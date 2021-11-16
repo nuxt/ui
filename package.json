@@ -23,9 +23,6 @@
   "dependencies": {
     "@unocss/core": "^0.9.3",
     "@unocss/nuxt": "^0.9.3",
-    "@unocss/preset-icons": "^0.9.3",
-    "@unocss/preset-uno": "^0.9.3",
-    "@unocss/reset": "^0.9.3",
     "pathe": "^0.2.0"
   },
   "devDependencies": {

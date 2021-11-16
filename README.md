@@ -1,6 +1,6 @@
 # @nuxthq/ui
 
-Components library as a Nuxt3 module.
+Components library as a Nuxt3 module using [UnoCSS](https://github.com/antfu/unocss).
 
 ## Installation
 
@@ -8,7 +8,7 @@ Components library as a Nuxt3 module.
 yarn add --dev @nuxthq/ui
 ```
 
-Register the module in your `nuxt.config.js`:
+Then, register the module in your `nuxt.config.js`:
 
 ```js
 import { defineNuxtConfig } from 'nuxt3'
@@ -20,11 +20,21 @@ export default defineNuxtConfig({
 })
 ```
 
+If you want latest updates, please use `@nuxthq/ui-edge` in your `package.json`:
+
+```json
+{
+  "devDependencies": {
+    "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest"
+  }
+}
+```
+
 ## Options
 
 - `primary`
 
-Define the primary variant. Defaults to `indigo`.
+Define the primary variant. Defaults to `indigo`. You can specify your own object of colors like here:
 
 **Example:**
 
@@ -33,10 +43,23 @@ import { defineNuxtConfig } from 'nuxt3'
 
 export default defineNuxtConfig({
   buildModules: [
-    '@nuxthq/ui'
-  ],
-  ui: {
-    primary: 'blue'
-  }
+    ['@nuxthq/ui', { primary: 'blue' }]
+  ]
+})
+```
+
+- `prefix`
+
+Define the prefix of the imported components. Defaults to `u`.
+
+**Example:**
+
+```js
+import { defineNuxtConfig } from 'nuxt3'
+
+export default defineNuxtConfig({
+  buildModules: [
+    ['@nuxthq/ui', { prefix: 'app' }]
+  ]
 })
 ```

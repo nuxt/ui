@@ -1,31 +1,25 @@
 import { join } from 'pathe'
 import { defineNuxtModule, installModule } from '@nuxt/kit'
-import presetUno, { colors } from '@unocss/preset-uno'
-import presetIcons from '@unocss/preset-icons'
+import { colors } from '@unocss/preset-uno'
 
 export default defineNuxtModule({
+  name: '@nuxthq/ui',
+  configKey: 'ui',
   async setup (_options, nuxt) {
+    const _prefix = _options?.prefix || 'u'
     const _primary = _options?.primary || 'indigo'
 
     const options = {
+      exclude: [/[\/\\]dist[\/\\]/, /\.(css|postcss|sass|scss|less|stylus|styl)$/],
       theme: {
         colors: {
           primary: typeof _primary === 'object' ? _primary : (colors && colors[_primary])
-        },
-        breakpoints: {
-          sm: '640px',
-          md: '768px',
-          lg: '1024px',
-          xl: '1280px',
-          '2xl': '1536px'
         }
       },
-      presets: [
-        presetUno(),
-        presetIcons({
-          prefix: ''
-        })
-      ],
+      preflight: true,
+      icons: {
+        prefix: ''
+      },
       shortcuts: {
         'bg-tw-white': 'bg-white dark:bg-gray-900',
         'bg-tw-gray-50': 'bg-gray-50 dark:bg-gray-800',
@@ -98,30 +92,28 @@ export default defineNuxtModule({
     nuxt.hook('components:dirs', (dirs) => {
       dirs.push({
         path: join(__dirname, 'components/elements'),
-        prefix: _options.prefix || 'u'
+        prefix: _prefix
       })
       dirs.push({
         path: join(__dirname, 'components/feedback'),
-        prefix: _options.prefix || 'u'
+        prefix: _prefix
       })
       dirs.push({
         path: join(__dirname, 'components/forms'),
-        prefix: _options.prefix || 'u'
+        prefix: _prefix
       })
       dirs.push({
         path: join(__dirname, 'components/layout'),
-        prefix: _options.prefix || 'u'
+        prefix: _prefix
       })
       dirs.push({
         path: join(__dirname, 'components/navigation'),
-        prefix: _options.prefix || 'u'
+        prefix: _prefix
       })
       dirs.push({
         path: join(__dirname, 'components/overlays'),
-        prefix: _options.prefix || 'u'
+        prefix: _prefix
       })
     })
-
-    nuxt.options.css.unshift('@unocss/reset/tailwind.css')
   }
 })

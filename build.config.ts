@@ -5,6 +5,7 @@ export default {
   ],
   declaration: true,
   externals: [
-    '@nuxt/kit'
+    '@nuxt/kit',
+    '@unocss/preset-uno'
   ]
 }

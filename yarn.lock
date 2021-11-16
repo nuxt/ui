@@ -871,7 +871,7 @@
   dependencies:
     "@unocss/core" "0.9.3"
 
-"@unocss/preset-icons@0.9.3", "@unocss/preset-icons@^0.9.3":
+"@unocss/preset-icons@0.9.3":
   version "0.9.3"
   resolved "https://registry.yarnpkg.com/@unocss/preset-icons/-/preset-icons-0.9.3.tgz#1a279f6a6614fc0413883da3e491e1a9e20b0e92"
   integrity sha512-qnVrvEsXMP7YgTEzvHtur4TbG5lrk0s4IKdu4WRkwTI+CytOHxJZ3ApP9XdbNIwDOS3eQIyGYqU4tfFSTBzZXw==
@@ -880,14 +880,14 @@
     "@unocss/core" "0.9.3"
     local-pkg "^0.4.0"
 
-"@unocss/preset-uno@0.9.3", "@unocss/preset-uno@^0.9.3":
+"@unocss/preset-uno@0.9.3":
   version "0.9.3"
   resolved "https://registry.yarnpkg.com/@unocss/preset-uno/-/preset-uno-0.9.3.tgz#eccd125374f6e7af7182c41a05e17cf668b2c33a"
   integrity sha512-i6kSGhDM35YDscqsUta6qljXn6j7mE9x3odE0Tr133EI8zNY0kcz8flB4pz0tJGhP2TS5vDy2D0M0XfqJXIOfg==
   dependencies:
     "@unocss/core" "0.9.3"
 
-"@unocss/reset@0.9.3", "@unocss/reset@^0.9.3":
+"@unocss/reset@0.9.3":
   version "0.9.3"
   resolved "https://registry.yarnpkg.com/@unocss/reset/-/reset-0.9.3.tgz#e0cf9d6419a928b4c1c0f68e9336a6ebf163c418"
   integrity sha512-g847Lsg0GlkbBrvhtcutb/3aICWy9bO3AQm1ySDb4wOY771awh+zjJ0EmBO7Hx6tFXKqSJOc3XNsIE/rT12M6A==
