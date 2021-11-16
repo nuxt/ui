@@ -5,10 +5,12 @@ import presetIcons from '@unocss/preset-icons'
 
 export default defineNuxtModule({
   async setup (_options, nuxt) {
+    const _primary = _options?.primary || 'indigo'
+
     const options = {
       theme: {
         colors: {
-          primary: colors ? colors[_options?.primary || 'indigo'] : undefined
+          primary: typeof _primary === 'object' ? _primary : (colors && colors[_primary])
         }
       },
       presets: [
