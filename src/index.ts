@@ -10,6 +10,7 @@ export default defineNuxtModule({
     const _primary = _options?.primary || 'indigo'
 
     const options = {
+      // eslint-disable-next-line no-useless-escape
       exclude: [/[\/\\]dist[\/\\]/, /\.(css|postcss|sass|scss|less|stylus|styl)$/],
       theme: {
         colors: {
