@@ -135,7 +135,7 @@ export default {
     }
   },
   watch: {
-    value (newValue) {
+    value () {
       this.resizeTextarea()
     }
   },
