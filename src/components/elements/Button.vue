@@ -12,12 +12,10 @@
 </template>
 
 <script>
-import Icon from './Icon'
+import Icon from '../elements/icon'
 
 export default {
-  components: {
-    Icon
-  },
+  components: { Icon },
   props: {
     type: {
       type: String,

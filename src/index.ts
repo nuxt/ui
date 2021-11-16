@@ -75,9 +75,28 @@ export default defineNuxtModule({
     await installModule(nuxt, { src: '@unocss/nuxt', options })
 
     nuxt.hook('components:dirs', (dirs) => {
-      // Add ./components dir to the list
       dirs.push({
-        path: join(__dirname, 'components'),
+        path: join(__dirname, 'components/elements'),
+        prefix: _options.prefix || 'u'
+      })
+      dirs.push({
+        path: join(__dirname, 'components/feedback'),
+        prefix: _options.prefix || 'u'
+      })
+      dirs.push({
+        path: join(__dirname, 'components/forms'),
+        prefix: _options.prefix || 'u'
+      })
+      dirs.push({
+        path: join(__dirname, 'components/layout'),
+        prefix: _options.prefix || 'u'
+      })
+      dirs.push({
+        path: join(__dirname, 'components/navigation'),
+        prefix: _options.prefix || 'u'
+      })
+      dirs.push({
+        path: join(__dirname, 'components/overlays'),
         prefix: _options.prefix || 'u'
       })
     })
