@@ -1,6 +1,7 @@
 export default {
   entries: [
-    './src/index'
+    './src/index',
+    { input: './src/components/', outDir: 'dist/components', ext: 'js' }
   ],
   declaration: true,
   externals: [
