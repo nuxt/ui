@@ -41,15 +41,6 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - name: Prepare
-        run: node ./node_modules/playwright/install.js
-
-      - name: Test
-        run: yarn test
-
-      - name: Coverage
-        uses: codecov/codecov-action@v2
-
       - name: Build
         run: yarn build
 
