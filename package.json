@@ -1,0 +1,38 @@
+{
+  "name": "@nuxthq/ui",
+  "version": "0.0.1",
+  "repository": "https://github.com/nuxtlabs/ui",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "nuxi dev example",
+    "lint": "eslint --ext .ts,.js,.vue ."
+  },
+  "dependencies": {
+    "@unocss/core": "^0.9.3",
+    "@unocss/nuxt": "^0.9.3",
+    "@unocss/preset-icons": "^0.9.3",
+    "@unocss/preset-uno": "^0.9.3",
+    "@unocss/reset": "^0.9.3",
+    "pathe": "^0.2.0"
+  },
+  "devDependencies": {
+    "@iconify-json/heroicons-outline": "^1.0.2",
+    "@nuxtjs/eslint-config-typescript": "^7.0.2",
+    "eslint": "^8.2.0",
+    "nuxt3": "latest",
+    "unbuild": "^0.5.11"
+  }
+}
