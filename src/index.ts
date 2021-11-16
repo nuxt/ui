@@ -11,6 +11,13 @@ export default defineNuxtModule({
       theme: {
         colors: {
           primary: typeof _primary === 'object' ? _primary : (colors && colors[_primary])
+        },
+        breakpoints: {
+          sm: '640px',
+          md: '768px',
+          lg: '1024px',
+          xl: '1280px',
+          '2xl': '1536px'
         }
       },
       presets: [
@@ -68,7 +75,21 @@ export default defineNuxtModule({
         'ring-tw-gray-600': 'ring-gray-600 dark:ring-gray-400',
         'ring-tw-gray-700': 'ring-gray-700 dark:ring-gray-300',
         'ring-tw-gray-800': 'ring-gray-800 dark:ring-gray-200',
-        'ring-tw-gray-900': 'ring-gray-900 dark:ring-gray-100'
+        'ring-tw-gray-900': 'ring-gray-900 dark:ring-gray-100',
+        // TailwindCSS `maxWidth` aliases
+        'max-w-0': 'max-w-0rem',
+        'max-w-none': 'max-w-none',
+        'max-w-xs': 'max-w-20rem',
+        'max-w-sm': 'max-w-24rem',
+        'max-w-md': 'max-w-28rem',
+        'max-w-lg': 'max-w-32rem',
+        'max-w-xl': 'max-w-36rem',
+        'max-w-2xl': 'max-w-42rem',
+        'max-w-3xl': 'max-w-48rem',
+        'max-w-4xl': 'max-w-56rem',
+        'max-w-5xl': 'max-w-64rem',
+        'max-w-6xl': 'max-w-72rem',
+        'max-w-7xl': 'max-w-80rem'
       }
     }
 
