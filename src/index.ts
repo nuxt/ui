@@ -116,5 +116,7 @@ export default defineNuxtModule({
         prefix: _prefix
       })
     })
+
+    nuxt.options.build.transpile.push('@popperjs/core')
   }
 })

@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.2",
+    "@popperjs/core": "^2.10.2",
     "@unocss/nuxt": "^0.9.3",
     "gradient-avatar": "^1.0.2",
     "pathe": "^0.2.0"
