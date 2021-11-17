@@ -4,3 +4,4 @@ node_modules
 nuxt.d.ts
 .output
 dist
+.DS_Store
