@@ -1,21 +1,26 @@
 <template>
   <nav class="flex items-center space-x-1.5">
     <div v-for="(link, index) of links" :key="index">
-      <TwButton
+      <Button
         :size="size"
         :to="link.to"
         :label="link.label"
         :icon="link.icon"
         :variant="isActive(link) ? activeVariant : variant"
         :custom-class="isActive(link) ? activeClass : ''"
-        @click.native="click(link)"
+        @click="click(link)"
       />
     </div>
   </nav>
 </template>
 
 <script>
+import Button from '../elements/Button'
+
 export default {
+  components: {
+    Button
+  },
   props: {
     links: {
       type: Array,

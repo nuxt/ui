@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <TwAvatar
+    <Avatar
       v-for="(avatar, index) of displayedGroup"
       :key="index"
       :src="avatar.src"
@@ -8,7 +8,7 @@
       :size="size"
       :status="avatar.status"
     />
-    <TwAvatar
+    <Avatar
       v-if="remainingGroupSize > 0"
       class="shadow-solid -ml-1.5 first:ml-0 text-[10px]"
       :size="size"
@@ -18,7 +18,12 @@
 </template>
 
 <script>
+import Avatar from './Avatar.vue'
+
 export default {
+  components: {
+    Avatar
+  },
   props: {
     group: {
       type: Array,

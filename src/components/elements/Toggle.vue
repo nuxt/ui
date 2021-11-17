@@ -51,10 +51,12 @@
 </template>
 
 <script>
-import Icon from '../elements/icon'
+import Icon from '../elements/Icon'
 
 export default {
-  components: { Icon },
+  components: {
+    Icon
+  },
   props: {
     value: {
       type: Boolean,

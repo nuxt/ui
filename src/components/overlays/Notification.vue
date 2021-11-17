@@ -26,7 +26,7 @@
               <p v-if="description" class="mt-1 text-sm leading-5 text-tw-gray-500">
                 {{ description }}
               </p>
-              <TwButton
+              <Button
                 v-if="undo"
                 variant="white"
                 size="xs"
@@ -39,7 +39,7 @@
                     Z
                   </span>
                 </div>
-              </TwButton>
+              </Button>
             </div>
             <div class="flex-shrink-0 ml-4">
               <button
@@ -61,10 +61,14 @@
 </template>
 
 <script>
-import Icon from '../elements/icon'
+import Icon from '../elements/Icon'
+import Button from '../elements/Button'
 
 export default {
-  components: { Icon },
+  components: {
+    Icon,
+    Button
+  },
   props: {
     id: {
       type: String,

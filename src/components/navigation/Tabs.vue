@@ -1,6 +1,6 @@
 <template>
   <nav class="flex items-center gap-6">
-    <TwLink
+    <Link
       v-for="(link, index) of links"
       :key="index"
       :to="link.to"
@@ -10,12 +10,17 @@
       :inactive-class="inactiveClass"
     >
       {{ link.label }}
-    </TwLink>
+    </Link>
   </nav>
 </template>
 
 <script>
+import Link from '../elements/Link'
+
 export default {
+  components: {
+    Link
+  },
   props: {
     links: {
       type: Array,

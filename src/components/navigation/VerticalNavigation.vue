@@ -10,7 +10,7 @@
     </h3>
 
     <div class="space-y-1">
-      <TwLink
+      <Link
         v-for="link of links"
         v-slot="{ isActive }"
         :key="link.to || link.label"
@@ -52,16 +52,20 @@
             </span>
           </slot>
         </span>
-      </TwLink>
+      </Link>
     </div>
   </nav>
 </template>
 
 <script>
-import Icon from '../elements/icon'
+import Icon from '../elements/Icon'
+import Link from '../elements/Link'
 
 export default {
-  components: { Icon },
+  components: {
+    Icon,
+    Link
+  },
   props: {
     links: {
       type: Array,

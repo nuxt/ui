@@ -26,7 +26,7 @@
         @before-leave="contentLeaving = true"
         @after-leave="contentLeaving = false"
       >
-        <TwCard
+        <Card
           v-if="showContent"
           v-bind="$attrs"
           class="z-50 flex flex-col flex-1 w-screen h-screen mx-auto overflow-hidden shadow-xl"
@@ -34,7 +34,6 @@
           variant="white"
           ring-class="sm:ring-1 ring-transparent dark:ring-gray-700"
           aria-modal="true"
-          v-on="$listeners"
         >
           <template v-if="$slots.header" #header>
             <slot name="header" />
@@ -60,17 +59,21 @@
           <template v-if="$slots.footer" #footer>
             <slot name="footer" />
           </template>
-        </TwCard>
+        </Card>
       </transition>
     </div>
   </div>
 </template>
 
 <script>
-import Icon from '../elements/icon'
+import Icon from '../elements/Icon'
+import Card from '../layout/Card'
 
 export default {
-  components: { Icon },
+  components: {
+    Icon,
+    Card
+  },
   props: {
     value: {
       type: Boolean,

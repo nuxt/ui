@@ -15,7 +15,7 @@
       ref="input"
       v-focus="autofocus"
       :name="name"
-      :value="value"
+      :value="modelValue"
       :type="type"
       :required="required"
       :placeholder="placeholder"
@@ -44,15 +44,18 @@
 
 <script>
 import Focus from '../../directives/focus'
-import Icon from '../elements/icon'
+
+import Icon from '../elements/Icon'
 
 export default {
-  components: { Icon },
+  components: {
+    Icon
+  },
   directives: {
     focus: Focus
   },
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: ''
     },
@@ -135,6 +138,7 @@ export default {
       default: false
     }
   },
+  emits: ['update:modelValue', 'focus', 'blur'],
   computed: {
     sizeClass () {
       return ({
@@ -246,7 +250,7 @@ export default {
   },
   methods: {
     updateValue (value) {
-      this.$emit('input', value)
+      this.$emit('update:modelValue', value)
     }
   }
 }

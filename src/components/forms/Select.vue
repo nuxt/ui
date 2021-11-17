@@ -41,12 +41,15 @@
 
 <script>
 import get from 'lodash/get'
-import Icon from '../elements/icon'
+
+import Icon from '../elements/Icon'
 
 export default {
-  components: { Icon },
+  components: {
+    Icon
+  },
   props: {
-    value: {
+    modelValue: {
       type: [String, Number, Object],
       default: ''
     },
@@ -106,6 +109,7 @@ export default {
       default: null
     }
   },
+  emits: ['update:modelValue'],
   computed: {
     sizeClass () {
       return {
@@ -177,7 +181,7 @@ export default {
       return normalizedOptions
     },
     normalizedValue () {
-      const foundOption = this.normalizedOptionsWithPlaceholder.find(option => option.value === this.value)
+      const foundOption = this.normalizedOptionsWithPlaceholder.find(option => option.value === this.modelValue)
       if (!foundOption) {
         return null
       }
@@ -207,7 +211,7 @@ export default {
       }
     },
     updateValue (value) {
-      this.$emit('input', value)
+      this.$emit('update:modelValue', value)
     }
   }
 }

@@ -5,7 +5,7 @@
       ref="textarea"
       v-focus="autofocus"
       :name="name"
-      :value="value"
+      :value="modelValue"
       :rows="rows"
       :required="required"
       :disabled="disabled"
@@ -25,7 +25,7 @@ export default {
     focus: Focus
   },
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: ''
     },
@@ -84,6 +84,7 @@ export default {
       default: false
     }
   },
+  emits: ['update:modelValue'],
   computed: {
     sizeClass () {
       return ({
@@ -151,7 +152,7 @@ export default {
       })
     },
     updateValue (value) {
-      this.$emit('input', value)
+      this.$emit('update:modelValue', value)
     }
   }
 }

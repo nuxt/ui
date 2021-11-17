@@ -22,7 +22,7 @@
           @before-leave="contentLeaving = true"
           @after-leave="contentLeaving = false"
         >
-          <TwCard
+          <Card
             v-if="showContent"
             v-bind="$attrs"
             role="dialog"
@@ -32,7 +32,6 @@
             ring-class="sm:ring-1 ring-transparent dark:ring-gray-700"
             variant="white"
             :rounded="false"
-            v-on="$listeners"
           >
             <template v-if="$slots.header" #header>
               <slot name="header" />
@@ -58,7 +57,7 @@
             <template v-if="$slots.footer" #footer>
               <slot name="footer" />
             </template>
-          </TwCard>
+          </Card>
         </transition>
       </section>
     </div>
@@ -68,10 +67,14 @@
 <script>
 import focusLock from 'dom-focus-lock'
 
-import Icon from '../elements/icon'
+import Icon from '../elements/Icon'
+import Card from '../layout/Card'
 
 export default {
-  components: { Icon },
+  components: {
+    Icon,
+    Card
+  },
   props: {
     value: {
       type: Boolean,

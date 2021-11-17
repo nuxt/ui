@@ -1,9 +1,11 @@
 <template>
   <fieldset :id="name">
-    <legend v-if="label" class="sr-only">{{ label }}</legend>
+    <legend v-if="label" class="sr-only">
+      {{ label }}
+    </legend>
 
     <div :class="wrapperClass">
-      <TwRadio
+      <Radio
         v-for="(option, index) in options"
         :key="index"
         :checked="option.value === value"
@@ -18,7 +20,12 @@
 </template>
 
 <script>
+import Radio from './Radio'
+
 export default {
+  components: {
+    Radio
+  },
   model: {
     event: 'change'
   },

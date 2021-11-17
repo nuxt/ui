@@ -133,10 +133,13 @@
 <script>
 import { createPopper } from '@popperjs/core'
 import { directive as onClickaway } from 'vue-clickaway'
-import Icon from '../elements/icon'
+
+import Icon from '../elements/Icon'
 
 export default {
-  components: { Icon },
+  components: {
+    Icon
+  },
   directives: {
     onClickaway
   },

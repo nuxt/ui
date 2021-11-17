@@ -4,7 +4,6 @@
       v-bind="$attrs"
       :href="href"
       :class="isActive ? activeClass : inactiveClass"
-      v-on="$listeners"
       @click="navigate"
     >
       <slot v-bind="{ isActive }" />
@@ -12,7 +11,7 @@
   </NuxtLink>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
 const RouterLink = Vue.component('RouterLink')
