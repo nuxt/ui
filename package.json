@@ -21,8 +21,9 @@
     "lint": "eslint --ext .ts,.js,.vue ."
   },
   "dependencies": {
-    "@unocss/core": "^0.9.3",
+    "@headlessui/vue": "^1.4.2",
     "@unocss/nuxt": "^0.9.3",
+    "gradient-avatar": "^1.0.2",
     "pathe": "^0.2.0"
   },
   "devDependencies": {
