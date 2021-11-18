@@ -1,6 +1,7 @@
-import { join } from 'pathe'
+import { resolve, join } from 'pathe'
 import { defineNuxtModule, installModule } from '@nuxt/kit'
 import { colors } from '@unocss/preset-uno'
+import type { UnocssNuxtOptions } from '@unocss/nuxt'
 
 export default defineNuxtModule({
   name: '@nuxthq/ui',
@@ -9,9 +10,7 @@ export default defineNuxtModule({
     const _prefix = _options?.prefix || 'u'
     const _primary = _options?.primary || 'indigo'
 
-    const options = {
-      // eslint-disable-next-line no-useless-escape
-      exclude: [/[\/\\]dist[\/\\]/, /\.(css|postcss|sass|scss|less|stylus|styl)$/],
+    const options: UnocssNuxtOptions = {
       theme: {
         colors: {
           primary: typeof _primary === 'object' ? _primary : (colors && colors[_primary])
@@ -90,29 +89,31 @@ export default defineNuxtModule({
 
     await installModule(nuxt, { src: '@unocss/nuxt', options })
 
+    const componentsRoot = resolve(__dirname, '../src/components')
+
     nuxt.hook('components:dirs', (dirs) => {
       dirs.push({
-        path: join(__dirname, 'components/elements'),
+        path: join(componentsRoot, 'elements'),
         prefix: _prefix
       })
       dirs.push({
-        path: join(__dirname, 'components/feedback'),
+        path: join(componentsRoot, 'feedback'),
         prefix: _prefix
       })
       dirs.push({
-        path: join(__dirname, 'components/forms'),
+        path: join(componentsRoot, 'forms'),
         prefix: _prefix
       })
       dirs.push({
-        path: join(__dirname, 'components/layout'),
+        path: join(componentsRoot, 'layout'),
         prefix: _prefix
       })
       dirs.push({
-        path: join(__dirname, 'components/navigation'),
+        path: join(componentsRoot, 'navigation'),
         prefix: _prefix
       })
       dirs.push({
-        path: join(__dirname, 'components/overlays'),
+        path: join(componentsRoot, 'overlays'),
         prefix: _prefix
       })
     })
