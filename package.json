@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@iconify-json/heroicons-outline": "^1.0.2",
+    "@iconify-json/heroicons-solid": "^1.0.2",
     "@nuxtjs/eslint-config-typescript": "^7.0.2",
     "eslint": "^8.2.0",
     "nuxt3": "latest",
