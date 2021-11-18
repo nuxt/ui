@@ -1,11 +1,12 @@
-import { join } from 'pathe'
+import { resolve } from 'pathe'
 import { defineNuxtModule, installModule } from '@nuxt/kit'
 import presetUno, { colors } from '@unocss/preset-uno'
 import presetIcons from '@unocss/preset-icons'
+import type { UnocssNuxtOptions } from '@unocss/nuxt'
 
 export default defineNuxtModule({
   async setup (_options, nuxt) {
-    const options = {
+    const options: UnocssNuxtOptions = {
       theme: {
         colors: {
           primary: colors ? colors[_options?.primary || 'indigo'] : undefined
@@ -24,7 +25,7 @@ export default defineNuxtModule({
     nuxt.hook('components:dirs', (dirs) => {
       // Add ./components dir to the list
       dirs.push({
-        path: join(__dirname, 'components'),
+        path: resolve(__dirname, '../src/components'),
         prefix: _options.prefix || 'u'
       })
     })
