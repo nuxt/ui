@@ -1,0 +1,106 @@
+<template>
+  <div class="mx-auto max-w-5xl py-12 space-y-4">
+    <div>
+      <UButton variant="primary" icon="heroicons-outline:bell">
+        toto
+      </UButton>
+    </div>
+
+    <div>
+      <UAvatar src="https://picsum.photos/200/300" />
+    </div>
+
+    <div>
+      <UButton @click="toggleModalIsOpen()">
+        Toggle modal!
+      </UButton>
+
+      <UModal v-model="isModalOpen" title="Modal">
+        Body
+      </UModal>
+    </div>
+
+    <div>
+      <UDropdown v-slot="{ open }" :items="dropdownItems" placement="bottom-start">
+        <UButton variant="white" :icon="open ? 'heroicons-solid:chevron-up' : 'heroicons-solid:chevron-down'" trailing icon-class="transition">
+          Open menu!
+        </UButton>
+      </UDropdown>
+    </div>
+
+    <div>
+      <UDropdown :items="customDropdownItems" placement="bottom-end">
+        <button>
+          <UAvatar src="https://picsum.photos/200/300" />
+        </button>
+
+        <template #item-with-avatar="{ item }">
+          <UAvatar v-if="item.avatar" :src="item.avatar" size="xs" class="mr-3" />
+
+          {{ item.label }}
+        </template>
+      </UDropdown>
+    </div>
+
+    <div>
+      <UToggle v-model="isSwitchEnabled" />
+    </div>
+
+    <!-- <UPopover v-slot="{ open }">
+      <UButton trailing variant="white" :icon="open ? 'heroicons-outline:chevron-up' : 'heroicons-outline:chevron-down'">
+        toto
+      </UButton>
+    </UPopover> -->
+  </div>
+</template>
+
+<script setup>
+const isModalOpen = ref(false)
+const isSwitchEnabled = ref(false)
+
+function toggleModalIsOpen () {
+  isModalOpen.value = !isModalOpen.value
+}
+
+function clickItem () {
+  // eslint-disable-next-line no-console
+  console.warn('clicked')
+}
+
+const dropdownItems = [
+  [{
+    label: 'Edit',
+    icon: 'heroicons-solid:pencil',
+    click: () => clickItem()
+  }, {
+    label: 'Duplicate',
+    icon: 'heroicons-solid:duplicate'
+  }],
+  [{
+    label: 'Archive',
+    icon: 'heroicons-solid:archive'
+  }, {
+    label: 'Move',
+    icon: 'heroicons-solid:external-link'
+  }],
+  [{
+    label: 'Delete',
+    icon: 'heroicons-solid:trash'
+  }]
+]
+
+const customDropdownItems = [
+  [{
+    label: 'benjamincanac',
+    avatar: 'https://picsum.photos/200/300',
+    href: 'https://google.fr',
+    target: '_blank',
+    slot: 'item-with-avatar'
+  }],
+  [{
+    label: 'About',
+    icon: 'heroicons-solid:plus',
+    to: '/about'
+  }]
+]
+</script>
