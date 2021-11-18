@@ -89,7 +89,7 @@ export default defineNuxtModule({
 
     await installModule(nuxt, { src: '@unocss/nuxt', options })
 
-    const componentsRoot = resolve(__dirname, '../src/components')
+    const componentsRoot = resolve(__dirname, './components')
 
     nuxt.hook('components:dirs', (dirs) => {
       dirs.push({
