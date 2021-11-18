@@ -13,7 +13,6 @@
     <input
       :id="name"
       ref="input"
-      v-focus="autofocus"
       :name="name"
       :value="modelValue"
       :type="type"
@@ -43,7 +42,7 @@
 </template>
 
 <script>
-import Focus from '../../directives/focus'
+// import Focus from '../../directives/focus'
 
 import Icon from '../elements/Icon'
 
@@ -51,9 +50,9 @@ export default {
   components: {
     Icon
   },
-  directives: {
-    focus: Focus
-  },
+  // directives: {
+  //   focus: Focus
+  // },
   props: {
     modelValue: {
       type: [String, Number],

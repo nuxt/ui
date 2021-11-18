@@ -1,8 +1,8 @@
 <template>
   <component
-    :is="$listeners && $listeners.submit ? 'form': 'div'"
-    :class="[padded && rounded && 'rounded-md', !padded && rounded && 'sm:rounded-md', wrapperClass, ringClass, backgroundClass]"
-    @submit.prevent="$listeners && $listeners.submit ? $listeners.submit() : null"
+    :is="$attrs && $attrs.submit ? 'form': 'div'"
+    :class="[padded && rounded && 'rounded-md', !padded && rounded && 'sm:rounded-md', wrapperClass, ringClass, shadowClass, backgroundClass]"
+    @submit.prevent="$attrs && $attrs.submit ? $attrs.submit() : null"
   >
     <div
       v-if="$slots.header"
@@ -29,9 +29,21 @@ export default {
       type: Boolean,
       default: false
     },
+    rounded: {
+      type: Boolean,
+      default: true
+    },
     wrapperClass: {
       type: String,
       default: 'overflow-hidden'
+    },
+    backgroundClass: {
+      type: String,
+      default: 'bg-tw-white'
+    },
+    shadowClass: {
+      type: String,
+      default: ''
     },
     ringClass: {
       type: String,
@@ -64,26 +76,6 @@ export default {
     borderColorClass: {
       type: String,
       default: 'border-gray-200 dark:border-gray-700'
-    },
-    rounded: {
-      type: Boolean,
-      default: true
-    },
-    variant: {
-      type: String,
-      default: 'gray',
-      validator (value) {
-        return ['gray', 'white', 'black'].includes(value)
-      }
-    }
-  },
-  computed: {
-    backgroundClass () {
-      return ({
-        white: 'bg-white dark:bg-gray-800',
-        gray: 'bg-tw-gray-50',
-        black: 'bg-white dark:bg-black'
-      })[this.variant]
     }
   }
 }

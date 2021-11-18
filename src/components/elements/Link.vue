@@ -12,15 +12,12 @@
 </template>
 
 <script>
-import Vue from 'vue'
-
-const RouterLink = Vue.component('RouterLink')
+import { RouterLink } from 'vue-router'
 
 export default {
   name: 'Link',
   props: {
-    // @ts-ignore
-    ...RouterLink.options.props,
+    ...RouterLink.props,
     inactiveClass: {
       type: String,
       default: ''
