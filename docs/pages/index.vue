@@ -49,7 +49,7 @@
         </button>
 
         <template #item-with-avatar="{ item }">
-          <UAvatar v-if="item.avatar" :src="item.avatar" size="xs" class="mr-3" />
+          <UAvatar v-if="item.avatar" :src="item.avatar" size="xxs" class="mr-3" />
 
           {{ item.label }}
         </template>
