@@ -27,14 +27,14 @@
     "@iconify-json/heroicons-outline": "^1.0.2",
     "@iconify-json/heroicons-solid": "^1.0.2",
     "@popperjs/core": "^2.10.2",
-    "@unocss/nuxt": "^0.10.0",
+    "@unocss/nuxt": "^0.11.1",
     "gradient-avatar": "^1.0.2",
     "pathe": "^0.2.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^7.0.2",
     "eslint": "^8.2.0",
-    "nuxt3": "latest",
-    "unbuild": "^0.5.11"
+    "nuxt3": "^3.0.0-27288761.d3fb512",
+    "unbuild": "^0.5.13"
   }
 }
