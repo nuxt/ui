@@ -11,10 +11,10 @@
             <ULink
               v-for="component in components"
               :key="component.name"
-              :to="component.to"
+              :to="`/components/${component.name}`"
               class="text-sm font-medium block w-full"
               active-class="text-primary-600"
-              inactive-class="text-tw-gray-900"
+              inactive-class="text-tw-gray-500 hover:text-tw-gray-900"
             >
               {{ component.name }}
             </ULink>
@@ -40,14 +40,14 @@ useMeta({
 })
 
 const components = [
-  { name: 'Avatar', to: '/Avatar' },
-  { name: 'Button', to: '/Button' },
-  { name: 'Badge', to: '/Badge' },
-  { name: 'Dropdown', to: '/Dropdown' },
-  { name: 'Icon', to: '/Icon' },
-  { name: 'Toggle', to: '/Toggle' },
-  { name: 'Card', to: '/Card' },
-  { name: 'Modal', to: '/Modal' },
-  { name: 'Select', to: '/Select' }
+  { name: 'Avatar' },
+  { name: 'Button' },
+  { name: 'Badge' },
+  { name: 'Dropdown' },
+  { name: 'Icon' },
+  { name: 'Toggle' },
+  { name: 'Card' },
+  { name: 'Modal' },
+  { name: 'Select' }
 ]
 </script>

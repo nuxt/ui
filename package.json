@@ -17,7 +17,8 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "dev": "nuxi dev example",
+    "dev": "nuxi dev docs",
+    "build:docs": "nuxi build docs",
     "lint": "eslint --ext .ts,.js,.vue ."
   },
   "dependencies": {

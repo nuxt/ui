@@ -1,5 +1,5 @@
 <template>
-  <UCard background-class="bg-tw-gray-100">
+  <UCard v-if="component" background-class="bg-tw-gray-100">
     <div class="flex justify-center">
       <component :is="is" v-bind="boundProps" />
     </div>

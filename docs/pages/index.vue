@@ -11,6 +11,16 @@
     </div>
 
     <div>
+      <UCard @submit.prevent="onSubmit">
+        <UInputGroup label="Email" name="email">
+          <UInput type="email" name="email" />
+        </UInputGroup>
+
+        <UButton type="submit" label="Submit" />
+      </UCard>
+    </div>
+
+    <div>
       <UButton @click="toggleModalIsOpen()">
         Toggle modal!
       </UButton>
@@ -62,16 +72,21 @@ function toggleModalIsOpen () {
   isModalOpen.value = !isModalOpen.value
 }
 
-function clickItem () {
+function onClick () {
   // eslint-disable-next-line no-console
-  console.warn('clicked')
+  console.warn('click')
+}
+
+function onSubmit () {
+  // eslint-disable-next-line no-console
+  console.warn('submit')
 }
 
 const dropdownItems = [
   [{
     label: 'Edit',
     icon: 'heroicons-solid:pencil',
-    click: () => clickItem()
+    click: () => onClick()
   }, {
     label: 'Duplicate',
     icon: 'heroicons-solid:duplicate'
