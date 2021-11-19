@@ -1,23 +1,33 @@
 <template>
-  <div class="h-full bg-tw-gray-50 min-h-screen">
-    <UContainer class="py-8">
+  <div class="bg-tw-gray-50">
+    <UContainer class="py-8 min-h-screen">
       <div class="lg:grid lg:grid-cols-12 lg:gap-10 lg:relative">
-        <aside class="pb-8 lg:pb-0 lg:sticky lg:top-0 px-4 sm:px-6 lg:px-0 lg:pt-8 lg:-mt-8 lg:self-start lg:col-span-3" style="position: sticky;">
+        <aside class="lg:flex lg:flex-col lg:relative pb-8 lg:pb-0 lg:sticky lg:top-0 px-4 sm:px-6 lg:px-0 lg:pt-8 lg:-mt-8 lg:self-start lg:col-span-3 lg:overflow-hidden lg:h-[calc(100vh-2rem)]" style="position: sticky;height: calc(100vh - 2rem);">
           <NuxtLink to="/" class="block font-bold text-lg mb-6">
             @nuxthq/ui
           </NuxtLink>
 
-          <nav class="space-y-2.5">
-            <ULink
-              v-for="component in components"
-              :key="component.name"
-              :to="`/components/${component.name}`"
-              class="text-sm font-medium block w-full"
-              active-class="text-primary-600"
-              inactive-class="text-tw-gray-500 hover:text-tw-gray-900"
-            >
-              {{ component.name }}
-            </ULink>
+          <nav class="overflow-y-auto h-auto">
+            <ul class="space-y-3">
+              <li v-for="section of sections" :key="section">
+                <h5 class="mb-3 uppercase tracking-wide font-semibold text-xs text-tw-gray-900">
+                  {{ section.label }}
+                </h5>
+                <ul class="space-y-1.5">
+                  <li v-for="component of section.components" :key="component">
+                    <ULink
+                      :to="`/components/${component}`"
+                      class="transition-colors duration-200 relative block text-sm rounded-md"
+                      active-class="text-primary-700"
+                      inactive-class="text-tw-gray-500 hover:text-tw-gray-900"
+                      exact
+                    >
+                      {{ component }}
+                    </ULink>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </nav>
         </aside>
 
@@ -39,15 +49,12 @@ useMeta({
   }
 })
 
-const components = [
-  { name: 'Avatar' },
-  { name: 'Button' },
-  { name: 'Badge' },
-  { name: 'Dropdown' },
-  { name: 'Icon' },
-  { name: 'Toggle' },
-  { name: 'Card' },
-  { name: 'Modal' },
-  { name: 'Select' }
+const sections = [
+  { label: 'Elements', components: ['Avatar', 'AvatarGroup', 'Badge', 'Button', 'Dropdown', 'Icon', 'Link', 'Toggle'] },
+  { label: 'Feedback', components: ['Alert'] },
+  { label: 'Forms', components: ['Checkbox', 'Input', 'InputGroup', 'Radio', 'RadioGroup', 'Select', 'SelectCustom', 'Textarea'] },
+  { label: 'Layout', components: ['Card', 'Container'] },
+  { label: 'Navigation', components: ['Pills', 'Tabs', 'VerticalNavigation'] },
+  { label: 'Overlays', components: ['Modal', 'Notification', 'Popover', 'Slideover', 'Tooltip'] }
 ]
 </script>
