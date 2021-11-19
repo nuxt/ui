@@ -32,9 +32,9 @@
     "pathe": "^0.2.0"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config-typescript": "^7.0.2",
-    "eslint": "^8.2.0",
-    "nuxt3": "^3.0.0-27288761.d3fb512",
-    "unbuild": "^0.5.13"
+    "@nuxtjs/eslint-config-typescript": "7.0.2",
+    "eslint": "8.2.0",
+    "nuxt3": "3.0.0-27288761.d3fb512",
+    "unbuild": "0.5.13"
   }
 }

@@ -552,7 +552,7 @@
     webpack-virtual-modules "^0.4.3"
     webpackbar "^5.0.2"
 
-"@nuxtjs/eslint-config-typescript@^7.0.2":
+"@nuxtjs/eslint-config-typescript@7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@nuxtjs/eslint-config-typescript/-/eslint-config-typescript-7.0.2.tgz#d25e3ff0cb8e40875f691938ddf1dba242c667d4"
   integrity sha512-nf/RupsrhproJPzoymmxMVFDQ48WV9BdN6zHSBR6uKmMpQcVoD/I4CAZfYW2f5gscnp2KPayKPoDEeugm7BajQ==
@@ -2742,7 +2742,7 @@ eslint-visitor-keys@^3.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-3.1.0.tgz#eee4acea891814cda67a7d8812d9647dd0179af2"
   integrity sha512-yWJFpu4DtjsWKkt5GeNBBuZMlNcYVs6vRCLoCVEJrTjaSB6LC98gFipNK/erM2Heg/E8mIK+hXG/pJMLK+eRZA==
 
-eslint@^8.2.0:
+eslint@8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.2.0.tgz#44d3fb506d0f866a506d97a0fc0e90ee6d06a815"
   integrity sha512-erw7XmM+CLxTOickrimJ1SiF55jiNlVSp2qqm0NuBWPtHYQCegD5ZMaW0c3i5ytPqL+SSLaCxdvQXFPLJn+ABw==
@@ -4433,7 +4433,7 @@ number-is-nan@^1.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-nuxt3@^3.0.0-27288761.d3fb512:
+nuxt3@3.0.0-27288761.d3fb512:
   version "3.0.0-27288761.d3fb512"
   resolved "https://registry.yarnpkg.com/nuxt3/-/nuxt3-3.0.0-27288761.d3fb512.tgz#5ca14ac2cbd82a9580b64efdeced3fb9ddf621c5"
   integrity sha512-qTn2Cf8ylk+cugBf6Qlzglw5r1NdJYjDQL9buT1TKueldsYVMMmmgNXwJFotkWX0TsezuoGh5ckMfPrfW317oQ==
@@ -6044,7 +6044,7 @@ unbox-primitive@^1.0.1:
     has-symbols "^1.0.2"
     which-boxed-primitive "^1.0.2"
 
-unbuild@^0.5.13:
+unbuild@0.5.13:
   version "0.5.13"
   resolved "https://registry.yarnpkg.com/unbuild/-/unbuild-0.5.13.tgz#ea80132e0252e075358c8cc81ae5b9012051f8a2"
   integrity sha512-9tB2ZA5VeTWmFW5+I4exDIQybb+65DbDKit5cOcpuJK4Wi/Jnom5ctdkpL1BesgBwuzOqEdMoPnk8YLMhslHMQ==
