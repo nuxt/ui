@@ -1,7 +1,11 @@
 <template>
-  <div class="mx-auto max-w-5xl py-12 space-y-4">
+  <div class="space-y-4">
+    <h1 class="font-medium text-xl">
+      Nuxt3 UI module documentation by NuxtLabs:
+    </h1>
+
     <div>
-      <UButton variant="primary" icon="heroicons-outline:bell">
+      <UButton variant="primary" loading icon="heroicons-outline:bell">
         toto
       </UButton>
     </div>

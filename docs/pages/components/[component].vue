@@ -1,5 +1,5 @@
 <template>
-  <UCard v-if="component" background-class="bg-tw-gray-100">
+  <UCard v-if="component" footer-class="px-4 py-4 sm:px-6 bg-tw-gray-100">
     <div class="flex justify-center">
       <component :is="is" v-bind="boundProps" />
     </div>
@@ -22,6 +22,7 @@
             v-else-if="prop.values"
             v-model="prop.value"
             :name="prop.key"
+            placeholder="Choose one..."
             :options="prop.values"
             size="sm"
           />
@@ -34,16 +35,17 @@
           />
           <UInput
             v-else-if="prop.type === 'Number'"
+            v-model="prop.value"
             type="number"
-            :value="prop.value"
             :name="prop.key"
             size="sm"
-            autocomplete="off"
-            @input="(value) => inputProp(prop.key, value)"
           />
-          <p v-else class="text-sm text-tw-gray-400">
-            This prop of type <span class="p-0.5 rounded bg-gray-100 dark:bg-gray-900">{{ prop.type }}</span> is not yet supported.
-          </p>
+          <UTextarea
+            v-else
+            v-model="prop.value"
+            :name="prop.key"
+            size="sm"
+          />
         </UInputGroup>
       </div>
     </template>
@@ -61,7 +63,7 @@ const component = nuxtApp.vueApp.component(is)
 const { props: componentProps } = await component.__asyncLoader()
 
 const refProps = Object.entries(componentProps).map(([key, prop]) => {
-  let value = prop.default
+  let value = typeof prop.default === 'function' ? prop.default() : prop.default
   let type = prop.type
   if (Array.isArray(type)) {
     type = type[0].name
@@ -75,12 +77,14 @@ const refProps = Object.entries(componentProps).map(([key, prop]) => {
     values = JSON.parse(result.replace(/'/g, '"'))
   }
 
-  if (type === 'Boolean') {
-    value = value === 'true'
-  } else if (type === 'String') {
-    value = value === 'undefined' ? '' : value
-    value = value === 'null' ? '' : value
-    value = (value || '').replace(/^'(.*)'$/, '$1')
+  if (value) {
+    if (type === 'Boolean') {
+      value = value === 'true'
+    } else if (type === 'String') {
+      value = value.replace(/^'(.*)'$/, '$1')
+    } else if (type === 'Array') {
+      value = JSON.stringify(value)
+    }
   }
 
   return {
@@ -95,7 +99,11 @@ const props = ref(refProps)
 const boundProps = computed(() => {
   const bound = {}
   for (const prop of props.value) {
-    bound[prop.key] = prop.value
+    try {
+      bound[prop.key] = prop.type === 'Array' ? JSON.parse(prop.value) : prop.value
+    } catch (e) {
+      continue
+    }
   }
   return bound
 })
