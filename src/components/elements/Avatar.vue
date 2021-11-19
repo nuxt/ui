@@ -1,6 +1,7 @@
 <template>
-  <span class="relative inline-flex items-center justify-center overflow-hidden" :class="avatarClass" @click="goto">
+  <span class="relative inline-flex items-center justify-center" :class="avatarClass" @click="goto">
     <img v-if="url" :src="url" :alt="alt" :class="[sizeClass, roundedClass]">
+    <!-- eslint-disable-next-line vue/no-v-html -->
     <span v-else-if="gradientPlaceholder" class="w-full h-full" v-html="gradientPlaceholder" />
     <span
       v-else-if="placeholder"
@@ -70,7 +71,7 @@ export default {
       type: String,
       default: null,
       validator (value) {
-        return [null, 'online', 'idle', 'invisible', 'donotdisturb', 'focus'].includes(value)
+        return ['online', 'idle', 'invisible', 'donotdisturb', 'focus'].includes(value)
       }
     }
   },

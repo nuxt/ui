@@ -238,7 +238,7 @@ export default {
     },
     iconName () {
       if (this.loading) {
-        return this.loadingIcon || 'custom/loading'
+        return this.loadingIcon || 'heroicons-outline:refresh'
       }
 
       return this.icon

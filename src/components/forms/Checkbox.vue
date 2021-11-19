@@ -13,14 +13,16 @@
         @focus="focused = true"
         @blur="focused = false"
         @change="onChange"
-      />
+      >
     </div>
     <div v-if="label" class="ml-3 text-sm">
       <label :for="name" class="font-medium text-tw-gray-700">
         {{ label }}
         <span v-if="required" class="text-red-400">*</span>
       </label>
-      <p v-if="help" class="text-tw-gray-500">{{ help }}</p>
+      <p v-if="help" class="text-tw-gray-500">
+        {{ help }}
+      </p>
     </div>
   </div>
 </template>

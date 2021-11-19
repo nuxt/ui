@@ -12,7 +12,7 @@
       @focus="focused = true"
       @blur="focused = false"
       @change="onChange"
-    />
+    >
     <div v-if="label" class="flex flex-col ml-3">
       <span class="block text-sm font-medium text-tw-gray-900">
         {{ label }}

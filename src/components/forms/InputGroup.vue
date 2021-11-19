@@ -24,7 +24,9 @@
       :class="{ 'mt-1': label && !inline, 'mt-1 sm:mt-0': label && inline, 'sm:col-span-2': inline }"
     >
       <slot />
-      <p v-if="help" class="mt-2 text-sm text-tw-gray-500">{{ help }}</p>
+      <p v-if="help" class="mt-2 text-sm text-tw-gray-500">
+        {{ help }}
+      </p>
     </div>
   </div>
 </template>
