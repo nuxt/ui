@@ -34,6 +34,6 @@
     "@nuxtjs/eslint-config-typescript": "^7.0.2",
     "eslint": "^8.2.0",
     "nuxt3": "latest",
-    "unbuild": "^0.5.11"
+    "unbuild": "0.5.13"
   }
 }

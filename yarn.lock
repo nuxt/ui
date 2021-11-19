@@ -2652,7 +2652,7 @@ esbuild@^0.13.13, esbuild@^0.13.2, esbuild@^0.13.4:
     esbuild-windows-64 "0.13.13"
     esbuild-windows-arm64 "0.13.13"
 
-esbuild@^0.13.8:
+esbuild@^0.13.14, esbuild@^0.13.8:
   version "0.13.14"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.13.14.tgz#98a3f7f42809abdc2b57c84565d0f713382dc1a5"
   integrity sha512-xu4D+1ji9x53ocuomcY+KOrwAnWzhBu/wTEjpdgZ8I1c8i5vboYIeigMdzgY1UowYBKa2vZgVgUB32bu7gkxeg==
@@ -4330,7 +4330,7 @@ mlly@^0.2.2:
   dependencies:
     import-meta-resolve "^1.1.1"
 
-mlly@^0.3.0, mlly@^0.3.10, mlly@^0.3.13, mlly@^0.3.6:
+mlly@^0.3.10, mlly@^0.3.13, mlly@^0.3.6:
   version "0.3.13"
   resolved "https://registry.yarnpkg.com/mlly/-/mlly-0.3.13.tgz#5433261f38ccebba6f72fabda863a4dfc84b16d8"
   integrity sha512-EXpbSPqSQLR9NEdB25uoyIYLSUvAqDEI7wUeM1HwXHsPF5Gx7cP7kuby5Mz2LfCPxBrgMnbcyPhcTCJRTQ+uvA==
@@ -5436,7 +5436,7 @@ rimraf@^3.0.2:
   dependencies:
     glob "^7.1.3"
 
-rollup-plugin-dts@^4.0.0:
+rollup-plugin-dts@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/rollup-plugin-dts/-/rollup-plugin-dts-4.0.1.tgz#930cbd5aaaa64a55e895ecd6ae8234e1a5467710"
   integrity sha512-DNv5F8pro/r0Hkx3JWKRtJZocDnqXfgypoajeiaNq134rYaFcEIl/oas5PogD1qexMadVijsHyVko1Chig0OOQ==
@@ -5445,10 +5445,10 @@ rollup-plugin-dts@^4.0.0:
   optionalDependencies:
     "@babel/code-frame" "^7.14.5"
 
-rollup-plugin-esbuild@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-esbuild/-/rollup-plugin-esbuild-4.6.0.tgz#293b0c8d2e64b753918f3023c1fb87dc4acdef3b"
-  integrity sha512-fjihkrOCy7qeNDd1VmtWw39UA4b6a96NVrsuK6eg1SArnWoS3G4xLoW7liF0oRQU7+ONPr/Gjxz9cv+WLRhaGA==
+rollup-plugin-esbuild@^4.7.1:
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-esbuild/-/rollup-plugin-esbuild-4.7.2.tgz#1a496a9f96257cdf5ed800e818932859232471f8"
+  integrity sha512-rBS2hTedtG+wL/yyIWQ84zju5rtfF15gkaCLN0vsWGmBdRd0UPm52meAwkmrsPQf3mB/H2o+k9Q8Ce8A66SE5A==
   dependencies:
     "@rollup/pluginutils" "^4.1.1"
     joycon "^3.0.1"
@@ -5481,7 +5481,7 @@ rollup-pluginutils@^2.8.2:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^2.57.0, rollup@^2.58.0, rollup@^2.59.0:
+rollup@^2.57.0, rollup@^2.59.0, rollup@^2.60.0:
   version "2.60.0"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.60.0.tgz#4ee60ab7bdd0356763f87d7099f413e5460fc193"
   integrity sha512-cHdv9GWd58v58rdseC8e8XIaPUo8a9cgZpnCMMDGZFDZKEODOiPPEQFXLriWr/TjXzhPPmG5bkAztPsOARIcGQ==
@@ -6167,10 +6167,10 @@ type-fest@^1.4.0:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-1.4.0.tgz#e9fb813fe3bf1744ec359d55d1affefa76f14be1"
   integrity sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==
 
-typescript@^4.4.4:
-  version "4.4.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.4.tgz#2cd01a1a1f160704d3101fd5a58ff0f9fcb8030c"
-  integrity sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==
+typescript@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.5.2.tgz#8ac1fba9f52256fdb06fb89e4122fa6a346c2998"
+  integrity sha512-5BlMof9H1yGt0P8/WF+wPNw6GfctgGjXp5hkblpyT+8rkASSmkUKMXrxR0Xg8ThVCi/JnHQiKXeBaEwCeQwMFw==
 
 ufo@^0.7.9:
   version "0.7.9"
@@ -6187,35 +6187,36 @@ unbox-primitive@^1.0.1:
     has-symbols "^1.0.2"
     which-boxed-primitive "^1.0.2"
 
-unbuild@^0.5.11:
-  version "0.5.11"
-  resolved "https://registry.yarnpkg.com/unbuild/-/unbuild-0.5.11.tgz#f3fb9ec18a8c4dd5d56a7924c51cbf5fea5fbd32"
-  integrity sha512-FR+9WwE5Y4XGdITr6dWplfmyXhFYuSF+GSd/ejuND144Uz6c2wwyxtUd+PUD9xAqMj4ZsahO1HjX/BSsgDtfVA==
+unbuild@0.5.13:
+  version "0.5.13"
+  resolved "https://registry.yarnpkg.com/unbuild/-/unbuild-0.5.13.tgz#ea80132e0252e075358c8cc81ae5b9012051f8a2"
+  integrity sha512-9tB2ZA5VeTWmFW5+I4exDIQybb+65DbDKit5cOcpuJK4Wi/Jnom5ctdkpL1BesgBwuzOqEdMoPnk8YLMhslHMQ==
   dependencies:
     "@rollup/plugin-alias" "^3.1.8"
     "@rollup/plugin-commonjs" "^21.0.1"
     "@rollup/plugin-json" "^4.1.0"
     "@rollup/plugin-node-resolve" "^13.0.6"
     "@rollup/plugin-replace" "^3.0.0"
+    "@rollup/pluginutils" "^4.1.1"
     chalk "^4.1.1"
     consola "^2.15.3"
     defu "^5.0.0"
-    esbuild "^0.13.8"
+    esbuild "^0.13.14"
     jiti "^1.12.9"
     magic-string "^0.25.7"
     mkdirp "^1.0.4"
     mkdist "^0.3.5"
-    mlly "^0.3.0"
+    mlly "^0.3.13"
     mri "^1.2.0"
     pathe "^0.2.0"
     pretty-bytes "^5.6.0"
     rimraf "^3.0.2"
-    rollup "^2.58.0"
-    rollup-plugin-dts "^4.0.0"
-    rollup-plugin-esbuild "^4.6.0"
+    rollup "^2.60.0"
+    rollup-plugin-dts "^4.0.1"
+    rollup-plugin-esbuild "^4.7.1"
     scule "^0.2.1"
-    typescript "^4.4.4"
-    untyped "^0.2.9"
+    typescript "^4.5.2"
+    untyped "^0.3.0"
 
 unctx@^1.0.2:
   version "1.0.2"
@@ -6280,10 +6281,15 @@ unstorage@^0.3.2:
     ufo "^0.7.9"
     ws "^8.2.1"
 
-untyped@^0.2.12, untyped@^0.2.13, untyped@^0.2.9:
+untyped@^0.2.12, untyped@^0.2.13:
   version "0.2.13"
   resolved "https://registry.yarnpkg.com/untyped/-/untyped-0.2.13.tgz#31be48c9cf1d81b65d05f762a0332b2b5e9a9cb3"
   integrity sha512-dnvCmDKTb+zg504JyQ9h1sWINAyxnP6KgmvUH6s6BjLV+3fvjZTiUklL15VvEqpDjy4Leq/xzlZ+JxskeoM5mg==
+
+untyped@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/untyped/-/untyped-0.3.0.tgz#854df4dec055cc6a0a2217aa2d20152277b6ada9"
+  integrity sha512-n4M5/T1wWlHFmohk0EhS+yM7W/h5dOtQldOV3MVEbZY1fTy5A47UL8+d8GLW1iwmaAwNrM5ERy3qe1k0T/Yc7A==
 
 upath@^2.0.1:
   version "2.0.1"
