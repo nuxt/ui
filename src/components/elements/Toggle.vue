@@ -1,74 +1,46 @@
 <template>
-  <div class="py-16 flex items-center">
-    <span v-if="textLeading" :class="textClass" class="pr-2">{{ textLeading }}</span>
-    <Switch
-      :class="props.modelValue ? 'bg-primary-600' : 'bg-tw-gray-200'"
-      class="relative inline-flex flex-shrink-0 h-38px w-74px border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-      @click="emits('update:modelValue', !modelValue)"
-    >
-      <div
-        :class="props.modelValue ? 'translate-x-9' : 'translate-x-0'"
-        class="flex items-center justify-center h-34px w-34px pointer-events-none inline-block rounded-full bg-white shadow-lg transform ring-0 transition ease-in-out duration-200"
-      >
-        <Icon :name="modelValue ? icon : (iconOff ? iconOff : icon)" />
-      </div>
-    </Switch>
-    <span v-if="textTrailing" :class="textClass" class="pl-2">{{ textTrailing }}</span>
-  </div>
+  <Switch
+    v-model="enabled"
+    :class="[enabled ? 'bg-primary-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-primary-200']"
+  >
+    <span :class="[enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']">
+      <span :class="[enabled ? 'opacity-0 ease-out duration-100' : 'opacity-100 ease-in duration-200', 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity']" aria-hidden="true">
+        <Icon :name="iconOff" class="h-3 w-3 text-gray-400" />
+      </span>
+      <span :class="[enabled ? 'opacity-100 ease-in duration-200' : 'opacity-0 ease-out duration-100', 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity']" aria-hidden="true">
+        <Icon :name="iconOn" class="h-3 w-3 text-primary-600" />
+      </span>
+    </span>
+  </Switch>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { Switch } from '@headlessui/vue'
-import { computed } from 'vue'
-import Icon from './Icon.vue'
+import Icon from './Icon'
 
 const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false
   },
-  icon: {
+  iconOn: {
     type: String,
     default: ''
   },
   iconOff: {
     type: String,
     default: ''
-  },
-  textLeading: {
-    type: String,
-    default: ''
-  },
-  textTrailing: {
-    type: String,
-    default: ''
-  },
-  textHighlight: {
-    type: Boolean,
-    default: false
-  },
-  size: {
-    type: String,
-    default: 'md',
-    validator (value: string) {
-      return ['xs', 'sm', 'md', 'lg', 'xl'].includes(value)
-    }
   }
 })
 
-const emits = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue'])
 
-const textClass = computed(() => {
-  return [
-    ({
-      xs: 'text-xs',
-      sm: 'text-sm',
-      md: 'text-sm',
-      lg: 'text-base',
-      xl: 'text-base'
-    })[props.size],
-    props.textHighlight && props.modelValue ? 'text-primary-600' : 'text-tw-gray-900',
-    'font-medium'
-  ].join(' ')
+const enabled = computed({
+  get () {
+    return props.modelValue
+  },
+  set (value) {
+    emit('update:modelValue', value)
+  }
 })
 </script>
