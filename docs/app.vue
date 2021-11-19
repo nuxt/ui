@@ -17,7 +17,7 @@
                   <li v-for="component of section.components" :key="component">
                     <ULink
                       :to="`/components/${component}`"
-                      class="transition-colors duration-200 relative block text-sm rounded-md"
+                      class="relative block text-sm rounded-md"
                       active-class="text-primary-700"
                       inactive-class="text-tw-gray-500 hover:text-tw-gray-900"
                       exact

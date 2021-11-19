@@ -43,8 +43,11 @@ import { defineNuxtConfig } from 'nuxt3'
 
 export default defineNuxtConfig({
   buildModules: [
-    ['@nuxthq/ui', { primary: 'blue' }]
-  ]
+    '@nuxthq/ui'
+  ],
+  ui: {
+    primary: 'blue'
+  }
 })
 ```
 
@@ -59,7 +62,10 @@ import { defineNuxtConfig } from 'nuxt3'
 
 export default defineNuxtConfig({
   buildModules: [
-    ['@nuxthq/ui', { prefix: 'app' }]
-  ]
+    '@nuxthq/ui'
+  ],
+  ui: {
+    prefix: 'tw'
+  }
 })
 ```

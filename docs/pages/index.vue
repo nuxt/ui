@@ -1,70 +1,97 @@
 <template>
   <div class="space-y-4">
-    <h1 class="font-medium text-xl">
-      Nuxt3 UI module documentation by NuxtLabs:
-    </h1>
+    <div class="pb-10 border-b border-gray-200 mb-10">
+      <div>
+        <h1 class="inline-block text-3xl font-extrabold text-gray-900 tracking-tight">
+          Documentation
+        </h1>
+      </div>
 
-    <div>
-      <UButton variant="primary" loading icon="heroicons-outline:bell">
-        toto
-      </UButton>
+      <p class="mt-1 text-lg text-gray-500">
+        Components library as a Nuxt3 module using <a href="https://github.com/antfu/unocss" target="_blank">UnoCSS</a>.
+      </p>
     </div>
 
-    <div>
-      <UAvatar src="https://picsum.photos/200/300" />
-    </div>
+    <h2 class="font-bold text-2xl text-tw-gray-900">
+      Installation
+    </h2>
 
-    <div>
-      <UCard @submit.prevent="onSubmit">
-        <UInputGroup label="Email" name="email">
-          <UInput type="email" name="email" />
-        </UInputGroup>
+    <pre class="bg-tw-gray-900 rounded-md text-tw-white px-4">
+      <code class="text-sm">
+yarn add --dev @nuxthq/ui</code>
+    </pre>
 
-        <UButton type="submit" label="Submit" />
-      </UCard>
-    </div>
+    <p>Then, register the module in your `nuxt.config.js`:</p>
 
-    <div>
-      <UButton @click="toggleModalIsOpen()">
-        Toggle modal!
-      </UButton>
+    <pre class="bg-tw-gray-900 rounded-md text-tw-white px-4">
+      <code class="text-sm">
+import { defineNuxtConfig } from 'nuxt3'
 
-      <UModal v-model="isModalOpen" title="Modal">
-        Body
-      </UModal>
-    </div>
+export default defineNuxtConfig({
+  buildModules: [
+    '@nuxthq/ui'
+  ]
+})</code>
+    </pre>
 
-    <div>
-      <UDropdown v-slot="{ open }" :items="dropdownItems" placement="bottom-start">
-        <UButton variant="white" :icon="open ? 'heroicons-solid:chevron-up' : 'heroicons-solid:chevron-down'" trailing icon-class="transition">
-          Open menu!
-        </UButton>
-      </UDropdown>
-    </div>
+    <p>If you want latest updates, please use `@nuxthq/ui-edge` in your `package.json`:</p>
 
-    <div>
-      <UDropdown :items="customDropdownItems" placement="bottom-end">
-        <button>
-          <UAvatar src="https://picsum.photos/200/300" />
-        </button>
+    <pre class="bg-tw-gray-900 rounded-md text-tw-white px-4">
+      <code class="text-sm">
+{
+  "devDependencies": {
+    "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest"
+  }
+}</code>
+    </pre>
 
-        <template #item-with-avatar="{ item }">
-          <UAvatar v-if="item.avatar" :src="item.avatar" size="xxs" class="mr-3" />
+    <h2 class="font-bold text-2xl text-tw-gray-900">
+      Options
+    </h2>
 
-          {{ item.label }}
-        </template>
-      </UDropdown>
-    </div>
+    <p>- `primary`</p>
 
-    <div>
-      <UToggle v-model="isSwitchEnabled" />
-    </div>
+    <p>Define the primary variant. Defaults to `indigo`. You can specify your own object of colors like here:</p>
 
-    <!-- <UPopover v-slot="{ open }">
-      <UButton trailing variant="white" :icon="open ? 'heroicons-outline:chevron-up' : 'heroicons-outline:chevron-down'">
-        toto
-      </UButton>
-    </UPopover> -->
+    <p class="font-medium">
+      Example:
+    </p>
+
+    <pre class="bg-tw-gray-900 rounded-md text-tw-white px-4">
+      <code class="text-sm">
+import { defineNuxtConfig } from 'nuxt3'
+
+export default defineNuxtConfig({
+  buildModules: [
+    '@nuxthq/ui'
+  ],
+  ui: {
+    primary: 'blue'
+  }
+})</code>
+    </pre>
+
+    <p>- `prefix`</p>
+
+    <p>Define the prefix of the imported components. Defaults to `u`.</p>
+
+    <p class="font-medium">
+      Example:
+    </p>
+
+    <pre class="bg-tw-gray-900 rounded-md text-tw-white px-4">
+      <code class="text-sm">
+import { defineNuxtConfig } from 'nuxt3'
+
+export default defineNuxtConfig({
+  buildModules: [
+    '@nuxthq/ui'
+  ],
+  ui: {
+    prefix: 'tw'
+  }
+})</code>
+    </pre>
   </div>
 </template>
 
