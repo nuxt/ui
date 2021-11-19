@@ -5,3 +5,4 @@ nuxt.d.ts
 .output
 dist
 .DS_Store
+.history
