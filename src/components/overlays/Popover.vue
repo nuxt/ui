@@ -1,7 +1,6 @@
 <template>
   <div
     ref="container"
-    v-on-clickaway="onClickaway"
     class="inline whitespace-normal"
     @mouseover="mode === 'hover' ? mouseover() : () => {}"
     @mouseleave="mode === 'hover' ? mouseleave() : () => {}"
@@ -18,7 +17,7 @@
         leave-to-class="opacity-0"
       >
         <div
-          v-if="show && ready && $scopedSlots.content"
+          v-if="show && ready && $slots.content"
           ref="popover"
           class="z-30 flex bg-white rounded-md shadow ring-1 ring-gray-200 dark:ring-gray-700"
           :class="[
@@ -38,12 +37,12 @@
 
 <script>
 import { createPopper } from '@popperjs/core'
-import { directive as onClickaway } from 'vue-clickaway'
+// import { directive as onClickaway } from 'vue-clickaway'
 
 export default {
-  directives: {
-    onClickaway
-  },
+  // directives: {
+  //   onClickaway
+  // },
   props: {
     darken: {
       type: Boolean,

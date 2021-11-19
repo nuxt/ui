@@ -1,5 +1,5 @@
 <template>
-  <div ref="container" v-on-clickaway="close">
+  <div ref="container">
     <input :value="value" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default">
 
     <slot :toggle="toggle" :open="open">
@@ -113,7 +113,7 @@
 <script>
 import get from 'lodash/get'
 import { createPopper } from '@popperjs/core'
-import { directive as onClickaway } from 'vue-clickaway'
+// import { directive as onClickaway } from 'vue-clickaway'
 
 import Icon from '../elements/Icon'
 
@@ -121,9 +121,9 @@ export default {
   components: {
     Icon
   },
-  directives: {
-    onClickaway
-  },
+  // directives: {
+  //   onClickaway
+  // },
   shortcuts: {
     disabled () {
       return !this.open

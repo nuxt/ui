@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import focusLock from 'dom-focus-lock'
+// import focusLock from 'dom-focus-lock'
 
 import Icon from '../elements/Icon'
 import Card from '../layout/Card'
@@ -164,7 +164,7 @@ export default {
   },
   beforeDestroy () {
     if (this.lock) {
-      focusLock.off(this.$refs.container)
+      // focusLock.off(this.$refs.container)
       this.lock = false
     }
   },
@@ -183,7 +183,7 @@ export default {
       document.activeElement?.blur()
       this.$nextTick(() => {
         if (this.$refs.container && !this.lock) {
-          focusLock.on(this.$refs.container)
+          // focusLock.on(this.$refs.container)
           this.lock = true
         }
       })
@@ -192,7 +192,7 @@ export default {
       this.showBackdrop = false
       this.showContent = false
       if (this.lock) {
-        focusLock.off(this.$refs.container)
+        // focusLock.off(this.$refs.container)
         this.lock = false
       }
     },

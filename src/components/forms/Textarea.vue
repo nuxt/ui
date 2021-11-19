@@ -3,7 +3,6 @@
     <textarea
       :id="name"
       ref="textarea"
-      v-focus="autofocus"
       :name="name"
       :value="modelValue"
       :rows="rows"
@@ -18,12 +17,12 @@
 </template>
 
 <script>
-import Focus from '../../directives/focus'
+// import Focus from '../../directives/focus'
 
 export default {
-  directives: {
-    focus: Focus
-  },
+  // directives: {
+  //   focus: Focus
+  // },
   props: {
     modelValue: {
       type: [String, Number],

@@ -1,9 +1,10 @@
 <template>
   <component
-    :is="$attrs && $attrs.submit ? 'form': 'div'"
+    :is="$attrs.onSubmit ? 'form': 'div'"
     :class="[padded && rounded && 'rounded-md', !padded && rounded && 'sm:rounded-md', wrapperClass, ringClass, shadowClass, backgroundClass]"
-    @submit.prevent="$attrs && $attrs.submit ? $attrs.submit() : null"
+    v-bind="$attrs"
   >
+    {{ $attrs }}
     <div
       v-if="$slots.header"
       :class="[headerClass, headerBackgroundClass, borderColorClass, !!$slots.default && 'border-b']"
@@ -77,6 +78,9 @@ export default {
       type: String,
       default: 'border-gray-200 dark:border-gray-700'
     }
+  },
+  setup (props, { attrs }) {
+    console.log('attrs', attrs)
   }
 }
 </script>

@@ -70,7 +70,7 @@ export default {
       type: String,
       default: null,
       validator (value) {
-        return ['online', 'idle', 'invisible', 'donotdisturb', 'focus'].includes(value)
+        return [null, 'online', 'idle', 'invisible', 'donotdisturb', 'focus'].includes(value)
       }
     }
   },

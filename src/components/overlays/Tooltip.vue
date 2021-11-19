@@ -1,6 +1,6 @@
 
 <template>
-  <div ref="container" v-on-clickaway="close" @mouseover="mouseover" @mouseleave="mouseleave">
+  <div ref="container" @mouseover="mouseover" @mouseleave="mouseleave">
     <slot />
 
     <transition
@@ -44,12 +44,12 @@
 
 <script>
 import { createPopper } from '@popperjs/core'
-import { directive as onClickaway } from 'vue-clickaway'
+// import { directive as onClickaway } from 'vue-clickaway'
 
 export default {
-  directives: {
-    onClickaway
-  },
+  // directives: {
+  //   onClickaway
+  // },
   props: {
     text: {
       type: String,
