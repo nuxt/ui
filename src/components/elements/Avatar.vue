@@ -1,6 +1,6 @@
 <template>
   <span class="relative inline-flex items-center justify-center overflow-hidden" :class="avatarClass" @click="goto">
-    <img v-if="url" :src="url" :alt="alt" :class="roundedClass">
+    <img v-if="url" :src="url" :alt="alt" :class="[sizeClass, roundedClass]">
     <span v-else-if="gradientPlaceholder" class="w-full h-full" v-html="gradientPlaceholder" />
     <span
       v-else-if="placeholder"
