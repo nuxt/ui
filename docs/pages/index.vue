@@ -92,6 +92,83 @@ export default defineNuxtConfig({
   }
 })</code>
     </pre>
+
+    <h2 class="font-bold text-2xl text-tw-gray-900">
+      Examples
+    </h2>
+
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Button:
+      </div>
+      <UButton variant="primary" icon="heroicons-outline:bell">
+        toto
+      </UButton>
+    </div>
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Avatar:
+      </div>
+      <UAvatar src="https://picsum.photos/200/300" />
+    </div>
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Card:
+      </div>
+      <UCard @submit.prevent="onSubmit">
+        <UInputGroup label="Email" name="email" class="mb-3">
+          <UInput type="email" name="email" />
+        </UInputGroup>
+        <UButton type="submit" label="Submit" />
+      </UCard>
+    </div>
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Modal:
+      </div>
+      <UButton @click="toggleModalIsOpen()">
+        Toggle modal!
+      </UButton>
+
+      <UModal v-model="isModalOpen" title="Modal">
+        Body
+      </UModal>
+    </div>
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Dropdown:
+      </div>
+      <UDropdown v-slot="{ open }" :items="dropdownItems" placement="bottom-start">
+        <UButton variant="white" :icon="open ? 'heroicons-solid:chevron-up' : 'heroicons-solid:chevron-down'" trailing icon-class="transition">
+          Open menu!
+        </UButton>
+      </UDropdown>
+    </div>
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Dropdown with avatar:
+      </div>
+      <UDropdown :items="customDropdownItems" placement="bottom-end">
+        <button>
+          <UAvatar src="https://picsum.photos/200/300" />
+        </button>
+        <template #item-with-avatar="{ item }">
+          <UAvatar v-if="item.avatar" :src="item.avatar" size="xxs" class="mr-3" />
+          {{ item.label }}
+        </template>
+      </UDropdown>
+    </div>
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Toggle:
+      </div>
+      <UToggle v-model="isSwitchEnabled" />
+    </div>
+    <!-- <UPopover v-slot="{ open }">
+      <UButton trailing variant="white" :icon="open ? 'heroicons-outline:chevron-up' : 'heroicons-outline:chevron-down'">
+        toto
+      </UButton>
+    </UPopover> -->
   </div>
 </template>
 

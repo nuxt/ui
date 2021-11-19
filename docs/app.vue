@@ -8,7 +8,7 @@
           </NuxtLink>
 
           <nav class="overflow-y-auto h-auto">
-            <ul class="space-y-3">
+            <ul class="space-y-6">
               <li v-for="section of sections" :key="section">
                 <h5 class="mb-3 uppercase tracking-wide font-semibold text-xs text-tw-gray-900">
                   {{ section.label }}
