@@ -34,7 +34,7 @@
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "7.0.2",
     "eslint": "8.2.0",
-    "nuxt3": "3.0.0-27288761.d3fb512",
+    "nuxt3": "3.0.0-27287661.1e0e881",
     "unbuild": "0.5.13"
   }
 }
