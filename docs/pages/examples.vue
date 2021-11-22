@@ -1,0 +1,337 @@
+<template>
+  <div class="space-y-4">
+    <div class="pb-10 border-b border-gray-200 mb-10">
+      <div>
+        <h1 class="inline-block text-3xl font-extrabold text-gray-900 tracking-tight">
+          Examples
+        </h1>
+      </div>
+
+      <p class="mt-1 text-lg text-gray-500">
+        Examples of real-life usage of components.
+      </p>
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Avatar:
+      </div>
+
+      <UAvatar src="https://picsum.photos/200/300" />
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Button:
+      </div>
+
+      <UButton variant="primary" icon="heroicons-outline:mail">
+        Button text
+      </UButton>
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Modal:
+      </div>
+
+      <UButton @click="toggleModalIsOpen()">
+        Toggle modal!
+      </UButton>
+
+      <UModal v-model="isModalOpen">
+        <div class="sm:flex sm:items-start">
+          <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+            <UIcon name="heroicons-outline:exclamation" class="h-6 w-6 text-red-600" aria-hidden="true" />
+          </div>
+          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+              Deactivate account
+            </h3>
+            <div class="mt-2">
+              <p class="text-sm text-gray-500">
+                Are you sure you want to deactivate your account? All of your data will be permanently removed from our servers forever. This action cannot be undone.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+          <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" @click="open = false">
+            Deactivate
+          </button>
+          <button ref="cancelButtonRef" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm" @click="open = false">
+            Cancel
+          </button>
+        </div>
+      </UModal>
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Dropdown:
+      </div>
+
+      <UDropdown v-slot="{ open }" :items="dropdownItems" placement="bottom-start">
+        <UButton variant="white" :icon="open ? 'heroicons-solid:chevron-up' : 'heroicons-solid:chevron-down'" trailing icon-class="transition">
+          Open menu!
+        </UButton>
+      </UDropdown>
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Dropdown with avatar:
+      </div>
+
+      <UDropdown :items="customDropdownItems" placement="bottom-end">
+        <button class="flex">
+          <UAvatar src="https://picsum.photos/200/300" />
+        </button>
+
+        <template #item-with-avatar="{ item }">
+          <UAvatar v-if="item.avatar" :src="item.avatar" size="xxs" class="mr-3" />
+          {{ item.label }}
+        </template>
+      </UDropdown>
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Popover:
+      </div>
+
+      <UPopover panel-class="w-screen max-w-sm px-4 sm:px-0 transform" wrapper-class="inline-block relative">
+        <template #default="{ open }">
+          <UButton variant="secondary" :icon="open ? 'heroicons-solid:chevron-up' : 'heroicons-solid:chevron-down'" trailing icon-class="transition">
+            Open popover!
+          </UButton>
+        </template>
+
+        <template #panel>
+          <div
+            class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5"
+          >
+            <div class="relative grid gap-8 bg-white p-7">
+              <a
+                v-for="item in solutions"
+                :key="item.name"
+                :href="item.href"
+                class="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+              >
+                <div
+                  class="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white sm:h-12 sm:w-12"
+                >
+                  <div v-html="item.icon" />
+                </div>
+                <div class="ml-4">
+                  <p class="text-sm font-medium text-gray-900">
+                    {{ item.name }}
+                  </p>
+                  <p class="text-sm text-gray-500">
+                    {{ item.description }}
+                  </p>
+                </div>
+              </a>
+            </div>
+            <div class="p-4 bg-gray-50">
+              <a
+                href="##"
+                class="flow-root px-2 py-2 transition duration-150 ease-in-out rounded-md hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+              >
+                <span class="flex items-center">
+                  <span class="text-sm font-medium text-gray-900">
+                    Documentation
+                  </span>
+                </span>
+                <span class="block text-sm text-gray-500">
+                  Start integrating products and tools
+                </span>
+              </a>
+            </div>
+          </div>
+        </template>
+      </UPopover>
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Tooltip:
+      </div>
+
+      <UTooltip>
+        <UIcon name="heroicons-outline:information-circle" class="w-6 h-6 text-black cursor-pointer" />
+      </UTooltip>
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Toggle:
+      </div>
+      <UToggle v-model="isSwitchEnabled" />
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 text-tw-gray-700">
+        Card:
+      </div>
+
+      <UCard @submit.prevent="onSubmit">
+        <UInputGroup label="Email" name="email" class="mb-3">
+          <UInput type="email" name="email" />
+        </UInputGroup>
+        <UButton type="submit" label="Submit" />
+      </UCard>
+    </div>
+
+    <!-- <UPopover v-slot="{ open }">
+      <UButton trailing variant="white" :icon="open ? 'heroicons-outline:chevron-up' : 'heroicons-outline:chevron-down'">
+        toto
+      </UButton>
+    </UPopover> -->
+  </div>
+</template>
+
+<script setup>
+const isModalOpen = ref(false)
+const isSwitchEnabled = ref(false)
+
+function toggleModalIsOpen () {
+  isModalOpen.value = !isModalOpen.value
+}
+
+function onClick () {
+  // eslint-disable-next-line no-console
+  console.warn('click')
+}
+
+function onSubmit () {
+  // eslint-disable-next-line no-console
+  console.warn('submit')
+}
+
+const dropdownItems = [
+  [{
+    label: 'Edit',
+    icon: 'heroicons-solid:pencil',
+    click: () => onClick()
+  }, {
+    label: 'Duplicate',
+    icon: 'heroicons-solid:duplicate'
+  }],
+  [{
+    label: 'Archive',
+    icon: 'heroicons-solid:archive'
+  }, {
+    label: 'Move',
+    icon: 'heroicons-solid:external-link'
+  }],
+  [{
+    label: 'Delete',
+    icon: 'heroicons-solid:trash'
+  }]
+]
+
+const customDropdownItems = [
+  [{
+    label: 'benjamincanac',
+    avatar: 'https://picsum.photos/200/300',
+    href: 'https://google.fr',
+    target: '_blank',
+    slot: 'item-with-avatar'
+  }],
+  [{
+    label: 'About',
+    icon: 'heroicons-solid:plus',
+    to: '/about'
+  }]
+]
+
+const solutions = [
+  {
+    name: 'Insights',
+    description: 'Measure actions your users take',
+    href: '##',
+    icon: `
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              aria-hidden='true'
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="48" height="48" rx="8" fill="#FFEDD5" />
+              <path
+                d="M24 11L35.2583 17.5V30.5L24 37L12.7417 30.5V17.5L24 11Z"
+                stroke="#FB923C"
+                stroke-width="2"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M16.7417 19.8094V28.1906L24 32.3812L31.2584 28.1906V19.8094L24 15.6188L16.7417 19.8094Z"
+                stroke="#FDBA74"
+                stroke-width="2"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M20.7417 22.1196V25.882L24 27.7632L27.2584 25.882V22.1196L24 20.2384L20.7417 22.1196Z"
+                stroke="#FDBA74"
+                stroke-width="2"
+              />
+            </svg>
+          `
+  },
+  {
+    name: 'Automations',
+    description: 'Create your own targeted content',
+    href: '##',
+    icon: `
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="48" height="48" rx="8" fill="#FFEDD5" />
+              <path
+                d="M28.0413 20L23.9998 13L19.9585 20M32.0828 27.0001L36.1242 34H28.0415M19.9585 34H11.8755L15.9171 27"
+                stroke="#FB923C"
+                stroke-width="2"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M18.804 30H29.1963L24.0001 21L18.804 30Z"
+                stroke="#FDBA74"
+                stroke-width="2"
+              />
+            </svg>
+          `
+  },
+  {
+    name: 'Reports',
+    description: 'Keep track of your growth',
+    href: '##',
+    icon: `
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="48" height="48" rx="8" fill="#FFEDD5" />
+              <rect x="13" y="32" width="2" height="4" fill="#FDBA74" />
+              <rect x="17" y="28" width="2" height="8" fill="#FDBA74" />
+              <rect x="21" y="24" width="2" height="12" fill="#FDBA74" />
+              <rect x="25" y="20" width="2" height="16" fill="#FDBA74" />
+              <rect x="29" y="16" width="2" height="20" fill="#FB923C" />
+              <rect x="33" y="12" width="2" height="24" fill="#FB923C" />
+            </svg>
+          `
+  }
+]
+</script>

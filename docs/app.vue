@@ -1,13 +1,13 @@
 <template>
   <div class="bg-tw-gray-50">
-    <UContainer class="py-8 min-h-screen">
+    <UContainer class="pt-8 min-h-screen">
       <div class="lg:grid lg:grid-cols-12 lg:gap-10 lg:relative">
-        <aside class="lg:flex lg:flex-col lg:relative pb-8 lg:pb-0 lg:sticky lg:top-0 px-4 sm:px-6 lg:px-0 lg:pt-8 lg:-mt-8 lg:self-start lg:col-span-3 lg:overflow-hidden lg:h-[calc(100vh-2rem)]" style="position: sticky;height: calc(100vh - 2rem);">
+        <aside class="lg:flex lg:flex-col lg:relative pb-8 lg:pb-0 lg:sticky lg:top-0 px-4 sm:px-6 lg:px-0 lg:pt-8 lg:-mt-8 lg:self-start lg:col-span-3 lg:overflow-hidden lg:h-[calc(100vh-2rem)]" style="position: sticky;height: calc(100vh - 0rem);">
           <NuxtLink to="/" class="block font-bold text-lg mb-6">
             @nuxthq/ui
           </NuxtLink>
 
-          <nav class="overflow-y-auto h-auto">
+          <nav class="overflow-y-auto h-auto pb-12">
             <ul class="space-y-6">
               <li v-for="section of sections" :key="section">
                 <h5 class="mb-3 uppercase tracking-wide font-semibold text-xs text-tw-gray-900">
@@ -31,7 +31,7 @@
           </nav>
         </aside>
 
-        <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
+        <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9 pb-80">
           <NuxtPage />
         </div>
       </div>
