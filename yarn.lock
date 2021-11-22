@@ -286,10 +286,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@headlessui/vue@^1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.4.2.tgz#1098f52cb6c583772708a980b3487222ac0ae65e"
-  integrity sha512-+uOaPwHncxHZ6JBwYycu3YxDDrY0v1tcxCtK04H1WGBLBm07dqVi38Q2RB7eY867FUhD0sL6q+Fj69rVn8P0OQ==
+"@headlessui/vue@^0.0.0-dev.50d9fd3":
+  version "0.0.0-dev.50d9fd3"
+  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-0.0.0-dev.50d9fd3.tgz#719a62e1acd62f721e9a7a3f128387f7af2f98e2"
+  integrity sha512-LyCxHzVqhfXla3jCR4neYxHTDmZcCrYcUgr5cNln3KXk/17fpn+3g1SRvVWFQBmRYsxTNPT4UeBzMmTCxVqWug==
 
 "@humanwhocodes/config-array@^0.6.0":
   version "0.6.0"
