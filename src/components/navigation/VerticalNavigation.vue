@@ -19,8 +19,8 @@
         class="flex items-center px-2 py-2 text-sm font-medium rounded-md group focus:outline-none"
         :active-class="activeVariantClass"
         :inactive-class="variantClass"
-        @click.native="link.click && link.click()"
-        @keyup.enter.native="$event.target.blur()"
+        @click="link.click && link.click()"
+        @keyup.enter="$event.target.blur()"
       >
         <slot name="icon" :link="link">
           <Icon

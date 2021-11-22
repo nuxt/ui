@@ -6,8 +6,9 @@
       </slot>
     </MenuButton>
 
-    <div ref="container" :class="containerClass">
+    <div v-if="open" ref="container" :class="containerClass">
       <transition
+        appear
         enter-active-class="transition duration-100 ease-out"
         enter-from-class="transform scale-95 opacity-0"
         enter-to-class="transform scale-100 opacity-100"
@@ -15,7 +16,7 @@
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
       >
-        <MenuItems :class="itemsClass">
+        <MenuItems :class="itemsClass" static>
           <div v-for="(subItems, index) of items" :key="index" class="py-1">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }">
               <Component v-bind="item" :is="(item.to && 'NuxtLink') || (item.href && 'a') || 'button'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)">
@@ -97,14 +98,6 @@ export default {
       type: String,
       default: 'mr-3 h-5 w-5 text-tw-gray-400 group-hover:text-tw-gray-500'
     }
-    // openDelay: {
-    //   type: Number,
-    //   default: 100
-    // },
-    // closeDelay: {
-    //   type: Number,
-    //   default: 0
-    // },
   },
   setup (props) {
     const [trigger, container] = usePopper({
