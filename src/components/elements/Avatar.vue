@@ -2,15 +2,11 @@
   <span class="relative inline-flex items-center justify-center" :class="avatarClass" @click="goto">
     <img v-if="url" :src="url" :alt="alt" :class="[sizeClass, roundedClass]">
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <span v-else-if="gradientPlaceholder" class="w-full h-full" v-html="gradientPlaceholder" />
+    <span v-else-if="gradientPlaceholder" class="w-full h-full overflow-hidden" :class="roundedClass" v-html="gradientPlaceholder" />
     <span
       v-else-if="placeholder"
-      class="font-bold leading-none text-white uppercase"
+      class="font-medium leading-none text-white uppercase"
     >{{ placeholder }}</span>
-    <span
-      v-else-if="text"
-      class="leading-snug"
-    >{{ text }}</span>
     <svg
       v-else
       class="w-full h-full text-tw-gray-300"
@@ -38,10 +34,6 @@ export default {
   props: {
     src: {
       type: [String, Boolean],
-      default: null
-    },
-    text: {
-      type: String,
       default: null
     },
     alt: {
@@ -117,7 +109,7 @@ export default {
     },
     placeholderClass () {
       return ({
-        true: 'bg-tw-white',
+        true: 'bg-tw-gray-500',
         false: 'bg-tw-gray-100'
       })[!!this.alt]
     },

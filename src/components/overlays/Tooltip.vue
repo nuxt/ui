@@ -14,11 +14,7 @@
       <div
         v-show="show && (text || shortcuts.length || $slots.text)"
         ref="tooltip"
-        class="fixed z-30 flex items-center justify-center invisible w-auto h-6 max-w-xs px-2 space-x-1 truncate rounded shadow lg:visible"
-        :class="{
-          'bg-gray-800': !darken,
-          'bg-gray-900': darken
-        }"
+        class="fixed z-30 flex bg-gray-800 items-center justify-center invisible w-auto h-6 max-w-xs px-2 space-x-1 truncate rounded shadow lg:visible"
       >
         <span v-if="text || $slots.text" class="truncate text-gray-50 text-xxs">
           <slot name="text">{{ text }}</slot>
@@ -43,113 +39,66 @@
 </template>
 
 <script>
-import { createPopper } from '@popperjs/core'
-// import { directive as onClickaway } from 'vue-clickaway'
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+
+import { usePopper } from '../../utils'
 
 export default {
-  // directives: {
-  //   onClickaway
-  // },
+  components: {
+    Popover,
+    PopoverButton,
+    PopoverPanel
+  },
   props: {
-    text: {
-      type: String,
-      default: null
-    },
-    shortcuts: {
-      type: Array,
-      default: () => []
-    },
-    darken: {
-      type: Boolean,
-      default: false
-    },
-    openDelay: {
-      type: Number,
-      default: 0
-    },
-    closeDelay: {
-      type: Number,
-      default: 100
-    },
     placement: {
       type: String,
       default: 'bottom'
+    },
+    strategy: {
+      type: String,
+      default: 'absolute'
+    },
+    wrapperClass: {
+      type: String,
+      default: 'relative'
+    },
+    tooltipClass: {
+      type: String,
+      default: 'z-10'
+    },
+    label: {
+      type: String,
+      default: ''
     }
   },
-  data () {
+  setup (props) {
+    const [trigger, container] = usePopper({
+      placement: props.placement,
+      strategy: props.strategy,
+      modifiers: [{
+        name: 'offset',
+        options: {
+          offset: [0, 8]
+        }
+      },
+      {
+        name: 'computeStyles',
+        options: {
+          gpuAcceleration: false,
+          adaptive: false
+        }
+      },
+      {
+        name: 'preventOverflow',
+        options: {
+          padding: 8
+        }
+      }]
+    })
+
     return {
-      show: false,
-      instance: null,
-      openTimeout: null,
-      closeTimeout: null
-    }
-  },
-  watch: {
-    show (value) {
-      if (!value) {
-        return
-      }
-
-      if (this.instance) {
-        this.instance.destroy()
-        this.instance = null
-      }
-
-      this.instance = createPopper(this.$refs.container, this.$refs.tooltip, {
-        strategy: 'fixed',
-        placement: this.placement,
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [0, 8]
-            }
-          },
-          {
-            name: 'computeStyles',
-            options: {
-              gpuAcceleration: false,
-              adaptive: false
-            }
-          },
-          {
-            name: 'preventOverflow',
-            options: {
-              padding: 8
-            }
-          }
-        ]
-      })
-    }
-  },
-  beforeDestroy () {
-    if (this.instance) {
-      this.instance.destroy()
-      this.instance = null
-    }
-  },
-  methods: {
-    mouseover () {
-      clearTimeout(this.closeTimeout)
-      this.closeTimeout = null
-      this.openTimeout = this.openTimeout || setTimeout(() => {
-        this.open()
-        this.openTimeout = null
-      }, this.openDelay)
-    },
-    mouseleave () {
-      clearTimeout(this.openTimeout)
-      this.openTimeout = null
-      this.closeTimeout = this.closeTimeout || setTimeout(() => {
-        this.close()
-        this.closeTimeout = null
-      }, this.closeDelay)
-    },
-    open () {
-      this.show = true
-    },
-    close () {
-      this.show = false
+      trigger,
+      container
     }
   }
 }

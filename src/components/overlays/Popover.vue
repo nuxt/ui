@@ -42,7 +42,7 @@ export default {
     },
     strategy: {
       type: String,
-      default: 'absolute'
+      default: 'fixed'
     },
     wrapperClass: {
       type: String,
