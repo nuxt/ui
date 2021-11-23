@@ -39,16 +39,16 @@
 </template>
 
 <script>
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+// import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
 import { usePopper } from '../../utils'
 
 export default {
-  components: {
-    Popover,
-    PopoverButton,
-    PopoverPanel
-  },
+  // components: {
+  //   Popover,
+  //   PopoverButton,
+  //   PopoverPanel
+  // },
   props: {
     placement: {
       type: String,

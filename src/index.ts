@@ -97,6 +97,7 @@ export default defineNuxtModule({
       },
       rules: [
         [/^shadow-?(.*)$/, ([, d], { theme }) => {
+          // @ts-ignore
           const value = theme?.boxShadow?.[d || 'DEFAULT']
           if (value) {
             return {
