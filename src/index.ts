@@ -1,5 +1,5 @@
 import { resolve, join } from 'pathe'
-import { defineNuxtModule, installModule } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addPlugin, resolveModule } from '@nuxt/kit'
 import { colors } from '@unocss/preset-uno'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
 
@@ -9,10 +9,17 @@ export default defineNuxtModule({
   async setup (_options, nuxt) {
     const _prefix = _options?.prefix || 'u'
     const _primary = _options?.primary || 'indigo'
+    const _shortcuts = _options?.shortcuts || []
+    const _rules = _options?.rules || []
 
     const options: UnocssNuxtOptions = {
       theme: {
         colors: {
+          transparent: 'transparent',
+          current: 'currentColor',
+          black: '#000',
+          white: '#fff',
+          gray: colors?.zinc,
           primary: typeof _primary === 'object' ? _primary : (colors && colors[_primary])
         }
       },
@@ -21,18 +28,19 @@ export default defineNuxtModule({
         prefix: ''
       },
       shortcuts: {
-        'bg-tw-white': 'bg-white dark:bg-gray-900',
-        'bg-tw-gray-50': 'bg-gray-50 dark:bg-gray-800',
-        'bg-tw-gray-100': 'bg-gray-100 dark:bg-gray-700',
-        'bg-tw-gray-200': 'bg-gray-200 dark:bg-gray-600',
-        'bg-tw-gray-300': 'bg-gray-300 dark:bg-gray-500',
-        'bg-tw-gray-400': 'bg-gray-400 dark:bg-gray-400',
-        'bg-tw-gray-500': 'bg-gray-500 dark:bg-gray-300',
-        'bg-tw-gray-600': 'bg-gray-600 dark:bg-gray-200',
-        'bg-tw-gray-700': 'bg-gray-700 dark:bg-gray-100',
-        'bg-tw-gray-800': 'bg-gray-800 dark:bg-gray-50',
-        'bg-tw-gray-900': 'bg-gray-900 dark:bg-white',
-        'text-tw-white': 'text-white dark:text-gray-900',
+        'bg-tw-white': 'bg-white dark:bg-black',
+        'bg-tw-gray-50': 'bg-gray-50 dark:bg-gray-900',
+        'bg-tw-gray-100': 'bg-gray-100 dark:bg-gray-800',
+        'bg-tw-gray-200': 'bg-gray-200 dark:bg-gray-700',
+        'bg-tw-gray-300': 'bg-gray-300 dark:bg-gray-600',
+        'bg-tw-gray-400': 'bg-gray-400 dark:bg-gray-500',
+        'bg-tw-gray-500': 'bg-gray-500 dark:bg-gray-400',
+        'bg-tw-gray-600': 'bg-gray-600 dark:bg-gray-300',
+        'bg-tw-gray-700': 'bg-gray-700 dark:bg-gray-200',
+        'bg-tw-gray-800': 'bg-gray-800 dark:bg-gray-100',
+        'bg-tw-gray-900': 'bg-gray-900 dark:bg-gray-50',
+        'bg-tw-black': 'bg-black dark:bg-white',
+        'text-tw-white': 'text-white dark:text-black',
         'text-tw-gray-50': 'text-gray-50 dark:text-gray-900',
         'text-tw-gray-100': 'text-gray-100 dark:text-gray-800',
         'text-tw-gray-200': 'text-gray-200 dark:text-gray-700',
@@ -43,6 +51,7 @@ export default defineNuxtModule({
         'text-tw-gray-700': 'text-gray-700 dark:text-gray-200',
         'text-tw-gray-800': 'text-gray-800 dark:text-gray-100',
         'text-tw-gray-900': 'text-gray-900 dark:text-gray-50',
+        'text-tw-black': 'text-black dark:text-white',
         'border-tw-gray-100': 'border-gray-100 dark:border-gray-900',
         'border-tw-gray-200': 'border-gray-200 dark:border-gray-800',
         'border-tw-gray-300': 'border-gray-300 dark:border-gray-700',
@@ -83,37 +92,53 @@ export default defineNuxtModule({
         'max-w-4xl': 'max-w-56rem',
         'max-w-5xl': 'max-w-64rem',
         'max-w-6xl': 'max-w-72rem',
-        'max-w-7xl': 'max-w-80rem'
-      }
+        'max-w-7xl': 'max-w-80rem',
+        ..._shortcuts
+      },
+      rules: [
+        [/^shadow-?(.*)$/, ([, d], { theme }) => {
+          const value = theme?.boxShadow?.[d || 'DEFAULT']
+          if (value) {
+            return {
+              '--un-shadow-color': '0,0,0',
+              '--un-shadow': value,
+              'box-shadow': 'var(--un-shadow)'
+            }
+          }
+        }],
+        ..._rules
+      ]
     }
 
     await installModule(nuxt, { src: '@unocss/nuxt', options })
 
-    const componentsRoot = resolve(__dirname, './components')
+    addPlugin(resolveModule('./plugin', { paths: resolve(__dirname, 'runtime') }), { append: true })
+
+    const componentsDir = resolve(__dirname, 'components')
 
     nuxt.hook('components:dirs', (dirs) => {
       dirs.push({
-        path: join(componentsRoot, 'elements'),
+        path: join(componentsDir, 'elements'),
         prefix: _prefix
       })
       dirs.push({
-        path: join(componentsRoot, 'feedback'),
+        path: join(componentsDir, 'feedback'),
         prefix: _prefix
       })
       dirs.push({
-        path: join(componentsRoot, 'forms'),
+        path: join(componentsDir, 'forms'),
         prefix: _prefix
       })
       dirs.push({
-        path: join(componentsRoot, 'layout'),
+        path: join(componentsDir, 'layout'),
         prefix: _prefix
       })
       dirs.push({
-        path: join(componentsRoot, 'navigation'),
+        path: join(componentsDir, 'navigation'),
         prefix: _prefix
       })
       dirs.push({
-        path: join(componentsRoot, 'overlays'),
+        path: join(componentsDir, 'overlays'),
         prefix: _prefix
       })
     })
