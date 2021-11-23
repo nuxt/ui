@@ -9,6 +9,11 @@
 
           <nav class="overflow-y-auto h-auto pb-12">
             <ul class="space-y-6">
+              <li>
+                <ULink to="/examples" class="mb-3 uppercase tracking-wide font-semibold text-xs" active-class="text-primary-700" inactive-class="text-tw-gray-700 hover:text-tw-gray-900" exact>
+                  Examples
+                </ULink>
+              </li>
               <li v-for="section of sections" :key="section">
                 <h5 class="mb-3 uppercase tracking-wide font-semibold text-xs text-tw-gray-900">
                   {{ section.label }}

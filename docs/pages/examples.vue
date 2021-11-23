@@ -153,7 +153,7 @@
       </UPopover>
     </div>
 
-    <div>
+    <!-- <div>
       <div class="font-medium text-sm mb-1 text-tw-gray-700">
         Tooltip:
       </div>
@@ -161,7 +161,7 @@
       <UTooltip>
         <UIcon name="heroicons-outline:information-circle" class="w-6 h-6 text-black cursor-pointer" />
       </UTooltip>
-    </div>
+    </div> -->
 
     <div>
       <div class="font-medium text-sm mb-1 text-tw-gray-700">
@@ -179,6 +179,11 @@
         <UInputGroup label="Email" name="email" class="mb-3">
           <UInput type="email" name="email" />
         </UInputGroup>
+
+        <UInputGroup label="Description" name="description" class="mb-3">
+          <UTextarea v-model="description" type="description" name="description" autofocus autoresize />
+        </UInputGroup>
+
         <UButton type="submit" label="Submit" />
       </UCard>
     </div>
@@ -334,4 +339,6 @@ const solutions = [
           `
   }
 ]
+
+const description = ref('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.')
 </script>
