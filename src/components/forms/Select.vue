@@ -1,5 +1,5 @@
 <template>
-  <div class="relative" :class="wrapperClass">
+  <div :class="wrapperClass">
     <select
       :id="name"
       :name="name"
@@ -84,17 +84,17 @@ export default {
         return ['xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)
       }
     },
+    wrapperClass: {
+      type: String,
+      default: 'relative'
+    },
     baseClass: {
       type: String,
-      default: 'block w-full disabled:cursor-not-allowed bg-tw-white text-tw-gray-700 disabled:bg-tw-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 border border-tw-gray-300 rounded-md focus:outline-none'
+      default: 'block w-full disabled:cursor-not-allowed bg-tw-white text-tw-gray-700 disabled:bg-tw-gray-50 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 border border-tw-gray-300 rounded-md shadow-sm focus:outline-none'
     },
     customClass: {
       type: String,
       default: null
-    },
-    noShadow: {
-      type: Boolean,
-      default: false
     },
     textAttribute: {
       type: String,
@@ -158,13 +158,6 @@ export default {
         this.sizeClass,
         this.paddingClass
       ].join(' ')
-    },
-    wrapperClass () {
-      return [
-        'relative',
-        'rounded-md',
-        !this.noShadow ? 'shadow-sm' : ''
-      ].filter(Boolean).join(' ')
     },
     normalizedOptions () {
       return this.options.map(option => this.normalizeOption(option))

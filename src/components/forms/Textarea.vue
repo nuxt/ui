@@ -84,7 +84,7 @@ export default {
     },
     baseClass: {
       type: String,
-      default: 'block w-full bg-tw-white text-tw-gray-700 shadow-sm disabled:cursor-not-allowed disabled:bg-tw-gray-50 focus:outline-none'
+      default: 'block w-full bg-tw-white text-tw-gray-700 disabled:cursor-not-allowed disabled:bg-tw-gray-50 focus:outline-none'
     },
     customClass: {
       type: String,
@@ -147,7 +147,7 @@ export default {
     })[props.size])
 
     const appearanceClass = computed(() => ({
-      default: 'focus:ring-1 focus:ring-primary-500 focus:border-primary-500 border border-tw-gray-300 rounded-md',
+      default: 'focus:ring-1 focus:ring-primary-500 focus:border-primary-500 border border-tw-gray-300 rounded-md shadow-sm',
       none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
     })[props.appearance])
 
