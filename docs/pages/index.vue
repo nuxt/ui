@@ -1,13 +1,13 @@
 <template>
   <div class="space-y-4">
-    <div class="pb-10 border-b border-gray-200 mb-10">
+    <div class="pb-10 border-b border-tw-gray-200 mb-10">
       <div>
-        <h1 class="inline-block text-3xl font-extrabold text-gray-900 tracking-tight">
+        <h1 class="inline-block text-3xl font-extrabold text-tw-gray-900 tracking-tight">
           Documentation
         </h1>
       </div>
 
-      <p class="mt-1 text-lg text-gray-500">
+      <p class="mt-1 text-lg text-tw-gray-500">
         Components library as a Nuxt3 module using <a href="https://github.com/antfu/unocss" target="_blank">UnoCSS</a>.
       </p>
     </div>

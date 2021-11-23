@@ -1,13 +1,13 @@
 <template>
   <div class="space-y-4">
-    <div class="pb-10 border-b border-gray-200 mb-10">
+    <div class="pb-10 border-b border-tw-gray-200 mb-10">
       <div>
-        <h1 class="inline-block text-3xl font-extrabold text-gray-900 tracking-tight">
+        <h1 class="inline-block text-3xl font-extrabold text-tw-gray-900 tracking-tight">
           Examples
         </h1>
       </div>
 
-      <p class="mt-1 text-lg text-gray-500">
+      <p class="mt-1 text-lg text-tw-gray-500">
         Examples of real-life usage of components.
       </p>
     </div>
@@ -45,11 +45,11 @@
             <UIcon name="heroicons-outline:exclamation" class="h-6 w-6 text-red-600" aria-hidden="true" />
           </div>
           <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">
+            <h3 class="text-lg leading-6 font-medium text-tw-gray-900">
               Deactivate account
             </h3>
             <div class="mt-2">
-              <p class="text-sm text-gray-500">
+              <p class="text-sm text-tw-gray-500">
                 Are you sure you want to deactivate your account? All of your data will be permanently removed from our servers forever. This action cannot be undone.
               </p>
             </div>
@@ -59,7 +59,7 @@
           <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" @click="open = false">
             Deactivate
           </button>
-          <button ref="cancelButtonRef" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm" @click="open = false">
+          <button ref="cancelButtonRef" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-tw-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-tw-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm" @click="open = false">
             Cancel
           </button>
         </div>
@@ -124,10 +124,10 @@
                   <div v-html="item.icon" />
                 </div>
                 <div class="ml-4">
-                  <p class="text-sm font-medium text-gray-900">
+                  <p class="text-sm font-medium text-tw-gray-900">
                     {{ item.name }}
                   </p>
-                  <p class="text-sm text-gray-500">
+                  <p class="text-sm text-tw-gray-500">
                     {{ item.description }}
                   </p>
                 </div>
@@ -139,11 +139,11 @@
                 class="flow-root px-2 py-2 transition duration-150 ease-in-out rounded-md hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
               >
                 <span class="flex items-center">
-                  <span class="text-sm font-medium text-gray-900">
+                  <span class="text-sm font-medium text-tw-gray-900">
                     Documentation
                   </span>
                 </span>
-                <span class="block text-sm text-gray-500">
+                <span class="block text-sm text-tw-gray-500">
                   Start integrating products and tools
                 </span>
               </a>
@@ -167,7 +167,7 @@
       <div class="font-medium text-sm mb-1 text-tw-gray-700">
         Toggle:
       </div>
-      <UToggle v-model="isSwitchEnabled" />
+      <UToggle v-model="isSwitchEnabled" icon-off="heroicons-solid:x" icon-on="heroicons-solid:check" />
     </div>
 
     <div>
@@ -177,11 +177,11 @@
 
       <UCard @submit.prevent="onSubmit">
         <UInputGroup label="Email" name="email" class="mb-3">
-          <UInput type="email" name="email" />
+          <UInput type="email" name="email" autofocus />
         </UInputGroup>
 
         <UInputGroup label="Description" name="description" class="mb-3">
-          <UTextarea v-model="description" type="description" name="description" autofocus autoresize />
+          <UTextarea v-model="description" type="description" name="description" autoresize />
         </UInputGroup>
 
         <UButton type="submit" label="Submit" />

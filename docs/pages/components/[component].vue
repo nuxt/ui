@@ -1,5 +1,5 @@
 <template>
-  <UCard v-if="component" footer-class="px-4 py-4 sm:px-6 bg-tw-gray-100">
+  <UCard v-if="component" footer-class="px-4 py-4 sm:px-6">
     <div class="flex justify-center">
       <component :is="is" v-bind="boundProps" />
     </div>
