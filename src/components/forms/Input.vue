@@ -22,8 +22,8 @@
       :readonly="readonly"
       :autocomplete="autocomplete"
       :spellcheck="spellcheck"
-      :class="inputClass"
-      @input="updateValue($event.target.value)"
+      :class="[baseClass, sizeClass, paddingClass, paddingIconClass, appearanceClass, customClass]"
+      @input="onInput($event.target.value)"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     >
@@ -42,17 +42,12 @@
 </template>
 
 <script>
-// import Focus from '../../directives/focus'
-
 import Icon from '../elements/Icon'
 
 export default {
   components: {
     Icon
   },
-  // directives: {
-  //   focus: Focus
-  // },
   props: {
     modelValue: {
       type: [String, Number],
@@ -117,9 +112,13 @@ export default {
         return ['', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)
       }
     },
+    wrapperClass: {
+      type: String,
+      default: 'relative'
+    },
     baseClass: {
       type: String,
-      default: 'block w-full bg-tw-white disabled:cursor-not-allowed disabled:bg-tw-gray-50'
+      default: 'block w-full bg-tw-white text-tw-gray-700 shadow-sm disabled:cursor-not-allowed disabled:bg-tw-gray-50 focus:outline-none'
     },
     customClass: {
       type: String,
@@ -129,7 +128,7 @@ export default {
       type: String,
       default: 'default',
       validator (value) {
-        return ['default', 'none', 'empty'].includes(value)
+        return ['default', 'none'].includes(value)
       }
     },
     loading: {
@@ -138,84 +137,86 @@ export default {
     }
   },
   emits: ['update:modelValue', 'focus', 'blur'],
-  computed: {
-    sizeClass () {
-      return ({
-        xxs: 'text-xs',
-        xs: 'text-xs',
-        sm: 'text-sm leading-4',
-        md: 'text-sm',
-        lg: 'text-base',
-        xl: 'text-base'
-      })[this.size]
-    },
-    paddingClass () {
-      return ({
-        xxs: 'px-1 py-0.5',
-        xs: 'px-2.5 py-1.5',
-        sm: 'px-3 py-2',
-        md: 'px-4 py-2',
-        lg: 'px-4 py-2',
-        xl: 'px-6 py-3'
-      })[this.size]
-    },
-    appearanceClass () {
-      return ({
-        default: 'focus:ring-primary-500 focus:border-primary-500 border-tw-gray-300 rounded-md',
-        none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none',
-        empty: ''
-      })[this.appearance]
-    },
-    paddingIconClass () {
+  setup (props, { emit }) {
+    const input = ref(null)
+
+    const autoFocus = () => {
+      if (props.autofocus) {
+        textarea.value.focus()
+      }
+    }
+
+    const onInput = (value) => {
+      emit('update:modelValue', value)
+    }
+
+    onMounted(() => {
+      setTimeout(() => {
+        autoFocus()
+      }, 100)
+    })
+
+    const sizeClass = computed(() => ({
+      xxs: 'text-xs',
+      xs: 'text-xs',
+      sm: 'text-sm leading-4',
+      md: 'text-sm',
+      lg: 'text-base',
+      xl: 'text-base'
+    })[props.size])
+
+    const paddingClass = computed(() => ({
+      xxs: 'px-1 py-0.5',
+      xs: 'px-2.5 py-1.5',
+      sm: 'px-3 py-2',
+      md: 'px-4 py-2',
+      lg: 'px-4 py-2',
+      xl: 'px-6 py-3'
+    })[props.size])
+
+    const appearanceClass = computed(() => ({
+      default: 'focus:ring-1 focus:ring-primary-500 focus:border-primary-500 border border-tw-gray-300 rounded-md',
+      none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
+    })[props.appearance])
+
+    const paddingIconClass = computed(() => {
       return [
-        this.isLeading && ({
+        props.isLeading && ({
           xxs: 'pl-7',
           xs: 'pl-7',
           sm: 'pl-10',
           md: 'pl-10',
           lg: 'pl-10',
           xl: 'pl-10'
-        })[this.size],
-        this.isTrailing && ({
+        })[props.size],
+        props.isTrailing && ({
           xxs: 'pr-10',
           xs: 'pr-10',
           sm: 'pr-10',
           md: 'pr-10',
           lg: 'pr-10',
           xl: 'pr-10'
-        })[this.size]
+        })[props.size]
       ].join(' ')
-    },
-    inputClass () {
-      return [
-        this.baseClass,
-        this.sizeClass,
-        this.paddingClass,
-        this.paddingIconClass,
-        this.appearanceClass,
-        this.customClass
-      ].join(' ')
-    },
-    wrapperClass () {
-      return [
-        'relative',
-        this.appearance !== 'none' ? 'shadow-sm' : ''
-      ].filter(Boolean).join(' ')
-    },
-    isLeading () {
-      return (this.icon && this.leading) || (this.icon && !this.trailing) || (this.loading && !this.trailing)
-    },
-    isTrailing () {
-      return (this.icon && this.trailing) || (this.loading && this.trailing)
-    },
-    iconName () {
-      if (this.loading) {
-        return this.loadingIcon || 'custom/loading'
+    })
+
+    const isLeading = computed(() => {
+      return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing)
+    })
+
+    const isTrailing = computed(() => {
+      return (props.icon && props.trailing) || (props.loading && props.trailing)
+    })
+
+    const iconName = computed(() => {
+      if (props.loading) {
+        return props.loadingIcon || 'custom/loading'
       }
 
-      return this.icon
-    },
-    iconClass () {
+      return props.icon
+    })
+
+    const iconClass = computed(() => {
       return [
         ({
           xxs: 'h-3 w-3',
@@ -224,32 +225,40 @@ export default {
           md: 'h-5 w-5',
           lg: 'h-5 w-5',
           xl: 'h-5 w-5'
-        })[this.size || 'sm'],
-        this.isLeading && ({
+        })[props.size || 'sm'],
+        props.isLeading && ({
           xxs: 'ml-2',
           xs: 'ml-2',
           sm: 'ml-3',
           md: 'ml-3',
           lg: 'ml-3',
           xl: 'ml-3'
-        })[this.size || 'sm'],
-        this.isTrailing && ({
+        })[props.size || 'sm'],
+        props.isTrailing && ({
           xxs: 'mr-2',
           xs: 'mr-2',
           sm: 'mr-3',
           md: 'mr-3',
           lg: 'mr-3',
           xl: 'mr-3'
-        })[this.size || 'sm'],
+        })[props.size || 'sm'],
         ({
           true: 'animate-spin'
-        })[this.loading]
+        })[props.loading]
       ]
-    }
-  },
-  methods: {
-    updateValue (value) {
-      this.$emit('update:modelValue', value)
+    })
+
+    return {
+      input,
+      onInput,
+      sizeClass,
+      paddingClass,
+      paddingIconClass,
+      appearanceClass,
+      iconClass,
+      iconName,
+      isLeading,
+      isTrailing
     }
   }
 }

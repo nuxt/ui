@@ -109,7 +109,7 @@ export default {
     },
     placeholderClass () {
       return ({
-        true: 'bg-tw-gray-500',
+        true: 'bg-gray-500 dark:bg-gray-900',
         false: 'bg-tw-gray-100'
       })[!!this.alt]
     },

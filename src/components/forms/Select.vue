@@ -86,7 +86,7 @@ export default {
     },
     baseClass: {
       type: String,
-      default: 'block w-full disabled:cursor-not-allowed bg-tw-white disabled:bg-tw-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 border-tw-gray-300 rounded-md'
+      default: 'block w-full disabled:cursor-not-allowed bg-tw-white text-tw-gray-700 disabled:bg-tw-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 border border-tw-gray-300 rounded-md focus:outline-none'
     },
     customClass: {
       type: String,

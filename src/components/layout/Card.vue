@@ -47,7 +47,7 @@ export default {
     },
     ringClass: {
       type: String,
-      default: 'ring-1 ring-gray-200 dark:ring-gray-700'
+      default: 'ring-1 ring-gray-200 dark:ring-gray-800'
     },
     bodyClass: {
       type: String,
@@ -75,7 +75,7 @@ export default {
     },
     borderColorClass: {
       type: String,
-      default: 'border-gray-200 dark:border-gray-700'
+      default: 'border-gray-200 dark:border-gray-800'
     }
   }
 }

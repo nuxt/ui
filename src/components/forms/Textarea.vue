@@ -84,14 +84,14 @@ export default {
     },
     baseClass: {
       type: String,
-      default: 'block w-full bg-tw-white disabled:cursor-not-allowed disabled:bg-tw-gray-50 focus:outline-none'
+      default: 'block w-full bg-tw-white text-tw-gray-700 shadow-sm disabled:cursor-not-allowed disabled:bg-tw-gray-50 focus:outline-none'
     },
     customClass: {
       type: String,
       default: null
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'focus', 'blur'],
   setup (props, { emit }) {
     const textarea = ref(null)
 
