@@ -8,15 +8,13 @@ export default defineNuxtModule({
   name: '@nuxthq/ui',
   configKey: 'ui',
   async setup (_options, nuxt) {
-    const prefix = _options?.prefix || 'u'
-    const primary = _options?.primary || 'indigo'
-
+    const { prefix = 'u', colors: { primary = 'indigo', gray = 'zinc' } = {} } = _options || {}
     const { shortcuts = [], rules = [], variants = [], theme = {} } = _options?.unocss || {}
 
     const options: UnocssNuxtOptions = {
       theme: {
         colors: {
-          gray: colors?.zinc,
+          gray: typeof gray === 'object' ? gray : (colors && colors[gray]),
           primary: typeof primary === 'object' ? primary : (colors && colors[primary])
         },
         ...theme

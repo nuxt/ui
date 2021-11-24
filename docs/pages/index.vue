@@ -49,28 +49,6 @@ export default defineNuxtConfig({
       Options
     </h2>
 
-    <p>- `primary`</p>
-
-    <p>Define the primary variant. Defaults to `indigo`. You can specify your own object of colors like here:</p>
-
-    <p class="font-medium">
-      Example:
-    </p>
-
-    <pre class="bg-tw-gray-900 rounded-md text-tw-white px-4">
-      <code class="text-sm">
-import { defineNuxtConfig } from 'nuxt3'
-
-export default defineNuxtConfig({
-  buildModules: [
-    '@nuxthq/ui'
-  ],
-  ui: {
-    primary: 'blue'
-  }
-})</code>
-    </pre>
-
     <p>- `prefix`</p>
 
     <p>Define the prefix of the imported components. Defaults to `u`.</p>
@@ -92,6 +70,34 @@ export default defineNuxtConfig({
   }
 })</code>
     </pre>
+
+    <p>- `colors.primary`</p>
+
+    <p>Define the primary variant. Defaults to `indigo`. You can specify your own object of colors like here:</p>
+
+    <p class="font-medium">
+      Example:
+    </p>
+
+    <pre class="bg-tw-gray-900 rounded-md text-tw-white px-4">
+      <code class="text-sm">
+import { defineNuxtConfig } from 'nuxt3'
+
+export default defineNuxtConfig({
+  buildModules: [
+    '@nuxthq/ui'
+  ],
+  ui: {
+    colors: {
+      primary: 'blue'
+    }
+  }
+})</code>
+    </pre>
+
+    <p>- `colors.gray`</p>
+
+    <p>Define the gray variant. Defaults to `zinc`. You can like the `primary` color specify your own object. https://github.com/antfu/unocss/blob/main/packages/preset-uno/src/theme/colors.ts</p>
 
     <p>- `unocss.shortcuts`. Defaults to `[]`.</p>
 
