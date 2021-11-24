@@ -1,14 +1,53 @@
-import { resolve, join } from 'pathe'
-import { defineNuxtModule, installModule, addPlugin, resolveModule } from '@nuxt/kit'
+import { fileURLToPath } from 'url'
+import { dirname, resolve } from 'pathe'
+import { defineNuxtModule, installModule, addPlugin, addComponentsDir } from '@nuxt/kit'
 import { colors } from '@unocss/preset-uno'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
 
-export default defineNuxtModule({
+const dir = dirname(fileURLToPath(import.meta.url))
+
+export interface UiColorsOptions {
+  /**
+   * @default 'indigo'
+   */
+  primary?: string
+
+  /**
+   * @default 'zinc'
+   */
+  gray?: string
+}
+
+export interface UiOptions {
+  /**
+   * Prefix of injected components.
+   *
+   * @default 'u'
+   */
+  prefix?: string
+  colors?: UiColorsOptions
+  unocss?: UnocssNuxtOptions
+}
+
+export default defineNuxtModule<UiOptions>({
   name: '@nuxthq/ui',
   configKey: 'ui',
+  defaults: {
+    prefix: 'u',
+    colors: {
+      primary: 'indigo',
+      gray: 'zinc'
+    },
+    unocss: {
+      shortcuts: [],
+      rules: [],
+      variants: [],
+      theme: {}
+    }
+  },
   async setup (_options, nuxt) {
-    const { prefix = 'u', colors: { primary = 'indigo', gray = 'zinc' } = {} } = _options || {}
-    const { shortcuts = [], rules = [], variants = [], theme = {} } = _options?.unocss || {}
+    const { prefix, colors: { primary = 'indigo', gray = 'zinc' } = {} } = _options
+    const { shortcuts = [], rules = [], variants = [], theme = {} } = _options.unocss || {}
 
     const options: UnocssNuxtOptions = {
       theme: {
@@ -96,38 +135,45 @@ export default defineNuxtModule({
     await installModule(nuxt, { src: '@vueuse/core/nuxt' })
     await installModule(nuxt, { src: '@unocss/nuxt', options })
 
-    const runtimeDir = resolve(__dirname, 'runtime')
-    const componentsDir = resolve(__dirname, 'components')
+    addPlugin(resolve(dir, './runtime/plugin'))
 
-    addPlugin(resolveModule('./plugin', { paths: runtimeDir }), { append: true })
-
-    nuxt.hook('components:dirs', (dirs) => {
-      dirs.push({
-        path: join(componentsDir, 'elements'),
-        prefix
-      })
-      dirs.push({
-        path: join(componentsDir, 'feedback'),
-        prefix
-      })
-      dirs.push({
-        path: join(componentsDir, 'forms'),
-        prefix
-      })
-      dirs.push({
-        path: join(componentsDir, 'layout'),
-        prefix
-      })
-      dirs.push({
-        path: join(componentsDir, 'navigation'),
-        prefix
-      })
-      dirs.push({
-        path: join(componentsDir, 'overlays'),
-        prefix
-      })
+    addComponentsDir({
+      path: resolve(dir, './components/elements'),
+      prefix,
+      watch: false
+    })
+    addComponentsDir({
+      path: resolve(dir, './components/feedback'),
+      prefix,
+      watch: false
+    })
+    addComponentsDir({
+      path: resolve(dir, './components/forms'),
+      prefix,
+      watch: false
+    })
+    addComponentsDir({
+      path: resolve(dir, './components/layout'),
+      prefix,
+      watch: false
+    })
+    addComponentsDir({
+      path: resolve(dir, './components/navigation'),
+      prefix,
+      watch: false
+    })
+    addComponentsDir({
+      path: resolve(dir, './components/overlays'),
+      prefix,
+      watch: false
     })
 
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@vueuse/core', '@nuxthq/ui')
   }
 })
+
+declare module '@nuxt/schema' {
+  interface NuxtConfig {
+    ui?: UiOptions
+  }
+}
