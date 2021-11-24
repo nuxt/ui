@@ -6,7 +6,6 @@ export default defineNuxtConfig({
     '../src'
   ],
   ui: {
-    prefix: 'u',
     colors: {
       primary: 'blue'
     }
