@@ -43,6 +43,7 @@
 
 <script>
 import Icon from '../elements/Icon'
+import { defineNuxtComponent } from '#app'
 
 export default defineNuxtComponent({
   components: {
