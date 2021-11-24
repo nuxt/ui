@@ -44,7 +44,7 @@
 <script>
 import Icon from '../elements/Icon'
 
-export default {
+export default defineNuxtComponent({
   components: {
     Icon
   },
@@ -261,5 +261,5 @@ export default {
       isTrailing
     }
   }
-}
+})
 </script>
