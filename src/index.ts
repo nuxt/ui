@@ -135,35 +135,35 @@ export default defineNuxtModule<UiOptions>({
     await installModule(nuxt, { src: '@vueuse/core/nuxt' })
     await installModule(nuxt, { src: '@unocss/nuxt', options })
 
-    addPlugin(resolve(dir, '../runtime/plugin'))
+    addPlugin(resolve(dir, './runtime/plugin'))
 
     addComponentsDir({
-      path: resolve(dir, '../components/elements'),
+      path: resolve(dir, './components/elements'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(dir, '../components/feedback'),
+      path: resolve(dir, './components/feedback'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(dir, '../components/forms'),
+      path: resolve(dir, './components/forms'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(dir, '../components/layout'),
+      path: resolve(dir, './components/layout'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(dir, '../components/navigation'),
+      path: resolve(dir, './components/navigation'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(dir, '../components/overlays'),
+      path: resolve(dir, './components/overlays'),
       prefix,
       watch: false
     })
