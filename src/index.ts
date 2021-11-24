@@ -8,21 +8,18 @@ export default defineNuxtModule({
   name: '@nuxthq/ui',
   configKey: 'ui',
   async setup (_options, nuxt) {
-    const _prefix = _options?.prefix || 'u'
-    const _primary = _options?.primary || 'indigo'
-    const _shortcuts = _options?.shortcuts || []
-    const _rules = _options?.rules || []
+    const prefix = _options?.prefix || 'u'
+    const primary = _options?.primary || 'indigo'
+
+    const { shortcuts = [], rules = [], variants = [], theme = {} } = _options?.unocss || {}
 
     const options: UnocssNuxtOptions = {
       theme: {
         colors: {
-          transparent: 'transparent',
-          current: 'currentColor',
-          black: '#000',
-          white: '#fff',
           gray: colors?.zinc,
-          primary: typeof _primary === 'object' ? _primary : (colors && colors[_primary])
-        }
+          primary: typeof primary === 'object' ? primary : (colors && colors[primary])
+        },
+        ...theme
       },
       preflight: true,
       icons: {
@@ -80,21 +77,7 @@ export default defineNuxtModule({
         'ring-tw-gray-700': 'ring-gray-700 dark:ring-gray-300',
         'ring-tw-gray-800': 'ring-gray-800 dark:ring-gray-200',
         'ring-tw-gray-900': 'ring-gray-900 dark:ring-gray-100',
-        // TailwindCSS `maxWidth` aliases
-        'max-w-0': 'max-w-0rem',
-        'max-w-none': 'max-w-none',
-        'max-w-xs': 'max-w-20rem',
-        'max-w-sm': 'max-w-24rem',
-        'max-w-md': 'max-w-28rem',
-        'max-w-lg': 'max-w-32rem',
-        'max-w-xl': 'max-w-36rem',
-        'max-w-2xl': 'max-w-42rem',
-        'max-w-3xl': 'max-w-48rem',
-        'max-w-4xl': 'max-w-56rem',
-        'max-w-5xl': 'max-w-64rem',
-        'max-w-6xl': 'max-w-72rem',
-        'max-w-7xl': 'max-w-80rem',
-        ..._shortcuts
+        ...shortcuts
       },
       rules: [
         [/^shadow-?(.*)$/, ([, d], { theme }) => {
@@ -108,8 +91,9 @@ export default defineNuxtModule({
             }
           }
         }],
-        ..._rules
-      ]
+        ...rules
+      ],
+      variants
     }
 
     await installModule(nuxt, { src: '@unocss/nuxt', options })
@@ -121,27 +105,27 @@ export default defineNuxtModule({
     nuxt.hook('components:dirs', (dirs) => {
       dirs.push({
         path: join(componentsDir, 'elements'),
-        prefix: _prefix
+        prefix
       })
       dirs.push({
         path: join(componentsDir, 'feedback'),
-        prefix: _prefix
+        prefix
       })
       dirs.push({
         path: join(componentsDir, 'forms'),
-        prefix: _prefix
+        prefix
       })
       dirs.push({
         path: join(componentsDir, 'layout'),
-        prefix: _prefix
+        prefix
       })
       dirs.push({
         path: join(componentsDir, 'navigation'),
-        prefix: _prefix
+        prefix
       })
       dirs.push({
         path: join(componentsDir, 'overlays'),
-        prefix: _prefix
+        prefix
       })
     })
 
