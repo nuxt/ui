@@ -93,6 +93,7 @@ export default defineNuxtModule({
       variants
     }
 
+    await installModule(nuxt, { src: '@vueuse/core/nuxt' })
     await installModule(nuxt, { src: '@unocss/nuxt', options })
 
     const runtimeDir = resolve(__dirname, 'runtime')
@@ -127,6 +128,6 @@ export default defineNuxtModule({
       })
     })
 
-    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@nuxthq/ui')
+    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@vueuse/core', '@nuxthq/ui')
   }
 })
