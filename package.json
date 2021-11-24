@@ -23,7 +23,7 @@
     "lint": "eslint --ext .ts,.js,.vue ."
   },
   "dependencies": {
-    "@headlessui/vue": "^1.4.2",
+    "@headlessui/vue": "^0.0.0-dev.8c57814",
     "@iconify-json/heroicons-outline": "^1.0.2",
     "@iconify-json/heroicons-solid": "^1.0.2",
     "@popperjs/core": "^2.10.2",
