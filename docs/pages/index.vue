@@ -93,8 +93,20 @@ export default defineNuxtConfig({
 })</code>
     </pre>
 
-    <NuxtLink to="/examples" class="font-bold text-2xl text-tw-gray-900 hover:underline block">
-      Examples
-    </NuxtLink>
+    <p>- `unocss.shortcuts`. Defaults to `[]`.</p>
+
+    <p>Define UnoCSS shortcuts: https://github.com/antfu/unocss#shortcuts.</p>
+
+    <p>- `unocss.rules`. Defaults to `[]`.</p>
+
+    <p>Customize UnoCSS rules: https://github.com/antfu/unocss#custom-rules.</p>
+
+    <p>- `unocss.variants`. Defaults to `[]`.</p>
+
+    <p>Customize UnoCSS variants: https://github.com/antfu/unocss#custom-variants.</p>
+
+    <p>- `unocss.theme`. Defaults to `{}`.</p>
+
+    <p>Extend UnoCSS theme: https://github.com/antfu/unocss#extend-theme.</p>
   </div>
 </template>

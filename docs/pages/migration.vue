@@ -1,0 +1,165 @@
+<template>
+  <div class="space-y-4">
+    <div class="pb-10 border-b border-tw-gray-200 mb-10">
+      <div>
+        <h1 class="inline-block text-3xl font-extrabold text-tw-gray-900 tracking-tight">
+          Migration
+        </h1>
+      </div>
+
+      <p class="mt-1 text-lg text-tw-gray-500">
+        Check out the components that have been migrated to Vue3 coming from `@nuxthq/volta-ui`.
+      </p>
+    </div>
+
+    <UCard body-class>
+      <table class="min-w-full divide-y divide-tw-gray-200">
+        <thead class="bg-tw-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-tw-gray-500 uppercase tracking-wider">
+              Component
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-tw-gray-500 uppercase tracking-wider">
+              Ready?
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(component, index) of components" :key="index" :class="index % 2 === 0 ? 'bg-tw-white' : 'bg-tw-gray-50'">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-tw-gray-900">
+              <NuxtLink :to="component.to" class="hover:underline">
+                {{ component.label }}
+              </NuxtLink>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-tw-gray-500">
+              <span v-if="component.ready">✅</span>
+              <span v-else>❌</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </UCard>
+  </div>
+</template>
+
+<script setup>
+const components = [
+  {
+    label: 'Avatar',
+    to: '/components/Avatar'
+  },
+  {
+    label: 'AvatarGroup',
+    to: '/components/AvatarGroup'
+  },
+  {
+    label: 'Badge',
+    to: '/components/Badge'
+  },
+  {
+    label: 'Button',
+    to: '/components/Button',
+    ready: true
+  },
+  {
+    label: 'Dropdown',
+    to: '/components/Dropdown',
+    ready: true
+  },
+  {
+    label: 'Icon',
+    to: '/components/Icon',
+    ready: true
+  },
+  {
+    label: 'Link',
+    to: '/components/Link'
+  },
+  {
+    label: 'Toggle',
+    to: '/components/Toggle'
+  },
+  {
+    label: 'Alert',
+    to: '/components/Alert'
+  },
+  {
+    label: 'Checkbox',
+    to: '/components/Checkbox'
+  },
+  {
+    label: 'Input',
+    to: '/components/Input',
+    ready: true
+  },
+  {
+    label: 'InputGroup',
+    to: '/components/InputGroup'
+  },
+  {
+    label: 'Radio',
+    to: '/components/Radio'
+  },
+  {
+    label: 'RadioGroup',
+    to: '/components/RadioGroup'
+  },
+  {
+    label: 'Select',
+    to: '/components/Select'
+  },
+  {
+    label: 'SelectCustom',
+    to: '/components/SelectCustom'
+  },
+  {
+    label: 'Textarea',
+    to: '/components/Textarea',
+    ready: true
+  },
+  {
+    label: 'Card',
+    to: '/components/Card',
+    ready: true
+  },
+  {
+    label: 'Container',
+    to: '/components/Container',
+    ready: true
+  },
+  {
+    label: 'Pills',
+    to: '/components/Pills'
+  },
+  {
+    label: 'Tabs',
+    to: '/components/Tabs'
+  },
+  {
+    label: 'VerticalNavigation',
+    to: '/components/VerticalNavigation'
+  },
+  {
+    label: 'Modal',
+    to: '/components/Modal',
+    ready: true
+  },
+  {
+    label: 'Notification',
+    to: '/components/Notification'
+  },
+  {
+    label: 'Popover',
+    to: '/components/Popover',
+    ready: true
+  },
+  {
+    label: 'Slideover',
+    to: '/components/Slideover'
+  },
+  {
+    label: 'Tooltip',
+    to: '/components/Tooltip'
+  }
+]
+</script>

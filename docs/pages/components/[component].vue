@@ -1,6 +1,6 @@
 <template>
-  <UCard v-if="component" footer-class="px-4 py-4 sm:px-6">
-    <div class="flex justify-center">
+  <UCard v-if="component" class="relative flex flex-col" body-class="px-4 py-5 sm:p-6 relative" footer-class="px-4 py-4 sm:px-6 flex-1 lg:overflow-y-auto" style="max-height: calc(100vh - 10rem);">
+    <div class="flex justify-center sticky top-0">
       <component :is="is" v-bind="boundProps" />
     </div>
 
@@ -9,6 +9,7 @@
         <UInputGroup
           v-for="prop of props"
           :key="prop.key"
+          class="capitalize"
           :name="prop.key"
           :label="prop.key"
         >
@@ -74,7 +75,7 @@ const refProps = Object.entries(componentProps).map(([key, prop]) => {
   let values
   if (prop.validator) {
     const result = prop.validator.toString().match(/\[.*\]/g, '')[0]
-    values = JSON.parse(result.replace(/'/g, '"'))
+    values = JSON.parse(result.replace(/'/g, '"')).filter(Boolean)
   }
 
   if (value) {
