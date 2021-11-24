@@ -8,6 +8,7 @@ export default {
   declaration: true,
   externals: [
     '@nuxt/kit',
+    '@nuxt/schema',
     '@unocss/preset-uno'
   ]
 }
