@@ -19,7 +19,7 @@
     "runtime"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "unbuild",
     "dev": "nuxi dev docs",
     "build:docs": "nuxi build docs",
     "postbuild:docs": "mv ./docs/.vercel_build_output .vercel_build_output",
