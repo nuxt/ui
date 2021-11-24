@@ -1,10 +1,7 @@
-import { fileURLToPath } from 'url'
-import { dirname, resolve } from 'pathe'
+import { resolve } from 'pathe'
 import { defineNuxtModule, installModule, addPlugin, addComponentsDir } from '@nuxt/kit'
 import { colors } from '@unocss/preset-uno'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
-
-const dir = dirname(fileURLToPath(import.meta.url))
 
 export interface UiColorsOptions {
   /**
@@ -135,35 +132,35 @@ export default defineNuxtModule<UiOptions>({
     await installModule(nuxt, { src: '@vueuse/core/nuxt' })
     await installModule(nuxt, { src: '@unocss/nuxt', options })
 
-    addPlugin(resolve(dir, './runtime/plugin'))
+    addPlugin(resolve(__dirname, './plugins/plugin'))
 
     addComponentsDir({
-      path: resolve(dir, './components/elements'),
+      path: resolve(__dirname, './components/elements'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(dir, './components/feedback'),
+      path: resolve(__dirname, './components/feedback'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(dir, './components/forms'),
+      path: resolve(__dirname, './components/forms'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(dir, './components/layout'),
+      path: resolve(__dirname, './components/layout'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(dir, './components/navigation'),
+      path: resolve(__dirname, './components/navigation'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(dir, './components/overlays'),
+      path: resolve(__dirname, './components/overlays'),
       prefix,
       watch: false
     })
