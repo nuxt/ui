@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue'
 import Icon from '../elements/Icon'
 
 export default {
