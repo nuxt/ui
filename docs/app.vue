@@ -8,6 +8,10 @@
               @nuxthq/ui
             </NuxtLink>
           </div>
+
+          <UseDark v-slot="{ isDark, toggleDark }">
+            <UButton variant="transparent" :icon="isDark ? 'heroicons-outline:moon' : 'heroicons-outline:sun'" @click="toggleDark()" />
+          </UseDark>
         </div>
       </UContainer>
     </nav>
@@ -48,6 +52,8 @@
 </template>
 
 <script setup>
+import { UseDark } from '@vueuse/components'
+
 useMeta({
   title: '@nuxthq/ui',
   meta: [
