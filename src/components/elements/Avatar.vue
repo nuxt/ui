@@ -21,7 +21,7 @@
 
     <span
       v-if="status"
-      class="absolute top-0 right-0 block rounded-full ring-1 ring-white dark:ring-gray-900"
+      class="absolute top-0 right-0 block rounded-full ring-1 ring-white dark:ring-black"
       :class="statusClass"
     />
   </span>
