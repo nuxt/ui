@@ -66,10 +66,7 @@ export default {
     },
     resize: {
       type: Boolean,
-      default: null,
-      validator (value) {
-        return ['none'].includes(value)
-      }
+      default: true
     },
     size: {
       type: String,
@@ -152,7 +149,7 @@ export default {
     })[props.appearance])
 
     const resizeClass = computed(() => {
-      return props.resize === 'none' ? 'resize-none' : ''
+      return props.resize ? '' : 'resize-none'
     })
 
     return {

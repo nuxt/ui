@@ -142,7 +142,7 @@ export default {
 
     const autoFocus = () => {
       if (props.autofocus) {
-        textarea.value.focus()
+        input.value.focus()
       }
     }
 
