@@ -28,11 +28,11 @@ export default {
     },
     activeClass: {
       type: String,
-      default: 'border-black dark:border-white text-black dark:text-white hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white'
+      default: 'u-border-black u-text-black hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white'
     },
     inactiveClass: {
       type: String,
-      default: 'border-transparent text-tw-gray-500 hover:text-tw-gray-700 hover:border-tw-gray-300'
+      default: 'border-transparent u-text-gray-500 hover:u-text-gray-700 hover:u-border-gray-300'
     }
   }
 }

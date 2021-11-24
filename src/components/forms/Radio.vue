@@ -14,11 +14,11 @@
       @change="onChange"
     >
     <div v-if="label" class="flex flex-col ml-3">
-      <span class="block text-sm font-medium text-tw-gray-900">
+      <span class="block text-sm font-medium u-text-gray-900">
         {{ label }}
         <span v-if="required" class="text-red-400">*</span>
       </span>
-      <span v-if="help" class="block text-sm text-tw-gray-500">{{ help }}</span>
+      <span v-if="help" class="block text-sm u-text-gray-500">{{ help }}</span>
     </div>
   </label>
 </template>
@@ -60,7 +60,7 @@ export default {
     },
     baseClass: {
       type: String,
-      default: 'h-4 w-4 mt-0.5 text-primary-600 checked:border-primary-600 border-tw-gray-300 bg-tw-white dark:checked:bg-primary-600 focus:ring-offset-white dark:focus:ring-offset-gray-900 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+      default: 'h-4 w-4 mt-0.5 text-primary-600 checked:border-primary-600 u-border-gray-300 u-bg-white dark:checked:bg-primary-600 focus:ring-offset-white dark:focus:ring-offset-gray-900 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
     },
     customClass: {
       type: String,

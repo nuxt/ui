@@ -5,11 +5,11 @@
     <span v-else-if="gradientPlaceholder" class="w-full h-full overflow-hidden" :class="roundedClass" v-html="gradientPlaceholder" />
     <span
       v-else-if="placeholder"
-      class="font-medium leading-none text-white uppercase"
+      class="font-medium leading-none u-text-gray-900 uppercase"
     >{{ placeholder }}</span>
     <svg
       v-else
-      class="w-full h-full text-tw-gray-300"
+      class="w-full h-full u-text-gray-300"
       :class="roundedClass"
       fill="currentColor"
       viewBox="0 0 24 24"
@@ -21,7 +21,7 @@
 
     <span
       v-if="status"
-      class="absolute top-0 right-0 block rounded-full ring-1 ring-white dark:ring-black"
+      class="absolute top-0 right-0 block rounded-full ring-1 u-ring-white"
       :class="statusClass"
     />
   </span>
@@ -109,8 +109,8 @@ export default {
     },
     placeholderClass () {
       return ({
-        true: 'bg-gray-500 dark:bg-gray-900',
-        false: 'bg-tw-gray-100'
+        true: 'u-bg-gray-100',
+        false: 'u-bg-gray-100'
       })[!!this.alt]
     },
     avatarClass () {
@@ -126,7 +126,7 @@ export default {
         ({
           online: 'bg-green-400',
           idle: 'bg-yellow-400',
-          invisible: 'bg-tw-gray-300',
+          invisible: 'u-bg-gray-300',
           donotdisturb: 'bg-red-400',
           focus: 'bg-primary-500'
         })[this.status],

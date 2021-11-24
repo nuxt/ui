@@ -40,7 +40,7 @@ export default {
     },
     activeClass: {
       type: String,
-      default: 'text-tw-gray-700 hover:text-tw-gray-700 focus:text-tw-gray-700'
+      default: 'u-text-gray-700 hover:u-text-gray-700 focus:u-text-gray-700'
     }
   },
   computed: {

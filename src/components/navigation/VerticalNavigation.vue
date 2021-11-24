@@ -2,7 +2,7 @@
   <nav>
     <h3
       v-if="title || $slots.title"
-      class="flex items-center justify-between px-2 mb-1 text-xs font-semibold tracking-wider uppercase text-tw-gray-500"
+      class="flex items-center justify-between px-2 mb-1 text-xs font-semibold tracking-wider uppercase u-text-gray-500"
     >
       <slot name="title">
         {{ title }}
@@ -34,7 +34,7 @@
           <span class="truncate">{{ link.label }}</span>
         </slot>
         <div v-if="link.shortcuts" class="hidden ml-3 space-x-1 lg:flex">
-          <span v-for="shortcut of link.shortcuts" :key="shortcut" class="flex items-center justify-center w-4 h-4 font-normal bg-gray-200 rounded text-xxs dark:bg-gray-700 text-tw-gray-600">
+          <span v-for="shortcut of link.shortcuts" :key="shortcut" class="flex items-center justify-center w-4 h-4 font-normal bg-gray-200 rounded text-xxs dark:bg-gray-700 u-text-gray-600">
             {{ shortcut }}
           </span>
         </div>
@@ -44,8 +44,8 @@
               v-if="link.badge"
               class="ml-auto inline-block py-0.5 px-3 text-xs rounded-full"
               :class="{
-                'bg-tw-gray-50': isActive,
-                'bg-gray-200 dark:bg-gray-700 text-tw-gray-600': !isActive
+                'u-bg-gray-50': isActive,
+                'bg-gray-200 dark:bg-gray-700 u-text-gray-600': !isActive
               }"
             >
               {{ link.badge }}
@@ -89,26 +89,26 @@ export default {
     },
     variantClass () {
       return ({
-        white: 'text-tw-gray-600 hover:text-tw-gray-900 hover:bg-tw-gray-50 focus:bg-tw-gray-50',
-        gray: 'text-tw-gray-600 hover:text-tw-gray-900 hover:bg-tw-gray-50 focus:bg-tw-gray-50'
+        white: 'u-text-gray-600 hover:u-text-gray-900 hover:u-bg-gray-50 focus:u-bg-gray-50',
+        gray: 'u-text-gray-600 hover:u-text-gray-900 hover:u-bg-gray-50 focus:u-bg-gray-50'
       })[this.variant]
     },
     activeVariantClass () {
       return ({
-        white: 'text-tw-gray-900 bg-tw-gray-100 hover:text-tw-gray-900 hover:bg-tw-gray-100 focus:bg-tw-gray-100',
-        gray: 'text-tw-gray-900 bg-gray-200 dark:bg-gray-800 hover:text-tw-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800'
+        white: 'u-text-gray-900 u-bg-gray-100 hover:u-text-gray-900 hover:u-bg-gray-100 focus:u-bg-gray-100',
+        gray: 'u-text-gray-900 bg-gray-200 dark:bg-gray-800 hover:u-text-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800'
       })[this.variant]
     },
     iconClass () {
       return ({
-        white: 'text-tw-gray-400 group-hover:text-tw-gray-500',
-        gray: 'text-tw-gray-400 group-hover:text-tw-gray-500'
+        white: 'u-text-gray-400 group-hover:u-text-gray-500',
+        gray: 'u-text-gray-400 group-hover:u-text-gray-500'
       })[this.variant]
     },
     activeIconClass () {
       return ({
-        white: 'text-tw-gray-500 group-hover:text-tw-gray-500',
-        gray: 'text-tw-gray-500 group-hover:text-tw-gray-500'
+        white: 'u-text-gray-500 group-hover:u-text-gray-500',
+        gray: 'u-text-gray-500 group-hover:u-text-gray-500'
       })[this.variant]
     }
   },

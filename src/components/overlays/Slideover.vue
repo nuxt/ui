@@ -38,14 +38,14 @@
             </template>
             <template v-else-if="title" #header>
               <div class="flex items-center justify-between">
-                <h2 class="font-medium sm:leading-6 sm:text-lg text-tw-gray-900">
+                <h2 class="font-medium sm:leading-6 sm:text-lg u-text-gray-900">
                   {{ title }}
                 </h2>
                 <div class="flex items-center">
                   <button
                     type="button"
                     aria-label="Close panel"
-                    class="rounded-md text-tw-gray-400 hover:text-tw-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    class="rounded-md u-text-gray-400 hover:u-text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
                     @click="open = false"
                   >
                     <Icon name="outline/x" class="w-6 h-6" />

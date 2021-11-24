@@ -76,7 +76,7 @@ export default {
     },
     itemsClass: {
       type: String,
-      default: 'bg-white divide-y divide-gray-100 dark:divide-gray-700 rounded-md ring-1 ring-black ring-opacity-5'
+      default: 'u-bg-white divide-y u-divide-gray-100 rounded-md ring-1 ring-black ring-opacity-5'
     },
     itemClass: {
       type: String,
@@ -84,11 +84,11 @@ export default {
     },
     itemActiveClass: {
       type: String,
-      default: 'bg-tw-gray-100 text-tw-gray-900'
+      default: 'u-bg-gray-100 u-text-gray-900'
     },
     itemInactiveClass: {
       type: String,
-      default: 'text-tw-gray-700'
+      default: 'u-text-gray-700'
     },
     itemDisabledClass: {
       type: String,
@@ -96,7 +96,7 @@ export default {
     },
     itemIconClass: {
       type: String,
-      default: 'mr-3 h-5 w-5 text-tw-gray-400 group-hover:text-tw-gray-500'
+      default: 'mr-3 h-5 w-5 u-text-gray-400 group-hover:u-text-gray-500'
     }
   },
   setup (props) {

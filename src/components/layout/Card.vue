@@ -39,7 +39,7 @@ export default {
     },
     backgroundClass: {
       type: String,
-      default: 'bg-tw-white'
+      default: 'u-bg-white'
     },
     shadowClass: {
       type: String,
@@ -47,7 +47,7 @@ export default {
     },
     ringClass: {
       type: String,
-      default: 'ring-1 ring-gray-200 dark:ring-gray-800'
+      default: 'ring-1 u-ring-gray-200'
     },
     bodyClass: {
       type: String,
@@ -75,7 +75,7 @@ export default {
     },
     borderColorClass: {
       type: String,
-      default: 'border-gray-200 dark:border-gray-800'
+      default: 'u-border-gray-200'
     }
   }
 }

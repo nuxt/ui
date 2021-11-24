@@ -16,11 +16,11 @@
       >
     </div>
     <div v-if="label" class="ml-3 text-sm">
-      <label :for="name" class="font-medium text-tw-gray-700">
+      <label :for="name" class="font-medium u-text-gray-700">
         {{ label }}
         <span v-if="required" class="text-red-400">*</span>
       </label>
-      <p v-if="help" class="text-tw-gray-500">
+      <p v-if="help" class="u-text-gray-500">
         {{ help }}
       </p>
     </div>
@@ -68,7 +68,7 @@ export default {
     },
     baseClass: {
       type: String,
-      default: 'h-4 w-4 text-primary-600 focus:ring-primary-500 border-tw-gray-300 bg-white dark:bg-gray-800 dark:checked:bg-primary-600 dark:checked:border-primary-600 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed rounded'
+      default: 'h-4 w-4 text-primary-600 focus:ring-primary-500 u-border-gray-300 bg-white dark:bg-gray-800 dark:checked:bg-primary-600 dark:checked:border-primary-600 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed rounded'
     },
     customClass: {
       type: String,

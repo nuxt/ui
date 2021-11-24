@@ -5,7 +5,7 @@
     <slot :toggle="toggle" :open="open">
       <TwButton
         icon="solid/selector"
-        icon-class="text-tw-gray-400"
+        icon-class="u-text-gray-400"
         trailing
         :size="size"
         :variant="variant"
@@ -16,11 +16,11 @@
         <div v-if="selectedOptions && selectedOptions.length" class="inline-flex w-full px-3 py-2 -my-2 -ml-3 truncate">
           <span v-for="(selectedOption, index) of selectedOptions" :key="index" class="inline-flex items-center pr-2">
             <slot name="label" :option="selectedOption">
-              <span class="text-tw-gray-700">{{ selectedOption[textAttribute] }}</span>
+              <span class="u-text-gray-700">{{ selectedOption[textAttribute] }}</span>
             </slot>
           </span>
         </div>
-        <div v-else class="inline-flex w-full text-tw-gray-400">
+        <div v-else class="inline-flex w-full u-text-gray-400">
           {{ placeholder || '' }}
         </div>
       </TwButton>
@@ -34,8 +34,8 @@
       leave-active-class="transition duration-100 ease-in"
       leave-to-class="opacity-0"
     >
-      <div v-show="open" ref="tooltip" class="z-10 overflow-hidden bg-white rounded-md shadow-lg dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-700" :class="dropdownClass">
-        <div v-if="searchable" class="w-full border-b border-gray-200 dark:border-gray-700">
+      <div v-show="open" ref="tooltip" class="z-10 overflow-hidden bg-white rounded-md shadow-lg dark:bg-gray-800 ring-1 u-ring-gray-200" :class="dropdownClass">
+        <div v-if="searchable" class="w-full border-b u-border-gray-200">
           <TwInput
             ref="search"
             v-model="q"
@@ -60,7 +60,7 @@
             class="relative pl-3 pr-12 cursor-default select-none group hover:text-white hover:bg-primary-600"
             :class="{
               'bg-primary-600 text-white': active === -1,
-              'text-tw-gray-900': active !== -1,
+              'u-text-gray-900': active !== -1,
               'py-2': dropdownSize === 'md',
               'py-1 text-sm': dropdownSize === 'sm'
             }"
@@ -80,7 +80,7 @@
             :class="{
               'font-semibold': isOptionSelected(option),
               'bg-primary-600 text-white': active === index,
-              'text-tw-gray-900': active !== index,
+              'u-text-gray-900': active !== index,
               'py-2': dropdownSize === 'md',
               'py-1 text-sm': dropdownSize === 'sm'
             }"

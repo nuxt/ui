@@ -1,10 +1,10 @@
 <template>
   <div>
-    <nav class="bg-white dark:bg-black border-b border-tw-gray-200 fixed top-0 inset-x-0 z-10">
+    <nav class="u-bg-white border-b u-border-gray-200 fixed top-0 inset-x-0 z-10">
       <UContainer padded>
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
-            <NuxtLink to="/" class="block font-bold text-lg text-tw-gray-900">
+            <NuxtLink to="/" class="block font-bold text-lg u-text-gray-900">
               @nuxthq/ui
             </NuxtLink>
           </div>
@@ -22,7 +22,7 @@
           <nav class="overflow-y-auto h-auto py-12">
             <ul class="space-y-6">
               <li v-for="section of sections" :key="section">
-                <h5 class="mb-3 uppercase tracking-wide font-semibold text-xs text-tw-gray-900">
+                <h5 class="mb-3 uppercase tracking-wide font-semibold text-xs u-text-gray-900">
                   {{ section.label }}
                 </h5>
                 <ul class="space-y-1.5">
@@ -31,7 +31,7 @@
                       :to="link.to"
                       class="relative block text-sm rounded-md"
                       active-class="text-primary-600"
-                      inactive-class="text-tw-gray-500 hover:text-tw-gray-700"
+                      inactive-class="u-text-gray-500 hover:u-text-gray-700"
                       exact
                     >
                       {{ link.label }}
@@ -53,19 +53,6 @@
 
 <script setup>
 import { UseDark } from '@vueuse/components'
-
-useMeta({
-  title: '@nuxthq/ui',
-  meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' }
-  ],
-  htmlAttrs: {
-    class: 'bg-tw-white'
-  },
-  bodyAttrs: {
-    class: 'bg-tw-gray-50 text-tw-gray-700'
-  }
-})
 
 const sections = [
   { label: 'Getting Started', links: [{ label: 'Installation', to: '/' }, { label: 'Examples', to: '/examples' }, { label: 'Migration', to: '/migration' }] },

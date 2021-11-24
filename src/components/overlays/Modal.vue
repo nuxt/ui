@@ -30,7 +30,7 @@
             <Card
               class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
               v-bind="$attrs"
-              ring-class="sm:ring-1 sm:ring-transparent dark:ring-gray-700"
+              ring-class
             >
               <template v-if="$slots.header" #header>
                 <slot name="header" />

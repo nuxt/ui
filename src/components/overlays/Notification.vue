@@ -13,17 +13,17 @@
       @mouseover="onMouseover"
       @mouseout="onMouseout"
     >
-      <div class="relative overflow-hidden rounded-lg ring-1 ring-gray-200 dark:ring-gray-700">
+      <div class="relative overflow-hidden rounded-lg ring-1 u-ring-gray-200">
         <div class="p-4">
           <div class="flex">
             <div class="flex-shrink-0">
               <Icon :name="iconName" class="w-6 h-6" :class="iconClass" />
             </div>
             <div class="ml-3 w-0 flex-1 pt-0.5">
-              <p class="text-sm font-medium leading-5 text-tw-gray-900">
+              <p class="text-sm font-medium leading-5 u-text-gray-900">
                 {{ title }}
               </p>
-              <p v-if="description" class="mt-1 text-sm leading-5 text-tw-gray-500">
+              <p v-if="description" class="mt-1 text-sm leading-5 u-text-gray-500">
                 {{ description }}
               </p>
               <Button
@@ -34,8 +34,8 @@
                 @click.native.stop="cancel"
               >
                 Undo
-                <div class="inline-flex items-center rounded bg-tw-gray-200 ml-1.5">
-                  <span class="w-full px-1 text-center text-tw-gray-600 text-xxs">
+                <div class="inline-flex items-center rounded u-bg-gray-200 ml-1.5">
+                  <span class="w-full px-1 text-center u-text-gray-600 text-xxs">
                     Z
                   </span>
                 </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="flex-shrink-0 ml-4">
               <button
-                class="transition duration-150 ease-in-out text-tw-gray-400 focus:outline-none hover:text-tw-gray-500 focus:text-tw-gray-500"
+                class="transition duration-150 ease-in-out u-text-gray-400 focus:outline-none hover:u-text-gray-500 focus:u-text-gray-500"
                 @click.stop="close"
               >
                 <span class="sr-only">Close</span>
@@ -129,7 +129,7 @@ export default {
         info: 'text-blue-400',
         success: 'text-green-400',
         error: 'text-red-400'
-      })[this.type] || 'text-tw-gray-400'
+      })[this.type] || 'u-text-gray-400'
     },
     progressBarStyle () {
       const remainingPercent = this.remainingTime / this.timeout * 100

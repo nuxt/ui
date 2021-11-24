@@ -90,7 +90,7 @@ export default {
     },
     baseClass: {
       type: String,
-      default: 'block w-full disabled:cursor-not-allowed bg-tw-white text-tw-gray-700 disabled:bg-tw-gray-50 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 border border-tw-gray-300 rounded-md shadow-sm focus:outline-none'
+      default: 'block w-full disabled:cursor-not-allowed u-bg-white u-text-gray-700 disabled:u-bg-gray-50 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 border u-border-gray-300 rounded-md shadow-sm focus:outline-none'
     },
     customClass: {
       type: String,
