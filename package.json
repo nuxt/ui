@@ -28,8 +28,6 @@
     "@iconify-json/heroicons-solid": "^1.0.2",
     "@popperjs/core": "^2.10.2",
     "@unocss/nuxt": "^0.12.4",
-    "@vueuse/components": "^7.0.3",
-    "@vueuse/core": "^7.0.3",
     "gradient-avatar": "^1.0.2",
     "pathe": "^0.2.0"
   },
