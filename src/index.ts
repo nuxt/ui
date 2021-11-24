@@ -1,7 +1,8 @@
-import { resolve, join } from 'pathe'
+import { join } from 'pathe'
 import { defineNuxtModule, installModule, addPlugin, resolveModule } from '@nuxt/kit'
 import { colors } from '@unocss/preset-uno'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
+import { runtimeDir, componentsDir } from './dirs'
 
 export default defineNuxtModule({
   name: '@nuxthq/ui',
@@ -94,9 +95,6 @@ export default defineNuxtModule({
     }
 
     await installModule(nuxt, { src: '@unocss/nuxt', options })
-
-    const runtimeDir = resolve(__dirname, 'runtime')
-    const componentsDir = resolve(__dirname, 'components')
 
     addPlugin(resolveModule('./plugin', { paths: runtimeDir }), { append: true })
 
