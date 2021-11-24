@@ -55,7 +55,7 @@
 import { UseDark } from '@vueuse/components'
 
 const sections = [
-  { label: 'Getting Started', links: [{ label: 'Installation', to: '/' }, { label: 'Examples', to: '/examples' }, { label: 'Migration', to: '/migration' }] },
+  { label: 'Getting Started', links: [{ label: 'Installation', to: '/' }, { label: 'Examples', to: '/examples' }, { label: 'Migration', to: '/migration' }, { label: 'Dark mode', to: '/dark' }] },
   { label: 'Elements', links: [{ label: 'Avatar', to: '/components/Avatar' }, { label: 'AvatarGroup', to: '/components/AvatarGroup' }, { label: 'Badge', to: '/components/Badge' }, { label: 'Button', to: '/components/Button' }, { label: 'Dropdown', to: '/components/Dropdown' }, { label: 'Icon', to: '/components/Icon' }, { label: 'Link', to: '/components/Link' }, { label: 'Toggle', to: '/components/Toggle' }] },
   { label: 'Feedback', links: [{ label: 'Alert', to: '/components/Alert' }] },
   { label: 'Forms', links: [{ label: 'Checkbox', to: '/components/Checkbox' }, { label: 'Input', to: '/components/Input' }, { label: 'InputGroup', to: '/components/InputGroup' }, { label: 'Radio', to: '/components/Radio' }, { label: 'RadioGroup', to: '/components/RadioGroup' }, { label: 'Select', to: '/components/Select' }, { label: 'SelectCustom', to: '/components/SelectCustom' }, { label: 'Textarea', to: '/components/Textarea' }] },
@@ -64,3 +64,9 @@ const sections = [
   { label: 'Overlays', links: [{ label: 'Modal', to: '/components/Modal' }, { label: 'Notification', to: '/components/Notification' }, { label: 'Popover', to: '/components/Popover' }, { label: 'Slideover', to: '/components/Slideover' }, { label: 'Tooltip', to: '/components/Tooltip' }] }
 ]
 </script>
+
+<style>
+html.dark {
+  background-color: black;
+}
+</style>

@@ -8,7 +8,7 @@
       </div>
 
       <p class="mt-1 text-lg u-text-gray-500">
-        Components library as a Nuxt3 module using <a href="https://github.com/antfu/unocss" target="_blank">UnoCSS</a>.
+        Components library as a Nuxt3 module using <a href="https://github.com/antfu/unocss" target="_blank" class="underline">UnoCSS</a>.
       </p>
     </div>
 
