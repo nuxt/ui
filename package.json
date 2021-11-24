@@ -13,10 +13,13 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "components",
+    "utils",
+    "runtime"
   ],
   "scripts": {
-    "build": "unbuild",
+    "build": "tsup",
     "dev": "nuxi dev docs",
     "build:docs": "nuxi build docs",
     "postbuild:docs": "mv ./docs/.vercel_build_output .vercel_build_output",
@@ -37,6 +40,7 @@
     "@nuxtjs/eslint-config-typescript": "7.0.2",
     "eslint": "8.3.0",
     "nuxt3": "3.0.0-27294839.7e5e50b",
+    "tsup": "^5.9.1",
     "unbuild": "0.5.13"
   }
 }
