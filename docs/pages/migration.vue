@@ -58,8 +58,7 @@ const components = [
   },
   {
     label: 'Button',
-    to: '/components/Button',
-    ready: true
+    to: '/components/Button'
   },
   {
     label: 'Dropdown',
