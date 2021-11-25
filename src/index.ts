@@ -175,7 +175,7 @@ export default defineNuxtModule<UiOptions>({
       watch: false
     })
 
-    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
+    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@nuxthq/ui')
   }
 })
 
