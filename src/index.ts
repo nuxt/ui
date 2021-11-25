@@ -134,7 +134,12 @@ export default defineNuxtModule<UiOptions>({
         }],
         ...rules
       ],
-      variants
+      variants,
+      layers: {
+        icons: 0,
+        default: 1,
+        shortcuts: 2
+      }
     }
 
     await installModule(nuxt, { src: '@unocss/nuxt', options })
