@@ -1,6 +1,6 @@
 <template>
   <UCard v-if="component" class="relative flex flex-col" body-class="px-4 py-5 sm:p-6 relative" footer-class="px-4 py-4 sm:px-6 flex-1 lg:overflow-y-auto" style="max-height: calc(100vh - 10rem);">
-    <div class="flex justify-center sticky top-0">
+    <div class="flex justify-center">
       <component :is="is" v-bind="boundProps" />
     </div>
 
@@ -79,9 +79,7 @@ const refProps = Object.entries(componentProps).map(([key, prop]) => {
   }
 
   if (value) {
-    if (type === 'Boolean') {
-      value = value === 'true'
-    } else if (type === 'String') {
+    if (type === 'String') {
       value = value.replace(/^'(.*)'$/, '$1')
     } else if (type === 'Array') {
       value = JSON.stringify(value)
