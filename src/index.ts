@@ -1,5 +1,5 @@
 import { resolve } from 'pathe'
-import { defineNuxtModule, installModule, addPlugin, addComponentsDir } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir } from '@nuxt/kit'
 import { colors } from '@unocss/preset-uno'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
 
@@ -22,7 +22,9 @@ export interface UiOptions {
    * @default 'u'
    */
   prefix?: string
+
   colors?: UiColorsOptions
+
   unocss?: UnocssNuxtOptions
 }
 
@@ -135,10 +137,7 @@ export default defineNuxtModule<UiOptions>({
       variants
     }
 
-    await installModule(nuxt, { src: '@vueuse/core/nuxt' })
     await installModule(nuxt, { src: '@unocss/nuxt', options })
-
-    addPlugin(resolve(__dirname, './plugins/plugin'))
 
     addComponentsDir({
       path: resolve(__dirname, './components/elements'),
@@ -171,7 +170,7 @@ export default defineNuxtModule<UiOptions>({
       watch: false
     })
 
-    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@vueuse/core', '@nuxthq/ui')
+    nuxt.options.build.transpile.push('@popperjs/core')
   }
 })
 

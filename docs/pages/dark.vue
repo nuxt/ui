@@ -16,9 +16,13 @@
       Usage
     </h2>
 
-    <p>VueUse <a href="https://vueuse.org/core/useDark" target="_blank" class="underline">useDark</a> composable is instancied through a plugin injected by the module.</p>
+    <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
+      <code class="text-sm">
+        {{ code5 }}
+      </code>
+    </pre>
 
-    <p>This composable makes use of the `dark` class on the html tag so you can easily take advantage of the UnoCSS `dark` variant.</p>
+    <p>The VueUse <a href="https://vueuse.org/core/useDark" target="_blank" class="underline">useDark</a> composable makes use of the `dark` class on the html tag so you can easily take advantage of the UnoCSS `dark` variant.</p>
 
     <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
       <code class="text-sm">
@@ -30,12 +34,12 @@
 
     <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
       <code class="text-sm">
-        {{ code1 }}
+        {{ code2 }}
       </code>
     </pre>
     <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
       <code class="text-sm">
-        {{ code2 }}
+        {{ code1 }}
       </code>
     </pre>
 
@@ -70,5 +74,8 @@ const code3 = `
 `
 const code4 = `
 <div class="bg-white dark:bg-black"></div>
+`
+const code5 = `
+yarn add @vueuse/components @vueuse/core
 `
 </script>
