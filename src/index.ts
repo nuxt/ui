@@ -1,6 +1,7 @@
 import { resolve } from 'pathe'
-import { defineNuxtModule, installModule, addComponentsDir } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addTemplate } from '@nuxt/kit'
 import { colors } from '@unocss/preset-uno'
+import defu from 'defu'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
 
 export interface UiColorsOptions {
@@ -17,8 +18,11 @@ export interface UiColorsOptions {
 
 export interface UiOptions {
   /**
-   * Prefix of injected components.
-   *
+   * @default 'tailwindui'
+   */
+  preset?: string | object
+
+  /**
    * @default 'u'
    */
   prefix?: string
@@ -28,24 +32,27 @@ export interface UiOptions {
   unocss?: UnocssNuxtOptions
 }
 
+const defaults = {
+  preset: 'tailwindui',
+  prefix: 'u',
+  colors: {
+    primary: 'indigo',
+    gray: 'zinc'
+  },
+  unocss: {
+    shortcuts: [],
+    rules: [],
+    variants: [],
+    theme: {}
+  }
+}
+
 export default defineNuxtModule<UiOptions>({
   name: '@nuxthq/ui',
   configKey: 'ui',
-  defaults: {
-    prefix: 'u',
-    colors: {
-      primary: 'indigo',
-      gray: 'zinc'
-    },
-    unocss: {
-      shortcuts: [],
-      rules: [],
-      variants: [],
-      theme: {}
-    }
-  },
+  defaults,
   async setup (_options, nuxt) {
-    const { prefix, colors: { primary = 'indigo', gray = 'zinc' } = {} } = _options
+    const { preset, prefix, colors: { primary = 'indigo', gray = 'zinc' } = {} } = _options
     const { shortcuts = [], rules = [], variants = [], theme = {} } = _options.unocss || {}
 
     const options: UnocssNuxtOptions = {
@@ -144,6 +151,24 @@ export default defineNuxtModule<UiOptions>({
 
     await installModule(nuxt, { src: '@unocss/nuxt', options })
 
+    let ui: object = {}
+    try {
+      if (typeof preset === 'object') {
+        ui = await import(resolve(__dirname, `./presets/${defaults.preset}`))
+
+        ui = defu(preset, ui)
+      } else {
+        ui = await import(resolve(__dirname, `./presets/${preset}`))
+      }
+    } catch (e) {
+      ui = await import(resolve(__dirname, `./presets/${defaults.preset}`))
+    }
+
+    addTemplate({
+      filename: 'ui.mjs',
+      getContents: () => `export default ${JSON.stringify(ui)}`
+    })
+
     addComponentsDir({
       path: resolve(__dirname, './components/elements'),
       prefix,
@@ -181,6 +206,9 @@ export default defineNuxtModule<UiOptions>({
 
 declare module '@nuxt/schema' {
   interface NuxtConfig {
+    ui?: UiOptions
+  }
+  interface NuxtOptions {
     ui?: UiOptions
   }
 }

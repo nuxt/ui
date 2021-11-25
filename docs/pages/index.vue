@@ -49,6 +49,10 @@ export default defineNuxtConfig({
       Options
     </h2>
 
+    <p>- `preset`</p>
+
+    <p>Choose preset. Defaults to `tailwindui`.</p>
+
     <p>- `prefix`</p>
 
     <p>Define the prefix of the imported components. Defaults to `u`.</p>

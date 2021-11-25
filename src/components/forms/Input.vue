@@ -22,7 +22,7 @@
       :readonly="readonly"
       :autocomplete="autocomplete"
       :spellcheck="spellcheck"
-      :class="[baseClass, sizeClass, paddingClass, paddingIconClass, appearanceClass, customClass]"
+      :class="[baseClass, sizeClass, paddingClass, appearanceClass, customClass]"
       @input="onInput($event.target.value)"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
@@ -44,6 +44,8 @@
 <script>
 import { ref, computed, onMounted } from 'vue'
 import Icon from '../elements/Icon'
+import { classNames } from '../../utils'
+import $ui from '#build/ui'
 
 export default {
   components: {
@@ -96,7 +98,7 @@ export default {
     },
     loadingIcon: {
       type: String,
-      default: null
+      default: 'heroicons-outline:refresh'
     },
     trailing: {
       type: Boolean,
@@ -119,7 +121,7 @@ export default {
     },
     baseClass: {
       type: String,
-      default: 'block w-full u-bg-white u-text-gray-700 disabled:cursor-not-allowed disabled:u-bg-gray-50 focus:outline-none'
+      default: () => $ui.input.base
     },
     customClass: {
       type: String,
@@ -157,50 +159,6 @@ export default {
       }, 100)
     })
 
-    const sizeClass = computed(() => ({
-      xxs: 'text-xs',
-      xs: 'text-xs',
-      sm: 'text-sm leading-4',
-      md: 'text-sm',
-      lg: 'text-base',
-      xl: 'text-base'
-    })[props.size])
-
-    const paddingClass = computed(() => ({
-      xxs: 'px-1 py-0.5',
-      xs: 'px-2.5 py-1.5',
-      sm: 'px-3 py-2',
-      md: 'px-4 py-2',
-      lg: 'px-4 py-2',
-      xl: 'px-6 py-3'
-    })[props.size])
-
-    const appearanceClass = computed(() => ({
-      default: 'focus:ring-1 focus:ring-primary-500 focus:border-primary-500 border u-border-gray-300 rounded-md shadow-sm',
-      none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
-    })[props.appearance])
-
-    const paddingIconClass = computed(() => {
-      return [
-        props.isLeading && ({
-          xxs: 'pl-7',
-          xs: 'pl-7',
-          sm: 'pl-10',
-          md: 'pl-10',
-          lg: 'pl-10',
-          xl: 'pl-10'
-        })[props.size],
-        props.isTrailing && ({
-          xxs: 'pr-10',
-          xs: 'pr-10',
-          sm: 'pr-10',
-          md: 'pr-10',
-          lg: 'pr-10',
-          xl: 'pr-10'
-        })[props.size]
-      ].join(' ')
-    })
-
     const isLeading = computed(() => {
       return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing)
     })
@@ -209,44 +167,33 @@ export default {
       return (props.icon && props.trailing) || (props.loading && props.trailing)
     })
 
+    const sizeClass = computed(() => $ui.input.size[props.size])
+
+    const appearanceClass = computed(() => $ui.input.appearance[props.appearance])
+
+    const paddingClass = computed(() => {
+      return classNames(
+        $ui.input.padding[props.size],
+        isLeading.value && $ui.input.leading[props.size],
+        isTrailing.value && $ui.input.trailing[props.size]
+      )
+    })
+
     const iconName = computed(() => {
       if (props.loading) {
-        return props.loadingIcon || 'custom/loading'
+        return props.loadingIcon
       }
 
       return props.icon
     })
 
     const iconClass = computed(() => {
-      return [
-        ({
-          xxs: 'h-3 w-3',
-          xs: 'h-4 w-4',
-          sm: 'h-5 w-5',
-          md: 'h-5 w-5',
-          lg: 'h-5 w-5',
-          xl: 'h-5 w-5'
-        })[props.size || 'sm'],
-        props.isLeading && ({
-          xxs: 'ml-2',
-          xs: 'ml-2',
-          sm: 'ml-3',
-          md: 'ml-3',
-          lg: 'ml-3',
-          xl: 'ml-3'
-        })[props.size || 'sm'],
-        props.isTrailing && ({
-          xxs: 'mr-2',
-          xs: 'mr-2',
-          sm: 'mr-3',
-          md: 'mr-3',
-          lg: 'mr-3',
-          xl: 'mr-3'
-        })[props.size || 'sm'],
-        ({
-          true: 'animate-spin'
-        })[props.loading]
-      ]
+      return classNames(
+        $ui.input.icon.size[props.size],
+        isLeading.value && $ui.input.icon.leading[props.size],
+        isTrailing.value && $ui.input.icon.trailing[props.size],
+        props.loading && 'animate-spin'
+      )
     })
 
     return {
@@ -254,7 +201,6 @@ export default {
       onInput,
       sizeClass,
       paddingClass,
-      paddingIconClass,
       appearanceClass,
       iconClass,
       iconName,
