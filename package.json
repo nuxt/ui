@@ -30,6 +30,7 @@
     "@unocss/nuxt": "^0.12.9",
     "defu": "^5.0.0",
     "gradient-avatar": "^1.0.2",
+    "lodash": "^4.17.21",
     "pathe": "^0.2.0"
   },
   "devDependencies": {
