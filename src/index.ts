@@ -141,7 +141,18 @@ export default defineNuxtModule<UiOptions>({
         }],
         ...rules
       ],
-      variants,
+      variants: [
+        // disabled:
+        (matcher) => {
+          if (!matcher.startsWith('disabled:')) { return matcher }
+          return {
+            // slice `disabled:` prefix and passed to the next variants and rules
+            matcher: matcher.slice(9),
+            selector: s => `${s}:disabled`
+          }
+        },
+        ...variants
+      ],
       layers: {
         icons: 0,
         default: 1,
