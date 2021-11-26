@@ -20,7 +20,10 @@
               Component
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
-              Ready?
+              Composition API
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
+              Preset system
             </th>
           </tr>
         </thead>
@@ -32,7 +35,11 @@
               </NuxtLink>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
-              <span v-if="component.ready">✅</span>
+              <span v-if="component.capi">✅</span>
+              <span v-else>❌</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
+              <span v-if="component.preset">✅</span>
               <span v-else>❌</span>
             </td>
           </tr>
@@ -63,12 +70,12 @@ const components = [
   {
     label: 'Dropdown',
     to: '/components/Dropdown',
-    ready: true
+    capi: true
   },
   {
     label: 'Icon',
     to: '/components/Icon',
-    ready: true
+    capi: true
   },
   {
     label: 'Link',
@@ -89,7 +96,8 @@ const components = [
   {
     label: 'Input',
     to: '/components/Input',
-    ready: true
+    capi: true,
+    preset: true
   },
   {
     label: 'InputGroup',
@@ -106,7 +114,8 @@ const components = [
   {
     label: 'Select',
     to: '/components/Select',
-    ready: true
+    capi: true,
+    preset: true
   },
   {
     label: 'SelectCustom',
@@ -115,17 +124,18 @@ const components = [
   {
     label: 'Textarea',
     to: '/components/Textarea',
-    ready: true
+    capi: true,
+    preset: true
   },
   {
     label: 'Card',
     to: '/components/Card',
-    ready: true
+    capi: true
   },
   {
     label: 'Container',
     to: '/components/Container',
-    ready: true
+    capi: true
   },
   {
     label: 'Pills',
@@ -142,7 +152,7 @@ const components = [
   {
     label: 'Modal',
     to: '/components/Modal',
-    ready: true
+    capi: true
   },
   {
     label: 'Notification',
@@ -151,7 +161,7 @@ const components = [
   {
     label: 'Popover',
     to: '/components/Popover',
-    ready: true
+    capi: true
   },
   {
     label: 'Slideover',

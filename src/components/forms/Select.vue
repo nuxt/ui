@@ -78,7 +78,7 @@ export default {
       type: String,
       default: 'md',
       validator (value) {
-        return ['xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)
+        return Object.keys($ui.select.size).includes(value)
       }
     },
     wrapperClass: {

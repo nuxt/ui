@@ -98,7 +98,7 @@ export default {
       type: String,
       default: 'md',
       validator (value) {
-        return ['', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)
+        return Object.keys($ui.input.size).includes(value)
       }
     },
     wrapperClass: {
@@ -121,7 +121,7 @@ export default {
       type: String,
       default: 'default',
       validator (value) {
-        return ['default', 'none'].includes(value)
+        return Object.keys($ui.input.appearance).includes(value)
       }
     },
     loading: {

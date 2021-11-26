@@ -51,7 +51,7 @@ export default defineNuxtConfig({
 
     <p>- `preset`</p>
 
-    <p>Choose preset. Defaults to `tailwindui`.</p>
+    <p>Choose preset. Defaults to `tailwindui`. An object can also be used to override some parts of the default preset.</p>
 
     <p>- `prefix`</p>
 

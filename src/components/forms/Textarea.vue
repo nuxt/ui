@@ -65,7 +65,7 @@ export default {
       type: String,
       default: 'default',
       validator (value) {
-        return ['default', 'none'].includes(value)
+        return Object.keys($ui.textarea.appearance).includes(value)
       }
     },
     resize: {
@@ -76,7 +76,7 @@ export default {
       type: String,
       default: 'md',
       validator (value) {
-        return ['', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)
+        return Object.keys($ui.textarea.size).includes(value)
       }
     },
     wrapperClass: {

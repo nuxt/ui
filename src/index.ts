@@ -56,7 +56,6 @@ export default defineNuxtModule<UiOptions>({
     const { shortcuts = [], rules = [], variants = [], theme = {} } = _options.unocss || {}
 
     const options: UnocssNuxtOptions = {
-      include: [/\.vue$/, /\.vue\?vue/, /\.svelte$/, /\.ts$/, /\.[jt]sx$/, /\.mdx?$/, /\.astro$/],
       theme: {
         colors: {
           gray: typeof gray === 'object' ? gray : (colors && colors[gray]),
@@ -178,7 +177,7 @@ export default defineNuxtModule<UiOptions>({
 
     addTemplate({
       filename: 'ui.mjs',
-      getContents: () => `export default ${JSON.stringify(ui)}`
+      getContents: () => `/* @unocss-include */ export default ${JSON.stringify(ui)}`
     })
 
     addComponentsDir({

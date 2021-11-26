@@ -1,4 +1,3 @@
-/* @unocss-include */
 const input = {
   wrapper: 'relative',
   base: 'block w-full u-bg-white u-text-gray-700 disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
