@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "7.0.2",
+    "@types/lodash": "^4.14.177",
     "@vueuse/components": "^7.1.1",
     "@vueuse/core": "^7.1.1",
     "eslint": "8.3.0",
