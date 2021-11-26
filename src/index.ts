@@ -56,7 +56,7 @@ export default defineNuxtModule<UiOptions>({
     const { shortcuts = [], rules = [], variants = [], theme = {} } = _options.unocss || {}
 
     const options: UnocssNuxtOptions = {
-      include: [/\.vue$/, /\.vue\?vue/, /\.svelte$/, /\.ts$/, /\.js$/, /\.[jt]sx$/, /\.mdx?$/, /\.astro$/],
+      include: [/\.vue$/, /\.vue\?vue/, /\.svelte$/, /\.ts$/, /\.[jt]sx$/, /\.mdx?$/, /\.astro$/],
       theme: {
         colors: {
           gray: typeof gray === 'object' ? gray : (colors && colors[gray]),
