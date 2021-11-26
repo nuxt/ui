@@ -105,7 +105,8 @@ const components = [
   },
   {
     label: 'Select',
-    to: '/components/Select'
+    to: '/components/Select',
+    ready: true
   },
   {
     label: 'SelectCustom',
