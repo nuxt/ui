@@ -1,14 +1,7 @@
 <template>
   <div :class="wrapperClass">
-    <div
-      v-if="isLeading"
-      class="absolute inset-y-0 left-0 flex items-center pointer-events-none"
-    >
-      <Icon
-        :name="iconName"
-        class="u-text-gray-400"
-        :class="iconClass"
-      />
+    <div v-if="isLeading" :class="iconLeadingWrapperClass">
+      <Icon :name="iconName" :class="iconClass" />
     </div>
     <input
       :id="name"
@@ -22,21 +15,14 @@
       :readonly="readonly"
       :autocomplete="autocomplete"
       :spellcheck="spellcheck"
-      :class="[baseClass, sizeClass, paddingClass, paddingIconClass, appearanceClass, customClass]"
+      :class="inputClass"
       @input="onInput($event.target.value)"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     >
     <slot />
-    <div
-      v-if="isTrailing"
-      class="absolute inset-y-0 right-0 flex items-center pointer-events-none"
-    >
-      <Icon
-        :name="iconName"
-        class="u-text-gray-400"
-        :class="iconClass"
-      />
+    <div v-if="isTrailing" :class="iconTrailingWrapperClass">
+      <Icon :name="iconName" :class="iconClass" />
     </div>
   </div>
 </template>
@@ -44,6 +30,8 @@
 <script>
 import { ref, computed, onMounted } from 'vue'
 import Icon from '../elements/Icon'
+import { classNames } from '../../utils'
+import $ui from '#build/ui'
 
 export default {
   components: {
@@ -96,7 +84,7 @@ export default {
     },
     loadingIcon: {
       type: String,
-      default: null
+      default: 'heroicons-outline:refresh'
     },
     trailing: {
       type: Boolean,
@@ -110,16 +98,20 @@ export default {
       type: String,
       default: 'md',
       validator (value) {
-        return ['', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)
+        return Object.keys($ui.input.size).includes(value)
       }
     },
     wrapperClass: {
       type: String,
-      default: 'relative'
+      default: $ui.input.wrapper
     },
     baseClass: {
       type: String,
-      default: 'block w-full u-bg-white u-text-gray-700 disabled:cursor-not-allowed disabled:u-bg-gray-50 focus:outline-none'
+      default: () => $ui.input.base
+    },
+    iconBaseClass: {
+      type: String,
+      default: () => $ui.input.icon.base
     },
     customClass: {
       type: String,
@@ -129,7 +121,7 @@ export default {
       type: String,
       default: 'default',
       validator (value) {
-        return ['default', 'none'].includes(value)
+        return Object.keys($ui.input.appearance).includes(value)
       }
     },
     loading: {
@@ -157,50 +149,6 @@ export default {
       }, 100)
     })
 
-    const sizeClass = computed(() => ({
-      xxs: 'text-xs',
-      xs: 'text-xs',
-      sm: 'text-sm leading-4',
-      md: 'text-sm',
-      lg: 'text-base',
-      xl: 'text-base'
-    })[props.size])
-
-    const paddingClass = computed(() => ({
-      xxs: 'px-1 py-0.5',
-      xs: 'px-2.5 py-1.5',
-      sm: 'px-3 py-2',
-      md: 'px-4 py-2',
-      lg: 'px-4 py-2',
-      xl: 'px-6 py-3'
-    })[props.size])
-
-    const appearanceClass = computed(() => ({
-      default: 'focus:ring-1 focus:ring-primary-500 focus:border-primary-500 border u-border-gray-300 rounded-md shadow-sm',
-      none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
-    })[props.appearance])
-
-    const paddingIconClass = computed(() => {
-      return [
-        props.isLeading && ({
-          xxs: 'pl-7',
-          xs: 'pl-7',
-          sm: 'pl-10',
-          md: 'pl-10',
-          lg: 'pl-10',
-          xl: 'pl-10'
-        })[props.size],
-        props.isTrailing && ({
-          xxs: 'pr-10',
-          xs: 'pr-10',
-          sm: 'pr-10',
-          md: 'pr-10',
-          lg: 'pr-10',
-          xl: 'pr-10'
-        })[props.size]
-      ].join(' ')
-    })
-
     const isLeading = computed(() => {
       return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing)
     })
@@ -209,55 +157,47 @@ export default {
       return (props.icon && props.trailing) || (props.loading && props.trailing)
     })
 
+    const inputClass = computed(() => {
+      return classNames(
+        props.baseClass,
+        $ui.input.size[props.size],
+        $ui.input.spacing[props.size],
+        $ui.input.appearance[props.appearance],
+        isLeading.value && $ui.input.leading.spacing[props.size],
+        isTrailing.value && $ui.input.trailing.spacing[props.size],
+        props.customClass
+      )
+    })
+
     const iconName = computed(() => {
       if (props.loading) {
-        return props.loadingIcon || 'custom/loading'
+        return props.loadingIcon
       }
 
       return props.icon
     })
 
     const iconClass = computed(() => {
-      return [
-        ({
-          xxs: 'h-3 w-3',
-          xs: 'h-4 w-4',
-          sm: 'h-5 w-5',
-          md: 'h-5 w-5',
-          lg: 'h-5 w-5',
-          xl: 'h-5 w-5'
-        })[props.size || 'sm'],
-        props.isLeading && ({
-          xxs: 'ml-2',
-          xs: 'ml-2',
-          sm: 'ml-3',
-          md: 'ml-3',
-          lg: 'ml-3',
-          xl: 'ml-3'
-        })[props.size || 'sm'],
-        props.isTrailing && ({
-          xxs: 'mr-2',
-          xs: 'mr-2',
-          sm: 'mr-3',
-          md: 'mr-3',
-          lg: 'mr-3',
-          xl: 'mr-3'
-        })[props.size || 'sm'],
-        ({
-          true: 'animate-spin'
-        })[props.loading]
-      ]
+      return classNames(
+        props.iconBaseClass,
+        $ui.input.icon.size[props.size],
+        isLeading.value && $ui.input.icon.leading.spacing[props.size],
+        isTrailing.value && $ui.input.icon.trailing.spacing[props.size],
+        props.loading && 'animate-spin'
+      )
     })
+
+    const iconLeadingWrapperClass = $ui.input.icon.leading.wrapper
+    const iconTrailingWrapperClass = $ui.input.icon.trailing.wrapper
 
     return {
       input,
       onInput,
-      sizeClass,
-      paddingClass,
-      paddingIconClass,
-      appearanceClass,
-      iconClass,
+      inputClass,
       iconName,
+      iconClass,
+      iconLeadingWrapperClass,
+      iconTrailingWrapperClass,
       isLeading,
       isTrailing
     }

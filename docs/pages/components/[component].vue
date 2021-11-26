@@ -54,6 +54,8 @@
 </template>
 
 <script setup>
+import $ui from '#build/ui'
+
 const nuxtApp = useNuxtApp()
 const { params } = useRoute()
 
@@ -74,8 +76,15 @@ const refProps = Object.entries(componentProps).map(([key, prop]) => {
 
   let values
   if (prop.validator) {
-    const result = prop.validator.toString().match(/\[.*\]/g, '')[0]
-    values = JSON.parse(result.replace(/'/g, '"')).filter(Boolean)
+    const arrayRegex = prop.validator.toString().match(/\[.*\]/g, '')
+    if (arrayRegex) {
+      values = JSON.parse(arrayRegex[0].replace(/'/g, '"')).filter(Boolean)
+    } else {
+      const $uiProp = $ui[params.component.toLowerCase()][key]
+      if ($uiProp) {
+        values = Object.keys($uiProp).filter(Boolean)
+      }
+    }
   }
 
   if (value) {

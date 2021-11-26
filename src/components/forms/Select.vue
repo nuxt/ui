@@ -1,13 +1,16 @@
 <template>
   <div :class="wrapperClass">
+    <div v-if="icon" :class="iconWrapperClass">
+      <Icon :name="icon" :class="iconClass" />
+    </div>
+
     <select
       :id="name"
       :name="name"
       :required="required"
       :disabled="disabled"
-      :readonly="readonly"
       :class="selectClass"
-      @input="updateValue($event.target.value)"
+      @input="onInput($event.target.value)"
     >
       <template v-for="(option, index) in normalizedOptionsWithPlaceholder">
         <optgroup
@@ -33,16 +36,14 @@
         />
       </template>
     </select>
-    <div v-if="icon" class="absolute inset-y-0 left-0 flex items-center pointer-events-none" :class="iconPadding">
-      <Icon :name="icon" :class="iconClass" />
-    </div>
   </div>
 </template>
 
 <script>
 import get from 'lodash/get'
-
 import Icon from '../elements/Icon'
+import { classNames } from '../../utils'
+import $ui from '#build/ui'
 
 export default {
   components: {
@@ -73,24 +74,24 @@ export default {
       type: Array,
       default: () => []
     },
-    readonly: {
-      type: Boolean,
-      default: false
-    },
     size: {
       type: String,
       default: 'md',
       validator (value) {
-        return ['xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)
+        return Object.keys($ui.select.size).includes(value)
       }
     },
     wrapperClass: {
       type: String,
-      default: 'relative'
+      default: $ui.select.wrapper
     },
     baseClass: {
       type: String,
-      default: 'block w-full disabled:cursor-not-allowed u-bg-white u-text-gray-700 disabled:u-bg-gray-50 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 border u-border-gray-300 rounded-md shadow-sm focus:outline-none'
+      default: $ui.select.base
+    },
+    iconBaseClass: {
+      type: String,
+      default: $ui.select.icon.base
     },
     customClass: {
       type: String,
@@ -110,101 +111,97 @@ export default {
     }
   },
   emits: ['update:modelValue'],
-  computed: {
-    sizeClass () {
-      return {
-        xxs: 'text-xs',
-        xs: 'text-xs',
-        sm: 'text-sm leading-4',
-        md: 'text-sm',
-        lg: 'text-base',
-        xl: 'text-base'
-      }[this.size]
-    },
-    paddingClass () {
-      return ({
-        xxs: `${this.icon ? 'pl-7' : 'pl-2'} pr-7 py-1.5`,
-        xs: `${this.icon ? 'pl-8' : 'pl-3'} pr-9 py-1.5`,
-        sm: `${this.icon ? 'pl-8' : 'pl-3'} pr-9 py-2`,
-        md: `${this.icon ? 'pl-10' : 'pl-3'} pr-10 py-2`,
-        lg: `${this.icon ? 'pl-10' : 'pl-3'} pr-10 py-2`,
-        xl: `${this.icon ? 'pl-12' : 'pl-4'} pr-12 py-3`
-      })[this.size]
-    },
-    iconClass () {
-      return ({
-        xxs: 'w-3 h-3',
-        xs: 'w-4 h-4',
-        sm: 'w-4 h-4',
-        md: 'w-5 h-5',
-        lg: 'w-5 h-5',
-        xl: 'w-5 h-5'
-      })[this.size]
-    },
-    iconPadding () {
-      return ({
-        xxs: 'pl-3',
-        xs: 'pl-3',
-        sm: 'pl-3',
-        md: 'pl-3',
-        lg: 'pl-3',
-        xl: 'pl-4'
-      })[this.size]
-    },
-    selectClass () {
-      return [
-        this.baseClass,
-        this.customClass,
-        this.sizeClass,
-        this.paddingClass
-      ].join(' ')
-    },
-    normalizedOptions () {
-      return this.options.map(option => this.normalizeOption(option))
-    },
-    normalizedOptionsWithPlaceholder () {
-      if (!this.placeholder) {
-        return this.normalizedOptions
-      }
-      const { normalizedOptions } = this
-      normalizedOptions.unshift({
-        [this.valueAttribute]: null,
-        [this.textAttribute]: this.placeholder
-      })
-      return normalizedOptions
-    },
-    normalizedValue () {
-      const foundOption = this.normalizedOptionsWithPlaceholder.find(option => option.value === this.modelValue)
-      if (!foundOption) {
-        return null
-      }
+  setup (props, { emit }) {
+    const select = ref(null)
 
-      return foundOption.value
+    const onInput = (value) => {
+      emit('update:modelValue', value)
     }
-  },
-  methods: {
-    guessOptionValue (option) {
-      return get(option, this.valueAttribute, get(option, this.textAttribute))
-    },
-    guessOptionText (option) {
-      return get(option, this.textAttribute, get(option, this.valueAttribute))
-    },
-    normalizeOption (option) {
+
+    const guessOptionValue = (option) => {
+      return get(option, props.valueAttribute, get(option, props.textAttribute))
+    }
+
+    const guessOptionText = (option) => {
+      return get(option, props.textAttribute, get(option, props.valueAttribute))
+    }
+
+    const normalizeOption = (option) => {
       if (['string', 'number', 'boolean'].includes(typeof option)) {
         return {
-          [this.valueAttribute]: option,
-          [this.textAttribute]: option
+          [props.valueAttribute]: option,
+          [props.textAttribute]: option
         }
       }
 
       return {
         ...option,
-        [this.valueAttribute]: this.guessOptionValue(option),
-        [this.textAttribute]: this.guessOptionText(option)
+        [props.valueAttribute]: guessOptionValue(option),
+        [props.textAttribute]: guessOptionText(option)
       }
-    },
-    updateValue (value) {
-      this.$emit('update:modelValue', value)
+    }
+
+    const normalizedOptions = computed(() => {
+      return props.options.map(option => normalizeOption(option))
+    })
+
+    const normalizedOptionsWithPlaceholder = computed(() => {
+      if (!props.placeholder) {
+        return normalizedOptions.value
+      }
+
+      return [
+        {
+          [props.valueAttribute]: null,
+          [props.textAttribute]: props.placeholder
+        },
+        ...normalizedOptions.value
+      ]
+    })
+
+    const normalizedValue = computed(() => {
+      const foundOption = normalizedOptionsWithPlaceholder.value.find(option => option.value === props.modelValue)
+      if (!foundOption) {
+        return null
+      }
+
+      return foundOption.value
+    })
+
+    const selectClass = computed(() => {
+      return classNames(
+        props.baseClass,
+        $ui.select.size[props.size],
+        $ui.select.spacing[props.size],
+        $ui.select.appearance.default,
+        !!props.icon && $ui.select.leading.spacing[props.size],
+        $ui.select.trailing.spacing[props.size],
+        props.customClass
+      )
+    })
+
+    const iconClass = computed(() => {
+      return classNames(
+        props.iconBaseClass,
+        $ui.select.icon.size[props.size],
+        !!props.icon && $ui.select.icon.leading.spacing[props.size]
+      )
+    })
+
+    const iconWrapperClass = $ui.select.icon.leading.base
+
+    return {
+      select,
+      onInput,
+      guessOptionValue,
+      guessOptionText,
+      normalizeOption,
+      normalizedOptions,
+      normalizedOptionsWithPlaceholder,
+      normalizedValue,
+      selectClass,
+      iconClass,
+      iconWrapperClass
     }
   }
 }
