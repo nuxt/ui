@@ -167,14 +167,19 @@ export default defineNuxtModule<UiOptions>({
     try {
       if (typeof preset === 'object') {
         ui = await import(resolveModule(`./${defaults.preset}`, { paths: presetsDir }))
-
+        // @ts-ignore
+        ui = ui.default ? ui.default : ui
         ui = defu(preset, ui)
       } else {
         // @ts-ignore
         ui = await import(resolveModule(`./${preset}`, { paths: presetsDir }))
+        // @ts-ignore
+        ui = ui.default ? ui.default : ui
       }
     } catch (e) {
       ui = await import(resolveModule(`./${defaults.preset}`, { paths: presetsDir }))
+      // @ts-ignore
+      ui = ui.default ? ui.default : ui
     }
 
     addTemplate({
