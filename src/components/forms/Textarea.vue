@@ -10,7 +10,7 @@
       :disabled="disabled"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
-      :class="[baseClass, customClass, sizeClass, paddingClass, appearanceClass, resizeClass]"
+      :class="textareaClass"
       @input="onInput($event.target.value)"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
@@ -20,6 +20,8 @@
 
 <script>
 import { ref, computed, onMounted } from 'vue'
+import { classNames } from '../../utils'
+import $ui from '#build/ui'
 
 export default {
   props: {
@@ -79,11 +81,11 @@ export default {
     },
     wrapperClass: {
       type: String,
-      default: 'relative'
+      default: $ui.textarea.wrapper
     },
     baseClass: {
       type: String,
-      default: 'block w-full u-bg-white u-text-gray-700 disabled:cursor-not-allowed disabled:u-bg-gray-50 focus:outline-none'
+      default: $ui.textarea.base
     },
     customClass: {
       type: String,
@@ -127,40 +129,21 @@ export default {
       }, 100)
     })
 
-    const sizeClass = computed(() => ({
-      xxs: 'text-xs',
-      xs: 'text-xs',
-      sm: 'text-sm leading-4',
-      md: 'text-sm',
-      lg: 'text-base',
-      xl: 'text-base'
-    })[props.size])
-
-    const paddingClass = computed(() => ({
-      xxs: 'px-1 py-0.5',
-      xs: 'px-2.5 py-1.5',
-      sm: 'px-3 py-2',
-      md: 'px-4 py-2',
-      lg: 'px-4 py-2',
-      xl: 'px-6 py-3'
-    })[props.size])
-
-    const appearanceClass = computed(() => ({
-      default: 'focus:ring-1 focus:ring-primary-500 focus:border-primary-500 border u-border-gray-300 rounded-md shadow-sm',
-      none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
-    })[props.appearance])
-
-    const resizeClass = computed(() => {
-      return props.resize ? '' : 'resize-none'
+    const textareaClass = computed(() => {
+      return classNames(
+        props.baseClass,
+        $ui.textarea.size[props.size],
+        $ui.textarea.spacing[props.size],
+        $ui.textarea.appearance[props.appearance],
+        !props.resize && 'resize-none',
+        props.customClass
+      )
     })
 
     return {
       textarea,
       onInput,
-      sizeClass,
-      paddingClass,
-      appearanceClass,
-      resizeClass
+      textareaClass
     }
   }
 }

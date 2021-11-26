@@ -1,14 +1,7 @@
 <template>
   <div :class="wrapperClass">
-    <div
-      v-if="isLeading"
-      class="absolute inset-y-0 left-0 flex items-center pointer-events-none"
-    >
-      <Icon
-        :name="iconName"
-        class="u-text-gray-400"
-        :class="iconClass"
-      />
+    <div v-if="isLeading" :class="iconLeadingWrapperClass">
+      <Icon :name="iconName" :class="iconClass" />
     </div>
     <input
       :id="name"
@@ -22,21 +15,14 @@
       :readonly="readonly"
       :autocomplete="autocomplete"
       :spellcheck="spellcheck"
-      :class="[baseClass, sizeClass, paddingClass, appearanceClass, customClass]"
+      :class="inputClass"
       @input="onInput($event.target.value)"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     >
     <slot />
-    <div
-      v-if="isTrailing"
-      class="absolute inset-y-0 right-0 flex items-center pointer-events-none"
-    >
-      <Icon
-        :name="iconName"
-        class="u-text-gray-400"
-        :class="iconClass"
-      />
+    <div v-if="isTrailing" :class="iconTrailingWrapperClass">
+      <Icon :name="iconName" :class="iconClass" />
     </div>
   </div>
 </template>
@@ -117,11 +103,15 @@ export default {
     },
     wrapperClass: {
       type: String,
-      default: 'relative'
+      default: $ui.input.wrapper
     },
     baseClass: {
       type: String,
       default: () => $ui.input.base
+    },
+    iconBaseClass: {
+      type: String,
+      default: () => $ui.input.icon.base
     },
     customClass: {
       type: String,
@@ -167,15 +157,15 @@ export default {
       return (props.icon && props.trailing) || (props.loading && props.trailing)
     })
 
-    const sizeClass = computed(() => $ui.input.size[props.size])
-
-    const appearanceClass = computed(() => $ui.input.appearance[props.appearance])
-
-    const paddingClass = computed(() => {
+    const inputClass = computed(() => {
       return classNames(
-        $ui.input.padding[props.size],
-        isLeading.value && $ui.input.leading[props.size],
-        isTrailing.value && $ui.input.trailing[props.size]
+        props.baseClass,
+        $ui.input.size[props.size],
+        $ui.input.spacing[props.size],
+        $ui.input.appearance[props.appearance],
+        isLeading.value && $ui.input.leading.spacing[props.size],
+        isTrailing.value && $ui.input.trailing.spacing[props.size],
+        props.customClass
       )
     })
 
@@ -189,21 +179,25 @@ export default {
 
     const iconClass = computed(() => {
       return classNames(
+        props.iconBaseClass,
         $ui.input.icon.size[props.size],
-        isLeading.value && $ui.input.icon.leading[props.size],
-        isTrailing.value && $ui.input.icon.trailing[props.size],
+        isLeading.value && $ui.input.icon.leading.spacing[props.size],
+        isTrailing.value && $ui.input.icon.trailing.spacing[props.size],
         props.loading && 'animate-spin'
       )
     })
 
+    const iconLeadingWrapperClass = $ui.input.icon.leading.wrapper
+    const iconTrailingWrapperClass = $ui.input.icon.trailing.wrapper
+
     return {
       input,
       onInput,
-      sizeClass,
-      paddingClass,
-      appearanceClass,
-      iconClass,
+      inputClass,
       iconName,
+      iconClass,
+      iconLeadingWrapperClass,
+      iconTrailingWrapperClass,
       isLeading,
       isTrailing
     }
