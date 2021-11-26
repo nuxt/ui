@@ -1,8 +1,9 @@
 import { resolve } from 'pathe'
-import { defineNuxtModule, installModule, addComponentsDir, addTemplate } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addTemplate, resolveModule } from '@nuxt/kit'
 import { colors } from '@unocss/preset-uno'
 import defu from 'defu'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
+import { presetsDir } from './dirs'
 
 export interface UiColorsOptions {
   /**
@@ -165,14 +166,15 @@ export default defineNuxtModule<UiOptions>({
     let ui: object = {}
     try {
       if (typeof preset === 'object') {
-        ui = await import(resolve(__dirname, `./presets/${defaults.preset}`))
+        ui = await import(resolveModule(`./${defaults.preset}`, { paths: presetsDir }))
 
         ui = defu(preset, ui)
       } else {
-        ui = await import(resolve(__dirname, `./presets/${preset}`))
+        // @ts-ignore
+        ui = await import(resolveModule(`./${preset}`, { paths: presetsDir }))
       }
     } catch (e) {
-      ui = await import(resolve(__dirname, `./presets/${defaults.preset}`))
+      ui = await import(resolveModule(`./${defaults.preset}`, { paths: presetsDir }))
     }
 
     addTemplate({
