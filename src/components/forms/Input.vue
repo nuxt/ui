@@ -84,7 +84,7 @@ export default {
     },
     loadingIcon: {
       type: String,
-      default: 'heroicons-outline:refresh'
+      default: () => $ui.input.icon.loading
     },
     trailing: {
       type: Boolean,

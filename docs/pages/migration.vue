@@ -20,6 +20,9 @@
               Component
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
+              Nuxt3 ready
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
               Composition API
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
@@ -33,6 +36,10 @@
               <NuxtLink :to="component.to" class="hover:underline">
                 {{ component.label }}
               </NuxtLink>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
+              <span v-if="component.nuxt3 || component.capi">✅</span>
+              <span v-else>❌</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
               <span v-if="component.capi">✅</span>
@@ -53,7 +60,8 @@
 const components = [
   {
     label: 'Avatar',
-    to: '/components/Avatar'
+    to: '/components/Avatar',
+    nuxt3: true
   },
   {
     label: 'AvatarGroup',
@@ -61,20 +69,26 @@ const components = [
   },
   {
     label: 'Badge',
-    to: '/components/Badge'
+    to: '/components/Badge',
+    nuxt3: true
   },
   {
     label: 'Button',
-    to: '/components/Button'
+    to: '/components/Button',
+    nuxt3: true,
+    capi: true,
+    preset: true
   },
   {
     label: 'Dropdown',
     to: '/components/Dropdown',
+    nuxt3: true,
     capi: true
   },
   {
     label: 'Icon',
     to: '/components/Icon',
+    nuxt3: true,
     capi: true
   },
   {
@@ -83,7 +97,9 @@ const components = [
   },
   {
     label: 'Toggle',
-    to: '/components/Toggle'
+    to: '/components/Toggle',
+    nuxt3: true,
+    capi: true
   },
   {
     label: 'Alert',
@@ -114,6 +130,7 @@ const components = [
   {
     label: 'Select',
     to: '/components/Select',
+    nuxt3: true,
     capi: true,
     preset: true
   },
@@ -124,17 +141,20 @@ const components = [
   {
     label: 'Textarea',
     to: '/components/Textarea',
+    nuxt3: true,
     capi: true,
     preset: true
   },
   {
     label: 'Card',
     to: '/components/Card',
+    nuxt3: true,
     capi: true
   },
   {
     label: 'Container',
     to: '/components/Container',
+    nuxt3: true,
     capi: true
   },
   {
@@ -152,6 +172,7 @@ const components = [
   {
     label: 'Modal',
     to: '/components/Modal',
+    nuxt3: true,
     capi: true
   },
   {
@@ -161,6 +182,7 @@ const components = [
   {
     label: 'Popover',
     to: '/components/Popover',
+    nuxt3: true,
     capi: true
   },
   {
