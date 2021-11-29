@@ -7,6 +7,9 @@
       v-else-if="placeholder"
       class="font-medium leading-none u-text-gray-900 uppercase"
     >{{ placeholder }}</span>
+    <span
+      v-else-if="text"
+    >{{ text }}</span>
     <svg
       v-else
       class="w-full h-full u-text-gray-300"
@@ -34,6 +37,10 @@ export default {
   props: {
     src: {
       type: [String, Boolean],
+      default: null
+    },
+    text: {
+      type: String,
       default: null
     },
     alt: {

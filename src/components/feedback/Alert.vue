@@ -53,10 +53,10 @@ export default {
   computed: {
     iconName () {
       return ({
-        info: 'solid/information-circle',
-        warning: 'solid/exclamation',
-        error: 'solid/x-circle',
-        success: 'solid/check-circle'
+        info: 'heroicons-solid:information-circle',
+        warning: 'heroicons-solid:exclamation',
+        error: 'heroicons-solid:x-circle',
+        success: 'heroicons-solid:check-circle'
       })[this.variant]
     },
     variantClass () {

@@ -16,7 +16,7 @@
 
 <script setup>
 import { Switch } from '@headlessui/vue'
-import Icon from './Icon'
+import Icon from '../elements/Icon'
 
 const props = defineProps({
   modelValue: {

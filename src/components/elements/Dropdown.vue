@@ -2,7 +2,7 @@
   <Menu v-slot="{ open }" as="div" :class="wrapperClass">
     <MenuButton ref="trigger" as="div">
       <slot :open="open">
-        Open
+        <button>Open</button>
       </slot>
     </MenuButton>
 

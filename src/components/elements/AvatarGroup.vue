@@ -1,16 +1,16 @@
 <template>
   <div class="flex">
     <Avatar
-      v-for="(avatar, index) of displayedGroup"
+      v-for="(avatar, index) of avatars"
       :key="index"
       :src="avatar.src"
-      class="shadow-solid -ml-1.5 first:ml-0"
+      class="ring-2 u-ring-white -ml-1.5 first:ml-0"
       :size="size"
       :status="avatar.status"
     />
     <Avatar
       v-if="remainingGroupSize > 0"
-      class="shadow-solid -ml-1.5 first:ml-0 text-[10px]"
+      class="ring-2 u-ring-white -ml-1.5 first:ml-0 text-[10px]"
       :size="size"
       :text="`+${remainingGroupSize}`"
     />
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Avatar from './Avatar.vue'
+import Avatar from './Avatar'
 
 export default {
   components: {
@@ -42,17 +42,21 @@ export default {
     }
   },
   computed: {
+    avatars () {
+      return this.group.map((avatar) => {
+        return typeof avatar === 'string' ? { src: avatar } : avatar
+      })
+    },
     displayedGroup () {
-      if (!this.max) { return this.group }
+      if (!this.max) { return this.avatars }
 
-      return this.group.slice(0, this.max)
+      return this.avatars.slice(0, this.max)
     },
     remainingGroupSize () {
       if (!this.max) { return 0 }
 
-      return this.group.length - this.max
+      return this.avatars.length - this.max
     }
-
   }
 }
 </script>

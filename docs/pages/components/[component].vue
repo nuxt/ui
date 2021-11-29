@@ -6,7 +6,8 @@
 
     <template v-if="props.length" #footer>
       <div class="space-y-3">
-        <UInputGroup
+        <component
+          :is="prop.type === 'Boolean' ? 'UToggleGroup' : 'UInputGroup'"
           v-for="prop of props"
           :key="prop.key"
           class="capitalize"
@@ -46,8 +47,10 @@
             v-model="prop.value"
             :name="prop.key"
             size="sm"
+            rows="8"
+            autoresize
           />
-        </UInputGroup>
+        </component>
       </div>
     </template>
   </UCard>
@@ -63,10 +66,57 @@ const is = `U${params.component}`
 
 const component = nuxtApp.vueApp.component(is)
 
+const defaultProps = {
+  Button: {
+    label: 'Button text'
+  },
+  Badge: {
+    label: 'Badge'
+  },
+  Alert: {
+    title: 'A new software update is available. See what’s new in version 2.0.4.'
+  },
+  Avatar: {
+    src: 'https://picsum.photos/200/300'
+  },
+  AvatarGroup: {
+    group: ['https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80', 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80', 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80']
+  },
+  Dropdown: {
+    items: [
+      [{
+        label: 'Edit',
+        icon: 'heroicons-solid:pencil'
+      }, {
+        label: 'Duplicate',
+        icon: 'heroicons-solid:duplicate'
+      }],
+      [{
+        label: 'Archive',
+        icon: 'heroicons-solid:archive'
+      }, {
+        label: 'Move',
+        icon: 'heroicons-solid:external-link'
+      }],
+      [{
+        label: 'Delete',
+        icon: 'heroicons-solid:trash'
+      }]
+    ]
+  },
+  Icon: {
+    name: 'heroicons-outline:bell'
+  },
+  Select: {
+    options: ['English', 'Spanish', 'French', 'German', 'Chinese']
+  }
+}
+
 const { props: componentProps } = await component.__asyncLoader()
 
 const refProps = Object.entries(componentProps).map(([key, prop]) => {
-  let value = typeof prop.default === 'function' ? prop.default() : prop.default
+  const defaultValue = (defaultProps[params.component] || {})[key]
+  let value = defaultValue || (typeof prop.default === 'function' ? prop.default() : prop.default)
   let type = prop.type
   if (Array.isArray(type)) {
     type = type[0].name
