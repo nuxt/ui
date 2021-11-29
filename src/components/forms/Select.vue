@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import get from 'lodash/get'
+import { get } from 'lodash-es'
 import Icon from '../elements/Icon'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'

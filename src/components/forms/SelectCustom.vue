@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import get from 'lodash/get'
+import { get } from 'lodash-es'
 import { createPopper } from '@popperjs/core'
 // import { directive as onClickaway } from 'vue-clickaway'
 
