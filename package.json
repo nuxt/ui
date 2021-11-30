@@ -34,7 +34,7 @@
     "pathe": "^0.2.0"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config-typescript": "8.0.0",
+    "@nuxtjs/eslint-config-typescript": "7.0.2",
     "@types/lodash-es": "^4.17.5",
     "@vueuse/components": "^7.1.2",
     "@vueuse/core": "^7.1.2",
