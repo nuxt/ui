@@ -107,8 +107,21 @@ const defaultProps = {
   Icon: {
     name: 'heroicons-outline:bell'
   },
+  Input: {
+    name: 'input'
+  },
+  Checkbox: {
+    name: 'checkbox'
+  },
+  Radio: {
+    name: 'radio'
+  },
   Select: {
+    name: 'select',
     options: ['English', 'Spanish', 'French', 'German', 'Chinese']
+  },
+  Textarea: {
+    name: 'textarea'
   }
 }
 

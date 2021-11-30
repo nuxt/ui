@@ -12,7 +12,15 @@ export default defineNuxtConfig({
     },
     bodyAttrs: {
       class: 'u-bg-gray-50 u-text-gray-700'
-    }
+    },
+    link: [
+      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Inter&family=Fira+Code&display=swap'
+      }
+    ]
   },
   buildModules: [
     '../src'
@@ -20,6 +28,14 @@ export default defineNuxtConfig({
   ui: {
     colors: {
       primary: 'blue'
+    },
+    unocss: {
+      theme: {
+        fontFamily: {
+          sans: '\'Inter\', sans-serif',
+          mono: '\'Fira Code\', monospace'
+        }
+      }
     }
   }
 })
