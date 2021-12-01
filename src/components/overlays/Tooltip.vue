@@ -1,77 +1,62 @@
 
 <template>
-  <div ref="container" @mouseover="mouseover" @mouseleave="mouseleave">
-    <slot />
+  <div ref="trigger" :class="wrapperClass" @mouseover="open = true" @mouseleave="open = false">
+    <slot :open="open">
+      Hover me
+    </slot>
 
-    <transition
-      enter-class="transform scale-95 opacity-0"
-      enter-active-class="transition duration-100 ease-out"
-      enter-to-class="transform scale-100 opacity-100"
-      leave-class="opacity-100"
-      leave-active-class="duration-100 ease-in"
-      leave-to-class="opacity-0"
-    >
-      <div
-        v-show="show && (text || shortcuts.length || $slots.text)"
-        ref="tooltip"
-        class="fixed z-30 flex bg-gray-800 items-center justify-center invisible w-auto h-6 max-w-xs px-2 space-x-1 truncate rounded shadow lg:visible"
+    <div v-if="open" ref="container" :class="containerClass">
+      <transition
+        appear
+        enter-active-class="transition ease-out duration-200"
+        enter-from-class="opacity-0 translate-y-1"
+        enter-to-class="opacity-100 translate-y-0"
+        leave-active-class="transition ease-in duration-150"
+        leave-from-class="opacity-100 translate-y-0"
+        leave-to-class="opacity-0 translate-y-1"
       >
-        <span v-if="text || $slots.text" class="truncate text-gray-50 text-xxs">
-          <slot name="text">{{ text }}</slot>
-        </span>
-        <div v-if="shortcuts && shortcuts.length">
-          <div class="flex items-center flex-shrink-0 h-6 space-x-1">
-            <span v-if="text" class="mb-2 text-center text-gray-500">.</span>
-            <div
-              v-for="(shortcut, index) of shortcuts"
-              :key="index"
-              class="flex items-center px-1 bg-gray-600 rounded"
-            >
-              <span
-                class="font-light text-center text-gray-200 text-xxs"
-              >{{ shortcut }}</span>
-            </div>
-          </div>
+        <div :class="tooltipClass">
+          <slot name="text">
+            {{ text }}
+          </slot>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
-// import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-
 import { usePopper } from '../../utils'
 
 export default {
-  // components: {
-  //   Popover,
-  //   PopoverButton,
-  //   PopoverPanel
-  // },
   props: {
+    text: {
+      type: String,
+      default: null
+    },
     placement: {
       type: String,
       default: 'bottom'
     },
     strategy: {
       type: String,
-      default: 'absolute'
+      default: 'fixed'
     },
     wrapperClass: {
       type: String,
       default: 'relative'
     },
-    tooltipClass: {
+    containerClass: {
       type: String,
       default: 'z-10'
     },
-    label: {
+    tooltipClass: {
       type: String,
-      default: ''
+      default: 'flex items-center justify-center invisible w-auto h-6 max-w-xs px-2 space-x-1 truncate rounded shadow lg:visible u-bg-gray-800 truncate u-text-gray-50 text-xs'
     }
   },
   setup (props) {
+    const open = ref(false)
     const [trigger, container] = usePopper({
       placement: props.placement,
       strategy: props.strategy,
@@ -97,6 +82,7 @@ export default {
     })
 
     return {
+      open,
       trigger,
       container
     }

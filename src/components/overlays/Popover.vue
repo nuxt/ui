@@ -2,7 +2,7 @@
   <Popover v-slot="{ open }" :class="wrapperClass">
     <PopoverButton ref="trigger" as="div">
       <slot :open="open">
-        Open
+        <button>Open</button>
       </slot>
     </PopoverButton>
 
