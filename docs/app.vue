@@ -18,8 +18,8 @@
 
     <UContainer class="mt-16">
       <div class="lg:grid lg:grid-cols-12 lg:gap-10 lg:relative">
-        <aside class="lg:flex lg:flex-col lg:relative pb-8 lg:pb-0 lg:sticky lg:top-0 px-4 sm:px-6 lg:px-0 lg:pt-16 lg:-mt-16 lg:self-start lg:col-span-3 lg:overflow-hidden sticky h-screen">
-          <nav class="overflow-y-auto h-auto py-12">
+        <aside class="lg:flex lg:flex-col lg:relative pb-8 lg:pb-0 lg:sticky lg:top-0 px-4 sm:px-6 lg:px-0 lg:pt-16 lg:-mt-16 lg:self-start lg:col-span-3 lg:overflow-hidden lg:sticky lg:h-screen">
+          <nav class="overflow-y-auto h-auto pt-8 lg:py-12">
             <ul class="space-y-6">
               <li v-for="section of sections" :key="section">
                 <h5 class="mb-3 uppercase tracking-wide font-semibold text-xs u-text-gray-900">
@@ -43,7 +43,7 @@
           </nav>
         </aside>
 
-        <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9 py-12">
+        <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9 lg:py-12">
           <NuxtPage />
         </div>
       </div>

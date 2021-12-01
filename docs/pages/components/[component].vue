@@ -1,5 +1,5 @@
 <template>
-  <UCard v-if="component" class="relative flex flex-col" body-class="px-4 py-5 sm:p-6 relative" footer-class="px-4 py-4 sm:px-6 flex-1 lg:overflow-y-auto" style="max-height: calc(100vh - 10rem);">
+  <UCard v-if="component" class="relative flex flex-col lg:max-h-[calc(100vh-10rem)]" body-class="px-4 py-5 sm:p-6 relative" footer-class="px-4 py-4 sm:px-6 flex-1 lg:overflow-y-auto">
     <div class="flex justify-center">
       <component :is="is" v-bind="boundProps" />
     </div>
@@ -47,7 +47,7 @@
             v-model="prop.value"
             :name="prop.key"
             size="sm"
-            rows="8"
+            :rows="8"
             autoresize
           />
         </component>
@@ -122,6 +122,9 @@ const defaultProps = {
   },
   Textarea: {
     name: 'textarea'
+  },
+  Tooltip: {
+    text: 'Tooltip text'
   }
 }
 
