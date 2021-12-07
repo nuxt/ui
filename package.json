@@ -38,7 +38,7 @@
     "@types/lodash-es": "^4.17.5",
     "@vueuse/components": "^7.1.2",
     "@vueuse/core": "^7.1.2",
-    "eslint": "8.3.0",
+    "eslint": "8.4.1",
     "nuxt3": "3.0.0-27303148.ac98373",
     "unbuild": "0.5.13"
   }
