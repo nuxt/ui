@@ -110,6 +110,14 @@ const defaultProps = {
   Input: {
     name: 'input'
   },
+  InputGroup: {
+    name: 'input',
+    label: 'Input group'
+  },
+  ToggleGroup: {
+    name: 'input',
+    label: 'Toggle group'
+  },
   Checkbox: {
     name: 'checkbox'
   },

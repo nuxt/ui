@@ -102,6 +102,13 @@ const components = [
     capi: true
   },
   {
+    label: 'ToggleGroup',
+    to: '/components/ToggleGroup',
+    nuxt3: true,
+    capi: true,
+    preset: true
+  },
+  {
     label: 'Alert',
     to: '/components/Alert'
   },
@@ -117,7 +124,10 @@ const components = [
   },
   {
     label: 'InputGroup',
-    to: '/components/InputGroup'
+    to: '/components/InputGroup',
+    nuxt3: true,
+    capi: true,
+    preset: true
   },
   {
     label: 'Radio',

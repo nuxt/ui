@@ -98,6 +98,18 @@ const input = {
   }
 }
 
+const inputGroup = {
+  label: 'block text-sm font-medium u-text-gray-700',
+  container: 'mt-1 relative',
+  required: 'text-red-400',
+  hint: 'text-sm leading-5 u-text-gray-500',
+  help: 'mt-2 text-sm u-text-gray-500'
+}
+
+const toggleGroup = {
+  ...inputGroup
+}
+
 const textarea = {
   ...input
 }
@@ -184,6 +196,8 @@ const button = {
 
 export default {
   input,
+  inputGroup,
+  toggleGroup,
   textarea,
   select,
   button
