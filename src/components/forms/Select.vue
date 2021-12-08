@@ -84,15 +84,15 @@ export default {
     },
     wrapperClass: {
       type: String,
-      default: $ui.select.wrapper
+      default: () => $ui.select.wrapper
     },
     baseClass: {
       type: String,
-      default: $ui.select.base
+      default: () => $ui.select.base
     },
     iconBaseClass: {
       type: String,
-      default: $ui.select.icon.base
+      default: () => $ui.select.icon.base
     },
     customClass: {
       type: String,

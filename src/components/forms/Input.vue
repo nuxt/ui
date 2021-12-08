@@ -103,7 +103,7 @@ export default {
     },
     wrapperClass: {
       type: String,
-      default: $ui.input.wrapper
+      default: () => $ui.input.wrapper
     },
     baseClass: {
       type: String,

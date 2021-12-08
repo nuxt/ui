@@ -81,11 +81,11 @@ export default {
     },
     wrapperClass: {
       type: String,
-      default: $ui.textarea.wrapper
+      default: () => $ui.textarea.wrapper
     },
     baseClass: {
       type: String,
-      default: $ui.textarea.base
+      default: () => $ui.textarea.base
     },
     customClass: {
       type: String,
