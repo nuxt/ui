@@ -207,6 +207,8 @@ export default defineNuxtModule<UiOptions>({
       watch: false
     })
 
+    nuxt.options.css.push(resolve(__dirname, './css/forms.css'))
+
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@nuxthq/ui')
   }
 })

@@ -3,7 +3,8 @@ export default {
     './src/index',
     { input: './src/components/', outDir: 'dist/components' },
     { input: './src/presets/', outDir: 'dist/presets' },
-    { input: './src/utils/', outDir: 'dist/utils' }
+    { input: './src/utils/', outDir: 'dist/utils' },
+    { input: './src/css/', outDir: 'dist/css' }
   ],
   declaration: true,
   externals: [
