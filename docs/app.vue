@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="antialiased font-sans">
     <nav class="u-bg-white border-b u-border-gray-200 fixed top-0 inset-x-0 z-10">
       <UContainer padded>
         <div class="flex items-center justify-between h-16">
