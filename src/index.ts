@@ -1,5 +1,5 @@
 import { resolve } from 'pathe'
-import { defineNuxtModule, installModule, addComponentsDir, addTemplate, resolveModule } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addTemplate, resolveModule, addPlugin } from '@nuxt/kit'
 import { colors } from '@unocss/preset-uno'
 import defu from 'defu'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
@@ -175,6 +175,10 @@ export default defineNuxtModule<UiOptions>({
       filename: 'ui.mjs',
       getContents: () => `/* @unocss-include */ export default ${JSON.stringify(ui)}`
     })
+
+    addPlugin(resolve(__dirname, './plugins/ticker.client'))
+    addPlugin(resolve(__dirname, './plugins/timer.client'))
+    addPlugin(resolve(__dirname, './plugins/toast.client'))
 
     addComponentsDir({
       path: resolve(__dirname, './components/elements'),

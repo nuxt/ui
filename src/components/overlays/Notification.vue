@@ -31,14 +31,9 @@
                 variant="white"
                 size="xs"
                 class="mt-2"
-                @click.native.stop="cancel"
+                @click.stop="cancel"
               >
                 Undo
-                <div class="inline-flex items-center rounded u-bg-gray-200 ml-1.5">
-                  <span class="w-full px-1 text-center u-text-gray-600 text-xxs">
-                    Z
-                  </span>
-                </div>
               </Button>
             </div>
             <div class="flex-shrink-0 ml-4">
@@ -47,7 +42,7 @@
                 @click.stop="close"
               >
                 <span class="sr-only">Close</span>
-                <Icon name="outline/x" class="w-5 h-5" />
+                <Icon name="heroicons-solid:x" class="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -117,10 +112,10 @@ export default {
   computed: {
     iconName () {
       return this.icon || ({
-        warning: 'solid/exclamation-circle',
-        info: 'solid/information-circle',
-        success: 'solid/check-circle',
-        error: 'solid/x-circle'
+        warning: 'heroicons-outline:exclamation-circle',
+        info: 'heroicons-outline:information-circle',
+        success: 'heroicons-outline:check-circle',
+        error: 'heroicons-outline:x-circle'
       })[this.type]
     },
     iconClass () {

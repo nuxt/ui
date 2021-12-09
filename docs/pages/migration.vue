@@ -187,7 +187,13 @@ const components = [
   },
   {
     label: 'Notification',
-    to: '/components/Notification'
+    to: '/components/Notification',
+    nuxt3: true
+  },
+  {
+    label: 'Notifications',
+    to: '/components/Notifications',
+    nuxt3: true
   },
   {
     label: 'Popover',
@@ -201,7 +207,8 @@ const components = [
   },
   {
     label: 'Tooltip',
-    to: '/components/Tooltip'
+    to: '/components/Tooltip',
+    nuxt3: true
   }
 ]
 </script>

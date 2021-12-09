@@ -15,6 +15,9 @@
       "node",
       "@nuxt/kit"
     ],
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "#app": ["./node_modules/nuxt3/dist/app"]
+    }
   }
 }

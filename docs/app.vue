@@ -48,6 +48,10 @@
         </div>
       </div>
     </UContainer>
+
+    <ClientOnly>
+      <UNotifications />
+    </ClientOnly>
   </div>
 </template>
 
@@ -56,7 +60,7 @@ import { UseDark } from '@vueuse/components'
 
 const sections = [
   { label: 'Getting Started', links: [{ label: 'Usage', to: '/' }, { label: 'Examples', to: '/examples' }, { label: 'Migration', to: '/migration' }, { label: 'Dark mode', to: '/dark' }] },
-  { label: 'Elements', links: [{ label: 'Avatar', to: '/components/Avatar' }, { label: 'AvatarGroup', to: '/components/AvatarGroup' }, { label: 'Badge', to: '/components/Badge' }, { label: 'Button', to: '/components/Button' }, { label: 'Dropdown', to: '/components/Dropdown' }, { label: 'Icon', to: '/components/Icon' }, { label: 'Link', to: '/components/Link' }] },
+  { label: 'Elements', links: [{ label: 'Avatar', to: '/components/Avatar' }, { label: 'AvatarGroup', to: '/components/AvatarGroup' }, { label: 'Badge', to: '/components/Badge' }, { label: 'Button', to: '/components/Button' }, { label: 'Dropdown', to: '/components/Dropdown' }, { label: 'Icon', to: '/components/Icon' }] },
   { label: 'Feedback', links: [{ label: 'Alert', to: '/components/Alert' }] },
   { label: 'Forms', links: [{ label: 'Checkbox', to: '/components/Checkbox' }, { label: 'Input', to: '/components/Input' }, { label: 'InputGroup', to: '/components/InputGroup' }, { label: 'Radio', to: '/components/Radio' }, { label: 'RadioGroup', to: '/components/RadioGroup' }, { label: 'Select', to: '/components/Select' }, { label: 'SelectCustom', to: '/components/SelectCustom' }, { label: 'Textarea', to: '/components/Textarea' }, { label: 'Toggle', to: '/components/Toggle' }, { label: 'ToggleGroup', to: '/components/ToggleGroup' }] },
   { label: 'Layout', links: [{ label: 'Card', to: '/components/Card' }, { label: 'Container', to: '/components/Container' }] },

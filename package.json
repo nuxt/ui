@@ -31,6 +31,7 @@
     "defu": "^5.0.0",
     "gradient-avatar": "^1.0.2",
     "lodash-es": "^4.17.21",
+    "nanoid": "^3.1.30",
     "pathe": "^0.2.0"
   },
   "devDependencies": {

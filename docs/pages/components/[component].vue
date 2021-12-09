@@ -1,7 +1,11 @@
 <template>
   <UCard v-if="component" class="relative flex flex-col lg:max-h-[calc(100vh-10rem)]" body-class="px-4 py-5 sm:p-6 relative" footer-class="px-4 py-4 sm:px-6 flex-1 lg:overflow-y-auto">
     <div class="flex justify-center">
-      <component :is="is" v-bind="boundProps" />
+      <component :is="is" v-bind="boundProps">
+        <template v-if="defaultProps[params.component].slot" #default>
+          <component :is="`U${defaultProps[params.component].slot}`" v-bind="defaultProps[defaultProps[params.component].slot]" />
+        </template>
+      </component>
     </div>
 
     <template v-if="props.length" #footer>
@@ -108,11 +112,13 @@ const defaultProps = {
     name: 'heroicons-outline:bell'
   },
   Input: {
-    name: 'input'
+    name: 'input',
+    placeholder: 'Enter text'
   },
   InputGroup: {
     name: 'input',
-    label: 'Input group'
+    label: 'Input group',
+    slot: 'Input'
   },
   ToggleGroup: {
     name: 'input',
@@ -133,6 +139,11 @@ const defaultProps = {
   },
   Tooltip: {
     text: 'Tooltip text'
+  },
+  Notification: {
+    id: '1',
+    title: 'Notification title',
+    callback: 'alert(\'Timer expired\')'
   }
 }
 
@@ -181,8 +192,22 @@ const props = ref(refProps)
 const boundProps = computed(() => {
   const bound = {}
   for (const prop of props.value) {
+    let value = prop.value
+    if (!value) {
+      continue
+    }
+
     try {
-      bound[prop.key] = prop.type === 'Array' ? JSON.parse(prop.value) : prop.value
+      if (prop.type === 'Array') {
+        value = JSON.parse(value)
+      } else if (prop.type === 'Number') {
+        value = Number(value)
+      } else if (prop.type === 'Function') {
+        // eslint-disable-next-line no-new-func
+        value = Function(value)
+      }
+
+      bound[prop.key] = value
     } catch (e) {
       continue
     }
