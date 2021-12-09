@@ -59,7 +59,7 @@ const input = {
     }
   },
   appearance: {
-    default: 'focus:ring-1 focus:ring-primary-500 focus:border-primary-500 border u-border-gray-300 rounded-md shadow-sm',
+    default: 'focus:ring-1 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 border u-border-gray-300 rounded-md shadow-sm',
     none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {

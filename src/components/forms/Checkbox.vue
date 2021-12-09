@@ -68,7 +68,7 @@ export default {
     },
     baseClass: {
       type: String,
-      default: 'h-4 w-4 text-primary-600 focus:ring-primary-500 u-border-gray-300 bg-white dark:bg-gray-800 dark:checked:bg-primary-600 dark:checked:border-primary-600 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed rounded'
+      default: 'h-4 w-4 text-primary-600 focus:ring-1 focus:ring-primary-500 u-border-gray-300 focus:border-primary-500 dark:focus:border-primary-500 u-bg-white dark:checked:bg-primary-600 dark:checked:border-primary-600 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed rounded'
     },
     customClass: {
       type: String,

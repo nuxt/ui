@@ -16,45 +16,6 @@ textarea {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	background-color: #fff;
-	border-color: #6b7280;
-	border-width: 1px;
-	border-radius: 0;
-	padding-top: .5rem;
-	padding-right: .75rem;
-	padding-bottom: .5rem;
-	padding-left: .75rem;
-	font-size: 1rem;
-	line-height: 1.5rem
-}
-
-[multiple]:focus,
-[type=date]:focus,
-[type=datetime-local]:focus,
-[type=email]:focus,
-[type=month]:focus,
-[type=number]:focus,
-[type=password]:focus,
-[type=search]:focus,
-[type=tel]:focus,
-[type=text]:focus,
-[type=time]:focus,
-[type=url]:focus,
-[type=week]:focus,
-select:focus,
-textarea:focus {
-	outline: 2px solid transparent;
-	outline-offset: 2px;
-	--tw-ring-inset: var(--tw-empty, );
-	/*!*/
-	/*!*/
-	--tw-ring-offset-width: 0px;
-	--tw-ring-offset-color: #fff;
-	--tw-ring-color: #2563eb;
-	--tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-	--tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-	box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-	border-color: #2563eb
 }
 
 input::-moz-placeholder,
@@ -121,10 +82,7 @@ select {
 	flex-shrink: 0;
 	height: 1rem;
 	width: 1rem;
-	color: #2563eb;
-	background-color: #fff;
-	border-color: #6b7280;
-	border-width: 1px
+	border-width: 1px;
 }
 
 [type=checkbox] {
@@ -133,21 +91,6 @@ select {
 
 [type=radio] {
 	border-radius: 100%
-}
-
-[type=checkbox]:focus,
-[type=radio]:focus {
-	outline: 2px solid transparent;
-	outline-offset: 2px;
-	--tw-ring-inset: var(--tw-empty, );
-	/*!*/
-	/*!*/
-	--tw-ring-offset-width: 2px;
-	--tw-ring-offset-color: #fff;
-	--tw-ring-color: #2563eb;
-	--tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-	--tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-	box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
 }
 
 [type=checkbox]:checked,

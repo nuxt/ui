@@ -60,7 +60,7 @@ export default {
     },
     baseClass: {
       type: String,
-      default: 'h-4 w-4 mt-0.5 text-primary-600 checked:border-primary-600 u-border-gray-300 u-bg-white dark:checked:bg-primary-600 focus:ring-offset-white dark:focus:ring-offset-gray-900 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+      default: 'h-4 w-4 mt-0.5 text-primary-600 checked:border-primary-600 dark:checked:border-primary-600 focus:ring-1 focus:ring-primary-500 u-border-gray-300 u-bg-white dark:checked:bg-primary-600 focus:ring-offset-white dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed'
     },
     customClass: {
       type: String,
