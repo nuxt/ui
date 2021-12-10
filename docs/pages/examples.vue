@@ -175,20 +175,47 @@
         Card:
       </div>
 
-      <UCard @submit.prevent="onSubmit">
-        <UFormGroup label="Email" name="email" class="mb-3" required>
-          <UInput type="email" name="email" required />
-        </UFormGroup>
+      <UCard body-class="flex" @submit.prevent="onSubmit">
+        <div class="flex-1 px-4 py-5 sm:p-6 space-y-3">
+          <UFormGroup label="Email" name="email" required>
+            <UInput v-model="form.email" type="email" name="email" required />
+          </UFormGroup>
 
-        <UFormGroup label="Description" name="description" class="mb-3">
-          <UTextarea type="description" name="description" autoresize />
-        </UFormGroup>
+          <UFormGroup label="Description" name="description">
+            <UTextarea v-model="form.description" type="description" name="description" autoresize />
+          </UFormGroup>
 
-        <UFormGroup label="Toggle" name="toggle" class="mb-3">
-          <UToggle v-model="isSwitchEnabled" name="toggle" icon-off="heroicons-solid:x" icon-on="heroicons-solid:check" />
-        </UFormGroup>
+          <UFormGroup label="Toggle" name="toggle">
+            <UToggle v-model="form.toggle" name="toggle" icon-off="heroicons-solid:x" icon-on="heroicons-solid:check" />
+          </UFormGroup>
 
-        <UButton type="submit" label="Submit" />
+          <UFormGroup label="Notifications" label-class="text-base font-medium u-text-gray-900" description="How do you prefer to receive notifications?">
+            <div class="space-y-4 mt-3">
+              <URadio v-model="form.notification" value="email" label="Email" help="Email" />
+              <URadio v-model="form.notification" value="phone" label="Phone (SMS)" help="Phone (SMS)" />
+              <URadio v-model="form.notification" value="push" label="Push notification" help="Push notification" />
+            </div>
+          </UFormGroup>
+
+          <UCard body-class="px-4 py-5 space-y-5">
+            <UCheckbox v-model="form.notifications" name="comments" value="comments" label="Comments" help="Get notified when someones posts a comment on a posting." />
+            <UCheckbox v-model="form.notifications" name="candidates" value="candidates" label="Candidates" help="Get notified when a candidate applies for a job." />
+            <UCheckbox v-model="form.notifications" name="offers" value="offers" label="Offers" help="Get notified when a candidate accepts or rejects an offer." />
+          </UCard>
+
+          <div>
+            <UCheckbox v-model="form.terms" label="I agree to the terms and conditions" name="terms" />
+          </div>
+
+          <div class="flex justify-end">
+            <UButton type="submit" label="Submit" class="ml-auto" />
+          </div>
+        </div>
+        <div class="w-1/3 px-4 py-5 sm:p-6 border-l u-border-gray-200 u-bg-gray-50">
+          <pre>
+{{ form }}
+          </pre>
+        </div>
       </UCard>
     </div>
   </div>
@@ -196,7 +223,7 @@
 
 <script setup>
 const isModalOpen = ref(false)
-const isSwitchEnabled = ref(false)
+const form = reactive({ email: '', description: '', toggle: false, notification: 'email', notifications: [], terms: false })
 
 const { $toast } = useNuxtApp()
 

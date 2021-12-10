@@ -1,6 +1,8 @@
 <template>
-  <UCard v-if="component" class="relative flex flex-col lg:max-h-[calc(100vh-10rem)]" body-class="px-4 py-5 sm:p-6 relative" footer-class="px-4 py-4 sm:px-6 flex-1 lg:overflow-y-auto">
+  <UCard v-if="component" class="relative flex flex-col lg:h-[calc(100vh-10rem)]" body-class="px-4 py-5 sm:p-6 relative" footer-class="flex flex-col flex-1 overflow-hidden">
     <div class="flex justify-center">
+      <component :is="`U${defaultProps[params.component].component.name}`" v-if="defaultProps[params.component] && defaultProps[params.component].component" v-bind="defaultProps[params.component].component.props" />
+
       <component :is="is" v-bind="{ ...boundProps, ...eventProps }">
         <template v-for="[key, slot] of Object.entries(defaultProps[params.component]?.slots || {}) || []" #[key]>
           <template v-if="Array.isArray(slot)">
@@ -23,7 +25,7 @@
     </div>
 
     <template v-if="props.length" #footer>
-      <div class="space-y-3">
+      <div class="flex-1 px-4 py-5 sm:p-6 space-y-3 lg:overflow-y-auto">
         <UFormGroup
           v-for="prop of props"
           :key="prop.key"
@@ -68,6 +70,21 @@
             autoresize
           />
         </UFormGroup>
+      </div>
+
+      <div class="border-t u-border-gray-200 u-bg-gray-50">
+        <pre class="text-sm leading-6 u-text-gray-900 flex-1 relative flex ligatures-none lg:overflow-y-auto overflow-x-hidden px-4 sm:px-6 py-5 sm:py-6">
+          <code class="flex-none min-w-full whitespace-pre-wrap break-all">{{ code }}</code>
+
+          <UButton
+            class="absolute top-0 right-0"
+            :icon="copied ? 'heroicons-outline:clipboard-check' : 'heroicons-outline:clipboard'"
+            variant="transparent"
+            size="sm"
+            :custom-class="copied && '!text-green-500'"
+            @click="onCopy"
+          />
+        </pre>
       </div>
     </template>
   </UCard>
@@ -154,20 +171,6 @@ const defaultProps = {
   Radio: {
     name: 'radio'
   },
-  RadioGroup: {
-    name: 'radio',
-    label: 'Radio group',
-    options: [
-      {
-        label: 'Option 1',
-        value: 'option-1'
-      },
-      {
-        label: 'Option 2',
-        value: 'option-2'
-      }
-    ]
-  },
   Select: {
     name: 'select',
     options: ['English', 'Spanish', 'French', 'German', 'Chinese']
@@ -186,6 +189,14 @@ const defaultProps = {
   Modal: {
     modelValue: modal,
     'onUpdate:modelValue': (v) => { modal.value = v },
+    component: {
+      name: 'Button',
+      props: {
+        variant: 'secondary',
+        label: 'Open modal',
+        onClick: () => { modal.value = true }
+      }
+    },
     slots: {
       default: {
         tag: 'div',
@@ -216,7 +227,8 @@ const { props: componentProps } = await component.__asyncLoader()
 
 const refProps = Object.entries(componentProps).map(([key, prop]) => {
   const defaultValue = componentDefaultProps[key]
-  let value = defaultValue || (typeof prop.default === 'function' ? prop.default() : prop.default)
+  const propDefault = (typeof prop.default === 'function' ? prop.default() : prop.default)
+  let value = defaultValue || propDefault
   let type = prop.type
   if (Array.isArray(type)) {
     type = type[0].name
@@ -249,7 +261,8 @@ const refProps = Object.entries(componentProps).map(([key, prop]) => {
     key,
     type,
     value,
-    values
+    values,
+    default: propDefault
   }
 })
 
@@ -265,7 +278,7 @@ const boundProps = computed(() => {
   const bound = {}
   for (const prop of props.value) {
     let value = prop.value
-    if (!value) {
+    if (value === null) {
       continue
     }
 
@@ -285,5 +298,36 @@ const boundProps = computed(() => {
     }
   }
   return bound
+})
+
+function toKebabCase (str) {
+  return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+}
+
+const copied = ref(false)
+const onCopy = () => {
+  navigator.clipboard.writeText(code.value).then(() => {
+    copied.value = true
+    setTimeout(() => {
+      copied.value = false
+    }, 2000)
+  })
+}
+
+const code = computed(() => {
+  let code = `<U${params.component}`
+  for (const prop of props.value) {
+    if (prop.value === null) {
+      continue
+    }
+    if (prop.value === prop.default) {
+      continue
+    }
+
+    const key = toKebabCase(prop.key)
+    code += `\n  ${prop.type === 'Boolean' ? ':' : ''}${key === 'model-value' ? 'v-model' : key}="${prop.value}"`
+  }
+  code += '\n/>'
+  return code
 })
 </script>

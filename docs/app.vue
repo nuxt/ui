@@ -17,8 +17,8 @@
     </nav>
 
     <UContainer class="mt-16">
-      <div class="lg:grid lg:grid-cols-12 lg:gap-10 lg:relative">
-        <aside class="lg:flex lg:flex-col lg:relative pb-8 lg:pb-0 lg:sticky lg:top-0 px-4 sm:px-6 lg:px-0 lg:pt-16 lg:-mt-16 lg:self-start lg:col-span-3 lg:overflow-hidden lg:sticky lg:h-screen">
+      <div class="lg:grid lg:grid-cols-10 lg:gap-10 lg:relative">
+        <aside class="lg:flex lg:flex-col lg:relative pb-8 lg:pb-0 lg:sticky lg:top-0 px-4 sm:px-6 lg:px-0 lg:pt-16 lg:-mt-16 lg:self-start lg:col-span-2 lg:overflow-hidden lg:sticky lg:h-screen">
           <nav class="overflow-y-auto h-auto pt-8 lg:py-12">
             <ul class="space-y-6">
               <li v-for="section of sections" :key="section">
@@ -43,7 +43,7 @@
           </nav>
         </aside>
 
-        <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9 lg:py-12">
+        <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-8 lg:py-12">
           <NuxtPage />
         </div>
       </div>
@@ -62,7 +62,7 @@ const sections = [
   { label: 'Getting Started', links: [{ label: 'Usage', to: '/' }, { label: 'Examples', to: '/examples' }, { label: 'Migration', to: '/migration' }, { label: 'Dark mode', to: '/dark' }] },
   { label: 'Elements', links: [{ label: 'Avatar', to: '/components/Avatar' }, { label: 'AvatarGroup', to: '/components/AvatarGroup' }, { label: 'Badge', to: '/components/Badge' }, { label: 'Button', to: '/components/Button' }, { label: 'Dropdown', to: '/components/Dropdown' }, { label: 'Icon', to: '/components/Icon' }] },
   { label: 'Feedback', links: [{ label: 'Alert', to: '/components/Alert' }] },
-  { label: 'Forms', links: [{ label: 'Checkbox', to: '/components/Checkbox' }, { label: 'Input', to: '/components/Input' }, { label: 'FormGroup', to: '/components/FormGroup' }, { label: 'Radio', to: '/components/Radio' }, { label: 'RadioGroup', to: '/components/RadioGroup' }, { label: 'Select', to: '/components/Select' }, { label: 'SelectCustom', to: '/components/SelectCustom' }, { label: 'Textarea', to: '/components/Textarea' }, { label: 'Toggle', to: '/components/Toggle' }] },
+  { label: 'Forms', links: [{ label: 'Checkbox', to: '/components/Checkbox' }, { label: 'Input', to: '/components/Input' }, { label: 'FormGroup', to: '/components/FormGroup' }, { label: 'Radio', to: '/components/Radio' }, { label: 'Select', to: '/components/Select' }, { label: 'SelectCustom', to: '/components/SelectCustom' }, { label: 'Textarea', to: '/components/Textarea' }, { label: 'Toggle', to: '/components/Toggle' }] },
   { label: 'Layout', links: [{ label: 'Card', to: '/components/Card' }, { label: 'Container', to: '/components/Container' }] },
   { label: 'Navigation', links: [{ label: 'Pills', to: '/components/Pills' }, { label: 'Tabs', to: '/components/Tabs' }, { label: 'VerticalNavigation', to: '/components/VerticalNavigation' }] },
   { label: 'Overlays', links: [{ label: 'Modal', to: '/components/Modal' }, { label: 'Notification', to: '/components/Notification' }, { label: 'Popover', to: '/components/Popover' }, { label: 'Tooltip', to: '/components/Tooltip' }] }

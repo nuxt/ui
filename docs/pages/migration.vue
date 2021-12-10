@@ -65,7 +65,8 @@ const components = [
   },
   {
     label: 'AvatarGroup',
-    to: '/components/AvatarGroup'
+    to: '/components/AvatarGroup',
+    nuxt3: true
   },
   {
     label: 'Badge',
@@ -106,10 +107,6 @@ const components = [
     to: '/components/Alert'
   },
   {
-    label: 'Checkbox',
-    to: '/components/Checkbox'
-  },
-  {
     label: 'Input',
     to: '/components/Input',
     capi: true,
@@ -123,12 +120,18 @@ const components = [
     preset: true
   },
   {
-    label: 'Radio',
-    to: '/components/Radio'
+    label: 'Checkbox',
+    to: '/components/Checkbox',
+    nuxt3: true,
+    capi: true,
+    preset: true
   },
   {
-    label: 'RadioGroup',
-    to: '/components/RadioGroup'
+    label: 'Radio',
+    to: '/components/Radio',
+    nuxt3: true,
+    capi: true,
+    preset: true
   },
   {
     label: 'Select',
@@ -152,12 +155,14 @@ const components = [
     label: 'Card',
     to: '/components/Card',
     nuxt3: true,
-    capi: true
+    capi: true,
+    preset: true
   },
   {
     label: 'Container',
     to: '/components/Container',
     nuxt3: true,
+    preset: true,
     capi: true
   },
   {
@@ -186,7 +191,8 @@ const components = [
   {
     label: 'Notifications',
     to: '/components/Notifications',
-    nuxt3: true
+    nuxt3: true,
+    capi: true
   },
   {
     label: 'Popover',
@@ -197,7 +203,8 @@ const components = [
   {
     label: 'Tooltip',
     to: '/components/Tooltip',
-    nuxt3: true
+    nuxt3: true,
+    capi: true
   }
 ]
 </script>
