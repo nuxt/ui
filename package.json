@@ -27,7 +27,7 @@
     "@iconify-json/heroicons-outline": "^1.0.2",
     "@iconify-json/heroicons-solid": "^1.0.2",
     "@popperjs/core": "^2.11.0",
-    "@unocss/nuxt": "^0.15.6",
+    "@unocss/nuxt": "^0.16.0",
     "defu": "^5.0.0",
     "gradient-avatar": "^1.0.2",
     "lodash-es": "^4.17.21",
