@@ -1,45 +1,48 @@
 <template>
-  <label :for="`${name}-${value}`" class="relative flex cursor-pointer">
-    <input
-      :id="`${name}-${value}`"
-      :checked="checked"
-      :name="name"
-      :required="required"
-      :value="value"
-      :disabled="disabled"
-      type="radio"
-      :class="inputClass"
-      @focus="focused = true"
-      @blur="focused = false"
-      @change="onChange"
-    >
-    <div v-if="label" class="flex flex-col ml-3">
-      <span class="block text-sm font-medium u-text-gray-900">
-        {{ label }}
-        <span v-if="required" class="text-red-400">*</span>
-      </span>
-      <span v-if="help" class="block text-sm u-text-gray-500">{{ help }}</span>
+  <div :class="wrapperClass">
+    <div class="flex items-center h-5">
+      <input
+        :id="`${name}-${value}`"
+        v-model="isChecked"
+        :name="name"
+        :required="required"
+        :value="value"
+        :disabled="disabled"
+        type="radio"
+        :class="radioClass"
+        @focus="$emit('focus', $event)"
+        @blur="$emit('blur', $event)"
+      >
     </div>
-  </label>
+    <div v-if="label" class="ml-3 text-sm">
+      <label :for="`${name}-${value}`" :class="labelClass">
+        {{ label }}
+        <span v-if="required" :class="requiredClass">*</span>
+      </label>
+      <p v-if="help" :class="helpClass">
+        {{ help }}
+      </p>
+    </div>
+  </div>
 </template>
 
 <script>
+import { computed } from 'vue'
+import { classNames } from '../../utils'
+import $ui from '#build/ui'
+
 export default {
-  model: {
-    prop: 'checked',
-    event: 'change'
-  },
   props: {
     value: {
+      type: [String, Number, Boolean],
+      default: null
+    },
+    modelValue: {
       type: [String, Number, Boolean, Object],
       default: null
     },
     name: {
       type: String,
-      default: null
-    },
-    checked: {
-      type: Boolean,
       default: null
     },
     disabled: {
@@ -58,31 +61,52 @@ export default {
       type: Boolean,
       default: false
     },
+    wrapperClass: {
+      type: String,
+      default: () => $ui.radio.wrapper
+    },
     baseClass: {
       type: String,
-      default: 'h-4 w-4 mt-0.5 text-primary-600 checked:border-primary-600 dark:checked:border-primary-600 focus:ring-1 focus:ring-primary-500 u-border-gray-300 u-bg-white dark:checked:bg-primary-600 focus:ring-offset-white dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed'
+      default: () => $ui.radio.base
+    },
+    labelClass: {
+      type: String,
+      default: () => $ui.radio.label
+    },
+    requiredClass: {
+      type: String,
+      default: () => $ui.radio.required
+    },
+    helpClass: {
+      type: String,
+      default: () => $ui.radio.help
     },
     customClass: {
       type: String,
       default: null
     }
   },
-  data () {
+  emits: ['update:modelValue', 'focus', 'blur'],
+  setup (props, { emit }) {
+    const isChecked = computed({
+      get () {
+        return props.modelValue
+      },
+      set (value) {
+        emit('update:modelValue', value)
+      }
+    })
+
+    const radioClass = computed(() => {
+      return classNames(
+        props.baseClass,
+        props.customClass
+      )
+    })
+
     return {
-      focused: false
-    }
-  },
-  computed: {
-    inputClass () {
-      return [
-        this.baseClass,
-        this.customClass
-      ].join(' ')
-    }
-  },
-  methods: {
-    onChange () {
-      this.$emit('change', this.value)
+      isChecked,
+      radioClass
     }
   }
 }

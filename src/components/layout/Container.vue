@@ -1,10 +1,14 @@
 <template>
-  <div class="mx-auto sm:px-6 lg:px-8" :class="{ 'px-4': padded, 'max-w-7xl': constrained }">
+  <div :class="containerClass">
     <slot />
   </div>
 </template>
 
 <script>
+import { computed } from 'vue'
+import { classNames } from '../../utils/'
+import $ui from '#build/ui'
+
 export default {
   props: {
     padded: {
@@ -14,6 +18,23 @@ export default {
     constrained: {
       type: Boolean,
       default: true
+    },
+    constrainedClass: {
+      type: String,
+      default: () => $ui.container.constrained
+    }
+  },
+  setup (props) {
+    const containerClass = computed(() => {
+      return classNames(
+        'mx-auto sm:px-6 lg:px-8',
+        props.padded && 'px-4',
+        props.constrained && props.constrainedClass
+      )
+    })
+
+    return {
+      containerClass
     }
   }
 }

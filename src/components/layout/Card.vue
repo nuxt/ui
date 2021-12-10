@@ -1,7 +1,7 @@
 <template>
   <component
     :is="$attrs.onSubmit ? 'form': 'div'"
-    :class="[padded && rounded && 'rounded-md', !padded && rounded && 'sm:rounded-md', wrapperClass, ringClass, shadowClass, backgroundClass]"
+    :class="cardClass"
     v-bind="$attrs"
   >
     <div
@@ -23,6 +23,10 @@
 </template>
 
 <script>
+import { computed } from 'vue'
+import { classNames } from '../../utils/'
+import $ui from '#build/ui'
+
 export default {
   props: {
     padded: {
@@ -33,25 +37,29 @@ export default {
       type: Boolean,
       default: true
     },
-    wrapperClass: {
+    baseClass: {
       type: String,
-      default: 'overflow-hidden'
+      default: () => $ui.card.base
     },
     backgroundClass: {
       type: String,
-      default: 'u-bg-white'
+      default: () => $ui.card.background
+    },
+    borderColorClass: {
+      type: String,
+      default: () => $ui.card.border
     },
     shadowClass: {
       type: String,
-      default: ''
+      default: () => $ui.card.shadow
     },
     ringClass: {
       type: String,
-      default: 'ring-1 u-ring-gray-200'
+      default: () => $ui.card.ring
     },
     bodyClass: {
       type: String,
-      default: 'px-4 py-5 sm:p-6'
+      default: () => $ui.card.body
     },
     bodyBackgroundClass: {
       type: String,
@@ -59,7 +67,7 @@ export default {
     },
     headerClass: {
       type: String,
-      default: 'px-4 py-5 sm:px-6'
+      default: () => $ui.card.header
     },
     headerBackgroundClass: {
       type: String,
@@ -67,15 +75,32 @@ export default {
     },
     footerClass: {
       type: String,
-      default: 'px-4 py-4 sm:px-6'
+      default: () => $ui.card.footer
     },
     footerBackgroundClass: {
       type: String,
       default: null
     },
-    borderColorClass: {
+    customClass: {
       type: String,
-      default: 'u-border-gray-200'
+      default: null
+    }
+  },
+  setup (props) {
+    const cardClass = computed(() => {
+      return classNames(
+        props.baseClass,
+        props.padded && props.rounded && 'rounded-md',
+        !props.padded && props.rounded && 'sm:rounded-md',
+        props.ringClass,
+        props.shadowClass,
+        props.backgroundClass,
+        props.customClass
+      )
+    })
+
+    return {
+      cardClass
     }
   }
 }

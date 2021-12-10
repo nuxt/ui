@@ -15,6 +15,9 @@
           <slot name="hint">{{ hint }}</slot>
         </span>
       </div>
+      <p v-if="description" :class="descriptionClass">
+        {{ description }}
+      </p>
     </slot>
     <div :class="!!label && containerClass">
       <slot />
@@ -32,9 +35,13 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      default: null
     },
     label: {
+      type: String,
+      default: null
+    },
+    description: {
       type: String,
       default: null
     },
@@ -52,23 +59,27 @@ export default {
     },
     containerClass: {
       type: String,
-      default: () => $ui.inputGroup.container
+      default: () => $ui.formGroup.container
     },
     labelClass: {
       type: String,
-      default: () => $ui.inputGroup.label
+      default: () => $ui.formGroup.label
+    },
+    descriptionClass: {
+      type: String,
+      default: () => $ui.formGroup.description
     },
     requiredClass: {
       type: String,
-      default: () => $ui.inputGroup.required
+      default: () => $ui.formGroup.required
     },
     hintClass: {
       type: String,
-      default: () => $ui.inputGroup.hint
+      default: () => $ui.formGroup.hint
     },
     helpClass: {
       type: String,
-      default: () => $ui.inputGroup.help
+      default: () => $ui.formGroup.help
     }
   }
 }
