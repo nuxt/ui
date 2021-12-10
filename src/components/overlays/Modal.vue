@@ -64,10 +64,6 @@ export default {
     modelValue: {
       type: Boolean,
       default: false
-    },
-    title: {
-      type: String,
-      default: null
     }
   },
   emits: ['update:modelValue'],

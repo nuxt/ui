@@ -6,6 +6,7 @@
           v-if="label"
           :for="name"
           :class="labelClass"
+          @click="onLabelClick"
         >
           {{ label }}
           <span v-if="required" :class="requiredClass">*</span>

@@ -1,17 +1,30 @@
 <template>
   <UCard v-if="component" class="relative flex flex-col lg:max-h-[calc(100vh-10rem)]" body-class="px-4 py-5 sm:p-6 relative" footer-class="px-4 py-4 sm:px-6 flex-1 lg:overflow-y-auto">
     <div class="flex justify-center">
-      <component :is="is" v-bind="boundProps">
-        <template v-if="defaultProps[params.component].slot" #default>
-          <component :is="`U${defaultProps[params.component].slot}`" v-bind="defaultProps[defaultProps[params.component].slot]" />
+      <component :is="is" v-bind="{ ...boundProps, ...eventProps }">
+        <template v-for="[key, slot] of Object.entries(defaultProps[params.component]?.slots || {}) || []" #[key]>
+          <template v-if="Array.isArray(slot)">
+            <div :key="key">
+              <component
+                :is="slot.component ? `U${slot.component}` : slot.tag"
+                v-for="(slot, index) of slot"
+                :key="index"
+                :class="slot.class"
+                v-bind="slot.props || defaultProps[slot.component]"
+                v-html="slot.html"
+              />
+            </div>
+          </template>
+          <template v-else>
+            <component :is="slot.component ? `U${slot.component}` : slot.tag" :key="key" :class="slot.class" v-bind="slot.props || defaultProps[slot.component]" v-html="slot.html" />
+          </template>
         </template>
       </component>
     </div>
 
     <template v-if="props.length" #footer>
       <div class="space-y-3">
-        <component
-          :is="prop.type === 'Boolean' ? 'UToggleGroup' : 'UInputGroup'"
+        <UFormGroup
           v-for="prop of props"
           :key="prop.key"
           class="capitalize"
@@ -54,7 +67,7 @@
             :rows="8"
             autoresize
           />
-        </component>
+        </UFormGroup>
       </div>
     </template>
   </UCard>
@@ -69,6 +82,9 @@ const { params } = useRoute()
 const is = `U${params.component}`
 
 const component = nuxtApp.vueApp.component(is)
+
+const toggle = ref(false)
+const modal = ref(false)
 
 const defaultProps = {
   Button: {
@@ -115,20 +131,42 @@ const defaultProps = {
     name: 'input',
     placeholder: 'Enter text'
   },
-  InputGroup: {
+  FormGroup: {
     name: 'input',
     label: 'Input group',
-    slot: 'Input'
+    slots: {
+      default: {
+        component: 'Input',
+        props: {
+          name: 'input',
+          placeholder: 'Works with every form element'
+        }
+      }
+    }
   },
-  ToggleGroup: {
-    name: 'input',
-    label: 'Toggle group'
+  Toggle: {
+    modelValue: toggle,
+    'onUpdate:modelValue': (v) => { toggle.value = v }
   },
   Checkbox: {
     name: 'checkbox'
   },
   Radio: {
     name: 'radio'
+  },
+  RadioGroup: {
+    name: 'radio',
+    label: 'Radio group',
+    options: [
+      {
+        label: 'Option 1',
+        value: 'option-1'
+      },
+      {
+        label: 'Option 2',
+        value: 'option-2'
+      }
+    ]
   },
   Select: {
     name: 'select',
@@ -144,13 +182,40 @@ const defaultProps = {
     id: '1',
     title: 'Notification title',
     callback: 'alert(\'Timer expired\')'
+  },
+  Modal: {
+    modelValue: modal,
+    'onUpdate:modelValue': (v) => { modal.value = v },
+    slots: {
+      default: {
+        tag: 'div',
+        html: 'Modal content'
+      },
+      footer: {
+        component: 'Button',
+        props: {
+          label: 'Close',
+          onClick: () => { modal.value = false }
+        }
+      }
+    }
+  },
+  Popover: {
+    slots: {
+      panel: {
+        tag: 'div',
+        class: 'u-bg-gray-100 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 p-6',
+        html: 'Popover content'
+      }
+    }
   }
 }
 
+const componentDefaultProps = defaultProps[params.component] || {}
 const { props: componentProps } = await component.__asyncLoader()
 
 const refProps = Object.entries(componentProps).map(([key, prop]) => {
-  const defaultValue = (defaultProps[params.component] || {})[key]
+  const defaultValue = componentDefaultProps[key]
   let value = defaultValue || (typeof prop.default === 'function' ? prop.default() : prop.default)
   let type = prop.type
   if (Array.isArray(type)) {
@@ -187,6 +252,13 @@ const refProps = Object.entries(componentProps).map(([key, prop]) => {
     values
   }
 })
+
+const eventProps = Object.entries(componentDefaultProps)
+  .filter(([key]) => !refProps.find(prop => prop.key === key))
+  .reduce((acc, [key, value]) => {
+    acc[key] = value
+    return acc
+  }, {})
 
 const props = ref(refProps)
 const boundProps = computed(() => {

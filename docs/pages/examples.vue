@@ -153,21 +153,14 @@
       </UPopover>
     </div>
 
-    <!-- <div>
+    <div>
       <div class="font-medium text-sm mb-1 u-text-gray-700">
         Tooltip:
       </div>
 
-      <UTooltip>
+      <UTooltip text="Hello tooltip!">
         <UIcon name="heroicons-outline:information-circle" class="w-6 h-6 text-black cursor-pointer" />
       </UTooltip>
-    </div> -->
-
-    <div>
-      <div class="font-medium text-sm mb-1 u-text-gray-700">
-        Toggle:
-      </div>
-      <UToggle v-model="isSwitchEnabled" icon-off="heroicons-solid:x" icon-on="heroicons-solid:check" />
     </div>
 
     <div>
@@ -183,23 +176,21 @@
       </div>
 
       <UCard @submit.prevent="onSubmit">
-        <UInputGroup label="Email" name="email" class="mb-3">
-          <UInput type="email" name="email" autofocus />
-        </UInputGroup>
+        <UFormGroup label="Email" name="email" class="mb-3" required>
+          <UInput type="email" name="email" required />
+        </UFormGroup>
 
-        <UInputGroup label="Description" name="description" class="mb-3">
-          <UTextarea v-model="description" type="description" name="description" autoresize />
-        </UInputGroup>
+        <UFormGroup label="Description" name="description" class="mb-3">
+          <UTextarea type="description" name="description" autoresize />
+        </UFormGroup>
+
+        <UFormGroup label="Toggle" name="toggle" class="mb-3">
+          <UToggle v-model="isSwitchEnabled" name="toggle" icon-off="heroicons-solid:x" icon-on="heroicons-solid:check" />
+        </UFormGroup>
 
         <UButton type="submit" label="Submit" />
       </UCard>
     </div>
-
-    <!-- <UPopover v-slot="{ open }">
-      <UButton trailing variant="white" :icon="open ? 'heroicons-outline:chevron-up' : 'heroicons-outline:chevron-down'">
-        toto
-      </UButton>
-    </UPopover> -->
   </div>
 </template>
 

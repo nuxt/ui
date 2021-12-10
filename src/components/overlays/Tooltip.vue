@@ -44,7 +44,7 @@ export default {
     },
     wrapperClass: {
       type: String,
-      default: 'relative'
+      default: 'relative inline-flex'
     },
     containerClass: {
       type: String,

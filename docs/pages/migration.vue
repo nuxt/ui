@@ -102,13 +102,6 @@ const components = [
     capi: true
   },
   {
-    label: 'ToggleGroup',
-    to: '/components/ToggleGroup',
-    nuxt3: true,
-    capi: true,
-    preset: true
-  },
-  {
     label: 'Alert',
     to: '/components/Alert'
   },
@@ -123,8 +116,8 @@ const components = [
     preset: true
   },
   {
-    label: 'InputGroup',
-    to: '/components/InputGroup',
+    label: 'FormGroup',
+    to: '/components/FormGroup',
     nuxt3: true,
     capi: true,
     preset: true
@@ -200,10 +193,6 @@ const components = [
     to: '/components/Popover',
     nuxt3: true,
     capi: true
-  },
-  {
-    label: 'Slideover',
-    to: '/components/Slideover'
   },
   {
     label: 'Tooltip',
