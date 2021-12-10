@@ -212,7 +212,7 @@
           </div>
         </div>
         <div class="w-1/3 px-4 py-5 sm:p-6 border-l u-border-gray-200 u-bg-gray-50">
-          <pre>
+          <pre class="whitespace-pre-wrap break-all">
 {{ form }}
           </pre>
         </div>
@@ -223,7 +223,14 @@
 
 <script setup>
 const isModalOpen = ref(false)
-const form = reactive({ email: '', description: '', toggle: false, notification: 'email', notifications: [], terms: false })
+const form = reactive({
+  email: '',
+  description: '',
+  toggle: false,
+  notification: 'email',
+  notifications: [],
+  terms: false
+})
 
 const { $toast } = useNuxtApp()
 
@@ -366,8 +373,6 @@ const solutions = [
           `
   }
 ]
-
-const description = ref('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.')
 
 const onNotificationClick = () => {
   $toast.error({ title: 'Error', description: 'This is an error message' })

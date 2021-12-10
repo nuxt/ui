@@ -78,10 +78,10 @@
 
           <UButton
             class="absolute top-0 right-0"
-            :icon="copied ? 'heroicons-outline:clipboard-check' : 'heroicons-outline:clipboard'"
+            :icon="copied ? 'heroicons-outline:clipboard-check' : 'heroicons-outline:clipboard-copy'"
             variant="transparent"
             size="sm"
-            :custom-class="copied && '!text-green-500'"
+            :custom-class="copied ? '!text-green-500' : ''"
             @click="onCopy"
           />
         </pre>
