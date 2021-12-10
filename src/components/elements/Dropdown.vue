@@ -60,11 +60,17 @@ export default {
     },
     placement: {
       type: String,
-      default: 'bottom-end'
+      default: 'bottom-end',
+      validator: (value) => {
+        return ['auto', 'auto-start', 'auto-end', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'right', 'right-start', 'right-end', 'left', 'left-start', 'left-end'].includes(value)
+      }
     },
     strategy: {
       type: String,
-      default: 'fixed'
+      default: 'fixed',
+      validator: (value) => {
+        return ['absolute', 'fixed'].includes(value)
+      }
     },
     wrapperClass: {
       type: String,
