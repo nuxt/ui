@@ -27,7 +27,7 @@
     "@iconify-json/heroicons-outline": "^1.0.2",
     "@iconify-json/heroicons-solid": "^1.0.2",
     "@popperjs/core": "^2.11.0",
-    "@unocss/nuxt": "^0.16.0",
+    "@unocss/nuxt": "^0.16.3",
     "defu": "^5.0.0",
     "gradient-avatar": "^1.0.2",
     "lodash-es": "^4.17.21",
@@ -35,12 +35,12 @@
     "pathe": "^0.2.0"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config-typescript": "7.0.2",
+    "@nuxtjs/eslint-config-typescript": "8.0.0",
     "@types/lodash-es": "^4.17.5",
-    "@vueuse/components": "^7.2.2",
-    "@vueuse/core": "^7.2.2",
+    "@vueuse/components": "^7.3.0",
+    "@vueuse/core": "^7.3.0",
     "eslint": "8.4.1",
-    "nuxt3": "3.0.0-27313139.1c88580",
+    "nuxt3": "3.0.0-27319101.3e82f0f",
     "unbuild": "0.6.3"
   }
 }
