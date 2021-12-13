@@ -1,4 +1,3 @@
-
 <template>
   <div ref="trigger" :class="wrapperClass" @mouseover="open = true" @mouseleave="open = false">
     <slot :open="open">
