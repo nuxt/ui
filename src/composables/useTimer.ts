@@ -46,7 +46,6 @@ export function useTimer (cb: (...args: unknown[]) => any, interval: number) {
   }
 
   function resume () {
-    console.log('resume')
     startTime.value += (Date.now() - timestamp.timestamp.value)
     timestamp.resume()
     set()
