@@ -186,7 +186,8 @@ const components = [
   {
     label: 'Notification',
     to: '/components/Notification',
-    nuxt3: true
+    nuxt3: true,
+    capi: true
   },
   {
     label: 'Notifications',

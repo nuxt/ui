@@ -184,7 +184,7 @@ const defaultProps = {
   Notification: {
     id: '1',
     title: 'Notification title',
-    callback: 'alert(\'Timer expired\')'
+    callback: 'console.log(\'Timer expired\')'
   },
   Modal: {
     modelValue: modal,
@@ -228,7 +228,7 @@ const { props: componentProps } = await component.__asyncLoader()
 const refProps = Object.entries(componentProps).map(([key, prop]) => {
   const defaultValue = componentDefaultProps[key]
   const propDefault = (typeof prop.default === 'function' ? prop.default() : prop.default)
-  let value = defaultValue || propDefault
+  let value = defaultValue !== undefined ? defaultValue : propDefault
   let type = prop.type
   if (Array.isArray(type)) {
     type = type[0].name
