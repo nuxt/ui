@@ -176,8 +176,6 @@ export default defineNuxtModule<UiOptions>({
       getContents: () => `/* @unocss-include */ export default ${JSON.stringify(ui)}`
     })
 
-    addPlugin(resolve(__dirname, './plugins/ticker.client'))
-    addPlugin(resolve(__dirname, './plugins/timer.client'))
     addPlugin(resolve(__dirname, './plugins/toast.client'))
 
     addComponentsDir({
@@ -209,6 +207,11 @@ export default defineNuxtModule<UiOptions>({
       path: resolve(__dirname, './components/overlays'),
       prefix,
       watch: false
+    })
+
+    // Add composables
+    nuxt.hook('autoImports:dirs', (dirs) => {
+      dirs.push(resolve(__dirname, './composables'))
     })
 
     nuxt.options.css.push(resolve(__dirname, './css/forms.css'))

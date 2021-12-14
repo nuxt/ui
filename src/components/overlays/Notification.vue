@@ -11,7 +11,7 @@
     <div
       class="z-50 w-full bg-white rounded-lg shadow-lg pointer-events-auto dark:bg-gray-800"
       @mouseover="onMouseover"
-      @mouseout="onMouseout"
+      @mouseleave="onMouseleave"
     >
       <div class="relative overflow-hidden rounded-lg ring-1 u-ring-gray-200">
         <div class="p-4">
@@ -31,7 +31,7 @@
                 variant="white"
                 size="xs"
                 class="mt-2"
-                @click.stop="cancel"
+                @click.stop="onUndo"
               >
                 Undo
               </Button>
@@ -39,7 +39,7 @@
             <div class="flex-shrink-0 ml-4">
               <button
                 class="transition duration-150 ease-in-out u-text-gray-400 focus:outline-none hover:u-text-gray-500 focus:u-text-gray-500"
-                @click.stop="close"
+                @click.stop="onClose"
               >
                 <span class="sr-only">Close</span>
                 <Icon name="heroicons-solid:x" class="w-5 h-5" />
@@ -56,8 +56,11 @@
 </template>
 
 <script>
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+
 import Icon from '../elements/Icon'
 import Button from '../elements/Button'
+import { useTimer } from '../../composables/useTimer'
 
 export default {
   components: {
@@ -102,84 +105,97 @@ export default {
       default: null
     }
   },
-  data () {
-    return {
-      timer: null,
-      ticker: null,
-      remainingTime: this.timeout
-    }
-  },
-  computed: {
-    iconName () {
-      return this.icon || ({
+  emits: ['close'],
+  setup (props, { emit }) {
+    let timer = null
+    const remaining = ref(props.timeout)
+
+    const iconName = computed(() => {
+      return props.icon || ({
         warning: 'heroicons-outline:exclamation-circle',
         info: 'heroicons-outline:information-circle',
         success: 'heroicons-outline:check-circle',
         error: 'heroicons-outline:x-circle'
-      })[this.type]
-    },
-    iconClass () {
+      })[props.type]
+    })
+
+    const iconClass = computed(() => {
       return ({
         warning: 'text-orange-400',
         info: 'text-blue-400',
         success: 'text-green-400',
         error: 'text-red-400'
-      })[this.type] || 'u-text-gray-400'
-    },
-    progressBarStyle () {
-      const remainingPercent = this.remainingTime / this.timeout * 100
-      return { width: `${remainingPercent}%` }
-    }
-  },
-  mounted () {
-    if (!this.$timer) {
-      return
+      })[props.type] || 'u-text-gray-400'
+    })
+
+    const progressBarStyle = computed(() => {
+      const remainingPercent = remaining.value / props.timeout * 100
+      return { width: `${remainingPercent || 0}%` }
+    })
+
+    function onMouseover () {
+      if (timer) {
+        timer.pause()
+      }
     }
 
-    if (this.timeout) {
-      this.timer = new this.$timer(() => {
-        this.close()
-        this.ticker?.stop()
-      }, this.timeout)
-      this.ticker = new this.$ticker(() => {
-        this.remainingTime -= 10
-      }, 10)
+    function onMouseleave () {
+      if (timer) {
+        timer.resume()
+      }
     }
-  },
-  beforeDestroy () {
-    if (this.timer) {
-      this.timer.stop()
-      this.ticker.stop()
+
+    function onClose () {
+      if (timer) {
+        timer.stop()
+      }
+
+      if (props.callback) {
+        props.callback()
+      }
+
+      emit('close')
     }
-  },
-  methods: {
-    onMouseover () {
-      if (this.timer) {
-        this.timer.pause()
-        this.ticker.stop()
+
+    function onUndo () {
+      if (timer) {
+        timer.stop()
       }
-    },
-    onMouseout () {
-      if (this.timer) {
-        this.timer.resume()
-        this.ticker.start()
+
+      if (props.undo) {
+        props.undo()
       }
-    },
-    cancel () {
-      if (this.timer) {
-        this.timer.stop()
-        this.ticker.stop()
+
+      emit('close')
+    }
+
+    onMounted(() => {
+      if (!props.timeout) {
+        return
       }
-      if (this.undo) {
-        this.undo()
-      }
-      this.$emit('close')
-    },
-    close () {
-      if (this.callback) {
-        this.callback()
-      }
-      this.$emit('close')
+
+      timer = useTimer(() => {
+        onClose()
+      }, props.timeout)
+
+      watchEffect(() => {
+        remaining.value = timer.remaining.value
+      })
+    })
+
+    onUnmounted(() => {
+      timer.stop()
+    })
+
+    return {
+      timer,
+      iconName,
+      iconClass,
+      progressBarStyle,
+      onMouseover,
+      onMouseleave,
+      onClose,
+      onUndo
     }
   }
 }
