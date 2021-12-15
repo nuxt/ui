@@ -1,27 +1,27 @@
 import { nanoid } from 'nanoid'
 import { Ref } from 'vue'
-import { Notification } from '../types'
+import { ToastNotification, ToastPlugin } from '../types'
 import { defineNuxtPlugin, useState } from '#app'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const notifications: Ref<Notification[]> = useState('notifications', () => [])
+  const notifications: Ref<ToastNotification[]> = useState('notifications', () => [])
 
-  function addNotification (notification: Partial<Notification>) {
+  function addNotification (notification: Partial<ToastNotification>) {
     const body = {
       id: nanoid(),
       ...notification
     }
 
-    const index = notifications.value.findIndex((n: Notification) => n.id === body.id)
+    const index = notifications.value.findIndex((n: ToastNotification) => n.id === body.id)
     if (index === -1) {
-      notifications.value.push(body as Notification)
+      notifications.value.push(body as ToastNotification)
     }
 
     return body
   }
 
   function removeNotification (id: string) {
-    notifications.value = notifications.value.filter((n: Notification) => n.id !== id)
+    notifications.value = notifications.value.filter((n: ToastNotification) => n.id !== id)
   }
 
   nuxtApp.provide('toast', {
@@ -48,6 +48,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 declare module '#app' {
   interface NuxtApp {
-    $toast: object
+    $toast: ToastPlugin
   }
 }

@@ -1,7 +1,8 @@
 export default {
   entries: [
-    './src/index',
+    './src/module',
     { input: './src/components/', outDir: 'dist/components' },
+    { input: './src/composables/', outDir: 'dist/composables' },
     { input: './src/presets/', outDir: 'dist/presets' },
     { input: './src/plugins/', outDir: 'dist/plugins' },
     { input: './src/types/', outDir: 'dist/types' },

@@ -5,13 +5,13 @@
   "license": "MIT",
   "exports": {
     ".": {
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs"
+      "require": "./dist/module.cjs",
+      "import": "./dist/module.mjs"
     }
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "dist/module.mjs",
+  "module": "dist/module.mjs",
+  "types": "dist/module.d.ts",
   "files": [
     "dist"
   ],
@@ -40,7 +40,7 @@
     "@vueuse/components": "^7.3.0",
     "@vueuse/core": "^7.3.0",
     "eslint": "8.4.1",
-    "nuxt3": "3.0.0-27319101.3e82f0f",
+    "nuxt3": "3.0.0-27324955.23397e6",
     "unbuild": "0.6.3"
   }
 }

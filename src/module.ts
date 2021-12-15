@@ -3,35 +3,9 @@ import { defineNuxtModule, installModule, addComponentsDir, addTemplate, resolve
 import { colors } from '@unocss/preset-uno'
 import defu from 'defu'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
+import type { Nuxt } from '@nuxt/schema'
 import { presetsDir } from './dirs'
-
-export interface UiColorsOptions {
-  /**
-   * @default 'indigo'
-   */
-  primary?: string
-
-  /**
-   * @default 'zinc'
-   */
-  gray?: string
-}
-
-export interface UiOptions {
-  /**
-   * @default 'tailwindui'
-   */
-  preset?: string | object
-
-  /**
-   * @default 'u'
-   */
-  prefix?: string
-
-  colors?: UiColorsOptions
-
-  unocss?: UnocssNuxtOptions
-}
+import type { UiOptions } from './types'
 
 const defaults = {
   preset: 'tailwindui',
@@ -52,7 +26,7 @@ export default defineNuxtModule<UiOptions>({
   name: '@nuxthq/ui',
   configKey: 'ui',
   defaults,
-  async setup (_options, nuxt) {
+  async setup (_options: UiOptions, nuxt: Nuxt) {
     const { preset, prefix, colors: { primary = 'indigo', gray = 'zinc' } = {} } = _options
     const { shortcuts = [], rules = [], variants = [], theme = {} } = _options.unocss || {}
 
@@ -219,6 +193,8 @@ export default defineNuxtModule<UiOptions>({
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@nuxthq/ui')
   }
 })
+
+export * from './types'
 
 declare module '@nuxt/schema' {
   interface NuxtConfig {
