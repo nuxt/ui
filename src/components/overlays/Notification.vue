@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
 
 import Icon from '../elements/Icon'
 import Button from '../elements/Button'
