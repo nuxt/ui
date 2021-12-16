@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import { Dialog, DialogOverlay, TransitionRoot, TransitionChild } from '@headlessui/vue'
 
 import Card from '../layout/Card'
