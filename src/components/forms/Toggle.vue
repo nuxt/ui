@@ -15,6 +15,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { Switch } from '@headlessui/vue'
 import Icon from '../elements/Icon'
 
