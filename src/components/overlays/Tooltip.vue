@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import { usePopper } from '../../utils'
 
 export default {
