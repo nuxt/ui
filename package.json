@@ -32,13 +32,13 @@
     "gradient-avatar": "^1.0.2",
     "lodash-es": "^4.17.21",
     "nanoid": "^3.1.30",
-    "pathe": "^0.2.0"
+    "pathe": "^0.2.0",
+    "@vueuse/core": "^7.3.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "8.0.0",
     "@types/lodash-es": "^4.17.5",
     "@vueuse/components": "^7.3.0",
-    "@vueuse/core": "^7.3.0",
     "eslint": "8.4.1",
     "nuxt3": "3.0.0-27324955.23397e6",
     "unbuild": "0.6.3"
