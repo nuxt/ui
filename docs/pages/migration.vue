@@ -28,6 +28,9 @@
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
               Preset system
             </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
+              Typescript
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -47,6 +50,10 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
               <span v-if="component.preset">✅</span>
+              <span v-else>❌</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
+              <span v-if="component.typescript">✅</span>
               <span v-else>❌</span>
             </td>
           </tr>
@@ -175,7 +182,10 @@ const components = [
   },
   {
     label: 'VerticalNavigation',
-    to: '/components/VerticalNavigation'
+    to: '/components/VerticalNavigation',
+    nuxt3: true,
+    capi: true,
+    preset: true
   },
   {
     label: 'Modal',
