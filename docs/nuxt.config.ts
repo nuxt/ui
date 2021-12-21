@@ -1,6 +1,7 @@
 /* @unocss-include */
 
 import { defineNuxtConfig } from 'nuxt3'
+import module from '../src/module'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
@@ -20,7 +21,7 @@ export default defineNuxtConfig({
     }
   },
   buildModules: [
-    '../src'
+    module
   ],
   ui: {
     colors: {
