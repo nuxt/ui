@@ -219,6 +219,22 @@ const container = {
   constrained: 'max-w-7xl'
 }
 
+const verticalNavigation = {
+  base: 'flex items-center px-3 py-2 text-sm font-medium rounded-md',
+  active: 'u-text-gray-900 u-bg-gray-100',
+  inactive: 'u-text-gray-600 hover:u-text-gray-900 hover:u-bg-gray-50 focus:u-bg-gray-50',
+  icon: {
+    base: 'flex-shrink-0 -ml-1 mr-3 h-6 w-6',
+    active: 'u-text-gray-500',
+    inactive: 'u-text-gray-400 group-hover:u-text-gray-500'
+  },
+  badge: {
+    base: 'ml-auto inline-block py-0.5 px-3 text-xs rounded-full',
+    active: 'u-bg-white',
+    inactive: 'u-bg-gray-100 group-hove:u-bg'
+  }
+}
+
 export default {
   button,
   formGroup,
@@ -228,5 +244,6 @@ export default {
   checkbox,
   radio,
   card,
-  container
+  container,
+  verticalNavigation
 }

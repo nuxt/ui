@@ -12,10 +12,13 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useRoute } from '#imports'
 
 export default {
   name: 'Link',
+  inheritAttrs: false,
   props: {
     ...RouterLink.props,
     inactiveClass: {
@@ -27,13 +30,18 @@ export default {
       default: false
     }
   },
-  computed: {
-    isActive () {
-      if (!this.exact) {
-        return !!this.$route.path.startsWith(this.to)
+  setup (props) {
+    const route = useRoute()
+    const isActive = computed(() => {
+      if (props.exact) {
+        return [props.to, `${props.to}/`].includes(route.path)
       } else {
-        return this.$route.path === this.to || this.$route.path === `${this.to}/`
+        return !!route.path.startsWith(props.to)
       }
+    })
+
+    return {
+      isActive
     }
   }
 }
