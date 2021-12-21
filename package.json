@@ -36,11 +36,11 @@
     "@vueuse/core": "^7.4.0"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config-typescript": "8.0.0",
+    "@nuxtjs/eslint-config-typescript": "^8.0.0",
     "@types/lodash-es": "^4.17.5",
     "@vueuse/components": "^7.4.0",
-    "eslint": "8.5.0",
-    "nuxt3": "3.0.0-27334872.6e32bde",
+    "eslint": "^8.5.0",
+    "nuxt3": "^3.0.0-27334926.045b9ed",
     "unbuild": "0.6.3"
   }
 }

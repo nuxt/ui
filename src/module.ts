@@ -23,8 +23,11 @@ const defaults = {
 }
 
 export default defineNuxtModule<UiOptions>({
-  name: '@nuxthq/ui',
-  configKey: 'ui',
+  meta: {
+    name: '@nuxthq/ui',
+    compatibility: { nuxt: '^3.0.0' },
+    configKey: 'ui'
+  },
   defaults,
   async setup (_options: UiOptions, nuxt: Nuxt) {
     const { preset, prefix, colors: { primary = 'indigo', gray = 'zinc' } = {} } = _options
@@ -124,7 +127,7 @@ export default defineNuxtModule<UiOptions>({
       }
     }
 
-    await installModule(nuxt, { src: '@unocss/nuxt', options })
+    await installModule('@unocss/nuxt', options, nuxt)
 
     let ui: object = {}
     try {
