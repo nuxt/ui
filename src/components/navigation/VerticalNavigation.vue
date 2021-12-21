@@ -1,11 +1,10 @@
 <template>
   <nav class="space-y-1">
     <Link
-      v-for="link of links"
+      v-for="(link, index) of links"
       v-slot="{ isActive }"
-      :key="link.to || link.label"
-      :to="link.to"
-      :exact="link.exact"
+      :key="index"
+      v-bind="link"
       :class="baseClass"
       :active-class="activeClass"
       :inactive-class="inactiveClass"

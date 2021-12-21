@@ -65,6 +65,7 @@ const sections = [
   { label: 'Forms', links: [{ label: 'Checkbox', to: '/components/Checkbox' }, { label: 'Input', to: '/components/Input' }, { label: 'FormGroup', to: '/components/FormGroup' }, { label: 'Radio', to: '/components/Radio' }, { label: 'Select', to: '/components/Select' }, { label: 'Textarea', to: '/components/Textarea' }, { label: 'Toggle', to: '/components/Toggle' }] },
   { label: 'Layout', links: [{ label: 'Card', to: '/components/Card' }, { label: 'Container', to: '/components/Container' }] },
   // { label: 'Navigation', links: [{ label: 'Pills', to: '/components/Pills' }, { label: 'Tabs', to: '/components/Tabs' }, { label: 'VerticalNavigation', to: '/components/VerticalNavigation' }] },
+  { label: 'Navigation', links: [{ label: 'VerticalNavigation', to: '/components/VerticalNavigation' }] },
   { label: 'Overlays', links: [{ label: 'Modal', to: '/components/Modal' }, { label: 'Notification', to: '/components/Notification' }, { label: 'Popover', to: '/components/Popover' }, { label: 'Tooltip', to: '/components/Tooltip' }] }
 ]
 </script>

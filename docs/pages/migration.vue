@@ -101,7 +101,9 @@ const components = [
   },
   {
     label: 'Link',
-    to: '/components/Link'
+    to: '/components/Link',
+    nuxt3: true,
+    capi: true
   },
   {
     label: 'Toggle',

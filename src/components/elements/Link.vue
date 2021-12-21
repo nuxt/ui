@@ -1,5 +1,13 @@
 <template>
-  <NuxtLink v-slot="{ href, navigate }" v-bind="$props" custom>
+  <a v-if="isExternalLink" v-bind="$attrs" :class="isActive ? activeClass : inactiveClass" :href="to" :target="target">
+    <slot v-bind="{ isActive }" />
+  </a>
+  <router-link
+    v-else
+    v-slot="{ href, navigate }"
+    v-bind="$props"
+    custom
+  >
     <a
       v-bind="$attrs"
       :href="href"
@@ -8,7 +16,7 @@
     >
       <slot v-bind="{ isActive }" />
     </a>
-  </NuxtLink>
+  </router-link>
 </template>
 
 <script>
@@ -28,6 +36,10 @@ export default {
     exact: {
       type: Boolean,
       default: false
+    },
+    target: {
+      type: String,
+      default: null
     }
   },
   setup (props) {
@@ -39,9 +51,13 @@ export default {
         return !!route.path.startsWith(props.to)
       }
     })
+    const isExternalLink = computed(() => {
+      return typeof props.to === 'string' && props.to.startsWith('http')
+    })
 
     return {
-      isActive
+      isActive,
+      isExternalLink
     }
   }
 }

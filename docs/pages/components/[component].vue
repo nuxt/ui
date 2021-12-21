@@ -141,6 +141,31 @@ const defaultProps = {
       }]
     ]
   },
+  VerticalNavigation: {
+    links: [
+      {
+        label: 'Home',
+        icon: 'heroicons-outline:home',
+        to: '/'
+      },
+      {
+        label: 'Examples',
+        icon: 'heroicons-outline:book-open',
+        to: '/examples'
+      },
+      {
+        label: 'Migration',
+        icon: 'heroicons-outline:refresh',
+        to: '/migration'
+      },
+      {
+        label: 'External link',
+        icon: 'heroicons-outline:external-link',
+        to: 'https://google.fr',
+        target: '_blank'
+      }
+    ]
+  },
   Icon: {
     name: 'heroicons-outline:bell'
   },

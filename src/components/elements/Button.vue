@@ -14,13 +14,15 @@
 
 <script>
 import { ref, computed } from 'vue'
+import Link from '../elements/Link'
 import Icon from '../elements/Icon'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
 export default {
   components: {
-    Icon
+    Icon,
+    Link
   },
   props: {
     type: {
@@ -73,10 +75,6 @@ export default {
       type: Boolean,
       default: false
     },
-    href: {
-      type: String,
-      default: null
-    },
     to: {
       type: [String, Object],
       default: null
@@ -118,10 +116,8 @@ export default {
     const button = ref(null)
 
     const buttonIs = computed(() => {
-      if (props.href) {
-        return 'a'
-      } else if (props.to) {
-        return 'NuxtLink'
+      if (props.to) {
+        return 'Link'
       }
 
       return 'button'
@@ -129,8 +125,7 @@ export default {
 
     const buttonProps = computed(() => {
       switch (buttonIs.value) {
-        case 'a': return { href: props.href, target: props.target }
-        case 'NuxtLink': return { to: props.to }
+        case 'Link': return { to: props.to, target: props.target }
         default: return { disabled: props.disabled || props.loading, type: props.type }
       }
     })

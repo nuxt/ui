@@ -19,7 +19,7 @@
         <MenuItems :class="itemsClass" static>
           <div v-for="(subItems, index) of items" :key="index" class="py-1">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }">
-              <Component v-bind="item" :is="(item.to && 'NuxtLink') || (item.href && 'a') || 'button'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)">
+              <Component v-bind="item" :is="(item.to && 'Link') || 'button'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)">
                 <slot :name="item.slot" :item="item">
                   <Icon v-if="item.icon" :name="item.icon" :class="itemIconClass" />
 
@@ -43,6 +43,7 @@ import {
 } from '@headlessui/vue'
 
 import Icon from '../elements/Icon'
+import Link from '../elements/Link'
 import { classNames, usePopper } from '../../utils'
 
 export default {
@@ -51,7 +52,8 @@ export default {
     MenuButton,
     MenuItems,
     MenuItem,
-    Icon
+    Icon,
+    Link
   },
   props: {
     items: {
