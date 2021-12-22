@@ -1,10 +1,9 @@
 import { resolve } from 'pathe'
-import { defineNuxtModule, installModule, addComponentsDir, addTemplate, resolveModule, addPlugin } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin } from '@nuxt/kit'
 import { colors } from '@unocss/preset-uno'
 import defu from 'defu'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
 import type { Nuxt } from '@nuxt/schema'
-import { presetsDir } from './dirs'
 import type { UiOptions } from './types'
 
 const defaults = {
@@ -25,8 +24,10 @@ const defaults = {
 export default defineNuxtModule<UiOptions>({
   meta: {
     name: '@nuxthq/ui',
-    compatibility: { nuxt: '^3.0.0' },
-    configKey: 'ui'
+    configKey: 'ui',
+    compatibility: {
+      nuxt: '^3.0.0'
+    }
   },
   defaults,
   async setup (_options: UiOptions, nuxt: Nuxt) {
@@ -129,23 +130,22 @@ export default defineNuxtModule<UiOptions>({
 
     await installModule('@unocss/nuxt', options, nuxt)
 
-    let ui: object = {}
+    // Transpile runtime
+    const runtimeDir = resolve(__dirname, './runtime')
+    nuxt.options.build.transpile.push(runtimeDir)
+    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
+
+    let ui: object = await import(resolve(runtimeDir, 'presets', defaults.preset))
     try {
       if (typeof preset === 'object') {
-        ui = await import(resolveModule(`./${defaults.preset}`, { paths: presetsDir }))
-        // @ts-ignore
-        ui = ui.default ? ui.default : ui
         ui = defu(preset, ui)
       } else {
         // @ts-ignore
-        ui = await import(resolveModule(`./${preset}`, { paths: presetsDir }))
-        // @ts-ignore
-        ui = ui.default ? ui.default : ui
+        ui = await import(resolve(runtimeDir, 'presets', preset))
       }
     } catch (e) {
-      ui = await import(resolveModule(`./${defaults.preset}`, { paths: presetsDir }))
-      // @ts-ignore
-      ui = ui.default ? ui.default : ui
+      // eslint-disable-next-line no-console
+      console.warn('Could not load preset file.')
     }
 
     addTemplate({
@@ -153,47 +153,46 @@ export default defineNuxtModule<UiOptions>({
       getContents: () => `/* @unocss-include */ export default ${JSON.stringify(ui)}`
     })
 
-    addPlugin(resolve(__dirname, './plugins/toast.client'))
+    addPlugin(resolve(runtimeDir, 'plugins', 'toast.client'))
 
     addComponentsDir({
-      path: resolve(__dirname, './components/elements'),
+      path: resolve(runtimeDir, 'components', 'elements'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(__dirname, './components/feedback'),
+      path: resolve(runtimeDir, 'components', 'feedback'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(__dirname, './components/forms'),
+      path: resolve(runtimeDir, 'components', 'forms'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(__dirname, './components/layout'),
+      path: resolve(runtimeDir, 'components', 'layout'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(__dirname, './components/navigation'),
+      path: resolve(runtimeDir, 'components', 'navigation'),
       prefix,
       watch: false
     })
     addComponentsDir({
-      path: resolve(__dirname, './components/overlays'),
+      path: resolve(runtimeDir, 'components', 'overlays'),
       prefix,
       watch: false
     })
 
     // Add composables
     nuxt.hook('autoImports:dirs', (dirs) => {
-      dirs.push(resolve(__dirname, './composables'))
+      dirs.push(resolve(runtimeDir, 'composables'))
     })
 
+    // Add CSS
     nuxt.options.css.push(resolve(__dirname, './css/forms.css'))
-
-    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@nuxthq/ui')
   }
 })
 

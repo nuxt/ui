@@ -5,13 +5,11 @@
   "license": "MIT",
   "exports": {
     ".": {
-      "require": "./dist/module.cjs",
       "import": "./dist/module.mjs"
     }
   },
-  "main": "dist/module.mjs",
-  "module": "dist/module.mjs",
-  "types": "dist/module.d.ts",
+  "main": "./dist/module.mjs",
+  "types": "./dist/module.d.ts",
   "files": [
     "dist"
   ],
@@ -36,11 +34,12 @@
     "@vueuse/core": "^7.4.0"
   },
   "devDependencies": {
+    "@nuxt/schema": "npm:@nuxt/schema-edge@latest",
     "@nuxtjs/eslint-config-typescript": "^8.0.0",
     "@types/lodash-es": "^4.17.5",
     "@vueuse/components": "^7.4.0",
     "eslint": "^8.5.0",
-    "nuxt3": "^3.0.0-27334958.ca9761d",
-    "unbuild": "0.6.3"
+    "nuxt3": "latest",
+    "unbuild": "^0.6.7"
   }
 }
