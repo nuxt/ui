@@ -26,7 +26,8 @@ export default defineNuxtModule<UiOptions>({
     name: '@nuxthq/ui',
     configKey: 'ui',
     compatibility: {
-      nuxt: '^3.0.0'
+      nuxt: '^3.0.0',
+      bridge: true
     }
   },
   defaults,
@@ -135,13 +136,13 @@ export default defineNuxtModule<UiOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
-    let ui: object = await import(resolve(runtimeDir, 'presets', defaults.preset))
+    let ui: object = await import(resolve(__dirname, `./presets/${defaults.preset}`))
     try {
       if (typeof preset === 'object') {
         ui = defu(preset, ui)
       } else {
         // @ts-ignore
-        ui = await import(resolve(runtimeDir, 'presets', preset))
+        ui = await import(resolve(__dirname, `./presets/${preset}`))
       }
     } catch (e) {
       // eslint-disable-next-line no-console
