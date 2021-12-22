@@ -138,13 +138,13 @@ export default defineNuxtModule<UiOptions>({
 
     const presetsDir = resolve(__dirname, './presets')
 
-    let ui: object = await import(resolveModule(`./${defaults.preset}`, { paths: presetsDir }))
+    let ui: object = (await import(resolveModule(`./${defaults.preset}`, { paths: presetsDir }))).default
     try {
       if (typeof preset === 'object') {
         ui = defu(preset, ui)
       } else {
         // @ts-ignore
-        ui = await import(resolveModule(`./${preset}`, { paths: presetsDir }))
+        ui = (await import(resolveModule(`./${preset}`, { paths: presetsDir }))).default
       }
     } catch (e) {
       // eslint-disable-next-line no-console
