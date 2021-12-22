@@ -1,5 +1,5 @@
 import { resolve } from 'pathe'
-import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin, resolveModule } from '@nuxt/kit'
 import { colors } from '@unocss/preset-uno'
 import defu from 'defu'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
@@ -136,13 +136,15 @@ export default defineNuxtModule<UiOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
-    let ui: object = await import(resolve(__dirname, `./presets/${defaults.preset}`))
+    const presetsDir = resolve(__dirname, './presets')
+
+    let ui: object = await import(resolveModule(`./${defaults.preset}`, { paths: presetsDir }))
     try {
       if (typeof preset === 'object') {
         ui = defu(preset, ui)
       } else {
         // @ts-ignore
-        ui = await import(resolve(__dirname, `./presets/${preset}`))
+        ui = await import(resolveModule(`./${preset}`, { paths: presetsDir }))
       }
     } catch (e) {
       // eslint-disable-next-line no-console
