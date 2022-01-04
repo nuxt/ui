@@ -1,5 +1,8 @@
 <template>
-  <a v-if="isExternalLink" v-bind="$attrs" :class="isActive ? activeClass : inactiveClass" :href="to" :target="target">
+  <button v-if="isButton" v-bind="$attrs" :class="isActive ? activeClass : inactiveClass">
+    <slot v-bind="{ isActive }" />
+  </button>
+  <a v-else-if="isExternalLink" v-bind="$attrs" :class="isActive ? activeClass : inactiveClass" :href="to" :target="target">
     <slot v-bind="{ isActive }" />
   </a>
   <router-link
@@ -29,6 +32,10 @@ export default {
   inheritAttrs: false,
   props: {
     ...RouterLink.props,
+    to: {
+      type: [String, Object],
+      default: null
+    },
     inactiveClass: {
       type: String,
       default: ''
@@ -45,6 +52,10 @@ export default {
   setup (props) {
     const route = useRoute()
     const isActive = computed(() => {
+      if (!props.to) {
+        return false
+      }
+
       if (props.exact) {
         return [props.to, `${props.to}/`].includes(route.path)
       } else {
@@ -54,9 +65,13 @@ export default {
     const isExternalLink = computed(() => {
       return typeof props.to === 'string' && props.to.startsWith('http')
     })
+    const isButton = computed(() => {
+      return !props.to
+    })
 
     return {
       isActive,
+      isButton,
       isExternalLink
     }
   }
