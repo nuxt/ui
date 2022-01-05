@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="wrapperClass">
     <slot name="label">
       <div class="flex content-center justify-between">
         <label
@@ -56,6 +56,10 @@ export default {
     hint: {
       type: String,
       default: null
+    },
+    wrapperClass: {
+      type: String,
+      default: () => $ui.formGroup.wrapper
     },
     containerClass: {
       type: String,

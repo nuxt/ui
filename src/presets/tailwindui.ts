@@ -96,6 +96,7 @@ const button = {
 }
 
 const formGroup = {
+  wrapper: '',
   label: 'block text-sm font-medium u-text-gray-700',
   container: 'mt-1 relative',
   required: 'text-red-400',
