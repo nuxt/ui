@@ -240,7 +240,7 @@ const toggle = {
 }
 
 const verticalNavigation = {
-  base: 'flex items-center px-3 py-2 text-sm font-medium rounded-md',
+  base: 'flex items-center px-3 py-2 text-sm font-medium rounded-md w-full',
   active: 'u-text-gray-900 u-bg-gray-100',
   inactive: 'u-text-gray-600 hover:u-text-gray-900 hover:u-bg-gray-50 focus:u-bg-gray-50',
   icon: {
