@@ -98,6 +98,7 @@ const button = {
 const formGroup = {
   wrapper: '',
   label: 'block text-sm font-medium u-text-gray-700',
+  labelWrapper: 'flex content-center justify-between',
   container: 'mt-1 relative',
   required: 'text-red-400',
   description: 'text-sm leading-5 u-text-gray-500',

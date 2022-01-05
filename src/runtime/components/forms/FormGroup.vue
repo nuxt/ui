@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperClass">
     <slot name="label">
-      <div class="flex content-center justify-between">
+      <div :class="labelWrapperClass">
         <label
           v-if="label"
           :for="name"
@@ -68,6 +68,10 @@ export default {
     labelClass: {
       type: String,
       default: () => $ui.formGroup.label
+    },
+    labelWrapperClass: {
+      type: String,
+      default: () => $ui.formGroup.labelWrapper
     },
     descriptionClass: {
       type: String,
