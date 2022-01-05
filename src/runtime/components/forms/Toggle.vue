@@ -1,14 +1,14 @@
 <template>
   <Switch
-    v-model="enabled"
-    :class="[enabled ? 'bg-primary-600' : 'u-bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-500']"
+    v-model="active"
+    :class="[active ? activeClass : inactiveClass, baseClass]"
   >
-    <span :class="[enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']">
-      <span :class="[enabled ? 'opacity-0 ease-out duration-100' : 'opacity-100 ease-in duration-200', 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity']" aria-hidden="true">
-        <Icon :name="iconOff" class="h-3 w-3 u-text-gray-400" />
+    <span :class="[active ? containerActiveClass : containerInactiveClass, containerBaseClass]">
+      <span :class="[active ? iconActiveClass : iconInactiveClass, iconBaseClass]" aria-hidden="true">
+        <Icon :name="iconOn" :class="iconOnClass" />
       </span>
-      <span :class="[enabled ? 'opacity-100 ease-in duration-200' : 'opacity-0 ease-out duration-100', 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity']" aria-hidden="true">
-        <Icon :name="iconOn" class="h-3 w-3 text-primary-600" />
+      <span :class="[active ? iconInactiveClass : iconActiveClass, iconBaseClass]" aria-hidden="true">
+        <Icon :name="iconOff" :class="iconOffClass" />
       </span>
     </span>
   </Switch>
@@ -18,6 +18,7 @@
 import { computed } from 'vue'
 import { Switch } from '@headlessui/vue'
 import Icon from '../elements/Icon'
+import $ui from '#build/ui'
 
 const props = defineProps({
   modelValue: {
@@ -31,12 +32,56 @@ const props = defineProps({
   iconOff: {
     type: String,
     default: ''
+  },
+  baseClass: {
+    type: String,
+    default: () => $ui.toggle.base
+  },
+  activeClass: {
+    type: String,
+    default: () => $ui.toggle.active
+  },
+  inactiveClass: {
+    type: String,
+    default: () => $ui.toggle.inactive
+  },
+  containerBaseClass: {
+    type: String,
+    default: () => $ui.toggle.container.base
+  },
+  containerActiveClass: {
+    type: String,
+    default: () => $ui.toggle.container.active
+  },
+  containerInactiveClass: {
+    type: String,
+    default: () => $ui.toggle.container.inactive
+  },
+  iconBaseClass: {
+    type: String,
+    default: () => $ui.toggle.icon.base
+  },
+  iconActiveClass: {
+    type: String,
+    default: () => $ui.toggle.icon.active
+  },
+  iconInactiveClass: {
+    type: String,
+    default: () => $ui.toggle.icon.inactive
+  },
+  iconOnClass: {
+    type: String,
+    default: () => $ui.toggle.icon.on
+  },
+  iconOffClass: {
+    type: String,
+    default: () => $ui.toggle.icon.off
   }
 })
 
 const emit = defineEmits(['update:modelValue'])
 
-const enabled = computed({
+const active = computed({
   get () {
     return props.modelValue
   },

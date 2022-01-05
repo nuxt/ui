@@ -219,6 +219,24 @@ const container = {
   constrained: 'max-w-7xl'
 }
 
+const toggle = {
+  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-500',
+  active: 'bg-primary-600',
+  inactive: 'u-bg-gray-200',
+  container: {
+    base: 'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
+    active: 'translate-x-5',
+    inactive: 'translate-x-0'
+  },
+  icon: {
+    base: 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
+    active: 'opacity-100 ease-in duration-200',
+    inactive: 'opacity-0 ease-out duration-100',
+    on: 'h-3 w-3 text-primary-600',
+    off: 'h-3 w-3 u-text-gray-400'
+  }
+}
+
 const verticalNavigation = {
   base: 'flex items-center px-3 py-2 text-sm font-medium rounded-md',
   active: 'u-text-gray-900 u-bg-gray-100',
@@ -245,5 +263,6 @@ export default {
   radio,
   card,
   container,
+  toggle,
   verticalNavigation
 }

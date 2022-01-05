@@ -109,6 +109,7 @@ const components = [
     label: 'Toggle',
     to: '/components/Toggle',
     nuxt3: true,
+    preset: true,
     capi: true
   },
   {
