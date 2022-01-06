@@ -78,7 +78,9 @@ const components = [
   {
     label: 'Badge',
     to: '/components/Badge',
-    nuxt3: true
+    nuxt3: true,
+    capi: true,
+    preset: true
   },
   {
     label: 'Button',

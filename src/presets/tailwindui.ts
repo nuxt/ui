@@ -95,6 +95,22 @@ const button = {
   }
 }
 
+const badge = {
+  base: 'inline-flex items-center font-medium',
+  size: {
+    sm: 'text-xs px-2 py-0.5',
+    md: 'text-sm px-2.5 py-0.5',
+    lg: 'text-sm px-3 py-0.5',
+    xl: 'text-sm px-4 py-1'
+  },
+  variant: {
+    ...colors.reduce((acc: any, color) => {
+      acc[color] = `bg-${color}-100 dark:bg-${color}-700 text-${color}-800 dark:text-${color}-100`
+      return acc
+    }, {})
+  }
+}
+
 const formGroup = {
   wrapper: '',
   label: 'block text-sm font-medium u-text-gray-700',
@@ -256,14 +272,15 @@ const verticalNavigation = {
 }
 
 export default {
+  card,
   button,
+  badge,
   formGroup,
   input,
   textarea,
   select,
   checkbox,
   radio,
-  card,
   container,
   toggle,
   verticalNavigation
