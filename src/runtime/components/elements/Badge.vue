@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
