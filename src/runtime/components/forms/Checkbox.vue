@@ -14,9 +14,9 @@
         @blur="$emit('blur', $event)"
       >
     </div>
-    <div v-if="label" class="ml-3 text-sm">
+    <div v-if="label || $slots.label" class="ml-3 text-sm">
       <label :for="name" :class="labelClass">
-        {{ label }}
+        <slot name="label">{{ label }}</slot>
         <span v-if="required" :class="requiredClass">*</span>
       </label>
       <p v-if="help" :class="helpClass">

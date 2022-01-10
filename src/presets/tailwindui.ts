@@ -47,17 +47,12 @@ const button = {
   },
   variant: {
     ...colors.reduce((acc: any, color) => {
-      acc[color] = `shadow-sm border border-transparent text-white bg-${color}-600 hover:bg-${color}-700 disabled:bg-${color}-600 focus:ring-2 focus:ring-${color}-200`
+      acc[color] = `shadow-sm border border-transparent text-white bg-${color}-600 hover:bg-${color}-700 disabled:bg-${color}-600 focus:ring-2 focus:ring-offset-2 focus:ring-${color}-500`
       return acc
     }, {}),
-    primary: 'shadow-sm border border-transparent text-white bg-primary-600 hover:bg-primary-700 disabled:bg-primary-600 focus:ring-2 focus:ring-primary-200',
-    secondary: 'border border-transparent text-primary-700 bg-primary-100 hover:bg-primary-200 disabled:bg-primary-100 focus:ring-2 focus:ring-primary-500',
-    white: 'shadow-sm border u-border-gray-300 u-text-gray-700 u-bg-white hover:u-bg-gray-50 disabled:u-bg-white focus:ring-1 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500',
-    'white-hover': 'border border-transparent u-text-gray-500 hover:u-text-gray-700 focus:u-text-gray-700 bg-transparent hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-900 dark:focus:bg-gray-900 disabled:u-text-gray-500',
-    gray: 'shadow-sm border u-border-gray-300 u-text-gray-500 hover:u-text-gray-700 focus:u-text-gray-700 bg-gray-50 dark:bg-gray-800 disabled:u-text-gray-500 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500',
-    'gray-hover': 'border border-transparent u-text-gray-500 hover:u-text-gray-700 focus:u-text-gray-700 bg-transparent hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-800 dark:focus:bg-gray-800 disabled:u-text-gray-500',
-    black: 'border border-transparent u-text-white u-bg-gray-800 hover:u-bg-gray-900 focus:u-bg-gray-900',
-    'black-hover': 'border border-transparent u-text-gray-500 hover:u-text-gray-900 focus:u-text-gray-700 bg-transparent hover:bg-white dark:hover:bg-black focus:bg-white dark:focus:bg-black',
+    primary: 'shadow-sm border border-transparent text-white bg-primary-600 hover:bg-primary-700 disabled:bg-primary-600 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
+    secondary: 'border border-transparent text-primary-700 bg-primary-100 hover:bg-primary-200 disabled:bg-primary-100 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
+    white: 'shadow-sm border u-border-gray-300 u-text-gray-700 u-bg-white hover:u-bg-gray-50 disabled:u-bg-white focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
     transparent: 'border border-transparent u-text-gray-500 hover:u-text-gray-700 focus:u-text-gray-700 disabled:hover:u-text-gray-500',
     link: 'border border-transparent text-primary-500 hover:text-primary-700 focus:text-primary-700'
   },
@@ -211,7 +206,7 @@ const select = {
 
 const radio = {
   wrapper: 'relative flex items-start',
-  base: 'h-4 w-4 text-primary-600 focus:ring-1 focus:ring-primary-500 u-border-gray-300 dark:checked:border-primary-600 disabled:opacity-50 disabled:cursor-not-allowed',
+  base: 'h-4 w-4 text-primary-600 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 u-border-gray-300 dark:checked:border-primary-600 disabled:opacity-50 disabled:cursor-not-allowed',
   label: 'font-medium u-text-gray-700',
   required: 'text-red-400',
   help: 'u-text-gray-500'
@@ -238,7 +233,7 @@ const container = {
 }
 
 const toggle = {
-  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-500',
+  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
   active: 'bg-primary-600',
   inactive: 'u-bg-gray-200',
   container: {

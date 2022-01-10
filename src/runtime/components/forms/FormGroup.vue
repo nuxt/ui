@@ -1,24 +1,17 @@
 <template>
   <div :class="wrapperClass">
-    <slot name="label">
-      <div :class="labelWrapperClass">
-        <label
-          v-if="label"
-          :for="name"
-          :class="labelClass"
-          @click="onLabelClick"
-        >
-          {{ label }}
-          <span v-if="required" :class="requiredClass">*</span>
-        </label>
-        <span v-if="$slots.hint || hint" :class="hintClass">
-          <slot name="hint">{{ hint }}</slot>
-        </span>
-      </div>
-      <p v-if="description" :class="descriptionClass">
-        {{ description }}
-      </p>
-    </slot>
+    <div v-if="label || $slots.label" :class="labelWrapperClass">
+      <label :for="name" :class="labelClass">
+        <slot name="label">{{ label }}</slot>
+        <span v-if="required" :class="requiredClass">*</span>
+      </label>
+      <span v-if="$slots.hint || hint" :class="hintClass">
+        <slot name="hint">{{ hint }}</slot>
+      </span>
+    </div>
+    <p v-if="description" :class="descriptionClass">
+      {{ description }}
+    </p>
     <div :class="!!label && containerClass">
       <slot />
       <p v-if="help" :class="helpClass">
