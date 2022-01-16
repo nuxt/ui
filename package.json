@@ -36,7 +36,7 @@
     "@nuxtjs/eslint-config-typescript": "^8.0.0",
     "@types/lodash-es": "^4.17.5",
     "@vueuse/components": "^7.4.0",
-    "eslint": "^8.5.0",
+    "eslint": "8.7.0",
     "nuxt3": "latest",
     "unbuild": "^0.6.7"
   }
