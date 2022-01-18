@@ -19,24 +19,24 @@
     "lint": "eslint --ext .ts,.js,.vue ."
   },
   "dependencies": {
-    "@headlessui/vue": "^1.4.2",
+    "@headlessui/vue": "^1.4.3",
     "@iconify-json/heroicons-outline": "^1.0.2",
     "@iconify-json/heroicons-solid": "^1.0.2",
-    "@popperjs/core": "^2.11.0",
-    "@unocss/nuxt": "^0.17.2",
-    "defu": "^5.0.0",
+    "@popperjs/core": "^2.11.2",
+    "@unocss/nuxt": "^0.22.4",
+    "defu": "^5.0.1",
     "gradient-avatar": "^1.0.2",
     "lodash-es": "^4.17.21",
-    "nanoid": "^3.1.30",
+    "nanoid": "^3.2.0",
     "pathe": "^0.2.0",
-    "@vueuse/core": "^7.4.0"
+    "@vueuse/core": "^7.5.3"
   },
   "devDependencies": {
     "@nuxt/schema": "npm:@nuxt/schema-edge@latest",
     "@nuxtjs/eslint-config-typescript": "^8.0.0",
     "@types/lodash-es": "^4.17.5",
-    "@vueuse/components": "^7.4.0",
-    "eslint": "^8.5.0",
+    "@vueuse/components": "^7.5.3",
+    "eslint": "^8.7.0",
     "nuxt3": "latest",
     "unbuild": "^0.6.7"
   }
