@@ -21,8 +21,8 @@
 </template>
 
 <script setup>
-import Notification from './Notification'
 import { useNuxtApp, useState } from '#app'
+import Notification from './Notification'
 
 const { $toast } = useNuxtApp()
 const notifications = useState('notifications')
