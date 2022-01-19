@@ -24,12 +24,12 @@
     "@iconify-json/heroicons-solid": "^1.0.2",
     "@popperjs/core": "^2.11.2",
     "@unocss/nuxt": "^0.22.4",
+    "@vueuse/core": "^7.5.3",
     "defu": "^5.0.1",
     "gradient-avatar": "^1.0.2",
     "lodash-es": "^4.17.21",
     "nanoid": "^3.2.0",
-    "pathe": "^0.2.0",
-    "@vueuse/core": "^7.5.3"
+    "pathe": "^0.2.0"
   },
   "devDependencies": {
     "@nuxt/schema": "npm:@nuxt/schema-edge@latest",
