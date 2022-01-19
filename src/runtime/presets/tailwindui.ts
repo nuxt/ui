@@ -266,6 +266,15 @@ const verticalNavigation = {
   }
 }
 
+const alertDialog = {
+  icon: {
+    wrapper: 'h-12 w-12 sm:h-10 sm:w-10 bg-primary-100',
+    base: 'text-primary-600'
+  },
+  title: 'text-lg leading-6 font-medium text-gray-900',
+  description: 'text-sm text-gray-500'
+}
+
 export default {
   card,
   button,
@@ -278,5 +287,6 @@ export default {
   radio,
   container,
   toggle,
-  verticalNavigation
+  verticalNavigation,
+  alertDialog
 }
