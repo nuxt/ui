@@ -35,7 +35,7 @@
     "@nuxt/schema": "npm:@nuxt/schema-edge@latest",
     "@nuxtjs/eslint-config-typescript": "^8.0.0",
     "@types/lodash-es": "^4.17.5",
-    "@vueuse/components": "^7.5.3",
+    "@vueuse/components": "7.5.4",
     "eslint": "^8.7.0",
     "nuxt3": "latest",
     "unbuild": "^0.6.7"
