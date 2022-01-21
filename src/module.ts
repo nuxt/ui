@@ -3,8 +3,34 @@ import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlug
 import { colors } from '@unocss/preset-uno'
 import defu from 'defu'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
-import type { Nuxt } from '@nuxt/schema'
-import type { UiOptions } from './types'
+
+interface ColorsOptions {
+  /**
+   * @default 'indigo'
+   */
+  primary?: string
+
+  /**
+   * @default 'zinc'
+   */
+  gray?: string
+}
+
+export interface ModuleOptions {
+  /**
+   * @default 'tailwindui'
+   */
+  preset?: string | object
+
+  /**
+   * @default 'u'
+   */
+  prefix?: string
+
+  colors?: ColorsOptions
+
+  unocss?: UnocssNuxtOptions
+}
 
 const defaults = {
   preset: 'tailwindui',
@@ -21,7 +47,7 @@ const defaults = {
   }
 }
 
-export default defineNuxtModule<UiOptions>({
+export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: '@nuxthq/ui',
     configKey: 'ui',
@@ -31,7 +57,7 @@ export default defineNuxtModule<UiOptions>({
     }
   },
   defaults,
-  async setup (_options: UiOptions, nuxt: Nuxt) {
+  async setup (_options, nuxt) {
     const { preset, prefix, colors: { primary = 'indigo', gray = 'zinc' } = {} } = _options
     const { shortcuts = [], rules = [], variants = [], theme = {} } = _options.unocss || {}
 
@@ -136,7 +162,7 @@ export default defineNuxtModule<UiOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
-    const presetsDir = resolve(__dirname, './presets')
+    const presetsDir = resolve(runtimeDir, './presets')
 
     let ui: object = (await import(resolveModule(`./${defaults.preset}`, { paths: presetsDir }))).default
     try {
@@ -195,17 +221,6 @@ export default defineNuxtModule<UiOptions>({
     })
 
     // Add CSS
-    nuxt.options.css.push(resolve(__dirname, './css/forms.css'))
+    nuxt.options.css.push(resolve(runtimeDir, 'css', 'forms.css'))
   }
 })
-
-export * from './types'
-
-declare module '@nuxt/schema' {
-  interface NuxtConfig {
-    ui?: UiOptions
-  }
-  interface NuxtOptions {
-    ui?: UiOptions
-  }
-}
