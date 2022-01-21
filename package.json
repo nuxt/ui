@@ -38,6 +38,6 @@
     "@vueuse/components": "^7.5.3",
     "eslint": "^8.7.0",
     "nuxt3": "latest",
-    "unbuild": "^0.6.7"
+    "unbuild": "0.6.8"
   }
 }
