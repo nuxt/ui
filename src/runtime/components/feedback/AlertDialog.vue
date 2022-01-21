@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed } from 'vue'
+import { computed } from 'vue'
 import { DialogTitle, DialogDescription } from '@headlessui/vue'
 import Modal from '../overlays/Modal'
 import Button from '../elements/Button'
