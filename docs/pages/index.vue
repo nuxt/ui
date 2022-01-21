@@ -17,32 +17,19 @@
     </h2>
 
     <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
-      <code class="text-sm">
-yarn add --dev @nuxthq/ui</code>
+      <code class="text-sm" v-html="code1" />
     </pre>
 
     <p>Then, register the module in your `nuxt.config.js`:</p>
 
     <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
-      <code class="text-sm">
-import { defineNuxtConfig } from 'nuxt3'
-
-export default defineNuxtConfig({
-  buildModules: [
-    '@nuxthq/ui'
-  ]
-})</code>
+      <code class="text-sm" v-html="code2" />
     </pre>
 
     <p>If you want latest updates, please use `@nuxthq/ui-edge` in your `package.json`:</p>
 
     <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
-      <code class="text-sm">
-{
-  "devDependencies": {
-    "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest"
-  }
-}</code>
+      <code class="text-sm" v-html="code3" />
     </pre>
 
     <h2 class="font-bold text-2xl u-text-gray-900">
@@ -62,17 +49,7 @@ export default defineNuxtConfig({
     </p>
 
     <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
-      <code class="text-sm">
-import { defineNuxtConfig } from 'nuxt3'
-
-export default defineNuxtConfig({
-  buildModules: [
-    '@nuxthq/ui'
-  ],
-  ui: {
-    prefix: 'tw'
-  }
-})</code>
+      <code class="text-sm" v-html="code4" />
     </pre>
 
     <p>- `colors.primary`</p>
@@ -84,19 +61,7 @@ export default defineNuxtConfig({
     </p>
 
     <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
-      <code class="text-sm">
-import { defineNuxtConfig } from 'nuxt3'
-
-export default defineNuxtConfig({
-  buildModules: [
-    '@nuxthq/ui'
-  ],
-  ui: {
-    colors: {
-      primary: 'blue'
-    }
-  }
-})</code>
+      <code class="text-sm" v-html="code5" />
     </pre>
 
     <p>- `colors.gray`</p>
@@ -120,3 +85,44 @@ export default defineNuxtConfig({
     <p>Extend UnoCSS theme: https://github.com/antfu/unocss#extend-theme.</p>
   </div>
 </template>
+
+<script setup>
+const code1 = `
+yarn add --dev @nuxthq/ui`
+
+const code2 = `
+import { defineNuxtConfig } from 'nuxt3'
+
+defineNuxtConfig({
+  buildModules: [
+    '@nuxthq/ui'
+  ]
+})`
+
+const code3 = `
+{
+  "devDependencies": {
+    "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest"
+  }
+}`
+
+const code4 = `
+import { defineNuxtConfig } from 'nuxt3'
+
+defineNuxtConfig({
+  ui: {
+    prefix: 'tw'
+  }
+})`
+
+const code5 = `
+import { defineNuxtConfig } from 'nuxt3'
+
+defineNuxtConfig({
+  ui: {
+    colors: {
+      primary: 'blue'
+    }
+  }
+})`
+</script>
