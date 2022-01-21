@@ -100,6 +100,7 @@ const is = `U${params.component}`
 
 const component = nuxtApp.vueApp.component(is)
 
+const alertDialog = ref(false)
 const toggle = ref(false)
 const modal = ref(false)
 
@@ -112,6 +113,19 @@ const defaultProps = {
   },
   Alert: {
     title: 'A new software update is available. See what’s new in version 2.0.4.'
+  },
+  AlertDialog: {
+    title: 'Are you sure you want to close this modal?',
+    modelValue: alertDialog,
+    'onUpdate:modelValue': (v) => { alertDialog.value = v },
+    component: {
+      name: 'Button',
+      props: {
+        variant: 'secondary',
+        label: 'Open modal',
+        onClick: () => { alertDialog.value = true }
+      }
+    }
   },
   Avatar: {
     src: 'https://picsum.photos/200/300'
