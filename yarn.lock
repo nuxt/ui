@@ -451,10 +451,10 @@
     unctx "^1.0.2"
     untyped "^0.3.0"
 
-"@nuxt/module-builder@0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@nuxt/module-builder/-/module-builder-0.1.6.tgz#e7e03697a4500c268e635e9c6e91be586daf81e3"
-  integrity sha512-JOe8FgavtYVaMXI54GyCh0nxNJG6XwmGPE5VFeQwdrfRqzYQAjZ0MwLu+0kxilakyJjHim0fsMxiX8Dtp+2Lpw==
+"@nuxt/module-builder@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@nuxt/module-builder/-/module-builder-0.1.7.tgz#6de83fa24a839265d43abdb5ecf8ec85456ca765"
+  integrity sha512-ueTrJhXrKKxGp6VAe2C/nOqTeRoy0qfq9RH2QVl0kq0duDyQHCe1e8dw8yBbYjTlSvfqBPYaraxpX8i2zis2cw==
   dependencies:
     consola "^2.15.3"
     mlly "^0.3.19"
