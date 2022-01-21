@@ -38,13 +38,13 @@
     "pathe": "^0.2.0"
   },
   "devDependencies": {
-    "@nuxt/module-builder": "^0.1.7",
-    "@nuxtjs/eslint-config-typescript": "^8.0.0",
-    "@types/lodash-es": "^4.17.5",
-    "@vueuse/components": "^7.5.4",
-    "eslint": "^8.7.0",
+    "@nuxt/module-builder": "0.1.7",
+    "@nuxtjs/eslint-config-typescript": "8.0.0",
+    "@types/lodash-es": "4.17.5",
+    "@vueuse/components": "7.5.4",
+    "eslint": "8.7.0",
     "nuxt3": "latest",
-    "standard-version": "^9.3.2"
+    "standard-version": "9.3.2"
   },
   "build": {
     "externals": ["@unocss/preset-uno"]
