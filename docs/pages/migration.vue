@@ -116,7 +116,15 @@ const components = [
   },
   {
     label: 'Alert',
-    to: '/components/Alert'
+    to: '/components/Alert',
+    nuxt3: true
+  },
+  {
+    label: 'AlertDialog',
+    to: '/components/AlertDialog',
+    nuxt3: true,
+    capi: true,
+    preset: true
   },
   {
     label: 'Input',

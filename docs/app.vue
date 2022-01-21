@@ -61,7 +61,7 @@ import { UseDark } from '@vueuse/components'
 const sections = [
   { label: 'Getting Started', links: [{ label: 'Usage', to: '/' }, { label: 'Examples', to: '/examples' }, { label: 'Migration', to: '/migration' }, { label: 'Dark mode', to: '/dark' }] },
   { label: 'Elements', links: [{ label: 'Avatar', to: '/components/Avatar' }, { label: 'AvatarGroup', to: '/components/AvatarGroup' }, { label: 'Badge', to: '/components/Badge' }, { label: 'Button', to: '/components/Button' }, { label: 'Dropdown', to: '/components/Dropdown' }, { label: 'Icon', to: '/components/Icon' }] },
-  { label: 'Feedback', links: [{ label: 'Alert', to: '/components/Alert' }] },
+  { label: 'Feedback', links: [{ label: 'Alert', to: '/components/Alert' }, { label: 'AlertDialog', to: '/components/AlertDialog' }] },
   { label: 'Forms', links: [{ label: 'Checkbox', to: '/components/Checkbox' }, { label: 'Input', to: '/components/Input' }, { label: 'FormGroup', to: '/components/FormGroup' }, { label: 'Radio', to: '/components/Radio' }, { label: 'Select', to: '/components/Select' }, { label: 'Textarea', to: '/components/Textarea' }, { label: 'Toggle', to: '/components/Toggle' }] },
   { label: 'Layout', links: [{ label: 'Card', to: '/components/Card' }, { label: 'Container', to: '/components/Container' }] },
   // { label: 'Navigation', links: [{ label: 'Pills', to: '/components/Pills' }, { label: 'Tabs', to: '/components/Tabs' }, { label: 'VerticalNavigation', to: '/components/VerticalNavigation' }] },
