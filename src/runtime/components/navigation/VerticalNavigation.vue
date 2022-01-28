@@ -1,5 +1,5 @@
 <template>
-  <nav class="space-y-1">
+  <nav :class="wrapperClass">
     <Link
       v-for="(link, index) of links"
       v-slot="{ isActive }"
@@ -44,6 +44,10 @@ export default {
     links: {
       type: Array,
       required: true
+    },
+    wrapperClass: {
+      type: String,
+      default: () => $ui.verticalNavigation.wrapper
     },
     baseClass: {
       type: String,

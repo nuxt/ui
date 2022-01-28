@@ -251,7 +251,8 @@ const toggle = {
 }
 
 const verticalNavigation = {
-  base: 'flex items-center px-3 py-2 text-sm font-medium rounded-md w-full',
+  wrapper: 'space-y-1',
+  base: 'group flex items-center px-3 py-2 text-sm font-medium rounded-md w-full',
   active: 'u-text-gray-900 u-bg-gray-100',
   inactive: 'u-text-gray-600 hover:u-text-gray-900 hover:u-bg-gray-50 focus:u-bg-gray-50',
   icon: {
@@ -263,7 +264,7 @@ const verticalNavigation = {
   badge: {
     base: 'ml-auto inline-block py-0.5 px-3 text-xs rounded-full',
     active: 'u-bg-white',
-    inactive: 'u-bg-gray-100 group-hove:u-bg'
+    inactive: 'u-bg-gray-100 u-text-gray-600 group-hover:u-bg-gray-200'
   }
 }
 
