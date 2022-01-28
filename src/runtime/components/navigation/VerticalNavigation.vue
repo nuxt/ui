@@ -19,7 +19,7 @@
         />
       </slot>
       <slot :link="link">
-        <span class="truncate">{{ link.label }}</span>
+        <span v-if="link.label" class="truncate">{{ link.label }}</span>
       </slot>
       <slot name="badge" :link="link">
         <span v-if="link.badge" :class="[badgeBaseClass, isActive ? badgeActiveClass : badgeInactiveClass]">
