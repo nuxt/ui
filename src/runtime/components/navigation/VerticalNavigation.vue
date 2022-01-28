@@ -15,7 +15,7 @@
         <Icon
           v-if="link.icon"
           :name="link.icon"
-          :class="[iconBaseClass, isActive ? iconActiveClass : iconInactiveClass]"
+          :class="[iconBaseClass, link.label && iconSpacingClass, isActive ? iconActiveClass : iconInactiveClass]"
         />
       </slot>
       <slot :link="link">
@@ -60,6 +60,10 @@ export default {
     iconBaseClass: {
       type: String,
       default: () => $ui.verticalNavigation.icon.base
+    },
+    iconSpacingClass: {
+      type: String,
+      default: () => $ui.verticalNavigation.icon.spacing
     },
     iconActiveClass: {
       type: String,
