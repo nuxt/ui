@@ -43,7 +43,7 @@ const toggle = {
   active: 'bg-gray-800'
 }
 
-export default defu(preset, {
+export default defu({
   badge,
   button,
   input,
@@ -52,4 +52,4 @@ export default defu(preset, {
   radio,
   checkbox,
   toggle
-})
+}, preset)
