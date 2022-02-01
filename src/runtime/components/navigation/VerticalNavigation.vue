@@ -5,7 +5,7 @@
       v-slot="{ isActive }"
       :key="index"
       v-bind="link"
-      :class="baseClass"
+      :class="[baseClass, spacingClass]"
       :active-class="activeClass"
       :inactive-class="inactiveClass"
       @click="link.click && link.click()"
@@ -52,6 +52,10 @@ export default {
     baseClass: {
       type: String,
       default: () => $ui.verticalNavigation.base
+    },
+    spacingClass: {
+      type: String,
+      default: () => $ui.verticalNavigation.spacing
     },
     activeClass: {
       type: String,
