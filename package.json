@@ -1,6 +1,6 @@
 {
   "name": "@nuxthq/ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": "https://github.com/nuxtlabs/ui",
   "license": "MIT",
   "exports": {
@@ -47,6 +47,8 @@
     "standard-version": "^9.3.2"
   },
   "build": {
-    "externals": ["@unocss/preset-uno"]
+    "externals": [
+      "@unocss/preset-uno"
+    ]
   }
 }
