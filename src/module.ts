@@ -33,7 +33,7 @@ export interface ModuleOptions {
 }
 
 const defaults = {
-  preset: 'tailwindui',
+  preset: 'default',
   prefix: 'u',
   colors: {
     primary: 'indigo',
