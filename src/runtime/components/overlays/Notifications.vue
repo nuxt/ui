@@ -25,5 +25,5 @@ import { useNuxtApp, useState } from '#app'
 import Notification from './Notification'
 
 const { $toast } = useNuxtApp()
-const notifications = useState('notifications')
+const notifications = useState('notifications', () => [])
 </script>
