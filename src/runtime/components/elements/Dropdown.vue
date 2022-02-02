@@ -16,7 +16,7 @@
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
       >
-        <MenuItems :class="itemsClass" static>
+        <MenuItems :class="baseClass" static>
           <div v-for="(subItems, index) of items" :key="index" class="py-1">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }">
               <Component v-bind="item" :is="(item.to && 'Link') || 'button'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)">
@@ -45,6 +45,7 @@ import {
 import Icon from '../elements/Icon'
 import Link from '../elements/Link'
 import { classNames, usePopper } from '../../utils'
+import $ui from '#build/ui'
 
 export default {
   components: {
@@ -76,35 +77,35 @@ export default {
     },
     wrapperClass: {
       type: String,
-      default: 'relative inline-block text-left'
+      default: () => $ui.dropdown.wrapper
     },
     containerClass: {
       type: String,
-      default: 'w-48 z-20'
+      default: () => $ui.dropdown.container
     },
-    itemsClass: {
+    baseClass: {
       type: String,
-      default: 'u-bg-white divide-y u-divide-gray-100 rounded-md ring-1 ring-black ring-opacity-5'
+      default: () => $ui.dropdown.base
     },
-    itemClass: {
+    itemBaseClass: {
       type: String,
-      default: 'group flex items-center px-4 py-2 text-sm w-full'
+      default: () => $ui.dropdown.item.base
     },
     itemActiveClass: {
       type: String,
-      default: 'u-bg-gray-100 u-text-gray-900'
+      default: () => $ui.dropdown.item.active
     },
     itemInactiveClass: {
       type: String,
-      default: 'u-text-gray-700'
+      default: () => $ui.dropdown.item.inactive
     },
     itemDisabledClass: {
       type: String,
-      default: 'cursor-not-allowed opacity-50'
+      default: () => $ui.dropdown.item.disabled
     },
     itemIconClass: {
       type: String,
-      default: 'mr-3 h-5 w-5 u-text-gray-400 group-hover:u-text-gray-500'
+      default: () => $ui.dropdown.item.icon
     }
   },
   setup (props) {
@@ -134,7 +135,7 @@ export default {
 
     function resolveItemClass ({ active, disabled }) {
       return classNames(
-        props.itemClass,
+        props.itemBaseClass,
         active ? props.itemActiveClass : props.itemInactiveClass,
         disabled && props.itemDisabledClass
       )
