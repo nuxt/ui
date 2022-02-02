@@ -1,4 +1,4 @@
-import { defineNuxtPlugin, useNuxtApp } from '#app'
+import { defineNuxtPlugin } from '#app'
 import { ClipboardPlugin } from '../types/clipboard'
 
 export default defineNuxtPlugin((nuxtApp) => {
