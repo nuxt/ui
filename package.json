@@ -32,7 +32,6 @@
     "@unocss/nuxt": "^0.22.6",
     "@vueuse/core": "^7.5.5",
     "defu": "^5.0.1",
-    "gradient-avatar": "^1.0.2",
     "lodash-es": "^4.17.21",
     "nanoid": "^3.2.0",
     "pathe": "^0.2.0"

@@ -1,8 +1,6 @@
 <template>
   <span class="relative inline-flex items-center justify-center" :class="avatarClass" @click="goto">
     <img v-if="url" :src="url" :alt="alt" :class="[sizeClass, roundedClass]">
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <span v-else-if="gradientPlaceholder" class="w-full h-full overflow-hidden" :class="roundedClass" v-html="gradientPlaceholder" />
     <span
       v-else-if="placeholder"
       class="font-medium leading-none u-text-gray-900 uppercase"
@@ -31,8 +29,6 @@
 </template>
 
 <script>
-import avatar from 'gradient-avatar'
-
 export default {
   props: {
     src: {
@@ -62,10 +58,6 @@ export default {
       type: Boolean,
       default: false
     },
-    gradient: {
-      type: Boolean,
-      default: false
-    },
     status: {
       type: String,
       default: null,
@@ -87,13 +79,6 @@ export default {
       }
 
       return this.alt.split(' ').map(word => word.charAt(0)).join('')
-    },
-    gradientPlaceholder () {
-      if (!this.gradient) {
-        return
-      }
-
-      return avatar(this.alt || new Date().toString())
     },
     sizeClass () {
       return ({

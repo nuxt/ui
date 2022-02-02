@@ -222,11 +222,5 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Add CSS
     nuxt.options.css.push(resolve(runtimeDir, 'css', 'forms.css'))
-
-    nuxt.options.vite = {
-      optimizeDeps: {
-        exclude: ['gradient-avatar']
-      }
-    }
   }
 })
