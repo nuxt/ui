@@ -183,6 +183,7 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     addPlugin(resolve(runtimeDir, 'plugins', 'toast.client'))
+    addPlugin(resolve(runtimeDir, 'plugins', 'clipboard.client'))
 
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'elements'),
