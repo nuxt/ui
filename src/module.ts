@@ -225,7 +225,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.vite = {
       optimizeDeps: {
-        include: ['gradient-avatar']
+        include: ['gradient-avatar/index.js']
       }
     }
   }
