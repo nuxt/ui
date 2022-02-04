@@ -163,7 +163,7 @@ export default {
     const iconClass = computed(() => {
       return classNames(
         props.iconBaseClass,
-        $ui.input.icon.size[props.size],
+        $ui.button.icon.size[props.size],
         isLeading.value && (!!slots.default || !!props.label?.length) && $ui.button.icon.leading.spacing[props.size],
         isTrailing.value && (!!slots.default || !!props.label?.length) && $ui.button.icon.trailing.spacing[props.size],
         props.loading && 'animate-spin'
