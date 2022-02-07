@@ -1,6 +1,6 @@
 <template>
   <Menu v-slot="{ open }" as="div" :class="wrapperClass">
-    <MenuButton ref="trigger" as="div">
+    <MenuButton ref="trigger" as="div" class="inline-flex">
       <slot :open="open">
         <button>Open</button>
       </slot>
