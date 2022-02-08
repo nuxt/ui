@@ -279,7 +279,7 @@ const alertDialog = {
 }
 
 const dropdown = {
-  wrapper: 'relative inline-block text-left',
+  wrapper: 'relative inline-flex text-left',
   container: 'w-48 z-20',
   base: 'u-bg-white divide-y u-divide-gray-100 rounded-md ring-1 ring-black ring-opacity-5',
   item: {
