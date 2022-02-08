@@ -43,6 +43,10 @@ const toggle = {
   active: 'bg-gray-800'
 }
 
+const container = {
+  constrained: 'max-w-6xl'
+}
+
 export default defu({
   badge,
   button,
@@ -51,5 +55,6 @@ export default defu({
   select,
   radio,
   checkbox,
-  toggle
+  toggle,
+  container
 }, preset)
