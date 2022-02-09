@@ -27,7 +27,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.provide('toast', {
     addNotification,
     removeNotification,
-    success ({ title, description, timeout = 4000 }: { title?: string, description?: string, timeout?: number } = {}) {
+    success ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
       addNotification({
         type: 'success',
         title,
@@ -35,7 +35,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         timeout
       })
     },
-    error ({ title = 'An error occurred!', description, timeout = 4000 }: { title?: string, description?: string, timeout?: number } = {}) {
+    error ({ title = 'An error occurred!', description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
       addNotification({
         type: 'error',
         title,
