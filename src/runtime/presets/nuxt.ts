@@ -3,22 +3,22 @@ import preset from './default'
 
 const badge = {
   variant: {
-    primary: 'bg-gray-800 text-white',
-    secondary: 'bg-white text-gray-700'
+    primary: 'u-bg-gray-800 u-text-white',
+    secondary: 'u-bg-white u-text-gray-700'
   }
 }
 
 const button = {
   variant: {
-    primary: 'border border-transparent text-white bg-gray-800 hover:bg-gray-900 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900',
-    secondary: 'border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900',
-    link: 'border border-transparent text-gray-900 hover:underline focus:underline'
+    primary: 'border border-transparent u-text-white u-bg-gray-800 hover:u-bg-gray-900 focus:ring-2 focus:ring-offset-2 focus:u-ring-gray-900',
+    secondary: 'border u-border-gray-300 u-text-gray-700 u-bg-white hover:u-bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:u-ring-gray-900',
+    link: 'border border-transparent u-text-gray-900 hover:underline focus:underline'
   }
 }
 
 const input = {
   appearance: {
-    default: 'focus:ring-1 focus:ring-gray-900 focus:border-gray-900 border border-gray-300 rounded-md shadow-sm'
+    default: 'focus:ring-1 focus:u-ring-gray-900 focus:u-border-gray-900 border u-border-gray-300 rounded-md shadow-sm'
   }
 }
 
@@ -31,7 +31,7 @@ const select = {
 }
 
 const radio = {
-  base: 'h-4 w-4 text-gray-900 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 u-border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed'
+  base: 'h-4 w-4 u-text-gray-900 focus:ring-2 focus:ring-offset-2 focus:u-ring-gray-900 focus:ring-offset-white dark:focus:ring-offset-black u-border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed'
 }
 
 const checkbox = {
@@ -39,8 +39,8 @@ const checkbox = {
 }
 
 const toggle = {
-  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2',
-  active: 'bg-gray-800'
+  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:u-ring-gray-900 focus:ring-offset-white dark:focus:ring-offset-black',
+  active: 'u-bg-gray-800'
 }
 
 const container = {

@@ -20,7 +20,7 @@ const colors = [
 ]
 
 const button = {
-  base: 'font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
+  base: 'font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 focus:ring-offset-white dark:focus:ring-offset-black',
   size: {
     xxs: 'text-xs',
     xs: 'text-xs',
@@ -206,7 +206,7 @@ const select = {
 
 const radio = {
   wrapper: 'relative flex items-start',
-  base: 'h-4 w-4 text-primary-600 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 u-border-gray-300 dark:checked:border-primary-600 disabled:opacity-50 disabled:cursor-not-allowed',
+  base: 'h-4 w-4 text-primary-600 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-black u-border-gray-300 dark:checked:border-primary-600 disabled:opacity-50 disabled:cursor-not-allowed',
   label: 'font-medium u-text-gray-700',
   required: 'text-red-400',
   help: 'u-text-gray-500'
@@ -222,7 +222,7 @@ const card = {
   background: 'u-bg-white',
   border: 'u-border-gray-200',
   ring: 'ring-1 u-ring-gray-200',
-  shadow: 'shadow',
+  shadow: '',
   body: 'px-4 py-5 sm:p-6',
   header: 'px-4 py-5 sm:px-6',
   footer: 'px-4 py-4 sm:px-6'
@@ -233,7 +233,7 @@ const container = {
 }
 
 const toggle = {
-  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
+  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-black',
   active: 'bg-primary-600',
   inactive: 'u-bg-gray-200',
   container: {
