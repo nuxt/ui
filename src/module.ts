@@ -1,6 +1,6 @@
 import { resolve } from 'pathe'
 import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin, resolveModule } from '@nuxt/kit'
-import { colors } from '@unocss/preset-uno'
+import { colors } from '@unocss/preset-mini'
 import defu from 'defu'
 import type { UnocssNuxtOptions } from '@unocss/nuxt'
 
