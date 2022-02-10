@@ -204,6 +204,10 @@ const select = {
   ...input
 }
 
+const selectCustom = {
+  ...select
+}
+
 const radio = {
   wrapper: 'relative flex items-start',
   base: 'h-4 w-4 text-primary-600 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-black u-border-gray-300 dark:checked:border-primary-600 disabled:opacity-50 disabled:cursor-not-allowed',
@@ -299,6 +303,7 @@ export default {
   input,
   textarea,
   select,
+  selectCustom,
   checkbox,
   radio,
   container,

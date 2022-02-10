@@ -100,6 +100,15 @@ const is = `U${params.component}`
 
 const component = nuxtApp.vueApp.component(is)
 
+const people = [
+  { id: 1, name: 'Durward Reynolds', disabled: false },
+  { id: 2, name: 'Kenton Towne', disabled: false },
+  { id: 3, name: 'Therese Wunsch', disabled: false },
+  { id: 4, name: 'Benedict Kessler', disabled: true },
+  { id: 5, name: 'Katelyn Rohan', disabled: false }
+]
+
+const selectCustom = ref(people[0])
 const alertDialog = ref(false)
 const toggle = ref(false)
 const modal = ref(false)
@@ -214,6 +223,12 @@ const defaultProps = {
     name: 'select',
     options: ['English', 'Spanish', 'French', 'German', 'Chinese']
   },
+  SelectCustom: {
+    modelValue: selectCustom,
+    'onUpdate:modelValue': (v) => { selectCustom.value = v },
+    textAttribute: 'name',
+    options: people
+  },
   Textarea: {
     name: 'textarea'
   },
@@ -264,6 +279,10 @@ const defaultProps = {
 const componentDefaultProps = defaultProps[params.component] || {}
 const { props: componentProps } = await component.__asyncLoader()
 
+function lowercaseFirstLetter (string) {
+  return string.charAt(0).toLowerCase() + string.slice(1)
+}
+
 const refProps = Object.entries(componentProps).map(([key, prop]) => {
   const defaultValue = componentDefaultProps[key]
   const propDefault = (typeof prop.default === 'function' ? prop.default() : prop.default)
@@ -281,7 +300,7 @@ const refProps = Object.entries(componentProps).map(([key, prop]) => {
     if (arrayRegex) {
       values = JSON.parse(arrayRegex[0].replace(/'/g, '"')).filter(Boolean)
     } else {
-      const $uiProp = $ui[params.component.toLowerCase()][key]
+      const $uiProp = $ui[lowercaseFirstLetter(params.component)][key]
       if ($uiProp) {
         values = Object.keys($uiProp).filter(Boolean)
       }
@@ -289,7 +308,7 @@ const refProps = Object.entries(componentProps).map(([key, prop]) => {
   }
 
   if (value) {
-    if (type === 'String') {
+    if (type === 'String' && typeof value === 'string') {
       value = value.replace(/^'(.*)'$/, '$1')
     } else if (type === 'Array') {
       value = JSON.stringify(value)
@@ -307,6 +326,7 @@ const refProps = Object.entries(componentProps).map(([key, prop]) => {
 
 const eventProps = Object.entries(componentDefaultProps)
   .filter(([key]) => !refProps.find(prop => prop.key === key))
+  .filter(([key]) => !['slots'].includes(key))
   .reduce((acc, [key, value]) => {
     acc[key] = value
     return acc

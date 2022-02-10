@@ -28,17 +28,11 @@ export default defineNuxtConfig({
       primary: 'blue'
     },
     preset: {
-      container: {
-        constrained: 'max-w-8xl'
-      }
     },
     unocss: {
       theme: {
         fontFamily: {
           sans: '"Inter var", sans-serif'
-        },
-        maxWidth: {
-          '8xl': '90rem'
         }
       }
     }

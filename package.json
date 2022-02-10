@@ -39,6 +39,10 @@
   "devDependencies": {
     "@nuxt/module-builder": "^0.1.7",
     "@nuxtjs/eslint-config-typescript": "^8.0.0",
+    "@nuxtjs/tailwindcss": "^5.0.0-4",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.4.0",
+    "@tailwindcss/line-clamp": "^0.3.1",
     "@types/lodash-es": "^4.17.6",
     "@vueuse/components": "^7.6.1",
     "eslint": "^8.8.0",
