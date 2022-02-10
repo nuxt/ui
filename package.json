@@ -24,13 +24,13 @@
     "release": "yarn lint && standard-version && git push --follow-tags"
   },
   "dependencies": {
-    "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
     "@headlessui/vue": "^1.4.3",
     "@iconify-json/heroicons-outline": "^1.0.2",
     "@iconify-json/heroicons-solid": "^1.0.2",
+    "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
     "@popperjs/core": "^2.11.2",
-    "@unocss/nuxt": "^0.23.0",
-    "@vueuse/core": "^7.5.5",
+    "@unocss/nuxt": "^0.24.3",
+    "@vueuse/core": "^7.6.1",
     "defu": "^5.0.1",
     "lodash-es": "^4.17.21",
     "nanoid": "^3.2.0",
@@ -40,14 +40,14 @@
     "@nuxt/module-builder": "^0.1.7",
     "@nuxtjs/eslint-config-typescript": "^8.0.0",
     "@types/lodash-es": "^4.17.6",
-    "@vueuse/components": "^7.5.5",
+    "@vueuse/components": "^7.6.1",
     "eslint": "^8.8.0",
     "nuxt3": "latest",
     "standard-version": "^9.3.2"
   },
   "build": {
     "externals": [
-      "@unocss/preset-uno"
+      "@unocss/preset-mini"
     ]
   }
 }
