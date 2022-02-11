@@ -5,6 +5,8 @@
     :class="wrapperClass"
     @update:model-value="$emit('update:modelValue', $event)"
   >
+    <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default">
+
     <ListboxButton :class="selectCustomClass">
       <span class="block truncate">{{ modelValue[textAttribute] }}</span>
       <span :class="iconWrapperClass">
@@ -59,6 +61,10 @@ const props = defineProps({
   options: {
     type: Array,
     default: () => []
+  },
+  required: {
+    type: Boolean,
+    default: false
   },
   size: {
     type: String,
