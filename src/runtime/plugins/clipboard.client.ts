@@ -1,5 +1,5 @@
 import { defineNuxtPlugin } from '#app'
-import { ClipboardPlugin } from '../types/clipboard'
+import { ClipboardPlugin } from '../types'
 
 export default defineNuxtPlugin((nuxtApp) => {
   function copy (text: string, success: { title?: string, description?: string } = {}, failure: { title?: string, description?: string } = {}) {

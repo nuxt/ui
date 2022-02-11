@@ -1,8 +1,10 @@
+import { fileURLToPath } from 'url'
 import { resolve } from 'pathe'
 import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin, resolveModule } from '@nuxt/kit'
-import { colors } from '@unocss/preset-mini'
 import defu from 'defu'
-import type { UnocssNuxtOptions } from '@unocss/nuxt'
+import type { TailwindConfig } from 'tailwindcss/tailwind-config'
+import colors from 'tailwindcss/colors.js'
+import { name, version } from '../package.json'
 
 interface ColorsOptions {
   /**
@@ -29,7 +31,7 @@ export interface ModuleOptions {
 
   colors?: ColorsOptions
 
-  unocss?: UnocssNuxtOptions
+  tailwindcss?: TailwindConfig
 }
 
 const defaults = {
@@ -39,17 +41,15 @@ const defaults = {
     primary: 'indigo',
     gray: 'zinc'
   },
-  unocss: {
-    shortcuts: [],
-    rules: [],
-    variants: [],
+  tailwindcss: {
     theme: {}
   }
 }
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: '@nuxthq/ui',
+    name,
+    version,
     configKey: 'ui',
     compatibility: {
       nuxt: '^3.0.0',
@@ -57,71 +57,40 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults,
-  async setup (_options, nuxt) {
-    const { preset, prefix, colors: { primary = 'indigo', gray = 'zinc' } = {} } = _options
-    const { shortcuts = [], rules = [], variants = [], theme = {} } = _options.unocss || {}
+  async setup (options, nuxt) {
+    const { preset, prefix, colors: { primary = 'indigo', gray = 'zinc' } = {}, tailwindcss: { theme = {} } = {} } = options
 
-    const options: UnocssNuxtOptions = {
-      theme: {
-        colors: {
-          gray: typeof gray === 'object' ? gray : (colors && colors[gray]),
-          primary: typeof primary === 'object' ? primary : (colors && colors[primary])
-        },
-        ...theme
-      },
-      preflight: true,
-      icons: {
-        prefix: ''
-      },
-      shortcuts: {
+    // Transpile runtime
+    const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
+    nuxt.options.build.transpile.push(runtimeDir)
+    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
-        ...shortcuts
-      },
-      rules: [
-        // [/^shadow-?(.*)$/, ([, d], { theme }) => {
-        //   // @ts-ignore
-        //   const value = theme?.boxShadow?.[d || 'DEFAULT']
-        //   if (value) {
-        //     return {
-        //       '--un-shadow-color': '0,0,0',
-        //       '--un-shadow': value,
-        //       'box-shadow': 'var(--un-shadow)'
-        //     }
-        //   }
-        // }],
-        ...rules
-      ],
-      variants,
-      layers: {
-        icons: 0,
-        default: 1,
-        shortcuts: 2
-      }
-    }
     await installModule('@nuxtjs/tailwindcss', {
       viewer: false,
       config: {
-        theme: {
+        darkMode: 'class',
+        theme: defu.arrayFn({
           extend: {
             colors: {
+              // @ts-ignore
               gray: typeof gray === 'object' ? gray : (colors && colors[gray]),
+              // @ts-ignore
               primary: typeof primary === 'object' ? primary : (colors && colors[primary])
-            },
-            ...theme
+            }
           }
-        },
+        }, theme),
         plugins: [
           require('@tailwindcss/forms'),
           require('@tailwindcss/line-clamp'),
           require('@tailwindcss/aspect-ratio')
+        ],
+        content: [
+          `${runtimeDir}/components/**/*.{vue,js,ts}`,
+          `${runtimeDir}/presets/**/*.{js,ts}`
         ]
-      }
+      },
+      cssPath: `${runtimeDir}/tailwind.css`
     })
-
-    // Transpile runtime
-    const runtimeDir = resolve(__dirname, './runtime')
-    nuxt.options.build.transpile.push(runtimeDir)
-    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
     const presetsDir = resolve(runtimeDir, './presets')
 
@@ -181,8 +150,5 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.hook('autoImports:dirs', (dirs) => {
       dirs.push(resolve(runtimeDir, 'composables'))
     })
-
-    // Add CSS
-    nuxt.options.css.push(resolve(runtimeDir, 'css', 'shortcuts.css'))
   }
 })

@@ -29,10 +29,12 @@ export default defineNuxtConfig({
     },
     preset: {
     },
-    unocss: {
+    tailwindcss: {
       theme: {
-        fontFamily: {
-          sans: '"Inter var", sans-serif'
+        extend: {
+          fontFamily: {
+            sans: '"Inter var", sans-serif'
+          }
         }
       }
     }

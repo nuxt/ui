@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { Ref } from 'vue'
 import { defineNuxtPlugin, useState } from '#app'
-import { ToastNotification, ToastPlugin } from '../types/toast'
+import { ToastNotification, ToastPlugin } from '../types'
 
 export default defineNuxtPlugin((nuxtApp) => {
   const notifications: Ref<ToastNotification[]> = useState('notifications', () => [])

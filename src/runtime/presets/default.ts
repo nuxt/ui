@@ -285,7 +285,7 @@ const alertDialog = {
 const dropdown = {
   wrapper: 'relative inline-flex text-left',
   container: 'w-48 z-20',
-  base: 'u-bg-white divide-y u-divide-gray-100 rounded-md ring-1 ring-black ring-opacity-5',
+  base: 'u-bg-white divide-y u-divide-gray-100 rounded-md ring-1 u-ring-gray-200 shadow-lg',
   item: {
     base: 'group flex items-center px-4 py-2 text-sm w-full',
     active: 'u-bg-gray-100 u-text-gray-900',
