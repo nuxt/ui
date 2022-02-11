@@ -28,17 +28,13 @@ export default defineNuxtConfig({
       primary: 'blue'
     },
     preset: {
-      container: {
-        constrained: 'max-w-8xl'
-      }
     },
-    unocss: {
+    tailwindcss: {
       theme: {
-        fontFamily: {
-          sans: '"Inter var", sans-serif'
-        },
-        maxWidth: {
-          '8xl': '90rem'
+        extend: {
+          fontFamily: {
+            sans: '"Inter var", sans-serif'
+          }
         }
       }
     }

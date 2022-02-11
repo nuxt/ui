@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .u-bg-white { @apply bg-white dark:bg-black; }
+  .u-bg-gray-50 { @apply bg-gray-50 dark:bg-gray-900; }
+  .u-bg-gray-100 { @apply bg-gray-100 dark:bg-gray-800; }
+  .u-bg-gray-200 { @apply bg-gray-200 dark:bg-gray-700; }
+  .u-bg-gray-300 { @apply bg-gray-300 dark:bg-gray-600; }
+  .u-bg-gray-400 { @apply bg-gray-400 dark:bg-gray-500; }
+  .u-bg-gray-500 { @apply bg-gray-500 dark:bg-gray-400; }
+  .u-bg-gray-600 { @apply bg-gray-600 dark:bg-gray-300; }
+  .u-bg-gray-700 { @apply bg-gray-700 dark:bg-gray-200; }
+  .u-bg-gray-800 { @apply bg-gray-800 dark:bg-gray-100; }
+  .u-bg-gray-900 { @apply bg-gray-900 dark:bg-gray-50; }
+  .u-bg-black { @apply bg-black dark:bg-white; }
+  .u-text-white { @apply text-white dark:text-black; }
+  .u-text-gray-50 { @apply text-gray-50 dark:text-gray-900; }
+  .u-text-gray-100 { @apply text-gray-100 dark:text-gray-800; }
+  .u-text-gray-200 { @apply text-gray-200 dark:text-gray-700; }
+  .u-text-gray-300 { @apply text-gray-300 dark:text-gray-600; }
+  .u-text-gray-400 { @apply text-gray-400 dark:text-gray-500; }
+  .u-text-gray-500 { @apply text-gray-500 dark:text-gray-400; }
+  .u-text-gray-600 { @apply text-gray-600 dark:text-gray-300; }
+  .u-text-gray-700 { @apply text-gray-700 dark:text-gray-200; }
+  .u-text-gray-800 { @apply text-gray-800 dark:text-gray-100; }
+  .u-text-gray-900 { @apply text-gray-900 dark:text-gray-50; }
+  .u-text-black { @apply text-black dark:text-white; }
+  .u-border-white { @apply border-white dark:border-black; }
+  .u-border-gray-100 { @apply border-gray-100 dark:border-gray-900; }
+  .u-border-gray-200 { @apply border-gray-200 dark:border-gray-800; }
+  .u-border-gray-300 { @apply border-gray-300 dark:border-gray-700; }
+  .u-border-gray-400 { @apply border-gray-400 dark:border-gray-600; }
+  .u-border-gray-500 { @apply border-gray-500 dark:border-gray-500; }
+  .u-border-gray-600 { @apply border-gray-600 dark:border-gray-400; }
+  .u-border-gray-700 { @apply border-gray-700 dark:border-gray-300; }
+  .u-border-gray-800 { @apply border-gray-800 dark:border-gray-200; }
+  .u-border-gray-900 { @apply border-gray-900 dark:border-gray-100; }
+  .u-border-black { @apply border-black dark:border-white; }
+  .u-divide-white { @apply divide-white dark:divide-black; }
+  .u-divide-gray-100 { @apply divide-gray-100 dark:divide-gray-900; }
+  .u-divide-gray-200 { @apply divide-gray-200 dark:divide-gray-800; }
+  .u-divide-gray-300 { @apply divide-gray-300 dark:divide-gray-700; }
+  .u-divide-gray-400 { @apply divide-gray-400 dark:divide-gray-600; }
+  .u-divide-gray-500 { @apply divide-gray-500 dark:divide-gray-500; }
+  .u-divide-gray-600 { @apply divide-gray-600 dark:divide-gray-400; }
+  .u-divide-gray-700 { @apply divide-gray-700 dark:divide-gray-300; }
+  .u-divide-gray-800 { @apply divide-gray-800 dark:divide-gray-200; }
+  .u-divide-gray-900 { @apply divide-gray-900 dark:divide-gray-100; }
+  .u-divide-black { @apply divide-black dark:divide-white; }
+  .u-ring-white { @apply ring-white dark:ring-black; }
+  .u-ring-gray-100 { @apply ring-gray-100 dark:ring-gray-900; }
+  .u-ring-gray-200 { @apply ring-gray-200 dark:ring-gray-800; }
+  .u-ring-gray-300 { @apply ring-gray-300 dark:ring-gray-700; }
+  .u-ring-gray-400 { @apply ring-gray-400 dark:ring-gray-600; }
+  .u-ring-gray-500 { @apply ring-gray-500 dark:ring-gray-500; }
+  .u-ring-gray-600 { @apply ring-gray-600 dark:ring-gray-400; }
+  .u-ring-gray-700 { @apply ring-gray-700 dark:ring-gray-300; }
+  .u-ring-gray-800 { @apply ring-gray-800 dark:ring-gray-200; }
+  .u-ring-gray-900 { @apply ring-gray-900 dark:ring-gray-100; }
+  .u-ring-black { @apply ring-black dark:ring-white; }
+}

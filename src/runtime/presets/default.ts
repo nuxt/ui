@@ -119,7 +119,7 @@ const formGroup = {
 
 const input = {
   wrapper: 'relative',
-  base: 'block w-full u-bg-white u-text-gray-700 disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
+  base: 'relative block w-full u-bg-white u-text-gray-700 disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
   size: {
     xxs: 'text-xs',
     xs: 'text-xs',
@@ -204,6 +204,26 @@ const select = {
   ...input
 }
 
+const selectCustom = {
+  ...select,
+  base: `${select.base} text-left cursor-default`,
+  list: {
+    base: 'absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 u-ring-gray-200 overflow-auto focus:outline-none sm:text-sm',
+    option: {
+      base: 'cursor-default select-none relative py-2 pl-4 pr-10',
+      active: 'text-white bg-primary-600',
+      inactive: 'u-text-gray-900',
+      disabled: 'cursor-not-allowed opacity-50',
+      icon: {
+        base: 'absolute inset-y-0 right-0 flex items-center pr-4',
+        active: 'text-white',
+        inactive: 'text-primary-600',
+        size: 'h-5 w-5'
+      }
+    }
+  }
+}
+
 const radio = {
   wrapper: 'relative flex items-start',
   base: 'h-4 w-4 text-primary-600 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-black u-border-gray-300 dark:checked:border-primary-600 disabled:opacity-50 disabled:cursor-not-allowed',
@@ -281,7 +301,7 @@ const alertDialog = {
 const dropdown = {
   wrapper: 'relative inline-flex text-left',
   container: 'w-48 z-20',
-  base: 'u-bg-white divide-y u-divide-gray-100 rounded-md ring-1 ring-black ring-opacity-5',
+  base: 'u-bg-white divide-y u-divide-gray-100 rounded-md ring-1 u-ring-gray-200 shadow-lg',
   item: {
     base: 'group flex items-center px-4 py-2 text-sm w-full',
     active: 'u-bg-gray-100 u-text-gray-900',
@@ -299,6 +319,7 @@ export default {
   input,
   textarea,
   select,
+  selectCustom,
   checkbox,
   radio,
   container,

@@ -1,8 +1,5 @@
 <template>
   <div :class="wrapperClass">
-    <div v-if="isLeading" :class="iconLeadingWrapperClass">
-      <Icon :name="iconName" :class="iconClass" />
-    </div>
     <input
       :id="name"
       ref="input"
@@ -21,6 +18,9 @@
       @blur="$emit('blur', $event)"
     >
     <slot />
+    <div v-if="isLeading" :class="iconLeadingWrapperClass">
+      <Icon :name="iconName" :class="iconClass" />
+    </div>
     <div v-if="isTrailing" :class="iconTrailingWrapperClass">
       <Icon :name="iconName" :class="iconClass" />
     </div>

@@ -8,7 +8,7 @@
       </div>
 
       <p class="mt-1 text-lg u-text-gray-500">
-        Components library as a Nuxt3 module using <a href="https://github.com/antfu/unocss" target="_blank" class="underline">UnoCSS</a>.
+        Components library as a Nuxt3 module using <a href="https://tailwindcss.com" target="_blank" class="underline">TailwindCSS</a>.
       </p>
     </div>
 
@@ -66,23 +66,11 @@
 
     <p>- `colors.gray`</p>
 
-    <p>Define the gray variant. Defaults to `zinc`. You can like the `primary` color specify your own object. https://github.com/antfu/unocss/blob/main/packages/preset-uno/src/theme/colors.ts</p>
+    <p>Define the gray variant. Defaults to `zinc`. You can like the `primary` color specify your own object. https://tailwindcss.com/docs/customizing-colors#default-color-palette</p>
 
-    <p>- `unocss.shortcuts`. Defaults to `[]`.</p>
+    <p>- `tailwindcss.theme`. Defaults to `{}`.</p>
 
-    <p>Define UnoCSS shortcuts: https://github.com/antfu/unocss#shortcuts.</p>
-
-    <p>- `unocss.rules`. Defaults to `[]`.</p>
-
-    <p>Customize UnoCSS rules: https://github.com/antfu/unocss#custom-rules.</p>
-
-    <p>- `unocss.variants`. Defaults to `[]`.</p>
-
-    <p>Customize UnoCSS variants: https://github.com/antfu/unocss#custom-variants.</p>
-
-    <p>- `unocss.theme`. Defaults to `{}`.</p>
-
-    <p>Extend UnoCSS theme: https://github.com/antfu/unocss#extend-theme.</p>
+    <p>Define TailwindCSS theme: https://tailwindcss.com/docs/theme.</p>
   </div>
 </template>
 

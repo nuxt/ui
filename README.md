@@ -1,6 +1,6 @@
 # @nuxthq/ui
 
-Components library as a Nuxt3 module using [UnoCSS](https://github.com/antfu/unocss).
+Components library as a Nuxt3 module using [TailwindCSS](https://tailwindcss.com).
 
 ## Installation
 
