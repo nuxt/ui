@@ -1,35 +1,36 @@
 <template>
-  <Listbox v-slot="{ open, disabled }" v-model="selectedOption" as="div" class="relative">
-    <ListboxButton as="div">
-      <slot :open="open" :disabled="disabled">
-        <UButton
-          variant="white"
-          icon="heroicons-solid:selector"
-          icon-base-class="u-text-gray-400"
-          trailing
-          :size="size"
-          :label="selectedOption[textAttribute]"
-        />
-      </slot>
+  <Listbox
+    :model-value="modelValue"
+    as="div"
+    :class="wrapperClass"
+    @update:model-value="$emit('update:modelValue', $event)"
+  >
+    <ListboxButton :class="selectCustomClass">
+      <span class="block truncate">{{ modelValue[textAttribute] }}</span>
+      <span :class="iconWrapperClass">
+        <Icon name="heroicons-solid:selector" :class="iconClass" aria-hidden="true" />
+      </span>
     </ListboxButton>
 
     <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
       <ListboxOptions class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 u-ring-gray-200 overflow-auto focus:outline-none sm:text-sm">
         <ListboxOption
-          v-for="option in options"
-          v-slot="{ active, selected }"
-          :key="option"
+          v-for="(option, index) in options"
+          v-slot="{ active, selected, disabled }"
+          :key="index"
           as="template"
           :value="option"
           :disabled="option.disabled"
         >
-          <li :class="[active ? 'text-white bg-primary-600' : 'u-text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9']">
+          <li :class="resolveOptionClass({ active, disabled })">
             <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">
-              {{ option[textAttribute] }}
+              <slot name="option" :option="option">
+                {{ option[textAttribute] }}
+              </slot>
             </span>
 
-            <span v-if="selected" :class="[active ? 'text-white' : 'text-primary-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
-              <Icon v-show="selected" name="heroicons-solid:check" />
+            <span v-if="selected" :class="resolveOptionIconClass({ active })">
+              <Icon name="heroicons-solid:check" :class="listOptionIconSizeClass" aria-hidden="true" />
             </span>
           </li>
         </ListboxOption>
@@ -39,7 +40,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import {
   Listbox,
   ListboxButton,
@@ -66,20 +67,99 @@ const props = defineProps({
       return Object.keys($ui.selectCustom.size).includes(value)
     }
   },
+  wrapperClass: {
+    type: String,
+    default: () => $ui.selectCustom.wrapper
+  },
+  baseClass: {
+    type: String,
+    default: () => $ui.selectCustom.base
+  },
+  iconBaseClass: {
+    type: String,
+    default: () => $ui.selectCustom.icon.base
+  },
+  customClass: {
+    type: String,
+    default: null
+  },
+  listBaseClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.base
+  },
+  listOptionBaseClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.base
+  },
+  listOptionActiveClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.active
+  },
+  listOptionInactiveClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.inactive
+  },
+  listOptionDisabledClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.disabled
+  },
+  listOptionIconBaseClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.icon.base
+  },
+  listOptionIconActiveClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.icon.active
+  },
+  listOptionIconInactiveClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.icon.inactive
+  },
+  listOptionIconSizeClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.icon.size
+  },
   textAttribute: {
     type: String,
     default: 'text'
   }
 })
 
-const emit = defineEmits(['update:modelValue'])
+defineEmits(['update:modelValue'])
 
-const selectedOption = computed({
-  get () {
-    return props.modelValue
-  },
-  set (value) {
-    emit('update:modelValue', value)
-  }
+const selectCustomClass = computed(() => {
+  return classNames(
+    props.baseClass,
+    $ui.selectCustom.size[props.size],
+    $ui.selectCustom.spacing[props.size],
+    $ui.selectCustom.appearance.default,
+    $ui.selectCustom.trailing.spacing[props.size],
+    props.customClass
+  )
 })
+
+const iconClass = computed(() => {
+  return classNames(
+    props.iconBaseClass,
+    $ui.selectCustom.icon.size[props.size],
+    $ui.selectCustom.icon.trailing.spacing[props.size]
+  )
+})
+
+const iconWrapperClass = $ui.selectCustom.icon.trailing.wrapper
+
+function resolveOptionClass ({ active, disabled }) {
+  return classNames(
+    props.listOptionBaseClass,
+    active ? props.listOptionActiveClass : props.listOptionInactiveClass,
+    disabled && props.listOptionDisabledClass
+  )
+}
+
+function resolveOptionIconClass ({ active }) {
+  return classNames(
+    props.listOptionIconBaseClass,
+    active ? props.listOptionIconActiveClass : props.listOptionIconInactiveClass
+  )
+}
 </script>

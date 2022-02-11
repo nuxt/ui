@@ -119,7 +119,7 @@ const formGroup = {
 
 const input = {
   wrapper: 'relative',
-  base: 'block w-full u-bg-white u-text-gray-700 disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
+  base: 'relative block w-full u-bg-white u-text-gray-700 disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
   size: {
     xxs: 'text-xs',
     xs: 'text-xs',
@@ -205,7 +205,23 @@ const select = {
 }
 
 const selectCustom = {
-  ...select
+  ...select,
+  base: `${select.base} text-left cursor-default`,
+  list: {
+    base: 'absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 u-ring-gray-200 overflow-auto focus:outline-none sm:text-sm',
+    option: {
+      base: 'cursor-default select-none relative py-2 pl-4 pr-10',
+      active: 'text-white bg-primary-600',
+      inactive: 'u-text-gray-900',
+      disabled: 'cursor-not-allowed opacity-50',
+      icon: {
+        base: 'absolute inset-y-0 right-0 flex items-center pr-4',
+        active: 'text-white',
+        inactive: 'text-primary-600',
+        size: 'h-5 w-5'
+      }
+    }
+  }
 }
 
 const radio = {

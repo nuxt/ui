@@ -1,9 +1,5 @@
 <template>
   <div :class="wrapperClass">
-    <div v-if="icon" :class="iconWrapperClass">
-      <Icon :name="icon" :class="iconClass" />
-    </div>
-
     <select
       :id="name"
       :name="name"
@@ -36,6 +32,10 @@
         />
       </template>
     </select>
+
+    <div v-if="icon" :class="iconWrapperClass">
+      <Icon :name="icon" :class="iconClass" />
+    </div>
   </div>
 </template>
 
@@ -189,7 +189,7 @@ export default {
       )
     })
 
-    const iconWrapperClass = $ui.select.icon.leading.base
+    const iconWrapperClass = $ui.select.icon.leading.wrapper
 
     return {
       select,

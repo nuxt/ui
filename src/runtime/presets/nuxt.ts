@@ -30,6 +30,10 @@ const select = {
   ...input
 }
 
+const selectCustom = {
+  ...input
+}
+
 const radio = {
   base: 'h-4 w-4 u-text-gray-900 focus:ring-2 focus:ring-offset-2 focus:u-ring-gray-900 focus:ring-offset-white dark:focus:ring-offset-black u-border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed'
 }
@@ -53,6 +57,7 @@ export default defu({
   input,
   textarea,
   select,
+  selectCustom,
   radio,
   checkbox,
   toggle,

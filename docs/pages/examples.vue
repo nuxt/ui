@@ -178,11 +178,26 @@
       <UCard body-class="flex" @submit.prevent="onSubmit">
         <div class="flex-1 px-4 py-5 sm:p-6 space-y-3">
           <UFormGroup label="Email" name="email" required>
-            <UInput v-model="form.email" type="email" name="email" required />
+            <UInput v-model="form.email" type="email" name="email" required icon="heroicons-outline:mail" />
           </UFormGroup>
 
           <UFormGroup label="Description" name="description">
             <UTextarea v-model="form.description" type="description" name="description" autoresize />
+          </UFormGroup>
+
+          <UFormGroup label="Person" name="person" required>
+            <USelect
+              v-model="form.personId"
+              name="person"
+              :options="people"
+              text-attribute="name"
+              value-attribute="id"
+              icon="heroicons-outline:user"
+            />
+          </UFormGroup>
+
+          <UFormGroup label="People" name="people" required>
+            <USelectCustom v-model="form.person" name="people" :options="people" text-attribute="name" />
           </UFormGroup>
 
           <UFormGroup label="Toggle" name="toggle">
@@ -223,13 +238,23 @@
 
 <script setup>
 const isModalOpen = ref(false)
+
+const people = [
+  { id: 1, name: 'Durward Reynolds', disabled: false },
+  { id: 2, name: 'Kenton Towne', disabled: false },
+  { id: 3, name: 'Therese Wunsch', disabled: false },
+  { id: 4, name: 'Benedict Kessler', disabled: true },
+  { id: 5, name: 'Katelyn Rohan', disabled: false }
+]
 const form = reactive({
   email: '',
   description: '',
   toggle: false,
   notification: 'email',
   notifications: [],
-  terms: false
+  terms: false,
+  personId: people[0].id,
+  person: ref(people[0])
 })
 
 const { $toast } = useNuxtApp()
