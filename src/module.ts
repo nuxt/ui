@@ -86,7 +86,7 @@ export default defineNuxtModule<ModuleOptions>({
         ],
         content: [
           resolve(runtimeDir, 'components/**/*.{vue,js,ts}'),
-          resolve(runtimeDir, 'presets/**/*.{js,ts}')
+          resolve(runtimeDir, 'presets/*.{js,ts}')
         ]
       },
       cssPath: resolve(runtimeDir, 'tailwind.css')
