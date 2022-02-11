@@ -12,7 +12,7 @@ addCollection(solid)
 
 defineProps({
   name: {
-    type: String,
+    type: [String, Object],
     required: true
   }
 })
