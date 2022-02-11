@@ -85,11 +85,11 @@ export default defineNuxtModule<ModuleOptions>({
           require('@tailwindcss/aspect-ratio')
         ],
         content: [
-          `${runtimeDir}/components/**/*.{vue,js,ts}`,
-          `${runtimeDir}/presets/**/*.{js,ts}`
+          resolve(runtimeDir, 'components/**/*.{vue,js,ts}'),
+          resolve(runtimeDir, 'presets/**/*.{js,ts}')
         ]
       },
-      cssPath: `${runtimeDir}/tailwind.css`
+      cssPath: resolve(runtimeDir, 'tailwind.css')
     })
 
     const presetsDir = resolve(runtimeDir, './presets')
