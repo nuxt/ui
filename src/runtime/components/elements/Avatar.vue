@@ -3,7 +3,7 @@
     <img v-if="url" :src="url" :alt="alt" :class="[sizeClass, roundedClass]">
     <span
       v-else-if="placeholder"
-      class="font-medium leading-none u-text-gray-900 uppercase"
+      class="font-medium leading-none uppercase u-text-gray-900"
     >{{ placeholder }}</span>
     <span
       v-else-if="text"
@@ -77,8 +77,7 @@ export default {
       if (!this.alt) {
         return
       }
-
-      return this.alt.split(' ').map(word => word.charAt(0)).join('')
+      return this.alt.split(' ').map(word => word.charAt(0)).join('').substr(0, 2)
     },
     sizeClass () {
       return ({
