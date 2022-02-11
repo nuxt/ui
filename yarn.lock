@@ -327,25 +327,6 @@
   resolved "https://registry.yarnpkg.com/@hutson/parse-repository-url/-/parse-repository-url-3.0.2.tgz#98c23c950a3d9b6c8f0daed06da6c3af06981340"
   integrity sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==
 
-"@iconify-json/heroicons-outline@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@iconify-json/heroicons-outline/-/heroicons-outline-1.0.2.tgz#bfe747b588ada1918b93f7f6c85948fad7ad4afa"
-  integrity sha512-bKcALoCJy9AB+Ojlb58rF/IklUOYBDeq8RaCme1Ez/rnFLAmwqrDY96B1f0/PtfhYwjo8v1fXiv9hL7QWImpPQ==
-  dependencies:
-    "@iconify/types" "^1.0.10"
-
-"@iconify-json/heroicons-solid@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@iconify-json/heroicons-solid/-/heroicons-solid-1.0.2.tgz#cf81ef6ce2aa70bf037c1c022b730b1698f63ffa"
-  integrity sha512-j9SuVhvVAVGhgesuUCzCk3Jk/Rjjh1Mcqg4SXbKv34AMvYpRLBn2LZi1gOv6RW0KmCpDsZ9C+qf5k9VmLc9kxQ==
-  dependencies:
-    "@iconify/types" "^1.0.10"
-
-"@iconify/types@^1.0.10":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@iconify/types/-/types-1.0.12.tgz#839f1f784b7030b94482d51996570f4dbd7d6796"
-  integrity sha512-6er6wSGF3hgc1JEZqiGpg21CTCjHBYOUwqLmb2Idzkjiw6ogalGP0ZMLVutCzah+0WB4yP+Zd2oVPN8jvJ+Ftg==
-
 "@iconify/vue@^3.1.3":
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/@iconify/vue/-/vue-3.1.3.tgz#df97d85e69c8447495bcd33ac26bd317bb543054"

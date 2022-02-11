@@ -25,8 +25,6 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.3",
-    "@iconify-json/heroicons-outline": "^1.0.2",
-    "@iconify-json/heroicons-solid": "^1.0.2",
     "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
     "@popperjs/core": "^2.11.2",
     "@vueuse/core": "^7.6.1",

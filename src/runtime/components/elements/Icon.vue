@@ -1,19 +1,17 @@
 <template>
-  <Icon :icon="name" />
+  <Icon :icon="icon" />
 </template>
 
 <script setup>
-import { Icon, addCollection } from '@iconify/vue/dist/offline'
-import outline from '@iconify-json/heroicons-outline/icons.json'
-import solid from '@iconify-json/heroicons-solid/icons.json'
+import { Icon } from '@iconify/vue/dist/offline'
+import { loadIcon } from '@iconify/vue'
 
-addCollection(outline)
-addCollection(solid)
-
-defineProps({
+const props = defineProps({
   name: {
     type: [String, Object],
     required: true
   }
 })
+
+const icon = await loadIcon(props.name)
 </script>
