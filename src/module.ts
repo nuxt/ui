@@ -5,7 +5,7 @@ import defu from 'defu'
 import type { TailwindConfig } from 'tailwindcss/tailwind-config'
 import colors from 'tailwindcss/colors.js'
 import { name, version } from '../package.json'
-import { safeColorsAsRegex } from './utils'
+import { safeColorsAsRegex } from './runtime/utils/colors'
 
 interface ColorsOptions {
   /**
