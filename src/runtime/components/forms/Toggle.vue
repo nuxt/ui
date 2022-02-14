@@ -4,10 +4,10 @@
     :class="[active ? activeClass : inactiveClass, baseClass]"
   >
     <span :class="[active ? containerActiveClass : containerInactiveClass, containerBaseClass]">
-      <span :class="[active ? iconActiveClass : iconInactiveClass, iconBaseClass]" aria-hidden="true">
+      <span v-if="iconOn" :class="[active ? iconActiveClass : iconInactiveClass, iconBaseClass]" aria-hidden="true">
         <Icon :name="iconOn" :class="iconOnClass" />
       </span>
-      <span :class="[active ? iconInactiveClass : iconActiveClass, iconBaseClass]" aria-hidden="true">
+      <span v-if="iconOff" :class="[active ? iconInactiveClass : iconActiveClass, iconBaseClass]" aria-hidden="true">
         <Icon :name="iconOff" :class="iconOffClass" />
       </span>
     </span>
@@ -27,11 +27,11 @@ const props = defineProps({
   },
   iconOn: {
     type: String,
-    default: ''
+    default: null
   },
   iconOff: {
     type: String,
-    default: ''
+    default: null
   },
   baseClass: {
     type: String,
