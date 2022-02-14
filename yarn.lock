@@ -426,34 +426,12 @@
     error-stack-parser "^2.0.0"
     string-width "^4.2.3"
 
-"@nuxt/kit@npm:@nuxt/kit-edge@3.0.0-27414150.3589a2d":
+"@nuxt/kit@npm:@nuxt/kit-edge@3.0.0-27414150.3589a2d", "@nuxt/kit@npm:@nuxt/kit-edge@latest":
   version "3.0.0-27414150.3589a2d"
   resolved "https://registry.yarnpkg.com/@nuxt/kit-edge/-/kit-edge-3.0.0-27414150.3589a2d.tgz#ce63334b85d6322c3da7a26445a1c994ace28e2c"
   integrity sha512-ek99V9xDOlsGUwvxtONuzKnMkII4U1kCzbxxhY6u5+exb+rcinQOCiUsN231gJEWtFBwX6QAxomhlBsmkLmDNg==
   dependencies:
     "@nuxt/schema" "npm:@nuxt/schema-edge@3.0.0-27414150.3589a2d"
-    c12 "^0.1.3"
-    consola "^2.15.3"
-    defu "^5.0.1"
-    globby "^13.1.1"
-    hash-sum "^2.0.0"
-    jiti "^1.12.15"
-    knitwork "^0.1.0"
-    lodash.template "^4.5.0"
-    mlly "^0.4.3"
-    pathe "^0.2.0"
-    pkg-types "^0.3.2"
-    scule "^0.2.1"
-    semver "^7.3.5"
-    unctx "^1.0.2"
-    untyped "^0.3.0"
-
-"@nuxt/kit@npm:@nuxt/kit-edge@latest":
-  version "3.0.0-27413936.9734856"
-  resolved "https://registry.yarnpkg.com/@nuxt/kit-edge/-/kit-edge-3.0.0-27413936.9734856.tgz#c118423dba6eac4694aeb01c08adc361c804065d"
-  integrity sha512-79Wle/moEPGDElCOWYNjTDF0usfBTPUvEaaJvsyRFdOTfGJptRrXiXDb7E8I1MaqENuoqBhyGS5oE1NI6493OQ==
-  dependencies:
-    "@nuxt/schema" "npm:@nuxt/schema-edge@3.0.0-27413936.9734856"
     c12 "^0.1.3"
     consola "^2.15.3"
     defu "^5.0.1"
@@ -558,20 +536,6 @@
     postcss-loader "^4.1.0"
     postcss-url "^10.1.1"
     semver "^7.3.4"
-
-"@nuxt/schema@npm:@nuxt/schema-edge@3.0.0-27413936.9734856":
-  version "3.0.0-27413936.9734856"
-  resolved "https://registry.yarnpkg.com/@nuxt/schema-edge/-/schema-edge-3.0.0-27413936.9734856.tgz#f6e4d42ba1c0bed25ea7fc54c559a42cb95d73c4"
-  integrity sha512-z6KY4Zh5sp7Xbv45bkvvS9Dt8JP7aC65nibkNlqeiBBghpIkyFDpSiO7cGYMAO/E6Jns1JdKi0DYRaGqzOG7Yg==
-  dependencies:
-    c12 "^0.1.3"
-    create-require "^1.1.1"
-    defu "^5.0.1"
-    jiti "^1.12.15"
-    pathe "^0.2.0"
-    scule "^0.2.1"
-    std-env "^3.0.1"
-    ufo "^0.7.9"
 
 "@nuxt/schema@npm:@nuxt/schema-edge@3.0.0-27414150.3589a2d":
   version "3.0.0-27414150.3589a2d"
@@ -1188,9 +1152,9 @@
     "@vue/shared" "3.2.31"
 
 "@vue/devtools-api@^6.0.0-beta.18":
-  version "6.0.9"
-  resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.0.9.tgz#d2a82ece1ed2e66970c0611e47ca8af9875a3cc2"
-  integrity sha512-O9tAMBMNMAMzgvbSS3OZlTpfgKCGjvjo5LTjWNtQ/M6A/SKWghJfvoMKuQL/vykLb6rjB/AkaQVFg9yDHprN6w==
+  version "6.0.10"
+  resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.0.10.tgz#097cbc453e76e37f5ae2c5b508058113f9855571"
+  integrity sha512-PxZDEDYOHX7rEdrZohA+6yUv0AOL/7IRzW4nbpWDlnwsmcyP5nAfV1yODYaConjL8HBxB/tIC6QmHu1ApW2muA==
 
 "@vue/reactivity-transform@3.2.31":
   version "3.2.31"
