@@ -90,13 +90,21 @@ export default defineNuxtModule<ModuleOptions>({
           resolve(runtimeDir, 'presets/*.{mjs,js,ts}')
         ],
         // Safelist dynamic colors used in preset
-        safelist: [{
-          pattern: new RegExp(`(hover|disabled|dark:)?bg-(${safeColorsAsRegex})-(100|600|700)`)
-        }, {
-          pattern: new RegExp(`(dark:)?text-(${safeColorsAsRegex})-(100|800)`)
-        }, {
-          pattern: new RegExp(`(focus:)?ring-(${safeColorsAsRegex})-(500)`)
-        }]
+        safelist: [
+          'dark',
+          {
+            pattern: new RegExp(`bg-(${safeColorsAsRegex})-(100|600|700)`),
+            variants: ['hover', 'disabled', 'dark']
+          },
+          {
+            pattern: new RegExp(`text-(${safeColorsAsRegex})-(100|800)`),
+            variants: ['dark']
+          },
+          {
+            pattern: new RegExp(`ring-(${safeColorsAsRegex})-(500)`),
+            variants: ['focus']
+          }
+        ]
       },
       cssPath: resolve(runtimeDir, 'tailwind.css')
     })
