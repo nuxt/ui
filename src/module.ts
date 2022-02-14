@@ -5,6 +5,7 @@ import defu from 'defu'
 import type { TailwindConfig } from 'tailwindcss/tailwind-config'
 import colors from 'tailwindcss/colors.js'
 import { name, version } from '../package.json'
+import { safeColorsAsRegex } from './utils'
 
 interface ColorsOptions {
   /**
@@ -87,7 +88,15 @@ export default defineNuxtModule<ModuleOptions>({
         content: [
           resolve(runtimeDir, 'components/**/*.{vue,js,ts}'),
           resolve(runtimeDir, 'presets/*.{mjs,js,ts}')
-        ]
+        ],
+        // Safelist dynamic colors used in preset
+        safelist: [{
+          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(100|600|700)`)
+        }, {
+          pattern: new RegExp(`text-(${safeColorsAsRegex})-(100|800)`)
+        }, {
+          pattern: new RegExp(`ring-(${safeColorsAsRegex})-(500)`)
+        }]
       },
       cssPath: resolve(runtimeDir, 'tailwind.css')
     })

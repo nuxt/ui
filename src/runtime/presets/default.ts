@@ -1,23 +1,4 @@
-const colors = [
-  'primary',
-  'rose',
-  'pink',
-  'fuchsia',
-  'purple',
-  'violet',
-  'indigo',
-  'blue',
-  'sky',
-  'cyan',
-  'teal',
-  'emerald',
-  'green',
-  'lime',
-  'yellow',
-  'amber',
-  'orange',
-  'red'
-]
+import { safeColors } from '../../utils'
 
 const button = {
   base: 'font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 focus:ring-offset-white dark:focus:ring-offset-black',
@@ -46,7 +27,7 @@ const button = {
     xl: 'p-3'
   },
   variant: {
-    ...colors.reduce((acc: any, color) => {
+    ...safeColors.reduce((acc: any, color) => {
       acc[color] = `shadow-sm border border-transparent text-white bg-${color}-600 hover:bg-${color}-700 disabled:bg-${color}-600 focus:ring-2 focus:ring-offset-2 focus:ring-${color}-500`
       return acc
     }, {}),
@@ -99,7 +80,7 @@ const badge = {
     xl: 'text-sm px-4 py-1'
   },
   variant: {
-    ...colors.reduce((acc: any, color) => {
+    ...safeColors.reduce((acc: any, color) => {
       acc[color] = `bg-${color}-100 dark:bg-${color}-700 text-${color}-800 dark:text-${color}-100`
       return acc
     }, {})
