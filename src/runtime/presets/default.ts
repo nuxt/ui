@@ -223,7 +223,7 @@ const card = {
   background: 'u-bg-white',
   border: 'u-border-gray-200',
   ring: 'ring-1 u-ring-gray-200',
-  shadow: '',
+  shadow: 'shadow',
   body: 'px-4 py-5 sm:p-6',
   header: 'px-4 py-5 sm:px-6',
   footer: 'px-4 py-4 sm:px-6'
