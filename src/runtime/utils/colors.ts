@@ -1,6 +1,21 @@
-import colors from 'tailwindcss/colors.js'
-import { without, kebabCase } from 'lodash-es'
-
-export const safeColors = without(Object.keys(colors).map(kebabCase), 'inherit', 'current', 'transparent', 'black', 'white', 'gray')
+export const safeColors = [
+  'rose',
+  'pink',
+  'fuchsia',
+  'purple',
+  'violet',
+  'indigo',
+  'blue',
+  'sky',
+  'cyan',
+  'teal',
+  'emerald',
+  'green',
+  'lime',
+  'yellow',
+  'amber',
+  'orange',
+  'red'
+]
 
 export const safeColorsAsRegex = safeColors.join('|')
