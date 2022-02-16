@@ -91,6 +91,7 @@
 </template>
 
 <script setup>
+import { useClipboard } from '@vueuse/core'
 import $ui from '#build/ui'
 
 const nuxtApp = useNuxtApp()
@@ -363,14 +364,9 @@ function toKebabCase (str) {
   return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 }
 
-const copied = ref(false)
+const { copy, copied } = useClipboard({ copiedDuring: 2000 })
 const onCopy = () => {
-  navigator.clipboard.writeText(code.value).then(() => {
-    copied.value = true
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  })
+  copy(code.value)
 }
 
 const code = computed(() => {
