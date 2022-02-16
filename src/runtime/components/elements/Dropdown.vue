@@ -22,8 +22,9 @@
               <Component v-bind="item" :is="(item.to && 'Link') || 'button'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)">
                 <slot :name="item.slot" :item="item">
                   <Icon v-if="item.icon" :name="item.icon" :class="itemIconClass" />
+                  <Avatar v-if="item.avatar" :src="item.avatar" :alt="item.label" :class="itemAvatarClass" size="xs" />
 
-                  {{ item.label }}
+                  <span class="truncate">{{ item.label }}</span>
                 </slot>
               </Component>
             </MenuItem>
@@ -43,6 +44,7 @@ import {
 } from '@headlessui/vue'
 
 import Icon from '../elements/Icon'
+import Avatar from '../elements/Avatar'
 import Link from '../elements/Link'
 import { classNames, usePopper } from '../../utils'
 import $ui from '#build/ui'
@@ -54,6 +56,7 @@ export default {
     MenuItems,
     MenuItem,
     Icon,
+    Avatar,
     Link
   },
   props: {
@@ -106,6 +109,10 @@ export default {
     itemIconClass: {
       type: String,
       default: () => $ui.dropdown.item.icon
+    },
+    itemAvatarClass: {
+      type: String,
+      default: () => $ui.dropdown.item.avatar
     }
   },
   setup (props) {

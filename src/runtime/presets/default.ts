@@ -284,11 +284,12 @@ const dropdown = {
   container: 'w-48 z-20',
   base: 'u-bg-white divide-y u-divide-gray-100 rounded-md ring-1 u-ring-gray-200 shadow-lg',
   item: {
-    base: 'group flex items-center px-4 py-2 text-sm w-full',
+    base: 'group flex items-center gap-3 px-4 py-2 text-sm w-full',
     active: 'u-bg-gray-100 u-text-gray-900',
     inactive: 'u-text-gray-700',
     disabled: 'cursor-not-allowed opacity-50',
-    icon: 'mr-3 h-5 w-5 u-text-gray-400 group-hover:u-text-gray-500'
+    icon: 'h-5 w-5 u-text-gray-400 group-hover:u-text-gray-500 flex-shrink-0',
+    avatar: '-my-0.5 group-hover:u-bg-gray-200 flex-shrink-0'
   }
 }
 
