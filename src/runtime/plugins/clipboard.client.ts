@@ -1,13 +1,16 @@
 import { defineNuxtPlugin } from '#app'
+import { useClipboard } from '@vueuse/core'
 import { ClipboardPlugin } from '../types'
 
 export default defineNuxtPlugin((nuxtApp) => {
+  const { copy: copyToClipboard, isSupported } = useClipboard()
+
   function copy (text: string, success: { title?: string, description?: string } = {}, failure: { title?: string, description?: string } = {}) {
-    if (!navigator?.clipboard) {
+    if (!isSupported) {
       return
     }
 
-    navigator.clipboard.writeText(text).then(() => {
+    copyToClipboard(text).then(() => {
       if (!success.title && !success.description) {
         return
       }
