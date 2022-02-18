@@ -10,8 +10,8 @@
           </div>
 
           <div class="flex items-center gap-3">
-            <UButton to="https://github.com/nuxtlabs/ui" target="_blank" variant="transparent" icon="fa-brands:github" />
             <UButton variant="transparent" :icon="colorMode.value === 'dark' ? 'heroicons-outline:moon' : 'heroicons-outline:sun'" @click="toggleDark" />
+            <UButton to="https://github.com/nuxtlabs/ui" target="_blank" variant="transparent" icon="fa-brands:github" />
           </div>
         </div>
       </UContainer>
@@ -58,6 +58,9 @@
 
 <script setup>
 useMeta({
+  htmlAttrs: {
+    class: 'bg-white dark:bg-black'
+  },
   bodyAttrs: {
     class: 'antialiased font-sans text-gray-700 bg-gray-50 dark:bg-gray-900 dark:text-gray-200'
   }
