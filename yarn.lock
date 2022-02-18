@@ -632,6 +632,16 @@
     webpack-virtual-modules "^0.4.3"
     webpackbar "^5.0.2"
 
+"@nuxtjs/color-mode@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/color-mode/-/color-mode-3.0.0.tgz#c5ba5c24f23148bfc5c8b4af02c5f7f1a0186a06"
+  integrity sha512-R3GxWl9+wOx/kAB9QLOJYW35knnRiKfRTTt+tkKyxsW0QQRiAAURZHr4BoJZeQtaEoneuRmJV99/p07/ehJcUw==
+  dependencies:
+    "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
+    defu "^5.0.0"
+    lodash.template "^4.5.0"
+    pathe "^0.2.0"
+
 "@nuxtjs/eslint-config-typescript@^8.0.0":
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/eslint-config-typescript/-/eslint-config-typescript-8.0.0.tgz#dd178386e4243874fa95464f8fce25ee9d66bf7a"
@@ -1204,16 +1214,7 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.31.tgz#c90de7126d833dcd3a4c7534d534be2fb41faa4e"
   integrity sha512-ymN2pj6zEjiKJZbrf98UM2pfDd6F2H7ksKw7NDt/ZZ1fh5Ei39X5tABugtT03ZRlWd9imccoK0hE8hpjpU7irQ==
 
-"@vueuse/components@^7.6.2":
-  version "7.6.2"
-  resolved "https://registry.yarnpkg.com/@vueuse/components/-/components-7.6.2.tgz#4377ad58f6f1c555e96b20f172f48a68ff29c772"
-  integrity sha512-kw/MUktbcpkLBSLzEiyju2NIqyqP3ZlOlhGIPyG05pSspZg8l+IeBCT34QFRpLtxjmNvi+Rivyv/vlM4J61+4g==
-  dependencies:
-    "@vueuse/core" "7.6.2"
-    "@vueuse/shared" "7.6.2"
-    vue-demi "*"
-
-"@vueuse/core@7.6.2", "@vueuse/core@^7.6.2":
+"@vueuse/core@^7.6.2":
   version "7.6.2"
   resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-7.6.2.tgz#1b9aa92048991189fac31577ff439296efa5fb4a"
   integrity sha512-bjAbXJVJO6aElMaZtDz2B70C0L6jFk/jGVqJxWZS5huffxA6dW5DN6tQQJwzOnx9B9rDhePHJIFKsix0qZIH2Q==
