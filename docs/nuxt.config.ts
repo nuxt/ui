@@ -1,5 +1,3 @@
-/* @unocss-include */
-
 import { defineNuxtConfig } from 'nuxt3'
 import module from '../src/module'
 
@@ -26,8 +24,6 @@ export default defineNuxtConfig({
   ui: {
     colors: {
       primary: 'blue'
-    },
-    preset: {
     },
     tailwindcss: {
       theme: {

@@ -4,6 +4,7 @@ import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlug
 import defu from 'defu'
 import type { TailwindConfig } from 'tailwindcss/tailwind-config'
 import colors from 'tailwindcss/colors.js'
+import presetIcons from '@unocss/preset-icons'
 import { name, version } from '../package.json'
 import { safeColorsAsRegex } from './runtime/utils/colors'
 
@@ -66,7 +67,18 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
-    await installModule('@nuxtjs/color-mode', { classSuffix: '' })
+    await installModule('@unocss/nuxt', {
+      uno: false,
+      presets: [
+        presetIcons({ prefix: '' })
+      ],
+      preflight: false,
+      components: false,
+      autoImport: false
+    })
+    await installModule('@nuxtjs/color-mode', {
+      classSuffix: ''
+    })
     await installModule('@nuxtjs/tailwindcss', {
       viewer: false,
       config: {
@@ -127,7 +139,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addTemplate({
       filename: 'ui.mjs',
-      getContents: () => `/* @unocss-include */ export default ${JSON.stringify(ui)}`
+      getContents: () => `export default ${JSON.stringify(ui)}`
     })
 
     addPlugin(resolve(runtimeDir, 'plugins', 'toast.client'))

@@ -1,17 +1,12 @@
 <template>
-  <Icon :icon="icon" />
+  <div :class="name" />
 </template>
 
 <script setup>
-import { Icon } from '@iconify/vue/dist/offline'
-import { loadIcon } from '@iconify/vue'
-
-const props = defineProps({
+defineProps({
   name: {
     type: [String, Object],
     required: true
   }
 })
-
-const icon = await loadIcon(props.name)
 </script>
