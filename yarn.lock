@@ -303,10 +303,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@headlessui/vue@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.5.0.tgz#8cd4877d3d344e482073a04ae8e3b7f987bb267c"
-  integrity sha512-jAp6XYpqdEv32xhszaj5ejvjaX5qhu20sCbxu7lplePEfZL+4ffabivJBBTZAiPWczqAXmnZWNWG5DOyqjRa4w==
+"@headlessui/vue@1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.4.3.tgz#685898891cde4d8a38a01945d4d84855d5fe7224"
+  integrity sha512-cDAd3aP7jH5bO2WO4eSkyQQg0k6Zw8gobl+zL8LGApqix28EtlxultyKH/mVKnbo8Kiq6IDRzwP1HfKOf1QZbQ==
 
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.3"
