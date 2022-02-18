@@ -11,10 +11,7 @@
 
           <div class="flex items-center gap-3">
             <UButton to="https://github.com/nuxtlabs/ui" target="_blank" variant="transparent" icon="fa-brands:github" />
-
-            <UseDark v-slot="{ isDark, toggleDark }">
-              <UButton variant="transparent" :icon="isDark ? 'heroicons-outline:moon' : 'heroicons-outline:sun'" @click="toggleDark()" />
-            </UseDark>
+            <UButton variant="transparent" :icon="colorMode.value === 'dark' ? 'heroicons-outline:moon' : 'heroicons-outline:sun'" @click="toggleDark" />
           </div>
         </div>
       </UContainer>
@@ -60,16 +57,16 @@
 </template>
 
 <script setup>
-import { UseDark } from '@vueuse/components'
-
 useMeta({
-  htmlAttrs: {
-    class: 'bg-white dark:bg-black'
-  },
   bodyAttrs: {
     class: 'antialiased font-sans text-gray-700 bg-gray-50 dark:bg-gray-900 dark:text-gray-200'
   }
 })
+
+const colorMode = useColorMode()
+const toggleDark = () => {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
 
 const sections = [
   { label: 'Getting Started', links: [{ label: 'Usage', to: '/' }, { label: 'Examples', to: '/examples' }, { label: 'Migration', to: '/migration' }, { label: 'Dark mode', to: '/dark' }] },

@@ -72,7 +72,7 @@
         </UFormGroup>
       </div>
 
-      <div class="border-t u-border-gray-200 u-bg-gray-50">
+      <div class="border-t u-border-gray-200">
         <pre class="text-sm leading-6 u-text-gray-900 flex-1 relative flex ligatures-none lg:overflow-y-auto overflow-x-hidden px-4 sm:px-6 py-5 sm:py-6">
           <code class="flex-none min-w-full whitespace-pre-wrap break-all">{{ code }}</code>
 

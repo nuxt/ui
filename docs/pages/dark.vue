@@ -8,7 +8,7 @@
       </div>
 
       <p class="mt-1 text-lg u-text-gray-500">
-        Dark mode implementation with <a href="https://vueuse.org" target="_blank" class="underline">VueUse</a>.
+        Dark mode implementation with <a href="https://color-mode.nuxtjs.org/" target="_blank" class="underline">Color Mode</a> module.
       </p>
     </div>
 
@@ -16,13 +16,7 @@
       Usage
     </h2>
 
-    <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
-      <code class="text-sm">
-        {{ code5 }}
-      </code>
-    </pre>
-
-    <p>The VueUse <a href="https://vueuse.org/core/useDark" target="_blank" class="underline">useDark</a> composable makes use of the `dark` class on the html tag so you can easily take advantage of the UnoCSS `dark` variant.</p>
+    <p>TailwindCSS takes advantage of the `dark` class on the html tag:</p>
 
     <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
       <code class="text-sm">
@@ -30,13 +24,8 @@
       </code>
     </pre>
 
-    <p>You can implement a toggle button easily by doing:</p>
+    <p>The `@nuxtjs/color-mode` module is now installed by default, you can easily implement a toggle button:</p>
 
-    <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
-      <code class="text-sm">
-        {{ code2 }}
-      </code>
-    </pre>
     <pre class="u-bg-gray-900 rounded-md u-text-white px-4">
       <code class="text-sm">
         {{ code1 }}
@@ -63,19 +52,14 @@
 
 <script setup>
 const code1 = `
-<UseDark v-slot="{ isDark, toggleDark }">
-  <UButton variant="transparent" :icon="isDark ? 'heroicons-outline:moon' : 'heroicons-outline:sun'" @click="toggleDark()" />
-</UseDark>`
-const code2 = `
-import { UseDark } from '@vueuse/components'
-`
+const colorMode = useColorMode()
+const toggleDark = () => {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}`
 const code3 = `
 <div class="u-bg-gray-100 border u-border-gray-200 u-text-gray-700"></div>
 `
 const code4 = `
 <div class="bg-white dark:bg-black"></div>
-`
-const code5 = `
-yarn add @vueuse/components @vueuse/core
 `
 </script>
