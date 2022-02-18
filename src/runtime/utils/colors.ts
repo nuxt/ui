@@ -1,4 +1,5 @@
 export const safeColors = [
+  'primary',
   'rose',
   'pink',
   'fuchsia',
