@@ -1,5 +1,5 @@
 <template>
-  <div class="antialiased font-sans">
+  <div>
     <nav class="u-bg-white border-b u-border-gray-200 fixed top-0 inset-x-0 z-20">
       <UContainer padded>
         <div class="flex items-center justify-between h-16">
@@ -57,6 +57,15 @@
 
 <script setup>
 import { UseDark } from '@vueuse/components'
+
+useMeta({
+  htmlAttrs: {
+    class: 'bg-white dark:bg-black'
+  },
+  bodyAttrs: {
+    class: 'antialiased font-sans text-gray-700 bg-gray-50 dark:bg-gray-900 dark:text-gray-200'
+  }
+})
 
 const sections = [
   { label: 'Getting Started', links: [{ label: 'Usage', to: '/' }, { label: 'Examples', to: '/examples' }, { label: 'Migration', to: '/migration' }, { label: 'Dark mode', to: '/dark' }] },

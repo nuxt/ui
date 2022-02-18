@@ -12,17 +12,14 @@ export default defineNuxtConfig({
     ],
     link: [
       { rel: 'stylesheet', href: 'https://rsms.me/inter/inter.css' }
-    ],
-    htmlAttrs: {
-      class: 'u-bg-white'
-    },
-    bodyAttrs: {
-      class: 'u-bg-gray-50 u-text-gray-700'
-    }
+    ]
   },
   buildModules: [
     module
   ],
+  components: {
+    global: true
+  },
   ui: {
     colors: {
       primary: 'blue'
