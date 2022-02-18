@@ -9,9 +9,13 @@
             </NuxtLink>
           </div>
 
-          <UseDark v-slot="{ isDark, toggleDark }">
-            <UButton variant="transparent" :icon="isDark ? 'heroicons-outline:moon' : 'heroicons-outline:sun'" @click="toggleDark()" />
-          </UseDark>
+          <div class="flex items-center gap-3">
+            <UButton to="https://github.com/nuxtlabs/ui" target="_blank" variant="transparent" icon="fa-brands:github" />
+
+            <UseDark v-slot="{ isDark, toggleDark }">
+              <UButton variant="transparent" :icon="isDark ? 'heroicons-outline:moon' : 'heroicons-outline:sun'" @click="toggleDark()" />
+            </UseDark>
+          </div>
         </div>
       </UContainer>
     </nav>
