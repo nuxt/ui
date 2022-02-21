@@ -632,10 +632,10 @@
     webpack-virtual-modules "^0.4.3"
     webpackbar "^5.0.2"
 
-"@nuxtjs/color-mode@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/color-mode/-/color-mode-3.0.0.tgz#c5ba5c24f23148bfc5c8b4af02c5f7f1a0186a06"
-  integrity sha512-R3GxWl9+wOx/kAB9QLOJYW35knnRiKfRTTt+tkKyxsW0QQRiAAURZHr4BoJZeQtaEoneuRmJV99/p07/ehJcUw==
+"@nuxtjs/color-mode@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/color-mode/-/color-mode-3.0.1.tgz#e4362f9bdbfd348a44a309bc4d5f32bb7c54415c"
+  integrity sha512-2FGlUSV6G6MtLAJcXOxodMR789nxxhwNZ76sqC4JtCgEmxcAT6PeHkR7TPSms/++r0gAE7BiPA4l0pR/7O4AIg==
   dependencies:
     "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
     defu "^5.0.0"
