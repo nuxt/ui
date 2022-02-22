@@ -58,11 +58,8 @@
 
 <script setup>
 useMeta({
-  htmlAttrs: {
-    class: 'bg-white dark:bg-black'
-  },
   bodyAttrs: {
-    class: 'antialiased font-sans text-gray-700 bg-gray-50 dark:bg-gray-900 dark:text-gray-200'
+    class: 'antialiased font-sans text-gray-700 bg-gray-50 dark:bg-gray-900 dark:text-gray-200 bg-white dark:bg-black'
   }
 })
 
@@ -81,3 +78,9 @@ const sections = [
   { label: 'Overlays', links: [{ label: 'Modal', to: '/components/Modal' }, { label: 'Notification', to: '/components/Notification' }, { label: 'Popover', to: '/components/Popover' }, { label: 'Tooltip', to: '/components/Tooltip' }] }
 ]
 </script>
+
+<style>
+html.dark {
+  @apply bg-black;
+}
+</style>
