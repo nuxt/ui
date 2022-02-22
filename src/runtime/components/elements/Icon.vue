@@ -3,6 +3,7 @@
 </template>
 
 <script setup>
+import { ref, watch } from 'vue'
 import { Icon } from '@iconify/vue/dist/offline'
 import { loadIcon } from '@iconify/vue'
 
