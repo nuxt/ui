@@ -13,5 +13,10 @@ const props = defineProps({
   }
 })
 
-const icon = await loadIcon(props.name)
+const icon = ref(null)
+icon.value = await loadIcon(props.name)
+
+watch(() => props.name, async () => {
+  icon.value = await loadIcon(props.name)
+})
 </script>
