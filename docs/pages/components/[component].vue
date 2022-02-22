@@ -274,6 +274,22 @@ const defaultProps = {
         html: 'Popover content'
       }
     }
+  },
+  Tabs: {
+    links: [{
+      label: 'Usage',
+      to: '/',
+      exact: true
+    }, {
+      label: 'Examples',
+      to: '/examples'
+    }, {
+      label: 'Migration',
+      to: '/migration'
+    }, {
+      label: 'Tabs',
+      to: '/components/Tabs'
+    }]
   }
 }
 

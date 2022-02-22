@@ -293,6 +293,13 @@ const dropdown = {
   }
 }
 
+const tabs = {
+  wrapper: 'flex items-center gap-6',
+  base: 'pt-2 pb-3 text-sm font-medium border-b-2 whitespace-nowrap',
+  active: 'u-border-black u-text-black hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white',
+  inactive: 'border-transparent u-text-gray-500 hover:u-text-gray-700 hover:u-border-gray-300'
+}
+
 export default {
   card,
   button,
@@ -308,5 +315,6 @@ export default {
   toggle,
   verticalNavigation,
   alertDialog,
-  dropdown
+  dropdown,
+  tabs
 }

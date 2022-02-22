@@ -192,7 +192,10 @@ const components = [
   },
   {
     label: 'Tabs',
-    to: '/components/Tabs'
+    to: '/components/Tabs',
+    nuxt3: true,
+    capi: true,
+    preset: true
   },
   {
     label: 'VerticalNavigation',

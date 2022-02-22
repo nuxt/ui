@@ -1,11 +1,11 @@
 <template>
-  <nav class="flex items-center gap-6">
+  <nav :class="wrapperClass">
     <Link
       v-for="(link, index) of links"
       :key="index"
       :to="link.to"
       :exact="link.exact"
-      class="pt-2 pb-3 text-sm font-medium border-b-2 whitespace-nowrap"
+      :class="baseClass"
       :active-class="activeClass"
       :inactive-class="inactiveClass"
     >
@@ -14,26 +14,30 @@
   </nav>
 </template>
 
-<script>
+<script setup>
 import Link from '../elements/Link'
+import $ui from '#build/ui'
 
-export default {
-  components: {
-    Link
+defineProps({
+  links: {
+    type: Array,
+    required: true
   },
-  props: {
-    links: {
-      type: Array,
-      required: true
-    },
-    activeClass: {
-      type: String,
-      default: 'u-border-black u-text-black hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white'
-    },
-    inactiveClass: {
-      type: String,
-      default: 'border-transparent u-text-gray-500 hover:u-text-gray-700 hover:u-border-gray-300'
-    }
+  wrapperClass: {
+    type: String,
+    default: () => $ui.tabs.wrapper
+  },
+  baseClass: {
+    type: String,
+    default: () => $ui.tabs.base
+  },
+  activeClass: {
+    type: String,
+    default: () => $ui.tabs.active
+  },
+  inactiveClass: {
+    type: String,
+    default: () => $ui.tabs.inactive
   }
-}
+})
 </script>
