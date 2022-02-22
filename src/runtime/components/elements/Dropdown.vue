@@ -18,8 +18,8 @@
       >
         <MenuItems :class="baseClass" static>
           <div v-for="(subItems, index) of items" :key="index" class="py-1">
-            <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }">
-              <Component v-bind="item" :is="(item.to && 'Link') || 'button'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)">
+            <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }" :disabled="item.disabled">
+              <Component v-bind="item" :is="(item.to && 'Link') || (item.click && 'button') || 'div'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)">
                 <slot :name="item.slot" :item="item">
                   <Icon v-if="item.icon" :name="item.icon" :class="itemIconClass" />
                   <Avatar v-if="item.avatar" :src="item.avatar" :alt="item.label" :class="itemAvatarClass" size="xs" />
