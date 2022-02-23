@@ -1,8 +1,8 @@
 <template>
-  <button v-if="isButton" v-bind="$attrs" :class="inactiveClass">
+  <button v-if="isButton" v-bind="$attrs">
     <slot />
   </button>
-  <a v-else-if="isExternalLink" v-bind="$attrs" :class="inactiveClass" :href="to" :target="target">
+  <a v-else-if="isExternalLink" v-bind="$attrs" :href="to" :target="target">
     <slot />
   </a>
   <router-link
