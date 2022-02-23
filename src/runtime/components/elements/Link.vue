@@ -1,20 +1,20 @@
 <template>
-  <button v-if="isButton" v-bind="$attrs" :class="isActive ? activeClass : inactiveClass">
-    <slot v-bind="{ isActive }" />
+  <button v-if="isButton" v-bind="$attrs" :class="inactiveClass">
+    <slot />
   </button>
-  <a v-else-if="isExternalLink" v-bind="$attrs" :class="isActive ? activeClass : inactiveClass" :href="to" :target="target">
-    <slot v-bind="{ isActive }" />
+  <a v-else-if="isExternalLink" v-bind="$attrs" :class="inactiveClass" :href="to" :target="target">
+    <slot />
   </a>
   <router-link
     v-else
-    v-slot="{ href, navigate }"
+    v-slot="{ href, navigate, isActive, isExactActive }"
     v-bind="$props"
     custom
   >
     <a
       v-bind="$attrs"
       :href="href"
-      :class="isActive ? activeClass : inactiveClass"
+      :class="resolveLinkClass({ isActive, isExactActive })"
       @click="navigate"
     >
       <slot v-bind="{ isActive }" />
@@ -25,7 +25,6 @@
 <script>
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
-import { useRoute } from '#imports'
 
 export default {
   name: 'Link',
@@ -50,18 +49,6 @@ export default {
     }
   },
   setup (props) {
-    const route = useRoute()
-    const isActive = computed(() => {
-      if (!props.to) {
-        return false
-      }
-
-      if (props.exact) {
-        return [props.to, `${props.to}/`].includes(route.path)
-      } else {
-        return !!route.path.startsWith(props.to)
-      }
-    })
     const isExternalLink = computed(() => {
       return typeof props.to === 'string' && props.to.startsWith('http')
     })
@@ -69,10 +56,18 @@ export default {
       return !props.to
     })
 
+    function resolveLinkClass ({ isActive, isExactActive }) {
+      if ((props.exact && isExactActive) || isActive) {
+        return props.activeClass
+      } else {
+        return props.inactiveClass
+      }
+    }
+
     return {
-      isActive,
       isButton,
-      isExternalLink
+      isExternalLink,
+      resolveLinkClass
     }
   }
 }
