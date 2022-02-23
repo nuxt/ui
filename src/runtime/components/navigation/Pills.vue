@@ -1,64 +1,43 @@
 <template>
-  <nav class="flex items-center space-x-1.5">
-    <div v-for="(link, index) of links" :key="index">
-      <Button
-        :size="size"
-        :to="link.to"
-        :label="link.label"
-        :icon="link.icon"
-        :variant="isActive(link) ? activeVariant : variant"
-        :custom-class="isActive(link) ? activeClass : ''"
-        @click="click(link)"
-      />
-    </div>
+  <nav :class="wrapperClass">
+    <Link
+      v-for="(link, index) of links"
+      :key="index"
+      :to="link.to"
+      :exact="link.exact"
+      :class="baseClass"
+      :active-class="activeClass"
+      :inactive-class="inactiveClass"
+    >
+      {{ link.label }}
+    </Link>
   </nav>
 </template>
 
-<script>
-import Button from '../elements/Button'
+<script setup>
+import Link from '../elements/Link'
+import $ui from '#build/ui'
 
-export default {
-  components: {
-    Button
+defineProps({
+  links: {
+    type: Array,
+    required: true
   },
-  props: {
-    links: {
-      type: Array,
-      required: true
-    },
-    size: {
-      type: String,
-      default: 'md'
-    },
-    variant: {
-      type: String,
-      default: 'gray-hover'
-    },
-    activeVariant: {
-      type: String,
-      default: 'gray'
-    },
-    activeClass: {
-      type: String,
-      default: 'u-text-gray-700 hover:u-text-gray-700 focus:u-text-gray-700'
-    }
+  wrapperClass: {
+    type: String,
+    default: () => $ui.pills.wrapper
   },
-  computed: {
-    options () {
-      return this.links.map(link => ({ value: link.to, text: link.label }))
-    }
+  baseClass: {
+    type: String,
+    default: () => $ui.pills.base
   },
-  methods: {
-    click (link) {
-      this.$emit('input', link)
-    },
-    isActive (link) {
-      if (link.exact === false) {
-        return !!this.$route.path.startsWith(link.to)
-      } else {
-        return this.$route.path === link.to
-      }
-    }
+  activeClass: {
+    type: String,
+    default: () => $ui.pills.active
+  },
+  inactiveClass: {
+    type: String,
+    default: () => $ui.pills.inactive
   }
-}
+})
 </script>

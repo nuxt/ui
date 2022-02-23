@@ -187,12 +187,15 @@ const components = [
     capi: true
   },
   {
-    label: 'Pills',
-    to: '/components/Pills'
-  },
-  {
     label: 'Tabs',
     to: '/components/Tabs',
+    nuxt3: true,
+    capi: true,
+    preset: true
+  },
+  {
+    label: 'Pills',
+    to: '/components/Pills',
     nuxt3: true,
     capi: true,
     preset: true

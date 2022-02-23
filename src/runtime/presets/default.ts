@@ -294,10 +294,17 @@ const dropdown = {
 }
 
 const tabs = {
-  wrapper: 'flex items-center gap-6',
-  base: 'pt-2 pb-3 text-sm font-medium border-b-2 whitespace-nowrap',
-  active: 'u-border-black u-text-black hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white',
+  wrapper: 'flex items-center gap-8',
+  base: 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm',
+  active: 'border-primary-500 text-primary-600',
   inactive: 'border-transparent u-text-gray-500 hover:u-text-gray-700 hover:u-border-gray-300'
+}
+
+const pills = {
+  wrapper: 'flex items-center gap-4',
+  base: 'px-3 py-2 font-medium text-sm rounded-md',
+  active: 'u-bg-gray-100 u-text-gray-700',
+  inactive: 'u-text-gray-500 hover:u-text-gray-700'
 }
 
 export default {
@@ -316,5 +323,6 @@ export default {
   verticalNavigation,
   alertDialog,
   dropdown,
-  tabs
+  tabs,
+  pills
 }

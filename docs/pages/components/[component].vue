@@ -290,6 +290,22 @@ const defaultProps = {
       label: 'Tabs',
       to: '/components/Tabs'
     }]
+  },
+  Pills: {
+    links: [{
+      label: 'Usage',
+      to: '/',
+      exact: true
+    }, {
+      label: 'Examples',
+      to: '/examples'
+    }, {
+      label: 'Migration',
+      to: '/migration'
+    }, {
+      label: 'Pills',
+      to: '/components/Pills'
+    }]
   }
 }
 
