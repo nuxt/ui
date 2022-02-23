@@ -57,10 +57,10 @@ export default {
     })
 
     function resolveLinkClass ({ isActive, isExactActive }) {
-      if ((props.exact && isExactActive) || isActive) {
-        return props.activeClass
+      if (props.exact) {
+        return isExactActive ? props.activeClass : props.inactiveClass
       } else {
-        return props.inactiveClass
+        return isActive ? props.activeClass : props.inactiveClass
       }
     }
 
