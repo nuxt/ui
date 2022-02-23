@@ -5,7 +5,7 @@
     :class="wrapperClass"
     @update:model-value="$emit('update:modelValue', $event)"
   >
-    <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default">
+    <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
 
     <ListboxButton :class="selectCustomClass">
       <slot>
