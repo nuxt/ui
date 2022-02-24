@@ -64,7 +64,7 @@ export default defineNuxtModule<ModuleOptions>({
     // Transpile runtime
     const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
     nuxt.options.build.transpile.push(runtimeDir)
-    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
+    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@iconify/vue')
 
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
