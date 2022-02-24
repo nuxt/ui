@@ -18,7 +18,7 @@
     </ListboxButton>
 
     <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-      <ListboxOptions class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 u-ring-gray-200 overflow-auto focus:outline-none sm:text-sm">
+      <ListboxOptions :class="listBaseClass">
         <ListboxOption
           v-for="(option, index) in options"
           v-slot="{ active, selected, disabled }"
