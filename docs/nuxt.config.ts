@@ -1,5 +1,3 @@
-/* @unocss-include */
-
 import { defineNuxtConfig } from 'nuxt3'
 import module from '../src/module'
 

@@ -127,7 +127,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addTemplate({
       filename: 'ui.mjs',
-      getContents: () => `/* @unocss-include */ export default ${JSON.stringify(ui)}`
+      getContents: () => `export default ${JSON.stringify(ui)}`
     })
 
     addPlugin(resolve(runtimeDir, 'plugins', 'toast.client'))
