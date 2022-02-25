@@ -307,6 +307,49 @@ const pills = {
   inactive: 'u-text-gray-500 hover:u-text-gray-700'
 }
 
+const avatar = {
+  wrapper: 'relative inline-flex items-center justify-center',
+  background: 'u-bg-gray-100',
+  placeholder: 'text-xs font-medium leading-none u-text-black',
+  size: {
+    xxxs: 'h-4 w-4 text-xs',
+    xxs: 'h-5 w-5 text-xs',
+    xs: 'h-6 w-6 text-xs',
+    sm: 'h-8 w-8 text-sm',
+    md: 'h-10 w-10 text-md',
+    lg: 'h-12 w-12 text-lg',
+    xl: 'h-14 w-14 text-xl',
+    '2xl': 'h-16 w-16 text-2xl',
+    '3xl': 'h-20 w-20 text-3xl'
+  },
+  chip: {
+    base: 'absolute block rounded-full ring-2 u-ring-white',
+    position: {
+      'top-right': 'top-0 right-0',
+      'bottom-right': 'bottom-0 right-0',
+      'top-left': 'top-0 left-0',
+      'bottom-left': 'bottom-0 left-0'
+    },
+    variant: {
+      ...safeColors.reduce((acc: any, color) => {
+        acc[color] = `bg-${color}-400`
+        return acc
+      }, {})
+    },
+    size: {
+      xxxs: 'h-1 w-1',
+      xxs: 'h-1 w-1',
+      xs: 'h-1.5 w-1.5',
+      sm: 'h-2 w-2',
+      md: 'h-2.5 w-2.5',
+      lg: 'h-3 w-3',
+      xl: 'h-3.5 w-3.5',
+      '2xl': 'h-3.5 w-3.5',
+      '3xl': 'h-4 w-4'
+    }
+  }
+}
+
 export default {
   card,
   button,
@@ -324,5 +367,6 @@ export default {
   alertDialog,
   dropdown,
   tabs,
-  pills
+  pills,
+  avatar
 }

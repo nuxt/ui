@@ -68,7 +68,9 @@ const components = [
   {
     label: 'Avatar',
     to: '/components/Avatar',
-    nuxt3: true
+    nuxt3: true,
+    preset: true,
+    capi: true
   },
   {
     label: 'AvatarGroup',

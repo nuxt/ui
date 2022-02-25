@@ -1,151 +1,100 @@
 <template>
-  <span class="relative inline-flex items-center justify-center" :class="avatarClass" @click="goto">
-    <img v-if="url" :src="url" :alt="alt" :class="[sizeClass, roundedClass]">
-    <span
-      v-else-if="placeholder"
-      class="font-medium leading-none uppercase u-text-gray-900"
-    >{{ placeholder }}</span>
-    <span
-      v-else-if="text"
-    >{{ text }}</span>
-    <svg
-      v-else
-      class="w-full h-full u-text-gray-300"
-      :class="roundedClass"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
-      />
-    </svg>
+  <span :class="wrapperClass">
+    <img v-if="src" :class="avatarClass" :src="src" :alt="alt">
+    <span v-else-if="text || placeholder" :class="placeholderClass">{{ text || placeholder }}</span>
 
+    <span v-if="chip" :class="chipClass" />
     <slot />
-
-    <span
-      v-if="status"
-      class="absolute top-0 right-0 block rounded-full ring-1 u-ring-white"
-      :class="statusClass"
-    />
   </span>
 </template>
 
-<script>
-export default {
-  props: {
-    src: {
-      type: [String, Boolean],
-      default: null
-    },
-    text: {
-      type: String,
-      default: null
-    },
-    alt: {
-      type: String,
-      default: null
-    },
-    to: {
-      type: String,
-      default: null
-    },
-    size: {
-      type: String,
-      default: 'md',
-      validator (value) {
-        return ['xxxs', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'].includes(value)
-      }
-    },
-    rounded: {
-      type: Boolean,
-      default: false
-    },
-    status: {
-      type: String,
-      default: null,
-      validator (value) {
-        return ['online', 'idle', 'invisible', 'donotdisturb', 'focus'].includes(value)
-      }
+<script setup>
+import { computed } from 'vue'
+import { classNames } from '../../utils'
+import $ui from '#build/ui'
+
+const props = defineProps({
+  src: {
+    type: [String, Boolean],
+    default: null
+  },
+  alt: {
+    type: String,
+    default: null
+  },
+  text: {
+    type: String,
+    default: null
+  },
+  size: {
+    type: String,
+    default: 'md',
+    validator (value) {
+      return Object.keys($ui.avatar.size).includes(value)
     }
   },
-  computed: {
-    url () {
-      if (typeof this.src === 'boolean') {
-        return null
-      }
-      return this.src
-    },
-    placeholder () {
-      if (!this.alt) {
-        return
-      }
-      return this.alt.split(' ').map(word => word.charAt(0)).join('').substr(0, 2)
-    },
-    sizeClass () {
-      return ({
-        xxxs: 'h-4 w-4 text-xs',
-        xxs: 'h-5 w-5 text-xs',
-        xs: 'h-6 w-6 text-xs',
-        sm: 'h-8 w-8 text-sm',
-        md: 'h-10 w-10 text-md',
-        lg: 'h-12 w-12 text-lg',
-        xl: 'h-14 w-14 text-xl',
-        '2xl': 'h-16 w-16 text-2xl',
-        '3xl': 'h-20 w-20 text-3xl'
-      })[this.size]
-    },
-    roundedClass () {
-      return ({
-        true: 'rounded-lg',
-        false: 'rounded-full'
-      })[this.rounded]
-    },
-    placeholderClass () {
-      return ({
-        true: 'u-bg-gray-100',
-        false: 'u-bg-gray-100'
-      })[!!this.alt]
-    },
-    avatarClass () {
-      return [
-        this.sizeClass,
-        this.roundedClass,
-        this.placeholderClass,
-        this.to ? 'cursor-pointer' : ''
-      ].join(' ')
-    },
-    statusClass () {
-      return [
-        ({
-          online: 'bg-green-400',
-          idle: 'bg-yellow-400',
-          invisible: 'u-bg-gray-300',
-          donotdisturb: 'bg-red-400',
-          focus: 'bg-primary-500'
-        })[this.status],
-        ({
-          xxxs: 'h-1 w-1',
-          xxs: 'h-1 w-1',
-          xs: 'h-1.5 w-1.5',
-          sm: 'h-2 w-2',
-          md: 'h-2.5 w-2.5',
-          lg: 'h-3 w-3',
-          xl: 'h-3.5 w-3.5',
-          '2xl': 'h-3.5 w-3.5',
-          '3xl': 'h-4 w-4'
-        })[this.size],
-        ({
-          true: 'transform -translate-y-1/2 translate-x-1/2'
-        })[this.rounded]
-      ].join(' ')
+  rounded: {
+    type: Boolean,
+    default: true
+  },
+  chip: {
+    type: Boolean,
+    default: false
+  },
+  chipVariant: {
+    type: String,
+    default: 'primary',
+    validator (value) {
+      return Object.keys($ui.avatar.chip.variant).includes(value)
     }
   },
-  methods: {
-    goto (e) {
-      if (!this.to || !this.$router) { return }
-      e.preventDefault()
-      this.$router.push(this.to)
+  chipPosition: {
+    type: String,
+    default: 'top-right',
+    validator (value) {
+      return Object.keys($ui.avatar.chip.position).includes(value)
     }
+  },
+  wrapperClass: {
+    type: String,
+    default: () => $ui.avatar.wrapper
+  },
+  backgroundClass: {
+    type: String,
+    default: () => $ui.avatar.background
+  },
+  placeholderClass: {
+    type: String,
+    default: () => $ui.avatar.placeholder
   }
-}
+})
+
+const wrapperClass = computed(() => {
+  return classNames(
+    props.wrapperClass,
+    props.backgroundClass,
+    $ui.avatar.size[props.size],
+    props.rounded ? 'rounded-full' : 'rounded-md'
+  )
+})
+
+const avatarClass = computed(() => {
+  return classNames(
+    $ui.avatar.size[props.size],
+    props.rounded ? 'rounded-full' : 'rounded-md'
+  )
+})
+
+const chipClass = computed(() => {
+  return classNames(
+    $ui.avatar.chip.base,
+    $ui.avatar.chip.position[props.chipPosition],
+    $ui.avatar.chip.variant[props.chipVariant],
+    $ui.avatar.chip.size[props.size]
+  )
+})
+
+const placeholder = computed(() => {
+  return (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substr(0, 2)
+})
 </script>
