@@ -20,6 +20,8 @@
       />
     </svg>
 
+    <slot />
+
     <span
       v-if="status"
       class="absolute top-0 right-0 block rounded-full ring-1 u-ring-white"
