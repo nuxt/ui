@@ -175,7 +175,7 @@
         Card:
       </div>
 
-      <UCard body-class="flex" @submit.prevent="onSubmit">
+      <UCard body-class="flex">
         <div class="flex-1 px-4 py-5 sm:p-6 space-y-3">
           <UFormGroup label="Email" name="email" required>
             <UInput v-model="form.email" type="email" name="email" required icon="heroicons-outline:mail" />
@@ -190,6 +190,7 @@
               v-model="form.personId"
               name="person"
               :options="people"
+              placeholder="Select a person"
               text-attribute="name"
               value-attribute="id"
               icon="heroicons-outline:user"
@@ -253,7 +254,7 @@ const form = reactive({
   notification: 'email',
   notifications: [],
   terms: false,
-  personId: people[0].id,
+  personId: null,
   person: ref(people[0])
 })
 

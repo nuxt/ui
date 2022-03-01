@@ -3,6 +3,7 @@
     <select
       :id="name"
       :name="name"
+      :value="modelValue"
       :required="required"
       :disabled="disabled"
       :class="selectClass"
@@ -20,6 +21,7 @@
             :key="`${childOption[valueAttribute]}-${index}-${index2}`"
             :value="childOption[valueAttribute]"
             :selected="childOption[valueAttribute] === normalizedValue"
+            :disabled="option.disabled"
             v-text="childOption[textAttribute]"
           />
         </optgroup>
@@ -28,6 +30,7 @@
           :key="`${option[valueAttribute]}-${index}`"
           :value="option[valueAttribute]"
           :selected="option[valueAttribute] === normalizedValue"
+          :disabled="option.disabled"
           v-text="option[textAttribute]"
         />
       </template>
@@ -154,7 +157,8 @@ export default {
       return [
         {
           [props.valueAttribute]: null,
-          [props.textAttribute]: props.placeholder
+          [props.textAttribute]: props.placeholder,
+          disabled: true
         },
         ...normalizedOptions.value
       ]
