@@ -1,6 +1,6 @@
 <template>
   <span :class="wrapperClass">
-    <img v-if="src" :class="avatarClass" :src="src" :alt="alt">
+    <img v-if="url" :class="avatarClass" :src="url" :alt="alt">
     <span v-else-if="text || placeholder" :class="placeholderClass">{{ text || placeholder }}</span>
 
     <span v-if="chip" :class="chipClass" />
@@ -92,6 +92,13 @@ const chipClass = computed(() => {
     $ui.avatar.chip.variant[props.chipVariant],
     $ui.avatar.chip.size[props.size]
   )
+})
+
+const url = computed(() => {
+  if (typeof props.src === 'boolean') {
+    return null
+  }
+  return props.src
 })
 
 const placeholder = computed(() => {
