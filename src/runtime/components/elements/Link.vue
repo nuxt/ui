@@ -17,7 +17,7 @@
       :class="resolveLinkClass({ isActive, isExactActive })"
       @click="navigate"
     >
-      <slot v-bind="{ isActive: props.exact ? isExactActive : isActive }" />
+      <slot v-bind="{ isActive: exact ? isExactActive : isActive }" />
     </a>
   </router-link>
 </template>
