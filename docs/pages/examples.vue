@@ -269,11 +269,6 @@ function onClick () {
   console.warn('click')
 }
 
-function onSubmit () {
-  // eslint-disable-next-line no-console
-  console.warn('submit')
-}
-
 const dropdownItems = [
   [{
     label: 'Edit',
