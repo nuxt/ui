@@ -61,6 +61,7 @@ export default {
     TransitionChild,
     Card
   },
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: Boolean,
