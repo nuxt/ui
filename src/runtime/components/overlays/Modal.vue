@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot :show="isOpen" as="template">
+  <TransitionRoot :appear="appear" :show="isOpen" as="template">
     <Dialog @close="setIsOpen">
       <div class="fixed z-20 inset-0 overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -64,6 +64,10 @@ export default {
   inheritAttrs: false,
   props: {
     modelValue: {
+      type: Boolean,
+      default: false
+    },
+    appear: {
       type: Boolean,
       default: false
     }
