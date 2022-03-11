@@ -1,5 +1,5 @@
 <template>
-  <Modal v-model="isOpen" class="w-full">
+  <Modal v-model="isOpen" :appear="appear" class="w-full" @close="onClose">
     <div class="sm:flex sm:items-start">
       <div v-if="icon" :class="iconWrapperClass" class="mx-auto flex-shrink-0 flex items-center justify-center rounded-full sm:mx-0">
         <Icon :name="icon" :class="iconClass" />
@@ -30,6 +30,10 @@ import $ui from '#build/ui'
 
 const props = defineProps({
   modelValue: {
+    type: Boolean,
+    default: false
+  },
+  appear: {
     type: Boolean,
     default: false
   },
@@ -75,7 +79,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue', 'confirm', 'cancel'])
+const emit = defineEmits(['update:modelValue', 'confirm', 'cancel', 'close'])
 
 const isOpen = computed({
   get () {
@@ -93,5 +97,8 @@ function onConfirm () {
 function onCancel () {
   emit('cancel')
   isOpen.value = false
+}
+function onClose () {
+  emit('close')
 }
 </script>
