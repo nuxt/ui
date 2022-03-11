@@ -1,10 +1,11 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template">
-    <Dialog @close="setIsOpen">
+    <Dialog @close="close">
       <div class="fixed z-20 inset-0 overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <TransitionChild
             as="template"
+            :appear="appear"
             enter="ease-out duration-300"
             enter-from="opacity-0"
             enter-to="opacity-100"
@@ -20,6 +21,7 @@
 
           <TransitionChild
             as="template"
+            :appear="appear"
             enter="ease-out duration-300"
             enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             enter-to="opacity-100 translate-y-0 sm:scale-100"
@@ -72,7 +74,7 @@ export default {
       default: false
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'close'],
   setup (props, { emit }) {
     const isOpen = computed({
       get () {
@@ -85,11 +87,9 @@ export default {
 
     return {
       isOpen,
-      setIsOpen (value) {
+      close (value) {
         isOpen.value = value
-      },
-      toggleIsOpen () {
-        isOpen.value = !isOpen.value
+        emit('close')
       }
     }
   }
