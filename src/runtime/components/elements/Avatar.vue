@@ -102,7 +102,7 @@ const url = computed(() => {
 })
 
 const placeholder = computed(() => {
-  return (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substr(0, 2)
+  return (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2)
 })
 
 const error = ref(false)
