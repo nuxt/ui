@@ -8,17 +8,18 @@
           <template v-if="Array.isArray(slot)">
             <div :key="key">
               <component
-                :is="slot.component ? `U${slot.component}` : slot.tag"
+                :is="slot.component ? `U${slot.component.name}` : slot.tag"
                 v-for="(slot, index) of slot"
                 :key="index"
                 :class="slot.class"
-                v-bind="slot.props || defaultProps[slot.component]"
+                v-bind="slot.component?.props || defaultProps[slot.component]"
                 v-html="slot.html"
               />
             </div>
           </template>
           <template v-else>
-            <component :is="slot.component ? `U${slot.component}` : slot.tag" :key="key" :class="slot.class" v-bind="slot.props || defaultProps[slot.component]" v-html="slot.html" />
+            <component :is="`U${slot.component.name}`" v-if="slot.component" :key="`${key}-component`" v-bind="slot.component?.props || defaultProps[slot.component]" />
+            <component :is="slot.tag" v-else :key="`${key}-tag`" :class="slot.class" v-html="slot.html" />
           </template>
         </template>
       </component>
@@ -202,10 +203,12 @@ const defaultProps = {
     label: 'Input group',
     slots: {
       default: {
-        component: 'Input',
-        props: {
-          name: 'input',
-          placeholder: 'Works with every form element'
+        component: {
+          name: 'Input',
+          props: {
+            name: 'input',
+            placeholder: 'Works with every form element'
+          }
         }
       }
     }
@@ -258,10 +261,12 @@ const defaultProps = {
         html: 'Modal content'
       },
       footer: {
-        component: 'Button',
-        props: {
-          label: 'Close',
-          onClick: () => { modal.value = false }
+        component: {
+          name: 'Button',
+          props: {
+            label: 'Close',
+            onClick: () => { modal.value = false }
+          }
         }
       }
     }
