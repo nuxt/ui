@@ -57,6 +57,13 @@ export default {
       type: String,
       default: () => $ui.card.ring
     },
+    roundedClass: {
+      type: String,
+      default: () => $ui.card.rounded,
+      validator (value) {
+        return ['sm', 'md', 'lg', 'xl', '2xl', '3xl'].map(size => `rounded-${size}`).includes(value)
+      }
+    },
     bodyClass: {
       type: String,
       default: () => $ui.card.body
@@ -90,8 +97,8 @@ export default {
     const cardClass = computed(() => {
       return classNames(
         props.baseClass,
-        props.padded && props.rounded && 'rounded-md',
-        !props.padded && props.rounded && 'sm:rounded-md',
+        props.padded && props.rounded && props.roundedClass,
+        !props.padded && props.rounded && `sm:${props.roundedClass}`,
         props.ringClass,
         props.shadowClass,
         props.backgroundClass,

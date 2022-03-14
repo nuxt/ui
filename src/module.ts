@@ -107,6 +107,14 @@ export default defineNuxtModule<ModuleOptions>({
           {
             pattern: new RegExp(`ring-(${safeColorsAsRegex})-(500)`),
             variants: ['focus']
+          },
+          {
+            pattern: /rounded-(sm|md|lg|xl|2xl|3xl)/,
+            variants: ['sm']
+          },
+          {
+            pattern: /max-w-(xs|sm|md|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)/,
+            variants: ['sm']
           }
         ]
       },

@@ -30,9 +30,14 @@
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <Card
-              class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+              :base-class="baseClass"
+              :background-class="backgroundClass"
+              :shadow-class="shadowClass"
+              :ring-class="ringClass"
+              :rounded-class="roundedClass"
+              :class="modalClass"
+              padded
               v-bind="$attrs"
-              ring-class
             >
               <template v-if="$slots.header" #header>
                 <slot name="header" />
@@ -52,8 +57,9 @@
 <script>
 import { computed } from 'vue'
 import { Dialog, DialogOverlay, TransitionRoot, TransitionChild } from '@headlessui/vue'
-
+import { classNames } from '../../utils/'
 import Card from '../layout/Card'
+import $ui from '#build/ui'
 
 export default {
   components: {
@@ -72,6 +78,33 @@ export default {
     appear: {
       type: Boolean,
       default: false
+    },
+    baseClass: {
+      type: String,
+      default: () => $ui.modal.base
+    },
+    backgroundClass: {
+      type: String,
+      default: () => $ui.modal.background
+    },
+    shadowClass: {
+      type: String,
+      default: () => $ui.modal.shadow
+    },
+    ringClass: {
+      type: String,
+      default: () => $ui.modal.ring
+    },
+    roundedClass: {
+      type: String,
+      default: () => $ui.modal.rounded
+    },
+    widthClass: {
+      type: String,
+      default: () => $ui.modal.width,
+      validator (value) {
+        return ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'].map(width => `max-w-${width}`).includes(value)
+      }
     }
   },
   emits: ['update:modelValue', 'close'],
@@ -85,8 +118,15 @@ export default {
       }
     })
 
+    const modalClass = computed(() => {
+      return classNames(
+        `sm:${props.widthClass}`
+      )
+    })
+
     return {
       isOpen,
+      modalClass,
       close (value) {
         isOpen.value = value
         emit('close')

@@ -213,6 +213,7 @@ const components = [
     label: 'Modal',
     to: '/components/Modal',
     nuxt3: true,
+    preset: true,
     capi: true
   },
   {

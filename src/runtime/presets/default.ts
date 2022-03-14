@@ -223,10 +223,21 @@ const card = {
   background: 'u-bg-white',
   border: 'u-border-gray-200',
   ring: 'ring-1 u-ring-gray-200',
+  rounded: 'rounded-md',
   shadow: 'shadow',
   body: 'px-4 py-5 sm:p-6',
   header: 'px-4 py-5 sm:px-6',
   footer: 'px-4 py-4 sm:px-6'
+}
+
+const modal = {
+  base: 'relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle w-full',
+  background: 'u-bg-white',
+  border: '',
+  ring: '',
+  rounded: 'rounded-lg',
+  shadow: 'shadow-xl',
+  width: 'max-w-lg'
 }
 
 const container = {
@@ -352,6 +363,7 @@ const avatar = {
 
 export default {
   card,
+  modal,
   button,
   badge,
   formGroup,
