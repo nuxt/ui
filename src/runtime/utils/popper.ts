@@ -10,8 +10,8 @@ export function usePopper (options: object) {
       if (!popper.value) { return }
       if (!reference.value) { return }
 
-      const popperEl = popper.value.el || popper.value
-      const referenceEl = reference.value.el || reference.value
+      const popperEl = popper.value.$el || popper.value
+      const referenceEl = reference.value.$el || reference.value
 
       if (!(referenceEl instanceof HTMLElement)) { return }
       if (!(popperEl instanceof HTMLElement)) { return }
