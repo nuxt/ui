@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
