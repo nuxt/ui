@@ -1,6 +1,6 @@
 <template>
   <span :class="wrapperClass">
-    <img v-if="url" :class="avatarClass" :src="url" :alt="alt">
+    <img v-if="url && !error" :class="avatarClass" :src="url" :alt="alt" :onerror="() => onError()">
     <span v-else-if="text || placeholder" :class="placeholderClass">{{ text || placeholder }}</span>
 
     <span v-if="chip" :class="chipClass" />
@@ -102,6 +102,18 @@ const url = computed(() => {
 })
 
 const placeholder = computed(() => {
-  return (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substr(0, 2)
+  return (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2)
 })
+
+const error = ref(false)
+
+watch(() => props.src, () => {
+  if (error.value) {
+    error.value = false
+  }
+})
+
+function onError () {
+  error.value = true
+}
 </script>
