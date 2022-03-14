@@ -175,10 +175,6 @@
         Card:
       </div>
 
-      <UCard @submit.prevent="onSubmit">
-        <UButton type="submit" label="Submit" class="ml-auto" />
-      </UCard>
-
       <UCard body-class="flex">
         <div class="flex-1 px-4 py-5 sm:p-6 space-y-3">
           <UFormGroup label="Email" name="email" required>
