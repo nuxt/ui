@@ -21,7 +21,7 @@
             :key="`${childOption[valueAttribute]}-${index}-${index2}`"
             :value="childOption[valueAttribute]"
             :selected="childOption[valueAttribute] === normalizedValue"
-            :disabled="option.disabled"
+            :disabled="childOption.disabled"
             v-text="childOption[textAttribute]"
           />
         </optgroup>
@@ -156,7 +156,7 @@ export default {
 
       return [
         {
-          [props.valueAttribute]: null,
+          [props.valueAttribute]: '',
           [props.textAttribute]: props.placeholder,
           disabled: true
         },
@@ -167,7 +167,7 @@ export default {
     const normalizedValue = computed(() => {
       const foundOption = normalizedOptionsWithPlaceholder.value.find(option => option.value === props.modelValue)
       if (!foundOption) {
-        return null
+        return ''
       }
 
       return foundOption.value
