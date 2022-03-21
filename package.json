@@ -34,7 +34,7 @@
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/line-clamp": "^0.3.1",
     "@vueuse/core": "^8.1.1",
-    "defu": "^5.0.1",
+    "defu": "^6.0.0",
     "lodash-es": "^4.17.21",
     "nanoid": "^3.3.1",
     "pathe": "^0.2.0",
