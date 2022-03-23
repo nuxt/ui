@@ -264,7 +264,7 @@ const toggle = {
 
 const verticalNavigation = {
   wrapper: 'space-y-1',
-  base: 'group flex items-center text-sm font-medium rounded-md w-full',
+  base: 'group flex items-center text-sm font-medium rounded-md w-full relative',
   spacing: 'px-3 py-2',
   active: 'u-text-gray-900 u-bg-gray-100',
   inactive: 'u-text-gray-600 hover:u-text-gray-900 hover:u-bg-gray-50 focus:u-bg-gray-50',
