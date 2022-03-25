@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'url'
 import { resolve } from 'pathe'
 import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin, resolveModule } from '@nuxt/kit'
-import defu from 'defu'
+import { defu, defuArrayFn } from 'defu'
 import type { TailwindConfig } from 'tailwindcss/tailwind-config'
 import colors from 'tailwindcss/colors.js'
 import { name, version } from '../package.json'
@@ -71,7 +71,7 @@ export default defineNuxtModule<ModuleOptions>({
       viewer: false,
       config: {
         darkMode: 'class',
-        theme: defu.arrayFn({
+        theme: defuArrayFn({
           extend: {
             colors: {
               // @ts-ignore
