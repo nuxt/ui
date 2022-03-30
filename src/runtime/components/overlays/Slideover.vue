@@ -22,8 +22,8 @@
         leave-to="-translate-x-full"
       >
         <div class="relative flex-1 flex flex-col w-full max-w-md u-bg-white focus:outline-none">
-          <div v-if="$slots.header" class="h-16 border-b u-border-gray-200">
-            <div class="flex items-center justify-between px-4">
+          <div v-if="$slots.header" class="border-b u-border-gray-200">
+            <div class="flex items-center justify-between px-4 h-16">
               <slot name="header" />
             </div>
           </div>
