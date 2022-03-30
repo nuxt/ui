@@ -22,13 +22,11 @@
         leave-to="-translate-x-full"
       >
         <div class="relative flex-1 flex flex-col w-full max-w-md u-bg-white focus:outline-none">
-          <div class="pb-4">
-            <div class="flex-shrink-0 flex items-center justify-between px-4 h-16 border-b u-border-gray-200">
-              <slot name="header" />
-            </div>
-
-            <slot />
+          <div class="flex-shrink-0 flex items-center justify-between px-4 h-16 border-b u-border-gray-200">
+            <slot name="header" />
           </div>
+
+          <slot />
         </div>
       </TransitionChild>
     </Dialog>
