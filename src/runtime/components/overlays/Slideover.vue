@@ -37,17 +37,18 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { WritableComputedRef, PropType } from 'vue'
 import { Dialog, DialogOverlay, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
 const props = defineProps({
   modelValue: {
-    type: Boolean,
+    type: Boolean as PropType<boolean>,
     default: false
   }
 })
 const emit = defineEmits(['update:modelValue'])
 
-const isOpen = computed({
+const isOpen: WritableComputedRef<boolean> = computed({
   get () {
     return props.modelValue
   },
