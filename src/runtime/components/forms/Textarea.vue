@@ -104,15 +104,19 @@ export default {
 
     const autoResize = () => {
       if (props.autoresize) {
+        textarea.value.rows = props.rows
+
         const styles = window.getComputedStyle(textarea.value)
         const paddingTop = parseInt(styles.paddingTop)
         const paddingBottom = parseInt(styles.paddingBottom)
         const padding = paddingTop + paddingBottom
-        const initialHeight = (parseInt(styles.height) - padding) / textarea.value.rows
-        const scrollHeight = textarea.value.scrollHeight - padding
-        const newRows = Math.ceil(scrollHeight / initialHeight)
+        const lineHeight = parseInt(styles.lineHeight)
+        const { scrollHeight } = textarea.value
+        const newRows = (scrollHeight - padding) / lineHeight
 
-        textarea.value.rows = newRows
+        if (newRows > props.rows) {
+          textarea.value.rows = newRows
+        }
       }
     }
 
