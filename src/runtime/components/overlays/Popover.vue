@@ -1,7 +1,7 @@
 <template>
-  <Popover v-slot="{ open }" :class="wrapperClass">
+  <Popover v-slot="{ open, close }" :class="wrapperClass">
     <PopoverButton ref="trigger" as="div">
-      <slot :open="open">
+      <slot :open="open" :close="close">
         <button>Open</button>
       </slot>
     </PopoverButton>
@@ -17,7 +17,7 @@
         leave-to-class="opacity-0 translate-y-1"
       >
         <PopoverPanel :class="panelClass" static>
-          <slot name="panel" />
+          <slot name="panel" :open="open" :close="close" />
         </PopoverPanel>
       </transition>
     </div>
