@@ -183,11 +183,15 @@ export default {
         return
       }
 
+      // cancel programmed closing
       if (closeTimeout) {
         clearTimeout(closeTimeout)
         closeTimeout = null
       }
-      // TODO: if already open, return
+      // dropdown already open
+      if (menuApi.value.menuState === 0) {
+        return
+      }
       openTimeout = openTimeout || setTimeout(() => {
         menuApi.value.openMenu && menuApi.value.openMenu()
         openTimeout = null
@@ -199,11 +203,15 @@ export default {
         return
       }
 
+      // cancel programmed opening
       if (openTimeout) {
         clearTimeout(openTimeout)
         openTimeout = null
       }
-      // TODO: if already closed, return
+      // dropdown already closed
+      if (menuApi.value.menuState === 1) {
+        return
+      }
       closeTimeout = closeTimeout || setTimeout(() => {
         menuApi.value.closeMenu && menuApi.value.closeMenu()
         closeTimeout = null
