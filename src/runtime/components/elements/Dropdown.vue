@@ -1,12 +1,12 @@
 <template>
-  <Menu v-slot="{ open }" as="div" :class="wrapperClass">
-    <MenuButton ref="trigger" as="div" class="inline-flex">
+  <Menu v-slot="{ open }" as="div" :class="wrapperClass" @mouseleave="onMouseLeave">
+    <MenuButton ref="trigger" as="div" class="inline-flex" @mouseover="onMouseOver">
       <slot :open="open">
         <button>Open</button>
       </slot>
     </MenuButton>
 
-    <div v-if="open" ref="container" :class="containerClass">
+    <div v-if="open" ref="container" :class="containerClass" @mouseover="onMouseOver">
       <transition
         appear
         enter-active-class="transition duration-100 ease-out"
@@ -43,6 +43,7 @@ import {
   MenuItem
 } from '@headlessui/vue'
 
+import { ref, onMounted } from 'vue'
 import Icon from '../elements/Icon'
 import Avatar from '../elements/Avatar'
 import Link from '../elements/Link'
@@ -76,6 +77,13 @@ export default {
       default: 'fixed',
       validator: (value) => {
         return ['absolute', 'fixed'].includes(value)
+      }
+    },
+    mode: {
+      type: String,
+      default: 'click',
+      validator: (value) => {
+        return ['click', 'hover'].includes(value)
       }
     },
     wrapperClass: {
@@ -159,10 +167,63 @@ export default {
       }
     }
 
+    const menuApi = ref(null)
+    let openTimeout = null
+    let closeTimeout = null
+    onMounted(() => {
+      setTimeout(() => {
+        const menuProvides = trigger.value?.$.provides
+        const menuProvidesSymbols = Object.getOwnPropertySymbols(menuProvides)
+        menuApi.value = menuProvidesSymbols.length && menuProvides[menuProvidesSymbols[0]]
+      }, 0)
+    })
+
+    function onMouseOver () {
+      if (props.mode !== 'hover' || !menuApi.value) {
+        return
+      }
+
+      // cancel programmed closing
+      if (closeTimeout) {
+        clearTimeout(closeTimeout)
+        closeTimeout = null
+      }
+      // dropdown already open
+      if (menuApi.value.menuState === 0) {
+        return
+      }
+      openTimeout = openTimeout || setTimeout(() => {
+        menuApi.value.openMenu && menuApi.value.openMenu()
+        openTimeout = null
+      }, 200)
+    }
+
+    function onMouseLeave () {
+      if (props.mode !== 'hover' || !menuApi.value) {
+        return
+      }
+
+      // cancel programmed opening
+      if (openTimeout) {
+        clearTimeout(openTimeout)
+        openTimeout = null
+      }
+      // dropdown already closed
+      if (menuApi.value.menuState === 1) {
+        return
+      }
+      closeTimeout = closeTimeout || setTimeout(() => {
+        menuApi.value.closeMenu && menuApi.value.closeMenu()
+        closeTimeout = null
+      }, 100)
+    }
+
     return {
       trigger,
       container,
       onItemClick,
+      onMouseOver,
+      onMouseLeave,
       resolveItemClass
     }
   }
