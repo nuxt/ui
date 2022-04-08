@@ -45,7 +45,7 @@
     "@nuxtjs/eslint-config-typescript": "^9.0.0",
     "@types/lodash-es": "^4.17.6",
     "@types/tailwindcss": "^3.0.10",
-    "eslint": "^8.12.0",
+    "eslint": "^8.13.0",
     "nuxt3": "latest",
     "standard-version": "^9.3.2"
   },
