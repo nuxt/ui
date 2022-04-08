@@ -235,6 +235,12 @@ const components = [
     capi: true
   },
   {
+    label: 'Slideover',
+    to: '/components/Slideover',
+    nuxt3: true,
+    capi: true
+  },
+  {
     label: 'Tooltip',
     to: '/components/Tooltip',
     nuxt3: true,

@@ -114,6 +114,7 @@ const selectCustom = ref(people[0])
 const alertDialog = ref(false)
 const toggle = ref(false)
 const modal = ref(false)
+const slideover = ref(false)
 
 const defaultProps = {
   Button: {
@@ -268,6 +269,24 @@ const defaultProps = {
             onClick: () => { modal.value = false }
           }
         }
+      }
+    }
+  },
+  Slideover: {
+    modelValue: slideover,
+    'onUpdate:modelValue': (v) => { slideover.value = v },
+    component: {
+      name: 'Button',
+      props: {
+        variant: 'secondary',
+        label: 'Open slideover',
+        onClick: () => { slideover.value = true }
+      }
+    },
+    slots: {
+      default: {
+        tag: 'div',
+        html: 'Slideover content'
       }
     }
   },
