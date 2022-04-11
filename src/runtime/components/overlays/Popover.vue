@@ -1,12 +1,12 @@
 <template>
-  <Popover v-slot="{ open, close }" :class="wrapperClass">
-    <PopoverButton ref="trigger" as="div">
+  <Popover v-slot="{ open, close }" :class="wrapperClass" @mouseleave="onMouseLeave">
+    <PopoverButton ref="trigger" as="div" @mouseover="onMouseOver">
       <slot :open="open" :close="close">
         <button>Open</button>
       </slot>
     </PopoverButton>
 
-    <div v-if="open" ref="container" :class="containerClass">
+    <div v-if="open" ref="container" :class="containerClass" @mouseover="onMouseOver">
       <transition
         appear
         enter-active-class="transition ease-out duration-200"
@@ -43,6 +43,13 @@ export default {
     strategy: {
       type: String,
       default: 'fixed'
+    },
+    mode: {
+      type: String,
+      default: 'click',
+      validator: (value) => {
+        return ['click', 'hover'].includes(value)
+      }
     },
     wrapperClass: {
       type: String,
@@ -82,9 +89,58 @@ export default {
       }]
     })
 
+    const popoverApi = ref(null)
+    let openTimeout = null
+    let closeTimeout = null
+    onMounted(() => {
+      setTimeout(() => {
+        const popoverProvides = trigger.value?.$.provides
+        const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
+        popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
+      }, 0)
+    })
+    function onMouseOver () {
+      if (props.mode !== 'hover' || !popoverApi.value) {
+        return
+      }
+      // cancel programmed closing
+      if (closeTimeout) {
+        clearTimeout(closeTimeout)
+        closeTimeout = null
+      }
+      // dropdown already open
+      if (popoverApi.value.popoverState === 0) {
+        return
+      }
+      openTimeout = openTimeout || setTimeout(() => {
+        popoverApi.value.togglePopover && popoverApi.value.togglePopover()
+        openTimeout = null
+      }, 200)
+    }
+    function onMouseLeave () {
+      if (props.mode !== 'hover' || !popoverApi.value) {
+        return
+      }
+      // cancel programmed opening
+      if (openTimeout) {
+        clearTimeout(openTimeout)
+        openTimeout = null
+      }
+      // dropdown already closed
+      if (popoverApi.value.popoverState === 1) {
+        return
+      }
+      closeTimeout = closeTimeout || setTimeout(() => {
+        popoverApi.value.closePopover && popoverApi.value.closePopover()
+        closeTimeout = null
+      }, 100)
+    }
+
     return {
       trigger,
-      container
+      container,
+      onMouseOver,
+      onMouseLeave
     }
   }
 }
