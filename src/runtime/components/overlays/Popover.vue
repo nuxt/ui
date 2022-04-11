@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
 import { usePopper } from '../../utils'
