@@ -100,6 +100,12 @@ export default {
         const popoverProvides = trigger.value?.$.provides
         const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
         popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
+        // stop trigger click propagation on hover
+        popoverApi.value.button.addEventListener('click', (e) => {
+          if (props.mode === 'hover') {
+            e.stopPropagation()
+          }
+        }, true)
       }, 0)
     })
 
@@ -119,7 +125,7 @@ export default {
       openTimeout = openTimeout || setTimeout(() => {
         popoverApi.value.togglePopover && popoverApi.value.togglePopover()
         openTimeout = null
-      }, 200)
+      }, 50)
     }
 
     function onMouseLeave () {
@@ -138,7 +144,7 @@ export default {
       closeTimeout = closeTimeout || setTimeout(() => {
         popoverApi.value.closePopover && popoverApi.value.closePopover()
         closeTimeout = null
-      }, 100)
+      }, 200)
     }
 
     return {
