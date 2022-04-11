@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
 import { usePopper } from '../../utils'
@@ -91,8 +91,10 @@ export default {
     })
 
     const popoverApi = ref(null)
+
     let openTimeout = null
     let closeTimeout = null
+
     onMounted(() => {
       setTimeout(() => {
         const popoverProvides = trigger.value?.$.provides
@@ -100,6 +102,7 @@ export default {
         popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
       }, 0)
     })
+
     function onMouseOver () {
       if (props.mode !== 'hover' || !popoverApi.value) {
         return
@@ -118,6 +121,7 @@ export default {
         openTimeout = null
       }, 200)
     }
+
     function onMouseLeave () {
       if (props.mode !== 'hover' || !popoverApi.value) {
         return
