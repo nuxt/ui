@@ -175,6 +175,12 @@ export default {
         const menuProvides = trigger.value?.$.provides
         const menuProvidesSymbols = Object.getOwnPropertySymbols(menuProvides)
         menuApi.value = menuProvidesSymbols.length && menuProvides[menuProvidesSymbols[0]]
+        // stop trigger click propagation on hover
+        menuApi.value.buttonRef.addEventListener('click', (e) => {
+          if (props.mode === 'hover') {
+            e.stopPropagation()
+          }
+        }, true)
       }, 0)
     })
 
@@ -195,7 +201,7 @@ export default {
       openTimeout = openTimeout || setTimeout(() => {
         menuApi.value.openMenu && menuApi.value.openMenu()
         openTimeout = null
-      }, 200)
+      }, 50)
     }
 
     function onMouseLeave () {
@@ -215,7 +221,7 @@ export default {
       closeTimeout = closeTimeout || setTimeout(() => {
         menuApi.value.closeMenu && menuApi.value.closeMenu()
         closeTimeout = null
-      }, 100)
+      }, 200)
     }
 
     return {
