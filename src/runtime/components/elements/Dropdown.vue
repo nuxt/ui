@@ -131,7 +131,7 @@ export default {
       modifiers: [{
         name: 'offset',
         options: {
-          offset: [0, 8]
+          offset: 0
         }
       },
       {
@@ -221,7 +221,7 @@ export default {
       closeTimeout = closeTimeout || setTimeout(() => {
         menuApi.value.closeMenu && menuApi.value.closeMenu()
         closeTimeout = null
-      }, 200)
+      }, 0)
     }
 
     return {

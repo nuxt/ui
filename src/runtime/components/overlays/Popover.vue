@@ -58,7 +58,7 @@ export default {
     },
     containerClass: {
       type: String,
-      default: 'z-10'
+      default: 'z-10 py-2'
     },
     panelClass: {
       type: String,
@@ -72,7 +72,7 @@ export default {
       modifiers: [{
         name: 'offset',
         options: {
-          offset: [0, 8]
+          offset: 0
         }
       },
       {
@@ -144,7 +144,7 @@ export default {
       closeTimeout = closeTimeout || setTimeout(() => {
         popoverApi.value.closePopover && popoverApi.value.closePopover()
         closeTimeout = null
-      }, 200)
+      }, 0)
     }
 
     return {

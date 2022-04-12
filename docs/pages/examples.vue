@@ -100,7 +100,7 @@
         Popover:
       </div>
 
-      <UPopover panel-class="w-screen max-w-sm px-4 sm:px-0 transform" wrapper-class="inline-block relative">
+      <UPopover mode="hover" wrapper-class="inline-block relative">
         <template #default="{ open }">
           <UButton variant="secondary" :icon="open ? 'heroicons-solid:chevron-up' : 'heroicons-solid:chevron-down'" trailing icon-class="transition">
             Open popover!
