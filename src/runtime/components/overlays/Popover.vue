@@ -62,7 +62,7 @@ export default {
     },
     panelClass: {
       type: String,
-      default: 'transform'
+      default: ''
     }
   },
   setup (props) {
