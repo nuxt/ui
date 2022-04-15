@@ -3,10 +3,9 @@
     <Avatar
       v-for="(avatar, index) of avatars"
       :key="index"
-      :src="avatar.src"
+      v-bind="avatar"
       class="ring-2 u-ring-white -ml-1.5 first:ml-0"
       :size="size"
-      :status="avatar.status"
     />
     <Avatar
       v-if="remainingGroupSize > 0"
