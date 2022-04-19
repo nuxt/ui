@@ -54,7 +54,7 @@ export default {
     },
     containerClass: {
       type: String,
-      default: 'z-10'
+      default: 'z-10 py-2'
     },
     tooltipClass: {
       type: String,
@@ -69,7 +69,7 @@ export default {
       modifiers: [{
         name: 'offset',
         options: {
-          offset: [0, 8]
+          offset: 0
         }
       },
       {
