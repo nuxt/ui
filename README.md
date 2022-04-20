@@ -1,6 +1,6 @@
 # @nuxthq/ui
 
-Components library as a Nuxt3 module using [TailwindCSS](https://tailwindcss.com).
+Components library as a Nuxt module using [TailwindCSS](https://tailwindcss.com).
 
 ## Installation
 
@@ -11,7 +11,7 @@ yarn add --dev @nuxthq/ui
 Then, register the module in your `nuxt.config.js`:
 
 ```js
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt'
 
 export default defineNuxtConfig({
   buildModules: [
@@ -39,7 +39,7 @@ Define the primary variant. Defaults to `indigo`. You can specify your own objec
 **Example:**
 
 ```js
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt'
 
 export default defineNuxtConfig({
   buildModules: [
@@ -58,7 +58,7 @@ Define the prefix of the imported components. Defaults to `u`.
 **Example:**
 
 ```js
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt'
 
 export default defineNuxtConfig({
   buildModules: [

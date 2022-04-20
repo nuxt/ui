@@ -26,7 +26,7 @@
   "dependencies": {
     "@headlessui/vue": "1.5.0",
     "@iconify/vue": "^3.2.1",
-    "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
+    "@nuxt/kit": "^3.0.0-rc.1",
     "@nuxtjs/color-mode": "^3.0.2",
     "@nuxtjs/tailwindcss": "^5.0.2",
     "@popperjs/core": "^2.11.5",
@@ -46,7 +46,7 @@
     "@types/lodash-es": "^4.17.6",
     "@types/tailwindcss": "^3.0.10",
     "eslint": "^8.13.0",
-    "nuxt3": "latest",
+    "nuxt": "^3.0.0-rc.1",
     "standard-version": "^9.3.2"
   },
   "build": {

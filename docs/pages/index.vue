@@ -79,7 +79,7 @@ const code1 = `
 yarn add --dev @nuxthq/ui`
 
 const code2 = `
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt'
 
 defineNuxtConfig({
   buildModules: [
@@ -95,7 +95,7 @@ const code3 = `
 }`
 
 const code4 = `
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt'
 
 defineNuxtConfig({
   ui: {
@@ -104,7 +104,7 @@ defineNuxtConfig({
 })`
 
 const code5 = `
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt'
 
 defineNuxtConfig({
   ui: {

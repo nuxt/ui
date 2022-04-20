@@ -1,4 +1,4 @@
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt'
 import module from '../src/module'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
