@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
@@ -104,6 +104,10 @@ export default {
 
     const autoResize = () => {
       if (props.autoresize) {
+        if (!textarea.value) {
+          return
+        }
+
         textarea.value.rows = props.rows
 
         const styles = window.getComputedStyle(textarea.value)
@@ -125,6 +129,10 @@ export default {
 
       emit('update:modelValue', value)
     }
+
+    watch(() => props.modelValue, () => {
+      nextTick(autoResize)
+    })
 
     onMounted(() => {
       setTimeout(() => {
