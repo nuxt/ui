@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useNuxtApp, useState } from '#app'
 import Notification from './Notification'
 

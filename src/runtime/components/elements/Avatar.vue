@@ -8,7 +8,7 @@
   </span>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
@@ -29,7 +29,7 @@ const props = defineProps({
   size: {
     type: String,
     default: 'md',
-    validator (value) {
+    validator (value: string) {
       return Object.keys($ui.avatar.size).includes(value)
     }
   },
@@ -44,14 +44,14 @@ const props = defineProps({
   chipVariant: {
     type: String,
     default: 'primary',
-    validator (value) {
+    validator (value: string) {
       return Object.keys($ui.avatar.chip.variant).includes(value)
     }
   },
   chipPosition: {
     type: String,
     default: 'top-right',
-    validator (value) {
+    validator (value: string) {
       return Object.keys($ui.avatar.chip.position).includes(value)
     }
   },
