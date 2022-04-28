@@ -1,6 +1,7 @@
 <template>
   <Listbox
     :model-value="modelValue"
+    :multiple="multiple"
     as="div"
     :class="wrapperClass"
     @update:model-value="$emit('update:modelValue', $event)"
@@ -58,7 +59,7 @@ import $ui from '#build/ui'
 
 const props = defineProps({
   modelValue: {
-    type: [String, Number, Object],
+    type: [String, Number, Object, Array],
     default: ''
   },
   options: {
@@ -66,6 +67,10 @@ const props = defineProps({
     default: () => []
   },
   required: {
+    type: Boolean,
+    default: false
+  },
+  multiple: {
     type: Boolean,
     default: false
   },
