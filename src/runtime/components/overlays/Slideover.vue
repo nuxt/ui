@@ -10,7 +10,7 @@
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <DialogOverlay class="fixed inset-0 bg-gray-500/75 dark:bg-gray-600/75 transition-opacity" />
+        <div class="fixed inset-0 bg-gray-500/75 dark:bg-gray-600/75 transition-opacity" />
       </TransitionChild>
 
       <TransitionChild
@@ -22,7 +22,7 @@
         leave-from="translate-x-0"
         leave-to="-translate-x-full"
       >
-        <div class="relative flex-1 flex flex-col w-full max-w-md u-bg-white focus:outline-none">
+        <DialogPanel class="relative flex-1 flex flex-col w-full max-w-md u-bg-white focus:outline-none">
           <div v-if="$slots.header" class="border-b u-border-gray-200">
             <div class="flex items-center justify-between px-4 sm:px-6 h-16">
               <slot name="header" />
@@ -30,7 +30,7 @@
           </div>
 
           <slot />
-        </div>
+        </DialogPanel>
       </TransitionChild>
     </Dialog>
   </TransitionRoot>
@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { WritableComputedRef, PropType } from 'vue'
-import { Dialog, DialogOverlay, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
 
 const props = defineProps({
   modelValue: {
