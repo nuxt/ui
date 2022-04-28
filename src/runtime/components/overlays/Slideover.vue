@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :show="isOpen">
-    <Dialog as="div" class="fixed inset-0 flex z-40 lg:hidden" @close="isOpen = false">
+    <Dialog class="fixed inset-0 flex z-40" @close="isOpen = false">
       <TransitionChild
         as="template"
         enter="transition-opacity ease-linear duration-300"
