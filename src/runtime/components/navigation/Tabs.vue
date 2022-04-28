@@ -14,7 +14,7 @@
   </nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Link from '../elements/Link'
 import $ui from '#build/ui'
 

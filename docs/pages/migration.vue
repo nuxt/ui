@@ -70,7 +70,8 @@ const components = [
     to: '/components/Avatar',
     nuxt3: true,
     preset: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'AvatarGroup',
@@ -82,7 +83,8 @@ const components = [
     to: '/components/Badge',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Button',
@@ -102,7 +104,8 @@ const components = [
     label: 'Icon',
     to: '/components/Icon',
     nuxt3: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'Link',
@@ -115,7 +118,8 @@ const components = [
     to: '/components/Toggle',
     nuxt3: true,
     preset: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'Alert',
@@ -127,7 +131,8 @@ const components = [
     to: '/components/AlertDialog',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Input',
@@ -165,7 +170,8 @@ const components = [
   },
   {
     label: 'SelectCustom',
-    to: '/components/SelectCustom'
+    to: '/components/SelectCustom',
+    typescript: true
   },
   {
     label: 'Textarea',
@@ -186,21 +192,24 @@ const components = [
     to: '/components/Container',
     nuxt3: true,
     preset: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'Tabs',
     to: '/components/Tabs',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Pills',
     to: '/components/Pills',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'VerticalNavigation',
@@ -226,7 +235,8 @@ const components = [
     label: 'Notifications',
     to: '/components/Notifications',
     nuxt3: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'Popover',
@@ -238,7 +248,8 @@ const components = [
     label: 'Slideover',
     to: '/components/Slideover',
     nuxt3: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'Tooltip',

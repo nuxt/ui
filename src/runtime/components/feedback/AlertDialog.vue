@@ -20,7 +20,7 @@
   </Modal>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { DialogTitle, DialogDescription } from '@headlessui/vue'
 import Modal from '../overlays/Modal'

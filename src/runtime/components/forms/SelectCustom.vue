@@ -44,7 +44,7 @@
   </Listbox>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import {
   Listbox,
@@ -76,7 +76,7 @@ const props = defineProps({
   size: {
     type: String,
     default: 'md',
-    validator (value) {
+    validator (value: string) {
       return Object.keys($ui.selectCustom.size).includes(value)
     }
   },
@@ -161,7 +161,7 @@ const iconClass = computed(() => {
 
 const iconWrapperClass = $ui.selectCustom.icon.trailing.wrapper
 
-function resolveOptionClass ({ active, disabled }) {
+function resolveOptionClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
   return classNames(
     props.listOptionBaseClass,
     active ? props.listOptionActiveClass : props.listOptionInactiveClass,
@@ -169,7 +169,7 @@ function resolveOptionClass ({ active, disabled }) {
   )
 }
 
-function resolveOptionIconClass ({ active }) {
+function resolveOptionIconClass ({ active }: { active: boolean }) {
   return classNames(
     props.listOptionIconBaseClass,
     active ? props.listOptionIconActiveClass : props.listOptionIconInactiveClass

@@ -20,9 +20,9 @@
   </div>
 </template>
 
-<script setup>
-import { useNuxtApp, useState } from '#app'
+<script setup lang="ts">
 import Notification from './Notification'
+import { useNuxtApp, useState } from '#app'
 
 const { $toast } = useNuxtApp()
 const notifications = useState('notifications', () => [])

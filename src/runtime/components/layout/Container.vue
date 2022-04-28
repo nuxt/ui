@@ -4,38 +4,31 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { classNames } from '../../utils/'
 import $ui from '#build/ui'
 
-export default {
-  props: {
-    padded: {
-      type: Boolean,
-      default: false
-    },
-    constrained: {
-      type: Boolean,
-      default: true
-    },
-    constrainedClass: {
-      type: String,
-      default: () => $ui.container.constrained
-    }
+const props = defineProps({
+  padded: {
+    type: Boolean,
+    default: false
   },
-  setup (props) {
-    const containerClass = computed(() => {
-      return classNames(
-        'mx-auto sm:px-6 lg:px-8',
-        props.padded && 'px-4',
-        props.constrained && props.constrainedClass
-      )
-    })
-
-    return {
-      containerClass
-    }
+  constrained: {
+    type: Boolean,
+    default: true
+  },
+  constrainedClass: {
+    type: String,
+    default: () => $ui.container.constrained
   }
-}
+})
+
+const containerClass = computed(() => {
+  return classNames(
+    'mx-auto sm:px-6 lg:px-8',
+    props.padded && 'px-4',
+    props.constrained && props.constrainedClass
+  )
+})
 </script>
