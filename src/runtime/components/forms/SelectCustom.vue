@@ -2,46 +2,46 @@
   <Listbox
     :model-value="modelValue"
     :multiple="multiple"
-    as="div"
-    :class="wrapperClass"
     @update:model-value="$emit('update:modelValue', $event)"
   >
-    <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
+    <div :class="wrapperClass">
+      <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
 
-    <ListboxButton :class="selectCustomClass">
-      <slot>
-        <span v-if="modelValue" class="block truncate">{{ modelValue[textAttribute] }}</span>
-        <span v-else class="block truncate u-text-gray-400">{{ placeholder }}</span>
-      </slot>
-      <span :class="iconWrapperClass">
-        <Icon name="heroicons-solid:selector" :class="iconClass" aria-hidden="true" />
-      </span>
-    </ListboxButton>
+      <ListboxButton :class="selectCustomClass">
+        <slot>
+          <span v-if="modelValue" class="block truncate">{{ modelValue[textAttribute] }}</span>
+          <span v-else class="block truncate u-text-gray-400">{{ placeholder }}</span>
+        </slot>
+        <span :class="iconWrapperClass">
+          <Icon name="heroicons-solid:selector" :class="iconClass" aria-hidden="true" />
+        </span>
+      </ListboxButton>
 
-    <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-      <ListboxOptions :class="listBaseClass">
-        <ListboxOption
-          v-for="(option, index) in options"
-          v-slot="{ active, selected, disabled }"
-          :key="index"
-          as="template"
-          :value="option"
-          :disabled="option.disabled"
-        >
-          <li :class="resolveOptionClass({ active, disabled })">
-            <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">
-              <slot name="option" :option="option">
-                {{ option[textAttribute] }}
-              </slot>
-            </span>
+      <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+        <ListboxOptions :class="listBaseClass">
+          <ListboxOption
+            v-for="(option, index) in options"
+            v-slot="{ active, selected, disabled }"
+            :key="index"
+            as="template"
+            :value="option"
+            :disabled="option.disabled"
+          >
+            <li :class="resolveOptionClass({ active, disabled })">
+              <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">
+                <slot name="option" :option="option">
+                  {{ option[textAttribute] }}
+                </slot>
+              </span>
 
-            <span v-if="selected" :class="resolveOptionIconClass({ active })">
-              <Icon name="heroicons-solid:check" :class="listOptionIconSizeClass" aria-hidden="true" />
-            </span>
-          </li>
-        </ListboxOption>
-      </ListboxOptions>
-    </transition>
+              <span v-if="selected" :class="resolveOptionIconClass({ active })">
+                <Icon name="heroicons-solid:check" :class="listOptionIconSizeClass" aria-hidden="true" />
+              </span>
+            </li>
+          </ListboxOption>
+        </ListboxOptions>
+      </transition>
+    </div>
   </Listbox>
 </template>
 
