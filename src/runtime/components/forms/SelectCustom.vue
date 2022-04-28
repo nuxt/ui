@@ -1,10 +1,10 @@
 <template>
-  <Listbox
-    :model-value="modelValue"
-    :multiple="multiple"
-    @update:model-value="$emit('update:modelValue', $event)"
-  >
-    <div :class="wrapperClass">
+  <div :class="wrapperClass">
+    <Listbox
+      :model-value="modelValue"
+      :multiple="multiple"
+      @update:model-value="$emit('update:modelValue', $event)"
+    >
       <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
 
       <ListboxButton :class="selectCustomClass">
@@ -41,8 +41,8 @@
           </ListboxOption>
         </ListboxOptions>
       </transition>
-    </div>
-  </Listbox>
+    </Listbox>
+  </div>
 </template>
 
 <script setup lang="ts">
