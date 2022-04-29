@@ -61,7 +61,7 @@ export default {
       type: String,
       default: () => $ui.card.rounded,
       validator (value) {
-        return ['sm', 'md', 'lg', 'xl', '2xl', '3xl'].map(size => `rounded-${size}`).includes(value)
+        return !value || ['sm', 'md', 'lg', 'xl', '2xl', '3xl'].map(size => `rounded-${size}`).includes(value)
       }
     },
     bodyClass: {
