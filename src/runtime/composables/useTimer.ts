@@ -17,7 +17,7 @@ export function useTimer (cb: (...args: unknown[]) => any, interval: number) {
     timer = setTimeout(() => {
       timer = null
       startTime.value = null
-      // eslint-disable-next-line node/no-callback-literal
+      // eslint-disable-next-line n/no-callback-literal
       cb(...args)
     }, remaining.value) as unknown as number
   }
