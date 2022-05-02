@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.1.7",
-    "@nuxtjs/eslint-config-typescript": "^9.0.0",
+    "@nuxtjs/eslint-config-typescript": "^10.0.0",
     "@types/lodash-es": "^4.17.6",
     "@types/tailwindcss": "^3.0.10",
     "eslint": "^8.14.0",
