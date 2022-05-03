@@ -30,69 +30,63 @@
   </nav>
 </template>
 
-<script>
+<script setup lang="ts">
 import Icon from '../elements/Icon'
 import Link from '../elements/Link'
 import $ui from '#build/ui'
 
-export default {
-  components: {
-    Icon,
-    Link
+defineProps({
+  links: {
+    type: Array,
+    required: true
   },
-  props: {
-    links: {
-      type: Array,
-      required: true
-    },
-    wrapperClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.wrapper
-    },
-    baseClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.base
-    },
-    spacingClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.spacing
-    },
-    activeClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.active
-    },
-    inactiveClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.inactive
-    },
-    iconBaseClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.icon.base
-    },
-    iconSpacingClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.icon.spacing
-    },
-    iconActiveClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.icon.active
-    },
-    iconInactiveClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.icon.inactive
-    },
-    badgeBaseClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.badge.base
-    },
-    badgeActiveClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.badge.active
-    },
-    badgeInactiveClass: {
-      type: String,
-      default: () => $ui.verticalNavigation.badge.inactive
-    }
+  wrapperClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.wrapper
+  },
+  baseClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.base
+  },
+  spacingClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.spacing
+  },
+  activeClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.active
+  },
+  inactiveClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.inactive
+  },
+  iconBaseClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.icon.base
+  },
+  iconSpacingClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.icon.spacing
+  },
+  iconActiveClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.icon.active
+  },
+  iconInactiveClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.icon.inactive
+  },
+  badgeBaseClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.badge.base
+  },
+  badgeActiveClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.badge.active
+  },
+  badgeInactiveClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.badge.inactive
   }
-}
+})
 </script>

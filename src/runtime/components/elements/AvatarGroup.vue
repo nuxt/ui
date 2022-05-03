@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <Avatar
-      v-for="(avatar, index) of avatars"
+      v-for="(avatar, index) of displayedGroup"
       :key="index"
       v-bind="avatar"
       class="ring-2 u-ring-white -ml-1.5 first:ml-0"
@@ -16,46 +16,43 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed } from 'vue'
 import Avatar from './Avatar'
 
-export default {
-  components: {
-    Avatar
+const props = defineProps({
+  group: {
+    type: Array,
+    default: () => []
   },
-  props: {
-    group: {
-      type: Array,
-      default: () => []
-    },
-    size: {
-      type: String,
-      default: 'md',
-      validator (value) {
-        return ['xxxs', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)
-      }
-    },
-    max: {
-      type: Number,
-      default: null
+  size: {
+    type: String,
+    default: 'md',
+    validator (value: string) {
+      return ['xxxs', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)
     }
   },
-  computed: {
-    avatars () {
-      return this.group.map((avatar) => {
-        return typeof avatar === 'string' ? { src: avatar } : avatar
-      })
-    },
-    displayedGroup () {
-      if (!this.max) { return this.avatars }
-
-      return this.avatars.slice(0, this.max)
-    },
-    remainingGroupSize () {
-      if (!this.max) { return 0 }
-
-      return this.avatars.length - this.max
-    }
+  max: {
+    type: Number,
+    default: null
   }
-}
+})
+
+const avatars = computed(() => {
+  return props.group.map((avatar) => {
+    return typeof avatar === 'string' ? { src: avatar } : avatar
+  })
+})
+
+const displayedGroup = computed(() => {
+  if (!props.max) { return avatars.value }
+
+  return avatars.value.slice(0, props.max)
+})
+
+const remainingGroupSize = computed(() => {
+  if (!props.max) { return 0 }
+
+  return avatars.value.length - props.max
+})
 </script>

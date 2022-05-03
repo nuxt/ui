@@ -24,74 +24,65 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { usePopper } from '../../utils'
 
-export default {
-  props: {
-    text: {
-      type: String,
-      default: null
-    },
-    placement: {
-      type: String,
-      default: 'bottom',
-      validator: (value) => {
-        return ['auto', 'auto-start', 'auto-end', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'right', 'right-start', 'right-end', 'left', 'left-start', 'left-end'].includes(value)
-      }
-    },
-    strategy: {
-      type: String,
-      default: 'fixed',
-      validator: (value) => {
-        return ['absolute', 'fixed'].includes(value)
-      }
-    },
-    wrapperClass: {
-      type: String,
-      default: 'relative inline-flex'
-    },
-    containerClass: {
-      type: String,
-      default: 'z-10 py-2'
-    },
-    tooltipClass: {
-      type: String,
-      default: 'flex items-center justify-center invisible w-auto h-6 max-w-xs px-2 space-x-1 truncate rounded shadow lg:visible u-bg-gray-800 truncate u-text-gray-50 text-xs'
+const props = defineProps({
+  text: {
+    type: String,
+    default: null
+  },
+  placement: {
+    type: String,
+    default: 'bottom',
+    validator: (value: string) => {
+      return ['auto', 'auto-start', 'auto-end', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'right', 'right-start', 'right-end', 'left', 'left-start', 'left-end'].includes(value)
     }
   },
-  setup (props) {
-    const open = ref(false)
-    const [trigger, container] = usePopper({
-      placement: props.placement,
-      strategy: props.strategy,
-      modifiers: [{
-        name: 'offset',
-        options: {
-          offset: 0
-        }
-      },
-      {
-        name: 'computeStyles',
-        options: {
-          gpuAcceleration: false,
-          adaptive: false
-        }
-      },
-      {
-        name: 'preventOverflow',
-        options: {
-          padding: 8
-        }
-      }]
-    })
-
-    return {
-      open,
-      trigger,
-      container
+  strategy: {
+    type: String,
+    default: 'fixed',
+    validator: (value: string) => {
+      return ['absolute', 'fixed'].includes(value)
     }
+  },
+  wrapperClass: {
+    type: String,
+    default: 'relative inline-flex'
+  },
+  containerClass: {
+    type: String,
+    default: 'z-10 py-2'
+  },
+  tooltipClass: {
+    type: String,
+    default: 'flex items-center justify-center invisible w-auto h-6 max-w-xs px-2 space-x-1 truncate rounded shadow lg:visible u-bg-gray-800 truncate u-text-gray-50 text-xs'
   }
-}
+})
+
+const open = ref(false)
+const [trigger, container] = usePopper({
+  placement: props.placement,
+  strategy: props.strategy,
+  modifiers: [{
+    name: 'offset',
+    options: {
+      offset: 0
+    }
+  },
+  {
+    name: 'computeStyles',
+    options: {
+      gpuAcceleration: false,
+      adaptive: false
+    }
+  },
+  {
+    name: 'preventOverflow',
+    options: {
+      padding: 8
+    }
+  }]
+})
 </script>
