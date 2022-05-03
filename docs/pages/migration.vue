@@ -99,8 +99,7 @@ const components = [
     to: '/components/Dropdown',
     nuxt3: true,
     capi: true,
-    preset: true,
-    typescript: true
+    preset: true
   },
   {
     label: 'Icon',
