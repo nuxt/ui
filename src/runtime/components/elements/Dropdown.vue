@@ -42,12 +42,14 @@ import {
   MenuItems,
   MenuItem
 } from '@headlessui/vue'
+
 import { ref, onMounted } from 'vue'
 import Icon from '../elements/Icon'
 import Avatar from '../elements/Avatar'
 import Link from '../elements/Link'
 import { classNames, usePopper } from '../../utils'
 import $ui from '#build/ui'
+
 export default {
   components: {
     Menu,
@@ -146,6 +148,7 @@ export default {
         }
       }]
     })
+
     function resolveItemClass ({ active, disabled }) {
       return classNames(
         props.itemBaseClass,
@@ -153,14 +156,17 @@ export default {
         disabled && props.itemDisabledClass
       )
     }
+
     function onItemClick (item) {
       if (item.disabled) {
         return
       }
+
       if (item.click) {
         item.click()
       }
     }
+
     const menuApi = ref(null)
     let openTimeout = null
     let closeTimeout = null
@@ -177,10 +183,12 @@ export default {
         }, true)
       }, 0)
     })
+
     function onMouseOver () {
       if (props.mode !== 'hover' || !menuApi.value) {
         return
       }
+
       // cancel programmed closing
       if (closeTimeout) {
         clearTimeout(closeTimeout)
@@ -195,10 +203,12 @@ export default {
         openTimeout = null
       }, 50)
     }
+
     function onMouseLeave () {
       if (props.mode !== 'hover' || !menuApi.value) {
         return
       }
+
       // cancel programmed opening
       if (openTimeout) {
         clearTimeout(openTimeout)
@@ -213,6 +223,7 @@ export default {
         closeTimeout = null
       }, 0)
     }
+
     return {
       trigger,
       container,
