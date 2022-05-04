@@ -92,14 +92,16 @@ const components = [
     to: '/components/Button',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Dropdown',
     to: '/components/Dropdown',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Icon',
@@ -112,7 +114,8 @@ const components = [
     label: 'Link',
     to: '/components/Link',
     nuxt3: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'Toggle',
@@ -233,7 +236,8 @@ const components = [
     to: '/components/Modal',
     nuxt3: true,
     preset: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'Notification',

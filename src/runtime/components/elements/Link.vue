@@ -22,53 +22,49 @@
   </router-link>
 </template>
 
-<script>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 
+const props = defineProps({
+  ...RouterLink.props,
+  to: {
+    type: [String, Object],
+    default: null
+  },
+  inactiveClass: {
+    type: String,
+    default: ''
+  },
+  exact: {
+    type: Boolean,
+    default: false
+  },
+  target: {
+    type: String,
+    default: null
+  }
+})
+
+const isExternalLink = computed(() => {
+  return typeof props.to === 'string' && props.to.startsWith('http')
+})
+const isButton = computed(() => {
+  return !props.to
+})
+
+function resolveLinkClass ({ isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
+  if (props.exact) {
+    return isExactActive ? props.activeClass : props.inactiveClass
+  } else {
+    return isActive ? props.activeClass : props.inactiveClass
+  }
+}
+</script>
+
+<script lang="ts">
 export default {
   name: 'Link',
-  inheritAttrs: false,
-  props: {
-    ...RouterLink.props,
-    to: {
-      type: [String, Object],
-      default: null
-    },
-    inactiveClass: {
-      type: String,
-      default: ''
-    },
-    exact: {
-      type: Boolean,
-      default: false
-    },
-    target: {
-      type: String,
-      default: null
-    }
-  },
-  setup (props) {
-    const isExternalLink = computed(() => {
-      return typeof props.to === 'string' && props.to.startsWith('http')
-    })
-    const isButton = computed(() => {
-      return !props.to
-    })
-
-    function resolveLinkClass ({ isActive, isExactActive }) {
-      if (props.exact) {
-        return isExactActive ? props.activeClass : props.inactiveClass
-      } else {
-        return isActive ? props.activeClass : props.inactiveClass
-      }
-    }
-
-    return {
-      isButton,
-      isExternalLink,
-      resolveLinkClass
-    }
-  }
+  inheritAttrs: false
 }
 </script>
