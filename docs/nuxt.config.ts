@@ -28,7 +28,7 @@ export default defineNuxtConfig({
       theme: {
         extend: {
           fontFamily: {
-            sans: '"Inter var", sans-serif'
+            sans: ['"Inter var", sans-serif']
           }
         }
       }
