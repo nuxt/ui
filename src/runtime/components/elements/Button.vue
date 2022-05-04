@@ -12,13 +12,21 @@
   </component>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import { ref, computed, useSlots } from 'vue'
 import Link from '../elements/Link'
 import Icon from '../elements/Icon'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
+export default {
+  components: {
+    Link
+  }
+}
+</script>
+
+<script setup lang="ts">
 const props = defineProps({
   type: {
     type: String,
