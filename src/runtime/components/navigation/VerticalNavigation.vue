@@ -5,7 +5,7 @@
       v-slot="{ isActive }"
       :key="index"
       v-bind="link"
-      :class="[baseClass, spacingClass]"
+      :class="[baseClass, spacingClass, link.class]"
       :active-class="activeClass"
       :inactive-class="inactiveClass"
       @click="link.click && link.click()"
