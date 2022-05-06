@@ -5,7 +5,7 @@
       v-slot="{ isActive }"
       :key="index"
       v-bind="link"
-      :class="[baseClass, spacingClass, link.class]"
+      :class="[baseClass, spacingClass]"
       :active-class="activeClass"
       :inactive-class="inactiveClass"
       @click="link.click && link.click()"
@@ -15,7 +15,7 @@
         <Icon
           v-if="link.icon"
           :name="link.icon"
-          :class="[iconBaseClass, link.label && iconSpacingClass, isActive ? iconActiveClass : iconInactiveClass]"
+          :class="[iconBaseClass, link.label && iconSpacingClass, isActive ? iconActiveClass : iconInactiveClass, link.iconClass]"
         />
       </slot>
       <slot :link="link">
