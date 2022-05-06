@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-0 right-0 flex flex-col justify-end w-full z-55 sm:w-96">
+  <div class="fixed bottom-0 right-0 flex flex-col justify-end w-full z-[55] sm:w-96">
     <div
       v-if="notifications.length"
       class="px-4 py-6 space-y-3 overflow-y-auto sm:px-6 lg:px-8"
