@@ -24,135 +24,121 @@
   </Popover>
 </template>
 
-<script>
+<script setup lang="ts">
+import type { Ref } from 'vue'
 import { ref, onMounted } from 'vue'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
 import { usePopper } from '../../utils'
 
-export default {
-  components: {
-    Popover,
-    PopoverButton,
-    PopoverPanel
+const props = defineProps({
+  placement: {
+    type: String,
+    default: 'bottom'
   },
-  props: {
-    placement: {
-      type: String,
-      default: 'bottom'
-    },
-    strategy: {
-      type: String,
-      default: 'fixed'
-    },
-    mode: {
-      type: String,
-      default: 'click',
-      validator: (value) => {
-        return ['click', 'hover'].includes(value)
-      }
-    },
-    wrapperClass: {
-      type: String,
-      default: 'relative'
-    },
-    containerClass: {
-      type: String,
-      default: 'z-10 py-2'
-    },
-    panelClass: {
-      type: String,
-      default: ''
+  strategy: {
+    type: String,
+    default: 'fixed'
+  },
+  mode: {
+    type: String,
+    default: 'click',
+    validator: (value: string) => {
+      return ['click', 'hover'].includes(value)
     }
   },
-  setup (props) {
-    const [trigger, container] = usePopper({
-      placement: props.placement,
-      strategy: props.strategy,
-      modifiers: [{
-        name: 'offset',
-        options: {
-          offset: 0
-        }
-      },
-      {
-        name: 'computeStyles',
-        options: {
-          gpuAcceleration: false,
-          adaptive: false
-        }
-      },
-      {
-        name: 'preventOverflow',
-        options: {
-          padding: 8
-        }
-      }]
-    })
-
-    const popoverApi = ref(null)
-
-    let openTimeout = null
-    let closeTimeout = null
-
-    onMounted(() => {
-      setTimeout(() => {
-        const popoverProvides = trigger.value?.$.provides
-        const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
-        popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
-        // stop trigger click propagation on hover
-        popoverApi.value.button.addEventListener('click', (e) => {
-          if (props.mode === 'hover') {
-            e.stopPropagation()
-          }
-        }, true)
-      }, 0)
-    })
-
-    function onMouseOver () {
-      if (props.mode !== 'hover' || !popoverApi.value) {
-        return
-      }
-      // cancel programmed closing
-      if (closeTimeout) {
-        clearTimeout(closeTimeout)
-        closeTimeout = null
-      }
-      // dropdown already open
-      if (popoverApi.value.popoverState === 0) {
-        return
-      }
-      openTimeout = openTimeout || setTimeout(() => {
-        popoverApi.value.togglePopover && popoverApi.value.togglePopover()
-        openTimeout = null
-      }, 50)
-    }
-
-    function onMouseLeave () {
-      if (props.mode !== 'hover' || !popoverApi.value) {
-        return
-      }
-      // cancel programmed opening
-      if (openTimeout) {
-        clearTimeout(openTimeout)
-        openTimeout = null
-      }
-      // dropdown already closed
-      if (popoverApi.value.popoverState === 1) {
-        return
-      }
-      closeTimeout = closeTimeout || setTimeout(() => {
-        popoverApi.value.closePopover && popoverApi.value.closePopover()
-        closeTimeout = null
-      }, 0)
-    }
-
-    return {
-      trigger,
-      container,
-      onMouseOver,
-      onMouseLeave
-    }
+  wrapperClass: {
+    type: String,
+    default: 'relative'
+  },
+  containerClass: {
+    type: String,
+    default: 'z-10 py-2'
+  },
+  panelClass: {
+    type: String,
+    default: ''
   }
+})
+
+const [trigger, container] = usePopper({
+  placement: props.placement,
+  strategy: props.strategy,
+  modifiers: [{
+    name: 'offset',
+    options: {
+      offset: 0
+    }
+  },
+  {
+    name: 'computeStyles',
+    options: {
+      gpuAcceleration: false,
+      adaptive: false
+    }
+  },
+  {
+    name: 'preventOverflow',
+    options: {
+      padding: 8
+    }
+  }]
+})
+
+const popoverApi: Ref<any> = ref(null)
+
+let openTimeout: NodeJS.Timeout | null = null
+let closeTimeout: NodeJS.Timeout | null = null
+
+onMounted(() => {
+  setTimeout(() => {
+    const popoverProvides = trigger.value?.$.provides
+    const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
+    popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
+    // stop trigger click propagation on hover
+    popoverApi.value.button.addEventListener('click', (e: Event) => {
+      if (props.mode === 'hover') {
+        e.stopPropagation()
+      }
+    }, true)
+  }, 0)
+})
+
+function onMouseOver () {
+  if (props.mode !== 'hover' || !popoverApi.value) {
+    return
+  }
+  // cancel programmed closing
+  if (closeTimeout) {
+    clearTimeout(closeTimeout)
+    closeTimeout = null
+  }
+  // dropdown already open
+  if (popoverApi.value.popoverState === 0) {
+    return
+  }
+  openTimeout = openTimeout || setTimeout(() => {
+    popoverApi.value.togglePopover && popoverApi.value.togglePopover()
+    openTimeout = null
+  }, 50)
+}
+
+function onMouseLeave () {
+  if (props.mode !== 'hover' || !popoverApi.value) {
+    return
+  }
+  // cancel programmed opening
+  if (openTimeout) {
+    clearTimeout(openTimeout)
+    openTimeout = null
+  }
+  // dropdown already closed
+  if (popoverApi.value.popoverState === 1) {
+    return
+  }
+  closeTimeout = closeTimeout || setTimeout(() => {
+    popoverApi.value.closePopover && popoverApi.value.closePopover()
+    closeTimeout = null
+  }, 0)
 }
 </script>

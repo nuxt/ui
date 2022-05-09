@@ -76,7 +76,8 @@ const components = [
   {
     label: 'AvatarGroup',
     to: '/components/AvatarGroup',
-    nuxt3: true
+    nuxt3: true,
+    typescript: true
   },
   {
     label: 'Badge',
@@ -91,14 +92,16 @@ const components = [
     to: '/components/Button',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Dropdown',
     to: '/components/Dropdown',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Icon',
@@ -111,7 +114,8 @@ const components = [
     label: 'Link',
     to: '/components/Link',
     nuxt3: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'Toggle',
@@ -124,7 +128,8 @@ const components = [
   {
     label: 'Alert',
     to: '/components/Alert',
-    nuxt3: true
+    nuxt3: true,
+    typescript: true
   },
   {
     label: 'AlertDialog',
@@ -138,35 +143,40 @@ const components = [
     label: 'Input',
     to: '/components/Input',
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'FormGroup',
     to: '/components/FormGroup',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Checkbox',
     to: '/components/Checkbox',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Radio',
     to: '/components/Radio',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Select',
     to: '/components/Select',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'SelectCustom',
@@ -178,14 +188,16 @@ const components = [
     to: '/components/Textarea',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Card',
     to: '/components/Card',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Container',
@@ -216,20 +228,23 @@ const components = [
     to: '/components/VerticalNavigation',
     nuxt3: true,
     capi: true,
-    preset: true
+    preset: true,
+    typescript: true
   },
   {
     label: 'Modal',
     to: '/components/Modal',
     nuxt3: true,
     preset: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'Notification',
     to: '/components/Notification',
     nuxt3: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'Notifications',
@@ -242,7 +257,8 @@ const components = [
     label: 'Popover',
     to: '/components/Popover',
     nuxt3: true,
-    capi: true
+    capi: true,
+    typescript: true
   },
   {
     label: 'Slideover',
@@ -255,7 +271,8 @@ const components = [
     label: 'Tooltip',
     to: '/components/Tooltip',
     nuxt3: true,
-    capi: true
+    capi: true,
+    typescript: true
   }
 ]
 </script>

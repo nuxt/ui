@@ -26,88 +26,81 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
-export default {
-  props: {
-    value: {
-      type: [String, Number, Boolean],
-      default: null
-    },
-    modelValue: {
-      type: [String, Number, Boolean, Array],
-      default: null
-    },
-    name: {
-      type: String,
-      default: null
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    help: {
-      type: String,
-      default: null
-    },
-    label: {
-      type: String,
-      default: null
-    },
-    required: {
-      type: Boolean,
-      default: false
-    },
-    wrapperClass: {
-      type: String,
-      default: () => $ui.checkbox.wrapper
-    },
-    baseClass: {
-      type: String,
-      default: () => $ui.checkbox.base
-    },
-    labelClass: {
-      type: String,
-      default: () => $ui.checkbox.label
-    },
-    requiredClass: {
-      type: String,
-      default: () => $ui.checkbox.required
-    },
-    helpClass: {
-      type: String,
-      default: () => $ui.checkbox.help
-    },
-    customClass: {
-      type: String,
-      default: null
-    }
+const props = defineProps({
+  value: {
+    type: [String, Number, Boolean],
+    default: null
   },
-  emits: ['update:modelValue', 'focus', 'blur'],
-  setup (props, { emit }) {
-    const isChecked = computed({
-      get () {
-        return props.modelValue
-      },
-      set (value) {
-        emit('update:modelValue', value)
-      }
-    })
-
-    const inputClass = computed(() => {
-      return classNames(
-        props.baseClass,
-        props.customClass
-      )
-    })
-
-    return {
-      isChecked,
-      inputClass
-    }
+  modelValue: {
+    type: [String, Number, Boolean, Array],
+    default: null
+  },
+  name: {
+    type: String,
+    default: null
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  help: {
+    type: String,
+    default: null
+  },
+  label: {
+    type: String,
+    default: null
+  },
+  required: {
+    type: Boolean,
+    default: false
+  },
+  wrapperClass: {
+    type: String,
+    default: () => $ui.checkbox.wrapper
+  },
+  baseClass: {
+    type: String,
+    default: () => $ui.checkbox.base
+  },
+  labelClass: {
+    type: String,
+    default: () => $ui.checkbox.label
+  },
+  requiredClass: {
+    type: String,
+    default: () => $ui.checkbox.required
+  },
+  helpClass: {
+    type: String,
+    default: () => $ui.checkbox.help
+  },
+  customClass: {
+    type: String,
+    default: null
   }
-}
+})
+
+const emit = defineEmits(['update:modelValue', 'focus', 'blur'])
+
+const isChecked = computed({
+  get () {
+    return props.modelValue
+  },
+  set (value) {
+    emit('update:modelValue', value)
+  }
+})
+
+const inputClass = computed(() => {
+  return classNames(
+    props.baseClass,
+    props.customClass
+  )
+})
 </script>

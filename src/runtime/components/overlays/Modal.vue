@@ -53,89 +53,81 @@
   </TransitionRoot>
 </template>
 
-<script>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { classNames } from '../../utils/'
 import Card from '../layout/Card'
 import $ui from '#build/ui'
 
-export default {
-  components: {
-    Dialog,
-    DialogPanel,
-    TransitionRoot,
-    TransitionChild,
-    Card
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false
   },
-  inheritAttrs: false,
-  props: {
-    modelValue: {
-      type: Boolean,
-      default: false
-    },
-    appear: {
-      type: Boolean,
-      default: false
-    },
-    baseClass: {
-      type: String,
-      default: () => $ui.modal.base
-    },
-    backgroundClass: {
-      type: String,
-      default: () => $ui.modal.background
-    },
-    shadowClass: {
-      type: String,
-      default: () => $ui.modal.shadow
-    },
-    ringClass: {
-      type: String,
-      default: () => $ui.modal.ring
-    },
-    roundedClass: {
-      type: String,
-      default: () => $ui.modal.rounded
-    },
-    widthClass: {
-      type: String,
-      default: () => $ui.modal.width,
-      validator (value) {
-        return ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'].map(width => `max-w-${width}`).includes(value)
-      }
+  appear: {
+    type: Boolean,
+    default: false
+  },
+  baseClass: {
+    type: String,
+    default: () => $ui.modal.base
+  },
+  backgroundClass: {
+    type: String,
+    default: () => $ui.modal.background
+  },
+  shadowClass: {
+    type: String,
+    default: () => $ui.modal.shadow
+  },
+  ringClass: {
+    type: String,
+    default: () => $ui.modal.ring
+  },
+  roundedClass: {
+    type: String,
+    default: () => $ui.modal.rounded
+  },
+  widthClass: {
+    type: String,
+    default: () => $ui.modal.width,
+    validator (value: string) {
+      return ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'].map(width => `max-w-${width}`).includes(value)
     }
-  },
-  emits: ['update:modelValue', 'close'],
-  setup (props, { emit }) {
-    const isOpen = computed({
-      get () {
-        return props.modelValue
-      },
-      set (value) {
-        emit('update:modelValue', value)
-      }
-    })
+  }
+})
 
-    const modalClass = computed(() => {
-      return classNames(
-        props.baseClass,
+const emit = defineEmits(['update:modelValue', 'close'])
+
+const isOpen = computed({
+  get () {
+    return props.modelValue
+  },
+  set (value) {
+    emit('update:modelValue', value)
+  }
+})
+
+const modalClass = computed(() => {
+  return classNames(
+    props.baseClass,
         `sm:${props.widthClass}`,
         props.backgroundClass,
         props.shadowClass,
         props.ringClass,
         props.roundedClass
-      )
-    })
+  )
+})
 
-    return {
-      isOpen,
-      modalClass,
-      close (value) {
-        isOpen.value = value
-        emit('close')
-      }
-    }
-  }
+function close (value: boolean) {
+  isOpen.value = value
+  emit('close')
+}
+</script>
+
+<script lang="ts">
+export default {
+  inheritAttrs: false
 }
 </script>

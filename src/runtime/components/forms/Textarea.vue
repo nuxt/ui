@@ -18,145 +18,138 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import type { Ref } from 'vue'
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
-export default {
-  props: {
-    modelValue: {
-      type: [String, Number],
-      default: ''
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    placeholder: {
-      type: String,
-      default: null
-    },
-    required: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    rows: {
-      type: Number,
-      default: 3
-    },
-    autoresize: {
-      type: Boolean,
-      default: false
-    },
-    autofocus: {
-      type: Boolean,
-      default: false
-    },
-    autocomplete: {
-      type: String,
-      default: null
-    },
-    appearance: {
-      type: String,
-      default: 'default',
-      validator (value) {
-        return Object.keys($ui.textarea.appearance).includes(value)
-      }
-    },
-    resize: {
-      type: Boolean,
-      default: true
-    },
-    size: {
-      type: String,
-      default: 'md',
-      validator (value) {
-        return Object.keys($ui.textarea.size).includes(value)
-      }
-    },
-    wrapperClass: {
-      type: String,
-      default: () => $ui.textarea.wrapper
-    },
-    baseClass: {
-      type: String,
-      default: () => $ui.textarea.base
-    },
-    customClass: {
-      type: String,
-      default: null
+const props = defineProps({
+  modelValue: {
+    type: [String, Number],
+    default: ''
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  placeholder: {
+    type: String,
+    default: null
+  },
+  required: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  rows: {
+    type: Number,
+    default: 3
+  },
+  autoresize: {
+    type: Boolean,
+    default: false
+  },
+  autofocus: {
+    type: Boolean,
+    default: false
+  },
+  autocomplete: {
+    type: String,
+    default: null
+  },
+  appearance: {
+    type: String,
+    default: 'default',
+    validator (value: string) {
+      return Object.keys($ui.textarea.appearance).includes(value)
     }
   },
-  emits: ['update:modelValue', 'focus', 'blur'],
-  setup (props, { emit }) {
-    const textarea = ref(null)
+  resize: {
+    type: Boolean,
+    default: true
+  },
+  size: {
+    type: String,
+    default: 'md',
+    validator (value: string) {
+      return Object.keys($ui.textarea.size).includes(value)
+    }
+  },
+  wrapperClass: {
+    type: String,
+    default: () => $ui.textarea.wrapper
+  },
+  baseClass: {
+    type: String,
+    default: () => $ui.textarea.base
+  },
+  customClass: {
+    type: String,
+    default: null
+  }
+})
 
-    const autoFocus = () => {
-      if (props.autofocus) {
-        textarea.value.focus()
-      }
+const emit = defineEmits(['update:modelValue', 'focus', 'blur'])
+
+const textarea: Ref<HTMLTextAreaElement> = ref(null)
+
+const autoFocus = () => {
+  if (props.autofocus) {
+    textarea.value.focus()
+  }
+}
+
+const autoResize = () => {
+  if (props.autoresize) {
+    if (!textarea.value) {
+      return
     }
 
-    const autoResize = () => {
-      if (props.autoresize) {
-        if (!textarea.value) {
-          return
-        }
+    textarea.value.rows = props.rows
 
-        textarea.value.rows = props.rows
+    const styles = window.getComputedStyle(textarea.value)
+    const paddingTop = parseInt(styles.paddingTop)
+    const paddingBottom = parseInt(styles.paddingBottom)
+    const padding = paddingTop + paddingBottom
+    const lineHeight = parseInt(styles.lineHeight)
+    const { scrollHeight } = textarea.value
+    const newRows = (scrollHeight - padding) / lineHeight
 
-        const styles = window.getComputedStyle(textarea.value)
-        const paddingTop = parseInt(styles.paddingTop)
-        const paddingBottom = parseInt(styles.paddingBottom)
-        const padding = paddingTop + paddingBottom
-        const lineHeight = parseInt(styles.lineHeight)
-        const { scrollHeight } = textarea.value
-        const newRows = (scrollHeight - padding) / lineHeight
-
-        if (newRows > props.rows) {
-          textarea.value.rows = newRows
-        }
-      }
-    }
-
-    const onInput = (value) => {
-      autoResize()
-
-      emit('update:modelValue', value)
-    }
-
-    watch(() => props.modelValue, () => {
-      nextTick(autoResize)
-    })
-
-    onMounted(() => {
-      setTimeout(() => {
-        autoFocus()
-        autoResize()
-      }, 100)
-    })
-
-    const textareaClass = computed(() => {
-      return classNames(
-        props.baseClass,
-        $ui.textarea.size[props.size],
-        $ui.textarea.spacing[props.size],
-        $ui.textarea.appearance[props.appearance],
-        !props.resize && 'resize-none',
-        props.customClass
-      )
-    })
-
-    return {
-      textarea,
-      onInput,
-      textareaClass
+    if (newRows > props.rows) {
+      textarea.value.rows = newRows
     }
   }
 }
+
+const onInput = (value: string) => {
+  autoResize()
+
+  emit('update:modelValue', value)
+}
+
+watch(() => props.modelValue, () => {
+  nextTick(autoResize)
+})
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+    autoResize()
+  }, 100)
+})
+
+const textareaClass = computed(() => {
+  return classNames(
+    props.baseClass,
+    $ui.textarea.size[props.size],
+    $ui.textarea.spacing[props.size],
+    $ui.textarea.appearance[props.appearance],
+    !props.resize && 'resize-none',
+    props.customClass
+  )
+})
 </script>

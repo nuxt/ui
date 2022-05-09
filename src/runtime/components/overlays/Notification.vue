@@ -55,148 +55,131 @@
   </transition>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
 
 import Icon from '../elements/Icon'
 import Button from '../elements/Button'
 import { useTimer } from '../../composables/useTimer'
 
-export default {
-  components: {
-    Icon,
-    Button
+const props = defineProps({
+  id: {
+    type: String,
+    required: true
   },
-  props: {
-    id: {
-      type: String,
-      required: true
-    },
-    type: {
-      type: String,
-      required: true,
-      default: 'info',
-      validator (value) {
-        return ['info', 'success', 'error', 'warning'].includes(value)
-      }
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    description: {
-      type: String,
-      default: null
-    },
-    icon: {
-      type: String,
-      default: null
-    },
-    timeout: {
-      type: Number,
-      default: 5000
-    },
-    undo: {
-      type: Function,
-      default: null
-    },
-    callback: {
-      type: Function,
-      default: null
+  type: {
+    type: String,
+    required: true,
+    default: 'info',
+    validator (value: string) {
+      return ['info', 'success', 'error', 'warning'].includes(value)
     }
   },
-  emits: ['close'],
-  setup (props, { emit }) {
-    let timer = null
-    const remaining = ref(props.timeout)
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    default: null
+  },
+  icon: {
+    type: String,
+    default: null
+  },
+  timeout: {
+    type: Number,
+    default: 5000
+  },
+  undo: {
+    type: Function,
+    default: null
+  },
+  callback: {
+    type: Function,
+    default: null
+  }
+})
 
-    const iconName = computed(() => {
-      return props.icon || ({
-        warning: 'heroicons-outline:exclamation-circle',
-        info: 'heroicons-outline:information-circle',
-        success: 'heroicons-outline:check-circle',
-        error: 'heroicons-outline:x-circle'
-      })[props.type]
-    })
+const emit = defineEmits(['close'])
 
-    const iconClass = computed(() => {
-      return ({
-        warning: 'text-orange-400',
-        info: 'text-blue-400',
-        success: 'text-green-400',
-        error: 'text-red-400'
-      })[props.type] || 'u-text-gray-400'
-    })
+let timer: any = null
+const remaining = ref(props.timeout)
 
-    const progressBarStyle = computed(() => {
-      const remainingPercent = remaining.value / props.timeout * 100
-      return { width: `${remainingPercent || 0}%` }
-    })
+const iconName = computed(() => {
+  return props.icon || ({
+    warning: 'heroicons-outline:exclamation-circle',
+    info: 'heroicons-outline:information-circle',
+    success: 'heroicons-outline:check-circle',
+    error: 'heroicons-outline:x-circle'
+  })[props.type]
+})
 
-    function onMouseover () {
-      if (timer) {
-        timer.pause()
-      }
-    }
+const iconClass = computed(() => {
+  return ({
+    warning: 'text-orange-400',
+    info: 'text-blue-400',
+    success: 'text-green-400',
+    error: 'text-red-400'
+  })[props.type] || 'u-text-gray-400'
+})
 
-    function onMouseleave () {
-      if (timer) {
-        timer.resume()
-      }
-    }
+const progressBarStyle = computed(() => {
+  const remainingPercent = remaining.value / props.timeout * 100
+  return { width: `${remainingPercent || 0}%` }
+})
 
-    function onClose () {
-      if (timer) {
-        timer.stop()
-      }
-
-      if (props.callback) {
-        props.callback()
-      }
-
-      emit('close')
-    }
-
-    function onUndo () {
-      if (timer) {
-        timer.stop()
-      }
-
-      if (props.undo) {
-        props.undo()
-      }
-
-      emit('close')
-    }
-
-    onMounted(() => {
-      if (!props.timeout) {
-        return
-      }
-
-      timer = useTimer(() => {
-        onClose()
-      }, props.timeout)
-
-      watchEffect(() => {
-        remaining.value = timer.remaining.value
-      })
-    })
-
-    onUnmounted(() => {
-      timer.stop()
-    })
-
-    return {
-      timer,
-      iconName,
-      iconClass,
-      progressBarStyle,
-      onMouseover,
-      onMouseleave,
-      onClose,
-      onUndo
-    }
+function onMouseover () {
+  if (timer) {
+    timer.pause()
   }
 }
+
+function onMouseleave () {
+  if (timer) {
+    timer.resume()
+  }
+}
+
+function onClose () {
+  if (timer) {
+    timer.stop()
+  }
+
+  if (props.callback) {
+    props.callback()
+  }
+
+  emit('close')
+}
+
+function onUndo () {
+  if (timer) {
+    timer.stop()
+  }
+
+  if (props.undo) {
+    props.undo()
+  }
+
+  emit('close')
+}
+
+onMounted(() => {
+  if (!props.timeout) {
+    return
+  }
+
+  timer = useTimer(() => {
+    onClose()
+  }, props.timeout)
+
+  watchEffect(() => {
+    remaining.value = timer.remaining.value
+  })
+})
+
+onUnmounted(() => {
+  timer.stop()
+})
 </script>
