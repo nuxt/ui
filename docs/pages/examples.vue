@@ -292,7 +292,9 @@ const dropdownItems = [
     icon: 'heroicons-solid:archive'
   }, {
     label: 'Move',
-    icon: 'heroicons-solid:external-link'
+    icon: 'heroicons-solid:external-link',
+    to: 'https://www.google.fr',
+    target: '_blank'
   }],
   [{
     label: 'Delete',

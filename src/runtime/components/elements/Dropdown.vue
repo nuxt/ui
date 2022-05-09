@@ -49,7 +49,7 @@ import Icon from '../elements/Icon'
 import Avatar from '../elements/Avatar'
 import { classNames, usePopper } from '../../utils'
 import $ui from '#build/ui'
-import { NuxtLink } from '#imports'
+import NuxtLink from '#app/components/nuxt-link'
 
 const props = defineProps({
   items: {
