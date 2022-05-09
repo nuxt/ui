@@ -12,21 +12,13 @@
   </component>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref, computed, useSlots } from 'vue'
 import Link from '../elements/Link'
 import Icon from '../elements/Icon'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
-export default {
-  components: {
-    Link
-  }
-}
-</script>
-
-<script setup lang="ts">
 const props = defineProps({
   type: {
     type: String,
@@ -122,16 +114,17 @@ const button = ref(null)
 
 const buttonIs = computed(() => {
   if (props.to) {
-    return 'Link'
+    return Link
   }
 
   return 'button'
 })
 
 const buttonProps = computed(() => {
-  switch (buttonIs.value) {
-    case 'Link': return { to: props.to, target: props.target }
-    default: return { disabled: props.disabled || props.loading, type: props.type }
+  if (props.to) {
+    return { to: props.to, target: props.target }
+  } else {
+    return { disabled: props.disabled || props.loading, type: props.type }
   }
 })
 
