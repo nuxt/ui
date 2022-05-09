@@ -15,7 +15,7 @@
         <Icon
           v-if="link.icon"
           :name="link.icon"
-          :class="[iconBaseClass, link.label && iconSpacingClass, isActive ? iconActiveClass : iconInactiveClass]"
+          :class="[iconBaseClass, link.label && iconSpacingClass, isActive ? iconActiveClass : iconInactiveClass, link.iconClass]"
         />
       </slot>
       <slot :link="link">
