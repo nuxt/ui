@@ -35,6 +35,22 @@ export default defineNuxtPlugin((nuxtApp) => {
         timeout
       })
     },
+    info ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
+      addNotification({
+        type: 'info',
+        title,
+        description,
+        timeout
+      })
+    },
+    warning ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
+      addNotification({
+        type: 'warning',
+        title,
+        description,
+        timeout
+      })
+    },
     error ({ title = 'An error occurred!', description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
       addNotification({
         type: 'error',
