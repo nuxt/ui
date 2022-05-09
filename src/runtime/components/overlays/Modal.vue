@@ -91,10 +91,7 @@ const props = defineProps({
   },
   widthClass: {
     type: String,
-    default: () => $ui.modal.width,
-    validator (value: string) {
-      return ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'].map(width => `max-w-${width}`).includes(value)
-    }
+    default: () => $ui.modal.width
   }
 })
 
@@ -112,11 +109,11 @@ const isOpen = computed({
 const modalClass = computed(() => {
   return classNames(
     props.baseClass,
-        `sm:${props.widthClass}`,
-        props.backgroundClass,
-        props.shadowClass,
-        props.ringClass,
-        props.roundedClass
+    props.widthClass,
+    props.backgroundClass,
+    props.shadowClass,
+    props.ringClass,
+    props.roundedClass
   )
 })
 
