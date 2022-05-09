@@ -237,7 +237,7 @@ const modal = {
   ring: '',
   rounded: 'rounded-lg',
   shadow: 'shadow-xl',
-  width: 'max-w-lg'
+  width: 'sm:max-w-lg'
 }
 
 const container = {
