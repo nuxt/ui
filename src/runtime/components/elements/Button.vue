@@ -14,9 +14,9 @@
 
 <script setup lang="ts">
 import { ref, computed, useSlots } from 'vue'
-import Link from '../elements/Link'
 import Icon from '../elements/Icon'
 import { classNames } from '../../utils'
+import { NuxtLink } from '#imports'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -114,7 +114,7 @@ const button = ref(null)
 
 const buttonIs = computed(() => {
   if (props.to) {
-    return Link
+    return NuxtLink
   }
 
   return 'button'

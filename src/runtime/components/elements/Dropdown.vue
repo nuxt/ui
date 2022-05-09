@@ -19,7 +19,7 @@
         <MenuItems :class="baseClass" static>
           <div v-for="(subItems, index) of items" :key="index" class="py-1">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }" :disabled="item.disabled" as="div">
-              <Component v-bind="item" :is="(item.to && 'Link') || (item.click && 'button') || 'div'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)" @mouseover="$emit('hover', item)">
+              <Component v-bind="item" :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)" @mouseover="$emit('hover', item)">
                 <slot :name="item.slot" :item="item">
                   <Icon v-if="item.icon" :name="item.icon" :class="itemIconClass" />
                   <Avatar v-if="item.avatar" :src="item.avatar" :alt="item.label" :class="itemAvatarClass" size="xs" />
@@ -35,7 +35,7 @@
   </Menu>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {
   Menu,
   MenuButton,
@@ -47,18 +47,10 @@ import type { Ref } from 'vue'
 import { ref, onMounted } from 'vue'
 import Icon from '../elements/Icon'
 import Avatar from '../elements/Avatar'
-import Link from '../elements/Link'
 import { classNames, usePopper } from '../../utils'
 import $ui from '#build/ui'
+import { NuxtLink } from '#imports'
 
-export default {
-  components: {
-    Link
-  }
-}
-</script>
-
-<script setup lang="ts">
 const props = defineProps({
   items: {
     type: Array,

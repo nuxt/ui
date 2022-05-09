@@ -9,14 +9,14 @@
           {{ title }}
         </p>
         <p v-if="link" class="mt-3 text-sm leading-5 md:mt-0 md:ml-6">
-          <Link
+          <NuxtLink
             :to="to"
             class="whitespace-nowrap font-medium"
             :class="linkClass"
             @click="click && click()"
           >
             {{ link }} &rarr;
-          </Link>
+          </NuxtLink>
         </p>
       </div>
     </div>
@@ -26,7 +26,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import Icon from '../elements/Icon'
-import Link from '../elements/Link'
 
 const props = defineProps({
   variant: {
