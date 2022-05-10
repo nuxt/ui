@@ -610,10 +610,10 @@
     vite-node "^0.10.5"
     vite-plugin-checker "^0.4.6"
 
-"@nuxtjs/color-mode@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/color-mode/-/color-mode-3.0.2.tgz#17110d78864ad00ce524f7fc2d379d8c28ff765a"
-  integrity sha512-JgppnxOsVe2T/UGj0xjok/8TKDI27bRuhNh+Qrvr0FsS90Mty2acZLLN0lkrOTV0WLrpnTgN7mZCrgCWmhvziA==
+"@nuxtjs/color-mode@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/color-mode/-/color-mode-3.0.3.tgz#f5b332f4383f169759ccb31e60fad1537d67adc8"
+  integrity sha512-FQVyLgRQ4C4C5NmTBrFRNm+LNjgT4cPFqyqfoRxD6hfVZhLxWJfKPGUaT8H/BCeBzkZZ29583MG9GqyDX7rnNg==
   dependencies:
     "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
     defu "^5.0.0"
