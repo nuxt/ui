@@ -3,6 +3,7 @@ import module from '../src/module'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
+  extends: ['../node_modules/@docus/base'],
   meta: {
     title: '@nuxthq/ui',
     meta: [
@@ -12,7 +13,7 @@ export default defineNuxtConfig({
       { rel: 'stylesheet', href: 'https://rsms.me/inter/inter.css' }
     ]
   },
-  buildModules: [
+  modules: [
     module
   ],
   components: {
@@ -23,8 +24,10 @@ export default defineNuxtConfig({
       primary: 'blue'
     },
     preset: {
-    },
-    tailwindcss: {
+    }
+  },
+  tailwindcss: {
+    config: {
       theme: {
         extend: {
           fontFamily: {

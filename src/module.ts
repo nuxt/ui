@@ -84,6 +84,7 @@ export default defineNuxtModule<ModuleOptions>({
         plugins: [
           require('@tailwindcss/forms'),
           require('@tailwindcss/line-clamp'),
+          require('@tailwindcss/typography'),
           require('@tailwindcss/aspect-ratio')
         ],
         content: [
