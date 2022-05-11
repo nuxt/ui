@@ -19,6 +19,7 @@
     "prepack": "yarn build",
     "dev": "nuxi dev docs",
     "build:docs": "nuxi build docs",
+    "postbuild:docs": "mv ./docs/.vercel_build_output .vercel_build_output",
     "lint": "eslint --ext .ts,.js,.vue .",
     "release": "yarn lint && standard-version && git push --follow-tags"
   },
