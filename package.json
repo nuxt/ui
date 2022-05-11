@@ -42,7 +42,7 @@
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {
-    "@docus/base": "^3.0.0",
+    "@docus/base": "npm:@docus/base-edge@latest",
     "@nuxt/module-builder": "^0.1.7",
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
     "@types/lodash-es": "^4.17.6",

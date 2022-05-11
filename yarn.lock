@@ -277,16 +277,17 @@
   dependencies:
     mime "^3.0.0"
 
-"@docus/base@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@docus/base/-/base-3.0.0.tgz#eae99a600db9bbe40a8b8769fcfec52c58cf54c0"
-  integrity sha512-D1HuhhdEpEPdIFX6XKcrnr/PkgItdlMRAhVkKnGR3M7+gmvMjpqx+mxjmE4IxDPzo/w1hKiNItUFizEvR0j7ng==
+"@docus/base@npm:@docus/base-edge@latest":
+  version "3.0.0-e76ec17"
+  resolved "https://registry.yarnpkg.com/@docus/base-edge/-/base-edge-3.0.0-e76ec17.tgz#f8f0c78dffdd8358d6d2f0cd5fb371ad42eb9fbb"
+  integrity sha512-0EfCjlgu30uWPKnwFt1KFcKJ2A/iM1+xxdXUHCZ1H+Z66q7ccwT75v1seFctuNg04XAOFmwwfk19tJ9k4sOerQ==
   dependencies:
     "@nuxt/content" "npm:@nuxt/content-edge@latest"
-    "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
     "@nuxthq/admin" "npm:@nuxthq/admin-edge@latest"
     "@vueuse/core" "^8.4.2"
     "@vueuse/nuxt" "^8.4.2"
+    defu "^6.0.0"
+    nuxt "^3.0.0-rc.3"
 
 "@eslint/eslintrc@^1.2.3":
   version "1.2.3"
@@ -5906,7 +5907,7 @@ nuxt-component-meta@^0.1.5:
     "@vue/compiler-sfc" "^3.2.33"
     scule "^0.2.1"
 
-nuxt@3.0.0-rc.3:
+nuxt@3.0.0-rc.3, nuxt@^3.0.0-rc.3:
   version "3.0.0-rc.3"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-3.0.0-rc.3.tgz#ab1a36a19f91f86d5fa42a7d6bb2dec4ae7cf824"
   integrity sha512-Ch68sD9Npt3BN0ZphvtRurVhFqtm1sAu4VDoXghmsRoVAwpT2ZDeDWaQJ9PSmXHYwyEaXPIZ9B2EDXPKETh0cQ==

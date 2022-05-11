@@ -5,7 +5,7 @@ definePageMeta({
   middleware: ['navigation', 'page']
 })
 
-const { page: document, theme } = useDocus()
+const { page, theme } = useDocus()
 
 useHead({
   title: page.value?.title,
@@ -20,6 +20,6 @@ useHead({
 
 <template>
   <div class="prose dark:prose-invert max-w-none">
-    <Content v-if="document" :document="document" />
+    <Content v-if="page" :document="page" />
   </div>
 </template>
