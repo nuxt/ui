@@ -97,6 +97,13 @@ const props = defineProps({
     type: String,
     default: null
   },
+  appearance: {
+    type: String,
+    default: 'default',
+    validator (value: string) {
+      return Object.keys($ui.select.appearance).includes(value)
+    }
+  },
   textAttribute: {
     type: String,
     default: 'text'
@@ -173,7 +180,7 @@ const selectClass = computed(() => {
     props.baseClass,
     $ui.select.size[props.size],
     $ui.select.spacing[props.size],
-    $ui.select.appearance.default,
+    $ui.select.appearance[props.appearance],
     !!props.icon && $ui.select.leading.spacing[props.size],
     $ui.select.trailing.spacing[props.size],
     props.customClass

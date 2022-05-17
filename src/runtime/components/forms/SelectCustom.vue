@@ -101,6 +101,13 @@ const props = defineProps({
     type: String,
     default: null
   },
+  appearance: {
+    type: String,
+    default: 'default',
+    validator (value: string) {
+      return Object.keys($ui.selectCustom.appearance).includes(value)
+    }
+  },
   listBaseClass: {
     type: String,
     default: () => $ui.selectCustom.list.base
@@ -150,7 +157,7 @@ const selectCustomClass = computed(() => {
     props.baseClass,
     $ui.selectCustom.size[props.size],
     $ui.selectCustom.spacing[props.size],
-    $ui.selectCustom.appearance.default,
+    $ui.selectCustom.appearance[props.appearance],
     $ui.selectCustom.trailing.spacing[props.size],
     props.customClass
   )
