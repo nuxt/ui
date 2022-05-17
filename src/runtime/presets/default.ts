@@ -2,6 +2,7 @@ import { safeColors } from '../utils/colors'
 
 const button = {
   base: 'font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 focus:ring-offset-white dark:focus:ring-offset-black',
+  rounded: 'rounded-md',
   size: {
     xxs: 'text-xs',
     xs: 'text-xs',

@@ -86,6 +86,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  roundedClass: {
+    type: String,
+    default: () => $ui.button.rounded
+  },
   baseClass: {
     type: String,
     default: () => $ui.button.base
@@ -145,7 +149,7 @@ const buttonClass = computed(() => {
     $ui.button[isSquare.value ? 'square' : 'spacing'][props.size],
     $ui.button.variant[props.variant],
     props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center',
-    props.rounded ? 'rounded-full' : 'rounded-md',
+    props.rounded ? 'rounded-full' : props.roundedClass,
     props.customClass
   )
 })
