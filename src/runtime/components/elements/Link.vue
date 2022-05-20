@@ -64,7 +64,7 @@ function resolveLinkClass ({ isActive, isExactActive }: { isActive: boolean, isE
 
 <script lang="ts">
 export default {
-  name: 'Link',
+  name: 'ULink',
   inheritAttrs: false
 }
 </script>

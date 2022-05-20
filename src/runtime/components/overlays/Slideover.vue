@@ -58,3 +58,7 @@ const isOpen: WritableComputedRef<boolean> = computed({
   }
 })
 </script>
+
+<script lang="ts">
+export default { name: 'USlideover' }
+</script>

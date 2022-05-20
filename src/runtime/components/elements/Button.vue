@@ -172,3 +172,7 @@ const iconClass = computed(() => {
   )
 })
 </script>
+
+<script lang="ts">
+export default { name: 'UButton' }
+</script>

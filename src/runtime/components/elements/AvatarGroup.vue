@@ -56,3 +56,7 @@ const remainingGroupSize = computed(() => {
   return avatars.value.length - props.max
 })
 </script>
+
+<script lang="ts">
+export default { name: 'UAvatarGroup' }
+</script>

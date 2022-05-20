@@ -29,3 +29,7 @@ watch(() => props.name, async () => {
   icon.value = await loadIcon(props.name).catch(_ => null)
 })
 </script>
+
+<script lang="ts">
+export default { name: 'UIcon' }
+</script>

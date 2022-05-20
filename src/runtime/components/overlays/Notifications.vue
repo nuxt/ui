@@ -24,3 +24,7 @@ import Notification from './Notification'
 const { $toast } = useNuxtApp()
 const notifications = useState('notifications', () => [])
 </script>
+
+<script lang="ts">
+export default { name: 'UNotifications' }
+</script>

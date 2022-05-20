@@ -41,3 +41,7 @@ defineProps({
   }
 })
 </script>
+
+<script lang="ts">
+export default { name: 'UPills' }
+</script>

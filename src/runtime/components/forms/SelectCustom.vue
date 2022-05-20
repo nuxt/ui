@@ -188,3 +188,7 @@ function resolveOptionIconClass ({ active }: { active: boolean }) {
   )
 }
 </script>
+
+<script lang="ts">
+export default { name: 'USelectCustom' }
+</script>

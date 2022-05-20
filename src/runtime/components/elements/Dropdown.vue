@@ -216,3 +216,7 @@ function onMouseLeave () {
   }, 0)
 }
 </script>
+
+<script lang="ts">
+export default { name: 'UDropdown' }
+</script>

@@ -117,3 +117,7 @@ function onError () {
   error.value = true
 }
 </script>
+
+<script lang="ts">
+export default { name: 'UAvatar' }
+</script>

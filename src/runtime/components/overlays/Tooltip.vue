@@ -86,3 +86,7 @@ const [trigger, container] = usePopper({
   }]
 })
 </script>
+
+<script lang="ts">
+export default { name: 'UTooltip' }
+</script>

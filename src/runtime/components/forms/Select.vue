@@ -197,3 +197,7 @@ const iconClass = computed(() => {
 
 const iconWrapperClass = $ui.select.icon.leading.wrapper
 </script>
+
+<script lang="ts">
+export default { name: 'USelect' }
+</script>

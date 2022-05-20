@@ -90,3 +90,7 @@ const active = computed({
   }
 })
 </script>
+
+<script lang="ts">
+export default { name: 'UToggle' }
+</script>

@@ -47,3 +47,7 @@ const badgeClass = computed(() => {
   )
 })
 </script>
+
+<script lang="ts">
+export default { name: 'UBadge' }
+</script>

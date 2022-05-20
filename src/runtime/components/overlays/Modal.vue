@@ -125,6 +125,7 @@ function close (value: boolean) {
 
 <script lang="ts">
 export default {
+  name: 'UModal',
   inheritAttrs: false
 }
 </script>

@@ -188,3 +188,7 @@ const iconClass = computed(() => {
 const iconLeadingWrapperClass = $ui.input.icon.leading.wrapper
 const iconTrailingWrapperClass = $ui.input.icon.trailing.wrapper
 </script>
+
+<script lang="ts">
+export default { name: 'UInput' }
+</script>

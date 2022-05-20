@@ -183,3 +183,7 @@ onUnmounted(() => {
   timer.stop()
 })
 </script>
+
+<script lang="ts">
+export default { name: 'UNotification' }
+</script>
