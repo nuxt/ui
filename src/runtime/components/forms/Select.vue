@@ -167,12 +167,13 @@ const normalizedOptionsWithPlaceholder = computed(() => {
 })
 
 const normalizedValue = computed(() => {
-  const foundOption = normalizedOptionsWithPlaceholder.value.find(option => option.value === props.modelValue)
+  const normalizeModelValue = normalizeOption(props.modelValue)
+  const foundOption = normalizedOptionsWithPlaceholder.value.find(option => option[props.valueAttribute] === normalizeModelValue[props.valueAttribute])
   if (!foundOption) {
     return ''
   }
 
-  return foundOption.value
+  return foundOption[props.valueAttribute]
 })
 
 const selectClass = computed(() => {
