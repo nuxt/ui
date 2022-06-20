@@ -190,7 +190,7 @@ const selectCustom = {
   ...select,
   base: `${select.base} text-left cursor-default`,
   list: {
-    base: 'absolute z-10 mt-1 w-full u-bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 u-ring-gray-200 overflow-auto focus:outline-none sm:text-sm',
+    base: 'absolute z-10 mt-1 w-full u-bg-white shadow-lg max-h-60 rounded-md py-1 text-sm ring-1 u-ring-gray-200 overflow-auto focus:outline-none',
     option: {
       base: 'cursor-default select-none relative py-2 pl-4 pr-10',
       active: 'text-white bg-primary-600',

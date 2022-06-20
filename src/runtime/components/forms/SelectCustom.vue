@@ -166,12 +166,14 @@ const selectCustomClass = computed(() => {
 const iconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
-    $ui.selectCustom.icon.size[props.size],
-    $ui.selectCustom.icon.trailing.spacing[props.size]
+    $ui.selectCustom.icon.size[props.size]
   )
 })
 
-const iconWrapperClass = $ui.selectCustom.icon.trailing.wrapper
+const iconWrapperClass = classNames(
+  $ui.selectCustom.icon.trailing.wrapper,
+  'pr-2'
+)
 
 function resolveOptionClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
   return classNames(
