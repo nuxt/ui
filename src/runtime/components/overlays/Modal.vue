@@ -16,7 +16,7 @@
         </TransitionChild>
 
         <div class="fixed inset-0 overflow-y-auto">
-          <div class="flex min-h-full items-center justify-center p-4 text-center">
+          <div class="flex min-h-full items-end sm:items-center justify-center p-4 text-center">
             <TransitionChild
               as="template"
               :appear="appear"
