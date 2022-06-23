@@ -97,7 +97,7 @@ const cardClass = computed(() => {
   return classNames(
     props.baseClass,
     props.padded && props.rounded && props.roundedClass,
-    !props.padded && props.rounded && `sm:${props.roundedClass}`,
+    !props.padded && props.rounded && props.roundedClass && `sm:${props.roundedClass}`,
     props.ringClass,
     props.shadowClass,
     props.backgroundClass,
