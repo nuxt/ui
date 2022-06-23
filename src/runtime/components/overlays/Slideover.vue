@@ -1,6 +1,12 @@
 <template>
   <TransitionRoot as="template" :show="isOpen">
-    <Dialog class="fixed inset-0 flex z-40" @close="isOpen = false">
+    <Dialog
+      class="fixed inset-0 flex z-40"
+      :class="{
+        'justify-end': side === 'right'
+      }"
+      @close="isOpen = false"
+    >
       <TransitionChild
         as="template"
         enter="transition-opacity ease-linear duration-300"
@@ -16,11 +22,11 @@
       <TransitionChild
         as="template"
         enter="transition ease-in-out duration-300 transform"
-        enter-from="-translate-x-full"
+        :enter-from="side === 'left' ? '-translate-x-full' : 'translate-x-full'"
         enter-to="translate-x-0"
         leave="transition ease-in-out duration-300 transform"
         leave-from="translate-x-0"
-        leave-to="-translate-x-full"
+        :leave-to="side === 'left' ? '-translate-x-full' : 'translate-x-full'"
       >
         <DialogPanel class="relative flex-1 flex flex-col w-full max-w-md u-bg-white focus:outline-none">
           <div v-if="$slots.header" class="border-b u-border-gray-200">
@@ -45,6 +51,11 @@ const props = defineProps({
   modelValue: {
     type: Boolean as PropType<boolean>,
     default: false
+  },
+  side: {
+    type: String,
+    default: 'left',
+    validator: (value: string) => ['left', 'right'].includes(value)
   }
 })
 const emit = defineEmits(['update:modelValue'])
