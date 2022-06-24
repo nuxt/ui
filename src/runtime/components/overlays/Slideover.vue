@@ -28,9 +28,17 @@
         leave-from="translate-x-0"
         :leave-to="side === 'left' ? '-translate-x-full' : 'translate-x-full'"
       >
-        <DialogPanel class="relative flex-1 flex flex-col w-full max-w-md u-bg-white focus:outline-none">
+        <DialogPanel class="relative flex-1 flex flex-col w-full u-bg-white focus:outline-none" :class="panelClass">
           <div v-if="$slots.header" class="border-b u-border-gray-200">
-            <div class="flex items-center justify-between px-4 sm:px-6 h-16">
+            <div
+              :class="{ 'flex-row-reverse justify-between': side === 'left' }"
+              class="flex items-center px-4 sm:px-6 h-16 gap-3"
+            >
+              <Button
+                icon="heroicons-outline:x"
+                variant="transparent"
+                @click="isOpen = false"
+              />
               <slot name="header" />
             </div>
           </div>
@@ -46,6 +54,7 @@
 import { computed } from 'vue'
 import type { WritableComputedRef, PropType } from 'vue'
 import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
+import Button from '../elements/Button'
 
 const props = defineProps({
   modelValue: {
@@ -56,6 +65,10 @@ const props = defineProps({
     type: String,
     default: 'left',
     validator: (value: string) => ['left', 'right'].includes(value)
+  },
+  panelClass: {
+    type: String,
+    default: 'max-w-md'
   }
 })
 const emit = defineEmits(['update:modelValue'])
