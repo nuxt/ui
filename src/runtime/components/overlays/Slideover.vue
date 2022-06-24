@@ -28,13 +28,12 @@
         leave-from="translate-x-0"
         :leave-to="side === 'left' ? '-translate-x-full' : 'translate-x-full'"
       >
-        <DialogPanel class="relative flex-1 flex flex-col w-full max-w-md u-bg-white focus:outline-none">
+        <DialogPanel class="relative flex-1 flex flex-col w-full max-w-md u-bg-white focus:outline-none" :class="panelClass">
           <div v-if="$slots.header" class="border-b u-border-gray-200">
             <div class="flex items-center justify-between px-4 sm:px-6 h-16">
               <slot name="header" />
             </div>
           </div>
-
           <slot />
         </DialogPanel>
       </TransitionChild>
@@ -56,6 +55,10 @@ const props = defineProps({
     type: String,
     default: 'left',
     validator: (value: string) => ['left', 'right'].includes(value)
+  },
+  panelClass: {
+    type: String,
+    default: 'max-w-md'
   }
 })
 const emit = defineEmits(['update:modelValue'])
