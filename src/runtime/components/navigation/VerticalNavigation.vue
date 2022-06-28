@@ -14,7 +14,6 @@
       <slot name="avatar" :link="link">
         <Avatar
           v-if="link.avatar"
-          :src="link.avatar"
           v-bind="link.avatar"
           :class="[avatarBaseClass, link.label && avatarSpacingClass]"
         />
