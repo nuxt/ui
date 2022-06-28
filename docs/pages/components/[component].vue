@@ -189,6 +189,10 @@ const defaultProps = {
         icon: 'heroicons-outline:external-link',
         to: 'https://google.fr',
         target: '_blank'
+      },
+      {
+        label: 'Logout',
+        avatar: 'https://github.com/benjamincanac.png'
       }
     ]
   },

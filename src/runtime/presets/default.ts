@@ -275,6 +275,10 @@ const verticalNavigation = {
     active: 'u-text-gray-500',
     inactive: 'u-text-gray-400 group-hover:u-text-gray-500'
   },
+  avatar: {
+    base: 'flex-shrink-0',
+    spacing: '-ml-1 mr-3'
+  },
   badge: {
     base: 'ml-auto inline-block py-0.5 px-3 text-xs rounded-full',
     active: 'u-bg-white',

@@ -11,6 +11,14 @@
       @click="link.click && link.click()"
       @keyup.enter="$event.target.blur()"
     >
+      <slot name="avatar" :link="link">
+        <Avatar
+          v-if="link.avatar"
+          :src="link.avatar"
+          :size="avatarSize"
+          :class="[avatarBaseClass, link.label && avatarSpacingClass, link.avatarClass]"
+        />
+      </slot>
       <slot name="icon" :link="link">
         <Icon
           v-if="link.icon"
@@ -33,6 +41,7 @@
 <script setup lang="ts">
 import Icon from '../elements/Icon'
 import Link from '../elements/Link'
+import Avatar from '../elements/Avatar'
 import $ui from '#build/ui'
 
 defineProps({
@@ -75,6 +84,18 @@ defineProps({
   iconInactiveClass: {
     type: String,
     default: () => $ui.verticalNavigation.icon.inactive
+  },
+  avatarSize: {
+    type: String,
+    default: () => 'xs'
+  },
+  avatarBaseClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.avatar.base
+  },
+  avatarSpacingClass: {
+    type: String,
+    default: () => $ui.verticalNavigation.avatar.spacing
   },
   badgeBaseClass: {
     type: String,
