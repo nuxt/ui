@@ -85,10 +85,6 @@ defineProps({
     type: String,
     default: () => $ui.verticalNavigation.icon.inactive
   },
-  avatarSize: {
-    type: String,
-    default: () => 'xs'
-  },
   avatarBaseClass: {
     type: String,
     default: () => $ui.verticalNavigation.avatar.base
