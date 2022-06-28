@@ -158,7 +158,7 @@ const input = {
       spacing: {
         xxs: 'ml-2',
         xs: 'ml-2',
-        sm: 'ml-3',
+        sm: 'ml-2',
         md: 'ml-3',
         lg: 'ml-3',
         xl: 'ml-3'
@@ -169,7 +169,7 @@ const input = {
       spacing: {
         xxs: 'mr-2',
         xs: 'mr-2',
-        sm: 'mr-3',
+        sm: 'mr-2',
         md: 'mr-3',
         lg: 'mr-3',
         xl: 'mr-3'
