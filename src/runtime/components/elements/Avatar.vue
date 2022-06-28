@@ -66,6 +66,10 @@ const props = defineProps({
   placeholderClass: {
     type: String,
     default: () => $ui.avatar.placeholder
+  },
+  roundedClass: {
+    type: String,
+    default: () => $ui.avatar.rounded
   }
 })
 
@@ -74,14 +78,14 @@ const wrapperClass = computed(() => {
     props.wrapperClass,
     props.backgroundClass,
     $ui.avatar.size[props.size],
-    props.rounded ? 'rounded-full' : 'rounded-md'
+    props.rounded ? 'rounded-full' : props.roundedClass
   )
 })
 
 const avatarClass = computed(() => {
   return classNames(
     $ui.avatar.size[props.size],
-    props.rounded ? 'rounded-full' : 'rounded-md'
+    props.rounded ? 'rounded-full' : props.roundedClass
   )
 })
 

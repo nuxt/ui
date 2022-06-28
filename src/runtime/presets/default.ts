@@ -326,6 +326,7 @@ const pills = {
 const avatar = {
   wrapper: 'relative inline-flex items-center justify-center',
   background: 'u-bg-gray-100',
+  rounded: 'rounded-md',
   placeholder: 'text-xs font-medium leading-none u-text-black truncate',
   size: {
     xxxs: 'h-4 w-4 text-xs',
