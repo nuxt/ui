@@ -85,9 +85,9 @@ export default defineNuxtModule<ModuleOptions>({
       // @ts-ignore
       tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {}
       // @ts-ignore
-      globalColors.primary = tailwindConfig.theme.extend.colors.primary = globalColors[primary]
+      globalColors.primary = tailwindConfig.theme.extend.colors.primary = globalColors[primary] || colors[primary]
       // @ts-ignore
-      globalColors.gray = tailwindConfig.theme.extend.colors.gray = globalColors[gray]
+      globalColors.gray = tailwindConfig.theme.extend.colors.gray = globalColors[gray] || colors[gray]
 
       const variantColors = excludeColors(globalColors)
       const safeColorsAsRegex = colorsAsRegex(variantColors)
