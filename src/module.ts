@@ -1,9 +1,21 @@
-import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin, resolveModule, createResolver } from '@nuxt/kit'
-import { defu, defuArrayFn } from 'defu'
-import type { TailwindConfig } from 'tailwindcss/tailwind-config'
+import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin, createResolver } from '@nuxt/kit'
+import { defu } from 'defu'
 import colors from 'tailwindcss/colors.js'
+import type { TailwindConfig } from 'tailwindcss/tailwind-config'
 import { name, version } from '../package.json'
-import { safeColorsAsRegex } from './runtime/utils/colors'
+import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
+import defaultPreset from './runtime/presets/default'
+
+// @ts-ignore
+delete colors.lightBlue
+// @ts-ignore
+delete colors.warmGray
+// @ts-ignore
+delete colors.trueGray
+// @ts-ignore
+delete colors.coolGray
+// @ts-ignore
+delete colors.blueGray
 
 interface ColorsOptions {
   /**
@@ -12,16 +24,13 @@ interface ColorsOptions {
   primary?: string
 
   /**
-   * @default 'zinc'
+   * @default 'gray'
    */
   gray?: string
 }
 
 export interface ModuleOptions {
-  /**
-   * @default 'tailwindui'
-   */
-  preset?: string | object
+  preset?: object
 
   /**
    * @default 'u'
@@ -34,11 +43,11 @@ export interface ModuleOptions {
 }
 
 const defaults = {
-  preset: 'default',
+  preset: {},
   prefix: 'u',
   colors: {
     primary: 'indigo',
-    gray: 'zinc'
+    gray: 'gray'
   },
   tailwindcss: {
     theme: {}
@@ -57,7 +66,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults,
   async setup (options, nuxt) {
-    const { preset, prefix, colors: { primary = 'indigo', gray = 'zinc' } = {}, tailwindcss: { theme = {} } = {} } = options
+    const { preset = {}, prefix, colors: { primary = 'indigo', gray = 'gray' } = {}, tailwindcss: { theme = {} } = {} } = options
 
     const { resolve } = createResolver(import.meta.url)
 
@@ -66,21 +75,54 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@iconify/vue')
 
+    // @ts-ignore
+    nuxt.hook('tailwindcss:config', function (tailwindConfig: TailwindConfig) {
+      const globalColors = {
+        ...(tailwindConfig.theme.colors || colors),
+        ...tailwindConfig.theme.extend?.colors
+      }
+
+      // @ts-ignore
+      tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {}
+      // @ts-ignore
+      globalColors.primary = tailwindConfig.theme.extend.colors.primary = globalColors[primary]
+      // @ts-ignore
+      globalColors.gray = tailwindConfig.theme.extend.colors.gray = globalColors[gray]
+
+      const variantColors = excludeColors(globalColors)
+      const safeColorsAsRegex = colorsAsRegex(variantColors)
+
+      tailwindConfig.safelist = tailwindConfig.safelist || []
+      tailwindConfig.safelist.push(...[{
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-400`)
+      },
+      {
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(100|600|700)`),
+        variants: ['hover', 'disabled', 'dark']
+      },
+      {
+        pattern: new RegExp(`text-(${safeColorsAsRegex})-(100|800)`),
+        variants: ['dark']
+      },
+      {
+        pattern: new RegExp(`ring-(${safeColorsAsRegex})-(500)`),
+        variants: ['focus']
+      }])
+
+      const ui: object = defu(preset, defaultPreset(variantColors))
+
+      addTemplate({
+        filename: 'ui.mjs',
+        getContents: () => `export default ${JSON.stringify(ui)}`
+      })
+    })
+
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
       viewer: false,
       config: {
         darkMode: 'class',
-        theme: defuArrayFn({
-          extend: {
-            colors: {
-              // @ts-ignore
-              gray: typeof gray === 'object' ? gray : (colors && colors[gray]),
-              // @ts-ignore
-              primary: typeof primary === 'object' ? primary : (colors && colors[primary])
-            }
-          }
-        }, theme),
+        theme,
         plugins: [
           require('@tailwindcss/forms'),
           require('@tailwindcss/line-clamp'),
@@ -91,24 +133,8 @@ export default defineNuxtModule<ModuleOptions>({
           resolve(runtimeDir, 'components/**/*.{vue,js,ts}'),
           resolve(runtimeDir, 'presets/*.{mjs,js,ts}')
         ],
-        // Safelist dynamic colors used in preset
         safelist: [
           'dark',
-          {
-            pattern: new RegExp(`bg-(${safeColorsAsRegex})-400`)
-          },
-          {
-            pattern: new RegExp(`bg-(${safeColorsAsRegex})-(100|600|700)`),
-            variants: ['hover', 'disabled', 'dark']
-          },
-          {
-            pattern: new RegExp(`text-(${safeColorsAsRegex})-(100|800)`),
-            variants: ['dark']
-          },
-          {
-            pattern: new RegExp(`ring-(${safeColorsAsRegex})-(500)`),
-            variants: ['focus']
-          },
           {
             pattern: /rounded-(sm|md|lg|xl|2xl|3xl)/,
             variants: ['sm']
@@ -116,26 +142,6 @@ export default defineNuxtModule<ModuleOptions>({
         ]
       },
       cssPath: resolve(runtimeDir, 'tailwind.css')
-    })
-
-    const presetsDir = resolve(runtimeDir, './presets')
-
-    let ui: object = (await import(resolveModule(`./${defaults.preset}`, { paths: presetsDir }))).default
-    try {
-      if (typeof preset === 'object') {
-        ui = defu(preset, ui)
-      } else {
-        // @ts-ignore
-        ui = (await import(resolveModule(`./${preset}`, { paths: presetsDir }))).default
-      }
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.warn('Could not load preset file.')
-    }
-
-    addTemplate({
-      filename: 'ui.mjs',
-      getContents: () => `export default ${JSON.stringify(ui)}`
     })
 
     addPlugin(resolve(runtimeDir, 'plugins', 'toast.client'))

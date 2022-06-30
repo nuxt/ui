@@ -1,22 +1,18 @@
-export const safeColors = [
-  'primary',
-  'rose',
-  'pink',
-  'fuchsia',
-  'purple',
-  'violet',
-  'indigo',
-  'blue',
-  'sky',
-  'cyan',
-  'teal',
-  'emerald',
-  'green',
-  'lime',
-  'yellow',
-  'amber',
-  'orange',
-  'red'
+import { omit, kebabCase } from './index'
+
+export const colorsToExclude = [
+  'inherit',
+  'transparent',
+  'current',
+  'white',
+  'black',
+  'slate',
+  'gray',
+  'zinc',
+  'neutral',
+  'stone'
 ]
 
-export const safeColorsAsRegex = safeColors.join('|')
+export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color))
+
+export const colorsAsRegex = (colors: string[]) => colors.join('|')
