@@ -7,7 +7,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   function addNotification (notification: Partial<ToastNotification>) {
     const body = {
-      id: new Date().getTime(),
+      id: new Date().getTime().toString(),
       ...notification
     }
 
