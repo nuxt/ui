@@ -13,6 +13,6 @@ export const colorsToExclude = [
   'stone'
 ]
 
-export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color))
+export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
 
-export const colorsAsRegex = (colors: string[]) => colors.join('|')
+export const colorsAsRegex = (colors: string[]): string => colors.join('|')
