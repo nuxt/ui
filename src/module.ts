@@ -1,6 +1,4 @@
-import { fileURLToPath } from 'url'
-import { resolve } from 'pathe'
-import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin, resolveModule } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin, resolveModule, createResolver } from '@nuxt/kit'
 import { defu, defuArrayFn } from 'defu'
 import type { TailwindConfig } from 'tailwindcss/tailwind-config'
 import colors from 'tailwindcss/colors.js'
@@ -61,8 +59,10 @@ export default defineNuxtModule<ModuleOptions>({
   async setup (options, nuxt) {
     const { preset, prefix, colors: { primary = 'indigo', gray = 'zinc' } = {}, tailwindcss: { theme = {} } = {} } = options
 
+    const { resolve } = createResolver(import.meta.url)
+
     // Transpile runtime
-    const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
+    const runtimeDir = resolve('./runtime')
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@iconify/vue')
 

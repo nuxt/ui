@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import { Ref } from 'vue'
 import { defineNuxtPlugin, useState } from '#app'
 import { ToastNotification, ToastPlugin } from '../types'
@@ -8,7 +7,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   function addNotification (notification: Partial<ToastNotification>) {
     const body = {
-      id: nanoid(),
+      id: new Date().getTime(),
       ...notification
     }
 
