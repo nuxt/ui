@@ -13,7 +13,7 @@
           <span v-else class="block truncate u-text-gray-400">{{ placeholder }}</span>
         </slot>
         <span :class="iconWrapperClass">
-          <Icon :name="iconName" :class="iconClass" aria-hidden="true" />
+          <Icon :name="icon" :class="iconClass" aria-hidden="true" />
         </span>
       </ListboxButton>
 
