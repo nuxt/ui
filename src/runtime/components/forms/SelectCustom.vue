@@ -18,7 +18,7 @@
       </ListboxButton>
 
       <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-        <ListboxOptions :class="listBaseClass">
+        <ListboxOptions :class="[listBaseClass, listContainerClass]">
           <ListboxOption
             v-for="(option, index) in options"
             v-slot="{ active, selected, disabled }"
@@ -115,6 +115,10 @@ const props = defineProps({
   listBaseClass: {
     type: String,
     default: () => $ui.selectCustom.list.base
+  },
+  listContainerClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.container
   },
   listOptionBaseClass: {
     type: String,
