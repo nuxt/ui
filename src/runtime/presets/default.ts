@@ -193,7 +193,7 @@ export default (variantColors: string[]) => {
       container: 'absolute z-10 mt-1 w-full py-1 max-h-60 overflow-auto',
       base: 'u-bg-white shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none',
       option: {
-        base: 'cursor-default select-none relative py-2 pl-4 pr-10',
+        base: 'cursor-default select-none relative py-2 pl-4 pr-10 text-sm',
         active: 'text-white bg-primary-600',
         inactive: 'u-text-gray-900',
         disabled: 'cursor-not-allowed opacity-50',
