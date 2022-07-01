@@ -189,8 +189,10 @@ export default (variantColors: string[]) => {
   const selectCustom = {
     ...select,
     base: `${select.base} text-left cursor-default`,
+    icon: 'heroicons-solid:selector',
     list: {
-      base: 'absolute z-10 mt-1 w-full u-bg-white shadow-lg max-h-60 rounded-md py-1 text-sm ring-1 u-ring-gray-200 overflow-auto focus:outline-none',
+      container: 'absolute z-10 mt-1 w-full py-1 max-h-60 overflow-auto',
+      base: 'u-bg-white shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none',
       option: {
         base: 'cursor-default select-none relative py-2 pl-4 pr-10',
         active: 'text-white bg-primary-600',

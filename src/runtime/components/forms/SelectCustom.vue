@@ -13,7 +13,7 @@
           <span v-else class="block truncate u-text-gray-400">{{ placeholder }}</span>
         </slot>
         <span :class="iconWrapperClass">
-          <Icon name="heroicons-solid:selector" :class="iconClass" aria-hidden="true" />
+          <Icon :name="iconName" :class="iconClass" aria-hidden="true" />
         </span>
       </ListboxButton>
 
@@ -92,6 +92,10 @@ const props = defineProps({
   baseClass: {
     type: String,
     default: () => $ui.selectCustom.base
+  },
+  icon: {
+    type: String,
+    default: () => $ui.selectCustom.icon
   },
   iconBaseClass: {
     type: String,
