@@ -95,7 +95,7 @@ const props = defineProps({
   },
   icon: {
     type: String,
-    default: () => $ui.selectCustom.icon
+    default: () => 'heroicons-solid:selector'
   },
   iconBaseClass: {
     type: String,
