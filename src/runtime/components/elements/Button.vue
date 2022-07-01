@@ -6,9 +6,9 @@
     :aria-label="ariaLabel"
     v-bind="buttonProps"
   >
-    <Icon v-if="isLeading" :name="iconName" :class="iconClass" aria-hidden="true" />
+    <Icon v-if="isLeading" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     <slot><span :class="truncate ? 'text-left break-all line-clamp-1' : ''">{{ label }}</span></slot>
-    <Icon v-if="isTrailing" :name="iconName" :class="iconClass" aria-hidden="true" />
+    <Icon v-if="isTrailing" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
   </component>
 </template>
 
@@ -58,6 +58,14 @@ const props = defineProps({
     type: String,
     default: null
   },
+  leadingIcon: {
+    type: String,
+    default: null
+  },
+  trailingIcon: {
+    type: String,
+    default: null
+  },
   loadingIcon: {
     type: String,
     default: () => $ui.button.icon.loading
@@ -98,6 +106,14 @@ const props = defineProps({
     type: String,
     default: () => $ui.button.icon.base
   },
+  leadingIconClass: {
+    type: String,
+    default: ''
+  },
+  trailingIconClass: {
+    type: String,
+    default: ''
+  },
   customClass: {
     type: String,
     default: null
@@ -133,11 +149,11 @@ const buttonProps = computed(() => {
 })
 
 const isLeading = computed(() => {
-  return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing)
+  return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
 })
 
 const isTrailing = computed(() => {
-  return (props.icon && props.trailing) || (props.loading && props.trailing)
+  return (props.icon && props.trailing) || (props.loading && props.trailing) || props.trailingIcon
 })
 
 const isSquare = computed(() => props.square || (!slots.default && !props.label))
@@ -154,21 +170,39 @@ const buttonClass = computed(() => {
   )
 })
 
-const iconName = computed(() => {
+const leadingIconName = computed(() => {
   if (props.loading) {
     return props.loadingIcon
   }
 
-  return props.icon
+  return props.leadingIcon || props.icon
 })
 
-const iconClass = computed(() => {
+const trailingIconName = computed(() => {
+  if (props.loading && !isLeading.value) {
+    return props.loadingIcon
+  }
+
+  return props.trailingIcon || props.icon
+})
+
+const leadingIconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
     $ui.button.icon.size[props.size],
-    isLeading.value && (!!slots.default || !!props.label?.length) && $ui.button.icon.leading.spacing[props.size],
-    isTrailing.value && (!!slots.default || !!props.label?.length) && $ui.button.icon.trailing.spacing[props.size],
+    (!!slots.default || !!props.label?.length) && $ui.button.icon.leading.spacing[props.size],
+    props.leadingIconClass,
     props.loading && 'animate-spin'
+  )
+})
+
+const trailingIconClass = computed(() => {
+  return classNames(
+    props.iconBaseClass,
+    $ui.button.icon.size[props.size],
+    (!!slots.default || !!props.label?.length) && $ui.button.icon.trailing.spacing[props.size],
+    props.trailingIconClass,
+    props.loading && !isLeading.value && 'animate-spin'
   )
 })
 </script>
