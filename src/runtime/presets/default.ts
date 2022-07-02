@@ -192,7 +192,7 @@ export default (variantColors: string[]) => {
     base: `${select.base} text-left cursor-default`,
     list: {
       container: 'z-10 w-full py-1 max-h-60',
-      base: 'u-bg-white shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none overflow-auto',
+      base: 'u-bg-white shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none overflow-y-auto py-1',
       option: {
         base: 'cursor-default select-none relative py-2 pl-4 pr-10 text-sm',
         active: 'text-white bg-primary-600',
