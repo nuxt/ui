@@ -1,24 +1,33 @@
 <template>
-  <div :class="wrapperClass">
-    <Listbox
-      :model-value="modelValue"
-      :multiple="multiple"
-      @update:model-value="$emit('update:modelValue', $event)"
-    >
-      <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
+  <Listbox
+    v-slot="{ open }"
+    :model-value="modelValue"
+    :multiple="multiple"
+    as="div"
+    :class="wrapperClass"
+    @update:model-value="$emit('update:modelValue', $event)"
+  >
+    <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
 
-      <ListboxButton :class="selectCustomClass">
-        <slot>
-          <span v-if="modelValue" class="block truncate">{{ modelValue[textAttribute] }}</span>
-          <span v-else class="block truncate u-text-gray-400">{{ placeholder }}</span>
-        </slot>
-        <span :class="iconWrapperClass">
-          <Icon :name="icon" :class="iconClass" aria-hidden="true" />
-        </span>
-      </ListboxButton>
+    <ListboxButton ref="trigger" as="div">
+      <slot :open="open">
+        <button :class="selectCustomClass">
+          <slot name="label">
+            <span v-if="modelValue" class="block truncate">{{ modelValue[textAttribute] }}</span>
+            <span v-else class="block truncate u-text-gray-400">{{ placeholder }}</span>
+          </slot>
+          <slot name="icon">
+            <span :class="iconWrapperClass">
+              <Icon :name="icon" :class="iconClass" aria-hidden="true" />
+            </span>
+          </slot>
+        </button>
+      </slot>
+    </ListboxButton>
 
-      <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-        <ListboxOptions :class="[listBaseClass, listContainerClass]">
+    <div v-if="open" ref="container" :class="listContainerClass">
+      <transition appear leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+        <ListboxOptions static :class="listBaseClass">
           <ListboxOption
             v-for="(option, index) in options"
             v-slot="{ active, selected, disabled }"
@@ -29,20 +38,20 @@
           >
             <li :class="resolveOptionClass({ active, disabled })">
               <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">
-                <slot name="option" :option="option">
+                <slot name="option" :option="option" :active="active" :selected="selected">
                   {{ option[textAttribute] }}
                 </slot>
               </span>
 
               <span v-if="selected" :class="resolveOptionIconClass({ active })">
-                <Icon name="heroicons-solid:check" :class="listOptionIconSizeClass" aria-hidden="true" />
+                <Icon :name="listOptionIcon" :class="listOptionIconSizeClass" aria-hidden="true" />
               </span>
             </li>
           </ListboxOption>
         </ListboxOptions>
       </transition>
-    </Listbox>
-  </div>
+    </div>
+  </Listbox>
 </template>
 
 <script setup lang="ts">
@@ -54,7 +63,7 @@ import {
   ListboxOption
 } from '@headlessui/vue'
 import Icon from '../elements/Icon'
-import { classNames } from '../../utils'
+import { classNames, usePopper } from '../../utils'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -65,6 +74,20 @@ const props = defineProps({
   options: {
     type: Array,
     default: () => []
+  },
+  placement: {
+    type: String,
+    default: 'bottom-end',
+    validator: (value: string) => {
+      return ['auto', 'auto-start', 'auto-end', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'right', 'right-start', 'right-end', 'left', 'left-start', 'left-end'].includes(value)
+    }
+  },
+  strategy: {
+    type: String,
+    default: 'absolute',
+    validator: (value: string) => {
+      return ['absolute', 'fixed'].includes(value)
+    }
   },
   required: {
     type: Boolean,
@@ -136,6 +159,10 @@ const props = defineProps({
     type: String,
     default: () => $ui.selectCustom.list.option.disabled
   },
+  listOptionIcon: {
+    type: String,
+    default: () => 'heroicons-solid:check'
+  },
   listOptionIconBaseClass: {
     type: String,
     default: () => $ui.selectCustom.list.option.icon.base
@@ -160,6 +187,30 @@ const props = defineProps({
 
 defineEmits(['update:modelValue'])
 
+const [trigger, container] = usePopper({
+  placement: props.placement,
+  strategy: props.strategy,
+  modifiers: [{
+    name: 'offset',
+    options: {
+      offset: 0
+    }
+  },
+  {
+    name: 'computeStyles',
+    options: {
+      gpuAcceleration: false,
+      adaptive: false
+    }
+  },
+  {
+    name: 'preventOverflow',
+    options: {
+      padding: 8
+    }
+  }]
+})
+
 const selectCustomClass = computed(() => {
   return classNames(
     props.baseClass,
@@ -174,13 +225,13 @@ const selectCustomClass = computed(() => {
 const iconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
-    $ui.selectCustom.icon.size[props.size]
+    $ui.selectCustom.icon.size[props.size],
+    'mr-2'
   )
 })
 
 const iconWrapperClass = classNames(
-  $ui.selectCustom.icon.trailing.wrapper,
-  'pr-2'
+  $ui.selectCustom.icon.trailing.wrapper
 )
 
 function resolveOptionClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
