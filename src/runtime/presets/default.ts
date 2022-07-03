@@ -194,9 +194,12 @@ export default (variantColors: string[]) => {
       container: 'z-10 w-full py-1',
       base: 'u-bg-white shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none overflow-y-auto py-1 max-h-60',
       option: {
-        base: 'cursor-default select-none relative py-2 pl-4 pr-10 text-sm',
+        base: 'cursor-default select-none relative py-2 pl-4 pr-10 text-sm group',
+        container: 'flex items-center',
         active: 'text-white bg-primary-600',
         inactive: 'u-text-gray-900',
+        selected: 'font-semibold',
+        unselected: 'font-normal',
         disabled: 'cursor-not-allowed opacity-50',
         icon: {
           base: 'absolute inset-y-0 right-0 flex items-center pr-4',

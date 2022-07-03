@@ -36,12 +36,12 @@
             :value="option"
             :disabled="option.disabled"
           >
-            <li :class="resolveOptionClass({ active, disabled })">
-              <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">
+            <li :class="resolveOptionClass({ active, selected, disabled })">
+              <div :class="listOptionContainerClass">
                 <slot name="option" :option="option" :active="active" :selected="selected">
-                  {{ option[textAttribute] }}
+                  <span class="block truncate">{{ option[textAttribute] }}</span>
                 </slot>
-              </span>
+              </div>
 
               <span v-if="selected" :class="resolveOptionIconClass({ active })">
                 <Icon :name="listOptionIcon" :class="listOptionIconSizeClass" aria-hidden="true" />
@@ -147,6 +147,10 @@ const props = defineProps({
     type: String,
     default: () => $ui.selectCustom.list.option.base
   },
+  listOptionContainerClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.container
+  },
   listOptionActiveClass: {
     type: String,
     default: () => $ui.selectCustom.list.option.active
@@ -154,6 +158,14 @@ const props = defineProps({
   listOptionInactiveClass: {
     type: String,
     default: () => $ui.selectCustom.list.option.inactive
+  },
+  listOptionSelectedClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.selected
+  },
+  listOptionUnselectedClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.unselected
   },
   listOptionDisabledClass: {
     type: String,
@@ -234,10 +246,11 @@ const iconWrapperClass = classNames(
   $ui.selectCustom.icon.trailing.wrapper
 )
 
-function resolveOptionClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
+function resolveOptionClass ({ active, selected, disabled }: { active: boolean, selected: boolean, disabled: boolean }) {
   return classNames(
     props.listOptionBaseClass,
     active ? props.listOptionActiveClass : props.listOptionInactiveClass,
+    selected ? props.listOptionSelectedClass : props.listOptionUnselectedClass,
     disabled && props.listOptionDisabledClass
   )
 }
