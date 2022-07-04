@@ -195,7 +195,7 @@ export default (variantColors: string[]) => {
       base: 'u-bg-white shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none overflow-y-auto py-1 max-h-60',
       option: {
         base: 'cursor-default select-none relative py-2 pl-4 pr-10 text-sm group',
-        container: 'flex items-center',
+        container: 'flex items-center gap-3',
         active: 'text-white bg-primary-600',
         inactive: 'u-text-gray-900',
         selected: 'font-semibold',
