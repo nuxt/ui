@@ -375,7 +375,9 @@ export default (variantColors: string[]) => {
 
   const slideover = {
     overlay: 'bg-gray-500/75 dark:bg-gray-600/75',
-    panel: 'u-bg-white max-w-md',
+    base: 'relative flex-1 flex flex-col w-full focus:outline-none',
+    background: 'u-bg-white',
+    width: 'max-w-md',
     header: {
       wrapper: 'border-b u-border-gray-200',
       base: 'flex items-center justify-between px-4 sm:px-6 h-16'

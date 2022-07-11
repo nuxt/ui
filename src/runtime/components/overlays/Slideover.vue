@@ -28,7 +28,7 @@
         leave-from="translate-x-0"
         :leave-to="side === 'left' ? '-translate-x-full' : 'translate-x-full'"
       >
-        <DialogPanel class="relative flex-1 flex flex-col w-full focus:outline-none" :class="panelClass">
+        <DialogPanel :class="slideoverClass">
           <div v-if="$slots.header" :class="headerWrapperClass">
             <div :class="headerClass">
               <slot name="header" />
@@ -45,6 +45,7 @@
 import { computed } from 'vue'
 import type { WritableComputedRef, PropType } from 'vue'
 import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
+import { classNames } from '../../utils/'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -57,13 +58,21 @@ const props = defineProps({
     default: 'left',
     validator: (value: string) => ['left', 'right'].includes(value)
   },
+  baseClass: {
+    type: String,
+    default: () => $ui.slideover.base
+  },
+  backgroundClass: {
+    type: String,
+    default: () => $ui.slideover.background
+  },
   overlayClass: {
     type: String,
     default: () => $ui.slideover.overlay
   },
-  panelClass: {
+  widthClass: {
     type: String,
-    default: () => $ui.slideover.panel
+    default: () => $ui.slideover.width
   },
   headerWrapperClass: {
     type: String,
@@ -83,6 +92,14 @@ const isOpen: WritableComputedRef<boolean> = computed({
   set (value) {
     emit('update:modelValue', value)
   }
+})
+
+const slideoverClass = computed(() => {
+  return classNames(
+    props.baseClass,
+    props.widthClass,
+    props.backgroundClass
+  )
 })
 </script>
 
