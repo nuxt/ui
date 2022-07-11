@@ -12,7 +12,7 @@
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <div class="fixed inset-0 bg-gray-500/75 dark:bg-gray-600/75 transition-opacity" />
+          <div class="fixed inset-0 transition-opacity" :class="overlayClass" />
         </TransitionChild>
 
         <div class="fixed inset-0 overflow-y-auto">
@@ -73,6 +73,10 @@ const props = defineProps({
     type: String,
     default: () => $ui.modal.base
   },
+  backgroundClass: {
+    type: String,
+    default: () => $ui.modal.background
+  },
   overlayClass: {
     type: String,
     default: () => $ui.modal.overlay
@@ -110,7 +114,7 @@ const modalClass = computed(() => {
   return classNames(
     props.baseClass,
     props.widthClass,
-    props.overlayClass,
+    props.backgroundClass,
     props.shadowClass,
     props.ringClass,
     props.roundedClass

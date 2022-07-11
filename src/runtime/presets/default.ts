@@ -238,7 +238,8 @@ export default (variantColors: string[]) => {
 
   const modal = {
     base: 'relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle w-full',
-    overlay: 'u-bg-white',
+    background: 'u-bg-white',
+    overlay: 'bg-gray-500/75 dark:bg-gray-600/75',
     border: '',
     ring: '',
     rounded: 'rounded-lg',
