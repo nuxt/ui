@@ -16,7 +16,7 @@
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-gray-500/75 dark:bg-gray-600/75 transition-opacity" />
+        <div class="fixed inset-0 transition-opacity" :class="overlayClass" />
       </TransitionChild>
 
       <TransitionChild
@@ -28,9 +28,9 @@
         leave-from="translate-x-0"
         :leave-to="side === 'left' ? '-translate-x-full' : 'translate-x-full'"
       >
-        <DialogPanel class="relative flex-1 flex flex-col w-full max-w-md u-bg-white focus:outline-none" :class="panelClass">
-          <div v-if="$slots.header" class="border-b u-border-gray-200">
-            <div class="flex items-center justify-between px-4 sm:px-6 h-16">
+        <DialogPanel :class="slideoverClass">
+          <div v-if="$slots.header" :class="headerWrapperClass">
+            <div :class="headerClass">
               <slot name="header" />
             </div>
           </div>
@@ -45,6 +45,8 @@
 import { computed } from 'vue'
 import type { WritableComputedRef, PropType } from 'vue'
 import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
+import { classNames } from '../../utils/'
+import $ui from '#build/ui'
 
 const props = defineProps({
   modelValue: {
@@ -56,9 +58,29 @@ const props = defineProps({
     default: 'left',
     validator: (value: string) => ['left', 'right'].includes(value)
   },
-  panelClass: {
+  baseClass: {
     type: String,
-    default: 'max-w-md'
+    default: () => $ui.slideover.base
+  },
+  backgroundClass: {
+    type: String,
+    default: () => $ui.slideover.background
+  },
+  overlayClass: {
+    type: String,
+    default: () => $ui.slideover.overlay
+  },
+  widthClass: {
+    type: String,
+    default: () => $ui.slideover.width
+  },
+  headerWrapperClass: {
+    type: String,
+    default: () => $ui.slideover.header.wrapper
+  },
+  headerClass: {
+    type: String,
+    default: () => $ui.slideover.header.base
   }
 })
 const emit = defineEmits(['update:modelValue'])
@@ -70,6 +92,14 @@ const isOpen: WritableComputedRef<boolean> = computed({
   set (value) {
     emit('update:modelValue', value)
   }
+})
+
+const slideoverClass = computed(() => {
+  return classNames(
+    props.baseClass,
+    props.widthClass,
+    props.backgroundClass
+  )
 })
 </script>
 
