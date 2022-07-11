@@ -16,7 +16,7 @@
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div class="fixed inset-0 transition-opacity" :class="backgroundClass" />
+        <div class="fixed inset-0 transition-opacity" :class="overlayClass" />
       </TransitionChild>
 
       <TransitionChild
@@ -57,9 +57,9 @@ const props = defineProps({
     default: 'left',
     validator: (value: string) => ['left', 'right'].includes(value)
   },
-  backgroundClass: {
+  overlayClass: {
     type: String,
-    default: () => $ui.slideover.background
+    default: () => $ui.slideover.overlay
   },
   panelClass: {
     type: String,

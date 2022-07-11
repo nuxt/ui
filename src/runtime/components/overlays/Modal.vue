@@ -73,9 +73,9 @@ const props = defineProps({
     type: String,
     default: () => $ui.modal.base
   },
-  backgroundClass: {
+  overlayClass: {
     type: String,
-    default: () => $ui.modal.background
+    default: () => $ui.modal.overlay
   },
   shadowClass: {
     type: String,
@@ -110,7 +110,7 @@ const modalClass = computed(() => {
   return classNames(
     props.baseClass,
     props.widthClass,
-    props.backgroundClass,
+    props.overlayClass,
     props.shadowClass,
     props.ringClass,
     props.roundedClass

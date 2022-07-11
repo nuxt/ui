@@ -238,7 +238,7 @@ export default (variantColors: string[]) => {
 
   const modal = {
     base: 'relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle w-full',
-    background: 'u-bg-white',
+    overlay: 'u-bg-white',
     border: '',
     ring: '',
     rounded: 'rounded-lg',
@@ -373,7 +373,7 @@ export default (variantColors: string[]) => {
   }
 
   const slideover = {
-    background: 'bg-gray-500/75 dark:bg-gray-600/75',
+    overlay: 'bg-gray-500/75 dark:bg-gray-600/75',
     panel: 'u-bg-white max-w-md',
     header: {
       wrapper: 'border-b u-border-gray-200',
