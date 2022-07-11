@@ -4,14 +4,14 @@
       v-for="(avatar, index) of displayedGroup"
       :key="index"
       v-bind="avatar"
-      class="ring-2 u-ring-white -ml-1.5 first:ml-0"
       :size="size"
+      :class="avatarClass"
     />
     <Avatar
       v-if="remainingGroupSize > 0"
-      class="ring-2 u-ring-white -ml-1.5 first:ml-0 text-[10px]"
       :size="size"
       :text="`+${remainingGroupSize}`"
+      :class="avatarClass"
     />
   </div>
 </template>
@@ -19,6 +19,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import Avatar from './Avatar'
+import $ui from '#build/ui'
 
 const props = defineProps({
   group: {
@@ -35,6 +36,10 @@ const props = defineProps({
   max: {
     type: Number,
     default: null
+  },
+  avatarClass: {
+    type: String,
+    default: () => $ui.avatarGroup.avatar
   }
 })
 
