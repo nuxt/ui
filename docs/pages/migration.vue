@@ -78,6 +78,7 @@ const components = [
     to: '/components/AvatarGroup',
     nuxt3: true,
     capi: true,
+    preset: true,
     typescript: true
   },
   {

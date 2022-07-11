@@ -373,6 +373,11 @@ export default (variantColors: string[]) => {
     }
   }
 
+  const avatarGroup = {
+    ring: 'ring-2 u-ring-white',
+    margin: '-ml-1.5 first:ml-0'
+  }
+
   const slideover = {
     overlay: 'bg-gray-500/75 dark:bg-gray-600/75',
     base: 'relative flex-1 flex flex-col w-full focus:outline-none',
@@ -404,6 +409,7 @@ export default (variantColors: string[]) => {
     tabs,
     pills,
     avatar,
+    avatarGroup,
     slideover
   }
 }
