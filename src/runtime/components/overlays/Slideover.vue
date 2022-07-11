@@ -29,10 +29,8 @@
         :leave-to="side === 'left' ? '-translate-x-full' : 'translate-x-full'"
       >
         <DialogPanel :class="slideoverClass">
-          <div v-if="$slots.header" :class="headerWrapperClass">
-            <div :class="headerClass">
-              <slot name="header" />
-            </div>
+          <div v-if="$slots.header" :class="headerClass">
+            <slot name="header" />
           </div>
           <slot />
         </DialogPanel>
@@ -74,13 +72,9 @@ const props = defineProps({
     type: String,
     default: () => $ui.slideover.width
   },
-  headerWrapperClass: {
-    type: String,
-    default: () => $ui.slideover.header.wrapper
-  },
   headerClass: {
     type: String,
-    default: () => $ui.slideover.header.base
+    default: () => $ui.slideover.header
   }
 })
 const emit = defineEmits(['update:modelValue'])
