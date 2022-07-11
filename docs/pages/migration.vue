@@ -77,6 +77,7 @@ const components = [
     label: 'AvatarGroup',
     to: '/components/AvatarGroup',
     nuxt3: true,
+    capi: true,
     typescript: true
   },
   {
@@ -129,6 +130,7 @@ const components = [
     label: 'Alert',
     to: '/components/Alert',
     nuxt3: true,
+    capi: true,
     typescript: true
   },
   {
@@ -181,6 +183,8 @@ const components = [
   {
     label: 'SelectCustom',
     to: '/components/SelectCustom',
+    capi: true,
+    preset: true,
     typescript: true
   },
   {
@@ -265,6 +269,7 @@ const components = [
     to: '/components/Slideover',
     nuxt3: true,
     capi: true,
+    preset: true,
     typescript: true
   },
   {
