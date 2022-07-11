@@ -372,6 +372,15 @@ export default (variantColors: string[]) => {
     }
   }
 
+  const slideover = {
+    background: 'bg-gray-500/75 dark:bg-gray-600/75',
+    panel: 'u-bg-white max-w-md',
+    header: {
+      wrapper: 'border-b u-border-gray-200',
+      base: 'flex items-center justify-between px-4 sm:px-6 h-16'
+    }
+  }
+
   return {
     card,
     modal,
@@ -391,6 +400,7 @@ export default (variantColors: string[]) => {
     dropdown,
     tabs,
     pills,
-    avatar
+    avatar,
+    slideover
   }
 }
