@@ -18,6 +18,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { classNames } from '../../utils/'
 import Avatar from './Avatar'
 import $ui from '#build/ui'
 
@@ -37,9 +38,13 @@ const props = defineProps({
     type: Number,
     default: null
   },
-  avatarClass: {
+  ringClass: {
     type: String,
-    default: () => $ui.avatarGroup.avatar
+    default: () => $ui.avatarGroup.ring
+  },
+  marginClass: {
+    type: String,
+    default: () => $ui.avatarGroup.margin
   }
 })
 
@@ -59,6 +64,13 @@ const remainingGroupSize = computed(() => {
   if (!props.max) { return 0 }
 
   return avatars.value.length - props.max
+})
+
+const avatarClass = computed(() => {
+  return classNames(
+    props.ringClass,
+    props.marginClass
+  )
 })
 </script>
 

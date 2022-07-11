@@ -374,7 +374,8 @@ export default (variantColors: string[]) => {
   }
 
   const avatarGroup = {
-    avatar: 'ring-2 u-ring-white -ml-1.5 first:ml-0'
+    ring: 'ring-2 u-ring-white',
+    margin: '-ml-1.5 first:ml-0'
   }
 
   const slideover = {
