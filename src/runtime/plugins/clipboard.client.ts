@@ -24,9 +24,11 @@ export default defineNuxtPlugin((nuxtApp) => {
     })
   }
 
-  nuxtApp.provide('clipboard', {
-    copy
-  })
+  return {
+    provide: {
+      copy
+    }
+  }
 })
 
 declare module '#app' {

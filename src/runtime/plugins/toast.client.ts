@@ -2,7 +2,7 @@ import { Ref } from 'vue'
 import { defineNuxtPlugin, useState } from '#app'
 import { ToastNotification, ToastPlugin } from '../types'
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(() => {
   const notifications: Ref<ToastNotification[]> = useState('notifications', () => [])
 
   function addNotification (notification: Partial<ToastNotification>) {
@@ -23,42 +23,44 @@ export default defineNuxtPlugin((nuxtApp) => {
     notifications.value = notifications.value.filter((n: ToastNotification) => n.id !== id)
   }
 
-  nuxtApp.provide('toast', {
-    addNotification,
-    removeNotification,
-    success ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
-      addNotification({
-        type: 'success',
-        title,
-        description,
-        timeout
-      })
-    },
-    info ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
-      addNotification({
-        type: 'info',
-        title,
-        description,
-        timeout
-      })
-    },
-    warning ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
-      addNotification({
-        type: 'warning',
-        title,
-        description,
-        timeout
-      })
-    },
-    error ({ title = 'An error occurred!', description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
-      addNotification({
-        type: 'error',
-        title,
-        description,
-        timeout
-      })
+  return {
+    provide: {
+      addNotification,
+      removeNotification,
+      success ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
+        addNotification({
+          type: 'success',
+          title,
+          description,
+          timeout
+        })
+      },
+      info ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
+        addNotification({
+          type: 'info',
+          title,
+          description,
+          timeout
+        })
+      },
+      warning ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
+        addNotification({
+          type: 'warning',
+          title,
+          description,
+          timeout
+        })
+      },
+      error ({ title = 'An error occurred!', description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
+        addNotification({
+          type: 'error',
+          title,
+          description,
+          timeout
+        })
+      }
     }
-  })
+  }
 })
 
 declare module '#app' {
