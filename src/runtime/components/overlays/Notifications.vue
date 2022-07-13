@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import { useNuxtApp, useState } from '#app'
 import Notification from './Notification'
+import { useNuxtApp, useState } from '#imports'
 
 const { $toast } = useNuxtApp()
 const notifications = useState('notifications', () => [])
