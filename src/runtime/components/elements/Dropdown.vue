@@ -45,11 +45,11 @@ import {
 
 import type { Ref } from 'vue'
 import { ref, onMounted } from 'vue'
+import NuxtLink from '#app/components/nuxt-link'
 import Icon from '../elements/Icon'
 import Avatar from '../elements/Avatar'
 import { classNames, usePopper } from '../../utils'
 import $ui from '#build/ui'
-import NuxtLink from '#app/components/nuxt-link'
 
 const props = defineProps({
   items: {

@@ -1,5 +1,5 @@
-import { defineNuxtPlugin } from '#app'
 import { useClipboard } from '@vueuse/core'
+import { defineNuxtPlugin } from '#app'
 import { ClipboardPlugin } from '../types'
 
 export default defineNuxtPlugin((nuxtApp) => {

@@ -14,9 +14,9 @@
 
 <script setup lang="ts">
 import { ref, computed, useSlots } from 'vue'
+import NuxtLink from '#app/components/nuxt-link'
 import Icon from '../elements/Icon'
 import { classNames } from '../../utils'
-import NuxtLink from '#app/components/nuxt-link'
 import $ui from '#build/ui'
 
 const props = defineProps({
