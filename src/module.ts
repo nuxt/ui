@@ -1,7 +1,7 @@
 import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin, createResolver } from '@nuxt/kit'
 import { defu } from 'defu'
 import colors from 'tailwindcss/colors.js'
-import type { TailwindConfig } from 'tailwindcss/tailwind-config'
+import type { Config } from 'tailwindcss'
 import { name, version } from '../package.json'
 import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
 import defaultPreset from './runtime/presets/default'
@@ -39,7 +39,7 @@ export interface ModuleOptions {
 
   colors?: ColorsOptions
 
-  tailwindcss?: TailwindConfig
+  tailwindcss?: Partial<Config>
 }
 
 const defaults = {

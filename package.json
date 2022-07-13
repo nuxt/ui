@@ -29,7 +29,7 @@
     "@iconify/vue": "^3.2.1",
     "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
     "@nuxtjs/color-mode": "^3.1.4",
-    "@nuxtjs/tailwindcss": "^5.2.0",
+    "@nuxtjs/tailwindcss": "^5.3.0",
     "@popperjs/core": "^2.11.5",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.2",
