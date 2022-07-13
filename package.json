@@ -33,7 +33,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/line-clamp": "^0.4.0",
-    "@tailwindcss/typography": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.4",
     "@vueuse/core": "^8.9.2",
     "defu": "^6.0.0",
     "lodash-es": "^4.17.21",
