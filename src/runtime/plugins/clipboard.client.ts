@@ -26,7 +26,9 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   return {
     provide: {
-      copy
+      clipboard: {
+        copy
+      }
     }
   }
 })
