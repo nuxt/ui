@@ -385,7 +385,7 @@ export default (variantColors: string[]) => {
     base: 'relative flex-1 flex flex-col w-full focus:outline-none',
     background: 'u-bg-white',
     width: 'max-w-md',
-    header: 'flex items-center justify-between px-4 sm:px-6 h-16 border-b u-border-gray-200'
+    header: 'flex items-center justify-between flex-shrink-0 px-4 sm:px-6 h-16 border-b u-border-gray-200'
   }
 
   return {
