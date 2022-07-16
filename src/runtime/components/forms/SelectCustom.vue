@@ -63,14 +63,16 @@
           <ComboboxOption v-if="queryOption" v-slot="{ active, selected }" :value="queryOption" as="template">
             <li :class="resolveOptionClass({ active, selected })">
               <div :class="listOptionContainerClass">
-                <slot name="option" :option="queryOption" :active="active" :selected="selected">
+                <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
                   <span class="block truncate">Create "{{ queryOption[textAttribute] }}"</span>
                 </slot>
               </div>
             </li>
           </ComboboxOption>
-          <p v-else-if="searchable && query" class="text-sm u-text-gray-400 px-4 py-2">
-            No results found for "{{ query }}".
+          <p v-else-if="searchable && query" :class="listOptionEmptyClass">
+            <slot name="option-empty" :query="query">
+              No results found for "{{ query }}".
+            </slot>
           </p>
         </ComboboxOptions>
       </transition>
@@ -211,6 +213,10 @@ const props = defineProps({
   listOptionDisabledClass: {
     type: String,
     default: () => $ui.selectCustom.list.option.disabled
+  },
+  listOptionEmptyClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.option.empty
   },
   listOptionIcon: {
     type: String,

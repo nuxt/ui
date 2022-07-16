@@ -202,6 +202,7 @@ export default (variantColors: string[]) => {
         selected: 'font-semibold',
         unselected: 'font-normal',
         disabled: 'cursor-not-allowed opacity-50',
+        empty: 'text-sm u-text-gray-400 px-4 py-2',
         icon: {
           base: 'absolute inset-y-0 right-0 flex items-center pr-4',
           active: 'text-white',
