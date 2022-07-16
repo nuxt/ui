@@ -193,6 +193,7 @@ export default (variantColors: string[]) => {
     list: {
       container: 'z-10 w-full py-1',
       base: 'u-bg-white shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none overflow-y-auto py-1 max-h-60',
+      input: 'relative block w-full focus:ring-transparent text-sm px-4 py-2 u-text-gray-700 border-l-0 border-t-0 border-r-0 u-border-gray-200 focus:u-border-gray-200',
       option: {
         base: 'cursor-default select-none relative py-2 pl-4 pr-10 text-sm group',
         container: 'flex items-center gap-3',

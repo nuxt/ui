@@ -1,15 +1,16 @@
 <template>
-  <Listbox
+  <Combobox
     v-slot="{ open }"
     :model-value="modelValue"
     :multiple="multiple"
+    :nullable="nullable"
     as="div"
     :class="wrapperClass"
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
 
-    <ListboxButton ref="trigger" as="div">
+    <ComboboxButton ref="trigger" as="div">
       <slot :open="open">
         <button :class="selectCustomClass">
           <slot name="label">
@@ -23,13 +24,23 @@
           </slot>
         </button>
       </slot>
-    </ListboxButton>
+    </ComboboxButton>
 
     <div v-if="open" ref="container" :class="listContainerClass">
       <transition appear leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-        <ListboxOptions static :class="listBaseClass">
-          <ListboxOption
-            v-for="(option, index) in options"
+        <ComboboxOptions static :class="listBaseClass">
+          <ComboboxInput
+            v-if="searchable"
+            :display-value="() => query"
+            name="q"
+            placeholder="Search..."
+            autofocus
+            autocomplete="off"
+            :class="listInputClass"
+            @change="query = $event.target.value"
+          />
+          <ComboboxOption
+            v-for="(option, index) in filteredOptions"
             v-slot="{ active, selected, disabled }"
             :key="index"
             as="template"
@@ -47,22 +58,37 @@
                 <Icon :name="listOptionIcon" :class="listOptionIconSizeClass" aria-hidden="true" />
               </span>
             </li>
-          </ListboxOption>
-        </ListboxOptions>
+          </ComboboxOption>
+
+          <ComboboxOption v-if="queryOption" v-slot="{ active, selected }" :value="queryOption" as="template">
+            <li :class="resolveOptionClass({ active, selected })">
+              <div :class="listOptionContainerClass">
+                <slot name="option" :option="queryOption" :active="active" :selected="selected">
+                  <span class="block truncate">Create "{{ queryOption[textAttribute] }}"</span>
+                </slot>
+              </div>
+            </li>
+          </ComboboxOption>
+          <p v-else-if="searchable && query" class="text-sm u-text-gray-400 px-4 py-2">
+            No results found for "{{ query }}".
+          </p>
+        </ComboboxOptions>
       </transition>
     </div>
-  </Listbox>
+  </Combobox>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import {
-  Listbox,
-  ListboxButton,
-  ListboxOptions,
-  ListboxOption
+  Combobox,
+  ComboboxButton,
+  ComboboxOptions,
+  ComboboxOption,
+  ComboboxInput
 } from '@headlessui/vue'
 import Icon from '../elements/Icon'
+import Input from '../forms/Input'
 import { classNames, usePopper } from '../../utils'
 import $ui from '#build/ui'
 
@@ -94,6 +120,18 @@ const props = defineProps({
     default: false
   },
   multiple: {
+    type: Boolean,
+    default: false
+  },
+  nullable: {
+    type: Boolean,
+    default: false
+  },
+  searchable: {
+    type: Boolean,
+    default: false
+  },
+  creatable: {
     type: Boolean,
     default: false
   },
@@ -142,6 +180,10 @@ const props = defineProps({
   listContainerClass: {
     type: String,
     default: () => $ui.selectCustom.list.container
+  },
+  listInputClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.input
   },
   listOptionBaseClass: {
     type: String,
@@ -194,6 +236,10 @@ const props = defineProps({
   textAttribute: {
     type: String,
     default: 'text'
+  },
+  searchAttributes: {
+    type: Array,
+    default: null
   }
 })
 
@@ -223,6 +269,8 @@ const [trigger, container] = usePopper({
   }]
 })
 
+const query = ref('')
+
 const selectCustomClass = computed(() => {
   return classNames(
     props.baseClass,
@@ -242,11 +290,32 @@ const iconClass = computed(() => {
   )
 })
 
+const filteredOptions = computed(() =>
+  query.value === ''
+    ? props.options
+    : props.options.filter((option: any) => {
+      return (props.searchAttributes?.length ? props.searchAttributes : [props.textAttribute]).some((searchAttribute: any) => {
+        return option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1
+      })
+    })
+)
+
+const queryOption = computed(() => {
+  if (!props.creatable) {
+    return null
+  }
+  if (!query.value) {
+    return null
+  }
+
+  return query.value === '' ? null : { [props.textAttribute]: query.value }
+})
+
 const iconWrapperClass = classNames(
   $ui.selectCustom.icon.trailing.wrapper
 )
 
-function resolveOptionClass ({ active, selected, disabled }: { active: boolean, selected: boolean, disabled: boolean }) {
+function resolveOptionClass ({ active, selected, disabled }: { active: boolean, selected: boolean, disabled?: boolean }) {
   return classNames(
     props.listOptionBaseClass,
     active ? props.listOptionActiveClass : props.listOptionInactiveClass,
