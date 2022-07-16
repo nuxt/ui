@@ -60,7 +60,7 @@
             </li>
           </ComboboxOption>
 
-          <ComboboxOption v-if="queryOption" v-slot="{ active, selected }" :value="queryOption" as="template">
+          <ComboboxOption v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
             <li :class="resolveOptionClass({ active, selected })">
               <div :class="listOptionContainerClass">
                 <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
@@ -69,7 +69,7 @@
               </div>
             </li>
           </ComboboxOption>
-          <p v-else-if="searchable && query" :class="listOptionEmptyClass">
+          <p v-else-if="searchable && query && !filteredOptions.length" :class="listOptionEmptyClass">
             <slot name="option-empty" :query="query">
               No results found for "{{ query }}".
             </slot>
@@ -306,13 +306,6 @@ const filteredOptions = computed(() =>
 )
 
 const queryOption = computed(() => {
-  if (!props.creatable) {
-    return null
-  }
-  if (!query.value) {
-    return null
-  }
-
   return query.value === '' ? null : { [props.textAttribute]: query.value }
 })
 
