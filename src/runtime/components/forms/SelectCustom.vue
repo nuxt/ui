@@ -88,7 +88,6 @@ import {
   ComboboxInput
 } from '@headlessui/vue'
 import Icon from '../elements/Icon'
-import Input from '../forms/Input'
 import { classNames, usePopper } from '../../utils'
 import $ui from '#build/ui'
 
