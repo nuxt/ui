@@ -30,11 +30,11 @@
 <script setup lang="ts">
 import { ComboboxOption } from '@headlessui/vue'
 import type { PropType } from 'vue'
-import type { Group } from '../../types/command-palette'
+import type { ComputedGroup } from '../../types/command-palette'
 
 defineProps({
   group: {
-    type: Object as PropType<Group>,
+    type: Object as PropType<ComputedGroup>,
     required: true
   }
 })

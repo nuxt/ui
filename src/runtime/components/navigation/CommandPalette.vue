@@ -15,8 +15,8 @@
         <UButton v-if="closeIcon" :icon="closeIcon" variant="transparent" class="absolute right-3" @click="onClear" />
       </div>
 
-      <ComboboxOptions v-if="results.length" static hold class="relative flex-1 overflow-y-auto divide-y u-divide-gray-100 scroll-py-2">
-        <CommandPaletteGroup v-for="group of groupedResults" :key="group.key" :group="group" />
+      <ComboboxOptions v-if="groups.length" static hold class="relative flex-1 overflow-y-auto divide-y u-divide-gray-100 scroll-py-2">
+        <CommandPaletteGroup v-for="group of groups" :key="group.key" :group="group" />
       </ComboboxOptions>
 
       <div v-else class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
@@ -32,10 +32,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { Combobox, ComboboxInput, ComboboxOptions } from '@headlessui/vue'
-import type { PropType, ComponentPublicInstance } from 'vue'
+import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useFuse } from '@vueuse/integrations/useFuse'
-import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import { defu } from 'defu'
+import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Group, Command } from '../../types/command-palette'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 
@@ -75,29 +75,27 @@ onMounted(() => {
   activateFirstOption()
 })
 
-// Computed
-
-const commands = computed(() => props.groups.flatMap(group => group.commands.map(command => ({ ...command, group: group.key }))))
-
-const options = computed(() => defu({}, {
+const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => defu({}, {
   fuseOptions: {
-    keys: ['label'],
-    isCaseSensitive: false,
-    threshold: undefined
+    keys: ['label']
   },
   resultLimit: 12,
   matchAllWhenSearchEmpty: true
 }, props.options))
 
-const { results } = useFuse(query, commands, options)
+const fuse = props.groups.reduce((acc, group) => {
+  const fuse = useFuse(query, group.commands, defu({}, group.options || {}, options.value))
+  acc[group.key] = fuse
+  return acc
+}, {})
 
-const groupedResults = computed(() => {
-  return props.groups.map(group => ({
+const groups = computed(() => props.groups.map((group) => {
+  return {
     key: group.key,
     label: group.label,
-    commands: results.value.map(result => result.item).filter(item => item.group === group.key).slice(0, options.value.resultLimit)
-  })).filter(group => group.commands.length)
-})
+    commands: fuse[group.key].results.value.map(result => result.item).slice(0, group.options?.resultLimit || options.value.resultLimit)
+  }
+}).filter(group => group.commands.length))
 
 // Methods
 
