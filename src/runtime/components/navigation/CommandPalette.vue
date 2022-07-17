@@ -61,15 +61,7 @@ const props = defineProps({
   },
   options: {
     type: Object as PropType<UseFuseOptions<Command>>,
-    default: () => ({
-      fuseOptions: {
-        keys: ['label'],
-        isCaseSensitive: false,
-        threshold: undefined
-      },
-      resultLimit: 12,
-      matchAllWhenSearchEmpty: true
-    })
+    default: () => ({})
   }
 })
 
@@ -86,13 +78,23 @@ onMounted(() => {
 
 const commands = computed(() => props.groups.flatMap(group => group.commands.map(command => ({ ...command, group: group.key }))))
 
-const { results } = useFuse(query, commands, props.options)
+const options = computed(() => Object.assign({}, {
+  fuseOptions: {
+    keys: ['label'],
+    isCaseSensitive: false,
+    threshold: undefined
+  },
+  resultLimit: 12,
+  matchAllWhenSearchEmpty: true
+}, props.options))
+
+const { results } = useFuse(query, commands, options)
 
 const groupedResults = computed(() => {
   return props.groups.map(group => ({
     key: group.key,
     label: group.label,
-    commands: results.value.map(result => result.item).filter(item => item.group === group.key)
+    commands: results.value.map(result => result.item).filter(item => item.group === group.key).slice(0, props.options.resultLimit)
   })).filter(group => group.commands.length)
 })
 
