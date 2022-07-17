@@ -35,6 +35,7 @@ import { Combobox, ComboboxInput, ComboboxOptions } from '@headlessui/vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
+import { defu } from 'defu'
 import type { Group, Command } from '../../types/command-palette'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 
@@ -60,7 +61,7 @@ const props = defineProps({
     default: 'heroicons-outline:search'
   },
   options: {
-    type: Object as PropType<UseFuseOptions<Command>>,
+    type: Object as PropType<Partial<UseFuseOptions<Command>>>,
     default: () => ({})
   }
 })
@@ -78,7 +79,7 @@ onMounted(() => {
 
 const commands = computed(() => props.groups.flatMap(group => group.commands.map(command => ({ ...command, group: group.key }))))
 
-const options = computed(() => Object.assign({}, {
+const options = computed(() => defu({}, {
   fuseOptions: {
     keys: ['label'],
     isCaseSensitive: false,
