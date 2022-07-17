@@ -213,6 +213,14 @@ const components = [
     typescript: true
   },
   {
+    label: 'CommandPalette',
+    to: '/components/CommandPalette',
+    nuxt3: true,
+    capi: true,
+    preset: false,
+    typescript: true
+  },
+  {
     label: 'Tabs',
     to: '/components/Tabs',
     nuxt3: true,

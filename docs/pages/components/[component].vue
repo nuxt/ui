@@ -193,6 +193,19 @@ const defaultProps = {
       }
     ]
   },
+  CommandPalette: {
+    groups: [{
+      key: 'people',
+      label: 'People',
+      commands: [
+        { id: 1, label: 'Durward Reynolds', disabled: false },
+        { id: 2, label: 'Kenton Towne', disabled: false },
+        { id: 3, label: 'Therese Wunsch', disabled: false },
+        { id: 4, label: 'Benedict Kessler', disabled: true },
+        { id: 5, label: 'Katelyn Rohan', disabled: false }
+      ]
+    }]
+  },
   Icon: {
     name: 'heroicons-outline:bell'
   },
