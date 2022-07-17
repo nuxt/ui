@@ -94,7 +94,7 @@ const groupedResults = computed(() => {
   return props.groups.map(group => ({
     key: group.key,
     label: group.label,
-    commands: results.value.map(result => result.item).filter(item => item.group === group.key).slice(0, props.options.resultLimit)
+    commands: results.value.map(result => result.item).filter(item => item.group === group.key).slice(0, options.value.resultLimit)
   })).filter(group => group.commands.length)
 })
 
