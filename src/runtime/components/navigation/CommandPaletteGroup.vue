@@ -13,11 +13,11 @@
         :disabled="command.disabled"
         as="template"
       >
-        <li :class="['flex justify-between select-none commands-center rounded-md px-3 py-2 u-text-gray-400', active && 'bg-gray-100 dark:bg-gray-800 u-text-gray-900', command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
-          <div class="flex commands-center flex-1 min-w-0">
+        <li :class="['flex justify-between select-none items-center rounded-md px-3 py-2 u-text-gray-400', active && 'bg-gray-100 dark:bg-gray-800 u-text-gray-900', command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
+          <div class="flex items-center flex-1 min-w-0">
             <UIcon v-if="command.icon" :name="command.icon" :class="['h-4 w-4', command.iconColor, command.iconClass]" class="flex-shrink-0" aria-hidden="true" />
             <UAvatar v-else-if="command.avatar" :src="command.avatar" :alt="command.label" :rounded="false" size="xxxs" />
-            <div class="flex commands-center flex-1 w-full ml-3 truncate u-text-gray-400" :class="{ 'opacity-50': command.disabled }">
+            <div class="flex items-center flex-1 w-full ml-3 truncate u-text-gray-400" :class="{ 'opacity-50': command.disabled }">
               <span class="u-text-gray-700">{{ command.label }}</span>
             </div>
           </div>
