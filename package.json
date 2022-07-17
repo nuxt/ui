@@ -25,7 +25,7 @@
     "release": "yarn lint && standard-version && git push --follow-tags"
   },
   "dependencies": {
-    "@headlessui/vue": "1.6.4",
+    "@headlessui/vue": "^1.6.7",
     "@iconify/vue": "^3.2.1",
     "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
     "@nuxtjs/color-mode": "^3.1.4",
@@ -35,8 +35,10 @@
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/line-clamp": "^0.4.0",
     "@tailwindcss/typography": "^0.5.4",
-    "@vueuse/core": "^8.9.2",
+    "@vueuse/core": "^8.9.4",
+    "@vueuse/integrations": "^8.9.4",
     "defu": "^6.0.0",
+    "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",
     "tailwindcss": "^3.1.6"
   },
@@ -45,7 +47,7 @@
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
     "@types/lodash-es": "^4.17.6",
     "@types/tailwindcss": "^3.0.11",
-    "eslint": "^8.19.0",
+    "eslint": "^8.20.0",
     "nuxt": "npm:nuxt3@latest",
     "standard-version": "^9.5.0"
   },
