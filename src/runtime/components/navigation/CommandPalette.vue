@@ -65,7 +65,7 @@ const props = defineProps({
       fuseOptions: {
         keys: ['label'],
         isCaseSensitive: false,
-        threshold: 0.1
+        threshold: undefined
       },
       resultLimit: 12,
       matchAllWhenSearchEmpty: true
