@@ -75,13 +75,13 @@ onMounted(() => {
   activateFirstOption()
 })
 
-const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => defu({}, {
+const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => defu({}, props.options, {
   fuseOptions: {
     keys: ['label']
   },
   resultLimit: 12,
   matchAllWhenSearchEmpty: true
-}, props.options))
+}))
 
 const fuse = props.groups.reduce((acc, group) => {
   const fuse = useFuse(query, group.commands, defu({}, group.options || {}, options.value))
