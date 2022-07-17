@@ -49,7 +49,7 @@
             size="sm"
           />
           <UInput
-            v-else-if="prop.type === 'String'"
+            v-else-if="prop.type === 'String' && typeof prop.value === 'string'"
             v-model="prop.value"
             :name="prop.key"
             size="sm"
@@ -64,11 +64,12 @@
           />
           <UTextarea
             v-else
-            v-model="prop.value"
+            :model-value="prop.value && JSON.stringify(prop.value)"
             :name="prop.key"
             size="sm"
             :rows="8"
             autoresize
+            @update:model-value="value => prop.value = JSON.parse(value)"
           />
         </UFormGroup>
       </div>
@@ -189,10 +190,6 @@ const defaultProps = {
         icon: 'heroicons-outline:external-link',
         to: 'https://google.fr',
         target: '_blank'
-      },
-      {
-        label: 'Logout',
-        avatar: 'https://github.com/benjamincanac.png'
       }
     ]
   },
