@@ -84,8 +84,6 @@ const props = defineProps({
   }
 })
 
-const router = useRouter()
-
 const emit = defineEmits(['update:modelValue', 'close'])
 
 const query = ref('')
@@ -129,12 +127,6 @@ function activateFirstOption () {
 function onSelect (option: Command) {
   if (option.disabled) {
     return
-  }
-
-  if (option.click) {
-    option.click()
-  } else if (option.to) {
-    router.push(option.to)
   }
 
   emit('update:modelValue', option)
