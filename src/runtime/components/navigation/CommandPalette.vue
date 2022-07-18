@@ -141,9 +141,7 @@ function onSelect (option: Command) {
 
   // waiting for modal to be closed
   if (!option.prevent) {
-    setTimeout(() => {
-      query.value = ''
-    }, 300)
+    query.value = ''
   }
 }
 
