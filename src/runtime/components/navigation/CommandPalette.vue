@@ -2,7 +2,6 @@
   <Combobox
     :model-value="modelValue"
     :multiple="multiple"
-    :nullable="nullable"
     @update:model-value="onSelect"
   >
     <div class="flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800">
@@ -43,7 +42,6 @@ import { defu } from 'defu'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Group, Command } from '../../types/command-palette'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
-import { useRouter } from '#imports'
 
 const props = defineProps({
   modelValue: {
@@ -51,10 +49,6 @@ const props = defineProps({
     default: null
   },
   multiple: {
-    type: Boolean,
-    default: false
-  },
-  nullable: {
     type: Boolean,
     default: false
   },
@@ -124,16 +118,14 @@ function activateFirstOption () {
   }, 0)
 }
 
-function onSelect (option: Command) {
-  if (option.disabled) {
-    return
-  }
-
+function onSelect (option: Command | Command[]) {
   emit('update:modelValue', option)
 
-  // waiting for modal to be closed
-  if (!option.prevent) {
-    query.value = ''
+  // Clear input after selection
+  if (!props.multiple) {
+    setTimeout(() => {
+      query.value = ''
+    }, 0)
   }
 }
 

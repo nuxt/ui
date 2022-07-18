@@ -9,7 +9,6 @@ export interface Command {
   avatar?: string
   chip?: string
   disabled?: boolean
-  prevent?: boolean
   shortcuts?: string[]
 }
 
