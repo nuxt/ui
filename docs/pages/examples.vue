@@ -172,6 +172,16 @@
 
     <div>
       <div class="font-medium text-sm mb-1 u-text-gray-700">
+        Command palette:
+      </div>
+
+      <UCard body-class="">
+        <UCommandPalette v-model="form.persons" multiple :groups="[{ key: 'persons', commands: people }]" />
+      </UCard>
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 u-text-gray-700">
         Card:
       </div>
 
@@ -198,7 +208,7 @@
           </UFormGroup>
 
           <UFormGroup label="People" name="people" required>
-            <USelectCustom v-model="form.person" name="people" :options="people" text-attribute="name" />
+            <USelectCustom v-model="form.person" name="people" :options="people" text-attribute="label" searchable />
           </UFormGroup>
 
           <UFormGroup label="Toggle" name="toggle">
@@ -241,11 +251,11 @@
 const isModalOpen = ref(false)
 
 const people = [
-  { id: 1, name: 'Durward Reynolds', disabled: false },
-  { id: 2, name: 'Kenton Towne', disabled: false },
-  { id: 3, name: 'Therese Wunsch', disabled: false },
-  { id: 4, name: 'Benedict Kessler', disabled: true },
-  { id: 5, name: 'Katelyn Rohan', disabled: false }
+  { id: 1, label: 'Durward Reynolds', disabled: false },
+  { id: 2, label: 'Kenton Towne', disabled: false },
+  { id: 3, label: 'Therese Wunsch', disabled: false },
+  { id: 4, label: 'Benedict Kessler', disabled: true },
+  { id: 5, label: 'Katelyn Rohan', disabled: false }
 ]
 const form = reactive({
   email: '',
@@ -255,7 +265,8 @@ const form = reactive({
   notifications: [],
   terms: false,
   personId: null,
-  person: ref(people[0])
+  person: ref(people[0]),
+  persons: ref([people[0]])
 })
 
 const { $toast } = useNuxtApp()

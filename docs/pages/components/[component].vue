@@ -104,14 +104,15 @@ const is = `U${params.component}`
 const component = nuxtApp.vueApp.component(is)
 
 const people = [
-  { id: 1, name: 'Durward Reynolds', disabled: false },
-  { id: 2, name: 'Kenton Towne', disabled: false },
-  { id: 3, name: 'Therese Wunsch', disabled: false },
-  { id: 4, name: 'Benedict Kessler', disabled: true },
-  { id: 5, name: 'Katelyn Rohan', disabled: false }
+  { id: 1, label: 'Durward Reynolds', disabled: false },
+  { id: 2, label: 'Kenton Towne', disabled: false },
+  { id: 3, label: 'Therese Wunsch', disabled: false },
+  { id: 4, label: 'Benedict Kessler', disabled: true },
+  { id: 5, label: 'Katelyn Rohan', disabled: false }
 ]
 
 const selectCustom = ref(people[0])
+const commandPalette = ref(people[0])
 const alertDialog = ref(false)
 const toggle = ref(false)
 const modal = ref(false)
@@ -194,16 +195,12 @@ const defaultProps = {
     ]
   },
   CommandPalette: {
+    modelValue: commandPalette,
+    'onUpdate:modelValue': (v) => { commandPalette.value = v },
     groups: [{
       key: 'people',
       label: 'People',
-      commands: [
-        { id: 1, label: 'Durward Reynolds', disabled: false },
-        { id: 2, label: 'Kenton Towne', disabled: false },
-        { id: 3, label: 'Therese Wunsch', disabled: false },
-        { id: 4, label: 'Benedict Kessler', disabled: true },
-        { id: 5, label: 'Katelyn Rohan', disabled: false }
-      ]
+      commands: people
     }]
   },
   Icon: {
@@ -245,7 +242,7 @@ const defaultProps = {
   SelectCustom: {
     modelValue: selectCustom,
     'onUpdate:modelValue': (v) => { selectCustom.value = v },
-    textAttribute: 'name',
+    textAttribute: 'label',
     options: people
   },
   Textarea: {
