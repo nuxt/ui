@@ -1,5 +1,10 @@
 <template>
-  <Combobox @update:modelValue="onSelect">
+  <Combobox
+    :model-value="modelValue"
+    :multiple="multiple"
+    :nullable="nullable"
+    @update:model-value="onSelect"
+  >
     <div class="flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800">
       <div class="relative flex items-center">
         <UIcon :name="inputIcon" class="pointer-events-none absolute top-3.5 left-5 h-5 w-5 u-text-gray-400" aria-hidden="true" />
@@ -40,6 +45,18 @@ import type { Group, Command } from '../../types/command-palette'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 
 const props = defineProps({
+  modelValue: {
+    type: [String, Number, Object, Array],
+    default: null
+  },
+  multiple: {
+    type: Boolean,
+    default: false
+  },
+  nullable: {
+    type: Boolean,
+    default: false
+  },
   groups: {
     type: Array as PropType<Group[]>,
     default: () => []
@@ -66,7 +83,9 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['select', 'close'])
+const router = useRouter()
+
+const emit = defineEmits(['update:modelValue', 'close'])
 
 const query = ref('')
 const comboboxInput = ref<ComponentPublicInstance<HTMLInputElement>>()
@@ -111,7 +130,13 @@ function onSelect (option) {
     return
   }
 
-  emit('select', option, { query: query.value })
+  if (option.click) {
+    option.click()
+  } else if (option.to) {
+    router.push(option.to)
+  }
+
+  emit('update:modelValue', option)
 
   // waiting for modal to be closed
   setTimeout(() => {
