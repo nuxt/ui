@@ -91,8 +91,7 @@ const fuse = props.groups.reduce((acc, group) => {
 
 const groups = computed(() => props.groups.map((group) => {
   return {
-    key: group.key,
-    label: group.label,
+    ...group,
     commands: fuse[group.key].results.value.map(result => result.item).slice(0, group.options?.resultLimit || options.value.resultLimit)
   }
 }).filter(group => group.commands.length))
