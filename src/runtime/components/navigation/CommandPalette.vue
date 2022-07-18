@@ -2,6 +2,7 @@
   <Combobox
     :model-value="modelValue"
     :multiple="multiple"
+    :nullable="nullable"
     @update:model-value="onSelect"
   >
     <div class="flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800">
@@ -49,6 +50,10 @@ const props = defineProps({
     default: null
   },
   multiple: {
+    type: Boolean,
+    default: false
+  },
+  nullable: {
     type: Boolean,
     default: false
   },
