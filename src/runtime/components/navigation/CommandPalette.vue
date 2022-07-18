@@ -43,6 +43,7 @@ import { defu } from 'defu'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Group, Command } from '../../types/command-palette'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
+import { useRouter } from '#imports'
 
 const props = defineProps({
   modelValue: {
