@@ -1,4 +1,5 @@
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
+import type { RouteLocationRaw } from 'vue-router'
 
 export interface Command {
   prefix?: string
@@ -9,6 +10,9 @@ export interface Command {
   avatar?: string
   chip?: string
   disabled?: boolean
+  prevent?: boolean
+  click?: Function
+  to?: RouteLocationRaw
   shortcuts?: string[]
 }
 

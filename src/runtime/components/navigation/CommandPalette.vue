@@ -20,7 +20,7 @@
         <UButton v-if="closeIcon" :icon="closeIcon" variant="transparent" class="absolute right-3" @click="onClear" />
       </div>
 
-      <ComboboxOptions v-if="groups.length" static hold class="relative flex-1 overflow-y-auto divide-y u-divide-gray-100 scroll-py-2">
+      <ComboboxOptions v-if="groups.length" static hold class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2">
         <CommandPaletteGroup v-for="group of groups" :key="group.key" :group="group" />
       </ComboboxOptions>
 
@@ -126,7 +126,7 @@ function activateFirstOption () {
   }, 0)
 }
 
-function onSelect (option) {
+function onSelect (option: Command) {
   if (option.disabled) {
     return
   }
@@ -140,9 +140,11 @@ function onSelect (option) {
   emit('update:modelValue', option)
 
   // waiting for modal to be closed
-  setTimeout(() => {
-    query.value = ''
-  }, 300)
+  if (!option.prevent) {
+    setTimeout(() => {
+      query.value = ''
+    }, 300)
+  }
 }
 
 function onClear () {
