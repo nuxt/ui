@@ -2,9 +2,10 @@ import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlug
 import { defu } from 'defu'
 import colors from 'tailwindcss/colors.js'
 import type { Config } from 'tailwindcss'
+// @ts-ignore
 import { name, version } from '../package.json'
-import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
-import defaultPreset from './runtime/presets/default'
+import { colorsAsRegex, excludeColors } from '../utils/colors'
+import defaultPreset from '../presets/default'
 
 // @ts-ignore
 delete colors.lightBlue
@@ -66,13 +67,9 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults,
   async setup (options, nuxt) {
-    const { preset = {}, prefix, colors: { primary = 'indigo', gray = 'gray' } = {}, tailwindcss: { theme = {} } = {} } = options
-
-    const { resolve } = createResolver(import.meta.url)
+    const { preset = {}, colors: { primary = 'indigo', gray = 'gray' } = {}, tailwindcss: { theme = {} } = {} } = options
 
     // Transpile runtime
-    const runtimeDir = resolve('./runtime')
-    nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@iconify/vue')
 
     // @ts-ignore
@@ -111,76 +108,18 @@ export default defineNuxtModule<ModuleOptions>({
 
       const ui: object = defu(preset, defaultPreset(variantColors))
 
+      console.log(ui)
+
       addTemplate({
         filename: 'ui.mjs',
         getContents: () => `export default ${JSON.stringify(ui)}`
       })
     })
 
-    await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
-      viewer: false,
       config: {
-        darkMode: 'class',
         theme,
-        plugins: [
-          require('@tailwindcss/forms'),
-          require('@tailwindcss/line-clamp'),
-          require('@tailwindcss/aspect-ratio'),
-          require('@tailwindcss/typography')
-        ],
-        content: [
-          resolve(runtimeDir, 'components/**/*.{vue,js,ts}'),
-          resolve(runtimeDir, 'presets/*.{mjs,js,ts}')
-        ],
-        safelist: [
-          'dark',
-          {
-            pattern: /rounded-(sm|md|lg|xl|2xl|3xl)/,
-            variants: ['sm']
-          }
-        ]
       },
-      cssPath: resolve(runtimeDir, 'tailwind.css')
-    })
-
-    addPlugin(resolve(runtimeDir, 'plugins', 'toast.client'))
-    addPlugin(resolve(runtimeDir, 'plugins', 'clipboard.client'))
-
-    addComponentsDir({
-      path: resolve(runtimeDir, 'components', 'elements'),
-      prefix,
-      watch: false
-    })
-    addComponentsDir({
-      path: resolve(runtimeDir, 'components', 'feedback'),
-      prefix,
-      watch: false
-    })
-    addComponentsDir({
-      path: resolve(runtimeDir, 'components', 'forms'),
-      prefix,
-      watch: false
-    })
-    addComponentsDir({
-      path: resolve(runtimeDir, 'components', 'layout'),
-      prefix,
-      watch: false
-    })
-    addComponentsDir({
-      path: resolve(runtimeDir, 'components', 'navigation'),
-      prefix,
-      watch: false
-    })
-    addComponentsDir({
-      path: resolve(runtimeDir, 'components', 'overlays'),
-      prefix,
-      watch: false
-    })
-
-    // Add composables
-    nuxt.hook('autoImports:dirs', (dirs) => {
-      dirs.push(resolve(runtimeDir, 'composables'))
     })
   }
 })

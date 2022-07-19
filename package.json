@@ -30,6 +30,8 @@
     "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
     "@nuxtjs/color-mode": "^3.1.4",
     "@nuxtjs/tailwindcss": "^5.3.0",
+    "@nuxt-themes/config": "npm:@nuxt-themes/config-edge@latest",
+    "@nuxtjs/design-tokens": "npm:@nuxtjs/design-tokens-edge@latest",
     "@popperjs/core": "^2.11.5",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.2",
@@ -48,6 +50,7 @@
     "@types/lodash-es": "^4.17.6",
     "eslint": "^8.20.0",
     "nuxt": "npm:nuxt3@latest",
+    "@nuxt-themes/docus": "npm:@nuxt-themes/docus-edge@latest",
     "standard-version": "^9.5.0"
   },
   "build": {

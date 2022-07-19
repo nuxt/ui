@@ -1,8 +1,8 @@
 import { defineNuxtConfig } from 'nuxt'
-import module from '../src/module'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
+  extends: ['@nuxt-themes/docus', '../'],
   meta: {
     title: '@nuxthq/ui',
     meta: [
@@ -12,9 +12,6 @@ export default defineNuxtConfig({
       { rel: 'stylesheet', href: 'https://rsms.me/inter/inter.css' }
     ]
   },
-  buildModules: [
-    module
-  ],
   components: {
     global: true
   },

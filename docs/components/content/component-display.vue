@@ -1,10 +1,10 @@
 <template>
   <UCard v-if="component" class="relative flex flex-col lg:h-[calc(100vh-10rem)]" body-class="px-4 py-5 sm:p-6 relative" footer-class="flex flex-col flex-1 overflow-hidden">
     <div class="flex justify-center">
-      <component :is="`U${defaultProps[params.component].component.name}`" v-if="defaultProps[params.component] && defaultProps[params.component].component" v-bind="defaultProps[params.component].component.props" />
+      <component :is="`U${defaultProps[component].component.name}`" v-if="defaultProps[component] && defaultProps[component].component" v-bind="defaultProps[component].component.props" />
 
       <component :is="is" v-bind="{ ...boundProps, ...eventProps }">
-        <template v-for="[key, slot] of Object.entries(defaultProps[params.component]?.slots || {}) || []" #[key]>
+        <template v-for="[key, slot] of Object.entries(defaultProps[component]?.slots || {}) || []" #[key]>
           <template v-if="Array.isArray(slot)">
             <div :key="key">
               <component
@@ -25,10 +25,10 @@
       </component>
     </div>
 
-    <template v-if="props.length" #footer>
+    <template v-if="refProps.length" #footer>
       <div class="flex-1 px-4 py-5 sm:p-6 space-y-3 lg:overflow-y-auto">
         <UFormGroup
-          v-for="prop of props"
+          v-for="prop of refProps"
           :key="prop.key"
           class="capitalize"
           :name="prop.key"
@@ -92,16 +92,23 @@
   </UCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
+import { computed } from '#imports'
 import $ui from '#build/ui'
 
+const props = defineProps({
+  component: {
+    type: String,
+    required: true
+  }
+})
+
 const nuxtApp = useNuxtApp()
-const { params } = useRoute()
 
-const is = `U${params.component}`
+const is = computed(() => `U${props.component}`)
 
-const component = nuxtApp.vueApp.component(is)
+const component = computed(() => nuxtApp.vueApp.component(is.value))
 
 const people = [
   { id: 1, label: 'Durward Reynolds', disabled: false },
@@ -344,66 +351,67 @@ const defaultProps = {
   }
 }
 
-const componentDefaultProps = defaultProps[params.component] || {}
-const { props: componentProps } = await component.__asyncLoader()
+const componentDefaultProps = computed(() => defaultProps[props.component] || {})
+const { props: componentProps } = await component.value.__asyncLoader()
 
 function lowercaseFirstLetter (string) {
   return string.charAt(0).toLowerCase() + string.slice(1)
 }
 
-const refProps = Object.entries(componentProps).map(([key, prop]) => {
-  const defaultValue = componentDefaultProps[key]
-  const propDefault = (typeof prop.default === 'function' ? prop.default() : prop.default)
-  let value = defaultValue !== undefined ? defaultValue : propDefault
-  let type = prop.type
-  if (Array.isArray(type)) {
-    type = type[0].name
-  } else {
-    type = type.name
-  }
-
-  let values
-  if (prop.validator) {
-    const arrayRegex = prop.validator.toString().match(/\[.*\]/g, '')
-    if (arrayRegex) {
-      values = JSON.parse(arrayRegex[0].replace(/'/g, '"')).filter(Boolean)
+const refProps = computed(() => Object.entries(componentProps).map(
+  ([key, prop]) => {
+    const defaultValue = componentDefaultProps.value[key]
+    const propDefault = (typeof prop.default === 'function' ? prop.default() : prop.default)
+    let value = defaultValue !== undefined ? defaultValue : propDefault
+    let type = prop.type
+    if (Array.isArray(type)) {
+      type = type[0].name
     } else {
-      const $uiProp = $ui[lowercaseFirstLetter(params.component)][key]
-      if ($uiProp) {
-        values = Object.keys($uiProp).filter(Boolean)
+      type = type.name
+    }
+
+    let values
+    if (prop.validator) {
+      const arrayRegex = prop.validator.toString().match(/\[.*\]/g, '')
+      if (arrayRegex) {
+        values = JSON.parse(arrayRegex[0].replace(/'/g, '"')).filter(Boolean)
+      } else {
+        const $uiProp = $ui[lowercaseFirstLetter(props.component)][key]
+        if ($uiProp) {
+          values = Object.keys($uiProp).filter(Boolean)
+        }
       }
     }
-  }
 
-  if (value) {
-    if (type === 'String' && typeof value === 'string') {
-      value = value.replace(/^'(.*)'$/, '$1')
-    } else if (type === 'Array') {
-      value = JSON.stringify(value)
+    if (value) {
+      if (type === 'String' && typeof value === 'string') {
+        value = value.replace(/^'(.*)'$/, '$1')
+      } else if (type === 'Array') {
+        value = JSON.stringify(value)
+      }
     }
-  }
 
-  return {
-    key,
-    type,
-    value,
-    values,
-    default: propDefault
-  }
-})
+    return {
+      key,
+      type,
+      value,
+      values,
+      default: propDefault
+    }
+  })
+)
 
 const eventProps = Object.entries(componentDefaultProps)
-  .filter(([key]) => !refProps.find(prop => prop.key === key))
+  .filter(([key]) => !refProps.value.find(prop => prop.key === key))
   .filter(([key]) => !['slots'].includes(key))
   .reduce((acc, [key, value]) => {
     acc[key] = value
     return acc
   }, {})
 
-const props = ref(refProps)
 const boundProps = computed(() => {
   const bound = {}
-  for (const prop of props.value) {
+  for (const prop of refProps.value) {
     let value = prop.value
     if (value === null) {
       continue
@@ -437,8 +445,8 @@ const onCopy = () => {
 }
 
 const code = computed(() => {
-  let code = `<U${params.component}`
-  for (const prop of props.value) {
+  let code = `<U${props.component}`
+  for (const prop of refProps.value) {
     if (prop.value === null) {
       continue
     }
