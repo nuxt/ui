@@ -46,8 +46,8 @@ import {
 import type { Ref } from 'vue'
 import { ref, onMounted } from 'vue'
 import NuxtLink from '#app/components/nuxt-link'
-import Icon from '../elements/Icon'
-import Avatar from '../elements/Avatar'
+import Icon from '../elements/Icon.vue'
+import Avatar from '../elements/Avatar.vue'
 import { classNames, usePopper } from '../../utils'
 import $ui from '#build/ui'
 

@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import Link from '../elements/Link'
+import Link from '../elements/Link.vue'
 import $ui from '#build/ui'
 
 defineProps({

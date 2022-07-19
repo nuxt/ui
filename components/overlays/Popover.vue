@@ -28,7 +28,6 @@
 import type { Ref } from 'vue'
 import { ref, onMounted } from 'vue'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-
 import { usePopper } from '../../utils'
 
 const props = defineProps({

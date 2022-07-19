@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import Icon from '../elements/Icon'
+import Icon from '../elements/Icon.vue'
 
 const props = defineProps({
   variant: {

@@ -38,9 +38,9 @@
 </template>
 
 <script setup lang="ts">
-import Icon from '../elements/Icon'
-import Link from '../elements/Link'
-import Avatar from '../elements/Avatar'
+import Icon from '../elements/Icon.vue'
+import Link from '../elements/Link.vue'
+import Avatar from '../elements/Avatar.vue'
 import $ui from '#build/ui'
 
 defineProps({

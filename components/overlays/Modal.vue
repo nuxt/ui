@@ -57,7 +57,7 @@
 import { computed } from 'vue'
 import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { classNames } from '../../utils/'
-import Card from '../layout/Card'
+import Card from '../layout/Card.vue'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -103,7 +103,7 @@ const emit = defineEmits(['update:modelValue', 'close'])
 
 const isOpen = computed({
   get () {
-    return props.modelValue
+    return props.modelValue || false
   },
   set (value) {
     emit('update:modelValue', value)

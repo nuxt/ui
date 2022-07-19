@@ -57,9 +57,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
-
-import Icon from '../elements/Icon'
-import Button from '../elements/Button'
+import Icon from '../elements/Icon.vue'
+import Button from '../elements/Button.vue'
 import { useTimer } from '../../composables/useTimer'
 
 const props = defineProps({

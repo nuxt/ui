@@ -18,31 +18,37 @@ export default defineNuxtConfig({
   components: [
     {
       path: resolveThemeDir('components/elements'),
+      global: true,
       prefix,
       watch: false
     },
     {
       path: resolveThemeDir('components/feedback'),
+      global: true,
       prefix,
       watch: false
     },
     {
       path: resolveThemeDir('components/forms'),
+      global: true,
       prefix,
       watch: false
     },
     {
       path: resolveThemeDir('components/layout'),
+      global: true,
       prefix,
       watch: false
     },
     {
       path: resolveThemeDir('components/navigation'),
+      global: true,
       prefix,
       watch: false
     },
     {
       path: resolveThemeDir('components/overlays'),
+      global: true,
       prefix,
       watch: false
     }

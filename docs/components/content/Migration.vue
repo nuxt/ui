@@ -1,66 +1,52 @@
 <template>
-  <div class="space-y-4">
-    <div class="pb-10 border-b u-border-gray-200 mb-10">
-      <div>
-        <h1 class="inline-block text-3xl font-extrabold u-text-gray-900 tracking-tight">
-          Migration
-        </h1>
-      </div>
-
-      <p class="mt-1 text-lg u-text-gray-500">
-        Check out the components that have been migrated to Vue3 coming from `@nuxthq/volta-ui`.
-      </p>
-    </div>
-
-    <UCard body-class>
-      <table class="min-w-full divide-y u-divide-gray-200">
-        <thead class="u-bg-gray-50">
-          <tr>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
-              Component
-            </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
-              Nuxt3 ready
-            </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
-              Composition API
-            </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
-              Preset system
-            </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
-              Typescript
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(component, index) of components" :key="index" :class="index % 2 === 0 ? 'u-bg-white' : 'u-bg-gray-50'">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium u-text-gray-900">
-              <NuxtLink :to="component.to" class="hover:underline">
-                {{ component.label }}
-              </NuxtLink>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
-              <span v-if="component.nuxt3 || component.capi">✅</span>
-              <span v-else>❌</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
-              <span v-if="component.capi">✅</span>
-              <span v-else>❌</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
-              <span v-if="component.preset">✅</span>
-              <span v-else>❌</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
-              <span v-if="component.typescript">✅</span>
-              <span v-else>❌</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </UCard>
-  </div>
+  <UCard body-class>
+    <table class="min-w-full divide-y u-divide-gray-200">
+      <thead class="u-bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
+            Component
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
+            Nuxt3 ready
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
+            Composition API
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
+            Preset system
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium u-text-gray-500 uppercase tracking-wider">
+            Typescript
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(component, index) of components" :key="index" :class="index % 2 === 0 ? 'u-bg-white' : 'u-bg-gray-50'">
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium u-text-gray-900">
+            <NuxtLink :to="component.to" class="hover:underline">
+              {{ component.label }}
+            </NuxtLink>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
+            <span v-if="component.nuxt3 || component.capi">✅</span>
+            <span v-else>❌</span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
+            <span v-if="component.capi">✅</span>
+            <span v-else>❌</span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
+            <span v-if="component.preset">✅</span>
+            <span v-else>❌</span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm u-text-gray-500">
+            <span v-if="component.typescript">✅</span>
+            <span v-else>❌</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </UCard>
 </template>
 
 <script setup>

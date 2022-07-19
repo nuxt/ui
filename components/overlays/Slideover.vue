@@ -43,7 +43,7 @@
 import { computed } from 'vue'
 import type { WritableComputedRef, PropType } from 'vue'
 import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
-import { classNames } from '../../utils/'
+import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
 const props = defineProps({

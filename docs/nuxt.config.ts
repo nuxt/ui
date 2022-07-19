@@ -2,7 +2,7 @@ import { defineNuxtConfig } from 'nuxt'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
-  extends: ['@nuxt-themes/docus', '../'],
+  extends: ['../', '@nuxt-themes/docus'],
   meta: {
     title: '@nuxthq/ui',
     meta: [

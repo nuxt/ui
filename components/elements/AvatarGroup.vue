@@ -18,8 +18,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { classNames } from '../../utils/'
-import Avatar from './Avatar'
+import { classNames } from '../../utils'
+import Avatar from './Avatar.vue'
 import $ui from '#build/ui'
 
 const props = defineProps({

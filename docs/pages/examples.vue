@@ -248,6 +248,11 @@
 </template>
 
 <script setup>
+definePageMeta({
+  layout: 'docs',
+  documentDriven: false
+})
+
 const isModalOpen = ref(false)
 
 const people = [
