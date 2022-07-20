@@ -11,9 +11,9 @@
   >
     <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
 
-    <ComboboxButton ref="trigger" as="div">
-      <slot :open="open">
-        <button :class="selectCustomClass">
+    <ComboboxButton ref="trigger" v-slot="{ disabled }" as="div">
+      <slot :open="open" :disabled="disabled">
+        <button :class="selectCustomClass" :disabled="disabled">
           <slot name="label">
             <span v-if="modelValue" class="block truncate">{{ modelValue[textAttribute] }}</span>
             <span v-else class="block truncate u-text-gray-400">{{ placeholder }}</span>
