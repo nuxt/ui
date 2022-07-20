@@ -4,6 +4,7 @@
     :model-value="modelValue"
     :multiple="multiple"
     :nullable="nullable"
+    :disabled="disabled"
     as="div"
     :class="wrapperClass"
     @update:model-value="$emit('update:modelValue', $event)"
@@ -117,6 +118,10 @@ const props = defineProps({
     }
   },
   required: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
     type: Boolean,
     default: false
   },
