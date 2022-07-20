@@ -47,7 +47,7 @@ import { computed } from 'vue'
 import { get } from 'lodash-es'
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   modelValue: {
@@ -78,20 +78,20 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($ui.select.size).includes(value)
+      return Object.keys($theme('ui.select.size').value).includes(value)
     }
   },
   wrapperClass: {
     type: String,
-    default: () => $ui.select.wrapper
+    default () { return $theme('ui.select.wrapper').value }
   },
   baseClass: {
     type: String,
-    default: () => $ui.select.base
+    default () { return $theme('ui.select.base').value }
   },
   iconBaseClass: {
     type: String,
-    default: () => $ui.select.icon.base
+    default () { return $theme('ui.select.icon.base').value }
   },
   customClass: {
     type: String,
@@ -101,7 +101,7 @@ const props = defineProps({
     type: String,
     default: 'default',
     validator (value: string) {
-      return Object.keys($ui.select.appearance).includes(value)
+      return Object.keys($theme('ui.select.appearance').value).includes(value)
     }
   },
   textAttribute: {
@@ -179,11 +179,11 @@ const normalizedValue = computed(() => {
 const selectClass = computed(() => {
   return classNames(
     props.baseClass,
-    $ui.select.size[props.size],
-    $ui.select.spacing[props.size],
-    $ui.select.appearance[props.appearance],
-    !!props.icon && $ui.select.leading.spacing[props.size],
-    $ui.select.trailing.spacing[props.size],
+    $theme('ui.select.size').value[props.size],
+    $theme('ui.select.spacing').value[props.size],
+    $theme('ui.select.appearance').value[props.appearance],
+    !!props.icon && $theme('ui.select.leading.spacing').value[props.size],
+    $theme('ui.select.trailing.spacing').value[props.size],
     props.customClass
   )
 })
@@ -191,12 +191,12 @@ const selectClass = computed(() => {
 const iconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
-    $ui.select.icon.size[props.size],
-    !!props.icon && $ui.select.icon.leading.spacing[props.size]
+    $theme('ui.select.icon.size').value[props.size],
+    !!props.icon && $theme('ui.select.icon.leading.spacing').value[props.size]
   )
 })
 
-const iconWrapperClass = $ui.select.icon.leading.wrapper
+const iconWrapperClass = $theme('ui.select.icon.leading.wrapper').value
 </script>
 
 <script lang="ts">

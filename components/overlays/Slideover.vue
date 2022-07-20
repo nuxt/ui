@@ -44,7 +44,7 @@ import { computed } from 'vue'
 import type { WritableComputedRef, PropType } from 'vue'
 import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   modelValue: {
@@ -58,23 +58,23 @@ const props = defineProps({
   },
   baseClass: {
     type: String,
-    default: () => $ui.slideover.base
+    default () { return $theme('ui.slideover.base').value }
   },
   backgroundClass: {
     type: String,
-    default: () => $ui.slideover.background
+    default () { return $theme('ui.slideover.background').value }
   },
   overlayClass: {
     type: String,
-    default: () => $ui.slideover.overlay
+    default () { return $theme('ui.slideover.overlay').value }
   },
   widthClass: {
     type: String,
-    default: () => $ui.slideover.width
+    default () { return $theme('ui.slideover.width').value }
   },
   headerClass: {
     type: String,
-    default: () => $ui.slideover.header
+    default () { return $theme('ui.slideover.header').value }
   }
 })
 const emit = defineEmits(['update:modelValue'])

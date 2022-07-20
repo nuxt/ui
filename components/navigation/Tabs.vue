@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import Link from '../elements/Link.vue'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 defineProps({
   links: {
@@ -25,19 +25,19 @@ defineProps({
   },
   wrapperClass: {
     type: String,
-    default: () => $ui.tabs.wrapper
+    default () { return $theme('ui.tabs.wrapper').value }
   },
   baseClass: {
     type: String,
-    default: () => $ui.tabs.base
+    default () { return $theme('ui.tabs.base').value }
   },
   activeClass: {
     type: String,
-    default: () => $ui.tabs.active
+    default () { return $theme('ui.tabs.active').value }
   },
   inactiveClass: {
     type: String,
-    default: () => $ui.tabs.inactive
+    default () { return $theme('ui.tabs.inactive').value }
   }
 })
 </script>

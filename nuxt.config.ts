@@ -9,7 +9,7 @@ const resolveThemeDir = (path: string) => resolve(themeDir, path)
 const prefix = 'U'
 
 export default defineNuxtConfig({
-  modules: ['@nuxt-themes/config/module', '@nuxtjs/design-tokens/module', module, '@nuxtjs/color-mode'],
+  modules: ['@nuxt-themes/config/module', '@nuxtjs/design-tokens/module', module, '@nuxtjs/color-mode', '@nuxtjs/tailwindcss'],
 
   css: [
     resolveThemeDir('app/tailwind.css')
@@ -56,5 +56,9 @@ export default defineNuxtConfig({
 
   tailwindcss: {
     viewer: false
+  },
+
+  build: {
+    transpile: ['@popperjs/core', '@headlessui/vue', '@iconify/vue']
   }
 })

@@ -95,7 +95,6 @@
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
 import { computed } from '#imports'
-import $ui from '#build/ui'
 
 const props = defineProps({
   component: {
@@ -105,6 +104,8 @@ const props = defineProps({
 })
 
 const nuxtApp = useNuxtApp()
+
+const $ui = nuxtApp.$ui
 
 const is = computed(() => `U${props.component}`)
 
@@ -376,7 +377,7 @@ const refProps = computed(() => Object.entries(componentProps).map(
       if (arrayRegex) {
         values = JSON.parse(arrayRegex[0].replace(/'/g, '"')).filter(Boolean)
       } else {
-        const $uiProp = $ui[lowercaseFirstLetter(props.component)][key]
+        const $uiProp = $ui.value[lowercaseFirstLetter(props.component)][key]
         if ($uiProp) {
           values = Object.keys($uiProp).filter(Boolean)
         }

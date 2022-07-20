@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   value: {
@@ -62,23 +62,23 @@ const props = defineProps({
   },
   wrapperClass: {
     type: String,
-    default: () => $ui.checkbox.wrapper
+    default () { return $theme('ui.checkbox.wrapper').value }
   },
   baseClass: {
     type: String,
-    default: () => $ui.checkbox.base
+    default () { return $theme('ui.checkbox.base').value }
   },
   labelClass: {
     type: String,
-    default: () => $ui.checkbox.label
+    default () { return $theme('ui.checkbox.label').value }
   },
   requiredClass: {
     type: String,
-    default: () => $ui.checkbox.required
+    default () { return $theme('ui.checkbox.required').value }
   },
   helpClass: {
     type: String,
-    default: () => $ui.checkbox.help
+    default () { return $theme('ui.checkbox.help').value }
   },
   customClass: {
     type: String,

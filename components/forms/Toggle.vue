@@ -18,7 +18,7 @@
 import { computed } from 'vue'
 import { Switch } from '@headlessui/vue'
 import Icon from '../elements/Icon.vue'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   modelValue: {
@@ -35,47 +35,47 @@ const props = defineProps({
   },
   baseClass: {
     type: String,
-    default: () => $ui.toggle.base
+    default () { return $theme('ui.toggle.base').value }
   },
   activeClass: {
     type: String,
-    default: () => $ui.toggle.active
+    default () { return $theme('ui.toggle.active').value }
   },
   inactiveClass: {
     type: String,
-    default: () => $ui.toggle.inactive
+    default () { return $theme('ui.toggle.inactive').value }
   },
   containerBaseClass: {
     type: String,
-    default: () => $ui.toggle.container.base
+    default () { return $theme('ui.toggle.container.base').value }
   },
   containerActiveClass: {
     type: String,
-    default: () => $ui.toggle.container.active
+    default () { return $theme('ui.toggle.container.active').value }
   },
   containerInactiveClass: {
     type: String,
-    default: () => $ui.toggle.container.inactive
+    default () { return $theme('ui.toggle.container.inactive').value }
   },
   iconBaseClass: {
     type: String,
-    default: () => $ui.toggle.icon.base
+    default () { return $theme('ui.toggle.icon.base').value }
   },
   iconActiveClass: {
     type: String,
-    default: () => $ui.toggle.icon.active
+    default () { return $theme('ui.toggle.icon.active').value }
   },
   iconInactiveClass: {
     type: String,
-    default: () => $ui.toggle.icon.inactive
+    default () { return $theme('ui.toggle.icon.inactive').value }
   },
   iconOnClass: {
     type: String,
-    default: () => $ui.toggle.icon.on
+    default () { return $theme('ui.toggle.icon.on').value }
   },
   iconOffClass: {
     type: String,
-    default: () => $ui.toggle.icon.off
+    default () { return $theme('ui.toggle.icon.off').value }
   }
 })
 

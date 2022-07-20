@@ -41,7 +41,7 @@
 import Icon from '../elements/Icon.vue'
 import Link from '../elements/Link.vue'
 import Avatar from '../elements/Avatar.vue'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 defineProps({
   links: {
@@ -50,59 +50,59 @@ defineProps({
   },
   wrapperClass: {
     type: String,
-    default: () => $ui.verticalNavigation.wrapper
+    default () { return $theme('ui.verticalNavigation.wrapper').value }
   },
   baseClass: {
     type: String,
-    default: () => $ui.verticalNavigation.base
+    default () { return $theme('ui.verticalNavigation.base').value }
   },
   spacingClass: {
     type: String,
-    default: () => $ui.verticalNavigation.spacing
+    default () { return $theme('ui.verticalNavigation.spacing').value }
   },
   activeClass: {
     type: String,
-    default: () => $ui.verticalNavigation.active
+    default () { return $theme('ui.verticalNavigation.active').value }
   },
   inactiveClass: {
     type: String,
-    default: () => $ui.verticalNavigation.inactive
+    default () { return $theme('ui.verticalNavigation.inactive').value }
   },
   iconBaseClass: {
     type: String,
-    default: () => $ui.verticalNavigation.icon.base
+    default () { return $theme('ui.verticalNavigation.icon.base').value }
   },
   iconSpacingClass: {
     type: String,
-    default: () => $ui.verticalNavigation.icon.spacing
+    default () { return $theme('ui.verticalNavigation.icon.spacing').value }
   },
   iconActiveClass: {
     type: String,
-    default: () => $ui.verticalNavigation.icon.active
+    default () { return $theme('ui.verticalNavigation.icon.active').value }
   },
   iconInactiveClass: {
     type: String,
-    default: () => $ui.verticalNavigation.icon.inactive
+    default () { return $theme('ui.verticalNavigation.icon.inactive').value }
   },
   avatarBaseClass: {
     type: String,
-    default: () => $ui.verticalNavigation.avatar.base
+    default () { return $theme('ui.verticalNavigation.avatar.base').value }
   },
   avatarSpacingClass: {
     type: String,
-    default: () => $ui.verticalNavigation.avatar.spacing
+    default () { return $theme('ui.verticalNavigation.avatar.spacing').value }
   },
   badgeBaseClass: {
     type: String,
-    default: () => $ui.verticalNavigation.badge.base
+    default () { return $theme('ui.verticalNavigation.badge.base').value }
   },
   badgeActiveClass: {
     type: String,
-    default: () => $ui.verticalNavigation.badge.active
+    default () { return $theme('ui.verticalNavigation.badge.active').value }
   },
   badgeInactiveClass: {
     type: String,
-    default: () => $ui.verticalNavigation.badge.inactive
+    default () { return $theme('ui.verticalNavigation.badge.inactive').value }
   }
 })
 </script>

@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import Link from '../elements/Link.vue'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 defineProps({
   links: {
@@ -25,19 +25,19 @@ defineProps({
   },
   wrapperClass: {
     type: String,
-    default: () => $ui.pills.wrapper
+    default () { return $theme('ui.pills.wrapper').value }
   },
   baseClass: {
     type: String,
-    default: () => $ui.pills.base
+    default () { return $theme('ui.pills.base').value }
   },
   activeClass: {
     type: String,
-    default: () => $ui.pills.active
+    default () { return $theme('ui.pills.active').value }
   },
   inactiveClass: {
     type: String,
-    default: () => $ui.pills.inactive
+    default () { return $theme('ui.pills.inactive').value }
   }
 })
 </script>

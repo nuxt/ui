@@ -15,7 +15,7 @@ export default defineTheme({
     releases: true
   },
   aside: {
-    level: 0
+    level: 1
   },
   header: {
     title: '@nuxthq/ui',

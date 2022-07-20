@@ -42,14 +42,13 @@ import {
   MenuItems,
   MenuItem
 } from '@headlessui/vue'
-
 import type { Ref } from 'vue'
 import { ref, onMounted } from 'vue'
 import NuxtLink from '#app/components/nuxt-link'
 import Icon from '../elements/Icon.vue'
 import Avatar from '../elements/Avatar.vue'
 import { classNames, usePopper } from '../../utils'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   items: {
@@ -79,39 +78,39 @@ const props = defineProps({
   },
   wrapperClass: {
     type: String,
-    default: () => $ui.dropdown.wrapper
+    default () { return $theme('ui.dropdown.wrapper').value }
   },
   containerClass: {
     type: String,
-    default: () => $ui.dropdown.container
+    default () { return $theme('ui.dropdown.container').value }
   },
   baseClass: {
     type: String,
-    default: () => $ui.dropdown.base
+    default () { return $theme('ui.dropdown.base').value }
   },
   itemBaseClass: {
     type: String,
-    default: () => $ui.dropdown.item.base
+    default () { return $theme('ui.dropdown.item.base').value }
   },
   itemActiveClass: {
     type: String,
-    default: () => $ui.dropdown.item.active
+    default () { return $theme('ui.dropdown.item.active').value }
   },
   itemInactiveClass: {
     type: String,
-    default: () => $ui.dropdown.item.inactive
+    default () { return $theme('ui.dropdown.item.inactive').value }
   },
   itemDisabledClass: {
     type: String,
-    default: () => $ui.dropdown.item.disabled
+    default () { return $theme('ui.dropdown.item.disabled').value }
   },
   itemIconClass: {
     type: String,
-    default: () => $ui.dropdown.item.icon
+    default () { return $theme('ui.dropdown.item.icon').value }
   },
   itemAvatarClass: {
     type: String,
-    default: () => $ui.dropdown.item.avatar
+    default () { return $theme('ui.dropdown.item.avatar').value }
   }
 })
 

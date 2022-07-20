@@ -432,9 +432,9 @@
     fastq "^1.6.0"
 
 "@nuxt-themes/config@npm:@nuxt-themes/config-edge@latest":
-  version "0.0.1-27636681.ac2951c"
-  resolved "https://registry.yarnpkg.com/@nuxt-themes/config-edge/-/config-edge-0.0.1-27636681.ac2951c.tgz#56db6829259658a01d5f360923133186543ec621"
-  integrity sha512-ylt723BisRtJUbKxlNOhwkW1jYF+2MAGPmTY/xhzSIzfym6Fkl9JWa9Hcr+Qbd9q51Z/O/bctUXIPPRcAu4Lew==
+  version "0.0.1-27637916.9117bea"
+  resolved "https://registry.yarnpkg.com/@nuxt-themes/config-edge/-/config-edge-0.0.1-27637916.9117bea.tgz#9e8f83263502e02b294d551b9bf5da4c595e512b"
+  integrity sha512-cPXZ/4LUCzvN+OEcfpnm6eV3vS54TiJ32tS7FWCn0jpnQQ7nvWVhPjy24zEPXAXrCze5a8V90clWNwieUEiZvw==
   dependencies:
     "@nuxt/kit" "^3.0.0-rc.6"
     untyped "^0.4.4"
@@ -729,9 +729,9 @@
     pathe "^0.3.0"
 
 "@nuxtjs/design-tokens@npm:@nuxtjs/design-tokens-edge@latest":
-  version "0.0.1-27636649.805494"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/design-tokens-edge/-/design-tokens-edge-0.0.1-27636649.805494.tgz#48dcfe7b2ba80c2cad6e2bb87fcae244f16781f4"
-  integrity sha512-9NQVlyJFQVVAv+x60El8qZvErUp2TA4m280JFwFoAMztwK96aUToXByls8I+WwfhNabHi8h/OaI2HaITKuCyBA==
+  version "0.0.1-27637916.afdc0de"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/design-tokens-edge/-/design-tokens-edge-0.0.1-27637916.afdc0de.tgz#ada2da1c88a5b9cd579ee9356a47382a103f39b5"
+  integrity sha512-RQHTx7HAmi7OOydsXHTcKjYjjBSDlayzhJ7q6kRvqKqJmuS8l/ugSfNmgCQIJl31Q6ez7LI2tLzFLUyqP+9e3g==
   dependencies:
     "@nuxt/kit" "^3.0.0-rc.6"
     browser-style-dictionary "^3.1.1-browser.1"
@@ -2774,9 +2774,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.188:
-  version "1.4.194"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.194.tgz#2f83fcec5067907044a3d502ac7c3efb1fe6430b"
-  integrity sha512-ola5UH0xAP1oYY0FFUsPvwtucEzCQHucXnT7PQ1zjHJMccZhCDktEugI++JUR3YuIs7Ff7afz+OVEhVAIMhLAQ==
+  version "1.4.195"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.195.tgz#139b2d95a42a3f17df217589723a1deac71d1473"
+  integrity sha512-vefjEh0sk871xNmR5whJf9TEngX+KTKS3hOHpjoMpauKkwlGwtMz1H8IaIjAT/GNnX0TbGwAdmVoXCAzXf+PPg==
 
 emoji-regex@^8.0.0:
   version "8.0.0"

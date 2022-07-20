@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   value: {
@@ -62,23 +62,23 @@ const props = defineProps({
   },
   wrapperClass: {
     type: String,
-    default: () => $ui.radio.wrapper
+    default () { return $theme('ui.radio.wrapper').value }
   },
   baseClass: {
     type: String,
-    default: () => $ui.radio.base
+    default () { return $theme('ui.radio.base').value }
   },
   labelClass: {
     type: String,
-    default: () => $ui.radio.label
+    default () { return $theme('ui.radio.label').value }
   },
   requiredClass: {
     type: String,
-    default: () => $ui.radio.required
+    default () { return $theme('ui.radio.required').value }
   },
   helpClass: {
     type: String,
-    default: () => $ui.radio.help
+    default () { return $theme('ui.radio.help').value }
   },
   customClass: {
     type: String,

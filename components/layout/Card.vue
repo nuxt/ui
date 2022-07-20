@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   padded: {
@@ -38,34 +38,34 @@ const props = defineProps({
   },
   baseClass: {
     type: String,
-    default: () => $ui.card.base
+    default () { return $theme('ui.card.base').value }
   },
   backgroundClass: {
     type: String,
-    default: () => $ui.card.background
+    default () { return $theme('ui.card.background').value }
   },
   borderColorClass: {
     type: String,
-    default: () => $ui.card.border
+    default () { return $theme('ui.card.border').value }
   },
   shadowClass: {
     type: String,
-    default: () => $ui.card.shadow
+    default () { return $theme('ui.card.shadow').value }
   },
   ringClass: {
     type: String,
-    default: () => $ui.card.ring
+    default () { return $theme('ui.card.ring').value }
   },
   roundedClass: {
     type: String,
-    default: () => $ui.card.rounded,
+    default () { return $theme('ui.card.rounded').value },
     validator (value: string) {
       return !value || ['sm', 'md', 'lg', 'xl', '2xl', '3xl'].map(size => `rounded-${size}`).includes(value)
     }
   },
   bodyClass: {
     type: String,
-    default: () => $ui.card.body
+    default () { return $theme('ui.card.body').value }
   },
   bodyBackgroundClass: {
     type: String,
@@ -73,7 +73,7 @@ const props = defineProps({
   },
   headerClass: {
     type: String,
-    default: () => $ui.card.header
+    default () { return $theme('ui.card.header').value }
   },
   headerBackgroundClass: {
     type: String,
@@ -81,7 +81,7 @@ const props = defineProps({
   },
   footerClass: {
     type: String,
-    default: () => $ui.card.footer
+    default () { return $theme('ui.card.footer').value }
   },
   footerBackgroundClass: {
     type: String,

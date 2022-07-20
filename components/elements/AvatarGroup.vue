@@ -20,7 +20,7 @@
 import { computed } from 'vue'
 import { classNames } from '../../utils'
 import Avatar from './Avatar.vue'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   group: {
@@ -40,11 +40,11 @@ const props = defineProps({
   },
   ringClass: {
     type: String,
-    default: () => $ui.avatarGroup.ring
+    default () { return $theme('ui.avatarGroup.ring').value }
   },
   marginClass: {
     type: String,
-    default: () => $ui.avatarGroup.margin
+    default () { return $theme('ui.avatarGroup.margin').value }
   }
 })
 

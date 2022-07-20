@@ -1,4 +1,6 @@
-export default (variantColors: string[]) => {
+import { defineTheme } from '@nuxt-themes/config'
+
+const defaultPreset = (variantColors: string[]) => {
   const button = {
     base: 'font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 focus:ring-offset-white dark:focus:ring-offset-black',
     rounded: 'rounded-md',
@@ -222,8 +224,11 @@ export default (variantColors: string[]) => {
   }
 
   const checkbox = {
-    ...radio,
-    base: `${radio.base} rounded`
+    wrapper: 'relative flex items-start',
+    base: 'h-4 w-4 text-primary-600 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-black u-border-gray-300 dark:checked:border-primary-600 disabled:opacity-50 disabled:cursor-not-allowed rounded',
+    label: 'font-medium u-text-gray-700',
+    required: 'text-red-400',
+    help: 'u-text-gray-500'
   }
 
   const card = {
@@ -412,3 +417,24 @@ export default (variantColors: string[]) => {
     slideover
   }
 }
+
+export default defineTheme({
+  ui: {
+    ...defaultPreset([
+      'green',
+      'yellow',
+      'orange',
+      'red',
+      'pear',
+      'teal',
+      'lightblue',
+      'blue',
+      'royalblue',
+      'indigo',
+      'purple',
+      'pink',
+      'ruby',
+      'primary'
+    ])
+  }
+})

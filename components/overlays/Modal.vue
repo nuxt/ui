@@ -58,7 +58,7 @@ import { computed } from 'vue'
 import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { classNames } from '../../utils/'
 import Card from '../layout/Card.vue'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   modelValue: {
@@ -71,31 +71,31 @@ const props = defineProps({
   },
   baseClass: {
     type: String,
-    default: () => $ui.modal.base
+    default () { return $theme('ui.modal.base').value }
   },
   backgroundClass: {
     type: String,
-    default: () => $ui.modal.background
+    default () { return $theme('ui.modal.background').value }
   },
   overlayClass: {
     type: String,
-    default: () => $ui.modal.overlay
+    default () { return $theme('ui.modal.overlay').value }
   },
   shadowClass: {
     type: String,
-    default: () => $ui.modal.shadow
+    default () { return $theme('ui.modal.shadow').value }
   },
   ringClass: {
     type: String,
-    default: () => $ui.modal.ring
+    default () { return $theme('ui.modal.ring').value }
   },
   roundedClass: {
     type: String,
-    default: () => $ui.modal.rounded
+    default () { return $theme('ui.modal.rounded').value }
   },
   widthClass: {
     type: String,
-    default: () => $ui.modal.width
+    default () { return $theme('ui.modal.width').value }
   }
 })
 

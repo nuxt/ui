@@ -32,7 +32,7 @@ import type { Ref } from 'vue'
 import { ref, computed, onMounted } from 'vue'
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   modelValue: {
@@ -81,7 +81,7 @@ const props = defineProps({
   },
   loadingIcon: {
     type: String,
-    default: () => $ui.input.icon.loading
+    default () { return $theme('ui.input.icon.loading').value }
   },
   trailing: {
     type: Boolean,
@@ -95,20 +95,20 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($ui.input.size).includes(value)
+      return Object.keys($theme('ui.input.size').value).includes(value)
     }
   },
   wrapperClass: {
     type: String,
-    default: () => $ui.input.wrapper
+    default () { return $theme('ui.input.wrapper').value }
   },
   baseClass: {
     type: String,
-    default: () => $ui.input.base
+    default () { return $theme('ui.input.base').value }
   },
   iconBaseClass: {
     type: String,
-    default: () => $ui.input.icon.base
+    default () { return $theme('ui.input.icon.base').value }
   },
   customClass: {
     type: String,
@@ -118,7 +118,7 @@ const props = defineProps({
     type: String,
     default: 'default',
     validator (value: string) {
-      return Object.keys($ui.input.appearance).includes(value)
+      return Object.keys($theme('ui.input.appearance').value).includes(value)
     }
   },
   loading: {
@@ -158,11 +158,11 @@ const isTrailing = computed(() => {
 const inputClass = computed(() => {
   return classNames(
     props.baseClass,
-    $ui.input.size[props.size],
-    $ui.input.spacing[props.size],
-    $ui.input.appearance[props.appearance],
-    isLeading.value && $ui.input.leading.spacing[props.size],
-    isTrailing.value && $ui.input.trailing.spacing[props.size],
+    $theme('ui.input.size').value[props.size],
+    $theme('ui.input.spacing').value[props.size],
+    $theme('ui.input.appearance').value[props.appearance],
+    isLeading.value && $theme('ui.input.leading.spacing').value[props.size],
+    isTrailing.value && $theme('ui.input.trailing.spacing').value[props.size],
     props.customClass
   )
 })
@@ -178,15 +178,15 @@ const iconName = computed(() => {
 const iconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
-    $ui.input.icon.size[props.size],
-    isLeading.value && $ui.input.icon.leading.spacing[props.size],
-    isTrailing.value && $ui.input.icon.trailing.spacing[props.size],
+    $theme('ui.input.icon.size').value[props.size],
+    isLeading.value && $theme('ui.input.icon.leading.spacing').value[props.size],
+    isTrailing.value && $theme('ui.input.icon.trailing.spacing').value[props.size],
     props.loading && 'animate-spin'
   )
 })
 
-const iconLeadingWrapperClass = $ui.input.icon.leading.wrapper
-const iconTrailingWrapperClass = $ui.input.icon.trailing.wrapper
+const iconLeadingWrapperClass = $theme('ui.input.icon.leading.wrapper').value
+const iconTrailingWrapperClass = $theme('ui.input.icon.trailing.wrapper').value
 </script>
 
 <script lang="ts">

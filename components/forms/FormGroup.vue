@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 defineProps({
   name: {
@@ -51,35 +51,35 @@ defineProps({
   },
   wrapperClass: {
     type: String,
-    default: () => $ui.formGroup.wrapper
+    default () { return $theme('ui.formGroup.wrapper').value }
   },
   containerClass: {
     type: String,
-    default: () => $ui.formGroup.container
+    default () { return $theme('ui.formGroup.container').value }
   },
   labelClass: {
     type: String,
-    default: () => $ui.formGroup.label
+    default () { return $theme('ui.formGroup.label').value }
   },
   labelWrapperClass: {
     type: String,
-    default: () => $ui.formGroup.labelWrapper
+    default () { return $theme('ui.formGroup.labelWrapper').value }
   },
   descriptionClass: {
     type: String,
-    default: () => $ui.formGroup.description
+    default () { return $theme('ui.formGroup.description').value }
   },
   requiredClass: {
     type: String,
-    default: () => $ui.formGroup.required
+    default () { return $theme('ui.formGroup.required').value }
   },
   hintClass: {
     type: String,
-    default: () => $ui.formGroup.hint
+    default () { return $theme('ui.formGroup.hint').value }
   },
   helpClass: {
     type: String,
-    default: () => $ui.formGroup.help
+    default () { return $theme('ui.formGroup.help').value }
   }
 })
 </script>

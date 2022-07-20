@@ -26,7 +26,7 @@ import { DialogTitle, DialogDescription } from '@headlessui/vue'
 import Modal from '../overlays/Modal.vue'
 import Button from '../elements/Button.vue'
 import Icon from '../elements/Icon.vue'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   modelValue: {
@@ -43,11 +43,11 @@ const props = defineProps({
   },
   iconClass: {
     type: String,
-    default: () => $ui.alertDialog.icon.base
+    default () { return $theme('ui.alertDialog.icon.base').value }
   },
   iconWrapperClass: {
     type: String,
-    default: () => $ui.alertDialog.icon.wrapper
+    default () { return $theme('ui.alertDialog.icon.wrapper').value }
   },
   title: {
     type: String,
@@ -55,7 +55,7 @@ const props = defineProps({
   },
   titleClass: {
     type: String,
-    default: () => $ui.alertDialog.icon.title
+    default () { return $theme('ui.alertDialog.icon.title').value }
   },
   description: {
     type: String,
@@ -63,7 +63,7 @@ const props = defineProps({
   },
   descriptionClass: {
     type: String,
-    default: () => $ui.alertDialog.description
+    default () { return $theme('ui.alertDialog.description').value }
   },
   confirmLabel: {
     type: String,
@@ -94,10 +94,12 @@ function onConfirm () {
   emit('confirm')
   isOpen.value = false
 }
+
 function onCancel () {
   emit('cancel')
   isOpen.value = false
 }
+
 function onClose () {
   emit('close')
 }

@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   padded: {
@@ -20,7 +20,7 @@ const props = defineProps({
   },
   constrainedClass: {
     type: String,
-    default: () => $ui.container.constrained
+    default () { return $theme('ui.container.constrained').value }
   }
 })
 

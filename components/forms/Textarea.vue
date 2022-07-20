@@ -22,7 +22,7 @@
 import type { Ref } from 'vue'
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import { $theme } from '#theme'
 
 const props = defineProps({
   modelValue: {
@@ -65,7 +65,7 @@ const props = defineProps({
     type: String,
     default: 'default',
     validator (value: string) {
-      return Object.keys($ui.textarea.appearance).includes(value)
+      return Object.keys($theme('ui.textarea.appearance').value).includes(value)
     }
   },
   resize: {
@@ -76,16 +76,16 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($ui.textarea.size).includes(value)
+      return Object.keys($theme('ui.textarea.size').value).includes(value)
     }
   },
   wrapperClass: {
     type: String,
-    default: () => $ui.textarea.wrapper
+    default () { return $theme('ui.textarea.wrapper').value }
   },
   baseClass: {
     type: String,
-    default: () => $ui.textarea.base
+    default () { return $theme('ui.textarea.base').value }
   },
   customClass: {
     type: String,
@@ -145,9 +145,9 @@ onMounted(() => {
 const textareaClass = computed(() => {
   return classNames(
     props.baseClass,
-    $ui.textarea.size[props.size],
-    $ui.textarea.spacing[props.size],
-    $ui.textarea.appearance[props.appearance],
+    $theme('ui.textarea.size').value[props.size],
+    $theme('ui.textarea.spacing').value[props.size],
+    $theme('ui.textarea.appearance').value[props.appearance],
     !props.resize && 'resize-none',
     props.customClass
   )
