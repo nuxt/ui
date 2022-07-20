@@ -15,30 +15,39 @@
     >
       <div class="relative overflow-hidden rounded-lg ring-1 u-ring-gray-200">
         <div class="p-4">
-          <div class="flex">
+          <div class="flex" :class="{ 'items-center': !description }">
             <div class="flex-shrink-0">
               <Icon :name="iconName" class="w-6 h-6" :class="iconClass" />
             </div>
             <div class="ml-3 w-0 flex-1 pt-0.5">
-              <p class="text-sm font-medium leading-5 u-text-gray-900">
+              <p class="text-sm font-medium u-text-gray-900">
                 {{ title }}
               </p>
               <p v-if="description" class="mt-1 text-sm leading-5 u-text-gray-500">
                 {{ description }}
               </p>
-              <Button
-                v-if="undo"
-                variant="white"
-                size="xs"
-                class="mt-2"
-                @click.stop="onUndo"
-              >
-                Undo
-              </Button>
+
+              <div v-if="description" class="mt-3 flex items-center gap-7">
+                <button v-if="undo" type="button" class="text-sm font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none" @click.stop="onUndo">
+                  Undo
+                </button>
+                <button v-if="dismiss" type="button" class="text-sm font-medium u-text-gray-700 hover:u-text-gray-500 focus:outline-none" @click.stop="onDismiss">
+                  Dismiss
+                </button>
+              </div>
             </div>
-            <div class="flex-shrink-0 ml-4">
+            <div class="flex-shrink-0 flex items-center ml-4">
+              <div v-if="!description" class="flex items-center gap-2">
+                <button v-if="undo" type="button" class="text-sm font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none" @click.stop="onUndo">
+                  Undo
+                </button>
+                <button v-if="dismiss" type="button" class="text-sm font-medium u-text-gray-700 hover:u-text-gray-500 focus:outline-none" @click.stop="onDismiss">
+                  Dismiss
+                </button>
+              </div>
+
               <button
-                class="transition duration-150 ease-in-out u-text-gray-400 focus:outline-none hover:u-text-gray-500 focus:u-text-gray-500"
+                class="transition duration-150 ease-in-out u-text-gray-400 focus:outline-none hover:u-text-gray-500 focus:u-text-gray-500 ml-4"
                 @click.stop="onClose"
               >
                 <span class="sr-only">Close</span>
@@ -59,8 +68,8 @@
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
 
 import Icon from '../elements/Icon'
-import Button from '../elements/Button'
 import { useTimer } from '../../composables/useTimer'
+import { classNames } from '../../utils'
 
 const props = defineProps({
   id: {
@@ -69,10 +78,9 @@ const props = defineProps({
   },
   type: {
     type: String,
-    required: true,
-    default: 'info',
-    validator (value: string) {
-      return ['info', 'success', 'error', 'warning'].includes(value)
+    default: null,
+    validator (value: string | null) {
+      return [null, 'info', 'success', 'error', 'warning'].includes(value)
     }
   },
   title: {
@@ -87,11 +95,19 @@ const props = defineProps({
     type: String,
     default: null
   },
+  iconClass: {
+    type: String,
+    default: null
+  },
   timeout: {
     type: Number,
     default: 5000
   },
   undo: {
+    type: Function,
+    default: null
+  },
+  dismiss: {
     type: Function,
     default: null
   },
@@ -116,12 +132,15 @@ const iconName = computed(() => {
 })
 
 const iconClass = computed(() => {
-  return ({
-    warning: 'text-orange-400',
-    info: 'text-blue-400',
-    success: 'text-green-400',
-    error: 'text-red-400'
-  })[props.type] || 'u-text-gray-400'
+  return classNames(
+    ({
+      warning: 'text-orange-400',
+      info: 'text-blue-400',
+      success: 'text-green-400',
+      error: 'text-red-400'
+    })[props.type] || 'u-text-gray-400',
+    props.iconClass
+  )
 })
 
 const progressBarStyle = computed(() => {
@@ -160,6 +179,18 @@ function onUndo () {
 
   if (props.undo) {
     props.undo()
+  }
+
+  emit('close')
+}
+
+function onDismiss () {
+  if (timer) {
+    timer.stop()
+  }
+
+  if (props.dismiss) {
+    props.dismiss()
   }
 
   emit('close')
