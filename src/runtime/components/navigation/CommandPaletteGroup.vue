@@ -1,7 +1,7 @@
 <template>
   <li class="p-2">
-    <h2 v-if="group.label" class="px-3 my-2 text-xs font-semibold u-text-gray-900">
-      {{ group.label }}
+    <h2 v-if="group[groupAttribute]" class="px-3 my-2 text-xs font-semibold u-text-gray-900">
+      {{ group[groupAttribute] }}
     </h2>
 
     <ul class="text-sm u-text-gray-700">
@@ -19,7 +19,7 @@
             <UAvatar
               v-else-if="command.avatar"
               :src="command.avatar"
-              :alt="command.label"
+              :alt="command[commandAttribute]"
               :rounded="false"
               size="xxxs"
               class="flex-shrink-0"
@@ -28,7 +28,7 @@
 
             <div class="flex items-center flex-1 min-w-0 u-text-gray-400 gap-1.5" :class="{ 'opacity-50': command.disabled }">
               <span v-if="command.prefix">{{ command.prefix }}</span>
-              <span class="u-text-gray-700 truncate">{{ command.label }}</span>
+              <span class="u-text-gray-700 truncate">{{ command[commandAttribute] }}</span>
             </div>
           </div>
 
@@ -53,6 +53,14 @@ import type { Group } from '../../types/command-palette'
 defineProps({
   group: {
     type: Object as PropType<Group>,
+    required: true
+  },
+  groupAttribute: {
+    type: String,
+    required: true
+  },
+  commandAttribute: {
+    type: String,
     required: true
   }
 })

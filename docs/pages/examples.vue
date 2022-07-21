@@ -176,7 +176,7 @@
       </div>
 
       <UCard body-class="">
-        <UCommandPalette v-model="form.persons" multiple :groups="[{ key: 'persons', commands: people }]" />
+        <UCommandPalette v-model="form.persons" multiple :groups="[{ key: 'persons', commands: people, customQuery, options: { fuseOptions: { useExtendedSearch: true, keys: ['name', 'static'] } } }]" command-attribute="name" />
       </UCard>
     </div>
 
@@ -208,7 +208,7 @@
           </UFormGroup>
 
           <UFormGroup label="People" name="people" required>
-            <USelectCustom v-model="form.person" name="people" :options="people" text-attribute="label" searchable />
+            <USelectCustom v-model="form.person" name="people" :options="people" text-attribute="name" searchable />
           </UFormGroup>
 
           <UFormGroup label="Toggle" name="toggle">
@@ -251,11 +251,11 @@
 const isModalOpen = ref(false)
 
 const people = [
-  { id: 1, label: 'Durward Reynolds', disabled: false },
-  { id: 2, label: 'Kenton Towne', disabled: false },
-  { id: 3, label: 'Therese Wunsch', disabled: false },
-  { id: 4, label: 'Benedict Kessler', disabled: true },
-  { id: 5, label: 'Katelyn Rohan', disabled: false }
+  { id: 1, name: 'Durward Reynolds', disabled: false },
+  { id: 2, name: 'Kenton Towne', disabled: false },
+  { id: 3, name: 'Therese Wunsch', disabled: false },
+  { id: 4, name: 'Benedict Kessler', disabled: true },
+  { id: 5, name: 'Katelyn Rohan', disabled: false, static: '1' }
 ]
 const form = reactive({
   email: '',
@@ -270,6 +270,8 @@ const form = reactive({
 })
 
 const { $toast } = useNuxtApp()
+
+const customQuery = query => computed(() => query.value ? `${query.value} | =1` : '')
 
 function toggleModalIsOpen () {
   isModalOpen.value = !isModalOpen.value
