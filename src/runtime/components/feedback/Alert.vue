@@ -25,7 +25,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import Icon from '../elements/Icon'
+import type { PropType } from 'vue'
+import type { RouteLocationNormalized } from 'vue-router'
+import Icon from '../elements/Icon.vue'
 
 const props = defineProps({
   variant: {
@@ -36,7 +38,7 @@ const props = defineProps({
     }
   },
   to: {
-    type: [String, Object],
+    type: [String, Object] as PropType<RouteLocationNormalized>,
     default: null
   },
   click: {

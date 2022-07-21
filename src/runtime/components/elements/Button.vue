@@ -14,8 +14,10 @@
 
 <script setup lang="ts">
 import { ref, computed, useSlots } from 'vue'
+import type { PropType } from 'vue'
+import type { RouteLocationNormalized } from 'vue-router'
 import NuxtLink from '#app/components/nuxt-link'
-import Icon from '../elements/Icon'
+import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
@@ -79,7 +81,7 @@ const props = defineProps({
     default: false
   },
   to: {
-    type: [String, Object],
+    type: [String, Object] as PropType<RouteLocationNormalized>,
     default: null
   },
   target: {

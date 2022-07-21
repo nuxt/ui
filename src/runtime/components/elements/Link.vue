@@ -24,12 +24,14 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { PropType } from 'vue'
+import type { RouteLocationNormalized } from 'vue-router'
 import { RouterLink } from 'vue-router'
 
 const props = defineProps({
   ...RouterLink.props,
   to: {
-    type: [String, Object],
+    type: [String, Object] as PropType<RouteLocationNormalized>,
     default: null
   },
   inactiveClass: {

@@ -44,9 +44,3 @@ export default defineNuxtPlugin(() => {
     }
   }
 })
-
-declare module '#app' {
-  interface NuxtApp {
-    $toast: ToastPlugin
-  }
-}

@@ -32,9 +32,3 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
   }
 })
-
-declare module '#app' {
-  interface NuxtApp {
-    $clipboard: ClipboardPlugin
-  }
-}

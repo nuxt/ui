@@ -38,14 +38,23 @@
 </template>
 
 <script setup lang="ts">
-import Icon from '../elements/Icon'
-import Link from '../elements/Link'
-import Avatar from '../elements/Avatar'
+import type { PropType } from 'vue'
+import Icon from '../elements/Icon.vue'
+import Link from '../elements/Link.vue'
+import Avatar from '../elements/Avatar.vue'
+import type { Avatar as AvatarType } from '../../types/avatar'
 import $ui from '#build/ui'
 
 defineProps({
   links: {
-    type: Array,
+    type: Array as PropType<{
+      label: string
+      icon?: string
+      iconClass?: string
+      avatar?: Partial<AvatarType>
+      click?: Function
+      badge?: string
+    }[]>,
     required: true
   },
   wrapperClass: {

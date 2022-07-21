@@ -1,5 +1,6 @@
 import type { Ref, ComputedRef } from 'vue'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
+import type { Avatar } from './avatar'
 
 export interface Command {
   prefix?: string
@@ -7,7 +8,7 @@ export interface Command {
   label: string
   icon?: string
   iconClass?: string
-  avatar?: string
+  avatar?: Partial<Avatar>
   chip?: string
   disabled?: boolean
   shortcuts?: string[]

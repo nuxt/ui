@@ -42,18 +42,28 @@ import {
   MenuItems,
   MenuItem
 } from '@headlessui/vue'
-
-import type { Ref } from 'vue'
+import type { Ref, PropType } from 'vue'
+import type { RouteLocationNormalized } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import NuxtLink from '#app/components/nuxt-link'
-import Icon from '../elements/Icon'
-import Avatar from '../elements/Avatar'
+import Icon from '../elements/Icon.vue'
+import Avatar from '../elements/Avatar.vue'
 import { classNames, usePopper } from '../../utils'
+import type { Avatar as AvatarType } from '../../types/avatar'
 import $ui from '#build/ui'
 
 const props = defineProps({
   items: {
-    type: Array,
+    type: Array as PropType<{
+      to: RouteLocationNormalized
+      exact: boolean
+      label: string
+      disabled?: boolean
+      slot?: string
+      icon?: string
+      avatar?: Partial<AvatarType>
+      click?: Function
+    }[][]>,
     default: () => []
   },
   placement: {

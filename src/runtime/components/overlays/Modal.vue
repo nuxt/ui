@@ -29,11 +29,11 @@
             >
               <DialogPanel :class="modalClass">
                 <Card
-                  base-class
-                  background-class
-                  shadow-class
-                  ring-class
-                  rounded-class
+                  base-class=""
+                  background-class=""
+                  shadow-class=""
+                  ring-class=""
+                  rounded-class=""
                   v-bind="$attrs"
                 >
                   <template v-if="$slots.header" #header>
@@ -56,8 +56,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
-import { classNames } from '../../utils/'
-import Card from '../layout/Card'
+import { classNames } from '../../utils'
+import Card from '../layout/Card.vue'
 import $ui from '#build/ui'
 
 const props = defineProps({

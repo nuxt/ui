@@ -15,8 +15,8 @@
       >
         <li :class="['flex justify-between select-none items-center rounded-md px-3 py-2 gap-3 relative', active && 'bg-gray-100 dark:bg-gray-800 u-text-gray-900', command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
           <div class="flex items-center flex-1 gap-3 min-w-0">
-            <UIcon v-if="command.icon" :name="command.icon" :class="['h-5 w-5 flex-shrink-0 text-opacity-40', active && 'text-opacity-100', command.iconClass || 'text-gray-900 dark:text-gray-50']" aria-hidden="true" />
-            <UAvatar
+            <Icon v-if="command.icon" :name="command.icon" :class="['h-5 w-5 flex-shrink-0 text-opacity-40', active && 'text-opacity-100', command.iconClass || 'text-gray-900 dark:text-gray-50']" aria-hidden="true" />
+            <Avatar
               v-else-if="command.avatar"
               v-bind="{ size: 'xxs', ...command.avatar }"
               class="flex-shrink-0"
@@ -32,7 +32,7 @@
             </div>
           </div>
 
-          <UIcon v-if="selected" name="heroicons-outline:check" class="h-5 w-5 absolute right-2 u-text-gray-900" aria-hidden="true" />
+          <Icon v-if="selected" name="heroicons-outline:check" class="h-5 w-5 absolute right-2 u-text-gray-900" aria-hidden="true" />
           <span v-else-if="active" class="flex-none u-text-gray-500">
             <slot :name="`${group.key}-active`" :group="group" :command="command">{{ group.active }}</slot>
           </span>
@@ -51,6 +51,8 @@
 <script setup lang="ts">
 import { ComboboxOption } from '@headlessui/vue'
 import type { PropType } from 'vue'
+import Icon from '../elements/Icon.vue'
+import Avatar from '../elements/Avatar.vue'
 import type { Group } from '../../types/command-palette'
 
 defineProps({

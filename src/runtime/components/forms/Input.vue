@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { ref, computed, onMounted } from 'vue'
-import Icon from '../elements/Icon'
+import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
@@ -72,7 +72,7 @@ const props = defineProps({
     default: null
   },
   spellcheck: {
-    type: String,
+    type: Boolean,
     default: null
   },
   icon: {

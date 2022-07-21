@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { classNames } from '../../utils/'
+import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
 const props = defineProps({

@@ -15,12 +15,14 @@
 </template>
 
 <script setup lang="ts">
-import Link from '../elements/Link'
+import type { PropType } from 'vue'
+import type { RouteLocationNormalized } from 'vue-router'
+import Link from '../elements/Link.vue'
 import $ui from '#build/ui'
 
 defineProps({
   links: {
-    type: Array,
+    type: Array as PropType<{ to: RouteLocationNormalized, exact: boolean, label: string }[]>,
     required: true
   },
   wrapperClass: {
