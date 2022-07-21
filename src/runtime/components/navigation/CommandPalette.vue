@@ -21,7 +21,11 @@
       </div>
 
       <ComboboxOptions v-if="groups.length" static hold class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2">
-        <CommandPaletteGroup v-for="group of groups" :key="group.key" :group="group" />
+        <CommandPaletteGroup v-for="group of groups" :key="group.key" :group="group" :group-attribute="groupAttribute" :command-attribute="commandAttribute">
+          <template v-for="(_, name) in $slots" #[name]="slotData">
+            <slot :name="name" v-bind="slotData" />
+          </template>
+        </CommandPaletteGroup>
       </ComboboxOptions>
 
       <div v-else class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
@@ -77,6 +81,14 @@ const props = defineProps({
     type: String,
     default: 'heroicons-outline:search'
   },
+  groupAttribute: {
+    type: String,
+    default: 'label'
+  },
+  commandAttribute: {
+    type: String,
+    default: 'label'
+  },
   options: {
     type: Object as PropType<Partial<UseFuseOptions<Command>>>,
     default: () => ({})
@@ -94,14 +106,14 @@ onMounted(() => {
 
 const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => defu({}, props.options, {
   fuseOptions: {
-    keys: ['label']
+    keys: [props.commandAttribute]
   },
   resultLimit: 12,
   matchAllWhenSearchEmpty: true
 }))
 
 const fuse = props.groups.reduce((acc, group) => {
-  const fuse = useFuse(query, group.commands, defu({}, group.options || {}, options.value))
+  const fuse = useFuse(group.customQuery ? group.customQuery(query) : query, group.commands, defu({}, group.options || {}, options.value))
   acc[group.key] = fuse
   return acc
 }, {})
@@ -124,7 +136,7 @@ function activateFirstOption () {
 }
 
 function onSelect (option: Command | Command[]) {
-  emit('update:modelValue', option)
+  emit('update:modelValue', option, { query: query.value })
 
   // Clear input after selection
   if (!props.multiple) {
