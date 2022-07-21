@@ -21,7 +21,11 @@
       </div>
 
       <ComboboxOptions v-if="groups.length" static hold class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2">
-        <CommandPaletteGroup v-for="group of groups" :key="group.key" :group="group" :group-attribute="groupAttribute" :command-attribute="commandAttribute" />
+        <CommandPaletteGroup v-for="group of groups" :key="group.key" :group="group" :group-attribute="groupAttribute" :command-attribute="commandAttribute">
+          <template v-for="(_, name) in $slots" #[name]="slotData">
+            <slot :name="name" v-bind="slotData" />
+          </template>
+        </CommandPaletteGroup>
       </ComboboxOptions>
 
       <div v-else class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
