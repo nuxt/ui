@@ -15,7 +15,7 @@
       >
         <li :class="['flex justify-between select-none items-center rounded-md px-3 py-2 gap-3 relative', active && 'bg-gray-100 dark:bg-gray-800 u-text-gray-900', command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
           <div class="flex items-center flex-1 gap-3 min-w-0">
-            <UIcon v-if="command.icon" :name="command.icon" :class="['h-5 w-5 flex-shrink-0', active && 'u-text-gray-900', !active && 'u-text-gray-400', command.iconClass]" aria-hidden="true" />
+            <UIcon v-if="command.icon" :name="command.icon" :class="['h-5 w-5 flex-shrink-0 text-opacity-40', active && 'text-opacity-100', command.iconClass || 'text-gray-900 dark:text-gray-50']" aria-hidden="true" />
             <UAvatar
               v-else-if="command.avatar"
               :src="command.avatar"
