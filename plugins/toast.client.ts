@@ -28,37 +28,17 @@ export default defineNuxtPlugin(() => {
       toast: {
         addNotification,
         removeNotification,
-        success ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
-          addNotification({
-            type: 'success',
-            title,
-            description,
-            timeout
-          })
+        success (notification: Partial<ToastNotification> = {}) {
+          return addNotification({ type: 'success', ...notification })
         },
-        info ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
-          addNotification({
-            type: 'info',
-            title,
-            description,
-            timeout
-          })
+        info (notification: Partial<ToastNotification> = {}) {
+          return addNotification({ type: 'info', ...notification })
         },
-        warning ({ title, description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
-          addNotification({
-            type: 'warning',
-            title,
-            description,
-            timeout
-          })
+        warning (notification: Partial<ToastNotification> = {}) {
+          return addNotification({ type: 'warning', ...notification })
         },
-        error ({ title = 'An error occurred!', description, timeout }: { title?: string, description?: string, timeout?: number } = {}) {
-          addNotification({
-            type: 'error',
-            title,
-            description,
-            timeout
-          })
+        error (notification: Partial<ToastNotification>) {
+          return addNotification({ type: 'error', title: 'An error occurred!', ...notification })
         }
       }
     }
