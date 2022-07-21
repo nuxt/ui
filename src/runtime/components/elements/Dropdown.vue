@@ -22,7 +22,7 @@
               <Component v-bind="item" :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)" @mouseover="$emit('hover', item)">
                 <slot :name="item.slot" :item="item">
                   <Icon v-if="item.icon" :name="item.icon" :class="itemIconClass" />
-                  <Avatar v-if="item.avatar" :src="item.avatar" :alt="item.label" :class="itemAvatarClass" size="xs" />
+                  <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="itemAvatarClass" />
 
                   <span class="truncate">{{ item.label }}</span>
                 </slot>
