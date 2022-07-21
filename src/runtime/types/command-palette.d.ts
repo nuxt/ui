@@ -10,6 +10,7 @@ export interface Command {
   chip?: string
   disabled?: boolean
   shortcuts?: string[]
+  static?: boolean
 }
 
 export interface Group {

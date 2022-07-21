@@ -107,10 +107,15 @@ const fuse = props.groups.reduce((acc, group) => {
 }, {})
 
 const groups = computed(() => props.groups.map((group) => {
-  return {
+  const g = {
     ...group,
     commands: fuse[group.key].results.value.map(result => result.item).slice(0, group.options?.resultLimit || options.value.resultLimit)
   }
+  const staticCommands = group.commands.filter(command => command.static && !g.commands.find(c => c.label === command.label))
+  if (staticCommands.length) {
+    g.commands.push(staticCommands)
+  }
+  return g
 }).filter(group => group.commands.length))
 
 // Methods
@@ -124,7 +129,7 @@ function activateFirstOption () {
 }
 
 function onSelect (option: Command | Command[]) {
-  emit('update:modelValue', option)
+  emit('update:modelValue', option, { query: query.value })
 
   // Clear input after selection
   if (!props.multiple) {
