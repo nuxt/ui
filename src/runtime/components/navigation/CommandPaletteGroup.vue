@@ -18,10 +18,7 @@
             <UIcon v-if="command.icon" :name="command.icon" :class="['h-5 w-5 flex-shrink-0 text-opacity-40', active && 'text-opacity-100', command.iconClass || 'text-gray-900 dark:text-gray-50']" aria-hidden="true" />
             <UAvatar
               v-else-if="command.avatar"
-              :src="command.avatar"
-              :alt="command[commandAttribute]"
-              :rounded="false"
-              size="xxs"
+              v-bind="{ size: 'xxs', ...command.avatar }"
               class="flex-shrink-0"
             />
             <span v-else-if="command.chip" class="flex-shrink-0 w-2 h-2 mx-1.5 rounded-full" :style="{ background: `#${command.chip}` }" />
