@@ -21,10 +21,10 @@
               :src="command.avatar"
               :alt="command[commandAttribute]"
               :rounded="false"
-              size="xxxs"
+              size="xxs"
               class="flex-shrink-0"
             />
-            <span v-else-if="command.chip" class="flex-shrink-0 w-2 h-2 rounded-full" :style="{ background: `#${command.chip}` }" />
+            <span v-else-if="command.chip" class="flex-shrink-0 w-2 h-2 mx-1.5 rounded-full" :style="{ background: `#${command.chip}` }" />
 
             <div class="flex items-center flex-1 min-w-0 gap-1.5" :class="{ 'opacity-50': command.disabled }">
               <slot :name="`${group.key}-command`" :group="group" :command="command">
