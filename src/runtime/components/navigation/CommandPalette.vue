@@ -115,6 +115,7 @@ const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => de
 }))
 
 const fuse = props.groups.reduce((acc, group) => {
+  // FIXME: useFuse is not watching data correctly, so we need to add an id
   const fuse = useFuse(group.customQuery ? group.customQuery(query) : query, group.commands, defu({}, group.options || {}, options.value))
   acc[group.key] = fuse
   return acc
@@ -123,7 +124,7 @@ const fuse = props.groups.reduce((acc, group) => {
 const groups = computed(() => props.groups.map((group) => {
   return {
     ...group,
-    commands: fuse[group.key].results.value.map(result => result.item).slice(0, group.options?.resultLimit || options.value.resultLimit)
+    commands: fuse[group.key].results.value.map(result => group.commands.find(command => command.id === result.item.id)).slice(0, group.options?.resultLimit || options.value.resultLimit)
   }
 }).filter(group => group.commands.length))
 
