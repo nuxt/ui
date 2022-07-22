@@ -31,7 +31,7 @@ import { RouterLink } from 'vue-router'
 const props = defineProps({
   ...RouterLink.props,
   to: {
-    type: [String, Object] as PropType<RouteLocationNormalized>,
+    type: [String, Object] as PropType<string | RouteLocationNormalized>,
     default: null
   },
   inactiveClass: {

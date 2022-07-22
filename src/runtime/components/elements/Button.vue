@@ -81,7 +81,7 @@ const props = defineProps({
     default: false
   },
   to: {
-    type: [String, Object] as PropType<RouteLocationNormalized>,
+    type: [String, Object] as PropType<string | RouteLocationNormalized>,
     default: null
   },
   target: {
