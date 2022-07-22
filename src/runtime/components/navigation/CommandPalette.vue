@@ -124,7 +124,7 @@ const fuse = props.groups.reduce((acc, group) => {
 const groups = computed(() => props.groups.map((group) => {
   return {
     ...group,
-    commands: fuse[group.key].results.value.map(result => group.commands.find(command => command.id === result.item.id)).slice(0, group.options?.resultLimit || options.value.resultLimit)
+    commands: fuse[group.key].results.value.map(result => group.commands.find(command => command.id === result.item.id)).filter(Boolean).slice(0, group.options?.resultLimit || options.value.resultLimit)
   }
 }).filter(group => group.commands.length))
 
