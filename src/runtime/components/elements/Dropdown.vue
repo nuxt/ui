@@ -25,6 +25,10 @@
                   <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="itemAvatarClass" />
 
                   <span class="truncate">{{ item.label }}</span>
+
+                  <span v-if="item.shortcuts?.length" :class="itemShortcutsClass">
+                    <kbd v-for="shortcut of item.shortcuts" :key="shortcut" class="font-sans">{{ shortcut }}</kbd>
+                  </span>
                 </slot>
               </Component>
             </MenuItem>
@@ -63,6 +67,7 @@ const props = defineProps({
       icon?: string
       avatar?: Partial<AvatarType>
       click?: Function
+      shortcuts?: string[]
     }[][]>,
     default: () => []
   },
@@ -122,6 +127,10 @@ const props = defineProps({
   itemAvatarClass: {
     type: String,
     default: () => $ui.dropdown.item.avatar
+  },
+  itemShortcutsClass: {
+    type: String,
+    default: () => $ui.dropdown.item.shortcuts
   }
 })
 
