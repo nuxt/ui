@@ -71,31 +71,31 @@ const props = defineProps({
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.modal.base').value }
+    default () { return $theme('ui.modal.base') }
   },
   backgroundClass: {
     type: String,
-    default () { return $theme('ui.modal.background').value }
+    default () { return $theme('ui.modal.background') }
   },
   overlayClass: {
     type: String,
-    default () { return $theme('ui.modal.overlay').value }
+    default () { return $theme('ui.modal.overlay') }
   },
   shadowClass: {
     type: String,
-    default () { return $theme('ui.modal.shadow').value }
+    default () { return $theme('ui.modal.shadow') }
   },
   ringClass: {
     type: String,
-    default () { return $theme('ui.modal.ring').value }
+    default () { return $theme('ui.modal.ring') }
   },
   roundedClass: {
     type: String,
-    default () { return $theme('ui.modal.rounded').value }
+    default () { return $theme('ui.modal.rounded') }
   },
   widthClass: {
     type: String,
-    default () { return $theme('ui.modal.width').value }
+    default () { return $theme('ui.modal.width') }
   }
 })
 

@@ -25,19 +25,19 @@ defineProps({
   },
   wrapperClass: {
     type: String,
-    default () { return $theme('ui.pills.wrapper').value }
+    default () { return $theme('ui.pills.wrapper') }
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.pills.base').value }
+    default () { return $theme('ui.pills.base') }
   },
   activeClass: {
     type: String,
-    default () { return $theme('ui.pills.active').value }
+    default () { return $theme('ui.pills.active') }
   },
   inactiveClass: {
     type: String,
-    default () { return $theme('ui.pills.inactive').value }
+    default () { return $theme('ui.pills.inactive') }
   }
 })
 </script>

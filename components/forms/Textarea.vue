@@ -65,7 +65,7 @@ const props = defineProps({
     type: String,
     default: 'default',
     validator (value: string) {
-      return Object.keys($theme('ui.textarea.appearance').value).includes(value)
+      return Object.keys($theme('ui.textarea.appearance')).includes(value)
     }
   },
   resize: {
@@ -76,16 +76,16 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($theme('ui.textarea.size').value).includes(value)
+      return Object.keys($theme('ui.textarea.size')).includes(value)
     }
   },
   wrapperClass: {
     type: String,
-    default () { return $theme('ui.textarea.wrapper').value }
+    default () { return $theme('ui.textarea.wrapper') }
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.textarea.base').value }
+    default () { return $theme('ui.textarea.base') }
   },
   customClass: {
     type: String,
@@ -145,9 +145,9 @@ onMounted(() => {
 const textareaClass = computed(() => {
   return classNames(
     props.baseClass,
-    $theme('ui.textarea.size').value[props.size],
-    $theme('ui.textarea.spacing').value[props.size],
-    $theme('ui.textarea.appearance').value[props.appearance],
+    $theme('ui.textarea.size')[props.size],
+    $theme('ui.textarea.spacing')[props.size],
+    $theme('ui.textarea.appearance')[props.appearance],
     !props.resize && 'resize-none',
     props.customClass
   )

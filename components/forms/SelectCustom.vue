@@ -149,16 +149,16 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($theme('ui.selectCustom.size').value).includes(value)
+      return Object.keys($theme('ui.selectCustom.size')).includes(value)
     }
   },
   wrapperClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.wrapper').value }
+    default () { return $theme('ui.selectCustom.wrapper') }
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.base').value }
+    default () { return $theme('ui.selectCustom.base') }
   },
   icon: {
     type: String,
@@ -166,7 +166,7 @@ const props = defineProps({
   },
   iconBaseClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.icon.base').value }
+    default () { return $theme('ui.selectCustom.icon.base') }
   },
   customClass: {
     type: String,
@@ -176,52 +176,52 @@ const props = defineProps({
     type: String,
     default: 'default',
     validator (value: string) {
-      return Object.keys($theme('ui.selectCustom.appearance').value).includes(value)
+      return Object.keys($theme('ui.selectCustom.appearance')).includes(value)
     }
   },
   listBaseClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.base').value }
+    default () { return $theme('ui.selectCustom.list.base') }
   },
   listContainerClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.container').value }
+    default () { return $theme('ui.selectCustom.list.container') }
   },
   listInputClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.input').value }
+    default () { return $theme('ui.selectCustom.list.input') }
   },
   listOptionBaseClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.base').value }
+    default () { return $theme('ui.selectCustom.list.option.base') }
   },
   listOptionContainerClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.container').value }
+    default () { return $theme('ui.selectCustom.list.option.container') }
   },
   listOptionActiveClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.active').value }
+    default () { return $theme('ui.selectCustom.list.option.active') }
   },
   listOptionInactiveClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.inactive').value }
+    default () { return $theme('ui.selectCustom.list.option.inactive') }
   },
   listOptionSelectedClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.selected').value }
+    default () { return $theme('ui.selectCustom.list.option.selected') }
   },
   listOptionUnselectedClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.unselected').value }
+    default () { return $theme('ui.selectCustom.list.option.unselected') }
   },
   listOptionDisabledClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.disabled').value }
+    default () { return $theme('ui.selectCustom.list.option.disabled') }
   },
   listOptionEmptyClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.empty').value }
+    default () { return $theme('ui.selectCustom.list.option.empty') }
   },
   listOptionIcon: {
     type: String,
@@ -229,19 +229,19 @@ const props = defineProps({
   },
   listOptionIconBaseClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.icon.base').value }
+    default () { return $theme('ui.selectCustom.list.option.icon.base') }
   },
   listOptionIconActiveClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.icon.active').value }
+    default () { return $theme('ui.selectCustom.list.option.icon.active') }
   },
   listOptionIconInactiveClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.icon.inactive').value }
+    default () { return $theme('ui.selectCustom.list.option.icon.inactive') }
   },
   listOptionIconSizeClass: {
     type: String,
-    default () { return $theme('ui.selectCustom.list.option.icon.size').value }
+    default () { return $theme('ui.selectCustom.list.option.icon.size') }
   },
   textAttribute: {
     type: String,
@@ -284,10 +284,10 @@ const query = ref('')
 const selectCustomClass = computed(() => {
   return classNames(
     props.baseClass,
-    $theme('ui.selectCustom.size').value[props.size],
-    $theme('ui.selectCustom.spacing').value[props.size],
-    $theme('ui.selectCustom.appearance').value[props.appearance],
-    $theme('ui.selectCustom.trailing.spacing').value[props.size],
+    $theme('ui.selectCustom.size')[props.size],
+    $theme('ui.selectCustom.spacing')[props.size],
+    $theme('ui.selectCustom.appearance')[props.appearance],
+    $theme('ui.selectCustom.trailing.spacing')[props.size],
     props.customClass
   )
 })
@@ -295,7 +295,7 @@ const selectCustomClass = computed(() => {
 const iconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
-    $theme('ui.selectCustom.icon.size').value[props.size],
+    $theme('ui.selectCustom.icon.size')[props.size],
     'mr-2'
   )
 })
@@ -315,7 +315,7 @@ const queryOption = computed(() => {
 })
 
 const iconWrapperClass = classNames(
-  $theme('ui.selectCustom.icon.trailing.wrapper').value
+  $theme('ui.selectCustom.icon.trailing.wrapper')
 )
 
 function resolveOptionClass ({ active, selected, disabled }: { active: boolean, selected: boolean, disabled?: boolean }) {

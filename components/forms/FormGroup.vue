@@ -51,35 +51,35 @@ defineProps({
   },
   wrapperClass: {
     type: String,
-    default () { return $theme('ui.formGroup.wrapper').value }
+    default () { return $theme('ui.formGroup.wrapper') }
   },
   containerClass: {
     type: String,
-    default () { return $theme('ui.formGroup.container').value }
+    default () { return $theme('ui.formGroup.container') }
   },
   labelClass: {
     type: String,
-    default () { return $theme('ui.formGroup.label').value }
+    default () { return $theme('ui.formGroup.label') }
   },
   labelWrapperClass: {
     type: String,
-    default () { return $theme('ui.formGroup.labelWrapper').value }
+    default () { return $theme('ui.formGroup.labelWrapper') }
   },
   descriptionClass: {
     type: String,
-    default () { return $theme('ui.formGroup.description').value }
+    default () { return $theme('ui.formGroup.description') }
   },
   requiredClass: {
     type: String,
-    default () { return $theme('ui.formGroup.required').value }
+    default () { return $theme('ui.formGroup.required') }
   },
   hintClass: {
     type: String,
-    default () { return $theme('ui.formGroup.hint').value }
+    default () { return $theme('ui.formGroup.hint') }
   },
   helpClass: {
     type: String,
-    default () { return $theme('ui.formGroup.help').value }
+    default () { return $theme('ui.formGroup.help') }
   }
 })
 </script>

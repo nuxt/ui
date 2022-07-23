@@ -62,23 +62,23 @@ const props = defineProps({
   },
   wrapperClass: {
     type: String,
-    default () { return $theme('ui.radio.wrapper').value }
+    default () { return $theme('ui.radio.wrapper') }
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.radio.base').value }
+    default () { return $theme('ui.radio.base') }
   },
   labelClass: {
     type: String,
-    default () { return $theme('ui.radio.label').value }
+    default () { return $theme('ui.radio.label') }
   },
   requiredClass: {
     type: String,
-    default () { return $theme('ui.radio.required').value }
+    default () { return $theme('ui.radio.required') }
   },
   helpClass: {
     type: String,
-    default () { return $theme('ui.radio.help').value }
+    default () { return $theme('ui.radio.help') }
   },
   customClass: {
     type: String,

@@ -40,11 +40,11 @@ const props = defineProps({
   },
   ringClass: {
     type: String,
-    default () { return $theme('ui.avatarGroup.ring').value }
+    default () { return $theme('ui.avatarGroup.ring') }
   },
   marginClass: {
     type: String,
-    default () { return $theme('ui.avatarGroup.margin').value }
+    default () { return $theme('ui.avatarGroup.margin') }
   }
 })
 

@@ -14,19 +14,19 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($theme('ui.badge.size').value).includes(value)
+      return Object.keys($theme('ui.badge.size')).includes(value)
     }
   },
   variant: {
     type: String,
     default: 'primary',
     validator (value: string) {
-      return Object.keys($theme('ui.badge.variant').value).includes(value)
+      return Object.keys($theme('ui.badge.variant')).includes(value)
     }
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.badge.base').value }
+    default () { return $theme('ui.badge.base') }
   },
   rounded: {
     type: Boolean,
@@ -41,8 +41,8 @@ const props = defineProps({
 const badgeClass = computed(() => {
   return classNames(
     props.baseClass,
-    $theme('ui.badge.size').value[props.size],
-    $theme('ui.badge.variant').value[props.variant],
+    $theme('ui.badge.size')[props.size],
+    $theme('ui.badge.variant')[props.variant],
     props.rounded ? 'rounded-full' : 'rounded-md'
   )
 })

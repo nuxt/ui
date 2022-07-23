@@ -30,7 +30,7 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($theme('ui.avatar.size').value).includes(value)
+      return Object.keys($theme('ui.avatar.size')).includes(value)
     }
   },
   rounded: {
@@ -45,33 +45,33 @@ const props = defineProps({
     type: String,
     default: 'primary',
     validator (value: string) {
-      return Object.keys($theme('ui.avatar.chip.variant').value).includes(value)
+      return Object.keys($theme('ui.avatar.chip.variant')).includes(value)
     }
   },
   chipPosition: {
     type: String,
     default: 'top-right',
     validator (value: string) {
-      return Object.keys($theme('ui.avatar.chip.position').value).includes(value)
+      return Object.keys($theme('ui.avatar.chip.position')).includes(value)
     }
   },
   wrapperClass: {
     type: String,
     default () {
-      return $theme('ui.avatar.wrapper').value
+      return $theme('ui.avatar.wrapper')
     }
   },
   backgroundClass: {
     type: String,
-    default () { return $theme('ui.avatar.background').value }
+    default () { return $theme('ui.avatar.background') }
   },
   placeholderClass: {
     type: String,
-    default () { return $theme('ui.avatar.placeholder').value }
+    default () { return $theme('ui.avatar.placeholder') }
   },
   roundedClass: {
     type: String,
-    default () { return $theme('ui.avatar.rounded').value }
+    default () { return $theme('ui.avatar.rounded') }
   }
 })
 
@@ -79,24 +79,24 @@ const wrapperClass = computed(() => {
   return classNames(
     props.wrapperClass,
     props.backgroundClass,
-    $theme('ui.avatar.size').value[props.size],
+    $theme('ui.avatar.size')[props.size],
     props.rounded ? 'rounded-full' : props.roundedClass
   )
 })
 
 const avatarClass = computed(() => {
   return classNames(
-    $theme('ui.avatar.size').value[props.size],
+    $theme('ui.avatar.size')[props.size],
     props.rounded ? 'rounded-full' : props.roundedClass
   )
 })
 
 const chipClass = computed(() => {
   return classNames(
-    $theme('ui.avatar.chip.base').value,
-    $theme('ui.avatar.chip.position').value[props.chipPosition],
-    $theme('ui.avatar.chip.variant').value[props.chipVariant],
-    $theme('ui.avatar.chip.size').value[props.size]
+    $theme('ui.avatar.chip.base'),
+    $theme('ui.avatar.chip.position')[props.chipPosition],
+    $theme('ui.avatar.chip.variant')[props.chipVariant],
+    $theme('ui.avatar.chip.size')[props.size]
   )
 })
 

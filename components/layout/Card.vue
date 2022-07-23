@@ -38,34 +38,34 @@ const props = defineProps({
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.card.base').value }
+    default () { return $theme('ui.card.base') }
   },
   backgroundClass: {
     type: String,
-    default () { return $theme('ui.card.background').value }
+    default () { return $theme('ui.card.background') }
   },
   borderColorClass: {
     type: String,
-    default () { return $theme('ui.card.border').value }
+    default () { return $theme('ui.card.border') }
   },
   shadowClass: {
     type: String,
-    default () { return $theme('ui.card.shadow').value }
+    default () { return $theme('ui.card.shadow') }
   },
   ringClass: {
     type: String,
-    default () { return $theme('ui.card.ring').value }
+    default () { return $theme('ui.card.ring') }
   },
   roundedClass: {
     type: String,
-    default () { return $theme('ui.card.rounded').value },
+    default () { return $theme('ui.card.rounded') },
     validator (value: string) {
       return !value || ['sm', 'md', 'lg', 'xl', '2xl', '3xl'].map(size => `rounded-${size}`).includes(value)
     }
   },
   bodyClass: {
     type: String,
-    default () { return $theme('ui.card.body').value }
+    default () { return $theme('ui.card.body') }
   },
   bodyBackgroundClass: {
     type: String,
@@ -73,7 +73,7 @@ const props = defineProps({
   },
   headerClass: {
     type: String,
-    default () { return $theme('ui.card.header').value }
+    default () { return $theme('ui.card.header') }
   },
   headerBackgroundClass: {
     type: String,
@@ -81,7 +81,7 @@ const props = defineProps({
   },
   footerClass: {
     type: String,
-    default () { return $theme('ui.card.footer').value }
+    default () { return $theme('ui.card.footer') }
   },
   footerBackgroundClass: {
     type: String,

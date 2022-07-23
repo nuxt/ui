@@ -78,20 +78,20 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($theme('ui.select.size').value).includes(value)
+      return Object.keys($theme('ui.select.size')).includes(value)
     }
   },
   wrapperClass: {
     type: String,
-    default () { return $theme('ui.select.wrapper').value }
+    default () { return $theme('ui.select.wrapper') }
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.select.base').value }
+    default () { return $theme('ui.select.base') }
   },
   iconBaseClass: {
     type: String,
-    default () { return $theme('ui.select.icon.base').value }
+    default () { return $theme('ui.select.icon.base') }
   },
   customClass: {
     type: String,
@@ -101,7 +101,7 @@ const props = defineProps({
     type: String,
     default: 'default',
     validator (value: string) {
-      return Object.keys($theme('ui.select.appearance').value).includes(value)
+      return Object.keys($theme('ui.select.appearance')).includes(value)
     }
   },
   textAttribute: {
@@ -179,11 +179,11 @@ const normalizedValue = computed(() => {
 const selectClass = computed(() => {
   return classNames(
     props.baseClass,
-    $theme('ui.select.size').value[props.size],
-    $theme('ui.select.spacing').value[props.size],
-    $theme('ui.select.appearance').value[props.appearance],
-    !!props.icon && $theme('ui.select.leading.spacing').value[props.size],
-    $theme('ui.select.trailing.spacing').value[props.size],
+    $theme('ui.select.size')[props.size],
+    $theme('ui.select.spacing')[props.size],
+    $theme('ui.select.appearance')[props.appearance],
+    !!props.icon && $theme('ui.select.leading.spacing')[props.size],
+    $theme('ui.select.trailing.spacing')[props.size],
     props.customClass
   )
 })
@@ -191,12 +191,12 @@ const selectClass = computed(() => {
 const iconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
-    $theme('ui.select.icon.size').value[props.size],
-    !!props.icon && $theme('ui.select.icon.leading.spacing').value[props.size]
+    $theme('ui.select.icon.size')[props.size],
+    !!props.icon && $theme('ui.select.icon.leading.spacing')[props.size]
   )
 })
 
-const iconWrapperClass = $theme('ui.select.icon.leading.wrapper').value
+const iconWrapperClass = $theme('ui.select.icon.leading.wrapper')
 </script>
 
 <script lang="ts">

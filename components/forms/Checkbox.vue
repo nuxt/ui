@@ -62,23 +62,23 @@ const props = defineProps({
   },
   wrapperClass: {
     type: String,
-    default () { return $theme('ui.checkbox.wrapper').value }
+    default () { return $theme('ui.checkbox.wrapper') }
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.checkbox.base').value }
+    default () { return $theme('ui.checkbox.base') }
   },
   labelClass: {
     type: String,
-    default () { return $theme('ui.checkbox.label').value }
+    default () { return $theme('ui.checkbox.label') }
   },
   requiredClass: {
     type: String,
-    default () { return $theme('ui.checkbox.required').value }
+    default () { return $theme('ui.checkbox.required') }
   },
   helpClass: {
     type: String,
-    default () { return $theme('ui.checkbox.help').value }
+    default () { return $theme('ui.checkbox.help') }
   },
   customClass: {
     type: String,

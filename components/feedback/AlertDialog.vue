@@ -1,5 +1,5 @@
 <template>
-  <Modal v-model="isOpen" :appear="appear" class="w-full" @close="onClose">
+  <Modal v-model="isOpen.value" :appear="appear" class="w-full" @close="onClose">
     <div class="sm:flex sm:items-start">
       <div v-if="icon" :class="iconWrapperClass" class="mx-auto flex-shrink-0 flex items-center justify-center rounded-full sm:mx-0">
         <Icon :name="icon" :class="iconClass" />
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { useVModel } from '@vueuse/core'
 import { DialogTitle, DialogDescription } from '@headlessui/vue'
 import Modal from '../overlays/Modal.vue'
 import Button from '../elements/Button.vue'
@@ -43,11 +43,11 @@ const props = defineProps({
   },
   iconClass: {
     type: String,
-    default () { return $theme('ui.alertDialog.icon.base').value }
+    default () { return $theme('ui.alertDialog.icon.base') }
   },
   iconWrapperClass: {
     type: String,
-    default () { return $theme('ui.alertDialog.icon.wrapper').value }
+    default () { return $theme('ui.alertDialog.icon.wrapper') }
   },
   title: {
     type: String,
@@ -55,7 +55,7 @@ const props = defineProps({
   },
   titleClass: {
     type: String,
-    default () { return $theme('ui.alertDialog.icon.title').value }
+    default () { return $theme('ui.alertDialog.icon.title') }
   },
   description: {
     type: String,
@@ -63,7 +63,7 @@ const props = defineProps({
   },
   descriptionClass: {
     type: String,
-    default () { return $theme('ui.alertDialog.description').value }
+    default () { return $theme('ui.alertDialog.description') }
   },
   confirmLabel: {
     type: String,
@@ -81,14 +81,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'confirm', 'cancel', 'close'])
 
-const isOpen = computed({
-  get () {
-    return props.modelValue
-  },
-  set (value) {
-    emit('update:modelValue', value)
-  }
-})
+const isOpen = useVModel(props, 'modelValue', emit)
 
 function onConfirm () {
   emit('confirm')

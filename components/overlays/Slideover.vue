@@ -58,23 +58,23 @@ const props = defineProps({
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.slideover.base').value }
+    default () { return $theme('ui.slideover.base') }
   },
   backgroundClass: {
     type: String,
-    default () { return $theme('ui.slideover.background').value }
+    default () { return $theme('ui.slideover.background') }
   },
   overlayClass: {
     type: String,
-    default () { return $theme('ui.slideover.overlay').value }
+    default () { return $theme('ui.slideover.overlay') }
   },
   widthClass: {
     type: String,
-    default () { return $theme('ui.slideover.width').value }
+    default () { return $theme('ui.slideover.width') }
   },
   headerClass: {
     type: String,
-    default () { return $theme('ui.slideover.header').value }
+    default () { return $theme('ui.slideover.header') }
   }
 })
 const emit = defineEmits(['update:modelValue'])

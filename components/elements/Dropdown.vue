@@ -78,39 +78,39 @@ const props = defineProps({
   },
   wrapperClass: {
     type: String,
-    default () { return $theme('ui.dropdown.wrapper').value }
+    default () { return $theme('ui.dropdown.wrapper') }
   },
   containerClass: {
     type: String,
-    default () { return $theme('ui.dropdown.container').value }
+    default () { return $theme('ui.dropdown.container') }
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.dropdown.base').value }
+    default () { return $theme('ui.dropdown.base') }
   },
   itemBaseClass: {
     type: String,
-    default () { return $theme('ui.dropdown.item.base').value }
+    default () { return $theme('ui.dropdown.item.base') }
   },
   itemActiveClass: {
     type: String,
-    default () { return $theme('ui.dropdown.item.active').value }
+    default () { return $theme('ui.dropdown.item.active') }
   },
   itemInactiveClass: {
     type: String,
-    default () { return $theme('ui.dropdown.item.inactive').value }
+    default () { return $theme('ui.dropdown.item.inactive') }
   },
   itemDisabledClass: {
     type: String,
-    default () { return $theme('ui.dropdown.item.disabled').value }
+    default () { return $theme('ui.dropdown.item.disabled') }
   },
   itemIconClass: {
     type: String,
-    default () { return $theme('ui.dropdown.item.icon').value }
+    default () { return $theme('ui.dropdown.item.icon') }
   },
   itemAvatarClass: {
     type: String,
-    default () { return $theme('ui.dropdown.item.avatar').value }
+    default () { return $theme('ui.dropdown.item.avatar') }
   }
 })
 

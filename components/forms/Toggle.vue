@@ -35,47 +35,47 @@ const props = defineProps({
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.toggle.base').value }
+    default () { return $theme('ui.toggle.base') }
   },
   activeClass: {
     type: String,
-    default () { return $theme('ui.toggle.active').value }
+    default () { return $theme('ui.toggle.active') }
   },
   inactiveClass: {
     type: String,
-    default () { return $theme('ui.toggle.inactive').value }
+    default () { return $theme('ui.toggle.inactive') }
   },
   containerBaseClass: {
     type: String,
-    default () { return $theme('ui.toggle.container.base').value }
+    default () { return $theme('ui.toggle.container.base') }
   },
   containerActiveClass: {
     type: String,
-    default () { return $theme('ui.toggle.container.active').value }
+    default () { return $theme('ui.toggle.container.active') }
   },
   containerInactiveClass: {
     type: String,
-    default () { return $theme('ui.toggle.container.inactive').value }
+    default () { return $theme('ui.toggle.container.inactive') }
   },
   iconBaseClass: {
     type: String,
-    default () { return $theme('ui.toggle.icon.base').value }
+    default () { return $theme('ui.toggle.icon.base') }
   },
   iconActiveClass: {
     type: String,
-    default () { return $theme('ui.toggle.icon.active').value }
+    default () { return $theme('ui.toggle.icon.active') }
   },
   iconInactiveClass: {
     type: String,
-    default () { return $theme('ui.toggle.icon.inactive').value }
+    default () { return $theme('ui.toggle.icon.inactive') }
   },
   iconOnClass: {
     type: String,
-    default () { return $theme('ui.toggle.icon.on').value }
+    default () { return $theme('ui.toggle.icon.on') }
   },
   iconOffClass: {
     type: String,
-    default () { return $theme('ui.toggle.icon.off').value }
+    default () { return $theme('ui.toggle.icon.off') }
   }
 })
 

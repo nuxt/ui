@@ -44,14 +44,14 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($theme('ui.button.size').value).includes(value)
+      return Object.keys($theme('ui.button.size')).includes(value)
     }
   },
   variant: {
     type: String,
     default: 'primary',
     validator (value: string) {
-      return Object.keys($theme('ui.button.variant').value).includes(value)
+      return Object.keys($theme('ui.button.variant')).includes(value)
     }
   },
   icon: {
@@ -68,7 +68,7 @@ const props = defineProps({
   },
   loadingIcon: {
     type: String,
-    default () { return $theme('ui.button.icon.loading').value }
+    default () { return $theme('ui.button.icon.loading') }
   },
   trailing: {
     type: Boolean,
@@ -96,15 +96,15 @@ const props = defineProps({
   },
   roundedClass: {
     type: String,
-    default () { return $theme('ui.button.rounded').value }
+    default () { return $theme('ui.button.rounded') }
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.button.base').value }
+    default () { return $theme('ui.button.base') }
   },
   iconBaseClass: {
     type: String,
-    default () { return $theme('ui.button.icon.base').value }
+    default () { return $theme('ui.button.icon.base') }
   },
   leadingIconClass: {
     type: String,
@@ -161,9 +161,9 @@ const isSquare = computed(() => props.square || (!slots.default && !props.label)
 const buttonClass = computed(() => {
   return classNames(
     props.baseClass,
-    $theme('ui.button.size').value[props.size],
-    $theme('ui.button').value[isSquare.value ? 'square' : 'spacing'][props.size],
-    $theme('ui.button.variant').value[props.variant],
+    $theme('ui.button.size')[props.size],
+    $theme('ui.button')[isSquare.value ? 'square' : 'spacing'][props.size],
+    $theme('ui.button.variant')[props.variant],
     props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center',
     props.rounded ? 'rounded-full' : props.roundedClass,
     props.customClass
@@ -189,8 +189,8 @@ const trailingIconName = computed(() => {
 const leadingIconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
-    $theme('ui.button.icon.size').value[props.size],
-    (!!slots.default || !!props.label?.length) && $theme('ui.button.icon.leading.spacing').value[props.size],
+    $theme('ui.button.icon.size')[props.size],
+    (!!slots.default || !!props.label?.length) && $theme('ui.button.icon.leading.spacing')[props.size],
     props.leadingIconClass,
     props.loading && 'animate-spin'
   )
@@ -199,8 +199,8 @@ const leadingIconClass = computed(() => {
 const trailingIconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
-    $theme('ui.button.icon.size').value[props.size],
-    (!!slots.default || !!props.label?.length) && $theme('ui.button.icon.trailing.spacing').value[props.size],
+    $theme('ui.button.icon.size')[props.size],
+    (!!slots.default || !!props.label?.length) && $theme('ui.button.icon.trailing.spacing')[props.size],
     props.trailingIconClass,
     props.loading && !isLeading.value && 'animate-spin'
   )

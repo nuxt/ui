@@ -50,59 +50,59 @@ defineProps({
   },
   wrapperClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.wrapper').value }
+    default () { return $theme('ui.verticalNavigation.wrapper') }
   },
   baseClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.base').value }
+    default () { return $theme('ui.verticalNavigation.base') }
   },
   spacingClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.spacing').value }
+    default () { return $theme('ui.verticalNavigation.spacing') }
   },
   activeClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.active').value }
+    default () { return $theme('ui.verticalNavigation.active') }
   },
   inactiveClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.inactive').value }
+    default () { return $theme('ui.verticalNavigation.inactive') }
   },
   iconBaseClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.icon.base').value }
+    default () { return $theme('ui.verticalNavigation.icon.base') }
   },
   iconSpacingClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.icon.spacing').value }
+    default () { return $theme('ui.verticalNavigation.icon.spacing') }
   },
   iconActiveClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.icon.active').value }
+    default () { return $theme('ui.verticalNavigation.icon.active') }
   },
   iconInactiveClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.icon.inactive').value }
+    default () { return $theme('ui.verticalNavigation.icon.inactive') }
   },
   avatarBaseClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.avatar.base').value }
+    default () { return $theme('ui.verticalNavigation.avatar.base') }
   },
   avatarSpacingClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.avatar.spacing').value }
+    default () { return $theme('ui.verticalNavigation.avatar.spacing') }
   },
   badgeBaseClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.badge.base').value }
+    default () { return $theme('ui.verticalNavigation.badge.base') }
   },
   badgeActiveClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.badge.active').value }
+    default () { return $theme('ui.verticalNavigation.badge.active') }
   },
   badgeInactiveClass: {
     type: String,
-    default () { return $theme('ui.verticalNavigation.badge.inactive').value }
+    default () { return $theme('ui.verticalNavigation.badge.inactive') }
   }
 })
 </script>

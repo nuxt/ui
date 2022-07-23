@@ -20,7 +20,7 @@ const props = defineProps({
   },
   constrainedClass: {
     type: String,
-    default () { return $theme('ui.container.constrained').value }
+    default () { return $theme('ui.container.constrained') }
   }
 })
 
