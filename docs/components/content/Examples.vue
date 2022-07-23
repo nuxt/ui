@@ -1,17 +1,5 @@
 <template>
   <div class="space-y-4">
-    <div class="pb-10 border-b u-border-gray-200 mb-10">
-      <div>
-        <h1 class="inline-block text-3xl font-extrabold u-text-gray-900 tracking-tight">
-          Examples
-        </h1>
-      </div>
-
-      <p class="mt-1 text-lg u-text-gray-500">
-        Examples of real-life usage of components.
-      </p>
-    </div>
-
     <div>
       <div class="font-medium text-sm mb-1 u-text-gray-700">
         Avatar:

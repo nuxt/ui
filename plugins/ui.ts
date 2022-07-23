@@ -6,7 +6,6 @@ export default defineNuxtPlugin(() => {
   const theme = useTheme()
 
   const ui = computed(() => {
-    // console.log(theme.value)
     return theme.value.ui
   })
 

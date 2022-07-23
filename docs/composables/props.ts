@@ -1,5 +1,3 @@
-import { ref } from 'vue'
-
 export const useDefaultProps = () => {
   const people = [
     { id: 1, label: 'Durward Reynolds', disabled: false },
@@ -8,13 +6,6 @@ export const useDefaultProps = () => {
     { id: 4, label: 'Benedict Kessler', disabled: true },
     { id: 5, label: 'Katelyn Rohan', disabled: false }
   ]
-
-  const selectCustom = ref(people[0])
-  const commandPalette = ref(people[0])
-  const alertDialog = ref(false)
-  const toggle = ref(false)
-  const modal = ref(false)
-  const slideover = ref(false)
 
   const defaults = computed(() => {
     return {
@@ -27,19 +18,19 @@ export const useDefaultProps = () => {
       Alert: {
         title: 'A new software update is available. See what’s new in version 2.0.4.'
       },
-      AlertDialog: {
+      AlertDialog: state => ({
         title: 'Are you sure you want to close this modal?',
-        modelValue: alertDialog,
-        'onUpdate:modelValue': (v) => { alertDialog.value = v },
+        modelValue: state.modelValue,
+        'onUpdate:modelValue': (v) => { state.modelValue = v },
         component: {
           name: 'Button',
           props: {
             variant: 'secondary',
             label: 'Open modal',
-            onClick: () => { alertDialog.value = true }
+            onClick: () => { state.modelValue = true }
           }
         }
-      },
+      }),
       Avatar: {
         src: 'https://picsum.photos/200/300'
       },
@@ -93,15 +84,15 @@ export const useDefaultProps = () => {
           }
         ]
       },
-      CommandPalette: {
-        modelValue: commandPalette,
-        'onUpdate:modelValue': (v) => { commandPalette.value = v },
+      CommandPalette: state => ({
+        modelValue: state.modelValue,
+        'onUpdate:modelValue': (v) => { state.modelValue = v },
         groups: [{
           key: 'people',
           label: 'People',
           commands: people
         }]
-      },
+      }),
       Icon: {
         name: 'heroicons-outline:bell'
       },
@@ -124,10 +115,10 @@ export const useDefaultProps = () => {
           }
         }
       },
-      Toggle: {
-        modelValue: toggle,
-        'onUpdate:modelValue': (v) => { toggle.value = v }
-      },
+      Toggle: state => ({
+        modelValue: state.modelValue,
+        'onUpdate:modelValue': (v) => { state.modelValue = v }
+      }),
       Checkbox: {
         name: 'checkbox'
       },
@@ -138,12 +129,12 @@ export const useDefaultProps = () => {
         name: 'select',
         options: ['English', 'Spanish', 'French', 'German', 'Chinese']
       },
-      SelectCustom: {
-        modelValue: selectCustom,
-        'onUpdate:modelValue': (v) => { selectCustom.value = v },
+      SelectCustom: state => ({
+        modelValue: state.modelValue,
+        'onUpdate:modelValue': (v) => { state.modelValue = v },
         textAttribute: 'label',
         options: people
-      },
+      }),
       Textarea: {
         name: 'textarea'
       },
@@ -155,17 +146,16 @@ export const useDefaultProps = () => {
         title: 'Notification title',
         callback: 'console.log(\'Timer expired\')'
       },
-      Modal: {
-        modelValue: modal,
-        'onUpdate:modelValue': (v) => { modal.value = v },
+      Modal: state => ({
+        modelValue: state.modelValue,
+        'onUpdate:modelValue': (v) => { state.modelValue = v },
         component: {
           name: 'Button',
           props: {
             variant: 'secondary',
             label: 'Open modal',
             onClick: () => {
-              console.log('???')
-              modal.value = true
+              state.modelValue = true
             }
           }
         },
@@ -179,12 +169,12 @@ export const useDefaultProps = () => {
               name: 'Button',
               props: {
                 label: 'Close',
-                onClick: () => { modal.value = false }
+                onClick: () => { state.modelValue = false }
               }
             }
           }
         }
-      },
+      }),
       Slideover: state => ({
         modelValue: state.modelValue,
         'onUpdate:modelValue': (v) => { state.modelValue = v },

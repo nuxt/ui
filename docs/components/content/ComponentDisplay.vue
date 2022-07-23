@@ -109,7 +109,7 @@ const defaultProps = useDefaultProps()
 
 // Grab component data from instance
 const componentDataProps = ref({})
-/* Uncomnent this part to fetch data from components instance
+// /* Uncomnent this part to fetch data from components instance
 watch(
   component,
   async () => {
@@ -123,7 +123,7 @@ watch(
     immediate: true
   }
 )
-*/
+// */
 
 // Fetch data from `nuxt-component-meta`
 const { data } = await useAsyncData('metas', () => $fetch('/api/component-meta'))
@@ -157,13 +157,15 @@ const meta = computed(() => {
 // Local component state
 const state = reactive({})
 
+/*
 watch(
   () => state,
   (val) => {
-    console.log({ val })
+    //
   },
   { deep: true }
 )
+*/
 
 // Grab defaults from `useDefaultProps`
 const defaults = computed(() => {
