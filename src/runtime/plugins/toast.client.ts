@@ -1,6 +1,6 @@
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 import { defineNuxtPlugin, useState } from '#app'
-import { ToastNotification } from '../types'
+import type { ToastNotification } from '../types'
 
 export default defineNuxtPlugin(() => {
   const notifications: Ref<ToastNotification[]> = useState('notifications', () => [])
