@@ -72,7 +72,7 @@ const props = defineProps({
     default: null
   },
   spellcheck: {
-    type: String,
+    type: Boolean,
     default: null
   },
   icon: {

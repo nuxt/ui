@@ -6,6 +6,10 @@
   color-scheme: dark;
 }
 
+a:focus {
+  @apply outline-primary-500;
+}
+
 @layer utilities {
   .u-bg-white { @apply bg-white dark:bg-black; }
   .u-bg-gray-50 { @apply bg-gray-50 dark:bg-gray-900; }

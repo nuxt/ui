@@ -75,11 +75,6 @@
         <button class="flex">
           <UAvatar src="https://picsum.photos/200/300" />
         </button>
-
-        <template #item-with-avatar="{ item }">
-          <UAvatar v-if="item.avatar" :src="item.avatar" size="xxs" />
-          {{ item.label }}
-        </template>
       </UDropdown>
     </div>
 
@@ -306,10 +301,9 @@ const dropdownItems = [
 const customDropdownItems = [
   [{
     label: 'benjamincanac',
-    avatar: 'https://picsum.photos/200/300',
+    avatar: { src: 'https://picsum.photos/200/300' },
     href: 'https://google.fr',
-    target: '_blank',
-    slot: 'item-with-avatar'
+    target: '_blank'
   }],
   [{
     label: 'About',

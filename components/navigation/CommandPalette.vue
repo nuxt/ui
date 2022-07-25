@@ -7,7 +7,7 @@
   >
     <div class="flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800">
       <div class="relative flex items-center">
-        <UIcon :name="inputIcon" class="pointer-events-none absolute top-3.5 left-5 h-5 w-5 u-text-gray-400" aria-hidden="true" />
+        <Icon :name="inputIcon" class="pointer-events-none absolute top-3.5 left-5 h-5 w-5 u-text-gray-400" aria-hidden="true" />
         <ComboboxInput
           ref="comboboxInput"
           :value="query"
@@ -17,7 +17,7 @@
           @change="query = $event.target.value"
         />
 
-        <UButton v-if="closeIcon" :icon="closeIcon" variant="transparent" class="absolute right-3" @click="onClear" />
+        <Button v-if="closeIcon" :icon="closeIcon" variant="transparent" class="absolute right-3" @click="onClear" />
       </div>
 
       <ComboboxOptions v-if="groups.length" static hold class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2">
@@ -29,7 +29,7 @@
       </ComboboxOptions>
 
       <div v-else class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
-        <UIcon :name="emptyIcon" class="w-6 h-6 mx-auto u-text-gray-400" aria-hidden="true" />
+        <Icon :name="emptyIcon" class="w-6 h-6 mx-auto u-text-gray-400" aria-hidden="true" />
         <p class="mt-4 text-sm u-text-gray-900">
           {{ query ? "We couldn't find any items with that term. Please try again." : "We couldn't find any items." }}
         </p>
@@ -46,6 +46,8 @@ import { useFuse } from '@vueuse/integrations/useFuse'
 import { defu } from 'defu'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Group, Command } from '../../types/command-palette'
+import Icon from '../elements/Icon.vue'
+import Button from '../elements/Button.vue'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 
 const props = defineProps({
@@ -113,6 +115,7 @@ const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => de
 }))
 
 const fuse = props.groups.reduce((acc, group) => {
+  // FIXME: useFuse is not watching data correctly, so we need to add an id
   const fuse = useFuse(group.customQuery ? group.customQuery(query) : query, group.commands, defu({}, group.options || {}, options.value))
   acc[group.key] = fuse
   return acc
@@ -121,7 +124,7 @@ const fuse = props.groups.reduce((acc, group) => {
 const groups = computed(() => props.groups.map((group) => {
   return {
     ...group,
-    commands: fuse[group.key].results.value.map(result => result.item).slice(0, group.options?.resultLimit || options.value.resultLimit)
+    commands: fuse[group.key].results.value.map(result => group.commands.find(command => command.id === result.item.id)).filter(Boolean).slice(0, group.options?.resultLimit || options.value.resultLimit)
   }
 }).filter(group => group.commands.length))
 

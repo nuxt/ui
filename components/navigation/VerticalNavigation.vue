@@ -14,7 +14,7 @@
       <slot name="avatar" :link="link">
         <Avatar
           v-if="link.avatar"
-          v-bind="link.avatar"
+          v-bind="{ size: 'xs', ...link.avatar }"
           :class="[avatarBaseClass, link.label && avatarSpacingClass]"
         />
       </slot>
@@ -38,14 +38,23 @@
 </template>
 
 <script setup lang="ts">
-import Icon from '../elements/Icon.vue'
+import type { PropType } from 'vue'
 import Link from '../elements/Link.vue'
 import Avatar from '../elements/Avatar.vue'
+import Icon from '../elements/Icon.vue'
+import type { Avatar as AvatarType } from '../../types/avatar'
 import { $theme } from '#theme'
 
 defineProps({
   links: {
-    type: Array,
+    type: Array as PropType<{
+      label: string
+      icon?: string
+      iconClass?: string
+      avatar?: Partial<AvatarType>
+      click?: Function
+      badge?: string
+    }[]>,
     required: true
   },
   wrapperClass: {

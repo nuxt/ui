@@ -22,9 +22,13 @@
               <Component v-bind="item" :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)" @mouseover="$emit('hover', item)">
                 <slot :name="item.slot" :item="item">
                   <Icon v-if="item.icon" :name="item.icon" :class="itemIconClass" />
-                  <Avatar v-if="item.avatar" :src="item.avatar" :alt="item.label" :class="itemAvatarClass" size="xs" />
+                  <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="itemAvatarClass" />
 
                   <span class="truncate">{{ item.label }}</span>
+
+                  <span v-if="item.shortcuts?.length" :class="itemShortcutsClass">
+                    <kbd v-for="shortcut of item.shortcuts" :key="shortcut" class="font-sans">{{ shortcut }}</kbd>
+                  </span>
                 </slot>
               </Component>
             </MenuItem>
@@ -42,17 +46,29 @@ import {
   MenuItems,
   MenuItem
 } from '@headlessui/vue'
-import type { Ref } from 'vue'
+import type { Ref, PropType } from 'vue'
+import type { RouteLocationNormalized } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import NuxtLink from '#app/components/nuxt-link'
 import Icon from '../elements/Icon.vue'
 import Avatar from '../elements/Avatar.vue'
 import { classNames, usePopper } from '../../utils'
+import type { Avatar as AvatarType } from '../../types/avatar'
 import { $theme } from '#theme'
 
 const props = defineProps({
   items: {
-    type: Array,
+    type: Array as PropType<{
+      to: RouteLocationNormalized
+      exact: boolean
+      label: string
+      disabled?: boolean
+      slot?: string
+      icon?: string
+      avatar?: Partial<AvatarType>
+      click?: Function
+      shortcuts?: string[]
+    }[][]>,
     default: () => []
   },
   placement: {
@@ -111,6 +127,10 @@ const props = defineProps({
   itemAvatarClass: {
     type: String,
     default () { return $theme('ui.dropdown.item.avatar') }
+  },
+  itemShortcutsClass: {
+    type: String,
+    default () { return $theme('ui.dropdown.item.shortcuts') }
   }
 })
 

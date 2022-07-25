@@ -50,9 +50,10 @@
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
     "@types/lodash-es": "^4.17.6",
     "eslint": "^8.20.0",
-    "nuxt": "npm:nuxt3@3.0.0-rc.6-27635653.88f4525",
     "standard-version": "^9.5.0",
-    "vite-plugin-inspect": "^0.6.0"
+    "vite-plugin-inspect": "^0.6.0",
+    "nuxt": "npm:nuxt3@latest",
+    "vue-tsc": "^0.38.9"
   },
   "build": {
     "externals": [

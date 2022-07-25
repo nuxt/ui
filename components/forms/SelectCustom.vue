@@ -83,6 +83,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import type { PropType } from 'vue'
 import {
   Combobox,
   ComboboxButton,
@@ -100,7 +101,7 @@ const props = defineProps({
     default: ''
   },
   options: {
-    type: Array,
+    type: Array as PropType<{ disabled?: boolean }[]>,
     default: () => []
   },
   placement: {

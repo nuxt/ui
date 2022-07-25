@@ -1,6 +1,6 @@
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 import { defineNuxtPlugin, useState } from '#app'
-import { ToastNotification, ToastPlugin } from '../types'
+import type { ToastNotification } from '../types'
 
 export default defineNuxtPlugin(() => {
   const notifications: Ref<ToastNotification[]> = useState('notifications', () => [])
@@ -44,9 +44,3 @@ export default defineNuxtPlugin(() => {
     }
   }
 })
-
-declare module '#app' {
-  interface NuxtApp {
-    $toast: ToastPlugin
-  }
-}

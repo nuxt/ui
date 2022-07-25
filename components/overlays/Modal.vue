@@ -29,11 +29,11 @@
             >
               <DialogPanel :class="modalClass">
                 <Card
-                  base-class
-                  background-class
-                  shadow-class
-                  ring-class
-                  rounded-class
+                  base-class=""
+                  background-class=""
+                  shadow-class=""
+                  ring-class=""
+                  rounded-class=""
                   v-bind="$attrs"
                 >
                   <template v-if="$slots.header" #header>

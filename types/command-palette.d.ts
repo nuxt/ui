@@ -1,13 +1,14 @@
 import type { Ref, ComputedRef } from 'vue'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
+import type { Avatar } from './avatar'
 
 export interface Command {
+  id: string | number
   prefix?: string
   suffix?: string
-  label: string
   icon?: string
   iconClass?: string
-  avatar?: string
+  avatar?: Partial<Avatar>
   chip?: string
   disabled?: boolean
   shortcuts?: string[]
@@ -15,7 +16,6 @@ export interface Command {
 
 export interface Group {
   key: string
-  label: string
   active?: string
   inactive?: string
   commands: Command[]

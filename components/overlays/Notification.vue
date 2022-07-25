@@ -15,11 +15,11 @@
     >
       <div class="relative overflow-hidden rounded-lg ring-1 u-ring-gray-200">
         <div class="p-4">
-          <div class="flex" :class="{ 'items-center': !description }">
-            <div class="flex-shrink-0">
+          <div class="flex gap-3" :class="{ 'items-start': description, 'items-center': !description }">
+            <div v-if="iconName" class="flex-shrink-0">
               <Icon :name="iconName" class="w-6 h-6" :class="iconClass" />
             </div>
-            <div class="ml-3 w-0 flex-1 pt-0.5">
+            <div class="w-0 flex-1">
               <p class="text-sm font-medium u-text-gray-900">
                 {{ title }}
               </p>
@@ -27,7 +27,7 @@
                 {{ description }}
               </p>
 
-              <div v-if="description" class="mt-3 flex items-center gap-7">
+              <div v-if="description && (undo || dismiss)" class="mt-3 flex items-center gap-6">
                 <button v-if="undo" type="button" class="text-sm font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none" @click.stop="onUndo">
                   Undo
                 </button>
@@ -36,8 +36,8 @@
                 </button>
               </div>
             </div>
-            <div class="flex-shrink-0 flex items-center ml-4">
-              <div v-if="!description" class="flex items-center gap-2">
+            <div class="flex-shrink-0 flex items-center gap-3">
+              <div v-if="!description && (undo || dismiss)" class="flex items-center gap-2">
                 <button v-if="undo" type="button" class="text-sm font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none" @click.stop="onUndo">
                   Undo
                 </button>
@@ -47,7 +47,7 @@
               </div>
 
               <button
-                class="transition duration-150 ease-in-out u-text-gray-400 focus:outline-none hover:u-text-gray-500 focus:u-text-gray-500 ml-4"
+                class="transition duration-150 ease-in-out u-text-gray-400 focus:outline-none hover:u-text-gray-500 focus:u-text-gray-500"
                 @click.stop="onClose"
               >
                 <span class="sr-only">Close</span>
