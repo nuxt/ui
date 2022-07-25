@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="relative min-h-[100px] p-8 w-full flex items-center justify-center bg-gray-800 ring-4 dark:ring-gray-900 ring-gray-100 rounded-lg drop-shadow-xl z-30">
+    <div class="relative min-h-[100px] p-8 w-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 ring-2 dark:ring-gray-900 ring-gray-200 rounded-lg drop-shadow-xl z-5">
       <component :is="`U${defaults.component.name}`" v-if="defaults && defaults.component" v-bind="defaults.component.props" />
 
       <component :is="component" v-bind="state">
@@ -25,61 +25,65 @@
       </component>
     </div>
 
-    <div class="p-4 flex-1 space-y-3 lg:overflow-y-auto">
-      <UFormGroup
-        v-for="prop of meta.props.filter(prop => prop.type && prop.name)"
-        :key="prop.name"
-        class="capitalize"
-        :name="prop.name"
-        :label="prop.name"
-      >
-        <UToggle
-          v-if="prop.type === 'Boolean'"
-          v-model="state[prop.name]"
+    <UCard class="-mt-2 pt-2 p-4 flex-1">
+      <div class="space-y-3">
+        <UFormGroup
+          v-for="prop of meta.props.filter(prop => prop.type && prop.name)"
+          :key="prop.name"
           :name="prop.name"
-          :label="prop.name"
-        />
-        <USelect
-          v-else-if="prop.values"
-          v-model="state[prop.name]"
-          :name="prop.name"
-          placeholder="Choose one..."
-          :options="prop.values"
-          size="sm"
-        />
-        <UInput
-          v-else-if="prop.type === 'String'"
-          v-model="state[prop.name]"
-          :name="prop.name"
-          size="sm"
-          autocomplete="off"
-        />
-        <UInput
-          v-else-if="prop.type === 'Number'"
-          v-model="state[prop.name]"
-          type="number"
-          :name="prop.name"
-          size="sm"
-        />
-        <UTextarea
-          v-else
-          :model-value="JSON.stringify(state[prop.name], null, 2)"
-          :name="prop.name"
-          size="sm"
-          :rows="8"
-          autoresize
-          @update:model-value="value => {
-            try {
-              state[prop.name] = JSON.parse(value)
-            } catch (e) {}
-          }"
-        />
-      </UFormGroup>
-    </div>
+          :label="upperFirst(kebabCase(prop.name).replaceAll('-', ' ').toLocaleLowerCase())"
+        >
+          <UToggle
+            v-if="prop.type === 'Boolean'"
+            v-model="state[prop.name]"
+            :name="prop.name"
+            :label="prop.name"
+          />
+          <USelect
+            v-else-if="prop.values"
+            v-model="state[prop.name]"
+            :name="prop.name"
+            placeholder="Choose one..."
+            :options="prop.values"
+            size="sm"
+          />
+          <UInput
+            v-else-if="prop.type === 'String'"
+            v-model="state[prop.name]"
+            :name="prop.name"
+            size="sm"
+            autocomplete="off"
+          />
+          <UInput
+            v-else-if="prop.type === 'Number'"
+            v-model="state[prop.name]"
+            type="number"
+            :name="prop.name"
+            size="sm"
+          />
+          <UTextarea
+            v-else
+            :model-value="JSON.stringify(state[prop.name], null, 2)"
+            :name="prop.name"
+            size="sm"
+            :rows="8"
+            autoresize
+            @update:model-value="value => {
+              try {
+                state[prop.name] = JSON.parse(value)
+              } catch (e) {}
+            }"
+          />
+        </UFormGroup>
+      </div>
+    </UCard>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computedWithControl } from '@vueuse/shared'
+import { kebabCase, upperFirst } from 'scule'
+
 const _props = defineProps({
   component: {
     type: String,
@@ -87,9 +91,11 @@ const _props = defineProps({
   }
 })
 
+/*
 function lowercaseFirstLetter (string) {
   return string.charAt(0).toLowerCase() + string.slice(1)
 }
+*/
 
 const nuxtApp = useNuxtApp()
 
@@ -107,15 +113,35 @@ const resolvedComponent = computed<any>(() => nuxtApp.vueApp.component(component
 // Grab default props defined locally
 const defaultProps = useDefaultProps()
 
+// Grab defaults from `useDefaultProps`
+const defaults = computedWithControl(
+  defaultProps,
+  () => {
+    let _defaults = defaultProps.value[_component.value] || {}
+
+    if (typeof _defaults === 'function') {
+      _defaults = _defaults(state)
+    }
+
+    return _defaults
+  }
+)
+
+// Slots shorthand
+const slots = computed<any[]>(() => {
+  return Object.entries(defaults.value.slots || {}) || []
+})
+
 // Grab component data from instance
 const componentDataProps = ref({})
+
 // /* Uncomnent this part to fetch data from components instance
 watch(
   component,
   async () => {
     if (!resolvedComponent.value?.__asyncLoader) { return false }
 
-    const data = await resolvedComponent.value?.__asyncLoader()
+    const data = await resolvedComponent.value.__asyncLoader()
 
     componentDataProps.value = data.props
   },
@@ -130,7 +156,7 @@ const { data } = await useAsyncData('metas', () => $fetch('/api/component-meta')
 
 // Meta
 const meta = computed(() => {
-  const _meta = data.value.find(item => item.name === component.value)
+  const _meta = { ...data.value.find(item => item.name === component.value) }
 
   _meta.props = _meta.props.map((prop) => {
     const componentPropData = componentDataProps.value?.[prop.name]
@@ -145,7 +171,6 @@ const meta = computed(() => {
         }
       }
     }
-
     if (values) { prop.values = values }
 
     return prop
@@ -167,42 +192,23 @@ watch(
 )
 */
 
-// Grab defaults from `useDefaultProps`
-const defaults = computed(() => {
-  let _defaults = defaultProps.value[_component.value] || {}
-
-  if (typeof _defaults === 'function') {
-    _defaults = _defaults(state)
-  }
-
-  return _defaults
-})
-
-// Slots shorthand
-const slots = computed<any[]>(() => {
-  return Object.entries(defaults.value.slots || {}) || []
-})
-
 // Recompose component state from defaults and parsed metas
-// - Apply data coming from `nuxt-component-meta`
 watch(
-  meta,
-  (val) => {
-    (val?.props || []).forEach(
+  [defaults, meta],
+  ([_defaults, _meta]) => {
+    const metaProps = _meta?.props || []
+
+    // - Apply data coming from `nuxt-component-meta`
+    metaProps.forEach(
       (val) => {
         const { name, default: defaultValue } = val
 
         state[name] = defaultValue
       }
     )
-  },
-  { immediate: true }
-)
-// - Apply data coming from useDefaultProps
-watch(
-  defaults,
-  (val) => {
-    Object.entries(val).forEach(
+
+    // - Apply data coming from useDefaultProps
+    Object.entries(_defaults).forEach(
       (binding) => {
         const [key, value] = binding
 

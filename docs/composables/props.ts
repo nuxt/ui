@@ -144,7 +144,7 @@ export const useDefaultProps = () => {
       Notification: {
         id: '1',
         title: 'Notification title',
-        callback: 'console.log(\'Timer expired\')'
+        callback: () => console.log('Timer expired')
       },
       Modal: state => ({
         modelValue: state.modelValue,

@@ -12,9 +12,13 @@ export default defineNuxtConfig({
       { rel: 'stylesheet', href: 'https://rsms.me/inter/inter.css' }
     ]
   },
-  components: {
-    global: true
-  },
+  components: [
+    {
+      path: '~/components',
+      global: true,
+      prefix: ''
+    }
+  ],
   ui: {
     colors: {
       primary: 'blue',
