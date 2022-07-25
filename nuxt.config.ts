@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'url'
 import { defineNuxtConfig } from 'nuxt'
 import { resolve } from 'pathe'
-import Inspect from 'vite-plugin-inspect'
+// import Inspect from 'vite-plugin-inspect'
 import module from './app/module'
 
 const themeDir = fileURLToPath(new URL('./', import.meta.url))
@@ -10,7 +10,7 @@ const resolveThemeDir = (path: string) => resolve(themeDir, path)
 export default defineNuxtConfig({
   vite: {
     plugins: [
-      Inspect()
+      // Inspect()
     ],
     optimizeDeps: {
       exclude: ['@nuxt-themes/docus']
