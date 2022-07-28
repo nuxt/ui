@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <div class="relative min-h-[100px] p-8 w-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 ring-2 dark:ring-gray-900 ring-gray-200 rounded-lg drop-shadow-xl z-5">
+  <div class="ring-4 dark:ring-gray-900 ring-gray-200 rounded-lg drop-shadow-xl overflow-hidden">
+    <div class="relative min-h-[100px] p-8 w-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 z-5">
       <component :is="`U${defaults.component.name}`" v-if="defaults && defaults.component" v-bind="defaults.component.props" />
 
       <component :is="component" v-bind="state">
-        <template v-for="[key, slot] of slots" #[key]>
+        <template v-for="[_key, slot] of slots">
           <template v-if="Array.isArray(slot)">
-            <div :key="key">
+            <div :key="_key">
               <component
                 :is="nestedSlot.component ? `U${nestedSlot.component.name}` : nestedSlot.tag"
                 v-for="(nestedSlot, index) of slot"
@@ -18,8 +18,10 @@
             </div>
           </template>
           <template v-else>
-            <component :is="`U${slot.component.name}`" v-if="slot.component" :key="`${key}-component`" v-bind="slot.component?.props || defaultProps[slot.component]" />
-            <component :is="slot.tag" v-else :key="`${key}-tag`" :class="slot.class" v-html="slot.html" />
+            <div :key="_key">
+              <component :is="`U${slot.component.name}`" v-if="slot.component" v-bind="slot.component?.props || defaultProps[slot.component]" />
+              <component :is="slot.tag" v-else :class="slot.class" v-html="slot.html" />
+            </div>
           </template>
         </template>
       </component>
@@ -76,6 +78,12 @@
           />
         </UFormGroup>
       </div>
+
+      <div class="border-t u-border-gray-200">
+        <pre class="text-sm leading-6 u-text-gray-900 flex-1 relative flex ligatures-none lg:overflow-y-auto overflow-x-hidden px-4 sm:px-6 py-5 sm:py-6">
+          <code class="flex-none min-w-full whitespace-pre-wrap break-all">{{ code }}</code>
+        </pre>
+      </div>
     </UCard>
   </div>
 </template>
@@ -90,12 +98,6 @@ const _props = defineProps({
     required: true
   }
 })
-
-/*
-function lowercaseFirstLetter (string) {
-  return string.charAt(0).toLowerCase() + string.slice(1)
-}
-*/
 
 const nuxtApp = useNuxtApp()
 
@@ -135,7 +137,6 @@ const slots = computed<any[]>(() => {
 // Grab component data from instance
 const componentDataProps = ref({})
 
-// /* Uncomnent this part to fetch data from components instance
 watch(
   component,
   async () => {
@@ -149,48 +150,53 @@ watch(
     immediate: true
   }
 )
-// */
 
 // Fetch data from `nuxt-component-meta`
-const { data } = await useAsyncData('metas', () => $fetch('/api/component-meta'))
+
+const { data } = await useAsyncData(
+  'component-metas',
+  () => $fetch('/api/component-meta', {
+    responseType: 'json'
+  })
+)
 
 // Meta
-const meta = computed(() => {
-  const _meta = { ...data.value.find(item => item.name === component.value) }
+const meta = computedWithControl(
+  [data],
+  () => {
+    const metas = data.value as any[] || []
 
-  _meta.props = _meta.props.map((prop) => {
-    const componentPropData = componentDataProps.value?.[prop.name]
+    const _meta = metas.find(item => item.name === component.value)
 
-    let values
-    if (componentPropData) {
-      if (componentPropData.validator) {
-        const arrayRegex = componentPropData.validator.toString().match(/\[.*\]/g, '')
-
-        if (arrayRegex) {
-          values = JSON.parse(arrayRegex[0].replace(/'/g, '"')).filter(Boolean)
-        }
+    if (!_meta) {
+      return {
+        props: []
       }
     }
-    if (values) { prop.values = values }
 
-    return prop
+    _meta.props = _meta.props.map((prop) => {
+      const componentPropData = componentDataProps.value?.[prop.name]
+
+      let values
+      if (componentPropData) {
+        if (componentPropData.validator) {
+          const arrayRegex = componentPropData.validator.toString().match(/\[.*\]/g, '')
+
+          if (arrayRegex) {
+            values = JSON.parse(arrayRegex[0].replace(/'/g, '"')).filter(Boolean)
+          }
+        }
+      }
+      if (values) { prop.values = values }
+
+      return prop
+    })
+
+    return _meta
   })
-
-  return _meta
-})
 
 // Local component state
 const state = reactive({})
-
-/*
-watch(
-  () => state,
-  (val) => {
-    //
-  },
-  { deep: true }
-)
-*/
 
 // Recompose component state from defaults and parsed metas
 watch(
@@ -222,4 +228,29 @@ watch(
   },
   { immediate: true }
 )
+
+const code = computed(() => {
+  let code = `<U${component.value}`
+
+  for (const [key, value] of Object.entries(state)) {
+    if (value) {
+      const prop = kebabCase(key)
+
+      if (key === 'modelValue') {
+        code += `\n v-model="${value}"`
+        continue
+      }
+
+      if (key === 'onUpdate:modelValue') {
+        continue
+      }
+
+      code += `\n :${prop}="${value}"`
+    }
+  }
+
+  code += '\n/>'
+
+  return code
+})
 </script>

@@ -421,6 +421,9 @@ const defaultPreset = (variantColors: string[]) => {
 
 export default defineTheme({
   ui: {
+    colors: {
+      primary: 'indigo'
+    },
     ...defaultPreset([
       'green',
       'yellow',

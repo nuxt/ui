@@ -2,7 +2,8 @@ import { defineNuxtConfig } from 'nuxt'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
-  extends: ['../playground', '@nuxt-themes/docus'],
+  extends: ['../'],
+  modules: ['nuxt-component-meta'],
   meta: {
     title: '@nuxthq/ui',
     meta: [

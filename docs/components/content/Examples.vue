@@ -230,7 +230,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const isModalOpen = ref(false)
 
 const people = [

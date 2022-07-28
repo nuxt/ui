@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'url'
 import { defineNuxtModule } from '@nuxt/kit'
 import { resolve } from 'pathe'
+import colors from 'tailwindcss/colors.js'
 import { name, version } from '../package.json'
 import { colorsAsRegex, excludeColors } from '../utils/colors'
 
@@ -66,6 +67,11 @@ export default defineNuxtModule({
       prefix: options.prefix
     }
 
+    const nitroConfig = nuxt.options.nitro
+    nitroConfig.prerender = nitroConfig.prerender || {}
+    nitroConfig.prerender.routes = nitroConfig.prerender.routes || []
+    nuxt.options.nitro.prerender.routes.push('/api/component-meta')
+
     // Push components with prefix
     nuxt.hook('components:dirs', (components) => {
       const rootIndex = components.findIndex((dir: any) => dir.path === resolveThemeDir('../components'))
@@ -74,17 +80,53 @@ export default defineNuxtModule({
     })
 
     // @ts-ignore
-    nuxt.hook('tailwindcss:config', function (tailwindConfig: TailwindConfig) {
+    nuxt.hook('tailwindcss:config', async (tailwindConfig: TailwindConfig) => {
+      const gray = 'gray'
+      const primary = 'indigo'
+      const excludedColors = [
+        'lightBlue',
+        'warmGray',
+        'trueGray',
+        'coolGray',
+        'blueGray'
+      ]
+      excludedColors.forEach(color => delete colors[color])
+
+      tailwindConfig.darkMode = 'class'
+
+      tailwindConfig.plugins = tailwindConfig.plugins ?? []
+      tailwindConfig.plugins.push(
+        await import('@tailwindcss/forms'),
+        await import('@tailwindcss/line-clamp'),
+        await import('@tailwindcss/aspect-ratio'),
+        await import('@tailwindcss/typography')
+      )
+
       const globalColors = {
-        ...(tailwindConfig?.theme?.colors || []),
+        ...(tailwindConfig?.theme?.colors || colors),
         ...(tailwindConfig?.theme?.extend?.colors || [])
       }
+
+      tailwindConfig.theme = tailwindConfig.theme ?? {}
+      tailwindConfig.theme.extend = tailwindConfig.theme.extend ?? {}
+      tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors ?? {}
+
+      // Overwrite colors
+      globalColors.primary = tailwindConfig.theme.extend.colors.primary = globalColors[primary] || colors[primary]
+
+      // @ts-ignore
+      globalColors.gray = tailwindConfig.theme.extend.colors.gray = globalColors[gray] || colors[gray]
 
       const variantColors = excludeColors(globalColors)
       const safeColorsAsRegex = colorsAsRegex(variantColors)
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
       tailwindConfig.safelist.push(
+        'dark',
+        {
+          pattern: /rounded-(sm|md|lg|xl|2xl|3xl)/,
+          variants: ['sm']
+        },
         ...[{
           pattern: new RegExp(`bg-(${safeColorsAsRegex})-400`)
         },
