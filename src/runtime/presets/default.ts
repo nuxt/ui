@@ -190,6 +190,10 @@ export default (variantColors: string[]) => {
     ...select,
     wrapper: 'relative',
     base: `${select.base} text-left cursor-default`,
+    icon: {
+      name: 'heroicons-solid:selector',
+      ...select.icon
+    },
     list: {
       container: 'z-10 w-full py-1',
       base: 'u-bg-white shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none overflow-y-auto py-1 max-h-60',
@@ -204,6 +208,7 @@ export default (variantColors: string[]) => {
         disabled: 'cursor-not-allowed opacity-50',
         empty: 'text-sm u-text-gray-400 px-4 py-2',
         icon: {
+          name: 'heroicons-solid:check',
           base: 'absolute inset-y-0 right-0 flex items-center pr-4',
           active: 'text-white',
           inactive: 'text-primary-600',
