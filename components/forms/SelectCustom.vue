@@ -163,7 +163,7 @@ const props = defineProps({
   },
   icon: {
     type: String,
-    default: () => 'heroicons-solid:selector'
+    default: () => $ui.selectCustom.icon.name
   },
   iconBaseClass: {
     type: String,
@@ -226,7 +226,7 @@ const props = defineProps({
   },
   listOptionIcon: {
     type: String,
-    default: () => 'heroicons-solid:check'
+    default: () => $ui.selectCustom.list.option.icon.name
   },
   listOptionIconBaseClass: {
     type: String,
