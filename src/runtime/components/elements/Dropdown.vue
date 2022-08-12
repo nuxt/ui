@@ -21,7 +21,7 @@
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }" :disabled="item.disabled" as="div">
               <Component v-bind="item" :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'" :class="resolveItemClass({ active, disabled })" @click="e => onItemClick(e, item)">
                 <slot :name="item.slot" :item="item">
-                  <Icon v-if="item.icon" :name="item.icon" :class="itemIconClass" />
+                  <Icon v-if="item.icon" :name="item.icon" :class="[itemIconClass, item.iconClass]" />
                   <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="itemAvatarClass" />
 
                   <span class="truncate">{{ item.label }}</span>
@@ -65,6 +65,7 @@ const props = defineProps({
       disabled?: boolean
       slot?: string
       icon?: string
+      iconClass?: string
       avatar?: Partial<AvatarType>
       click?: Function
       shortcuts?: string[]
