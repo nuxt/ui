@@ -19,7 +19,7 @@
         <MenuItems :class="baseClass" static>
           <div v-for="(subItems, index) of items" :key="index" class="py-1">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }" :disabled="item.disabled" as="div">
-              <Component v-bind="item" :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'" :class="resolveItemClass({ active, disabled })" @click="onItemClick(item)" @mouseover="$emit('hover', item)">
+              <Component v-bind="item" :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'" :class="resolveItemClass({ active, disabled })" @click="e => onItemClick(e, item)">
                 <slot :name="item.slot" :item="item">
                   <Icon v-if="item.icon" :name="item.icon" :class="itemIconClass" />
                   <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="itemAvatarClass" />
@@ -134,8 +134,6 @@ const props = defineProps({
   }
 })
 
-defineEmits(['hover'])
-
 const [trigger, container] = usePopper({
   placement: props.placement,
   strategy: props.strategy,
@@ -168,19 +166,20 @@ function resolveItemClass ({ active, disabled }: { active: boolean, disabled: bo
   )
 }
 
-function onItemClick (item: any) {
+function onItemClick (e, item: any) {
   if (item.disabled) {
     return
   }
 
   if (item.click) {
-    item.click()
+    item.click(e)
   }
 }
 
 const menuApi: Ref<any> = ref(null)
 let openTimeout: NodeJS.Timeout | null = null
 let closeTimeout: NodeJS.Timeout | null = null
+
 onMounted(() => {
   setTimeout(() => {
     const menuProvides = trigger.value?.$.provides

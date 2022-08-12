@@ -83,7 +83,7 @@
         Dropdown with avatar:
       </div>
 
-      <UDropdown :items="customDropdownItems" placement="bottom-end" @hover="onHover">
+      <UDropdown :items="customDropdownItems" placement="bottom-end">
         <button class="flex">
           <UAvatar src="https://picsum.photos/200/300" />
         </button>
@@ -282,15 +282,14 @@ function onSubmit () {
   console.warn('submit')
 }
 
-function onHover (item) {
-  console.log(item)
-}
-
 const dropdownItems = [
   [{
     label: 'Edit',
     icon: 'heroicons-solid:pencil',
-    click: () => onClick()
+    click: (e) => {
+      e.preventDefault()
+      onClick()
+    }
   }, {
     label: 'Duplicate',
     icon: 'heroicons-solid:duplicate'
