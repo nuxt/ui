@@ -1,6 +1,6 @@
 <template>
   <Popover v-slot="{ open, close }" :class="wrapperClass" @mouseleave="onMouseLeave">
-    <PopoverButton ref="trigger" as="div" @mouseover="onMouseOver">
+    <PopoverButton ref="trigger" as="div" class="inline-flex" @mouseover="onMouseOver">
       <slot :open="open" :close="close">
         <button>Open</button>
       </slot>
