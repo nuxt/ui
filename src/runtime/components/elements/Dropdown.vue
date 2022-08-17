@@ -192,7 +192,7 @@ onMounted(() => {
         e.stopPropagation()
       }
     }, true)
-  }, 0)
+  }, 100)
 })
 
 function onMouseOver () {
