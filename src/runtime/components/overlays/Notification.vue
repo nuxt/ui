@@ -192,7 +192,9 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  timer.stop()
+  if (timer) {
+    timer.stop()
+  }
 })
 </script>
 
