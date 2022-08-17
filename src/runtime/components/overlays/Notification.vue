@@ -27,22 +27,16 @@
                 {{ description }}
               </p>
 
-              <div v-if="description && (undo || dismiss)" class="mt-3 flex items-center gap-6">
-                <button v-if="undo" type="button" class="text-sm font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none" @click.stop="onUndo">
-                  Undo
-                </button>
-                <button v-if="dismiss" type="button" class="text-sm font-medium u-text-gray-700 hover:u-text-gray-500 focus:outline-none" @click.stop="onDismiss">
-                  Dismiss
+              <div v-if="description && actions.length" class="mt-3 flex items-center gap-6">
+                <button v-for="(action, index) of actions" :key="index" type="button" class="text-sm font-medium focus:outline-none text-primary-500 hover:text-primary-600 dark:hover:text-primary-400" @click.stop="onAction(action)">
+                  {{ action.label }}
                 </button>
               </div>
             </div>
             <div class="flex-shrink-0 flex items-center gap-3">
-              <div v-if="!description && (undo || dismiss)" class="flex items-center gap-2">
-                <button v-if="undo" type="button" class="text-sm font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none" @click.stop="onUndo">
-                  Undo
-                </button>
-                <button v-if="dismiss" type="button" class="text-sm font-medium u-text-gray-700 hover:u-text-gray-500 focus:outline-none" @click.stop="onDismiss">
-                  Dismiss
+              <div v-if="!description && actions.length" class="flex items-center gap-2">
+                <button v-for="(action, index) of actions" :key="index" type="button" class="text-sm font-medium focus:outline-none text-primary-500 hover:text-primary-600 dark:hover:text-primary-400" @click.stop="onAction(action)">
+                  {{ action.label }}
                 </button>
               </div>
 
@@ -66,6 +60,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
+import type { PropType } from 'vue'
 import Icon from '../elements/Icon.vue'
 import { useTimer } from '../../composables/useTimer'
 import { classNames } from '../../utils'
@@ -102,13 +97,12 @@ const props = defineProps({
     type: Number,
     default: 5000
   },
-  undo: {
-    type: Function,
-    default: null
-  },
-  dismiss: {
-    type: Function,
-    default: null
+  actions: {
+    type: Array as PropType<{
+      label: string,
+      click: Function
+    }[]>,
+    default: () => []
   },
   callback: {
     type: Function,
@@ -171,25 +165,13 @@ function onClose () {
   emit('close')
 }
 
-function onUndo () {
+function onAction (action) {
   if (timer) {
     timer.stop()
   }
 
-  if (props.undo) {
-    props.undo()
-  }
-
-  emit('close')
-}
-
-function onDismiss () {
-  if (timer) {
-    timer.stop()
-  }
-
-  if (props.dismiss) {
-    props.dismiss()
+  if (action.click) {
+    action.click()
   }
 
   emit('close')

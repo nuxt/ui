@@ -5,7 +5,10 @@ export interface ToastNotification {
   type: string
   icon?: string
   timeout: number
-  undo?: Function
+  actions?: {
+    label: string,
+    click: Function
+  }[]
   callback?: Function
 }
 
