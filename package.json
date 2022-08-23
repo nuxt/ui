@@ -36,7 +36,7 @@
     "@tailwindcss/line-clamp": "^0.4.0",
     "@tailwindcss/typography": "^0.5.4",
     "@vueuse/core": "^8.9.4",
-    "@vueuse/integrations": "^8.9.4",
+    "@vueuse/integrations": "^9.1.1",
     "defu": "^6.0.0",
     "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",
