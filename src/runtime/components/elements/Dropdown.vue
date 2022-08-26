@@ -184,6 +184,9 @@ let closeTimeout: NodeJS.Timeout | null = null
 onMounted(() => {
   setTimeout(() => {
     const menuProvides = trigger.value?.$.provides
+    if (!menuProvides) {
+      return
+    }
     const menuProvidesSymbols = Object.getOwnPropertySymbols(menuProvides)
     menuApi.value = menuProvidesSymbols.length && menuProvides[menuProvidesSymbols[0]]
     // stop trigger click propagation on hover
@@ -192,7 +195,7 @@ onMounted(() => {
         e.stopPropagation()
       }
     }, true)
-  }, 100)
+  }, 200)
 })
 
 function onMouseOver () {

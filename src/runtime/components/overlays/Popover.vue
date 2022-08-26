@@ -92,6 +92,9 @@ let closeTimeout: NodeJS.Timeout | null = null
 onMounted(() => {
   setTimeout(() => {
     const popoverProvides = trigger.value?.$.provides
+    if (!popoverProvides) {
+      return
+    }
     const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
     popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
     // stop trigger click propagation on hover
@@ -100,7 +103,7 @@ onMounted(() => {
         e.stopPropagation()
       }
     }, true)
-  }, 0)
+  }, 200)
 })
 
 function onMouseOver () {
