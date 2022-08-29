@@ -1,16 +1,16 @@
 <template>
-  <div class="flex">
+  <div class="flex flex-row-reverse">
+    <Avatar
+      v-if="remainingGroupSize > 0"
+      :size="size"
+      :text="`+${remainingGroupSize}`"
+      :class="avatarClass"
+    />
     <Avatar
       v-for="(avatar, index) of displayedGroup"
       :key="index"
       v-bind="avatar"
       :size="size"
-      :class="avatarClass"
-    />
-    <Avatar
-      v-if="remainingGroupSize > 0"
-      :size="size"
-      :text="`+${remainingGroupSize}`"
       :class="avatarClass"
     />
   </div>
@@ -55,9 +55,9 @@ const avatars = computed(() => {
 })
 
 const displayedGroup = computed(() => {
-  if (!props.max) { return avatars.value }
+  if (!props.max) { return [...avatars.value].reverse() }
 
-  return avatars.value.slice(0, props.max)
+  return avatars.value.slice(0, props.max).reverse()
 })
 
 const remainingGroupSize = computed(() => {
