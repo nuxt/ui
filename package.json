@@ -29,27 +29,27 @@
     "@iconify/vue": "^3.2.1",
     "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
     "@nuxtjs/color-mode": "^3.1.4",
-    "@nuxtjs/tailwindcss": "^5.3.0",
-    "@popperjs/core": "^2.11.5",
-    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@nuxtjs/tailwindcss": "^5.3.2",
+    "@popperjs/core": "^2.11.6",
+    "@tailwindcss/aspect-ratio": "^0.4.1",
     "@tailwindcss/forms": "^0.5.2",
-    "@tailwindcss/line-clamp": "^0.4.0",
-    "@tailwindcss/typography": "^0.5.4",
-    "@vueuse/core": "^8.9.4",
-    "@vueuse/integrations": "^8.9.4",
-    "defu": "^6.0.0",
+    "@tailwindcss/line-clamp": "^0.4.1",
+    "@tailwindcss/typography": "^0.5.6",
+    "@vueuse/core": "^9.1.1",
+    "@vueuse/integrations": "^9.1.1",
+    "defu": "^6.1.0",
     "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",
-    "tailwindcss": "^3.1.6"
+    "tailwindcss": "^3.1.8"
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.1.7",
-    "@nuxtjs/eslint-config-typescript": "^10.0.0",
+    "@nuxtjs/eslint-config-typescript": "^11.0.0",
     "@types/lodash-es": "^4.17.6",
-    "eslint": "^8.20.0",
+    "eslint": "^8.23.0",
     "nuxt": "npm:nuxt3@latest",
     "standard-version": "^9.5.0",
-    "vue-tsc": "^0.38.9"
+    "vue-tsc": "^0.40.5"
   },
   "build": {
     "externals": [

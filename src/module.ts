@@ -1,4 +1,4 @@
-import { defineNuxtModule, installModule, addComponentsDir, addTemplate, addPlugin, createResolver } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addAutoImportDir, addTemplate, addPlugin, createResolver } from '@nuxt/kit'
 import { defu } from 'defu'
 import colors from 'tailwindcss/colors.js'
 import type { Config } from 'tailwindcss'
@@ -60,8 +60,7 @@ export default defineNuxtModule<ModuleOptions>({
     version,
     configKey: 'ui',
     compatibility: {
-      nuxt: '^3.0.0',
-      bridge: true
+      nuxt: '^3.0.0-rc.8'
     }
   },
   defaults,
@@ -178,9 +177,6 @@ export default defineNuxtModule<ModuleOptions>({
       watch: false
     })
 
-    // Add composables
-    nuxt.hook('autoImports:dirs', (dirs) => {
-      dirs.push(resolve(runtimeDir, 'composables'))
-    })
+    addAutoImportDir(resolve(runtimeDir, 'composables'))
   }
 })
