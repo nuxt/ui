@@ -1,3 +1,5 @@
+<!-- eslint-disable vue/no-v-html -->
+<!-- eslint-disable vue/no-v-text-v-html-on-component -->
 <template>
   <UCard v-if="component" class="relative flex flex-col lg:h-[calc(100vh-10rem)]" body-class="px-4 py-5 sm:p-6 relative" footer-class="flex flex-col flex-1 overflow-hidden">
     <div class="flex justify-center">
