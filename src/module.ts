@@ -60,8 +60,7 @@ export default defineNuxtModule<ModuleOptions>({
     version,
     configKey: 'ui',
     compatibility: {
-      nuxt: '^3.0.0',
-      bridge: true
+      nuxt: '^3.0.0-rc.8'
     }
   },
   defaults,
@@ -179,7 +178,7 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     // Add composables
-    nuxt.hook('autoImports:dirs', (dirs) => {
+    nuxt.hook('imports:dirs', (dirs) => {
       dirs.push(resolve(runtimeDir, 'composables'))
     })
   }
