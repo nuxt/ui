@@ -18,7 +18,7 @@
           :class="[avatarBaseClass, link.label && avatarSpacingClass]"
         />
       </slot>
-      <slot name="icon" :link="link">
+      <slot name="icon" :link="link" :is-active="isActive">
         <Icon
           v-if="link.icon"
           :name="link.icon"
@@ -28,7 +28,7 @@
       <slot :link="link">
         <span v-if="link.label" class="truncate">{{ link.label }}</span>
       </slot>
-      <slot name="badge" :link="link">
+      <slot name="badge" :link="link" :is-active="isActive">
         <span v-if="link.badge" :class="[badgeBaseClass, isActive ? badgeActiveClass : badgeInactiveClass]">
           {{ link.badge }}
         </span>
