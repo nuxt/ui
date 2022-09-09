@@ -45,7 +45,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { get } from 'lodash-es'
-import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 

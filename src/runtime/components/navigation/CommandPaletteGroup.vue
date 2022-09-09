@@ -51,7 +51,6 @@
 <script setup lang="ts">
 import { ComboboxOption } from '@headlessui/vue'
 import type { PropType } from 'vue'
-import Icon from '../elements/Icon.vue'
 import Avatar from '../elements/Avatar.vue'
 import type { Group } from '../../types/command-palette'
 

@@ -61,7 +61,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
 import type { PropType } from 'vue'
-import Icon from '../elements/Icon.vue'
 import { useTimer } from '../../composables/useTimer'
 import { classNames } from '../../utils'
 

@@ -46,7 +46,6 @@ import { useFuse } from '@vueuse/integrations/useFuse'
 import { defu } from 'defu'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Group, Command } from '../../types/command-palette'
-import Icon from '../elements/Icon.vue'
 import Button from '../elements/Button.vue'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 

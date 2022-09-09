@@ -39,7 +39,6 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import Icon from '../elements/Icon.vue'
 import Link from '../elements/Link.vue'
 import Avatar from '../elements/Avatar.vue'
 import type { Avatar as AvatarType } from '../../types/avatar'

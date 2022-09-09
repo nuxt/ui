@@ -205,9 +205,6 @@ const defaultProps = {
       commands: people
     }]
   },
-  Icon: {
-    name: 'heroicons-outline:bell'
-  },
   Input: {
     name: 'input',
     placeholder: 'Enter text'
