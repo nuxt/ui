@@ -18,7 +18,7 @@
     "build": "nuxt-module-build",
     "prepack": "yarn build",
     "dev": "nuxi dev docs",
-    "build:docs": "nuxi build docs",
+    "build:docs": "nuxi generate docs",
     "lint": "eslint --ext .ts,.js,.vue .",
     "prepare": "nuxi prepare docs",
     "release": "yarn lint && standard-version && git push --follow-tags"

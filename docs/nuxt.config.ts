@@ -1,5 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
-import module from '../src/module'
+import nuxtUI from '../src/module'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
@@ -12,8 +12,8 @@ export default defineNuxtConfig({
       { rel: 'stylesheet', href: 'https://rsms.me/inter/inter.css' }
     ]
   },
-  buildModules: [
-    module
+  modules: [
+    nuxtUI
   ],
   components: {
     global: true
