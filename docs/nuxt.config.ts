@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
+import defaultTheme from 'tailwindcss/defaultTheme'
 import nuxtUI from '../src/module'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
@@ -29,7 +30,7 @@ export default defineNuxtConfig({
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Inter var", sans-serif']
+            sans: ['Inter var', ...defaultTheme.fontFamily.sans]
           }
         }
       }
