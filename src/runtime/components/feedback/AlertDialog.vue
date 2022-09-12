@@ -25,6 +25,7 @@ import { computed } from 'vue'
 import { DialogTitle, DialogDescription } from '@headlessui/vue'
 import Modal from '../overlays/Modal.vue'
 import Button from '../elements/Button.vue'
+import Icon from '../elements/Icon.vue'
 import $ui from '#build/ui'
 
 const props = defineProps({

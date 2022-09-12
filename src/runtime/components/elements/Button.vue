@@ -17,6 +17,7 @@ import { ref, computed, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import NuxtLink from '#app/components/nuxt-link'
+import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 

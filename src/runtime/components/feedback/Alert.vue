@@ -27,6 +27,7 @@
 import { computed } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
+import Icon from '../elements/Icon.vue'
 
 const props = defineProps({
   variant: {
