@@ -278,19 +278,19 @@ export default (variantColors: string[]) => {
 
   const verticalNavigation = {
     wrapper: 'space-y-1',
-    base: 'group flex items-center text-sm font-medium rounded-md w-full relative',
+    base: 'group flex items-center gap-2 text-sm font-medium rounded-md w-full relative',
     spacing: 'px-3 py-2',
     active: 'u-text-gray-900 u-bg-gray-100',
     inactive: 'u-text-gray-600 hover:u-text-gray-900 hover:u-bg-gray-50 focus:u-bg-gray-50',
     icon: {
       base: 'flex-shrink-0 h-6 w-6',
-      spacing: '-ml-1 mr-3',
+      spacing: '-ml-1 mr-1',
       active: 'u-text-gray-500',
       inactive: 'u-text-gray-400 group-hover:u-text-gray-500'
     },
     avatar: {
       base: 'flex-shrink-0',
-      spacing: '-ml-1 mr-3'
+      spacing: '-ml-1 mr-1'
     },
     badge: {
       base: 'ml-auto inline-block py-0.5 px-3 text-xs rounded-full',
