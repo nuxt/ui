@@ -345,10 +345,17 @@
   resolved "https://registry.yarnpkg.com/@hutson/parse-repository-url/-/parse-repository-url-3.0.2.tgz#98c23c950a3d9b6c8f0daed06da6c3af06981340"
   integrity sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==
 
-"@iconify/vue@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@iconify/vue/-/vue-3.2.1.tgz#bd8a2f1213ba8775d4b7a7a8ba895e53ae2f4dfc"
-  integrity sha512-c4R6ZgFo1JrJ8aPMMgOPgfU7lBswihMGR+yWe/P4ZukC3kTkeT4+lkt9Pc/itVFMkwva/S/7u9YofmYv57fnNQ==
+"@iconify/types@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@iconify/types/-/types-2.0.0.tgz#ab0e9ea681d6c8a1214f30cd741fe3a20cc57f57"
+  integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
+
+"@iconify/vue@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@iconify/vue/-/vue-4.0.0.tgz#f5165d31b33947129e0e642029dc736b10313cf2"
+  integrity sha512-73z81Yf2HISfehu3qvN9GqL1OnUO7wEMKkiFwVGJ2pqAdGCR8FrVylhRhka+6U+gFLlng0ynnT20svk3jJYwow==
+  dependencies:
+    "@iconify/types" "^2.0.0"
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"
@@ -4982,14 +4989,6 @@ nuxi@3.0.0-rc.9:
   integrity sha512-MsjGzFngDIQzouz96KV2LjSqfvXGrNAoKfGTHFiUc1dqtTZmGftY0rsVfsyrDh3I2hofPRN3hKMH7ieFo2PUZA==
   optionalDependencies:
     fsevents "~2.3.2"
-
-nuxt-icon@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/nuxt-icon/-/nuxt-icon-0.1.5.tgz#a0cc5a9869755c6388e93a576a4aee8d30d9713e"
-  integrity sha512-ecq41pjcH7wBV+yil6MqtNOlng81QE/wfcrfKDwm8Z4EyLccd1rUG5peauaR8cb3YaUShGKbjyDgJgD0tPefrg==
-  dependencies:
-    "@iconify/vue" "^3.2.1"
-    "@nuxt/kit" "^3.0.0-rc.9"
 
 nuxt@^3.0.0-rc.9:
   version "3.0.0-rc.9"

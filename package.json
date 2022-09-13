@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.0",
+    "@iconify/vue": "^4.0.0",
     "@nuxt/kit": "^3.0.0-rc.9",
     "@nuxtjs/color-mode": "^3.1.5",
     "@nuxtjs/tailwindcss": "^5.3.3",
@@ -38,7 +39,6 @@
     "defu": "^6.1.0",
     "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",
-    "nuxt-icon": "^0.1.5",
     "tailwindcss": "^3.1.8"
   },
   "devDependencies": {
