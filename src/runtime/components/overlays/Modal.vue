@@ -1,8 +1,9 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template">
     <Dialog class="relative z-50" @close="close">
-      <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div :class="wrapperClass">
         <TransitionChild
+          v-if="overlay"
           as="template"
           :appear="appear"
           enter="ease-out duration-300"
@@ -16,7 +17,7 @@
         </TransitionChild>
 
         <div class="fixed inset-0 overflow-y-auto">
-          <div class="flex min-h-full items-end sm:items-center justify-center p-4 text-center">
+          <div :class="containerClass">
             <TransitionChild
               as="template"
               :appear="appear"
@@ -69,6 +70,14 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  wrapperClass: {
+    type: String,
+    default: () => $ui.modal.wrapper
+  },
+  containerClass: {
+    type: String,
+    default: () => $ui.modal.container
+  },
   baseClass: {
     type: String,
     default: () => $ui.modal.base
@@ -76,6 +85,10 @@ const props = defineProps({
   backgroundClass: {
     type: String,
     default: () => $ui.modal.background
+  },
+  overlay: {
+    type: Boolean,
+    default: true
   },
   overlayClass: {
     type: String,

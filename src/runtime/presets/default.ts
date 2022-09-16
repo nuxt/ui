@@ -244,6 +244,8 @@ export default (variantColors: string[]) => {
   }
 
   const modal = {
+    wrapper: 'flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0',
+    container: 'flex min-h-full items-end sm:items-center justify-center p-4 text-center',
     base: 'relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle w-full',
     background: 'u-bg-white',
     overlay: 'bg-gray-500/75 dark:bg-gray-600/75',
