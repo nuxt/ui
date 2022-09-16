@@ -1,53 +1,41 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template">
     <Dialog class="relative z-50" @close="close">
-      <div :class="wrapperClass">
-        <TransitionChild
-          v-if="overlay"
-          as="template"
-          :appear="appear"
-          enter="ease-out duration-300"
-          enter-from="opacity-0"
-          enter-to="opacity-100"
-          leave="ease-in duration-200"
-          leave-from="opacity-100"
-          leave-to="opacity-0"
-        >
-          <div class="fixed inset-0 transition-opacity" :class="overlayClass" />
-        </TransitionChild>
+      <TransitionChild
+        v-if="overlay"
+        as="template"
+        :appear="appear"
+        v-bind="overlayTransition"
+      >
+        <div class="fixed inset-0 transition-opacity" :class="overlayClass" />
+      </TransitionChild>
 
-        <div class="fixed inset-0 overflow-y-auto">
-          <div :class="containerClass">
-            <TransitionChild
-              as="template"
-              :appear="appear"
-              enter="ease-out duration-300"
-              enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              enter-to="opacity-100 translate-y-0 sm:scale-100"
-              leave="ease-in duration-200"
-              leave-from="opacity-100 translate-y-0 sm:scale-100"
-              leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            >
-              <DialogPanel :class="modalClass">
-                <Card
-                  base-class=""
-                  background-class=""
-                  shadow-class=""
-                  ring-class=""
-                  rounded-class=""
-                  v-bind="$attrs"
-                >
-                  <template v-if="$slots.header" #header>
-                    <slot name="header" />
-                  </template>
-                  <slot />
-                  <template v-if="$slots.footer" #footer>
-                    <slot name="footer" />
-                  </template>
-                </Card>
-              </DialogPanel>
-            </TransitionChild>
-          </div>
+      <div :class="wrapperClass">
+        <div :class="containerClass">
+          <TransitionChild
+            as="template"
+            :appear="appear"
+            v-bind="modalTransition"
+          >
+            <DialogPanel :class="modalClass">
+              <Card
+                base-class=""
+                background-class=""
+                shadow-class=""
+                ring-class=""
+                rounded-class=""
+                v-bind="$attrs"
+              >
+                <template v-if="$slots.header" #header>
+                  <slot name="header" />
+                </template>
+                <slot />
+                <template v-if="$slots.footer" #footer>
+                  <slot name="footer" />
+                </template>
+              </Card>
+            </DialogPanel>
+          </TransitionChild>
         </div>
       </div>
     </Dialog>
@@ -109,6 +97,10 @@ const props = defineProps({
   widthClass: {
     type: String,
     default: () => $ui.modal.width
+  },
+  transition: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -132,6 +124,36 @@ const modalClass = computed(() => {
     props.ringClass,
     props.roundedClass
   )
+})
+
+const overlayTransition = computed(() => {
+  if (!props.transition) {
+    return {}
+  }
+
+  return {
+    enter: 'ease-out duration-300',
+    enterFrom: 'opacity-0',
+    enterTo: 'opacity-100',
+    leave: 'ease-in duration-200',
+    leaveFrom: 'opacity-100',
+    leaveTo: 'opacity-0'
+  }
+})
+
+const modalTransition = computed(() => {
+  if (!props.transition) {
+    return {}
+  }
+
+  return {
+    enter: 'ease-out duration-300',
+    enterFrom: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+    enterTo: 'opacity-100 translate-y-0 sm:scale-100',
+    leave: 'ease-in duration-200',
+    leaveFrom: 'opacity-100 translate-y-0 sm:scale-100',
+    leaveTo: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
+  }
 })
 
 function close (value: boolean) {
