@@ -396,6 +396,28 @@ export default (variantColors: string[]) => {
     header: 'flex items-center justify-between flex-shrink-0 px-4 sm:px-6 h-16 border-b u-border-gray-200'
   }
 
+  const notification = {
+    background: 'u-bg-white',
+    shadow: 'shadow-lg',
+    rounded: 'rounded-lg',
+    ring: 'ring-1 u-ring-gray-200',
+    type: {
+      info: 'heroicons-outline:information-circle',
+      success: 'heroicons-outline:check-circle',
+      warning: 'heroicons-outline:exclamation-circle',
+      error: 'heroicons-outline:x-circle'
+    },
+    icon: {
+      base: 'w-6 h-6',
+      color: {
+        warning: 'text-orange-400',
+        info: 'text-blue-400',
+        success: 'text-green-400',
+        error: 'text-red-400'
+      }
+    }
+  }
+
   return {
     card,
     modal,
@@ -417,6 +439,7 @@ export default (variantColors: string[]) => {
     pills,
     avatar,
     avatarGroup,
-    slideover
+    slideover,
+    notification
   }
 }

@@ -9,15 +9,15 @@
     leave-to-class="opacity-0"
   >
     <div
-      class="z-50 w-full bg-white rounded-lg shadow-lg pointer-events-auto dark:bg-gray-800"
+      :class="['z-50 w-full pointer-events-auto', backgroundClass, roundedClass, shadowClass]"
       @mouseover="onMouseover"
       @mouseleave="onMouseleave"
     >
-      <div class="relative overflow-hidden rounded-lg ring-1 u-ring-gray-200">
+      <div :class="['relative overflow-hidden', roundedClass, ringClass]">
         <div class="p-4">
           <div class="flex gap-3" :class="{ 'items-start': description, 'items-center': !description }">
             <div v-if="iconName" class="flex-shrink-0">
-              <Icon :name="iconName" class="w-6 h-6" :class="iconClass" />
+              <Icon :name="iconName" :class="iconClass" />
             </div>
             <div class="w-0 flex-1">
               <p class="text-sm font-medium u-text-gray-900">
@@ -64,6 +64,7 @@ import type { PropType } from 'vue'
 import Icon from '../elements/Icon.vue'
 import { useTimer } from '../../composables/useTimer'
 import { classNames } from '../../utils'
+import $ui from '#build/ui'
 
 const props = defineProps({
   id: {
@@ -73,8 +74,8 @@ const props = defineProps({
   type: {
     type: String,
     default: null,
-    validator (value: string | null) {
-      return [null, 'info', 'success', 'error', 'warning'].includes(value)
+    validator (value: string) {
+      return Object.keys($ui.notification.type).includes(value)
     }
   },
   title: {
@@ -85,13 +86,33 @@ const props = defineProps({
     type: String,
     default: null
   },
+  backgroundClass: {
+    type: String,
+    default: () => $ui.notification.background
+  },
+  shadowClass: {
+    type: String,
+    default: () => $ui.notification.shadow
+  },
+  ringClass: {
+    type: String,
+    default: () => $ui.notification.ring
+  },
+  roundedClass: {
+    type: String,
+    default: () => $ui.notification.rounded
+  },
+  customClass: {
+    type: String,
+    default: null
+  },
   icon: {
     type: String,
     default: null
   },
-  iconClass: {
+  iconBaseClass: {
     type: String,
-    default: null
+    default: () => $ui.notification.icon.base
   },
   timeout: {
     type: Number,
@@ -116,23 +137,13 @@ let timer: any = null
 const remaining = ref(props.timeout)
 
 const iconName = computed(() => {
-  return props.icon || ({
-    warning: 'heroicons-outline:exclamation-circle',
-    info: 'heroicons-outline:information-circle',
-    success: 'heroicons-outline:check-circle',
-    error: 'heroicons-outline:x-circle'
-  })[props.type]
+  return props.icon || $ui.notification.type[props.type]
 })
 
 const iconClass = computed(() => {
   return classNames(
-    ({
-      warning: 'text-orange-400',
-      info: 'text-blue-400',
-      success: 'text-green-400',
-      error: 'text-red-400'
-    })[props.type] || 'u-text-gray-400',
-    props.iconClass
+    props.iconBaseClass,
+    $ui.notification.icon.color[props.type] || 'u-text-gray-400'
   )
 })
 
