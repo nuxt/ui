@@ -24,10 +24,10 @@
     "release": "yarn lint && standard-version && git push --follow-tags"
   },
   "dependencies": {
-    "@headlessui/vue": "^1.7.0",
+    "@headlessui/vue": "^1.7.2",
     "@iconify/vue": "^4.0.0",
-    "@nuxt/kit": "^3.0.0-rc.9",
-    "@nuxtjs/color-mode": "^3.1.5",
+    "@nuxt/kit": "^3.0.0-rc.11",
+    "@nuxtjs/color-mode": "^3.1.6",
     "@nuxtjs/tailwindcss": "^5.3.3",
     "@popperjs/core": "^2.11.6",
     "@tailwindcss/aspect-ratio": "^0.4.2",
@@ -45,7 +45,7 @@
     "@nuxt/module-builder": "^0.1.7",
     "@nuxtjs/eslint-config-typescript": "^11.0.0",
     "@types/lodash-es": "^4.17.6",
-    "eslint": "^8.23.0",
+    "eslint": "^8.23.1",
     "nuxt": "^3.0.0-rc.9",
     "standard-version": "^9.5.0",
     "vue-tsc": "^0.40.13"
