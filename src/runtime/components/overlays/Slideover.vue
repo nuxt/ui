@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot as="template" :show="isOpen">
+  <TransitionRoot as="template" :appear="appear" :show="isOpen">
     <Dialog
       class="fixed inset-0 flex z-40"
       :class="{
@@ -10,18 +10,16 @@
       <TransitionChild
         v-if="overlay"
         as="template"
-        v-bind="overlayTransitionClass"
+        :appear="appear"
+        v-bind="overlayTransition"
       >
         <div class="fixed inset-0 transition-opacity" :class="overlayBackgroundClass" />
       </TransitionChild>
 
       <TransitionChild
         as="template"
-        :enter-from="side === 'left' ? '-translate-x-full' : 'translate-x-full'"
-        enter-to="translate-x-0"
-        leave-from="translate-x-0"
-        :leave-to="side === 'left' ? '-translate-x-full' : 'translate-x-full'"
-        v-bind="transitionClass"
+        :appear="appear"
+        v-bind="slideoverTransition"
       >
         <DialogPanel :class="slideoverClass">
           <div v-if="$slots.header" :class="headerClass">
@@ -44,6 +42,10 @@ import $ui from '#build/ui'
 const props = defineProps({
   modelValue: {
     type: Boolean as PropType<boolean>,
+    default: false
+  },
+  appear: {
+    type: Boolean,
     default: false
   },
   side: {
@@ -79,6 +81,10 @@ const props = defineProps({
     type: String,
     default: () => $ui.slideover.header
   },
+  transition: {
+    type: Boolean,
+    default: true
+  },
   transitionClass: {
     type: Object,
     default: () => $ui.slideover.transition
@@ -102,6 +108,28 @@ const slideoverClass = computed(() => {
     props.widthClass,
     props.backgroundClass
   )
+})
+
+const overlayTransition = computed(() => {
+  if (!props.transition) {
+    return {}
+  }
+
+  return props.overlayTransitionClass
+})
+
+const slideoverTransition = computed(() => {
+  if (!props.transition) {
+    return {}
+  }
+
+  return {
+    enterFrom: props.side === 'left' ? '-translate-x-full' : 'translate-x-full',
+    enterTo: 'translate-x-0',
+    leaveFrom: 'translate-x-0',
+    leaveTo: props.side === 'left' ? '-translate-x-full' : 'translate-x-full',
+    ...props.transitionClass
+  }
 })
 </script>
 
