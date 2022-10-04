@@ -1,13 +1,5 @@
 <template>
-  <transition
-    appear
-    enter-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
-    enter-active-class="transition duration-300 ease-out transform"
-    enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
-    leave-class="opacity-100"
-    leave-active-class="transition duration-100 ease-in"
-    leave-to-class="opacity-0"
-  >
+  <transition appear v-bind="transitionClass">
     <div
       :class="['z-50 w-full pointer-events-auto', backgroundClass, roundedClass, shadowClass]"
       @mouseover="onMouseover"
@@ -101,6 +93,10 @@ const props = defineProps({
   roundedClass: {
     type: String,
     default: () => $ui.notification.rounded
+  },
+  transitionClass: {
+    type: Object,
+    default: () => $ui.notification.transition
   },
   customClass: {
     type: String,

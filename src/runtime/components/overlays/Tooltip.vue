@@ -5,16 +5,8 @@
     </slot>
 
     <div v-if="open" ref="container" :class="containerClass">
-      <transition
-        appear
-        enter-active-class="transition ease-out duration-200"
-        enter-from-class="opacity-0 translate-y-1"
-        enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition ease-in duration-150"
-        leave-from-class="opacity-100 translate-y-0"
-        leave-to-class="opacity-0 translate-y-1"
-      >
-        <div :class="tooltipClass">
+      <transition appear v-bind="transitionClass">
+        <div :class="baseClass">
           <slot name="text">
             {{ text }}
           </slot>
@@ -27,6 +19,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { usePopper } from '../../utils'
+import $ui from '#build/ui'
 
 const props = defineProps({
   text: {
@@ -49,15 +42,19 @@ const props = defineProps({
   },
   wrapperClass: {
     type: String,
-    default: 'relative inline-flex'
+    default: () => $ui.tooltip.wrapper
   },
   containerClass: {
     type: String,
-    default: 'z-10 py-2'
+    default: () => $ui.tooltip.container
   },
-  tooltipClass: {
+  baseClass: {
     type: String,
-    default: 'flex items-center justify-center invisible w-auto h-6 max-w-xs px-2 space-x-1 truncate rounded shadow lg:visible u-bg-gray-800 truncate u-text-gray-50 text-xs'
+    default: () => $ui.tooltip.base
+  },
+  transitionClass: {
+    type: Object,
+    default: () => $ui.tooltip.transition
   }
 })
 

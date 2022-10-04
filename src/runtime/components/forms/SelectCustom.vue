@@ -28,7 +28,7 @@
     </ComboboxButton>
 
     <div v-if="open" ref="container" :class="listContainerClass">
-      <transition appear leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+      <transition appear v-bind="listTransitionClass">
         <ComboboxOptions static :class="listBaseClass">
           <ComboboxInput
             v-if="searchable"
@@ -191,6 +191,10 @@ const props = defineProps({
   listInputClass: {
     type: String,
     default: () => $ui.selectCustom.list.input
+  },
+  listTransitionClass: {
+    type: Object,
+    default: () => $ui.selectCustom.list.transition
   },
   listOptionBaseClass: {
     type: String,

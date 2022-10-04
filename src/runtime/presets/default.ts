@@ -214,6 +214,11 @@ export default (variantColors: string[]) => {
           inactive: 'text-primary-600',
           size: 'h-5 w-5'
         }
+      },
+      transition: {
+        leaveActiveClass: 'transition ease-in duration-100',
+        leaveFromClass: 'opacity-100',
+        leaveToClass: 'opacity-0'
       }
     }
   }
@@ -322,6 +327,14 @@ export default (variantColors: string[]) => {
       icon: 'h-5 w-5 u-text-gray-400 group-hover:u-text-gray-500 flex-shrink-0',
       avatar: '-m-0.5 group-hover:u-bg-gray-200 flex-shrink-0',
       shortcuts: 'flex-shrink-0 text-xs font-semibold u-text-gray-500 ml-auto'
+    },
+    transition: {
+      enterActiveClass: 'transition duration-100 ease-out',
+      enterFromClass: 'transform scale-95 opacity-0',
+      enterToClass: 'transform scale-100 opacity-100',
+      leaveActiveClass: 'transition duration-75 ease-out',
+      leaveFromClass: 'transform scale-100 opacity-100',
+      leaveToClass: 'transform scale-95 opacity-0'
     }
   }
 
@@ -415,6 +428,42 @@ export default (variantColors: string[]) => {
         success: 'text-green-400',
         error: 'text-red-400'
       }
+    },
+    transition: {
+      enterActiveClass: 'transform ease-out duration-300 transition',
+      enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2',
+      enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+      leaveActiveClass: 'transition ease-in duration-100',
+      leaveFromClass: 'opacity-100',
+      leaveToClass: 'opacity-0'
+    }
+  }
+
+  const tooltip = {
+    wrapper: 'relative inline-flex',
+    container: 'z-10 py-2',
+    base: 'flex items-center justify-center invisible w-auto h-6 max-w-xs px-2 space-x-1 truncate rounded shadow lg:visible u-bg-gray-800 truncate u-text-gray-50 text-xs',
+    transition: {
+      enterActiveClass: 'transition ease-out duration-200',
+      enterFromClass: 'opacity-0 translate-y-1',
+      enterToClass: 'opacity-100 translate-y-0',
+      leaveActiveClass: 'transition ease-in duration-150',
+      leaveFromClass: 'opacity-100 translate-y-0',
+      leaveToClass: 'opacity-0 translate-y-1'
+    }
+  }
+
+  const popover = {
+    wrapper: 'relative',
+    container: 'z-10 py-2',
+    base: '',
+    transition: {
+      enterActiveClass: 'transition ease-out duration-200',
+      enterFromClass: 'opacity-0 translate-y-1',
+      enterToClass: 'opacity-100 translate-y-0',
+      leaveActiveClass: 'transition ease-in duration-150',
+      leaveFromClass: 'opacity-100 translate-y-0',
+      leaveToClass: 'opacity-0 translate-y-1'
     }
   }
 
@@ -440,6 +489,8 @@ export default (variantColors: string[]) => {
     avatar,
     avatarGroup,
     slideover,
-    notification
+    notification,
+    tooltip,
+    popover
   }
 }

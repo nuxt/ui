@@ -7,16 +7,8 @@
     </PopoverButton>
 
     <div v-if="open" ref="container" :class="containerClass" @mouseover="onMouseOver">
-      <transition
-        appear
-        enter-active-class="transition ease-out duration-200"
-        enter-from-class="opacity-0 translate-y-1"
-        enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition ease-in duration-150"
-        leave-from-class="opacity-100 translate-y-0"
-        leave-to-class="opacity-0 translate-y-1"
-      >
-        <PopoverPanel :class="panelClass" static>
+      <transition appear v-bind="transitionClass">
+        <PopoverPanel :class="baseClass" static>
           <slot name="panel" :open="open" :close="close" />
         </PopoverPanel>
       </transition>
@@ -29,6 +21,7 @@ import type { Ref } from 'vue'
 import { ref, onMounted } from 'vue'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import { usePopper } from '../../utils'
+import $ui from '#build/ui'
 
 const props = defineProps({
   placement: {
@@ -48,15 +41,19 @@ const props = defineProps({
   },
   wrapperClass: {
     type: String,
-    default: 'relative'
+    default: () => $ui.popover.wrapper
   },
   containerClass: {
     type: String,
-    default: 'z-10 py-2'
+    default: () => $ui.popover.container
   },
-  panelClass: {
+  baseClass: {
     type: String,
-    default: ''
+    default: () => $ui.popover.base
+  },
+  transitionClass: {
+    type: Object,
+    default: () => $ui.popover.transition
   }
 })
 

@@ -7,15 +7,7 @@
     </MenuButton>
 
     <div v-if="open" ref="container" :class="containerClass" @mouseover="onMouseOver">
-      <transition
-        appear
-        enter-active-class="transition duration-100 ease-out"
-        enter-from-class="transform scale-95 opacity-0"
-        enter-to-class="transform scale-100 opacity-100"
-        leave-active-class="transition duration-75 ease-out"
-        leave-from-class="transform scale-100 opacity-100"
-        leave-to-class="transform scale-95 opacity-0"
-      >
+      <transition appear v-bind="transitionClass">
         <MenuItems :class="baseClass" static>
           <div v-for="(subItems, index) of items" :key="index" class="py-1">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }" :disabled="item.disabled" as="div">
@@ -104,6 +96,10 @@ const props = defineProps({
   baseClass: {
     type: String,
     default: () => $ui.dropdown.base
+  },
+  transitionClass: {
+    type: Object,
+    default: () => $ui.dropdown.transition
   },
   itemBaseClass: {
     type: String,
