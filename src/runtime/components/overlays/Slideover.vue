@@ -8,25 +8,20 @@
       @close="isOpen = false"
     >
       <TransitionChild
+        v-if="overlay"
         as="template"
-        enter="transition-opacity ease-linear duration-300"
-        enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="transition-opacity ease-linear duration-300"
-        leave-from="opacity-100"
-        leave-to="opacity-0"
+        v-bind="overlayTransitionClass"
       >
-        <div class="fixed inset-0 transition-opacity" :class="overlayClass" />
+        <div class="fixed inset-0 transition-opacity" :class="overlayBackgroundClass" />
       </TransitionChild>
 
       <TransitionChild
         as="template"
-        enter="transition ease-in-out duration-300 transform"
         :enter-from="side === 'left' ? '-translate-x-full' : 'translate-x-full'"
         enter-to="translate-x-0"
-        leave="transition ease-in-out duration-300 transform"
         leave-from="translate-x-0"
         :leave-to="side === 'left' ? '-translate-x-full' : 'translate-x-full'"
+        v-bind="transitionClass"
       >
         <DialogPanel :class="slideoverClass">
           <div v-if="$slots.header" :class="headerClass">
@@ -64,9 +59,17 @@ const props = defineProps({
     type: String,
     default: () => $ui.slideover.background
   },
-  overlayClass: {
+  overlay: {
+    type: Boolean,
+    default: true
+  },
+  overlayBackgroundClass: {
     type: String,
-    default: () => $ui.slideover.overlay
+    default: () => $ui.slideover.overlay.background
+  },
+  overlayTransitionClass: {
+    type: Object,
+    default: () => $ui.slideover.overlay.transition
   },
   widthClass: {
     type: String,
@@ -75,8 +78,13 @@ const props = defineProps({
   headerClass: {
     type: String,
     default: () => $ui.slideover.header
+  },
+  transitionClass: {
+    type: Object,
+    default: () => $ui.slideover.transition
   }
 })
+
 const emit = defineEmits(['update:modelValue'])
 
 const isOpen: WritableComputedRef<boolean> = computed({

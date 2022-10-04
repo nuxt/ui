@@ -7,7 +7,7 @@
         :appear="appear"
         v-bind="overlayTransition"
       >
-        <div class="fixed inset-0 transition-opacity" :class="overlayClass" />
+        <div class="fixed inset-0 transition-opacity" :class="overlayBackgroundClass" />
       </TransitionChild>
 
       <div :class="wrapperClass">
@@ -78,9 +78,13 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
-  overlayClass: {
+  overlayBackgroundClass: {
     type: String,
-    default: () => $ui.modal.overlay
+    default: () => $ui.modal.overlay.background
+  },
+  overlayTransitionClass: {
+    type: Object,
+    default: () => $ui.modal.overlay.transition
   },
   shadowClass: {
     type: String,
@@ -101,6 +105,10 @@ const props = defineProps({
   transition: {
     type: Boolean,
     default: true
+  },
+  transitionClass: {
+    type: Object,
+    default: () => $ui.modal.transition
   }
 })
 
@@ -131,14 +139,7 @@ const overlayTransition = computed(() => {
     return {}
   }
 
-  return {
-    enter: 'ease-out duration-300',
-    enterFrom: 'opacity-0',
-    enterTo: 'opacity-100',
-    leave: 'ease-in duration-200',
-    leaveFrom: 'opacity-100',
-    leaveTo: 'opacity-0'
-  }
+  return props.overlayTransitionClass
 })
 
 const modalTransition = computed(() => {
@@ -146,14 +147,7 @@ const modalTransition = computed(() => {
     return {}
   }
 
-  return {
-    enter: 'ease-out duration-300',
-    enterFrom: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
-    enterTo: 'opacity-100 translate-y-0 sm:scale-100',
-    leave: 'ease-in duration-200',
-    leaveFrom: 'opacity-100 translate-y-0 sm:scale-100',
-    leaveTo: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
-  }
+  return props.transitionClass
 })
 
 function close (value: boolean) {

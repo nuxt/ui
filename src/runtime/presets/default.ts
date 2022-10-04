@@ -253,12 +253,30 @@ export default (variantColors: string[]) => {
     container: 'flex min-h-full items-end sm:items-center justify-center p-4 sm:p-0 text-center',
     base: 'relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle w-full',
     background: 'u-bg-white',
-    overlay: 'bg-gray-500/75 dark:bg-gray-600/75',
+    overlay: {
+      background: 'bg-gray-500/75 dark:bg-gray-600/75',
+      transition: {
+        enter: 'ease-out duration-300',
+        enterFrom: 'opacity-0',
+        enterTo: 'opacity-100',
+        leave: 'ease-in duration-200',
+        leaveFrom: 'opacity-100',
+        leaveTo: 'opacity-0'
+      }
+    },
     border: '',
     ring: '',
     rounded: 'rounded-lg',
     shadow: 'shadow-xl',
-    width: 'sm:max-w-lg'
+    width: 'sm:max-w-lg',
+    transition: {
+      enter: 'ease-out duration-300',
+      enterFrom: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+      enterTo: 'opacity-100 translate-y-0 sm:scale-100',
+      leave: 'ease-in duration-200',
+      leaveFrom: 'opacity-100 translate-y-0 sm:scale-100',
+      leaveTo: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
+    }
   }
 
   const container = {
@@ -402,11 +420,25 @@ export default (variantColors: string[]) => {
   }
 
   const slideover = {
-    overlay: 'bg-gray-500/75 dark:bg-gray-600/75',
+    overlay: {
+      background: 'bg-gray-500/75 dark:bg-gray-600/75',
+      transition: {
+        enter: 'ease-in-out duration-500',
+        enterFrom: 'opacity-0',
+        enterTo: 'opacity-100',
+        leave: 'ease-in-out duration-500',
+        leaveFrom: 'opacity-100',
+        leaveTo: 'opacity-0'
+      }
+    },
     base: 'relative flex-1 flex flex-col w-full focus:outline-none',
     background: 'u-bg-white',
     width: 'max-w-md',
-    header: 'flex items-center justify-between flex-shrink-0 px-4 sm:px-6 h-16 border-b u-border-gray-200'
+    header: 'flex items-center justify-between flex-shrink-0 px-4 sm:px-6 h-16 border-b u-border-gray-200',
+    transition: {
+      enter: 'transform transition ease-in-out duration-500 sm:duration-700',
+      leave: 'transform transition ease-in-out duration-500 sm:duration-700'
+    }
   }
 
   const notification = {
