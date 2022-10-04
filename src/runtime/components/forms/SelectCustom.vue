@@ -13,7 +13,7 @@
 
     <ComboboxButton ref="trigger" v-slot="{ disabled }" as="div">
       <slot :open="open" :disabled="disabled">
-        <button :class="selectCustomClass" :disabled="disabled">
+        <button :class="selectCustomClass" :disabled="disabled" type="button">
           <slot name="label">
             <span v-if="modelValue" class="block truncate">{{ modelValue[textAttribute] }}</span>
             <span v-else class="block truncate u-text-gray-400">{{ placeholder }}</span>
