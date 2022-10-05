@@ -94,6 +94,10 @@ const props = defineProps({
   options: {
     type: Object as PropType<Partial<UseFuseOptions<Command>>>,
     default: () => ({})
+  },
+  autoselect: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -103,7 +107,9 @@ const query = ref('')
 const comboboxInput = ref<ComponentPublicInstance<HTMLInputElement>>()
 
 onMounted(() => {
-  activateFirstOption()
+  if (props.autoselect) {
+    activateFirstOption()
+  }
 })
 
 const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => defu({}, props.options, {
