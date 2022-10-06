@@ -7,7 +7,7 @@
     :disabled="disabled"
     as="div"
     :class="wrapperClass"
-    @update:model-value="$emit('update:modelValue', $event)"
+    @update:model-value="onUpdate"
   >
     <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
 
@@ -32,6 +32,7 @@
         <ComboboxOptions static :class="listBaseClass">
           <ComboboxInput
             v-if="searchable"
+            ref="searchInput"
             :display-value="() => query"
             name="q"
             placeholder="Search..."
@@ -83,7 +84,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import type { PropType } from 'vue'
+import type { PropType, ComponentPublicInstance } from 'vue'
 import {
   Combobox,
   ComboboxButton,
@@ -258,7 +259,7 @@ const props = defineProps({
   }
 })
 
-defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue'])
 
 const [trigger, container] = usePopper({
   placement: props.placement,
@@ -285,6 +286,7 @@ const [trigger, container] = usePopper({
 })
 
 const query = ref('')
+const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
 
 const selectCustomClass = computed(() => {
   return classNames(
@@ -337,6 +339,15 @@ function resolveOptionIconClass ({ active }: { active: boolean }) {
     props.listOptionIconBaseClass,
     active ? props.listOptionIconActiveClass : props.listOptionIconInactiveClass
   )
+}
+
+function onUpdate (event) {
+  if (query.value && searchInput.value?.$el) {
+    query.value = ''
+    // explicitly set input text because `ComboboxInput` `displayValue` is not reactive
+    searchInput.value.$el.value = ''
+  }
+  emit('update:modelValue', event)
 }
 </script>
 
