@@ -40,6 +40,10 @@ const props = defineProps({
       return ['absolute', 'fixed'].includes(value)
     }
   },
+  flip: {
+    type: Boolean,
+    default: true
+  },
   wrapperClass: {
     type: String,
     default: () => $ui.tooltip.wrapper
@@ -80,6 +84,9 @@ const [trigger, container] = usePopper({
     options: {
       padding: 8
     }
+  }, {
+    name: 'flip',
+    enabled: props.flip
   }]
 })
 </script>
