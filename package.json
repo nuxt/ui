@@ -48,7 +48,7 @@
     "eslint": "^8.24.0",
     "nuxt": "^3.0.0-rc.9",
     "standard-version": "^9.5.0",
-    "vue-tsc": "^0.40.13"
+    "vue-tsc": "^1.0.0"
   },
   "build": {
     "externals": [
