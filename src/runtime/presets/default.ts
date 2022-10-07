@@ -503,6 +503,21 @@ export default (variantColors: string[]) => {
     }
   }
 
+  const contextMenu = {
+    wrapper: 'relative',
+    container: 'z-20',
+    width: '',
+    base: '',
+    transition: {
+      enterActiveClass: 'transition ease-out duration-200',
+      enterFromClass: 'opacity-0 translate-y-1',
+      enterToClass: 'opacity-100 translate-y-0',
+      leaveActiveClass: 'transition ease-in duration-150',
+      leaveFromClass: 'opacity-100 translate-y-0',
+      leaveToClass: 'opacity-0 translate-y-1'
+    }
+  }
+
   return {
     card,
     modal,
@@ -527,6 +542,7 @@ export default (variantColors: string[]) => {
     slideover,
     notification,
     tooltip,
-    popover
+    popover,
+    contextMenu
   }
 }

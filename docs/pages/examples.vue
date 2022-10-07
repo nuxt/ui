@@ -167,6 +167,20 @@
 
     <div>
       <div class="font-medium text-sm mb-1 u-text-gray-700">
+        Context menu:
+      </div>
+
+      <UCard ref="contextMenuRef" class="relative" body-class="h-64" @click="isContextMenuOpen = false" @contextmenu.prevent="isContextMenuOpen = true">
+        <UContextMenu v-model="isContextMenuOpen" :virtual-element="virtualElement" width-class="w-48">
+          <UCard @click.stop>
+            Menu
+          </UCard>
+        </UContextMenu>
+      </UCard>
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 u-text-gray-700">
         Command palette:
       </div>
 
@@ -265,6 +279,32 @@ const form = reactive({
 })
 
 const { $toast } = useNuxtApp()
+
+const x = ref(0)
+const y = ref(0)
+const isContextMenuOpen = ref(false)
+const contextMenuRef = ref(null)
+
+onMounted(() => {
+  document.addEventListener('mousemove', ({ clientX, clientY }) => {
+    x.value = clientX
+    y.value = clientY
+  })
+})
+
+const virtualElement = computed(() => ({
+  getBoundingClientRect () {
+    return {
+      width: 0,
+      height: 0,
+      top: y.value,
+      right: x.value,
+      bottom: y.value,
+      left: x.value
+    }
+  },
+  contextElement: contextMenuRef.value?.$el
+}))
 
 const customQuery = query => computed(() => query.value ? `${query.value} | =1` : '')
 

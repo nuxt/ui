@@ -1,11 +1,13 @@
 import { ref, onMounted, watchEffect } from 'vue'
+import type { Ref } from 'vue'
 import { popperGenerator, defaultModifiers } from '@popperjs/core/lib/popper-lite'
+import type { Instance } from '@popperjs/core'
 import { omitBy, isUndefined } from 'lodash-es'
 import flip from '@popperjs/core/lib/modifiers/flip'
 import offset from '@popperjs/core/lib/modifiers/offset'
 import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow'
 
-const createPopper = popperGenerator({
+export const createPopper = popperGenerator({
   defaultModifiers: [...defaultModifiers, offset, flip, preventOverflow]
 })
 
@@ -16,22 +18,23 @@ export function usePopper ({
   offsetSkid = 0,
   placement,
   strategy
-}) {
-  const reference = ref(null)
-  const popper = ref(null)
+}, virtualReference) {
+  const reference: Ref<HTMLElement> = ref(null)
+  const popper: Ref<HTMLElement> = ref(null)
+  const instance: Ref<Instance> = ref(null)
 
   onMounted(() => {
     watchEffect((onInvalidate) => {
       if (!popper.value) { return }
-      if (!reference.value) { return }
+      if (!reference.value && !virtualReference.value) { return }
 
       const popperEl = popper.value.$el || popper.value
-      const referenceEl = reference.value.$el || reference.value
+      const referenceEl = virtualReference?.value || reference.value.$el || reference.value
 
-      if (!(referenceEl instanceof HTMLElement)) { return }
+      // if (!(referenceEl instanceof HTMLElement)) { return }
       if (!(popperEl instanceof HTMLElement)) { return }
 
-      const { destroy } = createPopper(referenceEl, popperEl, omitBy({
+      instance.value = createPopper(referenceEl, popperEl, omitBy({
         placement,
         strategy,
         modifiers: [{
@@ -50,9 +53,9 @@ export function usePopper ({
         }]
       }, isUndefined))
 
-      onInvalidate(destroy)
+      onInvalidate(instance.value.destroy)
     })
   })
 
-  return [reference, popper]
+  return [reference, popper, instance]
 }
