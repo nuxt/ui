@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-v-html -->
 <!-- eslint-disable vue/no-v-text-v-html-on-component -->
 <template>
-  <UCard v-if="component" class="relative flex flex-col lg:h-[calc(100vh-10rem)]" body-class="px-4 py-5 sm:p-6 relative" footer-class="flex flex-col flex-1 overflow-hidden">
+  <UCard v-if="component" class="relative flex flex-col" body-class="px-4 py-5 sm:p-6 relative" footer-class="flex flex-col flex-1 overflow-hidden">
     <div class="flex justify-center">
       <component :is="`U${defaultProps[params.component].component.name}`" v-if="defaultProps[params.component] && defaultProps[params.component].component" v-bind="defaultProps[params.component].component.props" />
 
@@ -28,7 +28,22 @@
     </div>
 
     <template v-if="props.length" #footer>
-      <div class="flex-1 px-4 py-5 sm:p-6 space-y-3 lg:overflow-y-auto">
+      <div class="border-b u-border-gray-200">
+        <pre class="text-sm leading-6 u-text-gray-900 flex-1 relative flex ligatures-none overflow-x-hidden px-4 sm:px-6 py-5 sm:py-6">
+          <code class="flex-none min-w-full whitespace-pre-wrap break-all">{{ code }}</code>
+
+          <UButton
+            class="absolute top-0 right-0"
+            :icon="copied ? 'heroicons-outline:clipboard-check' : 'heroicons-outline:clipboard-copy'"
+            variant="transparent"
+            size="sm"
+            :custom-class="copied ? '!text-green-500' : ''"
+            @click="onCopy"
+          />
+        </pre>
+      </div>
+
+      <div class="flex-1 px-4 py-5 sm:p-6 space-y-3">
         <UFormGroup
           v-for="prop of props"
           :key="prop.key"
@@ -74,21 +89,6 @@
             @update:model-value="value => prop.value = JSON.parse(value)"
           />
         </UFormGroup>
-      </div>
-
-      <div class="border-t u-border-gray-200">
-        <pre class="text-sm leading-6 u-text-gray-900 flex-1 relative flex ligatures-none lg:overflow-y-auto overflow-x-hidden px-4 sm:px-6 py-5 sm:py-6">
-          <code class="flex-none min-w-full whitespace-pre-wrap break-all">{{ code }}</code>
-
-          <UButton
-            class="absolute top-0 right-0"
-            :icon="copied ? 'heroicons-outline:clipboard-check' : 'heroicons-outline:clipboard-copy'"
-            variant="transparent"
-            size="sm"
-            :custom-class="copied ? '!text-green-500' : ''"
-            @click="onCopy"
-          />
-        </pre>
       </div>
     </template>
   </UCard>

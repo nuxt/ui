@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="u-bg-white border-b u-border-gray-200 fixed top-0 inset-x-0 z-20">
+    <nav class="u-bg-white border-b u-border-gray-200 fixed top-0 inset-x-0 z-10">
       <UContainer padded>
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
