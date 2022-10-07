@@ -6,7 +6,7 @@
       </slot>
     </PopoverButton>
 
-    <div v-if="open" ref="container" :class="containerClass" @mouseover="onMouseOver">
+    <div v-if="open" ref="container" :class="[containerClass, widthClass]" @mouseover="onMouseOver">
       <transition appear v-bind="transitionClass">
         <PopoverPanel :class="baseClass" static>
           <slot name="panel" :open="open" :close="close" />
@@ -17,21 +17,14 @@
 </template>
 
 <script setup lang="ts">
-import type { Ref } from 'vue'
+import type { Ref, PropType } from 'vue'
 import { ref, onMounted } from 'vue'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import { usePopper } from '../../utils'
+import { usePopper } from '../../composables/usePopper'
+import type { PopperOptions } from './../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
-  placement: {
-    type: String,
-    default: 'bottom'
-  },
-  strategy: {
-    type: String,
-    default: 'fixed'
-  },
   mode: {
     type: String,
     default: 'click',
@@ -47,6 +40,10 @@ const props = defineProps({
     type: String,
     default: () => $ui.popover.container
   },
+  widthClass: {
+    type: String,
+    default: () => $ui.tooltip.width
+  },
   baseClass: {
     type: String,
     default: () => $ui.popover.base
@@ -54,32 +51,16 @@ const props = defineProps({
   transitionClass: {
     type: Object,
     default: () => $ui.popover.transition
+  },
+  popperOptions: {
+    type: Object as PropType<PopperOptions>,
+    default: () => ({
+      strategy: 'fixed'
+    })
   }
 })
 
-const [trigger, container] = usePopper({
-  placement: props.placement,
-  strategy: props.strategy,
-  modifiers: [{
-    name: 'offset',
-    options: {
-      offset: 0
-    }
-  },
-  {
-    name: 'computeStyles',
-    options: {
-      gpuAcceleration: false,
-      adaptive: false
-    }
-  },
-  {
-    name: 'preventOverflow',
-    options: {
-      padding: 8
-    }
-  }]
-})
+const [trigger, container] = usePopper(props.popperOptions)
 
 const popoverApi: Ref<any> = ref(null)
 

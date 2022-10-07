@@ -4,7 +4,7 @@
       Hover me
     </slot>
 
-    <div v-if="open" ref="container" :class="containerClass">
+    <div v-if="open" ref="container" :class="[containerClass, widthClass]">
       <transition appear v-bind="transitionClass">
         <div :class="baseClass">
           <slot name="text">
@@ -17,32 +17,16 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
 import { ref } from 'vue'
-import { usePopper } from '../../utils'
+import { usePopper } from '../../composables/usePopper'
+import type { PopperOptions } from './../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
   text: {
     type: String,
     default: null
-  },
-  placement: {
-    type: String,
-    default: 'bottom',
-    validator: (value: string) => {
-      return ['auto', 'auto-start', 'auto-end', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'right', 'right-start', 'right-end', 'left', 'left-start', 'left-end'].includes(value)
-    }
-  },
-  strategy: {
-    type: String,
-    default: 'fixed',
-    validator: (value: string) => {
-      return ['absolute', 'fixed'].includes(value)
-    }
-  },
-  flip: {
-    type: Boolean,
-    default: true
   },
   wrapperClass: {
     type: String,
@@ -52,6 +36,10 @@ const props = defineProps({
     type: String,
     default: () => $ui.tooltip.container
   },
+  widthClass: {
+    type: String,
+    default: () => $ui.tooltip.width
+  },
   baseClass: {
     type: String,
     default: () => $ui.tooltip.base
@@ -59,36 +47,17 @@ const props = defineProps({
   transitionClass: {
     type: Object,
     default: () => $ui.tooltip.transition
+  },
+  popperOptions: {
+    type: Object as PropType<PopperOptions>,
+    default: () => ({
+      strategy: 'fixed'
+    })
   }
 })
 
 const open = ref(false)
-const [trigger, container] = usePopper({
-  placement: props.placement,
-  strategy: props.strategy,
-  modifiers: [{
-    name: 'offset',
-    options: {
-      offset: 0
-    }
-  },
-  {
-    name: 'computeStyles',
-    options: {
-      gpuAcceleration: false,
-      adaptive: false
-    }
-  },
-  {
-    name: 'preventOverflow',
-    options: {
-      padding: 8
-    }
-  }, {
-    name: 'flip',
-    enabled: props.flip
-  }]
-})
+const [trigger, container] = usePopper(props.popperOptions)
 </script>
 
 <script lang="ts">

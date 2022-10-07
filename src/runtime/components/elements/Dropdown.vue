@@ -6,7 +6,7 @@
       </slot>
     </MenuButton>
 
-    <div v-if="open" ref="container" :class="containerClass" @mouseover="onMouseOver">
+    <div v-if="open" ref="container" :class="[containerClass, widthClass]" @mouseover="onMouseOver">
       <transition appear v-bind="transitionClass">
         <MenuItems :class="baseClass" static>
           <div v-for="(subItems, index) of items" :key="index" class="py-1">
@@ -44,8 +44,10 @@ import { ref, onMounted } from 'vue'
 import NuxtLink from '#app/components/nuxt-link'
 import Icon from '../elements/Icon.vue'
 import Avatar from '../elements/Avatar.vue'
-import { classNames, usePopper } from '../../utils'
+import { classNames } from '../../utils'
+import { usePopper } from '../../composables/usePopper'
 import type { Avatar as AvatarType } from '../../types/avatar'
+import type { PopperOptions } from './../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -64,20 +66,6 @@ const props = defineProps({
     }[][]>,
     default: () => []
   },
-  placement: {
-    type: String,
-    default: 'bottom-end',
-    validator: (value: string) => {
-      return ['auto', 'auto-start', 'auto-end', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'right', 'right-start', 'right-end', 'left', 'left-start', 'left-end'].includes(value)
-    }
-  },
-  strategy: {
-    type: String,
-    default: 'fixed',
-    validator: (value: string) => {
-      return ['absolute', 'fixed'].includes(value)
-    }
-  },
   mode: {
     type: String,
     default: 'click',
@@ -92,6 +80,10 @@ const props = defineProps({
   containerClass: {
     type: String,
     default: () => $ui.dropdown.container
+  },
+  widthClass: {
+    type: String,
+    default: () => $ui.dropdown.width
   },
   baseClass: {
     type: String,
@@ -128,32 +120,17 @@ const props = defineProps({
   itemShortcutsClass: {
     type: String,
     default: () => $ui.dropdown.item.shortcuts
+  },
+  popperOptions: {
+    type: Object as PropType<PopperOptions>,
+    default: () => ({
+      placement: 'bottom-end',
+      strategy: 'fixed'
+    })
   }
 })
 
-const [trigger, container] = usePopper({
-  placement: props.placement,
-  strategy: props.strategy,
-  modifiers: [{
-    name: 'offset',
-    options: {
-      offset: 0
-    }
-  },
-  {
-    name: 'computeStyles',
-    options: {
-      gpuAcceleration: false,
-      adaptive: false
-    }
-  },
-  {
-    name: 'preventOverflow',
-    options: {
-      padding: 8
-    }
-  }]
-})
+const [trigger, container] = usePopper(props.popperOptions)
 
 function resolveItemClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
   return classNames(

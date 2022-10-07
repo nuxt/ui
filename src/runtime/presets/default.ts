@@ -195,7 +195,8 @@ export default (variantColors: string[]) => {
       ...select.icon
     },
     list: {
-      container: 'z-10 w-full py-1',
+      container: 'z-20',
+      width: 'w-full',
       base: 'u-bg-white shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none overflow-y-auto py-1 max-h-60',
       input: 'relative block w-full focus:ring-transparent text-sm px-4 py-2 u-text-gray-700 border-l-0 u-bg-white border-t-0 border-r-0 u-border-gray-200 focus:u-border-gray-200',
       option: {
@@ -335,7 +336,8 @@ export default (variantColors: string[]) => {
 
   const dropdown = {
     wrapper: 'relative inline-flex text-left',
-    container: 'w-48 z-20 py-2',
+    container: 'z-20',
+    width: 'w-48',
     base: 'u-bg-white divide-y u-divide-gray-100 rounded-md ring-1 u-ring-gray-200 shadow-lg',
     item: {
       base: 'group flex items-center gap-3 px-4 py-2 text-sm w-full',
@@ -473,7 +475,8 @@ export default (variantColors: string[]) => {
 
   const tooltip = {
     wrapper: 'relative inline-flex',
-    container: 'z-10 py-2',
+    container: 'z-20',
+    width: '',
     base: 'flex items-center justify-center invisible w-auto h-6 max-w-xs px-2 space-x-1 truncate rounded shadow lg:visible u-bg-gray-800 truncate u-text-gray-50 text-xs',
     transition: {
       enterActiveClass: 'transition ease-out duration-200',
@@ -487,7 +490,8 @@ export default (variantColors: string[]) => {
 
   const popover = {
     wrapper: 'relative',
-    container: 'z-10 py-2',
+    container: 'z-20',
+    width: '',
     base: '',
     transition: {
       enterActiveClass: 'transition ease-out duration-200',

@@ -27,7 +27,7 @@
       </slot>
     </ComboboxButton>
 
-    <div v-if="open" ref="container" :class="listContainerClass">
+    <div v-if="open" ref="container" :class="[listContainerClass, listWidthClass]">
       <transition appear v-bind="listTransitionClass">
         <ComboboxOptions static :class="listBaseClass">
           <ComboboxInput
@@ -93,7 +93,9 @@ import {
   ComboboxInput
 } from '@headlessui/vue'
 import Icon from '../elements/Icon.vue'
-import { classNames, usePopper } from '../../utils'
+import { classNames } from '../../utils'
+import { usePopper } from '../../composables/usePopper'
+import type { PopperOptions } from './../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -104,20 +106,6 @@ const props = defineProps({
   options: {
     type: Array as PropType<{ disabled?: boolean }[]>,
     default: () => []
-  },
-  placement: {
-    type: String,
-    default: 'bottom-end',
-    validator: (value: string) => {
-      return ['auto', 'auto-start', 'auto-end', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'right', 'right-start', 'right-end', 'left', 'left-start', 'left-end'].includes(value)
-    }
-  },
-  strategy: {
-    type: String,
-    default: 'absolute',
-    validator: (value: string) => {
-      return ['absolute', 'fixed'].includes(value)
-    }
   },
   required: {
     type: Boolean,
@@ -189,6 +177,10 @@ const props = defineProps({
     type: String,
     default: () => $ui.selectCustom.list.container
   },
+  listWidthClass: {
+    type: String,
+    default: () => $ui.selectCustom.list.width
+  },
   listInputClass: {
     type: String,
     default: () => $ui.selectCustom.list.input
@@ -256,34 +248,18 @@ const props = defineProps({
   searchAttributes: {
     type: Array,
     default: null
+  },
+  popperOptions: {
+    type: Object as PropType<PopperOptions>,
+    default: () => ({
+      placement: 'bottom-end'
+    })
   }
 })
 
 const emit = defineEmits(['update:modelValue'])
 
-const [trigger, container] = usePopper({
-  placement: props.placement,
-  strategy: props.strategy,
-  modifiers: [{
-    name: 'offset',
-    options: {
-      offset: 0
-    }
-  },
-  {
-    name: 'computeStyles',
-    options: {
-      gpuAcceleration: false,
-      adaptive: false
-    }
-  },
-  {
-    name: 'preventOverflow',
-    options: {
-      padding: 8
-    }
-  }]
-})
+const [trigger, container] = usePopper(props.popperOptions)
 
 const query = ref('')
 const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
