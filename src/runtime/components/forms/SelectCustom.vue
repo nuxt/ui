@@ -85,6 +85,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
+import { defu } from 'defu'
 import {
   Combobox,
   ComboboxButton,
@@ -251,15 +252,15 @@ const props = defineProps({
   },
   popperOptions: {
     type: Object as PropType<PopperOptions>,
-    default: () => ({
-      placement: 'bottom-end'
-    })
+    default: () => {}
   }
 })
 
 const emit = defineEmits(['update:modelValue'])
 
-const [trigger, container] = usePopper(props.popperOptions)
+const popperOptions = computed(() => defu({}, props.popperOptions, { placement: 'bottom-end' }))
+
+const [trigger, container] = usePopper(popperOptions.value)
 
 const query = ref('')
 const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
