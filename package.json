@@ -27,8 +27,8 @@
     "@headlessui/vue": "^1.7.3",
     "@iconify/vue": "^4.0.0",
     "@nuxt/kit": "^3.0.0-rc.11",
-    "@nuxtjs/color-mode": "^3.1.7",
-    "@nuxtjs/tailwindcss": "^5.3.3",
+    "@nuxtjs/color-mode": "^3.1.8",
+    "@nuxtjs/tailwindcss": "^5.3.4",
     "@popperjs/core": "^2.11.6",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
@@ -48,7 +48,7 @@
     "eslint": "^8.24.0",
     "nuxt": "^3.0.0-rc.9",
     "standard-version": "^9.5.0",
-    "vue-tsc": "^0.40.13"
+    "vue-tsc": "^1.0.0"
   },
   "build": {
     "externals": [
