@@ -31,7 +31,7 @@
 
       <div v-else class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
         <Icon :name="emptyIcon" class="w-6 h-6 mx-auto u-text-gray-400" aria-hidden="true" />
-        <p v-show="searchable" class="mt-4 text-sm text-center u-text-gray-900">
+        <p class="mt-4 text-sm text-center u-text-gray-900">
           {{ query ? "We couldn't find any items with that term. Please try again." : "We couldn't find any items." }}
         </p>
       </div>
