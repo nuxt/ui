@@ -1,12 +1,13 @@
 <template>
   <Combobox
+    ref="comboboxRef"
     :model-value="modelValue"
     :multiple="multiple"
     :nullable="nullable"
     @update:model-value="onSelect"
   >
     <div class="flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800">
-      <div class="relative flex items-center">
+      <div v-show="searchable" class="relative flex items-center">
         <Icon :name="inputIcon" class="pointer-events-none absolute top-3.5 left-5 h-5 w-5 u-text-gray-400" aria-hidden="true" />
         <ComboboxInput
           ref="comboboxInput"
@@ -30,7 +31,7 @@
 
       <div v-else class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
         <Icon :name="emptyIcon" class="w-6 h-6 mx-auto u-text-gray-400" aria-hidden="true" />
-        <p class="mt-4 text-sm u-text-gray-900">
+        <p v-show="searchable" class="mt-4 text-sm text-center u-text-gray-900">
           {{ query ? "We couldn't find any items with that term. Please try again." : "We couldn't find any items." }}
         </p>
       </div>
@@ -62,6 +63,10 @@ const props = defineProps({
   nullable: {
     type: Boolean,
     default: false
+  },
+  searchable: {
+    type: Boolean,
+    default: true
   },
   groups: {
     type: Array as PropType<Group[]>,
@@ -105,11 +110,30 @@ const emit = defineEmits(['update:modelValue', 'close'])
 
 const query = ref('')
 const comboboxInput = ref<ComponentPublicInstance<HTMLInputElement>>()
+const comboboxApi = ref(null)
+
+defineExpose({
+  updateQuery: (q) => {
+    query.value = q
+  },
+  comboboxApi
+})
 
 onMounted(() => {
   if (props.autoselect) {
     activateFirstOption()
   }
+})
+
+onMounted(() => {
+  setTimeout(() => {
+    const popoverProvides = comboboxInput.value?.$.provides
+    if (!popoverProvides) {
+      return
+    }
+    const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
+    comboboxApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
+  }, 200)
 })
 
 const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => defu({}, props.options, {
