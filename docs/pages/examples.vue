@@ -170,7 +170,7 @@
         Context menu:
       </div>
 
-      <UCard ref="contextMenuRef" class="relative" body-class="h-64" @click="isContextMenuOpen = false" @contextmenu.prevent="isContextMenuOpen = true">
+      <UCard ref="contextMenuRef" class="relative" body-class="h-64" @click="isContextMenuOpen = false" @contextmenu.prevent="openContextMenu">
         <UContextMenu v-model="isContextMenuOpen" :virtual-element="virtualElement" width-class="w-48">
           <UCard @click.stop>
             Menu
@@ -292,19 +292,20 @@ onMounted(() => {
   })
 })
 
-const virtualElement = computed(() => ({
-  getBoundingClientRect () {
-    return {
-      width: 0,
-      height: 0,
-      top: y.value,
-      right: x.value,
-      bottom: y.value,
-      left: x.value
-    }
-  },
-  contextElement: contextMenuRef.value?.$el
-}))
+const virtualElement = ref({ getBoundingClientRect: () => ({}) })
+
+function openContextMenu () {
+  const top = unref(y)
+  const left = unref(x)
+
+  virtualElement.value.getBoundingClientRect = () => ({
+    width: 0,
+    height: 0,
+    top,
+    left
+  })
+  isContextMenuOpen.value = true
+}
 
 const customQuery = query => computed(() => query.value ? `${query.value} | =1` : '')
 
