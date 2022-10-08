@@ -45,7 +45,7 @@ const props = defineProps({
     default: () => $ui.contextMenu.transition
   },
   popperOptions: {
-    type: Object as PropType<Pick<PopperOptions, 'strategy' | 'placement'>>,
+    type: Object as PropType<PopperOptions>,
     default: () => ({})
   }
 })
@@ -63,7 +63,7 @@ const isOpen = computed({
 
 const virtualElement = toRef(props, 'virtualElement')
 
-const popperOptions = computed(() => defu({}, props.popperOptions, { placement: 'bottom-start' }))
+const popperOptions = computed(() => defu({}, props.popperOptions, { placement: 'bottom-start', scroll: false }))
 
 const [, container] = usePopper(popperOptions.value, virtualElement)
 </script>
