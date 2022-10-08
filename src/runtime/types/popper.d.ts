@@ -7,4 +7,8 @@ export interface PopperOptions {
   offsetSkid?: number
   placement?: Placement
   strategy?: PositioningStrategy
+  gpuAcceleration?: boolean
+  adaptive?: boolean
+  scroll?: boolean
+  resize?: boolean
 }
