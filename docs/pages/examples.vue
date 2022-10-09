@@ -185,7 +185,23 @@
       </div>
 
       <UCard body-class="">
-        <UCommandPalette v-model="form.persons" multiple :groups="[{ key: 'persons', commands: people, customQuery, options: { fuseOptions: { useExtendedSearch: true, keys: ['name', 'static'] } } }]" command-attribute="name" />
+        <UCommandPalette
+          v-model="form.persons"
+          multiple
+          :groups="[{
+            key: 'persons',
+            commands: people,
+            customQuery,
+            options: {
+              fuseOptions: {
+                includeMatches: true,
+                useExtendedSearch: true,
+                keys: ['name']
+              }
+            }
+          }]"
+          command-attribute="name"
+        />
       </UCard>
     </div>
 

@@ -26,7 +26,8 @@
             <div class="flex items-center gap-1.5 min-w-0" :class="{ 'opacity-50': command.disabled }">
               <slot :name="`${group.key}-command`" :group="group" :command="command">
                 <span v-if="command.prefix" class="u-text-gray-400">{{ command.prefix }}</span>
-                <span class="truncate" :class="{ 'flex-none': command.suffix }">{{ command[commandAttribute] }}</span>
+                <span v-if="command.matches?.length" class="truncate" :class="{ 'flex-none': command.suffix }" v-html="highlight(command.matches[0])" />
+                <span v-else class="truncate" :class="{ 'flex-none': command.suffix }">{{ command[commandAttribute] }}</span>
                 <span v-if="command.suffix" class="u-text-gray-400 truncate">{{ command.suffix }}</span>
               </slot>
             </div>
@@ -69,6 +70,15 @@ defineProps({
     required: true
   }
 })
+
+function highlight ({ indices, value }, i = 1) {
+  const pair = indices[indices.length - i]
+  if (!pair) {
+    return value
+  }
+
+  return `${highlight({ indices, value: value.substring(0, pair[0]) }, i + 1)}<mark>${value.substring(pair[0], pair[1] + 1)}</mark>${value.substring(pair[1] + 1)}`
+}
 </script>
 
 <script lang="ts">

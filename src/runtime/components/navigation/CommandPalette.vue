@@ -1,6 +1,7 @@
 <template>
   <Combobox
     ref="comboboxRef"
+    :by="by"
     :model-value="modelValue"
     :multiple="multiple"
     :nullable="nullable"
@@ -55,6 +56,10 @@ const props = defineProps({
   modelValue: {
     type: [String, Number, Object, Array],
     default: null
+  },
+  by: {
+    type: String,
+    default: 'id'
   },
   multiple: {
     type: Boolean,
@@ -152,9 +157,18 @@ const fuse = props.groups.reduce((acc, group) => {
 }, {})
 
 const groups = computed(() => props.groups.map((group) => {
+  const commands = fuse[group.key].results.value.map((result) => {
+    const { item, ...data } = result
+
+    return {
+      ...item,
+      ...data
+    }
+  })
+
   return {
     ...group,
-    commands: fuse[group.key].results.value.map(result => group.commands.find(command => command.id === result.item.id)).filter(Boolean).slice(0, group.options?.resultLimit || options.value.resultLimit)
+    commands: commands.slice(0, group.options?.resultLimit || options.value.resultLimit)
   }
 }).filter(group => group.commands.length))
 
