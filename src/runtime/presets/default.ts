@@ -250,7 +250,8 @@ export default (variantColors: string[]) => {
   }
 
   const modal = {
-    wrapper: 'fixed inset-0 overflow-y-auto',
+    wrapper: 'relative z-50',
+    inner: 'fixed inset-0 overflow-y-auto',
     container: 'flex min-h-full items-end sm:items-center justify-center p-4 sm:p-0 text-center',
     base: 'relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle w-full',
     background: 'u-bg-white',
@@ -422,6 +423,7 @@ export default (variantColors: string[]) => {
   }
 
   const slideover = {
+    wrapper: 'fixed inset-0 flex z-40',
     overlay: {
       background: 'bg-gray-500/75 dark:bg-gray-600/75',
       transition: {

@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template">
-    <Dialog class="relative z-50" @close="close">
+    <Dialog :class="wrapperClass" @close="close">
       <TransitionChild
         v-if="overlay"
         as="template"
@@ -10,7 +10,7 @@
         <div class="fixed inset-0 transition-opacity" :class="overlayBackgroundClass" />
       </TransitionChild>
 
-      <div :class="wrapperClass">
+      <div :class="innerClass">
         <div :class="containerClass">
           <TransitionChild
             as="template"
@@ -61,6 +61,10 @@ const props = defineProps({
   wrapperClass: {
     type: String,
     default: () => $ui.modal.wrapper
+  },
+  innerClass: {
+    type: String,
+    default: () => $ui.modal.inner
   },
   containerClass: {
     type: String,

@@ -1,12 +1,6 @@
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
-    <Dialog
-      class="fixed inset-0 flex z-40"
-      :class="{
-        'justify-end': side === 'right'
-      }"
-      @close="isOpen = false"
-    >
+    <Dialog :class="[wrapperClass, { 'justify-end': side === 'right' }]" @close="isOpen = false">
       <TransitionChild
         v-if="overlay"
         as="template"
@@ -52,6 +46,10 @@ const props = defineProps({
     type: String,
     default: 'left',
     validator: (value: string) => ['left', 'right'].includes(value)
+  },
+  wrapperClass: {
+    type: String,
+    default: () => $ui.slideover.wrapper
   },
   baseClass: {
     type: String,
