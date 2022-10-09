@@ -1,6 +1,7 @@
 <template>
   <Combobox
     v-slot="{ open }"
+    :by="by"
     :model-value="modelValue"
     :multiple="multiple"
     :nullable="nullable"
@@ -103,6 +104,10 @@ const props = defineProps({
   modelValue: {
     type: [String, Number, Object, Array],
     default: ''
+  },
+  by: {
+    type: String,
+    default: undefined
   },
   options: {
     type: Array as PropType<{ disabled?: boolean }[]>,
