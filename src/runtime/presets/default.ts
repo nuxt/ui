@@ -478,7 +478,7 @@ export default (variantColors: string[]) => {
   const tooltip = {
     wrapper: 'relative inline-flex',
     container: 'z-20',
-    width: '',
+    width: 'max-w-xs',
     base: 'invisible w-auto h-6 px-2 py-1 space-x-1 truncate rounded shadow lg:visible u-bg-gray-800 truncate u-text-gray-50 text-xs',
     transition: {
       enterActiveClass: 'transition ease-out duration-200',
