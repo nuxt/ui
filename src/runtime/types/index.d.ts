@@ -1,3 +1,5 @@
+export * from './avatar'
 export * from './clipboard'
-export * from './toast'
+export * from './command-palette'
 export * from './popper'
+export * from './toast'
