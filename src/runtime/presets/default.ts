@@ -340,6 +340,7 @@ export default (variantColors: string[]) => {
     container: 'z-20',
     width: 'w-48',
     base: 'u-bg-white divide-y u-divide-gray-100 rounded-md ring-1 u-ring-gray-200 shadow-lg',
+    group: 'py-1',
     item: {
       base: 'group flex items-center gap-3 px-4 py-2 text-sm w-full',
       active: 'u-bg-gray-100 u-text-gray-900',

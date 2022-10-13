@@ -9,7 +9,7 @@
     <div v-if="open" ref="container" :class="[containerClass, widthClass]" @mouseover="onMouseOver">
       <transition appear v-bind="transitionClass">
         <MenuItems :class="baseClass" static>
-          <div v-for="(subItems, index) of items" :key="index" class="py-1">
+          <div v-for="(subItems, index) of items" :key="index" :class="groupClass">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }" :disabled="item.disabled" as="div">
               <Component v-bind="item" :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'" :class="resolveItemClass({ active, disabled })" @click="e => onItemClick(e, item)">
                 <slot :name="item.slot" :item="item">
@@ -93,6 +93,10 @@ const props = defineProps({
   transitionClass: {
     type: Object,
     default: () => $ui.dropdown.transition
+  },
+  groupClass: {
+    type: String,
+    default: () => $ui.dropdown.group
   },
   itemBaseClass: {
     type: String,
