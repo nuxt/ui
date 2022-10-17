@@ -20,7 +20,7 @@
 import type { PropType } from 'vue'
 import { ref } from 'vue'
 import { usePopper } from '../../composables/usePopper'
-import type { PopperOptions } from './../../types'
+import type { PopperOptions } from '../../types'
 import $ui from '#build/ui'
 
 const props = defineProps({

@@ -220,10 +220,10 @@ export default (variantColors: string[]) => {
         leaveActiveClass: 'transition ease-in duration-100',
         leaveFromClass: 'opacity-100',
         leaveToClass: 'opacity-0'
-      },
-      popperOptions: {
-        placement: 'bottom-end'
       }
+    },
+    popperOptions: {
+      placement: 'bottom-end'
     }
   }
 
