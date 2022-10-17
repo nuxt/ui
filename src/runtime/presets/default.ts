@@ -360,9 +360,7 @@ export default (variantColors: string[]) => {
     },
     popperOptions: {
       placement: 'bottom-end',
-      strategy: 'fixed',
-      offsetDistance: 0,
-      offsetSkid: 0
+      strategy: 'fixed'
     }
   }
 
