@@ -357,6 +357,12 @@ export default (variantColors: string[]) => {
       leaveActiveClass: 'transition duration-75 ease-out',
       leaveFromClass: 'transform scale-100 opacity-100',
       leaveToClass: 'transform scale-95 opacity-0'
+    },
+    popperOptions: {
+      placement: 'bottom-end',
+      strategy: 'fixed',
+      offsetDistance: 0,
+      offsetSkid: 0
     }
   }
 

@@ -48,7 +48,7 @@ import Avatar from '../elements/Avatar.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import type { Avatar as AvatarType } from '../../types/avatar'
-import type { PopperOptions } from './../types'
+import type { PopperOptions } from './../../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -128,7 +128,7 @@ const props = defineProps({
   },
   popperOptions: {
     type: Object as PropType<PopperOptions>,
-    default: () => {}
+    default: () => $ui.dropdown.popperOptions
   }
 })
 
