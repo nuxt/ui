@@ -86,7 +86,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
-import { defu } from 'defu'
 import {
   Combobox,
   ComboboxButton,
@@ -97,7 +96,7 @@ import {
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
-import type { PopperOptions } from './../types'
+import type { PopperOptions } from './../../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -257,15 +256,13 @@ const props = defineProps({
   },
   popperOptions: {
     type: Object as PropType<PopperOptions>,
-    default: () => {}
+    default: () => $ui.selectCustom.popperOptions
   }
 })
 
 const emit = defineEmits(['update:modelValue'])
 
-const popperOptions = computed(() => defu({}, props.popperOptions, { placement: 'bottom-end' }))
-
-const [trigger, container] = usePopper(popperOptions.value)
+const [trigger, container] = usePopper(props.popperOptions as PopperOptions)
 
 const query = ref('')
 const searchInput = ref<ComponentPublicInstance<HTMLElement>>()

@@ -5,8 +5,8 @@ export interface PopperOptions {
   overflowPadding?: number
   offsetDistance?: number
   offsetSkid?: number
-  placement?: Placement
-  strategy?: PositioningStrategy
+  placement: Placement
+  strategy: PositioningStrategy
   gpuAcceleration?: boolean
   adaptive?: boolean
   scroll?: boolean

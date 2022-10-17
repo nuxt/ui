@@ -40,8 +40,7 @@ import {
 } from '@headlessui/vue'
 import type { Ref, PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
-import { ref, computed, onMounted } from 'vue'
-import { defu } from 'defu'
+import { ref, onMounted } from 'vue'
 import NuxtLink from '#app/components/nuxt-link'
 import Icon from '../elements/Icon.vue'
 import Avatar from '../elements/Avatar.vue'
@@ -132,7 +131,7 @@ const props = defineProps({
   }
 })
 
-const [trigger, container] = usePopper(props.popperOptions)
+const [trigger, container] = usePopper(props.popperOptions as PopperOptions)
 
 function resolveItemClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
   return classNames(

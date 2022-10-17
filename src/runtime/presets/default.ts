@@ -220,6 +220,9 @@ export default (variantColors: string[]) => {
         leaveActiveClass: 'transition ease-in duration-100',
         leaveFromClass: 'opacity-100',
         leaveToClass: 'opacity-0'
+      },
+      popperOptions: {
+        placement: 'bottom-end'
       }
     }
   }
@@ -492,6 +495,9 @@ export default (variantColors: string[]) => {
       leaveActiveClass: 'transition ease-in duration-150',
       leaveFromClass: 'opacity-100 translate-y-0',
       leaveToClass: 'opacity-0 translate-y-1'
+    },
+    popperOptions: {
+      strategy: 'fixed'
     }
   }
 
@@ -507,6 +513,9 @@ export default (variantColors: string[]) => {
       leaveActiveClass: 'transition ease-in duration-150',
       leaveFromClass: 'opacity-100 translate-y-0',
       leaveToClass: 'opacity-0 translate-y-1'
+    },
+    popperOptions: {
+      strategy: 'fixed'
     }
   }
 
@@ -522,6 +531,10 @@ export default (variantColors: string[]) => {
       leaveActiveClass: 'transition ease-in duration-150',
       leaveFromClass: 'opacity-100 translate-y-0',
       leaveToClass: 'opacity-0 translate-y-1'
+    },
+    popperOptions: {
+      placement: 'bottom-start',
+      scroll: false
     }
   }
 
