@@ -93,7 +93,7 @@ import {
   ComboboxOption,
   ComboboxInput
 } from '@headlessui/vue'
-import defu from 'defu'
+import { defu } from 'defu'
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'

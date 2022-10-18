@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { PropType, computed, toRef } from 'vue'
-import defu from 'defu'
+import { defu } from 'defu'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
 import $ui from '#build/ui'

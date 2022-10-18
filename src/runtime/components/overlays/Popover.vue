@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { Ref, PropType, computed, ref, onMounted } from 'vue'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import defu from 'defu'
+import { defu } from 'defu'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
 import $ui from '#build/ui'
