@@ -17,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import { text } from 'stream/consumers'
 import { computed, PropType, ref } from 'vue'
 import defu from 'defu'
 import { usePopper } from '../../composables/usePopper'
