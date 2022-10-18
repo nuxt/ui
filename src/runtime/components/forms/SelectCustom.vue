@@ -86,6 +86,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
+import { defu } from 'defu'
 import {
   Combobox,
   ComboboxButton,
@@ -93,7 +94,6 @@ import {
   ComboboxOption,
   ComboboxInput
 } from '@headlessui/vue'
-import { defu } from 'defu'
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
