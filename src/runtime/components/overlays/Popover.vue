@@ -58,7 +58,7 @@ const props = defineProps({
   }
 })
 
-const popperOptions = computed(() => defu({}, props.popperOptions, { strategy: 'fixed' }))
+const popperOptions = computed(() => defu({}, props.popperOptions, $ui.popover.popperOptions))
 
 const [trigger, container] = usePopper(popperOptions.value as PopperOptions)
 

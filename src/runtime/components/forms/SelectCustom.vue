@@ -263,7 +263,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const popperOptions = computed(() => defu({}, props.popperOptions, { placement: 'bottom-end' }))
+const popperOptions = computed(() => defu({}, props.popperOptions, $ui.selectCustom.popperOptions))
 
 const [trigger, container] = usePopper(popperOptions.value as PopperOptions)
 
