@@ -17,8 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
-import { ref } from 'vue'
+import { text } from 'stream/consumers'
+import { computed, PropType, ref } from 'vue'
+import defu from 'defu'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
 import $ui from '#build/ui'
@@ -54,7 +55,9 @@ const props = defineProps({
   }
 })
 
-const [trigger, container] = usePopper(props.popperOptions as PopperOptions)
+const popperOptions = computed(() => defu({}, props.popperOptions, { strategy: 'fixed' }))
+
+const [trigger, container] = usePopper(popperOptions.value as PopperOptions)
 
 const open = ref(false)
 </script>

@@ -93,6 +93,7 @@ import {
   ComboboxOption,
   ComboboxInput
 } from '@headlessui/vue'
+import defu from 'defu'
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
@@ -262,7 +263,9 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const [trigger, container] = usePopper(props.popperOptions as PopperOptions)
+const popperOptions = computed(() => defu({}, props.popperOptions, { placement: 'bottom-end' }))
+
+const [trigger, container] = usePopper(popperOptions.value as PopperOptions)
 
 const query = ref('')
 const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
