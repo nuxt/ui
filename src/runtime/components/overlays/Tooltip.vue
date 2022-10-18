@@ -17,7 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType, ref } from 'vue'
+import type { PropType } from 'vue'
+import { computed, ref } from 'vue'
 import { defu } from 'defu'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
