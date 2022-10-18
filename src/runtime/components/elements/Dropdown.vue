@@ -128,7 +128,7 @@ const props = defineProps({
   },
   popperOptions: {
     type: Object as PropType<PopperOptions>,
-    default: () => $ui.dropdown.popperOptions
+    default: () => {}
   }
 })
 
