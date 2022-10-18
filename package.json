@@ -34,21 +34,21 @@
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.7",
-    "@vueuse/core": "^9.3.0",
-    "@vueuse/integrations": "^9.3.0",
+    "@vueuse/core": "^9.3.1",
+    "@vueuse/integrations": "^9.3.1",
     "defu": "^6.1.0",
     "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",
     "tailwindcss": "^3.1.8"
   },
   "devDependencies": {
-    "@nuxt/module-builder": "^0.1.7",
+    "@nuxt/module-builder": "^0.2.0",
     "@nuxtjs/eslint-config-typescript": "^11.0.0",
     "@types/lodash-es": "^4.17.6",
     "eslint": "^8.25.0",
     "nuxt": "^3.0.0-rc.9",
     "standard-version": "^9.5.0",
-    "vue-tsc": "^1.0.1"
+    "vue-tsc": "^1.0.8"
   },
   "build": {
     "externals": [
