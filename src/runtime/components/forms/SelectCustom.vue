@@ -97,7 +97,7 @@ import {
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
-import type { PopperOptions } from './../types'
+import type { PopperOptions } from '../../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -263,9 +263,9 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const popperOptions = computed(() => defu({}, props.popperOptions, { placement: 'bottom-end' }))
+const popperOptions = computed(() => defu({}, props.popperOptions, $ui.selectCustom.popperOptions))
 
-const [trigger, container] = usePopper(popperOptions.value)
+const [trigger, container] = usePopper(popperOptions.value as PopperOptions)
 
 const query = ref('')
 const searchInput = ref<ComponentPublicInstance<HTMLElement>>()

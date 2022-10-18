@@ -48,7 +48,7 @@ import Avatar from '../elements/Avatar.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import type { Avatar as AvatarType } from '../../types/avatar'
-import type { PopperOptions } from './../types'
+import type { PopperOptions } from '../../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -132,9 +132,9 @@ const props = defineProps({
   }
 })
 
-const popperOptions = computed(() => defu({}, props.popperOptions, { placement: 'bottom-end', strategy: 'fixed' }))
+const popperOptions = computed(() => defu({}, props.popperOptions, $ui.dropdown.popperOptions))
 
-const [trigger, container] = usePopper(popperOptions.value)
+const [trigger, container] = usePopper(popperOptions.value as PopperOptions)
 
 function resolveItemClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
   return classNames(

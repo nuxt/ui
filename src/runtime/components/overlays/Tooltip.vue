@@ -18,10 +18,10 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import { defu } from 'defu'
 import { usePopper } from '../../composables/usePopper'
-import type { PopperOptions } from './../types'
+import type { PopperOptions } from '../../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -55,9 +55,10 @@ const props = defineProps({
   }
 })
 
-const popperOptions = computed(() => defu({}, props.popperOptions, { strategy: 'fixed' }))
+const popperOptions = computed(() => defu({}, props.popperOptions, $ui.tooltip.popperOptions))
 
-const [trigger, container] = usePopper(popperOptions.value)
+const [trigger, container] = usePopper(popperOptions.value as PopperOptions)
+
 const open = ref(false)
 </script>
 

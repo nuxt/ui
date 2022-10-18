@@ -12,7 +12,7 @@
 import { PropType, computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { usePopper } from '../../composables/usePopper'
-import type { PopperOptions } from './../types'
+import type { PopperOptions } from '../../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -63,9 +63,9 @@ const isOpen = computed({
 
 const virtualElement = toRef(props, 'virtualElement')
 
-const popperOptions = computed(() => defu({}, props.popperOptions, { placement: 'bottom-start', scroll: false }))
+const popperOptions = computed(() => defu({}, props.popperOptions, $ui.contextMenu.popperOptions))
 
-const [, container] = usePopper(popperOptions.value, virtualElement)
+const [, container] = usePopper(popperOptions.value as PopperOptions, virtualElement)
 </script>
 
 <script lang="ts">

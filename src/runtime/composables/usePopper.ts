@@ -24,7 +24,7 @@ export function usePopper ({
   resize = true,
   placement,
   strategy
-}, virtualReference) {
+}, virtualReference: Ref<Object> = null) {
   const reference: Ref<HTMLElement> = ref(null)
   const popper: Ref<HTMLElement> = ref(null)
   const instance: Ref<Instance> = ref(null)

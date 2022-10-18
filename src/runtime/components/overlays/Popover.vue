@@ -18,11 +18,11 @@
 
 <script setup lang="ts">
 import type { Ref, PropType } from 'vue'
-import { ref, computed, onMounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { defu } from 'defu'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import { usePopper } from '../../composables/usePopper'
-import type { PopperOptions } from './../types'
+import type { PopperOptions } from '../../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -59,9 +59,9 @@ const props = defineProps({
   }
 })
 
-const popperOptions = computed(() => defu({}, props.popperOptions, { strategy: 'fixed' }))
+const popperOptions = computed(() => defu({}, props.popperOptions, $ui.popover.popperOptions))
 
-const [trigger, container] = usePopper(popperOptions.value)
+const [trigger, container] = usePopper(popperOptions.value as PopperOptions)
 
 const popoverApi: Ref<any> = ref(null)
 

@@ -221,6 +221,9 @@ export default (variantColors: string[]) => {
         leaveFromClass: 'opacity-100',
         leaveToClass: 'opacity-0'
       }
+    },
+    popperOptions: {
+      placement: 'bottom-end'
     }
   }
 
@@ -357,6 +360,10 @@ export default (variantColors: string[]) => {
       leaveActiveClass: 'transition duration-75 ease-out',
       leaveFromClass: 'transform scale-100 opacity-100',
       leaveToClass: 'transform scale-95 opacity-0'
+    },
+    popperOptions: {
+      placement: 'bottom-end',
+      strategy: 'fixed'
     }
   }
 
@@ -488,6 +495,9 @@ export default (variantColors: string[]) => {
       leaveActiveClass: 'transition ease-in duration-150',
       leaveFromClass: 'opacity-100 translate-y-0',
       leaveToClass: 'opacity-0 translate-y-1'
+    },
+    popperOptions: {
+      strategy: 'fixed'
     }
   }
 
@@ -503,6 +513,9 @@ export default (variantColors: string[]) => {
       leaveActiveClass: 'transition ease-in duration-150',
       leaveFromClass: 'opacity-100 translate-y-0',
       leaveToClass: 'opacity-0 translate-y-1'
+    },
+    popperOptions: {
+      strategy: 'fixed'
     }
   }
 
@@ -518,6 +531,10 @@ export default (variantColors: string[]) => {
       leaveActiveClass: 'transition ease-in duration-150',
       leaveFromClass: 'opacity-100 translate-y-0',
       leaveToClass: 'opacity-0 translate-y-1'
+    },
+    popperOptions: {
+      placement: 'bottom-start',
+      scroll: false
     }
   }
 
