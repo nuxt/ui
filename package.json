@@ -28,7 +28,7 @@
     "@iconify/vue": "^4.0.0",
     "@nuxt/kit": "^3.0.0-rc.12",
     "@nuxtjs/color-mode": "^3.1.8",
-    "@nuxtjs/tailwindcss": "^6.0.0",
+    "@nuxtjs/tailwindcss": "^6.0.1",
     "@popperjs/core": "^2.11.6",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
@@ -39,7 +39,7 @@
     "defu": "^6.1.0",
     "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.2.0"
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.2.0",
