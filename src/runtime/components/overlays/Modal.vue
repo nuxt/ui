@@ -67,7 +67,7 @@ const props = defineProps({
     default: () => $ui.modal.inner
   },
   innerStyle: {
-    type: String,
+    type: Object,
     default: () => ({})
   },
   containerClass: {
