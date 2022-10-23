@@ -10,7 +10,7 @@
         <div class="fixed inset-0 transition-opacity" :class="overlayBackgroundClass" />
       </TransitionChild>
 
-      <div ref="inner" :class="innerClass">
+      <div :class="innerClass" :style="innerStyle">
         <div :class="containerClass">
           <TransitionChild
             as="template"
@@ -65,6 +65,10 @@ const props = defineProps({
   innerClass: {
     type: String,
     default: () => $ui.modal.inner
+  },
+  innerStyle: {
+    type: String,
+    default: () => ({})
   },
   containerClass: {
     type: String,
