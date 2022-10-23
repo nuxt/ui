@@ -10,7 +10,7 @@
         <div class="fixed inset-0 transition-opacity" :class="overlayBackgroundClass" />
       </TransitionChild>
 
-      <div :class="innerClass">
+      <div ref="inner" :class="innerClass">
         <div :class="containerClass">
           <TransitionChild
             as="template"
