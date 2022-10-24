@@ -34,7 +34,7 @@
           </div>
 
           <Icon v-if="selected" name="heroicons-outline:check" class="h-5 w-5 u-text-gray-900 flex-shrink-0" aria-hidden="true" />
-          <slot v-else-if="active" :name="`${group.key}-active`" :group="group" :command="command">
+          <slot v-else-if="active && (group.active || $slots[`${group.key}-active`])" :name="`${group.key}-active`" :group="group" :command="command">
             <span v-if="group.active" class="flex-shrink-0 u-text-gray-500">{{ group.active }}</span>
           </slot>
           <slot v-else :name="`${group.key}-inactive`" :group="group" :command="command">
