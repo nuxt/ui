@@ -15,10 +15,10 @@
       >
         <li :class="['flex justify-between select-none items-center rounded-md px-3 py-2 gap-3 relative', active && 'bg-gray-100 dark:bg-gray-800 u-text-gray-900', command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
           <div class="flex items-center gap-3 min-w-0">
-            <Icon v-if="command.icon" :name="command.icon" :class="['h-5 w-5 flex-shrink-0', active ? 'text-opacity-100 dark:text-opacity-100' : 'text-opacity-40 dark:text-opacity-40', command.iconClass || 'text-gray-900 dark:text-gray-50']" aria-hidden="true" />
+            <Icon v-if="command.icon" :name="command.icon" :class="['h-4 w-4 flex-shrink-0', active ? 'text-opacity-100 dark:text-opacity-100' : 'text-opacity-40 dark:text-opacity-40', command.iconClass || 'text-gray-900 dark:text-gray-50']" aria-hidden="true" />
             <Avatar
               v-else-if="command.avatar"
-              v-bind="{ size: 'xxs', ...command.avatar }"
+              v-bind="{ size: 'xxxs', ...command.avatar }"
               class="flex-shrink-0"
             />
             <span v-else-if="command.chip" class="flex-shrink-0 w-2 h-2 mx-1.5 rounded-full" :style="{ background: `#${command.chip}` }" />
