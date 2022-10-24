@@ -1,4 +1,3 @@
-import type { Ref, ComputedRef } from 'vue'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Avatar } from './avatar'
 
@@ -19,6 +18,5 @@ export interface Group {
   active?: string
   inactive?: string
   commands: Command[]
-  customQuery?: (query: Ref<string>) => ComputedRef<string>
   options?: Partial<UseFuseOptions<Command>>
 }

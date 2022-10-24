@@ -30,7 +30,7 @@
         </CommandPaletteGroup>
       </ComboboxOptions>
 
-      <div v-else class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
+      <div v-else-if="placeholder" class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
         <Icon :name="emptyIcon" class="w-6 h-6 mx-auto u-text-gray-400" aria-hidden="true" />
         <p class="mt-4 text-sm text-center u-text-gray-900">
           {{ query ? "We couldn't find any items with that term. Please try again." : "We couldn't find any items." }}
@@ -45,6 +45,7 @@ import { ref, computed, onMounted } from 'vue'
 import { Combobox, ComboboxInput, ComboboxOptions } from '@headlessui/vue'
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useFuse } from '@vueuse/integrations/useFuse'
+import { groupBy, map } from 'lodash-es'
 import { defu } from 'defu'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Group, Command } from '../../types/command-palette'
@@ -108,6 +109,10 @@ const props = defineProps({
   autoselect: {
     type: Boolean,
     default: true
+  },
+  placeholder: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -116,13 +121,6 @@ const emit = defineEmits(['update:modelValue', 'close'])
 const query = ref('')
 const comboboxInput = ref<ComponentPublicInstance<HTMLInputElement>>()
 const comboboxApi = ref(null)
-
-defineExpose({
-  updateQuery: (q) => {
-    query.value = q
-  },
-  comboboxApi
-})
 
 onMounted(() => {
   if (props.autoselect) {
@@ -149,15 +147,14 @@ const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => de
   matchAllWhenSearchEmpty: true
 }))
 
-const fuse = props.groups.reduce((acc, group) => {
-  // FIXME: useFuse is not watching data correctly, so we need to add an id
-  const fuse = useFuse(group.customQuery ? group.customQuery(query) : query, group.commands, defu({}, group.options || {}, options.value))
-  acc[group.key] = fuse
-  return acc
-}, {})
+const commands = computed(() => props.groups.reduce((acc, group) => {
+  return acc.concat(group.commands.map(command => ({ ...command, group: group.key })))
+}, [] as Command[]))
 
-const groups = computed(() => props.groups.map((group) => {
-  const commands = fuse[group.key].results.value.map((result) => {
+const { results } = useFuse(query, commands, options)
+
+const groups = computed(() => map(groupBy(results.value, command => command.item.group), (results, key) => {
+  const commands = results.map((result) => {
     const { item, ...data } = result
 
     return {
@@ -167,10 +164,10 @@ const groups = computed(() => props.groups.map((group) => {
   })
 
   return {
-    ...group,
-    commands: commands.slice(0, group.options?.resultLimit || options.value.resultLimit)
+    ...props.groups.find(group => group.key === key),
+    commands: commands.slice(0, options.value.resultLimit)
   }
-}).filter(group => group.commands.length))
+}))
 
 // Methods
 
@@ -200,6 +197,14 @@ function onClear () {
     emit('close')
   }
 }
+
+defineExpose({
+  updateQuery: (q) => {
+    query.value = q
+  },
+  comboboxApi,
+  results
+})
 </script>
 
 <script lang="ts">

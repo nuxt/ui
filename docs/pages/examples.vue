@@ -188,17 +188,15 @@
         <UCommandPalette
           v-model="form.persons"
           multiple
+          :placeholder="false"
+          :options="{
+            fuseOptions: {
+              includeMatches: true
+            }
+          }"
           :groups="[{
             key: 'persons',
-            commands: people,
-            customQuery,
-            options: {
-              fuseOptions: {
-                includeMatches: true,
-                useExtendedSearch: true,
-                keys: ['name']
-              }
-            }
+            commands: people
           }]"
           command-attribute="name"
         />
@@ -275,13 +273,14 @@
 <script setup>
 const isModalOpen = ref(false)
 
-const people = [
+const people = ref([
   { id: 1, name: 'Durward Reynolds', disabled: false },
   { id: 2, name: 'Kenton Towne', disabled: false },
   { id: 3, name: 'Therese Wunsch', disabled: false },
   { id: 4, name: 'Benedict Kessler', disabled: true },
-  { id: 5, name: 'Katelyn Rohan', disabled: false, static: '1' }
-]
+  { id: 5, name: 'Katelyn Rohan', disabled: false }
+])
+
 const form = reactive({
   email: '',
   description: '',
@@ -290,8 +289,8 @@ const form = reactive({
   notifications: [],
   terms: false,
   personId: null,
-  person: ref(people[0]),
-  persons: ref([people[0]])
+  person: ref(people.value[0]),
+  persons: ref([people.value[0]])
 })
 
 const { $toast } = useNuxtApp()
@@ -322,8 +321,6 @@ function openContextMenu () {
   })
   isContextMenuOpen.value = true
 }
-
-const customQuery = query => computed(() => query.value ? `${query.value} | =1` : '')
 
 function toggleModalIsOpen () {
   isModalOpen.value = !isModalOpen.value
