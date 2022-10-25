@@ -55,9 +55,9 @@ const props = defineProps({
   }
 })
 
-const popperOptions = computed(() => defu({}, props.popperOptions, $ui.tooltip.popperOptions))
+const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.tooltip.popperOptions))
 
-const [trigger, container] = usePopper(popperOptions.value as PopperOptions)
+const [trigger, container] = usePopper(popperOptions.value)
 
 const open = ref(false)
 </script>

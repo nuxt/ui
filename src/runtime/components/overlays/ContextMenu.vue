@@ -63,9 +63,9 @@ const isOpen = computed({
 
 const virtualElement = toRef(props, 'virtualElement')
 
-const popperOptions = computed(() => defu({}, props.popperOptions, $ui.contextMenu.popperOptions))
+const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.contextMenu.popperOptions))
 
-const [, container] = usePopper(popperOptions.value as PopperOptions, virtualElement)
+const [, container] = usePopper(popperOptions.value, virtualElement)
 </script>
 
 <script lang="ts">

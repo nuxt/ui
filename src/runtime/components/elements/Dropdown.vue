@@ -132,9 +132,9 @@ const props = defineProps({
   }
 })
 
-const popperOptions = computed(() => defu({}, props.popperOptions, $ui.dropdown.popperOptions))
+const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.dropdown.popperOptions))
 
-const [trigger, container] = usePopper(popperOptions.value as PopperOptions)
+const [trigger, container] = usePopper(popperOptions.value)
 
 function resolveItemClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
   return classNames(
