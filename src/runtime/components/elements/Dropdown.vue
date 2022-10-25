@@ -151,6 +151,8 @@ function onItemClick (e, item: any) {
 
   if (item.click) {
     item.click(e)
+  } else if (item.to) {
+    menuApi.value.closeMenu && menuApi.value.closeMenu()
   }
 }
 
