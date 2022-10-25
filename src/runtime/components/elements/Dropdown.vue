@@ -129,6 +129,14 @@ const props = defineProps({
   popperOptions: {
     type: Object as PropType<PopperOptions>,
     default: () => {}
+  },
+  openDelay: {
+    type: Number,
+    default: 50
+  },
+  closeDelay: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -192,7 +200,7 @@ function onMouseOver () {
   openTimeout = openTimeout || setTimeout(() => {
     menuApi.value.openMenu && menuApi.value.openMenu()
     openTimeout = null
-  }, 50)
+  }, props.openDelay)
 }
 
 function onMouseLeave () {
@@ -212,7 +220,7 @@ function onMouseLeave () {
   closeTimeout = closeTimeout || setTimeout(() => {
     menuApi.value.closeMenu && menuApi.value.closeMenu()
     closeTimeout = null
-  }, 0)
+  }, props.closeDelay)
 }
 </script>
 
