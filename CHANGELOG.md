@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/nuxtlabs/ui/compare/v0.0.3...v0.1.0) (2022-10-25)
+
+
+### Bug Fixes
+
+* `to` prop type ([be94fea](https://github.com/nuxtlabs/ui/commit/be94fea84acc69c0114099b5251ff34e3a239726))
+* **CommandPalette:** command icons opacity in dark mode ([abb93b5](https://github.com/nuxtlabs/ui/commit/abb93b5fd3ddda8c91db3370c8e3109cff4a091d))
+* **CommandPalette:** fix groups computed ([9302b8d](https://github.com/nuxtlabs/ui/commit/9302b8d635c3ffb489142601a17a9878072c89fe))
+* **CommandPalette:** group items spacing ([32922de](https://github.com/nuxtlabs/ui/commit/32922def7deec5bee920a1fb1400449461315d0d))
+* **CommandPalette:** hack for reactivity ([b43394d](https://github.com/nuxtlabs/ui/commit/b43394ddc3ee795b56679f7076e0c80a1c496b2e))
+* **CommandPalette:** icon color on hover ([e4f148e](https://github.com/nuxtlabs/ui/commit/e4f148efa97adf52b1b5544ff6c349a4ac82a956))
+* **CommandPalette:** icon inactive opacity on dark mode ([5722a3a](https://github.com/nuxtlabs/ui/commit/5722a3ae62706229179b75d9291babd1c2039244))
+* **CommandPalette:** prevent empty active slot ([056ab30](https://github.com/nuxtlabs/ui/commit/056ab304745c3ba8dedbf9d6491839b9d620df88))
+* **CommandPalette:** prevent shortcuts to disappear on hover ([f87252f](https://github.com/nuxtlabs/ui/commit/f87252f05debda7c98f5ab8a9453e57efafaad0f))
+* **CommandPalette:** reactivity issue + improve results ([ec9f670](https://github.com/nuxtlabs/ui/commit/ec9f67094a51e3afde92f7924b8ee5d4e9053158)), closes [#95](https://github.com/nuxtlabs/ui/issues/95) [#96](https://github.com/nuxtlabs/ui/issues/96)
+* **CommandPalette:** truncate suffix ([aa242aa](https://github.com/nuxtlabs/ui/commit/aa242aa87d5ae834d838518efd530003fdde5e24))
+* default object options ([95c14a4](https://github.com/nuxtlabs/ui/commit/95c14a43600016bf405b557752fad289fb31154a))
+* **Dropdown:** increase timeout for hover mode ([7291942](https://github.com/nuxtlabs/ui/commit/72919425b6e84581ba3b854aec3348977b335a3f))
+* error in Popover and Dropdown ([541ed30](https://github.com/nuxtlabs/ui/commit/541ed304a0a4fa2646115547e03e44cf9e17c65e))
+* **icon:** hydratation warning when loading same icon twice ([#99](https://github.com/nuxtlabs/ui/issues/99)) ([d57647a](https://github.com/nuxtlabs/ui/commit/d57647a77a145ff6e81d3a71550e98e3eaf3a842))
+* load icons on mount rather than within setup ([#82](https://github.com/nuxtlabs/ui/issues/82)) ([62361bf](https://github.com/nuxtlabs/ui/commit/62361bfa8f77c2f3452af108f08434ba4c6ec4c5))
+* **Modal:** use object for `innerStyle` ([72dc0d0](https://github.com/nuxtlabs/ui/commit/72dc0d0d0c270b2dfbf2ba8a8eb03a04eb5dea9a))
+* **Notification:** improve placement with description ([945fec6](https://github.com/nuxtlabs/ui/commit/945fec62c2efa6baf7b32c8a85ba658dfd9311c9))
+* **Notification:** prevent error without timeout ([8a66f5e](https://github.com/nuxtlabs/ui/commit/8a66f5e9bf65ab04b8878f0d597e439b45b46bb3))
+* **Popover:** `inline-flex` on trigger button ([593573a](https://github.com/nuxtlabs/ui/commit/593573a286459b48fde8f49df2c2f1fc1dc98da6))
+* **SelectCustom:** avoid submitting to form when closing ([#83](https://github.com/nuxtlabs/ui/issues/83)) ([cf1b2cd](https://github.com/nuxtlabs/ui/commit/cf1b2cdd133233481da6e1ec47b49b7f012aa204))
+
 ### [0.0.3](https://github.com/nuxtlabs/ui/compare/v0.0.2...v0.0.3) (2022-07-18)
 
 
