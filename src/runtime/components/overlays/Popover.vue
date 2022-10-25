@@ -63,6 +63,7 @@ const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions
 
 const [trigger, container] = usePopper(popperOptions.value)
 
+// https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
 const popoverApi: Ref<any> = ref(null)
 
 let openTimeout: NodeJS.Timeout | null = null
@@ -77,7 +78,7 @@ onMounted(() => {
     const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
     popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
     // stop trigger click propagation on hover
-    popoverApi.value.button.addEventListener('click', (e: Event) => {
+    popoverApi.value?.button?.addEventListener('click', (e: Event) => {
       if (props.mode === 'hover') {
         e.stopPropagation()
       }
