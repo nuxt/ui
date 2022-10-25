@@ -8,6 +8,7 @@ import offset from '@popperjs/core/lib/modifiers/offset'
 import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow'
 import computeStyles from '@popperjs/core/lib/modifiers/computeStyles'
 import eventListeners from '@popperjs/core/lib/modifiers/eventListeners'
+import type { PopperOptions } from '../types'
 
 export const createPopper = popperGenerator({
   defaultModifiers: [...defaultModifiers, offset, flip, preventOverflow, computeStyles, eventListeners]
@@ -24,7 +25,7 @@ export function usePopper ({
   resize = true,
   placement,
   strategy
-}, virtualReference: Ref<Object> = null) {
+}: PopperOptions, virtualReference: Ref<Object> = null) {
   const reference: Ref<HTMLElement> = ref(null)
   const popper: Ref<HTMLElement> = ref(null)
   const instance: Ref<Instance> = ref(null)

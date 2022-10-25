@@ -59,9 +59,9 @@ const props = defineProps({
   }
 })
 
-const popperOptions = computed(() => defu({}, props.popperOptions, $ui.popover.popperOptions))
+const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.popover.popperOptions))
 
-const [trigger, container] = usePopper(popperOptions.value as PopperOptions)
+const [trigger, container] = usePopper(popperOptions.value)
 
 const popoverApi: Ref<any> = ref(null)
 
