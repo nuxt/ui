@@ -12,8 +12,8 @@
   >
     <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
 
-    <ComboboxButton ref="trigger" v-slot="{ disabled }" as="div">
-      <slot :open="open" :disabled="disabled">
+    <ComboboxButton ref="trigger" v-slot="{ disabled: buttonDisabled }" as="div">
+      <slot :open="open" :disabled="buttonDisabled">
         <button :class="selectCustomClass" :disabled="disabled" type="button">
           <slot name="label">
             <span v-if="modelValue" class="block truncate">{{ modelValue[textAttribute] }}</span>
@@ -44,13 +44,13 @@
           />
           <ComboboxOption
             v-for="(option, index) in filteredOptions"
-            v-slot="{ active, selected, disabled }"
+            v-slot="{ active, selected, disabled: optionDisabled }"
             :key="index"
             as="template"
             :value="option"
             :disabled="option.disabled"
           >
-            <li :class="resolveOptionClass({ active, selected, disabled })">
+            <li :class="resolveOptionClass({ active, selected, disabled: optionDisabled })">
               <div :class="listOptionContainerClass">
                 <slot name="option" :option="option" :active="active" :selected="selected">
                   <span class="block truncate">{{ option[textAttribute] }}</span>
@@ -110,7 +110,7 @@ const props = defineProps({
     default: undefined
   },
   options: {
-    type: Array as PropType<{ disabled?: boolean }[]>,
+    type: Array as PropType<{ [key: string]: any, disabled?: boolean }[]>,
     default: () => []
   },
   required: {
