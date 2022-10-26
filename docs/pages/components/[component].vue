@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-template-shadow -->
 <!-- eslint-disable vue/no-v-html -->
 <!-- eslint-disable vue/no-v-text-v-html-on-component -->
 <template>

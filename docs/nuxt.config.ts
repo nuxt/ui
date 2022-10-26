@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from 'nuxt'
 import defaultTheme from 'tailwindcss/defaultTheme'
 import nuxtUI from '../src/module'
 
