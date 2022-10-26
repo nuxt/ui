@@ -129,6 +129,14 @@ const props = defineProps({
   popperOptions: {
     type: Object as PropType<PopperOptions>,
     default: () => {}
+  },
+  openDelay: {
+    type: Number,
+    default: 50
+  },
+  closeDelay: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -154,7 +162,9 @@ function onItemClick (e, item: any) {
   }
 }
 
+// https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/menu/menu.ts#L131
 const menuApi: Ref<any> = ref(null)
+
 let openTimeout: NodeJS.Timeout | null = null
 let closeTimeout: NodeJS.Timeout | null = null
 
@@ -167,7 +177,7 @@ onMounted(() => {
     const menuProvidesSymbols = Object.getOwnPropertySymbols(menuProvides)
     menuApi.value = menuProvidesSymbols.length && menuProvides[menuProvidesSymbols[0]]
     // stop trigger click propagation on hover
-    menuApi.value?.buttonRef.addEventListener('click', (e: Event) => {
+    menuApi.value?.buttonRef?.addEventListener('click', (e: Event) => {
       if (props.mode === 'hover') {
         e.stopPropagation()
       }
@@ -192,7 +202,7 @@ function onMouseOver () {
   openTimeout = openTimeout || setTimeout(() => {
     menuApi.value.openMenu && menuApi.value.openMenu()
     openTimeout = null
-  }, 50)
+  }, props.openDelay)
 }
 
 function onMouseLeave () {
@@ -212,7 +222,7 @@ function onMouseLeave () {
   closeTimeout = closeTimeout || setTimeout(() => {
     menuApi.value.closeMenu && menuApi.value.closeMenu()
     closeTimeout = null
-  }, 0)
+  }, props.closeDelay)
 }
 </script>
 

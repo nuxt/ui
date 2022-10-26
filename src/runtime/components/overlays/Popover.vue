@@ -56,6 +56,14 @@ const props = defineProps({
   popperOptions: {
     type: Object as PropType<PopperOptions>,
     default: () => {}
+  },
+  openDelay: {
+    type: Number,
+    default: 50
+  },
+  closeDelay: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -63,6 +71,7 @@ const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions
 
 const [trigger, container] = usePopper(popperOptions.value)
 
+// https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
 const popoverApi: Ref<any> = ref(null)
 
 let openTimeout: NodeJS.Timeout | null = null
@@ -77,7 +86,7 @@ onMounted(() => {
     const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
     popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
     // stop trigger click propagation on hover
-    popoverApi.value.button.addEventListener('click', (e: Event) => {
+    popoverApi.value?.button?.addEventListener('click', (e: Event) => {
       if (props.mode === 'hover') {
         e.stopPropagation()
       }
@@ -89,6 +98,7 @@ function onMouseOver () {
   if (props.mode !== 'hover' || !popoverApi.value) {
     return
   }
+
   // cancel programmed closing
   if (closeTimeout) {
     clearTimeout(closeTimeout)
@@ -101,13 +111,14 @@ function onMouseOver () {
   openTimeout = openTimeout || setTimeout(() => {
     popoverApi.value.togglePopover && popoverApi.value.togglePopover()
     openTimeout = null
-  }, 50)
+  }, props.openDelay)
 }
 
 function onMouseLeave () {
   if (props.mode !== 'hover' || !popoverApi.value) {
     return
   }
+
   // cancel programmed opening
   if (openTimeout) {
     clearTimeout(openTimeout)
@@ -120,7 +131,7 @@ function onMouseLeave () {
   closeTimeout = closeTimeout || setTimeout(() => {
     popoverApi.value.closePopover && popoverApi.value.closePopover()
     closeTimeout = null
-  }, 0)
+  }, props.closeDelay)
 }
 </script>
 
