@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/nuxtlabs/ui/compare/v0.1.0...v0.1.1) (2022-10-26)
+
+
+### Bug Fixes
+
+* **CommandPalette:** lint ([6fab68b](https://github.com/nuxtlabs/ui/commit/6fab68baa836c97680446e8cfdee7c5a64008539))
+* **Dropdown:** close on click item with `to` ([#103](https://github.com/nuxtlabs/ui/issues/103)) ([5517cc2](https://github.com/nuxtlabs/ui/commit/5517cc28467f957956a20126c1ce48e64677cb82))
+* **Popover:** avoid crash on mount if ref not loaded ([#105](https://github.com/nuxtlabs/ui/issues/105)) ([e9f0224](https://github.com/nuxtlabs/ui/commit/e9f0224b919445260d3b19511420a3fd448e4ea7))
+* **SelectCustom:** types and lint ([ec8bd5c](https://github.com/nuxtlabs/ui/commit/ec8bd5cdc49feb924dfdff352d9f3d788653c583))
+
 ## [0.1.0](https://github.com/nuxtlabs/ui/compare/v0.0.3...v0.1.0) (2022-10-25)
 
 
