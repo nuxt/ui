@@ -26,6 +26,7 @@
             <div class="flex items-center gap-1.5 min-w-0" :class="{ 'opacity-50': command.disabled }">
               <slot :name="`${group.key}-command`" :group="group" :command="command">
                 <span v-if="command.prefix" class="u-text-gray-400">{{ command.prefix }}</span>
+                <!-- eslint-disable-next-line vue/no-v-html -->
                 <span v-if="command.matches?.length" class="truncate" :class="{ 'flex-none': command.suffix }" v-html="highlight(command.matches[0])" />
                 <span v-else class="truncate" :class="{ 'flex-none': command.suffix }">{{ command[commandAttribute] }}</span>
                 <span v-if="command.suffix" class="u-text-gray-400 truncate">{{ command.suffix }}</span>
