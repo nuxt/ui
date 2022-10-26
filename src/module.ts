@@ -114,6 +114,11 @@ export default defineNuxtModule<ModuleOptions>({
         filename: 'ui.mjs',
         getContents: () => `export default ${JSON.stringify(ui)}`
       })
+      addTemplate({
+        filename: 'ui.d.ts',
+        write: true,
+        getContents: () => 'declare const d: any; export default d;'
+      })
     })
 
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
