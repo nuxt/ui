@@ -1,6 +1,6 @@
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
+import type { FuseSortFunctionMatch, FuseSortFunctionMatchList } from 'fuse.js'
 import type { Avatar } from './avatar'
-
 export interface Command {
   id: string | number
   prefix?: string
@@ -11,6 +11,9 @@ export interface Command {
   chip?: string
   disabled?: boolean
   shortcuts?: string[]
+  group?: string
+  score?: number
+  matches?: (FuseSortFunctionMatch | FuseSortFunctionMatchList)[]
 }
 
 export interface Group {

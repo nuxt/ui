@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div class="space-y-4">
     <div class="pb-10 border-b u-border-gray-200 mb-10">

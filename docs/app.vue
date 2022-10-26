@@ -10,7 +10,9 @@
           </div>
 
           <div class="flex items-center gap-3">
-            <UButton variant="transparent" :icon="colorMode.value === 'dark' ? 'heroicons-outline:moon' : 'heroicons-outline:sun'" @click="toggleDark" />
+            <ColorScheme placeholder="" tag="span">
+              <UButton variant="transparent" :icon="colorMode.value === 'dark' ? 'heroicons-outline:moon' : 'heroicons-outline:sun'" @click="toggleDark" />
+            </ColorScheme>
             <UButton to="https://github.com/nuxtlabs/ui" target="_blank" variant="transparent" icon="fa-brands:github" />
           </div>
         </div>
@@ -19,7 +21,7 @@
 
     <UContainer class="mt-16">
       <div class="lg:grid lg:grid-cols-10 lg:gap-10 lg:relative">
-        <aside class="lg:flex lg:flex-col lg:relative pb-8 lg:pb-0 lg:sticky lg:top-0 px-4 sm:px-6 lg:px-0 lg:pt-16 lg:-mt-16 lg:self-start lg:col-span-2 lg:overflow-hidden lg:sticky lg:h-screen">
+        <aside class="lg:flex lg:flex-col pb-8 lg:pb-0 lg:sticky lg:top-0 px-4 sm:px-6 lg:px-0 lg:pt-16 lg:-mt-16 lg:self-start lg:col-span-2 lg:overflow-hidden lg:h-screen">
           <nav class="overflow-y-auto h-auto pt-8 lg:py-12">
             <ul class="space-y-6">
               <li v-for="section of sections" :key="section">
