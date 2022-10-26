@@ -152,16 +152,6 @@ function resolveItemClass ({ active, disabled }: { active: boolean, disabled: bo
   )
 }
 
-function onItemClick (e, item: any) {
-  if (item.disabled) {
-    return
-  }
-
-  if (item.click) {
-    item.click(e)
-  }
-}
-
 // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/menu/menu.ts#L131
 const menuApi: Ref<any> = ref(null)
 
