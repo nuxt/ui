@@ -56,6 +56,14 @@ const props = defineProps({
   popperOptions: {
     type: Object as PropType<PopperOptions>,
     default: () => {}
+  },
+  openDelay: {
+    type: Number,
+    default: 50
+  },
+  closeDelay: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -90,6 +98,7 @@ function onMouseOver () {
   if (props.mode !== 'hover' || !popoverApi.value) {
     return
   }
+
   // cancel programmed closing
   if (closeTimeout) {
     clearTimeout(closeTimeout)
@@ -102,13 +111,14 @@ function onMouseOver () {
   openTimeout = openTimeout || setTimeout(() => {
     popoverApi.value.togglePopover && popoverApi.value.togglePopover()
     openTimeout = null
-  }, 50)
+  }, props.openDelay)
 }
 
 function onMouseLeave () {
   if (props.mode !== 'hover' || !popoverApi.value) {
     return
   }
+
   // cancel programmed opening
   if (openTimeout) {
     clearTimeout(openTimeout)
@@ -121,7 +131,7 @@ function onMouseLeave () {
   closeTimeout = closeTimeout || setTimeout(() => {
     popoverApi.value.closePopover && popoverApi.value.closePopover()
     closeTimeout = null
-  }, 0)
+  }, props.closeDelay)
 }
 </script>
 

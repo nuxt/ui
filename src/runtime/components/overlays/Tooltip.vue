@@ -1,5 +1,5 @@
 <template>
-  <div ref="trigger" :class="wrapperClass" @mouseover="open = true" @mouseleave="open = false">
+  <div ref="trigger" :class="wrapperClass" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
     <slot :open="open">
       Hover me
     </slot>
@@ -52,6 +52,14 @@ const props = defineProps({
   popperOptions: {
     type: Object as PropType<PopperOptions>,
     default: () => {}
+  },
+  openDelay: {
+    type: Number,
+    default: 0
+  },
+  closeDelay: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -60,6 +68,43 @@ const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions
 const [trigger, container] = usePopper(popperOptions.value)
 
 const open = ref(false)
+
+let openTimeout: NodeJS.Timeout | null = null
+let closeTimeout: NodeJS.Timeout | null = null
+
+// Methods
+
+function onMouseOver () {
+  // cancel programmed closing
+  if (closeTimeout) {
+    clearTimeout(closeTimeout)
+    closeTimeout = null
+  }
+  // dropdown already open
+  if (open.value) {
+    return
+  }
+  openTimeout = openTimeout || setTimeout(() => {
+    open.value = true
+    openTimeout = null
+  }, props.openDelay)
+}
+
+function onMouseLeave () {
+  // cancel programmed opening
+  if (openTimeout) {
+    clearTimeout(openTimeout)
+    openTimeout = null
+  }
+  // dropdown already closed
+  if (!open.value) {
+    return
+  }
+  closeTimeout = closeTimeout || setTimeout(() => {
+    open.value = false
+    closeTimeout = null
+  }, props.closeDelay)
+}
 </script>
 
 <script lang="ts">
