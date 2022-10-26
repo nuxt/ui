@@ -10,8 +10,8 @@
       <transition appear v-bind="transitionClass">
         <MenuItems :class="baseClass" static>
           <div v-for="(subItems, index) of items" :key="index" :class="groupClass">
-            <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }" :disabled="item.disabled" as="div">
-              <Component v-bind="item" :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'" :class="resolveItemClass({ active, disabled })" @click="e => onItemClick(e, item)">
+            <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }" :disabled="item.disabled" @click="e => item.click?.(e)">
+              <Component v-bind="item" :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'" :class="resolveItemClass({ active, disabled })">
                 <slot :name="item.slot" :item="item">
                   <Icon v-if="item.icon" :name="item.icon" :class="[itemIconClass, item.iconClass]" />
                   <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="itemAvatarClass" />
@@ -150,16 +150,6 @@ function resolveItemClass ({ active, disabled }: { active: boolean, disabled: bo
     active ? props.itemActiveClass : props.itemInactiveClass,
     disabled && props.itemDisabledClass
   )
-}
-
-function onItemClick (e, item: any) {
-  if (item.disabled) {
-    return
-  }
-
-  if (item.click) {
-    item.click(e)
-  }
 }
 
 // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/menu/menu.ts#L131
