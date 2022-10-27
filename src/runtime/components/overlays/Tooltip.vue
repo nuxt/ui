@@ -13,7 +13,7 @@
 
           <span v-if="shortcuts?.length" class="inline-flex items-center justify-end flex-shrink-0 gap-0.5 ml-1">
             <span class="mr-1 u-text-gray-700">&middot;</span>
-            <kbd v-for="shortcut of shortcuts" :key="shortcut" class="flex items-center justify-center font-sans px-1 h-4 w-4 text-[10px] u-bg-gray-100 rounded u-text-gray-900">
+            <kbd v-for="shortcut of shortcuts" :key="shortcut" class="flex items-center justify-center font-sans px-1 h-4 min-w-[16px] text-[10px] u-bg-gray-100 rounded u-text-gray-900">
               {{ shortcut }}
             </kbd>
           </span>

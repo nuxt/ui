@@ -491,7 +491,7 @@ export default (variantColors: string[]) => {
     shadow: 'shadow',
     rounded: 'rounded',
     ring: 'ring-1 u-ring-gray-200',
-    base: 'invisible lg:visible h-6 px-2 py-1 text-xs',
+    base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal',
     transition: {
       enterActiveClass: 'transition ease-out duration-200',
       enterFromClass: 'opacity-0 translate-y-1',
