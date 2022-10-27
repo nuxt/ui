@@ -6,10 +6,17 @@
 
     <div v-if="open" ref="container" :class="[containerClass, widthClass]">
       <transition appear v-bind="transitionClass">
-        <div :class="baseClass">
+        <div :class="[baseClass, backgroundClass, roundedClass, shadowClass, ringClass]">
           <slot name="text">
-            {{ text }}
+            <span class="truncate">{{ text }}</span>
           </slot>
+
+          <span v-if="shortcuts?.length" class="inline-flex items-center justify-end flex-shrink-0 gap-0.5 ml-1">
+            <span class="mr-1 u-text-gray-700">&middot;</span>
+            <kbd v-for="shortcut of shortcuts" :key="shortcut" class="flex items-center justify-center font-sans px-1 h-4 w-4 text-[10px] u-bg-gray-100 rounded u-text-gray-900">
+              {{ shortcut }}
+            </kbd>
+          </span>
         </div>
       </transition>
     </div>
@@ -29,6 +36,10 @@ const props = defineProps({
     type: String,
     default: null
   },
+  shortcuts: {
+    type: Array as PropType<string[]>,
+    default: () => []
+  },
   wrapperClass: {
     type: String,
     default: () => $ui.tooltip.wrapper
@@ -40,6 +51,22 @@ const props = defineProps({
   widthClass: {
     type: String,
     default: () => $ui.tooltip.width
+  },
+  backgroundClass: {
+    type: String,
+    default: () => $ui.tooltip.background
+  },
+  shadowClass: {
+    type: String,
+    default: () => $ui.tooltip.shadow
+  },
+  ringClass: {
+    type: String,
+    default: () => $ui.tooltip.ring
+  },
+  roundedClass: {
+    type: String,
+    default: () => $ui.tooltip.rounded
   },
   baseClass: {
     type: String,

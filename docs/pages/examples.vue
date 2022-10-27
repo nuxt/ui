@@ -154,8 +154,8 @@
         Tooltip:
       </div>
 
-      <UTooltip text="Hello tooltip!">
-        <UIcon name="heroicons-outline:information-circle" class="w-6 h-6 text-black cursor-pointer" />
+      <UTooltip text="Hello tooltip!" :shortcuts="['⌘', 'G']">
+        <UIcon name="heroicons-outline:information-circle" class="w-6 h-6 u-text-gray-900 cursor-pointer" />
       </UTooltip>
     </div>
 

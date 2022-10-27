@@ -487,7 +487,11 @@ export default (variantColors: string[]) => {
     wrapper: 'relative inline-flex',
     container: 'z-20',
     width: 'max-w-xs',
-    base: 'invisible w-auto h-6 px-2 py-1 space-x-1 truncate rounded shadow lg:visible u-bg-gray-800 truncate u-text-gray-50 text-xs',
+    background: 'u-bg-white',
+    shadow: 'shadow',
+    rounded: 'rounded',
+    ring: 'ring-1 u-ring-gray-200',
+    base: 'invisible lg:visible h-6 px-2 py-1 text-xs',
     transition: {
       enterActiveClass: 'transition ease-out duration-200',
       enterFromClass: 'opacity-0 translate-y-1',
