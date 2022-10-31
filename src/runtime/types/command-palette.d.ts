@@ -19,7 +19,7 @@ export interface Command {
 
 export interface Group {
   key: string
-  lbel: string
+  label: string
   active?: string
   inactive?: string
   commands: Command[]
