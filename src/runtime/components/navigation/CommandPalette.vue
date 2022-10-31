@@ -166,7 +166,7 @@ const groups = computed(() => map(groupBy(results.value, command => command.item
   return {
     ...props.groups.find(group => group.key === key),
     commands: commands.slice(0, options.value.resultLimit)
-  }
+  } as Group
 }))
 
 // Methods
