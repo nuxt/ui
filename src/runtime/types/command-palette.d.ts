@@ -3,7 +3,6 @@ import type { FuseSortFunctionMatch, FuseSortFunctionMatchList } from 'fuse.js'
 import type { Avatar } from './avatar'
 export interface Command {
   id: string | number
-  label?: string
   prefix?: string
   suffix?: string
   icon?: string
@@ -15,6 +14,7 @@ export interface Command {
   group?: string
   score?: number
   matches?: (FuseSortFunctionMatch | FuseSortFunctionMatchList)[]
+  [key: string]: any
 }
 
 export interface Group {
