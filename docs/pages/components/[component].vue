@@ -67,7 +67,7 @@
             size="sm"
           />
           <UInput
-            v-else-if="prop.type === 'String' && typeof prop.value === 'string'"
+            v-else-if="prop.type === 'String'"
             v-model="prop.value"
             :name="prop.key"
             size="sm"
