@@ -14,6 +14,7 @@ export interface Command {
   group?: string
   score?: number
   matches?: (FuseSortFunctionMatch | FuseSortFunctionMatchList)[]
+  [key: string]: any
 }
 
 export interface Group {
@@ -22,4 +23,5 @@ export interface Group {
   inactive?: string
   commands: Command[]
   options?: Partial<UseFuseOptions<Command>>
+  [key: string]: any
 }
