@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/nuxtlabs/ui/compare/v0.1.2...v0.1.3) (2022-11-04)
+
+
+### Bug Fixes
+
+* **docs:** component input string field ([e521e1a](https://github.com/nuxtlabs/ui/commit/e521e1ac2421dc331652f1ea4ac2b0b2959dc069))
+* **types:** add missing field in command palette type ([#111](https://github.com/nuxtlabs/ui/issues/111)) ([28586c3](https://github.com/nuxtlabs/ui/commit/28586c35a558d9e925094f86e07acdb928d54ad7))
+
 ### [0.1.2](https://github.com/nuxtlabs/ui/compare/v0.1.1...v0.1.2) (2022-10-27)
 
 ### [0.1.1](https://github.com/nuxtlabs/ui/compare/v0.1.0...v0.1.1) (2022-10-26)
