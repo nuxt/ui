@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/nuxtlabs/ui/compare/v0.1.3...v0.1.4) (2022-11-08)
+
+
+### Bug Fixes
+
+* **button:** support `RouteLocationRaw` type for `to` ([#112](https://github.com/nuxtlabs/ui/issues/112)) ([1b56b50](https://github.com/nuxtlabs/ui/commit/1b56b50d4d54a5cb9e5febacdf42867988ae6c5d))
+
 ### [0.1.3](https://github.com/nuxtlabs/ui/compare/v0.1.2...v0.1.3) (2022-11-04)
 
 
