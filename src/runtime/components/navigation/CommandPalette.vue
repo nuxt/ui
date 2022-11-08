@@ -110,6 +110,10 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
+  autoclear: {
+    type: Boolean,
+    default: true
+  },
   placeholder: {
     type: Boolean,
     default: true
@@ -183,7 +187,7 @@ function onSelect (option: Command | Command[]) {
   emit('update:modelValue', option, { query: query.value })
 
   // Clear input after selection
-  if (!props.multiple) {
+  if (props.autoclear) {
     setTimeout(() => {
       query.value = ''
     }, 0)
