@@ -20,14 +20,14 @@
               </p>
 
               <div v-if="description && actions.length" class="mt-3 flex items-center gap-6">
-                <button v-for="(action, index) of actions" :key="index" type="button" class="text-sm font-medium focus:outline-none text-primary-500 hover:text-primary-600 dark:hover:text-primary-400" @click.stop="onAction(action)">
+                <button v-for="(action, index) of actions" :key="index" type="button" class="text-sm font-medium focus:outline-none text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500" @click.stop="onAction(action)">
                   {{ action.label }}
                 </button>
               </div>
             </div>
             <div class="flex-shrink-0 flex items-center gap-3">
               <div v-if="!description && actions.length" class="flex items-center gap-2">
-                <button v-for="(action, index) of actions" :key="index" type="button" class="text-sm font-medium focus:outline-none text-primary-500 hover:text-primary-600 dark:hover:text-primary-400" @click.stop="onAction(action)">
+                <button v-for="(action, index) of actions" :key="index" type="button" class="text-sm font-medium focus:outline-none text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500" @click.stop="onAction(action)">
                   {{ action.label }}
                 </button>
               </div>
