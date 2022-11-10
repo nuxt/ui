@@ -12,7 +12,7 @@
   >
     <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
 
-    <ComboboxButton ref="trigger" v-slot="{ disabled: buttonDisabled }" as="div">
+    <ComboboxButton ref="trigger" v-slot="{ disabled: buttonDisabled }" as="div" class="inline-flex">
       <slot :open="open" :disabled="buttonDisabled">
         <button :class="selectCustomClass" :disabled="disabled" type="button">
           <slot name="label">
