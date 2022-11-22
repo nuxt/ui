@@ -6,9 +6,9 @@
     :aria-label="ariaLabel"
     v-bind="buttonProps"
   >
-    <Icon v-if="isLeading" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
+    <Icon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     <slot><span :class="truncate ? 'text-left break-all line-clamp-1' : ''">{{ label }}</span></slot>
-    <Icon v-if="isTrailing" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+    <Icon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
   </component>
 </template>
 

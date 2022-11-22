@@ -13,16 +13,16 @@
       :autocomplete="autocomplete"
       :spellcheck="spellcheck"
       :class="inputClass"
-      @input="onInput($event.target.value)"
+      @input="onInput(($event.target as any).value)"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     >
     <slot />
     <div v-if="isLeading" :class="iconLeadingWrapperClass">
-      <Icon :name="iconName" :class="iconClass" />
+      <Icon v-if="iconName" :name="iconName" :class="iconClass" />
     </div>
     <div v-if="isTrailing" :class="iconTrailingWrapperClass">
-      <Icon :name="iconName" :class="iconClass" />
+      <Icon v-if="iconName" :name="iconName" :class="iconClass" />
     </div>
   </div>
 </template>
@@ -129,11 +129,11 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'focus', 'blur'])
 
-const input: Ref<HTMLInputElement> = ref(null)
+const input: Ref<HTMLInputElement | null> = ref(null)
 
 const autoFocus = () => {
   if (props.autofocus) {
-    input.value.focus()
+    input.value?.focus()
   }
 }
 
