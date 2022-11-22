@@ -79,6 +79,7 @@ let closeTimeout: NodeJS.Timeout | null = null
 
 onMounted(() => {
   setTimeout(() => {
+    // @ts-expect-error internals
     const popoverProvides = trigger.value?.$.provides
     if (!popoverProvides) {
       return

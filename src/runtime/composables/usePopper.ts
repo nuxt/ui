@@ -1,6 +1,6 @@
 import { ref, onMounted, watchEffect } from 'vue'
 import type { Ref } from 'vue'
-import { popperGenerator, defaultModifiers } from '@popperjs/core/lib/popper-lite'
+import { popperGenerator, defaultModifiers, VirtualElement } from '@popperjs/core/lib/popper-lite'
 import type { Instance } from '@popperjs/core'
 import { omitBy, isUndefined } from 'lodash-es'
 import flip from '@popperjs/core/lib/modifiers/flip'
@@ -8,6 +8,7 @@ import offset from '@popperjs/core/lib/modifiers/offset'
 import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow'
 import computeStyles from '@popperjs/core/lib/modifiers/computeStyles'
 import eventListeners from '@popperjs/core/lib/modifiers/eventListeners'
+import { MaybeElement, unrefElement } from '@vueuse/core'
 import type { PopperOptions } from '../types'
 
 export const createPopper = popperGenerator({
@@ -25,21 +26,22 @@ export function usePopper ({
   resize = true,
   placement,
   strategy
-}: PopperOptions, virtualReference: Ref<Object> = null) {
-  const reference: Ref<HTMLElement> = ref(null)
-  const popper: Ref<HTMLElement> = ref(null)
-  const instance: Ref<Instance> = ref(null)
+}: PopperOptions, virtualReference?: Ref<Element | VirtualElement>) {
+  const reference = ref<MaybeElement>(null)
+  const popper = ref<MaybeElement>(null)
+  const instance = ref<Instance | null>(null)
 
   onMounted(() => {
     watchEffect((onInvalidate) => {
       if (!popper.value) { return }
-      if (!reference.value && !virtualReference.value) { return }
+      if (!reference.value && !virtualReference?.value) { return }
 
-      const popperEl = popper.value.$el || popper.value
-      const referenceEl = virtualReference?.value || reference.value.$el || reference.value
+      const popperEl = unrefElement(popper)
+      const referenceEl = virtualReference?.value || unrefElement(reference)
 
       // if (!(referenceEl instanceof HTMLElement)) { return }
       if (!(popperEl instanceof HTMLElement)) { return }
+      if (!referenceEl) { return }
 
       instance.value = createPopper(referenceEl, popperEl, omitBy({
         placement,
@@ -76,5 +78,5 @@ export function usePopper ({
     })
   })
 
-  return [reference, popper, instance]
+  return [reference, popper, instance] as const
 }

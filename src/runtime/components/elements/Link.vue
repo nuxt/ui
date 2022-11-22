@@ -8,7 +8,7 @@
   <router-link
     v-else
     v-slot="{ href, navigate, isActive, isExactActive }"
-    v-bind="$props"
+    v-bind="$props as RouterLinkProps"
     custom
   >
     <a
@@ -25,10 +25,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { PropType } from 'vue'
-import type { RouteLocationNormalized } from 'vue-router'
+import type { RouteLocationNormalized, RouterLinkProps } from 'vue-router'
 import { RouterLink } from 'vue-router'
 
 const props = defineProps({
+  // @ts-expect-error internal props
   ...RouterLink.props,
   to: {
     type: [String, Object] as PropType<string | RouteLocationNormalized>,

@@ -90,7 +90,7 @@ const emit = defineEmits(['update:modelValue', 'focus', 'blur'])
 
 const isChecked = computed({
   get () {
-    return props.modelValue
+    return !!props.modelValue
   },
   set (value) {
     emit('update:modelValue', value)

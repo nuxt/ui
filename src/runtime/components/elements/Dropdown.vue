@@ -160,6 +160,7 @@ let closeTimeout: NodeJS.Timeout | null = null
 
 onMounted(() => {
   setTimeout(() => {
+    // @ts-expect-error internals
     const menuProvides = trigger.value?.$.provides
     if (!menuProvides) {
       return
