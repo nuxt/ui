@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Ref } from 'vue'
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'

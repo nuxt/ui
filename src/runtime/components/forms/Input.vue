@@ -28,7 +28,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Ref } from 'vue'
 import { ref, computed, onMounted } from 'vue'
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
@@ -129,7 +128,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'focus', 'blur'])
 
-const input: Ref<HTMLInputElement | null> = ref(null)
+const input = ref<HTMLInputElement | null>(null)
 
 const autoFocus = () => {
   if (props.autofocus) {

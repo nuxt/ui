@@ -17,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Ref, PropType } from 'vue'
 import { computed, ref, onMounted } from 'vue'
 import { defu } from 'defu'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
@@ -72,7 +71,7 @@ const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions
 const [trigger, container] = usePopper(popperOptions.value)
 
 // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
-const popoverApi: Ref<any> = ref(null)
+const popoverApi = ref<any>(null)
 
 let openTimeout: NodeJS.Timeout | null = null
 let closeTimeout: NodeJS.Timeout | null = null
