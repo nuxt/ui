@@ -56,7 +56,7 @@ import type { PropType } from 'vue'
 import Icon from '../elements/Icon.vue'
 import { useTimer } from '../../composables/useTimer'
 import { classNames } from '../../utils'
-import { ToastNotificationAction } from '../../types'
+import type { ToastNotificationAction } from '../../types'
 import $ui from '#build/ui'
 
 const props = defineProps({

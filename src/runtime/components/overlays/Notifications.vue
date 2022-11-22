@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ToastNotification } from '../../types'
+import type { ToastNotification } from '../../types'
 import Notification from './Notification.vue'
 import { useNuxtApp, useState } from '#imports'
 

@@ -57,7 +57,7 @@
                 </slot>
               </div>
 
-              <span v-if="selected " :class="resolveOptionIconClass({ active })">
+              <span v-if="selected" :class="resolveOptionIconClass({ active })">
                 <Icon v-if="listOptionIcon" :name="listOptionIcon" :class="listOptionIconSizeClass" aria-hidden="true" />
               </span>
             </li>
