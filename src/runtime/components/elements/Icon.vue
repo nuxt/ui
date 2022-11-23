@@ -20,6 +20,7 @@ const props = defineProps({
 const nuxtApp = useNuxtApp()
 const state = useState<Record<string, Required<IconifyIcon> | Promise<void> | null>>('u-icons', () => ({}))
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
 const isFetching = computed(() => state.value?.[props.name] && ('then' in state.value?.[props.name]!))
 const icon = computed<Required<IconifyIcon> | null>(() =>
   !state.value?.[props.name] || 'then' in state.value[props.name]!
