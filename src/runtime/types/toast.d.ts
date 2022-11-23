@@ -1,3 +1,8 @@
+export interface ToastNotificationAction {
+  label: string,
+  click: Function
+}
+
 export interface ToastNotification {
   id: string
   title: string
@@ -5,10 +10,8 @@ export interface ToastNotification {
   type: string
   icon?: string
   timeout: number
-  actions?: {
-    label: string,
-    click: Function
-  }[]
+  actions?: ToastNotificationAction[]
+  click?: Function
   callback?: Function
 }
 

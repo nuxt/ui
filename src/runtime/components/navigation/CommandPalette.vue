@@ -134,6 +134,7 @@ onMounted(() => {
 
 onMounted(() => {
   setTimeout(() => {
+    // @ts-expect-error internals
     const popoverProvides = comboboxInput.value?.$.provides
     if (!popoverProvides) {
       return
@@ -203,7 +204,7 @@ function onClear () {
 }
 
 defineExpose({
-  updateQuery: (q) => {
+  updateQuery: (q: string) => {
     query.value = q
   },
   comboboxApi,

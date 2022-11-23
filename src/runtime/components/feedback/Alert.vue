@@ -2,7 +2,7 @@
   <div class="rounded-md p-4" :class="variantClass">
     <div class="flex">
       <div class="flex-shrink-0">
-        <Icon :name="iconName" :class="iconClass" class="h-5 w-5" />
+        <Icon v-if="iconName" :name="iconName" :class="iconClass" class="h-5 w-5" />
       </div>
       <div class="ml-3 flex-1 md:flex md:justify-between">
         <p v-if="title" class="text-sm leading-5" :class="titleClass">

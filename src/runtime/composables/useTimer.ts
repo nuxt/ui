@@ -1,10 +1,10 @@
-import { Ref, ref, computed } from 'vue-demi'
+import { ref, computed } from 'vue-demi'
 import { useTimestamp } from '@vueuse/core'
 
 export function useTimer (cb: (...args: unknown[]) => any, interval: number) {
   let timer: number | null = null
   const timestamp = useTimestamp({ controls: true })
-  const startTime: Ref<number | null> = ref(null)
+  const startTime = ref<number | null>(null)
 
   const remaining = computed(() => {
     if (!startTime.value) {
@@ -46,7 +46,7 @@ export function useTimer (cb: (...args: unknown[]) => any, interval: number) {
   }
 
   function resume () {
-    startTime.value += (Date.now() - timestamp.timestamp.value)
+    startTime.value = (startTime.value || 0) + (Date.now() - timestamp.timestamp.value)
     timestamp.resume()
     set()
   }

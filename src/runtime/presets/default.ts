@@ -1,4 +1,4 @@
-export default (variantColors: string[]) => {
+export default function defaultPreset (variantColors: string[]) {
   const button = {
     base: 'font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 focus:ring-offset-white dark:focus:ring-offset-black',
     rounded: 'rounded-md',
@@ -570,3 +570,5 @@ export default (variantColors: string[]) => {
     contextMenu
   }
 }
+
+export type DefaultPreset = ReturnType<typeof defaultPreset>

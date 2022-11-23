@@ -60,6 +60,13 @@
 
 <script setup>
 useHead({
+  title: '@nuxthq/ui',
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' }
+  ],
+  link: [
+    { rel: 'stylesheet', href: 'https://rsms.me/inter/inter.css' }
+  ],
   bodyAttrs: {
     class: 'antialiased font-sans text-gray-700 bg-gray-50 dark:bg-gray-900 dark:text-gray-200 bg-white dark:bg-black'
   }

@@ -17,11 +17,12 @@
 </template>
 
 <script setup lang="ts">
+import type { ToastNotification } from '../../types'
 import Notification from './Notification.vue'
 import { useNuxtApp, useState } from '#imports'
 
 const { $toast } = useNuxtApp()
-const notifications = useState('notifications', () => [])
+const notifications = useState<ToastNotification[]>('notifications', () => [])
 </script>
 
 <script lang="ts">

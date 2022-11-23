@@ -1,3 +1,14 @@
 {
-  "extends": "./docs/.nuxt/tsconfig.json"
+  "extends": "./docs/.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext"
+  },
+  "include": [
+    "./**/*",
+    "./docs/.nuxt/nuxt.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

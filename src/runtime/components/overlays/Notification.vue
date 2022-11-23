@@ -56,6 +56,7 @@ import type { PropType } from 'vue'
 import Icon from '../elements/Icon.vue'
 import { useTimer } from '../../composables/useTimer'
 import { classNames } from '../../utils'
+import type { ToastNotificationAction } from '../../types'
 import $ui from '#build/ui'
 
 const props = defineProps({
@@ -172,7 +173,7 @@ function onClose () {
   emit('close')
 }
 
-function onAction (action) {
+function onAction (action: ToastNotificationAction) {
   if (timer) {
     timer.stop()
   }

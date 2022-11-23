@@ -72,7 +72,7 @@ defineProps({
   }
 })
 
-function highlight ({ indices, value }, i = 1) {
+function highlight ({ indices, value }: { indices: number[][], value:string }, i = 1): string {
   const pair = indices[indices.length - i]
   if (!pair) {
     return value

@@ -20,6 +20,7 @@
     "dev": "nuxi dev docs",
     "build:docs": "nuxi generate docs",
     "lint": "eslint --ext .ts,.js,.vue .",
+    "typecheck": "nuxi typecheck",
     "prepare": "nuxi prepare docs",
     "release": "yarn lint && standard-version && git push --follow-tags"
   },
@@ -48,6 +49,7 @@
     "eslint": "^8.27.0",
     "nuxt": "^3.0.0",
     "standard-version": "^9.5.0",
+    "unbuild": "^1.0.1",
     "vue-tsc": "^1.0.9"
   },
   "build": {

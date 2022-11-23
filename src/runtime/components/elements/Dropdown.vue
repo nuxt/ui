@@ -38,7 +38,7 @@ import {
   MenuItems,
   MenuItem
 } from '@headlessui/vue'
-import type { Ref, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import { ref, computed, onMounted } from 'vue'
 import { defu } from 'defu'
@@ -153,13 +153,14 @@ function resolveItemClass ({ active, disabled }: { active: boolean, disabled: bo
 }
 
 // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/menu/menu.ts#L131
-const menuApi: Ref<any> = ref(null)
+const menuApi = ref<any>(null)
 
 let openTimeout: NodeJS.Timeout | null = null
 let closeTimeout: NodeJS.Timeout | null = null
 
 onMounted(() => {
   setTimeout(() => {
+    // @ts-expect-error internals
     const menuProvides = trigger.value?.$.provides
     if (!menuProvides) {
       return

@@ -12,6 +12,7 @@
 import type { PropType } from 'vue'
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
+import type { VirtualElement } from '@popperjs/core'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
 import $ui from '#build/ui'
@@ -22,7 +23,7 @@ const props = defineProps({
     default: false
   },
   virtualElement: {
-    type: Object,
+    type: Object as PropType<VirtualElement>,
     required: true
   },
   wrapperClass: {

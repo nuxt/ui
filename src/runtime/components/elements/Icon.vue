@@ -18,15 +18,19 @@ const props = defineProps({
   }
 })
 const nuxtApp = useNuxtApp()
-const state = useState('u-icons', () => ({}))
+const state = useState<Record<string, Required<IconifyIcon> | Promise<void> | null>>('u-icons', () => ({}))
 
-const isFetching = computed(() => !!state.value?.[props.name]?.then)
-const icon = computed<IconifyIcon | null>(() => !state.value?.[props.name] || state.value[props.name].then ? null : state.value[props.name])
+const isFetching = computed(() => state.value?.[props.name] && ('then' in state.value?.[props.name]!))
+const icon = computed<Required<IconifyIcon> | null>(() =>
+  !state.value?.[props.name] || 'then' in state.value[props.name]!
+    ? null
+    : state.value[props.name] as Required<IconifyIcon>
+)
 const component = computed(() => nuxtApp.vueApp.component(props.name))
 
 const loadIconComponent = (name: string) => {
   state.value = state.value || {}
-  if (nuxtApp.vueApp.component(props.name) || state.value[name] || state.value[name] === null) { return state.value[name] }
+  if (nuxtApp.vueApp.component(props.name) || state.value[name] || state.value[name] == null) { return state.value[name] }
 
   state.value[name] = loadIcon(name)
     .then((res) => { state.value[name] = res })

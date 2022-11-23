@@ -16,12 +16,12 @@
       <slot :open="open" :disabled="buttonDisabled">
         <button :class="selectCustomClass" :disabled="disabled" type="button">
           <slot name="label">
-            <span v-if="modelValue" class="block truncate">{{ modelValue[textAttribute] }}</span>
+            <span v-if="modelValue" class="block truncate">{{ (modelValue as any)[textAttribute] }}</span>
             <span v-else class="block truncate u-text-gray-400">{{ placeholder }}</span>
           </slot>
           <slot name="icon">
             <span :class="iconWrapperClass">
-              <Icon :name="icon" :class="iconClass" aria-hidden="true" />
+              <Icon v-if="icon" :name="icon" :class="iconClass" aria-hidden="true" />
             </span>
           </slot>
         </button>
@@ -58,7 +58,7 @@
               </div>
 
               <span v-if="selected" :class="resolveOptionIconClass({ active })">
-                <Icon :name="listOptionIcon" :class="listOptionIconSizeClass" aria-hidden="true" />
+                <Icon v-if="listOptionIcon" :name="listOptionIcon" :class="listOptionIconSizeClass" aria-hidden="true" />
               </span>
             </li>
           </ComboboxOption>
@@ -323,7 +323,7 @@ function resolveOptionIconClass ({ active }: { active: boolean }) {
   )
 }
 
-function onUpdate (event) {
+function onUpdate (event: any) {
   if (query.value && searchInput.value?.$el) {
     query.value = ''
     // explicitly set input text because `ComboboxInput` `displayValue` is not reactive

@@ -11,7 +11,7 @@
       :placeholder="placeholder"
       :autocomplete="autocomplete"
       :class="textareaClass"
-      @input="onInput($event.target.value)"
+      @input="onInput(($event.target as any).value)"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     />
@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Ref } from 'vue'
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
@@ -95,11 +94,11 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'focus', 'blur'])
 
-const textarea: Ref<HTMLTextAreaElement> = ref(null)
+const textarea = ref<HTMLTextAreaElement | null>(null)
 
 const autoFocus = () => {
   if (props.autofocus) {
-    textarea.value.focus()
+    textarea.value?.focus()
   }
 }
 

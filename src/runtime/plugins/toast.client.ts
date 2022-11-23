@@ -1,9 +1,8 @@
-import type { Ref } from 'vue'
 import { defineNuxtPlugin, useState } from '#app'
 import type { ToastNotification } from '../types'
 
 export default defineNuxtPlugin(() => {
-  const notifications: Ref<ToastNotification[]> = useState('notifications', () => [])
+  const notifications = useState<ToastNotification[]>('notifications', () => [])
 
   function addNotification (notification: Partial<ToastNotification>) {
     const body = {
