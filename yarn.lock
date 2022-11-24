@@ -481,7 +481,7 @@
     unimport "^1.0.1"
     untyped "^1.0.0"
 
-"@nuxt/kit@^3.0.0-rc.12", "@nuxt/kit@^3.0.0-rc.14", "@nuxt/kit@^3.0.0-rc.9":
+"@nuxt/kit@^3.0.0-rc.12", "@nuxt/kit@^3.0.0-rc.14":
   version "3.0.0-rc.14"
   resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-3.0.0-rc.14.tgz#8eb0ffb4940fc874708b1cbb30f834c22d29da85"
   integrity sha512-CNIRkUAEWmvedA4MJqj4kVE1QNHYYu4V0Uj7bcOsOStWvbEzhRqh5AL56eaQGHcHnvNt/QEKvXDgcr6woFH4EQ==
@@ -636,14 +636,14 @@
     vite-plugin-checker "^0.5.1"
     vue-bundle-renderer "^1.0.0"
 
-"@nuxtjs/color-mode@^3.1.8":
-  version "3.1.8"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/color-mode/-/color-mode-3.1.8.tgz#58f3e5401028fe0c75088e9d2fdc5c7778d2b720"
-  integrity sha512-ahgjmSzpjTpaxvyyGA/1wD2rNcSFXiqs3/A/GEllB1s4BboJVnBIqkwIQpAguq7IDVZG2tMAvqmnZHSfwrI3IA==
+"@nuxtjs/color-mode@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/color-mode/-/color-mode-3.2.0.tgz#b5b6a3931a6ddd9646c3aad121d357c635792eb7"
+  integrity sha512-isDR01yfadopiHQ/VEVUpyNSPrk5PCjUHS4t1qYRZwuRGefU4s9Iaxf6H9nmr1QFzoMgTm+3T0r/54jLwtpZbA==
   dependencies:
-    "@nuxt/kit" "^3.0.0-rc.9"
+    "@nuxt/kit" "^3.0.0"
     lodash.template "^4.5.0"
-    pathe "^0.3.5"
+    pathe "^1.0.0"
 
 "@nuxtjs/eslint-config-typescript@^12.0.0":
   version "12.0.0"
@@ -5312,11 +5312,6 @@ pathe@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/pathe/-/pathe-0.2.0.tgz#30fd7bbe0a0d91f0e60bae621f5d19e9e225c339"
   integrity sha512-sTitTPYnn23esFR3RlqYBWn4c45WGeLcsKzQiUpXJAyfcWkolvlYpV8FLo7JishK946oQwMFUCHXQ9AjGPKExw==
-
-pathe@^0.3.5:
-  version "0.3.9"
-  resolved "https://registry.yarnpkg.com/pathe/-/pathe-0.3.9.tgz#4baff768f37f03e3d9341502865fb93116f65191"
-  integrity sha512-6Y6s0vT112P3jD8dGfuS6r+lpa0qqNrLyHPOwvXMnyNTQaYiwgau2DP3aNDsR13xqtGj7rrPo+jFUATpU6/s+g==
 
 pathe@^1.0.0:
   version "1.0.0"
