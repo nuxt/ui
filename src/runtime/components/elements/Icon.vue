@@ -31,7 +31,7 @@ const component = computed(() => nuxtApp.vueApp.component(props.name))
 
 const loadIconComponent = (name: string) => {
   state.value = state.value || {}
-  if (nuxtApp.vueApp.component(props.name) || state.value[name] || state.value[name] == null) { return state.value[name] }
+  if (nuxtApp.vueApp.component(props.name) || state.value[name] || state.value[name] === null) { return state.value[name] }
 
   state.value[name] = loadIcon(name)
     .then((res) => { state.value[name] = res })
