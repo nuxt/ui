@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.9](https://github.com/nuxtlabs/ui/compare/v0.1.8...v0.1.9) (2022-11-25)
+
+
+### Bug Fixes
+
+* **Icon:** couldn't load anymore ([6321d3e](https://github.com/nuxtlabs/ui/commit/6321d3ed8d5c9478cb1dafc1da94b21d0c7edb88))
+* **Icon:** eslint ignore ([bc0c168](https://github.com/nuxtlabs/ui/commit/bc0c168c0b0feae96d6a1848c3a356d846e2cbb5))
+
 ### [0.1.8](https://github.com/nuxtlabs/ui/compare/v0.1.7...v0.1.8) (2022-11-16)
 
 ### [0.1.7](https://github.com/nuxtlabs/ui/compare/v0.1.6...v0.1.7) (2022-11-16)
