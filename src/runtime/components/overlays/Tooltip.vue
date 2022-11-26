@@ -78,7 +78,7 @@ const props = defineProps({
   },
   popperOptions: {
     type: Object as PropType<PopperOptions>,
-    default: () => {}
+    default: () => ({})
   },
   openDelay: {
     type: Number,
