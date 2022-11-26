@@ -104,7 +104,7 @@ const props = defineProps({
   },
   options: {
     type: Object as PropType<Partial<UseFuseOptions<Command>>>,
-    default: () => {}
+    default: () => ({})
   },
   autoselect: {
     type: Boolean,
