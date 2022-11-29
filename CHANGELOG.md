@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.12](https://github.com/nuxtlabs/ui/compare/v0.1.11...v0.1.12) (2022-11-29)
+
+
+### Bug Fixes
+
+* **Checkbox:** types ([629bb72](https://github.com/nuxtlabs/ui/commit/629bb724249cfe1fdd999cf52f8e72ca444bd94d))
+
 ### [0.1.11](https://github.com/nuxtlabs/ui/compare/v0.1.10...v0.1.11) (2022-11-29)
 
 
