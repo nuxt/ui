@@ -54,8 +54,8 @@ import $ui from '#build/ui'
 const props = defineProps({
   items: {
     type: Array as PropType<{
-      to: RouteLocationNormalized
-      exact: boolean
+      to?: RouteLocationNormalized
+      exact?: boolean
       label: string
       disabled?: boolean
       slot?: string
