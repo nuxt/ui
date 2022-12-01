@@ -39,6 +39,7 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue'
+import type { RouteLocationNormalized } from 'vue-router'
 import Icon from '../elements/Icon.vue'
 import Link from '../elements/Link.vue'
 import Avatar from '../elements/Avatar.vue'
@@ -48,6 +49,8 @@ import $ui from '#build/ui'
 defineProps({
   links: {
     type: Array as PropType<{
+      to?: RouteLocationNormalized
+      exact?: boolean
       label: string
       icon?: string
       iconClass?: string
