@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.15](https://github.com/nuxtlabs/ui/compare/v0.1.14...v0.1.15) (2022-12-02)
+
+
+### Bug Fixes
+
+* **Dropdown:** better handle item click to preventDefault ([#119](https://github.com/nuxtlabs/ui/issues/119)) ([44a78d7](https://github.com/nuxtlabs/ui/commit/44a78d7f679812c59d4410d0bbc01f09abaa78dd))
+
 ### [0.1.14](https://github.com/nuxtlabs/ui/compare/v0.1.13...v0.1.14) (2022-12-02)
 
 ### [0.1.13](https://github.com/nuxtlabs/ui/compare/v0.1.12...v0.1.13) (2022-12-01)
