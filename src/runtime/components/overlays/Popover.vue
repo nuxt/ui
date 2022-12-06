@@ -43,7 +43,7 @@ const props = defineProps({
   },
   widthClass: {
     type: String,
-    default: () => $ui.tooltip.width
+    default: () => $ui.popover.width
   },
   baseClass: {
     type: String,
