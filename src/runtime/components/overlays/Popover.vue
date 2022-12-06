@@ -86,12 +86,6 @@ onMounted(() => {
     }
     const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
     popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
-    // stop trigger click propagation on hover
-    popoverApi.value?.button?.addEventListener('click', (e: Event) => {
-      if (props.mode === 'hover') {
-        e.stopPropagation()
-      }
-    }, true)
   }, 200)
 })
 
