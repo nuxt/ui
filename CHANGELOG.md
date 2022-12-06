@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.17](https://github.com/nuxtlabs/ui/compare/v0.1.16...v0.1.17) (2022-12-06)
+
+
+### Bug Fixes
+
+* remove stop propagation on mode hover ([16fd1c0](https://github.com/nuxtlabs/ui/commit/16fd1c0ca38f1438e791c0d44399f590d9f20d02))
+
 ### [0.1.16](https://github.com/nuxtlabs/ui/compare/v0.1.15...v0.1.16) (2022-12-06)
 
 
