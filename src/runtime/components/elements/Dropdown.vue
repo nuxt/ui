@@ -172,6 +172,13 @@ onMounted(() => {
     }
     const menuProvidesSymbols = Object.getOwnPropertySymbols(menuProvides)
     menuApi.value = menuProvidesSymbols.length && menuProvides[menuProvidesSymbols[0]]
+    // stop trigger click propagation on hover
+    menuApi.value?.buttonRef?.addEventListener('click', (e: Event) => {
+      // ignore links as it would break navigation
+      if (props.mode === 'hover' && (e.target as Element)?.tagName !== 'A') {
+        e.stopPropagation()
+      }
+    }, true)
   }, 200)
 })
 
