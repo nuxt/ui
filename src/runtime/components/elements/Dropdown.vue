@@ -1,6 +1,6 @@
 <template>
   <Menu v-slot="{ open }" as="div" :class="wrapperClass" @mouseleave="onMouseLeave">
-    <MenuButton ref="trigger" as="div" class="inline-flex" @mouseover="onMouseOver">
+    <MenuButton ref="trigger" as="div" class="inline-flex w-full" @mouseover="onMouseOver">
       <slot :open="open">
         <button>Open</button>
       </slot>
