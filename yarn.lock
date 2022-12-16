@@ -314,10 +314,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@headlessui/vue@^1.7.5":
-  version "1.7.5"
-  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.7.5.tgz#d089e9f126976ad9740c8c54b1fa5132614f5e7f"
-  integrity sha512-WjMvaOoxNUqbJO9UxdDJQmCtZZTsTUh4VbAekfhnbFsLqLrbvct27g1Q8gjEJjI4EWHiofIPCUs7mDsuKvwlHw==
+"@headlessui/vue@^1.7.6":
+  version "1.7.6"
+  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.7.6.tgz#2847a5cdd78deea2b4684f6a4ec42f771cf72581"
+  integrity sha512-G5Y23FLCk8/pkv/m/UMEMhISFn6mn2mDpmFuVIT7kT8536SSmxuXT6aJh3FSpztYIXjjE0hbD2qezmJ2OHtMjg==
 
 "@humanwhocodes/config-array@^0.11.6":
   version "0.11.7"
