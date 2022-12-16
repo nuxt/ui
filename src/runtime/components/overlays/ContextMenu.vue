@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import type { VirtualElement } from '@popperjs/core'
@@ -47,7 +47,7 @@ const props = defineProps({
     default: () => $ui.contextMenu.transition
   },
   popperOptions: {
-    type: Object,
+    type: Object as PropType<PopperOptions>,
     default: () => ({})
   }
 })
