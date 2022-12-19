@@ -25,7 +25,7 @@
     "release": "yarn lint && standard-version && git push --follow-tags"
   },
   "dependencies": {
-    "@headlessui/vue": "^1.7.7",
+    "@headlessui/vue": "1.7.4",
     "@iconify/vue": "^4.0.2",
     "@nuxt/kit": "^3.0.0",
     "@nuxtjs/color-mode": "^3.2.0",
