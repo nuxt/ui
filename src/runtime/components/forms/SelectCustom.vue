@@ -84,7 +84,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { defu } from 'defu'
 import {
@@ -261,7 +261,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'open'])
 
 const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.selectCustom.popperOptions))
 
@@ -306,6 +306,10 @@ const queryOption = computed(() => {
 const iconWrapperClass = classNames(
   $ui.selectCustom.icon.trailing.wrapper
 )
+
+watch(container, (value) => {
+  emit('open', !!value)
+})
 
 function resolveOptionClass ({ active, selected, disabled }: { active: boolean, selected: boolean, disabled?: boolean }) {
   return classNames(
