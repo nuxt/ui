@@ -261,7 +261,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue', 'open'])
+const emit = defineEmits(['update:modelValue', 'open', 'close'])
 
 const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.selectCustom.popperOptions))
 
@@ -308,7 +308,11 @@ const iconWrapperClass = classNames(
 )
 
 watch(container, (value) => {
-  emit('open', !!value)
+  if (value) {
+    emit('open')
+  } else {
+    emit('close')
+  }
 })
 
 function resolveOptionClass ({ active, selected, disabled }: { active: boolean, selected: boolean, disabled?: boolean }) {
