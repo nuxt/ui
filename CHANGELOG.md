@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.20](https://github.com/nuxtlabs/ui/compare/v0.1.19...v0.1.20) (2022-12-19)
+
+
+### Bug Fixes
+
+* avoid referring to complex types in props ([#123](https://github.com/nuxtlabs/ui/issues/123)) ([ff9f6c2](https://github.com/nuxtlabs/ui/commit/ff9f6c251df59641862d82587e5d963c8e6ea298))
+
 ### [0.1.19](https://github.com/nuxtlabs/ui/compare/v0.1.18...v0.1.19) (2022-12-16)
 
 ### [0.1.18](https://github.com/nuxtlabs/ui/compare/v0.1.17...v0.1.18) (2022-12-15)
