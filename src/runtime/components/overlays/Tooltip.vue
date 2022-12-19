@@ -4,7 +4,7 @@
       Hover me
     </slot>
 
-    <div v-if="open" ref="container" :class="[containerClass, widthClass]">
+    <div v-if="open && !prevent" ref="container" :class="[containerClass, widthClass]">
       <transition appear v-bind="transitionClass">
         <div :class="[baseClass, backgroundClass, roundedClass, shadowClass, ringClass]">
           <slot name="text">
@@ -35,6 +35,10 @@ const props = defineProps({
   text: {
     type: String,
     default: null
+  },
+  prevent: {
+    type: Boolean,
+    default: false
   },
   shortcuts: {
     type: Array as PropType<string[]>,
