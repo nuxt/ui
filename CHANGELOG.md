@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.26](https://github.com/nuxtlabs/ui/compare/v0.1.25...v0.1.26) (2023-01-09)
+
+
+### Bug Fixes
+
+* **CommandPalette:** select first item on search changes ([#126](https://github.com/nuxtlabs/ui/issues/126)) ([4f56921](https://github.com/nuxtlabs/ui/commit/4f56921096f5885cdab8b7cb5c5aa01304188e11))
+
 ### [0.1.25](https://github.com/nuxtlabs/ui/compare/v0.1.24...v0.1.25) (2023-01-09)
 
 ### [0.1.24](https://github.com/nuxtlabs/ui/compare/v0.1.23...v0.1.24) (2023-01-04)
