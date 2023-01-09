@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { Combobox, ComboboxInput, ComboboxOptions } from '@headlessui/vue'
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useFuse } from '@vueuse/integrations/useFuse'
@@ -174,11 +174,19 @@ const groups = computed(() => map(groupBy(results.value, command => command.item
   } as Group
 }))
 
+watch(groups, () => {
+  // Select first item on search changes
+  setTimeout(() => {
+    // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
+    comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
+  }, 0)
+})
+
 // Methods
 
 function activateFirstOption () {
   // hack combobox by using keyboard event
-  // https://github.com/tailwindlabs/headlessui/blob/main/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L692
+  // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L769
   setTimeout(() => {
     comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
   }, 0)
