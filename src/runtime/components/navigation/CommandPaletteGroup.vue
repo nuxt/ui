@@ -1,5 +1,5 @@
 <template>
-  <li class="p-2">
+  <li class="p-2" role="option">
     <h2 v-if="group[groupAttribute]" class="px-3 my-2 text-xs font-semibold u-text-gray-900">
       {{ group[groupAttribute] }}
     </h2>
@@ -20,6 +20,7 @@
               v-else-if="command.avatar"
               v-bind="{ size: 'xxxs', ...command.avatar }"
               class="flex-shrink-0"
+              aria-hidden="true"
             />
             <span v-else-if="command.chip" class="flex-shrink-0 w-2 h-2 mx-1 rounded-full" :style="{ background: `#${command.chip}` }" />
 
