@@ -19,7 +19,14 @@
           @change="query = $event.target.value"
         />
 
-        <Button v-if="closeIcon" :icon="closeIcon" variant="transparent" class="absolute right-3" @click="onClear" />
+        <Button
+          v-if="closeIcon"
+          :icon="closeIcon"
+          variant="transparent"
+          class="absolute right-3"
+          aria-label="close"
+          @click="onClear"
+        />
       </div>
 
       <ComboboxOptions v-if="groups.length" static hold class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2">

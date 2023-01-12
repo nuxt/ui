@@ -10,9 +10,9 @@
     :class="wrapperClass"
     @update:model-value="onUpdate"
   >
-    <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1">
+    <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1" aria-hidden="true">
 
-    <ComboboxButton ref="trigger" v-slot="{ disabled: buttonDisabled }" as="div" class="inline-flex w-full">
+    <ComboboxButton ref="trigger" v-slot="{ disabled: buttonDisabled }" as="div" role="button" class="inline-flex w-full">
       <slot :open="open" :disabled="buttonDisabled">
         <button :class="selectCustomClass" :disabled="disabled" type="button">
           <slot name="label">
