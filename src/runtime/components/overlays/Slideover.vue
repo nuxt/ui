@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
-    <Dialog :class="[wrapperClass, { 'justify-end': side === 'right' }]" @close="isOpen = false">
+    <Dialog :class="[wrapperClass, { 'justify-end': side === 'right' }]" @close="close">
       <TransitionChild
         v-if="overlay"
         as="template"
@@ -89,7 +89,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'close'])
 
 const isOpen: WritableComputedRef<boolean> = computed({
   get () {
@@ -129,6 +129,11 @@ const slideoverTransition = computed(() => {
     ...props.transitionClass
   }
 })
+
+function close (value: boolean) {
+  isOpen.value = value
+  emit('close')
+}
 </script>
 
 <script lang="ts">
