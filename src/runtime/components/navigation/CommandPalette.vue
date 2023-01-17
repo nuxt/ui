@@ -23,7 +23,7 @@
           v-if="closeIcon"
           :icon="closeIcon"
           variant="transparent"
-          class="absolute right-3"
+          class="absolute right-2"
           aria-label="close"
           @click="onClear"
         />
