@@ -26,6 +26,14 @@ export default function defaultPreset (variantColors: string[]) {
       lg: 'p-2',
       xl: 'p-3'
     },
+    compact: {
+      xxs: 'p-1 sm:px-2',
+      xs: 'p-1.5 sm:px-2.5',
+      sm: 'p-2 sm:px-3',
+      md: 'p-2 sm:px-4',
+      lg: 'p-2 sm:px-4',
+      xl: 'p-3 sm:px-6'
+    },
     variant: {
       ...variantColors.reduce((acc: any, color: string) => {
         acc[color] = `shadow-sm border border-transparent text-white bg-${color}-600 hover:bg-${color}-700 disabled:bg-${color}-600 focus:ring-2 focus:ring-offset-2 focus:ring-${color}-500`
@@ -57,6 +65,14 @@ export default function defaultPreset (variantColors: string[]) {
           md: '-ml-1 mr-2',
           lg: '-ml-1 mr-3',
           xl: '-ml-1 mr-3'
+        },
+        compactSpacing: {
+          xxs: 'sm:-ml-0.5 sm:mr-1',
+          xs: 'sm:-ml-0.5 sm:mr-1.5',
+          sm: 'sm:-ml-0.5 sm:mr-2',
+          md: 'sm:-ml-1 sm:mr-2',
+          lg: 'sm:-ml-1 sm:mr-3',
+          xl: 'sm:-ml-1 sm:mr-3'
         }
       },
       trailing: {
@@ -67,6 +83,14 @@ export default function defaultPreset (variantColors: string[]) {
           md: 'ml-2 -mr-1',
           lg: 'ml-3 -mr-1',
           xl: 'ml-3 -mr-1'
+        },
+        compactSpacing: {
+          xxs: 'sm:ml-1 sm:-mr-0.5',
+          xs: 'sm:ml-1.5 sm:-mr-0.5',
+          sm: 'sm:ml-2 sm:-mr-0.5',
+          md: 'sm:ml-2 sm:-mr-1',
+          lg: 'sm:ml-3 sm:-mr-1',
+          xl: 'sm:ml-3 sm:-mr-1'
         }
       }
     }

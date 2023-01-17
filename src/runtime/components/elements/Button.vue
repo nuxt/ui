@@ -7,7 +7,12 @@
     v-bind="buttonProps"
   >
     <Icon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
-    <slot><span :class="truncate ? 'text-left break-all line-clamp-1' : ''">{{ label }}</span></slot>
+    <slot>
+      <span :class="[truncate ? 'text-left break-all line-clamp-1' : '', compact ? 'hidden sm:block' : '']">
+        <span :class="[labelCompact && 'hidden sm:block']">{{ label }}</span>
+        <span v-if="labelCompact" class="sm:hidden">{{ labelCompact }}</span>
+      </span>
+    </slot>
     <Icon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
   </component>
 </template>
@@ -31,6 +36,10 @@ const props = defineProps({
     default: false
   },
   label: {
+    type: String,
+    default: null
+  },
+  labelCompact: {
     type: String,
     default: null
   },
@@ -127,6 +136,10 @@ const props = defineProps({
   truncate: {
     type: Boolean,
     default: false
+  },
+  compact: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -164,7 +177,7 @@ const buttonClass = computed(() => {
   return classNames(
     props.baseClass,
     $ui.button.size[props.size],
-    $ui.button[isSquare.value ? 'square' : 'spacing'][props.size],
+    $ui.button[isSquare.value ? 'square' : (props.compact ? 'compact' : 'spacing')][props.size],
     $ui.button.variant[props.variant],
     props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center',
     props.rounded ? 'rounded-full' : props.roundedClass,
@@ -192,7 +205,7 @@ const leadingIconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
     $ui.button.icon.size[props.size],
-    (!!slots.default || !!props.label?.length) && $ui.button.icon.leading.spacing[props.size],
+    (!!slots.default || !!props.label?.length) && $ui.button.icon.leading[props.compact ? 'compactSpacing' : 'spacing'][props.size],
     props.leadingIconClass,
     props.loading && 'animate-spin'
   )
@@ -202,7 +215,7 @@ const trailingIconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
     $ui.button.icon.size[props.size],
-    (!!slots.default || !!props.label?.length) && $ui.button.icon.trailing.spacing[props.size],
+    (!!slots.default || !!props.label?.length) && $ui.button.icon.trailing[props.compact ? 'compactSpacing' : 'spacing'][props.size],
     props.trailingIconClass,
     props.loading && !isLeading.value && 'animate-spin'
   )
