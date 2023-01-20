@@ -121,7 +121,32 @@ const toggle = ref(false)
 const modal = ref(false)
 const slideover = ref(false)
 
-const defaultProps = {
+const x = ref(0)
+const y = ref(0)
+const isContextMenuOpen = ref(false)
+const virtualElement = ref({ getBoundingClientRect: () => ({}) })
+
+onMounted(() => {
+  document.addEventListener('mousemove', ({ clientX, clientY }) => {
+    x.value = clientX
+    y.value = clientY
+  })
+})
+
+function openContextMenu () {
+  const top = unref(y)
+  const left = unref(x)
+
+  virtualElement.value.getBoundingClientRect = () => ({
+    width: 0,
+    height: 0,
+    top,
+    left
+  })
+  isContextMenuOpen.value = true
+}
+
+const defaultProps = computed(() => ({
   Button: {
     label: 'Button text'
   },
@@ -259,6 +284,31 @@ const defaultProps = {
     title: 'Notification title',
     callback: 'console.log(\'Timer expired\')'
   },
+  ContextMenu: {
+    modelValue: isContextMenuOpen,
+    'onUpdate:modelValue': (v) => { isContextMenuOpen.value = v },
+    virtualElement,
+    component: {
+      name: 'Card',
+      props: {
+        variant: 'secondary',
+        label: 'Open context menu',
+        onClick: () => { isContextMenuOpen.value = false },
+        onContextmenu: (e) => {
+          e?.preventDefault()
+          openContextMenu()
+        },
+        class: 'relative w-[300px] h-[100px]'
+      }
+    },
+    slots: {
+      default: {
+        tag: 'div',
+        html: 'Context menu content',
+        class: 'rounded border u-border-gray-200 p-2'
+      }
+    }
+  },
   Modal: {
     modelValue: modal,
     'onUpdate:modelValue': (v) => { modal.value = v },
@@ -345,9 +395,9 @@ const defaultProps = {
       to: '/components/Pills'
     }]
   }
-}
+}))
 
-const componentDefaultProps = defaultProps[params.component] || {}
+const componentDefaultProps = defaultProps.value[params.component] || {}
 const { props: componentProps } = await component.__asyncLoader()
 
 function lowercaseFirstLetter (string) {

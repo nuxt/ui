@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import type { VirtualElement } from '@popperjs/core'
@@ -23,7 +23,7 @@ const props = defineProps({
     default: false
   },
   virtualElement: {
-    type: Object,
+    type: Object as PropType<VirtualElement>,
     required: true
   },
   wrapperClass: {
@@ -63,7 +63,7 @@ const isOpen = computed({
   }
 })
 
-const virtualElement = toRef(props, 'virtualElement') as Ref<VirtualElement>
+const virtualElement = toRef(props, 'virtualElement')
 
 const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.contextMenu.popperOptions))
 
