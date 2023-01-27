@@ -7,23 +7,24 @@
     :nullable="nullable"
     @update:model-value="onSelect"
   >
-    <div class="flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800">
+    <div :class="$ui.commandPalette.wrapper">
       <div v-show="searchable" class="relative flex items-center">
-        <Icon :name="inputIcon" class="pointer-events-none absolute top-3.5 left-5 h-5 w-5 u-text-gray-400" aria-hidden="true" />
+        <Icon :name="inputIcon" :class="$ui.commandPalette.input.icon.base" aria-hidden="true" />
         <ComboboxInput
           ref="comboboxInput"
           :value="query"
-          class="w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-[3.25rem] u-text-gray-900 focus:ring-0 sm:text-sm"
+          :class="$ui.commandPalette.input.base"
           :placeholder="inputPlaceholder"
           autocomplete="off"
           @change="query = $event.target.value"
         />
 
         <Button
-          v-if="closeIcon"
-          :icon="closeIcon"
-          variant="transparent"
-          class="absolute right-2"
+          v-if="inputCloseIcon"
+          :icon="inputCloseIcon"
+          :class="$ui.commandPalette.input.close.base"
+          :size="$ui.commandPalette.input.close.size"
+          :variant="$ui.commandPalette.input.close.variant"
           aria-label="close"
           @click="onClear"
         />
@@ -59,6 +60,7 @@ import type { Group, Command } from '../../types/command-palette'
 import Icon from '../elements/Icon.vue'
 import Button from '../elements/Button.vue'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
+import $ui from '#build/ui'
 
 const props = defineProps({
   modelValue: {
@@ -85,13 +87,13 @@ const props = defineProps({
     type: Array as PropType<Group[]>,
     default: () => []
   },
-  closeIcon: {
-    type: String,
-    default: null
-  },
   inputIcon: {
     type: String,
-    default: 'heroicons-outline:search'
+    default: () => $ui.commandPalette.input.icon.name
+  },
+  inputCloseIcon: {
+    type: String,
+    default: () => $ui.commandPalette.input.close.icon.name
   },
   inputPlaceholder: {
     type: String,
@@ -99,7 +101,7 @@ const props = defineProps({
   },
   emptyIcon: {
     type: String,
-    default: 'heroicons-outline:search'
+    default: () => $ui.commandPalette.empty.icon.name
   },
   groupAttribute: {
     type: String,

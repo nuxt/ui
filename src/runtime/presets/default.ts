@@ -566,6 +566,30 @@ export default function defaultPreset (variantColors: string[]) {
     }
   }
 
+  const commandPalette = {
+    wrapper: 'flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800',
+    input: {
+      base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-[3.25rem] u-text-gray-900 focus:ring-0 sm:text-sm',
+      icon: {
+        base: 'pointer-events-none absolute top-3.5 left-5 h-5 w-5 u-text-gray-400',
+        name: 'heroicons-outline:search'
+      },
+      close: {
+        base: 'absolute right-2',
+        variant: 'transparent',
+        size: 'md',
+        icon: {
+          name: ''
+        }
+      }
+    },
+    empty: {
+      icon: {
+        name: 'heroicons-outline:search'
+      }
+    }
+  }
+
   return {
     card,
     modal,
@@ -591,7 +615,8 @@ export default function defaultPreset (variantColors: string[]) {
     notification,
     tooltip,
     popover,
-    contextMenu
+    contextMenu,
+    commandPalette
   }
 }
 
