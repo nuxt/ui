@@ -31,7 +31,7 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return ['xxxs', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)
+      return Object.keys($ui.avatar.size).includes(value)
     }
   },
   max: {
