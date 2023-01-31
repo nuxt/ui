@@ -12,7 +12,7 @@
       </slot>
     </MenuButton>
 
-    <div v-if="open" ref="container" :class="[containerClass, widthClass]" @mouseover="onMouseOver">
+    <div v-if="open && items.length" ref="container" :class="[containerClass, widthClass]" @mouseover="onMouseOver">
       <transition appear v-bind="transitionClass">
         <MenuItems :class="baseClass" static>
           <div v-for="(subItems, index) of items" :key="index" :class="groupClass">
