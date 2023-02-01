@@ -183,7 +183,7 @@ const groups = computed(() => map(groupBy(results.value, command => command.item
   } as Group
 }))
 
-watch(groups, () => {
+watch(query, () => {
   // Select first item on search changes
   setTimeout(() => {
     // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
