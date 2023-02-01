@@ -19,11 +19,11 @@
       <transition appear v-bind="transitionClass">
         <MenuItems :class="baseClass" static>
           <div v-for="(subItems, index) of items" :key="index" :class="groupClass">
-            <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled }" :disabled="item.disabled">
+            <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
               <Component
                 v-bind="omit(item, ['click'])"
                 :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'"
-                :class="resolveItemClass({ active, disabled })"
+                :class="resolveItemClass({ active, disabled: itemDisabled })"
                 @click="item.click"
               >
                 <slot :name="item.slot" :item="item">
