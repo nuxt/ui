@@ -56,7 +56,6 @@
             v-if="prop.type === 'Boolean'"
             v-model="prop.value"
             :name="prop.key"
-            :label="prop.key"
           />
           <USelect
             v-else-if="prop.values"
