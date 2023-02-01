@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.35](https://github.com/nuxtlabs/ui/compare/v0.1.34...v0.1.35) (2023-02-01)
+
+
+### Bug Fixes
+
+* **AvatarGroup:** preset size prop ([c90cd9c](https://github.com/nuxtlabs/ui/commit/c90cd9c4f37bc3ce5f6e13f3279dc2c574c76524))
+* **Dropdown:** lint ([1c4d46e](https://github.com/nuxtlabs/ui/commit/1c4d46e056adf84d69462a12af8ac29f93cbf87a))
+* **Dropdown:** prevent panel display when no items ([a764486](https://github.com/nuxtlabs/ui/commit/a7644860b8c22a0163e01ca2c0eab2c48b09745a))
+
 ### [0.1.34](https://github.com/nuxtlabs/ui/compare/v0.1.33...v0.1.34) (2023-01-27)
 
 
