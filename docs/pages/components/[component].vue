@@ -146,7 +146,7 @@ function openContextMenu () {
   isContextMenuOpen.value = true
 }
 
-const defaultProps = computed(() => ({
+const defaultProps = {
   Button: {
     label: 'Button text'
   },
@@ -395,9 +395,9 @@ const defaultProps = computed(() => ({
       to: '/components/Pills'
     }]
   }
-}))
+}
 
-const componentDefaultProps = defaultProps.value[params.component] || {}
+const componentDefaultProps = defaultProps[params.component] || {}
 const { props: componentProps } = await component.__asyncLoader()
 
 function lowercaseFirstLetter (string) {
