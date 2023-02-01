@@ -1,8 +1,17 @@
 <template>
   <Popover v-slot="{ open, close }" :class="wrapperClass" @mouseleave="onMouseLeave">
-    <PopoverButton ref="trigger" as="div" class="inline-flex w-full" role="button" @mouseover="onMouseOver">
+    <PopoverButton
+      ref="trigger"
+      as="div"
+      :disabled="disabled"
+      class="inline-flex w-full"
+      role="button"
+      @mouseover="onMouseOver"
+    >
       <slot :open="open" :close="close">
-        <button>Open</button>
+        <button :disabled="disabled">
+          Open
+        </button>
       </slot>
     </PopoverButton>
 
@@ -32,6 +41,10 @@ const props = defineProps({
     validator: (value: string) => {
       return ['click', 'hover'].includes(value)
     }
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   },
   wrapperClass: {
     type: String,

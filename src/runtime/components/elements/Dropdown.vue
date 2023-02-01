@@ -3,12 +3,15 @@
     <MenuButton
       ref="trigger"
       as="div"
+      :disabled="disabled"
       class="inline-flex w-full"
       role="button"
       @mouseover="onMouseOver"
     >
       <slot :open="open">
-        <button>Open</button>
+        <button :disabled="disabled">
+          Open
+        </button>
       </slot>
     </MenuButton>
 
@@ -84,6 +87,10 @@ const props = defineProps({
     validator: (value: string) => {
       return ['click', 'hover'].includes(value)
     }
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   },
   wrapperClass: {
     type: String,
