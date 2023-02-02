@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.36](https://github.com/nuxtlabs/ui/compare/v0.1.35...v0.1.36) (2023-02-02)
+
+
+### Bug Fixes
+
+* **CommandPalette:** put back cursor on top only when query changes ([5bf5a31](https://github.com/nuxtlabs/ui/commit/5bf5a314c414b96c656190719bd56acca10676f5))
+
 ### [0.1.35](https://github.com/nuxtlabs/ui/compare/v0.1.34...v0.1.35) (2023-02-01)
 
 
