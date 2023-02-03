@@ -1,10 +1,10 @@
 <template>
-  <li class="p-2" role="option">
+  <div class="p-2" role="option">
     <h2 v-if="group[groupAttribute]" class="px-3 my-2 text-xs font-semibold u-text-gray-900">
       {{ group[groupAttribute] }}
     </h2>
 
-    <ul class="text-sm u-text-gray-700">
+    <div class="text-sm u-text-gray-700" role="listbox" :aria-label="group[groupAttribute]">
       <ComboboxOption
         v-for="(command, index) of group.commands"
         :key="`${group.key}-${index}`"
@@ -13,7 +13,7 @@
         :disabled="command.disabled"
         as="template"
       >
-        <li :class="['flex justify-between select-none items-center rounded-md px-3 py-2 gap-3 relative', active && 'bg-gray-100 dark:bg-gray-800 u-text-gray-900', command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
+        <div :class="['flex justify-between select-none items-center rounded-md px-3 py-2 gap-3 relative', active && 'bg-gray-100 dark:bg-gray-800 u-text-gray-900', command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
           <div class="flex items-center gap-2 min-w-0">
             <Icon v-if="command.icon" :name="command.icon" :class="['h-4 w-4 flex-shrink-0', active ? 'text-opacity-100 dark:text-opacity-100' : 'text-opacity-40 dark:text-opacity-40', command.iconClass || 'text-gray-900 dark:text-gray-50']" aria-hidden="true" />
             <Avatar
@@ -45,10 +45,10 @@
             </span>
             <span v-else-if="!command.disabled && group.inactive" class="flex-shrink-0 u-text-gray-500">{{ group.inactive }}</span>
           </slot>
-        </li>
+        </div>
       </ComboboxOption>
-    </ul>
-  </li>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
