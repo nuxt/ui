@@ -30,7 +30,14 @@
         />
       </div>
 
-      <ComboboxOptions v-if="groups.length" static hold as="div" aria-label="Commands" class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2">
+      <ComboboxOptions
+        v-if="groups.length"
+        static
+        hold
+        as="div"
+        aria-label="Commands"
+        class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2"
+      >
         <CommandPaletteGroup v-for="group of groups" :key="group.key" :group="group" :group-attribute="groupAttribute" :command-attribute="commandAttribute">
           <template v-for="(_, name) in $slots" #[name]="slotData">
             <slot :name="name" v-bind="slotData" />
