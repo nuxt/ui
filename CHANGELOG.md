@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.37](https://github.com/nuxtlabs/ui/compare/v0.1.36...v0.1.37) (2023-02-03)
+
+
+### Bug Fixes
+
+* **CommandPalette:** improve accessibility ([#129](https://github.com/nuxtlabs/ui/issues/129)) ([bea47b5](https://github.com/nuxtlabs/ui/commit/bea47b5906d1bc665717830d6dc2f3ff2a0374f3))
+
 ### [0.1.36](https://github.com/nuxtlabs/ui/compare/v0.1.35...v0.1.36) (2023-02-02)
 
 

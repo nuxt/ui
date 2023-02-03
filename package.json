@@ -1,6 +1,6 @@
 {
   "name": "@nuxthq/ui",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "repository": "https://github.com/nuxtlabs/ui",
   "license": "MIT",
   "exports": {
