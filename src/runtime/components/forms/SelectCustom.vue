@@ -110,7 +110,7 @@ const props = defineProps({
     default: undefined
   },
   options: {
-    type: Array as PropType<{ [key: string]: any, disabled?: boolean }[]>,
+    type: Array as PropType<{ [key: string]: any, disabled?: boolean }[] | string[]>,
     default: () => []
   },
   required: {
