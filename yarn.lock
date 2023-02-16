@@ -5652,10 +5652,10 @@ nuxt-config-schema@^0.4.4:
     pathe "^1.0.0"
     untyped "^1.2.2"
 
-nuxt-icon@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/nuxt-icon/-/nuxt-icon-0.3.1.tgz#686162115d83b166e83f9be4af9c27b8c35fbf25"
-  integrity sha512-/ekFBwqZ2KCr1GNuGCal4Tr0ntYF9xMwDqlb0JYjk616ZM7zie2SXLyHam+if1a8n2v0RRTrxHu//pUhCLghjg==
+nuxt-icon@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/nuxt-icon/-/nuxt-icon-0.3.2.tgz#d28d9f0def8a632c51db20c5fe5b8d5dcf2a78c9"
+  integrity sha512-066pfova2nE9GZDvHE9oMkqJCwsnJvOZKU2FOSzRpjfXupH3UPtP9Zw8+C2wvZ82Nel6fuRoIUNQh5Sx8ZeQrQ==
   dependencies:
     "@iconify/vue" "^4.1.0"
     "@nuxt/kit" "^3.2.0"
