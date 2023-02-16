@@ -121,6 +121,9 @@ export default defineNuxtModule<ModuleOptions>({
       })
     })
 
+    nuxt.options.appConfig.nuxtIcon = defu(nuxt.options.appConfig.nuxtIcon, { size: false })
+
+    await installModule('nuxt-icon')
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
       viewer: false,

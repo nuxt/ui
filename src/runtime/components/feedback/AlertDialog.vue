@@ -2,7 +2,7 @@
   <Modal v-model="isOpen" :appear="appear" class="w-full" @close="onClose">
     <div class="sm:flex sm:items-start">
       <div v-if="icon" :class="iconWrapperClass" class="mx-auto flex-shrink-0 flex items-center justify-center rounded-full sm:mx-0">
-        <Icon :name="icon" :class="iconClass" />
+        <IconCSS :name="icon" :class="iconClass" />
       </div>
       <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left space-y-2">
         <DialogTitle v-if="title" as="h3" :class="titleClass">
@@ -25,7 +25,6 @@ import { computed } from 'vue'
 import { DialogTitle, DialogDescription } from '@headlessui/vue'
 import Modal from '../overlays/Modal.vue'
 import Button from '../elements/Button.vue'
-import Icon from '../elements/Icon.vue'
 import $ui from '#build/ui'
 
 const props = defineProps({

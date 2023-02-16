@@ -106,13 +106,6 @@ const components = [
     typescript: true
   },
   {
-    label: 'Icon',
-    to: '/components/Icon',
-    nuxt3: true,
-    capi: true,
-    typescript: true
-  },
-  {
     label: 'Link',
     to: '/components/Link',
     nuxt3: true,
