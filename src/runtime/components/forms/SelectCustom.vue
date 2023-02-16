@@ -292,11 +292,11 @@ const iconClass = computed(() => {
 const filteredOptions = computed(() =>
   query.value === ''
     ? props.options
-    : props.options.filter((option: any) => {
-      return (props.searchAttributes?.length ? props.searchAttributes : [props.textAttribute]).some((searchAttribute: any) => {
-        return option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1
+    : (props.options as any[]).filter((option: any) => {
+        return (props.searchAttributes?.length ? props.searchAttributes : [props.textAttribute]).some((searchAttribute: any) => {
+          return typeof option === 'string' ? option.search(new RegExp(query.value, 'i')) !== -1 : (option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1)
+        })
       })
-    })
 )
 
 const queryOption = computed(() => {
