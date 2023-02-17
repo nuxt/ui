@@ -25,7 +25,7 @@
     "release": "yarn lint && standard-version && git push --follow-tags"
   },
   "dependencies": {
-    "@egoist/tailwindcss-icons": "^1.0.4",
+    "@egoist/tailwindcss-icons": "^1.0.5",
     "@headlessui/vue": "^1.7.10",
     "@iconify-json/heroicons": "^1.1.9",
     "@nuxt/kit": "^3.2.0",

@@ -429,10 +429,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-2.0.2.tgz#1bfafe4b7ed0f3e4105837e056e0a89b108ebe36"
   integrity sha512-IkpVW/ehM1hWKln4fCA3NzJU8KwD+kIOvPZA4cqxoJHtE21CCzjyp+Kxbu0i5I4tBNOlXPL9mjwnWlL0VEG4Fg==
 
-"@egoist/tailwindcss-icons@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@egoist/tailwindcss-icons/-/tailwindcss-icons-1.0.4.tgz#b095185c442b2468003e9bb356dd4da73a15bdcc"
-  integrity sha512-pjeRwKUaWSUFoPaMiq07blUrXvFDOG1bD3BvUP808s73hLe3DY5f85F/99e5u4QF4wQvqwwHUkQJKgXzmOc6+A==
+"@egoist/tailwindcss-icons@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@egoist/tailwindcss-icons/-/tailwindcss-icons-1.0.5.tgz#053a6d34d032d6a8e4ec8fd23f610d3df68ee63a"
+  integrity sha512-l4+YcsO7UAPq/rsgi/36mW9X6VCq651ZsG8orE6d5Px9JBjdfmIzTBVmIPFeMdxtILzyhrB20MLj+jGqreyGbA==
   dependencies:
     "@iconify/utils" "^2.1.3"
 
