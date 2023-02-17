@@ -113,7 +113,7 @@ export default defineNuxtModule<ModuleOptions>({
       }])
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
-      tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons) }))
+      tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
 
       const ui: object = defu(preset, defaultPreset(variantColors))
 

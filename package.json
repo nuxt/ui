@@ -25,12 +25,12 @@
     "release": "yarn lint && standard-version && git push --follow-tags"
   },
   "dependencies": {
-    "@egoist/tailwindcss-icons": "^1.0.3",
+    "@egoist/tailwindcss-icons": "^1.0.4",
     "@headlessui/vue": "^1.7.10",
     "@iconify-json/heroicons": "^1.1.9",
     "@nuxt/kit": "^3.2.0",
     "@nuxtjs/color-mode": "^3.2.0",
-    "@nuxtjs/tailwindcss": "^6.4.0",
+    "@nuxtjs/tailwindcss": "^6.4.1",
     "@popperjs/core": "^2.11.6",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
@@ -41,7 +41,7 @@
     "defu": "^6.1.2",
     "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",
-    "tailwindcss": "^3.2.6"
+    "tailwindcss": "^3.2.7"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.47",
@@ -52,13 +52,7 @@
     "eslint": "^8.34.0",
     "nuxt": "^3.2.0",
     "standard-version": "^9.5.0",
-    "unbuild": "^1.1.1",
-    "vue-tsc": "^1.1.0"
-  },
-  "build": {
-    "externals": [
-      "tailwindcss",
-      "tailwindcss/colors.js"
-    ]
+    "unbuild": "^1.1.2",
+    "vue-tsc": "^1.1.2"
   }
 }
