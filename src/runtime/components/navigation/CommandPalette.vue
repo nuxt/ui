@@ -144,7 +144,7 @@ const props = defineProps({
   },
   debounce: {
     type: Number,
-    default: 0
+    default: 200
   }
 })
 
