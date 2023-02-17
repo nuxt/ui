@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/nuxtlabs/ui/compare/v1.0.0...v1.1.0) (2023-02-17)
+
+
+### Features
+
+* **CommandPalette:** handle async search for specific groups ([efa9674](https://github.com/nuxtlabs/ui/commit/efa9674815ab4de756079690da0a381c3703d564))
+
+
+### Bug Fixes
+
+* **CommandPalette:** types ([4702a4f](https://github.com/nuxtlabs/ui/commit/4702a4f10379201c167cc52099519778756a5780))
+
 ## [1.0.0](https://github.com/nuxtlabs/ui/compare/v0.2.1...v1.0.0) (2023-02-17)
 
 
