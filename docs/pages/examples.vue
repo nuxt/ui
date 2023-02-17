@@ -26,7 +26,7 @@
         Button:
       </div>
 
-      <UButton variant="primary" icon="heroicons-outline:mail">
+      <UButton variant="primary" icon="i-heroicons-envelope">
         Button text
       </UButton>
     </div>
@@ -43,7 +43,7 @@
       <UModal v-model="isModalOpen" @submit.prevent="onSubmit">
         <div class="sm:flex sm:items-start">
           <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-            <IconCSS name="heroicons-outline:exclamation" class="h-6 w-6 text-red-600" aria-hidden="true" />
+            <UIcon name="i-heroicons-exclamation" class="h-6 w-6 text-red-600" aria-hidden="true" />
           </div>
           <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
             <h3 class="text-lg leading-6 font-medium u-text-gray-900">
@@ -73,7 +73,7 @@
       </div>
 
       <UDropdown v-slot="{ open }" :items="dropdownItems" placement="bottom-start">
-        <UButton variant="white" :icon="open ? 'heroicons-solid:chevron-up' : 'heroicons-solid:chevron-down'" trailing icon-class="transition">
+        <UButton variant="white" :icon="open ? 'i-heroicons-chevron-up-20-solid' : 'i-heroicons-chevron-down-20-solid'" trailing icon-class="transition">
           Open menu!
         </UButton>
       </UDropdown>
@@ -98,7 +98,7 @@
 
       <UPopover wrapper-class="inline-block relative">
         <template #default="{ open }">
-          <UButton variant="secondary" :icon="open ? 'heroicons-solid:chevron-up' : 'heroicons-solid:chevron-down'" trailing icon-class="transition">
+          <UButton variant="secondary" :icon="open ? 'i-heroicons-chevron-up-20-solid-20' : 'i-heroicons-chevron-down-20-solid'" trailing icon-class="transition">
             Open popover!
           </UButton>
         </template>
@@ -117,7 +117,7 @@
       </div>
 
       <UTooltip text="Hello tooltip!" :shortcuts="['⌘', 'G']">
-        <IconCSS name="heroicons-outline:information-circle" class="w-6 h-6 u-text-gray-900 cursor-pointer" />
+        <UIcon name="i-heroicons-information-circle" class="w-6 h-6 u-text-gray-900 cursor-pointer" />
       </UTooltip>
     </div>
 
@@ -125,7 +125,7 @@
       <div class="font-medium text-sm mb-1 u-text-gray-700">
         Notifications:
       </div>
-      <UButton icon="heroicons-outline:bell" variant="red" label="Trigger an error" @click="onNotificationClick" />
+      <UButton icon="i-heroicons-bell" variant="red" label="Trigger an error" @click="onNotificationClick" />
     </div>
 
     <div>
@@ -174,7 +174,7 @@
       <UCard body-class="flex">
         <div class="flex-1 px-4 py-5 sm:p-6 space-y-3">
           <UFormGroup label="Email" name="email" required>
-            <UInput v-model="form.email" type="email" name="email" required icon="heroicons-outline:mail" />
+            <UInput v-model="form.email" type="email" name="email" required icon="i-heroicons-mail" />
           </UFormGroup>
 
           <UFormGroup label="Description" name="description">
@@ -189,7 +189,7 @@
               placeholder="Select a person"
               text-attribute="name"
               value-attribute="id"
-              icon="heroicons-outline:user"
+              icon="i-heroicons-user"
             />
           </UFormGroup>
 
@@ -198,7 +198,7 @@
           </UFormGroup>
 
           <UFormGroup label="Toggle" name="toggle">
-            <UToggle v-model="form.toggle" name="toggle" icon-off="heroicons-solid:x" icon-on="heroicons-solid:check" />
+            <UToggle v-model="form.toggle" name="toggle" icon-off="i-heroicons-x-mark-20-solid" icon-on="i-heroicons-check-20-solid" />
           </UFormGroup>
 
           <UFormGroup label="Notifications" label-class="text-base font-medium u-text-gray-900" description="How do you prefer to receive notifications?">
@@ -302,27 +302,27 @@ function onSubmit () {
 const dropdownItems = [
   [{
     label: 'Edit',
-    icon: 'heroicons-solid:pencil',
+    icon: 'i-heroicons-pencil-square-20-solid',
     click: (e) => {
       e.preventDefault()
       onClick()
     }
   }, {
     label: 'Duplicate',
-    icon: 'heroicons-solid:duplicate'
+    icon: 'i-heroicons-document-duplicate-20-solid'
   }],
   [{
     label: 'Archive',
-    icon: 'heroicons-solid:archive'
+    icon: 'i-heroicons-archive-box-20-solid'
   }, {
     label: 'Move',
-    icon: 'heroicons-solid:external-link',
+    icon: 'i-heroicons-arrow-right-circle-20-solid',
     to: 'https://www.google.fr',
     target: '_blank'
   }],
   [{
     label: 'Delete',
-    icon: 'heroicons-solid:trash'
+    icon: 'i-heroicons-trash-20-solid'
   }]
 ]
 
@@ -335,7 +335,7 @@ const customDropdownItems = [
   }],
   [{
     label: 'About',
-    icon: 'heroicons-solid:plus',
+    icon: 'i-heroicons-plus-20-solid',
     to: '/about'
   }]
 ]

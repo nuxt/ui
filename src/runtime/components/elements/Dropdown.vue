@@ -27,7 +27,7 @@
                 @click="item.click"
               >
                 <slot :name="item.slot" :item="item">
-                  <IconCSS v-if="item.icon" :name="item.icon" :class="[itemIconClass, item.iconClass]" />
+                  <Icon v-if="item.icon" :name="item.icon" :class="[itemIconClass, item.iconClass]" />
                   <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="itemAvatarClass" />
 
                   <span class="truncate">{{ item.label }}</span>
@@ -57,6 +57,7 @@ import type { RouteLocationNormalized } from 'vue-router'
 import { ref, computed, onMounted } from 'vue'
 import { defu } from 'defu'
 import NuxtLink from '#app/components/nuxt-link'
+import Icon from '../elements/Icon.vue'
 import Avatar from '../elements/Avatar.vue'
 import { classNames, omit } from '../../utils'
 import { usePopper } from '../../composables/usePopper'

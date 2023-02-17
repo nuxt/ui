@@ -19,7 +19,7 @@
         />
       </slot>
       <slot name="icon" :link="link" :is-active="isActive">
-        <IconCSS
+        <Icon
           v-if="link.icon"
           :name="link.icon"
           :class="[iconBaseClass, link.label && iconSpacingClass, isActive ? iconActiveClass : iconInactiveClass, link.iconClass]"
@@ -40,6 +40,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
+import Icon from '../elements/Icon.vue'
 import Link from '../elements/Link.vue'
 import Avatar from '../elements/Avatar.vue'
 import type { Avatar as AvatarType } from '../../types/avatar'

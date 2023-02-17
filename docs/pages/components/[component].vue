@@ -35,7 +35,7 @@
 
           <UButton
             class="absolute top-0 right-0"
-            :icon="copied ? 'heroicons-outline:clipboard-check' : 'heroicons-outline:clipboard-copy'"
+            :icon="copied ? 'i-heroicons-clipboard-document-check' : 'i-heroicons-clipboard-document'"
             variant="transparent"
             size="sm"
             :custom-class="copied ? '!text-green-500' : ''"
@@ -132,7 +132,9 @@ const defaultProps = {
     title: 'A new software update is available. See what’s new in version 2.0.4.'
   },
   AlertDialog: {
-    title: 'Are you sure you want to close this modal?',
+    icon: 'i-heroicons-exclamation-triangle',
+    title: 'Deactivate account',
+    description: 'Are you sure you want to deactivate your account? All of your data will be permanently removed from our servers forever. This action cannot be undone.',
     modelValue: alertDialog,
     'onUpdate:modelValue': (v) => { alertDialog.value = v },
     component: {
@@ -154,21 +156,21 @@ const defaultProps = {
     items: [
       [{
         label: 'Edit',
-        icon: 'heroicons-solid:pencil'
+        icon: 'i-heroicons-pencil-square-20-solid'
       }, {
         label: 'Duplicate',
-        icon: 'heroicons-solid:duplicate'
+        icon: 'i-heroicons-document-duplicate-20-solid'
       }],
       [{
         label: 'Archive',
-        icon: 'heroicons-solid:archive'
+        icon: 'i-heroicons-archive-box-20-solid'
       }, {
         label: 'Move',
-        icon: 'heroicons-solid:external-link'
+        icon: 'i-heroicons-arrow-right-circle-20-solid'
       }],
       [{
         label: 'Delete',
-        icon: 'heroicons-solid:trash'
+        icon: 'i-heroicons-trash-20-solid'
       }]
     ]
   },
@@ -176,22 +178,22 @@ const defaultProps = {
     links: [
       {
         label: 'Home',
-        icon: 'heroicons-outline:home',
+        icon: 'i-heroicons-home',
         to: '/'
       },
       {
         label: 'Examples',
-        icon: 'heroicons-outline:book-open',
+        icon: 'i-heroicons-book-open',
         to: '/examples'
       },
       {
         label: 'Migration',
-        icon: 'heroicons-outline:refresh',
+        icon: 'i-heroicons-arrow-path',
         to: '/migration'
       },
       {
         label: 'External link',
-        icon: 'heroicons-outline:external-link',
+        icon: 'i-heroicons-link',
         to: 'https://google.fr',
         target: '_blank'
       }
@@ -207,7 +209,7 @@ const defaultProps = {
     }]
   },
   Icon: {
-    name: 'heroicons-outline:bell'
+    name: 'i-heroicons-bell'
   },
   Input: {
     name: 'input',

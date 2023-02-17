@@ -9,7 +9,7 @@
   >
     <div :class="$ui.commandPalette.wrapper">
       <div v-show="searchable" class="relative flex items-center">
-        <IconCSS v-if="inputIcon" :name="inputIcon" :class="$ui.commandPalette.input.icon.base" aria-hidden="true" />
+        <Icon v-if="inputIcon" :name="inputIcon" :class="$ui.commandPalette.input.icon.base" aria-hidden="true" />
         <ComboboxInput
           ref="comboboxInput"
           :value="query"
@@ -46,7 +46,7 @@
       </ComboboxOptions>
 
       <div v-else-if="placeholder" class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
-        <IconCSS v-if="emptyIcon" :name="emptyIcon" class="w-6 h-6 mx-auto u-text-gray-400 mb-4" aria-hidden="true" />
+        <Icon v-if="emptyIcon" :name="emptyIcon" class="w-6 h-6 mx-auto u-text-gray-400 mb-4" aria-hidden="true" />
         <p class="text-sm text-center u-text-gray-900">
           {{ query ? "We couldn't find any items with that term. Please try again." : "We couldn't find any items." }}
         </p>
@@ -64,6 +64,7 @@ import { groupBy, map } from 'lodash-es'
 import { defu } from 'defu'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Group, Command } from '../../types/command-palette'
+import Icon from '../elements/Icon.vue'
 import Button from '../elements/Button.vue'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 import $ui from '#build/ui'

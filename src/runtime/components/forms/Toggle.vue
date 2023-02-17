@@ -5,10 +5,10 @@
   >
     <span :class="[active ? containerActiveClass : containerInactiveClass, containerBaseClass]">
       <span v-if="iconOn" :class="[active ? iconActiveClass : iconInactiveClass, iconBaseClass]" aria-hidden="true">
-        <IconCSS :name="iconOn" :class="iconOnClass" />
+        <Icon :name="iconOn" :class="iconOnClass" />
       </span>
       <span v-if="iconOff" :class="[active ? iconInactiveClass : iconActiveClass, iconBaseClass]" aria-hidden="true">
-        <IconCSS :name="iconOff" :class="iconOffClass" />
+        <Icon :name="iconOff" :class="iconOffClass" />
       </span>
     </span>
   </Switch>
@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Switch } from '@headlessui/vue'
+import Icon from '../elements/Icon.vue'
 import $ui from '#build/ui'
 
 const props = defineProps({

@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     },
     preset: {
     },
+    icons: ['heroicons', 'mdi'],
     tailwindcss: {
       theme: {
         extend: {

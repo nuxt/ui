@@ -21,7 +21,7 @@
           </slot>
           <slot name="icon">
             <span :class="iconWrapperClass">
-              <IconCSS v-if="icon" :name="icon" :class="iconClass" aria-hidden="true" />
+              <Icon v-if="icon" :name="icon" :class="iconClass" aria-hidden="true" />
             </span>
           </slot>
         </button>
@@ -58,7 +58,7 @@
               </div>
 
               <span v-if="selected" :class="resolveOptionIconClass({ active })">
-                <IconCSS v-if="listOptionIcon" :name="listOptionIcon" :class="listOptionIconSizeClass" aria-hidden="true" />
+                <Icon v-if="listOptionIcon" :name="listOptionIcon" :class="listOptionIconSizeClass" aria-hidden="true" />
               </span>
             </li>
           </ComboboxOption>
@@ -94,6 +94,7 @@ import {
   ComboboxOption,
   ComboboxInput
 } from '@headlessui/vue'
+import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'

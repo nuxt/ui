@@ -37,7 +37,7 @@
     </select>
 
     <div v-if="icon" :class="iconWrapperClass">
-      <IconCSS :name="icon" :class="iconClass" />
+      <Icon :name="icon" :class="iconClass" />
     </div>
   </div>
 </template>
@@ -46,6 +46,7 @@
 import { computed } from 'vue'
 import { get } from 'lodash-es'
 import { classNames } from '../../utils'
+import Icon from '../elements/Icon.vue'
 import $ui from '#build/ui'
 
 const props = defineProps({

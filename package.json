@@ -25,8 +25,9 @@
     "release": "yarn lint && standard-version && git push --follow-tags"
   },
   "dependencies": {
+    "@egoist/tailwindcss-icons": "^1.0.3",
     "@headlessui/vue": "^1.7.10",
-    "@iconify/vue": "^4.1.0",
+    "@iconify-json/heroicons": "^1.1.9",
     "@nuxt/kit": "^3.2.0",
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.4.0",
@@ -40,10 +41,10 @@
     "defu": "^6.1.2",
     "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",
-    "nuxt-icon": "^0.3.2",
     "tailwindcss": "^3.2.6"
   },
   "devDependencies": {
+    "@iconify-json/mdi": "^1.1.47",
     "@nuxt/module-builder": "^0.2.1",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@types/lodash-es": "^4.17.6",

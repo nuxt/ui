@@ -9,7 +9,7 @@
         <div class="p-4">
           <div class="flex gap-3" :class="{ 'items-start': description, 'items-center': !description }">
             <div v-if="iconName" class="flex-shrink-0">
-              <IconCSS :name="iconName" :class="iconClass" />
+              <Icon :name="iconName" :class="iconClass" />
             </div>
             <div class="w-0 flex-1">
               <p class="text-sm font-medium u-text-gray-900">
@@ -33,11 +33,11 @@
               </div>
 
               <button
-                class="transition duration-150 ease-in-out u-text-gray-400 focus:outline-none hover:u-text-gray-500 focus:u-text-gray-500"
+                class="inline-flex transition duration-150 ease-in-out u-text-gray-400 focus:outline-none hover:u-text-gray-500 focus:u-text-gray-500"
                 @click.stop="onClose"
               >
                 <span class="sr-only">Close</span>
-                <IconCSS name="heroicons-solid:x" class="w-5 h-5" />
+                <Icon :name="$ui.notification.close.icon.name" class="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -53,6 +53,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
 import type { PropType } from 'vue'
+import Icon from '../elements/Icon.vue'
 import { useTimer } from '../../composables/useTimer'
 import { classNames } from '../../utils'
 import type { ToastNotificationAction } from '../../types'

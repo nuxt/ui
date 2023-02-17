@@ -2,6 +2,7 @@ import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, addTe
 import { defu } from 'defu'
 import colors from 'tailwindcss/colors.js'
 import type { Config } from 'tailwindcss'
+import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
 import defaultPreset from './runtime/presets/default'
@@ -39,6 +40,8 @@ export interface ModuleOptions {
 
   colors?: ColorsOptions
 
+  icons: string[]
+
   tailwindcss?: Partial<Config>
 }
 
@@ -49,6 +52,7 @@ const defaults = {
     primary: 'indigo',
     gray: 'gray'
   },
+  icons: ['heroicons'],
   tailwindcss: {
     theme: {}
   }
@@ -72,7 +76,7 @@ export default defineNuxtModule<ModuleOptions>({
     // Transpile runtime
     const runtimeDir = resolve('./runtime')
     nuxt.options.build.transpile.push(runtimeDir)
-    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@iconify/vue')
+    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
     // @ts-ignore
     nuxt.hook('tailwindcss:config', function (tailwindConfig: TailwindConfig) {
@@ -108,6 +112,9 @@ export default defineNuxtModule<ModuleOptions>({
         variants: ['focus']
       }])
 
+      tailwindConfig.plugins = tailwindConfig.plugins || []
+      tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons) }))
+
       const ui: object = defu(preset, defaultPreset(variantColors))
 
       addTemplate({
@@ -121,9 +128,6 @@ export default defineNuxtModule<ModuleOptions>({
       })
     })
 
-    nuxt.options.appConfig.nuxtIcon = defu(nuxt.options.appConfig.nuxtIcon, { size: false })
-
-    await installModule('nuxt-icon')
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
       viewer: false,

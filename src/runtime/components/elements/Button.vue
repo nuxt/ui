@@ -6,14 +6,14 @@
     :aria-label="ariaLabel"
     v-bind="buttonProps"
   >
-    <IconCSS v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
+    <Icon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     <slot>
       <span :class="[truncate ? 'text-left break-all line-clamp-1' : '', compact ? 'hidden sm:block' : '']">
         <span :class="[labelCompact && 'hidden sm:block']">{{ label }}</span>
         <span v-if="labelCompact" class="sm:hidden">{{ labelCompact }}</span>
       </span>
     </slot>
-    <IconCSS v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+    <Icon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
   </component>
 </template>
 
@@ -22,6 +22,7 @@ import { ref, computed, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
 import NuxtLink from '#app/components/nuxt-link'
+import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 

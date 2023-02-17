@@ -9,11 +9,11 @@
             </NuxtLink>
           </div>
 
-          <div class="flex items-center gap-3">
+          <div class="flex items-center">
             <ColorScheme placeholder="" tag="span">
-              <UButton variant="transparent" :icon="colorMode.value === 'dark' ? 'heroicons-outline:moon' : 'heroicons-outline:sun'" @click="toggleDark" />
+              <UButton variant="transparent" :icon="colorMode.value === 'dark' ? 'i-heroicons-moon' : 'i-heroicons-sun'" @click="toggleDark" />
             </ColorScheme>
-            <UButton to="https://github.com/nuxtlabs/ui" target="_blank" variant="transparent" icon="fa-brands:github" />
+            <UButton to="https://github.com/nuxtlabs/ui" target="_blank" variant="transparent" icon="i-mdi-github" />
           </div>
         </div>
       </UContainer>

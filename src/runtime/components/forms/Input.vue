@@ -19,16 +19,17 @@
     >
     <slot />
     <div v-if="isLeading" :class="iconLeadingWrapperClass">
-      <IconCSS v-if="iconName" :name="iconName" :class="iconClass" />
+      <Icon v-if="iconName" :name="iconName" :class="iconClass" />
     </div>
     <div v-if="isTrailing" :class="iconTrailingWrapperClass">
-      <IconCSS v-if="iconName" :name="iconName" :class="iconClass" />
+      <Icon v-if="iconName" :name="iconName" :class="iconClass" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 

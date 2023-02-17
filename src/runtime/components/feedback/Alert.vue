@@ -1,8 +1,8 @@
 <template>
   <div class="rounded-md p-4" :class="variantClass">
     <div class="flex">
-      <div class="flex-shrink-0">
-        <IconCSS v-if="iconName" :name="iconName" :class="iconClass" class="h-5 w-5" />
+      <div class="inline-flex flex-shrink-0">
+        <Icon v-if="iconName" :name="iconName" :class="iconClass" class="h-5 w-5" />
       </div>
       <div class="ml-3 flex-1 md:flex md:justify-between">
         <p v-if="title" class="text-sm leading-5" :class="titleClass">
@@ -27,6 +27,7 @@
 import { computed } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
+import Icon from '../elements/Icon.vue'
 
 const props = defineProps({
   variant: {
@@ -56,10 +57,10 @@ const props = defineProps({
 
 const iconName = computed(() => {
   return ({
-    info: 'heroicons-solid:information-circle',
-    warning: 'heroicons-solid:exclamation',
-    error: 'heroicons-solid:x-circle',
-    success: 'heroicons-solid:check-circle'
+    info: 'i-heroicons-information-circle',
+    warning: 'i-heroicons-exclamation',
+    error: 'i-heroicons-x-circle',
+    success: 'i-heroicons-check-circle'
   })[props.variant]
 })
 

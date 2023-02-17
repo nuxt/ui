@@ -48,7 +48,7 @@ export default function defaultPreset (variantColors: string[]) {
     },
     icon: {
       base: 'flex-shrink-0',
-      loading: 'heroicons-outline:refresh',
+      loading: 'i-heroicons-arrow-path',
       size: {
         xxs: 'h-3.5 w-3.5',
         xs: 'h-4 w-4',
@@ -168,7 +168,7 @@ export default function defaultPreset (variantColors: string[]) {
     },
     icon: {
       base: 'u-text-gray-400',
-      loading: 'heroicons-outline:refresh',
+      loading: 'i-heroicons-arrow-path',
       size: {
         xxs: 'h-3 w-3',
         xs: 'h-4 w-4',
@@ -215,7 +215,7 @@ export default function defaultPreset (variantColors: string[]) {
     wrapper: 'relative',
     base: `${select.base} text-left cursor-default`,
     icon: {
-      name: 'heroicons-solid:selector',
+      name: 'i-heroicons-chevron-up-down-20-solid',
       ...select.icon
     },
     list: {
@@ -233,7 +233,7 @@ export default function defaultPreset (variantColors: string[]) {
         disabled: 'cursor-not-allowed opacity-50',
         empty: 'text-sm u-text-gray-400 px-4 py-2',
         icon: {
-          name: 'heroicons-solid:check',
+          name: 'i-heroicons-check-20-solid',
           base: 'absolute inset-y-0 right-0 flex items-center pr-4',
           active: 'text-white',
           inactive: 'text-primary-600',
@@ -355,11 +355,11 @@ export default function defaultPreset (variantColors: string[]) {
 
   const alertDialog = {
     icon: {
-      wrapper: 'h-12 w-12 sm:h-10 sm:w-10 bg-primary-100',
-      base: 'text-primary-600'
+      wrapper: 'mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary-100 sm:mx-0 sm:h-10 sm:w-10',
+      base: 'h-6 w-6 text-primary-600'
     },
-    title: 'text-lg leading-6 font-medium text-gray-900',
-    description: 'text-sm text-gray-500'
+    title: 'text-lg leading-6 font-medium u-text-gray-900',
+    description: 'text-sm u-text-gray-500'
   }
 
   const dropdown = {
@@ -483,10 +483,10 @@ export default function defaultPreset (variantColors: string[]) {
     rounded: 'rounded-lg',
     ring: 'ring-1 u-ring-gray-200',
     type: {
-      info: 'heroicons-outline:information-circle',
-      success: 'heroicons-outline:check-circle',
-      warning: 'heroicons-outline:exclamation-circle',
-      error: 'heroicons-outline:x-circle'
+      info: 'i-heroicons-information-circle',
+      success: 'i-heroicons-check-circle',
+      warning: 'i-heroicons-exclamation-circle',
+      error: 'i-heroicons-x-circle'
     },
     icon: {
       base: 'w-6 h-6',
@@ -495,6 +495,11 @@ export default function defaultPreset (variantColors: string[]) {
         info: 'text-blue-400',
         success: 'text-green-400',
         error: 'text-red-400'
+      }
+    },
+    close: {
+      icon: {
+        name: 'i-heroicons-x-mark-20-solid'
       }
     },
     transition: {
@@ -572,7 +577,7 @@ export default function defaultPreset (variantColors: string[]) {
       base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-[3.25rem] u-text-gray-900 focus:ring-0 sm:text-sm',
       icon: {
         base: 'pointer-events-none absolute top-3.5 left-5 h-5 w-5 u-text-gray-400',
-        name: 'heroicons-outline:search'
+        name: 'i-heroicons-magnifying-glass'
       },
       close: {
         base: 'absolute right-2',
@@ -585,7 +590,14 @@ export default function defaultPreset (variantColors: string[]) {
     },
     empty: {
       icon: {
-        name: 'heroicons-outline:search'
+        name: 'i-heroicons-magnifying-glass'
+      }
+    },
+    option: {
+      selected: {
+        icon: {
+          name: 'i-heroicons-check-20-solid'
+        }
       }
     }
   }
