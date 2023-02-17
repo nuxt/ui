@@ -184,7 +184,7 @@ const commands = computed(() => props.groups.filter(group => !group.search).redu
   return acc.concat(group.commands.map(command => ({ ...command, group: group.key })))
 }, [] as Command[]))
 
-const searchResults = ref({})
+const searchResults = ref<{ [key: string]: any }>({})
 
 const { results } = useFuse(query, commands, options)
 
