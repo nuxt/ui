@@ -38,7 +38,14 @@
         aria-label="Commands"
         class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2"
       >
-        <CommandPaletteGroup v-for="group of groups" :key="group.key" :group="group" :group-attribute="groupAttribute" :command-attribute="commandAttribute">
+        <CommandPaletteGroup
+          v-for="group of groups"
+          :key="group.key"
+          :query="query"
+          :group="group"
+          :group-attribute="groupAttribute"
+          :command-attribute="commandAttribute"
+        >
           <template v-for="(_, name) in $slots" #[name]="slotData">
             <slot :name="name" v-bind="slotData" />
           </template>
@@ -59,6 +66,7 @@
 import { ref, computed, watch, onMounted } from 'vue'
 import { Combobox, ComboboxInput, ComboboxOptions } from '@headlessui/vue'
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
+import { useDebounceFn } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { groupBy, map } from 'lodash-es'
 import { defu } from 'defu'
@@ -133,6 +141,10 @@ const props = defineProps({
   placeholder: {
     type: Boolean,
     default: true
+  },
+  debounce: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -168,29 +180,44 @@ const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => de
   matchAllWhenSearchEmpty: true
 }))
 
-const commands = computed(() => props.groups.reduce((acc, group) => {
+const commands = computed(() => props.groups.filter(group => !group.search).reduce((acc, group) => {
   return acc.concat(group.commands.map(command => ({ ...command, group: group.key })))
 }, [] as Command[]))
 
+const searchResults = ref({})
+
 const { results } = useFuse(query, commands, options)
 
-const groups = computed(() => map(groupBy(results.value, command => command.item.group), (results, key) => {
-  const commands = results.map((result) => {
-    const { item, ...data } = result
+const groups = computed(() => ([
+  ...map(groupBy(results.value, command => command.item.group), (results, key) => {
+    const commands = results.map((result) => {
+      const { item, ...data } = result
+
+      return {
+        ...item,
+        ...data
+      }
+    })
 
     return {
-      ...item,
-      ...data
-    }
-  })
+      ...props.groups.find(group => group.key === key),
+      commands: commands.slice(0, options.value.resultLimit)
+    } as Group
+  }),
+  ...props.groups.filter(group => !!group.search).map(group => ({ ...group, commands: (searchResults.value[group.key] || []).slice(0, options.value.resultLimit) })).filter(group => group.commands.length)
+]))
 
-  return {
-    ...props.groups.find(group => group.key === key),
-    commands: commands.slice(0, options.value.resultLimit)
-  } as Group
-}))
+const debouncedSearch = useDebounceFn(async () => {
+  const searchableGroups = props.groups.filter(group => !!group.search)
+
+  await Promise.all(searchableGroups.map(async (group) => {
+    searchResults.value[group.key] = await group.search(query.value)
+  }))
+}, props.debounce)
 
 watch(query, () => {
+  debouncedSearch()
+
   // Select first item on search changes
   setTimeout(() => {
     // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804

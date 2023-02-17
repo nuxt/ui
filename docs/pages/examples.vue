@@ -149,18 +149,13 @@
 
       <UCard body-class="">
         <UCommandPalette
-          v-model="form.persons"
-          multiple
           :placeholder="false"
           :options="{
             fuseOptions: {
               includeMatches: true
             }
           }"
-          :groups="[{
-            key: 'persons',
-            commands: people
-          }]"
+          :groups="commandPaletteGroups"
           command-attribute="name"
         />
       </UCard>
@@ -262,6 +257,18 @@ const x = ref(0)
 const y = ref(0)
 const isContextMenuOpen = ref(false)
 const contextMenuRef = ref(null)
+
+const commandPaletteGroups = computed(() => ([{
+  key: 'people',
+  commands: people.value
+}, {
+  key: 'search',
+  label: q => q && `Search results for "${q}"...`,
+  search: async (q) => {
+    if (!q) { return [] }
+    return await $fetch(`https://jsonplaceholder.typicode.com/users?q=${q}`)
+  }
+}]))
 
 onMounted(() => {
   document.addEventListener('mousemove', ({ clientX, clientY }) => {

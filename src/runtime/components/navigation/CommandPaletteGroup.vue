@@ -1,7 +1,7 @@
 <template>
   <div class="p-2" role="option">
-    <h2 v-if="group[groupAttribute]" class="px-3 my-2 text-xs font-semibold u-text-gray-900">
-      {{ group[groupAttribute] }}
+    <h2 v-if="label" class="px-3 my-2 text-xs font-semibold u-text-gray-900">
+      {{ label }}
     </h2>
 
     <div class="text-sm u-text-gray-700" role="listbox" :aria-label="group[groupAttribute]">
@@ -52,6 +52,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { ComboboxOption } from '@headlessui/vue'
 import type { PropType } from 'vue'
 import Icon from '../elements/Icon.vue'
@@ -59,10 +60,14 @@ import Avatar from '../elements/Avatar.vue'
 import type { Group } from '../../types/command-palette'
 import $ui from '#build/ui'
 
-defineProps({
+const props = defineProps({
   group: {
     type: Object as PropType<Group>,
     required: true
+  },
+  query: {
+    type: String,
+    default: ''
   },
   groupAttribute: {
     type: String,
@@ -72,6 +77,12 @@ defineProps({
     type: String,
     required: true
   }
+})
+
+const label = computed(() => {
+  const label = props.group[props.groupAttribute]
+
+  return typeof label === 'function' ? label(props.query) : label
 })
 
 function highlight ({ indices, value }: { indices: number[][], value:string }, i = 1): string {
