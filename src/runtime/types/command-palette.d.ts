@@ -1,6 +1,7 @@
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { FuseSortFunctionMatch, FuseSortFunctionMatchList } from 'fuse.js'
 import type { Avatar } from './avatar'
+
 export interface Command {
   id: string | number
   prefix?: string
@@ -22,6 +23,5 @@ export interface Group {
   active?: string
   inactive?: string
   commands: Command[]
-  options?: Partial<UseFuseOptions<Command>>
   [key: string]: any
 }
