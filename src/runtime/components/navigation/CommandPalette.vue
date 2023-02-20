@@ -255,6 +255,7 @@ function onClear () {
 }
 
 defineExpose({
+  query,
   updateQuery: (q: string) => {
     query.value = q
   },
