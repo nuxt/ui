@@ -8,7 +8,7 @@
       <transition appear v-bind="transitionClass">
         <div :class="[baseClass, backgroundClass, roundedClass, shadowClass, ringClass]">
           <slot name="text">
-            <span class="truncate">{{ text }}</span>
+            {{ text }}
           </slot>
 
           <span v-if="shortcuts?.length" class="inline-flex items-center justify-end flex-shrink-0 gap-0.5 ml-1">
