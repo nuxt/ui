@@ -56,7 +56,6 @@
             v-if="prop.type === 'Boolean'"
             v-model="prop.value"
             :name="prop.key"
-            :label="prop.key"
           />
           <USelect
             v-else-if="prop.values"
@@ -120,6 +119,31 @@ const alertDialog = ref(false)
 const toggle = ref(false)
 const modal = ref(false)
 const slideover = ref(false)
+
+const x = ref(0)
+const y = ref(0)
+const isContextMenuOpen = ref(false)
+const virtualElement = ref({ getBoundingClientRect: () => ({}) })
+
+onMounted(() => {
+  document.addEventListener('mousemove', ({ clientX, clientY }) => {
+    x.value = clientX
+    y.value = clientY
+  })
+})
+
+function openContextMenu () {
+  const top = unref(y)
+  const left = unref(x)
+
+  virtualElement.value.getBoundingClientRect = () => ({
+    width: 0,
+    height: 0,
+    top,
+    left
+  })
+  isContextMenuOpen.value = true
+}
 
 const defaultProps = {
   Button: {
@@ -260,6 +284,31 @@ const defaultProps = {
     id: '1',
     title: 'Notification title',
     callback: 'console.log(\'Timer expired\')'
+  },
+  ContextMenu: {
+    modelValue: isContextMenuOpen,
+    'onUpdate:modelValue': (v) => { isContextMenuOpen.value = v },
+    virtualElement,
+    component: {
+      name: 'Card',
+      props: {
+        variant: 'secondary',
+        label: 'Open context menu',
+        onClick: () => { isContextMenuOpen.value = false },
+        onContextmenu: (e) => {
+          e?.preventDefault()
+          openContextMenu()
+        },
+        class: 'relative w-[300px] h-[100px]'
+      }
+    },
+    slots: {
+      default: {
+        tag: 'div',
+        html: 'Context menu content',
+        class: 'rounded border u-border-gray-200 p-2'
+      }
+    }
   },
   Modal: {
     modelValue: modal,

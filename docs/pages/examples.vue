@@ -133,7 +133,7 @@
         Context menu:
       </div>
 
-      <UCard ref="contextMenuRef" class="relative" body-class="h-64" @click="isContextMenuOpen = false" @contextmenu.prevent="openContextMenu">
+      <UCard class="relative" body-class="h-64" @click="isContextMenuOpen = false" @contextmenu.prevent="openContextMenu">
         <UContextMenu v-model="isContextMenuOpen" :virtual-element="virtualElement" width-class="w-48">
           <UCard @click.stop>
             Menu
@@ -256,7 +256,7 @@ const { $toast } = useNuxtApp()
 const x = ref(0)
 const y = ref(0)
 const isContextMenuOpen = ref(false)
-const contextMenuRef = ref(null)
+const virtualElement = ref({ getBoundingClientRect: () => ({}) })
 
 const commandPaletteGroups = computed(() => ([{
   key: 'people',
@@ -276,8 +276,6 @@ onMounted(() => {
     y.value = clientY
   })
 })
-
-const virtualElement = ref({ getBoundingClientRect: () => ({}) })
 
 function openContextMenu () {
   const top = unref(y)

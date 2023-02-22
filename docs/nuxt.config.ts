@@ -3,6 +3,13 @@ import nuxtUI from '../src/module'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en'
+      }
+    }
+  },
   modules: [
     // @ts-ignore
     nuxtUI
