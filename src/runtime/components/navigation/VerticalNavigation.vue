@@ -49,7 +49,7 @@ import $ui from '#build/ui'
 defineProps({
   links: {
     type: Array as PropType<{
-      to?: RouteLocationNormalized
+      to?: RouteLocationNormalized | string
       exact?: boolean
       label: string
       icon?: string
