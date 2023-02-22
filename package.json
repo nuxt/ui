@@ -53,6 +53,6 @@
     "nuxt": "^3.2.2",
     "standard-version": "^9.5.0",
     "unbuild": "^1.1.2",
-    "vue-tsc": "^1.1.5"
+    "vue-tsc": "^1.1.7"
   }
 }
