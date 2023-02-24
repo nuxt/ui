@@ -1,7 +1,7 @@
 <template>
   <div v-if="isOpen" ref="container" :class="[containerClass, widthClass]">
     <transition appear v-bind="transitionClass">
-      <div :class="baseClass">
+      <div :class="[baseClass, ringClass, roundedClass, shadowClass, backgroundClass]">
         <slot />
       </div>
     </transition>
@@ -37,6 +37,22 @@ const props = defineProps({
   widthClass: {
     type: String,
     default: () => $ui.contextMenu.width
+  },
+  backgroundClass: {
+    type: String,
+    default: () => $ui.contextMenu.background
+  },
+  shadowClass: {
+    type: String,
+    default: () => $ui.contextMenu.shadow
+  },
+  roundedClass: {
+    type: String,
+    default: () => $ui.contextMenu.rounded
+  },
+  ringClass: {
+    type: String,
+    default: () => $ui.contextMenu.ring
   },
   baseClass: {
     type: String,

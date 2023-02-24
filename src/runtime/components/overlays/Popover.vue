@@ -17,7 +17,7 @@
 
     <div v-if="open" ref="container" :class="[containerClass, widthClass]" @mouseover="onMouseOver">
       <transition appear v-bind="transitionClass">
-        <PopoverPanel :class="baseClass" static>
+        <PopoverPanel :class="[baseClass, ringClass, roundedClass, shadowClass, backgroundClass]" static>
           <slot name="panel" :open="open" :close="close" />
         </PopoverPanel>
       </transition>
@@ -61,6 +61,22 @@ const props = defineProps({
   baseClass: {
     type: String,
     default: () => $ui.popover.base
+  },
+  backgroundClass: {
+    type: String,
+    default: () => $ui.popover.background
+  },
+  shadowClass: {
+    type: String,
+    default: () => $ui.popover.shadow
+  },
+  roundedClass: {
+    type: String,
+    default: () => $ui.popover.rounded
+  },
+  ringClass: {
+    type: String,
+    default: () => $ui.popover.ring
   },
   transitionClass: {
     type: Object,

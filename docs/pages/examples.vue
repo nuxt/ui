@@ -104,7 +104,7 @@
         </template>
 
         <template #panel>
-          <div class="p-4 u-bg-white border u-border-gray-200 rounded-md">
+          <div class="p-2">
             Panel
           </div>
         </template>
@@ -135,9 +135,9 @@
 
       <UCard class="relative" body-class="h-64" @click="isContextMenuOpen = false" @contextmenu.prevent="openContextMenu">
         <UContextMenu v-model="isContextMenuOpen" :virtual-element="virtualElement" width-class="w-48">
-          <UCard @click.stop>
+          <div class="p-2">
             Menu
-          </UCard>
+          </div>
         </UContextMenu>
       </UCard>
     </div>

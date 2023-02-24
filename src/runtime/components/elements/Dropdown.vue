@@ -17,7 +17,7 @@
 
     <div v-if="open && items.length" ref="container" :class="[containerClass, widthClass]" @mouseover="onMouseOver">
       <transition appear v-bind="transitionClass">
-        <MenuItems :class="baseClass" static>
+        <MenuItems :class="[baseClass, divideClass, ringClass, roundedClass, shadowClass, backgroundClass]" static>
           <div v-for="(subItems, index) of items" :key="index" :class="groupClass">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
               <Component
@@ -103,6 +103,26 @@ const props = defineProps({
   widthClass: {
     type: String,
     default: () => $ui.dropdown.width
+  },
+  backgroundClass: {
+    type: String,
+    default: () => $ui.dropdown.background
+  },
+  shadowClass: {
+    type: String,
+    default: () => $ui.dropdown.shadow
+  },
+  roundedClass: {
+    type: String,
+    default: () => $ui.dropdown.rounded
+  },
+  ringClass: {
+    type: String,
+    default: () => $ui.dropdown.ring
+  },
+  divideClass: {
+    type: String,
+    default: () => $ui.dropdown.divide
   },
   baseClass: {
     type: String,
