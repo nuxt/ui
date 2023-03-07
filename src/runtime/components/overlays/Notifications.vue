@@ -9,7 +9,7 @@
           v-bind="notification"
           :class="notification.click && 'cursor-pointer'"
           @click="notification.click && notification.click(notification)"
-          @close="$toast.removeNotification(notification.id)"
+          @close="toast.removeNotification(notification.id)"
         />
       </div>
     </div>
@@ -18,10 +18,11 @@
 
 <script setup lang="ts">
 import type { ToastNotification } from '../../types'
+import { useToast } from '../../composables/useToast'
 import Notification from './Notification.vue'
-import { useNuxtApp, useState } from '#imports'
+import { useState } from '#imports'
 
-const { $toast } = useNuxtApp()
+const toast = useToast()
 const notifications = useState<ToastNotification[]>('notifications', () => [])
 </script>
 

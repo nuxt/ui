@@ -1,4 +1,4 @@
-import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, addTemplate, addPlugin, createResolver } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, addTemplate, createResolver } from '@nuxt/kit'
 import { defu } from 'defu'
 import colors from 'tailwindcss/colors.js'
 import type { Config } from 'tailwindcss'
@@ -154,9 +154,6 @@ export default defineNuxtModule<ModuleOptions>({
       },
       cssPath: resolve(runtimeDir, 'tailwind.css')
     })
-
-    addPlugin(resolve(runtimeDir, 'plugins', 'toast.client'))
-    addPlugin(resolve(runtimeDir, 'plugins', 'clipboard.client'))
 
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'elements'),
