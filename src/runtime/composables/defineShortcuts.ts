@@ -1,6 +1,6 @@
 import type { Ref, ComputedRef } from 'vue'
 import { logicAnd, logicNot } from '@vueuse/math'
-import { onMounted, onBeforeUnmount } from 'vue'
+import { computed, onMounted, onBeforeUnmount } from 'vue'
 import { useShortcuts } from './useShortcuts'
 
 export interface ShortcutConfig {
