@@ -613,7 +613,7 @@ export default function defaultPreset (variantColors: string[]) {
           name: 'i-heroicons-check-20-solid'
         }
       },
-      shortcuts: 'hidden md:flex flex-shrink-0 text-xs font-semibold u-text-gray-500'
+      shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold u-text-gray-500'
     }
   }
 
