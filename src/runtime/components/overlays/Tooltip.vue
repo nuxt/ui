@@ -85,7 +85,7 @@ const props = defineProps({
     default: () => ({})
   },
   shortcutsClass: {
-    type: Object,
+    type: String,
     default: () => $ui.tooltip.shortcuts
   },
   openDelay: {
