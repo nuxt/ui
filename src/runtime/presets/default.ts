@@ -526,6 +526,7 @@ export default function defaultPreset (variantColors: string[]) {
     rounded: 'rounded',
     ring: 'ring-1 u-ring-gray-200',
     base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
+    shortcuts: 'inline-flex items-center justify-end flex-shrink-0 gap-0.5 ml-1',
     transition: {
       enterActiveClass: 'transition ease-out duration-200',
       enterFromClass: 'opacity-0 translate-y-1',
@@ -611,7 +612,8 @@ export default function defaultPreset (variantColors: string[]) {
         icon: {
           name: 'i-heroicons-check-20-solid'
         }
-      }
+      },
+      shortcuts: 'flex-shrink-0 text-xs font-semibold u-text-gray-500'
     }
   }
 

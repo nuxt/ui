@@ -42,7 +42,7 @@
             <span v-if="group.active" class="flex-shrink-0 u-text-gray-500">{{ group.active }}</span>
           </slot>
           <slot v-else :name="`${group.key}-inactive`" :group="group" :command="command">
-            <span v-if="command.shortcuts?.length" class="flex-shrink-0 text-xs font-semibold u-text-gray-500">
+            <span v-if="command.shortcuts?.length" :class="$ui.commandPalette.option.shortcuts">
               <kbd v-for="shortcut of command.shortcuts" :key="shortcut" class="font-sans">{{ shortcut }}</kbd>
             </span>
             <span v-else-if="!command.disabled && group.inactive" class="flex-shrink-0 u-text-gray-500">{{ group.inactive }}</span>
