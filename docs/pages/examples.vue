@@ -130,6 +130,16 @@
 
     <div>
       <div class="font-medium text-sm mb-1 u-text-gray-700">
+        Copy text to clipboard:
+      </div>
+      <div class="flex gap-2">
+        <UInput v-model="textToCopy" name="textToCopy" />
+        <UButton icon="i-heroicons-document-duplicate-solid" variant="primary" label="Copy text" @click="onCopyTextClick" />
+      </div>
+    </div>
+
+    <div>
+      <div class="font-medium text-sm mb-1 u-text-gray-700">
         Context menu:
       </div>
 
@@ -230,6 +240,7 @@
 
 <script setup>
 const isModalOpen = ref(false)
+const textToCopy = ref('Copied text')
 
 const people = ref([
   { id: 1, name: 'Durward Reynolds', disabled: false },
@@ -251,7 +262,8 @@ const form = reactive({
   persons: ref([people.value[0]])
 })
 
-const { $toast } = useNuxtApp()
+const toast = useToast()
+const clipboard = useCopyToClipboard()
 
 const x = ref(0)
 const y = ref(0)
@@ -346,6 +358,10 @@ const customDropdownItems = [
 ]
 
 const onNotificationClick = () => {
-  $toast.error({ title: 'Error', description: 'This is an error message' })
+  toast.error({ title: 'Error', description: 'This is an error message' })
+}
+
+const onCopyTextClick = () => {
+  clipboard.copy(textToCopy.value, { title: 'Text copied successfully!' })
 }
 </script>

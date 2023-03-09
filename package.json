@@ -38,6 +38,7 @@
     "@tailwindcss/typography": "^0.5.9",
     "@vueuse/core": "^9.13.0",
     "@vueuse/integrations": "^9.13.0",
+    "@vueuse/math": "^9.13.0",
     "defu": "^6.1.2",
     "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",

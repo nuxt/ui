@@ -1,8 +1,9 @@
 import { useClipboard } from '@vueuse/core'
-import { defineNuxtPlugin } from '#app'
+import { useToast } from './useToast'
 
-export default defineNuxtPlugin((nuxtApp) => {
+export function useCopyToClipboard () {
   const { copy: copyToClipboard, isSupported } = useClipboard()
+  const toast = useToast()
 
   function copy (text: string, success: { title?: string, description?: string } = {}, failure: { title?: string, description?: string } = {}) {
     if (!isSupported) {
@@ -14,9 +15,9 @@ export default defineNuxtPlugin((nuxtApp) => {
         return
       }
 
-      nuxtApp.$toast.success(success)
+      toast.success(success)
     }, function (e) {
-      nuxtApp.$toast.error({
+      toast.error({
         ...failure,
         description: failure.description || e.message
       })
@@ -24,10 +25,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   }
 
   return {
-    provide: {
-      clipboard: {
-        copy
-      }
-    }
+    copy
   }
-})
+}
