@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/nuxtlabs/ui/compare/v1.1.4...v1.2.0) (2023-03-09)
+
+
+### Bug Fixes
+
+* **defineShortcuts:** add missing import ([37b2271](https://github.com/nuxtlabs/ui/commit/37b2271bf04adfe6bee4d984fa12452b2168318c))
+* **Tooltip:** `shortcutsClass` prop type ([fa49d52](https://github.com/nuxtlabs/ui/commit/fa49d52f17752eaa06f997a9b6e8df8adcab983f))
+
 ### [1.1.4](https://github.com/nuxtlabs/ui/compare/v1.1.3...v1.1.4) (2023-03-02)
 
 ### [1.1.3](https://github.com/nuxtlabs/ui/compare/v1.1.2...v1.1.3) (2023-03-02)
