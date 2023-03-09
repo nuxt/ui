@@ -380,7 +380,7 @@ export default function defaultPreset (variantColors: string[]) {
       disabled: 'cursor-not-allowed opacity-50',
       icon: 'h-5 w-5 u-text-gray-400 group-hover:u-text-gray-500 flex-shrink-0',
       avatar: '-m-0.5 group-hover:u-bg-gray-200 flex-shrink-0',
-      shortcuts: 'flex-shrink-0 text-xs font-semibold u-text-gray-500 ml-auto'
+      shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold u-text-gray-500 ml-auto'
     },
     transition: {
       enterActiveClass: 'transition duration-100 ease-out',
@@ -526,6 +526,7 @@ export default function defaultPreset (variantColors: string[]) {
     rounded: 'rounded',
     ring: 'ring-1 u-ring-gray-200',
     base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
+    shortcuts: 'hidden md:inline-flex items-center justify-end flex-shrink-0 gap-0.5 ml-1',
     transition: {
       enterActiveClass: 'transition ease-out duration-200',
       enterFromClass: 'opacity-0 translate-y-1',
@@ -611,7 +612,8 @@ export default function defaultPreset (variantColors: string[]) {
         icon: {
           name: 'i-heroicons-check-20-solid'
         }
-      }
+      },
+      shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold u-text-gray-500'
     }
   }
 
