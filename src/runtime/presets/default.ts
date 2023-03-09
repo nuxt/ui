@@ -380,7 +380,7 @@ export default function defaultPreset (variantColors: string[]) {
       disabled: 'cursor-not-allowed opacity-50',
       icon: 'h-5 w-5 u-text-gray-400 group-hover:u-text-gray-500 flex-shrink-0',
       avatar: '-m-0.5 group-hover:u-bg-gray-200 flex-shrink-0',
-      shortcuts: 'hidden md:flex flex-shrink-0 text-xs font-semibold u-text-gray-500 ml-auto'
+      shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold u-text-gray-500 ml-auto'
     },
     transition: {
       enterActiveClass: 'transition duration-100 ease-out',
