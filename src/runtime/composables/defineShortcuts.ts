@@ -32,7 +32,7 @@ export const defineShortcuts = (config: ShortcutsConfig) => {
   let shortcuts: Shortcut[] = []
 
   const onKeyDown = (e: KeyboardEvent) => {
-    const alphabeticalKey = /^[a-z]{1}$/.test(e.key)
+    const alphabeticalKey = /^[a-z]{1}$/i.test(e.key)
 
     for (const shortcut of shortcuts) {
       if (e.key.toLowerCase() !== shortcut.key) { continue }
