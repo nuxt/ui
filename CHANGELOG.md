@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/nuxtlabs/ui/compare/v1.2.0...v1.2.1) (2023-03-20)
+
+
+### Bug Fixes
+
+* **defineShortcuts:** shift + alphabetic character handling ([#140](https://github.com/nuxtlabs/ui/issues/140)) ([377b418](https://github.com/nuxtlabs/ui/commit/377b4189ca85603db0b7f040949260ba7494c46f))
+
 ## [1.2.0](https://github.com/nuxtlabs/ui/compare/v1.1.4...v1.2.0) (2023-03-09)
 
 
