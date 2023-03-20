@@ -26,11 +26,11 @@
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.0.7",
-    "@headlessui/vue": "1.7.10",
+    "@headlessui/vue": "^1.7.12",
     "@iconify-json/heroicons": "^1.1.10",
-    "@nuxt/kit": "^3.2.3",
+    "@nuxt/kit": "^3.3.1",
     "@nuxtjs/color-mode": "^3.2.0",
-    "@nuxtjs/tailwindcss": "^6.4.1",
+    "@nuxtjs/tailwindcss": "^6.6.0",
     "@popperjs/core": "^2.11.6",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
@@ -45,13 +45,13 @@
     "tailwindcss": "^3.2.7"
   },
   "devDependencies": {
-    "@iconify-json/mdi": "^1.1.49",
+    "@iconify-json/mdi": "^1.1.50",
     "@nuxt/module-builder": "^0.2.1",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
-    "@types/lodash-es": "^4.17.6",
-    "@types/node": "^18.14.5",
-    "eslint": "^8.35.0",
-    "nuxt": "^3.2.3",
+    "@types/lodash-es": "^4.17.7",
+    "@types/node": "^18.15.3",
+    "eslint": "^8.36.0",
+    "nuxt": "^3.3.1",
     "standard-version": "^9.5.0",
     "unbuild": "^1.1.2",
     "vue-tsc": "^1.2.0"
