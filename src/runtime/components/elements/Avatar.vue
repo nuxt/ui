@@ -38,12 +38,8 @@ const props = defineProps({
     default: true
   },
   chip: {
-    type: Boolean,
-    default: false
-  },
-  chipVariant: {
     type: String,
-    default: 'primary',
+    default: null,
     validator (value: string) {
       return Object.keys($ui.avatar.chip.variant).includes(value)
     }
@@ -92,8 +88,8 @@ const avatarClass = computed(() => {
 const chipClass = computed(() => {
   return classNames(
     $ui.avatar.chip.base,
+    $ui.avatar.chip.variant[props.chip],
     $ui.avatar.chip.position[props.chipPosition],
-    $ui.avatar.chip.variant[props.chipVariant],
     $ui.avatar.chip.size[props.size]
   )
 })

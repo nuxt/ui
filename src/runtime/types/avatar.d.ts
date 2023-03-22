@@ -4,7 +4,6 @@ export interface Avatar {
   text: string
   size: string
   rounded: boolean
-  chip: boolean
-  chipVariant: string
+  chip: string
   chipPosition: string
 }
