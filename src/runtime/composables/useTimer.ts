@@ -2,16 +2,16 @@ import { ref, computed } from 'vue-demi'
 import { useTimestamp } from '@vueuse/core'
 import type { UseTimestampOptions } from '@vueuse/core'
 
-export function useTimer (cb: (...args: unknown[]) => any, interval: number, options: UseTimestampOptions<true> = { controls: true }) {
+export function useTimer (cb: (...args: unknown[]) => any, interval: number, options?: UseTimestampOptions<true>) {
   let timer: number | null = null
-  const timestamp = useTimestamp(options)
+  const { pause: tPause, resume: tResume, timestamp } = useTimestamp({ ...(options || {}), controls: true })
   const startTime = ref<number | null>(null)
 
   const remaining = computed(() => {
     if (!startTime.value) {
-      return
+      return 0
     }
-    return interval - (timestamp.timestamp.value - startTime.value)
+    return interval - (timestamp.value - startTime.value)
   })
 
   function set (...args: unknown[]) {
@@ -38,18 +38,18 @@ export function useTimer (cb: (...args: unknown[]) => any, interval: number, opt
 
   function stop () {
     clear()
-    timestamp.pause()
+    tPause()
   }
 
   function pause () {
     clear()
-    timestamp.pause()
+    tPause()
   }
 
   function resume () {
-    startTime.value = (startTime.value || 0) + (Date.now() - timestamp.timestamp.value)
-    timestamp.resume()
     set()
+    tResume()
+    startTime.value = (startTime.value || 0) + (Date.now() - timestamp.value)
   }
 
   start()
