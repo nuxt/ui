@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.7](https://github.com/nuxtlabs/ui/compare/v1.2.6...v1.2.7) (2023-04-04)
+
+
+### Bug Fixes
+
+* **useTimer:** remaining after pause ([aafdfdb](https://github.com/nuxtlabs/ui/commit/aafdfdb59c365c542f93703dd52b4306ac935040))
+
 ### [1.2.6](https://github.com/nuxtlabs/ui/compare/v1.2.5...v1.2.6) (2023-04-04)
 
 ### [1.2.5](https://github.com/nuxtlabs/ui/compare/v1.2.4...v1.2.5) (2023-04-04)
