@@ -34,7 +34,6 @@
     "@popperjs/core": "^2.11.7",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
-    "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.9",
     "@vueuse/core": "^9.13.0",
     "@vueuse/integrations": "^9.13.0",
