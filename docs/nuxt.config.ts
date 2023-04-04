@@ -10,6 +10,7 @@ export default defineNuxtConfig({
       }
     }
   },
+  // @ts-ignore
   modules: [
     // @ts-ignore
     nuxtUI
