@@ -1,9 +1,10 @@
 import { ref, computed } from 'vue-demi'
 import { useTimestamp } from '@vueuse/core'
+import type { UseTimestampOptions } from '@vueuse/core'
 
-export function useTimer (cb: (...args: unknown[]) => any, interval: number) {
+export function useTimer (cb: (...args: unknown[]) => any, interval: number, options: UseTimestampOptions<true> = { controls: true }) {
   let timer: number | null = null
-  const timestamp = useTimestamp({ controls: true })
+  const timestamp = useTimestamp(options)
   const startTime = ref<number | null>(null)
 
   const remaining = computed(() => {
