@@ -224,12 +224,12 @@ export default function defaultPreset (variantColors: string[]) {
       base: 'u-bg-white shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none overflow-y-auto py-1 max-h-60',
       input: 'relative block w-full focus:ring-transparent text-sm px-4 py-2 u-text-gray-700 border-l-0 u-bg-white border-t-0 border-r-0 u-border-gray-200 focus:u-border-gray-200',
       option: {
-        base: 'cursor-default select-none relative py-2 pl-4 pr-10 text-sm group',
+        base: 'cursor-default select-none relative py-2 text-sm group',
         container: 'flex items-center gap-3',
         active: 'text-white bg-primary-600',
         inactive: 'u-text-gray-900',
-        selected: 'font-semibold',
-        unselected: 'font-normal',
+        selected: 'font-semibold pl-4 pr-10',
+        unselected: 'font-normal px-4',
         disabled: 'cursor-not-allowed opacity-50',
         empty: 'text-sm u-text-gray-400 px-4 py-2',
         icon: {
