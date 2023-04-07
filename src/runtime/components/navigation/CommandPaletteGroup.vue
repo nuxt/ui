@@ -89,7 +89,7 @@ const label = computed(() => {
   return typeof label === 'function' ? label(props.query) : label
 })
 
-function highlight (text, { indices, value }: { indices: number[][], value:string }): string {
+function highlight (text: string, { indices, value }: { indices: number[][], value:string }): string {
   if (text === value) {
     return ''
   }
