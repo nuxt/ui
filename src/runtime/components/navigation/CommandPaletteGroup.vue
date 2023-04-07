@@ -28,11 +28,13 @@
 
             <div class="flex items-center gap-1.5 min-w-0" :class="{ 'opacity-50': command.disabled }">
               <slot :name="`${group.key}-command`" :group="group" :command="command">
-                <span v-if="command.prefix" class="u-text-gray-400">{{ command.prefix }}</span>
+                <span v-if="command.prefix" class="flex-shrink-0" :class="command.prefixClass || 'u-text-gray-400'">{{ command.prefix }}</span>
+
+                <span class="truncate" :class="{ 'flex-none': command.suffix || command.matches?.length }">{{ command[commandAttribute] }}</span>
+
                 <!-- eslint-disable-next-line vue/no-v-html -->
-                <span v-if="command.matches?.length" class="truncate" :class="{ 'flex-none': command.suffix }" v-html="highlight(command.matches[0])" />
-                <span v-else class="truncate" :class="{ 'flex-none': command.suffix }">{{ command[commandAttribute] }}</span>
-                <span v-if="command.suffix" class="u-text-gray-400 truncate">{{ command.suffix }}</span>
+                <span v-if="command.matches?.length" class="truncate" :class="command.suffixClass || 'u-text-gray-400'" v-html="highlight(command[commandAttribute], command.matches[0])" />
+                <span v-else-if="command.suffix" class="truncate" :class="command.suffixClass || 'u-text-gray-400'">{{ command.suffix }}</span>
               </slot>
             </div>
           </div>
@@ -87,13 +89,36 @@ const label = computed(() => {
   return typeof label === 'function' ? label(props.query) : label
 })
 
-function highlight ({ indices, value }: { indices: number[][], value:string }, i = 1): string {
-  const pair = indices[indices.length - i]
-  if (!pair) {
-    return value
+function highlight (text, { indices, value }: { indices: number[][], value:string }): string {
+  if (text === value) {
+    return ''
   }
 
-  return `${highlight({ indices, value: value.substring(0, pair[0]) }, i + 1)}<mark>${value.substring(pair[0], pair[1] + 1)}</mark>${value.substring(pair[1] + 1)}`
+  let content = ''
+  let nextUnhighlightedIndiceStartingIndex = 0
+
+  indices.forEach((indice) => {
+    const lastIndiceNextIndex = indice[1] + 1
+    const isMatched = (lastIndiceNextIndex - indice[0]) >= props.query.length
+
+    content += [
+      value.substring(nextUnhighlightedIndiceStartingIndex, indice[0]),
+      isMatched && '<mark>',
+      value.substring(indice[0], lastIndiceNextIndex),
+      isMatched && '</mark>'
+    ].filter(Boolean).join('')
+
+    nextUnhighlightedIndiceStartingIndex = lastIndiceNextIndex
+  })
+
+  content += value.substring(nextUnhighlightedIndiceStartingIndex)
+
+  const index = content.indexOf('<mark>')
+  if (index > 60) {
+    content = `...${content.substring(index - 60)}`
+  }
+
+  return content
 }
 </script>
 
