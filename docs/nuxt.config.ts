@@ -1,30 +1,34 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
-import nuxtUI from '../src/module'
+import ui from '../src/module'
+import preset from './ui'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
-  app: {
-    head: {
-      htmlAttrs: {
-        lang: 'en'
-      }
-    }
-  },
-  // @ts-ignore
   modules: [
     // @ts-ignore
-    nuxtUI
+    ui,
+    '@nuxthq/studio',
+    '@vueuse/nuxt',
+    '@nuxt/content',
+    '@nuxtjs/plausible',
+    'nuxt-lodash'
   ],
-  components: {
-    global: true
+  content: {
+    documentDriven: true,
+    highlight: {
+      theme: {
+        dark: 'one-dark-pro',
+        default: 'one-dark-pro'
+      },
+      preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown', 'yaml', 'bash', 'ini']
+    }
   },
   ui: {
     colors: {
-      primary: 'blue',
-      gray: 'zinc'
+      primary: 'sky',
+      gray: 'slate'
     },
-    preset: {
-    },
+    preset,
     icons: ['heroicons', 'mdi'],
     tailwindcss: {
       theme: {
@@ -35,5 +39,8 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+  typescript: {
+    strict: false
   }
 })

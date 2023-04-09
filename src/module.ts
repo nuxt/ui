@@ -100,8 +100,12 @@ export default defineNuxtModule<ModuleOptions>({
         pattern: new RegExp(`bg-(${safeColorsAsRegex})-400`)
       },
       {
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(100|600|700)`),
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(100|400|500|600)`),
         variants: ['hover', 'disabled', 'dark']
+      },
+      {
+        pattern: new RegExp(`outline-(${safeColorsAsRegex})-(500|600)`),
+        variants: ['focus-visible', 'dark']
       },
       {
         pattern: new RegExp(`text-(${safeColorsAsRegex})-(100|800)`),
@@ -124,7 +128,7 @@ export default defineNuxtModule<ModuleOptions>({
       addTemplate({
         filename: 'ui.d.ts',
         write: true,
-        getContents: () => 'declare const d: any; export default d;'
+        getContents: () => `declare const d: ${JSON.stringify(ui)}; export default d;`
       })
     })
 

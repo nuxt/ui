@@ -36,15 +36,16 @@ export default function defaultPreset (variantColors: string[]) {
     },
     variant: {
       ...variantColors.reduce((acc: any, color: string) => {
-        acc[color] = `shadow-sm border border-transparent text-white bg-${color}-600 hover:bg-${color}-700 disabled:bg-${color}-600 focus:ring-2 focus:ring-offset-2 focus:ring-${color}-500`
+        acc[color] = `shadow-sm border border-transparent text-white bg-${color}-600 dark:bg-${color}-500 hover:bg-${color}-500 dark:hover:bg-${color}-400 disabled:bg-${color}-600 dark:disabled:bg-${color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-600 dark:focus-visible:outline-${color}-500`
         return acc
       }, {}),
-      secondary: 'border border-transparent text-primary-700 bg-primary-100 hover:bg-primary-200 disabled:bg-primary-100 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
-      white: 'shadow-sm border u-border-gray-300 u-text-gray-700 u-bg-white hover:u-bg-gray-50 disabled:u-bg-white focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
-      gray: 'shadow-sm border u-border-gray-300 u-text-gray-700 u-bg-gray-50 hover:u-bg-gray-100 disabled:u-bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
-      black: 'shadow-sm border border-transparent u-text-white u-bg-gray-800 hover:u-bg-gray-900 disabled:u-bg-gray-800 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
-      transparent: 'border border-transparent u-text-gray-500 hover:u-text-gray-700 focus:u-text-gray-700 disabled:hover:u-text-gray-500',
-      link: 'border border-transparent text-primary-500 hover:text-primary-700 focus:text-primary-700'
+      ...variantColors.reduce((acc: any, color: string) => {
+        acc[`${color}-soft`] = `shadow-sm border border-transparent text-${color}-600 bg-${color}-50 dark:bg-${color}-500 hover:bg-${color}-100 dark:hover:bg-${color}-400 disabled:bg-${color}-50 dark:disabled:bg-${color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-600 dark:focus-visible:outline-${color}-500`
+        return acc
+      }, {}),
+      white: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-500',
+      gray: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50 disabled:bg-gray-50 dark:disabled:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-500',
+      transparent: 'border border-transparent u-text-gray-500 hover:u-text-gray-700 focus:u-text-gray-700 disabled:hover:u-text-gray-500'
     },
     icon: {
       base: 'flex-shrink-0',
@@ -163,7 +164,7 @@ export default function defaultPreset (variantColors: string[]) {
       }
     },
     appearance: {
-      default: 'u-bg-white u-text-gray-700 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 border u-border-gray-300 rounded-md shadow-sm',
+      default: 'bg-white dark:bg-gray-900 u-text-gray-700 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 border u-border-gray-300 rounded-md shadow-sm',
       none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
     },
     icon: {
@@ -221,8 +222,8 @@ export default function defaultPreset (variantColors: string[]) {
     list: {
       container: 'z-20',
       width: 'w-full',
-      base: 'u-bg-white shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none overflow-y-auto py-1 max-h-60',
-      input: 'relative block w-full focus:ring-transparent text-sm px-4 py-2 u-text-gray-700 border-l-0 u-bg-white border-t-0 border-r-0 u-border-gray-200 focus:u-border-gray-200',
+      base: 'bg-white dark:bg-gray-900 shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none overflow-y-auto py-1 max-h-60',
+      input: 'relative block w-full focus:ring-transparent text-sm px-4 py-2 u-text-gray-700 border-l-0 bg-white dark:bg-gray-900 border-t-0 border-r-0 u-border-gray-200 focus:u-border-gray-200',
       option: {
         base: 'cursor-default select-none relative py-2 text-sm group',
         container: 'flex items-center gap-3',
@@ -253,7 +254,7 @@ export default function defaultPreset (variantColors: string[]) {
 
   const radio = {
     wrapper: 'relative flex items-start',
-    base: 'h-4 w-4 text-primary-600 focus:ring-2 focus:ring-offset-2 u-bg-white dark:checked:bg-current dark:checked:border-transparent focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-black u-border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed',
+    base: 'h-4 w-4 text-primary-600 focus:ring-2 focus:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-black u-border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed',
     label: 'font-medium u-text-gray-700',
     required: 'text-red-400',
     help: 'u-text-gray-500'
@@ -266,7 +267,7 @@ export default function defaultPreset (variantColors: string[]) {
 
   const card = {
     base: 'overflow-hidden',
-    background: 'u-bg-white',
+    background: 'bg-white dark:bg-gray-900',
     border: 'u-border-gray-200',
     ring: 'ring-1 u-ring-gray-200',
     rounded: 'rounded-md',
@@ -281,7 +282,7 @@ export default function defaultPreset (variantColors: string[]) {
     inner: 'fixed inset-0 overflow-y-auto',
     container: 'flex min-h-full items-end sm:items-center justify-center p-4 sm:p-0 text-center',
     base: 'relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle w-full',
-    background: 'u-bg-white',
+    background: 'bg-white dark:bg-gray-900',
     overlay: {
       background: 'bg-gray-500/75 dark:bg-gray-600/75',
       transition: {
@@ -348,7 +349,7 @@ export default function defaultPreset (variantColors: string[]) {
     },
     badge: {
       base: 'ml-auto inline-block py-0.5 px-3 text-xs rounded-full',
-      active: 'u-bg-white',
+      active: 'bg-white dark:bg-gray-900',
       inactive: 'u-bg-gray-100 u-text-gray-600 group-hover:u-bg-gray-200'
     }
   }
@@ -366,7 +367,7 @@ export default function defaultPreset (variantColors: string[]) {
     wrapper: 'relative inline-flex text-left',
     container: 'z-20',
     width: 'w-48',
-    background: 'u-bg-white',
+    background: 'bg-white dark:bg-gray-900',
     shadow: 'shadow-lg',
     rounded: 'rounded-md',
     ring: 'ring-1 u-ring-gray-200',
@@ -401,13 +402,6 @@ export default function defaultPreset (variantColors: string[]) {
     base: 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm',
     active: 'border-primary-500 text-primary-600',
     inactive: 'border-transparent u-text-gray-500 hover:u-text-gray-700 hover:u-border-gray-300'
-  }
-
-  const pills = {
-    wrapper: 'flex items-center gap-4',
-    base: 'px-3 py-2 font-medium text-sm rounded-md',
-    active: 'u-bg-gray-100 u-text-gray-700',
-    inactive: 'u-text-gray-500 hover:u-text-gray-700'
   }
 
   const avatar = {
@@ -473,7 +467,7 @@ export default function defaultPreset (variantColors: string[]) {
       }
     },
     base: 'relative flex-1 flex flex-col w-full focus:outline-none',
-    background: 'u-bg-white',
+    background: 'bg-white dark:bg-gray-900',
     width: 'max-w-md',
     header: 'flex items-center justify-between flex-shrink-0 px-4 sm:px-6 h-16 border-b u-border-gray-200',
     transition: {
@@ -483,7 +477,7 @@ export default function defaultPreset (variantColors: string[]) {
   }
 
   const notification = {
-    background: 'u-bg-white',
+    background: 'bg-white dark:bg-gray-900',
     shadow: 'shadow-lg',
     rounded: 'rounded-lg',
     ring: 'ring-1 u-ring-gray-200',
@@ -521,7 +515,7 @@ export default function defaultPreset (variantColors: string[]) {
     wrapper: 'relative inline-flex',
     container: 'z-20',
     width: 'max-w-xs',
-    background: 'u-bg-white',
+    background: 'bg-white dark:bg-gray-900',
     shadow: 'shadow',
     rounded: 'rounded',
     ring: 'ring-1 u-ring-gray-200',
@@ -544,7 +538,7 @@ export default function defaultPreset (variantColors: string[]) {
     wrapper: 'relative',
     container: 'z-20',
     width: '',
-    background: 'u-bg-white',
+    background: 'bg-white dark:bg-gray-900',
     shadow: 'shadow-lg',
     rounded: 'rounded-md',
     ring: 'ring-1 u-ring-gray-200',
@@ -566,7 +560,7 @@ export default function defaultPreset (variantColors: string[]) {
     wrapper: 'relative',
     container: 'z-20',
     width: '',
-    background: 'u-bg-white',
+    background: 'bg-white dark:bg-gray-900',
     shadow: 'shadow-lg',
     rounded: 'rounded-md',
     ring: 'ring-1 u-ring-gray-200',
@@ -635,7 +629,6 @@ export default function defaultPreset (variantColors: string[]) {
     alertDialog,
     dropdown,
     tabs,
-    pills,
     avatar,
     avatarGroup,
     slideover,
