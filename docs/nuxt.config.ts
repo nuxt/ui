@@ -7,11 +7,12 @@ export default defineNuxtConfig({
   modules: [
     // @ts-ignore
     ui,
-    '@nuxthq/studio',
     '@vueuse/nuxt',
     '@nuxt/content',
     '@nuxtjs/plausible',
-    'nuxt-lodash'
+    '@nuxthq/studio',
+    'nuxt-lodash',
+    'nuxt-component-meta'
   ],
   content: {
     documentDriven: true,
@@ -24,6 +25,7 @@ export default defineNuxtConfig({
     }
   },
   ui: {
+    global: true,
     colors: {
       primary: 'sky',
       gray: 'slate'

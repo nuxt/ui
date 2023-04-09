@@ -8,7 +8,7 @@
       {{ title }}
     </p>
 
-    <p v-if="$slots.default" class="text-sm font-normal u-text-gray-500">
+    <p v-if="$slots.default" class="text-sm font-normal u-text-gray-500 line-clamp-2">
       <ContentSlot :use="$slots.default" />
     </p>
   </NuxtLink>

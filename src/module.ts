@@ -69,7 +69,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults,
   async setup (options, nuxt) {
-    const { preset = {}, prefix, colors: { primary = 'indigo', gray = 'gray' } = {}, tailwindcss: { theme = {} } = {} } = options
+    const { preset = {}, prefix, colors: { primary = 'indigo', gray = 'gray' } = {}, tailwindcss: { theme = {} } = {}, global } = options
 
     const { resolve } = createResolver(import.meta.url)
 
@@ -97,23 +97,30 @@ export default defineNuxtModule<ModuleOptions>({
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
       tailwindConfig.safelist.push(...[{
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-400`)
-      },
-      {
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(100|400|500|600)`),
-        variants: ['hover', 'disabled', 'dark']
-      },
-      {
-        pattern: new RegExp(`outline-(${safeColorsAsRegex})-(500|600)`),
-        variants: ['focus-visible', 'dark']
-      },
-      {
-        pattern: new RegExp(`text-(${safeColorsAsRegex})-(100|800)`),
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(100|400)`)
+      }, {
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-700`),
         variants: ['dark']
-      },
-      {
-        pattern: new RegExp(`ring-(${safeColorsAsRegex})-(500)`),
-        variants: ['focus']
+      }, {
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-600`),
+        variants: ['disabled']
+      }, {
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-500`),
+        variants: ['dark', 'hover', 'dark:disabled']
+      }, {
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-400`),
+        variants: ['dark:hover']
+      }, {
+        pattern: new RegExp(`outline-(${safeColorsAsRegex})-600`),
+        variants: ['focus-visible']
+      }, {
+        pattern: new RegExp(`outline-(${safeColorsAsRegex})-500`),
+        variants: ['dark:focus-visible']
+      }, {
+        pattern: new RegExp(`text-(${safeColorsAsRegex})-800`)
+      }, {
+        pattern: new RegExp(`text-(${safeColorsAsRegex})-100`),
+        variants: ['dark']
       }])
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
@@ -161,31 +168,37 @@ export default defineNuxtModule<ModuleOptions>({
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'elements'),
       prefix,
+      global,
       watch: false
     })
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'feedback'),
       prefix,
+      global,
       watch: false
     })
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'forms'),
       prefix,
+      global,
       watch: false
     })
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'layout'),
       prefix,
+      global,
       watch: false
     })
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'navigation'),
       prefix,
+      global,
       watch: false
     })
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'overlays'),
       prefix,
+      global,
       watch: false
     })
 
