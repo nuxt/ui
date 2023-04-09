@@ -5,12 +5,8 @@
 <script setup lang="ts">
 import $ui from '#build/ui'
 
-const props = defineProps({
-  name: {
-    type: String,
-    required: true
-  }
-})
+const route = useRoute()
+const name = useCamelCase(route.params.slug[1])
 
-const preset = $ui[props.name]
+const preset = $ui[name]
 </script>

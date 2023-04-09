@@ -17,10 +17,6 @@
 import { transformContent } from '@nuxt/content/transformers'
 
 const props = defineProps({
-  name: {
-    type: String,
-    required: true
-  },
   padding: {
     type: Boolean,
     default: true
@@ -35,7 +31,8 @@ const props = defineProps({
   }
 })
 
-const name = `U${useCapitalize(props.name)}`
+const route = useRoute()
+const name = `U${useUpperFirst(useCamelCase(route.params.slug[1]))}`
 
 const componentProps = toRef(props, 'props')
 const fullProps = computed(() => ({ ...props.baseProps, ...componentProps.value }))

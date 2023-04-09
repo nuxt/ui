@@ -6,6 +6,7 @@
           <th>Name</th>
           <th>Type</th>
           <th>Default</th>
+          <th>Description</th>
           <th class="text-center">
             Required
           </th>
@@ -16,6 +17,7 @@
           <td><code>{{ prop.name }}</code></td>
           <td><code>{{ prop.type }}</code></td>
           <td><code v-if="prop.default">{{ prop.default }}</code></td>
+          <td>{{ prop.description }}</td>
           <td class="text-center">
             <UIcon v-if="prop.required" name="i-heroicons-check" class="w-4 h-4 text-primary-500 dark:text-primary-400 align-middle" />
           </td>
@@ -26,16 +28,12 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  name: {
-    type: String,
-    required: true
-  }
-})
-
-const name = `U${useCapitalize(props.name)}`
+const route = useRoute()
+const name = `U${useUpperFirst(useCamelCase(route.params.slug[1]))}`
 
 const { data: meta } = await useAsyncData(`${name}-meta`, () => $fetch(`/api/component-meta/${name}`))
+
+console.log('meta.value', meta.value)
 </script>
 
 <script lang="ts">
