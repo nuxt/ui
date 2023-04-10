@@ -1,41 +1,44 @@
 <template>
-  <div class="[&>pre]:!rounded-t-none">
-    <div v-if="propsToSelect.length" class="relative flex border border-gray-200 dark:border-gray-700 rounded-t-md overflow-hidden">
-      <div v-for="prop in propsToSelect" :key="prop.name" class="font-medium bg-gray-50 dark:bg-gray-800 border-r border-r-gray-200 dark:border-r-gray-700">
-        <div v-if="prop.type === 'boolean'" class="px-4 py-1.5 flex">
-          <UToggle v-model="componentProps[prop.name]" />
-        </div>
+  <div>
+    <div v-if="propsToSelect.length" class="relative flex border border-gray-200 dark:border-gray-700 rounded-t-md overflow-hidden not-prose">
+      <div v-for="prop in propsToSelect" :key="prop.name" class="flex flex-col gap-0.5 justify-between py-1.5 font-medium bg-gray-50 dark:bg-gray-800 border-r border-r-gray-200 dark:border-r-gray-700">
+        <label :for="prop.name" class="block text-xs px-4 font-medium u-text-gray-400 -my-px">{{ useCamelCase(prop.name) }}</label>
+        <UCheckbox
+          v-if="prop.type === 'boolean'"
+          v-model="componentProps[prop.name]"
+          :name="prop.name"
+          appearance="none"
+          class="justify-center"
+        />
         <USelect
           v-else-if="prop.type === 'string' && prop.options.length"
           v-model="componentProps[prop.name]"
           :options="prop.options"
           :name="prop.name"
-          :placeholder="prop.name"
           appearance="none"
-
-          tabindex="-1"
-        >
-          {{ componentProps[prop.name] }}
-        </USelect>
+          custom-class="!py-0"
+        />
         <UInput
           v-else
           v-model="componentProps[prop.name]"
+          :type="prop.type === 'number' ? 'number' : 'text'"
           :name="prop.name"
-          :placeholder="prop.name"
-          autocomplete="off"
           appearance="none"
+          autocomplete="off"
+          custom-class="!py-0"
         />
       </div>
     </div>
 
     <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md']">
-      <component :is="name" v-bind="fullProps">
-        <ContentSlot v-if="$slots.default" :use="$slots.default" unwrap="p" />
+      <component :is="name" v-model="vModel" v-bind="fullProps">
+        <ContentSlot v-if="$slots.default" :use="$slots.default" />
       </component>
+
+      <UButton v-if="trigger" label="Click" @click="vModel = true" />
     </div>
 
-    <ContentSlot v-if="$slots.code" :use="$slots.code" />
-    <ContentRenderer v-else :value="ast" class="[&>pre]:!rounded-t-none" />
+    <ContentRenderer :value="ast" class="[&>pre]:!rounded-t-none [&>pre]:whitespace-pre-wrap" />
   </div>
 </template>
 
@@ -72,9 +75,14 @@ const props = defineProps({
   excludeProps: {
     type: Array,
     default: () => []
+  },
+  trigger: {
+    type: Boolean,
+    default: false
   }
 })
 
+const baseProps = reactive({ ...props.baseProps })
 const componentProps = reactive({ ...props.props })
 
 const route = useRoute()
@@ -89,6 +97,12 @@ const { data: meta } = await useAsyncData(`${name}-meta`, () => $fetch(`/api/com
 const ui = computed(() => defu({}, props.ui, $ui[camelName]))
 
 const fullProps = computed(() => ({ ...props.baseProps, ...componentProps }))
+const vModel = computed({
+  get: () => baseProps.modelValue,
+  set: (value) => {
+    baseProps.modelValue = value
+  }
+})
 
 const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   if (props.excludeProps.includes(key)) {
@@ -111,9 +125,13 @@ const code = computed(() => {
   let code = `\`\`\`html
 <${name}`
   for (const [key, value] of Object.entries(componentProps)) {
+    if (!value) {
+      continue
+    }
+
     const prop = meta.value.meta.props.find((prop: any) => prop.name === key)
 
-    code += ` ${prop?.type === 'boolean' ? ':' : ''}${key === 'model-value' ? 'v-model' : useKebabCase(key)}="${value}"`
+    code += ` ${prop?.type === 'boolean' && value === 'false' ? ':' : ''}${key === 'modelValue' ? 'v-model' : useKebabCase(key)}${prop?.type === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${value}"`}`
   }
   if (props.code) {
     const lineBreaks = (props.code.match(/\n/g) || []).length

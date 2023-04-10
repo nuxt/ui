@@ -1,10 +1,12 @@
 import { h, computed } from 'vue'
+import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
 import Avatar from './Avatar.vue'
 import $ui from '#build/ui'
+import { defineNuxtComponent } from '#imports'
 
-export default defineComponent({
+export default defineNuxtComponent({
   props: {
     size: {
       type: String,
@@ -14,7 +16,7 @@ export default defineComponent({
       }
     },
     max: {
-      type: [Number, String],
+      type: Number,
       default: null
     },
     ui: {

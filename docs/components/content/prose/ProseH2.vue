@@ -3,7 +3,7 @@ defineProps<{ id: string }>()
 </script>
 
 <template>
-  <h2 :id="id" class="scroll-mt-[112px]">
+  <h2 :id="id" class="scroll-mt-[161px] lg:scroll-mt-[112px]">
     <NuxtLink :href="`#${id}`" class="group">
       <slot />
 

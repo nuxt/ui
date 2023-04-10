@@ -1,11 +1,14 @@
 <template>
   <div>
-    <nav class="sticky top-0 z-40 w-full backdrop-blur flex-none lg:z-50 border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75">
+    <nav class="sticky top-0 z-10 w-full backdrop-blur flex-none border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75">
       <UContainer padded>
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
-            <NuxtLink to="/" class="block font-bold text-lg u-text-gray-900">
-              @nuxthq/ui
+            <NuxtLink to="/" class="flex items-center gap-2 font-bold text-lg u-text-gray-900">
+              <img v-if="colorMode.value === 'dark'" src="/icon-dark.svg" class="w-6 h-6">
+              <img v-else src="/icon-light.svg" class="w-6 h-6">
+
+              nuxthq/ui
             </NuxtLink>
           </div>
 

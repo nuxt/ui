@@ -8,7 +8,7 @@
   >
     <Icon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     <slot>
-      <span :class="[truncate ? 'text-left break-all line-clamp-1' : '', compact ? 'hidden sm:block' : '']">
+      <span v-if="label" :class="[truncate ? 'text-left break-all line-clamp-1' : '', compact ? 'hidden sm:block' : '']">
         <span :class="[labelCompact && 'hidden sm:block']">{{ label }}</span>
         <span v-if="labelCompact" class="sm:hidden">{{ labelCompact }}</span>
       </span>
@@ -18,6 +18,7 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'fs'
 import { ref, computed, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
@@ -98,14 +99,6 @@ const props = defineProps({
     type: String,
     default: null
   },
-  leadingIconClass: {
-    type: String,
-    default: ''
-  },
-  trailingIconClass: {
-    type: String,
-    default: ''
-  },
   square: {
     type: Boolean,
     default: false
@@ -160,6 +153,7 @@ const buttonClass = computed(() => {
   return classNames(
     ui.value.base,
     ui.value.rounded,
+    ui.value.shadow,
     ui.value.size[props.size],
     ui.value[isSquare.value ? 'square' : (props.compact ? 'compact' : 'spacing')][props.size],
     ui.value.variant[props.variant],
@@ -188,7 +182,7 @@ const leadingIconClass = computed(() => {
     ui.value.icon.base,
     ui.value.icon.size[props.size],
     (!!slots.default || !!props.label?.length) && ui.value.icon.leading[props.compact ? 'compactSpacing' : 'spacing'][props.size],
-    props.leadingIconClass,
+    ui.value.icon.leading.base,
     props.loading && 'animate-spin'
   )
 })
@@ -198,7 +192,7 @@ const trailingIconClass = computed(() => {
     ui.value.icon.base,
     ui.value.icon.size[props.size],
     (!!slots.default || !!props.label?.length) && ui.value.icon.trailing[props.compact ? 'compactSpacing' : 'spacing'][props.size],
-    props.trailingIconClass,
+    ui.value.icon.trailing.base,
     props.loading && !isLeading.value && 'animate-spin'
   )
 })

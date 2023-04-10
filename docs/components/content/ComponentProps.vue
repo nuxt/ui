@@ -17,7 +17,12 @@
             <code v-if="prop.default && prop.default !== 'null'">{{ prop.default }}</code>
           </td>
           <td>
-            <code class="break-all">{{ prop.name === 'ui' ? 'object' : prop.type }}</code>
+            <a v-if="prop.name === 'ui'" href="#preset">
+              <code>object</code>
+            </a>
+            <code v-else class="break-all">
+              {{ prop.type }}
+            </code>
             <p v-if="prop.description" class="u-text-gray-500">
               {{ prop.description }}
             </p>

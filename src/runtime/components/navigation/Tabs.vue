@@ -23,7 +23,7 @@ import $ui from '#build/ui'
 defineProps({
   links: {
     type: Array as PropType<{ to: RouteLocationNormalized, exact: boolean, label: string }[]>,
-    required: true
+    default: () => []
   },
   wrapperClass: {
     type: String,

@@ -17,7 +17,7 @@
         <button :class="selectCustomClass" :disabled="disabled" type="button">
           <slot name="label">
             <span v-if="modelValue" class="block truncate">{{ (modelValue as any)[textAttribute] }}</span>
-            <span v-else class="block truncate u-text-gray-400">{{ placeholder }}</span>
+            <span v-else class="block truncate u-text-gray-400">{{ placeholder || '&nbsp;' }}</span>
           </slot>
           <slot name="icon">
             <span :class="iconWrapperClass">
@@ -139,7 +139,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: 'Select an option'
+    default: null
   },
   size: {
     type: String,

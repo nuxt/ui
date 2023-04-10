@@ -2,6 +2,7 @@ export default function defaultPreset (variantColors: string[]) {
   const button = {
     base: 'font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 focus:ring-offset-white dark:focus:ring-offset-gray-900',
     rounded: 'rounded-md',
+    shadow: 'shadow-sm',
     size: {
       xxs: 'text-xs',
       xs: 'text-xs',
@@ -36,12 +37,12 @@ export default function defaultPreset (variantColors: string[]) {
     },
     variant: {
       ...variantColors.reduce((acc: any, color: string) => {
-        acc[color] = `shadow-sm border border-transparent text-white bg-${color}-600 dark:bg-${color}-500 hover:bg-${color}-500 dark:hover:bg-${color}-400 disabled:bg-${color}-600 dark:disabled:bg-${color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-600 dark:focus-visible:outline-${color}-500`
+        acc[color] = `border border-transparent text-white bg-${color}-600 dark:bg-${color}-500 hover:bg-${color}-500 dark:hover:bg-${color}-400 disabled:bg-${color}-600 dark:disabled:bg-${color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-600 dark:focus-visible:outline-${color}-500`
         return acc
       }, {}),
-      white: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-500',
-      gray: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50 disabled:bg-gray-50 dark:disabled:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-500',
-      transparent: 'border border-transparent u-text-gray-500 hover:u-text-gray-700 focus:u-text-gray-700 disabled:hover:u-text-gray-500'
+      white: 'border u-border-gray-300 u-text-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-500',
+      gray: 'border u-border-gray-300 u-text-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50 disabled:bg-gray-50 dark:disabled:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-500',
+      transparent: 'border border-transparent u-text-gray-500 hover:u-text-gray-700 focus:u-text-gray-700 disabled:hover:u-text-gray-500 !shadow-none'
     },
     icon: {
       base: 'flex-shrink-0',
@@ -55,6 +56,7 @@ export default function defaultPreset (variantColors: string[]) {
         xl: 'h-5 w-5'
       },
       leading: {
+        base: '',
         spacing: {
           xxs: '-ml-0.5 mr-1',
           xs: '-ml-0.5 mr-1.5',
@@ -73,6 +75,7 @@ export default function defaultPreset (variantColors: string[]) {
         }
       },
       trailing: {
+        base: '',
         spacing: {
           xxs: 'ml-1 -mr-0.5',
           xs: 'ml-1.5 -mr-0.5',
@@ -91,6 +94,12 @@ export default function defaultPreset (variantColors: string[]) {
         }
       }
     }
+  }
+
+  const buttonGroup = {
+    wrapper: 'inline-flex',
+    rounded: 'rounded-md',
+    shadow: 'shadow-sm'
   }
 
   const badge = {
@@ -613,6 +622,7 @@ export default function defaultPreset (variantColors: string[]) {
     card,
     modal,
     button,
+    buttonGroup,
     badge,
     formGroup,
     input,
