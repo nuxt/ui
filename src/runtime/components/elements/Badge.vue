@@ -6,6 +6,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { PropType } from 'vue'
+import { defu } from 'defu'
 import { classNames } from '../../utils'
 import $ui from '#build/ui'
 
@@ -24,30 +26,24 @@ const props = defineProps({
       return Object.keys($ui.badge.variant).includes(value)
     }
   },
-  baseClass: {
-    type: String,
-    default: () => $ui.badge.base
-  },
-  rounded: {
-    type: Boolean,
-    default: false
-  },
   label: {
     type: String,
     default: null
+  },
+  ui: {
+    type: Object as PropType<Partial<typeof $ui.badge>>,
+    default: () => $ui.badge
   }
 })
 
+const ui = computed<Partial<typeof $ui.badge>>(() => defu({}, props.ui, $ui.badge))
+
 const badgeClass = computed(() => {
   return classNames(
-    props.baseClass,
-    $ui.badge.size[props.size],
-    $ui.badge.variant[props.variant],
-    props.rounded ? 'rounded-full' : 'rounded-md'
+    ui.value.base,
+    ui.value.rounded,
+    ui.value.size[props.size],
+    ui.value.variant[props.variant]
   )
 })
-</script>
-
-<script lang="ts">
-export default { name: 'UBadge' }
 </script>

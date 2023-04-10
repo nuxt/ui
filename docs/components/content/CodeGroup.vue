@@ -1,6 +1,6 @@
 <template>
-  <TabGroup as="div" class="bg-gray-50 dark:bg-gray-800 rounded-md" :selected-index="selectedTab" @change="changeTab">
-    <TabList class="flex bg-gray-100 dark:bg-gray-700/50 border u-border-gray-300 border-b-0 rounded-t-md overflow-hidden divide-x u-divide-gray-300 z-[1] relative  -mb-px">
+  <TabGroup as="div" :selected-index="selectedTab" @change="changeTab">
+    <TabList class="flex border border-gray-200 dark:border-gray-700 border-b-0 rounded-t-md overflow-hidden">
       <Tab
         v-for="(tab, index) in tabs"
         :key="index"
@@ -8,7 +8,7 @@
         as="template"
       >
         <button
-          class="px-4 py-2 focus:outline-none text-sm z-[1] relative border-b"
+          class="px-4 py-2 focus:outline-none text-sm border-b border-r border-r-gray-200 dark:border-r-gray-700"
           tabindex="-1"
           :class="[selected ? 'text-primary-500 dark:text-primary-400 bg-gray-50 dark:bg-gray-800 !border-b-primary-400' : '!border-b-transparent']"
         >

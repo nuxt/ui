@@ -1,13 +1,8 @@
 <template>
-  <div class="grid gap-8 sm:grid-cols-2">
-    <DocsPrevNextCard v-if="prev" :to="prev._path" :title="prev.navigation?.title || prev.title" :icon="prev.icon || 'i-heroicons-arrow-small-left'">
-      {{ prev.description }}
-    </DocsPrevNextCard>
+  <div class="flex items-center justify-between">
+    <UButton v-if="prev" :label="prev.navigation?.title || prev.title" :to="prev._path" icon="i-heroicons-arrow-small-left" variant="white" />
     <span v-else>&nbsp;</span>
-
-    <DocsPrevNextCard v-if="next" :to="next._path" :title="next.navigation?.title || next.title" :icon="next.icon || 'i-heroicons-arrow-small-right'" class="text-right">
-      {{ next.description }}
-    </DocsPrevNextCard>
+    <UButton v-if="next" :label="next.navigation?.title || next.title" :to="next._path" trailing-icon="i-heroicons-arrow-small-right" variant="white" />
   </div>
 </template>
 

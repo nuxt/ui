@@ -1,6 +1,6 @@
 export default function defaultPreset (variantColors: string[]) {
   const button = {
-    base: 'font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 focus:ring-offset-white dark:focus:ring-offset-black',
+    base: 'font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 focus:ring-offset-white dark:focus:ring-offset-gray-900',
     rounded: 'rounded-md',
     size: {
       xxs: 'text-xs',
@@ -95,6 +95,7 @@ export default function defaultPreset (variantColors: string[]) {
 
   const badge = {
     base: 'inline-flex items-center font-medium',
+    rounded: 'rounded-md',
     size: {
       sm: 'text-xs px-2 py-0.5',
       md: 'text-sm px-2.5 py-0.5',
@@ -250,7 +251,7 @@ export default function defaultPreset (variantColors: string[]) {
 
   const radio = {
     wrapper: 'relative flex items-start',
-    base: 'h-4 w-4 text-primary-600 focus:ring-2 focus:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-black u-border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed',
+    base: 'h-4 w-4 text-primary-600 focus:ring-2 focus:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-gray-900 u-border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed',
     label: 'font-medium u-text-gray-700',
     required: 'text-red-400',
     help: 'u-text-gray-500'
@@ -310,7 +311,7 @@ export default function defaultPreset (variantColors: string[]) {
   }
 
   const toggle = {
-    base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-black',
+    base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-gray-900',
     active: 'bg-primary-600',
     inactive: 'u-bg-gray-200',
     container: {
@@ -403,8 +404,8 @@ export default function defaultPreset (variantColors: string[]) {
   const avatar = {
     wrapper: 'relative inline-flex items-center justify-center',
     background: 'u-bg-gray-100',
-    rounded: 'rounded-md',
-    placeholder: 'text-xs font-medium leading-none u-text-black truncate',
+    rounded: 'rounded-full',
+    placeholder: 'text-xs font-medium leading-none u-text-gray-900 truncate',
     size: {
       xxxs: 'h-4 w-4 text-xs',
       xxs: 'h-5 w-5 text-xs',
@@ -417,7 +418,7 @@ export default function defaultPreset (variantColors: string[]) {
       '3xl': 'h-20 w-20 text-3xl'
     },
     chip: {
-      base: 'absolute block rounded-full ring-2 u-ring-white',
+      base: 'absolute block rounded-full ring-2 ring-white dark:ring-gray-900',
       position: {
         'top-right': 'top-0 right-0',
         'bottom-right': 'bottom-0 right-0',
@@ -445,7 +446,8 @@ export default function defaultPreset (variantColors: string[]) {
   }
 
   const avatarGroup = {
-    ring: 'ring-2 u-ring-white',
+    wrapper: 'flex flex-row-reverse',
+    ring: 'ring-2 ring-white dark:ring-gray-900',
     margin: '-mr-1.5 first:mr-0'
   }
 

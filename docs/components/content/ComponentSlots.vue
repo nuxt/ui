@@ -3,24 +3,13 @@
     <table>
       <thead>
         <tr>
-          <th>Prop</th>
-          <th>Default</th>
-          <th>Description</th>
+          <th>Slot</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="prop in meta.meta.props" :key="prop.name">
+        <tr v-for="slot in meta.meta.slots" :key="slot.name">
           <td class="whitespace-nowrap">
-            <code>{{ prop.name }}</code><span v-if="prop.required" class="font-bold text-red-500 dark:text-red-400">*</span>
-          </td>
-          <td class="whitespace-nowrap">
-            <code v-if="prop.default && prop.default !== 'null'">{{ prop.default }}</code>
-          </td>
-          <td>
-            <code class="break-all">{{ prop.name === 'ui' ? 'object' : prop.type }}</code>
-            <p v-if="prop.description" class="u-text-gray-500">
-              {{ prop.description }}
-            </p>
+            <code>{{ slot.name }}</code>
           </td>
         </tr>
       </tbody>
