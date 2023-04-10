@@ -263,7 +263,3 @@ defineExpose({
   results
 })
 </script>
-
-<script lang="ts">
-export default { name: 'UCommandPalette' }
-</script>

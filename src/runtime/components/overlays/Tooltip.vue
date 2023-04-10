@@ -141,7 +141,3 @@ function onMouseLeave () {
   }, props.closeDelay)
 }
 </script>
-
-<script lang="ts">
-export default { name: 'UTooltip' }
-</script>

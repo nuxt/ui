@@ -205,7 +205,3 @@ onUnmounted(() => {
   }
 })
 </script>
-
-<script lang="ts">
-export default { name: 'UNotification' }
-</script>

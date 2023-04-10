@@ -1,5 +1,5 @@
 <template>
-  <Menu v-slot="{ open }" as="div" :class="wrapperClass" @mouseleave="onMouseLeave">
+  <Menu v-slot="{ open }" as="div" :class="ui.wrapper" @mouseleave="onMouseLeave">
     <MenuButton
       ref="trigger"
       as="div"
@@ -15,10 +15,10 @@
       </slot>
     </MenuButton>
 
-    <div v-if="open && items.length" ref="container" :class="[containerClass, widthClass]" @mouseover="onMouseOver">
-      <transition appear v-bind="transitionClass">
-        <MenuItems :class="[baseClass, divideClass, ringClass, roundedClass, shadowClass, backgroundClass]" static>
-          <div v-for="(subItems, index) of items" :key="index" :class="groupClass">
+    <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
+      <transition appear v-bind="ui.transition">
+        <MenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background]" static>
+          <div v-for="(subItems, index) of items" :key="index" :class="ui.group">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
               <Component
                 v-bind="omit(item, ['click'])"
@@ -27,12 +27,12 @@
                 @click="item.click"
               >
                 <slot :name="item.slot" :item="item">
-                  <Icon v-if="item.icon" :name="item.icon" :class="[itemIconClass, item.iconClass]" />
-                  <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="itemAvatarClass" />
+                  <Icon v-if="item.icon" :name="item.icon" :class="[ui.item.icon, item.iconClass]" />
+                  <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="ui.item.avatar" />
 
                   <span class="truncate">{{ item.label }}</span>
 
-                  <span v-if="item.shortcuts?.length" :class="itemShortcutsClass">
+                  <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
                     <kbd v-for="shortcut of item.shortcuts" :key="shortcut" class="font-sans">{{ shortcut }}</kbd>
                   </span>
                 </slot>
@@ -92,78 +92,6 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  wrapperClass: {
-    type: String,
-    default: () => $ui.dropdown.wrapper
-  },
-  containerClass: {
-    type: String,
-    default: () => $ui.dropdown.container
-  },
-  widthClass: {
-    type: String,
-    default: () => $ui.dropdown.width
-  },
-  backgroundClass: {
-    type: String,
-    default: () => $ui.dropdown.background
-  },
-  shadowClass: {
-    type: String,
-    default: () => $ui.dropdown.shadow
-  },
-  roundedClass: {
-    type: String,
-    default: () => $ui.dropdown.rounded
-  },
-  ringClass: {
-    type: String,
-    default: () => $ui.dropdown.ring
-  },
-  divideClass: {
-    type: String,
-    default: () => $ui.dropdown.divide
-  },
-  baseClass: {
-    type: String,
-    default: () => $ui.dropdown.base
-  },
-  transitionClass: {
-    type: Object,
-    default: () => $ui.dropdown.transition
-  },
-  groupClass: {
-    type: String,
-    default: () => $ui.dropdown.group
-  },
-  itemBaseClass: {
-    type: String,
-    default: () => $ui.dropdown.item.base
-  },
-  itemActiveClass: {
-    type: String,
-    default: () => $ui.dropdown.item.active
-  },
-  itemInactiveClass: {
-    type: String,
-    default: () => $ui.dropdown.item.inactive
-  },
-  itemDisabledClass: {
-    type: String,
-    default: () => $ui.dropdown.item.disabled
-  },
-  itemIconClass: {
-    type: String,
-    default: () => $ui.dropdown.item.icon
-  },
-  itemAvatarClass: {
-    type: String,
-    default: () => $ui.dropdown.item.avatar
-  },
-  itemShortcutsClass: {
-    type: String,
-    default: () => $ui.dropdown.item.shortcuts
-  },
   popperOptions: {
     type: Object as PropType<PopperOptions>,
     default: () => ({})
@@ -175,8 +103,14 @@ const props = defineProps({
   closeDelay: {
     type: Number,
     default: 0
+  },
+  ui: {
+    type: Object as PropType<Partial<typeof $ui.dropdown>>,
+    default: () => $ui.dropdown
   }
 })
+
+const ui = computed<Partial<typeof $ui.dropdown>>(() => defu({}, props.ui, $ui.dropdown))
 
 const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.dropdown.popperOptions))
 
@@ -184,9 +118,9 @@ const [trigger, container] = usePopper(popperOptions.value)
 
 function resolveItemClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
   return classNames(
-    props.itemBaseClass,
-    active ? props.itemActiveClass : props.itemInactiveClass,
-    disabled && props.itemDisabledClass
+    ui.value.item.base,
+    active ? ui.value.item.active : ui.value.item.inactive,
+    disabled && ui.value.item.disabled
   )
 }
 
@@ -247,8 +181,4 @@ function onMouseLeave () {
     closeTimeout = null
   }, props.closeDelay)
 }
-</script>
-
-<script lang="ts">
-export default { name: 'UDropdown' }
 </script>

@@ -121,7 +121,3 @@ function highlight (text: string, { indices, value }: { indices: number[][], val
   return content
 }
 </script>
-
-<script lang="ts">
-export default { name: 'UCommandPaletteGroup' }
-</script>

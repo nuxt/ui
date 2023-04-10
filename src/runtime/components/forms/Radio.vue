@@ -104,7 +104,3 @@ const radioClass = computed(() => {
   )
 })
 </script>
-
-<script lang="ts">
-export default { name: 'URadio' }
-</script>

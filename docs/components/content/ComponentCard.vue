@@ -1,19 +1,31 @@
 <template>
   <div class="[&>pre]:!rounded-t-none">
     <div v-if="propsToSelect.length" class="relative flex border border-gray-200 dark:border-gray-700 rounded-t-md overflow-hidden">
-      <USelect
-        v-for="prop in propsToSelect"
-        :key="prop.name"
-        v-model="componentProps[prop.name]"
-        :name="prop.name"
-        :placeholder="prop.name"
-        :options="prop.options"
-        appearance="none"
-        class="font-medium bg-gray-50 dark:bg-gray-800 border-r border-r-gray-200 dark:border-r-gray-700"
-        tabindex="-1"
-      >
-        {{ componentProps[prop.name] }}
-      </USelect>
+      <div v-for="prop in propsToSelect" :key="prop.name" class="font-medium bg-gray-50 dark:bg-gray-800 border-r border-r-gray-200 dark:border-r-gray-700">
+        <div v-if="prop.type === 'boolean'" class="px-4 py-1.5 flex">
+          <UToggle v-model="componentProps[prop.name]" />
+        </div>
+        <USelect
+          v-else-if="prop.type === 'string' && prop.options.length"
+          v-model="componentProps[prop.name]"
+          :options="prop.options"
+          :name="prop.name"
+          :placeholder="prop.name"
+          appearance="none"
+
+          tabindex="-1"
+        >
+          {{ componentProps[prop.name] }}
+        </USelect>
+        <UInput
+          v-else
+          v-model="componentProps[prop.name]"
+          :name="prop.name"
+          :placeholder="prop.name"
+          autocomplete="off"
+          appearance="none"
+        />
+      </div>
     </div>
 
     <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md']">
@@ -56,6 +68,10 @@ const props = defineProps({
   code: {
     type: String,
     default: null
+  },
+  excludeProps: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -75,12 +91,17 @@ const ui = computed(() => defu({}, props.ui, $ui[camelName]))
 const fullProps = computed(() => ({ ...props.baseProps, ...componentProps }))
 
 const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
-  const options = Object.keys(useGet(ui.value, useKebabCase(key).replaceAll('-', '.')) || {})
-  if (!options.length) {
+  if (props.excludeProps.includes(key)) {
     return null
   }
 
+  const prop = meta.value.meta.props.find((prop: any) => prop.name === key)
+  const dottedKey = useKebabCase(key).replaceAll('-', '.')
+  const keys = useGet(ui.value, dottedKey, {})
+  const options = Object.keys(keys).filter(key => typeof keys[key] === 'string')
+
   return {
+    type: prop?.type || 'string',
     name: key,
     options
   }

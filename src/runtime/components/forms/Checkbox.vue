@@ -104,7 +104,3 @@ const inputClass = computed(() => {
   )
 })
 </script>
-
-<script lang="ts">
-export default { name: 'UCheckbox' }
-</script>

@@ -100,7 +100,3 @@ const linkClass = computed(() => {
   })[props.variant]
 })
 </script>
-
-<script lang="ts">
-export default { name: 'UAlert' }
-</script>

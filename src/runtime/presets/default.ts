@@ -369,11 +369,11 @@ export default function defaultPreset (variantColors: string[]) {
     rounded: 'rounded-md',
     ring: 'ring-1 u-ring-gray-200',
     base: 'focus:outline-none',
-    divide: 'divide-y u-divide-gray-100',
+    divide: 'divide-y u-divide-gray-200',
     group: 'py-1',
     item: {
       base: 'group flex items-center gap-3 px-4 py-2 text-sm w-full',
-      active: 'u-bg-gray-100 u-text-gray-900',
+      active: 'bg-gray-100 dark:bg-gray-800 u-text-gray-900',
       inactive: 'u-text-gray-700',
       disabled: 'cursor-not-allowed opacity-50',
       icon: 'h-5 w-5 u-text-gray-400 group-hover:u-text-gray-500 flex-shrink-0',

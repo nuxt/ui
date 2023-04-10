@@ -102,7 +102,3 @@ function onClose () {
   emit('close')
 }
 </script>
-
-<script lang="ts">
-export default { name: 'UAlertDialog' }
-</script>

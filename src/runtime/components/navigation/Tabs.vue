@@ -43,7 +43,3 @@ defineProps({
   }
 })
 </script>
-
-<script lang="ts">
-export default { name: 'UTabs' }
-</script>

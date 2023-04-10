@@ -58,10 +58,7 @@ const props = defineProps({
   },
   roundedClass: {
     type: String,
-    default: () => $ui.card.rounded,
-    validator (value: string) {
-      return !value || ['sm', 'md', 'lg', 'xl', '2xl', '3xl'].map(size => `rounded-${size}`).includes(value)
-    }
+    default: () => $ui.card.rounded
   },
   bodyClass: {
     type: String,

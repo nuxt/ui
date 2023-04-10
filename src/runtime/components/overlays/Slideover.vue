@@ -135,7 +135,3 @@ function close (value: boolean) {
   emit('close')
 }
 </script>
-
-<script lang="ts">
-export default { name: 'USlideover' }
-</script>

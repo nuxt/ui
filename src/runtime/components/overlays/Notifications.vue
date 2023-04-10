@@ -25,7 +25,3 @@ import { useState } from '#imports'
 const toast = useToast()
 const notifications = useState<ToastNotification[]>('notifications', () => [])
 </script>
-
-<script lang="ts">
-export default { name: 'UNotifications' }
-</script>

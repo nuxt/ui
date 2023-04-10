@@ -340,7 +340,3 @@ function onUpdate (event: any) {
   emit('update:modelValue', event)
 }
 </script>
-
-<script lang="ts">
-export default { name: 'USelectCustom' }
-</script>

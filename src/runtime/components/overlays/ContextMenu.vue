@@ -85,7 +85,3 @@ const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions
 
 const [, container] = usePopper(popperOptions.value, virtualElement)
 </script>
-
-<script lang="ts">
-export default { name: 'UContextMenu' }
-</script>

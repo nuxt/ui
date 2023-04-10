@@ -21,6 +21,7 @@
 import { ref, computed, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
+import { defu } from 'defu'
 import NuxtLink from '#app/components/nuxt-link'
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
@@ -77,10 +78,6 @@ const props = defineProps({
     type: String,
     default: null
   },
-  loadingIcon: {
-    type: String,
-    default: () => $ui.button.icon.loading
-  },
   trailing: {
     type: Boolean,
     default: false
@@ -101,22 +98,6 @@ const props = defineProps({
     type: String,
     default: null
   },
-  rounded: {
-    type: Boolean,
-    default: false
-  },
-  roundedClass: {
-    type: String,
-    default: () => $ui.button.rounded
-  },
-  baseClass: {
-    type: String,
-    default: () => $ui.button.base
-  },
-  iconBaseClass: {
-    type: String,
-    default: () => $ui.button.icon.base
-  },
   leadingIconClass: {
     type: String,
     default: ''
@@ -124,10 +105,6 @@ const props = defineProps({
   trailingIconClass: {
     type: String,
     default: ''
-  },
-  customClass: {
-    type: String,
-    default: null
   },
   square: {
     type: Boolean,
@@ -140,8 +117,14 @@ const props = defineProps({
   compact: {
     type: Boolean,
     default: false
+  },
+  ui: {
+    type: Object as PropType<Partial<typeof $ui.button>>,
+    default: () => $ui.button
   }
 })
+
+const ui = computed<Partial<typeof $ui.button>>(() => defu({}, props.ui, $ui.button))
 
 const slots = useSlots()
 
@@ -175,19 +158,18 @@ const isSquare = computed(() => props.square || (!slots.default && !props.label)
 
 const buttonClass = computed(() => {
   return classNames(
-    props.baseClass,
-    $ui.button.size[props.size],
-    $ui.button[isSquare.value ? 'square' : (props.compact ? 'compact' : 'spacing')][props.size],
-    $ui.button.variant[props.variant],
-    props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center',
-    props.rounded ? 'rounded-full' : props.roundedClass,
-    props.customClass
+    ui.value.base,
+    ui.value.rounded,
+    ui.value.size[props.size],
+    ui.value[isSquare.value ? 'square' : (props.compact ? 'compact' : 'spacing')][props.size],
+    ui.value.variant[props.variant],
+    props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
   )
 })
 
 const leadingIconName = computed(() => {
   if (props.loading) {
-    return props.loadingIcon
+    return ui.value.icon.loading
   }
 
   return props.leadingIcon || props.icon
@@ -195,7 +177,7 @@ const leadingIconName = computed(() => {
 
 const trailingIconName = computed(() => {
   if (props.loading && !isLeading.value) {
-    return props.loadingIcon
+    return ui.value.icon.loading
   }
 
   return props.trailingIcon || props.icon
@@ -203,9 +185,9 @@ const trailingIconName = computed(() => {
 
 const leadingIconClass = computed(() => {
   return classNames(
-    props.iconBaseClass,
-    $ui.button.icon.size[props.size],
-    (!!slots.default || !!props.label?.length) && $ui.button.icon.leading[props.compact ? 'compactSpacing' : 'spacing'][props.size],
+    ui.value.icon.base,
+    ui.value.icon.size[props.size],
+    (!!slots.default || !!props.label?.length) && ui.value.icon.leading[props.compact ? 'compactSpacing' : 'spacing'][props.size],
     props.leadingIconClass,
     props.loading && 'animate-spin'
   )
@@ -213,15 +195,11 @@ const leadingIconClass = computed(() => {
 
 const trailingIconClass = computed(() => {
   return classNames(
-    props.iconBaseClass,
-    $ui.button.icon.size[props.size],
-    (!!slots.default || !!props.label?.length) && $ui.button.icon.trailing[props.compact ? 'compactSpacing' : 'spacing'][props.size],
+    ui.value.icon.base,
+    ui.value.icon.size[props.size],
+    (!!slots.default || !!props.label?.length) && ui.value.icon.trailing[props.compact ? 'compactSpacing' : 'spacing'][props.size],
     props.trailingIconClass,
     props.loading && !isLeading.value && 'animate-spin'
   )
 })
-</script>
-
-<script lang="ts">
-export default { name: 'UButton' }
 </script>
