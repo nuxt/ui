@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="[&>pre]:!rounded-t-none [&>pre]:whitespace-pre-wrap">
     <div v-if="propsToSelect.length" class="relative flex border border-gray-200 dark:border-gray-700 rounded-t-md overflow-hidden not-prose">
       <div v-for="prop in propsToSelect" :key="prop.name" class="flex flex-col gap-0.5 justify-between py-1.5 font-medium bg-gray-50 dark:bg-gray-800 border-r border-r-gray-200 dark:border-r-gray-700">
         <label :for="prop.name" class="block text-xs px-4 font-medium u-text-gray-400 -my-px">{{ useCamelCase(prop.name) }}</label>
@@ -38,7 +38,8 @@
       <UButton v-if="trigger" label="Click" @click="vModel = true" />
     </div>
 
-    <ContentRenderer :value="ast" class="[&>pre]:!rounded-t-none [&>pre]:whitespace-pre-wrap" />
+    <ContentSlot v-if="$slots.code" :use="$slots.code" />
+    <ContentRenderer v-else :value="ast" class="[&>pre]:!rounded-t-none [&>pre]:whitespace-pre-wrap" />
   </div>
 </template>
 

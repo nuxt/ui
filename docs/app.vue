@@ -5,8 +5,7 @@
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
             <NuxtLink to="/" class="flex items-center gap-2 font-bold text-lg u-text-gray-900">
-              <img v-if="colorMode.value === 'dark'" src="/icon-dark.svg" class="w-6 h-6">
-              <img v-else src="/icon-light.svg" class="w-6 h-6">
+              <Logo class="w-6 h-6" />
 
               nuxthq/ui
             </NuxtLink>

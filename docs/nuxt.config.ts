@@ -18,8 +18,9 @@ export default defineNuxtConfig({
     documentDriven: true,
     highlight: {
       theme: {
-        dark: 'one-dark-pro',
-        default: 'one-dark-pro'
+        default: 'material-default',
+        light: 'material-lighter',
+        dark: 'material-darker'
       },
       preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown', 'yaml', 'bash', 'ini']
     }
