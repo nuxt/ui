@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'fs'
 import { ref, computed, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
