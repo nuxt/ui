@@ -48,9 +48,8 @@ export default defineNuxtComponent({
       }
 
       node.props.class = node.props.class || ''
-
+      node.props.class += ' !shadow-none'
       node.props.ui = node.props.ui || {}
-      node.props.ui.shadow = ''
       node.props.ui.rounded = ''
 
       if (index === 0) {

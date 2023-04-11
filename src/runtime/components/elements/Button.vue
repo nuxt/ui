@@ -153,7 +153,6 @@ const buttonClass = computed(() => {
   return classNames(
     ui.value.base,
     ui.value.rounded,
-    ui.value.shadow,
     ui.value.size[props.size],
     ui.value[isSquare.value ? 'square' : (props.compact ? 'compact' : 'spacing')][props.size],
     ui.value.variant[props.variant],
