@@ -1,4 +1,3 @@
-import defaultTheme from 'tailwindcss/defaultTheme'
 import ui from '../src/module'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
