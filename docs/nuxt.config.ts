@@ -1,6 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
 import ui from '../src/module'
-import preset from './ui'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
@@ -31,17 +30,7 @@ export default defineNuxtConfig({
       primary: 'sky',
       gray: 'slate'
     },
-    preset,
-    icons: ['heroicons', 'mdi'],
-    tailwindcss: {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter var', ...defaultTheme.fontFamily.sans]
-          }
-        }
-      }
-    }
+    icons: ['heroicons', 'mdi']
   },
   typescript: {
     strict: false

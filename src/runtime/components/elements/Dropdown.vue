@@ -63,7 +63,8 @@ import { classNames, omit } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import type { Avatar as AvatarType } from '../../types/avatar'
 import type { PopperOptions } from '../../types'
-import $ui from '#build/ui'
+import $appConfig from '#build/app.config'
+import { useAppConfig } from '#imports'
 
 const props = defineProps({
   items: {
@@ -105,14 +106,16 @@ const props = defineProps({
     default: 0
   },
   ui: {
-    type: Object as PropType<Partial<typeof $ui.dropdown>>,
-    default: () => $ui.dropdown
+    type: Object as PropType<Partial<typeof $appConfig.ui.dropdown>>,
+    default: () => $appConfig.ui.dropdown
   }
 })
 
-const ui = computed<Partial<typeof $ui.dropdown>>(() => defu({}, props.ui, $ui.dropdown))
+const appConfig = useAppConfig()
 
-const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.dropdown.popperOptions))
+const ui = computed<Partial<typeof appConfig.ui.dropdown>>(() => defu({}, props.ui, appConfig.ui.dropdown))
+
+const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, ui.value.popperOptions))
 
 const [trigger, container] = usePopper(popperOptions.value)
 

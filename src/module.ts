@@ -18,6 +18,12 @@ delete colors.coolGray
 // @ts-ignore
 delete colors.blueGray
 
+declare module 'nuxt/schema' {
+  interface AppConfigInput {
+    ui?: Partial<DefaultPreset>
+  }
+}
+
 interface ColorsOptions {
   /**
    * @default 'indigo'
@@ -31,8 +37,6 @@ interface ColorsOptions {
 }
 
 export interface ModuleOptions {
-  preset?: Partial<DefaultPreset>
-
   /**
    * @default 'u'
    */
@@ -51,7 +55,6 @@ export interface ModuleOptions {
 }
 
 const defaults = {
-  preset: {} as Partial<DefaultPreset>,
   prefix: 'u',
   colors: {
     primary: 'indigo',
@@ -74,7 +77,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults,
   async setup (options, nuxt) {
-    const { preset, prefix, colors: { primary = 'indigo', gray = 'gray' } = {}, tailwindcss: { theme = {} } = {}, global } = options
+    const { prefix, colors: { primary = 'indigo', gray = 'gray' } = {}, tailwindcss: { theme = {} } = {}, global } = options
 
     const { resolve } = createResolver(import.meta.url)
 
@@ -131,7 +134,9 @@ export default defineNuxtModule<ModuleOptions>({
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
 
-      const ui: object = defu(preset || {}, defaultPreset(variantColors))
+      const ui: object = defaultPreset(variantColors)
+
+      nuxt.options.appConfig.ui = ui
 
       addTemplate({
         filename: 'ui.mjs',

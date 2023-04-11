@@ -1,3 +1,7 @@
+---
+navigation: false
+---
+
 ## Breaking Changes
 
 Components now have a `ui` prop to override the entire preset instead of individual props.

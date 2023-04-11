@@ -13,7 +13,8 @@ import { ref, computed, watch } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import $appConfig from '#build/app.config'
+import { useAppConfig } from '#imports'
 
 const props = defineProps({
   src: {
@@ -32,30 +33,31 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($ui.avatar.size).includes(value)
+      return Object.keys($appConfig.ui.avatar.size).includes(value)
     }
   },
   chipVariant: {
     type: String,
     default: null,
     validator (value: string) {
-      return Object.keys($ui.avatar.chip.variant).includes(value)
+      return Object.keys($appConfig.ui.avatar.chip.variant).includes(value)
     }
   },
   chipPosition: {
     type: String,
     default: 'top-right',
     validator (value: string) {
-      return Object.keys($ui.avatar.chip.position).includes(value)
+      return Object.keys($appConfig.ui.avatar.chip.position).includes(value)
     }
   },
   ui: {
-    type: Object as PropType<Partial<typeof $ui.avatar>>,
-    default: () => $ui.avatar
+    type: Object as PropType<Partial<typeof $appConfig.ui.avatar>>,
+    default: () => $appConfig.ui.avatar
   }
 })
 
-const ui = computed<Partial<typeof $ui.avatar>>(() => defu({}, props.ui, $ui.avatar))
+const appConfig = useAppConfig()
+const ui = computed<Partial<typeof appConfig.ui.avatar>>(() => defu({}, props.ui, appConfig.ui.avatar))
 
 const wrapperClass = computed(() => {
   return classNames(

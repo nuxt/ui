@@ -3,8 +3,8 @@ import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
 import Avatar from './Avatar.vue'
-import $ui from '#build/ui'
-import { defineNuxtComponent } from '#imports'
+import $appConfig from '#build/app.config'
+import { defineNuxtComponent, useAppConfig } from '#imports'
 
 export default defineNuxtComponent({
   props: {
@@ -12,7 +12,7 @@ export default defineNuxtComponent({
       type: String,
       default: null,
       validator (value: string) {
-        return Object.keys($ui.avatar.size).includes(value)
+        return Object.keys($appConfig.ui.avatar.size).includes(value)
       }
     },
     max: {
@@ -20,12 +20,14 @@ export default defineNuxtComponent({
       default: null
     },
     ui: {
-      type: Object as PropType<Partial<typeof $ui.avatarGroup>>,
-      default: () => $ui.avatarGroup
+      type: Object as PropType<Partial<typeof $appConfig.ui.avatarGroup>>,
+      default: () => $appConfig.ui.avatarGroup
     }
   },
   setup (props, { slots }) {
-    const ui = computed<Partial<typeof $ui.avatarGroup>>(() => defu({}, props.ui, $ui.avatarGroup))
+    const appConfig = useAppConfig()
+
+    const ui = computed<Partial<typeof appConfig.ui.avatarGroup>>(() => defu({}, props.ui, appConfig.ui.avatarGroup))
 
     const children = computed(() => {
       let children = slots.default?.()

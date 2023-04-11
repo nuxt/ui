@@ -3,8 +3,6 @@
 </template>
 
 <script setup lang="ts">
-import $ui from '#build/ui'
-
 const props = defineProps({
   slug: {
     type: String,
@@ -12,9 +10,10 @@ const props = defineProps({
   }
 })
 
+const appConfig = useAppConfig()
 const route = useRoute()
 const slug = props.slug || route.params.slug[1]
 const camelName = useCamelCase(slug)
 
-const preset = $ui[camelName]
+const preset = appConfig.ui[camelName]
 </script>

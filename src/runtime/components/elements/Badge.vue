@@ -9,21 +9,22 @@ import { computed } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import $appConfig from '#build/app.config'
+import { useAppConfig } from '#imports'
 
 const props = defineProps({
   size: {
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($ui.badge.size).includes(value)
+      return Object.keys($appConfig.ui.badge.size).includes(value)
     }
   },
   variant: {
     type: String,
     default: 'primary',
     validator (value: string) {
-      return Object.keys($ui.badge.variant).includes(value)
+      return Object.keys($appConfig.ui.badge.variant).includes(value)
     }
   },
   label: {
@@ -31,12 +32,14 @@ const props = defineProps({
     default: null
   },
   ui: {
-    type: Object as PropType<Partial<typeof $ui.badge>>,
-    default: () => $ui.badge
+    type: Object as PropType<Partial<typeof $appConfig.ui.badge>>,
+    default: () => $appConfig.ui.badge
   }
 })
 
-const ui = computed<Partial<typeof $ui.badge>>(() => defu({}, props.ui, $ui.badge))
+const appConfig = useAppConfig()
+
+const ui = computed<Partial<typeof appConfig.ui.badge>>(() => defu({}, props.ui, appConfig.ui.badge))
 
 const badgeClass = computed(() => {
   return classNames(

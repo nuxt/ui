@@ -25,7 +25,8 @@ import { defu } from 'defu'
 import NuxtLink from '#app/components/nuxt-link'
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import $appConfig from '#build/app.config'
+import { useAppConfig } from '#imports'
 
 const props = defineProps({
   type: {
@@ -56,14 +57,14 @@ const props = defineProps({
     type: String,
     default: 'md',
     validator (value: string) {
-      return Object.keys($ui.button.size).includes(value)
+      return Object.keys($appConfig.ui.button.size).includes(value)
     }
   },
   variant: {
     type: String,
     default: 'primary',
     validator (value: string) {
-      return Object.keys($ui.button.variant).includes(value)
+      return Object.keys($appConfig.ui.button.variant).includes(value)
     }
   },
   icon: {
@@ -111,12 +112,14 @@ const props = defineProps({
     default: false
   },
   ui: {
-    type: Object as PropType<Partial<typeof $ui.button>>,
-    default: () => $ui.button
+    type: Object as PropType<Partial<typeof $appConfig.ui.button>>,
+    default: () => $appConfig.ui.button
   }
 })
 
-const ui = computed<Partial<typeof $ui.button>>(() => defu({}, props.ui, $ui.button))
+const appConfig = useAppConfig()
+
+const ui = computed<Partial<typeof appConfig.ui.button>>(() => defu({}, props.ui, appConfig.ui.button))
 
 const slots = useSlots()
 

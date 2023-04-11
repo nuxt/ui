@@ -46,7 +46,6 @@
 <script setup lang="ts">
 import { transformContent } from '@nuxt/content/transformers'
 import { defu } from 'defu'
-import $ui from '#build/ui'
 
 const props = defineProps({
   slug: {
@@ -86,6 +85,7 @@ const props = defineProps({
 const baseProps = reactive({ ...props.baseProps })
 const componentProps = reactive({ ...props.props })
 
+const appConfig = useAppConfig()
 const route = useRoute()
 const slug = props.slug || route.params.slug[1]
 const camelName = useCamelCase(slug)
@@ -95,7 +95,7 @@ const { data: meta } = await useAsyncData(`${name}-meta`, () => $fetch(`/api/com
 
 // Computed
 
-const ui = computed(() => defu({}, props.ui, $ui[camelName]))
+const ui = computed(() => defu({}, props.ui, appConfig.ui[camelName]))
 
 const fullProps = computed(() => ({ ...props.baseProps, ...componentProps }))
 const vModel = computed({

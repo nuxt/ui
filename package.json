@@ -28,7 +28,7 @@
     "@egoist/tailwindcss-icons": "^1.0.7",
     "@headlessui/vue": "1.7.10",
     "@iconify-json/heroicons": "^1.1.10",
-    "@nuxt/kit": "^3.3.3",
+    "@nuxt/kit": "^3.4.0",
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.6.5",
     "@popperjs/core": "^2.11.7",
@@ -53,12 +53,15 @@
     "@types/lodash-es": "^4.17.7",
     "@types/node": "^18.15.11",
     "@vueuse/nuxt": "^9.13.0",
-    "eslint": "^8.37.0",
-    "nuxt": "^3.3.3",
+    "eslint": "^8.38.0",
+    "nuxt": "^3.4.0",
     "nuxt-component-meta": "^0.5.1",
     "nuxt-lodash": "^2.4.1",
     "standard-version": "^9.5.0",
     "unbuild": "^1.2.0",
     "vue-tsc": "^1.2.0"
+  },
+  "resolutions": {
+    "consola": "^3.0.1"
   }
 }

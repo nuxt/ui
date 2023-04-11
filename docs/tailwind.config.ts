@@ -5,7 +5,8 @@ module.exports = {
   darkMode: 'class',
   content: [
     'docs/ui/*.ts',
-    'docs/content/**/*.md'
+    'docs/content/**/*.md',
+    'docs/app.config.ts'
   ],
   theme: {
     extend: {
