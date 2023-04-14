@@ -1,8 +1,9 @@
 import { h, computed } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import $appConfig from '#build/app.config'
 import { defineNuxtComponent, useAppConfig } from '#imports'
+
+const appConfig = useAppConfig()
 
 export default defineNuxtComponent({
   props: {
@@ -10,17 +11,15 @@ export default defineNuxtComponent({
       type: String,
       default: null,
       validator (value: string) {
-        return Object.keys($appConfig.ui.avatar.size).includes(value)
+        return Object.keys(appConfig.ui.avatar.size).includes(value)
       }
     },
     ui: {
-      type: Object as PropType<Partial<typeof $appConfig.ui.buttonGroup>>,
-      default: () => $appConfig.ui.buttonGroup
+      type: Object as PropType<Partial<typeof appConfig.ui.buttonGroup>>,
+      default: () => appConfig.ui.buttonGroup
     }
   },
   setup (props, { slots }) {
-    const appConfig = useAppConfig()
-
     const ui = computed<Partial<typeof appConfig.ui.buttonGroup>>(() => defu({}, props.ui, appConfig.ui.buttonGroup))
 
     const children = computed(() => {
