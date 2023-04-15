@@ -1,6 +1,5 @@
 import ui from '../src/module'
 
-// https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   modules: [
     // @ts-ignore
@@ -25,10 +24,6 @@ export default defineNuxtConfig({
   },
   ui: {
     global: true,
-    colors: {
-      primary: 'sky',
-      gray: 'slate'
-    },
     icons: ['heroicons', 'mdi']
   },
   typescript: {

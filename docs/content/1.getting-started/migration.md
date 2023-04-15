@@ -21,6 +21,8 @@ Components now have a `ui` prop to override the entire preset instead of individ
 
 - `baseClass` prop has been removed in favor of `ui`
 - `rounded` prop is now a class defaulting to `rounded-md` instead of a boolean prop, can be overriden through `ui.badge.rounded`
+- `color` prop has been added to change the color scheme of the badge
+- `variant` prop is now the variant instead of the color
 
 ### `Button`
 
@@ -28,7 +30,8 @@ Components now have a `ui` prop to override the entire preset instead of individ
 - `baseClass`, `iconBaseClass`, `loadingIcon` and `roundedClass` props have been removed in favor of `ui`
 - `leadingIconClass` and `trailingIconClass` props have been moved to `ui.button.leading.icon.base` and `ui.button.trailing.icon.base`
 - `rounded` prop is now a class defaulting to `rounded-md` instead of a boolean prop, can be overriden through `ui.button.rounded`
-- preset variants have been updated
+- `color` prop has been added to change the color scheme of the badge
+- `variant` prop is now the variant instead of the color
 
 ### `ButtonGroup`
 

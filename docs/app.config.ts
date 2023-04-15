@@ -1,8 +1,5 @@
 export default defineAppConfig({
   ui: {
-    button: {
-      rounded: 'rounded-md'
-    },
     container: {
       constrained: 'max-w-2xl'
     },

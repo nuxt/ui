@@ -34,17 +34,26 @@ export default function defaultPreset (variantColors: string[]) {
       lg: 'p-2 sm:px-4',
       xl: 'p-3 sm:px-6'
     },
+    color: {
+      white: {
+        solid: 'shadow-sm border border-transparent text-white bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
+        soft: 'shadow-sm border border-transparent bg-white dark:bg-gray-900 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
+        outline: 'shadow-sm border border-transparent text-white bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
+        ghost: 'border border-transparent text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
+        link: 'border border-transparent hover:u-text-gray-900 focus:u-text-gray-900 underline-offset-4 hover:underline'
+      }
+    },
     variant: {
-      ...variantColors.reduce((acc: any, color: string) => {
-        acc[color] = `shadow-sm border border-transparent text-white bg-${color}-600 dark:bg-${color}-500 hover:bg-${color}-500 dark:hover:bg-${color}-400 disabled:bg-${color}-600 dark:disabled:bg-${color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-600 dark:focus-visible:outline-${color}-500`
-        return acc
-      }, {}),
-      // Add soft versions of classic variants
-      white: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
-      gray: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50 disabled:bg-gray-50 dark:disabled:bg-gray-800',
-      black: 'shadow-sm border border-transparent u-text-white u-bg-gray-800 hover:u-bg-gray-900 disabled:u-bg-gray-800',
-      transparent: 'border border-transparent u-text-gray-500 hover:u-text-gray-700 focus:u-text-gray-700 disabled:hover:u-text-gray-500',
+      solid: 'shadow-sm border border-transparent text-white bg-{color}-600 dark:bg-{color}-500 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-600 dark:focus-visible:outline-{color}-500',
+      soft: 'shadow-sm border border-transparent bg-{color}-50 text-{color}-600 hover:bg-{color}-100',
+      outline: 'shadow-sm border border-transparent text-white bg-{color}-600 dark:bg-{color}-500 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-600 dark:focus-visible:outline-{color}-500',
+      ghost: 'border border-transparent text-{color}- hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-600 dark:focus-visible:outline-{color}-500',
       link: 'border border-transparent hover:u-text-gray-900 focus:u-text-gray-900 underline-offset-4 hover:underline'
+
+      // white: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
+      // gray: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50 disabled:bg-gray-50 dark:disabled:bg-gray-800',
+      // black: 'shadow-sm border border-transparent u-text-white u-bg-gray-800 hover:u-bg-gray-900 disabled:u-bg-gray-800',
+      // transparent: 'border border-transparent u-text-gray-500 hover:u-text-gray-700 focus:u-text-gray-700 disabled:hover:u-text-gray-500',
     },
     icon: {
       base: 'flex-shrink-0',
@@ -95,6 +104,11 @@ export default function defaultPreset (variantColors: string[]) {
           xl: 'sm:ml-3 sm:-mr-1'
         }
       }
+    },
+    default: {
+      size: 'md',
+      variant: 'solid',
+      color: 'primary'
     }
   }
 
@@ -114,10 +128,12 @@ export default function defaultPreset (variantColors: string[]) {
       xl: 'text-sm px-4 py-1'
     },
     variant: {
-      ...variantColors.reduce((acc: any, color: string) => {
-        acc[color] = `bg-${color}-100 dark:bg-${color}-700 text-${color}-800 dark:text-${color}-100`
-        return acc
-      }, {})
+      solid: 'bg-{color}-100 dark:bg-{color}-700 text-{color}-800 dark:text-{color}-100'
+    },
+    default: {
+      size: 'md',
+      variant: 'solid',
+      color: 'primary'
     }
   }
 
@@ -362,15 +378,6 @@ export default function defaultPreset (variantColors: string[]) {
     }
   }
 
-  const alertDialog = {
-    icon: {
-      wrapper: 'mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary-100 sm:mx-0 sm:h-10 sm:w-10',
-      base: 'h-6 w-6 text-primary-600'
-    },
-    title: 'text-lg leading-6 font-medium u-text-gray-900',
-    description: 'text-sm u-text-gray-500'
-  }
-
   const dropdown = {
     wrapper: 'relative inline-flex text-left',
     container: 'z-20',
@@ -403,13 +410,6 @@ export default function defaultPreset (variantColors: string[]) {
       placement: 'bottom-end',
       strategy: 'fixed'
     }
-  }
-
-  const tabs = {
-    wrapper: 'flex items-center gap-8',
-    base: 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm',
-    active: 'border-primary-500 text-primary-600',
-    inactive: 'border-transparent u-text-gray-500 hover:u-text-gray-700 hover:u-border-gray-300'
   }
 
   const avatar = {
@@ -636,9 +636,7 @@ export default function defaultPreset (variantColors: string[]) {
     container,
     toggle,
     verticalNavigation,
-    alertDialog,
     dropdown,
-    tabs,
     avatar,
     avatarGroup,
     slideover,

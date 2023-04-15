@@ -113,7 +113,14 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   const prop = meta.value.meta.props.find((prop: any) => prop.name === key)
   const dottedKey = useKebabCase(key).replaceAll('-', '.')
   const keys = useGet(ui.value, dottedKey, {})
-  const options = Object.keys(keys).filter(key => typeof keys[key] === 'string')
+  let options = Object.keys(keys) // .filter(key => typeof keys[key] === 'string')
+
+  if (key === 'color') {
+    options = [
+      ...appConfig.ui.colors,
+      ...options
+    ]
+  }
 
   return {
     type: prop?.type || 'string',

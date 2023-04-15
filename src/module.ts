@@ -1,6 +1,5 @@
-import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, addTemplate, createResolver } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, addTemplate, createResolver, addPlugin } from '@nuxt/kit'
 import colors from 'tailwindcss/colors.js'
-import type { Config } from 'tailwindcss'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
@@ -23,18 +22,6 @@ declare module 'nuxt/schema' {
   }
 }
 
-interface ColorsOptions {
-  /**
-   * @default 'indigo'
-   */
-  primary?: string
-
-  /**
-   * @default 'gray'
-   */
-  gray?: string
-}
-
 export interface ModuleOptions {
   /**
    * @default 'u'
@@ -46,23 +33,12 @@ export interface ModuleOptions {
    */
   global?: boolean
 
-  colors?: ColorsOptions
-
   icons: string[]
-
-  tailwindcss?: Partial<Config>
 }
 
 const defaults = {
   prefix: 'u',
-  colors: {
-    primary: 'indigo',
-    gray: 'gray'
-  },
-  icons: ['heroicons'],
-  tailwindcss: {
-    theme: {}
-  }
+  icons: ['heroicons']
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -76,8 +52,6 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults,
   async setup (options, nuxt) {
-    const { prefix, colors: { primary = 'indigo', gray = 'gray' } = {}, tailwindcss: { theme = {} } = {}, global } = options
-
     const { resolve } = createResolver(import.meta.url)
 
     // Transpile runtime
@@ -92,12 +66,38 @@ export default defineNuxtModule<ModuleOptions>({
         ...tailwindConfig.theme.extend?.colors
       }
 
-      // @ts-ignore
       tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {}
-      // @ts-ignore
-      globalColors.primary = tailwindConfig.theme.extend.colors.primary = globalColors[primary] || colors[primary]
-      // @ts-ignore
-      globalColors.gray = tailwindConfig.theme.extend.colors.gray = globalColors[gray] || colors[gray]
+      globalColors.primary = tailwindConfig.theme.extend.colors.primary = {
+        50: 'rgb(var(--color-primary-50) / <alpha-value>)',
+        100: 'rgb(var(--color-primary-100) / <alpha-value>)',
+        200: 'rgb(var(--color-primary-200) / <alpha-value>)',
+        300: 'rgb(var(--color-primary-300) / <alpha-value>)',
+        400: 'rgb(var(--color-primary-400) / <alpha-value>)',
+        500: 'rgb(var(--color-primary-500) / <alpha-value>)',
+        600: 'rgb(var(--color-primary-600) / <alpha-value>)',
+        700: 'rgb(var(--color-primary-700) / <alpha-value>)',
+        800: 'rgb(var(--color-primary-800) / <alpha-value>)',
+        900: 'rgb(var(--color-primary-900) / <alpha-value>)',
+        950: 'rgb(var(--color-primary-950) / <alpha-value>)'
+      }
+
+      if (globalColors.gray) {
+        globalColors.cool = tailwindConfig.theme.extend.colors.cool = colors.gray
+      }
+
+      globalColors.gray = tailwindConfig.theme.extend.colors.gray = {
+        50: 'rgb(var(--color-gray-50) / <alpha-value>)',
+        100: 'rgb(var(--color-gray-100) / <alpha-value>)',
+        200: 'rgb(var(--color-gray-200) / <alpha-value>)',
+        300: 'rgb(var(--color-gray-300) / <alpha-value>)',
+        400: 'rgb(var(--color-gray-400) / <alpha-value>)',
+        500: 'rgb(var(--color-gray-500) / <alpha-value>)',
+        600: 'rgb(var(--color-gray-600) / <alpha-value>)',
+        700: 'rgb(var(--color-gray-700) / <alpha-value>)',
+        800: 'rgb(var(--color-gray-800) / <alpha-value>)',
+        900: 'rgb(var(--color-gray-900) / <alpha-value>)',
+        950: 'rgb(var(--color-gray-950) / <alpha-value>)'
+      }
 
       const variantColors = excludeColors(globalColors)
       const safeColorsAsRegex = colorsAsRegex(variantColors)
@@ -135,25 +135,25 @@ export default defineNuxtModule<ModuleOptions>({
 
       const ui: object = defaultPreset(variantColors)
 
-      nuxt.options.appConfig.ui = ui
+      nuxt.options.appConfig.ui = {
+        primary: 'sky',
+        gray: 'cool',
+        colors: variantColors,
+        ...ui
+      }
 
       addTemplate({
         filename: 'ui.mjs',
         getContents: () => `export default ${JSON.stringify(ui)}`
-      })
-      addTemplate({
-        filename: 'ui.d.ts',
-        write: true,
-        getContents: () => `declare const d: ${JSON.stringify(ui)}; export default d;`
       })
     })
 
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
       viewer: false,
+      exposeConfig: true,
       config: {
         darkMode: 'class',
-        theme,
         plugins: [
           require('@tailwindcss/forms'),
           require('@tailwindcss/aspect-ratio'),
@@ -174,40 +174,38 @@ export default defineNuxtModule<ModuleOptions>({
       cssPath: resolve(runtimeDir, 'tailwind.css')
     })
 
+    addPlugin({
+      src: resolve(runtimeDir, 'plugins', 'colors')
+    })
+
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'elements'),
-      prefix,
-      global,
-      watch: false
-    })
-    addComponentsDir({
-      path: resolve(runtimeDir, 'components', 'feedback'),
-      prefix,
-      global,
+      prefix: options.prefix,
+      global: options.global,
       watch: false
     })
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'forms'),
-      prefix,
-      global,
+      prefix: options.prefix,
+      global: options.global,
       watch: false
     })
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'layout'),
-      prefix,
-      global,
+      prefix: options.prefix,
+      global: options.global,
       watch: false
     })
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'navigation'),
-      prefix,
-      global,
+      prefix: options.prefix,
+      global: options.global,
       watch: false
     })
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'overlays'),
-      prefix,
-      global,
+      prefix: options.prefix,
+      global: options.global,
       watch: false
     })
 

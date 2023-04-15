@@ -3,7 +3,7 @@
     <nav class="sticky top-0 z-10 w-full backdrop-blur flex-none border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75">
       <UContainer padded>
         <div class="flex items-center justify-between h-16">
-          <div class="flex items-center">
+          <div class="flex items-center gap-3">
             <NuxtLink to="/" class="flex items-center gap-2 font-bold text-lg u-text-gray-900">
               <Logo class="w-6 h-6" />
 
@@ -12,8 +12,10 @@
           </div>
 
           <div class="flex items-center">
-            <ColorScheme placeholder="" tag="span">
-              <UButton variant="transparent" :icon="colorMode.value === 'dark' ? 'i-heroicons-moon' : 'i-heroicons-sun'" @click="toggleDark" />
+            <ThemeSelect class="mr-2" />
+
+            <ColorScheme placeholder="" tag="div" class="w-[38px]">
+              <UButton :icon="isDark ? 'i-heroicons-moon' : 'i-heroicons-sun'" variant="transparent" aria-label="Theme" @click="isDark = !isDark" />
             </ColorScheme>
             <UButton to="https://github.com/nuxtlabs/ui" target="_blank" variant="transparent" icon="i-mdi-github" />
           </div>
@@ -42,11 +44,14 @@ const colorMode = useColorMode()
 const href = computed(() => colorScheme.value === 'dark' ? '/icon-dark.svg' : '/icon-light.svg')
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
-// Methods
-
-function toggleDark () {
-  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-}
+const isDark = computed({
+  get () {
+    return colorMode.value === 'dark'
+  },
+  set () {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
+})
 
 // Head
 
