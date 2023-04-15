@@ -4,7 +4,7 @@
     icon="i-heroicons-magnifying-glass"
     block
     size="xs"
-    variant="gray"
+    color="gray"
     class="!px-3"
   >
     <span class="text-sm ml-0.5">Search</span>

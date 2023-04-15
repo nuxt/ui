@@ -15,9 +15,9 @@
             <ThemeSelect class="mr-2" />
 
             <ColorScheme placeholder="" tag="div" class="w-[38px]">
-              <UButton :icon="isDark ? 'i-heroicons-moon' : 'i-heroicons-sun'" variant="transparent" aria-label="Theme" @click="isDark = !isDark" />
+              <UButton :icon="isDark ? 'i-heroicons-moon' : 'i-heroicons-sun'" variant="ghost" aria-label="Theme" @click="isDark = !isDark" />
             </ColorScheme>
-            <UButton to="https://github.com/nuxtlabs/ui" target="_blank" variant="transparent" icon="i-mdi-github" />
+            <UButton to="https://github.com/nuxtlabs/ui" target="_blank" variant="ghost" icon="i-mdi-github" />
           </div>
         </div>
       </UContainer>

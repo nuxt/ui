@@ -1,13 +1,15 @@
-import { h, computed } from 'vue'
+import { h, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
 import Avatar from './Avatar.vue'
-import { defineNuxtComponent, useAppConfig } from '#imports'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+import appConfig from '#build/app.config'
 
-const appConfig = useAppConfig()
+// const appConfig = useAppConfig()
 
-export default defineNuxtComponent({
+export default defineComponent({
   props: {
     size: {
       type: String,
@@ -26,7 +28,10 @@ export default defineNuxtComponent({
     }
   },
   setup (props, { slots }) {
-    const ui = computed<Partial<typeof appConfig.ui.avatarGroup>>(() => defu({}, props.ui, appConfig.ui.avatarGroup))
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const $ui = computed<Partial<typeof appConfig.ui.avatarGroup>>(() => defu({}, props.ui, appConfig.ui.avatarGroup))
 
     const children = computed(() => {
       let children = slots.default?.()
@@ -47,8 +52,8 @@ export default defineNuxtComponent({
 
         node.props.class = node.props.class || ''
         node.props.class += ` ${classNames(
-          ui.value.ring,
-          ui.value.margin
+          $ui.value.ring,
+          $ui.value.margin
         )}`
 
         return node
@@ -59,8 +64,8 @@ export default defineNuxtComponent({
           size: props.size,
           text: `+${children.value.length - max.value}`,
           class: classNames(
-            ui.value.ring,
-            ui.value.margin
+            $ui.value.ring,
+            $ui.value.margin
           )
         })
       }
@@ -68,6 +73,6 @@ export default defineNuxtComponent({
       return null
     }).filter(Boolean).reverse())
 
-    return () => h('div', { class: ui.value.wrapper }, clones.value)
+    return () => h('div', { class: $ui.value.wrapper }, clones.value)
   }
 })

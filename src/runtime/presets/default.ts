@@ -87,18 +87,20 @@ const button = {
   },
   color: {
     white: {
-      solid: 'shadow-sm border border-transparent text-white bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
-      soft: 'shadow-sm border border-transparent bg-white dark:bg-gray-900 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
-      outline: 'shadow-sm border border-transparent text-white bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
-      ghost: 'border border-transparent text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
-      link: 'border border-transparent hover:u-text-gray-900 focus:u-text-gray-900 underline-offset-4 hover:underline'
+      solid: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900'
+    },
+    black: {
+      solid: 'shadow-sm border border-transparent u-text-white u-bg-gray-800 hover:u-bg-gray-900 disabled:u-bg-gray-800'
+    },
+    gray: {
+      solid: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50 disabled:bg-gray-50 dark:disabled:bg-gray-800'
     }
   },
   variant: {
     solid: 'shadow-sm border border-transparent text-white bg-{color}-600 dark:bg-{color}-500 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-600 dark:focus-visible:outline-{color}-500',
     soft: 'shadow-sm border border-transparent bg-{color}-50 text-{color}-600 hover:bg-{color}-100',
     outline: 'shadow-sm border border-transparent text-white bg-{color}-600 dark:bg-{color}-500 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-600 dark:focus-visible:outline-{color}-500',
-    ghost: 'border border-transparent text-{color}- hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-600 dark:focus-visible:outline-{color}-500',
+    ghost: 'border border-transparent text-{color}-600 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-600 dark:focus-visible:outline-{color}-500',
     link: 'border border-transparent hover:u-text-gray-900 focus:u-text-gray-900 underline-offset-4 hover:underline'
 
     // white: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
@@ -433,7 +435,7 @@ const dropdown = {
   wrapper: 'relative inline-flex text-left',
   container: 'z-20',
   width: 'w-48',
-  background: 'bg-white dark:bg-gray-900',
+  background: 'bg-white dark:bg-gray-800',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
   ring: 'ring-1 u-ring-gray-200',

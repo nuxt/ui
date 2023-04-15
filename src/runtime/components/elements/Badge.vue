@@ -10,8 +10,10 @@ import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
+// TODO: Remove
+import appConfig from '#build/app.config'
 
-const appConfig = useAppConfig()
+// const appConfig = useAppConfig()
 
 export default defineComponent({
   props: {
@@ -26,7 +28,7 @@ export default defineComponent({
       type: String,
       default: appConfig.ui.badge.default.color,
       validator (value: string) {
-        return Object.keys(appConfig.ui.colors).includes(value)
+        return appConfig.ui.colors.includes(value)
       }
     },
     variant: {
@@ -46,14 +48,17 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const ui = computed<Partial<typeof appConfig.ui.badge>>(() => defu({}, props.ui, appConfig.ui.badge))
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const $ui = computed<Partial<typeof appConfig.ui.badge>>(() => defu({}, props.ui, appConfig.ui.badge))
 
     const badgeClass = computed(() => {
       return classNames(
-        ui.value.base,
-        ui.value.rounded,
-        ui.value.size[props.size],
-        ui.value.variant[props.variant]?.replaceAll('{color}', props.color)
+        $ui.value.base,
+        $ui.value.rounded,
+        $ui.value.size[props.size],
+        $ui.value.variant[props.variant]?.replaceAll('{color}', props.color)
       )
     })
 

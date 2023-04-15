@@ -13,7 +13,7 @@
         label="Source"
         icon="i-mdi-github"
         size="sm"
-        variant="white"
+        color="white"
         :to="`https://github.com/nuxtlabs/ui/blob/dev/src/runtime/components/${page._dir}/U${page.title}.vue`"
       />
     </div>

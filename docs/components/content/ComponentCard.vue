@@ -115,7 +115,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   const keys = useGet(ui.value, dottedKey, {})
   let options = Object.keys(keys) // .filter(key => typeof keys[key] === 'string')
 
-  if (key === 'color') {
+  if (key.toLowerCase().endsWith('color')) {
     options = [
       ...appConfig.ui.colors,
       ...options

@@ -1,11 +1,13 @@
-import { h, computed } from 'vue'
+import { h, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { defineNuxtComponent, useAppConfig } from '#imports'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+import appConfig from '#build/app.config'
 
-const appConfig = useAppConfig()
+// const appConfig = useAppConfig()
 
-export default defineNuxtComponent({
+export default defineComponent({
   props: {
     size: {
       type: String,
@@ -20,7 +22,10 @@ export default defineNuxtComponent({
     }
   },
   setup (props, { slots }) {
-    const ui = computed<Partial<typeof appConfig.ui.buttonGroup>>(() => defu({}, props.ui, appConfig.ui.buttonGroup))
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const $ui = computed<Partial<typeof appConfig.ui.buttonGroup>>(() => defu({}, props.ui, appConfig.ui.buttonGroup))
 
     const children = computed(() => {
       let children = slots.default?.()
@@ -41,7 +46,7 @@ export default defineNuxtComponent({
       'rounded-2xl': { left: 'rounded-l-2xl', right: 'rounded-r-2xl' },
       'rounded-3xl': { left: 'rounded-l-3xl', right: 'rounded-r-3xl' },
       'rounded-full': { left: 'rounded-l-full', right: 'rounded-r-full' }
-    }[ui.value.rounded]))
+    }[$ui.value.rounded]))
 
     const clones = computed(() => children.value.map((node, index) => {
       if (props.size) {
@@ -68,6 +73,6 @@ export default defineNuxtComponent({
       return node
     }))
 
-    return () => h('div', { class: [ui.value.wrapper, ui.value.rounded, ui.value.shadow] }, clones.value)
+    return () => h('div', { class: [$ui.value.wrapper, $ui.value.rounded, $ui.value.shadow] }, clones.value)
   }
 })

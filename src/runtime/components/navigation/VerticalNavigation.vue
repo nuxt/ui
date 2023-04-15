@@ -1,6 +1,6 @@
 <template>
   <nav :class="ui.wrapper">
-    <Link
+    <LinkCustom
       v-for="(link, index) of links"
       v-slot="{ isActive }"
       :key="index"
@@ -33,25 +33,34 @@
           {{ link.badge }}
         </span>
       </slot>
-    </Link>
+    </LinkCustom>
   </nav>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue'
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import { defu } from 'defu'
 import Icon from '../elements/Icon.vue'
-import Link from '../elements/Link.vue'
+import LinkCustom from '../elements/LinkCustom.vue'
 import Avatar from '../elements/Avatar.vue'
 import type { Avatar as AvatarType } from '../../types/avatar'
-import $appConfig from '#build/app.config'
 import { useAppConfig } from '#imports'
+// TODO: Remove
+import appConfig from '#build/app.config'
 
-const props = defineProps({
-  links: {
-    type: Array as PropType<{
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  components: {
+    Icon,
+    LinkCustom,
+    Avatar
+  },
+  props: {
+    links: {
+      type: Array as PropType<{
       to?: RouteLocationNormalized | string
       exact?: boolean
       label: string
@@ -61,15 +70,22 @@ const props = defineProps({
       click?: Function
       badge?: string
     }[]>,
-    default: () => []
+      default: () => []
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.verticalNavigation>>,
+      default: () => appConfig.ui.verticalNavigation
+    }
   },
-  ui: {
-    type: Object as PropType<Partial<typeof $appConfig.ui.verticalNavigation>>,
-    default: () => $appConfig.ui.verticalNavigation
+  setup (props) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const ui = computed<Partial<typeof appConfig.ui.verticalNavigation>>(() => defu({}, props.ui, appConfig.ui.verticalNavigation))
+
+    return {
+      ui
+    }
   }
 })
-
-const appConfig = useAppConfig()
-
-const ui = computed<Partial<typeof appConfig.ui.verticalNavigation>>(() => defu({}, props.ui, appConfig.ui.verticalNavigation))
 </script>

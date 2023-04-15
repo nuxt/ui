@@ -14,8 +14,10 @@ import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
+// TODO: Remove
+import appConfig from '#build/app.config'
 
-const appConfig = useAppConfig()
+// const appConfig = useAppConfig()
 
 export default defineComponent({
   props: {
@@ -42,7 +44,7 @@ export default defineComponent({
       type: String,
       default: null,
       validator (value: string) {
-        return Object.keys(appConfig.ui.colors).includes(value)
+        return appConfig.ui.colors.includes(value)
       }
     },
     chipVariant: {
@@ -65,30 +67,33 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const ui = computed<Partial<typeof appConfig.ui.avatar>>(() => defu({}, props.ui, appConfig.ui.avatar))
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const $ui = computed<Partial<typeof appConfig.ui.avatar>>(() => defu({}, props.ui, appConfig.ui.avatar))
 
     const wrapperClass = computed(() => {
       return classNames(
-        ui.value.wrapper,
-        ui.value.background,
-        ui.value.rounded,
-        ui.value.size[props.size]
+        $ui.value.wrapper,
+        $ui.value.background,
+        $ui.value.rounded,
+        $ui.value.size[props.size]
       )
     })
 
     const avatarClass = computed(() => {
       return classNames(
-        ui.value.rounded,
-        ui.value.size[props.size]
+        $ui.value.rounded,
+        $ui.value.size[props.size]
       )
     })
 
     const chipClass = computed(() => {
       return classNames(
-        ui.value.chip.base,
-        ui.value.chip.size[props.size],
-        ui.value.chip.position[props.chipPosition],
-        ui.value.chip.variant[props.chipVariant]?.replaceAll('{color}', props.chipColor)
+        $ui.value.chip.base,
+        $ui.value.chip.size[props.size],
+        $ui.value.chip.position[props.chipPosition],
+        $ui.value.chip.variant[props.chipVariant]?.replaceAll('{color}', props.chipColor)
       )
     })
 

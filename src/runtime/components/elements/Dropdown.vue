@@ -1,5 +1,5 @@
 <template>
-  <Menu v-slot="{ open }" as="div" :class="ui.wrapper" @mouseleave="onMouseLeave">
+  <Menu v-slot="{ open }" as="div" :class="$ui.wrapper" @mouseleave="onMouseLeave">
     <MenuButton
       ref="trigger"
       as="div"
@@ -15,10 +15,10 @@
       </slot>
     </MenuButton>
 
-    <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
-      <transition appear v-bind="ui.transition">
-        <MenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background]" static>
-          <div v-for="(subItems, index) of items" :key="index" :class="ui.group">
+    <div v-if="open && items.length" ref="container" :class="[$ui.container, $ui.width]" @mouseover="onMouseOver">
+      <transition appear v-bind="$ui.transition">
+        <MenuItems :class="[$ui.base, $ui.divide, $ui.ring, $ui.rounded, $ui.shadow, $ui.background]" static>
+          <div v-for="(subItems, index) of items" :key="index" :class="$ui.group">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
               <Component
                 v-bind="omit(item, ['click'])"
@@ -27,12 +27,12 @@
                 @click="item.click"
               >
                 <slot :name="item.slot" :item="item">
-                  <Icon v-if="item.icon" :name="item.icon" :class="[ui.item.icon, item.iconClass]" />
-                  <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="ui.item.avatar" />
+                  <Icon v-if="item.icon" :name="item.icon" :class="[$ui.item.icon, item.iconClass]" />
+                  <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="$ui.item.avatar" />
 
                   <span class="truncate">{{ item.label }}</span>
 
-                  <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
+                  <span v-if="item.shortcuts?.length" :class="$ui.item.shortcuts">
                     <kbd v-for="shortcut of item.shortcuts" :key="shortcut" class="font-sans">{{ shortcut }}</kbd>
                   </span>
                 </slot>
@@ -63,8 +63,10 @@ import type { Avatar as AvatarType } from '../../types/avatar'
 import type { PopperOptions } from '../../types'
 import { NuxtLink } from '#components'
 import { useAppConfig } from '#imports'
+// TODO: Remove
+import appConfig from '#build/app.config'
 
-const appConfig = useAppConfig()
+// const appConfig = useAppConfig()
 
 export default defineComponent({
   components: {
@@ -119,17 +121,20 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const ui = computed<Partial<typeof appConfig.ui.dropdown>>(() => defu({}, props.ui, appConfig.ui.dropdown))
+    // TODO: Remove
+    const appConfig = useAppConfig()
 
-    const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, ui.value.popperOptions))
+    const $ui = computed<Partial<typeof appConfig.ui.dropdown>>(() => defu({}, props.ui, appConfig.ui.dropdown))
+
+    const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.value.popperOptions))
 
     const [trigger, container] = usePopper(popperOptions.value)
 
     function resolveItemClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
       return classNames(
-        ui.value.item.base,
-        active ? ui.value.item.active : ui.value.item.inactive,
-        disabled && ui.value.item.disabled
+        $ui.value.item.base,
+        active ? $ui.value.item.active : $ui.value.item.inactive,
+        disabled && $ui.value.item.disabled
       )
     }
 
@@ -192,6 +197,7 @@ export default defineComponent({
     }
 
     return {
+      $ui,
       trigger,
       container,
       resolveItemClass,
@@ -202,5 +208,4 @@ export default defineComponent({
     }
   }
 })
-
 </script>
