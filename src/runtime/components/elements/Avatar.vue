@@ -3,7 +3,7 @@
     <img v-if="url && !error" :class="avatarClass" :src="url" :alt="alt" :onerror="() => onError()">
     <span v-else-if="text || placeholder" :class="ui.placeholder">{{ text || placeholder }}</span>
 
-    <span v-if="chipVariant" :class="chipClass" />
+    <span v-if="chipColor" :class="chipClass" />
     <slot />
   </span>
 </template>
@@ -33,21 +33,28 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: 'md',
+      default: appConfig.ui.avatar.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.avatar.size).includes(value)
       }
     },
-    chipVariant: {
+    chipColor: {
       type: String,
       default: null,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.colors).includes(value)
+      }
+    },
+    chipVariant: {
+      type: String,
+      default: appConfig.ui.avatar.default.chipVariant,
       validator (value: string) {
         return Object.keys(appConfig.ui.avatar.chip.variant).includes(value)
       }
     },
     chipPosition: {
       type: String,
-      default: 'top-right',
+      default: appConfig.ui.avatar.default.chipPosition,
       validator (value: string) {
         return Object.keys(appConfig.ui.avatar.chip.position).includes(value)
       }
@@ -79,9 +86,9 @@ export default defineComponent({
     const chipClass = computed(() => {
       return classNames(
         ui.value.chip.base,
-        ui.value.chip.variant[props.chipVariant],
+        ui.value.chip.size[props.size],
         ui.value.chip.position[props.chipPosition],
-        ui.value.chip.size[props.size]
+        ui.value.chip.variant[props.chipVariant]?.replaceAll('{color}', props.chipColor)
       )
     })
 
@@ -119,5 +126,4 @@ export default defineComponent({
     }
   }
 })
-
 </script>

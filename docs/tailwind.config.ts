@@ -17,7 +17,6 @@ export default <Partial<Config>> {
         '8xl': '90rem'
       },
       typography: (theme) => {
-        console.log('theme', theme)
         return {
           DEFAULT: {
             css: {

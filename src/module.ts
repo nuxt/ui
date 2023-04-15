@@ -3,7 +3,7 @@ import colors from 'tailwindcss/colors.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
-import defaultPreset, { DefaultPreset } from './runtime/presets/default'
+import defaultPreset from './runtime/presets/default'
 
 // @ts-ignore
 delete colors.lightBlue
@@ -18,7 +18,7 @@ delete colors.blueGray
 
 declare module 'nuxt/schema' {
   interface AppConfigInput {
-    ui?: Partial<DefaultPreset>
+    ui?: Partial<typeof defaultPreset>
   }
 }
 
@@ -133,18 +133,16 @@ export default defineNuxtModule<ModuleOptions>({
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
 
-      const ui: object = defaultPreset(variantColors)
-
       nuxt.options.appConfig.ui = {
         primary: 'sky',
         gray: 'cool',
         colors: variantColors,
-        ...ui
+        ...defaultPreset
       }
 
       addTemplate({
         filename: 'ui.mjs',
-        getContents: () => `export default ${JSON.stringify(ui)}`
+        getContents: () => `export default ${JSON.stringify(defaultPreset)}`
       })
     })
 
