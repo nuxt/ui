@@ -17,14 +17,21 @@ export default defineComponent({
   props: {
     size: {
       type: String,
-      default: 'md',
+      default: appConfig.ui.badge.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.badge.size).includes(value)
       }
     },
+    color: {
+      type: String,
+      default: appConfig.ui.badge.default.color,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.colors).includes(value)
+      }
+    },
     variant: {
       type: String,
-      default: 'primary',
+      default: appConfig.ui.badge.default.variant,
       validator (value: string) {
         return Object.keys(appConfig.ui.badge.variant).includes(value)
       }
@@ -46,7 +53,7 @@ export default defineComponent({
         ui.value.base,
         ui.value.rounded,
         ui.value.size[props.size],
-        ui.value.variant[props.variant]
+        ui.value.variant[props.variant]?.replaceAll('{color}', props.color)
       )
     })
 
@@ -55,5 +62,4 @@ export default defineComponent({
     }
   }
 })
-
 </script>

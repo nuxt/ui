@@ -60,14 +60,21 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: 'md',
+      default: appConfig.ui.button.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.button.size).includes(value)
       }
     },
+    color: {
+      type: String,
+      default: appConfig.ui.button.default.color,
+      validator (value: string) {
+        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.button.color)].includes(value)
+      }
+    },
     variant: {
       type: String,
-      default: 'primary',
+      default: appConfig.ui.button.default.variant,
       validator (value: string) {
         return Object.keys(appConfig.ui.button.variant).includes(value)
       }
@@ -155,12 +162,14 @@ export default defineComponent({
     const isSquare = computed(() => props.square || (!slots.default && !props.label))
 
     const buttonClass = computed(() => {
+      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+
       return classNames(
         ui.value.base,
         ui.value.rounded,
         ui.value.size[props.size],
         ui.value[isSquare.value ? 'square' : (props.compact ? 'compact' : 'spacing')][props.size],
-        ui.value.variant[props.variant],
+        variant?.replaceAll('{color}', props.color),
         props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
       )
     })
@@ -216,5 +225,4 @@ export default defineComponent({
     }
   }
 })
-
 </script>
