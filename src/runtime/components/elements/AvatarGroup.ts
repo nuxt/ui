@@ -31,7 +31,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const $ui = computed<Partial<typeof appConfig.ui.avatarGroup>>(() => defu({}, props.ui, appConfig.ui.avatarGroup))
+    const ui = computed<Partial<typeof appConfig.ui.avatarGroup>>(() => defu({}, props.ui, appConfig.ui.avatarGroup))
 
     const children = computed(() => {
       let children = slots.default?.()
@@ -52,8 +52,8 @@ export default defineComponent({
 
         node.props.class = node.props.class || ''
         node.props.class += ` ${classNames(
-          $ui.value.ring,
-          $ui.value.margin
+          ui.value.ring,
+          ui.value.margin
         )}`
 
         return node
@@ -64,8 +64,8 @@ export default defineComponent({
           size: props.size,
           text: `+${children.value.length - max.value}`,
           class: classNames(
-            $ui.value.ring,
-            $ui.value.margin
+            ui.value.ring,
+            ui.value.margin
           )
         })
       }
@@ -73,6 +73,6 @@ export default defineComponent({
       return null
     }).filter(Boolean).reverse())
 
-    return () => h('div', { class: $ui.value.wrapper }, clones.value)
+    return () => h('div', { class: ui.value.wrapper }, clones.value)
   }
 })

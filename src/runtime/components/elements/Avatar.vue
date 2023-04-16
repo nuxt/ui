@@ -70,30 +70,30 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const $ui = computed<Partial<typeof appConfig.ui.avatar>>(() => defu({}, props.ui, appConfig.ui.avatar))
+    const ui = computed<Partial<typeof appConfig.ui.avatar>>(() => defu({}, props.ui, appConfig.ui.avatar))
 
     const wrapperClass = computed(() => {
       return classNames(
-        $ui.value.wrapper,
-        $ui.value.background,
-        $ui.value.rounded,
-        $ui.value.size[props.size]
+        ui.value.wrapper,
+        ui.value.background,
+        ui.value.rounded,
+        ui.value.size[props.size]
       )
     })
 
     const avatarClass = computed(() => {
       return classNames(
-        $ui.value.rounded,
-        $ui.value.size[props.size]
+        ui.value.rounded,
+        ui.value.size[props.size]
       )
     })
 
     const chipClass = computed(() => {
       return classNames(
-        $ui.value.chip.base,
-        $ui.value.chip.size[props.size],
-        $ui.value.chip.position[props.chipPosition],
-        $ui.value.chip.variant[props.chipVariant]?.replaceAll('{color}', props.chipColor)
+        ui.value.chip.base,
+        ui.value.chip.size[props.size],
+        ui.value.chip.position[props.chipPosition],
+        ui.value.chip.variant[props.chipVariant]?.replaceAll('{color}', props.chipColor)
       )
     })
 

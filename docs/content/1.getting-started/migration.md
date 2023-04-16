@@ -49,3 +49,18 @@ Components now have a `ui` prop to override the entire preset instead of individ
 ### `SelectCustom`
 
 - `placeholder` prop is now `null` by default
+
+### `Card`
+
+- `baseClass`, `backgroundClass`, `borderColorClass`, `shadowClass`, `ringClass`, `roundedClass`, `bodyClass`, `bodyBackgroundClass`, `headerClass`, `headerBackgroundClass`, `footerClass`, `footerBackgroundClass` props have been removed in favor of `ui`
+- `rounded` prop is now a class defaulting to `rounded-lg` instead of a boolean prop, can be overriden through `ui.avatar.rounded`
+- `padded` prop has been removed, use `ui.rounded = 'sm:rounded-lg'` instead when false
+- `ui.card.border` has been removed in favor of `ui.card.divide`
+- `ui.card.header` & `ui.card.footer` are now `{ spacing: '', background: '' }`
+
+### `Container`
+
+- `constrainedClass` prop has been removed in favor of `ui`
+- `ui.container.base` and `ui.container.spacing` have been added
+- `padded` prop has been removed, use `ui.spacing = 'sm:px-6 lg:px-8'` instead when false
+- `constrained` prop has been removed, use `ui.constrained = ''` instead when false

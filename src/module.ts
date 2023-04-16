@@ -4,6 +4,7 @@ import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
 import defaultPreset from './runtime/presets/default'
+import type { DeepPartial } from './runtime/types'
 
 // @ts-ignore
 delete colors.lightBlue
@@ -18,7 +19,11 @@ delete colors.blueGray
 
 declare module 'nuxt/schema' {
   interface AppConfigInput {
-    ui?: Partial<typeof defaultPreset>
+    ui?: {
+      primary?: string
+      gray?: string
+      colors?: string[]
+    } & DeepPartial<typeof defaultPreset>
   }
 }
 

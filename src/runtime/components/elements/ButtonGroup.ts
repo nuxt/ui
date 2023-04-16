@@ -25,7 +25,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const $ui = computed<Partial<typeof appConfig.ui.buttonGroup>>(() => defu({}, props.ui, appConfig.ui.buttonGroup))
+    const ui = computed<Partial<typeof appConfig.ui.buttonGroup>>(() => defu({}, props.ui, appConfig.ui.buttonGroup))
 
     const children = computed(() => {
       let children = slots.default?.()
@@ -46,7 +46,7 @@ export default defineComponent({
       'rounded-2xl': { left: 'rounded-l-2xl', right: 'rounded-r-2xl' },
       'rounded-3xl': { left: 'rounded-l-3xl', right: 'rounded-r-3xl' },
       'rounded-full': { left: 'rounded-l-full', right: 'rounded-r-full' }
-    }[$ui.value.rounded]))
+    }[ui.value.rounded]))
 
     const clones = computed(() => children.value.map((node, index) => {
       if (props.size) {
@@ -73,6 +73,6 @@ export default defineComponent({
       return node
     }))
 
-    return () => h('div', { class: [$ui.value.wrapper, $ui.value.rounded, $ui.value.shadow] }, clones.value)
+    return () => h('div', { class: [ui.value.wrapper, ui.value.rounded, ui.value.shadow] }, clones.value)
   }
 })

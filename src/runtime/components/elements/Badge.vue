@@ -51,14 +51,14 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const $ui = computed<Partial<typeof appConfig.ui.badge>>(() => defu({}, props.ui, appConfig.ui.badge))
+    const ui = computed<Partial<typeof appConfig.ui.badge>>(() => defu({}, props.ui, appConfig.ui.badge))
 
     const badgeClass = computed(() => {
       return classNames(
-        $ui.value.base,
-        $ui.value.rounded,
-        $ui.value.size[props.size],
-        $ui.value.variant[props.variant]?.replaceAll('{color}', props.color)
+        ui.value.base,
+        ui.value.rounded,
+        ui.value.size[props.size],
+        ui.value.variant[props.variant]?.replaceAll('{color}', props.color)
       )
     })
 

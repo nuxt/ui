@@ -1,111 +1,48 @@
 <template>
   <component
     :is="$attrs.onSubmit ? 'form': 'div'"
-    :class="cardClass"
+    :class="[ui.base, ui.rounded, ui.divide, ui.shadow, ui.background]"
     v-bind="$attrs"
   >
-    <div
-      v-if="$slots.header"
-      :class="[headerClass, headerBackgroundClass, borderColorClass, !!$slots.default && 'border-b']"
-    >
+    <div v-if="$slots.header" :class="[ui.header.spacing, ui.header.background]">
       <slot name="header" />
     </div>
-    <div :class="[bodyClass, bodyBackgroundClass]">
+    <div :class="[ui.body.spacing, ui.body.background]">
       <slot />
     </div>
-    <div
-      v-if="$slots.footer"
-      :class="[footerClass, footerBackgroundClass, borderColorClass, (!!$slots.default || (!$slots.default && !!$slots.header)) && 'border-t']"
-    >
+    <div v-if="$slots.footer" :class="[ui.footer.spacing, ui.footer.background]">
       <slot name="footer" />
     </div>
   </component>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue'
-import { classNames } from '../../utils'
-import $ui from '#build/ui'
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+import type { PropType } from 'vue'
+import { defu } from 'defu'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+import appConfig from '#build/app.config'
 
-const props = defineProps({
-  padded: {
-    type: Boolean,
-    default: false
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  inheritAttrs: false,
+  props: {
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.card>>,
+      default: () => appConfig.ui.card
+    }
   },
-  rounded: {
-    type: Boolean,
-    default: true
-  },
-  baseClass: {
-    type: String,
-    default: () => $ui.card.base
-  },
-  backgroundClass: {
-    type: String,
-    default: () => $ui.card.background
-  },
-  borderColorClass: {
-    type: String,
-    default: () => $ui.card.border
-  },
-  shadowClass: {
-    type: String,
-    default: () => $ui.card.shadow
-  },
-  ringClass: {
-    type: String,
-    default: () => $ui.card.ring
-  },
-  roundedClass: {
-    type: String,
-    default: () => $ui.card.rounded
-  },
-  bodyClass: {
-    type: String,
-    default: () => $ui.card.body
-  },
-  bodyBackgroundClass: {
-    type: String,
-    default: null
-  },
-  headerClass: {
-    type: String,
-    default: () => $ui.card.header
-  },
-  headerBackgroundClass: {
-    type: String,
-    default: null
-  },
-  footerClass: {
-    type: String,
-    default: () => $ui.card.footer
-  },
-  footerBackgroundClass: {
-    type: String,
-    default: null
-  },
-  customClass: {
-    type: String,
-    default: null
+  setup (props) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const ui = computed<Partial<typeof appConfig.ui.card>>(() => defu({}, props.ui, appConfig.ui.card))
+
+    return {
+      ui
+    }
   }
 })
-
-const cardClass = computed(() => {
-  return classNames(
-    props.baseClass,
-    props.padded && props.rounded && props.roundedClass,
-    !props.padded && props.rounded && props.roundedClass && `sm:${props.roundedClass}`,
-    props.ringClass,
-    props.shadowClass,
-    props.backgroundClass,
-    props.customClass
-  )
-})
-</script>
-
-<script lang="ts">
-export default {
-  name: 'UCard',
-  inheritAttrs: false
-}
 </script>

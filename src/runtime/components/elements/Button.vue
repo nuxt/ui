@@ -134,7 +134,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const $ui = computed<Partial<typeof appConfig.ui.button>>(() => defu({}, props.ui, appConfig.ui.button))
+    const ui = computed<Partial<typeof appConfig.ui.button>>(() => defu({}, props.ui, appConfig.ui.button))
 
     const slots = useSlots()
 
@@ -167,13 +167,13 @@ export default defineComponent({
     const isSquare = computed(() => props.square || (!slots.default && !props.label))
 
     const buttonClass = computed(() => {
-      const variant = $ui.value.color?.[props.color as string]?.[props.variant as string] || $ui.value.variant[props.variant]
+      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
       return classNames(
-        $ui.value.base,
-        $ui.value.rounded,
-        $ui.value.size[props.size],
-        $ui.value[isSquare.value ? 'square' : (props.compact ? 'compact' : 'spacing')][props.size],
+        ui.value.base,
+        ui.value.rounded,
+        ui.value.size[props.size],
+        ui.value[isSquare.value ? 'square' : (props.compact ? 'compact' : 'spacing')][props.size],
         variant?.replaceAll('{color}', props.color),
         props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
       )
@@ -181,7 +181,7 @@ export default defineComponent({
 
     const leadingIconName = computed(() => {
       if (props.loading) {
-        return $ui.value.icon.loading
+        return ui.value.icon.loading
       }
 
       return props.leadingIcon || props.icon
@@ -189,7 +189,7 @@ export default defineComponent({
 
     const trailingIconName = computed(() => {
       if (props.loading && !isLeading.value) {
-        return $ui.value.icon.loading
+        return ui.value.icon.loading
       }
 
       return props.trailingIcon || props.icon
@@ -197,20 +197,20 @@ export default defineComponent({
 
     const leadingIconClass = computed(() => {
       return classNames(
-        $ui.value.icon.base,
-        $ui.value.icon.size[props.size],
-        (!!slots.default || !!props.label?.length) && $ui.value.icon.leading[props.compact ? 'compactSpacing' : 'spacing'][props.size],
-        $ui.value.icon.leading.base,
+        ui.value.icon.base,
+        ui.value.icon.size[props.size],
+        (!!slots.default || !!props.label?.length) && ui.value.icon.leading[props.compact ? 'compactSpacing' : 'spacing'][props.size],
+        ui.value.icon.leading.base,
         props.loading && 'animate-spin'
       )
     })
 
     const trailingIconClass = computed(() => {
       return classNames(
-        $ui.value.icon.base,
-        $ui.value.icon.size[props.size],
-        (!!slots.default || !!props.label?.length) && $ui.value.icon.trailing[props.compact ? 'compactSpacing' : 'spacing'][props.size],
-        $ui.value.icon.trailing.base,
+        ui.value.icon.base,
+        ui.value.icon.size[props.size],
+        (!!slots.default || !!props.label?.length) && ui.value.icon.trailing[props.compact ? 'compactSpacing' : 'spacing'][props.size],
+        ui.value.icon.trailing.base,
         props.loading && !isLeading.value && 'animate-spin'
       )
     })

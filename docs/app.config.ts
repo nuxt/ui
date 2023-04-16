@@ -1,8 +1,5 @@
 export default defineAppConfig({
   ui: {
-    container: {
-      constrained: 'max-w-2xl'
-    },
     verticalNavigation: {
       wrapper: 'border-l u-border-gray-200 space-y-2',
       spacing: 'pl-4',

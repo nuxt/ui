@@ -97,10 +97,10 @@ const button = {
     }
   },
   variant: {
-    solid: 'shadow-sm border border-transparent text-white bg-{color}-600 dark:bg-{color}-500 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-600 dark:focus-visible:outline-{color}-500',
-    soft: 'shadow-sm border border-transparent bg-{color}-50 text-{color}-600 hover:bg-{color}-100',
-    outline: 'shadow-sm border border-transparent text-white bg-{color}-600 dark:bg-{color}-500 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-600 dark:focus-visible:outline-{color}-500',
-    ghost: 'border border-transparent text-{color}-600 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-600 dark:focus-visible:outline-{color}-500',
+    solid: 'shadow-sm border border-transparent text-white bg-{color}-600 dark:bg-{color}-500 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500',
+    soft: 'border border-transparent text-{color}-600 dark:text-{color}-500 bg-{color}-50 dark:bg-{color}-900 hover:bg-{color}-100 dark:hover:bg-{color}-800',
+    outline: 'border border-transparent text-{color}-600 dark:text-{color}-500 bg-{color}-50 dark:bg-{color}-500 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500',
+    ghost: 'border border-transparent text-{color}-600 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500',
     link: 'border border-transparent hover:u-text-gray-900 focus:u-text-gray-900 underline-offset-4 hover:underline'
 
     // white: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
@@ -345,13 +345,29 @@ const checkbox = {
 const card = {
   base: 'overflow-hidden',
   background: 'bg-white dark:bg-gray-900',
-  border: 'u-border-gray-200',
-  ring: 'ring-1 u-ring-gray-200',
-  rounded: 'rounded-md',
+  divide: 'divide-y u-divide-gray-200',
+  // TODO: Replace by shadow dark?
+  // ring: 'ring-1 u-ring-gray-200',
+  rounded: 'rounded-lg',
   shadow: 'shadow',
-  body: 'px-4 py-5 sm:p-6',
-  header: 'px-4 py-5 sm:px-6',
-  footer: 'px-4 py-4 sm:px-6'
+  body: {
+    background: '',
+    spacing: 'px-4 py-5 sm:p-6'
+  },
+  header: {
+    background: '',
+    spacing: 'px-4 py-5 sm:px-6'
+  },
+  footer: {
+    background: '',
+    spacing: 'px-4 py-4 sm:px-6'
+  }
+}
+
+const container = {
+  base: 'mx-auto',
+  spacing: 'px-4 sm:px-6 lg:px-8',
+  constrained: 'max-w-7xl'
 }
 
 const modal = {
@@ -384,10 +400,6 @@ const modal = {
     leaveFrom: 'opacity-100 translate-y-0 sm:scale-100',
     leaveTo: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
   }
-}
-
-const container = {
-  constrained: 'max-w-7xl'
 }
 
 const toggle = {
@@ -438,16 +450,19 @@ const dropdown = {
   background: 'bg-white dark:bg-gray-800',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
-  ring: 'ring-1 u-ring-gray-200',
+  ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
   base: 'focus:outline-none',
-  divide: 'divide-y u-divide-gray-200',
-  group: 'py-1',
+  divide: 'divide-y divide-gray-200 dark:divide-gray-700',
+  group: 'p-1',
   item: {
-    base: 'group flex items-center gap-3 px-4 py-2 text-sm w-full',
-    active: 'bg-gray-100 dark:bg-gray-800 u-text-gray-900',
+    // base: 'group flex items-center gap-3 px-4 py-2 text-sm w-full',
+    base: 'group flex items-center gap-2 px-3 py-1.5 text-sm w-full rounded-md',
+    // active: 'bg-gray-100 dark:bg-gray-800 u-text-gray-900',
+    active: 'bg-gray-100 dark:bg-gray-900 u-text-gray-900',
     inactive: 'u-text-gray-700',
     disabled: 'cursor-not-allowed opacity-50',
-    icon: 'h-5 w-5 u-text-gray-400 group-hover:u-text-gray-500 flex-shrink-0',
+    // icon: 'h-5 w-5 u-text-gray-400 group-hover:u-text-gray-500 flex-shrink-0',
+    icon: 'h-4 w-4 u-text-gray-400 group-hover:u-text-gray-500 flex-shrink-0',
     avatar: '-m-0.5 group-hover:u-bg-gray-200 flex-shrink-0',
     shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold u-text-gray-500 ml-auto'
   },
