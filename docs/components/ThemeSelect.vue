@@ -1,13 +1,13 @@
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center shadow-sm">
     <USelectCustom
       v-model="primary"
       name="primary"
-      list-width-class="w-48"
+      list-width-class="w-[186px]"
       :popper-options="{ placement: 'bottom-start' }"
       :options="primaryOptions"
     >
-      <UButton color="gray" size="sm" class="!rounded-r-none" truncate>
+      <UButton color="gray" size="sm" class="!shadow-none !rounded-r-none" truncate>
         <span class="flex-shrink-0 h-4 w-4 -ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${primary.hex}`}" />
 
         <span>{{ primary.text }}</span>
@@ -25,11 +25,11 @@
     <USelectCustom
       v-model="gray"
       name="gray"
-      list-width-class="w-48"
+      list-width-class="w-[186px]"
       :popper-options="{ placement: 'bottom-end' }"
       :options="grayOptions"
     >
-      <UButton color="gray" size="sm" class="!border-l-0 !rounded-l-none">
+      <UButton color="gray" size="sm" class="!shadow-none -ml-px !rounded-l-none">
         <span class="flex-shrink-0 h-4 w-4 -ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${gray.hex}`}" />
 
         <span>{{ gray.text }}</span>
@@ -52,25 +52,43 @@ import colors from '#tailwind-config/theme/colors'
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
+const uiPrimary = useCookie('primary', {
+  path: '/',
+  default: () => appConfig.ui.primary
+})
+
+const uiGray = useCookie('gray', {
+  path: '/',
+  default: () => appConfig.ui.gray
+})
+
+watch(uiPrimary, (primary) => {
+  appConfig.ui.primary = primary
+}, { immediate: true })
+
+watch(uiGray, (gray) => {
+  appConfig.ui.gray = gray
+}, { immediate: true })
+
 // Computed
 
 const primaryOptions = computed(() => useWithout(appConfig.ui.colors, 'primary').map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
 const primary = computed({
   get () {
-    return primaryOptions.value.find(option => option.value === appConfig.ui.primary)
+    return primaryOptions.value.find(option => option.value === uiPrimary.value)
   },
   set (option) {
-    appConfig.ui.primary = option.value
+    uiPrimary.value = option.value
   }
 })
 
 const grayOptions = computed(() => ['slate', 'cool', 'zinc', 'neutral', 'stone'].map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
 const gray = computed({
   get () {
-    return grayOptions.value.find(option => option.value === appConfig.ui.gray)
+    return grayOptions.value.find(option => option.value === uiGray.value)
   },
   set (option) {
-    appConfig.ui.gray = option.value
+    uiGray.value = option.value
   }
 })
 </script>

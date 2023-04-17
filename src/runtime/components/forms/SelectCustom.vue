@@ -16,7 +16,7 @@
       <slot :open="open" :disabled="buttonDisabled">
         <button :class="selectCustomClass" :disabled="disabled" type="button">
           <slot name="label">
-            <span v-if="modelValue" class="block truncate">{{ (modelValue as any)[textAttribute] }}</span>
+            <span v-if="modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : (modelValue as any)[textAttribute] }}</span>
             <span v-else class="block truncate text-gray-400 dark:text-gray-500">{{ placeholder || '&nbsp;' }}</span>
           </slot>
           <slot name="icon">
@@ -53,7 +53,7 @@
             <li :class="resolveOptionClass({ active, selected, disabled: optionDisabled })">
               <div :class="listOptionContainerClass">
                 <slot name="option" :option="option" :active="active" :selected="selected">
-                  <span class="block truncate">{{ option[textAttribute] }}</span>
+                  <span class="block truncate">{{ typeof option === 'string' ? option : option[textAttribute] }}</span>
                 </slot>
               </div>
 

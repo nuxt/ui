@@ -10,14 +10,22 @@
           appearance="none"
           class="justify-center"
         />
-        <USelect
+        <!-- TODO: remove rounded on top -->
+        <USelectCustom
           v-else-if="prop.type === 'string' && prop.options.length"
           v-model="componentProps[prop.name]"
           :options="prop.options"
           :name="prop.name"
+          list-width-class="w-32"
           appearance="none"
-          :ui="{ custom: '!py-0' }"
-        />
+          :popper-options="{ strategy: 'fixed', placement: 'bottom-start' }"
+        >
+          <button class="px-3 sm:text-sm sm:leading-6 inline-flex items-center gap-1.5">
+            {{ componentProps[prop.name] }}
+
+            <UIcon name="i-heroicons-chevron-down-20-solid" class="w-4 h-4 flex-shrink-0 -mr-0.5 text-gray-400 dark:text-gray-500" />
+          </button>
+        </USelectCustom>
         <UInput
           v-else
           v-model="componentProps[prop.name]"
@@ -72,7 +80,7 @@ const props = defineProps({
     type: String,
     default: null
   },
-  excludeProps: {
+  excludedProps: {
     type: Array,
     default: () => []
   },
@@ -106,7 +114,7 @@ const vModel = computed({
 })
 
 const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
-  if (props.excludeProps.includes(key)) {
+  if (props.excludedProps.includes(key)) {
     return null
   }
 
@@ -116,10 +124,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   let options = Object.keys(keys) // .filter(key => typeof keys[key] === 'string')
 
   if (key.toLowerCase().endsWith('color')) {
-    options = [
-      ...appConfig.ui.colors,
-      ...options
-    ]
+    options = appConfig.ui.colors
   }
 
   return {

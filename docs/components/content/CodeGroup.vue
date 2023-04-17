@@ -33,6 +33,8 @@
 </template>
 
 <script setup lang="ts">
+// TODO: fix ssr
+
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 
 const slots = useSlots()

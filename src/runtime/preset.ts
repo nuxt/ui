@@ -353,7 +353,7 @@ const card = {
   base: 'overflow-hidden',
   background: 'bg-white dark:bg-gray-900',
   divide: 'divide-y divide-gray-200 dark:divide-gray-800',
-  // TODO: Replace by shadow dark?
+  // TODO: Replace by shadow dark, also for dropdown, modal, select, etc.
   // ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   rounded: 'rounded-lg',
   shadow: 'shadow',
