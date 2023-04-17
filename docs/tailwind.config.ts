@@ -72,7 +72,7 @@ export default <Partial<Config>> {
                 content: ''
               },
               'input[type="checkbox"]': {
-                color: theme('colors.primary.600'),
+                color: 'rgb(var(--color-primary-500))',
                 borderRadius: theme('borderRadius.DEFAULT'),
                 borderColor: 'rgb(var(--color-gray-300))',
                 height: theme('spacing.4'),
@@ -84,7 +84,7 @@ export default <Partial<Config>> {
                 }
               },
               'input[type="checkbox"]:checked': {
-                borderColor: theme('colors.primary.600')
+                borderColor: 'rgb(var(--color-primary-500))'
               },
               'input[type="checkbox"]:disabled': {
                 opacity: 0.5,
@@ -134,7 +134,7 @@ export default <Partial<Config>> {
               '--tw-prose-body': 'rgb(var(--color-gray-700))',
               '--tw-prose-headings': 'rgb(var(--color-gray-900))',
               '--tw-prose-lead': 'rgb(var(--color-gray-600))',
-              '--tw-prose-links': theme('colors.primary.500'),
+              '--tw-prose-links': 'rgb(var(--color-primary-500))',
               '--tw-prose-bold': 'rgb(var(--color-gray-900))',
               '--tw-prose-counters': 'rgb(var(--color-gray-500))',
               '--tw-prose-bullets': 'rgb(var(--color-gray-300))',
@@ -151,7 +151,7 @@ export default <Partial<Config>> {
               '--tw-prose-invert-body': 'rgb(var(--color-gray-200))',
               '--tw-prose-invert-headings': theme('colors.white'),
               '--tw-prose-invert-lead': 'rgb(var(--color-gray-400))',
-              '--tw-prose-invert-links': theme('colors.primary.400'),
+              '--tw-prose-invert-links': 'rgb(var(--color-primary-400))',
               '--tw-prose-invert-bold': theme('colors.white'),
               '--tw-prose-invert-counters': 'rgb(var(--color-gray-400))',
               '--tw-prose-invert-bullets': 'rgb(var(--color-gray-600))',
@@ -175,8 +175,8 @@ export default <Partial<Config>> {
                 borderColor: 'rgb(var(--color-gray-700))'
               },
               'input[type="checkbox"]:checked': {
-                backgroundColor: theme('colors.primary.600'),
-                borderColor: theme('colors.primary.600')
+                backgroundColor: 'rgb(var(--color-primary-400))',
+                borderColor: 'rgb(var(--color-primary-400))'
               }
             }
           }

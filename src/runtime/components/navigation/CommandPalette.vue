@@ -53,8 +53,8 @@
       </ComboboxOptions>
 
       <div v-else-if="placeholder" class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
-        <Icon v-if="emptyIcon" :name="emptyIcon" class="w-6 h-6 mx-auto u-text-gray-400 mb-4" aria-hidden="true" />
-        <p class="text-sm text-center u-text-gray-900">
+        <Icon v-if="emptyIcon" :name="emptyIcon" class="w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4" aria-hidden="true" />
+        <p class="text-sm text-center text-gray-900 dark:text-white">
           {{ query ? "We couldn't find any items with that term. Please try again." : "We couldn't find any items." }}
         </p>
       </div>

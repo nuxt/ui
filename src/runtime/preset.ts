@@ -1,8 +1,8 @@
 const avatar = {
   wrapper: 'relative inline-flex items-center justify-center',
-  background: 'u-bg-gray-100',
+  background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
-  placeholder: 'text-xs font-medium leading-none u-text-gray-900 truncate',
+  placeholder: 'text-xs font-medium leading-none text-gray-900 dark:text-white truncate',
   size: {
     xxxs: 'h-4 w-4 text-xs',
     xxs: 'h-5 w-5 text-xs',
@@ -51,7 +51,7 @@ const avatarGroup = {
 }
 
 const button = {
-  base: 'font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 focus:ring-offset-white dark:focus:ring-offset-gray-900',
+  base: 'font-medium disabled:cursor-not-allowed disabled:opacity-75',
   rounded: 'rounded-md',
   size: {
     xxs: 'text-xs',
@@ -87,26 +87,27 @@ const button = {
   },
   color: {
     white: {
-      solid: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900'
-    },
-    black: {
-      solid: 'shadow-sm border border-transparent u-text-white u-bg-gray-800 hover:u-bg-gray-900 disabled:u-bg-gray-800'
+      solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800/50',
+      outline: 'text-gray-900 dark:text-white hover:bg-white dark:hover:bg-gray-900 hover:ring-1 ring-inset ring-gray-300 dark:ring-gray-700',
+      ghost: 'text-gray-900 dark:text-white hover:bg-white dark:hover:bg-gray-900',
+      link: 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white underline-offset-4 hover:underline'
     },
     gray: {
-      solid: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50 disabled:bg-gray-50 dark:disabled:bg-gray-800'
+      solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50',
+      outline: 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 hover:ring-1 ring-inset ring-gray-300 dark:ring-gray-700',
+      ghost: 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800',
+      link: 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline-offset-4 hover:underline'
+    },
+    black: {
+      solid: 'shadow-sm text-white dark:text-gray-900 bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-100'
     }
   },
+  // TODO: disabled states
   variant: {
-    solid: 'shadow-sm border border-transparent text-white bg-{color}-600 dark:bg-{color}-500 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500',
-    soft: 'border border-transparent text-{color}-600 dark:text-{color}-500 bg-{color}-50 dark:bg-{color}-900 hover:bg-{color}-100 dark:hover:bg-{color}-800',
-    outline: 'border border-transparent text-{color}-600 dark:text-{color}-500 bg-{color}-50 dark:bg-{color}-500 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500',
-    ghost: 'border border-transparent text-{color}-600 hover:bg-{color}-500 dark:hover:bg-{color}-400 disabled:bg-{color}-600 dark:disabled:bg-{color}-500',
-    link: 'border border-transparent hover:u-text-gray-900 focus:u-text-gray-900 underline-offset-4 hover:underline'
-
-    // white: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:bg-white dark:disabled:bg-gray-900',
-    // gray: 'shadow-sm border u-border-gray-300 u-text-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50 disabled:bg-gray-50 dark:disabled:bg-gray-800',
-    // black: 'shadow-sm border border-transparent u-text-white u-bg-gray-800 hover:u-bg-gray-900 disabled:u-bg-gray-800',
-    // transparent: 'border border-transparent u-text-gray-500 hover:u-text-gray-700 focus:u-text-gray-700 disabled:hover:u-text-gray-500',
+    solid: 'shadow-sm text-white bg-{color}-500 hover:bg-{color}-600 dark:bg-{color}-400 dark:hover:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
+    outline: 'ring-1 ring-inset ring-current text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950',
+    ghost: 'text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950',
+    link: 'text-{color}-500 hover:text-{color}-600 dark:text-{color}-400 dark:hover:text-{color}-500 underline-offset-4 hover:underline'
   },
   icon: {
     base: 'flex-shrink-0',
@@ -192,33 +193,34 @@ const badge = {
 
 const formGroup = {
   wrapper: '',
-  label: 'block text-sm font-medium u-text-gray-700',
+  label: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
   labelWrapper: 'flex content-center justify-between',
   container: 'mt-1 relative',
   required: 'text-red-400',
-  description: 'text-sm leading-5 u-text-gray-500',
-  hint: 'text-sm leading-5 u-text-gray-500',
-  help: 'mt-2 text-sm u-text-gray-500'
+  description: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
+  hint: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
+  help: 'mt-2 text-sm text-gray-500 dark:text-gray-400'
 }
 
 const input = {
   wrapper: 'relative',
   base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
+  custom: '',
   size: {
-    xxs: 'text-xs',
-    xs: 'text-xs',
-    sm: 'text-sm leading-4',
-    md: 'text-sm',
-    lg: 'text-base',
-    xl: 'text-base'
+    // xxs: 'text-xs',
+    // xs: 'text-xs',
+    // sm: 'text-sm leading-4',
+    md: 'sm:text-sm sm:leading-6'
+    // lg: 'text-base',
+    // xl: 'text-base'
   },
   spacing: {
-    xxs: 'px-1 py-0.5',
-    xs: 'px-2.5 py-1.5',
-    sm: 'px-3 py-2',
-    md: 'px-4 py-2',
-    lg: 'px-4 py-2',
-    xl: 'px-6 py-3'
+    // xxs: 'px-1 py-0.5',
+    // xs: 'px-2.5 py-1.5',
+    // sm: 'px-3 py-2',
+    md: 'py-1.5'
+    // lg: 'px-4 py-2',
+    // xl: 'px-6 py-3'
   },
   leading: {
     spacing: {
@@ -241,11 +243,12 @@ const input = {
     }
   },
   appearance: {
-    default: 'bg-white dark:bg-gray-900 u-text-gray-700 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 dark:focus:border-primary-500 border u-border-gray-300 rounded-md shadow-sm',
+    white: 'border-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
+    gray: 'border-0 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400',
     none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
-    base: 'u-text-gray-400',
+    base: 'text-gray-400 dark:text-gray-500',
     loading: 'i-heroicons-arrow-path',
     size: {
       xxs: 'h-3 w-3',
@@ -277,6 +280,10 @@ const input = {
         xl: 'mr-3'
       }
     }
+  },
+  default: {
+    size: 'md',
+    appearance: 'white'
   }
 }
 
@@ -299,23 +306,23 @@ const selectCustom = {
   list: {
     container: 'z-20',
     width: 'w-full',
-    base: 'bg-white dark:bg-gray-900 shadow-lg rounded-md ring-1 u-ring-gray-200 focus:outline-none overflow-y-auto py-1 max-h-60',
-    input: 'relative block w-full focus:ring-transparent text-sm px-4 py-2 u-text-gray-700 border-l-0 bg-white dark:bg-gray-900 border-t-0 border-r-0 u-border-gray-200 focus:u-border-gray-200',
+    base: 'relative bg-white dark:bg-gray-800 shadow-lg rounded-md ring-1 ring-gray-200 dark:ring-gray-700 focus:outline-none overflow-y-auto p-1 max-h-60',
+    input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 u-text-gray-700 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10',
     option: {
-      base: 'cursor-default select-none relative py-2 text-sm group',
-      container: 'flex items-center gap-3',
-      active: 'text-white bg-primary-600',
-      inactive: 'u-text-gray-900',
-      selected: 'font-semibold pl-4 pr-10',
-      unselected: 'font-normal px-4',
+      base: 'cursor-default select-none relative py-1.5 rounded-md text-sm text-gray-900 dark:text-white',
+      container: 'flex items-center gap-2',
+      active: 'bg-gray-100 dark:bg-gray-900',
+      inactive: '',
+      selected: 'font-semibold pl-2 pr-8',
+      unselected: 'font-normal px-2',
       disabled: 'cursor-not-allowed opacity-50',
-      empty: 'text-sm u-text-gray-400 px-4 py-2',
+      empty: 'text-sm text-gray-400 dark:text-gray-500 px-2 py-1.5',
       icon: {
         name: 'i-heroicons-check-20-solid',
-        base: 'absolute inset-y-0 right-0 flex items-center pr-4',
-        active: 'text-white',
-        inactive: 'text-primary-600',
-        size: 'h-5 w-5'
+        base: 'absolute inset-y-0 right-0 flex items-center pr-2',
+        active: '',
+        inactive: '',
+        size: 'h-4 w-4'
       }
     },
     transition: {
@@ -331,10 +338,10 @@ const selectCustom = {
 
 const radio = {
   wrapper: 'relative flex items-start',
-  base: 'h-4 w-4 text-primary-600 focus:ring-2 focus:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-gray-900 u-border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed',
-  label: 'font-medium u-text-gray-700',
+  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus:ring-2 focus:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus:ring-primary-500 dark:focus:ring-primary-400 focus:ring-offset-white dark:focus:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed',
+  label: 'font-medium text-gray-700 dark:text-gray-200',
   required: 'text-red-400',
-  help: 'u-text-gray-500'
+  help: 'text-gray-500 dark:text-gray-400'
 }
 
 const checkbox = {
@@ -345,9 +352,9 @@ const checkbox = {
 const card = {
   base: 'overflow-hidden',
   background: 'bg-white dark:bg-gray-900',
-  divide: 'divide-y u-divide-gray-200',
+  divide: 'divide-y divide-gray-200 dark:divide-gray-800',
   // TODO: Replace by shadow dark?
-  // ring: 'ring-1 u-ring-gray-200',
+  // ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   rounded: 'rounded-lg',
   shadow: 'shadow',
   body: {
@@ -403,9 +410,9 @@ const modal = {
 }
 
 const toggle = {
-  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-gray-900',
-  active: 'bg-primary-600',
-  inactive: 'u-bg-gray-200',
+  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:ring-offset-white dark:focus:ring-offset-gray-900',
+  active: 'bg-primary-500 dark:bg-primary-400',
+  inactive: 'bg-gray-200 dark:bg-gray-700',
   container: {
     base: 'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
     active: 'translate-x-5',
@@ -415,8 +422,8 @@ const toggle = {
     base: 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
     active: 'opacity-100 ease-in duration-200',
     inactive: 'opacity-0 ease-out duration-100',
-    on: 'h-3 w-3 text-primary-600',
-    off: 'h-3 w-3 u-text-gray-400'
+    on: 'h-3 w-3 text-primary-500 dark:text-primary-400',
+    off: 'h-3 w-3 text-gray-400 dark:text-gray-500'
   }
 }
 
@@ -424,13 +431,13 @@ const verticalNavigation = {
   wrapper: 'space-y-1',
   base: 'group flex items-center text-sm font-medium rounded-md w-full relative',
   spacing: 'px-3 py-2',
-  active: 'u-text-gray-900 u-bg-gray-100',
-  inactive: 'u-text-gray-600 hover:u-text-gray-900 hover:u-bg-gray-50 focus:u-bg-gray-50',
+  active: 'text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800',
+  inactive: 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-900 focus:bg-gray-50 dark:focus:bg-gray-900',
   icon: {
     base: 'flex-shrink-0 h-6 w-6',
     spacing: '-ml-1 mr-3',
-    active: 'u-text-gray-500',
-    inactive: 'u-text-gray-400 group-hover:u-text-gray-500'
+    active: 'text-gray-500 dark:text-gray-400',
+    inactive: 'text-gray-400 dark:text-gray-500 group-hover:text-gray-500 dark:group-hover:text-gray-400'
   },
   avatar: {
     base: 'flex-shrink-0',
@@ -439,7 +446,7 @@ const verticalNavigation = {
   badge: {
     base: 'ml-auto inline-block py-0.5 px-3 text-xs rounded-full',
     active: 'bg-white dark:bg-gray-900',
-    inactive: 'u-bg-gray-100 u-text-gray-600 group-hover:u-bg-gray-200'
+    inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 group-hover:bg-gray-200 dark:group-hover:bg-gray-700'
   }
 }
 
@@ -455,16 +462,13 @@ const dropdown = {
   divide: 'divide-y divide-gray-200 dark:divide-gray-700',
   group: 'p-1',
   item: {
-    // base: 'group flex items-center gap-3 px-4 py-2 text-sm w-full',
-    base: 'group flex items-center gap-2 px-3 py-1.5 text-sm w-full rounded-md',
-    // active: 'bg-gray-100 dark:bg-gray-800 u-text-gray-900',
-    active: 'bg-gray-100 dark:bg-gray-900 u-text-gray-900',
-    inactive: 'u-text-gray-700',
+    base: 'group flex items-center gap-2 px-2 py-1.5 text-sm w-full rounded-md',
+    active: 'bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white',
+    inactive: 'text-gray-700 dark:text-gray-200',
     disabled: 'cursor-not-allowed opacity-50',
-    // icon: 'h-5 w-5 u-text-gray-400 group-hover:u-text-gray-500 flex-shrink-0',
-    icon: 'h-4 w-4 u-text-gray-400 group-hover:u-text-gray-500 flex-shrink-0',
-    avatar: '-m-0.5 group-hover:u-bg-gray-200 flex-shrink-0',
-    shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold u-text-gray-500 ml-auto'
+    icon: 'h-4 w-4 text-gray-400 dark:text-gray-500 group-hover:text-gray-500 dark:group-hover:text-gray-400 flex-shrink-0',
+    avatar: '-m-0.5 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 flex-shrink-0',
+    shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400 ml-auto'
   },
   transition: {
     enterActiveClass: 'transition duration-100 ease-out',
@@ -496,7 +500,7 @@ const slideover = {
   base: 'relative flex-1 flex flex-col w-full focus:outline-none',
   background: 'bg-white dark:bg-gray-900',
   width: 'max-w-md',
-  header: 'flex items-center justify-between flex-shrink-0 px-4 sm:px-6 h-16 border-b u-border-gray-200',
+  header: 'flex items-center justify-between flex-shrink-0 px-4 sm:px-6 h-16 border-b border-gray-200 dark:border-gray-800',
   transition: {
     enter: 'transform transition ease-in-out duration-500 sm:duration-700',
     leave: 'transform transition ease-in-out duration-500 sm:duration-700'
@@ -507,7 +511,7 @@ const notification = {
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-lg',
-  ring: 'ring-1 u-ring-gray-200',
+  ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   type: {
     info: 'i-heroicons-information-circle',
     success: 'i-heroicons-check-circle',
@@ -545,7 +549,7 @@ const tooltip = {
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow',
   rounded: 'rounded',
-  ring: 'ring-1 u-ring-gray-200',
+  ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
   shortcuts: 'hidden md:inline-flex items-center justify-end flex-shrink-0 gap-0.5 ml-1',
   transition: {
@@ -568,7 +572,7 @@ const popover = {
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
-  ring: 'ring-1 u-ring-gray-200',
+  ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
@@ -590,7 +594,7 @@ const contextMenu = {
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
-  ring: 'ring-1 u-ring-gray-200',
+  ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
@@ -609,9 +613,9 @@ const contextMenu = {
 const commandPalette = {
   wrapper: 'flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800',
   input: {
-    base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-[3.25rem] u-text-gray-900 focus:ring-0 sm:text-sm',
+    base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-[3.25rem] text-gray-900 dark:text-white focus:ring-0 sm:text-sm',
     icon: {
-      base: 'pointer-events-none absolute top-3.5 left-5 h-5 w-5 u-text-gray-400',
+      base: 'pointer-events-none absolute top-3.5 left-5 h-5 w-5 text-gray-400 dark:text-gray-500',
       name: 'i-heroicons-magnifying-glass'
     },
     close: {
@@ -634,7 +638,7 @@ const commandPalette = {
         name: 'i-heroicons-check-20-solid'
       }
     },
-    shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold u-text-gray-500'
+    shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400'
   }
 }
 

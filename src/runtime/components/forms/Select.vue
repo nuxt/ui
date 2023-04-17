@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass">
+  <div :class="ui.wrapper">
     <select
       :id="name"
       :name="name"
@@ -36,165 +36,177 @@
       </template>
     </select>
 
-    <div v-if="icon" :class="iconWrapperClass">
+    <div v-if="icon" :class="ui.icon.leading.wrapper">
       <Icon :name="icon" :class="iconClass" />
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue'
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import { get } from 'lodash-es'
-import { classNames } from '../../utils'
+import { defu } from 'defu'
 import Icon from '../elements/Icon.vue'
-import $ui from '#build/ui'
+import { classNames } from '../../utils'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+import appConfig from '#build/app.config'
 
-const props = defineProps({
-  modelValue: {
-    type: [String, Number, Object],
-    default: ''
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  placeholder: {
-    type: String,
-    default: null
-  },
-  required: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  options: {
-    type: Array,
-    default: () => []
-  },
-  size: {
-    type: String,
-    default: 'md',
-    validator (value: string) {
-      return Object.keys($ui.select.size).includes(value)
-    }
-  },
-  wrapperClass: {
-    type: String,
-    default: () => $ui.select.wrapper
-  },
-  baseClass: {
-    type: String,
-    default: () => $ui.select.base
-  },
-  iconBaseClass: {
-    type: String,
-    default: () => $ui.select.icon.base
-  },
-  customClass: {
-    type: String,
-    default: null
-  },
-  appearance: {
-    type: String,
-    default: 'default',
-    validator (value: string) {
-      return Object.keys($ui.select.appearance).includes(value)
-    }
-  },
-  textAttribute: {
-    type: String,
-    default: 'text'
-  },
-  valueAttribute: {
-    type: String,
-    default: 'value'
-  },
-  icon: {
-    type: String,
-    default: null
-  }
-})
+// const appConfig = useAppConfig()
 
-const emit = defineEmits(['update:modelValue'])
-
-const onInput = (value: string) => {
-  emit('update:modelValue', value)
-}
-
-const guessOptionValue = (option: any) => {
-  return get(option, props.valueAttribute, get(option, props.textAttribute))
-}
-
-const guessOptionText = (option: any) => {
-  return get(option, props.textAttribute, get(option, props.valueAttribute))
-}
-
-const normalizeOption = (option: any) => {
-  if (['string', 'number', 'boolean'].includes(typeof option)) {
-    return {
-      [props.valueAttribute]: option,
-      [props.textAttribute]: option
-    }
-  }
-
-  return {
-    ...option,
-    [props.valueAttribute]: guessOptionValue(option),
-    [props.textAttribute]: guessOptionText(option)
-  }
-}
-
-const normalizedOptions = computed(() => {
-  return props.options.map(option => normalizeOption(option))
-})
-
-const normalizedOptionsWithPlaceholder = computed(() => {
-  if (!props.placeholder) {
-    return normalizedOptions.value
-  }
-
-  return [
-    {
-      [props.valueAttribute]: '',
-      [props.textAttribute]: props.placeholder,
-      disabled: true
+export default defineComponent({
+  components: {
+    Icon
+  },
+  props: {
+    modelValue: {
+      type: [String, Number, Object],
+      default: ''
     },
-    ...normalizedOptions.value
-  ]
-})
+    name: {
+      type: String,
+      required: true
+    },
+    placeholder: {
+      type: String,
+      default: null
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    icon: {
+      type: String,
+      default: null
+    },
+    options: {
+      type: Array,
+      default: () => []
+    },
+    size: {
+      type: String,
+      default: appConfig.ui.select.default.size,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.select.size).includes(value)
+      }
+    },
+    appearance: {
+      type: String,
+      default: appConfig.ui.select.default.appearance,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.select.appearance).includes(value)
+      }
+    },
+    textAttribute: {
+      type: String,
+      default: 'text'
+    },
+    valueAttribute: {
+      type: String,
+      default: 'value'
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.select>>,
+      default: () => appConfig.ui.select
+    }
+  },
+  emits: ['update:modelValue', 'focus', 'blur'],
+  setup (props, { emit }) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
 
-const normalizedValue = computed(() => {
-  const normalizeModelValue = normalizeOption(props.modelValue)
-  const foundOption = normalizedOptionsWithPlaceholder.value.find(option => option[props.valueAttribute] === normalizeModelValue[props.valueAttribute])
-  if (!foundOption) {
-    return ''
+    const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
+
+    const onInput = (value: string) => {
+      emit('update:modelValue', value)
+    }
+
+    const guessOptionValue = (option: any) => {
+      return get(option, props.valueAttribute, get(option, props.textAttribute))
+    }
+
+    const guessOptionText = (option: any) => {
+      return get(option, props.textAttribute, get(option, props.valueAttribute))
+    }
+
+    const normalizeOption = (option: any) => {
+      if (['string', 'number', 'boolean'].includes(typeof option)) {
+        return {
+          [props.valueAttribute]: option,
+          [props.textAttribute]: option
+        }
+      }
+
+      return {
+        ...option,
+        [props.valueAttribute]: guessOptionValue(option),
+        [props.textAttribute]: guessOptionText(option)
+      }
+    }
+
+    const normalizedOptions = computed(() => {
+      return props.options.map(option => normalizeOption(option))
+    })
+
+    const normalizedOptionsWithPlaceholder = computed(() => {
+      if (!props.placeholder) {
+        return normalizedOptions.value
+      }
+
+      return [
+        {
+          [props.valueAttribute]: '',
+          [props.textAttribute]: props.placeholder,
+          disabled: true
+        },
+        ...normalizedOptions.value
+      ]
+    })
+
+    const normalizedValue = computed(() => {
+      const normalizeModelValue = normalizeOption(props.modelValue)
+      const foundOption = normalizedOptionsWithPlaceholder.value.find(option => option[props.valueAttribute] === normalizeModelValue[props.valueAttribute])
+      if (!foundOption) {
+        return ''
+      }
+
+      return foundOption[props.valueAttribute]
+    })
+
+    const selectClass = computed(() => {
+      return classNames(
+        ui.value.base,
+        ui.value.size[props.size],
+        ui.value.spacing[props.size],
+        ui.value.appearance[props.appearance],
+        !!props.icon && ui.value.leading.spacing[props.size],
+        ui.value.trailing.spacing[props.size],
+        ui.value.custom
+      )
+    })
+
+    const iconClass = computed(() => {
+      return classNames(
+        ui.value.icon.base,
+        ui.value.icon.size[props.size],
+        !!props.icon && ui.value.icon.leading.spacing[props.size]
+      )
+    })
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      normalizedOptionsWithPlaceholder,
+      normalizedValue,
+      selectClass,
+      iconClass,
+      onInput
+    }
   }
-
-  return foundOption[props.valueAttribute]
 })
-
-const selectClass = computed(() => {
-  return classNames(
-    props.baseClass,
-    $ui.select.size[props.size],
-    $ui.select.spacing[props.size],
-    $ui.select.appearance[props.appearance],
-    !!props.icon && $ui.select.leading.spacing[props.size],
-    $ui.select.trailing.spacing[props.size],
-    props.customClass
-  )
-})
-
-const iconClass = computed(() => {
-  return classNames(
-    props.iconBaseClass,
-    $ui.select.icon.size[props.size],
-    !!props.icon && $ui.select.icon.leading.spacing[props.size]
-  )
-})
-
-const iconWrapperClass = $ui.select.icon.leading.wrapper
 </script>

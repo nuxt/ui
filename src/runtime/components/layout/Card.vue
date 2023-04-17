@@ -41,6 +41,7 @@ export default defineComponent({
     const ui = computed<Partial<typeof appConfig.ui.card>>(() => defu({}, props.ui, appConfig.ui.card))
 
     return {
+      // eslint-disable-next-line vue/no-dupe-keys
       ui
     }
   }

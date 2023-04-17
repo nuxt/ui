@@ -66,6 +66,7 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
+    // eslint-disable-next-line vue/no-reserved-component-names
     Menu,
     MenuButton,
     MenuItems,
@@ -194,6 +195,7 @@ export default defineComponent({
     }
 
     return {
+      // eslint-disable-next-line vue/no-dupe-keys
       ui,
       trigger,
       container,

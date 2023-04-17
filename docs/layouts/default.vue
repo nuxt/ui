@@ -9,7 +9,7 @@
         <slot />
       </div>
 
-      <hr class="u-border-gray-200 my-12">
+      <hr class="border-gray-200 dark:border-gray-800 my-12">
 
       <DocsPrevNext />
     </div>

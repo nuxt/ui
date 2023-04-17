@@ -1107,10 +1107,10 @@
   resolved "https://registry.yarnpkg.com/@tailwindcss/aspect-ratio/-/aspect-ratio-0.4.2.tgz#9ffd52fee8e3c8b20623ff0dcb29e5c21fb0a9ba"
   integrity sha512-8QPrypskfBa7QIMuKHg2TA7BqES6vhBrDLOv8Unb6FcFyd3TjKbc6lcmb9UPQHxfl24sXoJ41ux/H7qQQvfaSQ==
 
-"@tailwindcss/forms@^0.5.3":
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.5.3.tgz#e4d7989686cbcaf416c53f1523df5225332a86e7"
-  integrity sha512-y5mb86JUoiUgBjY/o6FJSFZSEttfb3Q5gllE4xoKjAAD+vBrnIhE4dViwUuow3va8mpH4s9jyUbUbrRGoRdc2Q==
+"@tailwindcss/forms@^0.0.0-insiders.615a228":
+  version "0.0.0-insiders.615a228"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.0.0-insiders.615a228.tgz#f9c3f61f8b9d5c73aa9327fabf20f6d5917c6f26"
+  integrity sha512-3nWtJhKLgZcDloCwrjmIvNOKMnPp5yuSz/KBvN3qHjuI3CHiTylB3zYD56BSl4/0OuPJF4snFZc/45To6t3xGQ==
   dependencies:
     mini-svg-data-uri "^1.2.3"
 

@@ -12,10 +12,10 @@
               <Icon :name="iconName" :class="iconClass" />
             </div>
             <div class="w-0 flex-1">
-              <p class="text-sm font-medium u-text-gray-900">
+              <p class="text-sm font-medium text-gray-900 dark:text-white">
                 {{ title }}
               </p>
-              <p v-if="description" class="mt-1 text-sm leading-5 u-text-gray-500">
+              <p v-if="description" class="mt-1 text-sm leading-5 text-gray-500 dark:text-gray-400">
                 {{ description }}
               </p>
 
@@ -33,7 +33,7 @@
               </div>
 
               <button
-                class="inline-flex transition duration-150 ease-in-out u-text-gray-400 focus:outline-none hover:u-text-gray-500 focus:u-text-gray-500"
+                class="inline-flex transition duration-150 ease-in-out text-gray-400 dark:text-gray-500 focus:outline-none hover:text-gray-500 dark:hover:text-gray-400 focus:text-gray-500 dark:focus:text-gray-400"
                 @click.stop="onClose"
               >
                 <span class="sr-only">Close</span>
@@ -140,7 +140,7 @@ const iconName = computed(() => {
 const iconClass = computed(() => {
   return classNames(
     props.iconBaseClass,
-    $ui.notification.icon.color[props.type] || 'u-text-gray-400'
+    $ui.notification.icon.color[props.type] || 'text-gray-400 dark:text-gray-500'
   )
 })
 

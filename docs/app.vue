@@ -1,10 +1,10 @@
 <template>
   <div>
     <nav class="sticky top-0 z-10 w-full backdrop-blur flex-none border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75">
-      <UContainer padded>
+      <UContainer>
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center gap-3">
-            <NuxtLink to="/" class="flex items-center gap-2 font-bold text-lg u-text-gray-900">
+            <NuxtLink to="/" class="flex items-center gap-2 font-bold text-lg text-gray-900 dark:text-white">
               <Logo class="w-6 h-6" />
 
               nuxthq/ui
@@ -15,15 +15,15 @@
             <ThemeSelect class="mr-2" />
 
             <ColorScheme placeholder="" tag="div" class="w-[38px]">
-              <UButton :icon="isDark ? 'i-heroicons-moon' : 'i-heroicons-sun'" variant="ghost" aria-label="Theme" @click="isDark = !isDark" />
+              <UButton :icon="isDark ? 'i-heroicons-moon' : 'i-heroicons-sun'" color="gray" variant="link" aria-label="Theme" @click="isDark = !isDark" />
             </ColorScheme>
-            <UButton to="https://github.com/nuxtlabs/ui" target="_blank" variant="ghost" icon="i-mdi-github" />
+            <UButton to="https://github.com/nuxtlabs/ui" target="_blank" color="gray" variant="link" icon="i-mdi-github" />
           </div>
         </div>
       </UContainer>
     </nav>
 
-    <UContainer padded>
+    <UContainer>
       <NuxtPage />
     </UContainer>
 

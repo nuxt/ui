@@ -55,7 +55,7 @@ const queryGroups = computed(() => navigation.value.map(item => ({
       id: `${file._path}${hash}`,
       title,
       prefix: `${file.navigation?.title || file.title} ->`,
-      prefixClass: 'u-text-gray-700',
+      prefixClass: 'text-gray-700 dark:text-gray-200',
       to: `${file._path}${hash}`,
       children: concatChildren(children),
       icon: file.icon

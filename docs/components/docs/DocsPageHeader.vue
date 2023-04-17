@@ -1,5 +1,5 @@
 <template>
-  <header v-if="page" class="relative border-b u-border-gray-200 pb-8 mb-12">
+  <header v-if="page" class="relative border-b border-gray-200 dark:border-gray-800 pb-8 mb-12">
     <p class="mb-4 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400 capitalize">
       {{ useLowerCase(page._dir) }}
     </p>

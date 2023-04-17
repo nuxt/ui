@@ -1,10 +1,10 @@
 <template>
   <div class="p-2" role="option">
-    <h2 v-if="label" class="px-3 my-2 text-xs font-semibold u-text-gray-900">
+    <h2 v-if="label" class="px-3 my-2 text-xs font-semibold text-gray-900 dark:text-white">
       {{ label }}
     </h2>
 
-    <div class="text-sm u-text-gray-700" role="listbox" :aria-label="group[groupAttribute]">
+    <div class="text-sm text-gray-700 dark:text-gray-200" role="listbox" :aria-label="group[groupAttribute]">
       <ComboboxOption
         v-for="(command, index) of group.commands"
         :key="`${group.key}-${index}`"
@@ -13,7 +13,7 @@
         :disabled="command.disabled"
         as="template"
       >
-        <div :class="['flex justify-between select-none items-center rounded-md px-3 py-2 gap-3 relative', active && 'bg-gray-100 dark:bg-gray-800 u-text-gray-900', command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
+        <div :class="['flex justify-between select-none items-center rounded-md px-3 py-2 gap-3 relative', active && 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white', command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
           <div class="flex items-center gap-2 min-w-0">
             <slot :name="`${group.key}-icon`" :group="group" :command="command">
               <Icon v-if="command.icon" :name="command.icon" :class="['h-4 w-4 flex-shrink-0', active ? 'text-opacity-100 dark:text-opacity-100' : 'text-opacity-40 dark:text-opacity-40', command.iconClass || 'text-gray-900 dark:text-gray-50']" aria-hidden="true" />
@@ -28,26 +28,26 @@
 
             <div class="flex items-center gap-1.5 min-w-0" :class="{ 'opacity-50': command.disabled }">
               <slot :name="`${group.key}-command`" :group="group" :command="command">
-                <span v-if="command.prefix" class="flex-shrink-0" :class="command.prefixClass || 'u-text-gray-400'">{{ command.prefix }}</span>
+                <span v-if="command.prefix" class="flex-shrink-0" :class="command.prefixClass || 'text-gray-400 dark:text-gray-500'">{{ command.prefix }}</span>
 
                 <span class="truncate" :class="{ 'flex-none': command.suffix || command.matches?.length }">{{ command[commandAttribute] }}</span>
 
                 <!-- eslint-disable-next-line vue/no-v-html -->
-                <span v-if="command.matches?.length" class="truncate" :class="command.suffixClass || 'u-text-gray-400'" v-html="highlight(command[commandAttribute], command.matches[0])" />
-                <span v-else-if="command.suffix" class="truncate" :class="command.suffixClass || 'u-text-gray-400'">{{ command.suffix }}</span>
+                <span v-if="command.matches?.length" class="truncate" :class="command.suffixClass || 'text-gray-400 dark:text-gray-500'" v-html="highlight(command[commandAttribute], command.matches[0])" />
+                <span v-else-if="command.suffix" class="truncate" :class="command.suffixClass || 'text-gray-400 dark:text-gray-500'">{{ command.suffix }}</span>
               </slot>
             </div>
           </div>
 
-          <Icon v-if="selected" :name="$ui.commandPalette.option.selected.icon.name" class="h-5 w-5 u-text-gray-900 flex-shrink-0" aria-hidden="true" />
+          <Icon v-if="selected" :name="$ui.commandPalette.option.selected.icon.name" class="h-5 w-5 text-gray-900 dark:text-white flex-shrink-0" aria-hidden="true" />
           <slot v-else-if="active && (group.active || $slots[`${group.key}-active`])" :name="`${group.key}-active`" :group="group" :command="command">
-            <span v-if="group.active" class="flex-shrink-0 u-text-gray-500">{{ group.active }}</span>
+            <span v-if="group.active" class="flex-shrink-0 text-gray-500 dark:text-gray-400">{{ group.active }}</span>
           </slot>
           <slot v-else :name="`${group.key}-inactive`" :group="group" :command="command">
             <span v-if="command.shortcuts?.length" :class="$ui.commandPalette.option.shortcuts">
               <kbd v-for="shortcut of command.shortcuts" :key="shortcut" class="font-sans">{{ shortcut }}</kbd>
             </span>
-            <span v-else-if="!command.disabled && group.inactive" class="flex-shrink-0 u-text-gray-500">{{ group.inactive }}</span>
+            <span v-else-if="!command.disabled && group.inactive" class="flex-shrink-0 text-gray-500 dark:text-gray-400">{{ group.inactive }}</span>
           </slot>
         </div>
       </ComboboxOption>

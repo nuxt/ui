@@ -2,7 +2,7 @@
   <div class="[&>pre]:!rounded-t-none [&>pre]:whitespace-pre-wrap">
     <div v-if="propsToSelect.length" class="relative flex border border-gray-200 dark:border-gray-700 rounded-t-md overflow-hidden not-prose">
       <div v-for="prop in propsToSelect" :key="prop.name" class="flex flex-col gap-0.5 justify-between py-1.5 font-medium bg-gray-50 dark:bg-gray-800 border-r border-r-gray-200 dark:border-r-gray-700">
-        <label :for="prop.name" class="block text-xs px-4 font-medium u-text-gray-400 -my-px">{{ useCamelCase(prop.name) }}</label>
+        <label :for="prop.name" class="block text-xs px-3 font-medium text-gray-400 dark:text-gray-500 -my-px">{{ useCamelCase(prop.name) }}</label>
         <UCheckbox
           v-if="prop.type === 'boolean'"
           v-model="componentProps[prop.name]"
@@ -16,7 +16,7 @@
           :options="prop.options"
           :name="prop.name"
           appearance="none"
-          custom-class="!py-0"
+          :ui="{ custom: '!py-0' }"
         />
         <UInput
           v-else
@@ -25,7 +25,7 @@
           :name="prop.name"
           appearance="none"
           autocomplete="off"
-          custom-class="!py-0"
+          :ui="{ custom: '!py-0' }"
         />
       </div>
     </div>
