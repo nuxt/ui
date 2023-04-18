@@ -62,6 +62,8 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
+    nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
+
     addTemplate({
       filename: 'ui.mjs',
       write: true,
@@ -125,17 +127,19 @@ export default defineNuxtModule<ModuleOptions>({
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
       tailwindConfig.safelist.push(...[{
-        // Avatar chip
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(400|500)`)
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|400|500)`)
       }, {
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-400`),
-        variants: ['dark']
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(500)`),
+        variants: ['disabled']
       }, {
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(500|950)`),
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(400|900|950)`),
         variants: ['dark:hover']
       }, {
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|600)`),
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|100|600)`),
         variants: ['hover']
+      }, {
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(950)`),
+        variants: ['dark']
       }, {
         pattern: new RegExp(`outline-(${safeColorsAsRegex})-500`),
         variants: ['focus-visible']
@@ -172,8 +176,7 @@ export default defineNuxtModule<ModuleOptions>({
           resolve(runtimeDir, 'components/**/*.{vue,js,ts}'),
           resolve(runtimeDir, '*.{mjs,js,ts}')
         ]
-      },
-      cssPath: resolve(runtimeDir, 'tailwind.css')
+      }
     })
 
     addPlugin({

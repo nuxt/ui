@@ -1,5 +1,5 @@
 <template>
-  <pre class="whitespace-pre-wrap"><code>{{ preset }}</code></pre>
+  <pre><code>{{ preset }}</code></pre>
 </template>
 
 <script setup lang="ts">

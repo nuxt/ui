@@ -7,7 +7,9 @@ defineProps<{ id: string }>()
     <NuxtLink :href="`#${id}`" class="group">
       <slot />
 
-      <UIcon name="i-heroicons-hashtag" class="w-4 h-4 inline-block opacity-0 group-hover:opacity-100 text-primary-500 dark:text-primary-400 transition-opacity ml-2" />
+      <div class="absolute -left-4 rounded-md p-1 bg-gray-800 invisible gorup-hover:visible">
+        <UIcon name="i-heroicons-hashtag" class="w-4 h-4 inline-block text-primary-500 dark:text-primary-400" />
+      </div>
     </NuxtLink>
   </h2>
 </template>

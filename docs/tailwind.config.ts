@@ -51,7 +51,8 @@ export default <Partial<Config>> {
               pre: {
                 margin: '0',
                 borderRadius: '0.375rem',
-                border: '1px solid var(--tw-prose-pre-border)'
+                border: '1px solid var(--tw-prose-pre-border)',
+                whiteSpace: 'pre-wrap'
               },
               code: {
                 backgroundColor: 'var(--tw-prose-pre-bg)',

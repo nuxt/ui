@@ -103,7 +103,7 @@ const { data: meta } = await useAsyncData(`${name}-meta`, () => $fetch(`/api/com
 
 // Computed
 
-const ui = computed(() => defu({}, props.ui, appConfig.ui[camelName]))
+const ui = computed(() => ({ ...appConfig.ui[camelName], ...props.ui }))
 
 const fullProps = computed(() => ({ ...props.baseProps, ...componentProps }))
 const vModel = computed({

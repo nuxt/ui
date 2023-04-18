@@ -1,0 +1,7 @@
+.dark {
+  color-scheme: dark;
+}
+
+a:focus-visible, button:focus-visible {
+  @apply outline-primary-500 dark:outline-primary-400;
+}
