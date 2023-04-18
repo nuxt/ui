@@ -85,6 +85,7 @@ const button = {
     lg: 'p-2 sm:px-4',
     xl: 'p-3 sm:px-6'
   },
+  // TODO: outlines
   color: {
     white: {
       solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800/50',
@@ -206,6 +207,7 @@ const input = {
   wrapper: 'relative',
   base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
   custom: '',
+  // TODO: redo sizes
   size: {
     // xxs: 'text-xs',
     // xs: 'text-xs',
@@ -298,7 +300,7 @@ const select = {
 const selectCustom = {
   ...select,
   wrapper: 'relative',
-  base: `${select.base} text-left cursor-default`,
+  base: select.base + ' text-left cursor-default',
   icon: {
     name: 'i-heroicons-chevron-up-down-20-solid',
     ...select.icon
@@ -346,7 +348,7 @@ const radio = {
 
 const checkbox = {
   ...radio,
-  base: `${radio.base} rounded`
+  base: radio.base + ' rounded'
 }
 
 const card = {
@@ -643,28 +645,30 @@ const commandPalette = {
 }
 
 export default {
-  card,
-  modal,
-  button,
-  buttonGroup,
-  badge,
-  formGroup,
-  input,
-  textarea,
-  select,
-  selectCustom,
-  checkbox,
-  radio,
-  container,
-  toggle,
-  verticalNavigation,
-  dropdown,
-  avatar,
-  avatarGroup,
-  slideover,
-  notification,
-  tooltip,
-  popover,
-  contextMenu,
-  commandPalette
+  ui: {
+    card,
+    modal,
+    button,
+    buttonGroup,
+    badge,
+    formGroup,
+    input,
+    textarea,
+    select,
+    selectCustom,
+    checkbox,
+    radio,
+    container,
+    toggle,
+    verticalNavigation,
+    dropdown,
+    avatar,
+    avatarGroup,
+    slideover,
+    notification,
+    tooltip,
+    popover,
+    contextMenu,
+    commandPalette
+  }
 }

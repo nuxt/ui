@@ -3,7 +3,7 @@ import colors from 'tailwindcss/colors.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
-import preset from './runtime/preset'
+import preset from './runtime/app.config'
 import type { DeepPartial } from './runtime/types'
 
 // @ts-ignore
@@ -23,7 +23,7 @@ declare module 'nuxt/schema' {
       primary?: string
       gray?: string
       colors?: string[]
-    } & DeepPartial<typeof preset>
+    } & DeepPartial<typeof preset.ui>
   }
 }
 
@@ -62,16 +62,16 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
-    nuxt.options.appConfig.ui = {
-      primary: 'sky',
-      gray: 'cool',
-      colors: [],
-      ...preset
-    }
-
     addTemplate({
       filename: 'ui.mjs',
-      getContents: () => `export default ${JSON.stringify(preset)}`
+      write: true,
+      getContents: () => `import appConfig from '#build/app.config'
+        export default appConfig.ui
+      `
+    })
+
+    nuxt.hook('app:resolve', (app) => {
+      app.configs.push(resolve(runtimeDir, 'app.config.ts'))
     })
 
     // @ts-ignore
@@ -117,7 +117,11 @@ export default defineNuxtModule<ModuleOptions>({
       const variantColors = excludeColors(globalColors)
       const safeColorsAsRegex = colorsAsRegex(variantColors)
 
-      nuxt.options.appConfig.ui.colors = variantColors
+      nuxt.options.appConfig.ui = {
+        primary: 'sky',
+        gray: 'cool',
+        colors: variantColors
+      }
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
       tailwindConfig.safelist.push(...[{

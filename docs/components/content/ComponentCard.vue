@@ -118,7 +118,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
     return null
   }
 
-  const prop = meta.value.meta.props.find((prop: any) => prop.name === key)
+  const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
   const dottedKey = useKebabCase(key).replaceAll('-', '.')
   const keys = useGet(ui.value, dottedKey, {})
   let options = Object.keys(keys) // .filter(key => typeof keys[key] === 'string')
@@ -142,7 +142,7 @@ const code = computed(() => {
       continue
     }
 
-    const prop = meta.value.meta.props.find((prop: any) => prop.name === key)
+    const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
 
     code += ` ${prop?.type === 'boolean' && value === 'false' ? ':' : ''}${key === 'modelValue' ? 'v-model' : useKebabCase(key)}${prop?.type === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${value}"`}`
   }
