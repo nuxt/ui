@@ -111,7 +111,7 @@ const button = {
   },
   icon: {
     base: 'flex-shrink-0',
-    loading: 'i-heroicons-arrow-path',
+    loading: 'i-heroicons-arrow-path-20-solid',
     size: {
       xxs: 'h-3.5 w-3.5',
       xs: 'h-4 w-4',
@@ -250,7 +250,7 @@ const input = {
   },
   icon: {
     base: 'text-gray-400 dark:text-gray-500',
-    loading: 'i-heroicons-arrow-path',
+    loading: 'i-heroicons-arrow-path-20-solid',
     size: {
       xxs: 'h-3 w-3',
       xs: 'h-4 w-4',
@@ -428,25 +428,25 @@ const toggle = {
 }
 
 const verticalNavigation = {
-  wrapper: 'space-y-1',
-  base: 'group flex items-center text-sm font-medium rounded-md w-full relative',
-  spacing: 'px-3 py-2',
-  active: 'text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800',
-  inactive: 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-900 focus:bg-gray-50 dark:focus:bg-gray-900',
+  wrapper: '',
+  base: 'group flex items-center gap-2 text-sm font-medium rounded-md w-full relative focus:outline-none after:absolute after:inset-px after:z-[-1] after:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
+  spacing: 'px-3 py-1.5',
+  active: 'u-text-gray-900 after:bg-gray-100 dark:after:bg-gray-800',
+  inactive: 'u-text-gray-500 hover:u-text-gray-900 hover:after:bg-gray-50 dark:hover:after:bg-gray-800/50 focus-visible:after:bg-gray-50 dark:focus-visible:after:bg-gray-800/50',
   icon: {
-    base: 'flex-shrink-0 h-6 w-6',
-    spacing: '-ml-1 mr-3',
-    active: 'text-gray-500 dark:text-gray-400',
-    inactive: 'text-gray-400 dark:text-gray-500 group-hover:text-gray-500 dark:group-hover:text-gray-400'
+    base: 'flex-shrink-0 w-4 h-4',
+    spacing: '-ml-0.5',
+    active: 'u-text-gray-700',
+    inactive: 'u-text-gray-400 group-hover:u-text-gray-700'
   },
   avatar: {
     base: 'flex-shrink-0',
-    spacing: '-ml-1 mr-3'
+    spacing: '-ml-0.5'
   },
   badge: {
-    base: 'ml-auto inline-block py-0.5 px-3 text-xs rounded-full',
+    base: 'ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
     active: 'bg-white dark:bg-gray-900',
-    inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 group-hover:bg-gray-200 dark:group-hover:bg-gray-700'
+    inactive: 'u-bg-gray-100 u-text-gray-600 group-hover:bg-white dark:group-hover:bg-gray-900'
   }
 }
 
@@ -616,7 +616,7 @@ const commandPalette = {
     base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-[3.25rem] text-gray-900 dark:text-white focus:ring-0 sm:text-sm',
     icon: {
       base: 'pointer-events-none absolute top-3.5 left-5 h-5 w-5 text-gray-400 dark:text-gray-500',
-      name: 'i-heroicons-magnifying-glass'
+      name: 'i-heroicons-magnifying-glass-20-solid'
     },
     close: {
       base: 'absolute right-2',
@@ -629,7 +629,7 @@ const commandPalette = {
   },
   empty: {
     icon: {
-      name: 'i-heroicons-magnifying-glass'
+      name: 'i-heroicons-magnifying-glass-20-solid'
     }
   },
   option: {

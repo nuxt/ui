@@ -19,7 +19,7 @@
             color="gray"
             variant="ghost"
             class="[&>span]:!w-5 [&>span]:!h-5 !p-1.5 lg:hidden"
-            icon="i-heroicons-magnifying-glass"
+            icon="i-heroicons-magnifying-glass-20-solid"
             size="sm"
             @click="openDocsSearch"
           />

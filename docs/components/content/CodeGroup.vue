@@ -1,45 +1,32 @@
 <template>
-  <TabGroup as="div" :selected-index="selectedTab" @change="changeTab">
-    <TabList class="flex border border-gray-200 dark:border-gray-700 border-b-0 rounded-t-md overflow-hidden">
-      <Tab
+  <div :selected-index="selectedIndex" @change="changeTab">
+    <div class="flex border border-gray-200 dark:border-gray-700 border-b-0 rounded-t-md overflow-hidden -mb-px">
+      <div
         v-for="(tab, index) in tabs"
         :key="index"
-        v-slot="{ selected }"
         as="template"
+        @click="selectedIndex = index"
       >
         <button
-          class="px-4 py-2 focus:outline-none text-sm border-b border-r border-r-gray-200 dark:border-r-gray-700"
+          class="px-4 py-2 focus:outline-none text-sm border-r border-r-gray-200 dark:border-r-gray-700 transition-colors"
           tabindex="-1"
-          :class="[selected ? 'text-primary-500 dark:text-primary-400 bg-gray-50 dark:bg-gray-800 !border-b-primary-400' : '!border-b-transparent']"
+          :class="[selectedIndex === index ? 'font-medium text-primary-500 dark:text-primary-400 bg-gray-50 dark:bg-gray-800' : 'hover:bg-gray-50 dark:hover:bg-gray-800']"
         >
           {{ tab.label }}
         </button>
-      </Tab>
-    </TabList>
+      </div>
+    </div>
 
-    <TabPanels class="relative">
-      <TabPanel
-        v-for="(tab, index) in tabs"
-        :key="index"
-        tabindex="-1"
-        class="[&>pre]:!rounded-t-none"
-      >
-        <ClientOnly>
-          <component :is="tab.component" />
-        </ClientOnly>
-      </TabPanel>
-    </TabPanels>
-  </TabGroup>
+    <div class="[&>pre]:!rounded-t-none">
+      <component :is="selectedTab.component" />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-// TODO: fix ssr
-
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
-
 const slots = useSlots()
 
-const selectedTab = ref()
+const selectedIndex = ref(0)
 
 // Computed
 
@@ -50,10 +37,12 @@ const tabs = computed(() => slots.default?.().map((slot, index) => {
   }
 }) || [])
 
+const selectedTab = computed(() => tabs.value.find((_, index) => index === selectedIndex.value))
+
 // Methods
 
 function changeTab (index) {
-  selectedTab.value = index
+  selectedIndex.value = index
 }
 </script>
 

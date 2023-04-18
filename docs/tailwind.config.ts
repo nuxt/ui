@@ -4,9 +4,7 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 export default <Partial<Config>> {
   darkMode: 'class',
   content: [
-    'docs/ui/*.ts',
-    'docs/content/**/*.md',
-    'docs/app.config.ts'
+    'docs/content/**/*.md'
   ],
   theme: {
     extend: {

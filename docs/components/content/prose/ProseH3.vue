@@ -5,8 +5,11 @@ defineProps<{ id: string }>()
 <template>
   <h3 :id="id" class="scroll-mt-[145px] lg:scroll-mt-[96px]">
     <NuxtLink :href="`#${id}`" class="group">
+      <div class="-ml-6 pr-2 inline-flex opacity-0 group-hover:opacity-100 transition-opacity">
+        <UIcon name="i-heroicons-hashtag-20-solid" class="w-4 h-4 text-primary-500 dark:text-primary-400" />
+      </div>
+
       <slot />
-      <UIcon name="i-heroicons-hashtag" class="w-3 h-3 inline-block opacity-0 group-hover:opacity-100 text-primary-500 dark:text-primary-400 transition-opacity ml-2" />
     </NuxtLink>
   </h3>
 </template>

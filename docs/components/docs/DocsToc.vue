@@ -4,7 +4,7 @@
       <button class="flex items-center gap-2" tabindex="-1" @click="isTocOpen = !isTocOpen">
         <span class="text-sm text-slate-900 font-semibold text-sm leading-6 dark:text-slate-100 truncate">Table of Contents</span>
 
-        <UIcon name="i-heroicons-chevron-right" class="lg:hidden w-4 h-4 transition-transform duration-100 transform text-gray-400 dark:text-gray-500" :class="[isTocOpen ? 'rotate-90' : 'rotate-0']" />
+        <UIcon name="i-heroicons-chevron-right-20-solid" class="lg:hidden w-4 h-4 transition-transform duration-100 transform text-gray-400 dark:text-gray-500" :class="[isTocOpen ? 'rotate-90' : 'rotate-0']" />
       </button>
 
       <DocsTocLinks class="mt-2 lg:mt-4" :links="toc.links" :class="[isTocOpen ? 'lg:block' : 'hidden lg:block']" />

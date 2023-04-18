@@ -13,7 +13,7 @@
 
         <span>{{ primary.text }}</span>
 
-        <UIcon name="i-heroicons-chevron-down-20-solid" class="ml-2" />
+        <UIcon name="i-heroicons-chevron-down-20-solid" class="ml-2 w-4 h-4 -mr-0.5" />
       </UButton>
 
       <template #option="{ option }">
@@ -36,7 +36,7 @@
 
         <span>{{ gray.text }}</span>
 
-        <UIcon name="i-heroicons-chevron-down-20-solid" class="ml-2" />
+        <UIcon name="i-heroicons-chevron-down-20-solid" class="ml-2 w-4 h-4 -mr-0.5" />
       </UButton>
 
       <template #option="{ option }">

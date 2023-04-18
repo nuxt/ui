@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md']">
+    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass]">
       <component :is="name" v-model="vModel" v-bind="fullProps">
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
       </component>
@@ -47,13 +47,12 @@
     </div>
 
     <ContentSlot v-if="$slots.code" :use="$slots.code" />
-    <ContentRenderer v-else :value="ast" class="[&>pre]:!rounded-t-none [&>pre]:whitespace-pre-wrap" />
+    <ContentRenderer v-else :value="ast" class="[&>pre]:!rounded-t-none" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { transformContent } from '@nuxt/content/transformers'
-import { defu } from 'defu'
 
 const props = defineProps({
   slug: {
@@ -87,6 +86,10 @@ const props = defineProps({
   trigger: {
     type: Boolean,
     default: false
+  },
+  backgroundClass: {
+    type: String,
+    default: 'bg-white dark:bg-gray-900'
   }
 })
 
