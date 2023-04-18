@@ -3,13 +3,13 @@
     <USelectCustom
       v-model="primary"
       name="primary"
-      list-width-class="w-[186px]"
+      list-width-class="w-[179px]"
       class="w-full"
       :popper-options="{ placement: 'bottom-start' }"
       :options="primaryOptions"
     >
       <UButton color="gray" size="sm" class="!shadow-none !rounded-r-none" truncate block>
-        <span class="flex-shrink-0 h-4 w-4 -ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${primary.hex}`}" />
+        <span class="flex-shrink-0 h-3 w-3 -ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${primary.hex}`}" />
 
         <span>{{ primary.text }}</span>
 
@@ -17,7 +17,7 @@
       </UButton>
 
       <template #option="{ option }">
-        <span class="flex-shrink-0 h-4 w-4 rounded-full" :style="{ backgroundColor: `${option.hex}`}" />
+        <span class="flex-shrink-0 h-3 w-3 rounded-full" :style="{ backgroundColor: `${option.hex}`}" />
 
         {{ option.text }}
       </template>
@@ -27,12 +27,12 @@
       v-model="gray"
       name="gray"
       class="w-full"
-      list-width-class="w-[186px]"
+      list-width-class="w-[179px]"
       :popper-options="{ placement: 'bottom-end' }"
       :options="grayOptions"
     >
       <UButton color="gray" size="sm" class="!shadow-none -ml-px !rounded-l-none" block>
-        <span class="flex-shrink-0 h-4 w-4 -ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${gray.hex}`}" />
+        <span class="flex-shrink-0 h-3 w-3 -ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${gray.hex}`}" />
 
         <span>{{ gray.text }}</span>
 
@@ -40,7 +40,7 @@
       </UButton>
 
       <template #option="{ option }">
-        <span class="flex-shrink-0 h-4 w-4 rounded-full" :style="{ backgroundColor: `${option.hex}`}" />
+        <span class="flex-shrink-0 h-3 w-3 rounded-full" :style="{ backgroundColor: `${option.hex}`}" />
 
         {{ option.text }}
       </template>
