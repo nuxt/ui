@@ -84,6 +84,7 @@ export default defineComponent({
     const ui = computed<Partial<typeof appConfig.ui.verticalNavigation>>(() => defu({}, props.ui, appConfig.ui.verticalNavigation))
 
     return {
+      // eslint-disable-next-line vue/no-dupe-keys
       ui
     }
   }
