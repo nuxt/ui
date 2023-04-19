@@ -15,6 +15,7 @@ import { defu } from 'defu'
 import type { VirtualElement } from '@popperjs/core'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
+// @ts-expect-error
 import $ui from '#build/ui'
 
 const props = defineProps({

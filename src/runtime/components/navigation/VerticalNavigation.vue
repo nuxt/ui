@@ -48,6 +48,7 @@ import LinkCustom from '../elements/LinkCustom.vue'
 import type { Avatar as AvatarType } from '../../types/avatar'
 import { useAppConfig } from '#imports'
 // TODO: Remove
+// @ts-expect-error
 import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()

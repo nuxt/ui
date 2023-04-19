@@ -120,6 +120,7 @@ export default defineNuxtModule<ModuleOptions>({
       const safeColorsAsRegex = colorsAsRegex(variantColors)
 
       nuxt.options.appConfig.ui = {
+        ...nuxt.options.appConfig.ui,
         primary: 'sky',
         gray: 'cool',
         colors: variantColors

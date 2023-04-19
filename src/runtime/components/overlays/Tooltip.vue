@@ -29,6 +29,7 @@ import { computed, ref } from 'vue'
 import { defu } from 'defu'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
+// @ts-expect-error
 import $ui from '#build/ui'
 
 const props = defineProps({

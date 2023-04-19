@@ -1,22 +1,16 @@
 <script setup>
 const links = [{
-  label: 'Dashboard',
-  icon: 'i-heroicons-home'
+  label: 'Installation',
+  icon: 'i-heroicons-home',
+  to: '/getting-started/installation'
 }, {
-  label: 'Team',
-  icon: 'i-heroicons-users'
+  label: 'Vertical Navigation',
+  icon: 'i-heroicons-chart-bar',
+  to: '/navigation/vertical-navigation'
 }, {
-  label: 'Projects',
-  icon: 'i-heroicons-folder'
-}, {
-  label: 'Calendar',
-  icon: 'i-heroicons-calendar'
-}, {
-  label: 'Documents',
-  icon: 'i-heroicons-inbox'
-}, {
-  label: 'Reports',
-  icon: 'i-heroicons-chart-bar'
+  label: 'Command Palette',
+  icon: 'i-heroicons-command-line',
+  to: '/navigation/command-palette'
 }]
 </script>
 

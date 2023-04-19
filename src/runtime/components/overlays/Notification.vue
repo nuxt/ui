@@ -57,6 +57,7 @@ import Icon from '../elements/Icon.vue'
 import { useTimer } from '../../composables/useTimer'
 import { classNames } from '../../utils'
 import type { ToastNotificationAction } from '../../types'
+// @ts-expect-error
 import $ui from '#build/ui'
 
 const props = defineProps({

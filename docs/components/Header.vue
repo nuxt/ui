@@ -24,6 +24,7 @@
             @click="openDocsSearch"
           />
 
+          <!-- @ts-ignore -->
           <ColorScheme class="w-[32px]">
             <UButton
               :icon="isDark ? 'i-heroicons-moon' : 'i-heroicons-sun'"

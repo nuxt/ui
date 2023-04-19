@@ -1,8 +1,8 @@
 import ui from '../src/module'
 
 export default defineNuxtConfig({
+  // @ts-ignore
   modules: [
-    // @ts-ignore
     ui,
     '@vueuse/nuxt',
     '@nuxt/content',
@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     icons: ['heroicons', 'mdi']
   },
   typescript: {
-    strict: false
+    strict: false,
+    includeWorkspace: true
   }
 })

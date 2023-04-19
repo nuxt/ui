@@ -60,6 +60,7 @@ import type { PopperOptions } from '../../types'
 import { NuxtLink } from '#components'
 import { useAppConfig } from '#imports'
 // TODO: Remove
+// @ts-expect-error
 import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()
@@ -124,7 +125,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.dropdown>>(() => defu({}, props.ui, appConfig.ui.dropdown))
 
-    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper))
+    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
 

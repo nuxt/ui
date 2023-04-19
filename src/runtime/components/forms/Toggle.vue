@@ -22,6 +22,7 @@ import { Switch } from '@headlessui/vue'
 import Icon from '../elements/Icon.vue'
 import { useAppConfig } from '#imports'
 // TODO: Remove
+// @ts-expect-error
 import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()

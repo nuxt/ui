@@ -5,6 +5,7 @@ import { classNames } from '../../utils'
 import Avatar from './Avatar.vue'
 import { useAppConfig } from '#imports'
 // TODO: Remove
+// @ts-expect-error
 import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()
@@ -37,6 +38,7 @@ export default defineComponent({
       let children = slots.default?.()
       // @ts-ignore-next
       if (children.length && children[0].type.name === 'ContentSlot') {
+        // @ts-ignore-next
         children = children[0].ctx.slots.default?.()
       }
       return children

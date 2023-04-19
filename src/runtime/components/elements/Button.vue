@@ -8,9 +8,8 @@
   >
     <Icon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     <slot>
-      <span v-if="label" :class="[truncate ? 'text-left break-all line-clamp-1' : '', compact ? 'hidden sm:block' : '']">
-        <span :class="[labelCompact && 'hidden sm:block']">{{ label }}</span>
-        <span v-if="labelCompact" class="sm:hidden">{{ labelCompact }}</span>
+      <span v-if="label" :class="[truncate ? 'text-left break-all line-clamp-1' : '']">
+        {{ label }}
       </span>
     </slot>
     <Icon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
@@ -27,6 +26,7 @@ import { classNames } from '../../utils'
 import { NuxtLink } from '#components'
 import { useAppConfig } from '#imports'
 // TODO: Remove
+// @ts-expect-error
 import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()
@@ -45,10 +45,6 @@ export default defineComponent({
       default: false
     },
     label: {
-      type: String,
-      default: null
-    },
-    labelCompact: {
       type: String,
       default: null
     },
@@ -121,10 +117,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    compact: {
-      type: Boolean,
-      default: false
-    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.button>>,
       default: () => appConfig.ui.button
@@ -173,7 +165,8 @@ export default defineComponent({
         ui.value.base,
         ui.value.rounded,
         ui.value.size[props.size],
-        ui.value[isSquare.value ? 'square' : (props.compact ? 'compact' : 'spacing')][props.size],
+        ui.value.gap[props.size],
+        ui.value[isSquare.value ? 'square' : 'spacing'][props.size],
         variant?.replaceAll('{color}', props.color),
         props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
       )

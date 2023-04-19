@@ -19,7 +19,7 @@
           :ui="{ width: 'w-32', rounded: 'rounded-b-md' }"
           :popper="{ strategy: 'fixed', placement: 'bottom-start' }"
         >
-          <button class="px-3 sm:text-sm sm:leading-6 inline-flex items-center gap-1.5">
+          <button class="px-3 sm:text-sm sm:leading-6 inline-flex items-center gap-1.5 mb-[0.5px]">
             {{ componentProps[prop.name] }}
 
             <UIcon name="i-heroicons-chevron-down-20-solid" class="w-4 h-4 flex-shrink-0 -mr-0.5 text-gray-400 dark:text-gray-500" />
@@ -48,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
+// @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
 
 const props = defineProps({

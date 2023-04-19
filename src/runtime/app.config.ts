@@ -215,9 +215,12 @@ const dropdown = {
     shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400 ml-auto'
   },
   transition: {
-    leaveActiveClass: 'transition ease-in duration-100',
-    leaveFromClass: 'opacity-100',
-    leaveToClass: 'opacity-0'
+    enterActiveClass: 'transition duration-100 ease-out',
+    enterFromClass: 'transform scale-95 opacity-0',
+    enterToClass: 'transform scale-100 opacity-100',
+    leaveActiveClass: 'transition duration-75 ease-out',
+    leaveFromClass: 'transform scale-100 opacity-100',
+    leaveToClass: 'transform scale-95 opacity-0'
   },
   popper: {
     placement: 'bottom-end',
@@ -233,7 +236,7 @@ const input = {
   base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
   custom: '',
   size: {
-    // xxs: 'text-xs',
+    // '2xs': 'text-xs',
     // xs: 'text-xs',
     // sm: 'text-sm leading-4',
     md: 'sm:text-sm sm:leading-6'
@@ -241,7 +244,7 @@ const input = {
     // xl: 'text-base'
   },
   spacing: {
-    // xxs: 'px-1 py-0.5',
+    // '2xs': 'px-1 py-0.5',
     // xs: 'px-2.5 py-1.5',
     // sm: 'px-3 py-2',
     md: 'px-3 py-1.5'
@@ -250,7 +253,7 @@ const input = {
   },
   leading: {
     spacing: {
-      // xxs: 'pl-7',
+      // '2xs': 'pl-7',
       // xs: 'pl-7',
       // sm: 'pl-10',
       md: 'pl-10'
@@ -260,7 +263,7 @@ const input = {
   },
   trailing: {
     spacing: {
-      // xxs: 'pr-7',
+      // '2xs': 'pr-7',
       // xs: 'pr-7',
       // sm: 'pr-10',
       md: 'pr-10'
@@ -276,7 +279,7 @@ const input = {
   icon: {
     base: 'text-gray-400 dark:text-gray-500',
     size: {
-      // xxs: 'h-3 w-3',
+      // '2xs': 'h-3 w-3',
       // xs: 'h-4 w-4',
       // sm: 'h-5 w-5',
       md: 'h-5 w-5'
@@ -286,7 +289,7 @@ const input = {
     leading: {
       wrapper: 'absolute inset-y-0 left-0 flex items-center pointer-events-none',
       spacing: {
-        // xxs: 'ml-2',
+        // '2xs': 'ml-2',
         // xs: 'ml-2',
         // sm: 'ml-2',
         md: 'pl-3'
@@ -297,7 +300,7 @@ const input = {
     trailing: {
       wrapper: 'absolute inset-y-0 right-0 flex items-center pointer-events-none',
       spacing: {
-        // xxs: 'mr-2',
+        // '2xs': 'mr-2',
         // xs: 'mr-2',
         // sm: 'mr-2',
         md: 'pr-3'
@@ -336,7 +339,7 @@ const selectMenu = {
   container: 'z-20',
   width: 'w-full',
   height: 'max-h-60',
-  base: 'relative focus:outline-none overflow-y-auto',
+  base: 'relative focus:outline-none overflow-y-auto scroll-py-1',
   background: 'bg-white dark:bg-gray-800',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
@@ -457,7 +460,9 @@ const verticalNavigation = {
 
 const commandPalette = {
   wrapper: 'flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800',
+  container: 'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
   input: {
+    wrapper: 'relative flex items-center',
     base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-[3.25rem] text-gray-900 dark:text-white focus:ring-0 sm:text-sm',
     icon: {
       base: 'pointer-events-none absolute top-3.5 left-5 h-5 w-5 text-gray-400 dark:text-gray-500',
@@ -473,8 +478,11 @@ const commandPalette = {
     }
   },
   placeholder: {
+    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    label: 'text-sm text-center text-gray-900 dark:text-white',
     icon: {
-      name: 'i-heroicons-magnifying-glass-20-solid'
+      name: 'i-heroicons-magnifying-glass-20-solid',
+      base: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
     }
   },
   option: {

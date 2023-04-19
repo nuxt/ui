@@ -8,7 +8,7 @@
     @update:model-value="onSelect"
   >
     <div :class="ui.wrapper">
-      <div v-show="searchable" class="relative flex items-center">
+      <div v-if="searchable" :class="ui.input.wrapper">
         <Icon v-if="ui.input.icon.name" :name="ui.input.icon.name" :class="ui.input.icon.base" aria-hidden="true" />
         <ComboboxInput
           ref="comboboxInput"
@@ -36,7 +36,7 @@
         hold
         as="div"
         aria-label="Commands"
-        class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2"
+        :class="ui.container"
       >
         <CommandPaletteGroup
           v-for="group of groups"
@@ -45,6 +45,7 @@
           :group="group"
           :group-attribute="groupAttribute"
           :command-attribute="commandAttribute"
+          :ui="ui"
         >
           <template v-for="(_, name) in $slots" #[name]="slotData">
             <slot :name="name" v-bind="slotData" />
@@ -52,9 +53,9 @@
         </CommandPaletteGroup>
       </ComboboxOptions>
 
-      <div v-else-if="placeholder" class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
-        <Icon v-if="ui.placeholder.icon.name" :name="ui.placeholder.icon.name" class="w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4" aria-hidden="true" />
-        <p class="text-sm text-center text-gray-900 dark:text-white">
+      <div v-else-if="placeholder" :class="ui.placeholder.wrapper">
+        <Icon v-if="ui.placeholder.icon.name" :name="ui.placeholder.icon.name" :class="ui.placehoder.icon.base" aria-hidden="true" />
+        <p :class="ui.placeholder.label">
           {{ query ? "We couldn't find any items with that term. Please try again." : "We couldn't find any items." }}
         </p>
       </div>
@@ -77,6 +78,7 @@ import Icon from '../elements/Icon.vue'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 import { useAppConfig } from '#imports'
 // TODO: Remove
+// @ts-expect-error
 import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()

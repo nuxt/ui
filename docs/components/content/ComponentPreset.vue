@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <ContentRenderer :value="ast" />
-  </div>
-  <!-- <pre><code>{{ preset }}</code></pre> -->
+  <ContentRenderer :value="ast" />
 </template>
 
 <script setup lang="ts">
+// @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
 
 const props = defineProps({

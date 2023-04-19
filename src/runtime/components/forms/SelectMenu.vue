@@ -95,6 +95,7 @@ import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
+// @ts-expect-error
 import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()
@@ -195,7 +196,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.selectMenu>>(() => defu({}, props.ui, appConfig.ui.selectMenu))
 
-    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper))
+    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
 
