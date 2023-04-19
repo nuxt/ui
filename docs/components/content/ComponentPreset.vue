@@ -30,9 +30,8 @@ ${JSON.stringify(preset, null, 2)}
 `, {
   highlight: {
     theme: {
-      default: 'material-default',
       light: 'material-lighter',
-      dark: 'material-darker'
+      dark: 'material-palenight'
     }
   }
 }))

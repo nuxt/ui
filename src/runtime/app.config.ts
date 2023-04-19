@@ -405,7 +405,7 @@ const toggle = {
 
 const card = {
   base: 'overflow-hidden',
-  background: 'bg-white dark:bg-gray-800',
+  background: 'bg-white dark:bg-gray-900',
   divide: 'divide-y divide-gray-200 dark:divide-gray-700',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
   rounded: 'rounded-lg',
@@ -472,7 +472,7 @@ const commandPalette = {
       }
     }
   },
-  empty: {
+  placeholder: {
     icon: {
       name: 'i-heroicons-magnifying-glass-20-solid'
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="[&>pre]:!rounded-t-none [&>pre]:whitespace-pre-wrap">
+  <div>
     <div v-if="propsToSelect.length" class="relative flex border border-gray-200 dark:border-gray-700 rounded-t-md overflow-hidden not-prose">
       <div v-for="prop in propsToSelect" :key="prop.name" class="flex flex-col gap-0.5 justify-between py-1.5 font-medium bg-gray-50 dark:bg-gray-800 border-r border-r-gray-200 dark:border-r-gray-700">
         <label :for="prop.name" class="block text-xs px-3 font-medium text-gray-400 dark:text-gray-500 -my-px">{{ useCamelCase(prop.name) }}</label>
@@ -43,7 +43,7 @@
       </component>
     </div>
 
-    <ContentRenderer :value="ast" class="[&>pre]:!rounded-t-none" />
+    <ContentRenderer :value="ast" class="[&>div>pre]:!rounded-t-none" />
   </div>
 </template>
 
@@ -161,9 +161,8 @@ const code = computed(() => {
 const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify(componentProps)}`, () => transformContent('content:_markdown.md', code.value, {
   highlight: {
     theme: {
-      default: 'material-default',
       light: 'material-lighter',
-      dark: 'material-darker'
+      dark: 'material-palenight'
     }
   }
 }), { watch: [code] })

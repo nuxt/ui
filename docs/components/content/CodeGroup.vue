@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="[&>pre]:!rounded-t-none">
+    <div class="[&>div>pre]:!rounded-t-none">
       <component :is="selectedTab.component" />
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="[&>pre]:!rounded-t-none">
+  <div class="[&>div>pre]:!rounded-t-none">
     <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose rounded-t-md" :class="[{ 'p-4': padding }, backgroundClass]">
       <ContentSlot v-if="$slots.default" :use="$slots.default" />
     </div>

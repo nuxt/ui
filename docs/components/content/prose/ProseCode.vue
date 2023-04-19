@@ -1,0 +1,62 @@
+<script lang="ts">
+import { defineComponent } from '#imports'
+
+export default defineComponent({
+  props: {
+    code: {
+      type: String,
+      default: ''
+    },
+    language: {
+      type: String,
+      default: null
+    },
+    filename: {
+      type: String,
+      default: null
+    },
+    highlights: {
+      type: Array as () => number[],
+      default: () => []
+    },
+    meta: {
+      type: String,
+      default: null
+    }
+  },
+  setup (props) {
+    const clipboard = useCopyToClipboard({ timeout: 2000 })
+    const icon = ref('i-heroicons-clipboard-document')
+
+    function copy () {
+      clipboard.copy(props.code, { title: 'Copied to clipboard!' })
+
+      icon.value = 'i-heroicons-clipboard-document-check'
+
+      setTimeout(() => {
+        icon.value = 'i-heroicons-clipboard-document'
+      }, 2000)
+    }
+
+    return {
+      icon,
+      copy
+    }
+  }
+})
+</script>
+
+<template>
+  <div class="group relative" :class="`language-${language}`">
+    <UButton :icon="icon" variant="ghost" class="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity" size="xs" @click="copy" />
+
+    <slot />
+  </div>
+</template>
+
+<style>
+pre code .line {
+  display: block;
+  min-height: 1rem;
+}
+</style>
