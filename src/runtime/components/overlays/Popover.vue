@@ -82,7 +82,7 @@ const props = defineProps({
     type: Object,
     default: () => $ui.popover.transition
   },
-  popperOptions: {
+  popper: {
     type: Object as PropType<PopperOptions>,
     default: () => ({})
   },
@@ -96,9 +96,9 @@ const props = defineProps({
   }
 })
 
-const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.popover.popperOptions))
+const popper = computed<PopperOptions>(() => defu({}, props.popper, $ui.popover.popper))
 
-const [trigger, container] = usePopper(popperOptions.value)
+const [trigger, container] = usePopper(popper.value)
 
 // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
 const popoverApi = ref<any>(null)

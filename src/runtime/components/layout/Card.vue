@@ -1,7 +1,7 @@
 <template>
   <component
     :is="$attrs.onSubmit ? 'form': 'div'"
-    :class="[ui.base, ui.rounded, ui.divide, ui.shadow, ui.background]"
+    :class="[ui.base, ui.rounded, ui.divide, ui.ring, ui.shadow, ui.background]"
     v-bind="$attrs"
   >
     <div v-if="$slots.header" :class="[ui.header.spacing, ui.header.background]">

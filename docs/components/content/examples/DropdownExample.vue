@@ -1,16 +1,3 @@
----
-description: ''
-autolink: true
----
-
-## Usage
-
-::component-example
-#default
-:dropdown-example
-
-#code
-```vue
 <script setup>
 const items = [
   [{
@@ -37,13 +24,3 @@ const items = [
     <UButton color="white" label="Options" trailing-icon="i-heroicons-chevron-down-20-solid" />
   </UDropdown>
 </template>
-```
-::
-
-## Props
-
-:component-props
-
-## Preset
-
-:component-preset

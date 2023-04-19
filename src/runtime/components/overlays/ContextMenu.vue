@@ -62,7 +62,7 @@ const props = defineProps({
     type: Object,
     default: () => $ui.contextMenu.transition
   },
-  popperOptions: {
+  popper: {
     type: Object as PropType<PopperOptions>,
     default: () => ({})
   }
@@ -81,7 +81,7 @@ const isOpen = computed({
 
 const virtualElement = toRef(props, 'virtualElement') as Ref<VirtualElement>
 
-const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.contextMenu.popperOptions))
+const popper = computed<PopperOptions>(() => defu({}, props.popper, $ui.contextMenu.popper))
 
-const [, container] = usePopper(popperOptions.value, virtualElement)
+const [, container] = usePopper(popper.value, virtualElement)
 </script>

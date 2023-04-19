@@ -36,9 +36,13 @@
       </template>
     </select>
 
-    <div v-if="icon" :class="ui.icon.leading.wrapper">
+    <div v-if="icon" :class="leadingIconClass">
       <Icon :name="icon" :class="iconClass" />
     </div>
+
+    <span :class="trailingIconClass">
+      <Icon name="i-heroicons-chevron-down-20-solid" :class="iconClass" aria-hidden="true" />
+    </span>
   </div>
 </template>
 
@@ -193,8 +197,21 @@ export default defineComponent({
     const iconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        ui.value.icon.size[props.size],
-        !!props.icon && ui.value.icon.leading.spacing[props.size]
+        ui.value.icon.size[props.size]
+      )
+    })
+
+    const leadingIconClass = computed(() => {
+      return classNames(
+        ui.value.icon.leading.wrapper,
+        ui.value.icon.leading.spacing[props.size]
+      )
+    })
+
+    const trailingIconClass = computed(() => {
+      return classNames(
+        ui.value.icon.trailing.wrapper,
+        ui.value.icon.trailing.spacing[props.size]
       )
     })
 
@@ -205,6 +222,8 @@ export default defineComponent({
       normalizedValue,
       selectClass,
       iconClass,
+      leadingIconClass,
+      trailingIconClass,
       onInput
     }
   }

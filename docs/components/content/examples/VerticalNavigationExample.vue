@@ -1,16 +1,3 @@
----
-description: ''
-autolink: true
----
-
-## Usage
-
-::component-example
-#default
-:vertical-navigation-example
-
-#code
-```vue
 <script setup>
 const links = [{
   label: 'Dashboard',
@@ -36,13 +23,3 @@ const links = [{
 <template>
   <UVerticalNavigation :links="links" />
 </template>
-```
-::
-
-## Props
-
-:component-props
-
-## Preset
-
-:component-preset

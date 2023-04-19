@@ -18,11 +18,11 @@
       @blur="$emit('blur', $event)"
     >
     <slot />
-    <div v-if="isLeading" :class="ui.input.icon.leading.wrapper">
-      <Icon v-if="iconName" :name="iconName" :class="iconClass" />
+    <div v-if="isLeading && leadingIconName" :class="leadingIconClass">
+      <Icon :name="leadingIconName" :class="iconClass" />
     </div>
-    <div v-if="isTrailing" :class="ui.input.icon.trailing.wrapper">
-      <Icon v-if="iconName" :name="iconName" :class="iconClass" />
+    <div v-if="isTrailing && trailingIconName" :class="trailingIconClass">
+      <Icon :name="trailingIconName" :class="iconClass" />
     </div>
   </div>
 </template>
@@ -68,10 +68,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    loading: {
-      type: Boolean,
-      default: false
-    },
     readonly: {
       type: Boolean,
       default: false
@@ -89,6 +85,14 @@ export default defineComponent({
       default: null
     },
     icon: {
+      type: String,
+      default: null
+    },
+    leadingIcon: {
+      type: String,
+      default: null
+    },
+    trailingIcon: {
       type: String,
       default: null
     },
@@ -144,14 +148,6 @@ export default defineComponent({
       }, 100)
     })
 
-    const isLeading = computed(() => {
-      return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing)
-    })
-
-    const isTrailing = computed(() => {
-      return (props.icon && props.trailing) || (props.loading && props.trailing)
-    })
-
     const inputClass = computed(() => {
       return classNames(
         ui.value.base,
@@ -164,21 +160,40 @@ export default defineComponent({
       )
     })
 
-    const iconName = computed(() => {
-      if (props.loading) {
-        return ui.value.icon.loading
-      }
+    const isLeading = computed(() => {
+      return (props.icon && props.leading) || (props.icon && !props.trailing) || props.leadingIcon
+    })
 
-      return props.icon
+    const isTrailing = computed(() => {
+      return (props.icon && props.trailing) || props.trailingIcon
+    })
+
+    const leadingIconName = computed(() => {
+      return props.leadingIcon || props.icon
+    })
+
+    const trailingIconName = computed(() => {
+      return props.trailingIcon || props.icon
     })
 
     const iconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        ui.value.icon.size[props.size],
-        isLeading.value && ui.value.icon.leading.spacing[props.size],
-        isTrailing.value && ui.value.icon.trailing.spacing[props.size],
-        props.loading && 'animate-spin'
+        ui.value.icon.size[props.size]
+      )
+    })
+
+    const leadingIconClass = computed(() => {
+      return classNames(
+        ui.value.icon.leading.wrapper,
+        ui.value.icon.leading.spacing[props.size]
+      )
+    })
+
+    const trailingIconClass = computed(() => {
+      return classNames(
+        ui.value.icon.trailing.wrapper,
+        ui.value.icon.trailing.spacing[props.size]
       )
     })
 
@@ -188,8 +203,11 @@ export default defineComponent({
       isLeading,
       isTrailing,
       inputClass,
-      iconName,
       iconClass,
+      leadingIconName,
+      leadingIconClass,
+      trailingIconName,
+      trailingIconClass,
       onInput
     }
   }

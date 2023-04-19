@@ -1,11 +1,13 @@
+// Elements
+
 const avatar = {
   wrapper: 'relative inline-flex items-center justify-center',
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
   placeholder: 'text-xs font-medium leading-none text-gray-900 dark:text-white truncate',
   size: {
-    xxxs: 'h-4 w-4 text-xs',
-    xxs: 'h-5 w-5 text-xs',
+    '3xs': 'h-4 w-4 text-xs',
+    '2xs': 'h-5 w-5 text-xs',
     xs: 'h-6 w-6 text-xs',
     sm: 'h-8 w-8 text-sm',
     md: 'h-10 w-10 text-md',
@@ -26,8 +28,8 @@ const avatar = {
       solid: 'bg-{color}-400'
     },
     size: {
-      xxxs: 'h-1 w-1',
-      xxs: 'h-1 w-1',
+      '3xs': 'h-1 w-1',
+      '2xs': 'h-1 w-1',
       xs: 'h-1.5 w-1.5',
       sm: 'h-2 w-2',
       md: 'h-2.5 w-2.5',
@@ -50,6 +52,26 @@ const avatarGroup = {
   margin: '-mr-1.5 first:mr-0'
 }
 
+const badge = {
+  base: 'inline-flex items-center font-medium',
+  rounded: 'rounded-md',
+  size: {
+    sm: 'text-xs px-2 py-0.5',
+    md: 'text-sm px-2.5 py-0.5',
+    lg: 'text-sm px-3 py-0.5',
+    xl: 'text-sm px-4 py-1'
+  },
+  variant: {
+    solid: 'bg-{color}-100 dark:bg-{color}-700 text-{color}-800 dark:text-{color}-100'
+  },
+  default: {
+    size: 'md',
+    variant: 'solid',
+    color: 'primary'
+  }
+}
+
+// TODO: improve sizes, should have `2xs`
 const button = {
   base: 'font-medium disabled:pointer-events-none disabled:select-none disabled:opacity-75',
   rounded: 'rounded-md',
@@ -172,24 +194,38 @@ const buttonGroup = {
   shadow: 'shadow-sm dark:shadow-white/5'
 }
 
-const badge = {
-  base: 'inline-flex items-center font-medium',
+const dropdown = {
+  wrapper: 'relative inline-flex text-left',
+  container: 'z-20',
+  width: 'w-48',
+  background: 'bg-white dark:bg-gray-800',
+  shadow: 'shadow-lg dark:shadow-white/10',
   rounded: 'rounded-md',
-  size: {
-    sm: 'text-xs px-2 py-0.5',
-    md: 'text-sm px-2.5 py-0.5',
-    lg: 'text-sm px-3 py-0.5',
-    xl: 'text-sm px-4 py-1'
+  ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
+  base: 'focus:outline-none',
+  divide: 'divide-y divide-gray-200 dark:divide-gray-700',
+  spacing: 'p-1',
+  item: {
+    base: 'group flex items-center gap-2 px-2 py-1.5 text-sm w-full rounded-md',
+    active: 'bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white',
+    inactive: 'text-gray-700 dark:text-gray-200',
+    disabled: 'cursor-not-allowed opacity-50',
+    icon: 'h-4 w-4 text-gray-400 dark:text-gray-500 group-hover:text-gray-500 dark:group-hover:text-gray-400 flex-shrink-0',
+    avatar: '-m-0.5 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 flex-shrink-0',
+    shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400 ml-auto'
   },
-  variant: {
-    solid: 'bg-{color}-100 dark:bg-{color}-700 text-{color}-800 dark:text-{color}-100'
+  transition: {
+    leaveActiveClass: 'transition ease-in duration-100',
+    leaveFromClass: 'opacity-100',
+    leaveToClass: 'opacity-0'
   },
-  default: {
-    size: 'md',
-    variant: 'solid',
-    color: 'primary'
+  popper: {
+    placement: 'bottom-end',
+    strategy: 'fixed'
   }
 }
+
+// Forms
 
 const formGroup = {
   wrapper: '',
@@ -202,11 +238,11 @@ const formGroup = {
   help: 'mt-2 text-sm text-gray-500 dark:text-gray-400'
 }
 
+// TODO: improve sizes
 const input = {
   wrapper: 'relative',
   base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
   custom: '',
-  // TODO: redo sizes
   size: {
     // xxs: 'text-xs',
     // xs: 'text-xs',
@@ -219,28 +255,28 @@ const input = {
     // xxs: 'px-1 py-0.5',
     // xs: 'px-2.5 py-1.5',
     // sm: 'px-3 py-2',
-    md: 'py-1.5'
+    md: 'px-3 py-1.5'
     // lg: 'px-4 py-2',
     // xl: 'px-6 py-3'
   },
   leading: {
     spacing: {
-      xxs: 'pl-7',
-      xs: 'pl-7',
-      sm: 'pl-10',
-      md: 'pl-10',
-      lg: 'pl-10',
-      xl: 'pl-10'
+      // xxs: 'pl-7',
+      // xs: 'pl-7',
+      // sm: 'pl-10',
+      md: 'pl-10'
+      // lg: 'pl-10',
+      // xl: 'pl-10'
     }
   },
   trailing: {
     spacing: {
-      xxs: 'pr-7',
-      xs: 'pr-7',
-      sm: 'pr-10',
-      md: 'pr-10',
-      lg: 'pr-10',
-      xl: 'pr-10'
+      // xxs: 'pr-7',
+      // xs: 'pr-7',
+      // sm: 'pr-10',
+      md: 'pr-10'
+      // lg: 'pr-10',
+      // xl: 'pr-10'
     }
   },
   appearance: {
@@ -250,35 +286,34 @@ const input = {
   },
   icon: {
     base: 'text-gray-400 dark:text-gray-500',
-    loading: 'i-heroicons-arrow-path-20-solid',
     size: {
-      xxs: 'h-3 w-3',
-      xs: 'h-4 w-4',
-      sm: 'h-5 w-5',
-      md: 'h-5 w-5',
-      lg: 'h-5 w-5',
-      xl: 'h-5 w-5'
+      // xxs: 'h-3 w-3',
+      // xs: 'h-4 w-4',
+      // sm: 'h-5 w-5',
+      md: 'h-5 w-5'
+      // lg: 'h-5 w-5',
+      // xl: 'h-5 w-5'
     },
     leading: {
       wrapper: 'absolute inset-y-0 left-0 flex items-center pointer-events-none',
       spacing: {
-        xxs: 'ml-2',
-        xs: 'ml-2',
-        sm: 'ml-2',
-        md: 'ml-3',
-        lg: 'ml-3',
-        xl: 'ml-3'
+        // xxs: 'ml-2',
+        // xs: 'ml-2',
+        // sm: 'ml-2',
+        md: 'pl-3'
+        // lg: 'ml-3',
+        // xl: 'ml-3'
       }
     },
     trailing: {
       wrapper: 'absolute inset-y-0 right-0 flex items-center pointer-events-none',
       spacing: {
-        xxs: 'mr-2',
-        xs: 'mr-2',
-        sm: 'mr-2',
-        md: 'mr-3',
-        lg: 'mr-3',
-        xl: 'mr-3'
+        // xxs: 'mr-2',
+        // xs: 'mr-2',
+        // sm: 'mr-2',
+        md: 'pr-3'
+        // lg: 'mr-3',
+        // xl: 'mr-3'
       }
     }
   },
@@ -296,43 +331,41 @@ const select = {
   ...input
 }
 
-const selectCustom = {
-  ...select,
+const selectMenu = {
   wrapper: 'relative',
-  base: select.base + ' text-left cursor-default',
-  icon: {
-    name: 'i-heroicons-chevron-up-down-20-solid',
-    ...select.icon
-  },
-  list: {
-    container: 'z-20',
-    width: 'w-full',
-    base: 'relative bg-white dark:bg-gray-800 shadow-lg dark:shadow-white/5 rounded-md ring-1 ring-gray-200 dark:ring-gray-700 focus:outline-none overflow-y-auto p-1 max-h-60',
-    input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 u-text-gray-700 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10',
-    option: {
-      base: 'cursor-default select-none relative py-1.5 rounded-md text-sm text-gray-900 dark:text-white',
-      container: 'flex items-center gap-2',
-      active: 'bg-gray-100 dark:bg-gray-900',
+  container: 'z-20',
+  width: 'w-full',
+  height: 'max-h-60',
+  base: 'relative focus:outline-none overflow-y-auto',
+  background: 'bg-white dark:bg-gray-800',
+  shadow: 'shadow-lg dark:shadow-white/5',
+  rounded: 'rounded-md',
+  spacing: 'p-1',
+  ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
+  input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 u-text-gray-700 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10',
+  option: {
+    base: 'cursor-default select-none relative py-1.5 rounded-md text-sm text-gray-900 dark:text-white',
+    container: 'flex items-center gap-2',
+    active: 'bg-gray-100 dark:bg-gray-900',
+    inactive: '',
+    selected: 'font-semibold pl-2 pr-8',
+    unselected: 'font-normal px-2',
+    disabled: 'cursor-not-allowed opacity-50',
+    empty: 'text-sm text-gray-400 dark:text-gray-500 px-2 py-1.5',
+    icon: {
+      name: 'i-heroicons-check-20-solid',
+      base: 'absolute inset-y-0 right-0 flex items-center pr-2',
+      active: '',
       inactive: '',
-      selected: 'font-semibold pl-2 pr-8',
-      unselected: 'font-normal px-2',
-      disabled: 'cursor-not-allowed opacity-50',
-      empty: 'text-sm text-gray-400 dark:text-gray-500 px-2 py-1.5',
-      icon: {
-        name: 'i-heroicons-check-20-solid',
-        base: 'absolute inset-y-0 right-0 flex items-center pr-2',
-        active: '',
-        inactive: '',
-        size: 'h-4 w-4'
-      }
-    },
-    transition: {
-      leaveActiveClass: 'transition ease-in duration-100',
-      leaveFromClass: 'opacity-100',
-      leaveToClass: 'opacity-0'
+      size: 'h-4 w-4'
     }
   },
-  popperOptions: {
+  transition: {
+    leaveActiveClass: 'transition ease-in duration-100',
+    leaveFromClass: 'opacity-100',
+    leaveToClass: 'opacity-0'
+  },
+  popper: {
     placement: 'bottom-end'
   }
 }
@@ -350,13 +383,33 @@ const checkbox = {
   base: radio.base + ' rounded'
 }
 
+const toggle = {
+  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:ring-offset-white dark:focus:ring-offset-gray-900',
+  active: 'bg-primary-500 dark:bg-primary-400',
+  inactive: 'bg-gray-200 dark:bg-gray-700',
+  container: {
+    base: 'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow dark:shadow-white/10 transform ring-0 transition ease-in-out duration-200',
+    active: 'translate-x-5',
+    inactive: 'translate-x-0'
+  },
+  icon: {
+    base: 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
+    active: 'opacity-100 ease-in duration-200',
+    inactive: 'opacity-0 ease-out duration-100',
+    on: 'h-3 w-3 text-primary-500 dark:text-primary-400',
+    off: 'h-3 w-3 text-gray-400 dark:text-gray-500'
+  }
+}
+
+// Layout
+
 const card = {
   base: 'overflow-hidden',
-  background: 'bg-white dark:bg-gray-900',
-  divide: 'divide-y divide-gray-200 dark:divide-gray-800',
-  // ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
+  background: 'bg-white dark:bg-gray-800',
+  divide: 'divide-y divide-gray-200 dark:divide-gray-700',
+  ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
   rounded: 'rounded-lg',
-  shadow: 'shadow dark:shadow-white/10',
+  shadow: '',
   body: {
     background: '',
     spacing: 'px-4 py-5 sm:p-6'
@@ -376,6 +429,65 @@ const container = {
   spacing: 'px-4 sm:px-6 lg:px-8',
   constrained: 'max-w-7xl'
 }
+
+// Navigation
+
+const verticalNavigation = {
+  wrapper: '',
+  base: 'group flex items-center gap-2 text-sm font-medium rounded-md w-full relative focus:outline-none after:absolute after:inset-px after:z-[-1] after:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
+  spacing: 'px-3 py-1.5',
+  active: 'u-text-gray-900 after:bg-gray-100 dark:after:bg-gray-800',
+  inactive: 'u-text-gray-500 hover:u-text-gray-900 hover:after:bg-gray-50 dark:hover:after:bg-gray-800/50 focus-visible:after:bg-gray-50 dark:focus-visible:after:bg-gray-800/50',
+  icon: {
+    base: 'flex-shrink-0 w-4 h-4',
+    spacing: '-ml-0.5',
+    active: 'u-text-gray-700',
+    inactive: 'u-text-gray-400 group-hover:u-text-gray-700'
+  },
+  avatar: {
+    base: 'flex-shrink-0',
+    spacing: '-ml-0.5'
+  },
+  badge: {
+    base: 'ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
+    active: 'bg-white dark:bg-gray-900',
+    inactive: 'u-bg-gray-100 u-text-gray-600 group-hover:bg-white dark:group-hover:bg-gray-900'
+  }
+}
+
+const commandPalette = {
+  wrapper: 'flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800',
+  input: {
+    base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-[3.25rem] text-gray-900 dark:text-white focus:ring-0 sm:text-sm',
+    icon: {
+      base: 'pointer-events-none absolute top-3.5 left-5 h-5 w-5 text-gray-400 dark:text-gray-500',
+      name: 'i-heroicons-magnifying-glass-20-solid'
+    },
+    close: {
+      base: 'absolute right-2',
+      variant: 'transparent',
+      size: 'md',
+      icon: {
+        name: ''
+      }
+    }
+  },
+  empty: {
+    icon: {
+      name: 'i-heroicons-magnifying-glass-20-solid'
+    }
+  },
+  option: {
+    selected: {
+      icon: {
+        name: 'i-heroicons-check-20-solid'
+      }
+    },
+    shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400'
+  }
+}
+
+// Overlays
 
 const modal = {
   wrapper: 'relative z-50',
@@ -409,81 +521,6 @@ const modal = {
   }
 }
 
-const toggle = {
-  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:ring-offset-white dark:focus:ring-offset-gray-900',
-  active: 'bg-primary-500 dark:bg-primary-400',
-  inactive: 'bg-gray-200 dark:bg-gray-700',
-  container: {
-    base: 'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow dark:shadow-white/10 transform ring-0 transition ease-in-out duration-200',
-    active: 'translate-x-5',
-    inactive: 'translate-x-0'
-  },
-  icon: {
-    base: 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
-    active: 'opacity-100 ease-in duration-200',
-    inactive: 'opacity-0 ease-out duration-100',
-    on: 'h-3 w-3 text-primary-500 dark:text-primary-400',
-    off: 'h-3 w-3 text-gray-400 dark:text-gray-500'
-  }
-}
-
-const verticalNavigation = {
-  wrapper: '',
-  base: 'group flex items-center gap-2 text-sm font-medium rounded-md w-full relative focus:outline-none after:absolute after:inset-px after:z-[-1] after:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
-  spacing: 'px-3 py-1.5',
-  active: 'u-text-gray-900 after:bg-gray-100 dark:after:bg-gray-800',
-  inactive: 'u-text-gray-500 hover:u-text-gray-900 hover:after:bg-gray-50 dark:hover:after:bg-gray-800/50 focus-visible:after:bg-gray-50 dark:focus-visible:after:bg-gray-800/50',
-  icon: {
-    base: 'flex-shrink-0 w-4 h-4',
-    spacing: '-ml-0.5',
-    active: 'u-text-gray-700',
-    inactive: 'u-text-gray-400 group-hover:u-text-gray-700'
-  },
-  avatar: {
-    base: 'flex-shrink-0',
-    spacing: '-ml-0.5'
-  },
-  badge: {
-    base: 'ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
-    active: 'bg-white dark:bg-gray-900',
-    inactive: 'u-bg-gray-100 u-text-gray-600 group-hover:bg-white dark:group-hover:bg-gray-900'
-  }
-}
-
-const dropdown = {
-  wrapper: 'relative inline-flex text-left',
-  container: 'z-20',
-  width: 'w-48',
-  background: 'bg-white dark:bg-gray-800',
-  shadow: 'shadow-lg dark:shadow-white/10',
-  rounded: 'rounded-md',
-  ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
-  base: 'focus:outline-none',
-  divide: 'divide-y divide-gray-200 dark:divide-gray-700',
-  group: 'p-1',
-  item: {
-    base: 'group flex items-center gap-2 px-2 py-1.5 text-sm w-full rounded-md',
-    active: 'bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white',
-    inactive: 'text-gray-700 dark:text-gray-200',
-    disabled: 'cursor-not-allowed opacity-50',
-    icon: 'h-4 w-4 text-gray-400 dark:text-gray-500 group-hover:text-gray-500 dark:group-hover:text-gray-400 flex-shrink-0',
-    avatar: '-m-0.5 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 flex-shrink-0',
-    shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400 ml-auto'
-  },
-  transition: {
-    enterActiveClass: 'transition duration-100 ease-out',
-    enterFromClass: 'transform scale-95 opacity-0',
-    enterToClass: 'transform scale-100 opacity-100',
-    leaveActiveClass: 'transition duration-75 ease-out',
-    leaveFromClass: 'transform scale-100 opacity-100',
-    leaveToClass: 'transform scale-95 opacity-0'
-  },
-  popperOptions: {
-    placement: 'bottom-end',
-    strategy: 'fixed'
-  }
-}
-
 const slideover = {
   wrapper: 'fixed inset-0 flex z-40',
   overlay: {
@@ -504,6 +541,74 @@ const slideover = {
   transition: {
     enter: 'transform transition ease-in-out duration-500 sm:duration-700',
     leave: 'transform transition ease-in-out duration-500 sm:duration-700'
+  }
+}
+
+const tooltip = {
+  wrapper: 'relative inline-flex',
+  container: 'z-20',
+  width: 'max-w-xs',
+  background: 'bg-white dark:bg-gray-900',
+  shadow: 'shadow dark:shadow-white/10',
+  rounded: 'rounded',
+  ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
+  base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
+  shortcuts: 'hidden md:inline-flex items-center justify-end flex-shrink-0 gap-0.5 ml-1',
+  transition: {
+    enterActiveClass: 'transition ease-out duration-200',
+    enterFromClass: 'opacity-0 translate-y-1',
+    enterToClass: 'opacity-100 translate-y-0',
+    leaveActiveClass: 'transition ease-in duration-150',
+    leaveFromClass: 'opacity-100 translate-y-0',
+    leaveToClass: 'opacity-0 translate-y-1'
+  },
+  popper: {
+    strategy: 'fixed'
+  }
+}
+
+const popover = {
+  wrapper: 'relative',
+  container: 'z-20',
+  width: '',
+  background: 'bg-white dark:bg-gray-900',
+  shadow: 'shadow-lg dark:shadow-white/10',
+  rounded: 'rounded-md',
+  ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
+  base: 'overflow-hidden focus:outline-none',
+  transition: {
+    enterActiveClass: 'transition ease-out duration-200',
+    enterFromClass: 'opacity-0 translate-y-1',
+    enterToClass: 'opacity-100 translate-y-0',
+    leaveActiveClass: 'transition ease-in duration-150',
+    leaveFromClass: 'opacity-100 translate-y-0',
+    leaveToClass: 'opacity-0 translate-y-1'
+  },
+  popper: {
+    strategy: 'fixed'
+  }
+}
+
+const contextMenu = {
+  wrapper: 'relative',
+  container: 'z-20',
+  width: '',
+  background: 'bg-white dark:bg-gray-900',
+  shadow: 'shadow-lg dark:shadow-white/10',
+  rounded: 'rounded-md',
+  ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
+  base: 'overflow-hidden focus:outline-none',
+  transition: {
+    enterActiveClass: 'transition ease-out duration-200',
+    enterFromClass: 'opacity-0 translate-y-1',
+    enterToClass: 'opacity-100 translate-y-0',
+    leaveActiveClass: 'transition ease-in duration-150',
+    leaveFromClass: 'opacity-100 translate-y-0',
+    leaveToClass: 'opacity-0 translate-y-1'
+  },
+  popper: {
+    placement: 'bottom-start',
+    scroll: false
   }
 }
 
@@ -542,106 +647,6 @@ const notification = {
   }
 }
 
-const tooltip = {
-  wrapper: 'relative inline-flex',
-  container: 'z-20',
-  width: 'max-w-xs',
-  background: 'bg-white dark:bg-gray-900',
-  shadow: 'shadow dark:shadow-white/10',
-  rounded: 'rounded',
-  ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
-  shortcuts: 'hidden md:inline-flex items-center justify-end flex-shrink-0 gap-0.5 ml-1',
-  transition: {
-    enterActiveClass: 'transition ease-out duration-200',
-    enterFromClass: 'opacity-0 translate-y-1',
-    enterToClass: 'opacity-100 translate-y-0',
-    leaveActiveClass: 'transition ease-in duration-150',
-    leaveFromClass: 'opacity-100 translate-y-0',
-    leaveToClass: 'opacity-0 translate-y-1'
-  },
-  popperOptions: {
-    strategy: 'fixed'
-  }
-}
-
-const popover = {
-  wrapper: 'relative',
-  container: 'z-20',
-  width: '',
-  background: 'bg-white dark:bg-gray-900',
-  shadow: 'shadow-lg dark:shadow-white/10',
-  rounded: 'rounded-md',
-  ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  base: 'overflow-hidden focus:outline-none',
-  transition: {
-    enterActiveClass: 'transition ease-out duration-200',
-    enterFromClass: 'opacity-0 translate-y-1',
-    enterToClass: 'opacity-100 translate-y-0',
-    leaveActiveClass: 'transition ease-in duration-150',
-    leaveFromClass: 'opacity-100 translate-y-0',
-    leaveToClass: 'opacity-0 translate-y-1'
-  },
-  popperOptions: {
-    strategy: 'fixed'
-  }
-}
-
-const contextMenu = {
-  wrapper: 'relative',
-  container: 'z-20',
-  width: '',
-  background: 'bg-white dark:bg-gray-900',
-  shadow: 'shadow-lg dark:shadow-white/10',
-  rounded: 'rounded-md',
-  ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  base: 'overflow-hidden focus:outline-none',
-  transition: {
-    enterActiveClass: 'transition ease-out duration-200',
-    enterFromClass: 'opacity-0 translate-y-1',
-    enterToClass: 'opacity-100 translate-y-0',
-    leaveActiveClass: 'transition ease-in duration-150',
-    leaveFromClass: 'opacity-100 translate-y-0',
-    leaveToClass: 'opacity-0 translate-y-1'
-  },
-  popperOptions: {
-    placement: 'bottom-start',
-    scroll: false
-  }
-}
-
-const commandPalette = {
-  wrapper: 'flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800',
-  input: {
-    base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-[3.25rem] text-gray-900 dark:text-white focus:ring-0 sm:text-sm',
-    icon: {
-      base: 'pointer-events-none absolute top-3.5 left-5 h-5 w-5 text-gray-400 dark:text-gray-500',
-      name: 'i-heroicons-magnifying-glass-20-solid'
-    },
-    close: {
-      base: 'absolute right-2',
-      variant: 'transparent',
-      size: 'md',
-      icon: {
-        name: ''
-      }
-    }
-  },
-  empty: {
-    icon: {
-      name: 'i-heroicons-magnifying-glass-20-solid'
-    }
-  },
-  option: {
-    selected: {
-      icon: {
-        name: 'i-heroicons-check-20-solid'
-      }
-    },
-    shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400'
-  }
-}
-
 export default {
   ui: {
     card,
@@ -653,7 +658,7 @@ export default {
     input,
     textarea,
     select,
-    selectCustom,
+    selectMenu,
     checkbox,
     radio,
     container,

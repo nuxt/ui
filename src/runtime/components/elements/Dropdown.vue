@@ -8,7 +8,7 @@
       role="button"
       @mouseover="onMouseOver"
     >
-      <slot :open="open">
+      <slot :open="open" :disabled="disabled">
         <button :disabled="disabled">
           Open
         </button>
@@ -18,7 +18,7 @@
     <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
       <transition appear v-bind="ui.transition">
         <MenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background]" static>
-          <div v-for="(subItems, index) of items" :key="index" :class="ui.group">
+          <div v-for="(subItems, index) of items" :key="index" :class="ui.spacing">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
               <Component
                 v-bind="omit(item, ['click'])"
@@ -28,7 +28,7 @@
               >
                 <slot :name="item.slot" :item="item">
                   <Icon v-if="item.icon" :name="item.icon" :class="[ui.item.icon, item.iconClass]" />
-                  <Avatar v-if="item.avatar" v-bind="{ size: 'xxs', ...item.avatar }" :class="ui.item.avatar" />
+                  <Avatar v-if="item.avatar" v-bind="{ size: '2xs', ...item.avatar }" :class="ui.item.avatar" />
 
                   <span class="truncate">{{ item.label }}</span>
 
@@ -101,7 +101,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    popperOptions: {
+    popper: {
       type: Object as PropType<PopperOptions>,
       default: () => ({})
     },
@@ -124,9 +124,9 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.dropdown>>(() => defu({}, props.ui, appConfig.ui.dropdown))
 
-    const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, ui.value.popperOptions))
+    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper))
 
-    const [trigger, container] = usePopper(popperOptions.value)
+    const [trigger, container] = usePopper(popper.value)
 
     function resolveItemClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
       return classNames(

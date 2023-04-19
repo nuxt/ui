@@ -43,8 +43,8 @@ import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import { defu } from 'defu'
 import Icon from '../elements/Icon.vue'
-import LinkCustom from '../elements/LinkCustom.vue'
 import Avatar from '../elements/Avatar.vue'
+import LinkCustom from '../elements/LinkCustom.vue'
 import type { Avatar as AvatarType } from '../../types/avatar'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -55,8 +55,8 @@ import appConfig from '#build/app.config'
 export default defineComponent({
   components: {
     Icon,
-    LinkCustom,
-    Avatar
+    Avatar,
+    LinkCustom
   },
   props: {
     links: {

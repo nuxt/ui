@@ -1,11 +1,11 @@
 <template>
   <div class="flex items-center shadow-sm">
-    <USelectCustom
+    <USelectMenu
       v-model="primary"
       name="primary"
-      list-width-class="w-[179px]"
       class="w-full"
-      :popper-options="{ placement: 'bottom-start' }"
+      :ui="{ width: 'w-[179px]' }"
+      :popper="{ placement: 'bottom-start' }"
       :options="primaryOptions"
     >
       <UButton color="gray" size="sm" class="!shadow-none !rounded-r-none" truncate block>
@@ -13,7 +13,7 @@
 
         <span>{{ primary.text }}</span>
 
-        <UIcon name="i-heroicons-chevron-down-20-solid" class="ml-2 w-4 h-4 -mr-0.5" />
+        <UIcon name="i-heroicons-chevron-down-20-solid" class="ml-2 w-4 h-4 -mr-0.5 text-gray-400 dark:text-gray-500" />
       </UButton>
 
       <template #option="{ option }">
@@ -21,14 +21,14 @@
 
         {{ option.text }}
       </template>
-    </USelectCustom>
+    </USelectMenu>
 
-    <USelectCustom
+    <USelectMenu
       v-model="gray"
       name="gray"
       class="w-full"
-      list-width-class="w-[179px]"
-      :popper-options="{ placement: 'bottom-end' }"
+      :ui="{ width: 'w-[179px]' }"
+      :popper="{ placement: 'bottom-end' }"
       :options="grayOptions"
     >
       <UButton color="gray" size="sm" class="!shadow-none -ml-px !rounded-l-none" block>
@@ -36,7 +36,7 @@
 
         <span>{{ gray.text }}</span>
 
-        <UIcon name="i-heroicons-chevron-down-20-solid" class="ml-2 w-4 h-4 -mr-0.5" />
+        <UIcon name="i-heroicons-chevron-down-20-solid" class="ml-2 w-4 h-4 -mr-0.5 text-gray-400 dark:text-gray-500" />
       </UButton>
 
       <template #option="{ option }">
@@ -44,7 +44,7 @@
 
         {{ option.text }}
       </template>
-    </USelectCustom>
+    </USelectMenu>
   </div>
 </template>
 

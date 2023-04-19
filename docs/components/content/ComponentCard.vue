@@ -11,21 +11,21 @@
           class="justify-center"
         />
         <!-- TODO: remove rounded on top -->
-        <USelectCustom
+        <USelectMenu
           v-else-if="prop.type === 'string' && prop.options.length"
           v-model="componentProps[prop.name]"
           :options="prop.options"
           :name="prop.name"
-          list-width-class="w-32"
           appearance="none"
-          :popper-options="{ strategy: 'fixed', placement: 'bottom-start' }"
+          :ui="{ width: 'w-32', rounded: 'rounded-b-md' }"
+          :popper="{ strategy: 'fixed', placement: 'bottom-start' }"
         >
           <button class="px-3 sm:text-sm sm:leading-6 inline-flex items-center gap-1.5">
             {{ componentProps[prop.name] }}
 
             <UIcon name="i-heroicons-chevron-down-20-solid" class="w-4 h-4 flex-shrink-0 -mr-0.5 text-gray-400 dark:text-gray-500" />
           </button>
-        </USelectCustom>
+        </USelectMenu>
         <UInput
           v-else
           v-model="componentProps[prop.name]"
@@ -42,12 +42,9 @@
       <component :is="name" v-model="vModel" v-bind="fullProps">
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
       </component>
-
-      <UButton v-if="trigger" label="Click" @click="vModel = true" />
     </div>
 
-    <ContentSlot v-if="$slots.code" :use="$slots.code" />
-    <ContentRenderer v-else :value="ast" class="[&>pre]:!rounded-t-none" />
+    <ContentRenderer :value="ast" class="[&>pre]:!rounded-t-none" />
   </div>
 </template>
 
@@ -75,17 +72,9 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   },
-  code: {
-    type: String,
-    default: null
-  },
   excludedProps: {
     type: Array,
     default: () => []
-  },
-  trigger: {
-    type: Boolean,
-    default: false
   },
   backgroundClass: {
     type: String,

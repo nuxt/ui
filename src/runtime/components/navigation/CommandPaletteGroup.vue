@@ -19,7 +19,7 @@
               <Icon v-if="command.icon" :name="command.icon" :class="['h-4 w-4 flex-shrink-0', active ? 'text-opacity-100 dark:text-opacity-100' : 'text-opacity-40 dark:text-opacity-40', command.iconClass || 'text-gray-900 dark:text-gray-50']" aria-hidden="true" />
               <Avatar
                 v-else-if="command.avatar"
-                v-bind="{ size: 'xxxs', ...command.avatar }"
+                v-bind="{ size: '2xs', ...command.avatar }"
                 class="flex-shrink-0"
                 aria-hidden="true"
               />

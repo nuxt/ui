@@ -78,7 +78,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     // @ts-ignore
     nuxt.hook('tailwindcss:config', function (tailwindConfig: TailwindConfig) {
-      console.log('tailwindC', tailwindConfig.content)
       const globalColors = {
         ...(tailwindConfig.theme.colors || colors),
         ...tailwindConfig.theme.extend?.colors

@@ -80,7 +80,7 @@ const props = defineProps({
     type: Object,
     default: () => $ui.tooltip.transition
   },
-  popperOptions: {
+  popper: {
     type: Object as PropType<PopperOptions>,
     default: () => ({})
   },
@@ -98,9 +98,9 @@ const props = defineProps({
   }
 })
 
-const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.tooltip.popperOptions))
+const popper = computed<PopperOptions>(() => defu({}, props.popper, $ui.tooltip.popper))
 
-const [trigger, container] = usePopper(popperOptions.value)
+const [trigger, container] = usePopper(popper.value)
 
 const open = ref(false)
 

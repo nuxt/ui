@@ -1,0 +1,304 @@
+<template>
+  <Combobox
+    v-slot="{ open }"
+    :by="by"
+    :name="name"
+    :model-value="modelValue"
+    :multiple="multiple"
+    :nullable="nullable"
+    :disabled="disabled"
+    as="div"
+    :class="ui.wrapper"
+    @update:model-value="onUpdate"
+  >
+    <!-- TODO: check that `name` fixes required -->
+    <!-- <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1" aria-hidden="true"> -->
+
+    <ComboboxButton ref="trigger" as="div" role="button" class="inline-flex w-full">
+      <slot :open="open" :disabled="disabled">
+        <button :class="selectMenuClass" :disabled="disabled" type="button">
+          <span v-if="icon" :class="leadingIconClass">
+            <Icon :name="icon" :class="iconClass" />
+          </span>
+          <span v-if="modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : (modelValue as any)[textAttribute] }}</span>
+          <span v-else class="block truncate text-gray-400 dark:text-gray-500">{{ placeholder || '&nbsp;' }}</span>
+          <span :class="trailingIconClass">
+            <Icon name="i-heroicons-chevron-down-20-solid" :class="iconClass" aria-hidden="true" />
+          </span>
+        </button>
+      </slot>
+    </ComboboxButton>
+
+    <div v-if="open" ref="container" :class="[ui.container, ui.width]">
+      <transition appear v-bind="ui.transition">
+        <ComboboxOptions static :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.spacing, ui.height]">
+          <ComboboxInput
+            v-if="searchable"
+            ref="searchInput"
+            :display-value="() => query"
+            name="q"
+            placeholder="Search..."
+            autofocus
+            autocomplete="off"
+            :class="ui.input"
+            @change="query = $event.target.value"
+          />
+          <ComboboxOption
+            v-for="(option, index) in filteredOptions"
+            v-slot="{ active, selected, disabled: optionDisabled }"
+            :key="index"
+            as="template"
+            :value="option"
+            :disabled="option.disabled"
+          >
+            <li :class="resolveOptionClass({ active, selected, disabled: optionDisabled })">
+              <div :class="ui.option.container">
+                <slot name="option" :option="option" :active="active" :selected="selected">
+                  <span class="block truncate">{{ typeof option === 'string' ? option : option[textAttribute] }}</span>
+                </slot>
+              </div>
+
+              <span v-if="selected" :class="resolveOptionIconClass({ active })">
+                <Icon v-if="ui.option.icon.name" :name="ui.option.icon.name" :class="ui.option.icon.size" aria-hidden="true" />
+              </span>
+            </li>
+          </ComboboxOption>
+
+          <ComboboxOption v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
+            <li :class="resolveOptionClass({ active, selected })">
+              <div :class="ui.option.container">
+                <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
+                  <span class="block truncate">Create "{{ queryOption[textAttribute] }}"</span>
+                </slot>
+              </div>
+            </li>
+          </ComboboxOption>
+          <p v-else-if="searchable && query && !filteredOptions.length" :class="ui.option.empty">
+            <slot name="option-empty" :query="query">
+              No results found for "{{ query }}".
+            </slot>
+          </p>
+        </ComboboxOptions>
+      </transition>
+    </div>
+  </Combobox>
+</template>
+
+<script lang="ts">
+import { ref, computed, watch, defineComponent } from 'vue'
+import type { PropType, ComponentPublicInstance } from 'vue'
+import { defu } from 'defu'
+import { Combobox, ComboboxButton, ComboboxOptions, ComboboxOption, ComboboxInput } from '@headlessui/vue'
+import Icon from '../elements/Icon.vue'
+import { classNames } from '../../utils'
+import { usePopper } from '../../composables/usePopper'
+import type { PopperOptions } from '../../types'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+import appConfig from '#build/app.config'
+
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  components: {
+    Combobox,
+    ComboboxButton,
+    ComboboxOptions,
+    ComboboxOption,
+    ComboboxInput,
+    Icon
+  },
+  props: {
+    modelValue: {
+      type: [String, Number, Object, Array],
+      default: ''
+    },
+    by: {
+      type: String,
+      default: undefined
+    },
+    options: {
+      type: Array as PropType<{ [key: string]: any, disabled?: boolean }[] | string[]>,
+      default: () => []
+    },
+    name: {
+      type: String,
+      default: null
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
+    icon: {
+      type: String,
+      default: null
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    nullable: {
+      type: Boolean,
+      default: false
+    },
+    searchable: {
+      type: Boolean,
+      default: false
+    },
+    creatable: {
+      type: Boolean,
+      default: false
+    },
+    placeholder: {
+      type: String,
+      default: null
+    },
+    size: {
+      type: String,
+      default: appConfig.ui.select.default.size,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.select.size).includes(value)
+      }
+    },
+    appearance: {
+      type: String,
+      default: appConfig.ui.select.default.appearance,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.select.appearance).includes(value)
+      }
+    },
+    textAttribute: {
+      type: String,
+      default: 'text'
+    },
+    searchAttributes: {
+      type: Array,
+      default: null
+    },
+    popper: {
+      type: Object as PropType<PopperOptions>,
+      default: () => ({})
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.selectMenu>>,
+      default: () => appConfig.ui.selectMenu
+    }
+  },
+  emits: ['update:modelValue', 'open', 'close'],
+  setup (props, { emit }) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const ui = computed<Partial<typeof appConfig.ui.selectMenu>>(() => defu({}, props.ui, appConfig.ui.selectMenu))
+
+    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper))
+
+    const [trigger, container] = usePopper(popper.value)
+
+    const query = ref('')
+    const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
+
+    const selectMenuClass = computed(() => {
+      return classNames(
+        appConfig.ui.select.base,
+        'text-left cursor-default',
+        appConfig.ui.select.size[props.size],
+        appConfig.ui.select.spacing[props.size],
+        appConfig.ui.select.appearance[props.appearance],
+        !!props.icon && appConfig.ui.select.leading.spacing[props.size],
+        appConfig.ui.select.trailing.spacing[props.size],
+        appConfig.ui.select.custom
+      )
+    })
+
+    const iconClass = computed(() => {
+      return classNames(
+        appConfig.ui.select.icon.base,
+        appConfig.ui.select.icon.size[props.size]
+      )
+    })
+
+    const leadingIconClass = computed(() => {
+      return classNames(
+        appConfig.ui.select.icon.leading.wrapper,
+        appConfig.ui.select.icon.leading.spacing[props.size]
+      )
+    })
+
+    const trailingIconClass = computed(() => {
+      return classNames(
+        appConfig.ui.select.icon.trailing.wrapper,
+        appConfig.ui.select.icon.trailing.spacing[props.size]
+      )
+    })
+
+    const filteredOptions = computed(() =>
+      query.value === ''
+        ? props.options
+        : (props.options as any[]).filter((option: any) => {
+            return (props.searchAttributes?.length ? props.searchAttributes : [props.textAttribute]).some((searchAttribute: any) => {
+              return typeof option === 'string' ? option.search(new RegExp(query.value, 'i')) !== -1 : (option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1)
+            })
+          })
+    )
+
+    const queryOption = computed(() => {
+      return query.value === '' ? null : { [props.textAttribute]: query.value }
+    })
+
+    watch(container, (value) => {
+      if (value) {
+        emit('open')
+      } else {
+        emit('close')
+      }
+    })
+
+    function resolveOptionClass ({ active, selected, disabled }: { active: boolean, selected: boolean, disabled?: boolean }) {
+      return classNames(
+        ui.value.option.base,
+        active ? ui.value.option.active : ui.value.option.inactive,
+        selected ? ui.value.option.selected : ui.value.option.unselected,
+        disabled && ui.value.option.disabled
+      )
+    }
+
+    function resolveOptionIconClass ({ active }: { active: boolean }) {
+      return classNames(
+        ui.value.option.icon.base,
+        active ? ui.value.option.icon.active : ui.value.option.icon.inactive
+      )
+    }
+
+    function onUpdate (event: any) {
+      if (query.value && searchInput.value?.$el) {
+        query.value = ''
+        // explicitly set input text because `ComboboxInput` `displayValue` is not reactive
+        searchInput.value.$el.value = ''
+      }
+      emit('update:modelValue', event)
+    }
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      trigger,
+      container,
+      selectMenuClass,
+      iconClass,
+      leadingIconClass,
+      trailingIconClass,
+      filteredOptions,
+      queryOption,
+      query,
+      resolveOptionClass,
+      resolveOptionIconClass,
+      onUpdate
+    }
+  }
+})
+</script>
