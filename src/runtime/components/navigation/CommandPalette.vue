@@ -126,7 +126,7 @@ const props = defineProps({
     type: String,
     default: 'label'
   },
-  options: {
+  fuse: {
     type: Object as PropType<Partial<UseFuseOptions<Command>>>,
     default: () => ({})
   },
@@ -172,7 +172,7 @@ onMounted(() => {
   }, 200)
 })
 
-const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => defu({}, props.options, {
+const options: ComputedRef<Partial<UseFuseOptions<Command>>> = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     keys: [props.commandAttribute]
   },

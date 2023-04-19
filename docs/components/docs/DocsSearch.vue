@@ -4,7 +4,7 @@
       ref="commandPaletteRef"
       :groups="groups"
       command-attribute="title"
-      :options="{
+      :fuse="{
         fuseOptions: { ignoreLocation: true, includeMatches: true, minMatchCharLength: 2, threshold: 0, keys: ['title', 'description', 'children.children.value', 'children.children.children.value'] },
         resultLimit: 10
       }"

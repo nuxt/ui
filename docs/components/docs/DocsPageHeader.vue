@@ -17,7 +17,7 @@
         :to="`https://github.com/nuxtlabs/ui/blob/dev/src/runtime/components/${page._dir}/U${page.title}.vue`"
       />
     </div>
-    <p v-if="page.description" class="mt-4 text-lg text-gray-700 dark:text-gray-400">
+    <p v-if="page.description" class="mt-4 text-lg">
       {{ page.description }}
     </p>
   </header>

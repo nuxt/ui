@@ -1,20 +1,3 @@
----
-description: ''
-autolink: true
----
-
-## Usage
-
-::component-example
----
-padding: false
----
-
-#default
-:command-palette-example{class="h-60"}
-
-#code
-```vue
 <script setup>
 const people = [
   { id: 1, name: 'Wade Cooper' },
@@ -31,15 +14,5 @@ const people = [
 </script>
 
 <template>
-  <UCommandPalette :groups="[{ key: 'people', commands: people }]" command-attribute="name" />
+  <UCommandPalette :groups="[{ key: 'people', commands: people }]" :fuse="{ resultLimit: 6 }" command-attribute="name" />
 </template>
-```
-::
-
-## Props
-
-:component-props
-
-## Preset
-
-:component-preset

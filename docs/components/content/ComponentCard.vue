@@ -10,7 +10,6 @@
           appearance="none"
           class="justify-center"
         />
-        <!-- TODO: remove rounded on top -->
         <USelectMenu
           v-else-if="prop.type === 'string' && prop.options.length"
           v-model="componentProps[prop.name]"
@@ -63,6 +62,10 @@ const props = defineProps({
   props: {
     type: Object,
     default: () => ({})
+  },
+  code: {
+    type: String,
+    default: null
   },
   baseProps: {
     type: Object,
@@ -158,8 +161,9 @@ const code = computed(() => {
 const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify(componentProps)}`, () => transformContent('content:_markdown.md', code.value, {
   highlight: {
     theme: {
-      dark: 'one-dark-pro',
-      default: 'one-dark-pro'
+      default: 'material-default',
+      light: 'material-lighter',
+      dark: 'material-darker'
     }
   }
 }), { watch: [code] })

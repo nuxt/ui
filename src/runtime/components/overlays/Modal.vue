@@ -17,23 +17,8 @@
             :appear="appear"
             v-bind="modalTransition"
           >
-            <DialogPanel :class="modalClass">
-              <Card
-                base-class=""
-                background-class=""
-                shadow-class=""
-                ring-class=""
-                rounded-class=""
-                v-bind="$attrs"
-              >
-                <template v-if="$slots.header" #header>
-                  <slot name="header" />
-                </template>
-                <slot />
-                <template v-if="$slots.footer" #footer>
-                  <slot name="footer" />
-                </template>
-              </Card>
+            <DialogPanel :class="modalClass" v-bind="$attrs">
+              <slot />
             </DialogPanel>
           </TransitionChild>
         </div>
@@ -46,7 +31,6 @@
 import { computed } from 'vue'
 import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { classNames } from '../../utils'
-import Card from '../layout/Card.vue'
 import $ui from '#build/ui'
 
 const props = defineProps({

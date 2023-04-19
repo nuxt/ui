@@ -1,5 +1,5 @@
 <template>
-  <UCard class="w-full">
+  <UCard>
     <template #header>
       <Placeholder class="h-8" />
     </template>

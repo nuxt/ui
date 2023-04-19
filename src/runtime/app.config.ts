@@ -109,23 +109,23 @@ const button = {
   },
   color: {
     white: {
-      solid: 'shadow-sm dark:shadow-white/5 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800/50',
+      solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800/50',
       ghost: 'text-gray-900 dark:text-white hover:bg-white dark:hover:bg-gray-900'
     },
     gray: {
-      solid: 'shadow-sm dark:shadow-white/5 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50',
+      solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50',
       // TODO: For Volta
       // 'outline-ghost': 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 hover:ring-1 ring-inset ring-gray-300 dark:ring-gray-700',
       ghost: 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800',
       link: 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline-offset-4 hover:underline'
     },
     black: {
-      solid: 'shadow-sm dark:shadow-white/5 text-white dark:text-gray-900 bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-100',
+      solid: 'shadow-sm text-white dark:text-gray-900 bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-100',
       link: 'text-gray-900 dark:text-white underline-offset-4 hover:underline'
     }
   },
   variant: {
-    solid: 'shadow-sm dark:shadow-white/5 text-white bg-{color}-500 hover:bg-{color}-600 dark:hover:bg-{color}-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
+    solid: 'shadow-sm text-white bg-{color}-500 hover:bg-{color}-600 dark:hover:bg-{color}-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
     outline: 'ring-1 ring-inset ring-current text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
     soft: 'text-{color}-500 dark:text-{color}-400 bg-{color}-50 hover:bg-{color}-100 dark:bg-{color}-950 dark:hover:bg-{color}-900 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
     ghost: 'text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
@@ -191,7 +191,7 @@ const button = {
 const buttonGroup = {
   wrapper: 'inline-flex',
   rounded: 'rounded-md',
-  shadow: 'shadow-sm dark:shadow-white/5'
+  shadow: 'shadow-sm'
 }
 
 const dropdown = {
@@ -199,7 +199,7 @@ const dropdown = {
   container: 'z-20',
   width: 'w-48',
   background: 'bg-white dark:bg-gray-800',
-  shadow: 'shadow-lg dark:shadow-white/10',
+  shadow: 'shadow-lg',
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
   base: 'focus:outline-none',
@@ -226,17 +226,6 @@ const dropdown = {
 }
 
 // Forms
-
-const formGroup = {
-  wrapper: '',
-  label: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-  labelWrapper: 'flex content-center justify-between',
-  container: 'mt-1 relative',
-  required: 'text-red-400',
-  description: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
-  hint: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
-  help: 'mt-2 text-sm text-gray-500 dark:text-gray-400'
-}
 
 // TODO: improve sizes
 const input = {
@@ -280,8 +269,8 @@ const input = {
     }
   },
   appearance: {
-    white: 'border-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-md shadow-sm dark:shadow-white/5 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
-    gray: 'border-0 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md shadow-sm dark:shadow-white/5 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400',
+    white: 'border-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
+    gray: 'border-0 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400',
     none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
@@ -323,6 +312,17 @@ const input = {
   }
 }
 
+const inputGroup = {
+  wrapper: '',
+  label: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
+  labelWrapper: 'flex content-center justify-between',
+  container: 'mt-1 relative',
+  required: 'text-red-400',
+  description: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
+  hint: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
+  help: 'mt-2 text-sm text-gray-500 dark:text-gray-400'
+}
+
 const textarea = {
   ...input
 }
@@ -338,7 +338,7 @@ const selectMenu = {
   height: 'max-h-60',
   base: 'relative focus:outline-none overflow-y-auto',
   background: 'bg-white dark:bg-gray-800',
-  shadow: 'shadow-lg dark:shadow-white/5',
+  shadow: 'shadow-lg',
   rounded: 'rounded-md',
   spacing: 'p-1',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
@@ -388,7 +388,7 @@ const toggle = {
   active: 'bg-primary-500 dark:bg-primary-400',
   inactive: 'bg-gray-200 dark:bg-gray-700',
   container: {
-    base: 'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow dark:shadow-white/10 transform ring-0 transition ease-in-out duration-200',
+    base: 'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
     active: 'translate-x-5',
     inactive: 'translate-x-0'
   },
@@ -409,7 +409,7 @@ const card = {
   divide: 'divide-y divide-gray-200 dark:divide-gray-700',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
   rounded: 'rounded-lg',
-  shadow: '',
+  shadow: 'shadow',
   body: {
     background: '',
     spacing: 'px-4 py-5 sm:p-6'
@@ -509,7 +509,7 @@ const modal = {
   border: '',
   ring: '',
   rounded: 'rounded-lg',
-  shadow: 'shadow-xl dark:shadow-white/10',
+  shadow: 'shadow-xl',
   width: 'sm:max-w-lg',
   transition: {
     enter: 'ease-out duration-300',
@@ -549,7 +549,7 @@ const tooltip = {
   container: 'z-20',
   width: 'max-w-xs',
   background: 'bg-white dark:bg-gray-900',
-  shadow: 'shadow dark:shadow-white/10',
+  shadow: 'shadow',
   rounded: 'rounded',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
@@ -572,7 +572,7 @@ const popover = {
   container: 'z-20',
   width: '',
   background: 'bg-white dark:bg-gray-900',
-  shadow: 'shadow-lg dark:shadow-white/10',
+  shadow: 'shadow-lg',
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
@@ -594,7 +594,7 @@ const contextMenu = {
   container: 'z-20',
   width: '',
   background: 'bg-white dark:bg-gray-900',
-  shadow: 'shadow-lg dark:shadow-white/10',
+  shadow: 'shadow-lg',
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
@@ -614,7 +614,7 @@ const contextMenu = {
 
 const notification = {
   background: 'bg-white dark:bg-gray-900',
-  shadow: 'shadow-lg dark:shadow-white/10',
+  shadow: 'shadow-lg',
   rounded: 'rounded-lg',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   type: {
@@ -649,29 +649,29 @@ const notification = {
 
 export default {
   ui: {
-    card,
-    modal,
+    avatar,
+    avatarGroup,
+    badge,
     button,
     buttonGroup,
-    badge,
-    formGroup,
+    dropdown,
     input,
+    inputGroup,
     textarea,
     select,
     selectMenu,
     checkbox,
     radio,
-    container,
     toggle,
+    card,
+    container,
     verticalNavigation,
-    dropdown,
-    avatar,
-    avatarGroup,
+    commandPalette,
+    modal,
     slideover,
-    notification,
-    tooltip,
     popover,
+    tooltip,
     contextMenu,
-    commandPalette
+    notification
   }
 }
