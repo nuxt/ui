@@ -48,7 +48,14 @@ export default defineComponent({
 
 <template>
   <div class="group relative" :class="`language-${language}`">
-    <UButton :icon="icon" variant="ghost" class="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity" size="xs" @click="copy" />
+    <UButton
+      :icon="icon"
+      variant="soft"
+      class="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity"
+      size="xs"
+      tabindex="-1"
+      @click="copy"
+    />
 
     <slot />
   </div>

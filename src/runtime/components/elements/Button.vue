@@ -192,7 +192,7 @@ export default defineComponent({
       return classNames(
         ui.value.icon.base,
         ui.value.icon.size[props.size],
-        (!!slots.default || !!props.label?.length) && ui.value.icon.leading[props.compact ? 'compactSpacing' : 'spacing'][props.size],
+        // (!!slots.default || !!props.label?.length) && ui.value.icon.leading.spacing[props.size],
         ui.value.icon.leading.base,
         props.loading && 'animate-spin'
       )
@@ -202,7 +202,7 @@ export default defineComponent({
       return classNames(
         ui.value.icon.base,
         ui.value.icon.size[props.size],
-        (!!slots.default || !!props.label?.length) && ui.value.icon.trailing[props.compact ? 'compactSpacing' : 'spacing'][props.size],
+        // (!!slots.default || !!props.label?.length) && ui.value.icon.trailing.spacing[props.size],
         ui.value.icon.trailing.base,
         props.loading && !isLeading.value && 'animate-spin'
       )

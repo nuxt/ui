@@ -71,41 +71,44 @@ const badge = {
   }
 }
 
-// TODO: improve sizes, should have `2xs`
 const button = {
   base: 'font-medium disabled:pointer-events-none disabled:select-none disabled:opacity-75',
   rounded: 'rounded-md',
   size: {
-    xxs: 'text-xs',
-    xs: 'text-xs',
-    sm: 'text-sm leading-4',
+    '2xs': 'text-xs',
+    xs: 'text-sm',
+    sm: 'text-sm',
     md: 'text-sm',
-    lg: 'text-base',
-    xl: 'text-base'
+    lg: 'text-sm',
+    xl: 'text-sm',
+    '2xl': 'text-base'
+  },
+  gap: {
+    '2xs': 'gap-x-1',
+    xs: 'gap-x-1',
+    sm: 'gap-x-1.5',
+    md: 'gap-x-2',
+    lg: 'gap-x-2.5',
+    xl: 'gap-x-3',
+    '2xl': 'gap-x-3'
   },
   spacing: {
-    xxs: 'px-2 py-1',
-    xs: 'px-2.5 py-1.5',
-    sm: 'px-3 py-2',
-    md: 'px-4 py-2',
-    lg: 'px-4 py-2',
-    xl: 'px-6 py-3'
+    '2xs': 'px-2 py-1',
+    xs: 'px-2 py-1',
+    sm: 'px-2.5 py-1.5',
+    md: 'px-3 py-2',
+    lg: 'px-3.5 py-2.5',
+    xl: 'px-4 py-3',
+    '2xl': 'px-4 py-3'
   },
   square: {
-    xxs: 'p-1',
-    xs: 'p-1.5',
-    sm: 'p-2',
+    '2xs': 'p-1',
+    xs: 'p-1',
+    sm: 'p-1.5',
     md: 'p-2',
-    lg: 'p-2',
-    xl: 'p-3'
-  },
-  compact: {
-    xxs: 'p-1 sm:px-2',
-    xs: 'p-1.5 sm:px-2.5',
-    sm: 'p-2 sm:px-3',
-    md: 'p-2 sm:px-4',
-    lg: 'p-2 sm:px-4',
-    xl: 'p-3 sm:px-6'
+    lg: 'p-2.5',
+    xl: 'p-3',
+    '2xl': 'p-3'
   },
   color: {
     white: {
@@ -135,50 +138,37 @@ const button = {
     base: 'flex-shrink-0',
     loading: 'i-heroicons-arrow-path-20-solid',
     size: {
-      xxs: 'h-3.5 w-3.5',
+      '2xs': 'h-3.5 w-3.5',
       xs: 'h-4 w-4',
-      sm: 'h-4 w-4',
+      sm: 'h-5 w-5',
       md: 'h-5 w-5',
       lg: 'h-5 w-5',
-      xl: 'h-5 w-5'
+      xl: 'h-5 w-5',
+      '2xl': 'h-6 w-6'
     },
     leading: {
-      base: '',
-      spacing: {
-        xxs: '-ml-0.5 mr-1',
-        xs: '-ml-0.5 mr-1.5',
-        sm: '-ml-0.5 mr-2',
-        md: '-ml-1 mr-2',
-        lg: '-ml-1 mr-3',
-        xl: '-ml-1 mr-3'
-      },
-      compactSpacing: {
-        xxs: 'sm:-ml-0.5 sm:mr-1',
-        xs: 'sm:-ml-0.5 sm:mr-1.5',
-        sm: 'sm:-ml-0.5 sm:mr-2',
-        md: 'sm:-ml-1 sm:mr-2',
-        lg: 'sm:-ml-1 sm:mr-3',
-        xl: 'sm:-ml-1 sm:mr-3'
-      }
+      base: ''
+      // spacing: {
+      //   '2xs': '-ml-0.5',
+      //   xs: '-ml-0.5',
+      //   sm: '-ml-0.5',
+      //   md: '',
+      //   lg: '-ml-0.5',
+      //   xl: '-ml-0.5',
+      //   '2xl': '-ml-0.5'
+      // }
     },
     trailing: {
-      base: '',
-      spacing: {
-        xxs: 'ml-1 -mr-0.5',
-        xs: 'ml-1.5 -mr-0.5',
-        sm: 'ml-2 -mr-0.5',
-        md: 'ml-2 -mr-1',
-        lg: 'ml-3 -mr-1',
-        xl: 'ml-3 -mr-1'
-      },
-      compactSpacing: {
-        xxs: 'sm:ml-1 sm:-mr-0.5',
-        xs: 'sm:ml-1.5 sm:-mr-0.5',
-        sm: 'sm:ml-2 sm:-mr-0.5',
-        md: 'sm:ml-2 sm:-mr-1',
-        lg: 'sm:ml-3 sm:-mr-1',
-        xl: 'sm:ml-3 sm:-mr-1'
-      }
+      base: ''
+      // spacing: {
+      //   '2xs': '-mr-0.5',
+      //   xs: '-mr-0.5',
+      //   sm: '-mr-0.5',
+      //   md: '-mr-0.5',
+      //   lg: '-mr-0.5',
+      //   xl: '-mr-0.5',
+      //   '2xl': '-mr-0.5'
+      // }
     }
   },
   default: {
@@ -239,6 +229,7 @@ const input = {
     // '2xs': 'text-xs',
     // xs: 'text-xs',
     // sm: 'text-sm leading-4',
+    sm: 'sm:text-sm sm:leading-6',
     md: 'sm:text-sm sm:leading-6'
     // lg: 'text-base',
     // xl: 'text-base'
@@ -246,7 +237,7 @@ const input = {
   spacing: {
     // '2xs': 'px-1 py-0.5',
     // xs: 'px-2.5 py-1.5',
-    // sm: 'px-3 py-2',
+    sm: 'px-2.5 py-1',
     md: 'px-3 py-1.5'
     // lg: 'px-4 py-2',
     // xl: 'px-6 py-3'
@@ -255,7 +246,7 @@ const input = {
     spacing: {
       // '2xs': 'pl-7',
       // xs: 'pl-7',
-      // sm: 'pl-10',
+      sm: 'pl-10',
       md: 'pl-10'
       // lg: 'pl-10',
       // xl: 'pl-10'
@@ -265,15 +256,15 @@ const input = {
     spacing: {
       // '2xs': 'pr-7',
       // xs: 'pr-7',
-      // sm: 'pr-10',
+      sm: 'pr-10',
       md: 'pr-10'
       // lg: 'pr-10',
       // xl: 'pr-10'
     }
   },
   appearance: {
-    white: 'border-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
-    gray: 'border-0 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400',
+    white: 'border-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus-visible:!outline-none',
+    gray: 'border-0 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus-visible:!outline-none',
     none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
@@ -281,7 +272,7 @@ const input = {
     size: {
       // '2xs': 'h-3 w-3',
       // xs: 'h-4 w-4',
-      // sm: 'h-5 w-5',
+      sm: 'h-5 w-5',
       md: 'h-5 w-5'
       // lg: 'h-5 w-5',
       // xl: 'h-5 w-5'
@@ -291,7 +282,7 @@ const input = {
       spacing: {
         // '2xs': 'ml-2',
         // xs: 'ml-2',
-        // sm: 'ml-2',
+        sm: 'pl-3',
         md: 'pl-3'
         // lg: 'ml-3',
         // xl: 'ml-3'
@@ -302,7 +293,7 @@ const input = {
       spacing: {
         // '2xs': 'mr-2',
         // xs: 'mr-2',
-        // sm: 'mr-2',
+        sm: 'pr-3',
         md: 'pr-3'
         // lg: 'mr-3',
         // xl: 'mr-3'

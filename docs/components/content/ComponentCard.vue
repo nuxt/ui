@@ -2,7 +2,7 @@
   <div>
     <div v-if="propsToSelect.length" class="relative flex border border-gray-200 dark:border-gray-700 rounded-t-md overflow-hidden not-prose">
       <div v-for="prop in propsToSelect" :key="prop.name" class="flex flex-col gap-0.5 justify-between py-1.5 font-medium bg-gray-50 dark:bg-gray-800 border-r border-r-gray-200 dark:border-r-gray-700">
-        <label :for="prop.name" class="block text-xs px-3 font-medium text-gray-400 dark:text-gray-500 -my-px">{{ useCamelCase(prop.name) }}</label>
+        <label :for="prop.name" class="block text-xs px-3 font-medium text-gray-400 dark:text-gray-500 -my-px">{{ prop.label }}</label>
         <UCheckbox
           v-if="prop.type === 'boolean'"
           v-model="componentProps[prop.name]"
@@ -19,10 +19,10 @@
           :ui="{ width: 'w-32', rounded: 'rounded-b-md' }"
           :popper="{ strategy: 'fixed', placement: 'bottom-start' }"
         >
-          <button class="px-3 sm:text-sm sm:leading-6 inline-flex items-center gap-1.5 mb-[0.5px]">
+          <button class="px-3 sm:text-sm sm:leading-6 inline-flex items-center gap-1.5 mb-[0.5px] w-full cursor-default">
             {{ componentProps[prop.name] }}
 
-            <UIcon name="i-heroicons-chevron-down-20-solid" class="w-4 h-4 flex-shrink-0 -mr-0.5 text-gray-400 dark:text-gray-500" />
+            <UIcon name="i-heroicons-chevron-down-20-solid" class="w-4 h-4 flex-shrink-0 -mr-0.5 ml-auto text-gray-400 dark:text-gray-500" />
           </button>
         </USelectMenu>
         <UInput
@@ -126,6 +126,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   return {
     type: prop?.type || 'string',
     name: key,
+    label: key === 'modelValue' ? 'value' : useCamelCase(key),
     options
   }
 }).filter(Boolean))
@@ -140,7 +141,7 @@ const code = computed(() => {
 
     const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
 
-    code += ` ${prop?.type === 'boolean' && value === 'false' ? ':' : ''}${key === 'modelValue' ? 'v-model' : useKebabCase(key)}${prop?.type === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${value}"`}`
+    code += ` ${prop?.type === 'boolean' && value === 'false' ? ':' : ''}${key === 'modelValue' ? 'value' : useKebabCase(key)}${prop?.type === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${value}"`}`
   }
   if (props.code) {
     const lineBreaks = (props.code.match(/\n/g) || []).length

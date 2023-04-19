@@ -20,8 +20,12 @@
           <span v-if="icon" :class="leadingIconClass">
             <Icon :name="icon" :class="iconClass" />
           </span>
-          <span v-if="modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : (modelValue as any)[textAttribute] }}</span>
-          <span v-else class="block truncate text-gray-400 dark:text-gray-500">{{ placeholder || '&nbsp;' }}</span>
+
+          <slot name="label">
+            <span v-if="modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : (modelValue as any)[textAttribute] }}</span>
+            <span v-else class="block truncate text-gray-400 dark:text-gray-500">{{ placeholder || '&nbsp;' }}</span>
+          </slot>
+
           <span :class="trailingIconClass">
             <Icon name="i-heroicons-chevron-down-20-solid" :class="iconClass" aria-hidden="true" />
           </span>
@@ -212,7 +216,8 @@ export default defineComponent({
         appConfig.ui.select.appearance[props.appearance],
         !!props.icon && appConfig.ui.select.leading.spacing[props.size],
         appConfig.ui.select.trailing.spacing[props.size],
-        appConfig.ui.select.custom
+        appConfig.ui.select.custom,
+        'inline-flex items-center'
       )
     })
 

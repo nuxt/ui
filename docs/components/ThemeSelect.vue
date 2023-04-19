@@ -3,18 +3,18 @@
     <USelectMenu
       v-model="primary"
       name="primary"
-      class="w-full"
-      :ui="{ width: 'w-[179px]' }"
+      class="w-full [&>div>button]:!rounded-r-none"
+      appearance="gray"
+      size="sm"
+      :ui="{ width: 'w-[194px]' }"
       :popper="{ placement: 'bottom-start' }"
       :options="primaryOptions"
     >
-      <UButton color="gray" size="sm" class="!shadow-none !rounded-r-none" truncate block>
-        <span class="flex-shrink-0 h-3 w-3 -ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${primary.hex}`}" />
+      <template #label>
+        <span class="flex-shrink-0 h-3 w-3 ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${primary.hex}`}" />
 
-        <span>{{ primary.text }}</span>
-
-        <UIcon name="i-heroicons-chevron-down-20-solid" class="ml-2 w-4 h-4 -mr-0.5 text-gray-400 dark:text-gray-500" />
-      </UButton>
+        {{ primary.text }}
+      </template>
 
       <template #option="{ option }">
         <span class="flex-shrink-0 h-3 w-3 rounded-full" :style="{ backgroundColor: `${option.hex}`}" />
@@ -26,18 +26,18 @@
     <USelectMenu
       v-model="gray"
       name="gray"
-      class="w-full"
-      :ui="{ width: 'w-[179px]' }"
+      class="w-full [&>div>button]:!rounded-l-none [&>div>button]:-ml-px"
+      appearance="gray"
+      size="sm"
+      :ui="{ width: 'w-[194px]' }"
       :popper="{ placement: 'bottom-end' }"
       :options="grayOptions"
     >
-      <UButton color="gray" size="sm" class="!shadow-none -ml-px !rounded-l-none" block>
-        <span class="flex-shrink-0 h-3 w-3 -ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${gray.hex}`}" />
+      <template #label>
+        <span class="flex-shrink-0 h-3 w-3 ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${gray.hex}`}" />
 
-        <span>{{ gray.text }}</span>
-
-        <UIcon name="i-heroicons-chevron-down-20-solid" class="ml-2 w-4 h-4 -mr-0.5 text-gray-400 dark:text-gray-500" />
-      </UButton>
+        {{ gray.text }}
+      </template>
 
       <template #option="{ option }">
         <span class="flex-shrink-0 h-3 w-3 rounded-full" :style="{ backgroundColor: `${option.hex}`}" />
