@@ -163,6 +163,7 @@ export default defineComponent({
 
       return classNames(
         ui.value.base,
+        ui.value.font,
         ui.value.rounded,
         ui.value.size[props.size],
         ui.value.gap[props.size],

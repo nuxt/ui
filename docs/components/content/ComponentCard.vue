@@ -19,7 +19,7 @@
           :ui="{ width: 'w-32', rounded: 'rounded-b-md' }"
           :popper="{ strategy: 'fixed', placement: 'bottom-start' }"
         >
-          <button class="px-3 sm:text-sm sm:leading-6 inline-flex items-center gap-1.5 mb-[0.5px] w-full cursor-default">
+          <button class="px-3 sm:text-sm sm:leading-6 inline-flex items-center gap-1.5 mb-[0.5px] w-full cursor-default focus:outline-none" tabindex="-1">
             {{ componentProps[prop.name] }}
 
             <UIcon name="i-heroicons-chevron-down-20-solid" class="w-4 h-4 flex-shrink-0 -mr-0.5 ml-auto text-gray-400 dark:text-gray-500" />
