@@ -194,7 +194,7 @@ export default defineComponent({
         ui.value.icon.base,
         ui.value.icon.size[props.size],
         // (!!slots.default || !!props.label?.length) && ui.value.icon.leading.spacing[props.size],
-        ui.value.icon.leading.base,
+        // ui.value.icon.leading.custom,
         props.loading && 'animate-spin'
       )
     })
@@ -204,7 +204,7 @@ export default defineComponent({
         ui.value.icon.base,
         ui.value.icon.size[props.size],
         // (!!slots.default || !!props.label?.length) && ui.value.icon.trailing.spacing[props.size],
-        ui.value.icon.trailing.base,
+        // ui.value.icon.trailing.custom,
         props.loading && !isLeading.value && 'animate-spin'
       )
     })

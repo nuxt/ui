@@ -53,16 +53,16 @@ const avatarGroup = {
 }
 
 const badge = {
-  base: 'inline-flex items-center font-medium',
+  base: 'inline-flex items-center',
   rounded: 'rounded-md',
+  font: 'font-medium',
   size: {
-    sm: 'text-xs px-2 py-0.5',
-    md: 'text-sm px-2.5 py-0.5',
-    lg: 'text-sm px-3 py-0.5',
-    xl: 'text-sm px-4 py-1'
+    sm: 'text-xs px-1.5 py-0.5',
+    md: 'text-xs px-2 py-1',
+    lg: 'text-xs px-2.5 py-1.5'
   },
   variant: {
-    solid: 'bg-{color}-100 dark:bg-{color}-700 text-{color}-800 dark:text-{color}-100'
+    solid: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-700 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400'
   },
   default: {
     size: 'md',
@@ -129,7 +129,7 @@ const button = {
     }
   },
   variant: {
-    solid: 'shadow-sm text-white bg-{color}-500 hover:bg-{color}-600 dark:bg-{color}-400 dark:hover:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
+    solid: 'shadow-sm text-white dark:text-gray-900 bg-{color}-500 hover:bg-{color}-600 dark:bg-{color}-400 dark:hover:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
     outline: 'ring-1 ring-inset ring-current text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
     soft: 'text-{color}-500 dark:text-{color}-400 bg-{color}-50 hover:bg-{color}-100 dark:bg-{color}-950 dark:hover:bg-{color}-900 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
     ghost: 'text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
@@ -146,31 +146,31 @@ const button = {
       lg: 'h-5 w-5',
       xl: 'h-5 w-5',
       '2xl': 'h-6 w-6'
-    },
-    leading: {
-      base: ''
-      // spacing: {
-      //   '2xs': '-ml-0.5',
-      //   xs: '-ml-0.5',
-      //   sm: '-ml-0.5',
-      //   md: '',
-      //   lg: '-ml-0.5',
-      //   xl: '-ml-0.5',
-      //   '2xl': '-ml-0.5'
-      // }
-    },
-    trailing: {
-      base: ''
-      // spacing: {
-      //   '2xs': '-mr-0.5',
-      //   xs: '-mr-0.5',
-      //   sm: '-mr-0.5',
-      //   md: '-mr-0.5',
-      //   lg: '-mr-0.5',
-      //   xl: '-mr-0.5',
-      //   '2xl': '-mr-0.5'
-      // }
     }
+    // leading: {
+    // custom: ''
+    // spacing: {
+    //   '2xs': '-ml-0.5',
+    //   xs: '-ml-0.5',
+    //   sm: '-ml-0.5',
+    //   md: '',
+    //   lg: '-ml-0.5',
+    //   xl: '-ml-0.5',
+    //   '2xl': '-ml-0.5'
+    // }
+    // },
+    // trailing: {
+    // custom: ''
+    // spacing: {
+    //   '2xs': '-mr-0.5',
+    //   xs: '-mr-0.5',
+    //   sm: '-mr-0.5',
+    //   md: '-mr-0.5',
+    //   lg: '-mr-0.5',
+    //   xl: '-mr-0.5',
+    //   '2xl': '-mr-0.5'
+    // }
+    // }
   },
   default: {
     size: 'md',
@@ -337,7 +337,7 @@ const selectMenu = {
   rounded: 'rounded-md',
   spacing: 'p-1',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
-  input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 u-text-gray-700 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10',
+  input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 u-text-gray-700 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10 placeholder-gray-400 dark:placeholder-gray-500',
   option: {
     base: 'cursor-default select-none relative py-1.5 rounded-md text-sm text-gray-900 dark:text-white',
     container: 'flex items-center gap-2',
@@ -434,7 +434,7 @@ const verticalNavigation = {
   active: 'u-text-gray-900 after:bg-gray-100 dark:after:bg-gray-800',
   inactive: 'u-text-gray-500 hover:u-text-gray-900 hover:after:bg-gray-50 dark:hover:after:bg-gray-800/50 focus-visible:after:bg-gray-50 dark:focus-visible:after:bg-gray-800/50',
   icon: {
-    base: 'flex-shrink-0 w-4 h-4',
+    base: 'flex-shrink-0 w-5 h-5',
     spacing: '-ml-0.5',
     active: 'u-text-gray-700',
     inactive: 'u-text-gray-400 group-hover:u-text-gray-700'

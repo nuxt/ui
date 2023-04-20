@@ -57,6 +57,7 @@ export default defineComponent({
     const badgeClass = computed(() => {
       return classNames(
         ui.value.base,
+        ui.value.font,
         ui.value.rounded,
         ui.value.size[props.size],
         ui.value.variant[props.variant]?.replaceAll('{color}', props.color)

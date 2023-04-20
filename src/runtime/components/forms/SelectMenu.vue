@@ -1,11 +1,11 @@
 <template>
-  <Combobox
+  <component
+    :is="searchable ? 'Combobox' : 'Listbox'"
     v-slot="{ open }"
     :by="by"
     :name="name"
     :model-value="modelValue"
     :multiple="multiple"
-    :nullable="nullable"
     :disabled="disabled"
     as="div"
     :class="ui.wrapper"
@@ -14,7 +14,13 @@
     <!-- TODO: check that `name` fixes required -->
     <!-- <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1" aria-hidden="true"> -->
 
-    <ComboboxButton ref="trigger" as="div" role="button" class="inline-flex w-full">
+    <component
+      :is="searchable ? 'ComboboxButton' : 'ListboxButton'"
+      ref="trigger"
+      as="div"
+      role="button"
+      class="inline-flex w-full"
+    >
       <slot :open="open" :disabled="disabled">
         <button :class="selectMenuClass" :disabled="disabled" type="button">
           <span v-if="icon" :class="leadingIconClass">
@@ -31,11 +37,11 @@
           </span>
         </button>
       </slot>
-    </ComboboxButton>
+    </component>
 
     <div v-if="open" ref="container" :class="[ui.container, ui.width]">
-      <transition appear v-bind="ui.transition">
-        <ComboboxOptions static :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.spacing, ui.height]">
+      <transition v-bind="ui.transition">
+        <component :is="searchable ? 'ComboboxOptions' : 'ListboxOptions'" static :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.spacing, ui.height]">
           <ComboboxInput
             v-if="searchable"
             ref="searchInput"
@@ -47,7 +53,8 @@
             :class="ui.input"
             @change="query = $event.target.value"
           />
-          <ComboboxOption
+          <component
+            :is="searchable ? 'ComboboxOption' : 'ListboxOption'"
             v-for="(option, index) in filteredOptions"
             v-slot="{ active, selected, disabled: optionDisabled }"
             :key="index"
@@ -66,9 +73,9 @@
                 <Icon v-if="ui.option.icon.name" :name="ui.option.icon.name" :class="ui.option.icon.size" aria-hidden="true" />
               </span>
             </li>
-          </ComboboxOption>
+          </component>
 
-          <ComboboxOption v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
+          <component :is="searchable ? 'ComboboxOption' : 'ListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
             <li :class="resolveOptionClass({ active, selected })">
               <div :class="ui.option.container">
                 <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
@@ -76,23 +83,23 @@
                 </slot>
               </div>
             </li>
-          </ComboboxOption>
+          </component>
           <p v-else-if="searchable && query && !filteredOptions.length" :class="ui.option.empty">
             <slot name="option-empty" :query="query">
               No results found for "{{ query }}".
             </slot>
           </p>
-        </ComboboxOptions>
+        </component>
       </transition>
     </div>
-  </Combobox>
+  </component>
 </template>
 
 <script lang="ts">
 import { ref, computed, watch, defineComponent } from 'vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { defu } from 'defu'
-import { Combobox, ComboboxButton, ComboboxOptions, ComboboxOption, ComboboxInput } from '@headlessui/vue'
+import { Combobox, ComboboxButton, ComboboxOptions, ComboboxOption, ComboboxInput, Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
@@ -111,6 +118,10 @@ export default defineComponent({
     ComboboxOptions,
     ComboboxOption,
     ComboboxInput,
+    Listbox,
+    ListboxButton,
+    ListboxOptions,
+    ListboxOption,
     Icon
   },
   props: {
@@ -143,10 +154,6 @@ export default defineComponent({
       default: false
     },
     multiple: {
-      type: Boolean,
-      default: false
-    },
-    nullable: {
       type: Boolean,
       default: false
     },

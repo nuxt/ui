@@ -50,7 +50,7 @@ export default defineComponent({
   <div class="group relative" :class="`language-${language}`">
     <UButton
       :icon="icon"
-      variant="soft"
+      variant="link"
       class="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity"
       size="xs"
       tabindex="-1"

@@ -1,7 +1,7 @@
 <script setup>
 const people = ['Wade Cooper', 'Arlene Mccoy', 'Devon Webb', 'Tom Cook', 'Tanya Fox', 'Hellen Schmidt', 'Caroline Schultz', 'Mason Heaney', 'Claudie Smitham', 'Emil Schaefer']
 
-const selected = ref(people[3])
+const selected = ref()
 </script>
 
 <template>

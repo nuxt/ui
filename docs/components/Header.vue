@@ -1,10 +1,10 @@
 <template>
-  <header class="sticky top-0 z-10 w-full backdrop-blur flex-none border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75">
+  <header class="sticky top-0 z-50 w-full backdrop-blur flex-none border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75">
     <UContainer>
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-3">
-          <NuxtLink to="/" class="flex items-center gap-2 font-bold text-lg text-gray-900 dark:text-white">
-            <Logo class="w-6 h-6" />
+          <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white">
+            <Logo class="w-8 h-8 text-primary-500 dark:text-primary-400" />
 
             nuxthq/ui
           </NuxtLink>
@@ -32,7 +32,6 @@
               variant="ghost"
               aria-label="Theme"
               size="sm"
-              class="[&>span]:!w-5 [&>span]:!h-5 !p-1.5"
               @click="isDark = !isDark"
             />
           </ColorScheme>
@@ -41,7 +40,6 @@
             target="_blank"
             color="gray"
             variant="ghost"
-            class="[&>span]:!w-5 [&>span]:!h-5 !p-1.5"
             icon="i-mdi-github"
             size="sm"
           />
