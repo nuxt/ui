@@ -69,6 +69,7 @@
                 </slot>
               </div>
 
+              <!-- TODO: Move to `.selected` and add icon in option -->
               <span v-if="selected" :class="resolveOptionIconClass({ active })">
                 <Icon v-if="ui.option.icon.name" :name="ui.option.icon.name" :class="ui.option.icon.size" aria-hidden="true" />
               </span>

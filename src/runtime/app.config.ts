@@ -457,8 +457,7 @@ const commandPalette = {
     wrapper: 'relative flex items-center',
     base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-[3.25rem] text-gray-900 dark:text-white focus:ring-0 sm:text-sm',
     icon: {
-      base: 'pointer-events-none absolute top-3.5 left-5 h-5 w-5 text-gray-400 dark:text-gray-500',
-      name: 'i-heroicons-magnifying-glass-20-solid'
+      base: 'pointer-events-none absolute top-3.5 left-5 h-5 w-5 text-gray-400 dark:text-gray-500'
     },
     close: {
       base: 'absolute right-2',
@@ -469,7 +468,7 @@ const commandPalette = {
       }
     }
   },
-  placeholder: {
+  empty: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
     icon: {
@@ -477,13 +476,43 @@ const commandPalette = {
       base: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
     }
   },
-  option: {
-    selected: {
+  group: {
+    wrapper: 'p-2',
+    label: 'px-3 my-2 text-xs font-semibold text-gray-900 dark:text-white',
+    container: 'text-sm text-gray-700 dark:text-gray-200',
+    command: {
+      base: 'flex justify-between select-none items-center rounded-md px-3 py-2 gap-3 relative',
+      active: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
+      inactive: '',
+      label: 'flex items-center gap-1.5 min-w-0',
+      prefix: 'text-gray-400 dark:text-gray-500',
+      suffix: 'text-gray-400 dark:text-gray-500',
+      container: 'flex items-center gap-2 min-w-0',
       icon: {
-        name: 'i-heroicons-check-20-solid'
-      }
+        base: 'flex-shrink-0 w-5 h-5',
+        active: 'text-gray-900 dark:text-white',
+        inactive: 'text-gray-400 dark:text-gray-500'
+      },
+      avatar: {
+        base: 'flex-shrink-0'
+      },
+      chip: {
+        base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
+      },
+      disabled: 'opacity-50',
+      selected: {
+        icon: {
+          name: 'i-heroicons-check-20-solid',
+          base: 'h-5 w-5 text-gray-900 dark:text-white flex-shrink-0'
+        }
+      },
+      shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400'
     },
-    shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400'
+    active: 'flex-shrink-0 text-gray-500 dark:text-gray-400',
+    inactive: 'flex-shrink-0 text-gray-500 dark:text-gray-400'
+  },
+  default: {
+    icon: 'i-heroicons-magnifying-glass-20-solid'
   }
 }
 

@@ -9,12 +9,12 @@
   >
     <div :class="ui.wrapper">
       <div v-if="searchable" :class="ui.input.wrapper">
-        <Icon v-if="ui.input.icon.name" :name="ui.input.icon.name" :class="ui.input.icon.base" aria-hidden="true" />
+        <Icon v-if="icon" :name="icon" :class="ui.input.icon.base" aria-hidden="true" />
         <ComboboxInput
           ref="comboboxInput"
           :value="query"
           :class="ui.input.base"
-          :placeholder="inputPlaceholder"
+          :placeholder="placeholder"
           autocomplete="off"
           @change="query = $event.target.value"
         />
@@ -53,9 +53,9 @@
         </CommandPaletteGroup>
       </ComboboxOptions>
 
-      <div v-else-if="placeholder" :class="ui.placeholder.wrapper">
-        <Icon v-if="ui.placeholder.icon.name" :name="ui.placeholder.icon.name" :class="ui.placehoder.icon.base" aria-hidden="true" />
-        <p :class="ui.placeholder.label">
+      <div v-else-if="empty" :class="ui.empty.wrapper">
+        <Icon v-if="ui.empty.icon.name" :name="ui.empty.icon.name" :class="ui.empty.icon.base" aria-hidden="true" />
+        <p :class="ui.empty.label">
           {{ query ? "We couldn't find any items with that term. Please try again." : "We couldn't find any items." }}
         </p>
       </div>
@@ -117,7 +117,11 @@ export default defineComponent({
       type: Array as PropType<Group[]>,
       default: () => []
     },
-    inputPlaceholder: {
+    icon: {
+      type: String,
+      default: appConfig.ui.commandPalette.default.icon
+    },
+    placeholder: {
       type: String,
       default: 'Search...'
     },
@@ -137,7 +141,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    placeholder: {
+    empty: {
       type: Boolean,
       default: true
     },

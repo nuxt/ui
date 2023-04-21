@@ -27,8 +27,9 @@
                 @click="item.click"
               >
                 <slot :name="item.slot" :item="item">
+                  <!-- TODO: resolveItemIconClass for active / inactive + `ui.item.icon.base` -->
                   <Icon v-if="item.icon" :name="item.icon" :class="[ui.item.icon, item.iconClass]" />
-                  <Avatar v-if="item.avatar" v-bind="{ size: '2xs', ...item.avatar }" :class="ui.item.avatar" />
+                  <Avatar v-if="item.avatar" v-bind="{ size: 'xs', ...item.avatar }" :class="ui.item.avatar" />
 
                   <span class="truncate">{{ item.label }}</span>
 
