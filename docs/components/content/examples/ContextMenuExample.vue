@@ -1,15 +1,3 @@
----
-description: ''
-github: true
----
-
-## Usage
-
-::component-example
-#default
-:context-menu-example
-#code
-```vue
 <script setup>
 const { x, y } = useMouse()
 
@@ -32,19 +20,15 @@ function openContextMenu () {
 </script>
 
 <template>
-  <div @click="isOpen = false" @contextmenu.prevent="openContextMenu">
+  <div class="w-full" @click="isOpen = false" @contextmenu.prevent="openContextMenu">
+    <Placeholder class="h-20 w-full flex items-center justify-center">
+      <p>Right click here</p>
+    </Placeholder>
+
     <UContextMenu v-model="isOpen" :virtual-element="virtualElement" width-class="w-48">
-      <!-- Content -->
+      <div class="p-4">
+        Menu
+      </div>
     </UContextMenu>
   </div>
 </template>
-```
-::
-
-## Props
-
-:component-props
-
-## Preset
-
-:component-preset

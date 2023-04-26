@@ -376,14 +376,17 @@ const card = {
   rounded: 'rounded-lg',
   shadow: 'shadow',
   body: {
+    base: '',
     background: '',
     spacing: 'px-4 py-5 sm:p-6'
   },
   header: {
+    base: '',
     background: '',
     spacing: 'px-4 py-5 sm:px-6'
   },
   footer: {
+    base: '',
     background: '',
     spacing: 'px-4 py-4 sm:px-6'
   }
@@ -491,8 +494,9 @@ const commandPalette = {
 const modal = {
   wrapper: 'relative z-50',
   inner: 'fixed inset-0 overflow-y-auto',
-  container: 'flex min-h-full items-end sm:items-center justify-center p-4 sm:p-0 text-center',
-  base: 'relative text-left overflow-hidden transform transition-all sm:my-8 w-full',
+  container: 'flex min-h-full items-end sm:items-center justify-center text-center',
+  spacing: 'p-4 sm:p-0',
+  base: 'relative text-left overflow-hidden sm:my-8 w-full flex flex-col',
   overlay: {
     base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-500/75 dark:bg-gray-600/75',
@@ -505,12 +509,12 @@ const modal = {
       leaveTo: 'opacity-0'
     }
   },
-  background: undefined,
-  divide: 'divide-y divide-gray-100 dark:divide-gray-800',
+  background: 'bg-white dark:bg-gray-900',
   ring: '',
-  rounded: undefined,
+  rounded: 'rounded-lg',
   shadow: 'shadow-xl',
   width: 'sm:max-w-lg',
+  height: '',
   transition: {
     enter: 'ease-out duration-300',
     enterFrom: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
@@ -538,6 +542,8 @@ const slideover = {
   base: 'relative flex-1 flex flex-col w-full focus:outline-none',
   background: 'bg-white dark:bg-gray-900',
   ring: '',
+  rounded: '',
+  shadow: 'shadow-xl',
   width: 'w-screen max-w-md',
   transition: {
     enter: 'transform transition ease-in-out duration-500 sm:duration-700',

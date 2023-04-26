@@ -1,88 +1,74 @@
 <template>
-  <div v-if="isOpen" ref="container" :class="[containerClass, widthClass]">
-    <transition appear v-bind="transitionClass">
-      <div :class="[baseClass, ringClass, roundedClass, shadowClass, backgroundClass]">
+  <div v-if="isOpen" ref="container" :class="[ui.container, ui.width]">
+    <transition appear v-bind="ui.transition">
+      <div :class="[ui.base, ui.ring, ui.rounded, ui.shadow, ui.background]">
         <slot />
       </div>
     </transition>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType, Ref } from 'vue'
-import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import type { VirtualElement } from '@popperjs/core'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
+import { useAppConfig } from '#imports'
+// TODO: Remove
 // @ts-expect-error
-import $ui from '#build/ui'
+import appConfig from '#build/app.config'
 
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  props: {
+    modelValue: {
+      type: Boolean,
+      default: false
+    },
+    virtualElement: {
+      type: Object,
+      required: true
+    },
+    popper: {
+      type: Object as PropType<PopperOptions>,
+      default: () => ({})
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.popover>>,
+      default: () => appConfig.ui.popover
+    }
   },
-  virtualElement: {
-    type: Object,
-    required: true
-  },
-  wrapperClass: {
-    type: String,
-    default: () => $ui.contextMenu.wrapper
-  },
-  containerClass: {
-    type: String,
-    default: () => $ui.contextMenu.container
-  },
-  widthClass: {
-    type: String,
-    default: () => $ui.contextMenu.width
-  },
-  backgroundClass: {
-    type: String,
-    default: () => $ui.contextMenu.background
-  },
-  shadowClass: {
-    type: String,
-    default: () => $ui.contextMenu.shadow
-  },
-  roundedClass: {
-    type: String,
-    default: () => $ui.contextMenu.rounded
-  },
-  ringClass: {
-    type: String,
-    default: () => $ui.contextMenu.ring
-  },
-  baseClass: {
-    type: String,
-    default: () => $ui.contextMenu.base
-  },
-  transitionClass: {
-    type: Object,
-    default: () => $ui.contextMenu.transition
-  },
-  popper: {
-    type: Object as PropType<PopperOptions>,
-    default: () => ({})
+  emits: ['update:modelValue', 'close'],
+  setup (props, { emit }) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const ui = computed<Partial<typeof appConfig.ui.popover>>(() => defu({}, props.ui, appConfig.ui.popover))
+
+    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
+
+    const isOpen = computed({
+      get () {
+        return props.modelValue
+      },
+      set (value) {
+        emit('update:modelValue', value)
+      }
+    })
+
+    const virtualElement = toRef(props, 'virtualElement') as Ref<VirtualElement>
+
+    const [, container] = usePopper(popper.value, virtualElement)
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      isOpen,
+      container
+    }
   }
 })
-
-const emit = defineEmits(['update:modelValue', 'close'])
-
-const isOpen = computed({
-  get () {
-    return props.modelValue
-  },
-  set (value) {
-    emit('update:modelValue', value)
-  }
-})
-
-const virtualElement = toRef(props, 'virtualElement') as Ref<VirtualElement>
-
-const popper = computed<PopperOptions>(() => defu({}, props.popper, $ui.contextMenu.popper))
-
-const [, container] = usePopper(popper.value, virtualElement)
 </script>

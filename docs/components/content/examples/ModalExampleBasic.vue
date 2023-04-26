@@ -6,10 +6,10 @@ const open = ref(false)
   <div>
     <UButton label="Open" @click="open = true" />
 
-    <USlideover v-model="open">
-      <div class="p-4 h-full">
-        <Placeholder class="w-full h-full" />
+    <UModal v-model="open">
+      <div class="p-4">
+        <Placeholder class="h-48" />
       </div>
-    </USlideover>
+    </UModal>
   </div>
 </template>

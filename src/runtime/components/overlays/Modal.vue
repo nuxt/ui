@@ -6,20 +6,10 @@
       </TransitionChild>
 
       <div :class="ui.inner">
-        <div :class="ui.container">
+        <div :class="[ui.container, ui.spacing]">
           <TransitionChild as="template" :appear="appear" v-bind="ui.transition">
-            <DialogPanel :class="[ui.base, ui.width]">
-              <Card :ui="cardUi">
-                <template v-if="$slots.header" #header>
-                  <slot name="header" />
-                </template>
-
-                <slot />
-
-                <template v-if="$slots.footer" #footer>
-                  <slot name="footer" />
-                </template>
-              </Card>
+            <DialogPanel :class="[ui.base, ui.width, ui.height, ui.background, ui.ring, ui.rounded, ui.shadow]">
+              <slot />
             </DialogPanel>
           </TransitionChild>
         </div>
@@ -32,9 +22,7 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { pick } from 'lodash-es'
 import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
-import Card from '../layout/Card.vue'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -44,7 +32,6 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    Card,
     // eslint-disable-next-line vue/no-reserved-component-names
     Dialog,
     DialogPanel,
@@ -81,8 +68,6 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.modal>>(() => defu({}, props.ui, appConfig.ui.modal))
 
-    const cardUi = computed(() => pick(ui.value, ['background', 'divide', 'ring', 'rounded', 'shadow', 'body', 'header', 'footer']))
-
     const isOpen = computed({
       get () {
         return props.modelValue
@@ -100,7 +85,6 @@ export default defineComponent({
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      cardUi,
       isOpen,
       close
     }

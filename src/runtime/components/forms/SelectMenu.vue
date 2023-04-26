@@ -221,7 +221,6 @@ export default defineComponent({
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
 
     const selectMenuClass = computed(() => {
-      console.log('uiSelect.value.custom', uiSelect.value.custom)
       return classNames(
         uiSelect.value.base,
         'text-left cursor-default',

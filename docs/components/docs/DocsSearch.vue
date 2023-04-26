@@ -1,5 +1,13 @@
 <template>
-  <UModal v-model="isSearchModalOpen" :ui="{ body: { spacing: '' } }">
+  <UModal
+    v-model="isSearchModalOpen"
+    :ui="{
+      spacing: 'sm:p-4',
+      rounded: 'sm:rounded-lg',
+      width: 'sm:max-w-3xl',
+      height: 'h-screen sm:h-[28rem]'
+    }"
+  >
     <UCommandPalette
       ref="commandPaletteRef"
       :groups="groups"
