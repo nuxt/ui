@@ -11,7 +11,7 @@
       :options="primaryOptions"
     >
       <template #label>
-        <span class="flex-shrink-0 h-3 w-3 ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${primary.hex}`}" />
+        <span class="flex-shrink-0 h-3 w-3 mr-2 rounded-full" :style="{ backgroundColor: `${primary.hex}`}" />
 
         {{ primary.text }}
       </template>
@@ -34,7 +34,7 @@
       :options="grayOptions"
     >
       <template #label>
-        <span class="flex-shrink-0 h-3 w-3 ml-0.5 mr-2 rounded-full" :style="{ backgroundColor: `${gray.hex}`}" />
+        <span class="flex-shrink-0 h-3 w-3 mr-2 rounded-full" :style="{ backgroundColor: `${gray.hex}`}" />
 
         {{ gray.text }}
       </template>

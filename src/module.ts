@@ -139,6 +139,9 @@ export default defineNuxtModule<ModuleOptions>({
         pattern: new RegExp(`bg-(${safeColorsAsRegex})-(500|900|950)`),
         variants: ['dark:hover']
       }, {
+        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(400)`),
+        variants: ['dark:disabled']
+      }, {
         pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|100|600)`),
         variants: ['hover']
       }, {

@@ -18,7 +18,7 @@ function hexToRgb (hex) {
 export default defineNuxtPlugin(() => {
   const appConfig = useAppConfig()
 
-  const primary = computed(() => `:root {
+  const root = computed(() => `:root {
 ${Object.entries(colors[appConfig.ui.primary]).map(([key, value]) => `--color-primary-${key}: ${hexToRgb(value)};`).join('\n')}
 
 ${Object.entries(colors[appConfig.ui.gray]).map(([key, value]) => `--color-gray-${key}: ${hexToRgb(value)};`).join('\n')}
@@ -28,7 +28,7 @@ ${Object.entries(colors[appConfig.ui.gray]).map(([key, value]) => `--color-gray-
 
   useHead({
     style: [{
-      innerHTML: () => primary.value
+      innerHTML: () => root.value
     }]
   })
 })

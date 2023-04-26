@@ -199,6 +199,10 @@ export default defineComponent({
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.selectMenu>>,
       default: () => appConfig.ui.selectMenu
+    },
+    uiSelect: {
+      type: Object as PropType<Partial<typeof appConfig.ui.select>>,
+      default: () => appConfig.ui.select
     }
   },
   emits: ['update:modelValue', 'open', 'close'],
@@ -207,6 +211,7 @@ export default defineComponent({
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.selectMenu>>(() => defu({}, props.ui, appConfig.ui.selectMenu))
+    const uiSelect = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.uiSelect, appConfig.ui.select))
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
@@ -216,37 +221,38 @@ export default defineComponent({
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
 
     const selectMenuClass = computed(() => {
+      console.log('uiSelect.value.custom', uiSelect.value.custom)
       return classNames(
-        appConfig.ui.select.base,
+        uiSelect.value.base,
         'text-left cursor-default',
-        appConfig.ui.select.size[props.size],
-        appConfig.ui.select.spacing[props.size],
-        appConfig.ui.select.appearance[props.appearance],
-        !!props.icon && appConfig.ui.select.leading.spacing[props.size],
-        appConfig.ui.select.trailing.spacing[props.size],
-        appConfig.ui.select.custom,
+        uiSelect.value.size[props.size],
+        uiSelect.value.spacing[props.size],
+        uiSelect.value.appearance[props.appearance],
+        !!props.icon && uiSelect.value.leading.spacing[props.size],
+        uiSelect.value.trailing.spacing[props.size],
+        uiSelect.value.custom,
         'inline-flex items-center'
       )
     })
 
     const iconClass = computed(() => {
       return classNames(
-        appConfig.ui.select.icon.base,
-        appConfig.ui.select.icon.size[props.size]
+        uiSelect.value.icon.base,
+        uiSelect.value.icon.size[props.size]
       )
     })
 
     const leadingIconClass = computed(() => {
       return classNames(
-        appConfig.ui.select.icon.leading.wrapper,
-        appConfig.ui.select.icon.leading.spacing[props.size]
+        uiSelect.value.icon.leading.wrapper,
+        uiSelect.value.icon.leading.spacing[props.size]
       )
     })
 
     const trailingIconClass = computed(() => {
       return classNames(
-        appConfig.ui.select.icon.trailing.wrapper,
-        appConfig.ui.select.icon.trailing.spacing[props.size]
+        uiSelect.value.icon.trailing.wrapper,
+        uiSelect.value.icon.trailing.spacing[props.size]
       )
     })
 

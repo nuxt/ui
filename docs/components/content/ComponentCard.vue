@@ -15,22 +15,21 @@
           v-model="componentProps[prop.name]"
           :options="prop.options"
           :name="prop.name"
+          :label="componentProps[prop.name]"
           appearance="none"
-          :ui="{ width: 'w-32', rounded: 'rounded-b-md' }"
+          size="sm"
+          class="inline-flex"
+          :ui="{ width: 'w-32 !-mt-px', rounded: 'rounded-b-md' }"
+          :ui-select="{ custom: '!py-0' }"
           :popper="{ strategy: 'fixed', placement: 'bottom-start' }"
-        >
-          <button class="px-3 sm:text-sm sm:leading-6 inline-flex items-center gap-1.5 mb-[0.5px] w-full cursor-default focus:outline-none" tabindex="-1">
-            {{ componentProps[prop.name] }}
-
-            <UIcon name="i-heroicons-chevron-down-20-solid" class="w-4 h-4 flex-shrink-0 -mr-0.5 ml-auto text-gray-400 dark:text-gray-500" />
-          </button>
-        </USelectMenu>
+        />
         <UInput
           v-else
           v-model="componentProps[prop.name]"
           :type="prop.type === 'number' ? 'number' : 'text'"
           :name="prop.name"
           appearance="none"
+          size="sm"
           autocomplete="off"
           :ui="{ custom: '!py-0' }"
         />

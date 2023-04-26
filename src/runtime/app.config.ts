@@ -72,64 +72,60 @@ const badge = {
 }
 
 const button = {
-  base: 'focus:outline-none focus-visible:outline-0 disabled:pointer-events-none disabled:select-none disabled:opacity-75',
+  base: 'focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75',
   font: 'font-medium',
   rounded: 'rounded-md',
   size: {
     '2xs': 'text-xs',
-    xs: 'text-sm',
+    xs: 'text-xs',
     sm: 'text-sm',
     md: 'text-sm',
-    lg: 'text-sm',
-    xl: 'text-sm',
-    '2xl': 'text-base'
+    lg: 'text-base',
+    xl: 'text-base'
   },
   gap: {
     '2xs': 'gap-x-1',
-    xs: 'gap-x-1',
+    xs: 'gap-x-1.5',
     sm: 'gap-x-1.5',
     md: 'gap-x-2',
-    lg: 'gap-x-2.5',
-    xl: 'gap-x-3',
-    '2xl': 'gap-x-3'
+    lg: 'gap-x-2',
+    xl: 'gap-x-2'
   },
   spacing: {
     '2xs': 'px-2 py-1',
-    xs: 'px-2 py-1',
-    sm: 'px-2.5 py-1.5',
+    xs: 'px-2.5 py-1.5',
+    sm: 'px-3 py-1.5',
     md: 'px-3 py-2',
-    lg: 'px-3.5 py-2.5',
-    xl: 'px-4 py-3',
-    '2xl': 'px-4 py-3'
+    lg: 'px-4 py-2',
+    xl: 'px-4 py-3'
   },
   square: {
     '2xs': 'p-1',
-    xs: 'p-1',
+    xs: 'p-1.5',
     sm: 'p-1.5',
     md: 'p-2',
-    lg: 'p-2.5',
-    xl: 'p-3',
-    '2xl': 'p-3'
+    lg: 'p-2',
+    xl: 'p-3'
   },
   color: {
     white: {
-      solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800/50 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
+      solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
       ghost: 'text-gray-900 dark:text-white hover:bg-white dark:hover:bg-gray-900 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
     },
     gray: {
-      solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700/50 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
+      solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 hover:bg-gray-100 disabled:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700/50 dark:disabled:bg-gray-800 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
       // TODO: For Volta
       // 'outline-ghost': 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 hover:ring-1 ring-inset ring-gray-300 dark:ring-gray-700',
       ghost: 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
       link: 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline-offset-4 hover:underline focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
     },
     black: {
-      solid: 'shadow-sm text-white dark:text-gray-900 bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-100 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
+      solid: 'shadow-sm text-white dark:text-gray-900 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 dark:disabled:bg-white focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
       link: 'text-gray-900 dark:text-white underline-offset-4 hover:underline focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
     }
   },
   variant: {
-    solid: 'shadow-sm text-white dark:text-gray-900 bg-{color}-500 hover:bg-{color}-600 dark:bg-{color}-400 dark:hover:bg-{color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
+    solid: 'shadow-sm text-white dark:text-gray-900 bg-{color}-500 hover:bg-{color}-600 disabled:bg-{color}-500 dark:bg-{color}-400 dark:hover:bg-{color}-500 dark:disabled:bg-{color}-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
     outline: 'ring-1 ring-inset ring-current text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
     soft: 'text-{color}-500 dark:text-{color}-400 bg-{color}-50 hover:bg-{color}-100 dark:bg-{color}-950 dark:hover:bg-{color}-900 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
     ghost: 'text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
@@ -141,36 +137,11 @@ const button = {
     size: {
       '2xs': 'h-3.5 w-3.5',
       xs: 'h-4 w-4',
-      sm: 'h-5 w-5',
+      sm: 'h-4 w-4',
       md: 'h-5 w-5',
       lg: 'h-5 w-5',
-      xl: 'h-5 w-5',
-      '2xl': 'h-6 w-6'
+      xl: 'h-6 w-6'
     }
-    // leading: {
-    // custom: ''
-    // spacing: {
-    //   '2xs': '-ml-0.5',
-    //   xs: '-ml-0.5',
-    //   sm: '-ml-0.5',
-    //   md: '',
-    //   lg: '-ml-0.5',
-    //   xl: '-ml-0.5',
-    //   '2xl': '-ml-0.5'
-    // }
-    // },
-    // trailing: {
-    // custom: ''
-    // spacing: {
-    //   '2xs': '-mr-0.5',
-    //   xs: '-mr-0.5',
-    //   sm: '-mr-0.5',
-    //   md: '-mr-0.5',
-    //   lg: '-mr-0.5',
-    //   xl: '-mr-0.5',
-    //   '2xl': '-mr-0.5'
-    // }
-    // }
   },
   default: {
     size: 'md',
@@ -227,77 +198,76 @@ const input = {
   base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
   custom: '',
   size: {
-    // '2xs': 'text-xs',
-    // xs: 'text-xs',
-    // sm: 'text-sm leading-4',
-    sm: 'sm:text-sm sm:leading-6',
-    md: 'sm:text-sm sm:leading-6'
-    // lg: 'text-base',
-    // xl: 'text-base'
+    '2xs': 'text-xs',
+    xs: 'text-xs',
+    sm: 'text-sm',
+    md: 'text-sm',
+    lg: 'text-base',
+    xl: 'text-base'
   },
   spacing: {
-    // '2xs': 'px-1 py-0.5',
-    // xs: 'px-2.5 py-1.5',
-    sm: 'px-2.5 py-1',
-    md: 'px-3 py-1.5'
-    // lg: 'px-4 py-2',
-    // xl: 'px-6 py-3'
+    '2xs': 'px-2 py-1',
+    xs: 'px-2.5 py-1.5',
+    sm: 'px-3 py-1.5',
+    md: 'px-3 py-2',
+    lg: 'px-4 py-2',
+    xl: 'px-4 py-3'
   },
   leading: {
     spacing: {
-      // '2xs': 'pl-7',
-      // xs: 'pl-7',
-      sm: 'pl-10',
-      md: 'pl-10'
-      // lg: 'pl-10',
-      // xl: 'pl-10'
+      '2xs': 'pl-[26px]',
+      xs: 'pl-8',
+      sm: 'pl-[34px]',
+      md: 'pl-10',
+      lg: 'pl-11',
+      xl: 'pl-12'
     }
   },
   trailing: {
     spacing: {
-      // '2xs': 'pr-7',
-      // xs: 'pr-7',
-      sm: 'pr-10',
-      md: 'pr-10'
-      // lg: 'pr-10',
-      // xl: 'pr-10'
+      '2xs': 'pr-[26px]',
+      xs: 'pr-8',
+      sm: 'pr-[34px]',
+      md: 'pr-10',
+      lg: 'pr-11',
+      xl: 'pr-12'
     }
   },
   appearance: {
     white: 'border-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
-    gray: 'border-0 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+    gray: 'border-0 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
     none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
     base: 'text-gray-400 dark:text-gray-500',
     size: {
-      // '2xs': 'h-3 w-3',
-      // xs: 'h-4 w-4',
-      sm: 'h-5 w-5',
-      md: 'h-5 w-5'
-      // lg: 'h-5 w-5',
-      // xl: 'h-5 w-5'
+      '2xs': 'h-3.5 w-3.5',
+      xs: 'h-4 w-4',
+      sm: 'h-4 w-4',
+      md: 'h-5 w-5',
+      lg: 'h-5 w-5',
+      xl: 'h-6 w-6'
     },
     leading: {
       wrapper: 'absolute inset-y-0 left-0 flex items-center pointer-events-none',
       spacing: {
-        // '2xs': 'ml-2',
-        // xs: 'ml-2',
+        '2xs': 'pl-2',
+        xs: 'pl-2.5',
         sm: 'pl-3',
-        md: 'pl-3'
-        // lg: 'ml-3',
-        // xl: 'ml-3'
+        md: 'pl-3',
+        lg: 'pl-4',
+        xl: 'pl-4'
       }
     },
     trailing: {
       wrapper: 'absolute inset-y-0 right-0 flex items-center pointer-events-none',
       spacing: {
-        // '2xs': 'mr-2',
-        // xs: 'mr-2',
+        '2xs': 'pr-2',
+        xs: 'pr-2.5',
         sm: 'pr-3',
-        md: 'pr-3'
-        // lg: 'mr-3',
-        // xl: 'mr-3'
+        md: 'pr-3',
+        lg: 'pr-4',
+        xl: 'pr-4'
       }
     }
   },
@@ -522,9 +492,9 @@ const modal = {
   wrapper: 'relative z-50',
   inner: 'fixed inset-0 overflow-y-auto',
   container: 'flex min-h-full items-end sm:items-center justify-center p-4 sm:p-0 text-center',
-  base: 'relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle w-full',
-  background: 'bg-white dark:bg-gray-900',
+  base: 'relative text-left overflow-hidden transform transition-all sm:my-8 w-full',
   overlay: {
+    base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-500/75 dark:bg-gray-600/75',
     transition: {
       enter: 'ease-out duration-300',
@@ -535,9 +505,10 @@ const modal = {
       leaveTo: 'opacity-0'
     }
   },
-  border: '',
+  background: undefined,
+  divide: 'divide-y divide-gray-100 dark:divide-gray-800',
   ring: '',
-  rounded: 'rounded-lg',
+  rounded: undefined,
   shadow: 'shadow-xl',
   width: 'sm:max-w-lg',
   transition: {
@@ -551,8 +522,9 @@ const modal = {
 }
 
 const slideover = {
-  wrapper: 'fixed inset-0 flex z-40',
+  wrapper: 'fixed inset-0 flex z-50',
   overlay: {
+    base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-500/75 dark:bg-gray-600/75',
     transition: {
       enter: 'ease-in-out duration-500',
@@ -565,8 +537,8 @@ const slideover = {
   },
   base: 'relative flex-1 flex flex-col w-full focus:outline-none',
   background: 'bg-white dark:bg-gray-900',
-  width: 'max-w-md',
-  header: 'flex items-center justify-between flex-shrink-0 px-4 sm:px-6 h-16 border-b border-gray-200 dark:border-gray-800',
+  ring: '',
+  width: 'w-screen max-w-md',
   transition: {
     enter: 'transform transition ease-in-out duration-500 sm:duration-700',
     leave: 'transform transition ease-in-out duration-500 sm:duration-700'

@@ -10,10 +10,10 @@
       </thead>
       <tbody>
         <tr v-for="prop in metaProps" :key="prop.name">
-          <td class="whitespace-nowrap relative">
+          <td class="relative">
             <code>{{ prop.name }}</code><span v-if="prop.required" class="font-bold text-red-500 dark:text-red-400 absolute top-0 ml-1">*</span>
           </td>
-          <td class="whitespace-nowrap">
+          <td>
             <code v-if="prop.default">{{ prop.default }}</code>
           </td>
           <td>

@@ -44,21 +44,21 @@
     "tailwindcss": "^3.3.1"
   },
   "devDependencies": {
-    "@iconify-json/mdi": "^1.1.50",
+    "@iconify-json/simple-icons": "^1.1.50",
     "@nuxt/content": "^2.6.0",
-    "@nuxt/module-builder": "^0.2.1",
+    "@nuxt/module-builder": "^0.3.0",
     "@nuxthq/studio": "^0.10.1",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@nuxtjs/plausible": "^0.2.0",
     "@types/lodash-es": "^4.17.7",
-    "@types/node": "^18.15.13",
+    "@types/node": "^18.16.0",
     "@vueuse/nuxt": "^9.13.0",
-    "eslint": "^8.38.0",
+    "eslint": "^8.39.0",
     "nuxt": "^3.4.2",
     "nuxt-component-meta": "^0.5.1",
     "nuxt-lodash": "^2.4.1",
     "standard-version": "^9.5.0",
-    "unbuild": "^1.2.0",
-    "vue-tsc": "^1.2.0"
+    "unbuild": "^1.2.1",
+    "vue-tsc": "^1.4.4"
   }
 }
