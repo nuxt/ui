@@ -25,13 +25,14 @@
         />
         <UInput
           v-else
-          v-model="componentProps[prop.name]"
+          :model-value="componentProps[prop.name]"
           :type="prop.type === 'number' ? 'number' : 'text'"
           :name="prop.name"
           appearance="none"
           size="sm"
           autocomplete="off"
           :ui="{ custom: '!py-0' }"
+          @update:model-value="val => componentProps[prop.name] = prop.type === 'number' ? Number(val) : val"
         />
       </div>
     </div>
@@ -116,8 +117,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
   const dottedKey = useKebabCase(key).replaceAll('-', '.')
   const keys = useGet(ui.value, dottedKey, {})
-  let options = Object.keys(keys) // .filter(key => typeof keys[key] === 'string')
-
+  let options = typeof keys === 'object' && Object.keys(keys)
   if (key.toLowerCase().endsWith('color')) {
     options = appConfig.ui.colors
   }
@@ -134,13 +134,13 @@ const code = computed(() => {
   let code = `\`\`\`html
 <${name}`
   for (const [key, value] of Object.entries(componentProps)) {
-    if (!value) {
+    if (value === 'undefined' || value === null) {
       continue
     }
 
     const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
 
-    code += ` ${prop?.type === 'boolean' && value === 'false' ? ':' : ''}${key === 'modelValue' ? 'value' : useKebabCase(key)}${prop?.type === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${value}"`}`
+    code += ` ${(prop?.type === 'boolean' && value !== true) || typeof value === 'object' ? ':' : ''}${key === 'modelValue' ? 'value' : useKebabCase(key)}${prop?.type === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? JSON.stringify(value) : value}"`}`
   }
   if (props.code) {
     const lineBreaks = (props.code.match(/\n/g) || []).length

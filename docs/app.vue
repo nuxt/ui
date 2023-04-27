@@ -8,9 +8,7 @@
 
     <DocsSearch />
 
-    <ClientOnly>
-      <UNotifications />
-    </ClientOnly>
+    <UNotifications />
   </div>
 </template>
 

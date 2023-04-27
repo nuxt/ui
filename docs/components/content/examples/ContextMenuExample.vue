@@ -20,9 +20,9 @@ function openContextMenu () {
 </script>
 
 <template>
-  <div class="w-full" @click="isOpen = false" @contextmenu.prevent="openContextMenu">
+  <div class="w-full" @contextmenu.prevent="openContextMenu">
     <Placeholder class="h-20 w-full flex items-center justify-center">
-      <p>Right click here</p>
+      Right click here
     </Placeholder>
 
     <UContextMenu v-model="isOpen" :virtual-element="virtualElement" width-class="w-48">

@@ -12,6 +12,7 @@
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType, Ref } from 'vue'
 import { defu } from 'defu'
+import { onClickOutside } from '@vueuse/core'
 import type { VirtualElement } from '@popperjs/core'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
@@ -37,8 +38,8 @@ export default defineComponent({
       default: () => ({})
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.popover>>,
-      default: () => appConfig.ui.popover
+      type: Object as PropType<Partial<typeof appConfig.ui.contextMenu>>,
+      default: () => appConfig.ui.contextMenu
     }
   },
   emits: ['update:modelValue', 'close'],
@@ -46,7 +47,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.popover>>(() => defu({}, props.ui, appConfig.ui.popover))
+    const ui = computed<Partial<typeof appConfig.ui.contextMenu>>(() => defu({}, props.ui, appConfig.ui.contextMenu))
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
@@ -62,6 +63,10 @@ export default defineComponent({
     const virtualElement = toRef(props, 'virtualElement') as Ref<VirtualElement>
 
     const [, container] = usePopper(popper.value, virtualElement)
+
+    onClickOutside(container, () => {
+      isOpen.value = false
+    })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

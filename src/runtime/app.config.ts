@@ -620,30 +620,16 @@ const contextMenu = {
 }
 
 const notification = {
+  wrapper: 'w-full pointer-events-auto',
+  container: 'relative overflow-hidden',
+  title: 'text-sm font-medium text-gray-900 dark:text-white',
+  description: 'mt-1 text-sm leading-5 text-gray-500 dark:text-gray-400',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-lg',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  type: {
-    info: 'i-heroicons-information-circle',
-    success: 'i-heroicons-check-circle',
-    warning: 'i-heroicons-exclamation-circle',
-    error: 'i-heroicons-x-circle'
-  },
-  icon: {
-    base: 'w-6 h-6',
-    color: {
-      warning: 'text-orange-400',
-      info: 'text-blue-400',
-      success: 'text-green-400',
-      error: 'text-red-400'
-    }
-  },
-  close: {
-    icon: {
-      name: 'i-heroicons-x-mark-20-solid'
-    }
-  },
+  icon: 'flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-500',
+  avatar: 'flex-shrink-0 pt-0.5',
   transition: {
     enterActiveClass: 'transform ease-out duration-300 transition',
     enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2',
@@ -651,7 +637,23 @@ const notification = {
     leaveActiveClass: 'transition ease-in duration-100',
     leaveFromClass: 'opacity-100',
     leaveToClass: 'opacity-0'
+  },
+  default: {
+    close: {
+      icon: 'i-heroicons-x-mark-20-solid',
+      color: 'gray',
+      variant: 'link',
+      padded: false
+    },
+    action: {
+      size: 'xs'
+    }
   }
+}
+
+const notifications = {
+  wrapper: 'fixed bottom-0 right-0 flex flex-col justify-end w-full z-[55] sm:w-96',
+  container: 'px-4 sm:px-6 py-6 space-y-3 overflow-y-auto'
 }
 
 export default {
@@ -679,6 +681,7 @@ export default {
     popover,
     tooltip,
     contextMenu,
-    notification
+    notification,
+    notifications
   }
 }

@@ -64,14 +64,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
 
-    addTemplate({
-      filename: 'ui.mjs',
-      write: true,
-      getContents: () => `import appConfig from '#build/app.config'
-        export default appConfig.ui
-      `
-    })
-
     nuxt.hook('app:resolve', (app) => {
       app.configs.push(resolve(runtimeDir, 'app.config.ts'))
     })

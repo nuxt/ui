@@ -7,7 +7,7 @@ const open = ref(false)
     <UButton label="Open" @click="open = true" />
 
     <UModal v-model="open">
-      <UCard :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+      <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
         <template #header>
           <Placeholder class="h-8" />
         </template>

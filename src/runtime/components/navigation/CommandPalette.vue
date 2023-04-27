@@ -159,7 +159,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'close'],
-  setup (props, { emit }) {
+  setup (props, { emit, expose }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -269,14 +269,14 @@ export default defineComponent({
       }
     }
 
-    // defineExpose({
-    //   query,
-    //   updateQuery: (q: string) => {
-    //     query.value = q
-    //   },
-    //   comboboxApi,
-    //   results
-    // })
+    expose({
+      query,
+      updateQuery: (q: string) => {
+        query.value = q
+      },
+      comboboxApi,
+      results
+    })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

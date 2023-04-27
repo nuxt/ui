@@ -56,6 +56,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    padded: {
+      type: Boolean,
+      default: true
+    },
     size: {
       type: String,
       default: appConfig.ui.button.default.size,
@@ -167,7 +171,7 @@ export default defineComponent({
         ui.value.rounded,
         ui.value.size[props.size],
         ui.value.gap[props.size],
-        ui.value[isSquare.value ? 'square' : 'spacing'][props.size],
+        props.padded && ui.value[isSquare.value ? 'square' : 'spacing'][props.size],
         variant?.replaceAll('{color}', props.color),
         props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
       )
