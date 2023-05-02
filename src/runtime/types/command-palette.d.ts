@@ -1,4 +1,3 @@
-import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { FuseSortFunctionMatch, FuseSortFunctionMatchList } from 'fuse.js'
 import type { Avatar } from './avatar'
 
