@@ -1,4 +1,4 @@
-import type { Ref, ComputedRef } from 'vue'
+import type { ComputedRef, WatchSource } from 'vue'
 import { logicAnd, logicNot } from '@vueuse/math'
 import { computed, onMounted, onBeforeUnmount } from 'vue'
 import { useShortcuts } from './useShortcuts'
@@ -6,7 +6,7 @@ import { useShortcuts } from './useShortcuts'
 export interface ShortcutConfig {
   handler: Function
   usingInput?: string | boolean
-  whenever?: Ref<Boolean>[]
+  whenever?: WatchSource<Boolean>[]
 }
 
 export interface ShortcutsConfig {
@@ -89,7 +89,7 @@ export const defineShortcuts = (config: ShortcutsConfig) => {
       }
 
       // Create shortcut computed
-      const conditions = []
+      const conditions: ComputedRef<Boolean>[] = []
       if (!(shortcutConfig as ShortcutConfig).usingInput) {
         conditions.push(logicNot(usingInput))
       } else if (typeof (shortcutConfig as ShortcutConfig).usingInput === 'string') {
