@@ -19,22 +19,20 @@
                 {{ description }}
               </p>
 
-              <div v-if="description && actions.length" class="mt-3 flex items-center gap-6">
-                <Button v-for="(action, index) of actions" :key="index" v-bind="action" @click.stop="onAction(action)" />
+              <div v-if="description && actions.length" class="mt-3 flex items-center gap-2">
+                <Button v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
               </div>
             </div>
             <div class="flex-shrink-0 flex items-center gap-3">
-              <div v-if="!description && actions.length" class="flex items-center gap-2">
-                <Button v-for="(action, index) of actions" :key="index" v-bind="action" @click.stop="onAction(action)" />
+              <div v-if="!description && actions.length" class="flex items-center gap-1">
+                <Button v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
               </div>
 
-              <Button v-if="close" v-bind="close" @click.stop="onClose" />
+              <Button v-if="close" v-bind="{ ...ui.default.close, ...close }" @click.stop="onClose" />
             </div>
           </div>
         </div>
-        <div v-if="timeout" class="absolute bottom-0 left-0 right-0 h-1">
-          <div class="h-1 bg-primary-500 dark:bg-primary-400" :style="progressBarStyle" />
-        </div>
+        <div v-if="timeout" :class="ui.progress" :style="progressBarStyle" />
       </div>
     </div>
   </transition>
@@ -88,7 +86,7 @@ export default defineComponent({
     },
     close: {
       type: Object as PropType<Partial<ButtonType>>,
-      default: appConfig.ui.notification.default.close
+      default: () => appConfig.ui.notification.default.close
     },
     timeout: {
       type: Number,

@@ -74,14 +74,14 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: appConfig.ui.textarea.default.size,
+      default: () => appConfig.ui.textarea.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.textarea.size).includes(value)
       }
     },
     appearance: {
       type: String,
-      default: appConfig.ui.textarea.default.appearance,
+      default: () => appConfig.ui.textarea.default.appearance,
       validator (value: string) {
         return Object.keys(appConfig.ui.textarea.appearance).includes(value)
       }

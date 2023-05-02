@@ -95,14 +95,14 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: appConfig.ui.select.default.size,
+      default: () => appConfig.ui.select.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.select.size).includes(value)
       }
     },
     appearance: {
       type: String,
-      default: appConfig.ui.select.default.appearance,
+      default: () => appConfig.ui.select.default.appearance,
       validator (value: string) {
         return Object.keys(appConfig.ui.select.appearance).includes(value)
       }

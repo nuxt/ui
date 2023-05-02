@@ -26,10 +26,9 @@
                 :class="resolveItemClass({ active, disabled: itemDisabled })"
                 @click="item.click"
               >
-                <slot :name="item.slot" :item="item">
-                  <!-- TODO: resolveItemIconClass for active / inactive + `ui.item.icon.base` -->
-                  <Icon v-if="item.icon" :name="item.icon" :class="[ui.item.icon, item.iconClass]" />
-                  <Avatar v-if="item.avatar" v-bind="{ size: 'xs', ...item.avatar }" :class="ui.item.avatar" />
+                <slot :name="item.slot || 'item'" :item="item">
+                  <Icon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
+                  <Avatar v-else-if="item.avatar" v-bind="{ size: '3xs', ...item.avatar }" :class="ui.item.avatar.base" />
 
                   <span class="truncate">{{ item.label }}</span>
 

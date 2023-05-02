@@ -28,7 +28,7 @@
           </span>
 
           <slot name="label">
-            <span v-if="modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : (modelValue as any)[textAttribute] }}</span>
+            <span v-if="modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : (modelValue as any)[optionAttribute] }}</span>
             <span v-else class="block truncate text-gray-400 dark:text-gray-500">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
@@ -62,25 +62,33 @@
             :value="option"
             :disabled="option.disabled"
           >
-            <li :class="resolveOptionClass({ active, selected, disabled: optionDisabled })">
+            <li :class="resolveOptionClass({ active, disabled: optionDisabled })">
               <div :class="ui.option.container">
                 <slot name="option" :option="option" :active="active" :selected="selected">
-                  <span class="block truncate">{{ typeof option === 'string' ? option : option[textAttribute] }}</span>
+                  <Icon v-if="option.icon" :name="option.icon" :class="[ui.option.icon.base, active ? ui.option.icon.active : ui.option.icon.inactive, option.iconClass]" aria-hidden="true" />
+                  <Avatar
+                    v-else-if="option.avatar"
+                    v-bind="{ size: '3xs', ...option.avatar }"
+                    :class="ui.option.avatar.base"
+                    aria-hidden="true"
+                  />
+                  <span v-else-if="option.chip" :class="ui.option.chip.base" :style="{ background: `#${option.chip}` }" />
+
+                  <span class="truncate">{{ typeof option === 'string' ? option : option[optionAttribute] }}</span>
                 </slot>
               </div>
 
-              <!-- TODO: Move to `.selected` and add icon in option -->
-              <span v-if="selected" :class="resolveOptionIconClass({ active })">
-                <Icon v-if="ui.option.icon.name" :name="ui.option.icon.name" :class="ui.option.icon.size" aria-hidden="true" />
+              <span v-if="selected" :class="ui.option.selected.wrapper">
+                <Icon :name="selectedIcon" :class="ui.option.selected.icon" aria-hidden="true" />
               </span>
             </li>
           </component>
 
           <component :is="searchable ? 'ComboboxOption' : 'ListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
-            <li :class="resolveOptionClass({ active, selected })">
+            <li :class="resolveOptionClass({ active })">
               <div :class="ui.option.container">
                 <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
-                  <span class="block truncate">Create "{{ queryOption[textAttribute] }}"</span>
+                  <span class="block truncate">Create "{{ queryOption[optionAttribute] }}"</span>
                 </slot>
               </div>
             </li>
@@ -102,6 +110,7 @@ import type { PropType, ComponentPublicInstance } from 'vue'
 import { defu } from 'defu'
 import { Combobox, ComboboxButton, ComboboxOptions, ComboboxOption, ComboboxInput, Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
 import Icon from '../elements/Icon.vue'
+import Avatar from '../elements/Avatar.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
@@ -123,7 +132,8 @@ export default defineComponent({
     ListboxButton,
     ListboxOptions,
     ListboxOption,
-    Icon
+    Icon,
+    Avatar
   },
   props: {
     modelValue: {
@@ -150,6 +160,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    selectedIcon: {
+      type: String,
+      default: () => appConfig.ui.selectMenu.default.selectedIcon
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -172,21 +186,21 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: appConfig.ui.select.default.size,
+      default: () => appConfig.ui.select.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.select.size).includes(value)
       }
     },
     appearance: {
       type: String,
-      default: appConfig.ui.select.default.appearance,
+      default: () => appConfig.ui.select.default.appearance,
       validator (value: string) {
         return Object.keys(appConfig.ui.select.appearance).includes(value)
       }
     },
-    textAttribute: {
+    optionAttribute: {
       type: String,
-      default: 'text'
+      default: 'label'
     },
     searchAttributes: {
       type: Array,
@@ -259,14 +273,14 @@ export default defineComponent({
       query.value === ''
         ? props.options
         : (props.options as any[]).filter((option: any) => {
-            return (props.searchAttributes?.length ? props.searchAttributes : [props.textAttribute]).some((searchAttribute: any) => {
+            return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
               return typeof option === 'string' ? option.search(new RegExp(query.value, 'i')) !== -1 : (option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1)
             })
           })
     )
 
     const queryOption = computed(() => {
-      return query.value === '' ? null : { [props.textAttribute]: query.value }
+      return query.value === '' ? null : { [props.optionAttribute]: query.value }
     })
 
     watch(container, (value) => {
@@ -277,19 +291,11 @@ export default defineComponent({
       }
     })
 
-    function resolveOptionClass ({ active, selected, disabled }: { active: boolean, selected: boolean, disabled?: boolean }) {
+    function resolveOptionClass ({ active, disabled }: { active: boolean, disabled?: boolean }) {
       return classNames(
         ui.value.option.base,
         active ? ui.value.option.active : ui.value.option.inactive,
-        selected ? ui.value.option.selected : ui.value.option.unselected,
         disabled && ui.value.option.disabled
-      )
-    }
-
-    function resolveOptionIconClass ({ active }: { active: boolean }) {
-      return classNames(
-        ui.value.option.icon.base,
-        active ? ui.value.option.icon.active : ui.value.option.icon.inactive
       )
     }
 
@@ -315,7 +321,6 @@ export default defineComponent({
       queryOption,
       query,
       resolveOptionClass,
-      resolveOptionIconClass,
       onUpdate
     }
   }

@@ -36,9 +36,9 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: appConfig.ui.avatar.default.size,
-      validator (value: string) {
-        return Object.keys(appConfig.ui.avatar.size).includes(value)
+      default: () => appConfig.ui.avatar.default.size,
+      validator (value: string | null) {
+        return Object.keys(appConfig.ui.avatar.size).includes(value) || value === null
       }
     },
     chipColor: {
@@ -50,14 +50,14 @@ export default defineComponent({
     },
     chipVariant: {
       type: String,
-      default: appConfig.ui.avatar.default.chipVariant,
+      default: () => appConfig.ui.avatar.default.chipVariant,
       validator (value: string) {
         return Object.keys(appConfig.ui.avatar.chip.variant).includes(value)
       }
     },
     chipPosition: {
       type: String,
-      default: appConfig.ui.avatar.default.chipPosition,
+      default: () => appConfig.ui.avatar.default.chipPosition,
       validator (value: string) {
         return Object.keys(appConfig.ui.avatar.chip.position).includes(value)
       }
@@ -78,21 +78,21 @@ export default defineComponent({
         ui.value.wrapper,
         ui.value.background,
         ui.value.rounded,
-        ui.value.size[props.size]
+        props.size && ui.value.size[props.size]
       )
     })
 
     const avatarClass = computed(() => {
       return classNames(
         ui.value.rounded,
-        ui.value.size[props.size]
+        props.size && ui.value.size[props.size]
       )
     })
 
     const chipClass = computed(() => {
       return classNames(
         ui.value.chip.base,
-        ui.value.chip.size[props.size],
+        props.size && ui.value.chip.size[props.size],
         ui.value.chip.position[props.chipPosition],
         ui.value.chip.variant[props.chipVariant]?.replaceAll('{color}', props.chipColor)
       )

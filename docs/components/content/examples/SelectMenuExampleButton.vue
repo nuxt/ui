@@ -6,7 +6,7 @@ const selected = ref(people[3])
 
 <template>
   <USelectMenu v-slot="{ open }" v-model="selected" :options="people">
-    <UButton color="gray" variant="ghost">
+    <UButton>
       {{ selected }}
 
       <UIcon name="i-heroicons-chevron-right-20-solid" class="w-5 h-5 transition-transform" :class="[open && 'transform rotate-90']" />

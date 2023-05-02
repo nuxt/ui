@@ -8,7 +8,7 @@
       :type="type"
       :required="required"
       :placeholder="placeholder"
-      :disabled="disabled"
+      :disabled="disabled || loading"
       :readonly="readonly"
       :autocomplete="autocomplete"
       :spellcheck="spellcheck"
@@ -89,6 +89,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    loadingIcon: {
+      type: String,
+      default: () => appConfig.ui.input.default.loadingIcon
+    },
     leadingIcon: {
       type: String,
       default: null
@@ -105,16 +109,20 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    loading: {
+      type: Boolean,
+      default: false
+    },
     size: {
       type: String,
-      default: appConfig.ui.input.default.size,
+      default: () => appConfig.ui.input.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.input.size).includes(value)
       }
     },
     appearance: {
       type: String,
-      default: appConfig.ui.input.default.appearance,
+      default: () => appConfig.ui.input.default.appearance,
       validator (value: string) {
         return Object.keys(appConfig.ui.input.appearance).includes(value)
       }
@@ -162,25 +170,34 @@ export default defineComponent({
     })
 
     const isLeading = computed(() => {
-      return (props.icon && props.leading) || (props.icon && !props.trailing) || props.leadingIcon
+      return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
     })
 
     const isTrailing = computed(() => {
-      return (props.icon && props.trailing) || props.trailingIcon
+      return (props.icon && props.trailing) || (props.loading && props.trailing) || props.trailingIcon
     })
 
     const leadingIconName = computed(() => {
+      if (props.loading) {
+        return props.loadingIcon
+      }
+
       return props.leadingIcon || props.icon
     })
 
     const trailingIconName = computed(() => {
+      if (props.loading && !isLeading.value) {
+        return props.loadingIcon
+      }
+
       return props.trailingIcon || props.icon
     })
 
     const iconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        ui.value.icon.size[props.size]
+        ui.value.icon.size[props.size],
+        props.loading && 'animate-spin'
       )
     })
 

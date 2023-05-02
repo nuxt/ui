@@ -19,7 +19,7 @@
               <Icon v-if="command.icon" :name="command.icon" :class="[ui.group.command.icon.base, active ? ui.group.command.icon.active : ui.group.command.icon.inactive, command.iconClass]" aria-hidden="true" />
               <Avatar
                 v-else-if="command.avatar"
-                v-bind="{ size: 'xs', ...command.avatar }"
+                v-bind="{ size: '2xs', ...command.avatar }"
                 :class="ui.group.command.avatar.base"
                 aria-hidden="true"
               />
@@ -39,7 +39,7 @@
             </div>
           </div>
 
-          <Icon v-if="selected" :name="ui.group.command.selected.icon.name" :class="ui.group.command.selected.icon.base" aria-hidden="true" />
+          <Icon v-if="selected" :name="selectedIcon" :class="ui.group.command.selected.icon" aria-hidden="true" />
           <slot v-else-if="active && (group.active || $slots[`${group.key}-active`])" :name="`${group.key}-active`" :group="group" :command="command">
             <span v-if="group.active" :class="ui.group.active">{{ group.active }}</span>
           </slot>
@@ -88,6 +88,10 @@ export default defineComponent({
       required: true
     },
     commandAttribute: {
+      type: String,
+      required: true
+    },
+    selectedIcon: {
       type: String,
       required: true
     },

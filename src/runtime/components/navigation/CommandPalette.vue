@@ -9,7 +9,7 @@
   >
     <div :class="ui.wrapper">
       <div v-if="searchable" :class="ui.input.wrapper">
-        <Icon v-if="icon" :name="icon" :class="ui.input.icon.base" aria-hidden="true" />
+        <Icon v-if="icon" :name="icon" :class="ui.input.icon" aria-hidden="true" />
         <ComboboxInput
           ref="comboboxInput"
           :value="query"
@@ -19,15 +19,13 @@
           @change="query = $event.target.value"
         />
 
-        <!-- <Button
-          v-if="ui.input.close.icon.name"
-          :icon="ui.input.close.icon"
-          :class="ui.input.close.base"
-          :size="ui.input.close.size"
-          :variant="ui.input.close.variant"
+        <Button
+          v-if="close"
+          v-bind="close"
+          :class="ui.input.close"
           aria-label="Close"
           @click="onClear"
-        /> -->
+        />
       </div>
 
       <ComboboxOptions
@@ -45,6 +43,7 @@
           :group="group"
           :group-attribute="groupAttribute"
           :command-attribute="commandAttribute"
+          :selected-icon="selectedIcon"
           :ui="ui"
         >
           <template v-for="(_, name) in $slots" #[name]="slotData">
@@ -54,9 +53,9 @@
       </ComboboxOptions>
 
       <div v-else-if="empty" :class="ui.empty.wrapper">
-        <Icon v-if="ui.empty.icon.name" :name="ui.empty.icon.name" :class="ui.empty.icon.base" aria-hidden="true" />
+        <Icon v-if="empty.icon" :name="empty.icon" :class="ui.empty.icon" aria-hidden="true" />
         <p :class="ui.empty.label">
-          {{ query ? "We couldn't find any items with that term. Please try again." : "We couldn't find any items." }}
+          {{ query ? empty.queryLabel : empty.label }}
         </p>
       </div>
     </div>
@@ -74,7 +73,8 @@ import { defu } from 'defu'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Group, Command } from '../../types/command-palette'
 import Icon from '../elements/Icon.vue'
-// import Button from '../elements/Button.vue'
+import Button from '../elements/Button.vue'
+import type { Button as ButtonType } from '../../types/button'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -89,7 +89,8 @@ export default defineComponent({
     ComboboxInput,
     ComboboxOptions,
     Icon,
-    // Button,
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Button,
     CommandPaletteGroup
   },
   props: {
@@ -119,7 +120,19 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: appConfig.ui.commandPalette.default.icon
+      default: () => appConfig.ui.commandPalette.default.icon
+    },
+    selectedIcon: {
+      type: String,
+      default: () => appConfig.ui.commandPalette.default.selectedIcon
+    },
+    close: {
+      type: Object as PropType<Partial<ButtonType>>,
+      default: () => appConfig.ui.commandPalette.default.close
+    },
+    empty: {
+      type: Object as PropType<{ icon: string, label: string, queryLabel: string }>,
+      default: () => appConfig.ui.commandPalette.default.empty
     },
     placeholder: {
       type: String,
@@ -138,10 +151,6 @@ export default defineComponent({
       default: true
     },
     autoclear: {
-      type: Boolean,
-      default: true
-    },
-    empty: {
       type: Boolean,
       default: true
     },

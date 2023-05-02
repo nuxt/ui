@@ -62,21 +62,21 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: appConfig.ui.button.default.size,
+      default: () => appConfig.ui.button.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.button.size).includes(value)
       }
     },
     color: {
       type: String,
-      default: appConfig.ui.button.default.color,
+      default: () => appConfig.ui.button.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.button.color)].includes(value)
       }
     },
     variant: {
       type: String,
-      default: appConfig.ui.button.default.variant,
+      default: () => appConfig.ui.button.default.variant,
       validator (value: string) {
         return Object.keys(appConfig.ui.button.variant).includes(value)
       }
@@ -84,6 +84,10 @@ export default defineComponent({
     icon: {
       type: String,
       default: null
+    },
+    loadingIcon: {
+      type: String,
+      default: () => appConfig.ui.button.default.loadingIcon
     },
     leadingIcon: {
       type: String,
@@ -179,7 +183,7 @@ export default defineComponent({
 
     const leadingIconName = computed(() => {
       if (props.loading) {
-        return ui.value.icon.loading
+        return props.loadingIcon
       }
 
       return props.leadingIcon || props.icon
@@ -187,7 +191,7 @@ export default defineComponent({
 
     const trailingIconName = computed(() => {
       if (props.loading && !isLeading.value) {
-        return ui.value.icon.loading
+        return props.loadingIcon
       }
 
       return props.trailingIcon || props.icon
@@ -197,8 +201,6 @@ export default defineComponent({
       return classNames(
         ui.value.icon.base,
         ui.value.icon.size[props.size],
-        // (!!slots.default || !!props.label?.length) && ui.value.icon.leading.spacing[props.size],
-        // ui.value.icon.leading.custom,
         props.loading && 'animate-spin'
       )
     })
@@ -207,8 +209,6 @@ export default defineComponent({
       return classNames(
         ui.value.icon.base,
         ui.value.icon.size[props.size],
-        // (!!slots.default || !!props.label?.length) && ui.value.icon.trailing.spacing[props.size],
-        // ui.value.icon.trailing.custom,
         props.loading && !isLeading.value && 'animate-spin'
       )
     })
