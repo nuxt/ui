@@ -10,7 +10,6 @@
             icon="i-heroicons-magnifying-glass-20-solid"
             class="w-full"
             color="gray"
-            size="sm"
             @click="isSearchModalOpen = true"
           >
             Search

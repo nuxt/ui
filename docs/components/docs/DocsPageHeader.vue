@@ -14,7 +14,6 @@
           :label="page.headlessui.label"
           :to="page.headlessui.to"
           icon="i-simple-icons-headlessui"
-          size="sm"
           color="white"
         />
 
@@ -22,7 +21,6 @@
           v-if="page.github"
           label="GitHub"
           icon="i-simple-icons-github"
-          size="sm"
           color="white"
           :to="`https://github.com/nuxtlabs/ui/blob/dev/src/runtime/components/${page._dir}/U${page.title}.vue`"
         />

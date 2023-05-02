@@ -18,9 +18,8 @@
           <UButton
             color="gray"
             variant="ghost"
-            class="[&>span]:!w-5 [&>span]:!h-5 lg:hidden"
+            class="lg:hidden"
             icon="i-heroicons-magnifying-glass-20-solid"
-            size="sm"
             @click="openDocsSearch"
           />
 
@@ -30,8 +29,6 @@
               color="gray"
               variant="ghost"
               aria-label="Theme"
-              size="sm"
-              class="[&>span]:!w-5 [&>span]:!h-5"
               @click="isDark = !isDark"
             />
           </ClientOnly>
@@ -40,17 +37,14 @@
             target="_blank"
             color="gray"
             variant="ghost"
-            class="[&>span]:!w-5 [&>span]:!h-5"
             icon="i-simple-icons-github"
-            size="sm"
           />
 
           <UButton
             color="gray"
             variant="ghost"
-            class="[&>span]:!w-5 [&>span]:!h-5 lg:hidden"
+            class="lg:hidden"
             icon="i-heroicons-bars-3-20-solid"
-            size="sm"
             @click="isDialogOpen = true"
           />
         </div>
@@ -74,9 +68,7 @@
                 <UButton
                   color="gray"
                   variant="ghost"
-                  class="[&>span]:!w-5 [&>span]:!h-5"
                   icon="i-heroicons-x-mark-20-solid"
-                  size="sm"
                   @click="isDialogOpen = false"
                 />
               </div>

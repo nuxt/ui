@@ -86,7 +86,7 @@ const button = {
   gap: {
     '2xs': 'gap-x-1',
     xs: 'gap-x-1.5',
-    sm: 'gap-x-1.5',
+    sm: 'gap-x-2',
     md: 'gap-x-2',
     lg: 'gap-x-2',
     xl: 'gap-x-2'
@@ -100,11 +100,11 @@ const button = {
     xl: 'px-4 py-3'
   },
   square: {
-    '2xs': 'p-1',
+    '2xs': 'p-[5px]',
     xs: 'p-1.5',
-    sm: 'p-1.5',
+    sm: 'p-2',
     md: 'p-2',
-    lg: 'p-2',
+    lg: 'p-2.5',
     xl: 'p-3'
   },
   color: {
@@ -143,7 +143,7 @@ const button = {
     }
   },
   default: {
-    size: 'md',
+    size: 'sm',
     variant: 'solid',
     color: 'primary',
     loadingIcon: 'i-heroicons-arrow-path-20-solid'
@@ -213,7 +213,7 @@ const input = {
   gap: {
     '2xs': 'gap-x-1',
     xs: 'gap-x-1.5',
-    sm: 'gap-x-1.5',
+    sm: 'gap-x-2',
     md: 'gap-x-2',
     lg: 'gap-x-2',
     xl: 'gap-x-2'
@@ -230,7 +230,7 @@ const input = {
     spacing: {
       '2xs': 'pl-[26px]',
       xs: 'pl-8',
-      sm: 'pl-[34px]',
+      sm: 'pl-9',
       md: 'pl-10',
       lg: 'pl-11',
       xl: 'pl-12'
@@ -240,7 +240,7 @@ const input = {
     spacing: {
       '2xs': 'pr-[26px]',
       xs: 'pr-8',
-      sm: 'pr-[34px]',
+      sm: 'pr-9',
       md: 'pr-10',
       lg: 'pr-11',
       xl: 'pr-12'
@@ -285,7 +285,7 @@ const input = {
     }
   },
   default: {
-    size: 'md',
+    size: 'sm',
     appearance: 'white',
     loadingIcon: 'i-heroicons-arrow-path-20-solid'
   }
