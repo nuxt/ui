@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 
-const { navigation } = useContent()
+const { navigation } = useContent() as { navigation: NavItem[] }
 
 function mapContentLinks (links: NavItem[]) {
   return links?.map(link => ({ label: link.title, icon: link.icon, to: link._path })) || []

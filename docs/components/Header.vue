@@ -24,8 +24,7 @@
             @click="openDocsSearch"
           />
 
-          <!-- @ts-ignore -->
-          <ColorScheme class="w-[32px]">
+          <ClientOnly>
             <UButton
               :icon="isDark ? 'i-heroicons-moon' : 'i-heroicons-sun'"
               color="gray"
@@ -35,7 +34,7 @@
               class="[&>span]:!w-5 [&>span]:!h-5"
               @click="isDark = !isDark"
             />
-          </ColorScheme>
+          </ClientOnly>
           <UButton
             to="https://github.com/nuxtlabs/ui"
             target="_blank"

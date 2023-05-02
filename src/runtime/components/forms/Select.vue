@@ -17,7 +17,7 @@
           :label="option[textAttribute]"
         >
           <option
-            v-for="(childOption, index2) in option.children"
+            v-for="(childOption, index2) in (option.children as any[])"
             :key="`${childOption[valueAttribute]}-${index}-${index2}`"
             :value="childOption[valueAttribute]"
             :selected="childOption[valueAttribute] === normalizedValue"
