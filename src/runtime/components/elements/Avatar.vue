@@ -37,8 +37,8 @@ export default defineComponent({
     size: {
       type: String,
       default: () => appConfig.ui.avatar.default.size,
-      validator (value: string | null) {
-        return Object.keys(appConfig.ui.avatar.size).includes(value) || value === null
+      validator (value: string) {
+        return Object.keys(appConfig.ui.avatar.size).includes(value)
       }
     },
     chipColor: {
@@ -78,21 +78,21 @@ export default defineComponent({
         ui.value.wrapper,
         ui.value.background,
         ui.value.rounded,
-        props.size && ui.value.size[props.size]
+        ui.value.size[props.size]
       )
     })
 
     const avatarClass = computed(() => {
       return classNames(
         ui.value.rounded,
-        props.size && ui.value.size[props.size]
+        ui.value.size[props.size]
       )
     })
 
     const chipClass = computed(() => {
       return classNames(
         ui.value.chip.base,
-        props.size && ui.value.chip.size[props.size],
+        ui.value.chip.size[props.size],
         ui.value.chip.position[props.chipPosition],
         ui.value.chip.variant[props.chipVariant]?.replaceAll('{color}', props.chipColor)
       )
