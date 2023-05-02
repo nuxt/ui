@@ -1,4 +1,4 @@
-import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, addTemplate, createResolver, addPlugin } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
 import colors from 'tailwindcss/colors.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
