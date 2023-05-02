@@ -16,9 +16,9 @@ export function useCopyToClipboard (options: Partial<ToastNotification> = {}) {
         return
       }
 
-      toast.success({ ...success, ...options })
+      toast.add({ ...success, ...options })
     }, function (e) {
-      toast.error({
+      toast.add({
         ...failure,
         description: failure.description || e.message,
         ...options
