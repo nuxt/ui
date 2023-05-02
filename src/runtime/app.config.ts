@@ -210,6 +210,14 @@ const input = {
     lg: 'text-base',
     xl: 'text-base'
   },
+  gap: {
+    '2xs': 'gap-x-1',
+    xs: 'gap-x-1.5',
+    sm: 'gap-x-1.5',
+    md: 'gap-x-2',
+    lg: 'gap-x-2',
+    xl: 'gap-x-2'
+  },
   spacing: {
     '2xs': 'px-2 py-1',
     xs: 'px-2.5 py-1.5',
@@ -422,14 +430,12 @@ const verticalNavigation = {
   active: 'u-text-gray-900 after:bg-gray-100 dark:after:bg-gray-800',
   inactive: 'u-text-gray-500 hover:u-text-gray-900 hover:after:bg-gray-50 dark:hover:after:bg-gray-800/50 focus-visible:after:bg-gray-50 dark:focus-visible:after:bg-gray-800/50',
   icon: {
-    base: 'flex-shrink-0 w-5 h-5',
-    spacing: '-ml-0.5',
+    base: 'flex-shrink-0 w-4 h-4',
     active: 'u-text-gray-700',
     inactive: 'u-text-gray-400 group-hover:u-text-gray-700'
   },
   avatar: {
-    base: 'flex-shrink-0',
-    spacing: '-ml-0.5'
+    base: 'flex-shrink-0'
   },
   badge: {
     base: 'ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
@@ -443,8 +449,8 @@ const commandPalette = {
   container: 'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
   input: {
     wrapper: 'relative flex items-center',
-    base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-12 text-gray-900 dark:text-white focus:ring-0 sm:text-sm',
-    icon: 'pointer-events-none absolute left-5 h-5 w-5 text-gray-400 dark:text-gray-500',
+    base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-10 text-gray-900 dark:text-white focus:ring-0 sm:text-sm',
+    icon: 'pointer-events-none absolute left-4 h-4 w-4 text-gray-400 dark:text-gray-500',
     close: 'absolute right-4'
   },
   empty: {
@@ -454,10 +460,10 @@ const commandPalette = {
   },
   group: {
     wrapper: 'p-2',
-    label: 'px-3 my-2 text-xs font-semibold text-gray-900 dark:text-white',
+    label: 'px-2 my-2 text-xs font-semibold text-gray-900 dark:text-white',
     container: 'text-sm text-gray-700 dark:text-gray-200',
     command: {
-      base: 'flex justify-between select-none items-center rounded-md px-3 py-2 gap-3 relative',
+      base: 'flex justify-between select-none items-center rounded-md px-2 py-1.5 gap-2 relative',
       active: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
       inactive: '',
       label: 'flex items-center gap-1.5 min-w-0',
@@ -465,7 +471,7 @@ const commandPalette = {
       suffix: 'text-gray-400 dark:text-gray-500',
       container: 'flex items-center gap-2 min-w-0',
       icon: {
-        base: 'flex-shrink-0 w-5 h-5',
+        base: 'flex-shrink-0 w-4 h-4',
         active: 'text-gray-900 dark:text-white',
         inactive: 'text-gray-400 dark:text-gray-500'
       },
@@ -477,7 +483,7 @@ const commandPalette = {
       },
       disabled: 'opacity-50',
       selected: {
-        icon: 'h-5 w-5 text-gray-900 dark:text-white flex-shrink-0'
+        icon: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
       },
       shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400'
     },

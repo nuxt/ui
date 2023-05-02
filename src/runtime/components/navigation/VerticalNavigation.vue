@@ -14,15 +14,15 @@
       <slot name="avatar" :link="link">
         <Avatar
           v-if="link.avatar"
-          v-bind="{ size: 'xs', ...link.avatar }"
-          :class="[ui.avatar.base, link.label && ui.avatar.spacing]"
+          v-bind="{ size: '3xs', ...link.avatar }"
+          :class="[ui.avatar.base]"
         />
       </slot>
       <slot name="icon" :link="link" :is-active="isActive">
         <Icon
           v-if="link.icon"
           :name="link.icon"
-          :class="[ui.icon.base, link.label && ui.icon.spacing, isActive ? ui.icon.active : ui.icon.inactive, link.iconClass]"
+          :class="[ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive, link.iconClass]"
         />
       </slot>
       <slot :link="link">

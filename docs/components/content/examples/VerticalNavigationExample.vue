@@ -1,5 +1,10 @@
 <script setup>
 const links = [{
+  label: 'Profile',
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/499550?s=60&v=4'
+  }
+}, {
   label: 'Installation',
   icon: 'i-heroicons-home',
   to: '/getting-started/installation'

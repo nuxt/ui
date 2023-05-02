@@ -4,7 +4,7 @@
       {{ useLowerCase(page._dir) }}
     </p>
     <div class="flex items-center justify-between">
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight dark:text-gray-200">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight dark:text-white">
         {{ page.title }}
       </h1>
 

@@ -239,6 +239,7 @@ export default defineComponent({
         uiSelect.value.base,
         'text-left cursor-default',
         uiSelect.value.size[props.size],
+        uiSelect.value.gap[props.size],
         uiSelect.value.spacing[props.size],
         uiSelect.value.appearance[props.appearance],
         !!props.icon && uiSelect.value.leading.spacing[props.size],
