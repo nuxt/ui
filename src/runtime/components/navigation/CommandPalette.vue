@@ -54,7 +54,7 @@
 
       <div v-else-if="empty" :class="ui.empty.wrapper">
         <Icon v-if="empty.icon" :name="empty.icon" :class="ui.empty.icon" aria-hidden="true" />
-        <p :class="ui.empty.label">
+        <p :class="query ? ui.empty.queryLabel : ui.empty.label">
           {{ query ? empty.queryLabel : empty.label }}
         </p>
       </div>

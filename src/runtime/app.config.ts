@@ -457,6 +457,7 @@ const commandPalette = {
   empty: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
+    queryLabel: 'text-sm text-center text-gray-900 dark:text-white',
     icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
   },
   group: {
