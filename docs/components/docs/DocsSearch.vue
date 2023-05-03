@@ -81,15 +81,6 @@ const canToggleModal = computed(() => isSearchModalOpen.value || !usingInput.val
 
 function remapChildren (children: any[]) {
   return children?.map((grandChild) => {
-    if (grandChild.tag === 'badge-button') {
-      return { type: 'text', value: grandChild.props?.label || '' }
-    }
-    if (grandChild.tag === 'badge-shortcut') {
-      return { type: 'text', value: grandChild.props?.value || '' }
-    }
-    if (grandChild.tag === 'issue-badge-status') {
-      return { type: 'text', value: grandChild.props?.status || '' }
-    }
     if (['code-inline', 'em', 'a', 'strong'].includes(grandChild.tag)) {
       return { type: 'text', value: grandChild.children.find(child => child.type === 'text')?.value || '' }
     }
@@ -103,7 +94,6 @@ function concatChildren (children: any[]) {
     if (['alert'].includes(child.tag)) {
       child.children = concatChildren(child.children)
     }
-
     if (child.tag === 'p') {
       child.children = remapChildren(child.children)
 
@@ -119,6 +109,9 @@ function concatChildren (children: any[]) {
         }
         return acc
       }, [])
+    }
+    if (['style'].includes(child.tag)) {
+      return null
     }
 
     return child
