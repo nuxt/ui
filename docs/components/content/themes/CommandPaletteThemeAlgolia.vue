@@ -29,7 +29,7 @@ const ui = {
   },
   group: {
     wrapper: 'p-3 relative',
-    label: '-mt-4 mb-2 py-1 text-sm font-semibold text-primary-500 dark:text-primary-400 font-semibold sticky top-0 bg-gray-50 dark:bg-gray-800 z-10',
+    label: '-mx-3 px-3 -mt-4 mb-2 py-1 text-sm font-semibold text-primary-500 dark:text-primary-400 font-semibold sticky top-0 bg-gray-50 dark:bg-gray-800 z-10',
     container: 'space-y-1',
     command: {
       base: 'flex justify-between select-none items-center rounded px-2 py-4 gap-2 relative font-medium text-sm group shadow',
@@ -62,8 +62,7 @@ const ui = {
     :empty="empty"
     command-attribute="title"
     :fuse="{
-      fuseOptions: { ignoreLocation: true, includeMatches: true, minMatchCharLength: 1, threshold: 0, keys: ['title', 'category'] },
-      resultLimit: 10
+      fuseOptions: { keys: ['title', 'category'] },
     }"
     placeholder="Search docs"
   />
