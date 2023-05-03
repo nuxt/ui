@@ -424,7 +424,7 @@ const container = {
 // Navigation
 
 const verticalNavigation = {
-  wrapper: '',
+  wrapper: 'relative z-0',
   base: 'group flex items-center gap-2 text-sm font-medium rounded-md w-full relative focus:outline-none after:absolute after:inset-px after:z-[-1] after:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
   spacing: 'px-3 py-1.5',
   active: 'u-text-gray-900 after:bg-gray-100 dark:after:bg-gray-800',
