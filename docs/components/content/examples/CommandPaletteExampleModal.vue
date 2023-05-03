@@ -21,13 +21,12 @@ const selected = ref([])
   <div>
     <UButton label="Open" @click="open = true" />
 
-    <UModal v-model="open" :ui="{ width: 'sm:max-w-2xl', height: 'sm:h-96' }">
+    <UModal v-model="open">
       <UCommandPalette
         v-model="selected"
         multiple
         nullable
         :groups="[{ key: 'people', commands: people }]"
-        :fuse="{ resultLimit: 6 }"
       />
     </UModal>
   </div>

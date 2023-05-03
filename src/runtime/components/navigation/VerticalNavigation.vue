@@ -14,7 +14,7 @@
       <slot name="avatar" :link="link">
         <Avatar
           v-if="link.avatar"
-          v-bind="{ size: '3xs', ...link.avatar }"
+          v-bind="{ size: ui.avatar.size, ...link.avatar }"
           :class="[ui.avatar.base]"
         />
       </slot>

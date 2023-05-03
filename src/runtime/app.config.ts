@@ -178,7 +178,8 @@ const dropdown = {
       inactive: 'text-gray-400 dark:text-gray-500'
     },
     avatar: {
-      base: 'flex-shrink-0'
+      base: 'flex-shrink-0',
+      size: '3xs'
     },
     shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400 ml-auto'
   },
@@ -335,7 +336,8 @@ const selectMenu = {
       inactive: 'text-gray-400 dark:text-gray-500'
     },
     avatar: {
-      base: 'flex-shrink-0'
+      base: 'flex-shrink-0',
+      size: '3xs'
     },
     chip: {
       base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
@@ -435,7 +437,8 @@ const verticalNavigation = {
     inactive: 'u-text-gray-400 group-hover:u-text-gray-700'
   },
   avatar: {
-    base: 'flex-shrink-0'
+    base: 'flex-shrink-0',
+    size: '3xs'
   },
   badge: {
     base: 'ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
@@ -478,7 +481,8 @@ const commandPalette = {
         inactive: 'text-gray-400 dark:text-gray-500'
       },
       avatar: {
-        base: 'flex-shrink-0'
+        base: 'flex-shrink-0',
+        size: '3xs'
       },
       chip: {
         base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'

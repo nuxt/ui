@@ -68,7 +68,7 @@
                   <Icon v-if="option.icon" :name="option.icon" :class="[ui.option.icon.base, active ? ui.option.icon.active : ui.option.icon.inactive, option.iconClass]" aria-hidden="true" />
                   <Avatar
                     v-else-if="option.avatar"
-                    v-bind="{ size: '3xs', ...option.avatar }"
+                    v-bind="{ size: ui.option.avatar.size, ...option.avatar }"
                     :class="ui.option.avatar.base"
                     aria-hidden="true"
                   />

@@ -28,7 +28,7 @@
               >
                 <slot :name="item.slot || 'item'" :item="item">
                   <Icon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
-                  <Avatar v-else-if="item.avatar" v-bind="{ size: '3xs', ...item.avatar }" :class="ui.item.avatar.base" />
+                  <Avatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
 
                   <span class="truncate">{{ item.label }}</span>
 
