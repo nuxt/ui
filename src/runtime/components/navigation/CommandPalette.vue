@@ -13,7 +13,7 @@
         <ComboboxInput
           ref="comboboxInput"
           :value="query"
-          :class="ui.input.base"
+          :class="[ui.input.base, icon && ui.input.spacing]"
           :placeholder="placeholder"
           autocomplete="off"
           @change="query = $event.target.value"

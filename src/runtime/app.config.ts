@@ -449,7 +449,8 @@ const commandPalette = {
   container: 'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
   input: {
     wrapper: 'relative flex items-center',
-    base: 'w-full h-12 pr-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 pl-10 text-gray-900 dark:text-white focus:ring-0 sm:text-sm',
+    base: 'w-full h-12 px-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0 sm:text-sm',
+    spacing: 'pl-10',
     icon: 'pointer-events-none absolute left-4 h-4 w-4 text-gray-400 dark:text-gray-500',
     close: 'absolute right-4'
   },

@@ -138,7 +138,7 @@ const code = computed(() => {
 
     const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
 
-    code += ` ${(prop?.type === 'boolean' && value !== true) || typeof value === 'object' ? ':' : ''}${key === 'modelValue' ? 'value' : useKebabCase(key)}${prop?.type === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? JSON.stringify(value) : value}"`}`
+    code += ` ${(prop?.type === 'boolean' && value !== true) || typeof value === 'object' ? ':' : ''}${key === 'modelValue' ? 'value' : useKebabCase(key)}${prop?.type === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
   }
   if (props.code) {
     const lineBreaks = (props.code.match(/\n/g) || []).length
@@ -156,6 +156,22 @@ const code = computed(() => {
 `
   return code
 })
+
+function renderObject (obj: any) {
+  if (Array.isArray(obj)) {
+    return `[${obj.map(renderObject).join(', ')}]`
+  }
+
+  if (typeof obj === 'object') {
+    return `{ ${Object.entries(obj).map(([key, value]) => `${key}: ${renderObject(value)}`).join(', ')} }`
+  }
+
+  if (typeof obj === 'string') {
+    return `'${obj}'`
+  }
+
+  return obj
+}
 
 const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify(componentProps)}`, () => transformContent('content:_markdown.md', code.value, {
   highlight: {
