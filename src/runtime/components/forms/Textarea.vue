@@ -11,7 +11,7 @@
       :placeholder="placeholder"
       :autocomplete="autocomplete"
       :class="textareaClass"
-      @input="onInput(($event.target as any).value)"
+      @input="onInput"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     />
@@ -128,10 +128,10 @@ export default defineComponent({
       }
     }
 
-    const onInput = (value: string) => {
+    const onInput = (event: InputEvent) => {
       autoResize()
 
-      emit('update:modelValue', value)
+      emit('update:modelValue', (event.target as any).value)
     }
 
     watch(() => props.modelValue, () => {

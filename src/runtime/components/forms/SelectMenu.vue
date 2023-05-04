@@ -28,7 +28,7 @@
           </span>
 
           <slot name="label">
-            <span v-if="modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : (modelValue as any)[optionAttribute] }}</span>
+            <span v-if="modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : modelValue[optionAttribute] }}</span>
             <span v-else class="block truncate text-gray-400 dark:text-gray-500">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 

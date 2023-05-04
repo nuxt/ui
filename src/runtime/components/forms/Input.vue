@@ -13,7 +13,7 @@
       :autocomplete="autocomplete"
       :spellcheck="spellcheck"
       :class="inputClass"
-      @input="onInput(($event.target as any).value)"
+      @input="onInput"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     >
@@ -147,8 +147,8 @@ export default defineComponent({
       }
     }
 
-    const onInput = (value: string) => {
-      emit('update:modelValue', value)
+    const onInput = (event: InputEvent) => {
+      emit('update:modelValue', (event.target as any).value)
     }
 
     onMounted(() => {

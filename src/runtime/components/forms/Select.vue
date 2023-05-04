@@ -7,7 +7,7 @@
       :required="required"
       :disabled="disabled"
       :class="selectClass"
-      @input="onInput(($event.target as any).value)"
+      @input="onInput"
     >
       <template v-for="(option, index) in normalizedOptionsWithPlaceholder">
         <optgroup
@@ -127,8 +127,8 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
 
-    const onInput = (value: string) => {
-      emit('update:modelValue', value)
+    const onInput = (event: InputEvent) => {
+      emit('update:modelValue', (event.target as any).value)
     }
 
     const guessOptionValue = (option: any) => {
