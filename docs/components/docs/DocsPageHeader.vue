@@ -3,12 +3,12 @@
     <p class="mb-4 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400 capitalize">
       {{ useLowerCase(page._dir) }}
     </p>
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
       <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight dark:text-white">
         {{ page.title }}
       </h1>
 
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 mt-4 lg:mt-0">
         <UButton
           v-if="page.headlessui"
           :label="page.headlessui.label"

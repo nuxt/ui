@@ -1,16 +1,20 @@
 <template>
   <div>
-    <table>
+    <table class="table-fixed">
       <thead>
         <tr>
-          <th>Prop</th>
-          <th>Default</th>
+          <th class="w-[25%]">
+            Prop
+          </th>
+          <th class="w-[50%]">
+            Default
+          </th>
           <th>Description</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="prop in metaProps" :key="prop.name">
-          <td class="relative">
+          <td class="relative flex-shrink-0">
             <code>{{ prop.name }}</code><span v-if="prop.required" class="font-bold text-red-500 dark:text-red-400 absolute top-0 ml-1">*</span>
           </td>
           <td>
