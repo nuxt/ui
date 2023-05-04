@@ -3,8 +3,8 @@ import colors from 'tailwindcss/colors.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
-import preset from './runtime/app.config'
 
+import appConfig from './runtime/app.config'
 type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
 
 // @ts-ignore
@@ -24,7 +24,7 @@ declare module 'nuxt/schema' {
       primary?: string
       gray?: string
       colors?: string[]
-    } & DeepPartial<typeof preset.ui>
+    } & DeepPartial<typeof appConfig.ui>
   }
 }
 
