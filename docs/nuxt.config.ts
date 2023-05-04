@@ -32,6 +32,9 @@ export default defineNuxtConfig({
     routeRules: {
       '/api/_content/**': { isr: true, static: true },
       '/api/component-meta/**': { isr: true, static: true }
+    },
+    experimental: {
+      payloadExtraction: true
     }
   }
 })
