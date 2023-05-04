@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.11](https://github.com/nuxtlabs/ui/compare/v1.2.10...v1.2.11) (2023-05-04)
+
+
+### Bug Fixes
+
+* **defineShortcuts:** use `useEventListener` ([#150](https://github.com/nuxtlabs/ui/issues/150)) ([59f62d3](https://github.com/nuxtlabs/ui/commit/59f62d322f07919d16a8d35340c3aa038cd09520))
+
 ### [1.2.10](https://github.com/nuxtlabs/ui/compare/v1.2.9...v1.2.10) (2023-04-07)
 
 
