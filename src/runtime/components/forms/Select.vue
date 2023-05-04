@@ -17,7 +17,7 @@
           :label="option[textAttribute]"
         >
           <option
-            v-for="(childOption, index2) in (option.children as any[])"
+            v-for="(childOption, index2) in option.children"
             :key="`${childOption[valueAttribute]}-${index}-${index2}`"
             :value="childOption[valueAttribute]"
             :selected="childOption[valueAttribute] === normalizedValue"
@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import type { PropType } from 'vue'
+import type { PropType, ComputedRef } from 'vue'
 import { get } from 'lodash-es'
 import { defu } from 'defu'
 import Icon from '../elements/Icon.vue'
@@ -158,7 +158,7 @@ export default defineComponent({
       return props.options.map(option => normalizeOption(option))
     })
 
-    const normalizedOptionsWithPlaceholder = computed(() => {
+    const normalizedOptionsWithPlaceholder: ComputedRef<{ disabled?: boolean, children: { disabled?: boolean }[] }[]> = computed(() => {
       if (!props.placeholder) {
         return normalizedOptions.value
       }
