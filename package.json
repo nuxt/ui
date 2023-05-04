@@ -14,6 +14,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=18 <19"
+  },
   "scripts": {
     "build": "nuxt-module-build",
     "prepack": "yarn build",
