@@ -49,9 +49,3 @@ const metaProps = computed(() => useSortBy(meta?.meta?.props || [], [
   prop => ['string', 'number', 'boolean', 'any'].indexOf(prop.type)
 ]))
 </script>
-
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>

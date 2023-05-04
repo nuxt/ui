@@ -182,9 +182,3 @@ const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify(component
   }
 }), { watch: [code] })
 </script>
-
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>

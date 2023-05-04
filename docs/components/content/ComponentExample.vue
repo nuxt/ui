@@ -20,9 +20,3 @@ defineProps({
   }
 })
 </script>
-
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>

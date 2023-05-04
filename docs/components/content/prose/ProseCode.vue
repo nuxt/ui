@@ -51,13 +51,13 @@ export default defineComponent({
     <UButton
       :icon="icon"
       variant="link"
-      class="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity"
+      class="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity z-[1]"
       size="xs"
       tabindex="-1"
       @click="copy"
     />
 
-    <span v-if="filename" class="text-gray-400 dark:text-gray-500 absolute right-3 bottom-3 text-sm">{{ filename }}</span>
+    <span v-if="filename" class="text-gray-400 dark:text-gray-500 absolute right-3 bottom-3 text-sm group-hover:opacity-0 transition-opacity">{{ filename }}</span>
 
     <slot />
   </div>

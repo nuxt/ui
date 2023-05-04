@@ -38,7 +38,6 @@ export default defineComponent({
     TransitionRoot,
     TransitionChild
   },
-  inheritAttrs: false,
   props: {
     modelValue: {
       type: Boolean,
