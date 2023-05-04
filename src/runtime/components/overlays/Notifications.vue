@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import type { ToastNotification } from '../../types'
