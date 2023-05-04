@@ -11,7 +11,7 @@
       :placeholder="placeholder"
       :autocomplete="autocomplete"
       :class="textareaClass"
-      @input="onInput(($event.target as any).value)"
+      @input="onInput($event.target.value)"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     />

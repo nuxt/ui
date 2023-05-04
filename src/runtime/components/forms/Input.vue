@@ -13,7 +13,7 @@
       :autocomplete="autocomplete"
       :spellcheck="spellcheck"
       :class="inputClass"
-      @input="onInput(($event.target as any).value)"
+      @input="onInput($event.target.value)"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     >

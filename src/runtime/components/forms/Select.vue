@@ -7,7 +7,7 @@
       :required="required"
       :disabled="disabled"
       :class="selectClass"
-      @input="onInput(($event.target as any).value)"
+      @input="onInput($event.target.value)"
     >
       <template v-for="(option, index) in normalizedOptionsWithPlaceholder">
         <optgroup
