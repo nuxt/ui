@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/nuxtlabs/ui/compare/v1.2.11...v2.0.0) (2023-05-04)
+
+
+### Features
+
+* rewrite to use app config and rework docs ([#143](https://github.com/nuxtlabs/ui/issues/143)) ([6da0db0](https://github.com/nuxtlabs/ui/commit/6da0db0113733df1a03220cb528bea862b553f37))
+
 ### [1.2.11](https://github.com/nuxtlabs/ui/compare/v1.2.10...v1.2.11) (2023-05-04)
 
 
