@@ -4,7 +4,7 @@ import { useState } from '#imports'
 export function useToast () {
   const notifications = useState<ToastNotification[]>('notifications', () => [])
 
-  function addNotification (notification: Partial<ToastNotification>) {
+  function add (notification: Partial<ToastNotification>) {
     const body = {
       id: new Date().getTime().toString(),
       ...notification
@@ -18,24 +18,12 @@ export function useToast () {
     return body
   }
 
-  function removeNotification (id: string) {
+  function remove (id: string) {
     notifications.value = notifications.value.filter((n: ToastNotification) => n.id !== id)
   }
 
-  const success = (notification: Partial<ToastNotification> = {}) => addNotification({ type: 'success', ...notification })
-
-  const info = (notification: Partial<ToastNotification> = {}) => addNotification({ type: 'info', ...notification })
-
-  const warning = (notification: Partial<ToastNotification> = {}) => addNotification({ type: 'warning', ...notification })
-
-  const error = (notification: Partial<ToastNotification>) => addNotification({ type: 'error', title: 'An error occurred!', ...notification })
-
   return {
-    addNotification,
-    removeNotification,
-    success,
-    info,
-    warning,
-    error
+    add,
+    remove
   }
 }

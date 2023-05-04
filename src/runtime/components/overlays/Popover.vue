@@ -1,5 +1,5 @@
 <template>
-  <Popover v-slot="{ open, close }" :class="wrapperClass" @mouseleave="onMouseLeave">
+  <Popover v-slot="{ open, close }" :class="ui.wrapper" @mouseleave="onMouseLeave">
     <PopoverButton
       ref="trigger"
       as="div"
@@ -15,9 +15,9 @@
       </slot>
     </PopoverButton>
 
-    <div v-if="open" ref="container" :class="[containerClass, widthClass]" @mouseover="onMouseOver">
-      <transition appear v-bind="transitionClass">
-        <PopoverPanel :class="[baseClass, ringClass, roundedClass, shadowClass, backgroundClass]" static>
+    <div v-if="open" ref="container" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
+      <transition appear v-bind="ui.transition">
+        <PopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
           <slot name="panel" :open="open" :close="close" />
         </PopoverPanel>
       </transition>
@@ -25,140 +25,131 @@
   </Popover>
 </template>
 
-<script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+<script lang="ts">
+import { computed, ref, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
-import $ui from '#build/ui'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+// @ts-expect-error
+import appConfig from '#build/app.config'
 
-const props = defineProps({
-  mode: {
-    type: String,
-    default: 'click',
-    validator: (value: string) => {
-      return ['click', 'hover'].includes(value)
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  components: {
+    Popover,
+    PopoverButton,
+    PopoverPanel
+  },
+  props: {
+    mode: {
+      type: String,
+      default: 'click',
+      validator: (value: string) => {
+        return ['click', 'hover'].includes(value)
+      }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    openDelay: {
+      type: Number,
+      default: 50
+    },
+    closeDelay: {
+      type: Number,
+      default: 0
+    },
+    popper: {
+      type: Object as PropType<PopperOptions>,
+      default: () => ({})
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.popover>>,
+      default: () => appConfig.ui.popover
     }
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  wrapperClass: {
-    type: String,
-    default: () => $ui.popover.wrapper
-  },
-  containerClass: {
-    type: String,
-    default: () => $ui.popover.container
-  },
-  widthClass: {
-    type: String,
-    default: () => $ui.popover.width
-  },
-  baseClass: {
-    type: String,
-    default: () => $ui.popover.base
-  },
-  backgroundClass: {
-    type: String,
-    default: () => $ui.popover.background
-  },
-  shadowClass: {
-    type: String,
-    default: () => $ui.popover.shadow
-  },
-  roundedClass: {
-    type: String,
-    default: () => $ui.popover.rounded
-  },
-  ringClass: {
-    type: String,
-    default: () => $ui.popover.ring
-  },
-  transitionClass: {
-    type: Object,
-    default: () => $ui.popover.transition
-  },
-  popperOptions: {
-    type: Object as PropType<PopperOptions>,
-    default: () => ({})
-  },
-  openDelay: {
-    type: Number,
-    default: 50
-  },
-  closeDelay: {
-    type: Number,
-    default: 0
-  }
-})
+  setup (props) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
 
-const popperOptions = computed<PopperOptions>(() => defu({}, props.popperOptions, $ui.popover.popperOptions))
+    const ui = computed<Partial<typeof appConfig.ui.popover>>(() => defu({}, props.ui, appConfig.ui.popover))
 
-const [trigger, container] = usePopper(popperOptions.value)
+    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
-// https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
-const popoverApi = ref<any>(null)
+    const [trigger, container] = usePopper(popper.value)
 
-let openTimeout: NodeJS.Timeout | null = null
-let closeTimeout: NodeJS.Timeout | null = null
+    // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
+    const popoverApi = ref<any>(null)
 
-onMounted(() => {
-  setTimeout(() => {
-    // @ts-expect-error internals
-    const popoverProvides = trigger.value?.$.provides
-    if (!popoverProvides) {
-      return
+    let openTimeout: NodeJS.Timeout | null = null
+    let closeTimeout: NodeJS.Timeout | null = null
+
+    onMounted(() => {
+      setTimeout(() => {
+        // @ts-expect-error internals
+        const popoverProvides = trigger.value?.$.provides
+        if (!popoverProvides) {
+          return
+        }
+        const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
+        popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
+      }, 200)
+    })
+
+    function onMouseOver () {
+      if (props.mode !== 'hover' || !popoverApi.value) {
+        return
+      }
+
+      // cancel programmed closing
+      if (closeTimeout) {
+        clearTimeout(closeTimeout)
+        closeTimeout = null
+      }
+      // dropdown already open
+      if (popoverApi.value.popoverState === 0) {
+        return
+      }
+      openTimeout = openTimeout || setTimeout(() => {
+        popoverApi.value.togglePopover && popoverApi.value.togglePopover()
+        openTimeout = null
+      }, props.openDelay)
     }
-    const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
-    popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
-  }, 200)
+
+    function onMouseLeave () {
+      if (props.mode !== 'hover' || !popoverApi.value) {
+        return
+      }
+
+      // cancel programmed opening
+      if (openTimeout) {
+        clearTimeout(openTimeout)
+        openTimeout = null
+      }
+      // dropdown already closed
+      if (popoverApi.value.popoverState === 1) {
+        return
+      }
+      closeTimeout = closeTimeout || setTimeout(() => {
+        popoverApi.value.closePopover && popoverApi.value.closePopover()
+        closeTimeout = null
+      }, props.closeDelay)
+    }
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      trigger,
+      container,
+      onMouseOver,
+      onMouseLeave
+    }
+  }
 })
-
-function onMouseOver () {
-  if (props.mode !== 'hover' || !popoverApi.value) {
-    return
-  }
-
-  // cancel programmed closing
-  if (closeTimeout) {
-    clearTimeout(closeTimeout)
-    closeTimeout = null
-  }
-  // dropdown already open
-  if (popoverApi.value.popoverState === 0) {
-    return
-  }
-  openTimeout = openTimeout || setTimeout(() => {
-    popoverApi.value.togglePopover && popoverApi.value.togglePopover()
-    openTimeout = null
-  }, props.openDelay)
-}
-
-function onMouseLeave () {
-  if (props.mode !== 'hover' || !popoverApi.value) {
-    return
-  }
-
-  // cancel programmed opening
-  if (openTimeout) {
-    clearTimeout(openTimeout)
-    openTimeout = null
-  }
-  // dropdown already closed
-  if (popoverApi.value.popoverState === 1) {
-    return
-  }
-  closeTimeout = closeTimeout || setTimeout(() => {
-    popoverApi.value.closePopover && popoverApi.value.closePopover()
-    closeTimeout = null
-  }, props.closeDelay)
-}
-</script>
-
-<script lang="ts">
-export default { name: 'UPopover' }
 </script>

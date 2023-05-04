@@ -1,9 +1,9 @@
 export interface Avatar {
-  src: string
+  src: string | boolean
   alt: string
   text: string
   size: string
-  rounded: boolean
-  chip: string
+  chipColor: string
+  chipVariant: string
   chipPosition: string
 }

@@ -1,38 +1,37 @@
 <template>
-  <div :class="containerClass">
+  <div :class="[ui.base, ui.spacing, ui.constrained]">
     <slot />
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue'
-import { classNames } from '../../utils'
-import $ui from '#build/ui'
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+import type { PropType } from 'vue'
+import { defu } from 'defu'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+// @ts-expect-error
+import appConfig from '#build/app.config'
 
-const props = defineProps({
-  padded: {
-    type: Boolean,
-    default: false
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  props: {
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.container>>,
+      default: () => appConfig.ui.container
+    }
   },
-  constrained: {
-    type: Boolean,
-    default: true
-  },
-  constrainedClass: {
-    type: String,
-    default: () => $ui.container.constrained
+  setup (props) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const ui = computed<Partial<typeof appConfig.ui.container>>(() => defu({}, props.ui, appConfig.ui.container))
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui
+    }
   }
 })
-
-const containerClass = computed(() => {
-  return classNames(
-    'mx-auto sm:px-6 lg:px-8',
-    props.padded && 'px-4',
-    props.constrained && props.constrainedClass
-  )
-})
-</script>
-
-<script lang="ts">
-export default { name: 'UContainer' }
 </script>

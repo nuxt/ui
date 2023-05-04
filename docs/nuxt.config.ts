@@ -1,39 +1,38 @@
-import defaultTheme from 'tailwindcss/defaultTheme'
-import nuxtUI from '../src/module'
+import ui from '../src/module'
 
-// https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
-  app: {
-    head: {
-      htmlAttrs: {
-        lang: 'en'
-      }
-    }
-  },
   // @ts-ignore
   modules: [
-    // @ts-ignore
-    nuxtUI
+    ui,
+    '@vueuse/nuxt',
+    '@nuxt/content',
+    '@nuxtjs/plausible',
+    'nuxt-lodash',
+    'nuxt-component-meta'
   ],
-  components: {
-    global: true
+  content: {
+    documentDriven: true,
+    highlight: {
+      theme: {
+        light: 'material-lighter',
+        dark: 'material-palenight'
+      },
+      preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown', 'yaml', 'bash', 'ini']
+    }
   },
   ui: {
-    colors: {
-      primary: 'blue',
-      gray: 'zinc'
-    },
-    preset: {
-    },
-    icons: ['heroicons', 'mdi'],
-    tailwindcss: {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter var', ...defaultTheme.fontFamily.sans]
-          }
-        }
-      }
+    global: true,
+    icons: ['heroicons', 'simple-icons']
+  },
+  typescript: {
+    strict: false,
+    includeWorkspace: true
+  },
+  // @ts-ignore
+  $production: {
+    routeRules: {
+      '/api/_content/**': { isr: true, static: true },
+      '/api/component-meta/**': { isr: true, static: true }
     }
   }
 })

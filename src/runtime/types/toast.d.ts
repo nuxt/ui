@@ -1,5 +1,6 @@
-export interface ToastNotificationAction {
-  label: string,
+import type { Button } from './button'
+
+export interface ToastNotificationAction extends Partial<Button> {
   click: Function
 }
 

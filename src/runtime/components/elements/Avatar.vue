@@ -1,123 +1,135 @@
 <template>
   <span :class="wrapperClass">
     <img v-if="url && !error" :class="avatarClass" :src="url" :alt="alt" :onerror="() => onError()">
-    <span v-else-if="text || placeholder" :class="placeholderClass">{{ text || placeholder }}</span>
+    <span v-else-if="text || placeholder" :class="ui.placeholder">{{ text || placeholder }}</span>
 
-    <span v-if="chip" :class="chipClass" />
+    <span v-if="chipColor" :class="chipClass" />
     <slot />
   </span>
 </template>
 
-<script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import { classNames } from '../../utils'
-import $ui from '#build/ui'
-
-const props = defineProps({
-  src: {
-    type: [String, Boolean],
-    default: null
-  },
-  alt: {
-    type: String,
-    default: null
-  },
-  text: {
-    type: String,
-    default: null
-  },
-  size: {
-    type: String,
-    default: 'md',
-    validator (value: string) {
-      return Object.keys($ui.avatar.size).includes(value)
-    }
-  },
-  rounded: {
-    type: Boolean,
-    default: true
-  },
-  chip: {
-    type: String,
-    default: null,
-    validator (value: string) {
-      return Object.keys($ui.avatar.chip.variant).includes(value)
-    }
-  },
-  chipPosition: {
-    type: String,
-    default: 'top-right',
-    validator (value: string) {
-      return Object.keys($ui.avatar.chip.position).includes(value)
-    }
-  },
-  wrapperClass: {
-    type: String,
-    default: () => $ui.avatar.wrapper
-  },
-  backgroundClass: {
-    type: String,
-    default: () => $ui.avatar.background
-  },
-  placeholderClass: {
-    type: String,
-    default: () => $ui.avatar.placeholder
-  },
-  roundedClass: {
-    type: String,
-    default: () => $ui.avatar.rounded
-  }
-})
-
-const wrapperClass = computed(() => {
-  return classNames(
-    props.wrapperClass,
-    props.backgroundClass,
-    $ui.avatar.size[props.size],
-    props.rounded ? 'rounded-full' : props.roundedClass
-  )
-})
-
-const avatarClass = computed(() => {
-  return classNames(
-    $ui.avatar.size[props.size],
-    props.rounded ? 'rounded-full' : props.roundedClass
-  )
-})
-
-const chipClass = computed(() => {
-  return classNames(
-    $ui.avatar.chip.base,
-    $ui.avatar.chip.variant[props.chip],
-    $ui.avatar.chip.position[props.chipPosition],
-    $ui.avatar.chip.size[props.size]
-  )
-})
-
-const url = computed(() => {
-  if (typeof props.src === 'boolean') {
-    return null
-  }
-  return props.src
-})
-
-const placeholder = computed(() => {
-  return (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2)
-})
-
-const error = ref(false)
-
-watch(() => props.src, () => {
-  if (error.value) {
-    error.value = false
-  }
-})
-
-function onError () {
-  error.value = true
-}
-</script>
-
 <script lang="ts">
-export default { name: 'UAvatar' }
+import { defineComponent, ref, computed, watch } from 'vue'
+import type { PropType } from 'vue'
+import { defu } from 'defu'
+import { classNames } from '../../utils'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+// @ts-expect-error
+import appConfig from '#build/app.config'
+
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  props: {
+    src: {
+      type: [String, Boolean],
+      default: null
+    },
+    alt: {
+      type: String,
+      default: null
+    },
+    text: {
+      type: String,
+      default: null
+    },
+    size: {
+      type: String,
+      default: () => appConfig.ui.avatar.default.size,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.avatar.size).includes(value)
+      }
+    },
+    chipColor: {
+      type: String,
+      default: null,
+      validator (value: string) {
+        return appConfig.ui.colors.includes(value)
+      }
+    },
+    chipVariant: {
+      type: String,
+      default: () => appConfig.ui.avatar.default.chipVariant,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.avatar.chip.variant).includes(value)
+      }
+    },
+    chipPosition: {
+      type: String,
+      default: () => appConfig.ui.avatar.default.chipPosition,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.avatar.chip.position).includes(value)
+      }
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.avatar>>,
+      default: () => appConfig.ui.avatar
+    }
+  },
+  setup (props) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const ui = computed<Partial<typeof appConfig.ui.avatar>>(() => defu({}, props.ui, appConfig.ui.avatar))
+
+    const wrapperClass = computed(() => {
+      return classNames(
+        ui.value.wrapper,
+        ui.value.background,
+        ui.value.rounded,
+        ui.value.size[props.size]
+      )
+    })
+
+    const avatarClass = computed(() => {
+      return classNames(
+        ui.value.rounded,
+        ui.value.size[props.size]
+      )
+    })
+
+    const chipClass = computed(() => {
+      return classNames(
+        ui.value.chip.base,
+        ui.value.chip.size[props.size],
+        ui.value.chip.position[props.chipPosition],
+        ui.value.chip.variant[props.chipVariant]?.replaceAll('{color}', props.chipColor)
+      )
+    })
+
+    const url = computed(() => {
+      if (typeof props.src === 'boolean') {
+        return null
+      }
+      return props.src
+    })
+
+    const placeholder = computed(() => {
+      return (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2)
+    })
+
+    const error = ref(false)
+
+    watch(() => props.src, () => {
+      if (error.value) {
+        error.value = false
+      }
+    })
+
+    function onError () {
+      error.value = true
+    }
+
+    return {
+      wrapperClass,
+      avatarClass,
+      chipClass,
+      url,
+      placeholder,
+      error,
+      onError
+    }
+  }
+})
 </script>

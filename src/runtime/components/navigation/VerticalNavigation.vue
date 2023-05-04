@@ -1,54 +1,67 @@
 <template>
-  <nav :class="wrapperClass">
-    <Link
+  <nav :class="ui.wrapper">
+    <LinkCustom
       v-for="(link, index) of links"
       v-slot="{ isActive }"
       :key="index"
       v-bind="link"
-      :class="[baseClass, spacingClass].join(' ')"
-      :active-class="activeClass"
-      :inactive-class="inactiveClass"
+      :class="[ui.base, ui.spacing]"
+      :active-class="ui.active"
+      :inactive-class="ui.inactive"
       @click="link.click && link.click()"
       @keyup.enter="$event.target.blur()"
     >
       <slot name="avatar" :link="link">
         <Avatar
           v-if="link.avatar"
-          v-bind="{ size: 'xs', ...link.avatar }"
-          :class="[avatarBaseClass, link.label && avatarSpacingClass]"
+          v-bind="{ size: ui.avatar.size, ...link.avatar }"
+          :class="[ui.avatar.base]"
         />
       </slot>
       <slot name="icon" :link="link" :is-active="isActive">
         <Icon
           v-if="link.icon"
           :name="link.icon"
-          :class="[iconBaseClass, link.label && iconSpacingClass, isActive ? iconActiveClass : iconInactiveClass, link.iconClass]"
+          :class="[ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive, link.iconClass]"
         />
       </slot>
       <slot :link="link">
         <span v-if="link.label" class="truncate">{{ link.label }}</span>
       </slot>
       <slot name="badge" :link="link" :is-active="isActive">
-        <span v-if="link.badge" :class="[badgeBaseClass, isActive ? badgeActiveClass : badgeInactiveClass]">
+        <span v-if="link.badge" :class="[ui.badge.baseClass, isActive ? ui.badge.active : ui.badge.inactive]">
           {{ link.badge }}
         </span>
       </slot>
-    </Link>
+    </LinkCustom>
   </nav>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
+import { defu } from 'defu'
 import Icon from '../elements/Icon.vue'
-import Link from '../elements/Link.vue'
 import Avatar from '../elements/Avatar.vue'
+import LinkCustom from '../elements/LinkCustom.vue'
 import type { Avatar as AvatarType } from '../../types/avatar'
-import $ui from '#build/ui'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+// @ts-expect-error
+import appConfig from '#build/app.config'
 
-defineProps({
-  links: {
-    type: Array as PropType<{
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  components: {
+    Icon,
+    Avatar,
+    LinkCustom
+  },
+  props: {
+    links: {
+      type: Array as PropType<{
       to?: RouteLocationNormalized | string
       exact?: boolean
       label: string
@@ -58,67 +71,23 @@ defineProps({
       click?: Function
       badge?: string
     }[]>,
-    required: true
+      default: () => []
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.verticalNavigation>>,
+      default: () => appConfig.ui.verticalNavigation
+    }
   },
-  wrapperClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.wrapper
-  },
-  baseClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.base
-  },
-  spacingClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.spacing
-  },
-  activeClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.active
-  },
-  inactiveClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.inactive
-  },
-  iconBaseClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.icon.base
-  },
-  iconSpacingClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.icon.spacing
-  },
-  iconActiveClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.icon.active
-  },
-  iconInactiveClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.icon.inactive
-  },
-  avatarBaseClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.avatar.base
-  },
-  avatarSpacingClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.avatar.spacing
-  },
-  badgeBaseClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.badge.base
-  },
-  badgeActiveClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.badge.active
-  },
-  badgeInactiveClass: {
-    type: String,
-    default: () => $ui.verticalNavigation.badge.inactive
+  setup (props) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const ui = computed<Partial<typeof appConfig.ui.verticalNavigation>>(() => defu({}, props.ui, appConfig.ui.verticalNavigation))
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui
+    }
   }
 })
-</script>
-
-<script lang="ts">
-export default { name: 'UVerticalNavigation' }
 </script>

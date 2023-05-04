@@ -1,96 +1,77 @@
 <template>
   <Switch
     v-model="active"
-    :class="[active ? activeClass : inactiveClass, baseClass]"
+    :class="[active ? ui.active : ui.inactive, ui.base]"
   >
-    <span :class="[active ? containerActiveClass : containerInactiveClass, containerBaseClass]">
-      <span v-if="iconOn" :class="[active ? iconActiveClass : iconInactiveClass, iconBaseClass]" aria-hidden="true">
-        <Icon :name="iconOn" :class="iconOnClass" />
+    <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
+      <span v-if="iconOn" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
+        <Icon :name="iconOn" :class="ui.icon.on" />
       </span>
-      <span v-if="iconOff" :class="[active ? iconInactiveClass : iconActiveClass, iconBaseClass]" aria-hidden="true">
-        <Icon :name="iconOff" :class="iconOffClass" />
+      <span v-if="iconOff" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
+        <Icon :name="iconOff" :class="ui.icon.off" />
       </span>
     </span>
   </Switch>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue'
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+import type { PropType } from 'vue'
+import { defu } from 'defu'
 import { Switch } from '@headlessui/vue'
 import Icon from '../elements/Icon.vue'
-import $ui from '#build/ui'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+// @ts-expect-error
+import appConfig from '#build/app.config'
 
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  components: {
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Switch,
+    Icon
   },
-  iconOn: {
-    type: String,
-    default: null
+  props: {
+    modelValue: {
+      type: Boolean,
+      default: false
+    },
+    iconOn: {
+      type: String,
+      default: null
+    },
+    iconOff: {
+      type: String,
+      default: null
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.toggle>>,
+      default: () => appConfig.ui.toggle
+    }
   },
-  iconOff: {
-    type: String,
-    default: null
-  },
-  baseClass: {
-    type: String,
-    default: () => $ui.toggle.base
-  },
-  activeClass: {
-    type: String,
-    default: () => $ui.toggle.active
-  },
-  inactiveClass: {
-    type: String,
-    default: () => $ui.toggle.inactive
-  },
-  containerBaseClass: {
-    type: String,
-    default: () => $ui.toggle.container.base
-  },
-  containerActiveClass: {
-    type: String,
-    default: () => $ui.toggle.container.active
-  },
-  containerInactiveClass: {
-    type: String,
-    default: () => $ui.toggle.container.inactive
-  },
-  iconBaseClass: {
-    type: String,
-    default: () => $ui.toggle.icon.base
-  },
-  iconActiveClass: {
-    type: String,
-    default: () => $ui.toggle.icon.active
-  },
-  iconInactiveClass: {
-    type: String,
-    default: () => $ui.toggle.icon.inactive
-  },
-  iconOnClass: {
-    type: String,
-    default: () => $ui.toggle.icon.on
-  },
-  iconOffClass: {
-    type: String,
-    default: () => $ui.toggle.icon.off
+  emits: ['update:modelValue'],
+  setup (props, { emit }) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defu({}, props.ui, appConfig.ui.toggle))
+
+    const active = computed({
+      get () {
+        return props.modelValue
+      },
+      set (value) {
+        emit('update:modelValue', value)
+      }
+    })
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      active
+    }
   }
 })
-
-const emit = defineEmits(['update:modelValue'])
-
-const active = computed({
-  get () {
-    return props.modelValue
-  },
-  set (value) {
-    emit('update:modelValue', value)
-  }
-})
-</script>
-
-<script lang="ts">
-export default { name: 'UToggle' }
 </script>

@@ -1,0 +1,11 @@
+.dark {
+  color-scheme: dark;
+}
+
+a:focus-visible {
+  @apply outline-primary-500 dark:outline-primary-400;
+}
+
+select {
+  background-image: none;
+}

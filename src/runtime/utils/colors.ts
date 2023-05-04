@@ -10,7 +10,8 @@ export const colorsToExclude = [
   'gray',
   'zinc',
   'neutral',
-  'stone'
+  'stone',
+  'cool'
 ]
 
 export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]

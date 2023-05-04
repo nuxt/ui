@@ -8,220 +8,224 @@
   >
     <Icon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     <slot>
-      <span :class="[truncate ? 'text-left break-all line-clamp-1' : '', compact ? 'hidden sm:block' : '']">
-        <span :class="[labelCompact && 'hidden sm:block']">{{ label }}</span>
-        <span v-if="labelCompact" class="sm:hidden">{{ labelCompact }}</span>
+      <span v-if="label" :class="[truncate ? 'text-left break-all line-clamp-1' : '']">
+        {{ label }}
       </span>
     </slot>
     <Icon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
   </component>
 </template>
 
-<script setup lang="ts">
-import { ref, computed, useSlots } from 'vue'
+<script lang="ts">
+import { ref, computed, defineComponent, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
-import NuxtLink from '#app/components/nuxt-link'
+import { defu } from 'defu'
 import Icon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
-import $ui from '#build/ui'
+import { NuxtLink } from '#components'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+// @ts-expect-error
+import appConfig from '#build/app.config'
 
-const props = defineProps({
-  type: {
-    type: String,
-    default: 'button'
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  components: {
+    Icon
   },
-  block: {
-    type: Boolean,
-    default: false
-  },
-  label: {
-    type: String,
-    default: null
-  },
-  labelCompact: {
-    type: String,
-    default: null
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  size: {
-    type: String,
-    default: 'md',
-    validator (value: string) {
-      return Object.keys($ui.button.size).includes(value)
+  props: {
+    type: {
+      type: String,
+      default: 'button'
+    },
+    block: {
+      type: Boolean,
+      default: false
+    },
+    label: {
+      type: String,
+      default: null
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    padded: {
+      type: Boolean,
+      default: true
+    },
+    size: {
+      type: String,
+      default: () => appConfig.ui.button.default.size,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.button.size).includes(value)
+      }
+    },
+    color: {
+      type: String,
+      default: () => appConfig.ui.button.default.color,
+      validator (value: string) {
+        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.button.color)].includes(value)
+      }
+    },
+    variant: {
+      type: String,
+      default: () => appConfig.ui.button.default.variant,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.button.variant).includes(value)
+      }
+    },
+    icon: {
+      type: String,
+      default: null
+    },
+    loadingIcon: {
+      type: String,
+      default: () => appConfig.ui.button.default.loadingIcon
+    },
+    leadingIcon: {
+      type: String,
+      default: null
+    },
+    trailingIcon: {
+      type: String,
+      default: null
+    },
+    trailing: {
+      type: Boolean,
+      default: false
+    },
+    leading: {
+      type: Boolean,
+      default: false
+    },
+    to: {
+      type: [String, Object] as PropType<string | RouteLocationNormalized | RouteLocationRaw>,
+      default: null
+    },
+    target: {
+      type: String,
+      default: null
+    },
+    ariaLabel: {
+      type: String,
+      default: null
+    },
+    square: {
+      type: Boolean,
+      default: false
+    },
+    truncate: {
+      type: Boolean,
+      default: false
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.button>>,
+      default: () => appConfig.ui.button
     }
   },
-  variant: {
-    type: String,
-    default: 'primary',
-    validator (value: string) {
-      return Object.keys($ui.button.variant).includes(value)
+  setup (props) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const ui = computed<Partial<typeof appConfig.ui.button>>(() => defu({}, props.ui, appConfig.ui.button))
+
+    const slots = useSlots()
+
+    const button = ref(null)
+
+    const buttonIs = computed(() => {
+      if (props.to) {
+        return NuxtLink
+      }
+
+      return 'button'
+    })
+
+    const buttonProps = computed(() => {
+      if (props.to) {
+        return { to: props.to, target: props.target }
+      } else {
+        return { disabled: props.disabled || props.loading, type: props.type }
+      }
+    })
+
+    const isLeading = computed(() => {
+      return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
+    })
+
+    const isTrailing = computed(() => {
+      return (props.icon && props.trailing) || (props.loading && props.trailing) || props.trailingIcon
+    })
+
+    const isSquare = computed(() => props.square || (!slots.default && !props.label))
+
+    const buttonClass = computed(() => {
+      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+
+      return classNames(
+        ui.value.base,
+        ui.value.font,
+        ui.value.rounded,
+        ui.value.size[props.size],
+        ui.value.gap[props.size],
+        props.padded && ui.value[isSquare.value ? 'square' : 'spacing'][props.size],
+        variant?.replaceAll('{color}', props.color),
+        props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
+      )
+    })
+
+    const leadingIconName = computed(() => {
+      if (props.loading) {
+        return props.loadingIcon
+      }
+
+      return props.leadingIcon || props.icon
+    })
+
+    const trailingIconName = computed(() => {
+      if (props.loading && !isLeading.value) {
+        return props.loadingIcon
+      }
+
+      return props.trailingIcon || props.icon
+    })
+
+    const leadingIconClass = computed(() => {
+      return classNames(
+        ui.value.icon.base,
+        ui.value.icon.size[props.size],
+        props.loading && 'animate-spin'
+      )
+    })
+
+    const trailingIconClass = computed(() => {
+      return classNames(
+        ui.value.icon.base,
+        ui.value.icon.size[props.size],
+        props.loading && !isLeading.value && 'animate-spin'
+      )
+    })
+
+    return {
+      button,
+      buttonIs,
+      buttonProps,
+      isLeading,
+      isTrailing,
+      isSquare,
+      buttonClass,
+      leadingIconName,
+      trailingIconName,
+      leadingIconClass,
+      trailingIconClass
     }
-  },
-  icon: {
-    type: String,
-    default: null
-  },
-  leadingIcon: {
-    type: String,
-    default: null
-  },
-  trailingIcon: {
-    type: String,
-    default: null
-  },
-  loadingIcon: {
-    type: String,
-    default: () => $ui.button.icon.loading
-  },
-  trailing: {
-    type: Boolean,
-    default: false
-  },
-  leading: {
-    type: Boolean,
-    default: false
-  },
-  to: {
-    type: [String, Object] as PropType<string | RouteLocationNormalized | RouteLocationRaw>,
-    default: null
-  },
-  target: {
-    type: String,
-    default: null
-  },
-  ariaLabel: {
-    type: String,
-    default: null
-  },
-  rounded: {
-    type: Boolean,
-    default: false
-  },
-  roundedClass: {
-    type: String,
-    default: () => $ui.button.rounded
-  },
-  baseClass: {
-    type: String,
-    default: () => $ui.button.base
-  },
-  iconBaseClass: {
-    type: String,
-    default: () => $ui.button.icon.base
-  },
-  leadingIconClass: {
-    type: String,
-    default: ''
-  },
-  trailingIconClass: {
-    type: String,
-    default: ''
-  },
-  customClass: {
-    type: String,
-    default: null
-  },
-  square: {
-    type: Boolean,
-    default: false
-  },
-  truncate: {
-    type: Boolean,
-    default: false
-  },
-  compact: {
-    type: Boolean,
-    default: false
   }
 })
-
-const slots = useSlots()
-
-const button = ref(null)
-
-const buttonIs = computed(() => {
-  if (props.to) {
-    return NuxtLink
-  }
-
-  return 'button'
-})
-
-const buttonProps = computed(() => {
-  if (props.to) {
-    return { to: props.to, target: props.target }
-  } else {
-    return { disabled: props.disabled || props.loading, type: props.type }
-  }
-})
-
-const isLeading = computed(() => {
-  return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
-})
-
-const isTrailing = computed(() => {
-  return (props.icon && props.trailing) || (props.loading && props.trailing) || props.trailingIcon
-})
-
-const isSquare = computed(() => props.square || (!slots.default && !props.label))
-
-const buttonClass = computed(() => {
-  return classNames(
-    props.baseClass,
-    $ui.button.size[props.size],
-    $ui.button[isSquare.value ? 'square' : (props.compact ? 'compact' : 'spacing')][props.size],
-    $ui.button.variant[props.variant],
-    props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center',
-    props.rounded ? 'rounded-full' : props.roundedClass,
-    props.customClass
-  )
-})
-
-const leadingIconName = computed(() => {
-  if (props.loading) {
-    return props.loadingIcon
-  }
-
-  return props.leadingIcon || props.icon
-})
-
-const trailingIconName = computed(() => {
-  if (props.loading && !isLeading.value) {
-    return props.loadingIcon
-  }
-
-  return props.trailingIcon || props.icon
-})
-
-const leadingIconClass = computed(() => {
-  return classNames(
-    props.iconBaseClass,
-    $ui.button.icon.size[props.size],
-    (!!slots.default || !!props.label?.length) && $ui.button.icon.leading[props.compact ? 'compactSpacing' : 'spacing'][props.size],
-    props.leadingIconClass,
-    props.loading && 'animate-spin'
-  )
-})
-
-const trailingIconClass = computed(() => {
-  return classNames(
-    props.iconBaseClass,
-    $ui.button.icon.size[props.size],
-    (!!slots.default || !!props.label?.length) && $ui.button.icon.trailing[props.compact ? 'compactSpacing' : 'spacing'][props.size],
-    props.trailingIconClass,
-    props.loading && !isLeading.value && 'animate-spin'
-  )
-})
-</script>
-
-<script lang="ts">
-export default { name: 'UButton' }
 </script>

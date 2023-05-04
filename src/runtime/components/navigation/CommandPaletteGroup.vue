@@ -1,10 +1,10 @@
 <template>
-  <div class="p-2" role="option">
-    <h2 v-if="label" class="px-3 my-2 text-xs font-semibold u-text-gray-900">
+  <div :class="ui.group.wrapper" role="option">
+    <h2 v-if="label" :class="ui.group.label">
       {{ label }}
     </h2>
 
-    <div class="text-sm u-text-gray-700" role="listbox" :aria-label="group[groupAttribute]">
+    <div :class="ui.group.container" role="listbox" :aria-label="group[groupAttribute]">
       <ComboboxOption
         v-for="(command, index) of group.commands"
         :key="`${group.key}-${index}`"
@@ -13,41 +13,41 @@
         :disabled="command.disabled"
         as="template"
       >
-        <div :class="['flex justify-between select-none items-center rounded-md px-3 py-2 gap-3 relative', active && 'bg-gray-100 dark:bg-gray-800 u-text-gray-900', command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
-          <div class="flex items-center gap-2 min-w-0">
+        <div :class="[ui.group.command.base, active ? ui.group.command.active : ui.group.command.inactive, command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
+          <div :class="ui.group.command.container">
             <slot :name="`${group.key}-icon`" :group="group" :command="command">
-              <Icon v-if="command.icon" :name="command.icon" :class="['h-4 w-4 flex-shrink-0', active ? 'text-opacity-100 dark:text-opacity-100' : 'text-opacity-40 dark:text-opacity-40', command.iconClass || 'text-gray-900 dark:text-gray-50']" aria-hidden="true" />
+              <Icon v-if="command.icon" :name="command.icon" :class="[ui.group.command.icon.base, active ? ui.group.command.icon.active : ui.group.command.icon.inactive, command.iconClass]" aria-hidden="true" />
               <Avatar
                 v-else-if="command.avatar"
-                v-bind="{ size: 'xxxs', ...command.avatar }"
-                class="flex-shrink-0"
+                v-bind="{ size: ui.group.command.avatar.size, ...command.avatar }"
+                :class="ui.group.command.avatar.base"
                 aria-hidden="true"
               />
-              <span v-else-if="command.chip" class="flex-shrink-0 w-2 h-2 mx-1 rounded-full" :style="{ background: `#${command.chip}` }" />
+              <span v-else-if="command.chip" :class="ui.group.command.chip.base" :style="{ background: `#${command.chip}` }" />
             </slot>
 
-            <div class="flex items-center gap-1.5 min-w-0" :class="{ 'opacity-50': command.disabled }">
+            <div :class="[ui.group.command.label, command.disabled && ui.group.command.disabled]">
               <slot :name="`${group.key}-command`" :group="group" :command="command">
-                <span v-if="command.prefix" class="flex-shrink-0" :class="command.prefixClass || 'u-text-gray-400'">{{ command.prefix }}</span>
+                <span v-if="command.prefix" class="flex-shrink-0" :class="command.prefixClass || ui.group.command.prefix">{{ command.prefix }}</span>
 
                 <span class="truncate" :class="{ 'flex-none': command.suffix || command.matches?.length }">{{ command[commandAttribute] }}</span>
 
                 <!-- eslint-disable-next-line vue/no-v-html -->
-                <span v-if="command.matches?.length" class="truncate" :class="command.suffixClass || 'u-text-gray-400'" v-html="highlight(command[commandAttribute], command.matches[0])" />
-                <span v-else-if="command.suffix" class="truncate" :class="command.suffixClass || 'u-text-gray-400'">{{ command.suffix }}</span>
+                <span v-if="command.matches?.length" class="truncate" :class="command.suffixClass || ui.group.command.suffix" v-html="highlight(command[commandAttribute], command.matches[0])" />
+                <span v-else-if="command.suffix" class="truncate" :class="command.suffixClass || ui.group.command.suffix">{{ command.suffix }}</span>
               </slot>
             </div>
           </div>
 
-          <Icon v-if="selected" :name="$ui.commandPalette.option.selected.icon.name" class="h-5 w-5 u-text-gray-900 flex-shrink-0" aria-hidden="true" />
+          <Icon v-if="selected" :name="selectedIcon" :class="ui.group.command.selected.icon" aria-hidden="true" />
           <slot v-else-if="active && (group.active || $slots[`${group.key}-active`])" :name="`${group.key}-active`" :group="group" :command="command">
-            <span v-if="group.active" class="flex-shrink-0 u-text-gray-500">{{ group.active }}</span>
+            <span v-if="group.active" :class="ui.group.active">{{ group.active }}</span>
           </slot>
           <slot v-else :name="`${group.key}-inactive`" :group="group" :command="command">
-            <span v-if="command.shortcuts?.length" :class="$ui.commandPalette.option.shortcuts">
+            <span v-if="command.shortcuts?.length" :class="ui.group.command.shortcuts">
               <kbd v-for="shortcut of command.shortcuts" :key="shortcut" class="font-sans">{{ shortcut }}</kbd>
             </span>
-            <span v-else-if="!command.disabled && group.inactive" class="flex-shrink-0 u-text-gray-500">{{ group.inactive }}</span>
+            <span v-else-if="!command.disabled && group.inactive" :class="ui.group.inactive">{{ group.inactive }}</span>
           </slot>
         </div>
       </ComboboxOption>
@@ -55,73 +55,94 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue'
-import { ComboboxOption } from '@headlessui/vue'
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
+import { ComboboxOption } from '@headlessui/vue'
 import Icon from '../elements/Icon.vue'
 import Avatar from '../elements/Avatar.vue'
 import type { Group } from '../../types/command-palette'
-import $ui from '#build/ui'
+// TODO: Remove
+// @ts-expect-error
+import appConfig from '#build/app.config'
 
-const props = defineProps({
-  group: {
-    type: Object as PropType<Group>,
-    required: true
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  components: {
+    ComboboxOption,
+    Icon,
+    Avatar
   },
-  query: {
-    type: String,
-    default: ''
+  props: {
+    group: {
+      type: Object as PropType<Group>,
+      required: true
+    },
+    query: {
+      type: String,
+      default: ''
+    },
+    groupAttribute: {
+      type: String,
+      required: true
+    },
+    commandAttribute: {
+      type: String,
+      required: true
+    },
+    selectedIcon: {
+      type: String,
+      required: true
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.commandPalette>>,
+      default: () => appConfig.ui.commandPalette
+    }
   },
-  groupAttribute: {
-    type: String,
-    required: true
-  },
-  commandAttribute: {
-    type: String,
-    required: true
+  setup (props) {
+    const label = computed(() => {
+      const label = props.group[props.groupAttribute]
+
+      return typeof label === 'function' ? label(props.query) : label
+    })
+
+    function highlight (text: string, { indices, value }: { indices: number[][], value:string }): string {
+      if (text === value) {
+        return ''
+      }
+
+      let content = ''
+      let nextUnhighlightedIndiceStartingIndex = 0
+
+      indices.forEach((indice) => {
+        const lastIndiceNextIndex = indice[1] + 1
+        const isMatched = (lastIndiceNextIndex - indice[0]) >= props.query.length
+
+        content += [
+          value.substring(nextUnhighlightedIndiceStartingIndex, indice[0]),
+          isMatched && '<mark>',
+          value.substring(indice[0], lastIndiceNextIndex),
+          isMatched && '</mark>'
+        ].filter(Boolean).join('')
+
+        nextUnhighlightedIndiceStartingIndex = lastIndiceNextIndex
+      })
+
+      content += value.substring(nextUnhighlightedIndiceStartingIndex)
+
+      const index = content.indexOf('<mark>')
+      if (index > 60) {
+        content = `...${content.substring(index - 60)}`
+      }
+
+      return content
+    }
+
+    return {
+      label,
+      highlight
+    }
   }
 })
-
-const label = computed(() => {
-  const label = props.group[props.groupAttribute]
-
-  return typeof label === 'function' ? label(props.query) : label
-})
-
-function highlight (text: string, { indices, value }: { indices: number[][], value:string }): string {
-  if (text === value) {
-    return ''
-  }
-
-  let content = ''
-  let nextUnhighlightedIndiceStartingIndex = 0
-
-  indices.forEach((indice) => {
-    const lastIndiceNextIndex = indice[1] + 1
-    const isMatched = (lastIndiceNextIndex - indice[0]) >= props.query.length
-
-    content += [
-      value.substring(nextUnhighlightedIndiceStartingIndex, indice[0]),
-      isMatched && '<mark>',
-      value.substring(indice[0], lastIndiceNextIndex),
-      isMatched && '</mark>'
-    ].filter(Boolean).join('')
-
-    nextUnhighlightedIndiceStartingIndex = lastIndiceNextIndex
-  })
-
-  content += value.substring(nextUnhighlightedIndiceStartingIndex)
-
-  const index = content.indexOf('<mark>')
-  if (index > 60) {
-    content = `...${content.substring(index - 60)}`
-  }
-
-  return content
-}
-</script>
-
-<script lang="ts">
-export default { name: 'UCommandPaletteGroup' }
 </script>

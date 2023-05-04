@@ -1,211 +1,191 @@
 <template>
-  <transition appear v-bind="transitionClass">
+  <transition appear v-bind="ui.transition">
     <div
-      :class="['z-50 w-full pointer-events-auto', backgroundClass, roundedClass, shadowClass]"
+      :class="[ui.wrapper, ui.background, ui.rounded, ui.shadow]"
       @mouseover="onMouseover"
       @mouseleave="onMouseleave"
     >
-      <div :class="['relative overflow-hidden', roundedClass, ringClass]">
+      <div :class="[ui.container, ui.rounded, ui.ring]">
         <div class="p-4">
           <div class="flex gap-3" :class="{ 'items-start': description, 'items-center': !description }">
-            <div v-if="iconName" class="flex-shrink-0">
-              <Icon :name="iconName" :class="iconClass" />
-            </div>
+            <Icon v-if="icon" :name="icon" :class="ui.icon" />
+            <Avatar v-if="avatar" v-bind="avatar" :class="ui.avatar" />
+
             <div class="w-0 flex-1">
-              <p class="text-sm font-medium u-text-gray-900">
+              <p :class="ui.title">
                 {{ title }}
               </p>
-              <p v-if="description" class="mt-1 text-sm leading-5 u-text-gray-500">
+              <p v-if="description" :class="ui.description">
                 {{ description }}
               </p>
 
-              <div v-if="description && actions.length" class="mt-3 flex items-center gap-6">
-                <button v-for="(action, index) of actions" :key="index" type="button" class="text-sm font-medium focus:outline-none text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500" @click.stop="onAction(action)">
-                  {{ action.label }}
-                </button>
+              <div v-if="description && actions.length" class="mt-3 flex items-center gap-2">
+                <Button v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
               </div>
             </div>
             <div class="flex-shrink-0 flex items-center gap-3">
               <div v-if="!description && actions.length" class="flex items-center gap-2">
-                <button v-for="(action, index) of actions" :key="index" type="button" class="text-sm font-medium focus:outline-none text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500" @click.stop="onAction(action)">
-                  {{ action.label }}
-                </button>
+                <Button v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
               </div>
 
-              <button
-                class="inline-flex transition duration-150 ease-in-out u-text-gray-400 focus:outline-none hover:u-text-gray-500 focus:u-text-gray-500"
-                @click.stop="onClose"
-              >
-                <span class="sr-only">Close</span>
-                <Icon :name="$ui.notification.close.icon.name" class="w-5 h-5" />
-              </button>
+              <Button v-if="close" v-bind="{ ...ui.default.close, ...close }" @click.stop="onClose" />
             </div>
           </div>
         </div>
-        <div v-if="timeout" class="absolute bottom-0 left-0 right-0 h-1">
-          <div class="h-1 bg-primary-500" :style="progressBarStyle" />
-        </div>
+        <div v-if="timeout" :class="ui.progress" :style="progressBarStyle" />
       </div>
     </div>
   </transition>
 </template>
 
-<script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
+<script lang="ts">
+import { ref, computed, onMounted, onUnmounted, watchEffect, defineComponent } from 'vue'
 import type { PropType } from 'vue'
+import { defu } from 'defu'
 import Icon from '../elements/Icon.vue'
+import Avatar from '../elements/Avatar.vue'
+import Button from '../elements/Button.vue'
 import { useTimer } from '../../composables/useTimer'
-import { classNames } from '../../utils'
 import type { ToastNotificationAction } from '../../types'
-import $ui from '#build/ui'
+import type { Avatar as AvatarType } from '../../types/avatar'
+import type { Button as ButtonType } from '../../types/button'
+import { useAppConfig } from '#imports'
+// TODO: Remove
+// @ts-expect-error
+import appConfig from '#build/app.config'
 
-const props = defineProps({
-  id: {
-    type: String,
-    required: true
+// const appConfig = useAppConfig()
+
+export default defineComponent({
+  components: {
+    Icon,
+    Avatar,
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Button
   },
-  type: {
-    type: String,
-    default: null,
-    validator (value: string) {
-      return Object.keys($ui.notification.type).includes(value)
+  props: {
+    id: {
+      type: [String, Number],
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String,
+      default: null
+    },
+    icon: {
+      type: String,
+      default: null
+    },
+    avatar: {
+      type: Object as PropType<Partial<AvatarType>>,
+      default: null
+    },
+    close: {
+      type: Object as PropType<Partial<ButtonType>>,
+      default: () => appConfig.ui.notification.default.close
+    },
+    timeout: {
+      type: Number,
+      default: 5000
+    },
+    actions: {
+      type: Array as PropType<ToastNotificationAction[]>,
+      default: () => []
+    },
+    callback: {
+      type: Function,
+      default: null
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.notification>>,
+      default: () => appConfig.ui.notification
     }
   },
-  title: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    default: null
-  },
-  backgroundClass: {
-    type: String,
-    default: () => $ui.notification.background
-  },
-  shadowClass: {
-    type: String,
-    default: () => $ui.notification.shadow
-  },
-  ringClass: {
-    type: String,
-    default: () => $ui.notification.ring
-  },
-  roundedClass: {
-    type: String,
-    default: () => $ui.notification.rounded
-  },
-  transitionClass: {
-    type: Object,
-    default: () => $ui.notification.transition
-  },
-  customClass: {
-    type: String,
-    default: null
-  },
-  icon: {
-    type: String,
-    default: null
-  },
-  iconBaseClass: {
-    type: String,
-    default: () => $ui.notification.icon.base
-  },
-  timeout: {
-    type: Number,
-    default: 5000
-  },
-  actions: {
-    type: Array as PropType<{
-      label: string,
-      click: Function
-    }[]>,
-    default: () => []
-  },
-  callback: {
-    type: Function,
-    default: null
+  emits: ['close'],
+  setup (props, { emit }) {
+    // TODO: Remove
+    const appConfig = useAppConfig()
+
+    const ui = computed<Partial<typeof appConfig.ui.notification>>(() => defu({}, props.ui, appConfig.ui.notification))
+
+    let timer: any = null
+    const remaining = ref(props.timeout)
+
+    const progressBarStyle = computed(() => {
+      const remainingPercent = remaining.value / props.timeout * 100
+
+      return { width: `${remainingPercent || 0}%` }
+    })
+
+    function onMouseover () {
+      if (timer) {
+        timer.pause()
+      }
+    }
+
+    function onMouseleave () {
+      if (timer) {
+        timer.resume()
+      }
+    }
+
+    function onClose () {
+      if (timer) {
+        timer.stop()
+      }
+
+      if (props.callback) {
+        props.callback()
+      }
+
+      emit('close')
+    }
+
+    function onAction (action: ToastNotificationAction) {
+      if (timer) {
+        timer.stop()
+      }
+
+      if (action.click) {
+        action.click()
+      }
+
+      emit('close')
+    }
+
+    onMounted(() => {
+      if (!props.timeout) {
+        return
+      }
+
+      timer = useTimer(() => {
+        onClose()
+      }, props.timeout)
+
+      watchEffect(() => {
+        remaining.value = timer.remaining.value
+      })
+    })
+
+    onUnmounted(() => {
+      if (timer) {
+        timer.stop()
+      }
+    })
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      progressBarStyle,
+      onMouseover,
+      onMouseleave,
+      onClose,
+      onAction
+    }
   }
 })
-
-const emit = defineEmits(['close'])
-
-let timer: any = null
-const remaining = ref(props.timeout)
-
-const iconName = computed(() => {
-  return props.icon || $ui.notification.type[props.type]
-})
-
-const iconClass = computed(() => {
-  return classNames(
-    props.iconBaseClass,
-    $ui.notification.icon.color[props.type] || 'u-text-gray-400'
-  )
-})
-
-const progressBarStyle = computed(() => {
-  const remainingPercent = remaining.value / props.timeout * 100
-  return { width: `${remainingPercent || 0}%` }
-})
-
-function onMouseover () {
-  if (timer) {
-    timer.pause()
-  }
-}
-
-function onMouseleave () {
-  if (timer) {
-    timer.resume()
-  }
-}
-
-function onClose () {
-  if (timer) {
-    timer.stop()
-  }
-
-  if (props.callback) {
-    props.callback()
-  }
-
-  emit('close')
-}
-
-function onAction (action: ToastNotificationAction) {
-  if (timer) {
-    timer.stop()
-  }
-
-  if (action.click) {
-    action.click()
-  }
-
-  emit('close')
-}
-
-onMounted(() => {
-  if (!props.timeout) {
-    return
-  }
-
-  timer = useTimer(() => {
-    onClose()
-  }, props.timeout)
-
-  watchEffect(() => {
-    remaining.value = timer.remaining.value
-  })
-})
-
-onUnmounted(() => {
-  if (timer) {
-    timer.stop()
-  }
-})
-</script>
-
-<script lang="ts">
-export default { name: 'UNotification' }
 </script>
