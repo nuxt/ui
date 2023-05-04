@@ -27,5 +27,11 @@ export default defineNuxtConfig({
   typescript: {
     strict: false,
     includeWorkspace: true
+  },
+  $production: {
+    routeRules: {
+      '/api/_content/**': { isr: true, static: true },
+      '/api/component-meta/**': { isr: true, static: true }
+    }
   }
 })
