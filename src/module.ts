@@ -67,10 +67,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui, preset)
 
-    nuxt.hook('app:resolve', (app) => {
-      app.configs.push(resolve(runtimeDir, 'app.config'))
-    })
-
     // @ts-ignore
     nuxt.hook('tailwindcss:config', function (tailwindConfig: TailwindConfig) {
       const globalColors = {
