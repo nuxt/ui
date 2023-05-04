@@ -1,11 +1,11 @@
-import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin, resolvePath } from '@nuxt/kit'
 import colors from 'tailwindcss/colors.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
-import { defu } from 'defu'
 import { name, version } from '../package.json'
 import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
-import { ui as preset } from './preset'
-import type { DeepPartial } from './runtime/types'
+import preset from './runtime/app.config'
+
+type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
 
 // @ts-ignore
 delete colors.lightBlue
@@ -24,7 +24,7 @@ declare module 'nuxt/schema' {
       primary?: string
       gray?: string
       colors?: string[]
-    } & DeepPartial<typeof preset>
+    } & DeepPartial<typeof preset.ui>
   }
 }
 
@@ -65,7 +65,10 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui, preset)
+    const appConfigFile = await resolvePath(resolve(runtimeDir, 'app.config'))
+    nuxt.hook('app:resolve', (app) => {
+      app.configs.push(appConfigFile)
+    })
 
     // @ts-ignore
     nuxt.hook('tailwindcss:config', function (tailwindConfig: TailwindConfig) {
