@@ -62,5 +62,8 @@
     "standard-version": "^9.5.0",
     "unbuild": "^1.2.1",
     "vue-tsc": "^1.6.3"
+  },
+  "volta": {
+    "node": "18.16.0"
   }
 }
