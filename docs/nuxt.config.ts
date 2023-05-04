@@ -28,13 +28,11 @@ export default defineNuxtConfig({
     strict: false,
     includeWorkspace: true
   },
+  // @ts-ignore
   $production: {
     routeRules: {
       '/api/_content/**': { isr: true, static: true },
       '/api/component-meta/**': { isr: true, static: true }
-    },
-    experimental: {
-      payloadExtraction: true
     }
   }
 })

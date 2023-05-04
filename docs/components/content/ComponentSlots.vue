@@ -30,7 +30,7 @@ const slug = props.slug || route.params.slug[1]
 const camelName = useCamelCase(slug)
 const name = `U${useUpperFirst(camelName)}`
 
-const { data: meta } = await useAsyncData(`${name}-meta`, () => $fetch<{ meta: { slots: { name: string }[] } }>(`/api/component-meta/${name}`))
+const meta = await fetchComponentMeta(name)
 </script>
 
 <script lang="ts">

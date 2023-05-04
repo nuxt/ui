@@ -93,7 +93,7 @@ const slug = props.slug || route.params.slug[1]
 const camelName = useCamelCase(slug)
 const name = `U${useUpperFirst(camelName)}`
 
-const { data: meta } = await useAsyncData(`${name}-meta`, () => $fetch(`/api/component-meta/${name}`))
+const meta = await fetchComponentMeta(name)
 
 // Computed
 
@@ -112,7 +112,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
     return null
   }
 
-  const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
+  const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
   const dottedKey = useKebabCase(key).replaceAll('-', '.')
   const keys = useGet(ui.value, dottedKey, {})
   let options = typeof keys === 'object' && Object.keys(keys)
@@ -136,7 +136,7 @@ const code = computed(() => {
       continue
     }
 
-    const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
+    const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
 
     code += ` ${(prop?.type === 'boolean' && value !== true) || typeof value === 'object' ? ':' : ''}${key === 'modelValue' ? 'value' : useKebabCase(key)}${prop?.type === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
   }

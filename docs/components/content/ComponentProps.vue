@@ -43,9 +43,9 @@ const slug = props.slug || route.params.slug[1]
 const camelName = useCamelCase(slug)
 const name = `U${useUpperFirst(camelName)}`
 
-const { data: meta } = await useAsyncData(`${name}-meta`, () => $fetch(`/api/component-meta/${name}`))
+const meta = await fetchComponentMeta(name)
 
-const metaProps = computed(() => useSortBy(meta.value?.meta?.props || [], [
+const metaProps = computed(() => useSortBy(meta?.meta?.props || [], [
   prop => ['string', 'number', 'boolean', 'any'].indexOf(prop.type)
 ]))
 </script>
