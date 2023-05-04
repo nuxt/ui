@@ -677,32 +677,30 @@ const notifications = {
   container: 'px-4 sm:px-6 py-6 space-y-3 overflow-y-auto'
 }
 
-export default {
-  ui: {
-    avatar,
-    avatarGroup,
-    badge,
-    button,
-    buttonGroup,
-    dropdown,
-    input,
-    inputGroup,
-    textarea,
-    select,
-    selectMenu,
-    checkbox,
-    radio,
-    toggle,
-    card,
-    container,
-    verticalNavigation,
-    commandPalette,
-    modal,
-    slideover,
-    popover,
-    tooltip,
-    contextMenu,
-    notification,
-    notifications
-  }
+export const ui = {
+  avatar,
+  avatarGroup,
+  badge,
+  button,
+  buttonGroup,
+  dropdown,
+  input,
+  inputGroup,
+  textarea,
+  select,
+  selectMenu,
+  checkbox,
+  radio,
+  toggle,
+  card,
+  container,
+  verticalNavigation,
+  commandPalette,
+  modal,
+  slideover,
+  popover,
+  tooltip,
+  contextMenu,
+  notification,
+  notifications
 }

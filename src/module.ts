@@ -1,9 +1,10 @@
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
 import colors from 'tailwindcss/colors.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
+import { defu } from 'defu'
 import { name, version } from '../package.json'
 import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
-import preset from './runtime/app.config'
+import { ui as preset } from './preset'
 import type { DeepPartial } from './runtime/types'
 
 // @ts-ignore
@@ -23,7 +24,7 @@ declare module 'nuxt/schema' {
       primary?: string
       gray?: string
       colors?: string[]
-    } & DeepPartial<typeof preset.ui>
+    } & DeepPartial<typeof preset>
   }
 }
 
@@ -63,6 +64,8 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
+
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui, preset)
 
     nuxt.hook('app:resolve', (app) => {
       app.configs.push(resolve(runtimeDir, 'app.config'))
