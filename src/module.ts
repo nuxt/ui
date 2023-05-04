@@ -65,7 +65,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
 
     nuxt.hook('app:resolve', (app) => {
-      app.configs.push(resolve(runtimeDir, 'app.config.ts'))
+      app.configs.push(resolve(runtimeDir, 'app.config'))
     })
 
     // @ts-ignore
