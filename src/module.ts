@@ -4,7 +4,7 @@ import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { defu } from 'defu'
 import { name, version } from '../package.json'
 import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
-import { ui as preset } from './preset'
+import appConfig from './runtime/app.config'
 import type { DeepPartial } from './runtime/types'
 
 // @ts-ignore
@@ -24,7 +24,7 @@ declare module 'nuxt/schema' {
       primary?: string
       gray?: string
       colors?: string[]
-    } & DeepPartial<typeof preset>
+    } & DeepPartial<typeof appConfig.ui>
   }
 }
 
@@ -65,7 +65,11 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui, preset)
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui, appConfig.ui)
+
+    nuxt.hook('app:resolve', (app) => {
+      app.configs.push(resolve(runtimeDir, 'app.config'))
+    })
 
     // @ts-ignore
     nuxt.hook('tailwindcss:config', function (tailwindConfig: TailwindConfig) {
