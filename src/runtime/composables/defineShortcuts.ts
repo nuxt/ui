@@ -1,6 +1,7 @@
 import type { ComputedRef, WatchSource } from 'vue'
 import { logicAnd, logicNot } from '@vueuse/math'
-import { computed, onMounted, onBeforeUnmount } from 'vue'
+import { useEventListener } from '@vueuse/core'
+import { computed } from 'vue'
 import { useShortcuts } from './useShortcuts'
 
 export interface ShortcutConfig {
@@ -52,58 +53,51 @@ export const defineShortcuts = (config: ShortcutsConfig) => {
     }
   }
 
-  onMounted(() => {
-    // Map config to full detailled shortcuts
-    shortcuts = Object.entries(config).map(([key, shortcutConfig]) => {
-      if (!shortcutConfig) {
-        return null
-      }
+  // Map config to full detailled shortcuts
+  shortcuts = Object.entries(config).map(([key, shortcutConfig]) => {
+    if (!shortcutConfig) {
+      return null
+    }
 
-      // Parse key and modifiers
-      const keySplit = key.toLowerCase().split('_').map(k => k)
-      let shortcut: Partial<Shortcut> = {
-        key: keySplit.filter(k => !['meta', 'ctrl', 'shift', 'alt'].includes(k)).join('_'),
-        metaKey: keySplit.includes('meta'),
-        ctrlKey: keySplit.includes('ctrl'),
-        shiftKey: keySplit.includes('shift'),
-        altKey: keySplit.includes('alt')
-      }
+    // Parse key and modifiers
+    const keySplit = key.toLowerCase().split('_').map(k => k)
+    let shortcut: Partial<Shortcut> = {
+      key: keySplit.filter(k => !['meta', 'ctrl', 'shift', 'alt'].includes(k)).join('_'),
+      metaKey: keySplit.includes('meta'),
+      ctrlKey: keySplit.includes('ctrl'),
+      shiftKey: keySplit.includes('shift'),
+      altKey: keySplit.includes('alt')
+    }
 
-      // Convert Meta to Ctrl for non-MacOS
-      if (!macOS.value && shortcut.metaKey && !shortcut.ctrlKey) {
-        shortcut.metaKey = false
-        shortcut.ctrlKey = true
-      }
+    // Convert Meta to Ctrl for non-MacOS
+    if (!macOS.value && shortcut.metaKey && !shortcut.ctrlKey) {
+      shortcut.metaKey = false
+      shortcut.ctrlKey = true
+    }
 
-      // Retrieve handler function
-      if (typeof shortcutConfig === 'function') {
-        shortcut.handler = shortcutConfig
-      } else if (typeof shortcutConfig === 'object') {
-        shortcut = { ...shortcut, handler: shortcutConfig.handler }
-      }
+    // Retrieve handler function
+    if (typeof shortcutConfig === 'function') {
+      shortcut.handler = shortcutConfig
+    } else if (typeof shortcutConfig === 'object') {
+      shortcut = { ...shortcut, handler: shortcutConfig.handler }
+    }
 
-      if (!shortcut.handler) {
-        // eslint-disable-next-line no-console
-        console.trace('[Shortcut] Invalid value')
-        return null
-      }
+    if (!shortcut.handler) {
+      console.trace('[Shortcut] Invalid value')
+      return null
+    }
 
-      // Create shortcut computed
-      const conditions: ComputedRef<Boolean>[] = []
-      if (!(shortcutConfig as ShortcutConfig).usingInput) {
-        conditions.push(logicNot(usingInput))
-      } else if (typeof (shortcutConfig as ShortcutConfig).usingInput === 'string') {
-        conditions.push(computed(() => usingInput.value === (shortcutConfig as ShortcutConfig).usingInput))
-      }
-      shortcut.condition = logicAnd(...conditions, ...((shortcutConfig as ShortcutConfig).whenever || []))
+    // Create shortcut computed
+    const conditions: ComputedRef<Boolean>[] = []
+    if (!(shortcutConfig as ShortcutConfig).usingInput) {
+      conditions.push(logicNot(usingInput))
+    } else if (typeof (shortcutConfig as ShortcutConfig).usingInput === 'string') {
+      conditions.push(computed(() => usingInput.value === (shortcutConfig as ShortcutConfig).usingInput))
+    }
+    shortcut.condition = logicAnd(...conditions, ...((shortcutConfig as ShortcutConfig).whenever || []))
 
-      return shortcut as Shortcut
-    }).filter(Boolean) as Shortcut[]
+    return shortcut as Shortcut
+  }).filter(Boolean) as Shortcut[]
 
-    document.addEventListener('keydown', onKeyDown)
-  })
-
-  onBeforeUnmount(() => {
-    document.removeEventListener('keydown', onKeyDown)
-  })
+  useEventListener('keydown', onKeyDown)
 }
