@@ -72,7 +72,7 @@ const badge = {
 }
 
 const button = {
-  base: 'focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75',
+  base: 'focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0',
   font: 'font-medium',
   rounded: 'rounded-md',
   size: {
