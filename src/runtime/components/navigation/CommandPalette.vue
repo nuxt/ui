@@ -126,7 +126,7 @@ export default defineComponent({
       default: () => appConfig.ui.commandPalette.default.selectedIcon
     },
     close: {
-      type: Object as PropType<Partial<UButtonType>>,
+      type: Object as PropType<Partial<ButtonType>>,
       default: () => appConfig.ui.commandPalette.default.close
     },
     empty: {
