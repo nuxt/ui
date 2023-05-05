@@ -2,7 +2,7 @@
   <div :class="ui.wrapper">
     <div v-if="notifications.length" :class="ui.container">
       <div v-for="notification of notifications" :key="notification.id">
-        <Notification
+        <UNotification
           v-bind="notification"
           :class="notification.click && 'cursor-pointer'"
           @click="notification.click && notification.click(notification)"
@@ -19,7 +19,7 @@ import type { PropType } from 'vue'
 import { defu } from 'defu'
 import type { ToastNotification } from '../../types'
 import { useToast } from '../../composables/useToast'
-import Notification from './Notification.vue'
+import UNotification from './Notification.vue'
 import { useState, useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -29,7 +29,7 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    Notification
+    UNotification
   },
   props: {
     ui: {

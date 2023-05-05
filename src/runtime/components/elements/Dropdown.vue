@@ -27,8 +27,8 @@
                 @click="item.click"
               >
                 <slot :name="item.slot || 'item'" :item="item">
-                  <Icon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
-                  <Avatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
+                  <UIcon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
+                  <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
 
                   <span class="truncate">{{ item.label }}</span>
 
@@ -51,8 +51,8 @@ import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import { defineComponent, ref, computed, onMounted } from 'vue'
 import { defu } from 'defu'
-import Icon from '../elements/Icon.vue'
-import Avatar from '../elements/Avatar.vue'
+import UIcon from '../elements/Icon.vue'
+import UAvatar from '../elements/Avatar.vue'
 import { classNames, omit } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import type { Avatar as AvatarType } from '../../types/avatar'
@@ -72,8 +72,8 @@ export default defineComponent({
     MenuButton,
     MenuItems,
     MenuItem,
-    Icon,
-    Avatar
+    UIcon,
+    UAvatar
   },
   props: {
     items: {

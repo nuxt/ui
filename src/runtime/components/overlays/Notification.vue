@@ -8,8 +8,8 @@
       <div :class="[ui.container, ui.rounded, ui.ring]">
         <div class="p-4">
           <div class="flex gap-3" :class="{ 'items-start': description, 'items-center': !description }">
-            <Icon v-if="icon" :name="icon" :class="ui.icon" />
-            <Avatar v-if="avatar" v-bind="avatar" :class="ui.avatar" />
+            <UIcon v-if="icon" :name="icon" :class="ui.icon" />
+            <UAvatar v-if="avatar" v-bind="avatar" :class="ui.avatar" />
 
             <div class="w-0 flex-1">
               <p :class="ui.title">
@@ -20,15 +20,15 @@
               </p>
 
               <div v-if="description && actions.length" class="mt-3 flex items-center gap-2">
-                <Button v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
+                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
               </div>
             </div>
             <div class="flex-shrink-0 flex items-center gap-3">
               <div v-if="!description && actions.length" class="flex items-center gap-2">
-                <Button v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
+                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
               </div>
 
-              <Button v-if="close" v-bind="{ ...ui.default.close, ...close }" @click.stop="onClose" />
+              <UButton v-if="close" v-bind="{ ...ui.default.close, ...close }" @click.stop="onClose" />
             </div>
           </div>
         </div>
@@ -42,9 +42,9 @@
 import { ref, computed, onMounted, onUnmounted, watchEffect, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import Icon from '../elements/Icon.vue'
-import Avatar from '../elements/Avatar.vue'
-import Button from '../elements/Button.vue'
+import UIcon from '../elements/Icon.vue'
+import UAvatar from '../elements/Avatar.vue'
+import UButton from '../elements/Button.vue'
 import { useTimer } from '../../composables/useTimer'
 import type { ToastNotificationAction } from '../../types'
 import type { Avatar as AvatarType } from '../../types/avatar'
@@ -58,10 +58,9 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    Icon,
-    Avatar,
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Button
+    UIcon,
+    UAvatar,
+    UButton
   },
   props: {
     id: {

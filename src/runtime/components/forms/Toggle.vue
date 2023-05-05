@@ -5,10 +5,10 @@
   >
     <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
       <span v-if="iconOn" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
-        <Icon :name="iconOn" :class="ui.icon.on" />
+        <UIcon :name="iconOn" :class="ui.icon.on" />
       </span>
       <span v-if="iconOff" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
-        <Icon :name="iconOff" :class="ui.icon.off" />
+        <UIcon :name="iconOff" :class="ui.icon.off" />
       </span>
     </span>
   </Switch>
@@ -19,7 +19,7 @@ import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { Switch } from '@headlessui/vue'
-import Icon from '../elements/Icon.vue'
+import UIcon from '../elements/Icon.vue'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -31,7 +31,7 @@ export default defineComponent({
   components: {
     // eslint-disable-next-line vue/no-reserved-component-names
     Switch,
-    Icon
+    UIcon
   },
   props: {
     modelValue: {

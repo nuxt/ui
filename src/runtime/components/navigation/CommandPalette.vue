@@ -9,7 +9,7 @@
   >
     <div :class="ui.wrapper">
       <div v-if="searchable" :class="ui.input.wrapper">
-        <Icon v-if="icon" :name="icon" :class="ui.input.icon" aria-hidden="true" />
+        <UIcon v-if="icon" :name="icon" :class="ui.input.icon" aria-hidden="true" />
         <ComboboxInput
           ref="comboboxInput"
           :value="query"
@@ -19,7 +19,7 @@
           @change="query = $event.target.value"
         />
 
-        <Button
+        <UButton
           v-if="close"
           v-bind="close"
           :class="ui.input.close"
@@ -53,7 +53,7 @@
       </ComboboxOptions>
 
       <div v-else-if="empty" :class="ui.empty.wrapper">
-        <Icon v-if="empty.icon" :name="empty.icon" :class="ui.empty.icon" aria-hidden="true" />
+        <UIcon v-if="empty.icon" :name="empty.icon" :class="ui.empty.icon" aria-hidden="true" />
         <p :class="query ? ui.empty.queryLabel : ui.empty.label">
           {{ query ? empty.queryLabel : empty.label }}
         </p>
@@ -72,8 +72,8 @@ import { groupBy, map } from 'lodash-es'
 import { defu } from 'defu'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Group, Command } from '../../types/command-palette'
-import Icon from '../elements/Icon.vue'
-import Button from '../elements/Button.vue'
+import UIcon from '../elements/Icon.vue'
+import UButton from '../elements/Button.vue'
 import type { Button as ButtonType } from '../../types/button'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 import { useAppConfig } from '#imports'
@@ -88,9 +88,8 @@ export default defineComponent({
     Combobox,
     ComboboxInput,
     ComboboxOptions,
-    Icon,
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Button,
+    UIcon,
+    UButton,
     CommandPaletteGroup
   },
   props: {
@@ -127,7 +126,7 @@ export default defineComponent({
       default: () => appConfig.ui.commandPalette.default.selectedIcon
     },
     close: {
-      type: Object as PropType<Partial<ButtonType>>,
+      type: Object as PropType<Partial<UButtonType>>,
       default: () => appConfig.ui.commandPalette.default.close
     },
     empty: {

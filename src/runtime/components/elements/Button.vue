@@ -6,13 +6,13 @@
     :aria-label="ariaLabel"
     v-bind="buttonProps"
   >
-    <Icon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
+    <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     <slot>
       <span v-if="label" :class="[truncate ? 'text-left break-all line-clamp-1' : '']">
         {{ label }}
       </span>
     </slot>
-    <Icon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+    <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
   </component>
 </template>
 
@@ -21,7 +21,7 @@ import { ref, computed, defineComponent, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
 import { defu } from 'defu'
-import Icon from '../elements/Icon.vue'
+import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { NuxtLink } from '#components'
 import { useAppConfig } from '#imports'
@@ -33,7 +33,7 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    Icon
+    UIcon
   },
   props: {
     type: {

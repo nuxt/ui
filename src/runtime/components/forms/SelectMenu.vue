@@ -24,7 +24,7 @@
       <slot :open="open" :disabled="disabled">
         <button :class="selectMenuClass" :disabled="disabled" type="button">
           <span v-if="icon" :class="leadingIconClass">
-            <Icon :name="icon" :class="iconClass" />
+            <UIcon :name="icon" :class="iconClass" />
           </span>
 
           <slot name="label">
@@ -33,7 +33,7 @@
           </slot>
 
           <span :class="trailingIconClass">
-            <Icon name="i-heroicons-chevron-down-20-solid" :class="iconClass" aria-hidden="true" />
+            <UIcon name="i-heroicons-chevron-down-20-solid" :class="iconClass" aria-hidden="true" />
           </span>
         </button>
       </slot>
@@ -65,8 +65,8 @@
             <li :class="resolveOptionClass({ active, disabled: optionDisabled })">
               <div :class="ui.option.container">
                 <slot name="option" :option="option" :active="active" :selected="selected">
-                  <Icon v-if="option.icon" :name="option.icon" :class="[ui.option.icon.base, active ? ui.option.icon.active : ui.option.icon.inactive, option.iconClass]" aria-hidden="true" />
-                  <Avatar
+                  <UIcon v-if="option.icon" :name="option.icon" :class="[ui.option.icon.base, active ? ui.option.icon.active : ui.option.icon.inactive, option.iconClass]" aria-hidden="true" />
+                  <UAvatar
                     v-else-if="option.avatar"
                     v-bind="{ size: ui.option.avatar.size, ...option.avatar }"
                     :class="ui.option.avatar.base"
@@ -79,7 +79,7 @@
               </div>
 
               <span v-if="selected" :class="ui.option.selected.wrapper">
-                <Icon :name="selectedIcon" :class="ui.option.selected.icon" aria-hidden="true" />
+                <UIcon :name="selectedIcon" :class="ui.option.selected.icon" aria-hidden="true" />
               </span>
             </li>
           </component>
@@ -109,8 +109,8 @@ import { ref, computed, watch, defineComponent } from 'vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { defu } from 'defu'
 import { Combobox, ComboboxButton, ComboboxOptions, ComboboxOption, ComboboxInput, Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
-import Icon from '../elements/Icon.vue'
-import Avatar from '../elements/Avatar.vue'
+import UIcon from '../elements/Icon.vue'
+import UAvatar from '../elements/Avatar.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
@@ -132,8 +132,8 @@ export default defineComponent({
     ListboxButton,
     ListboxOptions,
     ListboxOption,
-    Icon,
-    Avatar
+    UIcon,
+    UAvatar
   },
   props: {
     modelValue: {

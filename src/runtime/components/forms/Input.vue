@@ -19,10 +19,10 @@
     >
     <slot />
     <div v-if="isLeading && leadingIconName" :class="leadingIconClass">
-      <Icon :name="leadingIconName" :class="iconClass" />
+      <UIcon :name="leadingIconName" :class="iconClass" />
     </div>
     <div v-if="isTrailing && trailingIconName" :class="trailingIconClass">
-      <Icon :name="trailingIconName" :class="iconClass" />
+      <UIcon :name="trailingIconName" :class="iconClass" />
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@
 import { ref, computed, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import Icon from '../elements/Icon.vue'
+import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -42,7 +42,7 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    Icon
+    UIcon
   },
   props: {
     modelValue: {

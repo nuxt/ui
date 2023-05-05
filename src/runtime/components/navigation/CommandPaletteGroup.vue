@@ -16,8 +16,8 @@
         <div :class="[ui.group.command.base, active ? ui.group.command.active : ui.group.command.inactive, command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
           <div :class="ui.group.command.container">
             <slot :name="`${group.key}-icon`" :group="group" :command="command">
-              <Icon v-if="command.icon" :name="command.icon" :class="[ui.group.command.icon.base, active ? ui.group.command.icon.active : ui.group.command.icon.inactive, command.iconClass]" aria-hidden="true" />
-              <Avatar
+              <UIcon v-if="command.icon" :name="command.icon" :class="[ui.group.command.icon.base, active ? ui.group.command.icon.active : ui.group.command.icon.inactive, command.iconClass]" aria-hidden="true" />
+              <UAvatar
                 v-else-if="command.avatar"
                 v-bind="{ size: ui.group.command.avatar.size, ...command.avatar }"
                 :class="ui.group.command.avatar.base"
@@ -39,7 +39,7 @@
             </div>
           </div>
 
-          <Icon v-if="selected" :name="selectedIcon" :class="ui.group.command.selected.icon" aria-hidden="true" />
+          <UIcon v-if="selected" :name="selectedIcon" :class="ui.group.command.selected.icon" aria-hidden="true" />
           <slot v-else-if="active && (group.active || $slots[`${group.key}-active`])" :name="`${group.key}-active`" :group="group" :command="command">
             <span v-if="group.active" :class="ui.group.active">{{ group.active }}</span>
           </slot>
@@ -59,8 +59,8 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { ComboboxOption } from '@headlessui/vue'
-import Icon from '../elements/Icon.vue'
-import Avatar from '../elements/Avatar.vue'
+import UIcon from '../elements/Icon.vue'
+import UAvatar from '../elements/Avatar.vue'
 import type { Group } from '../../types/command-palette'
 // TODO: Remove
 // @ts-expect-error
@@ -71,8 +71,8 @@ import appConfig from '#build/app.config'
 export default defineComponent({
   components: {
     ComboboxOption,
-    Icon,
-    Avatar
+    UIcon,
+    UAvatar
   },
   props: {
     group: {

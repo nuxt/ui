@@ -1,6 +1,6 @@
 <template>
   <nav :class="ui.wrapper">
-    <LinkCustom
+    <ULinkCustom
       v-for="(link, index) of links"
       v-slot="{ isActive }"
       :key="index"
@@ -12,14 +12,14 @@
       @keyup.enter="$event.target.blur()"
     >
       <slot name="avatar" :link="link">
-        <Avatar
+        <UAvatar
           v-if="link.avatar"
           v-bind="{ size: ui.avatar.size, ...link.avatar }"
           :class="[ui.avatar.base]"
         />
       </slot>
       <slot name="icon" :link="link" :is-active="isActive">
-        <Icon
+        <UIcon
           v-if="link.icon"
           :name="link.icon"
           :class="[ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive, link.iconClass]"
@@ -33,7 +33,7 @@
           {{ link.badge }}
         </span>
       </slot>
-    </LinkCustom>
+    </ULinkCustom>
   </nav>
 </template>
 
@@ -42,9 +42,9 @@ import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import { defu } from 'defu'
-import Icon from '../elements/Icon.vue'
-import Avatar from '../elements/Avatar.vue'
-import LinkCustom from '../elements/LinkCustom.vue'
+import UIcon from '../elements/Icon.vue'
+import UAvatar from '../elements/Avatar.vue'
+import ULinkCustom from '../elements/LinkCustom.vue'
 import type { Avatar as AvatarType } from '../../types/avatar'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -55,9 +55,9 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    Icon,
-    Avatar,
-    LinkCustom
+    UIcon,
+    UAvatar,
+    ULinkCustom
   },
   props: {
     links: {

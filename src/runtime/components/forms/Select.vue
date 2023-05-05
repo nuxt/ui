@@ -37,11 +37,11 @@
     </select>
 
     <div v-if="icon" :class="leadingIconClass">
-      <Icon :name="icon" :class="iconClass" />
+      <UIcon :name="icon" :class="iconClass" />
     </div>
 
     <span :class="trailingIconClass">
-      <Icon name="i-heroicons-chevron-down-20-solid" :class="iconClass" aria-hidden="true" />
+      <UIcon name="i-heroicons-chevron-down-20-solid" :class="iconClass" aria-hidden="true" />
     </span>
   </div>
 </template>
@@ -51,7 +51,7 @@ import { computed, defineComponent } from 'vue'
 import type { PropType, ComputedRef } from 'vue'
 import { get } from 'lodash-es'
 import { defu } from 'defu'
-import Icon from '../elements/Icon.vue'
+import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -62,7 +62,7 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    Icon
+    UIcon
   },
   props: {
     modelValue: {

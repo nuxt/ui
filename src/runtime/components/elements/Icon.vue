@@ -2,11 +2,13 @@
   <span :class="name" />
 </template>
 
-<script setup lang="ts">
-defineProps({
-  name: {
-    type: String,
-    required: true
+<script lang="ts">
+export default defineComponent({
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
   }
 })
 </script>
