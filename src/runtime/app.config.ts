@@ -518,7 +518,7 @@ const modal = {
   base: 'relative text-left overflow-hidden sm:my-8 w-full flex flex-col',
   overlay: {
     base: 'fixed inset-0 transition-opacity',
-    background: 'bg-gray-500/75 dark:bg-gray-600/75',
+    background: 'bg-gray-200/75 dark:bg-gray-800/75',
     transition: {
       enter: 'ease-out duration-300',
       enterFrom: 'opacity-0',
@@ -548,7 +548,7 @@ const slideover = {
   wrapper: 'fixed inset-0 flex z-50',
   overlay: {
     base: 'fixed inset-0 transition-opacity',
-    background: 'bg-gray-500/75 dark:bg-gray-600/75',
+    background: 'bg-gray-200/75 dark:bg-gray-800/75',
     transition: {
       enter: 'ease-in-out duration-500',
       enterFrom: 'opacity-0',
