@@ -248,7 +248,7 @@ const input = {
   appearance: {
     white: 'border-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
     gray: 'border-0 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
-    none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none'
+    none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none placeholder:text-gray-400 dark:placeholder:text-gray-500'
   },
   icon: {
     base: 'text-gray-400 dark:text-gray-500',
