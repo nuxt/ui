@@ -78,7 +78,10 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.button.default.variant,
       validator (value: string) {
-        return Object.keys(appConfig.ui.button.variant).includes(value)
+        return [
+          ...Object.keys(appConfig.ui.button.variant),
+          ...Object.values(appConfig.ui.button.color).flatMap(value => Object.keys(value))
+        ].includes(value)
       }
     },
     icon: {
