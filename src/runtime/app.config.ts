@@ -424,11 +424,12 @@ const container = {
 // Navigation
 
 const verticalNavigation = {
-  wrapper: 'relative z-0',
-  base: 'group flex items-center gap-2 text-sm font-medium rounded-md w-full relative focus:outline-none after:absolute after:inset-px after:z-[-1] after:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
+  wrapper: 'relative',
+  base: 'group flex items-center gap-2 text-sm font-medium rounded-md w-full relative focus:outline-none before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
   spacing: 'px-3 py-1.5',
-  active: 'u-text-gray-900 after:bg-gray-100 dark:after:bg-gray-800',
-  inactive: 'u-text-gray-500 hover:u-text-gray-900 hover:after:bg-gray-50 dark:hover:after:bg-gray-800/50 focus-visible:after:bg-gray-50 dark:focus-visible:after:bg-gray-800/50',
+  active: 'u-text-gray-900 before:bg-gray-100 dark:before:bg-gray-800',
+  inactive: 'u-text-gray-500 hover:u-text-gray-900 hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 focus-visible:before:bg-gray-50 dark:focus-visible:before:bg-gray-800/50',
+  label: 'truncate z-0',
   icon: {
     base: 'flex-shrink-0 w-4 h-4',
     active: 'u-text-gray-700',
