@@ -1,22 +1,11 @@
 import { computed } from 'vue'
+import { hexToRgb } from '../utils/colors'
 import { defineNuxtPlugin, useHead, useAppConfig } from '#imports'
 import colors from '#tailwind-config/theme/colors'
 
-function hexToRgb (hex) {
-  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
-  hex = hex.replace(shorthandRegex, function (_, r, g, b) {
-    return r + r + g + g + b + b
-  })
-
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-  return result
-    ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}`
-    : null
-}
-
 export default defineNuxtPlugin(() => {
   const appConfig = useAppConfig()
+  const nuxtApp = useNuxtApp()
 
   const root = computed(() => `:root {
 ${Object.entries(colors[appConfig.ui.primary]).map(([key, value]) => `--color-primary-${key}: ${hexToRgb(value)};`).join('\n')}
@@ -25,10 +14,25 @@ ${Object.entries(colors[appConfig.ui.gray]).map(([key, value]) => `--color-gray-
   }`)
 
   // Head
-
-  useHead({
+  const headData: any = {
     style: [{
-      innerHTML: () => root.value
+      innerHTML: () => root.value,
+      tagPriority: -2
     }]
-  })
+  }
+
+  // SPA mode
+  if (process.client && nuxtApp.isHydrating && !nuxtApp.payload.serverRendered) {
+    const style = document.createElement('style')
+
+    style.innerHTML = root.value
+    style.setAttribute('data-nuxt-ui-colors', '')
+    document.head.appendChild(style)
+
+    headData.script = [{
+      innerHTML: 'document.head.removeChild(document.querySelector(\'[data-nuxt-ui-colors]\'))'
+    }]
+  }
+
+  useHead(headData)
 })
