@@ -23,7 +23,7 @@
               <Component
                 v-bind="omit(item, ['click'])"
                 :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'"
-                :class="[ui.item.base, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
+                :class="[ui.item.base, ui.item.spacing, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
                 @click="item.click"
               >
                 <slot :name="item.slot || 'item'" :item="item">

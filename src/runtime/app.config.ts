@@ -167,7 +167,10 @@ const dropdown = {
   divide: 'divide-y divide-gray-200 dark:divide-gray-700',
   spacing: 'p-1',
   item: {
-    base: 'group flex items-center gap-2 px-2 py-1.5 text-sm w-full rounded-md',
+    base: 'group flex items-center gap-2 w-full',
+    rounded: 'rounded-md',
+    spacing: 'px-2 py-1.5',
+    size: 'text-sm',
     active: 'bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white',
     inactive: 'text-gray-700 dark:text-gray-200',
     disabled: 'cursor-not-allowed opacity-50',
