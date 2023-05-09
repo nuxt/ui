@@ -11,8 +11,7 @@
     :class="ui.wrapper"
     @update:model-value="onUpdate"
   >
-    <!-- TODO: check that `name` fixes required -->
-    <!-- <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1" aria-hidden="true"> -->
+    <input :value="modelValue" :required="required" class="absolute inset-0 w-px opacity-0 cursor-default" tabindex="-1" aria-hidden="true">
 
     <component
       :is="searchable ? 'ComboboxButton' : 'ListboxButton'"
