@@ -394,12 +394,12 @@ const checkbox = {
 }
 
 const toggle = {
-  base: 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:ring-offset-white dark:focus:ring-offset-gray-900',
+  base: 'relative inline-flex flex-shrink-0 h-5 w-9 border-2 border-transparent rounded-full cursor-pointer disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   active: 'bg-primary-500 dark:bg-primary-400',
   inactive: 'bg-gray-200 dark:bg-gray-700',
   container: {
-    base: 'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
-    active: 'translate-x-5',
+    base: 'pointer-events-none relative inline-block h-4 w-4 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
+    active: 'translate-x-4',
     inactive: 'translate-x-0'
   },
   icon: {
