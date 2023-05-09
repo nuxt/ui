@@ -17,7 +17,7 @@ const avatar = {
     '3xl': 'h-20 w-20 text-3xl'
   },
   chip: {
-    base: 'absolute block rounded-full ring-2 ring-white dark:ring-gray-900',
+    base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900',
     position: {
       'top-right': 'top-0 right-0',
       'bottom-right': 'bottom-0 right-0',
