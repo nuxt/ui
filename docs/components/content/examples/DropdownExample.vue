@@ -7,10 +7,12 @@ const items = [
     }
   }], [{
     label: 'Edit',
-    icon: 'i-heroicons-pencil-square-20-solid'
+    icon: 'i-heroicons-pencil-square-20-solid',
+    shortcuts: ['E']
   }, {
     label: 'Duplicate',
-    icon: 'i-heroicons-document-duplicate-20-solid'
+    icon: 'i-heroicons-document-duplicate-20-solid',
+    shortcuts: ['D']
   }], [{
     label: 'Archive',
     icon: 'i-heroicons-archive-box-20-solid'
@@ -19,7 +21,8 @@ const items = [
     icon: 'i-heroicons-arrow-right-circle-20-solid'
   }], [{
     label: 'Delete',
-    icon: 'i-heroicons-trash-20-solid'
+    icon: 'i-heroicons-trash-20-solid',
+    shortcuts: ['⌘', 'D']
   }]
 ]
 </script>

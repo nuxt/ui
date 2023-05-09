@@ -179,7 +179,7 @@ const dropdown = {
       base: 'flex-shrink-0',
       size: '3xs'
     },
-    shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400 ml-auto'
+    shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ml-auto'
   },
   transition: {
     enterActiveClass: 'transition duration-100 ease-out',
@@ -192,6 +192,23 @@ const dropdown = {
   popper: {
     placement: 'bottom-end',
     strategy: 'fixed'
+  }
+}
+
+const kbd = {
+  base: 'inline-flex items-center justify-center text-gray-900 dark:text-white',
+  spacing: 'px-1',
+  size: {
+    xs: 'h-4 min-w-[16px] text-[10px]',
+    sm: 'h-5 min-w-[20px] text-[11px]',
+    md: 'h-6 min-w-[24px] text-[12px]'
+  },
+  rounded: 'rounded',
+  font: 'font-medium font-sans',
+  background: 'bg-gray-100 dark:bg-gray-800',
+  ring: 'ring-1 ring-gray-300 dark:ring-gray-700 ring-inset',
+  default: {
+    size: 'sm'
   }
 }
 
@@ -494,7 +511,7 @@ const commandPalette = {
       selected: {
         icon: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
       },
-      shortcuts: 'hidden md:inline-flex flex-shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400'
+      shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5'
     },
     active: 'flex-shrink-0 text-gray-500 dark:text-gray-400',
     inactive: 'flex-shrink-0 text-gray-500 dark:text-gray-400'
@@ -582,7 +599,7 @@ const tooltip = {
   rounded: 'rounded',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
-  shortcuts: 'hidden md:inline-flex items-center justify-end flex-shrink-0 gap-0.5 ml-1',
+  shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5',
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
     enterFromClass: 'opacity-0 translate-y-1',
@@ -688,6 +705,7 @@ export default {
     button,
     buttonGroup,
     dropdown,
+    kbd,
     input,
     inputGroup,
     textarea,

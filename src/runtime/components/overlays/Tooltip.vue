@@ -12,10 +12,10 @@
           </slot>
 
           <span v-if="shortcuts?.length" :class="ui.shortcuts">
-            <span class="mr-1 text-gray-700 dark:text-gray-200">&middot;</span>
-            <kbd v-for="shortcut of shortcuts" :key="shortcut" class="flex items-center justify-center font-sans px-1 h-4 min-w-[16px] text-[10px] bg-gray-100 dark:bg-gray-800 rounded text-gray-900 dark:text-white">
+            <span class="mx-1 text-gray-700 dark:text-gray-200">&middot;</span>
+            <UKbd v-for="shortcut of shortcuts" :key="shortcut" size="xs">
               {{ shortcut }}
-            </kbd>
+            </Ukbd>
           </span>
         </div>
       </transition>
@@ -27,6 +27,7 @@
 import { computed, ref, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
+import UKbd from '../elements/Kbd.vue'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
@@ -37,6 +38,9 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  components: {
+    UKbd
+  },
   props: {
     text: {
       type: String,

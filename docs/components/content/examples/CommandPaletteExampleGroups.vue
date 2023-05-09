@@ -10,10 +10,10 @@ const users = [
 ]
 
 const actions = [
-  { id: 'new-file', label: 'Add new file', icon: 'i-heroicons-document-plus', click: () => alert('New file') },
-  { id: 'new-folder', label: 'Add new folder', icon: 'i-heroicons-folder-plus', click: () => alert('New folder') },
-  { id: 'hashtag', label: 'Add hashtag', icon: 'i-heroicons-hashtag', click: () => alert('Add hashtag') },
-  { id: 'label', label: 'Add label', icon: 'i-heroicons-tag', click: () => alert('Add label') }
+  { id: 'new-file', label: 'Add new file', icon: 'i-heroicons-document-plus', click: () => alert('New file'), shortcuts: ['⌘', 'N'] },
+  { id: 'new-folder', label: 'Add new folder', icon: 'i-heroicons-folder-plus', click: () => alert('New folder'), shortcuts: ['⌘', 'F'] },
+  { id: 'hashtag', label: 'Add hashtag', icon: 'i-heroicons-hashtag', click: () => alert('Add hashtag'), shortcuts: ['⌘', 'H'] },
+  { id: 'label', label: 'Add label', icon: 'i-heroicons-tag', click: () => alert('Add label'), shortcuts: ['⌘', 'L'] }
 ]
 
 const groups = computed(() => commandPaletteRef.value?.query

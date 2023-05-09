@@ -14,9 +14,9 @@
           >
             Search
 
-            <div class="hidden lg:flex items-center gap-1 ml-auto -my-1">
-              <Shortcut value="meta" />
-              <Shortcut value="K" />
+            <div class="hidden lg:flex items-center gap-0.5 ml-auto -my-1">
+              <UKbd>{{ metaSymbol }}</UKbd>
+              <UKbd>K</UKbd>
             </div>
           </UButton>
         </div>
@@ -30,4 +30,5 @@
 
 <script setup lang="ts">
 const { isSearchModalOpen } = useDocs()
+const { metaSymbol } = useShortcuts()
 </script>

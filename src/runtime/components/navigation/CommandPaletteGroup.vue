@@ -45,7 +45,7 @@
           </slot>
           <slot v-else :name="`${group.key}-inactive`" :group="group" :command="command">
             <span v-if="command.shortcuts?.length" :class="ui.group.command.shortcuts">
-              <kbd v-for="shortcut of command.shortcuts" :key="shortcut" class="font-sans">{{ shortcut }}</kbd>
+              <UKbd v-for="shortcut of command.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
             </span>
             <span v-else-if="!command.disabled && group.inactive" :class="ui.group.inactive">{{ group.inactive }}</span>
           </slot>
@@ -61,6 +61,7 @@ import type { PropType } from 'vue'
 import { ComboboxOption } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
+import UKbd from '../elements/Kbd.vue'
 import type { Group } from '../../types/command-palette'
 // TODO: Remove
 // @ts-expect-error
@@ -72,7 +73,8 @@ export default defineComponent({
   components: {
     ComboboxOption,
     UIcon,
-    UAvatar
+    UAvatar,
+    UKbd
   },
   props: {
     group: {

@@ -33,7 +33,7 @@
                   <span class="truncate">{{ item.label }}</span>
 
                   <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
-                    <kbd v-for="shortcut of item.shortcuts" :key="shortcut" class="font-sans">{{ shortcut }}</kbd>
+                    <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
                   </span>
                 </slot>
               </Component>
@@ -53,7 +53,8 @@ import { defineComponent, ref, computed, onMounted } from 'vue'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
-import { classNames, omit } from '../../utils'
+import UKbd from '../elements/Kbd.vue'
+import { omit } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import type { Avatar as AvatarType } from '../../types/avatar'
 import type { PopperOptions } from '../../types'
@@ -73,7 +74,8 @@ export default defineComponent({
     MenuItems,
     MenuItem,
     UIcon,
-    UAvatar
+    UAvatar,
+    UKbd
   },
   props: {
     items: {
