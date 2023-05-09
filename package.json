@@ -33,7 +33,7 @@
     "@iconify-json/heroicons": "^1.1.10",
     "@nuxt/kit": "^3.4.3",
     "@nuxtjs/color-mode": "^3.2.0",
-    "@nuxtjs/tailwindcss": "^6.6.7",
+    "@nuxtjs/tailwindcss": "^6.6.8",
     "@popperjs/core": "^2.11.7",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.0.0-insiders.615a228",
