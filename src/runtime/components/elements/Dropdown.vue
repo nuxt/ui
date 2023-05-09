@@ -23,7 +23,7 @@
               <Component
                 v-bind="omit(item, ['click'])"
                 :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'"
-                :class="resolveItemClass({ active, disabled: itemDisabled })"
+                :class="[ui.item.base, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
                 @click="item.click"
               >
                 <slot :name="item.slot || 'item'" :item="item">
@@ -129,14 +129,6 @@ export default defineComponent({
 
     const [trigger, container] = usePopper(popper.value)
 
-    function resolveItemClass ({ active, disabled }: { active: boolean, disabled: boolean }) {
-      return classNames(
-        ui.value.item.base,
-        active ? ui.value.item.active : ui.value.item.inactive,
-        disabled && ui.value.item.disabled
-      )
-    }
-
     // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/menu/menu.ts#L131
     const menuApi = ref<any>(null)
 
@@ -200,7 +192,6 @@ export default defineComponent({
       ui,
       trigger,
       container,
-      resolveItemClass,
       onMouseOver,
       onMouseLeave,
       omit,
