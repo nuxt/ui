@@ -338,7 +338,7 @@ const selectMenu = {
   rounded: 'rounded-md',
   spacing: 'p-1',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
-  input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 u-text-gray-700 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10 placeholder-gray-400 dark:placeholder-gray-500',
+  input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10 placeholder-gray-400 dark:placeholder-gray-500',
   option: {
     base: 'cursor-default select-none relative flex items-center justify-between gap-1',
     rounded: 'rounded-md',
@@ -449,13 +449,13 @@ const verticalNavigation = {
   wrapper: 'relative',
   base: 'group flex items-center gap-2 text-sm font-medium rounded-md w-full relative focus:outline-none before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
   spacing: 'px-3 py-1.5',
-  active: 'u-text-gray-900 before:bg-gray-100 dark:before:bg-gray-800',
-  inactive: 'u-text-gray-500 hover:u-text-gray-900 hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 focus-visible:before:bg-gray-50 dark:focus-visible:before:bg-gray-800/50',
+  active: 'text-gray-900 dark:text-white before:bg-gray-100 dark:before:bg-gray-800',
+  inactive: 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 focus-visible:before:bg-gray-50 dark:focus-visible:before:bg-gray-800/50',
   label: 'truncate z-0',
   icon: {
     base: 'flex-shrink-0 w-4 h-4',
-    active: 'u-text-gray-700',
-    inactive: 'u-text-gray-400 group-hover:u-text-gray-700'
+    active: 'text-gray-700 dark:text-gray-200',
+    inactive: 'text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200'
   },
   avatar: {
     base: 'flex-shrink-0',
@@ -464,7 +464,7 @@ const verticalNavigation = {
   badge: {
     base: 'ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
     active: 'bg-white dark:bg-gray-900',
-    inactive: 'u-bg-gray-100 u-text-gray-600 group-hover:bg-white dark:group-hover:bg-gray-900'
+    inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 group-hover:bg-white dark:group-hover:bg-gray-900'
   }
 }
 
