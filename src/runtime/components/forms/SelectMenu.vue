@@ -62,7 +62,7 @@
             :value="option"
             :disabled="option.disabled"
           >
-            <li :class="resolveOptionClass({ active, disabled: optionDisabled })">
+            <li :class="[ui.option.base, ui.option.rounded, ui.option.spacing, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive, optionDisabled && ui.option.disabled]">
               <div :class="ui.option.container">
                 <slot name="option" :option="option" :active="active" :selected="selected">
                   <UIcon v-if="option.icon" :name="option.icon" :class="[ui.option.icon.base, active ? ui.option.icon.active : ui.option.icon.inactive, option.iconClass]" aria-hidden="true" />
@@ -85,7 +85,7 @@
           </component>
 
           <component :is="searchable ? 'ComboboxOption' : 'ListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
-            <li :class="resolveOptionClass({ active })">
+            <li :class="[ui.option.base, ui.option.rounded, ui.option.spacing, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive]">
               <div :class="ui.option.container">
                 <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
                   <span class="block truncate">Create "{{ queryOption[optionAttribute] }}"</span>
@@ -292,14 +292,6 @@ export default defineComponent({
       }
     })
 
-    function resolveOptionClass ({ active, disabled }: { active: boolean, disabled?: boolean }) {
-      return classNames(
-        ui.value.option.base,
-        active ? ui.value.option.active : ui.value.option.inactive,
-        disabled && ui.value.option.disabled
-      )
-    }
-
     function onUpdate (event: any) {
       if (query.value && searchInput.value?.$el) {
         query.value = ''
@@ -321,7 +313,6 @@ export default defineComponent({
       filteredOptions,
       queryOption,
       query,
-      resolveOptionClass,
       onUpdate
     }
   }
