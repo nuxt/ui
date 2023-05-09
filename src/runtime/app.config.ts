@@ -40,7 +40,7 @@ const avatar = {
     }
   },
   default: {
-    size: 'md',
+    size: 'sm',
     chipVariant: 'solid',
     chipPosition: 'top-right'
   }
