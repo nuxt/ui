@@ -31,7 +31,12 @@
               aria-label="Theme"
               @click="isDark = !isDark"
             />
+
+            <template #fallback>
+              <div class="w-8 h-8" />
+            </template>
           </ClientOnly>
+
           <UButton
             to="https://github.com/nuxtlabs/ui"
             target="_blank"
