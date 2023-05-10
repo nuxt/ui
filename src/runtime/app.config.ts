@@ -366,7 +366,8 @@ const selectMenu = {
       base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
     },
     selected: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center pr-2',
+      wrapper: 'absolute inset-y-0 right-0 flex items-center',
+      padding: 'pr-2',
       icon: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
     }
   },

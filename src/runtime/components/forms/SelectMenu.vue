@@ -77,7 +77,7 @@
                 </slot>
               </div>
 
-              <span v-if="selected" :class="ui.option.selected.wrapper">
+              <span v-if="selected" :class="[ui.option.selected.wrapper, ui.option.selected.padding]">
                 <UIcon :name="selectedIcon" :class="ui.option.selected.icon" aria-hidden="true" />
               </span>
             </li>
