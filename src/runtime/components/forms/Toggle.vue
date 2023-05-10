@@ -7,7 +7,7 @@
       <span v-if="iconOn" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
         <UIcon :name="iconOn" :class="ui.icon.on" />
       </span>
-      <span v-if="iconOff" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
+      <span v-if="iconOff" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]" aria-hidden="true">
         <UIcon :name="iconOff" :class="ui.icon.off" />
       </span>
     </span>
