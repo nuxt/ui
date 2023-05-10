@@ -45,7 +45,7 @@ export default defineComponent({
       type: String,
       default: null,
       validator (value: string) {
-        return appConfig.ui.colors.includes(value)
+        return ['gray', ...appConfig.ui.colors].includes(value)
       }
     },
     chipVariant: {

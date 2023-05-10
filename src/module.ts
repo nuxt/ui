@@ -121,7 +121,7 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
-      tailwindConfig.safelist.push(...[{
+      tailwindConfig.safelist.push(...['bg-gray-400', {
         pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|400|500)`)
       }, {
         pattern: new RegExp(`bg-(${safeColorsAsRegex})-500`),
