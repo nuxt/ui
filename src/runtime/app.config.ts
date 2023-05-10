@@ -92,7 +92,7 @@ const button = {
     lg: 'gap-x-2',
     xl: 'gap-x-2'
   },
-  spacing: {
+  padding: {
     '2xs': 'px-2 py-1',
     xs: 'px-2.5 py-1.5',
     sm: 'px-3 py-1.5',
@@ -165,11 +165,11 @@ const dropdown = {
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
   base: 'focus:outline-none',
   divide: 'divide-y divide-gray-200 dark:divide-gray-700',
-  spacing: 'p-1',
+  padding: 'p-1',
   item: {
     base: 'group flex items-center gap-2 w-full',
     rounded: 'rounded-md',
-    spacing: 'px-2 py-1.5',
+    padding: 'px-2 py-1.5',
     size: 'text-sm',
     active: 'bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white',
     inactive: 'text-gray-700 dark:text-gray-200',
@@ -201,7 +201,7 @@ const dropdown = {
 
 const kbd = {
   base: 'inline-flex items-center justify-center text-gray-900 dark:text-white',
-  spacing: 'px-1',
+  padding: 'px-1',
   size: {
     xs: 'h-4 min-w-[16px] text-[10px]',
     sm: 'h-5 min-w-[20px] text-[11px]',
@@ -238,7 +238,7 @@ const input = {
     lg: 'gap-x-2',
     xl: 'gap-x-2'
   },
-  spacing: {
+  padding: {
     '2xs': 'px-2 py-1',
     xs: 'px-2.5 py-1.5',
     sm: 'px-3 py-1.5',
@@ -247,7 +247,7 @@ const input = {
     xl: 'px-4 py-3'
   },
   leading: {
-    spacing: {
+    padding: {
       '2xs': 'pl-[26px]',
       xs: 'pl-8',
       sm: 'pl-9',
@@ -257,7 +257,7 @@ const input = {
     }
   },
   trailing: {
-    spacing: {
+    padding: {
       '2xs': 'pr-[26px]',
       xs: 'pr-8',
       sm: 'pr-9',
@@ -283,7 +283,7 @@ const input = {
     },
     leading: {
       wrapper: 'absolute inset-y-0 left-0 flex items-center pointer-events-none',
-      spacing: {
+      padding: {
         '2xs': 'pl-2',
         xs: 'pl-2.5',
         sm: 'pl-3',
@@ -294,7 +294,7 @@ const input = {
     },
     trailing: {
       wrapper: 'absolute inset-y-0 right-0 flex items-center pointer-events-none',
-      spacing: {
+      padding: {
         '2xs': 'pr-2',
         xs: 'pr-2.5',
         sm: 'pr-3',
@@ -339,13 +339,13 @@ const selectMenu = {
   background: 'bg-white dark:bg-gray-800',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
-  spacing: 'p-1',
+  padding: 'p-1',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
   input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10 placeholder-gray-400 dark:placeholder-gray-500',
   option: {
     base: 'cursor-default select-none relative flex items-center justify-between gap-1',
     rounded: 'rounded-md',
-    spacing: 'px-2 py-1.5',
+    padding: 'px-2 py-1.5',
     size: 'text-sm',
     color: 'text-gray-900 dark:text-white',
     container: 'flex items-center gap-2',
@@ -426,23 +426,23 @@ const card = {
   body: {
     base: '',
     background: '',
-    spacing: 'px-4 py-5 sm:p-6'
+    padding: 'px-4 py-5 sm:p-6'
   },
   header: {
     base: '',
     background: '',
-    spacing: 'px-4 py-5 sm:px-6'
+    padding: 'px-4 py-5 sm:px-6'
   },
   footer: {
     base: '',
     background: '',
-    spacing: 'px-4 py-4 sm:px-6'
+    padding: 'px-4 py-4 sm:px-6'
   }
 }
 
 const container = {
   base: 'mx-auto',
-  spacing: 'px-4 sm:px-6 lg:px-8',
+  padding: 'px-4 sm:px-6 lg:px-8',
   constrained: 'max-w-7xl'
 }
 
@@ -451,7 +451,7 @@ const container = {
 const verticalNavigation = {
   wrapper: 'relative',
   base: 'group flex items-center gap-2 text-sm font-medium rounded-md w-full relative focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
-  spacing: 'px-3 py-1.5',
+  padding: 'px-3 py-1.5',
   active: 'text-gray-900 dark:text-white before:bg-gray-100 dark:before:bg-gray-800 ',
   inactive: 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50',
   label: 'truncate relative',
@@ -476,9 +476,15 @@ const commandPalette = {
   container: 'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
   input: {
     wrapper: 'relative flex items-center',
-    base: 'w-full h-12 px-4 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0 sm:text-sm',
-    spacing: 'pl-10',
-    icon: 'pointer-events-none absolute left-4 h-4 w-4 text-gray-400 dark:text-gray-500',
+    base: 'w-full placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0',
+    padding: 'px-4',
+    height: 'h-12',
+    size: 'sm:text-sm',
+    icon: {
+      base: 'pointer-events-none absolute left-4 text-gray-400 dark:text-gray-500',
+      size: 'h-4 w-4',
+      padding: 'pl-10'
+    },
     close: 'absolute right-4'
   },
   empty: {
@@ -538,7 +544,7 @@ const modal = {
   wrapper: 'relative z-50',
   inner: 'fixed inset-0 overflow-y-auto',
   container: 'flex min-h-full items-end sm:items-center justify-center text-center',
-  spacing: 'p-4 sm:p-0',
+  padding: 'p-4 sm:p-0',
   base: 'relative text-left overflow-hidden sm:my-8 w-full flex flex-col',
   overlay: {
     base: 'fixed inset-0 transition-opacity',
@@ -586,11 +592,12 @@ const slideover = {
   background: 'bg-white dark:bg-gray-900',
   ring: '',
   rounded: '',
+  padding: '',
   shadow: 'shadow-xl',
   width: 'w-screen max-w-md',
   transition: {
-    enter: 'transform transition ease-in-out duration-500 sm:duration-700',
-    leave: 'transform transition ease-in-out duration-500 sm:duration-700'
+    enter: 'transform transition ease-in-out duration-300',
+    leave: 'transform transition ease-in-out duration-200'
   }
 }
 

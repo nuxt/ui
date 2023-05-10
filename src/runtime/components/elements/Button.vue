@@ -178,7 +178,7 @@ export default defineComponent({
         ui.value.rounded,
         ui.value.size[props.size],
         ui.value.gap[props.size],
-        props.padded && ui.value[isSquare.value ? 'square' : 'spacing'][props.size],
+        props.padded && ui.value[isSquare.value ? 'square' : 'padding'][props.size],
         variant?.replaceAll('{color}', props.color),
         props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
       )

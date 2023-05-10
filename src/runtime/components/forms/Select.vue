@@ -187,10 +187,10 @@ export default defineComponent({
       return classNames(
         ui.value.base,
         ui.value.size[props.size],
-        ui.value.spacing[props.size],
+        ui.value.padding[props.size],
         ui.value.appearance[props.appearance],
-        !!props.icon && ui.value.leading.spacing[props.size],
-        ui.value.trailing.spacing[props.size],
+        !!props.icon && ui.value.leading.padding[props.size],
+        ui.value.trailing.padding[props.size],
         ui.value.custom
       )
     })
@@ -205,14 +205,14 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return classNames(
         ui.value.icon.leading.wrapper,
-        ui.value.icon.leading.spacing[props.size]
+        ui.value.icon.leading.padding[props.size]
       )
     })
 
     const trailingIconClass = computed(() => {
       return classNames(
         ui.value.icon.trailing.wrapper,
-        ui.value.icon.trailing.spacing[props.size]
+        ui.value.icon.trailing.padding[props.size]
       )
     })
 

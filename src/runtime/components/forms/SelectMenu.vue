@@ -40,7 +40,7 @@
 
     <div v-if="open" ref="container" :class="[ui.container, ui.width]">
       <transition v-bind="ui.transition">
-        <component :is="searchable ? 'ComboboxOptions' : 'ListboxOptions'" static :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.spacing, ui.height]">
+        <component :is="searchable ? 'ComboboxOptions' : 'ListboxOptions'" static :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.padding, ui.height]">
           <ComboboxInput
             v-if="searchable"
             ref="searchInput"
@@ -61,7 +61,7 @@
             :value="option"
             :disabled="option.disabled"
           >
-            <li :class="[ui.option.base, ui.option.rounded, ui.option.spacing, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive, optionDisabled && ui.option.disabled]">
+            <li :class="[ui.option.base, ui.option.rounded, ui.option.padding, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive, optionDisabled && ui.option.disabled]">
               <div :class="ui.option.container">
                 <slot name="option" :option="option" :active="active" :selected="selected">
                   <UIcon v-if="option.icon" :name="option.icon" :class="[ui.option.icon.base, active ? ui.option.icon.active : ui.option.icon.inactive, option.iconClass]" aria-hidden="true" />
@@ -84,7 +84,7 @@
           </component>
 
           <component :is="searchable ? 'ComboboxOption' : 'ListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
-            <li :class="[ui.option.base, ui.option.rounded, ui.option.spacing, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive]">
+            <li :class="[ui.option.base, ui.option.rounded, ui.option.padding, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive]">
               <div :class="ui.option.container">
                 <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
                   <span class="block truncate">Create "{{ queryOption[optionAttribute] }}"</span>
@@ -239,10 +239,10 @@ export default defineComponent({
         'text-left cursor-default',
         uiSelect.value.size[props.size],
         uiSelect.value.gap[props.size],
-        uiSelect.value.spacing[props.size],
+        uiSelect.value.padding[props.size],
         uiSelect.value.appearance[props.appearance],
-        !!props.icon && uiSelect.value.leading.spacing[props.size],
-        uiSelect.value.trailing.spacing[props.size],
+        !!props.icon && uiSelect.value.leading.padding[props.size],
+        uiSelect.value.trailing.padding[props.size],
         uiSelect.value.custom,
         'inline-flex items-center'
       )
@@ -258,14 +258,14 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return classNames(
         uiSelect.value.icon.leading.wrapper,
-        uiSelect.value.icon.leading.spacing[props.size]
+        uiSelect.value.icon.leading.padding[props.size]
       )
     })
 
     const trailingIconClass = computed(() => {
       return classNames(
         uiSelect.value.icon.trailing.wrapper,
-        uiSelect.value.icon.trailing.spacing[props.size]
+        uiSelect.value.icon.trailing.padding[props.size]
       )
     })
 

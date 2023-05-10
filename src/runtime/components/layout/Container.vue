@@ -1,5 +1,5 @@
 <template>
-  <div :class="[ui.base, ui.spacing, ui.constrained]">
+  <div :class="[ui.base, ui.padding, ui.constrained]">
     <slot />
   </div>
 </template>

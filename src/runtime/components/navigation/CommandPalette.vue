@@ -9,11 +9,11 @@
   >
     <div :class="ui.wrapper">
       <div v-if="searchable" :class="ui.input.wrapper">
-        <UIcon v-if="icon" :name="icon" :class="ui.input.icon" aria-hidden="true" />
+        <UIcon v-if="icon" :name="icon" :class="[ui.input.icon.base, ui.input.icon.size]" aria-hidden="true" />
         <ComboboxInput
           ref="comboboxInput"
           :value="query"
-          :class="[ui.input.base, icon && ui.input.spacing]"
+          :class="[ui.input.base, ui.input.size, ui.input.height, ui.input.padding, icon && ui.input.icon.padding]"
           :placeholder="placeholder"
           autocomplete="off"
           @change="query = $event.target.value"

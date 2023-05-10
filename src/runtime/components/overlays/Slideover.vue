@@ -6,7 +6,7 @@
       </TransitionChild>
 
       <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-        <DialogPanel :class="[ui.base, ui.width, ui.background, ui.ring]">
+        <DialogPanel :class="[ui.base, ui.width, ui.background, ui.ring, ui.padding]">
           <slot />
         </DialogPanel>
       </TransitionChild>

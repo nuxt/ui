@@ -1,5 +1,5 @@
 <template>
-  <kbd :class="[ui.base, ui.size[size], ui.spacing, ui.rounded, ui.font, ui.background, ui.ring]">
+  <kbd :class="[ui.base, ui.size[size], ui.padding, ui.rounded, ui.font, ui.background, ui.ring]">
     <slot />
   </kbd>
 </template>

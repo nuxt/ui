@@ -18,12 +18,12 @@
     <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
       <transition appear v-bind="ui.transition">
         <MenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background]" static>
-          <div v-for="(subItems, index) of items" :key="index" :class="ui.spacing">
+          <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
               <Component
                 v-bind="omit(item, ['click'])"
                 :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'"
-                :class="[ui.item.base, ui.item.spacing, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
+                :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
                 @click="item.click"
               >
                 <slot :name="item.slot || 'item'" :item="item">

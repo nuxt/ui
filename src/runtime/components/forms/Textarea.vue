@@ -149,7 +149,7 @@ export default defineComponent({
       return classNames(
         ui.value.base,
         ui.value.size[props.size],
-        ui.value.spacing[props.size],
+        ui.value.padding[props.size],
         ui.value.appearance[props.appearance],
         !props.resize && 'resize-none',
         ui.value.custom
