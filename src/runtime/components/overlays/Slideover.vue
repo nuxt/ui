@@ -45,7 +45,7 @@ export default defineComponent({
     },
     side: {
       type: String,
-      default: 'left',
+      default: 'right',
       validator: (value: string) => ['left', 'right'].includes(value)
     },
     overlay: {
