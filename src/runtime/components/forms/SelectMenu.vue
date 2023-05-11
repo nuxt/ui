@@ -31,8 +31,8 @@
             <span v-else class="block truncate text-gray-400 dark:text-gray-500">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
-          <span :class="trailingIconClass">
-            <UIcon name="i-heroicons-chevron-down-20-solid" :class="iconClass" aria-hidden="true" />
+          <span v-if="trailingIcon" :class="trailingIconClass">
+            <UIcon :name="trailingIcon" :class="iconClass" aria-hidden="true" />
           </span>
         </button>
       </slot>
@@ -61,7 +61,7 @@
             :value="option"
             :disabled="option.disabled"
           >
-            <li :class="[ui.option.base, ui.option.rounded, ui.option.padding, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive, optionDisabled && ui.option.disabled]">
+            <li :class="[ui.option.base, ui.option.rounded, ui.option.padding, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive, selected && ui.option.selected, optionDisabled && ui.option.disabled]">
               <div :class="ui.option.container">
                 <slot name="option" :option="option" :active="active" :selected="selected">
                   <UIcon v-if="option.icon" :name="option.icon" :class="[ui.option.icon.base, active ? ui.option.icon.active : ui.option.icon.inactive, option.iconClass]" aria-hidden="true" />
@@ -77,8 +77,8 @@
                 </slot>
               </div>
 
-              <span v-if="selected" :class="[ui.option.selected.wrapper, ui.option.selected.padding]">
-                <UIcon :name="selectedIcon" :class="ui.option.selected.icon" aria-hidden="true" />
+              <span v-if="selected" :class="[ui.option.selectedIcon.wrapper, ui.option.selectedIcon.padding]">
+                <UIcon :name="selectedIcon" :class="ui.option.selectedIcon.base" aria-hidden="true" />
               </span>
             </li>
           </component>
@@ -158,6 +158,10 @@ export default defineComponent({
     icon: {
       type: String,
       default: null
+    },
+    trailingIcon: {
+      type: String,
+      default: () => appConfig.ui.selectMenu.default.trailingIcon
     },
     selectedIcon: {
       type: String,

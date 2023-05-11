@@ -357,9 +357,10 @@ const selectMenu = {
     padding: 'px-2 py-1.5',
     size: 'text-sm',
     color: 'text-gray-900 dark:text-white',
-    container: 'flex items-center gap-2',
+    container: 'flex items-center gap-2 min-w-0',
     active: 'bg-gray-100 dark:bg-gray-900',
     inactive: '',
+    selected: 'pr-7',
     disabled: 'cursor-not-allowed opacity-50',
     empty: 'text-sm text-gray-400 dark:text-gray-500 px-2 py-1.5',
     icon: {
@@ -367,17 +368,17 @@ const selectMenu = {
       active: 'text-gray-900 dark:text-white',
       inactive: 'text-gray-400 dark:text-gray-500'
     },
+    selectedIcon: {
+      wrapper: 'absolute inset-y-0 right-0 flex items-center',
+      padding: 'pr-2',
+      base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
+    },
     avatar: {
       base: 'flex-shrink-0',
       size: '3xs'
     },
     chip: {
       base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
-    },
-    selected: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center',
-      padding: 'pr-2',
-      icon: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
     }
   },
   transition: {
@@ -389,7 +390,8 @@ const selectMenu = {
     placement: 'bottom-end'
   },
   default: {
-    selectedIcon: 'i-heroicons-check-20-solid'
+    selectedIcon: 'i-heroicons-check-20-solid',
+    trailingIcon: 'i-heroicons-chevron-down-20-solid'
   }
 }
 
