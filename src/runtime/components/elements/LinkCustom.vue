@@ -1,5 +1,9 @@
 <template>
+  <button v-if="!$attrs.to" v-bind="$attrs" :class="inactiveClass">
+    <slot />
+  </button>
   <NuxtLink
+    v-else
     v-slot="{ href, navigate, exact, isActive, isExactActive }"
     custom
   >
