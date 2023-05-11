@@ -1,48 +1,38 @@
 import type { RouterConfig } from '@nuxt/schema'
+// https://router.vuejs.org/api/interfaces/routeroptions.html
+export default <RouterConfig> {
+  scrollBehavior (to, _form, savedPosition) {
+    if (history.state.stop) { return }
 
-function findHashPosition (hash): { el: any, behavior: ScrollBehavior, top: number } {
-  const el = document.querySelector(hash)
-  // vue-router does not incorporate scroll-margin-top on its own.
-  if (el) {
-    const top = parseFloat(getComputedStyle(el).scrollMarginTop)
-
-    return {
-      el: hash,
-      behavior: 'smooth',
-      top
-    }
-  }
-}
-
-// https://router.vuejs.org/api/#routeroptions
-export default <RouterConfig>{
-  scrollBehavior (to, from, savedPosition) {
-    const nuxtApp = useNuxtApp()
-
-    // If history back
-    if (savedPosition) {
-      // Handle Suspense resolution
-      return new Promise((resolve) => {
-        nuxtApp.hooks.hookOnce('page:finish', () => {
-          setTimeout(() => resolve(savedPosition), 50)
-        })
-      })
+    if (history.state.smooth) {
+      return {
+        el: history.state.smooth,
+        behavior: 'smooth'
+      }
     }
 
-    // Scroll to heading on click
     if (to.hash) {
-      return new Promise((resolve) => {
-        if (to.path === from.path) {
-          setTimeout(() => resolve(findHashPosition(to.hash)), 50)
-        } else {
-          nuxtApp.hooks.hookOnce('page:finish', () => {
-            setTimeout(() => resolve(findHashPosition(to.hash)), 50)
-          })
-        }
-      })
+      const el = document.querySelector(to.hash) as any
+
+      if (!el) { return }
+
+      const { marginTop } = getComputedStyle(el)
+
+      const marginTopValue = parseInt(marginTop)
+
+      const offset = (document.querySelector(to.hash) as any).offsetTop - marginTopValue
+
+      return {
+        top: offset,
+        behavior: 'smooth'
+      }
     }
 
     // Scroll to top of window
-    return { top: 0 }
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
   }
 }
