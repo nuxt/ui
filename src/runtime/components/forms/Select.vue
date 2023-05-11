@@ -40,8 +40,8 @@
       <UIcon :name="icon" :class="iconClass" />
     </div>
 
-    <span :class="trailingIconClass">
-      <UIcon name="i-heroicons-chevron-down-20-solid" :class="iconClass" aria-hidden="true" />
+    <span v-if="trailingIcon" :class="trailingIconClass">
+      <UIcon :name="trailingIcon" :class="iconClass" aria-hidden="true" />
     </span>
   </div>
 </template>
@@ -88,6 +88,10 @@ export default defineComponent({
     icon: {
       type: String,
       default: null
+    },
+    trailingIcon: {
+      type: String,
+      default: () => appConfig.ui.select.default.trailingIcon
     },
     options: {
       type: Array,

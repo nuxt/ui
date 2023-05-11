@@ -323,11 +323,20 @@ const inputGroup = {
 }
 
 const textarea = {
-  ...input
+  ...input,
+  default: {
+    size: 'sm',
+    appearance: 'white'
+  }
 }
 
 const select = {
-  ...input
+  ...input,
+  default: {
+    size: 'sm',
+    appearance: 'white',
+    trailingIcon: 'i-heroicons-chevron-down-20-solid'
+  }
 }
 
 const selectMenu = {
