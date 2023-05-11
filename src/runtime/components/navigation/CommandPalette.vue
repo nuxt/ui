@@ -8,7 +8,7 @@
     @update:model-value="onSelect"
   >
     <div :class="ui.wrapper">
-      <div v-if="searchable" :class="ui.input.wrapper">
+      <div v-show="searchable" :class="ui.input.wrapper">
         <UIcon v-if="icon" :name="icon" :class="[ui.input.icon.base, ui.input.icon.size]" aria-hidden="true" />
         <ComboboxInput
           ref="comboboxInput"
