@@ -25,7 +25,7 @@ function openContextMenu () {
       Right click here
     </Placeholder>
 
-    <UContextMenu v-model="isOpen" :virtual-element="virtualElement" width-class="w-48">
+    <UContextMenu v-model="isOpen" :virtual-element="virtualElement">
       <div class="p-4">
         Menu
       </div>
