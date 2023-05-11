@@ -291,6 +291,7 @@ export default defineComponent({
       ui,
       // eslint-disable-next-line vue/no-dupe-keys
       groups,
+      comboboxInput,
       query,
       onSelect,
       onClear
