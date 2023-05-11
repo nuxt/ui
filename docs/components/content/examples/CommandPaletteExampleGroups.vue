@@ -42,5 +42,5 @@ function onSelect (option) {
 </script>
 
 <template>
-  <UCommandPalette ref="commandPaletteRef" :groups="groups" @update:model-value="onSelect" />
+  <UCommandPalette ref="commandPaletteRef" :groups="groups" :autoselect="false" @update:model-value="onSelect" />
 </template>

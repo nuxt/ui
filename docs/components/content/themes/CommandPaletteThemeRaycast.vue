@@ -53,5 +53,12 @@ const ui = {
 </script>
 
 <template>
-  <UCommandPalette ref="commandPaletteRef" :groups="groups" icon="" :ui="ui" placeholder="Search for apps and commands" />
+  <UCommandPalette
+    ref="commandPaletteRef"
+    :groups="groups"
+    icon=""
+    :ui="ui"
+    :autoselect="false"
+    placeholder="Search for apps and commands"
+  />
 </template>

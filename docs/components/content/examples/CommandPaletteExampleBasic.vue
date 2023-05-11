@@ -20,7 +20,8 @@ const selected = ref([people[3]])
     v-model="selected"
     multiple
     nullable
+    :autoselect="false"
     :groups="[{ key: 'people', commands: people }]"
-    :fuse="{ resultLimit: 6 }"
+    :fuse="{ resultLimit: 6, fuseOptions: { threshold: 0.1 } }"
   />
 </template>

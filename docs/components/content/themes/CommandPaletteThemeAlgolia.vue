@@ -24,8 +24,14 @@ const ui = {
   wrapper: 'flex flex-col flex-1 min-h-0 bg-gray-50 dark:bg-gray-800',
   input: {
     wrapper: 'relative flex items-center mx-3 py-3',
-    base: 'w-full rounded border-2 border-primary-500 placeholder-gray-400 dark:placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-0 h-14 text-lg bg-white dark:bg-gray-900',
-    icon: 'pointer-events-none absolute left-3 h-6 w-6 text-primary-500 dark:text-primary-400'
+    base: 'w-full rounded border-2 border-primary-500 placeholder-gray-400 dark:placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-0 bg-white dark:bg-gray-900',
+    padding: 'px-4',
+    height: 'h-14',
+    size: 'text-lg',
+    icon: {
+      base: 'pointer-events-none absolute left-3 text-primary-500 dark:text-primary-400',
+      size: 'h-6 w-6'
+    }
   },
   group: {
     wrapper: 'p-3 relative',
@@ -60,6 +66,7 @@ const ui = {
     :ui="ui"
     :close="close"
     :empty="empty"
+    :autoselect="false"
     command-attribute="title"
     :fuse="{
       fuseOptions: { keys: ['title', 'category'] },
