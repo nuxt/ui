@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/nuxtlabs/ui/compare/v2.0.0...v2.0.1) (2023-05-11)
+
+
+### Bug Fixes
+
+* **app.config:** remove old `u-` classes ([939efba](https://github.com/nuxtlabs/ui/commit/939efba47ceb660e5448a3ea42f2acd71b9837ee))
+* **Avatar:** `gray` missing for `chipColor` ([fd4c80a](https://github.com/nuxtlabs/ui/commit/fd4c80acd4c70c7d378ebf780cd843115d8f434d))
+* **Avatar:** shrink chip ring ([ebf5fd6](https://github.com/nuxtlabs/ui/commit/ebf5fd6aeb2a5363e80457cf8245fbab5fbc17ca))
+* **Button:** `variant` validator takes color into account ([d1d8ab3](https://github.com/nuxtlabs/ui/commit/d1d8ab3c647d50f37832d1ae531550944d5aa8e3))
+* **colors:** missing `useNuxtApp` import ([76a0d61](https://github.com/nuxtlabs/ui/commit/76a0d61a0f7b3936b0eceff16e17bc6540fb946c))
+* **CommandPalette:** expose input ref to template ([192bf4c](https://github.com/nuxtlabs/ui/commit/192bf4c375293b16d952b94cc098a0260f47996a))
+* **CommandPalette:** put back searchable on `v-show` to input ref always exists ([aacb7e9](https://github.com/nuxtlabs/ui/commit/aacb7e98412d2973c6fc61d9cb3b6da9bd433eb0))
+* **CommandPalette:** wrong type usage ([4665563](https://github.com/nuxtlabs/ui/commit/4665563e6f9c4054cb1c859991369fe2cc844047))
+* **docs:** sticky search button `z-index` ([f48ead6](https://github.com/nuxtlabs/ui/commit/f48ead6faf6fd14deeff84ca7b25d6bb7fae6f12))
+* **Icon:** missing import ([cd430a4](https://github.com/nuxtlabs/ui/commit/cd430a4cad5143c5bd45c003086091f769e4f015))
+* **module:** remove `.ts` ext from app.config ([a076cae](https://github.com/nuxtlabs/ui/commit/a076cae4bfa387e1fd9800741b10702896c21ad2))
+* **Notifications:** missing `computed` from vue ([9ce43ac](https://github.com/nuxtlabs/ui/commit/9ce43ac68bcef3fb7fff8a9e317ad6d4a5ac2cb9))
+* prefix imported components ([0c69385](https://github.com/nuxtlabs/ui/commit/0c69385771ff1815cdcbff812962056da381a541))
+* put back app.config for hmr ([626409e](https://github.com/nuxtlabs/ui/commit/626409e1014ddcacaf6ee155830bd9862b335058))
+* remove augmentation of app ([#152](https://github.com/nuxtlabs/ui/issues/152)) ([f5c0030](https://github.com/nuxtlabs/ui/commit/f5c0030a198579e5929fd517b80e2e20c9bac769))
+* revert back to runtime app for hmr ([#153](https://github.com/nuxtlabs/ui/issues/153)) ([97b1a85](https://github.com/nuxtlabs/ui/commit/97b1a85ea12499289866a6baf15661c1f15279ce))
+* **Select:** move types from template ([fa05653](https://github.com/nuxtlabs/ui/commit/fa05653f23c4e9b1732eb4b9cd5e034f9bdca272))
+* **Toggle:** wrong `icon-off` positioning ([d5471f4](https://github.com/nuxtlabs/ui/commit/d5471f4d371b72df0ca5fac36e698066aca3864e))
+* update to fix type issues ([#151](https://github.com/nuxtlabs/ui/issues/151)) ([11e00a1](https://github.com/nuxtlabs/ui/commit/11e00a10e4781881e293e5fcd382331008c15346))
+* **VerticalNavigation:** improve focus ([034a95d](https://github.com/nuxtlabs/ui/commit/034a95d3c92eee9a54bd266e02d7446f7792d051))
+* **VerticalNavigation:** improve stacking context ([28ee917](https://github.com/nuxtlabs/ui/commit/28ee9179f5fbc006a47719ee632adf54f0e0ec4d))
+
 ## [2.0.0](https://github.com/nuxtlabs/ui/compare/v1.2.11...v2.0.0) (2023-05-04)
 
 
