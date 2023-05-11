@@ -511,6 +511,9 @@ const commandPalette = {
         active: 'text-gray-900 dark:text-white',
         inactive: 'text-gray-400 dark:text-gray-500'
       },
+      selectedIcon: {
+        base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
+      },
       avatar: {
         base: 'flex-shrink-0',
         size: '3xs'
@@ -519,9 +522,6 @@ const commandPalette = {
         base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
       },
       disabled: 'opacity-50',
-      selected: {
-        icon: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
-      },
       shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5'
     },
     active: 'flex-shrink-0 text-gray-500 dark:text-gray-400',

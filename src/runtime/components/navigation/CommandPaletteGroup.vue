@@ -39,7 +39,7 @@
             </div>
           </div>
 
-          <UIcon v-if="selected" :name="selectedIcon" :class="ui.group.command.selected.icon" aria-hidden="true" />
+          <UIcon v-if="selected" :name="selectedIcon" :class="ui.group.command.selectedIcon.base" aria-hidden="true" />
           <slot v-else-if="active && (group.active || $slots[`${group.key}-active`])" :name="`${group.key}-active`" :group="group" :command="command">
             <span v-if="group.active" :class="ui.group.active">{{ group.active }}</span>
           </slot>
