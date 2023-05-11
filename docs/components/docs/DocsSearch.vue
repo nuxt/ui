@@ -13,7 +13,7 @@
       :groups="groups"
       command-attribute="title"
       :fuse="{
-        fuseOptions: { ignoreLocation: true, includeMatches: true, minMatchCharLength: 2, threshold: 0, keys: ['title', 'description', 'children.children.value', 'children.children.children.value'] },
+        fuseOptions: { ignoreLocation: true, includeMatches: true, threshold: 0, keys: ['title', 'description', 'children.children.value', 'children.children.children.value'] },
         resultLimit: 10
       }"
       @update:model-value="onSelect"
