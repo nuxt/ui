@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/nuxtlabs/ui/compare/v2.0.1...v2.0.2) (2023-05-11)
+
+
+### Bug Fixes
+
+* **LinkCustom:** handle `button` when no `to` prop ([c7c78cb](https://github.com/nuxtlabs/ui/commit/c7c78cb47b00963c8a9ea0c0599fbc7e128cff66))
+
 ### [2.0.1](https://github.com/nuxtlabs/ui/compare/v2.0.0...v2.0.1) (2023-05-11)
 
 
