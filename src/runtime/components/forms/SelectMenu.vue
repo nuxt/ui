@@ -161,7 +161,7 @@ export default defineComponent({
     },
     trailingIcon: {
       type: String,
-      default: () => appConfig.ui.selectMenu.default.trailingIcon
+      default: () => appConfig.ui.select.default.trailingIcon
     },
     selectedIcon: {
       type: String,
