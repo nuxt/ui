@@ -5,6 +5,6 @@ const { metaSymbol } = useShortcuts()
 <template>
   <div class="flex items-center gap-0.5">
     <UKbd>{{ metaSymbol }}</UKbd>
-    <UKbd>U</UKbd>
+    <UKbd>K</UKbd>
   </div>
 </template>

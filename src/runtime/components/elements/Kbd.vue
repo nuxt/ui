@@ -1,6 +1,6 @@
 <template>
   <kbd :class="[ui.base, ui.size[size], ui.padding, ui.rounded, ui.font, ui.background, ui.ring]">
-    <slot />
+    <slot>{{ value }}</slot>
   </kbd>
 </template>
 
@@ -17,6 +17,10 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   props: {
+    value: {
+      type: String,
+      default: null
+    },
     size: {
       type: String,
       default: () => appConfig.ui.kbd.default.size,
