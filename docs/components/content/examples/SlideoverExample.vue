@@ -1,12 +1,12 @@
 <script setup>
-const open = ref(false)
+const isOpen = ref(false)
 </script>
 
 <template>
   <div>
-    <UButton label="Open" @click="open = true" />
+    <UButton label="Open" @click="isOpen = true" />
 
-    <USlideover v-model="open">
+    <USlideover v-model="isOpen">
       <div class="p-4 h-full">
         <Placeholder class="w-full h-full" />
       </div>
