@@ -457,6 +457,12 @@ const container = {
   constrained: 'max-w-7xl'
 }
 
+const skeleton = {
+  base: 'animate-pulse',
+  background: 'bg-gray-100 dark:bg-gray-800',
+  rounded: 'rounded-md'
+}
+
 // Navigation
 
 const verticalNavigation = {
@@ -738,6 +744,7 @@ export default {
     toggle,
     card,
     container,
+    skeleton,
     verticalNavigation,
     commandPalette,
     modal,
