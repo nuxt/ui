@@ -1,12 +1,12 @@
 <script setup>
-const open = ref(false)
+const isOpen = ref(false)
 </script>
 
 <template>
   <div>
-    <UButton label="Open" @click="open = true" />
+    <UButton label="Open" @click="isOpen = true" />
 
-    <UModal v-model="open">
+    <UModal v-model="isOpen">
       <div class="p-4">
         <Placeholder class="h-48" />
       </div>

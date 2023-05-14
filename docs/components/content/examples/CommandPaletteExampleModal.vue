@@ -1,5 +1,5 @@
 <script setup>
-const open = ref(false)
+const isOpen = ref(false)
 
 const people = [
   { id: 1, label: 'Wade Cooper' },
@@ -19,9 +19,9 @@ const selected = ref([])
 
 <template>
   <div>
-    <UButton label="Open" @click="open = true" />
+    <UButton label="Open" @click="isOpen = true" />
 
-    <UModal v-model="open">
+    <UModal v-model="isOpen">
       <UCommandPalette
         v-model="selected"
         multiple

@@ -1,12 +1,12 @@
 <script setup>
-const open = ref(false)
+const isOpen = ref(false)
 </script>
 
 <template>
   <div>
-    <UButton label="Open" @click="open = true" />
+    <UButton label="Open" @click="isOpen = true" />
 
-    <UModal v-model="open">
+    <UModal v-model="isOpen">
       <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
         <template #header>
           <Placeholder class="h-8" />
