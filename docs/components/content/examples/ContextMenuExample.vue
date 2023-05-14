@@ -1,11 +1,12 @@
 <script setup>
 const { x, y } = useMouse()
+const { y: windowY } = useWindowScroll()
 
 const isOpen = ref(false)
 const virtualElement = ref({ getBoundingClientRect: () => ({}) })
 
-function openContextMenu () {
-  const top = unref(y)
+function onContextMenu () {
+  const top = unref(y) - unref(windowY)
   const left = unref(x)
 
   virtualElement.value.getBoundingClientRect = () => ({
@@ -20,8 +21,8 @@ function openContextMenu () {
 </script>
 
 <template>
-  <div class="w-full" @contextmenu.prevent="openContextMenu">
-    <Placeholder class="h-20 w-full flex items-center justify-center">
+  <div class="w-full" @contextmenu.prevent="onContextMenu">
+    <Placeholder class="h-96 select-none w-full flex items-center justify-center">
       Right click here
     </Placeholder>
 
