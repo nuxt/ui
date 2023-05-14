@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-await navigateTo('/getting-started/installation')
+await navigateTo('/getting-started')
 </script>
