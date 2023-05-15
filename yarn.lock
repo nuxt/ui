@@ -1021,10 +1021,10 @@
     pathe "^1.1.0"
     plausible-tracker "^0.3.8"
 
-"@nuxtjs/tailwindcss@^6.6.8":
-  version "6.6.8"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/tailwindcss/-/tailwindcss-6.6.8.tgz#d1d63487b43b9c011465942c044e0269a3c9ce05"
-  integrity sha512-U0wnBLFStrhpY1pqFOdro8AptXDsSFFjYEF5Rp306dbDlDs6ukZrnoDZQOAor/x+w12S7lUdQUN3j8L5YuXyKQ==
+"@nuxtjs/tailwindcss@^6.7.0":
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/tailwindcss/-/tailwindcss-6.7.0.tgz#771a782849099fe4b673cdc42fabf875d244d1cd"
+  integrity sha512-Ixm4hWFKoM2bbtixJZ6/+bm1y/aZPefOkfED5zV4P3X/18HVJQfGD3icTHxDEc9hqRxMV0DVPwpBM13eo1yTlg==
   dependencies:
     "@nuxt/kit" "^3.4.3"
     "@nuxt/postcss8" "^1.1.3"
@@ -1035,9 +1035,9 @@
     cookie-es "^1.0.0"
     defu "^6.1.2"
     destr "^1.2.2"
-    h3 "^1.6.5"
+    h3 "^1.6.6"
     iron-webcrypto "^0.7.0"
-    minimatch "^9.0.0"
+    micromatch "^4.0.5"
     pathe "^1.1.0"
     postcss "^8.4.23"
     postcss-custom-properties "^13.1.5"
@@ -4217,10 +4217,10 @@ h3@^1.6.4:
     ufo "^1.1.1"
     uncrypto "^0.1.2"
 
-h3@^1.6.5:
-  version "1.6.5"
-  resolved "https://registry.yarnpkg.com/h3/-/h3-1.6.5.tgz#0836ffb87aa4a557871e02bdcf6116f41f7240fc"
-  integrity sha512-A0r2LCDzeavSfcAbJpMwHXLcSN0H3FpEZtYigbz4IYun0fOE8r6vy3galwubAnmc6gXVob4261zXQsu3sZayzg==
+h3@^1.6.6:
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/h3/-/h3-1.6.6.tgz#f7da8517ae3bf906716975e38f2d3c24ab79a239"
+  integrity sha512-DWu2s11OuuO9suEkX99dXaJoxd1RgPXiM4iDmLdrhGV63GLoav13f3Kdd5/Rw7xNKzhzn2+F2dleQjG66SnMPQ==
   dependencies:
     cookie-es "^1.0.0"
     defu "^6.1.2"
