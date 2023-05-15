@@ -2,7 +2,7 @@
   <component
     :is="to ? NuxtLink : 'div'"
     :to="to"
-    class="block pl-4 pr-6 py-3 rounded-md !border !border-gray-200 dark:!border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 text-sm leading-6 my-5 last:mb-0 font-normal group relative prose-code:bg-gray-200 dark:prose-code:bg-gray-800"
+    class="block pl-4 pr-6 py-3 rounded-md !border !border-gray-200 dark:!border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 text-sm leading-6 my-5 last:mb-0 font-normal group relative"
     :class="[to ? 'hover:!border-primary-500 dark:hover:!border-primary-400 hover:text-primary-500 dark:hover:text-primary-400 border-dashed' : '']"
   >
     <UIcon v-if="!!to" name="i-heroicons-link-20-solid" class="w-3 h-3 absolute right-2 top-2 text-gray-400 dark:text-gray-500 group-hover:text-primary-500 dark:group-hover:text-primary-400" />
