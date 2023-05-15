@@ -316,7 +316,7 @@ const inputGroup = {
   label: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
   labelWrapper: 'flex content-center justify-between',
   container: 'mt-1 relative',
-  required: 'text-red-400',
+  required: 'text-red-500 dark:text-red-400 ml-0.5',
   description: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
   hint: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
   help: 'mt-2 text-sm text-gray-500 dark:text-gray-400'
@@ -398,7 +398,7 @@ const radio = {
   wrapper: 'relative flex items-start',
   base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus:ring-offset-white dark:focus:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent',
   label: 'font-medium text-gray-700 dark:text-gray-200',
-  required: 'text-red-400',
+  required: 'text-red-500 dark:text-red-400',
   help: 'text-gray-500 dark:text-gray-400'
 }
 
