@@ -20,7 +20,9 @@
       </div>
     </UContainer>
 
-    <DocsSearch />
+    <ClientOnly>
+      <DocsSearch />
+    </ClientOnly>
 
     <UNotifications />
   </div>
