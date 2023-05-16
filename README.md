@@ -1,5 +1,10 @@
 # NuxtLabs UI
 
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![License][license-src]][license-href]
+[![Nuxt][nuxt-src]][nuxt-href]
+
 This module has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](https://volta.net) and [Nuxt Studio](https://nuxt.studio/). It provides everything related to UI when building a Nuxt application, including components, icons, colors, dark mode and also keyboard shortcuts.
 
 [![social preview](https://repository-images.githubusercontent.com/428329515/5a18c5dd-bb58-4874-b6ef-1c44e4884344)](https://ui.nuxtlabs.com)
@@ -56,3 +61,16 @@ Visit http://ui.nuxtlabs.com to view the documentation.
 ## License
 
 Licensed under the [MIT license](https://github.com/nuxtlabs/ui/blob/dev/LICENSE.md).
+
+<!-- Badges -->
+[npm-version-src]: https://img.shields.io/npm/v/@nuxthq/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-href]: https://npmjs.com/package/@nuxthq/ui
+
+[npm-downloads-src]: https://img.shields.io/npm/dm/@nuxthq/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-downloads-href]: https://npmjs.com/package/@nuxthq/ui
+
+[license-src]: https://img.shields.io/github/license/nuxtlabs/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
+[license-href]: https://github.com/nuxtlabs/ui/blob/main/LICENSE
+
+[nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
+[nuxt-href]: https://nuxt.com
