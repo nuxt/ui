@@ -1,7 +1,7 @@
 <template>
-  <div :class="[ui.base, ui.padding, ui.constrained]">
+  <component :is="as" :class="[ui.base, ui.padding, ui.constrained]">
     <slot />
-  </div>
+  </component>
 </template>
 
 <script lang="ts">
@@ -17,6 +17,10 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   props: {
+    as: {
+      type: String,
+      default: 'div'
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.container>>,
       default: () => appConfig.ui.container
