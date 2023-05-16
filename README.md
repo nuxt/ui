@@ -1,10 +1,12 @@
-# @nuxthq/ui
+# NuxtLabs UI
 
 This module has been developed by the [NuxtLabs](https://nuxtlabs.com/) team for [Volta](https://volta.net) and [Nuxt Studio](https://nuxt.studio/), its goal is to provide everything related to UI when building a Nuxt app. This includes components, icons, colors, dark mode but also keyboard shortcuts.
 
+![social preview](https://repository-images.githubusercontent.com/428329515/5a18c5dd-bb58-4874-b6ef-1c44e4884344)
+
 ## Features
 
-- Fully styled and customizable components
+- Built with [HeadlessUI](https://headlessui.dev/) and [TailwindCSS](https://tailwindcss.com/)
 - HMR support through Nuxt App Config
 - Dark mode support
 - Keyboard shortcuts
