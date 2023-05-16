@@ -1,8 +1,8 @@
 # NuxtLabs UI
 
-This module has been developed by the [NuxtLabs](https://nuxtlabs.com/) team for [Volta](https://volta.net) and [Nuxt Studio](https://nuxt.studio/), its goal is to provide everything related to UI when building a Nuxt app. This includes components, icons, colors, dark mode but also keyboard shortcuts.
+This module has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](https://volta.net) and [Nuxt Studio](https://nuxt.studio/). It provides everything related to UI when building a Nuxt application, including components, icons, colors, dark mode and also keyboard shortcuts.
 
-![social preview](https://repository-images.githubusercontent.com/428329515/5a18c5dd-bb58-4874-b6ef-1c44e4884344)
+[![social preview](https://repository-images.githubusercontent.com/428329515/5a18c5dd-bb58-4874-b6ef-1c44e4884344)](https://ui.nuxtlabs.com)
 
 ## Features
 
