@@ -11,7 +11,7 @@ This module has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](
 
 ## Features
 
-- Built with [HeadlessUI](https://headlessui.dev/) and [TailwindCSS](https://tailwindcss.com/)
+- Built with [Headless UI](https://headlessui.dev/) and [Tailwind CSS](https://tailwindcss.com/)
 - HMR support through Nuxt App Config
 - Dark mode support
 - Keyboard shortcuts
