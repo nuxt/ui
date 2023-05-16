@@ -54,4 +54,10 @@ useHead({
     class: 'antialiased font-sans text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-900'
   }
 })
+
+useSeoMeta({
+  ogImage: '/social-preview.jpg',
+  twitterImage: '/social-preview.jpg',
+  twitterCard: 'summary_large_image'
+})
 </script>
