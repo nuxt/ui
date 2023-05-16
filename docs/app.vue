@@ -29,12 +29,10 @@
 </template>
 
 <script setup lang="ts">
-const colorScheme = usePreferredColorScheme()
 const colorMode = useColorMode()
 
 // Computed
 
-const href = computed(() => colorScheme.value === 'dark' ? '/icon-dark.svg' : '/icon-light.svg')
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
 // Head
@@ -47,7 +45,7 @@ useHead({
   ],
   link: [
     { rel: 'stylesheet', href: 'https://rsms.me/inter/inter.css' },
-    { rel: 'icon', type: 'image/svg+xml', href }
+    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
   ],
   htmlAttrs: {
     lang: 'en'
