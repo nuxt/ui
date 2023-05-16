@@ -53,4 +53,4 @@ Visit http://ui.nuxtlabs.com to view the documentation.
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nuxtlabs/ui/blob/dev/LICENSE).
+Licensed under the [MIT license](https://github.com/nuxtlabs/ui/blob/dev/LICENSE.md).
