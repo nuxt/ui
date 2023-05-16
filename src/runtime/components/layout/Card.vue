@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="$attrs.onSubmit ? 'form': 'div'"
+    :is="$attrs.onSubmit ? 'form': as"
     :class="[ui.base, ui.rounded, ui.divide, ui.ring, ui.shadow, ui.background]"
     v-bind="$attrs"
   >
@@ -30,6 +30,10 @@ import appConfig from '#build/app.config'
 export default defineComponent({
   inheritAttrs: false,
   props: {
+    as: {
+      type: String,
+      default: 'div'
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.card>>,
       default: () => appConfig.ui.card
