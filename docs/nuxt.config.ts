@@ -6,6 +6,8 @@ export default defineNuxtConfig({
     ui,
     '@vueuse/nuxt',
     '@nuxt/content',
+    '@nuxt/devtools',
+    '@nuxthq/studio',
     '@nuxtjs/plausible',
     'nuxt-lodash',
     'nuxt-component-meta'

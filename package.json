@@ -49,7 +49,9 @@
   "devDependencies": {
     "@iconify-json/simple-icons": "^1.1.53",
     "@nuxt/content": "^2.6.0",
+    "@nuxt/devtools": "^0.4.6",
     "@nuxt/module-builder": "^0.3.1",
+    "@nuxthq/studio": "^0.12.1",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@nuxtjs/plausible": "^0.2.1",
     "@types/lodash-es": "^4.17.7",
