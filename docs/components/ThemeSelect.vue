@@ -52,7 +52,6 @@ import colors from '#tailwind-config/theme/colors'
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-// Computed
 const primaryCookie = useCookie('primary', { path: '/', default: () => appConfig.ui.primary })
 const grayCookie = useCookie('gray', { path: '/', default: () => appConfig.ui.gray })
 watch(primaryCookie, (primary) => {
