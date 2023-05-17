@@ -1,5 +1,5 @@
 <template>
-  <div v-if="toc" class="sticky top-16 bg-white/75 dark:bg-gray-900/75 backdrop-blur group lg:self-start -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:pl-8 lg:pr-0">
+  <div class="sticky top-16 bg-white/75 dark:bg-gray-900/75 backdrop-blur group lg:self-start -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:pl-8 lg:pr-0">
     <div class="py-3 lg:py-8 border-b border-dashed border-gray-200 dark:border-gray-800 lg:border-0">
       <button class="flex items-center gap-2" tabindex="-1" @click="isTocOpen = !isTocOpen">
         <span class="text-sm text-slate-900 font-semibold text-sm leading-6 dark:text-slate-100 truncate">Table of Contents</span>

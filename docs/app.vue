@@ -6,7 +6,7 @@
       <div class="relative grid lg:grid-cols-10 lg:gap-8">
         <DocsAside class="lg:col-span-2" />
 
-        <div class="relative lg:col-span-6 pt-8 pb-16">
+        <div class="relative pt-8 pb-16" :class="[toc ? 'lg:col-span-6' : 'lg:col-span-8']">
           <DocsPageHeader />
 
           <NuxtPage />
@@ -16,7 +16,7 @@
           <DocsPrevNext />
         </div>
 
-        <DocsToc class="lg:col-span-2 order-first lg:order-last" />
+        <DocsToc v-if="toc" class="lg:col-span-2 order-first lg:order-last" />
       </div>
     </UContainer>
 
@@ -29,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+const { toc } = useContent()
 const colorMode = useColorMode()
 
 // Computed
