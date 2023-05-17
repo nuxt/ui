@@ -22,7 +22,7 @@
           label="GitHub"
           icon="i-simple-icons-github"
           color="white"
-          :to="`https://github.com/nuxtlabs/ui/blob/dev/src/runtime/components/${page._dir}/U${page.title}.vue`"
+          :to="`https://github.com/nuxtlabs/ui/blob/dev/src/runtime/components/${page._dir}/${page.title.replace(' ', '')}.vue`"
         />
       </div>
     </div>
