@@ -30,10 +30,15 @@ export default defineComponent({
 
     const children = computed(() => {
       let children = slots.default?.()
-      // @ts-ignore-next
-      if (children.length && children[0].type.name === 'ContentSlot') {
+      if (children.length) {
+        if (typeof children[0].type === 'symbol') {
+          // @ts-ignore-next
+          children = children[0].children
         // @ts-ignore-next
-        children = children[0].ctx.slots.default?.()
+        } else if (children[0].type.name === 'ContentSlot') {
+          // @ts-ignore-next
+          children = children[0].ctx.slots.default?.()
+        }
       }
       return children
     })
