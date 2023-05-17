@@ -14,6 +14,10 @@
           <hr class="border-gray-200 dark:border-gray-800 my-12">
 
           <DocsPrevNext />
+
+          <hr class="border-gray-200 dark:border-gray-800 my-12">
+
+          <DocsPageFooter />
         </div>
 
         <DocsToc v-if="toc" class="lg:col-span-2 order-first lg:order-last" />
