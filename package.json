@@ -15,7 +15,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=16.10.0"
   },
   "scripts": {
     "build": "nuxt-module-build",
