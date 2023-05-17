@@ -7,11 +7,22 @@ export default defineNuxtPlugin(() => {
   const appConfig = useAppConfig()
   const nuxtApp = useNuxtApp()
 
-  const root = computed(() => `:root {
-${Object.entries(colors[appConfig.ui.primary]).map(([key, value]) => `--color-primary-${key}: ${hexToRgb(value)};`).join('\n')}
+  const root = computed(() => {
+    const primary = colors[appConfig.ui.primary]
+    const gray = colors[appConfig.ui.gray]
 
-${Object.entries(colors[appConfig.ui.gray]).map(([key, value]) => `--color-gray-${key}: ${hexToRgb(value)};`).join('\n')}
-  }`)
+    if (!primary) {
+      console.warn(`[@nuxthq/ui] Primary color '${appConfig.ui.primary}' not found in Tailwind config`)
+    }
+    if (!gray) {
+      console.warn(`[@nuxthq/ui] Gray color '${appConfig.ui.gray}' not found in Tailwind config`)
+    }
+
+    return `:root {
+${Object.entries(primary || colors.green).map(([key, value]) => `--color-primary-${key}: ${hexToRgb(value)};`).join('\n')}
+${Object.entries(gray || colors.cool).map(([key, value]) => `--color-gray-${key}: ${hexToRgb(value)};`).join('\n')}
+}`
+  })
 
   // Head
   const headData: any = {
