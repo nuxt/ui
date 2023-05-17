@@ -10,5 +10,7 @@ const props = defineProps({
   }
 })
 
-const src = computed(() => `https://volta.net/embed/${props.token}`)
+const appConfig = useAppConfig()
+
+const src = computed(() => `https://volta.net/embed/${props.token}?gray=${appConfig.ui.gray}&primary=${appConfig.ui.primary}`)
 </script>
