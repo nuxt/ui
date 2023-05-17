@@ -1,6 +1,7 @@
 <template>
   <footer class="flex items-center justify-between gap-1.5">
     <UButton
+      v-if="page"
       :to="`https://github.com/nuxtlabs/ui/edit/dev/docs/content/${page._file}`"
       label="Edit on GitHub"
       color="gray"
