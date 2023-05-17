@@ -36,5 +36,8 @@ export default defineNuxtConfig({
       '/api/_content/**': { isr: true, static: true },
       '/api/component-meta/**': { isr: true, static: true }
     }
+  },
+  routeRules: {
+    // '/getting-started': { swr: 100000 }
   }
 })

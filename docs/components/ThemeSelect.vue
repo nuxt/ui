@@ -51,37 +51,26 @@ import colors from '#tailwind-config/theme/colors'
 
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
-
-const primaryCookie = useCookie('primary', { path: '/', default: () => appConfig.ui.primary })
-const grayCookie = useCookie('gray', { path: '/', default: () => appConfig.ui.gray })
-
-watch(primaryCookie, (primary) => {
-  appConfig.ui.primary = primary
-}, { immediate: true })
-
-watch(grayCookie, (gray) => {
-  appConfig.ui.gray = gray
-}, { immediate: true })
+const uiPreference = useUIPreference()
 
 // Computed
-
 const primaryOptions = computed(() => useWithout(appConfig.ui.colors, 'primary').map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
 const primary = computed({
   get () {
-    return primaryOptions.value.find(option => option.value === primaryCookie.value)
+    return primaryOptions.value.find(option => option.value === appConfig.ui.primary)
   },
   set (option) {
-    primaryCookie.value = option.value
+    uiPreference.value.primary = option.value
   }
 })
 
 const grayOptions = computed(() => ['slate', 'cool', 'zinc', 'neutral', 'stone'].map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
 const gray = computed({
   get () {
-    return grayOptions.value.find(option => option.value === grayCookie.value)
+    return grayOptions.value.find(option => option.value === appConfig.ui.gray)
   },
   set (option) {
-    grayCookie.value = option.value
+    uiPreference.value.gray = option.value
   }
 })
 </script>
