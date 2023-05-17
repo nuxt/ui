@@ -54,13 +54,17 @@ const colorMode = useColorMode()
 
 const primaryCookie = useCookie('primary', { path: '/', default: () => appConfig.ui.primary })
 const grayCookie = useCookie('gray', { path: '/', default: () => appConfig.ui.gray })
+
 watch(primaryCookie, (primary) => {
   appConfig.ui.primary = primary
 }, { immediate: true })
+
 watch(grayCookie, (gray) => {
   appConfig.ui.gray = gray
 }, { immediate: true })
+
 // Computed
+
 const primaryOptions = computed(() => useWithout(appConfig.ui.colors, 'primary').map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
 const primary = computed({
   get () {
@@ -70,6 +74,7 @@ const primary = computed({
     primaryCookie.value = option.value
   }
 })
+
 const grayOptions = computed(() => ['slate', 'cool', 'zinc', 'neutral', 'stone'].map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
 const gray = computed({
   get () {
