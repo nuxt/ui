@@ -31,7 +31,7 @@ export default defineComponent({
     const children = computed(() => {
       let children = slots.default?.()
       if (children.length) {
-        if (children[0].type === Symbol.for('v-fgt')) {
+        if (typeof children[0].type === 'symbol') {
           // @ts-ignore-next
           children = children[0].children
         // @ts-ignore-next
