@@ -58,7 +58,7 @@
     "@types/node": "^20.1.7",
     "@vueuse/nuxt": "^10.1.2",
     "eslint": "^8.40.0",
-    "nuxt": "^3.4.3",
+    "nuxt": "^3.5.0",
     "nuxt-component-meta": "^0.5.1",
     "nuxt-lodash": "^2.4.1",
     "standard-version": "^9.5.0",
