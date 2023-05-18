@@ -116,6 +116,11 @@ export default defineComponent({
       type: String,
       default: null
     },
+    external: {
+      type: Boolean,
+      default: undefined,
+      required: false
+    },
     ariaLabel: {
       type: String,
       default: null
@@ -153,7 +158,7 @@ export default defineComponent({
 
     const buttonProps = computed(() => {
       if (props.to) {
-        return { to: props.to, target: props.target }
+        return { to: props.to, target: props.target, external: props.external }
       } else {
         return { disabled: props.disabled || props.loading, type: props.type }
       }
