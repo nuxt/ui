@@ -721,7 +721,8 @@ const notification = {
 }
 
 const notifications = {
-  wrapper: 'fixed bottom-0 right-0 flex flex-col justify-end w-full z-[55] sm:w-96',
+  wrapper: 'fixed flex flex-col justify-end w-full z-[55] sm:w-96',
+  position: 'bottom-0 right-0',
   container: 'px-4 sm:px-6 py-6 space-y-3 overflow-y-auto'
 }
 
