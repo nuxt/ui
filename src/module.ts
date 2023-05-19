@@ -177,7 +177,7 @@ export default defineNuxtModule<ModuleOptions>({
           require('@tailwindcss/typography')
         ],
         content: [
-          resolve(runtimeDir, 'components/**/*.{vue,js,ts}'),
+          resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'),
           resolve(runtimeDir, '*.{mjs,js,ts}')
         ]
       }
