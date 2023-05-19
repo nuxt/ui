@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/nuxtlabs/ui/compare/v2.0.4...v2.1.0) (2023-05-19)
+
+
+### Bug Fixes
+
+* **app.config:** trailing space ([703fdef](https://github.com/nuxtlabs/ui/commit/703fdef9bd4c0e26b0e38a13c30aff5b1d9d19aa))
+* **ButtonGroup/AvatarGroup:** allow `v-for` ([#173](https://github.com/nuxtlabs/ui/issues/173)) ([3fa10aa](https://github.com/nuxtlabs/ui/commit/3fa10aa4ebf9ff7d443f8f2564dcaf9b63ce1fa8))
+* **DocsPageHeader:** github component link ([#182](https://github.com/nuxtlabs/ui/issues/182)) ([7f00ec6](https://github.com/nuxtlabs/ui/commit/7f00ec6c3d059e5e78172a8e4bab905a7f02fa63))
+* **Input:** expose ref ([2ded24b](https://github.com/nuxtlabs/ui/commit/2ded24bec90a5ea6665ab6895ced15d9dd49e8ef))
+* **module:** add `.mjs` extension to tailwind `content` when builded ([246449b](https://github.com/nuxtlabs/ui/commit/246449b32850db805c1133151b8449687e7c14be)), closes [#172](https://github.com/nuxtlabs/ui/issues/172)
+* **Textarea:** expose ref ([ea740bf](https://github.com/nuxtlabs/ui/commit/ea740bf10a6090545ed58ff26322ee3a679b5452))
+
 ### [2.0.4](https://github.com/nuxtlabs/ui/compare/v2.0.3...v2.0.4) (2023-05-15)
 
 
