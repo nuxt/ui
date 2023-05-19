@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="[ui.wrapper, ui.position, ui.width]">
     <div v-if="notifications.length" :class="ui.container">
       <div v-for="notification of notifications" :key="notification.id">
         <UNotification
