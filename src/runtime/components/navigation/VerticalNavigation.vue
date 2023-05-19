@@ -69,7 +69,7 @@ export default defineComponent({
       iconClass?: string
       avatar?: Partial<AvatarType>
       click?: Function
-      badge?: string
+      badge?: string | number
     }[]>,
       default: () => []
     },
