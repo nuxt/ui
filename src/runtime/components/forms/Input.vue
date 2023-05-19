@@ -218,6 +218,7 @@ export default defineComponent({
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      input,
       isLeading,
       isTrailing,
       inputClass,
