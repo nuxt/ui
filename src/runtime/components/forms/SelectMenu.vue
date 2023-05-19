@@ -101,7 +101,7 @@
           </component>
           <p v-else-if="searchable && query && !filteredOptions.length" :class="ui.option.empty">
             <slot name="option-empty" :query="query">
-              No results found for "{{ query }}".
+              No results for "{{ query }}".
             </slot>
           </p>
         </component>
