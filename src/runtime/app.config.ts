@@ -482,9 +482,9 @@ const verticalNavigation = {
     size: '3xs'
   },
   badge: {
-    base: 'ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
+    base: 'relative ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
     active: 'bg-white dark:bg-gray-900',
-    inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 group-hover:bg-white dark:group-hover:bg-gray-900'
+    inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-900'
   }
 }
 
