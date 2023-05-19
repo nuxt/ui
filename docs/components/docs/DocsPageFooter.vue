@@ -7,7 +7,7 @@
       color="primary"
       variant="link"
       :padded="false"
-      icon="i-heroicons-arrow-top-right-on-square-20-solid"
+      icon="i-heroicons-pencil-square"
     />
   </div>
 </template>
