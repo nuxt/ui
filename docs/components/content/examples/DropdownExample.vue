@@ -4,11 +4,17 @@ const items = [
     label: 'Profile',
     avatar: {
       src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-    }
+    },
+    click() {
+      console.log("Profile selected ")
+    },
   }], [{
     label: 'Edit',
     icon: 'i-heroicons-pencil-square-20-solid',
     shortcuts: ['E']
+    click() {
+      console.log("Edit selected ")
+    },
   }, {
     label: 'Duplicate',
     icon: 'i-heroicons-document-duplicate-20-solid',
