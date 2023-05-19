@@ -1,6 +1,5 @@
 <template>
   <Combobox
-    ref="comboboxRef"
     :by="by"
     :model-value="modelValue"
     :multiple="multiple"
