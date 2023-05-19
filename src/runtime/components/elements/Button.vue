@@ -1,7 +1,6 @@
 <template>
   <component
     :is="buttonIs"
-    ref="button"
     :class="buttonClass"
     :aria-label="ariaLabel"
     v-bind="buttonProps"
@@ -17,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, useSlots } from 'vue'
+import { computed, defineComponent, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
 import { defu } from 'defu'
@@ -141,8 +140,6 @@ export default defineComponent({
 
     const slots = useSlots()
 
-    const button = ref(null)
-
     const buttonIs = computed(() => {
       if (props.to) {
         return NuxtLink
@@ -217,7 +214,6 @@ export default defineComponent({
     })
 
     return {
-      button,
       buttonIs,
       buttonProps,
       isLeading,
