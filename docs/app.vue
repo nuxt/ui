@@ -11,13 +11,13 @@
 
           <NuxtPage />
 
-          <hr class="border-gray-200 dark:border-gray-800 my-12">
+          <DocsPageFooter class="mt-12" />
+
+          <hr class="border-gray-200 dark:border-gray-800 my-6">
 
           <DocsPrevNext />
 
-          <hr class="border-gray-200 dark:border-gray-800 my-12">
-
-          <DocsPageFooter />
+          <DocsFooter class="mt-16" />
         </div>
 
         <DocsToc v-if="toc" class="lg:col-span-2 order-first lg:order-last" />
