@@ -1,5 +1,5 @@
 <template>
-  <div class="grid gap-8 sm:grid-cols-2">
+  <div class="grid gap-6 sm:grid-cols-2">
     <DocsPrevNextCard v-if="prev" :title="prev.navigation?.title || prev.title" :description="prev.navigation?.description || prev.description" :to="prev._path" icon="i-heroicons-arrow-left-20-solid" />
     <span v-else>&nbsp;</span>
     <DocsPrevNextCard
