@@ -39,7 +39,7 @@ export interface ModuleOptions {
    */
   global?: boolean
 
-  icons: string[]
+  icons: string[] | string
 }
 
 export default defineNuxtModule<ModuleOptions>({
