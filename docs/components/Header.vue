@@ -3,7 +3,7 @@
     <UContainer>
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-3">
-          <NuxtLink to="/" class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white">
+          <NuxtLink to="/getting-started" class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white">
             <Logo class="w-8 h-8 text-primary-500 dark:text-primary-400" />
 
             NuxtLabs<span class="text-primary-500 dark:text-primary-400">UI</span>
@@ -62,7 +62,7 @@
           <div class="px-4 sm:px-6 sticky top-0 border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75 backdrop-blur z-10">
             <div class="flex items-center justify-between h-16">
               <div class="flex items-center gap-3">
-                <NuxtLink to="/" class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white">
+                <NuxtLink to="/getting-started" class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white">
                   <Logo class="w-8 h-8 text-primary-500 dark:text-primary-400" />
                   NuxtLabs<span class="text-primary-500 dark:text-primary-400">UI</span>
                 </NuxtLink>

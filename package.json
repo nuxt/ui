@@ -21,7 +21,7 @@
     "build": "nuxt-module-build",
     "prepack": "yarn build",
     "dev": "nuxi dev docs",
-    "build:docs": "nuxi build docs",
+    "build:docs": "nuxi generate docs",
     "lint": "eslint .",
     "typecheck": "nuxi typecheck",
     "prepare": "nuxi prepare docs",

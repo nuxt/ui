@@ -30,14 +30,10 @@ export default defineNuxtConfig({
     strict: false,
     includeWorkspace: true
   },
-  // @ts-ignore
-  $production: {
-    routeRules: {
-      '/api/_content/**': { isr: true, static: true },
-      '/api/component-meta/**': { isr: true, static: true }
-    }
-  },
   routeRules: {
-    // '/getting-started': { swr: 100000 }
+    '/': { redirect: '/getting-started' },
+  },
+  generate: {
+    routes: ['/getting-started']
   }
 })
