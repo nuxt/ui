@@ -110,7 +110,6 @@ ${Object.entries(colors[gray.value.value] || colors.cool).map(([key, value]) => 
   })
 if (process.client) {
   watch(root, () => {
-    console.log('update')
     window.localStorage.setItem('nuxt-ui-root', root.value)
   }, { immediate: true })
 }
