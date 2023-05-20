@@ -6800,6 +6800,16 @@ nuxt-component-meta@^0.5.1:
     typescript "^5.0.2"
     vue-component-meta "^1.2.0"
 
+nuxt-component-meta@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/nuxt-component-meta/-/nuxt-component-meta-0.5.2.tgz#11433aea988740619846852ed7e49a7dd703404a"
+  integrity sha512-tjX2JaSRUm9tlxHCZ6cRauJnRm1zPMrPaoHj0dKtwHHXjrcp1+Ou2aL2SjD22mnaZ5ZulcEbyvsqp/oMwVldVQ==
+  dependencies:
+    "@nuxt/kit" "^3.3.1"
+    scule "^1.0.0"
+    typescript "^5.0.2"
+    vue-component-meta "^1.2.0"
+
 nuxt-config-schema@^0.4.6:
   version "0.4.6"
   resolved "https://registry.yarnpkg.com/nuxt-config-schema/-/nuxt-config-schema-0.4.6.tgz#4ff9b912648ddab8202c232040d5d38d0f14bef3"

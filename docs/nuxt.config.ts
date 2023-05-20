@@ -31,7 +31,7 @@ export default defineNuxtConfig({
     includeWorkspace: true
   },
   routeRules: {
-    '/': { redirect: '/getting-started' },
+    '/': { redirect: '/getting-started' }
   },
   generate: {
     routes: ['/getting-started']

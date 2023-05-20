@@ -10,7 +10,16 @@ export async function fetchComponentMeta (name: string) {
   if (state.value[name]) { return state.value[name] }
 
   // Store promise to avoid multiple calls
-  state.value[name] = $fetch(`/api/component-meta/${name}`).then((meta) => {
+
+  // add to nitro prerender
+  if (process.server) {
+    const event = useRequestEvent()
+    event.node.res.setHeader(
+      'x-nitro-prerender',
+      [event.node.res.getHeader('x-nitro-prerender'), `/api/component-meta/${name}.json`].filter(Boolean).join(',')
+    )
+  }
+  state.value[name] = $fetch(`/api/component-meta/${name}.json`).then((meta) => {
     state.value[name] = meta
   })
 
