@@ -6,3 +6,4 @@ nuxt.d.ts
 dist
 .DS_Store
 .history
+.vercel

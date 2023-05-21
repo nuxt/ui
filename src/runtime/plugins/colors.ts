@@ -28,7 +28,8 @@ ${Object.entries(gray || colors.cool).map(([key, value]) => `--color-gray-${key}
   const headData: any = {
     style: [{
       innerHTML: () => root.value,
-      tagPriority: -2
+      tagPriority: -2,
+      id: 'nuxt-ui-colors'
     }]
   }
 
