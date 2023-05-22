@@ -18,7 +18,7 @@
 <script lang="ts">
 import { computed, defineComponent, useSlots } from 'vue'
 import type { PropType } from 'vue'
-import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
+import type { RouteLocationRaw } from 'vue-router'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
@@ -32,7 +32,8 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    UIcon
+    UIcon,
+    NuxtLink
   },
   props: {
     type: {
@@ -108,7 +109,7 @@ export default defineComponent({
       default: false
     },
     to: {
-      type: [String, Object] as PropType<string | RouteLocationNormalized | RouteLocationRaw>,
+      type: [String, Object] as PropType<string | RouteLocationRaw>,
       default: null
     },
     target: {
@@ -142,7 +143,7 @@ export default defineComponent({
 
     const buttonIs = computed(() => {
       if (props.to) {
-        return NuxtLink
+        return 'NuxtLink'
       }
 
       return 'button'
