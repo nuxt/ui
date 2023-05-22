@@ -43,7 +43,7 @@ export default defineComponent({
     },
     chipColor: {
       type: String,
-      default: null,
+      default: () => appConfig.ui.avatar.default.chipColor,
       validator (value: string) {
         return ['gray', ...appConfig.ui.colors].includes(value)
       }

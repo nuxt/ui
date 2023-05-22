@@ -41,6 +41,7 @@ const avatar = {
   },
   default: {
     size: 'sm',
+    chipColor: null,
     chipVariant: 'solid',
     chipPosition: 'top-right'
   }
