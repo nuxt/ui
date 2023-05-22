@@ -546,6 +546,7 @@ const commandPalette = {
   },
   default: {
     icon: 'i-heroicons-magnifying-glass-20-solid',
+    loadingIcon: 'i-heroicons-arrow-path-20-solid',
     empty: {
       icon: 'i-heroicons-magnifying-glass-20-solid',
       label: 'We couldn\'t find any items.',
