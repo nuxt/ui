@@ -8,7 +8,7 @@
   >
     <div :class="ui.wrapper">
       <div v-show="searchable" :class="ui.input.wrapper">
-        <UIcon v-if="icon" :name="icon" :class="[ui.input.icon.base, ui.input.icon.size]" aria-hidden="true" />
+        <UIcon v-if="iconName" :name="iconName" :class="iconClass" aria-hidden="true" />
         <ComboboxInput
           ref="comboboxInput"
           :value="query"
@@ -74,6 +74,7 @@ import type { Group, Command } from '../../types/command-palette'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import type { Button as ButtonType } from '../../types/button'
+import { classNames } from '../../utils'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -112,6 +113,10 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    loading: {
+      type: Boolean,
+      default: false
+    },
     groups: {
       type: Array as PropType<Group[]>,
       default: () => []
@@ -119,6 +124,10 @@ export default defineComponent({
     icon: {
       type: String,
       default: () => appConfig.ui.commandPalette.default.icon
+    },
+    loadingIcon: {
+      type: String,
+      default: () => appConfig.ui.commandPalette.default.loadingIcon
     },
     selectedIcon: {
       type: String,
@@ -175,6 +184,7 @@ export default defineComponent({
     const query = ref('')
     const comboboxInput = ref<ComponentPublicInstance<HTMLInputElement>>()
     const comboboxApi = ref(null)
+    const isLoading = ref(false)
 
     onMounted(() => {
       if (props.autoselect) {
@@ -231,10 +241,17 @@ export default defineComponent({
 
     const debouncedSearch = useDebounceFn(async () => {
       const searchableGroups = props.groups.filter(group => !!group.search)
+      if (!searchableGroups.length) {
+        return
+      }
+
+      isLoading.value = true
 
       await Promise.all(searchableGroups.map(async (group) => {
         searchResults.value[group.key] = await group.search(query.value)
       }))
+
+      isLoading.value = false
     }, props.debounce)
 
     watch(query, () => {
@@ -245,6 +262,22 @@ export default defineComponent({
         // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
         comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
       }, 0)
+    })
+
+    const iconName = computed(() => {
+      if ((props.loading || isLoading.value) && props.loadingIcon) {
+        return props.loadingIcon
+      }
+
+      return props.icon
+    })
+
+    const iconClass = computed(() => {
+      return classNames(
+        ui.value.input.icon.base,
+        ui.value.input.icon.size,
+        ((props.loading || isLoading.value) && props.loadingIcon) && 'animate-spin'
+      )
     })
 
     // Methods
@@ -292,6 +325,8 @@ export default defineComponent({
       groups,
       comboboxInput,
       query,
+      iconName,
+      iconClass,
       onSelect,
       onClear
     }
