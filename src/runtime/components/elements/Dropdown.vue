@@ -20,9 +20,8 @@
         <MenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background]" static>
           <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
-              <Component
-                v-bind="omit(item, ['click'])"
-                :is="(item.to && NuxtLink) || (item.click && 'button') || 'div'"
+              <ULinkCustom
+                v-bind="omit(item, ['label', 'icon', 'iconClass', 'avatar', 'shortcuts', 'click'])"
                 :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
                 @click="item.click"
               >
@@ -36,7 +35,7 @@
                     <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
                   </span>
                 </slot>
-              </Component>
+              </ULinkCustom>
             </MenuItem>
           </div>
         </MenuItems>
@@ -48,17 +47,17 @@
 <script lang="ts">
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import type { PropType } from 'vue'
-import type { RouteLocationNormalized } from 'vue-router'
+import type { RouteLocationRaw } from 'vue-router'
 import { defineComponent, ref, computed, onMounted } from 'vue'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
+import ULinkCustom from '../elements/LinkCustom.vue'
 import { omit } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import type { Avatar as AvatarType } from '../../types/avatar'
 import type { PopperOptions } from '../../types'
-import { NuxtLink } from '#components'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -75,22 +74,23 @@ export default defineComponent({
     MenuItem,
     UIcon,
     UAvatar,
-    UKbd
+    UKbd,
+    ULinkCustom
   },
   props: {
     items: {
       type: Array as PropType<{
-      to?: RouteLocationNormalized
-      exact?: boolean
-      label: string
-      disabled?: boolean
-      slot?: string
-      icon?: string
-      iconClass?: string
-      avatar?: Partial<AvatarType>
-      click?: Function
-      shortcuts?: string[]
-    }[][]>,
+        to?: string | RouteLocationRaw
+        exact?: boolean
+        label: string
+        slot?: string
+        icon?: string
+        iconClass?: string
+        avatar?: Partial<AvatarType>
+        shortcuts?: string[]
+        disabled?: boolean
+        click?: Function
+      }[][]>,
       default: () => []
     },
     mode: {
@@ -196,8 +196,7 @@ export default defineComponent({
       container,
       onMouseOver,
       onMouseLeave,
-      omit,
-      NuxtLink
+      omit
     }
   }
 })
