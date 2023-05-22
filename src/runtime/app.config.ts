@@ -698,7 +698,12 @@ const notification = {
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   icon: 'flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white',
   avatar: 'flex-shrink-0 pt-0.5',
-  progress: 'absolute bottom-0 left-0 right-0 h-1 bg-primary-500 dark:bg-primary-400',
+  progress: {
+    base: 'absolute bottom-0 left-0 right-0 h-1',
+    variant: {
+      solid: 'bg-{color}-500 dark:bg-{color}-400',
+    }
+  },
   transition: {
     enterActiveClass: 'transform ease-out duration-300 transition',
     enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2',
@@ -708,6 +713,8 @@ const notification = {
     leaveToClass: 'opacity-0'
   },
   default: {
+    progressColor: 'primary',
+    progressVariant: 'solid',
     close: {
       icon: 'i-heroicons-x-mark-20-solid',
       color: 'gray',
