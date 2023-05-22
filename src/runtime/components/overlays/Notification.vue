@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-        <div v-if="timeout" :class="ui.progress" :style="progressBarStyle" />
+        <div v-if="timeout" :class="progressClass" :style="progressStyle" />
       </div>
     </div>
   </transition>
@@ -49,6 +49,7 @@ import { useTimer } from '../../composables/useTimer'
 import type { ToastNotificationAction } from '../../types'
 import type { Avatar as AvatarType } from '../../types/avatar'
 import type { Button as ButtonType } from '../../types/button'
+import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -99,6 +100,20 @@ export default defineComponent({
       type: Function,
       default: null
     },
+    progressColor: {
+      type: String,
+      default: () => appConfig.ui.notification.default.progressColor,
+      validator (value: string) {
+        return ['gray', ...appConfig.ui.colors].includes(value)
+      }
+    },
+    progressVariant: {
+      type: String,
+      default: () => appConfig.ui.notification.default.progressVariant,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.notification.progress.variant).includes(value)
+      }
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.notification>>,
       default: () => appConfig.ui.notification
@@ -114,10 +129,17 @@ export default defineComponent({
     let timer: any = null
     const remaining = ref(props.timeout)
 
-    const progressBarStyle = computed(() => {
+    const progressStyle = computed(() => {
       const remainingPercent = remaining.value / props.timeout * 100
 
       return { width: `${remainingPercent || 0}%` }
+    })
+
+    const progressClass = computed(() => {
+      return classNames(
+        ui.value.progress.base,
+        ui.value.progress.variant[props.progressVariant]?.replaceAll('{color}', props.progressColor)
+      )
     })
 
     function onMouseover () {
@@ -179,7 +201,8 @@ export default defineComponent({
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      progressBarStyle,
+      progressStyle,
+      progressClass,
       onMouseover,
       onMouseleave,
       onClose,
