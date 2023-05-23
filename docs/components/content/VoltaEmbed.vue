@@ -11,6 +11,7 @@ const props = defineProps({
 })
 
 const appConfig = useAppConfig()
+const colorMode = useColorMode()
 
-const src = computed(() => `https://volta.net/embed/${props.token}?gray=${appConfig.ui.gray}&primary=${appConfig.ui.primary}`)
+const src = computed(() => `https://volta.net/embed/${props.token}?theme=${colorMode.value}&gray=${appConfig.ui.gray}&primary=${appConfig.ui.primary}`)
 </script>
