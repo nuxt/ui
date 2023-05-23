@@ -696,6 +696,7 @@ const notification = {
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-lg',
+  padding: 'p-4',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   icon: 'flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white',
   avatar: 'flex-shrink-0 pt-0.5',

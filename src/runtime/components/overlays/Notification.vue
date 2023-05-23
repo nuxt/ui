@@ -1,12 +1,8 @@
 <template>
   <transition appear v-bind="ui.transition">
-    <div
-      :class="[ui.wrapper, ui.background, ui.rounded, ui.shadow]"
-      @mouseover="onMouseover"
-      @mouseleave="onMouseleave"
-    >
+    <div :class="[ui.wrapper, ui.background, ui.rounded, ui.shadow]" @mouseover="onMouseover" @mouseleave="onMouseleave">
       <div :class="[ui.container, ui.rounded, ui.ring]">
-        <div class="p-4">
+        <div :class="ui.padding">
           <div class="flex gap-3" :class="{ 'items-start': description, 'items-center': !description }">
             <UIcon v-if="icon" :name="icon" :class="ui.icon" />
             <UAvatar v-if="avatar" v-bind="avatar" :class="ui.avatar" />
