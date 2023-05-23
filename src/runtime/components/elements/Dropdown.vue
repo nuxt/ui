@@ -56,7 +56,7 @@ import UKbd from '../elements/Kbd.vue'
 import ULinkCustom from '../elements/LinkCustom.vue'
 import { omit } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
-import type { Avatar as AvatarType } from '../../types/avatar'
+import type { Avatar } from '../../types/avatar'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -86,7 +86,7 @@ export default defineComponent({
         slot?: string
         icon?: string
         iconClass?: string
-        avatar?: Partial<AvatarType>
+        avatar?: Partial<Avatar>
         shortcuts?: string[]
         disabled?: boolean
         click?: Function
