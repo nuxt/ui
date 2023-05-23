@@ -73,7 +73,7 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Group, Command } from '../../types/command-palette'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
-import type { Button as ButtonType } from '../../types/button'
+import type { Button } from '../../types/button'
 import { classNames } from '../../utils'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 import { useAppConfig } from '#imports'
@@ -134,7 +134,7 @@ export default defineComponent({
       default: () => appConfig.ui.commandPalette.default.selectedIcon
     },
     close: {
-      type: Object as PropType<Partial<ButtonType>>,
+      type: Object as PropType<Partial<Button>>,
       default: () => appConfig.ui.commandPalette.default.close
     },
     empty: {
