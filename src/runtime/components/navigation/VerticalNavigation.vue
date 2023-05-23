@@ -5,7 +5,7 @@
       v-slot="{ isActive }"
       :key="index"
       v-bind="omit(link, ['label', 'icon', 'iconClass', 'avatar', 'badge', 'click'])"
-      :class="[ui.base, ui.padding]"
+      :class="[ui.base, ui.padding, ui.width, ui.ring, ui.rounded, ui.font, ui.size]"
       :active-class="ui.active"
       :inactive-class="ui.inactive"
       @click="link.click"
