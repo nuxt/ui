@@ -46,7 +46,7 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULinkCustom from '../elements/LinkCustom.vue'
 import { omit } from '../../utils'
-import type { Avatar as AvatarType } from '../../types/avatar'
+import type { Avatar } from '../../types/avatar'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -68,7 +68,7 @@ export default defineComponent({
         label: string
         icon?: string
         iconClass?: string
-        avatar?: Partial<AvatarType>
+        avatar?: Partial<Avatar>
         click?: Function
         badge?: string | number
       }[]>,
