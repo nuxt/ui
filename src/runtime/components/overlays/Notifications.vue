@@ -17,7 +17,7 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import type { ToastNotification } from '../../types'
+import type { Notification } from '../../types'
 import { useToast } from '../../composables/useToast'
 import UNotification from './Notification.vue'
 import { useState, useAppConfig } from '#imports'
@@ -44,7 +44,7 @@ export default defineComponent({
     const ui = computed<Partial<typeof appConfig.ui.notifications>>(() => defu({}, props.ui, appConfig.ui.notifications))
 
     const toast = useToast()
-    const notifications = useState<ToastNotification[]>('notifications', () => [])
+    const notifications = useState<Notification[]>('notifications', () => [])
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

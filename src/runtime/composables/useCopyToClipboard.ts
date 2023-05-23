@@ -1,8 +1,8 @@
 import { useClipboard } from '@vueuse/core'
-import type { ToastNotification } from '../types/toast'
+import type { Notification } from '../types/notification'
 import { useToast } from './useToast'
 
-export function useCopyToClipboard (options: Partial<ToastNotification> = {}) {
+export function useCopyToClipboard (options: Partial<Notification> = {}) {
   const { copy: copyToClipboard, isSupported } = useClipboard()
   const toast = useToast()
 

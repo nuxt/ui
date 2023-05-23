@@ -1,5 +1,5 @@
 export * from './avatar'
 export * from './clipboard'
 export * from './command-palette'
+export * from './notification'
 export * from './popper'
-export * from './toast'

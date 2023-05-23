@@ -42,9 +42,9 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
 import { useTimer } from '../../composables/useTimer'
-import type { ToastNotificationAction } from '../../types'
-import type { Avatar as AvatarType } from '../../types/avatar'
-import type { Button as ButtonType } from '../../types/button'
+import type { NotificationAction } from '../../types'
+import type { Avatar} from '../../types/avatar'
+import type { Button } from '../../types/button'
 import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -77,11 +77,11 @@ export default defineComponent({
       default: null
     },
     avatar: {
-      type: Object as PropType<Partial<AvatarType>>,
+      type: Object as PropType<Partial<Avatar>>,
       default: null
     },
     close: {
-      type: Object as PropType<Partial<ButtonType>>,
+      type: Object as PropType<Partial<Button>>,
       default: () => appConfig.ui.notification.default.close
     },
     timeout: {
@@ -89,7 +89,7 @@ export default defineComponent({
       default: 5000
     },
     actions: {
-      type: Array as PropType<ToastNotificationAction[]>,
+      type: Array as PropType<NotificationAction[]>,
       default: () => []
     },
     callback: {
@@ -162,7 +162,7 @@ export default defineComponent({
       emit('close')
     }
 
-    function onAction (action: ToastNotificationAction) {
+    function onAction (action: NotificationAction) {
       if (timer) {
         timer.stop()
       }
