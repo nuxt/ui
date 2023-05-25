@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     highlight: {
       theme: {
         light: 'material-lighter',
+        default: 'material-default',
         dark: 'material-palenight'
       },
       preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown', 'yaml', 'bash', 'ini']
