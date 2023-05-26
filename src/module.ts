@@ -124,8 +124,6 @@ export default defineNuxtModule<ModuleOptions>({
       tailwindConfig.safelist.push(...[
         'bg-gray-500',
         'dark:bg-gray-400',
-        'text-gray-500',
-        'dark:text-gray-400',
         {
           pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|400|500)`)
         }, {

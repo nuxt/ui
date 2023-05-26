@@ -279,6 +279,7 @@ const input = {
     none: 'bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
+    base: 'flex-shrink-0 text-gray-400 dark:text-gray-500',
     color: 'text-{color}-500 dark:text-{color}-400',
     size: {
       '2xs': 'h-3.5 w-3.5',
@@ -716,7 +717,7 @@ const notification = {
   padding: 'p-4',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   icon: {
-    base: 'flex-shrink-0 w-5 h-5',
+    base: 'flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-500',
     color: 'text-{color}-500 dark:text-{color}-400'
   },
   avatar: {
