@@ -700,13 +700,17 @@ const notification = {
   rounded: 'rounded-lg',
   padding: 'p-4',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  icon: 'flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white',
-  avatar: 'flex-shrink-0 pt-0.5',
+  icon: {
+    base: 'flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white',
+    color: 'text-{color}-500 dark:text-{color}-400'
+  },
+  avatar: {
+    base: 'flex-shrink-0 self-center',
+    size: 'md'
+  },
   progress: {
     base: 'absolute bottom-0 left-0 right-0 h-1',
-    variant: {
-      solid: 'bg-{color}-500 dark:bg-{color}-400',
-    }
+    background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   transition: {
     enterActiveClass: 'transform ease-out duration-300 transition',
@@ -717,8 +721,8 @@ const notification = {
     leaveToClass: 'opacity-0'
   },
   default: {
-    progressColor: 'primary',
-    progressVariant: 'solid',
+    color: 'primary',
+    icon: null,
     close: {
       icon: 'i-heroicons-x-mark-20-solid',
       color: 'gray',
