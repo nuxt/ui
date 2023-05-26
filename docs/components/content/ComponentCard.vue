@@ -7,7 +7,7 @@
           v-if="prop.type === 'boolean'"
           v-model="componentProps[prop.name]"
           :name="prop.name"
-          appearance="none"
+          variant="none"
           class="justify-center"
         />
         <USelectMenu
@@ -16,7 +16,7 @@
           :options="prop.options"
           :name="prop.name"
           :label="componentProps[prop.name]"
-          appearance="none"
+          variant="none"
           class="inline-flex"
           :ui="{ width: 'w-32 !-mt-px', rounded: 'rounded-b-md' }"
           :ui-select="{ custom: '!py-0' }"
@@ -27,7 +27,7 @@
           :model-value="componentProps[prop.name]"
           :type="prop.type === 'number' ? 'number' : 'text'"
           :name="prop.name"
-          appearance="none"
+          variant="none"
           autocomplete="off"
           :ui="{ custom: '!py-0' }"
           @update:model-value="val => componentProps[prop.name] = prop.type === 'number' ? Number(val) : val"
@@ -49,6 +49,7 @@
 // @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
 
+// eslint-disable-next-line vue/no-dupe-keys
 const props = defineProps({
   slug: {
     type: String,
@@ -78,17 +79,23 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
+  extraColors: {
+    type: Array,
+    default: () => []
+  },
   backgroundClass: {
     type: String,
     default: 'bg-white dark:bg-gray-900'
   }
 })
 
+// eslint-disable-next-line vue/no-dupe-keys
 const baseProps = reactive({ ...props.baseProps })
 const componentProps = reactive({ ...props.props })
 
 const appConfig = useAppConfig()
 const route = useRoute()
+// eslint-disable-next-line vue/no-dupe-keys
 const slug = props.slug || route.params.slug[1]
 const camelName = useCamelCase(slug)
 const name = `U${useUpperFirst(camelName)}`
@@ -97,6 +104,7 @@ const meta = await fetchComponentMeta(name)
 
 // Computed
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => ({ ...appConfig.ui[camelName], ...props.ui }))
 
 const fullProps = computed(() => ({ ...props.baseProps, ...componentProps }))
@@ -117,7 +125,8 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   const keys = useGet(ui.value, dottedKey, {})
   let options = typeof keys === 'object' && Object.keys(keys)
   if (key.toLowerCase().endsWith('color')) {
-    options = appConfig.ui.colors
+    // @ts-ignore
+    options = [...appConfig.ui.colors, ...props.extraColors]
   }
 
   return {
@@ -128,6 +137,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   }
 }).filter(Boolean))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const code = computed(() => {
   let code = `\`\`\`html
 <${name}`

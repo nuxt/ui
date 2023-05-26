@@ -4,11 +4,11 @@
       v-for="(link, index) of links"
       v-slot="{ isActive }"
       :key="index"
-      v-bind="link"
-      :class="[ui.base, ui.padding]"
+      v-bind="omit(link, ['label', 'icon', 'iconClass', 'avatar', 'badge', 'click'])"
+      :class="[ui.base, ui.padding, ui.width, ui.ring, ui.rounded, ui.font, ui.size]"
       :active-class="ui.active"
       :inactive-class="ui.inactive"
-      @click="link.click && link.click()"
+      @click="link.click"
       @keyup.enter="$event.target.blur()"
     >
       <slot name="avatar" :link="link">
@@ -40,12 +40,13 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import type { RouteLocationNormalized } from 'vue-router'
+import type { RouteLocationRaw } from 'vue-router'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULinkCustom from '../elements/LinkCustom.vue'
-import type { Avatar as AvatarType } from '../../types/avatar'
+import { omit } from '../../utils'
+import type { Avatar } from '../../types/avatar'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -62,15 +63,15 @@ export default defineComponent({
   props: {
     links: {
       type: Array as PropType<{
-      to?: RouteLocationNormalized | string
-      exact?: boolean
-      label: string
-      icon?: string
-      iconClass?: string
-      avatar?: Partial<AvatarType>
-      click?: Function
-      badge?: string | number
-    }[]>,
+        to?: string | RouteLocationRaw
+        exact?: boolean
+        label: string
+        icon?: string
+        iconClass?: string
+        avatar?: Partial<Avatar>
+        click?: Function
+        badge?: string | number
+      }[]>,
       default: () => []
     },
     ui: {
@@ -86,7 +87,8 @@ export default defineComponent({
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
-      ui
+      ui,
+      omit
     }
   }
 })

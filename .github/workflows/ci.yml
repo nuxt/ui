@@ -22,30 +22,41 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@master
-        with:
-          persist-credentials: false
-          fetch-depth: 0
 
-      - name: Cache
-        uses: actions/cache@v3
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
         with:
-          path: node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          version: 7
+          run_install: false
 
-      - name: Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Lint
-        run: yarn lint
+        run: pnpm run lint
 
       - name: Typecheck
-        run: yarn typecheck
+        run: pnpm run typecheck
 
       - name: Build
-        run: yarn build
+        run: pnpm run build
 
       - name: Version Check
         id: check

@@ -43,16 +43,9 @@ export default defineComponent({
     },
     chipColor: {
       type: String,
-      default: null,
+      default: () => appConfig.ui.avatar.default.chipColor,
       validator (value: string) {
         return ['gray', ...appConfig.ui.colors].includes(value)
-      }
-    },
-    chipVariant: {
-      type: String,
-      default: () => appConfig.ui.avatar.default.chipVariant,
-      validator (value: string) {
-        return Object.keys(appConfig.ui.avatar.chip.variant).includes(value)
       }
     },
     chipPosition: {
@@ -94,7 +87,7 @@ export default defineComponent({
         ui.value.chip.base,
         ui.value.chip.size[props.size],
         ui.value.chip.position[props.chipPosition],
-        ui.value.chip.variant[props.chipVariant]?.replaceAll('{color}', props.chipColor)
+        ui.value.chip.background.replaceAll('{color}', props.chipColor)
       )
     })
 

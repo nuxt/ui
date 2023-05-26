@@ -18,14 +18,12 @@ const avatar = {
   },
   chip: {
     base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900',
+    background: 'bg-{color}-500 dark:bg-{color}-400',
     position: {
       'top-right': 'top-0 right-0',
       'bottom-right': 'bottom-0 right-0',
       'top-left': 'top-0 left-0',
       'bottom-left': 'bottom-0 left-0'
-    },
-    variant: {
-      solid: 'bg-{color}-400'
     },
     size: {
       '3xs': 'h-1 w-1',
@@ -41,7 +39,7 @@ const avatar = {
   },
   default: {
     size: 'sm',
-    chipVariant: 'solid',
+    chipColor: null,
     chipPosition: 'top-right'
   }
 }
@@ -220,7 +218,9 @@ const kbd = {
 
 const input = {
   wrapper: 'relative',
-  base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
+  base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0',
+  rounded: 'rounded-md',
+  placeholder: 'placeholder-gray-400 dark:placeholder-gray-500',
   custom: '',
   size: {
     '2xs': 'text-xs',
@@ -266,13 +266,21 @@ const input = {
       xl: 'pr-12'
     }
   },
-  appearance: {
-    white: 'border-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
-    gray: 'border-0 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
-    none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none placeholder:text-gray-400 dark:placeholder:text-gray-500'
+  color: {
+    white: {
+      outline: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+    },
+    gray: {
+      outline: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+    }
+  },
+  variant: {
+    outline: 'shadow-sm bg-transparent text-gray-900 dark:text-white ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 focus:ring-2 focus:ring-{color}-500 dark:focus:ring-{color}-400',
+    none: 'bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
-    base: 'text-gray-400 dark:text-gray-500',
+    base: 'flex-shrink-0 text-gray-400 dark:text-gray-500',
+    color: 'text-{color}-500 dark:text-{color}-400',
     size: {
       '2xs': 'h-3.5 w-3.5',
       xs: 'h-4 w-4',
@@ -306,27 +314,32 @@ const input = {
   },
   default: {
     size: 'sm',
-    appearance: 'white',
+    color: 'white',
+    variant: 'outline',
     loadingIcon: 'i-heroicons-arrow-path-20-solid'
   }
 }
 
-const inputGroup = {
+const formGroup = {
   wrapper: '',
-  label: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-  labelWrapper: 'flex content-center justify-between',
+  label: {
+    wrapper: 'flex content-center justify-between',
+    base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
+    required: `after:content-['*'] after:ml-0.5 after:text-red-500 dark:after:text-red-400`
+  },
+  description: 'text-sm text-gray-500 dark:text-gray-400',
   container: 'mt-1 relative',
-  required: 'text-red-500 dark:text-red-400 ml-0.5',
-  description: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
-  hint: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
-  help: 'mt-2 text-sm text-gray-500 dark:text-gray-400'
+  hint: 'text-sm text-gray-500 dark:text-gray-400',
+  help: 'mt-2 text-sm text-gray-500 dark:text-gray-400',
+  error: 'mt-2 text-sm text-red-500 dark:text-red-400'
 }
 
 const textarea = {
   ...input,
   default: {
     size: 'sm',
-    appearance: 'white'
+    color: 'white',
+    variant: 'outline',
   }
 }
 
@@ -334,7 +347,8 @@ const select = {
   ...input,
   default: {
     size: 'sm',
-    appearance: 'white',
+    color: 'white',
+    variant: 'outline',
     trailingIcon: 'i-heroicons-chevron-down-20-solid'
   }
 }
@@ -396,7 +410,7 @@ const selectMenu = {
 
 const radio = {
   wrapper: 'relative flex items-start',
-  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus:ring-offset-white dark:focus:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent',
+  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
   label: 'font-medium text-gray-700 dark:text-gray-200',
   required: 'text-red-500 dark:text-red-400',
   help: 'text-gray-500 dark:text-gray-400'
@@ -467,8 +481,13 @@ const skeleton = {
 
 const verticalNavigation = {
   wrapper: 'relative',
-  base: 'group flex items-center gap-2 text-sm font-medium rounded-md w-full relative focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
+  base: 'group relative flex items-center gap-2 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
+  ring: 'focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
   padding: 'px-3 py-1.5',
+  width: 'w-full',
+  rounded: 'rounded-md',
+  font: 'font-medium',
+  size: 'text-sm',
   active: 'text-gray-900 dark:text-white before:bg-gray-100 dark:before:bg-gray-800',
   inactive: 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50',
   label: 'truncate relative',
@@ -545,6 +564,7 @@ const commandPalette = {
   },
   default: {
     icon: 'i-heroicons-magnifying-glass-20-solid',
+    loadingIcon: 'i-heroicons-arrow-path-20-solid',
     empty: {
       icon: 'i-heroicons-magnifying-glass-20-solid',
       label: 'We couldn\'t find any items.',
@@ -694,10 +714,20 @@ const notification = {
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-lg',
+  padding: 'p-4',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  icon: 'flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white',
-  avatar: 'flex-shrink-0 pt-0.5',
-  progress: 'absolute bottom-0 left-0 right-0 h-1 bg-primary-500 dark:bg-primary-400',
+  icon: {
+    base: 'flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-500',
+    color: 'text-{color}-500 dark:text-{color}-400'
+  },
+  avatar: {
+    base: 'flex-shrink-0 self-center',
+    size: 'md'
+  },
+  progress: {
+    base: 'absolute bottom-0 left-0 right-0 h-1',
+    background: 'bg-{color}-500 dark:bg-{color}-400'
+  },
   transition: {
     enterActiveClass: 'transform ease-out duration-300 transition',
     enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2',
@@ -707,6 +737,8 @@ const notification = {
     leaveToClass: 'opacity-0'
   },
   default: {
+    color: 'primary',
+    icon: null,
     close: {
       icon: 'i-heroicons-x-mark-20-solid',
       color: 'gray',
@@ -737,7 +769,7 @@ export default {
     dropdown,
     kbd,
     input,
-    inputGroup,
+    formGroup,
     textarea,
     select,
     selectMenu,

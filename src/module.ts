@@ -121,45 +121,49 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
-      tailwindConfig.safelist.push(...['bg-gray-400', {
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|400|500)`)
-      }, {
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-500`),
-        variants: ['disabled']
-      }, {
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(400|950)`),
-        variants: ['dark']
-      }, {
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(500|900|950)`),
-        variants: ['dark:hover']
-      }, {
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-400`),
-        variants: ['dark:disabled']
-      }, {
-        pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|100|600)`),
-        variants: ['hover']
-      }, {
-        pattern: new RegExp(`outline-(${safeColorsAsRegex})-500`),
-        variants: ['focus-visible']
-      }, {
-        pattern: new RegExp(`outline-(${safeColorsAsRegex})-400`),
-        variants: ['dark:focus-visible']
-      }, {
-        pattern: new RegExp(`ring-(${safeColorsAsRegex})-500`),
-        variants: ['focus-visible']
-      }, {
-        pattern: new RegExp(`ring-(${safeColorsAsRegex})-400`),
-        variants: ['dark', 'dark:focus-visible']
-      }, {
-        pattern: new RegExp(`text-(${safeColorsAsRegex})-400`),
-        variants: ['dark']
-      }, {
-        pattern: new RegExp(`text-(${safeColorsAsRegex})-600`),
-        variants: ['hover']
-      }, {
-        pattern: new RegExp(`text-(${safeColorsAsRegex})-500`),
-        variants: ['dark:hover']
-      }])
+      tailwindConfig.safelist.push(...[
+        'bg-gray-500',
+        'dark:bg-gray-400',
+        {
+          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|400|500)`)
+        }, {
+          pattern: new RegExp(`bg-(${safeColorsAsRegex})-500`),
+          variants: ['disabled']
+        }, {
+          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(400|950)`),
+          variants: ['dark']
+        }, {
+          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(500|900|950)`),
+          variants: ['dark:hover']
+        }, {
+          pattern: new RegExp(`bg-(${safeColorsAsRegex})-400`),
+          variants: ['dark:disabled']
+        }, {
+          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|100|600)`),
+          variants: ['hover']
+        }, {
+          pattern: new RegExp(`outline-(${safeColorsAsRegex})-500`),
+          variants: ['focus-visible']
+        }, {
+          pattern: new RegExp(`outline-(${safeColorsAsRegex})-400`),
+          variants: ['dark:focus-visible']
+        }, {
+          pattern: new RegExp(`ring-(${safeColorsAsRegex})-500`),
+          variants: ['focus', 'focus-visible']
+        }, {
+          pattern: new RegExp(`ring-(${safeColorsAsRegex})-400`),
+          variants: ['dark', 'dark:focus', 'dark:focus-visible']
+        }, {
+          pattern: new RegExp(`text-(${safeColorsAsRegex})-400`),
+          variants: ['dark']
+        }, {
+          pattern: new RegExp(`text-(${safeColorsAsRegex})-500`),
+          variants: ['dark:hover']
+        }, {
+          pattern: new RegExp(`text-(${safeColorsAsRegex})-600`),
+          variants: ['hover']
+        }
+      ])
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))

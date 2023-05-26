@@ -113,6 +113,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    padded: {
+      type: Boolean,
+      default: true
+    },
     size: {
       type: String,
       default: () => appConfig.ui.input.default.size,
@@ -120,11 +124,21 @@ export default defineComponent({
         return Object.keys(appConfig.ui.input.size).includes(value)
       }
     },
-    appearance: {
+    color: {
       type: String,
-      default: () => appConfig.ui.input.default.appearance,
+      default: () => appConfig.ui.input.default.color,
       validator (value: string) {
-        return Object.keys(appConfig.ui.input.appearance).includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.input.color)].includes(value)
+      }
+    },
+    variant: {
+      type: String,
+      default: () => appConfig.ui.input.default.variant,
+      validator (value: string) {
+        return [
+          ...Object.keys(appConfig.ui.input.variant),
+          ...Object.values(appConfig.ui.input.color).flatMap(value => Object.keys(value))
+        ].includes(value)
       }
     },
     ui: {
@@ -158,11 +172,15 @@ export default defineComponent({
     })
 
     const inputClass = computed(() => {
+      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+
       return classNames(
         ui.value.base,
+        ui.value.rounded,
+        ui.value.placeholder,
         ui.value.size[props.size],
-        ui.value.padding[props.size],
-        ui.value.appearance[props.appearance],
+        props.padded && ui.value.padding[props.size],
+        variant?.replaceAll('{color}', props.color),
         isLeading.value && ui.value.leading.padding[props.size],
         isTrailing.value && ui.value.trailing.padding[props.size],
         ui.value.custom
@@ -196,6 +214,7 @@ export default defineComponent({
     const iconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
         ui.value.icon.size[props.size],
         props.loading && 'animate-spin'
       )
