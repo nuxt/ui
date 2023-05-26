@@ -60,6 +60,10 @@ export default defineComponent({
         node.props.color = node.props.oldColor
       }
 
+      if (props.name) {
+        node.props.name = props.name
+      }
+
       return node
     }))
 
