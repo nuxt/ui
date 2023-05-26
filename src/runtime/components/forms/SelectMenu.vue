@@ -53,7 +53,7 @@
             ref="searchInput"
             :display-value="() => query"
             name="q"
-            placeholder="Search..."
+            :placeholder="searchablePlaceholder"
             autofocus
             autocomplete="off"
             :class="ui.input"
@@ -185,6 +185,10 @@ export default defineComponent({
     searchable: {
       type: Boolean,
       default: false
+    },
+    searchablePlaceholder: {
+      type: String,
+      default: 'Search...'
     },
     creatable: {
       type: Boolean,
