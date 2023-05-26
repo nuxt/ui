@@ -218,7 +218,9 @@ const kbd = {
 
 const input = {
   wrapper: 'relative',
-  base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
+  base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0',
+  rounded: 'rounded-md',
+  placeholder: 'placeholder-gray-400 dark:placeholder-gray-500',
   custom: '',
   size: {
     '2xs': 'text-xs',
@@ -264,13 +266,21 @@ const input = {
       xl: 'pr-12'
     }
   },
-  appearance: {
-    white: 'border-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
-    gray: 'border-0 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
-    none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none placeholder:text-gray-400 dark:placeholder:text-gray-500'
+  color: {
+    white: {
+      outline: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+    },
+    gray: {
+      outline: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+    }
+  },
+  variant: {
+    outline: 'shadow-sm bg-transparent text-gray-900 dark:text-white ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 focus:ring-2 focus:ring-{color}-500 dark:focus:ring-{color}-400',
+    none: 'bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
-    base: 'text-gray-400 dark:text-gray-500',
+    base: 'flex-shrink-0 text-gray-400 dark:text-gray-500',
+    color: 'text-{color}-500 dark:text-{color}-400',
     size: {
       '2xs': 'h-3.5 w-3.5',
       xs: 'h-4 w-4',
@@ -304,27 +314,32 @@ const input = {
   },
   default: {
     size: 'sm',
-    appearance: 'white',
+    color: 'white',
+    variant: 'outline',
     loadingIcon: 'i-heroicons-arrow-path-20-solid'
   }
 }
 
-const inputGroup = {
+const formGroup = {
   wrapper: '',
-  label: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-  labelWrapper: 'flex content-center justify-between',
+  label: {
+    wrapper: 'flex content-center justify-between',
+    base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
+    required: `after:content-['*'] after:ml-0.5 after:text-red-500 dark:after:text-red-400`
+  },
+  description: 'text-sm text-gray-500 dark:text-gray-400',
   container: 'mt-1 relative',
-  required: 'text-red-500 dark:text-red-400 ml-0.5',
-  description: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
-  hint: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
-  help: 'mt-2 text-sm text-gray-500 dark:text-gray-400'
+  hint: 'text-sm text-gray-500 dark:text-gray-400',
+  help: 'mt-2 text-sm text-gray-500 dark:text-gray-400',
+  error: 'mt-2 text-sm text-red-500 dark:text-red-400'
 }
 
 const textarea = {
   ...input,
   default: {
     size: 'sm',
-    appearance: 'white'
+    color: 'white',
+    variant: 'outline',
   }
 }
 
@@ -332,7 +347,8 @@ const select = {
   ...input,
   default: {
     size: 'sm',
-    appearance: 'white',
+    color: 'white',
+    variant: 'outline',
     trailingIcon: 'i-heroicons-chevron-down-20-solid'
   }
 }
@@ -701,7 +717,7 @@ const notification = {
   padding: 'p-4',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   icon: {
-    base: 'flex-shrink-0 w-5 h-5',
+    base: 'flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-500',
     color: 'text-{color}-500 dark:text-{color}-400'
   },
   avatar: {
@@ -753,7 +769,7 @@ export default {
     dropdown,
     kbd,
     input,
-    inputGroup,
+    formGroup,
     textarea,
     select,
     selectMenu,

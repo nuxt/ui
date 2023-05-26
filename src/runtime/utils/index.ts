@@ -14,3 +14,18 @@ export const omit = (obj: object, keys: string[]) => {
     Object.entries(obj).filter(([key]) => !keys.includes(key))
   )
 }
+
+export const getSlotsChildren = (slots: any) => {
+  let children = slots.default?.()
+  if (children.length) {
+    if (typeof children[0].type === 'symbol') {
+      // @ts-ignore-next
+      children = children[0].children
+      // @ts-ignore-next
+    } else if (children[0].type.name === 'ContentSlot') {
+      // @ts-ignore-next
+      children = children[0].ctx.slots.default?.()
+    }
+  }
+  return children
+}

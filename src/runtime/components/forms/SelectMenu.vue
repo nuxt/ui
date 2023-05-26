@@ -198,6 +198,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    padded: {
+      type: Boolean,
+      default: true
+    },
     size: {
       type: String,
       default: () => appConfig.ui.select.default.size,
@@ -205,11 +209,21 @@ export default defineComponent({
         return Object.keys(appConfig.ui.select.size).includes(value)
       }
     },
-    appearance: {
+    color: {
       type: String,
-      default: () => appConfig.ui.select.default.appearance,
+      default: () => appConfig.ui.select.default.color,
       validator (value: string) {
-        return Object.keys(appConfig.ui.select.appearance).includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.select.color)].includes(value)
+      }
+    },
+    variant: {
+      type: String,
+      default: () => appConfig.ui.select.default.variant,
+      validator (value: string) {
+        return [
+          ...Object.keys(appConfig.ui.select.variant),
+          ...Object.values(appConfig.ui.select.color).flatMap(value => Object.keys(value))
+        ].includes(value)
       }
     },
     optionAttribute: {
@@ -249,13 +263,17 @@ export default defineComponent({
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
 
     const selectMenuClass = computed(() => {
+      const variant = uiSelect.value.color?.[props.color as string]?.[props.variant as string] || uiSelect.value.variant[props.variant]
+
       return classNames(
         uiSelect.value.base,
+        uiSelect.value.rounded,
+        uiSelect.value.placeholder,
         'text-left cursor-default',
         uiSelect.value.size[props.size],
         uiSelect.value.gap[props.size],
-        uiSelect.value.padding[props.size],
-        uiSelect.value.appearance[props.appearance],
+        props.padded && uiSelect.value.padding[props.size],
+        variant?.replaceAll('{color}', props.color),
         !!props.icon && uiSelect.value.leading.padding[props.size],
         uiSelect.value.trailing.padding[props.size],
         uiSelect.value.custom,
@@ -266,6 +284,7 @@ export default defineComponent({
     const iconClass = computed(() => {
       return classNames(
         uiSelect.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && uiSelect.value.icon.color.replaceAll('{color}', props.color),
         uiSelect.value.icon.size[props.size]
       )
     })
