@@ -18,14 +18,12 @@ const avatar = {
   },
   chip: {
     base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900',
+    background: 'bg-{color}-400',
     position: {
       'top-right': 'top-0 right-0',
       'bottom-right': 'bottom-0 right-0',
       'top-left': 'top-0 left-0',
       'bottom-left': 'bottom-0 left-0'
-    },
-    variant: {
-      solid: 'bg-{color}-400'
     },
     size: {
       '3xs': 'h-1 w-1',
@@ -42,7 +40,6 @@ const avatar = {
   default: {
     size: 'sm',
     chipColor: null,
-    chipVariant: 'solid',
     chipPosition: 'top-right'
   }
 }
