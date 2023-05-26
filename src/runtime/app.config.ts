@@ -18,14 +18,12 @@ const avatar = {
   },
   chip: {
     base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900',
+    background: 'bg-{color}-400',
     position: {
       'top-right': 'top-0 right-0',
       'bottom-right': 'bottom-0 right-0',
       'top-left': 'top-0 left-0',
       'bottom-left': 'bottom-0 left-0'
-    },
-    variant: {
-      solid: 'bg-{color}-400'
     },
     size: {
       '3xs': 'h-1 w-1',
@@ -42,7 +40,6 @@ const avatar = {
   default: {
     size: 'sm',
     chipColor: null,
-    chipVariant: 'solid',
     chipPosition: 'top-right'
   }
 }
@@ -718,13 +715,17 @@ const notification = {
   rounded: 'rounded-lg',
   padding: 'p-4',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  icon: 'flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white',
-  avatar: 'flex-shrink-0 pt-0.5',
+  icon: {
+    base: 'flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white',
+    color: 'text-{color}-500 dark:text-{color}-400'
+  },
+  avatar: {
+    base: 'flex-shrink-0 self-center',
+    size: 'md'
+  },
   progress: {
     base: 'absolute bottom-0 left-0 right-0 h-1',
-    variant: {
-      solid: 'bg-{color}-500 dark:bg-{color}-400',
-    }
+    background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   transition: {
     enterActiveClass: 'transform ease-out duration-300 transition',
@@ -735,8 +736,8 @@ const notification = {
     leaveToClass: 'opacity-0'
   },
   default: {
-    progressColor: 'primary',
-    progressVariant: 'solid',
+    color: 'primary',
+    icon: null,
     close: {
       icon: 'i-heroicons-x-mark-20-solid',
       color: 'gray',

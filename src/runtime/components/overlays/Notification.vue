@@ -4,8 +4,8 @@
       <div :class="[ui.container, ui.rounded, ui.ring]">
         <div :class="ui.padding">
           <div class="flex gap-3" :class="{ 'items-start': description, 'items-center': !description }">
-            <UIcon v-if="icon" :name="icon" :class="ui.icon" />
-            <UAvatar v-if="avatar" v-bind="avatar" :class="ui.avatar" />
+            <UIcon v-if="icon" :name="icon" :class="iconClass" />
+            <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
 
             <div class="w-0 flex-1">
               <p :class="ui.title">
@@ -74,7 +74,7 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: null
+      default: () => appConfig.ui.notification.default.icon
     },
     avatar: {
       type: Object as PropType<Partial<Avatar>>,
@@ -96,18 +96,11 @@ export default defineComponent({
       type: Function,
       default: null
     },
-    progressColor: {
+    color: {
       type: String,
-      default: () => appConfig.ui.notification.default.progressColor,
+      default: () => appConfig.ui.notification.default.color,
       validator (value: string) {
         return ['gray', ...appConfig.ui.colors].includes(value)
-      }
-    },
-    progressVariant: {
-      type: String,
-      default: () => appConfig.ui.notification.default.progressVariant,
-      validator (value: string) {
-        return Object.keys(appConfig.ui.notification.progress.variant).includes(value)
       }
     },
     ui: {
@@ -134,7 +127,14 @@ export default defineComponent({
     const progressClass = computed(() => {
       return classNames(
         ui.value.progress.base,
-        ui.value.progress.variant[props.progressVariant]?.replaceAll('{color}', props.progressColor)
+        ui.value.progress.background?.replaceAll('{color}', props.color)
+      )
+    })
+
+    const iconClass = computed(() => {
+      return classNames(
+        ui.value.icon.base,
+        ui.value.icon.color?.replaceAll('{color}', props.color)
       )
     })
 
@@ -199,6 +199,7 @@ export default defineComponent({
       ui,
       progressStyle,
       progressClass,
+      iconClass,
       onMouseover,
       onMouseleave,
       onClose,

@@ -17,7 +17,6 @@ export interface Notification {
   actions?: NotificationAction[]
   click?: Function
   callback?: Function
-  progressColor?: string
-  progressVariant?: string
+  color?: string
   ui?: Partial<typeof appConfig.ui.notification>
 }
