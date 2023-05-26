@@ -1,6 +1,7 @@
 import { h, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
+import { getSlotsChildren } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -28,20 +29,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.buttonGroup>>(() => defu({}, props.ui, appConfig.ui.buttonGroup))
 
-    const children = computed(() => {
-      let children = slots.default?.()
-      if (children.length) {
-        if (typeof children[0].type === 'symbol') {
-          // @ts-ignore-next
-          children = children[0].children
-        // @ts-ignore-next
-        } else if (children[0].type.name === 'ContentSlot') {
-          // @ts-ignore-next
-          children = children[0].ctx.slots.default?.()
-        }
-      }
-      return children
-    })
+    const children = computed(() => getSlotsChildren(slots))
 
     const rounded = computed(() => ({
       'rounded-none': { left: 'rounded-l-none', right: 'rounded-r-none' },

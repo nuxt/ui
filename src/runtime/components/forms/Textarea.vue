@@ -72,6 +72,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    padded: {
+      type: Boolean,
+      default: true
+    },
     size: {
       type: String,
       default: () => appConfig.ui.textarea.default.size,
@@ -79,11 +83,21 @@ export default defineComponent({
         return Object.keys(appConfig.ui.textarea.size).includes(value)
       }
     },
-    appearance: {
+    color: {
       type: String,
-      default: () => appConfig.ui.textarea.default.appearance,
+      default: () => appConfig.ui.textarea.default.color,
       validator (value: string) {
-        return Object.keys(appConfig.ui.textarea.appearance).includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.textarea.color)].includes(value)
+      }
+    },
+    variant: {
+      type: String,
+      default: () => appConfig.ui.textarea.default.variant,
+      validator (value: string) {
+        return [
+          ...Object.keys(appConfig.ui.textarea.variant),
+          ...Object.values(appConfig.ui.textarea.color).flatMap(value => Object.keys(value))
+        ].includes(value)
       }
     },
     ui: {
@@ -146,11 +160,15 @@ export default defineComponent({
     })
 
     const textareaClass = computed(() => {
+      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+
       return classNames(
         ui.value.base,
+        ui.value.rounded,
+        ui.value.placeholder,
         ui.value.size[props.size],
-        ui.value.padding[props.size],
-        ui.value.appearance[props.appearance],
+        props.padded && ui.value.padding[props.size],
+        variant?.replaceAll('{color}', props.color),
         !props.resize && 'resize-none',
         ui.value.custom
       )

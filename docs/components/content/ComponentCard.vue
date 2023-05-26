@@ -7,7 +7,7 @@
           v-if="prop.type === 'boolean'"
           v-model="componentProps[prop.name]"
           :name="prop.name"
-          appearance="none"
+          variant="none"
           class="justify-center"
         />
         <USelectMenu
@@ -16,7 +16,7 @@
           :options="prop.options"
           :name="prop.name"
           :label="componentProps[prop.name]"
-          appearance="none"
+          variant="none"
           class="inline-flex"
           :ui="{ width: 'w-32 !-mt-px', rounded: 'rounded-b-md' }"
           :ui-select="{ custom: '!py-0' }"
@@ -27,7 +27,7 @@
           :model-value="componentProps[prop.name]"
           :type="prop.type === 'number' ? 'number' : 'text'"
           :name="prop.name"
-          appearance="none"
+          variant="none"
           autocomplete="off"
           :ui="{ custom: '!py-0' }"
           @update:model-value="val => componentProps[prop.name] = prop.type === 'number' ? Number(val) : val"

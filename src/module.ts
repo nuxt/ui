@@ -146,19 +146,19 @@ export default defineNuxtModule<ModuleOptions>({
         variants: ['dark:focus-visible']
       }, {
         pattern: new RegExp(`ring-(${safeColorsAsRegex})-500`),
-        variants: ['focus-visible']
+        variants: ['focus', 'focus-visible']
       }, {
         pattern: new RegExp(`ring-(${safeColorsAsRegex})-400`),
-        variants: ['dark', 'dark:focus-visible']
+        variants: ['dark', 'dark:focus', 'dark:focus-visible']
       }, {
         pattern: new RegExp(`text-(${safeColorsAsRegex})-400`),
         variants: ['dark']
       }, {
-        pattern: new RegExp(`text-(${safeColorsAsRegex})-600`),
-        variants: ['hover']
-      }, {
         pattern: new RegExp(`text-(${safeColorsAsRegex})-500`),
         variants: ['dark:hover']
+      }, {
+        pattern: new RegExp(`text-(${safeColorsAsRegex})-600`),
+        variants: ['hover']
       }])
 
       tailwindConfig.plugins = tailwindConfig.plugins || []

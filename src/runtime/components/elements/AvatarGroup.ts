@@ -1,7 +1,7 @@
 import { h, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { classNames } from '../../utils'
+import { classNames, getSlotsChildren } from '../../utils'
 import Avatar from './Avatar.vue'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -34,20 +34,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.avatarGroup>>(() => defu({}, props.ui, appConfig.ui.avatarGroup))
 
-    const children = computed(() => {
-      let children = slots.default?.()
-      if (children.length) {
-        if (typeof children[0].type === 'symbol') {
-          // @ts-ignore-next
-          children = children[0].children
-        // @ts-ignore-next
-        } else if (children[0].type.name === 'ContentSlot') {
-          // @ts-ignore-next
-          children = children[0].ctx.slots.default?.()
-        }
-      }
-      return children
-    })
+    const children = computed(() => getSlotsChildren(slots))
 
     const max = computed(() => typeof props.max === 'string' ? parseInt(props.max, 10) : props.max)
 
