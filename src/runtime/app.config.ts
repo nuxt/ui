@@ -279,7 +279,7 @@ const input = {
     none: 'bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
-    color: 'text-{color}-400 dark:text-{color}-500',
+    color: 'text-{color}-500 dark:text-{color}-400',
     size: {
       '2xs': 'h-3.5 w-3.5',
       xs: 'h-4 w-4',
