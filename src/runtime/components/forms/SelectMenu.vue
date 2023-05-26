@@ -283,7 +283,7 @@ export default defineComponent({
 
     const iconClass = computed(() => {
       return classNames(
-        uiSelect.value.icon.base,
+        uiSelect.value.icon.color.replaceAll('{color}', ['gray', ...appConfig.ui.colors].includes(props.color) ? props.color : 'gray'),
         uiSelect.value.icon.size[props.size]
       )
     })
