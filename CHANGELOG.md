@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/nuxtlabs/ui/compare/v2.1.0...v2.2.0) (2023-05-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* handle color states on form elements (#234)
+* **Notification:** rename `progressColor` to `color` and style icon
+* **Avatar:** remove `chipVariant` prop
+* **VerticalNavigation:** split preset
+
+### Features
+
+* handle color states on form elements ([#234](https://github.com/nuxtlabs/ui/issues/234)) ([9ce531a](https://github.com/nuxtlabs/ui/commit/9ce531a06f1a972bc003876162e0503c1bbbdbd8))
+
+
+### Bug Fixes
+
+* **Notification:** remove default color on icon ([1a9dc5c](https://github.com/nuxtlabs/ui/commit/1a9dc5c980d8477cdf9386a17e20fc9fec0d883e))
+* **Radio/Checkbox:** remove ring offset on focus ([a56dbea](https://github.com/nuxtlabs/ui/commit/a56dbeab351a5c58e5bb49f5762669e2884c6483))
+* **VerticalNavigation:** badge display ([d2ee505](https://github.com/nuxtlabs/ui/commit/d2ee5058f819fc17f281f323dab2f0b3d80cf7bd)), closes [#205](https://github.com/nuxtlabs/ui/issues/205)
+
+
+* **Avatar:** remove `chipVariant` prop ([1f22f84](https://github.com/nuxtlabs/ui/commit/1f22f84360c20498eea8971b21db9293a4c9c3dc))
+* **Notification:** rename `progressColor` to `color` and style icon ([1b61ec7](https://github.com/nuxtlabs/ui/commit/1b61ec72e292325d7776a4719f14a75bdb18e110))
+* **VerticalNavigation:** split preset ([19923cb](https://github.com/nuxtlabs/ui/commit/19923cbf1edc6c6d4aefb9ffab9f908b116e1c69))
+
 ## [2.1.0](https://github.com/nuxtlabs/ui/compare/v2.0.4...v2.1.0) (2023-05-19)
 
 
