@@ -53,7 +53,7 @@ export default defineComponent({
     const children = computed(() => getSlotsChildren(slots))
 
     const clones = computed(() => children.value.map((node) => {
-      if (!!props.error) {
+      if (props.error) {
         node.props.oldColor = node.props.color
         node.props.color = 'red'
       } else {
