@@ -36,5 +36,13 @@ export default defineNuxtConfig({
   },
   generate: {
     routes: ['/getting-started']
+  },
+  componentMeta: {
+    metaFields: {
+      props: true,
+      slots: false,
+      events: false,
+      exposed: false
+    }
   }
 })
