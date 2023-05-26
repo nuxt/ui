@@ -18,7 +18,7 @@ const avatar = {
   },
   chip: {
     base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900',
-    background: 'bg-{color}-400',
+    background: 'bg-{color}-500 dark:bg-{color}-400',
     position: {
       'top-right': 'top-0 right-0',
       'bottom-right': 'bottom-0 right-0',
@@ -716,7 +716,7 @@ const notification = {
   padding: 'p-4',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   icon: {
-    base: 'flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white',
+    base: 'flex-shrink-0 w-5 h-5',
     color: 'text-{color}-500 dark:text-{color}-400'
   },
   avatar: {
