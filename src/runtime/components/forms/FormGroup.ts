@@ -32,7 +32,7 @@ export default defineComponent({
       default: null
     },
     error: {
-      type: String,
+      type: [String, Boolean],
       default: null
     },
     hint: {
@@ -75,7 +75,7 @@ export default defineComponent({
       props.description && h('p', { class: [ui.value.description] }, props.description),
       h('div', { class: [!!props.label && ui.value.container] }, [
         ...clones.value,
-        props.error ? h('p', { class: [ui.value.error] }, props.error) : props.help ? h('p', { class: [ui.value.help] }, props.help) : null
+        props.error && typeof props.error === 'string' ? h('p', { class: [ui.value.error] }, props.error) : props.help ? h('p', { class: [ui.value.help] }, props.help) : null
       ])
     ])
   }
