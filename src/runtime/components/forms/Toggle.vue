@@ -1,6 +1,7 @@
 <template>
   <Switch
     v-model="active"
+    :name="name"
     :class="[active ? ui.active : ui.inactive, ui.base]"
   >
     <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
@@ -34,17 +35,21 @@ export default defineComponent({
     UIcon
   },
   props: {
+    name: {
+      type: String,
+      default: null
+    },
     modelValue: {
       type: Boolean,
       default: false
     },
     iconOn: {
       type: String,
-      default: null
+      default: () => appConfig.ui.toggle.default.iconOn
     },
     iconOff: {
       type: String,
-      default: null
+      default: () => appConfig.ui.toggle.default.iconOff
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.toggle>>,
