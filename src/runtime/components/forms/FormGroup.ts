@@ -1,4 +1,4 @@
-import { computed, defineComponent } from 'vue'
+import { h, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { getSlotsChildren } from '../../utils'
