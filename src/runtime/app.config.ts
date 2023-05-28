@@ -1,3 +1,16 @@
+// Data
+
+const table = {
+  wrapper: 'relative',
+  container: 'min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700',
+  thead: '',
+  tbody: 'divide-y divide-gray-200 dark:divide-gray-800',
+  tr: '',
+  selected: 'bg-gray-50 dark:bg-gray-800/50',
+  th: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white',
+  td: 'whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400'
+}
+
 // Elements
 
 const avatar = {
@@ -765,6 +778,7 @@ const notifications = {
 
 export default {
   ui: {
+    table,
     avatar,
     avatarGroup,
     badge,
