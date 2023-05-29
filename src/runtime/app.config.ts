@@ -10,7 +10,19 @@ const table = {
     selected: 'bg-gray-50 dark:bg-gray-800/50'
   },
   th: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white',
-  td: 'whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400'
+  td: 'whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400',
+  default: {
+    sortAscIcon: 'i-heroicons-bars-arrow-down-20-solid',
+    sortDescIcon: 'i-heroicons-bars-arrow-up-20-solid',
+    sortButton: {
+      icon: 'i-heroicons-arrows-up-down-20-solid',
+      trailing: true,
+      square: true,
+      color: 'gray',
+      variant: 'ghost',
+      class: '-mx-2'
+    }
+  }
 }
 
 // Elements

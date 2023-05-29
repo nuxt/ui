@@ -8,7 +8,16 @@
           </th>
 
           <th v-for="(column, index) in columns" :key="index" scope="col" :class="ui.th">
-            {{ column[columnAttribute] }}
+            <slot :name="`${column.key}-header`" :column="column">
+              <UButton
+                v-if="column.sortable"
+                v-bind="sortButton"
+                :icon="(!sort.field || sort.field !== column.key) ? sortButton.icon : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
+                :label="column[columnAttribute] || capitalize(column.key)"
+                @click="onSort(column.key)"
+              />
+              <span v-else>{{ column[columnAttribute] || capitalize(column.key) }}</span>
+            </slot>
           </th>
         </tr>
       </thead>
@@ -32,8 +41,9 @@
 <script lang="ts">
 import { computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
-import { capitalize } from 'lodash-es'
+import { capitalize, orderBy } from 'lodash-es'
 import { defu } from 'defu'
+import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -67,6 +77,18 @@ export default defineComponent({
       type: String,
       default: 'label'
     },
+    sortButton: {
+      type: Object as PropType<Partial<Button>>,
+      default: () => appConfig.ui.table.default.sortButton
+    },
+    sortAscIcon: {
+      type: String,
+      default: () => appConfig.ui.table.default.sortAscIcon
+    },
+    sortDescIcon: {
+      type: String,
+      default: () => appConfig.ui.table.default.sortDescIcon
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.table>>,
       default: () => appConfig.ui.table
@@ -79,7 +101,19 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.table>>(() => defu({}, props.ui, appConfig.ui.table))
 
+    const sort = ref({ field: null, direction: null })
+
     const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: capitalize(key) })))
+
+    const rows = computed(() => {
+      if (!sort.value?.field) {
+        return props.rows
+      }
+
+      const { field, direction } = sort.value
+
+      return orderBy(props.rows, field, direction)
+    })
 
     const selected = computed({
       get () {
@@ -108,14 +142,27 @@ export default defineComponent({
       return selected.value.some((item) => compare(toRaw(item), toRaw(row)))
     }
 
+    function onSort (field: string) {
+      if (sort.value.field === field) {
+        sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+      } else {
+        sort.value = { field, direction: 'asc' }
+      }
+    }
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      sort,
       // eslint-disable-next-line vue/no-dupe-keys
       columns,
+      // eslint-disable-next-line vue/no-dupe-keys
+      rows,
       selected,
       indeterminate,
-      isSelected
+      isSelected,
+      onSort,
+      capitalize
     }
   }
 })

@@ -1,16 +1,17 @@
 <script setup>
 const columns = [{
+  key: 'id'
+}, {
   key: 'name',
-  label: 'User name'
+  sortable: true
 }, {
   key: 'title',
-  label: 'Job position'
+  sortable: true
 }, {
   key: 'email',
-  label: 'Email'
+  sortable: true
 }, {
-  key: 'role',
-  label: ''
+  key: 'role'
 }]
 
 const people = [{
