@@ -8,15 +8,15 @@
           </th>
 
           <th v-for="(column, index) in columns" :key="index" scope="col" :class="ui.th">
-            <slot :name="`${column.key}-header`" :column="column">
+            <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
                 v-bind="sortButton"
                 :icon="(!sort.field || sort.field !== column.key) ? sortButton.icon : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
-                :label="column[columnAttribute] || capitalize(column.key)"
+                :label="column[columnAttribute]"
                 @click="onSort(column.key)"
               />
-              <span v-else>{{ column[columnAttribute] || capitalize(column.key) }}</span>
+              <span v-else>{{ column[columnAttribute] }}</span>
             </slot>
           </th>
         </tr>
@@ -28,7 +28,7 @@
           </td>
 
           <td v-for="(column, subIndex) in columns" :key="subIndex" :class="ui.td">
-            <slot :name="`${column.key}-column`" :column="column" :row="row">
+            <slot :name="`${column.key}-data`" :column="column" :row="row">
               {{ row[column.key] }}
             </slot>
           </td>
@@ -142,11 +142,11 @@ export default defineComponent({
       return selected.value.some((item) => compare(toRaw(item), toRaw(row)))
     }
 
-    function onSort (field: string) {
+    function onSort (field: string, direction?: 'asc' | 'desc') {
       if (sort.value.field === field) {
-        sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+        sort.value.direction = direction || sort.value.direction === 'asc' ? 'desc' : 'asc'
       } else {
-        sort.value = { field, direction: 'asc' }
+        sort.value = { field, direction: direction || 'asc' }
       }
     }
 
@@ -161,8 +161,7 @@ export default defineComponent({
       selected,
       indeterminate,
       isSelected,
-      onSort,
-      capitalize
+      onSort
     }
   }
 })

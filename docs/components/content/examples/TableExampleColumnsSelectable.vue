@@ -1,5 +1,8 @@
 <script setup>
 const columns = [{
+  key: 'id',
+  label: 'ID'
+}, {
   key: 'name',
   label: 'Name'
 }, {

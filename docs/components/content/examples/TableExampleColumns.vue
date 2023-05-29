@@ -1,5 +1,8 @@
 <script setup>
 const columns = [{
+  key: 'id',
+  label: 'ID'
+}, {
   key: 'name',
   label: 'User name'
 }, {
@@ -9,8 +12,7 @@ const columns = [{
   key: 'email',
   label: 'Email'
 }, {
-  key: 'role',
-  label: ''
+  key: 'role'
 }]
 
 const people = [{
