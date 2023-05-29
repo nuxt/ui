@@ -1,20 +1,4 @@
 <script setup>
-const columns = [{
-  key: 'name',
-  label: 'Name'
-}, {
-  key: 'title',
-  label: 'Title'
-}, {
-  key: 'email',
-  label: 'Email'
-}, {
-  key: 'role',
-  label: 'Role'
-}]
-
-const selectedColumns = ref([...columns])
-
 const people = [{
   name: 'Lindsay Walton',
   title: 'Front-end Developer',
@@ -46,14 +30,28 @@ const people = [{
   email: 'floyd.miles@example.com',
   role: 'Member'
 }]
+
+const q = ref('')
+
+const filteredRows = computed(() => {
+  if (!q.value) {
+    return people
+  }
+
+  return people.filter((person) => {
+    return Object.values(person).some((value) => {
+      return String(value).toLowerCase().includes(q.value.toLowerCase())
+    })
+  })
+})
 </script>
 
 <template>
   <div>
     <div class="flex px-3 py-3.5 border-b border-gray-200 dark:border-gray-700">
-      <USelectMenu v-model="selectedColumns" :options="columns" multiple placeholder="Columns" />
+      <UInput v-model="q" placeholder="Filter people..." />
     </div>
 
-    <UTable :columns="selectedColumns" :rows="people" />
+    <UTable :rows="filteredRows" />
   </div>
 </template>
