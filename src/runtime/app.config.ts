@@ -744,13 +744,13 @@ const notification = {
   default: {
     color: 'primary',
     icon: null,
-    close: {
+    closeButton: {
       icon: 'i-heroicons-x-mark-20-solid',
       color: 'gray',
       variant: 'link',
       padded: false
     },
-    action: {
+    actionButton: {
       size: 'xs',
       color: 'white'
     }

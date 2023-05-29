@@ -12,7 +12,7 @@ export interface Notification {
   description: string
   icon?: string
   avatar?: Partial<Avatar>
-  close?: Partial<Button>
+  closeButton?: Partial<Button>
   timeout: number
   actions?: NotificationAction[]
   click?: Function
