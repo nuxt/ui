@@ -99,11 +99,11 @@ const button = {
     xl: 'px-4 py-3'
   },
   square: {
-    '2xs': 'p-[5px]',
+    '2xs': 'p-1',
     xs: 'p-1.5',
-    sm: 'p-2',
+    sm: 'p-1.5',
     md: 'p-2',
-    lg: 'p-2.5',
+    lg: 'p-2',
     xl: 'p-3'
   },
   color: {
