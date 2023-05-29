@@ -17,8 +17,8 @@ const groups = computed(() => navigation.value.map(item => ({
   }))
 })))
 
-const close = computed(() => commandPaletteRef.value?.query ? ({ icon: 'i-heroicons-x-mark', color: 'black', variant: 'ghost', size: 'lg', padded: false }) : null)
-const empty = computed(() => commandPaletteRef.value?.query ? ({ icon: 'i-heroicons-magnifying-glass', queryLabel: 'No results' }) : ({ icon: '', label: 'No recent searches' }))
+const closeButton = computed(() => commandPaletteRef.value?.query ? ({ icon: 'i-heroicons-x-mark', color: 'black', variant: 'ghost', size: 'lg', padded: false }) : null)
+const emptyState = computed(() => commandPaletteRef.value?.query ? ({ icon: 'i-heroicons-magnifying-glass', queryLabel: 'No results' }) : ({ icon: '', label: 'No recent searches' }))
 
 const ui = {
   wrapper: 'flex flex-col flex-1 min-h-0 bg-gray-50 dark:bg-gray-800',
@@ -50,7 +50,7 @@ const ui = {
       }
     }
   },
-  empty: {
+  emptyState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 py-9',
     label: 'text-sm text-center text-gray-500 dark:text-gray-400',
     queryLabel: 'text-lg text-center text-gray-900 dark:text-white',
@@ -64,8 +64,8 @@ const ui = {
     ref="commandPaletteRef"
     :groups="groups"
     :ui="ui"
-    :close="close"
-    :empty="empty"
+    :close-button="closeButton"
+    :empty-state="emptyState"
     :autoselect="false"
     command-attribute="title"
     :fuse="{

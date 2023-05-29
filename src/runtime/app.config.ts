@@ -126,11 +126,11 @@ const button = {
     xl: 'px-4 py-3'
   },
   square: {
-    '2xs': 'p-[5px]',
+    '2xs': 'p-1',
     xs: 'p-1.5',
-    sm: 'p-2',
+    sm: 'p-1.5',
     md: 'p-2',
-    lg: 'p-2.5',
+    lg: 'p-2',
     xl: 'p-3'
   },
   color: {
@@ -466,8 +466,8 @@ const toggle = {
     off: 'h-3 w-3 text-gray-400 dark:text-gray-500'
   },
   default: {
-    iconOn: null,
-    iconOff: null
+    onIcon: null,
+    offIcon: null
   }
 }
 
@@ -553,9 +553,9 @@ const commandPalette = {
       size: 'h-4 w-4',
       padding: 'pl-10'
     },
-    close: 'absolute right-4'
+    closeButton: 'absolute right-4'
   },
-  empty: {
+  emptyState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
     queryLabel: 'text-sm text-center text-gray-900 dark:text-white',
@@ -597,12 +597,12 @@ const commandPalette = {
   default: {
     icon: 'i-heroicons-magnifying-glass-20-solid',
     loadingIcon: 'i-heroicons-arrow-path-20-solid',
-    empty: {
+    emptyState: {
       icon: 'i-heroicons-magnifying-glass-20-solid',
       label: 'We couldn\'t find any items.',
       queryLabel: 'We couldn\'t find any items with that term. Please try again.'
     },
-    close: null,
+    closeButton: null,
     selectedIcon: 'i-heroicons-check-20-solid'
   }
 }
@@ -771,13 +771,13 @@ const notification = {
   default: {
     color: 'primary',
     icon: null,
-    close: {
+    closeButton: {
       icon: 'i-heroicons-x-mark-20-solid',
       color: 'gray',
       variant: 'link',
       padded: false
     },
-    action: {
+    actionButton: {
       size: 'xs',
       color: 'white'
     }

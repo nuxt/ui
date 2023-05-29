@@ -16,15 +16,15 @@
               </p>
 
               <div v-if="description && actions.length" class="mt-3 flex items-center gap-2">
-                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
+                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
               </div>
             </div>
             <div class="flex-shrink-0 flex items-center gap-3">
               <div v-if="!description && actions.length" class="flex items-center gap-2">
-                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
+                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
               </div>
 
-              <UButton v-if="close" v-bind="{ ...ui.default.close, ...close }" @click.stop="onClose" />
+              <UButton v-if="closeButton" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="onClose" />
             </div>
           </div>
         </div>
@@ -80,9 +80,9 @@ export default defineComponent({
       type: Object as PropType<Partial<Avatar>>,
       default: null
     },
-    close: {
+    closeButton: {
       type: Object as PropType<Partial<Button>>,
-      default: () => appConfig.ui.notification.default.close
+      default: () => appConfig.ui.notification.default.closeButton
     },
     timeout: {
       type: Number,
