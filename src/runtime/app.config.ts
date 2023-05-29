@@ -360,6 +360,7 @@ const textarea = {
 
 const select = {
   ...input,
+  placeholder: 'text-gray-900 dark:text-white',
   default: {
     size: 'sm',
     color: 'white',
