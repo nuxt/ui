@@ -526,9 +526,9 @@ const commandPalette = {
       size: 'h-4 w-4',
       padding: 'pl-10'
     },
-    close: 'absolute right-4'
+    closeButton: 'absolute right-4'
   },
-  empty: {
+  emptyState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
     queryLabel: 'text-sm text-center text-gray-900 dark:text-white',
@@ -570,12 +570,12 @@ const commandPalette = {
   default: {
     icon: 'i-heroicons-magnifying-glass-20-solid',
     loadingIcon: 'i-heroicons-arrow-path-20-solid',
-    empty: {
+    emptyState: {
       icon: 'i-heroicons-magnifying-glass-20-solid',
       label: 'We couldn\'t find any items.',
       queryLabel: 'We couldn\'t find any items with that term. Please try again.'
     },
-    close: null,
+    closeButton: null,
     selectedIcon: 'i-heroicons-check-20-solid'
   }
 }
