@@ -5,11 +5,11 @@
     :class="[active ? ui.active : ui.inactive, ui.base]"
   >
     <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
-      <span v-if="iconOn" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
-        <UIcon :name="iconOn" :class="ui.icon.on" />
+      <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
+        <UIcon :name="onIcon" :class="ui.icon.on" />
       </span>
-      <span v-if="iconOff" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]" aria-hidden="true">
-        <UIcon :name="iconOff" :class="ui.icon.off" />
+      <span v-if="offIcon" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]" aria-hidden="true">
+        <UIcon :name="offIcon" :class="ui.icon.off" />
       </span>
     </span>
   </Switch>
@@ -43,13 +43,13 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    iconOn: {
+    onIcon: {
       type: String,
-      default: () => appConfig.ui.toggle.default.iconOn
+      default: () => appConfig.ui.toggle.default.onIcon
     },
-    iconOff: {
+    offIcon: {
       type: String,
-      default: () => appConfig.ui.toggle.default.iconOff
+      default: () => appConfig.ui.toggle.default.offIcon
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.toggle>>,

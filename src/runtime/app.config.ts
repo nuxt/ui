@@ -439,8 +439,8 @@ const toggle = {
     off: 'h-3 w-3 text-gray-400 dark:text-gray-500'
   },
   default: {
-    iconOn: null,
-    iconOff: null
+    onIcon: null,
+    offIcon: null
   }
 }
 
