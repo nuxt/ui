@@ -34,8 +34,9 @@
           </span>
 
           <slot name="label">
-            <span v-if="modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : modelValue[optionAttribute] }}</span>
-            <span v-else class="block truncate text-gray-400 dark:text-gray-500">{{ placeholder || '&nbsp;' }}</span>
+            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" class="block truncate">{{ modelValue.length }} selected</span>
+            <span v-else-if="!multiple && modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : modelValue[optionAttribute] }}</span>
+            <span v-else class="block truncate" :class="ui.placeholder">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
           <span v-if="trailingIcon" :class="trailingIconClass">
@@ -268,7 +269,6 @@ export default defineComponent({
       return classNames(
         uiSelect.value.base,
         uiSelect.value.rounded,
-        uiSelect.value.placeholder,
         'text-left cursor-default',
         uiSelect.value.size[props.size],
         uiSelect.value.gap[props.size],

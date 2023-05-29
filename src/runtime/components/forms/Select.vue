@@ -207,7 +207,6 @@ export default defineComponent({
       return classNames(
         ui.value.base,
         ui.value.rounded,
-        ui.value.placeholder,
         ui.value.size[props.size],
         props.padded && ui.value.padding[props.size],
         variant?.replaceAll('{color}', props.color),
