@@ -103,7 +103,7 @@ export default defineComponent({
 
     const sort = ref({ field: null, direction: null })
 
-    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: capitalize(key) })))
+    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: capitalize(key), sortable: false })))
 
     const rows = computed(() => {
       if (!sort.value?.field) {
