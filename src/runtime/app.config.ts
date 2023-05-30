@@ -9,8 +9,20 @@ const table = {
     base: '',
     selected: 'bg-gray-50 dark:bg-gray-800/50'
   },
-  th: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white',
-  td: 'whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400',
+  th: {
+    base: '',
+    padding: 'px-3 py-3.5',
+    color: 'text-gray-900 dark:text-white',
+    font: 'font-semibold',
+    size: 'text-sm'
+  },
+  td: {
+    base: 'whitespace-nowrap',
+    padding: 'px-3 py-4',
+    color: 'text-gray-500 dark:text-gray-400',
+    font: '',
+    size: 'text-sm'
+  },
   default: {
     sortAscIcon: 'i-heroicons-bars-arrow-up-20-solid',
     sortDescIcon: 'i-heroicons-bars-arrow-down-20-solid',

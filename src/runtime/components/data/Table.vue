@@ -7,7 +7,7 @@
             <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" @change="selected = $event.target.checked ? rows : []" />
           </th>
 
-          <th v-for="(column, index) in columns" :key="index" scope="col" :class="ui.th">
+          <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size]">
             <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
@@ -27,7 +27,7 @@
             <UCheckbox v-model="selected" :value="row" />
           </td>
 
-          <td v-for="(column, subIndex) in columns" :key="subIndex" :class="ui.td">
+          <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
             <slot :name="`${column.key}-data`" :column="column" :row="row">
               {{ row[column.key] }}
             </slot>
