@@ -13,7 +13,8 @@ const columns = [{
 }, {
   key: 'email',
   label: 'Email',
-  sortable: true
+  sortable: true,
+  direction: 'desc'
 }, {
   key: 'role',
   label: 'Role'
@@ -59,5 +60,5 @@ const people = [{
 </script>
 
 <template>
-  <UTable :columns="columns" :rows="people" />
+  <UTable :columns="columns" :rows="people" :sort="{ column: 'title' }" />
 </template>

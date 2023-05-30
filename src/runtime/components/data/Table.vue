@@ -12,9 +12,9 @@
               <UButton
                 v-if="column.sortable"
                 v-bind="sortButton"
-                :icon="(!sort.field || sort.field !== column.key) ? sortButton.icon : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
+                :icon="(!sort.column || sort.column !== column.key) ? sortButton.icon : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
                 :label="column[columnAttribute]"
-                @click="onSort(column.key)"
+                @click="onSort(column)"
               />
               <span v-else>{{ column[columnAttribute] }}</span>
             </slot>
@@ -77,6 +77,10 @@ export default defineComponent({
       type: String,
       default: 'label'
     },
+    sort: {
+      type: Object,
+      default: () => ({})
+    },
     sortButton: {
       type: Object as PropType<Partial<Button>>,
       default: () => appConfig.ui.table.default.sortButton
@@ -101,18 +105,18 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.table>>(() => defu({}, props.ui, appConfig.ui.table))
 
-    const sort = ref({ field: null, direction: null })
-
     const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: capitalize(key), sortable: false })))
 
+    const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
+
     const rows = computed(() => {
-      if (!sort.value?.field) {
+      if (!sort.value?.column) {
         return props.rows
       }
 
-      const { field, direction } = sort.value
+      const { column, direction } = sort.value
 
-      return orderBy(props.rows, field, direction)
+      return orderBy(props.rows, column, direction)
     })
 
     const selected = computed({
@@ -142,17 +146,18 @@ export default defineComponent({
       return selected.value.some((item) => compare(toRaw(item), toRaw(row)))
     }
 
-    function onSort (field: string, direction?: 'asc' | 'desc') {
-      if (sort.value.field === field) {
-        sort.value.direction = direction || sort.value.direction === 'asc' ? 'desc' : 'asc'
+    function onSort (column) {
+      if (sort.value.column === column.key) {
+        sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
       } else {
-        sort.value = { field, direction: direction || 'asc' }
+        sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
     }
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      // eslint-disable-next-line vue/no-dupe-keys
       sort,
       // eslint-disable-next-line vue/no-dupe-keys
       columns,
