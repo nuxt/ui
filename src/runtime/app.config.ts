@@ -20,7 +20,7 @@ const table = {
       square: true,
       color: 'gray',
       variant: 'ghost',
-      class: '-mx-2'
+      class: '-m-1.5'
     }
   }
 }
