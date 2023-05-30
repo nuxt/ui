@@ -10,7 +10,7 @@ const table = {
     selected: 'bg-gray-50 dark:bg-gray-800/50'
   },
   th: {
-    base: '',
+    base: 'text-left',
     padding: 'px-3 py-3.5',
     color: 'text-gray-900 dark:text-white',
     font: 'font-semibold',
