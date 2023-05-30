@@ -78,7 +78,7 @@ export default defineComponent({
       default: 'label'
     },
     sort: {
-      type: Object,
+      type: Object as PropType<{ column: string, direction: 'asc' | 'desc' }>,
       default: () => ({})
     },
     sortButton: {
