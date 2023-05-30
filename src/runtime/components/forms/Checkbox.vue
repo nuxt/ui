@@ -8,6 +8,8 @@
         :required="required"
         :value="value"
         :disabled="disabled"
+        :checked="checked"
+        :indeterminate="indeterminate"
         type="checkbox"
         :class="[ui.base, ui.custom]"
         @focus="$emit('focus', $event)"
@@ -40,7 +42,7 @@ import appConfig from '#build/app.config'
 export default defineComponent({
   props: {
     value: {
-      type: [String, Number, Boolean],
+      type: [String, Number, Boolean, Object],
       default: null
     },
     modelValue: {
@@ -52,6 +54,14 @@ export default defineComponent({
       default: null
     },
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    checked: {
+      type: Boolean,
+      default: false
+    },
+    indeterminate: {
       type: Boolean,
       default: false
     },

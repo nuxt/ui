@@ -1,3 +1,30 @@
+// Data
+
+const table = {
+  wrapper: 'relative',
+  container: 'min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700',
+  thead: '',
+  tbody: 'divide-y divide-gray-200 dark:divide-gray-800',
+  tr: {
+    base: '',
+    selected: 'bg-gray-50 dark:bg-gray-800/50'
+  },
+  th: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white',
+  td: 'whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400',
+  default: {
+    sortAscIcon: 'i-heroicons-bars-arrow-up-20-solid',
+    sortDescIcon: 'i-heroicons-bars-arrow-down-20-solid',
+    sortButton: {
+      icon: 'i-heroicons-arrows-up-down-20-solid',
+      trailing: true,
+      square: true,
+      color: 'gray',
+      variant: 'ghost',
+      class: '-m-1.5'
+    }
+  }
+}
+
 // Elements
 
 const avatar = {
@@ -411,7 +438,7 @@ const selectMenu = {
 
 const radio = {
   wrapper: 'relative flex items-start',
-  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
   label: 'font-medium text-gray-700 dark:text-gray-200',
   required: 'text-red-500 dark:text-red-400',
   help: 'text-gray-500 dark:text-gray-400'
@@ -766,6 +793,7 @@ const notifications = {
 
 export default {
   ui: {
+    table,
     avatar,
     avatarGroup,
     badge,
