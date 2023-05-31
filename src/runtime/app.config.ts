@@ -404,7 +404,7 @@ const select = {
 }
 
 const selectMenu = {
-  wrapper: 'relative inline-flex',
+  wrapper: 'relative',
   container: 'z-20',
   width: 'w-full',
   height: 'max-h-60',
