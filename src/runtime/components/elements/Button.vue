@@ -5,13 +5,19 @@
     :aria-label="ariaLabel"
     v-bind="buttonProps"
   >
-    <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
+    <slot name="leading" :disabled="disabled" :loading="loading">
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
+    </slot>
+
     <slot>
       <span v-if="label" :class="[truncate ? 'text-left break-all line-clamp-1' : '']">
         {{ label }}
       </span>
     </slot>
-    <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+
+    <slot name="trailing" :disabled="disabled" :loading="loading">
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+    </slot>
   </component>
 </template>
 

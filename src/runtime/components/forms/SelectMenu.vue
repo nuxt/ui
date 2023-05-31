@@ -29,8 +29,10 @@
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
         <button :class="selectMenuClass" :disabled="disabled || loading" type="button">
-          <span v-if="isLeading && leadingIconName" :class="leadingWrapperIconClass">
-            <UIcon :name="leadingIconName" :class="leadingIconClass" />
+          <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
+            <slot name="leading" :disabled="disabled" :loading="loading">
+              <UIcon :name="leadingIconName" :class="leadingIconClass" />
+            </slot>
           </span>
 
           <slot name="label">
@@ -39,8 +41,10 @@
             <span v-else class="block truncate" :class="ui.placeholder">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
-          <span v-if="isTrailing && trailingIconName" :class="trailingWrapperIconClass">
-            <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+          <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
+            <slot name="trailing" :disabled="disabled" :loading="loading">
+              <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+            </slot>
           </span>
         </button>
       </slot>
@@ -269,7 +273,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'open', 'close'],
-  setup (props, { emit }) {
+  setup (props, { emit, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -294,8 +298,8 @@ export default defineComponent({
         uiSelect.value.gap[props.size],
         props.padded && uiSelect.value.padding[props.size],
         variant?.replaceAll('{color}', props.color),
-        isLeading.value && uiSelect.value.leading.padding[props.size],
-        isTrailing.value && uiSelect.value.trailing.padding[props.size],
+        (isLeading.value || slots.leading) && uiSelect.value.leading.padding[props.size],
+        (isTrailing.value || slots.trailing) && uiSelect.value.trailing.padding[props.size],
         uiSelect.value.custom,
         'inline-flex items-center'
       )
@@ -328,7 +332,8 @@ export default defineComponent({
     const leadingWrapperIconClass = computed(() => {
       return classNames(
         uiSelect.value.icon.leading.wrapper,
-        uiSelect.value.icon.leading.padding[props.size]
+        uiSelect.value.icon.leading.padding[props.size],
+        slots.leading && '!pointer-events-auto'
       )
     })
 
@@ -344,7 +349,8 @@ export default defineComponent({
     const trailingWrapperIconClass = computed(() => {
       return classNames(
         uiSelect.value.icon.trailing.wrapper,
-        uiSelect.value.icon.trailing.padding[props.size]
+        uiSelect.value.icon.trailing.padding[props.size],
+        slots.trailing && '!pointer-events-auto'
       )
     })
 

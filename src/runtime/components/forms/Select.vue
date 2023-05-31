@@ -36,12 +36,16 @@
       </template>
     </select>
 
-    <div v-if="isLeading && leadingIconName" :class="leadingWrapperIconClass">
-      <UIcon :name="leadingIconName" :class="leadingIconClass" />
+    <div v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
+      <slot name="leading" :disabled="disabled" :loading="loading">
+        <UIcon :name="leadingIconName" :class="leadingIconClass" />
+      </slot>
     </div>
 
-    <span v-if="isTrailing && trailingIconName" :class="trailingWrapperIconClass">
-      <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+    <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
+      <slot name="trailing" :disabled="disabled" :loading="loading">
+        <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+      </slot>
     </span>
   </div>
 </template>
@@ -159,7 +163,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'focus', 'blur'],
-  setup (props, { emit }) {
+  setup (props, { emit, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -230,8 +234,8 @@ export default defineComponent({
         ui.value.size[props.size],
         props.padded && ui.value.padding[props.size],
         variant?.replaceAll('{color}', props.color),
-        isLeading.value && ui.value.leading.padding[props.size],
-        isTrailing.value && ui.value.trailing.padding[props.size],
+        (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size],
         ui.value.custom
       )
     })
@@ -263,7 +267,8 @@ export default defineComponent({
     const leadingWrapperIconClass = computed(() => {
       return classNames(
         ui.value.icon.leading.wrapper,
-        ui.value.icon.leading.padding[props.size]
+        ui.value.icon.leading.padding[props.size],
+        slots.leading && '!pointer-events-auto'
       )
     })
 
@@ -279,7 +284,8 @@ export default defineComponent({
     const trailingWrapperIconClass = computed(() => {
       return classNames(
         ui.value.icon.trailing.wrapper,
-        ui.value.icon.trailing.padding[props.size]
+        ui.value.icon.trailing.padding[props.size],
+        slots.trailing && '!pointer-events-auto'
       )
     })
 
