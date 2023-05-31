@@ -27,10 +27,10 @@
       role="button"
       class="inline-flex w-full"
     >
-      <slot :open="open" :disabled="disabled">
-        <button :class="selectMenuClass" :disabled="disabled" type="button">
-          <span v-if="icon" :class="leadingIconClass">
-            <UIcon :name="icon" :class="iconClass" />
+      <slot :open="open" :disabled="disabled" :loading="loading">
+        <button :class="selectMenuClass" :disabled="disabled || loading" type="button">
+          <span v-if="isLeading && leadingIconName" :class="leadingWrapperIconClass">
+            <UIcon :name="leadingIconName" :class="leadingIconClass" />
           </span>
 
           <slot name="label">
@@ -39,8 +39,8 @@
             <span v-else class="block truncate" :class="ui.placeholder">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
-          <span v-if="trailingIcon" :class="trailingIconClass">
-            <UIcon :name="trailingIcon" :class="iconClass" aria-hidden="true" />
+          <span v-if="isTrailing && trailingIconName" :class="trailingWrapperIconClass">
+            <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
           </span>
         </button>
       </slot>
@@ -167,9 +167,29 @@ export default defineComponent({
       type: String,
       default: null
     },
+    loadingIcon: {
+      type: String,
+      default: () => appConfig.ui.input.default.loadingIcon
+    },
+    leadingIcon: {
+      type: String,
+      default: null
+    },
     trailingIcon: {
       type: String,
       default: () => appConfig.ui.select.default.trailingIcon
+    },
+    trailing: {
+      type: Boolean,
+      default: false
+    },
+    leading: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
+      type: Boolean,
+      default: false
     },
     selectedIcon: {
       type: String,
@@ -274,32 +294,66 @@ export default defineComponent({
         uiSelect.value.gap[props.size],
         props.padded && uiSelect.value.padding[props.size],
         variant?.replaceAll('{color}', props.color),
-        !!props.icon && uiSelect.value.leading.padding[props.size],
-        uiSelect.value.trailing.padding[props.size],
+        isLeading.value && uiSelect.value.leading.padding[props.size],
+        isTrailing.value && uiSelect.value.trailing.padding[props.size],
         uiSelect.value.custom,
         'inline-flex items-center'
       )
     })
 
-    const iconClass = computed(() => {
-      return classNames(
-        uiSelect.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && uiSelect.value.icon.color.replaceAll('{color}', props.color),
-        uiSelect.value.icon.size[props.size]
-      )
+    const isLeading = computed(() => {
+      return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
     })
 
-    const leadingIconClass = computed(() => {
+    const isTrailing = computed(() => {
+      return (props.icon && props.trailing) || (props.loading && props.trailing) || props.trailingIcon
+    })
+
+    const leadingIconName = computed(() => {
+      if (props.loading) {
+        return props.loadingIcon
+      }
+
+      return props.leadingIcon || props.icon
+    })
+
+    const trailingIconName = computed(() => {
+      if (props.loading && !isLeading.value) {
+        return props.loadingIcon
+      }
+
+      return props.trailingIcon || props.icon
+    })
+
+    const leadingWrapperIconClass = computed(() => {
       return classNames(
         uiSelect.value.icon.leading.wrapper,
         uiSelect.value.icon.leading.padding[props.size]
       )
     })
 
-    const trailingIconClass = computed(() => {
+    const leadingIconClass = computed(() => {
+      return classNames(
+        uiSelect.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && uiSelect.value.icon.color.replaceAll('{color}', props.color),
+        uiSelect.value.icon.size[props.size],
+        props.loading && 'animate-spin'
+      )
+    })
+
+    const trailingWrapperIconClass = computed(() => {
       return classNames(
         uiSelect.value.icon.trailing.wrapper,
         uiSelect.value.icon.trailing.padding[props.size]
+      )
+    })
+
+    const trailingIconClass = computed(() => {
+      return classNames(
+        uiSelect.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && uiSelect.value.icon.color.replaceAll('{color}', props.color),
+        uiSelect.value.icon.size[props.size],
+        props.loading && !isLeading.value && 'animate-spin'
       )
     })
 
@@ -339,10 +393,15 @@ export default defineComponent({
       ui,
       trigger,
       container,
+      isLeading,
+      isTrailing,
       selectMenuClass,
-      iconClass,
+      leadingIconName,
       leadingIconClass,
+      leadingWrapperIconClass,
+      trailingIconName,
       trailingIconClass,
+      trailingWrapperIconClass,
       filteredOptions,
       queryOption,
       query,

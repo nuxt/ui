@@ -5,7 +5,7 @@
       :name="name"
       :value="modelValue"
       :required="required"
-      :disabled="disabled"
+      :disabled="disabled || loading"
       :class="selectClass"
       @input="onInput"
     >
@@ -36,12 +36,12 @@
       </template>
     </select>
 
-    <div v-if="icon" :class="leadingIconClass">
-      <UIcon :name="icon" :class="iconClass" />
+    <div v-if="isLeading && leadingIconName" :class="leadingWrapperIconClass">
+      <UIcon :name="leadingIconName" :class="leadingIconClass" />
     </div>
 
-    <span v-if="trailingIcon" :class="trailingIconClass">
-      <UIcon :name="trailingIcon" :class="iconClass" aria-hidden="true" />
+    <span v-if="isTrailing && trailingIconName" :class="trailingWrapperIconClass">
+      <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
     </span>
   </div>
 </template>
@@ -89,17 +89,37 @@ export default defineComponent({
       type: String,
       default: null
     },
+    loadingIcon: {
+      type: String,
+      default: () => appConfig.ui.input.default.loadingIcon
+    },
+    leadingIcon: {
+      type: String,
+      default: null
+    },
     trailingIcon: {
       type: String,
       default: () => appConfig.ui.select.default.trailingIcon
     },
-    options: {
-      type: Array,
-      default: () => []
+    trailing: {
+      type: Boolean,
+      default: false
+    },
+    leading: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
+      type: Boolean,
+      default: false
     },
     padded: {
       type: Boolean,
       default: true
+    },
+    options: {
+      type: Array,
+      default: () => []
     },
     size: {
       type: String,
@@ -210,31 +230,65 @@ export default defineComponent({
         ui.value.size[props.size],
         props.padded && ui.value.padding[props.size],
         variant?.replaceAll('{color}', props.color),
-        !!props.icon && ui.value.leading.padding[props.size],
-        ui.value.trailing.padding[props.size],
+        isLeading.value && ui.value.leading.padding[props.size],
+        isTrailing.value && ui.value.trailing.padding[props.size],
         ui.value.custom
       )
     })
 
-    const iconClass = computed(() => {
-      return classNames(
-        ui.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
-        ui.value.icon.size[props.size]
-      )
+    const isLeading = computed(() => {
+      return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
     })
 
-    const leadingIconClass = computed(() => {
+    const isTrailing = computed(() => {
+      return (props.icon && props.trailing) || (props.loading && props.trailing) || props.trailingIcon
+    })
+
+    const leadingIconName = computed(() => {
+      if (props.loading) {
+        return props.loadingIcon
+      }
+
+      return props.leadingIcon || props.icon
+    })
+
+    const trailingIconName = computed(() => {
+      if (props.loading && !isLeading.value) {
+        return props.loadingIcon
+      }
+
+      return props.trailingIcon || props.icon
+    })
+
+    const leadingWrapperIconClass = computed(() => {
       return classNames(
         ui.value.icon.leading.wrapper,
         ui.value.icon.leading.padding[props.size]
       )
     })
 
-    const trailingIconClass = computed(() => {
+    const leadingIconClass = computed(() => {
+      return classNames(
+        ui.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        ui.value.icon.size[props.size],
+        props.loading && 'animate-spin'
+      )
+    })
+
+    const trailingWrapperIconClass = computed(() => {
       return classNames(
         ui.value.icon.trailing.wrapper,
         ui.value.icon.trailing.padding[props.size]
+      )
+    })
+
+    const trailingIconClass = computed(() => {
+      return classNames(
+        ui.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        ui.value.icon.size[props.size],
+        props.loading && !isLeading.value && 'animate-spin'
       )
     })
 
@@ -243,10 +297,15 @@ export default defineComponent({
       ui,
       normalizedOptionsWithPlaceholder,
       normalizedValue,
+      isLeading,
+      isTrailing,
       selectClass,
-      iconClass,
+      leadingIconName,
       leadingIconClass,
+      leadingWrapperIconClass,
+      trailingIconName,
       trailingIconClass,
+      trailingWrapperIconClass,
       onInput
     }
   }

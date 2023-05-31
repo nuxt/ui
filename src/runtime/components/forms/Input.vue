@@ -18,11 +18,11 @@
       @blur="$emit('blur', $event)"
     >
     <slot />
-    <div v-if="isLeading && leadingIconName" :class="leadingIconClass">
-      <UIcon :name="leadingIconName" :class="iconClass" />
+    <div v-if="isLeading && leadingIconName" :class="leadingWrapperIconClass">
+      <UIcon :name="leadingIconName" :class="leadingIconClass" />
     </div>
-    <div v-if="isTrailing && trailingIconName" :class="trailingIconClass">
-      <UIcon :name="trailingIconName" :class="iconClass" />
+    <div v-if="isTrailing && trailingIconName" :class="trailingWrapperIconClass">
+      <UIcon :name="trailingIconName" :class="trailingIconClass" />
     </div>
   </div>
 </template>
@@ -211,7 +211,14 @@ export default defineComponent({
       return props.trailingIcon || props.icon
     })
 
-    const iconClass = computed(() => {
+    const leadingWrapperIconClass = computed(() => {
+      return classNames(
+        ui.value.icon.leading.wrapper,
+        ui.value.icon.leading.padding[props.size]
+      )
+    })
+
+    const leadingIconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
         appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
@@ -220,17 +227,19 @@ export default defineComponent({
       )
     })
 
-    const leadingIconClass = computed(() => {
+    const trailingWrapperIconClass = computed(() => {
       return classNames(
-        ui.value.icon.leading.wrapper,
-        ui.value.icon.leading.padding[props.size]
+        ui.value.icon.trailing.wrapper,
+        ui.value.icon.trailing.padding[props.size]
       )
     })
 
     const trailingIconClass = computed(() => {
       return classNames(
-        ui.value.icon.trailing.wrapper,
-        ui.value.icon.trailing.padding[props.size]
+        ui.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        ui.value.icon.size[props.size],
+        props.loading && !isLeading.value && 'animate-spin'
       )
     })
 
@@ -241,11 +250,12 @@ export default defineComponent({
       isLeading,
       isTrailing,
       inputClass,
-      iconClass,
       leadingIconName,
       leadingIconClass,
+      leadingWrapperIconClass,
       trailingIconName,
       trailingIconClass,
+      trailingWrapperIconClass,
       onInput
     }
   }
