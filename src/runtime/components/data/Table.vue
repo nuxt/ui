@@ -1,6 +1,6 @@
 <template>
   <div :class="ui.wrapper">
-    <table :class="[ui.container, ui.divide]">
+    <table :class="[ui.base, ui.divide]">
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
           <th v-if="modelValue" scope="col" class="pl-4">

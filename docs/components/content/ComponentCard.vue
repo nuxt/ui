@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass]">
+    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass, overflowClass]">
       <component :is="name" v-model="vModel" v-bind="fullProps">
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
       </component>
@@ -86,6 +86,10 @@ const props = defineProps({
   backgroundClass: {
     type: String,
     default: 'bg-white dark:bg-gray-900'
+  },
+  overflowClass: {
+    type: String,
+    default: ''
   }
 })
 

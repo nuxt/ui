@@ -50,7 +50,7 @@ export default <Partial<Config>> {
                 borderRadius: '0.375rem',
                 border: '1px solid var(--tw-prose-pre-border)',
                 whiteSpace: 'pre-wrap',
-                wordBreak: 'break-words'
+                wordBreak: 'break-word'
               },
               code: {
                 backgroundColor: 'var(--tw-prose-pre-bg)',
