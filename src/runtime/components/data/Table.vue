@@ -33,6 +33,17 @@
             </slot>
           </td>
         </tr>
+
+        <tr v-if="emptyState && !rows.length">
+          <td :colspan="columns.length">
+            <div :class="ui.emptyState.wrapper">
+              <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
+              <p :class="ui.emptyState.label">
+                {{ emptyState.label }}
+              </p>
+            </div>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -92,6 +103,10 @@ export default defineComponent({
     sortDescIcon: {
       type: String,
       default: () => appConfig.ui.table.default.sortDescIcon
+    },
+    emptyState: {
+      type: Object as PropType<{ icon: string, label: string }>,
+      default: () => appConfig.ui.table.default.emptyState
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.table>>,

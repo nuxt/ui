@@ -1,4 +1,21 @@
 <script setup>
+const columns = [{
+  key: 'id',
+  label: 'ID'
+}, {
+  key: 'name',
+  label: 'Name'
+}, {
+  key: 'title',
+  label: 'Title'
+}, {
+  key: 'email',
+  label: 'Email'
+}, {
+  key: 'role',
+  label: 'Role'
+}]
+
 const people = [{
   id: 1,
   name: 'Lindsay Walton',
@@ -58,6 +75,6 @@ const filteredRows = computed(() => {
       <UInput v-model="q" placeholder="Filter people..." />
     </div>
 
-    <UTable :rows="filteredRows" />
+    <UTable :rows="filteredRows" :columns="columns" />
   </div>
 </template>
