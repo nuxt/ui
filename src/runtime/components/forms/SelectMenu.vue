@@ -6,7 +6,7 @@
     :name="name"
     :model-value="modelValue"
     :multiple="multiple"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     as="div"
     :class="ui.wrapper"
     @update:model-value="onUpdate"
