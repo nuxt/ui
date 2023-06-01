@@ -109,6 +109,7 @@ const badge = {
     md: 'text-sm px-2 py-1',
     lg: 'text-sm px-2.5 py-1.5'
   },
+  color: {},
   variant: {
     solid: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-10 dark:ring-opacity-20'
   },

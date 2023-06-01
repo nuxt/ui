@@ -29,14 +29,18 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.badge.default.color,
       validator (value: string) {
-        return appConfig.ui.colors.includes(value)
+        console.log('Object.keys(appConfig.ui.badge.color)', Object.keys(appConfig.ui.badge.color))
+        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.badge.color)].includes(value)
       }
     },
     variant: {
       type: String,
       default: () => appConfig.ui.badge.default.variant,
       validator (value: string) {
-        return Object.keys(appConfig.ui.badge.variant).includes(value)
+        return [
+          ...Object.keys(appConfig.ui.badge.variant),
+          ...Object.values(appConfig.ui.badge.color).flatMap(value => Object.keys(value))
+        ].includes(value)
       }
     },
     label: {
@@ -55,12 +59,14 @@ export default defineComponent({
     const ui = computed<Partial<typeof appConfig.ui.badge>>(() => defu({}, props.ui, appConfig.ui.badge))
 
     const badgeClass = computed(() => {
+      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+
       return classNames(
         ui.value.base,
         ui.value.font,
         ui.value.rounded,
         ui.value.size[props.size],
-        ui.value.variant[props.variant]?.replaceAll('{color}', props.color)
+        variant?.replaceAll('{color}', props.color)
       )
     })
 
