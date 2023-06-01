@@ -18,7 +18,6 @@
     "node": ">=16.14.0"
   },
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "build": "nuxt-module-build",
     "prepack": "pnpm build",
     "dev": "nuxi dev docs",
