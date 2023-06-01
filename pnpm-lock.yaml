@@ -70,8 +70,8 @@ devDependencies:
     specifier: ^0.4.0
     version: 0.4.0(@nuxt/kit@3.5.2)(nuxi@3.5.2)
   '@nuxthq/studio':
-    specifier: ^0.12.1
-    version: 0.12.1(rollup@3.23.0)
+    specifier: ^0.13.2
+    version: 0.13.2(rollup@3.23.0)
   '@nuxtjs/plausible':
     specifier: ^0.2.1
     version: 0.2.1(rollup@3.23.0)
@@ -1359,8 +1359,8 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxthq/studio@0.12.1(rollup@3.23.0):
-    resolution: {integrity: sha512-g9GV8JkQqqYLtP+gsNtPr4fh49jc3eIdAB2ZfiudZKkFdW0BxtT/xPx8RjNYQwyInKssDDB26zzYrRYH9hhHCQ==}
+  /@nuxthq/studio@0.13.2(rollup@3.23.0):
+    resolution: {integrity: sha512-lSjMDSq0yxX3I3O8EVJWoU+kA9iEwUuTS1sZfyha625FhiU2qDIGGkc7gEeA1ubBNeZmJMXTl2hIauxOVTSfgQ==}
     dependencies:
       '@nuxt/kit': 3.5.2(rollup@3.23.0)
       defu: 6.1.2
