@@ -2,11 +2,11 @@
   <div>
     <div v-if="propsToSelect.length" class="relative flex border border-gray-200 dark:border-gray-700 rounded-t-md overflow-hidden not-prose">
       <div v-for="prop in propsToSelect" :key="prop.name" class="flex flex-col gap-0.5 justify-between py-1.5 font-medium bg-gray-50 dark:bg-gray-800 border-r border-r-gray-200 dark:border-r-gray-700">
-        <label :for="prop.name" class="block text-xs px-3 font-medium text-gray-400 dark:text-gray-500 -my-px">{{ prop.label }}</label>
+        <label :for="`prop-${prop.name}`" class="block text-xs px-3 font-medium text-gray-400 dark:text-gray-500 -my-px">{{ prop.label }}</label>
         <UCheckbox
           v-if="prop.type === 'boolean'"
           v-model="componentProps[prop.name]"
-          :name="prop.name"
+          :name="`prop-${prop.name}`"
           variant="none"
           class="justify-center"
         />
@@ -14,7 +14,7 @@
           v-else-if="prop.type === 'string' && prop.options.length"
           v-model="componentProps[prop.name]"
           :options="prop.options"
-          :name="prop.name"
+          :name="`prop-${prop.name}`"
           :label="componentProps[prop.name]"
           variant="none"
           class="inline-flex"
@@ -26,7 +26,7 @@
           v-else
           :model-value="componentProps[prop.name]"
           :type="prop.type === 'number' ? 'number' : 'text'"
-          :name="prop.name"
+          :name="`prop-${prop.name}`"
           variant="none"
           autocomplete="off"
           :ui="{ custom: '!py-0' }"
