@@ -11,7 +11,7 @@
             <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
-                v-bind="sortButton"
+                v-bind="{ ...ui.default.sortButton, ...sortButton }"
                 :icon="(!sort.column || sort.column !== column.key) ? sortButton.icon : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
                 :label="column[columnAttribute]"
                 @click="onSort(column)"
@@ -145,6 +145,8 @@ export default defineComponent({
 
     const indeterminate = computed(() => selected.value && selected.value.length > 0 && selected.value.length < props.rows.length)
 
+    const emptyState = computed(() => ({ ...ui.value.default.emptyState, ...props.emptyState }))
+
     function compare (a: any, z: any) {
       if (typeof props.by === 'string') {
         const property = props.by as unknown as any
@@ -180,6 +182,8 @@ export default defineComponent({
       rows,
       selected,
       indeterminate,
+      // eslint-disable-next-line vue/no-dupe-keys
+      emptyState,
       isSelected,
       onSort
     }
