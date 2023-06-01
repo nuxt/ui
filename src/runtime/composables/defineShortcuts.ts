@@ -33,6 +33,9 @@ export const defineShortcuts = (config: ShortcutsConfig) => {
   let shortcuts: Shortcut[] = []
 
   const onKeyDown = (e: KeyboardEvent) => {
+    // Input autocomplete triggers a keydown event
+    if (!e.key) { return }
+
     const alphabeticalKey = /^[a-z]{1}$/i.test(e.key)
 
     for (const shortcut of shortcuts) {
