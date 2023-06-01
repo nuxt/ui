@@ -1,4 +1,8 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 dependencies:
   '@egoist/tailwindcss-icons':
@@ -70,7 +74,7 @@ devDependencies:
     specifier: ^0.4.0
     version: 0.4.0(@nuxt/kit@3.5.2)(nuxi@3.5.2)
   '@nuxthq/studio':
-    specifier: ^0.13.2
+    specifier: ^0.13.0
     version: 0.13.2(rollup@3.23.0)
   '@nuxtjs/plausible':
     specifier: ^0.2.1
