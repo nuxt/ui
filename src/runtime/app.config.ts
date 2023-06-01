@@ -339,7 +339,8 @@ const input = {
       xl: 'h-6 w-6'
     },
     leading: {
-      wrapper: 'absolute inset-y-0 left-0 flex items-center pointer-events-none',
+      wrapper: 'absolute inset-y-0 left-0 flex items-center',
+      pointer: 'pointer-events-none',
       padding: {
         '2xs': 'pl-2',
         xs: 'pl-2.5',
@@ -350,7 +351,8 @@ const input = {
       }
     },
     trailing: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center pointer-events-none',
+      wrapper: 'absolute inset-y-0 right-0 flex items-center',
+      pointer: 'pointer-events-none',
       padding: {
         '2xs': 'pr-2',
         xs: 'pr-2.5',

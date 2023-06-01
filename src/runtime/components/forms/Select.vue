@@ -36,11 +36,11 @@
       </template>
     </select>
 
-    <div v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
+    <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
       <slot name="leading" :disabled="disabled" :loading="loading">
         <UIcon :name="leadingIconName" :class="leadingIconClass" />
       </slot>
-    </div>
+    </span>
 
     <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
       <slot name="trailing" :disabled="disabled" :loading="loading">
@@ -267,8 +267,8 @@ export default defineComponent({
     const leadingWrapperIconClass = computed(() => {
       return classNames(
         ui.value.icon.leading.wrapper,
-        ui.value.icon.leading.padding[props.size],
-        slots.leading && '!pointer-events-auto'
+        ui.value.icon.leading.pointer,
+        ui.value.icon.leading.padding[props.size]
       )
     })
 
@@ -284,8 +284,8 @@ export default defineComponent({
     const trailingWrapperIconClass = computed(() => {
       return classNames(
         ui.value.icon.trailing.wrapper,
-        ui.value.icon.trailing.padding[props.size],
-        slots.trailing && '!pointer-events-auto'
+        ui.value.icon.trailing.pointer,
+        ui.value.icon.trailing.padding[props.size]
       )
     })
 

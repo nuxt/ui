@@ -332,8 +332,8 @@ export default defineComponent({
     const leadingWrapperIconClass = computed(() => {
       return classNames(
         uiSelect.value.icon.leading.wrapper,
-        uiSelect.value.icon.leading.padding[props.size],
-        slots.leading && '!pointer-events-auto'
+        uiSelect.value.icon.leading.pointer,
+        uiSelect.value.icon.leading.padding[props.size]
       )
     })
 
@@ -349,8 +349,8 @@ export default defineComponent({
     const trailingWrapperIconClass = computed(() => {
       return classNames(
         uiSelect.value.icon.trailing.wrapper,
-        uiSelect.value.icon.trailing.padding[props.size],
-        slots.trailing && '!pointer-events-auto'
+        uiSelect.value.icon.trailing.pointer,
+        uiSelect.value.icon.trailing.padding[props.size]
       )
     })
 
