@@ -20,7 +20,7 @@
 
         <UButton
           v-if="closeButton"
-          v-bind="closeButton"
+          v-bind="{ ...ui.default.closeButton, ...closeButton }"
           :class="ui.input.closeButton"
           aria-label="Close"
           @click="onClear"
@@ -280,6 +280,8 @@ export default defineComponent({
       )
     })
 
+    const emptyState = computed(() => ({ ...ui.value.default.emptyState, ...props.emptyState }))
+
     // Methods
 
     function activateFirstOption () {
@@ -327,6 +329,8 @@ export default defineComponent({
       query,
       iconName,
       iconClass,
+      // eslint-disable-next-line vue/no-dupe-keys
+      emptyState,
       onSelect,
       onClear
     }
