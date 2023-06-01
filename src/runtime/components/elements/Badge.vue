@@ -29,7 +29,6 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.badge.default.color,
       validator (value: string) {
-        console.log('Object.keys(appConfig.ui.badge.color)', Object.keys(appConfig.ui.badge.color))
         return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.badge.color)].includes(value)
       }
     },
