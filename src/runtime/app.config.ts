@@ -53,17 +53,17 @@ const avatar = {
   wrapper: 'relative inline-flex items-center justify-center',
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
-  placeholder: 'text-xs font-medium leading-none text-gray-900 dark:text-white truncate',
+  placeholder: 'font-medium leading-none text-gray-900 dark:text-white truncate',
   size: {
-    '3xs': 'h-4 w-4 text-xs',
-    '2xs': 'h-5 w-5 text-xs',
-    xs: 'h-6 w-6 text-xs',
-    sm: 'h-8 w-8 text-sm',
-    md: 'h-10 w-10 text-md',
-    lg: 'h-12 w-12 text-lg',
-    xl: 'h-14 w-14 text-xl',
-    '2xl': 'h-16 w-16 text-2xl',
-    '3xl': 'h-20 w-20 text-3xl'
+    '3xs': 'h-4 w-4 text-[8px]',
+    '2xs': 'h-5 w-5 text-[10px]',
+    xs: 'h-6 w-6 text-[11px]',
+    sm: 'h-8 w-8 text-xs',
+    md: 'h-10 w-10 text-sm',
+    lg: 'h-12 w-12 text-base',
+    xl: 'h-14 w-14 text-lg',
+    '2xl': 'h-16 w-16 text-xl',
+    '3xl': 'h-20 w-20 text-2xl'
   },
   chip: {
     base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900',
