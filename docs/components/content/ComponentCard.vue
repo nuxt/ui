@@ -38,6 +38,12 @@
     <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass, overflowClass]">
       <component :is="name" v-model="vModel" v-bind="fullProps">
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
+
+        <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
+          <ClientOnly>
+            <ContentSlot v-if="$slots[slot]" :use="$slots[slot]" />
+          </ClientOnly>
+        </template>
       </component>
     </div>
 
@@ -65,6 +71,10 @@ const props = defineProps({
   },
   code: {
     type: String,
+    default: null
+  },
+  slots: {
+    type: Object,
     default: null
   },
   baseProps: {
@@ -154,7 +164,14 @@ const code = computed(() => {
 
     code += ` ${(prop?.type === 'boolean' && value !== true) || typeof value === 'object' ? ':' : ''}${key === 'modelValue' ? 'value' : useKebabCase(key)}${prop?.type === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
   }
-  if (props.code) {
+
+  if (props.slots) {
+    code += `>
+  ${Object.entries(props.slots).map(([key, value]) => `<template #${key}>
+    ${value}
+  </template>`).join('\n  ')}
+</${name}>`
+  } else if (props.code) {
     const lineBreaks = (props.code.match(/\n/g) || []).length
     if (lineBreaks > 1) {
       code += `>
@@ -187,7 +204,7 @@ function renderObject (obj: any) {
   return obj
 }
 
-const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify(componentProps)}`, () => transformContent('content:_markdown.md', code.value, {
+const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify(props)}`, () => transformContent('content:_markdown.md', code.value, {
   highlight: {
     theme: {
       light: 'material-lighter',
