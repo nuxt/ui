@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/nuxtlabs/ui/compare/v2.2.1...v2.3.0) (2023-06-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Input:** move pointer class inside its own preset class
+* **SelectMenu:** remove `inline-flex` from wrapper to behave like other form elements
+* **Notification:** rename to `closeButton` and `actionButton` for consistency
+* **CommandPalette:** rename props to `emptyState` and `closeButton` for consistency
+* **Toggle:** rename icons to `onIcon` / `offIcon` for consistency
+
+### Features
+
+* add `Table` component ([#237](https://github.com/nuxtlabs/ui/issues/237)) ([cce000a](https://github.com/nuxtlabs/ui/commit/cce000ab2b2af1079216e0e79769703fc4d9933e))
+
+
+### Bug Fixes
+
+* **Avatar:** placeholder font size ([71edb91](https://github.com/nuxtlabs/ui/commit/71edb91c4ff17a258d6229ed6c6fa6a4b54bdd53))
+* **Badge:** remove `console.log` in validator ([f9b935f](https://github.com/nuxtlabs/ui/commit/f9b935f5f59b872fd952a2739d305d6574bf7cf8))
+* **Button:** invalid padding when using `square` prop ([1ebaa5a](https://github.com/nuxtlabs/ui/commit/1ebaa5aa00752cd276f7c754d64ac7f85b14dc26))
+* **CommandPalette:** override of `closeButton` and `emptyState` props ([2c673f5](https://github.com/nuxtlabs/ui/commit/2c673f5377dbbcdefa6b57eddba2c19d065d5f1f))
+* **defineShortcuts:** err with input autocomplete that triggers `keydown` ([01fa85c](https://github.com/nuxtlabs/ui/commit/01fa85c7a3e476d4f710ed3a36c1e815fc986a94))
+* **SelectMenu:** disable on loading ([8951923](https://github.com/nuxtlabs/ui/commit/8951923a11d533ebf53dbec5f852800555af253c))
+* **Table:** add missing `text-left` in `th.base` ([6bd5142](https://github.com/nuxtlabs/ui/commit/6bd5142a377694599952e0f9b53fde0d0132b61b))
+* **Table:** missing `ref` import from `vue` ([272af9d](https://github.com/nuxtlabs/ui/commit/272af9d24c7cda8341e66b57f76acdb9f46ea23e))
+* **Table:** override of `sortButton` and `emptyState` props ([192b0e6](https://github.com/nuxtlabs/ui/commit/192b0e63018ae73e8acaa8b4b1771cda2b59bdb6))
+* **Table:** type `sort` prop ([3ba0aed](https://github.com/nuxtlabs/ui/commit/3ba0aedcba578350e2fdd9c180505ed8920e0404))
+* use `cloneVNode` when altering props in render functions ([5e50eb9](https://github.com/nuxtlabs/ui/commit/5e50eb9eb82571d22e0a2f1a2fe985addf7efe18)), closes [#252](https://github.com/nuxtlabs/ui/issues/252)
+
+
+* **CommandPalette:** rename props to `emptyState` and `closeButton` for consistency ([daca463](https://github.com/nuxtlabs/ui/commit/daca46371cab1344bd87ffb0abe0f7e9cdb08609))
+* **Input:** move pointer class inside its own preset class ([f59a92c](https://github.com/nuxtlabs/ui/commit/f59a92ca1533a44e17fbc8b7945bdaa9a83e805a))
+* **Notification:** rename to `closeButton` and `actionButton` for consistency ([4458656](https://github.com/nuxtlabs/ui/commit/4458656be5547fc9505a5c4758bea4818ada408b))
+* **SelectMenu:** remove `inline-flex` from wrapper to behave like other form elements ([ba44c58](https://github.com/nuxtlabs/ui/commit/ba44c58a80252a4394fcf2f84611ea2696883120))
+* **Toggle:** rename icons to `onIcon` / `offIcon` for consistency ([8ee2ac1](https://github.com/nuxtlabs/ui/commit/8ee2ac10e7eda4c54418f613a5ef87dd89e1f7eb))
+
 ### [2.2.1](https://github.com/nuxtlabs/ui/compare/v2.2.0...v2.2.1) (2023-05-27)
 
 
