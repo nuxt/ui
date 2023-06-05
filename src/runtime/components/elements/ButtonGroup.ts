@@ -1,4 +1,4 @@
-import { h, computed, defineComponent } from 'vue'
+import { h, cloneVNode, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { getSlotsChildren } from '../../utils'
@@ -44,28 +44,30 @@ export default defineComponent({
     }[ui.value.rounded]))
 
     const clones = computed(() => children.value.map((node, index) => {
+      const vProps: any = {}
+
       if (props.size) {
-        node.props.size = props.size
+        vProps.size = props.size
       }
 
-      node.props.class = node.props.class || ''
-      node.props.class += ' !shadow-none'
-      node.props.ui = node.props.ui || {}
-      node.props.ui.rounded = ''
+      vProps.class = node.props.class || ''
+      vProps.class += ' !shadow-none'
+      vProps.ui = node.props.ui || {}
+      vProps.ui.rounded = ''
 
       if (index === 0) {
-        node.props.ui.rounded = rounded.value.left
+        vProps.ui.rounded = rounded.value.left
       }
 
       if (index > 0) {
-        node.props.class += ' -ml-px'
+        vProps.class += ' -ml-px'
       }
 
       if (index === children.value.length - 1) {
-        node.props.ui.rounded = rounded.value.right
+        vProps.ui.rounded = rounded.value.right
       }
 
-      return node
+      return cloneVNode(node, vProps)
     }))
 
     return () => h('div', { class: [ui.value.wrapper, ui.value.rounded, ui.value.shadow] }, clones.value)

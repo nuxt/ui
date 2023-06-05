@@ -1,4 +1,4 @@
-import { h, computed, defineComponent } from 'vue'
+import { h, cloneVNode, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { getSlotsChildren } from '../../utils'
@@ -53,18 +53,20 @@ export default defineComponent({
     const children = computed(() => getSlotsChildren(slots))
 
     const clones = computed(() => children.value.map((node) => {
+      const vProps: any = {}
+
       if (props.error) {
-        node.props.oldColor = node.props.color
-        node.props.color = 'red'
+        vProps.oldColor = node.props.color
+        vProps.color = 'red'
       } else {
-        node.props.color = node.props.oldColor
+        vProps.color = vProps.oldColor
       }
 
       if (props.name) {
-        node.props.name = props.name
+        vProps.name = props.name
       }
 
-      return node
+      return cloneVNode(node, vProps)
     }))
 
     return () => h('div', { class: [ui.value.wrapper] }, [

@@ -1,4 +1,4 @@
-import { h, computed, defineComponent } from 'vue'
+import { h, cloneVNode, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames, getSlotsChildren } from '../../utils'
@@ -39,18 +39,20 @@ export default defineComponent({
     const max = computed(() => typeof props.max === 'string' ? parseInt(props.max, 10) : props.max)
 
     const clones = computed(() => children.value.map((node, index) => {
+      const vProps: any = {}
+
       if (!props.max || (max.value && index < max.value)) {
         if (props.size) {
-          node.props.size = props.size
+          vProps.size = props.size
         }
 
-        node.props.class = node.props.class || ''
-        node.props.class += ` ${classNames(
+        vProps.class = node.props.class || ''
+        vProps.class += ` ${classNames(
           ui.value.ring,
           ui.value.margin
         )}`
 
-        return node
+        return cloneVNode(node, vProps)
       }
 
       if (max.value !== undefined && index === max.value) {
