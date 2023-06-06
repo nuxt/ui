@@ -15,7 +15,7 @@ export default defineComponent({
       type: String,
       default: null,
       validator (value: string) {
-        return Object.keys(appConfig.ui.avatar.size).includes(value)
+        return Object.keys(appConfig.ui.button.size).includes(value)
       }
     },
     ui: {
@@ -57,10 +57,6 @@ export default defineComponent({
 
       if (index === 0) {
         vProps.ui.rounded = rounded.value.left
-      }
-
-      if (index > 0) {
-        vProps.class += ' -ml-px'
       }
 
       if (index === children.value.length - 1) {
