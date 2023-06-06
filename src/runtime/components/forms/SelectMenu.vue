@@ -296,7 +296,7 @@ export default defineComponent({
         'text-left cursor-default',
         uiSelect.value.size[props.size],
         uiSelect.value.gap[props.size],
-        props.padded && uiSelect.value.padding[props.size],
+        props.padded ? uiSelect.value.padding[props.size] : 'p-0',
         variant?.replaceAll('{color}', props.color),
         (isLeading.value || slots.leading) && uiSelect.value.leading.padding[props.size],
         (isTrailing.value || slots.trailing) && uiSelect.value.trailing.padding[props.size],

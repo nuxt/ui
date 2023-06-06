@@ -167,7 +167,7 @@ export default defineComponent({
         ui.value.rounded,
         ui.value.placeholder,
         ui.value.size[props.size],
-        props.padded && ui.value.padding[props.size],
+        props.padded ? ui.value.padding[props.size] : 'p-0',
         variant?.replaceAll('{color}', props.color),
         !props.resize && 'resize-none',
         ui.value.custom

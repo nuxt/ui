@@ -232,7 +232,7 @@ export default defineComponent({
         ui.value.base,
         ui.value.rounded,
         ui.value.size[props.size],
-        props.padded && ui.value.padding[props.size],
+        props.padded ? ui.value.padding[props.size] : 'p-0',
         variant?.replaceAll('{color}', props.color),
         (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size],
