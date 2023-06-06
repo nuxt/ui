@@ -28,10 +28,10 @@
     "release": "pnpm lint && standard-version && git push --follow-tags"
   },
   "dependencies": {
-    "@egoist/tailwindcss-icons": "^1.0.7",
+    "@egoist/tailwindcss-icons": "^1.1.0",
     "@headlessui/vue": "1.7.10",
     "@iconify-json/heroicons": "^1.1.10",
-    "@nuxt/kit": "^3.5.2",
+    "@nuxt/kit": "^3.5.3",
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.7.0",
     "@popperjs/core": "^2.11.8",
@@ -57,8 +57,8 @@
     "@types/lodash-es": "^4.17.7",
     "@types/node": "^20.2.5",
     "@vueuse/nuxt": "^10.1.2",
-    "eslint": "^8.41.0",
-    "nuxt": "^3.5.2",
+    "eslint": "^8.42.0",
+    "nuxt": "^3.5.3",
     "nuxt-component-meta": "^0.5.3",
     "nuxt-lodash": "^2.4.1",
     "standard-version": "^9.5.0",
