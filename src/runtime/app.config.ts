@@ -129,32 +129,32 @@ const button = {
     xs: 'text-xs',
     sm: 'text-sm',
     md: 'text-sm',
-    lg: 'text-base',
+    lg: 'text-sm',
     xl: 'text-base'
   },
   gap: {
     '2xs': 'gap-x-1',
     xs: 'gap-x-1.5',
-    sm: 'gap-x-2',
+    sm: 'gap-x-1.5',
     md: 'gap-x-2',
-    lg: 'gap-x-2',
-    xl: 'gap-x-2'
+    lg: 'gap-x-2.5',
+    xl: 'gap-x-2.5'
   },
   padding: {
     '2xs': 'px-2 py-1',
     xs: 'px-2.5 py-1.5',
-    sm: 'px-3 py-1.5',
+    sm: 'px-2.5 py-1.5',
     md: 'px-3 py-2',
-    lg: 'px-4 py-2',
-    xl: 'px-4 py-3'
+    lg: 'px-3.5 py-2.5',
+    xl: 'px-3.5 py-2.5'
   },
   square: {
     '2xs': 'p-1',
     xs: 'p-1.5',
     sm: 'p-1.5',
     md: 'p-2',
-    lg: 'p-2',
-    xl: 'p-3'
+    lg: 'p-2.5',
+    xl: 'p-2.5'
   },
   color: {
     white: {
@@ -181,9 +181,9 @@ const button = {
   icon: {
     base: 'flex-shrink-0',
     size: {
-      '2xs': 'h-3.5 w-3.5',
+      '2xs': 'h-4 w-4',
       xs: 'h-4 w-4',
-      sm: 'h-4 w-4',
+      sm: 'h-5 w-5',
       md: 'h-5 w-5',
       lg: 'h-5 w-5',
       xl: 'h-6 w-6'
@@ -277,7 +277,7 @@ const input = {
     xs: 'text-xs',
     sm: 'text-sm',
     md: 'text-sm',
-    lg: 'text-base',
+    lg: 'text-sm',
     xl: 'text-base'
   },
   gap: {
@@ -291,14 +291,14 @@ const input = {
   padding: {
     '2xs': 'px-2 py-1',
     xs: 'px-2.5 py-1.5',
-    sm: 'px-3 py-1.5',
+    sm: 'px-2.5 py-1.5',
     md: 'px-3 py-2',
-    lg: 'px-4 py-2',
-    xl: 'px-4 py-3'
+    lg: 'px-3.5 py-2.5',
+    xl: 'px-3.5 py-2.5'
   },
   leading: {
     padding: {
-      '2xs': 'pl-[26px]',
+      '2xs': 'pl-7',
       xs: 'pl-8',
       sm: 'pl-9',
       md: 'pl-10',
@@ -308,7 +308,7 @@ const input = {
   },
   trailing: {
     padding: {
-      '2xs': 'pr-[26px]',
+      '2xs': 'pr-7',
       xs: 'pr-8',
       sm: 'pr-9',
       md: 'pr-10',
@@ -332,9 +332,9 @@ const input = {
     base: 'flex-shrink-0 text-gray-400 dark:text-gray-500',
     color: 'text-{color}-500 dark:text-{color}-400',
     size: {
-      '2xs': 'h-3.5 w-3.5',
+      '2xs': 'h-4 w-4',
       xs: 'h-4 w-4',
-      sm: 'h-4 w-4',
+      sm: 'h-5 w-5',
       md: 'h-5 w-5',
       lg: 'h-5 w-5',
       xl: 'h-6 w-6'
@@ -345,10 +345,10 @@ const input = {
       padding: {
         '2xs': 'pl-2',
         xs: 'pl-2.5',
-        sm: 'pl-3',
+        sm: 'pl-2.5',
         md: 'pl-3',
-        lg: 'pl-4',
-        xl: 'pl-4'
+        lg: 'pl-3.5',
+        xl: 'pl-3.5'
       }
     },
     trailing: {
@@ -357,10 +357,10 @@ const input = {
       padding: {
         '2xs': 'pr-2',
         xs: 'pr-2.5',
-        sm: 'pr-3',
+        sm: 'pr-2.5',
         md: 'pr-3',
-        lg: 'pr-4',
-        xl: 'pr-4'
+        lg: 'pr-3.5',
+        xl: 'pr-3.5'
       }
     }
   },
