@@ -633,6 +633,20 @@ const commandPalette = {
   }
 }
 
+const pagination = {
+  default: {
+    size: 'sm',
+    activeButton: {
+      color: 'primary'
+    },
+    inactiveButton: {
+      color: 'white'
+    },
+    prevIcon: 'i-heroicons-chevron-left-20-solid',
+    nextIcon: 'i-heroicons-chevron-right-20-solid'
+  }
+}
+
 // Overlays
 
 const modal = {
@@ -840,6 +854,7 @@ export default {
     skeleton,
     verticalNavigation,
     commandPalette,
+    pagination,
     modal,
     slideover,
     popover,
