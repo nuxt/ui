@@ -15,7 +15,7 @@ export default defineComponent({
       type: String,
       default: null,
       validator (value: string) {
-        return Object.keys(appConfig.ui.avatar.size).includes(value)
+        return Object.keys(appConfig.ui.button.size).includes(value)
       }
     },
     ui: {
