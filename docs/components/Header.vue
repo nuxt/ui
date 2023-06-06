@@ -10,8 +10,8 @@
           </NuxtLink>
         </div>
 
-        <div class="flex items-center -mr-1.5">
-          <div class="mr-1.5 hidden lg:block">
+        <div class="flex items-center -mr-1.5 gap-1.5">
+          <div class="hidden lg:block">
             <ThemeSelect />
           </div>
 
