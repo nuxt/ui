@@ -34,7 +34,7 @@
           </td>
         </tr>
 
-        <tr v-if="emptyState && !rows.length">
+        <tr v-if="emptyState && !rows.length && !isLoading">
           <td :colspan="columns.length">
             <div :class="ui.emptyState.wrapper">
               <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
@@ -42,6 +42,17 @@
                 {{ emptyState.label }}
               </p>
             </div>
+
+        <tr v-if="isLoading">
+          <td :colspan="columns.length">
+            <slot name="loading-state">
+              <div :class="ui.loadingState.wrapper">
+                <UIcon v-if="loadingState.icon" :name="loadingState.icon" :class="ui.loadingState.icon" aria-hidden="true" />
+                <p :class="ui.loadingState.label">
+                  {{ loadingState.label }}
+                </p>
+              </div>
+            </slot>
           </td>
         </tr>
       </tbody>
@@ -111,6 +122,14 @@ export default defineComponent({
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.table>>,
       default: () => appConfig.ui.table
+    },
+    isLoading: {
+      type: Boolean,
+      default: false
+    },
+    loadingState: {
+      type: Object as PropType<{ icon: string, label: string }>,
+      default: () => appConfig.ui.table.default.loadingState
     }
   },
   emits: ['update:modelValue'],
