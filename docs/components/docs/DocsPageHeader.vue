@@ -8,7 +8,7 @@
         {{ page.title }}
       </h1>
 
-      <div class="flex items-center gap-2 mt-4 lg:mt-0">
+      <div v-if="page.headlessui || page.github" class="flex items-center gap-2 mt-4 lg:mt-0">
         <UButton
           v-if="page.headlessui"
           :label="page.headlessui.label"
