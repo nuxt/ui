@@ -1,5 +1,3 @@
-import { flatten } from 'lodash-es'
-
 export function classNames (...classes: any[string]) {
   return classes.filter(Boolean).join(' ')
 }
@@ -20,7 +18,7 @@ export const omit = (obj: object, keys: string[]) => {
 export const getSlotsChildren = (slots: any) => {
   let children = slots.default?.()
   if (children.length) {
-    children = flatten(children.map(c => {
+    children = children.flatMap(c => {
       if (typeof c.type === 'symbol') {
         if (typeof c.children === 'string') {
           // `v-if="false"` or commented node
@@ -31,7 +29,7 @@ export const getSlotsChildren = (slots: any) => {
         return c.ctx.slots.default?.()
       }
       return c
-    }).filter(Boolean))
+    }).filter(Boolean)
   }
   return children
 }

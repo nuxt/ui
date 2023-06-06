@@ -12,7 +12,7 @@
       :key="index"
       :label="`${page}`"
       v-bind="page === currentPage ? { ...ui.default.activeButton, ...activeButton } : { ...ui.default.inactiveButton, ...inactiveButton }"
-      :class="{ 'pointer-events-none': typeof page === 'string' }"
+      :class="{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }"
       @click="() => onClickPage(page)"
     />
     <UButton
