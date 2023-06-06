@@ -35,19 +35,62 @@ const people = [{
   title: 'Principal Designer',
   email: 'floyd.miles@example.com',
   role: 'Member'
+}, {
+  id: 7,
+  name: 'Emily Selman',
+  title: 'VP, User Experience',
+  email: '',
+  role: 'Admin'
+}, {
+  id: 8,
+  name: 'Kristin Watson',
+  title: 'VP, Human Resources',
+  email: '',
+  role: 'Member'
+}, {
+  id: 9,
+  name: 'Emma Watson',
+  title: 'Front-end Developer',
+  email: '',
+  role: 'Member'
+}, {
+  id: 10,
+  name: 'John Doe',
+  title: 'Designer',
+  email: '',
+  role: 'Admin'
+}, {
+  id: 11,
+  name: 'Jane Doe',
+  title: 'Director of Product',
+  email: '',
+  role: 'Member'
+}, {
+  id: 12,
+  name: 'John Smith',
+  title: 'Copywriter',
+  email: '',
+  role: 'Admin'
+}, {
+  id: 13,
+  name: 'Jane Smith',
+  title: 'Senior Designer',
+  email: '',
+  role: 'Owner'
 }]
 
 const page = ref(1)
-const pageCount = 2
+const pageCount = 5
 
-const peoplePage = computed(() => {
-  return people.slice((page.value - 1) * pageCount, (page.value) * pageCount)
-})
+const rows = computed(() => people.slice((page.value - 1) * pageCount, (page.value) * pageCount))
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-2 pb-2">
-    <UTable :rows="peoplePage" />
-    <UPagination v-model="page" :page-count="pageCount" :total="people.length" class="place-self-center" />
+  <div>
+    <UTable :rows="rows" />
+
+    <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
+      <UPagination v-model="page" :page-count="pageCount" :total="people.length" />
+    </div>
   </div>
 </template>

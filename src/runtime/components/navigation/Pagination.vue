@@ -31,11 +31,11 @@ import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UButton from '../elements/Button.vue'
 import UButtonGroup from '../elements/ButtonGroup'
+import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
-import { Button } from '../../types'
 
 // const appConfig = useAppConfig()
 
