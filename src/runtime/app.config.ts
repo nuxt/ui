@@ -198,7 +198,7 @@ const button = {
 }
 
 const buttonGroup = {
-  wrapper: 'inline-flex',
+  wrapper: 'inline-flex -space-x-px',
   rounded: 'rounded-md',
   shadow: 'shadow-sm'
 }

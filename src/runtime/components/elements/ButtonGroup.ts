@@ -59,10 +59,6 @@ export default defineComponent({
         vProps.ui.rounded = rounded.value.left
       }
 
-      if (index > 0) {
-        vProps.class += ' -ml-px'
-      }
-
       if (index === children.value.length - 1) {
         vProps.ui.rounded = rounded.value.right
       }
