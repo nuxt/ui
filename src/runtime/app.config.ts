@@ -642,8 +642,16 @@ const pagination = {
     inactiveButton: {
       color: 'white'
     },
-    prevIcon: 'i-heroicons-chevron-left-20-solid',
-    nextIcon: 'i-heroicons-chevron-right-20-solid'
+    prev: {
+      iconClass: 'h-5 w-5',
+      icon: 'i-heroicons-chevron-left-20-solid',
+      label: '',
+    },
+    next: {
+      iconClass: 'h-5 w-5',
+      icon: 'i-heroicons-chevron-right-20-solid',
+      label: '',
+    },
   }
 }
 

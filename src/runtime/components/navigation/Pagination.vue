@@ -1,12 +1,21 @@
 <template>
   <UButtonGroup :size="size">
     <UButton
-      v-if="prevIcon"
-      :icon="prevIcon"
+      v-if="prevLabel || prevIcon"
       :disabled="!canGoPrev"
       v-bind="{ ...ui.default.inactiveButton, ...inactiveButton }"
       @click="onClickPrev"
-    />
+    >
+      <slot name="prev">
+        <div class="flex justify-center items-center">
+          <UIcon v-if="prevIcon" :name="prevIcon" :class="prevIconClass" aria-hidden="true" />
+          <span v-if="prevLabel">
+            {{ prevLabel }}
+          </span>
+        </div>
+      </slot>
+    </UButton>
+
     <UButton
       v-for="(page, index) of displayedPages"
       :key="index"
@@ -15,13 +24,22 @@
       :class="{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }"
       @click="() => onClickPage(page)"
     />
+
     <UButton
-      v-if="nextIcon"
-      :icon="nextIcon"
+      v-if="nextLabel || nextIcon"
       :disabled="!canGoNext"
       v-bind="{ ...ui.default.inactiveButton, ...inactiveButton }"
       @click="onClickNext"
-    />
+    >
+      <slot name="next">
+        <div class="flex justify-center items-center">
+          <span v-if="nextLabel">
+            {{ nextLabel }}
+          </span>
+          <UIcon v-if="nextIcon" :name="nextIcon" :class="nextIconClass" aria-hidden="true" />
+        </div>
+      </slot>
+    </UButton>
   </UButtonGroup>
 </template>
 
@@ -79,13 +97,29 @@ export default defineComponent({
       type: Object as PropType<Partial<Button>>,
       default: () => appConfig.ui.pagination.default.inactiveButton
     },
+    prevIconClass: {
+      type: String,
+      default: () => appConfig.ui.pagination.default.prev.iconClass
+    },
+    nextIconClass: {
+      type: String,
+      default: () => appConfig.ui.pagination.default.next.iconClass
+    },
     prevIcon: {
       type: String,
-      default: () => appConfig.ui.pagination.default.prevIcon
+      default: () => appConfig.ui.pagination.default.prev.icon
     },
     nextIcon: {
       type: String,
-      default: () => appConfig.ui.pagination.default.nextIcon
+      default: () => appConfig.ui.pagination.default.next.icon
+    },
+    prevLabel: {
+      type: String,
+      default: () => appConfig.ui.pagination.default.prev.label
+    },
+    nextLabel: {
+      type: String,
+      default: () => appConfig.ui.pagination.default.next.label
     },
     divider: {
       type: String,
