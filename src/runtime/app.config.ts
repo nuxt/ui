@@ -52,7 +52,17 @@ const table = {
 const avatar = {
   wrapper: 'relative inline-flex items-center justify-center',
   background: 'bg-gray-100 dark:bg-gray-800',
-  rounded: 'rounded-full',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   placeholder: 'font-medium leading-none text-gray-900 dark:text-white truncate',
   size: {
     '3xs': 'h-4 w-4 text-[8px]',
@@ -88,6 +98,7 @@ const avatar = {
   },
   default: {
     size: 'sm',
+    rounded: 'full',
     chipColor: null,
     chipPosition: 'top-right'
   }
@@ -101,7 +112,17 @@ const avatarGroup = {
 
 const badge = {
   base: 'inline-flex items-center',
-  rounded: 'rounded-md',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   font: 'font-medium',
   size: {
     xs: 'text-xs px-1.5 py-0.5',
@@ -115,6 +136,7 @@ const badge = {
   },
   default: {
     size: 'sm',
+    rounded: 'md',
     variant: 'solid',
     color: 'primary'
   }
@@ -123,7 +145,17 @@ const badge = {
 const button = {
   base: 'focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0',
   font: 'font-medium',
-  rounded: 'rounded-md',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   size: {
     '2xs': 'text-xs',
     xs: 'text-xs',
@@ -193,6 +225,7 @@ const button = {
     size: 'sm',
     variant: 'solid',
     color: 'primary',
+    rounded: 'md',
     loadingIcon: 'i-heroicons-arrow-path-20-solid'
   }
 }
@@ -209,7 +242,17 @@ const dropdown = {
   width: 'w-48',
   background: 'bg-white dark:bg-gray-800',
   shadow: 'shadow-lg',
-  rounded: 'rounded-md',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
   base: 'focus:outline-none',
   divide: 'divide-y divide-gray-200 dark:divide-gray-700',
@@ -244,6 +287,9 @@ const dropdown = {
   popper: {
     placement: 'bottom-end',
     strategy: 'fixed'
+  },
+  default: {
+    rounded: 'md',
   }
 }
 
@@ -255,12 +301,23 @@ const kbd = {
     sm: 'h-5 min-w-[20px] text-[11px]',
     md: 'h-6 min-w-[24px] text-[12px]'
   },
-  rounded: 'rounded',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   font: 'font-medium font-sans',
   background: 'bg-gray-100 dark:bg-gray-800',
   ring: 'ring-1 ring-gray-300 dark:ring-gray-700 ring-inset',
   default: {
-    size: 'sm'
+    size: 'sm',
+    rounded: 'rounded',
   }
 }
 
@@ -269,7 +326,6 @@ const kbd = {
 const input = {
   wrapper: 'relative',
   base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0',
-  rounded: 'rounded-md',
   placeholder: 'placeholder-gray-400 dark:placeholder-gray-500',
   custom: '',
   size: {
@@ -279,6 +335,17 @@ const input = {
     md: 'text-sm',
     lg: 'text-sm',
     xl: 'text-base'
+  },
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
   },
   gap: {
     '2xs': 'gap-x-1',
@@ -366,6 +433,7 @@ const input = {
   },
   default: {
     size: 'sm',
+    rounded: 'md',
     color: 'white',
     variant: 'outline',
     loadingIcon: 'i-heroicons-arrow-path-20-solid'
@@ -390,6 +458,7 @@ const textarea = {
   ...input,
   default: {
     size: 'sm',
+    rounded: 'md',
     color: 'white',
     variant: 'outline',
   }
@@ -400,6 +469,7 @@ const select = {
   placeholder: 'text-gray-900 dark:text-white',
   default: {
     size: 'sm',
+    rounded: 'md',
     color: 'white',
     variant: 'outline',
     loadingIcon: 'i-heroicons-arrow-path-20-solid',
@@ -415,7 +485,6 @@ const selectMenu = {
   base: 'relative focus:outline-none overflow-y-auto scroll-py-1',
   background: 'bg-white dark:bg-gray-800',
   shadow: 'shadow-lg',
-  rounded: 'rounded-md',
   padding: 'p-1',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
   input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10 placeholder-gray-400 dark:placeholder-gray-500',
@@ -504,7 +573,17 @@ const card = {
   background: 'bg-white dark:bg-gray-900',
   divide: 'divide-y divide-gray-200 dark:divide-gray-800',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  rounded: 'rounded-lg',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   shadow: 'shadow',
   body: {
     base: '',
@@ -520,6 +599,9 @@ const card = {
     base: '',
     background: '',
     padding: 'px-4 py-4 sm:px-6'
+  },
+  default: {
+    rounded: 'lg',
   }
 }
 
@@ -530,9 +612,22 @@ const container = {
 }
 
 const skeleton = {
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   base: 'animate-pulse',
   background: 'bg-gray-100 dark:bg-gray-800',
-  rounded: 'rounded-md'
+  default: {
+    rounded: 'md',
+  }
 }
 
 // Navigation
@@ -543,7 +638,6 @@ const verticalNavigation = {
   ring: 'focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
   padding: 'px-3 py-1.5',
   width: 'w-full',
-  rounded: 'rounded-md',
   font: 'font-medium',
   size: 'text-sm',
   active: 'text-gray-900 dark:text-white before:bg-gray-100 dark:before:bg-gray-800',
@@ -655,7 +749,17 @@ const modal = {
   },
   background: 'bg-white dark:bg-gray-900',
   ring: '',
-  rounded: 'rounded-lg',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   shadow: 'shadow-xl',
   width: 'sm:max-w-lg',
   height: '',
@@ -666,6 +770,9 @@ const modal = {
     leave: 'ease-in duration-200',
     leaveFrom: 'opacity-100 translate-y-0 sm:scale-100',
     leaveTo: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
+  },
+  default: {
+    rounded: 'lg',
   }
 }
 
@@ -686,13 +793,26 @@ const slideover = {
   base: 'relative flex-1 flex flex-col w-full focus:outline-none',
   background: 'bg-white dark:bg-gray-900',
   ring: '',
-  rounded: '',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   padding: '',
   shadow: 'shadow-xl',
   width: 'w-screen max-w-md',
   transition: {
     enter: 'transform transition ease-in-out duration-300',
     leave: 'transform transition ease-in-out duration-200'
+  },
+  default: {
+    rounded: 'md',
   }
 }
 
@@ -702,7 +822,17 @@ const tooltip = {
   width: 'max-w-xs',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow',
-  rounded: 'rounded',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
   shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5',
@@ -716,6 +846,9 @@ const tooltip = {
   },
   popper: {
     strategy: 'fixed'
+  },
+  default: {
+    rounded: 'rounded',
   }
 }
 
@@ -725,7 +858,17 @@ const popover = {
   width: '',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
-  rounded: 'rounded-md',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
   transition: {
@@ -738,6 +881,9 @@ const popover = {
   },
   popper: {
     strategy: 'fixed'
+  },
+  default: {
+    rounded: 'md',
   }
 }
 
@@ -747,7 +893,17 @@ const contextMenu = {
   width: '',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
-  rounded: 'rounded-md',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
   transition: {
@@ -761,6 +917,9 @@ const contextMenu = {
   popper: {
     placement: 'bottom-start',
     scroll: false
+  },
+  default: {
+    rounded: 'md',
   }
 }
 
@@ -771,7 +930,17 @@ const notification = {
   description: 'mt-1 text-sm leading-5 text-gray-500 dark:text-gray-400',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
-  rounded: 'rounded-lg',
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    rounded:'rounded',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
+  },
   padding: 'p-4',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   icon: {
@@ -796,6 +965,7 @@ const notification = {
   },
   default: {
     color: 'primary',
+    rounded: 'lg',
     icon: null,
     closeButton: {
       icon: 'i-heroicons-x-mark-20-solid',
