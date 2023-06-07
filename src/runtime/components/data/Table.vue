@@ -36,12 +36,14 @@
 
         <tr v-if="emptyState && !rows.length">
           <td :colspan="columns.length">
-            <div :class="ui.emptyState.wrapper">
-              <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
-              <p :class="ui.emptyState.label">
-                {{ emptyState.label }}
-              </p>
-            </div>
+            <slot name="empty-state">
+              <div :class="ui.emptyState.wrapper">
+                <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
+                <p :class="ui.emptyState.label">
+                  {{ emptyState.label }}
+                </p>
+              </div>
+            </slot>
           </td>
         </tr>
       </tbody>
