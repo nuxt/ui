@@ -130,6 +130,13 @@ export default defineComponent({
         return Object.keys(appConfig.ui.input.size).includes(value)
       }
     },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.input.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.input.rounded).includes(value)
+      }
+    },
     color: {
       type: String,
       default: () => appConfig.ui.input.default.color,
@@ -182,7 +189,7 @@ export default defineComponent({
 
       return classNames(
         ui.value.base,
-        ui.value.rounded,
+        ui.value.rounded[props.rounded],
         ui.value.placeholder,
         ui.value.size[props.size],
         props.padded ? ui.value.padding[props.size] : 'p-0',

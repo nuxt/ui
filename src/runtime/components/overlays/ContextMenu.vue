@@ -1,7 +1,7 @@
 <template>
   <div v-if="isOpen" ref="container" :class="[ui.container, ui.width]">
     <transition appear v-bind="ui.transition">
-      <div :class="[ui.base, ui.ring, ui.rounded, ui.shadow, ui.background]">
+      <div :class="[ui.base, ui.ring, ui.rounded[rounded], ui.shadow, ui.background]">
         <slot />
       </div>
     </transition>
@@ -36,6 +36,13 @@ export default defineComponent({
     popper: {
       type: Object as PropType<PopperOptions>,
       default: () => ({})
+    },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.contextMenu.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.contextMenu.rounded).includes(value)
+      }
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.contextMenu>>,

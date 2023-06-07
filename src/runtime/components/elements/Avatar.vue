@@ -41,6 +41,13 @@ export default defineComponent({
         return Object.keys(appConfig.ui.avatar.size).includes(value)
       }
     },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.avatar.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.avatar.rounded).includes(value)
+      }
+    },
     chipColor: {
       type: String,
       default: () => appConfig.ui.avatar.default.chipColor,
@@ -70,14 +77,14 @@ export default defineComponent({
       return classNames(
         ui.value.wrapper,
         ui.value.background,
-        ui.value.rounded,
+        ui.value.rounded[props.rounded],
         ui.value.size[props.size]
       )
     })
 
     const avatarClass = computed(() => {
       return classNames(
-        ui.value.rounded,
+        ui.value.rounded[props.rounded],
         ui.value.size[props.size]
       )
     })

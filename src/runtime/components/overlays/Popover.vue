@@ -17,7 +17,7 @@
 
     <div v-if="open" ref="container" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
       <transition appear v-bind="ui.transition">
-        <PopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
+        <PopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded[rounded], ui.shadow]" static>
           <slot name="panel" :open="open" :close="close" />
         </PopoverPanel>
       </transition>
@@ -68,6 +68,13 @@ export default defineComponent({
     popper: {
       type: Object as PropType<PopperOptions>,
       default: () => ({})
+    },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.popover.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.popover.rounded).includes(value)
+      }
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.popover>>,

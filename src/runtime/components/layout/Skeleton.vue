@@ -1,5 +1,5 @@
 <template>
-  <div :class="[ui.base, ui.background, ui.rounded]" />
+  <div :class="[ui.base, ui.background, ui.rounded[rounded]]" />
 </template>
 
 <script lang="ts">
@@ -15,6 +15,13 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   props: {
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.skeleton.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.skeleton.rounded).includes(value)
+      }
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.skeleton>>,
       default: () => appConfig.ui.skeleton

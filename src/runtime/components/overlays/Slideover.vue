@@ -6,7 +6,7 @@
       </TransitionChild>
 
       <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-        <DialogPanel :class="[ui.base, ui.width, ui.background, ui.ring, ui.padding]">
+        <DialogPanel :class="[ui.base, ui.width, ui.rounded[rounded], ui.background, ui.ring, ui.padding]">
           <slot />
         </DialogPanel>
       </TransitionChild>
@@ -55,6 +55,13 @@ export default defineComponent({
     transition: {
       type: Boolean,
       default: true
+    },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.slideover.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.slideover.rounded).includes(value)
+      }
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.slideover>>,

@@ -234,6 +234,13 @@ export default defineComponent({
         return Object.keys(appConfig.ui.select.size).includes(value)
       }
     },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.select.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.select.rounded).includes(value)
+      }
+    },
     color: {
       type: String,
       default: () => appConfig.ui.select.default.color,
@@ -292,7 +299,7 @@ export default defineComponent({
 
       return classNames(
         uiSelect.value.base,
-        uiSelect.value.rounded,
+        uiSelect.value.rounded[props.rounded],
         'text-left cursor-default',
         uiSelect.value.size[props.size],
         uiSelect.value.gap[props.size],

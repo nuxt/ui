@@ -1,5 +1,5 @@
 <template>
-  <kbd :class="[ui.base, ui.size[size], ui.padding, ui.rounded, ui.font, ui.background, ui.ring]">
+  <kbd :class="[ui.base, ui.size[size], ui.padding, ui.rounded[rounded], ui.font, ui.background, ui.ring]">
     <slot>{{ value }}</slot>
   </kbd>
 </template>
@@ -26,6 +26,13 @@ export default defineComponent({
       default: () => appConfig.ui.kbd.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.kbd.size).includes(value)
+      }
+    },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.kbd.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.kbd.rounded).includes(value)
       }
     },
     ui: {

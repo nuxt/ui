@@ -132,6 +132,13 @@ export default defineComponent({
         return Object.keys(appConfig.ui.select.size).includes(value)
       }
     },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.select.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.select.rounded).includes(value)
+      }
+    },
     color: {
       type: String,
       default: () => appConfig.ui.select.default.color,
@@ -230,7 +237,7 @@ export default defineComponent({
 
       return classNames(
         ui.value.base,
-        ui.value.rounded,
+        ui.value.rounded[props.rounded],
         ui.value.size[props.size],
         props.padded ? ui.value.padding[props.size] : 'p-0',
         variant?.replaceAll('{color}', props.color),

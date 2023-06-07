@@ -8,7 +8,7 @@
       <div :class="ui.inner">
         <div :class="[ui.container, ui.padding]">
           <TransitionChild as="template" :appear="appear" v-bind="ui.transition">
-            <DialogPanel :class="[ui.base, ui.width, ui.height, ui.background, ui.ring, ui.rounded, ui.shadow]">
+            <DialogPanel :class="[ui.base, ui.width, ui.height, ui.background, ui.ring, ui.rounded[rounded], ui.shadow]">
               <slot />
             </DialogPanel>
           </TransitionChild>
@@ -54,6 +54,13 @@ export default defineComponent({
     transition: {
       type: Boolean,
       default: true
+    },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.modal.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.modal.rounded).includes(value)
+      }
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.modal>>,

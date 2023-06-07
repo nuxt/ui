@@ -25,6 +25,13 @@ export default defineComponent({
         return Object.keys(appConfig.ui.badge.size).includes(value)
       }
     },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.badge.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.badge.rounded).includes(value)
+      }
+    },
     color: {
       type: String,
       default: () => appConfig.ui.badge.default.color,
@@ -63,7 +70,7 @@ export default defineComponent({
       return classNames(
         ui.value.base,
         ui.value.font,
-        ui.value.rounded,
+        ui.value.rounded[props.rounded],
         ui.value.size[props.size],
         variant?.replaceAll('{color}', props.color)
       )

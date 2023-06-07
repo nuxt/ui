@@ -1,7 +1,7 @@
 <template>
   <component
     :is="$attrs.onSubmit ? 'form': as"
-    :class="[ui.base, ui.rounded, ui.divide, ui.ring, ui.shadow, ui.background]"
+    :class="[ui.base, ui.rounded[rounded], ui.divide, ui.ring, ui.shadow, ui.background]"
     v-bind="$attrs"
   >
     <div v-if="$slots.header" :class="[ui.header.base, ui.header.padding, ui.header.background]">
@@ -33,6 +33,13 @@ export default defineComponent({
     as: {
       type: String,
       default: 'div'
+    },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.card.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.card.rounded).includes(value)
+      }
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.card>>,

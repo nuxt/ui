@@ -73,6 +73,13 @@ export default defineComponent({
         return Object.keys(appConfig.ui.button.size).includes(value)
       }
     },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.button.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.button.rounded).includes(value)
+      }
+    },
     color: {
       type: String,
       default: () => appConfig.ui.button.default.color,
@@ -179,7 +186,7 @@ export default defineComponent({
       return classNames(
         ui.value.base,
         ui.value.font,
-        ui.value.rounded,
+        ui.value.rounded[props.rounded],
         ui.value.size[props.size],
         ui.value.gap[props.size],
         props.padded && ui.value[isSquare.value ? 'square' : 'padding'][props.size],

@@ -6,7 +6,7 @@
 
     <div v-if="open && !prevent" ref="container" :class="[ui.container, ui.width]">
       <transition appear v-bind="ui.transition">
-        <div :class="[ui.base, ui.background, ui.rounded, ui.shadow, ui.ring]">
+        <div :class="[ui.base, ui.background, ui.rounded[rounded], ui.shadow, ui.ring]">
           <slot name="text">
             {{ text }}
           </slot>
@@ -65,6 +65,13 @@ export default defineComponent({
     popper: {
       type: Object as PropType<PopperOptions>,
       default: () => ({})
+    },
+    rounded: {
+      type: String,
+      default: () => appConfig.ui.tooltip.default.rounded,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.tooltip.rounded).includes(value)
+      }
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.tooltip>>,
