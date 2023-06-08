@@ -207,11 +207,12 @@ const dropdown = {
   wrapper: 'relative inline-flex text-left',
   container: 'z-20',
   width: 'w-48',
+  height: '',
   background: 'bg-white dark:bg-gray-800',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
-  base: 'focus:outline-none',
+  base: 'relative focus:outline-none overflow-y-auto scroll-py-1',
   divide: 'divide-y divide-gray-200 dark:divide-gray-700',
   padding: 'p-1',
   item: {
