@@ -1,28 +1,40 @@
 <template>
-  <UButtonGroup :size="size">
-    <UButton
-      v-if="prevIcon"
-      :icon="prevIcon"
-      :disabled="!canGoPrev"
-      v-bind="{ ...ui.default.inactiveButton, ...inactiveButton }"
-      @click="onClickPrev"
-    />
+  <div :class="ui.wrapper">
+    <slot name="prev" :on-click="onClickPrev">
+      <UButton
+        v-if="prevButton"
+        :size="size"
+        :disabled="!canGoPrev"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...ui.default.prevButton, ...prevButton }"
+        :ui="{ rounded: '' }"
+        @click="onClickPrev"
+      />
+    </slot>
+
     <UButton
       v-for="(page, index) of displayedPages"
       :key="index"
+      :size="size"
       :label="`${page}`"
       v-bind="page === currentPage ? { ...ui.default.activeButton, ...activeButton } : { ...ui.default.inactiveButton, ...inactiveButton }"
-      :class="{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }"
+      :class="[{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }, ui.base, ui.rounded]"
+      :ui="{ rounded: '' }"
       @click="() => onClickPage(page)"
     />
-    <UButton
-      v-if="nextIcon"
-      :icon="nextIcon"
-      :disabled="!canGoNext"
-      v-bind="{ ...ui.default.inactiveButton, ...inactiveButton }"
-      @click="onClickNext"
-    />
-  </UButtonGroup>
+
+    <slot name="next" :on-click="onClickNext">
+      <UButton
+        v-if="nextButton"
+        :size="size"
+        :disabled="!canGoNext"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...ui.default.nextButton, ...nextButton }"
+        :ui="{ rounded: '' }"
+        @click="onClickNext"
+      />
+    </slot>
+  </div>
 </template>
 
 <script lang="ts">
@@ -30,7 +42,6 @@ import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UButton from '../elements/Button.vue'
-import UButtonGroup from '../elements/ButtonGroup'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -41,8 +52,7 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    UButton,
-    UButtonGroup
+    UButton
   },
   props: {
     modelValue: {
@@ -79,13 +89,13 @@ export default defineComponent({
       type: Object as PropType<Partial<Button>>,
       default: () => appConfig.ui.pagination.default.inactiveButton
     },
-    prevIcon: {
-      type: String,
-      default: () => appConfig.ui.pagination.default.prevIcon
+    prevButton: {
+      type: Object as PropType<Partial<Button>>,
+      default: () => appConfig.ui.pagination.default.prevButton
     },
-    nextIcon: {
-      type: String,
-      default: () => appConfig.ui.pagination.default.nextIcon
+    nextButton: {
+      type: Object as PropType<Partial<Button>>,
+      default: () => appConfig.ui.pagination.default.nextButton
     },
     divider: {
       type: String,

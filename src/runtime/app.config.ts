@@ -634,6 +634,9 @@ const commandPalette = {
 }
 
 const pagination = {
+  wrapper: 'flex items-center -space-x-px',
+  base: '',
+  rounded: 'first:rounded-l-md last:rounded-r-md',
   default: {
     size: 'sm',
     activeButton: {
@@ -642,8 +645,14 @@ const pagination = {
     inactiveButton: {
       color: 'white'
     },
-    prevIcon: 'i-heroicons-chevron-left-20-solid',
-    nextIcon: 'i-heroicons-chevron-right-20-solid'
+    prevButton: {
+      color: 'white',
+      icon: 'i-heroicons-chevron-left-20-solid'
+    },
+    nextButton: {
+      color: 'white',
+      icon: 'i-heroicons-chevron-right-20-solid'
+    }
   }
 }
 
