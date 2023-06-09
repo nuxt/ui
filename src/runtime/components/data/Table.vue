@@ -34,7 +34,7 @@
           </td>
         </tr>
 
-        <tr v-if="emptyState && !rows.length && !isLoading">
+        <tr v-if="emptyState && !rows.length && !loading">
           <td :colspan="columns.length">
             <div :class="ui.emptyState.wrapper">
               <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
@@ -42,8 +42,10 @@
                 {{ emptyState.label }}
               </p>
             </div>
+          </td>
+        </tr>
 
-        <tr v-if="isLoading">
+        <tr v-if="loading">
           <td :colspan="columns.length">
             <slot name="loading-state">
               <div :class="ui.loadingState.wrapper">
@@ -123,7 +125,7 @@ export default defineComponent({
       type: Object as PropType<Partial<typeof appConfig.ui.table>>,
       default: () => appConfig.ui.table
     },
-    isLoading: {
+    loading: {
       type: Boolean,
       default: false
     },

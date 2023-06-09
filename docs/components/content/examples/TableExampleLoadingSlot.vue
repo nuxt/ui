@@ -21,7 +21,7 @@ const isLoading = ref(true);
 </script>
 
 <template>
-  <UTable :rows="people" :columns="columns" :is-loading="isLoading">
+  <UTable :rows="people" :columns="columns" :loading="isLoading">
     <template #loading-state>
       <div class="flex items-center justify-center">
         <span class="py-10">Loading...</span>
