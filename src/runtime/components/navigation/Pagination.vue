@@ -1,36 +1,40 @@
 <template>
-  <UButtonGroup :size="size">
-    <slot name="prev" @click="onClickPrev">
+  <div :class="ui.wrapper">
+    <slot name="prev" :on-click="onClickPrev">
       <UButton
-        v-if="prevButton.label || prevButton.icon"
+        v-if="prevButton"
+        :size="size"
         :disabled="!canGoPrev"
-        v-bind="{ ...ui.default.inactiveButton, ...inactiveButton }"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...ui.default.prevButton, ...prevButton }"
+        :ui="{ rounded: '' }"
         @click="onClickPrev"
-        :label="prevButton.label"
-        :leading-icon="prevButton.icon"
       />
     </slot>
 
     <UButton
       v-for="(page, index) of displayedPages"
       :key="index"
+      :size="size"
       :label="`${page}`"
       v-bind="page === currentPage ? { ...ui.default.activeButton, ...activeButton } : { ...ui.default.inactiveButton, ...inactiveButton }"
-      :class="{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }"
+      :class="[{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }, ui.base, ui.rounded]"
+      :ui="{ rounded: '' }"
       @click="() => onClickPage(page)"
     />
 
-    <slot name="next" @click="onClickNext">
+    <slot name="next" :on-click="onClickNext">
       <UButton
-        v-if="nextButton.label || nextButton.icon"
+        v-if="nextButton"
+        :size="size"
         :disabled="!canGoNext"
-        v-bind="{ ...ui.default.inactiveButton, ...inactiveButton }"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...ui.default.nextButton, ...nextButton }"
+        :ui="{ rounded: '' }"
         @click="onClickNext"
-        :label="nextButton.label"
-        :trailing-icon="nextButton.icon"
       />
     </slot>
-  </UButtonGroup>
+  </div>
 </template>
 
 <script lang="ts">
@@ -38,7 +42,6 @@ import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UButton from '../elements/Button.vue'
-import UButtonGroup from '../elements/ButtonGroup'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -49,8 +52,7 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    UButton,
-    UButtonGroup
+    UButton
   },
   props: {
     modelValue: {
