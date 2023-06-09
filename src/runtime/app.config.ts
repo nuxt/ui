@@ -776,7 +776,7 @@ const notification = {
   padding: 'p-4',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   icon: {
-    base: 'flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-500',
+    base: 'flex-shrink-0 w-5 h-5',
     color: 'text-{color}-500 dark:text-{color}-400'
   },
   avatar: {

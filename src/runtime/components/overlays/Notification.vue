@@ -134,7 +134,7 @@ export default defineComponent({
     const iconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && ui.value.icon.color?.replaceAll('{color}', props.color)
+        ui.value.icon.color?.replaceAll('{color}', props.color)
       )
     })
 
