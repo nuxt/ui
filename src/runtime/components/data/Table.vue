@@ -36,7 +36,7 @@
 
         <tr v-if="emptyState && !rows.length">
           <td :colspan="columns.length">
-            <slot name="empty-state">
+            <slot name="empty">
               <div :class="ui.emptyState.wrapper">
                 <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
                 <p :class="ui.emptyState.label">
