@@ -20,7 +20,7 @@ const people = []
 
 <template>
   <UTable :rows="people" :columns="columns">
-    <template #empty>
+    <template #empty-state>
       <div class="flex flex-col items-center justify-center py-5">
           <span>No people</span>
           <UButton color="primary" label="Add People" size="sm" class="rounded-full mt-2"/>
