@@ -121,7 +121,7 @@ const meta = await fetchComponentMeta(name)
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => ({ ...appConfig.ui[camelName], ...props.ui }))
 
-const fullProps = computed(() => ({ ...props.baseProps, ...componentProps }))
+const fullProps = computed(() => ({ ...baseProps, ...componentProps }))
 const vModel = computed({
   get: () => baseProps.modelValue,
   set: (value) => {
