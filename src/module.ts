@@ -1,22 +1,17 @@
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin, resolvePath } from '@nuxt/kit'
-import colors from 'tailwindcss/colors.js'
+import defaultColors from 'tailwindcss/colors.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
-import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
+import { generateSafelist, excludeColors } from './safelist'
 
 import appConfig from './runtime/app.config'
 type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
 
-// @ts-ignore
-delete colors.lightBlue
-// @ts-ignore
-delete colors.warmGray
-// @ts-ignore
-delete colors.trueGray
-// @ts-ignore
-delete colors.coolGray
-// @ts-ignore
-delete colors.blueGray
+delete defaultColors.lightBlue
+delete defaultColors.warmGray
+delete defaultColors.trueGray
+delete defaultColors.coolGray
+delete defaultColors.blueGray
 
 declare module 'nuxt/schema' {
   interface AppConfigInput {
@@ -40,6 +35,8 @@ export interface ModuleOptions {
   global?: boolean
 
   icons: string[] | string
+
+  safelistColors?: string[] | { avatar?: string[], badge?: string[], button?: string[], input?: string[], notification?: string[] }
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -73,7 +70,7 @@ export default defineNuxtModule<ModuleOptions>({
     // @ts-ignore
     nuxt.hook('tailwindcss:config', function (tailwindConfig: TailwindConfig) {
       const globalColors = {
-        ...(tailwindConfig.theme.colors || colors),
+        ...(tailwindConfig.theme.colors || defaultColors),
         ...tailwindConfig.theme.extend?.colors
       }
 
@@ -93,7 +90,7 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       if (globalColors.gray) {
-        globalColors.cool = tailwindConfig.theme.extend.colors.cool = colors.gray
+        globalColors.cool = tailwindConfig.theme.extend.colors.cool = defaultColors.gray
       }
 
       globalColors.gray = tailwindConfig.theme.extend.colors.gray = {
@@ -110,60 +107,17 @@ export default defineNuxtModule<ModuleOptions>({
         950: 'rgb(var(--color-gray-950) / <alpha-value>)'
       }
 
-      const variantColors = excludeColors(globalColors)
-      const safeColorsAsRegex = colorsAsRegex(variantColors)
+      const colors = excludeColors(globalColors)
 
       nuxt.options.appConfig.ui = {
         ...nuxt.options.appConfig.ui,
         primary: 'green',
         gray: 'cool',
-        colors: variantColors
+        colors
       }
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
-      tailwindConfig.safelist.push(...[
-        'bg-gray-500',
-        'dark:bg-gray-400',
-        {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|400|500)`)
-        }, {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-500`),
-          variants: ['disabled']
-        }, {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(400|950)`),
-          variants: ['dark']
-        }, {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(500|900|950)`),
-          variants: ['dark:hover']
-        }, {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-400`),
-          variants: ['dark:disabled']
-        }, {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|100|600)`),
-          variants: ['hover']
-        }, {
-          pattern: new RegExp(`outline-(${safeColorsAsRegex})-500`),
-          variants: ['focus-visible']
-        }, {
-          pattern: new RegExp(`outline-(${safeColorsAsRegex})-400`),
-          variants: ['dark:focus-visible']
-        }, {
-          pattern: new RegExp(`ring-(${safeColorsAsRegex})-500`),
-          variants: ['focus', 'focus-visible']
-        }, {
-          pattern: new RegExp(`ring-(${safeColorsAsRegex})-400`),
-          variants: ['dark', 'dark:focus', 'dark:focus-visible']
-        }, {
-          pattern: new RegExp(`text-(${safeColorsAsRegex})-400`),
-          variants: ['dark']
-        }, {
-          pattern: new RegExp(`text-(${safeColorsAsRegex})-500`),
-          variants: ['dark:hover']
-        }, {
-          pattern: new RegExp(`text-(${safeColorsAsRegex})-600`),
-          variants: ['hover']
-        }
-      ])
+      tailwindConfig.safelist.push(...generateSafelist(colors, options.safelistColors))
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
