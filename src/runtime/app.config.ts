@@ -642,13 +642,11 @@ const pagination = {
     inactiveButton: {
       color: 'white'
     },
-    prev: {
-      iconClass: 'h-5 w-5',
+    prevButton: {
       icon: 'i-heroicons-chevron-left-20-solid',
       label: '',
     },
-    next: {
-      iconClass: 'h-5 w-5',
+    nextButton: {
       icon: 'i-heroicons-chevron-right-20-solid',
       label: '',
     },
