@@ -52,10 +52,12 @@
       </ComboboxOptions>
 
       <div v-else-if="emptyState" :class="ui.emptyState.wrapper">
-        <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
-        <p :class="query ? ui.emptyState.queryLabel : ui.emptyState.label">
-          {{ query ? emptyState.queryLabel : emptyState.label }}
-        </p>
+        <slot name="empty-state">
+          <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
+          <p :class="query ? ui.emptyState.queryLabel : ui.emptyState.label">
+            {{ query ? emptyState.queryLabel : emptyState.label }}
+          </p>
+        </slot>
       </div>
     </div>
   </Combobox>
