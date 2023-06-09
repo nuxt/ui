@@ -634,6 +634,29 @@ const commandPalette = {
   }
 }
 
+const pagination = {
+  wrapper: 'flex items-center -space-x-px',
+  base: '',
+  rounded: 'first:rounded-l-md last:rounded-r-md',
+  default: {
+    size: 'sm',
+    activeButton: {
+      color: 'primary'
+    },
+    inactiveButton: {
+      color: 'white'
+    },
+    prevButton: {
+      color: 'white',
+      icon: 'i-heroicons-chevron-left-20-solid'
+    },
+    nextButton: {
+      color: 'white',
+      icon: 'i-heroicons-chevron-right-20-solid'
+    }
+  }
+}
+
 // Overlays
 
 const modal = {
@@ -841,6 +864,7 @@ export default {
     skeleton,
     verticalNavigation,
     commandPalette,
+    pagination,
     modal,
     slideover,
     popover,
