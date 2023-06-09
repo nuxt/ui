@@ -17,7 +17,7 @@
 
     <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <transition appear v-bind="ui.transition">
-        <MenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background]" static>
+        <MenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
           <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
               <ULinkCustom
