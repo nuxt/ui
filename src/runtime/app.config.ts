@@ -651,8 +651,7 @@ const pagination = {
     },
     nextButton: {
       color: 'white',
-      icon: 'i-heroicons-chevron-right-20-solid',
-      trailing: true
+      icon: 'i-heroicons-chevron-right-20-solid'
     }
   }
 }
