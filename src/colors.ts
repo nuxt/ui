@@ -25,7 +25,7 @@ const kebabCase = (str: string) => {
     ?.join('-')
 }
 
-const safelist = {
+const safelistByComponent = {
   avatar: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex}|gray)-500`)
   }, {
@@ -115,20 +115,37 @@ const colorsAsRegex = (colors: string[]): string => colors.join('|')
 
 export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
 
-const generateSafelistFor = (component, colors: string[], safelistColors?: { avatar?: string[], badge?: string[], button?: string[], input?: string[], notification?: string[] } | string[]) => {
-  let colorsToInclude = [...colors]
+export const generateSafelist = (colors: string[]) => ['avatar', 'badge', 'button', 'input', 'notification'].flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
 
-  if (safelistColors) {
-    if (typeof safelistColors === 'object' && Array.isArray(safelistColors[component])) {
-      colorsToInclude = colorsToInclude.filter(color => color === 'primary' || safelistColors[component].includes(color))
-    } else if (Array.isArray(safelistColors)) {
-      colorsToInclude = colorsToInclude.filter(color => color === 'primary' || safelistColors.includes(color))
+export const customSafelistExtractor = (prefix, content: string) => {
+  const classes = []
+  const regex = /<(\w+)\s+[^>]*color=["']([^"']+)["'][^>]*>/gs
+  const matches = [...content.matchAll(regex)]
+
+  for (const match of matches) {
+    const [, component, color] = match
+
+    if (colorsToExclude.includes(color)) {
+      continue
+    }
+
+    if (Object.keys(safelistByComponent).map(component => `${prefix}${component.charAt(0).toUpperCase() + component.slice(1)}`).includes(component)) {
+      const name = component.replace(prefix, '').toLowerCase()
+
+      const matchClasses = safelistByComponent[name](color).flatMap(group => {
+        return ['', ...group.variants].flatMap(variant => {
+          const matches = group.pattern.source.match(/\(([^)]+)\)/g)
+
+          return matches.map(match => {
+            const colorOptions = match.substring(1, match.length - 1).split('|')
+            return colorOptions.map(color => `${variant ? variant + ':' : ''}` + group.pattern.source.replace(match, color))
+          }).flat()
+        })
+      })
+
+      classes.push(...matchClasses)
     }
   }
 
-  return safelist[component](colorsAsRegex(colorsToInclude))
-}
-
-export const generateSafelist = (colors: string[], safelistColors?: { avatar?: string[], badge?: string[], button?: string[], input?: string[], notification?: string[] } | string[]) => {
-  return ['avatar', 'badge', 'button', 'input', 'notification'].flatMap(component => generateSafelistFor(component, colors, safelistColors))
+  return classes
 }

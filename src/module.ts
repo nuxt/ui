@@ -1,10 +1,11 @@
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin, resolvePath } from '@nuxt/kit'
 import defaultColors from 'tailwindcss/colors.js'
+import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/src/lib/defaultExtractor.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
-import { generateSafelist, excludeColors } from './safelist'
-
+import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
 import appConfig from './runtime/app.config'
+
 type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
 
 delete defaultColors.lightBlue
@@ -36,7 +37,7 @@ export interface ModuleOptions {
 
   icons: string[] | string
 
-  safelistColors?: string[] | { avatar?: string[], badge?: string[], button?: string[], input?: string[], notification?: string[] }
+  safelistColors?: string[]
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -49,8 +50,9 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults: {
-    prefix: 'u',
-    icons: ['heroicons']
+    prefix: 'U',
+    icons: ['heroicons'],
+    safelistColors: ['primary']
   },
   async setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
@@ -67,14 +69,14 @@ export default defineNuxtModule<ModuleOptions>({
       app.configs.push(appConfigFile)
     })
 
-    // @ts-ignore
-    nuxt.hook('tailwindcss:config', function (tailwindConfig: TailwindConfig) {
-      const globalColors = {
+    nuxt.hook('tailwindcss:config', function (tailwindConfig) {
+      const globalColors: any = {
         ...(tailwindConfig.theme.colors || defaultColors),
         ...tailwindConfig.theme.extend?.colors
       }
 
       tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {}
+      // @ts-ignore
       globalColors.primary = tailwindConfig.theme.extend.colors.primary = {
         50: 'rgb(var(--color-primary-50) / <alpha-value>)',
         100: 'rgb(var(--color-primary-100) / <alpha-value>)',
@@ -90,9 +92,11 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       if (globalColors.gray) {
+        // @ts-ignore
         globalColors.cool = tailwindConfig.theme.extend.colors.cool = defaultColors.gray
       }
 
+      // @ts-ignore
       globalColors.gray = tailwindConfig.theme.extend.colors.gray = {
         50: 'rgb(var(--color-gray-50) / <alpha-value>)',
         100: 'rgb(var(--color-gray-100) / <alpha-value>)',
@@ -117,11 +121,13 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
-      tailwindConfig.safelist.push(...generateSafelist(colors, options.safelistColors))
+      tailwindConfig.safelist.push(...generateSafelist(options.safelistColors))
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
     })
+
+    // Modules
 
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
@@ -135,16 +141,30 @@ export default defineNuxtModule<ModuleOptions>({
           require('@tailwindcss/typography'),
           require('@tailwindcss/container-queries')
         ],
-        content: [
-          resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'),
-          resolve(runtimeDir, '*.{mjs,js,ts}')
-        ]
+        content: {
+          files: [
+            resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'),
+            resolve(runtimeDir, '*.{mjs,js,ts}')
+          ],
+          extract: {
+            vue: (content) => {
+              return [
+                ...createDefaultExtractor({ tailwindConfig: { separator: ':' } })(content),
+                ...customSafelistExtractor(options.prefix, content)
+              ]
+            }
+          }
+        }
       }
     })
+
+    // Plugins
 
     addPlugin({
       src: resolve(runtimeDir, 'plugins', 'colors')
     })
+
+    // Components
 
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'elements'),
@@ -182,6 +202,8 @@ export default defineNuxtModule<ModuleOptions>({
       global: options.global,
       watch: false
     })
+
+    // Composables
 
     addImportsDir(resolve(runtimeDir, 'composables'))
   }
