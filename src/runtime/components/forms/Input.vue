@@ -12,6 +12,7 @@
       :readonly="readonly"
       :autocomplete="autocomplete"
       :spellcheck="spellcheck"
+      class="form-input"
       :class="inputClass"
       @input="onInput"
       @focus="$emit('focus', $event)"

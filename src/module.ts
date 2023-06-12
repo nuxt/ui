@@ -176,7 +176,7 @@ export default defineNuxtModule<ModuleOptions>({
       config: {
         darkMode: 'class',
         plugins: [
-          require('@tailwindcss/forms'),
+          require("@tailwindcss/forms")({ strategy: 'class' }),
           require('@tailwindcss/aspect-ratio'),
           require('@tailwindcss/typography'),
           require('@tailwindcss/container-queries')
