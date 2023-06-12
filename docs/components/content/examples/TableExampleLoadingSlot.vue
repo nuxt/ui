@@ -34,7 +34,7 @@ const pending = ref(true)
 /* https://codepen.io/jenning/pen/YzNmzaV */
 
 .loader {
-	--color: white;
+	--color: rgb(var(--color-primary-400));
 	--size-mid: 6vmin;
 	--size-dot: 1.5vmin;
 	--size-bar: 0.4vmin;
