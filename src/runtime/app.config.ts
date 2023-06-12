@@ -281,7 +281,6 @@ const input = {
   base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0',
   rounded: 'rounded-md',
   placeholder: 'placeholder-gray-400 dark:placeholder-gray-500',
-  custom: '',
   size: {
     '2xs': 'text-xs',
     xs: 'text-xs',

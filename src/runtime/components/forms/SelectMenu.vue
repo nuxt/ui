@@ -28,7 +28,7 @@
       class="inline-flex w-full"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
-        <button :class="selectMenuClass" :disabled="disabled || loading" type="button">
+        <button :class="selectMenuClass" :disabled="disabled || loading" type="button" v-bind="$attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
             <slot name="leading" :disabled="disabled" :loading="loading">
               <UIcon :name="leadingIconName" :class="leadingIconClass" />
@@ -146,6 +146,7 @@ export default defineComponent({
     UIcon,
     UAvatar
   },
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: [String, Number, Object, Array],
@@ -300,7 +301,6 @@ export default defineComponent({
         variant?.replaceAll('{color}', props.color),
         (isLeading.value || slots.leading) && uiSelect.value.leading.padding[props.size],
         (isTrailing.value || slots.trailing) && uiSelect.value.trailing.padding[props.size],
-        uiSelect.value.custom,
         'inline-flex items-center'
       )
     })

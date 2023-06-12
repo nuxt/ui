@@ -1,10 +1,10 @@
 <template>
-  <div class="flex items-center shadow-sm">
-    <ClientOnly>
+  <ClientOnly>
+    <div class="inline-flex shadow-sm rounded-md">
       <USelectMenu
         v-model="primary"
         name="primary"
-        class="w-full [&>div>button]:!rounded-r-none"
+        class="!rounded-r-none !shadow-none focus:z-[1]"
         color="gray"
         :ui="{ width: 'w-[194px]' }"
         :popper="{ placement: 'bottom-start' }"
@@ -22,15 +22,13 @@
           {{ option.text }}
         </template>
       </USelectMenu>
-    </ClientOnly>
 
-    <ClientOnly>
       <USelectMenu
         v-model="gray"
         name="gray"
-        class="w-full [&>div>button]:!rounded-l-none [&>div>button]:-ml-px"
+        class="!rounded-l-none !shadow-none"
         color="gray"
-        :ui="{ width: 'w-[194px]' }"
+        :ui="{ width: 'w-[194px]', wrapper: '-ml-px' }"
         :popper="{ placement: 'bottom-end' }"
         :options="grayOptions"
       >
@@ -46,8 +44,8 @@
           {{ option.text }}
         </template>
       </USelectMenu>
-    </ClientOnly>
-  </div>
+    </div>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
