@@ -10,6 +10,7 @@
       :disabled="disabled"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
+      class="form-textarea"
       :class="textareaClass"
       @input="onInput"
       @focus="$emit('focus', $event)"

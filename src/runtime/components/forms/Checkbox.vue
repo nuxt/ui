@@ -11,6 +11,7 @@
         :checked="checked"
         :indeterminate="indeterminate"
         type="checkbox"
+        class="form-checkbox"
         :class="[ui.base, ui.custom]"
         @focus="$emit('focus', $event)"
         @blur="$emit('blur', $event)"

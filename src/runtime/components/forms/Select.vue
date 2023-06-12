@@ -6,6 +6,7 @@
       :value="modelValue"
       :required="required"
       :disabled="disabled || loading"
+      class="form-select"
       :class="selectClass"
       @input="onInput"
     >
