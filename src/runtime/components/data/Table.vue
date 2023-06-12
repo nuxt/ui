@@ -34,26 +34,26 @@
           </td>
         </tr>
 
-        <tr v-if="emptyState && !rows.length && !loading">
-          <td :colspan="columns.length">
-            <slot name="empty-state">
-              <div :class="ui.emptyState.wrapper">
-                <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
-                <p :class="ui.emptyState.label">
-                  {{ emptyState.label }}
-                </p>
-              </div>
-            </slot>
-          </td>
-        </tr>
-
-        <tr v-if="loading">
+        <tr v-if="loadingState && loading">
           <td :colspan="columns.length">
             <slot name="loading-state">
               <div :class="ui.loadingState.wrapper">
                 <UIcon v-if="loadingState.icon" :name="loadingState.icon" :class="ui.loadingState.icon" aria-hidden="true" />
                 <p :class="ui.loadingState.label">
                   {{ loadingState.label }}
+                </p>
+              </div>
+            </slot>
+          </td>
+        </tr>
+
+        <tr v-else-if="emptyState && !rows.length">
+          <td :colspan="columns.length">
+            <slot name="empty-state">
+              <div :class="ui.emptyState.wrapper">
+                <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
+                <p :class="ui.emptyState.label">
+                  {{ emptyState.label }}
                 </p>
               </div>
             </slot>
@@ -119,14 +119,6 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.table.default.sortDescIcon
     },
-    emptyState: {
-      type: Object as PropType<{ icon: string, label: string }>,
-      default: () => appConfig.ui.table.default.emptyState
-    },
-    ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.table>>,
-      default: () => appConfig.ui.table
-    },
     loading: {
       type: Boolean,
       default: false
@@ -134,6 +126,14 @@ export default defineComponent({
     loadingState: {
       type: Object as PropType<{ icon: string, label: string }>,
       default: () => appConfig.ui.table.default.loadingState
+    },
+    emptyState: {
+      type: Object as PropType<{ icon: string, label: string }>,
+      default: () => appConfig.ui.table.default.emptyState
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.table>>,
+      default: () => appConfig.ui.table
     }
   },
   emits: ['update:modelValue'],

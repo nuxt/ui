@@ -24,15 +24,15 @@ const table = {
     font: '',
     size: 'text-sm'
   },
+  loadingState: {
+    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    label: 'text-sm text-center text-gray-900 dark:text-white',
+    icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4 animate-spin'
+  },
   emptyState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
     icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
-  },
-  loadingState: {
-    wrapper: 'flex items-center justify-center px-6 py-10 sm:px-10',
-    label: 'text-sm text-center text-gray-900 dark:text-white ml-2',
-    icon: 'w-5 h-5 text-gray-400 dark:text-gray-500'
   },
   default: {
     sortAscIcon: 'i-heroicons-bars-arrow-up-20-solid',
@@ -45,13 +45,13 @@ const table = {
       variant: 'ghost',
       class: '-m-1.5'
     },
+    loadingState: {
+      icon: 'i-heroicons-arrow-path-20-solid',
+      label: 'Loading...'
+    },
     emptyState: {
       icon: 'i-heroicons-circle-stack-20-solid',
       label: 'No items.'
-    },
-    loadingState: {
-      icon: 'i-heroicons-arrow-path animate-spin',
-      label: 'Loading...',
     }
   }
 }
