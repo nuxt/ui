@@ -24,6 +24,11 @@ const table = {
     font: '',
     size: 'text-sm'
   },
+  loadingState: {
+    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    label: 'text-sm text-center text-gray-900 dark:text-white',
+    icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4 animate-spin'
+  },
   emptyState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
@@ -39,6 +44,10 @@ const table = {
       color: 'gray',
       variant: 'ghost',
       class: '-m-1.5'
+    },
+    loadingState: {
+      icon: 'i-heroicons-arrow-path-20-solid',
+      label: 'Loading...'
     },
     emptyState: {
       icon: 'i-heroicons-circle-stack-20-solid',
@@ -465,15 +474,19 @@ const selectMenu = {
 
 const radio = {
   wrapper: 'relative flex items-start',
-  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
   label: 'font-medium text-gray-700 dark:text-gray-200',
   required: 'text-red-500 dark:text-red-400',
   help: 'text-gray-500 dark:text-gray-400'
 }
 
 const checkbox = {
-  ...radio,
-  base: radio.base + ' rounded'
+  wrapper: 'relative flex items-start',
+  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  rounded: 'rounded',
+  label: 'font-medium text-gray-700 dark:text-gray-200',
+  required: 'text-red-500 dark:text-red-400',
+  help: 'text-gray-500 dark:text-gray-400'
 }
 
 const toggle = {
@@ -571,7 +584,7 @@ const commandPalette = {
   container: 'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
   input: {
     wrapper: 'relative flex items-center',
-    base: 'w-full placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0',
+    base: 'w-full placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0 focus:outline-none',
     padding: 'px-4',
     height: 'h-12',
     size: 'sm:text-sm',
@@ -631,6 +644,29 @@ const commandPalette = {
     },
     closeButton: null,
     selectedIcon: 'i-heroicons-check-20-solid'
+  }
+}
+
+const pagination = {
+  wrapper: 'flex items-center -space-x-px',
+  base: '',
+  rounded: 'first:rounded-l-md last:rounded-r-md',
+  default: {
+    size: 'sm',
+    activeButton: {
+      color: 'primary'
+    },
+    inactiveButton: {
+      color: 'white'
+    },
+    prevButton: {
+      color: 'white',
+      icon: 'i-heroicons-chevron-left-20-solid'
+    },
+    nextButton: {
+      color: 'white',
+      icon: 'i-heroicons-chevron-right-20-solid'
+    }
   }
 }
 
@@ -841,6 +877,7 @@ export default {
     skeleton,
     verticalNavigation,
     commandPalette,
+    pagination,
     modal,
     slideover,
     popover,

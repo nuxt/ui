@@ -2,6 +2,7 @@
   <Switch
     v-model="active"
     :name="name"
+    :disabled="disabled"
     :class="[active ? ui.active : ui.inactive, ui.base]"
   >
     <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
@@ -40,6 +41,10 @@ export default defineComponent({
       default: null
     },
     modelValue: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     },

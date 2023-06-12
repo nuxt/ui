@@ -51,12 +51,16 @@
         </CommandPaletteGroup>
       </ComboboxOptions>
 
-      <div v-else-if="emptyState" :class="ui.emptyState.wrapper">
-        <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
-        <p :class="query ? ui.emptyState.queryLabel : ui.emptyState.label">
-          {{ query ? emptyState.queryLabel : emptyState.label }}
-        </p>
-      </div>
+      <template v-else-if="emptyState">
+        <slot name="empty-state">
+          <div :class="ui.emptyState.wrapper">
+            <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
+            <p :class="query ? ui.emptyState.queryLabel : ui.emptyState.label">
+              {{ query ? emptyState.queryLabel : emptyState.label }}
+            </p>
+          </div>
+        </slot>
+      </template>
     </div>
   </Combobox>
 </template>

@@ -9,6 +9,7 @@
         :value="value"
         :disabled="disabled"
         type="radio"
+        class="form-radio"
         :class="[ui.base, ui.custom]"
         @focus="$emit('focus', $event)"
         @blur="$emit('blur', $event)"
