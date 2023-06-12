@@ -15,7 +15,7 @@
           v-if="option.children"
           :key="`${option[valueAttribute]}-optgroup-${index}`"
           :value="option[valueAttribute]"
-          :label="option[textAttribute]"
+          :label="option[optionAttribute]"
         >
           <option
             v-for="(childOption, index2) in option.children"
@@ -23,7 +23,7 @@
             :value="childOption[valueAttribute]"
             :selected="childOption[valueAttribute] === normalizedValue"
             :disabled="childOption.disabled"
-            v-text="childOption[textAttribute]"
+            v-text="childOption[optionAttribute]"
           />
         </optgroup>
         <option
@@ -32,7 +32,7 @@
           :value="option[valueAttribute]"
           :selected="option[valueAttribute] === normalizedValue"
           :disabled="option.disabled"
-          v-text="option[textAttribute]"
+          v-text="option[optionAttribute]"
         />
       </template>
     </select>
@@ -150,9 +150,9 @@ export default defineComponent({
         ].includes(value)
       }
     },
-    textAttribute: {
+    optionAttribute: {
       type: String,
-      default: 'text'
+      default: 'label'
     },
     valueAttribute: {
       type: String,
@@ -175,25 +175,25 @@ export default defineComponent({
     }
 
     const guessOptionValue = (option: any) => {
-      return get(option, props.valueAttribute, get(option, props.textAttribute))
+      return get(option, props.valueAttribute, get(option, props.optionAttribute))
     }
 
     const guessOptionText = (option: any) => {
-      return get(option, props.textAttribute, get(option, props.valueAttribute))
+      return get(option, props.optionAttribute, get(option, props.valueAttribute))
     }
 
     const normalizeOption = (option: any) => {
       if (['string', 'number', 'boolean'].includes(typeof option)) {
         return {
           [props.valueAttribute]: option,
-          [props.textAttribute]: option
+          [props.optionAttribute]: option
         }
       }
 
       return {
         ...option,
         [props.valueAttribute]: guessOptionValue(option),
-        [props.textAttribute]: guessOptionText(option)
+        [props.optionAttribute]: guessOptionText(option)
       }
     }
 
@@ -209,7 +209,7 @@ export default defineComponent({
       return [
         {
           [props.valueAttribute]: '',
-          [props.textAttribute]: props.placeholder,
+          [props.optionAttribute]: props.placeholder,
           disabled: true
         },
         ...normalizedOptions.value
