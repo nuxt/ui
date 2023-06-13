@@ -3,7 +3,7 @@
     <img v-if="url && !error" :class="avatarClass" :src="url" :alt="alt" :onerror="() => onError()">
     <span v-else-if="text || placeholder" :class="ui.placeholder">{{ text || placeholder }}</span>
 
-    <span v-if="chipColor" :class="chipClass" />
+    <span v-if="chipColor" :class="chipClass">{{ chipText }}</span>
     <slot />
   </span>
 </template>
@@ -55,6 +55,10 @@ export default defineComponent({
         return Object.keys(appConfig.ui.avatar.chip.position).includes(value)
       }
     },
+    chipText: {
+      type: String,
+      default: null
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.avatar>>,
       default: () => appConfig.ui.avatar
@@ -85,7 +89,7 @@ export default defineComponent({
     const chipClass = computed(() => {
       return classNames(
         ui.value.chip.base,
-        ui.value.chip.size[props.size],
+        (!props.chipText ? ui.value.chip.size[props.size] : ui.value.chip.size.fit),
         ui.value.chip.position[props.chipPosition],
         ui.value.chip.background.replaceAll('{color}', props.chipColor)
       )
