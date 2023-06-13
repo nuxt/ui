@@ -9,9 +9,9 @@
       :required="required"
       :disabled="disabled"
       :placeholder="placeholder"
-      :autocomplete="autocomplete"
       class="form-textarea"
       :class="textareaClass"
+      v-bind="$attrs"
       @input="onInput"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
@@ -32,6 +32,7 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: [String, Number],
@@ -64,10 +65,6 @@ export default defineComponent({
     autofocus: {
       type: Boolean,
       default: false
-    },
-    autocomplete: {
-      type: String,
-      default: null
     },
     resize: {
       type: Boolean,
@@ -170,8 +167,7 @@ export default defineComponent({
         ui.value.size[props.size],
         props.padded ? ui.value.padding[props.size] : 'p-0',
         variant?.replaceAll('{color}', props.color),
-        !props.resize && 'resize-none',
-        ui.value.custom
+        !props.resize && 'resize-none'
       )
     })
 
