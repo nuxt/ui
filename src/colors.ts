@@ -141,7 +141,7 @@ export const generateSafelist = (colors: string[]) => {
 export const customSafelistExtractor = (prefix, content: string, colors: string[]) => {
   const classes = []
   const regex = /<(\w+)\s+[^>:]*color=["']([^"']+)["'][^>]*>/gs
-  const matches = [...content.matchAll(regex)]
+  const matches = content.matchAll(regex)
 
   for (const match of matches) {
     const [, component, color] = match

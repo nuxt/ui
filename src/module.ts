@@ -148,6 +148,11 @@ export default defineNuxtModule<ModuleOptions>({
             resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'),
             resolve(runtimeDir, '*.{mjs,js,ts}')
           ],
+          transform: {
+            vue: (content) => {
+              return content.replaceAll(/(?:\r\n|\r|\n)/g, ' ')
+            }
+          },
           extract: {
             vue: (content) => {
               return [
