@@ -27,9 +27,9 @@ const kebabCase = (str: string) => {
 
 const safelistByComponent = {
   avatar: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex}|gray)-500`)
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex}|gray)-400`),
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
   }],
   badge: (colorsAsRegex) => [{
@@ -99,14 +99,14 @@ const safelistByComponent = {
     variants: ['focus']
   }],
   notification: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex}|gray)-500`)
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex}|gray)-400`),
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex}|gray)-500`)
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex}|gray)-400`),
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['dark']
   }]
 }
@@ -115,27 +115,17 @@ const colorsAsRegex = (colors: string[]): string => colors.join('|')
 
 export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
 
-const mergeSafelist = (safelist) => {
-  return safelist.reduce((result, current) => {
-    const found = result.find(obj => obj.pattern.toString() === current.pattern.toString())
-    if (found) {
-      if (Array.isArray(found.variants) && Array.isArray(current.variants)) {
-        const mergedVariants = [...new Set([...found.variants, ...current.variants])]
-        found.variants = mergedVariants
-      } else if (Array.isArray(current.variants)) {
-        found.variants = current.variants
-      }
-    } else {
-      result.push(current)
-    }
-    return result
-  }, [])
-}
-
 export const generateSafelist = (colors: string[]) => {
   const safelist = ['avatar', 'badge', 'button', 'input', 'notification'].flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
 
-  return mergeSafelist(safelist)
+  return [
+    ...safelist,
+    // Gray safelist for Avatar & Notification
+    'bg-gray-500',
+    'dark:bg-gray-400',
+    'text-gray-500',
+    'dark:text-gray-400'
+  ]
 }
 
 export const customSafelistExtractor = (prefix, content: string, colors: string[]) => {
