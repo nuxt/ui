@@ -152,7 +152,7 @@ export default defineNuxtModule<ModuleOptions>({
             vue: (content) => {
               return [
                 ...defaultExtractor(content),
-                ...customSafelistExtractor(options.prefix, content)
+                ...customSafelistExtractor(options.prefix, content, nuxt.options.appConfig.ui.colors)
               ]
             }
           }

@@ -117,7 +117,7 @@ export const excludeColors = (colors: object) => Object.keys(omit(colors, colors
 
 export const generateSafelist = (colors: string[]) => ['avatar', 'badge', 'button', 'input', 'notification'].flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
 
-export const customSafelistExtractor = (prefix, content: string) => {
+export const customSafelistExtractor = (prefix, content: string, colors: string[]) => {
   const classes = []
   const regex = /<(\w+)\s+[^>:]*color=["']([^"']+)["'][^>]*>/gs
   const matches = [...content.matchAll(regex)]
@@ -125,7 +125,7 @@ export const customSafelistExtractor = (prefix, content: string) => {
   for (const match of matches) {
     const [, component, color] = match
 
-    if (colorsToExclude.includes(color)) {
+    if (!colors.includes(color)) {
       continue
     }
 
