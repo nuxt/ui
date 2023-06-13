@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/nuxtlabs/ui/compare/v2.3.0...v2.4.0) (2023-06-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **forms:** bind `$attrs` to elements (#279)
+* **Select:** rename `text-attribute` to `option-attribute` and defaults to `label`
+
+### Features
+
+* **CommandPalette:** handle `empty-state` ([#271](https://github.com/nuxtlabs/ui/issues/271)) ([652af93](https://github.com/nuxtlabs/ui/commit/652af93f5c7cd4b34044a5597f3c14441ed6d998))
+* **module:** smart safelisting ([#268](https://github.com/nuxtlabs/ui/issues/268)) ([20fa4d2](https://github.com/nuxtlabs/ui/commit/20fa4d2317fc1e14fe87fa273957b92e63668945))
+* **Pagination:** new component ([#257](https://github.com/nuxtlabs/ui/issues/257)) ([f0b24ba](https://github.com/nuxtlabs/ui/commit/f0b24ba25d52184b8683e364016ed8fb800fc96b))
+* **table:** add loading state ([#259](https://github.com/nuxtlabs/ui/issues/259)) ([4741532](https://github.com/nuxtlabs/ui/commit/47415322ea56b5388e55c404c901531e807a9f00))
+* **table:** add slot for empty state ([#260](https://github.com/nuxtlabs/ui/issues/260)) ([f7a34c8](https://github.com/nuxtlabs/ui/commit/f7a34c8feeda6a4e1e1daff87b37b375aaa0c90d))
+
+
+### Bug Fixes
+
+* **ButtonGroup:** invalid `size` validator ([a617672](https://github.com/nuxtlabs/ui/commit/a6176720c75b26768ba91efcab50689a932931ad))
+* **ButtonGroup:** use `-space-x-px` on wrapper ([d91c0bb](https://github.com/nuxtlabs/ui/commit/d91c0bb8944224d4e8eb62f99a33a6be94e5cd92))
+* **Button:** same size when no label + uniformize form elements ([a6903df](https://github.com/nuxtlabs/ui/commit/a6903df58fb91da44e6f83cc2bd9c963827fe5dd))
+* **CommandPalette:** input focus after be5f352 ([cbc8ef1](https://github.com/nuxtlabs/ui/commit/cbc8ef13cc3253690c22c32d90ea9746970c345a))
+* **deps:** move `@tailwindcss/container-queries` to dependencies ([9559d0b](https://github.com/nuxtlabs/ui/commit/9559d0b3bc09956d7fe17ee0deeef03599d02d45))
+* **forms:** `padded` prop with `p-0` class ([207444f](https://github.com/nuxtlabs/ui/commit/207444fdea773b8ee64dd4f80b4f70b76462a9d6))
+* **forms:** bind `$attrs` to elements ([#279](https://github.com/nuxtlabs/ui/issues/279)) ([e12e974](https://github.com/nuxtlabs/ui/commit/e12e9740c97b75d3b7b70c38978e249b5e26eead))
+* **module:** deduplicate default safelist as components may share same rules ([2cfa1f8](https://github.com/nuxtlabs/ui/commit/2cfa1f8d0355d4c9cec5d4294d63e043d223cd64))
+* **module:** hardcode `gray` safelist instead of deduplicate complex logic ([a733c13](https://github.com/nuxtlabs/ui/commit/a733c13866cdb74398f3e6f022cc63223e269e19))
+* **module:** only safelist known colors ([cdce519](https://github.com/nuxtlabs/ui/commit/cdce519742b86ff29460aa50264d7bb34ad24bd0))
+* **module:** prevent safelisting dynamic `:color` variables ([ccd9ca5](https://github.com/nuxtlabs/ui/commit/ccd9ca5106d0b81aed6591097f121eb81dcc9b47))
+* **module:** transform `vue` files to detect multi-line components ([88c1930](https://github.com/nuxtlabs/ui/commit/88c1930845d26c66c2fbd32f99f52dbd23244341))
+* **module:** use `@tailwindcss/forms` class strategy ([#278](https://github.com/nuxtlabs/ui/issues/278)) ([be5f352](https://github.com/nuxtlabs/ui/commit/be5f352296cf4e0c9099cf468ed905283b31007d))
+* **Notification:** class priority for icon color ([07f7855](https://github.com/nuxtlabs/ui/commit/07f7855a263e516250f62d0730afc69753d0322c))
+* **Radio/Checkbox:** split preset as `indeterminate` is checkbox only ([429791d](https://github.com/nuxtlabs/ui/commit/429791dab0fbb84bae1e1e13e7e688708f0b5c98))
+* **SelectMenu:** input focus after `be5f352` ([717a514](https://github.com/nuxtlabs/ui/commit/717a5144511c4db013a57869ac06421accf51e38))
+* **Table:** colspan of `empty` and `loading` is wrong when selection enabled ([#284](https://github.com/nuxtlabs/ui/issues/284)) ([786d776](https://github.com/nuxtlabs/ui/commit/786d7765f5517a7e8cdd718ce93fd9fecc427ba7))
+* **Toggle:** missing `disabled` prop ([fe833eb](https://github.com/nuxtlabs/ui/commit/fe833eb2b2b4d1d32eb9e082b437a0259b6f75c6))
+
+
+* **Select:** rename `text-attribute` to `option-attribute` and defaults to `label` ([b4a96a8](https://github.com/nuxtlabs/ui/commit/b4a96a8b01b52751c9a9c6609ed8cf7ccf516a04))
+
 ## [2.3.0](https://github.com/nuxtlabs/ui/compare/v2.2.1...v2.3.0) (2023-06-05)
 
 
