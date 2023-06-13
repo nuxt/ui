@@ -1,6 +1,6 @@
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin, resolvePath } from '@nuxt/kit'
 import defaultColors from 'tailwindcss/colors.js'
-import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/src/lib/defaultExtractor.js'
+import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/defaultExtractor.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
