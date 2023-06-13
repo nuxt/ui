@@ -1,4 +1,5 @@
 import ui from '../src/module'
+import { excludeColors } from '../src/colors'
 import colors from 'tailwindcss/colors'
 
 export default defineNuxtConfig({
@@ -27,7 +28,7 @@ export default defineNuxtConfig({
   ui: {
     global: true,
     icons: ['heroicons', 'simple-icons'],
-    safelistColors: Object.keys(colors)
+    safelistColors: excludeColors(colors)
   },
   typescript: {
     strict: false,
