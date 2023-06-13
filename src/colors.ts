@@ -115,7 +115,28 @@ const colorsAsRegex = (colors: string[]): string => colors.join('|')
 
 export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
 
-export const generateSafelist = (colors: string[]) => ['avatar', 'badge', 'button', 'input', 'notification'].flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
+const mergeSafelist = (safelist) => {
+  return safelist.reduce((result, current) => {
+    const found = result.find(obj => obj.pattern.toString() === current.pattern.toString())
+    if (found) {
+      if (Array.isArray(found.variants) && Array.isArray(current.variants)) {
+        const mergedVariants = [...new Set([...found.variants, ...current.variants])]
+        found.variants = mergedVariants
+      } else if (Array.isArray(current.variants)) {
+        found.variants = current.variants
+      }
+    } else {
+      result.push(current)
+    }
+    return result
+  }, [])
+}
+
+export const generateSafelist = (colors: string[]) => {
+  const safelist = ['avatar', 'badge', 'button', 'input', 'notification'].flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
+
+  return mergeSafelist(safelist)
+}
 
 export const customSafelistExtractor = (prefix, content: string, colors: string[]) => {
   const classes = []
