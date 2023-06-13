@@ -1,22 +1,20 @@
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin, resolvePath } from '@nuxt/kit'
-import colors from 'tailwindcss/colors.js'
+import defaultColors from 'tailwindcss/colors.js'
+import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/defaultExtractor.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
-import { colorsAsRegex, excludeColors } from './runtime/utils/colors'
-
+import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
 import appConfig from './runtime/app.config'
+
 type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
 
-// @ts-ignore
-delete colors.lightBlue
-// @ts-ignore
-delete colors.warmGray
-// @ts-ignore
-delete colors.trueGray
-// @ts-ignore
-delete colors.coolGray
-// @ts-ignore
-delete colors.blueGray
+const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
+
+delete defaultColors.lightBlue
+delete defaultColors.warmGray
+delete defaultColors.trueGray
+delete defaultColors.coolGray
+delete defaultColors.blueGray
 
 declare module 'nuxt/schema' {
   interface AppConfigInput {
@@ -40,6 +38,8 @@ export interface ModuleOptions {
   global?: boolean
 
   icons: string[] | string
+
+  safelistColors?: string[]
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -52,8 +52,9 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults: {
-    prefix: 'u',
-    icons: ['heroicons']
+    prefix: 'U',
+    icons: ['heroicons'],
+    safelistColors: ['primary']
   },
   async setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
@@ -70,14 +71,14 @@ export default defineNuxtModule<ModuleOptions>({
       app.configs.push(appConfigFile)
     })
 
-    // @ts-ignore
-    nuxt.hook('tailwindcss:config', function (tailwindConfig: TailwindConfig) {
-      const globalColors = {
-        ...(tailwindConfig.theme.colors || colors),
+    nuxt.hook('tailwindcss:config', function (tailwindConfig) {
+      const globalColors: any = {
+        ...(tailwindConfig.theme.colors || defaultColors),
         ...tailwindConfig.theme.extend?.colors
       }
 
       tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {}
+      // @ts-ignore
       globalColors.primary = tailwindConfig.theme.extend.colors.primary = {
         50: 'rgb(var(--color-primary-50) / <alpha-value>)',
         100: 'rgb(var(--color-primary-100) / <alpha-value>)',
@@ -93,9 +94,11 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       if (globalColors.gray) {
-        globalColors.cool = tailwindConfig.theme.extend.colors.cool = colors.gray
+        // @ts-ignore
+        globalColors.cool = tailwindConfig.theme.extend.colors.cool = defaultColors.gray
       }
 
+      // @ts-ignore
       globalColors.gray = tailwindConfig.theme.extend.colors.gray = {
         50: 'rgb(var(--color-gray-50) / <alpha-value>)',
         100: 'rgb(var(--color-gray-100) / <alpha-value>)',
@@ -110,64 +113,23 @@ export default defineNuxtModule<ModuleOptions>({
         950: 'rgb(var(--color-gray-950) / <alpha-value>)'
       }
 
-      const variantColors = excludeColors(globalColors)
-      const safeColorsAsRegex = colorsAsRegex(variantColors)
+      const colors = excludeColors(globalColors)
 
       nuxt.options.appConfig.ui = {
         ...nuxt.options.appConfig.ui,
         primary: 'green',
         gray: 'cool',
-        colors: variantColors
+        colors
       }
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
-      tailwindConfig.safelist.push(...[
-        'bg-gray-500',
-        'dark:bg-gray-400',
-        {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|400|500)`)
-        }, {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-500`),
-          variants: ['disabled']
-        }, {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(400|950)`),
-          variants: ['dark']
-        }, {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(500|900|950)`),
-          variants: ['dark:hover']
-        }, {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-400`),
-          variants: ['dark:disabled']
-        }, {
-          pattern: new RegExp(`bg-(${safeColorsAsRegex})-(50|100|600)`),
-          variants: ['hover']
-        }, {
-          pattern: new RegExp(`outline-(${safeColorsAsRegex})-500`),
-          variants: ['focus-visible']
-        }, {
-          pattern: new RegExp(`outline-(${safeColorsAsRegex})-400`),
-          variants: ['dark:focus-visible']
-        }, {
-          pattern: new RegExp(`ring-(${safeColorsAsRegex})-500`),
-          variants: ['focus', 'focus-visible']
-        }, {
-          pattern: new RegExp(`ring-(${safeColorsAsRegex})-400`),
-          variants: ['dark', 'dark:focus', 'dark:focus-visible']
-        }, {
-          pattern: new RegExp(`text-(${safeColorsAsRegex})-400`),
-          variants: ['dark']
-        }, {
-          pattern: new RegExp(`text-(${safeColorsAsRegex})-500`),
-          variants: ['dark:hover']
-        }, {
-          pattern: new RegExp(`text-(${safeColorsAsRegex})-600`),
-          variants: ['hover']
-        }
-      ])
+      tailwindConfig.safelist.push(...generateSafelist(options.safelistColors))
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
     })
+
+    // Modules
 
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
@@ -181,16 +143,30 @@ export default defineNuxtModule<ModuleOptions>({
           require('@tailwindcss/typography'),
           require('@tailwindcss/container-queries')
         ],
-        content: [
-          resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'),
-          resolve(runtimeDir, '*.{mjs,js,ts}')
-        ]
+        content: {
+          files: [
+            resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'),
+            resolve(runtimeDir, '*.{mjs,js,ts}')
+          ],
+          extract: {
+            vue: (content) => {
+              return [
+                ...defaultExtractor(content),
+                ...customSafelistExtractor(options.prefix, content)
+              ]
+            }
+          }
+        }
       }
     })
+
+    // Plugins
 
     addPlugin({
       src: resolve(runtimeDir, 'plugins', 'colors')
     })
+
+    // Components
 
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'elements'),
@@ -228,6 +204,8 @@ export default defineNuxtModule<ModuleOptions>({
       global: options.global,
       watch: false
     })
+
+    // Composables
 
     addImportsDir(resolve(runtimeDir, 'composables'))
   }

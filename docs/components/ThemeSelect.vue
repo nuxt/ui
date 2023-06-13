@@ -70,7 +70,7 @@ watch(grayCookie, (gray) => {
 const primaryOptions = computed(() => useWithout(appConfig.ui.colors, 'primary').map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
 const primary = computed({
   get () {
-    return primaryOptions.value.find(option => option.value === primaryCookie.value)
+    return primaryOptions.value.find(option => option.value === primaryCookie.value) || primaryOptions.value.find(option => option.value === 'green')
   },
   set (option) {
     primaryCookie.value = option.value
@@ -80,7 +80,7 @@ const primary = computed({
 const grayOptions = computed(() => ['slate', 'cool', 'zinc', 'neutral', 'stone'].map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
 const gray = computed({
   get () {
-    return grayOptions.value.find(option => option.value === grayCookie.value)
+    return grayOptions.value.find(option => option.value === grayCookie.value) || grayOptions.value.find(option => option.value === 'cool')
   },
   set (option) {
     grayCookie.value = option.value
