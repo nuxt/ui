@@ -8,6 +8,8 @@ import appConfig from './runtime/app.config'
 
 type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
 
+const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
+
 delete defaultColors.lightBlue
 delete defaultColors.warmGray
 delete defaultColors.trueGray
@@ -149,7 +151,7 @@ export default defineNuxtModule<ModuleOptions>({
           extract: {
             vue: (content) => {
               return [
-                ...createDefaultExtractor({ tailwindConfig: { separator: ':' } })(content),
+                ...defaultExtractor(content),
                 ...customSafelistExtractor(options.prefix, content)
               ]
             }
