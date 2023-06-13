@@ -92,7 +92,8 @@ const avatar = {
       lg: 'h-3 w-3',
       xl: 'h-3.5 w-3.5',
       '2xl': 'h-3.5 w-3.5',
-      '3xl': 'h-4 w-4'
+      '3xl': 'h-4 w-4',
+      fit: 'h-5 w-5 text-center align-middle text-sm font-bold px-1.5 min-w-fit'
     }
   },
   default: {
