@@ -133,7 +133,7 @@ export const customSafelistExtractor = (prefix, content: string) => {
       const name = component.replace(prefix, '').toLowerCase()
 
       const matchClasses = safelistByComponent[name](color).flatMap(group => {
-        return ['', ...group.variants].flatMap(variant => {
+        return ['', ...(group.variants || [])].flatMap(variant => {
           const matches = group.pattern.source.match(/\(([^)]+)\)/g)
 
           return matches.map(match => {
