@@ -9,11 +9,9 @@
       :required="required"
       :placeholder="placeholder"
       :disabled="disabled || loading"
-      :readonly="readonly"
-      :autocomplete="autocomplete"
-      :spellcheck="spellcheck"
       class="form-input"
       :class="inputClass"
+      v-bind="$attrs"
       @input="onInput"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
@@ -51,6 +49,7 @@ export default defineComponent({
   components: {
     UIcon
   },
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: [String, Number],
@@ -76,21 +75,9 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    readonly: {
-      type: Boolean,
-      default: false
-    },
     autofocus: {
       type: Boolean,
       default: false
-    },
-    autocomplete: {
-      type: String,
-      default: null
-    },
-    spellcheck: {
-      type: Boolean,
-      default: null
     },
     icon: {
       type: String,
@@ -189,8 +176,7 @@ export default defineComponent({
         props.padded ? ui.value.padding[props.size] : 'p-0',
         variant?.replaceAll('{color}', props.color),
         (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
-        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size],
-        ui.value.custom
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size]
       )
     })
 

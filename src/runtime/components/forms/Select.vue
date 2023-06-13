@@ -8,6 +8,7 @@
       :disabled="disabled || loading"
       class="form-select"
       :class="selectClass"
+      v-bind="$attrs"
       @input="onInput"
     >
       <template v-for="(option, index) in normalizedOptionsWithPlaceholder">
@@ -69,6 +70,7 @@ export default defineComponent({
   components: {
     UIcon
   },
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: [String, Number, Object],
@@ -236,8 +238,7 @@ export default defineComponent({
         props.padded ? ui.value.padding[props.size] : 'p-0',
         variant?.replaceAll('{color}', props.color),
         (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
-        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size],
-        ui.value.custom
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size]
       )
     })
 
