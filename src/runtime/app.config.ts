@@ -510,6 +510,15 @@ const toggle = {
   }
 }
 
+const slider = {
+  base: 'h-6 w-full cursor-pointer bg-transparent rounded-full overflow-hidden',
+  thumb : '[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:top-[50%] [&::-webkit-slider-thumb]:shadow-range [&::-webkit-slider-thumb]:inset-box-shadow [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:border-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-{color}-500 [&::-webkit-slider-thumb]:-translate-y-1/2',
+  default: {
+    size: 'sm',
+    color: 'primary',
+  }
+}
+
 // Layout
 
 const card = {
@@ -864,6 +873,7 @@ export default {
     dropdown,
     kbd,
     input,
+    slider,
     formGroup,
     textarea,
     select,

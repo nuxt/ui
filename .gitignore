@@ -7,3 +7,4 @@ dist
 .DS_Store
 .history
 .vercel
+.idea
