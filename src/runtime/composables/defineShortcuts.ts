@@ -14,9 +14,14 @@ export interface ShortcutsConfig {
   [key: string]: ShortcutConfig | Function
 }
 
+export interface ShortcutsOptions {
+  chainDelay?: number
+}
+
 interface Shortcut {
   handler: Function
   condition: ComputedRef<Boolean>
+  chained: boolean
   // KeyboardEvent attributes
   key: string
   ctrlKey: boolean
@@ -27,10 +32,16 @@ interface Shortcut {
   // keyCode?: number
 }
 
-export const defineShortcuts = (config: ShortcutsConfig) => {
+export const defineShortcuts = (config: ShortcutsConfig, options: ShortcutsOptions = {}) => {
   const { macOS, usingInput } = useShortcuts()
 
   let shortcuts: Shortcut[] = []
+
+  const chainedInputs = ref([])
+  const clearChainedInput = () => {
+    chainedInputs.value.splice(0, chainedInputs.value.length)
+  }
+  const debouncedClearChainedInput = useDebounceFn(clearChainedInput, options.chainDelay ?? 800)
 
   const onKeyDown = (e: KeyboardEvent) => {
     // Input autocomplete triggers a keydown event
@@ -38,7 +49,26 @@ export const defineShortcuts = (config: ShortcutsConfig) => {
 
     const alphabeticalKey = /^[a-z]{1}$/i.test(e.key)
 
-    for (const shortcut of shortcuts) {
+    let chainedKey
+    chainedInputs.value.push(e.key)
+    // try matching a chained shortcut
+    if (chainedInputs.value.length >= 2) {
+      chainedKey = chainedInputs.value.slice(-2).join('-')
+
+      for (const shortcut of shortcuts.filter(s => s.chained)) {
+        if (shortcut.key !== chainedKey) { continue }
+
+        if (shortcut.condition.value) {
+          e.preventDefault()
+          shortcut.handler()
+        }
+        clearChainedInput()
+        return
+      }
+    }
+
+    // try matching a standard shortcut
+    for (const shortcut of shortcuts.filter(s => !s.chained)) {
       if (e.key.toLowerCase() !== shortcut.key) { continue }
       if (e.metaKey !== shortcut.metaKey) { continue }
       if (e.ctrlKey !== shortcut.ctrlKey) { continue }
@@ -52,8 +82,11 @@ export const defineShortcuts = (config: ShortcutsConfig) => {
         e.preventDefault()
         shortcut.handler()
       }
+      clearChainedInput()
       return
     }
+
+    debouncedClearChainedInput()
   }
 
   // Map config to full detailled shortcuts
@@ -63,14 +96,33 @@ export const defineShortcuts = (config: ShortcutsConfig) => {
     }
 
     // Parse key and modifiers
-    const keySplit = key.toLowerCase().split('_').map(k => k)
-    let shortcut: Partial<Shortcut> = {
-      key: keySplit.filter(k => !['meta', 'ctrl', 'shift', 'alt'].includes(k)).join('_'),
-      metaKey: keySplit.includes('meta'),
-      ctrlKey: keySplit.includes('ctrl'),
-      shiftKey: keySplit.includes('shift'),
-      altKey: keySplit.includes('alt')
+    let shortcut: Partial<Shortcut>
+
+    if (key.includes('-') && key.includes('_')) {
+      console.trace('[Shortcut] Invalid key')
+      return null
     }
+
+    const chained = key.includes('-')
+    if (chained) {
+      shortcut = {
+        key: key.toLowerCase(),
+        metaKey: false,
+        ctrlKey: false,
+        shiftKey: false,
+        altKey: false
+      }
+    } else {
+      const keySplit = key.toLowerCase().split('_').map(k => k)
+      shortcut = {
+        key: keySplit.filter(k => !['meta', 'ctrl', 'shift', 'alt'].includes(k)).join('_'),
+        metaKey: keySplit.includes('meta'),
+        ctrlKey: keySplit.includes('ctrl'),
+        shiftKey: keySplit.includes('shift'),
+        altKey: keySplit.includes('alt')
+      }
+    }
+    shortcut.chained = chained
 
     // Convert Meta to Ctrl for non-MacOS
     if (!macOS.value && shortcut.metaKey && !shortcut.ctrlKey) {
