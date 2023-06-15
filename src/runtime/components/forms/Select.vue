@@ -173,7 +173,7 @@ export default defineComponent({
     const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
 
     const onInput = (event: InputEvent) => {
-      emit('update:modelValue', (event.target as any).value)
+      emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
     const guessOptionValue = (option: any) => {
