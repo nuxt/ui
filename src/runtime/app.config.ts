@@ -25,14 +25,12 @@ const table = {
     size: 'text-sm'
   },
   loadingState: {
-    wrapper:
-      'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
     icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4 animate-spin'
   },
   emptyState: {
-    wrapper:
-      'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
     icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
   },
@@ -64,8 +62,7 @@ const avatar = {
   wrapper: 'relative inline-flex items-center justify-center',
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
-  placeholder:
-    'font-medium leading-none text-gray-900 dark:text-white truncate',
+  placeholder: 'font-medium leading-none text-gray-900 dark:text-white truncate',
   size: {
     '3xs': 'h-4 w-4 text-[8px]',
     '2xs': 'h-5 w-5 text-[10px]',
@@ -123,8 +120,7 @@ const badge = {
   },
   color: {},
   variant: {
-    solid:
-      'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-10 dark:ring-opacity-20'
+    solid: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-10 dark:ring-opacity-20'
   },
   default: {
     size: 'sm',
@@ -171,32 +167,24 @@ const button = {
   },
   color: {
     white: {
-      solid:
-        'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
-      ghost:
-        'text-gray-900 dark:text-white hover:bg-white dark:hover:bg-gray-900 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
+      solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
+      ghost: 'text-gray-900 dark:text-white hover:bg-white dark:hover:bg-gray-900 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
     },
     gray: {
-      solid:
-        'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 hover:bg-gray-100 disabled:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700/50 dark:disabled:bg-gray-800 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
-      ghost:
-        'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
+      solid: 'shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 hover:bg-gray-100 disabled:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700/50 dark:disabled:bg-gray-800 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
+      ghost: 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
       link: 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline-offset-4 hover:underline focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
     },
     black: {
-      solid:
-        'shadow-sm text-white dark:text-gray-900 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 dark:disabled:bg-white focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
+      solid: 'shadow-sm text-white dark:text-gray-900 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 dark:disabled:bg-white focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
       link: 'text-gray-900 dark:text-white underline-offset-4 hover:underline focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
     }
   },
   variant: {
-    solid:
-      'shadow-sm text-white dark:text-gray-900 bg-{color}-500 hover:bg-{color}-600 disabled:bg-{color}-500 dark:bg-{color}-400 dark:hover:bg-{color}-500 dark:disabled:bg-{color}-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
-    outline:
-      'ring-1 ring-inset ring-current text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
+    solid: 'shadow-sm text-white dark:text-gray-900 bg-{color}-500 hover:bg-{color}-600 disabled:bg-{color}-500 dark:bg-{color}-400 dark:hover:bg-{color}-500 dark:disabled:bg-{color}-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
+    outline: 'ring-1 ring-inset ring-current text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
     soft: 'text-{color}-500 dark:text-{color}-400 bg-{color}-50 hover:bg-{color}-100 dark:bg-{color}-950 dark:hover:bg-{color}-900 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
-    ghost:
-      'text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
+    ghost: 'text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
     link: 'text-{color}-500 hover:text-{color}-600 dark:text-{color}-400 dark:hover:text-{color}-500 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400'
   },
   icon: {
@@ -339,17 +327,14 @@ const input = {
   },
   color: {
     white: {
-      outline:
-        'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
+      outline: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
     },
     gray: {
-      outline:
-        'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
+      outline: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
     }
   },
   variant: {
-    outline:
-      'shadow-sm bg-transparent text-gray-900 dark:text-white ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 focus:ring-2 focus:ring-{color}-500 dark:focus:ring-{color}-400',
+    outline: 'shadow-sm bg-transparent text-gray-900 dark:text-white ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 focus:ring-2 focus:ring-{color}-500 dark:focus:ring-{color}-400',
     none: 'bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
@@ -415,7 +400,7 @@ const textarea = {
   default: {
     size: 'sm',
     color: 'white',
-    variant: 'outline'
+    variant: 'outline',
   }
 }
 
@@ -442,8 +427,7 @@ const selectMenu = {
   rounded: 'rounded-md',
   padding: 'p-1',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
-  input:
-    'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none',
+  input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none',
   option: {
     base: 'cursor-default select-none relative flex items-center justify-between gap-1',
     rounded: 'rounded-md',
@@ -608,16 +592,13 @@ const verticalNavigation = {
   rounded: 'rounded-md',
   font: 'font-medium',
   size: 'text-sm',
-  active:
-    'text-gray-900 dark:text-white before:bg-gray-100 dark:before:bg-gray-800',
-  inactive:
-    'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50',
+  active: 'text-gray-900 dark:text-white before:bg-gray-100 dark:before:bg-gray-800',
+  inactive: 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50',
   label: 'truncate relative',
   icon: {
     base: 'flex-shrink-0 w-4 h-4',
     active: 'text-gray-700 dark:text-gray-200',
-    inactive:
-      'text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200'
+    inactive: 'text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200'
   },
   avatar: {
     base: 'flex-shrink-0',
@@ -626,16 +607,13 @@ const verticalNavigation = {
   badge: {
     base: 'relative ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
     active: 'bg-white dark:bg-gray-900',
-    inactive:
-      'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-900'
+    inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-900'
   }
 }
 
 const commandPalette = {
-  wrapper:
-    'flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800',
-  container:
-    'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
+  wrapper: 'flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800',
+  container: 'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
   input: {
     wrapper: 'relative flex items-center',
     base: 'w-full placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0 focus:outline-none',
@@ -650,8 +628,7 @@ const commandPalette = {
     closeButton: 'absolute right-4'
   },
   emptyState: {
-    wrapper:
-      'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
     queryLabel: 'text-sm text-center text-gray-900 dark:text-white',
     icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
@@ -694,8 +671,8 @@ const commandPalette = {
     loadingIcon: 'i-heroicons-arrow-path-20-solid',
     emptyState: {
       icon: 'i-heroicons-magnifying-glass-20-solid',
-      label: "We couldn't find any items.",
-      queryLabel: "We couldn't find any items with that term. Please try again."
+      label: 'We couldn\'t find any items.',
+      queryLabel: 'We couldn\'t find any items with that term. Please try again.'
     },
     closeButton: null,
     selectedIcon: 'i-heroicons-check-20-solid'
@@ -730,8 +707,7 @@ const pagination = {
 const modal = {
   wrapper: 'relative z-50',
   inner: 'fixed inset-0 overflow-y-auto',
-  container:
-    'flex min-h-full items-end sm:items-center justify-center text-center',
+  container: 'flex min-h-full items-end sm:items-center justify-center text-center',
   padding: 'p-4 sm:p-0',
   base: 'relative text-left overflow-hidden sm:my-8 w-full flex flex-col',
   overlay: {
@@ -921,7 +897,6 @@ export default {
     dropdown,
     kbd,
     input,
-    range,
     formGroup,
     textarea,
     select,
@@ -929,6 +904,7 @@ export default {
     checkbox,
     radio,
     toggle,
+    range,
     card,
     container,
     skeleton,
