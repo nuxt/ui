@@ -120,7 +120,7 @@ export const generateSafelist = (colors: string[]) => {
 
   return [
     ...safelist,
-    ...colors.map(color => `[&::-webkit-slider-thumb]:shadow-${color}-500`),
+    ...colors.map(color => `[&::-webkit-slider-thumb]:ring-${color}-500`),
     // Gray safelist for Avatar & Notification
     'bg-gray-500',
     'dark:bg-gray-400',
