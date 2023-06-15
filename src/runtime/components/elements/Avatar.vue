@@ -4,6 +4,9 @@
     <span v-else-if="text || placeholder" :class="ui.placeholder">{{ text || placeholder }}</span>
 
     <span v-if="chipColor" :class="chipClass" />
+    <div v-if="chipText" :class="chipTextClass">
+      <slot name="chipText"></slot>
+    </div>
     <slot />
   </span>
 </template>
@@ -65,6 +68,9 @@ export default defineComponent({
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.avatar>>,
       default: () => appConfig.ui.avatar
+    },
+    chipText: {
+      type: [String, Number]
     }
   },
   setup (props) {
@@ -109,6 +115,10 @@ export default defineComponent({
       return (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2)
     })
 
+    const chipTextClass = computed(() => {
+      return classNames(ui.value.chipText.base)
+    })
+
     const error = ref(false)
 
     watch(() => props.src, () => {
@@ -128,7 +138,8 @@ export default defineComponent({
       url,
       placeholder,
       error,
-      onError
+      onError,
+      chipTextClass
     }
   }
 })
