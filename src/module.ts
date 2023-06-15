@@ -133,7 +133,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
-      viewer: false,
       exposeConfig: true,
       config: {
         darkMode: 'class',
