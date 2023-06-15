@@ -143,7 +143,7 @@ export default defineComponent({
     const onInput = (event: InputEvent) => {
       autoResize()
 
-      emit('update:modelValue', (event.target as any).value)
+      emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
     watch(() => props.modelValue, () => {
