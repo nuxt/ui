@@ -77,21 +77,21 @@ export default defineComponent({
     size: {
       type: String,
       default: () => appConfig.ui.textarea.default.size,
-      validator(value: string) {
+      validator (value: string) {
         return Object.keys(appConfig.ui.textarea.size).includes(value)
       }
     },
     color: {
       type: String,
       default: () => appConfig.ui.textarea.default.color,
-      validator(value: string) {
+      validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.textarea.color)].includes(value)
       }
     },
     variant: {
       type: String,
       default: () => appConfig.ui.textarea.default.variant,
-      validator(value: string) {
+      validator (value: string) {
         return [
           ...Object.keys(appConfig.ui.textarea.variant),
           ...Object.values(appConfig.ui.textarea.color).flatMap(value => Object.keys(value))
@@ -104,7 +104,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'focus', 'blur'],
-  setup(props, { emit }) {
+  setup (props, { emit }) {
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
     // TODO: Remove
@@ -142,6 +142,7 @@ export default defineComponent({
 
     const onInput = (event: InputEvent) => {
       autoResize()
+
       emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
