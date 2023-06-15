@@ -83,8 +83,6 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig();
 
-    console.log(props.ui);
-
     const ui = computed<Partial<typeof appConfig.ui.slider>>(() =>
       defu({}, props.ui, appConfig.ui.slider)
     );
@@ -99,10 +97,6 @@ export default defineComponent({
         ui.value.thumb.base.replaceAll("{color}", props.color),
         ui.value.thumb.size[props.size],
         ui.value.size[props.size]
-        /*  ui.value.rounded,
-          ui.value.placeholder,
-          ui.value.size[props.size],
-          props.padded ? ui.value.padding[props.size] : 'p-0',*/
       );
     });
 
