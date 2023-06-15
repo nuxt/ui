@@ -526,7 +526,7 @@ const toggle = {
   },
 };
 
-const slider = {
+const range = {
   wrapper: "relative w-full min-w-[200px] text-{color}-500",
   base: "absolute w-full bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg dark:bg-gray-700 ",
   disabled : "cursor-not-allowed opacity-50 grayscale",
@@ -922,7 +922,7 @@ export default {
     dropdown,
     kbd,
     input,
-    slider,
+    range,
     formGroup,
     textarea,
     select,

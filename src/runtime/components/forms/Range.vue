@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted, defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import type { PropType } from "vue";
 import { defu } from "defu";
 import { classNames } from "../../utils";
@@ -66,21 +66,21 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: () => appConfig.ui.slider.default.size,
+      default: () => appConfig.ui.range.default.size,
       validator(value: string) {
-        return Object.keys(appConfig.ui.slider.size).includes(value);
+        return Object.keys(appConfig.ui.range.size).includes(value);
       },
     },
     color: {
       type: String,
-      default: () => appConfig.ui.slider.default.color,
+      default: () => appConfig.ui.range.default.color,
       validator(value: string) {
         return appConfig.ui.colors.includes(value);
       },
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.slider>>,
-      default: () => appConfig.ui.slider,
+      type: Object as PropType<Partial<typeof appConfig.ui.range>>,
+      default: () => appConfig.ui.range,
     },
   },
   emits: ["update:modelValue", "focus", "blur"],
@@ -88,8 +88,8 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig();
 
-    const ui = computed<Partial<typeof appConfig.ui.slider>>(() =>
-      defu({}, props.ui, appConfig.ui.slider)
+    const ui = computed<Partial<typeof appConfig.ui.range>>(() =>
+      defu({}, props.ui, appConfig.ui.range)
     );
 
     const onInput = (event: InputEvent) => {
