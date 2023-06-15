@@ -530,7 +530,17 @@ const slider = {
   wrapper: "relative w-full min-w-[200px] text-{color}-500",
   base: "absolute w-full bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg dark:bg-gray-700",
   thumb: {
-    base: "[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:-webkit-appearance-none [&::-webkit-slider-thumb]:ring-{color}-500 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:ring-2 [&::-moz-range-thumb]:ring-{color}-500 [&::-webkit-slider-thumb]:z-20 [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-runnable-track]:h-full",
+    base: `
+    [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none 
+    [&::-webkit-slider-thumb]:-webkit-appearance-none [&::-moz-range-thumb]:-webkit-appearance-none 
+    [&::-webkit-slider-thumb]:ring-{color}-500 [&::-moz-range-thumb]:ring-{color}-500 
+    [&::-webkit-slider-thumb]:bg-white [&::-moz-range-thumb]:bg-white 
+    [&::-webkit-slider-thumb]:ring-2 [&::-moz-range-thumb]:ring-2 
+    [&::-webkit-slider-thumb]:z-20 [&::-moz-range-thumb]:z-20 
+    [&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative 
+    [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full 
+    [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:cursor-pointer 
+    [&::-webkit-slider-runnable-track]:h-full [&::-moz-slider-runnable-track]:h-full` ,
     size :{
       sm : "[&::-webkit-slider-thumb]:h-2.5 [&::-webkit-slider-thumb]:w-2.5 [&::-webkit-slider-thumb]:-mt-[3px]",
       md : "[&::-webkit-slider-thumb]:h-3.5 [&::-webkit-slider-thumb]:w-3.5 [&::-webkit-slider-thumb]:-mt-[3px]",
