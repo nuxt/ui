@@ -23,9 +23,11 @@
 </template>
 
 <script setup lang="ts">
+import type { NavItem } from '@nuxt/content/dist/runtime/types'
 import type { Command } from '../../../src/runtime/types'
 
-const { navigation } = useContent()
+const navigation: Ref<NavItem[]> = inject('navigation')
+
 const router = useRouter()
 const { usingInput } = useShortcuts()
 const { isSearchModalOpen } = useDocs()

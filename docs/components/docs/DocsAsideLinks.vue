@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 
-const { navigation } = useContent() as { navigation: NavItem[] }
+const navigation: Ref<NavItem[]> = inject('navigation')
 
 function mapContentLinks (links: NavItem[]) {
   return links?.map(link => ({ label: link.title, icon: link.icon, to: link._path, badge: link.badge })) || []
