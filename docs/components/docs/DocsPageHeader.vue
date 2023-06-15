@@ -33,5 +33,10 @@
 </template>
 
 <script setup lang="ts">
-const { page } = useContent()
+defineProps({
+  page: {
+    type: Object,
+    default: null
+  }
+})
 </script>
