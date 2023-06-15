@@ -1,8 +1,21 @@
 <template>
   <div :class="ui.wrapper">
-    <textarea :id="name" ref="textarea" :value="modelValue" :name="name" :rows="rows" :required="required"
-      :disabled="disabled" :placeholder="placeholder" class="form-textarea" :class="textareaClass" v-bind="$attrs"
-      @input="onInput" @focus="$emit('focus', $event)" @blur="$emit('blur', $event)" />
+    <textarea
+      :id="name"
+      ref="textarea"
+      :value="modelValue"
+      :name="name"
+      :rows="rows"
+      :required="required"
+      :disabled="disabled"
+      :placeholder="placeholder"
+      class="form-textarea"
+      :class="textareaClass"
+      v-bind="$attrs"
+      @input="onInput"
+      @focus="$emit('focus', $event)"
+      @blur="$emit('blur', $event)"
+    />
   </div>
 </template>
 
