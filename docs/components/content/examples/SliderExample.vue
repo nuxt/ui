@@ -1,7 +1,7 @@
 <script setup>
-const value = ref(50)
+const value = ref(50);
 </script>
 
 <template>
-  <USlider v-model="value" />
+  <USlider v-model.number="value" />
 </template>

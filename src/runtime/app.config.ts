@@ -528,13 +528,14 @@ const toggle = {
 
 const slider = {
   wrapper: "relative w-full min-w-[200px] text-{color}-500",
-  base: "absolute w-full bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg dark:bg-gray-700",
+  base: "absolute w-full bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg dark:bg-gray-700 ",
+  disabled : "cursor-not-allowed opacity-50 grayscale",
   thumb: {
     base: `
     [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none 
     [&::-webkit-slider-thumb]:-webkit-appearance-none [&::-moz-range-thumb]:-webkit-appearance-none 
     [&::-webkit-slider-thumb]:ring-{color}-500 [&::-moz-range-thumb]:ring-{color}-500 
-    [&::-webkit-slider-thumb]:bg-white [&::-moz-range-thumb]:bg-white 
+    [&::-webkit-slider-thumb]:bg-white [&::-moz-range-thumb]:bg-white dark:[&::-webkit-slider-thumb]:bg-gray-700 dark:[&::-moz-range-thumb]:bg-gray-700 
     [&::-webkit-slider-thumb]:ring-2 [&::-moz-range-thumb]:ring-2 
     [&::-webkit-slider-thumb]:z-20 [&::-moz-range-thumb]:z-20 
     [&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative 

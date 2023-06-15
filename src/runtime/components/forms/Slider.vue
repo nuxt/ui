@@ -12,6 +12,7 @@
       :max="max"
       :value="modelValue"
       :disabled="disabled"
+      :step="step"
       type="range"
       :class="inputClass"
       v-bind="$attrs"
@@ -37,7 +38,7 @@ export default defineComponent({
     modelValue: {
       type: Number,
       required: true,
-      default: 0,
+      default: 50,
     },
     name: {
       type: String,
@@ -58,6 +59,10 @@ export default defineComponent({
     max: {
       type: Number,
       default: 100,
+    },
+    step: {
+      type: Number,
+      default: 1,
     },
     size: {
       type: String,
@@ -103,7 +108,8 @@ export default defineComponent({
     const wrapperClass = computed(() => {
       return classNames(
         ui.value.wrapper.replaceAll("{color}", props.color),
-        ui.value.size[props.size]
+        ui.value.size[props.size],
+        props.disabled ? ui.value.disabled : ""
       );
     });
 
