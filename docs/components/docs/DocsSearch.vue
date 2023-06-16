@@ -12,6 +12,8 @@
       ref="commandPaletteRef"
       :groups="groups"
       command-attribute="title"
+      :close-button="{ icon: 'i-heroicons-x-mark-20-solid', color: 'gray', variant: 'ghost', size: 'sm', class: '-mr-1.5' }"
+      :ui="{ input: { height: 'h-16 sm:h-12', icon: { size: 'h-5 w-5', padding: 'pl-11' } } }"
       :fuse="{
         fuseOptions: { ignoreLocation: true, includeMatches: true, threshold: 0, keys: ['title', 'description', 'children.children.value', 'children.children.children.value'] },
         resultLimit: 10
