@@ -737,6 +737,7 @@ const tooltip = {
   container: 'z-20',
   width: 'max-w-xs',
   background: 'bg-white dark:bg-gray-900',
+  color: 'text-gray-900 dark:text-white',
   shadow: 'shadow',
   rounded: 'rounded',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
