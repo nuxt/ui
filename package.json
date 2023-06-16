@@ -65,6 +65,7 @@
     "nuxt-lodash": "^2.4.1",
     "release-it": "^15.11.0",
     "unbuild": "^1.2.1",
+    "v-calendar": "^3.0.3",
     "vue-tsc": "1.6.3"
   }
 }
