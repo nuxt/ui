@@ -257,6 +257,58 @@ const dropdown = {
   }
 }
 
+const disclosure = {
+  wrapper: "w-full flex flex-col items-center justify-center space-y-2",
+  base: "w-full",
+  button: {
+    class: "flex w-full justify-between items-center bg-{color}-100 px-4 py-2 font-medium text-{color}-900 dark:text-gray-900 hover:bg-{color}-200 focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:opacity-75",
+    icon: {
+      size: {
+        '2xs': 'h-4 w-4',
+        xs: 'h-4 w-4',
+        sm: 'h-5 w-5',
+        md: 'h-5 w-5',
+        lg: 'h-6 w-6',
+        xl: 'h-7 w-7'
+      },
+    },
+  },
+  size: {
+    "2xs": "text-xs",
+    xs: "text-xs",
+    sm: "text-sm",
+    md: "text-sm",
+    lg: "text-lg",
+    xl: "text-xl",
+  },
+  gap: {
+    '2xs': 'gap-y-0.5',
+    xs: 'gap-y-0.5',
+    sm: 'gap-y-0.5',
+    md: 'gap-y-0.5',
+    lg: 'gap-y-1',
+    xl: 'gap-y-1.5'
+  },
+  shadow: "shadow-sm",
+  rounded: "rounded-lg",
+  transition: {
+    enterActiveClass: "transition duration-100 ease-out",
+    enterFromClass: "transform scale-95 opacity-0",
+    enterToClass: "transform scale-100 opacity-100",
+    leaveActiveClass: "transition duration-75 ease-out",
+    leaveFromClass: "transform scale-100 opacity-100",
+    leaveToClass: "transform scale-95 opacity-0"
+  },
+  default: {
+    size: 'md',
+    color: 'primary',
+    contentClass: "px-4 pt-4 pb-2 text-gray-500",
+    leadingIconClass: 'mr-2',
+    openIcon: 'i-heroicons-chevron-down',
+    closeIcon: '',
+  }
+};
+
 const kbd = {
   base: 'inline-flex items-center justify-center text-gray-900 dark:text-white',
   padding: 'px-1',
@@ -863,6 +915,7 @@ export default {
     buttonGroup,
     dropdown,
     kbd,
+    disclosure,
     input,
     formGroup,
     textarea,
