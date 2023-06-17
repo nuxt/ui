@@ -45,7 +45,7 @@
       </component>
     </div>
 
-    <ContentRenderer :value="ast" class="[&>div>pre]:!rounded-t-none" />
+    <ContentRenderer :value="ast" class="[&>div>pre]:!rounded-t-none" v-if="! previewOnly"/>
   </div>
 </template>
 
@@ -98,6 +98,10 @@ const props = defineProps({
   overflowClass: {
     type: String,
     default: ''
+  },
+  previewOnly: {
+    type: Boolean,
+    default: false
   }
 })
 
