@@ -2,25 +2,11 @@
   <div>
     <Header />
 
-    <UContainer>
-      <div class="relative grid lg:grid-cols-10 lg:gap-8">
-        <DocsAside class="lg:col-span-2" />
+    <UContainer class="grid lg:grid-cols-10 lg:gap-8">
+      <DocsAside class="lg:col-span-2" />
 
-        <div class="relative pt-8 pb-16" :class="[toc ? 'lg:col-span-6' : 'lg:col-span-8']">
-          <DocsPageHeader />
-
-          <NuxtPage />
-
-          <DocsPageFooter class="mt-12" />
-
-          <hr class="border-gray-200 dark:border-gray-800 my-6">
-
-          <DocsPrevNext />
-
-          <DocsFooter class="mt-16" />
-        </div>
-
-        <DocsToc v-if="toc" class="lg:col-span-2 order-first lg:order-last" />
+      <div class="lg:col-span-8 min-h-0 flex flex-col">
+        <NuxtPage />
       </div>
     </UContainer>
 
@@ -33,8 +19,11 @@
 </template>
 
 <script setup lang="ts">
-const { toc } = useContent()
 const colorMode = useColorMode()
+
+const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
+
+provide('navigation', navigation)
 
 // Computed
 
@@ -56,7 +45,7 @@ useHead({
     lang: 'en'
   },
   bodyAttrs: {
-    class: 'antialiased font-sans text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-900'
+    class: 'antialiased font-sans text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900'
   }
 })
 

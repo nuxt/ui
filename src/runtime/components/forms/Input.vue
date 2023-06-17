@@ -9,21 +9,26 @@
       :required="required"
       :placeholder="placeholder"
       :disabled="disabled || loading"
-      :readonly="readonly"
-      :autocomplete="autocomplete"
-      :spellcheck="spellcheck"
+      class="form-input"
       :class="inputClass"
+      v-bind="$attrs"
       @input="onInput"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     >
     <slot />
-    <div v-if="isLeading && leadingIconName" :class="leadingIconClass">
-      <UIcon :name="leadingIconName" :class="iconClass" />
-    </div>
-    <div v-if="isTrailing && trailingIconName" :class="trailingIconClass">
-      <UIcon :name="trailingIconName" :class="iconClass" />
-    </div>
+
+    <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
+      <slot name="leading" :disabled="disabled" :loading="loading">
+        <UIcon :name="leadingIconName" :class="leadingIconClass" />
+      </slot>
+    </span>
+
+    <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
+      <slot name="trailing" :disabled="disabled" :loading="loading">
+        <UIcon :name="trailingIconName" :class="trailingIconClass" />
+      </slot>
+    </span>
   </div>
 </template>
 
@@ -44,6 +49,7 @@ export default defineComponent({
   components: {
     UIcon
   },
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: [String, Number],
@@ -55,7 +61,7 @@ export default defineComponent({
     },
     name: {
       type: String,
-      required: true
+      default: null
     },
     placeholder: {
       type: String,
@@ -69,21 +75,9 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    readonly: {
-      type: Boolean,
-      default: false
-    },
     autofocus: {
       type: Boolean,
       default: false
-    },
-    autocomplete: {
-      type: String,
-      default: null
-    },
-    spellcheck: {
-      type: Boolean,
-      default: null
     },
     icon: {
       type: String,
@@ -113,6 +107,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    padded: {
+      type: Boolean,
+      default: true
+    },
     size: {
       type: String,
       default: () => appConfig.ui.input.default.size,
@@ -120,11 +118,21 @@ export default defineComponent({
         return Object.keys(appConfig.ui.input.size).includes(value)
       }
     },
-    appearance: {
+    color: {
       type: String,
-      default: () => appConfig.ui.input.default.appearance,
+      default: () => appConfig.ui.input.default.color,
       validator (value: string) {
-        return Object.keys(appConfig.ui.input.appearance).includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.input.color)].includes(value)
+      }
+    },
+    variant: {
+      type: String,
+      default: () => appConfig.ui.input.default.variant,
+      validator (value: string) {
+        return [
+          ...Object.keys(appConfig.ui.input.variant),
+          ...Object.values(appConfig.ui.input.color).flatMap(value => Object.keys(value))
+        ].includes(value)
       }
     },
     ui: {
@@ -133,7 +141,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'focus', 'blur'],
-  setup (props, { emit }) {
+  setup (props, { emit, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -148,7 +156,7 @@ export default defineComponent({
     }
 
     const onInput = (event: InputEvent) => {
-      emit('update:modelValue', (event.target as any).value)
+      emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
     onMounted(() => {
@@ -158,14 +166,17 @@ export default defineComponent({
     })
 
     const inputClass = computed(() => {
+      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+
       return classNames(
         ui.value.base,
+        ui.value.rounded,
+        ui.value.placeholder,
         ui.value.size[props.size],
-        ui.value.padding[props.size],
-        ui.value.appearance[props.appearance],
-        isLeading.value && ui.value.leading.padding[props.size],
-        isTrailing.value && ui.value.trailing.padding[props.size],
-        ui.value.custom
+        props.padded ? ui.value.padding[props.size] : 'p-0',
+        variant?.replaceAll('{color}', props.color),
+        (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size]
       )
     })
 
@@ -193,25 +204,37 @@ export default defineComponent({
       return props.trailingIcon || props.icon
     })
 
-    const iconClass = computed(() => {
+    const leadingWrapperIconClass = computed(() => {
       return classNames(
-        ui.value.icon.base,
-        ui.value.icon.size[props.size],
-        props.loading && 'animate-spin'
+        ui.value.icon.leading.wrapper,
+        ui.value.icon.leading.pointer,
+        ui.value.icon.leading.padding[props.size]
       )
     })
 
     const leadingIconClass = computed(() => {
       return classNames(
-        ui.value.icon.leading.wrapper,
-        ui.value.icon.leading.padding[props.size]
+        ui.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        ui.value.icon.size[props.size],
+        props.loading && 'animate-spin'
+      )
+    })
+
+    const trailingWrapperIconClass = computed(() => {
+      return classNames(
+        ui.value.icon.trailing.wrapper,
+        ui.value.icon.trailing.pointer,
+        ui.value.icon.trailing.padding[props.size]
       )
     })
 
     const trailingIconClass = computed(() => {
       return classNames(
-        ui.value.icon.trailing.wrapper,
-        ui.value.icon.trailing.padding[props.size]
+        ui.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        ui.value.icon.size[props.size],
+        props.loading && !isLeading.value && 'animate-spin'
       )
     })
 
@@ -222,11 +245,12 @@ export default defineComponent({
       isLeading,
       isTrailing,
       inputClass,
-      iconClass,
       leadingIconName,
       leadingIconClass,
+      leadingWrapperIconClass,
       trailingIconName,
       trailingIconClass,
+      trailingWrapperIconClass,
       onInput
     }
   }

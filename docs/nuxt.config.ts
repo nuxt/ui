@@ -1,4 +1,6 @@
 import ui from '../src/module'
+import { excludeColors } from '../src/colors'
+import colors from 'tailwindcss/colors'
 
 export default defineNuxtConfig({
   // @ts-ignore
@@ -13,10 +15,10 @@ export default defineNuxtConfig({
     'nuxt-component-meta'
   ],
   content: {
-    documentDriven: true,
     highlight: {
       theme: {
         light: 'material-lighter',
+        default: 'material-default',
         dark: 'material-palenight'
       },
       preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown', 'yaml', 'bash', 'ini']
@@ -24,7 +26,8 @@ export default defineNuxtConfig({
   },
   ui: {
     global: true,
-    icons: ['heroicons', 'simple-icons']
+    icons: ['heroicons', 'simple-icons'],
+    safelistColors: excludeColors(colors)
   },
   typescript: {
     strict: false,
@@ -35,5 +38,13 @@ export default defineNuxtConfig({
   },
   generate: {
     routes: ['/getting-started']
+  },
+  componentMeta: {
+    metaFields: {
+      props: true,
+      slots: false,
+      events: false,
+      exposed: false
+    }
   }
 })

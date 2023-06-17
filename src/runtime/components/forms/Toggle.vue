@@ -1,14 +1,16 @@
 <template>
   <Switch
     v-model="active"
+    :name="name"
+    :disabled="disabled"
     :class="[active ? ui.active : ui.inactive, ui.base]"
   >
     <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
-      <span v-if="iconOn" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
-        <UIcon :name="iconOn" :class="ui.icon.on" />
+      <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
+        <UIcon :name="onIcon" :class="ui.icon.on" />
       </span>
-      <span v-if="iconOff" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]" aria-hidden="true">
-        <UIcon :name="iconOff" :class="ui.icon.off" />
+      <span v-if="offIcon" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]" aria-hidden="true">
+        <UIcon :name="offIcon" :class="ui.icon.off" />
       </span>
     </span>
   </Switch>
@@ -34,17 +36,25 @@ export default defineComponent({
     UIcon
   },
   props: {
+    name: {
+      type: String,
+      default: null
+    },
     modelValue: {
       type: Boolean,
       default: false
     },
-    iconOn: {
-      type: String,
-      default: null
+    disabled: {
+      type: Boolean,
+      default: false
     },
-    iconOff: {
+    onIcon: {
       type: String,
-      default: null
+      default: () => appConfig.ui.toggle.default.onIcon
+    },
+    offIcon: {
+      type: String,
+      default: () => appConfig.ui.toggle.default.offIcon
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.toggle>>,

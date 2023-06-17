@@ -5,8 +5,10 @@
       :name="name"
       :value="modelValue"
       :required="required"
-      :disabled="disabled"
+      :disabled="disabled || loading"
+      class="form-select"
       :class="selectClass"
+      v-bind="$attrs"
       @input="onInput"
     >
       <template v-for="(option, index) in normalizedOptionsWithPlaceholder">
@@ -14,7 +16,7 @@
           v-if="option.children"
           :key="`${option[valueAttribute]}-optgroup-${index}`"
           :value="option[valueAttribute]"
-          :label="option[textAttribute]"
+          :label="option[optionAttribute]"
         >
           <option
             v-for="(childOption, index2) in option.children"
@@ -22,7 +24,7 @@
             :value="childOption[valueAttribute]"
             :selected="childOption[valueAttribute] === normalizedValue"
             :disabled="childOption.disabled"
-            v-text="childOption[textAttribute]"
+            v-text="childOption[optionAttribute]"
           />
         </optgroup>
         <option
@@ -31,17 +33,21 @@
           :value="option[valueAttribute]"
           :selected="option[valueAttribute] === normalizedValue"
           :disabled="option.disabled"
-          v-text="option[textAttribute]"
+          v-text="option[optionAttribute]"
         />
       </template>
     </select>
 
-    <div v-if="icon" :class="leadingIconClass">
-      <UIcon :name="icon" :class="iconClass" />
-    </div>
+    <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
+      <slot name="leading" :disabled="disabled" :loading="loading">
+        <UIcon :name="leadingIconName" :class="leadingIconClass" />
+      </slot>
+    </span>
 
-    <span v-if="trailingIcon" :class="trailingIconClass">
-      <UIcon :name="trailingIcon" :class="iconClass" aria-hidden="true" />
+    <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
+      <slot name="trailing" :disabled="disabled" :loading="loading">
+        <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+      </slot>
     </span>
   </div>
 </template>
@@ -64,6 +70,7 @@ export default defineComponent({
   components: {
     UIcon
   },
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: [String, Number, Object],
@@ -71,7 +78,7 @@ export default defineComponent({
     },
     name: {
       type: String,
-      required: true
+      default: null
     },
     placeholder: {
       type: String,
@@ -89,9 +96,33 @@ export default defineComponent({
       type: String,
       default: null
     },
+    loadingIcon: {
+      type: String,
+      default: () => appConfig.ui.input.default.loadingIcon
+    },
+    leadingIcon: {
+      type: String,
+      default: null
+    },
     trailingIcon: {
       type: String,
       default: () => appConfig.ui.select.default.trailingIcon
+    },
+    trailing: {
+      type: Boolean,
+      default: false
+    },
+    leading: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    padded: {
+      type: Boolean,
+      default: true
     },
     options: {
       type: Array,
@@ -104,16 +135,26 @@ export default defineComponent({
         return Object.keys(appConfig.ui.select.size).includes(value)
       }
     },
-    appearance: {
+    color: {
       type: String,
-      default: () => appConfig.ui.select.default.appearance,
+      default: () => appConfig.ui.select.default.color,
       validator (value: string) {
-        return Object.keys(appConfig.ui.select.appearance).includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.select.color)].includes(value)
       }
     },
-    textAttribute: {
+    variant: {
       type: String,
-      default: 'text'
+      default: () => appConfig.ui.select.default.variant,
+      validator (value: string) {
+        return [
+          ...Object.keys(appConfig.ui.select.variant),
+          ...Object.values(appConfig.ui.select.color).flatMap(value => Object.keys(value))
+        ].includes(value)
+      }
+    },
+    optionAttribute: {
+      type: String,
+      default: 'label'
     },
     valueAttribute: {
       type: String,
@@ -125,36 +166,36 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'focus', 'blur'],
-  setup (props, { emit }) {
+  setup (props, { emit, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
 
     const onInput = (event: InputEvent) => {
-      emit('update:modelValue', (event.target as any).value)
+      emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
     const guessOptionValue = (option: any) => {
-      return get(option, props.valueAttribute, get(option, props.textAttribute))
+      return get(option, props.valueAttribute, get(option, props.optionAttribute))
     }
 
     const guessOptionText = (option: any) => {
-      return get(option, props.textAttribute, get(option, props.valueAttribute))
+      return get(option, props.optionAttribute, get(option, props.valueAttribute))
     }
 
     const normalizeOption = (option: any) => {
       if (['string', 'number', 'boolean'].includes(typeof option)) {
         return {
           [props.valueAttribute]: option,
-          [props.textAttribute]: option
+          [props.optionAttribute]: option
         }
       }
 
       return {
         ...option,
         [props.valueAttribute]: guessOptionValue(option),
-        [props.textAttribute]: guessOptionText(option)
+        [props.optionAttribute]: guessOptionText(option)
       }
     }
 
@@ -170,7 +211,7 @@ export default defineComponent({
       return [
         {
           [props.valueAttribute]: '',
-          [props.textAttribute]: props.placeholder,
+          [props.optionAttribute]: props.placeholder,
           disabled: true
         },
         ...normalizedOptions.value
@@ -188,35 +229,74 @@ export default defineComponent({
     })
 
     const selectClass = computed(() => {
+      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+
       return classNames(
         ui.value.base,
+        ui.value.rounded,
         ui.value.size[props.size],
-        ui.value.padding[props.size],
-        ui.value.appearance[props.appearance],
-        !!props.icon && ui.value.leading.padding[props.size],
-        ui.value.trailing.padding[props.size],
-        ui.value.custom
+        props.padded ? ui.value.padding[props.size] : 'p-0',
+        variant?.replaceAll('{color}', props.color),
+        (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size]
       )
     })
 
-    const iconClass = computed(() => {
+    const isLeading = computed(() => {
+      return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
+    })
+
+    const isTrailing = computed(() => {
+      return (props.icon && props.trailing) || (props.loading && props.trailing) || props.trailingIcon
+    })
+
+    const leadingIconName = computed(() => {
+      if (props.loading) {
+        return props.loadingIcon
+      }
+
+      return props.leadingIcon || props.icon
+    })
+
+    const trailingIconName = computed(() => {
+      if (props.loading && !isLeading.value) {
+        return props.loadingIcon
+      }
+
+      return props.trailingIcon || props.icon
+    })
+
+    const leadingWrapperIconClass = computed(() => {
       return classNames(
-        ui.value.icon.base,
-        ui.value.icon.size[props.size]
+        ui.value.icon.leading.wrapper,
+        ui.value.icon.leading.pointer,
+        ui.value.icon.leading.padding[props.size]
       )
     })
 
     const leadingIconClass = computed(() => {
       return classNames(
-        ui.value.icon.leading.wrapper,
-        ui.value.icon.leading.padding[props.size]
+        ui.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        ui.value.icon.size[props.size],
+        props.loading && 'animate-spin'
+      )
+    })
+
+    const trailingWrapperIconClass = computed(() => {
+      return classNames(
+        ui.value.icon.trailing.wrapper,
+        ui.value.icon.trailing.pointer,
+        ui.value.icon.trailing.padding[props.size]
       )
     })
 
     const trailingIconClass = computed(() => {
       return classNames(
-        ui.value.icon.trailing.wrapper,
-        ui.value.icon.trailing.padding[props.size]
+        ui.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        ui.value.icon.size[props.size],
+        props.loading && !isLeading.value && 'animate-spin'
       )
     })
 
@@ -225,10 +305,15 @@ export default defineComponent({
       ui,
       normalizedOptionsWithPlaceholder,
       normalizedValue,
+      isLeading,
+      isTrailing,
       selectClass,
-      iconClass,
+      leadingIconName,
       leadingIconClass,
+      leadingWrapperIconClass,
+      trailingIconName,
       trailingIconClass,
+      trailingWrapperIconClass,
       onInput
     }
   }

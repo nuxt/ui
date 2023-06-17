@@ -19,9 +19,9 @@
         />
 
         <UButton
-          v-if="close"
-          v-bind="close"
-          :class="ui.input.close"
+          v-if="closeButton"
+          v-bind="{ ...ui.default.closeButton, ...closeButton }"
+          :class="ui.input.closeButton"
           aria-label="Close"
           @click="onClear"
         />
@@ -51,12 +51,16 @@
         </CommandPaletteGroup>
       </ComboboxOptions>
 
-      <div v-else-if="empty" :class="ui.empty.wrapper">
-        <UIcon v-if="empty.icon" :name="empty.icon" :class="ui.empty.icon" aria-hidden="true" />
-        <p :class="query ? ui.empty.queryLabel : ui.empty.label">
-          {{ query ? empty.queryLabel : empty.label }}
-        </p>
-      </div>
+      <template v-else-if="emptyState">
+        <slot name="empty-state">
+          <div :class="ui.emptyState.wrapper">
+            <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
+            <p :class="query ? ui.emptyState.queryLabel : ui.emptyState.label">
+              {{ query ? emptyState.queryLabel : emptyState.label }}
+            </p>
+          </div>
+        </slot>
+      </template>
     </div>
   </Combobox>
 </template>
@@ -133,13 +137,13 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.commandPalette.default.selectedIcon
     },
-    close: {
+    closeButton: {
       type: Object as PropType<Partial<Button>>,
-      default: () => appConfig.ui.commandPalette.default.close
+      default: () => appConfig.ui.commandPalette.default.closeButton
     },
-    empty: {
+    emptyState: {
       type: Object as PropType<{ icon: string, label: string, queryLabel: string }>,
-      default: () => appConfig.ui.commandPalette.default.empty
+      default: () => appConfig.ui.commandPalette.default.emptyState
     },
     placeholder: {
       type: String,
@@ -280,6 +284,8 @@ export default defineComponent({
       )
     })
 
+    const emptyState = computed(() => ({ ...ui.value.default.emptyState, ...props.emptyState }))
+
     // Methods
 
     function activateFirstOption () {
@@ -327,6 +333,8 @@ export default defineComponent({
       query,
       iconName,
       iconClass,
+      // eslint-disable-next-line vue/no-dupe-keys
+      emptyState,
       onSelect,
       onClear
     }

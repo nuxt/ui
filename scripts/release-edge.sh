@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Restore all git changes
-git restore -s@ -SW  -- example src test
+git restore -s@ -SW  -- .
 
 # Bump versions to edge
-yarn jiti ./scripts/bump-edge
+pnpm jiti ./scripts/bump-edge
 
-# Resolve yarn
-yarn
+# Resolve pnpm
+pnpm install
 
 # Update token
 if [[ ! -z ${NODE_AUTH_TOKEN} ]] ; then

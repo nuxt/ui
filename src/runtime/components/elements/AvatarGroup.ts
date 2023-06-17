@@ -1,7 +1,7 @@
-import { h, computed, defineComponent } from 'vue'
+import { h, cloneVNode, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { classNames } from '../../utils'
+import { classNames, getSlotsChildren } from '../../utils'
 import Avatar from './Avatar.vue'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -34,36 +34,25 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.avatarGroup>>(() => defu({}, props.ui, appConfig.ui.avatarGroup))
 
-    const children = computed(() => {
-      let children = slots.default?.()
-      if (children.length) {
-        if (typeof children[0].type === 'symbol') {
-          // @ts-ignore-next
-          children = children[0].children
-        // @ts-ignore-next
-        } else if (children[0].type.name === 'ContentSlot') {
-          // @ts-ignore-next
-          children = children[0].ctx.slots.default?.()
-        }
-      }
-      return children
-    })
+    const children = computed(() => getSlotsChildren(slots))
 
     const max = computed(() => typeof props.max === 'string' ? parseInt(props.max, 10) : props.max)
 
     const clones = computed(() => children.value.map((node, index) => {
+      const vProps: any = {}
+
       if (!props.max || (max.value && index < max.value)) {
         if (props.size) {
-          node.props.size = props.size
+          vProps.size = props.size
         }
 
-        node.props.class = node.props.class || ''
-        node.props.class += ` ${classNames(
+        vProps.class = node.props.class || ''
+        vProps.class += ` ${classNames(
           ui.value.ring,
           ui.value.margin
         )}`
 
-        return node
+        return cloneVNode(node, vProps)
       }
 
       if (max.value !== undefined && index === max.value) {

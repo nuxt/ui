@@ -9,7 +9,9 @@
         :value="value"
         :disabled="disabled"
         type="radio"
+        class="form-radio"
         :class="[ui.base, ui.custom]"
+        v-bind="$attrs"
         @focus="$emit('focus', $event)"
         @blur="$emit('blur', $event)"
       >
@@ -38,6 +40,7 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     value: {
       type: [String, Number, Boolean],

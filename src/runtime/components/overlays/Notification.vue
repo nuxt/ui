@@ -4,8 +4,8 @@
       <div :class="[ui.container, ui.rounded, ui.ring]">
         <div :class="ui.padding">
           <div class="flex gap-3" :class="{ 'items-start': description, 'items-center': !description }">
-            <UIcon v-if="icon" :name="icon" :class="ui.icon" />
-            <UAvatar v-if="avatar" v-bind="avatar" :class="ui.avatar" />
+            <UIcon v-if="icon" :name="icon" :class="iconClass" />
+            <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
 
             <div class="w-0 flex-1">
               <p :class="ui.title">
@@ -16,15 +16,15 @@
               </p>
 
               <div v-if="description && actions.length" class="mt-3 flex items-center gap-2">
-                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
+                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
               </div>
             </div>
             <div class="flex-shrink-0 flex items-center gap-3">
               <div v-if="!description && actions.length" class="flex items-center gap-2">
-                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.action, ...action }" @click.stop="onAction(action)" />
+                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
               </div>
 
-              <UButton v-if="close" v-bind="{ ...ui.default.close, ...close }" @click.stop="onClose" />
+              <UButton v-if="closeButton" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="onClose" />
             </div>
           </div>
         </div>
@@ -74,15 +74,15 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: null
+      default: () => appConfig.ui.notification.default.icon
     },
     avatar: {
       type: Object as PropType<Partial<Avatar>>,
       default: null
     },
-    close: {
+    closeButton: {
       type: Object as PropType<Partial<Button>>,
-      default: () => appConfig.ui.notification.default.close
+      default: () => appConfig.ui.notification.default.closeButton
     },
     timeout: {
       type: Number,
@@ -96,18 +96,11 @@ export default defineComponent({
       type: Function,
       default: null
     },
-    progressColor: {
+    color: {
       type: String,
-      default: () => appConfig.ui.notification.default.progressColor,
+      default: () => appConfig.ui.notification.default.color,
       validator (value: string) {
         return ['gray', ...appConfig.ui.colors].includes(value)
-      }
-    },
-    progressVariant: {
-      type: String,
-      default: () => appConfig.ui.notification.default.progressVariant,
-      validator (value: string) {
-        return Object.keys(appConfig.ui.notification.progress.variant).includes(value)
       }
     },
     ui: {
@@ -134,7 +127,14 @@ export default defineComponent({
     const progressClass = computed(() => {
       return classNames(
         ui.value.progress.base,
-        ui.value.progress.variant[props.progressVariant]?.replaceAll('{color}', props.progressColor)
+        ui.value.progress.background?.replaceAll('{color}', props.color)
+      )
+    })
+
+    const iconClass = computed(() => {
+      return classNames(
+        ui.value.icon.base,
+        ui.value.icon.color?.replaceAll('{color}', props.color)
       )
     })
 
@@ -199,6 +199,7 @@ export default defineComponent({
       ui,
       progressStyle,
       progressClass,
+      iconClass,
       onMouseover,
       onMouseleave,
       onClose,

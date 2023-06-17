@@ -1,32 +1,88 @@
+// Data
+
+const table = {
+  wrapper: 'relative',
+  base: 'min-w-full table-fixed',
+  divide: 'divide-y divide-gray-300 dark:divide-gray-700',
+  thead: '',
+  tbody: 'divide-y divide-gray-200 dark:divide-gray-800',
+  tr: {
+    base: '',
+    selected: 'bg-gray-50 dark:bg-gray-800/50'
+  },
+  th: {
+    base: 'text-left',
+    padding: 'px-3 py-3.5',
+    color: 'text-gray-900 dark:text-white',
+    font: 'font-semibold',
+    size: 'text-sm'
+  },
+  td: {
+    base: 'whitespace-nowrap',
+    padding: 'px-3 py-4',
+    color: 'text-gray-500 dark:text-gray-400',
+    font: '',
+    size: 'text-sm'
+  },
+  loadingState: {
+    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    label: 'text-sm text-center text-gray-900 dark:text-white',
+    icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4 animate-spin'
+  },
+  emptyState: {
+    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    label: 'text-sm text-center text-gray-900 dark:text-white',
+    icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
+  },
+  default: {
+    sortAscIcon: 'i-heroicons-bars-arrow-up-20-solid',
+    sortDescIcon: 'i-heroicons-bars-arrow-down-20-solid',
+    sortButton: {
+      icon: 'i-heroicons-arrows-up-down-20-solid',
+      trailing: true,
+      square: true,
+      color: 'gray',
+      variant: 'ghost',
+      class: '-m-1.5'
+    },
+    loadingState: {
+      icon: 'i-heroicons-arrow-path-20-solid',
+      label: 'Loading...'
+    },
+    emptyState: {
+      icon: 'i-heroicons-circle-stack-20-solid',
+      label: 'No items.'
+    }
+  }
+}
+
 // Elements
 
 const avatar = {
   wrapper: 'relative inline-flex items-center justify-center',
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
-  placeholder: 'text-xs font-medium leading-none text-gray-900 dark:text-white truncate',
+  placeholder: 'font-medium leading-none text-gray-900 dark:text-white truncate',
   size: {
-    '3xs': 'h-4 w-4 text-xs',
-    '2xs': 'h-5 w-5 text-xs',
-    xs: 'h-6 w-6 text-xs',
-    sm: 'h-8 w-8 text-sm',
-    md: 'h-10 w-10 text-md',
-    lg: 'h-12 w-12 text-lg',
-    xl: 'h-14 w-14 text-xl',
-    '2xl': 'h-16 w-16 text-2xl',
-    '3xl': 'h-20 w-20 text-3xl'
+    '3xs': 'h-4 w-4 text-[8px]',
+    '2xs': 'h-5 w-5 text-[10px]',
+    xs: 'h-6 w-6 text-[11px]',
+    sm: 'h-8 w-8 text-xs',
+    md: 'h-10 w-10 text-sm',
+    lg: 'h-12 w-12 text-base',
+    xl: 'h-14 w-14 text-lg',
+    '2xl': 'h-16 w-16 text-xl',
+    '3xl': 'h-20 w-20 text-2xl'
   },
   chip: {
     base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900 text-center',
     text: 'rounded-full p-1 text-{color}-500 bg-{color}-100',
+    background: 'bg-{color}-500 dark:bg-{color}-400',
     position: {
       'top-right': 'top-0 right-0',
       'bottom-right': 'bottom-0 right-0',
       'top-left': 'top-0 left-0',
       'bottom-left': 'bottom-0 left-0'
-    },
-    variant: {
-      solid: 'bg-{color}-400'
     },
     size: {
       '3xs': 'h-1 w-1',
@@ -43,7 +99,6 @@ const avatar = {
   default: {
     size: 'sm',
     chipColor: null,
-    chipVariant: 'solid',
     chipPosition: 'top-right'
   }
 }
@@ -64,6 +119,7 @@ const badge = {
     md: 'text-sm px-2 py-1',
     lg: 'text-sm px-2.5 py-1.5'
   },
+  color: {},
   variant: {
     solid: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-10 dark:ring-opacity-20'
   },
@@ -83,32 +139,32 @@ const button = {
     xs: 'text-xs',
     sm: 'text-sm',
     md: 'text-sm',
-    lg: 'text-base',
+    lg: 'text-sm',
     xl: 'text-base'
   },
   gap: {
     '2xs': 'gap-x-1',
     xs: 'gap-x-1.5',
-    sm: 'gap-x-2',
+    sm: 'gap-x-1.5',
     md: 'gap-x-2',
-    lg: 'gap-x-2',
-    xl: 'gap-x-2'
+    lg: 'gap-x-2.5',
+    xl: 'gap-x-2.5'
   },
   padding: {
     '2xs': 'px-2 py-1',
     xs: 'px-2.5 py-1.5',
-    sm: 'px-3 py-1.5',
+    sm: 'px-2.5 py-1.5',
     md: 'px-3 py-2',
-    lg: 'px-4 py-2',
-    xl: 'px-4 py-3'
+    lg: 'px-3.5 py-2.5',
+    xl: 'px-3.5 py-2.5'
   },
   square: {
-    '2xs': 'p-[5px]',
+    '2xs': 'p-1',
     xs: 'p-1.5',
-    sm: 'p-2',
+    sm: 'p-1.5',
     md: 'p-2',
     lg: 'p-2.5',
-    xl: 'p-3'
+    xl: 'p-2.5'
   },
   color: {
     white: {
@@ -135,9 +191,9 @@ const button = {
   icon: {
     base: 'flex-shrink-0',
     size: {
-      '2xs': 'h-3.5 w-3.5',
+      '2xs': 'h-4 w-4',
       xs: 'h-4 w-4',
-      sm: 'h-4 w-4',
+      sm: 'h-5 w-5',
       md: 'h-5 w-5',
       lg: 'h-5 w-5',
       xl: 'h-6 w-6'
@@ -152,7 +208,7 @@ const button = {
 }
 
 const buttonGroup = {
-  wrapper: 'inline-flex',
+  wrapper: 'inline-flex -space-x-px',
   rounded: 'rounded-md',
   shadow: 'shadow-sm'
 }
@@ -161,11 +217,12 @@ const dropdown = {
   wrapper: 'relative inline-flex text-left',
   container: 'z-20',
   width: 'w-48',
+  height: '',
   background: 'bg-white dark:bg-gray-800',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
-  base: 'focus:outline-none',
+  base: 'relative focus:outline-none overflow-y-auto scroll-py-1',
   divide: 'divide-y divide-gray-200 dark:divide-gray-700',
   padding: 'p-1',
   item: {
@@ -222,14 +279,15 @@ const kbd = {
 
 const input = {
   wrapper: 'relative',
-  base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
-  custom: '',
+  base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0',
+  rounded: 'rounded-md',
+  placeholder: 'placeholder-gray-400 dark:placeholder-gray-500',
   size: {
     '2xs': 'text-xs',
     xs: 'text-xs',
     sm: 'text-sm',
     md: 'text-sm',
-    lg: 'text-base',
+    lg: 'text-sm',
     xl: 'text-base'
   },
   gap: {
@@ -243,14 +301,14 @@ const input = {
   padding: {
     '2xs': 'px-2 py-1',
     xs: 'px-2.5 py-1.5',
-    sm: 'px-3 py-1.5',
+    sm: 'px-2.5 py-1.5',
     md: 'px-3 py-2',
-    lg: 'px-4 py-2',
-    xl: 'px-4 py-3'
+    lg: 'px-3.5 py-2.5',
+    xl: 'px-3.5 py-2.5'
   },
   leading: {
     padding: {
-      '2xs': 'pl-[26px]',
+      '2xs': 'pl-7',
       xs: 'pl-8',
       sm: 'pl-9',
       md: 'pl-10',
@@ -260,7 +318,7 @@ const input = {
   },
   trailing: {
     padding: {
-      '2xs': 'pr-[26px]',
+      '2xs': 'pr-7',
       xs: 'pr-8',
       sm: 'pr-9',
       md: 'pr-10',
@@ -268,81 +326,99 @@ const input = {
       xl: 'pr-12'
     }
   },
-  appearance: {
-    white: 'border-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
-    gray: 'border-0 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500',
-    none: 'border-0 bg-transparent focus:ring-0 focus:shadow-none placeholder:text-gray-400 dark:placeholder:text-gray-500'
+  color: {
+    white: {
+      outline: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+    },
+    gray: {
+      outline: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+    }
+  },
+  variant: {
+    outline: 'shadow-sm bg-transparent text-gray-900 dark:text-white ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 focus:ring-2 focus:ring-{color}-500 dark:focus:ring-{color}-400',
+    none: 'bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
-    base: 'text-gray-400 dark:text-gray-500',
+    base: 'flex-shrink-0 text-gray-400 dark:text-gray-500',
+    color: 'text-{color}-500 dark:text-{color}-400',
     size: {
-      '2xs': 'h-3.5 w-3.5',
+      '2xs': 'h-4 w-4',
       xs: 'h-4 w-4',
-      sm: 'h-4 w-4',
+      sm: 'h-5 w-5',
       md: 'h-5 w-5',
       lg: 'h-5 w-5',
       xl: 'h-6 w-6'
     },
     leading: {
-      wrapper: 'absolute inset-y-0 left-0 flex items-center pointer-events-none',
+      wrapper: 'absolute inset-y-0 left-0 flex items-center',
+      pointer: 'pointer-events-none',
       padding: {
         '2xs': 'pl-2',
         xs: 'pl-2.5',
-        sm: 'pl-3',
+        sm: 'pl-2.5',
         md: 'pl-3',
-        lg: 'pl-4',
-        xl: 'pl-4'
+        lg: 'pl-3.5',
+        xl: 'pl-3.5'
       }
     },
     trailing: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center pointer-events-none',
+      wrapper: 'absolute inset-y-0 right-0 flex items-center',
+      pointer: 'pointer-events-none',
       padding: {
         '2xs': 'pr-2',
         xs: 'pr-2.5',
-        sm: 'pr-3',
+        sm: 'pr-2.5',
         md: 'pr-3',
-        lg: 'pr-4',
-        xl: 'pr-4'
+        lg: 'pr-3.5',
+        xl: 'pr-3.5'
       }
     }
   },
   default: {
     size: 'sm',
-    appearance: 'white',
+    color: 'white',
+    variant: 'outline',
     loadingIcon: 'i-heroicons-arrow-path-20-solid'
   }
 }
 
-const inputGroup = {
+const formGroup = {
   wrapper: '',
-  label: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-  labelWrapper: 'flex content-center justify-between',
+  label: {
+    wrapper: 'flex content-center justify-between',
+    base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
+    required: `after:content-['*'] after:ml-0.5 after:text-red-500 dark:after:text-red-400`
+  },
+  description: 'text-sm text-gray-500 dark:text-gray-400',
   container: 'mt-1 relative',
-  required: 'text-red-500 dark:text-red-400 ml-0.5',
-  description: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
-  hint: 'text-sm leading-5 text-gray-500 dark:text-gray-400',
-  help: 'mt-2 text-sm text-gray-500 dark:text-gray-400'
+  hint: 'text-sm text-gray-500 dark:text-gray-400',
+  help: 'mt-2 text-sm text-gray-500 dark:text-gray-400',
+  error: 'mt-2 text-sm text-red-500 dark:text-red-400'
 }
 
 const textarea = {
   ...input,
   default: {
     size: 'sm',
-    appearance: 'white'
+    color: 'white',
+    variant: 'outline',
   }
 }
 
 const select = {
   ...input,
+  placeholder: 'text-gray-900 dark:text-white',
   default: {
     size: 'sm',
-    appearance: 'white',
+    color: 'white',
+    variant: 'outline',
+    loadingIcon: 'i-heroicons-arrow-path-20-solid',
     trailingIcon: 'i-heroicons-chevron-down-20-solid'
   }
 }
 
 const selectMenu = {
-  wrapper: 'relative inline-flex',
+  wrapper: 'relative',
   container: 'z-20',
   width: 'w-full',
   height: 'max-h-60',
@@ -352,7 +428,7 @@ const selectMenu = {
   rounded: 'rounded-md',
   padding: 'p-1',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
-  input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10 placeholder-gray-400 dark:placeholder-gray-500',
+  input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none',
   option: {
     base: 'cursor-default select-none relative flex items-center justify-between gap-1',
     rounded: 'rounded-md',
@@ -405,8 +481,12 @@ const radio = {
 }
 
 const checkbox = {
-  ...radio,
-  base: radio.base + ' rounded'
+  wrapper: 'relative flex items-start',
+  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  rounded: 'rounded',
+  label: 'font-medium text-gray-700 dark:text-gray-200',
+  required: 'text-red-500 dark:text-red-400',
+  help: 'text-gray-500 dark:text-gray-400'
 }
 
 const toggle = {
@@ -414,7 +494,7 @@ const toggle = {
   active: 'bg-primary-500 dark:bg-primary-400',
   inactive: 'bg-gray-200 dark:bg-gray-700',
   container: {
-    base: 'pointer-events-none relative inline-block h-4 w-4 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
+    base: 'pointer-events-none relative inline-block h-4 w-4 rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200',
     active: 'translate-x-4',
     inactive: 'translate-x-0'
   },
@@ -424,6 +504,10 @@ const toggle = {
     inactive: 'opacity-0 ease-out duration-100',
     on: 'h-3 w-3 text-primary-500 dark:text-primary-400',
     off: 'h-3 w-3 text-gray-400 dark:text-gray-500'
+  },
+  default: {
+    onIcon: null,
+    offIcon: null
   }
 }
 
@@ -500,7 +584,7 @@ const commandPalette = {
   container: 'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
   input: {
     wrapper: 'relative flex items-center',
-    base: 'w-full placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0',
+    base: 'w-full placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0 focus:outline-none',
     padding: 'px-4',
     height: 'h-12',
     size: 'sm:text-sm',
@@ -509,9 +593,9 @@ const commandPalette = {
       size: 'h-4 w-4',
       padding: 'pl-10'
     },
-    close: 'absolute right-4'
+    closeButton: 'absolute right-4'
   },
-  empty: {
+  emptyState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
     queryLabel: 'text-sm text-center text-gray-900 dark:text-white',
@@ -553,13 +637,36 @@ const commandPalette = {
   default: {
     icon: 'i-heroicons-magnifying-glass-20-solid',
     loadingIcon: 'i-heroicons-arrow-path-20-solid',
-    empty: {
+    emptyState: {
       icon: 'i-heroicons-magnifying-glass-20-solid',
       label: 'We couldn\'t find any items.',
       queryLabel: 'We couldn\'t find any items with that term. Please try again.'
     },
-    close: null,
+    closeButton: null,
     selectedIcon: 'i-heroicons-check-20-solid'
+  }
+}
+
+const pagination = {
+  wrapper: 'flex items-center -space-x-px',
+  base: '',
+  rounded: 'first:rounded-l-md last:rounded-r-md',
+  default: {
+    size: 'sm',
+    activeButton: {
+      color: 'primary'
+    },
+    inactiveButton: {
+      color: 'white'
+    },
+    prevButton: {
+      color: 'white',
+      icon: 'i-heroicons-chevron-left-20-solid'
+    },
+    nextButton: {
+      color: 'white',
+      icon: 'i-heroicons-chevron-right-20-solid'
+    }
   }
 }
 
@@ -631,6 +738,7 @@ const tooltip = {
   container: 'z-20',
   width: 'max-w-xs',
   background: 'bg-white dark:bg-gray-900',
+  color: 'text-gray-900 dark:text-white',
   shadow: 'shadow',
   rounded: 'rounded',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
@@ -704,13 +812,17 @@ const notification = {
   rounded: 'rounded-lg',
   padding: 'p-4',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  icon: 'flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white',
-  avatar: 'flex-shrink-0 pt-0.5',
+  icon: {
+    base: 'flex-shrink-0 w-5 h-5',
+    color: 'text-{color}-500 dark:text-{color}-400'
+  },
+  avatar: {
+    base: 'flex-shrink-0 self-center',
+    size: 'md'
+  },
   progress: {
     base: 'absolute bottom-0 left-0 right-0 h-1',
-    variant: {
-      solid: 'bg-{color}-500 dark:bg-{color}-400',
-    }
+    background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   transition: {
     enterActiveClass: 'transform ease-out duration-300 transition',
@@ -721,15 +833,15 @@ const notification = {
     leaveToClass: 'opacity-0'
   },
   default: {
-    progressColor: 'primary',
-    progressVariant: 'solid',
-    close: {
+    color: 'primary',
+    icon: null,
+    closeButton: {
       icon: 'i-heroicons-x-mark-20-solid',
       color: 'gray',
       variant: 'link',
       padded: false
     },
-    action: {
+    actionButton: {
       size: 'xs',
       color: 'white'
     }
@@ -745,6 +857,7 @@ const notifications = {
 
 export default {
   ui: {
+    table,
     avatar,
     avatarGroup,
     badge,
@@ -753,7 +866,7 @@ export default {
     dropdown,
     kbd,
     input,
-    inputGroup,
+    formGroup,
     textarea,
     select,
     selectMenu,
@@ -765,6 +878,7 @@ export default {
     skeleton,
     verticalNavigation,
     commandPalette,
+    pagination,
     modal,
     slideover,
     popover,

@@ -5,10 +5,5 @@ const selected = ref([])
 </script>
 
 <template>
-  <USelectMenu v-model="selected" :options="people" multiple>
-    <template #label>
-      <span v-if="selected.length" class="font-medium truncate">{{ selected.join(', ') }}</span>
-      <span v-else class="block truncate text-gray-400 dark:text-gray-500">Select people</span>
-    </template>
-  </USelectMenu>
+  <USelectMenu v-model="selected" :options="people" multiple placeholder="Select people" />
 </template>

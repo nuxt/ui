@@ -8,7 +8,7 @@
         {{ page.title }}
       </h1>
 
-      <div class="flex items-center gap-2 mt-4 lg:mt-0">
+      <div v-if="page.headlessui || page.github" class="flex items-center gap-2 mt-4 lg:mt-0">
         <UButton
           v-if="page.headlessui"
           :label="page.headlessui.label"
@@ -22,16 +22,21 @@
           label="GitHub"
           icon="i-simple-icons-github"
           color="white"
-          :to="`https://github.com/nuxtlabs/ui/blob/dev/src/runtime/components/${page._dir}/${page.title.replace(' ', '')}.vue`"
+          :to="`https://github.com/nuxtlabs/ui/blob/dev/src/runtime/components/${page._dir}/${page.title.replace(' ', '')}${page.github.suffix || '.vue'}`"
         />
       </div>
     </div>
-    <p v-if="page.description" class="mt-4 text-lg">
+    <p v-if="page.description" class="mt-4 text-lg text-gray-500 dark:text-gray-400">
       {{ page.description }}
     </p>
   </header>
 </template>
 
 <script setup lang="ts">
-const { page } = useContent()
+defineProps({
+  page: {
+    type: Object,
+    default: null
+  }
+})
 </script>

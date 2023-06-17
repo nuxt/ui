@@ -15,9 +15,9 @@
       </slot>
     </MenuButton>
 
-    <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
+    <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <transition appear v-bind="ui.transition">
-        <MenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background]" static>
+        <MenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
           <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
             <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
               <ULinkCustom
@@ -50,11 +50,11 @@ import type { PropType } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
 import { defineComponent, ref, computed, onMounted } from 'vue'
 import { defu } from 'defu'
+import { omit } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
 import ULinkCustom from '../elements/LinkCustom.vue'
-import { omit } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import type { Avatar } from '../../types/avatar'
 import type { PopperOptions } from '../../types'
@@ -127,7 +127,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.dropdown>>(() => defu({}, props.ui, appConfig.ui.dropdown))
 
-    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
+    const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
 
@@ -147,6 +147,12 @@ export default defineComponent({
         const menuProvidesSymbols = Object.getOwnPropertySymbols(menuProvides)
         menuApi.value = menuProvidesSymbols.length && menuProvides[menuProvidesSymbols[0]]
       }, 200)
+    })
+
+    const containerStyle = computed(() => {
+      const offsetDistance = (props.popper as PopperOptions)?.offsetDistance || (ui.value.popper as PopperOptions)?.offsetDistance || 8
+
+      return props.mode === 'hover' ? { paddingTop: `${offsetDistance}px`, paddingBottom: `${offsetDistance}px` } : {}
     })
 
     function onMouseOver () {
@@ -194,6 +200,7 @@ export default defineComponent({
       ui,
       trigger,
       container,
+      containerStyle,
       onMouseOver,
       onMouseLeave,
       omit

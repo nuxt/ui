@@ -9,8 +9,9 @@
       :required="required"
       :disabled="disabled"
       :placeholder="placeholder"
-      :autocomplete="autocomplete"
+      class="form-textarea"
       :class="textareaClass"
+      v-bind="$attrs"
       @input="onInput"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
@@ -31,6 +32,7 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: [String, Number],
@@ -38,7 +40,7 @@ export default defineComponent({
     },
     name: {
       type: String,
-      required: true
+      default: null
     },
     placeholder: {
       type: String,
@@ -64,13 +66,13 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    autocomplete: {
-      type: String,
-      default: null
-    },
     resize: {
       type: Boolean,
       default: false
+    },
+    padded: {
+      type: Boolean,
+      default: true
     },
     size: {
       type: String,
@@ -79,11 +81,21 @@ export default defineComponent({
         return Object.keys(appConfig.ui.textarea.size).includes(value)
       }
     },
-    appearance: {
+    color: {
       type: String,
-      default: () => appConfig.ui.textarea.default.appearance,
+      default: () => appConfig.ui.textarea.default.color,
       validator (value: string) {
-        return Object.keys(appConfig.ui.textarea.appearance).includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.textarea.color)].includes(value)
+      }
+    },
+    variant: {
+      type: String,
+      default: () => appConfig.ui.textarea.default.variant,
+      validator (value: string) {
+        return [
+          ...Object.keys(appConfig.ui.textarea.variant),
+          ...Object.values(appConfig.ui.textarea.color).flatMap(value => Object.keys(value))
+        ].includes(value)
       }
     },
     ui: {
@@ -131,7 +143,7 @@ export default defineComponent({
     const onInput = (event: InputEvent) => {
       autoResize()
 
-      emit('update:modelValue', (event.target as any).value)
+      emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
     watch(() => props.modelValue, () => {
@@ -146,13 +158,16 @@ export default defineComponent({
     })
 
     const textareaClass = computed(() => {
+      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+
       return classNames(
         ui.value.base,
+        ui.value.rounded,
+        ui.value.placeholder,
         ui.value.size[props.size],
-        ui.value.padding[props.size],
-        ui.value.appearance[props.appearance],
-        !props.resize && 'resize-none',
-        ui.value.custom
+        props.padded ? ui.value.padding[props.size] : 'p-0',
+        variant?.replaceAll('{color}', props.color),
+        !props.resize && 'resize-none'
       )
     })
 

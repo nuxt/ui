@@ -12,12 +12,11 @@ export interface Notification {
   description: string
   icon?: string
   avatar?: Partial<Avatar>
-  close?: Partial<Button>
+  closeButton?: Partial<Button>
   timeout: number
   actions?: NotificationAction[]
   click?: Function
   callback?: Function
-  progressColor?: string
-  progressVariant?: string
+  color?: string
   ui?: Partial<typeof appConfig.ui.notification>
 }
