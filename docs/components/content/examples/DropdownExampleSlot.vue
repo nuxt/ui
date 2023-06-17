@@ -1,124 +1,8 @@
----
-github: true
-description: Display a list of actions in a dropdown menu.
-headlessui:
-  label: 'Menu'
-  to: 'https://headlessui.com/vue/menu'
----
-
-## Usage
-
-Pass an array of arrays to the `items` prop of the Dropdown component. Each array represents a group of items. Each item can have the following properties:
-
-- `label` - The label of the item.
-- `icon` - The icon of the item.
-- `iconClass` - The class of the icon of the item.
-- `avatar` - The avatar of the item. You can pass all the props of the [Avatar](/elements/avatar) component.
-- `shortcuts` - The shortcuts of the item.
-- `slot` - The slot of the item.
-- `disabled` - Whether the item is disabled.
-- `click` - The click handler of the item.
-
-You can also pass properties from the [NuxtLink](https://nuxt.com/docs/api/components/nuxt-link#props) component such as `to`, `exact`, etc.
-
-::component-example
-#default
-:dropdown-example-basic
-
-#code
-```vue
-<script setup>
-const items = [
-  [{
-    label: 'Profile',
-    avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-    }
-  }], [{
-    label: 'Edit',
-    icon: 'i-heroicons-pencil-square-20-solid',
-    shortcuts: ['E'],
-    click: () => {
-      console.log('Edit')
-    }
-  }, {
-    label: 'Duplicate',
-    icon: 'i-heroicons-document-duplicate-20-solid',
-    shortcuts: ['D'],
-    disabled: true
-  }], [{
-    label: 'Archive',
-    icon: 'i-heroicons-archive-box-20-solid'
-  }, {
-    label: 'Move',
-    icon: 'i-heroicons-arrow-right-circle-20-solid'
-  }], [{
-    label: 'Delete',
-    icon: 'i-heroicons-trash-20-solid',
-    shortcuts: ['⌘', 'D']
-  }]
-]
-</script>
-
-<template>
-  <UDropdown :items="items" :popper="{ placement: 'bottom-start' }">
-    <UButton color="white" label="Options" trailing-icon="i-heroicons-chevron-down-20-solid" />
-  </UDropdown>
-</template>
-```
-::
-
-### Mode
-
-Use the `mode` prop to switch between `click` and `hover` modes.
-
-::component-example
-#default
-:dropdown-example-mode
-
-#code
-```vue
-<script setup>
-const items = [
-  [{
-    label: 'Profile',
-    avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-    }
-  }]
-]
-</script>
-
-<template>
-  <UDropdown :items="items" mode="hover" :popper="{ placement: 'bottom-start' }">
-    <UButton color="white" label="Options" trailing-icon="i-heroicons-chevron-down-20-solid" />
-  </UDropdown>
-</template>
-```
-::
-
-## Slots
-
-### `item` / `<item-slot>`
-
-Use the `#item` or `#<item-slot>` which you can define it in the item's props to set the content of the item.
-
-By default, the slot name is `#item` which you can use it to set the content of all items.
-
-Otherwise, you can use the `#<item-slot>` to set the content of a specific item.
-
-::component-example
-#default
-:dropdown-example-slot
-
-#code
-
-```vue
 <script setup>
 const items = [
   [
     {
-      label: "Haytham A Salama",
+      label: "Benjamin Canac",
       slot: "account",
       descriotion: "Owner",
       points: "1000",
@@ -157,7 +41,14 @@ const branches = [
       label: "Branch 2",
       mail: "example@mail.com",
     },
-    // etc.
+    {
+      label: "Branch 3",
+      mail: "example@mail.com",
+    },
+    {
+      label: "Branch 4",
+      mail: "example@mail.com",
+    },
   ],
 ];
 </script>
@@ -207,7 +98,6 @@ const branches = [
     </template>
   </UDropdown>
 
-
   <UDropdown
     class="mx-2"
     :items="branches"
@@ -241,14 +131,3 @@ const branches = [
     </template>
   </UDropdown>
 </template>
-
-```
-::
-
-## Props
-
-:component-props
-
-## Preset
-
-:component-preset
