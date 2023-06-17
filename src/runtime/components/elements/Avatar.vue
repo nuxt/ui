@@ -3,10 +3,9 @@
     <img v-if="url && !error" :class="avatarClass" :src="url" :alt="alt" :onerror="() => onError()">
     <span v-else-if="text || placeholder" :class="ui.placeholder">{{ text || placeholder }}</span>
 
-    <span v-if="chipColor" :class="chipClass" />
-    <div v-if="chipText" :class="chipTextClass">
-      <slot name="chipText"></slot>
-    </div>
+    <span v-if="chipColor" :class="chipClass">
+        <sup v-if="chipText" :class="chipTextClass">{{ chipText }}</sup>
+    </span>
     <slot />
   </span>
 </template>
@@ -70,7 +69,8 @@ export default defineComponent({
       default: () => appConfig.ui.avatar
     },
     chipText: {
-      type: [String, Number]
+      type: [String, Number],
+      default: null
     }
   },
   setup (props) {
@@ -100,10 +100,18 @@ export default defineComponent({
         ui.value.chip.base,
         ui.value.chip.size[props.size],
         ui.value.chip.position[props.chipPosition],
+        props.chipText ?  '' : 
         ui.value.chip.variant[props.chipVariant]?.replaceAll('{color}', props.chipColor)
       )
     })
 
+    const chipTextClass = computed( () => {
+      if(props.chipText){
+        return classNames(
+          ui.value.chip.text.replaceAll('{color}', props.chipColor)
+        )
+      }else return ''
+    });
     const url = computed(() => {
       if (typeof props.src === 'boolean') {
         return null
@@ -113,10 +121,6 @@ export default defineComponent({
 
     const placeholder = computed(() => {
       return (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2)
-    })
-
-    const chipTextClass = computed(() => {
-      return classNames(ui.value.chipText.base)
     })
 
     const error = ref(false)

@@ -16,11 +16,9 @@ const avatar = {
     '2xl': 'h-16 w-16 text-2xl',
     '3xl': 'h-20 w-20 text-3xl'
   },
-  chipText : {
-    base : 'flex absolute -top-[6px] border border-solid ring-inset -right-[10px] p-2 items-center justify-center text-white bg-gray-300 dark:bg-gray-800 rounded-full h-4 w-4 text-[8px] ring-2 ring-white dark:ring-gray-900 overflow-hidden'
-  },
   chip: {
-    base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900',
+    base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900 text-center',
+    text: 'rounded-full p-1 text-{color}-500 bg-{color}-100',
     position: {
       'top-right': 'top-0 right-0',
       'bottom-right': 'bottom-0 right-0',
