@@ -89,13 +89,13 @@ export default defineComponent({
     })
 
     const chipClass = computed(() => {
+      // Conditionally handling background of chip When chipText is provided
       return classNames(
         ui.value.chip.base,
         ui.value.chip.size[props.size],
         ui.value.chip.position[props.chipPosition],
         props.chipText ?  '' : 
-        ui.value.chip.variant[props.chipVariant]?.replaceAll('{color}', props.chipColor),
-        ui.value.chip.background.replaceAll('{color}', props.chipColor)
+        ui.value.chip.background.replaceAll('{color}', props.chipColor),
       )
     })
 
