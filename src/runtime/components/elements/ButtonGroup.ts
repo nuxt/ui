@@ -32,15 +32,15 @@ export default defineComponent({
     const children = computed(() => getSlotsChildren(slots))
 
     const rounded = computed(() => ({
-      'rounded-none': { left: 'rounded-l-none', right: 'rounded-r-none' },
-      'rounded-sm': { left: 'rounded-l-sm', right: 'rounded-r-sm' },
-      rounded: { left: 'rounded-l', right: 'rounded-r' },
-      'rounded-md': { left: 'rounded-l-md', right: 'rounded-r-md' },
-      'rounded-lg': { left: 'rounded-l-lg', right: 'rounded-r-lg' },
-      'rounded-xl': { left: 'rounded-l-xl', right: 'rounded-r-xl' },
-      'rounded-2xl': { left: 'rounded-l-2xl', right: 'rounded-r-2xl' },
-      'rounded-3xl': { left: 'rounded-l-3xl', right: 'rounded-r-3xl' },
-      'rounded-full': { left: 'rounded-l-full', right: 'rounded-r-full' }
+      'rounded-none': { left: 'rounded-s-none', right: 'rounded-e-none' },
+      'rounded-sm': { left: 'rounded-s-sm', right: 'rounded-e-sm' },
+      rounded: { left: 'rounded-s', right: 'rounded-e' },
+      'rounded-md': { left: 'rounded-s-md', right: 'rounded-e-md' },
+      'rounded-lg': { left: 'rounded-s-lg', right: 'rounded-e-lg' },
+      'rounded-xl': { left: 'rounded-s-xl', right: 'rounded-e-xl' },
+      'rounded-2xl': { left: 'rounded-s-2xl', right: 'rounded-e-2xl' },
+      'rounded-3xl': { left: 'rounded-s-3xl', right: 'rounded-e-3xl' },
+      'rounded-full': { left: 'rounded-s-full', right: 'rounded-e-full' }
     }[ui.value.rounded]))
 
     const clones = computed(() => children.value.map((node, index) => {
