@@ -22,7 +22,7 @@
         />
         <UInput
           v-else
-          :model-value="componentProps[prop.name]"
+          :model-value="objToString(componentProps[prop.name])"
           :type="prop.type === 'number' ? 'number' : 'text'"
           :name="`prop-${prop.name}`"
           variant="none"
@@ -148,6 +148,16 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
     options
   }
 }).filter(Boolean))
+
+
+const objToString = (obj) => {
+    if (typeof obj !== 'object') {
+      return obj
+    }
+    return Object.entries(obj).reduce((str, [p, val]) => {
+        return `{ ${str}${p}: '${val}' }`;
+    }, '');
+}
 
 // eslint-disable-next-line vue/no-dupe-keys
 const code = computed(() => {
