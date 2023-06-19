@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import type { ComputedRef, WatchSource } from 'vue'
 import { logicAnd, logicNot } from '@vueuse/math'
 import { useEventListener } from '@vueuse/core'
