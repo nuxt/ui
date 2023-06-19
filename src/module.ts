@@ -62,7 +62,7 @@ export default defineNuxtModule<ModuleOptions>({
     // Transpile runtime
     const runtimeDir = resolve('./runtime')
     nuxt.options.build.transpile.push(runtimeDir)
-    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
+    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue', '@headlessui-float/vue')
 
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
 
