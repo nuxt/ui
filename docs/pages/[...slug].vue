@@ -1,5 +1,5 @@
 <template>
-  <div class="grid lg:grid-cols-10 lg:gap-8">
+  <div v-if="page" class="grid lg:grid-cols-10 lg:gap-8">
     <div class="pt-8 pb-16" :class="page.body?.toc ? 'lg:col-span-8' : 'lg:col-span-10'">
       <DocsPageHeader :page="page" />
 
@@ -15,6 +15,25 @@
     </div>
 
     <DocsToc v-if="page.body?.toc" :toc="page.body.toc" class="lg:col-span-2" />
+  </div>
+  <div v-else class="flex-1 flex flex-col items-center justify-center">
+    <div class="text-center">
+      <p class="text-base font-semibold text-primary-500 dark:text-primary-400">
+        404
+      </p>
+      <h1 class="mt-2 text-4xl tracking-tight font-extrabold u-text-gray-900 sm:text-5xl">
+        Page not found
+      </h1>
+      <p class="mt-2 text-base u-text-gray-500">
+        Sorry, we couldn’t find the page you’re looking for.
+      </p>
+      <div class="mt-6">
+        <NuxtLink to="/" class="text-base font-medium text-primary-500 dark:text-primary-400 hover:u-text-gray-900">
+          Go back home
+          <span aria-hidden="true"> &rarr;</span>
+        </NuxtLink>
+      </div>
+    </div>
   </div>
 </template>
 
