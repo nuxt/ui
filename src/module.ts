@@ -69,13 +69,13 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
 
     const appConfigFile = await resolvePath(resolve(runtimeDir, 'app.config'))
-    console.log('appConfigFile', appConfigFile)
+
     nuxt.hook('app:resolve', (app) => {
       app.configs.push(appConfigFile)
     })
 
     nuxt.hook('tailwindcss:config', function (tailwindConfig) {
-      tailwindConfig.prefix
+      console.log(tailwindConfig.prefix)
 
       const globalColors: any = {
         ...(tailwindConfig.theme.colors || defaultColors),
