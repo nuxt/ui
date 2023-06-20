@@ -92,6 +92,11 @@ const safelistByComponent = {
     variants: ['focus-visible']
   }],
   input: (colorsAsRegex) => [{
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
     pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
     variants: ['dark', 'dark:focus']
   }, {
@@ -109,6 +114,12 @@ const safelistByComponent = {
     pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['dark']
   }]
+}
+
+const safelistComponentAliasesMap = {
+  'USelect': 'UInput',
+  'USelectMenu': 'UInput',
+  'UTextarea': 'UInput'
 }
 
 const colorsAsRegex = (colors: string[]): string => colors.join('|')
@@ -133,6 +144,8 @@ export const customSafelistExtractor = (prefix, content: string, colors: string[
   const regex = /<(\w+)\s+[^>:]*color=["']([^"']+)["'][^>]*>/gs
   const matches = content.matchAll(regex)
 
+  const components = Object.keys(safelistByComponent).map(component => `${prefix}${component.charAt(0).toUpperCase() + component.slice(1)}`)
+
   for (const match of matches) {
     const [, component, color] = match
 
@@ -140,22 +153,26 @@ export const customSafelistExtractor = (prefix, content: string, colors: string[
       continue
     }
 
-    if (Object.keys(safelistByComponent).map(component => `${prefix}${component.charAt(0).toUpperCase() + component.slice(1)}`).includes(component)) {
-      const name = component.replace(prefix, '').toLowerCase()
+    let name = safelistComponentAliasesMap[component] ? safelistComponentAliasesMap[component] : component
 
-      const matchClasses = safelistByComponent[name](color).flatMap(group => {
-        return ['', ...(group.variants || [])].flatMap(variant => {
-          const matches = group.pattern.source.match(/\(([^)]+)\)/g)
-
-          return matches.map(match => {
-            const colorOptions = match.substring(1, match.length - 1).split('|')
-            return colorOptions.map(color => `${variant ? variant + ':' : ''}` + group.pattern.source.replace(match, color))
-          }).flat()
-        })
-      })
-
-      classes.push(...matchClasses)
+    if (!components.includes(name)) {
+      continue
     }
+
+    name = name.replace(prefix, '').toLowerCase()
+
+    const matchClasses = safelistByComponent[name](color).flatMap(group => {
+      return ['', ...(group.variants || [])].flatMap(variant => {
+        const matches = group.pattern.source.match(/\(([^)]+)\)/g)
+
+        return matches.map(match => {
+          const colorOptions = match.substring(1, match.length - 1).split('|')
+          return colorOptions.map(color => `${variant ? variant + ':' : ''}` + group.pattern.source.replace(match, color))
+        }).flat()
+      })
+    })
+
+    classes.push(...matchClasses)
   }
 
   return classes
