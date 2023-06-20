@@ -3,16 +3,15 @@
     <input
       :id="name"
       ref="input"
+      v-model.number="value"
       :name="name"
       :min="min"
       :max="max"
-      :value="modelValue"
       :disabled="disabled"
       :step="step"
       type="range"
       :class="[inputClass, thumbClass]"
       v-bind="$attrs"
-      @input="onInput"
     >
 
     <span :class="progressClass" :style="progressStyle" />
@@ -82,9 +81,14 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.range>>(() => defu({}, props.ui, appConfig.ui.range))
 
-    const onInput = (event: InputEvent) => {
-      emit('update:modelValue', (event.target as any).value)
-    }
+    const value = computed({
+      get () {
+        return props.modelValue
+      },
+      set (value) {
+        emit('update:modelValue', value)
+      }
+    })
 
     const wrapperClass = computed(() => {
       return classNames(
@@ -98,6 +102,7 @@ export default defineComponent({
         ui.value.base,
         ui.value.background,
         ui.value.rounded,
+        ui.value.ring.replaceAll('{color}', props.color),
         ui.value.size[props.size]
       )
     })
@@ -131,12 +136,12 @@ export default defineComponent({
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      value,
       wrapperClass,
       inputClass,
       thumbClass,
       progressClass,
       progressStyle,
-      onInput
     }
   }
 })
