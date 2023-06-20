@@ -3,7 +3,7 @@
     <div class="flex items-center h-5">
       <input
         :id="name"
-        v-model="isChecked"
+        v-model="toggle"
         :name="name"
         :required="required"
         :value="value"
@@ -12,10 +12,8 @@
         :indeterminate="indeterminate"
         type="checkbox"
         class="form-checkbox"
-        :class="[ui.base, ui.rounded]"
+        :class="inputClass"
         v-bind="$attrs"
-        @focus="$emit('focus', $event)"
-        @blur="$emit('blur', $event)"
       >
     </div>
     <div v-if="label || $slots.label" class="ml-3 text-sm">
@@ -34,6 +32,7 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
+import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -80,19 +79,26 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    color: {
+      type: String,
+      default: () => appConfig.ui.checkbox.default.color,
+      validator (value: string) {
+        return appConfig.ui.colors.includes(value)
+      }
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.checkbox>>,
       default: () => appConfig.ui.checkbox
     }
   },
-  emits: ['update:modelValue', 'focus', 'blur'],
+  emits: ['update:modelValue'],
   setup (props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.checkbox>>(() => defu({}, props.ui, appConfig.ui.checkbox))
 
-    const isChecked = computed({
+    const toggle = computed({
       get () {
         return props.modelValue
       },
@@ -101,10 +107,22 @@ export default defineComponent({
       }
     })
 
+    const inputClass = computed(() => {
+      return classNames(
+        ui.value.base,
+        ui.value.rounded,
+        ui.value.background,
+        ui.value.border,
+        ui.value.ring.replaceAll('{color}', props.color),
+        ui.value.color.replaceAll('{color}', props.color)
+      )
+    })
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      isChecked
+      toggle,
+      inputClass
     }
   }
 })

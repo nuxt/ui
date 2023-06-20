@@ -473,24 +473,40 @@ const selectMenu = {
 
 const radio = {
   wrapper: 'relative flex items-start',
-  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  base: 'h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  color: 'text-{color}-500 dark:text-{color}-400',
+  background: 'bg-white dark:bg-gray-900',
+  border: 'border border-gray-300 dark:border-gray-700',
+  ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   label: 'font-medium text-gray-700 dark:text-gray-200',
   required: 'text-red-500 dark:text-red-400',
-  help: 'text-gray-500 dark:text-gray-400'
+  help: 'text-gray-500 dark:text-gray-400',
+  default: {
+    color: 'primary'
+  }
 }
 
 const checkbox = {
   wrapper: 'relative flex items-start',
-  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  base: 'h-4 w-4 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
   rounded: 'rounded',
+  color: 'text-{color}-500 dark:text-{color}-400',
+  background: 'bg-white dark:bg-gray-900',
+  border: 'border border-gray-300 dark:border-gray-700',
+  ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   label: 'font-medium text-gray-700 dark:text-gray-200',
   required: 'text-red-500 dark:text-red-400',
-  help: 'text-gray-500 dark:text-gray-400'
+  help: 'text-gray-500 dark:text-gray-400',
+  default: {
+    color: 'primary'
+  }
 }
 
 const toggle = {
-  base: 'relative inline-flex flex-shrink-0 h-5 w-9 border-2 border-transparent rounded-full cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
-  active: 'bg-primary-500 dark:bg-primary-400',
+  base: 'relative inline-flex h-5 w-9 flex-shrink-0 border-2 border-transparent disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none',
+  rounded: 'rounded-full',
+  ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
+  active: 'bg-{color}-500 dark:bg-{color}-400',
   inactive: 'bg-gray-200 dark:bg-gray-700',
   container: {
     base: 'pointer-events-none relative inline-block h-4 w-4 rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200',
@@ -501,12 +517,13 @@ const toggle = {
     base: 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
     active: 'opacity-100 ease-in duration-200',
     inactive: 'opacity-0 ease-out duration-100',
-    on: 'h-3 w-3 text-primary-500 dark:text-primary-400',
+    on: 'h-3 w-3 text-{color}-500 dark:text-{color}-400',
     off: 'h-3 w-3 text-gray-400 dark:text-gray-500'
   },
   default: {
     onIcon: null,
-    offIcon: null
+    offIcon: null,
+    color: 'primary'
   }
 }
 
