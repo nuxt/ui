@@ -12,7 +12,7 @@
         :indeterminate="indeterminate"
         type="checkbox"
         class="form-checkbox"
-        :class="[ui.base, ui.rounded, ui.custom]"
+        :class="classStyle"
         v-bind="$attrs"
         @focus="$emit('focus', $event)"
         @blur="$emit('blur', $event)"
@@ -38,6 +38,7 @@ import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { classNames } from '../../utils'
 
 // const appConfig = useAppConfig()
 
@@ -80,6 +81,13 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    color: {
+      type: String,
+      default: () => appConfig.ui.checkbox.default.color,
+      validator (value: string) {
+        return [...appConfig.ui.colors].includes(value)
+      }
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.checkbox>>,
       default: () => appConfig.ui.checkbox
@@ -101,10 +109,19 @@ export default defineComponent({
       }
     })
 
+    const classStyle = computed(() => {
+      return classNames(
+        ui.value.base.replaceAll('{color}', props.color),
+        ui.value.rounded,
+        ui.value.custom,
+      )
+    })
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      isChecked
+      isChecked,
+      classStyle
     }
   }
 })

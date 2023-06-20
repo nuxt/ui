@@ -10,7 +10,7 @@
         :disabled="disabled"
         type="radio"
         class="form-radio"
-        :class="[ui.base, ui.custom]"
+        :class="classStyle"
         v-bind="$attrs"
         @focus="$emit('focus', $event)"
         @blur="$emit('blur', $event)"
@@ -36,6 +36,7 @@ import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { classNames } from '../../utils'
 
 // const appConfig = useAppConfig()
 
@@ -70,6 +71,13 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    color: {
+      type: String,
+      default: () => appConfig.ui.radio.default.color,
+      validator (value: string) {
+        return [...appConfig.ui.colors].includes(value)
+      }
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.radio>>,
       default: () => appConfig.ui.radio
@@ -91,10 +99,18 @@ export default defineComponent({
       }
     })
 
+    const classStyle = computed(() => {
+      return classNames(
+        ui.value.base.replaceAll('{color}', props.color),
+        ui.value.custom
+      )
+    })
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      isChecked
+      isChecked,
+      classStyle
     }
   }
 })

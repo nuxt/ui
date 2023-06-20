@@ -3,11 +3,11 @@
     v-model="active"
     :name="name"
     :disabled="disabled"
-    :class="[active ? ui.active : ui.inactive, ui.base]"
+    :class="classStyle"
   >
     <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
       <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
-        <UIcon :name="onIcon" :class="ui.icon.on" />
+        <UIcon :name="onIcon" :class="onIconClass" />
       </span>
       <span v-if="offIcon" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]" aria-hidden="true">
         <UIcon :name="offIcon" :class="ui.icon.off" />
@@ -26,6 +26,7 @@ import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { classNames } from '../../utils'
 
 // const appConfig = useAppConfig()
 
@@ -56,6 +57,13 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.toggle.default.offIcon
     },
+    color: {
+      type: String,
+      default: () => appConfig.ui.toggle.default.color,
+      validator (value: string) {
+        return [...appConfig.ui.colors].includes(value)
+      }
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.toggle>>,
       default: () => appConfig.ui.toggle
@@ -77,10 +85,25 @@ export default defineComponent({
       }
     })
 
+    const classStyle = computed(()=>{
+      return classNames(
+        active.value ? ui.value.active.replaceAll('{color}', props.color) : ui.value.inactive,
+        ui.value.base.replaceAll('{color}', props.color)
+      )
+    })
+
+    const onIconClass = computed(()=>{
+      return classNames(
+        ui.value.icon.on.replaceAll('{color}', props.color)
+      )
+    })
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      active
+      active,
+      classStyle,
+      onIconClass
     }
   }
 })
