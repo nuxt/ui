@@ -9,7 +9,7 @@
       "require": "./dist/module.cjs"
     }
   },
-  "main": "./dist/module.cjs",
+  "main": "./src/module.ts",
   "types": "./dist/types.d.ts",
   "files": [
     "dist"
@@ -25,7 +25,10 @@
     "lint": "eslint .",
     "typecheck": "nuxi typecheck",
     "prepare": "nuxi prepare docs",
-    "release": "pnpm lint && standard-version && git push --follow-tags"
+    "release": "pnpm lint && standard-version && git push --follow-tags",
+    "dev:playground": "nuxi dev playground",
+    "dev:playground:build": "nuxi build playground",
+    "dev:playground:prepare": "nuxt-module-build --stub && nuxi prepare playground"
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.1.0",

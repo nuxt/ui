@@ -40,6 +40,8 @@ export interface ModuleOptions {
   icons: string[] | string
 
   safelistColors?: string[]
+
+  tailwindPrefix?: string
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -67,11 +69,14 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
 
     const appConfigFile = await resolvePath(resolve(runtimeDir, 'app.config'))
+    console.log('appConfigFile', appConfigFile)
     nuxt.hook('app:resolve', (app) => {
       app.configs.push(appConfigFile)
     })
 
     nuxt.hook('tailwindcss:config', function (tailwindConfig) {
+      tailwindConfig.prefix
+
       const globalColors: any = {
         ...(tailwindConfig.theme.colors || defaultColors),
         ...tailwindConfig.theme.extend?.colors
