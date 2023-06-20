@@ -105,9 +105,11 @@ export default defineComponent({
     const thumbClass = computed(() => {
       return classNames(
         ui.value.thumb.base,
-        // Intermediate class to allow thumb ring color as it's impossible to safelist with arbitrary values
+        // Intermediate class to allow thumb ring, border or background color (set to `current`) as it's impossible to safelist with arbitrary values
         ui.value.thumb.color.replaceAll('{color}', props.color),
         ui.value.thumb.ring,
+        ui.value.thumb.border,
+        ui.value.thumb.shadow,
         ui.value.thumb.background,
         ui.value.thumb.size[props.size]
       )
