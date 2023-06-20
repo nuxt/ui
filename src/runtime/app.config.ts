@@ -327,10 +327,10 @@ const input = {
   },
   color: {
     white: {
-      outline: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+      outline: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
     },
     gray: {
-      outline: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+      outline: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
     }
   },
   variant: {
@@ -400,7 +400,7 @@ const textarea = {
   default: {
     size: 'sm',
     color: 'white',
-    variant: 'outline',
+    variant: 'outline'
   }
 }
 
@@ -507,6 +507,39 @@ const toggle = {
   default: {
     onIcon: null,
     offIcon: null
+  }
+}
+
+const range = {
+  wrapper: 'relative w-full',
+  base: 'w-full absolute appearance-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none [&::-webkit-slider-runnable-track]:h-full [&::-moz-slider-runnable-track]:h-full',
+  background: 'bg-gray-200 dark:bg-gray-700',
+  rounded: 'rounded-lg',
+  ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
+  progress: {
+    base: 'absolute inset-0 h-full pointer-events-none',
+    rounded: 'rounded-l-lg',
+    background: 'bg-{color}-500 dark:bg-{color}-400'
+  },
+  thumb: {
+    base: `[&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0`,
+    color: 'text-{color}-500 dark:text-{color}-400',
+    background: '[&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:dark:bg-gray-900 [&::-moz-range-thumb]:bg-current',
+    ring: '[&::-webkit-slider-thumb]:ring-2 [&::-webkit-slider-thumb]:ring-current',
+    size: {
+      sm: '[&::-webkit-slider-thumb]:h-3 [&::-moz-range-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-moz-range-thumb]:w-3 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1',
+      md: '[&::-webkit-slider-thumb]:h-4 [&::-moz-range-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-moz-range-thumb]:w-4 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1',
+      lg: '[&::-webkit-slider-thumb]:h-5 [&::-moz-range-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-moz-range-thumb]:w-5 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1'
+    }
+  },
+  size: {
+    sm: 'h-1',
+    md: 'h-2',
+    lg: 'h-3'
+  },
+  default: {
+    size: 'md',
+    color: 'primary'
   }
 }
 
@@ -872,6 +905,7 @@ export default {
     checkbox,
     radio,
     toggle,
+    range,
     card,
     container,
     skeleton,
