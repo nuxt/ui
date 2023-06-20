@@ -174,7 +174,7 @@ const colorsAsRegex = (colors: string[]): string => colors.join('|')
 export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
 
 export const generateSafelist = (colors: string[]) => {
-  const safelist = ['avatar', 'badge', 'button', 'input', 'range', 'notification'].flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
+  const safelist = Object.keys(safelistByComponent).flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
 
   return [
     ...safelist,
