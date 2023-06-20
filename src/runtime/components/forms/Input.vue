@@ -13,8 +13,6 @@
       :class="inputClass"
       v-bind="$attrs"
       @input="onInput"
-      @focus="$emit('focus', $event)"
-      @blur="$emit('blur', $event)"
     >
     <slot />
 
@@ -140,7 +138,7 @@ export default defineComponent({
       default: () => appConfig.ui.input
     }
   },
-  emits: ['update:modelValue', 'focus', 'blur'],
+  emits: ['update:modelValue'],
   setup (props, { emit, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()

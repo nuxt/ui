@@ -91,7 +91,7 @@ export default defineComponent({
       default: () => appConfig.ui.checkbox
     }
   },
-  emits: ['update:modelValue', 'focus', 'blur'],
+  emits: ['update:modelValue'],
   setup (props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()

@@ -12,8 +12,6 @@
         class="form-radio"
         :class="inputClass"
         v-bind="$attrs"
-        @focus="$emit('focus', $event)"
-        @blur="$emit('blur', $event)"
       >
     </div>
     <div v-if="label || $slots.label" class="ml-3 text-sm">
@@ -83,7 +81,7 @@ export default defineComponent({
       default: () => appConfig.ui.radio
     }
   },
-  emits: ['update:modelValue', 'focus', 'blur'],
+  emits: ['update:modelValue'],
   setup (props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
