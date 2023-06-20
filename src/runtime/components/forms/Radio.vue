@@ -3,17 +3,15 @@
     <div class="flex items-center h-5">
       <input
         :id="`${name}-${value}`"
-        v-model="isChecked"
+        v-model="pick"
         :name="name"
         :required="required"
         :value="value"
         :disabled="disabled"
         type="radio"
         class="form-radio"
-        :class="[ui.base]"
+        :class="inputClass"
         v-bind="$attrs"
-        @focus="$emit('focus', $event)"
-        @blur="$emit('blur', $event)"
       >
     </div>
     <div v-if="label || $slots.label" class="ml-3 text-sm">
@@ -32,6 +30,7 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
+import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -70,19 +69,26 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    color: {
+      type: String,
+      default: () => appConfig.ui.radio.default.color,
+      validator (value: string) {
+        return appConfig.ui.colors.includes(value)
+      }
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.radio>>,
       default: () => appConfig.ui.radio
     }
   },
-  emits: ['update:modelValue', 'focus', 'blur'],
+  emits: ['update:modelValue'],
   setup (props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.radio>>(() => defu({}, props.ui, appConfig.ui.radio))
 
-    const isChecked = computed({
+    const pick = computed({
       get () {
         return props.modelValue
       },
@@ -91,10 +97,21 @@ export default defineComponent({
       }
     })
 
+    const inputClass = computed(() => {
+      return classNames(
+        ui.value.base,
+        ui.value.background,
+        ui.value.border,
+        ui.value.ring.replaceAll('{color}', props.color),
+        ui.value.color.replaceAll('{color}', props.color)
+      )
+    })
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      isChecked
+      pick,
+      inputClass
     }
   }
 })

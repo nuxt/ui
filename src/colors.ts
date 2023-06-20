@@ -103,6 +103,47 @@ const safelistByComponent = {
     pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
     variants: ['focus']
   }],
+  radio: (colorsAsRegex) => [{
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark:focus-visible']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    variants: ['focus-visible']
+  }],
+  checkbox: (colorsAsRegex) => [{
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark:focus-visible']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    variants: ['focus-visible']
+  }],
+  toggle: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark:focus-visible']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    variants: ['focus-visible']
+  }],
   range: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
@@ -144,7 +185,7 @@ const colorsAsRegex = (colors: string[]): string => colors.join('|')
 export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
 
 export const generateSafelist = (colors: string[]) => {
-  const safelist = ['avatar', 'badge', 'button', 'input', 'range', 'notification'].flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
+  const safelist = Object.keys(safelistByComponent).flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
 
   return [
     ...safelist,
