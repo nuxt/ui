@@ -113,7 +113,6 @@ export default defineComponent({
       return classNames(
         ui.value.base.replaceAll('{color}', props.color),
         ui.value.rounded,
-        ui.value.custom,
       )
     })
 
