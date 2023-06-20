@@ -34,7 +34,7 @@ const items = ref([
 </script>
 
 <template>
-  <UDisclosure :items="items">
+  <UAccordion :items="items">
     <template #button="{ title ,index ,leadingIcon, isOpen }">
       <div class="flex justify-start items-center border-b w-full pt-1 pb-3">
         <span class="bg-primary-200 rounded-full text-primary-800 p-[8px] mr-4 flex justify-center">
@@ -47,15 +47,10 @@ const items = ref([
         <div class="flex justify-between items-center w-full">
           <div>{{ index+1 }}.  {{ title }}</div>
           <div>
-            <UIcon
-              :name="{
-                'i-heroicons-plus': !isOpen,
-                'i-heroicons-minus': isOpen,
-              }"
-            />
+            <UIcon :name="isOpen ? 'i-heroicons-minus' : 'i-heroicons-plus'" />
           </div>
         </div>
       </div>
     </template>
-  </UDisclosure>
+  </UAccordion>
 </template>

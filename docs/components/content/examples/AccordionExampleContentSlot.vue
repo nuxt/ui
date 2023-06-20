@@ -66,7 +66,7 @@ const subItems = ref([
 </script>
 
 <template>
-  <UDisclosure :items="items" default-open-all>
+  <UAccordion :items="items" default-open-all>
     <template #item-1-content>
       <div class="flex justify-start items-center w-full pt-1 pb-3">
         <div class="flex flex-col justify-center items-start ml-2">
@@ -80,7 +80,7 @@ const subItems = ref([
         </div>
       </div>
 
-      <UDisclosure :items="subItems" color="emerald" />
+      <UAccordion :items="subItems" color="emerald" />
     </template>
 
     <template #item-2-content="{ content }">
@@ -102,5 +102,5 @@ const subItems = ref([
         <code>$ pnpm i -D @nuxthq/ui</code>
       </div>
     </template>
-  </UDisclosure>
+  </UAccordion>
 </template>

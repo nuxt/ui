@@ -257,7 +257,7 @@ const dropdown = {
   }
 }
 
-const disclosure = {
+const accordion = {
   wrapper: "w-full flex flex-col items-center justify-center space-y-2",
   base: "w-full",
   button: {
@@ -303,7 +303,7 @@ const disclosure = {
     size: 'md',
     color: 'primary',
     contentClass: "px-4 pt-4 pb-2 text-gray-500",
-    leadingIconClass: 'mr-2',
+    leadingIconClass: 'me-2',
     openIcon: 'i-heroicons-chevron-down',
     closeIcon: '',
   }
@@ -915,7 +915,7 @@ export default {
     buttonGroup,
     dropdown,
     kbd,
-    disclosure,
+    accordion,
     input,
     formGroup,
     textarea,

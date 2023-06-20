@@ -42,5 +42,5 @@ const items = ref([
 </script>
 
 <template>
-  <UDisclosure :items="items" />
+  <UAccordion :items="items" />
 </template>
