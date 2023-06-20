@@ -1,9 +1,5 @@
 ﻿<template>
   <div :class="wrapperClass">
-    <label
-      class="absolute inset-0 z-10 rounded-l-full h-full pointer-events-none bg-current"
-      :style="{ width: `${(modelValue / max) * 100}%` }"
-    />
     <input
       :id="name"
       ref="input"
@@ -14,12 +10,12 @@
       :disabled="disabled"
       :step="step"
       type="range"
-      :class="inputClass"
+      :class="[inputClass, thumbClass]"
       v-bind="$attrs"
       @input="onInput"
-      @focus="$emit('focus', $event)"
-      @blur="$emit('blur', $event)"
-    />
+    >
+
+    <span :class="progressClass" :style="progressStyle" />
   </div>
 </template>
 
@@ -34,21 +30,17 @@ import { useAppConfig } from '#imports'
 import appConfig from '#build/app.config'
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: Number,
-      required: true,
-      default: 50
+      default: 0
     },
     name: {
       type: String,
       default: null
     },
     disabled: {
-      type: Boolean,
-      default: false
-    },
-    autofocus: {
       type: Boolean,
       default: false
     },
@@ -83,38 +75,69 @@ export default defineComponent({
       default: () => appConfig.ui.range
     }
   },
-  emits: ['update:modelValue', 'focus', 'blur'],
-  setup(props, { emit, slots }) {
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.range>>(() =>
-      defu({}, props.ui, appConfig.ui.range)
-    )
+    const ui = computed<Partial<typeof appConfig.ui.range>>(() => defu({}, props.ui, appConfig.ui.range))
 
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as any).value)
     }
 
-    const inputClass = computed(() => {
+    const wrapperClass = computed(() => {
       return classNames(
-        ui.value.base,
-        ui.value.thumb.base.replaceAll('{color}', props.color),
-        ui.value.thumb.size[props.size],
+        ui.value.wrapper,
         ui.value.size[props.size]
       )
     })
 
-    const wrapperClass = computed(() => {
+    const inputClass = computed(() => {
       return classNames(
-        ui.value.wrapper.replaceAll('{color}', props.color),
-        ui.value.size[props.size],
-        props.disabled ? ui.value.disabled : ''
+        ui.value.base,
+        ui.value.background,
+        ui.value.rounded,
+        ui.value.size[props.size]
       )
     })
 
-    // eslint-disable-next-line vue/no-dupe-keys
-    return { ui, onInput, inputClass, wrapperClass }
+    const thumbClass = computed(() => {
+      return classNames(
+        ui.value.thumb.base,
+        // Intermediate class to allow thumb ring color as it's impossible to safelist with arbitrary values
+        ui.value.thumb.color.replaceAll('{color}', props.color),
+        ui.value.thumb.ring,
+        ui.value.thumb.background,
+        ui.value.thumb.size[props.size]
+      )
+    })
+
+    const progressClass = computed(() => {
+      return classNames(
+        ui.value.progress.base,
+        ui.value.progress.rounded,
+        ui.value.progress.background.replaceAll('{color}', props.color),
+        ui.value.size[props.size]
+      )
+    })
+
+    const progressStyle = computed(() => {
+      return {
+        width: `${(props.modelValue / props.max) * 100}%`
+      }
+    })
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      wrapperClass,
+      inputClass,
+      thumbClass,
+      progressClass,
+      progressStyle,
+      onInput
+    }
   }
 })
 </script>
