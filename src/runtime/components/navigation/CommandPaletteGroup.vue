@@ -150,6 +150,7 @@ export default defineComponent({
 </script>
 
 <style>
+/* TODO: APPLY WITH PREFIX IF AVAILABLE */
 mark {
   @apply bg-primary-400;
 }

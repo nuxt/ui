@@ -1,10 +1,11 @@
-import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin, resolvePath } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin, resolvePath, addTemplate } from '@nuxt/kit'
 import defaultColors from 'tailwindcss/colors.js'
 import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/defaultExtractor.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
-import appConfig from './runtime/app.config'
+import appConfig from './runtime/app.config.template'
+import Prefixer from "./runtime/utils/Prefixer";
 
 type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
 
@@ -68,14 +69,23 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
 
-    const appConfigFile = await resolvePath(resolve(runtimeDir, 'app.config'))
+    const appConfigFile = await resolvePath(resolve(runtimeDir, 'app.config.template'))
+    let finalAppConfigFile: string|undefined
 
     nuxt.hook('app:resolve', (app) => {
-      app.configs.push(appConfigFile)
+      app.configs.push(finalAppConfigFile || appConfigFile)
     })
 
-    nuxt.hook('tailwindcss:config', function (tailwindConfig) {
-      console.log(tailwindConfig.prefix)
+    nuxt.hook('tailwindcss:config', async function (tailwindConfig) {
+      // Use app config and apply prefixes to classes to create new
+      const appConfigContents = await import(appConfigFile)
+      const prefixer = new Prefixer(tailwindConfig.prefix)
+      const newConfig = prefixer.applyToConfig(appConfigContents)
+      const resolvedTemplate = addTemplate({
+        filename: 'app.config.ts',
+        getContents: () => `export default ${JSON.stringify(newConfig, undefined, 2)}`
+      })
+      finalAppConfigFile = resolvedTemplate.dst
 
       const globalColors: any = {
         ...(tailwindConfig.theme.colors || defaultColors),

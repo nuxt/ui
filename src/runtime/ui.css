@@ -2,8 +2,9 @@
   color-scheme: dark;
 }
 
+/* TODO: must apply with the prefix */
 a:focus-visible {
-  @apply outline-primary-500 dark:outline-primary-400;
+  @apply cwa-outline-primary-500 dark:cwa-outline-primary-400;
 }
 
 select {
