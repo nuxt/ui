@@ -7,8 +7,8 @@ export default defineNuxtPlugin({
     const appConfig = useAppConfig()
 
     const root = computed(() => {
-      const primary = colors[appConfig.ui.primary]
-      const gray = colors[appConfig.ui.gray]
+      const primary: Record<string, string> | undefined = colors[appConfig.ui.primary]
+      const gray: Record<string, string> | undefined = colors[appConfig.ui.gray]
 
       return `:root {
         ${Object.entries(primary || colors.green).map(([key, value]) => `--color-primary-${key}: ${hexToRgb(value)};`).join('\n')}
