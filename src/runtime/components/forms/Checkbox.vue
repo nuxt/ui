@@ -32,11 +32,11 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
+import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
-import { classNames } from '../../utils'
 
 // const appConfig = useAppConfig()
 
