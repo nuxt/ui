@@ -6,6 +6,7 @@ import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
 import appConfig from './runtime/app.config.template'
 import Prefixer from "./runtime/utils/Prefixer";
+import {Config} from "tailwindcss/types/config";
 
 type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
 
@@ -76,7 +77,7 @@ export default defineNuxtModule<ModuleOptions>({
       app.configs.push(finalAppConfigFile || appConfigFile)
     })
 
-    nuxt.hook('tailwindcss:config', async function (tailwindConfig) {
+    nuxt.hook('tailwindcss:config', async function (tailwindConfig: Config) {
       // Use app config and apply prefixes to classes to create new
       const appConfigContents = await import(appConfigFile)
       const prefixer = new Prefixer(tailwindConfig.prefix)
@@ -88,6 +89,7 @@ export default defineNuxtModule<ModuleOptions>({
       })
       finalAppConfigFile = resolvedTemplate.dst
 
+      const prefix = tailwindConfig.prefix || ''
       const uiCssTemplate = addTemplate({
         filename: 'ui.css',
         write: true,
@@ -96,7 +98,7 @@ export default defineNuxtModule<ModuleOptions>({
 }
 
 a:focus-visible {
-  @apply ${tailwindConfig.prefix}outline-primary-500 dark:${tailwindConfig.prefix}outline-primary-400;
+  @apply ${prefix}outline-primary-500 dark:${prefix}outline-primary-400;
 }
 
 select {
@@ -105,7 +107,7 @@ select {
 
 /* for CommandPaletteGroup - is there a better way to apply this as a style within component with prefix? It wasn't scoped in the component or anything */
 mark {
-  @apply ${tailwindConfig.prefix}bg-primary-400;
+  @apply ${prefix}bg-primary-400;
 }
 `
       })
@@ -167,7 +169,11 @@ mark {
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
 
-      tailwindConfig.content.files.push(resolvedTemplate.dst, uiCssTemplate.dst)
+      if (Array.isArray(tailwindConfig.content)) {
+        tailwindConfig.content.push(resolvedTemplate.dst, uiCssTemplate.dst)
+      } else {
+        tailwindConfig.content.files.push(resolvedTemplate.dst, uiCssTemplate.dst)
+      }
     })
 
     // Modules
