@@ -10,7 +10,7 @@
         :disabled="disabled"
         type="radio"
         class="form-radio"
-        :class="[ui.base, ui.custom]"
+        :class="[ui.base]"
         v-bind="$attrs"
         @focus="$emit('focus', $event)"
         @blur="$emit('blur', $event)"

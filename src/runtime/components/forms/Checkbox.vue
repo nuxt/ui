@@ -12,7 +12,7 @@
         :indeterminate="indeterminate"
         type="checkbox"
         class="form-checkbox"
-        :class="[ui.base, ui.rounded, ui.custom]"
+        :class="[ui.base, ui.rounded]"
         v-bind="$attrs"
         @focus="$emit('focus', $event)"
         @blur="$emit('blur', $event)"
