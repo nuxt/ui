@@ -58,14 +58,14 @@ export default defineComponent({
     size: {
       type: String,
       default: () => appConfig.ui.range.default.size,
-      validator(value: string) {
+      validator (value: string) {
         return Object.keys(appConfig.ui.range.size).includes(value)
       }
     },
     color: {
       type: String,
       default: () => appConfig.ui.range.default.color,
-      validator(value: string) {
+      validator (value: string) {
         return appConfig.ui.colors.includes(value)
       }
     },
@@ -75,7 +75,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue'],
-  setup(props, { emit }) {
+  setup (props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -141,7 +141,7 @@ export default defineComponent({
       inputClass,
       thumbClass,
       progressClass,
-      progressStyle,
+      progressStyle
     }
   }
 })
