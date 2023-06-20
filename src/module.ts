@@ -88,17 +88,21 @@ export default defineNuxtModule<ModuleOptions>({
         getContents: () => `export default ${JSON.stringify(newConfig, undefined, 2)}`
       })
       finalAppConfigFile = resolvedTemplate.dst
+      nuxt.options.colorMode = {
+        ...nuxt.options.colorMode,
+        classPrefix: tailwindConfig.prefix
+      }
 
-      const prefix = tailwindConfig.prefix || ''
+      const prefixStr = tailwindConfig.prefix || ''
       const uiCssTemplate = addTemplate({
         filename: 'ui.css',
         write: true,
-        getContents: () => `.dark {
+        getContents: () => `.${prefixStr}dark {
   color-scheme: dark;
 }
 
 a:focus-visible {
-  @apply ${prefix}outline-primary-500 dark:${prefix}outline-primary-400;
+  @apply ${prefixStr}outline-primary-500 dark:${prefixStr}outline-primary-400;
 }
 
 select {
@@ -107,7 +111,7 @@ select {
 
 /* for CommandPaletteGroup - is there a better way to apply this as a style within component with prefix? It wasn't scoped in the component or anything */
 mark {
-  @apply ${prefix}bg-primary-400;
+  @apply ${prefixStr}bg-primary-400;
 }
 `
       })
@@ -178,7 +182,7 @@ mark {
 
     // Modules
 
-    await installModule('@nuxtjs/color-mode', { classSuffix: '' })
+    await installModule('@nuxtjs/color-mode', { classSuffix: '', classPrefix: 'cwa-' })
     await installModule('@nuxtjs/tailwindcss', {
       exposeConfig: true,
       config: {
