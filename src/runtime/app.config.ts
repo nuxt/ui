@@ -521,7 +521,7 @@ const range = {
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   thumb: {
-    base: `[&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full`,
+    base: `[&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0`,
     color: 'text-{color}-500 dark:text-{color}-400',
     background: '[&::-webkit-slider-thumb]:bg-white [&::-moz-range-thumb]:bg-white [&::-webkit-slider-thumb]:dark:bg-gray-900 [&::-moz-range-thumb]:dark:bg-gray-900',
     ring: '[&::-webkit-slider-thumb]:ring-2 [&::-moz-range-thumb]:ring-2 [&::-webkit-slider-thumb]:ring-current [&::-moz-range-thumb]:ring-current',
