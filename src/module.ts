@@ -67,7 +67,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
-    nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
+
 
     const appConfigFile = await resolvePath(resolve(runtimeDir, 'app.config.template'))
     let finalAppConfigFile: string|undefined
@@ -86,6 +86,28 @@ export default defineNuxtModule<ModuleOptions>({
         getContents: () => `export default ${JSON.stringify(newConfig, undefined, 2)}`
       })
       finalAppConfigFile = resolvedTemplate.dst
+
+      const uiCssTemplate = addTemplate({
+        filename: 'ui.css',
+        getContents: () => `.dark {
+  color-scheme: dark;
+}
+
+a:focus-visible {
+  @apply ${tailwindConfig.prefix}outline-primary-500 dark:${tailwindConfig.prefix}outline-primary-400;
+}
+
+select {
+  background-image: none;
+}
+
+/* for CommandPaletteGroup - is there a better way to apply this as a style within component with prefix? It wasn't scoped in the component or anything */
+mark {
+  @apply ${tailwindConfig.prefix}bg-primary-400;
+}
+`
+      })
+      nuxt.options.css.push(uiCssTemplate.dst)
 
       const globalColors: any = {
         ...(tailwindConfig.theme.colors || defaultColors),
@@ -142,6 +164,7 @@ export default defineNuxtModule<ModuleOptions>({
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
+      console.log(tailwindConfig)
     })
 
     // Modules

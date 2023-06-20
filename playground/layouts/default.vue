@@ -1,11 +1,11 @@
 <template>
-  <div class="p-10">
-    <div class="container mx-auto">
-      <div class="flex flex-row">
-        <div class="basis-40">
+  <div class="cwa-p-10">
+    <div class="cwa-container cwa-mx-auto">
+      <div class="cwa-flex cwa-flex-row">
+        <div class="cwa-basis-40">
           <UVerticalNavigation :links="links" />
         </div>
-        <div class="pl-5 grow">
+        <div class="cwa-pl-5 cwa-grow">
           <slot />
         </div>
       </div>
