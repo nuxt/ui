@@ -83,12 +83,14 @@ export default defineNuxtModule<ModuleOptions>({
       const newConfig = prefixer.applyToConfig(appConfigContents)
       const resolvedTemplate = addTemplate({
         filename: 'app.config.ts',
+        write: true,
         getContents: () => `export default ${JSON.stringify(newConfig, undefined, 2)}`
       })
       finalAppConfigFile = resolvedTemplate.dst
 
       const uiCssTemplate = addTemplate({
         filename: 'ui.css',
+        write: true,
         getContents: () => `.dark {
   color-scheme: dark;
 }
@@ -164,7 +166,8 @@ mark {
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
-      console.log(tailwindConfig)
+
+      tailwindConfig.content.files.push(resolvedTemplate.dst, uiCssTemplate.dst)
     })
 
     // Modules
