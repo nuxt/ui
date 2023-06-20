@@ -119,13 +119,9 @@ mark {
       })
       nuxt.options.css.push(uiCssTemplate.dst)
 
-      /*
-      TODO: MISSING CLASSES EG FOR VERTICAL NAV:
-      :is(.dark .dark\:hover\:before\:bg-gray-800\/50:hover):before {
-    background-color: rgb(var(--color-gray-800)/.5);
-    content: var(--tw-content);
-}
-       */
+      // TODO: ring-primary-400 would not exist in the tailwind classes static file as primary is a custom colour name... we need to figure out how to fix this
+      console.log(prefixer.applyTailwindPrefix(`<div class="dark:focus:ring-primary-400 dark:hover:before:bg-gray-800/50"></div>`))
+
       const globalColors: any = {
         ...(tailwindConfig.theme.colors || defaultColors),
         ...tailwindConfig.theme.extend?.colors

@@ -34,12 +34,12 @@ export default class Prefixer {
     return config
   }
 
-  private applyTailwindPrefix(code: string) {
+  public applyTailwindPrefix(code: string) {
     const escapeRegExp = (s) => s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
 
     for (const twCls of TailwindClasses) {
       const exp = new RegExp(
-        `(["':\\s])(?!${this.prefix})(-?${escapeRegExp(twCls)})(?![-/])`,
+        `(["':\\s])(?!${this.prefix})(-?${escapeRegExp(twCls)})(?![-])`,
         'g',
       )
       code = ` ${code}`.replace(exp, `$1${this.prefix}$2`).trimStart()
