@@ -27,10 +27,10 @@ const kebabCase = (str: string) => {
 
 const safelistByComponent = {
   avatar: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
-  }, {
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
   }],
   badge: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-50`)
@@ -38,15 +38,15 @@ const safelistByComponent = {
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
-  }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-500`)
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
   }, {
     pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
     variants: ['dark']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`)
   }],
   button: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-50`),
@@ -103,16 +103,33 @@ const safelistByComponent = {
     pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
     variants: ['focus']
   }],
-  notification: (colorsAsRegex) => [{
+  range: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
     pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['dark']
   }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-500`)
   }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark:focus-visible']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    variants: ['focus-visible']
+  }],
+  notification: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+  }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
   }]
 }
 
@@ -127,7 +144,7 @@ const colorsAsRegex = (colors: string[]): string => colors.join('|')
 export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
 
 export const generateSafelist = (colors: string[]) => {
-  const safelist = ['avatar', 'badge', 'button', 'input', 'notification'].flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
+  const safelist = ['avatar', 'badge', 'button', 'input', 'range', 'notification'].flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
 
   return [
     ...safelist,

@@ -77,7 +77,7 @@ import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()
 
-function defaultComparator<T>(a: T, z: T): boolean {
+function defaultComparator<T> (a: T, z: T): boolean {
   return a === z
 }
 
