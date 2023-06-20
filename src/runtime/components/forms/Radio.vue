@@ -3,14 +3,14 @@
     <div class="flex items-center h-5">
       <input
         :id="`${name}-${value}`"
-        v-model="isChecked"
+        v-model="pick"
         :name="name"
         :required="required"
         :value="value"
         :disabled="disabled"
         type="radio"
         class="form-radio"
-        :class="classStyle"
+        :class="inputClass"
         v-bind="$attrs"
         @focus="$emit('focus', $event)"
         @blur="$emit('blur', $event)"
@@ -75,7 +75,7 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.radio.default.color,
       validator (value: string) {
-        return [...appConfig.ui.colors].includes(value)
+        return appConfig.ui.colors.includes(value)
       }
     },
     ui: {
@@ -90,7 +90,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.radio>>(() => defu({}, props.ui, appConfig.ui.radio))
 
-    const isChecked = computed({
+    const pick = computed({
       get () {
         return props.modelValue
       },
@@ -99,17 +99,21 @@ export default defineComponent({
       }
     })
 
-    const classStyle = computed(() => {
+    const inputClass = computed(() => {
       return classNames(
-        ui.value.base.replaceAll('{color}', props.color)
+        ui.value.base,
+        ui.value.background,
+        ui.value.border,
+        ui.value.ring.replaceAll('{color}', props.color),
+        ui.value.color.replaceAll('{color}', props.color)
       )
     })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      isChecked,
-      classStyle
+      pick,
+      inputClass
     }
   }
 })

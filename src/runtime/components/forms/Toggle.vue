@@ -3,14 +3,14 @@
     v-model="active"
     :name="name"
     :disabled="disabled"
-    :class="classStyle"
+    :class="switchClass"
   >
     <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
       <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
         <UIcon :name="onIcon" :class="onIconClass" />
       </span>
       <span v-if="offIcon" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]" aria-hidden="true">
-        <UIcon :name="offIcon" :class="ui.icon.off" />
+        <UIcon :name="offIcon" :class="offIconClass" />
       </span>
     </span>
   </Switch>
@@ -61,7 +61,7 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.toggle.default.color,
       validator (value: string) {
-        return [...appConfig.ui.colors].includes(value)
+        return appConfig.ui.colors.includes(value)
       }
     },
     ui: {
@@ -85,10 +85,12 @@ export default defineComponent({
       }
     })
 
-    const classStyle = computed(()=>{
+    const switchClass = computed(()=>{
       return classNames(
-        active.value ? ui.value.active.replaceAll('{color}', props.color) : ui.value.inactive,
-        ui.value.base.replaceAll('{color}', props.color)
+        ui.value.base,
+        ui.value.rounded,
+        ui.value.ring.replaceAll('{color}', props.color),
+        (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', props.color)
       )
     })
 
@@ -98,12 +100,19 @@ export default defineComponent({
       )
     })
 
+    const offIconClass = computed(()=>{
+      return classNames(
+        ui.value.icon.off.replaceAll('{color}', props.color)
+      )
+    })
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       active,
-      classStyle,
-      onIconClass
+      switchClass,
+      onIconClass,
+      offIconClass
     }
   }
 })

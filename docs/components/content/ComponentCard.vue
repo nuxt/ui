@@ -7,7 +7,6 @@
           v-if="prop.type === 'boolean'"
           v-model="componentProps[prop.name]"
           :name="`prop-${prop.name}`"
-          variant="none"
           :ui="{ wrapper: 'relative flex items-start justify-center' }"
         />
         <USelectMenu

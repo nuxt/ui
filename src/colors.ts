@@ -98,6 +98,47 @@ const safelistByComponent = {
     pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
     variants: ['focus']
   }],
+  radio: (colorsAsRegex) => [{
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark:focus-visible']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    variants: ['focus-visible']
+  }],
+  checkbox: (colorsAsRegex) => [{
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark:focus-visible']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    variants: ['focus-visible']
+  }],
+  toggle: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark:focus-visible']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    variants: ['focus-visible']
+  }],
   range: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']

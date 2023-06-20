@@ -3,7 +3,7 @@
     <div class="flex items-center h-5">
       <input
         :id="name"
-        v-model="isChecked"
+        v-model="toggle"
         :name="name"
         :required="required"
         :value="value"
@@ -12,10 +12,8 @@
         :indeterminate="indeterminate"
         type="checkbox"
         class="form-checkbox"
-        :class="classStyle"
+        :class="inputClass"
         v-bind="$attrs"
-        @focus="$emit('focus', $event)"
-        @blur="$emit('blur', $event)"
       >
     </div>
     <div v-if="label || $slots.label" class="ml-3 text-sm">
@@ -85,7 +83,7 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.checkbox.default.color,
       validator (value: string) {
-        return [...appConfig.ui.colors].includes(value)
+        return appConfig.ui.colors.includes(value)
       }
     },
     ui: {
@@ -100,7 +98,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.checkbox>>(() => defu({}, props.ui, appConfig.ui.checkbox))
 
-    const isChecked = computed({
+    const toggle = computed({
       get () {
         return props.modelValue
       },
@@ -109,18 +107,22 @@ export default defineComponent({
       }
     })
 
-    const classStyle = computed(() => {
+    const inputClass = computed(() => {
       return classNames(
-        ui.value.base.replaceAll('{color}', props.color),
-        ui.value.rounded
+        ui.value.base,
+        ui.value.rounded,
+        ui.value.background,
+        ui.value.border,
+        ui.value.ring.replaceAll('{color}', props.color),
+        ui.value.color.replaceAll('{color}', props.color)
       )
     })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      isChecked,
-      classStyle
+      toggle,
+      inputClass
     }
   }
 })
