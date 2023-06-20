@@ -112,7 +112,7 @@ export default defineComponent({
     const classStyle = computed(() => {
       return classNames(
         ui.value.base.replaceAll('{color}', props.color),
-        ui.value.rounded,
+        ui.value.rounded
       )
     })
 
