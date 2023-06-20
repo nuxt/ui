@@ -7,6 +7,7 @@
           v-if="prop.type === 'boolean'"
           v-model="componentProps[prop.name]"
           :name="`prop-${prop.name}`"
+          tabindex="-1"
           :ui="{ wrapper: 'relative flex items-start justify-center' }"
         />
         <USelectMenu
@@ -17,6 +18,7 @@
           variant="none"
           :ui="{ width: 'w-32 !-mt-px', rounded: 'rounded-b-md', wrapper: 'relative inline-flex' }"
           class="!py-0"
+          tabindex="-1"
           :popper="{ strategy: 'fixed', placement: 'bottom-start' }"
         />
         <UInput
@@ -27,6 +29,7 @@
           variant="none"
           autocomplete="off"
           class="!py-0"
+          tabindex="-1"
           @update:model-value="val => componentProps[prop.name] = prop.type === 'number' ? Number(val) : val"
         />
       </div>
