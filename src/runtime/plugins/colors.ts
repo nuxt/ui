@@ -8,8 +8,8 @@ export default defineNuxtPlugin(() => {
   const nuxtApp = useNuxtApp()
 
   const root = computed(() => {
-    const primary = colors[appConfig.ui.primary]
-    const gray = colors[appConfig.ui.gray]
+    const primary: Record<string, string> | undefined = colors[appConfig.ui.primary]
+    const gray: Record<string, string> | undefined = colors[appConfig.ui.gray]
 
     if (!primary) {
       console.warn(`[@nuxthq/ui] Primary color '${appConfig.ui.primary}' not found in Tailwind config`)
