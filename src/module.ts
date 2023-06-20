@@ -68,8 +68,6 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
-
-
     const appConfigFile = await resolvePath(resolve(runtimeDir, 'app.config.template'))
     let finalAppConfigFile: string|undefined
 
@@ -78,6 +76,10 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     nuxt.hook('tailwindcss:config', async function (tailwindConfig: Config) {
+      nuxt.options.colorMode= {
+        ...nuxt.options.colorMode,
+        classPrefix: 'cwa-'
+      }
       // Use app config and apply prefixes to classes to create new
       const appConfigContents = await import(appConfigFile)
       const prefixer = new Prefixer(tailwindConfig.prefix)
@@ -117,6 +119,13 @@ mark {
       })
       nuxt.options.css.push(uiCssTemplate.dst)
 
+      /*
+      TODO: MISSING CLASSES EG FOR VERTICAL NAV:
+      :is(.dark .dark\:hover\:before\:bg-gray-800\/50:hover):before {
+    background-color: rgb(var(--color-gray-800)/.5);
+    content: var(--tw-content);
+}
+       */
       const globalColors: any = {
         ...(tailwindConfig.theme.colors || defaultColors),
         ...tailwindConfig.theme.extend?.colors
@@ -181,8 +190,6 @@ mark {
     })
 
     // Modules
-
-    await installModule('@nuxtjs/color-mode', { classSuffix: '', classPrefix: 'cwa-' })
     await installModule('@nuxtjs/tailwindcss', {
       exposeConfig: true,
       config: {
@@ -214,6 +221,7 @@ mark {
         }
       }
     })
+    await installModule('@nuxtjs/color-mode', { classSuffix: '' })
 
     // Plugins
 

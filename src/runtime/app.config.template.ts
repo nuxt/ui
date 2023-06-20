@@ -753,7 +753,8 @@ const tooltip = {
   },
   popper: {
     strategy: 'fixed'
-  }
+  },
+  middot: 'mx-1 text-gray-700 dark:text-gray-200'
 }
 
 const popover = {

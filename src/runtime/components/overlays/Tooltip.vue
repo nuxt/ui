@@ -12,7 +12,7 @@
           </slot>
 
           <span v-if="shortcuts?.length" :class="ui.shortcuts">
-            <span class="mx-1 text-gray-700 dark:text-gray-200">&middot;</span>
+            <span :class="ui.middot">&middot;</span>
             <UKbd v-for="shortcut of shortcuts" :key="shortcut" size="xs">
               {{ shortcut }}
             </Ukbd>
