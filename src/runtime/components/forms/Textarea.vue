@@ -13,8 +13,6 @@
       :class="textareaClass"
       v-bind="$attrs"
       @input="onInput"
-      @focus="$emit('focus', $event)"
-      @blur="$emit('blur', $event)"
     />
   </div>
 </template>
@@ -103,7 +101,7 @@ export default defineComponent({
       default: () => appConfig.ui.textarea
     }
   },
-  emits: ['update:modelValue', 'focus', 'blur'],
+  emits: ['update:modelValue'],
   setup (props, { emit }) {
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
