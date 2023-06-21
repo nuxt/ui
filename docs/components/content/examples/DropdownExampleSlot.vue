@@ -7,49 +7,49 @@ const items = [
       descriotion: "Owner",
       points: "1000",
       avatar: {
-        src: "https://avatars.githubusercontent.com/u/739984?v=4",
-      },
+        src: "https://avatars.githubusercontent.com/u/739984?v=4"
+      }
     },
     {
       label: "Settings",
-      icon: "i-heroicons-cog-20-solid",
+      icon: "i-heroicons-cog-20-solid"
     },
     {
       label: "Upgrade To Pro",
       iconClass: "text-yellow-500 animate-pulse",
       icon: "i-heroicons-sparkles",
-      slot: "upgrade",
+      slot: "upgrade"
     },
     {
       label: "History",
-      icon: "i-heroicons-clock-20-solid",
+      icon: "i-heroicons-clock-20-solid"
     },
     {
       label: "Logout",
-      icon: "i-heroicons-arrow-right-on-rectangle",
-    },
-  ],
+      icon: "i-heroicons-arrow-right-on-rectangle"
+    }
+  ]
 ];
 
 const branches = [
   [
     {
       label: "Branch 1",
-      mail: "example@mail.com",
+      mail: "example@mail.com"
     },
     {
       label: "Branch 2",
-      mail: "example@mail.com",
+      mail: "example@mail.com"
     },
     {
       label: "Branch 3",
-      mail: "example@mail.com",
+      mail: "example@mail.com"
     },
     {
       label: "Branch 4",
-      mail: "example@mail.com",
-    },
-  ],
+      mail: "example@mail.com"
+    }
+  ]
 ];
 </script>
 
