@@ -40,6 +40,7 @@ import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { prefix as tailwindPrefix } from '#tailwind-config'
 
 // const appConfig = useAppConfig()
 
@@ -171,7 +172,8 @@ export default defineComponent({
         ui.value.rounded,
         ui.value.placeholder,
         ui.value.size[props.size],
-        props.padded ? ui.value.padding[props.size] : 'p-0',
+        // todo: fallback will not apply prefix like this
+        props.padded ? ui.value.padding[props.size] : `${tailwindPrefix || ''}p-0`,
         variant?.replaceAll('{color}', props.color),
         (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size]

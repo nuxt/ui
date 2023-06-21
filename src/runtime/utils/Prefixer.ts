@@ -1,5 +1,3 @@
-import TailwindClasses from "./tailwind-classes";
-
 interface AppComponentConfig {
   [component: string]: string|AppComponentConfig
 }
@@ -10,7 +8,14 @@ interface AppConfig {
 }
 
 export default class Prefixer {
+  private excludeConfigKeys: string[];
+
   public constructor(private prefix: string|undefined) {
+    this.excludeConfigKeys = [
+      'size',
+      'chipPosition',
+      'variant'
+    ]
   }
 
   public applyToConfig(config: AppConfig) {
@@ -23,28 +28,47 @@ export default class Prefixer {
     return config
   }
 
-  private createPrefixedComponentConfig(config: AppComponentConfig) {
+  private createPrefixedComponentConfig(config: AppComponentConfig, prefixKeys: boolean = false) {
+    const newConfig = {}
     for (const [configKey, data] of Object.entries(config)) {
+      const newConfigKey = prefixKeys ? `${this.prefix}${configKey}` : configKey
+
       if (typeof data === 'string') {
-        config[configKey] = this.applyTailwindPrefix(data)
+        // if it is size and a string then it is a literal ref to an object key - skip
+        if (this.excludeConfigKeys.includes(configKey)) {
+          newConfig[newConfigKey] = data
+          continue
+        }
+
+        newConfig[newConfigKey] = this.applyTailwindPrefix(data)
         continue
       }
-      config[configKey] = data === null ? null : this.createPrefixedComponentConfig(data)
+      newConfig[newConfigKey] = data === null ? null : this.createPrefixedComponentConfig(data, configKey === 'color')
     }
-    return config
+    return newConfig
   }
 
-  public applyTailwindPrefix(code: string) {
-    const escapeRegExp = (s) => s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+  private applyTailwindPrefix(classStr: string) {
+    const classes = classStr.split(' ')
+    const prefixedClasses = []
+    for (const cls of classes) {
+      if (cls.trim() === '') {
+        continue
+      }
+      if (cls.startsWith('i-')) {
+        prefixedClasses.push(cls)
+        continue
+      }
+      const modifierSeperator = ':'
+      const sliceIndex = cls.lastIndexOf(modifierSeperator) + 1
+      if (sliceIndex === 0) {
+        prefixedClasses.push(`${this.prefix}${cls}`)
+      } else {
+        const prefixesCls = cls.slice(0, sliceIndex) + this.prefix + cls.slice(sliceIndex)
+        prefixedClasses.push(prefixesCls)
+      }
 
-    for (const twCls of TailwindClasses) {
-      const exp = new RegExp(
-        `(["':\\s])(?!${this.prefix})(-?${escapeRegExp(twCls)})(?![-])`,
-        'g',
-      )
-      code = ` ${code}`.replace(exp, `$1${this.prefix}$2`).trimStart()
     }
-
-    return code
+    return prefixedClasses.join(' ')
   }
 }

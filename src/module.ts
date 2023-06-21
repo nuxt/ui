@@ -76,24 +76,22 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     nuxt.hook('tailwindcss:config', async function (tailwindConfig: Config) {
-      nuxt.options.colorMode= {
+      nuxt.options.colorMode = {
         ...nuxt.options.colorMode,
-        classPrefix: 'cwa-'
+        classPrefix: tailwindConfig.prefix
       }
+
       // Use app config and apply prefixes to classes to create new
-      const appConfigContents = await import(appConfigFile)
       const prefixer = new Prefixer(tailwindConfig.prefix)
-      const newConfig = prefixer.applyToConfig(appConfigContents)
+      const appConfig = await import(appConfigFile)
+      const newConfig = prefixer.applyToConfig(appConfig)
+
       const resolvedTemplate = addTemplate({
         filename: 'app.config.ts',
         write: true,
         getContents: () => `export default ${JSON.stringify(newConfig, undefined, 2)}`
       })
       finalAppConfigFile = resolvedTemplate.dst
-      nuxt.options.colorMode = {
-        ...nuxt.options.colorMode,
-        classPrefix: tailwindConfig.prefix
-      }
 
       const prefixStr = tailwindConfig.prefix || ''
       const uiCssTemplate = addTemplate({
@@ -118,9 +116,6 @@ mark {
 `
       })
       nuxt.options.css.push(uiCssTemplate.dst)
-
-      // TODO: ring-primary-400 would not exist in the tailwind classes static file as primary is a custom colour name... we need to figure out how to fix this
-      console.log(prefixer.applyTailwindPrefix(`<div class="dark:focus:ring-primary-400 dark:hover:before:bg-gray-800/50"></div>`))
 
       const globalColors: any = {
         ...(tailwindConfig.theme.colors || defaultColors),
