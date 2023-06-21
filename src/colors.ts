@@ -139,9 +139,10 @@ export const generateSafelist = (colors: string[]) => {
   ]
 }
 
-export const customSafelistExtractor = (prefix, content: string, colors: string[]) => {
+export const customSafelistExtractor = (prefix, content: string, colors: string[], safelistColors: string[]) => {
   const classes = []
-  const regex = /<(\w+)\s+[^>:]*color=["']([^"']+)["'][^>]*>/gs
+  const regex = /<(\w+)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/gs
+
   const matches = content.matchAll(regex)
 
   const components = Object.keys(safelistByComponent).map(component => `${prefix}${component.charAt(0).toUpperCase() + component.slice(1)}`)
@@ -149,7 +150,7 @@ export const customSafelistExtractor = (prefix, content: string, colors: string[
   for (const match of matches) {
     const [, component, color] = match
 
-    if (!colors.includes(color)) {
+    if (!colors.includes(color) || safelistColors.includes(color)) {
       continue
     }
 
