@@ -26,12 +26,17 @@
         />
       </div>
     </div>
-    <p v-if="page.description" class="mt-4 text-lg">
+    <p v-if="page.description" class="mt-4 text-lg text-gray-500 dark:text-gray-400">
       {{ page.description }}
     </p>
   </header>
 </template>
 
 <script setup lang="ts">
-const { page } = useContent()
+defineProps({
+  page: {
+    type: Object,
+    default: null
+  }
+})
 </script>

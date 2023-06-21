@@ -6,7 +6,7 @@
 
     <div v-if="open && !prevent" ref="container" :class="[ui.container, ui.width]">
       <transition appear v-bind="ui.transition">
-        <div :class="[ui.base, ui.background, ui.rounded, ui.shadow, ui.ring]">
+        <div :class="[ui.base, ui.background, ui.color, ui.rounded, ui.shadow, ui.ring]">
           <slot name="text">
             {{ text }}
           </slot>

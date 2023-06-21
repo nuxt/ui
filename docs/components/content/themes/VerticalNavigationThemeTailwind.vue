@@ -1,13 +1,22 @@
 <script setup>
 const links = [{
+  label: 'Introduction',
+  to: '/getting-started'
+}, {
   label: 'Installation',
   to: '/getting-started/installation'
 }, {
-  label: 'Vertical Navigation',
-  to: '/navigation/vertical-navigation'
+  label: 'Theming',
+  to: '/getting-started/theming'
 }, {
-  label: 'Command Palette',
-  to: '/navigation/command-palette'
+  label: 'Shortcuts',
+  to: '/getting-started/shortcuts'
+}, {
+  label: 'Examples',
+  to: '/getting-started/examples'
+}, {
+  label: 'Roadmap',
+  to: '/getting-started/roadmap'
 }]
 </script>
 

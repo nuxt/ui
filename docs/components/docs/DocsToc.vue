@@ -13,7 +13,12 @@
 </template>
 
 <script setup lang="ts">
-const { toc } = useContent()
+defineProps({
+  toc: {
+    type: Object,
+    default: null
+  }
+})
 
 const isTocOpen = ref(false)
 </script>
