@@ -9,7 +9,7 @@
       "require": "./dist/module.cjs"
     }
   },
-  "main": "./src/module.ts",
+  "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
   "files": [
     "dist"
