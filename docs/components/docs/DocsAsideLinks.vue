@@ -1,9 +1,9 @@
 <template>
   <div class="space-y-8">
     <div v-for="(group, index) in navigation" :key="index" class="space-y-3">
-      <div class="text-sm font-semibold text-gray-900 dark:text-gray-200">
-        <span class="truncate">{{ group.title }}</span>
-      </div>
+      <p class="text-sm font-semibold text-gray-900 dark:text-gray-200 truncate leading-6">
+        {{ group.title }}
+      </p>
 
       <UVerticalNavigation
         :links="mapContentLinks(group.children)"
@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 
-const { navigation } = useContent() as { navigation: NavItem[] }
+const navigation: Ref<NavItem[]> = inject('navigation')
 
 function mapContentLinks (links: NavItem[]) {
   return links?.map(link => ({ label: link.title, icon: link.icon, to: link._path, badge: link.badge })) || []

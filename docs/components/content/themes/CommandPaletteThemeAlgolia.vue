@@ -1,7 +1,7 @@
 <script setup>
 const commandPaletteRef = ref()
 
-const { navigation } = useContent()
+const navigation = inject('navigation')
 
 const { data: files } = await useLazyAsyncData('search', () => queryContent().where({ _type: 'markdown' }).find(), { default: () => [] })
 

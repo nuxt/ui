@@ -15,7 +15,6 @@ export default defineNuxtConfig({
     'nuxt-component-meta'
   ],
   content: {
-    documentDriven: true,
     highlight: {
       theme: {
         light: 'material-lighter',

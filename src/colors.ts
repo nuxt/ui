@@ -27,10 +27,10 @@ const kebabCase = (str: string) => {
 
 const safelistByComponent = {
   avatar: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
-  }, {
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
   }],
   badge: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-50`)
@@ -38,15 +38,15 @@ const safelistByComponent = {
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
-  }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-500`)
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
   }, {
     pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
     variants: ['dark']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`)
   }],
   button: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-50`),
@@ -92,23 +92,92 @@ const safelistByComponent = {
     variants: ['focus-visible']
   }],
   input: (colorsAsRegex) => [{
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
     pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
     variants: ['dark', 'dark:focus']
   }, {
     pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
     variants: ['focus']
   }],
-  notification: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
-  }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+  radio: (colorsAsRegex) => [{
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['dark']
   }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-500`)
   }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark:focus-visible']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    variants: ['focus-visible']
+  }],
+  checkbox: (colorsAsRegex) => [{
     pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark:focus-visible']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    variants: ['focus-visible']
+  }],
+  toggle: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark:focus-visible']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    variants: ['focus-visible']
+  }],
+  range: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark:focus-visible']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    variants: ['focus-visible']
+  }],
+  notification: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
   }]
+}
+
+const safelistComponentAliasesMap = {
+  'USelect': 'UInput',
+  'USelectMenu': 'UInput',
+  'UTextarea': 'UInput'
 }
 
 const colorsAsRegex = (colors: string[]): string => colors.join('|')
@@ -116,7 +185,7 @@ const colorsAsRegex = (colors: string[]): string => colors.join('|')
 export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
 
 export const generateSafelist = (colors: string[]) => {
-  const safelist = ['avatar', 'badge', 'button', 'input', 'notification'].flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
+  const safelist = Object.keys(safelistByComponent).flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
 
   return [
     ...safelist,
@@ -128,34 +197,41 @@ export const generateSafelist = (colors: string[]) => {
   ]
 }
 
-export const customSafelistExtractor = (prefix, content: string, colors: string[]) => {
+export const customSafelistExtractor = (prefix, content: string, colors: string[], safelistColors: string[]) => {
   const classes = []
-  const regex = /<(\w+)\s+[^>:]*color=["']([^"']+)["'][^>]*>/gs
+  const regex = /<(\w+)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/gs
+
   const matches = content.matchAll(regex)
+
+  const components = Object.keys(safelistByComponent).map(component => `${prefix}${component.charAt(0).toUpperCase() + component.slice(1)}`)
 
   for (const match of matches) {
     const [, component, color] = match
 
-    if (!colors.includes(color)) {
+    if (!colors.includes(color) || safelistColors.includes(color)) {
       continue
     }
 
-    if (Object.keys(safelistByComponent).map(component => `${prefix}${component.charAt(0).toUpperCase() + component.slice(1)}`).includes(component)) {
-      const name = component.replace(prefix, '').toLowerCase()
+    let name = safelistComponentAliasesMap[component] ? safelistComponentAliasesMap[component] : component
 
-      const matchClasses = safelistByComponent[name](color).flatMap(group => {
-        return ['', ...(group.variants || [])].flatMap(variant => {
-          const matches = group.pattern.source.match(/\(([^)]+)\)/g)
-
-          return matches.map(match => {
-            const colorOptions = match.substring(1, match.length - 1).split('|')
-            return colorOptions.map(color => `${variant ? variant + ':' : ''}` + group.pattern.source.replace(match, color))
-          }).flat()
-        })
-      })
-
-      classes.push(...matchClasses)
+    if (!components.includes(name)) {
+      continue
     }
+
+    name = name.replace(prefix, '').toLowerCase()
+
+    const matchClasses = safelistByComponent[name](color).flatMap(group => {
+      return ['', ...(group.variants || [])].flatMap(variant => {
+        const matches = group.pattern.source.match(/\(([^)]+)\)/g)
+
+        return matches.map(match => {
+          const colorOptions = match.substring(1, match.length - 1).split('|')
+          return colorOptions.map(color => `${variant ? variant + ':' : ''}` + group.pattern.source.replace(match, color))
+        }).flat()
+      })
+    })
+
+    classes.push(...matchClasses)
   }
 
   return classes

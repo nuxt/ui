@@ -165,7 +165,7 @@ export default defineComponent({
       default: () => appConfig.ui.select
     }
   },
-  emits: ['update:modelValue', 'focus', 'blur'],
+  emits: ['update:modelValue'],
   setup (props, { emit, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
