@@ -11,7 +11,7 @@ const table = {
     selected: 'bg-gray-50 dark:bg-gray-800/50'
   },
   th: {
-    base: 'text-left',
+    base: 'text-left rtl:text-right',
     padding: 'px-3 py-3.5',
     color: 'text-gray-900 dark:text-white',
     font: 'font-semibold',
@@ -213,7 +213,7 @@ const buttonGroup = {
 }
 
 const dropdown = {
-  wrapper: 'relative inline-flex text-left',
+  wrapper: 'relative inline-flex text-left rtl:text-right',
   container: 'z-20',
   width: 'w-48',
   height: '',
@@ -307,22 +307,22 @@ const input = {
   },
   leading: {
     padding: {
-      '2xs': 'pl-7',
-      xs: 'pl-8',
-      sm: 'pl-9',
-      md: 'pl-10',
-      lg: 'pl-11',
-      xl: 'pl-12'
+      '2xs': 'ps-7',
+      xs: 'ps-8',
+      sm: 'ps-9',
+      md: 'ps-10',
+      lg: 'ps-11',
+      xl: 'ps-12'
     }
   },
   trailing: {
     padding: {
-      '2xs': 'pr-7',
-      xs: 'pr-8',
-      sm: 'pr-9',
-      md: 'pr-10',
-      lg: 'pr-11',
-      xl: 'pr-12'
+      '2xs': 'pe-7',
+      xs: 'pe-8',
+      sm: 'pe-9',
+      md: 'pe-10',
+      lg: 'pe-11',
+      xl: 'pe-12'
     }
   },
   color: {
@@ -352,24 +352,24 @@ const input = {
       wrapper: 'absolute inset-y-0 left-0 flex items-center',
       pointer: 'pointer-events-none',
       padding: {
-        '2xs': 'pl-2',
-        xs: 'pl-2.5',
-        sm: 'pl-2.5',
-        md: 'pl-3',
-        lg: 'pl-3.5',
-        xl: 'pl-3.5'
+        '2xs': 'ps-2',
+        xs: 'ps-2.5',
+        sm: 'ps-2.5',
+        md: 'ps-3',
+        lg: 'ps-3.5',
+        xl: 'ps-3.5'
       }
     },
     trailing: {
       wrapper: 'absolute inset-y-0 right-0 flex items-center',
       pointer: 'pointer-events-none',
       padding: {
-        '2xs': 'pr-2',
-        xs: 'pr-2.5',
-        sm: 'pr-2.5',
-        md: 'pr-3',
-        lg: 'pr-3.5',
-        xl: 'pr-3.5'
+        '2xs': 'pe-2',
+        xs: 'pe-2.5',
+        sm: 'pe-2.5',
+        md: 'pe-3',
+        lg: 'pe-3.5',
+        xl: 'pe-3.5'
       }
     }
   },
@@ -437,7 +437,7 @@ const selectMenu = {
     container: 'flex items-center gap-2 min-w-0',
     active: 'bg-gray-100 dark:bg-gray-900',
     inactive: '',
-    selected: 'pr-7',
+    selected: 'pe-7',
     disabled: 'cursor-not-allowed opacity-50',
     empty: 'text-sm text-gray-400 dark:text-gray-500 px-2 py-1.5',
     icon: {
@@ -447,7 +447,7 @@ const selectMenu = {
     },
     selectedIcon: {
       wrapper: 'absolute inset-y-0 right-0 flex items-center',
-      padding: 'pr-2',
+      padding: 'pe-2',
       base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
     },
     avatar: {
@@ -640,7 +640,7 @@ const commandPalette = {
     icon: {
       base: 'pointer-events-none absolute left-4 text-gray-400 dark:text-gray-500',
       size: 'h-4 w-4',
-      padding: 'pl-10'
+      padding: 'ps-10'
     },
     closeButton: 'absolute right-4'
   },
@@ -699,7 +699,7 @@ const commandPalette = {
 const pagination = {
   wrapper: 'flex items-center -space-x-px',
   base: '',
-  rounded: 'first:rounded-l-md last:rounded-r-md',
+  rounded: 'first:rounded-s-md last:rounded-e-md',
   default: {
     size: 'sm',
     activeButton: {
@@ -726,7 +726,7 @@ const modal = {
   inner: 'fixed inset-0 overflow-y-auto',
   container: 'flex min-h-full items-end sm:items-center justify-center text-center',
   padding: 'p-4 sm:p-0',
-  base: 'relative text-left overflow-hidden sm:my-8 w-full flex flex-col',
+  base: 'relative text-left rtl:text-right overflow-hidden sm:my-8 w-full flex flex-col',
   overlay: {
     base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-200/75 dark:bg-gray-800/75',
