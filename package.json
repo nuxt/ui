@@ -25,7 +25,7 @@
     "lint": "eslint .",
     "typecheck": "nuxi typecheck",
     "prepare": "nuxi prepare docs",
-    "release": "pnpm lint && standard-version && git push --follow-tags"
+    "release": "release-it"
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.1.0",
@@ -55,6 +55,7 @@
     "@nuxt/module-builder": "^0.4.0",
     "@nuxthq/studio": "^0.13.2",
     "@nuxtjs/plausible": "^0.2.1",
+    "@release-it/conventional-changelog": "^5.1.1",
     "@types/lodash-es": "^4.17.7",
     "@types/node": "^20.3.1",
     "@vueuse/nuxt": "^10.1.2",
@@ -62,7 +63,7 @@
     "nuxt": "^3.5.3",
     "nuxt-component-meta": "^0.5.3",
     "nuxt-lodash": "^2.4.1",
-    "standard-version": "^9.5.0",
+    "release-it": "^15.11.0",
     "unbuild": "^1.2.1",
     "vue-tsc": "1.6.3"
   }

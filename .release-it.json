@@ -1,0 +1,22 @@
+{
+  "git": {
+    "commitMessage": "chore(release): ${version}"
+  },
+  "npm": {
+    "publish": false
+  },
+  "github": {
+    "release": true,
+    "web": true
+  },
+  "hooks": {
+    "before:init": ["pnpm lint"]
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "conventionalcommits",
+      "infile": "CHANGELOG.md",
+      "ignoreRecommendedBump": true
+    }
+  }
+}
