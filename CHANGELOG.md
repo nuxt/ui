@@ -1,4 +1,4 @@
-
+# Changelog
 
 ### [2.4.1](https://github.com/nuxtlabs/ui/compare/v2.4.0...v2.4.1) (2023-06-21)
 
@@ -11,9 +11,6 @@
 * **module:** safelist regex when a `:` was present before color ([f7e2082](https://github.com/nuxtlabs/ui/commit/f7e2082983c2eb650e95a9040aafde4ce2c88c54))
 * **Radio/Checkbox:** remove legacy `custom` ([3bac087](https://github.com/nuxtlabs/ui/commit/3bac0874f106a8ff7436b541f9d064c1c7c27464))
 
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ## [2.4.0](https://github.com/nuxtlabs/ui/compare/v2.3.0...v2.4.0) (2023-06-13)
 
