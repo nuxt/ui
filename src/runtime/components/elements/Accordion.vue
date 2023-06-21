@@ -84,7 +84,7 @@ export default defineComponent({
     Disclosure,
     DisclosureButton,
     DisclosurePanel,
-    UIcon,
+    UIcon
   },
   props: {
     items: {
@@ -95,48 +95,48 @@ export default defineComponent({
           opened?: boolean;
           disabled?: boolean;
         }[]>,
-      default: () => [],
+      default: () => []
     },
     defaultOpenAll: {
       type: Boolean,
-      default: false,
+      default: false
     },
     leadingIconClass: {
       type: String,
-      default: () => appConfig.ui.accordion.default.leadingIconClass,
+      default: () => appConfig.ui.accordion.default.leadingIconClass
     },
     openIcon: {
       type: String,
-      default: () => appConfig.ui.accordion.default.openIcon,
+      default: () => appConfig.ui.accordion.default.openIcon
     },
     closeIcon: {
       type: String,
-      default: () => appConfig.ui.accordion.default.closeIcon,
+      default: () => appConfig.ui.accordion.default.closeIcon
     },
     size: {
       type: String,
       default: () => appConfig.ui.accordion.default.size,
-      validator(value: string) {
+      validator (value: string) {
         return Object.keys(appConfig.ui.accordion.size).includes(value);
-      },
+      }
     },
     contentClass: {
       type: String,
-      default: () => appConfig.ui.accordion.default.contentClass,
+      default: () => appConfig.ui.accordion.default.contentClass
     },
     color: {
       type: String,
       default: () => appConfig.ui.accordion.default.color,
-      validator(value: string) {
+      validator (value: string) {
         return [...appConfig.ui.colors].includes(value);
-      },
+      }
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.accordion>>,
-      default: () => appConfig.ui.accordion,
-    },
+      default: () => appConfig.ui.accordion
+    }
   },
-  setup(props) {
+  setup (props) {
     // TODO: Remove
     const appConfig = useAppConfig();
 
@@ -146,8 +146,8 @@ export default defineComponent({
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      ui
     };
-  },
+  }
 });
 </script>

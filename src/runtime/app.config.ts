@@ -270,8 +270,8 @@ const accordion = {
         md: 'h-5 w-5',
         lg: 'h-6 w-6',
         xl: 'h-7 w-7'
-      },
-    },
+      }
+    }
   },
   size: {
     "2xs": "text-xs",
@@ -279,7 +279,7 @@ const accordion = {
     sm: "text-sm",
     md: "text-sm",
     lg: "text-lg",
-    xl: "text-xl",
+    xl: "text-xl"
   },
   gap: {
     '2xs': 'gap-y-0.5',
@@ -305,7 +305,7 @@ const accordion = {
     contentClass: "px-4 pt-4 pb-2 text-gray-500",
     leadingIconClass: 'me-2',
     openIcon: 'i-heroicons-chevron-down',
-    closeIcon: '',
+    closeIcon: ''
   }
 };
 
