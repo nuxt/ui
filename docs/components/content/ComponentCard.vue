@@ -47,7 +47,7 @@
       </component>
     </div>
 
-    <ContentRenderer v-if="! previewOnly" :value="ast" class="[&>div>pre]:!rounded-t-none" />
+    <ContentRenderer v-if="!previewOnly" :value="ast" class="[&>div>pre]:!rounded-t-none" />
   </div>
 </template>
 
