@@ -75,7 +75,7 @@ const avatar = {
     '3xl': 'h-20 w-20 text-2xl'
   },
   chip: {
-    base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900',
+    base: 'absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium',
     background: 'bg-{color}-500 dark:bg-{color}-400',
     position: {
       'top-right': 'top-0 right-0',
@@ -84,15 +84,15 @@ const avatar = {
       'bottom-left': 'bottom-0 left-0'
     },
     size: {
-      '3xs': 'h-1 w-1',
-      '2xs': 'h-1 w-1',
-      xs: 'h-1.5 w-1.5',
-      sm: 'h-2 w-2',
-      md: 'h-2.5 w-2.5',
-      lg: 'h-3 w-3',
-      xl: 'h-3.5 w-3.5',
-      '2xl': 'h-3.5 w-3.5',
-      '3xl': 'h-4 w-4'
+      '3xs': 'h-[4px] min-w-[4px] text-[4px] p-px',
+      '2xs': 'h-[5px] min-w-[5px] text-[5px] p-px',
+      xs: 'h-1.5 min-w-[0.375rem] text-[6px] p-px',
+      sm: 'h-2 min-w-[0.5rem] text-[7px] p-0.5',
+      md: 'h-2.5 min-w-[0.625rem] text-[8px] p-0.5',
+      lg: 'h-3 min-w-[0.75rem] text-[10px] p-0.5',
+      xl: 'h-3.5 min-w-[0.875rem] text-[11px] p-1',
+      '2xl': 'h-4 min-w-[1rem] text-[12px] p-1',
+      '3xl': 'h-5 min-w-[1.25rem] text-[14px] p-1'
     }
   },
   default: {
