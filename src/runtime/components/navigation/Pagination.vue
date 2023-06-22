@@ -111,9 +111,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.pagination>>(() =>
-      defu({}, props.ui, appConfig.ui.pagination)
-    )
+    const ui = computed<Partial<typeof appConfig.ui.pagination>>(() => defu({}, props.ui, appConfig.ui.pagination))
 
     const currentPage = computed({
       get () {
@@ -124,12 +122,7 @@ export default defineComponent({
       }
     })
 
-    const pages = computed(() =>
-      Array.from(
-        { length: Math.ceil(props.total / props.pageCount) },
-        (_, i) => i + 1
-      )
-    )
+    const pages = computed(() => Array.from({ length: Math.ceil(props.total / props.pageCount) }, (_, i) => i + 1))
 
     const displayedPages = computed(() => {
       if (!props.max || pages.value.length <= 5) {
@@ -147,13 +140,13 @@ export default defineComponent({
         if (beforeWrapped) items.push(props.divider)
 
         if (!afterWrapped) {
-          const addedItems = current + r + 2 - max
+          const addedItems = (current + r + 2) - max
           for (let i = current - r - addedItems; i <= current - r - 1; i++) {
             items.push(i)
           }
         }
 
-        for (let i = r1 > 2 ? r1 : 2; i <= Math.min(max, r2); i++) {
+        for (let i = r1 > 2 ? (r1) : 2; i <= Math.min(max, r2); i++) {
           items.push(i)
         }
 
@@ -173,11 +166,7 @@ export default defineComponent({
           items[1] = 2
         }
         // Replace divider by number on end edge case [..., 48, '…', 50]
-        if (
-          items.length >= 3 &&
-          items[items.length - 2] === props.divider &&
-          items[items.length - 1] === items.length
-        ) {
+        if (items.length >= 3 && items[items.length - 2] === props.divider && items[items.length - 1] === items.length) {
           items[items.length - 2] = items.length - 1
         }
 
