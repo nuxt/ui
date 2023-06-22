@@ -77,7 +77,7 @@ import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()
 
-function defaultComparator<T> (a: T, z: T): boolean {
+function defaultComparator<T>(a: T, z: T): boolean {
   return a === z
 }
 
@@ -96,7 +96,14 @@ export default defineComponent({
       default: () => []
     },
     columns: {
-      type: Array as PropType<{ key: string, sortable?: boolean, [key: string]: any }[]>,
+      type: Array as PropType<
+        {
+          key: string
+          sortable?: boolean
+          direction?: 'asc' | 'desc'
+          [key: string]: any
+        }[]
+      >,
       default: null
     },
     columnAttribute: {
@@ -104,8 +111,12 @@ export default defineComponent({
       default: 'label'
     },
     sort: {
-      type: Object as PropType<{ column: string, direction: 'asc' | 'desc' }>,
+      type: Object as PropType<{ column: string; direction: 'asc' | 'desc' }>,
       default: () => ({})
+    },
+    removeableSort: {
+      type: Boolean,
+      default: false
     },
     sortButton: {
       type: Object as PropType<Partial<Button>>,
@@ -124,11 +135,11 @@ export default defineComponent({
       default: false
     },
     loadingState: {
-      type: Object as PropType<{ icon: string, label: string }>,
+      type: Object as PropType<{ icon: string; label: string }>,
       default: () => appConfig.ui.table.default.loadingState
     },
     emptyState: {
-      type: Object as PropType<{ icon: string, label: string }>,
+      type: Object as PropType<{ icon: string; label: string }>,
       default: () => appConfig.ui.table.default.emptyState
     },
     ui: {
@@ -137,13 +148,24 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.table>>(() => defu({}, props.ui, appConfig.ui.table))
+    const ui = computed<Partial<typeof appConfig.ui.table>>(() =>
+      defu({}, props.ui, appConfig.ui.table)
+    )
 
-    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: capitalize(key), sortable: false })))
+    const columns = computed(
+      () =>
+        props.columns ??
+        Object.keys(props.rows[0] ?? {}).map((key) => ({
+          key,
+          label: capitalize(key),
+          sortable: false,
+          direction: null
+        }))
+    )
 
     const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
 
@@ -158,10 +180,10 @@ export default defineComponent({
     })
 
     const selected = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })
@@ -170,7 +192,7 @@ export default defineComponent({
 
     const emptyState = computed(() => ({ ...ui.value.default.emptyState, ...props.emptyState }))
 
-    function compare (a: any, z: any) {
+    function compare(a: any, z: any) {
       if (typeof props.by === 'string') {
         const property = props.by as unknown as any
         return a?.[property] === z?.[property]
@@ -178,7 +200,7 @@ export default defineComponent({
       return props.by(a, z)
     }
 
-    function isSelected (row) {
+    function isSelected(row) {
       if (!props.modelValue) {
         return false
       }
@@ -186,11 +208,28 @@ export default defineComponent({
       return selected.value.some((item) => compare(toRaw(item), toRaw(row)))
     }
 
-    function onSort (column) {
+    function onSort(column) {
       if (sort.value.column === column.key) {
-        sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+        if (props.removeableSort) {
+          //This is the sort direction before it returns to unsorted
+          const lastSortDirection =
+            column.direction === null ||
+            column.direction === undefined ||
+            column.direction === 'asc'
+              ? 'desc'
+              : 'asc'
+
+          if (sort.value.direction === lastSortDirection) {
+            sort.value.column = null
+          }
+        } else {
+          sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+        }
       } else {
-        sort.value = { column: column.key, direction: column.direction || 'asc' }
+        sort.value = {
+          column: column.key,
+          direction: column.direction || 'asc'
+        }
       }
     }
 
