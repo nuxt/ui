@@ -4,7 +4,7 @@
     <span v-else-if="text || placeholder" :class="ui.placeholder">{{ text || placeholder }}</span>
 
     <span v-if="chipColor" :class="chipClass">
-        <sup v-if="chipText" :class="chipTextClass">{{ chipText }}</sup>
+      {{ chipText }}
     </span>
     <slot />
   </span>
@@ -57,13 +57,13 @@ export default defineComponent({
         return Object.keys(appConfig.ui.avatar.chip.position).includes(value)
       }
     },
-    ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.avatar>>,
-      default: () => appConfig.ui.avatar
-    },
     chipText: {
       type: [String, Number],
       default: null
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof appConfig.ui.avatar>>,
+      default: () => appConfig.ui.avatar
     }
   },
   setup (props) {
@@ -89,23 +89,14 @@ export default defineComponent({
     })
 
     const chipClass = computed(() => {
-      // Conditionally handling background of chip When chipText is provided
       return classNames(
         ui.value.chip.base,
         ui.value.chip.size[props.size],
         ui.value.chip.position[props.chipPosition],
-        props.chipText ?  '' : 
-        ui.value.chip.background.replaceAll('{color}', props.chipColor),
+        ui.value.chip.background.replaceAll('{color}', props.chipColor)
       )
     })
 
-    const chipTextClass = computed( () => {
-      if(props.chipText){
-        return classNames(
-          ui.value.chip.text.replaceAll('{color}', props.chipColor)
-        )
-      }else return ''
-    });
     const url = computed(() => {
       if (typeof props.src === 'boolean') {
         return null
@@ -136,8 +127,7 @@ export default defineComponent({
       url,
       placeholder,
       error,
-      onError,
-      chipTextClass
+      onError
     }
   }
 })
