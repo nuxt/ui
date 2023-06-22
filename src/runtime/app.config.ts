@@ -349,7 +349,7 @@ const input = {
       xl: 'h-6 w-6'
     },
     leading: {
-      wrapper: 'absolute inset-y-0 left-0 flex items-center',
+      wrapper: 'absolute inset-y-0 left-0 rtl:right-0 flex items-center',
       pointer: 'pointer-events-none',
       padding: {
         '2xs': 'ps-2',
