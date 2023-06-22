@@ -17,19 +17,8 @@
       :key="index"
       :size="size"
       :label="`${page}`"
-      v-bind="
-        page === currentPage
-          ? { ...ui.default.activeButton, ...activeButton }
-          : { ...ui.default.inactiveButton, ...inactiveButton }
-      "
-      :class="[
-        {
-          'pointer-events-none': typeof page === 'string',
-          'z-[1]': page === currentPage
-        },
-        ui.base,
-        ui.rounded
-      ]"
+      v-bind="page === currentPage ? { ...ui.default.activeButton, ...activeButton } : { ...ui.default.inactiveButton, ...inactiveButton }"
+      :class="[{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }, ui.base, ui.rounded]"
       :ui="{ rounded: '' }"
       @click="() => onClickPage(page)"
     />
@@ -81,14 +70,14 @@ export default defineComponent({
     max: {
       type: Number,
       default: 7,
-      validate(value) {
+      validate (value) {
         return value >= 7 && value < Number.MAX_VALUE
       }
     },
     size: {
       type: String,
       default: () => appConfig.ui.pagination.default.size,
-      validator(value: string) {
+      validator (value: string) {
         return Object.keys(appConfig.ui.button.size).includes(value)
       }
     },
@@ -118,7 +107,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue'],
-  setup(props, { emit }) {
+  setup (props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -127,10 +116,10 @@ export default defineComponent({
     )
 
     const currentPage = computed({
-      get() {
+      get () {
         return props.modelValue
       },
-      set(value) {
+      set (value) {
         emit('update:modelValue', value)
       }
     })
@@ -199,7 +188,7 @@ export default defineComponent({
     const canGoPrev = computed(() => currentPage.value > 1)
     const canGoNext = computed(() => currentPage.value < pages.value.length)
 
-    function onClickPage(page: number | string) {
+    function onClickPage (page: number | string) {
       if (typeof page === 'string') {
         return
       }
@@ -207,7 +196,7 @@ export default defineComponent({
       currentPage.value = page
     }
 
-    function onClickPrev() {
+    function onClickPrev () {
       if (!canGoPrev.value) {
         return
       }
@@ -215,7 +204,7 @@ export default defineComponent({
       currentPage.value--
     }
 
-    function onClickNext() {
+    function onClickNext () {
       if (!canGoNext.value) {
         return
       }
