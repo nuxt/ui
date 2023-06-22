@@ -4,10 +4,19 @@
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
           <th v-if="modelValue" scope="col" class="pl-4">
-            <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" @change="selected = $event.target.checked ? rows : []" />
+            <UCheckbox
+              :checked="indeterminate || selected.length === rows.length"
+              :indeterminate="indeterminate"
+              @change="selected = $event.target.checked ? rows : []"
+            />
           </th>
 
-          <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size]">
+          <th
+            v-for="(column, index) in columns"
+            :key="index"
+            scope="col"
+            :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size]"
+          >
             <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
@@ -27,7 +36,11 @@
             <UCheckbox v-model="selected" :value="row" />
           </td>
 
-          <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
+          <td
+            v-for="(column, subIndex) in columns"
+            :key="subIndex"
+            :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
+          >
             <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index">
               {{ row[column.key] }}
             </slot>
@@ -38,7 +51,12 @@
           <td :colspan="columns.length + (modelValue ? 1 : 0)">
             <slot name="loading-state">
               <div :class="ui.loadingState.wrapper">
-                <UIcon v-if="loadingState.icon" :name="loadingState.icon" :class="ui.loadingState.icon" aria-hidden="true" />
+                <UIcon
+                  v-if="loadingState.icon"
+                  :name="loadingState.icon"
+                  :class="ui.loadingState.icon"
+                  aria-hidden="true"
+                />
                 <p :class="ui.loadingState.label">
                   {{ loadingState.label }}
                 </p>
@@ -77,7 +95,7 @@ import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()
 
-function defaultComparator<T>(a: T, z: T): boolean {
+function defaultComparator<T> (a: T, z: T): boolean {
   return a === z
 }
 
@@ -148,8 +166,8 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue'],
-  setup(props, { emit }) {
-    // TODO: Remove
+  setup (props, { emit }) {
+    // TODO: Remove  
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.table>>(() =>
@@ -180,10 +198,10 @@ export default defineComponent({
     })
 
     const selected = computed({
-      get() {
+      get () {
         return props.modelValue
       },
-      set(value) {
+      set (value) {
         emit('update:modelValue', value)
       }
     })
@@ -192,7 +210,7 @@ export default defineComponent({
 
     const emptyState = computed(() => ({ ...ui.value.default.emptyState, ...props.emptyState }))
 
-    function compare(a: any, z: any) {
+    function compare (a: any, z: any) {
       if (typeof props.by === 'string') {
         const property = props.by as unknown as any
         return a?.[property] === z?.[property]
@@ -200,7 +218,7 @@ export default defineComponent({
       return props.by(a, z)
     }
 
-    function isSelected(row) {
+    function isSelected (row) {
       if (!props.modelValue) {
         return false
       }
@@ -208,14 +226,14 @@ export default defineComponent({
       return selected.value.some((item) => compare(toRaw(item), toRaw(row)))
     }
 
-    function onSort(column) {
+    function onSort (column) {
       if (sort.value.column === column.key) {
         if (props.removeableSort) {
           //This is the sort direction before it returns to unsorted
           const lastSortDirection =
             column.direction === null ||
-            column.direction === undefined ||
-            column.direction === 'asc'
+              column.direction === undefined ||
+              column.direction === 'asc'
               ? 'desc'
               : 'asc'
 
