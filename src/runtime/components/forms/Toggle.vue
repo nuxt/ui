@@ -3,14 +3,14 @@
     v-model="active"
     :name="name"
     :disabled="disabled"
-    :class="[active ? ui.active : ui.inactive, ui.base]"
+    :class="switchClass"
   >
     <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
       <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
-        <UIcon :name="onIcon" :class="ui.icon.on" />
+        <UIcon :name="onIcon" :class="onIconClass" />
       </span>
       <span v-if="offIcon" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]" aria-hidden="true">
-        <UIcon :name="offIcon" :class="ui.icon.off" />
+        <UIcon :name="offIcon" :class="offIconClass" />
       </span>
     </span>
   </Switch>
@@ -22,6 +22,7 @@ import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { Switch } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
+import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -56,6 +57,13 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.toggle.default.offIcon
     },
+    color: {
+      type: String,
+      default: () => appConfig.ui.toggle.default.color,
+      validator (value: string) {
+        return appConfig.ui.colors.includes(value)
+      }
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.toggle>>,
       default: () => appConfig.ui.toggle
@@ -77,10 +85,34 @@ export default defineComponent({
       }
     })
 
+    const switchClass = computed(()=>{
+      return classNames(
+        ui.value.base,
+        ui.value.rounded,
+        ui.value.ring.replaceAll('{color}', props.color),
+        (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', props.color)
+      )
+    })
+
+    const onIconClass = computed(()=>{
+      return classNames(
+        ui.value.icon.on.replaceAll('{color}', props.color)
+      )
+    })
+
+    const offIconClass = computed(()=>{
+      return classNames(
+        ui.value.icon.off.replaceAll('{color}', props.color)
+      )
+    })
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      active
+      active,
+      switchClass,
+      onIconClass,
+      offIconClass
     }
   }
 })

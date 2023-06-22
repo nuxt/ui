@@ -78,8 +78,8 @@ import type { Group, Command } from '../../types/command-palette'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import type { Button } from '../../types/button'
-import { classNames } from '../../utils'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
+import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
