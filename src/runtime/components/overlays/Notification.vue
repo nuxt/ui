@@ -1,5 +1,5 @@
 <template>
-  <transition appear v-bind="ui.transition">
+  <Transition appear v-bind="ui.transition">
     <div :class="[ui.wrapper, ui.background, ui.rounded, ui.shadow]" @mouseover="onMouseover" @mouseleave="onMouseleave">
       <div :class="[ui.container, ui.rounded, ui.ring]">
         <div :class="ui.padding">
@@ -31,7 +31,7 @@
         <div v-if="timeout" :class="progressClass" :style="progressStyle" />
       </div>
     </div>
-  </transition>
+  </Transition>
 </template>
 
 <script lang="ts">

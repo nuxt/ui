@@ -243,6 +243,7 @@ const dropdown = {
     },
     shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ml-auto'
   },
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition duration-100 ease-out',
     enterFromClass: 'transform scale-95 opacity-0',
@@ -458,6 +459,7 @@ const selectMenu = {
       base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
     }
   },
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     leaveActiveClass: 'transition ease-in duration-100',
     leaveFromClass: 'opacity-100',
@@ -730,6 +732,7 @@ const modal = {
   overlay: {
     base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-200/75 dark:bg-gray-800/75',
+    // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
     transition: {
       enter: 'ease-out duration-300',
       enterFrom: 'opacity-0',
@@ -745,6 +748,7 @@ const modal = {
   shadow: 'shadow-xl',
   width: 'sm:max-w-lg',
   height: '',
+  // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
   transition: {
     enter: 'ease-out duration-300',
     enterFrom: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
@@ -760,6 +764,7 @@ const slideover = {
   overlay: {
     base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-200/75 dark:bg-gray-800/75',
+    // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
     transition: {
       enter: 'ease-in-out duration-500',
       enterFrom: 'opacity-0',
@@ -776,6 +781,7 @@ const slideover = {
   padding: '',
   shadow: 'shadow-xl',
   width: 'w-screen max-w-md',
+  // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
   transition: {
     enter: 'transform transition ease-in-out duration-300',
     leave: 'transform transition ease-in-out duration-200'
@@ -793,6 +799,7 @@ const tooltip = {
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
   shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5',
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
     enterFromClass: 'opacity-0 translate-y-1',
@@ -815,6 +822,7 @@ const popover = {
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
     enterFromClass: 'opacity-0 translate-y-1',
@@ -837,6 +845,7 @@ const contextMenu = {
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
     enterFromClass: 'opacity-0 translate-y-1',
@@ -873,6 +882,7 @@ const notification = {
     base: 'absolute bottom-0 left-0 right-0 h-1',
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transform ease-out duration-300 transition',
     enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2',
