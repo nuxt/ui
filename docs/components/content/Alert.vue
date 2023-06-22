@@ -7,7 +7,7 @@
   >
     <UIcon v-if="!!to" name="i-heroicons-link-20-solid" class="w-3 h-3 absolute right-2 top-2 text-gray-400 dark:text-gray-500 group-hover:text-primary-500 dark:group-hover:text-primary-400" />
 
-    <UIcon v-if="icon" :name="icon" class="w-4 h-4 me-2 inline-flex items-center align-text-top" :class="color" />
+    <UIcon v-if="icon" :name="icon" class="w-4 h-4 mr-2 inline-flex items-center align-text-top" :class="color" />
 
     <ContentSlot :use="$slots.default" unwrap="p" />
   </component>
