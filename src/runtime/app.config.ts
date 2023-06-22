@@ -105,7 +105,7 @@ const avatar = {
 const avatarGroup = {
   wrapper: 'flex flex-row-reverse',
   ring: 'ring-2 ring-white dark:ring-gray-900',
-  margin: '-mr-1.5 first:mr-0'
+  margin: '-me-1.5 first:me-0'
 }
 
 const badge = {
@@ -361,7 +361,7 @@ const input = {
       }
     },
     trailing: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center',
+      wrapper: 'absolute inset-y-0 end-0 flex items-center',
       pointer: 'pointer-events-none',
       padding: {
         '2xs': 'pe-2',
@@ -446,7 +446,7 @@ const selectMenu = {
       inactive: 'text-gray-400 dark:text-gray-500'
     },
     selectedIcon: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center',
+      wrapper: 'absolute inset-y-0 end-0 flex items-center',
       padding: 'pe-2',
       base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
     },
@@ -510,8 +510,8 @@ const toggle = {
   inactive: 'bg-gray-200 dark:bg-gray-700',
   container: {
     base: 'pointer-events-none relative inline-block h-4 w-4 rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200',
-    active: 'translate-x-4',
-    inactive: 'translate-x-0'
+    active: 'translate-x-4 rtl:-translate-x-4',
+    inactive: 'translate-x-0 rtl:-translate-x-0'
   },
   icon: {
     base: 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
@@ -622,7 +622,7 @@ const verticalNavigation = {
     size: '3xs'
   },
   badge: {
-    base: 'relative ms-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
+    base: 'relative ms-auto inline-block py-0.5 px-2 text-xs rounded-md -me-1 -my-0.5',
     active: 'bg-white dark:bg-gray-900',
     inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-900'
   }
@@ -638,11 +638,11 @@ const commandPalette = {
     height: 'h-12',
     size: 'sm:text-sm',
     icon: {
-      base: 'pointer-events-none absolute left-4 text-gray-400 dark:text-gray-500',
+      base: 'pointer-events-none absolute start-4 text-gray-400 dark:text-gray-500',
       size: 'h-4 w-4',
       padding: 'ps-10'
     },
-    closeButton: 'absolute right-4'
+    closeButton: 'absolute end-4'
   },
   emptyState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
@@ -700,6 +700,7 @@ const pagination = {
   wrapper: 'flex items-center -space-x-px',
   base: '',
   rounded: 'first:rounded-s-md last:rounded-e-md',
+  iconClass:'rtl:rotate-180',
   default: {
     size: 'sm',
     activeButton: {
@@ -870,7 +871,7 @@ const notification = {
     size: 'md'
   },
   progress: {
-    base: 'absolute bottom-0 left-0 right-0 h-1',
+    base: 'absolute bottom-0 end-0 start-0 h-1',
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   transition: {
@@ -899,7 +900,7 @@ const notification = {
 
 const notifications = {
   wrapper: 'fixed flex flex-col justify-end z-[55]',
-  position: 'bottom-0 right-0',
+  position: 'bottom-0 end-0',
   width: 'w-full sm:w-96',
   container: 'px-4 sm:px-6 py-6 space-y-3 overflow-y-auto'
 }
