@@ -241,7 +241,7 @@ const dropdown = {
       base: 'flex-shrink-0',
       size: '3xs'
     },
-    shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ml-auto'
+    shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ms-auto'
   },
   transition: {
     enterActiveClass: 'transition duration-100 ease-out',
@@ -386,7 +386,7 @@ const formGroup = {
   label: {
     wrapper: 'flex content-center justify-between',
     base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-    required: `after:content-['*'] after:ml-0.5 after:text-red-500 dark:after:text-red-400`
+    required: `after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400`
   },
   description: 'text-sm text-gray-500 dark:text-gray-400',
   container: 'mt-1 relative',
@@ -535,7 +535,7 @@ const range = {
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   progress: {
     base: 'absolute inset-0 h-full pointer-events-none',
-    rounded: 'rounded-l-lg',
+    rounded: 'rounded-s-lg',
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   thumb: {
@@ -622,7 +622,7 @@ const verticalNavigation = {
     size: '3xs'
   },
   badge: {
-    base: 'relative ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
+    base: 'relative ms-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
     active: 'bg-white dark:bg-gray-900',
     inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-900'
   }
