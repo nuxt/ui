@@ -7,7 +7,7 @@
         :disabled="!canGoPrev"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.prevButton, ...prevButton }"
-        :ui="{ rounded: '', icon: { base: ui.iconClass } }"
+        :ui="{ rounded: '' }"
         @click="onClickPrev"
       />
     </slot>
@@ -30,7 +30,7 @@
         :disabled="!canGoNext"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.nextButton, ...nextButton }"
-        :ui="{ rounded: '', icon: { base: ui.iconClass } }"
+        :ui="{ rounded: '' }"
         @click="onClickNext"
       />
     </slot>
