@@ -15,7 +15,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=v16.20.1"
+    "node": ">=v16.14.0"
   },
   "scripts": {
     "build": "nuxt-module-build",
