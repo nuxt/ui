@@ -105,7 +105,7 @@ const avatar = {
 const avatarGroup = {
   wrapper: 'flex flex-row-reverse',
   ring: 'ring-2 ring-white dark:ring-gray-900',
-  margin: '-mr-1.5 first:mr-0'
+  margin: '-me-1.5 first:me-0'
 }
 
 const badge = {
@@ -241,7 +241,7 @@ const dropdown = {
       base: 'flex-shrink-0',
       size: '3xs'
     },
-    shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ml-auto'
+    shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ms-auto'
   },
   // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
@@ -350,7 +350,7 @@ const input = {
       xl: 'h-6 w-6'
     },
     leading: {
-      wrapper: 'absolute inset-y-0 left-0 flex items-center',
+      wrapper: 'absolute inset-y-0 start-0 flex items-center',
       pointer: 'pointer-events-none',
       padding: {
         '2xs': 'ps-2',
@@ -362,7 +362,7 @@ const input = {
       }
     },
     trailing: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center',
+      wrapper: 'absolute inset-y-0 end-0 flex items-center',
       pointer: 'pointer-events-none',
       padding: {
         '2xs': 'pe-2',
@@ -387,7 +387,7 @@ const formGroup = {
   label: {
     wrapper: 'flex content-center justify-between',
     base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-    required: `after:content-['*'] after:ml-0.5 after:text-red-500 dark:after:text-red-400`
+    required: `after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400`
   },
   description: 'text-sm text-gray-500 dark:text-gray-400',
   container: 'mt-1 relative',
@@ -447,7 +447,7 @@ const selectMenu = {
       inactive: 'text-gray-400 dark:text-gray-500'
     },
     selectedIcon: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center',
+      wrapper: 'absolute inset-y-0 end-0 flex items-center',
       padding: 'pe-2',
       base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
     },
@@ -512,8 +512,8 @@ const toggle = {
   inactive: 'bg-gray-200 dark:bg-gray-700',
   container: {
     base: 'pointer-events-none relative inline-block h-4 w-4 rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200',
-    active: 'translate-x-4',
-    inactive: 'translate-x-0'
+    active: 'translate-x-4 rtl:-translate-x-4',
+    inactive: 'translate-x-0 rtl:-translate-x-0'
   },
   icon: {
     base: 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
@@ -537,7 +537,7 @@ const range = {
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   progress: {
     base: 'absolute inset-0 h-full pointer-events-none',
-    rounded: 'rounded-l-lg',
+    rounded: 'rounded-s-lg',
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   thumb: {
@@ -624,7 +624,7 @@ const verticalNavigation = {
     size: '3xs'
   },
   badge: {
-    base: 'relative ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
+    base: 'relative ms-auto inline-block py-0.5 px-2 text-xs rounded-md -me-1 -my-0.5',
     active: 'bg-white dark:bg-gray-900',
     inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-900'
   }
@@ -640,11 +640,11 @@ const commandPalette = {
     height: 'h-12',
     size: 'sm:text-sm',
     icon: {
-      base: 'pointer-events-none absolute left-4 text-gray-400 dark:text-gray-500',
+      base: 'pointer-events-none absolute start-4 text-gray-400 dark:text-gray-500',
       size: 'h-4 w-4',
       padding: 'ps-10'
     },
-    closeButton: 'absolute right-4'
+    closeButton: 'absolute end-4'
   },
   emptyState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
@@ -712,11 +712,13 @@ const pagination = {
     },
     prevButton: {
       color: 'white',
+      class: 'rtl:[&_span:first-child]:rotate-180',
       icon: 'i-heroicons-chevron-left-20-solid'
     },
     nextButton: {
       color: 'white',
-      icon: 'i-heroicons-chevron-right-20-solid'
+      class: 'rtl:[&_span:last-child]:rotate-180',
+      icon: 'i-heroicons-chevron-right-20-solid '
     }
   }
 }
@@ -879,7 +881,7 @@ const notification = {
     size: 'md'
   },
   progress: {
-    base: 'absolute bottom-0 left-0 right-0 h-1',
+    base: 'absolute bottom-0 end-0 start-0 h-1',
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
@@ -909,7 +911,7 @@ const notification = {
 
 const notifications = {
   wrapper: 'fixed flex flex-col justify-end z-[55]',
-  position: 'bottom-0 right-0',
+  position: 'bottom-0 end-0',
   width: 'w-full sm:w-96',
   container: 'px-4 sm:px-6 py-6 space-y-3 overflow-y-auto'
 }
