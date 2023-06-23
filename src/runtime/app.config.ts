@@ -711,7 +711,7 @@ const pagination = {
     prevButton: {
       color: 'white',
       class: 'rtl:[&_span:first-child]:rotate-180',
-      icon: 'i-heroicons-chevron-left-20-solid rtl:[&_span]:rotate-180'
+      icon: 'i-heroicons-chevron-left-20-solid'
     },
     nextButton: {
       color: 'white',
