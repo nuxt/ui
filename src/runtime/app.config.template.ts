@@ -75,7 +75,7 @@ const avatar = {
     '3xl': 'h-20 w-20 text-2xl'
   },
   chip: {
-    base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900',
+    base: 'absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium',
     background: 'bg-{color}-500 dark:bg-{color}-400',
     position: {
       'top-right': 'top-0 right-0',
@@ -84,15 +84,15 @@ const avatar = {
       'bottom-left': 'bottom-0 left-0'
     },
     size: {
-      '3xs': 'h-1 w-1',
-      '2xs': 'h-1 w-1',
-      xs: 'h-1.5 w-1.5',
-      sm: 'h-2 w-2',
-      md: 'h-2.5 w-2.5',
-      lg: 'h-3 w-3',
-      xl: 'h-3.5 w-3.5',
-      '2xl': 'h-3.5 w-3.5',
-      '3xl': 'h-4 w-4'
+      '3xs': 'h-[4px] min-w-[4px] text-[4px] p-px',
+      '2xs': 'h-[5px] min-w-[5px] text-[5px] p-px',
+      xs: 'h-1.5 min-w-[0.375rem] text-[6px] p-px',
+      sm: 'h-2 min-w-[0.5rem] text-[7px] p-0.5',
+      md: 'h-2.5 min-w-[0.625rem] text-[8px] p-0.5',
+      lg: 'h-3 min-w-[0.75rem] text-[10px] p-0.5',
+      xl: 'h-3.5 min-w-[0.875rem] text-[11px] p-1',
+      '2xl': 'h-4 min-w-[1rem] text-[12px] p-1',
+      '3xl': 'h-5 min-w-[1.25rem] text-[14px] p-1'
     }
   },
   default: {
@@ -105,7 +105,7 @@ const avatar = {
 const avatarGroup = {
   wrapper: 'flex flex-row-reverse',
   ring: 'ring-2 ring-white dark:ring-gray-900',
-  margin: '-mr-1.5 first:mr-0'
+  margin: '-me-1.5 first:me-0'
 }
 
 const badge = {
@@ -241,8 +241,9 @@ const dropdown = {
       base: 'flex-shrink-0',
       size: '3xs'
     },
-    shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ml-auto'
+    shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ms-auto'
   },
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition duration-100 ease-out',
     enterFromClass: 'transform scale-95 opacity-0',
@@ -349,7 +350,7 @@ const input = {
       xl: 'h-6 w-6'
     },
     leading: {
-      wrapper: 'absolute inset-y-0 left-0 flex items-center',
+      wrapper: 'absolute inset-y-0 start-0 flex items-center',
       pointer: 'pointer-events-none',
       padding: {
         '2xs': 'ps-2',
@@ -361,7 +362,7 @@ const input = {
       }
     },
     trailing: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center',
+      wrapper: 'absolute inset-y-0 end-0 flex items-center',
       pointer: 'pointer-events-none',
       padding: {
         '2xs': 'pe-2',
@@ -386,7 +387,7 @@ const formGroup = {
   label: {
     wrapper: 'flex content-center justify-between',
     base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-    required: `after:content-['*'] after:ml-0.5 after:text-red-500 dark:after:text-red-400`
+    required: `after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400`
   },
   description: 'text-sm text-gray-500 dark:text-gray-400',
   container: 'mt-1 relative',
@@ -446,7 +447,7 @@ const selectMenu = {
       inactive: 'text-gray-400 dark:text-gray-500'
     },
     selectedIcon: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center',
+      wrapper: 'absolute inset-y-0 end-0 flex items-center',
       padding: 'pe-2',
       base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
     },
@@ -458,6 +459,7 @@ const selectMenu = {
       base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
     }
   },
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     leaveActiveClass: 'transition ease-in duration-100',
     leaveFromClass: 'opacity-100',
@@ -510,8 +512,8 @@ const toggle = {
   inactive: 'bg-gray-200 dark:bg-gray-700',
   container: {
     base: 'pointer-events-none relative inline-block h-4 w-4 rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200',
-    active: 'translate-x-4',
-    inactive: 'translate-x-0'
+    active: 'translate-x-4 rtl:-translate-x-4',
+    inactive: 'translate-x-0 rtl:-translate-x-0'
   },
   icon: {
     base: 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
@@ -535,7 +537,7 @@ const range = {
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   progress: {
     base: 'absolute inset-0 h-full pointer-events-none',
-    rounded: 'rounded-l-lg',
+    rounded: 'rounded-s-lg',
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   thumb: {
@@ -622,7 +624,7 @@ const verticalNavigation = {
     size: '3xs'
   },
   badge: {
-    base: 'relative ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
+    base: 'relative ms-auto inline-block py-0.5 px-2 text-xs rounded-md -me-1 -my-0.5',
     active: 'bg-white dark:bg-gray-900',
     inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-900'
   }
@@ -638,11 +640,11 @@ const commandPalette = {
     height: 'h-12',
     size: 'sm:text-sm',
     icon: {
-      base: 'pointer-events-none absolute left-4 text-gray-400 dark:text-gray-500',
+      base: 'pointer-events-none absolute start-4 text-gray-400 dark:text-gray-500',
       size: 'h-4 w-4',
       padding: 'ps-10'
     },
-    closeButton: 'absolute right-4'
+    closeButton: 'absolute end-4'
   },
   emptyState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
@@ -710,11 +712,13 @@ const pagination = {
     },
     prevButton: {
       color: 'white',
+      class: 'rtl:[&_span:first-child]:rotate-180',
       icon: 'i-heroicons-chevron-left-20-solid'
     },
     nextButton: {
       color: 'white',
-      icon: 'i-heroicons-chevron-right-20-solid'
+      class: 'rtl:[&_span:last-child]:rotate-180',
+      icon: 'i-heroicons-chevron-right-20-solid '
     }
   }
 }
@@ -730,6 +734,7 @@ const modal = {
   overlay: {
     base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-200/75 dark:bg-gray-800/75',
+    // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
     transition: {
       enter: 'ease-out duration-300',
       enterFrom: 'opacity-0',
@@ -745,6 +750,7 @@ const modal = {
   shadow: 'shadow-xl',
   width: 'sm:max-w-lg',
   height: '',
+  // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
   transition: {
     enter: 'ease-out duration-300',
     enterFrom: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
@@ -760,6 +766,7 @@ const slideover = {
   overlay: {
     base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-200/75 dark:bg-gray-800/75',
+    // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
     transition: {
       enter: 'ease-in-out duration-500',
       enterFrom: 'opacity-0',
@@ -776,6 +783,7 @@ const slideover = {
   padding: '',
   shadow: 'shadow-xl',
   width: 'w-screen max-w-md',
+  // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
   transition: {
     enter: 'transform transition ease-in-out duration-300',
     leave: 'transform transition ease-in-out duration-200'
@@ -793,6 +801,7 @@ const tooltip = {
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
   shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5',
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
     enterFromClass: 'opacity-0 translate-y-1',
@@ -815,6 +824,7 @@ const popover = {
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
     enterFromClass: 'opacity-0 translate-y-1',
@@ -837,6 +847,7 @@ const contextMenu = {
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
     enterFromClass: 'opacity-0 translate-y-1',
@@ -870,9 +881,10 @@ const notification = {
     size: 'md'
   },
   progress: {
-    base: 'absolute bottom-0 left-0 right-0 h-1',
+    base: 'absolute bottom-0 end-0 start-0 h-1',
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transform ease-out duration-300 transition',
     enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2',
@@ -899,7 +911,7 @@ const notification = {
 
 const notifications = {
   wrapper: 'fixed flex flex-col justify-end z-[55]',
-  position: 'bottom-0 right-0',
+  position: 'bottom-0 end-0',
   width: 'w-full sm:w-96',
   container: 'px-4 sm:px-6 py-6 space-y-3 overflow-y-auto'
 }

@@ -5,7 +5,7 @@
     </h2>
 
     <div :class="ui.group.container" role="listbox" :aria-label="group[groupAttribute]">
-      <ComboboxOption
+      <HComboboxOption
         v-for="(command, index) of group.commands"
         :key="`${group.key}-${index}`"
         v-slot="{ active, selected }"
@@ -50,7 +50,7 @@
             <span v-else-if="!command.disabled && group.inactive" :class="ui.group.inactive">{{ group.inactive }}</span>
           </slot>
         </div>
-      </ComboboxOption>
+      </HComboboxOption>
     </div>
   </div>
 </template>
@@ -58,7 +58,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { ComboboxOption } from '@headlessui/vue'
+import { ComboboxOption as HComboboxOption } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
@@ -71,7 +71,7 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    ComboboxOption,
+    HComboboxOption,
     UIcon,
     UAvatar,
     UKbd

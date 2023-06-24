@@ -205,7 +205,7 @@ mark {
             vue: (content) => {
               return [
                 ...defaultExtractor(content),
-                ...customSafelistExtractor(options.prefix, content, nuxt.options.appConfig.ui.colors)
+                ...customSafelistExtractor(options.prefix, content, nuxt.options.appConfig.ui.colors, options.safelistColors)
               ]
             }
           }

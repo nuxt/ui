@@ -1,5 +1,5 @@
 <template>
-  <Combobox
+  <HCombobox
     :by="by"
     :model-value="modelValue"
     :multiple="multiple"
@@ -9,7 +9,7 @@
     <div :class="ui.wrapper">
       <div v-show="searchable" :class="ui.input.wrapper">
         <UIcon v-if="iconName" :name="iconName" :class="iconClass" aria-hidden="true" />
-        <ComboboxInput
+        <HComboboxInput
           ref="comboboxInput"
           :value="query"
           :class="[ui.input.base, ui.input.size, ui.input.height, ui.input.padding, icon && ui.input.icon.padding]"
@@ -27,7 +27,7 @@
         />
       </div>
 
-      <ComboboxOptions
+      <HComboboxOptions
         v-if="groups.length"
         static
         hold
@@ -49,7 +49,7 @@
             <slot :name="name" v-bind="slotData" />
           </template>
         </CommandPaletteGroup>
-      </ComboboxOptions>
+      </HComboboxOptions>
 
       <template v-else-if="emptyState">
         <slot name="empty-state">
@@ -62,12 +62,12 @@
         </slot>
       </template>
     </div>
-  </Combobox>
+  </HCombobox>
 </template>
 
 <script lang="ts">
 import { ref, computed, watch, onMounted, defineComponent } from 'vue'
-import { Combobox, ComboboxInput, ComboboxOptions } from '@headlessui/vue'
+import { Combobox as HCombobox, ComboboxInput as HComboboxInput, ComboboxOptions as HComboboxOptions } from '@headlessui/vue'
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
@@ -89,9 +89,9 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    Combobox,
-    ComboboxInput,
-    ComboboxOptions,
+    HCombobox,
+    HComboboxInput,
+    HComboboxOptions,
     UIcon,
     UButton,
     CommandPaletteGroup
