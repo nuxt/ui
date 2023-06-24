@@ -172,7 +172,6 @@ export default defineComponent({
         ui.value.rounded,
         ui.value.placeholder,
         ui.value.size[props.size],
-        // todo: fallback will not apply prefix like this
         props.padded ? ui.value.padding[props.size] : `${tailwindPrefix || ''}p-0`,
         variant?.replaceAll('{color}', props.color),
         (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
