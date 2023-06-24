@@ -42,8 +42,6 @@ export interface ModuleOptions {
   icons: string[] | string
 
   safelistColors?: string[]
-
-  tailwindPrefix?: string
 }
 
 export default defineNuxtModule<ModuleOptions>({
