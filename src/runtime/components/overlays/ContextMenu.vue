@@ -1,10 +1,10 @@
 <template>
   <div v-if="isOpen" ref="container" :class="[ui.container, ui.width]">
-    <transition appear v-bind="ui.transition">
+    <Transition appear v-bind="ui.transition">
       <div :class="[ui.base, ui.ring, ui.rounded, ui.shadow, ui.background]">
         <slot />
       </div>
-    </transition>
+    </Transition>
   </div>
 </template>
 

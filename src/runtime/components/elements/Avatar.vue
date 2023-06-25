@@ -3,7 +3,9 @@
     <img v-if="url && !error" :class="avatarClass" :src="url" :alt="alt" :onerror="() => onError()">
     <span v-else-if="text || placeholder" :class="ui.placeholder">{{ text || placeholder }}</span>
 
-    <span v-if="chipColor" :class="chipClass" />
+    <span v-if="chipColor" :class="chipClass">
+      {{ chipText }}
+    </span>
     <slot />
   </span>
 </template>
@@ -54,6 +56,10 @@ export default defineComponent({
       validator (value: string) {
         return Object.keys(appConfig.ui.avatar.chip.position).includes(value)
       }
+    },
+    chipText: {
+      type: [String, Number],
+      default: null
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.avatar>>,

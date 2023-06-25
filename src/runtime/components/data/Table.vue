@@ -3,7 +3,7 @@
     <table :class="[ui.base, ui.divide]">
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
-          <th v-if="modelValue" scope="col" class="pl-4">
+          <th v-if="modelValue" scope="col" class="ps-4">
             <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" @change="selected = $event.target.checked ? rows : []" />
           </th>
 
@@ -23,7 +23,7 @@
       </thead>
       <tbody :class="ui.tbody">
         <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected]">
-          <td v-if="modelValue" class="pl-4">
+          <td v-if="modelValue" class="ps-4">
             <UCheckbox v-model="selected" :value="row" />
           </td>
 

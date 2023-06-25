@@ -1,16 +1,16 @@
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
-    <Dialog :class="[ui.wrapper, { 'justify-end': side === 'right' }]" @close="close">
+    <HDialog :class="[ui.wrapper, { 'justify-end': side === 'right' }]" @close="close">
       <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
       <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-        <DialogPanel :class="[ui.base, ui.width, ui.background, ui.ring, ui.padding]">
+        <HDialogPanel :class="[ui.base, ui.width, ui.background, ui.ring, ui.padding]">
           <slot />
-        </DialogPanel>
+        </HDialogPanel>
       </TransitionChild>
-    </Dialog>
+    </HDialog>
   </TransitionRoot>
 </template>
 
@@ -18,7 +18,7 @@
 import { computed, defineComponent } from 'vue'
 import type { WritableComputedRef, PropType } from 'vue'
 import { defu } from 'defu'
-import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
+import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -28,9 +28,8 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Dialog,
-    DialogPanel,
+    HDialog,
+    HDialogPanel,
     TransitionRoot,
     TransitionChild
   },

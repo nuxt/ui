@@ -1,6 +1,6 @@
 <template>
-  <Menu v-slot="{ open }" as="div" :class="ui.wrapper" @mouseleave="onMouseLeave">
-    <MenuButton
+  <HMenu v-slot="{ open }" as="div" :class="ui.wrapper" @mouseleave="onMouseLeave">
+    <HMenuButton
       ref="trigger"
       as="div"
       :disabled="disabled"
@@ -13,13 +13,13 @@
           Open
         </button>
       </slot>
-    </MenuButton>
+    </HMenuButton>
 
     <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
-      <transition appear v-bind="ui.transition">
-        <MenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
+      <Transition appear v-bind="ui.transition">
+        <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
           <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
-            <MenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
+            <HMenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
               <ULinkCustom
                 v-bind="omit(item, ['label', 'icon', 'iconClass', 'avatar', 'shortcuts', 'click'])"
                 :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
@@ -36,19 +36,19 @@
                   </span>
                 </slot>
               </ULinkCustom>
-            </MenuItem>
+            </HMenuItem>
           </div>
-        </MenuItems>
-      </transition>
+        </HMenuItems>
+      </Transition>
     </div>
-  </Menu>
+  </HMenu>
 </template>
 
 <script lang="ts">
-import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import { defineComponent, ref, computed, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
-import { defineComponent, ref, computed, onMounted } from 'vue'
+import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem } from '@headlessui/vue'
 import { defu } from 'defu'
 import { omit } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
@@ -67,11 +67,10 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Menu,
-    MenuButton,
-    MenuItems,
-    MenuItem,
+    HMenu,
+    HMenuButton,
+    HMenuItems,
+    HMenuItem,
     UIcon,
     UAvatar,
     UKbd,

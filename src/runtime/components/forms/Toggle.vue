@@ -1,5 +1,5 @@
 <template>
-  <Switch
+  <HSwitch
     v-model="active"
     :name="name"
     :disabled="disabled"
@@ -13,14 +13,14 @@
         <UIcon :name="offIcon" :class="offIconClass" />
       </span>
     </span>
-  </Switch>
+  </HSwitch>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { Switch } from '@headlessui/vue'
+import { Switch as HSwitch } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
@@ -32,8 +32,7 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Switch,
+    HSwitch,
     UIcon
   },
   props: {

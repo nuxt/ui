@@ -1,11 +1,11 @@
 <template>
   <div ref="trigger" :class="ui.wrapper" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
     <slot :open="open">
-      hover
+      Hover
     </slot>
 
     <div v-if="open && !prevent" ref="container" :class="[ui.container, ui.width]">
-      <transition appear v-bind="ui.transition">
+      <Transition appear v-bind="ui.transition">
         <div :class="[ui.base, ui.background, ui.color, ui.rounded, ui.shadow, ui.ring]">
           <slot name="text">
             {{ text }}
@@ -18,7 +18,7 @@
             </Ukbd>
           </span>
         </div>
-      </transition>
+      </Transition>
     </div>
   </div>
 </template>
