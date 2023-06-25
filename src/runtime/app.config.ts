@@ -308,7 +308,7 @@ const accordion = {
     openIcon: 'i-heroicons-chevron-down',
     closeIcon: ''
   }
-};
+}
 
 const kbd = {
   base: 'inline-flex items-center justify-center text-gray-900 dark:text-white',

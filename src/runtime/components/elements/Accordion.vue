@@ -68,15 +68,15 @@
 </template>
 
 <script lang="ts">
-import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import type { PropType } from "vue";
-import { defineComponent, computed } from "vue";
-import { defu } from "defu";
-import UIcon from "../elements/Icon.vue";
-import { useAppConfig } from "#imports";
+import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue"
+import type { PropType } from "vue"
+import { defineComponent, computed } from "vue"
+import { defu } from "defu"
+import UIcon from "../elements/Icon.vue"
+import { useAppConfig } from "#imports"
 // TODO: Remove
 // @ts-expect-error
-import appConfig from "#build/app.config";
+import appConfig from "#build/app.config"
 
 export default defineComponent({
   components: {
@@ -117,7 +117,7 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.accordion.default.size,
       validator (value: string) {
-        return Object.keys(appConfig.ui.accordion.size).includes(value);
+        return Object.keys(appConfig.ui.accordion.size).includes(value)
       }
     },
     contentClass: {
@@ -128,7 +128,7 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.accordion.default.color,
       validator (value: string) {
-        return [...appConfig.ui.colors].includes(value);
+        return [...appConfig.ui.colors].includes(value)
       }
     },
     ui: {
@@ -138,16 +138,16 @@ export default defineComponent({
   },
   setup (props) {
     // TODO: Remove
-    const appConfig = useAppConfig();
+    const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.accordion>>(() =>
       defu({}, props.ui, appConfig.ui.accordion)
-    );
+    )
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui
-    };
+    }
   }
-});
+})
 </script>
