@@ -1,6 +1,6 @@
 <template>
-  <Popover v-slot="{ open, close }" :class="ui.wrapper" @mouseleave="onMouseLeave">
-    <PopoverButton
+  <HPopover v-slot="{ open, close }" :class="ui.wrapper" @mouseleave="onMouseLeave">
+    <HPopoverButton
       ref="trigger"
       as="div"
       :disabled="disabled"
@@ -13,23 +13,23 @@
           Open
         </button>
       </slot>
-    </PopoverButton>
+    </HPopoverButton>
 
     <div v-if="open" ref="container" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
-      <transition appear v-bind="ui.transition">
-        <PopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
+      <Transition appear v-bind="ui.transition">
+        <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
           <slot name="panel" :open="open" :close="close" />
-        </PopoverPanel>
-      </transition>
+        </HPopoverPanel>
+      </Transition>
     </div>
-  </Popover>
+  </HPopover>
 </template>
 
 <script lang="ts">
 import { computed, ref, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel } from '@headlessui/vue'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
@@ -41,9 +41,9 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    Popover,
-    PopoverButton,
-    PopoverPanel
+    HPopover,
+    HPopoverButton,
+    HPopoverPanel
   },
   props: {
     mode: {
