@@ -29,7 +29,7 @@ const items = [
       icon: "i-heroicons-arrow-right-on-rectangle"
     }
   ]
-];
+]
 
 const branches = [
   [
@@ -50,7 +50,7 @@ const branches = [
       mail: "example@mail.com"
     }
   ]
-];
+]
 </script>
 
 <template>
