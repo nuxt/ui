@@ -23,6 +23,7 @@
     "dev": "nuxi dev docs",
     "build:docs": "nuxi generate docs",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "typecheck": "nuxi typecheck",
     "prepare": "nuxi prepare docs",
     "release": "release-it"
