@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody :class="ui.tbody">
-        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected]">
+        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected]" v-bind="omit(row, ['row', 'index', 'click'])" @click="row.click">
           <td v-if="modelValue" class="ps-4">
             <UCheckbox v-model="selected" :value="row" />
           </td>
@@ -69,6 +69,7 @@ import { ref, computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
 import { capitalize, orderBy } from 'lodash-es'
 import { defu } from 'defu'
+import { omit } from 'lodash-es'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -214,7 +215,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       emptyState,
       isSelected,
-      onSort
+      onSort,
+      omit
     }
   }
 })
