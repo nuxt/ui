@@ -4,8 +4,8 @@ const items = ref(Array(55))
 </script>
 
 <template>
-  <div class="w-full gap-3">
-    <div class="flex justify-between w-full mb-2 border-b pb-4">
+  <div class="w-full divide-y divide-gray-200 dark:divide-gray-700 space-y-4">
+    <div class="flex justify-between w-full">
       <div dir="ltr">
         <UInput
           icon="i-heroicons-magnifying-glass-20-solid"
@@ -27,7 +27,7 @@ const items = ref(Array(55))
       </div>
     </div>
 
-    <div class="flex justify-between w-full mt-4">
+    <div class="flex justify-between w-full pt-4">
       <div dir="ltr">
         <UPagination
           v-model="page"
