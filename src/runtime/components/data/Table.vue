@@ -12,7 +12,7 @@
               <UButton
                 v-if="column.sortable"
                 v-bind="{ ...ui.default.sortButton, ...sortButton }"
-                :icon="(!sort.column || sort.column !== column.key) ? (sortButton.icon || ui.default.sortButton) : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
+                :icon="(!sort.column || sort.column !== column.key) ? (sortButton.icon || ui.default.sortButton.icon) : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
                 :label="column[columnAttribute]"
                 @click="onSort(column)"
               />
