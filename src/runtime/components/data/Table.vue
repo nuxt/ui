@@ -22,9 +22,9 @@
         </tr>
       </thead>
       <tbody :class="ui.tbody">
-        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected]" v-bind="omit(row, ['row', 'index', 'click'])" @click="row.click">
+        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, row.click && ui.tr.active]" @click="row.click">
           <td v-if="modelValue" class="ps-4">
-            <UCheckbox v-model="selected" :value="row" />
+            <UCheckbox v-model="selected" :value="row" @click.stop />
           </td>
 
           <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
@@ -69,7 +69,6 @@ import { ref, computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
 import { capitalize, orderBy } from 'lodash-es'
 import { defu } from 'defu'
-import { omit } from 'lodash-es'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -93,7 +92,7 @@ export default defineComponent({
       default: () => defaultComparator
     },
     rows: {
-      type: Array as PropType<{ [key: string]: any }[]>,
+      type: Array as PropType<{ [key: string]: any, click?: Function }[]>,
       default: () => []
     },
     columns: {
@@ -215,8 +214,7 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       emptyState,
       isSelected,
-      onSort,
-      omit
+      onSort
     }
   }
 })
