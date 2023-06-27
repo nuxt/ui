@@ -1,4 +1,4 @@
-import { hexToRgb } from "../../src/runtime/utils"
+import { hexToRgb } from '../../src/runtime/utils'
 import colors from '#tailwind-config/theme/colors'
 
 export default defineNuxtPlugin({
