@@ -168,6 +168,7 @@ export default defineComponent({
     },
     options: {
       type: Array as PropType<{ [key: string]: any, disabled?: boolean }[] | string[]>,
+      type: Array as PropType<{ [key: string]: any, disabled?: boolean }[] | string[] | ReadonlyArray<string>>,
       default: () => []
     },
     name: {
