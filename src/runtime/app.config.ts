@@ -248,13 +248,36 @@ const dropdown = {
     enterActiveClass: 'transition duration-100 ease-out',
     enterFromClass: 'transform scale-95 opacity-0',
     enterToClass: 'transform scale-100 opacity-100',
-    leaveActiveClass: 'transition duration-75 ease-out',
+    leaveActiveClass: 'transition duration-75 ease-in',
     leaveFromClass: 'transform scale-100 opacity-100',
     leaveToClass: 'transform scale-95 opacity-0'
   },
   popper: {
     placement: 'bottom-end',
     strategy: 'fixed'
+  }
+}
+
+const accordion = {
+  wrapper: 'w-full flex flex-col gap-y-2',
+  item: {
+    base: '',
+    size: 'text-sm',
+    color: 'text-gray-500 dark:text-gray-400',
+    padding: 'py-2'
+  },
+  transition: {
+    enterActiveClass: 'transition duration-100 ease-in',
+    enterFromClass: 'transform opacity-0',
+    enterToClass: 'transform opacity-100',
+    leaveActiveClass: 'transition duration-75 ease-out',
+    leaveFromClass: 'transform opacity-100',
+    leaveToClass: 'transform opacity-0'
+  },
+  default: {
+    openIcon: 'i-heroicons-chevron-down-20-solid',
+    closeIcon: '',
+    variant: 'soft'
   }
 }
 
@@ -387,7 +410,7 @@ const formGroup = {
   label: {
     wrapper: 'flex content-center justify-between',
     base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-    required: `after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400`
+    required: 'after:content-[\'*\'] after:ms-0.5 after:text-red-500 dark:after:text-red-400'
   },
   description: 'text-sm text-gray-500 dark:text-gray-400',
   container: 'mt-1 relative',
@@ -541,7 +564,7 @@ const range = {
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   thumb: {
-    base: `[&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0`,
+    base: '[&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0',
     color: 'text-{color}-500 dark:text-{color}-400',
     background: '[&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:dark:bg-gray-900 [&::-moz-range-thumb]:bg-current',
     ring: '[&::-webkit-slider-thumb]:ring-2 [&::-webkit-slider-thumb]:ring-current',
@@ -926,6 +949,7 @@ export default {
     buttonGroup,
     dropdown,
     kbd,
+    accordion,
     input,
     formGroup,
     textarea,
