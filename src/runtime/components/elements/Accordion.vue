@@ -1,109 +1,65 @@
 <template>
-  <div :class="[ui.wrapper, ui.rounded, ui.gap[size]]">
-    <Disclosure
-      v-for="(item, index) in items"
-      v-slot="{ open }"
-      :key="index"
-      :default-open="defaultOpenAll || item.opened"
-      :class="[ui.base, ui.rounded]"
-      as="div"
-    >
-      <DisclosureButton :class="ui.base" as="div">
-        <slot
-          name="button"
-          :title="item.title"
-          :index="index"
-          :leading-icon="item.leadingIcon"
-          :is-open="open"
-        >
-          <UButton
-            :ui="{
-              rounded: ui.rounded,
-              shadow: ui.shadow,
-              variant: {
-                solid: ui.button.class,
-              },
-            }"
-            v-bind="{
-              color,
-              size,
-              disabled: item.disabled,
-            }"
-          >
-            <template #leading>
-              <div class="flex justify-center items-center">
-                <UIcon
-                  v-if="item.leadingIcon"
-                  :name="item.leadingIcon"
-                  :class="[ui.button.icon.size[size], leadingIconClass]"
-                />
-                <span>{{ item.title }}</span>
-              </div>
-            </template>
+  <div :class="ui.wrapper">
+    <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
+      <HDisclosureButton as="template">
+        <slot :item="item" :index="index" :open="open" :close="close">
+          <UButton v-bind="{ ...$attrs, ...omit(item, ['slot', 'content', 'defaultOpen']) }" class="w-full">
             <template #trailing>
               <UIcon
                 :name="!open ? openIcon : closeIcon ? closeIcon : openIcon"
+                class="ms-auto transform"
                 :class="[
-                  open && !closeIcon ? 'rotate-180 transform' : '',
-                  ui.button.icon.size[size],
+                  open && !closeIcon ? '-rotate-180' : '',
+                  uiButton.icon.size[item.size || uiButton.default.size]
                 ]"
               />
             </template>
           </UButton>
         </slot>
-      </DisclosureButton>
+      </HDisclosureButton>
 
-      <transition v-bind="ui.transition">
-        <DisclosurePanel
-          :class="[contentClass, ui.rounded, ui.size[size]]"
-          as="div"
-        >
-          <slot :name="`item-${index + 1}-content`" :content="item.content">
+      <Transition v-bind="ui.transition">
+        <HDisclosurePanel :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]">
+          <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
             {{ item.content }}
           </slot>
-        </DisclosurePanel>
-      </transition>
-    </Disclosure>
+        </HDisclosurePanel>
+      </Transition>
+    </HDisclosure>
   </div>
 </template>
 
 <script lang="ts">
-import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue"
-import type { PropType } from "vue"
-import { defineComponent, computed } from "vue"
-import { defu } from "defu"
-import UIcon from "../elements/Icon.vue"
-import { useAppConfig } from "#imports"
+import { defineComponent, computed } from 'vue'
+import type { PropType } from 'vue'
+import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel } from '@headlessui/vue'
+import { defu } from 'defu'
+import { omit } from 'lodash-es'
+import UIcon from '../elements/Icon.vue'
+import UButton from '../elements/Button.vue'
+import type { Button } from '../../types/button'
+import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
-import appConfig from "#build/app.config"
+import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    UIcon
+    HDisclosure,
+    HDisclosureButton,
+    HDisclosurePanel,
+    UIcon,
+    UButton
   },
+  inheritAttrs: false,
   props: {
     items: {
-      type: Array as PropType<{
-          title: string;
-          content?: string;
-          leadingIcon?: string;
-          opened?: boolean;
-          disabled?: boolean;
-        }[]>,
+      type: Array as PropType<Partial<Button & { slot: string, content: string, defaultOpen: boolean }>[]>,
       default: () => []
     },
-    defaultOpenAll: {
+    defaultOpen: {
       type: Boolean,
       default: false
-    },
-    leadingIconClass: {
-      type: String,
-      default: () => appConfig.ui.accordion.default.leadingIconClass
     },
     openIcon: {
       type: String,
@@ -112,24 +68,6 @@ export default defineComponent({
     closeIcon: {
       type: String,
       default: () => appConfig.ui.accordion.default.closeIcon
-    },
-    size: {
-      type: String,
-      default: () => appConfig.ui.accordion.default.size,
-      validator (value: string) {
-        return Object.keys(appConfig.ui.accordion.size).includes(value)
-      }
-    },
-    contentClass: {
-      type: String,
-      default: () => appConfig.ui.accordion.default.contentClass
-    },
-    color: {
-      type: String,
-      default: () => appConfig.ui.accordion.default.color,
-      validator (value: string) {
-        return [...appConfig.ui.colors].includes(value)
-      }
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.accordion>>,
@@ -140,13 +78,15 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.accordion>>(() =>
-      defu({}, props.ui, appConfig.ui.accordion)
-    )
+    const ui = computed<Partial<typeof appConfig.ui.accordion>>(() => defu({}, props.ui, appConfig.ui.accordion))
+
+    const uiButton = computed<Partial<typeof appConfig.ui.button>>(() => appConfig.ui.button)
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
-      ui
+      ui,
+      uiButton,
+      omit
     }
   }
 })

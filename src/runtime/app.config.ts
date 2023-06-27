@@ -248,7 +248,7 @@ const dropdown = {
     enterActiveClass: 'transition duration-100 ease-out',
     enterFromClass: 'transform scale-95 opacity-0',
     enterToClass: 'transform scale-100 opacity-100',
-    leaveActiveClass: 'transition duration-75 ease-out',
+    leaveActiveClass: 'transition duration-75 ease-in',
     leaveFromClass: 'transform scale-100 opacity-100',
     leaveToClass: 'transform scale-95 opacity-0'
   },
@@ -259,53 +259,23 @@ const dropdown = {
 }
 
 const accordion = {
-  wrapper: "w-full flex flex-col items-center justify-center space-y-2",
-  base: "w-full",
-  button: {
-    class: "flex w-full justify-between items-center bg-{color}-100 px-4 py-2 font-medium text-{color}-900 dark:text-gray-900 hover:bg-{color}-200 focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:opacity-75",
-    icon: {
-      size: {
-        '2xs': 'h-4 w-4',
-        xs: 'h-4 w-4',
-        sm: 'h-5 w-5',
-        md: 'h-5 w-5',
-        lg: 'h-6 w-6',
-        xl: 'h-7 w-7'
-      }
-    }
+  wrapper: 'w-full flex flex-col gap-y-2',
+  item: {
+    base: '',
+    size: 'text-sm',
+    color: 'text-gray-500 dark:text-gray-400',
+    padding: 'py-2'
   },
-  size: {
-    "2xs": "text-xs",
-    xs: "text-xs",
-    sm: "text-sm",
-    md: "text-sm",
-    lg: "text-lg",
-    xl: "text-xl"
-  },
-  gap: {
-    '2xs': 'gap-y-0.5',
-    xs: 'gap-y-0.5',
-    sm: 'gap-y-0.5',
-    md: 'gap-y-0.5',
-    lg: 'gap-y-1',
-    xl: 'gap-y-1.5'
-  },
-  shadow: "shadow-sm",
-  rounded: "rounded-lg",
   transition: {
-    enterActiveClass: "transition duration-100 ease-out",
-    enterFromClass: "transform scale-95 opacity-0",
-    enterToClass: "transform scale-100 opacity-100",
-    leaveActiveClass: "transition duration-75 ease-out",
-    leaveFromClass: "transform scale-100 opacity-100",
-    leaveToClass: "transform scale-95 opacity-0"
+    enterActiveClass: 'transition duration-100 ease-in',
+    enterFromClass: 'transform opacity-0',
+    enterToClass: 'transform opacity-100',
+    leaveActiveClass: 'transition duration-75 ease-out',
+    leaveFromClass: 'transform opacity-100',
+    leaveToClass: 'transform opacity-0'
   },
   default: {
-    size: 'md',
-    color: 'primary',
-    contentClass: "px-4 pt-4 pb-2 text-gray-500",
-    leadingIconClass: 'me-2',
-    openIcon: 'i-heroicons-chevron-down',
+    openIcon: 'i-heroicons-chevron-down-20-solid',
     closeIcon: ''
   }
 }
@@ -439,7 +409,7 @@ const formGroup = {
   label: {
     wrapper: 'flex content-center justify-between',
     base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-    required: `after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400`
+    required: 'after:content-[\'*\'] after:ms-0.5 after:text-red-500 dark:after:text-red-400'
   },
   description: 'text-sm text-gray-500 dark:text-gray-400',
   container: 'mt-1 relative',
@@ -593,7 +563,7 @@ const range = {
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   thumb: {
-    base: `[&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0`,
+    base: '[&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0',
     color: 'text-{color}-500 dark:text-{color}-400',
     background: '[&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:dark:bg-gray-900 [&::-moz-range-thumb]:bg-current',
     ring: '[&::-webkit-slider-thumb]:ring-2 [&::-webkit-slider-thumb]:ring-current',

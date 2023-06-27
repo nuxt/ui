@@ -28,5 +28,17 @@ const items = [{
 </script>
 
 <template>
-  <UAccordion :items="items" />
+  <UAccordion :items="items">
+    <template #default="{ item, open }">
+      <UButton :label="item.label" :icon="item.icon" color="gray" variant="ghost">
+        <template #trailing>
+          <UIcon
+            name="i-heroicons-chevron-right-20-solid"
+            class="w-5 h-5 ms-auto transform transition-transform duration-200"
+            :class="[open && 'rotate-90']"
+          />
+        </template>
+      </UButton>
+    </template>
+  </UAccordion>
 </template>
