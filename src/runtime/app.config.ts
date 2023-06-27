@@ -276,7 +276,8 @@ const accordion = {
   },
   default: {
     openIcon: 'i-heroicons-chevron-down-20-solid',
-    closeIcon: ''
+    closeIcon: '',
+    variant: 'soft'
   }
 }
 
