@@ -188,7 +188,13 @@ export default defineComponent({
 
     function onSort (column) {
       if (sort.value.column === column.key) {
-        sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+        const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
+
+        if (sort.value.direction === direction) {
+          sort.value = defu({}, props.sort, { column: null, direction: 'asc' })
+        } else {
+          sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+        }
       } else {
         sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
