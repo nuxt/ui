@@ -1,7 +1,7 @@
 <template>
   <div :class="ui.wrapper">
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
-      <HDisclosureButton as="template">
+      <HDisclosureButton as="template" :disabled="item.disabled">
         <slot :item="item" :index="index" :open="open" :close="close">
           <UButton v-bind="{ ...$attrs, ...omit(item, ['slot', 'content', 'defaultOpen']) }" class="w-full">
             <template #trailing>
@@ -54,7 +54,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     items: {
-      type: Array as PropType<Partial<Button & { slot: string, content: string, defaultOpen: boolean }>[]>,
+      type: Array as PropType<Partial<Button & { slot: string, disabled: boolean, content: string, defaultOpen: boolean }>[]>,
       default: () => []
     },
     defaultOpen: {
