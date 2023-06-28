@@ -8,12 +8,8 @@
             <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
 
             <div class="w-0 flex-1">
-              <p :class="ui.title">
-                {{ title }}
-              </p>
-              <p v-if="description" :class="ui.description">
-                {{ description }}
-              </p>
+              <p :class="ui.title" v-html="title" />
+              <p v-if="description" :class="ui.description" v-html="description" />
 
               <div v-if="description && actions.length" class="mt-3 flex items-center gap-2">
                 <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
