@@ -1,7 +1,7 @@
 <template>
   <div :class="ui.wrapper">
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
-      <HDisclosureButton as="template" :disabled="item.disabled" :ref="() => updateClosesRefs(close, index)">
+      <HDisclosureButton as="template" :ref="() => updateClosesRefs(close, index)" :disabled="item.disabled">
         <slot :item="item" :index="index" :open="open" :close="close">
           <UButton v-bind="{ ...omit(ui.default, ['openIcon', 'closeIcon']), ...$attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }" class="w-full" @click="closeAll(index)">
             <template #trailing>
@@ -89,14 +89,14 @@ export default defineComponent({
     const closesRefs = ref([])
 
     function updateClosesRefs(close, index) {
-      closesRefs.value[index] = close;
+      closesRefs.value[index] = close
     }
 
     function closeAll(itemIndex) {
-      if (!props.items[itemIndex].closeOthers && !props.closeOthers) return;
+      if (!props.items[itemIndex].closeOthers && !props.closeOthers) return
 
       closesRefs.value.forEach((close, index) => {
-        if (index === itemIndex) return;
+        if (index === itemIndex) return
 
         close()
       })
@@ -109,7 +109,7 @@ export default defineComponent({
       omit,
       closeAll,
       closesRefs,
-      updateClosesRefs,
+      updateClosesRefs
     }
   }
 })
