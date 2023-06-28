@@ -1,9 +1,9 @@
 <template>
   <div :class="ui.wrapper">
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
-      <HDisclosureButton as="template" :disabled="item.disabled">
+      <HDisclosureButton as="template" :disabled="item.disabled" :ref="() => updateClosesRefs(close, index)">
         <slot :item="item" :index="index" :open="open" :close="close">
-          <UButton v-bind="{ ...omit(ui.default, ['openIcon', 'closeIcon']), ...$attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }" class="w-full">
+          <UButton v-bind="{ ...omit(ui.default, ['openIcon', 'closeIcon']), ...$attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }" class="w-full" @click="closeAll(index)">
             <template #trailing>
               <UIcon
                 :name="!open ? openIcon : closeIcon ? closeIcon : openIcon"
@@ -54,7 +54,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     items: {
-      type: Array as PropType<Partial<Button & { slot: string, disabled: boolean, content: string, defaultOpen: boolean }>[]>,
+      type: Array as PropType<Partial<Button & { slot: string, disabled: boolean, content: string, defaultOpen: boolean, closeOthers: boolean }>[]>,
       default: () => []
     },
     defaultOpen: {
@@ -69,6 +69,10 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.accordion.default.closeIcon
     },
+    closeOthers: {
+      type: Boolean,
+      default: false
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.accordion>>,
       default: () => appConfig.ui.accordion
@@ -82,11 +86,30 @@ export default defineComponent({
 
     const uiButton = computed<Partial<typeof appConfig.ui.button>>(() => appConfig.ui.button)
 
+    const closesRefs = ref([])
+
+    function updateClosesRefs(close, index) {
+      closesRefs.value[index] = close;
+    }
+
+    function closeAll(itemIndex) {
+      if (!props.items[itemIndex].closeOthers && !props.closeOthers) return;
+
+      closesRefs.value.forEach((close, index) => {
+        if (index === itemIndex) return;
+
+        close()
+      })
+    }
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       uiButton,
-      omit
+      omit,
+      closeAll,
+      closesRefs,
+      updateClosesRefs,
     }
   }
 })
