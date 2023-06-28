@@ -554,12 +554,12 @@ const toggle = {
 
 const range = {
   wrapper: 'relative w-full',
-  base: 'w-full absolute appearance-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none [&::-webkit-slider-runnable-track]:h-full [&::-moz-slider-runnable-track]:h-full',
+  base: 'w-full absolute appearance-none cursor-pointer disabled:cursor-not-allowed disabled:bg-opacity-50 focus:outline-none [&::-webkit-slider-runnable-track]:h-full [&::-moz-slider-runnable-track]:h-full peer',
   background: 'bg-gray-200 dark:bg-gray-700',
   rounded: 'rounded-lg',
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   progress: {
-    base: 'absolute inset-0 h-full pointer-events-none',
+    base: 'absolute inset-0 h-full pointer-events-none peer-disabled:bg-opacity-50',
     rounded: 'rounded-s-lg',
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
