@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody :class="ui.tbody">
-        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, row.click && ui.tr.active]" @click="row.click">
+        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, row.click && ui.tr.active]" @click="() => row.click && row.click(row)">
           <td v-if="modelValue" class="ps-4">
             <UCheckbox v-model="selected" :value="row" @click.stop />
           </td>
@@ -69,6 +69,7 @@ import { ref, computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
 import { capitalize, orderBy } from 'lodash-es'
 import { defu } from 'defu'
+import { omit } from 'lodash-es'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -143,7 +144,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.table>>(() => defu({}, props.ui, appConfig.ui.table))
 
-    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: capitalize(key), sortable: false })))
+    const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: capitalize(key), sortable: false })))
 
     const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
 
