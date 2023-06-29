@@ -267,12 +267,8 @@ const accordion = {
     padding: 'py-2'
   },
   transition: {
-    enterActiveClass: 'transition duration-100 ease-in',
-    enterFromClass: 'transform opacity-0',
-    enterToClass: 'transform opacity-100',
-    leaveActiveClass: 'transition duration-75 ease-out',
-    leaveFromClass: 'transform opacity-100',
-    leaveToClass: 'transform opacity-0'
+    enterActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out',
+    leaveActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out'
   },
   default: {
     openIcon: 'i-heroicons-chevron-down-20-solid',
