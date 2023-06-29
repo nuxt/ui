@@ -1,6 +1,8 @@
 <template>
   <UModal
     v-model="isSearchModalOpen"
+    :overlay="!isXs"
+    :transition="!isXs"
     :ui="{
       padding: 'sm:p-4',
       rounded: 'sm:rounded-lg',
@@ -33,6 +35,9 @@ const navigation: Ref<NavItem[]> = inject('navigation')
 const router = useRouter()
 const { usingInput } = useShortcuts()
 const { isSearchModalOpen } = useDocs()
+const breakpoints = useBreakpoints({ mobile: 640 })
+
+const isXs = breakpoints.smaller('mobile')
 
 const commandPaletteRef = ref<HTMLElement & { query: Ref<string>, results: { item: Command }[] }>()
 
