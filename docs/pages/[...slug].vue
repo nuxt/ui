@@ -14,7 +14,7 @@
       <DocsFooter class="mt-16" />
     </div>
 
-    <DocsToc v-if="page.body?.toc" :toc="page.body.toc" class="lg:col-span-2" />
+    <DocsToc v-if="page.body?.toc" :toc="page.body.toc" class="lg:col-span-2 order-first lg:order-last" />
   </div>
   <div v-else class="flex-1 flex flex-col items-center justify-center">
     <div class="text-center">
