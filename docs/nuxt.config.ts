@@ -1,6 +1,7 @@
 import ui from '../src/module'
 import { excludeColors } from '../src/colors'
 import colors from 'tailwindcss/colors'
+import pkg from '../package.json'
 
 export default defineNuxtConfig({
   // @ts-ignore
@@ -14,6 +15,11 @@ export default defineNuxtConfig({
     'nuxt-lodash',
     'nuxt-component-meta'
   ],
+  runtimeConfig: {
+    public: {
+      version: pkg.version
+    }
+  },
   content: {
     highlight: {
       theme: {

@@ -33,6 +33,7 @@
           target="_blank"
           color="gray"
           variant="ghost"
+          class="hidden lg:inline-flex"
           icon="i-simple-icons-twitter"
         />
 
@@ -41,6 +42,7 @@
           target="_blank"
           color="gray"
           variant="ghost"
+          class="hidden lg:inline-flex"
           icon="i-simple-icons-github"
         />
 
