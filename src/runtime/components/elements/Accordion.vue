@@ -77,7 +77,7 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.accordion.default.closeIcon
     },
-    closeOthers: {
+    multiple: {
       type: Boolean,
       default: false
     },
@@ -101,7 +101,7 @@ export default defineComponent({
     }
 
     function closeAll (itemIndex: number) {
-      if (!props.items[itemIndex].closeOthers && !props.closeOthers) return
+      if (!props.items[itemIndex].closeOthers && props.multiple) return
 
       closesRefs.value.forEach((close, index) => {
         if (index === itemIndex) return
