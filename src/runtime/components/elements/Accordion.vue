@@ -94,13 +94,13 @@ export default defineComponent({
 
     const uiButton = computed<Partial<typeof appConfig.ui.button>>(() => appConfig.ui.button)
 
-    const closesRefs = ref([])
+    const closesRefs = ref<Function[]>([])
 
-    function updateClosesRefs (close, index) {
+    function updateClosesRefs (close: Function, index: number) {
       closesRefs.value[index] = close
     }
 
-    function closeAll (itemIndex) {
+    function closeAll (itemIndex: number) {
       if (!props.items[itemIndex].closeOthers && !props.closeOthers) return
 
       closesRefs.value.forEach((close, index) => {
@@ -144,7 +144,7 @@ export default defineComponent({
       onEnter,
       onBeforeLeave,
       onAfterEnter,
-      onLeave,
+      onLeave
     }
   }
 })
