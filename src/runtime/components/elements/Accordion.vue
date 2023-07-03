@@ -1,9 +1,9 @@
 <template>
   <div :class="ui.wrapper">
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
-      <HDisclosureButton :ref="() => updateClosesRefs(close, index)" as="template" :disabled="item.disabled">
+      <HDisclosureButton :ref="() => buttonRefs[index] = close" as="template" :disabled="item.disabled">
         <slot :item="item" :index="index" :open="open" :close="close">
-          <UButton v-bind="{ ...omit(ui.default, ['openIcon', 'closeIcon']), ...$attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }" class="w-full" @click="closeAll(index)">
+          <UButton v-bind="{ ...omit(ui.default, ['openIcon', 'closeIcon']), ...$attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }" class="w-full">
             <template #trailing>
               <UIcon
                 :name="!open ? openIcon : closeIcon ? closeIcon : openIcon"
@@ -17,6 +17,8 @@
           </UButton>
         </slot>
       </HDisclosureButton>
+
+      <StateEmitter :open="open" @open="closeOthers(index)" />
 
       <Transition
         v-bind="ui.transition"
@@ -45,6 +47,7 @@ import { defu } from 'defu'
 import { omit } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
+import StateEmitter from '../../utils/StateEmitter'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -57,7 +60,8 @@ export default defineComponent({
     HDisclosureButton,
     HDisclosurePanel,
     UIcon,
-    UButton
+    UButton,
+    StateEmitter
   },
   inheritAttrs: false,
   props: {
@@ -94,16 +98,14 @@ export default defineComponent({
 
     const uiButton = computed<Partial<typeof appConfig.ui.button>>(() => appConfig.ui.button)
 
-    const closesRefs = ref<Function[]>([])
+    const buttonRefs = ref<Function[]>([])
 
-    function updateClosesRefs (close: Function, index: number) {
-      closesRefs.value[index] = close
-    }
+    function closeOthers (itemIndex: number) {
+      if (!props.items[itemIndex].closeOthers && props.multiple) {
+        return
+      }
 
-    function closeAll (itemIndex: number) {
-      if (!props.items[itemIndex].closeOthers && props.multiple) return
-
-      closesRefs.value.forEach((close, index) => {
+      buttonRefs.value.forEach((close, index) => {
         if (index === itemIndex) return
 
         close()
@@ -128,19 +130,18 @@ export default defineComponent({
     }
 
     function onLeave (el: HTMLElement, done) {
-      el.style.height = '0';
+      el.style.height = '0'
 
-      (el as HTMLElement).addEventListener('transitionend', done, { once: true })
+      el.addEventListener('transitionend', done, { once: true })
     }
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       uiButton,
+      buttonRefs,
+      closeOthers,
       omit,
-      closeAll,
-      closesRefs,
-      updateClosesRefs,
       onEnter,
       onBeforeLeave,
       onAfterEnter,
