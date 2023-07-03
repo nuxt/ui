@@ -1,7 +1,7 @@
 <template>
   <div :class="ui.wrapper">
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
-      <HDisclosureButton as="template" :disabled="item.disabled">
+      <HDisclosureButton :ref="() => buttonRefs[index] = close" as="template" :disabled="item.disabled">
         <slot :item="item" :index="index" :open="open" :close="close">
           <UButton v-bind="{ ...omit(ui.default, ['openIcon', 'closeIcon']), ...$attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }" class="w-full">
             <template #trailing>
@@ -17,6 +17,8 @@
           </UButton>
         </slot>
       </HDisclosureButton>
+
+      <StateEmitter :open="open" @open="closeOthers(index)" />
 
       <Transition
         v-bind="ui.transition"
@@ -45,6 +47,7 @@ import { defu } from 'defu'
 import { omit } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
+import StateEmitter from '../../utils/StateEmitter'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -57,12 +60,13 @@ export default defineComponent({
     HDisclosureButton,
     HDisclosurePanel,
     UIcon,
-    UButton
+    UButton,
+    StateEmitter
   },
   inheritAttrs: false,
   props: {
     items: {
-      type: Array as PropType<Partial<Button & { slot: string, disabled: boolean, content: string, defaultOpen: boolean }>[]>,
+      type: Array as PropType<Partial<Button & { slot: string, disabled: boolean, content: string, defaultOpen: boolean, closeOthers: boolean }>[]>,
       default: () => []
     },
     defaultOpen: {
@@ -77,6 +81,10 @@ export default defineComponent({
       type: String,
       default: () => appConfig.ui.accordion.default.closeIcon
     },
+    multiple: {
+      type: Boolean,
+      default: false
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.accordion>>,
       default: () => appConfig.ui.accordion
@@ -89,6 +97,20 @@ export default defineComponent({
     const ui = computed<Partial<typeof appConfig.ui.accordion>>(() => defu({}, props.ui, appConfig.ui.accordion))
 
     const uiButton = computed<Partial<typeof appConfig.ui.button>>(() => appConfig.ui.button)
+
+    const buttonRefs = ref<Function[]>([])
+
+    function closeOthers (itemIndex: number) {
+      if (!props.items[itemIndex].closeOthers && props.multiple) {
+        return
+      }
+
+      buttonRefs.value.forEach((close, index) => {
+        if (index === itemIndex) return
+
+        close()
+      })
+    }
 
     function onEnter (el: HTMLElement, done) {
       el.style.height = '0'
@@ -108,20 +130,22 @@ export default defineComponent({
     }
 
     function onLeave (el: HTMLElement, done) {
-      el.style.height = '0';
+      el.style.height = '0'
 
-      (el as HTMLElement).addEventListener('transitionend', done, { once: true })
+      el.addEventListener('transitionend', done, { once: true })
     }
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       uiButton,
+      buttonRefs,
+      closeOthers,
+      omit,
       onEnter,
       onBeforeLeave,
       onAfterEnter,
-      onLeave,
-      omit
+      onLeave
     }
   }
 })
