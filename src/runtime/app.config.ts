@@ -259,12 +259,12 @@ const dropdown = {
 }
 
 const accordion = {
-  wrapper: 'w-full flex flex-col gap-y-2',
+  wrapper: 'w-full flex flex-col',
   item: {
     base: '',
     size: 'text-sm',
     color: 'text-gray-500 dark:text-gray-400',
-    padding: 'py-2'
+    padding: 'pt-1.5 pb-3'
   },
   transition: {
     enterActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out',
@@ -273,6 +273,7 @@ const accordion = {
   default: {
     openIcon: 'i-heroicons-chevron-down-20-solid',
     closeIcon: '',
+    class: 'mb-1.5 w-full',
     variant: 'soft'
   }
 }
