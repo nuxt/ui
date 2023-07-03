@@ -259,7 +259,7 @@ const dropdown = {
 }
 
 const accordion = {
-  wrapper: 'w-full flex flex-col gap-y-2',
+  wrapper: 'w-full flex flex-col',
   item: {
     base: '',
     size: 'text-sm',
@@ -273,7 +273,10 @@ const accordion = {
   default: {
     openIcon: 'i-heroicons-chevron-down-20-solid',
     closeIcon: '',
-    variant: 'soft'
+    button: {
+      class:'mb-1.5 w-full',
+      variant: 'soft'
+    }
   }
 }
 
