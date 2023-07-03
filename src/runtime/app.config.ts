@@ -15,14 +15,16 @@ const table = {
     padding: 'px-3 py-3.5',
     color: 'text-gray-900 dark:text-white',
     font: 'font-semibold',
-    size: 'text-sm'
+    size: 'text-sm',
+    border: 'border border -gray-500 dark:border -gray-400'
   },
   td: {
     base: 'whitespace-nowrap',
     padding: 'px-3 py-4',
     color: 'text-gray-500 dark:text-gray-400',
     font: '',
-    size: 'text-sm'
+    size: 'text-sm',
+    border: 'border border -gray-500 dark:border -gray-400'
   },
   loadingState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',

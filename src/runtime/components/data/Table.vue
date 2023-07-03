@@ -7,7 +7,7 @@
             <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" @change="selected = $event.target.checked ? rows : []" />
           </th>
 
-          <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]">
+          <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class,  border ? ui.th.border : '' ]">
             <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
@@ -23,11 +23,11 @@
       </thead>
       <tbody :class="ui.tbody">
         <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected]">
-          <td v-if="modelValue" class="ps-4">
+          <td v-if="modelValue" class="ps-4" :class="[border ? ui.td.border : '']">
             <UCheckbox v-model="selected" :value="row" />
           </td>
 
-          <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
+          <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, border ? ui.td.border : '']">
             <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index">
               {{ row[column.key] }}
             </slot>
@@ -134,6 +134,10 @@ export default defineComponent({
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.table>>,
       default: () => appConfig.ui.table
+    },
+    border : {
+      type : Boolean,
+      default : false
     }
   },
   emits: ['update:modelValue'],
