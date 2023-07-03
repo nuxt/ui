@@ -18,12 +18,20 @@
         </slot>
       </HDisclosureButton>
 
-      <Transition v-bind="ui.transition">
-        <HDisclosurePanel :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]">
-          <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
-            {{ item.content }}
-          </slot>
-        </HDisclosurePanel>
+      <Transition
+        v-bind="ui.transition"
+        @enter="onEnter"
+        @after-enter="onAfterEnter"
+        @before-leave="onBeforeLeave"
+        @leave="onLeave"
+      >
+        <div v-show="open">
+          <HDisclosurePanel :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]" static>
+            <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
+              {{ item.content }}
+            </slot>
+          </HDisclosurePanel>
+        </div>
       </Transition>
     </HDisclosure>
   </div>
@@ -82,10 +90,37 @@ export default defineComponent({
 
     const uiButton = computed<Partial<typeof appConfig.ui.button>>(() => appConfig.ui.button)
 
+    function onEnter (el: HTMLElement, done) {
+      el.style.height = '0'
+      el.offsetHeight // Trigger a reflow, flushing the CSS changes
+      el.style.height = el.scrollHeight + 'px'
+
+      el.addEventListener('transitionend', done, { once: true })
+    }
+
+    function onBeforeLeave (el: HTMLElement) {
+      el.style.height = el.scrollHeight + 'px'
+      el.offsetHeight // Trigger a reflow, flushing the CSS changes
+    }
+
+    function onAfterEnter (el: HTMLElement) {
+      el.style.height = 'auto'
+    }
+
+    function onLeave (el: HTMLElement, done) {
+      el.style.height = '0';
+
+      (el as HTMLElement).addEventListener('transitionend', done, { once: true })
+    }
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       uiButton,
+      onEnter,
+      onBeforeLeave,
+      onAfterEnter,
+      onLeave,
       omit
     }
   }
