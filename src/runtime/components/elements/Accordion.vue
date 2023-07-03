@@ -3,7 +3,7 @@
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
       <HDisclosureButton as="template" :disabled="item.disabled">
         <slot :item="item" :index="index" :open="open" :close="close">
-          <UButton v-bind="{ ...ui.default.button, ...$attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }">
+          <UButton v-bind="{ ...omit(ui.default, ['openIcon', 'closeIcon']), ...$attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }">
             <template #trailing>
               <UIcon
                 :name="!open ? openIcon : closeIcon ? closeIcon : openIcon"
