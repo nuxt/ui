@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="searchable ? 'Combobox' : 'Listbox'"
+    :is="searchable ? 'HCombobox' : 'HListbox'"
     v-slot="{ open }"
     :by="by"
     :name="name"
@@ -21,7 +21,7 @@
     >
 
     <component
-      :is="searchable ? 'ComboboxButton' : 'ListboxButton'"
+      :is="searchable ? 'HComboboxButton' : 'HListboxButton'"
       ref="trigger"
       as="div"
       role="button"
@@ -51,9 +51,9 @@
     </component>
 
     <div v-if="open" ref="container" :class="[ui.container, ui.width]">
-      <transition v-bind="ui.transition">
-        <component :is="searchable ? 'ComboboxOptions' : 'ListboxOptions'" static :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.padding, ui.height]">
-          <ComboboxInput
+      <Transition v-bind="ui.transition">
+        <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.padding, ui.height]">
+          <HComboboxInput
             v-if="searchable"
             ref="searchInput"
             :display-value="() => query"
@@ -65,7 +65,7 @@
             @change="query = $event.target.value"
           />
           <component
-            :is="searchable ? 'ComboboxOption' : 'ListboxOption'"
+            :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
             v-for="(option, index) in filteredOptions"
             v-slot="{ active, selected, disabled: optionDisabled }"
             :key="index"
@@ -95,7 +95,7 @@
             </li>
           </component>
 
-          <component :is="searchable ? 'ComboboxOption' : 'ListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
+          <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
             <li :class="[ui.option.base, ui.option.rounded, ui.option.padding, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive]">
               <div :class="ui.option.container">
                 <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
@@ -110,7 +110,7 @@
             </slot>
           </p>
         </component>
-      </transition>
+      </Transition>
     </div>
   </component>
 </template>
@@ -118,8 +118,18 @@
 <script lang="ts">
 import { ref, computed, watch, defineComponent } from 'vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
+import {
+  Combobox as HCombobox,
+  ComboboxButton as HComboboxButton,
+  ComboboxOptions as HComboboxOptions,
+  ComboboxOption as HComboboxOption,
+  ComboboxInput as HComboboxInput,
+  Listbox as HListbox,
+  ListboxButton as HListboxButton,
+  ListboxOptions as HListboxOptions,
+  ListboxOption as HListboxOption
+} from '@headlessui/vue'
 import { defu } from 'defu'
-import { Combobox, ComboboxButton, ComboboxOptions, ComboboxOption, ComboboxInput, Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { classNames } from '../../utils'
@@ -134,15 +144,15 @@ import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
-    Combobox,
-    ComboboxButton,
-    ComboboxOptions,
-    ComboboxOption,
-    ComboboxInput,
-    Listbox,
-    ListboxButton,
-    ListboxOptions,
-    ListboxOption,
+    HCombobox,
+    HComboboxButton,
+    HComboboxOptions,
+    HComboboxOption,
+    HComboboxInput,
+    HListbox,
+    HListboxButton,
+    HListboxOptions,
+    HListboxOption,
     UIcon,
     UAvatar
   },

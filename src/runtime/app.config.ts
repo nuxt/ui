@@ -11,7 +11,7 @@ const table = {
     selected: 'bg-gray-50 dark:bg-gray-800/50'
   },
   th: {
-    base: 'text-left',
+    base: 'text-left rtl:text-right',
     padding: 'px-3 py-3.5',
     color: 'text-gray-900 dark:text-white',
     font: 'font-semibold',
@@ -75,7 +75,7 @@ const avatar = {
     '3xl': 'h-20 w-20 text-2xl'
   },
   chip: {
-    base: 'absolute block rounded-full ring-1 ring-white dark:ring-gray-900',
+    base: 'absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium',
     background: 'bg-{color}-500 dark:bg-{color}-400',
     position: {
       'top-right': 'top-0 right-0',
@@ -84,15 +84,15 @@ const avatar = {
       'bottom-left': 'bottom-0 left-0'
     },
     size: {
-      '3xs': 'h-1 w-1',
-      '2xs': 'h-1 w-1',
-      xs: 'h-1.5 w-1.5',
-      sm: 'h-2 w-2',
-      md: 'h-2.5 w-2.5',
-      lg: 'h-3 w-3',
-      xl: 'h-3.5 w-3.5',
-      '2xl': 'h-3.5 w-3.5',
-      '3xl': 'h-4 w-4'
+      '3xs': 'h-[4px] min-w-[4px] text-[4px] p-px',
+      '2xs': 'h-[5px] min-w-[5px] text-[5px] p-px',
+      xs: 'h-1.5 min-w-[0.375rem] text-[6px] p-px',
+      sm: 'h-2 min-w-[0.5rem] text-[7px] p-0.5',
+      md: 'h-2.5 min-w-[0.625rem] text-[8px] p-0.5',
+      lg: 'h-3 min-w-[0.75rem] text-[10px] p-0.5',
+      xl: 'h-3.5 min-w-[0.875rem] text-[11px] p-1',
+      '2xl': 'h-4 min-w-[1rem] text-[12px] p-1',
+      '3xl': 'h-5 min-w-[1.25rem] text-[14px] p-1'
     }
   },
   default: {
@@ -105,7 +105,7 @@ const avatar = {
 const avatarGroup = {
   wrapper: 'flex flex-row-reverse',
   ring: 'ring-2 ring-white dark:ring-gray-900',
-  margin: '-mr-1.5 first:mr-0'
+  margin: '-me-1.5 first:me-0'
 }
 
 const badge = {
@@ -182,10 +182,10 @@ const button = {
   },
   variant: {
     solid: 'shadow-sm text-white dark:text-gray-900 bg-{color}-500 hover:bg-{color}-600 disabled:bg-{color}-500 dark:bg-{color}-400 dark:hover:bg-{color}-500 dark:disabled:bg-{color}-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
-    outline: 'ring-1 ring-inset ring-current text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
-    soft: 'text-{color}-500 dark:text-{color}-400 bg-{color}-50 hover:bg-{color}-100 dark:bg-{color}-950 dark:hover:bg-{color}-900 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
-    ghost: 'text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
-    link: 'text-{color}-500 hover:text-{color}-600 dark:text-{color}-400 dark:hover:text-{color}-500 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400'
+    outline: 'ring-1 ring-inset ring-current text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 disabled:bg-transparent dark:hover:bg-{color}-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
+    soft: 'text-{color}-500 dark:text-{color}-400 bg-{color}-50 hover:bg-{color}-100 disabled:bg-{color}-50 dark:bg-{color}-950 dark:hover:bg-{color}-900 dark:disabled:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
+    ghost: 'text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 disabled:bg-transparent dark:hover:bg-{color}-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
+    link: 'text-{color}-500 hover:text-{color}-600 disabled:text-{color}-500 dark:text-{color}-400 dark:hover:text-{color}-500 dark:disabled:text-{color}-400 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400'
   },
   icon: {
     base: 'flex-shrink-0',
@@ -213,7 +213,7 @@ const buttonGroup = {
 }
 
 const dropdown = {
-  wrapper: 'relative inline-flex text-left',
+  wrapper: 'relative inline-flex text-left rtl:text-right',
   container: 'z-20',
   width: 'w-48',
   height: '',
@@ -241,19 +241,40 @@ const dropdown = {
       base: 'flex-shrink-0',
       size: '3xs'
     },
-    shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ml-auto'
+    shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ms-auto'
   },
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition duration-100 ease-out',
     enterFromClass: 'transform scale-95 opacity-0',
     enterToClass: 'transform scale-100 opacity-100',
-    leaveActiveClass: 'transition duration-75 ease-out',
+    leaveActiveClass: 'transition duration-75 ease-in',
     leaveFromClass: 'transform scale-100 opacity-100',
     leaveToClass: 'transform scale-95 opacity-0'
   },
   popper: {
     placement: 'bottom-end',
     strategy: 'fixed'
+  }
+}
+
+const accordion = {
+  wrapper: 'w-full flex flex-col',
+  item: {
+    base: '',
+    size: 'text-sm',
+    color: 'text-gray-500 dark:text-gray-400',
+    padding: 'pt-1.5 pb-3'
+  },
+  transition: {
+    enterActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out',
+    leaveActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out'
+  },
+  default: {
+    openIcon: 'i-heroicons-chevron-down-20-solid',
+    closeIcon: '',
+    class: 'mb-1.5 w-full',
+    variant: 'soft'
   }
 }
 
@@ -307,30 +328,30 @@ const input = {
   },
   leading: {
     padding: {
-      '2xs': 'pl-7',
-      xs: 'pl-8',
-      sm: 'pl-9',
-      md: 'pl-10',
-      lg: 'pl-11',
-      xl: 'pl-12'
+      '2xs': 'ps-7',
+      xs: 'ps-8',
+      sm: 'ps-9',
+      md: 'ps-10',
+      lg: 'ps-11',
+      xl: 'ps-12'
     }
   },
   trailing: {
     padding: {
-      '2xs': 'pr-7',
-      xs: 'pr-8',
-      sm: 'pr-9',
-      md: 'pr-10',
-      lg: 'pr-11',
-      xl: 'pr-12'
+      '2xs': 'pe-7',
+      xs: 'pe-8',
+      sm: 'pe-9',
+      md: 'pe-10',
+      lg: 'pe-11',
+      xl: 'pe-12'
     }
   },
   color: {
     white: {
-      outline: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+      outline: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
     },
     gray: {
-      outline: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+      outline: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
     }
   },
   variant: {
@@ -349,27 +370,27 @@ const input = {
       xl: 'h-6 w-6'
     },
     leading: {
-      wrapper: 'absolute inset-y-0 left-0 flex items-center',
+      wrapper: 'absolute inset-y-0 start-0 flex items-center',
       pointer: 'pointer-events-none',
       padding: {
-        '2xs': 'pl-2',
-        xs: 'pl-2.5',
-        sm: 'pl-2.5',
-        md: 'pl-3',
-        lg: 'pl-3.5',
-        xl: 'pl-3.5'
+        '2xs': 'ps-2',
+        xs: 'ps-2.5',
+        sm: 'ps-2.5',
+        md: 'ps-3',
+        lg: 'ps-3.5',
+        xl: 'ps-3.5'
       }
     },
     trailing: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center',
+      wrapper: 'absolute inset-y-0 end-0 flex items-center',
       pointer: 'pointer-events-none',
       padding: {
-        '2xs': 'pr-2',
-        xs: 'pr-2.5',
-        sm: 'pr-2.5',
-        md: 'pr-3',
-        lg: 'pr-3.5',
-        xl: 'pr-3.5'
+        '2xs': 'pe-2',
+        xs: 'pe-2.5',
+        sm: 'pe-2.5',
+        md: 'pe-3',
+        lg: 'pe-3.5',
+        xl: 'pe-3.5'
       }
     }
   },
@@ -386,7 +407,7 @@ const formGroup = {
   label: {
     wrapper: 'flex content-center justify-between',
     base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-    required: `after:content-['*'] after:ml-0.5 after:text-red-500 dark:after:text-red-400`
+    required: 'after:content-[\'*\'] after:ms-0.5 after:text-red-500 dark:after:text-red-400'
   },
   description: 'text-sm text-gray-500 dark:text-gray-400',
   container: 'mt-1 relative',
@@ -400,7 +421,7 @@ const textarea = {
   default: {
     size: 'sm',
     color: 'white',
-    variant: 'outline',
+    variant: 'outline'
   }
 }
 
@@ -437,7 +458,7 @@ const selectMenu = {
     container: 'flex items-center gap-2 min-w-0',
     active: 'bg-gray-100 dark:bg-gray-900',
     inactive: '',
-    selected: 'pr-7',
+    selected: 'pe-7',
     disabled: 'cursor-not-allowed opacity-50',
     empty: 'text-sm text-gray-400 dark:text-gray-500 px-2 py-1.5',
     icon: {
@@ -446,8 +467,8 @@ const selectMenu = {
       inactive: 'text-gray-400 dark:text-gray-500'
     },
     selectedIcon: {
-      wrapper: 'absolute inset-y-0 right-0 flex items-center',
-      padding: 'pr-2',
+      wrapper: 'absolute inset-y-0 end-0 flex items-center',
+      padding: 'pe-2',
       base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
     },
     avatar: {
@@ -458,6 +479,7 @@ const selectMenu = {
       base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
     }
   },
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     leaveActiveClass: 'transition ease-in duration-100',
     leaveFromClass: 'opacity-100',
@@ -473,40 +495,90 @@ const selectMenu = {
 
 const radio = {
   wrapper: 'relative flex items-start',
-  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  base: 'h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  color: 'text-{color}-500 dark:text-{color}-400',
+  background: 'bg-white dark:bg-gray-900',
+  border: 'border border-gray-300 dark:border-gray-700',
+  ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   label: 'font-medium text-gray-700 dark:text-gray-200',
   required: 'text-red-500 dark:text-red-400',
-  help: 'text-gray-500 dark:text-gray-400'
+  help: 'text-gray-500 dark:text-gray-400',
+  default: {
+    color: 'primary'
+  }
 }
 
 const checkbox = {
   wrapper: 'relative flex items-start',
-  base: 'h-4 w-4 text-primary-500 dark:text-primary-400 focus-visible:ring-2 focus-visible:ring-offset-2 bg-white dark:bg-gray-900 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  base: 'h-4 w-4 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
   rounded: 'rounded',
+  color: 'text-{color}-500 dark:text-{color}-400',
+  background: 'bg-white dark:bg-gray-900',
+  border: 'border border-gray-300 dark:border-gray-700',
+  ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   label: 'font-medium text-gray-700 dark:text-gray-200',
   required: 'text-red-500 dark:text-red-400',
-  help: 'text-gray-500 dark:text-gray-400'
+  help: 'text-gray-500 dark:text-gray-400',
+  default: {
+    color: 'primary'
+  }
 }
 
 const toggle = {
-  base: 'relative inline-flex flex-shrink-0 h-5 w-9 border-2 border-transparent rounded-full cursor-pointer disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
-  active: 'bg-primary-500 dark:bg-primary-400',
+  base: 'relative inline-flex h-5 w-9 flex-shrink-0 border-2 border-transparent disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none',
+  rounded: 'rounded-full',
+  ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
+  active: 'bg-{color}-500 dark:bg-{color}-400',
   inactive: 'bg-gray-200 dark:bg-gray-700',
   container: {
     base: 'pointer-events-none relative inline-block h-4 w-4 rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200',
-    active: 'translate-x-4',
-    inactive: 'translate-x-0'
+    active: 'translate-x-4 rtl:-translate-x-4',
+    inactive: 'translate-x-0 rtl:-translate-x-0'
   },
   icon: {
     base: 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
     active: 'opacity-100 ease-in duration-200',
     inactive: 'opacity-0 ease-out duration-100',
-    on: 'h-3 w-3 text-primary-500 dark:text-primary-400',
+    on: 'h-3 w-3 text-{color}-500 dark:text-{color}-400',
     off: 'h-3 w-3 text-gray-400 dark:text-gray-500'
   },
   default: {
     onIcon: null,
-    offIcon: null
+    offIcon: null,
+    color: 'primary'
+  }
+}
+
+const range = {
+  wrapper: 'relative w-full',
+  base: 'w-full absolute appearance-none cursor-pointer disabled:cursor-not-allowed disabled:bg-opacity-50 focus:outline-none [&::-webkit-slider-runnable-track]:h-full [&::-moz-slider-runnable-track]:h-full peer',
+  background: 'bg-gray-200 dark:bg-gray-700',
+  rounded: 'rounded-lg',
+  ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
+  progress: {
+    base: 'absolute inset-0 h-full pointer-events-none peer-disabled:bg-opacity-50',
+    rounded: 'rounded-s-lg',
+    background: 'bg-{color}-500 dark:bg-{color}-400'
+  },
+  thumb: {
+    base: '[&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0',
+    color: 'text-{color}-500 dark:text-{color}-400',
+    background: '[&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:dark:bg-gray-900 [&::-moz-range-thumb]:bg-current',
+    ring: '[&::-webkit-slider-thumb]:ring-2 [&::-webkit-slider-thumb]:ring-current',
+    size: {
+      sm: '[&::-webkit-slider-thumb]:h-3 [&::-moz-range-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-moz-range-thumb]:w-3 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1',
+      md: '[&::-webkit-slider-thumb]:h-4 [&::-moz-range-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-moz-range-thumb]:w-4 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1',
+      lg: '[&::-webkit-slider-thumb]:h-5 [&::-moz-range-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-moz-range-thumb]:w-5 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1'
+    }
+  },
+  size: {
+    sm: 'h-1',
+    md: 'h-2',
+    lg: 'h-3'
+  },
+  default: {
+    size: 'md',
+    color: 'primary'
   }
 }
 
@@ -572,7 +644,7 @@ const verticalNavigation = {
     size: '3xs'
   },
   badge: {
-    base: 'relative ml-auto inline-block py-0.5 px-2 text-xs rounded-md -mr-1 -my-0.5',
+    base: 'relative ms-auto inline-block py-0.5 px-2 text-xs rounded-md -me-1 -my-0.5',
     active: 'bg-white dark:bg-gray-900',
     inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-900'
   }
@@ -588,11 +660,11 @@ const commandPalette = {
     height: 'h-12',
     size: 'sm:text-sm',
     icon: {
-      base: 'pointer-events-none absolute left-4 text-gray-400 dark:text-gray-500',
+      base: 'pointer-events-none absolute start-4 text-gray-400 dark:text-gray-500',
       size: 'h-4 w-4',
-      padding: 'pl-10'
+      padding: 'ps-10'
     },
-    closeButton: 'absolute right-4'
+    closeButton: 'absolute end-4'
   },
   emptyState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
@@ -649,7 +721,7 @@ const commandPalette = {
 const pagination = {
   wrapper: 'flex items-center -space-x-px',
   base: '',
-  rounded: 'first:rounded-l-md last:rounded-r-md',
+  rounded: 'first:rounded-s-md last:rounded-e-md',
   default: {
     size: 'sm',
     activeButton: {
@@ -660,11 +732,13 @@ const pagination = {
     },
     prevButton: {
       color: 'white',
+      class: 'rtl:[&_span:first-child]:rotate-180',
       icon: 'i-heroicons-chevron-left-20-solid'
     },
     nextButton: {
       color: 'white',
-      icon: 'i-heroicons-chevron-right-20-solid'
+      class: 'rtl:[&_span:last-child]:rotate-180',
+      icon: 'i-heroicons-chevron-right-20-solid '
     }
   }
 }
@@ -676,10 +750,11 @@ const modal = {
   inner: 'fixed inset-0 overflow-y-auto',
   container: 'flex min-h-full items-end sm:items-center justify-center text-center',
   padding: 'p-4 sm:p-0',
-  base: 'relative text-left overflow-hidden sm:my-8 w-full flex flex-col',
+  base: 'relative text-left rtl:text-right overflow-hidden sm:my-8 w-full flex flex-col',
   overlay: {
     base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-200/75 dark:bg-gray-800/75',
+    // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
     transition: {
       enter: 'ease-out duration-300',
       enterFrom: 'opacity-0',
@@ -695,6 +770,7 @@ const modal = {
   shadow: 'shadow-xl',
   width: 'sm:max-w-lg',
   height: '',
+  // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
   transition: {
     enter: 'ease-out duration-300',
     enterFrom: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
@@ -710,6 +786,7 @@ const slideover = {
   overlay: {
     base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-200/75 dark:bg-gray-800/75',
+    // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
     transition: {
       enter: 'ease-in-out duration-500',
       enterFrom: 'opacity-0',
@@ -726,6 +803,7 @@ const slideover = {
   padding: '',
   shadow: 'shadow-xl',
   width: 'w-screen max-w-md',
+  // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
   transition: {
     enter: 'transform transition ease-in-out duration-300',
     leave: 'transform transition ease-in-out duration-200'
@@ -743,6 +821,7 @@ const tooltip = {
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
   shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5',
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
     enterFromClass: 'opacity-0 translate-y-1',
@@ -765,6 +844,7 @@ const popover = {
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
     enterFromClass: 'opacity-0 translate-y-1',
@@ -787,6 +867,7 @@ const contextMenu = {
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   base: 'overflow-hidden focus:outline-none',
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
     enterFromClass: 'opacity-0 translate-y-1',
@@ -820,9 +901,10 @@ const notification = {
     size: 'md'
   },
   progress: {
-    base: 'absolute bottom-0 left-0 right-0 h-1',
+    base: 'absolute bottom-0 end-0 start-0 h-1',
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transform ease-out duration-300 transition',
     enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2',
@@ -849,7 +931,7 @@ const notification = {
 
 const notifications = {
   wrapper: 'fixed flex flex-col justify-end z-[55]',
-  position: 'bottom-0 right-0',
+  position: 'bottom-0 end-0',
   width: 'w-full sm:w-96',
   container: 'px-4 sm:px-6 py-6 space-y-3 overflow-y-auto'
 }
@@ -864,6 +946,7 @@ export default {
     buttonGroup,
     dropdown,
     kbd,
+    accordion,
     input,
     formGroup,
     textarea,
@@ -872,6 +955,7 @@ export default {
     checkbox,
     radio,
     toggle,
+    range,
     card,
     container,
     skeleton,

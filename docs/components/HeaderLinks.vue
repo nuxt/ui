@@ -33,6 +33,7 @@
           target="_blank"
           color="gray"
           variant="ghost"
+          class="hidden lg:inline-flex"
           icon="i-simple-icons-twitter"
         />
 
@@ -41,9 +42,8 @@
           target="_blank"
           color="gray"
           variant="ghost"
-          icon="i-simple-icons-github"
+          class="hidden lg:inline-flex"
         />
-
         <UButton
           color="gray"
           variant="ghost"
