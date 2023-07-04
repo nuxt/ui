@@ -56,7 +56,7 @@
     "@nuxt/module-builder": "^0.4.0",
     "@nuxthq/studio": "^0.13.2",
     "@nuxtjs/plausible": "^0.2.1",
-    "@release-it/conventional-changelog": "^5.1.1",
+    "@release-it/conventional-changelog": "^6.0.0",
     "@types/lodash-es": "^4.17.7",
     "@types/node": "^20.3.3",
     "@vueuse/nuxt": "^10.2.1",
