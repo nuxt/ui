@@ -7,7 +7,7 @@
 
       <div :class="ui.inner">
         <div :class="[ui.container, ui.padding]">
-          <TransitionChild as="template" :appear="appear" v-bind="ui.transition">
+          <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
             <HDialogPanel :class="[ui.base, ui.width, ui.height, ui.background, ui.ring, ui.rounded, ui.shadow]">
               <slot />
             </HDialogPanel>
@@ -75,6 +75,16 @@ export default defineComponent({
       }
     })
 
+    const transitionClass = computed(() => {
+      if (!props.transition) {
+        return {}
+      }
+
+      return {
+        ...ui.value.transition
+      }
+    })
+
     function close (value: boolean) {
       isOpen.value = value
       emit('close')
@@ -84,6 +94,7 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       isOpen,
+      transitionClass,
       close
     }
   }

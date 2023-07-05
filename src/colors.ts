@@ -50,7 +50,7 @@ const safelistByComponent = {
   }],
   button: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-50`),
-    variants: ['hover']
+    variants: ['hover', 'disabled']
   }, {
     pattern: new RegExp(`bg-(${colorsAsRegex})-100`),
     variants: ['hover']
@@ -68,13 +68,13 @@ const safelistByComponent = {
     variants: ['dark:hover']
   }, {
     pattern: new RegExp(`bg-(${colorsAsRegex})-950`),
-    variants: ['dark', 'dark:hover']
+    variants: ['dark', 'dark:hover', 'dark:disabled']
   }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-400`),
-    variants: ['dark']
+    variants: ['dark', 'dark:disabled']
   }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-500`),
-    variants: ['dark:hover']
+    variants: ['dark:hover', 'disabled']
   }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-600`),
     variants: ['hover']

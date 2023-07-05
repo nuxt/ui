@@ -7,8 +7,34 @@
       </NuxtLink>
     </div>
 
-    <NuxtLink to="https://github.com/nuxtlabs/ui/releases" target="_blank">
-      <UBadge label="v2.4.0" />
-    </NuxtLink>
+    <div class="flex items-center gap-3 -my-1">
+      <div class="flex lg:hidden items-center gap-1.5">
+        <UButton
+          to="https://twitter.com/nuxtlabs"
+          target="_blank"
+          color="gray"
+          size="2xs"
+          variant="ghost"
+          icon="i-simple-icons-twitter"
+        />
+
+        <UButton
+          to="https://github.com/nuxtlabs/ui"
+          target="_blank"
+          color="gray"
+          size="2xs"
+          variant="ghost"
+          icon="i-simple-icons-github"
+        />
+      </div>
+
+      <NuxtLink :to="`https://github.com/nuxtlabs/ui/releases/tag/v${config.version}`" target="_blank">
+        <UBadge :label="`v${config.version}`" />
+      </NuxtLink>
+    </div>
   </footer>
 </template>
+
+<script setup lang="ts">
+const config = useRuntimeConfig().public
+</script>
