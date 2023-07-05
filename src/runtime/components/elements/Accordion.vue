@@ -7,10 +7,10 @@
             <template #trailing>
               <UIcon
                 :name="!open ? openIcon : closeIcon ? closeIcon : openIcon"
-                class="ms-auto transform"
                 :class="[
                   open && !closeIcon ? '-rotate-180' : '',
-                  uiButton.icon.size[item.size || uiButton.default.size]
+                  uiButton.icon.size[item.size || uiButton.default.size],
+                  ui.item.icon
                 ]"
               />
             </template>

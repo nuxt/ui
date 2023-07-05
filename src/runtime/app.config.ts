@@ -264,7 +264,8 @@ const accordion = {
     base: '',
     size: 'text-sm',
     color: 'text-gray-500 dark:text-gray-400',
-    padding: 'pt-1.5 pb-3'
+    padding: 'pt-1.5 pb-3',
+    icon: 'ms-auto transform transition-transform duration-200'
   },
   transition: {
     enterActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out',
