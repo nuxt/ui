@@ -15,6 +15,13 @@ export default defineComponent({
       type: String,
       default: null
     },
+    size: {
+      type: String,
+      default: () => appConfig.ui.button.default.size,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.button.size).includes(value)
+      }
+    },
     label: {
       type: String,
       default: null
@@ -70,12 +77,12 @@ export default defineComponent({
     }))
 
     return () => h('div', { class: [ui.value.wrapper] }, [
-      props.label && h('div', { class: [ui.value.label.wrapper] }, [
+      props.label && h('div', { class: [ui.value.label.wrapper, ui.value.size[props.size]] }, [
         h('label', { for: props.name, class: [ui.value.label.base, props.required && ui.value.label.required] }, props.label),
         props.hint && h('span', { class: [ui.value.hint] }, props.hint)
       ]),
-      props.description && h('p', { class: [ui.value.description] }, props.description),
-      h('div', { class: [!!props.label && ui.value.container] }, [
+      props.description && h('p', { class: [ui.value.description, ui.value.size[props.size]] }, props.description),
+      h('div', { class: [!!props.label && ui.value.container, ui.value.size[props.size]] }, [
         ...clones.value,
         props.error && typeof props.error === 'string' ? h('p', { class: [ui.value.error] }, props.error) : props.help ? h('p', { class: [ui.value.help] }, props.help) : null
       ])
