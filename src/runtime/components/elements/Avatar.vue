@@ -1,6 +1,13 @@
 <template>
   <span :class="wrapperClass">
-    <img v-if="url && !error" :class="avatarClass" :src="url" :alt="alt" :onerror="() => onError()">
+    <img
+      v-if="url && !error"
+      :class="avatarClass"
+      :src="url"
+      :alt="alt"
+      :onerror="() => onError()"
+      :referrerpolicy="referrerpolicy"
+    >
     <span v-else-if="text || placeholder" :class="ui.placeholder">{{ text || placeholder }}</span>
 
     <span v-if="chipColor" :class="chipClass">
@@ -31,6 +38,10 @@ export default defineComponent({
     alt: {
       type: String,
       default: null
+    },
+    referrerpolicy: {
+      type: String as PropType<'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url'>,
+      default: () => 'strict-origin-when-cross-origin'
     },
     text: {
       type: String,
