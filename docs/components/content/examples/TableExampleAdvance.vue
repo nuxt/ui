@@ -52,9 +52,9 @@ const numberOfRows = computed(() => {
     return 1
   }
 
-
   return (page.value-1) * pageCount.value
 })
+
 // Data
 const { data: users, pending } = await useAsyncData<{
   id:number
