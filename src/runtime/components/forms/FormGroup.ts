@@ -17,9 +17,9 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: () => appConfig.ui.button.default.size,
+      default: () => appConfig.ui.input.default.size,
       validator (value: string) {
-        return Object.keys(appConfig.ui.button.size).includes(value)
+        return Object.keys(appConfig.ui.formGroup.size).includes(value)
       }
     },
     label: {
@@ -81,7 +81,8 @@ export default defineComponent({
         h('label', { for: props.name, class: [ui.value.label.base, props.required && ui.value.label.required] }, props.label),
         props.hint && h('span', { class: [ui.value.hint] }, props.hint)
       ]),
-      props.description && h('p', { class: [ui.value.description, ui.value.size[props.size]] }, props.description),
+      props.description && h('p', { class: [ui.value.description, ui.value.size[props.size]
+      ] }, props.description),
       h('div', { class: [!!props.label && ui.value.container, ui.value.size[props.size]] }, [
         ...clones.value,
         props.error && typeof props.error === 'string' ? h('p', { class: [ui.value.error] }, props.error) : props.help ? h('p', { class: [ui.value.help] }, props.help) : null
