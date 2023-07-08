@@ -64,7 +64,7 @@
     "nuxt": "^3.6.1",
     "nuxt-component-meta": "^0.5.3",
     "nuxt-lodash": "^2.5.0",
-    "release-it": "^15.11.0",
+    "release-it": "^16.1.0",
     "unbuild": "^1.2.1",
     "v-calendar": "^3.0.3",
     "vue-tsc": "^1.8.3"
