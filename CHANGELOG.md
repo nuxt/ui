@@ -1,5 +1,34 @@
 # Changelog
 
+## [2.5.0](https://github.com/nuxtlabs/ui/compare/v2.4.1...v2.5.0) (2023-06-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Radio/Checkbox/Toggle:** handle `color` prop for form elements (#323)
+
+### Features
+
+* **Avatar:** handle `chipText` ([#306](https://github.com/nuxtlabs/ui/issues/306)) ([759af05](https://github.com/nuxtlabs/ui/commit/759af058df636f55a54326b21ebb1c315c73c26b))
+* **defineShortcuts:** chained shortcuts + docs update ([#282](https://github.com/nuxtlabs/ui/issues/282)) ([a67f691](https://github.com/nuxtlabs/ui/commit/a67f691a0066e4d017f580388df31b22d1c45372))
+* **Radio/Checkbox/Toggle:** handle `color` prop for form elements ([#323](https://github.com/nuxtlabs/ui/issues/323)) ([ffb312d](https://github.com/nuxtlabs/ui/commit/ffb312d34dfc2ac7a7aabdcbdf9ddb1d04d8a66f))
+* **Range:** new component ([#290](https://github.com/nuxtlabs/ui/issues/290)) ([97a1c86](https://github.com/nuxtlabs/ui/commit/97a1c8643314d5ff950b122f46f31b206485cd50))
+* RTL support ([#320](https://github.com/nuxtlabs/ui/issues/320)) ([4ea114a](https://github.com/nuxtlabs/ui/commit/4ea114a4d6b11277674c121130f746927045ade3))
+* **Table:** pass row index to table cell ([#291](https://github.com/nuxtlabs/ui/issues/291)) ([71c2465](https://github.com/nuxtlabs/ui/commit/71c2465d7be78cfb0e274b107aceda9de5384fb7))
+* **Table:** reset sort on third click ([1ff11ac](https://github.com/nuxtlabs/ui/commit/1ff11ac1a3eff537a4ee854a049668f312f1d415)), closes [#300](https://github.com/nuxtlabs/ui/issues/300)
+
+
+### Bug Fixes
+
+* **components:** prefix `@headlessui/vue` components ([41b85d5](https://github.com/nuxtlabs/ui/commit/41b85d50a865cfe4aa0f06a62f5209358422eaec)), closes [#315](https://github.com/nuxtlabs/ui/issues/315)
+* **defineShortcuts:** missing `ref` import ([a880379](https://github.com/nuxtlabs/ui/commit/a8803794802c4032f703a0a0a6343a8204b19bc8))
+* **defineShortcuts:** missing `useDebounceFn` import ([9cd73aa](https://github.com/nuxtlabs/ui/commit/9cd73aa49d1dd43bac8ec71932b850bdcb375fcf))
+* **FormGroup:** prevent overriding `color` of children ([6be9290](https://github.com/nuxtlabs/ui/commit/6be9290f689c449b6a6435a3ef25e89a106e1c06)), closes [#352](https://github.com/nuxtlabs/ui/issues/352)
+* **Table:** default `sortButton` icon ([07b27a2](https://github.com/nuxtlabs/ui/commit/07b27a228d293655368825979a6ca0bc1dd6e51a))
+* **Table:** missing default sort icon when overriding `sort-button` prop ([0f3fe0d](https://github.com/nuxtlabs/ui/commit/0f3fe0d54ef8b45a046b84ceb31ae55a26e153fb))
+* **Toggle:** add `opacity-50` when disabled ([c2ebb04](https://github.com/nuxtlabs/ui/commit/c2ebb0416eb2c92b759be5a4bf0d219031889b4b))
+* **Tooltip:** add `color` in config ([1b03b8a](https://github.com/nuxtlabs/ui/commit/1b03b8a531d397871e0df4f8574d7f47ac4ec610))
+
 ### [2.4.1](https://github.com/nuxtlabs/ui/compare/v2.4.0...v2.4.1) (2023-06-21)
 
 

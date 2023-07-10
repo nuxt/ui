@@ -128,8 +128,11 @@ export default defineComponent({
     })
 
     const progressStyle = computed(() => {
+      const { modelValue, min, max } = props
+      const clampedValue = Math.max(min, Math.min(modelValue, max))
+      const relativeValue = (clampedValue - min) / (max - min)
       return {
-        width: `${(props.modelValue / props.max) * 100}%`
+        width: `${relativeValue * 100}%`
       }
     })
 

@@ -182,10 +182,10 @@ const button = {
   },
   variant: {
     solid: 'shadow-sm text-white dark:text-gray-900 bg-{color}-500 hover:bg-{color}-600 disabled:bg-{color}-500 dark:bg-{color}-400 dark:hover:bg-{color}-500 dark:disabled:bg-{color}-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-{color}-500 dark:focus-visible:outline-{color}-400',
-    outline: 'ring-1 ring-inset ring-current text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
-    soft: 'text-{color}-500 dark:text-{color}-400 bg-{color}-50 hover:bg-{color}-100 dark:bg-{color}-950 dark:hover:bg-{color}-900 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
-    ghost: 'text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 dark:hover:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
-    link: 'text-{color}-500 hover:text-{color}-600 dark:text-{color}-400 dark:hover:text-{color}-500 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400'
+    outline: 'ring-1 ring-inset ring-current text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 disabled:bg-transparent dark:hover:bg-{color}-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
+    soft: 'text-{color}-500 dark:text-{color}-400 bg-{color}-50 hover:bg-{color}-100 disabled:bg-{color}-50 dark:bg-{color}-950 dark:hover:bg-{color}-900 dark:disabled:bg-{color}-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
+    ghost: 'text-{color}-500 dark:text-{color}-400 hover:bg-{color}-50 disabled:bg-transparent dark:hover:bg-{color}-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400',
+    link: 'text-{color}-500 hover:text-{color}-600 disabled:text-{color}-500 dark:text-{color}-400 dark:hover:text-{color}-500 dark:disabled:text-{color}-400 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400'
   },
   icon: {
     base: 'flex-shrink-0',
@@ -248,13 +248,34 @@ const dropdown = {
     enterActiveClass: 'transition duration-100 ease-out',
     enterFromClass: 'transform scale-95 opacity-0',
     enterToClass: 'transform scale-100 opacity-100',
-    leaveActiveClass: 'transition duration-75 ease-out',
+    leaveActiveClass: 'transition duration-75 ease-in',
     leaveFromClass: 'transform scale-100 opacity-100',
     leaveToClass: 'transform scale-95 opacity-0'
   },
   popper: {
     placement: 'bottom-end',
     strategy: 'fixed'
+  }
+}
+
+const accordion = {
+  wrapper: 'w-full flex flex-col',
+  item: {
+    base: '',
+    size: 'text-sm',
+    color: 'text-gray-500 dark:text-gray-400',
+    padding: 'pt-1.5 pb-3',
+    icon: 'ms-auto transform transition-transform duration-200'
+  },
+  transition: {
+    enterActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out',
+    leaveActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out'
+  },
+  default: {
+    openIcon: 'i-heroicons-chevron-down-20-solid',
+    closeIcon: '',
+    class: 'mb-1.5 w-full',
+    variant: 'soft'
   }
 }
 
@@ -387,7 +408,7 @@ const formGroup = {
   label: {
     wrapper: 'flex content-center justify-between',
     base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-    required: `after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400`
+    required: 'after:content-[\'*\'] after:ms-0.5 after:text-red-500 dark:after:text-red-400'
   },
   description: 'text-sm text-gray-500 dark:text-gray-400',
   container: 'mt-1 relative',
@@ -531,17 +552,17 @@ const toggle = {
 
 const range = {
   wrapper: 'relative w-full',
-  base: 'w-full absolute appearance-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none [&::-webkit-slider-runnable-track]:h-full [&::-moz-slider-runnable-track]:h-full',
+  base: 'w-full absolute appearance-none cursor-pointer disabled:cursor-not-allowed disabled:bg-opacity-50 focus:outline-none [&::-webkit-slider-runnable-track]:h-full [&::-moz-slider-runnable-track]:h-full peer',
   background: 'bg-gray-200 dark:bg-gray-700',
   rounded: 'rounded-lg',
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   progress: {
-    base: 'absolute inset-0 h-full pointer-events-none',
+    base: 'absolute inset-0 h-full pointer-events-none peer-disabled:bg-opacity-50',
     rounded: 'rounded-s-lg',
     background: 'bg-{color}-500 dark:bg-{color}-400'
   },
   thumb: {
-    base: `[&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0`,
+    base: '[&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0',
     color: 'text-{color}-500 dark:text-{color}-400',
     background: '[&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:dark:bg-gray-900 [&::-moz-range-thumb]:bg-current',
     ring: '[&::-webkit-slider-thumb]:ring-2 [&::-webkit-slider-thumb]:ring-current',
@@ -926,6 +947,7 @@ export default {
     buttonGroup,
     dropdown,
     kbd,
+    accordion,
     input,
     formGroup,
     textarea,

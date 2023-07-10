@@ -50,9 +50,9 @@ export default defineComponent({
         vProps.size = props.size
       }
 
-      vProps.class = node.props.class || ''
+      vProps.class = node.props?.class || ''
       vProps.class += ' !shadow-none'
-      vProps.ui = node.props.ui || {}
+      vProps.ui = node.props?.ui || {}
       vProps.ui.rounded = ''
 
       if (index === 0) {

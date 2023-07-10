@@ -7,12 +7,12 @@
             <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" @change="selected = $event.target.checked ? rows : []" />
           </th>
 
-          <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size]">
+          <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]">
             <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
                 v-bind="{ ...ui.default.sortButton, ...sortButton }"
-                :icon="(!sort.column || sort.column !== column.key) ? sortButton.icon : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
+                :icon="(!sort.column || sort.column !== column.key) ? (sortButton.icon || ui.default.sortButton.icon) : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
                 :label="column[columnAttribute]"
                 @click="onSort(column)"
               />
@@ -96,7 +96,7 @@ export default defineComponent({
       default: () => []
     },
     columns: {
-      type: Array as PropType<{ key: string, sortable?: boolean, [key: string]: any }[]>,
+      type: Array as PropType<{ key: string, sortable?: boolean, direction?: 'asc' | 'desc', class?: string, [key: string]: any }[]>,
       default: null
     },
     columnAttribute: {
@@ -186,9 +186,15 @@ export default defineComponent({
       return selected.value.some((item) => compare(toRaw(item), toRaw(row)))
     }
 
-    function onSort (column) {
+    function onSort (column: { key: string, direction?: 'asc' | 'desc' }) {
       if (sort.value.column === column.key) {
-        sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+        const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
+
+        if (sort.value.direction === direction) {
+          sort.value = defu({}, props.sort, { column: null, direction: 'asc' })
+        } else {
+          sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+        }
       } else {
         sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
