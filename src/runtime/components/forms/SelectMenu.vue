@@ -51,7 +51,7 @@
     </component>
 
     <div v-if="open" ref="container" :class="[ui.container, ui.width]">
-      <Transition v-bind="ui.transition">
+      <Transition appear v-bind="ui.transition">
         <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.padding, ui.height]">
           <HComboboxInput
             v-if="searchable"
