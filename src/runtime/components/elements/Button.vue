@@ -66,6 +66,13 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    duration: {
+      type: String,
+      default: () => appConfig.ui.button.default.duration,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.button.duration).includes(value)
+      }
+    },
     size: {
       type: String,
       default: () => appConfig.ui.button.default.size,
@@ -181,6 +188,7 @@ export default defineComponent({
         ui.value.font,
         ui.value.rounded,
         ui.value.size[props.size],
+        ui.value.duration[props.duration],
         ui.value.gap[props.size],
         props.padded && ui.value[isSquare.value ? 'square' : 'padding'][props.size],
         variant?.replaceAll('{color}', props.color),
