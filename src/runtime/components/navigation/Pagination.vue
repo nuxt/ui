@@ -4,6 +4,7 @@
       <UButton
         v-if="prevButton"
         :size="size"
+        :duration="duration"
         :disabled="!canGoPrev"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.prevButton, ...prevButton }"
@@ -16,6 +17,7 @@
       v-for="(page, index) of displayedPages"
       :key="index"
       :size="size"
+      :duration="duration"
       :label="`${page}`"
       v-bind="page === currentPage ? { ...ui.default.activeButton, ...activeButton } : { ...ui.default.inactiveButton, ...inactiveButton }"
       :class="[{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }, ui.base, ui.rounded]"
@@ -27,6 +29,7 @@
       <UButton
         v-if="nextButton"
         :size="size"
+        :duration="duration"
         :disabled="!canGoNext"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.nextButton, ...nextButton }"
@@ -79,6 +82,13 @@ export default defineComponent({
       default: () => appConfig.ui.pagination.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.button.size).includes(value)
+      }
+    },
+    duration: {
+      type: String,
+      default: () => appConfig.ui.pagination.default.duration,
+      validator (value: string) {
+        return Object.keys(appConfig.ui.pagination.duration).includes(value)
       }
     },
     activeButton: {
