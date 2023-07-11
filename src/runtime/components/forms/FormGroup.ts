@@ -73,6 +73,10 @@ export default defineComponent({
         vProps.name = props.name
       }
 
+      if (props.size) {
+        vProps.size = props.size
+      }
+
       return cloneVNode(node, vProps)
     }))
 
