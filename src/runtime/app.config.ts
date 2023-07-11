@@ -198,11 +198,19 @@ const button = {
       xl: 'h-6 w-6'
     }
   },
+  duration: {
+    0: 'duration-0',
+    250: 'duration-250',
+    500: 'duration-500',
+    750: 'duration-750',
+    1000: 'duration-1000'
+  },
   default: {
     size: 'sm',
     variant: 'solid',
     color: 'primary',
-    loadingIcon: 'i-heroicons-arrow-path-20-solid'
+    loadingIcon: 'i-heroicons-arrow-path-20-solid',
+    duration: 0
   }
 }
 
@@ -723,8 +731,16 @@ const pagination = {
   wrapper: 'flex items-center -space-x-px',
   base: '',
   rounded: 'first:rounded-s-md last:rounded-e-md',
+  duration: {
+    0: 'duration-0',
+    250: 'duration-250',
+    500: 'duration-500',
+    750: 'duration-750',
+    1000: 'duration-1000'
+  },
   default: {
     size: 'sm',
+    duration: 0,
     activeButton: {
       color: 'primary'
     },
@@ -921,11 +937,13 @@ const notification = {
       icon: 'i-heroicons-x-mark-20-solid',
       color: 'gray',
       variant: 'link',
-      padded: false
+      padded: false,
+      duration: 0
     },
     actionButton: {
       size: 'xs',
-      color: 'white'
+      color: 'white',
+      duration: 0
     }
   }
 }
