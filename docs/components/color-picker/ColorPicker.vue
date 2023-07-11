@@ -1,13 +1,13 @@
 <template>
   <div class="p-2">
     <div class="grid grid-cols-5 gap-px">
-      <ColorPickerButton v-for="color in primaryColors" :key="color.value" :color="color" :selected="primary" @select="primary = color" />
+      <ColorPickerPill v-for="color in primaryColors" :key="color.value" :color="color" :selected="primary" @select="primary = color" />
     </div>
 
     <hr class="border-gray-200 dark:border-gray-800 my-2">
 
     <div class="grid grid-cols-5 gap-px">
-      <ColorPickerButton v-for="color in grayColors" :key="color.value" :color="color" :selected="gray" @select="gray = color" />
+      <ColorPickerPill v-for="color in grayColors" :key="color.value" :color="color" :selected="gray" @select="gray = color" />
     </div>
   </div>
 </template>

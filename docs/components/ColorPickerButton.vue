@@ -1,25 +1,13 @@
 <template>
-  <UTooltip :text="color.value" class="capitalize" :open-delay="500">
-    <UButton
-      color="gray"
-      square
-      :ui="{
-        color: {
-          gray: {
-            solid: 'bg-gray-100 dark:bg-gray-800',
-            ghost: 'hover:bg-gray-50 dark:hover:bg-gray-800/50'
-          }
-        }
-      }"
-      :variant="color.value === selected.value ? 'solid' : 'ghost'"
-      @click.stop.prevent="$emit('select')"
-    >
-      <span class="inline-block w-3 h-3 rounded-full" :style="{ backgroundColor: color.hex }" />
-    </UButton>
-  </UTooltip>
-</template>
+  <UPopover>
+    <template #default="{ open }">
+      <UButton color="gray" variant="ghost" square :class="[open && 'bg-gray-50 dark:bg-gray-800']">
+        <UIcon name="i-heroicons-swatch-20-solid" class="w-5 h-5 text-primary-500 dark:text-primary-400" />
+      </UButton>
+    </template>
 
-<script setup lang="ts">
-defineProps<{ color: { value: string, hex: string }, selected: { value: string} }>()
-defineEmits(['select'])
-</script>
+    <template #panel>
+      <ColorPicker />
+    </template>
+  </UPopover>
+</template>

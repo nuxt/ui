@@ -57,6 +57,7 @@ export default defineNuxtModule<ModuleOptions>({
     safelistColors: ['primary']
   },
   async setup (options, nuxt) {
+    console.log('setup')
     const { resolve } = createResolver(import.meta.url)
 
     // Transpile runtime

@@ -1,17 +1,36 @@
 <template>
   <div>
-    <Header />
+    <UHeader>
+      <template #left>
+        <NuxtLink to="/getting-started" class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white">
+          <Logo class="w-8 h-8 text-primary-500 dark:text-primary-400" />
 
-    <UContainer class="grid lg:grid-cols-10 lg:gap-8">
-      <DocsAside class="lg:col-span-2" />
+          <span class="hidden sm:block">NuxtLabs</span><span class="sm:text-primary-500 dark:sm:text-primary-400">UI</span>
+        </NuxtLink>
+      </template>
 
-      <div class="lg:col-span-8 min-h-0 flex flex-col">
+      <template #center>
+        <UDocsSearchButton class="ml-1.5 flg:w-64 xl:w-96" />
+      </template>
+
+      <template #right>
+        <ColorPickerButton />
+
+        <UColorModeButton />
+
+        <USocialButton to="https://twitter.com/nuxtlabs" icon="i-simple-icons-twitter" class="hidden lg:inline-flex" />
+        <USocialButton to="https://github.com/nuxtlabs/ui" icon="i-simple-icons-github" class="hidden lg:inline-flex" />
+      </template>
+    </UHeader>
+
+    <UContainer>
+      <UDocsLayout :links="navigation">
         <NuxtPage />
-      </div>
+      </UDocsLayout>
     </UContainer>
 
     <ClientOnly>
-      <DocsSearch />
+      <UDocsSearch />
     </ClientOnly>
 
     <UNotifications />
@@ -38,7 +57,6 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'stylesheet', href: 'https://rsms.me/inter/inter.css' },
     { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
   ],
   htmlAttrs: {
