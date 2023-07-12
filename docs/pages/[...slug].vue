@@ -1,5 +1,9 @@
 <template>
-  <UDocsPage v-if="page" :page="page" :surround="surround" />
+  <UDocsPage v-if="page" :page="page" :surround="surround">
+    <template #footer>
+      <Footer />
+    </template>
+  </UDocsPage>
 </template>
 
 <script setup lang="ts">

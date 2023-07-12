@@ -109,7 +109,7 @@ importers:
         version: 0.13.4(rollup@3.26.2)
       '@nuxthq/ui-kit':
         specifier: npm:@nuxthq/ui-kit-edge@latest
-        version: /@nuxthq/ui-kit-edge@0.0.1-28151767.4c642eb(vue@3.3.4)
+        version: /@nuxthq/ui-kit-edge@0.0.1-28152557.70b59be(vue@3.3.4)
       '@nuxtjs/google-fonts':
         specifier: ^3.0.1
         version: 3.0.1(rollup@3.26.2)
@@ -1553,8 +1553,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nuxthq/ui-kit-edge@0.0.1-28151767.4c642eb(vue@3.3.4):
-    resolution: {integrity: sha512-+X4UPql8pc++TNycwa1OoBg5FKW73zO/m8LjTPWzTDlxV2jLiFj+OFHvbv4BEAQn17SjMyhhsUFEckzPUn6aFQ==}
+  /@nuxthq/ui-kit-edge@0.0.1-28152557.70b59be(vue@3.3.4):
+    resolution: {integrity: sha512-SkEjhPUrABXnpBTX7aF1vu1uBW5Y4e1FEHfWXtfgsVH8tuy2fuU7B76H4rJWRWrYHGKT3LvMLQopob+xD0Lu5Q==}
     dependencies:
       '@vueuse/core': 10.2.1(vue@3.3.4)
       lodash-es: 4.17.21

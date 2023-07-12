@@ -21,6 +21,10 @@
         <USocialButton to="https://twitter.com/nuxtlabs" icon="i-simple-icons-twitter" class="hidden lg:inline-flex" />
         <USocialButton to="https://github.com/nuxtlabs/ui" icon="i-simple-icons-github" class="hidden lg:inline-flex" />
       </template>
+
+      <template #links>
+        <UDocsAsideLinks :links="navigation" />
+      </template>
     </UHeader>
 
     <UContainer>
@@ -30,7 +34,7 @@
     </UContainer>
 
     <ClientOnly>
-      <UDocsSearch />
+      <UDocsSearch :files="files" :links="navigation" />
     </ClientOnly>
 
     <UNotifications />
@@ -41,6 +45,7 @@
 const colorMode = useColorMode()
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
+const { data: files } = await useLazyAsyncData('files', () => queryContent().where({ _type: 'markdown', navigation: { $ne: false } }).find(), { default: () => [] })
 
 provide('navigation', navigation)
 
