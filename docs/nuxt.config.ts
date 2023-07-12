@@ -9,7 +9,6 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/devtools',
     '@nuxthq/studio',
-    // @ts-ignore
     module,
     '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
