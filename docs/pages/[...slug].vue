@@ -4,6 +4,9 @@
       <Footer />
     </template>
   </UDocsPage>
+  <div v-else class="pt-8">
+    Page not found
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -17,6 +20,11 @@ const { data: surround } = await useAsyncData(`docs-${route.path}-surround`, () 
   .where({ _extension: 'md', navigation: { $ne: false } })
   .findSurround(route.path.endsWith('/') ? route.path.slice(0, -1) : route.path)
 )
+
+if (process.server && !page.value) {
+  const event = useRequestEvent()
+  setResponseStatus(event, 404)
+}
 
 useContentHead(page)
 </script>
