@@ -32,7 +32,7 @@
     "@egoist/tailwindcss-icons": "^1.1.0",
     "@headlessui/vue": "^1.7.14",
     "@iconify-json/heroicons": "^1.1.11",
-    "@nuxt/kit": "3.6.1",
+    "@nuxt/kit": "^3.6.2",
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@popperjs/core": "^2.11.8",

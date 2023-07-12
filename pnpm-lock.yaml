@@ -14,8 +14,8 @@ importers:
         specifier: ^1.1.11
         version: 1.1.11
       '@nuxt/kit':
-        specifier: 3.6.1
-        version: 3.6.1(rollup@3.26.2)
+        specifier: ^3.6.2
+        version: 3.6.2(rollup@3.26.2)
       '@nuxtjs/color-mode':
         specifier: ^3.3.0
         version: 3.3.0(rollup@3.26.2)
@@ -64,7 +64,7 @@ importers:
         version: 0.1.1(eslint@8.44.0)
       '@nuxt/module-builder':
         specifier: ^0.4.0
-        version: 0.4.0(@nuxt/kit@3.6.1)(nuxi@3.6.2)
+        version: 0.4.0(@nuxt/kit@3.6.2)(nuxi@3.6.2)
       '@release-it/conventional-changelog':
         specifier: ^7.0.0
         version: 7.0.0(release-it@16.1.0)
@@ -1213,7 +1213,7 @@ packages:
   /@nuxt/content-edge@2.7.0-28144276.f9ca7fe(rollup@3.26.2):
     resolution: {integrity: sha512-WcBxB2/8Fi3kVWDamOrvbK5ztMk+hKXpbv63qNSvjeR+dzD90bg6YZKE3bbzGtu/l5RCeCMnq8+CGaIS112kNw==}
     dependencies:
-      '@nuxt/kit': 3.6.1(rollup@3.26.2)
+      '@nuxt/kit': 3.6.2(rollup@3.26.2)
       consola: 3.2.3
       defu: 6.1.2
       destr: 2.0.0
@@ -1275,7 +1275,7 @@ packages:
       nuxt: ^3.6.1
       vite: '*'
     dependencies:
-      '@nuxt/kit': 3.6.1(rollup@3.26.2)
+      '@nuxt/kit': 3.6.2(rollup@3.26.2)
       '@nuxt/schema': 3.6.2(rollup@3.26.2)
       execa: 7.1.1
       nuxt: 3.6.1(@types/node@20.4.1)(eslint@8.44.0)(rollup@3.26.2)(typescript@5.1.6)(vue-tsc@1.8.4)
@@ -1392,6 +1392,7 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
+    dev: true
 
   /@nuxt/kit@3.6.2(rollup@3.26.2):
     resolution: {integrity: sha512-X1WN76izsILva6TvQVTfJCHG7TXCwsB6jsxZKcU3qSog26jer5dildDb5ZmKL3e+IFD6BwK4ShO/py8VZcT6OA==}
@@ -1417,16 +1418,15 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
-    dev: true
 
-  /@nuxt/module-builder@0.4.0(@nuxt/kit@3.6.1)(nuxi@3.6.2):
+  /@nuxt/module-builder@0.4.0(@nuxt/kit@3.6.2)(nuxi@3.6.2):
     resolution: {integrity: sha512-B+UAYgFV1Hkc2ZcD7GaiKZ3SNHhyxFlXzZoBWTc9ulE0Z/+rq6RTa9fNm13BZyGhVhDCl5FN/wF/yYa1O/D2iw==}
     hasBin: true
     peerDependencies:
       '@nuxt/kit': ^3.5.0
       nuxi: ^3.5.0
     dependencies:
-      '@nuxt/kit': 3.6.1(rollup@3.26.2)
+      '@nuxt/kit': 3.6.2(rollup@3.26.2)
       consola: 3.2.3
       mlly: 1.4.0
       mri: 1.2.0
@@ -1469,6 +1469,7 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
+    dev: true
 
   /@nuxt/schema@3.6.2(rollup@3.26.2):
     resolution: {integrity: sha512-wxb1/C5ozly5IwX0IRjVGml1n2KjZrTKsf6lTk3fdjUpW105kAvYX4j66PDOdBRE4vCwCsgaHJfWpUSeNBxbuA==}
@@ -1486,13 +1487,12 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
-    dev: true
 
   /@nuxt/telemetry@2.3.1(rollup@3.26.2):
     resolution: {integrity: sha512-7kr2VDirYIXqyTHqaiWCrfQLgUjAa4qAHzykJOspMCFJWalHU9SVfnv+cTOKGqoXQ4TWOCd09tEd7sLlMFTEqw==}
     hasBin: true
     dependencies:
-      '@nuxt/kit': 3.6.1(rollup@3.26.2)
+      '@nuxt/kit': 3.6.2(rollup@3.26.2)
       chalk: 5.3.0
       ci-info: 3.8.0
       consola: 3.2.3
@@ -1611,7 +1611,7 @@ packages:
   /@nuxtjs/color-mode@3.3.0(rollup@3.26.2):
     resolution: {integrity: sha512-YVFNmTISke1eL7uk5p9I1suOsM222FxrqKoF13HS4x94OKCWwPLLeTCEzHZ8orzKnaFUbCXpuL4pRv8gvW+0Kw==}
     dependencies:
-      '@nuxt/kit': 3.6.1(rollup@3.26.2)
+      '@nuxt/kit': 3.6.2(rollup@3.26.2)
       lodash.template: 4.5.0
       pathe: 1.1.1
     transitivePeerDependencies:
@@ -1645,7 +1645,7 @@ packages:
   /@nuxtjs/tailwindcss@6.8.0(rollup@3.26.2)(webpack@5.88.1):
     resolution: {integrity: sha512-jzuvD1nfA2BPnSbHtKK0aiI51ndMa7lNGL1iDEFuEPsltzilZ9ED7zOP6niGTrImg0n5Yt4GEJpixi6yWwp9Hw==}
     dependencies:
-      '@nuxt/kit': 3.6.1(rollup@3.26.2)
+      '@nuxt/kit': 3.6.2(rollup@3.26.2)
       '@nuxt/postcss8': 1.1.3(webpack@5.88.1)
       autoprefixer: 10.4.14(postcss@8.4.25)
       chokidar: 3.5.3
@@ -8040,7 +8040,7 @@ packages:
   /nuxt-config-schema@0.4.6(rollup@3.26.2):
     resolution: {integrity: sha512-kHLWJFynj5QrxVZ1MjY2xmDaTSN1BCMLGExA+hMMLoCb3wn9TJlDVqnE/nSdUJPMRkNn/NQ5WP9NLA9vlAXRUw==}
     dependencies:
-      '@nuxt/kit': 3.6.1(rollup@3.26.2)
+      '@nuxt/kit': 3.6.2(rollup@3.26.2)
       defu: 6.1.2
       jiti: 1.19.1
       pathe: 1.1.1
