@@ -1,5 +1,5 @@
 <template>
-  <UDocsPage v-if="page" :page="page" :surround="surround">
+  <UDocsPage v-if="page" :page="page" :surround="(surround as ParsedContent[])">
     <template #footer>
       <Footer />
     </template>
@@ -7,6 +7,8 @@
 </template>
 
 <script setup lang="ts">
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+
 const route = useRoute()
 
 const { data: page } = await useAsyncData(`docs-${route.path}`, () => queryContent(route.path).findOne())

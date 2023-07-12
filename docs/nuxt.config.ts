@@ -39,6 +39,11 @@ export default defineNuxtConfig({
   generate: {
     routes: ['/getting-started']
   },
+  nitro: {
+    prerender: {
+      ignore: ['/']
+    }
+  },
   componentMeta: {
     metaFields: {
       props: true,
