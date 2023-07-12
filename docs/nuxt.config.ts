@@ -35,8 +35,11 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { redirect: '/getting-started' }
   },
-  generate: {
-    routes: ['/getting-started']
+  nitro: {
+    prerender: {
+      routes: ['/getting-started'],
+      failOnError: false
+    }
   },
   componentMeta: {
     metaFields: {
