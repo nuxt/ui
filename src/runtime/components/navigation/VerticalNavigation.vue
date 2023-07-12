@@ -40,13 +40,12 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import type { RouteLocationRaw } from 'vue-router'
 import { defu } from 'defu'
 import { omit } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULinkCustom from '../elements/LinkCustom.vue'
-import type { Avatar } from '../../types/avatar'
+import type { Link } from '../../types/vertical-navigation'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -62,16 +61,7 @@ export default defineComponent({
   },
   props: {
     links: {
-      type: Array as PropType<{
-        to?: string | RouteLocationRaw
-        exact?: boolean
-        label: string
-        icon?: string
-        iconClass?: string
-        avatar?: Partial<Avatar>
-        click?: Function
-        badge?: string | number
-      }[]>,
+      type: Array as PropType<Link[]>,
       default: () => []
     },
     ui: {
