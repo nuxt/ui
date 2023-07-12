@@ -4,9 +4,7 @@ import { excludeColors } from '../src/colors'
 import pkg from '../package.json'
 
 export default defineNuxtConfig({
-  extends: [
-    '@nuxthq/ui-kit'
-  ],
+  extends: '@nuxthq/ui-kit',
   modules: [
     '@nuxt/content',
     '@nuxt/devtools',
@@ -38,11 +36,6 @@ export default defineNuxtConfig({
   },
   generate: {
     routes: ['/getting-started']
-  },
-  nitro: {
-    prerender: {
-      ignore: ['/']
-    }
   },
   componentMeta: {
     metaFields: {
