@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody :class="ui.tbody">
-        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, row.click && ui.tr.active]" @click="() => row.click && row.click(row)">
+        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active]" @click="() => onSelect(row)">
           <td v-if="modelValue" class="ps-4">
             <UCheckbox v-model="selected" :value="row" @click.stop />
           </td>
@@ -138,7 +138,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -201,6 +201,15 @@ export default defineComponent({
       }
     }
 
+    function onSelect (row) {
+      if (!attrs.onSelect) {
+        return
+      }
+
+      // @ts-ignore
+      attrs.onSelect(row)
+    }
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -215,7 +224,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       emptyState,
       isSelected,
-      onSort
+      onSort,
+      onSelect
     }
   }
 })

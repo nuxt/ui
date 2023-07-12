@@ -37,7 +37,7 @@ const people = [{
   role: 'Member'
 }]
 
-function click (row) {
+function select (row) {
   const index = selected.value.findIndex((item) => item.id === row.id)
   if (index === -1) {
     selected.value.push(row)
@@ -46,11 +46,9 @@ function click (row) {
   }
 }
 
-const rows = people.map((row) => ({ ...row, click }))
-
-const selected = ref([rows[1]])
+const selected = ref([people[1]])
 </script>
 
 <template>
-  <UTable v-model="selected" :rows="rows" />
+  <UTable v-model="selected" :rows="people" @select="select" />
 </template>
