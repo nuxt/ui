@@ -97,7 +97,7 @@ importers:
         version: 1.1.60
       '@nuxt/content':
         specifier: npm:@nuxt/content-edge@latest
-        version: /@nuxt/content-edge@2.7.0-28144276.f9ca7fe(rollup@3.26.2)
+        version: /@nuxt/content-edge@2.7.0-28152937.f9a0113(rollup@3.26.2)
       '@nuxt/devtools':
         specifier: ^0.6.7
         version: 0.6.7(nuxt@3.6.1)(rollup@3.26.2)(vite@4.4.3)
@@ -109,7 +109,7 @@ importers:
         version: 0.13.4(rollup@3.26.2)
       '@nuxthq/ui-kit':
         specifier: npm:@nuxthq/ui-kit-edge@latest
-        version: /@nuxthq/ui-kit-edge@0.0.1-28152557.70b59be(vue@3.3.4)
+        version: /@nuxthq/ui-kit-edge@0.0.1-28152970.96a5cec(vue@3.3.4)
       '@nuxtjs/google-fonts':
         specifier: ^3.0.1
         version: 3.0.1(rollup@3.26.2)
@@ -1210,8 +1210,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/content-edge@2.7.0-28144276.f9ca7fe(rollup@3.26.2):
-    resolution: {integrity: sha512-WcBxB2/8Fi3kVWDamOrvbK5ztMk+hKXpbv63qNSvjeR+dzD90bg6YZKE3bbzGtu/l5RCeCMnq8+CGaIS112kNw==}
+  /@nuxt/content-edge@2.7.0-28152937.f9a0113(rollup@3.26.2):
+    resolution: {integrity: sha512-s3rDVhCWdZ53fPWxB14CoLZaycYjl81IAfjhjYgR5u91nnso2jkLleWYTYrxNcLJJ+tDGeCnz/dYrg1klD6E1g==}
     dependencies:
       '@nuxt/kit': 3.6.2(rollup@3.26.2)
       consola: 3.2.3
@@ -1598,8 +1598,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nuxthq/ui-kit-edge@0.0.1-28152557.70b59be(vue@3.3.4):
-    resolution: {integrity: sha512-SkEjhPUrABXnpBTX7aF1vu1uBW5Y4e1FEHfWXtfgsVH8tuy2fuU7B76H4rJWRWrYHGKT3LvMLQopob+xD0Lu5Q==}
+  /@nuxthq/ui-kit-edge@0.0.1-28152970.96a5cec(vue@3.3.4):
+    resolution: {integrity: sha512-E87VYI6sXToNtt3qkKCNarkbzcprWVmVtAo341a2k043WK5Tsvb00Q57bGBZIo3VmjqzSsmHrxyZ4g4n5Jtbaw==}
     dependencies:
       '@vueuse/core': 10.2.1(vue@3.3.4)
       lodash-es: 4.17.21
