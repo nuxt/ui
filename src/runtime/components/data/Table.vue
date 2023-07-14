@@ -111,6 +111,10 @@ export default defineComponent({
       type: Object as PropType<Partial<Button>>,
       default: () => appConfig.ui.table.default.sortButton
     },
+    sortingFunction: {
+      type: Function,
+      default: null
+    },
     sortAscIcon: {
       type: String,
       default: () => appConfig.ui.table.default.sortAscIcon
@@ -154,7 +158,11 @@ export default defineComponent({
 
       const { column, direction } = sort.value
 
-      return orderBy(props.rows, column, direction)
+      if(!props.sortingFunction) {
+        return orderBy(props.rows, column, direction)
+      } else {
+        return props.sortingFunction(column, direction)
+      }
     })
 
     const selected = computed({
