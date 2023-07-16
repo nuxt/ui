@@ -47,7 +47,6 @@
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue'
 import type { PropType } from 'vue'
-import type { RouteLocationRaw } from 'vue-router'
 import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem } from '@headlessui/vue'
 import { defu } from 'defu'
 import { omit } from 'lodash-es'
@@ -56,7 +55,7 @@ import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
 import ULinkCustom from '../elements/LinkCustom.vue'
 import { usePopper } from '../../composables/usePopper'
-import type { Avatar } from '../../types/avatar'
+import type { Item } from '../../types/dropdown'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -78,18 +77,7 @@ export default defineComponent({
   },
   props: {
     items: {
-      type: Array as PropType<{
-        to?: string | RouteLocationRaw
-        exact?: boolean
-        label: string
-        slot?: string
-        icon?: string
-        iconClass?: string
-        avatar?: Partial<Avatar>
-        shortcuts?: string[]
-        disabled?: boolean
-        click?: Function
-      }[][]>,
+      type: Array as PropType<Item[][]>,
       default: () => []
     },
     mode: {
