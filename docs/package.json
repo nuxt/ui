@@ -1,0 +1,22 @@
+{
+  "name": "@nuxthq/ui-docs",
+  "private": true,
+  "devDependencies": {
+    "@iconify-json/heroicons": "latest",
+    "@iconify-json/simple-icons": "latest",
+    "@nuxt/content": "npm:@nuxt/content-edge@latest",
+    "@nuxt/devtools": "^0.6.7",
+    "@nuxt/eslint-config": "^0.1.1",
+    "@nuxthq/studio": "^0.13.4",
+    "@nuxthq/ui-kit": "npm:@nuxthq/ui-kit-edge@0.0.1-28159938.cd087ba",
+    "@nuxtjs/google-fonts": "^3.0.1",
+    "@nuxtjs/plausible": "^0.2.1",
+    "@vueuse/nuxt": "^10.2.1",
+    "eslint": "^8.45.0",
+    "nuxt": "^3.6.2",
+    "nuxt-component-meta": "^0.5.3",
+    "nuxt-lodash": "^2.5.0",
+    "typescript": "^5.1.6",
+    "v-calendar": "^3.0.3"
+  }
+}

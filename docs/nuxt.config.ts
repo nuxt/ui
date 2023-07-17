@@ -1,33 +1,24 @@
-import ui from '../src/module'
-import { excludeColors } from '../src/colors'
 import colors from 'tailwindcss/colors'
+import module from '../src/module'
+import { excludeColors } from '../src/colors'
 import pkg from '../package.json'
 
 export default defineNuxtConfig({
-  // @ts-ignore
+  extends: '@nuxthq/ui-kit',
   modules: [
-    ui,
-    '@vueuse/nuxt',
     '@nuxt/content',
     '@nuxt/devtools',
     '@nuxthq/studio',
+    module,
+    '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
-    'nuxt-lodash',
-    'nuxt-component-meta'
+    '@vueuse/nuxt',
+    'nuxt-component-meta',
+    'nuxt-lodash'
   ],
   runtimeConfig: {
     public: {
       version: pkg.version
-    }
-  },
-  content: {
-    highlight: {
-      theme: {
-        light: 'material-lighter',
-        default: 'material-default',
-        dark: 'material-palenight'
-      },
-      preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown', 'yaml', 'bash', 'ini']
     }
   },
   ui: {
@@ -35,15 +26,18 @@ export default defineNuxtConfig({
     icons: ['heroicons', 'simple-icons'],
     safelistColors: excludeColors(colors)
   },
-  typescript: {
-    strict: false,
-    includeWorkspace: true
+  googleFonts: {
+    families: {
+      Inter: [400, 500, 600, 700]
+    }
   },
   routeRules: {
-    '/': { redirect: '/getting-started' }
+    '/': { redirect: '/getting-started', prerender: false }
   },
-  generate: {
-    routes: ['/getting-started']
+  nitro: {
+    prerender: {
+      routes: ['/getting-started']
+    }
   },
   componentMeta: {
     metaFields: {
@@ -52,5 +46,9 @@ export default defineNuxtConfig({
       events: false,
       exposed: false
     }
+  },
+  typescript: {
+    strict: false,
+    includeWorkspace: true
   }
 })
