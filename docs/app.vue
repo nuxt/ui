@@ -14,7 +14,7 @@
       </template>
 
       <template #right>
-        <ColorPickerButton />
+        <ColorPicker />
 
         <UColorModeButton />
 
@@ -23,12 +23,13 @@
       </template>
 
       <template #links>
+        <UDocsAsideAnchors :links="anchors" />
         <UDocsAsideLinks :links="navigation" />
       </template>
     </UHeader>
 
     <UContainer>
-      <UDocsLayout :links="navigation">
+      <UDocsLayout :links="navigation" :anchors="anchors">
         <NuxtPage />
       </UDocsLayout>
     </UContainer>
@@ -48,6 +49,20 @@ const { data: navigation } = await useAsyncData('navigation', () => fetchContent
 const { data: files } = await useLazyAsyncData('files', () => queryContent().where({ _type: 'markdown', navigation: { $ne: false } }).find(), { default: () => [] })
 
 provide('navigation', navigation)
+
+const anchors = [{
+  label: 'Documentation',
+  icon: 'i-heroicons-book-open-solid',
+  to: '/getting-started'
+}, {
+  label: 'Playground',
+  icon: 'i-simple-icons-stackblitz',
+  to: 'https://stackblitz.com/edit/nuxtlabs-ui?file=app.config.ts,app.vue'
+}, {
+  label: 'Releases',
+  icon: 'i-heroicons-rocket-launch-solid',
+  to: 'https://github.com/nuxtlabs/ui/releases'
+}]
 
 // Computed
 
