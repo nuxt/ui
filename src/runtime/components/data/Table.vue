@@ -22,9 +22,9 @@
         </tr>
       </thead>
       <tbody :class="ui.tbody">
-        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected]">
+        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active]" @click="() => onSelect(row)">
           <td v-if="modelValue" class="ps-4">
-            <UCheckbox v-model="selected" :value="row" />
+            <UCheckbox v-model="selected" :value="row" @click.stop />
           </td>
 
           <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
@@ -69,6 +69,7 @@ import { ref, computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
 import { capitalize, orderBy } from 'lodash-es'
 import { defu } from 'defu'
+import { omit } from 'lodash-es'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -92,7 +93,7 @@ export default defineComponent({
       default: () => defaultComparator
     },
     rows: {
-      type: Array as PropType<{ [key: string]: any }[]>,
+      type: Array as PropType<{ [key: string]: any, click?: Function }[]>,
       default: () => []
     },
     columns: {
@@ -137,13 +138,13 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.table>>(() => defu({}, props.ui, appConfig.ui.table))
 
-    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: capitalize(key), sortable: false })))
+    const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: capitalize(key), sortable: false })))
 
     const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
 
@@ -200,6 +201,15 @@ export default defineComponent({
       }
     }
 
+    function onSelect (row) {
+      if (!attrs.onSelect) {
+        return
+      }
+
+      // @ts-ignore
+      attrs.onSelect(row)
+    }
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -214,7 +224,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       emptyState,
       isSelected,
-      onSort
+      onSort,
+      onSelect
     }
   }
 })
