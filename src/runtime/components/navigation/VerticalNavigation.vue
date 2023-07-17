@@ -45,7 +45,7 @@ import { omit } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULinkCustom from '../elements/LinkCustom.vue'
-import type { Link } from '../../types/vertical-navigation'
+import type { VerticalNavigationLink } from '../../types/vertical-navigation'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -61,7 +61,7 @@ export default defineComponent({
   },
   props: {
     links: {
-      type: Array as PropType<Link[]>,
+      type: Array as PropType<VerticalNavigationLink[]>,
       default: () => []
     },
     ui: {
