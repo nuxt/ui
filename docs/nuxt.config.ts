@@ -39,6 +39,9 @@ export default defineNuxtConfig({
       routes: ['/getting-started']
     }
   },
+  experimental: {
+    payloadExtraction: true
+  },
   componentMeta: {
     metaFields: {
       props: true,
