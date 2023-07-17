@@ -4,7 +4,7 @@ import { excludeColors } from '../src/colors'
 import pkg from '../package.json'
 
 export default defineNuxtConfig({
-  extends: '@nuxthq/ui-kit',
+  extends: '@nuxt-themes/ui-kit',
   modules: [
     '@nuxt/content',
     '@nuxt/devtools',
