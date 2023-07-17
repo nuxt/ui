@@ -55,7 +55,7 @@ import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
 import ULinkCustom from '../elements/LinkCustom.vue'
 import { usePopper } from '../../composables/usePopper'
-import type { Item } from '../../types/dropdown'
+import type { DropdownItem } from '../../types/dropdown'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -77,7 +77,7 @@ export default defineComponent({
   },
   props: {
     items: {
-      type: Array as PropType<Item[][]>,
+      type: Array as PropType<DropdownItem[][]>,
       default: () => []
     },
     mode: {

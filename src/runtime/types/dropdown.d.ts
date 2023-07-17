@@ -1,7 +1,7 @@
 import type { RouteLocationRaw } from 'vue-router'
 import type { Avatar } from './avatar'
 
-export interface Item {
+export interface DropdownItem {
   to?: string | RouteLocationRaw
   exact?: boolean
   label: string
