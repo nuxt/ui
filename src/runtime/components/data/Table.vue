@@ -4,7 +4,7 @@
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
           <th v-if="modelValue" scope="col" class="ps-4">
-            <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" @change="selected = $event.target.checked ? rows : []" />
+            <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" @change="onChange" />
           </th>
 
           <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]">
@@ -210,6 +210,25 @@ export default defineComponent({
       attrs.onSelect(row)
     }
 
+    function selectAllRows () {
+      props.rows.forEach((row) => {
+        // If the row is already selected, don't select it again
+        if (selected.value.some((item) => compare(toRaw(item), toRaw(row)))) {
+          return
+        }
+
+        onSelect(row)
+      })
+    }
+
+    function onChange (event: any) {
+      if (event.target.checked) {
+        selectAllRows()
+      } else {
+        selected.value = []
+      }
+    }
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -225,7 +244,8 @@ export default defineComponent({
       emptyState,
       isSelected,
       onSort,
-      onSelect
+      onSelect,
+      onChange
     }
   }
 })
