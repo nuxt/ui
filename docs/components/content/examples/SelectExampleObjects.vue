@@ -4,7 +4,8 @@ const countries = [{
   value: 'US'
 }, {
   name: 'Canada',
-  value: 'CA'
+  value: 'CA',
+  disabled: true
 }, {
   name: 'Mexico',
   value: 'MX'
