@@ -129,6 +129,7 @@ import {
   ListboxOptions as HListboxOptions,
   ListboxOption as HListboxOption
 } from '@headlessui/vue'
+import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
@@ -225,6 +226,14 @@ export default defineComponent({
     searchablePlaceholder: {
       type: String,
       default: 'Search...'
+    },
+    searchFunction: {
+      type: Function as PropType<(query: string) => Promise<any[]> | any[]>,
+      default: null
+    },
+    debounce: {
+      type: Number,
+      default: 200
     },
     creatable: {
       type: Boolean,
@@ -373,15 +382,23 @@ export default defineComponent({
       )
     })
 
-    const filteredOptions = computed(() =>
-      query.value === ''
-        ? props.options
-        : (props.options as any[]).filter((option: any) => {
-            return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
-              return typeof option === 'string' ? option.search(new RegExp(query.value, 'i')) !== -1 : (option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1)
-            })
-          })
-    )
+    const debouncedSearch = typeof props.searchFunction === 'function' ? useDebounceFn(props.searchFunction, props.debounce) : undefined
+
+    const filteredOptions = computedAsync(async () => {
+      if (props.searchable && debouncedSearch) {
+        return await debouncedSearch(query.value)
+      }
+
+      if (query.value === '') {
+        return props.options
+      }
+
+      return (props.options as any[]).filter((option: any) => {
+        return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
+          return typeof option === 'string' ? option.search(new RegExp(query.value, 'i')) !== -1 : (option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1)
+        })
+      })
+    })
 
     const queryOption = computed(() => {
       return query.value === '' ? null : { [props.optionAttribute]: query.value }
