@@ -137,7 +137,7 @@ export default defineComponent({
       default: () => appConfig.ui.table
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue',"sort"],
   setup (props, { emit, attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
@@ -199,6 +199,7 @@ export default defineComponent({
       } else {
         sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
+      emit("sort",sort.value);
     }
 
     function onSelect (row) {
