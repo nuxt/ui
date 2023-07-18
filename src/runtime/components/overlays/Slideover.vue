@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
-    <HDialog :class="[ui.wrapper, { 'justify-end': side === 'right' }]" @close="close">
+    <HDialog :class="[ui.wrapper, { 'justify-end': side === 'right' }]" @close="(e) => !preventClose && close(e)">
       <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
@@ -54,6 +54,10 @@ export default defineComponent({
     transition: {
       type: Boolean,
       default: true
+    },
+    preventClose: {
+      type: Boolean,
+      default: false
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.slideover>>,

@@ -8,7 +8,8 @@ const table = {
   tbody: 'divide-y divide-gray-200 dark:divide-gray-800',
   tr: {
     base: '',
-    selected: 'bg-gray-50 dark:bg-gray-800/50'
+    selected: 'bg-gray-50 dark:bg-gray-800/50',
+    active: 'hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer'
   },
   th: {
     base: 'text-left rtl:text-right',

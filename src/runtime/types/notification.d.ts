@@ -3,7 +3,7 @@ import type { Button } from './button'
 import appConfig from '#build/app.config'
 
 export interface NotificationAction extends Partial<Button> {
-  click: Function
+  click?: Function
 }
 
 export interface Notification {

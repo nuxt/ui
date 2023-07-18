@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template">
-    <HDialog :class="ui.wrapper" @close="close">
+    <HDialog :class="ui.wrapper" @close="(e) => !preventClose && close(e)">
       <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
@@ -54,6 +54,10 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    preventClose: {
+      type: Boolean,
+      default: false
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.modal>>,
       default: () => appConfig.ui.modal
@@ -87,6 +91,7 @@ export default defineComponent({
 
     function close (value: boolean) {
       isOpen.value = value
+
       emit('close')
     }
 

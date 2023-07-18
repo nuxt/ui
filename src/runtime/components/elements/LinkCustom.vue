@@ -5,6 +5,7 @@
   <NuxtLink
     v-else
     v-slot="{ href, navigate, exact, isActive, isExactActive }"
+    :to="$attrs.to"
     custom
   >
     <a
