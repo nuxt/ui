@@ -4,7 +4,7 @@
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
           <th v-if="modelValue" scope="col" class="ps-4">
-            <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" @change="handleChange" />
+            <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" @change="onChange" />
           </th>
 
           <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]">
@@ -216,10 +216,12 @@ export default defineComponent({
         if (selected.value.some((item) => compare(toRaw(item), toRaw(row)))) {
           return
         }
+
         onSelect(row)
       })
     }
-    function handleChange (event: any) {
+
+    function onChange (event: any) {
       if (event.target.checked) {
         selectAllRows()
       } else {
@@ -243,7 +245,7 @@ export default defineComponent({
       isSelected,
       onSort,
       onSelect,
-      handleChange
+      onChange
     }
   }
 })
