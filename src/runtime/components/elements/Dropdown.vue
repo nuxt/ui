@@ -21,7 +21,7 @@
           <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
             <HMenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
               <ULinkCustom
-                v-bind="omit(item, ['label', 'icon', 'iconClass', 'avatar', 'shortcuts', 'click'])"
+                v-bind="omit(item, ['label', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'click'])"
                 :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
                 @click="item.click"
               >
