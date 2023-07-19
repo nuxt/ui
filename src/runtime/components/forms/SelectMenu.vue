@@ -70,7 +70,7 @@
             v-slot="{ active, selected, disabled: optionDisabled }"
             :key="index"
             as="template"
-            :value="option"
+            :value="valueAttribute ? option[valueAttribute] : option"
             :disabled="option.disabled"
           >
             <li :class="[ui.option.base, ui.option.rounded, ui.option.padding, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive, selected && ui.option.selected, optionDisabled && ui.option.disabled]">
@@ -270,6 +270,10 @@ export default defineComponent({
     optionAttribute: {
       type: String,
       default: 'label'
+    },
+    valueAttribute: {
+      type: String,
+      default: null
     },
     searchAttributes: {
       type: Array,
