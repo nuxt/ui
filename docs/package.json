@@ -13,7 +13,7 @@
     "@nuxtjs/plausible": "^0.2.1",
     "@vueuse/nuxt": "^10.2.1",
     "eslint": "^8.45.0",
-    "nuxt": "^3.6.4",
+    "nuxt": "^3.6.5",
     "nuxt-component-meta": "^0.5.3",
     "nuxt-lodash": "^2.5.0",
     "typescript": "^5.1.6",
