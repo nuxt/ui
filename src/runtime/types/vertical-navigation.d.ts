@@ -1,9 +1,7 @@
-import type { RouteLocationRaw } from 'vue-router'
+import type { NuxtLinkProps } from '#app'
 import type { Avatar } from './avatar'
 
-export interface VerticalNavigationLink {
-  to?: string | RouteLocationRaw
-  exact?: boolean
+export interface VerticalNavigationLink extends NuxtLinkProps {
   label: string
   icon?: string
   iconClass?: string
