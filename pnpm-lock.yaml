@@ -21,7 +21,7 @@ importers:
         version: 3.3.0(rollup@3.26.2)
       '@nuxtjs/tailwindcss':
         specifier: ^6.8.0
-        version: 6.8.0(rollup@3.26.2)(webpack@5.88.1)
+        version: 6.8.0(rollup@3.26.2)(webpack@5.88.2)
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
@@ -97,7 +97,7 @@ importers:
         version: 1.1.61
       '@nuxt-themes/ui-kit':
         specifier: npm:@nuxt-themes/ui-kit-edge@latest
-        version: /@nuxt-themes/ui-kit-edge@0.0.1-28162723.5a27878(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1)
+        version: /@nuxt-themes/ui-kit-edge@0.0.1-28163203.863d46c(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.2)
       '@nuxt/content':
         specifier: 2.7.0
         version: 2.7.0(rollup@3.26.2)
@@ -1200,10 +1200,10 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt-themes/ui-kit-edge@0.0.1-28162723.5a27878(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
-    resolution: {integrity: sha512-f+PtwrTd0XL/XprgQ6c1Lh+RgKkAYlHr6eU5edGmTGelakcdBgcUY8bUIhdy/P+wKtj45Q8854TWkmdAW0zP9A==}
+  /@nuxt-themes/ui-kit-edge@0.0.1-28163203.863d46c(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-xQ3/cu+WOIGkhY4tqQNZSXpWwtvw9RKNOCpjNmTfbphzSbjoJmyeWndHOL1j+A6pdeIrtngtG74IzxBvxnNoLg==}
     dependencies:
-      '@nuxthq/ui': /@nuxthq/ui-edge@2.6.0-28163081.8a2b260(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1)
+      '@nuxthq/ui': /@nuxthq/ui-edge@2.6.0-28163186.72ee359(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.2)
       '@vueuse/core': 10.2.1(vue@3.3.4)
       lodash-es: 4.17.21
     transitivePeerDependencies:
@@ -1454,15 +1454,15 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/postcss8@1.1.3(webpack@5.88.1):
+  /@nuxt/postcss8@1.1.3(webpack@5.88.2):
     resolution: {integrity: sha512-CdHtErhvQwueNZPBOmlAAKrNCK7aIpZDYhtS7TzXlSgPHHox1g3cSlf+Ke9oB/8t4mNNjdB+prclme2ibuCOEA==}
     dependencies:
       autoprefixer: 10.4.14(postcss@8.4.25)
-      css-loader: 5.2.7(webpack@5.88.1)
+      css-loader: 5.2.7(webpack@5.88.2)
       defu: 3.2.2
       postcss: 8.4.25
       postcss-import: 13.0.0(postcss@8.4.25)
-      postcss-loader: 4.3.0(postcss@8.4.25)(webpack@5.88.1)
+      postcss-loader: 4.3.0(postcss@8.4.25)(webpack@5.88.2)
       postcss-url: 10.1.3(postcss@8.4.25)
       semver: 7.5.4
     transitivePeerDependencies:
@@ -1631,8 +1631,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nuxthq/ui-edge@2.6.0-28163081.8a2b260(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
-    resolution: {integrity: sha512-k2oAw+oL/Nlicz725WtD91J7DIF+QvA88n1wVfisZo5yPlc63g4RK+1W61saW6C2FheacjWkghWLkQIsrYx0Nw==}
+  /@nuxthq/ui-edge@2.6.0-28163186.72ee359(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-7aBwPyB64rxW6p/yVvqxRm8MgA+HKDn2uhUNBgxcRKXay/TrxRcD6oRQl70J4+8KfHN9rjFavCrrGFw4nGZ42A==}
     engines: {node: '>=v16.14.0'}
     dependencies:
       '@egoist/tailwindcss-icons': 1.1.0(tailwindcss@3.3.3)
@@ -1640,7 +1640,7 @@ packages:
       '@iconify-json/heroicons': 1.1.11
       '@nuxt/kit': 3.6.5(rollup@3.26.2)
       '@nuxtjs/color-mode': 3.3.0(rollup@3.26.2)
-      '@nuxtjs/tailwindcss': 6.8.0(rollup@3.26.2)(webpack@5.88.1)
+      '@nuxtjs/tailwindcss': 6.8.0(rollup@3.26.2)(webpack@5.88.2)
       '@popperjs/core': 2.11.8
       '@tailwindcss/aspect-ratio': 0.4.2(tailwindcss@3.3.3)
       '@tailwindcss/container-queries': 0.1.1(tailwindcss@3.3.3)
@@ -1706,11 +1706,11 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxtjs/tailwindcss@6.8.0(rollup@3.26.2)(webpack@5.88.1):
+  /@nuxtjs/tailwindcss@6.8.0(rollup@3.26.2)(webpack@5.88.2):
     resolution: {integrity: sha512-jzuvD1nfA2BPnSbHtKK0aiI51ndMa7lNGL1iDEFuEPsltzilZ9ED7zOP6niGTrImg0n5Yt4GEJpixi6yWwp9Hw==}
     dependencies:
       '@nuxt/kit': 3.6.5(rollup@3.26.2)
-      '@nuxt/postcss8': 1.1.3(webpack@5.88.1)
+      '@nuxt/postcss8': 1.1.3(webpack@5.88.2)
       autoprefixer: 10.4.14(postcss@8.4.25)
       chokidar: 3.5.3
       clear-module: 4.1.2
@@ -4138,7 +4138,7 @@ packages:
       postcss: 8.4.26
     dev: true
 
-  /css-loader@5.2.7(webpack@5.88.1):
+  /css-loader@5.2.7(webpack@5.88.2):
     resolution: {integrity: sha512-Q7mOvpBNBG7YrVGMxRxcBJZFL75o+cH2abNASdibkj/fffYD8qWbInZrD0S9ccI6vZclF3DsHE7njGlLtaHbhg==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -4154,7 +4154,7 @@ packages:
       postcss-value-parser: 4.2.0
       schema-utils: 3.3.0
       semver: 7.5.4
-      webpack: 5.88.1
+      webpack: 5.88.2
 
   /css-select@5.1.0:
     resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
@@ -8863,7 +8863,7 @@ packages:
       postcss: 8.4.26
       yaml: 2.3.1
 
-  /postcss-loader@4.3.0(postcss@8.4.25)(webpack@5.88.1):
+  /postcss-loader@4.3.0(postcss@8.4.25)(webpack@5.88.2):
     resolution: {integrity: sha512-M/dSoIiNDOo8Rk0mUqoj4kpGq91gcxCfb9PoyZVdZ76/AuhxylHDYZblNE8o+EQ9AMSASeMFEKxZf5aU6wlx1Q==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -8876,7 +8876,7 @@ packages:
       postcss: 8.4.25
       schema-utils: 3.3.0
       semver: 7.5.4
-      webpack: 5.88.1
+      webpack: 5.88.2
 
   /postcss-merge-longhand@6.0.0(postcss@8.4.26):
     resolution: {integrity: sha512-4VSfd1lvGkLTLYcxFuISDtWUfFS4zXe0FpF149AyziftPFQIWxjvFSKhA4MIxMe4XM3yTDgQMbSNgzIVxChbIg==}
@@ -10488,7 +10488,7 @@ packages:
       mkdirp: 1.0.4
       yallist: 4.0.0
 
-  /terser-webpack-plugin@5.3.9(webpack@5.88.1):
+  /terser-webpack-plugin@5.3.9(webpack@5.88.2):
     resolution: {integrity: sha512-ZuXsqE07EcggTWQjXUj+Aot/OMcD0bMKGgF63f7UxYcu5/AJF53aIpK1YoP5xR9l6s/Hy2b+t1AM0bLNPRuhwA==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -10508,11 +10508,22 @@ packages:
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.1
-      terser: 5.19.0
-      webpack: 5.88.1
+      terser: 5.19.1
+      webpack: 5.88.2
 
   /terser@5.19.0:
     resolution: {integrity: sha512-JpcpGOQLOXm2jsomozdMDpd5f8ZHh1rR48OFgWUH3QsyZcfPgv2qDCYbcDEAYNd4OZRj2bWYKpwdll/udZCk/Q==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      '@jridgewell/source-map': 0.3.5
+      acorn: 8.10.0
+      commander: 2.20.3
+      source-map-support: 0.5.21
+    dev: true
+
+  /terser@5.19.1:
+    resolution: {integrity: sha512-27hxBUVdV6GoNg1pKQ7Z5cbR6V9txPVyBA+FQw3BaZ1Wuzvztce5p156DaP0NVZNrMZZ+6iG9Syf7WgMNKDg2Q==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
@@ -11589,8 +11600,8 @@ packages:
   /webpack-virtual-modules@0.5.0:
     resolution: {integrity: sha512-kyDivFZ7ZM0BVOUteVbDFhlRt7Ah/CSPwJdi8hBpkK7QLumUqdLtVfm/PX/hkcnrvr0i77fO5+TjZ94Pe+C9iw==}
 
-  /webpack@5.88.1:
-    resolution: {integrity: sha512-FROX3TxQnC/ox4N+3xQoWZzvGXSuscxR32rbzjpXgEzWudJFEJBpdlkkob2ylrv5yzzufD1zph1OoFsLtm6stQ==}
+  /webpack@5.88.2:
+    resolution: {integrity: sha512-JmcgNZ1iKj+aiR0OvTYtWQqJwq37Pf683dY9bVORwVbUrDhLhdn/PlO2sHsFHPkj7sHNQF3JwaAkp49V+Sq1tQ==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     peerDependencies:
@@ -11620,7 +11631,7 @@ packages:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.9(webpack@5.88.1)
+      terser-webpack-plugin: 5.3.9(webpack@5.88.2)
       watchpack: 2.4.0
       webpack-sources: 3.2.3
     transitivePeerDependencies:
