@@ -1,10 +1,5 @@
 <template>
-  <component
-    :is="buttonIs"
-    :class="buttonClass"
-    :aria-label="ariaLabel"
-    v-bind="buttonProps"
-  >
+  <ULinkCustom :class="buttonClass" v-bind="buttonProps">
     <slot name="leading" :disabled="disabled" :loading="loading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     </slot>
@@ -18,15 +13,16 @@
     <slot name="trailing" :disabled="disabled" :loading="loading">
       <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
     </slot>
-  </component>
+  </ULinkCustom>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, useSlots } from 'vue'
 import type { PropType } from 'vue'
-import type { RouteLocationRaw } from 'vue-router'
 import { defu } from 'defu'
+import { pick } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
+import ULinkCustom from '../elements/LinkCustom.vue'
 import { classNames } from '../../utils'
 import { NuxtLink } from '#components'
 import { useAppConfig } from '#imports'
@@ -39,9 +35,10 @@ import appConfig from '#build/app.config'
 export default defineComponent({
   components: {
     UIcon,
-    NuxtLink
+    ULinkCustom
   },
   props: {
+    ...NuxtLink.props,
     type: {
       type: String,
       default: 'button'
@@ -114,18 +111,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    to: {
-      type: [String, Object] as PropType<string | RouteLocationRaw>,
-      default: null
-    },
-    target: {
-      type: String,
-      default: null
-    },
-    ariaLabel: {
-      type: String,
-      default: null
-    },
     square: {
       type: Boolean,
       default: false
@@ -143,25 +128,9 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.button>>(() => defu({}, props.ui, appConfig.ui.button))
-
     const slots = useSlots()
 
-    const buttonIs = computed(() => {
-      if (props.to) {
-        return 'NuxtLink'
-      }
-
-      return 'button'
-    })
-
-    const buttonProps = computed(() => {
-      if (props.to) {
-        return { to: props.to, target: props.target }
-      } else {
-        return { disabled: props.disabled || props.loading, type: props.type }
-      }
-    })
+    const ui = computed<Partial<typeof appConfig.ui.button>>(() => defu({}, props.ui, appConfig.ui.button))
 
     const isLeading = computed(() => {
       return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
@@ -172,6 +141,14 @@ export default defineComponent({
     })
 
     const isSquare = computed(() => props.square || (!slots.default && !props.label))
+
+    const buttonProps = computed(() => {
+      if (props.to) {
+        return pick(props, Object.keys(NuxtLink.props))
+      } else {
+        return { disabled: props.disabled || props.loading, type: props.type }
+      }
+    })
 
     const buttonClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -221,11 +198,10 @@ export default defineComponent({
     })
 
     return {
-      buttonIs,
-      buttonProps,
       isLeading,
       isTrailing,
       isSquare,
+      buttonProps,
       buttonClass,
       leadingIconName,
       trailingIconName,
