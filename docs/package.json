@@ -4,8 +4,8 @@
   "devDependencies": {
     "@iconify-json/heroicons": "latest",
     "@iconify-json/simple-icons": "latest",
-    "@nuxt-themes/ui-kit": "npm:@nuxt-themes/ui-kit-edge@0.0.1-28162723.5a27878",
-    "@nuxt/content": "^2.7.0",
+    "@nuxt-themes/ui-kit": "npm:@nuxt-themes/ui-kit-edge@latest",
+    "@nuxt/content": "2.7.0",
     "@nuxt/devtools": "^0.6.7",
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxthq/studio": "^0.13.4",

@@ -96,10 +96,10 @@ importers:
         specifier: latest
         version: 1.1.61
       '@nuxt-themes/ui-kit':
-        specifier: npm:@nuxt-themes/ui-kit-edge@0.0.1-28162723.5a27878
+        specifier: npm:@nuxt-themes/ui-kit-edge@latest
         version: /@nuxt-themes/ui-kit-edge@0.0.1-28162723.5a27878(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1)
       '@nuxt/content':
-        specifier: ^2.7.0
+        specifier: 2.7.0
         version: 2.7.0(rollup@3.26.2)
       '@nuxt/devtools':
         specifier: ^0.6.7
@@ -1203,7 +1203,7 @@ packages:
   /@nuxt-themes/ui-kit-edge@0.0.1-28162723.5a27878(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
     resolution: {integrity: sha512-f+PtwrTd0XL/XprgQ6c1Lh+RgKkAYlHr6eU5edGmTGelakcdBgcUY8bUIhdy/P+wKtj45Q8854TWkmdAW0zP9A==}
     dependencies:
-      '@nuxthq/ui': /@nuxthq/ui-edge@2.6.0-28163005.b048614(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1)
+      '@nuxthq/ui': /@nuxthq/ui-edge@2.6.0-28163071.d94c1b5(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1)
       '@vueuse/core': 10.2.1(vue@3.3.4)
       lodash-es: 4.17.21
     transitivePeerDependencies:
@@ -1229,14 +1229,14 @@ packages:
   /@nuxt/content@2.7.0(rollup@3.26.2):
     resolution: {integrity: sha512-3vv3Rbpf6NH7RRuy7PLVmpQCt8C9DgV4aTWLmTCdnWpmlNsX+0wQT8bA/ypqmh8zrJ6BXWztFM35WVESkNvDvQ==}
     dependencies:
-      '@nuxt/kit': 3.6.3(rollup@3.26.2)
+      '@nuxt/kit': 3.6.4(rollup@3.26.2)
       consola: 3.2.3
       defu: 6.1.2
       destr: 1.2.2
       detab: 3.0.2
       json5: 2.2.3
       knitwork: 1.0.0
-      listhen: 1.0.4
+      listhen: 1.1.2
       mdast-util-to-hast: 12.3.0
       mdurl: 1.0.1
       ohash: 1.1.2
@@ -1389,32 +1389,6 @@ packages:
     engines: {node: ^14.18.0 || >=16.10.0}
     dependencies:
       '@nuxt/schema': 3.6.2(rollup@3.26.2)
-      c12: 1.4.2
-      consola: 3.2.3
-      defu: 6.1.2
-      globby: 13.2.2
-      hash-sum: 2.0.0
-      ignore: 5.2.4
-      jiti: 1.19.1
-      knitwork: 1.0.0
-      mlly: 1.4.0
-      pathe: 1.1.1
-      pkg-types: 1.0.3
-      scule: 1.0.0
-      semver: 7.5.4
-      unctx: 2.3.1
-      unimport: 3.0.14(rollup@3.26.2)
-      untyped: 1.3.2
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
-  /@nuxt/kit@3.6.3(rollup@3.26.2):
-    resolution: {integrity: sha512-Eq+2whSIsZ+2IdB9J3okYOc+nZHassjt13vJZowxO3dw0rsXTnWGFHx40IX+wrBYE6eiOHjU/cXQ1XHdiU2GyQ==}
-    engines: {node: ^14.18.0 || >=16.10.0}
-    dependencies:
-      '@nuxt/schema': 3.6.3(rollup@3.26.2)
       c12: 1.4.2
       consola: 3.2.3
       defu: 6.1.2
@@ -1657,8 +1631,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nuxthq/ui-edge@2.6.0-28163005.b048614(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
-    resolution: {integrity: sha512-Il3MYig3/505B5VYsixODBI/FHcaE+SD1IuqEV/XRGqx72JYyLRy+qql2qP45+2TccVNOHWwLTNFxnb4q8R8pQ==}
+  /@nuxthq/ui-edge@2.6.0-28163071.d94c1b5(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
+    resolution: {integrity: sha512-BfrX4tmiAaIwJwaxALzL2JyNO44Rhof/TE1TbyRYDaVGusOqEo++iL+9Nzi5PGuLCvZaiDuRKKP2a//Zsi3qdQ==}
     engines: {node: '>=v16.14.0'}
     dependencies:
       '@egoist/tailwindcss-icons': 1.1.0(tailwindcss@3.3.3)
@@ -6837,6 +6811,23 @@ packages:
       http-shutdown: 1.2.2
       ip-regex: 5.0.0
       node-forge: 1.3.1
+      ufo: 1.1.2
+    dev: true
+
+  /listhen@1.1.2:
+    resolution: {integrity: sha512-rLX5V57oonazmc6zoZ2LzfbSOfGzDOLdQ/eTEh/d3f1xYMACH1yIU8nr0YGl2WiR+l31o3QCN4/VH2dUNyYvTA==}
+    hasBin: true
+    dependencies:
+      citty: 0.1.2
+      clipboardy: 3.0.0
+      consola: 3.2.3
+      defu: 6.1.2
+      get-port-please: 3.0.1
+      http-shutdown: 1.2.2
+      jiti: 1.19.1
+      mlly: 1.4.0
+      node-forge: 1.3.1
+      pathe: 1.1.1
       ufo: 1.1.2
     dev: true
 
