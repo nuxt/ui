@@ -3,6 +3,8 @@ import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { getSlotsChildren } from '../../utils'
 import { useAppConfig } from '#imports'
+import { FormError } from '../../types'
+
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -21,6 +23,10 @@ export default defineComponent({
       validator (value: string) {
         return Object.keys(appConfig.ui.formGroup.size).includes(value)
       }
+    },
+    path: {
+      type: String,
+      default: null
     },
     label: {
       type: String,
@@ -57,6 +63,13 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.formGroup>>(() => defu({}, props.ui, appConfig.ui.formGroup))
 
+    const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
+    const errorMessage = computed(() => {
+      return props.error && typeof props.error === 'string'
+        ? props.error
+        : formErrors?.value?.find((error) => error.path === props.path)?.message
+    })
+
     const children = computed(() => getSlotsChildren(slots))
 
     const clones = computed(() => children.value.map((node) => {
@@ -89,7 +102,7 @@ export default defineComponent({
       ] }, props.description),
       h('div', { class: [!!props.label && ui.value.container] }, [
         ...clones.value,
-        props.error && typeof props.error === 'string' ? h('p', { class: [ui.value.error, ui.value.size[props.size]] }, props.error) : props.help ? h('p', { class: [ui.value.help, ui.value.size[props.size]] }, props.help) : null
+        errorMessage.value ? h('p', { class: [ui.value.error, ui.value.size[props.size]] }, errorMessage.value) : props.help ? h('p', { class: [ui.value.help, ui.value.size[props.size]] }, props.help) : null
       ])
     ])
   }
