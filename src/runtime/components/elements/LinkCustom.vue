@@ -4,7 +4,7 @@
   </button>
   <NuxtLink
     v-else
-    v-slot="{ href, target, rel, navigate, exact, isActive, isExactActive, isExternal }"
+    v-slot="{ href, target, rel, navigate, isActive, isExactActive, isExternal }"
     v-bind="$props"
     custom
   >
@@ -29,6 +29,10 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     ...NuxtLink.props,
+    exact: {
+      type: Boolean,
+      default: false
+    },
     inactiveClass: {
       type: String,
       default: undefined
@@ -36,7 +40,11 @@ export default defineComponent({
   },
   setup (props) {
     function resolveLinkClass ({ isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
-      if (isActive || isExactActive) {
+      if (props.exact && isExactActive) {
+        return props.activeClass
+      }
+
+      if (!props.exact && isActive) {
         return props.activeClass
       }
 
