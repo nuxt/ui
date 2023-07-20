@@ -11,6 +11,8 @@
             <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
+                :disable="loading"
+                :loading="loading && sort.column === column.key"
                 v-bind="{ ...ui.default.sortButton, ...sortButton }"
                 :icon="(!sort.column || sort.column !== column.key) ? (sortButton.icon || ui.default.sortButton.icon) : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
                 :label="column[columnAttribute]"
@@ -108,6 +110,9 @@ export default defineComponent({
       type: Object as PropType<{ column: string, direction: 'asc' | 'desc' }>,
       default: () => ({})
     },
+    fnSort:{
+      type: [ Function]
+    },
     sortButton: {
       type: Object as PropType<Button>,
       default: () => appConfig.ui.table.default.sortButton
@@ -187,18 +192,26 @@ export default defineComponent({
       return selected.value.some((item) => compare(toRaw(item), toRaw(row)))
     }
 
-    function onSort (column: { key: string, direction?: 'asc' | 'desc' }) {
+    async function onSort (column: { key: string, direction?: 'asc' | 'desc' }) {
+      let toSort=sort.value
+      
       if (sort.value.column === column.key) {
         const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
 
         if (sort.value.direction === direction) {
-          sort.value = defu({}, props.sort, { column: null, direction: 'asc' })
+          toSort= defu({}, props.sort, { column: null, direction: 'asc' })
         } else {
-          sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+          toSort.direction = toSort.direction === 'asc' ? 'desc' : 'asc'
         }
       } else {
-        sort.value = { column: column.key, direction: column.direction || 'asc' }
+        toSort = { column: column.key, direction: column.direction || 'asc' }
       }
+
+      if(props.fnSort){
+         sort.value.column=toSort.column
+         await props.fnSort(toSort)
+      }
+      sort.value=toSort
     }
 
     function onSelect (row) {
