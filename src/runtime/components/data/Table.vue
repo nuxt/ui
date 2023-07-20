@@ -11,6 +11,8 @@
             <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
+                :disable="loading"
+                :loading="loading && sort.column === column.key"
                 v-bind="{ ...ui.default.sortButton, ...sortButton }"
                 :icon="(!sort.column || sort.column !== column.key) ? (sortButton.icon || ui.default.sortButton.icon) : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
                 :label="column[columnAttribute]"
@@ -108,6 +110,9 @@ export default defineComponent({
       type: Object as PropType<{ column: string, direction: 'asc' | 'desc' }>,
       default: () => ({})
     },
+    fnSort:{
+      type: [ Function],
+    },
     sortButton: {
       type: Object as PropType<Partial<Button>>,
       default: () => appConfig.ui.table.default.sortButton
@@ -188,6 +193,10 @@ export default defineComponent({
     }
 
     function onSort (column: { key: string, direction?: 'asc' | 'desc' }) {
+      if(props.fnSort){
+         sort.value.column=column.key
+         await props.fnSort(column);
+      }
       if (sort.value.column === column.key) {
         const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
 
@@ -199,7 +208,6 @@ export default defineComponent({
       } else {
         sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
-      emit("sort",sort.value);
     }
 
     function onSelect (row) {
