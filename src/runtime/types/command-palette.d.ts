@@ -7,7 +7,7 @@ export interface Command {
   suffix?: string
   icon?: string
   iconClass?: string
-  avatar?: Partial<Avatar>
+  avatar?: Avatar
   chip?: string
   disabled?: boolean
   shortcuts?: string[]

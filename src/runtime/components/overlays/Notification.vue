@@ -81,11 +81,11 @@ export default defineComponent({
       default: () => appConfig.ui.notification.default.icon
     },
     avatar: {
-      type: Object as PropType<Partial<Avatar>>,
+      type: Object as PropType<Avatar>,
       default: null
     },
     closeButton: {
-      type: Object as PropType<Partial<Button>>,
+      type: Object as PropType<Button>,
       default: () => appConfig.ui.notification.default.closeButton
     },
     timeout: {
