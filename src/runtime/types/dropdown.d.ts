@@ -6,7 +6,7 @@ export interface DropdownItem extends NuxtLinkProps {
   slot?: string
   icon?: string
   iconClass?: string
-  avatar?: Partial<Avatar>
+  avatar?: Avatar
   shortcuts?: string[]
   disabled?: boolean
   click?: Function

@@ -138,7 +138,7 @@ export default defineComponent({
       default: () => appConfig.ui.commandPalette.default.selectedIcon
     },
     closeButton: {
-      type: Object as PropType<Partial<Button>>,
+      type: Object as PropType<Button>,
       default: () => appConfig.ui.commandPalette.default.closeButton
     },
     emptyState: {
