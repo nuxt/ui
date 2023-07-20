@@ -16,7 +16,8 @@ const people = [{
   name: 'Tom Cook'
 }]
 
-const selected = ref([people[0].id])
+const selected = ref(people[0].id)
+const current = computed(() => people.find(person => person.id === selected.value))
 </script>
 
 <template>
@@ -26,6 +27,9 @@ const selected = ref([people[0].id])
     placeholder="Select people"
     value-attribute="id"
     option-attribute="name"
-    multiple
-  />
+  >
+    <template #label>
+      {{ current.name }}
+    </template>
+  </USelectMenu>
 </template>
