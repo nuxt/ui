@@ -23,7 +23,6 @@ const rules = {
     if (v.length < 8)
       return 'Must be at least 8 characters'
   }
-
 }
 
 const validate = async (state: any): Promise<FormError[]> => {

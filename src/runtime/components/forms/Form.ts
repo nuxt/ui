@@ -5,36 +5,12 @@ import { useEventBus } from '@vueuse/core'
 import type { ZodSchema, ZodError } from 'zod'
 import type { ObjectSchema, ValidationError } from 'yup'
 
-function isZodSchema (schema: any): schema is ZodSchema {
-  return schema?.constructor.name === 'ZodObject' && schema.parse !== undefined
-}
-
-function isZodError (error: any): error is ZodError {
-  return error?.constructor.name === 'ZodError' && error.issues !== undefined
-}
-
 function isYupSchema (schema: any): schema is ObjectSchema<any> {
   return schema?.constructor.name === 'ObjectSchema' && schema.validate !== undefined
 }
 
 function isYupError (error: any): error is ValidationError {
   return error?.constructor.name === 'ValidationError' && error.inner !== undefined
-}
-
-async function getZodErrors (state: any, schema: ZodSchema): Promise<FormError[]> {
-  try {
-    schema.parse(state)
-    return []
-  } catch (error) {
-    if (isZodError(error)) {
-      return error.issues.map((issue) => ({
-        path: issue.path.join('.'),
-        message: issue.message
-      }))
-    } else {
-      throw error
-    }
-  }
 }
 
 async function getYupErrors (state: any, schema: ObjectSchema<any>): Promise<FormError[]> {
@@ -45,6 +21,31 @@ async function getYupErrors (state: any, schema: ObjectSchema<any>): Promise<For
     if (isYupError(error)) {
       return error.inner.map((issue) => ({
         path: issue.path ?? '',
+        message: issue.message
+      }))
+    } else {
+      throw error
+    }
+  }
+}
+
+function isZodSchema (schema: any): schema is ZodSchema {
+  return schema?.constructor.name === 'ZodObject' && schema.parse !== undefined
+}
+
+function isZodError (error: any): error is ZodError {
+  return error?.constructor.name === 'ZodError' && error.issues !== undefined
+}
+
+
+async function getZodErrors (state: any, schema: ZodSchema): Promise<FormError[]> {
+  try {
+    schema.parse(state)
+    return []
+  } catch (error) {
+    if (isZodError(error)) {
+      return error.issues.map((issue) => ({
+        path: issue.path.join('.'),
         message: issue.message
       }))
     } else {
