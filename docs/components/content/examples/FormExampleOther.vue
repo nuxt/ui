@@ -11,38 +11,41 @@ const state = ref({
 
 const rules = {
   email: (v: string) => {
-    if (!v)
-      return 'Required'
-    if (!v.includes('@'))
-      return 'Invalid email'
+    if (!v) return 'Required'
+    if (!v.includes('@')) return 'Invalid email'
   },
 
   password: (v: string) => {
-    if (!v)
-      return 'Required'
-    if (v.length < 8)
-      return 'Must be at least 8 characters'
+    if (!v) return 'Required'
+    if (v.length < 8) return 'Must be at least 8 characters'
   }
 }
 
 const validate = async (state: any): Promise<FormError[]> => {
-  return Object.entries(state).map(([key, value]) => {
-    const result = rules[key](value)
-    if (result)
-      return { path: key, message: result }
-  }).filter(Boolean)
+  return Object.entries(state)
+    .map(([key, value]) => {
+      const result = rules[key](value)
+      if (result) return { path: key, message: result }
+    })
+    .filter(Boolean)
 }
 
 const form = ref<Form<any>>()
 
 async function submit () {
-  const data = await form.value!.validate()
-  console.log(data)
+  await form.value!.validate()
+  // Do something with state.value
 }
 </script>
 
 <template>
-  <UForm ref="form" :validate="validate" :state="state" class="space-y-2" @submit.prevent="submit">
+  <UForm
+    ref="form"
+    :validate="validate"
+    :state="state"
+    class="space-y-2"
+    @submit.prevent="submit"
+  >
     <UFormGroup label="Email" path="email">
       <UInput v-model="state.email" />
     </UFormGroup>

@@ -7,10 +7,6 @@ export interface Form<T> {
   async validate(): T
 }
 
-export interface Form {
-  async validate(): any
-}
-
 export interface FormEvent {
   type: 'blur' // | 'change' | 'focus'
   path: string

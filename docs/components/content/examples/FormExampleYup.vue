@@ -6,8 +6,10 @@ import { object, string, InferType } from 'yup'
 import type { Form } from '../../../../src/runtime/types'
 
 const schema = object({
-    email: string().email('Invalid email').required('Required'),
-    password: string().min(8, 'Must be at least 8 characters').required('Required')
+  email: string().email('Invalid email').required('Required'),
+  password: string()
+    .min(8, 'Must be at least 8 characters')
+    .required('Required')
 })
 
 type Schema = InferType<typeof schema>
@@ -20,13 +22,19 @@ const state = ref({
 const form = ref<Form<Schema>>()
 
 async function submit () {
-  const data = await form.value!.validate()
-  console.log(data)
+  await form.value!.validate()
+  // Do something with state.value
 }
 </script>
 
 <template>
-  <UForm ref="form" :schema="schema" :state="state" class="space-y-2" @submit.prevent="submit">
+  <UForm
+    ref="form"
+    :schema="schema"
+    :state="state"
+    class="space-y-2"
+    @submit.prevent="submit"
+  >
     <UFormGroup label="Email" path="email">
       <UInput v-model="state.email" />
     </UFormGroup>

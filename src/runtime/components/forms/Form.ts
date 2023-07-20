@@ -6,14 +6,21 @@ import type { ZodSchema, ZodError } from 'zod'
 import type { ObjectSchema, ValidationError } from 'yup'
 
 function isYupSchema (schema: any): schema is ObjectSchema<any> {
-  return schema?.constructor.name === 'ObjectSchema' && schema.validate !== undefined
+  return (
+    schema?.constructor.name === 'ObjectSchema' && schema.validate !== undefined
+  )
 }
 
 function isYupError (error: any): error is ValidationError {
-  return error?.constructor.name === 'ValidationError' && error.inner !== undefined
+  return (
+    error?.constructor.name === 'ValidationError' && error.inner !== undefined
+  )
 }
 
-async function getYupErrors (state: any, schema: ObjectSchema<any>): Promise<FormError[]> {
+async function getYupErrors (
+  state: any,
+  schema: ObjectSchema<any>
+): Promise<FormError[]> {
   try {
     await schema.validate(state, { abortEarly: false })
     return []
@@ -37,8 +44,10 @@ function isZodError (error: any): error is ZodError {
   return error?.constructor.name === 'ZodError' && error.issues !== undefined
 }
 
-
-async function getZodErrors (state: any, schema: ZodSchema): Promise<FormError[]> {
+async function getZodErrors (
+  state: any,
+  schema: ZodSchema
+): Promise<FormError[]> {
   try {
     schema.parse(state)
     return []
@@ -78,8 +87,12 @@ export default defineComponent({
 
     bus.on(async (event) => {
       if (event.type === 'blur') {
-        const otherErrors = errors.value.filter((error) => error.path !== event.path)
-        const pathErrors = (await getErrors(props.state, props.schema)).filter((error) => error.path === event.path)
+        const otherErrors = errors.value.filter(
+          (error) => error.path !== event.path
+        )
+        const pathErrors = (await getErrors()).filter(
+          (error) => error.path === event.path
+        )
         errors.value = otherErrors.concat(pathErrors)
       }
     })
@@ -88,22 +101,22 @@ export default defineComponent({
     provide('form-errors', errors)
     provide('form-events', bus)
 
-    async function getErrors (state: any, schema?: ZodSchema | ObjectSchema<any>): Promise<FormError[]>{
+    async function getErrors (): Promise<FormError[]> {
       let errs = await props.validate(props.state)
-
-      if (isZodSchema(schema)) {
-        errs = errs.concat(await getZodErrors(state, schema))
-      } else if (isYupSchema(schema)) {
-        errs = errs.concat(await getYupErrors(state, schema))
+      if (isZodSchema(props.schema)) {
+        errs = errs.concat(await getZodErrors(props.state, props.schema))
+      } else if (isYupSchema(props.schema)) {
+        errs = errs.concat(await getYupErrors(props.state, props.schema))
       }
-
       return errs
     }
 
     async function validate () {
-      errors.value = await getErrors(props.state, props.schema)
+      errors.value = await getErrors()
       if (errors.value.length > 0) {
-        throw new Error(`Form Validation error: ${JSON.stringify(errors.value, null, 2)}`)
+        throw new Error(
+          `Form Validation Failed: ${JSON.stringify(errors.value, null, 2)}`
+        )
       }
     }
 

@@ -6,8 +6,8 @@ import { z } from 'zod'
 import type { Form } from '../../../../src/runtime/types'
 
 const schema = z.object({
-    email: z.string().email('Invalid email'),
-    password: z.string().min(8, 'Must be at least 8 characters')
+  email: z.string().email('Invalid email'),
+  password: z.string().min(8, 'Must be at least 8 characters')
 })
 
 type Schema = z.output<typeof schema>
@@ -20,13 +20,19 @@ const state = ref({
 const form = ref<Form<Schema>>()
 
 async function submit () {
-  const data = await form.value!.validate()
-  console.log(data)
+  await form.value!.validate()
+  // Do something with state.value
 }
 </script>
 
 <template>
-  <UForm ref="form" :schema="schema" :state="state" class="space-y-2" @submit.prevent="submit">
+  <UForm
+    ref="form"
+    :schema="schema"
+    :state="state"
+    class="space-y-2"
+    @submit.prevent="submit"
+  >
     <UFormGroup label="Email" path="email">
       <UInput v-model="state.email" />
     </UFormGroup>
