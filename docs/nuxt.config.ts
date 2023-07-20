@@ -40,9 +40,10 @@ export default defineNuxtConfig({
     }
   },
   experimental: {
-    payloadExtraction: true
+    payloadExtraction: false
   },
   componentMeta: {
+    globalsOnly: true,
     metaFields: {
       props: true,
       slots: false,

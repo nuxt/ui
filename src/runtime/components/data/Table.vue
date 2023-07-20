@@ -114,7 +114,7 @@ export default defineComponent({
       type: [ Function],
     },
     sortButton: {
-      type: Object as PropType<Partial<Button>>,
+      type: Object as PropType<Button>,
       default: () => appConfig.ui.table.default.sortButton
     },
     sortAscIcon: {

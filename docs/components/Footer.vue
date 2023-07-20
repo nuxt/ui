@@ -12,8 +12,8 @@
     </NuxtLink>
 
     <div class="flex-1 flex items-center justify-end gap-1.5 -my-1 lg:hidden">
-      <USocialButton to="https://twitter.com/nuxtlabs" icon="i-simple-icons-twitter" />
-      <USocialButton to="https://github.com/nuxtlabs/ui" icon="i-simple-icons-github" />
+      <USocialButton to="https://twitter.com/nuxtlabs" target="_blank" icon="i-simple-icons-twitter" />
+      <USocialButton to="https://github.com/nuxtlabs/ui" target="_blank" icon="i-simple-icons-github" />
     </div>
   </footer>
 </template>
