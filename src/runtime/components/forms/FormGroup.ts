@@ -87,9 +87,9 @@ export default defineComponent({
       ]),
       props.description && h('p', { class: [ui.value.description, ui.value.size[props.size]
       ] }, props.description),
-      h('div', { class: [!!props.label && ui.value.container, ui.value.size[props.size]] }, [
+      h('div', { class: [!!props.label && ui.value.container] }, [
         ...clones.value,
-        props.error && typeof props.error === 'string' ? h('p', { class: [ui.value.error] }, props.error) : props.help ? h('p', { class: [ui.value.help] }, props.help) : null
+        props.error && typeof props.error === 'string' ? h('p', { class: [ui.value.error, ui.value.size[props.size]] }, props.error) : props.help ? h('p', { class: [ui.value.help, ui.value.size[props.size]] }, props.help) : null
       ])
     ])
   }
