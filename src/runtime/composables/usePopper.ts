@@ -1,7 +1,7 @@
 import { ref, onMounted, watchEffect } from 'vue'
 import type { Ref } from 'vue'
 import { popperGenerator, defaultModifiers } from '@popperjs/core/lib/popper-lite'
-import type { VirtualElement } from "@popperjs/core/lib/popper-lite"
+import type { VirtualElement } from '@popperjs/core/lib/popper-lite'
 import type { Instance } from '@popperjs/core'
 import { omitBy, isUndefined } from 'lodash-es'
 import flip from '@popperjs/core/lib/modifiers/flip'
