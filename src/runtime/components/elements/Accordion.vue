@@ -7,10 +7,10 @@
             <template #trailing>
               <UIcon
                 :name="!open ? openIcon : closeIcon ? closeIcon : openIcon"
-                class="ms-auto transform"
                 :class="[
                   open && !closeIcon ? '-rotate-180' : '',
-                  uiButton.icon.size[item.size || uiButton.default.size]
+                  uiButton.icon.size[item.size || uiButton.default.size],
+                  ui.item.icon
                 ]"
               />
             </template>
@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { ref, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel } from '@headlessui/vue'
 import { defu } from 'defu'
@@ -48,7 +48,7 @@ import { omit } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import StateEmitter from '../../utils/StateEmitter'
-import type { Button } from '../../types/button'
+import type { AccordionItem } from '../../types/accordion'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -66,7 +66,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     items: {
-      type: Array as PropType<Partial<Button & { slot: string, disabled: boolean, content: string, defaultOpen: boolean, closeOthers: boolean }>[]>,
+      type: Array as PropType<AccordionItem[]>,
       default: () => []
     },
     defaultOpen: {

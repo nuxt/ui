@@ -1,6 +1,13 @@
 <template>
   <span :class="wrapperClass">
-    <img v-if="url && !error" :class="avatarClass" :src="url" :alt="alt" :onerror="() => onError()">
+    <img
+      v-if="url && !error"
+      :class="avatarClass"
+      :alt="alt"
+      :src="url"
+      v-bind="$attrs"
+      :onerror="() => onError()"
+    >
     <span v-else-if="text || placeholder" :class="ui.placeholder">{{ text || placeholder }}</span>
 
     <span v-if="chipColor" :class="chipClass">
@@ -23,6 +30,7 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     src: {
       type: [String, Boolean],

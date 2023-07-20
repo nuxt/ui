@@ -8,7 +8,8 @@ const table = {
   tbody: 'divide-y divide-gray-200 dark:divide-gray-800',
   tr: {
     base: '',
-    selected: 'bg-gray-50 dark:bg-gray-800/50'
+    selected: 'bg-gray-50 dark:bg-gray-800/50',
+    active: 'hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer'
   },
   th: {
     base: 'text-left rtl:text-right',
@@ -264,7 +265,8 @@ const accordion = {
     base: '',
     size: 'text-sm',
     color: 'text-gray-500 dark:text-gray-400',
-    padding: 'pt-1.5 pb-3'
+    padding: 'pt-1.5 pb-3',
+    icon: 'ms-auto transform transition-transform duration-200'
   },
   transition: {
     enterActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out',

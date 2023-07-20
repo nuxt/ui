@@ -21,7 +21,7 @@
           <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
             <HMenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
               <ULinkCustom
-                v-bind="omit(item, ['label', 'icon', 'iconClass', 'avatar', 'shortcuts', 'click'])"
+                v-bind="omit(item, ['label', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'click'])"
                 :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
                 @click="item.click"
               >
@@ -47,7 +47,6 @@
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue'
 import type { PropType } from 'vue'
-import type { RouteLocationRaw } from 'vue-router'
 import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem } from '@headlessui/vue'
 import { defu } from 'defu'
 import { omit } from 'lodash-es'
@@ -56,7 +55,7 @@ import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
 import ULinkCustom from '../elements/LinkCustom.vue'
 import { usePopper } from '../../composables/usePopper'
-import type { Avatar } from '../../types/avatar'
+import type { DropdownItem } from '../../types/dropdown'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -78,18 +77,7 @@ export default defineComponent({
   },
   props: {
     items: {
-      type: Array as PropType<{
-        to?: string | RouteLocationRaw
-        exact?: boolean
-        label: string
-        slot?: string
-        icon?: string
-        iconClass?: string
-        avatar?: Partial<Avatar>
-        shortcuts?: string[]
-        disabled?: boolean
-        click?: Function
-      }[][]>,
+      type: Array as PropType<DropdownItem[][]>,
       default: () => []
     },
     mode: {
