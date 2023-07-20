@@ -2,21 +2,19 @@
 const people = [{
   id: 1,
   name: 'Wade Cooper'
-},
-{
+}, {
   id: 2,
   name: 'Arlene Mccoy'
-},
-{
+}, {
   id: 3,
   name: 'Devon Webb'
-},
-{
+}, {
   id: 4,
   name: 'Tom Cook'
 }]
 
 const selected = ref(people[0].id)
+
 const current = computed(() => people.find(person => person.id === selected.value))
 </script>
 
