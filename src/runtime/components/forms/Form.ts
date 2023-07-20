@@ -7,13 +7,13 @@ import type { ObjectSchema, ValidationError } from 'yup'
 
 function isYupSchema (schema: any): schema is ObjectSchema<any> {
   return (
-    schema?.constructor.name === 'ObjectSchema' && schema.validate !== undefined
+    schema.validate !== undefined
   )
 }
 
 function isYupError (error: any): error is ValidationError {
   return (
-    error?.constructor.name === 'ValidationError' && error.inner !== undefined
+    error.inner !== undefined
   )
 }
 
@@ -37,11 +37,11 @@ async function getYupErrors (
 }
 
 function isZodSchema (schema: any): schema is ZodSchema {
-  return schema?.constructor.name === 'ZodObject' && schema.parse !== undefined
+  return schema.parse !== undefined
 }
 
 function isZodError (error: any): error is ZodError {
-  return error?.constructor.name === 'ZodError' && error.issues !== undefined
+  return error.issues !== undefined
 }
 
 async function getZodErrors (
