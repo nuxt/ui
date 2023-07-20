@@ -43,6 +43,7 @@ export default defineNuxtConfig({
     payloadExtraction: true
   },
   componentMeta: {
+    globalsOnly: true,
     metaFields: {
       props: true,
       slots: false,
