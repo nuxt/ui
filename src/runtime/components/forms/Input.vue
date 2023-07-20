@@ -13,6 +13,7 @@
       :class="inputClass"
       v-bind="$attrs"
       @input="onInput"
+      @blur="onBlur"
     >
     <slot />
 
@@ -34,13 +35,14 @@
 import { ref, computed, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
+import { UseEventBusReturn } from '@vueuse/core'
 import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
+import { FormEvent } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
-
 // const appConfig = useAppConfig()
 
 export default defineComponent({
@@ -138,7 +140,7 @@ export default defineComponent({
       default: () => appConfig.ui.input
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'blur'],
   setup (props, { emit, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
@@ -155,6 +157,16 @@ export default defineComponent({
 
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
+    }
+
+    const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
+    const formPath = inject<string | undefined>('form-path', undefined)
+
+    const onBlur = (event: FocusEvent) => {
+      emit('blur', event)
+      if (formBus && formPath) {
+        formBus.emit({ type: 'blur', path: formPath })
+      }
     }
 
     onMounted(() => {
@@ -249,7 +261,8 @@ export default defineComponent({
       trailingIconName,
       trailingIconClass,
       trailingWrapperIconClass,
-      onInput
+      onInput,
+      onBlur
     }
   }
 })

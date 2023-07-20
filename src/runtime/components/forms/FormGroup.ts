@@ -63,6 +63,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.formGroup>>(() => defu({}, props.ui, appConfig.ui.formGroup))
 
+    provide('form-path', props.path)
     const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
     const errorMessage = computed(() => {
       return props.error && typeof props.error === 'string'
