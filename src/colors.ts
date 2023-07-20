@@ -185,10 +185,14 @@ const colorsAsRegex = (colors: string[]): string => colors.join('|')
 export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
 
 export const generateSafelist = (colors: string[]) => {
-  const safelist = Object.keys(safelistByComponent).flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
+  const baseSafelist = Object.keys(safelistByComponent).flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
+
+  // Ensure `red` color is safelisted for form elements so that `error` prop of `UFormGroup` always works
+  const formsSafelist = ['input', 'radio', 'checkbox', 'toggle', 'range'].flatMap(component => safelistByComponent[component](colorsAsRegex(['red'])))
 
   return [
-    ...safelist,
+    ...baseSafelist,
+    ...formsSafelist,
     // Gray safelist for Avatar & Notification
     'bg-gray-500',
     'dark:bg-gray-400',

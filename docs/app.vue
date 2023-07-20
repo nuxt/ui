@@ -18,8 +18,8 @@
 
         <UColorModeButton />
 
-        <USocialButton to="https://twitter.com/nuxtlabs" icon="i-simple-icons-twitter" class="hidden lg:inline-flex" />
-        <USocialButton to="https://github.com/nuxtlabs/ui" icon="i-simple-icons-github" class="hidden lg:inline-flex" />
+        <USocialButton to="https://twitter.com/nuxtlabs" target="_blank" icon="i-simple-icons-twitter" class="hidden lg:inline-flex" />
+        <USocialButton to="https://github.com/nuxtlabs/ui" target="_blank" icon="i-simple-icons-github" class="hidden lg:inline-flex" />
       </template>
 
       <template #links>
@@ -38,7 +38,15 @@
       <UDocsSearch :files="files" :links="navigation" />
     </ClientOnly>
 
-    <UNotifications />
+    <UNotifications>
+      <template #title="{ title }">
+        <span v-html="title" />
+      </template>
+
+      <template #description="{ description }">
+        <span v-html="description" />
+      </template>
+    </UNotifications>
   </div>
 </template>
 
@@ -57,11 +65,13 @@ const anchors = [{
 }, {
   label: 'Playground',
   icon: 'i-simple-icons-stackblitz',
-  to: 'https://stackblitz.com/edit/nuxtlabs-ui?file=app.config.ts,app.vue'
+  to: 'https://stackblitz.com/edit/nuxtlabs-ui?file=app.config.ts,app.vue',
+  target: '_blank'
 }, {
   label: 'Releases',
   icon: 'i-heroicons-rocket-launch-solid',
-  to: 'https://github.com/nuxtlabs/ui/releases'
+  to: 'https://github.com/nuxtlabs/ui/releases',
+  target: '_blank'
 }]
 
 // Computed

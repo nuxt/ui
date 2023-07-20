@@ -1,5 +1,36 @@
 # Changelog
 
+## [2.6.0](https://github.com/nuxtlabs/ui/compare/v2.5.0...v2.6.0) (2023-07-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Avatar:** bind component attributes to img element (#421)
+
+### Features
+
+* **Accordion:** add `multiple` prop and close others by default ([#364](https://github.com/nuxtlabs/ui/issues/364)) ([b78fcf9](https://github.com/nuxtlabs/ui/commit/b78fcf91a4b592a6ca83ca4333e1d6658ec6458d))
+* **Accordion:** new component ([#301](https://github.com/nuxtlabs/ui/issues/301)) ([e50f377](https://github.com/nuxtlabs/ui/commit/e50f377b946996efd4546195e528fbed59dcb22f))
+* **Avatar:** bind component attributes to img element ([#421](https://github.com/nuxtlabs/ui/issues/421)) ([773a23f](https://github.com/nuxtlabs/ui/commit/773a23f969d2dbbbcb01582f9e127e02f0248be9))
+* **Modal:** add `prevent-close` prop ([2cc5c0d](https://github.com/nuxtlabs/ui/commit/2cc5c0d810e30b889081d1f457d725004bd0b933)), closes [#303](https://github.com/nuxtlabs/ui/issues/303)
+* **SelectMenu:** handle async search ([#426](https://github.com/nuxtlabs/ui/issues/426)) ([5f8fe85](https://github.com/nuxtlabs/ui/commit/5f8fe8559f2eb12d3916387d5acf65a391bfa0eb))
+* **Slideover:** add `prevent-close` prop ([d15e816](https://github.com/nuxtlabs/ui/commit/d15e8163e7d7eb3eb7624bb982c139581902d596))
+* **Table:** add click event for the entire row ([#353](https://github.com/nuxtlabs/ui/issues/353)) ([d292706](https://github.com/nuxtlabs/ui/commit/d2927069673840dad58d388ab982b5488642edec))
+* **Table:** allow columns `class` customization ([5dffa86](https://github.com/nuxtlabs/ui/commit/5dffa868b11760610ea0bf9f2ce37931cdac4eb9)), closes [#366](https://github.com/nuxtlabs/ui/issues/366)
+
+
+### Bug Fixes
+
+* **Accordion:** missing `ref` import from vue ([3de6b34](https://github.com/nuxtlabs/ui/commit/3de6b349d8b043ed2524bd6418f350ebb4557adb))
+* **Accordion:** solve the shift between buttons when they are opened ([#379](https://github.com/nuxtlabs/ui/issues/379)) ([eaf0043](https://github.com/nuxtlabs/ui/commit/eaf0043da660dfb168a7d4f2312d4344598c2f86))
+* **ButtonGroup:** err when no props on buttons ([80a9738](https://github.com/nuxtlabs/ui/commit/80a97384909891a14edca4ff760d5c81b26b3307)), closes [#360](https://github.com/nuxtlabs/ui/issues/360)
+* **Button:** missing `disabled` state on some variants ([41a5238](https://github.com/nuxtlabs/ui/commit/41a523857902b1674ba7f6021938f68d66a2ddbd))
+* **Modal:** disabling `transition` prop had no effect ([db34665](https://github.com/nuxtlabs/ui/commit/db346652b829ea02b8b1f5355f7080f5e530dcb2))
+* **Range:** `disabled` thumb opacity ([c92dc98](https://github.com/nuxtlabs/ui/commit/c92dc980c984cff8e9f9c38eb9524d151523c16b))
+* **Range:** progress style ([#385](https://github.com/nuxtlabs/ui/issues/385)) ([a79c165](https://github.com/nuxtlabs/ui/commit/a79c165eeeb3e8ea76cd3abc1b8f1218d02b446b))
+* **SelectMenu:** missing `appear` on transition ([cbe2b1b](https://github.com/nuxtlabs/ui/commit/cbe2b1bfb802f8cb10dd4a0d36a8cefb215debb2)), closes [#400](https://github.com/nuxtlabs/ui/issues/400)
+* **Table:** fixed row deletion bug on deselect ([#425](https://github.com/nuxtlabs/ui/issues/425)) ([46b444a](https://github.com/nuxtlabs/ui/commit/46b444a3e0cc988c89bfde7442b42b1e82095fc9))
+
 ## [2.5.0](https://github.com/nuxtlabs/ui/compare/v2.4.1...v2.5.0) (2023-06-27)
 
 
