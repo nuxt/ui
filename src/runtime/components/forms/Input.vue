@@ -35,10 +35,10 @@
 import { ref, computed, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { UseEventBusReturn } from '@vueuse/core'
 import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
-import { FormEvent } from '../../types'
+import { useFormEvents } from '../../utils/useFormEvents'
+
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -159,14 +159,10 @@ export default defineComponent({
       emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
-    const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
-    const formPath = inject<string | undefined>('form-path', undefined)
-
+    const { emitFormBlur } = useFormEvents()
     const onBlur = (event: FocusEvent) => {
+      emitFormBlur()
       emit('blur', event)
-      if (formBus && formPath) {
-        formBus.emit({ type: 'blur', path: formPath })
-      }
     }
 
     onMounted(() => {

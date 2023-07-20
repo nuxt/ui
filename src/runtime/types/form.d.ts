@@ -12,6 +12,6 @@ export interface Form {
 }
 
 export interface FormEvent {
-  type: 'blur' | 'focus'
+  type: 'blur' // | 'change' | 'focus'
   path: string
 }

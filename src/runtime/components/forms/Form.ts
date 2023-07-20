@@ -21,6 +21,38 @@ function isYupError (error: any): error is ValidationError {
   return error?.constructor.name === 'ValidationError' && error.inner !== undefined
 }
 
+async function getZodErrors (state: any, schema: ZodSchema): Promise<FormError[]> {
+  try {
+    schema.parse(state)
+    return []
+  } catch (error) {
+    if (isZodError(error)) {
+      return error.issues.map((issue) => ({
+        path: issue.path.join('.'),
+        message: issue.message
+      }))
+    } else {
+      throw error
+    }
+  }
+}
+
+async function getYupErrors (state: any, schema: ObjectSchema<any>): Promise<FormError[]> {
+  try {
+    await schema.validate(state, { abortEarly: false })
+    return []
+  } catch (error) {
+    if (isYupError(error)) {
+      return error.inner.map((issue) => ({
+        path: issue.path ?? '',
+        message: issue.message
+      }))
+    } else {
+      throw error
+    }
+  }
+}
+
 export default defineComponent({
   props: {
     schema: {
@@ -65,39 +97,6 @@ export default defineComponent({
       }
 
       return errs
-    }
-
-    async function getZodErrors (state: any, schema: ZodSchema): Promise<FormError[]> {
-      try {
-        schema.parse(state)
-        return []
-      } catch (error) {
-        if (isZodError(error)) {
-          console.log(error.issues)
-          return error.issues.map((issue) => ({
-            path: issue.path.join('.'),
-            message: issue.message
-          }))
-        } else {
-          throw error
-        }
-      }
-    }
-
-    async function getYupErrors (state: any, schema: ObjectSchema<any>): Promise<FormError[]> {
-      try {
-        await schema.validate(state, { abortEarly: false })
-        return []
-      } catch (error) {
-        if (isYupError(error)) {
-          return error.inner.map((issue) => ({
-            path: issue.path ?? '',
-            message: issue.message
-          }))
-        } else {
-          throw error
-        }
-      }
     }
 
     async function validate () {
