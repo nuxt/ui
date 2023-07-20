@@ -9,10 +9,14 @@
 
             <div class="w-0 flex-1">
               <p :class="ui.title">
-                {{ title }}
+                <slot name="title" :title="title">
+                  {{ title }}
+                </slot>
               </p>
               <p v-if="description" :class="ui.description">
-                {{ description }}
+                <slot name="description" :description="description">
+                  {{ description }}
+                </slot>
               </p>
 
               <div v-if="description && actions.length" class="mt-3 flex items-center gap-2">
