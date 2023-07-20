@@ -319,3 +319,13 @@ export default defineComponent({
   }
 })
 </script>
+<style scoped>
+.form-select {
+  appearance: none; /* Remove default appearance */
+}
+
+.form-select::-ms-expand {
+  display: none; /* Internet Explorer 11 */
+}
+
+</style>
