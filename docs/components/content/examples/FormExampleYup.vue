@@ -6,8 +6,8 @@ import { object, string, InferType } from 'yup'
 import type { Form } from '../../../../src/runtime/types'
 
 const schema = object({
-    email: string().email().required(),
-    password: string().min(8).required()
+    email: string().email('Invalid email').required('Required'),
+    password: string().min(8, 'Must be at least 8 characters').required('Required')
 })
 
 type Schema = InferType<typeof schema>

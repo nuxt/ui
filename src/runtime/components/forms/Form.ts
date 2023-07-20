@@ -56,10 +56,8 @@ export default defineComponent({
     provide('form-events', bus)
 
     async function getErrors (state: any, schema?: ZodSchema | ObjectSchema<any>): Promise<FormError[]>{
-      let errs = [] as FormError[]
-      if (props.validate) {
-        errs.concat(await props.validate(props.state))
-      }
+      let errs = await props.validate(props.state)
+
       if (isZodSchema(schema)) {
         errs = errs.concat(await getZodErrors(state, schema))
       } else if (isYupSchema(schema)) {
@@ -75,6 +73,7 @@ export default defineComponent({
         return []
       } catch (error) {
         if (isZodError(error)) {
+          console.log(error.issues)
           return error.issues.map((issue) => ({
             path: issue.path.join('.'),
             message: issue.message

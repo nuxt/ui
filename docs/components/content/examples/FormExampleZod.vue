@@ -6,8 +6,8 @@ import { z } from 'zod'
 import type { Form } from '../../../../src/runtime/types'
 
 const schema = z.object({
-    email: z.string().email(),
-    password: z.string().min(8)
+    email: z.string().email('Invalid email'),
+    password: z.string().min(8, 'Must be at least 8 characters')
 })
 
 type Schema = z.output<typeof schema>

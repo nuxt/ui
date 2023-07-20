@@ -12,16 +12,16 @@ const state = ref({
 const rules = {
   email: (v: string) => {
     if (!v)
-      return 'Email is required'
+      return 'Required'
     if (!v.includes('@'))
-      return 'Email must be valid'
+      return 'Invalid email'
   },
 
   password: (v: string) => {
     if (!v)
-      return 'Password is required'
-    if (v.length >= 8)
-      return 'Password must be at least 8 characters'
+      return 'Required'
+    if (v.length < 8)
+      return 'Must be at least 8 characters'
   }
 
 }
