@@ -16,7 +16,7 @@
           :options="prop.options"
           :name="`prop-${prop.name}`"
           variant="none"
-          :ui="{ width: 'w-32 !-mt-px', rounded: 'rounded-b-md', wrapper: 'relative inline-flex' }"
+          :ui-menu="{ width: 'w-32 !-mt-px', rounded: 'rounded-b-md', wrapper: 'relative inline-flex' }"
           class="!py-0"
           tabindex="-1"
           :popper="{ strategy: 'fixed', placement: 'bottom-start' }"

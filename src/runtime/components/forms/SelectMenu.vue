@@ -8,7 +8,7 @@
     :multiple="multiple"
     :disabled="disabled || loading"
     as="div"
-    :class="ui.wrapper"
+    :class="uiMenu.wrapper"
     @update:model-value="onUpdate"
   >
     <input
@@ -28,7 +28,7 @@
       class="inline-flex w-full"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
-        <button :class="selectMenuClass" :disabled="disabled || loading" type="button" v-bind="$attrs">
+        <button :class="selectClass" :disabled="disabled || loading" type="button" v-bind="$attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
             <slot name="leading" :disabled="disabled" :loading="loading">
               <UIcon :name="leadingIconName" :class="leadingIconClass" />
@@ -38,7 +38,7 @@
           <slot name="label">
             <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" class="block truncate">{{ modelValue.length }} selected</span>
             <span v-else-if="!multiple && modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : modelValue[optionAttribute] }}</span>
-            <span v-else class="block truncate" :class="ui.placeholder">{{ placeholder || '&nbsp;' }}</span>
+            <span v-else class="block truncate" :class="uiMenu.placeholder">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
           <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
@@ -50,9 +50,9 @@
       </slot>
     </component>
 
-    <div v-if="open" ref="container" :class="[ui.container, ui.width]">
-      <Transition appear v-bind="ui.transition">
-        <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.padding, ui.height]">
+    <div v-if="open" ref="container" :class="[uiMenu.container, uiMenu.width]">
+      <Transition appear v-bind="uiMenu.transition">
+        <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.divide, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
           <HComboboxInput
             v-if="searchable"
             ref="searchInput"
@@ -61,7 +61,7 @@
             :placeholder="searchablePlaceholder"
             autofocus
             autocomplete="off"
-            :class="ui.input"
+            :class="uiMenu.input"
             @change="query = $event.target.value"
           />
           <component
@@ -73,38 +73,38 @@
             :value="option"
             :disabled="option.disabled"
           >
-            <li :class="[ui.option.base, ui.option.rounded, ui.option.padding, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive, selected && ui.option.selected, optionDisabled && ui.option.disabled]">
-              <div :class="ui.option.container">
+            <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, selected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]">
+              <div :class="uiMenu.option.container">
                 <slot name="option" :option="option" :active="active" :selected="selected">
-                  <UIcon v-if="option.icon" :name="option.icon" :class="[ui.option.icon.base, active ? ui.option.icon.active : ui.option.icon.inactive, option.iconClass]" aria-hidden="true" />
+                  <UIcon v-if="option.icon" :name="option.icon" :class="[uiMenu.option.icon.base, active ? uiMenu.option.icon.active : uiMenu.option.icon.inactive, option.iconClass]" aria-hidden="true" />
                   <UAvatar
                     v-else-if="option.avatar"
-                    v-bind="{ size: ui.option.avatar.size, ...option.avatar }"
-                    :class="ui.option.avatar.base"
+                    v-bind="{ size: uiMenu.option.avatar.size, ...option.avatar }"
+                    :class="uiMenu.option.avatar.base"
                     aria-hidden="true"
                   />
-                  <span v-else-if="option.chip" :class="ui.option.chip.base" :style="{ background: `#${option.chip}` }" />
+                  <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
 
                   <span class="truncate">{{ typeof option === 'string' ? option : option[optionAttribute] }}</span>
                 </slot>
               </div>
 
-              <span v-if="selected" :class="[ui.option.selectedIcon.wrapper, ui.option.selectedIcon.padding]">
-                <UIcon :name="selectedIcon" :class="ui.option.selectedIcon.base" aria-hidden="true" />
+              <span v-if="selected" :class="[uiMenu.option.selectedIcon.wrapper, uiMenu.option.selectedIcon.padding]">
+                <UIcon :name="selectedIcon" :class="uiMenu.option.selectedIcon.base" aria-hidden="true" />
               </span>
             </li>
           </component>
 
           <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
-            <li :class="[ui.option.base, ui.option.rounded, ui.option.padding, ui.option.size, ui.option.color, active ? ui.option.active : ui.option.inactive]">
-              <div :class="ui.option.container">
+            <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
+              <div :class="uiMenu.option.container">
                 <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
                   <span class="block truncate">Create "{{ queryOption[optionAttribute] }}"</span>
                 </slot>
               </div>
             </li>
           </component>
-          <p v-else-if="searchable && query && !filteredOptions.length" :class="ui.option.empty">
+          <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
             <slot name="option-empty" :query="query">
               No results for "{{ query }}".
             </slot>
@@ -280,12 +280,12 @@ export default defineComponent({
       default: () => ({})
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.selectMenu>>,
-      default: () => appConfig.ui.selectMenu
-    },
-    uiSelect: {
       type: Object as PropType<Partial<typeof appConfig.ui.select>>,
       default: () => appConfig.ui.select
+    },
+    uiMenu: {
+      type: Object as PropType<Partial<typeof appConfig.ui.selectMenu>>,
+      default: () => appConfig.ui.selectMenu
     }
   },
   emits: ['update:modelValue', 'open', 'close'],
@@ -293,29 +293,29 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.selectMenu>>(() => defu({}, props.ui, appConfig.ui.selectMenu))
-    const uiSelect = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.uiSelect, appConfig.ui.select))
+    const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
+    const uiMenu = computed<Partial<typeof appConfig.ui.selectMenu>>(() => defu({}, props.uiMenu, appConfig.ui.selectMenu))
 
-    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
+    const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
 
-    const selectMenuClass = computed(() => {
-      const variant = uiSelect.value.color?.[props.color as string]?.[props.variant as string] || uiSelect.value.variant[props.variant]
+    const selectClass = computed(() => {
+      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
       return classNames(
-        uiSelect.value.base,
-        uiSelect.value.rounded,
+        ui.value.base,
+        ui.value.rounded,
         'text-left cursor-default',
-        uiSelect.value.size[props.size],
-        uiSelect.value.gap[props.size],
-        props.padded ? uiSelect.value.padding[props.size] : 'p-0',
+        ui.value.size[props.size],
+        ui.value.gap[props.size],
+        props.padded ? ui.value.padding[props.size] : 'p-0',
         variant?.replaceAll('{color}', props.color),
-        (isLeading.value || slots.leading) && uiSelect.value.leading.padding[props.size],
-        (isTrailing.value || slots.trailing) && uiSelect.value.trailing.padding[props.size],
+        (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size],
         'inline-flex items-center'
       )
     })
@@ -346,34 +346,34 @@ export default defineComponent({
 
     const leadingWrapperIconClass = computed(() => {
       return classNames(
-        uiSelect.value.icon.leading.wrapper,
-        uiSelect.value.icon.leading.pointer,
-        uiSelect.value.icon.leading.padding[props.size]
+        ui.value.icon.leading.wrapper,
+        ui.value.icon.leading.pointer,
+        ui.value.icon.leading.padding[props.size]
       )
     })
 
     const leadingIconClass = computed(() => {
       return classNames(
-        uiSelect.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && uiSelect.value.icon.color.replaceAll('{color}', props.color),
-        uiSelect.value.icon.size[props.size],
+        ui.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        ui.value.icon.size[props.size],
         props.loading && 'animate-spin'
       )
     })
 
     const trailingWrapperIconClass = computed(() => {
       return classNames(
-        uiSelect.value.icon.trailing.wrapper,
-        uiSelect.value.icon.trailing.pointer,
-        uiSelect.value.icon.trailing.padding[props.size]
+        ui.value.icon.trailing.wrapper,
+        ui.value.icon.trailing.pointer,
+        ui.value.icon.trailing.padding[props.size]
       )
     })
 
     const trailingIconClass = computed(() => {
       return classNames(
-        uiSelect.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && uiSelect.value.icon.color.replaceAll('{color}', props.color),
-        uiSelect.value.icon.size[props.size],
+        ui.value.icon.base,
+        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        ui.value.icon.size[props.size],
         props.loading && !isLeading.value && 'animate-spin'
       )
     })
@@ -419,12 +419,12 @@ export default defineComponent({
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      uiMenu,
       trigger,
       container,
       isLeading,
       isTrailing,
-      selectMenuClass,
+      selectClass,
       leadingIconName,
       leadingIconClass,
       leadingWrapperIconClass,
