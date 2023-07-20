@@ -142,7 +142,7 @@ export default defineComponent({
       default: () => appConfig.ui.table
     }
   },
-  emits: ['update:modelValue',"sort"],
+  emits: ['update:modelValue'],
   setup (props, { emit, attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
