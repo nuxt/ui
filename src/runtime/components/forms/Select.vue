@@ -60,7 +60,7 @@ import { get } from 'lodash-es'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
-import { useFormEvents } from '../../utils/useFormEvents'
+import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error

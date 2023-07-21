@@ -36,8 +36,8 @@ import { ref, computed, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
+import { useFormEvents } from '../../composables/useFormEvents'
 import { classNames } from '../../utils'
-import { useFormEvents } from '../../utils/useFormEvents'
 
 import { useAppConfig } from '#imports'
 // TODO: Remove

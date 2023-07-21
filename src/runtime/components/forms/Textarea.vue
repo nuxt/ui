@@ -23,7 +23,7 @@ import { ref, computed, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
-import { useFormEvents } from '../../utils/useFormEvents'
+import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error

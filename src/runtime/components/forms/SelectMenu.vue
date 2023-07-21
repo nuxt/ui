@@ -10,7 +10,6 @@
     as="div"
     :class="uiMenu.wrapper"
     @update:model-value="onUpdate"
-    @close="onClose"
   >
     <input
       v-if="required"
@@ -135,8 +134,8 @@ import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { classNames } from '../../utils'
-import { useFormEvents } from '../../utils/useFormEvents'
 import { usePopper } from '../../composables/usePopper'
+import { useFormEvents } from '../../composables/useFormEvents'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove

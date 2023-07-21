@@ -4,7 +4,6 @@
     :name="name"
     :disabled="disabled"
     :class="switchClass"
-    @change="onChange"
   >
     <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
       <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
@@ -24,7 +23,7 @@ import { defu } from 'defu'
 import { Switch as HSwitch } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
-import { useFormEvents } from '../../utils/useFormEvents'
+import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
