@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { z } from 'zod'
-
-// TODO: Export Form interface
-import type { Form } from '../../../../src/runtime/types'
+import { Form } from '#ui'
 
 const schema = z.object({
   email: z.string().email('Invalid email'),

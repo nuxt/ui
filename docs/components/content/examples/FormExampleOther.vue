@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-
-// TODO: Export Form interface properly
-import type { Form, FormError } from '../../../../src/runtime/types'
+import { Form, FormError } from '#ui'
 
 const state = ref({
   email: undefined,

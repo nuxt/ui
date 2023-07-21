@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { object, string, InferType } from 'yup'
-
-// TODO: Export Form interface properly
-import type { Form } from '../../../../src/runtime/types'
+import { Form } from '#ui'
 
 const schema = object({
   email: string().email('Invalid email').required('Required'),

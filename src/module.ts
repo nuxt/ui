@@ -1,4 +1,4 @@
-import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin, resolvePath } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin, addTemplate, resolvePath } from '@nuxt/kit'
 import defaultColors from 'tailwindcss/colors.js'
 import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/defaultExtractor.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
@@ -212,5 +212,12 @@ export default defineNuxtModule<ModuleOptions>({
     // Composables
 
     addImportsDir(resolve(runtimeDir, 'composables'))
+
+    nuxt.options.alias['#ui'] = addTemplate({
+      filename: 'types/ui.d.ts',
+      getContents: () => [
+        `export { Form, FormError } from '${resolve('./runtime/types/form')}'`
+      ].join('\n')
+    }).dst
   }
 })

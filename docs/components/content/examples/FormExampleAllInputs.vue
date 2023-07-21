@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { z } from 'zod'
-import type { Form } from '../../../../src/runtime/types'
+import { Form } from '#ui'
 
 const options = [
   { label: 'Option 1', value: 'option-1' },
@@ -86,7 +86,7 @@ async function submit () {
     </UFormGroup>
 
     <UFormGroup path="radio" label="Radio">
-      <URadio v-for="option in options" :key="option" v-model="state.radio" v-bind="option">
+      <URadio v-for="option in options" :key="option.value" v-model="state.radio" v-bind="option">
         {{ option.label }}
       </URadio>
     </UFormGroup>
