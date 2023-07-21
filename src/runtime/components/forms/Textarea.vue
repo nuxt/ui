@@ -13,6 +13,7 @@
       :class="textareaClass"
       v-bind="$attrs"
       @input="onInput"
+      @blur="onBlur"
     />
   </div>
 </template>
@@ -22,6 +23,7 @@ import { ref, computed, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
+import { useFormEvents } from '../../utils/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -101,7 +103,7 @@ export default defineComponent({
       default: () => appConfig.ui.textarea
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'blur'],
   setup (props, { emit }) {
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
@@ -144,6 +146,18 @@ export default defineComponent({
       emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
+    const { emitFormBlur } = useFormEvents()
+    const onBlur = (event: FocusEvent) => {
+      emitFormBlur()
+      emit('blur', event)
+    }
+
+    onMounted(() => {
+      setTimeout(() => {
+        autoFocus()
+      }, 100)
+    })
+
     watch(() => props.modelValue, () => {
       nextTick(autoResize)
     })
@@ -174,7 +188,8 @@ export default defineComponent({
       ui,
       textarea,
       textareaClass,
-      onInput
+      onInput,
+      onBlur
     }
   }
 })

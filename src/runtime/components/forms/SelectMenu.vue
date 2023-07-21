@@ -10,6 +10,7 @@
     as="div"
     :class="uiMenu.wrapper"
     @update:model-value="onUpdate"
+    @close="onClose"
   >
     <input
       v-if="required"
@@ -134,6 +135,7 @@ import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { classNames } from '../../utils'
+import { useFormEvents } from '../../utils/useFormEvents'
 import { usePopper } from '../../composables/usePopper'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
@@ -404,11 +406,14 @@ export default defineComponent({
       return query.value === '' ? null : { [props.optionAttribute]: query.value }
     })
 
+    const { emitFormBlur } = useFormEvents()
+
     watch(container, (value) => {
       if (value) {
         emit('open')
       } else {
         emit('close')
+        emitFormBlur()
       }
     })
 
@@ -419,7 +424,9 @@ export default defineComponent({
         searchInput.value.$el.value = ''
       }
       emit('update:modelValue', event)
+      emitFormBlur()
     }
+
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

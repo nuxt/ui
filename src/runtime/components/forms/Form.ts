@@ -103,11 +103,17 @@ export default defineComponent({
 
     async function getErrors (): Promise<FormError[]> {
       let errs = await props.validate(props.state)
-      if (isZodSchema(props.schema)) {
-        errs = errs.concat(await getZodErrors(props.state, props.schema))
-      } else if (isYupSchema(props.schema)) {
-        errs = errs.concat(await getYupErrors(props.state, props.schema))
+
+      if (props.schema) {
+        if (isZodSchema(props.schema)) {
+          errs = errs.concat(await getZodErrors(props.state, props.schema))
+        } else if (isYupSchema(props.schema)) {
+          errs = errs.concat(await getYupErrors(props.state, props.schema))
+        } else {
+          throw new Error('Form validation failed: Unsupported form schema')
+        }
       }
+
       return errs
     }
 
@@ -115,7 +121,7 @@ export default defineComponent({
       errors.value = await getErrors()
       if (errors.value.length > 0) {
         throw new Error(
-          `Form Validation Failed: ${JSON.stringify(errors.value, null, 2)}`
+          `Form validation failed: ${JSON.stringify(errors.value, null, 2)}`
         )
       }
     }
