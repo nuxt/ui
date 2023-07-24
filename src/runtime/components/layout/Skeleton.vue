@@ -1,5 +1,9 @@
 <template>
-  <div :class="[ui.base, ui.background, ui.rounded]" />
+  <div
+    v-for="i in count"
+    :key="i"
+    :class="[ui.base, ui.background, ui.rounded, $attrs.class]"
+  />
 </template>
 
 <script lang="ts">
@@ -18,6 +22,10 @@ export default defineComponent({
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.skeleton>>,
       default: () => appConfig.ui.skeleton
+    },
+    count: {
+      type: Number,
+      default: 1
     }
   },
   setup (props) {
