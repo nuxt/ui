@@ -15,7 +15,7 @@
       >
         <div :class="[ui.group.command.base, active ? ui.group.command.active : ui.group.command.inactive, command.disabled ? 'cursor-not-allowed' : 'cursor-pointer']">
           <div :class="ui.group.command.container">
-            <slot :name="`${group.key}-icon`" :group="group" :command="command">
+            <slot :name="`${group.key}-icon`" :group="group" :command="command" :active="active" :selected="selected">
               <UIcon v-if="command.icon" :name="command.icon" :class="[ui.group.command.icon.base, active ? ui.group.command.icon.active : ui.group.command.icon.inactive, command.iconClass]" aria-hidden="true" />
               <UAvatar
                 v-else-if="command.avatar"
@@ -27,7 +27,7 @@
             </slot>
 
             <div :class="[ui.group.command.label, command.disabled && ui.group.command.disabled]">
-              <slot :name="`${group.key}-command`" :group="group" :command="command">
+              <slot :name="`${group.key}-command`" :group="group" :command="command" :active="active" :selected="selected">
                 <span v-if="command.prefix" class="flex-shrink-0" :class="command.prefixClass || ui.group.command.prefix">{{ command.prefix }}</span>
 
                 <span class="truncate" :class="{ 'flex-none': command.suffix || command.matches?.length }">{{ command[commandAttribute] }}</span>
@@ -40,10 +40,10 @@
           </div>
 
           <UIcon v-if="selected" :name="selectedIcon" :class="ui.group.command.selectedIcon.base" aria-hidden="true" />
-          <slot v-else-if="active && (group.active || $slots[`${group.key}-active`])" :name="`${group.key}-active`" :group="group" :command="command">
+          <slot v-else-if="active && (group.active || $slots[`${group.key}-active`])" :name="`${group.key}-active`" :group="group" :command="command" :active="active" :selected="selected">
             <span v-if="group.active" :class="ui.group.active">{{ group.active }}</span>
           </slot>
-          <slot v-else :name="`${group.key}-inactive`" :group="group" :command="command">
+          <slot v-else :name="`${group.key}-inactive`" :group="group" :command="command" :active="active" :selected="selected">
             <span v-if="command.shortcuts?.length" :class="ui.group.command.shortcuts">
               <UKbd v-for="shortcut of command.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
             </span>
