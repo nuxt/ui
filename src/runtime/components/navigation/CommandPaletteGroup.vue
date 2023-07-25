@@ -40,10 +40,24 @@
           </div>
 
           <UIcon v-if="selected" :name="selectedIcon" :class="ui.group.command.selectedIcon.base" aria-hidden="true" />
-          <slot v-else-if="active && (group.active || $slots[`${group.key}-active`])" :name="`${group.key}-active`" :group="group" :command="command" :active="active" :selected="selected">
+          <slot
+            v-else-if="active && (group.active || $slots[`${group.key}-active`])"
+            :name="`${group.key}-active`"
+            :group="group"
+            :command="command"
+            :active="active"
+            :selected="selected"
+          >
             <span v-if="group.active" :class="ui.group.active">{{ group.active }}</span>
           </slot>
-          <slot v-else :name="`${group.key}-inactive`" :group="group" :command="command" :active="active" :selected="selected">
+          <slot
+            v-else
+            :name="`${group.key}-inactive`"
+            :group="group"
+            :command="command"
+            :active="active"
+            :selected="selected"
+          >
             <span v-if="command.shortcuts?.length" :class="ui.group.command.shortcuts">
               <UKbd v-for="shortcut of command.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
             </span>
