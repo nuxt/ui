@@ -16,7 +16,7 @@ delete defaultColors.trueGray
 delete defaultColors.coolGray
 delete defaultColors.blueGray
 
-declare module 'nuxt/schema' {
+declare module '@nuxt/schema' {
   interface AppConfigInput {
     ui?: {
       primary?: string
