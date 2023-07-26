@@ -76,7 +76,7 @@ export default defineComponent({
     const clones = computed(() => children.value.map((node) => {
       const vProps: any = {}
 
-      if (props.error) {
+      if (errorMessage.value) {
         vProps.oldColor = node.props.color
         vProps.color = 'red'
       } else if (vProps.oldColor) {
