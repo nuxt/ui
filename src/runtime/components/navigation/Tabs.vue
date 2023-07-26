@@ -88,6 +88,7 @@ export default defineComponent({
     // Methods
 
     function onChange (index) {
+      // @ts-ignore
       const tab = itemRefs.value[index]?.$el
       if (!tab) {
         return
