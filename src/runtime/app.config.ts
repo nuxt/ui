@@ -764,6 +764,10 @@ const pagination = {
   }
 }
 
+const tabs = {
+
+}
+
 // Overlays
 
 const modal = {
@@ -983,6 +987,7 @@ export default {
     verticalNavigation,
     commandPalette,
     pagination,
+    tabs,
     modal,
     slideover,
     popover,
