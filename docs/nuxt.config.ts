@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
     '@nuxt/devtools',
-    '@nuxthq/studio',
+    // '@nuxthq/studio',
     module,
     '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
