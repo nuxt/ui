@@ -119,9 +119,20 @@ const badge = {
     md: 'text-sm px-2 py-1',
     lg: 'text-sm px-2.5 py-1.5'
   },
-  color: {},
+  color: {
+    white: {
+      solid: 'ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900'
+    },
+    gray: {
+      solid: 'ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800'
+    },
+    black: {
+      solid: 'text-white dark:text-gray-900 bg-gray-900 dark:bg-white'
+    }
+  },
   variant: {
-    solid: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-10 dark:ring-opacity-20'
+    solid: 'bg-{color}-500 dark:bg-{color}-400 text-white dark:text-gray-900',
+    outline: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-10 dark:ring-opacity-20'
   },
   default: {
     size: 'sm',
