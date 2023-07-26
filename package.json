@@ -46,6 +46,7 @@
     "@vueuse/math": "^10.2.1",
     "defu": "^6.1.2",
     "fuse.js": "^6.6.2",
+    "joi": "^17.9.2",
     "lodash-es": "^4.17.21",
     "tailwindcss": "^3.3.3"
   },
