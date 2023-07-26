@@ -38,6 +38,8 @@ const safelistByComponent = {
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
   }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+  }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['dark']
   }, {
