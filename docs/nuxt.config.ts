@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
     '@nuxt/devtools',
-    '@nuxthq/studio',
+    // '@nuxthq/studio',
     module,
     '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
@@ -40,9 +40,10 @@ export default defineNuxtConfig({
     }
   },
   experimental: {
-    payloadExtraction: true
+    payloadExtraction: false
   },
   componentMeta: {
+    globalsOnly: true,
     metaFields: {
       props: true,
       slots: false,

@@ -21,7 +21,7 @@
             <code v-if="prop.default">{{ prop.default }}</code>
           </td>
           <td>
-            <a v-if="prop.name === 'ui'" href="#preset">
+            <a v-if="prop.default === `appConfig.ui.${camelName}`" href="#preset">
               <code>{{ prop.type }}</code>
             </a>
             <code v-else class="break-all">

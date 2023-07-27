@@ -5,7 +5,7 @@ export interface VerticalNavigationLink extends NuxtLinkProps {
   label: string
   icon?: string
   iconClass?: string
-  avatar?: Partial<Avatar>
+  avatar?: Avatar
   click?: Function
   badge?: string | number
 }

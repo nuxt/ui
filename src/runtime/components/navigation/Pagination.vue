@@ -82,19 +82,19 @@ export default defineComponent({
       }
     },
     activeButton: {
-      type: Object as PropType<Partial<Button>>,
+      type: Object as PropType<Button>,
       default: () => appConfig.ui.pagination.default.activeButton
     },
     inactiveButton: {
-      type: Object as PropType<Partial<Button>>,
+      type: Object as PropType<Button>,
       default: () => appConfig.ui.pagination.default.inactiveButton
     },
     prevButton: {
-      type: Object as PropType<Partial<Button>>,
+      type: Object as PropType<Button>,
       default: () => appConfig.ui.pagination.default.prevButton
     },
     nextButton: {
-      type: Object as PropType<Partial<Button>>,
+      type: Object as PropType<Button>,
       default: () => appConfig.ui.pagination.default.nextButton
     },
     divider: {
