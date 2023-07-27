@@ -119,9 +119,20 @@ const badge = {
     md: 'text-sm px-2 py-1',
     lg: 'text-sm px-2.5 py-1.5'
   },
-  color: {},
+  color: {
+    white: {
+      solid: 'ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900'
+    },
+    gray: {
+      solid: 'ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800'
+    },
+    black: {
+      solid: 'text-white dark:text-gray-900 bg-gray-900 dark:bg-white'
+    }
+  },
   variant: {
-    solid: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-10 dark:ring-opacity-20'
+    solid: 'bg-{color}-500 dark:bg-{color}-400 text-white dark:text-gray-900',
+    outline: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-10 dark:ring-opacity-20'
   },
   default: {
     size: 'sm',
@@ -407,15 +418,24 @@ const input = {
 const formGroup = {
   wrapper: '',
   label: {
-    wrapper: 'flex content-center justify-between',
-    base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-    required: 'after:content-[\'*\'] after:ms-0.5 after:text-red-500 dark:after:text-red-400'
+    wrapper: 'flex content-center items-center justify-between',
+    base: 'block font-medium text-gray-700 dark:text-gray-200',
+    // eslint-disable-next-line quotes
+    required: `after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400`
   },
-  description: 'text-sm text-gray-500 dark:text-gray-400',
+  size: {
+    '2xs': 'text-xs',
+    xs: 'text-xs',
+    sm: 'text-sm',
+    md: 'text-sm',
+    lg: 'text-sm',
+    xl: 'text-base'
+  },
   container: 'mt-1 relative',
-  hint: 'text-sm text-gray-500 dark:text-gray-400',
-  help: 'mt-2 text-sm text-gray-500 dark:text-gray-400',
-  error: 'mt-2 text-sm text-red-500 dark:text-red-400'
+  description: 'text-gray-500 dark:text-gray-400',
+  hint: 'text-gray-500 dark:text-gray-400',
+  help: 'mt-2 text-gray-500 dark:text-gray-400',
+  error: 'mt-2 text-red-500 dark:text-red-400'
 }
 
 const textarea = {
@@ -745,6 +765,40 @@ const pagination = {
   }
 }
 
+const tabs = {
+  wrapper: 'relative space-y-2',
+  container: 'relative w-full',
+  base: 'focus:outline-none',
+  list: {
+    base: 'relative',
+    background: 'bg-gray-100 dark:bg-gray-800',
+    rounded: 'rounded-lg',
+    shadow: '',
+    padding: 'p-1',
+    height: 'h-10',
+    width: 'w-full',
+    marker: {
+      wrapper: 'absolute top-[4px] left-[4px] duration-200 ease-out focus:outline-none',
+      base: 'w-full h-full',
+      background: 'bg-white dark:bg-gray-900',
+      rounded: 'rounded-md',
+      shadow: 'shadow-sm'
+    },
+    tab: {
+      base: 'relative inline-flex items-center justify-center flex-shrink-0 w-full whitespace-nowrap focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
+      background: '',
+      active: 'text-gray-900 dark:text-white',
+      inactive: 'text-gray-500 dark:text-gray-400',
+      height: 'h-8',
+      padding: 'px-3',
+      size: 'text-sm',
+      font: 'font-medium',
+      rounded: 'rounded-md',
+      shadow: ''
+    }
+  }
+}
+
 // Overlays
 
 const modal = {
@@ -964,6 +1018,7 @@ export default {
     verticalNavigation,
     commandPalette,
     pagination,
+    tabs,
     modal,
     slideover,
     popover,
