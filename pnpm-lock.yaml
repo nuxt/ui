@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -101,6 +97,10 @@ importers:
         version: 3.21.4
 
   docs:
+    dependencies:
+      '@nuxthq/ui':
+        specifier: workspace:latest
+        version: link:..
     devDependencies:
       '@iconify-json/heroicons':
         specifier: latest
@@ -1225,7 +1225,7 @@ packages:
   /@nuxt-themes/ui-kit-edge@0.0.1-28164481.fd7cd68(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
     resolution: {integrity: sha512-7BvKI9sARYR8TLmofY0IJVjV5I5f03z/sOlM4fByB8VNql/+wepVOrABnDAt0yg6rSuKMEx4/QoY6+9I2tSqYA==}
     dependencies:
-      '@nuxthq/ui': /@nuxthq/ui-edge@2.6.0-28173140.9a73c5f(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1)
+      '@nuxthq/ui': /@nuxthq/ui-edge@2.6.0-28174357.10890e6(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1)
       '@vueuse/core': 10.2.1(vue@3.3.4)
       lodash-es: 4.17.21
     transitivePeerDependencies:
@@ -1653,8 +1653,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nuxthq/ui-edge@2.6.0-28173140.9a73c5f(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
-    resolution: {integrity: sha512-45mfdkx3BanU1e/oa2SSBaEbdmidEMlfoJjVmeNRZJUcCNwXJNchuoV178s8kDmi712iM7LNwtWJk5Wjs+r46g==}
+  /@nuxthq/ui-edge@2.6.0-28174357.10890e6(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
+    resolution: {integrity: sha512-ljgVY1HnwOnVo1HTbYGKbYLZRfD7WmteNVjiTnDRHs8khQrTkqNadGgIXhLn3vkC2yb+WBrJBkrXCxoculsuqg==}
     engines: {node: '>=v16.14.0'}
     dependencies:
       '@egoist/tailwindcss-icons': 1.1.0(tailwindcss@3.3.3)
@@ -11876,3 +11876,7 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

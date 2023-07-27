@@ -1,13 +1,9 @@
 import { provide, ref, PropType, h } from 'vue'
-import { FormError, FormEvent } from '../../types'
 import { useEventBus } from '@vueuse/core'
-
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ZodSchema, ZodError } from 'zod'
-import type {
-  ObjectSchema as YupObjectSchema,
-  ValidationError as YupError
-} from 'yup'
+import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
+import type { FormError, FormEvent } from '../../types'
 
 export default defineComponent({
   props: {

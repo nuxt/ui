@@ -2,8 +2,8 @@ import { h, cloneVNode, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { getSlotsChildren } from '../../utils'
+import type { FormError } from '../../types'
 import { useAppConfig } from '#imports'
-import { FormError } from '../../types'
 
 // TODO: Remove
 // @ts-expect-error

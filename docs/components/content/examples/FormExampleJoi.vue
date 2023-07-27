@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Joi from 'joi'
-import { Form } from '#ui'
+import type { Schema } from 'joi'
+import type { Form } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = Joi.object({
   email: Joi.string().required(),
@@ -15,7 +16,7 @@ const state = ref({
   password: undefined
 })
 
-const form = ref()
+const form = ref<Form<Schema>>()
 
 async function submit () {
   await form.value!.validate()

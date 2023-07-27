@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { object, string, InferType } from 'yup'
-import { Form } from '#ui'
+import type { Form } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = object({
   email: string().email('Invalid email').required('Required'),

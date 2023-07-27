@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { z } from 'zod'
-import { Form } from '#ui'
+import type { Form } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = z.object({
   email: z.string().email('Invalid email'),

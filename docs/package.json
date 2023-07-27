@@ -1,6 +1,9 @@
 {
   "name": "@nuxthq/ui-docs",
   "private": true,
+  "dependencies": {
+    "@nuxthq/ui": "workspace:latest"
+  },
   "devDependencies": {
     "@iconify-json/heroicons": "latest",
     "@iconify-json/simple-icons": "latest",

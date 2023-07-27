@@ -212,12 +212,5 @@ export default defineNuxtModule<ModuleOptions>({
     // Composables
 
     addImportsDir(resolve(runtimeDir, 'composables'))
-
-    nuxt.options.alias['#ui'] = addTemplate({
-      filename: 'types/ui.d.ts',
-      getContents: () => [
-        `export { Form, FormError } from '${resolve('./runtime/types/form')}'`
-      ].join('\n')
-    }).dst
   }
 })
