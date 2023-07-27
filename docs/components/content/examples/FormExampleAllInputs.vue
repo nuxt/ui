@@ -14,7 +14,7 @@ const state = ref({
   textarea: undefined,
   select: undefined,
   selectMenu: undefined,
-  check: undefined,
+  checkbox: undefined,
   toggle: undefined,
   radio: undefined,
   switch: undefined,
@@ -57,44 +57,44 @@ async function submit () {
     ref="form"
     :schema="schema"
     :state="state"
-    class="space-y-4"
+    class="space-y-4 w-full"
     @submit.prevent="submit"
   >
-    <UFormGroup path="input" label="Input">
+    <UFormGroup name="input" path="input" label="Input">
       <UInput v-model="state.input" />
     </UFormGroup>
 
-    <UFormGroup path="textarea" label="Text Area">
+    <UFormGroup name="textarea" path="textarea" label="Textarea">
       <UTextarea v-model="state.textarea" />
     </UFormGroup>
 
-    <UFormGroup path="select" label="Select">
+    <UFormGroup name="select" path="select" label="Select">
       <USelect v-model="state.select" placeholder="Select..." :options="options" />
     </UFormGroup>
 
-    <UFormGroup path="selectMenu" label="Select Menu">
+    <UFormGroup name="selectMenu" path="selectMenu" label="Select Menu">
       <USelectMenu v-model="state.selectMenu" placeholder="Select..." :options="options" />
     </UFormGroup>
 
-    <UFormGroup path="toggle" label="Toggle">
+    <UFormGroup name="toggle" path="toggle" label="Toggle">
       <UToggle v-model="state.toggle" />
     </UFormGroup>
 
-    <UFormGroup path="check" label="Checkbox">
-      <UCheckbox v-model="state.check" />
+    <UFormGroup name="checkbox" path="checkbox" label="Checkbox">
+      <UCheckbox v-model="state.checkbox" />
     </UFormGroup>
 
-    <UFormGroup path="radio" label="Radio">
+    <UFormGroup name="radio" path="radio" label="Radio">
       <URadio v-for="option in options" :key="option.value" v-model="state.radio" v-bind="option">
         {{ option.label }}
       </URadio>
     </UFormGroup>
 
-    <UFormGroup path="range" label="Range">
+    <UFormGroup name="range" path="range" label="Range">
       <URange v-model="state.range" />
     </UFormGroup>
 
-    <UButton block type="submit">
+    <UButton type="submit">
       Submit
     </UButton>
   </UForm>

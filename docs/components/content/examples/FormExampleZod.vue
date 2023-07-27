@@ -28,7 +28,7 @@ async function submit () {
     ref="form"
     :schema="schema"
     :state="state"
-    class="space-y-2"
+    class="space-y-4 w-full"
     @submit.prevent="submit"
   >
     <UFormGroup label="Email" path="email">
@@ -39,7 +39,7 @@ async function submit () {
       <UInput v-model="state.password" type="password" />
     </UFormGroup>
 
-    <UButton block type="submit">
+    <UButton type="submit">
       Submit
     </UButton>
   </UForm>
