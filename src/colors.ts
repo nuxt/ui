@@ -26,6 +26,24 @@ const kebabCase = (str: string) => {
 }
 
 const safelistByComponent = {
+  alert: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-50`)
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`)
+  }],
   avatar: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
