@@ -1,7 +1,7 @@
-import { provide, ref, PropType, h } from 'vue'
+import { provide, ref, type PropType, h } from 'vue'
 import { useEventBus } from '@vueuse/core'
-import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ZodSchema, ZodError } from 'zod'
+import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { FormError, FormEvent } from '../../types'
 
@@ -14,18 +14,15 @@ export default defineComponent({
         | PropType<JoiSchema>,
       default: undefined
     },
-
     state: {
       type: Object,
       required: true
     },
-
     validate: {
       type: Function as PropType<(state: any) => Promise<FormError[]>>,
       default: () => []
     }
   },
-
   setup (props, { slots, expose }) {
     const seed = Math.random().toString(36).substring(7)
     const bus = useEventBus<FormEvent>(`form-${seed}`)
