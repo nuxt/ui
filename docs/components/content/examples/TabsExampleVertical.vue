@@ -12,5 +12,5 @@ const items = [{
 </script>
 
 <template>
-  <UTabs :items="items" orientation="vertical" />
+  <UTabs :items="items" orientation="vertical" :ui="{ wrapper: 'flex items-center gap-4', list: { width: 'w-48' } }" />
 </template>

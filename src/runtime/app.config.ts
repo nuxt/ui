@@ -769,12 +769,13 @@ const tabs = {
   container: 'relative w-full',
   base: 'focus:outline-none',
   list: {
-    base: 'relative w-full',
+    base: 'relative',
     background: 'bg-gray-100 dark:bg-gray-800',
     rounded: 'rounded-lg',
     shadow: '',
     padding: 'p-1',
     height: 'h-10',
+    width: 'w-full',
     marker: {
       wrapper: 'absolute top-[4px] left-[4px] duration-200 ease-out focus:outline-none',
       base: 'w-full h-full',

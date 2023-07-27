@@ -1,7 +1,7 @@
 <template>
   <HTabGroup :vertical="orientation === 'vertical'" :default-index="defaultIndex" as="div" :class="ui.wrapper" @change="onChange">
     <HTabList
-      :class="[ui.list.base, ui.list.background, ui.list.rounded, ui.list.shadow, ui.list.padding, orientation === 'horizontal' && ui.list.height, orientation === 'horizontal' && 'inline-grid items-center']"
+      :class="[ui.list.base, ui.list.background, ui.list.rounded, ui.list.shadow, ui.list.padding, ui.list.width, orientation === 'horizontal' && ui.list.height, orientation === 'horizontal' && 'inline-grid items-center']"
       :style="[orientation === 'horizontal' && `grid-template-columns: repeat(${items.length}, minmax(0, 1fr))`]"
     >
       <div ref="markerRef" :class="ui.list.marker.wrapper">
