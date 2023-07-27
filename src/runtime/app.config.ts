@@ -420,7 +420,8 @@ const formGroup = {
   label: {
     wrapper: 'flex content-center items-center justify-between',
     base: 'block font-medium text-gray-700 dark:text-gray-200',
-    required: 'after:content-[\'*\'] after:ms-0.5 after:text-red-500 dark:after:text-red-400'
+    // eslint-disable-next-line quotes
+    required: `after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400`
   },
   size: {
     '2xs': 'text-xs',

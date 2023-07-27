@@ -1,5 +1,5 @@
 <template>
-  <HPopover v-slot="{ open, close }" :class="ui.wrapper" @mouseleave="onMouseLeave">
+  <HPopover ref="popover" v-slot="{ open, close }" :class="ui.wrapper" @mouseleave="onMouseLeave">
     <HPopoverButton
       ref="trigger"
       as="div"
@@ -85,21 +85,19 @@ export default defineComponent({
     const [trigger, container] = usePopper(popper.value)
 
     // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
+    const popover = ref<any>(null)
     const popoverApi = ref<any>(null)
 
     let openTimeout: NodeJS.Timeout | null = null
     let closeTimeout: NodeJS.Timeout | null = null
 
     onMounted(() => {
-      setTimeout(() => {
-        // @ts-expect-error internals
-        const popoverProvides = trigger.value?.$.provides
-        if (!popoverProvides) {
-          return
-        }
-        const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
-        popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
-      }, 200)
+      const popoverProvides = popover.value?.$.provides
+      if (!popoverProvides) {
+        return
+      }
+      const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
+      popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
     })
 
     function onMouseOver () {
@@ -145,6 +143,7 @@ export default defineComponent({
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      popover,
       trigger,
       container,
       onMouseOver,
