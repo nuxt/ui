@@ -96,8 +96,8 @@ importers:
         specifier: latest
         version: 1.1.61
       '@nuxt-themes/ui-kit':
-        specifier: npm:@nuxt-themes/ui-kit-edge@0.0.1-28161530.eabde2d
-        version: /@nuxt-themes/ui-kit-edge@0.0.1-28161530.eabde2d(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1)
+        specifier: npm:@nuxt-themes/ui-kit-edge@0.0.1-28162723.5a27878
+        version: /@nuxt-themes/ui-kit-edge@0.0.1-28162723.5a27878(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1)
       '@nuxt/content':
         specifier: ^2.7.0
         version: 2.7.0(rollup@3.26.2)
@@ -1200,10 +1200,10 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt-themes/ui-kit-edge@0.0.1-28161530.eabde2d(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
-    resolution: {integrity: sha512-opLe0Nj9guLPn7Oh3moFGUFIzBhSLUVLCTHebUVtTfjaRHgJlgjgL2N/HsYhTQO6IsUEBxvSbQXSGBUUDwIBVQ==}
+  /@nuxt-themes/ui-kit-edge@0.0.1-28162723.5a27878(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
+    resolution: {integrity: sha512-f+PtwrTd0XL/XprgQ6c1Lh+RgKkAYlHr6eU5edGmTGelakcdBgcUY8bUIhdy/P+wKtj45Q8854TWkmdAW0zP9A==}
     dependencies:
-      '@nuxthq/ui': /@nuxthq/ui-edge@2.5.0-28161480.5f8fe85(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1)
+      '@nuxthq/ui': /@nuxthq/ui-edge@2.6.0-28161593.a31e7df(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1)
       '@vueuse/core': 10.2.1(vue@3.3.4)
       lodash-es: 4.17.21
     transitivePeerDependencies:
@@ -1613,8 +1613,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nuxthq/ui-edge@2.5.0-28161480.5f8fe85(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
-    resolution: {integrity: sha512-zWnt6Sqsl5sS2GMOq8M18gR9GB3a1jDp+oVWJak6OjTyQ5tqBut8D4KysXsgvtY+G1Wb5iFkwunzXl7CdNbU2A==}
+  /@nuxthq/ui-edge@2.6.0-28161593.a31e7df(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.1):
+    resolution: {integrity: sha512-EEvGUMolXnUt9qV+z2xvYLz6N69c1rU8w3f1a/UlUD3UJyxzuTLHcY4hge6/goszM7QAcmbW1DojyCYgBVaYLw==}
     engines: {node: '>=v16.14.0'}
     dependencies:
       '@egoist/tailwindcss-icons': 1.1.0(tailwindcss@3.3.3)

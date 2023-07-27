@@ -21,6 +21,7 @@
     "build": "nuxt-module-build",
     "prepack": "pnpm build",
     "dev": "nuxi dev docs",
+    "play": "nuxi dev playground",
     "build:docs": "nuxi generate docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

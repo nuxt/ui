@@ -18,8 +18,8 @@
 
         <UColorModeButton />
 
-        <USocialButton to="https://twitter.com/nuxtlabs" icon="i-simple-icons-twitter" class="hidden lg:inline-flex" />
-        <USocialButton to="https://github.com/nuxtlabs/ui" icon="i-simple-icons-github" class="hidden lg:inline-flex" />
+        <USocialButton to="https://twitter.com/nuxtlabs" target="_blank" icon="i-simple-icons-twitter" class="hidden lg:inline-flex" />
+        <USocialButton to="https://github.com/nuxtlabs/ui" target="_blank" icon="i-simple-icons-github" class="hidden lg:inline-flex" />
       </template>
 
       <template #links>
