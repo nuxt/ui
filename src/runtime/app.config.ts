@@ -457,7 +457,8 @@ const formGroup = {
   label: {
     wrapper: 'flex content-center items-center justify-between',
     base: 'block font-medium text-gray-700 dark:text-gray-200',
-    required: 'after:content-[\'*\'] after:ms-0.5 after:text-red-500 dark:after:text-red-400'
+    // eslint-disable-next-line quotes
+    required: `after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400`
   },
   size: {
     '2xs': 'text-xs',
@@ -801,6 +802,40 @@ const pagination = {
   }
 }
 
+const tabs = {
+  wrapper: 'relative space-y-2',
+  container: 'relative w-full',
+  base: 'focus:outline-none',
+  list: {
+    base: 'relative',
+    background: 'bg-gray-100 dark:bg-gray-800',
+    rounded: 'rounded-lg',
+    shadow: '',
+    padding: 'p-1',
+    height: 'h-10',
+    width: 'w-full',
+    marker: {
+      wrapper: 'absolute top-[4px] left-[4px] duration-200 ease-out focus:outline-none',
+      base: 'w-full h-full',
+      background: 'bg-white dark:bg-gray-900',
+      rounded: 'rounded-md',
+      shadow: 'shadow-sm'
+    },
+    tab: {
+      base: 'relative inline-flex items-center justify-center flex-shrink-0 w-full whitespace-nowrap focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
+      background: '',
+      active: 'text-gray-900 dark:text-white',
+      inactive: 'text-gray-500 dark:text-gray-400',
+      height: 'h-8',
+      padding: 'px-3',
+      size: 'text-sm',
+      font: 'font-medium',
+      rounded: 'rounded-md',
+      shadow: ''
+    }
+  }
+}
+
 // Overlays
 
 const modal = {
@@ -1021,6 +1056,7 @@ export default {
     verticalNavigation,
     commandPalette,
     pagination,
+    tabs,
     modal,
     slideover,
     popover,
