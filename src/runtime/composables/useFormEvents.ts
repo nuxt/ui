@@ -1,19 +1,6 @@
 import { inject } from 'vue'
 import { UseEventBusReturn } from '@vueuse/core'
-
-export interface FormError {
-  path: string
-  message: string
-}
-
-export interface Form<T> {
-  validate(): Promise<T>
-}
-
-export interface FormEvent {
-  type: 'blur' // | 'change' | 'focus'
-  path: string
-}
+import { FormEvent } from '../types'
 
 export const useFormEvents = () => {
     const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
