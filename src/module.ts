@@ -123,7 +123,7 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
-      tailwindConfig.safelist.push(...generateSafelist(options.safelistColors))
+      tailwindConfig.safelist.push(...generateSafelist(options.safelistColors, colors))
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
