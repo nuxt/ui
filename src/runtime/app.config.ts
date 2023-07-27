@@ -294,7 +294,7 @@ const accordion = {
 const alert = {
   wrapper: 'w-full relative overflow-hidden',
   title: 'text-sm font-medium',
-  description: 'mt-1 text-sm leading-4 opacity-80',
+  description: 'mt-1 text-sm leading-4 opacity-90',
   shadow: '',
   rounded: 'rounded-lg',
   padding: 'p-3',
