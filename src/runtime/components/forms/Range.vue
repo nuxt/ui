@@ -83,6 +83,8 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.range>>(() => defu({}, props.ui, appConfig.ui.range))
 
+    const { emitFormBlur } = useFormEvents()
+
     const value = computed({
       get () {
         return props.modelValue
@@ -92,7 +94,6 @@ export default defineComponent({
       }
     })
 
-    const { emitFormBlur } = useFormEvents()
     const onChange = (event: Event) => {
       emit('change', event)
       emitFormBlur()

@@ -174,17 +174,16 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
 
+    const { emitFormBlur } = useFormEvents()
+
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
-
-    const { emitFormBlur } = useFormEvents()
     const onChange = (event: Event) => {
       emitFormBlur()
       emit('change', event)
     }
-
 
     const guessOptionValue = (option: any) => {
       return get(option, props.valueAttribute, get(option, props.optionAttribute))

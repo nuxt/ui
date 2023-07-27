@@ -100,6 +100,8 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.checkbox>>(() => defu({}, props.ui, appConfig.ui.checkbox))
 
+    const { emitFormBlur } = useFormEvents()
+
     const toggle = computed({
       get () {
         return props.modelValue
@@ -109,7 +111,6 @@ export default defineComponent({
       }
     })
 
-    const { emitFormBlur } = useFormEvents()
     const onChange = (event: Event) => {
       emit('change', event)
       emitFormBlur()

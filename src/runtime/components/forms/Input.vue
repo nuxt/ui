@@ -147,6 +147,8 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.input>>(() => defu({}, props.ui, appConfig.ui.input))
 
+    const { emitFormBlur } = useFormEvents()
+
     const input = ref<HTMLInputElement | null>(null)
 
     const autoFocus = () => {
@@ -159,7 +161,6 @@ export default defineComponent({
       emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
-    const { emitFormBlur } = useFormEvents()
     const onBlur = (event: FocusEvent) => {
       emitFormBlur()
       emit('blur', event)

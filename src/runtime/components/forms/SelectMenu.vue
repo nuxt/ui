@@ -304,6 +304,7 @@ export default defineComponent({
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
+    const { emitFormBlur } = useFormEvents()
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
@@ -405,8 +406,6 @@ export default defineComponent({
       return query.value === '' ? null : { [props.optionAttribute]: query.value }
     })
 
-    const { emitFormBlur } = useFormEvents()
-
     watch(container, (value) => {
       if (value) {
         emit('open')
@@ -426,7 +425,6 @@ export default defineComponent({
       emit('change', event)
       emitFormBlur()
     }
-
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

@@ -91,6 +91,7 @@ export default defineComponent({
     const ui = computed<Partial<typeof appConfig.ui.radio>>(() => defu({}, props.ui, appConfig.ui.radio))
 
     const { emitFormBlur } = useFormEvents()
+
     const pick = computed({
       get () {
         return props.modelValue
@@ -102,7 +103,6 @@ export default defineComponent({
         }
       }
     })
-
 
     const inputClass = computed(() => {
       return classNames(
