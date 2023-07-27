@@ -3,7 +3,7 @@
     <div :class="[ui.wrapper, ui.background, ui.rounded, ui.shadow]" @mouseover="onMouseover" @mouseleave="onMouseleave">
       <div :class="[ui.container, ui.rounded, ui.ring]">
         <div :class="ui.padding">
-          <div class="flex gap-3" :class="{ 'items-start': description, 'items-center': !description }">
+          <div class="flex gap-3" :class="{ 'items-start': description || $slots.description, 'items-center': !description && !$slots.description }">
             <UIcon v-if="icon" :name="icon" :class="iconClass" />
             <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
 
@@ -13,18 +13,18 @@
                   {{ title }}
                 </slot>
               </p>
-              <p v-if="description" :class="ui.description">
+              <p v-if="(description || $slots.description)" :class="ui.description">
                 <slot name="description" :description="description">
                   {{ description }}
                 </slot>
               </p>
 
-              <div v-if="description && actions.length" class="mt-3 flex items-center gap-2">
+              <div v-if="(description || $slots.description) && actions.length" class="mt-3 flex items-center gap-2">
                 <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
               </div>
             </div>
             <div class="flex-shrink-0 flex items-center gap-3">
-              <div v-if="!description && actions.length" class="flex items-center gap-2">
+              <div v-if="!description && !$slots.description && actions.length" class="flex items-center gap-2">
                 <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
               </div>
 
