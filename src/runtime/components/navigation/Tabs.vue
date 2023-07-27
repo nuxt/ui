@@ -1,33 +1,33 @@
 <template>
-  <HTabGroup :vertical="vertical" :default-index="defaultIndex" as="div" @change="onChange">
+  <HTabGroup :vertical="vertical" :default-index="defaultIndex" as="div" :class="ui.wrapper" @change="onChange">
     <HTabList
-      class="rounded-lg bg-gray-100 dark:bg-gray-800 p-1 relative items-center w-full"
-      :class="[!vertical && 'h-10 inline-grid']"
+      :class="[ui.list.base, ui.list.background, ui.list.rounded, ui.list.shadow, ui.list.padding, !vertical && ui.list.height, !vertical && 'inline-grid items-center']"
       :style="[!vertical && `grid-template-columns: repeat(${items.length}, minmax(0, 1fr))`]"
     >
-      <div ref="markerRef" class="absolute top-[4px] left-[4px] duration-200 ease-out">
-        <div class="w-full h-full bg-white dark:bg-gray-900 rounded-md shadow-sm" />
+      <div ref="markerRef" :class="ui.list.marker.wrapper">
+        <div :class="[ui.list.marker.base, ui.list.marker.background, ui.list.marker.rounded, ui.list.marker.shadow]" />
       </div>
 
       <HTab
         v-for="(item, index) of items"
         :key="index"
         ref="itemRefs"
+        v-slot="{ selected }"
         :disabled="item.disabled"
         as="template"
       >
-        <button class="relative inline-flex items-center justify-center w-full h-8 px-3 text-sm font-medium rounded-md cursor-pointer whitespace-nowrap focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+        <button :class="[ui.list.tab.base, ui.list.tab.background, ui.list.tab.height, ui.list.tab.padding, ui.list.tab.size, ui.list.tab.font, ui.list.tab.rounded, ui.list.tab.shadow, selected ? ui.list.tab.active : ui.list.tab.inactive]">
           {{ item.label }}
         </button>
       </HTab>
     </HTabList>
 
-    <HTabPanels class="mt-2">
+    <HTabPanels :class="ui.container">
       <HTabPanel
         v-for="(item, index) of items"
         :key="index"
         v-slot="{ selected }"
-        class=" focus:outline-none"
+        :class="ui.base"
       >
         <slot :name="item.slot || 'item'" :item="item" :index="index" :selected="selected">
           {{ item.content }}
