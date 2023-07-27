@@ -293,7 +293,7 @@ export default defineComponent({
       default: () => appConfig.ui.selectMenu
     }
   },
-  emits: ['update:modelValue', 'open', 'close'],
+  emits: ['update:modelValue', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
@@ -423,6 +423,7 @@ export default defineComponent({
         searchInput.value.$el.value = ''
       }
       emit('update:modelValue', event)
+      emit('change', event)
       emitFormBlur()
     }
 
