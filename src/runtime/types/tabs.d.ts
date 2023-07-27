@@ -1,6 +1,5 @@
-import type { Button } from './button'
-
-export interface TabItem extends Button {
+export interface TabItem {
+  label: string
   slot?: string
   disabled?: boolean
   content?: string

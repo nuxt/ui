@@ -1,8 +1,8 @@
 <template>
-  <HTabGroup :vertical="vertical" :default-index="defaultIndex" as="div" :class="ui.wrapper" @change="onChange">
+  <HTabGroup :vertical="orientation === 'vertical'" :default-index="defaultIndex" as="div" :class="ui.wrapper" @change="onChange">
     <HTabList
-      :class="[ui.list.base, ui.list.background, ui.list.rounded, ui.list.shadow, ui.list.padding, !vertical && ui.list.height, !vertical && 'inline-grid items-center']"
-      :style="[!vertical && `grid-template-columns: repeat(${items.length}, minmax(0, 1fr))`]"
+      :class="[ui.list.base, ui.list.background, ui.list.rounded, ui.list.shadow, ui.list.padding, orientation === 'horizontal' && ui.list.height, orientation === 'horizontal' && 'inline-grid items-center']"
+      :style="[orientation === 'horizontal' && `grid-template-columns: repeat(${items.length}, minmax(0, 1fr))`]"
     >
       <div ref="markerRef" :class="ui.list.marker.wrapper">
         <div :class="[ui.list.marker.base, ui.list.marker.background, ui.list.marker.rounded, ui.list.marker.shadow]" />
@@ -12,12 +12,14 @@
         v-for="(item, index) of items"
         :key="index"
         ref="itemRefs"
-        v-slot="{ selected }"
+        v-slot="{ selected, disabled }"
         :disabled="item.disabled"
         as="template"
       >
         <button :class="[ui.list.tab.base, ui.list.tab.background, ui.list.tab.height, ui.list.tab.padding, ui.list.tab.size, ui.list.tab.font, ui.list.tab.rounded, ui.list.tab.shadow, selected ? ui.list.tab.active : ui.list.tab.inactive]">
-          {{ item.label }}
+          <slot :item="item" :index="index" :selected="selected" :disabled="disabled">
+            {{ item.label }}
+          </slot>
         </button>
       </HTab>
     </HTabList>
@@ -59,9 +61,10 @@ export default defineComponent({
     HTabPanel
   },
   props: {
-    vertical: {
-      type: Boolean,
-      default: false
+    orientation: {
+      type: String as PropType<'horizontal' | 'vertical'>,
+      default: 'horizontal',
+      validator: (value: string) => ['horizontal', 'vertical'].includes(value)
     },
     defaultIndex: {
       type: Number,
