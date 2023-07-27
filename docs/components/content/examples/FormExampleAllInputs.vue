@@ -60,37 +60,37 @@ async function submit () {
     class="space-y-4 w-full"
     @submit.prevent="submit"
   >
-    <UFormGroup name="input" path="input" label="Input">
+    <UFormGroup name="input" label="Input">
       <UInput v-model="state.input" />
     </UFormGroup>
 
-    <UFormGroup name="textarea" path="textarea" label="Textarea">
+    <UFormGroup name="textarea" label="Textarea">
       <UTextarea v-model="state.textarea" />
     </UFormGroup>
 
-    <UFormGroup name="select" path="select" label="Select">
+    <UFormGroup name="select" label="Select">
       <USelect v-model="state.select" placeholder="Select..." :options="options" />
     </UFormGroup>
 
-    <UFormGroup name="selectMenu" path="selectMenu" label="Select Menu">
+    <UFormGroup name="selectMenu" label="Select Menu">
       <USelectMenu v-model="state.selectMenu" placeholder="Select..." :options="options" />
     </UFormGroup>
 
-    <UFormGroup name="toggle" path="toggle" label="Toggle">
+    <UFormGroup  name="toggle" label="Toggle">
       <UToggle v-model="state.toggle" />
     </UFormGroup>
 
-    <UFormGroup name="checkbox" path="checkbox" label="Checkbox">
+    <UFormGroup name="checkbox" label="Checkbox">
       <UCheckbox v-model="state.checkbox" />
     </UFormGroup>
 
-    <UFormGroup name="radio" path="radio" label="Radio">
+    <UFormGroup name="radio" label="Radio">
       <URadio v-for="option in options" :key="option.value" v-model="state.radio" v-bind="option">
         {{ option.label }}
       </URadio>
     </UFormGroup>
 
-    <UFormGroup name="range" path="range" label="Range">
+    <UFormGroup name="range" label="Range">
       <URange v-model="state.range" />
     </UFormGroup>
 

@@ -44,11 +44,11 @@ async function submit () {
     class="space-y-4 w-full"
     @submit.prevent="submit"
   >
-    <UFormGroup label="Email" path="email">
+    <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormGroup>
 
-    <UFormGroup label="Password" path="password">
+    <UFormGroup label="Password" name="password">
       <UInput v-model="state.password" type="password" />
     </UFormGroup>
 

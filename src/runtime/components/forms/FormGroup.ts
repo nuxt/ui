@@ -24,10 +24,6 @@ export default defineComponent({
         return Object.keys(appConfig.ui.formGroup.size).includes(value)
       }
     },
-    path: {
-      type: String,
-      default: null
-    },
     label: {
       type: String,
       default: null
@@ -63,12 +59,12 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.formGroup>>(() => defu({}, props.ui, appConfig.ui.formGroup))
 
-    provide('form-path', props.path)
+    provide('form-path', props.name)
     const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
     const errorMessage = computed(() => {
       return props.error && typeof props.error === 'string'
         ? props.error
-        : formErrors?.value?.find((error) => error.path === props.path)?.message
+        : formErrors?.value?.find((error) => error.path === props.name)?.message
     })
 
     const children = computed(() => getSlotsChildren(slots))
