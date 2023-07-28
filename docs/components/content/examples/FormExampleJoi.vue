@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Joi from 'joi'
-import type { Schema } from 'joi'
-import type { Form } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = Joi.object({
   email: Joi.string().required(),
@@ -16,7 +14,7 @@ const state = ref({
   password: undefined
 })
 
-const form = ref<Form<Schema>>()
+const form = ref()
 
 async function submit () {
   await form.value!.validate()
@@ -29,7 +27,7 @@ async function submit () {
     ref="form"
     :schema="schema"
     :state="state"
-    class="space-y-4 w-full"
+    class="space-y-4 w-60"
     @submit.prevent="submit"
   >
     <UFormGroup label="Email" name="email">

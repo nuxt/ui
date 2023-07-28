@@ -33,7 +33,7 @@ const schema = z.object({
   toggle: z.boolean().refine(value => value === true, {
     message: 'Toggle me'
   }),
-  check: z.boolean().refine(value => value === true, {
+  checkbox: z.boolean().refine(value => value === true, {
     message: 'Check me'
   }),
   radio: z.string().refine(value => value === 'option-2', {
@@ -57,7 +57,7 @@ async function submit () {
     ref="form"
     :schema="schema"
     :state="state"
-    class="space-y-4 w-full"
+    class="space-y-4 w-60"
     @submit.prevent="submit"
   >
     <UFormGroup name="input" label="Input">

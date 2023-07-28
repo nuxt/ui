@@ -19,7 +19,7 @@ export default defineComponent({
       required: true
     },
     validate: {
-      type: Function as PropType<(state: any) => Promise<FormError[]>>,
+      type: Function as PropType<(state: any) => Promise<FormError[]>> | PropType<(state: any) => FormError[]>,
       default: () => []
     }
   },

@@ -19,7 +19,7 @@ const form = ref<Form<Schema>>()
 
 async function submit () {
   await form.value!.validate()
-  // Do something with state.value
+  // Do something with data
 }
 </script>
 
@@ -28,7 +28,7 @@ async function submit () {
     ref="form"
     :schema="schema"
     :state="state"
-    class="space-y-4 w-full"
+    class="space-y-4 w-60"
     @submit.prevent="submit"
   >
     <UFormGroup label="Email" name="email">
