@@ -24,6 +24,7 @@ const columns = [
 ]
 
 const selectedColumns = ref(columns)
+const columnsTable = computed(() => columns.filter((column) => selectedColumns.value.includes(column)))
 
 // Selected Rows
 const selectedRows = ref([])
@@ -179,7 +180,7 @@ const { data: users, pending } = await useAsyncData<{
     <UTable
       v-model="selectedRows"
       :rows="users"
-      :columns="selectedColumns"
+      :columns="columnsTable"
       :loading="pending"
       sort-asc-icon="i-heroicons-arrow-up"
       sort-desc-icon="i-heroicons-arrow-down"
