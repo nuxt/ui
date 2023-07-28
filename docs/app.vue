@@ -92,9 +92,6 @@ useHead({
   ],
   htmlAttrs: {
     lang: 'en'
-  },
-  bodyAttrs: {
-    class: 'antialiased font-sans text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900'
   }
 })
 

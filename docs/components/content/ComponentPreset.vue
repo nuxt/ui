@@ -29,8 +29,9 @@ ${JSON.stringify(preset, null, 2)}
 `, {
   highlight: {
     theme: {
-      light: 'material-lighter',
-      dark: 'material-palenight'
+      light: 'material-theme-lighter',
+      default: 'material-theme',
+      dark: 'material-theme-palenight'
     }
   }
 }))
