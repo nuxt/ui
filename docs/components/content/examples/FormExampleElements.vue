@@ -76,7 +76,7 @@ async function submit () {
       <USelectMenu v-model="state.selectMenu" placeholder="Select..." :options="options" />
     </UFormGroup>
 
-    <UFormGroup  name="toggle" label="Toggle">
+    <UFormGroup name="toggle" label="Toggle">
       <UToggle v-model="state.toggle" />
     </UFormGroup>
 

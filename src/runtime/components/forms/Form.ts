@@ -1,4 +1,4 @@
-import { provide, ref, type PropType, h } from 'vue'
+import { provide, ref, type PropType, h, defineComponent } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema, ZodError } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
