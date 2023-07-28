@@ -23,7 +23,7 @@ const name = `U${useUpperFirst(camelName)}`
 const preset = appConfig.ui[camelName]
 
 const { data: ast } = await useAsyncData(`${name}-preset`, () => transformContent('content:_markdown.md', `
-\`\`\`json
+\`\`\`json [appConfig.ui.${camelName}]
 ${JSON.stringify(preset, null, 2)}
 \`\`\`\
 `, {
