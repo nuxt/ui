@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody :class="ui.tbody">
-        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active]" @click="() => onSelect(row)">
+        <tr v-for="(row, index) in rows" v-show="!loading" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active]" @click="() => onSelect(row)">
           <td v-if="modelValue" class="ps-4">
             <UCheckbox v-model="selected" :value="row" @click.stop />
           </td>
