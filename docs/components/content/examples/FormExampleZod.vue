@@ -19,7 +19,7 @@ const form = ref<Form<Schema>>()
 
 async function submit () {
   await form.value!.validate()
-  // Do something with data
+  // Do something with state.value
 }
 </script>
 
