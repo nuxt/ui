@@ -7,8 +7,8 @@ import offset from '@popperjs/core/lib/modifiers/offset'
 import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow'
 import computeStyles from '@popperjs/core/lib/modifiers/computeStyles'
 import eventListeners from '@popperjs/core/lib/modifiers/eventListeners'
-import { MaybeElement, unrefElement, MaybeComputedElementRef  } from '@vueuse/core'
-import type { PopperOptions } from '../types'
+import { MaybeElement, unrefElement } from '@vueuse/core'
+import type { MaybeComputedVirtualElementRef, PopperOptions } from '../types'
 
 export const createPopper = popperGenerator({
   defaultModifiers: [...defaultModifiers, offset, flip, preventOverflow, computeStyles, eventListeners]
@@ -25,7 +25,7 @@ export function usePopper ({
   resize = true,
   placement,
   strategy
-}: PopperOptions, virtualReference?: MaybeComputedElementRef) {
+}: PopperOptions, virtualReference?: MaybeComputedVirtualElementRef) {
   const reference = ref<MaybeElement>(null)
   const popper = ref<MaybeElement>(null)
   const instance = ref<Instance | null>(null)
@@ -36,9 +36,9 @@ export function usePopper ({
       if (!reference.value && !unref(virtualReference)) { return }
 
       const popperEl = unrefElement(popper)
-      let referenceEl: Element | VirtualElement
+      let referenceEl: VirtualElement
       if (unref(virtualReference)) {
-        referenceEl = unrefElement(virtualReference)
+        referenceEl = unrefElement(virtualReference as MaybeElement)
       } else {
         referenceEl = unrefElement(reference)
       }
