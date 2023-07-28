@@ -1,6 +1,6 @@
 <template>
   <div ref="trigger" :class="ui.wrapper" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
-    <slot :open="open">
+    <slot v-if="$slots.default" :open="open">
       Hover
     </slot>
 
@@ -34,6 +34,7 @@ import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { MaybeElement } from '@vueuse/core'
 
 // const appConfig = useAppConfig()
 
@@ -66,6 +67,10 @@ export default defineComponent({
       type: Object as PropType<PopperOptions>,
       default: () => ({})
     },
+    virtualRef: {
+      type: Object as PropType<MaybeElement>,
+      default: () => null
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.tooltip>>,
       default: () => appConfig.ui.tooltip
@@ -79,7 +84,8 @@ export default defineComponent({
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
-    const [trigger, container] = usePopper(popper.value)
+    const virtualRef = computed(()=> props.virtualRef)
+    const [trigger, container] = usePopper(popper.value, virtualRef)
 
     const open = ref(false)
 
@@ -119,6 +125,23 @@ export default defineComponent({
         closeTimeout = null
       }, props.closeDelay)
     }
+
+    onMounted(()=> {
+      watch(virtualRef,(_el, _prevEl)=>{
+        const el = unrefElement(_el)
+        const prevEl = unrefElement(_prevEl)
+        if (el){
+          el.addEventListener('mouseover', onMouseOver)
+          el.addEventListener('mouseleave', onMouseLeave)
+        }
+        if (prevEl){
+          prevEl.removeEventListener('mouseover', onMouseOver)
+          prevEl.removeEventListener('mouseleave', onMouseLeave)
+        }
+      },{
+        immediate: true
+      })
+    })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
