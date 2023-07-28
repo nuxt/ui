@@ -3,223 +3,221 @@
 const columns = [
   {
     key: 'id',
-    label: 'ID'
+    label: '#',
+    sortable: true
   },
   {
-    key: 'name',
-    label: 'Name'
+    key: 'title',
+    label: 'Title',
+    sortable: true
   },
   {
-    key: 'phone',
-    label: 'Phone'
-  },
-  // {
-  //   key: 'username',
-  //   label: 'Username',
-  //   selected: false
-  // },
-  {
-    key: 'email',
-    label: 'Email'
+    key: 'completed',
+    label: 'Status',
+    sortable: true
   },
   {
     key: 'actions',
-    label: 'Actions'
+    label: 'Actions',
+    sortable: false
   }
 ]
-const columnsTable = ref(
-  columns.map((column) => {
-    return {
-      ...column,
-      selected: true
-    }
-  })
-)
-const selectedColumns = computed(() =>  columnsTable.value.filter((column) => column.selected))
-const isColumnControllerOpen = ref(false)
+
+const selectedColumns = ref(columns)
+
+// Selected Rows
+const selectedRows = ref([])
+function select (row) {
+  const index = selectedRows.value.findIndex((item) => item.id === row.id)
+  if (index === -1) {
+    selectedRows.value.push(row)
+  } else {
+    selectedRows.value.splice(index, 1)
+  }
+}
+
+// Actions
+const actions = [
+  [{
+    key: 'completed',
+    label: 'completed',
+    icon: 'i-heroicons-check'
+  }], [{
+    key: 'uncompleted',
+    label: 'In Progress',
+    icon: 'i-heroicons-arrow-path'
+  }]
+]
 
 // Filters
+const todoStatus = [
+  {
+    key: 'uncompleted',
+    label: 'In Progress',
+    value: false
+  },
+  {
+    key: 'completed',
+    label: 'completed',
+    value: true
+  }
+]
 const search = ref('')
-
-// Paginations
-const page = ref(1)
-const pageCount =  ref(3)
-// This information should be obtained from the API, which is 10
-const pageTotal = ref(10)
-
-const numberOfRows = computed(() => {
-  if (page.value == 1 ) {
-    return 1
+const selectedStatus = ref([])
+const searchStatus = computed(() => {
+  if (selectedStatus.value?.length === 0) {
+    return ''
   }
 
-  return (page.value-1) * pageCount.value
+  if (selectedStatus?.value?.length > 1) {
+    return `?completed=${selectedStatus.value[0].value}&completed=${selectedStatus.value[1].value}`
+  }
+
+  return `?completed=${selectedStatus.value[0].value}`
 })
+const resetFilters = () => {
+  search.value = ''
+  selectedStatus.value = []
+}
+
+// Pagination
+const page = ref(1)
+const pageCount =  ref(10)
+const pageTotal = ref(200) // This information should be obtained from the API, which is 10
+const numberOfRows = computed(() => (page.value) * pageCount.value)
 
 // Data
 const { data: users, pending } = await useAsyncData<{
   id:number
-  name:string
-  username:string
-  email:string
-  phone:string
+  title:string
+  completed:string
 }[]>(
-  'users',
-  () => $fetch('https://jsonplaceholder.typicode.com/users', {
-    params: {
+  'todos',
+  () => $fetch(`https://jsonplaceholder.typicode.com/todos${searchStatus.value}`, {
+    query: {
       q: search.value,
       '_page': page.value,
       '_limit': pageCount.value
     }
   }), {
-    watch: [page, search, pageCount]
+    watch: [page, search, searchStatus, pageCount]
   })
 </script>
 
 <template>
-  <!-- Columns -->
-  <USlideover
-    v-model="isColumnControllerOpen"
-    :ui="{
-      width: 'w-screen max-w-[350px]',
-    }"
-  >
-    <div class="flex flex-col w-full px-8 py-4">
-      <div class="border-b py-2">
-        <h3 class="font-semibold text-md text-gray-800 leading-tight">
-          Columns
-        </h3>
-      </div>
-
-      <!-- Use draggable to make animation for coulmns -->
-      <UCard
-        v-for="(column, index) in columnsTable"
-        :key="index"
-        class="mt-2 pt-1 cursor-move"
-        :ui="{
-          rounded: 'rounded-md',
-          body: {
-            padding: 'p-3',
-          },
-        }"
-      >
-        <div class="flex justify-between w-full">
-          <UCheckbox v-model="column.selected" :label="column.label" />
-
-          <UIcon
-            :name="column.selected ? 'i-heroicons-eye' : 'i-heroicons-eye-slash'"
-            :class="column.selected ? 'text-green-500' : 'text-red-500'"
-            size="md"
-          />
-        </div>
-      </UCard>
-
-      <div class="flex gap-2 mt-4 w-full">
-        <UButton
-          color="primary"
-          variant="soft"
-          size="md"
-          class="w-1/2"
-          icon="i-heroicons-check"
-          @click="isColumnControllerOpen = false"
-        >
-          Save
-        </UButton>
-
-        <UButton
-          color="red"
-          size="md"
-          icon="i-heroicons-x-mark"
-          variant="soft"
-          class="w-1/2"
-          @click="isColumnControllerOpen = false"
-        >
-          Cancel
-        </UButton>
-      </div>
-    </div>
-  </USlideover>
-
   <UCard class="w-full" :ui="{ body: { padding: 'py-3 px-4' } }">
-    <!-- Title -->
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Users
+        Todos
       </h2>
     </template>
 
     <!-- Filters -->
-    <div class="w-full border-b pb-3">
-      <UInput
-        v-model="search"
-        icon="i-heroicons-magnifying-glass-20-solid"
-        size="sm"
-        :trailing="false"
-        placeholder="Search"
-      />
+    <div class="flex gap-4 border-b pb-3">
+      <div>
+        <UInput
+          v-model="search"
+          icon="i-heroicons-magnifying-glass-20-solid"
+          size="sm"
+          :trailing="false"
+          placeholder="Search"
+        />
+      </div>
+
+      <USelectMenu v-model="selectedStatus" :options="todoStatus" multiple placeholder="Status" />
     </div>
 
-    <div>
-      <!-- Header -->
-      <div class="flex justify-between items-center w-full border-b py-3">
-        <div class="flex items-center">
-          <span class="text-sm leading-5 text-gray-700 me-2">Rows per page:</span>
+    <!-- Header and Action buttons -->
+    <div class="flex justify-between items-center w-full border-b py-3">
+      <div class="flex items-center">
+        <span class="text-sm leading-5 text-gray-700 me-2">Rows per page:</span>
+        <USelect
+          v-model="pageCount"
+          :options="[3, 5, 10, 20, 30, 40]"
+          class="me-2 w-20"
+        />
+      </div>
 
-          <USelect
-            v-model="pageCount"
-            :options="[3, 5, 10, 20, 30, 40]"
-            class="me-2 w-20"
-          />
-        </div>
+      <div class="flex gap-1 items-center">
+        <UDropdown v-if="selectedRows.length>1" :items="actions" :ui="{ width: 'w-36' }">
+          <UButton
+            icon="i-heroicons-chevron-down"
+            trailing
+            variant="soft"
+            size="xs"
+            class="border border-primary-300"
+          >
+            Mark as
+          </UButton>
+        </UDropdown>
 
-        <div class="flex gap-1 items-center">
+        <USelectMenu v-model="selectedColumns" :options="columns" multiple>
           <UButton
             icon="i-heroicons-view-columns"
-            size="sm"
             variant="soft"
-            @click="isColumnControllerOpen = !isColumnControllerOpen"
+            size="xs"
+            class="border border-primary-300"
           >
             Columns
           </UButton>
+        </USelectMenu>
 
-          <UButton icon="i-heroicons-plus-20-solid" size="sm" variant="soft">
-            Add
-          </UButton>
-
-          <UButton
-            icon="i-heroicons-funnel"
-            size="sm"
-            variant="soft"
-            color="red"
-          >
-            Clear filters
-          </UButton>
-        </div>
+        <UButton
+          icon="i-heroicons-funnel"
+          variant="soft"
+          color="red"
+          size="xs"
+          class="border border-red-300"
+          @click="resetFilters"
+        >
+          Reset
+        </UButton>
       </div>
-
-      <!-- Table -->
-      <UTable :rows="users" :columns="selectedColumns" :loading="pending">
-        <template #actions-data>
-          <UButton
-            icon="i-heroicons-trash-20-solid"
-            size="sm"
-            class="mr-2"
-            variant="soft"
-            color="red"
-          />
-
-          <UButton
-            icon="i-heroicons-pencil-20-solid"
-            size="sm"
-            class="mr-2"
-            variant="soft"
-          />
-        </template>
-      </UTable>
     </div>
 
+    <!-- Table -->
+    <UTable
+      v-model="selectedRows"
+      :rows="users"
+      :columns="selectedColumns"
+      :loading="pending"
+      sort-asc-icon="i-heroicons-arrow-up"
+      sort-desc-icon="i-heroicons-arrow-down"
+      :sort-button="{ size: '2xs', square: false, }"
+      @select="select"
+    >
+      <template #completed-data="{ row }">
+        <UBadge size="sm" :label="row.completed ? 'Completed' : 'In Progress'" :color="row.completed ? 'green': 'orange'" />
+      </template>
+
+      <template #actions-data="{ row }">
+        <UButton
+          v-if="!row.completed"
+          icon="i-heroicons-check"
+          size="2xs"
+          color="green"
+          variant="soft"
+          :ui="{ rounded: 'rounded-full' }"
+          class="border border-green-300"
+          square
+        />
+
+        <UButton
+          v-else
+          icon="i-heroicons-arrow-path"
+          size="2xs"
+          color="orange"
+          variant="soft"
+          :ui="{ rounded: 'rounded-full' }"
+          class="border border-orange-300"
+          square
+        />
+      </template>
+    </UTable>
+
+    <!-- Number of rows & Pagination -->
     <template #footer>
       <div class="flex justify-between items-center">
-        <!-- Number of rows -->
         <div>
           <span class="text-sm leading-5 text-gray-700">
             Showing
@@ -232,8 +230,21 @@ const { data: users, pending } = await useAsyncData<{
           </span>
         </div>
 
-        <!-- Pagination -->
-        <UPagination v-model="page" :page-count="pageCount" :total="pageTotal" />
+        <UPagination
+          v-model="page"
+          :page-count="pageCount"
+          :total="pageTotal"
+          :ui="{
+            wrapper: 'flex items-center gap-1',
+            rounded: 'rounded-full min-w-[32px] justify-center',
+            default: {
+              activeButton: {
+                variant: 'soft',
+                class: 'border border-primary-300'
+              },
+            }
+          }"
+        />
       </div>
     </template>
   </UCard>
