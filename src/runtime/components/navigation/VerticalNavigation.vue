@@ -11,7 +11,7 @@
       @click="link.click"
       @keyup.enter="$event.target.blur()"
     >
-      <slot name="avatar" :link="link">
+      <slot name="avatar" :link="link" :is-active="isActive">
         <UAvatar
           v-if="link.avatar"
           v-bind="{ size: ui.avatar.size, ...link.avatar }"
@@ -25,7 +25,7 @@
           :class="[ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive, link.iconClass]"
         />
       </slot>
-      <slot :link="link">
+      <slot :link="link" :is-active="isActive">
         <span v-if="link.label" :class="ui.label">{{ link.label }}</span>
       </slot>
       <slot name="badge" :link="link" :is-active="isActive">
