@@ -1,15 +1,19 @@
+import { createResolver } from '@nuxt/kit'
 import colors from 'tailwindcss/colors'
 import module from '../src/module'
 import { excludeColors } from '../src/colors'
 import pkg from '../package.json'
+
+const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
   extends: '@nuxt-themes/ui-kit',
   modules: [
     '@nuxt/content',
     '@nuxt/devtools',
-    '@nuxthq/studio',
+    // '@nuxthq/studio',
     module,
+    '@nuxtjs/fontaine',
     '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
@@ -40,9 +44,11 @@ export default defineNuxtConfig({
     }
   },
   experimental: {
-    payloadExtraction: true
+    payloadExtraction: false
   },
   componentMeta: {
+    globalsOnly: true,
+    exclude: [resolve('./components'), resolve('@nuxt-themes/ui-kit/components')],
     metaFields: {
       props: true,
       slots: false,

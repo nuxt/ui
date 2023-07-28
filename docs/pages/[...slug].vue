@@ -1,5 +1,16 @@
 <template>
   <UDocsPage v-if="page" :page="page" :surround="(surround as ParsedContent[])">
+    <ContentRenderer v-if="page && page.body" :value="page" class="prose prose-primary dark:prose-invert max-w-none" />
+
+    <UButton
+      :to="githubLink"
+      variant="link"
+      icon="i-heroicons-pencil-square"
+      label="Edit this page on GitHub"
+      :padded="false"
+      class="mt-12"
+    />
+
     <template #footer>
       <Footer />
     </template>
@@ -27,4 +38,6 @@ if (process.server && !page.value) {
 }
 
 useContentHead(page)
+
+const githubLink = computed(() => `https://github.com/nuxtlabs/ui/edit/dev/docs/content/${page?.value?._file}`)
 </script>

@@ -26,6 +26,24 @@ const kebabCase = (str: string) => {
 }
 
 const safelistByComponent = {
+  alert: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-50`)
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`)
+  }],
   avatar: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
@@ -37,6 +55,8 @@ const safelistByComponent = {
   }, {
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
   }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['dark']
@@ -184,7 +204,7 @@ const colorsAsRegex = (colors: string[]): string => colors.join('|')
 
 export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
 
-export const generateSafelist = (colors: string[]) => {
+export const generateSafelist = (colors: string[], globalColors) => {
   const baseSafelist = Object.keys(safelistByComponent).flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
 
   // Ensure `red` color is safelisted for form elements so that `error` prop of `UFormGroup` always works
@@ -193,6 +213,8 @@ export const generateSafelist = (colors: string[]) => {
   return [
     ...baseSafelist,
     ...formsSafelist,
+    // Ensure all global colors are safelisted for the Notification (toast.add)
+    ...safelistByComponent['notification'](colorsAsRegex(globalColors)),
     // Gray safelist for Avatar & Notification
     'bg-gray-500',
     'dark:bg-gray-400',

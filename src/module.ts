@@ -16,7 +16,7 @@ delete defaultColors.trueGray
 delete defaultColors.coolGray
 delete defaultColors.blueGray
 
-declare module 'nuxt/schema' {
+declare module '@nuxt/schema' {
   interface AppConfigInput {
     ui?: {
       primary?: string
@@ -123,7 +123,7 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
-      tailwindConfig.safelist.push(...generateSafelist(options.safelistColors))
+      tailwindConfig.safelist.push(...generateSafelist(options.safelistColors, colors))
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))

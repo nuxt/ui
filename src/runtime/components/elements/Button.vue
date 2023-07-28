@@ -1,5 +1,5 @@
 <template>
-  <ULinkCustom :class="buttonClass" v-bind="buttonProps">
+  <ULinkCustom :type="type" :disabled="disabled || loading" :class="buttonClass">
     <slot name="leading" :disabled="disabled" :loading="loading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     </slot>
@@ -20,11 +20,9 @@
 import { computed, defineComponent, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { pick } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
 import ULinkCustom from '../elements/LinkCustom.vue'
 import { classNames } from '../../utils'
-import { NuxtLink } from '#components'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -38,7 +36,6 @@ export default defineComponent({
     ULinkCustom
   },
   props: {
-    ...NuxtLink.props,
     type: {
       type: String,
       default: 'button'
@@ -142,14 +139,6 @@ export default defineComponent({
 
     const isSquare = computed(() => props.square || (!slots.default && !props.label))
 
-    const buttonProps = computed(() => {
-      if (props.to) {
-        return pick(props, Object.keys(NuxtLink.props))
-      } else {
-        return { disabled: props.disabled || props.loading, type: props.type }
-      }
-    })
-
     const buttonClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
@@ -201,7 +190,6 @@ export default defineComponent({
       isLeading,
       isTrailing,
       isSquare,
-      buttonProps,
       buttonClass,
       leadingIconName,
       trailingIconName,

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
     <UHeader>
@@ -38,7 +39,15 @@
       <UDocsSearch :files="files" :links="navigation" />
     </ClientOnly>
 
-    <UNotifications />
+    <UNotifications>
+      <template #title="{ title }">
+        <span v-html="title" />
+      </template>
+
+      <template #description="{ description }">
+        <span v-html="description" />
+      </template>
+    </UNotifications>
   </div>
 </template>
 
@@ -83,9 +92,6 @@ useHead({
   ],
   htmlAttrs: {
     lang: 'en'
-  },
-  bodyAttrs: {
-    class: 'antialiased font-sans text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900'
   }
 })
 
