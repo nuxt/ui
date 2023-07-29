@@ -1,33 +1,38 @@
 <template>
-  <UDocsPage v-if="page" :page="page" :surround="(surround as ParsedContent[])">
-    <ContentRenderer v-if="page && page.body" :value="page" class="prose prose-primary dark:prose-invert max-w-none" />
+  <UPage v-if="page">
+    <UPageHeader v-bind="page" :headline="headline" />
 
-    <UButton
-      :to="githubLink"
-      variant="link"
-      icon="i-heroicons-pencil-square"
-      label="Edit this page on GitHub"
-      :padded="false"
-      class="mt-12"
-    />
+    <UPageBody prose>
+      <ContentRenderer v-if="page && page.body" :value="page" />
 
-    <template #footer>
+      <UButton
+        :to="githubLink"
+        variant="link"
+        icon="i-heroicons-pencil-square"
+        label="Edit this page on GitHub"
+        :padded="false"
+        class="mt-12"
+      />
+
+      <hr v-if="surround?.length" class="border-gray-200 dark:border-gray-800 my-8">
+
+      <UDocsSurround :surround="surround" />
+
       <Footer />
+    </UPageBody>
+
+    <template v-if="page.body?.toc?.links?.length" #right>
+      <UDocsToc :links="page.body.toc.links" />
     </template>
-  </UDocsPage>
-  <div v-else class="pt-8">
-    Page not found
-  </div>
+  </UPage>
+  <UPageError v-else />
 </template>
 
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
-
 const route = useRoute()
 
 const { data: page } = await useAsyncData(`docs-${route.path}`, () => queryContent(route.path).findOne())
 const { data: surround } = await useAsyncData(`docs-${route.path}-surround`, () => queryContent()
-  .only(['_path', 'title', 'navigation', 'description'])
   .where({ _extension: 'md', navigation: { $ne: false } })
   .findSurround(route.path.endsWith('/') ? route.path.slice(0, -1) : route.path)
 )
@@ -40,4 +45,5 @@ if (process.server && !page.value) {
 useContentHead(page)
 
 const githubLink = computed(() => `https://github.com/nuxtlabs/ui/edit/dev/docs/content/${page?.value?._file}`)
+const headline = computed(() => page.value._dir?.title ? page.value._dir.title : useLowerCase(page.value._dir))
 </script>
