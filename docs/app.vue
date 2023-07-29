@@ -24,19 +24,25 @@
       </template>
 
       <template #links>
-        <UDocsAsideAnchors :links="anchors" />
-        <UDocsAsideLinks :links="navigation" />
+        <UAsideAnchors :links="anchors" />
+        <UAsideLinks :links="links" />
       </template>
     </UHeader>
 
-    <UContainer>
-      <UDocsLayout :links="navigation" :anchors="anchors">
-        <NuxtPage />
-      </UDocsLayout>
-    </UContainer>
+    <UMain>
+      <UContainer>
+        <UPage>
+          <template #left>
+            <UAside :links="links" :anchors="anchors" />
+          </template>
+
+          <NuxtPage />
+        </UPage>
+      </UContainer>
+    </UMain>
 
     <ClientOnly>
-      <UDocsSearch :files="files" :links="navigation" />
+      <UDocsSearch :files="files" :links="links" />
     </ClientOnly>
 
     <UNotifications>
@@ -54,10 +60,13 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
+const { data: links } = await useAsyncData('navigation', () => fetchContentNavigation(), {
+  transform: (navigation) => mapContentLinks(navigation)
+})
+
 const { data: files } = await useLazyAsyncData('files', () => queryContent().where({ _type: 'markdown', navigation: { $ne: false } }).find(), { default: () => [] })
 
-provide('navigation', navigation)
+provide('links', links)
 
 const anchors = [{
   label: 'Documentation',
