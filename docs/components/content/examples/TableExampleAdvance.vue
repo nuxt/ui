@@ -84,7 +84,8 @@ const resetFilters = () => {
 const page = ref(1)
 const pageCount =  ref(10)
 const pageTotal = ref(200) // This value should be dynamic coming from the API
-const numberOfRows = computed(() => (page.value) * pageCount.value)
+const pageFrom = computed(() => (page.value - 1) * pageCount.value + 1)
+const pageTo = computed(() => Math.min(page.value * pageCount.value, pageTotal.value))
 
 // Data
 const { data: todos, pending } = await useLazyAsyncData<{
@@ -221,9 +222,9 @@ const { data: todos, pending } = await useLazyAsyncData<{
         <div>
           <span class="text-sm leading-5 text-gray-700">
             Showing
-            <span class="font-medium">{{ numberOfRows }}</span>
+            <span class="font-medium">{{ pageFrom }}</span>
             to
-            <span class="font-medium">{{ page * pageCount }}</span>
+            <span class="font-medium">{{ pageTo }}</span>
             of
             <span class="font-medium">{{ pageTotal }}</span>
             results
