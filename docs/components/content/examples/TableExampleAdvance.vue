@@ -22,7 +22,6 @@ const columns = [
     sortable: false
   }
 ]
-
 const selectedColumns = ref(columns)
 const columnsTable = computed(() => columns.filter((column) => selectedColumns.value.includes(column)))
 
@@ -84,11 +83,11 @@ const resetFilters = () => {
 // Pagination
 const page = ref(1)
 const pageCount =  ref(10)
-const pageTotal = ref(200) // This information should be obtained from the API, which is 10
+const pageTotal = ref(200) // This value should be dynamic coming from the API
 const numberOfRows = computed(() => (page.value) * pageCount.value)
 
 // Data
-const { data: users, pending } = await useAsyncData<{
+const { data: todos, pending } = await useLazyAsyncData<{
   id:number
   title:string
   completed:string
@@ -179,7 +178,7 @@ const { data: users, pending } = await useAsyncData<{
     <!-- Table -->
     <UTable
       v-model="selectedRows"
-      :rows="users"
+      :rows="todos"
       :columns="columnsTable"
       :loading="pending"
       sort-asc-icon="i-heroicons-arrow-up"
