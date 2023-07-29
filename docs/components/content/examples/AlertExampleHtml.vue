@@ -1,6 +1,7 @@
 <template>
   <UAlert title="Heads <i>up</i>!" icon="i-heroicons-command-line">
     <template #title="{ title }">
+      <!-- eslint-disable-next-line vue/no-v-html -->
       <span v-html="title" />
     </template>
 
