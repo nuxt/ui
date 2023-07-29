@@ -1,10 +1,13 @@
 {
   "name": "@nuxthq/ui-docs",
   "private": true,
+  "dependencies": {
+    "@nuxthq/ui": "workspace:latest"
+  },
   "devDependencies": {
     "@iconify-json/heroicons": "latest",
     "@iconify-json/simple-icons": "latest",
-    "@nuxt-themes/ui-kit": "npm:@nuxt-themes/ui-kit-edge@0.0.1-28175745.ce6207e",
+    "@nuxt-themes/ui-kit": "npm:@nuxt-themes/ui-kit-edge@0.0.1-28177244.dca5e05",
     "@nuxt/content": "^2.7.2",
     "@nuxt/devtools": "^0.6.7",
     "@nuxt/eslint-config": "^0.1.1",
