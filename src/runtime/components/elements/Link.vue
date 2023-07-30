@@ -25,6 +25,7 @@
 import { isEqual } from 'lodash-es'
 import { defineComponent } from 'vue'
 import { NuxtLink } from '#components'
+import { useRoute } from '#imports'
 
 export default defineComponent({
   inheritAttrs: false,
