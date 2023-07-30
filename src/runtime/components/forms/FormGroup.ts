@@ -63,7 +63,7 @@ export default defineComponent({
       const vProps: any = {}
 
       if (props.error) {
-        vProps.oldColor = node.props.color
+        vProps.oldColor = node.props?.color
         vProps.color = 'red'
       } else if (vProps.oldColor) {
         vProps.color = vProps.oldColor

@@ -22,18 +22,6 @@
         </tr>
       </thead>
       <tbody :class="ui.tbody">
-        <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active]" @click="() => onSelect(row)">
-          <td v-if="modelValue" class="ps-4">
-            <UCheckbox v-model="selected" :value="row" @click.stop />
-          </td>
-
-          <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
-            <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index">
-              {{ row[column.key] }}
-            </slot>
-          </td>
-        </tr>
-
         <tr v-if="loadingState && loading">
           <td :colspan="columns.length + (modelValue ? 1 : 0)">
             <slot name="loading-state">
@@ -59,6 +47,20 @@
             </slot>
           </td>
         </tr>
+
+        <template v-else>
+          <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active]" @click="() => onSelect(row)">
+            <td v-if="modelValue" class="ps-4">
+              <UCheckbox v-model="selected" :value="row" @click.stop />
+            </td>
+
+            <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
+              <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index">
+                {{ row[column.key] }}
+              </slot>
+            </td>
+          </tr>
+        </template>
       </tbody>
     </table>
   </div>

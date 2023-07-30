@@ -84,7 +84,7 @@ export default defineComponent({
       }
     })
 
-    const switchClass = computed(()=>{
+    const switchClass = computed(() => {
       return classNames(
         ui.value.base,
         ui.value.rounded,
@@ -93,13 +93,13 @@ export default defineComponent({
       )
     })
 
-    const onIconClass = computed(()=>{
+    const onIconClass = computed(() => {
       return classNames(
         ui.value.icon.on.replaceAll('{color}', props.color)
       )
     })
 
-    const offIconClass = computed(()=>{
+    const offIconClass = computed(() => {
       return classNames(
         ui.value.icon.off.replaceAll('{color}', props.color)
       )
