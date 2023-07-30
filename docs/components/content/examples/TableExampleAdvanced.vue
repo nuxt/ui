@@ -165,6 +165,7 @@ const { data: todos, pending } = await useLazyAsyncData('todos', () => $fetch<{
           variant="soft"
           color="red"
           size="xs"
+          :disabled="search === '' && selectedStatus.length === 0"
           @click="resetFilters"
         >
           Reset
@@ -180,7 +181,6 @@ const { data: todos, pending } = await useLazyAsyncData('todos', () => $fetch<{
       :loading="pending"
       sort-asc-icon="i-heroicons-arrow-up"
       sort-desc-icon="i-heroicons-arrow-down"
-      :sort-button="{ size: '2xs', square: false, }"
       @select="select"
     >
       <template #completed-data="{ row }">
