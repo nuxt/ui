@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { ref, computed, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel } from '@headlessui/vue'
 import { defu } from 'defu'

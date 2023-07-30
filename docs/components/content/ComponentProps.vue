@@ -1,36 +1,21 @@
 <template>
   <div>
-    <table class="table-fixed">
-      <thead>
-        <tr>
-          <th class="w-[25%]">
-            Prop
-          </th>
-          <th class="w-[50%]">
-            Default
-          </th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="prop in metaProps" :key="prop.name">
-          <td class="relative flex-shrink-0">
-            <code>{{ prop.name }}</code><span v-if="prop.required" class="font-bold text-red-500 dark:text-red-400 absolute top-0 ml-1">*</span>
-          </td>
-          <td>
-            <code v-if="prop.default">{{ prop.default }}</code>
-          </td>
-          <td>
-            <a v-if="prop.default === `appConfig.ui.${camelName}`" href="#preset">
-              <code>{{ prop.type }}</code>
-            </a>
-            <code v-else class="break-all">
-              {{ prop.type }}
-            </code>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <FieldGroup>
+      <Field v-for="prop in metaProps" :key="prop.name" v-bind="prop">
+        <code v-if="prop.default">{{ prop.default }}</code>
+
+        <Collapsible v-if="prop.schema?.kind === 'array' && prop.schema?.schema?.filter(schema => schema.kind === 'object').length">
+          <FieldGroup v-for="schema in prop.schema.schema" :key="schema.name" class="!mt-0">
+            <Field v-for="subProp in Object.values(schema.schema)" :key="(subProp as any).name" v-bind="subProp" />
+          </FieldGroup>
+        </Collapsible>
+        <Collapsible v-else-if="prop.schema?.kind === 'object' && Object.values(prop.schema.schema)?.length">
+          <FieldGroup class="!mt-0">
+            <Field v-for="subProp in Object.values(prop.schema.schema)" :key="(subProp as any).name" v-bind="subProp" />
+          </FieldGroup>
+        </Collapsible>
+      </Field>
+    </FieldGroup>
   </div>
 </template>
 

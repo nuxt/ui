@@ -10,7 +10,7 @@
       :disabled="disabled"
       :step="step"
       type="range"
-      :class="[inputClass, thumbClass]"
+      :class="[inputClass, thumbClass, trackClass]"
       v-bind="$attrs"
       @change="onChange"
     >
@@ -127,12 +127,21 @@ export default defineComponent({
       )
     })
 
+    const trackClass = computed(() => {
+      return classNames(
+        ui.value.track.base,
+        ui.value.track.background,
+        ui.value.track.rounded,
+        ui.value.track.size[props.size]
+      )
+    })
+
     const progressClass = computed(() => {
       return classNames(
         ui.value.progress.base,
         ui.value.progress.rounded,
         ui.value.progress.background.replaceAll('{color}', props.color),
-        ui.value.size[props.size]
+        ui.value.progress.size[props.size]
       )
     })
 
@@ -152,6 +161,7 @@ export default defineComponent({
       wrapperClass,
       inputClass,
       thumbClass,
+      trackClass,
       progressClass,
       progressStyle,
       onChange
