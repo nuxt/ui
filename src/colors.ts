@@ -1,3 +1,5 @@
+import { omit, kebabCase, camelCase, upperFirst } from 'lodash-es'
+
 const colorsToExclude = [
   'inherit',
   'transparent',
@@ -11,19 +13,6 @@ const colorsToExclude = [
   'stone',
   'cool'
 ]
-
-const omit = (obj: object, keys: string[]) => {
-  return Object.fromEntries(
-    Object.entries(obj).filter(([key]) => !keys.includes(key))
-  )
-}
-
-const kebabCase = (str: string) => {
-  return str
-    ?.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-    ?.map(x => x.toLowerCase())
-    ?.join('-')
-}
 
 const safelistByComponent = {
   alert: (colorsAsRegex) => [{
@@ -225,7 +214,7 @@ export const generateSafelist = (colors: string[], globalColors) => {
 
 export const customSafelistExtractor = (prefix, content: string, colors: string[], safelistColors: string[]) => {
   const classes = []
-  const regex = /<(\w+)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/gs
+  const regex = /<([A-Za-z][A-Za-z0-9]*(?:-[A-Za-z][A-Za-z0-9]*)*)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/gs
 
   const matches = content.matchAll(regex)
 
@@ -234,11 +223,13 @@ export const customSafelistExtractor = (prefix, content: string, colors: string[
   for (const match of matches) {
     const [, component, color] = match
 
+    const camelComponent = upperFirst(camelCase(component))
+
     if (!colors.includes(color) || safelistColors.includes(color)) {
       continue
     }
 
-    let name = safelistComponentAliasesMap[component] ? safelistComponentAliasesMap[component] : component
+    let name = safelistComponentAliasesMap[camelComponent] ? safelistComponentAliasesMap[camelComponent] : camelComponent
 
     if (!components.includes(name)) {
       continue
