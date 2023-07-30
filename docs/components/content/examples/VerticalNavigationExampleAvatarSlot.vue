@@ -1,23 +1,18 @@
 <script setup>
-const links = [
-  {
-    avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-    },
-    label: 'Benjamin Canac'
+const links = [{
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/739984?v=4'
   },
-  {
-    label: 'KeJun'
-  }
-]
+  label: 'Benjamin Canac'
+}, {
+  label: 'KeJun'
+}]
 
 const { ui } = useAppConfig()
 </script>
 
 <template>
-  <UVerticalNavigation
-    :links="links"
-  >
+  <UVerticalNavigation :links="links">
     <template #avatar="{ link }">
       <UAvatar
         v-if="link.avatar"

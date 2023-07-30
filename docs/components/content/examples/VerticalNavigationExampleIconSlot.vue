@@ -17,29 +17,22 @@ const types = {
     color: 'text-green-500'
   }
 }
-const links = [
-  {
-    label: 'UDropdown and UPopover dropdown menu, dropdown will be obscured',
-    type: 'bug'
-  },
-  {
-    label: 'Uncaught (in promise) ReferenceError: ref is not defined',
-    type: 'lock'
-  },
-  {
-    label: 'Fully styled and customizable components for Nuxt.',
-    type: 'docs'
-  },
-  {
-    label: 'Can I pass a tailwind color to UNotifications with `toast.add()` ?'
-  }
-]
+const links = [{
+  label: 'UDropdown and UPopover dropdown menu, dropdown will be obscured',
+  type: 'bug'
+}, {
+  label: 'Uncaught (in promise) ReferenceError: ref is not defined',
+  type: 'lock'
+}, {
+  label: 'Fully styled and customizable components for Nuxt.',
+  type: 'docs'
+}, {
+  label: 'Can I pass a tailwind color to UNotifications with `toast.add()` ?'
+}]
 </script>
 
 <template>
-  <UVerticalNavigation
-    :links="links"
-  >
+  <UVerticalNavigation :links="links">
     <template #icon="{ link }">
       <UIcon v-if="link.type" :name="types[link.type].icon" :class="types[link.type].color" class="text-base" />
       <UIcon v-else :name="types.default.icon" :class="types.default.color" class="text-base" />
