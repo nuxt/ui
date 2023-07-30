@@ -38,11 +38,11 @@ import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import { useFormEvents } from '../../composables/useFormEvents'
 import { classNames } from '../../utils'
-
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
+
 // const appConfig = useAppConfig()
 
 export default defineComponent({
