@@ -18,17 +18,17 @@ const actions = [
 
 const groups = computed(() => commandPaletteRef.value?.query
   ? [{
-      key: 'users',
-      commands: users
-    }]
+    key: 'users',
+    commands: users
+  }]
   : [{
-      key: 'recent',
-      label: 'Recent searches',
-      commands: users.slice(0, 1)
-    }, {
-      key: 'actions',
-      commands: actions
-    }])
+    key: 'recent',
+    label: 'Recent searches',
+    commands: users.slice(0, 1)
+  }, {
+    key: 'actions',
+    commands: actions
+  }])
 
 function onSelect (option) {
   if (option.click) {
