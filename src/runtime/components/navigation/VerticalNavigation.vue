@@ -1,6 +1,6 @@
 <template>
   <nav :class="ui.wrapper">
-    <ULinkCustom
+    <ULink
       v-for="(link, index) of links"
       v-slot="{ isActive }"
       :key="index"
@@ -33,7 +33,7 @@
           {{ link.badge }}
         </span>
       </slot>
-    </ULinkCustom>
+    </ULink>
   </nav>
 </template>
 
@@ -44,7 +44,7 @@ import { defu } from 'defu'
 import { omit } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
-import ULinkCustom from '../elements/LinkCustom.vue'
+import ULink from '../elements/Link.vue'
 import type { VerticalNavigationLink } from '../../types/vertical-navigation'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -57,7 +57,7 @@ export default defineComponent({
   components: {
     UIcon,
     UAvatar,
-    ULinkCustom
+    ULink
   },
   props: {
     links: {

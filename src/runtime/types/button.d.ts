@@ -1,4 +1,6 @@
-export interface Button {
+import type { Link } from './link'
+
+export interface Button extends Link {
   type?: string
   block?: boolean
   label?: string

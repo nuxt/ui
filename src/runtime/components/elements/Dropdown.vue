@@ -20,7 +20,7 @@
         <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
           <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
             <HMenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
-              <ULinkCustom
+              <ULink
                 v-bind="omit(item, ['label', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'click'])"
                 :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
                 @click="item.click"
@@ -35,7 +35,7 @@
                     <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
                   </span>
                 </slot>
-              </ULinkCustom>
+              </ULink>
             </HMenuItem>
           </div>
         </HMenuItems>
@@ -53,7 +53,7 @@ import { omit } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
-import ULinkCustom from '../elements/LinkCustom.vue'
+import ULink from '../elements/Link.vue'
 import { usePopper } from '../../composables/usePopper'
 import type { DropdownItem } from '../../types/dropdown'
 import type { PopperOptions } from '../../types'
@@ -73,7 +73,7 @@ export default defineComponent({
     UIcon,
     UAvatar,
     UKbd,
-    ULinkCustom
+    ULink
   },
   props: {
     items: {
