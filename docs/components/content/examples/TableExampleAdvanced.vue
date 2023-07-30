@@ -1,32 +1,29 @@
 <script lang="ts" setup>
 // Columns
-const columns = [
-  {
-    key: 'id',
-    label: '#',
-    sortable: true
-  },
-  {
-    key: 'title',
-    label: 'Title',
-    sortable: true
-  },
-  {
-    key: 'completed',
-    label: 'Status',
-    sortable: true
-  },
-  {
-    key: 'actions',
-    label: 'Actions',
-    sortable: false
-  }
-]
+const columns = [{
+  key: 'id',
+  label: '#',
+  sortable: true
+}, {
+  key: 'title',
+  label: 'Title',
+  sortable: true
+}, {
+  key: 'completed',
+  label: 'Status',
+  sortable: true
+}, {
+  key: 'actions',
+  label: 'Actions',
+  sortable: false
+}]
+
 const selectedColumns = ref(columns)
 const columnsTable = computed(() => columns.filter((column) => selectedColumns.value.includes(column)))
 
 // Selected Rows
 const selectedRows = ref([])
+
 function select (row) {
   const index = selectedRows.value.findIndex((item) => item.id === row.id)
   if (index === -1) {
@@ -40,7 +37,7 @@ function select (row) {
 const actions = [
   [{
     key: 'completed',
-    label: 'completed',
+    label: 'Completed',
     icon: 'i-heroicons-check'
   }], [{
     key: 'uncompleted',
@@ -50,18 +47,16 @@ const actions = [
 ]
 
 // Filters
-const todoStatus = [
-  {
-    key: 'uncompleted',
-    label: 'In Progress',
-    value: false
-  },
-  {
-    key: 'completed',
-    label: 'completed',
-    value: true
-  }
-]
+const todoStatus = [{
+  key: 'uncompleted',
+  label: 'In Progress',
+  value: false
+}, {
+  key: 'completed',
+  label: 'Completed',
+  value: true
+}]
+
 const search = ref('')
 const selectedStatus = ref([])
 const searchStatus = computed(() => {
@@ -75,6 +70,7 @@ const searchStatus = computed(() => {
 
   return `?completed=${selectedStatus.value[0].value}`
 })
+
 const resetFilters = () => {
   search.value = ''
   selectedStatus.value = []
@@ -88,65 +84,67 @@ const pageFrom = computed(() => (page.value - 1) * pageCount.value + 1)
 const pageTo = computed(() => Math.min(page.value * pageCount.value, pageTotal.value))
 
 // Data
-const { data: todos, pending } = await useLazyAsyncData<{
-  id:number
-  title:string
-  completed:string
-}[]>(
-  'todos',
-  () => $fetch(`https://jsonplaceholder.typicode.com/todos${searchStatus.value}`, {
-    query: {
-      q: search.value,
-      '_page': page.value,
-      '_limit': pageCount.value
-    }
-  }), {
-    watch: [page, search, searchStatus, pageCount]
-  })
+const { data: todos, pending } = await useLazyAsyncData('todos', () => $fetch<{
+  id: number
+  title: string
+  completed: string
+}[]>(`https://jsonplaceholder.typicode.com/todos${searchStatus.value}`, {
+  query: {
+    q: search.value,
+    '_page': page.value,
+    '_limit': pageCount.value
+  }
+}), {
+  default: () => [],
+  watch: [page, search, searchStatus, pageCount]
+})
 </script>
 
 <template>
-  <UCard class="w-full" :ui="{ body: { padding: 'py-3 px-4' } }">
+  <UCard
+    class="w-full"
+    :ui="{
+      base: '',
+      ring: '',
+      divide: 'divide-y divide-gray-200 dark:divide-gray-700',
+      header: { padding: 'px-4 py-5' },
+      body: { padding: '', base: 'divide-y divide-gray-200 dark:divide-gray-700' },
+      footer: { padding: 'p-4' }
+    }"
+  >
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      <h2 class="font-semibold text-xl text-gray-900 dark:text-white leading-tight">
         Todos
       </h2>
     </template>
 
     <!-- Filters -->
-    <div class="flex gap-4 border-b pb-3">
-      <div>
-        <UInput
-          v-model="search"
-          icon="i-heroicons-magnifying-glass-20-solid"
-          size="sm"
-          :trailing="false"
-          placeholder="Search"
-        />
-      </div>
+    <div class="flex items-center justify-between gap-3 px-4 py-3">
+      <UInput v-model="search" icon="i-heroicons-magnifying-glass-20-solid" placeholder="Search..." />
 
-      <USelectMenu v-model="selectedStatus" :options="todoStatus" multiple placeholder="Status" />
+      <USelectMenu v-model="selectedStatus" :options="todoStatus" multiple placeholder="Status" class="w-40" />
     </div>
 
     <!-- Header and Action buttons -->
-    <div class="flex justify-between items-center w-full border-b py-3">
-      <div class="flex items-center">
-        <span class="text-sm leading-5 text-gray-700 me-2">Rows per page:</span>
+    <div class="flex justify-between items-center w-full px-4 py-3">
+      <div class="flex items-center gap-1.5">
+        <span class="text-sm leading-5">Rows per page:</span>
+
         <USelect
           v-model="pageCount"
           :options="[3, 5, 10, 20, 30, 40]"
           class="me-2 w-20"
+          size="xs"
         />
       </div>
 
-      <div class="flex gap-1 items-center">
-        <UDropdown v-if="selectedRows.length>1" :items="actions" :ui="{ width: 'w-36' }">
+      <div class="flex gap-1.5 items-center">
+        <UDropdown v-if="selectedRows.length > 1" :items="actions" :ui="{ width: 'w-36' }">
           <UButton
             icon="i-heroicons-chevron-down"
             trailing
             variant="soft"
             size="xs"
-            class="border border-primary-300"
           >
             Mark as
           </UButton>
@@ -157,7 +155,6 @@ const { data: todos, pending } = await useLazyAsyncData<{
             icon="i-heroicons-view-columns"
             variant="soft"
             size="xs"
-            class="border border-primary-300"
           >
             Columns
           </UButton>
@@ -168,7 +165,6 @@ const { data: todos, pending } = await useLazyAsyncData<{
           variant="soft"
           color="red"
           size="xs"
-          class="border border-red-300"
           @click="resetFilters"
         >
           Reset
@@ -188,7 +184,7 @@ const { data: todos, pending } = await useLazyAsyncData<{
       @select="select"
     >
       <template #completed-data="{ row }">
-        <UBadge size="sm" :label="row.completed ? 'Completed' : 'In Progress'" :color="row.completed ? 'green': 'orange'" />
+        <UBadge size="xs" :label="row.completed ? 'Completed' : 'In Progress'" :color="row.completed ? 'emerald' : 'orange'" variant="subtle" />
       </template>
 
       <template #actions-data="{ row }">
@@ -196,10 +192,9 @@ const { data: todos, pending } = await useLazyAsyncData<{
           v-if="!row.completed"
           icon="i-heroicons-check"
           size="2xs"
-          color="green"
-          variant="soft"
+          color="emerald"
+          variant="outline"
           :ui="{ rounded: 'rounded-full' }"
-          class="border border-green-300"
           square
         />
 
@@ -208,9 +203,8 @@ const { data: todos, pending } = await useLazyAsyncData<{
           icon="i-heroicons-arrow-path"
           size="2xs"
           color="orange"
-          variant="soft"
+          variant="outline"
           :ui="{ rounded: 'rounded-full' }"
-          class="border border-orange-300"
           square
         />
       </template>
@@ -220,7 +214,7 @@ const { data: todos, pending } = await useLazyAsyncData<{
     <template #footer>
       <div class="flex justify-between items-center">
         <div>
-          <span class="text-sm leading-5 text-gray-700">
+          <span class="text-sm leading-5">
             Showing
             <span class="font-medium">{{ pageFrom }}</span>
             to
@@ -240,9 +234,8 @@ const { data: todos, pending } = await useLazyAsyncData<{
             rounded: 'rounded-full min-w-[32px] justify-center',
             default: {
               activeButton: {
-                variant: 'soft',
-                class: 'border border-primary-300'
-              },
+                variant: 'outline'
+              }
             }
           }"
         />
