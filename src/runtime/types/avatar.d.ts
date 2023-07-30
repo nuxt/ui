@@ -1,7 +1,7 @@
 export interface Avatar {
   src?: string | boolean
   alt?: string
-  text:? string
+  text?: string
   size?: string
   chipColor?: string
   chipVariant?: string

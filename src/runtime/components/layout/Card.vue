@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="$attrs.onSubmit ? 'form': as"
+    :is="$attrs.onSubmit ? 'form' : as"
     :class="[ui.base, ui.rounded, ui.divide, ui.ring, ui.shadow, ui.background]"
     v-bind="$attrs"
   >
