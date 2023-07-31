@@ -13,6 +13,7 @@
       :class="inputClass"
       v-bind="$attrs"
       @input="onInput"
+      @blur="onBlur"
     >
     <slot />
 
@@ -35,6 +36,7 @@ import { ref, computed, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
+import { useFormEvents } from '../../composables/useFormEvents'
 import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -138,12 +140,14 @@ export default defineComponent({
       default: () => appConfig.ui.input
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'blur'],
   setup (props, { emit, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.input>>(() => defu({}, props.ui, appConfig.ui.input))
+
+    const { emitFormBlur } = useFormEvents()
 
     const input = ref<HTMLInputElement | null>(null)
 
@@ -155,6 +159,11 @@ export default defineComponent({
 
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
+    }
+
+    const onBlur = (event: FocusEvent) => {
+      emitFormBlur()
+      emit('blur', event)
     }
 
     onMounted(() => {
@@ -249,7 +258,8 @@ export default defineComponent({
       trailingIconName,
       trailingIconClass,
       trailingWrapperIconClass,
-      onInput
+      onInput,
+      onBlur
     }
   }
 })

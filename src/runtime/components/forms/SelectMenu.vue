@@ -135,6 +135,7 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
+import { useFormEvents } from '../../composables/useFormEvents'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -292,7 +293,7 @@ export default defineComponent({
       default: () => appConfig.ui.selectMenu
     }
   },
-  emits: ['update:modelValue', 'open', 'close'],
+  emits: ['update:modelValue', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
@@ -303,6 +304,7 @@ export default defineComponent({
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
+    const { emitFormBlur } = useFormEvents()
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
@@ -409,6 +411,7 @@ export default defineComponent({
         emit('open')
       } else {
         emit('close')
+        emitFormBlur()
       }
     })
 
@@ -419,6 +422,8 @@ export default defineComponent({
         searchInput.value.$el.value = ''
       }
       emit('update:modelValue', event)
+      emit('change', event)
+      emitFormBlur()
     }
 
     return {

@@ -2,7 +2,9 @@ import { h, cloneVNode, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { getSlotsChildren } from '../../utils'
+import type { FormError } from '../../types'
 import { useAppConfig } from '#imports'
+
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -57,12 +59,20 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.formGroup>>(() => defu({}, props.ui, appConfig.ui.formGroup))
 
+    provide('form-path', props.name)
+    const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
+    const errorMessage = computed(() => {
+      return props.error && typeof props.error === 'string'
+        ? props.error
+        : formErrors?.value?.find((error) => error.path === props.name)?.message
+    })
+
     const children = computed(() => getSlotsChildren(slots))
 
     const clones = computed(() => children.value.map((node) => {
       const vProps: any = {}
 
-      if (props.error) {
+      if (errorMessage.value) {
         vProps.oldColor = node.props?.color
         vProps.color = 'red'
       } else if (vProps.oldColor) {
@@ -89,7 +99,7 @@ export default defineComponent({
       ] }, props.description),
       h('div', { class: [!!props.label && ui.value.container] }, [
         ...clones.value,
-        props.error && typeof props.error === 'string' ? h('p', { class: [ui.value.error, ui.value.size[props.size]] }, props.error) : props.help ? h('p', { class: [ui.value.help, ui.value.size[props.size]] }, props.help) : null
+        errorMessage.value ? h('p', { class: [ui.value.error, ui.value.size[props.size]] }, errorMessage.value) : props.help ? h('p', { class: [ui.value.help, ui.value.size[props.size]] }, props.help) : null
       ])
     ])
   }

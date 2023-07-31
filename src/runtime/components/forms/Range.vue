@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div :class="wrapperClass">
     <input
       :id="name"
@@ -12,6 +12,7 @@
       type="range"
       :class="[inputClass, thumbClass, trackClass]"
       v-bind="$attrs"
+      @change="onChange"
     >
 
     <span :class="progressClass" :style="progressStyle" />
@@ -23,6 +24,7 @@ import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
+import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -74,12 +76,14 @@ export default defineComponent({
       default: () => appConfig.ui.range
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.range>>(() => defu({}, props.ui, appConfig.ui.range))
+
+    const { emitFormBlur } = useFormEvents()
 
     const value = computed({
       get () {
@@ -89,6 +93,11 @@ export default defineComponent({
         emit('update:modelValue', value)
       }
     })
+
+    const onChange = (event: Event) => {
+      emit('change', event)
+      emitFormBlur()
+    }
 
     const wrapperClass = computed(() => {
       return classNames(
@@ -154,7 +163,8 @@ export default defineComponent({
       thumbClass,
       trackClass,
       progressClass,
-      progressStyle
+      progressStyle,
+      onChange
     }
   }
 })

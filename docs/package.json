@@ -21,6 +21,9 @@
     "nuxt-component-meta": "^0.5.3",
     "nuxt-lodash": "^2.5.0",
     "typescript": "^5.1.6",
-    "v-calendar": "^3.0.3"
+    "v-calendar": "^3.0.3",
+    "yup": "^1.2.0",
+    "joi": "^17.9.2",
+    "zod": "^3.21.4"
   }
 }
