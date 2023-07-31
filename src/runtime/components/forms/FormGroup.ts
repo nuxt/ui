@@ -19,7 +19,7 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: () => appConfig.ui.input.default.size,
+      default: null,
       validator (value: string) {
         return Object.keys(appConfig.ui.formGroup.size).includes(value)
       }
