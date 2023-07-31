@@ -27,7 +27,6 @@ async function submit () {
     ref="form"
     :schema="schema"
     :state="state"
-    class="space-y-4 w-60"
     @submit.prevent="submit"
   >
     <UFormGroup label="Email" name="email">
