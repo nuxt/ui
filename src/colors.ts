@@ -191,7 +191,11 @@ const safelistComponentAliasesMap = {
 
 const colorsAsRegex = (colors: string[]): string => colors.join('|')
 
-export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
+export const excludeColors = (colors: object): string[] => {
+  return Object.entries(omit(colors, colorsToExclude))
+    .filter(([, value]) => typeof value === 'object')
+    .map(([key]) => kebabCase(key))
+}
 
 export const generateSafelist = (colors: string[], globalColors) => {
   const baseSafelist = Object.keys(safelistByComponent).flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))

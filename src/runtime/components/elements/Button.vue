@@ -1,5 +1,5 @@
 <template>
-  <ULinkCustom :type="type" :disabled="disabled || loading" :class="buttonClass">
+  <ULink :type="type" :disabled="disabled || loading" :class="buttonClass">
     <slot name="leading" :disabled="disabled" :loading="loading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     </slot>
@@ -13,7 +13,7 @@
     <slot name="trailing" :disabled="disabled" :loading="loading">
       <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
     </slot>
-  </ULinkCustom>
+  </ULink>
 </template>
 
 <script lang="ts">
@@ -21,7 +21,7 @@ import { computed, defineComponent, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
-import ULinkCustom from '../elements/LinkCustom.vue'
+import ULink from '../elements/Link.vue'
 import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -33,7 +33,7 @@ import appConfig from '#build/app.config'
 export default defineComponent({
   components: {
     UIcon,
-    ULinkCustom
+    ULink
   },
   props: {
     type: {

@@ -1,7 +1,7 @@
-import type { NuxtLinkProps } from '#app'
+import type { Link } from './link'
 import type { Avatar } from './avatar'
 
-export interface VerticalNavigationLink extends NuxtLinkProps {
+export interface VerticalNavigationLink extends Link {
   label: string
   icon?: string
   iconClass?: string

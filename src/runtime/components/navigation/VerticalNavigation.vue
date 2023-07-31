@@ -1,6 +1,6 @@
 <template>
   <nav :class="ui.wrapper">
-    <ULinkCustom
+    <ULink
       v-for="(link, index) of links"
       v-slot="{ isActive }"
       :key="index"
@@ -11,7 +11,7 @@
       @click="link.click"
       @keyup.enter="$event.target.blur()"
     >
-      <slot name="avatar" :link="link">
+      <slot name="avatar" :link="link" :is-active="isActive">
         <UAvatar
           v-if="link.avatar"
           v-bind="{ size: ui.avatar.size, ...link.avatar }"
@@ -25,7 +25,7 @@
           :class="[ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive, link.iconClass]"
         />
       </slot>
-      <slot :link="link">
+      <slot :link="link" :is-active="isActive">
         <span v-if="link.label" :class="ui.label">{{ link.label }}</span>
       </slot>
       <slot name="badge" :link="link" :is-active="isActive">
@@ -33,7 +33,7 @@
           {{ link.badge }}
         </span>
       </slot>
-    </ULinkCustom>
+    </ULink>
   </nav>
 </template>
 
@@ -44,7 +44,7 @@ import { defu } from 'defu'
 import { omit } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
-import ULinkCustom from '../elements/LinkCustom.vue'
+import ULink from '../elements/Link.vue'
 import type { VerticalNavigationLink } from '../../types/vertical-navigation'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -57,7 +57,7 @@ export default defineComponent({
   components: {
     UIcon,
     UAvatar,
-    ULinkCustom
+    ULink
   },
   props: {
     links: {
