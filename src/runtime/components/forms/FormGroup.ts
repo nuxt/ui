@@ -1,4 +1,4 @@
-import { h, cloneVNode, computed, defineComponent } from 'vue'
+import { h, cloneVNode, computed, defineComponent, provide, inject } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { getSlotsChildren } from '../../utils'
