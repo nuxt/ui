@@ -29,11 +29,11 @@ async function submit () {
     :state="state"
     @submit.prevent="submit"
   >
-    <UFormGroup label="Email" name="email">
+    <UFormGroup label="Email" name="email-joi">
       <UInput v-model="state.email" />
     </UFormGroup>
 
-    <UFormGroup label="Password" name="password">
+    <UFormGroup label="Password" name="password-joi">
       <UInput v-model="state.password" type="password" />
     </UFormGroup>
 
