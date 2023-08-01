@@ -5,20 +5,21 @@
     <UPageBody prose>
       <ContentRenderer v-if="page && page.body" :value="page" />
 
-      <UButton
-        :to="githubLink"
-        variant="link"
-        icon="i-heroicons-pencil-square"
-        label="Edit this page on GitHub"
-        :padded="false"
-        class="mt-12"
-      />
+      <div class="mt-12 not-prose">
+        <UButton
+          :to="githubLink"
+          variant="link"
+          icon="i-heroicons-pencil-square"
+          label="Edit this page on GitHub"
+          :padded="false"
+        />
+      </div>
 
       <hr v-if="surround?.length" class="border-gray-200 dark:border-gray-800 my-8">
 
       <UDocsSurround :surround="surround" />
 
-      <Footer />
+      <Footer class="not-prose" />
     </UPageBody>
 
     <template v-if="page.body?.toc?.links?.length" #right>
