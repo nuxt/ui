@@ -16,3 +16,13 @@ export interface Button {
   square?: boolean
   truncate?: boolean
 }
+
+export interface ButtonGroupContext {
+  ui?: Partial<typeof appConfig.ui.buttonGroup>,
+  size?: string,
+  class?: string
+}
+
+export interface ButtonGroupInjection {
+  onRender (context: ButtonGroupContext): void
+}

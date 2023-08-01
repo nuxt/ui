@@ -15,32 +15,34 @@
       </slot>
     </HMenuButton>
 
-    <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
-      <Transition appear v-bind="ui.transition">
-        <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
-          <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
-            <HMenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
-              <ULinkCustom
-                v-bind="omit(item, ['label', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'click'])"
-                :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
-                @click="item.click"
-              >
-                <slot :name="item.slot || 'item'" :item="item">
-                  <UIcon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
-                  <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
+    <UButtonGroupReset>
+      <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
+        <Transition appear v-bind="ui.transition">
+          <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
+            <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
+              <HMenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
+                <ULinkCustom
+                  v-bind="omit(item, ['label', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'click'])"
+                  :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
+                  @click="item.click"
+                >
+                  <slot :name="item.slot || 'item'" :item="item">
+                    <UIcon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
+                    <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
 
-                  <span class="truncate">{{ item.label }}</span>
+                    <span class="truncate">{{ item.label }}</span>
 
-                  <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
-                    <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
-                  </span>
-                </slot>
-              </ULinkCustom>
-            </HMenuItem>
-          </div>
-        </HMenuItems>
-      </Transition>
-    </div>
+                    <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
+                      <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
+                    </span>
+                  </slot>
+                </ULinkCustom>
+              </HMenuItem>
+            </div>
+          </HMenuItems>
+        </Transition>
+      </div>
+    </UButtonGroupReset>
   </HMenu>
 </template>
 

@@ -1,4 +1,5 @@
 <template>
+  <OnRender @render="onRender" />
   <ULinkCustom :type="type" :disabled="disabled || loading" :class="buttonClass">
     <slot name="leading" :disabled="disabled" :loading="loading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
@@ -27,13 +28,29 @@ import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { ButtonGroupInjectionKey } from '../../composables/symbols'
+import { ButtonGroupContext } from '../../types'
 
 // const appConfig = useAppConfig()
 
+// TODO: maybe move to utils component
+// eslint-disable-next-line vue/one-component-per-file
+const OnRender =  defineComponent({
+  emits: ['render'],
+  setup (_, { emit }) {
+    return () => {
+      emit('render')
+      return null
+    }
+  }
+})
+
+// eslint-disable-next-line vue/one-component-per-file
 export default defineComponent({
   components: {
     UIcon,
-    ULinkCustom
+    ULinkCustom,
+    OnRender
   },
   props: {
     type: {
@@ -127,7 +144,15 @@ export default defineComponent({
 
     const slots = useSlots()
 
-    const ui = computed<Partial<typeof appConfig.ui.button>>(() => defu({}, props.ui, appConfig.ui.button))
+    const buttonGroupInject = reactive<ButtonGroupContext>({})
+    const buttonGroup = inject(ButtonGroupInjectionKey)
+
+    const ui = computed<Partial<typeof appConfig.ui.button>>(() => defu({}, buttonGroupInject.ui, props.ui, appConfig.ui.button ))
+    const size = computed(() => buttonGroupInject.size || props.size)
+
+    function onRender () {
+      buttonGroup?.onRender(buttonGroupInject)
+    }
 
     const isLeading = computed(() => {
       return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
@@ -146,11 +171,12 @@ export default defineComponent({
         ui.value.base,
         ui.value.font,
         ui.value.rounded,
-        ui.value.size[props.size],
-        ui.value.gap[props.size],
-        props.padded && ui.value[isSquare.value ? 'square' : 'padding'][props.size],
+        ui.value.size[size.value],
+        ui.value.gap[size.value],
+        props.padded && ui.value[isSquare.value ? 'square' : 'padding'][size.value],
         variant?.replaceAll('{color}', props.color),
-        props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
+        props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center',
+        buttonGroupInject.class
       )
     })
 
@@ -173,7 +199,7 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        ui.value.icon.size[props.size],
+        ui.value.icon.size[size.value],
         props.loading && 'animate-spin'
       )
     })
@@ -181,12 +207,13 @@ export default defineComponent({
     const trailingIconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        ui.value.icon.size[props.size],
+        ui.value.icon.size[size.value],
         props.loading && !isLeading.value && 'animate-spin'
       )
     })
 
     return {
+      onRender,
       isLeading,
       isTrailing,
       isSquare,

@@ -6,6 +6,8 @@ import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { ButtonGroupInjectionKey } from '../../composables/symbols'
+import { ButtonGroupContext, ButtonGroupInjection } from '../../types'
 
 // const appConfig = useAppConfig()
 
@@ -43,29 +45,65 @@ export default defineComponent({
       'rounded-full': { left: 'rounded-s-full', right: 'rounded-e-full' }
     }[ui.value.rounded]))
 
-    const clones = computed(() => children.value.map((node, index) => {
-      const vProps: any = {}
+    const buttons: ButtonGroupContext[] = []
+    const seen = new Set<ButtonGroupContext>()
+    const injection = reactive<ButtonGroupInjection>({
+      onRender (ctx) {
+        if (seen.has(ctx)) return
+        seen.add(ctx)
 
-      if (props.size) {
-        vProps.size = props.size
+        if (props.size) {
+          ctx.size = props.size
+        }
+
+        ctx.class = ' !shadow-none'
+        ctx.ui ||= {}
+
+        // first button
+        if (!buttons.length) {
+          ctx.ui.rounded = rounded.value.left
+        }
+        else {
+          // remove rounded from previous button
+          if (buttons.length > 1) {
+            buttons[buttons.length - 1].ui.rounded = ''
+          }
+          // assume we are the last button, unless the next button resets it
+          ctx.ui.rounded = rounded.value.right
+        }
+        buttons.push(ctx)
       }
+    })
 
-      vProps.class = node.props?.class || ''
-      vProps.class += ' !shadow-none'
-      vProps.ui = node.props?.ui || {}
-      vProps.ui.rounded = ''
+    provide(ButtonGroupInjectionKey, injection)
 
-      if (index === 0) {
-        vProps.ui.rounded = rounded.value.left
-      }
+    // function update () {
+    //   collect.buttons.map((vProps, index) => {
+    //     if (props.size) {
+    //       vProps.size = props.size
+    //     }
 
-      if (index === children.value.length - 1) {
-        vProps.ui.rounded = rounded.value.right
-      }
+    //     vProps.class = ' !shadow-none'
+    //     vProps.ui = {
+    //       rounded: ''
+    //     }
 
-      return cloneVNode(node, vProps)
-    }))
+    //     if (index === 0) {
+    //       vProps.ui.rounded = rounded.value.left
+    //     }
 
-    return () => h('div', { class: [ui.value.wrapper, ui.value.rounded, ui.value.shadow] }, clones.value)
+    //     if (index === children.value.length - 1) {
+    //       vProps.ui.rounded = rounded.value.right
+    //     }
+    //   })
+    // }
+
+    // onBeforeMount(update)
+    // onMounted(update)
+
+    return () => {
+      buttons.length = 0
+      return h('div', { class: [ui.value.wrapper, ui.value.rounded, ui.value.shadow] }, children.value)
+    }
   }
 })
