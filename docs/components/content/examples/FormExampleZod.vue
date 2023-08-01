@@ -11,8 +11,8 @@ const schema = z.object({
 type Schema = z.output<typeof schema>
 
 const state = ref({
-  email: undefined,
-  password: undefined
+  emailZod: undefined,
+  passwordZod: undefined
 })
 
 const form = ref<Form<Schema>>()
@@ -31,11 +31,11 @@ async function submit () {
     @submit.prevent="submit"
   >
     <UFormGroup label="Email" name="emailZod">
-      <UInput v-model="state.email" />
+      <UInput v-model="state.emailZod" />
     </UFormGroup>
 
     <UFormGroup label="Password" name="passwordZod">
-      <UInput v-model="state.password" type="password" />
+      <UInput v-model="state.passwordZod" type="password" />
     </UFormGroup>
 
     <UButton type="submit">
