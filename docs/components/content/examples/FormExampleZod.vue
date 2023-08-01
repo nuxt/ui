@@ -4,8 +4,8 @@ import { z } from 'zod'
 import type { Form } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = z.object({
-  email: z.string().email('Invalid email'),
-  password: z.string().min(8, 'Must be at least 8 characters')
+  emailZod: z.string().email('Invalid email'),
+  passwordZod: z.string().min(8, 'Must be at least 8 characters')
 })
 
 type Schema = z.output<typeof schema>
@@ -30,11 +30,11 @@ async function submit () {
     :state="state"
     @submit.prevent="submit"
   >
-    <UFormGroup label="Email" name="email-zod">
+    <UFormGroup label="Email" name="emailZod">
       <UInput v-model="state.email" />
     </UFormGroup>
 
-    <UFormGroup label="Password" name="password-zod">
+    <UFormGroup label="Password" name="passwordZod">
       <UInput v-model="state.password" type="password" />
     </UFormGroup>
 

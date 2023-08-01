@@ -68,6 +68,8 @@ export default defineComponent({
           `Form validation failed: ${JSON.stringify(errors.value, null, 2)}`
         )
       }
+
+      return props.state
     }
 
     expose({

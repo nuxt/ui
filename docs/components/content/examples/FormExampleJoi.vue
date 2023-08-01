@@ -3,8 +3,8 @@ import { ref } from 'vue'
 import Joi from 'joi'
 
 const schema = Joi.object({
-  email: Joi.string().required(),
-  password: Joi.string()
+  emailJoi: Joi.string().required(),
+  passwordJoi: Joi.string()
     .min(8)
     .required()
 })
@@ -29,11 +29,11 @@ async function submit () {
     :state="state"
     @submit.prevent="submit"
   >
-    <UFormGroup label="Email" name="email-joi">
+    <UFormGroup label="Email" name="emailJoi">
       <UInput v-model="state.email" />
     </UFormGroup>
 
-    <UFormGroup label="Password" name="password-joi">
+    <UFormGroup label="Password" name="passwordJoi">
       <UInput v-model="state.password" type="password" />
     </UFormGroup>
 

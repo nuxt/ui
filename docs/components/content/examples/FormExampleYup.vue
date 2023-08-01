@@ -4,8 +4,8 @@ import { object, string, InferType } from 'yup'
 import type { Form } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = object({
-  email: string().email('Invalid email').required('Required'),
-  password: string()
+  emailYup: string().email('Invalid email').required('Required'),
+  passwordYup: string()
     .min(8, 'Must be at least 8 characters')
     .required('Required')
 })
@@ -32,11 +32,11 @@ async function submit () {
     :state="state"
     @submit.prevent="submit"
   >
-    <UFormGroup label="Email" name="email-yup">
+    <UFormGroup label="Email" name="emailYup">
       <UInput v-model="state.email" />
     </UFormGroup>
 
-    <UFormGroup label="Password" name="password-yup">
+    <UFormGroup label="Password" name="passwordYup">
       <UInput v-model="state.password" type="password" />
     </UFormGroup>
 
