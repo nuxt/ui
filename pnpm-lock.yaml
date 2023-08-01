@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -94,7 +98,7 @@ importers:
         version: 1.1.11
       '@iconify-json/simple-icons':
         specifier: latest
-        version: 1.1.62
+        version: 1.1.63
       '@nuxt-themes/ui-kit':
         specifier: npm:@nuxt-themes/ui-kit-edge@0.0.1-28164481.fd7cd68
         version: /@nuxt-themes/ui-kit-edge@0.0.1-28164481.fd7cd68(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.2)
@@ -1013,8 +1017,8 @@ packages:
     dependencies:
       '@iconify/types': 2.0.0
 
-  /@iconify-json/simple-icons@1.1.62:
-    resolution: {integrity: sha512-idHWbDrd9HKtZq9XBJyVN5+QCxJ+oO4BJeJtNNi9GfFSgoA2ig0LZt7adj9uZ/zzEX0i5OY37OpuotkeFRCWfg==}
+  /@iconify-json/simple-icons@1.1.63:
+    resolution: {integrity: sha512-aIbo99YLjwZ53XxU9HC+CO9Br9H0vRuGmq8b0TOaGA1g7HX2ZlpmzPvWAte5xbmbohfRzAMX/OVsFhOT+CL+Aw==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -1203,7 +1207,7 @@ packages:
   /@nuxt-themes/ui-kit-edge@0.0.1-28164481.fd7cd68(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.2):
     resolution: {integrity: sha512-7BvKI9sARYR8TLmofY0IJVjV5I5f03z/sOlM4fByB8VNql/+wepVOrABnDAt0yg6rSuKMEx4/QoY6+9I2tSqYA==}
     dependencies:
-      '@nuxthq/ui': /@nuxthq/ui-edge@2.6.0-28174501.ab2abae(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.2)
+      '@nuxthq/ui': /@nuxthq/ui-edge@2.7.0-28181796.b696b15(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.2)
       '@vueuse/core': 10.2.1(vue@3.3.4)
       lodash-es: 4.17.21
     transitivePeerDependencies:
@@ -1292,7 +1296,7 @@ packages:
       vite: '*'
     dependencies:
       '@nuxt/kit': 3.6.5(rollup@3.26.2)
-      '@nuxt/schema': 3.6.3(rollup@3.26.2)
+      '@nuxt/schema': 3.6.5(rollup@3.26.2)
       execa: 7.1.1
       nuxt: 3.6.5(@types/node@20.4.2)(eslint@8.45.0)(rollup@3.26.2)(typescript@5.1.6)(vue-tsc@1.8.8)
       vite: 4.4.4(@types/node@20.4.2)
@@ -1486,24 +1490,6 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/schema@3.6.3(rollup@3.26.2):
-    resolution: {integrity: sha512-ZkcDt1DbgKX4Zv6Y+uLdn4Zt2WUDsZy+cuVx9XTRPoGVaG9PXZEgQr1XYoVH1vBMH/8VgDApvjok/Vzo+x+Nrg==}
-    engines: {node: ^14.18.0 || >=16.10.0}
-    dependencies:
-      defu: 6.1.2
-      hookable: 5.5.3
-      pathe: 1.1.1
-      pkg-types: 1.0.3
-      postcss-import-resolver: 2.0.0
-      std-env: 3.3.3
-      ufo: 1.1.2
-      unimport: 3.0.14(rollup@3.26.2)
-      untyped: 1.3.2
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
   /@nuxt/schema@3.6.5(rollup@3.26.2):
     resolution: {integrity: sha512-UPUnMB0W5TZ/Pi1fiF71EqIsPlj8LGZqzhSf8wOeh538KHwxbA9r7cuvEUU92eXRksOZaylbea3fJxZWhOITVw==}
     engines: {node: ^14.18.0 || >=16.10.0}
@@ -1631,8 +1617,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nuxthq/ui-edge@2.6.0-28174501.ab2abae(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-OqqB9HY231ple1fg6+mF2wK5ONBcfPCw/tba7GpJMd+i8KM4nqE2lFK8NpfFkgpfPYhkz0dLW2WHBMDsLB2kOQ==}
+  /@nuxthq/ui-edge@2.7.0-28181796.b696b15(rollup@3.26.2)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-DLEfl/iq2Yep19jH2AdHVuBzjxc3hf0mjtN3N4nNX4ZJ8JHGBi7/5PipKD9++YuV0v4W3wrfLF3DYwptHf3YjQ==}
     engines: {node: '>=v16.14.0'}
     dependencies:
       '@egoist/tailwindcss-icons': 1.1.0(tailwindcss@3.3.3)
@@ -2087,7 +2073,7 @@ packages:
       rollup: 3.26.3
       serialize-javascript: 6.0.1
       smob: 1.4.0
-      terser: 5.19.0
+      terser: 5.19.1
     dev: true
 
   /@rollup/plugin-wasm@6.1.3(rollup@3.26.3):
@@ -10483,17 +10469,6 @@ packages:
       serialize-javascript: 6.0.1
       terser: 5.19.1
       webpack: 5.88.2
-
-  /terser@5.19.0:
-    resolution: {integrity: sha512-JpcpGOQLOXm2jsomozdMDpd5f8ZHh1rR48OFgWUH3QsyZcfPgv2qDCYbcDEAYNd4OZRj2bWYKpwdll/udZCk/Q==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      '@jridgewell/source-map': 0.3.5
-      acorn: 8.10.0
-      commander: 2.20.3
-      source-map-support: 0.5.21
-    dev: true
 
   /terser@5.19.1:
     resolution: {integrity: sha512-27hxBUVdV6GoNg1pKQ7Z5cbR6V9txPVyBA+FQw3BaZ1Wuzvztce5p156DaP0NVZNrMZZ+6iG9Syf7WgMNKDg2Q==}
