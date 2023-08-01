@@ -13,8 +13,8 @@ const schema = object({
 type Schema = InferType<typeof schema>
 
 const state = ref({
-  email: undefined,
-  password: undefined
+  emailYup: undefined,
+  passwordYup: undefined
 })
 
 const form = ref<Form<Schema>>()
@@ -33,11 +33,11 @@ async function submit () {
     @submit.prevent="submit"
   >
     <UFormGroup label="Email" name="emailYup">
-      <UInput v-model="state.email" />
+      <UInput v-model="state.emailYup" />
     </UFormGroup>
 
     <UFormGroup label="Password" name="passwordYup">
-      <UInput v-model="state.password" type="password" />
+      <UInput v-model="state.passwordYup" type="password" />
     </UFormGroup>
 
     <UButton type="submit">

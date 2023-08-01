@@ -10,8 +10,8 @@ const schema = Joi.object({
 })
 
 const state = ref({
-  email: undefined,
-  password: undefined
+  emailJoi: undefined,
+  passwordJoi: undefined
 })
 
 const form = ref()
@@ -30,11 +30,11 @@ async function submit () {
     @submit.prevent="submit"
   >
     <UFormGroup label="Email" name="emailJoi">
-      <UInput v-model="state.email" />
+      <UInput v-model="state.emailJoi" />
     </UFormGroup>
 
     <UFormGroup label="Password" name="passwordJoi">
-      <UInput v-model="state.password" type="password" />
+      <UInput v-model="state.passwordJoi" type="password" />
     </UFormGroup>
 
     <UButton type="submit">
