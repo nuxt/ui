@@ -15,7 +15,7 @@
       </slot>
     </HPopoverButton>
 
-    <div v-if="open" ref="container" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
+    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
         <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
           <slot name="panel" :open="open" :close="close" />
@@ -80,7 +80,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.popover>>(() => defu({}, props.ui, appConfig.ui.popover))
 
-    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
+    const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
 
@@ -98,6 +98,12 @@ export default defineComponent({
       }
       const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
       popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
+    })
+
+    const containerStyle = computed(() => {
+      const offsetDistance = (props.popper as PopperOptions)?.offsetDistance || (ui.value.popper as PopperOptions)?.offsetDistance || 8
+
+      return props.mode === 'hover' ? { paddingTop: `${offsetDistance}px`, paddingBottom: `${offsetDistance}px` } : {}
     })
 
     function onMouseOver () {
@@ -146,6 +152,7 @@ export default defineComponent({
       popover,
       trigger,
       container,
+      containerStyle,
       onMouseOver,
       onMouseLeave
     }
