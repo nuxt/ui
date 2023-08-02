@@ -146,6 +146,7 @@ export default defineComponent({
       autoResize()
 
       emit('update:modelValue', (event.target as HTMLInputElement).value)
+      emitFormInput()
     }
 
     const onBlur = (event: FocusEvent) => {

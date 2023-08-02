@@ -96,5 +96,9 @@ async function submit () {
     <UButton type="submit">
       Submit
     </UButton>
+
+    <UButton variant="outline" class="ml-2" @click="form.clear()">
+      Clear
+    </UButton>
   </UForm>
 </template>

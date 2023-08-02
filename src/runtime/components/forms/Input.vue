@@ -160,6 +160,7 @@ export default defineComponent({
 
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
+      emitFormInput()
     }
 
     const onBlur = (event: FocusEvent) => {

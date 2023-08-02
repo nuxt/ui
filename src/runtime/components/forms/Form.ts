@@ -33,14 +33,8 @@ export default defineComponent({
     const bus = useEventBus<FormEvent>(`form-${seed}`)
 
     bus.on(async (event) => {
-      if (event.type === 'blur') {
-        const otherErrors = errors.value.filter(
-          (error) => error.path !== event.path
-        )
-        const pathErrors = (await getErrors()).filter(
-          (error) => error.path === event.path
-        )
-        errors.value = otherErrors.concat(pathErrors)
+      if (event.type === 'blur' || event.type === 'input') {
+        await validate(event.path, { silent: true }) 
       }
     })
 
@@ -66,19 +60,37 @@ export default defineComponent({
       return errs
     }
 
-    async function validate () {
-      errors.value = await getErrors()
-      if (errors.value.length > 0) {
+    async function validate (path: string, opts: { silent?: boolean } = { silent: false }) {
+      if (path) {
+       const otherErrors = errors.value.filter(
+          (error) => error.path !== path
+        )
+        const pathErrors = (await getErrors()).filter(
+          (error) => error.path === path
+        )
+        errors.value = otherErrors.concat(pathErrors)
+      } else {
+        errors.value = await getErrors()
+      }
+
+      if (!opts.silent && errors.value.length > 0) {
         throw new Error(
           `Form validation failed: ${JSON.stringify(errors.value, null, 2)}`
         )
       }
-
       return props.state
     }
 
     expose({
-      validate
+      validate,
+      errors,
+      clear (path?: string) {
+        if (path) {
+          errors.value = errors.value.filter((err) => err.path === path)
+        } else {
+          errors.value = []
+        }
+      }
     })
 
     return () => h('form', slots.default?.())
