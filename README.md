@@ -47,7 +47,7 @@ If you want latest updates, please use `@nuxthq/ui-edge` in your `package.json`:
 
 ## Documentation
 
-Visit https://ui.nuxtlabs.com to view the documentation.
+Visit <https://ui.nuxtlabs.com> to view the documentation.
 
 ## Credits
 
