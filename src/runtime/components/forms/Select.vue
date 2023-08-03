@@ -1,7 +1,6 @@
 <template>
   <div :class="ui.wrapper">
     <select
-      :id="name"
       :name="name"
       :value="modelValue"
       :required="required"
@@ -174,7 +173,9 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
 
-    const { emitFormBlur } = useFormGroup()
+    const { emitFormBlur, formGroup } = useFormGroup()
+    const size = computed(() => formGroup?.size?.value ?? props.size)
+
 
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
@@ -243,11 +244,11 @@ export default defineComponent({
       return classNames(
         ui.value.base,
         ui.value.rounded,
-        ui.value.size[props.size],
-        props.padded ? ui.value.padding[props.size] : 'p-0',
+        ui.value.size[size.value],
+        props.padded ? ui.value.padding[size.value] : 'p-0',
         variant?.replaceAll('{color}', props.color),
-        (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
-        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size]
+        (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
       )
     })
 
@@ -279,7 +280,7 @@ export default defineComponent({
       return classNames(
         ui.value.icon.leading.wrapper,
         ui.value.icon.leading.pointer,
-        ui.value.icon.leading.padding[props.size]
+        ui.value.icon.leading.padding[size.value]
       )
     })
 
@@ -287,7 +288,7 @@ export default defineComponent({
       return classNames(
         ui.value.icon.base,
         appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
-        ui.value.icon.size[props.size],
+        ui.value.icon.size[size.value],
         props.loading && 'animate-spin'
       )
     })
@@ -296,7 +297,7 @@ export default defineComponent({
       return classNames(
         ui.value.icon.trailing.wrapper,
         ui.value.icon.trailing.pointer,
-        ui.value.icon.trailing.padding[props.size]
+        ui.value.icon.trailing.padding[size.value]
       )
     })
 
@@ -304,7 +305,7 @@ export default defineComponent({
       return classNames(
         ui.value.icon.base,
         appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
-        ui.value.icon.size[props.size],
+        ui.value.icon.size[size.value],
         props.loading && !isLeading.value && 'animate-spin'
       )
     })

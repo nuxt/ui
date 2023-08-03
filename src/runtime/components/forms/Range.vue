@@ -1,7 +1,6 @@
 <template>
   <div :class="wrapperClass">
     <input
-      :id="name"
       ref="input"
       v-model.number="value"
       :name="name"
@@ -83,7 +82,8 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.range>>(() => defu({}, props.ui, appConfig.ui.range))
 
-    const { emitFormBlur } = useFormGroup()
+    const { emitFormBlur, formGroup } = useFormGroup()
+    const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const value = computed({
       get () {
@@ -102,7 +102,7 @@ export default defineComponent({
     const wrapperClass = computed(() => {
       return classNames(
         ui.value.wrapper,
-        ui.value.size[props.size]
+        ui.value.size[size.value]
       )
     })
 
@@ -112,7 +112,7 @@ export default defineComponent({
         ui.value.background,
         ui.value.rounded,
         ui.value.ring.replaceAll('{color}', props.color),
-        ui.value.size[props.size]
+        ui.value.size[size.value]
       )
     })
 
@@ -123,7 +123,7 @@ export default defineComponent({
         ui.value.thumb.color.replaceAll('{color}', props.color),
         ui.value.thumb.ring,
         ui.value.thumb.background,
-        ui.value.thumb.size[props.size]
+        ui.value.thumb.size[size.value]
       )
     })
 
@@ -132,7 +132,7 @@ export default defineComponent({
         ui.value.track.base,
         ui.value.track.background,
         ui.value.track.rounded,
-        ui.value.track.size[props.size]
+        ui.value.track.size[size.value]
       )
     })
 
@@ -141,7 +141,7 @@ export default defineComponent({
         ui.value.progress.base,
         ui.value.progress.rounded,
         ui.value.progress.background.replaceAll('{color}', props.color),
-        ui.value.progress.size[props.size]
+        ui.value.progress.size[size.value]
       )
     })
 
