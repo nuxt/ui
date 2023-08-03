@@ -45,7 +45,7 @@ type Schema = z.infer<typeof schema>
 
 const form = ref()
 
-async function submit (data) {
+async function submit (data: Schema) {
   // Do something with data
   console.log(data)
 }

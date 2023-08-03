@@ -15,9 +15,9 @@ const state = ref({
 })
 
 const form = ref()
-async function submit (value: Schema) {
-  // Do something with state.value
-  console.log(value)
+async function submit (data: Schema) {
+  // Do something with data
+  console.log(data)
 }
 </script>
 
