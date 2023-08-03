@@ -11,7 +11,9 @@ export interface Form<T> {
   clear(path?: string): void
 }
 
+export type FormEventType = 'blur' | 'input' | 'submit' | 'change'
+
 export interface FormEvent {
-  type: 'blur' | 'input'
+  type: FormEventType
   path: string
 }

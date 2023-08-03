@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { z } from 'zod'
-import type { Form } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = z.object({
   emailZod: z.string().email('Invalid email'),
@@ -15,11 +14,10 @@ const state = ref({
   passwordZod: undefined
 })
 
-const form = ref<Form<Schema>>()
-
-async function submit () {
-  await form.value!.validate()
+const form = ref()
+async function submit (value: Schema) {
   // Do something with state.value
+  console.log(value)
 }
 </script>
 
@@ -28,7 +26,7 @@ async function submit () {
     ref="form"
     :schema="schema"
     :state="state"
-    @submit.prevent="submit"
+    @submit="(value) => submit(value)"
   >
     <UFormGroup label="Email" name="emailZod">
       <UInput v-model="state.emailZod" />

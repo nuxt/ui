@@ -16,9 +16,9 @@ const state = ref({
 
 const form = ref()
 
-async function submit () {
-  await form.value!.validate()
-  // Do something with state.value
+async function submit (data) {
+  // Do something with data
+  console.log(data)
 }
 </script>
 
@@ -27,7 +27,7 @@ async function submit () {
     ref="form"
     :schema="schema"
     :state="state"
-    @submit.prevent="submit"
+    @submit="submit"
   >
     <UFormGroup label="Email" name="emailJoi">
       <UInput v-model="state.emailJoi" />

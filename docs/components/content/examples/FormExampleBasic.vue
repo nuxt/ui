@@ -16,9 +16,9 @@ const validate = (state: any): FormError[] => {
 
 const form = ref()
 
-async function submit () {
-  await form.value!.validate()
-  // Do something with state.value
+async function submit (data) {
+  // Do something with data
+  console.log(data)
 }
 </script>
 
@@ -27,7 +27,7 @@ async function submit () {
     ref="form"
     :validate="validate"
     :state="state"
-    @submit.prevent="submit"
+    @submit="submit"
   >
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />

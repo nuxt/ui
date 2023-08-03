@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { object, string, InferType } from 'yup'
-import type { Form } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = object({
   emailYup: string().email('Invalid email').required('Required'),
@@ -17,11 +16,9 @@ const state = ref({
   passwordYup: undefined
 })
 
-const form = ref<Form<Schema>>()
-
-async function submit () {
-  await form.value!.validate()
-  // Do something with state.value
+async function submit (data: Schema) {
+  // Do something with data
+  console.log(data)
 }
 </script>
 
@@ -30,7 +27,7 @@ async function submit () {
     ref="form"
     :schema="schema"
     :state="state"
-    @submit.prevent="submit"
+    @submit="submit"
   >
     <UFormGroup label="Email" name="emailYup">
       <UInput v-model="state.emailYup" />

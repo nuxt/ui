@@ -1,12 +1,16 @@
+<template>
+  <form @submit.prevent="onSubmit">
+    <slot />
+  </form>
+</template>
+
+<script lang="ts">
 import { provide, ref, type PropType, h, defineComponent } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
-import type {
-  ObjectSchema as YupObjectSchema,
-  ValidationError as YupError
-} from 'yup'
-import type { FormError, FormEvent } from '../../types'
+import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
+import type { FormError, FormEvent, FormEventType } from '../../types'
 
 export default defineComponent({
   props: {
@@ -27,20 +31,19 @@ export default defineComponent({
         | PropType<(state: any) => FormError[]>,
       default: () => []
     },
-    disableAutoValidation: {
-      type: Boolean,
-      default: false
+    validateOn: {
+      type: Array as PropType<FormEventType[]>,
+      default: () => ['blur', 'input', 'change', 'submit']
     }
   },
-  setup (props, { slots, expose }) {
+  emits: ['submit'],
+  setup (props, { expose, emit }) {
     const seed = Math.random().toString(36).substring(7)
     const bus = useEventBus<FormEvent>(`form-${seed}`)
 
     bus.on(async (event) => {
-      if (!props.disableAutoValidation) {
-        if (event.type === 'blur' || event.type === 'input') {
-          await validate(event.path, { silent: true })
-        }
+      if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
+        await validate(event.path, { silent: true })
       }
     })
 
@@ -68,7 +71,7 @@ export default defineComponent({
 
     async function validate (path?: string, opts: { silent?: boolean } = { silent: false }) {
       if (path) {
-       const otherErrors = errors.value.filter(
+        const otherErrors = errors.value.filter(
           (error) => error.path !== path
         )
         const pathErrors = (await getErrors()).filter(
@@ -87,6 +90,13 @@ export default defineComponent({
       return props.state
     }
 
+    async function onSubmit () {
+      if (props.validateOn?.includes('submit')) {
+        await validate()
+      }
+      emit('submit', props.state)
+    }
+
     expose({
       validate,
       errors,
@@ -102,7 +112,9 @@ export default defineComponent({
       }
     })
 
-    return () => h('form', slots.default?.())
+    return {
+      onSubmit
+    }
   }
 })
 
@@ -177,3 +189,4 @@ async function getJoiErrors (
     }
   }
 }
+</script>
