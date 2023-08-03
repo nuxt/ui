@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "yoavbls.pretty-ts-errors"
+        "yoavbls.pretty-ts-errors",
+        "bradlc.vscode-tailwindcss"
     ]
 }
