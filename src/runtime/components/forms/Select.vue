@@ -60,7 +60,7 @@ import { get } from 'lodash-es'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -174,7 +174,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormBlur } = useFormGroup()
 
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)

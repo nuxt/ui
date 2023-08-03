@@ -23,7 +23,7 @@ import { ref, computed, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -112,7 +112,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defu({}, props.ui, appConfig.ui.textarea))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormBlur } = useFormGroup()
 
     const autoFocus = () => {
       if (props.autofocus) {
