@@ -15,12 +15,11 @@ export const useFormGroup = () => {
       }
     }
 
-    // TODO: Call this whenever and input value is updated and update Form to trigger validation
     const emitFormInput = useDebounceFn(() => {
       if (formBus && formPath && blurred.value) {
         formBus.emit({ type: 'input', path: formPath })
       }
-    }, 500)
+    }, 200)
 
     return {
       emitFormBlur,
