@@ -90,16 +90,18 @@ export default defineComponent({
       return cloneVNode(node, vProps)
     }))
 
+    const size = computed(() => ui.value.size[props.size ?? appConfig.ui.input.default.size])
+
     return () => h('div', { class: [ui.value.wrapper] }, [
-      props.label && h('div', { class: [ui.value.label.wrapper, ui.value.size[props.size]] }, [
+      props.label && h('div', { class: [ui.value.label.wrapper, size.value] }, [
         h('label', { for: props.name, class: [ui.value.label.base, props.required && ui.value.label.required] }, props.label),
         props.hint && h('span', { class: [ui.value.hint] }, props.hint)
       ]),
-      props.description && h('p', { class: [ui.value.description, ui.value.size[props.size]
+      props.description && h('p', { class: [ui.value.description, size.value
       ] }, props.description),
       h('div', { class: [!!props.label && ui.value.container] }, [
         ...clones.value,
-        errorMessage.value ? h('p', { class: [ui.value.error, ui.value.size[props.size]] }, errorMessage.value) : props.help ? h('p', { class: [ui.value.help, ui.value.size[props.size]] }, props.help) : null
+        errorMessage.value ? h('p', { class: [ui.value.error, size.value] }, errorMessage.value) : props.help ? h('p', { class: [ui.value.help, size.value] }, props.help) : null
       ])
     ])
   }
