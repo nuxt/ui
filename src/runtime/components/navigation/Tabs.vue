@@ -1,6 +1,7 @@
 <template>
-  <HTabGroup :vertical="orientation === 'vertical'" :default-index="defaultIndex" as="div" :class="ui.wrapper" @change="onChange">
+  <HTabGroup :vertical="orientation === 'vertical'" :selected-index="selectedIndex" as="div" :class="ui.wrapper" @change="onChange">
     <HTabList
+      ref="listRef"
       :class="[ui.list.base, ui.list.background, ui.list.rounded, ui.list.shadow, ui.list.padding, ui.list.width, orientation === 'horizontal' && ui.list.height, orientation === 'horizontal' && 'inline-grid items-center']"
       :style="[orientation === 'horizontal' && `grid-template-columns: repeat(${items.length}, minmax(0, 1fr))`]"
     >
@@ -40,9 +41,10 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted, defineComponent } from 'vue'
+import { ref, computed, watch, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel } from '@headlessui/vue'
+import { useResizeObserver } from '@vueuse/core'
 import { defu } from 'defu'
 import type { TabItem } from '../../types/tabs'
 import { useAppConfig } from '#imports'
@@ -61,6 +63,10 @@ export default defineComponent({
     HTabPanel
   },
   props: {
+    modelValue: {
+      type: Number,
+      default: undefined
+    },
     orientation: {
       type: String as PropType<'horizontal' | 'vertical'>,
       default: 'horizontal',
@@ -79,18 +85,22 @@ export default defineComponent({
       default: () => appConfig.ui.tabs
     }
   },
-  setup (props) {
+  emits: ['update:modelValue', 'change'],
+  setup (props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.tabs>>(() => defu({}, props.ui, appConfig.ui.tabs))
 
+    const listRef = ref<HTMLElement>()
     const itemRefs = ref<HTMLElement[]>([])
     const markerRef = ref<HTMLElement>()
 
+    const selectedIndex = ref(props.modelValue || props.defaultIndex)
+
     // Methods
 
-    function onChange (index) {
+    function calcMarkerSize (index: number) {
       // @ts-ignore
       const tab = itemRefs.value[index]?.$el
       if (!tab) {
@@ -103,13 +113,35 @@ export default defineComponent({
       markerRef.value.style.height = `${tab.offsetHeight}px`
     }
 
-    onMounted(() => onChange(props.defaultIndex))
+    function onChange (index) {
+      selectedIndex.value = index
+
+      emit('change', index)
+
+      if (props.modelValue !== undefined) {
+        emit('update:modelValue', index)
+      }
+
+      calcMarkerSize(index)
+    }
+
+    useResizeObserver(listRef, () => {
+      calcMarkerSize(selectedIndex.value)
+    })
+
+    watch(() => props.modelValue, (value) => {
+      selectedIndex.value = value
+    })
+
+    onMounted(() => calcMarkerSize(selectedIndex.value))
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      listRef,
       itemRefs,
       markerRef,
+      selectedIndex,
       onChange
     }
   }
