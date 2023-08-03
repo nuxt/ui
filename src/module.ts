@@ -90,7 +90,8 @@ export default defineNuxtModule<ModuleOptions>({
         700: 'rgb(var(--color-primary-700) / <alpha-value>)',
         800: 'rgb(var(--color-primary-800) / <alpha-value>)',
         900: 'rgb(var(--color-primary-900) / <alpha-value>)',
-        950: 'rgb(var(--color-primary-950) / <alpha-value>)'
+        950: 'rgb(var(--color-primary-950) / <alpha-value>)',
+        DEFAULT: 'rgb(var(--color-primary-DEFAULT) / <alpha-value>)'
       }
 
       if (globalColors.gray) {
