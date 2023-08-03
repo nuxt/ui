@@ -2,7 +2,6 @@
   <div :class="ui.wrapper">
     <div class="flex items-center h-5">
       <input
-        :id="`${name}-${value}`"
         v-model="pick"
         :name="name"
         :required="required"

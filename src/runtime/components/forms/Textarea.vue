@@ -1,7 +1,6 @@
 <template>
   <div :class="ui.wrapper">
     <textarea
-      :id="name"
       ref="textarea"
       :value="modelValue"
       :name="name"
@@ -112,7 +111,8 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defu({}, props.ui, appConfig.ui.textarea))
 
-    const { emitFormBlur } = useFormGroup()
+    const { emitFormBlur, formGroup } = useFormGroup()
+    const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const autoFocus = () => {
       if (props.autofocus) {
@@ -177,8 +177,8 @@ export default defineComponent({
         ui.value.base,
         ui.value.rounded,
         ui.value.placeholder,
-        ui.value.size[props.size],
-        props.padded ? ui.value.padding[props.size] : 'p-0',
+        ui.value.size[size.value],
+        props.padded ? ui.value.padding[size.value] : 'p-0',
         variant?.replaceAll('{color}', props.color),
         !props.resize && 'resize-none'
       )
