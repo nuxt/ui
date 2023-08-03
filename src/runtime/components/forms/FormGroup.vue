@@ -1,14 +1,14 @@
 <template>
   <label :class="[ui.wrapper]">
-    <div v-if="label" :class="[ui.label.wrapper, size.value]">
+    <div v-if="label" :class="[ui.label.wrapper, ui.size[size]]">
       <p :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</p>
       <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
     </div>
-    <p v-if="description" :class="[ui.description, size.value]">{{ description }}</p>
+    <p v-if="description" :class="[ui.description, ui.size[size]]">{{ description }}</p>
     <div :class="[label ? ui.container : '']">
       <slot v-bind="{ error: errorMessage }" />
-      <p v-if="errorMessage" :class="[ui.error, size.value]">{{ errorMessage }}</p>
-      <p v-else-if="help" :class="[ui.help, size.value]">{{ help }}</p>
+      <p v-if="errorMessage" :class="[ui.error, ui.size[size]]">{{ errorMessage }}</p>
+      <p v-else-if="help" :class="[ui.help, ui.size[size]]">{{ help }}</p>
     </div>
   </label>
 </template>
@@ -78,7 +78,7 @@ export default defineComponent({
         : formErrors?.value?.find((error) => error.path === props.name)?.message
     })
 
-    const size = computed(() => ui.value.size[props.size ?? appConfig.ui.input.default.size])
+    const size = computed(() => props.size ?? appConfig.ui.input.default.size)
     provide('form-group', {
       size,
       name: computed(() => props.name),
