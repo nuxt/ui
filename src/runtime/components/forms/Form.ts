@@ -26,6 +26,10 @@ export default defineComponent({
         | PropType<(state: any) => Promise<FormError[]>>
         | PropType<(state: any) => FormError[]>,
       default: () => []
+    },
+    disableAutoValidation: {
+      type: Boolean,
+      default: false
     }
   },
   setup (props, { slots, expose }) {
@@ -33,8 +37,10 @@ export default defineComponent({
     const bus = useEventBus<FormEvent>(`form-${seed}`)
 
     bus.on(async (event) => {
-      if (event.type === 'blur' || event.type === 'input') {
-        await validate(event.path, { silent: true }) 
+      if (!props.disableAutoValidation) {
+        if (event.type === 'blur' || event.type === 'input') {
+          await validate(event.path, { silent: true })
+        }
       }
     })
 
@@ -60,7 +66,7 @@ export default defineComponent({
       return errs
     }
 
-    async function validate (path: string, opts: { silent?: boolean } = { silent: false }) {
+    async function validate (path?: string, opts: { silent?: boolean } = { silent: false }) {
       if (path) {
        const otherErrors = errors.value.filter(
           (error) => error.path !== path
@@ -84,6 +90,9 @@ export default defineComponent({
     expose({
       validate,
       errors,
+      setErrors (errs: FormError[]) {
+        errors.value = errs
+      },
       clear (path?: string) {
         if (path) {
           errors.value = errors.value.filter((err) => err.path === path)
