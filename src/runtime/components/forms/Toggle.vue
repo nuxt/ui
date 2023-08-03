@@ -23,7 +23,7 @@ import { defu } from 'defu'
 import { Switch as HSwitch } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -76,7 +76,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defu({}, props.ui, appConfig.ui.toggle))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormBlur } = useFormGroup()
 
     const active = computed({
       get () {
