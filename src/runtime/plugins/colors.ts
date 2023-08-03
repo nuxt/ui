@@ -21,7 +21,14 @@ export default defineNuxtPlugin(() => {
     return `:root {
 ${Object.entries(primary || colors.green).map(([key, value]) => `--color-primary-${key}: ${hexToRgb(value)};`).join('\n')}
 ${Object.entries(gray || colors.cool).map(([key, value]) => `--color-gray-${key}: ${hexToRgb(value)};`).join('\n')}
-}`
+
+--color-primary-default: var(--color-primary-500);
+}
+
+.dark {
+  --color-primary-default: var(--color-primary-400);
+}
+`
   })
 
   // Head

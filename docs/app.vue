@@ -4,9 +4,9 @@
     <UHeader>
       <template #left>
         <NuxtLink to="/getting-started" class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white">
-          <Logo class="w-8 h-8 text-primary-500 dark:text-primary-400" />
+          <Logo class="w-8 h-8 text-primary" />
 
-          <span class="hidden sm:block">NuxtLabs</span><span class="sm:text-primary-500 dark:sm:text-primary-400">UI</span>
+          <span class="hidden sm:block">NuxtLabs</span><span class="sm:text-primary">UI</span>
         </NuxtLink>
       </template>
 
