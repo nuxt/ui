@@ -10,7 +10,7 @@ import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
-import type { FormError, FormEvent, FormEventType } from '../../types'
+import type { FormError, FormEvent, FormEventType, FormSubmitEvent } from '../../types'
 
 export default defineComponent({
   props: {
@@ -42,7 +42,6 @@ export default defineComponent({
     const bus = useEventBus<FormEvent>(`form-${seed}`)
 
     bus.on(async (event) => {
-      console.log(event)
       if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
         await validate(event.path, { silent: true })
       }
@@ -91,11 +90,13 @@ export default defineComponent({
       return props.state
     }
 
-    async function onSubmit () {
+    async function onSubmit (event: SubmitEvent) {
       if (props.validateOn?.includes('submit')) {
         await validate()
       }
-      emit('submit', props.state)
+      const submitEvent = event as FormSubmitEvent<any>
+      submitEvent.data = props.state
+      emit('submit', event)
     }
 
     expose({

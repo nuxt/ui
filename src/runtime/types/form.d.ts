@@ -11,6 +11,8 @@ export interface Form<T> {
   clear(path?: string): void
 }
 
+export type FormSubmitEvent<T> = SubmitEvent & { data: T }
+
 export type FormEventType = 'blur' | 'input' | 'change' | 'submit'
 
 export interface FormEvent {

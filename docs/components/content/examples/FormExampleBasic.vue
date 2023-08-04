@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormError } from '@nuxthq/ui/dist/runtime/types'
+import type { FormError, FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
 
 const state = ref({
   email: undefined,
@@ -16,9 +16,9 @@ const validate = (state: any): FormError[] => {
 
 const form = ref()
 
-async function submit (data) {
+async function submit (event: FormSubmitEvent<any>) {
   // Do something with data
-  console.log(data)
+  console.log(event.data)
 }
 </script>
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { z } from 'zod'
+import { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = z.object({
   email: z.string().email('Invalid email'),
@@ -15,9 +16,9 @@ const state = ref({
 })
 
 const form = ref()
-async function submit (data: Schema) {
+async function submit (event: FormSubmitEvent<Schema>) {
   // Do something with data
-  console.log(data)
+  console.log(event.data)
 }
 </script>
 

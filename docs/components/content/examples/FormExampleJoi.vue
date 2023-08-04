@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Joi from 'joi'
+import { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = Joi.object({
   email: Joi.string().required(),
@@ -16,9 +17,9 @@ const state = ref({
 
 const form = ref()
 
-async function submit (data) {
-  // Do something with data
-  console.log(data)
+async function submit (event: FormSubmitEvent<any>) {
+  // Do something with event.data
+  console.log(event.data)
 }
 </script>
 

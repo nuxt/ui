@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { z } from 'zod'
+import { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
 
 const options = [
   { label: 'Option 1', value: 'option-1' },
@@ -45,9 +46,9 @@ type Schema = z.infer<typeof schema>
 
 const form = ref()
 
-async function submit (data: Schema) {
-  // Do something with data
-  console.log(data)
+async function submit (event: FormSubmitEvent<Schema>) {
+  // Do something with event.data
+  console.log(event.data)
 }
 </script>
 

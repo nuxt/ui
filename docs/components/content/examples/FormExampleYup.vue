@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { object, string, InferType } from 'yup'
+import { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = object({
   email: string().email('Invalid email').required('Required'),
@@ -16,9 +17,9 @@ const state = ref({
   password: undefined
 })
 
-async function submit (data: Schema) {
-  // Do something with data
-  console.log(data)
+async function submit (event: FormSubmitEvent<Schema>) {
+  // Do something with event.data
+  console.log(event.data)
 }
 </script>
 
