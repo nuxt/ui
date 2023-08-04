@@ -8,7 +8,7 @@ export interface Form<T> {
   clear(path?: string): void
   errors: Ref<FormError[]>
   setErrors(errs: FormError[]): void
-  clear(path?: string): void
+  getErrors(path?: string): FormError[]
 }
 
 export type FormSubmitEvent<T> = SubmitEvent & { data: T }
