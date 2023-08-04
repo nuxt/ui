@@ -3,15 +3,15 @@ import { ref } from 'vue'
 import { z } from 'zod'
 
 const schema = z.object({
-  emailZod: z.string().email('Invalid email'),
-  passwordZod: z.string().min(8, 'Must be at least 8 characters')
+  email: z.string().email('Invalid email'),
+  password: z.string().min(8, 'Must be at least 8 characters')
 })
 
 type Schema = z.output<typeof schema>
 
 const state = ref({
-  emailZod: undefined,
-  passwordZod: undefined
+  email: undefined,
+  password: undefined
 })
 
 const form = ref()
@@ -28,12 +28,12 @@ async function submit (data: Schema) {
     :state="state"
     @submit="(value) => submit(value)"
   >
-    <UFormGroup label="Email" name="emailZod">
-      <UInput v-model="state.emailZod" />
+    <UFormGroup label="Email" name="email">
+      <UInput v-model="state.email" />
     </UFormGroup>
 
-    <UFormGroup label="Password" name="passwordZod">
-      <UInput v-model="state.passwordZod" type="password" />
+    <UFormGroup label="Password" name="password">
+      <UInput v-model="state.password" type="password" />
     </UFormGroup>
 
     <UButton type="submit">
