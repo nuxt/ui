@@ -869,6 +869,42 @@ const tabs = {
   }
 }
 
+const steps = {
+  wrapper: 'relative space-y-2',
+  container: 'relative w-full',
+  base: 'focus:outline-none',
+  list: {
+    base: 'relative',
+    background: 'bg-gray-100 dark:bg-gray-800',
+    rounded: 'rounded-lg',
+    shadow: '',
+    padding: 'p-1',
+    height: 'h-10',
+    width: 'w-full',
+    marker: {
+      wrapper: 'top-[4px] left-[4px] duration-200 ease-out focus:outline-none',
+      base: 'w-6 h-6',
+      background: '',
+      active: 'bg-primary',
+      inactive: 'bg-gray-300 dark:bg-gray-700',
+      rounded: 'rounded-full',
+      shadow: 'shadow-sm'
+    },
+    step: {
+      base: 'relative flex flex-col gap-1 items-center justify-center flex-shrink-0 whitespace-nowrap focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
+      background: '',
+      active: 'text-gray-900 dark:text-white',
+      inactive: 'text-gray-500 dark:text-gray-400',
+      height: 'h-8',
+      padding: 'px-3',
+      size: 'text-sm',
+      font: 'font-medium',
+      rounded: 'rounded-md',
+      shadow: ''
+    }
+  }
+}
+
 // Overlays
 
 const modal = {
@@ -1092,6 +1128,7 @@ export default {
     tabs,
     modal,
     slideover,
+    steps,
     popover,
     tooltip,
     contextMenu,
