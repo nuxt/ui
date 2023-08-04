@@ -1,29 +1,38 @@
 import { inject } from 'vue'
 import { UseEventBusReturn, useDebounceFn } from '@vueuse/core'
-import { FormEvent } from '../types'
+import { FormEvent, FormEventType } from '../types'
 
 export const useFormGroup = () => {
     const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
     const formGroup = inject('form-group', undefined)
 
-    const formPath = inject<string | undefined>('form-path', undefined)
     const blurred = ref(false)
-    const emitFormBlur = () => {
-      if (formBus && formPath) {
-        formBus.emit({ type: 'blur', path: formGroup.name.value })
-        blurred.value = true
+
+    function emitFormEvent (type: FormEventType, path: string) {
+      if (formBus) {
+        formBus.emit({ type, path })
       }
     }
 
+    function emitFormBlur () {
+      emitFormEvent('blur', formGroup.name.value)
+      blurred.value = true
+    }
+
+    function emitFormChange () {
+      emitFormEvent('change', formGroup.name.value)
+    }
+
     const emitFormInput = useDebounceFn(() => {
-      if (formBus && formPath && blurred.value) {
-        formBus.emit({ type: 'input', path: formPath })
+      if (blurred.value) {
+        emitFormEvent('input', formGroup.name.value)
       }
-    }, 200)
+    }, 300)
 
     return {
       emitFormBlur,
       emitFormInput,
+      emitFormChange,
       formGroup
     }
 }

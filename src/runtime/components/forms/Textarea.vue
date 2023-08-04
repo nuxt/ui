@@ -111,7 +111,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defu({}, props.ui, appConfig.ui.textarea))
 
-    const { emitFormBlur, formGroup } = useFormGroup()
+    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
     const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const autoFocus = () => {
@@ -150,8 +150,8 @@ export default defineComponent({
     }
 
     const onBlur = (event: FocusEvent) => {
-      emitFormBlur()
       emit('blur', event)
+      emitFormBlur()
     }
 
     onMounted(() => {

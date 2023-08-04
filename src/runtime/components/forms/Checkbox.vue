@@ -100,7 +100,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.checkbox>>(() => defu({}, props.ui, appConfig.ui.checkbox))
 
-    const { emitFormBlur } = useFormGroup()
+    const { emitFormChange } = useFormGroup()
 
     const toggle = computed({
       get () {
@@ -113,7 +113,7 @@ export default defineComponent({
 
     const onChange = (event: Event) => {
       emit('change', event)
-      emitFormBlur()
+      emitFormChange()
     }
 
     const inputClass = computed(() => {

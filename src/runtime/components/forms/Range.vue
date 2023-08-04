@@ -82,7 +82,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.range>>(() => defu({}, props.ui, appConfig.ui.range))
 
-    const { emitFormBlur, formGroup } = useFormGroup()
+    const { emitFormChange, formGroup } = useFormGroup()
     const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const value = computed({
@@ -96,7 +96,7 @@ export default defineComponent({
 
     const onChange = (event: Event) => {
       emit('change', event)
-      emitFormBlur()
+      emitFormChange()
     }
 
     const wrapperClass = computed(() => {

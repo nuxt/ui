@@ -11,7 +11,6 @@
         class="form-radio"
         :class="inputClass"
         v-bind="$attrs"
-        @change="onChange"
       >
     </div>
     <div v-if="label || $slots.label" class="ms-3 text-sm">
@@ -82,14 +81,14 @@ export default defineComponent({
       default: () => appConfig.ui.radio
     }
   },
-  emits: ['update:modelValue', 'change'],
+  emits: ['update:modelValue'],
   setup (props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.radio>>(() => defu({}, props.ui, appConfig.ui.radio))
 
-    const { emitFormBlur } = useFormGroup()
+    const { emitFormChange } = useFormGroup()
 
     const pick = computed({
       get () {
@@ -98,7 +97,7 @@ export default defineComponent({
       set (value) {
         emit('update:modelValue', value)
         if (value) {
-          emitFormBlur()
+          emitFormChange()
         }
       }
     })

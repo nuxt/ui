@@ -76,7 +76,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defu({}, props.ui, appConfig.ui.toggle))
 
-    const { emitFormBlur } = useFormGroup()
+    const { emitFormChange } = useFormGroup()
 
     const active = computed({
       get () {
@@ -84,7 +84,7 @@ export default defineComponent({
       },
       set (value) {
         emit('update:modelValue', value)
-        emitFormBlur()
+        emitFormChange()
       }
     })
 

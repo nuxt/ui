@@ -146,7 +146,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.input>>(() => defu({}, props.ui, appConfig.ui.input))
 
-    const { emitFormBlur, formGroup } = useFormGroup()
+    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
 

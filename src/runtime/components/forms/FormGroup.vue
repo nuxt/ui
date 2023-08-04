@@ -1,16 +1,18 @@
 <template>
-  <label :class="[ui.wrapper]">
-    <div v-if="label" :class="[ui.label.wrapper, ui.size[size]]">
-      <p :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</p>
-      <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
-    </div>
-    <p v-if="description" :class="[ui.description, ui.size[size]]">{{ description }}</p>
-    <div :class="[label ? ui.container : '']">
-      <slot v-bind="{ error: errorMessage }" />
-      <p v-if="errorMessage" :class="[ui.error, ui.size[size]]">{{ errorMessage }}</p>
-      <p v-else-if="help" :class="[ui.help, ui.size[size]]">{{ help }}</p>
-    </div>
-  </label>
+  <div :class="[ui.wrapper]">
+    <label>
+      <div v-if="label" :class="[ui.label.wrapper, ui.size[size]]">
+        <p :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</p>
+        <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
+      </div>
+      <p v-if="description" :class="[ui.description, ui.size[size]]">{{ description }}</p>
+      <div :class="[label ? ui.container : '']">
+        <slot v-bind="{ error: errorMessage }" />
+        <p v-if="errorMessage" :class="[ui.error, ui.size[size]]">{{ errorMessage }}</p>
+        <p v-else-if="help" :class="[ui.help, ui.size[size]]">{{ help }}</p>
+      </div>
+    </label>
+  </div>
 </template>
 
 <script lang="ts">

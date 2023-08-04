@@ -304,7 +304,7 @@ export default defineComponent({
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
-    const { emitFormBlur, formGroup } = useFormGroup()
+    const { emitFormBlur, emitFormChange, formGroup } = useFormGroup()
     const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const query = ref('')
@@ -424,7 +424,7 @@ export default defineComponent({
       }
       emit('update:modelValue', event)
       emit('change', event)
-      emitFormBlur()
+      emitFormChange()
     }
 
     return {

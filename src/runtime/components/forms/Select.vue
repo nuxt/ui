@@ -173,7 +173,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
 
-    const { emitFormBlur, formGroup } = useFormGroup()
+    const { emitFormChange, formGroup } = useFormGroup()
     const size = computed(() => formGroup?.size?.value ?? props.size)
 
 
@@ -182,7 +182,7 @@ export default defineComponent({
     }
 
     const onChange = (event: Event) => {
-      emitFormBlur()
+      emitFormChange()
       emit('change', event)
     }
 

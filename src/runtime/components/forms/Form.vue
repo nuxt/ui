@@ -42,6 +42,7 @@ export default defineComponent({
     const bus = useEventBus<FormEvent>(`form-${seed}`)
 
     bus.on(async (event) => {
+      console.log(event)
       if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
         await validate(event.path, { silent: true })
       }
@@ -100,8 +101,21 @@ export default defineComponent({
     expose({
       validate,
       errors,
-      setErrors (errs: FormError[]) {
+      setErrors (errs: FormError[], path?: string) {
         errors.value = errs
+        if (path) {
+          errors.value = errors.value.filter(
+            (error) => error.path !== path
+          ).concat(errs)
+        } else {
+          errors.value = errs
+        }
+      },
+      getErrors (path?: string) {
+        if (path) {
+          return errors.value.filter((err) => err.path === path)
+        }
+        return errors.value
       },
       clear (path?: string) {
         if (path) {
@@ -111,7 +125,6 @@ export default defineComponent({
         }
       }
     })
-
     return {
       onSubmit
     }
