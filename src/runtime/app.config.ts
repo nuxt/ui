@@ -63,17 +63,18 @@ const avatar = {
   wrapper: 'relative inline-flex items-center justify-center',
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
-  placeholder: 'font-medium leading-none text-gray-900 dark:text-white truncate',
+  text: 'font-medium leading-none text-gray-900 dark:text-white truncate',
+  placeholder: 'font-medium leading-none text-gray-500 dark:text-gray-400 truncate',
   size: {
     '3xs': 'h-4 w-4 text-[8px]',
     '2xs': 'h-5 w-5 text-[10px]',
-    xs: 'h-6 w-6 text-[11px]',
-    sm: 'h-8 w-8 text-xs',
-    md: 'h-10 w-10 text-sm',
-    lg: 'h-12 w-12 text-base',
-    xl: 'h-14 w-14 text-lg',
-    '2xl': 'h-16 w-16 text-xl',
-    '3xl': 'h-20 w-20 text-2xl'
+    xs: 'h-6 w-6 text-xs',
+    sm: 'h-8 w-8 text-sm',
+    md: 'h-10 w-10 text-base',
+    lg: 'h-12 w-12 text-lg',
+    xl: 'h-14 w-14 text-xl',
+    '2xl': 'h-16 w-16 text-2xl',
+    '3xl': 'h-20 w-20 text-3xl'
   },
   chip: {
     base: 'absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium',
@@ -94,6 +95,20 @@ const avatar = {
       xl: 'h-3.5 min-w-[0.875rem] text-[11px] p-1',
       '2xl': 'h-4 min-w-[1rem] text-[12px] p-1',
       '3xl': 'h-5 min-w-[1.25rem] text-[14px] p-1'
+    }
+  },
+  icon: {
+    base: 'text-gray-500 dark:text-gray-400 flex-shrink-0',
+    size: {
+      '3xs': 'h-2 w-2',
+      '2xs': 'h-2.5 w-2.5',
+      xs: 'h-3 w-3',
+      sm: 'h-4 w-4',
+      md: 'h-5 w-5',
+      lg: 'h-6 w-6',
+      xl: 'h-7 w-7',
+      '2xl': 'h-8 w-8',
+      '3xl': 'h-10 w-10'
     }
   },
   default: {

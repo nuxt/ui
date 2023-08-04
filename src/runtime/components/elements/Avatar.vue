@@ -6,9 +6,11 @@
       :alt="alt"
       :src="url"
       v-bind="$attrs"
-      :onerror="() => onError()"
+      @error="onError"
     >
-    <span v-else-if="text || placeholder" :class="ui.placeholder">{{ text || placeholder }}</span>
+    <span v-else-if="text" :class="ui.text">{{ text }}</span>
+    <UIcon v-else-if="icon" :name="icon" :class="iconClass" />
+    <span v-else-if="placeholder" :class="ui.placeholder">{{ placeholder }}</span>
 
     <span v-if="chipColor" :class="chipClass">
       {{ chipText }}
@@ -21,6 +23,7 @@
 import { defineComponent, ref, computed, watch } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
+import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -30,6 +33,9 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  components: {
+    UIcon
+  },
   inheritAttrs: false,
   props: {
     src: {
@@ -41,6 +47,10 @@ export default defineComponent({
       default: null
     },
     text: {
+      type: String,
+      default: null
+    },
+    icon: {
       type: String,
       default: null
     },
@@ -80,10 +90,21 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.avatar>>(() => defu({}, props.ui, appConfig.ui.avatar))
 
+    const url = computed(() => {
+      if (typeof props.src === 'boolean') {
+        return null
+      }
+      return props.src
+    })
+
+    const placeholder = computed(() => {
+      return (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2)
+    })
+
     const wrapperClass = computed(() => {
       return classNames(
         ui.value.wrapper,
-        ui.value.background,
+        (error.value || !url.value) && ui.value.background,
         ui.value.rounded,
         ui.value.size[props.size]
       )
@@ -96,6 +117,13 @@ export default defineComponent({
       )
     })
 
+    const iconClass = computed(() => {
+      return classNames(
+        ui.value.icon.base,
+        ui.value.icon.size[props.size]
+      )
+    })
+
     const chipClass = computed(() => {
       return classNames(
         ui.value.chip.base,
@@ -103,17 +131,6 @@ export default defineComponent({
         ui.value.chip.position[props.chipPosition],
         ui.value.chip.background.replaceAll('{color}', props.chipColor)
       )
-    })
-
-    const url = computed(() => {
-      if (typeof props.src === 'boolean') {
-        return null
-      }
-      return props.src
-    })
-
-    const placeholder = computed(() => {
-      return (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2)
     })
 
     const error = ref(false)
@@ -131,6 +148,7 @@ export default defineComponent({
     return {
       wrapperClass,
       avatarClass,
+      iconClass,
       chipClass,
       url,
       placeholder,
