@@ -46,11 +46,13 @@ export default defineComponent({
           vProps.size = props.size
         }
 
-        vProps.class = node.props.class || ''
-        vProps.class += ` ${classNames(
+        vProps.ui = node.props.ui || {}
+        vProps.ui.wrapper = classNames(
+          appConfig.ui.avatar.wrapper,
+          vProps.ui.wrapper || '',
           ui.value.ring,
           ui.value.margin
-        )}`
+        )
 
         return cloneVNode(node, vProps)
       }
@@ -59,10 +61,13 @@ export default defineComponent({
         return h(Avatar, {
           size: props.size,
           text: `+${children.value.length - max.value}`,
-          class: classNames(
-            ui.value.ring,
-            ui.value.margin
-          )
+          ui: {
+            wrapper: classNames(
+              appConfig.ui.avatar.wrapper,
+              ui.value.ring,
+              ui.value.margin
+            )
+          }
         })
       }
 
