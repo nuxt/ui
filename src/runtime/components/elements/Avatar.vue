@@ -52,7 +52,7 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: null
+      default: () => appConfig.ui.avatar.default.icon
     },
     size: {
       type: String,
