@@ -113,6 +113,7 @@ const avatar = {
   },
   default: {
     size: 'sm',
+    icon: null,
     chipColor: null,
     chipPosition: 'top-right'
   }
