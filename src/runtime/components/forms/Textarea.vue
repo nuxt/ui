@@ -112,6 +112,7 @@ export default defineComponent({
     const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defu({}, props.ui, appConfig.ui.textarea))
 
     const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const autoFocus = () => {
@@ -172,7 +173,7 @@ export default defineComponent({
     })
 
     const textareaClass = computed(() => {
-      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+      const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
       return classNames(
         ui.value.base,
@@ -180,7 +181,7 @@ export default defineComponent({
         ui.value.placeholder,
         ui.value.size[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
-        variant?.replaceAll('{color}', props.color),
+        variant?.replaceAll('{color}', color.value),
         !props.resize && 'resize-none'
       )
     })

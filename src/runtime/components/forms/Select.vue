@@ -174,6 +174,7 @@ export default defineComponent({
     const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
 
     const { emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
 
 
@@ -239,14 +240,14 @@ export default defineComponent({
     })
 
     const selectClass = computed(() => {
-      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+      const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
       return classNames(
         ui.value.base,
         ui.value.rounded,
         ui.value.size[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
-        variant?.replaceAll('{color}', props.color),
+        variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
       )
@@ -287,7 +288,7 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
         props.loading && 'animate-spin'
       )
@@ -304,7 +305,7 @@ export default defineComponent({
     const trailingIconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
         props.loading && !isLeading.value && 'animate-spin'
       )

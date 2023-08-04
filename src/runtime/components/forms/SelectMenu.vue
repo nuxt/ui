@@ -305,13 +305,14 @@ export default defineComponent({
 
     const [trigger, container] = usePopper(popper.value)
     const { emitFormBlur, emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
 
     const selectClass = computed(() => {
-      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+      const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
       return classNames(
         ui.value.base,
@@ -320,7 +321,7 @@ export default defineComponent({
         ui.value.size[size.value],
         ui.value.gap[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
-        variant?.replaceAll('{color}', props.color),
+        variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value],
         'inline-flex items-center'
@@ -362,7 +363,7 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
         props.loading && 'animate-spin'
       )
@@ -379,7 +380,7 @@ export default defineComponent({
     const trailingIconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
+        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
         props.loading && !isLeading.value && 'animate-spin'
       )

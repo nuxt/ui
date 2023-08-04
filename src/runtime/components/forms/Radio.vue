@@ -88,7 +88,8 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.radio>>(() => defu({}, props.ui, appConfig.ui.radio))
 
-    const { emitFormChange } = useFormGroup()
+    const { emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
 
     const pick = computed({
       get () {
@@ -107,8 +108,8 @@ export default defineComponent({
         ui.value.base,
         ui.value.background,
         ui.value.border,
-        ui.value.ring.replaceAll('{color}', props.color),
-        ui.value.color.replaceAll('{color}', props.color)
+        ui.value.ring.replaceAll('{color}', color.value),
+        ui.value.color.replaceAll('{color}', color.value)
       )
     })
 

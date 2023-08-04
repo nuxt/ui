@@ -83,6 +83,7 @@ export default defineComponent({
     const ui = computed<Partial<typeof appConfig.ui.range>>(() => defu({}, props.ui, appConfig.ui.range))
 
     const { emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const value = computed({
@@ -111,7 +112,7 @@ export default defineComponent({
         ui.value.base,
         ui.value.background,
         ui.value.rounded,
-        ui.value.ring.replaceAll('{color}', props.color),
+        ui.value.ring.replaceAll('{color}', color.value),
         ui.value.size[size.value]
       )
     })
@@ -120,7 +121,7 @@ export default defineComponent({
       return classNames(
         ui.value.thumb.base,
         // Intermediate class to allow thumb ring or background color (set to `current`) as it's impossible to safelist with arbitrary values
-        ui.value.thumb.color.replaceAll('{color}', props.color),
+        ui.value.thumb.color.replaceAll('{color}', color.value),
         ui.value.thumb.ring,
         ui.value.thumb.background,
         ui.value.thumb.size[size.value]
@@ -140,7 +141,7 @@ export default defineComponent({
       return classNames(
         ui.value.progress.base,
         ui.value.progress.rounded,
-        ui.value.progress.background.replaceAll('{color}', props.color),
+        ui.value.progress.background.replaceAll('{color}', color.value),
         ui.value.progress.size[size.value]
       )
     })

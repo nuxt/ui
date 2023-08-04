@@ -76,7 +76,8 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defu({}, props.ui, appConfig.ui.toggle))
 
-    const { emitFormChange } = useFormGroup()
+    const { emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
 
     const active = computed({
       get () {
@@ -92,20 +93,20 @@ export default defineComponent({
       return classNames(
         ui.value.base,
         ui.value.rounded,
-        ui.value.ring.replaceAll('{color}', props.color),
-        (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', props.color)
+        ui.value.ring.replaceAll('{color}', color.value),
+        (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', color.value)
       )
     })
 
     const onIconClass = computed(() => {
       return classNames(
-        ui.value.icon.on.replaceAll('{color}', props.color)
+        ui.value.icon.on.replaceAll('{color}', color.value)
       )
     })
 
     const offIconClass = computed(() => {
       return classNames(
-        ui.value.icon.off.replaceAll('{color}', props.color)
+        ui.value.icon.off.replaceAll('{color}', color.value)
       )
     })
 
