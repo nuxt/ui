@@ -1,6 +1,8 @@
 {
     "recommendations": [
         "yoavbls.pretty-ts-errors",
-        "bradlc.vscode-tailwindcss"
+        "bradlc.vscode-tailwindcss",
+        "vue.volar",
+        "vue.vscode-typescript-vue-plugin"
     ]
 }
