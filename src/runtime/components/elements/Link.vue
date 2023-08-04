@@ -15,7 +15,7 @@
       :role="disabled ? 'link' : undefined"
       :rel="rel"
       :target="target"
-      :class="resolveLinkClass(route, { isActive, isExactActive })"
+      :class="resolveLinkClass(route, $route, { isActive, isExactActive })"
       @click="(e) => !isExternal && navigate(e)"
     >
       <slot v-bind="{ isActive: exact ? isExactActive : isActive }" />
@@ -27,7 +27,6 @@
 import { isEqual } from 'lodash-es'
 import { defineComponent } from 'vue'
 import { NuxtLink } from '#components'
-import { useRoute } from '#imports'
 
 export default defineComponent({
   inheritAttrs: false,
@@ -59,11 +58,11 @@ export default defineComponent({
     }
   },
   setup (props) {
-    function resolveLinkClass (route, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
-      if (props.exactQuery && !isEqual(route.query, useRoute().query)) {
+    function resolveLinkClass (route, $route, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
+      if (props.exactQuery && !isEqual(route.query, $route.query)) {
         return props.inactiveClass
       }
-      if (props.exactHash && route.hash !== useRoute().hash) {
+      if (props.exactHash && route.hash !== $route.hash) {
         return props.inactiveClass
       }
 
