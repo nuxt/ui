@@ -60,7 +60,7 @@ const table = {
 // Elements
 
 const avatar = {
-  wrapper: 'relative inline-flex items-center justify-center',
+  wrapper: 'relative inline-flex items-center justify-center flex-shrink-0',
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
   text: 'font-medium leading-none text-gray-900 dark:text-white truncate',
