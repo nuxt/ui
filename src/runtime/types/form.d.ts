@@ -4,7 +4,7 @@ export interface FormError {
 }
 
 export interface Form<T> {
-  async validate(): T
+  validate(): Promise<T>
 }
 
 export interface FormEvent {
