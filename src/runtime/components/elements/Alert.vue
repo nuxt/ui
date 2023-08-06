@@ -76,7 +76,7 @@ export default defineComponent({
       default: () => appConfig.ui.alert.default.closeButton
     },
     actions: {
-      type: Array as PropType<Button & { click: Function }[]>,
+      type: Array as PropType<(Button & { click: Function })[]>,
       default: () => []
     },
     color: {
