@@ -878,6 +878,11 @@ export const tabs = {
   }
 }
 
+const breadcrumb = {
+  wrapper: '',
+  container: ''
+}
+
 // Overlays
 
 export const modal = {
@@ -1070,4 +1075,43 @@ export const notifications = {
   position: 'bottom-0 end-0',
   width: 'w-full sm:w-96',
   container: 'px-4 sm:px-6 py-6 space-y-3 overflow-y-auto'
+}
+
+export default {
+  ui: {
+    table,
+    avatar,
+    avatarGroup,
+    badge,
+    button,
+    buttonGroup,
+    dropdown,
+    kbd,
+    accordion,
+    alert,
+    input,
+    formGroup,
+    textarea,
+    select,
+    selectMenu,
+    checkbox,
+    radio,
+    toggle,
+    range,
+    card,
+    container,
+    skeleton,
+    verticalNavigation,
+    commandPalette,
+    pagination,
+    tabs,
+    breadcrumb,
+    modal,
+    slideover,
+    popover,
+    tooltip,
+    contextMenu,
+    notification,
+    notifications
+  }
 }
