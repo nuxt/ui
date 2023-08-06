@@ -1,8 +1,11 @@
 import { provide, ref, type PropType, h, defineComponent } from 'vue'
 import { useEventBus } from '@vueuse/core'
-import type { ZodSchema, ZodError } from 'zod'
+import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
-import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
+import type {
+  ObjectSchema as YupObjectSchema,
+  ValidationError as YupError
+} from 'yup'
 import type { FormError, FormEvent } from '../../types'
 
 export default defineComponent({
@@ -19,7 +22,9 @@ export default defineComponent({
       required: true
     },
     validate: {
-      type: Function as PropType<(state: any) => Promise<FormError[]>> | PropType<(state: any) => FormError[]>,
+      type: Function as
+        | PropType<(state: any) => Promise<FormError[]>>
+        | PropType<(state: any) => FormError[]>,
       default: () => []
     }
   },
@@ -111,27 +116,18 @@ function isZodSchema (schema: any): schema is ZodSchema {
   return schema.parse !== undefined
 }
 
-function isZodError (error: any): error is ZodError {
-  return error.issues !== undefined
-}
-
 async function getZodErrors (
   state: any,
   schema: ZodSchema
 ): Promise<FormError[]> {
-  try {
-    schema.parse(state)
-    return []
-  } catch (error) {
-    if (isZodError(error)) {
-      return error.issues.map((issue) => ({
-        path: issue.path.join('.'),
-        message: issue.message
-      }))
-    } else {
-      throw error
-    }
+  const result = await schema.safeParseAsync(state)
+  if (result.success === false) {
+    return result.error.issues.map((issue) => ({
+      path: issue.path.join('.'),
+      message: issue.message
+    }))
   }
+  return []
 }
 
 function isJoiSchema (schema: any): schema is JoiSchema {
