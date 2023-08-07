@@ -230,7 +230,7 @@ export default defineComponent({
       }
     }
 
-    const getRowData = (row: Object, rowKey: string | string[]) => {
+    function getRowData (row: Object, rowKey: string | string[]) {
       return get(row, rowKey, 'Failed to get cell value')
     }
 
