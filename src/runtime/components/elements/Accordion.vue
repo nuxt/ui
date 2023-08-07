@@ -99,11 +99,9 @@ export default defineComponent({
 
     const uiButton = computed<Partial<typeof appConfig.ui.button>>(() => appConfig.ui.button)
 
-    const buttonRefs = ref<Function[]>([])
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
-    const wrapperClass = computed(() => {
-      return twMerge(ui.value.wrapper, attrs.class as string)
-    })
+    const buttonRefs = ref<Function[]>([])
 
     function closeOthers (itemIndex: number) {
       if (!props.items[itemIndex].closeOthers && props.multiple) {
@@ -145,8 +143,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       uiButton,
-      buttonRefs,
       wrapperClass,
+      buttonRefs,
       closeOthers,
       omit,
       onEnter,

@@ -4,6 +4,7 @@
     :name="name"
     :disabled="disabled"
     :class="switchClass"
+    v-bind="attrs"
   >
     <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
       <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
@@ -20,8 +21,10 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Switch as HSwitch } from '@headlessui/vue'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
-import { classNames, defuTwMerge } from '../../utils'
+import { defuTwMerge } from '../../utils'
 import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -35,6 +38,7 @@ export default defineComponent({
     HSwitch,
     UIcon
   },
+  inheritAttrs: false,
   props: {
     name: {
       type: String,
@@ -69,7 +73,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -88,27 +92,28 @@ export default defineComponent({
     })
 
     const switchClass = computed(() => {
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.rounded,
         ui.value.ring.replaceAll('{color}', props.color),
         (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', props.color)
-      )
+      ), attrs.class as string)
     })
 
     const onIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.on.replaceAll('{color}', props.color)
       )
     })
 
     const offIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.off.replaceAll('{color}', props.color)
       )
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       active,

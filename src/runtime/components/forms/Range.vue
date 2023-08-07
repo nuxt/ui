@@ -11,7 +11,7 @@
       :step="step"
       type="range"
       :class="[inputClass, thumbClass, trackClass]"
-      v-bind="$attrs"
+      v-bind="attrs"
       @change="onChange"
     >
 
@@ -22,7 +22,9 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { classNames, defuTwMerge } from '../../utils'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
+import { defuTwMerge } from '../../utils'
 import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -70,13 +72,17 @@ export default defineComponent({
         return appConfig.ui.colors.includes(value)
       }
     },
+    inputClass: {
+      type: String,
+      default: null
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.range>>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -99,24 +105,24 @@ export default defineComponent({
     }
 
     const wrapperClass = computed(() => {
-      return classNames(
+      return twMerge(twJoin(
         ui.value.wrapper,
         ui.value.size[props.size]
-      )
+      ), attrs.class as string)
     })
 
     const inputClass = computed(() => {
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.background,
         ui.value.rounded,
         ui.value.ring.replaceAll('{color}', props.color),
         ui.value.size[props.size]
-      )
+      ), props.inputClass)
     })
 
     const thumbClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.thumb.base,
         // Intermediate class to allow thumb ring or background color (set to `current`) as it's impossible to safelist with arbitrary values
         ui.value.thumb.color.replaceAll('{color}', props.color),
@@ -127,7 +133,7 @@ export default defineComponent({
     })
 
     const trackClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.track.base,
         ui.value.track.background,
         ui.value.track.rounded,
@@ -136,7 +142,7 @@ export default defineComponent({
     })
 
     const progressClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.progress.base,
         ui.value.progress.rounded,
         ui.value.progress.background.replaceAll('{color}', props.color),
@@ -154,10 +160,12 @@ export default defineComponent({
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       value,
       wrapperClass,
+      // eslint-disable-next-line vue/no-dupe-keys
       inputClass,
       thumbClass,
       trackClass,

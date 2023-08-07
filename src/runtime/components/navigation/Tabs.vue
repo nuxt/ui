@@ -1,5 +1,12 @@
 <template>
-  <HTabGroup :vertical="orientation === 'vertical'" :selected-index="selectedIndex" as="div" :class="ui.wrapper" @change="onChange">
+  <HTabGroup
+    :vertical="orientation === 'vertical'"
+    :selected-index="selectedIndex"
+    as="div"
+    :class="wrapperClass"
+    v-bind="attrs"
+    @change="onChange"
+  >
     <HTabList
       ref="listRef"
       :class="[ui.list.base, ui.list.background, ui.list.rounded, ui.list.shadow, ui.list.padding, ui.list.width, orientation === 'horizontal' && ui.list.height, orientation === 'horizontal' && 'inline-grid items-center']"
@@ -45,6 +52,8 @@ import { ref, computed, watch, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel } from '@headlessui/vue'
 import { useResizeObserver } from '@vueuse/core'
+import { omit } from 'lodash-es'
+import { twMerge } from 'tailwind-merge'
 import { defuTwMerge } from '../../utils'
 import type { TabItem } from '../../types/tabs'
 import { useAppConfig } from '#imports'
@@ -62,6 +71,7 @@ export default defineComponent({
     HTabPanels,
     HTabPanel
   },
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: Number,
@@ -86,7 +96,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup (props, { attrs, emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -97,6 +107,8 @@ export default defineComponent({
     const markerRef = ref<HTMLElement>()
 
     const selectedIndex = ref(props.modelValue || props.defaultIndex)
+
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     // Methods
 
@@ -136,12 +148,14 @@ export default defineComponent({
     onMounted(() => calcMarkerSize(selectedIndex.value))
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       listRef,
       itemRefs,
       markerRef,
       selectedIndex,
+      wrapperClass,
       onChange
     }
   }

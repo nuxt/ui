@@ -11,6 +11,7 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     size: {
       type: String,

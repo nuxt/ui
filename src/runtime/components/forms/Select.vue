@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="wrapperClass">
     <select
       :id="name"
       :name="name"
@@ -8,7 +8,7 @@
       :disabled="disabled || loading"
       class="form-select"
       :class="selectClass"
-      v-bind="$attrs"
+      v-bind="attrs"
       @input="onInput"
       @change="onChange"
     >
@@ -56,9 +56,10 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType, ComputedRef } from 'vue'
-import { get } from 'lodash-es'
+import { get, omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
-import { classNames, defuTwMerge } from '../../utils'
+import { defuTwMerge } from '../../utils'
 import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -161,13 +162,17 @@ export default defineComponent({
       type: String,
       default: 'value'
     },
+    selectClass: {
+      type: String,
+      default: null
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.select>>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit, slots }) {
+  setup (props, { emit, attrs, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -236,10 +241,12 @@ export default defineComponent({
       return foundOption[props.valueAttribute]
     })
 
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+
     const selectClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.rounded,
         ui.value.size[props.size],
@@ -247,7 +254,7 @@ export default defineComponent({
         variant?.replaceAll('{color}', props.color),
         (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size]
-      )
+      ), props.selectClass)
     })
 
     const isLeading = computed(() => {
@@ -275,7 +282,7 @@ export default defineComponent({
     })
 
     const leadingWrapperIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.leading.wrapper,
         ui.value.icon.leading.pointer,
         ui.value.icon.leading.padding[props.size]
@@ -283,7 +290,7 @@ export default defineComponent({
     })
 
     const leadingIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
         ui.value.icon.size[props.size],
@@ -292,7 +299,7 @@ export default defineComponent({
     })
 
     const trailingWrapperIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.trailing.wrapper,
         ui.value.icon.trailing.pointer,
         ui.value.icon.trailing.padding[props.size]
@@ -300,7 +307,7 @@ export default defineComponent({
     })
 
     const trailingIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
         ui.value.icon.size[props.size],
@@ -309,12 +316,15 @@ export default defineComponent({
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       normalizedOptionsWithPlaceholder,
       normalizedValue,
       isLeading,
       isTrailing,
+      wrapperClass,
+      // eslint-disable-next-line vue/no-dupe-keys
       selectClass,
       leadingIconName,
       leadingIconClass,

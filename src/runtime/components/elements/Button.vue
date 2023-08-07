@@ -23,7 +23,7 @@ import { omit } from 'lodash-es'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
-import { classNames, defuTwMerge } from '../../utils'
+import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -171,7 +171,7 @@ export default defineComponent({
     })
 
     const leadingIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         ui.value.icon.size[props.size],
         props.loading && 'animate-spin'
@@ -179,7 +179,7 @@ export default defineComponent({
     })
 
     const trailingIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         ui.value.icon.size[props.size],
         props.loading && !isLeading.value && 'animate-spin'

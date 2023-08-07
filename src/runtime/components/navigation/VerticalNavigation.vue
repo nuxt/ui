@@ -1,5 +1,5 @@
 <template>
-  <nav :class="ui.wrapper">
+  <nav :class="wrapperClass" v-bind="attrs">
     <ULink
       v-for="(link, index) of links"
       v-slot="{ isActive }"
@@ -41,6 +41,7 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { omit } from 'lodash-es'
+import { twMerge } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULink from '../elements/Link.vue'
@@ -59,6 +60,7 @@ export default defineComponent({
     UAvatar,
     ULink
   },
+  inheritAttrs: false,
   props: {
     links: {
       type: Array as PropType<VerticalNavigationLink[]>,
@@ -69,15 +71,19 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup (props, { attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.verticalNavigation>>(() => defuTwMerge({}, props.ui, appConfig.ui.verticalNavigation))
 
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      wrapperClass,
       omit
     }
   }

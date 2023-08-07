@@ -145,9 +145,7 @@ export default defineComponent({
       return props.mode === 'hover' ? { paddingTop: `${offsetDistance}px`, paddingBottom: `${offsetDistance}px` } : {}
     })
 
-    const wrapperClass = computed(() => {
-      return twMerge(ui.value.wrapper, attrs.class as string)
-    })
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     function onMouseOver () {
       if (props.mode !== 'hover' || !menuApi.value) {

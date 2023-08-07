@@ -2,7 +2,7 @@
   <span :class="wrapperClass">
     <img
       v-if="url && !error"
-      :class="avatarClass"
+      :class="imgClass"
       :alt="alt"
       :src="url"
       v-bind="attrs"
@@ -80,6 +80,10 @@ export default defineComponent({
       type: [String, Number],
       default: null
     },
+    imgClass: {
+      type: String,
+      default: ''
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.avatar>>,
       default: () => ({})
@@ -111,11 +115,11 @@ export default defineComponent({
       ), attrs.class as string)
     })
 
-    const avatarClass = computed(() => {
-      return twJoin(
+    const imgClass = computed(() => {
+      return twMerge(twJoin(
         ui.value.rounded,
         ui.value.size[props.size]
-      )
+      ), props.imgClass)
     })
 
     const iconClass = computed(() => {
@@ -149,7 +153,8 @@ export default defineComponent({
     return {
       attrs: omit(attrs, ['class']),
       wrapperClass,
-      avatarClass,
+      // eslint-disable-next-line vue/no-dupe-keys
+      imgClass,
       iconClass,
       chipClass,
       url,

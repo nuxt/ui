@@ -9,10 +9,6 @@ export const defuTwMerge = createDefu((obj, key, value) => {
   }
 })
 
-export function classNames (...classes: any[string]) {
-  return classes.filter(Boolean).join(' ')
-}
-
 export const hexToRgb = (hex: string) => {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i

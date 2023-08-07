@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="wrapperClass">
     <div class="flex items-center h-5">
       <input
         :id="`${name}-${value}`"
@@ -11,7 +11,7 @@
         type="radio"
         class="form-radio"
         :class="inputClass"
-        v-bind="$attrs"
+        v-bind="attrs"
         @change="onChange"
       >
     </div>
@@ -30,7 +30,9 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { classNames, defuTwMerge } from '../../utils'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
+import { defuTwMerge } from '../../utils'
 import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -77,13 +79,17 @@ export default defineComponent({
         return appConfig.ui.colors.includes(value)
       }
     },
+    inputClass: {
+      type: String,
+      default: null
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.radio>>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -103,20 +109,25 @@ export default defineComponent({
       }
     })
 
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+
     const inputClass = computed(() => {
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.background,
         ui.value.border,
         ui.value.ring.replaceAll('{color}', props.color),
         ui.value.color.replaceAll('{color}', props.color)
-      )
+      ), props.inputClass)
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       pick,
+      wrapperClass,
+      // eslint-disable-next-line vue/no-dupe-keys
       inputClass
     }
   }

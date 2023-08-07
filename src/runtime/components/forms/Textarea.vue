@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="wrapperClass">
     <textarea
       :id="name"
       ref="textarea"
@@ -11,7 +11,7 @@
       :placeholder="placeholder"
       class="form-textarea"
       :class="textareaClass"
-      v-bind="$attrs"
+      v-bind="attrs"
       @input="onInput"
       @blur="onBlur"
     />
@@ -21,7 +21,9 @@
 <script lang="ts">
 import { ref, computed, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { classNames, defuTwMerge } from '../../utils'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
+import { defuTwMerge } from '../../utils'
 import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -97,13 +99,17 @@ export default defineComponent({
         ].includes(value)
       }
     },
+    textareaClass: {
+      type: String,
+      default: null
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.textarea>>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'blur'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
     // TODO: Remove
@@ -169,10 +175,12 @@ export default defineComponent({
       }, 100)
     })
 
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+
     const textareaClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.rounded,
         ui.value.placeholder,
@@ -180,13 +188,16 @@ export default defineComponent({
         props.padded ? ui.value.padding[props.size] : 'p-0',
         variant?.replaceAll('{color}', props.color),
         !props.resize && 'resize-none'
-      )
+      ), props.textareaClass)
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       textarea,
+      wrapperClass,
+      // eslint-disable-next-line vue/no-dupe-keys
       textareaClass,
       onInput,
       onBlur

@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template">
-    <HDialog :class="ui.wrapper" @close="(e) => !preventClose && close(e)">
+    <HDialog :class="wrapperClass" v-bind="attrs" @close="(e) => !preventClose && close(e)">
       <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
@@ -21,6 +21,8 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
+import { omit } from 'lodash-es'
+import { twMerge } from 'tailwind-merge'
 import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
@@ -64,7 +66,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'close'],
-  setup (props, { emit }) {
+  setup (props, { attrs, emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -78,6 +80,8 @@ export default defineComponent({
         emit('update:modelValue', value)
       }
     })
+
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     const transitionClass = computed(() => {
       if (!props.transition) {
@@ -96,9 +100,11 @@ export default defineComponent({
     }
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       isOpen,
+      wrapperClass,
       transitionClass,
       close
     }

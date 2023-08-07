@@ -1,5 +1,5 @@
 <template>
-  <div ref="trigger" :class="ui.wrapper" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
+  <div ref="trigger" :class="wrapperClass" v-bind="attrs" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
     <slot :open="open">
       Hover
     </slot>
@@ -27,6 +27,8 @@
 import { computed, ref, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
+import { omit } from 'lodash-es'
+import { twMerge } from 'tailwind-merge'
 import UKbd from '../elements/Kbd.vue'
 import { usePopper } from '../../composables/usePopper'
 import { defuTwMerge } from '../../utils'
@@ -42,6 +44,7 @@ export default defineComponent({
   components: {
     UKbd
   },
+  inheritAttrs: false,
   props: {
     text: {
       type: String,
@@ -72,7 +75,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup (props, { attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
@@ -86,6 +89,8 @@ export default defineComponent({
 
     let openTimeout: NodeJS.Timeout | null = null
     let closeTimeout: NodeJS.Timeout | null = null
+
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     // Methods
 
@@ -122,11 +127,13 @@ export default defineComponent({
     }
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       trigger,
       container,
       open,
+      wrapperClass,
       onMouseOver,
       onMouseLeave
     }
