@@ -133,7 +133,7 @@ import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
-import { classNames } from '../../utils'
+import { classNames, defuTwMerge } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import { useFormEvents } from '../../composables/useFormEvents'
 import type { PopperOptions } from '../../types'
@@ -286,11 +286,11 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.select>>,
-      default: () => appConfig.ui.select
+      default: () => ({})
     },
     uiMenu: {
       type: Object as PropType<Partial<typeof appConfig.ui.selectMenu>>,
-      default: () => appConfig.ui.selectMenu
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'open', 'close', 'change'],
@@ -298,8 +298,8 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
-    const uiMenu = computed<Partial<typeof appConfig.ui.selectMenu>>(() => defu({}, props.uiMenu, appConfig.ui.selectMenu))
+    const ui = computed<Partial<typeof appConfig.ui.select>>(() => defuTwMerge({}, props.ui, appConfig.ui.select))
+    const uiMenu = computed<Partial<typeof appConfig.ui.selectMenu>>(() => defuTwMerge({}, props.uiMenu, appConfig.ui.selectMenu))
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 

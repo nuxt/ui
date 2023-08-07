@@ -19,7 +19,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
+import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -36,14 +36,14 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.card>>,
-      default: () => appConfig.ui.card
+      default: () => ({})
     }
   },
   setup (props) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.card>>(() => defu({}, props.ui, appConfig.ui.card))
+    const ui = computed<Partial<typeof appConfig.ui.card>>(() => defuTwMerge({}, props.ui, appConfig.ui.card))
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

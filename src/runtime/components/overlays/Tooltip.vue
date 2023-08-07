@@ -29,6 +29,7 @@ import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UKbd from '../elements/Kbd.vue'
 import { usePopper } from '../../composables/usePopper'
+import { defuTwMerge } from '../../utils'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -68,14 +69,14 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.tooltip>>,
-      default: () => appConfig.ui.tooltip
+      default: () => ({})
     }
   },
   setup (props) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.tooltip>>(() => defu({}, props.ui, appConfig.ui.tooltip))
+    const ui = computed<Partial<typeof appConfig.ui.tooltip>>(() => defuTwMerge({}, props.ui, appConfig.ui.tooltip))
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 

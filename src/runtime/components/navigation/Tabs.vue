@@ -45,7 +45,7 @@ import { ref, computed, watch, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel } from '@headlessui/vue'
 import { useResizeObserver } from '@vueuse/core'
-import { defu } from 'defu'
+import { defuTwMerge } from '../../utils'
 import type { TabItem } from '../../types/tabs'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -82,7 +82,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.tabs>>,
-      default: () => appConfig.ui.tabs
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
@@ -90,7 +90,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.tabs>>(() => defu({}, props.ui, appConfig.ui.tabs))
+    const ui = computed<Partial<typeof appConfig.ui.tabs>>(() => defuTwMerge({}, props.ui, appConfig.ui.tabs))
 
     const listRef = ref<HTMLElement>()
     const itemRefs = ref<HTMLElement[]>([])

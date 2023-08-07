@@ -1,7 +1,6 @@
 import { h, cloneVNode, computed, defineComponent, provide, inject } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
-import { getSlotsChildren } from '../../utils'
+import { defuTwMerge, getSlotsChildren } from '../../utils'
 import type { FormError } from '../../types'
 import { useAppConfig } from '#imports'
 
@@ -50,14 +49,14 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.formGroup>>,
-      default: () => appConfig.ui.formGroup
+      default: () => ({})
     }
   },
   setup (props, { slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.formGroup>>(() => defu({}, props.ui, appConfig.ui.formGroup))
+    const ui = computed<Partial<typeof appConfig.ui.formGroup>>(() => defuTwMerge({}, props.ui, appConfig.ui.formGroup))
 
     provide('form-path', props.name)
     const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)

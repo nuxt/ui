@@ -17,8 +17,8 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { WritableComputedRef, PropType } from 'vue'
-import { defu } from 'defu'
 import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
+import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -61,7 +61,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.slideover>>,
-      default: () => appConfig.ui.slideover
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close'],
@@ -69,7 +69,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.slideover>>(() => defu({}, props.ui, appConfig.ui.slideover))
+    const ui = computed<Partial<typeof appConfig.ui.slideover>>(() => defuTwMerge({}, props.ui, appConfig.ui.slideover))
 
     const isOpen: WritableComputedRef<boolean> = computed({
       get () {

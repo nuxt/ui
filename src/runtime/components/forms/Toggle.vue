@@ -19,10 +19,9 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
 import { Switch as HSwitch } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
-import { classNames } from '../../utils'
+import { classNames, defuTwMerge } from '../../utils'
 import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -66,7 +65,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.toggle>>,
-      default: () => appConfig.ui.toggle
+      default: () => ({})
     }
   },
   emits: ['update:modelValue'],
@@ -74,7 +73,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defu({}, props.ui, appConfig.ui.toggle))
+    const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defuTwMerge({}, props.ui, appConfig.ui.toggle))
 
     const { emitFormBlur } = useFormEvents()
 

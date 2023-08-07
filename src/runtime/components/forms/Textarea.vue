@@ -21,8 +21,7 @@
 <script lang="ts">
 import { ref, computed, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
-import { classNames } from '../../utils'
+import { classNames, defuTwMerge } from '../../utils'
 import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -100,7 +99,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.textarea>>,
-      default: () => appConfig.ui.textarea
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'blur'],
@@ -110,7 +109,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defu({}, props.ui, appConfig.ui.textarea))
+    const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defuTwMerge({}, props.ui, appConfig.ui.textarea))
 
     const { emitFormBlur } = useFormEvents()
 

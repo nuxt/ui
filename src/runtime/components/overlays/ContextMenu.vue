@@ -15,6 +15,7 @@ import { defu } from 'defu'
 import { onClickOutside } from '@vueuse/core'
 import type { VirtualElement } from '@popperjs/core'
 import { usePopper } from '../../composables/usePopper'
+import { defuTwMerge } from '../../utils'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -39,7 +40,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.contextMenu>>,
-      default: () => appConfig.ui.contextMenu
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close'],
@@ -47,7 +48,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.contextMenu>>(() => defu({}, props.ui, appConfig.ui.contextMenu))
+    const ui = computed<Partial<typeof appConfig.ui.contextMenu>>(() => defuTwMerge({}, props.ui, appConfig.ui.contextMenu))
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 

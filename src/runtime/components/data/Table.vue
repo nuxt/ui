@@ -72,6 +72,7 @@ import type { PropType } from 'vue'
 import { capitalize, orderBy } from 'lodash-es'
 import { defu } from 'defu'
 import { omit } from 'lodash-es'
+import { defuTwMerge } from '../../utils'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -136,7 +137,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.table>>,
-      default: () => appConfig.ui.table
+      default: () => ({})
     }
   },
   emits: ['update:modelValue'],
@@ -144,7 +145,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.table>>(() => defu({}, props.ui, appConfig.ui.table))
+    const ui = computed<Partial<typeof appConfig.ui.table>>(() => defuTwMerge({}, props.ui, appConfig.ui.table))
 
     const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: capitalize(key), sortable: false })))
 

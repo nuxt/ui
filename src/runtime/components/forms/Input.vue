@@ -34,10 +34,9 @@
 <script lang="ts">
 import { ref, computed, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import { useFormEvents } from '../../composables/useFormEvents'
-import { classNames } from '../../utils'
+import { classNames, defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -137,7 +136,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.input>>,
-      default: () => appConfig.ui.input
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'blur'],
@@ -145,7 +144,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.input>>(() => defu({}, props.ui, appConfig.ui.input))
+    const ui = computed<Partial<typeof appConfig.ui.input>>(() => defuTwMerge({}, props.ui, appConfig.ui.input))
 
     const { emitFormBlur } = useFormEvents()
 

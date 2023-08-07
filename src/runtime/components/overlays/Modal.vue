@@ -21,8 +21,8 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
 import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
+import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -60,7 +60,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.modal>>,
-      default: () => appConfig.ui.modal
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close'],
@@ -68,7 +68,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.modal>>(() => defu({}, props.ui, appConfig.ui.modal))
+    const ui = computed<Partial<typeof appConfig.ui.modal>>(() => defuTwMerge({}, props.ui, appConfig.ui.modal))
 
     const isOpen = computed({
       get () {

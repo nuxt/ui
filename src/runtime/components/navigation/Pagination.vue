@@ -40,8 +40,8 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
 import UButton from '../elements/Button.vue'
+import { defuTwMerge } from '../../utils'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -103,7 +103,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.pagination>>,
-      default: () => appConfig.ui.pagination
+      default: () => ({})
     }
   },
   emits: ['update:modelValue'],
@@ -111,7 +111,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.pagination>>(() => defu({}, props.ui, appConfig.ui.pagination))
+    const ui = computed<Partial<typeof appConfig.ui.pagination>>(() => defuTwMerge({}, props.ui, appConfig.ui.pagination))
 
     const currentPage = computed({
       get () {

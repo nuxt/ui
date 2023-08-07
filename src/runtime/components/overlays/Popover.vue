@@ -31,6 +31,7 @@ import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel } from '@headlessui/vue'
 import { usePopper } from '../../composables/usePopper'
+import { defuTwMerge } from '../../utils'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -71,14 +72,14 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.popover>>,
-      default: () => appConfig.ui.popover
+      default: () => ({})
     }
   },
   setup (props) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.popover>>(() => defu({}, props.ui, appConfig.ui.popover))
+    const ui = computed<Partial<typeof appConfig.ui.popover>>(() => defuTwMerge({}, props.ui, appConfig.ui.popover))
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 

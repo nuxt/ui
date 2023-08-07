@@ -1,3 +1,14 @@
+import { createDefu } from 'defu'
+import { twMerge } from 'tailwind-merge'
+
+export const defuTwMerge = createDefu((obj, key, value) => {
+  if (typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
+    // @ts-ignore
+    obj[key] = twMerge(obj[key], value)
+    return true
+  }
+})
+
 export function classNames (...classes: any[string]) {
   return classes.filter(Boolean).join(' ')
 }

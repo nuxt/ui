@@ -57,9 +57,8 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType, ComputedRef } from 'vue'
 import { get } from 'lodash-es'
-import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
-import { classNames } from '../../utils'
+import { classNames, defuTwMerge } from '../../utils'
 import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -164,7 +163,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.select>>,
-      default: () => appConfig.ui.select
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
@@ -172,7 +171,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
+    const ui = computed<Partial<typeof appConfig.ui.select>>(() => defuTwMerge({}, props.ui, appConfig.ui.select))
 
     const { emitFormBlur } = useFormEvents()
 

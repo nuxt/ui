@@ -40,11 +40,11 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
 import { omit } from 'lodash-es'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULink from '../elements/Link.vue'
+import { defuTwMerge } from '../../utils'
 import type { VerticalNavigationLink } from '../../types/vertical-navigation'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -66,14 +66,14 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.verticalNavigation>>,
-      default: () => appConfig.ui.verticalNavigation
+      default: () => ({})
     }
   },
   setup (props) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.verticalNavigation>>(() => defu({}, props.ui, appConfig.ui.verticalNavigation))
+    const ui = computed<Partial<typeof appConfig.ui.verticalNavigation>>(() => defuTwMerge({}, props.ui, appConfig.ui.verticalNavigation))
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

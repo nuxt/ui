@@ -79,7 +79,7 @@ import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import type { Button } from '../../types/button'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
-import { classNames } from '../../utils'
+import { classNames, defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -175,7 +175,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.commandPalette>>,
-      default: () => appConfig.ui.commandPalette
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close'],
@@ -183,7 +183,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.commandPalette>>(() => defu({}, props.ui, appConfig.ui.commandPalette))
+    const ui = computed<Partial<typeof appConfig.ui.commandPalette>>(() => defuTwMerge({}, props.ui, appConfig.ui.commandPalette))
 
     const query = ref('')
     const comboboxInput = ref<ComponentPublicInstance<HTMLInputElement>>()

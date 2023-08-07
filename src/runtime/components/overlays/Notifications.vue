@@ -20,10 +20,10 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
-import type { Notification } from '../../types'
-import { useToast } from '../../composables/useToast'
 import UNotification from './Notification.vue'
+import { useToast } from '../../composables/useToast'
+import { defuTwMerge } from '../../utils'
+import type { Notification } from '../../types'
 import { useState, useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -38,14 +38,14 @@ export default defineComponent({
   props: {
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.notifications>>,
-      default: () => appConfig.ui.notifications
+      default: () => ({})
     }
   },
   setup (props) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.notifications>>(() => defu({}, props.ui, appConfig.ui.notifications))
+    const ui = computed<Partial<typeof appConfig.ui.notifications>>(() => defuTwMerge({}, props.ui, appConfig.ui.notifications))
 
     const toast = useToast()
     const notifications = useState<Notification[]>('notifications', () => [])

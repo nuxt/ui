@@ -41,7 +41,6 @@
 <script lang="ts">
 import { ref, computed, onMounted, onUnmounted, watchEffect, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
@@ -49,7 +48,7 @@ import { useTimer } from '../../composables/useTimer'
 import type { NotificationAction } from '../../types'
 import type { Avatar } from '../../types/avatar'
 import type { Button } from '../../types/button'
-import { classNames } from '../../utils'
+import { classNames, defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -109,7 +108,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.notification>>,
-      default: () => appConfig.ui.notification
+      default: () => ({})
     }
   },
   emits: ['close'],
@@ -117,7 +116,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.notification>>(() => defu({}, props.ui, appConfig.ui.notification))
+    const ui = computed<Partial<typeof appConfig.ui.notification>>(() => defuTwMerge({}, props.ui, appConfig.ui.notification))
 
     let timer: any = null
     const remaining = ref(props.timeout)

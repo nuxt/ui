@@ -22,8 +22,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
-import { classNames } from '../../utils'
+import { classNames, defuTwMerge } from '../../utils'
 import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -73,7 +72,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.range>>,
-      default: () => appConfig.ui.range
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
@@ -81,7 +80,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.range>>(() => defu({}, props.ui, appConfig.ui.range))
+    const ui = computed<Partial<typeof appConfig.ui.range>>(() => defuTwMerge({}, props.ui, appConfig.ui.range))
 
     const { emitFormBlur } = useFormEvents()
 
