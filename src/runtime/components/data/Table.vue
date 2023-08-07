@@ -55,8 +55,8 @@
             </td>
 
             <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
-              <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-data-cell-value="getDataCellValue">
-                {{ getDataCellValue(row, column.key) }}
+              <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="getRowData">
+                {{ getRowData(row, column.key) }}
               </slot>
             </td>
           </tr>
@@ -230,7 +230,7 @@ export default defineComponent({
       }
     }
 
-    const getDataCellValue = (row: Object, rowKey: string | Array<string>) => {
+    const getRowData = (row: Object, rowKey: string | string[]) => {
       return get(row, rowKey, 'Failed to get cell value')
     }
 
@@ -251,7 +251,7 @@ export default defineComponent({
       onSort,
       onSelect,
       onChange,
-      getDataCellValue
+      getRowData
     }
   }
 })
