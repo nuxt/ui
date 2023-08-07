@@ -1,39 +1,15 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
-    <UHeader>
-      <template #left>
-        <NuxtLink to="/getting-started" class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white">
-          <Logo class="w-8 h-8 text-primary" />
-
-          <span class="hidden sm:block">NuxtLabs</span><span class="sm:text-primary">UI</span>
-        </NuxtLink>
-      </template>
-
-      <template #center>
-        <UDocsSearchButton class="ml-1.5 flg:w-64 xl:w-96" />
-      </template>
-
-      <template #right>
-        <ColorPicker />
-
-        <UColorModeButton />
-
-        <USocialButton to="https://twitter.com/nuxtlabs" target="_blank" icon="i-simple-icons-twitter" class="hidden lg:inline-flex" />
-        <USocialButton to="https://github.com/nuxtlabs/ui" target="_blank" icon="i-simple-icons-github" class="hidden lg:inline-flex" />
-      </template>
-
-      <template #links>
-        <UAsideAnchors :links="anchors" />
-        <UAsideLinks :links="links" />
-      </template>
-    </UHeader>
+    <Header />
 
     <UMain>
       <UContainer>
         <UPage>
           <template #left>
-            <UAside :links="links" :anchors="anchors" />
+            <UAside :links="anchors">
+              <UNavigationTree :links="mapContentNavigation(navigation)" />
+            </UAside>
           </template>
 
           <NuxtPage />
@@ -42,7 +18,7 @@
     </UMain>
 
     <ClientOnly>
-      <UDocsSearch :files="files" :links="links" />
+      <UDocsSearch :files="files" :navigation="navigation" />
     </ClientOnly>
 
     <UNotifications>
@@ -59,14 +35,14 @@
 
 <script setup lang="ts">
 const colorMode = useColorMode()
+const { mapContentNavigation } = useElementsHelpers()
 
-const { data: links } = await useAsyncData('navigation', () => fetchContentNavigation(), {
-  transform: (navigation) => mapContentLinks(navigation)
+const { data: navigation } = await useLazyAsyncData('navigation', () => fetchContentNavigation(), {
+  default: () => []
 })
-
-const { data: files } = await useLazyAsyncData('files', () => queryContent().where({ _type: 'markdown', navigation: { $ne: false } }).find(), { default: () => [] })
-
-provide('links', links)
+const { data: files } = await useLazyAsyncData('files', () => queryContent().where({ _type: 'markdown', navigation: { $ne: false } }).find(), {
+  default: () => []
+})
 
 const anchors = [{
   label: 'Documentation',
@@ -109,4 +85,8 @@ useSeoMeta({
   twitterImage: '/social-preview.jpg',
   twitterCard: 'summary_large_image'
 })
+
+// Provide
+
+provide('navigation', navigation)
 </script>

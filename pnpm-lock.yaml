@@ -107,10 +107,10 @@ importers:
         version: 1.1.11
       '@iconify-json/simple-icons':
         specifier: latest
-        version: 1.1.62
+        version: 1.1.63
       '@nuxt-themes/ui-kit':
-        specifier: npm:@nuxt-themes/ui-kit-edge@0.0.1-28178970.ce8b67a
-        version: /@nuxt-themes/ui-kit-edge@0.0.1-28178970.ce8b67a(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4)
+        specifier: npm:@nuxt-themes/ui-kit-edge@0.0.1-28190664.e085e91
+        version: /@nuxt-themes/ui-kit-edge@0.0.1-28190664.e085e91(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4)
       '@nuxt/content':
         specifier: ^2.7.2
         version: 2.7.2(rollup@3.26.2)
@@ -1258,8 +1258,8 @@ packages:
     dependencies:
       '@iconify/types': 2.0.0
 
-  /@iconify-json/simple-icons@1.1.62:
-    resolution: {integrity: sha512-idHWbDrd9HKtZq9XBJyVN5+QCxJ+oO4BJeJtNNi9GfFSgoA2ig0LZt7adj9uZ/zzEX0i5OY37OpuotkeFRCWfg==}
+  /@iconify-json/simple-icons@1.1.63:
+    resolution: {integrity: sha512-aIbo99YLjwZ53XxU9HC+CO9Br9H0vRuGmq8b0TOaGA1g7HX2ZlpmzPvWAte5xbmbohfRzAMX/OVsFhOT+CL+Aw==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -1447,8 +1447,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt-themes/ui-kit-edge@0.0.1-28178970.ce8b67a(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4):
-    resolution: {integrity: sha512-DgrTgcNV4rKVKe+esFjgsGb7janfEESJ6QdNnQh+G1sY8jXJoNdBXSLH8/yZvSBPBPi39THntZEudL2DubXXnA==}
+  /@nuxt-themes/ui-kit-edge@0.0.1-28190664.e085e91(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4):
+    resolution: {integrity: sha512-O3csaribtIrr38DQadB5z79z2OOSPVHDoIlekWfs5oNqvWAf3dshFvayUG3WPOQVdR1Uitt8DwU7ZoZIjTRo2A==}
     peerDependencies:
       '@nuxt/content': ^2.7.2
       '@nuxthq/ui': npm:@nuxthq/ui-edge@latest
@@ -1457,6 +1457,7 @@ packages:
       '@nuxthq/ui': 'link:'
       '@vueuse/core': 10.3.0(vue@3.3.4)
       lodash-es: 4.17.21
+      tailwind-merge: 1.14.0
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -10870,6 +10871,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /tailwind-merge@1.14.0:
+    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
+    dev: true
 
   /tailwindcss@3.3.3:
     resolution: {integrity: sha512-A0KgSkef7eE4Mf+nKJ83i75TMyq8HqY3qmFIJSWy8bNt0v1lG7jUcpGpoTFxAwYcWOphcTBLPPJg+bDfhDf52w==}
