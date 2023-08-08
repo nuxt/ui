@@ -55,7 +55,7 @@
             </td>
 
             <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
-              <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="getRowData">
+              <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue: any) => getRowData(row, column.key, defaultValue)">
                 {{ getRowData(row, column.key) }}
               </slot>
             </td>
@@ -230,8 +230,8 @@ export default defineComponent({
       }
     }
 
-    function getRowData (row: Object, rowKey: string | string[]) {
-      return get(row, rowKey, 'Failed to get cell value')
+    function getRowData (row: Object, rowKey: string | string[], defaultValue: any = 'Failed to get cell value') {
+      return get(row, rowKey, defaultValue)
     }
 
     return {
