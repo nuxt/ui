@@ -879,8 +879,36 @@ export const tabs = {
 }
 
 const breadcrumb = {
-  wrapper: '',
-  container: ''
+  wrapper: 'w-full rounded p-3',
+  base: 'flex items-center gap-x-3 w-full',
+  size: {
+    '2xs': 'text-xs',
+    xs: 'text-xs',
+    sm: 'text-sm',
+    md: 'text-sm',
+    lg: 'text-sm',
+    xl: 'text-base'
+  },
+  icon: {
+    size: {
+      '2xs': 'h-4 w-4',
+      xs: 'h-4 w-4',
+      sm: 'h-5 w-5',
+      md: 'h-5 w-5',
+      lg: 'h-5 w-5',
+      xl: 'h-6 w-6'
+    }
+  },
+  active: 'text-primary-500 dark:text-primary-400 font-semibold',
+  inactive: 'text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
+  item: {
+    base: 'flex items-center',
+    divider: 'ms-1 flex'
+  },
+  default: {
+    icon: 'i-heroicons-chevron-right',
+    size: 'md',
+  }
 }
 
 // Overlays
