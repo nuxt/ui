@@ -10,7 +10,7 @@
           '{color}',
           color
         ),
-        readOnly ? 'cursor-auto' : 'cursor-pointer',
+        readOnly ? 'cursor-auto hover:text-gray-300 hover:dark:text-gray-700 peer-hover:text-gray-300 peer-hover:dark:text-gray-700' : 'cursor-pointer',
         'order-{order}'.replaceAll('{order}', star.toString()),
       ]"
       @click="setRating(star + 1)"
