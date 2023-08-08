@@ -1107,6 +1107,7 @@ export default {
     radio,
     toggle,
     range,
+    rating,
     card,
     container,
     skeleton,
