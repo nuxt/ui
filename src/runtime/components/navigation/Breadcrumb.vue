@@ -1,7 +1,14 @@
 <template>
   <div :class="ui.wrapper">
-    <ul :class="ui.base">
+    <ol :class="ui.base">
       <li v-for="(item, key) in items" :key="key" :class="[ui.item.base, ui.size[size]]">
+        <!-- TODO Handle custom HTML element Tag ol , li -->
+        <!-- TODO Handle disable style -->
+        <!-- TODO Handle slots  -->
+        <!-- TODO add various styles of breadcrumbs to the examples page. -->
+        <!-- TODO semantic HTML elements tags  -->
+        <!-- TODO refactor styles and names if needed -->
+
         <ULink
           :to="item.to"
           class="flex items-center gap-x-1"
@@ -14,12 +21,12 @@
           {{ item.text }}
 
           <span v-if="key < items.length - 1" :class="ui.item.divider">
-            <UIcon v-if="icon" :name="icon" :class="ui.icon.size[size]" />
-            <span v-else>{{ divider }}</span>
+            <span v-if="divider">{{ divider }}</span>
+            <UIcon v-else :name="icon" :class="ui.icon.size[size]" />
           </span>
         </ULink>
       </li>
-    </ul>
+    </ol>
   </div>
 </template>
 
@@ -57,7 +64,7 @@ export default defineComponent({
     },
     tag: {
       type: String,
-      default: 'ul'
+      default: 'ol'
     },
     icon: {
       type: String,
@@ -65,7 +72,7 @@ export default defineComponent({
     },
     divider: {
       type: String,
-      default: '/'
+      default: ''
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.breadcrumb>>,

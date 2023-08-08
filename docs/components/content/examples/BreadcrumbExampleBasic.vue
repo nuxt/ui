@@ -8,8 +8,8 @@ const items = [{
   icon: 'i-heroicons-arrow-down-tray',
   to: '/getting-started/installation'
 }, {
-  text: 'Elements',
-  icon: 'i-heroicons-rectangle-group',
+  text: 'Navigation',
+  icon: 'i-heroicons-bars-3',
   disabled: true
 }, {
   text: 'Breadcrumb',
