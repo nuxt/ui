@@ -181,21 +181,17 @@ const safelistByComponent = {
   }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-500`)
   }],
-  rating: (colorsAsRegex) => [
-  {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`),
-  },
-  {
+  rating: (colorsAsRegex) => [{
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-400`),
-    variants: ["dark"],
-  },
-  {
+    variants: ['dark']
+  }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-500`),
-    variants: ["hover", "peer-hover"],
-  },
-  {
+    variants: ['hover', 'peer-hover']
+  }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-300`),
-    variants: ["dark:hover", "dark:peer-hover"],
+    variants: ['dark:hover', 'dark:peer-hover']
   }]
 }
 
