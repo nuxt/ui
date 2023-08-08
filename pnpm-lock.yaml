@@ -109,8 +109,8 @@ importers:
         specifier: latest
         version: 1.1.63
       '@nuxt-themes/ui-kit':
-        specifier: npm:@nuxt-themes/ui-kit-edge@0.0.1-28190664.e085e91
-        version: /@nuxt-themes/ui-kit-edge@0.0.1-28190664.e085e91(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4)
+        specifier: npm:@nuxt-themes/ui-kit-edge@0.0.1-28191382.fd52259
+        version: /@nuxt-themes/ui-kit-edge@0.0.1-28191382.fd52259(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4)
       '@nuxt/content':
         specifier: ^2.7.2
         version: 2.7.2(rollup@3.26.2)
@@ -1447,8 +1447,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt-themes/ui-kit-edge@0.0.1-28190664.e085e91(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4):
-    resolution: {integrity: sha512-O3csaribtIrr38DQadB5z79z2OOSPVHDoIlekWfs5oNqvWAf3dshFvayUG3WPOQVdR1Uitt8DwU7ZoZIjTRo2A==}
+  /@nuxt-themes/ui-kit-edge@0.0.1-28191382.fd52259(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4):
+    resolution: {integrity: sha512-J+ELuYVfqQIyKr4hfgqqzZJieIFxN379wM8rfJ3QA++cc929Cw4g0P/0rmd6H3dXhtyCR1k5Rfb3L9DRczWoug==}
     peerDependencies:
       '@nuxt/content': ^2.7.2
       '@nuxthq/ui': npm:@nuxthq/ui-edge@latest
