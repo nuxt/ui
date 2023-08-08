@@ -677,6 +677,26 @@ const range = {
   }
 }
 
+const rating = {
+  wrapper: 'relative flex flex-row-reverse items-center justify-end gap-1',
+  base: 'transition peer hover:text-{color}-500 dark:hover:text-{color}-300 peer-hover:text-{color}-500 dark:peer-hover:text-{color}-300',
+  active: 'text-{color}-500 dark:text-{color}-400',
+  inactive: 'text-gray-300 dark:text-gray-700',
+  label: 'font-medium text-gray-700 dark:text-gray-200',
+  size: {
+    sm: 'text-sm',
+    md: 'text-base',
+    lg: 'text-lg',
+    xl: 'text-xl'
+  },
+  default: {
+    color: 'primary',
+    icon: 'i-heroicons-star-20-solid',
+    max: 5,
+    size: 'md'
+  }
+}
+
 // Layout
 
 const card = {
