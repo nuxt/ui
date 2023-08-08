@@ -685,7 +685,8 @@ const rating = {
     sm: 'text-sm',
     md: 'text-base',
     lg: 'text-lg',
-    xl: 'text-xl'
+    xl: 'text-xl',
+    '2xl': 'text-2xl'
   },
   default: {
     color: 'primary',
