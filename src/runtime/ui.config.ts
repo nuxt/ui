@@ -907,7 +907,7 @@ const breadcrumb = {
   },
   default: {
     icon: 'i-heroicons-chevron-right',
-    size: 'md',
+    size: 'md'
   }
 }
 
