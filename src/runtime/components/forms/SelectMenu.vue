@@ -70,6 +70,7 @@
             v-slot="{ active, selected, disabled: optionDisabled }"
             :key="index"
             as="template"
+            :class="isSearching && 'opacity-50'"
             :value="valueAttribute ? option[valueAttribute] : option"
             :disabled="option.disabled"
           >
@@ -107,6 +108,11 @@
           <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
             <slot name="option-empty" :query="query">
               No results for "{{ query }}".
+            </slot>
+          </p>
+          <p v-else-if="searchable && !filteredOptions.length && isSearching" :class="uiMenu.option.empty">
+            <slot name="option-empty-loading" :query="query">
+              Searching for results...
             </slot>
           </p>
         </component>
@@ -394,10 +400,20 @@ export default defineComponent({
       )
     })
 
-    const debouncedSearch = typeof props.searchable === 'function' ? useDebounceFn(props.searchable, props.debounce) : undefined
+    const isSearching = ref(false)
+    const debouncedSearch = useDebounceFn(async (q: string) => {
+      if (typeof props.searchable === 'function') {
+        try {
+          return await props.searchable(q)
+        } finally {
+          isSearching.value = false
+        }
+      }
+    }, props.debounce)
 
     const filteredOptions = computedAsync(async () => {
-      if (props.searchable && debouncedSearch) {
+      if (typeof props.searchable === 'function' && debouncedSearch) {
+        isSearching.value = true
         return await debouncedSearch(query.value)
       }
 
@@ -447,6 +463,7 @@ export default defineComponent({
       wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
       selectClass,
+      isSearching,
       leadingIconName,
       leadingIconClass,
       leadingWrapperIconClass,
