@@ -105,14 +105,14 @@
               </div>
             </li>
           </component>
+          <p v-else-if="searchable && !filteredOptions.length && isSearching" :class="uiMenu.option.empty">
+            <slot name="option-empty-loading" :query="query">
+              {{ query ? `Searching for "${query}"` : "Searching for results..." }}
+            </slot>
+          </p>
           <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
             <slot name="option-empty" :query="query">
               No results for "{{ query }}".
-            </slot>
-          </p>
-          <p v-else-if="searchable && !filteredOptions.length && isSearching" :class="uiMenu.option.empty">
-            <slot name="option-empty-loading" :query="query">
-              Searching for results...
             </slot>
           </p>
         </component>
