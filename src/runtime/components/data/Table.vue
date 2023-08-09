@@ -55,7 +55,7 @@
             </td>
 
             <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
-              <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue: any) => getRowData(row, column.key, defaultValue)">
+              <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue) => getRowData(row, column.key, defaultValue)">
                 {{ getRowData(row, column.key) }}
               </slot>
             </td>
