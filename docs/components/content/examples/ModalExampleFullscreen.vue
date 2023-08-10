@@ -6,7 +6,7 @@ const isOpen = ref(false)
   <div>
     <UButton label="Open" @click="isOpen = true" />
 
-    <UModal v-model="isOpen" :fullscreen="true">
+    <UModal v-model="isOpen" fullscreen>
       <UCard
         :ui="{
           base: 'h-full flex flex-col',
