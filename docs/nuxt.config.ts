@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   extends: '@nuxt-themes/ui-kit',
   modules: [
     '@nuxt/content',
-    '@nuxt/devtools',
+    // '@nuxt/devtools',
     // '@nuxthq/studio',
     module,
     '@nuxtjs/fontaine',
