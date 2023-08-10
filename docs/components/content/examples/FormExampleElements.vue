@@ -18,7 +18,8 @@ const state = ref({
   toggle: undefined,
   radio: undefined,
   switch: undefined,
-  range: undefined
+  range: undefined,
+  rating: undefined
 })
 
 const schema = z.object({
@@ -39,7 +40,8 @@ const schema = z.object({
   radio: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
   }),
-  range: z.number().max(20, { message: 'Must be less than 20' })
+  range: z.number().max(20, { message: 'Must be less than 20' }),
+  rating: z.number().min(1)
 })
 
 type Schema = z.infer<typeof schema>
@@ -91,6 +93,10 @@ async function submit () {
 
     <UFormGroup name="range" label="Range">
       <URange v-model="state.range" />
+    </UFormGroup>
+
+    <UFormGroup name="rating" label="Rating">
+      <URating v-model="state.rating" />
     </UFormGroup>
 
     <UButton type="submit">
