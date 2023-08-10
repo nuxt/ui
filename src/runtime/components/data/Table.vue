@@ -111,7 +111,7 @@ export default defineComponent({
       type: Object as PropType<{ column: string, direction: 'asc' | 'desc' }>,
       default: () => ({})
     },
-    fnSort:{
+    fnSort: {
       type: [ Function]
     },
     sortButton: {
@@ -194,13 +194,13 @@ export default defineComponent({
     }
 
     async function onSort (column: { key: string, direction?: 'asc' | 'desc' }) {
-      let toSort=sort.value
+      let toSort = sort.value
       
       if (sort.value.column === column.key) {
         const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
 
         if (sort.value.direction === direction) {
-          toSort= defu({}, props.sort, { column: null, direction: 'asc' })
+          toSort = defu({}, props.sort, { column: null, direction: 'asc' })
         } else {
           toSort.direction = toSort.direction === 'asc' ? 'desc' : 'asc'
         }
@@ -208,11 +208,11 @@ export default defineComponent({
         toSort = { column: column.key, direction: column.direction || 'asc' }
       }
 
-      if(props.fnSort){
-         sort.value.column=toSort.column
-         await props.fnSort(toSort)
+      if (props.fnSort) {
+        sort.value.column = toSort.column
+        await props.fnSort(toSort)
       }
-      sort.value=toSort
+      sort.value = toSort
     }
 
     function onSelect (row) {
