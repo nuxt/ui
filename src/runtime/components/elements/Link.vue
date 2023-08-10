@@ -4,16 +4,18 @@
   </button>
   <NuxtLink
     v-else
-    v-slot="{ href, target, rel, navigate, isActive, isExactActive, isExternal }"
+    v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }"
     v-bind="$props"
     custom
   >
     <a
       v-bind="$attrs"
-      :href="href"
+      :href="!disabled ? href : undefined"
+      :aria-disabled="disabled ? 'true' : undefined"
+      :role="disabled ? 'link' : undefined"
       :rel="rel"
       :target="target"
-      :class="resolveLinkClass({ isActive, isExactActive })"
+      :class="resolveLinkClass(route, $route, { isActive, isExactActive })"
       @click="(e) => !isExternal && navigate(e)"
     >
       <slot v-bind="{ isActive: exact ? isExactActive : isActive }" />
@@ -22,6 +24,7 @@
 </template>
 
 <script lang="ts">
+import { isEqual } from 'lodash-es'
 import { defineComponent } from 'vue'
 import { NuxtLink } from '#components'
 
@@ -41,13 +44,28 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    exactQuery: {
+      type: Boolean,
+      default: false
+    },
+    exactHash: {
+      type: Boolean,
+      default: false
+    },
     inactiveClass: {
       type: String,
       default: undefined
     }
   },
   setup (props) {
-    function resolveLinkClass ({ isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
+    function resolveLinkClass (route, $route, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
+      if (props.exactQuery && !isEqual(route.query, $route.query)) {
+        return props.inactiveClass
+      }
+      if (props.exactHash && route.hash !== $route.hash) {
+        return props.inactiveClass
+      }
+
       if (props.exact && isExactActive) {
         return props.activeClass
       }

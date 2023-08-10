@@ -23,6 +23,7 @@ import { defu } from 'defu'
 import { Switch as HSwitch } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
+import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -75,16 +76,19 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defu({}, props.ui, appConfig.ui.toggle))
 
+    const { emitFormBlur } = useFormEvents()
+
     const active = computed({
       get () {
         return props.modelValue
       },
       set (value) {
         emit('update:modelValue', value)
+        emitFormBlur()
       }
     })
 
-    const switchClass = computed(()=>{
+    const switchClass = computed(() => {
       return classNames(
         ui.value.base,
         ui.value.rounded,
@@ -93,13 +97,13 @@ export default defineComponent({
       )
     })
 
-    const onIconClass = computed(()=>{
+    const onIconClass = computed(() => {
       return classNames(
         ui.value.icon.on.replaceAll('{color}', props.color)
       )
     })
 
-    const offIconClass = computed(()=>{
+    const offIconClass = computed(() => {
       return classNames(
         ui.value.icon.off.replaceAll('{color}', props.color)
       )

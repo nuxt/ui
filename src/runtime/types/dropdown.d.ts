@@ -1,7 +1,7 @@
-import type { NuxtLinkProps } from '#app'
+import type { Link } from './link'
 import type { Avatar } from './avatar'
 
-export interface DropdownItem extends NuxtLinkProps {
+export interface DropdownItem extends Link {
   label: string
   slot?: string
   icon?: string

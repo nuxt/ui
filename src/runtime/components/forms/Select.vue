@@ -10,6 +10,7 @@
       :class="selectClass"
       v-bind="$attrs"
       @input="onInput"
+      @change="onChange"
     >
       <template v-for="(option, index) in normalizedOptionsWithPlaceholder">
         <optgroup
@@ -59,6 +60,7 @@ import { get } from 'lodash-es'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
+import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -165,15 +167,22 @@ export default defineComponent({
       default: () => appConfig.ui.select
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'change'],
   setup (props, { emit, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
 
+    const { emitFormBlur } = useFormEvents()
+
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
+    }
+
+    const onChange = (event: Event) => {
+      emitFormBlur()
+      emit('change', event)
     }
 
     const guessOptionValue = (option: any) => {
@@ -314,7 +323,8 @@ export default defineComponent({
       trailingIconName,
       trailingIconClass,
       trailingWrapperIconClass,
-      onInput
+      onInput,
+      onChange
     }
   }
 })

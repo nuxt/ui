@@ -60,20 +60,21 @@ const table = {
 // Elements
 
 const avatar = {
-  wrapper: 'relative inline-flex items-center justify-center',
+  wrapper: 'relative inline-flex items-center justify-center flex-shrink-0',
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
-  placeholder: 'font-medium leading-none text-gray-900 dark:text-white truncate',
+  text: 'font-medium leading-none text-gray-900 dark:text-white truncate',
+  placeholder: 'font-medium leading-none text-gray-500 dark:text-gray-400 truncate',
   size: {
     '3xs': 'h-4 w-4 text-[8px]',
     '2xs': 'h-5 w-5 text-[10px]',
-    xs: 'h-6 w-6 text-[11px]',
-    sm: 'h-8 w-8 text-xs',
-    md: 'h-10 w-10 text-sm',
-    lg: 'h-12 w-12 text-base',
-    xl: 'h-14 w-14 text-lg',
-    '2xl': 'h-16 w-16 text-xl',
-    '3xl': 'h-20 w-20 text-2xl'
+    xs: 'h-6 w-6 text-xs',
+    sm: 'h-8 w-8 text-sm',
+    md: 'h-10 w-10 text-base',
+    lg: 'h-12 w-12 text-lg',
+    xl: 'h-14 w-14 text-xl',
+    '2xl': 'h-16 w-16 text-2xl',
+    '3xl': 'h-20 w-20 text-3xl'
   },
   chip: {
     base: 'absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium',
@@ -96,8 +97,23 @@ const avatar = {
       '3xl': 'h-5 min-w-[1.25rem] text-[14px] p-1'
     }
   },
+  icon: {
+    base: 'text-gray-500 dark:text-gray-400 flex-shrink-0',
+    size: {
+      '3xs': 'h-2 w-2',
+      '2xs': 'h-2.5 w-2.5',
+      xs: 'h-3 w-3',
+      sm: 'h-4 w-4',
+      md: 'h-5 w-5',
+      lg: 'h-6 w-6',
+      xl: 'h-7 w-7',
+      '2xl': 'h-8 w-8',
+      '3xl': 'h-10 w-10'
+    }
+  },
   default: {
     size: 'sm',
+    icon: null,
     chipColor: null,
     chipPosition: 'top-right'
   }
@@ -119,9 +135,22 @@ const badge = {
     md: 'text-sm px-2 py-1',
     lg: 'text-sm px-2.5 py-1.5'
   },
-  color: {},
+  color: {
+    white: {
+      solid: 'ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900'
+    },
+    gray: {
+      solid: 'ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800'
+    },
+    black: {
+      solid: 'text-white dark:text-gray-900 bg-gray-900 dark:bg-white'
+    }
+  },
   variant: {
-    solid: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-10 dark:ring-opacity-20'
+    solid: 'bg-{color}-500 dark:bg-{color}-400 text-white dark:text-gray-900',
+    outline: 'text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400',
+    soft: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400',
+    subtle: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-25 dark:ring-opacity-25'
   },
   default: {
     size: 'sm',
@@ -280,6 +309,44 @@ const accordion = {
   }
 }
 
+const alert = {
+  wrapper: 'w-full relative overflow-hidden',
+  title: 'text-sm font-medium',
+  description: 'mt-1 text-sm leading-4 opacity-90',
+  shadow: '',
+  rounded: 'rounded-lg',
+  padding: 'p-3',
+  icon: {
+    base: 'flex-shrink-0 w-5 h-5'
+  },
+  avatar: {
+    base: 'flex-shrink-0 self-center',
+    size: 'md'
+  },
+  color: {
+    white: {
+      solid: 'text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800'
+    }
+  },
+  variant: {
+    solid: 'bg-{color}-500 dark:bg-{color}-400 text-white dark:text-gray-900',
+    outline: 'text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400',
+    soft: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400',
+    subtle: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-25 dark:ring-opacity-25'
+  },
+  default: {
+    color: 'white',
+    variant: 'solid',
+    icon: null,
+    closeButton: null,
+    actionButton: {
+      size: 'xs',
+      color: 'primary',
+      variant: 'link'
+    }
+  }
+}
+
 const kbd = {
   base: 'inline-flex items-center justify-center text-gray-900 dark:text-white',
   padding: 'px-1',
@@ -407,15 +474,24 @@ const input = {
 const formGroup = {
   wrapper: '',
   label: {
-    wrapper: 'flex content-center justify-between',
-    base: 'block text-sm font-medium text-gray-700 dark:text-gray-200',
-    required: 'after:content-[\'*\'] after:ms-0.5 after:text-red-500 dark:after:text-red-400'
+    wrapper: 'flex content-center items-center justify-between',
+    base: 'block font-medium text-gray-700 dark:text-gray-200',
+    // eslint-disable-next-line quotes
+    required: `after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400`
   },
-  description: 'text-sm text-gray-500 dark:text-gray-400',
+  size: {
+    '2xs': 'text-xs',
+    xs: 'text-xs',
+    sm: 'text-sm',
+    md: 'text-sm',
+    lg: 'text-sm',
+    xl: 'text-base'
+  },
   container: 'mt-1 relative',
-  hint: 'text-sm text-gray-500 dark:text-gray-400',
-  help: 'mt-2 text-sm text-gray-500 dark:text-gray-400',
-  error: 'mt-2 text-sm text-red-500 dark:text-red-400'
+  description: 'text-gray-500 dark:text-gray-400',
+  hint: 'text-gray-500 dark:text-gray-400',
+  help: 'mt-2 text-gray-500 dark:text-gray-400',
+  error: 'mt-2 text-red-500 dark:text-red-400'
 }
 
 const textarea = {
@@ -552,15 +628,20 @@ const toggle = {
 }
 
 const range = {
-  wrapper: 'relative w-full',
-  base: 'w-full absolute appearance-none cursor-pointer disabled:cursor-not-allowed disabled:bg-opacity-50 focus:outline-none [&::-webkit-slider-runnable-track]:h-full [&::-moz-slider-runnable-track]:h-full peer',
-  background: 'bg-gray-200 dark:bg-gray-700',
+  wrapper: 'relative w-full flex items-center',
+  base: 'w-full absolute appearance-none cursor-pointer disabled:cursor-not-allowed disabled:bg-opacity-50 focus:outline-none peer group',
   rounded: 'rounded-lg',
+  background: 'bg-transparent',
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   progress: {
-    base: 'absolute inset-0 h-full pointer-events-none peer-disabled:bg-opacity-50',
+    base: 'absolute pointer-events-none peer-disabled:bg-opacity-50',
     rounded: 'rounded-s-lg',
-    background: 'bg-{color}-500 dark:bg-{color}-400'
+    background: 'bg-{color}-500 dark:bg-{color}-400',
+    size: {
+      sm: 'h-1',
+      md: 'h-2',
+      lg: 'h-3'
+    }
   },
   thumb: {
     base: '[&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0',
@@ -573,10 +654,20 @@ const range = {
       lg: '[&::-webkit-slider-thumb]:h-5 [&::-moz-range-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-moz-range-thumb]:w-5 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1'
     }
   },
+  track: {
+    base: '[&::-webkit-slider-runnable-track]:group-disabled:bg-opacity-50 [&::-moz-slider-runnable-track]:group-disabled:bg-opacity-50',
+    background: '[&::-webkit-slider-runnable-track]:bg-gray-200 [&::-moz-slider-runnable-track]:bg-gray-200 [&::-webkit-slider-runnable-track]:dark:bg-gray-700 [&::-moz-slider-runnable-track]:dark:bg-gray-700',
+    rounded: '[&::-webkit-slider-runnable-track]:rounded-lg [&::-moz-slider-runnable-track]:rounded-lg',
+    size: {
+      sm: '[&::-webkit-slider-runnable-track]:h-1 [&::-moz-slider-runnable-track]:h-1',
+      md: '[&::-webkit-slider-runnable-track]:h-2 [&::-moz-slider-runnable-track]:h-2',
+      lg: '[&::-webkit-slider-runnable-track]:h-3 [&::-moz-slider-runnable-track]:h-3'
+    }
+  },
   size: {
-    sm: 'h-1',
-    md: 'h-2',
-    lg: 'h-3'
+    sm: 'h-3',
+    md: 'h-4',
+    lg: 'h-5'
   },
   default: {
     size: 'md',
@@ -745,6 +836,40 @@ const pagination = {
   }
 }
 
+const tabs = {
+  wrapper: 'relative space-y-2',
+  container: 'relative w-full',
+  base: 'focus:outline-none',
+  list: {
+    base: 'relative',
+    background: 'bg-gray-100 dark:bg-gray-800',
+    rounded: 'rounded-lg',
+    shadow: '',
+    padding: 'p-1',
+    height: 'h-10',
+    width: 'w-full',
+    marker: {
+      wrapper: 'absolute top-[4px] left-[4px] duration-200 ease-out focus:outline-none',
+      base: 'w-full h-full',
+      background: 'bg-white dark:bg-gray-900',
+      rounded: 'rounded-md',
+      shadow: 'shadow-sm'
+    },
+    tab: {
+      base: 'relative inline-flex items-center justify-center flex-shrink-0 w-full whitespace-nowrap focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
+      background: '',
+      active: 'text-gray-900 dark:text-white',
+      inactive: 'text-gray-500 dark:text-gray-400',
+      height: 'h-8',
+      padding: 'px-3',
+      size: 'text-sm',
+      font: 'font-medium',
+      rounded: 'rounded-md',
+      shadow: ''
+    }
+  }
+}
+
 // Overlays
 
 const modal = {
@@ -888,7 +1013,7 @@ const notification = {
   wrapper: 'w-full pointer-events-auto',
   container: 'relative overflow-hidden',
   title: 'text-sm font-medium text-gray-900 dark:text-white',
-  description: 'mt-1 text-sm leading-5 text-gray-500 dark:text-gray-400',
+  description: 'mt-1 text-sm leading-4 text-gray-500 dark:text-gray-400',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-lg',
@@ -949,6 +1074,7 @@ export default {
     dropdown,
     kbd,
     accordion,
+    alert,
     input,
     formGroup,
     textarea,
@@ -964,6 +1090,7 @@ export default {
     verticalNavigation,
     commandPalette,
     pagination,
+    tabs,
     modal,
     slideover,
     popover,

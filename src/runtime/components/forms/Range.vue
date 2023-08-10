@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div :class="wrapperClass">
     <input
       :id="name"
@@ -10,8 +10,9 @@
       :disabled="disabled"
       :step="step"
       type="range"
-      :class="[inputClass, thumbClass]"
+      :class="[inputClass, thumbClass, trackClass]"
       v-bind="$attrs"
+      @change="onChange"
     >
 
     <span :class="progressClass" :style="progressStyle" />
@@ -23,6 +24,7 @@ import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
+import { useFormEvents } from '../../composables/useFormEvents'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -74,12 +76,14 @@ export default defineComponent({
       default: () => appConfig.ui.range
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.range>>(() => defu({}, props.ui, appConfig.ui.range))
+
+    const { emitFormBlur } = useFormEvents()
 
     const value = computed({
       get () {
@@ -89,6 +93,11 @@ export default defineComponent({
         emit('update:modelValue', value)
       }
     })
+
+    const onChange = (event: Event) => {
+      emit('change', event)
+      emitFormBlur()
+    }
 
     const wrapperClass = computed(() => {
       return classNames(
@@ -118,12 +127,21 @@ export default defineComponent({
       )
     })
 
+    const trackClass = computed(() => {
+      return classNames(
+        ui.value.track.base,
+        ui.value.track.background,
+        ui.value.track.rounded,
+        ui.value.track.size[props.size]
+      )
+    })
+
     const progressClass = computed(() => {
       return classNames(
         ui.value.progress.base,
         ui.value.progress.rounded,
         ui.value.progress.background.replaceAll('{color}', props.color),
-        ui.value.size[props.size]
+        ui.value.progress.size[props.size]
       )
     })
 
@@ -143,8 +161,10 @@ export default defineComponent({
       wrapperClass,
       inputClass,
       thumbClass,
+      trackClass,
       progressClass,
-      progressStyle
+      progressStyle,
+      onChange
     }
   }
 })

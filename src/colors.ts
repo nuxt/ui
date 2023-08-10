@@ -1,3 +1,5 @@
+import { omit, kebabCase, camelCase, upperFirst } from 'lodash-es'
+
 const colorsToExclude = [
   'inherit',
   'transparent',
@@ -12,20 +14,25 @@ const colorsToExclude = [
   'cool'
 ]
 
-const omit = (obj: object, keys: string[]) => {
-  return Object.fromEntries(
-    Object.entries(obj).filter(([key]) => !keys.includes(key))
-  )
-}
-
-const kebabCase = (str: string) => {
-  return str
-    ?.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-    ?.map(x => x.toLowerCase())
-    ?.join('-')
-}
-
 const safelistByComponent = {
+  alert: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-50`)
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`ring-(${colorsAsRegex})-500`)
+  }],
   avatar: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
@@ -37,6 +44,8 @@ const safelistByComponent = {
   }, {
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
   }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['dark']
@@ -182,9 +191,13 @@ const safelistComponentAliasesMap = {
 
 const colorsAsRegex = (colors: string[]): string => colors.join('|')
 
-export const excludeColors = (colors: object) => Object.keys(omit(colors, colorsToExclude)).map(color => kebabCase(color)) as string[]
+export const excludeColors = (colors: object): string[] => {
+  return Object.entries(omit(colors, colorsToExclude))
+    .filter(([, value]) => typeof value === 'object')
+    .map(([key]) => kebabCase(key))
+}
 
-export const generateSafelist = (colors: string[]) => {
+export const generateSafelist = (colors: string[], globalColors) => {
   const baseSafelist = Object.keys(safelistByComponent).flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
 
   // Ensure `red` color is safelisted for form elements so that `error` prop of `UFormGroup` always works
@@ -193,6 +206,8 @@ export const generateSafelist = (colors: string[]) => {
   return [
     ...baseSafelist,
     ...formsSafelist,
+    // Ensure all global colors are safelisted for the Notification (toast.add)
+    ...safelistByComponent['notification'](colorsAsRegex(globalColors)),
     // Gray safelist for Avatar & Notification
     'bg-gray-500',
     'dark:bg-gray-400',
@@ -203,7 +218,7 @@ export const generateSafelist = (colors: string[]) => {
 
 export const customSafelistExtractor = (prefix, content: string, colors: string[], safelistColors: string[]) => {
   const classes = []
-  const regex = /<(\w+)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/gs
+  const regex = /<([A-Za-z][A-Za-z0-9]*(?:-[A-Za-z][A-Za-z0-9]*)*)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/gs
 
   const matches = content.matchAll(regex)
 
@@ -212,11 +227,13 @@ export const customSafelistExtractor = (prefix, content: string, colors: string[
   for (const match of matches) {
     const [, component, color] = match
 
+    const camelComponent = upperFirst(camelCase(component))
+
     if (!colors.includes(color) || safelistColors.includes(color)) {
       continue
     }
 
-    let name = safelistComponentAliasesMap[component] ? safelistComponentAliasesMap[component] : component
+    let name = safelistComponentAliasesMap[camelComponent] ? safelistComponentAliasesMap[camelComponent] : camelComponent
 
     if (!components.includes(name)) {
       continue

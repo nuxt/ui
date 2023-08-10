@@ -211,8 +211,9 @@ function renderObject (obj: any) {
 const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify(props)}`, () => transformContent('content:_markdown.md', code.value, {
   highlight: {
     theme: {
-      light: 'material-lighter',
-      dark: 'material-palenight'
+      light: 'material-theme-lighter',
+      default: 'material-theme',
+      dark: 'material-theme-palenight'
     }
   }
 }), { watch: [code] })

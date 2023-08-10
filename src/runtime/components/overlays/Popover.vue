@@ -1,5 +1,5 @@
 <template>
-  <HPopover v-slot="{ open, close }" :class="ui.wrapper" @mouseleave="onMouseLeave">
+  <HPopover ref="popover" v-slot="{ open, close }" :class="ui.wrapper" @mouseleave="onMouseLeave">
     <HPopoverButton
       ref="trigger"
       as="div"
@@ -15,7 +15,7 @@
       </slot>
     </HPopoverButton>
 
-    <div v-if="open" ref="container" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
+    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
         <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
           <slot name="panel" :open="open" :close="close" />
@@ -80,26 +80,30 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.popover>>(() => defu({}, props.ui, appConfig.ui.popover))
 
-    const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
+    const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
 
     // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
+    const popover = ref<any>(null)
     const popoverApi = ref<any>(null)
 
     let openTimeout: NodeJS.Timeout | null = null
     let closeTimeout: NodeJS.Timeout | null = null
 
     onMounted(() => {
-      setTimeout(() => {
-        // @ts-expect-error internals
-        const popoverProvides = trigger.value?.$.provides
-        if (!popoverProvides) {
-          return
-        }
-        const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
-        popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
-      }, 200)
+      const popoverProvides = popover.value?.$.provides
+      if (!popoverProvides) {
+        return
+      }
+      const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
+      popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
+    })
+
+    const containerStyle = computed(() => {
+      const offsetDistance = (props.popper as PopperOptions)?.offsetDistance || (ui.value.popper as PopperOptions)?.offsetDistance || 8
+
+      return props.mode === 'hover' ? { paddingTop: `${offsetDistance}px`, paddingBottom: `${offsetDistance}px` } : {}
     })
 
     function onMouseOver () {
@@ -145,8 +149,10 @@ export default defineComponent({
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      popover,
       trigger,
       container,
+      containerStyle,
       onMouseOver,
       onMouseLeave
     }
