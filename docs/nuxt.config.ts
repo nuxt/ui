@@ -7,7 +7,7 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  extends: '@nuxt-themes/ui-kit',
+  extends: '@nuxthq/elements',
   modules: [
     '@nuxt/content',
     // '@nuxt/devtools',
@@ -48,7 +48,7 @@ export default defineNuxtConfig({
   },
   componentMeta: {
     globalsOnly: true,
-    exclude: [resolve('./components'), resolve('@nuxt-themes/ui-kit/components')],
+    exclude: [resolve('./components'), resolve('@nuxthq/elements/components')],
     metaFields: {
       props: true,
       slots: false,
