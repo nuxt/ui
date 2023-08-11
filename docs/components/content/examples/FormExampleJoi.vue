@@ -15,8 +15,6 @@ const state = ref({
   password: undefined
 })
 
-const form = ref()
-
 async function submit (event: FormSubmitEvent<any>) {
   // Do something with event.data
   console.log(event.data)
@@ -25,7 +23,6 @@ async function submit (event: FormSubmitEvent<any>) {
 
 <template>
   <UForm
-    ref="form"
     :schema="schema"
     :state="state"
     @submit="submit"

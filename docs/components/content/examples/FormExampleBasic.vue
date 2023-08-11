@@ -14,8 +14,6 @@ const validate = (state: any): FormError[] => {
   return errors
 }
 
-const form = ref()
-
 async function submit (event: FormSubmitEvent<any>) {
   // Do something with data
   console.log(event.data)
@@ -24,7 +22,6 @@ async function submit (event: FormSubmitEvent<any>) {
 
 <template>
   <UForm
-    ref="form"
     :validate="validate"
     :state="state"
     @submit="submit"

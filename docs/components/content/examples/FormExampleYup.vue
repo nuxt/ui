@@ -25,7 +25,6 @@ async function submit (event: FormSubmitEvent<Schema>) {
 
 <template>
   <UForm
-    ref="form"
     :schema="schema"
     :state="state"
     @submit="submit"
