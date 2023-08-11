@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -107,7 +111,7 @@ importers:
         version: 1.1.11
       '@iconify-json/simple-icons':
         specifier: latest
-        version: 1.1.63
+        version: 1.1.62
       '@nuxt-themes/ui-kit':
         specifier: npm:@nuxt-themes/ui-kit-edge@0.0.1-28191382.fd52259
         version: /@nuxt-themes/ui-kit-edge@0.0.1-28191382.fd52259(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4)
@@ -1258,8 +1262,8 @@ packages:
     dependencies:
       '@iconify/types': 2.0.0
 
-  /@iconify-json/simple-icons@1.1.63:
-    resolution: {integrity: sha512-aIbo99YLjwZ53XxU9HC+CO9Br9H0vRuGmq8b0TOaGA1g7HX2ZlpmzPvWAte5xbmbohfRzAMX/OVsFhOT+CL+Aw==}
+  /@iconify-json/simple-icons@1.1.62:
+    resolution: {integrity: sha512-idHWbDrd9HKtZq9XBJyVN5+QCxJ+oO4BJeJtNNi9GfFSgoA2ig0LZt7adj9uZ/zzEX0i5OY37OpuotkeFRCWfg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
