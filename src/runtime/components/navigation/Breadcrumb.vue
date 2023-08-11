@@ -1,32 +1,32 @@
 <template>
   <div :class="ui.wrapper">
-    <ol :class="ui.base">
-      <li v-for="(item, key) in items" :key="key" :class="[ui.item.base, ui.size[size]]">
-        <!-- TODO Handle custom HTML element Tag ol , li -->
-        <!-- TODO Handle disable style -->
-        <!-- TODO Handle slots  -->
-        <!-- TODO add various styles of breadcrumbs to the examples page. -->
-        <!-- TODO semantic HTML elements tags  -->
-        <!-- TODO refactor styles and names if needed -->
-
+    <component :is="tag" :class="ui.base">
+      <component :is="item.tag || 'li'" v-for="(item, key) in items" :key="key" :class="[ui.item.base, ui.size[size]]">
         <ULink
+          v-slot="{ isActive }"
           :to="item.to"
-          class="flex items-center gap-x-1"
-          :active-class="ui.active"
-          :inactive-class="ui.inactive"
+          :class="ui.item.link"
+          :active-class="ui.item.active"
+          :inactive-class="ui.item.inactive"
           v-bind="omit(item, ['text', 'icon', 'tag'])"
         >
-          <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon.size[size]" />
+          <slot name="leading" :index="key" :is-active="isActive">
+            <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon.size[size]" />
+          </slot>
 
-          {{ item.text }}
+          <slot name="item" :item="item" :index="key" :is-active="isActive">
+            {{ item.text }}
+          </slot>
 
-          <span v-if="key < items.length - 1" :class="ui.item.divider">
-            <span v-if="divider">{{ divider }}</span>
-            <UIcon v-else :name="icon" :class="ui.icon.size[size]" />
-          </span>
+          <slot v-if="key < items.length - 1" name="divider">
+            <span v-if="divider" :class="ui.item.divider">
+              <UIcon v-if="divider.icon" :name="divider.icon" :class="ui.icon.size[size]" />
+              <span v-else>{{ divider?.text }}</span>
+            </span>
+          </slot>
         </ULink>
-      </li>
-    </ol>
+      </component>
+    </component>
   </div>
 </template>
 
@@ -66,13 +66,9 @@ export default defineComponent({
       type: String,
       default: 'ol'
     },
-    icon: {
-      type: String,
-      default: () => appConfig.ui.breadcrumb.default.icon
-    },
     divider: {
-      type: String,
-      default: ''
+      type: Object as PropType<{ icon: string, text: string }>,
+      default: () => appConfig.ui.breadcrumb.default.divider
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.breadcrumb>>,

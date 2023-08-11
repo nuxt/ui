@@ -899,14 +899,18 @@ const breadcrumb = {
       xl: 'h-6 w-6'
     }
   },
-  active: 'text-primary-500 dark:text-primary-400 font-semibold',
-  inactive: 'text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
   item: {
     base: 'flex items-center',
+    link: 'flex items-center gap-x-1 disabled:cursor-not-allowed disabled:opacity-75',
+    active: 'text-primary-500 dark:text-primary-400 font-semibold',
+    inactive: 'text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
     divider: 'ms-1 flex'
   },
   default: {
-    icon: 'i-heroicons-chevron-right',
+    divider: {
+      icon: 'i-heroicons-chevron-right',
+      text: ''
+    },
     size: 'md'
   }
 }

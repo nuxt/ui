@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const items = [{
   text: 'Documentation',
-  icon: 'i-heroicons-information-circle',
+  icon: 'i-heroicons-home',
   to: '/getting-started'
 }, {
   text: 'Installation',
