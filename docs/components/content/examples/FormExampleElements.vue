@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { z } from 'zod'
-import { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
 
 const options = [
   { label: 'Option 1', value: 'option-1' },

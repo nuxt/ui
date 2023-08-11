@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { z } from 'zod'
-import { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = z.object({
   email: z.string().email('Invalid email'),
@@ -27,7 +27,7 @@ async function submit (event: FormSubmitEvent<Schema>) {
     ref="form"
     :schema="schema"
     :state="state"
-    @submit="(value) => submit(value)"
+    @submit="submit"
   >
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
