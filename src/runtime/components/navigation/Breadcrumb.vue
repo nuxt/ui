@@ -1,7 +1,7 @@
 <template>
   <div :class="ui.wrapper">
     <component :is="tag" :class="ui.base">
-      <component :is="item.tag || 'li'" v-for="(item, key) in items" :key="key" :class="[ui.item.base, ui.size[size]]">
+      <component :is="itemTag" v-for="(item, key) in items" :key="key" :class="[ui.item.base, ui.size[size]]">
         <ULink
           v-slot="{ isActive }"
           :to="item.to"
@@ -65,6 +65,10 @@ export default defineComponent({
     tag: {
       type: String,
       default: 'ol'
+    },
+    itemTag: {
+      type: String,
+      default: 'li'
     },
     divider: {
       type: Object as PropType<{ icon: string, text: string }>,
