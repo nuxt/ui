@@ -67,7 +67,7 @@ const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 // Head
 
 useHead({
-  titleTemplate: title => title && title.includes('NuxtLabs UI') ? title : `${title} - NuxtLabs UI`,
+  titleTemplate: title => title && title.includes('Nuxt UI') ? title : `${title} - Nuxt UI`,
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
