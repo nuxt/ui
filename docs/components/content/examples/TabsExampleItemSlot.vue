@@ -9,7 +9,7 @@ const items = [{
   description: 'Change your password here. After saving, you\'ll be logged out.'
 }]
 
-const accountForm = reactive({ name: 'Benjamin', username: 'benjamincanac'  })
+const accountForm = reactive({ name: 'Benjamin', username: 'benjamincanac' })
 const passwordForm = reactive({ currentPassword: '', newPassword: '' })
 
 function onSubmit (form) {
