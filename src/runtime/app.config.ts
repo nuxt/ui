@@ -877,7 +877,8 @@ const modal = {
   inner: 'fixed inset-0 overflow-y-auto',
   container: 'flex min-h-full items-end sm:items-center justify-center text-center',
   padding: 'p-4 sm:p-0',
-  base: 'relative text-left rtl:text-right overflow-hidden sm:my-8 w-full flex flex-col',
+  margin: 'sm:my-8',
+  base: 'relative text-left rtl:text-right overflow-hidden w-full flex flex-col',
   overlay: {
     base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-200/75 dark:bg-gray-800/75',

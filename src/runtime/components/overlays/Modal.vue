@@ -8,7 +8,18 @@
       <div :class="ui.inner">
         <div :class="[ui.container, ui.padding]">
           <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-            <HDialogPanel :class="[ui.base, ui.width, ui.height, ui.background, ui.ring, ui.rounded, ui.shadow]">
+            <HDialogPanel
+              :class="[
+                ui.base,
+                ui.background,
+                ui.ring,
+                ui.shadow,
+                fullscreen ? 'w-screen' : ui.width,
+                fullscreen ? 'h-screen' : ui.height,
+                fullscreen ? 'rounded-none' : ui.rounded,
+                fullscreen ? 'm-0' : ui.margin
+              ]"
+            >
               <slot />
             </HDialogPanel>
           </TransitionChild>
@@ -55,6 +66,10 @@ export default defineComponent({
       default: true
     },
     preventClose: {
+      type: Boolean,
+      default: false
+    },
+    fullscreen: {
       type: Boolean,
       default: false
     },
