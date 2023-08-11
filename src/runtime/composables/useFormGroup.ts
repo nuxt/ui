@@ -15,17 +15,17 @@ export const useFormGroup = () => {
     }
 
     function emitFormBlur () {
-      emitFormEvent('blur', formGroup.name.value)
+      emitFormEvent('blur', formGroup?.name.value)
       blurred.value = true
     }
 
     function emitFormChange () {
-      emitFormEvent('change', formGroup.name.value)
+      emitFormEvent('change', formGroup?.name.value)
     }
 
     const emitFormInput = useDebounceFn(() => {
       if (blurred.value) {
-        emitFormEvent('input', formGroup.name.value)
+        emitFormEvent('input', formGroup?.name.value)
       }
     }, 300)
 
