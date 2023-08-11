@@ -75,7 +75,7 @@ export default defineComponent({
 
     const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
     const errorMessage = computed(() => {
-      return props.error && typeof props.error === 'string'
+      return (props.error && typeof props.error === 'string') || typeof props.error === 'boolean'
         ? props.error
         : formErrors?.value?.find((error) => error.path === props.name)?.message
     })
