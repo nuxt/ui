@@ -131,6 +131,7 @@ export default defineComponent({
 
     watch(() => props.modelValue, (value) => {
       selectedIndex.value = value
+      calcMarkerSize(value)
     })
 
     onMounted(() => calcMarkerSize(selectedIndex.value))
