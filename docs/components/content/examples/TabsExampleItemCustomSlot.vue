@@ -7,7 +7,7 @@ const items = [{
   label: 'Password'
 }]
 
-const accountForm = reactive({ name: 'Benjamin', username: 'benjamincanac'  })
+const accountForm = reactive({ name: 'Benjamin', username: 'benjamincanac' })
 const passwordForm = reactive({ currentPassword: '', newPassword: '' })
 
 function onSubmitAccount () {
