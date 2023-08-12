@@ -8,7 +8,7 @@
           v-model="componentProps[prop.name]"
           :name="`prop-${prop.name}`"
           tabindex="-1"
-          :ui="{ wrapper: 'relative flex items-start justify-center' }"
+          class="justify-center"
         />
         <USelectMenu
           v-else-if="prop.type === 'string' && prop.options.length"
@@ -16,8 +16,9 @@
           :options="prop.options"
           :name="`prop-${prop.name}`"
           variant="none"
-          :ui-menu="{ width: 'w-32 !-mt-px', rounded: 'rounded-b-md', wrapper: 'relative inline-flex' }"
-          class="!py-0"
+          class="inline-flex"
+          :ui-menu="{ width: 'w-32 !-mt-px', rounded: 'rounded-t-none' }"
+          select-class="py-0"
           tabindex="-1"
           :popper="{ strategy: 'fixed', placement: 'bottom-start' }"
         />
@@ -28,7 +29,7 @@
           :name="`prop-${prop.name}`"
           variant="none"
           autocomplete="off"
-          class="!py-0"
+          input-class="py-0"
           tabindex="-1"
           @update:model-value="val => componentProps[prop.name] = prop.type === 'number' ? Number(val) : val"
         />

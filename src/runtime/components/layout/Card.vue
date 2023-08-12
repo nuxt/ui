@@ -1,8 +1,8 @@
 <template>
   <component
     :is="$attrs.onSubmit ? 'form' : as"
-    :class="[ui.base, ui.rounded, ui.divide, ui.ring, ui.shadow, ui.background]"
-    v-bind="$attrs"
+    :class="cardClass"
+    v-bind="attrs"
   >
     <div v-if="$slots.header" :class="[ui.header.base, ui.header.padding, ui.header.background]">
       <slot name="header" />
@@ -19,7 +19,9 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
+import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -36,18 +38,31 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.card>>,
-      default: () => appConfig.ui.card
+      default: () => ({})
     }
   },
-  setup (props) {
+  setup (props, { attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.card>>(() => defu({}, props.ui, appConfig.ui.card))
+    const ui = computed<Partial<typeof appConfig.ui.card>>(() => defuTwMerge({}, props.ui, appConfig.ui.card))
+
+    const cardClass = computed(() => {
+      return twMerge(twJoin(
+        ui.value.base,
+        ui.value.rounded,
+        ui.value.divide,
+        ui.value.ring,
+        ui.value.shadow,
+        ui.value.background
+      ), attrs.class as string)
+    })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
-      ui
+      ui,
+      cardClass
     }
   }
 })

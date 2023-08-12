@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isOpen" ref="container" :class="[ui.container, ui.width]">
+  <div v-if="isOpen" ref="container" :class="wrapperClass" v-bind="attrs">
     <Transition appear v-bind="ui.transition">
       <div :class="[ui.base, ui.ring, ui.rounded, ui.shadow, ui.background]">
         <slot />
@@ -14,7 +14,10 @@ import type { PropType, Ref } from 'vue'
 import { defu } from 'defu'
 import { onClickOutside } from '@vueuse/core'
 import type { VirtualElement } from '@popperjs/core'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
 import { usePopper } from '../../composables/usePopper'
+import { defuTwMerge } from '../../utils'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -24,6 +27,7 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: Boolean,
@@ -39,15 +43,15 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.contextMenu>>,
-      default: () => appConfig.ui.contextMenu
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close'],
-  setup (props, { emit }) {
+  setup (props, { attrs, emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.contextMenu>>(() => defu({}, props.ui, appConfig.ui.contextMenu))
+    const ui = computed<Partial<typeof appConfig.ui.contextMenu>>(() => defuTwMerge({}, props.ui, appConfig.ui.contextMenu))
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
@@ -64,14 +68,23 @@ export default defineComponent({
 
     const [, container] = usePopper(popper.value, virtualElement)
 
+    const wrapperClass = computed(() => {
+      return twMerge(twJoin(
+        ui.value.container,
+        ui.value.width
+      ), attrs.class as string)
+    })
+
     onClickOutside(container, () => {
       isOpen.value = false
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       isOpen,
+      wrapperClass,
       container
     }
   }

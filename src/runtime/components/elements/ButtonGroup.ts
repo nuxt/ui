@@ -1,7 +1,8 @@
 import { h, cloneVNode, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
-import { getSlotsChildren } from '../../utils'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
+import { defuTwMerge, getSlotsChildren } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -10,6 +11,7 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     size: {
       type: String,
@@ -20,14 +22,14 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.buttonGroup>>,
-      default: () => appConfig.ui.buttonGroup
+      default: () => ({})
     }
   },
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.buttonGroup>>(() => defu({}, props.ui, appConfig.ui.buttonGroup))
+    const ui = computed<Partial<typeof appConfig.ui.buttonGroup>>(() => defuTwMerge({}, props.ui, appConfig.ui.buttonGroup))
 
     const children = computed(() => getSlotsChildren(slots))
 
@@ -50,22 +52,20 @@ export default defineComponent({
         vProps.size = props.size
       }
 
-      vProps.class = node.props?.class || ''
-      vProps.class += ' !shadow-none'
-      vProps.ui = node.props?.ui || {}
-      vProps.ui.rounded = ''
-
+      const classes = ['shadow-none', 'rounded-none']
       if (index === 0) {
-        vProps.ui.rounded = rounded.value.left
+        classes.push(rounded.value.left)
+      }
+      if (index === children.value.length - 1) {
+        classes.push(rounded.value.right)
       }
 
-      if (index === children.value.length - 1) {
-        vProps.ui.rounded = rounded.value.right
-      }
+      vProps.class = node.props?.class || ''
+      vProps.class = twMerge(twJoin(...classes), vProps.class)
 
       return cloneVNode(node, vProps)
     }))
 
-    return () => h('div', { class: [ui.value.wrapper, ui.value.rounded, ui.value.shadow] }, clones.value)
+    return () => h('div', { class: twMerge(twJoin(ui.value.wrapper, ui.value.rounded, ui.value.shadow), attrs.class as string), ...omit(attrs, ['class']) }, clones.value)
   }
 })

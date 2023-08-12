@@ -47,6 +47,7 @@
     "defu": "^6.1.2",
     "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",
+    "tailwind-merge": "^1.14.0",
     "tailwindcss": "^3.3.3"
   },
   "devDependencies": {
@@ -54,13 +55,13 @@
     "@nuxt/module-builder": "^0.4.0",
     "@release-it/conventional-changelog": "^7.0.0",
     "eslint": "^8.47.0",
+    "joi": "^17.9.2",
     "nuxt": "^3.6.5",
     "release-it": "^16.1.4",
     "typescript": "^5.1.6",
     "unbuild": "^1.2.1",
     "vue-tsc": "^1.8.8",
     "yup": "^1.2.0",
-    "joi": "^17.9.2",
     "zod": "^3.21.4"
   }
 }

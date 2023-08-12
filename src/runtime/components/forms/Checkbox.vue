@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="wrapperClass">
     <div class="flex items-center h-5">
       <input
         :id="name"
@@ -13,7 +13,7 @@
         type="checkbox"
         class="form-checkbox"
         :class="inputClass"
-        v-bind="$attrs"
+        v-bind="attrs"
         @change="onChange"
       >
     </div>
@@ -32,8 +32,9 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
-import { classNames } from '../../utils'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
+import { defuTwMerge } from '../../utils'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -88,17 +89,21 @@ export default defineComponent({
         return appConfig.ui.colors.includes(value)
       }
     },
+    inputClass: {
+      type: String,
+      default: ''
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.checkbox>>,
-      default: () => appConfig.ui.checkbox
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.checkbox>>(() => defu({}, props.ui, appConfig.ui.checkbox))
+    const ui = computed<Partial<typeof appConfig.ui.checkbox>>(() => defuTwMerge({}, props.ui, appConfig.ui.checkbox))
 
     const { emitFormChange, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
@@ -117,21 +122,26 @@ export default defineComponent({
       emitFormChange()
     }
 
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+
     const inputClass = computed(() => {
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.rounded,
         ui.value.background,
         ui.value.border,
         ui.value.ring.replaceAll('{color}', color.value),
         ui.value.color.replaceAll('{color}', color.value)
-      )
+      ), props.inputClass)
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       toggle,
+      wrapperClass,
+      // eslint-disable-next-line vue/no-dupe-keys
       inputClass,
       onChange
     }
