@@ -870,7 +870,7 @@ const tabs = {
   }
 }
 
-const steps = {
+const stepper = {
   wrapper: 'relative space-y-2',
   container: 'relative w-full',
   base: 'focus:outline-none',
@@ -1130,7 +1130,7 @@ export default {
     tabs,
     modal,
     slideover,
-    steps,
+    stepper,
     popover,
     tooltip,
     contextMenu,
