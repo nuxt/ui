@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="wrapperClass" v-bind="attrs">
     <label>
       <div v-if="label" :class="[ui.label.wrapper, size]">
         <p :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</p>
@@ -11,7 +11,7 @@
       <div :class="[label ? ui.container : '']">
         <slot v-bind="{ error }" />
 
-        <p v-if="error" :class="[ui.error, size]">{{ error }}</p>
+        <p v-if="error && typeof error !== 'boolean'" :class="[ui.error, size]">{{ error }}</p>
         <p v-else-if="help" :class="[ui.help, size]">{{ help }}</p>
       </div>
     </label>
@@ -21,9 +21,11 @@
 <script lang="ts">
 import { computed, defineComponent, provide, inject } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
+import { omit } from 'lodash-es'
+import { twMerge } from 'tailwind-merge'
 import type { FormError } from '../../types'
-
+import { defuTwMerge } from '../../utils'
+import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -31,6 +33,7 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     name: {
       type: String,
@@ -69,14 +72,16 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.formGroup>>,
-      default: () => appConfig.ui.formGroup
+      default: () => ({})
     }
   },
-  setup (props) {
+  setup (props, { attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.formGroup>>(() => defu({}, props.ui, appConfig.ui.formGroup))
+    const ui = computed<Partial<typeof appConfig.ui.formGroup>>(() => defuTwMerge({}, props.ui, appConfig.ui.formGroup))
+
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
@@ -95,8 +100,10 @@ export default defineComponent({
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
       size,
       // eslint-disable-next-line vue/no-dupe-keys

@@ -1,9 +1,9 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="wrapperClass">
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
       <HDisclosureButton :ref="() => buttonRefs[index] = close" as="template" :disabled="item.disabled">
         <slot :item="item" :index="index" :open="open" :close="close">
-          <UButton v-bind="{ ...omit(ui.default, ['openIcon', 'closeIcon']), ...$attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }">
+          <UButton v-bind="{ ...omit(ui.default, ['openIcon', 'closeIcon']), ...attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }">
             <template #trailing>
               <UIcon
                 :name="!open ? openIcon : closeIcon ? closeIcon : openIcon"
@@ -43,10 +43,11 @@
 import { ref, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel } from '@headlessui/vue'
-import { defu } from 'defu'
 import { omit } from 'lodash-es'
+import { twMerge } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
+import { defuTwMerge } from '../../utils'
 import StateEmitter from '../../utils/StateEmitter'
 import type { AccordionItem } from '../../types/accordion'
 import { useAppConfig } from '#imports'
@@ -87,16 +88,18 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.accordion>>,
-      default: () => appConfig.ui.accordion
+      default: () => ({})
     }
   },
-  setup (props) {
+  setup (props, { attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.accordion>>(() => defu({}, props.ui, appConfig.ui.accordion))
+    const ui = computed<Partial<typeof appConfig.ui.accordion>>(() => defuTwMerge({}, props.ui, appConfig.ui.accordion))
 
     const uiButton = computed<Partial<typeof appConfig.ui.button>>(() => appConfig.ui.button)
+
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     const buttonRefs = ref<Function[]>([])
 
@@ -136,9 +139,11 @@ export default defineComponent({
     }
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       uiButton,
+      wrapperClass,
       buttonRefs,
       closeOthers,
       omit,

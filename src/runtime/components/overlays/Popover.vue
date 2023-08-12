@@ -1,5 +1,5 @@
 <template>
-  <HPopover ref="popover" v-slot="{ open, close }" :class="ui.wrapper" @mouseleave="onMouseLeave">
+  <HPopover ref="popover" v-slot="{ open, close }" :class="wrapperClass" v-bind="attrs" @mouseleave="onMouseLeave">
     <HPopoverButton
       ref="trigger"
       as="div"
@@ -29,8 +29,11 @@
 import { computed, ref, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
+import { omit } from 'lodash-es'
+import { twMerge } from 'tailwind-merge'
 import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel } from '@headlessui/vue'
 import { usePopper } from '../../composables/usePopper'
+import { defuTwMerge } from '../../utils'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -45,6 +48,7 @@ export default defineComponent({
     HPopoverButton,
     HPopoverPanel
   },
+  inheritAttrs: false,
   props: {
     mode: {
       type: String,
@@ -71,14 +75,14 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.popover>>,
-      default: () => appConfig.ui.popover
+      default: () => ({})
     }
   },
-  setup (props) {
+  setup (props, { attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.popover>>(() => defu({}, props.ui, appConfig.ui.popover))
+    const ui = computed<Partial<typeof appConfig.ui.popover>>(() => defuTwMerge({}, props.ui, appConfig.ui.popover))
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 
@@ -105,6 +109,8 @@ export default defineComponent({
 
       return props.mode === 'hover' ? { paddingTop: `${offsetDistance}px`, paddingBottom: `${offsetDistance}px` } : {}
     })
+
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     function onMouseOver () {
       if (props.mode !== 'hover' || !popoverApi.value) {
@@ -147,12 +153,14 @@ export default defineComponent({
     }
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       popover,
       trigger,
       container,
       containerStyle,
+      wrapperClass,
       onMouseOver,
       onMouseLeave
     }

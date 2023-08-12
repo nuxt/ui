@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="wrapperClass">
     <textarea
       ref="textarea"
       :value="modelValue"
@@ -10,7 +10,7 @@
       :placeholder="placeholder"
       class="form-textarea"
       :class="textareaClass"
-      v-bind="$attrs"
+      v-bind="attrs"
       @input="onInput"
       @blur="onBlur"
     />
@@ -20,8 +20,9 @@
 <script lang="ts">
 import { ref, computed, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
-import { classNames } from '../../utils'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
+import { defuTwMerge } from '../../utils'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -97,19 +98,23 @@ export default defineComponent({
         ].includes(value)
       }
     },
+    textareaClass: {
+      type: String,
+      default: null
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.textarea>>,
-      default: () => appConfig.ui.textarea
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'blur'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defu({}, props.ui, appConfig.ui.textarea))
+    const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defuTwMerge({}, props.ui, appConfig.ui.textarea))
 
     const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
@@ -172,10 +177,12 @@ export default defineComponent({
       }, 100)
     })
 
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+
     const textareaClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.rounded,
         ui.value.placeholder,
@@ -183,13 +190,16 @@ export default defineComponent({
         props.padded ? ui.value.padding[size.value] : 'p-0',
         variant?.replaceAll('{color}', color.value),
         !props.resize && 'resize-none'
-      )
+      ), props.textareaClass)
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       textarea,
+      wrapperClass,
+      // eslint-disable-next-line vue/no-dupe-keys
       textareaClass,
       onInput,
       onBlur

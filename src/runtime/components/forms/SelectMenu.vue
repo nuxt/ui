@@ -8,7 +8,7 @@
     :multiple="multiple"
     :disabled="disabled || loading"
     as="div"
-    :class="uiMenu.wrapper"
+    :class="wrapperClass"
     @update:model-value="onUpdate"
   >
     <input
@@ -28,7 +28,7 @@
       class="inline-flex w-full"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
-        <button :class="selectClass" :disabled="disabled || loading" type="button" v-bind="$attrs">
+        <button :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
             <slot name="leading" :disabled="disabled" :loading="loading">
               <UIcon :name="leadingIconName" :class="leadingIconClass" />
@@ -131,9 +131,11 @@ import {
 } from '@headlessui/vue'
 import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
-import { classNames } from '../../utils'
+import { defuTwMerge } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
 import type { PopperOptions } from '../../types'
@@ -284,22 +286,26 @@ export default defineComponent({
       type: Object as PropType<PopperOptions>,
       default: () => ({})
     },
+    selectClass: {
+      type: String,
+      default: null
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.select>>,
-      default: () => appConfig.ui.select
+      default: () => ({})
     },
     uiMenu: {
       type: Object as PropType<Partial<typeof appConfig.ui.selectMenu>>,
-      default: () => appConfig.ui.selectMenu
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'open', 'close', 'change'],
-  setup (props, { emit, slots }) {
+  setup (props, { emit, attrs, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.select>>(() => defu({}, props.ui, appConfig.ui.select))
-    const uiMenu = computed<Partial<typeof appConfig.ui.selectMenu>>(() => defu({}, props.uiMenu, appConfig.ui.selectMenu))
+    const ui = computed<Partial<typeof appConfig.ui.select>>(() => defuTwMerge({}, props.ui, appConfig.ui.select))
+    const uiMenu = computed<Partial<typeof appConfig.ui.selectMenu>>(() => defuTwMerge({}, props.uiMenu, appConfig.ui.selectMenu))
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
@@ -311,10 +317,12 @@ export default defineComponent({
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
 
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+
     const selectClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.rounded,
         'text-left cursor-default',
@@ -325,7 +333,7 @@ export default defineComponent({
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value],
         'inline-flex items-center'
-      )
+      ), props.selectClass)
     })
 
     const isLeading = computed(() => {
@@ -353,7 +361,7 @@ export default defineComponent({
     })
 
     const leadingWrapperIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.leading.wrapper,
         ui.value.icon.leading.pointer,
         ui.value.icon.leading.padding[size.value]
@@ -361,7 +369,7 @@ export default defineComponent({
     })
 
     const leadingIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
@@ -370,7 +378,7 @@ export default defineComponent({
     })
 
     const trailingWrapperIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.trailing.wrapper,
         ui.value.icon.trailing.pointer,
         ui.value.icon.trailing.padding[size.value]
@@ -378,7 +386,7 @@ export default defineComponent({
     })
 
     const trailingIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
@@ -429,12 +437,15 @@ export default defineComponent({
     }
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       uiMenu,
       trigger,
       container,
       isLeading,
       isTrailing,
+      wrapperClass,
+      // eslint-disable-next-line vue/no-dupe-keys
       selectClass,
       leadingIconName,
       leadingIconClass,

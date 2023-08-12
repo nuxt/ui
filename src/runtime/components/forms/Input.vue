@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="wrapperClass">
     <input
       ref="input"
       :name="name"
@@ -10,7 +10,7 @@
       :disabled="disabled || loading"
       class="form-input"
       :class="inputClass"
-      v-bind="$attrs"
+      v-bind="attrs"
       @input="onInput"
       @blur="onBlur"
     >
@@ -33,10 +33,11 @@
 <script lang="ts">
 import { ref, computed, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
+import { defuTwMerge } from '../../utils'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { classNames } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -134,17 +135,21 @@ export default defineComponent({
         ].includes(value)
       }
     },
+    inputClass: {
+      type: String,
+      default: null
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.input>>,
-      default: () => appConfig.ui.input
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'blur'],
-  setup (props, { emit, slots }) {
+  setup (props, { emit, attrs, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.input>>(() => defu({}, props.ui, appConfig.ui.input))
+    const ui = computed<Partial<typeof appConfig.ui.input>>(() => defuTwMerge({}, props.ui, appConfig.ui.input))
 
     const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
@@ -174,10 +179,12 @@ export default defineComponent({
       }, 100)
     })
 
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+
     const inputClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.rounded,
         ui.value.placeholder,
@@ -186,7 +193,7 @@ export default defineComponent({
         variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
-      )
+      ), props.inputClass)
     })
 
     const isLeading = computed(() => {
@@ -214,7 +221,7 @@ export default defineComponent({
     })
 
     const leadingWrapperIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.leading.wrapper,
         ui.value.icon.leading.pointer,
         ui.value.icon.leading.padding[size.value]
@@ -222,7 +229,7 @@ export default defineComponent({
     })
 
     const leadingIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
@@ -231,7 +238,7 @@ export default defineComponent({
     })
 
     const trailingWrapperIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.trailing.wrapper,
         ui.value.icon.trailing.pointer,
         ui.value.icon.trailing.padding[size.value]
@@ -239,7 +246,7 @@ export default defineComponent({
     })
 
     const trailingIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
@@ -248,11 +255,14 @@ export default defineComponent({
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       input,
       isLeading,
       isTrailing,
+      wrapperClass,
+      // eslint-disable-next-line vue/no-dupe-keys
       inputClass,
       leadingIconName,
       leadingIconClass,
