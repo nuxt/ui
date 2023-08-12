@@ -52,16 +52,17 @@ export default defineComponent({
         vProps.size = props.size
       }
 
-      const classes = ['shadow-none', 'rounded-none']
+      vProps.ui = node.props?.ui || {}
+      vProps.ui.rounded = 'rounded-none'
+      vProps.ui.base = '!shadow-none'
+
       if (index === 0) {
-        classes.push(rounded.value.left)
-      }
-      if (index === children.value.length - 1) {
-        classes.push(rounded.value.right)
+        vProps.ui.rounded += ` ${rounded.value.left}`
       }
 
-      vProps.class = node.props?.class || ''
-      vProps.class = twMerge(twJoin(...classes), vProps.class)
+      if (index === children.value.length - 1) {
+        vProps.ui.rounded += ` ${rounded.value.right}`
+      }
 
       return cloneVNode(node, vProps)
     }))
