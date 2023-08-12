@@ -55,8 +55,8 @@
             </td>
 
             <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
-              <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index">
-                {{ row[column.key] }}
+              <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue) => getRowData(row, column.key, defaultValue)">
+                {{ getRowData(row, column.key) }}
               </slot>
             </td>
           </tr>
@@ -69,7 +69,7 @@
 <script lang="ts">
 import { ref, computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
-import { omit, capitalize, orderBy } from 'lodash-es'
+import { omit, capitalize, orderBy, get } from 'lodash-es'
 import { defu } from 'defu'
 import { twMerge } from 'tailwind-merge'
 import { defuTwMerge } from '../../utils'
@@ -235,6 +235,10 @@ export default defineComponent({
       }
     }
 
+    function getRowData (row: Object, rowKey: string | string[], defaultValue: any = 'Failed to get cell value') {
+      return get(row, rowKey, defaultValue)
+    }
+
     return {
       attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
@@ -253,7 +257,8 @@ export default defineComponent({
       isSelected,
       onSort,
       onSelect,
-      onChange
+      onChange,
+      getRowData
     }
   }
 })

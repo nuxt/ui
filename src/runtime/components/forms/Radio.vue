@@ -2,7 +2,6 @@
   <div :class="wrapperClass">
     <div class="flex items-center h-5">
       <input
-        :id="`${name}-${value}`"
         v-model="pick"
         :name="name"
         :required="required"
@@ -12,7 +11,6 @@
         class="form-radio"
         :class="inputClass"
         v-bind="attrs"
-        @change="onChange"
       >
     </div>
     <div v-if="label || $slots.label" class="ms-3 text-sm">
@@ -33,7 +31,7 @@ import type { PropType } from 'vue'
 import { omit } from 'lodash-es'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { defuTwMerge } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -88,14 +86,15 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'change'],
+  emits: ['update:modelValue'],
   setup (props, { emit, attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
     const ui = computed<Partial<typeof appConfig.ui.radio>>(() => defuTwMerge({}, props.ui, appConfig.ui.radio))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
 
     const pick = computed({
       get () {
@@ -104,7 +103,7 @@ export default defineComponent({
       set (value) {
         emit('update:modelValue', value)
         if (value) {
-          emitFormBlur()
+          emitFormChange()
         }
       }
     })
@@ -116,8 +115,8 @@ export default defineComponent({
         ui.value.base,
         ui.value.background,
         ui.value.border,
-        ui.value.ring.replaceAll('{color}', props.color),
-        ui.value.color.replaceAll('{color}', props.color)
+        ui.value.ring.replaceAll('{color}', color.value),
+        ui.value.color.replaceAll('{color}', color.value)
       ), props.inputClass)
     })
 

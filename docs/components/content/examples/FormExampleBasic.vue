@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormError } from '@nuxthq/ui/dist/runtime/types'
+import type { FormError, FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
 
 const state = ref({
   email: undefined,
@@ -14,20 +14,17 @@ const validate = (state: any): FormError[] => {
   return errors
 }
 
-const form = ref()
-
-async function submit () {
-  await form.value!.validate()
-  // Do something with state.value
+async function submit (event: FormSubmitEvent<any>) {
+  // Do something with data
+  console.log(event.data)
 }
 </script>
 
 <template>
   <UForm
-    ref="form"
     :validate="validate"
     :state="state"
-    @submit.prevent="submit"
+    @submit="submit"
   >
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />

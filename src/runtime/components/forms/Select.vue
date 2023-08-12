@@ -1,7 +1,6 @@
 <template>
   <div :class="wrapperClass">
     <select
-      :id="name"
       :name="name"
       :value="modelValue"
       :required="required"
@@ -60,7 +59,7 @@ import { get, omit } from 'lodash-es'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { defuTwMerge } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -178,14 +177,17 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.select>>(() => defuTwMerge({}, props.ui, appConfig.ui.select))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
+    const size = computed(() => formGroup?.size?.value ?? props.size)
+
 
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
     const onChange = (event: Event) => {
-      emitFormBlur()
+      emitFormChange()
       emit('change', event)
     }
 
@@ -244,16 +246,16 @@ export default defineComponent({
     const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     const selectClass = computed(() => {
-      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+      const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
       return twMerge(twJoin(
         ui.value.base,
         ui.value.rounded,
-        ui.value.size[props.size],
-        props.padded ? ui.value.padding[props.size] : 'p-0',
-        variant?.replaceAll('{color}', props.color),
-        (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
-        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size]
+        ui.value.size[size.value],
+        props.padded ? ui.value.padding[size.value] : 'p-0',
+        variant?.replaceAll('{color}', color.value),
+        (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
       ), props.selectClass)
     })
 
@@ -285,15 +287,15 @@ export default defineComponent({
       return twJoin(
         ui.value.icon.leading.wrapper,
         ui.value.icon.leading.pointer,
-        ui.value.icon.leading.padding[props.size]
+        ui.value.icon.leading.padding[size.value]
       )
     })
 
     const leadingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
-        ui.value.icon.size[props.size],
+        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        ui.value.icon.size[size.value],
         props.loading && 'animate-spin'
       )
     })
@@ -302,15 +304,15 @@ export default defineComponent({
       return twJoin(
         ui.value.icon.trailing.wrapper,
         ui.value.icon.trailing.pointer,
-        ui.value.icon.trailing.padding[props.size]
+        ui.value.icon.trailing.padding[size.value]
       )
     })
 
     const trailingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
-        ui.value.icon.size[props.size],
+        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        ui.value.icon.size[size.value],
         props.loading && !isLeading.value && 'animate-spin'
       )
     })

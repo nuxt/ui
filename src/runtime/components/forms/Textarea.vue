@@ -1,7 +1,6 @@
 <template>
   <div :class="wrapperClass">
     <textarea
-      :id="name"
       ref="textarea"
       :value="modelValue"
       :name="name"
@@ -24,7 +23,7 @@ import type { PropType } from 'vue'
 import { omit } from 'lodash-es'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { defuTwMerge } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -117,7 +116,9 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defuTwMerge({}, props.ui, appConfig.ui.textarea))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
+    const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const autoFocus = () => {
       if (props.autofocus) {
@@ -151,11 +152,12 @@ export default defineComponent({
       autoResize()
 
       emit('update:modelValue', (event.target as HTMLInputElement).value)
+      emitFormInput()
     }
 
     const onBlur = (event: FocusEvent) => {
-      emitFormBlur()
       emit('blur', event)
+      emitFormBlur()
     }
 
     onMounted(() => {
@@ -178,15 +180,15 @@ export default defineComponent({
     const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     const textareaClass = computed(() => {
-      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+      const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
       return twMerge(twJoin(
         ui.value.base,
         ui.value.rounded,
         ui.value.placeholder,
-        ui.value.size[props.size],
-        props.padded ? ui.value.padding[props.size] : 'p-0',
-        variant?.replaceAll('{color}', props.color),
+        ui.value.size[size.value],
+        props.padded ? ui.value.padding[size.value] : 'p-0',
+        variant?.replaceAll('{color}', color.value),
         !props.resize && 'resize-none'
       ), props.textareaClass)
     })
