@@ -5,12 +5,12 @@ export const useContentSource = () => {
 
   const branches = [{
     name: 'dev',
-    // icon: 'i-heroicons-wrench-screwdriver-20-solid',
+    icon: 'i-heroicons-cube',
     suffix: 'dev',
     label: 'Edge'
   }, {
     name: 'main',
-    // icon: 'i-heroicons-rocket-launch-20-solid',
+    icon: 'i-heroicons-cube',
     suffix: 'latest',
     label: `v${config.version}`
   }]
@@ -37,6 +37,10 @@ export const useContentSource = () => {
 
   function removePrefixFromFiles (files: ParsedContent[]) {
     return files.map((file) => {
+      if (!file) {
+        return
+      }
+
       const { _path, ...rest } = file
 
       return {
