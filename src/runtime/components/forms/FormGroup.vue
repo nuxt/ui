@@ -11,7 +11,7 @@
       <div :class="[label ? ui.container : '']">
         <slot v-bind="{ error }" />
 
-        <p v-if="error" :class="[ui.error, size]">{{ error }}</p>
+        <p v-if="error && typeof error !== 'boolean'" :class="[ui.error, size]">{{ error }}</p>
         <p v-else-if="help" :class="[ui.help, size]">{{ help }}</p>
       </div>
     </label>
