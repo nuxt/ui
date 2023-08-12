@@ -1,7 +1,6 @@
 <template>
   <div :class="ui.wrapper">
     <textarea
-      :id="name"
       ref="textarea"
       :value="modelValue"
       :name="name"
@@ -23,7 +22,7 @@ import { ref, computed, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -112,7 +111,9 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defu({}, props.ui, appConfig.ui.textarea))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
+    const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const autoFocus = () => {
       if (props.autofocus) {
@@ -146,11 +147,12 @@ export default defineComponent({
       autoResize()
 
       emit('update:modelValue', (event.target as HTMLInputElement).value)
+      emitFormInput()
     }
 
     const onBlur = (event: FocusEvent) => {
-      emitFormBlur()
       emit('blur', event)
+      emitFormBlur()
     }
 
     onMounted(() => {
@@ -171,15 +173,15 @@ export default defineComponent({
     })
 
     const textareaClass = computed(() => {
-      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+      const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
       return classNames(
         ui.value.base,
         ui.value.rounded,
         ui.value.placeholder,
-        ui.value.size[props.size],
-        props.padded ? ui.value.padding[props.size] : 'p-0',
-        variant?.replaceAll('{color}', props.color),
+        ui.value.size[size.value],
+        props.padded ? ui.value.padding[size.value] : 'p-0',
+        variant?.replaceAll('{color}', color.value),
         !props.resize && 'resize-none'
       )
     })
