@@ -1,15 +1,18 @@
 <template>
-  <div :class="[ui.wrapper]">
+  <div :class="ui.wrapper">
     <label>
-      <div v-if="label" :class="[ui.label.wrapper, ui.size[size]]">
+      <div v-if="label" :class="[ui.label.wrapper, size]">
         <p :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</p>
         <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
       </div>
-      <p v-if="description" :class="[ui.description, ui.size[size]]">{{ description }}</p>
+
+      <p v-if="description" :class="[ui.description, size]">{{ description }}</p>
+
       <div :class="[label ? ui.container : '']">
-        <slot v-bind="{ error: errorMessage }" />
-        <p v-if="errorMessage" :class="[ui.error, ui.size[size]]">{{ errorMessage }}</p>
-        <p v-else-if="help" :class="[ui.help, ui.size[size]]">{{ help }}</p>
+        <slot v-bind="{ error }" />
+
+        <p v-if="error" :class="[ui.error, size]">{{ error }}</p>
+        <p v-else-if="help" :class="[ui.help, size]">{{ help }}</p>
       </div>
     </label>
   </div>
@@ -70,21 +73,25 @@ export default defineComponent({
     }
   },
   setup (props) {
+    // TODO: Remove
     const appConfig = useAppConfig()
+
     const ui = computed<Partial<typeof appConfig.ui.formGroup>>(() => defu({}, props.ui, appConfig.ui.formGroup))
 
     const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
-    const errorMessage = computed(() => {
+
+    const error = computed(() => {
       return (props.error && typeof props.error === 'string') || typeof props.error === 'boolean'
         ? props.error
         : formErrors?.value?.find((error) => error.path === props.name)?.message
     })
 
-    const size = computed(() => props.size ?? appConfig.ui.input.default.size)
+    const size = computed(() => ui.value.size[props.size ?? appConfig.ui.input.default.size])
+
     provide('form-group', {
-      size,
+      error,
       name: computed(() => props.name),
-      error: errorMessage
+      size: computed(() => props.size)
     })
 
     return {
@@ -92,7 +99,8 @@ export default defineComponent({
       ui,
       // eslint-disable-next-line vue/no-dupe-keys
       size,
-      errorMessage
+      // eslint-disable-next-line vue/no-dupe-keys
+      error
     }
   }
 })
