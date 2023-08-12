@@ -8,7 +8,9 @@
         <UPage>
           <template #left>
             <UAside :links="anchors">
-              <UNavigationTree :links="mapContentNavigation(navigation)" />
+              <VersionSelect />
+
+              <UNavigationTree :links="tree" />
             </UAside>
           </template>
 
@@ -18,7 +20,7 @@
     </UMain>
 
     <ClientOnly>
-      <UDocsSearch :files="files" :navigation="navigation" />
+      <UDocsSearch :files="removePrefixFromFiles(files)" :navigation="removePrefixFromNavigation(navigation)" />
     </ClientOnly>
 
     <UNotifications>
@@ -35,13 +37,17 @@
 
 <script setup lang="ts">
 const colorMode = useColorMode()
+const { prefix, removePrefixFromNavigation, removePrefixFromFiles } = useContentSource()
 const { mapContentNavigation } = useElementsHelpers()
 
-const { data: navigation } = await useLazyAsyncData('navigation', () => fetchContentNavigation(), {
-  default: () => []
+const { data: navigation } = await useLazyAsyncData('navigation', () => fetchContentNavigation(queryContent(prefix.value)), {
+  default: () => [],
+  transform: (navigation) => navigation[0]?.children || [],
+  watch: [prefix]
 })
-const { data: files } = await useLazyAsyncData('files', () => queryContent().where({ _type: 'markdown', navigation: { $ne: false } }).find(), {
-  default: () => []
+const { data: files } = await useLazyAsyncData('files', () => queryContent(prefix.value).where({ _type: 'markdown', navigation: { $ne: false } }).find(), {
+  default: () => [],
+  watch: [prefix]
 })
 
 const anchors = [{
@@ -63,6 +69,8 @@ const anchors = [{
 // Computed
 
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
+
+const tree = computed(() => mapContentNavigation(removePrefixFromNavigation(navigation.value)))
 
 // Head
 

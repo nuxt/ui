@@ -30,6 +30,23 @@ export default defineNuxtConfig({
     icons: ['heroicons', 'simple-icons'],
     safelistColors: excludeColors(colors)
   },
+  content: {
+    sources: {
+      // overwrite default source AKA `content` directory
+      content: {
+        prefix: '/dev',
+        driver: 'fs',
+        base: resolve('./content')
+      },
+      main: {
+        prefix: '/main',
+        driver: 'github',
+        repo: 'nuxtlabs/ui',
+        branch: 'main',
+        dir: 'docs/content'
+      }
+    }
+  },
   googleFonts: {
     families: {
       Inter: [400, 500, 600, 700]
