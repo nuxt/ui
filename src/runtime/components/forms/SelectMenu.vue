@@ -135,7 +135,7 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { classNames } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { useFormGroup } from '../../composables/useFormGroup'
 import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -304,24 +304,26 @@ export default defineComponent({
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormBlur, emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
+    const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
 
     const selectClass = computed(() => {
-      const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
+      const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
       return classNames(
         ui.value.base,
         ui.value.rounded,
         'text-left cursor-default',
-        ui.value.size[props.size],
-        ui.value.gap[props.size],
-        props.padded ? ui.value.padding[props.size] : 'p-0',
-        variant?.replaceAll('{color}', props.color),
-        (isLeading.value || slots.leading) && ui.value.leading.padding[props.size],
-        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[props.size],
+        ui.value.size[size.value],
+        ui.value.gap[size.value],
+        props.padded ? ui.value.padding[size.value] : 'p-0',
+        variant?.replaceAll('{color}', color.value),
+        (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value],
         'inline-flex items-center'
       )
     })
@@ -354,15 +356,15 @@ export default defineComponent({
       return classNames(
         ui.value.icon.leading.wrapper,
         ui.value.icon.leading.pointer,
-        ui.value.icon.leading.padding[props.size]
+        ui.value.icon.leading.padding[size.value]
       )
     })
 
     const leadingIconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
-        ui.value.icon.size[props.size],
+        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        ui.value.icon.size[size.value],
         props.loading && 'animate-spin'
       )
     })
@@ -371,15 +373,15 @@ export default defineComponent({
       return classNames(
         ui.value.icon.trailing.wrapper,
         ui.value.icon.trailing.pointer,
-        ui.value.icon.trailing.padding[props.size]
+        ui.value.icon.trailing.padding[size.value]
       )
     })
 
     const trailingIconClass = computed(() => {
       return classNames(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(props.color) && ui.value.icon.color.replaceAll('{color}', props.color),
-        ui.value.icon.size[props.size],
+        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        ui.value.icon.size[size.value],
         props.loading && !isLeading.value && 'animate-spin'
       )
     })
@@ -423,7 +425,7 @@ export default defineComponent({
       }
       emit('update:modelValue', event)
       emit('change', event)
-      emitFormBlur()
+      emitFormChange()
     }
 
     return {

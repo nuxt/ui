@@ -23,7 +23,7 @@ import { defu } from 'defu'
 import { Switch as HSwitch } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import { classNames } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -76,7 +76,8 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defu({}, props.ui, appConfig.ui.toggle))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
 
     const active = computed({
       get () {
@@ -84,7 +85,7 @@ export default defineComponent({
       },
       set (value) {
         emit('update:modelValue', value)
-        emitFormBlur()
+        emitFormChange()
       }
     })
 
@@ -92,20 +93,20 @@ export default defineComponent({
       return classNames(
         ui.value.base,
         ui.value.rounded,
-        ui.value.ring.replaceAll('{color}', props.color),
-        (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', props.color)
+        ui.value.ring.replaceAll('{color}', color.value),
+        (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', color.value)
       )
     })
 
     const onIconClass = computed(() => {
       return classNames(
-        ui.value.icon.on.replaceAll('{color}', props.color)
+        ui.value.icon.on.replaceAll('{color}', color.value)
       )
     })
 
     const offIconClass = computed(() => {
       return classNames(
-        ui.value.icon.off.replaceAll('{color}', props.color)
+        ui.value.icon.off.replaceAll('{color}', color.value)
       )
     })
 

@@ -34,7 +34,7 @@ import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { classNames } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -100,7 +100,8 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.checkbox>>(() => defu({}, props.ui, appConfig.ui.checkbox))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
 
     const toggle = computed({
       get () {
@@ -113,7 +114,7 @@ export default defineComponent({
 
     const onChange = (event: Event) => {
       emit('change', event)
-      emitFormBlur()
+      emitFormChange()
     }
 
     const inputClass = computed(() => {
@@ -122,8 +123,8 @@ export default defineComponent({
         ui.value.rounded,
         ui.value.background,
         ui.value.border,
-        ui.value.ring.replaceAll('{color}', props.color),
-        ui.value.color.replaceAll('{color}', props.color)
+        ui.value.ring.replaceAll('{color}', color.value),
+        ui.value.color.replaceAll('{color}', color.value)
       )
     })
 
