@@ -63,7 +63,7 @@ export default defineComponent({
     },
     openDelay: {
       type: Number,
-      default: 50
+      default: 0
     },
     closeDelay: {
       type: Number,
