@@ -1,7 +1,6 @@
 <template>
   <div :class="wrapperClass">
     <input
-      :id="name"
       ref="input"
       v-model.number="value"
       :name="name"
@@ -11,7 +10,7 @@
       :step="step"
       type="range"
       :class="[inputClass, thumbClass, trackClass]"
-      v-bind="$attrs"
+      v-bind="attrs"
       @change="onChange"
     >
 
@@ -22,9 +21,10 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
-import { classNames } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
+import { defuTwMerge } from '../../utils'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -71,19 +71,25 @@ export default defineComponent({
         return appConfig.ui.colors.includes(value)
       }
     },
+    inputClass: {
+      type: String,
+      default: null
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.range>>,
-      default: () => appConfig.ui.range
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.range>>(() => defu({}, props.ui, appConfig.ui.range))
+    const ui = computed<Partial<typeof appConfig.ui.range>>(() => defuTwMerge({}, props.ui, appConfig.ui.range))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
+    const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const value = computed({
       get () {
@@ -96,52 +102,52 @@ export default defineComponent({
 
     const onChange = (event: Event) => {
       emit('change', event)
-      emitFormBlur()
+      emitFormChange()
     }
 
     const wrapperClass = computed(() => {
-      return classNames(
+      return twMerge(twJoin(
         ui.value.wrapper,
-        ui.value.size[props.size]
-      )
+        ui.value.size[size.value]
+      ), attrs.class as string)
     })
 
     const inputClass = computed(() => {
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.background,
         ui.value.rounded,
-        ui.value.ring.replaceAll('{color}', props.color),
-        ui.value.size[props.size]
-      )
+        ui.value.ring.replaceAll('{color}', color.value),
+        ui.value.size[size.value]
+      ), props.inputClass)
     })
 
     const thumbClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.thumb.base,
         // Intermediate class to allow thumb ring or background color (set to `current`) as it's impossible to safelist with arbitrary values
-        ui.value.thumb.color.replaceAll('{color}', props.color),
+        ui.value.thumb.color.replaceAll('{color}', color.value),
         ui.value.thumb.ring,
         ui.value.thumb.background,
-        ui.value.thumb.size[props.size]
+        ui.value.thumb.size[size.value]
       )
     })
 
     const trackClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.track.base,
         ui.value.track.background,
         ui.value.track.rounded,
-        ui.value.track.size[props.size]
+        ui.value.track.size[size.value]
       )
     })
 
     const progressClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.progress.base,
         ui.value.progress.rounded,
-        ui.value.progress.background.replaceAll('{color}', props.color),
-        ui.value.progress.size[props.size]
+        ui.value.progress.background.replaceAll('{color}', color.value),
+        ui.value.progress.size[size.value]
       )
     })
 
@@ -155,10 +161,12 @@ export default defineComponent({
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       value,
       wrapperClass,
+      // eslint-disable-next-line vue/no-dupe-keys
       inputClass,
       thumbClass,
       trackClass,

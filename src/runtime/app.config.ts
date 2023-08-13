@@ -382,10 +382,10 @@ const input = {
   gap: {
     '2xs': 'gap-x-1',
     xs: 'gap-x-1.5',
-    sm: 'gap-x-2',
+    sm: 'gap-x-1.5',
     md: 'gap-x-2',
-    lg: 'gap-x-2',
-    xl: 'gap-x-2'
+    lg: 'gap-x-2.5',
+    xl: 'gap-x-2.5'
   },
   padding: {
     '2xs': 'px-2 py-1',
@@ -516,7 +516,6 @@ const select = {
 }
 
 const selectMenu = {
-  wrapper: 'relative',
   container: 'z-20',
   width: 'w-full',
   height: 'max-h-60',

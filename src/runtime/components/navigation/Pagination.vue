@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="wrapperClass" v-bind="attrs">
     <slot name="prev" :on-click="onClickPrev">
       <UButton
         v-if="prevButton"
@@ -40,8 +40,10 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
+import { omit } from 'lodash-es'
+import { twMerge } from 'tailwind-merge'
 import UButton from '../elements/Button.vue'
+import { defuTwMerge } from '../../utils'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -54,6 +56,7 @@ export default defineComponent({
   components: {
     UButton
   },
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: Number,
@@ -103,15 +106,15 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.pagination>>,
-      default: () => appConfig.ui.pagination
+      default: () => ({})
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit }) {
+  setup (props, { attrs, emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.pagination>>(() => defu({}, props.ui, appConfig.ui.pagination))
+    const ui = computed<Partial<typeof appConfig.ui.pagination>>(() => defuTwMerge({}, props.ui, appConfig.ui.pagination))
 
     const currentPage = computed({
       get () {
@@ -177,6 +180,8 @@ export default defineComponent({
     const canGoPrev = computed(() => currentPage.value > 1)
     const canGoNext = computed(() => currentPage.value < pages.value.length)
 
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+
     function onClickPage (page: number | string) {
       if (typeof page === 'string') {
         return
@@ -202,6 +207,7 @@ export default defineComponent({
     }
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       currentPage,
@@ -209,6 +215,7 @@ export default defineComponent({
       displayedPages,
       canGoPrev,
       canGoNext,
+      wrapperClass,
       onClickPrev,
       onClickNext,
       onClickPage

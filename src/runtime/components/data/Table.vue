@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="wrapperClass" v-bind="attrs">
     <table :class="[ui.base, ui.divide]">
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
@@ -69,8 +69,10 @@
 <script lang="ts">
 import { ref, computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
-import { capitalize, orderBy, omit, get } from 'lodash-es'
+import { omit, capitalize, orderBy, get } from 'lodash-es'
 import { defu } from 'defu'
+import { twMerge } from 'tailwind-merge'
+import { defuTwMerge } from '../../utils'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -84,6 +86,7 @@ function defaultComparator<T> (a: T, z: T): boolean {
 }
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: Array,
@@ -135,7 +138,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.table>>,
-      default: () => appConfig.ui.table
+      default: () => ({})
     }
   },
   emits: ['update:modelValue'],
@@ -143,7 +146,9 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.table>>(() => defu({}, props.ui, appConfig.ui.table))
+    const ui = computed<Partial<typeof appConfig.ui.table>>(() => defuTwMerge({}, props.ui, appConfig.ui.table))
+
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: capitalize(key), sortable: false })))
 
@@ -235,8 +240,10 @@ export default defineComponent({
     }
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
       sort,
       // eslint-disable-next-line vue/no-dupe-keys

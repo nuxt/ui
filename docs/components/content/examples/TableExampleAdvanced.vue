@@ -78,7 +78,7 @@ const resetFilters = () => {
 
 // Pagination
 const page = ref(1)
-const pageCount =  ref(10)
+const pageCount = ref(10)
 const pageTotal = ref(200) // This value should be dynamic coming from the API
 const pageFrom = computed(() => (page.value - 1) * pageCount.value + 1)
 const pageTo = computed(() => Math.min(page.value * pageCount.value, pageTotal.value))
@@ -231,7 +231,7 @@ const { data: todos, pending } = await useLazyAsyncData('todos', () => $fetch<{
           :total="pageTotal"
           :ui="{
             wrapper: 'flex items-center gap-1',
-            rounded: 'rounded-full min-w-[32px] justify-center',
+            rounded: '!rounded-full min-w-[32px] justify-center',
             default: {
               activeButton: {
                 variant: 'outline'

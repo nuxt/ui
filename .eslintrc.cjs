@@ -14,6 +14,7 @@ module.exports = {
     'key-spacing': ['error', { beforeColon: false, afterColon: true, mode: 'strict' }],
     'space-before-blocks': ['error', 'always'],
     'space-infix-ops': ['error', { int32Hint: false }],
+    'no-multi-spaces': ['error', { ignoreEOLComments: true }],
 
     // Typescript
     '@typescript-eslint/type-annotation-spacing': 'error',
@@ -21,6 +22,7 @@ module.exports = {
     // Vuejs
     'vue/multi-word-component-names': 0,
     'vue/html-indent': ['error', 2],
+    'vue/comma-spacing': ['error', { before: false, after: true }],
     'vue/script-indent': ['error', 2, { baseIndent: 0 }],
     'vue/keyword-spacing': ['error', { before: true, after: true }],
     'vue/object-curly-spacing': ['error', 'always'],

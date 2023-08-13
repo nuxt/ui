@@ -1,5 +1,5 @@
 <template>
-  <span :class="badgeClass">
+  <span :class="badgeClass" v-bind="attrs">
     <slot>{{ label }}</slot>
   </span>
 </template>
@@ -7,8 +7,9 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
-import { classNames } from '../../utils'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
+import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -17,6 +18,7 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     size: {
       type: String,
@@ -48,28 +50,29 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.badge>>,
-      default: () => appConfig.ui.badge
+      default: () => ({})
     }
   },
-  setup (props) {
+  setup (props, { attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.badge>>(() => defu({}, props.ui, appConfig.ui.badge))
+    const ui = computed<Partial<typeof appConfig.ui.badge>>(() => defuTwMerge({}, props.ui, appConfig.ui.badge))
 
     const badgeClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.font,
         ui.value.rounded,
         ui.value.size[props.size],
         variant?.replaceAll('{color}', props.color)
-      )
+      ), attrs.class as string)
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       badgeClass
     }
   }
