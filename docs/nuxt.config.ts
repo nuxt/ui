@@ -57,7 +57,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: ['/getting-started']
+      routes: ['/getting-started', '/getting-started?branch=dev']
     }
   },
   experimental: {

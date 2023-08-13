@@ -1,6 +1,7 @@
 import type { NavItem, ParsedContent } from '@nuxt/content/dist/runtime/types'
 
 export const useContentSource = () => {
+  const route = useRoute()
   const config = useRuntimeConfig().public
 
   const branches = [{
@@ -15,7 +16,11 @@ export const useContentSource = () => {
     label: `v${config.version}`
   }]
 
-  const branch = useCookie('branch', { default: () => 'main' })
+  const branch = useCookie<string>('branch', { default: () => process.dev ? 'dev' : 'main' })
+
+  if (route.query.branch) {
+    branch.value = route.query.branch as string
+  }
 
   const prefix = computed(() => {
     const b = branches.find((b) => b.name === branch.value) || branches[0]
