@@ -18,8 +18,10 @@ export const useContentSource = () => {
 
   const branch = useCookie<string>('branch', { default: () => process.dev ? 'dev' : 'main' })
 
-  if (route.query.branch) {
-    branch.value = route.query.branch as string
+  if (route.path.startsWith('/dev') && branch.value !== 'dev') {
+    branch.value = 'dev'
+  } else if (route.path.startsWith('/main') && branch.value !== 'main') {
+    branch.value = 'main'
   }
 
   const prefix = computed(() => {
@@ -34,7 +36,7 @@ export const useContentSource = () => {
 
       return {
         ...rest,
-        _path: _path.replace(new RegExp(`^${prefix.value}`, 'g'), '') + (route.query.branch ? `?branch=${route.query.branch}` : ''),
+        _path: route.path.startsWith(prefix.value) ? _path : _path.replace(new RegExp(`^${prefix.value}`, 'g'), ''),
         children: children?.length ? removePrefixFromNavigation(children) : undefined
       }
     })
@@ -50,7 +52,7 @@ export const useContentSource = () => {
 
       return {
         ...rest,
-        _path: _path.replace(new RegExp(`^${prefix.value}`, 'g'), '')
+        _path: route.path.startsWith(prefix.value) ? _path : _path.replace(new RegExp(`^${prefix.value}`, 'g'), '')
       }
     })
   }

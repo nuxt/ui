@@ -27,15 +27,17 @@ const route = useRoute()
 const { prefix, removePrefixFromFiles } = useContentSource()
 const { findPageHeadline } = useElementsHelpers()
 
-const { data: page } = await useAsyncData(`docs-${prefix.value}${route.path}`, () => queryContent(`${prefix.value}${route.path}`).findOne(), { watch: [prefix] })
+const path = computed(() => route.path.startsWith(prefix.value) ? route.path : `${prefix.value}${route.path}`)
+
+const { data: page } = await useAsyncData(path.value, () => queryContent(path.value).findOne(), { watch: [prefix] })
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
-const { data: surround } = await useAsyncData(`docs-${prefix.value}${route.path}-surround`, () => {
+const { data: surround } = await useAsyncData(`${path.value}-surround`, () => {
   return queryContent(prefix.value)
     .where({ _extension: 'md', navigation: { $ne: false } })
-    .findSurround(prefix.value + (route.path.endsWith('/') ? route.path.slice(0, -1) : route.path))
+    .findSurround((route.path.startsWith(prefix.value) ? '' : prefix.value) + (route.path.endsWith('/') ? route.path.slice(0, -1) : route.path))
 }, {
   watch: [prefix]
 })
