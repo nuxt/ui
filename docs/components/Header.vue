@@ -20,7 +20,7 @@
     </template>
 
     <template #panel>
-      <VersionSelect />
+      <BranchSelect />
 
       <UNavigationTree :links="mapContentNavigation(navigation)" />
     </template>

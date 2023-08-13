@@ -16,19 +16,9 @@ export const useContentSource = () => {
     label: `v${config.version}`
   }]
 
-  const branch = useCookie<string>('branch', { default: () => process.dev ? 'dev' : 'main' })
+  const branch = computed(() => branches.find(b => b.name === (route.path.startsWith('/dev') ? 'dev' : 'main')))
 
-  if (route.path.startsWith('/dev') && branch.value !== 'dev') {
-    branch.value = 'dev'
-  } else if (route.path.startsWith('/main') && branch.value !== 'main') {
-    branch.value = 'main'
-  }
-
-  const prefix = computed(() => {
-    const b = branches.find((b) => b.name === branch.value) || branches[0]
-
-    return `/${b.name}`
-  })
+  const prefix = computed(() => `/${branch.value.name}`)
 
   function removePrefixFromNavigation (navigation: NavItem[]): NavItem[] {
     return navigation.map((link) => {

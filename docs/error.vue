@@ -32,15 +32,22 @@ defineProps<{
   error: NuxtError
 }>()
 
-const { data: navigation } = await useLazyAsyncData('navigation', () => fetchContentNavigation(queryContent(prefix.value)), {
+const { data: navigation } = await useLazyAsyncData('navigation', () => fetchContentNavigation(), {
   default: () => [],
-  transform: (navigation) => removePrefixFromNavigation(navigation[0]?.children || []),
-  watch: [prefix]
+  transform: (navigation) => {
+    navigation = navigation.find(link => link._path === prefix.value)?.children || []
+
+    return prefix.value === '/main' ? removePrefixFromNavigation(navigation) : navigation
+  }
 })
-const { data: files } = await useLazyAsyncData('files', () => queryContent(prefix.value).where({ _type: 'markdown', navigation: { $ne: false } }).find(), {
+
+const { data: files } = await useLazyAsyncData('files', () => queryContent().where({ _type: 'markdown', navigation: { $ne: false } }).find(), {
   default: () => [],
-  transform: (files) => removePrefixFromFiles(files),
-  watch: [prefix]
+  transform: (files) => {
+    files = files.filter(file => file._path.startsWith(prefix.value))
+
+    return prefix.value === '/main' ? removePrefixFromFiles(files) : files
+  }
 })
 
 // Provide

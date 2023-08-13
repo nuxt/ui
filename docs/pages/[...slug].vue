@@ -29,7 +29,7 @@ const { findPageHeadline } = useElementsHelpers()
 
 const path = computed(() => route.path.startsWith(prefix.value) ? route.path : `${prefix.value}${route.path}`)
 
-const { data: page } = await useAsyncData(path.value, () => queryContent(path.value).findOne(), { watch: [prefix] })
+const { data: page } = await useAsyncData(path.value, () => queryContent(path.value).findOne())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
@@ -37,9 +37,7 @@ if (!page.value) {
 const { data: surround } = await useAsyncData(`${path.value}-surround`, () => {
   return queryContent(prefix.value)
     .where({ _extension: 'md', navigation: { $ne: false } })
-    .findSurround((route.path.startsWith(prefix.value) ? '' : prefix.value) + (route.path.endsWith('/') ? route.path.slice(0, -1) : route.path))
-}, {
-  watch: [prefix]
+    .findSurround((path.value.endsWith('/') ? path.value.slice(0, -1) : path.value))
 })
 
 useContentHead(page)

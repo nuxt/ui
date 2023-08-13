@@ -8,7 +8,7 @@
         <UPage>
           <template #left>
             <UAside :links="anchors">
-              <VersionSelect />
+              <BranchSelect />
 
               <UNavigationTree :links="mapContentNavigation(navigation)" />
             </UAside>
@@ -40,14 +40,23 @@ const colorMode = useColorMode()
 const { prefix, removePrefixFromNavigation, removePrefixFromFiles } = useContentSource()
 const { mapContentNavigation } = useElementsHelpers()
 
-const { data: navigation } = await useLazyAsyncData('navigation', () => fetchContentNavigation(queryContent(prefix.value)), {
+const { data: navigation } = await useLazyAsyncData('navigation', () => fetchContentNavigation(), {
   default: () => [],
-  transform: (navigation) => removePrefixFromNavigation(navigation[0]?.children || []),
+  transform: (navigation) => {
+    navigation = navigation.find(link => link._path === prefix.value)?.children || []
+
+    return prefix.value === '/main' ? removePrefixFromNavigation(navigation) : navigation
+  },
   watch: [prefix]
 })
-const { data: files } = await useLazyAsyncData('files', () => queryContent(prefix.value).where({ _type: 'markdown', navigation: { $ne: false } }).find(), {
+
+const { data: files } = await useLazyAsyncData('files', () => queryContent().where({ _type: 'markdown', navigation: { $ne: false } }).find(), {
   default: () => [],
-  transform: (files) => removePrefixFromFiles(files),
+  transform: (files) => {
+    files = files.filter(file => file._path.startsWith(prefix.value))
+
+    return prefix.value === '/main' ? removePrefixFromFiles(files) : files
+  },
   watch: [prefix]
 })
 
