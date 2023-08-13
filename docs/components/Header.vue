@@ -22,7 +22,7 @@
     <template #panel>
       <VersionSelect />
 
-      <UNavigationTree :links="tree" />
+      <UNavigationTree :links="mapContentNavigation(navigation)" />
     </template>
   </UHeader>
 </template>
@@ -30,10 +30,7 @@
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 
-const { removePrefixFromNavigation } = useContentSource()
 const { mapContentNavigation } = useElementsHelpers()
 
 const navigation = inject<Ref<NavItem[]>>('navigation')
-
-const tree = computed(() => mapContentNavigation(removePrefixFromNavigation(navigation.value)))
 </script>

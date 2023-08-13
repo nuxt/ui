@@ -7,7 +7,7 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  extends: '@nuxthq/elements',
+  extends: process.env.NUXT_ELEMENTS_PATH || '@nuxthq/elements',
   modules: [
     '@nuxt/content',
     // '@nuxt/devtools',

@@ -34,7 +34,7 @@ export const useContentSource = () => {
 
       return {
         ...rest,
-        _path: _path.replace(prefix.value, ''),
+        _path: _path.replace(new RegExp(`^${prefix.value}`, 'g'), '') + (route.query.branch ? `?branch=${route.query.branch}` : ''),
         children: children?.length ? removePrefixFromNavigation(children) : undefined
       }
     })
@@ -50,7 +50,7 @@ export const useContentSource = () => {
 
       return {
         ...rest,
-        _path: _path.replace(prefix.value, '')
+        _path: _path.replace(new RegExp(`^${prefix.value}`, 'g'), '')
       }
     })
   }

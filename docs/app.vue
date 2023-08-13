@@ -10,7 +10,7 @@
             <UAside :links="anchors">
               <VersionSelect />
 
-              <UNavigationTree :links="tree" />
+              <UNavigationTree :links="mapContentNavigation(navigation)" />
             </UAside>
           </template>
 
@@ -20,7 +20,7 @@
     </UMain>
 
     <ClientOnly>
-      <UDocsSearch :files="removePrefixFromFiles(files)" :navigation="removePrefixFromNavigation(navigation)" />
+      <UDocsSearch :files="files" :navigation="navigation" />
     </ClientOnly>
 
     <UNotifications>
@@ -42,11 +42,12 @@ const { mapContentNavigation } = useElementsHelpers()
 
 const { data: navigation } = await useLazyAsyncData('navigation', () => fetchContentNavigation(queryContent(prefix.value)), {
   default: () => [],
-  transform: (navigation) => navigation[0]?.children || [],
+  transform: (navigation) => removePrefixFromNavigation(navigation[0]?.children || []),
   watch: [prefix]
 })
 const { data: files } = await useLazyAsyncData('files', () => queryContent(prefix.value).where({ _type: 'markdown', navigation: { $ne: false } }).find(), {
   default: () => [],
+  transform: (files) => removePrefixFromFiles(files),
   watch: [prefix]
 })
 
@@ -69,8 +70,6 @@ const anchors = [{
 // Computed
 
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
-
-const tree = computed(() => mapContentNavigation(removePrefixFromNavigation(navigation.value)))
 
 // Head
 
@@ -97,4 +96,5 @@ useSeoMeta({
 // Provide
 
 provide('navigation', navigation)
+provide('files', files)
 </script>
