@@ -108,11 +108,8 @@ export default defineComponent({
       default: 'label'
     },
     sort: {
-      type: Object as PropType<{ column: string, direction: 'asc' | 'desc' }>,
+      type: Object as PropType<{ column: string | null, direction: 'asc' | 'desc', sortBy?: Function }>,
       default: () => ({})
-    },
-    fnSort: {
-      type: [ Function]
     },
     sortButton: {
       type: Object as PropType<Button>,
@@ -208,9 +205,9 @@ export default defineComponent({
         toSort = { column: column.key, direction: column.direction || 'asc' }
       }
 
-      if (props.fnSort) {
+      if (props.sort?.sortBy) {
         sort.value.column = toSort.column
-        await props.fnSort(toSort)
+        await props.sort.sortBy(toSort)
       }
       sort.value = toSort
     }
