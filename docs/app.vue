@@ -8,6 +8,8 @@
         <UPage>
           <template #left>
             <UAside :links="anchors">
+              <BranchSelect />
+
               <UNavigationTree :links="mapContentNavigation(navigation)" />
             </UAside>
           </template>
@@ -35,13 +37,27 @@
 
 <script setup lang="ts">
 const colorMode = useColorMode()
+const { prefix, removePrefixFromNavigation, removePrefixFromFiles } = useContentSource()
 const { mapContentNavigation } = useElementsHelpers()
 
 const { data: navigation } = await useLazyAsyncData('navigation', () => fetchContentNavigation(), {
-  default: () => []
+  default: () => [],
+  transform: (navigation) => {
+    navigation = navigation.find(link => link._path === prefix.value)?.children || []
+
+    return prefix.value === '/main' ? removePrefixFromNavigation(navigation) : navigation
+  },
+  watch: [prefix]
 })
+
 const { data: files } = await useLazyAsyncData('files', () => queryContent().where({ _type: 'markdown', navigation: { $ne: false } }).find(), {
-  default: () => []
+  default: () => [],
+  transform: (files) => {
+    files = files.filter(file => file._path.startsWith(prefix.value))
+
+    return prefix.value === '/main' ? removePrefixFromFiles(files) : files
+  },
+  watch: [prefix]
 })
 
 const anchors = [{
@@ -89,4 +105,5 @@ useSeoMeta({
 // Provide
 
 provide('navigation', navigation)
+provide('files', files)
 </script>

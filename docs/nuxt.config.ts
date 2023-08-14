@@ -7,7 +7,7 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  extends: '@nuxthq/elements',
+  extends: process.env.NUXT_ELEMENTS_PATH || '@nuxthq/elements',
   modules: [
     '@nuxt/content',
     // '@nuxt/devtools',
@@ -30,6 +30,23 @@ export default defineNuxtConfig({
     icons: ['heroicons', 'simple-icons'],
     safelistColors: excludeColors(colors)
   },
+  content: {
+    sources: {
+      // overwrite default source AKA `content` directory
+      content: {
+        prefix: '/dev',
+        driver: 'fs',
+        base: resolve('./content')
+      },
+      main: {
+        prefix: '/main',
+        driver: 'github',
+        repo: 'nuxtlabs/ui',
+        branch: 'main',
+        dir: 'docs/content'
+      }
+    }
+  },
   googleFonts: {
     families: {
       Inter: [400, 500, 600, 700]
@@ -40,7 +57,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: ['/getting-started']
+      routes: ['/getting-started', '/dev/getting-started']
     }
   },
   experimental: {
