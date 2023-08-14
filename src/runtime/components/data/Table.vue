@@ -175,7 +175,10 @@ export default defineComponent({
 
     const indeterminate = computed(() => selected.value && selected.value.length > 0 && selected.value.length < props.rows.length)
 
-    const emptyState = computed(() => ({ ...ui.value.default.emptyState, ...props.emptyState }))
+    const emptyState = computed(() => {
+      if (props.emptyState === null) return null
+      return { ...ui.value.default.emptyState, ...props.emptyState }
+    })
 
     function compare (a: any, z: any) {
       if (typeof props.by === 'string') {
