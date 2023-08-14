@@ -180,6 +180,11 @@ export default defineComponent({
       return { ...ui.value.default.emptyState, ...props.emptyState }
     })
 
+    const loadingState = computed(() => {
+      if (props.loadingState === null) return null
+      return { ...ui.value.default.loadingState, ...props.loadingState }
+    })
+
     function compare (a: any, z: any) {
       if (typeof props.by === 'string') {
         const property = props.by as unknown as any
@@ -257,6 +262,8 @@ export default defineComponent({
       indeterminate,
       // eslint-disable-next-line vue/no-dupe-keys
       emptyState,
+      // eslint-disable-next-line vue/no-dupe-keys
+      loadingState,
       isSelected,
       onSort,
       onSelect,
