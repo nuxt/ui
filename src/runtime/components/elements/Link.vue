@@ -1,7 +1,14 @@
 <template>
-  <button v-if="!to" :type="type" :disabled="disabled" v-bind="$attrs" :class="inactiveClass">
+  <component
+    :is="as"
+    v-if="!to"
+    :type="type"
+    :disabled="disabled"
+    v-bind="$attrs"
+    :class="inactiveClass"
+  >
     <slot />
-  </button>
+  </component>
   <NuxtLink
     v-else
     v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }"
@@ -32,6 +39,10 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     ...NuxtLink.props,
+    as: {
+      type: String,
+      default: 'button'
+    },
     type: {
       type: String,
       default: null
