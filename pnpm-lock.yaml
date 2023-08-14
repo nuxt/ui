@@ -121,8 +121,8 @@ importers:
         specifier: ^0.1.1
         version: 0.1.1(eslint@8.47.0)
       '@nuxthq/elements':
-        specifier: npm:@nuxthq/elements-edge@0.0.1-28197629.5e2d155
-        version: /@nuxthq/elements-edge@0.0.1-28197629.5e2d155(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4)
+        specifier: npm:@nuxthq/elements-edge@0.0.1-28198976.e8e2f70
+        version: /@nuxthq/elements-edge@0.0.1-28198976.e8e2f70(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4)
       '@nuxthq/studio':
         specifier: ^0.13.4
         version: 0.13.4(rollup@3.26.2)
@@ -1852,8 +1852,8 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxthq/elements-edge@0.0.1-28197629.5e2d155(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4):
-    resolution: {integrity: sha512-Kge09WmdOopvvmbuEHoC04zvUa2CnRANH3gg+rnKEaM3rhaBe7s8b8jGzJTWyKIIs1Fz53lrd80feigF7tG84A==}
+  /@nuxthq/elements-edge@0.0.1-28198976.e8e2f70(@nuxt/content@2.7.2)(@nuxthq/ui@)(vue@3.3.4):
+    resolution: {integrity: sha512-i3d+HD6JaA7hSgQGkaAS36rSqHWUwa7550KqRIpyOs3VsJ/gT9ry8NW1dRpNamUnGAJqhAt6Btr4NyXDKPfJdQ==}
     peerDependencies:
       '@nuxt/content': ^2.7.2
       '@nuxthq/ui': npm:@nuxthq/ui-edge@latest
