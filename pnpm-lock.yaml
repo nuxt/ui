@@ -75,6 +75,9 @@ importers:
       '@nuxt/module-builder':
         specifier: ^0.4.0
         version: 0.4.0(@nuxt/kit@3.6.5)(nuxi@3.6.5)
+      '@nuxthq/ui':
+        specifier: ^2.7.0
+        version: 2.7.0(rollup@3.28.0)(vue@3.3.4)(webpack@5.88.2)
       '@release-it/conventional-changelog':
         specifier: ^7.0.0
         version: 7.0.0(release-it@16.1.4)
@@ -1216,7 +1219,7 @@ packages:
   /@nuxt-themes/ui-kit-edge@0.0.1-28164481.fd7cd68(rollup@3.28.0)(vue@3.3.4)(webpack@5.88.2):
     resolution: {integrity: sha512-7BvKI9sARYR8TLmofY0IJVjV5I5f03z/sOlM4fByB8VNql/+wepVOrABnDAt0yg6rSuKMEx4/QoY6+9I2tSqYA==}
     dependencies:
-      '@nuxthq/ui': /@nuxthq/ui-edge@2.7.0-28194972.fe95ffe(rollup@3.28.0)(vue@3.3.4)(webpack@5.88.2)
+      '@nuxthq/ui': /@nuxthq/ui-edge@2.7.0-28200741.b8b7d74(rollup@3.28.0)(vue@3.3.4)(webpack@5.88.2)
       '@vueuse/core': 10.3.0(vue@3.3.4)
       lodash-es: 4.17.21
     transitivePeerDependencies:
@@ -1745,8 +1748,51 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nuxthq/ui-edge@2.7.0-28194972.fe95ffe(rollup@3.28.0)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-GQ6GutX8PhPKG4XlaZgjKvJWubqW/cdUC/xeNSc0So1DKBDV2Ehz0F70Ng4RnvhDlrp9e4T5fAwzIHJnDK2+rQ==}
+  /@nuxthq/ui-edge@2.7.0-28200741.b8b7d74(rollup@3.28.0)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-s3Fo6FRCOVsvfRMNpBNNzcSEuiFK3sX/XpIj8Z6CbqQ3Dclo1T789Dfesgg8aAjzH1xyti0lQC2rI2SM5UpPsA==}
+    engines: {node: '>=v16.20.2'}
+    dependencies:
+      '@egoist/tailwindcss-icons': 1.1.0(tailwindcss@3.3.3)
+      '@headlessui/vue': 1.7.15(vue@3.3.4)
+      '@iconify-json/heroicons': 1.1.12
+      '@nuxt/kit': 3.6.5(rollup@3.28.0)
+      '@nuxtjs/color-mode': 3.3.0(rollup@3.28.0)
+      '@nuxtjs/tailwindcss': 6.8.0(rollup@3.28.0)(webpack@5.88.2)
+      '@popperjs/core': 2.11.8
+      '@tailwindcss/aspect-ratio': 0.4.2(tailwindcss@3.3.3)
+      '@tailwindcss/container-queries': 0.1.1(tailwindcss@3.3.3)
+      '@tailwindcss/forms': 0.5.4(tailwindcss@3.3.3)
+      '@tailwindcss/typography': 0.5.9(tailwindcss@3.3.3)
+      '@vueuse/core': 10.3.0(vue@3.3.4)
+      '@vueuse/integrations': 10.3.0(fuse.js@6.6.2)(vue@3.3.4)
+      '@vueuse/math': 10.3.0(vue@3.3.4)
+      defu: 6.1.2
+      fuse.js: 6.6.2
+      lodash-es: 4.17.21
+      tailwind-merge: 1.14.0
+      tailwindcss: 3.3.3
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - async-validator
+      - axios
+      - change-case
+      - drauu
+      - focus-trap
+      - idb-keyval
+      - jwt-decode
+      - nprogress
+      - qrcode
+      - rollup
+      - sortablejs
+      - supports-color
+      - ts-node
+      - universal-cookie
+      - vue
+      - webpack
+    dev: true
+
+  /@nuxthq/ui@2.7.0(rollup@3.28.0)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-ObWd9VhU0Tz6Jx5KNQG8j9XxyVf1b7QLpX/XyGsTOl5zlFY9XTeI4ZeAZro5BIxQU4hAIoVpPZjuG+5wnToGVg==}
     engines: {node: '>=v16.14.0'}
     dependencies:
       '@egoist/tailwindcss-icons': 1.1.0(tailwindcss@3.3.3)
@@ -4154,7 +4200,7 @@ packages:
       handlebars: 4.7.8
       json-stringify-safe: 5.0.1
       meow: 8.1.2
-      semver: 7.5.1
+      semver: 7.5.4
       split: 1.0.1
     dev: true
 
@@ -8211,7 +8257,7 @@ packages:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.13.0
-      semver: 7.5.1
+      semver: 7.5.4
       validate-npm-package-license: 3.0.4
     dev: true
 
@@ -10706,6 +10752,10 @@ packages:
       tailwindcss: 3.3.3
     transitivePeerDependencies:
       - supports-color
+
+  /tailwind-merge@1.14.0:
+    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
+    dev: true
 
   /tailwindcss@3.3.3:
     resolution: {integrity: sha512-A0KgSkef7eE4Mf+nKJ83i75TMyq8HqY3qmFIJSWy8bNt0v1lG7jUcpGpoTFxAwYcWOphcTBLPPJg+bDfhDf52w==}

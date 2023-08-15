@@ -1,6 +1,6 @@
 {
   "name": "@nuxthq/ui",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "repository": "https://github.com/nuxtlabs/ui",
   "license": "MIT",
   "exports": {
@@ -54,6 +54,7 @@
     "@nuxt/devtools": "^0.8.0",
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxt/module-builder": "^0.4.0",
+    "@nuxthq/ui": "^2.7.0",
     "@release-it/conventional-changelog": "^7.0.0",
     "eslint": "^8.46.0",
     "nuxt": "^3.6.5",
