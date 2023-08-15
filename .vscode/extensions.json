@@ -3,6 +3,8 @@
         "yoavbls.pretty-ts-errors",
         "bradlc.vscode-tailwindcss",
         "vue.volar",
-        "vue.vscode-typescript-vue-plugin"
+        "vue.vscode-typescript-vue-plugin",
+        "bourhaouta.tailwindshades",
+        "austenc.tailwind-docs"
     ]
 }

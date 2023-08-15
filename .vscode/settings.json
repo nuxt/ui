@@ -1,4 +1,5 @@
 {
     "typescript.tsdk": "node_modules\\typescript\\lib",
-    "editor.foldingMaximumRegions": 63998
+    "editor.foldingMaximumRegions": 63998,
+    "tailwindCSS.emmetCompletions": true
 }
