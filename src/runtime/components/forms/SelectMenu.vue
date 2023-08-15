@@ -247,7 +247,7 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String,
+      type: String as PropType<keyof typeof appConfig.ui.selectMenu.size>,
       default: () => appConfig.ui.select.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.select.size).includes(value)

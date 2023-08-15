@@ -1,3 +1,4 @@
+
 export interface Avatar {
   src?: string | boolean
   alt?: string

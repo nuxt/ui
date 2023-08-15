@@ -21,7 +21,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     size: {
-      type: String,
+      type: String as PropType<keyof typeof appConfig.ui.badge.size>,
       default: () => appConfig.ui.badge.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.badge.size).includes(value)

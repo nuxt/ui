@@ -40,7 +40,7 @@ export default defineComponent({
       default: null
     },
     size: {
-      type: String,
+      type: String as PropType<keyof typeof appConfig.ui.formGroup.size>,
       default: null,
       validator (value: string) {
         return Object.keys(appConfig.ui.formGroup.size).includes(value)

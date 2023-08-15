@@ -63,7 +63,7 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String,
+      type: String as PropType<keyof typeof appConfig.ui.button.size>,
       default: () => appConfig.ui.button.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.button.size).includes(value)

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div :class="wrapperClass">
     <input
       ref="input"
@@ -58,7 +58,7 @@ export default defineComponent({
       default: 1
     },
     size: {
-      type: String,
+      type: String as PropType<keyof typeof appConfig.ui.range.size>,
       default: () => appConfig.ui.range.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.range.size).includes(value)

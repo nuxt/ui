@@ -25,7 +25,7 @@ export default defineComponent({
       default: null
     },
     size: {
-      type: String,
+      type: String as PropType<keyof typeof appConfig.ui.kbd.size>,
       default: () => appConfig.ui.kbd.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.kbd.size).includes(value)

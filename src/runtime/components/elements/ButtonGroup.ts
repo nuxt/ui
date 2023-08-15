@@ -14,7 +14,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     size: {
-      type: String,
+      type: String as PropType<keyof typeof appConfig.ui.button.size>,
       default: null,
       validator (value: string) {
         return Object.keys(appConfig.ui.button.size).includes(value)

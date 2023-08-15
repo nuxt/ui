@@ -75,7 +75,7 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String,
+      type: String as PropType<keyof typeof appConfig.ui.textarea.size>,
       default: () => appConfig.ui.textarea.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.textarea.size).includes(value)

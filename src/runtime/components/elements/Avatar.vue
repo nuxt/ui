@@ -56,7 +56,7 @@ export default defineComponent({
       default: () => appConfig.ui.avatar.default.icon
     },
     size: {
-      type: String,
+      type: String as PropType<keyof typeof appConfig.ui.avatar.size>,
       default: () => appConfig.ui.avatar.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.avatar.size).includes(value)
