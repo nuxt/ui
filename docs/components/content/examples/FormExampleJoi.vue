@@ -1,40 +1,38 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Joi from 'joi'
+import type { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = Joi.object({
-  emailJoi: Joi.string().required(),
-  passwordJoi: Joi.string()
+  email: Joi.string().required(),
+  password: Joi.string()
     .min(8)
     .required()
 })
 
 const state = ref({
-  emailJoi: undefined,
-  passwordJoi: undefined
+  email: undefined,
+  password: undefined
 })
 
-const form = ref()
-
-async function submit () {
-  await form.value!.validate()
-  // Do something with state.value
+async function submit (event: FormSubmitEvent<any>) {
+  // Do something with event.data
+  console.log(event.data)
 }
 </script>
 
 <template>
   <UForm
-    ref="form"
     :schema="schema"
     :state="state"
-    @submit.prevent="submit"
+    @submit="submit"
   >
-    <UFormGroup label="Email" name="emailJoi">
-      <UInput v-model="state.emailJoi" />
+    <UFormGroup label="Email" name="email">
+      <UInput v-model="state.email" />
     </UFormGroup>
 
-    <UFormGroup label="Password" name="passwordJoi">
-      <UInput v-model="state.passwordJoi" type="password" />
+    <UFormGroup label="Password" name="password">
+      <UInput v-model="state.password" type="password" />
     </UFormGroup>
 
     <UButton type="submit">

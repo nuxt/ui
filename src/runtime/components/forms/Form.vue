@@ -1,12 +1,16 @@
-import { provide, ref, type PropType, h, defineComponent } from 'vue'
+<template>
+  <form @submit.prevent="onSubmit">
+    <slot />
+  </form>
+</template>
+
+<script lang="ts">
+import { provide, ref, type PropType, defineComponent } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
-import type {
-  ObjectSchema as YupObjectSchema,
-  ValidationError as YupError
-} from 'yup'
-import type { FormError, FormEvent } from '../../types'
+import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
+import type { FormError, FormEvent, FormEventType, FormSubmitEvent, Form } from '../../types'
 
 export default defineComponent({
   props: {
@@ -26,21 +30,20 @@ export default defineComponent({
         | PropType<(state: any) => Promise<FormError[]>>
         | PropType<(state: any) => FormError[]>,
       default: () => []
+    },
+    validateOn: {
+      type: Array as PropType<FormEventType[]>,
+      default: () => ['blur', 'input', 'change', 'submit']
     }
   },
-  setup (props, { slots, expose }) {
+  emits: ['submit'],
+  setup (props, { expose, emit }) {
     const seed = Math.random().toString(36).substring(7)
     const bus = useEventBus<FormEvent>(`form-${seed}`)
 
     bus.on(async (event) => {
-      if (event.type === 'blur') {
-        const otherErrors = errors.value.filter(
-          (error) => error.path !== event.path
-        )
-        const pathErrors = (await getErrors()).filter(
-          (error) => error.path === event.path
-        )
-        errors.value = otherErrors.concat(pathErrors)
+      if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
+        await validate(event.path, { silent: true })
       }
     })
 
@@ -66,22 +69,67 @@ export default defineComponent({
       return errs
     }
 
-    async function validate () {
-      errors.value = await getErrors()
-      if (errors.value.length > 0) {
+    async function validate (path?: string, opts: { silent?: boolean } = { silent: false }) {
+      if (path) {
+        const otherErrors = errors.value.filter(
+          (error) => error.path !== path
+        )
+        const pathErrors = (await getErrors()).filter(
+          (error) => error.path === path
+        )
+        errors.value = otherErrors.concat(pathErrors)
+      } else {
+        errors.value = await getErrors()
+      }
+
+      if (!opts.silent && errors.value.length > 0) {
         throw new Error(
           `Form validation failed: ${JSON.stringify(errors.value, null, 2)}`
         )
       }
-
       return props.state
     }
 
-    expose({
-      validate
-    })
+    async function onSubmit (event: SubmitEvent) {
+      if (props.validateOn?.includes('submit')) {
+        await validate()
+      }
+      const submitEvent = event as FormSubmitEvent<any>
+      submitEvent.data = props.state
+      emit('submit', event)
+    }
 
-    return () => h('form', slots.default?.())
+    expose({
+      validate,
+      errors,
+      setErrors (errs: FormError[], path?: string) {
+        errors.value = errs
+        if (path) {
+          errors.value = errors.value.filter(
+            (error) => error.path !== path
+          ).concat(errs)
+        } else {
+          errors.value = errs
+        }
+      },
+      getErrors (path?: string) {
+        if (path) {
+          return errors.value.filter((err) => err.path === path)
+        }
+        return errors.value
+      },
+      clear (path?: string) {
+        if (path) {
+          errors.value = errors.value.filter((err) => err.path === path)
+        } else {
+          errors.value = []
+        }
+      }
+    } as Form<any>)
+
+    return {
+      onSubmit
+    }
   }
 })
 
@@ -156,3 +204,4 @@ async function getJoiErrors (
     }
   }
 }
+</script>

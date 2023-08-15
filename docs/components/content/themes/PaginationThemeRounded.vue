@@ -9,7 +9,7 @@ const items = ref(Array(55))
     :total="items.length"
     :ui="{
       wrapper: 'flex items-center gap-1',
-      rounded: 'rounded-full min-w-[32px] justify-center'
+      rounded: '!rounded-full min-w-[32px] justify-center'
     }"
     :prev-button="null"
     :next-button="{

@@ -16,7 +16,7 @@ const props = defineProps({
 const appConfig = useAppConfig()
 const route = useRoute()
 // eslint-disable-next-line vue/no-dupe-keys
-const slug = props.slug || route.params.slug[1]
+const slug = props.slug || route.params.slug[route.params.slug.length - 1]
 const camelName = useCamelCase(slug)
 const name = `U${useUpperFirst(camelName)}`
 

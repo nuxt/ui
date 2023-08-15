@@ -1,5 +1,5 @@
 <template>
-  <ULink :type="type" :disabled="disabled || loading" :class="buttonClass">
+  <ULink :type="type" :disabled="disabled || loading" :class="buttonClass" v-bind="attrs">
     <slot name="leading" :disabled="disabled" :loading="loading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     </slot>
@@ -17,12 +17,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, useSlots } from 'vue'
+import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
-import { classNames } from '../../utils'
+import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -35,6 +36,7 @@ export default defineComponent({
     UIcon,
     ULink
   },
+  inheritAttrs: false,
   props: {
     type: {
       type: String,
@@ -118,16 +120,14 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.button>>,
-      default: () => appConfig.ui.button
+      default: () => ({})
     }
   },
-  setup (props) {
+  setup (props, { attrs, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const slots = useSlots()
-
-    const ui = computed<Partial<typeof appConfig.ui.button>>(() => defu({}, props.ui, appConfig.ui.button))
+    const ui = computed<Partial<typeof appConfig.ui.button>>(() => defuTwMerge({}, props.ui, appConfig.ui.button))
 
     const isLeading = computed(() => {
       return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
@@ -142,7 +142,7 @@ export default defineComponent({
     const buttonClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.font,
         ui.value.rounded,
@@ -151,7 +151,7 @@ export default defineComponent({
         props.padded && ui.value[isSquare.value ? 'square' : 'padding'][props.size],
         variant?.replaceAll('{color}', props.color),
         props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
-      )
+      ), attrs.class as string)
     })
 
     const leadingIconName = computed(() => {
@@ -171,7 +171,7 @@ export default defineComponent({
     })
 
     const leadingIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         ui.value.icon.size[props.size],
         props.loading && 'animate-spin'
@@ -179,7 +179,7 @@ export default defineComponent({
     })
 
     const trailingIconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         ui.value.icon.size[props.size],
         props.loading && !isLeading.value && 'animate-spin'
@@ -187,6 +187,7 @@ export default defineComponent({
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       isLeading,
       isTrailing,
       isSquare,

@@ -45,7 +45,9 @@ import { ref, computed, watch, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel } from '@headlessui/vue'
 import { useResizeObserver } from '@vueuse/core'
-import { defu } from 'defu'
+import { omit } from 'lodash-es'
+import { twMerge } from 'tailwind-merge'
+import { defuTwMerge } from '../../utils'
 import type { TabItem } from '../../types/tabs'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -62,6 +64,7 @@ export default defineComponent({
     HTabPanels,
     HTabPanel
   },
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: Number,
@@ -82,21 +85,23 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.tabs>>,
-      default: () => appConfig.ui.tabs
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup (props, { attrs, emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.tabs>>(() => defu({}, props.ui, appConfig.ui.tabs))
+    const ui = computed<Partial<typeof appConfig.ui.tabs>>(() => defuTwMerge({}, props.ui, appConfig.ui.tabs))
 
     const listRef = ref<HTMLElement>()
     const itemRefs = ref<HTMLElement[]>([])
     const markerRef = ref<HTMLElement>()
 
     const selectedIndex = ref(props.defaultIndex)
+
+    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     // Methods
 
@@ -131,17 +136,20 @@ export default defineComponent({
 
     watch(() => props.modelValue, (value) => {
       selectedIndex.value = value
+      calcMarkerSize(value)
     })
 
     onMounted(() => calcMarkerSize(selectedIndex.value))
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       listRef,
       itemRefs,
       markerRef,
       selectedIndex,
+      wrapperClass,
       onChange
     }
   }

@@ -1,41 +1,38 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { z } from 'zod'
-import type { Form } from '@nuxthq/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
 
 const schema = z.object({
-  emailZod: z.string().email('Invalid email'),
-  passwordZod: z.string().min(8, 'Must be at least 8 characters')
+  email: z.string().email('Invalid email'),
+  password: z.string().min(8, 'Must be at least 8 characters')
 })
 
 type Schema = z.output<typeof schema>
 
 const state = ref({
-  emailZod: undefined,
-  passwordZod: undefined
+  email: undefined,
+  password: undefined
 })
 
-const form = ref<Form<Schema>>()
-
-async function submit () {
-  await form.value!.validate()
-  // Do something with state.value
+async function submit (event: FormSubmitEvent<Schema>) {
+  // Do something with data
+  console.log(event.data)
 }
 </script>
 
 <template>
   <UForm
-    ref="form"
     :schema="schema"
     :state="state"
-    @submit.prevent="submit"
+    @submit="submit"
   >
-    <UFormGroup label="Email" name="emailZod">
-      <UInput v-model="state.emailZod" />
+    <UFormGroup label="Email" name="email">
+      <UInput v-model="state.email" />
     </UFormGroup>
 
-    <UFormGroup label="Password" name="passwordZod">
-      <UInput v-model="state.passwordZod" type="password" />
+    <UFormGroup label="Password" name="password">
+      <UInput v-model="state.password" type="password" />
     </UFormGroup>
 
     <UButton type="submit">

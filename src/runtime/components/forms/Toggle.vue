@@ -4,6 +4,7 @@
     :name="name"
     :disabled="disabled"
     :class="switchClass"
+    v-bind="attrs"
   >
     <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
       <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
@@ -19,11 +20,12 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
 import { Switch as HSwitch } from '@headlessui/vue'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
-import { classNames } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { defuTwMerge } from '../../utils'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -36,6 +38,7 @@ export default defineComponent({
     HSwitch,
     UIcon
   },
+  inheritAttrs: false,
   props: {
     name: {
       type: String,
@@ -66,17 +69,18 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.toggle>>,
-      default: () => appConfig.ui.toggle
+      default: () => ({})
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defu({}, props.ui, appConfig.ui.toggle))
+    const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defuTwMerge({}, props.ui, appConfig.ui.toggle))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormChange, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
 
     const active = computed({
       get () {
@@ -84,32 +88,33 @@ export default defineComponent({
       },
       set (value) {
         emit('update:modelValue', value)
-        emitFormBlur()
+        emitFormChange()
       }
     })
 
     const switchClass = computed(() => {
-      return classNames(
+      return twMerge(twJoin(
         ui.value.base,
         ui.value.rounded,
-        ui.value.ring.replaceAll('{color}', props.color),
-        (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', props.color)
-      )
+        ui.value.ring.replaceAll('{color}', color.value),
+        (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', color.value)
+      ), attrs.class as string)
     })
 
     const onIconClass = computed(() => {
-      return classNames(
-        ui.value.icon.on.replaceAll('{color}', props.color)
+      return twJoin(
+        ui.value.icon.on.replaceAll('{color}', color.value)
       )
     })
 
     const offIconClass = computed(() => {
-      return classNames(
-        ui.value.icon.off.replaceAll('{color}', props.color)
+      return twJoin(
+        ui.value.icon.off.replaceAll('{color}', color.value)
       )
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       active,

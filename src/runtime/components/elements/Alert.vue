@@ -1,5 +1,5 @@
 <template>
-  <div :class="alertClass">
+  <div :class="alertClass" v-bind="attrs">
     <div class="flex gap-3" :class="{ 'items-start': (description || $slots.description), 'items-center': !description && !$slots.description }">
       <UIcon v-if="icon" :name="icon" :class="ui.icon.base" />
       <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
@@ -34,17 +34,18 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
 import type { Avatar } from '../../types/avatar'
 import type { Button } from '../../types/button'
-import { classNames } from '../../utils'
+import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { omit } from 'lodash-es'
 
 // const appConfig = useAppConfig()
 
@@ -54,6 +55,7 @@ export default defineComponent({
     UAvatar,
     UButton
   },
+  inheritAttrs: false,
   props: {
     title: {
       type: String,
@@ -98,29 +100,30 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.alert>>,
-      default: () => appConfig.ui.alert
+      default: () => ({})
     }
   },
   emits: ['close'],
-  setup (props) {
+  setup (props, { attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.alert>>(() => defu({}, props.ui, appConfig.ui.alert))
+    const ui = computed<Partial<typeof appConfig.ui.alert>>(() => defuTwMerge({}, props.ui, appConfig.ui.alert))
 
     const alertClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
-      return classNames(
+      return twMerge(twJoin(
         ui.value.wrapper,
         ui.value.rounded,
         ui.value.shadow,
         ui.value.padding,
         variant?.replaceAll('{color}', props.color)
-      )
+      ), attrs.class as string)
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       alertClass

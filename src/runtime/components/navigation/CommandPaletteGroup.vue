@@ -113,7 +113,7 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.commandPalette>>,
-      default: () => appConfig.ui.commandPalette
+      default: () => ({})
     }
   },
   setup (props) {
