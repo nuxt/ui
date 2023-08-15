@@ -1,5 +1,12 @@
 <template>
-  <HTabGroup :vertical="orientation === 'vertical'" :selected-index="modelValue || selectedIndex" as="div" :class="ui.wrapper" @change="onChange">
+  <HTabGroup
+    :vertical="orientation === 'vertical'"
+    :selected-index="modelValue || selectedIndex"
+    as="div"
+    :class="wrapperClass"
+    v-bind="attrs"
+    @change="onChange"
+  >
     <HTabList
       ref="listRef"
       :class="[ui.list.base, ui.list.background, ui.list.rounded, ui.list.shadow, ui.list.padding, ui.list.width, orientation === 'horizontal' && ui.list.height, orientation === 'horizontal' && 'inline-grid items-center']"
