@@ -99,6 +99,12 @@ importers:
       vue-tsc:
         specifier: ^1.8.8
         version: 1.8.8(typescript@5.1.6)
+      yup:
+        specifier: ^1.2.0
+        version: 1.2.0
+      zod:
+        specifier: ^3.22.0
+        version: 3.22.0
 
   docs:
     devDependencies:
@@ -1791,48 +1797,6 @@ packages:
       - webpack
     dev: true
 
-  /@nuxthq/ui@2.7.0(rollup@3.28.0)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-ObWd9VhU0Tz6Jx5KNQG8j9XxyVf1b7QLpX/XyGsTOl5zlFY9XTeI4ZeAZro5BIxQU4hAIoVpPZjuG+5wnToGVg==}
-    engines: {node: '>=v16.14.0'}
-    dependencies:
-      '@egoist/tailwindcss-icons': 1.1.0(tailwindcss@3.3.3)
-      '@headlessui/vue': 1.7.15(vue@3.3.4)
-      '@iconify-json/heroicons': 1.1.12
-      '@nuxt/kit': 3.6.5(rollup@3.28.0)
-      '@nuxtjs/color-mode': 3.3.0(rollup@3.28.0)
-      '@nuxtjs/tailwindcss': 6.8.0(rollup@3.28.0)(webpack@5.88.2)
-      '@popperjs/core': 2.11.8
-      '@tailwindcss/aspect-ratio': 0.4.2(tailwindcss@3.3.3)
-      '@tailwindcss/container-queries': 0.1.1(tailwindcss@3.3.3)
-      '@tailwindcss/forms': 0.5.4(tailwindcss@3.3.3)
-      '@tailwindcss/typography': 0.5.9(tailwindcss@3.3.3)
-      '@vueuse/core': 10.3.0(vue@3.3.4)
-      '@vueuse/integrations': 10.3.0(fuse.js@6.6.2)(vue@3.3.4)
-      '@vueuse/math': 10.3.0(vue@3.3.4)
-      defu: 6.1.2
-      fuse.js: 6.6.2
-      lodash-es: 4.17.21
-      tailwindcss: 3.3.3
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - async-validator
-      - axios
-      - change-case
-      - drauu
-      - focus-trap
-      - idb-keyval
-      - jwt-decode
-      - nprogress
-      - qrcode
-      - rollup
-      - sortablejs
-      - supports-color
-      - ts-node
-      - universal-cookie
-      - vue
-      - webpack
-    dev: true
-
   /@nuxtjs/color-mode@3.3.0(rollup@3.28.0):
     resolution: {integrity: sha512-YVFNmTISke1eL7uk5p9I1suOsM222FxrqKoF13HS4x94OKCWwPLLeTCEzHZ8orzKnaFUbCXpuL4pRv8gvW+0Kw==}
     dependencies:
@@ -2771,7 +2735,7 @@ packages:
       '@babel/core': 7.22.10
       '@babel/plugin-transform-typescript': 7.22.10(@babel/core@7.22.10)
       '@vue/babel-plugin-jsx': 1.1.5(@babel/core@7.22.10)
-      vite: 4.3.9(@types/node@20.4.7)
+      vite: 4.3.9(@types/node@20.4.9)
       vue: 3.3.4
     transitivePeerDependencies:
       - supports-color
@@ -2784,7 +2748,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.3.9(@types/node@20.4.7)
+      vite: 4.3.9(@types/node@20.4.9)
       vue: 3.3.4
     dev: true
 
@@ -5783,7 +5747,7 @@ packages:
     hasBin: true
     dependencies:
       meow: 8.1.2
-      semver: 7.5.1
+      semver: 7.5.4
     dev: true
 
   /git-up@7.0.0:
@@ -9605,6 +9569,10 @@ packages:
       sisteransi: 1.0.5
     dev: true
 
+  /property-expr@2.0.5:
+    resolution: {integrity: sha512-IJUkICM5dP5znhCckHSv30Q4b5/JA5enCtkRHYaOVOAocnH/1BQEYTC5NMfT3AVl/iXKdr3aqQbQn9DxyWknwA==}
+    dev: true
+
   /property-information@6.2.0:
     resolution: {integrity: sha512-kma4U7AFCTwpqq5twzC1YVIDXSqg6qQK6JN0smOw8fgRy1OkMi0CYSzFmsy6dnqSenamAtj0CyXMUJ1Mf6oROg==}
     dev: true
@@ -10894,6 +10862,10 @@ packages:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: true
 
+  /tiny-case@1.0.3:
+    resolution: {integrity: sha512-Eet/eeMhkO6TX8mnUteS9zgPbUMQa4I6Kkp5ORiBD5476/m+PIRiumP5tmh5ioJpH7k51Kehawy2UDfsnxxY8Q==}
+    dev: true
+
   /tiny-invariant@1.3.1:
     resolution: {integrity: sha512-AD5ih2NlSssTCwsMznbvwMZpJ1cbhkGd2uueNxzv2jDlEeZdU04JQfRnggJQ8DrcVBGjAsCKwFBbDlVNtEMlzw==}
     dev: true
@@ -10927,6 +10899,10 @@ packages:
   /toidentifier@1.0.1:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
     engines: {node: '>=0.6'}
+
+  /toposort@2.0.2:
+    resolution: {integrity: sha512-0a5EOkAUp8D4moMi2W8ZF8jcga7BgZd91O/yabJCFY8az+XSzeGyTKs0Aoo897iV1Nj6guFq8orWDS96z91oGg==}
+    dev: true
 
   /totalist@3.0.1:
     resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
@@ -11724,7 +11700,7 @@ packages:
       open: 9.1.0
       picocolors: 1.0.0
       sirv: 2.0.3
-      vite: 4.4.9(@types/node@20.4.7)
+      vite: 4.4.9(@types/node@20.4.9)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -11744,7 +11720,7 @@ packages:
       kolorist: 1.8.0
       magic-string: 0.30.2
       shell-quote: 1.8.1
-      vite: 4.4.9(@types/node@20.4.7)
+      vite: 4.4.9(@types/node@20.4.9)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -12364,6 +12340,15 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  /yup@1.2.0:
+    resolution: {integrity: sha512-PPqYKSAXjpRCgLgLKVGPA33v5c/WgEx3wi6NFjIiegz90zSwyMpvTFp/uGcVnnbx6to28pgnzp/q8ih3QRjLMQ==}
+    dependencies:
+      property-expr: 2.0.5
+      tiny-case: 1.0.3
+      toposort: 2.0.2
+      type-fest: 2.19.0
+    dev: true
+
   /zhead@2.0.10:
     resolution: {integrity: sha512-irug8fXNKjqazkA27cFQs7C6/ZD3qNiEzLC56kDyzQART/Z9GMGfg8h2i6fb9c8ZWnIx/QgOgFJxK3A/CYHG0g==}
     dev: true
@@ -12375,6 +12360,10 @@ packages:
       archiver-utils: 2.1.0
       compress-commons: 4.1.1
       readable-stream: 3.6.2
+    dev: true
+
+  /zod@3.22.0:
+    resolution: {integrity: sha512-y5KZY/ssf5n7hCGDGGtcJO/EBJEm5Pa+QQvFBeyMOtnFYOSflalxIFFvdaYevPhePcmcKC4aTbFkCcXN7D0O8Q==}
     dev: true
 
   /zwitch@2.0.4:
