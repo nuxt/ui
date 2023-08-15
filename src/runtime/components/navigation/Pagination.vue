@@ -81,7 +81,7 @@ export default defineComponent({
       type: String as PropType<keyof typeof appConfig.ui.pagination.size>,
       default: () => appConfig.ui.pagination.default.size,
       validator (value: string) {
-        return Object.keys(appConfig.ui.button.size).includes(value)
+        return Object.keys(appConfig.ui.pagination.size).includes(value)
       }
     },
     activeButton: {

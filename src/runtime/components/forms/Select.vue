@@ -130,7 +130,7 @@ export default defineComponent({
       default: () => []
     },
     size: {
-      type: String as PropType<keyof typeof appConfig.ui.input.size>,
+      type: String as PropType<keyof typeof appConfig.ui.select.size>,
       default: () => appConfig.ui.select.default.size,
       validator (value: string) {
         return Object.keys(appConfig.ui.select.size).includes(value)
