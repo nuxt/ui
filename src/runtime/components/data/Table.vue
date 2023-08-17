@@ -175,7 +175,15 @@ export default defineComponent({
 
     const indeterminate = computed(() => selected.value && selected.value.length > 0 && selected.value.length < props.rows.length)
 
-    const emptyState = computed(() => ({ ...ui.value.default.emptyState, ...props.emptyState }))
+    const emptyState = computed(() => {
+      if (props.emptyState === null) return null
+      return { ...ui.value.default.emptyState, ...props.emptyState }
+    })
+
+    const loadingState = computed(() => {
+      if (props.loadingState === null) return null
+      return { ...ui.value.default.loadingState, ...props.loadingState }
+    })
 
     function compare (a: any, z: any) {
       if (typeof props.by === 'string') {
@@ -254,6 +262,8 @@ export default defineComponent({
       indeterminate,
       // eslint-disable-next-line vue/no-dupe-keys
       emptyState,
+      // eslint-disable-next-line vue/no-dupe-keys
+      loadingState,
       isSelected,
       onSort,
       onSelect,

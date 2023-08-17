@@ -11,7 +11,7 @@
 
       <hr v-if="surround?.length" class="my-8">
 
-      <UDocsSurround :surround="surround" />
+      <UDocsSurround :surround="removePrefixFromFiles(surround)" />
 
       <Footer class="not-prose" />
     </UPageBody>
@@ -24,17 +24,21 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const { prefix, removePrefixFromFiles } = useContentSource()
 const { findPageHeadline } = useElementsHelpers()
 
-const { data: page } = await useAsyncData(`docs-${route.path}`, () => queryContent(route.path).findOne())
+const path = computed(() => route.path.startsWith(prefix.value) ? route.path : `${prefix.value}${route.path}`)
+
+const { data: page } = await useAsyncData(path.value, () => queryContent(path.value).findOne())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
-const { data: surround } = await useAsyncData(`docs-${route.path}-surround`, () => queryContent()
-  .where({ _extension: 'md', navigation: { $ne: false } })
-  .findSurround(route.path.endsWith('/') ? route.path.slice(0, -1) : route.path)
-)
+const { data: surround } = await useAsyncData(`${path.value}-surround`, () => {
+  return queryContent(prefix.value)
+    .where({ _extension: 'md', navigation: { $ne: false } })
+    .findSurround((path.value.endsWith('/') ? path.value.slice(0, -1) : path.value))
+})
 
 useContentHead(page)
 
