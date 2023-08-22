@@ -1,6 +1,6 @@
 <template>
   <Transition appear v-bind="ui.transition">
-    <div :class="[ui.wrapper, ui.background, ui.rounded, ui.shadow]" @mouseover="onMouseover" @mouseleave="onMouseleave">
+    <div :class="wrapperClass" v-bind="attrs" @mouseover="onMouseover" @mouseleave="onMouseleave">
       <div :class="[ui.container, ui.rounded, ui.ring]">
         <div :class="ui.padding">
           <div class="flex gap-3" :class="{ 'items-start': description || $slots.description, 'items-center': !description && !$slots.description }">
@@ -41,7 +41,8 @@
 <script lang="ts">
 import { ref, computed, onMounted, onUnmounted, watchEffect, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
@@ -49,7 +50,7 @@ import { useTimer } from '../../composables/useTimer'
 import type { NotificationAction } from '../../types'
 import type { Avatar } from '../../types/avatar'
 import type { Button } from '../../types/button'
-import { classNames } from '../../utils'
+import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -63,6 +64,7 @@ export default defineComponent({
     UAvatar,
     UButton
   },
+  inheritAttrs: false,
   props: {
     id: {
       type: [String, Number],
@@ -109,18 +111,34 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.notification>>,
-      default: () => appConfig.ui.notification
+      default: () => ({})
     }
   },
   emits: ['close'],
-  setup (props, { emit }) {
+  setup (props, { attrs, emit }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.notification>>(() => defu({}, props.ui, appConfig.ui.notification))
+    const ui = computed<Partial<typeof appConfig.ui.notification>>(() => defuTwMerge({}, props.ui, appConfig.ui.notification))
 
     let timer: any = null
     const remaining = ref(props.timeout)
+
+    const wrapperClass = computed(() => {
+      return twMerge(twJoin(
+        ui.value.wrapper,
+        ui.value.background,
+        ui.value.rounded,
+        ui.value.shadow
+      ), attrs.class as string)
+    })
+
+    const progressClass = computed(() => {
+      return twJoin(
+        ui.value.progress.base,
+        ui.value.progress.background?.replaceAll('{color}', props.color)
+      )
+    })
 
     const progressStyle = computed(() => {
       const remainingPercent = remaining.value / props.timeout * 100
@@ -128,15 +146,8 @@ export default defineComponent({
       return { width: `${remainingPercent || 0}%` }
     })
 
-    const progressClass = computed(() => {
-      return classNames(
-        ui.value.progress.base,
-        ui.value.progress.background?.replaceAll('{color}', props.color)
-      )
-    })
-
     const iconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         ui.value.icon.color?.replaceAll('{color}', props.color)
       )
@@ -199,10 +210,12 @@ export default defineComponent({
     })
 
     return {
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      progressStyle,
+      wrapperClass,
       progressClass,
+      progressStyle,
       iconClass,
       onMouseover,
       onMouseleave,

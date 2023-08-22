@@ -2,10 +2,10 @@
   <span :class="wrapperClass">
     <img
       v-if="url && !error"
-      :class="avatarClass"
+      :class="imgClass"
       :alt="alt"
       :src="url"
-      v-bind="$attrs"
+      v-bind="attrs"
       @error="onError"
     >
     <span v-else-if="text" :class="ui.text">{{ text }}</span>
@@ -22,13 +22,14 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
-import { classNames } from '../../utils'
+import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { omit } from 'lodash-es'
 
 // const appConfig = useAppConfig()
 
@@ -79,16 +80,20 @@ export default defineComponent({
       type: [String, Number],
       default: null
     },
+    imgClass: {
+      type: String,
+      default: ''
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.avatar>>,
-      default: () => appConfig.ui.avatar
+      default: () => ({})
     }
   },
-  setup (props) {
+  setup (props, { attrs }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.avatar>>(() => defu({}, props.ui, appConfig.ui.avatar))
+    const ui = computed<Partial<typeof appConfig.ui.avatar>>(() => defuTwMerge({}, props.ui, appConfig.ui.avatar))
 
     const url = computed(() => {
       if (typeof props.src === 'boolean') {
@@ -102,30 +107,30 @@ export default defineComponent({
     })
 
     const wrapperClass = computed(() => {
-      return classNames(
+      return twMerge(twJoin(
         ui.value.wrapper,
         (error.value || !url.value) && ui.value.background,
         ui.value.rounded,
         ui.value.size[props.size]
-      )
+      ), attrs.class as string)
     })
 
-    const avatarClass = computed(() => {
-      return classNames(
+    const imgClass = computed(() => {
+      return twMerge(twJoin(
         ui.value.rounded,
         ui.value.size[props.size]
-      )
+      ), props.imgClass)
     })
 
     const iconClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.icon.base,
         ui.value.icon.size[props.size]
       )
     })
 
     const chipClass = computed(() => {
-      return classNames(
+      return twJoin(
         ui.value.chip.base,
         ui.value.chip.size[props.size],
         ui.value.chip.position[props.chipPosition],
@@ -146,8 +151,10 @@ export default defineComponent({
     }
 
     return {
+      attrs: omit(attrs, ['class']),
       wrapperClass,
-      avatarClass,
+      // eslint-disable-next-line vue/no-dupe-keys
+      imgClass,
       iconClass,
       chipClass,
       url,

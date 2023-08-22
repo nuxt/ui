@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { z } from 'zod'
-import type { Form } from '@nuxthq/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
 
 const options = [
   { label: 'Option 1', value: 'option-1' },
@@ -46,11 +46,11 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>
 
-const form = ref<Form<Schema>>()
+const form = ref()
 
-async function submit () {
-  await form.value!.validate()
-  // Do something with state.value
+async function submit (event: FormSubmitEvent<Schema>) {
+  // Do something with event.data
+  console.log(event.data)
 }
 </script>
 
@@ -59,7 +59,7 @@ async function submit () {
     ref="form"
     :schema="schema"
     :state="state"
-    @submit.prevent="submit"
+    @submit="submit"
   >
     <UFormGroup name="input" label="Input">
       <UInput v-model="state.input" />
@@ -101,6 +101,10 @@ async function submit () {
 
     <UButton type="submit">
       Submit
+    </UButton>
+
+    <UButton variant="outline" class="ml-2" @click="form.clear()">
+      Clear
     </UButton>
   </UForm>
 </template>

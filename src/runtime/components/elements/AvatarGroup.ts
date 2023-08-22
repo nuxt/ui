@@ -1,7 +1,8 @@
 import { h, cloneVNode, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
-import { classNames, getSlotsChildren } from '../../utils'
+import { omit } from 'lodash-es'
+import { twMerge, twJoin } from 'tailwind-merge'
+import { defuTwMerge, getSlotsChildren } from '../../utils'
 import Avatar from './Avatar.vue'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -11,6 +12,7 @@ import appConfig from '#build/app.config'
 // const appConfig = useAppConfig()
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     size: {
       type: String,
@@ -25,14 +27,14 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.avatarGroup>>,
-      default: () => appConfig.ui.avatarGroup
+      default: () => ({})
     }
   },
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.avatarGroup>>(() => defu({}, props.ui, appConfig.ui.avatarGroup))
+    const ui = computed<Partial<typeof appConfig.ui.avatarGroup>>(() => defuTwMerge({}, props.ui, appConfig.ui.avatarGroup))
 
     const children = computed(() => getSlotsChildren(slots))
 
@@ -46,13 +48,8 @@ export default defineComponent({
           vProps.size = props.size
         }
 
-        vProps.ui = node.props.ui || {}
-        vProps.ui.wrapper = classNames(
-          appConfig.ui.avatar.wrapper,
-          vProps.ui.wrapper || '',
-          ui.value.ring,
-          ui.value.margin
-        )
+        vProps.class = node.props.class || ''
+        vProps.class = twMerge(twJoin(vProps.class, ui.value.ring, ui.value.margin), vProps.class)
 
         return cloneVNode(node, vProps)
       }
@@ -61,19 +58,13 @@ export default defineComponent({
         return h(Avatar, {
           size: props.size,
           text: `+${children.value.length - max.value}`,
-          ui: {
-            wrapper: classNames(
-              appConfig.ui.avatar.wrapper,
-              ui.value.ring,
-              ui.value.margin
-            )
-          }
+          class: twJoin(ui.value.ring, ui.value.margin)
         })
       }
 
       return null
     }).filter(Boolean).reverse())
 
-    return () => h('div', { class: ui.value.wrapper }, clones.value)
+    return () => h('div', { class: twMerge(ui.value.wrapper, attrs.class as string), ...omit(attrs, ['class']) }, clones.value)
   }
 })

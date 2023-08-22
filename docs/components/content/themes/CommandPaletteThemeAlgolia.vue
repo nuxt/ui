@@ -2,13 +2,12 @@
 const commandPaletteRef = ref()
 
 const navigation = inject('navigation')
-
-const { data: files } = await useLazyAsyncData('search', () => queryContent().where({ _type: 'markdown' }).find(), { default: () => [] })
+const files = inject('files')
 
 const groups = computed(() => navigation.value.map(item => ({
-  key: item.to,
+  key: item._path,
   label: item.label,
-  commands: files.value.filter(file => file._path.startsWith(item.to)).map(file => ({
+  commands: files.value.filter(file => file._path.startsWith(item._path)).map(file => ({
     id: file._id,
     icon: 'i-heroicons-document',
     title: file.navigation?.title || file.title,
