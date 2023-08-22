@@ -15,10 +15,12 @@ const items = [{
 <template>
   <UBreadcrumb :items="items" :divider="null">
     <template #leading="{ index, isActive }">
-      <UBadge :color="isActive ? 'primary' : 'gray'" :ui="{ rounded: 'rounded-full' }">
-        {{ index + 1 }}
-      </UBadge>
-      <span class="w-5 h-1 rounded-full me-2" :class="{ 'bg-primary-400': isActive, 'bg-gray-400': !isActive }" />
+      <UAvatar
+        :alt="(index + 1 ).toString()"
+        :ui="{ background: isActive ? 'bg-primary-100 dark:bg-primary-800 border border-primary' : 'bg-gray-100 dark:bg-gray-800 border' }"
+        size="xs"
+      />
+      <span class="w-8 h-1 rounded-full me-2" :class="[isActive ? 'bg-primary-100' : 'bg-gray-100']" />
     </template>
   </UBreadcrumb>
 </template>

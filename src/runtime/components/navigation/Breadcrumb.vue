@@ -1,24 +1,25 @@
 <template>
   <div :class="ui.wrapper">
     <component :is="tag" :class="ui.base">
-      <component :is="itemTag" v-for="(item, key) in items" :key="key" :class="[ui.item.base, ui.size[size]]">
+      <component :is="itemTag" v-for="(item, index) in items" :key="index" :class="[ui.item.base, ui.size[size]]">
         <ULink
           v-slot="{ isActive }"
+          as="div"
           :to="item.to"
           :class="ui.item.link"
           :active-class="ui.item.active"
           :inactive-class="ui.item.inactive"
           v-bind="omit(item, ['text', 'icon', 'tag'])"
         >
-          <slot name="leading" :index="key" :is-active="isActive">
+          <slot name="leading" :index="index" :is-active="isActive">
             <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon.size[size]" />
           </slot>
 
-          <slot name="item" :item="item" :index="key" :is-active="isActive">
+          <slot name="item" :item="item" :index="index" :is-active="isActive">
             {{ item.text }}
           </slot>
 
-          <slot v-if="key < items.length - 1" name="divider">
+          <slot v-if="index < items.length - 1" name="divider">
             <span v-if="divider" :class="ui.item.divider">
               <UIcon v-if="divider.icon" :name="divider.icon" :class="ui.icon.size[size]" />
               <span v-else>{{ divider?.text }}</span>

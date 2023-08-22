@@ -15,7 +15,7 @@ const items = [{
 <template>
   <UBreadcrumb :items="items">
     <template #item="{ item, isActive, index }">
-      <UBadge :color="isActive ? 'primary' : 'gray'" variant="subtle" :class="{ 'ms-2': index === 0 }" :ui="{ rounded: 'rounded-full' }">
+      <UBadge :color="isActive ? 'primary' : 'gray'" variant="outline" :class="{ 'ms-2': index === 0 }" :ui="{ rounded: 'rounded-full' }">
         {{ index + 1 }}. {{ item.text }}
       </UBadge>
     </template>

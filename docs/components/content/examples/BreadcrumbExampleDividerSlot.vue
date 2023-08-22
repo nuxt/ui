@@ -15,9 +15,9 @@ const items = [{
 <template>
   <UBreadcrumb :items="items">
     <template #divider>
-      <span class="w-1 h-1 rounded-full bg-gray-400" />
-      <span class="w-8 h-1 rounded-full bg-gray-400" />
-      <span class="w-1 h-1 rounded-full bg-gray-400" />
+      <span class="w-1 h-1 rounded-full bg-gray-200" />
+      <span class="w-8 h-1 rounded-full bg-gray-300" />
+      <span class="w-1 h-1 rounded-full bg-gray-200" />
     </template>
   </UBreadcrumb>
 </template>
