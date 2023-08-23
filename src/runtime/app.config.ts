@@ -690,7 +690,6 @@ const rating = {
   default: {
     color: 'primary',
     icon: 'i-heroicons-star-20-solid',
-    max: 5,
     size: 'md'
   }
 }
