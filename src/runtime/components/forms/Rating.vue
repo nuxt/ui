@@ -1,17 +1,13 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="wrapperClass">
     <UIcon
       v-for="star of [...Array(max).keys()].slice().reverse()"
       :key="star"
       :name="icon"
       :class="[
         ratingClass,
-        (star + 1 <= modelValue ? ui.active : ui.inactive).replaceAll(
-          '{color}',
-          color
-        ),
-        readOnly ? 'cursor-auto hover:text-gray-300 hover:dark:text-gray-700 peer-hover:text-gray-300 peer-hover:dark:text-gray-700' : 'cursor-pointer',
-        'order-{order}'.replaceAll('{order}', star.toString()),
+        (rate >= star + 1 ? ui.active : ui.inactive).replaceAll('{color}',color),
+  'order-{order}'.replaceAll('{order}', star.toString()),
       ]"
       @click="setRating(star + 1)"
     />
@@ -20,10 +16,10 @@
 
 <script lang="ts">
 import { computed } from 'vue'
-import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
-import { classNames } from '../../utils'
-import { useFormEvents } from '../../composables/useFormEvents'
+import { twMerge, twJoin } from 'tailwind-merge'
+import { defuTwMerge } from '../../utils'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { useAppConfig } from '#imports'
 
 // TODO: Remove
@@ -45,7 +41,10 @@ export default defineComponent({
     },
     max: {
       type: Number,
-      default: () => appConfig.ui.rating.default.max
+      default: 5,
+      validate (value: number) {
+        return value >= 1 && value < Number.MAX_VALUE
+      }
     },
     color: {
       type: String,
@@ -64,18 +63,18 @@ export default defineComponent({
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.rating>>,
-      default: () => appConfig.ui.rating
+      default: () => ({})
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.rating>>(() =>
-      defu({}, props.ui, appConfig.ui.rating)
-    )
+    const ui = computed<Partial<typeof appConfig.ui.rating>>(() => defuTwMerge({}, props.ui, appConfig.ui.rating))
 
-    const { emitFormBlur } = useFormEvents()
+    const { emitFormBlur, formGroup } = useFormGroup()
+    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
+    const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const rate = computed({
       get () {
@@ -98,10 +97,18 @@ export default defineComponent({
       rate.value = rating
     }
 
+    const wrapperClass = computed(() => {
+      return twMerge(twJoin(
+        ui.value.wrapper,
+        ui.value.size[size.value]
+      ), attrs.class as string)
+    })
+
     const ratingClass = computed(() => {
-      return classNames(
-        ui.value.base.replaceAll('{color}', props.color),
-        ui.value.size[props.size]
+      return twJoin(
+        ui.value.base.replaceAll('{color}', color.value),
+        ui.value.size[props.size],
+        props.readOnly ?  'cursor-auto hover:text-gray-300 hover:dark:text-gray-700 peer-hover:text-gray-300 peer-hover:dark:text-gray-700' : 'cursor-pointer'
       )
     })
 
@@ -110,6 +117,7 @@ export default defineComponent({
       ui,
       rate,
       setRating,
+      wrapperClass,
       ratingClass
     }
   }
