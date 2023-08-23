@@ -10,20 +10,20 @@
     "@nuxt/content": "^2.7.2",
     "@nuxt/devtools": "^0.8.0",
     "@nuxt/eslint-config": "^0.1.1",
-    "@nuxthq/elements": "npm:@nuxthq/elements-edge@0.0.1-28199465.7f5d659",
+    "@nuxthq/elements": "npm:@nuxthq/elements-edge@0.0.1-28211896.f2ba924",
     "@nuxthq/studio": "^0.13.4",
     "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/google-fonts": "^3.0.2",
     "@nuxtjs/plausible": "^0.2.1",
     "@vueuse/nuxt": "^10.3.0",
     "eslint": "^8.47.0",
-    "nuxt": "^3.6.5",
+    "nuxt": "npm:nuxt3@3.7.0-28212954.a2f2a474",
     "nuxt-component-meta": "^0.5.3",
     "nuxt-lodash": "^2.5.0",
     "typescript": "^5.1.6",
     "v-calendar": "^3.0.3",
     "yup": "^1.2.0",
     "joi": "^17.9.2",
-    "zod": "^3.22.0"
+    "zod": "^3.22.2"
   }
 }
