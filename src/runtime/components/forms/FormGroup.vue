@@ -1,8 +1,8 @@
 <template>
   <div :class="wrapperClass" v-bind="attrs">
     <label>
-      <div v-if="label" :class="[ui.base, size]">
-        <p :class="[ui.label, required ? ui.required : '']">{{ label }}</p>
+      <div v-if="label" :class="[ui.label.wrapper, size]">
+        <p :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</p>
         <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
       </div>
 
