@@ -57,6 +57,65 @@ const table = {
   }
 }
 
+const list = {
+  wrapper: 'relative',
+  base: 'min-w-full md:table md:table-fixed md:border-collapse flex flex-col gap-4 md:gap-0',
+  divide: 'md:divide-y md:divide-gray-300 md:dark:divide-gray-700',
+  thead: 'md:table-header-group',
+  tbody: 'md:table-row-group md:divide-y md:divide-gray-200 md:dark:divide-gray-800 flex flex-col gap-4 md:gap-0',
+  tr: {
+    base: 'rounded border border-gray-200 md:border-0 dark:border-gray-700 md:table-row',
+    selected: 'bg-gray-50 dark:bg-gray-800/50',
+    active: 'hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer',
+    heading: 'overflow-y-auto',
+    item: 'flex flex-col gap-2 md:gap-0 px-3 py-3.5'
+  },
+  th: {
+    base: 'table-cell text-left rtl:text-right',
+    padding: 'px-3 py-3.5',
+    color: 'text-gray-900 dark:text-white',
+    font: 'font-semibold',
+    size: 'text-sm'
+  },
+  td: {
+    base: 'md:table-cell md:whitespace-nowrap',
+    padding: 'md:px-3 md:py-4',
+    color: 'text-gray-500 dark:text-gray-400',
+    font: '',
+    size: 'text-sm'
+  },
+  loadingState: {
+    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    label: 'text-sm text-center text-gray-900 dark:text-white',
+    icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4 animate-spin'
+  },
+  emptyState: {
+    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    label: 'text-sm text-center text-gray-900 dark:text-white',
+    icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
+  },
+  default: {
+    sortAscIcon: 'i-heroicons-bars-arrow-up-20-solid',
+    sortDescIcon: 'i-heroicons-bars-arrow-down-20-solid',
+    sortButton: {
+      icon: 'i-heroicons-arrows-up-down-20-solid',
+      trailing: true,
+      square: true,
+      color: 'gray',
+      variant: 'ghost',
+      class: '-m-1.5'
+    },
+    loadingState: {
+      icon: 'i-heroicons-arrow-path-20-solid',
+      label: 'Loading...'
+    },
+    emptyState: {
+      icon: 'i-heroicons-circle-stack-20-solid',
+      label: 'No items.'
+    }
+  }
+}
+
 // Elements
 
 const avatar = {
@@ -1067,6 +1126,7 @@ const notifications = {
 export default {
   ui: {
     table,
+    list,
     avatar,
     avatarGroup,
     badge,
