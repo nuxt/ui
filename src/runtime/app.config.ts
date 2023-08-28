@@ -946,7 +946,7 @@ const tooltip = {
   shadow: 'shadow',
   rounded: 'rounded',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  base: 'invisible lg:visible h-6 px-2 py-1 text-xs font-normal truncate',
+  base: '[@media(pointer:coarse)]:hidden h-6 px-2 py-1 text-xs font-normal truncate',
   shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5',
   // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
