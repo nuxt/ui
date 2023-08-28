@@ -104,11 +104,10 @@ export default defineComponent({
     })
 
     const ratingClass = computed(() => {
-      return twJoin(
+      return twMerge(twJoin(
         ui.value.base.replaceAll('{color}', color.value),
-        ui.value.size[props.size],
-        props.readOnly ? 'cursor-auto hover:text-gray-300 hover:dark:text-gray-700 peer-hover:text-gray-300 peer-hover:dark:text-gray-700' : 'cursor-pointer'
-      )
+        ui.value.size[props.size]
+      ), props.readOnly ? 'cursor-auto hover:text-gray-300 hover:dark:text-gray-700 peer-hover:text-gray-300 peer-hover:dark:text-gray-700' : 'cursor-pointer')
     })
 
     return {
