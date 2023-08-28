@@ -69,6 +69,41 @@ export const table = {
   }
 }
 
+export const list = {
+  stacking: {
+    base: 'flex',
+    orientation: {
+      vertical: 'flex-col justify-center',
+      horizontal: 'flex-row items-center'
+    },
+    wrap: 'flex-wrap',
+    nowrap: 'flex-nowrap'
+  },
+  item: {
+    base: 'grow',
+    contents: 'grow gap-x-2'
+  },
+  separator: {
+    base: 'grow',
+    color: 'bg-{color}-200 dark:bg-{color}-800',
+    orientation: {
+      vertical: 'h-px w-auto my-2',
+      horizontal: 'h-auto w-px mx-2 self-stretch'
+    }
+  },
+  color: {
+    gray: 'bg-gray-200 dark:bg-gray-800',
+    black: 'bg-black dark:bg-white',
+    white: 'bg-white dark:bg-black'
+  },
+  default: {
+    orientation: 'vertical',
+    separatorColor: 'gray',
+    variant: 'link',
+    wrap: false
+  }
+}
+
 // Elements
 
 export const avatar = {

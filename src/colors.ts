@@ -204,7 +204,13 @@ const safelistByComponent = {
     variants: ['dark']
   }, {
     pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
-  }]
+  }],
+  table: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-200`),
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-800`),
+    variants: ['dark']
+  }],
 }
 
 const safelistComponentAliasesMap = {
