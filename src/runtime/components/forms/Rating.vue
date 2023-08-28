@@ -6,8 +6,7 @@
       :name="icon"
       :class="[
         ratingClass,
-        (rate >= star + 1 ? ui.active : ui.inactive).replaceAll('{color}',color),
-  'order-{order}'.replaceAll('{order}', star.toString()),
+        (rate >= star + 1 ? ui.active : ui.inactive).replaceAll('{color}', color), 'order-{order}'.replaceAll('{order}', star.toString()),
       ]"
       @click="setRating(star + 1)"
     />
@@ -108,7 +107,7 @@ export default defineComponent({
       return twJoin(
         ui.value.base.replaceAll('{color}', color.value),
         ui.value.size[props.size],
-        props.readOnly ?  'cursor-auto hover:text-gray-300 hover:dark:text-gray-700 peer-hover:text-gray-300 peer-hover:dark:text-gray-700' : 'cursor-pointer'
+        props.readOnly ? 'cursor-auto hover:text-gray-300 hover:dark:text-gray-700 peer-hover:text-gray-300 peer-hover:dark:text-gray-700' : 'cursor-pointer'
       )
     })
 
