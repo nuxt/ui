@@ -30,6 +30,11 @@ export default defineNuxtConfig({
     icons: ['heroicons', 'simple-icons'],
     safelistColors: excludeColors(colors)
   },
+  vite: {
+    optimizeDeps: {
+      exclude: ['@nuxtjs/mdc']
+    }
+  },
   content: {
     sources: {
       // overwrite default source AKA `content` directory
