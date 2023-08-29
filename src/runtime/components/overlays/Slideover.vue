@@ -12,10 +12,12 @@
       <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
         <HDialogPanel
           :class="[
-            ui.base, ui.width, ui.background, ui.ring, ui.padding,
+            ui.base, ui.width, ui.background, ui.ring, ui.padding, ui.height,
             {
-              'max-w-[100%] max-h-[66%] top-[33%]': side === 'bottom',
-              'max-w-[100%] max-h-[66%]': side === 'top'
+              'top-[33%]': side === 'bottom',
+              'max-h-[66%]': side === 'top',
+              'h-full max-w-md': side === 'left',
+              'h-full max-w-md': side === 'right'
             }
           ]"
         >
