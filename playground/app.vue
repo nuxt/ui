@@ -4,16 +4,27 @@
       <template #header>
         Welcome to the playground!
       </template>
+      
+      <div class="text-gray-500 dark:text-gray-400 flex space-x-4 mb-48">
+        <UButton label="Open slideOver" @click="isOpen = true" />
+        
+        <USelectMenu v-model="selected" :options="['left', 'right', 'bottom', 'top']" />
 
-      <p class="text-gray-500 dark:text-gray-400">
-        Try your components here!
-      </p>
+
+        <USlideover v-model="isOpen" :side="selected">
+          <p class="p-4">
+            My content INTO slide Over
+          </p>
+        </USlideover>
+      </div>
     </UCard>
   </UContainer>
 </template>
 
 <script setup>
 
+const isOpen = ref(false)
+const selected = ref('right')
 </script>
 
 <style>
