@@ -48,7 +48,7 @@ export default defineComponent({
     side: {
       type: String,
       default: 'right',
-      validator: (value: string) => ['left', 'right'].includes(value)
+      validator: (value: string) => ['left', 'right', 'bottom'].includes(value)
     },
     overlay: {
       type: Boolean,
@@ -89,14 +89,43 @@ export default defineComponent({
       if (!props.transition) {
         return {}
       }
+      if (props.side === 'right') {
+        return {
+          ...ui.value.transition,
+          enterFrom: 'translate-x-full',
+          enterTo: 'translate-x-0',
+          leaveFrom: 'translate-x-0',
+          leaveTo: 'translate-x-full'
+        }
+      }
+      if (props.side === 'bottom') {
+        return {
+          ...ui.value.transition,
+          enterFrom: 'translate-y-full',
+          enterTo: 'translate-y-0',
+          leaveFrom: 'translate-y-0',
+          leaveTo: 'translate-y-full'
+        }
+      }
+      if (props.side === 'top') {
+        return {
+          ...ui.value.transition,
+          enterFrom: '-translate-y-full',
+          enterTo: 'translate-y-0',
+          leaveFrom: 'translate-y-0',
+          leaveTo: '-translate-y-full'
+        }
+      }
 
+      // default: left
       return {
         ...ui.value.transition,
-        enterFrom: props.side === 'left' ? '-translate-x-full' : 'translate-x-full',
+        enterFrom: '-translate-x-full',
         enterTo: 'translate-x-0',
         leaveFrom: 'translate-x-0',
-        leaveTo: props.side === 'left' ? '-translate-x-full' : 'translate-x-full'
+        leaveTo: '-translate-x-full'
       }
+
     })
 
     function close (value: boolean) {
