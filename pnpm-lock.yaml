@@ -1882,7 +1882,7 @@ packages:
       pkg-types: 1.0.3
       postcss-import-resolver: 2.0.0
       std-env: 3.3.3
-      ufo: 1.1.2
+      ufo: 1.3.0
       unimport: 3.0.14(rollup@3.28.1)
       untyped: 1.3.2
     transitivePeerDependencies:
@@ -1900,7 +1900,7 @@ packages:
       pkg-types: 1.0.3
       postcss-import-resolver: 2.0.0
       std-env: 3.3.3
-      ufo: 1.1.2
+      ufo: 1.3.0
       unimport: 3.1.3(rollup@3.28.1)
       untyped: 1.4.0
     transitivePeerDependencies:
@@ -2046,7 +2046,7 @@ packages:
       nuxt-component-meta: 0.5.3(patch_hash=ybky4hlfy36ww3cfjktd7bj6kq)(rollup@3.28.1)
       nuxt-config-schema: 0.4.6(rollup@3.28.1)
       socket.io-client: 4.7.1
-      ufo: 1.1.2
+      ufo: 1.3.0
     transitivePeerDependencies:
       - bufferutil
       - rollup
@@ -2072,7 +2072,7 @@ packages:
       fontaine: 0.4.0
       magic-string: 0.30.1
       pathe: 1.1.1
-      ufo: 1.1.2
+      ufo: 1.3.0
     transitivePeerDependencies:
       - encoding
       - rollup
@@ -6067,7 +6067,7 @@ packages:
       magic-regexp: 0.7.0
       magic-string: 0.30.3
       pathe: 1.1.1
-      ufo: 1.1.2
+      ufo: 1.3.0
       unplugin: 1.4.0
     transitivePeerDependencies:
       - encoding
@@ -6567,6 +6567,7 @@ packages:
       radix3: 1.0.1
       ufo: 1.3.0
       uncrypto: 0.1.3
+    dev: false
 
   /h3@1.8.1:
     resolution: {integrity: sha512-m5rFuu+5bpwBBHqqS0zexjK+Q8dhtFRvO9JXQG0RvSPL6QrIT6vv42vuBM22SLOgGMoZYsHk0y7VPidt9s+nkw==}
@@ -7036,6 +7037,7 @@ packages:
 
   /iron-webcrypto@0.7.1:
     resolution: {integrity: sha512-K/UmlEhPCPXEHV5hAtH5C0tI5JnFuOrv4yO/j7ODPl3HaiiHBLbOLTde+ieUaAyfCATe4LoAnclyF+hmSCOVmQ==}
+    dev: false
 
   /iron-webcrypto@0.8.0:
     resolution: {integrity: sha512-gScdcWHjTGclCU15CIv2r069NoQrys1UeUFFfaO1hL++ytLHkVw7N5nXJmFf3J2LEDMz1PkrvC0m62JEeu1axQ==}
@@ -7843,11 +7845,6 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /lru-cache@10.0.0:
-    resolution: {integrity: sha512-svTf/fzsKHffP42sujkO/Rjs37BCIsQVRCeNYIm9WN8rgT7ffoUnRtZCqU+6BqcSBdv8gwJeTz8knJpgACeQMw==}
-    engines: {node: 14 || >=16.14}
-    dev: true
-
   /lru-cache@10.0.1:
     resolution: {integrity: sha512-IJ4uwUTi2qCccrioU6g9g/5rvvVl13bsdczUUcqbciD9iLr095yj8DQKdObriEvuNSx325N1rV1O0sJFszx75g==}
     engines: {node: 14 || >=16.14}
@@ -7881,7 +7878,7 @@ packages:
       magic-string: 0.30.3
       mlly: 1.4.0
       type-level-regexp: 0.1.17
-      ufo: 1.1.2
+      ufo: 1.3.0
       unplugin: 1.4.0
     dev: true
 
@@ -8875,7 +8872,7 @@ packages:
       acorn: 8.10.0
       pathe: 1.1.1
       pkg-types: 1.0.3
-      ufo: 1.1.2
+      ufo: 1.3.0
 
   /mlly@1.4.1:
     resolution: {integrity: sha512-SCDs78Q2o09jiZiE2WziwVBEqXQ02XkGdUy45cbJf+BpYRIjArXRJ1Wbowxkb+NaM9DWvS3UC9GiO/6eqvQ/pg==}
@@ -9064,10 +9061,6 @@ packages:
       char-regex: 1.0.2
       emojilib: 2.4.0
       skin-tone: 2.0.0
-    dev: true
-
-  /node-fetch-native@1.2.0:
-    resolution: {integrity: sha512-5IAMBTl9p6PaAjYCnMv5FmqIF6GcZnawAVnzaCG0rX2aYZJ4CxEkZNtVPuTRug7fL7wyM5BQYTlAzcyMPi6oTQ==}
     dev: true
 
   /node-fetch-native@1.4.0:
@@ -10560,6 +10553,7 @@ packages:
 
   /radix3@1.0.1:
     resolution: {integrity: sha512-y+AcwZ3HcUIGc9zGsNVf5+BY/LxL+z+4h4J3/pp8jxSmy1STaCocPS3qrj4tA5ehUSzqtqK+0Aygvz/r/8vy4g==}
+    dev: false
 
   /radix3@1.1.0:
     resolution: {integrity: sha512-pNsHDxbGORSvuSScqNJ+3Km6QAVqk8CfsCBIEoDgpqLrkD2f3QM4I7d1ozJJ172OmIcoUcerZaNWqtLkRXTV3A==}
@@ -12045,9 +12039,6 @@ packages:
     hasBin: true
     dev: true
 
-  /ufo@1.1.2:
-    resolution: {integrity: sha512-TrY6DsjTQQgyS3E3dBaOXf0TpPD8u9FVrVYmKVegJuFw51n/YB9XPt+U6ydzFG5ZIN7+DIjPbNmXoBj9esYhgQ==}
-
   /ufo@1.3.0:
     resolution: {integrity: sha512-bRn3CsoojyNStCZe0BG0Mt4Nr/4KF+rhFlnNXybgqt5pXHNFRlqinSoQaTrGyzE4X8aHplSb+TorH+COin9Yxw==}
 
@@ -12445,12 +12436,12 @@ packages:
       anymatch: 3.1.3
       chokidar: 3.5.3
       destr: 2.0.1
-      h3: 1.7.1
+      h3: 1.8.1
       ioredis: 5.3.2
       listhen: 1.4.3
-      lru-cache: 10.0.0
+      lru-cache: 10.0.1
       mri: 1.2.0
-      node-fetch-native: 1.2.0
+      node-fetch-native: 1.4.0
       ofetch: 1.3.3
       ufo: 1.3.0
     transitivePeerDependencies:
