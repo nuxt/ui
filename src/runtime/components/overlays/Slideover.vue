@@ -1,11 +1,7 @@
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
     <HDialog
-      :class="[wrapperClass, 
-               { 'justify-end': side === 'right' },
-               { 'flex-col': side === 'bottom' },
-               { 'justify-end': side === 'right' },
-      ]"
+      :class="[wrapperClass, { 'justify-end': side === 'right' }]"
       v-bind="attrs"
       @close="(e) => !preventClose && close(e)"
     >
@@ -18,8 +14,8 @@
           :class="[
             ui.base, ui.width, ui.background, ui.ring, ui.padding,
             {
-              'max-w-full max-h-[66%] top-[33%]': side === 'bottom',
-              'max-w-full max-h-[66%]': side === 'top'
+              'max-w-[100%] max-h-[66%] top-[33%]': side === 'bottom',
+              'max-w-[100%] max-h-[66%]': side === 'top'
             }
           ]"
         >
@@ -64,7 +60,7 @@ export default defineComponent({
     side: {
       type: String,
       default: 'right',
-      validator: (value: string) => ['left', 'right', 'bottom'].includes(value)
+      validator: (value: string) => ['left', 'right', 'bottom', 'top'].includes(value)
     },
     overlay: {
       type: Boolean,
