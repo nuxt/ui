@@ -46,7 +46,7 @@ export default defineComponent({
       default: false
     },
     side: {
-      type: String,
+      type: String as PropType<'left' | 'right'>,
       default: 'right',
       validator: (value: string) => ['left', 'right'].includes(value)
     },

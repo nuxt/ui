@@ -138,7 +138,7 @@ import UAvatar from '../elements/Avatar.vue'
 import { defuTwMerge } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
-import type { PopperOptions } from '../../types'
+import type { PopperOptions } from '../../types/popper'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error

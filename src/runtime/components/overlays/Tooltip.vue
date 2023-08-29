@@ -32,7 +32,7 @@ import { twMerge } from 'tailwind-merge'
 import UKbd from '../elements/Kbd.vue'
 import { usePopper } from '../../composables/usePopper'
 import { defuTwMerge } from '../../utils'
-import type { PopperOptions } from '../../types'
+import type { PopperOptions } from '../../types/popper'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error

@@ -23,7 +23,7 @@ import { computed, defineComponent, provide, inject } from 'vue'
 import type { PropType } from 'vue'
 import { omit } from 'lodash-es'
 import { twMerge } from 'tailwind-merge'
-import type { FormError } from '../../types'
+import type { FormError } from '../../types/form'
 import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove

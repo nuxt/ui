@@ -9,7 +9,7 @@ import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow'
 import computeStyles from '@popperjs/core/lib/modifiers/computeStyles'
 import eventListeners from '@popperjs/core/lib/modifiers/eventListeners'
 import { MaybeElement, unrefElement } from '@vueuse/core'
-import type { PopperOptions } from '../types'
+import type { PopperOptions } from '../types/popper'
 
 export const createPopper = popperGenerator({
   defaultModifiers: [...defaultModifiers, offset, flip, preventOverflow, computeStyles, eventListeners]
