@@ -3,9 +3,9 @@ import { hexToRgb } from '../utils'
 import { defineNuxtPlugin, useHead, useAppConfig, useNuxtApp } from '#imports'
 import colors from '#tailwind-config/theme/colors'
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin((nuxtApp) => {
   const appConfig = useAppConfig()
-  const nuxtApp = useNuxtApp()
+  const head = nuxtApp.vueApp._context.provides.usehead
 
   const root = computed(() => {
     const primary: Record<string, string> | undefined = colors[appConfig.ui.primary]
@@ -53,5 +53,6 @@ ${Object.entries(gray || colors.cool).map(([key, value]) => `--color-gray-${key}
     }]
   }
 
-  useHead(headData)
+  // Workaround for https://github.com/nuxt/nuxt/issues/22763
+  head.push(headData)
 })
