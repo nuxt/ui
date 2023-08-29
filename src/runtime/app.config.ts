@@ -930,6 +930,7 @@ const slideover = {
   padding: '',
   shadow: 'shadow-xl',
   width: 'w-screen max-w-md',
+  height: '',
   // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
   transition: {
     enter: 'transform transition ease-in-out duration-300',

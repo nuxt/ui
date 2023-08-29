@@ -1,12 +1,28 @@
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
-    <HDialog :class="[wrapperClass, { 'justify-end': side === 'right' }]" v-bind="attrs" @close="(e) => !preventClose && close(e)">
+    <HDialog
+      :class="[wrapperClass, 
+               { 'justify-end': side === 'right' },
+               { 'flex-col': side === 'bottom' },
+               { 'justify-end': side === 'right' },
+      ]"
+      v-bind="attrs"
+      @close="(e) => !preventClose && close(e)"
+    >
       <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
       <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-        <HDialogPanel :class="[ui.base, ui.width, ui.background, ui.ring, ui.padding]">
+        <HDialogPanel
+          :class="[
+            ui.base, ui.width, ui.background, ui.ring, ui.padding,
+            {
+              'max-w-full max-h-[66%] top-[33%]': side === 'bottom',
+              'max-w-full max-h-[66%]': side === 'top'
+            }
+          ]"
+        >
           <slot />
         </HDialogPanel>
       </TransitionChild>
