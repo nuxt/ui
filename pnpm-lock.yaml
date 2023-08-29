@@ -114,7 +114,7 @@ importers:
         version: 1.1.12
       '@iconify-json/simple-icons':
         specifier: latest
-        version: 1.1.67
+        version: 1.1.68
       '@nuxt/content':
         specifier: ^2.7.2
         version: 2.7.2(rollup@3.28.1)
@@ -1582,8 +1582,8 @@ packages:
     dependencies:
       '@iconify/types': 2.0.0
 
-  /@iconify-json/simple-icons@1.1.67:
-    resolution: {integrity: sha512-ZVpiOC7+H+ZVRpvCNZLz1AdD2E7TINS4ksQPDHrdSYuezF6wJ0kvonwFechlgUoxaqM/R9HZ/LnYABFCdwWA6g==}
+  /@iconify-json/simple-icons@1.1.68:
+    resolution: {integrity: sha512-szbZhXj4Bn4yw1ZCebtq/njEYiTW6/sE9VI2ZDYLkgDhBt5Y0cp8/uP6BemAepIgrQ1by7F1RlHmZJgrVbXDLg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -12535,7 +12535,7 @@ packages:
       '@types/node': 20.4.10
       esbuild: 0.18.20
       postcss: 8.4.27
-      rollup: 3.28.0
+      rollup: 3.28.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
