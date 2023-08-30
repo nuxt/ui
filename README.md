@@ -1,3 +1,5 @@
+[![nuxt-ui-social-card](https://github.com/nuxt/modules/assets/904724/47071f61-379d-4c46-a61e-caaf2d2143d7#gh-dark-mode-only)](https://ui.nuxtlabs.com)
+
 # Nuxt UI
 
 [![npm version][npm-version-src]][npm-version-href]
@@ -5,9 +7,9 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-This module has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](https://volta.net) and [Nuxt Studio](https://nuxt.studio/). It provides everything related to UI when building a Nuxt application, including components, icons, colors, dark mode and also keyboard shortcuts.
+Nuxt UI provides everything related to UI when building Nuxt applications: components, icons, colors, dark mode and also keyboard shortcuts.
 
-[![social preview](https://repository-images.githubusercontent.com/428329515/5a18c5dd-bb58-4874-b6ef-1c44e4884344)](https://ui.nuxtlabs.com)
+Is has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](https://volta.net), [Nuxt Studio](https://nuxt.studio/) and the Nuxt community.
 
 ## Features
 
@@ -19,10 +21,19 @@ This module has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](
 - Bundled icons
 - Fully typed
 
+Read more on [ui.nuxtlabs.com](https://ui.nuxtlabs.com)
+
 ## Installation
 
 ```bash
-yarn add --dev @nuxthq/ui
+# Using npm
+npm install @nuxthq/ui
+
+# Using yarn
+yarn add @nuxthq/ui
+
+# Using pnpm
+pnpm add @nuxthq/ui
 ```
 
 Then, register the module in your `nuxt.config.ts`:
@@ -47,7 +58,7 @@ If you want latest updates, please use `@nuxthq/ui-edge` in your `package.json`:
 
 ## Documentation
 
-Visit https://ui.nuxtlabs.com to view the documentation.
+Visit https://ui.nuxtlabs.com to explore the documentation.
 
 ## Credits
 
