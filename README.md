@@ -1,4 +1,4 @@
-[![nuxt-ui-social-card](https://github.com/nuxt/modules/assets/904724/47071f61-379d-4c46-a61e-caaf2d2143d7#gh-dark-mode-only)](https://ui.nuxtlabs.com)
+[![nuxt-ui-social-card](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxtlabs.com)
 
 # Nuxt UI
 
