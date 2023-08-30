@@ -64,6 +64,9 @@
     "yup": "^1.2.0",
     "zod": "^3.22.2"
   },
+  "resolutions": {
+    "@nuxtjs/mdc": "npm:@nuxtjs/mdc-edge@0.1.4-28223495.3036a1e"
+  },
   "pnpm": {
     "patchedDependencies": {
       "nuxt-component-meta@0.5.3": "patches/nuxt-component-meta@0.5.3.patch"
