@@ -10,7 +10,7 @@
     "@nuxt/content": "^2.7.2",
     "@nuxt/devtools": "^0.8.0",
     "@nuxt/eslint-config": "^0.1.1",
-    "@nuxthq/elements": "npm:@nuxthq/elements-edge@0.0.1-28199465.7f5d659",
+    "@nuxthq/elements": "npm:@nuxthq/elements-edge@0.0.1-28222076.7655352",
     "@nuxthq/studio": "^0.13.4",
     "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/google-fonts": "^3.0.2",
