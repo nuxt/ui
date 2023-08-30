@@ -11,7 +11,7 @@
           class="justify-center"
         />
         <USelectMenu
-          v-else-if="prop.type === 'string' && prop.options.length"
+          v-else-if="prop.type === 'string' && prop.options.length && prop.name !== 'label'"
           v-model="componentProps[prop.name]"
           :options="prop.options"
           :name="`prop-${prop.name}`"
@@ -165,7 +165,7 @@ const code = computed(() => {
       continue
     }
 
-    code += ` ${(typeof value === 'boolean' && value !== true) || typeof value === 'object' ? ':' : ''}${key === 'modelValue' ? 'value' : useKebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
+    code += ` ${(typeof value === 'boolean' && value !== true) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'value' : useKebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
   }
 
   if (props.slots) {
