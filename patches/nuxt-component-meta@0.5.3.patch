@@ -1,0 +1,15 @@
+diff --git a/dist/module.mjs b/dist/module.mjs
+index 286319046560f8ead5a26f811e7643fe990f9ee6..14be2f9551c24cd1e5c35dadaad9f83009f4c5a0 100644
+--- a/dist/module.mjs
++++ b/dist/module.mjs
+@@ -142,10 +142,6 @@ const module = defineNuxtModule({
+       references.push({
+         path: join(nuxt.options.buildDir, "component-meta.d.ts")
+       });
+-      tsConfig.compilerOptions = tsConfig.compilerOptions || {};
+-      tsConfig.compilerOptions.paths = tsConfig.compilerOptions.paths || {};
+-      tsConfig.compilerOptions.paths["#nuxt-component-meta"] = [withoutLeadingSlash(join(nuxt.options.buildDir, "/component-meta.mjs").replace(nuxt.options.rootDir, ""))];
+-      tsConfig.compilerOptions.paths["#nuxt-component-meta/types"] = [withoutLeadingSlash(join(nuxt.options.buildDir, "/component-meta.d.ts").replace(nuxt.options.rootDir, ""))];
+     });
+     nuxt.hook("nitro:config", (nitroConfig) => {
+       nitroConfig.handlers = nitroConfig.handlers || [];
