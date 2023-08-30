@@ -40,20 +40,10 @@ const { prefix, removePrefixFromNavigation, removePrefixFromFiles } = useContent
 const { mapContentNavigation } = useElementsHelpers()
 
 const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
-const navigation = computed(() => {
-  const navigation = nav.value.find(link => link._path === prefix.value)?.children || []
-
-  return prefix.value === '/main' ? removePrefixFromNavigation(navigation) : navigation
-})
 
 const { data: search } = useLazyFetch('/api/search.json', {
   default: () => [],
   server: false
-})
-const files = computed(() => {
-  const files = search.value.filter(file => file._path.startsWith(prefix.value))
-
-  return prefix.value === '/main' ? removePrefixFromFiles(files) : files
 })
 
 const anchors = [{
@@ -73,6 +63,18 @@ const anchors = [{
 }]
 
 // Computed
+
+const navigation = computed(() => {
+  const navigation = nav.value.find(link => link._path === prefix.value)?.children || []
+
+  return prefix.value === '/main' ? removePrefixFromNavigation(navigation) : navigation
+})
+
+const files = computed(() => {
+  const files = search.value.filter(file => file._path.startsWith(prefix.value))
+
+  return prefix.value === '/main' ? removePrefixFromFiles(files) : files
+})
 
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
