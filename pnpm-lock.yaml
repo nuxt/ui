@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@nuxtjs/mdc': npm:@nuxtjs/mdc-edge@0.1.4-28223495.3036a1e
+
 patchedDependencies:
   nuxt-component-meta@0.5.3:
     hash: ybky4hlfy36ww3cfjktd7bj6kq
@@ -1287,7 +1290,7 @@ packages:
     resolution: {integrity: sha512-uFhZXuP/5MVkK8rhj/1QPQKasW1ThyjE9JfLwTF0QEH/KJWgDg1FssKhGY7aCidR3ycUI+V3zHd407uSrdoCFw==}
     dependencies:
       '@nuxt/kit': 3.7.0(rollup@3.28.1)
-      '@nuxtjs/mdc': 0.1.3(rollup@3.28.1)
+      '@nuxtjs/mdc': /@nuxtjs/mdc-edge@0.1.4-28223495.3036a1e(rollup@3.28.1)
       '@vueuse/head': 1.3.1(vue@3.3.4)
       consola: 3.2.3
       defu: 6.1.2
@@ -1678,8 +1681,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxtjs/mdc@0.1.3(rollup@3.28.1):
-    resolution: {integrity: sha512-oZCdIxbq4rb7UaAJpUHbXIZxKeIsNd2tbT3SVaKK8TcFZdrUVQENlamo8VpJ5S387LocQdJLwinVbW+bOl8nOw==}
+  /@nuxtjs/mdc-edge@0.1.4-28223495.3036a1e(rollup@3.28.1):
+    resolution: {integrity: sha512-2+OBiApu/UYKr7nqwkhCJN9zRMrIdSSvgEWnvANJNf1xz2fCQcH9tkoytwrHzTGrrxovQ2YwTXl/WKibYR28Dg==}
     dependencies:
       '@nuxt/kit': 3.7.0(rollup@3.28.1)
       '@types/hast': 3.0.0
@@ -1969,6 +1972,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     dev: true
     bundledDependencies:
       - napi-wasm
@@ -8308,6 +8312,10 @@ packages:
     resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
     engines: {node: ^14 || ^16 || >=18}
     hasBin: true
+    dev: true
+
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
     dev: true
 
   /natural-compare@1.4.0:
