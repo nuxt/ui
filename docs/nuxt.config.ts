@@ -57,11 +57,14 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: ['/getting-started', '/dev/getting-started']
+      // Waiting for https://github.com/nuxt/nuxt/issues/22763
+      concurrency: 1,
+      routes: [
+        '/getting-started',
+        '/dev/getting-started',
+        '/api/search.json'
+      ]
     }
-  },
-  experimental: {
-    payloadExtraction: false
   },
   componentMeta: {
     globalsOnly: true,
@@ -76,5 +79,16 @@ export default defineNuxtConfig({
   typescript: {
     strict: false,
     includeWorkspace: true
+  },
+  hooks: {
+    // TODO: Uncomment after Nuxt v3.7 upgrade
+    // Related to https://github.com/nuxt/nuxt/pull/22558
+    // 'components:extend': (components) => {
+    //   components.forEach((component) => {
+    //     if (component.global) {
+    //       component.global = 'sync'
+    //     }
+    //   })
+    // }
   }
 })

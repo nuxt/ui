@@ -9,7 +9,6 @@
           <template #left>
             <UAside :links="anchors">
               <BranchSelect />
-
               <UNavigationTree :links="mapContentNavigation(navigation)" />
             </UAside>
           </template>
@@ -20,7 +19,7 @@
     </UMain>
 
     <ClientOnly>
-      <UDocsSearch :files="files" :navigation="navigation" />
+      <LazyUDocsSearch :files="files" :navigation="navigation" />
     </ClientOnly>
 
     <UNotifications>
@@ -40,24 +39,11 @@ const colorMode = useColorMode()
 const { prefix, removePrefixFromNavigation, removePrefixFromFiles } = useContentSource()
 const { mapContentNavigation } = useElementsHelpers()
 
-const { data: navigation } = await useLazyAsyncData('navigation', () => fetchContentNavigation(), {
+const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
+
+const { data: search } = useLazyFetch('/api/search.json', {
   default: () => [],
-  transform: (navigation) => {
-    navigation = navigation.find(link => link._path === prefix.value)?.children || []
-
-    return prefix.value === '/main' ? removePrefixFromNavigation(navigation) : navigation
-  },
-  watch: [prefix]
-})
-
-const { data: files } = await useLazyAsyncData('files', () => queryContent().where({ _type: 'markdown', navigation: { $ne: false } }).find(), {
-  default: () => [],
-  transform: (files) => {
-    files = files.filter(file => file._path.startsWith(prefix.value))
-
-    return prefix.value === '/main' ? removePrefixFromFiles(files) : files
-  },
-  watch: [prefix]
+  server: false
 })
 
 const anchors = [{
@@ -77,6 +63,18 @@ const anchors = [{
 }]
 
 // Computed
+
+const navigation = computed(() => {
+  const navigation = nav.value.find(link => link._path === prefix.value)?.children || []
+
+  return prefix.value === '/main' ? removePrefixFromNavigation(navigation) : navigation
+})
+
+const files = computed(() => {
+  const files = search.value.filter(file => file._path.startsWith(prefix.value))
+
+  return prefix.value === '/main' ? removePrefixFromFiles(files) : files
+})
 
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
