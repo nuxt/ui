@@ -28,7 +28,6 @@
 
     <template #panel>
       <BranchSelect />
-
       <UNavigationTree :links="mapContentNavigation(navigation)" />
     </template>
   </UHeader>
