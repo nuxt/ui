@@ -11,7 +11,7 @@
           class="justify-center"
         />
         <USelectMenu
-          v-else-if="prop.type === 'string' && prop.options.length"
+          v-else-if="prop.type === 'string' && prop.options.length && prop.name !== 'label'"
           v-model="componentProps[prop.name]"
           :options="prop.options"
           :name="`prop-${prop.name}`"
