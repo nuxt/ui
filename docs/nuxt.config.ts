@@ -52,12 +52,10 @@ export default defineNuxtConfig({
       Inter: [400, 500, 600, 700]
     }
   },
-  routeRules: {
-    '/': { redirect: '/getting-started', prerender: false }
-  },
   nitro: {
     prerender: {
       routes: [
+        '/',
         '/getting-started',
         '/dev/getting-started',
         '/api/search.json'

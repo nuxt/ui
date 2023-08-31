@@ -3,20 +3,11 @@
   <div>
     <Header />
 
-    <UMain>
-      <UContainer>
-        <UPage>
-          <template #left>
-            <UAside :links="anchors">
-              <BranchSelect />
-              <UNavigationTree :links="mapContentNavigation(navigation)" />
-            </UAside>
-          </template>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
 
-          <NuxtPage />
-        </UPage>
-      </UContainer>
-    </UMain>
+    <Footer />
 
     <ClientOnly>
       <LazyUDocsSearch :files="files" :navigation="navigation" />
@@ -37,7 +28,6 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
 const { prefix, removePrefixFromNavigation, removePrefixFromFiles } = useContentSource()
-const { mapContentNavigation } = useElementsHelpers()
 
 const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
 
@@ -45,22 +35,6 @@ const { data: search } = useLazyFetch('/api/search.json', {
   default: () => [],
   server: false
 })
-
-const anchors = [{
-  label: 'Documentation',
-  icon: 'i-heroicons-book-open-solid',
-  to: '/getting-started'
-}, {
-  label: 'Playground',
-  icon: 'i-simple-icons-stackblitz',
-  to: 'https://stackblitz.com/edit/nuxtlabs-ui?file=app.config.ts,app.vue',
-  target: '_blank'
-}, {
-  label: 'Releases',
-  icon: 'i-heroicons-rocket-launch-solid',
-  to: 'https://github.com/nuxtlabs/ui/releases',
-  target: '_blank'
-}]
 
 // Computed
 

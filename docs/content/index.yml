@@ -1,0 +1,51 @@
+navigation: false
+hero:
+  title: 'A <span class="text-primary">UI Library</span> for Modern Web Apps'
+  description: 'Nuxt UI simplifies the creation of stunning and responsive web applications with its comprehensive collection of fully styled and customizable UI components designed for Nuxt.'
+sections:
+  - title: Everything you except from a<br> <span class="text-primary">UI component library</span>
+    slot: features
+    features:
+      - icon: i-heroicons-check-circle
+        title: Fully responsive
+        description: 'Nuxt UI components are designed to work and look great on all devices.'
+      - icon: i-heroicons-clipboard-check
+        title: Easy to customize
+        description: 'Nuxt UI components are designed to work and look great on all devices.'
+      - icon: i-heroicons-clipboard-check
+        title: Easy to customize
+        description: 'Nuxt UI components are designed to work and look great on all devices.'
+  - title: 'A <span class="text-primary">XXX+</span> UI components & variants'
+    description: 'Get access to 150+ pre-styled and customizable components for Nuxt. These components are updated regularly to ensure that you always have the latest features and functionality.'
+    slot: categories
+    links:
+      - label: View all components
+        to: /elements/accordion
+        color: white
+        size: lg
+        trailingIcon: i-heroicons-arrow-right-20-solid
+    categories:
+      - label: Elements
+        to: /elements/dropdown
+        image: /illustrations/elements.svg
+        badge: 9
+      - label: Forms
+        to: /forms/form
+        image: /illustrations/forms.svg
+        badge: 10
+      - label: Data
+        to: /data/table
+        image: /illustrations/data.svg
+        badge: 1
+      - label: Navigation
+        to: /navigation/command-palette
+        image: /illustrations/navigation.svg
+        badge: 4
+      - label: Overlays
+        to: /overlays/modal
+        image: /illustrations/overlays.svg
+        badge: 6
+      - label: Layout
+        to: /layout/card
+        image: /illustrations/layout.svg
+        badge: 3
