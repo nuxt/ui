@@ -20,6 +20,11 @@ export default defineComponent({
         return Object.keys(appConfig.ui.button.size).includes(value)
       }
     },
+    orientation: {
+      type: String as PropType<'horizontal' | 'vertical'>,
+      default: 'horizontal',
+      validator: (value: string) => ['horizontal', 'vertical'].includes(value)
+    },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.buttonGroup>>,
       default: () => ({})
@@ -33,20 +38,29 @@ export default defineComponent({
 
     const children = computed(() => getSlotsChildren(slots))
 
-    const rounded = computed(() => ({
-      'rounded-none': { left: 'rounded-s-none', right: 'rounded-e-none' },
-      'rounded-sm': { left: 'rounded-s-sm', right: 'rounded-e-sm' },
-      rounded: { left: 'rounded-s', right: 'rounded-e' },
-      'rounded-md': { left: 'rounded-s-md', right: 'rounded-e-md' },
-      'rounded-lg': { left: 'rounded-s-lg', right: 'rounded-e-lg' },
-      'rounded-xl': { left: 'rounded-s-xl', right: 'rounded-e-xl' },
-      'rounded-2xl': { left: 'rounded-s-2xl', right: 'rounded-e-2xl' },
-      'rounded-3xl': { left: 'rounded-s-3xl', right: 'rounded-e-3xl' },
-      'rounded-full': { left: 'rounded-s-full', right: 'rounded-e-full' }
-    }[ui.value.rounded]))
+    const rounded = computed(() => {
+      const roundedStyles = ['none', 'sm', '', 'md', 'lg', 'xl', '2xl', '3xl', 'full'].reduce((acc, cur) => {
+        acc[`rounded-${cur}`] = {
+          left: `rounded-s-${cur}`,
+          right: `rounded-e-${cur}`,
+          top: `rounded-t-${cur}`,
+          bottom: `rounded-b-${cur}`
+        }
+        return acc
+      }, {})
+      return props.orientation === 'vertical'
+        ? { top: roundedStyles[ui.value.rounded].top, bottom: roundedStyles[ui.value.rounded].bottom }
+        : { left: roundedStyles[ui.value.rounded].left, right: roundedStyles[ui.value.rounded].right }
+    })
 
     const clones = computed(() => children.value.map((node, index) => {
       const vProps: any = {}
+
+      if (props.orientation === 'vertical') {
+        ui.value.wrapper = 'flex flex-col -space-y-px'
+      } else {
+        ui.value.wrapper = 'inline-flex -space-x-px'
+      }
 
       if (props.size) {
         vProps.size = props.size
@@ -57,11 +71,11 @@ export default defineComponent({
       vProps.ui.base = '!shadow-none'
 
       if (index === 0) {
-        vProps.ui.rounded += ` ${rounded.value.left}`
+        vProps.ui.rounded += ` ${rounded.value.left || rounded.value.top}`
       }
 
       if (index === children.value.length - 1) {
-        vProps.ui.rounded += ` ${rounded.value.right}`
+        vProps.ui.rounded += ` ${rounded.value.right || rounded.value.bottom}`
       }
 
       return cloneVNode(node, vProps)
