@@ -36,8 +36,10 @@
           </span>
 
           <slot name="label">
-            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" class="block truncate">{{ modelValue.length }} selected</span>
-            <span v-else-if="!multiple && modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : modelValue[optionAttribute] }}</span>
+            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" class="block truncate">{{
+              modelValue.length }} selected</span>
+            <span v-else-if="!multiple && modelValue" class="block truncate">{{ typeof modelValue === 'string' ?
+              modelValue : modelValue[optionAttribute] }}</span>
             <span v-else class="block truncate" :class="uiMenu.placeholder">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
@@ -52,7 +54,11 @@
 
     <div v-if="open" ref="container" :class="[uiMenu.container, uiMenu.width]">
       <Transition appear v-bind="uiMenu.transition">
-        <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.divide, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
+        <component
+          :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'"
+          static
+          :class="[uiMenu.base, uiMenu.divide, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]"
+        >
           <HComboboxInput
             v-if="searchable"
             ref="searchInput"
@@ -62,7 +68,7 @@
             autofocus
             autocomplete="off"
             :class="uiMenu.input"
-            @change="query = $event.target.value"
+            @change="searchInputHandler"
           />
           <component
             :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
@@ -73,17 +79,28 @@
             :value="valueAttribute ? option[valueAttribute] : option"
             :disabled="option.disabled"
           >
-            <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, selected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]">
+            <li
+              :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, selected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]"
+            >
               <div :class="uiMenu.option.container">
                 <slot name="option" :option="option" :active="active" :selected="selected">
-                  <UIcon v-if="option.icon" :name="option.icon" :class="[uiMenu.option.icon.base, active ? uiMenu.option.icon.active : uiMenu.option.icon.inactive, option.iconClass]" aria-hidden="true" />
+                  <UIcon
+                    v-if="option.icon"
+                    :name="option.icon"
+                    :class="[uiMenu.option.icon.base, active ? uiMenu.option.icon.active : uiMenu.option.icon.inactive, option.iconClass]"
+                    aria-hidden="true"
+                  />
                   <UAvatar
                     v-else-if="option.avatar"
                     v-bind="{ size: uiMenu.option.avatar.size, ...option.avatar }"
                     :class="uiMenu.option.avatar.base"
                     aria-hidden="true"
                   />
-                  <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
+                  <span
+                    v-else-if="option.chip"
+                    :class="uiMenu.option.chip.base"
+                    :style="{ background: `#${option.chip}` }"
+                  />
 
                   <span class="truncate">{{ typeof option === 'string' ? option : option[optionAttribute] }}</span>
                 </slot>
@@ -95,8 +112,16 @@
             </li>
           </component>
 
-          <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
-            <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
+          <component
+            :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
+            v-if="creatable && queryOption && !filteredOptions.length"
+            v-slot="{ active, selected }"
+            :value="queryOption"
+            as="template"
+          >
+            <li
+              :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]"
+            >
               <div :class="uiMenu.option.container">
                 <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
                   <span class="block truncate">Create "{{ queryOption[optionAttribute] }}"</span>
@@ -109,6 +134,21 @@
               No results for "{{ query }}".
             </slot>
           </p>
+
+          <slot
+            v-if="searchable && filteredOptions.length"
+            name="loadMore"
+            :page="page"
+            :disabled="hasNextPage"
+            :is-loader-more="isLoadMore"
+            :load-more-handler="loadMoreHandler"
+          >
+            <div class="flex justify-center">
+              <UButton variant="link" color="white" :loading="isLoadMore" :disabled="!hasNextPage" @click="loadMoreHandler">
+                Load more
+              </UButton>
+            </div>
+          </slot>
         </component>
       </Transition>
     </div>
@@ -223,7 +263,7 @@ export default defineComponent({
       default: false
     },
     searchable: {
-      type: [Boolean, Function] as PropType<boolean | ((query: string) => Promise<any[]> | any[])>,
+      type: [Boolean, Function] as PropType<boolean | ((query: string, page: number) => Promise<any[]> | any[])>,
       default: false
     },
     searchablePlaceholder: {
@@ -319,6 +359,14 @@ export default defineComponent({
 
     const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
+    const page = ref<number>(1)
+
+    const searchableData = ref([])
+    const hasNextPage = ref(true)
+    const isLoadMore = ref(false)
+
+    const timer = ref()
+
     const selectClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
@@ -398,7 +446,18 @@ export default defineComponent({
 
     const filteredOptions = computedAsync(async () => {
       if (props.searchable && debouncedSearch) {
-        return await debouncedSearch(query.value)
+
+        if (hasNextPage.value) {
+          const data = await debouncedSearch(query.value, page.value).finally(() => isLoadMore.value = false)
+
+          if (data) {
+            searchableData.value.push(...data)
+          } else {
+            hasNextPage.value = false
+          }
+        }
+
+        return searchableData.value
       }
 
       if (query.value === '') {
@@ -414,6 +473,14 @@ export default defineComponent({
 
     const queryOption = computed(() => {
       return query.value === '' ? null : { [props.optionAttribute]: query.value }
+    })
+
+    watch(query, (value) => {
+      if (value.length > 0) {
+        searchableData.value = []
+        page.value = 1
+        hasNextPage.value = true
+      }
     })
 
     watch(container, (value) => {
@@ -436,6 +503,19 @@ export default defineComponent({
       emitFormChange()
     }
 
+    function searchInputHandler (event: { target: HTMLInputElement }) {
+      clearTimeout(timer.value)
+
+      timer.value = setTimeout(() => {
+        query.value = event.target.value.trim()
+      }, 500)
+    }
+
+    function loadMoreHandler () {
+      page.value++
+      isLoadMore.value = true
+    }
+
     return {
       attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
@@ -456,7 +536,12 @@ export default defineComponent({
       filteredOptions,
       queryOption,
       query,
-      onUpdate
+      onUpdate,
+      page,
+      searchInputHandler,
+      isLoadMore,
+      loadMoreHandler,
+      hasNextPage
     }
   }
 })
