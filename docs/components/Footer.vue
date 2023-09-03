@@ -15,6 +15,14 @@
       </div>
     </template>
 
+    <template #center>
+      <span class="text-sm text-gray-600 dark:text-gray-300">
+        Published under <NuxtLink to="https://github.com/nuxtlabs/ui" target="_blank" class="text-gray-900 dark:text-white">
+          MIT License
+        </NuxtLink>
+      </span>
+    </template>
+
     <template #right>
       <USocialButton aria-label="Nuxt Website" icon="i-simple-icons-nuxtdotjs" to="https://nuxt.com" />
       <USocialButton aria-label="Nuxt on X" icon="i-simple-icons-x" to="https://x.com/nuxtlabs" />

@@ -1,7 +1,7 @@
 navigation: false
 hero:
-  title: 'A <span class="text-primary">UI Library</span> for Modern Web Apps'
-  description: 'Nuxt UI simplifies the creation of stunning and responsive web applications with its comprehensive collection of fully styled and customizable UI components designed for Nuxt.'
+  title: 'A <span class="text-primary">UI Library</span> for<br>Modern Web Apps'
+  description: 'Nuxt UI simplifies the creation of stunning and responsive web applications with its<br> comprehensive collection of fully styled and customizable UI components designed for Nuxt.'
 sections:
   - title: Everything you except from a<br> <span class="text-primary">UI component library</span>
     slot: features
@@ -21,31 +21,34 @@ sections:
     links:
       - label: View all components
         to: /elements/accordion
-        color: white
+        color: gray
         size: lg
         trailingIcon: i-heroicons-arrow-right-20-solid
     categories:
       - label: Elements
         to: /elements/dropdown
-        image: /illustrations/elements.svg
+        image: /illustrations/elements
         badge: 9
       - label: Forms
         to: /forms/form
-        image: /illustrations/forms.svg
+        image: /illustrations/forms
         badge: 10
       - label: Data
         to: /data/table
-        image: /illustrations/data.svg
+        image: /illustrations/data
         badge: 1
       - label: Navigation
         to: /navigation/command-palette
-        image: /illustrations/navigation.svg
+        image: /illustrations/navigation
         badge: 4
       - label: Overlays
         to: /overlays/modal
-        image: /illustrations/overlays.svg
+        image: /illustrations/overlays
         badge: 6
       - label: Layout
         to: /layout/card
-        image: /illustrations/layout.svg
+        image: /illustrations/layout
         badge: 3
+cta:
+
+  title: Trusted and supported by our<br>amazing community
