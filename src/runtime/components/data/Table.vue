@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass" v-bind="attrs">
+  <div :class="[ui.wrapper, 'overflow-x-auto']" v-bind="attrs">
     <table :class="[ui.base, ui.divide]">
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
