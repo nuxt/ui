@@ -25,7 +25,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UNotification from './Notification.vue'
 import { useToast } from '../../composables/useToast'
 import { defuTwMerge } from '../../utils'
-import type { Notification } from '../../types'
+import type { Notification } from '../../types/notification'
 import { useState, useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error

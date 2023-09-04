@@ -173,7 +173,7 @@ export default defineComponent({
       default: 200
     },
     fuse: {
-      type: Object as PropType<Partial<UseFuseOptions<Command>>>,
+      type: Object as PropType<UseFuseOptions<Command>>,
       default: () => ({})
     },
     ui: {
