@@ -23,7 +23,9 @@ export default defineComponent({
     orientation: {
       type: String as PropType<'horizontal' | 'vertical'>,
       default: 'horizontal',
-      validator: (value: string) => ['horizontal', 'vertical'].includes(value)
+      validator (value: string) {
+        return ['horizontal', 'vertical'].includes(value)
+      }
     },
     ui: {
       type: Object as PropType<Partial<typeof appConfig.ui.buttonGroup>>,
