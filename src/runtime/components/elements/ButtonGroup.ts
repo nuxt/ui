@@ -39,18 +39,18 @@ export default defineComponent({
     const children = computed(() => getSlotsChildren(slots))
 
     const rounded = computed(() => {
-      const roundedStyles = ['none', 'sm', '', 'md', 'lg', 'xl', '2xl', '3xl', 'full'].reduce((acc, cur) => {
-        acc[`rounded-${cur}`] = {
-          left: `rounded-s-${cur}`,
-          right: `rounded-e-${cur}`,
-          top: `rounded-t-${cur}`,
-          bottom: `rounded-b-${cur}`
-        }
-        return acc
-      }, {})
-      return props.orientation === 'vertical'
-        ? { top: roundedStyles[ui.value.rounded].top, bottom: roundedStyles[ui.value.rounded].bottom }
-        : { left: roundedStyles[ui.value.rounded].left, right: roundedStyles[ui.value.rounded].right }
+      const roundedMap = {
+        'rounded-none': { horizontal: { left: 'rounded-s-none', right: 'rounded-e-none' }, vertical: { top: 'rounded-t-none', bottom: 'rounded-b-none' } },
+        'rounded-sm': { horizontal: { left: 'rounded-s-sm', right: 'rounded-e-sm' }, vertical: { top: 'rounded-t-sm', bottom: 'rounded-b-sm' } },
+        rounded: { horizontal: { left: 'rounded-s', right: 'rounded-e' }, vertical: { top: 'rounded-t', bottom: 'rounded-b' } },
+        'rounded-md': { horizontal: { left: 'rounded-s-md', right: 'rounded-e-md' }, vertical: { top: 'rounded-t-md', bottom: 'rounded-b-md' } },
+        'rounded-lg': { horizontal: { left: 'rounded-s-lg', right: 'rounded-e-lg' }, vertical: { top: 'rounded-t-lg', bottom: 'rounded-b-lg' } },
+        'rounded-xl': { horizontal: { left: 'rounded-s-xl', right: 'rounded-e-xl' }, vertical: { top: 'rounded-t-xl', bottom: 'rounded-b-xl' } },
+        'rounded-2xl': { horizontal: { left: 'rounded-s-2xl', right: 'rounded-e-2xl' }, vertical: { top: 'rounded-t-2xl', bottom: 'rounded-b-2xl' } },
+        'rounded-3xl': { horizontal: { left: 'rounded-s-3xl', right: 'rounded-e-3xl' }, vertical: { top: 'rounded-t-3xl', bottom: 'rounded-b-3xl' } },
+        'rounded-full': { horizontal: { left: 'rounded-s-full', right: 'rounded-e-full' }, vertical: { top: 'rounded-t-full', bottom: 'rounded-b-full' } }
+      }
+      return roundedMap[ui.value.rounded][props.orientation]
     })
 
     const clones = computed(() => children.value.map((node, index) => {
