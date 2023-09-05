@@ -18,7 +18,7 @@ import { omit } from 'lodash-es'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { usePopper } from '../../composables/usePopper'
 import { defuTwMerge } from '../../utils'
-import type { PopperOptions } from '../../types'
+import type { PopperOptions } from '../../types/popper'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error

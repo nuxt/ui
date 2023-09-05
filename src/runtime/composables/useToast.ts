@@ -1,4 +1,4 @@
-import type { Notification } from '../types'
+import type { Notification } from '../types/notification'
 import { useState } from '#imports'
 
 export function useToast () {
