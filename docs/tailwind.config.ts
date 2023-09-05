@@ -2,6 +2,11 @@ import type { Config } from 'tailwindcss'
 import defaultTheme from 'tailwindcss/defaultTheme'
 
 export default <Partial<Config>>{
+  content: {
+    files: [
+      'content/**/*.yml'
+    ]
+  },
   theme: {
     extend: {
       fontFamily: {
@@ -21,6 +26,9 @@ export default <Partial<Config>>{
           900: '#0A5331',
           950: '#052e16'
         }
+      },
+      gridRow: {
+        'span-8': 'span 8 / span 8'
       }
     }
   }

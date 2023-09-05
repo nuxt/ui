@@ -4,7 +4,7 @@ const isOpen = ref(false)
 
 <template>
   <div>
-    <UButton label="Open" @click="isOpen = true" />
+    <UButton label="Open" v-bind="$attrs" @click="isOpen = true" />
 
     <USlideover v-model="isOpen">
       <UCard class="flex flex-col flex-1" :ui="{ body: { base: 'flex-1' }, ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">

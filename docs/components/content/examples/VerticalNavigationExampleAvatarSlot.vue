@@ -3,9 +3,23 @@ const links = [{
   avatar: {
     src: 'https://avatars.githubusercontent.com/u/739984?v=4'
   },
-  label: 'Benjamin Canac'
+  label: 'benjamincanac',
+  to: 'https://github.com/benjamincanac',
+  target: '_blank'
 }, {
-  label: 'KeJun'
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/904724?v=4'
+  },
+  label: 'Atinux',
+  to: 'https://github.com/Atinux',
+  target: '_blank'
+}, {
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/7547335?v=4'
+  },
+  label: 'smarroufin',
+  to: 'https://github.com/smarroufin',
+  target: '_blank'
 }]
 
 const { ui } = useAppConfig()

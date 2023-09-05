@@ -40,14 +40,6 @@
       </ClientOnly>
     </ULandingHero>
 
-    <ULandingSection>
-      <URange :model-value="50" class="animate-bounce w-48" />
-
-      <PaginationExampleBasic class="animate-bounce" />
-
-      <UNotification :id="1" title="Heads up!" icon="i-heroicons-command-line" class="animate-bounce" />
-    </ULandingSection>
-
     <ULandingSection v-for="(section, index) of page.sections" :key="index" v-bind="section">
       <template v-if="section.title" #title>
         <span v-html="section?.title" />
@@ -57,10 +49,86 @@
         <span v-html="section.description" />
       </template>
 
+      <template #demo>
+        <ULandingGrid class="lg:grid-cols-10 lg:gap-x-8 lg:auto-rows-[2rem] lg:gap-y-6">
+          <div class="col-span-8 flex items-center">
+            <RangeExample />
+          </div>
+
+          <div class="col-span-2 row-span-2 flex items-center">
+            <RadioExample />
+          </div>
+
+          <div class="col-span-2">
+            <DropdownExampleBasic :popper="{ placement: 'bottom-start', strategy: 'absolute' }" />
+          </div>
+
+          <div class="col-span-6 flex flex-wrap items-center justify-between gap-1">
+            <UAvatarGroup :max="2">
+              <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" alt="benjamincanac" />
+              <UAvatar src="https://avatars.githubusercontent.com/u/904724?v=4" alt="Atinux" />
+              <UAvatar src="https://avatars.githubusercontent.com/u/7547335?v=4" alt="smarroufin" />
+            </UAvatarGroup>
+
+            <UButton label="Button" icon="i-heroicons-pencil-square" />
+
+            <UBadge label="Badge" />
+
+            <UColorModeToggle />
+
+            <PaginationExampleBasic />
+          </div>
+
+          <div class="col-span-3 row-span-8 gap-6 flex flex-col">
+            <UNotification :id="1" title="Notification" description="This is a notification!" icon="i-heroicons-command-line" />
+
+            <TabsExampleItemCustomSlot />
+
+            <UCard class="flex-shrink-0" :ui="{ body: { padding: 'sm:py-4' } }">
+              <div class="flex items-center gap-4 justify-center mt-1">
+                <USkeleton class="h-14 w-14 flex-shrink-0" :ui="{ rounded: 'rounded-full' }" />
+                <div class="space-y-3 flex-1">
+                  <USkeleton class="h-4 w-full" />
+                  <USkeleton class="h-4 w-2/3" />
+                </div>
+              </div>
+            </UCard>
+          </div>
+
+          <div class="col-span-5 row-span-5 flex flex-col -mb-4">
+            <UCard :ui="{ body: { base: 'flex-1 flex flex-col overflow-y-auto', padding: '' } }" class="col-span-4 row-span-6 flex-1 flex flex-col">
+              <CommandPaletteExampleGroups />
+            </UCard>
+          </div>
+
+          <div class="col-span-2 row-span-5 gap-6 flex flex-col">
+            <CheckboxExample />
+
+            <InputExampleClearable />
+
+            <UFormGroup label="User">
+              <SelectMenuExampleAsyncSearch />
+            </UFormGroup>
+
+            <VerticalNavigationExampleAvatarSlot />
+          </div>
+
+          <div class="col-span-7 row-span-6">
+            <UCard :ui="{ body: { padding: '' } }" class="mt-4">
+              <TableExampleClickable :ui="{ divide: 'divide-gray-200 dark:divide-gray-800' }" />
+            </UCard>
+          </div>
+        </ULandingGrid>
+      </template>
+
       <template #features>
-        <UPageGrid class="xl:grid-cols-4">
-          <ULandingCard v-for="(feature, subIndex) of section.features" :key="subIndex" v-bind="feature" />
-        </UPageGrid>
+        <ULandingGrid>
+          <ULandingCard v-for="(feature, subIndex) of section.features" :key="subIndex" v-bind="feature" :ui="{ background: 'dark:bg-gradient-to-b from-gray-900 to-gray-950', body: { base: 'flex-1', background: 'dark:bg-gray-900/50' } }" class="flex flex-col">
+            <div v-if="feature.image">
+              <UColorModeImage :light="`${feature.image}-light.svg`" :dark="`${feature.image}-dark.svg`" class="object-cover w-full" />
+            </div>
+          </ULandingCard>
+        </ULandingGrid>
       </template>
 
       <template #categories>
@@ -69,7 +137,7 @@
             v-for="(category, subIndex) of section.categories"
             :key="subIndex"
             :to="category.to"
-            class="hover:bg-gradient-to-b hover:from-gray-300/50 dark:hover:from-gray-700/50 rounded-lg"
+            class="hover:bg-gradient-to-b hover:from-gray-200/50 dark:hover:from-gray-800/50 rounded-lg"
           >
             <UColorModeImage :light="`${category.image}-light.svg`" :dark="`${category.image}-dark.svg`" class="object-cover w-full" />
 
@@ -83,14 +151,14 @@
       </template>
     </ULandingSection>
 
-    <ULandingSection>
-      <ULandingCTA panel align="left" :ui="{ background: 'dark:bg-gradient-to-b from-gray-800 to-gray-900 backdrop-blur-lg', inner: 'bg-gray-50/50 dark:bg-gray-900/50' }" class="ring-1 ring-gray-200 dark:ring-gray-800">
+    <ULandingSection class="!pt-0">
+      <ULandingCTA align="left" card :ui="{ background: 'dark:bg-gradient-to-b from-gray-800 to-gray-900', body: { background: 'bg-gray-50/50 dark:bg-gray-900/50' } }">
         <template #title>
           <span v-html="page.cta.title" />
         </template>
 
         <template #description>
-          <UAvatarGroup :max="10" size="sm" class="justify-end [&_span:first-child]:text-xs">
+          <UAvatarGroup :max="10" size="sm" class="[&_span:first-child]:text-xs">
             <UAvatar
               v-for="(contributor, index) of module.contributors"
               :key="index"
@@ -106,14 +174,14 @@
         </template>
 
         <div class="flex items-center justify-center gap-16">
-          <NuxtLink class="text-center" :to="`https://npmjs.org/package/${module.npm}`" target="_blank">
+          <NuxtLink class="text-center" to="https://npmjs.org/package/@nuxthq/ui" target="_blank">
             <p class="text-6xl font-semibold text-gray-900 dark:text-white">
               {{ formatNumber(module.stats.downloads) }}+
             </p>
             <p>downloads</p>
           </NuxtLink>
 
-          <NuxtLink class="text-center" :to="`https://github.com/${module.repo}`" target="_blank">
+          <NuxtLink class="text-center" to="https://github.com/nuxtlabs/ui" target="_blank">
             <p class="text-6xl font-semibold text-gray-900 dark:text-white">
               {{ formatNumber(module.stats.stars) }}+
             </p>
@@ -126,8 +194,20 @@
 </template>
 
 <script setup lang="ts">
+import { pick } from 'lodash-es'
+
 const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
-const { data: module } = await useLazyFetch('https://api.nuxt.com/modules/nuxtlabs-ui')
+const { data: module } = await useFetch<{
+  stats: {
+    downloads: number
+    stars: number
+  }
+  contributors: {
+    username: string
+  }[]
+}>('https://api.nuxt.com/modules/nuxtlabs-ui', {
+  transform: (module) => pick(module, ['stats', 'contributors'])
+})
 
 const source = ref('pnpm i -D @nuxthq/ui')
 
