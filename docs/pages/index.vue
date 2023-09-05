@@ -35,9 +35,7 @@
         </UInput>
       </template>
 
-      <ClientOnly>
-        <Tetris class="top-[-1px]" />
-      </ClientOnly>
+      <Tetris />
     </ULandingHero>
 
     <ULandingSection v-for="(section, index) of page.sections" :key="index" v-bind="section">
@@ -122,8 +120,8 @@
       </template>
 
       <template #features>
-        <ULandingGrid>
-          <ULandingCard v-for="(feature, subIndex) of section.features" :key="subIndex" v-bind="feature" :ui="{ background: 'dark:bg-gradient-to-b from-gray-900 to-gray-950', body: { base: 'flex-1', background: 'dark:bg-gray-900/50' } }" class="flex flex-col">
+        <ULandingGrid class="lg:-mb-20">
+          <ULandingCard v-for="(feature, subIndex) of section.features" :key="subIndex" v-bind="feature" :ui="{ background: 'dark:lg:bg-gradient-to-b from-gray-900 to-gray-950', body: { base: 'flex-1', background: 'dark:bg-gray-800/50 dark:lg:bg-gray-900/50' } }" class="flex flex-col">
             <div v-if="feature.image">
               <UColorModeImage :light="`${feature.image}-light.svg`" :dark="`${feature.image}-dark.svg`" class="object-cover w-full" />
             </div>
@@ -157,32 +155,40 @@
           <span v-html="page.cta.title" />
         </template>
 
-        <template #description>
-          <UAvatarGroup :max="10" size="sm" class="[&_span:first-child]:text-xs">
-            <UAvatar
+        <template #links>
+          <UAvatarGroup :max="13" size="md" class="flex-wrap [&_span:first-child]:text-xs">
+            <UTooltip
               v-for="(contributor, index) of module.contributors"
               :key="index"
-              :alt="contributor.username"
-              :src="`https://github.com/${contributor.username}.png`"
-              class="lg:hover:scale-110 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
+              :text="contributor.username"
+              class="rounded-full"
+              :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50' }"
+              :popper="{ offsetDistance: 16 }"
             >
-              <NuxtLink :to="`https://github.com/${contributor.username}`" target="_blank" class="focus:outline-none" tabindex="-1">
-                <span class="absolute inset-0" aria-hidden="true" />
-              </NuxtLink>
-            </UAvatar>
+              <UAvatar
+                :alt="contributor.username"
+                :src="`https://github.com/${contributor.username}.png`"
+                class="lg:hover:scale-125 lg:hover:ring-2 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
+                size="md"
+              >
+                <NuxtLink :to="`https://github.com/${contributor.username}`" target="_blank" class="focus:outline-none" tabindex="-1">
+                  <span class="absolute inset-0" aria-hidden="true" />
+                </NuxtLink>
+              </UAvatar>
+            </UTooltip>
           </UAvatarGroup>
         </template>
 
-        <div class="flex items-center justify-center gap-16">
-          <NuxtLink class="text-center" to="https://npmjs.org/package/@nuxthq/ui" target="_blank">
-            <p class="text-6xl font-semibold text-gray-900 dark:text-white">
+        <div class="flex items-center justify-center gap-8 lg:gap-16">
+          <NuxtLink class="text-center group" to="https://npmjs.org/package/@nuxthq/ui" target="_blank">
+            <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ formatNumber(module.stats.downloads) }}+
             </p>
             <p>downloads</p>
           </NuxtLink>
 
-          <NuxtLink class="text-center" to="https://github.com/nuxtlabs/ui" target="_blank">
-            <p class="text-6xl font-semibold text-gray-900 dark:text-white">
+          <NuxtLink class="text-center group" to="https://github.com/nuxtlabs/ui" target="_blank">
+            <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ formatNumber(module.stats.stars) }}+
             </p>
             <p>stars</p>
