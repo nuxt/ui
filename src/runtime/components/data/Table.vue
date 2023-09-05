@@ -89,6 +89,11 @@ function defaultComparator<T> (a: T, z: T): boolean {
 }
 
 export default defineComponent({
+  components: {
+    UButton,
+    UIcon,
+    UCheckbox
+  },
   inheritAttrs: false,
   props: {
     modelValue: {
