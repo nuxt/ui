@@ -1,7 +1,7 @@
 // Data
 
 const table = {
-  wrapper: 'relative',
+  wrapper: 'relative overflow-x-auto',
   base: 'min-w-full table-fixed',
   divide: 'divide-y divide-gray-300 dark:divide-gray-700',
   thead: '',
