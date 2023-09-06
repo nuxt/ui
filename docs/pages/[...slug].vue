@@ -46,7 +46,18 @@ const { data: surround } = await useAsyncData(`${path.value}-surround`, () => {
     .findSurround((path.value.endsWith('/') ? path.value.slice(0, -1) : path.value))
 })
 
-useContentHead(page)
+useSeoMeta({
+  title: page.value.title,
+  ogTitle: `${page.value.title} - Nuxt UI`,
+  description: page.value.description,
+  ogDescription: page.value.description
+})
+
+defineOgImage({
+  component: 'Docs',
+  title: page.value.title,
+  description: page.value.description
+})
 
 const headline = computed(() => findPageHeadline(page.value))
 

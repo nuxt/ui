@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   extends: process.env.NUXT_ELEMENTS_PATH || '@nuxthq/elements',
   modules: [
     '@nuxt/content',
+    'nuxt-og-image',
     // '@nuxt/devtools',
     // '@nuxthq/studio',
     module,

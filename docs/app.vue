@@ -26,6 +26,8 @@
 </template>
 
 <script setup lang="ts">
+import { withoutTrailingSlash } from 'ufo'
+const route = useRoute()
 const colorMode = useColorMode()
 const { prefix, removePrefixFromNavigation, removePrefixFromFiles } = useContentSource()
 
@@ -53,24 +55,23 @@ const files = computed(() => {
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
 // Head
-
 useHead({
-  titleTemplate: title => title && title.includes('Nuxt UI') ? title : `${title} - Nuxt UI`,
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
+    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
+    { rel: 'canonical', href: `https://ui.nuxtlabs.com${withoutTrailingSlash(route.path)}` }
   ],
   htmlAttrs: {
     lang: 'en'
   }
 })
 
-useSeoMeta({
-  ogImage: '/social-preview.jpg',
-  twitterImage: '/social-preview.jpg',
+useServerSeoMeta({
+  titleTemplate: '%s - Nuxt UI',
+  ogSiteName: 'Nuxt UI',
   twitterCard: 'summary_large_image'
 })
 

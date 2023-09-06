@@ -141,14 +141,14 @@
         <div class="flex items-center justify-center gap-8 lg:gap-16">
           <NuxtLink class="text-center group" to="https://npmjs.org/package/@nuxthq/ui" target="_blank">
             <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
-              {{ formatNumber(module.stats.downloads) }}+
+              {{ format(module.stats.downloads) }}+
             </p>
-            <p>downloads</p>
+            <p>monthly downloads</p>
           </NuxtLink>
 
           <NuxtLink class="text-center group" to="https://github.com/nuxtlabs/ui" target="_blank">
             <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
-              {{ formatNumber(module.stats.stars) }}+
+              {{ format(module.stats.stars) }}+
             </p>
             <p>stars</p>
           </NuxtLink>
@@ -178,15 +178,15 @@ const source = ref('pnpm i -D @nuxthq/ui')
 
 const { copy, copied } = useClipboard({ source })
 
-useContentHead(page)
+useSeoMeta({
+  titleTemplate: '',
+  title: page.value.title,
+  ogTitle: page.value.title,
+  description: page.value.description,
+  ogDescription: page.value.description,
+  ogImage: 'https://ui.nuxtlabs.com/social-card.png',
+  twitterImage: 'https://ui.nuxtlavs.com/social-card.png'
+})
 
-const formatNumber = function (num: number, fractionDigits = 0) {
-  if (num > 999 && num < 1000000) {
-    return (num / 1000).toFixed(fractionDigits) + 'k' // convert to K for number from > 1000 < 1 million
-  } else if (num > 1000000) {
-    return (num / 1000000).toFixed(fractionDigits) + 'm' // convert to M for number from > 1 million
-  } else {
-    return String(num)
-  }
-}
+const { format } = Intl.NumberFormat('en-GB', { notation: 'compact' })
 </script>
