@@ -35,7 +35,9 @@
         </UInput>
       </template>
 
-      <HomeTetris />
+      <ClientOnly>
+        <HomeTetris />
+      </ClientOnly>
     </ULandingHero>
 
     <ULandingSection v-for="(section, index) of page.sections" :key="index" v-bind="section">
