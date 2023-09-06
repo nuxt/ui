@@ -56,7 +56,7 @@ export default defineComponent({
 
       if (max.value !== undefined && index === max.value) {
         return h(Avatar, {
-          size: props.size,
+          size: props.size || appConfig.ui.avatar.default.size,
           text: `+${children.value.length - max.value}`,
           class: twJoin(ui.value.ring, ui.value.margin)
         })
