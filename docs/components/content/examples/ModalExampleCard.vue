@@ -4,7 +4,7 @@ const isOpen = ref(false)
 
 <template>
   <div>
-    <UButton label="Open" v-bind="$attrs" @click="isOpen = true" />
+    <UButton label="Open" @click="isOpen = true" />
 
     <UModal v-model="isOpen">
       <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
