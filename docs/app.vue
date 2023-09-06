@@ -39,7 +39,6 @@ const { data: search } = useLazyFetch('/api/search.json', {
 })
 
 // Computed
-
 const navigation = computed(() => {
   const navigation = nav.value.find(link => link._path === prefix.value)?.children || []
 
@@ -70,13 +69,11 @@ useHead({
 })
 
 useServerSeoMeta({
-  titleTemplate: '%s - Nuxt UI',
   ogSiteName: 'Nuxt UI',
   twitterCard: 'summary_large_image'
 })
 
 // Provide
-
 provide('navigation', navigation)
 provide('files', files)
 </script>
