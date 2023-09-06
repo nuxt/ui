@@ -47,9 +47,14 @@ export default defineNuxtConfig({
       }
     }
   },
+  fontMetrics: {
+    fonts: ['DM Sans']
+  },
   googleFonts: {
+    display: 'swap',
+    download: true,
     families: {
-      Inter: [400, 500, 600, 700]
+      'DM+Sans': [400, 500, 600, 700]
     }
   },
   nitro: {

@@ -10,7 +10,7 @@ export default <Partial<Config>>{
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'Inter fallback', ...defaultTheme.fontFamily.sans]
+        sans: ['DM Sans', 'DM Sans fallback', ...defaultTheme.fontFamily.sans]
       },
       colors: {
         green: {
