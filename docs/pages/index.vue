@@ -58,10 +58,10 @@
             :key="subIndex"
             v-bind="feature"
             :ui="{
-              background: 'dark:lg:bg-gradient-to-b from-gray-800 to-gray-950',
+              background: 'dark:bg-gray-900/50 dark:lg:bg-gradient-to-b from-gray-700/50 to-gray-950/50',
               body: {
                 base: 'flex-1',
-                background: 'dark:bg-gray-800/50 dark:lg:bg-gray-900/50'
+                background: 'dark:bg-gray-800/50 dark:lg:bg-gray-900/50 backdrop-blur-lg'
               }
             }"
             class="flex flex-col"
