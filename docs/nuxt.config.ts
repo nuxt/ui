@@ -69,7 +69,7 @@ export default defineNuxtConfig({
   },
   componentMeta: {
     globalsOnly: true,
-    exclude: [resolve('./components'), resolve('@nuxthq/elements/components')],
+    exclude: ['@nuxtjs/mdc', resolve('./components'), resolve('@nuxthq/elements/components')],
     metaFields: {
       props: true,
       slots: false,

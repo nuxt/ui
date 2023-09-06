@@ -52,7 +52,7 @@
       </template>
 
       <template #features>
-        <ULandingGrid class="lg:-mb-20">
+        <ULandingGrid class="lg:-mb-20 lg:auto-rows-[3rem]">
           <ULandingCard
             v-for="(feature, subIndex) of section.features"
             :key="subIndex"
@@ -102,7 +102,9 @@
           shadow: 'dark:shadow-2xl',
           body: {
             background: 'bg-gray-50/50 dark:bg-gray-900/50'
-          }
+          },
+          title: 'text-center lg:text-left',
+          links: 'justify-center lg:justify-start'
         }"
       >
         <template #title>

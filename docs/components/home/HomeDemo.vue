@@ -1,5 +1,5 @@
 <template>
-  <ULandingGrid class="lg:grid-cols-10 lg:gap-x-8 lg:auto-rows-[2rem] lg:gap-y-6">
+  <ULandingGrid class="lg:grid-cols-10 lg:gap-8">
     <div class="col-span-8 flex items-center">
       <RangeExample />
     </div>
@@ -28,13 +28,13 @@
       <PaginationExampleBasic />
     </div>
 
-    <div class="col-span-3 row-span-8 gap-6 flex flex-col">
+    <div class="col-span-3 row-span-8 gap-6 flex flex-col justify-between">
       <UNotification :id="1" title="Notification" description="This is a notification!" icon="i-heroicons-command-line" />
 
       <TabsExampleItemCustomSlot />
 
-      <UCard class="flex-shrink-0" :ui="{ body: { padding: 'sm:py-4' } }">
-        <div class="flex items-center gap-4 justify-center mt-1">
+      <UCard class="flex-shrink-0">
+        <div class="flex items-center gap-4 justify-center">
           <USkeleton class="h-14 w-14 flex-shrink-0" :ui="{ rounded: 'rounded-full' }" />
           <div class="space-y-3 flex-1">
             <USkeleton class="h-4 w-full" />
@@ -44,13 +44,13 @@
       </UCard>
     </div>
 
-    <div class="col-span-5 row-span-5 flex flex-col -mb-4">
+    <div class="col-span-5 row-span-2 flex flex-col">
       <UCard :ui="{ body: { base: 'flex-1 flex flex-col overflow-y-auto', padding: '' } }" class="col-span-4 row-span-6 flex-1 flex flex-col">
         <CommandPaletteExampleGroups />
       </UCard>
     </div>
 
-    <div class="col-span-2 row-span-5 gap-6 flex flex-col">
+    <div class="col-span-2 row-span-2 gap-6 flex flex-col">
       <CheckboxExample />
 
       <InputExampleClearable />
@@ -59,11 +59,13 @@
         <SelectMenuExampleAsyncSearch />
       </UFormGroup>
 
-      <VerticalNavigationExampleAvatarSlot />
+      <UCard :ui="{ body: { padding: '!p-1' } }">
+        <VerticalNavigationExampleAvatarSlot />
+      </UCard>
     </div>
 
     <div class="col-span-7 row-span-6">
-      <UCard :ui="{ body: { padding: '' } }" class="mt-4">
+      <UCard :ui="{ body: { padding: '' } }">
         <TableExampleClickable :ui="{ divide: 'divide-gray-200 dark:divide-gray-800' }" />
       </UCard>
     </div>

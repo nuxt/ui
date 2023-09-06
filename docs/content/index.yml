@@ -8,7 +8,7 @@ hero:
 sections:
   - slot: demo
     class: 'hidden lg:block dark:bg-gradient-to-b from-gray-900 to-gray-950/50 !pt-0'
-  - title: Everything you except from a<br class="hidden lg:block"> <span class="text-primary">UI component library</span>
+  - title: Everything you expect from a<br class="hidden lg:block"> <span class="text-primary">UI component library</span>
     slot: features
     class: 'dark:lg:bg-gray-950/50'
     features:
@@ -54,7 +54,7 @@ sections:
         size: lg
         trailingIcon: i-heroicons-arrow-right-20-solid
   - title: 'A collection of <span class="text-primary">30+</span> components'
-    description: 'Get access to 30+ beatufiully designed and fully customizable components built for Nuxt. These components<br class="hidden lg:block"> are updated regularly to ensure that you always have the latest features and functionalities.'
+    description: 'Get access to 30+ beautifully designed and fully customizable components built for Nuxt. These components<br class="hidden lg:block"> are updated regularly to ensure that you always have the latest features and functionalities.'
     class: 'dark:lg:bg-gradient-to-b from-gray-950/50 to-gray-900'
     slot: categories
     links:
