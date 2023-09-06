@@ -73,6 +73,9 @@ import { omit, capitalize, orderBy, get } from 'lodash-es'
 import { defu } from 'defu'
 import { twMerge } from 'tailwind-merge'
 import { defuTwMerge } from '../../utils'
+import UButton from '../elements/Button.vue'
+import UIcon from '../elements/Icon.vue'
+import UCheckbox from '../forms/Checkbox.vue'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -86,6 +89,11 @@ function defaultComparator<T> (a: T, z: T): boolean {
 }
 
 export default defineComponent({
+  components: {
+    UButton,
+    UIcon,
+    UCheckbox
+  },
   inheritAttrs: false,
   props: {
     modelValue: {

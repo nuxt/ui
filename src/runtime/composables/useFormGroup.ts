@@ -1,6 +1,6 @@
 import { inject, ref } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
-import type { FormEvent, FormEventType } from '../types'
+import type { FormEvent, FormEventType } from '../types/form'
 
 export const useFormGroup = () => {
     const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
