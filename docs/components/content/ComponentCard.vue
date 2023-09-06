@@ -41,9 +41,7 @@
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
 
         <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
-          <ClientOnly>
-            <ContentSlot v-if="$slots[slot]" :use="$slots[slot]" />
-          </ClientOnly>
+          <ContentSlot :name="slot" />
         </template>
       </component>
     </div>
