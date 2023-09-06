@@ -110,7 +110,7 @@
         </template>
 
         <template #links>
-          <UAvatarGroup :max="13" size="md" class="flex-wrap [&_span:first-child]:text-xs">
+          <UAvatarGroup :max="13" size="md" class="flex-wrap-reverse [&_span:first-child]:text-xs justify-center">
             <UTooltip
               v-for="(contributor, index) of module.contributors"
               :key="index"
