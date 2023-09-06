@@ -1,21 +1,24 @@
 <script setup>
 const links = [{
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+    src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/benjamincanac',
+    srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/benjamincanac 2x'
   },
   label: 'benjamincanac',
   to: 'https://github.com/benjamincanac',
   target: '_blank'
 }, {
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/904724?v=4'
+    src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/Atinux',
+    srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/Atinux 2x'
   },
   label: 'Atinux',
   to: 'https://github.com/Atinux',
   target: '_blank'
 }, {
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/7547335?v=4'
+    src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/smarroufin',
+    srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/smarroufin 2x'
   },
   label: 'smarroufin',
   to: 'https://github.com/smarroufin',

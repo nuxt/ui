@@ -125,7 +125,8 @@
             >
               <UAvatar
                 :alt="contributor.username"
-                :src="`https://github.com/${contributor.username}.png`"
+                :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
+                :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
                 class="lg:hover:scale-125 lg:hover:ring-2 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
                 size="md"
               >

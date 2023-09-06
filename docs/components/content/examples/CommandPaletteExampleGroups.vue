@@ -4,9 +4,9 @@ const router = useRouter()
 const commandPaletteRef = ref()
 
 const users = [
-  { id: 'benjamincanac', label: 'benjamincanac', href: 'https://github.com/benjamincanac', target: '_blank', avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' } },
-  { id: 'Atinux', label: 'Atinux', href: 'https://github.com/Atinux', target: '_blank', avatar: { src: 'https://avatars.githubusercontent.com/u/904724?v=4' } },
-  { id: 'smarroufin', label: 'smarroufin', href: 'https://github.com/smarroufin', target: '_blank', avatar: { src: 'https://avatars.githubusercontent.com/u/7547335?v=4' } }
+  { id: 'benjamincanac', label: 'benjamincanac', href: 'https://github.com/benjamincanac', target: '_blank', avatar: { src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/benjamincanac', srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/benjamincanac 2x' } },
+  { id: 'Atinux', label: 'Atinux', href: 'https://github.com/Atinux', target: '_blank', avatar: { src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/Atinux', srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/Atinux 2x' } },
+  { id: 'smarroufin', label: 'smarroufin', href: 'https://github.com/smarroufin', target: '_blank', avatar: { src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/smarroufin', srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/smarroufin 2x' } }
 ]
 
 const actions = [

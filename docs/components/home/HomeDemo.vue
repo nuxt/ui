@@ -14,9 +14,21 @@
 
     <div class="col-span-6 flex flex-wrap items-center justify-between gap-1">
       <UAvatarGroup :max="2">
-        <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" alt="benjamincanac" />
-        <UAvatar src="https://avatars.githubusercontent.com/u/904724?v=4" alt="Atinux" />
-        <UAvatar src="https://avatars.githubusercontent.com/u/7547335?v=4" alt="smarroufin" />
+        <UAvatar
+          src="https://ipx.nuxt.com/s_32x32/gh_avatar/benjamincanac"
+          srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/benjamincanac 2x"
+          alt="benjamincanac"
+        />
+        <UAvatar
+          src="https://ipx.nuxt.com/s_32x32/gh_avatar/Atinux"
+          srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/Atinux 2x"
+          alt="Atinux"
+        />
+        <UAvatar
+          src="https://ipx.nuxt.com/s_32x32/gh_avatar/smarroufin"
+          srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/smarroufin 2x"
+          alt="smarroufin"
+        />
       </UAvatarGroup>
 
       <UButton label="Button" icon="i-heroicons-pencil-square" />
