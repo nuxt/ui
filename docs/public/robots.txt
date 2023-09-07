@@ -1,1 +1,2 @@
-Disallow: /dev/*
+user-agent: *
+disallow: /dev/*
