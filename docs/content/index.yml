@@ -1,0 +1,91 @@
+navigation: false
+title: 'Nuxt UI: Fully styled and customizable components for Nuxt'
+description: 'It provides everything related to UI when building your Nuxt app. This includes components, icons, colors, dark mode but also keyboard shortcuts. Built with Headless UI and Tailwind CSS, published under MIT License.'
+hero:
+  title: 'A <span class="text-primary">UI Library</span> for<br class="hidden lg:block"> Modern Web Apps'
+  description: 'Nuxt UI simplifies the creation of stunning and responsive web applications with its<br class="hidden lg:block"> comprehensive collection of fully styled and customizable UI components designed for Nuxt.'
+sections:
+  - slot: demo
+    class: 'hidden lg:block dark:bg-gradient-to-b from-gray-900 to-gray-950/50 !pt-0'
+  - title: Everything you expect from a<br class="hidden lg:block"> <span class="text-primary">UI component library</span>
+    slot: features
+    class: 'dark:bg-gradient-to-b from-gray-900 to-gray-950/50 dark:lg:bg-none dark:lg:bg-gray-950/50'
+    features:
+      - title: Color Palette
+        description: 'Choose a primary and a gray color from your Tailwind CSS color palette. Components will be styled accordingly.'
+        icon: i-heroicons-swatch
+        to: /getting-started/theming#colors
+        class: 'col-span-7 row-span-3'
+        image: /illustrations/color-palette
+        orientation: 'horizontal'
+      - title: Fully Customizable
+        description: 'Change the style of any component in your App Config or customize them specifically through the ui prop.'
+        icon: i-heroicons-wrench-screwdriver
+        to: /getting-started/theming#components
+        image: /illustrations/fully-customizable
+        class: 'col-span-5 row-span-5 lg:mb-10'
+        orientation: 'vertical'
+      - title: Icons
+        description: 'Choose any of the 100k+ icons from the most popular icon libraries with the Icon component or the icon prop.'
+        icon: i-heroicons-face-smile
+        to: /getting-started/theming#icons
+        image: /illustrations/icon-library
+        class: 'col-span-7 row-span-3'
+        orientation: 'horizontal'
+      - title: Light & Dark
+        description: 'Every component is designed with dark mode in mind. Works out of the box with @nuxtjs/color-mode.'
+        to: /getting-started/theming#dark-mode
+        icon: i-heroicons-moon
+        image: /illustrations/dark-mode
+        class: 'col-span-5 row-span-5 lg:-mt-10 lg:mb-20'
+        orientation: 'vertical'
+      - title: Keyboard Shortcuts
+        description: 'Nuxt UI comes with a set of Vue composables to easily handle keyboard shortcuts in your app.'
+        icon: i-heroicons-computer-desktop
+        to: /getting-started/shortcuts
+        class: 'col-span-7 row-span-3'
+        image: /illustrations/keyboard-shortcuts
+        orientation: 'horizontal'
+    links:
+      - label: Learn more
+        to: /getting-started/theming
+        color: white
+        size: lg
+        trailingIcon: i-heroicons-arrow-right-20-solid
+  - title: 'A collection of <span class="text-primary">30+</span> components'
+    description: 'Get access to 30+ beautifully designed and fully customizable components built for Nuxt. These components<br class="hidden lg:block"> are updated regularly to ensure that you always have the latest features and functionalities.'
+    class: 'dark:bg-gradient-to-b from-gray-950/50 to-gray-900'
+    slot: categories
+    links:
+      - label: View all components
+        to: /elements/accordion
+        color: white
+        size: lg
+        trailingIcon: i-heroicons-arrow-right-20-solid
+    categories:
+      - label: Elements
+        to: /elements/dropdown
+        image: /illustrations/elements
+        badge: 9
+      - label: Forms
+        to: /forms/form
+        image: /illustrations/forms
+        badge: 10
+      - label: Data
+        to: /data/table
+        image: /illustrations/data
+        badge: 1
+      - label: Navigation
+        to: /navigation/command-palette
+        image: /illustrations/navigation
+        badge: 4
+      - label: Overlays
+        to: /overlays/modal
+        image: /illustrations/overlays
+        badge: 6
+      - label: Layout
+        to: /layout/card
+        image: /illustrations/layout
+        badge: 3
+cta:
+  title: Trusted and supported by our<br class="hidden lg:block"> amazing community

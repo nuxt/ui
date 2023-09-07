@@ -1,23 +1,32 @@
 <template>
-  <footer class="flex items-center gap-1.5 mt-12">
-    <div class="flex-1 flex items-baseline gap-1.5 text-sm text-gray-600 dark:text-gray-300 leading-6">
-      Made by
-      <NuxtLink to="https://nuxtlabs.com" aria-label="NuxtLabs">
-        <LogoLabs class="text-gray-900 dark:text-white w-14 h-auto" />
-      </NuxtLink>
+  <div class="w-full h-px bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
+    <div class="bg-white dark:bg-gray-900 px-4">
+      <LogoOnly class="w-5 h-5" />
     </div>
+  </div>
 
-    <NuxtLink :to="`https://github.com/nuxtlabs/ui/releases/tag/v${config.version}`" target="_blank" class="inline-flex">
-      <UBadge :label="`v${config.version}`" variant="subtle" />
-    </NuxtLink>
+  <UFooter :links="[]" :ui="{ bottom: { container: 'lg:py-4' } }">
+    <template #left>
+      <div class="text-sm text-gray-600 dark:text-gray-300">
+        Made by
+        <NuxtLink to="https://nuxtlabs.com" aria-label="NuxtLabs" class="inline-block">
+          <LogoLabs class="text-gray-900 dark:text-white h-4 w-auto" />
+        </NuxtLink>
+      </div>
+    </template>
 
-    <div class="flex-1 flex items-center justify-end gap-1.5 -my-1 lg:hidden">
-      <USocialButton to="https://twitter.com/nuxtlabs" target="_blank" icon="i-simple-icons-twitter" />
-      <USocialButton to="https://github.com/nuxtlabs/ui" target="_blank" icon="i-simple-icons-github" />
-    </div>
-  </footer>
+    <template #center>
+      <span class="text-sm text-gray-600 dark:text-gray-300">
+        Published under <NuxtLink to="https://github.com/nuxtlabs/ui" target="_blank" class="text-gray-900 dark:text-white">
+          MIT License
+        </NuxtLink>
+      </span>
+    </template>
+
+    <template #right>
+      <USocialButton aria-label="Nuxt Website" icon="i-simple-icons-nuxtdotjs" to="https://nuxt.com" />
+      <USocialButton aria-label="Nuxt on X" icon="i-simple-icons-x" to="https://x.com/nuxtlabs" />
+      <USocialButton aria-label="Nuxt Image on GitHub" icon="i-simple-icons-github" to="https://github.com/nuxtlabs/ui" />
+    </template>
+  </UFooter>
 </template>
-
-<script setup lang="ts">
-const config = useRuntimeConfig().public
-</script>

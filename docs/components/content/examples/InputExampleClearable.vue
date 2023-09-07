@@ -1,5 +1,12 @@
 <template>
-  <UInput v-model="q" name="q" placeholder="Search..." icon="i-heroicons-magnifying-glass-20-solid" :ui="{ icon: { trailing: { pointer: '' } } }">
+  <UInput
+    v-model="q"
+    name="q"
+    placeholder="Search..."
+    icon="i-heroicons-magnifying-glass-20-solid"
+    autocomplete="off"
+    :ui="{ icon: { trailing: { pointer: '' } } }"
+  >
     <template #trailing>
       <UButton
         v-show="q !== ''"

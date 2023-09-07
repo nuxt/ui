@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   extends: process.env.NUXT_ELEMENTS_PATH || '@nuxthq/elements',
   modules: [
     '@nuxt/content',
+    'nuxt-og-image',
     // '@nuxt/devtools',
     // '@nuxthq/studio',
     module,
@@ -47,17 +48,20 @@ export default defineNuxtConfig({
       }
     }
   },
-  googleFonts: {
-    families: {
-      Inter: [400, 500, 600, 700]
-    }
+  fontMetrics: {
+    fonts: ['DM Sans']
   },
-  routeRules: {
-    '/': { redirect: '/getting-started', prerender: false }
+  googleFonts: {
+    display: 'swap',
+    download: true,
+    families: {
+      'DM+Sans': [400, 500, 600, 700]
+    }
   },
   nitro: {
     prerender: {
       routes: [
+        '/',
         '/getting-started',
         '/dev/getting-started',
         '/api/search.json'
@@ -66,7 +70,7 @@ export default defineNuxtConfig({
   },
   componentMeta: {
     globalsOnly: true,
-    exclude: [resolve('./components'), resolve('@nuxthq/elements/components')],
+    exclude: ['@nuxtjs/mdc', resolve('./components'), resolve('@nuxthq/elements/components')],
     metaFields: {
       props: true,
       slots: false,
@@ -79,14 +83,13 @@ export default defineNuxtConfig({
     includeWorkspace: true
   },
   hooks: {
-    // TODO: Uncomment after Nuxt v3.7 upgrade
     // Related to https://github.com/nuxt/nuxt/pull/22558
-    // 'components:extend': (components) => {
-    //   components.forEach((component) => {
-    //     if (component.global) {
-    //       component.global = 'sync'
-    //     }
-    //   })
-    // }
+    'components:extend': (components) => {
+      components.forEach((component) => {
+        if (component.global) {
+          component.global = 'sync'
+        }
+      })
+    }
   }
 })

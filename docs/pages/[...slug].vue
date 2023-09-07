@@ -5,19 +5,21 @@
     <UPageBody prose>
       <ContentRenderer v-if="page.body" :value="page" />
 
-      <div class="mt-12 not-prose">
-        <UButton :to="githubLink" variant="link" icon="i-heroicons-pencil-square" label="Edit this page on GitHub" :padded="false" />
-      </div>
-
-      <hr v-if="surround?.length" class="my-8">
+      <UDivider v-if="surround?.length" />
 
       <UDocsSurround :surround="removePrefixFromFiles(surround)" />
-
-      <Footer class="not-prose" />
     </UPageBody>
 
     <template v-if="page.body?.toc?.links?.length" #right>
-      <UDocsToc :links="page.body.toc.links" />
+      <UDocsToc :links="page.body.toc.links">
+        <template #bottom>
+          <div class="hidden lg:block space-y-6 !mt-6">
+            <UDivider v-if="page.body?.toc?.links?.length" dashed />
+
+            <UPageLinks title="Community" :links="links" />
+          </div>
+        </template>
+      </UDocsToc>
     </template>
   </UPage>
 </template>
@@ -26,6 +28,10 @@
 const route = useRoute()
 const { prefix, removePrefixFromFiles } = useContentSource()
 const { findPageHeadline } = useElementsHelpers()
+
+definePageMeta({
+  layout: 'docs'
+})
 
 const path = computed(() => route.path.startsWith(prefix.value) ? route.path : `${prefix.value}${route.path}`)
 
@@ -40,8 +46,36 @@ const { data: surround } = await useAsyncData(`${path.value}-surround`, () => {
     .findSurround((path.value.endsWith('/') ? path.value.slice(0, -1) : path.value))
 })
 
-useContentHead(page)
+useSeoMeta({
+  titleTemplate: '%s - Nuxt UI',
+  title: page.value.title,
+  ogTitle: `${page.value.title} - Nuxt UI`,
+  description: page.value.description,
+  ogDescription: page.value.description
+})
 
-const githubLink = computed(() => `https://github.com/nuxtlabs/ui/edit/dev/docs/content/${page?.value?._file}`)
+defineOgImage({
+  component: 'Docs',
+  title: page.value.title,
+  description: page.value.description
+})
+
 const headline = computed(() => findPageHeadline(page.value))
+
+const links = computed(() => [{
+  icon: 'i-heroicons-pencil-square',
+  label: 'Edit this page',
+  to: `https://github.com/nuxtlabs/ui/edit/dev/docs/content/${page?.value?._file}`,
+  target: '_blank'
+}, {
+  icon: 'i-heroicons-star',
+  label: 'Star on GitHub',
+  to: 'https://github.com/nuxtlabs/ui',
+  target: '_blank'
+}, {
+  icon: 'i-heroicons-book-open',
+  label: 'Nuxt documentation',
+  to: 'https://nuxt.com',
+  target: '_blank'
+}])
 </script>
