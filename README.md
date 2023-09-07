@@ -72,7 +72,7 @@ Visit https://ui.nuxt.com to explore the documentation.
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nuxtlabs/ui/blob/dev/LICENSE.md).
+Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md).
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
@@ -81,8 +81,8 @@ Licensed under the [MIT license](https://github.com/nuxtlabs/ui/blob/dev/LICENSE
 [npm-downloads-src]: https://img.shields.io/npm/dm/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-downloads-href]: https://npmjs.com/package/@nuxt/ui
 
-[license-src]: https://img.shields.io/github/license/nuxtlabs/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://github.com/nuxtlabs/ui/blob/main/LICENSE
+[license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
+[license-href]: https://github.com/nuxt/ui/blob/main/LICENSE
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com

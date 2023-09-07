@@ -42,7 +42,7 @@ export default defineNuxtConfig({
       main: {
         prefix: '/main',
         driver: 'github',
-        repo: 'nuxtlabs/ui',
+        repo: 'nuxt/ui',
         branch: 'main',
         dir: 'docs/content'
       }

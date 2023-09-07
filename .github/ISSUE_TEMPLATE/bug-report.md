@@ -19,7 +19,7 @@ nuxt: <!-- ex: v3.5.0 -->
 <!--
 A minimal test case based on one of:
 - a GitHub repository that can reproduce the bug
-- https://stackblitz.com/edit/nuxtlabs-ui
+- https://stackblitz.com/edit/nuxt-ui
 -->
 
 ### Steps to reproduce

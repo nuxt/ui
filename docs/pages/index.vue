@@ -148,7 +148,7 @@
             <p>monthly downloads</p>
           </NuxtLink>
 
-          <NuxtLink class="text-center group" to="https://github.com/nuxtlabs/ui" target="_blank">
+          <NuxtLink class="text-center group" to="https://github.com/nuxt/ui" target="_blank">
             <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ format(module.stats.stars) }}+
             </p>
