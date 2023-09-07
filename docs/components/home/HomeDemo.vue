@@ -68,8 +68,8 @@
 
         <InputExampleClearable />
 
-        <UFormGroup label="User">
-          <SelectMenuExampleAsyncSearch />
+        <UFormGroup label="Labels">
+          <SelectMenuExampleCreatable />
         </UFormGroup>
 
         <UCard :ui="{ body: { padding: '!p-1' } }">
