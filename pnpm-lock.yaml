@@ -70,9 +70,6 @@ importers:
       tailwindcss:
         specifier: ^3.3.3
         version: 3.3.3
-      valibot:
-        specifier: ^0.13.1
-        version: 0.13.1
     devDependencies:
       '@nuxt/eslint-config':
         specifier: ^0.2.0
@@ -101,6 +98,9 @@ importers:
       unbuild:
         specifier: ^2.0.0
         version: 2.0.0(typescript@5.2.2)
+      valibot:
+        specifier: ^0.13.1
+        version: 0.13.1
       vue-tsc:
         specifier: ^1.8.10
         version: 1.8.10(typescript@5.2.2)
@@ -1573,25 +1573,6 @@ packages:
       - rollup
       - supports-color
 
-  /@nuxt/schema@3.7.1(rollup@3.28.1):
-    resolution: {integrity: sha512-+0W/oos7Ktm3eTwQ/78PrcAObR0+yQzHIUzbQ7HgUnEEntRGVxp4hnfng5dmhvVjJqQvpuGZHa3yIS/g41vE6A==}
-    engines: {node: ^14.18.0 || >=16.10.0}
-    dependencies:
-      '@nuxt/ui-templates': 1.3.1
-      defu: 6.1.2
-      hookable: 5.5.3
-      pathe: 1.1.1
-      pkg-types: 1.0.3
-      postcss-import-resolver: 2.0.0
-      std-env: 3.4.3
-      ufo: 1.3.0
-      unimport: 3.3.0(rollup@3.28.1)
-      untyped: 1.4.0
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
   /@nuxt/telemetry@2.4.1(rollup@3.28.1):
     resolution: {integrity: sha512-Cj+4sXjO5pZNW2sX7Y+djYpf4pZwgYF3rV/YHLWIOq9nAjo2UcDXjh1z7qnhkoUkvJN3lHnvhnCNhfAioe6k/A==}
     hasBin: true
@@ -2002,7 +1983,6 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [arm]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -2012,7 +1992,6 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -2022,7 +2001,6 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -2032,7 +2010,6 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -2042,7 +2019,6 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -6225,7 +6201,7 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      meow: 8.1.2
+      meow: 12.1.1
       semver: 7.5.4
     dev: true
 
@@ -7790,7 +7766,7 @@ packages:
     dependencies:
       estree-walker: 3.0.3
       magic-string: 0.30.3
-      mlly: 1.4.2
+      mlly: 1.4.1
       type-level-regexp: 0.1.17
       ufo: 1.3.0
       unplugin: 1.4.0
@@ -12251,7 +12227,7 @@ packages:
       fast-glob: 3.3.1
       local-pkg: 0.4.3
       magic-string: 0.30.3
-      mlly: 1.4.2
+      mlly: 1.4.1
       pathe: 1.1.1
       pkg-types: 1.0.3
       scule: 1.0.0
@@ -12277,24 +12253,6 @@ packages:
       unplugin: 1.4.0
     transitivePeerDependencies:
       - rollup
-
-  /unimport@3.3.0(rollup@3.28.1):
-    resolution: {integrity: sha512-3jhq3ZG5hFZzrWGDCpx83kjPzefP/EeuKkIO1T0MA4Zwj+dO/Og1mFvZ4aZ5WSDm0FVbbdVIRH1zKBG7c4wOpg==}
-    dependencies:
-      '@rollup/pluginutils': 5.0.4(rollup@3.28.1)
-      escape-string-regexp: 5.0.0
-      fast-glob: 3.3.1
-      local-pkg: 0.4.3
-      magic-string: 0.30.3
-      mlly: 1.4.2
-      pathe: 1.1.1
-      pkg-types: 1.0.3
-      scule: 1.0.0
-      strip-literal: 1.3.0
-      unplugin: 1.4.0
-    transitivePeerDependencies:
-      - rollup
-    dev: true
 
   /unique-filename@3.0.0:
     resolution: {integrity: sha512-afXhuC55wkAmZ0P18QsVE6kp8JaxrEokN2HGIoIVv2ijHQd419H0+6EigAFcIzXeMIkcIkNBpB3L/DXB3cTS/g==}
@@ -12617,7 +12575,7 @@ packages:
 
   /valibot@0.13.1:
     resolution: {integrity: sha512-SG2W1RHqE2LShl3p6tyERt6I+G6PQa9ZFVfkyNKXz01HBzL+tBeH5kXw/5AQeAzPJSjI3djVGBl1CyozA1kyBQ==}
-    dev: false
+    dev: true
 
   /validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
