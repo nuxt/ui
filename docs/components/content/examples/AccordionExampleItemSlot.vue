@@ -61,9 +61,9 @@ const items = [{
       </div>
 
       <div class="flex flex-col items-center">
-        <code>$ npm install @nuxt/ui</code>
-        <code>$ nnpm install -D @nuxt/ui</code>
-        <code>$ pnpm i -D @nuxt/ui</code>
+        <code>$ npm i @nuxt/ui</code>
+        <code>$ yarn add @nuxt/ui</code>
+        <code>$ pnpm i @nuxt/ui</code>
       </div>
     </template>
   </UAccordion>
