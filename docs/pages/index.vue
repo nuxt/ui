@@ -173,7 +173,7 @@ const { data: module } = await useFetch<{
   contributors: {
     username: string
   }[]
-}>('https://api.nuxt.com/modules/nuxtlabs-ui', {
+}>('https://api.nuxt.com/modules/ui', {
   transform: (module) => pick(module, ['stats', 'contributors'])
 })
 
