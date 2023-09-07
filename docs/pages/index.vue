@@ -116,28 +116,30 @@
         </template>
 
         <template #links>
-          <UAvatarGroup :max="xlAndLarger ? 13 : lgAndLarger ? 10 : mdAndLarger ? 16 : 8" size="md" class="flex-wrap-reverse [&_span:first-child]:text-xs justify-center">
-            <UTooltip
-              v-for="(contributor, index) of module.contributors"
-              :key="index"
-              :text="contributor.username"
-              class="rounded-full"
-              :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50' }"
-              :popper="{ offsetDistance: 16 }"
-            >
-              <UAvatar
-                :alt="contributor.username"
-                :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
-                :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
-                class="lg:hover:scale-125 lg:hover:ring-2 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
-                size="md"
+          <ClientOnly>
+            <UAvatarGroup :max="xlAndLarger ? 13 : lgAndLarger ? 10 : mdAndLarger ? 16 : 8" size="md" class="flex-wrap-reverse [&_span:first-child]:text-xs justify-center">
+              <UTooltip
+                v-for="(contributor, index) of module.contributors"
+                :key="index"
+                :text="contributor.username"
+                class="rounded-full"
+                :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50' }"
+                :popper="{ offsetDistance: 16 }"
               >
-                <NuxtLink :to="`https://github.com/${contributor.username}`" target="_blank" class="focus:outline-none" tabindex="-1">
-                  <span class="absolute inset-0" aria-hidden="true" />
-                </NuxtLink>
-              </UAvatar>
-            </UTooltip>
-          </UAvatarGroup>
+                <UAvatar
+                  :alt="contributor.username"
+                  :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
+                  :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
+                  class="lg:hover:scale-125 lg:hover:ring-2 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
+                  size="md"
+                >
+                  <NuxtLink :to="`https://github.com/${contributor.username}`" target="_blank" class="focus:outline-none" tabindex="-1">
+                    <span class="absolute inset-0" aria-hidden="true" />
+                  </NuxtLink>
+                </UAvatar>
+              </UTooltip>
+            </UAvatarGroup>
+          </ClientOnly>
         </template>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-8 lg:gap-16">
