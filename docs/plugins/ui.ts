@@ -3,9 +3,8 @@ import colors from '#tailwind-config/theme/colors'
 
 export default defineNuxtPlugin({
   enforce: 'post',
-  setup (nuxtApp) {
+  setup () {
     const appConfig = useAppConfig()
-    const head = nuxtApp.vueApp._context.provides.usehead
 
     const root = computed(() => {
       const primary: Record<string, string> | undefined = colors[appConfig.ui.primary]
@@ -33,7 +32,7 @@ export default defineNuxtPlugin({
       appConfig.ui.gray = window.localStorage.getItem('nuxt-ui-gray') || appConfig.ui.gray
     }
     if (process.server) {
-      head.push({
+      useHead({
         script: [
           {
             innerHTML: `
