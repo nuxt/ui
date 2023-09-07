@@ -30,12 +30,12 @@ const anchors = [{
 }, {
   label: 'Playground',
   icon: 'i-simple-icons-stackblitz',
-  to: 'https://stackblitz.com/edit/nuxtlabs-ui?file=app.config.ts,app.vue',
+  to: 'https://stackblitz.com/edit/nuxt-ui?file=app.config.ts,app.vue',
   target: '_blank'
 }, {
   label: 'Releases',
   icon: 'i-heroicons-rocket-launch-solid',
-  to: 'https://github.com/nuxtlabs/ui/releases',
+  to: 'https://github.com/nuxt/ui/releases',
   target: '_blank'
 }]
 </script>
