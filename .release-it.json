@@ -14,7 +14,9 @@
   },
   "plugins": {
     "@release-it/conventional-changelog": {
-      "preset": "conventionalcommits",
+      "preset": {
+        "name": "conventionalcommits"
+      },
       "infile": "CHANGELOG.md",
       "header": "# Changelog",
       "ignoreRecommendedBump": true
