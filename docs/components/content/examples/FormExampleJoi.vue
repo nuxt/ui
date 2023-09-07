@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Joi from 'joi'
-import type { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 
 const schema = Joi.object({
   email: Joi.string().required(),

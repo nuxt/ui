@@ -1,8 +1,8 @@
 {
-  "name": "@nuxthq/ui-docs",
+  "name": "@nuxt/ui-docs",
   "private": true,
   "dependencies": {
-    "@nuxthq/ui": "workspace:latest"
+    "@nuxt/ui": "workspace:latest"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "latest",

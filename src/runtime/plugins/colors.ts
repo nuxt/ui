@@ -12,10 +12,10 @@ export default defineNuxtPlugin(() => {
     const gray: Record<string, string> | undefined = colors[appConfig.ui.gray]
 
     if (!primary) {
-      console.warn(`[@nuxthq/ui] Primary color '${appConfig.ui.primary}' not found in Tailwind config`)
+      console.warn(`[@nuxt/ui] Primary color '${appConfig.ui.primary}' not found in Tailwind config`)
     }
     if (!gray) {
-      console.warn(`[@nuxthq/ui] Gray color '${appConfig.ui.gray}' not found in Tailwind config`)
+      console.warn(`[@nuxt/ui] Gray color '${appConfig.ui.gray}' not found in Tailwind config`)
     }
 
     return `:root {
