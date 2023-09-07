@@ -1,4 +1,4 @@
-[![nuxt-ui-social-card](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxtlabs.com)
+[![nuxt-ui-social-card](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxt.com)
 
 # Nuxt UI
 
@@ -21,19 +21,19 @@ Is has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](https://v
 - Bundled icons
 - Fully typed
 
-Read more on [ui.nuxtlabs.com](https://ui.nuxtlabs.com)
+Read more on [ui.nuxt.com](https://ui.nuxt.com)
 
 ## Installation
 
 ```bash
 # Using npm
-npm install @nuxthq/ui
+npm install @nuxt/ui
 
 # Using yarn
-yarn add @nuxthq/ui
+yarn add @nuxt/ui
 
 # Using pnpm
-pnpm add @nuxthq/ui
+pnpm add @nuxt/ui
 ```
 
 Then, register the module in your `nuxt.config.ts`:
@@ -58,7 +58,7 @@ If you want latest updates, please use `@nuxt/ui-edge` in your `package.json`:
 
 ## Documentation
 
-Visit https://ui.nuxtlabs.com to explore the documentation.
+Visit https://ui.nuxt.com to explore the documentation.
 
 ## Credits
 

@@ -22,7 +22,8 @@
       <UDocsSearchButton :class="[$route.path !== '/' && 'lg:hidden']" icon-only />
 
       <UColorModeButton v-if="!$colorMode.forced" />
-      <USocialButton to="https://github.com/nuxtlabs/ui" target="_blank" icon="i-simple-icons-github" class="hidden lg:inline-flex" />
+
+      <USocialButton to="https://github.com/nuxt/ui" target="_blank" icon="i-simple-icons-github" class="hidden lg:inline-flex" />
     </template>
 
     <template #panel>
@@ -51,12 +52,12 @@ const links = computed(() => {
   }, {
     label: 'Playground',
     icon: 'i-simple-icons-stackblitz',
-    to: 'https://stackblitz.com/edit/nuxtlabs-ui?file=app.config.ts,app.vue',
+    to: 'https://stackblitz.com/edit/nuxt-ui?file=app.config.ts,app.vue',
     target: '_blank'
   }, {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch-solid',
-    to: 'https://github.com/nuxtlabs/ui/releases',
+    to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
   }]
 })
