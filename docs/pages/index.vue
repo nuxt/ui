@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ULandingHero v-bind="page.hero" :ui="{ base: 'relative z-[1]' }" class="mb-[calc(var(--header-height)*2)]">
+    <ULandingHero v-bind="page.hero" :ui="{ base: 'relative z-[1]', container: 'max-w-3xl' }" class="mb-[calc(var(--header-height)*2)]">
       <template #title>
         <span v-html="page.hero?.title" />
       </template>
@@ -71,7 +71,7 @@
             class="flex flex-col"
           >
             <div v-if="feature.image">
-              <UColorModeImage :light="`${feature.image}-light.svg`" :dark="`${feature.image}-dark.svg`" class="object-cover w-full" />
+              <UColorModeImage :light="`${feature.image}-light.svg`" :dark="`${feature.image}-dark.svg`" :alt="feature.title" class="object-cover w-full" />
             </div>
           </ULandingCard>
         </ULandingGrid>
@@ -85,7 +85,7 @@
             :to="category.to"
             class="hover:bg-gradient-to-b hover:from-gray-200/50 dark:hover:from-gray-800/50 rounded-lg"
           >
-            <UColorModeImage :light="`${category.image}-light.svg`" :dark="`${category.image}-dark.svg`" class="object-cover w-full" />
+            <UColorModeImage :light="`${category.image}-light.svg`" :dark="`${category.image}-dark.svg`" :alt="category.label" class="object-cover w-full" />
 
             <div class="flex items-center justify-center gap-2 mt-1 mb-2">
               <span class="font-semibold text-lg">{{ category.label }}</span>

@@ -7,7 +7,7 @@
     }"
   >
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white">
+      <NuxtLink to="/" class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white" aria-label="Nuxt UI">
         <Logo class="w-auto h-6" />
       </NuxtLink>
     </template>
@@ -23,7 +23,7 @@
 
       <UColorModeButton v-if="!$colorMode.forced" />
 
-      <USocialButton to="https://github.com/nuxt/ui" target="_blank" icon="i-simple-icons-github" class="hidden lg:inline-flex" />
+      <USocialButton to="https://github.com/nuxt/ui" target="_blank" icon="i-simple-icons-github" aria-label="GitHub" class="hidden lg:inline-flex" />
     </template>
 
     <template #panel>
