@@ -65,7 +65,7 @@ const headline = computed(() => findPageHeadline(page.value))
 const links = computed(() => [{
   icon: 'i-heroicons-pencil-square',
   label: 'Edit this page',
-  to: `https://github.com/nuxt/ui/edit/dev/docs/content/${page?.value?._file}`,
+  to: `https://github.com/nuxt/ui/edit/dev/docs/content/${page?.value?._file.split('/').slice(1).join('/')}`,
   target: '_blank'
 }, {
   icon: 'i-heroicons-star',
