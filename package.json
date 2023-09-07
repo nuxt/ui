@@ -62,7 +62,8 @@
     "unbuild": "^2.0.0",
     "vue-tsc": "^1.8.10",
     "yup": "^1.2.0",
-    "zod": "^3.22.2"
+    "zod": "^3.22.2",
+    "valibot": "^0.13.1"
   },
   "pnpm": {
     "patchedDependencies": {

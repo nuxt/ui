@@ -10,6 +10,8 @@ import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
+import type { ObjectSchema as ValibotObjectSchema } from 'valibot'
+import { safeParseAsync } from 'valibot'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, Form } from '../../types/form'
 
 export default defineComponent({
