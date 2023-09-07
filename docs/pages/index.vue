@@ -116,41 +116,39 @@
         </template>
 
         <template #links>
-          <ClientOnly>
-            <UAvatarGroup :max="xlAndLarger ? 13 : lgAndLarger ? 10 : mdAndLarger ? 16 : 8" size="md" class="flex-wrap-reverse [&_span:first-child]:text-xs justify-center">
-              <UTooltip
-                v-for="(contributor, index) of module.contributors"
-                :key="index"
-                :text="contributor.username"
-                class="rounded-full"
-                :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50' }"
-                :popper="{ offsetDistance: 16 }"
+          <UAvatarGroup :max="xlAndLarger ? 13 : lgAndLarger ? 10 : mdAndLarger ? 16 : 8" size="md" class="flex-wrap-reverse [&_span:first-child]:text-xs justify-center">
+            <UTooltip
+              v-for="(contributor, index) of module.contributors"
+              :key="index"
+              :text="contributor.username"
+              class="rounded-full"
+              :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50' }"
+              :popper="{ offsetDistance: 16 }"
+            >
+              <UAvatar
+                :alt="contributor.username"
+                :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
+                :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
+                class="lg:hover:scale-125 lg:hover:ring-2 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
+                size="md"
               >
-                <UAvatar
-                  :alt="contributor.username"
-                  :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
-                  :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
-                  class="lg:hover:scale-125 lg:hover:ring-2 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
-                  size="md"
-                >
-                  <NuxtLink :to="`https://github.com/${contributor.username}`" target="_blank" class="focus:outline-none" tabindex="-1">
-                    <span class="absolute inset-0" aria-hidden="true" />
-                  </NuxtLink>
-                </UAvatar>
-              </UTooltip>
-            </UAvatarGroup>
-          </ClientOnly>
+                <NuxtLink :to="`https://github.com/${contributor.username}`" target="_blank" class="focus:outline-none" tabindex="-1">
+                  <span class="absolute inset-0" aria-hidden="true" />
+                </NuxtLink>
+              </UAvatar>
+            </UTooltip>
+          </UAvatarGroup>
         </template>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-8 lg:gap-16">
-          <NuxtLink class="text-center group" to="https://npmjs.org/package/@nuxt/ui" target="_blank">
+          <NuxtLink class="text-center group" to="https://npmjs.org/package/@nuxthq/ui" target="_blank">
             <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ format(module.stats.downloads) }}+
             </p>
             <p>monthly downloads</p>
           </NuxtLink>
 
-          <NuxtLink class="text-center group" to="https://github.com/nuxt/ui" target="_blank">
+          <NuxtLink class="text-center group" to="https://github.com/nuxtlabs/ui" target="_blank">
             <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ format(module.stats.stars) }}+
             </p>
@@ -176,10 +174,12 @@ const { data: module } = await useFetch<{
     username: string
   }[]
 }>('https://api.nuxt.com/modules/ui', {
+const source = ref('npm i @nuxt/ui')
+}>('https://api.nuxt.com/modules/nuxtlabs-ui', {
   transform: (module) => pick(module, ['stats', 'contributors'])
 })
 
-const source = ref('npm i @nuxt/ui')
+const source = ref('npm i @nuxthq/ui')
 
 const { copy, copied } = useClipboard({ source })
 const breakpoints = useBreakpoints(breakpointsTailwind)
@@ -194,8 +194,8 @@ useSeoMeta({
   ogTitle: page.value.title,
   description: page.value.description,
   ogDescription: page.value.description,
-  ogImage: 'https://ui.nuxt.com/social-card.png',
-  twitterImage: 'https://ui.nuxt.com/social-card.png'
+  ogImage: 'https://ui.nuxtlabs.com/social-card.png',
+  twitterImage: 'https://ui.nuxtlabs.com/social-card.png'
 })
 
 const { format } = Intl.NumberFormat('en-GB', { notation: 'compact' })

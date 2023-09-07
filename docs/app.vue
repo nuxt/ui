@@ -3,20 +3,11 @@
   <div>
     <Header />
 
-    <UMain>
-      <UContainer>
-        <UPage>
-          <template #left>
-            <UAside :links="anchors">
-              <BranchSelect />
-              <UNavigationTree :links="mapContentNavigation(navigation)" />
-            </UAside>
-          </template>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
 
-          <NuxtPage />
-        </UPage>
-      </UContainer>
-    </UMain>
+    <Footer />
 
     <ClientOnly>
       <LazyUDocsSearch :files="files" :navigation="navigation" />
@@ -47,35 +38,7 @@ const { data: search } = useLazyFetch('/api/search.json', {
   server: false
 })
 
-const anchors = [{
-  label: 'Documentation',
-  icon: 'i-heroicons-book-open-solid',
-  to: '/getting-started'
-}, {
-  label: 'Playground',
-  icon: 'i-simple-icons-stackblitz',
-  to: 'https://stackblitz.com/edit/nuxtlabs-ui?file=app.config.ts,app.vue',
-  target: '_blank'
-}, {
-  label: 'Releases',
-  icon: 'i-heroicons-rocket-launch-solid',
-  to: 'https://github.com/nuxtlabs/ui/releases',
-  target: '_blank'
-}]
-
 // Computed
-const navigation = computed(() => {
-  const navigation = nav.value.find(link => link._path === prefix.value)?.children || []
-
-  return prefix.value === '/main' ? removePrefixFromNavigation(navigation) : navigation
-})
-
-const files = computed(() => {
-  const files = search.value.filter(file => file._path.startsWith(prefix.value))
-
-  return prefix.value === '/main' ? removePrefixFromFiles(files) : files
-})
-
 const navigation = computed(() => {
   const navigation = nav.value.find(link => link._path === prefix.value)?.children || []
 
@@ -98,7 +61,7 @@ useHead({
   ],
   link: [
     { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
+    { rel: 'canonical', href: `https://ui.nuxtlabs.com${withoutTrailingSlash(route.path)}` }
   ],
   htmlAttrs: {
     lang: 'en'
