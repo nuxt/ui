@@ -50,7 +50,9 @@
       </template>
 
       <template #demo>
-        <HomeDemo />
+        <ClientOnly>
+          <HomeDemo v-if="lgAndLarger" />
+        </ClientOnly>
       </template>
 
       <template #features>
@@ -114,7 +116,7 @@
         </template>
 
         <template #links>
-          <UAvatarGroup :max="13" size="md" class="flex-wrap-reverse [&_span:first-child]:text-xs justify-center">
+          <UAvatarGroup :max="xlAndLarger ? 13 : lgAndLarger ? 10 : mdAndLarger ? 16 : 8" size="md" class="flex-wrap-reverse [&_span:first-child]:text-xs justify-center">
             <UTooltip
               v-for="(contributor, index) of module.contributors"
               :key="index"
@@ -138,7 +140,7 @@
           </UAvatarGroup>
         </template>
 
-        <div class="flex items-center justify-center gap-8 lg:gap-16">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-8 lg:gap-16">
           <NuxtLink class="text-center group" to="https://npmjs.org/package/@nuxthq/ui" target="_blank">
             <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ format(module.stats.downloads) }}+
@@ -160,6 +162,7 @@
 
 <script setup lang="ts">
 import { pick } from 'lodash-es'
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
 const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
 const { data: module } = await useFetch<{
@@ -177,6 +180,11 @@ const { data: module } = await useFetch<{
 const source = ref('pnpm i -D @nuxthq/ui')
 
 const { copy, copied } = useClipboard({ source })
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const mdAndLarger = breakpoints.greaterOrEqual('md')
+const lgAndLarger = breakpoints.greaterOrEqual('lg')
+const xlAndLarger = breakpoints.greaterOrEqual('xl')
 
 useSeoMeta({
   titleTemplate: '',
