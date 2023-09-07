@@ -174,8 +174,6 @@ const { data: module } = await useFetch<{
     username: string
   }[]
 }>('https://api.nuxt.com/modules/ui', {
-const source = ref('npm i @nuxt/ui')
-}>('https://api.nuxt.com/modules/nuxtlabs-ui', {
   transform: (module) => pick(module, ['stats', 'contributors'])
 })
 
