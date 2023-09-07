@@ -48,8 +48,7 @@
     "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",
     "tailwind-merge": "^1.14.0",
-    "tailwindcss": "^3.3.3",
-    "valibot": "^0.13.1"
+    "tailwindcss": "^3.3.3"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.2.0",
@@ -63,7 +62,8 @@
     "unbuild": "^2.0.0",
     "vue-tsc": "^1.8.10",
     "yup": "^1.2.0",
-    "zod": "^3.22.2"
+    "zod": "^3.22.2",
+    "valibot": "^0.13.1"
   },
   "pnpm": {
     "patchedDependencies": {
