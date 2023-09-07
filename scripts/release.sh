@@ -15,5 +15,5 @@ if [[ ! -z ${NODE_AUTH_TOKEN} ]] ; then
 fi
 
 # Release package
-echo "Publishing @nuxthq/ui"
+echo "Publishing @nuxt/ui"
 npm publish -q --access public
