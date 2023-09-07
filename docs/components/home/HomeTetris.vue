@@ -1,21 +1,23 @@
 <template>
-  <div
-    :style="{
-      '--cell': `${width / cols}px`,
-      '--rows': rows - 1
-    }"
-  >
+  <Transition appear name="fade">
     <div
-      ref="el"
-      class="absolute inset-0 grid justify-center auto-rows-[var(--cell)] -space-y-px"
+      :style="{
+        '--cell': `${width / cols}px`,
+        '--rows': rows - 1
+      }"
     >
-      <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="grid grid-flow-col auto-cols-[--cell] flex-1 -space-x-px">
-        <div v-for="(cell, cellIndex) in row" :key="cellIndex" class="transition-[background] duration-1000 border border-primary-200/50 dark:border-primary-900/25 bg-opacity-10 hover:bg-opacity-20 dark:bg-opacity-5 dark:hover:bg-opacity-10" :class="[cell && `bg-primary-500 dark:bg-primary-400 cursor-pointer`]" @click="removeCell(rowIndex, cellIndex)" />
-      </div>
+      <div
+        ref="el"
+        class="absolute inset-0 grid justify-center auto-rows-[var(--cell)] -space-y-px"
+      >
+        <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="grid grid-flow-col auto-cols-[--cell] flex-1 -space-x-px">
+          <div v-for="(cell, cellIndex) in row" :key="cellIndex" class="transition-[background] duration-1000 border border-primary-200/50 dark:border-primary-900/25 bg-opacity-10 hover:bg-opacity-20 dark:bg-opacity-5 dark:hover:bg-opacity-10" :class="[cell && `bg-primary-500 dark:bg-primary-400 cursor-pointer`]" @click="removeCell(rowIndex, cellIndex)" />
+        </div>
 
-      <div class="absolute top-[calc((var(--cell)*var(--rows))+1px)] inset-x-0 h-[calc(var(--cell)*2)] bg-gradient-to-t from-white dark:from-gray-900" />
+        <div class="absolute top-[calc((var(--cell)*var(--rows))+1px)] inset-x-0 h-[calc(var(--cell)*2)] bg-gradient-to-t from-white dark:from-gray-900" />
+      </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script setup>
@@ -92,3 +94,15 @@ onMounted(() => {
   }, 1000)
 })
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

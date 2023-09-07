@@ -10,7 +10,7 @@
       </template>
 
       <template #links>
-        <UButton label="Get Started" icon="i-heroicons-rocket-launch" size="lg" to="/getting-started" />
+        <UButton label="Get Started" icon="i-heroicons-rocket-launch" size="lg" to="/getting-started/installation" />
 
         <UInput
           v-model="source"
@@ -177,7 +177,7 @@ const { data: module } = await useFetch<{
   transform: (module) => pick(module, ['stats', 'contributors'])
 })
 
-const source = ref('pnpm i -D @nuxthq/ui')
+const source = ref('npm i @nuxthq/ui')
 
 const { copy, copied } = useClipboard({ source })
 const breakpoints = useBreakpoints(breakpointsTailwind)

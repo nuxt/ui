@@ -49,7 +49,7 @@ sections:
     links:
       - label: Learn more
         to: /getting-started/theming
-        color: gray
+        color: white
         size: lg
         trailingIcon: i-heroicons-arrow-right-20-solid
   - title: 'A collection of <span class="text-primary">30+</span> components'
@@ -59,7 +59,7 @@ sections:
     links:
       - label: View all components
         to: /elements/accordion
-        color: gray
+        color: white
         size: lg
         trailingIcon: i-heroicons-arrow-right-20-solid
     categories:
