@@ -11,7 +11,7 @@ assignees: ''
 Before reporting a bug, please make sure that you have read through our documentation and you think your problem is indeed an issue related to our module. -->
 
 ### Version
-@nuxthq/ui: <!-- ex: v2.0.0 -->
+@nuxt/ui: <!-- ex: v2.0.0 -->
 nuxt: <!-- ex: v3.5.0 -->
 
 ### Reproduction Link

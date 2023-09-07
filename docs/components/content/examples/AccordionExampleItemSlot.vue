@@ -53,7 +53,7 @@ const items = [{
           Installation
         </h3>
         <p class="text-sm text-gray-500 dark:text-gray-400">
-          Install <code>@nuxthq/ui</code> dependency to your project:
+          Install <code>@nuxt/ui</code> dependency to your project:
         </p>
         <p>
           {{ description }}
@@ -61,9 +61,9 @@ const items = [{
       </div>
 
       <div class="flex flex-col items-center">
-        <code>$ npm install @nuxthq/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
+        <code>$ npm install @nuxt/ui</code>
+        <code>$ nnpm install -D @nuxt/ui</code>
+        <code>$ pnpm i -D @nuxt/ui</code>
       </div>
     </template>
   </UAccordion>
