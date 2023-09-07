@@ -13,7 +13,7 @@
     </template>
 
     <template v-if="$route.path !== '/'" #center>
-      <UDocsSearchButton class="ml-1.5 flg:w-64 xl:w-96" />
+      <UDocsSearchButton class="ml-1.5 hidden lg:flex lg:w-64 xl:w-96" />
     </template>
 
     <template #right>
