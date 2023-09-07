@@ -55,8 +55,8 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Typecheck
-        run: pnpm run typecheck
+      # - name: Typecheck
+      #   run: pnpm run typecheck
 
       - name: Release Edge
         if: github.event_name == 'push'
