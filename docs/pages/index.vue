@@ -185,7 +185,7 @@ useSeoMeta({
   description: page.value.description,
   ogDescription: page.value.description,
   ogImage: 'https://ui.nuxtlabs.com/social-card.png',
-  twitterImage: 'https://ui.nuxtlavs.com/social-card.png'
+  twitterImage: 'https://ui.nuxtlabs.com/social-card.png'
 })
 
 const { format } = Intl.NumberFormat('en-GB', { notation: 'compact' })
