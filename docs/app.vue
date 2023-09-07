@@ -3,20 +3,11 @@
   <div>
     <Header />
 
-    <UMain>
-      <UContainer>
-        <UPage>
-          <template #left>
-            <UAside :links="anchors">
-              <BranchSelect />
-              <UNavigationTree :links="mapContentNavigation(navigation)" />
-            </UAside>
-          </template>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
 
-          <NuxtPage />
-        </UPage>
-      </UContainer>
-    </UMain>
+    <Footer />
 
     <ClientOnly>
       <LazyUDocsSearch :files="files" :navigation="navigation" />
@@ -35,9 +26,10 @@
 </template>
 
 <script setup lang="ts">
+import { withoutTrailingSlash } from 'ufo'
+const route = useRoute()
 const colorMode = useColorMode()
 const { prefix, removePrefixFromNavigation, removePrefixFromFiles } = useContentSource()
-const { mapContentNavigation } = useElementsHelpers()
 
 const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
 
@@ -46,24 +38,7 @@ const { data: search } = useLazyFetch('/api/search.json', {
   server: false
 })
 
-const anchors = [{
-  label: 'Documentation',
-  icon: 'i-heroicons-book-open-solid',
-  to: '/getting-started'
-}, {
-  label: 'Playground',
-  icon: 'i-simple-icons-stackblitz',
-  to: 'https://stackblitz.com/edit/nuxtlabs-ui?file=app.config.ts,app.vue',
-  target: '_blank'
-}, {
-  label: 'Releases',
-  icon: 'i-heroicons-rocket-launch-solid',
-  to: 'https://github.com/nuxtlabs/ui/releases',
-  target: '_blank'
-}]
-
 // Computed
-
 const navigation = computed(() => {
   const navigation = nav.value.find(link => link._path === prefix.value)?.children || []
 
@@ -79,29 +54,26 @@ const files = computed(() => {
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
 // Head
-
 useHead({
-  titleTemplate: title => title && title.includes('Nuxt UI') ? title : `${title} - Nuxt UI`,
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
+    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
+    { rel: 'canonical', href: `https://ui.nuxtlabs.com${withoutTrailingSlash(route.path)}` }
   ],
   htmlAttrs: {
     lang: 'en'
   }
 })
 
-useSeoMeta({
-  ogImage: '/social-preview.jpg',
-  twitterImage: '/social-preview.jpg',
+useServerSeoMeta({
+  ogSiteName: 'Nuxt UI',
   twitterCard: 'summary_large_image'
 })
 
 // Provide
-
 provide('navigation', navigation)
 provide('files', files)
 </script>

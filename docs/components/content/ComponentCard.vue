@@ -11,7 +11,7 @@
           class="justify-center"
         />
         <USelectMenu
-          v-else-if="prop.type === 'string' && prop.options.length && prop.name !== 'label'"
+          v-else-if="prop.options.length && prop.name !== 'label'"
           v-model="componentProps[prop.name]"
           :options="prop.options"
           :name="`prop-${prop.name}`"
@@ -41,9 +41,7 @@
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
 
         <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
-          <ClientOnly>
-            <ContentSlot v-if="$slots[slot]" :use="$slots[slot]" />
-          </ClientOnly>
+          <ContentSlot :name="slot" />
         </template>
       </component>
     </div>

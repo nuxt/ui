@@ -29,12 +29,6 @@ const people = [{
   title: 'Senior Designer',
   email: 'leonard.krasner@example.com',
   role: 'Owner'
-}, {
-  id: 6,
-  name: 'Floyd Miles',
-  title: 'Principal Designer',
-  email: 'floyd.miles@example.com',
-  role: 'Member'
 }]
 
 function select (row) {

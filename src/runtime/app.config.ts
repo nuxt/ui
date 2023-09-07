@@ -1,7 +1,7 @@
 // Data
 
 const table = {
-  wrapper: 'relative',
+  wrapper: 'relative overflow-x-auto',
   base: 'min-w-full table-fixed',
   divide: 'divide-y divide-gray-300 dark:divide-gray-700',
   thead: '',
@@ -120,7 +120,7 @@ const avatar = {
 }
 
 const avatarGroup = {
-  wrapper: 'flex flex-row-reverse',
+  wrapper: 'flex flex-row-reverse justify-end',
   ring: 'ring-2 ring-white dark:ring-gray-900',
   margin: '-me-1.5 first:me-0'
 }
