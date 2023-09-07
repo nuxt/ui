@@ -98,6 +98,9 @@ importers:
       unbuild:
         specifier: ^2.0.0
         version: 2.0.0(typescript@5.2.2)
+      valibot:
+        specifier: ^0.13.1
+        version: 0.13.1
       vue-tsc:
         specifier: ^1.8.10
         version: 1.8.10(typescript@5.2.2)
@@ -12568,6 +12571,10 @@ packages:
       lodash: 4.17.21
       vue: 3.3.4
       vue-screen-utils: 1.0.0-beta.13(vue@3.3.4)
+    dev: true
+
+  /valibot@0.13.1:
+    resolution: {integrity: sha512-SG2W1RHqE2LShl3p6tyERt6I+G6PQa9ZFVfkyNKXz01HBzL+tBeH5kXw/5AQeAzPJSjI3djVGBl1CyozA1kyBQ==}
     dev: true
 
   /validate-npm-package-license@3.0.4:

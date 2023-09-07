@@ -10,6 +10,8 @@ import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
+import type { ObjectSchema as ValibotObjectSchema } from 'valibot'
+import { safeParseAsync } from 'valibot'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, Form } from '../../types/form'
 
 export default defineComponent({
@@ -18,7 +20,8 @@ export default defineComponent({
       type: Object as
         | PropType<ZodSchema>
         | PropType<YupObjectSchema<any>>
-        | PropType<JoiSchema>,
+        | PropType<JoiSchema>
+        | PropType<ValibotObjectSchema<any>>,
       default: undefined
     },
     state: {
@@ -61,6 +64,8 @@ export default defineComponent({
           errs = errs.concat(await getYupErrors(props.state, props.schema))
         } else if (isJoiSchema(props.schema)) {
           errs = errs.concat(await getJoiErrors(props.state, props.schema))
+        } else if (isValibotSchema(props.schema)) {
+          errs = errs.concat(await getValibotError(props.state, props.schema))
         } else {
           throw new Error('Form validation failed: Unsupported form schema')
         }
@@ -203,5 +208,23 @@ async function getJoiErrors (
       throw error
     }
   }
+}
+
+function isValibotSchema (schema: any): schema is ValibotObjectSchema<any> {
+  return schema._parse !== undefined
+}
+
+async function getValibotError (
+  state: any,
+  schema: ValibotObjectSchema<any>
+): Promise<FormError[]> {
+  const result = await safeParseAsync(schema, state)
+  if (result.success === false) {
+    return result.issues.map((issue) => ({
+      path: issue.path.map(p => p.key).join('.'),
+      message: issue.message
+    }))
+  }
+  return []
 }
 </script>
