@@ -7,7 +7,7 @@
 
   <UFooter :links="[]" :ui="{ bottom: { container: 'lg:py-4' } }">
     <template #left>
-      <div class="text-sm text-gray-600 dark:text-gray-300">
+      <div class="text-sm text-gray-500 dark:text-gray-400">
         Made by
         <NuxtLink to="https://nuxtlabs.com" aria-label="NuxtLabs" class="inline-block">
           <LogoLabs class="text-gray-900 dark:text-white h-4 w-auto" />
@@ -16,7 +16,7 @@
     </template>
 
     <template #center>
-      <span class="text-sm text-gray-600 dark:text-gray-300">
+      <span class="text-sm text-gray-500 dark:text-gray-400">
         Published under <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="text-gray-900 dark:text-white">
           MIT License
         </NuxtLink>
