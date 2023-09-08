@@ -133,8 +133,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(eslint@8.48.0)
       '@nuxthq/elements':
-        specifier: npm:@nuxthq/elements-edge@0.0.1-28235056.51848fa
-        version: /@nuxthq/elements-edge@0.0.1-28235056.51848fa(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
+        specifier: npm:@nuxthq/elements-edge@0.0.1-28236037.22a1d4d
+        version: /@nuxthq/elements-edge@0.0.1-28236037.22a1d4d(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
       '@nuxthq/studio':
         specifier: ^0.13.4
         version: 0.13.4(rollup@3.28.1)
@@ -1699,8 +1699,8 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxthq/elements-edge@0.0.1-28235056.51848fa(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-pY7q6TcVlJOPO3aK+K94KbDEVobiV/1SJYuNJSHXdFotX0gfvz3biGQFT393je2VfX+zTzfgTiIffaLovhWkUA==}
+  /@nuxthq/elements-edge@0.0.1-28236037.22a1d4d(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-zTOG8x4PXYPt2hVcP9wn9DBkSvve1/yWY745OChgj55NYA0HQhTLTsFrVfL1Kum04Ld7skqQTEKmFBkdw0odAQ==}
     dependencies:
       '@nuxt/ui': 2.8.0(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
       '@vueuse/core': 10.4.1(vue@3.3.4)
