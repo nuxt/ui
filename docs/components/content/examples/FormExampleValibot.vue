@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { string, object, email, minLength, Input } from 'valibot'
+import { string, objectAsync, email, minLength, Input } from 'valibot'
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 
-const schema = object({
+const schema = objectAsync({
   email: string([email('Invalid email')]),
   password: string([minLength(8, 'Must be at least 8 characters')])
 })
