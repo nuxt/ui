@@ -52,6 +52,10 @@ const links = computed(() => {
     icon: 'i-heroicons-book-open-solid',
     to: '/getting-started'
   }, {
+    label: 'Examples',
+    icon: 'i-heroicons-square-3-stack-3d',
+    to: '/getting-started/examples'
+  }, {
     label: 'Playground',
     icon: 'i-simple-icons-stackblitz',
     to: 'https://stackblitz.com/edit/nuxt-ui?file=app.config.ts,app.vue',
