@@ -1,9 +1,9 @@
 <template>
   <div :class="wrapperClass">
     <textarea
+      :id="name"
       ref="textarea"
       :value="modelValue"
-      :id="name"
       :name="name"
       :rows="rows"
       :required="required"
@@ -199,6 +199,7 @@ export default defineComponent({
       attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      // eslint-disable-next-line vue/no-dupe-keys
       name,
       textarea,
       wrapperClass,

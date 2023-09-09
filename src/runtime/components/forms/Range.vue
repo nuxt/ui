@@ -1,9 +1,9 @@
 <template>
   <div :class="wrapperClass">
     <input
+      :id="name"
       ref="input"
       v-model.number="value"
-      :id="name"
       :name="name"
       :min="min"
       :max="max"
@@ -166,6 +166,7 @@ export default defineComponent({
       attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      // eslint-disable-next-line vue/no-dupe-keys
       name,
       value,
       wrapperClass,

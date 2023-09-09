@@ -1,8 +1,8 @@
 <template>
   <div :class="wrapperClass">
     <input
-      ref="input"
       :id="name"
+      ref="input"
       :name="name"
       :value="modelValue"
       :type="type"
@@ -260,6 +260,7 @@ export default defineComponent({
       attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      // eslint-disable-next-line vue/no-dupe-keys
       name,
       input,
       isLeading,

@@ -1,7 +1,7 @@
 <template>
   <HSwitch
-    v-model="active"
     :id="name"
+    v-model="active"
     :name="name"
     :disabled="disabled"
     :class="switchClass"
@@ -119,6 +119,7 @@ export default defineComponent({
       attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      // eslint-disable-next-line vue/no-dupe-keys
       name,
       active,
       switchClass,

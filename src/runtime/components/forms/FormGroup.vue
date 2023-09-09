@@ -5,13 +5,17 @@
       <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
     </div>
 
-    <p v-if="description" :class="[ui.description, size]">{{ description }}</p>
-
+    <p v-if="description" :class="[ui.description, size]">
+      {{ description }}
+    </p>
     <div :class="[label ? ui.container : '']">
       <slot v-bind="{ error }" />
-
-      <p v-if="error && typeof error !== 'boolean'" :class="[ui.error, size]">{{ error }}</p>
-      <p v-else-if="help" :class="[ui.help, size]">{{ help }}</p>
+      <p v-if="typeof error === 'string' && error" :class="[ui.error, size]">
+        {{ error }}
+      </p>
+      <p v-else-if="help" :class="[ui.help, size]">
+        {{ help }}
+      </p>
     </div>
   </div>
 </template>

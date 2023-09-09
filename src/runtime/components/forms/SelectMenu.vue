@@ -438,6 +438,7 @@ export default defineComponent({
     }
 
     return {
+      // eslint-disable-next-line vue/no-dupe-keys
       name,
       attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
