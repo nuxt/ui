@@ -134,8 +134,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(eslint@8.49.0)
       '@nuxthq/elements':
-        specifier: npm:@nuxthq/elements-edge@0.0.1-28236037.22a1d4d
-        version: /@nuxthq/elements-edge@0.0.1-28236037.22a1d4d(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
+        specifier: npm:@nuxthq/elements-edge@0.0.1-28236454.ad14ce1
+        version: /@nuxthq/elements-edge@0.0.1-28236454.ad14ce1(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
       '@nuxthq/studio':
         specifier: ^0.14.1
         version: 0.14.1(rollup@3.28.1)
@@ -1688,7 +1688,7 @@ packages:
       - webpack
     dev: true
 
-  /@nuxt/vite-builder@3.7.1(eslint@8.48.0)(rollup@3.28.1)(typescript@5.2.2)(vue-tsc@1.8.10)(vue@3.3.4):
+  /@nuxt/vite-builder@3.7.1(eslint@8.49.0)(rollup@3.28.1)(typescript@5.2.2)(vue-tsc@1.8.10)(vue@3.3.4):
     resolution: {integrity: sha512-/DJZNJ8al8P+O5GrmmgpUmtlaDKZfrm1bfGnjpsDR8VBN6dgxTvAYi5bCkxTLCbaJyXs4XcbYrAXCNSlsRrl3Q==}
     engines: {node: ^14.18.0 || >=16.10.0}
     peerDependencies:
@@ -1750,8 +1750,8 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxthq/elements-edge@0.0.1-28236037.22a1d4d(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-zTOG8x4PXYPt2hVcP9wn9DBkSvve1/yWY745OChgj55NYA0HQhTLTsFrVfL1Kum04Ld7skqQTEKmFBkdw0odAQ==}
+  /@nuxthq/elements-edge@0.0.1-28236454.ad14ce1(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-bQKeijMX8qjRzQGwAd6XUUJ6NoO3OE8r8qrHH88vV0LZ6Px9kYmcc/Vm0ZXi4a65+oBAFbFTlggKyEZ3XCRa8A==}
     dependencies:
       '@nuxt/ui': 2.8.0(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
       '@vueuse/core': 10.4.1(vue@3.3.4)
