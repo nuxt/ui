@@ -1,6 +1,7 @@
 <template>
   <HSwitch
     v-model="active"
+    :id="name"
     :name="name"
     :disabled="disabled"
     :class="switchClass"
@@ -81,6 +82,7 @@ export default defineComponent({
 
     const { emitFormChange, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
+    const name = computed(() => formGroup?.name?.value ?? props.name)
 
     const active = computed({
       get () {
@@ -117,6 +119,7 @@ export default defineComponent({
       attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      name,
       active,
       switchClass,
       onIconClass,

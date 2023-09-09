@@ -28,7 +28,7 @@
       class="inline-flex w-full"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
-        <button :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
+        <button :id="name" :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
             <slot name="leading" :disabled="disabled" :loading="loading">
               <UIcon :name="leadingIconName" :class="leadingIconClass" />
@@ -313,6 +313,7 @@ export default defineComponent({
     const { emitFormBlur, emitFormChange, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
+    const name = computed(() => formGroup?.name?.value ?? props.name)
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
@@ -437,6 +438,7 @@ export default defineComponent({
     }
 
     return {
+      name,
       attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       uiMenu,

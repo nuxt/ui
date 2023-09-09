@@ -3,6 +3,7 @@
     <textarea
       ref="textarea"
       :value="modelValue"
+      :id="name"
       :name="name"
       :rows="rows"
       :required="required"
@@ -119,6 +120,7 @@ export default defineComponent({
     const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
+    const name = computed(() => formGroup?.name?.value ?? props.name)
 
     const autoFocus = () => {
       if (props.autofocus) {
@@ -197,6 +199,7 @@ export default defineComponent({
       attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      name,
       textarea,
       wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys

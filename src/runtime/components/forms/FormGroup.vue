@@ -1,20 +1,18 @@
 <template>
   <div :class="wrapperClass" v-bind="attrs">
-    <label>
-      <div v-if="label" :class="[ui.label.wrapper, size]">
-        <p :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</p>
-        <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
-      </div>
+    <div v-if="label" :class="[ui.label.wrapper, size]">
+      <label :for="name" :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</label>
+      <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
+    </div>
 
-      <p v-if="description" :class="[ui.description, size]">{{ description }}</p>
+    <p v-if="description" :class="[ui.description, size]">{{ description }}</p>
 
-      <div :class="[label ? ui.container : '']">
-        <slot v-bind="{ error }" />
+    <div :class="[label ? ui.container : '']">
+      <slot v-bind="{ error }" />
 
-        <p v-if="error && typeof error !== 'boolean'" :class="[ui.error, size]">{{ error }}</p>
-        <p v-else-if="help" :class="[ui.help, size]">{{ help }}</p>
-      </div>
-    </label>
+      <p v-if="error && typeof error !== 'boolean'" :class="[ui.error, size]">{{ error }}</p>
+      <p v-else-if="help" :class="[ui.help, size]">{{ help }}</p>
+    </div>
   </div>
 </template>
 

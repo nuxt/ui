@@ -3,6 +3,7 @@
     <input
       ref="input"
       v-model.number="value"
+      :id="name"
       :name="name"
       :min="min"
       :max="max"
@@ -90,6 +91,7 @@ export default defineComponent({
     const { emitFormChange, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
+    const name = computed(() => formGroup?.name?.value ?? props.name)
 
     const value = computed({
       get () {
@@ -164,6 +166,7 @@ export default defineComponent({
       attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      name,
       value,
       wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
