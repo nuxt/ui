@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.8.1](https://github.com/nuxt/ui/compare/v2.8.0...v2.8.1) (2023-09-09)
+
+
+### Bug Fixes
+
+* **Form:** fix `getValibotError` to avoid importing `safeParseAsync` ([#640](https://github.com/nuxt/ui/issues/640)) ([e8daf7f](https://github.com/nuxt/ui/commit/e8daf7f81018c01c28c2c38aed6ee57ef887f823))
+* **Form:** fix valibot imports ([#617](https://github.com/nuxt/ui/issues/617)) ([1a7eb27](https://github.com/nuxt/ui/commit/1a7eb27cad9f3357c4dcde188530cdb0001d3ae6))
+* **Pagination:** page numbers not clickable ([#624](https://github.com/nuxt/ui/issues/624)) ([c1e0654](https://github.com/nuxt/ui/commit/c1e0654417ad39df8be3f2172ab4e0af6dacb631))
+
 ## [2.8.0](https://github.com/nuxt/ui/compare/v2.7.0...v2.8.0) (2023-09-07)
 
 
