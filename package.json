@@ -54,7 +54,7 @@
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/module-builder": "^0.5.1",
     "@release-it/conventional-changelog": "^7.0.1",
-    "eslint": "^8.48.0",
+    "eslint": "^8.49.0",
     "joi": "^17.10.1",
     "nuxt": "^3.7.1",
     "release-it": "^16.1.5",
@@ -63,7 +63,7 @@
     "vue-tsc": "^1.8.10",
     "yup": "^1.2.0",
     "zod": "^3.22.2",
-    "valibot": "^0.13.1"
+    "valibot": "^0.14.0"
   },
   "pnpm": {
     "patchedDependencies": {
