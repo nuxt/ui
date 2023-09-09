@@ -19,16 +19,22 @@
             src="https://ipx.nuxt.com/s_32x32/gh_avatar/benjamincanac"
             srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/benjamincanac 2x"
             alt="benjamincanac"
+            width="40"
+            height="40"
           />
           <UAvatar
             src="https://ipx.nuxt.com/s_32x32/gh_avatar/Atinux"
             srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/Atinux 2x"
             alt="Atinux"
+            width="40"
+            height="40"
           />
           <UAvatar
             src="https://ipx.nuxt.com/s_32x32/gh_avatar/smarroufin"
             srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/smarroufin 2x"
             alt="smarroufin"
+            width="40"
+            height="40"
           />
         </UAvatarGroup>
 

@@ -71,7 +71,14 @@
             class="flex flex-col"
           >
             <div v-if="feature.image">
-              <UColorModeImage :light="`${feature.image}-light.svg`" :dark="`${feature.image}-dark.svg`" :alt="feature.title" class="object-cover w-full" />
+              <UColorModeImage
+                :light="`${feature.image.path}-light.svg`"
+                :dark="`${feature.image.path}-dark.svg`"
+                :width="feature.image.width"
+                :height="feature.image.height"
+                :alt="feature.title"
+                class="object-cover w-full"
+              />
             </div>
           </ULandingCard>
         </ULandingGrid>
@@ -85,7 +92,14 @@
             :to="category.to"
             class="hover:bg-gradient-to-b hover:from-gray-200/50 dark:hover:from-gray-800/50 rounded-lg"
           >
-            <UColorModeImage :light="`${category.image}-light.svg`" :dark="`${category.image}-dark.svg`" :alt="category.label" class="object-cover w-full" />
+            <UColorModeImage
+              :light="`${category.image.path}-light.svg`"
+              :dark="`${category.image.path}-dark.svg`"
+              width="363"
+              height="190"
+              :alt="category.label"
+              class="object-cover w-full"
+            />
 
             <div class="flex items-center justify-center gap-2 mt-1 mb-2">
               <span class="font-semibold text-lg">{{ category.label }}</span>
@@ -131,6 +145,8 @@
                   :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
                   :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
                   class="lg:hover:scale-125 lg:hover:ring-2 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
+                  width="40"
+                  height="40"
                   size="md"
                 >
                   <NuxtLink :to="`https://github.com/${contributor.username}`" target="_blank" class="focus:outline-none" tabindex="-1">

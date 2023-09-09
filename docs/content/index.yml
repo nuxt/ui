@@ -16,27 +16,39 @@ sections:
         icon: i-heroicons-swatch
         to: /getting-started/theming#colors
         class: 'col-span-7 row-span-3'
-        image: /illustrations/color-palette
+        image:
+          path: /illustrations/color-palette
+          width: 363
+          height: 152
         orientation: 'horizontal'
       - title: Fully Customizable
         description: 'Change the style of any component in your App Config or customize them specifically through the ui prop.'
         icon: i-heroicons-wrench-screwdriver
         to: /getting-started/theming#components
-        image: /illustrations/fully-customizable
+        image:
+          path: /illustrations/fully-customizable
+          width: 444
+          height: 160
         class: 'col-span-5 row-span-5 lg:mb-10'
         orientation: 'vertical'
       - title: Icons
         description: 'Choose any of the 100k+ icons from the most popular icon libraries with the Icon component or the icon prop.'
         icon: i-heroicons-face-smile
         to: /getting-started/theming#icons
-        image: /illustrations/icon-library
+        image:
+          path: /illustrations/icon-library
+          width: 362
+          height: 184
         class: 'col-span-7 row-span-3'
         orientation: 'horizontal'
       - title: Light & Dark
         description: 'Every component is designed with dark mode in mind. Works out of the box with @nuxtjs/color-mode.'
         to: /getting-started/theming#dark-mode
         icon: i-heroicons-moon
-        image: /illustrations/dark-mode
+        image:
+          path: /illustrations/dark-mode
+          width: 444
+          height: 160
         class: 'col-span-5 row-span-5 lg:-mt-10 lg:mb-20'
         orientation: 'vertical'
       - title: Keyboard Shortcuts
@@ -44,10 +56,13 @@ sections:
         icon: i-heroicons-computer-desktop
         to: /getting-started/shortcuts
         class: 'col-span-7 row-span-3'
-        image: /illustrations/keyboard-shortcuts
+        image:
+          path: /illustrations/keyboard-shortcuts
+          width: 444
+          height: 160
         orientation: 'horizontal'
     links:
-      - label: Learn more
+      - label: Explore the docs
         to: /getting-started/theming
         color: white
         size: lg
@@ -65,27 +80,33 @@ sections:
     categories:
       - label: Elements
         to: /elements/dropdown
-        image: /illustrations/elements
+        image:
+          path: /illustrations/elements
         badge: 9
       - label: Forms
         to: /forms/form
-        image: /illustrations/forms
+        image:
+          path: /illustrations/forms
         badge: 10
       - label: Data
         to: /data/table
-        image: /illustrations/data
+        image:
+          path: /illustrations/data
         badge: 1
       - label: Navigation
         to: /navigation/command-palette
-        image: /illustrations/navigation
+        image:
+          path: /illustrations/navigation
         badge: 4
       - label: Overlays
         to: /overlays/modal
-        image: /illustrations/overlays
+        image:
+          path: /illustrations/overlays
         badge: 6
       - label: Layout
         to: /layout/card
-        image: /illustrations/layout
+        image:
+          path: /illustrations/layout
         badge: 3
 cta:
   title: Trusted and supported by our<br class="hidden lg:block"> amazing community
