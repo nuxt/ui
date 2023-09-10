@@ -73,7 +73,7 @@ import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { twMerge, twJoin } from 'tailwind-merge'
-import { groupBy, map, omit } from '../../utils/lodash'
+import { omit } from '../../utils/lodash'
 import { defu } from 'defu'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { Group, Command } from '../../types/command-palette'
@@ -228,7 +228,24 @@ export default defineComponent({
     const { results } = useFuse(query, commands, options)
 
     const groups = computed(() => ([
-      ...map(groupBy(results.value, command => command.item.group), (results, key) => {
+      ...(function groupBy (array, getKey) {
+        const groups = Object.values(
+          array.reduce((map, item) => {
+            const key = String(getKey(item))
+            const group = map[key]
+
+            if (group) {
+              group.push(item)
+            } else {
+              map[key] = [item]
+            }
+
+            return map
+          }, {} as Record<string, any[]>)
+        )
+
+        return groups
+      })(results.value, command => command.item.group).map((results, key) => {
         const commands = results.map((result) => {
           const { item, ...data } = result
 
@@ -243,8 +260,16 @@ export default defineComponent({
           commands: commands.slice(0, options.value.resultLimit)
         } as Group
       }),
-      ...props.groups.filter(group => !!group.search).map(group => ({ ...group, commands: (searchResults.value[group.key] || []).slice(0, options.value.resultLimit) })).filter(group => group.commands.length)
+      ...props.groups
+        .filter(group => !!group.search)
+        .map(group => ({
+          ...group,
+          commands: (searchResults.value[group.key] || []).slice(0, options.value.resultLimit)
+        }))
+        .filter(group => group.commands.length)
     ]))
+
+
 
     const debouncedSearch = useDebounceFn(async () => {
       const searchableGroups = props.groups.filter(group => !!group.search)

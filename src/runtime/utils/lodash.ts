@@ -40,38 +40,6 @@ export function get (object: Record<string, any>, path: Path, defaultValue?: any
   return result !== undefined ? result : defaultValue
 }
 
-export function groupBy<T, K> (
-  array: T[],
-  getKey: (item: T) => K
-): any[][] {
-  const groups: any[][] = Object.values(
-    array.reduce((map, item) => {
-      const key = String(getKey(item))
-      const group = map[key]
-
-      if (group) {
-        group.push(item)
-      } else {
-        map[key] = [item]
-      }
-
-      return map
-    }, {} as Record<string, T[]>)
-  )
-
-  return groups
-}
-
-
-
-export function map<T, U> (array: T[], iteratee: (value: T, index: number, collection: T[]) => U): U[] {
-  const result: U[] = []
-  for (let i = 0; i < array.length; i++) {
-    result.push(iteratee(array[i], i, array))
-  }
-  return result
-}
-
 export function omitBy<T> (
   obj: Record<string, T>,
   predicate: (value: T, key: string) => boolean
