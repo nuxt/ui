@@ -1,5 +1,4 @@
 import { kebabCase, camelCase, upperFirst } from 'scule'
-import { isEqual } from 'ohash'
 
 type OmitObject<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
@@ -84,4 +83,4 @@ export function pick<T extends Record<string, any>, K extends keyof T> (
   return picked as Pick<T, K>
 }
 
-export { kebabCase, camelCase, upperFirst, isEqual }
+export { kebabCase, camelCase, upperFirst }
