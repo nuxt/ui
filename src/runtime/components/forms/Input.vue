@@ -33,7 +33,7 @@
 <script lang="ts">
 import { ref, computed, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from 'lodash-es'
+import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { defuTwMerge } from '../../utils'

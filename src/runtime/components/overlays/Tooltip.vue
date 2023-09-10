@@ -27,7 +27,7 @@
 import { computed, ref, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { omit } from 'lodash-es'
+import { omit } from '../../utils/lodash'
 import { twMerge } from 'tailwind-merge'
 import UKbd from '../elements/Kbd.vue'
 import { usePopper } from '../../composables/usePopper'

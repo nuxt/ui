@@ -69,7 +69,7 @@
 <script lang="ts">
 import { ref, computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
-import { omit, capitalize, orderBy, get } from 'lodash-es'
+import { omit, capitalize, orderBy, get } from '../../utils/lodash'
 import { defu } from 'defu'
 import { twMerge } from 'tailwind-merge'
 import { defuTwMerge } from '../../utils'

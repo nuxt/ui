@@ -29,7 +29,7 @@
 import { computed, ref, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { omit } from 'lodash-es'
+import { omit } from '../../utils/lodash'
 import { twMerge } from 'tailwind-merge'
 import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel } from '@headlessui/vue'
 import { usePopper } from '../../composables/usePopper'

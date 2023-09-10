@@ -61,9 +61,9 @@ importers:
       fuse.js:
         specifier: ^6.6.2
         version: 6.6.2
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+      scule:
+        specifier: ^1.0.0
+        version: 1.0.0
       tailwind-merge:
         specifier: ^1.14.0
         version: 1.14.0
@@ -7476,6 +7476,7 @@ packages:
 
   /lodash-es@4.17.21:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: true
 
   /lodash._reinterpolate@3.0.0:
     resolution: {integrity: sha512-xYHt68QRoYGjeeM/XOE1uJtvXQAgvszfBhjV4yvsQH0u2i9I6cI6c6/eG4Hh3UAOVn0y/xAXwmTzEay49Q//HA==}

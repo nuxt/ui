@@ -43,7 +43,7 @@
 import { ref, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel } from '@headlessui/vue'
-import { omit } from 'lodash-es'
+import { omit } from '../../utils/lodash'
 import { twMerge } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'

@@ -179,7 +179,7 @@
 </template>
 
 <script setup lang="ts">
-import { pick } from 'lodash-es'
+import { pick } from '../../src/runtime/utils/lodash'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
 const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())

@@ -29,8 +29,7 @@ import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
-import { omit } from 'lodash-es'
-
+import { omit } from '../../utils/lodash'
 // const appConfig = useAppConfig()
 
 export default defineComponent({

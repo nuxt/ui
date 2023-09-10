@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { isEqual } from 'lodash-es'
+import { isEqual } from '../../utils/lodash'
 import { defineComponent } from 'vue'
 import { NuxtLink } from '#components'
 

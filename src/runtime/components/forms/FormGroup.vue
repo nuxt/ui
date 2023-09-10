@@ -21,7 +21,7 @@
 <script lang="ts">
 import { computed, defineComponent, provide, inject } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from 'lodash-es'
+import { omit } from '../../utils/lodash'
 import { twMerge } from 'tailwind-merge'
 import type { FormError } from '../../types/form'
 import { defuTwMerge } from '../../utils'
