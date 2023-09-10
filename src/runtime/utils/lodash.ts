@@ -1,16 +1,21 @@
 import { kebabCase, camelCase, upperFirst } from 'scule'
+import { isEqual } from 'ohash'
 
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+type OmitObject<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
-export function omit<T extends Record<string, any>, K extends keyof T> (obj: T, keysToOmit: K[]): Omit<T, K> {
-  const result: Record<string, any> = {}
-  for (const key in obj) {
-    if (!keysToOmit.includes(key as unknown as K)) {
-      result[key] = obj[key]
-    }
+export function omit<T extends Record<string, any>, K extends keyof T> (
+  object: T,
+  keysToOmit: K[] | any[]
+): OmitObject<T, K> {
+  const result = { ...object }
+
+  for (const key of keysToOmit) {
+    delete result[key]
   }
-  return result as Omit<T, K>
+
+  return result as OmitObject<T, K>
 }
+
 
 type Path = (string | number)[] | string;
 
@@ -33,36 +38,6 @@ export function get (object: Record<string, any>, path: Path, defaultValue?: any
   }
 
   return result !== undefined ? result : defaultValue
-}
-
-
-export function isEqual<T> (valueA: T, valueB: T): boolean {
-  if (valueA === valueB) {
-    return true
-  }
-
-  if (typeof valueA !== 'object' || typeof valueB !== 'object') {
-    return false
-  }
-
-  const keysA = Object.keys(valueA)
-  const keysB = Object.keys(valueB)
-
-  if (keysA.length !== keysB.length) {
-    return false
-  }
-
-  for (const key of keysA) {
-    if (!keysB.includes(key)) {
-      return false
-    }
-
-    if (!isEqual(valueA[key], valueB[key])) {
-      return false
-    }
-  }
-
-  return true
 }
 
 export function groupBy<T, K> (
@@ -89,13 +64,11 @@ export function groupBy<T, K> (
 
 
 
-export function map<T, U> (array: T[], callback: (item: T, index: number, array: T[]) => U): U[] {
+export function map<T, U> (array: T[], iteratee: (value: T, index: number, collection: T[]) => U): U[] {
   const result: U[] = []
-
   for (let i = 0; i < array.length; i++) {
-    result.push(callback(array[i], i, array))
+    result.push(iteratee(array[i], i, array))
   }
-
   return result
 }
 
@@ -110,20 +83,6 @@ export function omitBy<T> (
     return acc
   }, {} as Record<string, T>)
 }
-
-export function isUndefined (value: any): boolean {
-  return value === undefined
-}
-
-export function capitalize (input: string): string {
-  if (typeof input !== 'string' || input.length === 0) {
-    return ''
-  }
-
-  return input.charAt(0).toUpperCase() + input.slice(1)
-}
-
-
 
 type Order = 'asc' | 'desc';
 
@@ -157,4 +116,4 @@ export function pick<T extends Record<string, any>, K extends keyof T> (
   return picked as Pick<T, K>
 }
 
-export { kebabCase, camelCase, upperFirst }
+export { kebabCase, camelCase, upperFirst, isEqual }

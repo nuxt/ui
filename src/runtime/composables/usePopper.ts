@@ -2,7 +2,7 @@ import { ref, onMounted, watchEffect } from 'vue'
 import type { Ref } from 'vue'
 import { popperGenerator, defaultModifiers, VirtualElement } from '@popperjs/core/lib/popper-lite'
 import type { Instance } from '@popperjs/core'
-import { omitBy, isUndefined } from '../utils/lodash'
+import { omitBy } from '../utils/lodash'
 import flip from '@popperjs/core/lib/modifiers/flip'
 import offset from '@popperjs/core/lib/modifiers/offset'
 import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow'
@@ -72,7 +72,7 @@ export function usePopper ({
             resize
           }
         }]
-      }, isUndefined))
+      }, (value) => value === undefined))
 
       onInvalidate(instance.value.destroy)
     })

@@ -69,7 +69,7 @@
 <script lang="ts">
 import { ref, computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
-import { omit, capitalize, orderBy, get } from '../../utils/lodash'
+import { omit, upperFirst, orderBy, get } from '../../utils/lodash'
 import { defu } from 'defu'
 import { twMerge } from 'tailwind-merge'
 import { defuTwMerge } from '../../utils'
@@ -158,7 +158,7 @@ export default defineComponent({
 
     const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
-    const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: capitalize(key), sortable: false })))
+    const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: upperFirst(key), sortable: false })))
 
     const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
 

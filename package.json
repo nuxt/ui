@@ -45,6 +45,7 @@
     "@vueuse/integrations": "^10.4.1",
     "@vueuse/math": "^10.4.1",
     "defu": "^6.1.2",
+    "ohash": "^1.1.3",
     "scule": "^1.0.0",
     "fuse.js": "^6.6.2",
     "tailwind-merge": "^1.14.0",
