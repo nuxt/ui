@@ -239,7 +239,7 @@ export default defineComponent({
         })
 
         return {
-          ...props.groups.find(group => group.key === key),
+          ...props.groups.find(group => Number(group.key) === key),
           commands: commands.slice(0, options.value.resultLimit)
         } as Group
       }),

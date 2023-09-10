@@ -65,16 +65,29 @@ export function isEqual<T> (valueA: T, valueB: T): boolean {
   return true
 }
 
-export function groupBy<T, K extends keyof T> (array: T[], key: K): Record<string, T[]> {
-  return array.reduce((acc, item) => {
-    const groupKey = item[key] as string
-    if (!acc[groupKey]) {
-      acc[groupKey] = []
-    }
-    acc[groupKey].push(item)
-    return acc
-  }, {} as Record<string, T[]>)
+export function groupBy<T, K> (
+  array: T[],
+  getKey: (item: T) => K
+): any[][] {
+  const groups: any[][] = Object.values(
+    array.reduce((map, item) => {
+      const key = String(getKey(item))
+      const group = map[key]
+
+      if (group) {
+        group.push(item)
+      } else {
+        map[key] = [item]
+      }
+
+      return map
+    }, {} as Record<string, T[]>)
+  )
+
+  return groups
 }
+
+
 
 export function map<T, U> (array: T[], callback: (item: T, index: number, array: T[]) => U): U[] {
   const result: U[] = []
