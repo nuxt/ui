@@ -8,6 +8,7 @@
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.prevButton, ...prevButton }"
         :ui="{ rounded: '' }"
+        aria-label="Prev"
         @click="onClickPrev"
       />
     </slot>
@@ -31,6 +32,7 @@
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.nextButton, ...nextButton }"
         :ui="{ rounded: '' }"
+        aria-label="Next"
         @click="onClickNext"
       />
     </slot>
