@@ -1,11 +1,31 @@
 <script setup>
 const links = [{
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+    src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/benjamincanac',
+    srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/benjamincanac 2x',
+    alt: 'benjamincanac'
   },
-  label: 'Benjamin Canac'
+  label: 'benjamincanac',
+  to: 'https://github.com/benjamincanac',
+  target: '_blank'
 }, {
-  label: 'KeJun'
+  avatar: {
+    src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/Atinux',
+    srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/Atinux 2x',
+    alt: 'Atinux'
+  },
+  label: 'Atinux',
+  to: 'https://github.com/Atinux',
+  target: '_blank'
+}, {
+  avatar: {
+    src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/smarroufin',
+    srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/smarroufin 2x',
+    alt: 'smarroufin'
+  },
+  label: 'smarroufin',
+  to: 'https://github.com/smarroufin',
+  target: '_blank'
 }]
 
 const { ui } = useAppConfig()

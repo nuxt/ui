@@ -22,9 +22,9 @@ function onSubmit (form) {
     <template #item="{ item }">
       <UCard @submit.prevent="() => onSubmit(item.key === 'account' ? accountForm : passwordForm)">
         <template #header>
-          <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+          <p class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
             {{ item.label }}
-          </h3>
+          </p>
           <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
             {{ item.description }}
           </p>

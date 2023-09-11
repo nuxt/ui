@@ -45,7 +45,7 @@ export default defineComponent({
       }
     },
     label: {
-      type: String,
+      type: [String, Number],
       default: null
     },
     ui: {

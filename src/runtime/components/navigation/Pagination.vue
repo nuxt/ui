@@ -14,7 +14,7 @@
 
     <UButton
       v-for="(page, index) of displayedPages"
-      :key="index"
+      :key="`${page}-${index}`"
       :size="size"
       :label="`${page}`"
       v-bind="page === currentPage ? { ...ui.default.activeButton, ...activeButton } : { ...ui.default.inactiveButton, ...inactiveButton }"

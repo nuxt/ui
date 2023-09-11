@@ -1,7 +1,7 @@
 // Data
 
 const table = {
-  wrapper: 'relative',
+  wrapper: 'relative overflow-x-auto',
   base: 'min-w-full table-fixed',
   divide: 'divide-y divide-gray-300 dark:divide-gray-700',
   thead: '',
@@ -120,7 +120,7 @@ const avatar = {
 }
 
 const avatarGroup = {
-  wrapper: 'flex flex-row-reverse',
+  wrapper: 'flex flex-row-reverse justify-end',
   ring: 'ring-2 ring-white dark:ring-gray-900',
   margin: '-me-1.5 first:me-0'
 }
@@ -654,13 +654,13 @@ const range = {
     }
   },
   track: {
-    base: '[&::-webkit-slider-runnable-track]:group-disabled:bg-opacity-50 [&::-moz-slider-runnable-track]:group-disabled:bg-opacity-50',
-    background: '[&::-webkit-slider-runnable-track]:bg-gray-200 [&::-moz-slider-runnable-track]:bg-gray-200 [&::-webkit-slider-runnable-track]:dark:bg-gray-700 [&::-moz-slider-runnable-track]:dark:bg-gray-700',
-    rounded: '[&::-webkit-slider-runnable-track]:rounded-lg [&::-moz-slider-runnable-track]:rounded-lg',
+    base: '[&::-webkit-slider-runnable-track]:group-disabled:bg-opacity-50 [&::-moz-range-track]:group-disabled:bg-opacity-50',
+    background: '[&::-webkit-slider-runnable-track]:bg-gray-200 [&::-moz-range-track]:bg-gray-200 [&::-webkit-slider-runnable-track]:dark:bg-gray-700 [&::-moz-range-track]:dark:bg-gray-700',
+    rounded: '[&::-webkit-slider-runnable-track]:rounded-lg [&::-moz-range-track]:rounded-lg',
     size: {
-      sm: '[&::-webkit-slider-runnable-track]:h-1 [&::-moz-slider-runnable-track]:h-1',
-      md: '[&::-webkit-slider-runnable-track]:h-2 [&::-moz-slider-runnable-track]:h-2',
-      lg: '[&::-webkit-slider-runnable-track]:h-3 [&::-moz-slider-runnable-track]:h-3'
+      sm: '[&::-webkit-slider-runnable-track]:h-1 [&::-moz-range-track]:h-1',
+      md: '[&::-webkit-slider-runnable-track]:h-2 [&::-moz-range-track]:h-2',
+      lg: '[&::-webkit-slider-runnable-track]:h-3 [&::-moz-range-track]:h-3'
     }
   },
   size: {

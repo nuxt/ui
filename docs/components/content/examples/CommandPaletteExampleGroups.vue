@@ -1,34 +1,34 @@
 <script setup>
 const router = useRouter()
+const toast = useToast()
 
 const commandPaletteRef = ref()
 
 const users = [
-  { id: 'benjamincanac', label: 'benjamincanac', href: 'https://github.com/benjamincanac', target: '_blank', avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' } },
-  { id: 'Atinux', label: 'Atinux', href: 'https://github.com/Atinux', target: '_blank', avatar: { src: 'https://avatars.githubusercontent.com/u/904724?v=4' } },
-  { id: 'smarroufin', label: 'smarroufin', href: 'https://github.com/smarroufin', target: '_blank', avatar: { src: 'https://avatars.githubusercontent.com/u/7547335?v=4' } }
+  { id: 'benjamincanac', label: 'benjamincanac', href: 'https://github.com/benjamincanac', target: '_blank', avatar: { src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/benjamincanac', srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/benjamincanac 2x' } },
+  { id: 'Atinux', label: 'Atinux', href: 'https://github.com/Atinux', target: '_blank', avatar: { src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/Atinux', srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/Atinux 2x' } },
+  { id: 'smarroufin', label: 'smarroufin', href: 'https://github.com/smarroufin', target: '_blank', avatar: { src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/smarroufin', srcset: 'https://ipx.nuxt.com/s_32x32/gh_avatar/smarroufin 2x' } }
 ]
 
 const actions = [
-  { id: 'new-file', label: 'Add new file', icon: 'i-heroicons-document-plus', click: () => alert('New file'), shortcuts: ['⌘', 'N'] },
-  { id: 'new-folder', label: 'Add new folder', icon: 'i-heroicons-folder-plus', click: () => alert('New folder'), shortcuts: ['⌘', 'F'] },
-  { id: 'hashtag', label: 'Add hashtag', icon: 'i-heroicons-hashtag', click: () => alert('Add hashtag'), shortcuts: ['⌘', 'H'] },
-  { id: 'label', label: 'Add label', icon: 'i-heroicons-tag', click: () => alert('Add label'), shortcuts: ['⌘', 'L'] }
+  { id: 'new-file', label: 'Add new file', icon: 'i-heroicons-document-plus', click: () => toast.add({ title: 'New file added!' }), shortcuts: ['⌘', 'N'] },
+  { id: 'new-folder', label: 'Add new folder', icon: 'i-heroicons-folder-plus', click: () => toast.add({ title: 'New folder added!' }), shortcuts: ['⌘', 'F'] },
+  { id: 'hashtag', label: 'Add hashtag', icon: 'i-heroicons-hashtag', click: () => toast.add({ title: 'Hashtag added!' }), shortcuts: ['⌘', 'H'] },
+  { id: 'label', label: 'Add label', icon: 'i-heroicons-tag', click: () => toast.add({ title: 'Label added!' }), shortcuts: ['⌘', 'L'] }
 ]
 
-const groups = computed(() => commandPaletteRef.value?.query
-  ? [{
+const groups = computed(() =>
+  [commandPaletteRef.value?.query ? {
     key: 'users',
     commands: users
-  }]
-  : [{
+  } : {
     key: 'recent',
     label: 'Recent searches',
     commands: users.slice(0, 1)
   }, {
     key: 'actions',
     commands: actions
-  }])
+  }].filter(Boolean))
 
 function onSelect (option) {
   if (option.click) {

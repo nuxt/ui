@@ -1,4 +1,4 @@
-[![nuxt-ui-social-card](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxtlabs.com)
+[![nuxt-ui-social-card](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxt.com)
 
 # Nuxt UI
 
@@ -21,19 +21,19 @@ Is has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](https://v
 - Bundled icons
 - Fully typed
 
-Read more on [ui.nuxtlabs.com](https://ui.nuxtlabs.com)
+Read more on [ui.nuxt.com](https://ui.nuxt.com)
 
 ## Installation
 
 ```bash
 # Using npm
-npm install @nuxthq/ui
+npm install @nuxt/ui
 
 # Using yarn
-yarn add @nuxthq/ui
+yarn add @nuxt/ui
 
 # Using pnpm
-pnpm add @nuxthq/ui
+pnpm add @nuxt/ui
 ```
 
 Then, register the module in your `nuxt.config.ts`:
@@ -41,24 +41,24 @@ Then, register the module in your `nuxt.config.ts`:
 ```js
 export default defineNuxtConfig({
   modules: [
-    '@nuxthq/ui'
+    '@nuxt/ui'
   ]
 })
 ```
 
-If you want latest updates, please use `@nuxthq/ui-edge` in your `package.json`:
+If you want latest updates, please use `@nuxt/ui-edge` in your `package.json`:
 
 ```json
 {
   "devDependencies": {
-    "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest"
+    "@nuxt/ui": "npm:@nuxt/ui-edge@latest"
   }
 }
 ```
 
 ## Documentation
 
-Visit https://ui.nuxtlabs.com to explore the documentation.
+Visit https://ui.nuxt.com to explore the documentation.
 
 ## Credits
 
@@ -72,17 +72,17 @@ Visit https://ui.nuxtlabs.com to explore the documentation.
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nuxtlabs/ui/blob/dev/LICENSE.md).
+Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md).
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/@nuxthq/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-version-href]: https://npmjs.com/package/@nuxthq/ui
+[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-href]: https://npmjs.com/package/@nuxt/ui
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/@nuxthq/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-downloads-href]: https://npmjs.com/package/@nuxthq/ui
+[npm-downloads-src]: https://img.shields.io/npm/dm/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-downloads-href]: https://npmjs.com/package/@nuxt/ui
 
-[license-src]: https://img.shields.io/github/license/nuxtlabs/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://github.com/nuxtlabs/ui/blob/main/LICENSE
+[license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
+[license-href]: https://github.com/nuxt/ui/blob/main/LICENSE
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com

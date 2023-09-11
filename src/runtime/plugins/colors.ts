@@ -1,21 +1,21 @@
 import { computed } from 'vue'
 import { hexToRgb } from '../utils'
-import { defineNuxtPlugin, useAppConfig } from '#imports'
+import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from '#imports'
 import colors from '#tailwind-config/theme/colors'
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(() => {
   const appConfig = useAppConfig()
-  const head = nuxtApp.vueApp._context.provides.usehead
+  const nuxtApp = useNuxtApp()
 
   const root = computed(() => {
     const primary: Record<string, string> | undefined = colors[appConfig.ui.primary]
     const gray: Record<string, string> | undefined = colors[appConfig.ui.gray]
 
     if (!primary) {
-      console.warn(`[@nuxthq/ui] Primary color '${appConfig.ui.primary}' not found in Tailwind config`)
+      console.warn(`[@nuxt/ui] Primary color '${appConfig.ui.primary}' not found in Tailwind config`)
     }
     if (!gray) {
-      console.warn(`[@nuxthq/ui] Gray color '${appConfig.ui.gray}' not found in Tailwind config`)
+      console.warn(`[@nuxt/ui] Gray color '${appConfig.ui.gray}' not found in Tailwind config`)
     }
 
     return `:root {
@@ -53,6 +53,5 @@ ${Object.entries(gray || colors.cool).map(([key, value]) => `--color-gray-${key}
     }]
   }
 
-  // Workaround for https://github.com/nuxt/nuxt/issues/22763
-  head.push(headData)
+  useHead(headData)
 })
