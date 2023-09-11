@@ -239,7 +239,7 @@ export default defineComponent({
           return
         }
 
-        selected.value.push(row)
+        attrs.onSelect ? onSelect(row) : selected.value.push(row)
       })
     }
 
