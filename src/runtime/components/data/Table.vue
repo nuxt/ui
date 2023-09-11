@@ -239,7 +239,8 @@ export default defineComponent({
           return
         }
 
-        attrs.onSelect ? onSelect(row) : selected.value.push(row)
+        // @ts-ignore
+        attrs.onSelect ? attrs.onSelect(row) : selected.value.push(row)
       })
     }
 
