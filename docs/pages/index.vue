@@ -179,7 +179,6 @@
 </template>
 
 <script setup lang="ts">
-import { pick } from '../../src/runtime/utils/lodash'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
 const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
@@ -192,7 +191,7 @@ const { data: module } = await useFetch<{
     username: string
   }[]
 }>('https://api.nuxt.com/modules/ui', {
-  transform: (module) => pick(module, ['stats', 'contributors'])
+  transform: ({ stats, contributors }) => ({ stats, contributors })
 })
 
 const source = ref('npm i @nuxt/ui')

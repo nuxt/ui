@@ -70,17 +70,5 @@ export function orderBy<T> (array: T[], key: keyof T, order: Order = 'asc'): T[]
   })
 }
 
-export function pick<T extends Record<string, any>, K extends keyof T> (
-  obj: T,
-  keys: K[]
-): Pick<T, K> {
-  const picked: Partial<Pick<T, K>> = {}
-  for (const key of keys) {
-    if (key in obj) {
-      picked[key] = obj[key]
-    }
-  }
-  return picked as Pick<T, K>
-}
 
 export { kebabCase, camelCase, upperFirst }
