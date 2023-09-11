@@ -10,7 +10,7 @@ const label = computed(() => date.value.toLocaleDateString('en-us', { weekday: '
     <UButton icon="i-heroicons-calendar-days-20-solid" :label="label" />
 
     <template #panel="{ close }">
-      <DatePicker v-model="date" @close="close" />
+      <LazyDatePicker v-model="date" @close="close" />
     </template>
   </UPopover>
 </template>
