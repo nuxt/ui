@@ -17,7 +17,7 @@ const { stop } = useIntersectionObserver(
   ([{ isIntersecting }], observerElement) => {
     sectionVisible.value = isIntersecting
   },
-  { threshold: 0.3 },
+  { threshold: 0.3 }
 )
 
 onMounted(() => animate())
@@ -30,28 +30,45 @@ watch(sectionVisible, () => {
 </script>
 
 <template>
-  <ULandingGrid class="lg:grid-cols-10 lg:gap-8" ref="section">
-    <div class="col-span-8 flex items-center animate-top" :ref="(el) => (refs[1] = el)">
+  <ULandingGrid ref="section" class="lg:grid-cols-10 lg:gap-8">
+    <div :ref="(el) => (refs[1] = el)" class="col-span-8 flex items-center animate-top">
       <RangeExample />
     </div>
 
-    <div class="col-span-2 row-span-2 flex items-center animate-right" :ref="(el) => (refs[2] = el)">
+    <div :ref="(el) => (refs[2] = el)" class="col-span-2 row-span-2 flex items-center animate-right">
       <RadioExample />
     </div>
 
-    <div class="col-span-2 animate-left z-[50]" :ref="(el) => (refs[4] = el)">
+    <div :ref="(el) => (refs[4] = el)" class="col-span-2 animate-left z-[50]">
       <DropdownExampleBasic :popper="{ placement: 'bottom-start', strategy: 'absolute' }" />
     </div>
 
-    <div class="col-span-6 flex flex-wrap items-center justify-between gap-1 animate-bottom"
-      :ref="(el) => (refs[3] = el)">
+    <div
+      :ref="(el) => (refs[3] = el)"
+      class="col-span-6 flex flex-wrap items-center justify-between gap-1 animate-bottom"
+    >
       <UAvatarGroup :max="2">
-        <UAvatar src="https://ipx.nuxt.com/s_32x32/gh_avatar/benjamincanac"
-          srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/benjamincanac 2x" alt="benjamincanac" width="40" height="40" />
-        <UAvatar src="https://ipx.nuxt.com/s_32x32/gh_avatar/Atinux"
-          srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/Atinux 2x" alt="Atinux" width="40" height="40" />
-        <UAvatar src="https://ipx.nuxt.com/s_32x32/gh_avatar/smarroufin"
-          srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/smarroufin 2x" alt="smarroufin" width="40" height="40" />
+        <UAvatar
+          src="https://ipx.nuxt.com/s_32x32/gh_avatar/benjamincanac"
+          srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/benjamincanac 2x"
+          alt="benjamincanac"
+          width="40"
+          height="40"
+        />
+        <UAvatar
+          src="https://ipx.nuxt.com/s_32x32/gh_avatar/Atinux"
+          srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/Atinux 2x"
+          alt="Atinux"
+          width="40"
+          height="40"
+        />
+        <UAvatar
+          src="https://ipx.nuxt.com/s_32x32/gh_avatar/smarroufin"
+          srcset="https://ipx.nuxt.com/s_64x64/gh_avatar/smarroufin 2x"
+          alt="smarroufin"
+          width="40"
+          height="40"
+        />
       </UAvatarGroup>
 
       <UButton label="Button" icon="i-heroicons-pencil-square" />
@@ -63,7 +80,7 @@ watch(sectionVisible, () => {
       <PaginationExampleBasic />
     </div>
 
-    <div class="col-span-3 row-span-8 gap-6 flex flex-col justify-between animate-left" :ref="(el) => (refs[5] = el)">
+    <div :ref="(el) => (refs[5] = el)" class="col-span-3 row-span-8 gap-6 flex flex-col justify-between animate-left">
       <UNotification :id="1" title="Notification" description="This is a notification!" icon="i-heroicons-command-line" />
 
       <TabsExampleItemCustomSlot />
@@ -79,14 +96,16 @@ watch(sectionVisible, () => {
       </UCard>
     </div>
 
-    <div class="col-span-5 row-span-2 flex flex-col animate-bottom" :ref="(el) => (refs[6] = el)">
-      <UCard :ui="{ body: { base: 'flex-1 flex flex-col overflow-y-auto', padding: '' } }"
-        class="col-span-4 row-span-6 flex-1 flex flex-col">
+    <div :ref="(el) => (refs[6] = el)" class="col-span-5 row-span-2 flex flex-col animate-bottom">
+      <UCard
+        :ui="{ body: { base: 'flex-1 flex flex-col overflow-y-auto', padding: '' } }"
+        class="col-span-4 row-span-6 flex-1 flex flex-col"
+      >
         <CommandPaletteExampleGroups />
       </UCard>
     </div>
 
-    <div class="col-span-2 row-span-2 gap-6 flex flex-col animate-right " :ref="(el) => (refs[7] = el)">
+    <div :ref="(el) => (refs[7] = el)" class="col-span-2 row-span-2 gap-6 flex flex-col animate-right ">
       <CheckboxExample />
 
       <InputExampleClearable />
@@ -100,7 +119,7 @@ watch(sectionVisible, () => {
       </UCard>
     </div>
 
-    <div class="col-span-7 row-span-6 animate-bottom bg-gray-300" :ref="(el) => (refs[8] = el)">
+    <div :ref="(el) => (refs[8] = el)" class="col-span-7 row-span-6 animate-bottom bg-gray-300">
       <UCard :ui="{ body: { padding: '' } }">
         <TableExampleClickable :ui="{ divide: 'divide-gray-200 dark:divide-gray-800' }" />
       </UCard>
