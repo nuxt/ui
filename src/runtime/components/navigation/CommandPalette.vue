@@ -16,6 +16,7 @@
         :value="query"
         :class="[ui.input.base, ui.input.size, ui.input.height, ui.input.padding, icon && ui.input.icon.padding]"
         :placeholder="placeholder"
+        :aria-label="placeholder"
         autocomplete="off"
         @change="query = $event.target.value"
       />
