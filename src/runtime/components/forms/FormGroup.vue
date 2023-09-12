@@ -103,7 +103,7 @@ export default defineComponent({
       error,
       labelFor,
       name: computed(() => props.name),
-      size: computed(() => props.size),
+      size: computed(() => props.size)
     })
 
     return {
