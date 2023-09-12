@@ -19,6 +19,7 @@
           autocomplete="off"
           icon="i-heroicons-command-line"
           input-class="select-none"
+          aria-label="Install @nuxt/ui"
           size="lg"
           :ui="{ base: 'disabled:cursor-default', icon: { trailing: { pointer: '' } } }"
         >
@@ -149,7 +150,7 @@
                   height="40"
                   size="md"
                 >
-                  <NuxtLink :to="`https://github.com/${contributor.username}`" target="_blank" class="focus:outline-none" tabindex="-1">
+                  <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
                     <span class="absolute inset-0" aria-hidden="true" />
                   </NuxtLink>
                 </UAvatar>
@@ -179,7 +180,6 @@
 </template>
 
 <script setup lang="ts">
-import { pick } from 'lodash-es'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
 const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
@@ -192,7 +192,7 @@ const { data: module } = await useFetch<{
     username: string
   }[]
 }>('https://api.nuxt.com/modules/ui', {
-  transform: (module) => pick(module, ['stats', 'contributors'])
+  transform: ({ stats, contributors }) => ({ stats, contributors })
 })
 
 const source = ref('npm i @nuxt/ui')

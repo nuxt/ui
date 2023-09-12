@@ -205,7 +205,7 @@ function renderObject (obj: any) {
   return obj
 }
 
-const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify(componentProps)}`, () => transformContent('content:_markdown.md', code.value, {
+const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`, () => transformContent('content:_markdown.md', code.value, {
   highlight: {
     theme: {
       light: 'material-theme-lighter',

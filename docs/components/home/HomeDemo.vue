@@ -2,7 +2,7 @@
   <Transition appear name="fade">
     <ULandingGrid class="lg:grid-cols-10 lg:gap-8">
       <div class="col-span-8 flex items-center">
-        <RangeExample />
+        <RangeExample aria-label="Range" />
       </div>
 
       <div class="col-span-2 row-span-2 flex items-center">
