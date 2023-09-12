@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperClass" v-bind="attrs">
     <div v-if="label" :class="[ui.label.wrapper, size]">
-      <label :for="name" :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</label>
+      <label :for="labelFor" :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</label>
       <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
     </div>
 
@@ -33,6 +33,8 @@ import { useAppConfig } from '#imports'
 import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()
+
+let increment = 0
 
 export default defineComponent({
   inheritAttrs: false,
@@ -95,13 +97,17 @@ export default defineComponent({
 
     const size = computed(() => ui.value.size[props.size ?? appConfig.ui.input.default.size])
 
+    const labelFor = `label-for-${increment = increment < 1000000 ? increment + 1 : 0}`
+
     provide('form-group', {
       error,
+      labelFor,
       name: computed(() => props.name),
-      size: computed(() => props.size)
+      size: computed(() => props.size),
     })
 
     return {
+      labelFor,
       attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,

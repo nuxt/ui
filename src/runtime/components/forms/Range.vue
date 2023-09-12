@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperClass">
     <input
-      :id="name"
+      :id="labelFor"
       ref="input"
       v-model.number="value"
       :name="name"
@@ -91,7 +91,7 @@ export default defineComponent({
     const { emitFormChange, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
-    const name = computed(() => formGroup?.name?.value ?? props.name)
+    const labelFor = formGroup?.labelFor
 
     const value = computed({
       get () {
@@ -163,11 +163,10 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      labelFor,
+      attrs: computed(() => omit(attrs, ['class', labelFor ? 'id' : null ])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      // eslint-disable-next-line vue/no-dupe-keys
-      name,
       value,
       wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys

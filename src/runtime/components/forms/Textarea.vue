@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperClass">
     <textarea
-      :id="name"
+      :id="labelFor"
       ref="textarea"
       :value="modelValue"
       :name="name"
@@ -120,7 +120,7 @@ export default defineComponent({
     const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
-    const name = computed(() => formGroup?.name?.value ?? props.name)
+    const labelFor = formGroup?.labelFor
 
     const autoFocus = () => {
       if (props.autofocus) {
@@ -196,11 +196,8 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
-      // eslint-disable-next-line vue/no-dupe-keys
-      name,
+      labelFor,
+      attrs: computed(() => omit(attrs, ['class', labelFor ? 'id' : null ])),
       textarea,
       wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys

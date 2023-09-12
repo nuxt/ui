@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperClass">
     <select
-      :id="name"
+      :id="labelFor"
       :name="name"
       :value="modelValue"
       :required="required"
@@ -181,7 +181,7 @@ export default defineComponent({
     const { emitFormChange, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
-    const name = computed(() => formGroup?.name?.value ?? props.name)
+    const labelFor = formGroup?.labelFor
 
 
     const onInput = (event: InputEvent) => {
@@ -320,11 +320,10 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: computed(() => omit(attrs, ['class', labelFor ? 'id' : null ])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      // eslint-disable-next-line vue/no-dupe-keys
-      name,
+      labelFor,
       normalizedOptionsWithPlaceholder,
       normalizedValue,
       isLeading,

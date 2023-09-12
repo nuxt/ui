@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperClass">
     <input
-      :id="name"
+      :id="labelFor"
       ref="input"
       :name="name"
       :value="modelValue"
@@ -155,7 +155,7 @@ export default defineComponent({
     const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
-    const name = computed(() => formGroup?.name?.value ?? props.name)
+    const labelFor = formGroup?.labelFor
 
     const input = ref<HTMLInputElement | null>(null)
 
@@ -257,11 +257,10 @@ export default defineComponent({
     })
 
     return {
+      labelFor,
       attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      // eslint-disable-next-line vue/no-dupe-keys
-      name,
       input,
       isLeading,
       isTrailing,
