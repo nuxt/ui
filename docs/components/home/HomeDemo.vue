@@ -12,9 +12,9 @@ const animate = () => {
   })
 }
 
-const { stop } = useIntersectionObserver(
+useIntersectionObserver(
   section,
-  ([{ isIntersecting }], observerElement) => {
+  ([{ isIntersecting }]) => {
     sectionVisible.value = isIntersecting
   },
   { threshold: 0.3 }
@@ -81,7 +81,7 @@ watch(sectionVisible, () => {
     </div>
 
     <div :ref="(el) => (refs[5] = el)" class="col-span-3 row-span-8 gap-6 flex flex-col justify-between animate-left">
-      <UNotification :id="1" title="Notification" description="This is a notification!" icon="i-heroicons-command-line" />
+      <UNotification :id="1" title="Notification" description="This is a notification!" icon="i-heroicons-command-line" :ui="{ shadow: 'shadow' }" />
 
       <TabsExampleItemCustomSlot />
 
@@ -119,7 +119,7 @@ watch(sectionVisible, () => {
       </UCard>
     </div>
 
-    <div :ref="(el) => (refs[8] = el)" class="col-span-7 row-span-6 animate-bottom bg-gray-300">
+    <div :ref="(el) => (refs[8] = el)" class="col-span-7 row-span-6 animate-bottom">
       <UCard :ui="{ body: { padding: '' } }">
         <TableExampleClickable :ui="{ divide: 'divide-gray-200 dark:divide-gray-800' }" />
       </UCard>
