@@ -25,7 +25,7 @@
           <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="action.click" />
         </div>
 
-        <UButton v-if="closeButton" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="$emit('close')" />
+        <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="$emit('close')" />
       </div>
     </div>
   </div>

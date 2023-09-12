@@ -20,13 +20,7 @@
         @change="query = $event.target.value"
       />
 
-      <UButton
-        v-if="closeButton"
-        v-bind="{ ...ui.default.closeButton, ...closeButton }"
-        :class="ui.input.closeButton"
-        aria-label="Close"
-        @click="onClear"
-      />
+      <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" :class="ui.input.closeButton" @click="onClear" />
     </div>
 
     <HComboboxOptions
