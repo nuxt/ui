@@ -1,31 +1,32 @@
 <script setup lang="ts">
 const refs = ref([])
 const section = ref()
-const sectionVisible = ref(false)
 
-const animate = () => {
+const { stop } = useIntersectionObserver(
+  section,
+  ([{ isIntersecting }]) => {
+    if (!isIntersecting) {
+      return
+    }
+
+    refs.value.forEach(element => element.style.animationPlayState = 'running')
+
+    stop()
+  },
+  { threshold: 0.3 }
+)
+
+onMounted(() => {
   refs.value.forEach((element) => {
+    if (!element) {
+      return
+    }
+
     element.style.animationFillMode = 'forwards'
     element.style.transformOrigin = 'center'
     element.style.animationPlayState = 'paused'
     element.style.animationDuration = '1s'
   })
-}
-
-useIntersectionObserver(
-  section,
-  ([{ isIntersecting }]) => {
-    sectionVisible.value = isIntersecting
-  },
-  { threshold: 0.3 }
-)
-
-onMounted(() => animate())
-
-watch(sectionVisible, () => {
-  if (sectionVisible.value) {
-    refs.value.map(element => element.style.animationPlayState = 'running')
-  }
 })
 </script>
 
