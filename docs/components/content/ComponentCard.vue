@@ -53,6 +53,8 @@
 <script setup lang="ts">
 // @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
+// @ts-ignore
+import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
 
 // eslint-disable-next-line vue/no-dupe-keys
 const props = defineProps({
@@ -205,12 +207,26 @@ function renderObject (obj: any) {
   return obj
 }
 
+const shikiHighlighter = useShikiHighlighter({})
+const codeHighlighter = async (code: string, lang: string, theme: any, highlights: any) => {
+  const styleMap = {}
+  const { tree, className } = await shikiHighlighter.getHighlightedAST(code, lang, theme, { styleMap, highlights })
+  return {
+    tree,
+    className,
+    style: shikiHighlighter.generateStyles(styleMap),
+    styleMap
+  }
+}
 const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`, () => transformContent('content:_markdown.md', code.value, {
-  highlight: {
-    theme: {
-      light: 'material-theme-lighter',
-      default: 'material-theme',
-      dark: 'material-theme-palenight'
+  markdown: {
+    highlight: {
+      highlighter: codeHighlighter,
+      theme: {
+        light: 'material-theme-lighter',
+        default: 'material-theme',
+        dark: 'material-theme-palenight'
+      }
     }
   }
 }), { watch: [code] })
