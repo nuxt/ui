@@ -81,7 +81,15 @@ watch(sectionVisible, () => {
     </div>
 
     <div :ref="(el) => (refs[5] = el)" class="col-span-3 row-span-8 gap-6 flex flex-col justify-between animate-left">
-      <UNotification :id="1" title="Notification" description="This is a notification!" icon="i-heroicons-command-line" :ui="{ shadow: 'shadow' }" />
+      <UNotification
+        :id="1"
+        title="Notification"
+        description="This is a notification!"
+        icon="i-heroicons-command-line"
+        :ui="{ shadow: 'shadow' }"
+        :close-button="null"
+        :timeout="30000"
+      />
 
       <TabsExampleItemCustomSlot />
 
