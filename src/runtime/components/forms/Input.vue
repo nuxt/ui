@@ -258,7 +258,7 @@ export default defineComponent({
 
     return {
       labelFor,
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: computed(() => omit(attrs, ['class', labelFor ? 'id' : null ])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       input,
