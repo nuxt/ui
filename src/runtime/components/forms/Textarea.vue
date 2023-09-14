@@ -20,7 +20,7 @@
 <script lang="ts">
 import { ref, computed, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from 'lodash-es'
+import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { defuTwMerge } from '../../utils'
 import { useFormGroup } from '../../composables/useFormGroup'

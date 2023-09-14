@@ -32,7 +32,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from 'lodash-es'
+import { omit } from '../../utils/lodash'
 import { twMerge } from 'tailwind-merge'
 import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { defuTwMerge } from '../../utils'

@@ -69,9 +69,10 @@
 <script lang="ts">
 import { ref, computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
-import { omit, capitalize, orderBy, get } from 'lodash-es'
+import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { twMerge } from 'tailwind-merge'
+import { omit, get } from '../../utils/lodash'
 import { defuTwMerge } from '../../utils'
 import UButton from '../elements/Button.vue'
 import UIcon from '../elements/Icon.vue'
@@ -158,7 +159,7 @@ export default defineComponent({
 
     const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
-    const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: capitalize(key), sortable: false })))
+    const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: upperFirst(key), sortable: false })))
 
     const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
 
@@ -169,7 +170,20 @@ export default defineComponent({
 
       const { column, direction } = sort.value
 
-      return orderBy(props.rows, column, direction)
+      return props.rows.slice().sort((a, b) => {
+        const aValue = a[column]
+        const bValue = b[column]
+
+        if (aValue === bValue) {
+          return 0
+        }
+
+        if (direction === 'asc') {
+          return aValue < bValue ? -1 : 1
+        } else {
+          return aValue > bValue ? -1 : 1
+        }
+      })
     })
 
     const selected = computed({

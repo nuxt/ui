@@ -1,6 +1,6 @@
 import { h, cloneVNode, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from 'lodash-es'
+import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { defuTwMerge, getSlotsChildren } from '../../utils'
 import { useAppConfig } from '#imports'
