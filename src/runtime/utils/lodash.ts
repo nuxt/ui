@@ -36,22 +36,3 @@ export function get (object: Record<string, any>, path: Path, defaultValue?: any
 
   return result !== undefined ? result : defaultValue
 }
-
-type Order = 'asc' | 'desc';
-
-export function orderBy<T> (array: T[], key: keyof T, order: Order = 'asc'): T[] {
-  return array.slice().sort((a, b) => {
-    const aValue = a[key]
-    const bValue = b[key]
-
-    if (aValue === bValue) {
-      return 0
-    }
-
-    if (order === 'asc') {
-      return aValue < bValue ? -1 : 1
-    } else {
-      return aValue > bValue ? -1 : 1
-    }
-  })
-}

@@ -72,7 +72,7 @@ import type { PropType } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { twMerge } from 'tailwind-merge'
-import { omit, orderBy, get } from '../../utils/lodash'
+import { omit, get } from '../../utils/lodash'
 import { defuTwMerge } from '../../utils'
 import UButton from '../elements/Button.vue'
 import UIcon from '../elements/Icon.vue'
@@ -170,7 +170,20 @@ export default defineComponent({
 
       const { column, direction } = sort.value
 
-      return orderBy(props.rows, column, direction)
+      return props.rows.slice().sort((a, b) => {
+        const aValue = a[column]
+        const bValue = b[column]
+
+        if (aValue === bValue) {
+          return 0
+        }
+
+        if (direction === 'asc') {
+          return aValue < bValue ? -1 : 1
+        } else {
+          return aValue > bValue ? -1 : 1
+        }
+      })
     })
 
     const selected = computed({
