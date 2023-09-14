@@ -37,18 +37,6 @@ export function get (object: Record<string, any>, path: Path, defaultValue?: any
   return result !== undefined ? result : defaultValue
 }
 
-export function omitBy<T> (
-  obj: Record<string, T>,
-  predicate: (value: T, key: string) => boolean
-): Record<string, T> {
-  return Object.keys(obj).reduce((acc, key) => {
-    if (!predicate(obj[key], key)) {
-      acc[key] = obj[key]
-    }
-    return acc
-  }, {} as Record<string, T>)
-}
-
 type Order = 'asc' | 'desc';
 
 export function orderBy<T> (array: T[], key: keyof T, order: Order = 'asc'): T[] {
