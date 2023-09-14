@@ -55,6 +55,7 @@
 import { transformContent } from '@nuxt/content/transformers'
 // @ts-ignore
 import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
+import { upperFirst, camelCase, kebabCase } from 'scule'
 
 // eslint-disable-next-line vue/no-dupe-keys
 const props = defineProps({
@@ -116,8 +117,8 @@ const appConfig = useAppConfig()
 const route = useRoute()
 // eslint-disable-next-line vue/no-dupe-keys
 const slug = props.slug || route.params.slug[route.params.slug.length - 1]
-const camelName = useCamelCase(slug)
-const name = `U${useUpperFirst(camelName)}`
+const camelName = camelCase(slug)
+const name = `U${upperFirst(camelName)}`
 
 const meta = await fetchComponentMeta(name)
 
@@ -140,8 +141,8 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   }
 
   const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
-  const dottedKey = useKebabCase(key).replaceAll('-', '.')
-  const keys = useGet(ui.value, dottedKey, {})
+  const dottedKey = kebabCase(key).replaceAll('-', '.')
+  const keys = ui.value[dottedKey] ?? {}
   let options = typeof keys === 'object' && Object.keys(keys)
   if (key.toLowerCase().endsWith('color')) {
     // @ts-ignore
@@ -151,7 +152,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   return {
     type: prop?.type || 'string',
     name: key,
-    label: key === 'modelValue' ? 'value' : useCamelCase(key),
+    label: key === 'modelValue' ? 'value' : camelCase(key),
     options
   }
 }).filter(Boolean))
@@ -165,7 +166,7 @@ const code = computed(() => {
       continue
     }
 
-    code += ` ${(typeof value === 'boolean' && value !== true) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'value' : useKebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
+    code += ` ${(typeof value === 'boolean' && value !== true) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'value' : kebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
   }
 
   if (props.slots) {

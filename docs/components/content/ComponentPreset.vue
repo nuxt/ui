@@ -5,6 +5,7 @@
 <script setup lang="ts">
 // @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
+import { upperFirst, camelCase } from 'scule'
 
 const props = defineProps({
   slug: {
@@ -17,8 +18,8 @@ const appConfig = useAppConfig()
 const route = useRoute()
 // eslint-disable-next-line vue/no-dupe-keys
 const slug = props.slug || route.params.slug[route.params.slug.length - 1]
-const camelName = useCamelCase(slug)
-const name = `U${useUpperFirst(camelName)}`
+const camelName = camelCase(slug)
+const name = `U${upperFirst(camelName)}`
 
 const preset = appConfig.ui[camelName]
 

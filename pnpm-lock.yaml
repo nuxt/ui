@@ -136,8 +136,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(eslint@8.49.0)
       '@nuxthq/elements':
-        specifier: npm:@nuxthq/elements-edge@0.0.1-28241821.23b95ff
-        version: /@nuxthq/elements-edge@0.0.1-28241821.23b95ff(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
+        specifier: npm:@nuxthq/elements-edge@0.0.1-28245159.d523b38
+        version: /@nuxthq/elements-edge@0.0.1-28245159.d523b38(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
       '@nuxthq/studio':
         specifier: ^0.14.1
         version: 0.14.1(rollup@3.28.1)
@@ -165,9 +165,6 @@ importers:
       nuxt-component-meta:
         specifier: ^0.5.3
         version: 0.5.3(patch_hash=ybky4hlfy36ww3cfjktd7bj6kq)(rollup@3.28.1)
-      nuxt-lodash:
-        specifier: ^2.5.0
-        version: 2.5.0(rollup@3.28.1)
       nuxt-og-image:
         specifier: ^2.0.25
         version: 2.0.25(rollup@3.28.1)
@@ -1500,6 +1497,33 @@ packages:
       - rollup
       - supports-color
 
+  /@nuxt/kit@3.7.3(rollup@3.28.1):
+    resolution: {integrity: sha512-bhP02i6CNti15Z4ix3LpR3fd1ANtTcpfS3CDSaCja24hDt3UxIasyp52mqD9LRC+OxrUVHJziB18EwUtS6RLDQ==}
+    engines: {node: ^14.18.0 || >=16.10.0}
+    dependencies:
+      '@nuxt/schema': 3.7.3(rollup@3.28.1)
+      c12: 1.4.2
+      consola: 3.2.3
+      defu: 6.1.2
+      globby: 13.2.2
+      hash-sum: 2.0.0
+      ignore: 5.2.4
+      jiti: 1.20.0
+      knitwork: 1.0.0
+      mlly: 1.4.2
+      pathe: 1.1.1
+      pkg-types: 1.0.3
+      scule: 1.0.0
+      semver: 7.5.4
+      ufo: 1.3.0
+      unctx: 2.3.1
+      unimport: 3.3.0(rollup@3.28.1)
+      untyped: 1.4.0
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
   /@nuxt/module-builder@0.5.1(@nuxt/kit@3.7.1)(nuxi@3.7.3)(typescript@5.2.2):
     resolution: {integrity: sha512-O39UrOFbNgL27urwDqeMgXeYiNIUvp73nsmtt7jm9JDcMVIWykuUzyBPYtHif7gq5ElzIjjmDw9zdRGgyMzo+w==}
     hasBin: true
@@ -1571,6 +1595,25 @@ packages:
       - rollup
       - supports-color
 
+  /@nuxt/schema@3.7.3(rollup@3.28.1):
+    resolution: {integrity: sha512-Uqe3Z9RnAROzv5owQo//PztD9d4csKK6ulwQO1hIAinCh34X7z2zrv9lhm14hlRYU1n7ISEi4S7UeHgL/r8d8A==}
+    engines: {node: ^14.18.0 || >=16.10.0}
+    dependencies:
+      '@nuxt/ui-templates': 1.3.1
+      defu: 6.1.2
+      hookable: 5.5.3
+      pathe: 1.1.1
+      pkg-types: 1.0.3
+      postcss-import-resolver: 2.0.0
+      std-env: 3.4.3
+      ufo: 1.3.0
+      unimport: 3.3.0(rollup@3.28.1)
+      untyped: 1.4.0
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
   /@nuxt/telemetry@2.4.1(rollup@3.28.1):
     resolution: {integrity: sha512-Cj+4sXjO5pZNW2sX7Y+djYpf4pZwgYF3rV/YHLWIOq9nAjo2UcDXjh1z7qnhkoUkvJN3lHnvhnCNhfAioe6k/A==}
     hasBin: true
@@ -1603,14 +1646,14 @@ packages:
   /@nuxt/ui-templates@1.3.1:
     resolution: {integrity: sha512-5gc02Pu1HycOVUWJ8aYsWeeXcSTPe8iX8+KIrhyEtEoOSkY0eMBuo0ssljB8wALuEmepv31DlYe5gpiRwkjESA==}
 
-  /@nuxt/ui@2.8.0(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-8vJM2gKikIq9qKuYZFozEBtD0c/loq+G+IMcBTeO+khQ+ipdVxARFfNUDeTmknEQ+aT7RnZshpqNv+W/jTiJBg==}
+  /@nuxt/ui@2.8.1(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-SVOo1PTroStUyv8ZcXTdDVgkV9U2Q0dtq7nQDF7NNZkvyH96Zbrbdk11wr1uHKuQdTcaEAq50OGleD+t6ceWEQ==}
     engines: {node: '>=v16.20.2'}
     dependencies:
       '@egoist/tailwindcss-icons': 1.1.0(tailwindcss@3.3.3)
       '@headlessui/vue': 1.7.16(vue@3.3.4)
       '@iconify-json/heroicons': 1.1.12
-      '@nuxt/kit': 3.7.1(rollup@3.28.1)
+      '@nuxt/kit': 3.7.3(rollup@3.28.1)
       '@nuxtjs/color-mode': 3.3.0(rollup@3.28.1)
       '@nuxtjs/tailwindcss': 6.8.0(rollup@3.28.1)(webpack@5.88.2)
       '@popperjs/core': 2.11.8
@@ -1708,12 +1751,11 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxthq/elements-edge@0.0.1-28241821.23b95ff(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-E2ZneDYwPtwuwluOqvVCb9AhgxH414wSefKsnGA43kfBaeIRuDIE9LHmeZUgq8bFbIVjkcKOVT7XFjcoUJ2EUg==}
+  /@nuxthq/elements-edge@0.0.1-28245159.d523b38(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-/A7GmZClyhbGeckwB4aPYtkoLDLHS4+jkyF/zM53jFHqLGziNrAvnog10zFgr3XSIdXfTuUE6qA/3bLjV/WhEw==}
     dependencies:
-      '@nuxt/ui': 2.8.0(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
+      '@nuxt/ui': 2.8.1(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
       '@vueuse/core': 10.4.1(vue@3.3.4)
-      lodash-es: 4.17.21
       ofetch: 1.3.3
       pathe: 1.1.1
       tailwind-merge: 1.14.0
@@ -1791,7 +1833,7 @@ packages:
   /@nuxtjs/mdc@0.1.6(rollup@3.28.1):
     resolution: {integrity: sha512-zJuq5KwU3d1Dlh1sudnpVtIFoap09ZrvO9IAM1iP4tipzSRkgHFbCOTMEmK17Rx7KSdmvBbFP+/4MBaJdj1NqQ==}
     dependencies:
-      '@nuxt/kit': 3.7.1(rollup@3.28.1)
+      '@nuxt/kit': 3.7.3(rollup@3.28.1)
       '@types/hast': 3.0.0
       '@types/mdast': 4.0.0
       '@vue/compiler-core': 3.3.4
@@ -2667,12 +2709,6 @@ packages:
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
     dependencies:
       '@types/node': 20.5.7
-    dev: true
-
-  /@types/lodash-es@4.17.9:
-    resolution: {integrity: sha512-ZTcmhiI3NNU7dEvWLZJkzG6ao49zOIjEgIE0RgV7wbPxU0f2xT3VSAHw2gmst8swH6V0YkLRGp4qPlX/6I90MQ==}
-    dependencies:
-      '@types/lodash': 4.14.197
     dev: true
 
   /@types/lodash@4.14.197:
@@ -7181,6 +7217,11 @@ packages:
     resolution: {integrity: sha512-5eEbBDQT/jF1xg6l36P+mWGGoH9Spuy0PCdSr2dtWRDGC6ph/w9ZCL4lmESW8f8F7MwT3XKescfP0wnZWAKL9w==}
     hasBin: true
 
+  /jiti@1.20.0:
+    resolution: {integrity: sha512-3TV69ZbrvV6U5DfQimop50jE9Dl6J8O1ja1dvBbMba/sZ3YBEQqJ2VZRoQPVnhlzjNtU1vaXRZVrVjU4qtm8yA==}
+    hasBin: true
+    dev: true
+
   /joi@17.10.1:
     resolution: {integrity: sha512-vIiDxQKmRidUVp8KngT8MZSOcmRVm2zV7jbMjNYWuHcJWI0bUck3nRTGQjhpPlQenIQIBC5Vp9AhcnHbWQqafw==}
     dependencies:
@@ -8977,17 +9018,6 @@ packages:
       jiti: 1.19.3
       pathe: 1.1.1
       untyped: 1.4.0
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
-  /nuxt-lodash@2.5.0(rollup@3.28.1):
-    resolution: {integrity: sha512-nd7YrKzJH7kqMEwyAlwk0T8Fi/G1heAaWJENFm6SUIwYgR6AOigp/ryLya+JBEP+ZmGrJbIHq+mhWNdvKsLK7g==}
-    dependencies:
-      '@nuxt/kit': 3.7.1(rollup@3.28.1)
-      '@types/lodash-es': 4.17.9
-      lodash-es: 4.17.21
     transitivePeerDependencies:
       - rollup
       - supports-color
