@@ -56,7 +56,7 @@ const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 // Head
 useHead({
   meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [

@@ -8,7 +8,7 @@
 
       <p v-if="description" :class="[ui.description, size]">{{ description }}</p>
 
-      <div :class="[label ? ui.container : '']">
+      <div :class="[label ? ui.container : '']" @click="$event.preventDefault()">
         <slot v-bind="{ error }" />
 
         <p v-if="error && typeof error !== 'boolean'" :class="[ui.error, size]">{{ error }}</p>
@@ -100,7 +100,7 @@ export default defineComponent({
     })
 
     return {
-      attrs: omit(attrs, ['class']),
+      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       wrapperClass,

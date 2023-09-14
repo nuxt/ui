@@ -143,7 +143,7 @@ const { data: todos, pending } = await useLazyAsyncData('todos', () => $fetch<{
           <UButton
             icon="i-heroicons-chevron-down"
             trailing
-            variant="soft"
+            color="gray"
             size="xs"
           >
             Mark as
@@ -153,7 +153,7 @@ const { data: todos, pending } = await useLazyAsyncData('todos', () => $fetch<{
         <USelectMenu v-model="selectedColumns" :options="columns" multiple>
           <UButton
             icon="i-heroicons-view-columns"
-            variant="soft"
+            color="gray"
             size="xs"
           >
             Columns
@@ -162,8 +162,7 @@ const { data: todos, pending } = await useLazyAsyncData('todos', () => $fetch<{
 
         <UButton
           icon="i-heroicons-funnel"
-          variant="soft"
-          color="red"
+          color="gray"
           size="xs"
           :disabled="search === '' && selectedStatus.length === 0"
           @click="resetFilters"
@@ -181,6 +180,8 @@ const { data: todos, pending } = await useLazyAsyncData('todos', () => $fetch<{
       :loading="pending"
       sort-asc-icon="i-heroicons-arrow-up"
       sort-desc-icon="i-heroicons-arrow-down"
+      class="w-full"
+      :ui="{ td: { base: 'max-w-[0] truncate' } }"
       @select="select"
     >
       <template #completed-data="{ row }">
@@ -212,7 +213,7 @@ const { data: todos, pending } = await useLazyAsyncData('todos', () => $fetch<{
 
     <!-- Number of rows & Pagination -->
     <template #footer>
-      <div class="flex justify-between items-center">
+      <div class="flex flex-wrap justify-between items-center">
         <div>
           <span class="text-sm leading-5">
             Showing

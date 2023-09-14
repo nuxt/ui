@@ -8,13 +8,19 @@
     >
       <div
         ref="el"
-        class="absolute inset-0 grid justify-center auto-rows-[var(--cell)] -space-y-px"
+        class="absolute inset-0 grid justify-center auto-rows-[--cell] -space-y-px"
       >
         <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="grid grid-flow-col auto-cols-[--cell] flex-1 -space-x-px">
-          <div v-for="(cell, cellIndex) in row" :key="cellIndex" class="transition-[background] duration-1000 border border-primary-200/50 dark:border-primary-900/25 bg-opacity-10 hover:bg-opacity-20 dark:bg-opacity-5 dark:hover:bg-opacity-10" :class="[cell && `bg-primary-500 dark:bg-primary-400 cursor-pointer`]" @click="removeCell(rowIndex, cellIndex)" />
+          <div
+            v-for="(cell, cellIndex) in row"
+            :key="cellIndex"
+            class="relative border border-primary-200/50 dark:border-primary-900/25"
+          >
+            <div class="absolute inset-0 bg-primary-500/10 hover:bg-primary-500/20 dark:bg-primary-400/5 dark:hover:bg-primary-400/10 opacity-0 transition-opacity will-change-[opacity] duration-1000" :class="[cell && 'opacity-100 cursor-pointer']" @click="cell && removeCell(rowIndex, cellIndex)" />
+          </div>
         </div>
 
-        <div class="absolute top-[calc((var(--cell)*var(--rows))+1px)] inset-x-0 h-[calc(var(--cell)*2)] bg-gradient-to-t from-white dark:from-gray-900" />
+        <div class="absolute top-[calc((var(--cell)*var(--rows))+1px)] inset-x-0 h-[calc(var(--cell)*2)] bg-gradient-to-t from-white dark:from-gray-900 pointer-events-none" />
       </div>
     </div>
   </Transition>
@@ -28,12 +34,7 @@ const grid = ref([])
 const rows = ref(0)
 const cols = ref(0)
 
-const colors = useAppConfig()?.ui.colors
 const { width, height } = useElementSize(el)
-
-function getRandomColor () {
-  return colors[Math.floor(Math.random() * (colors.length - 1))]
-}
 
 function createGrid () {
   grid.value = []
@@ -44,10 +45,9 @@ function createGrid () {
 }
 
 function createNewCell () {
-  const color = getRandomColor()
   const x = Math.floor(Math.random() * cols.value)
 
-  grid.value[0][x] = color
+  grid.value[0][x] = true
 }
 
 function moveCellsDown () {
