@@ -6,7 +6,7 @@ hero:
   description: 'Nuxt UI simplifies the creation of stunning and responsive web applications with its<br class="hidden lg:block"> comprehensive collection of fully styled and customizable UI components designed for Nuxt.'
 sections:
   - slot: demo
-    class: 'hidden lg:block dark:bg-gradient-to-b from-gray-900 to-gray-950/50 !pt-0'
+    class: 'hidden lg:block dark:bg-gradient-to-b from-gray-900 to-gray-950/50 !pt-12'
   - title: Everything you expect from a<br class="hidden lg:block"> <span class="text-primary">UI component library</span>
     slot: features
     class: 'dark:bg-gradient-to-b from-gray-900 to-gray-950/50 dark:lg:bg-none dark:lg:bg-gray-950/50'

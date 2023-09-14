@@ -4,7 +4,6 @@
       <label :for="labelFor" :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</label>
       <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
     </div>
-
     <p v-if="description" :class="[ui.description, size]">
       {{ description }}
     </p>

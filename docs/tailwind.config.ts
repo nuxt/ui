@@ -4,7 +4,8 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 export default <Partial<Config>>{
   content: {
     files: [
-      'content/**/*.yml'
+      './docs/content/**/*.md',
+      './docs/content/**/*.yml'
     ]
   },
   theme: {

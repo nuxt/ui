@@ -12,14 +12,12 @@
       </NuxtLink>
     </template>
 
-    <template v-if="$route.path !== '/'" #center>
-      <UDocsSearchButton class="ml-1.5 hidden lg:flex lg:w-64 xl:w-96" />
-    </template>
-
     <template #right>
       <ColorPicker />
 
-      <UDocsSearchButton :class="[$route.path !== '/' && 'lg:hidden']" icon-only />
+      <UTooltip text="Search" :shortcuts="[metaSymbol, 'K']">
+        <UDocsSearchButton icon-only />
+      </UTooltip>
 
       <UColorModeButton v-if="!$colorMode.forced" />
 
@@ -37,16 +35,12 @@
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 
-const route = useRoute()
+const { metaSymbol } = useShortcuts()
 const { mapContentNavigation } = useElementsHelpers()
 
 const navigation = inject<Ref<NavItem[]>>('navigation')
 
 const links = computed(() => {
-  if (route.path !== '/') {
-    return []
-  }
-
   return [{
     label: 'Documentation',
     icon: 'i-heroicons-book-open-solid',
@@ -58,8 +52,7 @@ const links = computed(() => {
   }, {
     label: 'Playground',
     icon: 'i-simple-icons-stackblitz',
-    to: 'https://stackblitz.com/edit/nuxt-ui?file=app.config.ts,app.vue',
-    target: '_blank'
+    to: '/playground'
   }, {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch-solid',
