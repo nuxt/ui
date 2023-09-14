@@ -24,7 +24,7 @@ import { computed, defineComponent, provide, inject } from 'vue'
 import type { PropType } from 'vue'
 import { omit } from 'lodash-es'
 import { twMerge } from 'tailwind-merge'
-import type { FormError } from '../../types/form'
+import type { FormError, InjectedFormGroupValue } from '../../types/form'
 import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -97,7 +97,7 @@ export default defineComponent({
     const size = computed(() => ui.value.size[props.size ?? appConfig.ui.input.default.size])
     const labelFor = computed(() => `${props.name}-${increment = increment < 1000000 ? increment + 1 : 0}`)
 
-    provide('form-group', {
+    provide<InjectedFormGroupValue>('form-group', {
       error,
       labelFor,
       name: computed(() => props.name),
