@@ -32,7 +32,7 @@ import { twMerge } from 'tailwind-merge'
 import UKbd from '../elements/Kbd.vue'
 import { usePopper } from '../../composables/usePopper'
 import { defuTwMerge } from '../../utils'
-import type { PopperOptions } from '../../types/popper'
+import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -127,7 +127,7 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       trigger,

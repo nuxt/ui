@@ -58,7 +58,7 @@ import ULink from '../elements/Link.vue'
 import { usePopper } from '../../composables/usePopper'
 import { defuTwMerge } from '../../utils'
 import type { DropdownItem } from '../../types/dropdown'
-import type { PopperOptions } from '../../types/popper'
+import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -84,9 +84,11 @@ export default defineComponent({
       default: () => []
     },
     mode: {
-      type: String as PropType<'click' | 'hover'>,
+      type: String,
       default: 'click',
-      validator: (value: string) => ['click', 'hover'].includes(value)
+      validator: (value: string) => {
+        return ['click', 'hover'].includes(value)
+      }
     },
     disabled: {
       type: Boolean,
@@ -186,7 +188,7 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       trigger,

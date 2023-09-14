@@ -8,14 +8,13 @@
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.prevButton, ...prevButton }"
         :ui="{ rounded: '' }"
-        aria-label="Prev"
         @click="onClickPrev"
       />
     </slot>
 
     <UButton
       v-for="(page, index) of displayedPages"
-      :key="`${page}-${index}`"
+      :key="index"
       :size="size"
       :label="`${page}`"
       v-bind="page === currentPage ? { ...ui.default.activeButton, ...activeButton } : { ...ui.default.inactiveButton, ...inactiveButton }"
@@ -32,7 +31,6 @@
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.nextButton, ...nextButton }"
         :ui="{ rounded: '' }"
-        aria-label="Next"
         @click="onClickNext"
       />
     </slot>
@@ -209,7 +207,7 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       currentPage,

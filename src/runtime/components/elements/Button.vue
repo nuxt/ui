@@ -187,7 +187,7 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       isLeading,
       isTrailing,
       isSquare,

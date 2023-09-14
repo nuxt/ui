@@ -2,7 +2,6 @@
   <div :class="wrapperClass">
     <div class="flex items-center h-5">
       <input
-        :id="`${name}-${value}`"
         v-model="pick"
         :name="name"
         :required="required"
@@ -122,7 +121,7 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       pick,

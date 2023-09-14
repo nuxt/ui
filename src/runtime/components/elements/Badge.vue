@@ -45,7 +45,7 @@ export default defineComponent({
       }
     },
     label: {
-      type: [String, Number],
+      type: String,
       default: null
     },
     ui: {
@@ -72,7 +72,7 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       badgeClass
     }
   }

@@ -46,7 +46,7 @@ export default defineComponent({
       default: false
     },
     side: {
-      type: String as PropType<'left' | 'right'>,
+      type: String,
       default: 'right',
       validator: (value: string) => ['left', 'right'].includes(value)
     },
@@ -105,7 +105,7 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       isOpen,

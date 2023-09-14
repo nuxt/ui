@@ -16,12 +16,17 @@
         :value="query"
         :class="[ui.input.base, ui.input.size, ui.input.height, ui.input.padding, icon && ui.input.icon.padding]"
         :placeholder="placeholder"
-        :aria-label="placeholder"
         autocomplete="off"
         @change="query = $event.target.value"
       />
 
-      <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" :class="ui.input.closeButton" @click="onClear" />
+      <UButton
+        v-if="closeButton"
+        v-bind="{ ...ui.default.closeButton, ...closeButton }"
+        :class="ui.input.closeButton"
+        aria-label="Close"
+        @click="onClear"
+      />
     </div>
 
     <HComboboxOptions
@@ -168,7 +173,7 @@ export default defineComponent({
       default: 200
     },
     fuse: {
-      type: Object as PropType<UseFuseOptions<Command>>,
+      type: Object as PropType<Partial<UseFuseOptions<Command>>>,
       default: () => ({})
     },
     ui: {
@@ -325,7 +330,7 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       // eslint-disable-next-line vue/no-dupe-keys

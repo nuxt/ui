@@ -3,8 +3,8 @@
     <table :class="[ui.base, ui.divide]">
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
-          <th v-if="modelValue" scope="col" :class="ui.checkbox.padding">
-            <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" aria-label="Select all" @change="onChange" />
+          <th v-if="modelValue" scope="col" class="ps-4">
+            <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" @change="onChange" />
           </th>
 
           <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]">
@@ -50,8 +50,8 @@
 
         <template v-else>
           <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active]" @click="() => onSelect(row)">
-            <td v-if="modelValue" :class="ui.checkbox.padding">
-              <UCheckbox v-model="selected" :value="row" aria-label="Select row" @click.stop />
+            <td v-if="modelValue" class="ps-4">
+              <UCheckbox v-model="selected" :value="row" @click.stop />
             </td>
 
             <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
@@ -73,9 +73,6 @@ import { omit, capitalize, orderBy, get } from 'lodash-es'
 import { defu } from 'defu'
 import { twMerge } from 'tailwind-merge'
 import { defuTwMerge } from '../../utils'
-import UButton from '../elements/Button.vue'
-import UIcon from '../elements/Icon.vue'
-import UCheckbox from '../forms/Checkbox.vue'
 import type { Button } from '../../types/button'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -89,11 +86,6 @@ function defaultComparator<T> (a: T, z: T): boolean {
 }
 
 export default defineComponent({
-  components: {
-    UButton,
-    UIcon,
-    UCheckbox
-  },
   inheritAttrs: false,
   props: {
     modelValue: {
@@ -239,8 +231,7 @@ export default defineComponent({
           return
         }
 
-        // @ts-ignore
-        attrs.onSelect ? attrs.onSelect(row) : selected.value.push(row)
+        onSelect(row)
       })
     }
 
@@ -257,7 +248,7 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       wrapperClass,

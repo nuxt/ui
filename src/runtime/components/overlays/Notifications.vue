@@ -25,7 +25,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UNotification from './Notification.vue'
 import { useToast } from '../../composables/useToast'
 import { defuTwMerge } from '../../utils'
-import type { Notification } from '../../types/notification'
+import type { Notification } from '../../types'
 import { useState, useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -62,7 +62,7 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       toast,

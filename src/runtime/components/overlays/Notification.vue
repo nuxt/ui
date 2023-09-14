@@ -28,7 +28,7 @@
                 <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
               </div>
 
-              <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="onClose" />
+              <UButton v-if="closeButton" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="onClose" />
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
 import { useTimer } from '../../composables/useTimer'
-import type { NotificationAction } from '../../types/notification'
+import type { NotificationAction } from '../../types'
 import type { Avatar } from '../../types/avatar'
 import type { Button } from '../../types/button'
 import { defuTwMerge } from '../../utils'
@@ -210,7 +210,7 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       wrapperClass,

@@ -8,7 +8,7 @@
 
       <p v-if="description" :class="[ui.description, size]">{{ description }}</p>
 
-      <div :class="[label ? ui.container : '']" @click="$event.preventDefault()">
+      <div :class="[label ? ui.container : '']">
         <slot v-bind="{ error }" />
 
         <p v-if="error && typeof error !== 'boolean'" :class="[ui.error, size]">{{ error }}</p>
@@ -23,7 +23,7 @@ import { computed, defineComponent, provide, inject } from 'vue'
 import type { PropType } from 'vue'
 import { omit } from 'lodash-es'
 import { twMerge } from 'tailwind-merge'
-import type { FormError } from '../../types/form'
+import type { FormError } from '../../types'
 import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -100,7 +100,7 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       wrapperClass,

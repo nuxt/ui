@@ -37,7 +37,7 @@
 
           <slot name="label">
             <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" class="block truncate">{{ modelValue.length }} selected</span>
-            <span v-else-if="!multiple && modelValue" class="block truncate">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
+            <span v-else-if="!multiple && modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : modelValue[optionAttribute] }}</span>
             <span v-else class="block truncate" :class="uiMenu.placeholder">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
@@ -85,7 +85,7 @@
                   />
                   <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
 
-                  <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : option[optionAttribute] }}</span>
+                  <span class="truncate">{{ typeof option === 'string' ? option : option[optionAttribute] }}</span>
                 </slot>
               </div>
 
@@ -138,7 +138,7 @@ import UAvatar from '../elements/Avatar.vue'
 import { defuTwMerge } from '../../utils'
 import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
-import type { PopperOptions } from '../../types/popper'
+import type { PopperOptions } from '../../types'
 import { useAppConfig } from '#imports'
 // TODO: Remove
 // @ts-expect-error
@@ -407,7 +407,7 @@ export default defineComponent({
 
       return (props.options as any[]).filter((option: any) => {
         return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
-          return ['string', 'number'].includes(typeof option) ? option.toString().search(new RegExp(query.value, 'i')) !== -1 : (option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1)
+          return typeof option === 'string' ? option.search(new RegExp(query.value, 'i')) !== -1 : (option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1)
         })
       })
     })
@@ -437,7 +437,7 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       uiMenu,
       trigger,
