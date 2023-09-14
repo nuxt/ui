@@ -1,22 +1,17 @@
-type OmitObject<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
 export function omit<T extends Record<string, any>, K extends keyof T> (
   object: T,
   keysToOmit: K[] | any[]
-): OmitObject<T, K> {
+): Pick<T, Exclude<keyof T, K>> {
   const result = { ...object }
 
   for (const key of keysToOmit) {
     delete result[key]
   }
 
-  return result as OmitObject<T, K>
+  return result
 }
 
-
-type Path = (string | number)[] | string;
-
-export function get (object: Record<string, any>, path: Path, defaultValue?: any): any {
+export function get (object: Record<string, any>, path: (string | number)[] | string, defaultValue?: any): any {
   if (typeof path === 'string') {
     path = path.split('.').map(key => {
       const numKey = Number(key)
