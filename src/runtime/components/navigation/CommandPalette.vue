@@ -214,57 +214,50 @@ export default defineComponent({
       matchAllWhenSearchEmpty: true
     }))
 
-    const commands = computed(() => props.groups.filter(group => !group.search).reduce((acc, group) => {
-      return acc.concat(group.commands.map(command => ({ ...command, group: group.key })))
-    }, [] as Command[]))
+    const commands = computed(() => {
+      const commands: Command[] = []
+      for (const group of props.groups) {
+        if (!group.search) {
+          commands.push(...group.commands.map(command => ({ ...command, group: group.key })))
+        }
+      }
+      return commands
+    })
 
     const searchResults = ref<{ [key: string]: any }>({})
 
     const { results } = useFuse(query, commands, options)
 
-    const groups = computed(() => ([
-      ...(function groupBy (array, getKey) {
-        const groups = Object.values(
-          array.reduce((map, item) => {
-            const key = String(getKey(item))
-            const group = map[key]
+    const groups = computed(() => {
+      const groups: Group[] = []
 
-            if (group) {
-              group.push(item)
-            } else {
-              map[key] = [item]
-            }
-
-            return map
-          }, {} as Record<string, any[]>)
-        )
-
-        return groups
-      })(results.value, command => command.item.group).map((results, key) => {
-        const commands = results.map((result) => {
+      const groupedCommands: Record<string, typeof results['value']> = {}
+      for (const command of results.value) {
+        groupedCommands[command.item.group] ||= []
+        groupedCommands[command.item.group].push(command)
+      }
+      for (const key in groupedCommands) {
+        const group = props.groups.find(group => group.key === key)
+        const commands = groupedCommands[key].slice(0, options.value.resultLimit).map((result) => {
           const { item, ...data } = result
 
           return {
             ...item,
             ...data
-          }
+          } as Command
         })
 
-        return {
-          ...props.groups.find(group => Number(group.key) === key),
-          commands: commands.slice(0, options.value.resultLimit)
-        } as Group
-      }),
-      ...props.groups
-        .filter(group => !!group.search)
-        .map(group => ({
-          ...group,
-          commands: (searchResults.value[group.key] || []).slice(0, options.value.resultLimit)
-        }))
-        .filter(group => group.commands.length)
-    ]))
+        groups.push({ ...group, commands })
+      }
 
+      for (const group of props.groups) {
+        if (group.search && searchResults.value[group.key]?.length) {
+          groups.push({ ...group, commands: (searchResults.value[group.key] || []).slice(0, options.value.resultLimit) })
+        }
+      }
 
+      return groups
+    })
 
     const debouncedSearch = useDebounceFn(async () => {
       const searchableGroups = props.groups.filter(group => !!group.search)
