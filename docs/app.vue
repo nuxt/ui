@@ -10,7 +10,7 @@
     <Footer />
 
     <ClientOnly>
-      <LazyUDocsSearch :files="files" :navigation="navigation" />
+      <LazyUDocsSearch ref="searchRef" :files="files" :navigation="navigation" />
     </ClientOnly>
 
     <UNotifications>
@@ -27,18 +27,20 @@
 
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
+import { debounce } from 'perfect-debounce'
+
+const searchRef = ref()
+
 const route = useRoute()
 const colorMode = useColorMode()
 const { prefix, removePrefixFromNavigation, removePrefixFromFiles } = useContentSource()
 
 const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
 
-const { data: search } = useLazyFetch('/api/search.json', {
-  default: () => [],
-  server: false
-})
+const { data: search } = useLazyFetch('/api/search.json', { default: () => [], server: false })
 
 // Computed
+
 const navigation = computed(() => {
   const navigation = nav.value.find(link => link._path === prefix.value)?.children || []
 
@@ -53,7 +55,18 @@ const files = computed(() => {
 
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
+// Watch
+
+watch(() => searchRef.value?.commandPaletteRef?.query, debounce((query: string) => {
+  if (!query) {
+    return
+  }
+
+  useTrackEvent('Search', { props: { query, results: `${searchRef.value?.commandPaletteRef.results.length}` } })
+}, 500))
+
 // Head
+
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -74,6 +87,7 @@ useServerSeoMeta({
 })
 
 // Provide
+
 provide('navigation', navigation)
 provide('files', files)
 </script>
