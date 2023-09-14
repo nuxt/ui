@@ -69,9 +69,10 @@
 <script lang="ts">
 import { ref, computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
-import { omit, upperFirst, orderBy, get } from '../../utils/lodash'
+import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { twMerge } from 'tailwind-merge'
+import { omit, orderBy, get } from '../../utils/lodash'
 import { defuTwMerge } from '../../utils'
 import UButton from '../elements/Button.vue'
 import UIcon from '../elements/Icon.vue'

@@ -1,5 +1,3 @@
-import { kebabCase, camelCase, upperFirst } from 'scule'
-
 type OmitObject<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export function omit<T extends Record<string, any>, K extends keyof T> (
@@ -69,6 +67,3 @@ export function orderBy<T> (array: T[], key: keyof T, order: Order = 'asc'): T[]
     }
   })
 }
-
-
-export { kebabCase, camelCase, upperFirst }
