@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ULandingHero v-bind="page.hero" :ui="{ base: 'relative z-[1]' }" class="mb-[calc(var(--header-height)*2)]">
+    <ULandingHero v-bind="page.hero" :ui="{ base: 'relative z-[1]', container: 'max-w-3xl' }" class="mb-[calc(var(--header-height)*2)]">
       <template #title>
         <span v-html="page.hero?.title" />
       </template>
@@ -19,6 +19,7 @@
           autocomplete="off"
           icon="i-heroicons-command-line"
           input-class="select-none"
+          aria-label="Install @nuxt/ui"
           size="lg"
           :ui="{ base: 'disabled:cursor-default', icon: { trailing: { pointer: '' } } }"
         >
@@ -71,7 +72,14 @@
             class="flex flex-col"
           >
             <div v-if="feature.image">
-              <UColorModeImage :light="`${feature.image}-light.svg`" :dark="`${feature.image}-dark.svg`" class="object-cover w-full" />
+              <UColorModeImage
+                :light="`${feature.image.path}-light.svg`"
+                :dark="`${feature.image.path}-dark.svg`"
+                :width="feature.image.width"
+                :height="feature.image.height"
+                :alt="feature.title"
+                class="object-cover w-full"
+              />
             </div>
           </ULandingCard>
         </ULandingGrid>
@@ -85,7 +93,14 @@
             :to="category.to"
             class="hover:bg-gradient-to-b hover:from-gray-200/50 dark:hover:from-gray-800/50 rounded-lg"
           >
-            <UColorModeImage :light="`${category.image}-light.svg`" :dark="`${category.image}-dark.svg`" class="object-cover w-full" />
+            <UColorModeImage
+              :light="`${category.image.path}-light.svg`"
+              :dark="`${category.image.path}-dark.svg`"
+              width="363"
+              height="190"
+              :alt="category.label"
+              class="object-cover w-full"
+            />
 
             <div class="flex items-center justify-center gap-2 mt-1 mb-2">
               <span class="font-semibold text-lg">{{ category.label }}</span>
@@ -131,9 +146,11 @@
                   :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
                   :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
                   class="lg:hover:scale-125 lg:hover:ring-2 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
+                  width="40"
+                  height="40"
                   size="md"
                 >
-                  <NuxtLink :to="`https://github.com/${contributor.username}`" target="_blank" class="focus:outline-none" tabindex="-1">
+                  <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
                     <span class="absolute inset-0" aria-hidden="true" />
                   </NuxtLink>
                 </UAvatar>
@@ -163,7 +180,6 @@
 </template>
 
 <script setup lang="ts">
-import { pick } from 'lodash-es'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
 const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
@@ -176,7 +192,7 @@ const { data: module } = await useFetch<{
     username: string
   }[]
 }>('https://api.nuxt.com/modules/ui', {
-  transform: (module) => pick(module, ['stats', 'contributors'])
+  transform: ({ stats, contributors }) => ({ stats, contributors })
 })
 
 const source = ref('npm i @nuxt/ui')
