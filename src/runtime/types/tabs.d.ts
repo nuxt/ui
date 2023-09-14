@@ -3,4 +3,5 @@ export interface TabItem {
   slot?: string
   disabled?: boolean
   content?: string
+  [key: string]: any
 }

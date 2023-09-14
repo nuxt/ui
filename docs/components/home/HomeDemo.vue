@@ -40,7 +40,7 @@ onMounted(() => {
       <RadioExample />
     </div>
 
-    <div :ref="(el) => (refs[4] = el)" class="col-span-2 animate-left z-[50]">
+    <div :ref="(el) => (refs[4] = el)" class="col-span-2 animate-left z-10">
       <DropdownExampleBasic :popper="{ placement: 'bottom-start', strategy: 'absolute' }" />
     </div>
 
@@ -114,7 +114,7 @@ onMounted(() => {
       </UCard>
     </div>
 
-    <div :ref="(el) => (refs[7] = el)" class="col-span-2 row-span-2 gap-6 flex flex-col animate-right ">
+    <div :ref="(el) => (refs[7] = el)" class="col-span-2 row-span-2 gap-6 flex flex-col animate-right z-10">
       <CheckboxExample />
 
       <InputExampleClearable />
