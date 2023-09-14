@@ -95,8 +95,7 @@ export default defineComponent({
     })
 
     const size = computed(() => ui.value.size[props.size ?? appConfig.ui.input.default.size])
-
-    const labelFor = `label-for-${increment = increment < 1000000 ? increment + 1 : 0}`
+    const labelFor = computed(() => `${props.name}-${increment = increment < 1000000 ? increment + 1 : 0}`)
 
     provide('form-group', {
       error,
