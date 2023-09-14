@@ -92,7 +92,7 @@ const rows = computed(() => {
     <UTable :rows="rows" />
 
     <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
-      <UPagination v-model="page" :page-count="pageCount" :total="people.length" />
+      <UPagination v-model="page" v-if="people.length" :page-count="pageCount" :total="people.length" />
     </div>
   </div>
 </template>
