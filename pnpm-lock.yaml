@@ -136,8 +136,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(eslint@8.49.0)
       '@nuxthq/elements':
-        specifier: npm:@nuxthq/elements-edge@0.0.1-28245089.29bf1c5
-        version: /@nuxthq/elements-edge@0.0.1-28245089.29bf1c5(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
+        specifier: npm:@nuxthq/elements-edge@0.0.1-28245159.d523b38
+        version: /@nuxthq/elements-edge@0.0.1-28245159.d523b38(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
       '@nuxthq/studio':
         specifier: ^0.14.1
         version: 0.14.1(rollup@3.28.1)
@@ -1646,8 +1646,8 @@ packages:
   /@nuxt/ui-templates@1.3.1:
     resolution: {integrity: sha512-5gc02Pu1HycOVUWJ8aYsWeeXcSTPe8iX8+KIrhyEtEoOSkY0eMBuo0ssljB8wALuEmepv31DlYe5gpiRwkjESA==}
 
-  /@nuxt/ui@2.8.0(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-8vJM2gKikIq9qKuYZFozEBtD0c/loq+G+IMcBTeO+khQ+ipdVxARFfNUDeTmknEQ+aT7RnZshpqNv+W/jTiJBg==}
+  /@nuxt/ui@2.8.1(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-SVOo1PTroStUyv8ZcXTdDVgkV9U2Q0dtq7nQDF7NNZkvyH96Zbrbdk11wr1uHKuQdTcaEAq50OGleD+t6ceWEQ==}
     engines: {node: '>=v16.20.2'}
     dependencies:
       '@egoist/tailwindcss-icons': 1.1.0(tailwindcss@3.3.3)
@@ -1751,10 +1751,10 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxthq/elements-edge@0.0.1-28245089.29bf1c5(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-BhtsABEiRef++k1MaTEzcO1rw+Z//HVvJ6afUTHFI0CocLZmQ7/yA89WhcSR3muonOMeyS1AxD/yyugF47vV7g==}
+  /@nuxthq/elements-edge@0.0.1-28245159.d523b38(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-/A7GmZClyhbGeckwB4aPYtkoLDLHS4+jkyF/zM53jFHqLGziNrAvnog10zFgr3XSIdXfTuUE6qA/3bLjV/WhEw==}
     dependencies:
-      '@nuxt/ui': 2.8.0(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
+      '@nuxt/ui': 2.8.1(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
       '@vueuse/core': 10.4.1(vue@3.3.4)
       ofetch: 1.3.3
       pathe: 1.1.1
