@@ -19,6 +19,7 @@
           autocomplete="off"
           icon="i-heroicons-command-line"
           input-class="select-none"
+          aria-label="Install @nuxt/ui"
           size="lg"
           :ui="{ base: 'disabled:cursor-default', icon: { trailing: { pointer: '' } } }"
         >
@@ -149,7 +150,7 @@
                   height="40"
                   size="md"
                 >
-                  <NuxtLink :to="`https://github.com/${contributor.username}`" target="_blank" class="focus:outline-none" tabindex="-1">
+                  <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
                     <span class="absolute inset-0" aria-hidden="true" />
                   </NuxtLink>
                 </UAvatar>

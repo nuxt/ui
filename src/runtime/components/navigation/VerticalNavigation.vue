@@ -80,7 +80,7 @@ export default defineComponent({
     const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     return {
-      attrs: omit(attrs, ['class']),
+      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       wrapperClass,

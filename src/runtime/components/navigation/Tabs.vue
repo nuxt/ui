@@ -149,7 +149,7 @@ export default defineComponent({
     onMounted(() => calcMarkerSize(selectedIndex.value))
 
     return {
-      attrs: omit(attrs, ['class']),
+      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       listRef,
