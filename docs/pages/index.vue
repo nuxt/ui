@@ -184,7 +184,7 @@
 <script setup lang="ts">
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
-const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
+const { data: page } = await useAsyncData('index', () => queryContent('/dev').findOne())
 const { data: module } = await useFetch<{
   stats: {
     downloads: number
