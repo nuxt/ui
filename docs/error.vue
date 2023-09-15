@@ -11,7 +11,7 @@
     </UContainer>
 
     <ClientOnly>
-      <UDocsSearch :files="files" :navigation="navigation" />
+      <LazyUDocsSearch :files="files" :navigation="navigation" />
     </ClientOnly>
 
     <UNotifications />
@@ -20,8 +20,7 @@
 
 <script setup lang="ts">
 import type { NuxtError } from '#app'
-
-const { prefix, removePrefixFromNavigation, removePrefixFromFiles } = useContentSource()
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 
 useSeoMeta({
   title: 'Page not found',
@@ -32,22 +31,18 @@ defineProps<{
   error: NuxtError
 }>()
 
-const { data: navigation } = await useLazyAsyncData('navigation', () => fetchContentNavigation(), {
-  default: () => [],
-  transform: (navigation) => {
-    navigation = navigation.find(link => link._path === prefix.value)?.children || []
+const { branch } = useContentSource()
 
-    return prefix.value === '/main' ? removePrefixFromNavigation(navigation) : navigation
-  }
-})
+const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
+const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', { default: () => [], server: false })
 
-const { data: files } = await useLazyAsyncData('files', () => queryContent().where({ _type: 'markdown', navigation: { $ne: false } }).find(), {
-  default: () => [],
-  transform: (files) => {
-    files = files.filter(file => file._path.startsWith(prefix.value))
+// Computed
 
-    return prefix.value === '/main' ? removePrefixFromFiles(files) : files
-  }
+const navigation = computed(() => {
+  const main = nav.value.filter(item => item._path !== '/dev')
+  const dev = nav.value.find(item => item._path === '/dev')?.children
+
+  return branch.value?.name === 'dev' ? dev : main
 })
 
 // Provide
