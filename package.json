@@ -65,10 +65,5 @@
     "yup": "^1.2.0",
     "zod": "^3.22.2",
     "valibot": "^0.15.0"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "nuxt-component-meta@0.5.3": "patches/nuxt-component-meta@0.5.3.patch"
-    }
   }
 }

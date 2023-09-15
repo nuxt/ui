@@ -16,12 +16,19 @@
       <ColorPicker />
 
       <UTooltip text="Search" :shortcuts="[metaSymbol, 'K']">
-        <UDocsSearchButton icon-only />
+        <UDocsSearchButton :label="null" />
       </UTooltip>
 
       <UColorModeButton />
 
-      <USocialButton to="https://github.com/nuxt/ui" target="_blank" icon="i-simple-icons-github" aria-label="GitHub" class="hidden lg:inline-flex" />
+      <UButton
+        to="https://github.com/nuxt/ui"
+        target="_blank"
+        icon="i-simple-icons-github"
+        aria-label="GitHub"
+        class="hidden lg:inline-flex"
+        v-bind="$elements.button.secondary"
+      />
     </template>
 
     <template #panel>
