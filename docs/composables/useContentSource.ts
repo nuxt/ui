@@ -1,57 +1,43 @@
-import type { NavItem, ParsedContent } from '@nuxt/content/dist/runtime/types'
-
 export const useContentSource = () => {
   const route = useRoute()
+  const router = useRouter()
   const config = useRuntimeConfig().public
 
-  const branches = [{
+  const branches = computed(() => [{
+    id: 'dev',
     name: 'dev',
     icon: 'i-heroicons-cube',
     suffix: 'dev',
-    label: 'Edge'
+    label: 'Edge',
+    disabled: route.path.startsWith('/dev'),
+    click: () => select({ name: 'dev' })
   }, {
+    id: 'main',
     name: 'main',
     icon: 'i-heroicons-cube',
     suffix: 'latest',
-    label: `v${config.version}`
-  }]
+    label: `v${config.version}`,
+    disabled: !route.path.startsWith('/dev'),
+    click: () => select({ name: 'main' })
+  }])
 
-  const branch = computed(() => branches.find(b => b.name === (route.path.startsWith('/dev') ? 'dev' : 'main')))
+  const branch = computed(() => branches.value.find(b => b.name === (route.path.startsWith('/dev') ? 'dev' : 'main')))
 
-  const prefix = computed(() => `/${branch.value.name}`)
-
-  function removePrefixFromNavigation (navigation: NavItem[]): NavItem[] {
-    return navigation.map((link) => {
-      const { _path, children, ...rest } = link
-
-      return {
-        ...rest,
-        _path: route.path.startsWith(prefix.value) ? _path : _path.replace(new RegExp(`^${prefix.value}`, 'g'), ''),
-        children: children?.length ? removePrefixFromNavigation(children) : undefined
-      }
-    })
-  }
-
-  function removePrefixFromFiles (files: ParsedContent[]) {
-    return files.map((file) => {
-      if (!file) {
+  function select (branch) {
+    if (branch.name === 'dev') {
+      if (route.path.startsWith('/dev')) {
         return
       }
 
-      const { _path, ...rest } = file
-
-      return {
-        ...rest,
-        _path: route.path.startsWith(prefix.value) ? _path : _path.replace(new RegExp(`^${prefix.value}`, 'g'), '')
-      }
-    })
+      router.push(`/dev${route.path}`)
+    } else {
+      router.push(route.path.replace('/dev', ''))
+    }
   }
 
   return {
     branches,
     branch,
-    prefix,
-    removePrefixFromNavigation,
-    removePrefixFromFiles
+    select
   }
 }

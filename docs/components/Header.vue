@@ -19,7 +19,7 @@
         <UDocsSearchButton icon-only />
       </UTooltip>
 
-      <UColorModeButton v-if="!$colorMode.forced" />
+      <UColorModeButton />
 
       <USocialButton to="https://github.com/nuxt/ui" target="_blank" icon="i-simple-icons-github" aria-label="GitHub" class="hidden lg:inline-flex" />
     </template>

@@ -7,10 +7,10 @@
   "devDependencies": {
     "@iconify-json/heroicons": "latest",
     "@iconify-json/simple-icons": "latest",
-    "@nuxt/content": "^2.8.2",
+    "@nuxt/content": "npm:@nuxt/content-edge@2.8.2-28246249.76260da",
     "@nuxt/devtools": "^0.8.3",
     "@nuxt/eslint-config": "^0.2.0",
-    "@nuxthq/elements": "npm:@nuxthq/elements-edge@0.0.1-28245159.d523b38",
+    "@nuxthq/elements": "npm:@nuxthq/elements-edge@0.0.1-28246224.5395dca",
     "@nuxthq/studio": "^0.14.1",
     "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/google-fonts": "^3.0.2",
@@ -24,6 +24,7 @@
     "typescript": "^5.2.2",
     "ufo": "^1.3.0",
     "v-calendar": "^3.0.3",
+    "valibot": "^0.15.0",
     "yup": "^1.2.0",
     "zod": "^3.22.2"
   }
