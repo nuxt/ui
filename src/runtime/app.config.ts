@@ -860,7 +860,7 @@ const tabs = {
     tab: {
       base: 'relative inline-flex items-center justify-center flex-shrink-0 w-full whitespace-nowrap focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
       background: '',
-      active: 'text-gray-900 dark:text-white',
+      active: 'text-gray-900 dark:text-white focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
       inactive: 'text-gray-500 dark:text-gray-400',
       height: 'h-8',
       padding: 'px-3',
