@@ -1,13 +1,21 @@
-import { createDefu } from 'defu'
+import { defu, createDefu } from 'defu'
 import { twMerge } from 'tailwind-merge'
 
-export const defuTwMerge = createDefu((obj, key, value) => {
+const defuTwMerge = createDefu((obj, key, value) => {
   if (typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
     // @ts-ignore
     obj[key] = twMerge(obj[key], value)
     return true
   }
 })
+
+export const getUIConfig = (strategy, config, defaults) => {
+  if (strategy === 'override') {
+    return defu({}, config, defaults)
+  }
+
+  return defuTwMerge({}, config, defaults)
+}
 
 export const hexToRgb = (hex: string) => {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")

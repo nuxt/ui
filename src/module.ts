@@ -22,6 +22,7 @@ declare module '@nuxt/schema' {
       primary?: string
       gray?: string
       colors?: string[]
+      strategy?: 'merge' | 'override'
     } & DeepPartial<typeof appConfig.ui>
   }
 }
@@ -66,10 +67,10 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
 
-    const appConfigFile = await resolvePath(resolve(runtimeDir, 'app.config'))
-    nuxt.hook('app:resolve', (app) => {
-      app.configs.push(appConfigFile)
-    })
+    // const appConfigFile = await resolvePath(resolve(runtimeDir, 'app.config'))
+    // nuxt.hook('app:resolve', (app) => {
+    //   app.configs.push(appConfigFile)
+    // })
 
     nuxt.hook('tailwindcss:config', function (tailwindConfig) {
       const globalColors: any = {
