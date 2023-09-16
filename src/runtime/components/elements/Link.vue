@@ -2,6 +2,7 @@
   <component
     :is="as"
     v-if="!to"
+    :type="type"
     :disabled="disabled"
     v-bind="$attrs"
     :class="inactiveClass"
@@ -41,6 +42,10 @@ export default defineComponent({
     as: {
       type: String,
       default: 'button'
+    },
+    type: {
+      type: String,
+      default: null
     },
     disabled: {
       type: Boolean,
