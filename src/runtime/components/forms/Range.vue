@@ -89,7 +89,16 @@ export default defineComponent({
 
     const { emitFormChange, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => formGroup?.size?.value ?? props.size)
+    const size = computed(() => {
+      const size = formGroup?.size?.value ?? props.size
+      if (!ui.value.size[size.value] ||
+        !ui.value.thumb[size.value] ||
+        !ui.value.track[size.value] ||
+        !ui.value.progress[size.value]) {
+        return appConfig.ui.range.default.size
+      }
+      return size
+    })
 
     const value = computed({
       get () {
