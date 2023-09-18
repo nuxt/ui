@@ -2,20 +2,21 @@ import { defu, createDefu } from 'defu'
 import { twMerge } from 'tailwind-merge'
 import type { Strategy } from '../types'
 
-const defuTwMerge = createDefu((obj, key, value) => {
-  if (typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
+const defuTwMerge = createDefu((obj, key, value, namespace) => {
+  // TODO: Not for default object
+  if (namespace !== 'default' && typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
     // @ts-ignore
     obj[key] = twMerge(obj[key], value)
     return true
   }
 })
 
-export function getUIConfig<T> (strategy: Strategy, config: Partial<T>, defaults: T): T {
+export function mergeConfig<T> (strategy: Strategy, ...configs): T {
   if (strategy === 'override') {
-    return defu({}, config || {}, defaults) as T
+    return defu({}, ...configs) as T
   }
 
-  return defuTwMerge({}, config || {}, defaults) as T
+  return defuTwMerge({}, ...configs) as T
 }
 
 export function hexToRgb (hex: string) {

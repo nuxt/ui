@@ -19,17 +19,17 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
-import config from './Button.config'
+import { mergeConfig } from '../../utils'
+import { omit } from '../../utils/lodash'
 import type { Strategy } from '../../types'
-import { getUIConfig } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { button } from '#ui/ui.config'
 
-const fullConfig = getUIConfig<typeof config>(appConfig.ui.strategy, appConfig.ui.button, config)
+const config = mergeConfig<typeof button>(appConfig.ui.strategy, appConfig.ui.button, button)
 
 export default defineComponent({
   components: {
@@ -64,25 +64,25 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: () => fullConfig.default.size,
+      default: () => config.default.size,
       validator (value: string) {
-        return Object.keys(fullConfig.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String,
-      default: () => fullConfig.default.color,
+      default: () => config.default.color,
       validator (value: string) {
-        return [...appConfig.ui.colors, ...Object.keys(fullConfig.color)].includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String,
-      default: () => fullConfig.default.variant,
+      default: () => config.default.variant,
       validator (value: string) {
         return [
-          ...Object.keys(fullConfig.variant),
-          ...Object.values(fullConfig.color).flatMap(value => Object.keys(value))
+          ...Object.keys(config.variant),
+          ...Object.values(config.color).flatMap(value => Object.keys(value))
         ].includes(value)
       }
     },
@@ -92,7 +92,7 @@ export default defineComponent({
     },
     loadingIcon: {
       type: String,
-      default: () => fullConfig.default.loadingIcon
+      default: () => config.default.loadingIcon
     },
     leadingIcon: {
       type: String,
@@ -119,12 +119,14 @@ export default defineComponent({
       default: false
     },
     ui: {
-      type: Object as PropType<Partial<typeof fullConfig & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props, { attrs, slots }) {
-    const ui = computed(() => getUIConfig<typeof fullConfig>(props.ui.strategy || appConfig.ui.strategy, props.ui, fullConfig))
+    const appConfig = useAppConfig()
+
+    const ui = computed(() => mergeConfig<typeof config>(props.ui?.strategy || appConfig.ui?.strategy, props.ui || {}, process.dev ? appConfig.ui?.button || {} : {}, config))
 
     const isLeading = computed(() => {
       return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
@@ -192,7 +194,8 @@ export default defineComponent({
       leadingIconName,
       trailingIconName,
       leadingIconClass,
-      trailingIconClass
+      trailingIconClass,
+      appConfig
     }
   }
 })

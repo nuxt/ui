@@ -76,13 +76,13 @@ import { omit, get } from '../../utils/lodash'
 import UButton from '../elements/Button.vue'
 import UIcon from '../elements/Icon.vue'
 import UCheckbox from '../forms/Checkbox.vue'
-import type { Button } from '../../types/button'
-import config from './Table.config'
-import { getUIConfig } from '../../utils'
+import type { Strategy, Button } from '../../types'
+import { mergeConfig } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { table } from '#ui/ui.config'
 
-const fullConfig = getUIConfig<typeof config>(appConfig.ui.strategy, appConfig.ui.table, config)
+const config = mergeConfig<typeof table>(appConfig.ui.strategy, appConfig.ui.table, table)
 
 function defaultComparator<T> (a: T, z: T): boolean {
   return a === z
@@ -122,15 +122,15 @@ export default defineComponent({
     },
     sortButton: {
       type: Object as PropType<Button>,
-      default: () => fullConfig.default.sortButton
+      default: () => config.default.sortButton
     },
     sortAscIcon: {
       type: String,
-      default: () => fullConfig.default.sortAscIcon
+      default: () => config.default.sortAscIcon
     },
     sortDescIcon: {
       type: String,
-      default: () => fullConfig.default.sortDescIcon
+      default: () => config.default.sortDescIcon
     },
     loading: {
       type: Boolean,
@@ -138,20 +138,22 @@ export default defineComponent({
     },
     loadingState: {
       type: Object as PropType<{ icon: string, label: string }>,
-      default: () => fullConfig.default.loadingState
+      default: () => config.default.loadingState
     },
     emptyState: {
       type: Object as PropType<{ icon: string, label: string }>,
-      default: () => fullConfig.default.emptyState
+      default: () => config.default.emptyState
     },
     ui: {
-      type: Object as PropType<Partial<typeof fullConfig>>,
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   emits: ['update:modelValue'],
   setup (props, { emit, attrs }) {
-    const ui = computed(() => getUIConfig<typeof fullConfig>(props.ui.strategy || appConfig.ui.strategy, props.ui, fullConfig))
+    const appConfig = useAppConfig()
+
+    const ui = computed(() => mergeConfig<typeof config>(props.ui?.strategy || appConfig.ui?.strategy, props.ui || {}, process.dev ? appConfig.ui?.button || {} : {}, config))
 
     const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 

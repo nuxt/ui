@@ -4,6 +4,7 @@ import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
+// import createTemplates from './templates'
 import type { DeepPartial, Strategy, Config } from './runtime/types'
 
 const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
@@ -63,6 +64,8 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
 
+    nuxt.options.alias['#ui'] = runtimeDir
+
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
 
     nuxt.hook('tailwindcss:config', function (tailwindConfig) {
@@ -121,6 +124,8 @@ export default defineNuxtModule<ModuleOptions>({
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
+
+      // createTemplates(nuxt)
     })
 
     // Modules
