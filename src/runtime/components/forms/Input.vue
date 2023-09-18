@@ -152,7 +152,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.input>>(() => defuTwMerge({}, props.ui, appConfig.ui.input))
 
-    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
+    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup(attrs)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
     const labelFor = formGroup?.labelFor

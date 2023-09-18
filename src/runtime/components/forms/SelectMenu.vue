@@ -310,7 +310,7 @@ export default defineComponent({
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
-    const { emitFormBlur, emitFormChange, formGroup } = useFormGroup()
+    const { emitFormBlur, emitFormChange, formGroup } = useFormGroup(attrs)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
     const labelFor = formGroup?.labelFor

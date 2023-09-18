@@ -80,7 +80,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defuTwMerge({}, props.ui, appConfig.ui.toggle))
 
-    const { emitFormChange, formGroup } = useFormGroup()
+    const { emitFormChange, formGroup } = useFormGroup(attrs)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const labelFor = formGroup?.labelFor
 
