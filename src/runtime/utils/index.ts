@@ -1,5 +1,6 @@
 import { defu, createDefu } from 'defu'
 import { twMerge } from 'tailwind-merge'
+import type { Strategy } from '../types'
 
 const defuTwMerge = createDefu((obj, key, value) => {
   if (typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
@@ -9,15 +10,15 @@ const defuTwMerge = createDefu((obj, key, value) => {
   }
 })
 
-export const getUIConfig = (strategy, config, defaults) => {
+export function getUIConfig<T> (strategy: Strategy, config: Partial<T>, defaults: T): T {
   if (strategy === 'override') {
-    return defu({}, config, defaults)
+    return defu({}, config || {}, defaults) as T
   }
 
-  return defuTwMerge({}, config, defaults)
+  return defuTwMerge({}, config || {}, defaults) as T
 }
 
-export const hexToRgb = (hex: string) => {
+export function hexToRgb (hex: string) {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
   hex = hex.replace(shorthandRegex, function (_, r, g, b) {
@@ -30,7 +31,7 @@ export const hexToRgb = (hex: string) => {
     : null
 }
 
-export const getSlotsChildren = (slots: any) => {
+export function getSlotsChildren (slots: any) {
   let children = slots.default?.()
   if (children.length) {
     children = children.flatMap(c => {

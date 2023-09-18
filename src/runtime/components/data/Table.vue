@@ -73,17 +73,16 @@ import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { twMerge } from 'tailwind-merge'
 import { omit, get } from '../../utils/lodash'
-import { defuTwMerge } from '../../utils'
 import UButton from '../elements/Button.vue'
 import UIcon from '../elements/Icon.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import type { Button } from '../../types/button'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import config from './Table.config'
+import { getUIConfig } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 
-// const appConfig = useAppConfig()
+const fullConfig = getUIConfig<typeof config>(appConfig.ui.strategy, appConfig.ui.table, config)
 
 function defaultComparator<T> (a: T, z: T): boolean {
   return a === z
@@ -123,15 +122,15 @@ export default defineComponent({
     },
     sortButton: {
       type: Object as PropType<Button>,
-      default: () => appConfig.ui.table.default.sortButton
+      default: () => fullConfig.default.sortButton
     },
     sortAscIcon: {
       type: String,
-      default: () => appConfig.ui.table.default.sortAscIcon
+      default: () => fullConfig.default.sortAscIcon
     },
     sortDescIcon: {
       type: String,
-      default: () => appConfig.ui.table.default.sortDescIcon
+      default: () => fullConfig.default.sortDescIcon
     },
     loading: {
       type: Boolean,
@@ -139,23 +138,20 @@ export default defineComponent({
     },
     loadingState: {
       type: Object as PropType<{ icon: string, label: string }>,
-      default: () => appConfig.ui.table.default.loadingState
+      default: () => fullConfig.default.loadingState
     },
     emptyState: {
       type: Object as PropType<{ icon: string, label: string }>,
-      default: () => appConfig.ui.table.default.emptyState
+      default: () => fullConfig.default.emptyState
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.table>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof fullConfig>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue'],
   setup (props, { emit, attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.table>>(() => defuTwMerge({}, props.ui, appConfig.ui.table))
+    const ui = computed(() => getUIConfig<typeof fullConfig>(props.ui.strategy || appConfig.ui.strategy, props.ui, fullConfig))
 
     const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
