@@ -162,6 +162,47 @@ const badge = {
   }
 }
 
+const progressBar = {
+  wrapper: 'relative w-full flex items-center ',
+  base: 'h-full w-full relative ',
+  rounded: 'rounded-md',
+  size: {
+    sm: 'h-3',
+    md: 'h-4',
+    lg: 'h-5'
+  },
+  color: 'bg-gray-200 dark:bg-gray-800',
+  progress: {
+    base: 'block absolute h-full',
+    rounded: 'rounded-md',
+    background: 'bg-{color}-500 dark:bg-{color}-400'
+  },
+  label: {
+    base: 'absolute z-10 h-full flex items-center justify-center font-medium text-gray-900 dark:text-white',
+    size: {
+      sm: 'text-sm',
+      md: 'text-base',
+      lg: 'text-lg'
+    },
+    position: {
+      'inner-left': 'left-1',
+      'inner-right': 'right-1',
+      'inner-center': 'left-0 right-0',
+      'outer-top-left': 'bottom-4 right-1',
+      'outer-top-right': 'bottom-4 left-1',
+      'outer-top-center': 'bottom-4 left-0 right-0',
+      'outer-bottom-left': 'top-4 right-1',
+      'outer-bottom-right': 'top-4 left-1',
+      'outer-bottom-center': 'top-4 left-0 right-0'
+    }
+  },
+  default: {
+    size: 'sm',
+    color: 'primary',
+    labelPosition: 'inner-center'
+  }
+}
+
 const button = {
   base: 'focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0',
   font: 'font-medium',
@@ -1072,6 +1113,7 @@ export default {
     avatar,
     avatarGroup,
     badge,
+    progressBar,
     button,
     buttonGroup,
     dropdown,
