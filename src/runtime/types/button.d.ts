@@ -1,4 +1,7 @@
 import type { Link } from './link'
+import { button } from '../ui.config'
+
+export type ButtonSize = keyof typeof button.size
 
 export interface Button extends Link {
   type?: string
@@ -7,7 +10,7 @@ export interface Button extends Link {
   loading?: boolean
   disabled?: boolean
   padded?: boolean
-  size?: string
+  size?: ButtonSize
   color?: string
   variant?: string
   icon?: string

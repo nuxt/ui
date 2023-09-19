@@ -3,7 +3,7 @@
     :vertical="orientation === 'vertical'"
     :selected-index="selectedIndex"
     as="div"
-    :class="wrapperClass"
+    :class="ui.wrapper"
     v-bind="attrs"
     @change="onChange"
   >
@@ -48,20 +48,18 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, onMounted, defineComponent } from 'vue'
+import { ref, watch, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel } from '@headlessui/vue'
 import { useResizeObserver } from '@vueuse/core'
-import { omit } from '../../utils/lodash'
-import { twMerge } from 'tailwind-merge'
-import { defuTwMerge } from '../../utils'
-import type { TabItem } from '../../types/tabs'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { TabItem, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { tabs } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof tabs>(appConfig.ui.strategy, appConfig.ui.tabs, tabs)
 
 export default defineComponent({
   components: {
@@ -91,24 +89,19 @@ export default defineComponent({
       default: () => []
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.tabs>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { attrs, emit }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.tabs>>(() => defuTwMerge({}, props.ui, appConfig.ui.tabs))
+  setup (props, { emit }) {
+    const { ui, attrs } = useUI('tabs', props.ui, config, { mergeWrapper: true })
 
     const listRef = ref<HTMLElement>()
     const itemRefs = ref<HTMLElement[]>([])
     const markerRef = ref<HTMLElement>()
 
     const selectedIndex = ref(props.modelValue || props.defaultIndex)
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     // Methods
 
@@ -149,14 +142,13 @@ export default defineComponent({
     onMounted(() => calcMarkerSize(selectedIndex.value))
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       listRef,
       itemRefs,
       markerRef,
       selectedIndex,
-      wrapperClass,
       onChange
     }
   }

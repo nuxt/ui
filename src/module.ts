@@ -18,6 +18,14 @@ delete defaultColors.blueGray
 type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
 
 declare module '@nuxt/schema' {
+  interface AppConfig {
+    ui?: {
+      primary?: string
+      gray?: string
+      colors?: string[]
+      strategy?: Strategy
+    } & DeepPartial<typeof config>
+  }
   interface AppConfigInput {
     ui?: {
       primary?: string

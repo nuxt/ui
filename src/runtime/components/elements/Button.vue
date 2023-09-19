@@ -22,9 +22,9 @@ import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
+import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import { omit } from '../../utils/lodash'
-import type { Strategy } from '../../types'
+import type { ButtonSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { button } from '#ui/ui.config'
@@ -63,7 +63,7 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String,
+      type: String as PropType<ButtonSize>,
       default: () => config.default.size,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
@@ -123,10 +123,8 @@ export default defineComponent({
       default: undefined
     }
   },
-  setup (props, { attrs, slots }) {
-    const appConfig = useAppConfig()
-
-    const ui = computed(() => mergeConfig<typeof config>(props.ui?.strategy || appConfig.ui?.strategy, props.ui || {}, process.dev ? appConfig.ui?.button || {} : {}, config))
+  setup (props, { slots }) {
+    const { ui, attrs, attrsClass } = useUI('button', props.ui, config)
 
     const isLeading = computed(() => {
       return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
@@ -150,7 +148,7 @@ export default defineComponent({
         props.padded && ui.value[isSquare.value ? 'square' : 'padding'][props.size],
         variant?.replaceAll('{color}', props.color),
         props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
-      ), attrs.class as string)
+      ), attrsClass)
     })
 
     const leadingIconName = computed(() => {
@@ -186,7 +184,7 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs,
       isLeading,
       isTrailing,
       isSquare,

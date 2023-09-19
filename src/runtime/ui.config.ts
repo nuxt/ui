@@ -123,7 +123,7 @@ export const avatar = {
 }
 
 export const avatarGroup = {
-  wrapper: 'flex flex-row-reverse justify-end',
+  wrapper: 'inline-flex flex-row-reverse justify-end',
   ring: 'ring-2 ring-white dark:ring-gray-900',
   margin: '-me-1.5 first:me-0'
 }
@@ -240,7 +240,10 @@ export const button = {
 }
 
 export const buttonGroup = {
-  wrapper: 'inline-flex -space-x-px',
+  wrapper: {
+    horizontal: 'inline-flex -space-x-px',
+    vertical: 'inline-flex flex-col -space-y-px'
+  },
   rounded: 'rounded-md',
   shadow: 'shadow-sm'
 }
