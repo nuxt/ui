@@ -39,7 +39,7 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
-import type { Avatar, Button, Strategy } from '../../types'
+import type { Avatar, Button, NestedKeyOf, Strategy } from '../../types'
 import { mergeConfig } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -80,14 +80,14 @@ export default defineComponent({
       default: () => []
     },
     color: {
-      type: String,
+      type: String as PropType<keyof typeof config.color>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String,
+      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
       default: () => config.default.variant,
       validator (value: string) {
         return [

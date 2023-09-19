@@ -5,7 +5,7 @@ import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
 import * as config from './runtime/ui.config'
-import type { Strategy } from './runtime/types'
+import type { DeepPartial, Strategy } from './runtime/types'
 
 const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
@@ -14,8 +14,6 @@ delete defaultColors.warmGray
 delete defaultColors.trueGray
 delete defaultColors.coolGray
 delete defaultColors.blueGray
-
-type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
 
 type UI = {
   primary?: string

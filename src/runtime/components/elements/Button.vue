@@ -24,7 +24,7 @@ import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { ButtonSize, Strategy } from '../../types'
+import type { ButtonSize, NestedKeyOf, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { button } from '#ui/ui.config'
@@ -70,14 +70,14 @@ export default defineComponent({
       }
     },
     color: {
-      type: String,
+      type: String as PropType<keyof typeof config.color>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String,
+      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
       default: () => config.default.variant,
       validator (value: string) {
         return [

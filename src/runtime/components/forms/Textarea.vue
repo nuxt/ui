@@ -24,7 +24,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types'
+import type { NestedKeyOf, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { textarea } from '#ui/ui.config'
@@ -82,14 +82,14 @@ export default defineComponent({
       }
     },
     color: {
-      type: String,
+      type: String as PropType<keyof typeof config.color>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String,
+      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
       default: () => config.default.variant,
       validator (value: string) {
         return [
