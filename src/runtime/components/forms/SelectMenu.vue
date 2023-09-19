@@ -174,6 +174,10 @@ export default defineComponent({
       type: Array as PropType<{ [key: string]: any, disabled?: boolean }[] | string[]>,
       default: () => []
     },
+    id: {
+      type: String,
+      default: null
+    },
     name: {
       type: String,
       default: null
@@ -310,7 +314,7 @@ export default defineComponent({
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
-    const { emitFormBlur, emitFormChange, formGroup } = useFormGroup(attrs)
+    const { emitFormBlur, emitFormChange, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
     const labelFor = formGroup?.labelFor

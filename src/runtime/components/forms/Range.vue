@@ -38,6 +38,10 @@ export default defineComponent({
       type: Number,
       default: 0
     },
+    id: {
+      type: String,
+      default: null
+    },
     name: {
       type: String,
       default: null
@@ -88,7 +92,7 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.range>>(() => defuTwMerge({}, props.ui, appConfig.ui.range))
 
-    const { emitFormChange, formGroup } = useFormGroup(attrs)
+    const { emitFormChange, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
     const labelFor = formGroup?.labelFor
