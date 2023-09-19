@@ -4,8 +4,8 @@ import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
-// import createTemplates from './templates'
-import type { DeepPartial, Strategy, Config } from './runtime/types'
+import * as config from './runtime/ui.config'
+import type { Strategy } from './runtime/types'
 
 const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
@@ -15,6 +15,8 @@ delete defaultColors.trueGray
 delete defaultColors.coolGray
 delete defaultColors.blueGray
 
+type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
+
 declare module '@nuxt/schema' {
   interface AppConfigInput {
     ui?: {
@@ -22,7 +24,7 @@ declare module '@nuxt/schema' {
       gray?: string
       colors?: string[]
       strategy?: Strategy
-    } & DeepPartial<Config>
+    } & DeepPartial<typeof config>
   }
 }
 
@@ -124,8 +126,6 @@ export default defineNuxtModule<ModuleOptions>({
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
-
-      // createTemplates(nuxt)
     })
 
     // Modules

@@ -3,7 +3,6 @@ import { twMerge } from 'tailwind-merge'
 import type { Strategy } from '../types'
 
 const defuTwMerge = createDefu((obj, key, value, namespace) => {
-  // TODO: Not for default object
   if (namespace !== 'default' && typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
     // @ts-ignore
     obj[key] = twMerge(obj[key], value)

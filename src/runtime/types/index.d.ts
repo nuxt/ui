@@ -3,7 +3,6 @@ export * from './avatar'
 export * from './button'
 export * from './clipboard'
 export * from './command-palette'
-export * from './config'
 export * from './dropdown'
 export * from './form'
 export * from './link'
@@ -12,5 +11,4 @@ export * from './popper'
 export * from './tabs'
 export * from './vertical-navigation'
 
-export type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string } }>
 export type Strategy = 'merge' | 'override'
