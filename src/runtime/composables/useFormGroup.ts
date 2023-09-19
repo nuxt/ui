@@ -10,7 +10,9 @@ export const useFormGroup = (inputAttrs?: InputAttrs) => {
     const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
     const formGroup = inject<InjectedFormGroupValue>('form-group', undefined)
 
-    const labelFor = computed(() => inputAttrs?.id || formGroup?.labelFor.value)
+    if (formGroup) {
+      formGroup.labelFor.value = inputAttrs?.id ?? formGroup?.labelFor.value
+    }
 
     const blurred = ref(false)
 
@@ -39,9 +41,6 @@ export const useFormGroup = (inputAttrs?: InputAttrs) => {
       emitFormBlur,
       emitFormInput,
       emitFormChange,
-      formGroup: {
-        ...formGroup,
-        labelFor
-      }
+      formGroup
     }
 }
