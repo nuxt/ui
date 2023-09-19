@@ -135,7 +135,7 @@ export default defineComponent({
     },
     closeButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.closeButton
+      default: () => config.default.closeButton as Button
     },
     emptyState: {
       type: Object as PropType<{ icon: string, label: string, queryLabel: string }>,

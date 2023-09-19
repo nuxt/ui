@@ -85,7 +85,7 @@ export default defineComponent({
     },
     closeButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.closeButton
+      default: () => config.default.closeButton as Button
     },
     timeout: {
       type: Number,

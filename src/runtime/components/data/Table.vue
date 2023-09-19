@@ -121,7 +121,7 @@ export default defineComponent({
     },
     sortButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.sortButton
+      default: () => config.default.sortButton as Button
     },
     sortAscIcon: {
       type: String,

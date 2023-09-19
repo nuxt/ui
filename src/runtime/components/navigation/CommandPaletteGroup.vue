@@ -19,7 +19,7 @@
               <UIcon v-if="command.icon" :name="command.icon" :class="[ui.group.command.icon.base, active ? ui.group.command.icon.active : ui.group.command.icon.inactive, command.iconClass]" aria-hidden="true" />
               <UAvatar
                 v-else-if="command.avatar"
-                v-bind="{ size: ui.group.command.avatar.size, ...command.avatar }"
+                v-bind="{ size: (ui.group.command.avatar.size as AvatarSize), ...command.avatar }"
                 :class="ui.group.command.avatar.base"
                 aria-hidden="true"
               />
@@ -76,7 +76,8 @@ import { ComboboxOption as HComboboxOption } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
-import type { Group } from '../../types/command-palette'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { AvatarSize, Group } from '../../types'
 import { commandPalette } from '#ui/ui.config'
 
 export default defineComponent({

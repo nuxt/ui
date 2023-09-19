@@ -73,7 +73,7 @@ export default defineComponent({
     },
     closeButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.closeButton
+      default: () => config.default.closeButton as Button
     },
     actions: {
       type: Array as PropType<(Button & { click?: Function })[]>,

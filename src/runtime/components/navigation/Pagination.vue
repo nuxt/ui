@@ -88,19 +88,19 @@ export default defineComponent({
     },
     activeButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.activeButton
+      default: () => config.default.activeButton as Button
     },
     inactiveButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.inactiveButton
+      default: () => config.default.inactiveButton as Button
     },
     prevButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.prevButton
+      default: () => config.default.prevButton as Button
     },
     nextButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.nextButton
+      default: () => config.default.nextButton as Button
     },
     divider: {
       type: String,
