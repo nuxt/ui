@@ -38,6 +38,7 @@ const { ui } = useAppConfig()
         v-if="link.avatar"
         v-bind="{ size: ui.verticalNavigation.avatar.size, ...link.avatar }"
         :class="[ui.verticalNavigation.avatar.base]"
+        loading="lazy"
       />
       <UIcon v-else name="i-heroicons-user-circle-20-solid" class="text-lg" />
     </template>

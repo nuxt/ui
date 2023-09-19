@@ -55,6 +55,7 @@ onMounted(() => {
           alt="benjamincanac"
           width="40"
           height="40"
+          loading="lazy"
         />
         <UAvatar
           src="https://ipx.nuxt.com/s_32x32/gh_avatar/Atinux"
@@ -62,6 +63,7 @@ onMounted(() => {
           alt="Atinux"
           width="40"
           height="40"
+          loading="lazy"
         />
         <UAvatar
           src="https://ipx.nuxt.com/s_32x32/gh_avatar/smarroufin"
@@ -69,6 +71,7 @@ onMounted(() => {
           alt="smarroufin"
           width="40"
           height="40"
+          loading="lazy"
         />
       </UAvatarGroup>
 

@@ -1,12 +1,12 @@
 <template>
   <UTooltip :text="color.value" class="capitalize" :open-delay="500">
     <UButton
-      color="transparent"
+      color="white"
       square
       :ui="{
         color: {
-          transparent: {
-            solid: 'bg-gray-100 dark:bg-gray-800',
+          white: {
+            solid: 'ring-0 bg-gray-100 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800',
             ghost: 'hover:bg-gray-50 dark:hover:bg-gray-800/50'
           }
         }

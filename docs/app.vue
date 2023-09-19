@@ -10,7 +10,7 @@
     <Footer />
 
     <ClientOnly>
-      <LazyUDocsSearch :files="files" :navigation="navigation" />
+      <LazyUDocsSearch ref="searchRef" :files="files" :navigation="navigation" :groups="groups" />
     </ClientOnly>
 
     <UNotifications>
@@ -27,33 +27,49 @@
 
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
+import { debounce } from 'perfect-debounce'
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+
+const searchRef = ref()
+
 const route = useRoute()
 const colorMode = useColorMode()
-const { prefix, removePrefixFromNavigation, removePrefixFromFiles } = useContentSource()
+const { branch, branches } = useContentSource()
 
 const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
-
-const { data: search } = useLazyFetch('/api/search.json', {
-  default: () => [],
-  server: false
-})
+const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', { default: () => [], server: false })
 
 // Computed
-const navigation = computed(() => {
-  const navigation = nav.value.find(link => link._path === prefix.value)?.children || []
 
-  return prefix.value === '/main' ? removePrefixFromNavigation(navigation) : navigation
+const navigation = computed(() => {
+  const main = nav.value.filter(item => item._path !== '/dev')
+  const dev = nav.value.find(item => item._path === '/dev')?.children
+
+  return branch.value?.name === 'dev' ? dev : main
 })
 
-const files = computed(() => {
-  const files = search.value.filter(file => file._path.startsWith(prefix.value))
+const groups = computed(() => {
+  if (route.path === '/') {
+    return []
+  }
 
-  return prefix.value === '/main' ? removePrefixFromFiles(files) : files
+  return [{ key: 'branch', label: 'Branch', commands: branches.value }]
 })
 
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
+// Watch
+
+watch(() => searchRef.value?.commandPaletteRef?.query, debounce((query: string) => {
+  if (!query) {
+    return
+  }
+
+  useTrackEvent('Search', { props: { query: `${query} - ${searchRef.value?.commandPaletteRef.results.length} results` } })
+}, 500))
+
 // Head
+
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -74,6 +90,7 @@ useServerSeoMeta({
 })
 
 // Provide
+
 provide('navigation', navigation)
 provide('files', files)
 </script>

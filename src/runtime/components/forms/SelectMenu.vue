@@ -131,7 +131,7 @@ import {
 } from '@headlessui/vue'
 import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
-import { omit } from 'lodash-es'
+import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'

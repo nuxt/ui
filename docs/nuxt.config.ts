@@ -18,8 +18,7 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
-    'nuxt-component-meta',
-    'nuxt-lodash'
+    'nuxt-component-meta'
   ],
   runtimeConfig: {
     public: {
@@ -33,14 +32,13 @@ export default defineNuxtConfig({
   },
   content: {
     sources: {
-      // overwrite default source AKA `content` directory
-      content: {
+      dev: {
         prefix: '/dev',
         driver: 'fs',
         base: resolve('./content')
       },
-      main: {
-        prefix: '/main',
+      // overwrite default source AKA `content` directory
+      content: {
         driver: 'github',
         repo: 'nuxt/ui',
         branch: 'main',

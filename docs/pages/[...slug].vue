@@ -7,7 +7,7 @@
 
       <UDivider v-if="surround?.length" />
 
-      <UDocsSurround :surround="removePrefixFromFiles(surround)" />
+      <UDocsSurround :surround="(surround as ParsedContent[])" />
     </UPageBody>
 
     <template v-if="page.body?.toc?.links?.length" #right>
@@ -25,25 +25,35 @@
 </template>
 
 <script setup lang="ts">
+import { withoutTrailingSlash } from 'ufo'
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+
 const route = useRoute()
-const { prefix, removePrefixFromFiles } = useContentSource()
+const { branch } = useContentSource()
 const { findPageHeadline } = useElementsHelpers()
 
 definePageMeta({
   layout: 'docs'
 })
 
-const path = computed(() => route.path.startsWith(prefix.value) ? route.path : `${prefix.value}${route.path}`)
-
-const { data: page } = await useAsyncData(path.value, () => queryContent(path.value).findOne())
+const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
-const { data: surround } = await useAsyncData(`${path.value}-surround`, () => {
-  return queryContent(prefix.value)
-    .where({ _extension: 'md', navigation: { $ne: false } })
-    .findSurround((path.value.endsWith('/') ? path.value.slice(0, -1) : path.value))
+const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
+  return queryContent()
+    .where({
+      _extension: 'md',
+      _path: {
+        [branch.value?.name === 'dev' ? '$eq' : '$ne']: new RegExp('^/dev')
+      },
+      navigation: {
+        $ne: false
+      }
+    })
+    .only(['title', 'description', '_path'])
+    .findSurround(withoutTrailingSlash(route.path))
 })
 
 useSeoMeta({

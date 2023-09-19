@@ -55,7 +55,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType, ComputedRef } from 'vue'
-import { get, omit } from 'lodash-es'
+import { get, omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { defuTwMerge } from '../../utils'
