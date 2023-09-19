@@ -23,9 +23,10 @@
           ui.step.padding,
           ui.step.size,
           ui.step.font,
-          selectedIndex === index ? ui.step.active : ui.step.inactive
+          selectedIndex === index ? ui.step.active : ui.step.inactive,
         ]"
         @click="onChange(index)"
+        :to="item.to"
       >
         <div :class="[ui.step.leading.wrapper]">
           <UIcon
