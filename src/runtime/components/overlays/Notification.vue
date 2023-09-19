@@ -48,7 +48,7 @@ import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { useTimer } from '../../composables/useTimer'
 import { mergeConfig } from '../../utils'
-import type { Avatar, Button, NotificationAction, Strategy } from '../../types'
+import type { Avatar, Button, NotificationColor, NotificationAction, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { notification } from '#ui/ui.config'
@@ -100,7 +100,7 @@ export default defineComponent({
       default: null
     },
     color: {
-      type: String,
+      type: String as PropType<NotificationColor>,
       default: () => config.default.color,
       validator (value: string) {
         return ['gray', ...appConfig.ui.colors].includes(value)

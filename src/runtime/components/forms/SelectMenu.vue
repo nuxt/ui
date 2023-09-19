@@ -142,6 +142,7 @@ import type { PopperOptions, NestedKeyOf, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { select, selectMenu } from '#ui/ui.config'
+import colors from '#ui-colors'
 
 const config = mergeConfig<typeof select>(appConfig.ui.strategy, appConfig.ui.select, select)
 
@@ -255,7 +256,7 @@ export default defineComponent({
       }
     },
     color: {
-      type: String as PropType<keyof typeof config.color>,
+      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)

@@ -40,6 +40,7 @@ import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { checkbox } from '#ui/ui.config'
+import colors from '#ui-colors'
 
 const config = mergeConfig<typeof checkbox>(appConfig.ui.strategy, appConfig.ui.checkbox, checkbox)
 
@@ -83,7 +84,7 @@ export default defineComponent({
       default: false
     },
     color: {
-      type: String,
+      type: String as PropType<typeof colors[number]>,
       default: () => config.default.color,
       validator (value: string) {
         return appConfig.ui.colors.includes(value)

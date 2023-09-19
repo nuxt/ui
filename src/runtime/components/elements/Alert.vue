@@ -44,6 +44,7 @@ import { mergeConfig } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { alert } from '#ui/ui.config'
+import colors from '#ui-colors'
 
 const config = mergeConfig<typeof alert>(appConfig.ui.strategy, appConfig.ui.alert, alert)
 
@@ -80,7 +81,7 @@ export default defineComponent({
       default: () => []
     },
     color: {
-      type: String as PropType<keyof typeof config.color>,
+      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)

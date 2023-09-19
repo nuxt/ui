@@ -30,6 +30,7 @@ import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { toggle } from '#ui/ui.config'
+import colors from '#ui-colors'
 
 const config = mergeConfig<typeof toggle>(appConfig.ui.strategy, appConfig.ui.toggle, toggle)
 
@@ -61,7 +62,7 @@ export default defineComponent({
       default: () => config.default.offIcon
     },
     color: {
-      type: String,
+      type: String as PropType<typeof colors[number]>,
       default: () => config.default.color,
       validator (value: string) {
         return appConfig.ui.colors.includes(value)

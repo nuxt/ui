@@ -37,6 +37,7 @@ import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { radio } from '#ui/ui.config'
+import colors from '#ui-colors'
 
 const config = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
 
@@ -72,7 +73,7 @@ export default defineComponent({
       default: false
     },
     color: {
-      type: String,
+      type: String as PropType<typeof colors[number]>,
       default: () => config.default.color,
       validator (value: string) {
         return appConfig.ui.colors.includes(value)

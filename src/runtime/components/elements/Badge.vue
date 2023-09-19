@@ -14,6 +14,7 @@ import type { NestedKeyOf, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { badge } from '#ui/ui.config'
+import colors from '#ui-colors'
 
 const config = mergeConfig<typeof badge>(appConfig.ui.strategy, appConfig.ui.badge, badge)
 
@@ -28,7 +29,7 @@ export default defineComponent({
       }
     },
     color: {
-      type: String as PropType<keyof typeof config.color>,
+      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)

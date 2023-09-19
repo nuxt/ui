@@ -4,6 +4,7 @@ import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
+import createTemplates from './templates'
 import * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types'
 
@@ -130,6 +131,8 @@ export default defineNuxtModule<ModuleOptions>({
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
     })
+
+    createTemplates(nuxt)
 
     // Modules
 
