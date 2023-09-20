@@ -795,7 +795,7 @@ export const commandPalette = {
       },
       avatar: {
         base: 'flex-shrink-0',
-        size: '3xs'
+        size: '3xs' as const
       },
       chip: {
         base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
@@ -1034,7 +1034,7 @@ export const notification = {
   },
   avatar: {
     base: 'flex-shrink-0 self-center',
-    size: 'md'
+    size: 'md' as const
   },
   progress: {
     base: 'absolute bottom-0 end-0 start-0 h-1',

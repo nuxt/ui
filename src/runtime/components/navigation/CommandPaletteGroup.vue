@@ -19,7 +19,7 @@
               <UIcon v-if="command.icon" :name="command.icon" :class="[ui.group.command.icon.base, active ? ui.group.command.icon.active : ui.group.command.icon.inactive, command.iconClass]" aria-hidden="true" />
               <UAvatar
                 v-else-if="command.avatar"
-                v-bind="{ size: (ui.group.command.avatar.size as any), ...command.avatar }"
+                v-bind="{ size: ui.group.command.avatar.size, ...command.avatar }"
                 :class="ui.group.command.avatar.base"
                 aria-hidden="true"
               />
