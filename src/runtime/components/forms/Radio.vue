@@ -2,7 +2,7 @@
   <div :class="ui.wrapper">
     <div class="flex items-center h-5">
       <input
-        :id="`${name}-${value}`"
+        :id="id"
         v-model="pick"
         :name="name"
         :required="required"
@@ -15,7 +15,7 @@
       >
     </div>
     <div v-if="label || $slots.label" class="ms-3 text-sm">
-      <label :for="`${name}-${value}`" :class="ui.label">
+      <label :for="id" :class="ui.label">
         <slot name="label">{{ label }}</slot>
         <span v-if="required" :class="ui.required">*</span>
       </label>
@@ -38,12 +38,18 @@ import type { Strategy } from '../../types'
 import appConfig from '#build/app.config'
 import { radio } from '#ui/ui.config'
 import colors from '#ui-colors'
+import { uid } from '../../utils/uid'
 
 const config = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
 
 export default defineComponent({
   inheritAttrs: false,
   props: {
+    id: {
+      type: String,
+      // A default value is needed here to bind the label
+      default: () => uid()
+    },
     value: {
       type: [String, Number, Boolean],
       default: null
@@ -92,8 +98,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('radio', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormChange, formGroup } = useFormGroup()
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
+    const { emitFormChange, color } = useFormGroup()
 
     const pick = computed({
       get () {

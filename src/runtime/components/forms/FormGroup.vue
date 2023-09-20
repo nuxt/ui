@@ -1,7 +1,7 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
     <div v-if="label" :class="[ui.label.wrapper, size]">
-      <label :for="labelFor" :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</label>
+      <label :for="inputId" :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</label>
       <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
     </div>
     <p v-if="description" :class="[ui.description, size]">
@@ -28,10 +28,9 @@ import type { FormError, InjectedFormGroupValue, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { formGroup } from '#ui/ui.config'
+import { uid } from '../../utils/uid'
 
 const config = mergeConfig<typeof formGroup>(appConfig.ui.strategy, appConfig.ui.formGroup, formGroup)
-
-let increment = 0
 
 export default defineComponent({
   inheritAttrs: false,
@@ -88,11 +87,11 @@ export default defineComponent({
     })
 
     const size = computed(() => ui.value.size[props.size ?? config.default.size])
-    const labelFor = ref(`${props.name || 'lf'}-${increment = increment < 1000000 ? increment + 1 : 0}`)
+    const inputId = ref(uid())
 
     provide<InjectedFormGroupValue>('form-group', {
       error,
-      labelFor,
+      inputId,
       name: computed(() => props.name),
       size: computed(() => props.size)
     })
@@ -101,7 +100,7 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
-      labelFor,
+      inputId,
       // eslint-disable-next-line vue/no-dupe-keys
       size,
       // eslint-disable-next-line vue/no-dupe-keys

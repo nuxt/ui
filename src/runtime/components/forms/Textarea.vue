@@ -1,7 +1,7 @@
 <template>
   <div :class="ui.wrapper">
     <textarea
-      :id="id"
+      :id="inputId"
       ref="textarea"
       :value="modelValue"
       :name="name"
@@ -117,10 +117,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('textarea', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup(props)
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => formGroup?.size?.value ?? props.size)
-    const id = formGroup?.labelFor
+    const { emitFormBlur, emitFormInput, inputId, color, size } = useFormGroup(props)
 
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
@@ -200,7 +197,7 @@ export default defineComponent({
       ui,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
-      id,
+      inputId,
       textarea,
       // eslint-disable-next-line vue/no-dupe-keys
       textareaClass,
