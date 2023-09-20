@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -123,7 +119,7 @@ importers:
         version: 1.1.12
       '@iconify-json/simple-icons':
         specifier: latest
-        version: 1.1.71
+        version: 1.1.69
       '@nuxt/content':
         specifier: npm:@nuxt/content-edge@2.8.2-28246255.cae34d7
         version: /@nuxt/content-edge@2.8.2-28246255.cae34d7(rollup@3.28.1)(vue@3.3.4)
@@ -1064,8 +1060,8 @@ packages:
     dependencies:
       '@iconify/types': 2.0.0
 
-  /@iconify-json/simple-icons@1.1.71:
-    resolution: {integrity: sha512-3WVgJTaWBUOvq4G99v3Qs46zqnOJGNVMMlKCw+p8/gfbVz9mEAiwiqfGr+mpraotuwvUuQoJMi4SyseO8qjYDQ==}
+  /@iconify-json/simple-icons@1.1.69:
+    resolution: {integrity: sha512-NkWhAj8irGjI4cleB1rVukLd1MZZwq2GN6bQa+NSjn9ZNnEWv3SVHcDDiUPVX7PK1EUyAETwaCKINUa25tzjhg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -7053,6 +7049,7 @@ packages:
   /jiti@1.19.3:
     resolution: {integrity: sha512-5eEbBDQT/jF1xg6l36P+mWGGoH9Spuy0PCdSr2dtWRDGC6ph/w9ZCL4lmESW8f8F7MwT3XKescfP0wnZWAKL9w==}
     hasBin: true
+    dev: true
 
   /jiti@1.20.0:
     resolution: {integrity: sha512-3TV69ZbrvV6U5DfQimop50jE9Dl6J8O1ja1dvBbMba/sZ3YBEQqJ2VZRoQPVnhlzjNtU1vaXRZVrVjU4qtm8yA==}
@@ -11194,7 +11191,7 @@ packages:
       fast-glob: 3.3.1
       glob-parent: 6.0.2
       is-glob: 4.0.3
-      jiti: 1.19.3
+      jiti: 1.20.0
       lilconfig: 2.1.0
       micromatch: 4.0.5
       normalize-path: 3.0.0
@@ -12747,3 +12744,7 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

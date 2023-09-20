@@ -6,7 +6,8 @@ import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
 import createTemplates from './templates'
 import * as config from './runtime/ui.config'
-import type { DeepPartial, Strategy } from './runtime/types'
+
+import type { DeepPartial, Strategy } from './runtime/types/utils'
 
 const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
@@ -62,7 +63,7 @@ export default defineNuxtModule<ModuleOptions>({
     icons: ['heroicons'],
     safelistColors: ['primary']
   },
-  async setup (options, nuxt) {
+  async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
     // Transpile runtime
