@@ -192,8 +192,7 @@ export default defineComponent({
       leadingIconName,
       trailingIconName,
       leadingIconClass,
-      trailingIconClass,
-      appConfig
+      trailingIconClass
     }
   }
 })
