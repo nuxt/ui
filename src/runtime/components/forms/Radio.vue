@@ -98,7 +98,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('radio', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormChange, color } = useFormGroup(props)
+    const { emitFormChange, color, name } = useFormGroup(props)
 
     const pick = computed({
       get () {
@@ -127,6 +127,8 @@ export default defineComponent({
       ui,
       attrs,
       pick,
+      // eslint-disable-next-line vue/no-dupe-keys
+      name,
       // eslint-disable-next-line vue/no-dupe-keys
       inputClass
     }

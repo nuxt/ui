@@ -314,7 +314,7 @@ export default defineComponent({
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
-    const { emitFormBlur, emitFormChange, inputId, color, size } = useFormGroup(props)
+    const { emitFormBlur, emitFormChange, inputId, color, size, name } = useFormGroup(props)
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
@@ -443,6 +443,7 @@ export default defineComponent({
       uiMenu,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
+      name,
       inputId,
       trigger,
       container,

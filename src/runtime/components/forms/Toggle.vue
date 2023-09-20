@@ -82,7 +82,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs, attrsClass } = useUI('toggle', props.ui, config)
 
-    const { emitFormChange, color, inputId } = useFormGroup(props)
+    const { emitFormChange, color, inputId, name } = useFormGroup(props)
 
     const active = computed({
       get () {
@@ -120,6 +120,7 @@ export default defineComponent({
       ui,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
+      name,
       inputId,
       active,
       switchClass,

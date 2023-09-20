@@ -117,7 +117,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('textarea', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormBlur, emitFormInput, inputId, color, size } = useFormGroup(props)
+    const { emitFormBlur, emitFormInput, inputId, color, size, name } = useFormGroup(props)
 
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
@@ -197,6 +197,7 @@ export default defineComponent({
       ui,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
+      name,
       inputId,
       textarea,
       // eslint-disable-next-line vue/no-dupe-keys

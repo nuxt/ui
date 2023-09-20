@@ -109,7 +109,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('checkbox', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormChange, color } = useFormGroup(props)
+    const { emitFormChange, color, name } = useFormGroup(props)
 
     const toggle = computed({
       get () {
@@ -141,6 +141,8 @@ export default defineComponent({
       ui,
       attrs,
       toggle,
+      // eslint-disable-next-line vue/no-dupe-keys
+      name,
       // eslint-disable-next-line vue/no-dupe-keys
       inputClass,
       onChange

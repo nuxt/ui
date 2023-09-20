@@ -180,7 +180,7 @@ export default defineComponent({
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('select', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormChange, inputId, color, size } = useFormGroup(props)
+    const { emitFormChange, inputId, color, size, name } = useFormGroup(props)
 
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
@@ -320,6 +320,7 @@ export default defineComponent({
       ui,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
+      name,
       inputId,
       normalizedOptionsWithPlaceholder,
       normalizedValue,

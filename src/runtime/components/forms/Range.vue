@@ -92,7 +92,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs, attrsClass } = useUI('range', props.ui, config)
 
-    const { emitFormChange, inputId, color, size } = useFormGroup(props)
+    const { emitFormChange, inputId, color, size, name } = useFormGroup(props)
 
     const value = computed({
       get () {
@@ -168,6 +168,7 @@ export default defineComponent({
       ui,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
+      name,
       inputId,
       value,
       wrapperClass,
