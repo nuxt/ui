@@ -76,10 +76,6 @@ export default defineNuxtConfig({
       exposed: false
     }
   },
-  typescript: {
-    strict: false,
-    includeWorkspace: true
-  },
   hooks: {
     // Related to https://github.com/nuxt/nuxt/pull/22558
     'components:extend': (components) => {

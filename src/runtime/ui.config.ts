@@ -497,7 +497,10 @@ export const formGroup = {
   description: 'text-gray-500 dark:text-gray-400',
   hint: 'text-gray-500 dark:text-gray-400',
   help: 'mt-2 text-gray-500 dark:text-gray-400',
-  error: 'mt-2 text-red-500 dark:text-red-400'
+  error: 'mt-2 text-red-500 dark:text-red-400',
+  default: {
+    size: 'sm'
+  }
 }
 
 export const textarea = {

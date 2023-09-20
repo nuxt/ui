@@ -27,8 +27,6 @@ const links = [{
   to: 'https://github.com/smarroufin',
   target: '_blank'
 }]
-
-const { ui } = useAppConfig()
 </script>
 
 <template>
@@ -36,8 +34,8 @@ const { ui } = useAppConfig()
     <template #avatar="{ link }">
       <UAvatar
         v-if="link.avatar"
-        v-bind="{ size: ui.verticalNavigation.avatar.size, ...link.avatar }"
-        :class="[ui.verticalNavigation.avatar.base]"
+        v-bind="link.avatar"
+        size="3xs"
         loading="lazy"
       />
       <UIcon v-else name="i-heroicons-user-circle-20-solid" class="text-lg" />

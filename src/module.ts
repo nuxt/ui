@@ -28,6 +28,7 @@ declare module '@nuxt/schema' {
     ui?: UI
   }
   interface AppConfigInput {
+    // @ts-ignore
     ui?: UI
   }
 }

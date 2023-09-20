@@ -20,8 +20,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, provide, inject } from 'vue'
-import type { PropType } from 'vue'
+import { computed, defineComponent, provide, inject, ref } from 'vue'
+import type { Ref, PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
 import type { FormError, InjectedFormGroupValue, Strategy } from '../../types'
@@ -87,7 +87,7 @@ export default defineComponent({
         : formErrors?.value?.find((error) => error.path === props.name)?.message
     })
 
-    const size = computed(() => ui.value.size[props.size ?? appConfig.ui.input.default.size])
+    const size = computed(() => ui.value.size[props.size ?? config.default.size])
     const labelFor = ref(`${props.name || 'lf'}-${increment = increment < 1000000 ? increment + 1 : 0}`)
 
     provide<InjectedFormGroupValue>('form-group', {
