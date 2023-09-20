@@ -2,6 +2,7 @@ import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, creat
 import defaultColors from 'tailwindcss/colors.js'
 import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/defaultExtractor.js'
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
+import headlessUiPlugin from '@headlessui/tailwindcss'
 import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
 import appConfig from './runtime/app.config'
@@ -128,6 +129,7 @@ export default defineNuxtModule<ModuleOptions>({
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
+      tailwindConfig.plugins.push(headlessUiPlugin({}))
     })
 
     // Modules

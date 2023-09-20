@@ -858,9 +858,9 @@ const tabs = {
       shadow: 'shadow-sm'
     },
     tab: {
-      base: 'relative inline-flex items-center justify-center flex-shrink-0 w-full whitespace-nowrap focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
+      base: 'relative inline-flex items-center justify-center flex-shrink-0 w-full whitespace-nowrap ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
       background: '',
-      active: 'text-gray-900 dark:text-white focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
+      active: 'text-gray-900 dark:text-white',
       inactive: 'text-gray-500 dark:text-gray-400',
       height: 'h-8',
       padding: 'px-3',
