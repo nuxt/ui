@@ -1,6 +1,7 @@
 <template>
   <div :class="ui.wrapper">
     <select
+      :id="id"
       :name="name"
       :value="modelValue"
       :required="required"
@@ -77,6 +78,10 @@ export default defineComponent({
     modelValue: {
       type: [String, Number, Object],
       default: ''
+    },
+    id: {
+      type: String,
+      default: null
     },
     name: {
       type: String,
@@ -175,9 +180,10 @@ export default defineComponent({
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('select', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormChange, formGroup } = useFormGroup()
+    const { emitFormChange, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
+    const id = formGroup?.labelFor
 
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
@@ -316,6 +322,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      id,
       normalizedOptionsWithPlaceholder,
       normalizedValue,
       isLeading,

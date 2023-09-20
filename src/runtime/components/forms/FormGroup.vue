@@ -1,20 +1,21 @@
 <template>
   <div :class="wrapperClass" v-bind="attrs">
-    <label>
-      <div v-if="label" :class="[ui.label.wrapper, size]">
-        <p :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</p>
-        <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
-      </div>
-
-      <p v-if="description" :class="[ui.description, size]">{{ description }}</p>
-
-      <div :class="[label ? ui.container : '']" @click="$event.preventDefault()">
-        <slot v-bind="{ error }" />
-
-        <p v-if="error && typeof error !== 'boolean'" :class="[ui.error, size]">{{ error }}</p>
-        <p v-else-if="help" :class="[ui.help, size]">{{ help }}</p>
-      </div>
-    </label>
+    <div v-if="label" :class="[ui.label.wrapper, size]">
+      <label :for="labelFor" :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</label>
+      <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
+    </div>
+    <p v-if="description" :class="[ui.description, size]">
+      {{ description }}
+    </p>
+    <div :class="[label ? ui.container : '']">
+      <slot v-bind="{ error }" />
+      <p v-if="typeof error === 'string' && error" :class="[ui.error, size]">
+        {{ error }}
+      </p>
+      <p v-else-if="help" :class="[ui.help, size]">
+        {{ help }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -23,7 +24,7 @@ import { computed, defineComponent, provide, inject } from 'vue'
 import type { PropType } from 'vue'
 import { omit } from '../../utils/lodash'
 import { twMerge } from 'tailwind-merge'
-import type { FormError } from '../../types/form'
+import type { FormError, InjectedFormGroupValue } from '../../types/form'
 import { defuTwMerge } from '../../utils'
 import { useAppConfig } from '#imports'
 // TODO: Remove
@@ -31,6 +32,8 @@ import { useAppConfig } from '#imports'
 import appConfig from '#build/app.config'
 
 // const appConfig = useAppConfig()
+
+let increment = 0
 
 export default defineComponent({
   inheritAttrs: false,
@@ -92,14 +95,17 @@ export default defineComponent({
     })
 
     const size = computed(() => ui.value.size[props.size ?? appConfig.ui.input.default.size])
+    const labelFor = ref(`${props.name || 'lf'}-${increment = increment < 1000000 ? increment + 1 : 0}`)
 
-    provide('form-group', {
+    provide<InjectedFormGroupValue>('form-group', {
       error,
+      labelFor,
       name: computed(() => props.name),
       size: computed(() => props.size)
     })
 
     return {
+      labelFor,
       attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,

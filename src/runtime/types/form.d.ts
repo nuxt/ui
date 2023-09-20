@@ -19,3 +19,10 @@ export interface FormEvent {
   type: FormEventType
   path: string
 }
+
+export interface InjectedFormGroupValue {
+  labelFor: Ref<string>
+  name: Ref<string>
+  size: Ref<string>
+  error: Ref<string | boolean>
+}

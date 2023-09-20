@@ -1,6 +1,7 @@
 <template>
   <div :class="ui.wrapper">
     <input
+      :id="id"
       ref="input"
       :name="name"
       :value="modelValue"
@@ -59,6 +60,10 @@ export default defineComponent({
     type: {
       type: String,
       default: 'text'
+    },
+    id: {
+      type: String,
+      default: null
     },
     name: {
       type: String,
@@ -149,9 +154,10 @@ export default defineComponent({
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('input', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
+    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
+    const id = formGroup?.labelFor
 
     const input = ref<HTMLInputElement | null>(null)
 
@@ -254,6 +260,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      id,
       input,
       isLeading,
       isTrailing,
