@@ -7,40 +7,41 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { NestedKeyOf, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { badge } from '#ui/ui.config'
+import colors from '#ui-colors'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof badge>(appConfig.ui.strategy, appConfig.ui.badge, badge)
 
 export default defineComponent({
   inheritAttrs: false,
   props: {
     size: {
-      type: String,
-      default: () => appConfig.ui.badge.default.size,
+      type: String as PropType<keyof typeof config.size>,
+      default: () => config.default.size,
       validator (value: string) {
-        return Object.keys(appConfig.ui.badge.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String,
-      default: () => appConfig.ui.badge.default.color,
+      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      default: () => config.default.color,
       validator (value: string) {
-        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.badge.color)].includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String,
-      default: () => appConfig.ui.badge.default.variant,
+      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      default: () => config.default.variant,
       validator (value: string) {
         return [
-          ...Object.keys(appConfig.ui.badge.variant),
-          ...Object.values(appConfig.ui.badge.color).flatMap(value => Object.keys(value))
+          ...Object.keys(config.variant),
+          ...Object.values(config.color).flatMap(value => Object.keys(value))
         ].includes(value)
       }
     },
@@ -49,15 +50,12 @@ export default defineComponent({
       default: null
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.badge>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.badge>>(() => defuTwMerge({}, props.ui, appConfig.ui.badge))
+  setup (props) {
+    const { ui, attrs, attrsClass } = useUI('badge', props.ui, config)
 
     const badgeClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -68,11 +66,11 @@ export default defineComponent({
         ui.value.rounded,
         ui.value.size[props.size],
         variant?.replaceAll('{color}', props.color)
-      ), attrs.class as string)
+      ), attrsClass)
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs,
       badgeClass
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <HMenu v-slot="{ open }" as="div" :class="wrapperClass" v-bind="attrs" @mouseleave="onMouseLeave">
+  <HMenu v-slot="{ open }" as="div" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HMenuButton
       ref="trigger"
       as="div"
@@ -49,22 +49,19 @@ import { defineComponent, ref, computed, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem } from '@headlessui/vue'
 import { defu } from 'defu'
-import { omit } from '../../utils/lodash'
-import { twMerge } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
 import ULink from '../elements/Link.vue'
+import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
-import { defuTwMerge } from '../../utils'
-import type { DropdownItem } from '../../types/dropdown'
-import type { PopperOptions } from '../../types/popper'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig, omit } from '../../utils'
+import type { DropdownItem, PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { dropdown } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof dropdown>(appConfig.ui.strategy, appConfig.ui.dropdown, dropdown)
 
 export default defineComponent({
   components: {
@@ -105,15 +102,12 @@ export default defineComponent({
       default: 0
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.dropdown>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.dropdown>>(() => defuTwMerge({}, props.ui, appConfig.ui.dropdown))
+  setup (props) {
+    const { ui, attrs } = useUI('dropdown', props.ui, config, { mergeWrapper: true })
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 
@@ -142,8 +136,6 @@ export default defineComponent({
 
       return props.mode === 'hover' ? { paddingTop: `${offsetDistance}px`, paddingBottom: `${offsetDistance}px` } : {}
     })
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     function onMouseOver () {
       if (props.mode !== 'hover' || !menuApi.value) {
@@ -186,13 +178,12 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       trigger,
       container,
       containerStyle,
-      wrapperClass,
       onMouseOver,
       onMouseLeave,
       omit

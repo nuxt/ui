@@ -1,7 +1,7 @@
 <template>
-  <div :class="wrapperClass">
+  <div :class="ui.wrapper">
     <input
-      :id="labelFor"
+      :id="id"
       ref="input"
       :name="name"
       :value="modelValue"
@@ -34,17 +34,18 @@
 <script lang="ts">
 import { ref, computed, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
-import { defuTwMerge } from '../../utils'
+import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig } from '../../utils'
+import type { NestedKeyOf, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { input } from '#ui/ui.config'
+import colors from '#ui-colors'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof input>(appConfig.ui.strategy, appConfig.ui.input, input)
 
 export default defineComponent({
   components: {
@@ -90,7 +91,7 @@ export default defineComponent({
     },
     loadingIcon: {
       type: String,
-      default: () => appConfig.ui.input.default.loadingIcon
+      default: () => config.default.loadingIcon
     },
     leadingIcon: {
       type: String,
@@ -117,26 +118,26 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String,
-      default: () => appConfig.ui.input.default.size,
+      type: String as PropType<keyof typeof config.size>,
+      default: () => config.default.size,
       validator (value: string) {
-        return Object.keys(appConfig.ui.input.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String,
-      default: () => appConfig.ui.input.default.color,
+      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      default: () => config.default.color,
       validator (value: string) {
-        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.input.color)].includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String,
-      default: () => appConfig.ui.input.default.variant,
+      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      default: () => config.default.variant,
       validator (value: string) {
         return [
-          ...Object.keys(appConfig.ui.input.variant),
-          ...Object.values(appConfig.ui.input.color).flatMap(value => Object.keys(value))
+          ...Object.keys(config.variant),
+          ...Object.values(config.color).flatMap(value => Object.keys(value))
         ].includes(value)
       }
     },
@@ -145,21 +146,18 @@ export default defineComponent({
       default: null
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.input>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'blur'],
-  setup (props, { emit, attrs, slots }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.input>>(() => defuTwMerge({}, props.ui, appConfig.ui.input))
+  setup (props, { emit, slots }) {
+    const { ui, attrs } = useUI('input', props.ui, config, { mergeWrapper: true })
 
     const { emitFormBlur, emitFormInput, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
-    const labelFor = formGroup?.labelFor
+    const id = formGroup?.labelFor
 
     const input = ref<HTMLInputElement | null>(null)
 
@@ -184,8 +182,6 @@ export default defineComponent({
         autoFocus()
       }, 100)
     })
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     const inputClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -261,14 +257,14 @@ export default defineComponent({
     })
 
     return {
-      labelFor,
-      attrs: computed(() => omit(attrs, ['class', labelFor ? 'id' : null ])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      id,
       input,
       isLeading,
       isTrailing,
-      wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
       inputClass,
       leadingIconName,

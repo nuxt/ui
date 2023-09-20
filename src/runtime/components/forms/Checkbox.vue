@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass">
+  <div :class="ui.wrapper">
     <div class="flex items-center h-5">
       <input
         :id="name"
@@ -32,16 +32,17 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
-import { defuTwMerge } from '../../utils'
+import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig } from '../../utils'
+import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { checkbox } from '#ui/ui.config'
+import colors from '#ui-colors'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof checkbox>(appConfig.ui.strategy, appConfig.ui.checkbox, checkbox)
 
 export default defineComponent({
   inheritAttrs: false,
@@ -83,8 +84,8 @@ export default defineComponent({
       default: false
     },
     color: {
-      type: String,
-      default: () => appConfig.ui.checkbox.default.color,
+      type: String as PropType<typeof colors[number]>,
+      default: () => config.default.color,
       validator (value: string) {
         return appConfig.ui.colors.includes(value)
       }
@@ -94,16 +95,13 @@ export default defineComponent({
       default: ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.checkbox>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit, attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.checkbox>>(() => defuTwMerge({}, props.ui, appConfig.ui.checkbox))
+  setup (props, { emit }) {
+    const { ui, attrs } = useUI('checkbox', props.ui, config, { mergeWrapper: true })
 
     const { emitFormChange, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
@@ -122,8 +120,6 @@ export default defineComponent({
       emitFormChange()
     }
 
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
-
     const inputClass = computed(() => {
       return twMerge(twJoin(
         ui.value.base,
@@ -136,11 +132,10 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       toggle,
-      wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
       inputClass,
       onChange

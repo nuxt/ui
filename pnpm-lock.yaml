@@ -59,6 +59,9 @@ importers:
       ohash:
         specifier: ^1.1.3
         version: 1.1.3
+      pathe:
+        specifier: ^1.1.1
+        version: 1.1.1
       scule:
         specifier: ^1.0.0
         version: 1.0.0
@@ -120,7 +123,7 @@ importers:
         version: 1.1.12
       '@iconify-json/simple-icons':
         specifier: latest
-        version: 1.1.70
+        version: 1.1.71
       '@nuxt/content':
         specifier: npm:@nuxt/content-edge@2.8.2-28246255.cae34d7
         version: /@nuxt/content-edge@2.8.2-28246255.cae34d7(rollup@3.28.1)(vue@3.3.4)
@@ -131,8 +134,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(eslint@8.49.0)
       '@nuxthq/elements':
-        specifier: npm:@nuxthq/elements-edge@0.0.1-28246521.0e46d44
-        version: /@nuxthq/elements-edge@0.0.1-28246521.0e46d44(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
+        specifier: npm:@nuxthq/elements-edge@0.0.1-28253627.e4bd6ad
+        version: /@nuxthq/elements-edge@0.0.1-28253627.e4bd6ad(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
       '@nuxthq/studio':
         specifier: ^0.14.1
         version: 0.14.1(rollup@3.28.1)
@@ -1061,8 +1064,8 @@ packages:
     dependencies:
       '@iconify/types': 2.0.0
 
-  /@iconify-json/simple-icons@1.1.70:
-    resolution: {integrity: sha512-YZoHn180s0PELhjlMMTMVG8FxQOfP3AIn7P6KNV8xONzt/GwqMkYQ92DNYZbvSyQ4NhRajm27YkaOeSwNusr7A==}
+  /@iconify-json/simple-icons@1.1.71:
+    resolution: {integrity: sha512-3WVgJTaWBUOvq4G99v3Qs46zqnOJGNVMMlKCw+p8/gfbVz9mEAiwiqfGr+mpraotuwvUuQoJMi4SyseO8qjYDQ==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -1748,8 +1751,8 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxthq/elements-edge@0.0.1-28246521.0e46d44(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-8MU2WXawTcZFpaAOuz0WYDBR8fjblH6UTS9wlXz3qNRya15wOAH62a7VNfdy2xsE8Rlmv1DeuIVFZnIO24Rmbw==}
+  /@nuxthq/elements-edge@0.0.1-28253627.e4bd6ad(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-y7ujX/dr4CcmY1JilTjpU++IEN5+9NrdeQseC8+OvLE3rHE0/5d9KWusa+0y+o5z3NjM3mzupSYraBWoH8/qvQ==}
     dependencies:
       '@nuxt/ui': 2.8.1(rollup@3.28.1)(vue@3.3.4)(webpack@5.88.2)
       '@vueuse/core': 10.4.1(vue@3.3.4)
@@ -7050,6 +7053,7 @@ packages:
   /jiti@1.19.3:
     resolution: {integrity: sha512-5eEbBDQT/jF1xg6l36P+mWGGoH9Spuy0PCdSr2dtWRDGC6ph/w9ZCL4lmESW8f8F7MwT3XKescfP0wnZWAKL9w==}
     hasBin: true
+    dev: true
 
   /jiti@1.20.0:
     resolution: {integrity: sha512-3TV69ZbrvV6U5DfQimop50jE9Dl6J8O1ja1dvBbMba/sZ3YBEQqJ2VZRoQPVnhlzjNtU1vaXRZVrVjU4qtm8yA==}
@@ -11191,7 +11195,7 @@ packages:
       fast-glob: 3.3.1
       glob-parent: 6.0.2
       is-glob: 4.0.3
-      jiti: 1.19.3
+      jiti: 1.20.0
       lilconfig: 2.1.0
       micromatch: 4.0.5
       normalize-path: 3.0.0

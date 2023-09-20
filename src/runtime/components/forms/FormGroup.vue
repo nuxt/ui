@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass" v-bind="attrs">
+  <div :class="ui.wrapper" v-bind="attrs">
     <div v-if="label" :class="[ui.label.wrapper, size]">
       <label :for="labelFor" :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</label>
       <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
@@ -20,18 +20,16 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, provide, inject } from 'vue'
-import type { PropType } from 'vue'
-import { omit } from '../../utils/lodash'
-import { twMerge } from 'tailwind-merge'
-import type { FormError, InjectedFormGroupValue } from '../../types/form'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { computed, defineComponent, provide, inject, ref } from 'vue'
+import type { Ref, PropType } from 'vue'
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { FormError, InjectedFormGroupValue, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { formGroup } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof formGroup>(appConfig.ui.strategy, appConfig.ui.formGroup, formGroup)
 
 let increment = 0
 
@@ -43,10 +41,10 @@ export default defineComponent({
       default: null
     },
     size: {
-      type: String,
+      type: String as PropType<keyof typeof config.size>,
       default: null,
       validator (value: string) {
-        return Object.keys(appConfig.ui.formGroup.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
     label: {
@@ -74,17 +72,12 @@ export default defineComponent({
       default: null
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.formGroup>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.formGroup>>(() => defuTwMerge({}, props.ui, appConfig.ui.formGroup))
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+  setup (props) {
+    const { ui, attrs } = useUI('formGroup', props.ui, config, { mergeWrapper: true })
 
     const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
@@ -94,7 +87,7 @@ export default defineComponent({
         : formErrors?.value?.find((error) => error.path === props.name)?.message
     })
 
-    const size = computed(() => ui.value.size[props.size ?? appConfig.ui.input.default.size])
+    const size = computed(() => ui.value.size[props.size ?? config.default.size])
     const labelFor = ref(`${props.name || 'lf'}-${increment = increment < 1000000 ? increment + 1 : 0}`)
 
     provide<InjectedFormGroupValue>('form-group', {
@@ -105,11 +98,10 @@ export default defineComponent({
     })
 
     return {
-      labelFor,
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      wrapperClass,
+      attrs,
+      labelFor,
       // eslint-disable-next-line vue/no-dupe-keys
       size,
       // eslint-disable-next-line vue/no-dupe-keys

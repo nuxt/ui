@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass" v-bind="attrs">
+  <div :class="ui.wrapper" v-bind="attrs">
     <slot name="prev" :on-click="onClickPrev">
       <UButton
         v-if="prevButton"
@@ -42,17 +42,17 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from '../../utils/lodash'
-import { twMerge } from 'tailwind-merge'
 import UButton from '../elements/Button.vue'
-import { defuTwMerge } from '../../utils'
-import type { Button } from '../../types/button'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { Button, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { pagination, button } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof pagination>(appConfig.ui.strategy, appConfig.ui.pagination, pagination)
+
+const buttonConfig = mergeConfig<typeof button>(appConfig.ui.strategy, appConfig.ui.button, button)
 
 export default defineComponent({
   components: {
@@ -80,43 +80,40 @@ export default defineComponent({
       }
     },
     size: {
-      type: String,
-      default: () => appConfig.ui.pagination.default.size,
+      type: String as PropType<keyof typeof buttonConfig.size>,
+      default: () => config.default.size,
       validator (value: string) {
-        return Object.keys(appConfig.ui.button.size).includes(value)
+        return Object.keys(buttonConfig.size).includes(value)
       }
     },
     activeButton: {
       type: Object as PropType<Button>,
-      default: () => appConfig.ui.pagination.default.activeButton
+      default: () => config.default.activeButton as Button
     },
     inactiveButton: {
       type: Object as PropType<Button>,
-      default: () => appConfig.ui.pagination.default.inactiveButton
+      default: () => config.default.inactiveButton as Button
     },
     prevButton: {
       type: Object as PropType<Button>,
-      default: () => appConfig.ui.pagination.default.prevButton
+      default: () => config.default.prevButton as Button
     },
     nextButton: {
       type: Object as PropType<Button>,
-      default: () => appConfig.ui.pagination.default.nextButton
+      default: () => config.default.nextButton as Button
     },
     divider: {
       type: String,
       default: '…'
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.pagination>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { attrs, emit }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.pagination>>(() => defuTwMerge({}, props.ui, appConfig.ui.pagination))
+  setup (props, { emit }) {
+    const { ui, attrs } = useUI('pagination', props.ui, config, { mergeWrapper: true })
 
     const currentPage = computed({
       get () {
@@ -182,8 +179,6 @@ export default defineComponent({
     const canGoPrev = computed(() => currentPage.value > 1)
     const canGoNext = computed(() => currentPage.value < pages.value.length)
 
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
-
     function onClickPage (page: number | string) {
       if (typeof page === 'string') {
         return
@@ -209,15 +204,14 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       currentPage,
       pages,
       displayedPages,
       canGoPrev,
       canGoNext,
-      wrapperClass,
       onClickPrev,
       onClickNext,
       onClickPage

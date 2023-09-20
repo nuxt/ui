@@ -1,6 +1,6 @@
 <template>
   <HSwitch
-    :id="labelFor"
+    :id="id"
     v-model="active"
     :name="name"
     :disabled="disabled"
@@ -22,17 +22,18 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Switch as HSwitch } from '@headlessui/vue'
-import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
-import { defuTwMerge } from '../../utils'
+import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig } from '../../utils'
+import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { toggle } from '#ui/ui.config'
+import colors from '#ui-colors'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof toggle>(appConfig.ui.strategy, appConfig.ui.toggle, toggle)
 
 export default defineComponent({
   components: {
@@ -59,34 +60,31 @@ export default defineComponent({
     },
     onIcon: {
       type: String,
-      default: () => appConfig.ui.toggle.default.onIcon
+      default: () => config.default.onIcon
     },
     offIcon: {
       type: String,
-      default: () => appConfig.ui.toggle.default.offIcon
+      default: () => config.default.offIcon
     },
     color: {
-      type: String,
-      default: () => appConfig.ui.toggle.default.color,
+      type: String as PropType<typeof colors[number]>,
+      default: () => config.default.color,
       validator (value: string) {
         return appConfig.ui.colors.includes(value)
       }
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.toggle>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit, attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defuTwMerge({}, props.ui, appConfig.ui.toggle))
+  setup (props, { emit }) {
+    const { ui, attrs, attrsClass } = useUI('toggle', props.ui, config)
 
     const { emitFormChange, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const labelFor = formGroup?.labelFor
+    const id = formGroup?.labelFor
 
     const active = computed({
       get () {
@@ -104,7 +102,7 @@ export default defineComponent({
         ui.value.rounded,
         ui.value.ring.replaceAll('{color}', color.value),
         (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', color.value)
-      ), attrs.class as string)
+      ), attrsClass)
     })
 
     const onIconClass = computed(() => {
@@ -120,10 +118,11 @@ export default defineComponent({
     })
 
     return {
-      labelFor,
-      attrs: computed(() => omit(attrs, ['class', labelFor ? 'id' : null ])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      id,
       active,
       switchClass,
       onIconClass,
