@@ -1,10 +1,18 @@
 import { inject, ref } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
-import type { FormEvent, FormEventType } from '../types/form'
+import type { FormEvent, FormEventType, InjectedFormGroupValue } from '../types/form'
 
-export const useFormGroup = () => {
+type InputAttrs = {
+  id?: string
+}
+
+export const useFormGroup = (inputAttrs?: InputAttrs) => {
     const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
-    const formGroup = inject('form-group', undefined)
+    const formGroup = inject<InjectedFormGroupValue>('form-group', undefined)
+
+    if (formGroup) {
+      formGroup.labelFor.value = inputAttrs?.id ?? formGroup?.labelFor.value
+    }
 
     const blurred = ref(false)
 

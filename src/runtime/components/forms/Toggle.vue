@@ -1,5 +1,6 @@
 <template>
   <HSwitch
+    :id="labelFor"
     v-model="active"
     :name="name"
     :disabled="disabled"
@@ -40,6 +41,10 @@ export default defineComponent({
   },
   inheritAttrs: false,
   props: {
+    id: {
+      type: String,
+      default: null
+    },
     name: {
       type: String,
       default: null
@@ -79,8 +84,9 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.toggle>>(() => defuTwMerge({}, props.ui, appConfig.ui.toggle))
 
-    const { emitFormChange, formGroup } = useFormGroup()
+    const { emitFormChange, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
+    const labelFor = formGroup?.labelFor
 
     const active = computed({
       get () {
@@ -114,7 +120,8 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      labelFor,
+      attrs: computed(() => omit(attrs, ['class', labelFor ? 'id' : null ])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       active,

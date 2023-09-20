@@ -1,6 +1,7 @@
 <template>
   <div :class="wrapperClass">
     <input
+      :id="labelFor"
       ref="input"
       v-model.number="value"
       :name="name"
@@ -36,6 +37,10 @@ export default defineComponent({
     modelValue: {
       type: Number,
       default: 0
+    },
+    id: {
+      type: String,
+      default: null
     },
     name: {
       type: String,
@@ -87,9 +92,10 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.range>>(() => defuTwMerge({}, props.ui, appConfig.ui.range))
 
-    const { emitFormChange, formGroup } = useFormGroup()
+    const { emitFormChange, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
+    const labelFor = formGroup?.labelFor
 
     const value = computed({
       get () {
@@ -161,7 +167,8 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      labelFor,
+      attrs: computed(() => omit(attrs, ['class', labelFor ? 'id' : null ])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       value,

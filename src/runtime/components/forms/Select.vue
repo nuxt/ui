@@ -1,6 +1,7 @@
 <template>
   <div :class="wrapperClass">
     <select
+      :id="labelFor"
       :name="name"
       :value="modelValue"
       :required="required"
@@ -76,6 +77,10 @@ export default defineComponent({
     modelValue: {
       type: [String, Number, Object],
       default: ''
+    },
+    id: {
+      type: String,
+      default: null
     },
     name: {
       type: String,
@@ -177,9 +182,10 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.select>>(() => defuTwMerge({}, props.ui, appConfig.ui.select))
 
-    const { emitFormChange, formGroup } = useFormGroup()
+    const { emitFormChange, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
+    const labelFor = formGroup?.labelFor
 
 
     const onInput = (event: InputEvent) => {
@@ -318,9 +324,10 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      attrs: computed(() => omit(attrs, ['class', labelFor ? 'id' : null ])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      labelFor,
       normalizedOptionsWithPlaceholder,
       normalizedValue,
       isLeading,

@@ -28,7 +28,7 @@
       class="inline-flex w-full"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
-        <button :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
+        <button :id="labelFor" :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
             <slot name="leading" :disabled="disabled" :loading="loading">
               <UIcon :name="leadingIconName" :class="leadingIconClass" />
@@ -174,6 +174,10 @@ export default defineComponent({
       type: Array as PropType<{ [key: string]: any, disabled?: boolean }[] | string[]>,
       default: () => []
     },
+    id: {
+      type: String,
+      default: null
+    },
     name: {
       type: String,
       default: null
@@ -310,9 +314,10 @@ export default defineComponent({
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
-    const { emitFormBlur, emitFormChange, formGroup } = useFormGroup()
+    const { emitFormBlur, emitFormChange, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
+    const labelFor = formGroup?.labelFor
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
@@ -437,7 +442,8 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      labelFor,
+      attrs: computed(() => omit(attrs, ['class', labelFor ? 'id' : null ])),
       // eslint-disable-next-line vue/no-dupe-keys
       uiMenu,
       trigger,

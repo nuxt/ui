@@ -1,6 +1,7 @@
 <template>
   <div :class="wrapperClass">
     <textarea
+      :id="labelFor"
       ref="textarea"
       :value="modelValue"
       :name="name"
@@ -37,6 +38,10 @@ export default defineComponent({
     modelValue: {
       type: [String, Number],
       default: ''
+    },
+    id: {
+      type: String,
+      default: null
     },
     name: {
       type: String,
@@ -116,9 +121,10 @@ export default defineComponent({
 
     const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defuTwMerge({}, props.ui, appConfig.ui.textarea))
 
-    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
+    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
     const size = computed(() => formGroup?.size?.value ?? props.size)
+    const labelFor = formGroup?.labelFor
 
     const autoFocus = () => {
       if (props.autofocus) {
@@ -194,9 +200,8 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      labelFor,
+      attrs: computed(() => omit(attrs, ['class', labelFor ? 'id' : null ])),
       textarea,
       wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
