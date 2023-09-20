@@ -98,7 +98,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('radio', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormChange, color } = useFormGroup()
+    const { emitFormChange, color } = useFormGroup(props)
 
     const pick = computed({
       get () {

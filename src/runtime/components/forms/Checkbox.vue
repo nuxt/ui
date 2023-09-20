@@ -109,7 +109,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('checkbox', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormChange, color } = useFormGroup()
+    const { emitFormChange, color } = useFormGroup(props)
 
     const toggle = computed({
       get () {
