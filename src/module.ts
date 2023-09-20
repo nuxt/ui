@@ -23,12 +23,13 @@ type UI = {
   strategy?: Strategy
 } & DeepPartial<typeof config>
 
-declare module '@nuxt/schema' {
-  interface AppConfig {
+declare module 'nuxt/schema' {
+  interface AppConfigInput {
     ui?: UI
   }
+}
+declare module '@nuxt/schema' {
   interface AppConfigInput {
-    // @ts-ignore
     ui?: UI
   }
 }
@@ -123,7 +124,8 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.appConfig.ui = {
         primary: 'green',
         gray: 'cool',
-        colors
+        colors,
+        strategy: 'merge'
       }
 
       tailwindConfig.safelist = tailwindConfig.safelist || []

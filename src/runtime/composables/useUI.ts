@@ -8,7 +8,7 @@ export const useUI = <T>(key, $ui: Partial<T & { strategy: Strategy }>, $config?
   const appConfig = useAppConfig()
 
   const ui = computed(() => mergeConfig<T>(
-    $ui?.strategy || appConfig.ui?.strategy,
+    $ui?.strategy || (appConfig.ui?.strategy as Strategy),
     mergeWrapper ? { wrapper: $attrs?.class } : {},
     $ui || {},
     process.dev ? (appConfig.ui[key] || {}) : {},

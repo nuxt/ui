@@ -25,8 +25,8 @@
     "build:docs": "nuxi generate docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "nuxi typecheck",
-    "prepare": "nuxi prepare docs",
+    "typecheck": "vue-tsc --noEmit && nuxi typecheck docs",
+    "prepare": "nuxt-module-build --stub && nuxt-module-build prepare && nuxi prepare docs",
     "release": "release-it"
   },
   "dependencies": {
