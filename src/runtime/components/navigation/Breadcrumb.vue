@@ -32,19 +32,18 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { defu } from 'defu'
-import { omit } from 'lodash-es'
+import { useUI } from '../../composables/useUI'
+import { mergeConfig, omit } from '../../utils'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
-import type { BreadcrumbItem } from '../../types/breadcrumb'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import type { BreadcrumbItem, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { breadcrumb } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof breadcrumb>(appConfig.ui.strategy, appConfig.ui.breadcrumb)
 
 export default defineComponent({
   components: {
@@ -58,9 +57,9 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: () => appConfig.ui.breadcrumb.default.size,
+      default: () => config.default.size,
       validator (value: string) {
-        return Object.keys(appConfig.ui.breadcrumb.size).includes(value)
+        return Object.keys(config.breadcrumb.size).includes(value)
       }
     },
     tag: {
@@ -73,18 +72,15 @@ export default defineComponent({
     },
     divider: {
       type: Object as PropType<{ icon: string, text: string }>,
-      default: () => appConfig.ui.breadcrumb.default.divider
+      default: () => config.default.divider
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.breadcrumb>>,
-      default: () => appConfig.ui.breadcrumb
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   setup (props) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.breadcrumb>>(() => defu({}, props.ui, appConfig.ui.breadcrumb))
+    const { ui } = useUI('breadcrumb', props.ui, config, { mergeWrapper: true })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
