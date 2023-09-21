@@ -1,6 +1,6 @@
 import { computed, toValue, useAttrs } from 'vue'
 import { useAppConfig } from '#imports'
-import { mergeConfig, omit } from '../utils'
+import { mergeConfig, omit, get } from '../utils'
 import { Strategy } from '../types'
 
 export const useUI = <T>(key, $ui: Partial<T & { strategy: Strategy }>, $config?: T, { mergeWrapper = false }: { mergeWrapper?: boolean } = {}) => {
@@ -11,7 +11,7 @@ export const useUI = <T>(key, $ui: Partial<T & { strategy: Strategy }>, $config?
     $ui?.strategy || (appConfig.ui?.strategy as Strategy),
     mergeWrapper ? { wrapper: $attrs?.class } : {},
     $ui || {},
-    process.dev ? (appConfig.ui[key] || {}) : {},
+    process.dev ? get(appConfig, key, {}) : {},
     toValue($config || {})
   ))
   const attrs = computed(() => omit($attrs, ['class']))

@@ -75,7 +75,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('popover', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('ui.popover', props.ui, config, { mergeWrapper: true })
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 

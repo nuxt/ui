@@ -124,7 +124,7 @@ export default defineComponent({
     }
   },
   setup (props, { slots }) {
-    const { ui, attrs, attrsClass } = useUI('button', props.ui, config)
+    const { ui, attrs, attrsClass } = useUI('ui.button', props.ui, config)
 
     const isLeading = computed(() => {
       return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon

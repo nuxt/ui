@@ -96,7 +96,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('radio', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('ui.radio', props.ui, config, { mergeWrapper: true })
 
     const { emitFormChange, color, name } = useFormGroup(props)
 

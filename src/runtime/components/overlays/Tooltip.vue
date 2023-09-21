@@ -74,7 +74,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('tooltip', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('ui.tooltip', props.ui, config, { mergeWrapper: true })
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 

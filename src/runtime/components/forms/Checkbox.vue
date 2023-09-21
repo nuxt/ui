@@ -107,7 +107,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('checkbox', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('ui.checkbox', props.ui, config, { mergeWrapper: true })
 
     const { emitFormChange, color, name } = useFormGroup(props)
 

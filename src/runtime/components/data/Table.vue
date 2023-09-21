@@ -150,7 +150,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (props, { emit, attrs: $attrs }) {
-    const { ui, attrs } = useUI('table', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('ui.table', props.ui, config, { mergeWrapper: true })
 
     const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: upperFirst(key), sortable: false })))
 

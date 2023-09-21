@@ -37,7 +37,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('kbd', props.ui, config)
+    const { ui, attrs, attrsClass } = useUI('ui.kbd', props.ui, config)
 
     const kbdClass = computed(() => {
       return twMerge(twJoin(
