@@ -42,7 +42,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('ui.card', props.ui, config)
+    const { ui, attrs, attrsClass } = useUI('card', props.ui, config)
 
     const cardClass = computed(() => {
       return twMerge(twJoin(

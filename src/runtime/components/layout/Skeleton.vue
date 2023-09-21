@@ -24,7 +24,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('ui.skeleton', props.ui, config)
+    const { ui, attrs, attrsClass } = useUI('skeleton', props.ui, config)
 
     const skeletonClass = computed(() => {
       return twMerge(twJoin(

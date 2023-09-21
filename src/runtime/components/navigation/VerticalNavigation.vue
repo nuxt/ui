@@ -70,7 +70,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('ui.verticalNavigation', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('verticalNavigation', props.ui, config, { mergeWrapper: true })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

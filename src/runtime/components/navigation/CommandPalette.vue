@@ -176,7 +176,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'close'],
   setup (props, { emit, expose }) {
-    const { ui, attrs } = useUI('ui.commandPalette', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('commandPalette', props.ui, config, { mergeWrapper: true })
 
     const query = ref('')
     const comboboxInput = ref<ComponentPublicInstance<HTMLInputElement>>()

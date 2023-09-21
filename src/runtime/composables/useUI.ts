@@ -11,7 +11,7 @@ export const useUI = <T>(key, $ui: Partial<T & { strategy: Strategy }>, $config?
     $ui?.strategy || (appConfig.ui?.strategy as Strategy),
     mergeWrapper ? { wrapper: $attrs?.class } : {},
     $ui || {},
-    process.dev ? get(appConfig, key, {}) : {},
+    process.dev ? get(appConfig.ui, key, {}) : {},
     toValue($config || {})
   ))
   const attrs = computed(() => omit($attrs, ['class']))

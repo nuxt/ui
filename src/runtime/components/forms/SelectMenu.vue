@@ -307,9 +307,9 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
-    const { ui, attrs } = useUI('ui.select', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('select', props.ui, config, { mergeWrapper: true })
 
-    const { ui: uiMenu } = useUI('ui.selectMenu', props.uiMenu, configMenu)
+    const { ui: uiMenu } = useUI('selectMenu', props.uiMenu, configMenu)
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 

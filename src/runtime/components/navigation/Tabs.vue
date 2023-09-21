@@ -95,7 +95,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('ui.tabs', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('tabs', props.ui, config, { mergeWrapper: true })
 
     const listRef = ref<HTMLElement>()
     const itemRefs = ref<HTMLElement[]>([])

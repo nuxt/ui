@@ -94,7 +94,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('ui.accordion', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('accordion', props.ui, config, { mergeWrapper: true })
 
     const uiButton = computed<Partial<typeof configButton>>(() => configButton)
 

@@ -113,7 +113,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('ui.pagination', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('pagination', props.ui, config, { mergeWrapper: true })
 
     const currentPage = computed({
       get () {
