@@ -7,7 +7,7 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  extends: process.env.NUXT_ELEMENTS_PATH || '@nuxthq/elements',
+  extends: process.env.NUXT_UI_PRO_PATH || '@nuxt/ui-pro',
   modules: [
     '@nuxt/content',
     'nuxt-og-image',
@@ -68,7 +68,7 @@ export default defineNuxtConfig({
   },
   componentMeta: {
     globalsOnly: true,
-    exclude: ['@nuxtjs/mdc', resolve('./components'), resolve('@nuxthq/elements/components')],
+    exclude: ['@nuxtjs/mdc', resolve('./components'), resolve('@nuxt/ui-pro/components')],
     metaFields: {
       props: true,
       slots: false,
