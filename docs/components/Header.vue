@@ -27,7 +27,7 @@
         icon="i-simple-icons-github"
         aria-label="GitHub"
         class="hidden lg:inline-flex"
-        v-bind="$elements.button.secondary"
+        v-bind="($ui.button.secondary as any)"
       />
     </template>
 
@@ -43,7 +43,6 @@
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 
 const { metaSymbol } = useShortcuts()
-const { mapContentNavigation } = useElementsHelpers()
 
 const navigation = inject<Ref<NavItem[]>>('navigation')
 

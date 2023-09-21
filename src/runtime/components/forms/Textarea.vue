@@ -1,6 +1,7 @@
 <template>
-  <div :class="wrapperClass">
+  <div :class="ui.wrapper">
     <textarea
+      :id="inputId"
       ref="textarea"
       :value="modelValue"
       :name="name"
@@ -20,16 +21,17 @@
 <script lang="ts">
 import { ref, computed, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
-import { defuTwMerge } from '../../utils'
+import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig } from '../../utils'
+import type { NestedKeyOf, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { textarea } from '#ui/ui.config'
+import colors from '#ui-colors'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof textarea>(appConfig.ui.strategy, appConfig.ui.textarea, textarea)
 
 export default defineComponent({
   inheritAttrs: false,
@@ -37,6 +39,10 @@ export default defineComponent({
     modelValue: {
       type: [String, Number],
       default: ''
+    },
+    id: {
+      type: String,
+      default: null
     },
     name: {
       type: String,
@@ -75,26 +81,26 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String,
-      default: () => appConfig.ui.textarea.default.size,
+      type: String as PropType<keyof typeof config.size>,
+      default: null,
       validator (value: string) {
-        return Object.keys(appConfig.ui.textarea.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String,
-      default: () => appConfig.ui.textarea.default.color,
+      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      default: () => config.default.color,
       validator (value: string) {
-        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.textarea.color)].includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String,
-      default: () => appConfig.ui.textarea.default.variant,
+      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      default: () => config.default.variant,
       validator (value: string) {
         return [
-          ...Object.keys(appConfig.ui.textarea.variant),
-          ...Object.values(appConfig.ui.textarea.color).flatMap(value => Object.keys(value))
+          ...Object.keys(config.variant),
+          ...Object.values(config.color).flatMap(value => Object.keys(value))
         ].includes(value)
       }
     },
@@ -103,22 +109,17 @@ export default defineComponent({
       default: null
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.textarea>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'blur'],
-  setup (props, { emit, attrs }) {
+  setup (props, { emit }) {
+    const { ui, attrs } = useUI('textarea', props.ui, config, { mergeWrapper: true })
+
+    const { emitFormBlur, emitFormInput, inputId, color, size, name } = useFormGroup(props, config)
+
     const textarea = ref<HTMLTextAreaElement | null>(null)
-
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.textarea>>(() => defuTwMerge({}, props.ui, appConfig.ui.textarea))
-
-    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup()
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => formGroup?.size?.value ?? props.size)
 
     const autoFocus = () => {
       if (props.autofocus) {
@@ -177,8 +178,6 @@ export default defineComponent({
       }, 100)
     })
 
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
-
     const textareaClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
@@ -194,11 +193,13 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      name,
+      inputId,
       textarea,
-      wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
       textareaClass,
       onInput,
