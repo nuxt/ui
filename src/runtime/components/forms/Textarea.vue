@@ -115,7 +115,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'blur'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('textarea', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('ui.textarea', props.ui, config, { mergeWrapper: true })
 
     const { emitFormBlur, emitFormInput, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)

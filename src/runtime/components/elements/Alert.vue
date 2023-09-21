@@ -104,7 +104,7 @@ export default defineComponent({
   },
   emits: ['close'],
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('alert', props.ui, config)
+    const { ui, attrs, attrsClass } = useUI('ui.alert', props.ui, config)
 
     const alertClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]

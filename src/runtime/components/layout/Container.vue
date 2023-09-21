@@ -30,7 +30,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('container', props.ui, config)
+    const { ui, attrs, attrsClass } = useUI('ui.container', props.ui, config)
 
     const containerClass = computed(() => {
       return twMerge(twJoin(

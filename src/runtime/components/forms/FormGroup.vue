@@ -77,7 +77,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('formGroup', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('ui.formGroup', props.ui, config, { mergeWrapper: true })
 
     const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 

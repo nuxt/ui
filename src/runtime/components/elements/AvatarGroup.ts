@@ -33,7 +33,7 @@ export default defineComponent({
     }
   },
   setup (props, { slots }) {
-    const { ui, attrs } = useUI('avatarGroup', props.ui, avatarGroupConfig, { mergeWrapper: true })
+    const { ui, attrs } = useUI('ui.avatarGroup', props.ui, avatarGroupConfig, { mergeWrapper: true })
 
     const children = computed(() => getSlotsChildren(slots))
 

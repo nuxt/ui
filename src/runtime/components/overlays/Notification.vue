@@ -113,7 +113,7 @@ export default defineComponent({
   },
   emits: ['close'],
   setup (props, { emit }) {
-    const { ui, attrs, attrsClass } = useUI('notification', props.ui, config)
+    const { ui, attrs, attrsClass } = useUI('ui.notification', props.ui, config)
 
     let timer: any = null
     const remaining = ref(props.timeout)

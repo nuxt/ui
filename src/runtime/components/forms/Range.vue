@@ -90,7 +90,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
-    const { ui, attrs, attrsClass } = useUI('range', props.ui, config)
+    const { ui, attrs, attrsClass } = useUI('ui.range', props.ui, config)
 
     const { emitFormChange, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)

@@ -152,7 +152,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'blur'],
   setup (props, { emit, slots }) {
-    const { ui, attrs } = useUI('input', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('ui.input', props.ui, config, { mergeWrapper: true })
 
     const { emitFormBlur, emitFormInput, formGroup } = useFormGroup(props)
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)

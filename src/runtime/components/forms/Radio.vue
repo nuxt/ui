@@ -90,7 +90,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('radio', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('ui.radio', props.ui, config, { mergeWrapper: true })
 
     const { emitFormChange, formGroup } = useFormGroup()
     const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
