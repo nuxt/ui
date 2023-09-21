@@ -13,6 +13,14 @@ import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } fro
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, Form } from '../../types/form'
 
+class FormException extends Error {
+  constructor (message: string) {
+    super(message)
+    this.message = message
+    Object.setPrototypeOf(this, FormException.prototype)
+  }
+}
+
 export default defineComponent({
   props: {
     schema: {
@@ -36,9 +44,15 @@ export default defineComponent({
     validateOn: {
       type: Array as PropType<FormEventType[]>,
       default: () => ['blur', 'input', 'change', 'submit']
+    },
+    /** Only works if <input name=""> name is the same that `state` key.  */
+    focusOnFail: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
-  emits: ['submit'],
+  emits: ['submit', 'error'],
   setup (props, { expose, emit }) {
     const seed = Math.random().toString(36).substring(7)
     const bus = useEventBus<FormEvent>(`form-${seed}`)
@@ -87,7 +101,7 @@ export default defineComponent({
       }
 
       if (!opts.silent && errors.value.length > 0) {
-        throw new Error(
+        throw new FormException(
           `Form validation failed: ${JSON.stringify(errors.value, null, 2)}`
         )
       }
@@ -95,12 +109,28 @@ export default defineComponent({
     }
 
     async function onSubmit (event: SubmitEvent) {
-      if (props.validateOn?.includes('submit')) {
-        await validate()
+      try {
+        if (props.validateOn?.includes('submit')) {
+          await validate()
+        }
+        const submitEvent = event as FormSubmitEvent<any>
+        submitEvent.data = props.state
+        emit('submit', event)
+      } catch (error) {
+        if (error instanceof FormException) {
+          emit('error', event, errors.value)
+          if (props.focusOnFail) {
+            const { path } = errors.value[0]
+            const element = document.querySelector(`input[name="${path}"]`) as HTMLInputElement
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' })
+              element.focus()
+            }
+          }
+        } else {
+          throw error
+        }
       }
-      const submitEvent = event as FormSubmitEvent<any>
-      submitEvent.data = props.state
-      emit('submit', event)
     }
 
     expose({
