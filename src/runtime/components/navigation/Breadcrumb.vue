@@ -50,6 +50,7 @@ export default defineComponent({
     UIcon,
     ULink
   },
+  inheritAttrs: false,
   props: {
     items: {
       type: Array as PropType<BreadcrumbItem[]>,
