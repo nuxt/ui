@@ -45,7 +45,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('ui.notifications', props.ui, config)
+    const { ui, attrs, attrsClass } = useUI('notifications', props.ui, config)
 
     const toast = useToast()
     const notifications = useState<Notification[]>('notifications', () => [])

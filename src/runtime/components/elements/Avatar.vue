@@ -90,7 +90,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('ui.avatar', props.ui, config)
+    const { ui, attrs, attrsClass } = useUI('avatar', props.ui, config)
 
     const url = computed(() => {
       if (typeof props.src === 'boolean') {

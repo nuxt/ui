@@ -82,7 +82,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'close'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('ui.modal', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('modal', props.ui, config, { mergeWrapper: true })
 
     const isOpen = computed({
       get () {

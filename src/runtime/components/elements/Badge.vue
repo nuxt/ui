@@ -55,7 +55,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('ui.badge', props.ui, config)
+    const { ui, attrs, attrsClass } = useUI('badge', props.ui, config)
 
     const badgeClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]

@@ -68,7 +68,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'close'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('ui.slideover', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('slideover', props.ui, config, { mergeWrapper: true })
 
     const isOpen: WritableComputedRef<boolean> = computed({
       get () {

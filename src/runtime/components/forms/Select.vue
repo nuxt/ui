@@ -178,7 +178,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit, slots }) {
-    const { ui, attrs } = useUI('ui.select', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('select', props.ui, config, { mergeWrapper: true })
 
     const { emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
 
