@@ -43,7 +43,7 @@ import type { BreadcrumbItem, Strategy } from '../../types'
 import appConfig from '#build/app.config'
 import { breadcrumb } from '#ui/ui.config'
 
-const config = mergeConfig<typeof breadcrumb>(appConfig.ui.strategy, appConfig.ui.breadcrumb)
+const config = mergeConfig<typeof breadcrumb>(appConfig.ui.strategy, appConfig.ui.breadcrumb, breadcrumb)
 
 export default defineComponent({
   components: {
