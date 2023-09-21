@@ -30,7 +30,6 @@ import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 
 const route = useRoute()
 const { branch } = useContentSource()
-const { findPageHeadline } = useElementsHelpers()
 
 definePageMeta({
   layout: 'docs'

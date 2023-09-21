@@ -43,7 +43,6 @@
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 
 const { metaSymbol } = useShortcuts()
-const { mapContentNavigation } = useElementsHelpers()
 
 const navigation = inject<Ref<NavItem[]>>('navigation')
 
