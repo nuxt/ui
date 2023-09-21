@@ -59,7 +59,7 @@ export default defineComponent({
       type: String,
       default: () => config.default.size,
       validator (value: string) {
-        return Object.keys(config.breadcrumb.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
     tag: {
