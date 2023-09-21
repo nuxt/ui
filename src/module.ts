@@ -21,6 +21,7 @@ type UI = {
   gray?: string
   colors?: string[]
   strategy?: Strategy
+  [key: string]: any
 } & DeepPartial<typeof config>
 
 declare module 'nuxt/schema' {
