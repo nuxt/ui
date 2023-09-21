@@ -254,7 +254,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<keyof typeof config.size>,
-      default: () => config.default.size,
+      default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
@@ -314,7 +314,7 @@ export default defineComponent({
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
-    const { emitFormBlur, emitFormChange, inputId, color, size, name } = useFormGroup(props)
+    const { emitFormBlur, emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()

@@ -119,7 +119,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<keyof typeof config.size>,
-      default: () => config.default.size,
+      default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
@@ -154,7 +154,7 @@ export default defineComponent({
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('input', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormBlur, emitFormInput, size, color, inputId, name } = useFormGroup(props)
+    const { emitFormBlur, emitFormInput, size, color, inputId, name } = useFormGroup(props, config)
 
     const input = ref<HTMLInputElement | null>(null)
 

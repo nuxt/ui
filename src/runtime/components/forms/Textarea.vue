@@ -82,7 +82,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<keyof typeof config.size>,
-      default: () => config.default.size,
+      default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
@@ -117,7 +117,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('textarea', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormBlur, emitFormInput, inputId, color, size, name } = useFormGroup(props)
+    const { emitFormBlur, emitFormInput, inputId, color, size, name } = useFormGroup(props, config)
 
     const textarea = ref<HTMLTextAreaElement | null>(null)
 

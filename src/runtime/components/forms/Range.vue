@@ -67,7 +67,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<keyof typeof config.size>,
-      default: () => config.default.size,
+      default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
@@ -92,7 +92,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs, attrsClass } = useUI('range', props.ui, config)
 
-    const { emitFormChange, inputId, color, size, name } = useFormGroup(props)
+    const { emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
 
     const value = computed({
       get () {
