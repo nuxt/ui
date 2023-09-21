@@ -122,6 +122,7 @@ export default defineNuxtModule<ModuleOptions>({
 
       const colors = excludeColors(globalColors)
 
+      // @ts-ignore
       nuxt.options.appConfig.ui = {
         primary: 'green',
         gray: 'cool',
