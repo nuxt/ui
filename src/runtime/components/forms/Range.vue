@@ -92,7 +92,7 @@ export default defineComponent({
     const size = computed(() => {
       const size = formGroup?.size?.value ?? props.size
       if (!ui.value.size[size.value]) {
-        return appConfig.ui.range.default.size
+        return props.size
       }
       return size
     })
