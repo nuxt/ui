@@ -1,18 +1,33 @@
 <template>
   <div :class="wrapperClass" v-bind="attrs">
     <label>
-      <div v-if="label" :class="[ui.label.wrapper, size]">
-        <p :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</p>
-        <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
+      <div v-if="label || $slots.label" :class="[ui.label.wrapper, size]">
+        <p :class="[ui.label.base, required ? ui.label.required : '']">
+          <slot v-if="$slots.label" name="label" v-bind="{ error, label, name, hint, description, help }" />
+          <template v-else>{{ label }}</template>
+        </p>
+        <span v-if="hint || $slots.hint" :class="[ui.hint]">
+          <slot v-if="$slots.hint" name="hint" v-bind="{ error, label, name, hint, description, help }" />
+          <template v-else>{{ hint }}</template>
+        </span>
       </div>
 
-      <p v-if="description" :class="[ui.description, size]">{{ description }}</p>
+      <p v-if="description || $slots.description" :class="[ui.description, size]">
+        <slot v-if="$slots.description" name="description" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>{{ description }}</template>
+      </p>
 
       <div :class="[label ? ui.container : '']" @click="$event.preventDefault()">
         <slot v-bind="{ error }" />
 
-        <p v-if="error && typeof error !== 'boolean'" :class="[ui.error, size]">{{ error }}</p>
-        <p v-else-if="help" :class="[ui.help, size]">{{ help }}</p>
+        <p v-if="error && typeof error !== 'boolean'" :class="[ui.error, size]">
+          <slot v-if="$slots.error" name="error" v-bind="{ error, label, name, hint, description, help }" />
+          <template v-else>{{ error }}</template>
+        </p>
+        <p v-else-if="help || $slots.help" :class="[ui.help, size]">
+          <slot v-if="$slots.help" name="help" v-bind="{ error, label, name, hint, description, help }" />
+          <template v-else>{{ help }}</template>
+        </p>
       </div>
     </label>
   </div>
