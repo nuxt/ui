@@ -80,7 +80,7 @@ async function submit (event: FormSubmitEvent<Schema>) {
     </UFormGroup>
 
     <UFormGroup name="checkbox" label="Checkbox">
-      <UCheckbox v-model="state.checkbox" />
+      <UCheckbox v-model="state.checkbox" label="Check me" />
     </UFormGroup>
 
     <UFormGroup name="radio" label="Radio">

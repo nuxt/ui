@@ -12,6 +12,7 @@ import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, Form } from '../../types/form'
+import { uid } from '../../utils/uid'
 
 export default defineComponent({
   props: {
@@ -40,8 +41,7 @@ export default defineComponent({
   },
   emits: ['submit'],
   setup (props, { expose, emit }) {
-    const seed = Math.random().toString(36).substring(7)
-    const bus = useEventBus<FormEvent>(`form-${seed}`)
+    const bus = useEventBus<FormEvent>(`form-${uid()}`)
 
     bus.on(async (event) => {
       if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {

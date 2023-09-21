@@ -21,7 +21,7 @@ export interface FormEvent {
 }
 
 export interface InjectedFormGroupValue {
-  labelFor: Ref<string>
+  inputId: Ref<string>
   name: Ref<string>
   size: Ref<string>
   error: Ref<string | boolean>
