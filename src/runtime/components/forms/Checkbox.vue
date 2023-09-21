@@ -2,7 +2,7 @@
   <div :class="ui.wrapper">
     <div class="flex items-center h-5">
       <input
-        :id="id"
+        :id="inputId"
         v-model="toggle"
         :name="name"
         :required="required"
@@ -18,7 +18,7 @@
       >
     </div>
     <div v-if="label || $slots.label" class="ms-3 text-sm">
-      <label :for="id" :class="ui.label">
+      <label :for="inputId" :class="ui.label">
         <slot name="label">{{ label }}</slot>
         <span v-if="required" :class="ui.required">*</span>
       </label>
@@ -109,7 +109,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('checkbox', props.ui, config, { mergeWrapper: true })
 
-    const { emitFormChange, color, name } = useFormGroup(props)
+    const { emitFormChange, color, name, inputId } = useFormGroup(props)
 
     const toggle = computed({
       get () {
@@ -141,6 +141,7 @@ export default defineComponent({
       ui,
       attrs,
       toggle,
+      inputId,
       // eslint-disable-next-line vue/no-dupe-keys
       name,
       // eslint-disable-next-line vue/no-dupe-keys
