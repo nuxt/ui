@@ -14,17 +14,16 @@ import type { PropType, Ref } from 'vue'
 import { defu } from 'defu'
 import { onClickOutside } from '@vueuse/core'
 import type { VirtualElement } from '@popperjs/core'
-import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
+import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
-import { defuTwMerge } from '../../utils'
-import type { PopperOptions } from '../../types/popper'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig } from '../../utils'
+import type { PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { contextMenu } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof contextMenu>(appConfig.ui.strategy, appConfig.ui.contextMenu, contextMenu)
 
 export default defineComponent({
   inheritAttrs: false,
@@ -42,16 +41,13 @@ export default defineComponent({
       default: () => ({})
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.contextMenu>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'close'],
-  setup (props, { attrs, emit }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.contextMenu>>(() => defuTwMerge({}, props.ui, appConfig.ui.contextMenu))
+  setup (props, { emit }) {
+    const { ui, attrs, attrsClass } = useUI('contextMenu', props.ui, config)
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
@@ -72,7 +68,7 @@ export default defineComponent({
       return twMerge(twJoin(
         ui.value.container,
         ui.value.width
-      ), attrs.class as string)
+      ), attrsClass)
     })
 
     onClickOutside(container, () => {
@@ -80,9 +76,9 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       isOpen,
       wrapperClass,
       container

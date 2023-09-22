@@ -4,7 +4,7 @@
     :model-value="modelValue"
     :multiple="multiple"
     :nullable="nullable"
-    :class="wrapperClass"
+    :class="ui.wrapper"
     v-bind="attrs"
     as="div"
     @update:model-value="onSelect"
@@ -67,22 +67,20 @@ import { Combobox as HCombobox, ComboboxInput as HComboboxInput, ComboboxOptions
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
-import { twMerge, twJoin } from 'tailwind-merge'
-import { omit } from '../../utils/lodash'
-import { defu } from 'defu'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
-import type { Group, Command } from '../../types/command-palette'
+import { twJoin } from 'tailwind-merge'
+import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
-import type { Button } from '../../types/button'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { Group, Command, Button, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { commandPalette } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof commandPalette>(appConfig.ui.strategy, appConfig.ui.commandPalette, commandPalette)
 
 export default defineComponent({
   components: {
@@ -125,23 +123,23 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: () => appConfig.ui.commandPalette.default.icon
+      default: () => config.default.icon
     },
     loadingIcon: {
       type: String,
-      default: () => appConfig.ui.commandPalette.default.loadingIcon
+      default: () => config.default.loadingIcon
     },
     selectedIcon: {
       type: String,
-      default: () => appConfig.ui.commandPalette.default.selectedIcon
+      default: () => config.default.selectedIcon
     },
     closeButton: {
       type: Object as PropType<Button>,
-      default: () => appConfig.ui.commandPalette.default.closeButton
+      default: () => config.default.closeButton as Button
     },
     emptyState: {
       type: Object as PropType<{ icon: string, label: string, queryLabel: string }>,
-      default: () => appConfig.ui.commandPalette.default.emptyState
+      default: () => config.default.emptyState
     },
     placeholder: {
       type: String,
@@ -172,16 +170,13 @@ export default defineComponent({
       default: () => ({})
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.commandPalette>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'close'],
-  setup (props, { emit, attrs, expose }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.commandPalette>>(() => defuTwMerge({}, props.ui, appConfig.ui.commandPalette))
+  setup (props, { emit, expose }) {
+    const { ui, attrs } = useUI('commandPalette', props.ui, config, { mergeWrapper: true })
 
     const query = ref('')
     const comboboxInput = ref<ComponentPublicInstance<HTMLInputElement>>()
@@ -284,8 +279,6 @@ export default defineComponent({
       }, 0)
     })
 
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
-
     const iconName = computed(() => {
       if ((props.loading || isLoading.value) && props.loadingIcon) {
         return props.loadingIcon
@@ -343,14 +336,13 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       // eslint-disable-next-line vue/no-dupe-keys
       groups,
       comboboxInput,
       query,
-      wrapperClass,
       iconName,
       iconClass,
       // eslint-disable-next-line vue/no-dupe-keys

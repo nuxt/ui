@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass" v-bind="attrs">
+  <div :class="ui.wrapper" v-bind="attrs">
     <table :class="[ui.base, ui.divide]">
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
@@ -71,19 +71,17 @@ import { ref, computed, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
-import { twMerge } from 'tailwind-merge'
-import { omit, get } from '../../utils/lodash'
-import { defuTwMerge } from '../../utils'
 import UButton from '../elements/Button.vue'
 import UIcon from '../elements/Icon.vue'
 import UCheckbox from '../forms/Checkbox.vue'
-import type { Button } from '../../types/button'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig, omit, get } from '../../utils'
+import type { Strategy, Button } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { table } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof table>(appConfig.ui.strategy, appConfig.ui.table, table)
 
 function defaultComparator<T> (a: T, z: T): boolean {
   return a === z
@@ -123,15 +121,15 @@ export default defineComponent({
     },
     sortButton: {
       type: Object as PropType<Button>,
-      default: () => appConfig.ui.table.default.sortButton
+      default: () => config.default.sortButton as Button
     },
     sortAscIcon: {
       type: String,
-      default: () => appConfig.ui.table.default.sortAscIcon
+      default: () => config.default.sortAscIcon
     },
     sortDescIcon: {
       type: String,
-      default: () => appConfig.ui.table.default.sortDescIcon
+      default: () => config.default.sortDescIcon
     },
     loading: {
       type: Boolean,
@@ -139,25 +137,20 @@ export default defineComponent({
     },
     loadingState: {
       type: Object as PropType<{ icon: string, label: string }>,
-      default: () => appConfig.ui.table.default.loadingState
+      default: () => config.default.loadingState
     },
     emptyState: {
       type: Object as PropType<{ icon: string, label: string }>,
-      default: () => appConfig.ui.table.default.emptyState
+      default: () => config.default.emptyState
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.table>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit, attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.table>>(() => defuTwMerge({}, props.ui, appConfig.ui.table))
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+  setup (props, { emit, attrs: $attrs }) {
+    const { ui, attrs } = useUI('table', props.ui, config, { mergeWrapper: true })
 
     const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: upperFirst(key), sortable: false })))
 
@@ -238,12 +231,12 @@ export default defineComponent({
     }
 
     function onSelect (row) {
-      if (!attrs.onSelect) {
+      if (!$attrs.onSelect) {
         return
       }
 
       // @ts-ignore
-      attrs.onSelect(row)
+      $attrs.onSelect(row)
     }
 
     function selectAllRows () {
@@ -254,7 +247,7 @@ export default defineComponent({
         }
 
         // @ts-ignore
-        attrs.onSelect ? attrs.onSelect(row) : selected.value.push(row)
+        $attrs.onSelect ? $attrs.onSelect(row) : selected.value.push(row)
       })
     }
 
@@ -271,10 +264,9 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      wrapperClass,
+      attrs,
       // eslint-disable-next-line vue/no-dupe-keys
       sort,
       // eslint-disable-next-line vue/no-dupe-keys

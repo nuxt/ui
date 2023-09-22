@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
-    <HDialog :class="[wrapperClass, { 'justify-end': side === 'right' }]" v-bind="attrs" @close="(e) => !preventClose && close(e)">
+    <HDialog :class="[ui.wrapper, { 'justify-end': side === 'right' }]" v-bind="attrs" @close="(e) => !preventClose && close(e)">
       <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
@@ -18,15 +18,14 @@
 import { computed, defineComponent } from 'vue'
 import type { WritableComputedRef, PropType } from 'vue'
 import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
-import { omit } from '../../utils/lodash'
-import { twMerge } from 'tailwind-merge'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { slideover } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof slideover>(appConfig.ui.strategy, appConfig.ui.slideover, slideover)
 
 export default defineComponent({
   components: {
@@ -63,16 +62,13 @@ export default defineComponent({
       default: false
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.slideover>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'close'],
-  setup (props, { attrs, emit }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.slideover>>(() => defuTwMerge({}, props.ui, appConfig.ui.slideover))
+  setup (props, { emit }) {
+    const { ui, attrs } = useUI('slideover', props.ui, config, { mergeWrapper: true })
 
     const isOpen: WritableComputedRef<boolean> = computed({
       get () {
@@ -82,8 +78,6 @@ export default defineComponent({
         emit('update:modelValue', value)
       }
     })
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     const transitionClass = computed(() => {
       if (!props.transition) {
@@ -105,11 +99,10 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       isOpen,
-      wrapperClass,
       transitionClass,
       close
     }

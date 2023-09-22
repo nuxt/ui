@@ -1,5 +1,5 @@
 <template>
-  <HPopover ref="popover" v-slot="{ open, close }" :class="wrapperClass" v-bind="attrs" @mouseleave="onMouseLeave">
+  <HPopover ref="popover" v-slot="{ open, close }" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HPopoverButton
       ref="trigger"
       as="div"
@@ -29,18 +29,16 @@
 import { computed, ref, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { omit } from '../../utils/lodash'
-import { twMerge } from 'tailwind-merge'
 import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel } from '@headlessui/vue'
+import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
-import { defuTwMerge } from '../../utils'
-import type { PopperOptions } from '../../types/popper'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig } from '../../utils'
+import type { PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { popover } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof popover>(appConfig.ui.strategy, appConfig.ui.popover, popover)
 
 export default defineComponent({
   components: {
@@ -72,15 +70,12 @@ export default defineComponent({
       default: () => ({})
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.popover>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.popover>>(() => defuTwMerge({}, props.ui, appConfig.ui.popover))
+  setup (props) {
+    const { ui, attrs } = useUI('popover', props.ui, config, { mergeWrapper: true })
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 
@@ -107,8 +102,6 @@ export default defineComponent({
 
       return props.mode === 'hover' ? { paddingTop: `${offsetDistance}px`, paddingBottom: `${offsetDistance}px` } : {}
     })
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     function onMouseOver () {
       if (props.mode !== 'hover' || !popoverApi.value) {
@@ -151,14 +144,13 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       popover,
       trigger,
       container,
       containerStyle,
-      wrapperClass,
       onMouseOver,
       onMouseLeave
     }
