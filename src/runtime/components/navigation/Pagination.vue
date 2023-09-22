@@ -156,7 +156,7 @@ export default defineComponent({
         items.push(i)
       }
 
-      if (current < lastPage - halfDisplayedPages) {
+      if (current < lastPage - halfDisplayedPages && endDisplayedPage < lastPage) {
         items.push(props.divider)
       }
 
