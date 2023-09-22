@@ -1,5 +1,5 @@
 <template>
-  <nav :class="wrapperClass" v-bind="attrs">
+  <nav :class="ui.wrapper" v-bind="attrs">
     <ULink
       v-for="(link, index) of links"
       v-slot="{ isActive }"
@@ -38,21 +38,19 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from '../../utils/lodash'
-import { twMerge } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULink from '../elements/Link.vue'
-import { defuTwMerge } from '../../utils'
-import type { VerticalNavigationLink } from '../../types/vertical-navigation'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig, omit } from '../../utils'
+import type { VerticalNavigationLink, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { verticalNavigation } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof verticalNavigation>(appConfig.ui.strategy, appConfig.ui.verticalNavigation, verticalNavigation)
 
 export default defineComponent({
   components: {
@@ -67,23 +65,17 @@ export default defineComponent({
       default: () => []
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.verticalNavigation>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.verticalNavigation>>(() => defuTwMerge({}, props.ui, appConfig.ui.verticalNavigation))
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+  setup (props) {
+    const { ui, attrs } = useUI('verticalNavigation', props.ui, config, { mergeWrapper: true })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      wrapperClass,
+      attrs,
       omit
     }
   }

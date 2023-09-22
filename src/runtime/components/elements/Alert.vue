@@ -38,16 +38,15 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
-import type { Avatar } from '../../types/avatar'
-import type { Button } from '../../types/button'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import type { Avatar, Button, NestedKeyOf, Strategy } from '../../types'
+import { mergeConfig } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
-import { omit } from '../../utils/lodash'
+import { alert } from '#ui/ui.config'
+import colors from '#ui-colors'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof alert>(appConfig.ui.strategy, appConfig.ui.alert, alert)
 
 export default defineComponent({
   components: {
@@ -67,7 +66,7 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: () => appConfig.ui.alert.default.icon
+      default: () => config.default.icon
     },
     avatar: {
       type: Object as PropType<Avatar>,
@@ -75,40 +74,37 @@ export default defineComponent({
     },
     closeButton: {
       type: Object as PropType<Button>,
-      default: () => appConfig.ui.alert.default.closeButton
+      default: () => config.default.closeButton as Button
     },
     actions: {
       type: Array as PropType<(Button & { click?: Function })[]>,
       default: () => []
     },
     color: {
-      type: String,
-      default: () => appConfig.ui.alert.default.color,
+      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      default: () => config.default.color,
       validator (value: string) {
-        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.alert.color)].includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String,
-      default: () => appConfig.ui.alert.default.variant,
+      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      default: () => config.default.variant,
       validator (value: string) {
         return [
-          ...Object.keys(appConfig.ui.alert.variant),
-          ...Object.values(appConfig.ui.alert.color).flatMap(value => Object.keys(value))
+          ...Object.keys(config.variant),
+          ...Object.values(config.color).flatMap(value => Object.keys(value))
         ].includes(value)
       }
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.alert>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['close'],
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.alert>>(() => defuTwMerge({}, props.ui, appConfig.ui.alert))
+  setup (props) {
+    const { ui, attrs, attrsClass } = useUI('alert', props.ui, config)
 
     const alertClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -119,13 +115,13 @@ export default defineComponent({
         ui.value.shadow,
         ui.value.padding,
         variant?.replaceAll('{color}', props.color)
-      ), attrs.class as string)
+      ), attrsClass)
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       alertClass
     }
   }

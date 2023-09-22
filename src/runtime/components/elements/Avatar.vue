@@ -24,13 +24,14 @@ import { defineComponent, ref, computed, watch } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { AvatarSize, AvatarChipColor, AvatarChipPosition, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
-import { omit } from '../../utils/lodash'
-// const appConfig = useAppConfig()
+import { avatar } from '#ui/ui.config'
+
+const config = mergeConfig<typeof avatar>(appConfig.ui.strategy, appConfig.ui.avatar, avatar)
 
 export default defineComponent({
   components: {
@@ -52,27 +53,27 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: () => appConfig.ui.avatar.default.icon
+      default: () => config.default.icon
     },
     size: {
-      type: String,
-      default: () => appConfig.ui.avatar.default.size,
+      type: String as PropType<AvatarSize>,
+      default: () => config.default.size,
       validator (value: string) {
-        return Object.keys(appConfig.ui.avatar.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
     chipColor: {
-      type: String,
-      default: () => appConfig.ui.avatar.default.chipColor,
+      type: String as PropType<AvatarChipColor>,
+      default: () => config.default.chipColor,
       validator (value: string) {
         return ['gray', ...appConfig.ui.colors].includes(value)
       }
     },
     chipPosition: {
-      type: String,
-      default: () => appConfig.ui.avatar.default.chipPosition,
+      type: String as PropType<AvatarChipPosition>,
+      default: () => config.default.chipPosition,
       validator (value: string) {
-        return Object.keys(appConfig.ui.avatar.chip.position).includes(value)
+        return Object.keys(config.chip.position).includes(value)
       }
     },
     chipText: {
@@ -84,15 +85,12 @@ export default defineComponent({
       default: ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.avatar>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.avatar>>(() => defuTwMerge({}, props.ui, appConfig.ui.avatar))
+  setup (props) {
+    const { ui, attrs, attrsClass } = useUI('avatar', props.ui, config)
 
     const url = computed(() => {
       if (typeof props.src === 'boolean') {
@@ -111,7 +109,7 @@ export default defineComponent({
         (error.value || !url.value) && ui.value.background,
         ui.value.rounded,
         ui.value.size[props.size]
-      ), attrs.class as string)
+      ), attrsClass)
     })
 
     const imgClass = computed(() => {
@@ -150,7 +148,9 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      attrs,
       wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
       imgClass,

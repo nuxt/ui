@@ -56,6 +56,7 @@ import { transformContent } from '@nuxt/content/transformers'
 // @ts-ignore
 import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
 import { upperFirst, camelCase, kebabCase } from 'scule'
+import * as config from '#ui/ui.config'
 
 // eslint-disable-next-line vue/no-dupe-keys
 const props = defineProps({
@@ -124,8 +125,7 @@ const meta = await fetchComponentMeta(name)
 
 // Computed
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => ({ ...appConfig.ui[camelName], ...props.ui }))
+const ui = computed(() => ({ ...config[camelName], ...props.ui }))
 
 const fullProps = computed(() => ({ ...baseProps, ...componentProps }))
 const vModel = computed({

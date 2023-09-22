@@ -1,5 +1,5 @@
 <template>
-  <div ref="trigger" :class="wrapperClass" v-bind="attrs" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
+  <div ref="trigger" :class="ui.wrapper" v-bind="attrs" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
     <slot :open="open">
       Hover
     </slot>
@@ -27,18 +27,16 @@
 import { computed, ref, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { omit } from '../../utils/lodash'
-import { twMerge } from 'tailwind-merge'
 import UKbd from '../elements/Kbd.vue'
+import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
-import { defuTwMerge } from '../../utils'
-import type { PopperOptions } from '../../types/popper'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig } from '../../utils'
+import type { PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { tooltip } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof tooltip>(appConfig.ui.strategy, appConfig.ui.tooltip, tooltip)
 
 export default defineComponent({
   components: {
@@ -71,15 +69,12 @@ export default defineComponent({
       default: () => ({})
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.tooltip>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.tooltip>>(() => defuTwMerge({}, props.ui, appConfig.ui.tooltip))
+  setup (props) {
+    const { ui, attrs } = useUI('tooltip', props.ui, config, { mergeWrapper: true })
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
@@ -89,8 +84,6 @@ export default defineComponent({
 
     let openTimeout: NodeJS.Timeout | null = null
     let closeTimeout: NodeJS.Timeout | null = null
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     // Methods
 
@@ -127,13 +120,12 @@ export default defineComponent({
     }
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       trigger,
       container,
       open,
-      wrapperClass,
       onMouseOver,
       onMouseLeave
     }
