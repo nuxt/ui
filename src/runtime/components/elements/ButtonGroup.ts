@@ -1,23 +1,24 @@
 import { h, cloneVNode, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
-import { defuTwMerge, getSlotsChildren } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig, getSlotsChildren } from '../../utils'
+import type { ButtonSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { button, buttonGroup } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const buttonConfig = mergeConfig<typeof button>(appConfig.ui.strategy, appConfig.ui.button, button)
+const buttonGroupConfig = mergeConfig<typeof buttonGroup>(appConfig.ui.strategy, appConfig.ui.buttonGroup, buttonGroup)
 
 export default defineComponent({
   inheritAttrs: false,
   props: {
     size: {
-      type: String,
+      type: String as PropType<ButtonSize>,
       default: null,
       validator (value: string) {
-        return Object.keys(appConfig.ui.button.size).includes(value)
+        return Object.keys(buttonConfig.size).includes(value)
       }
     },
     orientation: {
@@ -28,15 +29,12 @@ export default defineComponent({
       }
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.buttonGroup>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof buttonGroupConfig & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs, slots }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.buttonGroup>>(() => defuTwMerge({}, props.ui, appConfig.ui.buttonGroup))
+  setup (props, { slots }) {
+    const { ui, attrs, attrsClass } = useUI('buttonGroup', props.ui, buttonGroupConfig)
 
     const children = computed(() => getSlotsChildren(slots))
 
@@ -58,12 +56,6 @@ export default defineComponent({
     const clones = computed(() => children.value.map((node, index) => {
       const vProps: any = {}
 
-      if (props.orientation === 'vertical') {
-        ui.value.wrapper = 'flex flex-col -space-y-px'
-      } else {
-        ui.value.wrapper = 'inline-flex -space-x-px'
-      }
-
       if (props.size) {
         vProps.size = props.size
       }
@@ -83,6 +75,14 @@ export default defineComponent({
       return cloneVNode(node, vProps)
     }))
 
-    return () => h('div', { class: twMerge(twJoin(ui.value.wrapper, ui.value.rounded, ui.value.shadow), attrs.class as string), ...omit(attrs, ['class']) }, clones.value)
+    const wrapperClass = computed(() => {
+      return twMerge(twJoin(
+        ui.value.wrapper[props.orientation],
+        ui.value.rounded,
+        ui.value.shadow
+      ), attrsClass)
+    })
+
+    return () => h('div', { class: wrapperClass.value, ...attrs.value }, clones.value)
   }
 })

@@ -76,12 +76,8 @@ import { ComboboxOption as HComboboxOption } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
-import type { Group } from '../../types/command-palette'
-// TODO: Remove
-// @ts-expect-error
-import appConfig from '#build/app.config'
-
-// const appConfig = useAppConfig()
+import type { Group } from '../../types'
+import { commandPalette } from '#ui/ui.config'
 
 export default defineComponent({
   components: {
@@ -112,8 +108,8 @@ export default defineComponent({
       required: true
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.commandPalette>>,
-      default: () => ({})
+      type: Object as PropType<typeof commandPalette>,
+      required: true
     }
   },
   setup (props) {

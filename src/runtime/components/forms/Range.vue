@@ -1,6 +1,7 @@
 <template>
   <div :class="wrapperClass">
     <input
+      :id="inputId"
       ref="input"
       v-model.number="value"
       :name="name"
@@ -21,14 +22,17 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
-import { defuTwMerge } from '../../utils'
+import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig } from '../../utils'
+import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { range } from '#ui/ui.config'
+import colors from '#ui-colors'
+
+const config = mergeConfig<typeof range>(appConfig.ui.strategy, appConfig.ui.range, range)
 
 export default defineComponent({
   inheritAttrs: false,
@@ -36,6 +40,10 @@ export default defineComponent({
     modelValue: {
       type: Number,
       default: 0
+    },
+    id: {
+      type: String,
+      default: null
     },
     name: {
       type: String,
@@ -58,15 +66,15 @@ export default defineComponent({
       default: 1
     },
     size: {
-      type: String,
-      default: () => appConfig.ui.range.default.size,
+      type: String as PropType<keyof typeof config.size>,
+      default: null,
       validator (value: string) {
-        return Object.keys(appConfig.ui.range.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String,
-      default: () => appConfig.ui.range.default.color,
+      type: String as PropType<typeof colors[number]>,
+      default: () => config.default.color,
       validator (value: string) {
         return appConfig.ui.colors.includes(value)
       }
@@ -76,26 +84,16 @@ export default defineComponent({
       default: null
     },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.range>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit, attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
+  setup (props, { emit }) {
+    const { ui, attrs, attrsClass } = useUI('range', props.ui, config)
 
-    const ui = computed<Partial<typeof appConfig.ui.range>>(() => defuTwMerge({}, props.ui, appConfig.ui.range))
-
-    const { emitFormChange, formGroup } = useFormGroup()
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => {
-      const size = formGroup?.size?.value ?? props.size
-      if (!ui.value.size[size.value]) {
-        return props.size
-      }
-      return size
-    })
+    const { emitFormChange, inputId, color, size: formGroupSize, name } = useFormGroup(props, config)
+    const size = computed(() => ui.value.size[formGroupSize] ? formGroupSize : config.default?.size)
 
     const value = computed({
       get () {
@@ -115,7 +113,7 @@ export default defineComponent({
       return twMerge(twJoin(
         ui.value.wrapper,
         ui.value.size[size.value]
-      ), attrs.class as string)
+      ), attrsClass)
     })
 
     const inputClass = computed(() => {
@@ -167,9 +165,12 @@ export default defineComponent({
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      name,
+      inputId,
       value,
       wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys

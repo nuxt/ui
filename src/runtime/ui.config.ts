@@ -1,6 +1,6 @@
 // Data
 
-const table = {
+export const table = {
   wrapper: 'relative overflow-x-auto',
   base: 'min-w-full table-fixed',
   divide: 'divide-y divide-gray-300 dark:divide-gray-700',
@@ -62,7 +62,7 @@ const table = {
 
 // Elements
 
-const avatar = {
+export const avatar = {
   wrapper: 'relative inline-flex items-center justify-center flex-shrink-0',
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
@@ -122,13 +122,13 @@ const avatar = {
   }
 }
 
-const avatarGroup = {
-  wrapper: 'flex flex-row-reverse justify-end',
+export const avatarGroup = {
+  wrapper: 'inline-flex flex-row-reverse justify-end',
   ring: 'ring-2 ring-white dark:ring-gray-900',
   margin: '-me-1.5 first:me-0'
 }
 
-const badge = {
+export const badge = {
   base: 'inline-flex items-center',
   rounded: 'rounded-md',
   font: 'font-medium',
@@ -162,7 +162,7 @@ const badge = {
   }
 }
 
-const button = {
+export const button = {
   base: 'focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0',
   font: 'font-medium',
   rounded: 'rounded-md',
@@ -239,13 +239,16 @@ const button = {
   }
 }
 
-const buttonGroup = {
-  wrapper: 'inline-flex -space-x-px',
+export const buttonGroup = {
+  wrapper: {
+    horizontal: 'inline-flex -space-x-px',
+    vertical: 'inline-flex flex-col -space-y-px'
+  },
   rounded: 'rounded-md',
   shadow: 'shadow-sm'
 }
 
-const dropdown = {
+export const dropdown = {
   wrapper: 'relative inline-flex text-left rtl:text-right',
   container: 'z-20',
   width: 'w-48',
@@ -291,7 +294,7 @@ const dropdown = {
   }
 }
 
-const accordion = {
+export const accordion = {
   wrapper: 'w-full flex flex-col',
   item: {
     base: '',
@@ -312,7 +315,7 @@ const accordion = {
   }
 }
 
-const alert = {
+export const alert = {
   wrapper: 'w-full relative overflow-hidden',
   title: 'text-sm font-medium',
   description: 'mt-1 text-sm leading-4 opacity-90',
@@ -350,7 +353,7 @@ const alert = {
   }
 }
 
-const kbd = {
+export const kbd = {
   base: 'inline-flex items-center justify-center text-gray-900 dark:text-white',
   padding: 'px-1',
   size: {
@@ -369,7 +372,7 @@ const kbd = {
 
 // Forms
 
-const input = {
+export const input = {
   wrapper: 'relative',
   base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0',
   rounded: 'rounded-md',
@@ -474,7 +477,7 @@ const input = {
   }
 }
 
-const formGroup = {
+export const formGroup = {
   wrapper: '',
   label: {
     wrapper: 'flex content-center items-center justify-between',
@@ -494,10 +497,13 @@ const formGroup = {
   description: 'text-gray-500 dark:text-gray-400',
   hint: 'text-gray-500 dark:text-gray-400',
   help: 'mt-2 text-gray-500 dark:text-gray-400',
-  error: 'mt-2 text-red-500 dark:text-red-400'
+  error: 'mt-2 text-red-500 dark:text-red-400',
+  default: {
+    size: 'sm'
+  }
 }
 
-const textarea = {
+export const textarea = {
   ...input,
   default: {
     size: 'sm',
@@ -506,7 +512,7 @@ const textarea = {
   }
 }
 
-const select = {
+export const select = {
   ...input,
   placeholder: 'text-gray-900 dark:text-white',
   default: {
@@ -518,7 +524,7 @@ const select = {
   }
 }
 
-const selectMenu = {
+export const selectMenu = {
   container: 'z-20',
   width: 'w-full',
   height: 'max-h-60',
@@ -573,7 +579,7 @@ const selectMenu = {
   }
 }
 
-const radio = {
+export const radio = {
   wrapper: 'relative flex items-start',
   base: 'h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
   color: 'text-{color}-500 dark:text-{color}-400',
@@ -588,7 +594,7 @@ const radio = {
   }
 }
 
-const checkbox = {
+export const checkbox = {
   wrapper: 'relative flex items-start',
   base: 'h-4 w-4 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
   rounded: 'rounded',
@@ -604,7 +610,7 @@ const checkbox = {
   }
 }
 
-const toggle = {
+export const toggle = {
   base: 'relative inline-flex h-5 w-9 flex-shrink-0 border-2 border-transparent disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none',
   rounded: 'rounded-full',
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
@@ -629,7 +635,7 @@ const toggle = {
   }
 }
 
-const range = {
+export const range = {
   wrapper: 'relative w-full flex items-center',
   base: 'w-full absolute appearance-none cursor-pointer disabled:cursor-not-allowed disabled:bg-opacity-50 focus:outline-none peer group',
   rounded: 'rounded-lg',
@@ -679,7 +685,7 @@ const range = {
 
 // Layout
 
-const card = {
+export const card = {
   base: 'overflow-hidden',
   background: 'bg-white dark:bg-gray-900',
   divide: 'divide-y divide-gray-200 dark:divide-gray-800',
@@ -703,13 +709,13 @@ const card = {
   }
 }
 
-const container = {
+export const container = {
   base: 'mx-auto',
   padding: 'px-4 sm:px-6 lg:px-8',
   constrained: 'max-w-7xl'
 }
 
-const skeleton = {
+export const skeleton = {
   base: 'animate-pulse',
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-md'
@@ -717,7 +723,7 @@ const skeleton = {
 
 // Navigation
 
-const verticalNavigation = {
+export const verticalNavigation = {
   wrapper: 'relative',
   base: 'group relative flex items-center gap-2 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
   ring: 'focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
@@ -745,7 +751,7 @@ const verticalNavigation = {
   }
 }
 
-const commandPalette = {
+export const commandPalette = {
   wrapper: 'flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800',
   container: 'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
   input: {
@@ -789,7 +795,7 @@ const commandPalette = {
       },
       avatar: {
         base: 'flex-shrink-0',
-        size: '3xs'
+        size: '3xs' as const
       },
       chip: {
         base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
@@ -813,7 +819,7 @@ const commandPalette = {
   }
 }
 
-const pagination = {
+export const pagination = {
   wrapper: 'flex items-center -space-x-px',
   base: '',
   rounded: 'first:rounded-s-md last:rounded-e-md',
@@ -838,7 +844,7 @@ const pagination = {
   }
 }
 
-const tabs = {
+export const tabs = {
   wrapper: 'relative space-y-2',
   container: 'relative w-full',
   base: 'focus:outline-none',
@@ -874,7 +880,7 @@ const tabs = {
 
 // Overlays
 
-const modal = {
+export const modal = {
   wrapper: 'relative z-50',
   inner: 'fixed inset-0 overflow-y-auto',
   container: 'flex min-h-full items-end sm:items-center justify-center text-center',
@@ -911,7 +917,7 @@ const modal = {
   }
 }
 
-const slideover = {
+export const slideover = {
   wrapper: 'fixed inset-0 flex z-50',
   overlay: {
     base: 'fixed inset-0 transition-opacity',
@@ -940,7 +946,7 @@ const slideover = {
   }
 }
 
-const tooltip = {
+export const tooltip = {
   wrapper: 'relative inline-flex',
   container: 'z-20',
   width: 'max-w-xs',
@@ -965,7 +971,7 @@ const tooltip = {
   }
 }
 
-const popover = {
+export const popover = {
   wrapper: 'relative',
   container: 'z-20',
   width: '',
@@ -988,7 +994,7 @@ const popover = {
   }
 }
 
-const contextMenu = {
+export const contextMenu = {
   wrapper: 'relative',
   container: 'z-20',
   width: '',
@@ -1012,7 +1018,7 @@ const contextMenu = {
   }
 }
 
-const notification = {
+export const notification = {
   wrapper: 'w-full pointer-events-auto',
   container: 'relative overflow-hidden',
   title: 'text-sm font-medium text-gray-900 dark:text-white',
@@ -1028,7 +1034,7 @@ const notification = {
   },
   avatar: {
     base: 'flex-shrink-0 self-center',
-    size: 'md'
+    size: 'md' as const
   },
   progress: {
     base: 'absolute bottom-0 end-0 start-0 h-1',
@@ -1059,47 +1065,9 @@ const notification = {
   }
 }
 
-const notifications = {
+export const notifications = {
   wrapper: 'fixed flex flex-col justify-end z-[55]',
   position: 'bottom-0 end-0',
   width: 'w-full sm:w-96',
   container: 'px-4 sm:px-6 py-6 space-y-3 overflow-y-auto'
-}
-
-export default {
-  ui: {
-    table,
-    avatar,
-    avatarGroup,
-    badge,
-    button,
-    buttonGroup,
-    dropdown,
-    kbd,
-    accordion,
-    alert,
-    input,
-    formGroup,
-    textarea,
-    select,
-    selectMenu,
-    checkbox,
-    radio,
-    toggle,
-    range,
-    card,
-    container,
-    skeleton,
-    verticalNavigation,
-    commandPalette,
-    pagination,
-    tabs,
-    modal,
-    slideover,
-    popover,
-    tooltip,
-    contextMenu,
-    notification,
-    notifications
-  }
 }

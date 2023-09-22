@@ -1,0 +1,3 @@
+imports.autoImport=false
+typescript.includeWorkspace=true
+typescript.strict=false

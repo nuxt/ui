@@ -4,7 +4,7 @@ export interface FormError {
 }
 
 export interface Form<T> {
-  validate(path?: string, opts: { silent?: boolean } = { silent: false }): Promise<T>
+  validate(path?: string, opts: { silent?: boolean }): Promise<T>
   clear(path?: string): void
   errors: Ref<FormError[]>
   setErrors(errs: FormError[], path?: string): void
@@ -18,4 +18,11 @@ export type FormEventType = 'blur' | 'input' | 'change' | 'submit'
 export interface FormEvent {
   type: FormEventType
   path: string
+}
+
+export interface InjectedFormGroupValue {
+  inputId: Ref<string>
+  name: Ref<string>
+  size: Ref<string>
+  error: Ref<string | boolean>
 }

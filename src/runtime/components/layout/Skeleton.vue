@@ -5,42 +5,39 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from '../../utils/lodash'
 import { twMerge, twJoin } from 'tailwind-merge'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { skeleton } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof skeleton>(appConfig.ui.strategy, appConfig.ui.skeleton, skeleton)
 
 export default defineComponent({
   inheritAttrs: false,
   props: {
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.skeleton>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.skeleton>>(() => defuTwMerge({}, props.ui, appConfig.ui.skeleton))
+  setup (props) {
+    const { ui, attrs, attrsClass } = useUI('skeleton', props.ui, config)
 
     const skeletonClass = computed(() => {
       return twMerge(twJoin(
         ui.value.base,
         ui.value.background,
         ui.value.rounded
-      ), attrs.class as string)
+      ), attrsClass)
     })
 
     return {
-      attrs: computed(() => omit(attrs, ['class'])),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       skeletonClass
     }
   }

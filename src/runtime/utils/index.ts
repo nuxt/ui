@@ -1,15 +1,30 @@
-import { createDefu } from 'defu'
-import { twMerge } from 'tailwind-merge'
+import { defu, createDefu } from 'defu'
+import { extendTailwindMerge } from 'tailwind-merge'
+import type { Strategy } from '../types'
 
-export const defuTwMerge = createDefu((obj, key, value) => {
-  if (typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
+const customTwMerge = extendTailwindMerge({
+  classGroups: {
+    icons: [(classPart: string) => /^i-/.test(classPart)]
+  }
+})
+
+const defuTwMerge = createDefu((obj, key, value, namespace) => {
+  if (namespace !== 'default' && typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
     // @ts-ignore
-    obj[key] = twMerge(obj[key], value)
+    obj[key] = customTwMerge(obj[key], value)
     return true
   }
 })
 
-export const hexToRgb = (hex: string) => {
+export function mergeConfig<T> (strategy: Strategy, ...configs): T {
+  if (strategy === 'override') {
+    return defu({}, ...configs) as T
+  }
+
+  return defuTwMerge({}, ...configs) as T
+}
+
+export function hexToRgb (hex: string) {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
   hex = hex.replace(shorthandRegex, function (_, r, g, b) {
@@ -22,7 +37,7 @@ export const hexToRgb = (hex: string) => {
     : null
 }
 
-export const getSlotsChildren = (slots: any) => {
+export function getSlotsChildren (slots: any) {
   let children = slots.default?.()
   if (children.length) {
     children = children.flatMap(c => {
@@ -40,3 +55,5 @@ export const getSlotsChildren = (slots: any) => {
   }
   return children
 }
+
+export * from './lodash'
