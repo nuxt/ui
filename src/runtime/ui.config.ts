@@ -370,6 +370,76 @@ export const kbd = {
   }
 }
 
+export const meter = {
+  wrapper: 'w-full flex flex-col gap-2',
+  indicator: {
+    container: 'min-w-fit transition-all',
+    text: 'text-gray-500 text-end',
+    size: {
+      sm: 'text-xs',
+      md: 'text-sm',
+      lg: 'text-md'
+    }
+  },
+  meter: {
+    base: 'appearance-none block w-full bg-none overflow-y-hidden',
+    background: 'bg-gray-200 dark:bg-gray-700',
+    color: 'text-{color}-500',
+    ring: '',
+    rounded: 'rounded-full',
+    shadow: '',
+    size: {
+      sm: 'h-1',
+      md: 'h-2',
+      lg: 'h-3'
+    },
+    appearance: {
+      inner: '[&::-webkit-meter-inner-element]:block [&::-webkit-meter-inner-element]:relative [&::-webkit-meter-inner-element]:border-none [&::-webkit-meter-inner-element]:bg-none [&::-webkit-meter-inner-element]:bg-transparent',
+      meter: '[&::-webkit-meter-bar]:border-none [&::-webkit-meter-bar]:bg-none [&::-webkit-meter-bar]:bg-transparent',
+      bar: '[&::-webkit-meter-optimum-value]:border-none [&::-webkit-meter-optimum-value]:bg-none [&::-webkit-meter-optimum-value]:bg-current',
+      value: '[&::-moz-meter-bar]:border-none [&::-moz-meter-bar]:bg-none [&::-moz-meter-bar]:bg-current'
+    },
+    bar: {
+      transition: '[&::-webkit-meter-optimum-value]:transition-all [&::-moz-meter-bar]:transition-all',
+      ring: '',
+      rounded: '[&::-webkit-meter-optimum-value]:rounded-full [&::-moz-meter-bar]:rounded-full',
+      size: {
+        sm: '[&::-webkit-meter-optimum-value]:h-1 [&::-moz-meter-bar]:h-1',
+        md: '[&::-webkit-meter-optimum-value]:h-2 [&::-moz-meter-bar]:h-2',
+        lg: '[&::-webkit-meter-optimum-value]:h-3 [&::-moz-meter-bar]:h-3'
+      }
+    }
+  },
+  label: {
+    base: 'truncate',
+    color: 'text-{color}-500',
+    size: {
+      sm: 'text-xs',
+      md: 'text-sm',
+      lg: 'text-md'
+    }
+  },
+  default: {
+    size: 'md',
+    color: 'primary'
+  }
+}
+
+export const meterGroup = {
+  wrapper: 'flex flex-row flex-nowrap flex-shrink w-full',
+  background: 'bg-gray-200 dark:bg-gray-700',
+  rounded: 'rounded-full',
+  shadow: '',
+  size: {
+    sm: 'h-1',
+    md: 'h-2',
+    lg: 'h-3'
+  },
+  default: {
+    size: 'md'
+  }
+}
+
 // Forms
 
 export const input = {
