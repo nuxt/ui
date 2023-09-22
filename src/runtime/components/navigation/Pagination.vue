@@ -128,19 +128,20 @@ export default defineComponent({
 
     const displayedPages = computed(() => {
       const totalItems = props.total
+      const totalPages = pages.value.length
       const current = currentPage.value
       const perPage = props.pageCount
       const lastPage = Math.ceil(totalItems / perPage)
 
       const maxDisplayedPages = props.max
       const halfDisplayedPages = Math.floor(maxDisplayedPages / 2)
-      const startDisplayedPage = Math.max(2, current - halfDisplayedPages)
-      const endDisplayedPage = Math.min(startDisplayedPage + maxDisplayedPages - 2, Math.ceil(totalItems / perPage))
+      const startDisplayedPage = Math.max(2, current + 1 - halfDisplayedPages)
+      const endDisplayedPage = Math.min(startDisplayedPage + maxDisplayedPages - 2, lastPage)
 
       const items = []
 
-      if (totalItems <= maxDisplayedPages) {
-        for (let i = 1; i <= totalItems; i++) {
+      if (totalPages <= maxDisplayedPages) {
+        for (let i = 1; i <= totalPages; i++) {
           items.push(i)
         }
         return items
@@ -148,7 +149,7 @@ export default defineComponent({
 
       items.push(1)
 
-      if (current > halfDisplayedPages + 1) {
+      if (current > halfDisplayedPages + 1 && startDisplayedPage > 2) {
         items.push(props.divider)
       }
 
