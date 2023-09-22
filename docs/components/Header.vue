@@ -56,14 +56,30 @@ const links = computed(() => {
     icon: 'i-heroicons-square-3-stack-3d',
     to: '/getting-started/examples'
   }, {
-    label: 'Playground',
-    icon: 'i-simple-icons-stackblitz',
-    to: '/playground'
+    label: 'Pro',
+    icon: 'i-heroicons-square-3-stack-3d',
+    to: '/pro'
   }, {
-    label: 'Releases',
-    icon: 'i-heroicons-rocket-launch-solid',
-    to: 'https://github.com/nuxt/ui/releases',
-    target: '_blank'
+    label: 'Community',
+    children: [{
+      label: 'Playground',
+      icon: 'i-simple-icons-stackblitz',
+      to: '/playground'
+    }, {
+      label: 'Roadmap',
+      icon: 'i-heroicons-beaker',
+      to: '/roadmap'
+    }, {
+      label: 'Contribution',
+      icon: 'i-heroicons-globe-alt',
+      to: 'https://nuxt.com/docs/community/contribution',
+      target: '_blank'
+    }, {
+      label: 'Releases',
+      icon: 'i-heroicons-rocket-launch',
+      to: 'https://github.com/nuxt/ui/releases',
+      target: '_blank'
+    }]
   }]
 })
 </script>

@@ -6,7 +6,7 @@
           <UAside>
             <BranchSelect />
 
-            <UNavigationTree :links="mapContentNavigation(navigation)" />
+            <UNavigationTree :links="mapContentNavigation(docsNavigation)" />
           </UAside>
         </template>
 
@@ -20,4 +20,6 @@
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 
 const navigation = inject<NavItem[]>('navigation')
+
+const docsNavigation = computed(() => navigation.value.filter(item => !item._path.startsWith('/pro')))
 </script>

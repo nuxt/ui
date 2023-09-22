@@ -22,7 +22,8 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      version: pkg.version
+      version: pkg.version,
+      uiProPath: process.env.NUXT_UI_PRO_PATH
     }
   },
   ui: {
@@ -43,6 +44,18 @@ export default defineNuxtConfig({
         repo: 'nuxt/ui',
         branch: 'main',
         dir: 'docs/content'
+      },
+      pro: process.env.NUXT_UI_PRO_PATH ? {
+        prefix: '/pro',
+        driver: 'fs',
+        base: resolve(process.env.NUXT_UI_PRO_PATH, '.docs')
+      } : {
+        prefix: '/pro',
+        driver: 'github',
+        repo: 'nuxt/ui-pro',
+        branch: 'dev',
+        dir: '.docs',
+        token: process.env.GITHUB_TOKEN || ''
       }
     }
   },
@@ -68,7 +81,7 @@ export default defineNuxtConfig({
   },
   componentMeta: {
     globalsOnly: true,
-    exclude: ['@nuxtjs/mdc', resolve('./components'), resolve('@nuxt/ui-pro/components')],
+    exclude: ['@nuxtjs/mdc', resolve('./components')],
     metaFields: {
       props: true,
       slots: false,
