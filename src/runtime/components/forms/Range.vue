@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperClass">
     <input
-      :id="id"
+      :id="inputId"
       ref="input"
       v-model.number="value"
       :name="name"
@@ -67,7 +67,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<keyof typeof config.size>,
-      default: () => config.default.size,
+      default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
@@ -92,10 +92,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs, attrsClass } = useUI('range', props.ui, config)
 
-    const { emitFormChange, formGroup } = useFormGroup(props)
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => formGroup?.size?.value ?? props.size)
-    const id = formGroup?.labelFor
+    const { emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
 
     const value = computed({
       get () {
@@ -171,7 +168,8 @@ export default defineComponent({
       ui,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
-      id,
+      name,
+      inputId,
       value,
       wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
