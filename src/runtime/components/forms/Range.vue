@@ -92,8 +92,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs, attrsClass } = useUI('range', props.ui, config)
 
-    const { emitFormChange, inputId, color, size: formGroupSize, name } = useFormGroup(props, config)
-    const size = computed(() => ui.value.size[formGroupSize] ? formGroupSize : (props.size ?? config.default?.size))
+    const { emitFormChange, inputId, color, size, name } = useFormGroup(props, ui)
 
     const value = computed({
       get () {
