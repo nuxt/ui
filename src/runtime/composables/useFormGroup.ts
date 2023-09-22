@@ -12,11 +12,16 @@ type InputProps = {
 export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
     const formGroup = inject<InjectedFormGroupValue>('form-group', undefined)
+    const formInputs = inject<any>('form-inputs', undefined)
 
     if (formGroup) {
       // Updates for="..." attribute on label if inputProps.id is provided
       formGroup.inputId.value = inputProps?.id ?? formGroup?.inputId.value
     }
+
+    if (formInputs) {
+      formInputs.value[formGroup.name.value] = formGroup.inputId.value
+   }
 
     const blurred = ref(false)
 

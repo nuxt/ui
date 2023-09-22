@@ -45,12 +45,6 @@ export default defineComponent({
     validateOn: {
       type: Array as PropType<FormEventType[]>,
       default: () => ['blur', 'input', 'change', 'submit']
-    },
-    /** Only works if <input name=""> name is the same that `state` key.  */
-    focusOnFail: {
-      type: Boolean,
-      required: false,
-      default: false
     }
   },
   emits: ['submit', 'error'],
@@ -66,6 +60,8 @@ export default defineComponent({
     const errors = ref<FormError[]>([])
     provide('form-errors', errors)
     provide('form-events', bus)
+    const inputs = ref({})
+    provide('form-inputs', inputs)
 
     async function getErrors (): Promise<FormError[]> {
       let errs = await props.validate(props.state)
@@ -118,15 +114,12 @@ export default defineComponent({
         emit('submit', event)
       } catch (error) {
         if (error instanceof FormException) {
-          emit('error', event, errors.value)
-          if (props.focusOnFail) {
-            const { path } = errors.value[0]
-            const element = document.querySelector(`input[name="${path}"]`) as HTMLInputElement
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth' })
-              element.focus()
-            }
+          const submitEvent = event as FormSubmitEvent<any>
+          submitEvent.data = {
+            errors: errors.value,
+            ids: inputs.value
           }
+          emit('error', submitEvent)
         } else {
           throw error
         }
