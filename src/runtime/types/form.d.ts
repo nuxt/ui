@@ -1,5 +1,5 @@
-export interface FormError {
-  path: string
+export interface FormError<T extends string = string> {
+  path: T
   message: string
 }
 
