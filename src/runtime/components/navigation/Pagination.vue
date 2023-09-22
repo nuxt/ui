@@ -132,7 +132,7 @@ export default defineComponent({
       const perPage = props.pageCount
       const lastPage = Math.ceil(totalItems / perPage)
 
-      const maxDisplayedPages = Math.min(props.max, perPage)
+      const maxDisplayedPages = props.max
       const halfDisplayedPages = Math.floor(maxDisplayedPages / 2)
       const startDisplayedPage = Math.max(2, current - halfDisplayedPages)
       const endDisplayedPage = Math.min(startDisplayedPage + maxDisplayedPages - 2, Math.ceil(totalItems / perPage))
