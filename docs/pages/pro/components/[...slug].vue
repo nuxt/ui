@@ -14,7 +14,7 @@
         </h2>
 
         <FieldGroup>
-          <ComponentField v-for="prop in component.meta.props" :key="prop.name" :prop="prop" />
+          <ComponentPropsField v-for="prop in component.meta.props" :key="prop.name" :prop="prop" />
         </FieldGroup>
       </template>
 
@@ -27,17 +27,15 @@
           <Field v-for="slot in component.meta.slots" :key="slot.name" v-bind="slot" />
         </FieldGroup>
       </template>
-
-      <DocsFooter />
     </UPageBody>
-
-    <template v-if="tocLinks.length" #right>
-      <UDocsToc :links="tocLinks" />
-    </template>
   </UPage>
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: 'pro'
+})
+
 const route = useRoute()
 
 const [category, name] = route.params.slug

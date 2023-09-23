@@ -178,6 +178,8 @@
         </div>
       </ULandingCTA>
     </ULandingSection>
+
+    <ULandingSection v-bind="page.pro" />
   </div>
 </template>
 

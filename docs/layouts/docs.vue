@@ -3,7 +3,7 @@
     <UContainer>
       <UPage>
         <template #left>
-          <UAside>
+          <UAside :links="links">
             <BranchSelect />
 
             <UNavigationTree :links="mapContentNavigation(docsNavigation)" />
@@ -19,7 +19,19 @@
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 
-const navigation = inject<NavItem[]>('navigation')
+const nav = inject<Ref<NavItem[]>>('navigation')
 
-const docsNavigation = computed(() => navigation.value.filter(item => !item._path.startsWith('/pro')))
+const navigation = computed(() => nav.value.filter(item => !item._path.startsWith('/pro')))
+
+const links = [{
+  label: 'Figma Kit',
+  icon: 'i-simple-icons-figma',
+  to: 'https://www.figma.com/community/file/1009606299846269139/Nuxt-UI',
+  target: '_blank'
+}, {
+  label: 'Releases',
+  icon: 'i-heroicons-rocket-launch',
+  to: 'https://github.com/nuxt/ui/releases',
+  target: '_blank'
+}]
 </script>
