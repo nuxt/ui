@@ -1,0 +1,20 @@
+name: "🚀 Feature request"
+description: Suggest an idea or enhancement for the module.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before requesting a feature, please make sure that you have read through our [documentation](https://ui.nuxt.com) and existing [issues](https://github.com/nuxt/ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc).
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of what you think would be an helpful addition to the module, including the possible use cases and alternatives you have considered. If you have a working prototype or module that implements it, please include a link.
+    validations:
+      required: true
+  - type: textarea
+    id: additonal
+    attributes:
+      label: Additional context
+      description: If applicable, add any other context or screenshots here.
