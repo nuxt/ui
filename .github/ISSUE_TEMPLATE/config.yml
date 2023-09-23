@@ -3,6 +3,6 @@ contact_links:
   - name: 📖 Documentation
     url: https://ui.nuxt.com/
     about: Check the documentation for guides and examples.
-  - name: #️⃣ Discord
+  - name: 💬 Discord
     url: https://discord.nuxtjs.org/
     about: Consider asking questions in the `#ui` channel.
