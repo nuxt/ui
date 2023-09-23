@@ -50,6 +50,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    active: {
+      type: Boolean,
+      default: false
+    },
     exactQuery: {
       type: Boolean,
       default: false
@@ -65,6 +69,10 @@ export default defineComponent({
   },
   setup (props) {
     function resolveLinkClass (route, $route, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
+      if (props.active) {
+        return props.activeClass
+      }
+
       if (props.exactQuery && !isEqual(route.query, $route.query)) {
         return props.inactiveClass
       }
