@@ -61,7 +61,7 @@ const links = computed(() => {
     icon: 'i-heroicons-beaker',
     to: '/roadmap'
   }, {
-    label: 'UI Pro',
+    label: 'Pro',
     icon: 'i-heroicons-square-3-stack-3d',
     to: '/pro'
   }]

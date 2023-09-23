@@ -6,7 +6,7 @@
           <UAside :links="links">
             <BranchSelect />
 
-            <UNavigationTree :links="mapContentNavigation(docsNavigation)" />
+            <UNavigationTree :links="mapContentNavigation(navigation)" />
           </UAside>
         </template>
 
