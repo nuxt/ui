@@ -30,6 +30,9 @@ export default <Partial<Config>>{
       },
       gridRow: {
         'span-8': 'span 8 / span 8'
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
       }
     }
   }

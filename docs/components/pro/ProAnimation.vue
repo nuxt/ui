@@ -1,7 +1,7 @@
 <template>
-  <UMain class="p-12 max-w-7xl mx-auto h-full flex flex-col justify-between gap-4 relative">
+  <div class="h-full flex flex-col justify-between gap-4 relative">
     <ComponentPlaceholder v-for="(component, index) in components" :key="index" v-bind="component" />
-  </UMain>
+  </div>
 </template>
 
 
