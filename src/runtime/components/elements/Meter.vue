@@ -67,7 +67,7 @@ export default defineComponent({
       required: false
     },
     size: {
-      type: String as PropType<keyof typeof config.size>,
+      type: String as PropType<keyof typeof config.meter.size>,
       default: () => config.default.size,
       validator (value: string) {
         return Object.keys(config.meter.bar.size).includes(value)
