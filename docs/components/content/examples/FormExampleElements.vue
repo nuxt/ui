@@ -17,6 +17,7 @@ const state = ref({
   checkbox: undefined,
   toggle: undefined,
   radio: undefined,
+  radioGroup: undefined,
   switch: undefined,
   range: undefined
 })
@@ -37,6 +38,9 @@ const schema = z.object({
     message: 'Check me'
   }),
   radio: z.string().refine(value => value === 'option-2', {
+    message: 'Select Option 2'
+  }),
+  radioGroup: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
   }),
   range: z.number().max(20, { message: 'Must be less than 20' })
@@ -81,6 +85,10 @@ async function submit (event: FormSubmitEvent<Schema>) {
 
     <UFormGroup name="checkbox" label="Checkbox">
       <UCheckbox v-model="state.checkbox" label="Check me" />
+    </UFormGroup>
+
+    <UFormGroup name="radioGroup" label="Radio Group">
+      <URadioGroup v-model="state.radioGroup" :options="options" />
     </UFormGroup>
 
     <UFormGroup name="radio" label="Radio">

@@ -1,14 +1,11 @@
 <script setup>
-const methods = [{
-  name: 'email',
+const options = [{
   value: 'email',
   label: 'Email'
 }, {
-  name: 'sms',
   value: 'sms',
   label: 'Phone (SMS)'
 }, {
-  name: 'push',
   value: 'push',
   label: 'Push notification'
 }]
@@ -18,6 +15,6 @@ const selected = ref('sms')
 
 <template>
   <div class="space-y-1">
-    <URadio v-for="method of methods" :key="method.name" v-model="selected" v-bind="method" />
+    <URadioGroup v-model="selected" :options="options" />
   </div>
 </template>
