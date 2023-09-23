@@ -1,16 +1,11 @@
 ---
-name: Question
+name: 💬 Question
 about: Ask a question about the module.
 title: ''
 labels: 'question'
 assignees: ''
-
 ---
 
 <!-- **IMPORTANT!**
-Please make sure to look for an answer to your question in our documentation and the documentation before asking a question here.
-
-If you have a general question regarding the module use Discord `modules` channel. Thanks!
-
-Nuxt Discord: https://discord.nuxtjs.org/
+Please make sure that you have read through our documentation and existing [issues](https://github.com/nuxt/ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) before asking here.
 -->

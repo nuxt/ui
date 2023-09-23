@@ -1,20 +1,23 @@
 ---
-name: Feature request
+name: 🚀 Feature request
 about: Suggest an idea or enhancement for the module.
 title: ''
 labels: 'enhancement'
 assignees: ''
-
 ---
 
-### Is your feature request related to a problem? Please describe.
-<!-- A clear and concise description of what the problem is. Ex. I'm always frustrated when [...] -->
+<!-- **IMPORTANT!**
+Before requesting a feature, please make sure that you have read through our documentation and existing [issues](https://github.com/nuxt/ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc).
+-->
 
-### Describe the solution you'd like
-<!-- A clear and concise description of what you want to happen. -->
+### Description
 
-### Describe alternatives you've considered
-<!-- A clear and concise description of any alternative solutions or features you've considered. -->
+<!--
+A clear and concise description of what you think would be an helpful addition to the module, including the possible use cases and alternatives you have considered. If you have a working prototype or module that implements it, please include a link.
+-->
 
 ### Additional context
-<!-- Add any other context or screenshots about the feature request here. -->
+
+<!--
+Add any other context or screenshots about the feature request here.
+-->
