@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { upperFirst } from 'scule'
+import { upperFirst, camelCase } from 'scule'
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 import type { Link } from '#ui-pro/types'
 
@@ -59,7 +59,7 @@ const links = computed(() => {
     if (!category) {
       acc.push({
         to: `/pro/components/${categoryName}`,
-        label: upperFirst(categoryName),
+        label: upperFirst(camelCase(categoryName)),
         children: [link]
       })
     } else {

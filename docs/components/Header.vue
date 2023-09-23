@@ -51,7 +51,7 @@ const links = computed(() => {
   return [{
     label: 'Documentation',
     icon: 'i-heroicons-book-open-solid',
-    to: `${branch.value?.name === 'dev' ? '/dev' : ''}/docs`
+    to: `${branch.value?.name === 'dev' ? '/dev' : ''}/getting-started`
   }, {
     label: 'Playground',
     icon: 'i-simple-icons-stackblitz',

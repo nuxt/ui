@@ -2,7 +2,11 @@
   <div>
     <UPageHero v-bind="page" align="center" />
 
-    <ProAnimation />
+    <UPage>
+      <UPageBody>
+        <ProAnimation />
+      </UPageBody>
+    </UPage>
   </div>
 </template>
 
