@@ -20,10 +20,6 @@
 
           <template #header-right>
             <div class="flex items-center gap-1.5">
-              <ColorPicker />
-
-              <UDocsSearchButton :label="null" />
-
               <UColorModeButton />
 
               <UButton
@@ -51,6 +47,43 @@
               <UButton aria-label="Nuxt UI on Discord" icon="i-simple-icons-discord" to="https://discord.com/channels/473401852243869706/1153996761426300948" target="_blank" v-bind="($ui.button.secondary as any)" />
               <UButton aria-label="Nuxt UI on GitHub" icon="i-simple-icons-github" to="https://github.com/nuxt/ui" target="_blank" v-bind="($ui.button.secondary as any)" />
             </div>
+          </template>
+
+          <template #aside-top>
+            <UDocsSearchButton size="lg" class="w-full" />
+          </template>
+
+          <template #aside-default>
+            <UNavigationTree
+              class="w-full h-full [&>div>div>div>nav]:border-gray-800/10 dark:[&>div>div>div>nav]:border-gray-200/10"
+              :links="[{
+                label: 'Getting Started',
+                children: [{
+                  label: 'Introduction'
+                }, {
+                  label: 'Installation'
+                }, {
+                  label: 'Theming'
+                }, {
+                  label: 'Shortcuts'
+                }, {
+                  label: 'Examples'
+                }, {
+                  label: 'Roadmap'
+                }]
+              }, {
+                label: 'Elements',
+                children: [{
+                  label: 'Alert'
+                }, {
+                  label: 'Avatar'
+                }, {
+                  label: 'Badge'
+                }, {
+                  label: 'Button'
+                }]
+              }]"
+            />
           </template>
         </ProTemplate>
       </ULandingSection>
@@ -93,114 +126,100 @@ function getStep () {
 const steps = {
   UHeader: 0,
   UFooter: 5,
-  UPage: 10
+  UPage: 10,
+  UAside: 12
 }
 
-const components = computed(() => [{
+function trimArray <T> (array: Array<T | false | null | undefined>, { deep = false } = {}): Array<T> {
+  return (deep
+    ? array.map((item) => {
+      if (Array.isArray(item)) {
+        return trimArray(item, { deep })
+      } else {
+        return item
+      }
+    })
+    : array).filter(item => !!item && (!Array.isArray(item) || item.length)) as Array<T>
+}
+
+const components = computed(() => trimArray([scrolledStep(steps.UHeader) && {
   name: 'UHeader',
   class: 'h-16 inset-x-0 top-0',
-  visible: scrolledStep(steps.UHeader),
   inactive: scrolledStep(steps.UHeader + 1),
-  children: [{
+  children: [scrolledStep(steps.UHeader + 2) ? {
+    slot: 'header-left',
+    class: 'left-4 top-5'
+  } : {
     name: '#left',
-    class: 'left-4 inset-y-4 w-64',
-    inactive: scrolledStep(steps.UHeader + 2)
-  }, {
+    class: 'left-4 inset-y-4 w-64'
+  }, scrolledStep(steps.UHeader + 3) ? {
+    slot: 'header-center',
+    class: 'inset-x-72 top-5'
+  } : {
     name: '#center',
-    class: 'inset-x-72 inset-y-4',
-    inactive: scrolledStep(steps.UHeader + 3)
-  }, {
+    class: 'inset-x-72 inset-y-4'
+  }, scrolledStep(steps.UHeader + 4) ? {
+    slot: 'header-right',
+    class: 'right-4 top-4'
+  } : {
     name: '#right',
-    class: 'right-4 inset-y-4 w-64',
-    inactive: scrolledStep(steps.UHeader + 4)
+    class: 'right-4 inset-y-4 w-64'
   }]
-}, {
-  visible: scrolledStep(steps.UHeader + 2),
-  slot: 'header-left',
-  transparent: true,
-  class: 'left-4 top-5'
-}, {
-  visible: scrolledStep(steps.UHeader + 3),
-  slot: 'header-center',
-  transparent: true,
-  class: 'inset-x-72 top-5'
-}, {
-  visible: scrolledStep(steps.UHeader + 4),
-  slot: 'header-right',
-  transparent: true,
-  class: 'right-4 top-4'
-}, {
+}, scrolledStep(steps.UFooter) && {
   name: 'UFooter',
   class: 'h-16 inset-x-0 bottom-0',
-  visible: scrolledStep(steps.UFooter),
   inactive: scrolledStep(steps.UFooter + 1),
-  children: [{
+  children: [scrolledStep(steps.UFooter + 2) ? {
+    slot: 'footer-left',
+    class: 'left-4 bottom-5'
+  } : {
     name: '#left',
-    class: 'left-4 inset-y-4 w-64',
-    inactive: scrolledStep(steps.UFooter + 2)
-  }, {
+    class: 'left-4 inset-y-4 w-64'
+  }, scrolledStep(steps.UFooter + 3) ? {
+    slot: 'footer-center',
+    class: 'inset-x-72 bottom-5'
+  } : {
     name: '#center',
-    class: 'inset-x-72 inset-y-4',
-    inactive: scrolledStep(steps.UFooter + 3)
-  }, {
+    class: 'inset-x-72 inset-y-4'
+  }, scrolledStep(steps.UFooter + 4) ? {
+    slot: 'footer-right',
+    class: 'right-4 bottom-4'
+  } : {
     name: '#right',
-    class: 'right-4 inset-y-4 w-64',
-    inactive: scrolledStep(steps.UFooter + 4)
+    class: 'right-4 inset-y-4 w-64'
   }]
-}, {
-  visible: scrolledStep(steps.UFooter + 2),
-  slot: 'footer-left',
-  transparent: true,
-  class: 'left-4 bottom-5'
-}, {
-  visible: scrolledStep(steps.UFooter + 3),
-  slot: 'footer-center',
-  transparent: true,
-  class: 'inset-x-72 bottom-5'
-}, {
-  visible: scrolledStep(steps.UFooter + 4),
-  slot: 'footer-right',
-  transparent: true,
-  class: 'right-4 bottom-4'
-}, {
+}, scrolledStep(steps.UPage) && {
   name: 'UPage',
   class: 'inset-x-0 top-20 bottom-20',
-  visible: scrolledStep(steps.UPage),
   inactive: scrolledStep(steps.UPage + 1),
-  children: [{
-    name: '#left',
+  children: [scrolledStep(steps.UAside) ? {
+    name: 'UAside',
     class: 'left-4 inset-y-4 w-64',
-    inactive: scrolledStep(steps.UPage + 3)
+    inactive: scrolledStep(steps.UAside + 1),
+    children: [scrolledStep(steps.UAside + 2) ? {
+      slot: 'aside-top',
+      class: 'inset-x-4 top-4'
+    } : {
+      name: '#top',
+      class: 'inset-x-4 top-4 h-10'
+    }, scrolledStep(steps.UAside + 3) ? {
+      name: 'UNavigationTree',
+      class: ['inset-x-4 top-20 bottom-4', scrolledStep(steps.UAside + 4) && '!bg-transparent !border-0'].join(' '),
+      inactive: scrolledStep(steps.UAside + 4),
+      children: [{
+        slot: 'aside-default',
+        class: 'top-0 left-2 right-0'
+      }]
+    } : {
+      name: '#default',
+      class: 'inset-x-4 top-20 bottom-4'
+    }]
+  } : {
+    name: '#left',
+    class: 'left-4 inset-y-4 w-64'
   }, {
     name: '#default',
     class: 'left-72 right-4 inset-y-4'
   }]
-}, {
-  name: 'UAside',
-  class: 'left-4 inset-y-24 w-64',
-  visible: scrolledStep(steps.UPage + 2),
-  inactive: scrolledStep(steps.UPage + 3),
-  children: [{
-    name: '#top',
-    class: 'inset-x-4 top-4 h-12'
-  }, {
-    name: '#default',
-    class: 'inset-x-4 inset-y-20'
-  }, {
-    name: '#bottom',
-    class: 'inset-x-4 bottom-4 h-12'
-  }]
-}].filter(c => c.visible))
+}], { deep: true }))
 </script>
-
-<style scoped lang="postcss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
