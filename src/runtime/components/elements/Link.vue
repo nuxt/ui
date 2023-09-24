@@ -46,11 +46,11 @@ export default defineComponent({
       type: Boolean,
       default: null
     },
-    exact: {
+    active: {
       type: Boolean,
       default: false
     },
-    active: {
+    exact: {
       type: Boolean,
       default: false
     },
