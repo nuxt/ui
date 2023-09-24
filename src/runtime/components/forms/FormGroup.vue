@@ -18,7 +18,7 @@
       </template>
     </p>
 
-    <div :class="[label ? ui.container : '']" @click="$event.preventDefault()">
+    <div :class="[label ? ui.container : '']">
       <slot v-bind="{ error }" />
 
       <p v-if="typeof error === 'string' && error" :class="[ui.error, size]">
