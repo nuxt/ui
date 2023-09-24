@@ -1,0 +1,60 @@
+name: "🐛 Bug report"
+description: Report a bug to help us improve the module.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before reporting a bug, please make sure that you have read through our [documentation](https://ui.nuxt.com) and existing [issues](https://github.com/nuxt/ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc).
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: You can use `npx nuxi info` to fill this section
+      placeholder: |
+        - Operating System: `Darwin`
+        - Node Version:     `v18.16.0`
+        - Nuxt Version:     `3.7.3`
+        - CLI Version:      `3.8.4`
+        - Nitro Version:    `2.6.3`
+        - Package Manager:  `pnpm@8.7.4`
+        - Builder:          `-`
+        - User Config:      `-`
+        - Runtime Modules:  `-`
+        - Build Modules:    `-`
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: v2.8.0
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Please provide a reproduction link using this template https://stackblitz.com/edit/nuxt-ui. A minimal [reproduction is required](https://antfu.me/posts/why-reproductions-are-required) unless you are absolutely sure that the issue is obvious and the provided information is enough to understand the problem. If a report is vague (e.g. just a generic error message) and has no reproduction, it will receive a "needs reproduction" label. If no reproduction is provided we might close it.
+      placeholder: https://stackblitz.com/edit/nuxt-ui
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of what the bug is. If you intend to submit a PR for this issue, tell us in the description.
+    validations:
+      required: true
+  - type: textarea
+    id: additonal
+    attributes:
+      label: Additional context
+      description: If applicable, add any other context or screenshots here.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        Optional if provided reproduction. Please try not to insert an image but copy paste the log text.
+      render: shell-script
