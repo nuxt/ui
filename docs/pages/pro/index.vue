@@ -15,7 +15,7 @@
           </template>
 
           <template #header-center>
-            <UHeaderLinks :links="headerLinks" />
+            <UHeaderLinks :links="[{ label: 'Documentation', active: true }, { label: 'Playground' }, { label: 'Roadmap' }, { label: 'Pro' }]" />
           </template>
 
           <template #header-right>
@@ -89,21 +89,6 @@ function scrolledStep (i = 0) {
 function getStep () {
   return Math.floor((y.value - start) / inc)
 }
-
-const headerLinks = [{
-  label: 'Documentation',
-  icon: 'i-heroicons-book-open-solid',
-  active: true
-}, {
-  label: 'Playground',
-  icon: 'i-simple-icons-stackblitz'
-}, {
-  label: 'Roadmap',
-  icon: 'i-heroicons-beaker'
-}, {
-  label: 'Pro',
-  icon: 'i-heroicons-square-3-stack-3d'
-}]
 
 const steps = {
   UHeader: 0,
