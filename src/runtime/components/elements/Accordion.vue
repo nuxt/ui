@@ -111,8 +111,6 @@ export default defineComponent({
         .filter(index => index !== currentIndex)
         .reverse()
 
-      console.log(order)
-
       for (const index of order) {
         const close = buttonRefs.value[index]
         close()
