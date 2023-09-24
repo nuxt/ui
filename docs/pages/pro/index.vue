@@ -217,7 +217,18 @@ const components = computed(() => trimArray([scrolledStep(steps.UHeader) && {
   } : {
     name: '#left',
     class: 'left-4 inset-y-4 w-64'
-  }, {
+  }, scrolledStep(steps.UAside + 5) ? {
+    name: 'UPage',
+    class: 'left-72 right-4 inset-y-4',
+    inactive: scrolledStep(steps.UAside + 6),
+    children: [{
+      name: '#default',
+      class: 'left-4 right-72 inset-y-4'
+    }, {
+      name: '#right',
+      class: 'right-4 inset-y-4 w-64'
+    }]
+  } : {
     name: '#default',
     class: 'left-72 right-4 inset-y-4'
   }]
