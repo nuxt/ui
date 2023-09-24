@@ -3,8 +3,8 @@
     <template #default="{ error }">
       <UInput v-model="email" type="email" placeholder="Enter email" :trailing-icon="error ? 'i-heroicons-exclamation-triangle-20-solid' : undefined" />
     </template>
-    <template #error="scope">
-      <UAlert icon="i-heroicons-exclamation-triangle-20-solid" :description="scope.error" color="red" />
+    <template #error="{ error }">
+      <UAlert icon="i-heroicons-exclamation-triangle-20-solid" :description="error" color="red" />
     </template>
   </UFormGroup>
 </template>
