@@ -1,11 +1,7 @@
 <template>
   <UMain>
     <UContainer>
-      <template v-if="$route.path === '/pro'">
-        <slot />
-      </template>
-
-      <UPage v-else>
+      <UPage>
         <template #left>
           <UAside>
             <UNavigationTree :links="links" default-open :multiple="false" />
