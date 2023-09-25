@@ -9,13 +9,13 @@
 
     <div>
       <ULandingSection title="Build a documentation" class="sticky h-screen top-0 flex !pb-16" :ui="{ container: 'flex-1' }">
-        <ProTemplate :components="components">
+        <ProDemo :components="components">
           <template #header-left>
             <Logo class="w-auto h-6" />
           </template>
 
           <template #header-center>
-            <UHeaderLinks :links="[{ label: 'Documentation', active: true }, { label: 'Playground' }, { label: 'Roadmap' }, { label: 'Pro' }]" />
+            <UHeaderLinks :links="headerLinks" />
           </template>
 
           <template #header-right>
@@ -50,48 +50,70 @@
           </template>
 
           <template #aside-top>
-            <UDocsSearchButton size="lg" class="w-full" />
+            <UDocsSearchButton size="md" class="w-full" />
           </template>
 
           <template #aside-default>
             <UNavigationTree
               class="w-full h-full [&>div>div>div>nav]:border-gray-800/10 dark:[&>div>div>div>nav]:border-gray-200/10"
-              :links="[{
-                label: 'Getting Started',
-                children: [{
-                  label: 'Introduction'
-                }, {
-                  label: 'Installation'
-                }, {
-                  label: 'Theming'
-                }, {
-                  label: 'Shortcuts'
-                }, {
-                  label: 'Examples'
-                }, {
-                  label: 'Roadmap'
-                }]
-              }, {
-                label: 'Elements',
-                children: [{
-                  label: 'Alert'
-                }, {
-                  label: 'Avatar'
-                }, {
-                  label: 'Badge'
-                }, {
-                  label: 'Button'
-                }]
-              }]"
+              :links="navigationLinks"
             />
           </template>
-        </ProTemplate>
+
+          <template #page-header>
+            <UPageHeader
+              title="Installation"
+              description="Learn how to install and configure the module in your Nuxt app."
+              headline="Getting Started"
+              class="!p-0 !border-0"
+              :ui="{ headline: 'mb-2', title: '!text-2xl', description: 'mt-2 text-sm' }"
+            />
+          </template>
+
+          <template #page-body>
+            <MDC :value="md" tag="div" class="-mt-8 prose prose-primary prose-sm dark:prose-invert max-w-none" />
+          </template>
+
+          <template #docs-surround>
+            <UDocsSurround
+              :surround="(surround as unknown as ParsedContent[])"
+              class="w-full gap-4"
+              :ui="{
+                link: {
+                  wrapper: 'px-4 py-2.5 border-gray-800/10 dark:border-gray-200/10 cursor-pointer',
+                  icon: {
+                    wrapper: 'mb-2 p-1',
+                    base: 'h-4 w-4',
+                  },
+                  title: 'text-sm',
+                  description: 'text-xs'
+                }
+              }"
+            />
+          </template>
+
+          <template #docs-toc>
+            <div>
+              <UDocsToc :links="toc" class="!bg-transparent" :ui="{ container: '!pt-0 !pb-4' }" />
+
+              <UDivider dashed class="border-gray-800/10 dark:border-gray-200/10" />
+
+              <UPageLinks title="Community" :links="communityLinks" class="mt-4" />
+            </div>
+          </template>
+        </ProDemo>
+
+        <template #bottom>
+          <div class="mx-auto absolute inset-x-0 bottom-4 flex justify-center">
+            <UButton color="white" size="xs" label="Skip" trailing-icon="i-heroicons-arrow-right-20-solid" to="#features" />
+          </div>
+        </template>
       </ULandingSection>
 
-      <div class="h-[calc(100vh*5)]" />
+      <div class="h-[calc(100vh*3)]" />
     </div>
 
-    <ULandingSection title="Features" class="relative" />
+    <ULandingSection id="features" title="Features" class="relative" />
 
     <ULandingSection class="!pt-0">
       <ULandingCTA title="CTA" card />
@@ -103,6 +125,7 @@
 
 
 <script setup lang="ts">
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import { useWindowScroll } from '@vueuse/core'
 
 const route = useRoute()
@@ -126,29 +149,17 @@ function getStep () {
 const steps = {
   UHeader: 0,
   UFooter: 5,
-  UPage: 10,
-  UAside: 12
-}
-
-function trimArray <T> (array: Array<T | false | null | undefined>, { deep = false } = {}): Array<T> {
-  return (deep
-    ? array.map((item) => {
-      if (Array.isArray(item)) {
-        return trimArray(item, { deep })
-      } else {
-        return item
-      }
-    })
-    : array).filter(item => !!item && (!Array.isArray(item) || item.length)) as Array<T>
+  UPage: 10
 }
 
 const components = computed(() => trimArray([scrolledStep(steps.UHeader) && {
   name: 'UHeader',
   class: 'h-16 inset-x-0 top-0',
+  to: '/pro/components/header/Header',
   inactive: scrolledStep(steps.UHeader + 1),
   children: [scrolledStep(steps.UHeader + 2) ? {
     slot: 'header-left',
-    class: 'left-4 top-5'
+    class: 'left-4 top-4'
   } : {
     name: '#left',
     class: 'left-4 inset-y-4 w-64'
@@ -192,39 +203,70 @@ const components = computed(() => trimArray([scrolledStep(steps.UHeader) && {
   name: 'UPage',
   class: 'inset-x-0 top-20 bottom-20',
   inactive: scrolledStep(steps.UPage + 1),
-  children: [scrolledStep(steps.UAside) ? {
+  children: [scrolledStep(steps.UPage + 2) ? {
     name: 'UAside',
     class: 'left-4 inset-y-4 w-64',
-    inactive: scrolledStep(steps.UAside + 1),
-    children: [scrolledStep(steps.UAside + 2) ? {
+    inactive: scrolledStep(steps.UPage + 3),
+    children: [scrolledStep(steps.UPage + 4) ? {
       slot: 'aside-top',
       class: 'inset-x-4 top-4'
     } : {
       name: '#top',
-      class: 'inset-x-4 top-4 h-10'
-    }, scrolledStep(steps.UAside + 3) ? {
+      class: 'inset-x-4 top-4 h-9'
+    }, scrolledStep(steps.UPage + 5) ? {
       name: 'UNavigationTree',
-      class: ['inset-x-4 top-20 bottom-4', scrolledStep(steps.UAside + 4) && '!bg-transparent !border-0'].join(' '),
-      inactive: scrolledStep(steps.UAside + 4),
+      class: ['inset-x-4 top-[4.25rem] bottom-4', scrolledStep(steps.UPage + 6) && '!bg-transparent !border-0'].join(' '),
+      inactive: scrolledStep(steps.UPage + 6),
       children: [{
         slot: 'aside-default',
-        class: 'top-0 left-2 right-0'
+        class: 'inset-0'
       }]
     } : {
       name: '#default',
-      class: 'inset-x-4 top-20 bottom-4'
+      class: 'inset-x-4 top-[4.25rem] bottom-4'
     }]
   } : {
     name: '#left',
     class: 'left-4 inset-y-4 w-64'
-  }, scrolledStep(steps.UAside + 5) ? {
+  }, scrolledStep(steps.UPage + 7) ? {
     name: 'UPage',
     class: 'left-72 right-4 inset-y-4',
-    inactive: scrolledStep(steps.UAside + 6),
-    children: [{
+    inactive: scrolledStep(steps.UPage + 8),
+    children: [...(scrolledStep(steps.UPage + 9) ? [{
+      name: 'UPageHeader',
+      class: 'top-4 left-4 right-72 h-32',
+      inactive: scrolledStep(steps.UPage + 10),
+      children: [{
+        slot: 'page-header',
+        class: 'inset-4 !justify-start'
+      }]
+    }, {
+      name: 'UPageBody',
+      class: 'top-40 left-4 right-72 bottom-4',
+      inactive: scrolledStep(steps.UPage + 11),
+      children: [{
+        slot: 'page-body',
+        class: 'inset-x-4 top-4 !justify-start'
+      }, scrolledStep(steps.UPage + 12) ? {
+        slot: 'docs-surround',
+        class: 'bottom-4 inset-x-4 h-28'
+      } : {
+        name: 'UDocsSurround',
+        class: 'bottom-4 inset-x-4 h-28',
+        inactive: false
+      }]
+    }] : [{
       name: '#default',
       class: 'left-4 right-72 inset-y-4'
-    }, {
+    }]), scrolledStep(steps.UPage + 13) ? {
+      name: 'UDocsToc',
+      class: 'right-4 inset-y-4 w-64',
+      inactive: scrolledStep(steps.UPage + 14),
+      children: [{
+        slot: 'docs-toc',
+        class: 'inset-4 !items-start !justify-start'
+      }]
+    } : {
       name: '#right',
       class: 'right-4 inset-y-4 w-64'
     }]
@@ -233,4 +275,80 @@ const components = computed(() => trimArray([scrolledStep(steps.UHeader) && {
     class: 'left-72 right-4 inset-y-4'
   }]
 }], { deep: true }))
+
+// Slots Data
+
+const headerLinks = [{ label: 'Documentation', active: true }, { label: 'Playground' }, { label: 'Roadmap' }, { label: 'Pro' }]
+
+const navigationLinks = [{
+  label: 'Getting Started',
+  children: [{
+    label: 'Introduction'
+  }, {
+    label: 'Installation',
+    active: true
+  }, {
+    label: 'Theming'
+  }, {
+    label: 'Shortcuts'
+  }, {
+    label: 'Examples'
+  }, {
+    label: 'Roadmap'
+  }]
+}, {
+  label: 'Elements',
+  children: [{
+    label: 'Alert'
+  }, {
+    label: 'Avatar'
+  }, {
+    label: 'Badge'
+  }, {
+    label: 'Button'
+  }]
+}]
+
+const surround = [{ title: 'Introduction', description: 'Fully styled and customizable components for Nuxt.' }, { title: 'Theming', description: 'Learn how to customize the look and feel of the components.' }]
+
+const md = `
+## Edge
+
+To use the latest updates pushed on the [\`dev\`](https://github.com/nuxt/ui/tree/dev) branch, you can use \`@nuxt/ui-edge\`.
+
+Update your \`package.json\` with \`"@nuxt/ui": "npm:@nuxt/ui-edge@latest"\`.
+`
+
+const toc = [{
+  'id': 'quick-start',
+  'depth': 2,
+  'text': 'Quick Start'
+}, {
+  'id': 'intellisense',
+  'depth': 2,
+  'text': 'IntelliSense'
+}, {
+  'id': 'options',
+  'depth': 2,
+  'text': 'Options'
+}, {
+  'id': 'edge',
+  'depth': 2,
+  'text': 'Edge'
+}]
+
+const communityLinks = [{
+  icon: 'i-heroicons-pencil-square',
+  label: 'Edit this page'
+}, {
+  icon: 'i-heroicons-star',
+  label: 'Star on GitHub',
+  to: 'https://github.com/nuxt/ui',
+  target: '_blank'
+}, {
+  icon: 'i-heroicons-book-open',
+  label: 'Nuxt documentation',
+  to: 'https://nuxt.com',
+  target: '_blank'
+}]
 </script>
