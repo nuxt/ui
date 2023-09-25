@@ -104,7 +104,7 @@
         </ProDemo>
 
         <template #bottom>
-          <div class="mx-auto absolute inset-x-0 bottom-4 flex justify-center">
+          <div v-if="!isPast" class="mx-auto absolute inset-x-0 bottom-4 flex justify-center">
             <UButton color="white" size="xs" label="Skip" trailing-icon="i-heroicons-arrow-right-20-solid" to="#features" />
           </div>
         </template>
@@ -151,6 +151,8 @@ const steps = {
   UFooter: 5,
   UPage: 10
 }
+
+const isPast = computed(() => y.value > (start + (25 * inc)))
 
 const blocks = computed(() => trimArray([scrolledStep(steps.UHeader) && {
   name: 'UHeader',

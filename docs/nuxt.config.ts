@@ -26,6 +26,9 @@ export default defineNuxtConfig({
       uiProPath: process.env.NUXT_UI_PRO_PATH
     }
   },
+  routeRules: {
+    '/pro/components': { redirect: '/pro/components/header/Header', prerender: false }
+  },
   ui: {
     global: true,
     icons: ['heroicons', 'simple-icons'],
