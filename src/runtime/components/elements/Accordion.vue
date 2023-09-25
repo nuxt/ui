@@ -100,16 +100,21 @@ export default defineComponent({
 
     const buttonRefs = ref<Function[]>([])
 
-    function closeOthers (itemIndex: number) {
-      if (!props.items[itemIndex].closeOthers && props.multiple) {
+    function closeOthers (currentIndex: number) {
+      if (!props.items[currentIndex].closeOthers && props.multiple) {
         return
       }
 
-      buttonRefs.value.forEach((close, index) => {
-        if (index === itemIndex) return
+      const totalItems = buttonRefs.value.length
 
+      const order = Array.from({ length: totalItems }, (_, i) => (currentIndex + i) % totalItems)
+        .filter(index => index !== currentIndex)
+        .reverse()
+
+      for (const index of order) {
+        const close = buttonRefs.value[index]
         close()
-      })
+      }
     }
 
     function onEnter (el: HTMLElement, done) {
