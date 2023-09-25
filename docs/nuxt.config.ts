@@ -55,7 +55,7 @@ export default defineNuxtConfig({
         repo: 'nuxt/ui-pro',
         branch: 'dev',
         dir: '.docs',
-        token: process.env.GITHUB_TOKEN || ''
+        token: process.env.NUXT_GITHUB_TOKEN || ''
       }
     }
   },
