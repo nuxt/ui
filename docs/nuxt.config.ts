@@ -78,6 +78,8 @@ export default defineNuxtConfig({
         '/',
         '/getting-started',
         '/dev/getting-started',
+        '/pro',
+        '/pro/guide',
         '/api/search.json'
       ]
     }
@@ -86,7 +88,7 @@ export default defineNuxtConfig({
     exclude: ['@nuxtjs/mdc', resolve('./components')],
     metaFields: {
       props: true,
-      slots: false,
+      slots: true,
       events: false,
       exposed: false
     }

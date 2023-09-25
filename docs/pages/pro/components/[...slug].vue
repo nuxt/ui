@@ -28,6 +28,10 @@
         </FieldGroup>
       </template>
     </UPageBody>
+
+    <template v-if="tocLinks?.length" #right>
+      <UDocsToc :links="tocLinks" />
+    </template>
   </UPage>
 </template>
 
