@@ -9,7 +9,7 @@
 
     <div>
       <ULandingSection title="Build a documentation" class="sticky h-screen top-0 flex !pb-16" :ui="{ container: 'flex-1' }">
-        <ProDemo :components="components">
+        <ProDemo :blocks="blocks">
           <template #header-left>
             <Logo class="w-auto h-6" />
           </template>
@@ -55,7 +55,7 @@
 
           <template #aside-default>
             <UNavigationTree
-              class="w-full h-full [&>div>div>div>nav]:border-gray-800/10 dark:[&>div>div>div>nav]:border-gray-200/10"
+              class="w-full h-full [&>div>div>div>nav]:border-gray-800/10 dark:[&>div>div>div>nav]:border-gray-200/10 overflow-y-auto"
               :links="navigationLinks"
             />
           </template>
@@ -93,8 +93,8 @@
           </template>
 
           <template #docs-toc>
-            <div>
-              <UDocsToc :links="toc" class="!bg-transparent" :ui="{ container: '!pt-0 !pb-4' }" />
+            <div class="absolute top-0 left-0">
+              <UDocsToc :links="toc" class="bg-transparent relative max-h-full overflow-hidden top-0" :ui="{ container: '!pt-0 !pb-4' }" />
 
               <UDivider dashed class="border-gray-800/10 dark:border-gray-200/10" />
 
@@ -110,7 +110,7 @@
         </template>
       </ULandingSection>
 
-      <div class="h-[calc(100vh*3)]" />
+      <div class="h-[3200px]" />
     </div>
 
     <ULandingSection id="features" title="Features" class="relative" />
@@ -152,10 +152,10 @@ const steps = {
   UPage: 10
 }
 
-const components = computed(() => trimArray([scrolledStep(steps.UHeader) && {
+const blocks = computed(() => trimArray([scrolledStep(steps.UHeader) && {
   name: 'UHeader',
-  class: 'h-16 inset-x-0 top-0',
   to: '/pro/components/header/Header',
+  class: 'h-16 inset-x-0 top-0',
   inactive: scrolledStep(steps.UHeader + 1),
   children: [scrolledStep(steps.UHeader + 2) ? {
     slot: 'header-left',
@@ -178,6 +178,7 @@ const components = computed(() => trimArray([scrolledStep(steps.UHeader) && {
   }]
 }, scrolledStep(steps.UFooter) && {
   name: 'UFooter',
+  to: '/pro/components/footer/Footer',
   class: 'h-16 inset-x-0 bottom-0',
   inactive: scrolledStep(steps.UFooter + 1),
   children: [scrolledStep(steps.UFooter + 2) ? {
@@ -201,10 +202,12 @@ const components = computed(() => trimArray([scrolledStep(steps.UHeader) && {
   }]
 }, scrolledStep(steps.UPage) && {
   name: 'UPage',
+  to: '/pro/components/page/Page',
   class: 'inset-x-0 top-20 bottom-20',
   inactive: scrolledStep(steps.UPage + 1),
   children: [scrolledStep(steps.UPage + 2) ? {
     name: 'UAside',
+    to: '/pro/components/aside/Aside',
     class: 'left-4 inset-y-4 w-64',
     inactive: scrolledStep(steps.UPage + 3),
     children: [scrolledStep(steps.UPage + 4) ? {
@@ -215,6 +218,7 @@ const components = computed(() => trimArray([scrolledStep(steps.UHeader) && {
       class: 'inset-x-4 top-4 h-9'
     }, scrolledStep(steps.UPage + 5) ? {
       name: 'UNavigationTree',
+      to: '/pro/components/navigation/NavigationTree',
       class: ['inset-x-4 top-[4.25rem] bottom-4', scrolledStep(steps.UPage + 6) && '!bg-transparent !border-0'].join(' '),
       inactive: scrolledStep(steps.UPage + 6),
       children: [{
@@ -230,28 +234,32 @@ const components = computed(() => trimArray([scrolledStep(steps.UHeader) && {
     class: 'left-4 inset-y-4 w-64'
   }, scrolledStep(steps.UPage + 7) ? {
     name: 'UPage',
+    to: '/pro/components/page/Page',
     class: 'left-72 right-4 inset-y-4',
     inactive: scrolledStep(steps.UPage + 8),
     children: [...(scrolledStep(steps.UPage + 9) ? [{
       name: 'UPageHeader',
+      to: '/pro/components/page/PageHeader',
       class: 'top-4 left-4 right-72 h-32',
       inactive: scrolledStep(steps.UPage + 10),
       children: [{
         slot: 'page-header',
-        class: 'inset-4 !justify-start'
+        class: 'inset-4 justify-start'
       }]
     }, {
       name: 'UPageBody',
-      class: 'top-40 left-4 right-72 bottom-4',
+      to: '/pro/components/page/PageBody',
+      class: 'top-40 left-4 right-72 bottom-4 overflow-y-auto',
       inactive: scrolledStep(steps.UPage + 11),
       children: [{
         slot: 'page-body',
-        class: 'inset-x-4 top-4 !justify-start'
+        class: 'inset-x-4 top-4 justify-start'
       }, scrolledStep(steps.UPage + 12) ? {
         slot: 'docs-surround',
         class: 'bottom-4 inset-x-4 h-28'
       } : {
         name: 'UDocsSurround',
+        to: '/pro/components/docs/DocsSurround',
         class: 'bottom-4 inset-x-4 h-28',
         inactive: false
       }]
@@ -260,11 +268,12 @@ const components = computed(() => trimArray([scrolledStep(steps.UHeader) && {
       class: 'left-4 right-72 inset-y-4'
     }]), scrolledStep(steps.UPage + 13) ? {
       name: 'UDocsToc',
+      to: '/pro/components/docs/DocsToc',
       class: 'right-4 inset-y-4 w-64',
       inactive: scrolledStep(steps.UPage + 14),
       children: [{
         slot: 'docs-toc',
-        class: 'inset-4 !items-start !justify-start'
+        class: 'inset-4 overflow-y-auto'
       }]
     } : {
       name: '#right',
