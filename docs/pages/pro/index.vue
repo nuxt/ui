@@ -1,29 +1,13 @@
 <template>
   <div class="relative">
+    <!-- TODO -->
+    <div class="fixed bottom-4 right-4 text-center text-xl text-primary">
+      Y: {{ y }} Step: {{ getStep() }} Inc: {{ inc }}
+    </div>
+
     <ULandingHero v-bind="page.hero" align="center">
       <template #top>
-        <svg class="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
-          <defs>
-            <pattern
-              id="983e3e4c-de6d-4c3f-8d64-b9761d1534cc"
-              width="200"
-              height="200"
-              x="50%"
-              y="-1"
-              patternUnits="userSpaceOnUse"
-            >
-              <path d="M.5 200V.5H200" fill="none" />
-            </pattern>
-          </defs>
-          <svg x="50%" y="-1" class="overflow-visible fill-gray-800/20">
-            <path d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z" stroke-width="0" />
-          </svg>
-          <rect width="100%" height="100%" stroke-width="0" fill="url(#983e3e4c-de6d-4c3f-8d64-b9761d1534cc)" />
-        </svg>
-
-        <div class="absolute left-[calc(50%-4rem)] top-10 -z-10 transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]" aria-hidden="true">
-          <div class="aspect-[1108/632] w-[69.25rem] bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-20" style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)" />
-        </div>
+        <ProHeroBackground />
       </template>
 
       <template #title>
@@ -37,12 +21,11 @@
 
     <ULandingSection id="features" v-bind="page.features" />
 
-    <!-- TODO -->
-    <div class="fixed bottom-4 right-4 text-center text-xl text-primary">
-      Y: {{ y }} Step: {{ getStep() }}
-    </div>
-
-    <div>
+    <div
+      :style="{
+        '--y': `${y}px`
+      }"
+    >
       <ULandingSection class="sticky h-screen top-0 flex !pb-16" :ui="{ container: 'flex-1 sm:gap-y-16' }">
         <template #title>
           <span v-html="isPast ? page.docs?.title : page.landing?.title" />
@@ -52,7 +35,7 @@
           <span v-html="isPast ? page.docs?.description : page.landing?.description" />
         </template>
 
-        <ProDemo :blocks="blocks">
+        <ProDemo ref="demoRef" :blocks="blocks">
           <template #header-left>
             <Logo class="w-auto h-6" />
           </template>
@@ -144,6 +127,38 @@
               <UPageLinks title="Community" :links="communityLinks" class="mt-4" />
             </div>
           </template>
+
+          <template #landing-hero>
+            <ULandingHero class="!p-0" :ui="{ title: '!text-5xl', description: 'text-base' }">
+              <template #title>
+                A <span class="text-primary">UI Library</span> for<br> Modern Web Apps
+              </template>
+
+              <template #description>
+                Nuxt UI simplifies the creation of stunning and responsive web applications with its<br> comprehensive collection of fully styled and customizable UI components designed for Nuxt.
+              </template>
+
+              <template #links>
+                <UButton label="Get Started" icon="i-heroicons-rocket-launch" size="md" />
+
+                <UInput
+                  model-value="npm i @nuxt/ui"
+                  color="gray"
+                  readonly
+                  autocomplete="off"
+                  icon="i-heroicons-command-line"
+                  input-class="select-none"
+                  aria-label="Install @nuxt/ui"
+                  size="md"
+                  :ui="{ base: 'disabled:cursor-default', icon: { trailing: { pointer: '' } } }"
+                />
+              </template>
+            </ULandingHero>
+          </template>
+
+          <template #landing-section-left>
+            <ULandingSection title="A better workflow" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione." :links="[{ label: 'Learn more', size: 'md', trailingIcon: 'i-heroicons-arrow-right-20-solid' }]" align="left" />
+          </template>
         </ProDemo>
 
         <template #bottom>
@@ -153,7 +168,7 @@
         </template>
       </ULandingSection>
 
-      <div class="h-[6400px]" />
+      <div class="h-[3200px]" />
     </div>
 
     <ULandingSection v-bind="page.next" />
@@ -169,6 +184,7 @@
 <script setup lang="ts">
 import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import { useWindowScroll } from '@vueuse/core'
+import { useElementSize } from '@vueuse/core'
 
 const route = useRoute()
 const { y } = useWindowScroll()
@@ -183,94 +199,90 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-const start = 920
-const inc = 40
+const demoRef = ref()
+const { height } = useElementSize(demoRef)
 
-function scrolledStep (i = 0) {
-  return y.value >= (start + (i * inc))
+const start = 920
+const inc = computed(() => (height.value - 32 - 64 - 32 - 32) / 4)
+
+function isBeforeStep (i = 0) {
+  return y.value < (start + (i * inc.value))
+}
+
+function isAfterStep (i = 0) {
+  return y.value >= (start + (i * inc.value))
 }
 
 function getStep () {
-  return Math.floor((y.value - start) / inc)
+  return Math.floor((y.value - start) / inc.value)
+}
+
+function getStepY (step) {
+  return start + (step * inc.value)
 }
 
 const steps = {
-  UHeader: 0,
-  UFooter: 5,
-  UPage: 10
+  header: 0,
+  footer: 5,
+  landing: 10,
+  docs: 50
 }
 
-const isPast = computed(() => y.value > (start + (25 * inc)))
+const isPast = computed(() => y.value > (start + (25 * inc.value)))
 
-const blocks = computed(() => trimArray([scrolledStep(steps.UHeader) && {
-  name: 'UHeader',
-  to: '/pro/components/header/Header',
-  class: 'h-16 inset-x-0 top-0',
-  inactive: scrolledStep(steps.UHeader + 1),
-  children: [scrolledStep(steps.UHeader + 2) ? {
-    slot: 'header-left',
-    class: 'left-4 top-4'
-  } : {
-    name: '#left',
-    class: 'left-4 inset-y-4 w-64'
-  }, scrolledStep(steps.UHeader + 3) ? {
-    slot: 'header-center',
-    class: 'inset-x-72 top-5'
-  } : {
-    name: '#center',
-    class: 'inset-x-72 inset-y-4'
-  }, scrolledStep(steps.UHeader + 4) ? {
-    slot: 'header-right',
-    class: 'right-4 top-4'
-  } : {
-    name: '#right',
-    class: 'right-4 inset-y-4 w-64'
+const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(steps.docs) ? [{
+  class: 'inset-x-0 top-20 bottom-20 overflow-hidden',
+  inactive: true,
+  children: [{
+    name: 'ULandingHero',
+    to: '/pro/components/landing/LandingHero',
+    class: ['inset-4', isAfterStep(steps.landing + 2) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'].filter(Boolean).join(' '),
+    style: {
+      '--step-y': `${getStepY(steps.landing + 2)}px`
+    },
+    inactive: isAfterStep(steps.landing + 1),
+    children: [{
+      slot: 'landing-hero',
+      class: 'inset-4'
+    }]
+  }, isAfterStep(steps.landing + 2) && {
+    name: 'ULandingSection',
+    description: 'left aligned',
+    to: '/pro/components/landing/LandingSection',
+    class: ['inset-4', isBeforeStep(steps.landing + 6) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--prev-height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--prev-height))]'].filter(Boolean).join(' '),
+    style: {
+      '--prev-height': (inc.value * 4) + 'px',
+      '--prev-step-y': `${getStepY(steps.landing + 2)}px`
+    },
+    inactive: isAfterStep(steps.landing + 7),
+    children: [{
+      slot: 'landing-section-left',
+      class: 'inset-4'
+    }]
   }]
-}, scrolledStep(steps.UFooter) && {
-  name: 'UFooter',
-  to: '/pro/components/footer/Footer',
-  class: 'h-16 inset-x-0 bottom-0',
-  inactive: scrolledStep(steps.UFooter + 1),
-  children: [scrolledStep(steps.UFooter + 2) ? {
-    slot: 'footer-left',
-    class: 'left-4 bottom-5'
-  } : {
-    name: '#left',
-    class: 'left-4 inset-y-4 w-64'
-  }, scrolledStep(steps.UFooter + 3) ? {
-    slot: 'footer-center',
-    class: 'inset-x-72 bottom-5'
-  } : {
-    name: '#center',
-    class: 'inset-x-72 inset-y-4'
-  }, scrolledStep(steps.UFooter + 4) ? {
-    slot: 'footer-right',
-    class: 'right-4 bottom-4'
-  } : {
-    name: '#right',
-    class: 'right-4 inset-y-4 w-64'
-  }]
-}, scrolledStep(steps.UPage) && {
+}] : [])
+
+const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
   name: 'UPage',
   to: '/pro/components/page/Page',
   class: 'inset-x-0 top-20 bottom-20',
-  inactive: scrolledStep(steps.UPage + 1),
-  children: [scrolledStep(steps.UPage + 2) ? {
+  inactive: isAfterStep(steps.docs + 1),
+  children: [isAfterStep(steps.docs + 2) ? {
     name: 'UAside',
     to: '/pro/components/aside/Aside',
     class: 'left-4 inset-y-4 w-64',
-    inactive: scrolledStep(steps.UPage + 3),
-    children: [scrolledStep(steps.UPage + 4) ? {
+    inactive: isAfterStep(steps.docs + 3),
+    children: [isAfterStep(steps.docs + 4) ? {
       slot: 'aside-top',
       class: 'inset-x-4 top-4'
     } : {
       name: '#top',
       class: 'inset-x-4 top-4 h-9'
-    }, scrolledStep(steps.UPage + 5) ? {
+    }, isAfterStep(steps.docs + 5) ? {
       name: 'UNavigationTree',
       to: '/pro/components/navigation/NavigationTree',
-      class: ['inset-x-4 top-[4.25rem] bottom-4', scrolledStep(steps.UPage + 6) && '!bg-transparent !border-0'].join(' '),
-      inactive: scrolledStep(steps.UPage + 6),
+      class: ['inset-x-4 top-[4.25rem] bottom-4', isAfterStep(steps.docs + 6) && '!bg-transparent !border-0'].join(' '),
+      inactive: isAfterStep(steps.docs + 6),
       children: [{
         slot: 'aside-default',
         class: 'inset-0'
@@ -282,16 +294,16 @@ const blocks = computed(() => trimArray([scrolledStep(steps.UHeader) && {
   } : {
     name: '#left',
     class: 'left-4 inset-y-4 w-64'
-  }, scrolledStep(steps.UPage + 7) ? {
+  }, isAfterStep(steps.docs + 7) ? {
     name: 'UPage',
     to: '/pro/components/page/Page',
     class: 'left-72 right-4 inset-y-4',
-    inactive: scrolledStep(steps.UPage + 8),
-    children: [...(scrolledStep(steps.UPage + 9) ? [{
+    inactive: isAfterStep(steps.docs + 8),
+    children: [...(isAfterStep(steps.docs + 9) ? [{
       name: 'UPageHeader',
       to: '/pro/components/page/PageHeader',
       class: 'top-4 left-4 right-72 h-32',
-      inactive: scrolledStep(steps.UPage + 10),
+      inactive: isAfterStep(steps.docs + 10),
       children: [{
         slot: 'page-header',
         class: 'inset-4 justify-start'
@@ -300,11 +312,11 @@ const blocks = computed(() => trimArray([scrolledStep(steps.UHeader) && {
       name: 'UPageBody',
       to: '/pro/components/page/PageBody',
       class: 'top-40 left-4 right-72 bottom-4 overflow-y-auto',
-      inactive: scrolledStep(steps.UPage + 11),
+      inactive: isAfterStep(steps.docs + 11),
       children: [{
         slot: 'page-body',
         class: 'inset-x-4 top-4 justify-start'
-      }, scrolledStep(steps.UPage + 12) ? {
+      }, isAfterStep(steps.docs + 12) ? {
         slot: 'docs-surround',
         class: 'bottom-4 inset-x-4 h-28'
       } : {
@@ -316,11 +328,11 @@ const blocks = computed(() => trimArray([scrolledStep(steps.UHeader) && {
     }] : [{
       name: '#default',
       class: 'left-4 right-72 inset-y-4'
-    }]), scrolledStep(steps.UPage + 13) ? {
+    }]), isAfterStep(steps.docs + 13) ? {
       name: 'UDocsToc',
       to: '/pro/components/docs/DocsToc',
       class: 'right-4 inset-y-4 w-64',
-      inactive: scrolledStep(steps.UPage + 14),
+      inactive: isAfterStep(steps.docs + 14),
       children: [{
         slot: 'docs-toc',
         class: 'inset-4 overflow-y-auto'
@@ -333,7 +345,57 @@ const blocks = computed(() => trimArray([scrolledStep(steps.UHeader) && {
     name: '#default',
     class: 'left-72 right-4 inset-y-4'
   }]
-}], { deep: true }))
+}])
+
+const blocks = computed(() => trimArray([isAfterStep(steps.header) && {
+  name: 'UHeader',
+  to: '/pro/components/header/Header',
+  class: 'h-16 inset-x-0 top-0',
+  inactive: isAfterStep(steps.header + 1),
+  children: [isAfterStep(steps.header + 2) ? {
+    slot: 'header-left',
+    class: 'left-4 top-4'
+  } : {
+    name: '#left',
+    class: 'left-4 inset-y-4 w-64'
+  }, isAfterStep(steps.header + 3) ? {
+    slot: 'header-center',
+    class: 'inset-x-72 top-5'
+  } : {
+    name: '#center',
+    class: 'inset-x-72 inset-y-4'
+  }, isAfterStep(steps.header + 4) ? {
+    slot: 'header-right',
+    class: 'right-4 top-4'
+  } : {
+    name: '#right',
+    class: 'right-4 inset-y-4 w-64'
+  }]
+}, isAfterStep(steps.footer) && {
+  name: 'UFooter',
+  to: '/pro/components/footer/Footer',
+  class: 'h-16 inset-x-0 bottom-0',
+  inactive: isAfterStep(steps.footer + 1),
+  children: [isAfterStep(steps.footer + 2) ? {
+    slot: 'footer-left',
+    class: 'left-4 bottom-5'
+  } : {
+    name: '#left',
+    class: 'left-4 inset-y-4 w-64'
+  }, isAfterStep(steps.footer + 3) ? {
+    slot: 'footer-center',
+    class: 'inset-x-72 bottom-5'
+  } : {
+    name: '#center',
+    class: 'inset-x-72 inset-y-4'
+  }, isAfterStep(steps.footer + 4) ? {
+    slot: 'footer-right',
+    class: 'right-4 bottom-4'
+  } : {
+    name: '#right',
+    class: 'right-4 inset-y-4 w-64'
+  }]
+}, ...landingBlocks.value, ...docsBlocks.value], { deep: true }))
 
 // Slots Data
 

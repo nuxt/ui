@@ -70,11 +70,6 @@ const links = computed(() => {
       exactHash: true,
       icon: 'i-heroicons-beaker'
     }, {
-      label: 'Demo',
-      to: '/pro#features',
-      exactHash: true,
-      icon: 'i-heroicons-beaker'
-    }, {
       label: 'Pricing',
       to: '/pro#pricing',
       exactHash: true,
