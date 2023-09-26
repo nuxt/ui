@@ -4,7 +4,8 @@ const columns = [{
   label: '#'
 }, {
   key: 'quantity',
-  label: 'quantity'
+  label: 'Quantity',
+  class: 'italic'
 }, {
   key: 'name',
   label: 'Name'
@@ -13,20 +14,20 @@ const columns = [{
 const items = [{
   id: 1,
   name: 'Apple',
-  quantity: { value: 100, class: 'bg-green-200' }
+  quantity: { value: 100, class: 'bg-green-300 dark:bg-green-900' }
 }, {
   id: 2,
   name: 'Orange',
   quantity: { value: 0 },
-  class: 'bg-red-200 animate-pulse'
+  class: 'bg-red-300 dark:bg-red-900 animate-pulse'
 }, {
   id: 3,
   name: 'Banana',
-  quantity: { value: 30, class: 'bg-green-200' }
+  quantity: { value: 30, class: 'bg-green-300  dark:bg-green-900' }
 }, {
   id: 4,
   name: 'Mango',
-  quantity: { value: 5, class: 'bg-green-200' }
+  quantity: { value: 5, class: 'bg-green-300  dark:bg-green-900' }
 }]
 </script>
 
