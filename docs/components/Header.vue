@@ -63,7 +63,36 @@ const links = computed(() => {
   }, {
     label: 'Pro',
     icon: 'i-heroicons-square-3-stack-3d',
-    to: '/pro'
+    to: '/pro',
+    children: [{
+      label: 'Features',
+      to: '/pro#features',
+      exactHash: true,
+      icon: 'i-heroicons-beaker'
+    }, {
+      label: 'Demo',
+      to: '/pro#features',
+      exactHash: true,
+      icon: 'i-heroicons-beaker'
+    }, {
+      label: 'Pricing',
+      to: '/pro#pricing',
+      exactHash: true,
+      icon: 'i-heroicons-shopping-cart'
+    }, {
+      label: 'Guide',
+      to: '/pro/guide',
+      icon: 'i-heroicons-book-open'
+    }, {
+      label: 'Components',
+      to: '/pro/components',
+      icon: 'i-heroicons-cube-transparent'
+    }]
+  }, {
+    label: 'Releases',
+    icon: 'i-heroicons-rocket-launch',
+    to: 'https://github.com/nuxt/ui/releases',
+    target: '_blank'
   }]
 })
 </script>
