@@ -49,7 +49,6 @@ import type { Button, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { pagination, button } from '#ui/ui.config'
-import { end } from '@popperjs/core'
 
 const config = mergeConfig<typeof pagination>(appConfig.ui.strategy, appConfig.ui.pagination, pagination)
 
