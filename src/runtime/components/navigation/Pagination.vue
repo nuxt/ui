@@ -1,5 +1,4 @@
 <template>
-  {{ displayedPages.length }}
   <div :class="ui.wrapper" v-bind="attrs">
     <slot name="prev" :on-click="onClickPrev">
       <UButton
