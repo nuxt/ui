@@ -1,4 +1,5 @@
 <template>
+  {{ displayedPages.length }}
   <div :class="ui.wrapper" v-bind="attrs">
     <slot name="prev" :on-click="onClickPrev">
       <UButton
@@ -49,6 +50,7 @@ import type { Button, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { pagination, button } from '#ui/ui.config'
+import { end } from '@popperjs/core'
 
 const config = mergeConfig<typeof pagination>(appConfig.ui.strategy, appConfig.ui.pagination, pagination)
 
@@ -127,18 +129,18 @@ export default defineComponent({
     const pages = computed(() => Array.from({ length: Math.ceil(props.total / props.pageCount) }, (_, i) => i + 1))
 
     const displayedPages = computed(() => {
-      const totalItems = props.total
       const totalPages = pages.value.length
       const current = currentPage.value
-      const perPage = props.pageCount
-      const lastPage = Math.ceil(totalItems / perPage)
+      const maxDisplayedPages = Math.max(props.max, 5)
 
-      const maxDisplayedPages = props.max
-      const halfDisplayedPages = Math.floor(maxDisplayedPages / 2)
-      const startDisplayedPage = Math.max(2, current + 1 - halfDisplayedPages)
-      const endDisplayedPage = Math.min(startDisplayedPage + maxDisplayedPages - 2, lastPage)
+      const r = Math.floor((Math.min(maxDisplayedPages, totalPages) - 5) / 2)
+      const r1 = current - r
+      const r2 = current + r
 
-      const items = []
+      const hasStartDivider = r1 - 1 > 1
+      const hasEndDivider = r2 + 1 < totalPages
+
+      const items: Array<number | string> = []
 
       if (totalPages <= maxDisplayedPages) {
         for (let i = 1; i <= totalPages; i++) {
@@ -149,19 +151,47 @@ export default defineComponent({
 
       items.push(1)
 
-      if (current > halfDisplayedPages + 1 && startDisplayedPage > 2) {
+      if (hasStartDivider) {
         items.push(props.divider)
       }
 
-      for (let i = startDisplayedPage; i < endDisplayedPage; i++) {
+      if (!hasEndDivider) {
+        const addedItems = (current + r + 2) - totalPages
+
+        for (let i = current - r - addedItems; i <= current - r - 1; i++) {
+          items.push(i)
+        }
+      }
+
+      for (let i = Math.max(2, r1); i <= Math.min(totalPages, r2); i++) {
         items.push(i)
       }
 
-      if (current < lastPage - halfDisplayedPages && endDisplayedPage < lastPage) {
+      if (!hasStartDivider) {
+        const addedItems = 1 - (current - r - 2)
+
+        for (let i = current + r + 1; i <= current + r + addedItems; i++) {
+          items.push(i)
+        }
+      }
+
+      if (hasEndDivider) {
         items.push(props.divider)
       }
 
-      items.push(lastPage)
+      if (r2 < totalPages) {
+        items.push(totalPages)
+      }
+
+      // Replace divider by number on start edge case [1, '…', 3, ...]
+      if (items.length >= 3 && items[1] === props.divider && items[2] === 3) {
+        items[1] = 2
+      }
+
+      // Replace divider by number on end edge case [..., 48, '…', 50]
+      if (items.length >= 3 && items[items.length - 2] === props.divider && items[items.length - 1] === items.length) {
+        items[items.length - 2] = items.length - 1
+      }
 
       return items
     })
