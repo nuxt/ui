@@ -128,8 +128,8 @@ importers:
         specifier: latest
         version: 1.1.72
       '@nuxt/content':
-        specifier: ^2.8.3
-        version: 2.8.3(rollup@3.28.1)(vue@3.3.4)
+        specifier: ^2.8.4
+        version: 2.8.4(rollup@3.28.1)(vue@3.3.4)
       '@nuxt/devtools':
         specifier: ^0.8.3
         version: 0.8.3(nuxt@3.7.3)(rollup@3.28.1)(vite@4.4.9)
@@ -1302,8 +1302,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/content@2.8.3(rollup@3.28.1)(vue@3.3.4):
-    resolution: {integrity: sha512-JhgG/v6jyBhU3PFb61pMwQ2Hi9X3ViDWFAN8fLL/SAOwSWOw07/uOPD+jxFZwgOpNKAF1UkcwsuVUxy/FEHGsw==}
+  /@nuxt/content@2.8.4(rollup@3.28.1)(vue@3.3.4):
+    resolution: {integrity: sha512-daKEHldAkbgxR42UHdi4CUVYemr6Rm2H1uN/ucFh0dziqfYxf9uLbSt6JxW0y+IdOoUt1G674sKpgEicQOMvDg==}
     dependencies:
       '@nuxt/kit': 3.7.4(rollup@3.28.1)
       '@nuxtjs/mdc': 0.2.0(rollup@3.28.1)
@@ -1709,7 +1709,7 @@ packages:
       '@egoist/tailwindcss-icons': 1.1.0(tailwindcss@3.3.3)
       '@headlessui/vue': 1.7.16(vue@3.3.4)
       '@iconify-json/heroicons': 1.1.12
-      '@nuxt/kit': 3.7.3(rollup@3.28.1)
+      '@nuxt/kit': 3.7.4(rollup@3.28.1)
       '@nuxtjs/color-mode': 3.3.0(rollup@3.28.1)
       '@nuxtjs/tailwindcss': 6.8.0(rollup@3.28.1)(webpack@5.88.2)
       '@popperjs/core': 2.11.8
