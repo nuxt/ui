@@ -38,7 +38,7 @@ export default defineComponent({
     }
   },
   setup (props, { slots }) {
-    const { ui, attrs } = useUI('buttonGroup', toRef(props), buttonGroupConfig)
+    const { ui, attrs } = useUI('buttonGroup', toRef(props, 'ui'), buttonGroupConfig)
 
     const children = computed(() => getSlotsChildren(slots))
 
