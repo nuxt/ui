@@ -149,13 +149,10 @@ export default defineComponent({
 
       items.push(1)
 
-      if (hasStartDivider) {
-        items.push(props.divider)
-      }
+      if (hasStartDivider) items.push(props.divider)
 
       if (!hasEndDivider) {
         const addedItems = (current + r + 2) - totalPages
-
         for (let i = current - r - addedItems; i <= current - r - 1; i++) {
           items.push(i)
         }
@@ -167,15 +164,12 @@ export default defineComponent({
 
       if (!hasStartDivider) {
         const addedItems = 1 - (current - r - 2)
-
         for (let i = current + r + 1; i <= current + r + addedItems; i++) {
           items.push(i)
         }
       }
 
-      if (hasEndDivider) {
-        items.push(props.divider)
-      }
+      if (hasEndDivider) items.push(props.divider)
 
       if (r2 < totalPages) {
         items.push(totalPages)
