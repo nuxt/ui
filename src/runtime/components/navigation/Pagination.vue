@@ -135,8 +135,8 @@ export default defineComponent({
       const r1 = current - r
       const r2 = current + r
 
-      const hasStartDivider = r1 - 1 > 1
-      const hasEndDivider = r2 + 1 < totalPages
+      const beforeWrapped = r1 - 1 > 1
+      const afterWrapped = r2 + 1 < totalPages
 
       const items: Array<number | string> = []
 
@@ -149,9 +149,9 @@ export default defineComponent({
 
       items.push(1)
 
-      if (hasStartDivider) items.push(props.divider)
+      if (beforeWrapped) items.push(props.divider)
 
-      if (!hasEndDivider) {
+      if (!afterWrapped) {
         const addedItems = (current + r + 2) - totalPages
         for (let i = current - r - addedItems; i <= current - r - 1; i++) {
           items.push(i)
@@ -162,14 +162,14 @@ export default defineComponent({
         items.push(i)
       }
 
-      if (!hasStartDivider) {
+      if (!beforeWrapped) {
         const addedItems = 1 - (current - r - 2)
         for (let i = current + r + 1; i <= current + r + addedItems; i++) {
           items.push(i)
         }
       }
 
-      if (hasEndDivider) items.push(props.divider)
+      if (afterWrapped) items.push(props.divider)
 
       if (r2 < totalPages) {
         items.push(totalPages)
