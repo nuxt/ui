@@ -142,7 +142,6 @@ export default defineComponent({
 
     const buttonClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
-      
       return twMerge(twJoin(
         ui.value.base,
         ui.value.font,
