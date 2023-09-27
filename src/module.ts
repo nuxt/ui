@@ -150,7 +150,8 @@ export default defineNuxtModule<ModuleOptions>({
           require('@tailwindcss/forms')({ strategy: 'class' }),
           require('@tailwindcss/aspect-ratio'),
           require('@tailwindcss/typography'),
-          require('@tailwindcss/container-queries')
+          require('@tailwindcss/container-queries'),
+          require('@headlessui/tailwindcss')
         ],
         content: {
           files: [
