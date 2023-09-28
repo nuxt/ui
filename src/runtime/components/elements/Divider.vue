@@ -1,10 +1,9 @@
 <template>
   <div :class="wrapperStyle">
     <div :class="borderStyle" />
-
-    <div v-if="label || icon || alt || image || $slot" :class="ui.base">
+    <div v-if="label || icon || image || alt || $slots" :class="ui.base">
       <slot>
-        <UAvatar v-if="!label" :icon="icon" :src="image" :alt="alt" />
+        <UAvatar v-if="!label" :icon="icon" :src="image" :alt="alt" :ui="{ rounded: ui.rounded, background: ui.background }" />
         <span v-else :class="ui.label">
           {{ label }}
         </span>
@@ -16,7 +15,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { toRef, computed, defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import UAvatar from '../elements/Avatar.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
@@ -65,7 +65,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('divider', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('divider', toRef(props, 'ui'), config)
 
     const isHorizontal = computed(() => props.orientation === 'horizontal' )
 
