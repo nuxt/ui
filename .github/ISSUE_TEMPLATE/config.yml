@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Nuxt Community Discord
-    url: https://discord.nuxtjs.org/
-    about: Consider asking questions about the module here.
+  - name: 📖 Documentation
+    url: https://ui.nuxt.com
+    about: Check the documentation for guides and examples.
+  - name: 📚 Discord
+    url: https://discord.com/channels/473401852243869706/1153996761426300948
+    about: Consider asking questions in the `#ui` channel.

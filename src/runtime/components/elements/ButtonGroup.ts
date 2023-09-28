@@ -1,4 +1,4 @@
-import { h, cloneVNode, computed, defineComponent } from 'vue'
+import { h, cloneVNode, computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
@@ -28,13 +28,17 @@ export default defineComponent({
         return ['horizontal', 'vertical'].includes(value)
       }
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof buttonGroupConfig & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props, { slots }) {
-    const { ui, attrs, attrsClass } = useUI('buttonGroup', props.ui, buttonGroupConfig)
+    const { ui, attrs } = useUI('buttonGroup', toRef(props, 'ui'), buttonGroupConfig)
 
     const children = computed(() => getSlotsChildren(slots))
 
@@ -80,7 +84,7 @@ export default defineComponent({
         ui.value.wrapper[props.orientation],
         ui.value.rounded,
         ui.value.shadow
-      ), attrsClass)
+      ), props.class)
     })
 
     return () => h('div', { class: wrapperClass.value, ...attrs.value }, clones.value)
