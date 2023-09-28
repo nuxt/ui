@@ -370,6 +370,25 @@ export const kbd = {
   }
 }
 
+export const divider = {
+  wrapper: {
+    base: 'flex items-center align-center text-center',
+    horizontal: 'flex-row',
+    vertical: 'flex-col'
+  },
+  border: {
+    base: 'flex border-gray-200 dark:border-gray-800',
+    horizontal: 'w-full',
+    vertical: 'h-full',
+    size: {
+      horizontal: 'border-t',
+      vertical: 'border-s'
+    }
+  },
+  base: 'mx-4 text-primary-200 dark:text-primary-800 w-auto',
+  label: ''
+}
+
 // Forms
 
 export const input = {
