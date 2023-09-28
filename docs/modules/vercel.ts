@@ -1,14 +1,16 @@
 import { defineNuxtModule } from 'nuxt/kit'
-import { symlinkSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { symlinkSync, mkdirSync } from 'node:fs'
+import { resolve, dirname } from 'node:path'
 
 export default defineNuxtModule({
   setup (_, nuxt) {
     nuxt.hook('nitro:build:public-assets', () => {
-      const vercelDir = resolve(nuxt.options.rootDir, '.vercel')
-      const workspaceVercelDir = resolve(nuxt.options.workspaceDir, '.vercel')
+      const vercelDir = resolve(nuxt.options.rootDir, '.vercel/output')
+      const workspaceVercelDir = resolve(nuxt.options.workspaceDir, '.vercel/output')
       try {
-        symlinkSync(vercelDir, workspaceVercelDir)
+        mkdirSync(dirname(workspaceVercelDir), { recursive: true })
+        mkdirSync(dirname(vercelDir), { recursive: true })
+        symlinkSync(vercelDir, workspaceVercelDir, 'junction')
       } catch (err) {
         console.error(err)
       }
