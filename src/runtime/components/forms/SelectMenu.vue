@@ -116,7 +116,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, defineComponent } from 'vue'
+import { ref, computed, toRef, watch, defineComponent } from 'vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import {
   Combobox as HCombobox,
@@ -296,6 +296,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -307,9 +311,9 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
-    const { ui, attrs } = useUI('select', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { ui: uiMenu } = useUI('selectMenu', props.uiMenu, configMenu)
+    const { ui: uiMenu } = useUI('selectMenu', toRef(props, 'uiMenu'), configMenu)
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 

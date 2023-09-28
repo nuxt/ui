@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -97,6 +97,10 @@ export default defineComponent({
         ].includes(value)
       }
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -104,7 +108,7 @@ export default defineComponent({
   },
   emits: ['close'],
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('alert', props.ui, config)
+    const { ui, attrs } = useUI('alert', toRef(props, 'ui'), config)
 
     const alertClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -115,7 +119,7 @@ export default defineComponent({
         ui.value.shadow,
         ui.value.padding,
         variant?.replaceAll('{color}', props.color)
-      ), attrsClass)
+      ), props.class)
     })
 
     return {

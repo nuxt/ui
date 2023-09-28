@@ -46,7 +46,7 @@
       </component>
     </div>
 
-    <ContentRenderer v-if="!previewOnly" :value="ast" class="[&>pre]:!rounded-t-none" />
+    <ContentRenderer v-if="!previewOnly" :value="ast" class="[&>div>pre]:!rounded-t-none" />
   </div>
 </template>
 
@@ -209,16 +209,7 @@ function renderObject (obj: any) {
 }
 
 const shikiHighlighter = useShikiHighlighter({})
-const codeHighlighter = async (code: string, lang: string, theme: any, highlights: any) => {
-  const styleMap = {}
-  const { tree, className } = await shikiHighlighter.getHighlightedAST(code, lang, theme, { styleMap, highlights })
-  return {
-    tree,
-    className,
-    style: shikiHighlighter.generateStyles(styleMap),
-    styleMap
-  }
-}
+const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
 const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`, () => transformContent('content:_markdown.md', code.value, {
   markdown: {
     highlight: {
