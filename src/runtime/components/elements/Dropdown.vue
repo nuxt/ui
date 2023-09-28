@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted } from 'vue'
+import { defineComponent, ref, computed, toRef, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem } from '@headlessui/vue'
 import { defu } from 'defu'
@@ -101,13 +101,17 @@ export default defineComponent({
       type: Number,
       default: 0
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('dropdown', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('dropdown', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 

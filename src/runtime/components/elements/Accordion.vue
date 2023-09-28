@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent } from 'vue'
+import { ref, computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
@@ -88,13 +88,17 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('accordion', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('accordion', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const uiButton = computed<Partial<typeof configButton>>(() => configButton)
 

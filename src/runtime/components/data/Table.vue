@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, toRaw } from 'vue'
+import { ref, computed, defineComponent, toRaw, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -143,6 +143,10 @@ export default defineComponent({
       type: Object as PropType<{ icon: string, label: string }>,
       default: () => config.default.emptyState
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -150,7 +154,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (props, { emit, attrs: $attrs }) {
-    const { ui, attrs } = useUI('table', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: upperFirst(key), sortable: false })))
 

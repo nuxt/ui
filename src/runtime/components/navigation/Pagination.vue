@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
@@ -106,6 +106,10 @@ export default defineComponent({
       type: String,
       default: '…'
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -113,7 +117,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('pagination', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('pagination', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const currentPage = computed({
       get () {

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
@@ -24,20 +24,24 @@ export default defineComponent({
       type: String,
       default: 'div'
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('container', props.ui, config)
+    const { ui, attrs } = useUI('container', toRef(props, 'ui'), config)
 
     const containerClass = computed(() => {
       return twMerge(twJoin(
         ui.value.base,
         ui.value.padding,
         ui.value.constrained
-      ), attrsClass)
+      ), props.class)
     })
 
     return {
