@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -118,13 +118,17 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props, { slots }) {
-    const { ui, attrs, attrsClass } = useUI('button', props.ui, config)
+    const { ui, attrs } = useUI('button', toRef(props, 'ui'), config)
 
     const isLeading = computed(() => {
       return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
@@ -148,7 +152,7 @@ export default defineComponent({
         props.padded && ui.value[isSquare.value ? 'square' : 'padding'][props.size],
         variant?.replaceAll('{color}', props.color),
         props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
-      ), attrsClass)
+      ), props.class)
     })
 
     const leadingIconName = computed(() => {
