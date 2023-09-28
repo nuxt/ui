@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperClass">
     <input
-      :id="id"
+      :id="inputId"
       ref="input"
       v-model.number="value"
       :name="name"
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
@@ -67,7 +67,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<keyof typeof config.size>,
-      default: () => config.default.size,
+      default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
@@ -83,6 +83,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -90,12 +94,9 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
-    const { ui, attrs, attrsClass } = useUI('range', props.ui, config)
+    const { ui, attrs } = useUI('range', toRef(props, 'ui'), config)
 
-    const { emitFormChange, formGroup } = useFormGroup(props)
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => formGroup?.size?.value ?? props.size)
-    const id = formGroup?.labelFor
+    const { emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
 
     const value = computed({
       get () {
@@ -115,7 +116,7 @@ export default defineComponent({
       return twMerge(twJoin(
         ui.value.wrapper,
         ui.value.size[size.value]
-      ), attrsClass)
+      ), props.class)
     })
 
     const inputClass = computed(() => {
@@ -171,7 +172,8 @@ export default defineComponent({
       ui,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
-      id,
+      name,
+      inputId,
       value,
       wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys

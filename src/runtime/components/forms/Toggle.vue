@@ -1,6 +1,6 @@
 <template>
   <HSwitch
-    :id="id"
+    :id="inputId"
     v-model="active"
     :name="name"
     :disabled="disabled"
@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Switch as HSwitch } from '@headlessui/vue'
 import { twMerge, twJoin } from 'tailwind-merge'
@@ -73,6 +73,10 @@ export default defineComponent({
         return appConfig.ui.colors.includes(value)
       }
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -80,11 +84,9 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
-    const { ui, attrs, attrsClass } = useUI('toggle', props.ui, config)
+    const { ui, attrs } = useUI('toggle', toRef(props, 'ui'), config)
 
-    const { emitFormChange, formGroup } = useFormGroup(props)
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const id = formGroup?.labelFor
+    const { emitFormChange, color, inputId, name } = useFormGroup(props)
 
     const active = computed({
       get () {
@@ -102,7 +104,7 @@ export default defineComponent({
         ui.value.rounded,
         ui.value.ring.replaceAll('{color}', color.value),
         (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', color.value)
-      ), attrsClass)
+      ), props.class)
     })
 
     const onIconClass = computed(() => {
@@ -122,7 +124,8 @@ export default defineComponent({
       ui,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
-      id,
+      name,
+      inputId,
       active,
       switchClass,
       onIconClass,

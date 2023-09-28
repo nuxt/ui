@@ -2,7 +2,7 @@
   <div :class="ui.wrapper">
     <div class="flex items-center h-5">
       <input
-        :id="name"
+        :id="inputId"
         v-model="toggle"
         :name="name"
         :required="required"
@@ -18,7 +18,7 @@
       >
     </div>
     <div v-if="label || $slots.label" class="ms-3 text-sm">
-      <label :for="name" :class="ui.label">
+      <label :for="inputId" :class="ui.label">
         <slot name="label">{{ label }}</slot>
         <span v-if="required" :class="ui.required">*</span>
       </label>
@@ -30,12 +30,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
+import { uid } from '../../utils/uid'
 import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -47,6 +48,11 @@ const config = mergeConfig<typeof checkbox>(appConfig.ui.strategy, appConfig.ui.
 export default defineComponent({
   inheritAttrs: false,
   props: {
+    id: {
+      type: String,
+      // A default value is needed here to bind the label
+      default: () => uid()
+    },
     value: {
       type: [String, Number, Boolean, Object],
       default: null
@@ -94,6 +100,10 @@ export default defineComponent({
       type: String,
       default: ''
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -101,10 +111,9 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('checkbox', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('checkbox', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { emitFormChange, formGroup } = useFormGroup()
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
+    const { emitFormChange, color, name, inputId } = useFormGroup(props)
 
     const toggle = computed({
       get () {
@@ -136,6 +145,9 @@ export default defineComponent({
       ui,
       attrs,
       toggle,
+      inputId,
+      // eslint-disable-next-line vue/no-dupe-keys
+      name,
       // eslint-disable-next-line vue/no-dupe-keys
       inputClass,
       onChange
