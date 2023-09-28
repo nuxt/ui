@@ -5,7 +5,7 @@ export interface ProBlock {
   description?: string
   slot?: string
   class: string
-  style?: string
+  style?: any
   inactive?: boolean
   transparent?: boolean
   children?: ProBlock[]
