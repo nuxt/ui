@@ -25,7 +25,7 @@ export default defineComponent({
       default: 'div'
     },
     class: {
-      type: [String, Object, Array] as PropType<unknown>,
+      type: [String, Object, Array] as PropType<any>,
       default: undefined
     },
     ui: {

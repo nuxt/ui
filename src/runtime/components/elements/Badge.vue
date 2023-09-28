@@ -50,7 +50,7 @@ export default defineComponent({
       default: null
     },
     class: {
-      type: [String, Object, Array] as PropType<unknown>,
+      type: [String, Object, Array] as PropType<any>,
       default: undefined
     },
     ui: {
