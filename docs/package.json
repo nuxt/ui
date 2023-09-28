@@ -7,10 +7,10 @@
   "devDependencies": {
     "@iconify-json/heroicons": "latest",
     "@iconify-json/simple-icons": "latest",
-    "@nuxt/content": "^2.8.4",
+    "@nuxt/content": "^2.8.5",
     "@nuxt/devtools": "^0.8.3",
     "@nuxt/eslint-config": "^0.2.0",
-    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@0.0.1-28265055.6f16c18",
+    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@0.0.1-28265077.f2f485c",
     "@nuxthq/studio": "^0.14.1",
     "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/google-fonts": "^3.0.2",
