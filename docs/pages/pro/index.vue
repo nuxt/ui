@@ -24,7 +24,8 @@
 
     <div
       :style="{
-        '--y': `${y}px`
+        '--y': `${y}px`,
+        '--inc': `${inc}px`
       }"
     >
       <ULandingSection class="sticky h-screen top-0 flex !pb-16" :ui="{ container: 'flex-1 sm:gap-y-12' }">
@@ -194,7 +195,7 @@
         </template>
       </ULandingSection>
 
-      <div class="h-[6400px]" />
+      <div class="h-[calc(var(--inc)*42)]" />
     </div>
 
     <ULandingSection v-bind="page.next" />
@@ -352,7 +353,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         class: 'inset-0'
       }]
     }]
-  }]
+  }].filter(Boolean)
 }] : [])
 
 const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
@@ -438,9 +439,9 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
     name: '#default',
     class: 'left-72 right-4 inset-y-4'
   }]
-}])
+}].filter(Boolean))
 
-const blocks = computed(() => trimArray([isAfterStep(steps.header) && {
+const blocks = computed(() => [isAfterStep(steps.header) && {
   name: 'UHeader',
   to: '/pro/components/header/Header',
   class: 'h-16 inset-x-0 top-0',
@@ -488,7 +489,7 @@ const blocks = computed(() => trimArray([isAfterStep(steps.header) && {
     name: '#right',
     class: 'right-4 inset-y-4 w-64'
   }]
-}, ...landingBlocks.value, ...docsBlocks.value], { deep: true }))
+}, ...landingBlocks.value, ...docsBlocks.value].filter(Boolean))
 
 // Slots Data
 

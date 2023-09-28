@@ -2,7 +2,7 @@
   <div
     :id="block.id"
     :class="twMerge(
-      'absolute rounded-lg flex items-center justify-center group',
+      'absolute rounded-lg flex items-center justify-center',
       block.class,
       !block.slot && (block.inactive || block.inactive === undefined ? 'border border-gray-800/10 dark:border-gray-200/10 bg-gray-200/20 dark:bg-gray-700/20 transition-[background,text] duration-500' : 'bg-primary transition-[background,text] duration-500'),
       block.name?.startsWith('#') && 'border-dashed'
