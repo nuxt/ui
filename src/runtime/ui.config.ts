@@ -385,10 +385,13 @@ export const divider = {
       vertical: 'border-s'
     }
   },
-  base: 'mx-4 text-primary-500 dark:text-primary-800 w-auto',
+  base: 'mx-4 text-{color}-500 dark:text-{color}-800 w-auto',
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
-  label: ''
+  label: '',
+  default: {
+    color: 'primary'
+  }
 }
 
 // Forms

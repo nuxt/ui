@@ -1,10 +1,17 @@
 <template>
   <div :class="wrapperStyle">
     <div :class="borderStyle" />
-    <div v-if="label || icon || image || alt || $slots" :class="ui.base">
+    <div v-if="label || icon || image || alt || $slots.default" :class="ui.base.replaceAll('{color}', color)">
       <slot>
-        <UAvatar v-if="!label" :icon="icon" :src="image" :alt="alt" :ui="{ rounded: ui.rounded, background: ui.background }" />
-        <span v-else :class="ui.label">
+        <UAvatar
+          v-if="!label"
+          :icon="icon"
+          :src="image"
+          :alt="alt"
+          :ui="{ rounded: ui.rounded, background: ui.background }"
+          :color="color"
+        />
+        <span v-else :class="ui?.label">
           {{ label }}
         </span>
       </slot>
@@ -24,6 +31,7 @@ import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { divider } from '#ui/ui.config'
+import colors from '#ui-colors'
 
 const config = mergeConfig<typeof divider>(appConfig.ui.strategy, appConfig.ui.divider, divider)
 
@@ -49,6 +57,13 @@ export default defineComponent({
       type: String,
       default: ''
     },
+    color: {
+      type: String as PropType<typeof colors[number]>,
+      default: () => config.default.color,
+      validator (value: string) {
+        return appConfig.ui.colors.includes(value)
+      }
+    },
     orientation: {
       type: String as PropType<'horizontal' | 'vertical'>,
       default: 'horizontal',
@@ -58,6 +73,10 @@ export default defineComponent({
       type: String as PropType<'solid' | 'dotted' | 'dashed'>,
       default: 'solid',
       validator: (value: string) => ['solid', 'dotted', 'dashed'].includes(value)
+    },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
     },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
@@ -78,7 +97,8 @@ export default defineComponent({
 
     const wrapperStyle = computed(() => [
       ui.value.wrapper.base,
-      isHorizontal.value ? ui.value.wrapper.horizontal : ui.value.wrapper.vertical
+      isHorizontal.value ? ui.value.wrapper.horizontal : ui.value.wrapper.vertical,
+      props?.class
     ])
 
     return {
