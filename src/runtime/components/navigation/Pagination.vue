@@ -76,7 +76,7 @@ export default defineComponent({
       type: Number,
       default: 7,
       validate (value) {
-        return value >= 7 && value < Number.MAX_VALUE
+        return value >= 5 && value < Number.MAX_VALUE
       }
     },
     size: {
