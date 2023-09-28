@@ -76,7 +76,7 @@ export default defineComponent({
       type: Number,
       default: 7,
       validate (value) {
-        return value >= 7 && value < Number.MAX_VALUE
+        return value >= 5 && value < Number.MAX_VALUE
       }
     },
     size: {
@@ -131,53 +131,65 @@ export default defineComponent({
     const pages = computed(() => Array.from({ length: Math.ceil(props.total / props.pageCount) }, (_, i) => i + 1))
 
     const displayedPages = computed(() => {
-      if (!props.max || pages.value.length <= 5) {
-        return pages.value
-      } else {
-        const current = currentPage.value
-        const max = pages.value.length
-        const r = Math.floor((Math.min(props.max, max) - 5) / 2)
-        const r1 = current - r
-        const r2 = current + r
-        const beforeWrapped = r1 - 1 > 1
-        const afterWrapped = r2 + 1 < max
-        const items: Array<number | string> = [1]
+      const totalPages = pages.value.length
+      const current = currentPage.value
+      const maxDisplayedPages = Math.max(props.max, 5)
 
-        if (beforeWrapped) items.push(props.divider)
+      const r = Math.floor((Math.min(maxDisplayedPages, totalPages) - 5) / 2)
+      const r1 = current - r
+      const r2 = current + r
 
-        if (!afterWrapped) {
-          const addedItems = (current + r + 2) - max
-          for (let i = current - r - addedItems; i <= current - r - 1; i++) {
-            items.push(i)
-          }
-        }
+      const beforeWrapped = r1 - 1 > 1
+      const afterWrapped = r2 + 1 < totalPages
 
-        for (let i = r1 > 2 ? (r1) : 2; i <= Math.min(max, r2); i++) {
+      const items: Array<number | string> = []
+
+      if (totalPages <= maxDisplayedPages) {
+        for (let i = 1; i <= totalPages; i++) {
           items.push(i)
         }
-
-        if (!beforeWrapped) {
-          const addedItems = 1 - (current - r - 2)
-          for (let i = current + r + 1; i <= current + r + addedItems; i++) {
-            items.push(i)
-          }
-        }
-
-        if (afterWrapped) items.push(props.divider)
-
-        if (r2 < max) items.push(max)
-
-        // Replace divider by number on start edge case [1, '…', 3, ...]
-        if (items.length >= 3 && items[1] === props.divider && items[2] === 3) {
-          items[1] = 2
-        }
-        // Replace divider by number on end edge case [..., 48, '…', 50]
-        if (items.length >= 3 && items[items.length - 2] === props.divider && items[items.length - 1] === items.length) {
-          items[items.length - 2] = items.length - 1
-        }
-
         return items
       }
+
+      items.push(1)
+
+      if (beforeWrapped) items.push(props.divider)
+
+      if (!afterWrapped) {
+        const addedItems = (current + r + 2) - totalPages
+        for (let i = current - r - addedItems; i <= current - r - 1; i++) {
+          items.push(i)
+        }
+      }
+
+      for (let i = Math.max(2, r1); i <= Math.min(totalPages, r2); i++) {
+        items.push(i)
+      }
+
+      if (!beforeWrapped) {
+        const addedItems = 1 - (current - r - 2)
+        for (let i = current + r + 1; i <= current + r + addedItems; i++) {
+          items.push(i)
+        }
+      }
+
+      if (afterWrapped) items.push(props.divider)
+
+      if (r2 < totalPages) {
+        items.push(totalPages)
+      }
+
+      // Replace divider by number on start edge case [1, '…', 3, ...]
+      if (items.length >= 3 && items[1] === props.divider && items[2] === 3) {
+        items[1] = 2
+      }
+
+      // Replace divider by number on end edge case [..., 48, '…', 50]
+      if (items.length >= 3 && items[items.length - 2] === props.divider && items[items.length - 1] === items.length) {
+        items[items.length - 2] = items.length - 1
+      }
+
+      return items
     })
 
     const canGoPrev = computed(() => currentPage.value > 1)
