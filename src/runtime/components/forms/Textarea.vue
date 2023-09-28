@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, onMounted, nextTick, defineComponent } from 'vue'
+import { ref, computed, toRef, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
@@ -108,6 +108,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -115,7 +119,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'blur'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('textarea', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('textarea', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const { emitFormBlur, emitFormInput, inputId, color, size, name } = useFormGroup(props, config)
 

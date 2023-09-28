@@ -86,5 +86,10 @@ const links = computed(() => [{
   label: 'Nuxt documentation',
   to: 'https://nuxt.com',
   target: '_blank'
+}, {
+  icon: 'i-simple-icons-figma',
+  label: 'Figma Kit',
+  to: 'https://www.figma.com/community/file/1288455405058138934/nuxt-ui',
+  target: '_blank'
 }])
 </script>

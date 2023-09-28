@@ -1,4 +1,4 @@
-import { h, cloneVNode, computed, defineComponent } from 'vue'
+import { h, cloneVNode, computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UAvatar from './Avatar.vue'
@@ -27,13 +27,17 @@ export default defineComponent({
       type: Number,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof avatarGroupConfig & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props, { slots }) {
-    const { ui, attrs } = useUI('avatarGroup', props.ui, avatarGroupConfig, { mergeWrapper: true })
+    const { ui, attrs } = useUI('avatarGroup', toRef(props, 'ui'), avatarGroupConfig, toRef(props, 'class'))
 
     const children = computed(() => getSlotsChildren(slots))
 
