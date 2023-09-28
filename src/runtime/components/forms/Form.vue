@@ -22,6 +22,7 @@ import { Strategy } from '../../types'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, Form } from '../../types/form'
 import { uid } from '../../utils/uid'
 
+// @ts-expect-error
 import appConfig from '#build/app.config'
 import { form } from '#ui/ui.config'
 
