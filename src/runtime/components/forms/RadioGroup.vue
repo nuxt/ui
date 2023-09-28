@@ -1,6 +1,11 @@
 <template>
   <div :class="ui.wrapper">
     <fieldset v-bind="attrs">
+      <legend v-if="legend || $slots.legend" :class="ui.legend">
+        <slot name="legend">
+          {{ legend }}
+        </slot>
+      </legend>
       <URadio
         v-for="option in normalizedOptions"
         :key="option.value"
@@ -28,10 +33,10 @@ import { mergeConfig, get } from '../../utils'
 import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
-import { radio } from '#ui/ui.config'
+import { radioGroup } from '#ui/ui.config'
 import colors from '#ui-colors'
 
-const config = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.select, radio)
+const config = mergeConfig<typeof radioGroup>(appConfig.ui.strategy, appConfig.ui.select, radioGroup)
 
 export default defineComponent({
   components: {
@@ -44,6 +49,10 @@ export default defineComponent({
       default: ''
     },
     name: {
+      type: String,
+      default: null
+    },
+    legend: {
       type: String,
       default: null
     },
@@ -77,7 +86,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('select', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('radioGroup', props.ui, config, { mergeWrapper: true })
 
     const { emitFormChange, color, name } = useFormGroup(props, config)
     provide('radio-group', { color, name })

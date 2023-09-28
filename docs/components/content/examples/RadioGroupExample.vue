@@ -14,5 +14,5 @@ const selected = ref('sms')
 </script>
 
 <template>
-  <URadioGroup v-model="selected" :options="options" />
+  <URadioGroup v-model="selected" legend="Choose something" :options="options" />
 </template>
