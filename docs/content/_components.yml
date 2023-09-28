@@ -64,7 +64,7 @@ LandingCard:
 LandingCTA:
   description: 'A customizable stylised `Card` with title, description, buttons links and content with in different alignements of your choice.'
 LandingGrid:
-  description: 'A customizable grid to display components like a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Masonry_layout" alt="mansonry layout reference"> masonry layout. </a>'
+  description: 'A customizable grid to display components like a mansonry layout. </a>'
 LandingHero:
   description: 'A customizable hero which allows you to display a title, description, buttons and other content in different alignements and positions.'
 LandingLogos:
