@@ -156,12 +156,33 @@
             </ULandingHero>
           </template>
 
-          <template #landing-section-left>
-            <ULandingSection title="Everything you expect from a UI component library" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione." :links="[{ label: 'Learn more', size: 'md', trailingIcon: 'i-heroicons-arrow-right-20-solid' }]" align="left" :ui="{ title: '!text-3xl', description: 'text-base' }" />
+          <template #landing-section>
+            <ULandingSection :ui="{ title: '!text-3xl', description: 'text-base' }" class="!p-0">
+              <template #title>
+                Everything you expect from a<br> <span class="text-primary">UI component library</span>
+              </template>
+            </ULandingSection>
           </template>
 
-          <template #landing-section-right>
-            <ULandingSection title="A collection of 30+ components" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione." :links="[{ label: 'Learn more', size: 'md', trailingIcon: 'i-heroicons-arrow-right-20-solid' }]" align="right" :ui="{ title: '!text-3xl', description: 'text-base' }" />
+          <template #landing-card-1>
+            <ULandingCard icon="i-heroicons-swatch" title="Color Palette" description="Choose a primary and a gray color from your Tailwind CSS color palette." />
+          </template>
+          <template #landing-card-2>
+            <ULandingCard icon="i-heroicons-wrench-screwdriver" title="Fully Customizable" description="Change the style of any component in your App Config or with ui prop." />
+          </template>
+          <template #landing-card-3>
+            <ULandingCard icon="i-heroicons-face-smile" title="Icons" description="Choose any of the 100k+ icons from the most popular icon libraries." />
+          </template>
+          <template #landing-card-4>
+            <ULandingCard icon="i-heroicons-computer-desktop" title="Keyboard Shortcuts" description="Nuxt UI comes with a set of Vue composables to easily handle shortcuts." />
+          </template>
+
+          <template #landing-cta>
+            <ULandingCTA card :links="[{ label: 'Get started', color: 'black', size: 'md' }, { label: 'Learn more', color: 'black', variant: 'link', size: 'md', trailingIcon: 'i-heroicons-arrow-right-20-solid' }]" :ui="{ title: '!text-3xl', description: 'text-base' }" class="w-full h-full rounded-md">
+              <template #title>
+                Trusted and supported by our<br> amazing community
+              </template>
+            </ULandingCTA>
           </template>
         </ProDemo>
 
@@ -229,7 +250,7 @@ const steps = {
   header: 0,
   footer: 5,
   landing: 10,
-  docs: 30
+  docs: 27
 }
 
 const isPast = computed(() => y.value > (start + (25 * inc.value)))
@@ -253,40 +274,82 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
       class: 'inset-4'
     }]
   }, isAfterStep(steps.landing + 2) && {
-    name: 'ULandingSection (left)',
+    name: 'ULandingSection',
     to: '/pro/components/landing/LandingSection',
     class: [
       'inset-4',
       isBeforeStep(steps.landing + 6) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]',
-      isAfterStep(steps.landing + 8) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
+      isAfterStep(steps.landing + 10) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
     ].filter(Boolean).join(' '),
     style: {
       '--height': (inc.value * 4) + 'px',
-      '--step-y': `${getStepY(steps.landing + 8)}px`,
+      '--step-y': `${getStepY(steps.landing + 10)}px`,
       '--prev-step-y': `${getStepY(steps.landing + 2)}px`
     },
     inactive: isAfterStep(steps.landing + 7),
     children: [{
-      slot: 'landing-section-left',
-      class: 'inset-4'
+      slot: 'landing-section',
+      class: 'inset-x-4 top-16'
+    }, {
+      name: 'ULandingGrid',
+      to: '/pro/components/landing/LandingGrid',
+      class: ['inset-x-4 bottom-4 top-48', isAfterStep(steps.landing + 8) && 'grid grid-cols-4 gap-4 p-4'].filter(Boolean).join(' '),
+      inactive: isAfterStep(steps.landing + 8),
+      children: [isAfterStep(steps.landing + 9) ? {
+        slot: 'landing-card-1',
+        class: '!relative'
+      } : {
+        name: 'ULandingCard',
+        to: '/pro/components/landing/LandingCard',
+        class: '!relative h-full',
+        inactive: false
+      }, isAfterStep(steps.landing + 9) ? {
+        slot: 'landing-card-2',
+        class: '!relative'
+      } : {
+        name: 'ULandingCard',
+        to: '/pro/components/landing/LandingCard',
+        class: '!relative h-full',
+        inactive: false
+      }, isAfterStep(steps.landing + 9) ? {
+        slot: 'landing-card-3',
+        class: '!relative'
+      } : {
+        name: 'ULandingCard',
+        to: '/pro/components/landing/LandingCard',
+        class: '!relative h-full',
+        inactive: false
+      }, isAfterStep(steps.landing + 9) ? {
+        slot: 'landing-card-4',
+        class: '!relative'
+      } : {
+        name: 'ULandingCard',
+        to: '/pro/components/landing/LandingCard',
+        class: '!relative h-full',
+        inactive: false
+      }]
     }]
-  }, isAfterStep(steps.landing + 8) && {
-    name: 'ULandingSection (right)',
+  }, isAfterStep(steps.landing + 10) && {
+    name: 'ULandingSection',
     to: '/pro/components/landing/LandingSection',
     class: [
       'inset-4',
-      isBeforeStep(steps.landing + 12) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]',
-      isAfterStep(steps.landing + 14) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
+      isBeforeStep(steps.landing + 14) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]'
     ].filter(Boolean).join(' '),
     style: {
       '--height': (inc.value * 4) + 'px',
-      '--step-y': `${getStepY(steps.landing + 14)}px`,
-      '--prev-step-y': `${getStepY(steps.landing + 8)}px`
+      '--step-y': `${getStepY(steps.landing + 18)}px`,
+      '--prev-step-y': `${getStepY(steps.landing + 10)}px`
     },
-    inactive: isAfterStep(steps.landing + 13),
+    inactive: isAfterStep(steps.landing + 15),
     children: [{
-      slot: 'landing-section-right',
-      class: 'inset-4'
+      name: 'ULandingCTA',
+      class: 'inset-4',
+      inactive: isAfterStep(steps.landing + 16),
+      children: [{
+        slot: 'landing-cta',
+        class: 'inset-0'
+      }]
     }]
   }]
 }] : [])
