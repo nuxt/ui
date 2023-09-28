@@ -32,6 +32,8 @@
     </template>
 
     <template #panel>
+      <UAsideLinks :links="links" />
+
       <BranchSelect />
 
       <UNavigationTree :links="mapContentNavigation(navigation)" />
@@ -41,58 +43,15 @@
 
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
+import type { Link } from '#ui-pro/types'
+
+defineProps<{
+  links: Link[]
+}>()
 
 const { metaSymbol } = useShortcuts()
-const { branch } = useContentSource()
 
-const navigation = inject<Ref<NavItem[]>>('navigation')
+const nav = inject<Ref<NavItem[]>>('navigation')
 
-const links = computed(() => {
-  return [{
-    label: 'Documentation',
-    icon: 'i-heroicons-book-open-solid',
-    to: `${branch.value?.name === 'dev' ? '/dev' : ''}/getting-started`
-  }, {
-    label: 'Playground',
-    icon: 'i-simple-icons-stackblitz',
-    to: '/playground'
-  }, {
-    label: 'Roadmap',
-    icon: 'i-heroicons-beaker',
-    to: '/roadmap'
-  }, {
-    label: 'Pro',
-    icon: 'i-heroicons-square-3-stack-3d',
-    to: '/pro',
-    children: [{
-      label: 'Features',
-      to: '/pro#features',
-      exactHash: true,
-      icon: 'i-heroicons-beaker'
-    }, {
-      label: 'Demo',
-      to: '/pro#features',
-      exactHash: true,
-      icon: 'i-heroicons-beaker'
-    }, {
-      label: 'Pricing',
-      to: '/pro#pricing',
-      exactHash: true,
-      icon: 'i-heroicons-shopping-cart'
-    }, {
-      label: 'Guide',
-      to: '/pro/guide',
-      icon: 'i-heroicons-book-open'
-    }, {
-      label: 'Components',
-      to: '/pro/components',
-      icon: 'i-heroicons-cube-transparent'
-    }]
-  }, {
-    label: 'Releases',
-    icon: 'i-heroicons-rocket-launch',
-    to: 'https://github.com/nuxt/ui/releases',
-    target: '_blank'
-  }]
-})
+const navigation = computed(() => nav.value.filter(item => !item._path.startsWith('/pro')))
 </script>
