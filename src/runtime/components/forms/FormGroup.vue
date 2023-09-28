@@ -1,19 +1,37 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
-    <div v-if="label" :class="[ui.label.wrapper, size]">
-      <label :for="inputId" :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</label>
-      <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
+    <div v-if="label || $slots.label" :class="[ui.label.wrapper, size]">
+      <label :for="inputId" :class="[ui.label.base, required ? ui.label.required : '']">
+        <slot v-if="$slots.label" name="label" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>{{ label }}</template>
+      </label>
+      <span v-if="hint || $slots.hint" :class="[ui.hint]">
+        <slot v-if="$slots.hint" name="hint" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>{{ hint }}</template>
+      </span>
     </div>
-    <p v-if="description" :class="[ui.description, size]">
-      {{ description }}
+
+    <p v-if="description || $slots.description" :class="[ui.description, size]">
+      <slot v-if="$slots.description" name="description" v-bind="{ error, label, name, hint, description, help }" />
+      <template v-else>
+        {{ description }}
+      </template>
     </p>
+
     <div :class="[label ? ui.container : '']">
       <slot v-bind="{ error }" />
-      <p v-if="typeof error === 'string' && error" :class="[ui.error, size]">
-        {{ error }}
+
+      <p v-if="(typeof error === 'string' && error) || $slots.error" :class="[ui.error, size]">
+        <slot v-if="$slots.error" name="error" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>
+          {{ error }}
+        </template>
       </p>
-      <p v-else-if="help" :class="[ui.help, size]">
-        {{ help }}
+      <p v-else-if="help || $slots.help" :class="[ui.help, size]">
+        <slot v-if="$slots.help" name="help" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>
+          {{ help }}
+        </template>
       </p>
     </div>
   </div>
