@@ -7,5 +7,6 @@ dist
 .DS_Store
 .history
 .vercel
+!/.vercel
 .idea
 .env
