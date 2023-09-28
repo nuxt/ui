@@ -477,6 +477,10 @@ export const input = {
   }
 }
 
+export const form = {
+  error: 'text-sm mt-2 text-red-500 dark:text-red-400'
+}
+
 export const formGroup = {
   wrapper: '',
   label: {

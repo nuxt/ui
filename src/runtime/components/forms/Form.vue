@@ -1,18 +1,31 @@
 <template>
   <form @submit.prevent="onSubmit">
     <slot />
+    <div>
+      <p v-if="globalError" :class="[ui.error]">
+        {{ globalError.message }}
+      </p>
+    </div>
   </form>
 </template>
 
 <script lang="ts">
-import { provide, ref, type PropType, defineComponent } from 'vue'
+import { provide, ref, type PropType, defineComponent, computed } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import { Strategy } from '../../types'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, Form } from '../../types/form'
 import { uid } from '../../utils/uid'
+
+import appConfig from '#build/app.config'
+import { form } from '#ui/ui.config'
+
+const config = mergeConfig<typeof form>(appConfig.ui.strategy, appConfig.ui.form, form)
 
 export default defineComponent({
   props: {
@@ -37,10 +50,16 @@ export default defineComponent({
     validateOn: {
       type: Array as PropType<FormEventType[]>,
       default: () => ['blur', 'input', 'change', 'submit']
+    },
+    ui: {
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['submit'],
   setup (props, { expose, emit }) {
+    const { ui } = useUI('form', props.ui, config, { mergeWrapper: true })
+
     const bus = useEventBus<FormEvent>(`form-${uid()}`)
 
     bus.on(async (event) => {
@@ -50,6 +69,8 @@ export default defineComponent({
     })
 
     const errors = ref<FormError[]>([])
+    const globalError = computed(() => errors.value.filter((err) => !err.path)[0])
+
     provide('form-errors', errors)
     provide('form-events', bus)
 
@@ -79,7 +100,7 @@ export default defineComponent({
           (error) => error.path !== path
         )
         const pathErrors = (await getErrors()).filter(
-          (error) => error.path === path
+          (error) => error.path === path ?? !error.path
         )
         errors.value = otherErrors.concat(pathErrors)
       } else {
@@ -132,7 +153,10 @@ export default defineComponent({
     } as Form<any>)
 
     return {
-      onSubmit
+      onSubmit,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      globalError
     }
   }
 })
@@ -175,7 +199,7 @@ async function getZodErrors (
   const result = await schema.safeParseAsync(state)
   if (result.success === false) {
     return result.error.issues.map((issue) => ({
-      path: issue.path.join('.'),
+      path: issue.path?.join('.'),
       message: issue.message
     }))
   }
@@ -200,7 +224,7 @@ async function getJoiErrors (
   } catch (error) {
     if (isJoiError(error)) {
       return error.details.map((detail) => ({
-        path: detail.path.join('.'),
+        path: detail.path?.join('.'),
         message: detail.message
       }))
     } else {
@@ -220,7 +244,7 @@ async function getValibotError (
   const result = await schema._parse(state)
   if (result.issues) {
     return result.issues.map((issue) => ({
-      path: issue.path.map(p => p.key).join('.'),
+      path: issue.path?.map(p => p.key).join('.'),
       message: issue.message
     }))
   }

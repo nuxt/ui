@@ -1,5 +1,5 @@
 export interface FormError {
-  path: string
+  path?: string
   message: string
 }
 
