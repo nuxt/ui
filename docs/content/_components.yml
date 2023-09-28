@@ -1,100 +1,99 @@
 Aside:
-  description: 'Display a customizable Aside to your page.'
 AsideLinks:
-  description: 'Display an AsideLink with a list of customizable ULink.'
+  description: 'Display an `AsideLink` with a list of customizable ULink with label and external icon.'
 ColorModeAvatar:
-  description: 'Display an UAvatar depending on color mode.'
+  description: 'Display an `Avatar` that may be different depending on light or dark mode.'
 ColorModeButton:
-  description: 'Display an UButton depending on color mode.'
+  description: 'Display an `Button` that may be different depending on light or dark mode'
 ColorModeImage:
-  description: 'Display component depending on color mode. By default an img.'
+  description: 'Display a `Component` that may be different depending on light or dark mode. `Img` by default.'
 ColorModeToggle:
-  description: 'Display a UToogle to switch between color mode.'
+  description: 'Display an `Toogle` to switch between color mode.'
 ProseCode:
-  description: 'A component to display block code render in content.'
+  description: 'A component to display block code render in content files.'
 ProseH1:
-  description: 'A component to display an h1 title render in content.'
+  description: 'A component to display an h1 title render in content files.'
 ProseH2:
-  description: 'A component to display an h2 title render in content.'
+  description: 'A component to display an h2 title render in content files.'
 ProseH3:
-  description: 'A component to display an h3 title render in content.'
+  description: 'A component to display an h3 title render in content files.'
 ProseH4:
-  description: 'A component to display an h4 title render in content.'
+  description: 'A component to display an h4 title render in content files.'
 Callout:
-  description: 'Display a customizable alert component can be a also a NuxtLink.'
+  description: 'Display a alert component render in content files with a customizable icon and content. Can also be a link.'
 Card:
-  description: 'Display a customizable card component.'
+  description: 'Display a `Card` component render in content files with a customizable icon, title and content. Can also be a link.'
 CodeGroup:
-  description: 'A component displaying multiple code block.'
+  description: 'A component displaying multiple `CodeBlock` render in content files.'
 Collaspsible:
-  description: 'Display a togglable collapsible'
+  description: 'Display a togglable collapsible render in content files with a customizable icon and content.'
 Field:
-  description: ''
+  description: 'Display a customizable field component render in content files.'
 FieldGroup:
-  description: ''
+  description: 'Display a list a field render in content files.'
 Shortcut:
-  description: ''
+  description: 'Display and define a keyboard shortcuts render in content files.'
 Divider:
-  description: ''
+  description: 'Display a customizable hr divider.'
 DocsSearch:
-  description: ''
+  description: 'Display a command palette that browses your documentation to perform a research.'
 DocsSearchButton:
-  description: ''
+  description: 'Display a input to open a `DocsSearch` component with a customizable label, icon and shortcut.'
 DocsSurround:
-  description: ''
+  description: 'Display a surround component to browse your documentation with a customizable icon.'
 DocsSurroundLink:
-  description: ''
+  description: 'A customamisable NuxtLink useful for your navigable docs component.'
 DocsToc:
-  description: ''
+  description: 'A customizable table of content for your documentation with an icon, title and content of your choice.'
 DocsTocLinks:
-  description: ''
+  description: 'A resursive component which allows you to display a link with childrens.'
 Footer:
-  description: ''
+  description: 'A customizable Footer that allows you to display informations in different direction and positions.'
 FooterColumns:
-  description: ''
+  description: 'A customizable component which display your links in columns, useful for your Footer.'
 FooterLinks:
-  description: ''
+  description: 'A customizable list of links useful for your footer.'
 Header:
-  description: ''
+  description: 'A customizable Header that allows you to display informations in different directions and positions.'
 HeaderLinks:
-  description: ''
+  description: 'A customizable link opening a popover containing a list of children links.'
 HeaderPopoverLinks:
-  description: ''
+  description: 'A customizable list of links, useful to displaying in a header `Popover`.'
 LandingCard:
-  description: ''
+  description: 'A customizable stylised `Card` with hover effect.'
 LandingCTA:
-  description: ''
+  description: 'A customizable stylised `Card` with title, description, buttons links and content with in different alignements of your choice.'
 LandingGrid:
-  description: ''
+  description: 'A customizable grid to display components like a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Masonry_layout" alt="mansonry layout reference"> masonry layout. </a>'
 LandingHero:
-  description: ''
+  description: 'A customizable hero which allows you to display a title, description, buttons and other content in different alignements and positions.'
 LandingLogos:
-  description: ''
+  description: 'Display a list of logos with images and title in a different alignements.'
 LandingSection:
-  description: ''
+  description: 'Display a container with icon, headline, title, description, buttons and other content in a different alignement and position.'
 Main:
-  description: ''
+  description: 'A main component with a calculated min height according your header size.'
 NavigationAccordion:
-  description: ''
+  description: 'Display an `Accordion` with a resrusive navigation and a cuztomisable icon, title and content.'
 NavigationLinks:
-  description: ''
+  description: 'Display an `Link` component with a cuztomisable `UBadge`, icon and label. Useful for your navigation components.'
 NavigationTree:
-  description: ''
+  description: 'Display a list of `Accordion` or `UNavigationLinks` depending on your navigation depth with a customizable state (open or close).'
 PageLinks:
-  description: ''
+  description: 'Display a cuztomisable link in your page with a title, `Link`, `Avatar`, icon and label.'
 PageHero:
-  description: ''
+  description: 'A customizable component in your page which allows you to display a title, description, buttons link and other content in different alignements and positions.'
 PageHeader:
-  description: ''
+  description: 'Display a customizable header in your page which allows you to display a headerline, icon, title, description and buttons link in different alignements and positions.'
 PageGrid:
-  description: ''
+  description: 'Display a customizable grid in your page.'
 PageColumns:
-  description: ''
+  description: 'Display a customizable columns in your page.'
 PageError:
-  description: ''
+  description: 'Display a page error with a cuzomizable status, name, message and links.'
 PageCard:
-  description: ''
+  description: 'Display a `Card` in your page with a customizable header, icon, title, description and footer.'
 PageBody:
-  description: ''
+  description: 'Display a customizable body in your page.'
 Page:
-  description: ''
+  description: 'Display a grid with a customizable columns and position. Useful to add an aside or table of content'
