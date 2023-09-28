@@ -26,13 +26,13 @@
         '--y': `${y}px`
       }"
     >
-      <ULandingSection class="sticky h-screen top-0 flex !pb-16" :ui="{ container: 'flex-1 sm:gap-y-16' }">
+      <ULandingSection class="sticky h-screen top-0 flex !pb-16" :ui="{ container: 'flex-1 sm:gap-y-12' }">
         <template #title>
-          <span v-html="isPast ? page.docs?.title : page.landing?.title" />
+          <span v-html="isAfterStep(steps.docs) ? page.docs?.title : page.landing?.title" />
         </template>
 
         <template #description>
-          <span v-html="isPast ? page.docs?.description : page.landing?.description" />
+          <span v-html="isAfterStep(steps.docs) ? page.docs?.description : page.landing?.description" />
         </template>
 
         <ProDemo ref="demoRef" :blocks="blocks">
@@ -157,7 +157,11 @@
           </template>
 
           <template #landing-section-left>
-            <ULandingSection title="A better workflow" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione." :links="[{ label: 'Learn more', size: 'md', trailingIcon: 'i-heroicons-arrow-right-20-solid' }]" align="left" />
+            <ULandingSection title="Everything you expect from a UI component library" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione." :links="[{ label: 'Learn more', size: 'md', trailingIcon: 'i-heroicons-arrow-right-20-solid' }]" align="left" :ui="{ title: '!text-3xl', description: 'text-base' }" />
+          </template>
+
+          <template #landing-section-right>
+            <ULandingSection title="A collection of 30+ components" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione." :links="[{ label: 'Learn more', size: 'md', trailingIcon: 'i-heroicons-arrow-right-20-solid' }]" align="right" :ui="{ title: '!text-3xl', description: 'text-base' }" />
           </template>
         </ProDemo>
 
@@ -168,7 +172,7 @@
         </template>
       </ULandingSection>
 
-      <div class="h-[3200px]" />
+      <div class="h-[6400px]" />
     </div>
 
     <ULandingSection v-bind="page.next" />
@@ -225,7 +229,7 @@ const steps = {
   header: 0,
   footer: 5,
   landing: 10,
-  docs: 50
+  docs: 30
 }
 
 const isPast = computed(() => y.value > (start + (25 * inc.value)))
@@ -236,7 +240,10 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
   children: [{
     name: 'ULandingHero',
     to: '/pro/components/landing/LandingHero',
-    class: ['inset-4', isAfterStep(steps.landing + 2) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'].filter(Boolean).join(' '),
+    class: [
+      'inset-4',
+      isAfterStep(steps.landing + 2) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
+    ].filter(Boolean).join(' '),
     style: {
       '--step-y': `${getStepY(steps.landing + 2)}px`
     },
@@ -246,17 +253,39 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
       class: 'inset-4'
     }]
   }, isAfterStep(steps.landing + 2) && {
-    name: 'ULandingSection',
-    description: 'left aligned',
+    name: 'ULandingSection (left)',
     to: '/pro/components/landing/LandingSection',
-    class: ['inset-4', isBeforeStep(steps.landing + 6) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--prev-height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--prev-height))]'].filter(Boolean).join(' '),
+    class: [
+      'inset-4',
+      isBeforeStep(steps.landing + 6) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]',
+      isAfterStep(steps.landing + 8) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
+    ].filter(Boolean).join(' '),
     style: {
-      '--prev-height': (inc.value * 4) + 'px',
+      '--height': (inc.value * 4) + 'px',
+      '--step-y': `${getStepY(steps.landing + 8)}px`,
       '--prev-step-y': `${getStepY(steps.landing + 2)}px`
     },
     inactive: isAfterStep(steps.landing + 7),
     children: [{
       slot: 'landing-section-left',
+      class: 'inset-4'
+    }]
+  }, isAfterStep(steps.landing + 8) && {
+    name: 'ULandingSection (right)',
+    to: '/pro/components/landing/LandingSection',
+    class: [
+      'inset-4',
+      isBeforeStep(steps.landing + 12) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]',
+      isAfterStep(steps.landing + 14) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
+    ].filter(Boolean).join(' '),
+    style: {
+      '--height': (inc.value * 4) + 'px',
+      '--step-y': `${getStepY(steps.landing + 14)}px`,
+      '--prev-step-y': `${getStepY(steps.landing + 8)}px`
+    },
+    inactive: isAfterStep(steps.landing + 13),
+    children: [{
+      slot: 'landing-section-right',
       class: 'inset-4'
     }]
   }]
