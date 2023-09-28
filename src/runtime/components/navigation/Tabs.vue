@@ -38,6 +38,7 @@
         :key="index"
         v-slot="{ selected }"
         :class="ui.base"
+        tabindex="-1"
       >
         <slot :name="item.slot || 'item'" :item="item" :index="index" :selected="selected">
           {{ item.content }}
