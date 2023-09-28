@@ -581,7 +581,10 @@ export const selectMenu = {
 
 export const radioGroup = {
   wrapper: 'relative flex items-start',
-  legend: 'text-sm font-medium text-gray-700 dark:text-gray-200 mb-1'
+  legend: 'text-sm font-medium text-gray-700 dark:text-gray-200 mb-1',
+  default: {
+    color: 'primary'
+  }
 }
 
 export const radio = {
