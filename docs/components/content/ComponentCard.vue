@@ -2,7 +2,7 @@
   <div>
     <div v-if="propsToSelect.length" class="relative flex border border-gray-200 dark:border-gray-700 rounded-t-md overflow-hidden not-prose">
       <div v-for="prop in propsToSelect" :key="prop.name" class="flex flex-col gap-0.5 justify-between py-1.5 font-medium bg-gray-50 dark:bg-gray-800 border-r border-r-gray-200 dark:border-r-gray-700">
-        <label :for="`prop-${prop.name}`" class="block text-xs px-2.5 font-medium text-gray-400 dark:text-gray-500 -my-px">{{ prop.label }}</label>
+        <label :for="`prop-${prop.name}`" class="block text-xs px-2.5 font-medium text-gray-400 dark:text-gray-500 -my-px capitalize">{{ prop.label }} :</label>
         <UCheckbox
           v-if="prop.type.startsWith('boolean')"
           v-model="componentProps[prop.name]"
@@ -125,8 +125,6 @@ const meta = await fetchComponentMeta(name)
 
 // Computed
 
-const ui = computed(() => ({ ...config[camelName], ...props.ui }))
-
 const fullProps = computed(() => ({ ...baseProps, ...componentProps }))
 const vModel = computed({
   get: () => baseProps.modelValue,
@@ -141,12 +139,15 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   }
 
   const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
-  const dottedKey = kebabCase(key).replaceAll('-', '.')
-  const keys = ui.value[dottedKey] ?? {}
-  let options = typeof keys === 'object' && Object.keys(keys)
+  let options = []
+
   if (key.toLowerCase().endsWith('color')) {
     // @ts-ignore
     options = [...appConfig.ui.colors, ...props.extraColors]
+  }
+
+  if (prop?.schema?.schema && prop?.schema?.kind === 'enum') {
+    options = prop.schema.schema.map((option: string) => option.replaceAll('"', ''))
   }
 
   return {
