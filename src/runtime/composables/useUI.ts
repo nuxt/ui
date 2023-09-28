@@ -10,13 +10,14 @@ export const useUI = <T>(key, $ui: Ref<Partial<T & { strategy: Strategy }> | und
 
   const ui = computed(() => {
     const _ui = toValue($ui)
+    const _config = toValue($config)
     const _wrapperClass = toValue($wrapperClass)
     return mergeConfig<T>(
       _ui?.strategy || (appConfig.ui?.strategy as Strategy),
       _wrapperClass ? { wrapper: _wrapperClass } : {},
       _ui || {},
       process.dev ? get(appConfig.ui, key, {}) : {},
-      $config || {}
+      _config || {}
     )
   })
 
