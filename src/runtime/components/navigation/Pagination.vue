@@ -107,7 +107,7 @@ export default defineComponent({
       default: '…'
     },
     class: {
-      type: String,
+      type: [String, Object, Array] as PropType<unknown>,
       default: undefined
     },
     ui: {
