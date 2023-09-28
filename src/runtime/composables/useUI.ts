@@ -4,7 +4,7 @@ import { useAppConfig } from '#imports'
 import { mergeConfig, omit, get } from '../utils'
 import { Strategy } from '../types'
 
-export const useUI = <T>(key, $ui: Ref<Partial<T & { strategy: Strategy }> | undefined>, $config?: T, $wrapperClass?: Ref<string>) => {
+export const useUI = <T>(key, $ui: Ref<Partial<T & { strategy: Strategy }> | undefined>, $config?: Ref<T> | T, $wrapperClass?: Ref<string>) => {
   const $attrs = useAttrs()
   const appConfig = useAppConfig()
 
