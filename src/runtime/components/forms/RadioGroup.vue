@@ -5,12 +5,14 @@
         v-for="option in normalizedOptions"
         :key="option.value"
         :label="option.label"
-        :model-value="option.value"
-        :checked="option.value === modelValue"
+        :model-value="modelValue"
+        :value="option.value"
         :disabled="disabled"
         @change="onUpdate(option.value)"
       >
-        <slot name="label" v-bind="{ option }" />
+        <template #label>
+          <slot name="label" v-bind="{ option }" />
+        </template>
       </URadio>
     </fieldset>
   </div>
