@@ -204,7 +204,9 @@
       <ULandingCTA v-bind="page.pricing" card />
     </ULandingSection>
 
-    <ULandingSection v-bind="page.faq" />
+    <ULandingSection :title="page.faq.title" :description="page.faq.description">
+      <ULandingFAQ :items="page.faq.items" />
+    </ULandingSection>
   </div>
 </template>
 
