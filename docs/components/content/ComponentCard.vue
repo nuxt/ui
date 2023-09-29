@@ -2,7 +2,7 @@
   <div>
     <div v-if="propsToSelect.length" class="relative flex border border-gray-200 dark:border-gray-700 rounded-t-md overflow-hidden not-prose">
       <div v-for="prop in propsToSelect" :key="prop.name" class="flex flex-col gap-0.5 justify-between py-1.5 font-medium bg-gray-50 dark:bg-gray-800 border-r border-r-gray-200 dark:border-r-gray-700">
-        <label :for="`prop-${prop.name}`" class="block text-xs px-2.5 font-medium text-gray-400 dark:text-gray-500 -my-px capitalize">{{ prop.label }} :</label>
+        <label :for="`prop-${prop.name}`" class="block text-xs px-2.5 font-medium text-gray-400 dark:text-gray-500 -my-px">{{ prop.label }}</label>
         <UCheckbox
           v-if="prop.type.startsWith('boolean')"
           v-model="componentProps[prop.name]"
@@ -51,12 +51,11 @@
 </template>
 
 <script setup lang="ts">
-// @ts-expect-error
+// @ts-expect-errorn
 import { transformContent } from '@nuxt/content/transformers'
 // @ts-ignore
 import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
 import { upperFirst, camelCase, kebabCase } from 'scule'
-import * as config from '#ui/ui.config'
 
 // eslint-disable-next-line vue/no-dupe-keys
 const props = defineProps({
