@@ -1,23 +1,131 @@
-<template>
-  <UContainer class="min-h-screen flex items-center">
-    <UCard class="flex-1" :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50', ring: 'ring-1 ring-gray-300 dark:ring-gray-700', divide: 'divide-y divide-gray-300 dark:divide-gray-700', header: { base: 'font-bold' } }">
-      <template #header>
-        Welcome to the playground!
-      </template>
+<script setup lang="ts">
 
-      <p class="text-gray-500 dark:text-gray-400">
-        Try your components here!
-      </p>
-    </UCard>
-  </UContainer>
-</template>
+const colorMode = useColorMode()
+const isDark = computed({
+  get () {
+    return colorMode.value === 'dark'
+  },
+  set () {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
+})
 
-<script setup>
+const people = ['Wade Cooper', 'Arlene Mccoy', 'Devon Webb', 'Tom Cook', 'Tanya Fox', 'Hellen Schmidt', 'Caroline Schultz', 'Mason Heaney', 'Claudie Smitham', 'Emil Schaefer']
+const countries = ['United States', 'Canada', 'Mexico']
 
+const state = ref({
+  email: undefined,
+  password: undefined,
+  people: undefined,
+  country: undefined,
+  notification: undefined
+})
+
+const validate = (state) => {
+  const errors = []
+  if (!state.email) errors.push({ path: 'email', message: 'Required' })
+  if (!state.password) errors.push({ path: 'password', message: 'Required' })
+  if (!state.people) errors.push({ path: 'people', message: 'Required' })
+  if (!state.country) errors.push({ path: 'country', message: 'Required' })
+  if (!state.notification) errors.push({ path: 'notification', message: 'Required' })
+  return errors
+}
+
+async function submit (event) {}
 </script>
 
-<style>
-body {
-  @apply antialiased font-sans text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900;
-}
-</style>
+<template>
+  <Body class="bg-gray-400" />
+
+  <!-- with bg -->
+  <UCard class="m-4">
+    <div class="flex flex-col gap-4">
+      <UButton
+        :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+        color="gray"
+        :label="isDark ? 'Dark' : 'Light'"
+        aria-label="Theme"
+        @click="isDark = !isDark"
+      />
+
+      <UForm :validate="validate" :state="state" class="flex flex-col gap-6 py-6" @submit="submit">
+        <UFormGroup name="password">
+          <UInput v-model="state.password" type="text" />
+        </UFormGroup>
+
+        <UFormGroup name="password">
+          <UTextarea v-model="state.password" />
+        </UFormGroup>
+
+        <UFormGroup name="country">
+          <USelect v-model="state.country" :options="countries" />
+        </UFormGroup>
+
+        <UFormGroup name="people">
+          <USelectMenu v-model="state.people" :options="people" />
+        </UFormGroup>
+
+        <UFormGroup name="notification">
+          <UCheckbox v-model="state.notification" name="notifications" label="Notifications" />
+        </UFormGroup>
+
+        <UFormGroup name="notification">
+          <URadio v-model="state.notification" name="notifications" label="Notifications" />
+        </UFormGroup>
+
+        <UFormGroup name="notification">
+          <UToggle v-model="state.notification" name="notifications" />
+        </UFormGroup>
+
+        <UButton type="submit">
+          Submit
+        </UButton>
+      </UForm>
+    </div>
+  </UCard>
+
+  <!-- without bg -->
+  <div class="m-4 flex flex-col gap-4 border rounded p-5">
+    <UButton
+      :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+      color="gray"
+      :label="isDark ? 'Dark' : 'Light'"
+      aria-label="Theme"
+      @click="isDark = !isDark"
+    />
+
+    <UForm :validate="validate" :state="state" class="flex flex-col gap-6 py-6" @submit="submit">
+      <UFormGroup name="password">
+        <UInput v-model="state.password" type="text" />
+      </UFormGroup>
+
+      <UFormGroup name="password">
+        <UTextarea v-model="state.password" />
+      </UFormGroup>
+
+      <UFormGroup name="country">
+        <USelect v-model="state.country" :options="countries" />
+      </UFormGroup>
+
+      <UFormGroup name="people">
+        <USelectMenu v-model="state.people" :options="people" />
+      </UFormGroup>
+
+      <UFormGroup name="notification">
+        <UCheckbox v-model="state.notification" name="notifications" label="Notifications" />
+      </UFormGroup>
+
+      <UFormGroup name="notification">
+        <URadio v-model="state.notification" name="notifications" label="Notifications" />
+      </UFormGroup>
+
+      <UFormGroup name="notification">
+        <UToggle v-model="state.notification" name="notifications" />
+      </UFormGroup>
+
+      <UButton type="submit">
+        Submit
+      </UButton>
+    </UForm>
+  </div>
+</template>
