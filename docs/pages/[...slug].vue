@@ -82,8 +82,13 @@ const links = computed(() => [{
   to: 'https://github.com/nuxt/ui',
   target: '_blank'
 }, {
+  icon: 'i-heroicons-chat-bubble-bottom-center-text',
+  label: 'Chat on Discord',
+  to: 'https://discord.com/channels/473401852243869706/1153996761426300948',
+  target: '_blank'
+}, {
   icon: 'i-heroicons-book-open',
-  label: 'Nuxt documentation',
+  label: 'Nuxt docs',
   to: 'https://nuxt.com',
   target: '_blank'
 }, {
