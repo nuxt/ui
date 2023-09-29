@@ -35,7 +35,7 @@ type ComponentMeta = {
 const { data: components } = await useAsyncData('components', () => $fetch<ComponentMeta>('/api/component-meta'))
 
 const links = computed(() => {
-  const proComponents = Object.values(components.value).filter(component => runtimeConfig.uiProPath ? component.shortPath.startsWith(`${runtimeConfig.uiProPath}`) : false)
+  const proComponents = Object.values(components.value).filter(component => runtimeConfig.uiProPath ? component.shortPath.startsWith(`${runtimeConfig.uiProPath}`) : ['@nuxt/ui-pro', '@nuxt/ui-pro-edge'].includes(component.shortPath))
 
   const proComponentsTree = proComponents.reduce((acc: Link[], component: any) => {
     const categoryName = component.shortPath.split('/').reverse()[1]
