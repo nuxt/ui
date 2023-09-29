@@ -200,11 +200,13 @@
 
     <ULandingSection v-bind="page.next" />
 
-    <ULandingSection id="pricing" class="!pt-0">
-      <ULandingCTA v-bind="page.pricing" card />
+    <ULandingSection id="pricing" :title="page.pricing.title" :description="page.pricing.description">
+      <UPricingGrid>
+        <UPricingCard v-for="(plan, index) in page.pricing.plans" :key="index" v-bind="plan" />
+      </UPricingGrid>
     </ULandingSection>
 
-    <ULandingSection :title="page.faq.title" :description="page.faq.description">
+    <ULandingSection id="faq" :title="page.faq.title" :description="page.faq.description">
       <ULandingFAQ :items="page.faq.items" />
     </ULandingSection>
   </div>
