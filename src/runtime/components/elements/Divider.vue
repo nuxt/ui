@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperStyle">
     <div :class="borderStyle" />
-    <div v-if="label || icon || image || alt || $slots.default" :class="ui.base.replaceAll('{color}', color)">
+    <div v-if="label || icon || image || alt || $slots.default" :class="baseStyle">
       <slot>
         <UAvatar
           v-if="!label"
@@ -9,7 +9,6 @@
           :src="image"
           :alt="alt"
           :ui="{ rounded: ui.rounded, background: ui.background }"
-          :color="color"
         />
         <span v-else :class="ui?.label">
           {{ label }}
@@ -31,7 +30,6 @@ import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { divider } from '#ui/ui.config'
-import colors from '#ui-colors'
 
 const config = mergeConfig<typeof divider>(appConfig.ui.strategy, appConfig.ui.divider, divider)
 
@@ -57,13 +55,6 @@ export default defineComponent({
       type: String,
       default: ''
     },
-    color: {
-      type: String as PropType<typeof colors[number]>,
-      default: () => config.default.color,
-      validator (value: string) {
-        return appConfig.ui.colors.includes(value)
-      }
-    },
     orientation: {
       type: String as PropType<'horizontal' | 'vertical'>,
       default: 'horizontal',
@@ -88,6 +79,17 @@ export default defineComponent({
 
     const isHorizontal = computed(() => props.orientation === 'horizontal' )
 
+    const wrapperStyle = computed(() => [
+      ui.value.wrapper.base,
+      isHorizontal.value ? ui.value.wrapper.horizontal : ui.value.wrapper.vertical,
+      props?.class
+    ])
+
+    const baseStyle = computed(() => [
+      ui.value.base.main,
+      isHorizontal.value ? ui.value.base.horizontal : ui.value.base.vertical
+    ])
+
     const borderStyle = computed(() => [
       'border-{style}'.replaceAll('{style}', props.type),
       ui.value.border.base,
@@ -95,19 +97,13 @@ export default defineComponent({
       isHorizontal.value ? ui.value.border.size.horizontal : ui.value.border.size.vertical
     ])
 
-    const wrapperStyle = computed(() => [
-      ui.value.wrapper.base,
-      isHorizontal.value ? ui.value.wrapper.horizontal : ui.value.wrapper.vertical,
-      props?.class
-    ])
-
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
+      wrapperStyle,
       borderStyle,
-      wrapperStyle
-
+      baseStyle
     }
   }
 })
