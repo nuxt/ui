@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-// @ts-expect-errorn
+// @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
 // @ts-ignore
 import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
@@ -146,7 +146,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   }
 
   if (prop?.schema?.schema && prop?.schema?.kind === 'enum') {
-    options = prop.schema.schema.map((option: string) => option.replaceAll('"', ''))
+    options = prop.schema.schema?.map((option: string) => option?.replaceAll('"', ''))
   }
 
   return {
