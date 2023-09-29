@@ -83,7 +83,6 @@ async function submit (event: FormSubmitEvent<any>) {
       <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-4">
         If you purchased a team license, activate the license key for each of your team members.
       </p>
-      <div class="h-20" />
     </UPage>
   </UContainer>
 </template>
