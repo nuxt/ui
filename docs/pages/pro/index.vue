@@ -307,7 +307,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         inactive: false
       }, isAfterStep(steps.landing + 9) ? {
         slot: 'landing-card-2',
-        class: '!relative'
+        class: '!relative h-full'
       } : {
         name: 'ULandingCard',
         to: '/pro/components/landing/LandingCard',
@@ -315,7 +315,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         inactive: false
       }, isAfterStep(steps.landing + 9) ? {
         slot: 'landing-card-3',
-        class: '!relative'
+        class: '!relative h-full'
       } : {
         name: 'ULandingCard',
         to: '/pro/components/landing/LandingCard',
@@ -323,7 +323,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         inactive: false
       }, isAfterStep(steps.landing + 9) ? {
         slot: 'landing-card-4',
-        class: '!relative'
+        class: '!relative h-full'
       } : {
         name: 'ULandingCard',
         to: '/pro/components/landing/LandingCard',
