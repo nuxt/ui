@@ -87,6 +87,11 @@ const links = computed(() => [{
   to: 'https://nuxt.com',
   target: '_blank'
 }, {
+  icon: 'i-simple-icons-discord',
+  label: 'Chat on Discord',
+  to: 'https://discord.com/channels/473401852243869706/1153996761426300948',
+  target: '_blank'
+}, {
   icon: 'i-simple-icons-figma',
   label: 'Figma Kit',
   to: 'https://www.figma.com/community/file/1288455405058138934/nuxt-ui',
