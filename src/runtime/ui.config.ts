@@ -385,7 +385,7 @@ export const divider = {
       vertical: 'border-s'
     }
   },
-  base: 'mx-4 text-{color}-500 dark:text-{color}-800 w-auto',
+  base: 'font-medium text-{color}-700 dark:text-{color}-200 w-1/2 text-center align-center',
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
   label: '',
