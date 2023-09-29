@@ -145,8 +145,8 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
     options = [...appConfig.ui.colors, ...props.extraColors]
   }
 
-  if (prop?.schema?.schema && prop?.schema?.kind === 'enum') {
-    options = prop.schema.schema?.map((option: string) => option?.replaceAll('"', ''))
+  if (prop?.schema?.schema?.length > 0 && prop?.schema?.kind === 'enum') {
+    options = prop.schema.schema.map((option: string) => option.replaceAll('"', ''))
   }
 
   return {
