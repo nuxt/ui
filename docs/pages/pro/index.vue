@@ -189,7 +189,7 @@
         </ProDemo>
 
         <template #bottom>
-          <div v-if="!isPast" class="mx-auto absolute inset-x-0 bottom-4 flex justify-center">
+          <div v-if="isBeforeStep(steps.docs + 14)" class="mx-auto absolute inset-x-0 bottom-4 flex justify-center">
             <UButton color="white" size="xs" label="Skip" trailing-icon="i-heroicons-arrow-right-20-solid" to="#features" />
           </div>
         </template>
@@ -254,8 +254,6 @@ const steps = {
   landing: 10,
   docs: 27
 }
-
-const isPast = computed(() => y.value > (start + (25 * inc.value)))
 
 const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(steps.docs) ? [{
   class: 'inset-x-0 top-20 bottom-20 overflow-hidden',
