@@ -325,6 +325,7 @@ export default defineComponent({
 
     const selectClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
+      const background = ui.value.color[props.color]?.background || ui.value?.background || ''
 
       return twMerge(twJoin(
         ui.value.base,
@@ -333,7 +334,7 @@ export default defineComponent({
         ui.value.size[size.value],
         ui.value.gap[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
-        variant?.replaceAll('{color}', color.value),
+        `${variant?.replaceAll('{color}', color.value)} ${background}`.trim(),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value],
         'inline-flex items-center'
