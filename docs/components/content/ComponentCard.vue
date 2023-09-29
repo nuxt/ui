@@ -138,7 +138,6 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   }
 
   const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
-
   let options = []
 
   if (key.toLowerCase().endsWith('color')) {
@@ -147,7 +146,8 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   }
 
   if (prop?.schema?.schema?.length > 0 && prop?.schema?.kind === 'enum') {
-    options = prop.schema.schema.map((option: string) => option.replaceAll('"', ''))
+    options = prop.schema.schema.filter(option => typeof option === 'string')
+      .map((option: string) => option.replaceAll('"', ''))
   }
 
   return {
