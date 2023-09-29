@@ -52,7 +52,7 @@ if (!component.value) {
 const headerLinks = computed(() => [{
   label: 'GitHub',
   icon: 'i-simple-icons-github',
-  to: `https://github.com/nuxtlabs/elements/blob/dev/components/${category}/${name}.vue`
+  to: `https://github.com/nuxt/ui-pro/blob/dev/components/${category}/${name}.vue`
 }])
 
 const tocLinks = computed(() => {
