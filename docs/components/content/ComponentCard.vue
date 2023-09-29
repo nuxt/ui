@@ -56,7 +56,6 @@ import { transformContent } from '@nuxt/content/transformers'
 // @ts-ignore
 import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
 import { upperFirst, camelCase, kebabCase } from 'scule'
-import * as config from '#ui/ui.config'
 
 // eslint-disable-next-line vue/no-dupe-keys
 const props = defineProps({
@@ -120,10 +119,10 @@ const route = useRoute()
 const slug = props.slug || route.params.slug[route.params.slug.length - 1]
 const camelName = camelCase(slug)
 const name = `U${upperFirst(camelName)}`
+
 const meta = await fetchComponentMeta(name)
 
 // Computed
-const ui = computed(() => ({ ...config[camelName], ...props.ui }))
 
 const fullProps = computed(() => ({ ...baseProps, ...componentProps }))
 const vModel = computed({
@@ -139,8 +138,6 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   }
 
   const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
-  const dottedKey = kebabCase(key).replaceAll('-', '.')
-  const keys = ui.value[dottedKey] ?? {}
 
   let options = []
 
