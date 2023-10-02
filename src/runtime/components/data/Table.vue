@@ -3,7 +3,7 @@
     <table :class="[ui.base, ui.divide]">
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
-          <th v-if="modelValue" scope="col" :class="ui.checkbox.padding">
+          <th v-if="modelValue" scope="col" :class="[ui.th.base, ui.th.color, ui.th.font, ui.th.size, ui.checkbox.padding]">
             <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" aria-label="Select all" @change="onChange" />
           </th>
 
@@ -50,7 +50,7 @@
 
         <template v-else>
           <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
-            <td v-if="modelValue" :class="ui.checkbox.padding">
+            <td v-if="modelValue" :class="[ui.td.base, ui.td.color, ui.td.font, ui.td.size, ui.checkbox.padding]">
               <UCheckbox v-model="selected" :value="row" aria-label="Select row" @click.stop />
             </td>
 
