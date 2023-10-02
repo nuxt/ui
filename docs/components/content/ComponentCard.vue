@@ -91,8 +91,8 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-  extraColors: {
-    type: Array,
+  options: {
+    type: Array as PropType<{ name: string; values: string[]; restriction: 'expected' | 'included' | 'exclude' | 'only' }[]>,
     default: () => []
   },
   backgroundClass: {
@@ -131,6 +131,38 @@ const vModel = computed({
     baseProps.modelValue = value
   }
 })
+const generateOptions = (key: string, schema: { kind: string, schema: string[], type: string }) => {
+  let options = []
+  const optionItem = props?.options?.find(item => item?.name === key) || null
+  const types = schema?.type?.split('|')?.map(item => item.trim()?.replaceAll('"', '')) || []
+  const hasIgnoredTypes = types?.every(item => ['string', 'number', 'boolean', 'array', 'object', 'Function'].includes(item))
+
+  if (key.toLowerCase().endsWith('color')) {
+    options = [...appConfig.ui.colors]
+  }
+
+  if (schema?.schema?.length > 0 && schema?.kind === 'enum' && !hasIgnoredTypes && optionItem?.restriction !== 'only') {
+    options = schema.schema.map((option) => option.replaceAll('"', ''))
+  }
+
+  if (optionItem?.restriction === 'only') {
+    options = optionItem.values
+  }
+
+  if (optionItem?.restriction === 'expected') {
+    options = options.filter(item => optionItem.values.includes(item))
+  }
+
+  if (optionItem?.restriction === 'included') {
+    options = [...options, ...optionItem.values]
+  }
+
+  if (optionItem?.restriction === 'exclude') {
+    options = options.filter(item => !optionItem.values.includes(item))
+  }
+
+  return options
+}
 
 const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   if (props.excludedProps.includes(key)) {
@@ -139,20 +171,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
 
   const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
   const schema = prop?.schema || {}
-  const propTypes: string[] = schema?.type?.split('|')?.map(item => item.trim()?.replaceAll('"', '')) || []
-  const hasIgnoredTypes = propTypes?.every(item => ['string', 'number', 'boolean', 'array', 'object', 'Function'].includes(item))
-
-  let options = []
-
-  if (key.toLowerCase().endsWith('color')) {
-    // @ts-ignore
-    options = [...appConfig.ui.colors, ...props.extraColors]
-  }
-
-  if (schema?.schema?.length > 0 && schema?.kind === 'enum' && !hasIgnoredTypes) {
-    options = schema.schema.filter(option => typeof option === 'string')
-      .map((option: string) => option.replaceAll('"', ''))
-  }
+  const options = generateOptions(key, schema)
 
   return {
     type: prop?.type || 'string',
