@@ -131,7 +131,7 @@ const vModel = computed({
     baseProps.modelValue = value
   }
 })
-const generateOptions = (key: string, schema: { kind: string, schema: string[], type: string }) => {
+const generateOptions = (key: string, schema: { kind: string, schema: [], type: string }) => {
   let options = []
   const optionItem = props?.options?.find(item => item?.name === key) || null
   const types = schema?.type?.split('|')?.map(item => item.trim()?.replaceAll('"', '')) || []
@@ -142,7 +142,7 @@ const generateOptions = (key: string, schema: { kind: string, schema: string[], 
   }
 
   if (schema?.schema?.length > 0 && schema?.kind === 'enum' && !hasIgnoredTypes && optionItem?.restriction !== 'only') {
-    options = schema.schema.map((option) => option.replaceAll('"', ''))
+    options = schema.schema.filter(option => typeof option === 'string').map((option: string) => option.replaceAll('"', ''))
   }
 
   if (optionItem?.restriction === 'only') {
