@@ -66,7 +66,7 @@ import type { PropType } from 'vue'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
-import { omit } from 'lodash-es'
+import { omit } from './runtime/utils/lodash'
 import { twMerge } from 'tailwind-merge'
 import { defuTwMerge } from '../../utils'
 import type { StepperItem } from '../../types/stepper'
@@ -122,7 +122,7 @@ export default defineComponent({
     // TODO: Remove
     const appConfig = useAppConfig()
 
-    const ui = computed<Partial<typeof appConfig.ui.stepper>>(() => defuTwMerge({}, props.ui, appConfig.ui.stepper))
+    const ui = computed<Partial<typeof appConfig.ui.stepper>>(() => twMerge(props.ui, appConfig.ui.stepper))
 
     const selectedIndex = ref(props.modelValue || props.defaultIndex)
 
