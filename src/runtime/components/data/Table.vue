@@ -3,7 +3,7 @@
     <table :class="[ui.base, ui.divide]">
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
-          <th v-if="modelValue" scope="col" :class="ui.checkbox.padding">
+          <th v-if="modelValue" scope="col" :class="[ui.th.base, ui.th.color, ui.th.font, ui.th.size, ui.checkbox.padding]">
             <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" aria-label="Select all" @change="onChange" />
           </th>
 
