@@ -44,7 +44,7 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     return {
       inputId: computed(() => inputProps.id ?? formGroup?.inputId.value),
       name: computed(() => inputProps?.name ?? formGroup?.name.value),
-      size: computed(() => inputProps?.size ?? config.size[formGroup?.size.value] ? formGroup?.size.value : config?.default?.size),
+      size: computed(() => {
         const formGroupSize = config.size[formGroup?.size.value] ? formGroup?.size.value : null
         return inputProps?.size ?? formGroupSize ?? config?.default?.size
       }),
