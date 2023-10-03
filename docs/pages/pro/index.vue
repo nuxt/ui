@@ -1,11 +1,6 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <div class="relative">
-    <!-- TODO -->
-    <div class="fixed bottom-4 right-4 text-center text-xl text-primary">
-      Y: {{ y }} Step: {{ getStep() }} Inc: {{ inc }}
-    </div>
-
     <ULandingHero v-bind="page.hero" align="center">
       <template #top>
         <ProHeroBackground />
@@ -22,12 +17,7 @@
 
     <ULandingSection id="features" v-bind="page.features" />
 
-    <div
-      :style="{
-        '--y': `${y}px`,
-        '--inc': `${inc}px`
-      }"
-    >
+    <div :style="{ '--y': `${y}px`, '--inc': `${inc}px` }">
       <ULandingSection class="sticky h-screen top-0 flex !pb-16" :ui="{ container: 'flex-1 sm:gap-y-12' }">
         <template #title>
           <span v-html="isAfterStep(steps.docs) ? page.docs?.title : page.landing?.title" />
@@ -242,10 +232,6 @@ function isBeforeStep (i = 0) {
 
 function isAfterStep (i = 0) {
   return y.value >= (start + (i * inc.value))
-}
-
-function getStep () {
-  return Math.floor((y.value - start) / inc.value)
 }
 
 function getStepY (step) {
@@ -495,7 +481,16 @@ const blocks = computed(() => [isAfterStep(steps.header) && {
 
 // Slots Data
 
-const headerLinks = [{ label: 'Documentation', active: true }, { label: 'Playground' }, { label: 'Roadmap' }, { label: 'Pro' }]
+const headerLinks = [{
+  label: 'Documentation',
+  active: true
+}, {
+  label: 'Playground'
+}, {
+  label: 'Roadmap'
+}, {
+  label: 'Pro'
+}]
 
 const navigationLinks = [{
   label: 'Getting Started',
@@ -526,7 +521,13 @@ const navigationLinks = [{
   }]
 }]
 
-const surround = [{ title: 'Introduction', description: 'Fully styled and customizable components for Nuxt.' }, { title: 'Theming', description: 'Learn how to customize the look and feel of the components.' }]
+const surround = [{
+  title: 'Introduction',
+  description: 'Fully styled and customizable components for Nuxt.'
+}, {
+  title: 'Theming',
+  description: 'Learn how to customize the look and feel of the components.'
+}]
 
 const md = `
 ## Edge
@@ -535,21 +536,21 @@ To use the latest updates pushed on the [\`dev\`](https://github.com/nuxt/ui/tre
 `
 
 const toc = [{
-  'id': 'quick-start',
-  'depth': 2,
-  'text': 'Quick Start'
+  id: 'quick-start',
+  depth: 2,
+  text: 'Quick Start'
 }, {
-  'id': 'intellisense',
-  'depth': 2,
-  'text': 'IntelliSense'
+  id: 'intellisense',
+  depth: 2,
+  text: 'IntelliSense'
 }, {
-  'id': 'options',
-  'depth': 2,
-  'text': 'Options'
+  id: 'options',
+  depth: 2,
+  text: 'Options'
 }, {
-  'id': 'edge',
-  'depth': 2,
-  'text': 'Edge'
+  id: 'edge',
+  depth: 2,
+  text: 'Edge'
 }]
 
 const communityLinks = [{
