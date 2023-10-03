@@ -16,7 +16,20 @@
     </ULandingHero>
 
     <ULandingSection id="features" v-bind="page.features" align="left">
-      <ProCodeBlock :code="page.features.code" filename="app.vue" />
+      <MDC
+        :value="page.features.code"
+        tag="pre"
+        class="prose prose-primary dark:prose-invert max-w-none"
+        :parser-options="{
+          highlight: {
+            theme: {
+              light: 'material-theme-lighter',
+              default: 'material-theme',
+              dark: 'material-theme-palenight'
+            }
+          }
+        }"
+      />
     </ULandingSection>
 
     <div :style="{ '--y': `${y}px`, '--inc': `${inc}px` }">
