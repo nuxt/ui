@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { FormError, FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 
+const route = useRoute()
 const title = 'Activate your Nuxt UI Pro License'
 const description = 'Enable Nuxt UI Pro in your production projects by activating your license key received by email and get invited to the GitHub private repository.'
 useSeoMeta({
@@ -46,6 +47,11 @@ async function submit (event: FormSubmitEvent<any>) {
   }
   activating.value = false
 }
+onMounted(() => {
+  if (route.query.license_key && !state.license) {
+    state.license = route.query.license_key
+  }
+})
 </script>
 
 <template>
