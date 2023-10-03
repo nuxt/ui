@@ -15,7 +15,9 @@
       </template>
     </ULandingHero>
 
-    <ULandingSection id="features" v-bind="page.features" />
+    <ULandingSection id="features" v-bind="page.features" align="left">
+      <ProCodeBlock :code="page.features.code" filename="app.vue" />
+    </ULandingSection>
 
     <div :style="{ '--y': `${y}px`, '--inc': `${inc}px` }">
       <ULandingSection class="sticky h-screen top-0 flex !pb-16" :ui="{ container: 'flex-1 sm:gap-y-12' }">

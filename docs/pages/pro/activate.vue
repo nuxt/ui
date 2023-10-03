@@ -86,7 +86,7 @@ onMounted(() => {
           <UAlert v-else-if="errorMessage" color="amber" variant="subtle" :title="errorMessage" />
         </UForm>
       </ULandingCard>
-      <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-4">
+      <p class="text-sm text-center text-gray-600 dark:text-gray-400 my-4">
         If you purchased a team license, activate the license key for each of your team members.
       </p>
     </UPage>
