@@ -180,7 +180,7 @@
 
         <template #bottom>
           <div v-if="isBeforeStep(steps.docs + 14)" class="mx-auto absolute inset-x-0 bottom-4 flex justify-center">
-            <UButton color="white" size="xs" label="Skip" trailing-icon="i-heroicons-arrow-right-20-solid" to="#features" />
+            <UButton color="white" size="xs" label="Skip" trailing-icon="i-heroicons-arrow-right-20-solid" to="#next" />
           </div>
         </template>
       </ULandingSection>
@@ -188,7 +188,7 @@
       <div class="h-[calc(var(--inc)*42)]" />
     </div>
 
-    <ULandingSection v-bind="page.next" />
+    <ULandingSection id="next" v-bind="page.next" />
 
     <ULandingSection id="pricing" :title="page.pricing.title" :description="page.pricing.description">
       <UPricingGrid v-bind="page.pricing.grid">
