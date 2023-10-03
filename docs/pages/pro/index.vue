@@ -238,7 +238,7 @@ useSeoMeta({
 const demoRef = ref()
 const { height } = useElementSize(demoRef)
 
-const start = 920
+const start = 1468
 const inc = computed(() => (height.value - 32 - 64 - 32 - 32) / 4)
 
 function isBeforeStep (i = 0) {
