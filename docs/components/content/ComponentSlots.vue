@@ -1,19 +1,8 @@
 <template>
   <div>
-    <table>
-      <thead>
-        <tr>
-          <th>Slot</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="slot in (meta.meta.slots as any[])" :key="slot.name">
-          <td class="whitespace-nowrap">
-            <code>{{ slot.name }}</code>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <FieldGroup>
+      <Field v-for="slot in meta?.meta.slots" :key="slot.name" v-bind="slot" />
+    </FieldGroup>
   </div>
 </template>
 

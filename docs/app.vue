@@ -1,13 +1,13 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
-    <Header :links="links" />
+    <Header v-if="!$route.path.startsWith('/examples')" :links="links" />
 
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
 
-    <Footer />
+    <Footer v-if="!$route.path.startsWith('/examples')" />
 
     <ClientOnly>
       <LazyUDocsSearch ref="searchRef" :files="files" :navigation="navigation" :groups="groups" :links="links" />

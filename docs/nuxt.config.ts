@@ -27,7 +27,7 @@ export default defineNuxtConfig({
     }
   },
   routeRules: {
-    '/pro/components': { redirect: '/pro/components/header/Header', prerender: false }
+    '/pro/components': { redirect: '/pro/components/header/header', prerender: false }
   },
   ui: {
     global: true,

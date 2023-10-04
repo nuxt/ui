@@ -10,7 +10,7 @@
       <UDocsSurround :surround="(surround as ParsedContent[])" />
     </UPageBody>
 
-    <template v-if="page.body?.toc?.links?.length" #right>
+    <template v-if="!$route.path.startsWith('/pro/components') && page.body?.toc?.links?.length" #right>
       <UDocsToc :links="page.body.toc.links" />
     </template>
   </UPage>
