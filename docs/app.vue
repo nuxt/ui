@@ -61,7 +61,7 @@ const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 const links = computed(() => {
   return [{
     label: 'Documentation',
-    icon: 'i-heroicons-book-open-solid',
+    icon: 'i-heroicons-book-open',
     to: `${branch.value?.name === 'dev' ? '/dev' : ''}/getting-started`
   }, {
     label: 'Playground',
