@@ -82,9 +82,6 @@ export default defineNuxtConfig({
         '/',
         '/getting-started',
         '/dev/getting-started',
-        '/pro',
-        '/pro/guide',
-        '/pro/activate',
         '/api/search.json'
       ]
     }
