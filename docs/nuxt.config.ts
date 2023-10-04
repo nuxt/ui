@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   ] : [
     '@nuxt/ui-pro',
     // eslint-disable-next-line no-useless-escape
-    'github:nuxt/ui-pro/.docs#feat\/docs'
+    'github:nuxt/ui-pro/.docs'
   ],
   modules: [
     '@nuxt/content',
