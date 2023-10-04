@@ -7,7 +7,13 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  extends: process.env.NUXT_UI_PRO_PATH || '@nuxt/ui-pro',
+  extends: process.env.NUXT_UI_PRO_PATH ? [
+    process.env.NUXT_UI_PRO_PATH,
+    resolve(process.env.NUXT_UI_PRO_PATH, '.docs')
+  ] : [
+    '@nuxt/ui-pro',
+    'github:nuxt/ui-pro/.docs'
+  ],
   modules: [
     '@nuxt/content',
     'nuxt-og-image',
@@ -25,9 +31,6 @@ export default defineNuxtConfig({
       version: pkg.version,
       uiProPath: process.env.NUXT_UI_PRO_PATH
     }
-  },
-  routeRules: {
-    '/pro/components': { redirect: '/pro/components/header/header', prerender: false }
   },
   ui: {
     global: true,
@@ -51,7 +54,7 @@ export default defineNuxtConfig({
       pro: process.env.NUXT_UI_PRO_PATH ? {
         prefix: '/pro',
         driver: 'fs',
-        base: resolve(process.env.NUXT_UI_PRO_PATH, '.docs')
+        base: resolve(process.env.NUXT_UI_PRO_PATH, '.docs/content')
       } : {
         prefix: '/pro',
         driver: 'github',
