@@ -19,6 +19,7 @@ jobs:
 
     env:
       NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
+      GIGET_AUTH: ${{ secrets.GIGET_AUTH }}
 
     steps:
       - uses: actions/setup-node@v3
