@@ -55,7 +55,7 @@ export default defineNuxtConfig({
       pro: process.env.NUXT_UI_PRO_PATH ? {
         prefix: '/pro',
         driver: 'fs',
-        base: resolve(process.env.NUXT_UI_PRO_PATH, '.docs/content')
+        base: resolve(process.env.NUXT_UI_PRO_PATH, '.docs/content/pro')
       } : {
         prefix: '/pro',
         driver: 'github',
