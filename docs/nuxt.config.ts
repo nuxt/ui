@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     resolve(process.env.NUXT_UI_PRO_PATH, '.docs')
   ] : [
     '@nuxt/ui-pro',
-    'github:nuxt/ui-pro/.docs'
+    'github:nuxt/ui-pro/.docs#feat/docs'
   ],
   modules: [
     '@nuxt/content',
