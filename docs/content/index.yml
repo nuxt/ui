@@ -110,13 +110,3 @@ sections:
         badge: 3
 cta:
   title: Trusted and supported by our<br class="hidden lg:block"> amazing community
-pro:
-  headline: 'Coming soon'
-  title: 'Nuxt UI Pro'
-  description: 'Nuxt UI Pro is a premium version of Nuxt UI that provides additional components, features, and functionalities to help you build your Nuxt app faster and easier.'
-  links:
-    - label: Learn more
-      to: /pro
-      color: white
-      size: lg
-      trailingIcon: i-heroicons-arrow-right-20-solid
