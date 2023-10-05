@@ -28,7 +28,7 @@
                 <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
               </div>
 
-              <UButton v-if="closeButton" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="onClose" />
+              <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="onClose" />
             </div>
           </div>
         </div>
@@ -39,24 +39,21 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted, onUnmounted, watchEffect, defineComponent } from 'vue'
+import { ref, computed, toRef, onMounted, onUnmounted, watchEffect, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from 'lodash-es'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
+import { useUI } from '../../composables/useUI'
 import { useTimer } from '../../composables/useTimer'
-import type { NotificationAction } from '../../types'
-import type { Avatar } from '../../types/avatar'
-import type { Button } from '../../types/button'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig } from '../../utils'
+import type { Avatar, Button, NotificationColor, NotificationAction, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { notification } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof notification>(appConfig.ui.strategy, appConfig.ui.notification, notification)
 
 export default defineComponent({
   components: {
@@ -80,7 +77,7 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: () => appConfig.ui.notification.default.icon
+      default: () => config.default.icon
     },
     avatar: {
       type: Object as PropType<Avatar>,
@@ -88,7 +85,7 @@ export default defineComponent({
     },
     closeButton: {
       type: Object as PropType<Button>,
-      default: () => appConfig.ui.notification.default.closeButton
+      default: () => config.default.closeButton as Button
     },
     timeout: {
       type: Number,
@@ -103,23 +100,24 @@ export default defineComponent({
       default: null
     },
     color: {
-      type: String,
-      default: () => appConfig.ui.notification.default.color,
+      type: String as PropType<NotificationColor>,
+      default: () => config.default.color,
       validator (value: string) {
         return ['gray', ...appConfig.ui.colors].includes(value)
       }
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.notification>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['close'],
-  setup (props, { attrs, emit }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.notification>>(() => defuTwMerge({}, props.ui, appConfig.ui.notification))
+  setup (props, { emit }) {
+    const { ui, attrs } = useUI('notification', toRef(props, 'ui'), config)
 
     let timer: any = null
     const remaining = ref(props.timeout)
@@ -130,7 +128,7 @@ export default defineComponent({
         ui.value.background,
         ui.value.rounded,
         ui.value.shadow
-      ), attrs.class as string)
+      ), props.class)
     })
 
     const progressClass = computed(() => {
@@ -210,9 +208,9 @@ export default defineComponent({
     })
 
     return {
-      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       wrapperClass,
       progressClass,
       progressStyle,

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
     <ULandingHero v-bind="page.hero" :ui="{ base: 'relative z-[1]', container: 'max-w-3xl' }" class="mb-[calc(var(--header-height)*2)]">
@@ -149,6 +150,7 @@
                   width="40"
                   height="40"
                   size="md"
+                  loading="lazy"
                 >
                   <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
                     <span class="absolute inset-0" aria-hidden="true" />
@@ -182,7 +184,7 @@
 <script setup lang="ts">
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
-const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
+const { data: page } = await useAsyncData('index', () => queryContent('/dev').findOne())
 const { data: module } = await useFetch<{
   stats: {
     downloads: number

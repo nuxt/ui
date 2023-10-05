@@ -11,7 +11,7 @@
           class="justify-center"
         />
         <USelectMenu
-          v-else-if="prop.type === 'string' && prop.options.length && prop.name !== 'label'"
+          v-else-if="prop.options.length && prop.name !== 'label'"
           v-model="componentProps[prop.name]"
           :options="prop.options"
           :name="`prop-${prop.name}`"
@@ -41,20 +41,22 @@
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
 
         <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
-          <ClientOnly>
-            <ContentSlot v-if="$slots[slot]" :use="$slots[slot]" />
-          </ClientOnly>
+          <ContentSlot :name="slot" />
         </template>
       </component>
     </div>
 
-    <ContentRenderer v-if="!previewOnly" :value="ast" class="[&>div>pre]:!rounded-t-none" />
+    <ContentRenderer v-if="!previewOnly" :value="ast" class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0" />
   </div>
 </template>
 
 <script setup lang="ts">
 // @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
+// @ts-ignore
+import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
+import { upperFirst, camelCase, kebabCase } from 'scule'
+import * as config from '#ui/ui.config'
 
 // eslint-disable-next-line vue/no-dupe-keys
 const props = defineProps({
@@ -116,15 +118,14 @@ const appConfig = useAppConfig()
 const route = useRoute()
 // eslint-disable-next-line vue/no-dupe-keys
 const slug = props.slug || route.params.slug[route.params.slug.length - 1]
-const camelName = useCamelCase(slug)
-const name = `U${useUpperFirst(camelName)}`
+const camelName = camelCase(slug)
+const name = `U${upperFirst(camelName)}`
 
 const meta = await fetchComponentMeta(name)
 
 // Computed
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => ({ ...appConfig.ui[camelName], ...props.ui }))
+const ui = computed(() => ({ ...config[camelName], ...props.ui }))
 
 const fullProps = computed(() => ({ ...baseProps, ...componentProps }))
 const vModel = computed({
@@ -140,8 +141,8 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   }
 
   const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
-  const dottedKey = useKebabCase(key).replaceAll('-', '.')
-  const keys = useGet(ui.value, dottedKey, {})
+  const dottedKey = kebabCase(key).replaceAll('-', '.')
+  const keys = ui.value[dottedKey] ?? {}
   let options = typeof keys === 'object' && Object.keys(keys)
   if (key.toLowerCase().endsWith('color')) {
     // @ts-ignore
@@ -151,7 +152,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   return {
     type: prop?.type || 'string',
     name: key,
-    label: key === 'modelValue' ? 'value' : useCamelCase(key),
+    label: key === 'modelValue' ? 'value' : camelCase(key),
     options
   }
 }).filter(Boolean))
@@ -165,7 +166,7 @@ const code = computed(() => {
       continue
     }
 
-    code += ` ${(typeof value === 'boolean' && value !== true) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'value' : useKebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
+    code += ` ${(typeof value === 'boolean' && value !== true) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'value' : kebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
   }
 
   if (props.slots) {
@@ -207,12 +208,17 @@ function renderObject (obj: any) {
   return obj
 }
 
-const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify(props)}`, () => transformContent('content:_markdown.md', code.value, {
-  highlight: {
-    theme: {
-      light: 'material-theme-lighter',
-      default: 'material-theme',
-      dark: 'material-theme-palenight'
+const shikiHighlighter = useShikiHighlighter({})
+const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
+const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`, () => transformContent('content:_markdown.md', code.value, {
+  markdown: {
+    highlight: {
+      highlighter: codeHighlighter,
+      theme: {
+        light: 'material-theme-lighter',
+        default: 'material-theme',
+        dark: 'material-theme-palenight'
+      }
     }
   }
 }), { watch: [code] })

@@ -1,36 +1,54 @@
 <template>
-  <div :class="wrapperClass" v-bind="attrs">
-    <label>
-      <div v-if="label" :class="[ui.label.wrapper, size]">
-        <p :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</p>
-        <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
-      </div>
+  <div :class="ui.wrapper" v-bind="attrs">
+    <div v-if="label || $slots.label" :class="[ui.label.wrapper, size]">
+      <label :for="inputId" :class="[ui.label.base, required ? ui.label.required : '']">
+        <slot v-if="$slots.label" name="label" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>{{ label }}</template>
+      </label>
+      <span v-if="hint || $slots.hint" :class="[ui.hint]">
+        <slot v-if="$slots.hint" name="hint" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>{{ hint }}</template>
+      </span>
+    </div>
 
-      <p v-if="description" :class="[ui.description, size]">{{ description }}</p>
+    <p v-if="description || $slots.description" :class="[ui.description, size]">
+      <slot v-if="$slots.description" name="description" v-bind="{ error, label, name, hint, description, help }" />
+      <template v-else>
+        {{ description }}
+      </template>
+    </p>
 
-      <div :class="[label ? ui.container : '']">
-        <slot v-bind="{ error }" />
+    <div :class="[label ? ui.container : '']">
+      <slot v-bind="{ error }" />
 
-        <p v-if="error && typeof error !== 'boolean'" :class="[ui.error, size]">{{ error }}</p>
-        <p v-else-if="help" :class="[ui.help, size]">{{ help }}</p>
-      </div>
-    </label>
+      <p v-if="(typeof error === 'string' && error) || $slots.error" :class="[ui.error, size]">
+        <slot v-if="$slots.error" name="error" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>
+          {{ error }}
+        </template>
+      </p>
+      <p v-else-if="help || $slots.help" :class="[ui.help, size]">
+        <slot v-if="$slots.help" name="help" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>
+          {{ help }}
+        </template>
+      </p>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, provide, inject } from 'vue'
-import type { PropType } from 'vue'
-import { omit } from 'lodash-es'
-import { twMerge } from 'tailwind-merge'
-import type { FormError } from '../../types'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { computed, defineComponent, provide, inject, ref, toRef } from 'vue'
+import type { Ref, PropType } from 'vue'
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { FormError, InjectedFormGroupValue, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { formGroup } from '#ui/ui.config'
+import { uid } from '../../utils/uid'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof formGroup>(appConfig.ui.strategy, appConfig.ui.formGroup, formGroup)
 
 export default defineComponent({
   inheritAttrs: false,
@@ -40,10 +58,10 @@ export default defineComponent({
       default: null
     },
     size: {
-      type: String,
+      type: String as PropType<keyof typeof config.size>,
       default: null,
       validator (value: string) {
-        return Object.keys(appConfig.ui.formGroup.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
     label: {
@@ -70,18 +88,17 @@ export default defineComponent({
       type: String,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.formGroup>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.formGroup>>(() => defuTwMerge({}, props.ui, appConfig.ui.formGroup))
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+  setup (props) {
+    const { ui, attrs } = useUI('formGroup', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
@@ -91,19 +108,21 @@ export default defineComponent({
         : formErrors?.value?.find((error) => error.path === props.name)?.message
     })
 
-    const size = computed(() => ui.value.size[props.size ?? appConfig.ui.input.default.size])
+    const size = computed(() => ui.value.size[props.size ?? config.default.size])
+    const inputId = ref(uid())
 
-    provide('form-group', {
+    provide<InjectedFormGroupValue>('form-group', {
       error,
+      inputId,
       name: computed(() => props.name),
       size: computed(() => props.size)
     })
 
     return {
-      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      wrapperClass,
+      attrs,
+      inputId,
       // eslint-disable-next-line vue/no-dupe-keys
       size,
       // eslint-disable-next-line vue/no-dupe-keys

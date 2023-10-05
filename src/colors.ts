@@ -1,4 +1,5 @@
-import { omit, kebabCase, camelCase, upperFirst } from 'lodash-es'
+import { omit } from './runtime/utils/lodash'
+import { kebabCase, camelCase, upperFirst } from 'scule'
 
 const colorsToExclude = [
   'inherit',

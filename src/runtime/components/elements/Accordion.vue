@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass">
+  <div :class="ui.wrapper">
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
       <HDisclosureButton :ref="() => buttonRefs[index] = close" as="template" :disabled="item.disabled">
         <slot :item="item" :index="index" :open="open" :close="close">
@@ -40,20 +40,22 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent } from 'vue'
+import { ref, computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel } from '@headlessui/vue'
-import { omit } from 'lodash-es'
-import { twMerge } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
-import { defuTwMerge } from '../../utils'
+import { useUI } from '../../composables/useUI'
+import { mergeConfig, omit } from '../../utils'
 import StateEmitter from '../../utils/StateEmitter'
-import type { AccordionItem } from '../../types/accordion'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import type { AccordionItem, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { accordion, button } from '#ui/ui.config'
+
+const config = mergeConfig<typeof accordion>(appConfig.ui.strategy, appConfig.ui.accordion, accordion)
+
+const configButton = mergeConfig<typeof button>(appConfig.ui.strategy, appConfig.ui.button, button)
 
 export default defineComponent({
   components: {
@@ -76,43 +78,47 @@ export default defineComponent({
     },
     openIcon: {
       type: String,
-      default: () => appConfig.ui.accordion.default.openIcon
+      default: () => config.default.openIcon
     },
     closeIcon: {
       type: String,
-      default: () => appConfig.ui.accordion.default.closeIcon
+      default: () => config.default.closeIcon
     },
     multiple: {
       type: Boolean,
       default: false
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.accordion>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
+  setup (props) {
+    const { ui, attrs } = useUI('accordion', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const ui = computed<Partial<typeof appConfig.ui.accordion>>(() => defuTwMerge({}, props.ui, appConfig.ui.accordion))
-
-    const uiButton = computed<Partial<typeof appConfig.ui.button>>(() => appConfig.ui.button)
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
+    const uiButton = computed<Partial<typeof configButton>>(() => configButton)
 
     const buttonRefs = ref<Function[]>([])
 
-    function closeOthers (itemIndex: number) {
-      if (!props.items[itemIndex].closeOthers && props.multiple) {
+    function closeOthers (currentIndex: number) {
+      if (!props.items[currentIndex].closeOthers && props.multiple) {
         return
       }
 
-      buttonRefs.value.forEach((close, index) => {
-        if (index === itemIndex) return
+      const totalItems = buttonRefs.value.length
 
+      const order = Array.from({ length: totalItems }, (_, i) => (currentIndex + i) % totalItems)
+        .filter(index => index !== currentIndex)
+        .reverse()
+
+      for (const index of order) {
+        const close = buttonRefs.value[index]
         close()
-      })
+      }
     }
 
     function onEnter (el: HTMLElement, done) {
@@ -139,11 +145,10 @@ export default defineComponent({
     }
 
     return {
-      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       uiButton,
-      wrapperClass,
+      attrs,
       buttonRefs,
       closeOthers,
       omit,

@@ -7,9 +7,10 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  extends: process.env.NUXT_ELEMENTS_PATH || '@nuxthq/elements',
+  extends: process.env.NUXT_UI_PRO_PATH || '@nuxt/ui-pro',
   modules: [
     '@nuxt/content',
+    'nuxt-og-image',
     // '@nuxt/devtools',
     // '@nuxthq/studio',
     module,
@@ -17,8 +18,7 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
-    'nuxt-component-meta',
-    'nuxt-lodash'
+    'nuxt-component-meta'
   ],
   runtimeConfig: {
     public: {
@@ -32,34 +32,34 @@ export default defineNuxtConfig({
   },
   content: {
     sources: {
-      // overwrite default source AKA `content` directory
-      content: {
+      dev: {
         prefix: '/dev',
         driver: 'fs',
         base: resolve('./content')
       },
-      main: {
-        prefix: '/main',
+      // overwrite default source AKA `content` directory
+      content: {
         driver: 'github',
-        repo: 'nuxtlabs/ui',
+        repo: 'nuxt/ui',
         branch: 'main',
         dir: 'docs/content'
       }
     }
   },
-  googleFonts: {
-    families: {
-      Inter: [400, 500, 600, 700]
-    }
+  fontMetrics: {
+    fonts: ['DM Sans']
   },
-  routeRules: {
-    '/': { redirect: '/getting-started', prerender: false }
+  googleFonts: {
+    display: 'swap',
+    download: true,
+    families: {
+      'DM+Sans': [400, 500, 600, 700]
+    }
   },
   nitro: {
     prerender: {
-      // Waiting for https://github.com/nuxt/nuxt/issues/22763
-      concurrency: 1,
       routes: [
+        '/',
         '/getting-started',
         '/dev/getting-started',
         '/api/search.json'
@@ -68,7 +68,7 @@ export default defineNuxtConfig({
   },
   componentMeta: {
     globalsOnly: true,
-    exclude: [resolve('./components'), resolve('@nuxthq/elements/components')],
+    exclude: ['@nuxtjs/mdc', resolve('./components'), resolve('@nuxt/ui-pro/components')],
     metaFields: {
       props: true,
       slots: false,
@@ -76,19 +76,14 @@ export default defineNuxtConfig({
       exposed: false
     }
   },
-  typescript: {
-    strict: false,
-    includeWorkspace: true
-  },
   hooks: {
-    // TODO: Uncomment after Nuxt v3.7 upgrade
     // Related to https://github.com/nuxt/nuxt/pull/22558
-    // 'components:extend': (components) => {
-    //   components.forEach((component) => {
-    //     if (component.global) {
-    //       component.global = 'sync'
-    //     }
-    //   })
-    // }
+    'components:extend': (components) => {
+      components.forEach((component) => {
+        if (component.global) {
+          component.global = 'sync'
+        }
+      })
+    }
   }
 })

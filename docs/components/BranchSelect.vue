@@ -10,7 +10,7 @@
       color="gray"
       :ui="{ icon: { trailing: { padding: { sm: 'pe-1.5' } } } }"
       :ui-menu="{ option: { container: 'gap-1.5' } }"
-      @update:model-value="selectBranch"
+      @update:model-value="select"
     >
       <template #label>
         <UIcon v-if="branch.icon" :name="branch.icon" class="w-4 h-4 flex-shrink-0 text-gray-600 dark:text-gray-300" />
@@ -32,19 +32,5 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
-const router = useRouter()
-const { branches, branch } = useContentSource()
-
-function selectBranch (branch) {
-  if (branch.name === 'dev') {
-    if (route.path.startsWith('/dev')) {
-      return
-    }
-
-    router.push(`/dev${route.path}`)
-  } else {
-    router.push(route.path.replace('/dev', ''))
-  }
-}
+const { branches, branch, select } = useContentSource()
 </script>

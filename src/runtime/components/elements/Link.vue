@@ -1,7 +1,13 @@
 <template>
-  <button v-if="!to" :type="type" :disabled="disabled" v-bind="$attrs" :class="inactiveClass">
+  <component
+    :is="as"
+    v-if="!to"
+    :disabled="disabled"
+    v-bind="$attrs"
+    :class="inactiveClass"
+  >
     <slot />
-  </button>
+  </component>
   <NuxtLink
     v-else
     v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }"
@@ -24,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { isEqual } from 'lodash-es'
+import { isEqual } from 'ohash'
 import { defineComponent } from 'vue'
 import { NuxtLink } from '#components'
 
@@ -32,13 +38,17 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     ...NuxtLink.props,
-    type: {
+    as: {
       type: String,
-      default: null
+      default: 'button'
     },
     disabled: {
       type: Boolean,
       default: null
+    },
+    active: {
+      type: Boolean,
+      default: false
     },
     exact: {
       type: Boolean,
@@ -59,6 +69,10 @@ export default defineComponent({
   },
   setup (props) {
     function resolveLinkClass (route, $route, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
+      if (props.active) {
+        return props.activeClass
+      }
+
       if (props.exactQuery && !isEqual(route.query, $route.query)) {
         return props.inactiveClass
       }

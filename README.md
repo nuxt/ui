@@ -20,6 +20,7 @@ Is has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](https://v
 - Keyboard shortcuts
 - Bundled icons
 - Fully typed
+- [Figma Kit](https://www.figma.com/community/file/1288455405058138934)
 
 Read more on [ui.nuxtlabs.com](https://ui.nuxtlabs.com)
 

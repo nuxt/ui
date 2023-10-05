@@ -8,7 +8,7 @@
     :multiple="multiple"
     :disabled="disabled || loading"
     as="div"
-    :class="wrapperClass"
+    :class="ui.wrapper"
     @update:model-value="onUpdate"
   >
     <input
@@ -28,7 +28,7 @@
       class="inline-flex w-full"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
-        <button :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
+        <button :id="inputId" :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
             <slot name="leading" :disabled="disabled" :loading="loading">
               <UIcon :name="leadingIconName" :class="leadingIconClass" />
@@ -37,7 +37,7 @@
 
           <slot name="label">
             <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" class="block truncate">{{ modelValue.length }} selected</span>
-            <span v-else-if="!multiple && modelValue" class="block truncate">{{ typeof modelValue === 'string' ? modelValue : modelValue[optionAttribute] }}</span>
+            <span v-else-if="!multiple && modelValue" class="block truncate">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
             <span v-else class="block truncate" :class="uiMenu.placeholder">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
@@ -85,7 +85,7 @@
                   />
                   <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
 
-                  <span class="truncate">{{ typeof option === 'string' ? option : option[optionAttribute] }}</span>
+                  <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : option[optionAttribute] }}</span>
                 </slot>
               </div>
 
@@ -116,7 +116,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, defineComponent } from 'vue'
+import { ref, computed, toRef, watch, defineComponent } from 'vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import {
   Combobox as HCombobox,
@@ -131,20 +131,22 @@ import {
 } from '@headlessui/vue'
 import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
-import { omit } from 'lodash-es'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
-import { defuTwMerge } from '../../utils'
+import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
-import type { PopperOptions } from '../../types'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig } from '../../utils'
+import type { PopperOptions, NestedKeyOf, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { select, selectMenu } from '#ui/ui.config'
+import colors from '#ui-colors'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof select>(appConfig.ui.strategy, appConfig.ui.select, select)
+
+const configMenu = mergeConfig<typeof selectMenu>(appConfig.ui.strategy, appConfig.ui.selectMenu, selectMenu)
 
 export default defineComponent({
   components: {
@@ -174,6 +176,10 @@ export default defineComponent({
       type: Array as PropType<{ [key: string]: any, disabled?: boolean }[] | string[]>,
       default: () => []
     },
+    id: {
+      type: String,
+      default: null
+    },
     name: {
       type: String,
       default: null
@@ -188,7 +194,7 @@ export default defineComponent({
     },
     loadingIcon: {
       type: String,
-      default: () => appConfig.ui.input.default.loadingIcon
+      default: () => config.default.loadingIcon
     },
     leadingIcon: {
       type: String,
@@ -196,7 +202,7 @@ export default defineComponent({
     },
     trailingIcon: {
       type: String,
-      default: () => appConfig.ui.select.default.trailingIcon
+      default: () => config.default.trailingIcon
     },
     trailing: {
       type: Boolean,
@@ -212,7 +218,7 @@ export default defineComponent({
     },
     selectedIcon: {
       type: String,
-      default: () => appConfig.ui.selectMenu.default.selectedIcon
+      default: () => configMenu.default.selectedIcon
     },
     disabled: {
       type: Boolean,
@@ -247,26 +253,26 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String,
-      default: () => appConfig.ui.select.default.size,
+      type: String as PropType<keyof typeof config.size>,
+      default: null,
       validator (value: string) {
-        return Object.keys(appConfig.ui.select.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String,
-      default: () => appConfig.ui.select.default.color,
+      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      default: () => config.default.color,
       validator (value: string) {
-        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.select.color)].includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String,
-      default: () => appConfig.ui.select.default.variant,
+      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      default: () => config.default.variant,
       validator (value: string) {
         return [
-          ...Object.keys(appConfig.ui.select.variant),
-          ...Object.values(appConfig.ui.select.color).flatMap(value => Object.keys(value))
+          ...Object.keys(config.variant),
+          ...Object.values(config.color).flatMap(value => Object.keys(value))
         ].includes(value)
       }
     },
@@ -290,34 +296,32 @@ export default defineComponent({
       type: String,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.select>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     },
     uiMenu: {
-      type: Object as PropType<Partial<typeof appConfig.ui.selectMenu>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof configMenu & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'open', 'close', 'change'],
-  setup (props, { emit, attrs, slots }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
+  setup (props, { emit, slots }) {
+    const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const ui = computed<Partial<typeof appConfig.ui.select>>(() => defuTwMerge({}, props.ui, appConfig.ui.select))
-    const uiMenu = computed<Partial<typeof appConfig.ui.selectMenu>>(() => defuTwMerge({}, props.uiMenu, appConfig.ui.selectMenu))
+    const { ui: uiMenu } = useUI('selectMenu', toRef(props, 'uiMenu'), configMenu)
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
-    const { emitFormBlur, emitFormChange, formGroup } = useFormGroup()
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => formGroup?.size?.value ?? props.size)
+    const { emitFormBlur, emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     const selectClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -407,7 +411,7 @@ export default defineComponent({
 
       return (props.options as any[]).filter((option: any) => {
         return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
-          return typeof option === 'string' ? option.search(new RegExp(query.value, 'i')) !== -1 : (option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1)
+          return ['string', 'number'].includes(typeof option) ? option.toString().search(new RegExp(query.value, 'i')) !== -1 : (option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1)
         })
       })
     })
@@ -437,14 +441,18 @@ export default defineComponent({
     }
 
     return {
-      attrs: omit(attrs, ['class']),
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       // eslint-disable-next-line vue/no-dupe-keys
       uiMenu,
+      attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      name,
+      inputId,
       trigger,
       container,
       isLeading,
       isTrailing,
-      wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
       selectClass,
       leadingIconName,

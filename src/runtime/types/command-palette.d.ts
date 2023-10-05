@@ -21,6 +21,7 @@ export interface Group {
   key: string
   active?: string
   inactive?: string
-  commands: Command[]
+  commands?: Command[]
+  search?: Function
   [key: string]: any
 }

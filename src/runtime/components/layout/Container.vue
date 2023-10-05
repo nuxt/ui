@@ -5,17 +5,17 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from 'lodash-es'
 import { twMerge, twJoin } from 'tailwind-merge'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { container } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof container>(appConfig.ui.strategy, appConfig.ui.container, container)
 
 export default defineComponent({
   inheritAttrs: false,
@@ -24,29 +24,30 @@ export default defineComponent({
       type: String,
       default: 'div'
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.container>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.container>>(() => defuTwMerge({}, props.ui, appConfig.ui.container))
+  setup (props) {
+    const { ui, attrs } = useUI('container', toRef(props, 'ui'), config)
 
     const containerClass = computed(() => {
       return twMerge(twJoin(
         ui.value.base,
         ui.value.padding,
         ui.value.constrained
-      ), attrs.class as string)
+      ), props.class)
     })
 
     return {
-      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       containerClass
     }
   }

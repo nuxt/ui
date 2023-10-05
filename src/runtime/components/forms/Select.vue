@@ -1,6 +1,7 @@
 <template>
-  <div :class="wrapperClass">
+  <div :class="ui.wrapper">
     <select
+      :id="inputId"
       :name="name"
       :value="modelValue"
       :required="required"
@@ -53,19 +54,20 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType, ComputedRef } from 'vue'
-import { get, omit } from 'lodash-es'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
-import { defuTwMerge } from '../../utils'
+import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { mergeConfig, get } from '../../utils'
+import type { NestedKeyOf, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { select } from '#ui/ui.config'
+import colors from '#ui-colors'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof select>(appConfig.ui.strategy, appConfig.ui.select, select)
 
 export default defineComponent({
   components: {
@@ -76,6 +78,10 @@ export default defineComponent({
     modelValue: {
       type: [String, Number, Object],
       default: ''
+    },
+    id: {
+      type: String,
+      default: null
     },
     name: {
       type: String,
@@ -99,7 +105,7 @@ export default defineComponent({
     },
     loadingIcon: {
       type: String,
-      default: () => appConfig.ui.input.default.loadingIcon
+      default: () => config.default.loadingIcon
     },
     leadingIcon: {
       type: String,
@@ -107,7 +113,7 @@ export default defineComponent({
     },
     trailingIcon: {
       type: String,
-      default: () => appConfig.ui.select.default.trailingIcon
+      default: () => config.default.trailingIcon
     },
     trailing: {
       type: Boolean,
@@ -130,26 +136,26 @@ export default defineComponent({
       default: () => []
     },
     size: {
-      type: String,
-      default: () => appConfig.ui.select.default.size,
+      type: String as PropType<keyof typeof config.size>,
+      default: null,
       validator (value: string) {
-        return Object.keys(appConfig.ui.select.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String,
-      default: () => appConfig.ui.select.default.color,
+      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      default: () => config.default.color,
       validator (value: string) {
-        return [...appConfig.ui.colors, ...Object.keys(appConfig.ui.select.color)].includes(value)
+        return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String,
-      default: () => appConfig.ui.select.default.variant,
+      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      default: () => config.default.variant,
       validator (value: string) {
         return [
-          ...Object.keys(appConfig.ui.select.variant),
-          ...Object.values(appConfig.ui.select.color).flatMap(value => Object.keys(value))
+          ...Object.keys(config.variant),
+          ...Object.values(config.color).flatMap(value => Object.keys(value))
         ].includes(value)
       }
     },
@@ -165,22 +171,20 @@ export default defineComponent({
       type: String,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.select>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit, attrs, slots }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
+  setup (props, { emit, slots }) {
+    const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const ui = computed<Partial<typeof appConfig.ui.select>>(() => defuTwMerge({}, props.ui, appConfig.ui.select))
-
-    const { emitFormChange, formGroup } = useFormGroup()
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => formGroup?.size?.value ?? props.size)
-
+    const { emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
 
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
@@ -242,8 +246,6 @@ export default defineComponent({
 
       return foundOption[props.valueAttribute]
     })
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     const selectClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -318,14 +320,16 @@ export default defineComponent({
     })
 
     return {
-      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      name,
+      inputId,
       normalizedOptionsWithPlaceholder,
       normalizedValue,
       isLeading,
       isTrailing,
-      wrapperClass,
       // eslint-disable-next-line vue/no-dupe-keys
       selectClass,
       leadingIconName,

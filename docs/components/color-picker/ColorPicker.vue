@@ -30,7 +30,7 @@ const colorMode = useColorMode()
 
 // Computed
 
-const primaryColors = computed(() => useWithout(appConfig.ui.colors, 'primary').map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
+const primaryColors = computed(() => appConfig.ui.colors.filter(color => color !== 'primary').map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
 const primary = computed({
   get () {
     return primaryColors.value.find(option => option.value === appConfig.ui.primary)

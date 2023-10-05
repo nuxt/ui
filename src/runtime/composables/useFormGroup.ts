@@ -1,10 +1,22 @@
-import { inject, ref } from 'vue'
+import { inject, ref, computed } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
-import type { FormEvent, FormEventType } from '../types'
+import type { FormEvent, FormEventType, InjectedFormGroupValue } from '../types/form'
 
-export const useFormGroup = () => {
+type InputProps = {
+  id?: string
+  size?: string
+  color?: string
+  name?: string
+}
+
+export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
-    const formGroup = inject('form-group', undefined)
+    const formGroup = inject<InjectedFormGroupValue>('form-group', undefined)
+
+    if (formGroup) {
+      // Updates for="..." attribute on label if inputProps.id is provided
+      formGroup.inputId.value = inputProps?.id ?? formGroup?.inputId.value
+    }
 
     const blurred = ref(false)
 
@@ -30,9 +42,12 @@ export const useFormGroup = () => {
     }, 300)
 
     return {
+      inputId: computed(() => inputProps.id ?? formGroup?.inputId.value),
+      name: computed(() => inputProps?.name ?? formGroup?.name.value),
+      size: computed(() => inputProps?.size ?? formGroup?.size.value ?? config?.default?.size),
+      color: computed(() => formGroup?.error?.value ? 'red' : inputProps?.color),
       emitFormBlur,
       emitFormInput,
-      emitFormChange,
-      formGroup
+      emitFormChange
     }
 }

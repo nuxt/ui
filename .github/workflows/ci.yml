@@ -49,14 +49,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Prepare
+        run: pnpm run dev:prepare
+
       - name: Lint
         run: pnpm run lint
 
-      - name: Build
-        run: pnpm run build
-
       - name: Typecheck
         run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
 
       - name: Version Check
         id: check

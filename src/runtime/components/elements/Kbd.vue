@@ -5,17 +5,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { toRef, defineComponent, computed } from 'vue'
 import type { PropType } from 'vue'
-import { omit } from 'lodash-es'
 import { twMerge, twJoin } from 'tailwind-merge'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { kbd } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof kbd>(appConfig.ui.strategy, appConfig.ui.kbd, kbd)
 
 export default defineComponent({
   inheritAttrs: false,
@@ -25,22 +25,23 @@ export default defineComponent({
       default: null
     },
     size: {
-      type: String,
-      default: () => appConfig.ui.kbd.default.size,
+      type: String as PropType<keyof typeof config.size>,
+      default: () => config.default.size,
       validator (value: string) {
-        return Object.keys(appConfig.ui.kbd.size).includes(value)
+        return Object.keys(config.size).includes(value)
       }
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.kbd>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
-  setup (props, { attrs }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.kbd>>(() => defuTwMerge({}, props.ui, appConfig.ui.kbd))
+  setup (props) {
+    const { ui, attrs } = useUI('kbd', toRef(props, 'ui'), config)
 
     const kbdClass = computed(() => {
       return twMerge(twJoin(
@@ -51,13 +52,13 @@ export default defineComponent({
         ui.value.font,
         ui.value.background,
         ui.value.ring
-      ), attrs.class as string)
+      ), props.class)
     })
 
     return {
-      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       kbdClass
     }
   }
