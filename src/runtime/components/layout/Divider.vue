@@ -40,7 +40,7 @@ export default defineComponent({
   props: {
     label: {
       type: String,
-      default: ''
+      default: null
     },
     icon: {
       type: String,

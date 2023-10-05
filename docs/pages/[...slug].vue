@@ -5,7 +5,7 @@
     <UPageBody prose>
       <ContentRenderer v-if="page.body" :value="page" />
 
-      <UDivider v-if="surround?.length" />
+      <hr v-if="surround?.length">
 
       <UDocsSurround :surround="(surround as ParsedContent[])" />
     </UPageBody>
