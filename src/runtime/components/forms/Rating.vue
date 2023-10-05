@@ -77,7 +77,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui } = useUI('rating', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { emitFormBlur, size, color } = useFormGroup()
+    const { emitFormBlur, size, color } = useFormGroup(props)
 
     const rate = computed({
       get () {
@@ -109,7 +109,7 @@ export default defineComponent({
 
     const ratingClass = computed(() => {
       return twJoin(
-        ui.value.base.replaceAll('{color}', color.value),
+        ui.value.base,
         ui.value.size[props.size],
         props.readOnly ? 'cursor-auto' : ui.value.hover.replaceAll('{color}', color.value))
     })
