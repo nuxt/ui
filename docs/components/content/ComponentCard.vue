@@ -92,7 +92,7 @@ const props = defineProps({
     default: () => []
   },
   options: {
-    type: Array as PropType<{ name: string; values: string[]; restriction: 'expected' | 'included' | 'exclude' | 'only' }[]>,
+    type: Array as PropType<{ name: string; values: string[]; restriction: 'expected' | 'included' | 'excluded' | 'only' }[]>,
     default: () => []
   },
   backgroundClass: {
