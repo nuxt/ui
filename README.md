@@ -9,7 +9,7 @@
 
 Nuxt UI provides everything related to UI when building Nuxt applications: components, icons, colors, dark mode and also keyboard shortcuts.
 
-Is has been developed by [NuxtLabs](https://nuxt.com/) for [Volta](https://volta.net), [Nuxt Studio](https://nuxt.studio/) and the Nuxt community.
+Is has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](https://volta.net), [Nuxt Studio](https://nuxt.studio/) and the Nuxt community.
 
 ## Features
 
@@ -28,13 +28,13 @@ Read more on [ui.nuxt.com](https://ui.nuxt.com)
 
 ```bash
 # Using npm
-npm install @nuxthq/ui
+npm install @nuxt/ui
 
 # Using yarn
-yarn add @nuxthq/ui
+yarn add @nuxt/ui
 
 # Using pnpm
-pnpm add @nuxthq/ui
+pnpm add @nuxt/ui
 ```
 
 Then, register the module in your `nuxt.config.ts`:
@@ -42,17 +42,17 @@ Then, register the module in your `nuxt.config.ts`:
 ```js
 export default defineNuxtConfig({
   modules: [
-    '@nuxthq/ui'
+    '@nuxt/ui'
   ]
 })
 ```
 
-If you want latest updates, please use `@nuxthq/ui-edge` in your `package.json`:
+If you want latest updates, please use `@nuxt/ui-edge` in your `package.json`:
 
 ```json
 {
   "devDependencies": {
-    "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest"
+    "@nuxt/ui": "npm:@nuxt/ui-edge@latest"
   }
 }
 ```
@@ -76,11 +76,11 @@ Visit https://ui.nuxt.com to explore the documentation.
 Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md).
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/@nuxthq/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-version-href]: https://npmjs.com/package/@nuxthq/ui
+[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-href]: https://npmjs.com/package/@nuxt/ui
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/@nuxthq/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-downloads-href]: https://npmjs.com/package/@nuxthq/ui
+[npm-downloads-src]: https://img.shields.io/npm/dm/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-downloads-href]: https://npmjs.com/package/@nuxt/ui
 
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
 [license-href]: https://github.com/nuxt/ui/blob/main/LICENSE
