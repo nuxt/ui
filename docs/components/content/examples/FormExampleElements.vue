@@ -41,7 +41,7 @@ const schema = z.object({
     message: 'Select Option 2'
   }),
   range: z.number().max(20, { message: 'Must be less than 20' }),
-  rating: z.number().max(3, {message: "Must be less than 3"})
+  rating: z.number().max(3, { message: 'Must be less than 3' })
 })
 
 type Schema = z.infer<typeof schema>
@@ -96,7 +96,7 @@ async function submit (event: FormSubmitEvent<Schema>) {
     </UFormGroup>
 
     <UFormGroup name="rating" label="Rating">
-      <URating v-model="state.rating"/>
+      <URating v-model="state.rating" />
     </UFormGroup>
 
     <UButton type="submit">
