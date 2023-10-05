@@ -69,7 +69,7 @@ const links = computed(() => {
     to: '/playground'
   }, {
     label: 'Roadmap',
-    icon: 'i-heroicons-beaker',
+    icon: 'i-heroicons-academic-cap',
     to: '/roadmap'
   }, {
     label: 'Pro',
@@ -85,7 +85,7 @@ const links = computed(() => {
       label: 'Pricing',
       to: '/pro#pricing',
       exactHash: true,
-      icon: 'i-heroicons-shopping-cart',
+      icon: 'i-heroicons-credit-card',
       description: 'A simple pricing, for solo developers or teams.'
     }, {
       label: 'Guide',

@@ -56,7 +56,7 @@ const links = computed(() => {
     to: '/playground'
   }, {
     label: 'Roadmap',
-    icon: 'i-heroicons-beaker',
+    icon: 'i-heroicons-academic-cap',
     to: '/roadmap'
   }, {
     label: 'Pro',
@@ -66,20 +66,24 @@ const links = computed(() => {
       label: 'Features',
       to: '/pro#features',
       exactHash: true,
-      icon: 'i-heroicons-beaker'
+      icon: 'i-heroicons-beaker',
+      description: 'Discover all the features of Nuxt UI Pro.'
     }, {
       label: 'Pricing',
       to: '/pro#pricing',
       exactHash: true,
-      icon: 'i-heroicons-shopping-cart'
+      icon: 'i-heroicons-credit-card',
+      description: 'A simple pricing, for solo developers or teams.'
     }, {
       label: 'Guide',
       to: '/pro/guide',
-      icon: 'i-heroicons-book-open'
+      icon: 'i-heroicons-book-open',
+      description: 'Learn how to use Nuxt UI Pro in your app.'
     }, {
       label: 'Components',
       to: '/pro/components',
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-heroicons-cube-transparent',
+      description: 'Discover all the components available in Nuxt UI Pro.'
     }]
   }, {
     label: 'Releases',
