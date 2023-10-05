@@ -158,7 +158,7 @@ const generateOptions = (key: string, schema: { kind: string, schema: [], type: 
     options = [...options, ...optionItem.values]
   }
 
-  if (optionItem?.restriction === 'exclude') {
+  if (optionItem?.restriction === 'excluded') {
     options = options.filter(item => !optionItem.values.includes(item))
   }
 
