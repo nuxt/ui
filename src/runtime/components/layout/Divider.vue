@@ -2,17 +2,19 @@
   <div :class="wrapperClass" v-bind="attrs">
     <div :class="borderClass" />
 
-    <div v-if="label || icon || avatar || $slots.default" :class="containerClass">
-      <slot>
-        <span v-if="label" :class="ui.label">
-          {{ label }}
-        </span>
-        <UIcon v-else-if="icon" :name="icon" :class="ui.icon.base" />
-        <UAvatar v-else-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
-      </slot>
-    </div>
+    <template v-if="label || icon || avatar || $slots.default">
+      <div :class="containerClass">
+        <slot>
+          <span v-if="label" :class="ui.label">
+            {{ label }}
+          </span>
+          <UIcon v-else-if="icon" :name="icon" :class="ui.icon.base" />
+          <UAvatar v-else-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
+        </slot>
+      </div>
 
-    <div :class="borderClass" />
+      <div :class="borderClass" />
+    </template>
   </div>
 </template>
 
