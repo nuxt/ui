@@ -17,7 +17,7 @@
 import { computed, defineComponent, toRef } from 'vue'
 import type { PropType } from 'vue'
 import UIcon from '../elements/Icon.vue'
-import { twJoin } from 'tailwind-merge'
+import { twJoin, twMerge } from 'tailwind-merge'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
 import { useUI } from '../../composables/useUI'
@@ -25,12 +25,9 @@ import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { rating } from '#ui/ui.config'
+import colors from '#ui-colors'
 
 const config = mergeConfig<typeof rating>(appConfig.ui.strategy, appConfig.ui.rating, rating)
-
-// TODO: Remove
-// @ts-expect-error
-import appConfig from '#build/app.config'
 
 export default defineComponent({
   components: {
@@ -53,10 +50,10 @@ export default defineComponent({
       }
     },
     color: {
-      type: String,
+      type: String as PropType<typeof colors[number]>,
       default: () => config.default.color,
       validator (value: string) {
-        return config.colors.includes(value)
+        return appConfig.ui.colors.includes(value)
       }
     },
     size: {
@@ -104,7 +101,7 @@ export default defineComponent({
     }
 
     const wrapperClass = computed(() => {
-      return twJoin(twJoin(
+      return twMerge(twJoin(
         ui.value.wrapper,
         ui.value.size[size.value]
       ), props.class as string)
