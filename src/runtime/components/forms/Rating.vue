@@ -6,7 +6,8 @@
       :name="icon"
       :class="[
         ratingClass,
-        (rate >= star + 1 ? ui.active : ui.inactive).replaceAll('{color}', color), 'order-{order}'.replaceAll('{order}', star.toString()),
+        (rate >= star + 1 ? ui.active : ui.inactive).replaceAll('{color}', color),
+        'order-{order}'.replaceAll('{order}', star.toString()),
       ]"
       @click="setRating(star + 1)"
     />
@@ -57,10 +58,14 @@ export default defineComponent({
       }
     },
     size: {
-      type: String,
+      type: String as PropType<keyof typeof config.size>,
       default: () => config.default.size
     },
     readOnly: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     },
@@ -90,7 +95,7 @@ export default defineComponent({
     })
 
     const setRating = (rating: number) => {
-      if (props.readOnly) return
+      if (props.readOnly || props.disabled) return
 
       if (rate.value == rating) {
         rate.value = 0
@@ -104,14 +109,17 @@ export default defineComponent({
       return twMerge(twJoin(
         ui.value.wrapper,
         ui.value.size[size.value]
-      ), props.class as string)
+      ), props.class)
     })
 
     const ratingClass = computed(() => {
       return twJoin(
         ui.value.base,
         ui.value.size[props.size],
-        props.readOnly ? 'cursor-auto' : ui.value.hover.replaceAll('{color}', color.value))
+        props.readOnly ? ui.value.readonly : '',
+        props.disabled ? ui.value.disabled : '',
+        !props.readOnly && !props.disabled ? ui.value.hover.replaceAll('{color}', color.value) : ''
+      )
     })
 
     return {
