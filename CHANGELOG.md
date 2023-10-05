@@ -1,5 +1,38 @@
 # Changelog
 
+## [2.9.0](https://github.com/nuxt/ui/compare/v2.8.1...v2.9.0) (2023-10-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **module:** use `tailwind-merge` for `app.config` & move config to components & type props (#692)
+
+### Features
+
+* **FormGroup:** add slots ([#714](https://github.com/nuxt/ui/issues/714)) ([2fc9385](https://github.com/nuxt/ui/commit/2fc938575d2e409ba9df9fb2ddb8d51d021a1756))
+* **Link:** add `active` prop to override default behaviour ([#732](https://github.com/nuxt/ui/issues/732)) ([8257a11](https://github.com/nuxt/ui/commit/8257a11dcba9c34053f8061ed1383894d06b2a6c))
+* **Link:** add `as` prop ([#535](https://github.com/nuxt/ui/issues/535)) ([e404912](https://github.com/nuxt/ui/commit/e40491208ac1096e505803072df0d9e2e771008e))
+* **module:** use `tailwind-merge` for `app.config` & move config to components & type props ([#692](https://github.com/nuxt/ui/issues/692)) ([34d2f57](https://github.com/nuxt/ui/commit/34d2f57801d08d26262fdff4398ec3d3329b4bb0))
+* remove `lodash-es` ([#648](https://github.com/nuxt/ui/issues/648)) ([d6476d1](https://github.com/nuxt/ui/commit/d6476d17f9b17317a7160271dacdb854f30237ae))
+* **Table:** add ability to custom style for  `td` and  `tr` ([#741](https://github.com/nuxt/ui/issues/741)) ([874447c](https://github.com/nuxt/ui/commit/874447cb41a77868513459eee5d3301fe8b8e9a1))
+
+
+### Bug Fixes
+
+* **Accordion:** close other items in circular order ([#735](https://github.com/nuxt/ui/issues/735)) ([6887f73](https://github.com/nuxt/ui/commit/6887f732ee8e14625459a0576460523845cb0a6d))
+* **FormGroup:** prevent input click from propagating to label ([#651](https://github.com/nuxt/ui/issues/651)) ([4c58330](https://github.com/nuxt/ui/commit/4c5833083f0840add52f3c67efc42b8db5687d37))
+* **FormGroup:** use explicit label instead of implicit label ([#638](https://github.com/nuxt/ui/issues/638)) ([681f0e5](https://github.com/nuxt/ui/commit/681f0e5684feaad0c711130404751f2fd65ddbe4))
+* **module:** move `@headlessui/tailwindcss` to plugins on module install ([3e647e4](https://github.com/nuxt/ui/commit/3e647e4af154dad7fa186f062ce984e4d8d0e202))
+* **module:** retain props reactivity through `useUI` ([#745](https://github.com/nuxt/ui/issues/745)) ([109ec52](https://github.com/nuxt/ui/commit/109ec52d50b0b32b0f0b24ece5b92cd7bbce29da))
+* **Pagination:** handle `max > 5` and `max` equal total pages ([#728](https://github.com/nuxt/ui/issues/728)) ([a071e4b](https://github.com/nuxt/ui/commit/a071e4b8755f5dbbdfd05985c8fcb65c3cdab3ec))
+* **Range:** fix track pseudo-elements for mozilla ([#636](https://github.com/nuxt/ui/issues/636)) ([8955595](https://github.com/nuxt/ui/commit/8955595dc6904d0090ad7f82ed8b376a15e51f94))
+* **SelectMenu:** handle numbers ([0544a01](https://github.com/nuxt/ui/commit/0544a01c5b7ae534a595e6c91d2884a601ae3185)), closes [#574](https://github.com/nuxt/ui/issues/574)
+* **Table:** add missing classes in `app.config.ts` ([a603ea5](https://github.com/nuxt/ui/commit/a603ea56c165e9ad01482d092460da3991f3e41d)), closes [#655](https://github.com/nuxt/ui/issues/655)
+* **Table:** select all rows without select listener ([#652](https://github.com/nuxt/ui/issues/652)) ([83d609d](https://github.com/nuxt/ui/commit/83d609d53067b2639a55a0e367a5e7adbd8a22fc))
+* **Tabs:** add visible focus indicator on active tabs ([#690](https://github.com/nuxt/ui/issues/690)) ([be734fc](https://github.com/nuxt/ui/commit/be734fc026b75bc8c921e9401ba6e97f65356cec))
+* **Tabs:** allow custom keys in `TabItem` ([#671](https://github.com/nuxt/ui/issues/671)) ([15e418e](https://github.com/nuxt/ui/commit/15e418e6c6f981afd2c0e8f27dedb303b8cbad70))
+* **Tabs:** prevent focus of `TabPanel` with `tabindex="-1"` ([cbb2f28](https://github.com/nuxt/ui/commit/cbb2f28c3fd96e45c7af20675b5b67576ddc0d63))
+
 ## [2.8.1](https://github.com/nuxt/ui/compare/v2.8.0...v2.8.1) (2023-09-09)
 
 
