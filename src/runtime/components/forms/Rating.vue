@@ -14,12 +14,19 @@
 </template>
 
 <script lang="ts">
-import { computed } from 'vue'
+import { computed, defineComponent, toRef } from 'vue'
+import type { PropType } from 'vue'
 import UIcon from '../elements/Icon.vue'
-import { twMerge, twJoin } from 'tailwind-merge'
-import { defuTwMerge } from '../../utils'
+import { twJoin } from 'tailwind-merge'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { useAppConfig } from '#imports'
+import { mergeConfig } from '../../utils'
+import { useUI } from '../../composables/useUI'
+import type { Strategy } from '../../types'
+// @ts-expect-error
+import appConfig from '#build/app.config'
+import { rating } from '#ui/ui.config'
+
+const config = mergeConfig<typeof rating>(appConfig.ui.strategy, appConfig.ui.rating, rating)
 
 // TODO: Remove
 // @ts-expect-error
@@ -36,7 +43,7 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: () => appConfig.ui.rating.default.icon
+      default: () => config.default.icon
     },
     max: {
       type: Number,
@@ -47,33 +54,33 @@ export default defineComponent({
     },
     color: {
       type: String,
-      default: () => appConfig.ui.rating.default.color,
+      default: () => config.default.color,
       validator (value: string) {
-        return appConfig.ui.colors.includes(value)
+        return config.colors.includes(value)
       }
     },
     size: {
       type: String,
-      default: () => appConfig.ui.rating.default.size
+      default: () => config.default.size
     },
     readOnly: {
       type: Boolean,
       default: false
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.rating>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit, attrs }) {
-    const appConfig = useAppConfig()
+  setup (props, { emit }) {
+    const { ui } = useUI('rating', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const ui = computed<Partial<typeof appConfig.ui.rating>>(() => defuTwMerge({}, props.ui, appConfig.ui.rating))
-
-    const { emitFormBlur, formGroup } = useFormGroup()
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => formGroup?.size?.value ?? props.size)
+    const { emitFormBlur, size, color } = useFormGroup()
 
     const rate = computed({
       get () {
@@ -97,10 +104,10 @@ export default defineComponent({
     }
 
     const wrapperClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(twJoin(
         ui.value.wrapper,
         ui.value.size[size.value]
-      ), attrs.class as string)
+      ), props.class as string)
     })
 
     const ratingClass = computed(() => {

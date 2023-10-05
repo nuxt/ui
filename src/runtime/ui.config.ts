@@ -683,7 +683,7 @@ export const range = {
   }
 }
 
-const rating = {
+export const rating = {
   wrapper: 'relative flex flex-row-reverse items-center justify-end gap-1',
   base: 'transition peer',
   hover: 'cursor-pointer hover:text-{color}-500 dark:hover:text-{color}-300 peer-hover:text-{color}-500 dark:peer-hover:text-{color}-300',
