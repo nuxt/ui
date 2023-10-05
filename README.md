@@ -1,4 +1,4 @@
-[![nuxt-ui-social-card](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxtlabs.com)
+[![nuxt-ui-social-card](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxt.com)
 
 # Nuxt UI
 
@@ -9,7 +9,7 @@
 
 Nuxt UI provides everything related to UI when building Nuxt applications: components, icons, colors, dark mode and also keyboard shortcuts.
 
-Is has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](https://volta.net), [Nuxt Studio](https://nuxt.studio/) and the Nuxt community.
+Is has been developed by [NuxtLabs](https://nuxt.com/) for [Volta](https://volta.net), [Nuxt Studio](https://nuxt.studio/) and the Nuxt community.
 
 ## Features
 
@@ -22,7 +22,7 @@ Is has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](https://v
 - Fully typed
 - [Figma Kit](https://www.figma.com/community/file/1288455405058138934)
 
-Read more on [ui.nuxtlabs.com](https://ui.nuxtlabs.com)
+Read more on [ui.nuxt.com](https://ui.nuxt.com)
 
 ## Installation
 
@@ -59,7 +59,7 @@ If you want latest updates, please use `@nuxthq/ui-edge` in your `package.json`:
 
 ## Documentation
 
-Visit https://ui.nuxtlabs.com to explore the documentation.
+Visit https://ui.nuxt.com to explore the documentation.
 
 ## Credits
 
@@ -73,7 +73,7 @@ Visit https://ui.nuxtlabs.com to explore the documentation.
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nuxtlabs/ui/blob/dev/LICENSE.md).
+Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md).
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@nuxthq/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
@@ -82,8 +82,8 @@ Licensed under the [MIT license](https://github.com/nuxtlabs/ui/blob/dev/LICENSE
 [npm-downloads-src]: https://img.shields.io/npm/dm/@nuxthq/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-downloads-href]: https://npmjs.com/package/@nuxthq/ui
 
-[license-src]: https://img.shields.io/github/license/nuxtlabs/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://github.com/nuxtlabs/ui/blob/main/LICENSE
+[license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
+[license-href]: https://github.com/nuxt/ui/blob/main/LICENSE
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
