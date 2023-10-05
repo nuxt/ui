@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { object, string, InferType } from 'yup'
-import type { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 
 const schema = object({
   email: string().email('Invalid email').required('Required'),

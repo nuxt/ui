@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormError, FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
+import type { FormError, FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 
 const state = ref({
   email: undefined,

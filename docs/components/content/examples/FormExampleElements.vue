@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { z } from 'zod'
-import type { FormSubmitEvent } from '@nuxthq/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 
 const options = [
   { label: 'Option 1', value: 'option-1' },
@@ -18,8 +18,7 @@ const state = ref({
   toggle: undefined,
   radio: undefined,
   switch: undefined,
-  range: undefined,
-  rating: undefined
+  range: undefined
 })
 
 const schema = z.object({
@@ -40,8 +39,7 @@ const schema = z.object({
   radio: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
   }),
-  range: z.number().max(20, { message: 'Must be less than 20' }),
-  rating: z.number().min(1)
+  range: z.number().max(20, { message: 'Must be less than 20' })
 })
 
 type Schema = z.infer<typeof schema>
@@ -93,10 +91,6 @@ async function submit (event: FormSubmitEvent<Schema>) {
 
     <UFormGroup name="range" label="Range">
       <URange v-model="state.range" />
-    </UFormGroup>
-
-    <UFormGroup name="rating" label="Rating">
-      <URating v-model="state.rating" />
     </UFormGroup>
 
     <UButton type="submit">

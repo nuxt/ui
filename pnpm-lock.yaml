@@ -139,7 +139,7 @@ importers:
       '@nuxt/ui-pro':
         specifier: npm:@nuxt/ui-pro-edge@0.2.1-28275199.6736697
         version: /@nuxt/ui-pro-edge@0.2.1-28275199.6736697(rollup@3.29.1)(vue@3.3.4)(webpack@5.88.2)
-      '@nuxthq/studio':
+      '@nuxt/studio':
         specifier: ^0.14.1
         version: 0.14.1(rollup@3.29.1)
       '@nuxtjs/fontaine':
@@ -1744,7 +1744,7 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxthq/studio@0.14.1(rollup@3.29.1):
+  /@nuxt/studio@0.14.1(rollup@3.29.1):
     resolution: {integrity: sha512-9Pdkiph1D7AoWess+pcj4AOinTnpEKpB0F0zmcbZt05LZr1urEab6nvpWlhbaen5mtkqhXlWe6skbBrQVNv17w==}
     dependencies:
       '@nuxt/kit': 3.7.4(rollup@3.29.1)

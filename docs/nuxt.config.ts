@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     'nuxt-og-image',
     // '@nuxt/devtools',
-    // '@nuxthq/studio',
+    // '@nuxt/studio',
     module,
     '@nuxtjs/fontaine',
     '@nuxtjs/google-fonts',
