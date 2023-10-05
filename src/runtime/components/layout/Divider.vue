@@ -1,32 +1,30 @@
 <template>
-  <div :class="wrapperStyle">
-    <div :class="borderStyle" />
-    <div v-if="label || icon || image || alt || $slots.default" :class="baseStyle">
+  <div :class="wrapperClass" v-bind="attrs">
+    <div :class="borderClass" />
+
+    <div v-if="label || icon || avatar || $slots.default" :class="containerClass">
       <slot>
-        <UAvatar
-          v-if="!label"
-          :icon="icon"
-          :src="image"
-          :alt="alt"
-          :ui="{ rounded: ui.rounded, background: ui.background }"
-        />
-        <span v-else :class="ui?.label">
+        <span v-if="label" :class="ui.label">
           {{ label }}
         </span>
+        <UIcon v-else-if="icon" :name="icon" :class="ui.icon.base" />
+        <UAvatar v-else-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
       </slot>
     </div>
 
-    <div :class="borderStyle" />
+    <div :class="borderClass" />
   </div>
 </template>
 
 <script lang="ts">
 import { toRef, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
+import { twMerge, twJoin } from 'tailwind-merge'
+import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types'
+import type { Avatar, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { divider } from '#ui/ui.config'
@@ -35,6 +33,7 @@ const config = mergeConfig<typeof divider>(appConfig.ui.strategy, appConfig.ui.d
 
 export default defineComponent({
   components: {
+    UIcon,
     UAvatar
   },
   inheritAttrs: false,
@@ -45,15 +44,11 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: ''
+      default: null
     },
-    image: {
-      type: String,
-      default: ''
-    },
-    alt: {
-      type: String,
-      default: ''
+    avatar: {
+      type: Object as PropType<Avatar>,
+      default: null
     },
     orientation: {
       type: String as PropType<'horizontal' | 'vertical'>,
@@ -79,31 +74,42 @@ export default defineComponent({
 
     const isHorizontal = computed(() => props.orientation === 'horizontal' )
 
-    const wrapperStyle = computed(() => [
-      ui.value.wrapper.base,
-      isHorizontal.value ? ui.value.wrapper.horizontal : ui.value.wrapper.vertical,
-      props?.class
-    ])
+    const wrapperClass = computed(() => {
+      return twMerge(twJoin(
+        ui.value.wrapper.base,
+        isHorizontal.value ? ui.value.wrapper.horizontal : ui.value.wrapper.vertical
+      ), props.class)
+    })
 
-    const baseStyle = computed(() => [
-      ui.value.base.main,
-      isHorizontal.value ? ui.value.base.horizontal : ui.value.base.vertical
-    ])
+    const containerClass = computed(() => {
+      return twJoin(
+        ui.value.container.base,
+        isHorizontal.value ? ui.value.container.horizontal : ui.value.container.vertical
+      )
+    })
 
-    const borderStyle = computed(() => [
-      'border-{style}'.replaceAll('{style}', props.type),
-      ui.value.border.base,
-      isHorizontal.value ? ui.value.border.horizontal : ui.value.border.vertical,
-      isHorizontal.value ? ui.value.border.size.horizontal : ui.value.border.size.vertical
-    ])
+    const borderClass = computed(() => {
+      const typeClass = ({
+        solid: 'border-solid',
+        dotted: 'border-dotted',
+        dashed: 'border-dashed'
+      })[props.type]
+
+      return twJoin(
+        ui.value.border.base,
+        isHorizontal.value ? ui.value.border.horizontal : ui.value.border.vertical,
+        isHorizontal.value ? ui.value.border.size.horizontal : ui.value.border.size.vertical,
+        typeClass
+      )
+    })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
-      wrapperStyle,
-      borderStyle,
-      baseStyle
+      wrapperClass,
+      containerClass,
+      borderClass
     }
   }
 })

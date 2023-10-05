@@ -1,62 +1,46 @@
 <script setup>
-const loginForm = reactive({ email: 'mail@example.com', passowrd: 'passowrd' })
+const form = reactive({ email: 'mail@example.com', password: 'password' })
 </script>
 
 <template>
   <div class="w-full flex flex-col gap-y-4">
-    <UCard :ui="{ body: { base: 'w-full grid grid-cols-3' } }">
-      <div class="w-ful">
-        <UFormGroup label="Email" name="email" class="mb-3">
-          <UInput v-model="loginForm.email" />
+    <UCard :ui="{ body: { base: 'grid grid-cols-3' } }">
+      <div class="space-y-4">
+        <UFormGroup label="Email" name="email">
+          <UInput v-model="form.email" />
         </UFormGroup>
 
-        <UFormGroup label="Passowrd" name="passowrd">
-          <UInput v-model="loginForm.passowrd" type="password" />
+        <UFormGroup label="Password" name="password">
+          <UInput v-model="form.password" type="password" />
         </UFormGroup>
 
-        <UButton class="w-full my-4" color="black" variant="outline">
-          Login
-        </UButton>
+        <UButton label="Login" color="gray" block />
       </div>
 
-      <UDivider class="my-4 w-ful" label="OR" color="gray" orientation="vertical" />
+      <UDivider label="OR" color="gray" orientation="vertical" />
 
-      <div class="w-full flex flex-col gap-y-2 justify-center">
-        <UButton color="black">
-          <UIcon name="i-simple-icons-github" />
-          Login with Github
-        </UButton>
-        <UButton color="black">
-          <UIcon name="i-simple-icons-google" />
-          Login with Google
-        </UButton>
+      <div class="space-y-4 flex flex-col justify-center">
+        <UButton color="black" label="Login with GitHub" icon="i-simple-icons-github" block />
+        <UButton color="black" label="Login with Google" icon="i-simple-icons-google" block />
       </div>
     </UCard>
 
     <UCard>
-      <UFormGroup label="Email" name="email" class="mb-3">
-        <UInput v-model="loginForm.email" />
-      </UFormGroup>
+      <div class="space-y-4">
+        <UFormGroup label="Email" name="email">
+          <UInput v-model="form.email" />
+        </UFormGroup>
 
-      <UFormGroup label="Passowrd" name="passowrd">
-        <UInput v-model="loginForm.passowrd" type="password" />
-      </UFormGroup>
+        <UFormGroup label="Password" name="password">
+          <UInput v-model="form.password" type="password" />
+        </UFormGroup>
 
-      <UButton class="w-full mt-4" color="black" variant="outline">
-        Login
-      </UButton>
+        <UButton label="Login" color="gray" block />
 
-      <UDivider class="my-4" label="OR" color="gray" />
+        <UDivider label="OR" color="gray" />
 
-      <div class="flex flex-col gap-y-2">
-        <UButton color="black">
-          <UIcon name="i-simple-icons-github" />
-          Login with Github
-        </UButton>
-        <UButton color="black">
-          <UIcon name="i-simple-icons-google" />
-          Login with Google
-        </UButton>
+        <UButton color="black" label="Login with GitHub" icon="i-simple-icons-github" block />
+        <UButton color="black" label="Login with Google" icon="i-simple-icons-google" block />
       </div>
     </UCard>
   </div>
