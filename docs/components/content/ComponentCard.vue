@@ -56,7 +56,6 @@ import { transformContent } from '@nuxt/content/transformers'
 // @ts-ignore
 import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
 import { upperFirst, camelCase, kebabCase } from 'scule'
-import * as config from '#ui/ui.config'
 
 // eslint-disable-next-line vue/no-dupe-keys
 const props = defineProps({
@@ -92,8 +91,8 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-  extraColors: {
-    type: Array,
+  options: {
+    type: Array as PropType<{ name: string; values: string[]; restriction: 'expected' | 'included' | 'excluded' | 'only' }[]>,
     default: () => []
   },
   backgroundClass: {
@@ -125,8 +124,6 @@ const meta = await fetchComponentMeta(name)
 
 // Computed
 
-const ui = computed(() => ({ ...config[camelName], ...props.ui }))
-
 const fullProps = computed(() => ({ ...baseProps, ...componentProps }))
 const vModel = computed({
   get: () => baseProps.modelValue,
@@ -135,19 +132,47 @@ const vModel = computed({
   }
 })
 
+const generateOptions = (key: string, schema: { kind: string, schema: [], type: string }) => {
+  let options = []
+  const optionItem = props?.options?.find(item => item?.name === key) || null
+  const types = schema?.type?.split('|')?.map(item => item.trim()?.replaceAll('"', '')) || []
+  const hasIgnoredTypes = types?.every(item => ['string', 'number', 'boolean', 'array', 'object', 'Function'].includes(item))
+
+  if (key.toLowerCase().endsWith('color')) {
+    options = [...appConfig.ui.colors]
+  }
+
+  if (schema?.schema?.length > 0 && schema?.kind === 'enum' && !hasIgnoredTypes && optionItem?.restriction !== 'only') {
+    options = schema.schema.filter(option => typeof option === 'string').map((option: string) => option.replaceAll('"', ''))
+  }
+
+  if (optionItem?.restriction === 'only') {
+    options = optionItem.values
+  }
+
+  if (optionItem?.restriction === 'expected') {
+    options = options.filter(item => optionItem.values.includes(item))
+  }
+
+  if (optionItem?.restriction === 'included') {
+    options = [...options, ...optionItem.values]
+  }
+
+  if (optionItem?.restriction === 'excluded') {
+    options = options.filter(item => !optionItem.values.includes(item))
+  }
+
+  return options
+}
+
 const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   if (props.excludedProps.includes(key)) {
     return null
   }
 
   const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
-  const dottedKey = kebabCase(key).replaceAll('-', '.')
-  const keys = ui.value[dottedKey] ?? {}
-  let options = typeof keys === 'object' && Object.keys(keys)
-  if (key.toLowerCase().endsWith('color')) {
-    // @ts-ignore
-    options = [...appConfig.ui.colors, ...props.extraColors]
-  }
+  const schema = prop?.schema || {}
+  const options = generateOptions(key, schema)
 
   return {
     type: prop?.type || 'string',
