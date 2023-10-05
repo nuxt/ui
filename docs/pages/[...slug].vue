@@ -5,7 +5,7 @@
     <UPageBody prose>
       <ContentRenderer v-if="page.body" :value="page" />
 
-      <UDivider v-if="surround?.length" />
+      <hr v-if="surround?.length">
 
       <UDocsSurround :surround="(surround as ParsedContent[])" />
     </UPageBody>
@@ -14,7 +14,7 @@
       <UDocsToc :links="page.body.toc.links">
         <template #bottom>
           <div class="hidden lg:block space-y-6 !mt-6">
-            <UDivider v-if="page.body?.toc?.links?.length" dashed />
+            <UDivider v-if="page.body?.toc?.links?.length" type="dashed" />
 
             <UPageLinks title="Community" :links="links" />
           </div>
