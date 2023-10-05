@@ -49,11 +49,9 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     mode: {
-      type: String,
+      type: String as PropType<'click' | 'hover'>,
       default: 'click',
-      validator: (value: string) => {
-        return ['click', 'hover'].includes(value)
-      }
+      validator: (value: string) => ['click', 'hover'].includes(value)
     },
     disabled: {
       type: Boolean,
