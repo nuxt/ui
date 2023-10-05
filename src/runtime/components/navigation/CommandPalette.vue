@@ -4,7 +4,7 @@
     :model-value="modelValue"
     :multiple="multiple"
     :nullable="nullable"
-    :class="wrapperClass"
+    :class="ui.wrapper"
     v-bind="attrs"
     as="div"
     @update:model-value="onSelect"
@@ -16,17 +16,12 @@
         :value="query"
         :class="[ui.input.base, ui.input.size, ui.input.height, ui.input.padding, icon && ui.input.icon.padding]"
         :placeholder="placeholder"
+        :aria-label="placeholder"
         autocomplete="off"
         @change="query = $event.target.value"
       />
 
-      <UButton
-        v-if="closeButton"
-        v-bind="{ ...ui.default.closeButton, ...closeButton }"
-        :class="ui.input.closeButton"
-        aria-label="Close"
-        @click="onClear"
-      />
+      <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" :class="ui.input.closeButton" @click="onClear" />
     </div>
 
     <HComboboxOptions
@@ -67,27 +62,25 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, onMounted, defineComponent } from 'vue'
+import { ref, computed, watch, toRef, onMounted, defineComponent } from 'vue'
 import { Combobox as HCombobox, ComboboxInput as HComboboxInput, ComboboxOptions as HComboboxOptions } from '@headlessui/vue'
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
-import { twMerge, twJoin } from 'tailwind-merge'
-import { groupBy, map, omit } from 'lodash-es'
-import { defu } from 'defu'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
-import type { Group, Command } from '../../types/command-palette'
+import { twJoin } from 'tailwind-merge'
+import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
-import type { Button } from '../../types/button'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
-import { defuTwMerge } from '../../utils'
-import { useAppConfig } from '#imports'
-// TODO: Remove
+import { useUI } from '../../composables/useUI'
+import { mergeConfig } from '../../utils'
+import type { Group, Command, Button, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+import { commandPalette } from '#ui/ui.config'
 
-// const appConfig = useAppConfig()
+const config = mergeConfig<typeof commandPalette>(appConfig.ui.strategy, appConfig.ui.commandPalette, commandPalette)
 
 export default defineComponent({
   components: {
@@ -130,23 +123,23 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: () => appConfig.ui.commandPalette.default.icon
+      default: () => config.default.icon
     },
     loadingIcon: {
       type: String,
-      default: () => appConfig.ui.commandPalette.default.loadingIcon
+      default: () => config.default.loadingIcon
     },
     selectedIcon: {
       type: String,
-      default: () => appConfig.ui.commandPalette.default.selectedIcon
+      default: () => config.default.selectedIcon
     },
     closeButton: {
       type: Object as PropType<Button>,
-      default: () => appConfig.ui.commandPalette.default.closeButton
+      default: () => config.default.closeButton as Button
     },
     emptyState: {
       type: Object as PropType<{ icon: string, label: string, queryLabel: string }>,
-      default: () => appConfig.ui.commandPalette.default.emptyState
+      default: () => config.default.emptyState
     },
     placeholder: {
       type: String,
@@ -173,20 +166,21 @@ export default defineComponent({
       default: 200
     },
     fuse: {
-      type: Object as PropType<Partial<UseFuseOptions<Command>>>,
+      type: Object as PropType<UseFuseOptions<Command>>,
       default: () => ({})
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
-      type: Object as PropType<Partial<typeof appConfig.ui.commandPalette>>,
-      default: () => ({})
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'close'],
-  setup (props, { emit, attrs, expose }) {
-    // TODO: Remove
-    const appConfig = useAppConfig()
-
-    const ui = computed<Partial<typeof appConfig.ui.commandPalette>>(() => defuTwMerge({}, props.ui, appConfig.ui.commandPalette))
+  setup (props, { emit, expose }) {
+    const { ui, attrs } = useUI('commandPalette', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const query = ref('')
     const comboboxInput = ref<ComponentPublicInstance<HTMLInputElement>>()
@@ -219,32 +213,50 @@ export default defineComponent({
       matchAllWhenSearchEmpty: true
     }))
 
-    const commands = computed(() => props.groups.filter(group => !group.search).reduce((acc, group) => {
-      return acc.concat(group.commands.map(command => ({ ...command, group: group.key })))
-    }, [] as Command[]))
+    const commands = computed(() => {
+      const commands: Command[] = []
+      for (const group of props.groups) {
+        if (!group.search) {
+          commands.push(...group.commands.map(command => ({ ...command, group: group.key })))
+        }
+      }
+      return commands
+    })
 
     const searchResults = ref<{ [key: string]: any }>({})
 
     const { results } = useFuse(query, commands, options)
 
-    const groups = computed(() => ([
-      ...map(groupBy(results.value, command => command.item.group), (results, key) => {
-        const commands = results.map((result) => {
+    const groups = computed(() => {
+      const groups: Group[] = []
+
+      const groupedCommands: Record<string, typeof results['value']> = {}
+      for (const command of results.value) {
+        groupedCommands[command.item.group] ||= []
+        groupedCommands[command.item.group].push(command)
+      }
+      for (const key in groupedCommands) {
+        const group = props.groups.find(group => group.key === key)
+        const commands = groupedCommands[key].slice(0, options.value.resultLimit).map((result) => {
           const { item, ...data } = result
 
           return {
             ...item,
             ...data
-          }
+          } as Command
         })
 
-        return {
-          ...props.groups.find(group => group.key === key),
-          commands: commands.slice(0, options.value.resultLimit)
-        } as Group
-      }),
-      ...props.groups.filter(group => !!group.search).map(group => ({ ...group, commands: (searchResults.value[group.key] || []).slice(0, options.value.resultLimit) })).filter(group => group.commands.length)
-    ]))
+        groups.push({ ...group, commands })
+      }
+
+      for (const group of props.groups) {
+        if (group.search && searchResults.value[group.key]?.length) {
+          groups.push({ ...group, commands: (searchResults.value[group.key] || []).slice(0, options.value.resultLimit) })
+        }
+      }
+
+      return groups
+    })
 
     const debouncedSearch = useDebounceFn(async () => {
       const searchableGroups = props.groups.filter(group => !!group.search)
@@ -270,8 +282,6 @@ export default defineComponent({
         comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
       }, 0)
     })
-
-    const wrapperClass = computed(() => twMerge(ui.value.wrapper, attrs.class as string))
 
     const iconName = computed(() => {
       if ((props.loading || isLoading.value) && props.loadingIcon) {
@@ -330,14 +340,13 @@ export default defineComponent({
     })
 
     return {
-      attrs: omit(attrs, ['class']),
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      attrs,
       // eslint-disable-next-line vue/no-dupe-keys
       groups,
       comboboxInput,
       query,
-      wrapperClass,
       iconName,
       iconClass,
       // eslint-disable-next-line vue/no-dupe-keys
