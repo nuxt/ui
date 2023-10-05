@@ -191,7 +191,7 @@ const safelistByComponent = {
     pattern: new RegExp(`text-(${colorsAsRegex})-400`),
     variants: ['hover', 'peer-hover']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-200`),
+    pattern: new RegExp(`text-(${colorsAsRegex})-300`),
     variants: ['dark:hover', 'dark:peer-hover']
   }]
 }
