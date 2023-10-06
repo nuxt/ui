@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { string, objectAsync, email, minLength, Input } from 'valibot'
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 
@@ -10,7 +9,7 @@ const schema = objectAsync({
 
 type Schema = Input<typeof schema>
 
-const state = ref({
+const state = reactive({
   email: undefined,
   password: undefined
 })
