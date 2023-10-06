@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { FormError, FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 
-const state = ref({
+const state = reactive({
   email: undefined,
   password: undefined
 })
