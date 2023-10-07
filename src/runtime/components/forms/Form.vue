@@ -11,7 +11,7 @@ import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
-import type { FormError, FormEvent, FormEventType, FormSubmitEvent, Form } from '../../types/form'
+import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types/form'
 import { uid } from '../../utils/uid'
 
 class FormException extends Error {
@@ -109,20 +109,24 @@ export default defineComponent({
         if (props.validateOn?.includes('submit')) {
           await validate()
         }
-        const submitEvent = event as FormSubmitEvent<any>
-        submitEvent.data = props.state
-        emit('submit', event)
+        const submitEvent: FormSubmitEvent<any> = {
+          ...event,
+          data: props.state
+        }
+        emit('submit', submitEvent)
       } catch (error) {
-        if (error instanceof FormException) {
-          const submitEvent = event as FormSubmitEvent<any>
-          submitEvent.data = {
-            errors: errors.value,
-            ids: inputs.value
-          }
-          emit('error', submitEvent)
-        } else {
+        if (!(error instanceof FormException)) {
           throw error
         }
+
+        const errorEvent: FormErrorEvent = {
+          ...event,
+          errors: errors.value.map((err) => ({
+            ...err,
+            id: inputs.value[err.path]
+          }))
+        }
+        emit('error', errorEvent)
       }
     }
 
