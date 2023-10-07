@@ -37,14 +37,14 @@ export default defineNuxtConfig({
         prefix: '/dev',
         driver: 'fs',
         base: resolve('./content')
-      },
-      // overwrite default source AKA `content` directory
-      content: {
-        driver: 'github',
-        repo: 'nuxt/ui',
-        branch: 'main',
-        dir: 'docs/content'
       }
+      // // overwrite default source AKA `content` directory
+      // content: {
+      //   driver: 'github',
+      //   repo: 'nuxt/ui',
+      //   branch: 'main',
+      //   dir: 'docs/content'
+      // }
     }
   },
   fontMetrics: {
