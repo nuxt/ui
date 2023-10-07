@@ -14,7 +14,6 @@ export default defineNuxtModule({
     name: 'content-examples-code'
   },
   async setup (_options, nuxt) {
-    // @ts-expect-error ignore
     const resolver = createResolver(import.meta.url)
     let _configResolved: any
     let components: Record<string, any>
