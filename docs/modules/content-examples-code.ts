@@ -75,7 +75,12 @@ export default defineNuxtModule({
 
     nuxt.hook('components:extend', async (_components) => {
       components = _components
-        .filter((v) => v.shortPath.startsWith('components/content/examples/'))
+        .filter(
+          (v) =>
+            v.shortPath.startsWith('components/content/examples/') ||
+            v.shortPath.startsWith('components/content/themes/') ||
+            v.shortPath.startsWith('components/content/ColorModeButton')
+        )
         .reduce((acc, component) => {
           acc[component.pascalName] = component
           return acc

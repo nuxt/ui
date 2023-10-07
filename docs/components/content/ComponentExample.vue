@@ -4,10 +4,13 @@
       class="flex border border-gray-200 dark:border-gray-700 relative not-prose rounded-t-md"
       :class="[{ 'p-4': padding, 'rounded-b-md': !hasCode, 'border-b-0': hasCode }, backgroundClass, overflowClass]"
     >
+      <component :is="camelName" v-if="component" v-bind="componentProps" />
       <ContentSlot v-if="$slots.default" :use="$slots.default" />
     </div>
-    <ContentSlot v-if="$slots.code" :use="$slots.code" />
-    <ContentRenderer v-else-if="ast" :value="ast" class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0" />
+    <template v-if="hasCode">
+      <ContentSlot v-if="$slots.code" :use="$slots.code" />
+      <ContentRenderer v-else :value="ast" class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0" />
+    </template>
   </div>
 </template>
 
@@ -23,6 +26,18 @@ const props = defineProps({
   component: {
     type: String,
     default: null
+  },
+  componentClass: {
+    type: String,
+    default: ''
+  },
+  componentProps: {
+    type: Object,
+    default: () => ({})
+  },
+  hiddenCode: {
+    type: Boolean,
+    default: false
   },
   padding: {
     type: Boolean,
@@ -42,7 +57,7 @@ const instance = getCurrentInstance()
 const camelName = camelCase(props.component)
 const data = await fetchContentExampleCode(camelName)
 
-const hasCode = computed(() => data?.code || instance.slots.code)
+const hasCode = computed(() => !props.hiddenCode && (data?.code || instance.slots.code))
 
 const shikiHighlighter = useShikiHighlighter({})
 const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })

@@ -11,7 +11,7 @@ export default defineEventHandler((event) => {
     if (!component) {
       throw createError({
         statusMessage: 'Examples not found!',
-        statusCode: 404,
+        statusCode: 404
       })
     }
     return component
