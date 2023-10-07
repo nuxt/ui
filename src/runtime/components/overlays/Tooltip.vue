@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ref, defineComponent } from 'vue'
+import { computed, ref, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UKbd from '../elements/Kbd.vue'
@@ -68,13 +68,17 @@ export default defineComponent({
       type: Object as PropType<PopperOptions>,
       default: () => ({})
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('tooltip', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('tooltip', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
