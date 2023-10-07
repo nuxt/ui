@@ -721,6 +721,36 @@ export const skeleton = {
   rounded: 'rounded-md'
 }
 
+export const divider = {
+  wrapper: {
+    base: 'flex items-center align-center text-center w-full',
+    horizontal: 'flex-row',
+    vertical: 'flex-col'
+  },
+  container: {
+    base: 'font-medium text-gray-700 dark:text-gray-200 flex',
+    horizontal: 'mx-3 whitespace-nowrap',
+    vertical: 'my-2'
+  },
+  border: {
+    base: 'flex border-gray-200 dark:border-gray-800',
+    horizontal: 'w-full',
+    vertical: 'h-full',
+    size: {
+      horizontal: 'border-t',
+      vertical: 'border-s'
+    }
+  },
+  icon: {
+    base: 'flex-shrink-0 w-5 h-5'
+  },
+  avatar: {
+    base: 'flex-shrink-0',
+    size: '2xs'
+  },
+  label: 'text-sm'
+}
+
 // Navigation
 
 export const verticalNavigation = {
@@ -864,7 +894,7 @@ export const tabs = {
       shadow: 'shadow-sm'
     },
     tab: {
-      base: 'relative inline-flex items-center justify-center flex-shrink-0 w-full whitespace-nowrap focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
+      base: 'relative inline-flex items-center justify-center flex-shrink-0 w-full whitespace-nowrap ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
       background: '',
       active: 'text-gray-900 dark:text-white',
       inactive: 'text-gray-500 dark:text-gray-400',

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { z } from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 
@@ -9,7 +8,7 @@ const options = [
   { label: 'Option 3', value: 'option-3' }
 ]
 
-const state = ref({
+const state = reactive({
   input: undefined,
   textarea: undefined,
   select: undefined,

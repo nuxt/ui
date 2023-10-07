@@ -49,12 +49,12 @@
         </tr>
 
         <template v-else>
-          <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active]" @click="() => onSelect(row)">
+          <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
             <td v-if="modelValue" :class="ui.checkbox.padding">
               <UCheckbox v-model="selected" :value="row" aria-label="Select row" @click.stop />
             </td>
 
-            <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
+            <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, row[column.key]?.class]">
               <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue) => getRowData(row, column.key, defaultValue)">
                 {{ getRowData(row, column.key) }}
               </slot>
@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, toRaw } from 'vue'
+import { ref, computed, defineComponent, toRaw, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -143,6 +143,10 @@ export default defineComponent({
       type: Object as PropType<{ icon: string, label: string }>,
       default: () => config.default.emptyState
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -150,7 +154,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (props, { emit, attrs: $attrs }) {
-    const { ui, attrs } = useUI('table', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: upperFirst(key), sortable: false })))
 

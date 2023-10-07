@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import Joi from 'joi'
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 
@@ -10,7 +9,7 @@ const schema = Joi.object({
     .required()
 })
 
-const state = ref({
+const state = reactive({
   email: undefined,
   password: undefined
 })
