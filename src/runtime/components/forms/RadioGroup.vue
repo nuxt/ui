@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import URadio from './Radio.vue'
-import { computed, defineComponent, provide } from 'vue'
+import { computed, defineComponent, provide, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
@@ -86,7 +86,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('radioGroup', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('radioGroup', props.ui, config)
 
     const { emitFormChange, color, name } = useFormGroup(props, config)
     provide('radio-group', { color, name })
