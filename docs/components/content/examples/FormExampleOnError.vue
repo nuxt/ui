@@ -1,31 +1,40 @@
 <script setup lang="ts">
-import { object, string } from 'yup'
-import type { FormErrorEvent } from '@nuxt/ui/dist/runtime/types'
+import type { FormError, FormErrorEvent, FormSubmitEvent } from '#ui/types'
 
-const schema = object({ email: string().email('Invalid email').required('Required') })
+const state = reactive({
+  email: undefined,
+  password: undefined
+})
 
-const state = reactive({ email: undefined })
+const validate = (state: any): FormError[] => {
+  const errors = []
+  if (!state.email) errors.push({ path: 'email', message: 'Required' })
+  if (!state.password) errors.push({ path: 'password', message: 'Required' })
+  return errors
+}
+
+async function onSubmit (event: FormSubmitEvent<any>) {
+  // Do something with data
+  console.log(event.data)
+}
 
 async function onError (event: FormErrorEvent) {
   console.log(event)
 
   const element = document.getElementById(event.errors[0].id)
-  console.log(element)
-  element.focus()
-  element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  element?.focus()
+  element?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 }
-
 </script>
 
 <template>
-  <UForm
-    :schema="schema"
-    :state="state"
-    @submit="console.log"
-    @error="onError"
-  >
+  <UForm :validate="validate" :state="state" @submit="onSubmit" @error="onError">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
+    </UFormGroup>
+
+    <UFormGroup label="Password" name="password">
+      <UInput v-model="state.password" type="password" />
     </UFormGroup>
 
     <UButton type="submit">
