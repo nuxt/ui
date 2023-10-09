@@ -124,7 +124,7 @@ const meta = await fetchComponentMeta(name)
 
 // Computed
 
-const fullProps = computed(() => ({ ...baseProps, ...componentProps }))
+const fullProps = computed(() => ({ ...componentProps, ...baseProps }))
 const vModel = computed({
   get: () => baseProps.modelValue,
   set: (value) => {
@@ -186,7 +186,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
 const code = computed(() => {
   let code = `\`\`\`html
 <${name}`
-  for (const [key, value] of Object.entries(componentProps)) {
+  for (const [key, value] of Object.entries(fullProps.value)) {
     if (value === 'undefined' || value === null) {
       continue
     }
