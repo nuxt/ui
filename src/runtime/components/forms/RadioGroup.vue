@@ -86,7 +86,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('radioGroup', props.ui, config)
+    const { ui, attrs } = useUI('radioGroup', toRef(props, 'ui'), config)
 
     const { emitFormChange, color, name } = useFormGroup(props, config)
     provide('radio-group', { color, name })
