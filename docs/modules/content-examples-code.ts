@@ -77,8 +77,7 @@ export default defineNuxtModule({
         .filter(
           (v) =>
             v.shortPath.startsWith('components/content/examples/') ||
-            v.shortPath.startsWith('components/content/themes/') ||
-            v.shortPath.startsWith('components/content/ColorModeButton')
+            v.shortPath.startsWith('components/content/themes/')
         )
         .reduce((acc, component) => {
           acc[component.pascalName] = component
