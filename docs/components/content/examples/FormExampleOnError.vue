@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { object, string } from 'yup'
 import type { FormErrorEvent } from '@nuxt/ui/dist/runtime/types'
 
 const schema = object({ email: string().email('Invalid email').required('Required') })
 
-const state = ref({ email: undefined })
+const state = reactive({ email: undefined })
 
 async function onError (event: FormErrorEvent) {
   console.log(event)
