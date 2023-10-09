@@ -1,4 +1,4 @@
-const useContentExamplesCodeState = () => useState('components-meta', () => ({}))
+const useContentExamplesCodeState = () => useState('content-examples-code', () => ({}))
 
 export async function fetchContentExampleCode (name?: string) {
   if (!name) return
