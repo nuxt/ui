@@ -19,6 +19,7 @@
     "eslint": "^8.50.0",
     "joi": "^17.10.2",
     "nuxt": "^3.7.4",
+    "nuxt-cloudflare-analytics": "^1.0.8",
     "nuxt-component-meta": "^0.5.4",
     "nuxt-og-image": "^2.0.28",
     "typescript": "^5.2.2",
