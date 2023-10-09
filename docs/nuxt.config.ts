@@ -18,7 +18,8 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
-    'nuxt-component-meta'
+    'nuxt-component-meta',
+    'modules/content-examples-code'
   ],
   runtimeConfig: {
     public: {
