@@ -88,7 +88,7 @@ const { data: todos, pending } = await useLazyAsyncData<{
   id: number
   title: string
   completed: string
-}[]>('todos', () => $fetch(`https://jsonplaceholder.typicode.com/todos${searchStatus.value}`, {
+}[]>('todos', () => ($fetch as any)(`https://jsonplaceholder.typicode.com/todos${searchStatus.value}`, {
   query: {
     q: search.value,
     '_page': page.value,
