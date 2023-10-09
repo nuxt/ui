@@ -24,12 +24,12 @@ export type FormEventType = 'blur' | 'input' | 'change' | 'submit'
 
 export interface FormEvent {
   type: FormEventType
-  path: string
+  path?: string
 }
 
 export interface InjectedFormGroupValue {
-  inputId: Ref<string>
+  inputId: Ref<string | undefined>
   name: Ref<string>
-  size: Ref<string>
+  size: Ref<string | number | symbol>
   error: Ref<string | boolean>
 }
