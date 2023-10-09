@@ -113,6 +113,7 @@ const props = defineProps({
 const baseProps = reactive({ ...props.baseProps })
 const componentProps = reactive({ ...props.props })
 
+const { $prettier } = useNuxtApp()
 const appConfig = useAppConfig()
 const route = useRoute()
 // eslint-disable-next-line vue/no-dupe-keys
@@ -187,7 +188,7 @@ const code = computed(() => {
   let code = `\`\`\`html
 <${name}`
   for (const [key, value] of Object.entries(fullProps.value)) {
-    if (value === 'undefined' || value === null) {
+    if (value === 'undefined' || value === null || key === 'name') {
       continue
     }
 
@@ -235,16 +236,27 @@ function renderObject (obj: any) {
 
 const shikiHighlighter = useShikiHighlighter({})
 const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
-const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`, () => transformContent('content:_markdown.md', code.value, {
-  markdown: {
-    highlight: {
-      highlighter: codeHighlighter,
-      theme: {
-        light: 'material-theme-lighter',
-        default: 'material-theme',
-        dark: 'material-theme-palenight'
-      }
+const { data: ast } = await useAsyncData(
+  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`,
+  async () => {
+    let formatted = ''
+    try {
+      formatted = await $prettier.format(code.value) || code.value
+    } catch (error) {
+      formatted = code.value
     }
-  }
-}), { watch: [code] })
+
+    return transformContent('content:_markdown.md', formatted, {
+      markdown: {
+        highlight: {
+          highlighter: codeHighlighter,
+          theme: {
+            light: 'material-theme-lighter',
+            default: 'material-theme',
+            dark: 'material-theme-palenight'
+          }
+        }
+      }
+    })
+  }, { watch: [code] })
 </script>
