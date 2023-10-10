@@ -188,7 +188,7 @@ const code = computed(() => {
   let code = `\`\`\`html
 <${name}`
   for (const [key, value] of Object.entries(fullProps.value)) {
-    if (value === 'undefined' || value === null || key === 'name') {
+    if (value === 'undefined' || value === null) {
       continue
     }
 
@@ -207,7 +207,7 @@ const code = computed(() => {
       code += `>
   ${props.code}</${name}>`
     } else {
-      code += `>${props.code}</${name}>`
+      code += `>${props.code} </${name}>`
     }
   } else {
     code += ' />'
