@@ -13,16 +13,15 @@
         <ContentRenderer
           v-else
           :value="ast"
-          class="[&>div>pre]:!rounded-t-none [&>div>pre]:h-full [&>div>pre]:!mt-0 [&>div>pre]:block"
+          class="[&>div>pre]:!rounded-t-none [&>div>pre]:h-full [&>div>pre]:!mt-0 [&>div>pre]:block [&>div>pre]:transition-all [&>div>pre]:ease-in-out [&>div>pre]:duration-300"
           :class="{
-            '[&>div>pre]:max-h-[250px] [&>div>pre]:block [&>div>pre]:overflow-hidden ': expandCode,
+            '[&>div>pre]:max-h-[250px] [&>div>pre]:block [&>div>pre]:overflow-hidden': expandCode,
             '[&>div>pre]:overflow-scroll [&>div>pre]:max-h-[80vh]': !expandCode
           }"
         />
         <div class="bg-gradient-to-t from-[#161618FF] to-[#16161800] bottom-[1px] left-[1px] right-[1px] h-20 flex items-center justify-center absolute rounded-b-lg">
           <UButton
-            class="mt-4"
-            :ui="{ rounded: 'rounded-full' }"
+            class="my-4"
             :icon="expandCode ? 'i-heroicons-chevron-down-20-solid' : 'i-heroicons-chevron-up-20-solid'"
             trailing
             @click="expandCode = !expandCode"
