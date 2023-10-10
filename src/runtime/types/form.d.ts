@@ -1,10 +1,16 @@
-export interface FormError {
-  path: string
+import { Ref } from 'vue'
+
+export interface FormError<T extends string = string> {
+  path: T
   message: string
 }
 
+export interface FormErrorWithId extends FormError {
+  id: string
+}
+
 export interface Form<T> {
-  validate(path?: string, opts: { silent?: boolean }): Promise<T>
+  validate(path?: string, opts?: { silent?: boolean }): Promise<T>
   clear(path?: string): void
   errors: Ref<FormError[]>
   setErrors(errs: FormError[], path?: string): void
@@ -12,17 +18,18 @@ export interface Form<T> {
 }
 
 export type FormSubmitEvent<T> = SubmitEvent & { data: T }
+export type FormErrorEvent = SubmitEvent & { errors: FormErrorWithId[] }
 
 export type FormEventType = 'blur' | 'input' | 'change' | 'submit'
 
 export interface FormEvent {
   type: FormEventType
-  path: string
+  path?: string
 }
 
 export interface InjectedFormGroupValue {
-  inputId: Ref<string>
+  inputId: Ref<string | undefined>
   name: Ref<string>
-  size: Ref<string>
+  size: Ref<string | number | symbol>
   error: Ref<string | boolean>
 }

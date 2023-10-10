@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FormError, FormSubmitEvent } from '#ui/types'
+import type { FormError, FormErrorEvent, FormSubmitEvent } from '#ui/types'
 
 const state = reactive({
   email: undefined,
@@ -17,10 +17,16 @@ async function onSubmit (event: FormSubmitEvent<any>) {
   // Do something with data
   console.log(event.data)
 }
+
+async function onError (event: FormErrorEvent) {
+  const element = document.getElementById(event.errors[0].id)
+  element?.focus()
+  element?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+}
 </script>
 
 <template>
-  <UForm :validate="validate" :state="state" @submit="onSubmit">
+  <UForm :validate="validate" :state="state" @submit="onSubmit" @error="onError">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormGroup>
