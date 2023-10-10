@@ -163,6 +163,9 @@ importers:
       nuxt:
         specifier: ^3.7.4
         version: 3.7.4(eslint@8.50.0)(rollup@3.29.1)(typescript@5.2.2)(vue-tsc@1.8.15)
+      nuxt-cloudflare-analytics:
+        specifier: ^1.0.8
+        version: 1.0.8(rollup@3.29.1)
       nuxt-component-meta:
         specifier: ^0.5.4
         version: 0.5.4(rollup@3.29.1)
@@ -8700,6 +8703,16 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.3
+    dev: true
+
+  /nuxt-cloudflare-analytics@1.0.8(rollup@3.29.1):
+    resolution: {integrity: sha512-gUBcxHfvR06tBNDszTj/cMx8EGwtNFqICk7IBM66JIebe/VG0HgDF6AFJfqqOFG5ACk6ApdAxREHhvnmgUSudA==}
+    engines: {npm: '>= 4.0.0'}
+    dependencies:
+      '@nuxt/kit': 3.7.4(rollup@3.29.1)
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
     dev: true
 
   /nuxt-component-meta@0.5.4(rollup@3.29.1):
