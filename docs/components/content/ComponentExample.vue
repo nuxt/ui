@@ -18,15 +18,21 @@
           '[&>div>pre]:overflow-scroll [&>div>pre]:max-h-[85vh]': !expandCode
         }"
       />
-      <div class="bg-gradient-to-t dark:from-[#161618FF] dark:to-[#16161800] from-[#e0e0e0FF] to-[#e0e0e000] bottom-[1px] left-[1px] right-[1px] h-20 flex items-center justify-center absolute rounded-b">
+      <div
+        :class="{
+          'bg-gradient-to-t dark:from-[#161618FF] dark:to-[#16161800] from-[#e0e0e0FF] to-[#e0e0e000]  rounded-b bottom-[1px] left-[1px] right-[1px] h-15 flex items-center justify-center absolute': expandCode,
+          'top-2.5 right-10 absolute': !expandCode
+        }"
+      >
         <UButton
-          class="my-4"
-          :icon="expandCode ? 'i-heroicons-chevron-down-20-solid' : 'i-heroicons-chevron-up-20-solid'"
-          trailing
+          :label="expandCode ? 'Expand Code' : 'Collapse Code'"
+          :size="expandCode ? 'sm' : 'xs'"
+          :variant="expandCode ? 'solid' : 'soft'"
+          :class="{ 'my-4': expandCode, }"
+          :icon="expandCode ? 'i-heroicons-arrows-pointing-out' : 'i-heroicons-arrows-pointing-in'"
+          :leading="false"
           @click="expandCode = !expandCode"
-        >
-          {{ expandCode ? 'Expand' : 'Collapse' }} code
-        </UButton>
+        />
       </div>
     </div>
   </div>
