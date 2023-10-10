@@ -159,6 +159,7 @@ export default defineComponent({
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const { emitFormBlur, emitFormInput, size, color, inputId, name } = useFormGroup(props, config)
+
     const input = ref<HTMLInputElement | null>(null)
 
     const autoFocus = () => {
