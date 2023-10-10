@@ -8,7 +8,7 @@
       <ContentSlot v-if="$slots.default" :use="$slots.default" />
     </div>
     <template v-if="hasCode">
-      <div class="relative h-full w-full">
+      <div class="relative">
         <ContentSlot v-if="$slots.code" :use="$slots.code" />
         <ContentRenderer
           v-else
@@ -16,7 +16,7 @@
           class="[&>div>pre]:!rounded-t-none [&>div>pre]:h-full [&>div>pre]:!mt-0 [&>div>pre]:block [&>div>pre]:transition-all [&>div>pre]:ease-in-out [&>div>pre]:duration-300"
           :class="{
             '[&>div>pre]:max-h-[250px] [&>div>pre]:block [&>div>pre]:overflow-hidden': expandCode,
-            '[&>div>pre]:overflow-scroll [&>div>pre]:max-h-[80vh]': !expandCode
+            '[&>div>pre]:overflow-scroll [&>div>pre]:max-h-[85vh]': !expandCode
           }"
         />
         <div class="bg-gradient-to-t from-[#161618FF] to-[#16161800] bottom-[1px] left-[1px] right-[1px] h-20 flex items-center justify-center absolute rounded-b-lg">
