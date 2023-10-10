@@ -19,7 +19,7 @@
             '[&>div>pre]:overflow-scroll [&>div>pre]:max-h-[85vh]': !expandCode
           }"
         />
-        <div class="bg-gradient-to-t from-[#161618FF] to-[#16161800] bottom-[1px] left-[1px] right-[1px] h-20 flex items-center justify-center absolute rounded-b-lg">
+        <div class="bg-gradient-to-t dark:from-[#161618FF] dark:to-[#16161800] from-[#e0e0e0FF] to-[#e0e0e000] bottom-[1px] left-[1px] right-[1px] h-20 flex items-center justify-center absolute rounded-b">
           <UButton
             class="my-4"
             :icon="expandCode ? 'i-heroicons-chevron-down-20-solid' : 'i-heroicons-chevron-up-20-solid'"
