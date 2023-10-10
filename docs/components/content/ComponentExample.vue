@@ -7,30 +7,28 @@
       <component :is="camelName" v-if="component" v-bind="componentProps" />
       <ContentSlot v-if="$slots.default" :use="$slots.default" />
     </div>
-    <template v-if="hasCode">
-      <div class="relative">
-        <ContentSlot v-if="$slots.code" :use="$slots.code" />
-        <ContentRenderer
-          v-else
-          :value="ast"
-          class="[&>div>pre]:!rounded-t-none [&>div>pre]:h-full [&>div>pre]:!mt-0 [&>div>pre]:block [&>div>pre]:transition-all [&>div>pre]:ease-in-out [&>div>pre]:duration-300"
-          :class="{
-            '[&>div>pre]:max-h-[250px] [&>div>pre]:block [&>div>pre]:overflow-hidden': expandCode,
-            '[&>div>pre]:overflow-scroll [&>div>pre]:max-h-[85vh]': !expandCode
-          }"
-        />
-        <div class="bg-gradient-to-t dark:from-[#161618FF] dark:to-[#16161800] from-[#e0e0e0FF] to-[#e0e0e000] bottom-[1px] left-[1px] right-[1px] h-20 flex items-center justify-center absolute rounded-b">
-          <UButton
-            class="my-4"
-            :icon="expandCode ? 'i-heroicons-chevron-down-20-solid' : 'i-heroicons-chevron-up-20-solid'"
-            trailing
-            @click="expandCode = !expandCode"
-          >
-            {{ expandCode ? 'Expand' : 'Collapse' }} code
-          </UButton>
-        </div>
+    <div v-if="hasCode" class="relative">
+      <ContentSlot v-if="$slots.code" :use="$slots.code" />
+      <ContentRenderer
+        v-else
+        :value="ast"
+        class="[&>div>pre]:!rounded-t-none [&>div>pre]:h-full [&>div>pre]:!mt-0 [&>div>pre]:block [&>div>pre]:transition-all [&>div>pre]:ease-in-out [&>div>pre]:duration-300"
+        :class="{
+          '[&>div>pre]:max-h-[250px] [&>div>pre]:block [&>div>pre]:overflow-hidden': expandCode,
+          '[&>div>pre]:overflow-scroll [&>div>pre]:max-h-[85vh]': !expandCode
+        }"
+      />
+      <div class="bg-gradient-to-t dark:from-[#161618FF] dark:to-[#16161800] from-[#e0e0e0FF] to-[#e0e0e000] bottom-[1px] left-[1px] right-[1px] h-20 flex items-center justify-center absolute rounded-b">
+        <UButton
+          class="my-4"
+          :icon="expandCode ? 'i-heroicons-chevron-down-20-solid' : 'i-heroicons-chevron-up-20-solid'"
+          trailing
+          @click="expandCode = !expandCode"
+        >
+          {{ expandCode ? 'Expand' : 'Collapse' }} code
+        </UButton>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
