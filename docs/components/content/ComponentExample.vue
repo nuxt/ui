@@ -14,8 +14,8 @@
         :value="ast"
         class="[&>div>pre]:!rounded-t-none [&>div>pre]:h-full [&>div>pre]:!mt-0 [&>div>pre]:block [&>div>pre]:transition-all [&>div>pre]:ease-in-out [&>div>pre]:duration-300"
         :class="{
-          '[&>div>pre]:max-h-[250px] [&>div>pre]:block [&>div>pre]:overflow-hidden': expandCode,
-          '[&>div>pre]:overflow-scroll [&>div>pre]:max-h-[85vh]': !expandCode
+          '[&>div>pre]:max-h-[200px] [&>div>pre]:block [&>div>pre]:overflow-hidden': expandCode,
+          '[&>div>pre]:overflow-scroll [&>div>pre]:max-h-[80vh]': !expandCode
         }"
       />
       <div
