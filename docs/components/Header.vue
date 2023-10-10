@@ -26,7 +26,6 @@
         target="_blank"
         icon="i-simple-icons-github"
         aria-label="GitHub"
-        class="hidden lg:inline-flex"
         v-bind="($ui.button.secondary as any)"
       />
     </template>
