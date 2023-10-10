@@ -8,8 +8,29 @@
       <ContentSlot v-if="$slots.default" :use="$slots.default" />
     </div>
     <template v-if="hasCode">
-      <ContentSlot v-if="$slots.code" :use="$slots.code" />
-      <ContentRenderer v-else :value="ast" class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0" />
+      <div class="relative h-full w-full">
+        <ContentSlot v-if="$slots.code" :use="$slots.code" />
+        <ContentRenderer
+          v-else
+          :value="ast"
+          class="[&>div>pre]:!rounded-t-none [&>div>pre]:h-full [&>div>pre]:!mt-0 [&>div>pre]:block"
+          :class="{
+            '[&>div>pre]:max-h-[250px] [&>div>pre]:block [&>div>pre]:overflow-hidden ': expandCode,
+            '[&>div>pre]:overflow-scroll [&>div>pre]:max-h-[80vh]': !expandCode
+          }"
+        />
+        <div class="bg-gradient-to-t from-[#161618FF] to-[#16161800] bottom-[1px] left-[1px] right-[1px] h-20 flex items-center justify-center absolute rounded-b-lg">
+          <UButton
+            class="mt-4"
+            :ui="{ rounded: 'rounded-full' }"
+            :icon="expandCode ? 'i-heroicons-chevron-down-20-solid' : 'i-heroicons-chevron-up-20-solid'"
+            trailing
+            @click="expandCode = !expandCode"
+          >
+            {{ expandCode ? 'Expand' : 'Collapse' }} code
+          </UButton>
+        </div>
+      </div>
     </template>
   </div>
 </template>
@@ -39,6 +60,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  expandCode: {
+    type: Boolean,
+    default: true
+  },
   padding: {
     type: Boolean,
     default: true
@@ -58,6 +83,8 @@ const camelName = camelCase(props.component)
 const data = await fetchContentExampleCode(camelName)
 
 const hasCode = computed(() => !props.hiddenCode && (data?.code || instance.slots.code))
+
+const expandCode = ref(props.expandCode)
 
 const shikiHighlighter = useShikiHighlighter({})
 const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
