@@ -18,7 +18,7 @@
     <div v-if="(open !== undefined) ? open : headlessOpen" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
         <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
-          <slot name="panel" :open="headlessOpen" :close="close" />
+          <slot name="panel" :open="(open !== undefined) ? open : headlessOpen" :close="close" />
         </HPopoverPanel>
       </Transition>
     </div>
