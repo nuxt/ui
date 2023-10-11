@@ -8,7 +8,7 @@
       role="button"
       @mouseover="onMouseOver"
     >
-      <slot :open="headlessOpen" :close="close">
+      <slot :open="(open !== undefined) ? open : headlessOpen" :close="close">
         <button :disabled="disabled">
           Open
         </button>
