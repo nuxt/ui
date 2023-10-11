@@ -115,10 +115,8 @@ const componentProps = reactive({ ...props.props })
 
 const appConfig = useAppConfig()
 const route = useRoute()
-// eslint-disable-next-line vue/no-dupe-keys
-const slug = props.slug || route.params.slug[route.params.slug.length - 1]
-const camelName = camelCase(slug)
-const name = `U${upperFirst(camelName)}`
+
+const name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
 
 const meta = await fetchComponentMeta(name)
 
