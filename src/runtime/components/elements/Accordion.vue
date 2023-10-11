@@ -105,7 +105,7 @@ export default defineComponent({
 
     const uiButton = computed<Partial<typeof configButton>>(() => configButton)
 
-    const buttonRefs = ref<{open: boolean, close: (e: EventTarget) => {}}[]>([])
+    const buttonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
 
     function closeOthers (currentIndex: number, e: Event) {
       if (!props.items[currentIndex].closeOthers && props.multiple) {
@@ -114,7 +114,6 @@ export default defineComponent({
 
       buttonRefs.value.forEach((button) => {
         if (button.open) {
-          // pass the HTMLElement to close method to save the current click button for enter/space press, see #626 
           button.close(e.target)
         }
       })
