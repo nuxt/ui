@@ -1,12 +1,12 @@
 <template>
   <div :class="ui.wrapper">
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
-      <HDisclosureButton 
-        :ref="() => buttonRefs[index] = { open, close }" 
-        as="template" 
-        :disabled="item.disabled" 
-        @click="closeOthers(index, $event)" 
-        @keydown.enter="closeOthers(index, $event)" 
+      <HDisclosureButton
+        :ref="() => buttonRefs[index] = { open, close }"
+        as="template"
+        :disabled="item.disabled"
+        @click="closeOthers(index, $event)"
+        @keydown.enter="closeOthers(index, $event)"
         @keydown.space="closeOthers(index, $event)"
       >
         <slot :item="item" :index="index" :open="open" :close="close">
