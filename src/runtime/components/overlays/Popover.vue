@@ -1,5 +1,5 @@
 <template>
-  <HPopover ref="popover" v-slot="{ open, close }" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
+  <HPopover ref="popover" v-slot="{ open: headlessOpen, close }" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HPopoverButton
       ref="trigger"
       as="div"
@@ -8,17 +8,17 @@
       role="button"
       @mouseover="onMouseOver"
     >
-      <slot :open="open" :close="close">
+      <slot :open="(open !== undefined) ? open : headlessOpen" :close="close">
         <button :disabled="disabled">
           Open
         </button>
       </slot>
     </HPopoverButton>
 
-    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
+    <div v-if="(open !== undefined) ? open : headlessOpen" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
         <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
-          <slot name="panel" :open="open" :close="close" />
+          <slot name="panel" :open="(open !== undefined) ? open : headlessOpen" :close="close" />
         </HPopoverPanel>
       </Transition>
     </div>
@@ -52,6 +52,10 @@ export default defineComponent({
       type: String as PropType<'click' | 'hover'>,
       default: 'click',
       validator: (value: string) => ['click', 'hover'].includes(value)
+    },
+    open: {
+      type: Boolean,
+      default: undefined
     },
     disabled: {
       type: Boolean,
@@ -103,8 +107,14 @@ export default defineComponent({
 
     const containerStyle = computed(() => {
       const offsetDistance = (props.popper as PopperOptions)?.offsetDistance || (ui.value.popper as PopperOptions)?.offsetDistance || 8
+      const padding = `${offsetDistance}px`
 
-      return props.mode === 'hover' ? { paddingTop: `${offsetDistance}px`, paddingBottom: `${offsetDistance}px` } : {}
+      return props.mode === 'hover' ? {
+        paddingTop: padding,
+        paddingBottom: padding,
+        paddingLeft: padding,
+        paddingRight: padding
+      } : {}
     })
 
     function onMouseOver () {
