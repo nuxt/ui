@@ -18,7 +18,9 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
-    'nuxt-component-meta'
+    'nuxt-component-meta',
+    'nuxt-cloudflare-analytics',
+    'modules/content-examples-code'
   ],
   runtimeConfig: {
     public: {
@@ -75,6 +77,10 @@ export default defineNuxtConfig({
       events: false,
       exposed: false
     }
+  },
+  cloudflareAnalytics: {
+    token: '1e2b0c5e9a214f0390b9b94e043d8d4c',
+    scriptPath: false
   },
   hooks: {
     // Related to https://github.com/nuxt/nuxt/pull/22558
