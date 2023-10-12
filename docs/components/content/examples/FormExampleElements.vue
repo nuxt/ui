@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { z } from 'zod'
-import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '#ui/types'
 
 const options = [
   { label: 'Option 1', value: 'option-1' },
@@ -45,19 +45,14 @@ type Schema = z.infer<typeof schema>
 
 const form = ref()
 
-async function submit (event: FormSubmitEvent<Schema>) {
+async function onSubmit (event: FormSubmitEvent<Schema>) {
   // Do something with event.data
   console.log(event.data)
 }
 </script>
 
 <template>
-  <UForm
-    ref="form"
-    :schema="schema"
-    :state="state"
-    @submit="submit"
-  >
+  <UForm ref="form" :schema="schema" :state="state" @submit="onSubmit">
     <UFormGroup name="input" label="Input">
       <UInput v-model="state.input" />
     </UFormGroup>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { z } from 'zod'
-import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '#ui/types'
 
 const schema = z.object({
   email: z.string().email('Invalid email'),
@@ -14,18 +14,14 @@ const state = reactive({
   password: undefined
 })
 
-async function submit (event: FormSubmitEvent<Schema>) {
+async function onSubmit (event: FormSubmitEvent<Schema>) {
   // Do something with data
   console.log(event.data)
 }
 </script>
 
 <template>
-  <UForm
-    :schema="schema"
-    :state="state"
-    @submit="submit"
-  >
+  <UForm :schema="schema" :state="state" @submit="onSubmit">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormGroup>
