@@ -152,7 +152,7 @@ export default defineComponent({
       default: undefined
     }
   },
-  emits: ['update:modelValue', 'onSort'],
+  emits: ['update:modelValue', 'sort'],
   setup (props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
