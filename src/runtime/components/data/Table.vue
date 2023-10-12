@@ -152,7 +152,7 @@ export default defineComponent({
       default: undefined
     }
   },
-  emits: ['update:modelValue', 'sort'],
+  emits: ['update:modelValue', 'update:sort'],
   setup (props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -233,7 +233,7 @@ export default defineComponent({
         sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
 
-      emit('sort', sort.value)
+      emit('update:sort', sort.value)
     }
 
     function onSelect (row) {
