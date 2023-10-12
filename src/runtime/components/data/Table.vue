@@ -233,7 +233,7 @@ export default defineComponent({
         sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
 
-      emit('onSort', sort.value)
+      emit('sort', sort.value)
     }
 
     function onSelect (row) {
