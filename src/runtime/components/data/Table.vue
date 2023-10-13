@@ -160,6 +160,8 @@ export default defineComponent({
 
     const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
 
+    const defaultSort = { column: sort.value.column, direction: null }
+
     const rows = computed(() => {
       if (!sort.value?.column) {
         return props.rows
@@ -225,7 +227,7 @@ export default defineComponent({
         const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
 
         if (sort.value.direction === direction) {
-          sort.value = defu({}, props.sort, { column: null, direction: 'asc' })
+          sort.value = defu({}, defaultSort, { column: null, direction: 'asc' })
         } else {
           sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
         }
