@@ -87,7 +87,7 @@ export default defineComponent({
     },
     autofocusDelay: {
       type: Number,
-      default: 100,
+      default: 100
     },
     icon: {
       type: String,
