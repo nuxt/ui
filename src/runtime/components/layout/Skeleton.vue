@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
@@ -18,20 +18,24 @@ const config = mergeConfig<typeof skeleton>(appConfig.ui.strategy, appConfig.ui.
 export default defineComponent({
   inheritAttrs: false,
   props: {
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('skeleton', props.ui, config)
+    const { ui, attrs } = useUI('skeleton', toRef(props, 'ui'), config)
 
     const skeletonClass = computed(() => {
       return twMerge(twJoin(
         ui.value.base,
         ui.value.background,
         ui.value.rounded
-      ), attrsClass)
+      ), props.class)
     })
 
     return {

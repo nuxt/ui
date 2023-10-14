@@ -1,7 +1,7 @@
 <template>
   <div :class="ui.wrapper">
     <select
-      :id="id"
+      :id="inputId"
       :name="name"
       :value="modelValue"
       :required="required"
@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType, ComputedRef } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -137,7 +137,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<keyof typeof config.size>,
-      default: () => config.default.size,
+      default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
@@ -171,6 +171,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -178,12 +182,9 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit, slots }) {
-    const { ui, attrs } = useUI('select', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { emitFormChange, formGroup } = useFormGroup(props)
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => formGroup?.size?.value ?? props.size)
-    const id = formGroup?.labelFor
+    const { emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
 
     const onInput = (event: InputEvent) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
@@ -323,7 +324,8 @@ export default defineComponent({
       ui,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
-      id,
+      name,
+      inputId,
       normalizedOptionsWithPlaceholder,
       normalizedValue,
       isLeading,

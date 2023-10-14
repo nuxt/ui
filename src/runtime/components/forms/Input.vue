@@ -1,7 +1,7 @@
 <template>
   <div :class="ui.wrapper">
     <input
-      :id="id"
+      :id="inputId"
       ref="input"
       :name="name"
       :value="modelValue"
@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted, defineComponent } from 'vue'
+import { ref, computed, toRef, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -85,6 +85,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    autofocusDelay: {
+      type: Number,
+      default: 100
+    },
     icon: {
       type: String,
       default: null
@@ -119,7 +123,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<keyof typeof config.size>,
-      default: () => config.default.size,
+      default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
@@ -145,6 +149,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -152,12 +160,9 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'blur'],
   setup (props, { emit, slots }) {
-    const { ui, attrs } = useUI('input', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup(props)
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => formGroup?.size?.value ?? props.size)
-    const id = formGroup?.labelFor
+    const { emitFormBlur, emitFormInput, size, color, inputId, name } = useFormGroup(props, config)
 
     const input = ref<HTMLInputElement | null>(null)
 
@@ -180,7 +185,7 @@ export default defineComponent({
     onMounted(() => {
       setTimeout(() => {
         autoFocus()
-      }, 100)
+      }, props.autofocusDelay)
     })
 
     const inputClass = computed(() => {
@@ -261,7 +266,8 @@ export default defineComponent({
       ui,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
-      id,
+      name,
+      inputId,
       input,
       isLeading,
       isTrailing,

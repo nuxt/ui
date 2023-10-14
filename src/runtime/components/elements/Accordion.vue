@@ -1,7 +1,14 @@
 <template>
   <div :class="ui.wrapper">
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
-      <HDisclosureButton :ref="() => buttonRefs[index] = close" as="template" :disabled="item.disabled">
+      <HDisclosureButton
+        :ref="() => buttonRefs[index] = { open, close }"
+        as="template"
+        :disabled="item.disabled"
+        @click="closeOthers(index, $event)"
+        @keydown.enter="closeOthers(index, $event)"
+        @keydown.space="closeOthers(index, $event)"
+      >
         <slot :item="item" :index="index" :open="open" :close="close">
           <UButton v-bind="{ ...omit(ui.default, ['openIcon', 'closeIcon']), ...attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }">
             <template #trailing>
@@ -17,8 +24,6 @@
           </UButton>
         </slot>
       </HDisclosureButton>
-
-      <StateEmitter :open="open" @open="closeOthers(index)" />
 
       <Transition
         v-bind="ui.transition"
@@ -40,14 +45,13 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent } from 'vue'
+import { ref, computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, omit } from '../../utils'
-import StateEmitter from '../../utils/StateEmitter'
 import type { AccordionItem, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -63,8 +67,7 @@ export default defineComponent({
     HDisclosureButton,
     HDisclosurePanel,
     UIcon,
-    UButton,
-    StateEmitter
+    UButton
   },
   inheritAttrs: false,
   props: {
@@ -88,27 +91,31 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('accordion', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('accordion', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const uiButton = computed<Partial<typeof configButton>>(() => configButton)
 
-    const buttonRefs = ref<Function[]>([])
+    const buttonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
 
-    function closeOthers (itemIndex: number) {
-      if (!props.items[itemIndex].closeOthers && props.multiple) {
+    function closeOthers (currentIndex: number, e: Event) {
+      if (!props.items[currentIndex].closeOthers && props.multiple) {
         return
       }
 
-      buttonRefs.value.forEach((close, index) => {
-        if (index === itemIndex) return
-
-        close()
+      buttonRefs.value.forEach((button) => {
+        if (button.open) {
+          button.close(e.target)
+        }
       })
     }
 

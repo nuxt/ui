@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
@@ -64,13 +64,17 @@ export default defineComponent({
       type: Array as PropType<VerticalNavigationLink[]>,
       default: () => []
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('verticalNavigation', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('verticalNavigation', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

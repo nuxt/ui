@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, onMounted, defineComponent } from 'vue'
+import { ref, computed, watch, toRef, onMounted, defineComponent } from 'vue'
 import { Combobox as HCombobox, ComboboxInput as HComboboxInput, ComboboxOptions as HComboboxOptions } from '@headlessui/vue'
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
@@ -169,6 +169,10 @@ export default defineComponent({
       type: Object as PropType<UseFuseOptions<Command>>,
       default: () => ({})
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -176,7 +180,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'close'],
   setup (props, { emit, expose }) {
-    const { ui, attrs } = useUI('commandPalette', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('commandPalette', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const query = ref('')
     const comboboxInput = ref<ComponentPublicInstance<HTMLInputElement>>()

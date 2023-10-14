@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { z } from 'zod'
-import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '#ui/types'
 
 const options = [
   { label: 'Option 1', value: 'option-1' },
@@ -9,7 +8,7 @@ const options = [
   { label: 'Option 3', value: 'option-3' }
 ]
 
-const state = ref({
+const state = reactive({
   input: undefined,
   textarea: undefined,
   select: undefined,
@@ -46,19 +45,14 @@ type Schema = z.infer<typeof schema>
 
 const form = ref()
 
-async function submit (event: FormSubmitEvent<Schema>) {
+async function onSubmit (event: FormSubmitEvent<Schema>) {
   // Do something with event.data
   console.log(event.data)
 }
 </script>
 
 <template>
-  <UForm
-    ref="form"
-    :schema="schema"
-    :state="state"
-    @submit="submit"
-  >
+  <UForm ref="form" :schema="schema" :state="state" @submit="onSubmit">
     <UFormGroup name="input" label="Input">
       <UInput v-model="state.input" />
     </UFormGroup>
@@ -80,7 +74,7 @@ async function submit (event: FormSubmitEvent<Schema>) {
     </UFormGroup>
 
     <UFormGroup name="checkbox" label="Checkbox">
-      <UCheckbox v-model="state.checkbox" />
+      <UCheckbox v-model="state.checkbox" label="Check me" />
     </UFormGroup>
 
     <UFormGroup name="radio" label="Radio">

@@ -1,26 +1,44 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
-    <div v-if="label" :class="[ui.label.wrapper, size]">
-      <label :for="labelFor" :class="[ui.label.base, required ? ui.label.required : '']">{{ label }}</label>
-      <span v-if="hint" :class="[ui.hint]">{{ hint }}</span>
+    <div v-if="label || $slots.label" :class="[ui.label.wrapper, size]">
+      <label :for="inputId" :class="[ui.label.base, required ? ui.label.required : '']">
+        <slot v-if="$slots.label" name="label" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>{{ label }}</template>
+      </label>
+      <span v-if="hint || $slots.hint" :class="[ui.hint]">
+        <slot v-if="$slots.hint" name="hint" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>{{ hint }}</template>
+      </span>
     </div>
-    <p v-if="description" :class="[ui.description, size]">
-      {{ description }}
+
+    <p v-if="description || $slots.description" :class="[ui.description, size]">
+      <slot v-if="$slots.description" name="description" v-bind="{ error, label, name, hint, description, help }" />
+      <template v-else>
+        {{ description }}
+      </template>
     </p>
+
     <div :class="[label ? ui.container : '']">
       <slot v-bind="{ error }" />
-      <p v-if="typeof error === 'string' && error" :class="[ui.error, size]">
-        {{ error }}
+
+      <p v-if="(typeof error === 'string' && error) || $slots.error" :class="[ui.error, size]">
+        <slot v-if="$slots.error" name="error" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>
+          {{ error }}
+        </template>
       </p>
-      <p v-else-if="help" :class="[ui.help, size]">
-        {{ help }}
+      <p v-else-if="help || $slots.help" :class="[ui.help, size]">
+        <slot v-if="$slots.help" name="help" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>
+          {{ help }}
+        </template>
       </p>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, provide, inject, ref } from 'vue'
+import { computed, defineComponent, provide, inject, ref, toRef } from 'vue'
 import type { Ref, PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
@@ -28,10 +46,9 @@ import type { FormError, InjectedFormGroupValue, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { formGroup } from '#ui/ui.config'
+import { uid } from '../../utils/uid'
 
 const config = mergeConfig<typeof formGroup>(appConfig.ui.strategy, appConfig.ui.formGroup, formGroup)
-
-let increment = 0
 
 export default defineComponent({
   inheritAttrs: false,
@@ -71,13 +88,17 @@ export default defineComponent({
       type: String,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('formGroup', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('formGroup', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
@@ -88,11 +109,11 @@ export default defineComponent({
     })
 
     const size = computed(() => ui.value.size[props.size ?? config.default.size])
-    const labelFor = ref(`${props.name || 'lf'}-${increment = increment < 1000000 ? increment + 1 : 0}`)
+    const inputId = ref(uid())
 
     provide<InjectedFormGroupValue>('form-group', {
       error,
-      labelFor,
+      inputId,
       name: computed(() => props.name),
       size: computed(() => props.size)
     })
@@ -101,7 +122,7 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
-      labelFor,
+      inputId,
       // eslint-disable-next-line vue/no-dupe-keys
       size,
       // eslint-disable-next-line vue/no-dupe-keys

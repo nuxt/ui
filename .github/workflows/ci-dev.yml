@@ -12,6 +12,10 @@ jobs:
   ci:
     runs-on: ${{ matrix.os }}
 
+    permissions:
+      contents: read
+      pull-requests: read
+
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
@@ -46,6 +50,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            src:
+              - 'src/**'
+              - 'package.json'
+              - 'pnpm-lock.yaml'
+
       - name: Install dependencies
         run: pnpm install
 
@@ -62,7 +75,7 @@ jobs:
         run: pnpm run build
 
       - name: Release Edge
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && steps.changes.outputs.src == 'true'
         run: ./scripts/release-edge.sh
         env:
           NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}

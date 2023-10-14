@@ -1,7 +1,7 @@
 <template>
   <div :class="ui.wrapper">
     <textarea
-      :id="id"
+      :id="inputId"
       ref="textarea"
       :value="modelValue"
       :name="name"
@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, onMounted, nextTick, defineComponent } from 'vue'
+import { ref, computed, toRef, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
@@ -72,6 +72,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    autofocusDelay: {
+      type: Number,
+      default: 100
+    },
     resize: {
       type: Boolean,
       default: false
@@ -82,7 +86,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<keyof typeof config.size>,
-      default: () => config.default.size,
+      default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
@@ -108,6 +112,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -115,12 +123,9 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'blur'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('textarea', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('textarea', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { emitFormBlur, emitFormInput, formGroup } = useFormGroup(props)
-    const color = computed(() => formGroup?.error?.value ? 'red' : props.color)
-    const size = computed(() => formGroup?.size?.value ?? props.size)
-    const id = formGroup?.labelFor
+    const { emitFormBlur, emitFormInput, inputId, color, size, name } = useFormGroup(props, config)
 
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
@@ -167,7 +172,7 @@ export default defineComponent({
     onMounted(() => {
       setTimeout(() => {
         autoFocus()
-      }, 100)
+      }, props.autofocusDelay)
     })
 
     watch(() => props.modelValue, () => {
@@ -200,7 +205,8 @@ export default defineComponent({
       ui,
       attrs,
       // eslint-disable-next-line vue/no-dupe-keys
-      id,
+      name,
+      inputId,
       textarea,
       // eslint-disable-next-line vue/no-dupe-keys
       textareaClass,
