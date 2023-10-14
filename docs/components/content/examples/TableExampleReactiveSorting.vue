@@ -62,7 +62,6 @@ const people = [{
   email: 'floyd.miles@example.com',
   role: 'Member'
 }]
-
 </script>
 
 <template>
