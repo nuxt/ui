@@ -85,6 +85,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    autofocusDelay: {
+      type: Number,
+      default: 100,
+    },
     icon: {
       type: String,
       default: null
@@ -181,7 +185,7 @@ export default defineComponent({
     onMounted(() => {
       setTimeout(() => {
         autoFocus()
-      }, 100)
+      }, props.autofocusDelay)
     })
 
     const inputClass = computed(() => {
