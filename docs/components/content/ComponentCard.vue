@@ -41,7 +41,7 @@
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
 
         <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
-          <ContentSlot :name="slot" />
+          <ContentSlot :name="slot" unwrap="p" />
         </template>
       </component>
     </div>
@@ -113,6 +113,7 @@ const props = defineProps({
 const baseProps = reactive({ ...props.baseProps })
 const componentProps = reactive({ ...props.props })
 
+const { $prettier } = useNuxtApp()
 const appConfig = useAppConfig()
 const route = useRoute()
 
@@ -127,7 +128,7 @@ const meta = await fetchComponentMeta(name)
 
 // Computed
 
-const fullProps = computed(() => ({ ...baseProps, ...componentProps }))
+const fullProps = computed(() => ({ ...componentProps, ...baseProps }))
 const vModel = computed({
   get: () => baseProps.modelValue,
   set: (value) => {
@@ -189,7 +190,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
 const code = computed(() => {
   let code = `\`\`\`html
 <${name}`
-  for (const [key, value] of Object.entries(componentProps)) {
+  for (const [key, value] of Object.entries(fullProps.value)) {
     if (value === 'undefined' || value === null) {
       continue
     }
@@ -209,7 +210,7 @@ const code = computed(() => {
       code += `>
   ${props.code}</${name}>`
     } else {
-      code += `>${props.code}</${name}>`
+      code += `>${props.code.endsWith('>') ? `${props.code}\n` : props.code}</${name}>`
     }
   } else {
     code += ' />'
@@ -238,16 +239,27 @@ function renderObject (obj: any) {
 
 const shikiHighlighter = useShikiHighlighter({})
 const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
-const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`, () => transformContent('content:_markdown.md', code.value, {
-  markdown: {
-    highlight: {
-      highlighter: codeHighlighter,
-      theme: {
-        light: 'material-theme-lighter',
-        default: 'material-theme',
-        dark: 'material-theme-palenight'
-      }
+const { data: ast } = await useAsyncData(
+  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`,
+  async () => {
+    let formatted = ''
+    try {
+      formatted = await $prettier.format(code.value) || code.value
+    } catch (error) {
+      formatted = code.value
     }
-  }
-}), { watch: [code] })
+
+    return transformContent('content:_markdown.md', formatted, {
+      markdown: {
+        highlight: {
+          highlighter: codeHighlighter,
+          theme: {
+            light: 'material-theme-lighter',
+            default: 'material-theme',
+            dark: 'material-theme-palenight'
+          }
+        }
+      }
+    })
+  }, { watch: [code] })
 </script>
