@@ -152,13 +152,15 @@ export default defineComponent({
       default: undefined
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'update:sort'],
   setup (props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: upperFirst(key), sortable: false })))
 
     const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
+
+    const defaultSort = { column: sort.value.column, direction: null }
 
     const rows = computed(() => {
       if (!sort.value?.column) {
@@ -225,13 +227,15 @@ export default defineComponent({
         const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
 
         if (sort.value.direction === direction) {
-          sort.value = defu({}, props.sort, { column: null, direction: 'asc' })
+          sort.value = defu({}, defaultSort, { column: null, direction: 'asc' })
         } else {
           sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
         }
       } else {
         sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
+
+      emit('update:sort', sort.value)
     }
 
     function onSelect (row) {

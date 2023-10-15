@@ -6,7 +6,7 @@
       </TransitionChild>
 
       <div :class="ui.inner">
-        <div :class="[ui.container, ui.padding]">
+        <div :class="[ui.container, !fullscreen && ui.padding]">
           <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
             <HDialogPanel
               :class="[
