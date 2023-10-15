@@ -41,7 +41,7 @@
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
 
         <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
-          <ContentSlot :name="slot" />
+          <ContentSlot :name="slot" unwrap="p" />
         </template>
       </component>
     </div>
@@ -207,7 +207,7 @@ const code = computed(() => {
       code += `>
   ${props.code}</${name}>`
     } else {
-      code += `>${props.code} </${name}>`
+      code += `>${props.code.endsWith('>') ? `${props.code}\n` : props.code}</${name}>`
     }
   } else {
     code += ' />'

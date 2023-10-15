@@ -5,8 +5,9 @@
     </template>
 
     <template #error="{ error }">
-      <UAlert v-if="error" icon="i-heroicons-exclamation-triangle-20-solid" :title="error" color="red" />
-      <UAlert v-else icon="i-heroicons-check-circle-20-solid" title="Your email is valid" color="green" />
+      <span :class="[error ? 'text-red-500 dark:text-red-400' : 'text-primary-500 dark:text-primary-400']">
+        {{ error ? error : 'Your email is valid' }}
+      </span>
     </template>
   </UFormGroup>
 </template>
