@@ -71,8 +71,21 @@
       <MDC
         :value="pro.code"
         tag="pre"
-        class="prose prose-primary dark:prose-invert max-w-none -mt-5"
+        class="prose prose-primary dark:prose-invert max-w-none mt-10"
       />
     </ULandingHero>
   </UMain>
 </template>
+
+<script setup>
+const title = 'Nuxt UI Pro: The Building Blocks for Modern Web Apps'
+const description = 'Nuxt UI Pro is a collection of premium components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes. It includes all primitives to build landing pages, marketing pages, blogs, documentations or entire SaaS products.'
+
+useSeoMeta({
+  titleTemplate: '',
+  title: title,
+  ogTitle: `${title} - Nuxt UI`,
+  description: description,
+  ogDescription: description
+})
+</script>
