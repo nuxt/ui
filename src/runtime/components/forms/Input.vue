@@ -7,6 +7,11 @@
       :value="modelValue"
       :type="type"
       :required="required"
+      :autocomplete="autocomplete"
+      :form="form"
+      :tabindex="tabindex"
+      :maxlength="maxlength"
+      :minlength="minlength"
       :placeholder="placeholder"
       :disabled="disabled || loading"
       class="form-input"
@@ -88,6 +93,26 @@ export default defineComponent({
     autofocusDelay: {
       type: Number,
       default: 100
+    },
+    autocomplete: {
+      type: String,
+      default: 'on'
+    },
+    form: {
+      type: String,
+      default: null
+    },
+    tabindex: {
+      type: Number,
+      default: 0
+    },
+    maxlength: {
+      type: Number,
+      default: null
+    },
+    minlength: {
+      type: Number,
+      default: null
     },
     icon: {
       type: String,
