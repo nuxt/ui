@@ -2,9 +2,13 @@
   <div class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0">
     <div
       class="flex border border-gray-200 dark:border-gray-700 relative not-prose rounded-t-md"
-      :class="[{ 'p-4': padding, 'rounded-b-md': !hasCode, 'border-b-0': hasCode }, backgroundClass, overflowClass]"
+      :class="[{ 'p-4': padding, 'rounded-b-md': !hasCode, 'border-b-0': hasCode }, backgroundClass, extraClass]"
     >
-      <component :is="camelName" v-if="component" v-bind="componentProps" />
+      <template v-if="component">
+        <iframe v-if="iframe" :src="`/examples/${component}`" v-bind="iframeProps" :class="backgroundClass" class="w-full" />
+        <component :is="camelName" v-else v-bind="componentProps" />
+      </template>
+
       <ContentSlot v-if="$slots.default" :use="$slots.default" />
     </div>
     <template v-if="hasCode">
@@ -43,11 +47,19 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
+  iframe: {
+    type: Boolean,
+    default: false
+  },
+  iframeProps: {
+    type: Object,
+    default: () => ({})
+  },
   backgroundClass: {
     type: String,
     default: 'bg-white dark:bg-gray-900'
   },
-  overflowClass: {
+  extraClass: {
     type: String,
     default: ''
   }

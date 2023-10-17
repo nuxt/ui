@@ -30,8 +30,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      version: pkg.version,
-      uiProPath: process.env.NUXT_UI_PRO_PATH
+      version: pkg.version
     }
   },
   ui: {
@@ -104,7 +103,9 @@ export default defineNuxtConfig({
     // Related to https://github.com/nuxt/nuxt/pull/22558
     'components:extend': (components) => {
       components.forEach((component) => {
-        if (component.global) {
+        if (component.shortPath.includes(process.env.NUXT_UI_PRO_PATH || '@nuxt/ui-pro')) {
+          component.global = true
+        } else if (component.global) {
           component.global = 'sync'
         }
       })

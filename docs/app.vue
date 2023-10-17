@@ -42,10 +42,17 @@ const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', { defa
 // Computed
 
 const navigation = computed(() => {
-  const main = nav.value.filter(item => item._path !== '/dev')
-  const dev = nav.value.find(item => item._path === '/dev')?.children
+  if (branch.value?.name === 'dev') {
+    const dev = nav.value.find(item => item._path === '/dev')?.children
+    const pro = nav.value.find(item => item._path === '/pro')
 
-  return branch.value?.name === 'dev' ? dev : main
+    return [
+      pro,
+      ...dev
+    ]
+  }
+
+  return nav.value.filter(item => item._path !== '/dev')
 })
 
 const groups = computed(() => {
