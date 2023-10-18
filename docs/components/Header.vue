@@ -59,6 +59,10 @@ const links = computed(() => {
     icon: 'i-simple-icons-stackblitz',
     to: '/playground'
   }, {
+    label: 'Pro',
+    icon: 'i-heroicons-square-3-stack-3d',
+    to: '/pro'
+  }, {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch-solid',
     to: 'https://github.com/nuxt/ui/releases',
