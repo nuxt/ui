@@ -127,6 +127,9 @@ importers:
       '@iconify-json/heroicons':
         specifier: ^1.1.12
         version: 1.1.12
+      '@iconify-json/logos':
+        specifier: ^1.1.37
+        version: 1.1.37
       '@iconify-json/simple-icons':
         specifier: ^1.1.74
         version: 1.1.74
@@ -1118,6 +1121,12 @@ packages:
     dependencies:
       '@iconify/types': 2.0.0
 
+  /@iconify-json/logos@1.1.37:
+    resolution: {integrity: sha512-H2S8frTEznk6paX2kMzeUGn4KSiykghvO0b8UvEDd1fFFzt0WxCXpP1tBv67XaWK99e6JgA34hhv4lRGAm1hJg==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
   /@iconify-json/simple-icons@1.1.74:
     resolution: {integrity: sha512-KlDN8k/8LyWWe+i1ErGmMHWFbiAFvz1R8ifkXI05vHt0K3Z6Ce1uDZY20CbQVhbwIFStS0fVdJAlYhcL7MYvVg==}
     dependencies:
@@ -1236,7 +1245,7 @@ packages:
       npmlog: 5.0.1
       rimraf: 3.0.2
       semver: 7.5.4
-      tar: 6.1.15
+      tar: 6.2.0
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -3915,7 +3924,7 @@ packages:
       minipass-pipeline: 1.2.4
       p-map: 4.0.0
       ssri: 10.0.5
-      tar: 6.1.15
+      tar: 6.2.0
       unique-filename: 3.0.0
     dev: true
 

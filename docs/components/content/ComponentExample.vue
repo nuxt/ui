@@ -6,7 +6,7 @@
     >
       <template v-if="component">
         <iframe v-if="iframe" :src="`/examples/${component}`" v-bind="iframeProps" :class="backgroundClass" class="w-full" />
-        <component :is="camelName" v-else v-bind="componentProps" />
+        <component :is="camelName" v-else v-bind="componentProps" :class="componentClass" />
       </template>
 
       <ContentSlot v-if="$slots.default" :use="$slots.default" />
