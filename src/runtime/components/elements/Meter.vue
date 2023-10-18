@@ -176,7 +176,7 @@ export default defineComponent({
       labelClass,
       normalizedMin,
       normalizedMax,
-      percent,
+      percent
     }
   }
 })
