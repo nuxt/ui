@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass">
+  <div :class="wrapperClass" v-bind="attrs">
     <template v-if="$props.indicator || $slots.indicator">
       <slot name="indicator" v-bind="{ percent }">
         <div :class="indicatorContainerClass" :style="{ width: `${percent}%` }">
@@ -28,13 +28,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, toRef } from 'vue'
+import { computed, defineComponent, toRef } from 'vue'
 import type { PropType } from 'vue'
-import { mergeConfig } from '../../utils'
-import type { Strategy, MeterSize, MeterColors } from '../../types'
 import { twJoin, twMerge } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
-// TODO: Remove
+import { mergeConfig } from '../../utils'
+import type { Strategy, MeterColors, MeterSize } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { meter } from '#ui/ui.config'
@@ -42,6 +41,7 @@ import { meter } from '#ui/ui.config'
 const config = mergeConfig<typeof meter>(appConfig.ui.strategy, appConfig.ui.meter, meter)
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     value: {
       type: Number,
@@ -61,14 +61,13 @@ export default defineComponent({
     },
     label: {
       type: String,
-      required: false,
-      default: undefined
+      default: null
     },
     size: {
       type: String as PropType<MeterSize>,
       default: () => config.default.size,
       validator (value: string) {
-        return Object.keys(config.meter.bar.size).includes(value)
+        return Object.keys(config.meter.size).includes(value)
       }
     },
     color: {
@@ -88,7 +87,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui } = useUI('meter', toRef(props, 'ui'), config)
+    const { ui, attrs } = useUI('meter', toRef(props, 'ui'), config)
 
     function clampPercent (value: number, min: number, max: number): number {
       if (min == max) {
@@ -167,6 +166,7 @@ export default defineComponent({
     const percent = computed(() => clampPercent(Number(props.value), normalizedMin.value, normalizedMax.value))
 
     return {
+      attrs,
       wrapperClass,
       indicatorContainerClass,
       indicatorClass,
@@ -176,7 +176,7 @@ export default defineComponent({
       labelClass,
       normalizedMin,
       normalizedMax,
-      percent
+      percent,
     }
   }
 })

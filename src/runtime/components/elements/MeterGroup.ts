@@ -4,13 +4,12 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getSlotsChildren } from '../../utils'
 import type { Strategy, MeterColors, MeterSize } from '../../types'
-// TODO: Remove
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { meter, meterGroup } from '#ui/ui.config'
 
 const meterConfig = mergeConfig<typeof meter>(appConfig.ui.strategy, appConfig.ui.meter, meter)
-const config = mergeConfig<typeof meterGroup>(appConfig.ui.strategy, appConfig.ui.meterGroup, meterGroup)
+const meterGroupConfig = mergeConfig<typeof meterGroup>(appConfig.ui.strategy, appConfig.ui.meterGroup, meterGroup)
 
 export default defineComponent({
   inheritAttrs: false,
@@ -36,8 +35,7 @@ export default defineComponent({
     },
     label: {
       type: String,
-      required: false,
-      default: undefined
+      default: null
     },
     color: {
       type: String as PropType<MeterColors>,
@@ -51,13 +49,13 @@ export default defineComponent({
       default: undefined
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof meterGroupConfig & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props, { slots }) {
-    const { ui: meterUi } = useUI('meter', undefined, meterConfig)
-    const { ui } = useUI('meterGroup', toRef(props, 'ui'), config)
+      const { ui: meterGroupUi, attrs } = useUI('meterGroup', toRef(props, 'ui'), meterGroupConfig)
+      const { ui: meterUi } = useUI('meter', undefined, meterConfig)
 
     // If there is no children, throw an expressive error.
     if (!slots.default) {
@@ -83,7 +81,7 @@ export default defineComponent({
         'rounded-full': { left: 'rounded-s-full', right: 'rounded-e-full' }
       }
 
-      return roundedMap[ui.value.rounded]
+      return roundedMap[meterGroupUi.value.rounded]
     })
 
     function clampPercent (value: number, min: number, max: number): number {
@@ -115,7 +113,7 @@ export default defineComponent({
       vProps.ui.base = node.props?.ui?.base || ''
       vProps.ui.base += [
         node.props?.ui?.base,
-        props.ui?.meter?.background || ui.value.background,
+        props.ui?.meter?.background || meterGroupUi.value.background,
         'transition-all'
       ].filter(Boolean).join(' ')
 
@@ -147,16 +145,16 @@ export default defineComponent({
 
     const baseClass = computed(() => {
       return twMerge(twJoin(
-        ui.value.base
+        meterGroupUi.value.base
       ), props.class)
     })
 
     const wrapperClass = computed(() => {
       return twMerge(twJoin(
-        ui.value.wrapper,
-        ui.value.background,
-        ui.value.rounded,
-        ui.value.shadow,
+        meterGroupUi.value.wrapper,
+        meterGroupUi.value.background,
+        meterGroupUi.value.rounded,
+        meterGroupUi.value.shadow,
         meterUi.value.meter.size[props.size]
       ), props.class)
     })
@@ -208,6 +206,6 @@ export default defineComponent({
       return vNodeSlots
     })
 
-    return () => h('div', { class: baseClass.value }, vNodeChildren.value)
+    return () => h('div', { class: baseClass.value, ...attrs }, vNodeChildren.value)
   }
 })
