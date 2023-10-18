@@ -10,7 +10,7 @@ sections:
   - title: Everything you expect from a<br class="hidden lg:block"> <span class="text-primary">UI component library</span>
     slot: features
     class: 'dark:bg-gradient-to-b from-gray-900 to-gray-950/50 dark:lg:bg-none dark:lg:bg-gray-950/50'
-    features:
+    cards:
       - title: Color Palette
         description: 'Choose a primary and a gray color from your Tailwind CSS color palette. Components will be styled accordingly.'
         icon: i-heroicons-swatch

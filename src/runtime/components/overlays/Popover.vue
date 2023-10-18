@@ -1,5 +1,5 @@
 <template>
-  <HPopover ref="popover" v-slot="{ open, close }" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
+  <HPopover ref="popover" v-slot="{ open: headlessOpen, close }" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HPopoverButton
       ref="trigger"
       as="div"
@@ -8,17 +8,17 @@
       role="button"
       @mouseover="onMouseOver"
     >
-      <slot :open="open" :close="close">
+      <slot :open="(open !== undefined) ? open : headlessOpen" :close="close">
         <button :disabled="disabled">
           Open
         </button>
       </slot>
     </HPopoverButton>
 
-    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
+    <div v-if="(open !== undefined) ? open : headlessOpen" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
         <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
-          <slot name="panel" :open="open" :close="close" />
+          <slot name="panel" :open="(open !== undefined) ? open : headlessOpen" :close="close" />
         </HPopoverPanel>
       </Transition>
     </div>
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ref, onMounted, defineComponent } from 'vue'
+import { computed, ref, toRef, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel } from '@headlessui/vue'
@@ -53,6 +53,10 @@ export default defineComponent({
       default: 'click',
       validator: (value: string) => ['click', 'hover'].includes(value)
     },
+    open: {
+      type: Boolean,
+      default: undefined
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -69,13 +73,17 @@ export default defineComponent({
       type: Object as PropType<PopperOptions>,
       default: () => ({})
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('popover', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('popover', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 
@@ -99,8 +107,14 @@ export default defineComponent({
 
     const containerStyle = computed(() => {
       const offsetDistance = (props.popper as PopperOptions)?.offsetDistance || (ui.value.popper as PopperOptions)?.offsetDistance || 8
+      const padding = `${offsetDistance}px`
 
-      return props.mode === 'hover' ? { paddingTop: `${offsetDistance}px`, paddingBottom: `${offsetDistance}px` } : {}
+      return props.mode === 'hover' ? {
+        paddingTop: padding,
+        paddingBottom: padding,
+        paddingLeft: padding,
+        paddingRight: padding
+      } : {}
     })
 
     function onMouseOver () {

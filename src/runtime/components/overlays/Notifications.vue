@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UNotification from './Notification.vue'
@@ -39,13 +39,17 @@ export default defineComponent({
   },
   inheritAttrs: false,
   props: {
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs, attrsClass } = useUI('notifications', props.ui, config)
+    const { ui, attrs } = useUI('notifications', toRef(props, 'ui'), config)
 
     const toast = useToast()
     const notifications = useState<Notification[]>('notifications', () => [])
@@ -55,7 +59,7 @@ export default defineComponent({
         ui.value.wrapper,
         ui.value.position,
         ui.value.width
-      ), attrsClass)
+      ), props.class)
     })
 
     return {
