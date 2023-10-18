@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass" aria-live="assertive" v-bind="attrs">
+  <div :class="wrapperClass" role="region" v-bind="attrs">
     <div v-if="notifications.length" :class="ui.container">
       <div v-for="notification of notifications" :key="notification.id">
         <UNotification
