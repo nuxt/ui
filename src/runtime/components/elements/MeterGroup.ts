@@ -157,7 +157,7 @@ export default defineComponent({
         ui.value.background,
         ui.value.rounded,
         ui.value.shadow,
-        ui.value.size[props.size]
+        meterUi.value.meter.size[props.size]
       ), props.class)
     })
 

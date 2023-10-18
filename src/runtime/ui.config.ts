@@ -410,12 +410,12 @@ export const meter = {
       ring: '',
       rounded: '[&::-webkit-meter-optimum-value]:rounded-full [&::-moz-meter-bar]:rounded-full',
       size: {
-        xs: '[&::-webkit-meter-optimum-value]:h-1 [&::-moz-meter-bar]:h-px',
+        xs: '[&::-webkit-meter-optimum-value]:h-px [&::-moz-meter-bar]:h-px',
         sm: '[&::-webkit-meter-optimum-value]:h-1 [&::-moz-meter-bar]:h-1',
         md: '[&::-webkit-meter-optimum-value]:h-2 [&::-moz-meter-bar]:h-2',
         lg: '[&::-webkit-meter-optimum-value]:h-3 [&::-moz-meter-bar]:h-3',
-        xl: '[&::-webkit-meter-optimum-value]:h-3 [&::-moz-meter-bar]:h-4',
-        '2xl': '[&::-webkit-meter-optimum-value]:h-3 [&::-moz-meter-bar]:h-6'
+        xl: '[&::-webkit-meter-optimum-value]:h-4 [&::-moz-meter-bar]:h-4',
+        '2xl': '[&::-webkit-meter-optimum-value]:h-6 [&::-moz-meter-bar]:h-6'
       }
     }
   },
@@ -448,14 +448,6 @@ export const meterGroup = {
   background: 'bg-gray-200 dark:bg-gray-700',
   rounded: 'rounded-full',
   shadow: '',
-  size: {
-    xs: 'h-px',
-    sm: 'h-1',
-    md: 'h-2',
-    lg: 'h-3',
-    xl: 'h-4',
-    '2xl': 'h-6'
-  },
   default: {
     size: 'md'
   }
