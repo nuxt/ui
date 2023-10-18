@@ -1,6 +1,12 @@
 <template>
   <Transition appear v-bind="ui.transition">
-    <div :class="wrapperClass" v-bind="attrs" @mouseover="onMouseover" @mouseleave="onMouseleave">
+    <div
+      :class="wrapperClass"
+      role="status" 
+      v-bind="attrs"
+      @mouseover="onMouseover" 
+      @mouseleave="onMouseleave"
+    >
       <div :class="[ui.container, ui.rounded, ui.ring]">
         <div :class="ui.padding">
           <div class="flex gap-3" :class="{ 'items-start': description || $slots.description, 'items-center': !description && !$slots.description }">

@@ -18,7 +18,7 @@
     "node": ">=v16.20.2"
   },
   "scripts": {
-    "build": "nuxt-module-build",
+    "build": "nuxt-module-build build",
     "prepack": "pnpm build",
     "dev": "nuxi dev docs",
     "play": "nuxi dev playground",
@@ -26,7 +26,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit && nuxi typecheck docs",
-    "dev:prepare": "nuxt-module-build --stub && nuxt-module-build prepare && nuxi prepare docs",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare docs",
     "release": "release-it"
   },
   "dependencies": {
