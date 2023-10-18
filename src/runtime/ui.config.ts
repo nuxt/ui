@@ -431,6 +431,7 @@ export const progress = {
   },
   animation: {
     carousel: 'bar-animation-carousel',
+    'carousel-inverse': 'bar-animation-carousel-inverse',
     swing: 'bar-animation-swing',
     elastic: 'bar-animation-elastic'
   },

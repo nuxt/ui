@@ -247,6 +247,18 @@ progress:indeterminate {
     }
   }
 
+  &.bar-animation-carousel-inverse {
+    &:after {
+      animation: carousel-inverse 2s ease-in-out infinite;
+    }
+    &::-webkit-progress-value {
+      animation: carousel-inverse 2s ease-in-out infinite;
+    }
+    &::-moz-progress-bar {
+      animation: carousel-inverse 2s ease-in-out infinite;
+    }
+  }
+
   &.bar-animation-swing {
     &:after {
       animation: swing 3s ease-in-out infinite;
@@ -273,18 +285,26 @@ progress:indeterminate {
 }
 
 @keyframes carousel {
-  0%, 100% { width: 25% }
+  0%, 100% { width: 50% }
   0% { transform: translateX(-100%) }
-  100% { transform: translateX(400%) }
+  100% { transform: translateX(200%) }
+}
+
+@keyframes carousel-inverse {
+  0%, 100% { width: 50% }
+  0% { transform: translateX(200%) }
+  100% { transform: translateX(-100%) }
 }
 
 @keyframes swing {
-  0%, 100% { width: 50%; transform: translateX(-75%) }
-  50% { width: 50%; transform: translateX(175%) }
+  0%, 100% { width: 50% }
+  0%, 100% { transform: translateX(-25%) }
+  50% { transform: translateX(125%) }
 }
 
 @keyframes elastic {
-  0%, 100% { margin-left: 40%; width: 20% }
-  50% { margin-left: 2.5%; width: 90% }
+  /* Firefox doesn't do "margin: 0 auto", we have to play with margin-left */
+  0%, 100% { width: 50%; margin-left: 25%; }
+  50% { width: 90%; margin-left: 5% }
 }
 </style>
