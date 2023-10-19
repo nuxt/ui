@@ -71,7 +71,7 @@
       <MDC
         :value="pro.code"
         tag="pre"
-        class="prose prose-primary dark:prose-invert max-w-none mt-10"
+        class="prose prose-primary dark:prose-invert max-w-none -mt-6"
       />
     </ULandingHero>
   </UMain>
