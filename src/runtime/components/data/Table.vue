@@ -170,8 +170,8 @@ export default defineComponent({
       const { column, direction } = sort.value
 
       return props.rows.slice().sort((a, b) => {
-        const aValue = a[column]
-        const bValue = b[column]
+        const aValue = get(a, column)
+        const bValue = get(b, column)
 
         if (aValue === bValue) {
           return 0
