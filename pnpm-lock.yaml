@@ -140,8 +140,8 @@ importers:
         specifier: ^0.3.1
         version: 0.3.1(rollup@3.29.1)(vue@3.3.4)(webpack@5.88.2)
       '@nuxthq/studio':
-        specifier: ^0.14.1
-        version: 0.14.1(rollup@3.29.1)
+        specifier: ^1.0.2
+        version: 1.0.2(rollup@3.29.1)
       '@nuxtjs/fontaine':
         specifier: ^0.4.1
         version: 0.4.1(rollup@3.29.1)
@@ -1195,6 +1195,7 @@ packages:
   /@koa/router@9.4.0:
     resolution: {integrity: sha512-dOOXgzqaDoHu5qqMEPLKEgLz5CeIA7q8+1W62mCvFVCOqeC71UoTGJ4u1xUSOpIl2J1x2pqrNULkFteUeZW3/A==}
     engines: {node: '>= 8.0.0'}
+    deprecated: '**IMPORTANT 10x+ PERFORMANCE UPGRADE**: Please upgrade to v12.0.1+ as we have fixed an issue with debuglog causing 10x slower router benchmark performance, see https://github.com/koajs/router/pull/173'
     dependencies:
       debug: 4.3.4
       http-errors: 1.8.1
@@ -1233,7 +1234,7 @@ packages:
       npmlog: 5.0.1
       rimraf: 3.0.2
       semver: 7.5.4
-      tar: 6.1.15
+      tar: 6.2.0
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -1406,8 +1407,8 @@ packages:
       nuxt: ^3.7.3
       vite: '*'
     dependencies:
-      '@nuxt/kit': 3.7.4(rollup@3.29.1)
-      '@nuxt/schema': 3.7.4(rollup@3.29.1)
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
+      '@nuxt/schema': 3.8.0(rollup@3.29.1)
       execa: 7.2.0
       nuxt: 3.7.4(eslint@8.51.0)(rollup@3.29.1)(typescript@5.2.2)(vue-tsc@1.8.19)
       vite: 4.4.9
@@ -1506,7 +1507,7 @@ packages:
     engines: {node: ^14.18.0 || >=16.10.0}
     dependencies:
       '@nuxt/schema': 3.7.4(rollup@3.29.1)
-      c12: 1.4.2
+      c12: 1.5.1
       consola: 3.2.3
       defu: 6.1.2
       globby: 13.2.2
@@ -1521,7 +1522,7 @@ packages:
       semver: 7.5.4
       ufo: 1.3.1
       unctx: 2.3.1
-      unimport: 3.3.0(rollup@3.29.1)
+      unimport: 3.4.0(rollup@3.29.1)
       untyped: 1.4.0
     transitivePeerDependencies:
       - rollup
@@ -1601,7 +1602,7 @@ packages:
       postcss-import-resolver: 2.0.0
       std-env: 3.4.3
       ufo: 1.3.1
-      unimport: 3.3.0(rollup@3.29.1)
+      unimport: 3.4.0(rollup@3.29.1)
       untyped: 1.4.0
     transitivePeerDependencies:
       - rollup
@@ -1631,7 +1632,7 @@ packages:
     resolution: {integrity: sha512-7vZyOHfCAZg1PuCwy3B87MQOezW4pf8BC3gNDL92FW24BuLF0dl/BbFfxPeRxvjivuj5kkNM78x/qzNRCKfZgw==}
     hasBin: true
     dependencies:
-      '@nuxt/kit': 3.7.4(rollup@3.29.1)
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
       chalk: 5.3.0
       ci-info: 3.8.0
       consola: 3.2.3
@@ -1664,7 +1665,7 @@ packages:
       '@headlessui/tailwindcss': 0.2.0(tailwindcss@3.3.3)
       '@headlessui/vue': 1.7.16(vue@3.3.4)
       '@iconify-json/heroicons': 1.1.12
-      '@nuxt/kit': 3.7.4(rollup@3.29.1)
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
       '@nuxtjs/color-mode': 3.3.0(rollup@3.29.1)
       '@nuxtjs/tailwindcss': 6.8.0(rollup@3.29.1)(webpack@5.88.2)
       '@popperjs/core': 2.11.8
@@ -1797,10 +1798,10 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxthq/studio@0.14.1(rollup@3.29.1):
-    resolution: {integrity: sha512-9Pdkiph1D7AoWess+pcj4AOinTnpEKpB0F0zmcbZt05LZr1urEab6nvpWlhbaen5mtkqhXlWe6skbBrQVNv17w==}
+  /@nuxthq/studio@1.0.2(rollup@3.29.1):
+    resolution: {integrity: sha512-QoF6oYigr6IcHgNeQqAUBmCrSqnuPffoF9Tbg8cToF3oYU7WHkKgYCe+diICFdWuiH/SHTEfSm9kaone/Bp2gw==}
     dependencies:
-      '@nuxt/kit': 3.7.4(rollup@3.29.1)
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
       defu: 6.1.2
       nuxt-component-meta: 0.5.4(rollup@3.29.1)
       nuxt-config-schema: 0.4.6(rollup@3.29.1)
@@ -3463,6 +3464,7 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /agent-base@7.1.0:
     resolution: {integrity: sha512-o/zjMZRhJxny7OyEF+Op8X+efiELC7k7yOjMzgfzVqOzXqkBkWI79YoTdOtsuWd5BWhAGAuOY/Xa6xpiaWXiNg==}
@@ -3471,7 +3473,6 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /agentkeepalive@4.5.0:
     resolution: {integrity: sha512-5GG/5IbQQpC9FpkRGsSvZI5QYeSCzlJHdpBQntCsuTOxhKD8lqKhrleg2Yi7yvMIf82Ycmmqln9U8V9qwEiJew==}
@@ -3929,7 +3930,7 @@ packages:
       chokidar: 3.5.3
       defu: 6.1.2
       dotenv: 16.3.1
-      giget: 1.1.2
+      giget: 1.1.3
       jiti: 1.20.0
       mlly: 1.4.2
       ohash: 1.1.3
@@ -3939,6 +3940,7 @@ packages:
       rc9: 2.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /c12@1.5.1:
     resolution: {integrity: sha512-BWZRJgDEveT8uI+cliCwvYSSSSvb4xKoiiu5S0jaDbKBopQLQF7E+bq9xKk1pTcG+mUa3yXuFO7bD9d8Lr9Xxg==}
@@ -3956,7 +3958,6 @@ packages:
       rc9: 2.1.1
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /cac@6.7.14:
     resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
@@ -3977,7 +3978,7 @@ packages:
       minipass-pipeline: 1.2.4
       p-map: 4.0.0
       ssri: 10.0.5
-      tar: 6.1.15
+      tar: 6.2.0
       unique-filename: 3.0.0
     dev: true
 
@@ -3995,7 +3996,7 @@ packages:
       minipass-pipeline: 1.2.4
       p-map: 4.0.0
       ssri: 10.0.5
-      tar: 6.1.15
+      tar: 6.2.0
       unique-filename: 3.0.0
     dev: true
 
@@ -5908,20 +5909,6 @@ packages:
       - supports-color
     dev: true
 
-  /giget@1.1.2:
-    resolution: {integrity: sha512-HsLoS07HiQ5oqvObOI+Qb2tyZH4Gj5nYGfF9qQcZNrPw+uEFhdXtgJr01aO2pWadGHucajYDLxxbtQkm97ON2A==}
-    hasBin: true
-    dependencies:
-      colorette: 2.0.20
-      defu: 6.1.2
-      https-proxy-agent: 5.0.1
-      mri: 1.2.0
-      node-fetch-native: 1.4.0
-      pathe: 1.1.1
-      tar: 6.1.15
-    transitivePeerDependencies:
-      - supports-color
-
   /giget@1.1.3:
     resolution: {integrity: sha512-zHuCeqtfgqgDwvXlR84UNgnJDuUHQcNI5OqWqFxxuk2BshuKbYhJWdxBsEo4PvKqoGh23lUAIvBNpChMLv7/9Q==}
     hasBin: true
@@ -5935,7 +5922,6 @@ packages:
       tar: 6.2.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /git-config-path@2.0.0:
     resolution: {integrity: sha512-qc8h1KIQbJpp+241id3GuAtkdyJ+IK+LIVtkiFTRKRrmddDzs3SI9CvP1QYmWBFvm1I/PWRwj//of8bgAc0ltA==}
@@ -6506,6 +6492,7 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /https-proxy-agent@7.0.2:
     resolution: {integrity: sha512-NmLNjm6ucYwtcUmL7JQC1ZQ57LmHP4lT15FQ8D61nak1rO6DH+fz5qNK2Ap5UN4ZapYICE3/0KodcLYSPsPbaA==}
@@ -6515,7 +6502,6 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /httpxy@0.1.4:
     resolution: {integrity: sha512-ArXKNWhU5taozl6fFnu01M9HiInAqSOw4mUp+7DY/zbTHPmS8JBqH0IC3VLovRBd9b8ZE03ztemcxzeWT6pCoA==}
@@ -8537,7 +8523,7 @@ packages:
       '@types/http-proxy': 1.17.11
       '@vercel/nft': 0.23.1
       archiver: 6.0.1
-      c12: 1.4.2
+      c12: 1.5.1
       chalk: 5.3.0
       chokidar: 3.5.3
       citty: 0.1.4
@@ -8584,7 +8570,7 @@ packages:
       uncrypto: 0.1.3
       unctx: 2.3.1
       unenv: 1.7.4
-      unimport: 3.3.0(rollup@3.29.1)
+      unimport: 3.4.0(rollup@3.29.1)
       unstorage: 1.9.0
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -8668,7 +8654,7 @@ packages:
       npmlog: 6.0.2
       rimraf: 3.0.2
       semver: 7.5.4
-      tar: 6.1.15
+      tar: 6.2.0
       which: 2.0.2
     transitivePeerDependencies:
       - supports-color
@@ -8846,7 +8832,7 @@ packages:
   /nuxt-config-schema@0.4.6(rollup@3.29.1):
     resolution: {integrity: sha512-kHLWJFynj5QrxVZ1MjY2xmDaTSN1BCMLGExA+hMMLoCb3wn9TJlDVqnE/nSdUJPMRkNn/NQ5WP9NLA9vlAXRUw==}
     dependencies:
-      '@nuxt/kit': 3.7.4(rollup@3.29.1)
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
       defu: 6.1.2
       jiti: 1.20.0
       pathe: 1.1.1
@@ -8860,7 +8846,7 @@ packages:
     resolution: {integrity: sha512-ND4yh8kW4VyIbORP3cWjgVrOAvy6QSDFDTJltakdqmxVfVysNIs/bx2NzlkHeR1EOS8E/jVcemfTPmRsJ7WUVw==}
     dependencies:
       '@iconify/vue': 4.1.1(vue@3.3.4)
-      '@nuxt/kit': 3.7.4(rollup@3.29.1)
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -8916,8 +8902,8 @@ packages:
   /nuxt-site-config-kit@1.5.4(rollup@3.29.1)(vue@3.3.4):
     resolution: {integrity: sha512-anTcPXIb5/1S7BP9nce3BU/UgbX38A6mofZ0c+cvni4O512GOx07SWJCpq9GXlS5qInEbg8f5azIEupTD+d+iQ==}
     dependencies:
-      '@nuxt/kit': 3.7.4(rollup@3.29.1)
-      '@nuxt/schema': 3.7.4(rollup@3.29.1)
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
+      '@nuxt/schema': 3.8.0(rollup@3.29.1)
       pkg-types: 1.0.3
       site-config-stack: 1.5.4(vue@3.3.4)
       std-env: 3.4.3
@@ -8931,8 +8917,8 @@ packages:
   /nuxt-site-config@1.5.4(rollup@3.29.1)(vue@3.3.4):
     resolution: {integrity: sha512-u6N1D+2iAul5fHL0heeMMdvaa/TIqUXA9eNhwbGibc9Tiw+cOals4bFdQYFp6PXcRZrQC81dX27p87qgOa5q+g==}
     dependencies:
-      '@nuxt/kit': 3.7.4(rollup@3.29.1)
-      '@nuxt/schema': 3.7.4(rollup@3.29.1)
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
+      '@nuxt/schema': 3.8.0(rollup@3.29.1)
       nuxt-site-config-kit: 1.5.4(rollup@3.29.1)(vue@3.3.4)
       pathe: 1.1.1
       site-config-stack: 1.5.4(vue@3.3.4)
@@ -9306,7 +9292,7 @@ packages:
       read-package-json-fast: 3.0.2
       sigstore: 2.1.0
       ssri: 10.0.5
-      tar: 6.1.15
+      tar: 6.2.0
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -11216,17 +11202,6 @@ packages:
       streamx: 2.15.1
     dev: true
 
-  /tar@6.1.15:
-    resolution: {integrity: sha512-/zKt9UyngnxIT/EAGYuxaMYgOIJiP81ab9ZfkILq4oNLPFX50qyYmu7jRj9qeXoxmJHjGlbH0+cm2uy1WCs10A==}
-    engines: {node: '>=10'}
-    dependencies:
-      chownr: 2.0.0
-      fs-minipass: 2.1.0
-      minipass: 5.0.0
-      minizlib: 2.1.2
-      mkdirp: 1.0.4
-      yallist: 4.0.0
-
   /tar@6.2.0:
     resolution: {integrity: sha512-/Wo7DcT0u5HUV486xg675HtjNd3BXZ6xDbzsCUZPt5iw8bTQ63bP0Raut3mvro9u+CUyq7YQd8Cx55fsZXxqLQ==}
     engines: {node: '>=10'}
@@ -11237,7 +11212,6 @@ packages:
       minizlib: 2.1.2
       mkdirp: 1.0.4
       yallist: 4.0.0
-    dev: true
 
   /terminate@2.6.1:
     resolution: {integrity: sha512-0kdr49oam98yvjkVY+gfUaT3SMaJI6Sc+yijJjU+qhat+0NQKQn60OsIZZeKyVgTO0/33nRa3HowRbpw3A7u9A==}
@@ -11690,6 +11664,7 @@ packages:
       unplugin: 1.5.0
     transitivePeerDependencies:
       - rollup
+    dev: true
 
   /unimport@3.4.0(rollup@3.29.1):
     resolution: {integrity: sha512-M/lfFEgufIT156QAr/jWHLUn55kEmxBBiQsMxvRSIbquwmeJEyQYgshHDEvQDWlSJrVOOTAgnJ3FvlsrpGkanA==}
@@ -11707,7 +11682,6 @@ packages:
       unplugin: 1.5.0
     transitivePeerDependencies:
       - rollup
-    dev: true
 
   /unique-filename@3.0.0:
     resolution: {integrity: sha512-afXhuC55wkAmZ0P18QsVE6kp8JaxrEokN2HGIoIVv2ijHQd419H0+6EigAFcIzXeMIkcIkNBpB3L/DXB3cTS/g==}
