@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperClass" v-bind="attrs">
     <template v-if="$props.indicator || $slots.indicator">
-      <slot name="indicator" v-bind="{ percent }">
+      <slot name="indicator" v-bind="{ percent, value: $props.value }">
         <div :class="indicatorContainerClass" :style="{ width: `${percent}%` }">
           <div :class="indicatorClass">
             {{ Math.round(percent) }}%
@@ -18,9 +18,9 @@
     />
 
     <template v-if="$props.label || $slots.label">
-      <slot name="label" v-bind="{ percent }">
+      <slot name="label" v-bind="{ percent, value: $props.value }">
         <div :class="labelClass">
-          {{ label }}
+          <UIcon v-if="$props.icon" :name="$props.icon" /> {{ label }}
         </div>
       </slot>
     </template>
@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, toRef } from 'vue'
-import type { PropType } from 'vue'
+import type { SlotsType, PropType } from 'vue'
 import { twJoin, twMerge } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
@@ -42,6 +42,10 @@ const config = mergeConfig<typeof meter>(appConfig.ui.strategy, appConfig.ui.met
 
 export default defineComponent({
   inheritAttrs: false,
+  slots: Object as SlotsType<{
+    indicator?: { percent: number, value: number },
+    label?: { percent: number, value: number },
+  }>,
   props: {
     value: {
       type: Number,
@@ -76,6 +80,10 @@ export default defineComponent({
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
+    },
+    icon: {
+      type: String,
+      default: null
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
@@ -155,6 +163,7 @@ export default defineComponent({
     const labelClass = computed(() => {
       return twMerge(twJoin(
         ui.value.label.base,
+        ui.value.label.text,
         ui.value.color[props.color] ?? ui.value.label.color.replaceAll('{color}', props.color),
         ui.value.label.size[props.size]
       ))

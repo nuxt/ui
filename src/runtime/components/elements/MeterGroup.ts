@@ -1,18 +1,27 @@
-import { h, cloneVNode, computed, ref, toRef, defineComponent } from 'vue'
-import type { PropType } from 'vue'
+import { h, cloneVNode, computed, toRef, defineComponent } from 'vue'
+import type { ComputedRef, VNode, SlotsType, PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getSlotsChildren } from '../../utils'
-import type { Strategy, MeterColors, MeterSize } from '../../types'
+import type { Strategy, MeterSize } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { meter, meterGroup } from '#ui/ui.config'
+import type Meter from './Meter.vue'
+import UIcon from './Icon.vue'
 
 const meterConfig = mergeConfig<typeof meter>(appConfig.ui.strategy, appConfig.ui.meter, meter)
 const meterGroupConfig = mergeConfig<typeof meterGroup>(appConfig.ui.strategy, appConfig.ui.meterGroup, meterGroup)
 
 export default defineComponent({
+  components: {
+    UIcon
+  },
   inheritAttrs: false,
+  slots: Object as SlotsType<{
+    default?: typeof Meter[],
+    indicator?: { percent: number },
+  }>,
   props: {
     min: {
       type: Number,
@@ -43,8 +52,8 @@ export default defineComponent({
     }
   },
   setup (props, { slots }) {
-      const { ui: meterGroupUi, attrs } = useUI('meterGroup', toRef(props, 'ui'), meterGroupConfig)
-      const { ui: meterUi } = useUI('meter', undefined, meterConfig)
+    const { ui: meterGroupUi, attrs } = useUI('meterGroup', toRef(props, 'ui'), meterGroupConfig)
+    const { ui: meterUi } = useUI('meter', undefined, meterConfig)
 
     // If there is no children, throw an expressive error.
     if (!slots.default) {
@@ -88,12 +97,22 @@ export default defineComponent({
     }
 
     // We have to store the labels outside to preserve reactivity later.
-    const labels = ref([])
+    const labels = computed(() => {
+      return children.value.map(node => node.props.label)
+    })
 
-    const clones = computed(() => children.value.map((node, index) => {
+    const percents = computed(() => {
+      return children.value.map(node => clampPercent(node.props.value, props.min, props.max))
+    })
+
+    const percent = computed(() => {
+      return Math.max(0, Math.max(percents.value.reduce((prev, percent) => prev + percent, 0)))
+    })
+
+    const clones: ComputedRef<VNode> = computed(() => children.value.map((node, index) => {
       const vProps: any = {}
 
-      vProps.style = { width: `${clampPercent(node.props.value, props.min, props.max)}%` }
+      vProps.style = { width: `${percents.value[index]}%` }
 
       // Normalize the props to be the same on all groups
       vProps.size = props.size
@@ -102,11 +121,11 @@ export default defineComponent({
 
       // Adjust the style of all meters, so they appear in a row.
       vProps.ui = node.props?.ui || {}
-      vProps.ui.base = node.props?.ui?.base || ''
-      vProps.ui.base += [
-        node.props?.ui?.base,
+      vProps.ui.wrapper = node.props?.ui?.wrapper || ''
+      vProps.ui.wrapper += [
+        node.props?.ui?.wrapper,
         props.ui?.meter?.background || meterGroupUi.value.background,
-        'transition-all'
+        meterGroupUi.value.transition
       ].filter(Boolean).join(' ')
 
       // Override the background to make the bar appear "full"
@@ -124,17 +143,16 @@ export default defineComponent({
       }
 
       // Move the labels out of the node so these can be checked later
-      labels.value.push({
-        has: Boolean(node.slots?.label || node.props.label),
-        isSlot: Boolean(node.slots?.label),
-        label: node.slots?.label ?? node.props.label
-      })
+      labels.value[index] = node.props.label
 
-      delete(node.slots)
-      delete(node.props.indicator)
-      delete(node.props.label)
+      const clone = cloneVNode(node, vProps)
 
-      return cloneVNode(node, vProps)
+      // @ts-expect-error
+      delete(clone.children?.label)
+      delete(clone.props.indicator)
+      delete(clone.props.label)
+
+      return clone
     }))
 
     const baseClass = computed(() => {
@@ -166,13 +184,6 @@ export default defineComponent({
       ))
     })
 
-    const percent = computed(() => {
-      return Math.max(0, Math.max(clones.value.reduce((prev, node) => {
-          return prev + clampPercent(node.props.value, props.min, props.max)
-        }, 0)
-      ))
-    })
-
     const vNodeChildren = computed(() => {
       const vNodeSlots = [
         undefined,
@@ -181,29 +192,28 @@ export default defineComponent({
       ]
 
       if (props.indicator) {
-        vNodeSlots[0] = h('div', { class: indicatorContainerClass.value },
+        vNodeSlots[0] = h('div', { class: indicatorContainerClass.value }, [
           h('div', { class: indicatorClass.value, style: { width: `${percent.value}%` } }, Math.round(percent.value) + '%')
-        )
+        ])
       } else if (slots.indicator) {
-        vNodeSlots[0] = h(slots.indicator({ percent }))
+        // @ts-expect-error
+        vNodeSlots[0] = slots.indicator({ percent: percent.value })
       }
 
       vNodeSlots[2] = h('ol', { class: 'list-disc list-inside' }, labels.value.map((label, key) => {
-        if (label.has) {
-          if (label.isSlot) {
-            return h('li', label.label({ percent }))
-          }
+        const labelClass = computed(() => {
+          return twMerge(twJoin(
+            meterUi.value.label.base,
+            meterUi.value.label.text,
+            meterUi.value.color[clones.value[key]?.props.color] ?? meterUi.value.label.color.replaceAll('{color}', clones.value[key]?.props.color ?? meterUi.value.default.color),
+            meterUi.value.label.size[props.size]
+          ))
+        })
 
-          const labelClass = computed(() => {
-            return twMerge(twJoin(
-              meterUi.value.label.base,
-              meterUi.value.color[clones.value[key].props.color] ?? meterUi.value.label.color.replaceAll('{color}', clones.value[key].props.color),
-              meterUi.value.label.size[props.size]
-            ))
-          })
-
-          return h('li', { class: labelClass.value }, label.label)
-        }
+        return h('li', { class: labelClass.value }, [
+          h(UIcon, { name: clones.value[key]?.props.icon ?? meterGroupUi.value.listIcon }),
+          `${label} (${ Math.round(percents.value[key]) }%)`
+        ])
       }))
 
       return vNodeSlots

@@ -420,7 +420,8 @@ export const meter = {
     }
   },
   label: {
-    base: 'truncate',
+    base: 'flex gap-2 items-center',
+    text: 'truncate',
     color: 'text-{color}-500',
     size: {
       xs: 'text-xs',
@@ -446,7 +447,9 @@ export const meterGroup = {
   base: 'flex flex-col gap-2 w-full',
   wrapper: 'flex flex-row flex-nowrap flex-shrink overflow-hidden',
   background: 'bg-gray-200 dark:bg-gray-700',
+  transition: 'transition-all',
   rounded: 'rounded-full',
+  listIcon: 'i-heroicons-minus',
   shadow: '',
   default: {
     size: 'md'
