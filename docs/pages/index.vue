@@ -1,7 +1,11 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
-    <ULandingHero v-bind="page.hero" :ui="{ base: 'relative z-[1]', container: 'max-w-3xl' }" class="mb-[calc(var(--header-height)*2)]">
+    <ULandingHero :ui="{ base: 'relative z-[1]', container: 'max-w-4xl' }" class="mb-[calc(var(--header-height)*2)]">
+      <template #headline>
+        <UButton v-bind="page.hero?.cta" />
+      </template>
+
       <template #title>
         <span v-html="page.hero?.title" />
       </template>
