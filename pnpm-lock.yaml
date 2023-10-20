@@ -143,8 +143,8 @@ importers:
         specifier: ^0.3.1
         version: 0.3.1(rollup@3.29.1)(vue@3.3.4)(webpack@5.89.0)
       '@nuxthq/studio':
-        specifier: ^0.14.1
-        version: 0.14.1(rollup@3.29.1)
+        specifier: ^1.0.2
+        version: 1.0.2(rollup@3.29.1)
       '@nuxtjs/fontaine':
         specifier: ^0.4.1
         version: 0.4.1(rollup@3.29.1)
@@ -1838,10 +1838,10 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxthq/studio@0.14.1(rollup@3.29.1):
-    resolution: {integrity: sha512-9Pdkiph1D7AoWess+pcj4AOinTnpEKpB0F0zmcbZt05LZr1urEab6nvpWlhbaen5mtkqhXlWe6skbBrQVNv17w==}
+  /@nuxthq/studio@1.0.2(rollup@3.29.1):
+    resolution: {integrity: sha512-QoF6oYigr6IcHgNeQqAUBmCrSqnuPffoF9Tbg8cToF3oYU7WHkKgYCe+diICFdWuiH/SHTEfSm9kaone/Bp2gw==}
     dependencies:
-      '@nuxt/kit': 3.7.4(rollup@3.29.1)
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
       defu: 6.1.2
       nuxt-component-meta: 0.5.4(rollup@3.29.1)
       nuxt-config-schema: 0.4.6(rollup@3.29.1)
@@ -8912,7 +8912,7 @@ packages:
   /nuxt-config-schema@0.4.6(rollup@3.29.1):
     resolution: {integrity: sha512-kHLWJFynj5QrxVZ1MjY2xmDaTSN1BCMLGExA+hMMLoCb3wn9TJlDVqnE/nSdUJPMRkNn/NQ5WP9NLA9vlAXRUw==}
     dependencies:
-      '@nuxt/kit': 3.7.4(rollup@3.29.1)
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
       defu: 6.1.2
       jiti: 1.20.0
       pathe: 1.1.1
