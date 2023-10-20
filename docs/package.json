@@ -11,7 +11,7 @@
     "@nuxt/devtools": "^0.8.5",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/ui-pro": "^0.3.1",
-    "@nuxthq/studio": "^0.14.1",
+    "@nuxthq/studio": "^1.0.2",
     "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/google-fonts": "^3.0.2",
     "@nuxtjs/plausible": "^0.2.3",
