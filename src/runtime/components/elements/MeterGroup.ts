@@ -1,4 +1,4 @@
-import { h, cloneVNode, computed, toRef, defineComponent } from 'vue'
+import { h, cloneVNode, computed, ref, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
@@ -32,17 +32,6 @@ export default defineComponent({
     indicator: {
       type: Boolean,
       default: false
-    },
-    label: {
-      type: String,
-      default: null
-    },
-    color: {
-      type: String as PropType<MeterColors>,
-      default: () => meterConfig.default.color,
-      validator (value: string) {
-        return [...appConfig.ui.colors, ...Object.keys(meterConfig.color)].includes(value)
-      }
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
@@ -98,6 +87,9 @@ export default defineComponent({
       return Math.max(0, Math.min(100, percent))
     }
 
+    // We have to store the labels outside to preserve reactivity later.
+    const labels = ref([])
+
     const clones = computed(() => children.value.map((node, index) => {
       const vProps: any = {}
 
@@ -131,17 +123,19 @@ export default defineComponent({
         vProps.ui.meter.rounded = `${rounded.value.right} rounded-s-none`
       }
 
-      // Normalize all the bars without labels or indicators
-      delete(vProps.slots?.indicator)
-      delete(vProps.slots?.label)
-      delete(vProps.indicator)
-      delete(vProps.label)
+      // Move the labels out of the node so these can be checked later
+      labels.value.push({
+        has: Boolean(node.slots?.label || node.props.label),
+        isSlot: Boolean(node.slots?.label),
+        label: node.slots?.label ?? node.props.label
+      })
+
+      delete(node.slots)
+      delete(node.props.indicator)
+      delete(node.props.label)
 
       return cloneVNode(node, vProps)
     }))
-
-    // Get the computed value of the sum of all meters.
-    const value = computed(() => clones.value.reduce((prev, node) => prev + node.props.value, 0))
 
     const baseClass = computed(() => {
       return twMerge(twJoin(
@@ -172,15 +166,12 @@ export default defineComponent({
       ))
     })
 
-    const labelClass = computed(() => {
-      return twMerge(twJoin(
-        meterUi.value.label.base,
-        meterUi.value.color[props.color] ?? meterUi.value.label.color.replaceAll('{color}', props.color),
-        meterUi.value.label.size[props.size]
+    const percent = computed(() => {
+      return Math.max(0, Math.max(clones.value.reduce((prev, node) => {
+          return prev + clampPercent(node.props.value, props.min, props.max)
+        }, 0)
       ))
     })
-
-    const percent = computed(() => clampPercent(Number(value.value), normalizedMin.value, normalizedMax.value))
 
     const vNodeChildren = computed(() => {
       const vNodeSlots = [
@@ -197,11 +188,23 @@ export default defineComponent({
         vNodeSlots[0] = h(slots.indicator({ percent }))
       }
 
-      if (props.label) {
-        vNodeSlots[2] = h('div', { class: labelClass.value }, props.label)
-      } else if (slots.label) {
-        vNodeSlots[2] = h(slots.label({ percent }))
-      }
+      vNodeSlots[2] = h('ol', { class: 'list-disc list-inside' }, labels.value.map((label, key) => {
+        if (label.has) {
+          if (label.isSlot) {
+            return h('li', label.label({ percent }))
+          }
+
+          const labelClass = computed(() => {
+            return twMerge(twJoin(
+              meterUi.value.label.base,
+              meterUi.value.color[clones.value[key].props.color] ?? meterUi.value.label.color.replaceAll('{color}', clones.value[key].props.color),
+              meterUi.value.label.size[props.size]
+            ))
+          })
+
+          return h('li', { class: labelClass.value }, label.label)
+        }
+      }))
 
       return vNodeSlots
     })

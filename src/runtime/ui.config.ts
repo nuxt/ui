@@ -444,7 +444,7 @@ export const meter = {
 
 export const meterGroup = {
   base: 'flex flex-col gap-2 w-full',
-  wrapper: 'flex flex-row flex-nowrap flex-shrink',
+  wrapper: 'flex flex-row flex-nowrap flex-shrink overflow-hidden',
   background: 'bg-gray-200 dark:bg-gray-700',
   rounded: 'rounded-full',
   shadow: '',
