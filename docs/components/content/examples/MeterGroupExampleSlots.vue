@@ -3,7 +3,7 @@
     <template #indicator>
       <div class="flex flex-row gap-2 justify-between">
         <div>86GB used</div>
-        <div>42GB remaining</div>
+        <div class="text-gray-500">42GB remaining</div>
       </div>
     </template>
 

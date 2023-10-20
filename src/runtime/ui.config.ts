@@ -449,7 +449,6 @@ export const meterGroup = {
   background: 'bg-gray-200 dark:bg-gray-700',
   transition: 'transition-all',
   rounded: 'rounded-full',
-  listIcon: 'i-heroicons-minus',
   shadow: '',
   default: {
     size: 'md'

@@ -42,6 +42,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    listIcon: {
+      type: String,
+      default: 'i-heroicons-minus'
+    },
     class: {
       type: [String, Object, Array] as PropType<any>,
       default: undefined
@@ -211,7 +215,7 @@ export default defineComponent({
         })
 
         return h('li', { class: labelClass.value }, [
-          h(UIcon, { name: clones.value[key]?.props.icon ?? meterGroupUi.value.listIcon }),
+          h(UIcon, { name: clones.value[key]?.props.icon ?? props.listIcon }),
           `${label} (${ Math.round(percents.value[key]) }%)`
         ])
       }))
