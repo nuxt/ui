@@ -1,6 +1,9 @@
 <template>
   <Field v-bind="prop">
     <code v-if="prop.default">{{ prop.default }}</code>
+    <p v-if="prop.description">
+      {{ prop.description }}
+    </p>
 
     <Collapsible v-if="prop.schema?.kind === 'array' && prop.schema?.schema?.filter(schema => schema.kind === 'object').length">
       <FieldGroup v-for="schema in prop.schema.schema" :key="schema.name" class="!mt-0">
