@@ -3,7 +3,17 @@
   <div>
     <ULandingHero :ui="{ base: 'relative z-[1]', container: 'max-w-4xl' }" class="mb-[calc(var(--header-height)*2)]">
       <template #headline>
-        <UButton v-bind="page.hero?.cta" />
+        <UBadge variant="subtle" size="md" class="hover:bg-primary-100 dark:hover:bg-primary-900/50 transition-color relative font-semibold">
+          <NuxtLink :to="`https://github.com/nuxt/ui/releases/tag/v${config.version}`" target="_blank" class="focus:outline-none" tabindex="-1">
+            <span class="absolute inset-0" aria-hidden="true" />
+          </NuxtLink>
+
+          <span class="flex items-center gap-1">
+            v{{ config.version }}
+
+            <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 pointer-events-none" />
+          </span>
+        </UBadge>
       </template>
 
       <template #title>
@@ -203,6 +213,7 @@ const { data: module } = await useFetch<{
 
 const source = ref('npm i @nuxt/ui')
 
+const config = useRuntimeConfig().public
 const { copy, copied } = useClipboard({ source })
 const breakpoints = useBreakpoints(breakpointsTailwind)
 

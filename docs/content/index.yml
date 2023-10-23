@@ -4,15 +4,6 @@ description: 'It provides everything related to UI when building your Nuxt app. 
 hero:
   title: 'A <span class="text-primary">UI Library</span> for<br class="hidden lg:block"> Modern Web Apps'
   description: 'Nuxt UI simplifies the creation of stunning and responsive web applications with its<br class="hidden lg:block"> comprehensive collection of fully styled and customizable UI components designed for Nuxt.'
-  cta:
-    label: ✨ v2.9.0
-    to: https://github.com/nuxt/ui/releases/tag/v2.9.0
-    target: _blank
-    variant: outline
-    icon: i-heroicons-arrow-right
-    size: xs
-    trailing: true
-    class: 'text-sm font-semibold rounded-full'
 sections:
   - slot: demo
     class: 'hidden lg:block dark:bg-gradient-to-b from-gray-900 to-gray-950/50 !pt-12'
