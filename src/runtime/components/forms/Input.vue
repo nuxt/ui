@@ -184,7 +184,7 @@ export default defineComponent({
         value = value.trim()
       }
 
-      if (props.modelModifiers.number) {
+      if (props.modelModifiers.number || props.type === 'number') {
         value = looseToNumber(value)
       }
 
