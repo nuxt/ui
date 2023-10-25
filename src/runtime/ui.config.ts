@@ -321,6 +321,7 @@ export const alert = {
   description: 'mt-1 text-sm leading-4 opacity-90',
   shadow: '',
   rounded: 'rounded-lg',
+  gap: 'gap-3',
   padding: 'p-3',
   icon: {
     base: 'flex-shrink-0 w-5 h-5'

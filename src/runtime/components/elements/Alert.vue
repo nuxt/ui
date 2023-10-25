@@ -1,6 +1,6 @@
 <template>
   <div :class="alertClass" v-bind="attrs">
-    <div class="flex gap-3" :class="{ 'items-start': (description || $slots.description), 'items-center': !description && !$slots.description }">
+    <div class="flex" :class="[ui.gap, { 'items-start': (description || $slots.description), 'items-center': !description && !$slots.description }]">
       <UIcon v-if="icon" :name="icon" :class="ui.icon.base" />
       <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
 
