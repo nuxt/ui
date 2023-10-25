@@ -1,13 +1,12 @@
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
 import defaultColors from 'tailwindcss/colors.js'
 import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/defaultExtractor.js'
-import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons'
+import { iconsPlugin, getIconCollections, type CollectionNames } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
 import createTemplates from './templates'
 import * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types/utils'
-import type { CollectionNames } from '@egoist/tailwindcss-icons'
 
 const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
@@ -78,6 +77,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
 
+    // @ts-ignore
     nuxt.hook('tailwindcss:config', function (tailwindConfig) {
       const globalColors: any = {
         ...(tailwindConfig.theme.colors || defaultColors),
