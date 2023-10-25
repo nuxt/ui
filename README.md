@@ -71,6 +71,15 @@ Visit https://ui.nuxt.com to explore the documentation.
 - [vueuse/vueuse](https://github.com/vueuse/vueuse)
 - [egoist/tailwindcss-icons](https://github.com/egoist/tailwindcss-icons)
 
+## Development
+
+- Clone this repository.
+- Enable [Corepack](https://github.com/nodejs/corepack) using `corepack enable`.
+- Install dependencies using `pnpm install`.
+- Run `pnpm dev:prepare` to generate type stubs.
+- Use `pnpm play` to start [playground](https://github.com/nuxt/ui/tree/main/playground) in development mode.
+- Use `pnpm dev` to start [docs](https://github.com/nuxt/ui/tree/main/docs) in development mode.
+
 ## License
 
 Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md).
