@@ -52,7 +52,7 @@
 
     <slot name="last" :on-click="onClickLast">
       <UButton
-        v-if="firstButton && showLast"
+        v-if="lastButton && showLast"
         :size="size"
         :disabled="!canGoLastOrNext"
         :class="[ui.base, ui.rounded]"
