@@ -7,6 +7,7 @@ import { generateSafelist, excludeColors, customSafelistExtractor } from './colo
 import createTemplates from './templates'
 import * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types/utils'
+import type { CollectionNames } from '@egoist/tailwindcss-icons'
 
 const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
@@ -46,7 +47,7 @@ export interface ModuleOptions {
    */
   global?: boolean
 
-  icons: string[] | string
+  icons: CollectionNames[] | 'all'
 
   safelistColors?: string[]
 }
@@ -141,6 +142,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Modules
 
+    await installModule('nuxt-icon')
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
       exposeConfig: true,
