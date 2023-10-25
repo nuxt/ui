@@ -1,8 +1,7 @@
 import { avatar } from '../ui.config'
 import colors from '#ui-colors'
-import type { AppConfig } from 'nuxt/schema'
 
-export type AvatarSize = keyof typeof avatar.size | keyof AppConfig['ui']['avatar']['size']
+export type AvatarSize = keyof typeof avatar.size
 export type AvatarChipColor = 'gray' | typeof colors[number]
 export type AvatarChipPosition = keyof typeof avatar.chip.position
 
