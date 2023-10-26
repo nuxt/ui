@@ -8,12 +8,13 @@ import offset from '@popperjs/core/lib/modifiers/offset'
 import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow'
 import computeStyles from '@popperjs/core/lib/modifiers/computeStyles'
 import eventListeners from '@popperjs/core/lib/modifiers/eventListeners'
+import arrowModifier from '@popperjs/core/lib/modifiers/arrow'
 import { unrefElement } from '@vueuse/core'
 import type { MaybeElement } from '@vueuse/core'
 import type { PopperOptions } from '../types/popper'
 
 export const createPopper = popperGenerator({
-  defaultModifiers: [...defaultModifiers, offset, flip, preventOverflow, computeStyles, eventListeners]
+  defaultModifiers: [...defaultModifiers, offset, flip, preventOverflow, computeStyles, eventListeners, arrowModifier]
 })
 
 export function usePopper ({
@@ -25,6 +26,7 @@ export function usePopper ({
   adaptive = true,
   scroll = true,
   resize = true,
+  arrow = false,
   placement,
   strategy
 }: PopperOptions, virtualReference?: Ref<Element | VirtualElement>) {
@@ -75,6 +77,10 @@ export function usePopper ({
               scroll,
               resize
             }
+          },
+          {
+            name: 'arrow',
+            enabled: arrow
           }
         ]
       }
