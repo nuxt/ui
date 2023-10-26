@@ -861,6 +861,16 @@ export const pagination = {
     inactiveButton: {
       color: 'white'
     },
+    firstButton: {
+      color: 'white',
+      class: 'rtl:[&_span:first-child]:rotate-180',
+      icon: 'i-heroicons-chevron-double-left-20-solid'
+    },
+    lastButton: {
+      color: 'white',
+      class: 'rtl:[&_span:last-child]:rotate-180',
+      icon: 'i-heroicons-chevron-double-right-20-solid'
+    },
     prevButton: {
       color: 'white',
       class: 'rtl:[&_span:first-child]:rotate-180',
