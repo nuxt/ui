@@ -6,6 +6,9 @@
 
     <div v-if="open && !prevent" ref="container" :class="[ui.container, ui.width]">
       <Transition appear v-bind="ui.transition">
+        <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(ui.arrow)]" />
+      </Transition>
+      <Transition appear v-bind="ui.transition">
         <div :class="[ui.base, ui.background, ui.color, ui.rounded, ui.shadow, ui.ring]">
           <slot name="text">
             {{ text }}
@@ -127,6 +130,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      popper,
       trigger,
       container,
       open,
