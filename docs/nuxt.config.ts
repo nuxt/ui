@@ -88,7 +88,18 @@ export default defineNuxtConfig({
     }
   },
   componentMeta: {
-    exclude: ['@nuxtjs/mdc', resolve('./components')],
+    exclude: [
+      '@nuxt/content',
+      '@nuxt/ui-templates',
+      '@nuxtjs/color-mode',
+      '@nuxtjs/mdc',
+      'nuxt/dist',
+      'nuxt-og-image',
+      'nuxt-site-config',
+      '.c12',
+      resolve('./components'),
+      process.env.NUXT_UI_PRO_PATH && resolve(process.env.NUXT_UI_PRO_PATH, '.docs', 'components')
+    ].filter(Boolean),
     metaFields: {
       props: true,
       slots: true,
