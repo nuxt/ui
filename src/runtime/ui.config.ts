@@ -1,5 +1,14 @@
 // Data
 
+const _popperArrowPresets = {
+  base: 'before:w-2 before:h-2',
+  ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-800',
+  rounded: 'before:rounded-sm',
+  background: 'before:bg-white dark:before:bg-gray-900',
+  shadow: 'before:shadow',
+  placement: 'group-data-[popper-placement*="right"]:-left-1 group-data-[popper-placement*="left"]:-right-1 group-data-[popper-placement*="top"]:-bottom-1 group-data-[popper-placement*="bottom"]:-top-1'
+}
+
 export const table = {
   wrapper: 'relative overflow-x-auto',
   base: 'min-w-full table-fixed',
@@ -250,7 +259,7 @@ export const buttonGroup = {
 
 export const dropdown = {
   wrapper: 'relative inline-flex text-left rtl:text-right',
-  container: 'z-20',
+  container: 'z-20 group',
   width: 'w-48',
   height: '',
   background: 'bg-white dark:bg-gray-800',
@@ -291,7 +300,8 @@ export const dropdown = {
   popper: {
     placement: 'bottom-end',
     strategy: 'fixed'
-  }
+  },
+  arrow: _popperArrowPresets
 }
 
 export const accordion = {
@@ -525,7 +535,7 @@ export const select = {
 }
 
 export const selectMenu = {
-  container: 'z-20',
+  container: 'z-20 group',
   width: 'w-full',
   height: 'max-h-60',
   base: 'relative focus:outline-none overflow-y-auto scroll-py-1',
@@ -576,7 +586,8 @@ export const selectMenu = {
   },
   default: {
     selectedIcon: 'i-heroicons-check-20-solid'
-  }
+  },
+  arrow: _popperArrowPresets
 }
 
 export const radio = {
@@ -1009,25 +1020,18 @@ export const tooltip = {
   popper: {
     strategy: 'fixed'
   },
-  arrow: {
-    base: 'before:w-2 before:h-2',
-    ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-800',
-    rounded: 'before:rounded-sm',
-    background: 'before:bg-white dark:before:bg-gray-900',
-    shadow: 'before:shadow',
-    placement: 'group-data-[popper-placement=right]:-left-1 group-data-[popper-placement=left]:-right-1 group-data-[popper-placement=top]:-bottom-1 group-data-[popper-placement=bottom]:-top-1'
-  }
+  arrow: _popperArrowPresets
 }
 
 export const popover = {
   wrapper: 'relative',
-  container: 'z-20',
+  container: 'z-20 group',
   width: '',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  base: 'overflow-hidden focus:outline-none',
+  base: 'overflow-hidden focus:outline-none relative',
   // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
@@ -1039,18 +1043,19 @@ export const popover = {
   },
   popper: {
     strategy: 'fixed'
-  }
+  },
+  arrow: _popperArrowPresets
 }
 
 export const contextMenu = {
   wrapper: 'relative',
-  container: 'z-20',
+  container: 'z-20 group',
   width: '',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  base: 'overflow-hidden focus:outline-none',
+  base: 'overflow-hidden focus:outline-none relative',
   // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
@@ -1063,7 +1068,8 @@ export const contextMenu = {
   popper: {
     placement: 'bottom-start',
     scroll: false
-  }
+  },
+  arrow: _popperArrowPresets
 }
 
 export const notification = {
