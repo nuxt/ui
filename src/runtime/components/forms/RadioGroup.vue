@@ -79,6 +79,10 @@ export default defineComponent({
         return appConfig.ui.colors.includes(value)
       }
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -86,7 +90,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('radioGroup', toRef(props, 'ui'), config)
+    const { ui, attrs } = useUI('radioGroup', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const { emitFormChange, color, name } = useFormGroup(props, config)
     provide('radio-group', { color, name })
