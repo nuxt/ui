@@ -401,7 +401,8 @@ export const progress = {
       sm: 'text-sm',
       md: 'text-sm',
       lg: 'text-sm',
-      xl: 'text-base'
+      xl: 'text-base',
+      '2xl': 'text-base'
     }
   },
   progress: {
@@ -435,7 +436,8 @@ export const progress = {
       sm: 'text-sm',
       md: 'text-sm',
       lg: 'text-sm',
-      xl: 'text-base'
+      xl: 'text-base',
+      '2xl': 'text-base'
     }
   },
   step: {
