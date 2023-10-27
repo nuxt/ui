@@ -17,9 +17,12 @@
 
     <div v-if="(open !== undefined) ? open : headlessOpen" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
-        <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
-          <slot name="panel" :open="(open !== undefined) ? open : headlessOpen" :close="close" />
-        </HPopoverPanel>
+        <div>
+          <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(ui.arrow)]" />
+          <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
+            <slot name="panel" :open="(open !== undefined) ? open : headlessOpen" :close="close" />
+          </HPopoverPanel>
+        </div>
       </Transition>
     </div>
   </HPopover>
@@ -162,6 +165,8 @@ export default defineComponent({
       ui,
       attrs,
       popover,
+      // eslint-disable-next-line vue/no-dupe-keys
+      popper,
       trigger,
       container,
       containerStyle,

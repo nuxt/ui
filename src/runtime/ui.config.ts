@@ -1,3 +1,12 @@
+const _popperArrow = {
+  base: 'before:w-2 before:h-2',
+  ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-800',
+  rounded: 'before:rounded-sm',
+  background: 'before:bg-gray-200 dark:before:bg-gray-800',
+  shadow: 'before:shadow',
+  placement: 'group-data-[popper-placement*="right"]:-left-1 group-data-[popper-placement*="left"]:-right-1 group-data-[popper-placement*="top"]:-bottom-1 group-data-[popper-placement*="bottom"]:-top-1'
+}
+
 // Data
 
 export const table = {
@@ -250,7 +259,7 @@ export const buttonGroup = {
 
 export const dropdown = {
   wrapper: 'relative inline-flex text-left rtl:text-right',
-  container: 'z-20',
+  container: 'z-20 group',
   width: 'w-48',
   height: '',
   background: 'bg-white dark:bg-gray-800',
@@ -291,6 +300,11 @@ export const dropdown = {
   popper: {
     placement: 'bottom-end',
     strategy: 'fixed'
+  },
+  arrow: {
+    ..._popperArrow,
+    ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
+    background: 'before:bg-white dark:before:bg-gray-700'
   }
 }
 
@@ -367,6 +381,170 @@ export const kbd = {
   ring: 'ring-1 ring-gray-300 dark:ring-gray-700 ring-inset',
   default: {
     size: 'sm'
+  }
+}
+
+export const progress = {
+  wrapper: 'w-full flex flex-col gap-2',
+  indicator: {
+    container: {
+      base: 'flex flex-row justify-end',
+      width: 'min-w-fit',
+      transition: 'transition-all'
+    },
+    align: 'text-end',
+    width: 'w-fit',
+    color: 'text-gray-400 dark:text-gray-500',
+    size: {
+      '2xs': 'text-xs',
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-sm',
+      lg: 'text-sm',
+      xl: 'text-base',
+      '2xl': 'text-base'
+    }
+  },
+  progress: {
+    base: 'block appearance-none border-none overflow-hidden',
+    width: 'w-full [&::-webkit-progress-bar]:w-full',
+    size: {
+      '2xs': 'h-px',
+      xs: 'h-0.5',
+      sm: 'h-1',
+      md: 'h-2',
+      lg: 'h-3',
+      xl: 'h-4',
+      '2xl': 'h-5'
+    },
+    rounded: 'rounded-full [&::-webkit-progress-bar]:rounded-full',
+    track: '[&::-webkit-progress-bar]:bg-gray-200 [&::-webkit-progress-bar]:dark:bg-gray-700 [@supports(selector(&::-moz-progress-bar))]:bg-gray-200 [@supports(selector(&::-moz-progress-bar))]:dark:bg-gray-700',
+    bar: '[&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:transition-all [&::-webkit-progress-value]:ease-in-out [&::-moz-progress-bar]:rounded-full',
+    color: 'text-{color}-500 dark:text-{color}-400',
+    background: '[&::-webkit-progress-value]:bg-current [&::-moz-progress-bar]:bg-current',
+    indeterminate: {
+      base: 'indeterminate:relative',
+      rounded: 'indeterminate:after:rounded-full [&:indeterminate::-webkit-progress-value]:rounded-full [&:indeterminate::-moz-progress-bar]:rounded-full'
+    }
+  },
+  steps: {
+    base: 'grid grid-cols-1',
+    color: 'text-{color}-500 dark:text-{color}-400',
+    size: {
+      '2xs': 'text-xs',
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-sm',
+      lg: 'text-sm',
+      xl: 'text-base',
+      '2xl': 'text-base'
+    }
+  },
+  step: {
+    base: 'transition-all opacity-0 truncate row-start-1 col-start-1',
+    align: 'text-end',
+    active: 'opacity-100',
+    first: 'text-gray-500 dark:text-gray-400'
+  },
+  animation: {
+    carousel: 'bar-animation-carousel',
+    'carousel-inverse': 'bar-animation-carousel-inverse',
+    swing: 'bar-animation-swing',
+    elastic: 'bar-animation-elastic'
+  },
+  default: {
+    color: 'primary',
+    size: 'md',
+    animation: 'carousel'
+  }
+}
+
+export const meter = {
+  wrapper: 'w-full flex flex-col gap-2',
+  indicator: {
+    container: 'min-w-fit transition-all',
+    text: 'text-gray-400 dark:text-gray-500 text-end',
+    size: {
+      '2xs': 'text-xs',
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-sm',
+      lg: 'text-sm',
+      xl: 'text-base',
+      '2xl': 'text-base'
+    }
+  },
+  meter: {
+    base: 'appearance-none block w-full bg-none overflow-y-hidden',
+    background: 'bg-gray-200 dark:bg-gray-700',
+    color: 'text-{color}-500 dark:text-{color}-400',
+    ring: '',
+    rounded: 'rounded-full',
+    shadow: '',
+    size: {
+      '2xs': 'h-px',
+      xs: 'h-0.5',
+      sm: 'h-1',
+      md: 'h-2',
+      lg: 'h-3',
+      xl: 'h-4',
+      '2xl': 'h-5'
+    },
+    appearance: {
+      inner: '[&::-webkit-meter-inner-element]:block [&::-webkit-meter-inner-element]:relative [&::-webkit-meter-inner-element]:border-none [&::-webkit-meter-inner-element]:bg-none [&::-webkit-meter-inner-element]:bg-transparent',
+      meter: '[&::-webkit-meter-bar]:border-none [&::-webkit-meter-bar]:bg-none [&::-webkit-meter-bar]:bg-transparent',
+      bar: '[&::-webkit-meter-optimum-value]:border-none [&::-webkit-meter-optimum-value]:bg-none [&::-webkit-meter-optimum-value]:bg-current',
+      value: '[&::-moz-meter-bar]:border-none [&::-moz-meter-bar]:bg-none [&::-moz-meter-bar]:bg-current'
+    },
+    bar: {
+      transition: '[&::-webkit-meter-optimum-value]:transition-all [&::-moz-meter-bar]:transition-all',
+      ring: '',
+      rounded: '[&::-webkit-meter-optimum-value]:rounded-full [&::-moz-meter-bar]:rounded-full',
+      size: {
+        '2xs': '[&::-webkit-meter-optimum-value]:h-px [&::-moz-meter-bar]:h-px',
+        xs: '[&::-webkit-meter-optimum-value]:h-0.5 [&::-moz-meter-bar]:h-0.5',
+        sm: '[&::-webkit-meter-optimum-value]:h-1 [&::-moz-meter-bar]:h-1',
+        md: '[&::-webkit-meter-optimum-value]:h-2 [&::-moz-meter-bar]:h-2',
+        lg: '[&::-webkit-meter-optimum-value]:h-3 [&::-moz-meter-bar]:h-3',
+        xl: '[&::-webkit-meter-optimum-value]:h-4 [&::-moz-meter-bar]:h-4',
+        '2xl': '[&::-webkit-meter-optimum-value]:h-5 [&::-moz-meter-bar]:h-5'
+      }
+    }
+  },
+  label: {
+    base: 'flex gap-2 items-center',
+    text: 'truncate',
+    color: 'text-{color}-500 dark:text-{color}-400',
+    size: {
+      '2xs': 'text-xs',
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-sm',
+      lg: 'text-sm',
+      xl: 'text-base',
+      '2xl': 'text-base'
+    }
+  },
+  color: {
+    white: 'text-white dark:text-black',
+    black: 'text-black dark:text-white',
+    gray: 'text-gray-500 dark:text-gray-400'
+  },
+  default: {
+    size: 'md',
+    color: 'primary'
+  }
+}
+
+export const meterGroup = {
+  base: 'flex flex-col gap-2 w-full',
+  wrapper: 'flex flex-row flex-nowrap flex-shrink overflow-hidden',
+  background: 'bg-gray-200 dark:bg-gray-700',
+  transition: 'transition-all',
+  rounded: 'rounded-full',
+  shadow: '',
+  default: {
+    size: 'md'
   }
 }
 
@@ -525,7 +703,7 @@ export const select = {
 }
 
 export const selectMenu = {
-  container: 'z-20',
+  container: 'z-20 group',
   width: 'w-full',
   height: 'max-h-60',
   base: 'relative focus:outline-none overflow-y-auto scroll-py-1',
@@ -576,6 +754,19 @@ export const selectMenu = {
   },
   default: {
     selectedIcon: 'i-heroicons-check-20-solid'
+  },
+  arrow: {
+    ..._popperArrow,
+    ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
+    background: 'before:bg-white dark:before:bg-gray-700'
+  }
+}
+
+export const radioGroup = {
+  wrapper: 'relative flex items-start',
+  legend: 'text-sm font-medium text-gray-700 dark:text-gray-200 mb-1',
+  default: {
+    color: 'primary'
   }
 }
 
@@ -646,9 +837,13 @@ export const range = {
     rounded: 'rounded-s-lg',
     background: 'bg-{color}-500 dark:bg-{color}-400',
     size: {
+      '2xs': 'h-px',
+      xs: 'h-0.5',
       sm: 'h-1',
       md: 'h-2',
-      lg: 'h-3'
+      lg: 'h-3',
+      xl: 'h-4',
+      '2xl': 'h-5'
     }
   },
   thumb: {
@@ -657,9 +852,13 @@ export const range = {
     background: '[&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:dark:bg-gray-900 [&::-moz-range-thumb]:bg-current',
     ring: '[&::-webkit-slider-thumb]:ring-2 [&::-webkit-slider-thumb]:ring-current',
     size: {
+      '2xs': '[&::-webkit-slider-thumb]:h-1.5 [&::-moz-range-thumb]:h-1.5 [&::-webkit-slider-thumb]:w-1.5 [&::-moz-range-thumb]:w-1.5 [&::-webkit-slider-thumb]:mt-[-2.5px] [&::-moz-range-thumb]:mt-[-2.5px]',
+      xs: '[&::-webkit-slider-thumb]:h-2 [&::-moz-range-thumb]:h-2 [&::-webkit-slider-thumb]:w-2 [&::-moz-range-thumb]:w-2 [&::-webkit-slider-thumb]:mt-[-3px] [&::-moz-range-thumb]:mt-[-3px]',
       sm: '[&::-webkit-slider-thumb]:h-3 [&::-moz-range-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-moz-range-thumb]:w-3 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1',
       md: '[&::-webkit-slider-thumb]:h-4 [&::-moz-range-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-moz-range-thumb]:w-4 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1',
-      lg: '[&::-webkit-slider-thumb]:h-5 [&::-moz-range-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-moz-range-thumb]:w-5 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1'
+      lg: '[&::-webkit-slider-thumb]:h-5 [&::-moz-range-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-moz-range-thumb]:w-5 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1',
+      xl: '[&::-webkit-slider-thumb]:h-6 [&::-moz-range-thumb]:h-6 [&::-webkit-slider-thumb]:w-6 [&::-moz-range-thumb]:w-6 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1',
+      '2xl': '[&::-webkit-slider-thumb]:h-7 [&::-moz-range-thumb]:h-7 [&::-webkit-slider-thumb]:w-7 [&::-moz-range-thumb]:w-7 [&::-webkit-slider-thumb]:-mt-1 [&::-moz-range-thumb]:-mt-1'
     }
   },
   track: {
@@ -667,15 +866,23 @@ export const range = {
     background: '[&::-webkit-slider-runnable-track]:bg-gray-200 [&::-moz-range-track]:bg-gray-200 [&::-webkit-slider-runnable-track]:dark:bg-gray-700 [&::-moz-range-track]:dark:bg-gray-700',
     rounded: '[&::-webkit-slider-runnable-track]:rounded-lg [&::-moz-range-track]:rounded-lg',
     size: {
+      '2xs': '[&::-webkit-slider-runnable-track]:h-px [&::-moz-range-track]:h-px',
+      xs: '[&::-webkit-slider-runnable-track]:h-0.5 [&::-moz-range-track]:h-0.5',
       sm: '[&::-webkit-slider-runnable-track]:h-1 [&::-moz-range-track]:h-1',
       md: '[&::-webkit-slider-runnable-track]:h-2 [&::-moz-range-track]:h-2',
-      lg: '[&::-webkit-slider-runnable-track]:h-3 [&::-moz-range-track]:h-3'
+      lg: '[&::-webkit-slider-runnable-track]:h-3 [&::-moz-range-track]:h-3',
+      xl: '[&::-webkit-slider-runnable-track]:h-4 [&::-moz-range-track]:h-4',
+      '2xl': '[&::-webkit-slider-runnable-track]:h-5 [&::-moz-range-track]:h-5'
     }
   },
   size: {
+    '2xs': 'h-1.5',
+    xs: 'h-2',
     sm: 'h-3',
     md: 'h-4',
-    lg: 'h-5'
+    lg: 'h-5',
+    xl: 'h-6',
+    '2xl': 'h-7'
   },
   default: {
     size: 'md',
@@ -1009,25 +1216,18 @@ export const tooltip = {
   popper: {
     strategy: 'fixed'
   },
-  arrow: {
-    base: 'before:w-2 before:h-2',
-    ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-800',
-    rounded: 'before:rounded-sm',
-    background: 'before:bg-white dark:before:bg-gray-900',
-    shadow: 'before:shadow',
-    placement: 'group-data-[popper-placement=right]:-left-1 group-data-[popper-placement=left]:-right-1 group-data-[popper-placement=top]:-bottom-1 group-data-[popper-placement=bottom]:-top-1'
-  }
+  arrow: _popperArrow
 }
 
 export const popover = {
   wrapper: 'relative',
-  container: 'z-20',
+  container: 'z-20 group',
   width: '',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  base: 'overflow-hidden focus:outline-none',
+  base: 'overflow-hidden focus:outline-none relative',
   // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
@@ -1039,18 +1239,19 @@ export const popover = {
   },
   popper: {
     strategy: 'fixed'
-  }
+  },
+  arrow: _popperArrow
 }
 
 export const contextMenu = {
   wrapper: 'relative',
-  container: 'z-20',
+  container: 'z-20 group',
   width: '',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-md',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  base: 'overflow-hidden focus:outline-none',
+  base: 'overflow-hidden focus:outline-none relative',
   // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
     enterActiveClass: 'transition ease-out duration-200',
@@ -1063,7 +1264,8 @@ export const contextMenu = {
   popper: {
     placement: 'bottom-start',
     scroll: false
-  }
+  },
+  arrow: _popperArrow
 }
 
 export const notification = {
