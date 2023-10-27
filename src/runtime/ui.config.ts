@@ -408,12 +408,13 @@ export const progress = {
     base: 'block appearance-none border-none overflow-hidden',
     width: 'w-full [&::-webkit-progress-bar]:w-full',
     size: {
-      xs: 'h-px',
+      '2xs': 'h-px',
+      xs: 'h-0.5',
       sm: 'h-1',
       md: 'h-2',
       lg: 'h-3',
       xl: 'h-4',
-      '2xl': 'h-6'
+      '2xl': 'h-5'
     },
     rounded: 'rounded-full [&::-webkit-progress-bar]:rounded-full',
     track: '[&::-webkit-progress-bar]:bg-gray-200 [&::-webkit-progress-bar]:dark:bg-gray-700 [@supports(selector(&::-moz-progress-bar))]:bg-gray-200 [@supports(selector(&::-moz-progress-bar))]:dark:bg-gray-700',
