@@ -171,6 +171,12 @@ const safelistByComponent = {
     pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
     variants: ['focus-visible']
   }],
+  progress: (colorsAsRegex) => [{
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }],
   notification: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
