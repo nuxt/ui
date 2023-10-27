@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass">
+  <div :class="ui.wrapper" v-bind="attrs">
     <slot v-if="indicator || $slots.indicator" name="indicator" v-bind="{ percent }">
       <div v-if="!isSteps" :class="indicatorContainerClass" :style="{ width: `${percent}%` }">
         <div :class="indicatorClass">
@@ -14,7 +14,7 @@
 
     <div v-if="isSteps" :class="stepsClass">
       <div v-for="(step, index) in max" :key="index" :class="stepClasses(index)">
-        <slot :name="`${index}-step`" v-bind="{ step }">
+        <slot :name="`step-${index}`" v-bind="{ step }">
           {{ step }}
         </slot>
       </div>
@@ -23,18 +23,20 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, toRef } from 'vue'
+import { computed, defineComponent, toRef } from 'vue'
+import type { PropType } from 'vue'
+import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import { twMerge, twJoin } from 'tailwind-merge'
+import type { Strategy, ProgressSize, ProgressAnimation } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { progress } from '#ui/ui.config'
-import type { Strategy, ProgressSize, ProgressAnimation } from '../../types'
 
 const config = mergeConfig<typeof progress>(appConfig.ui.strategy, appConfig.ui.progress, progress)
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     value: {
       type: [Number, null, undefined],
@@ -55,10 +57,6 @@ export default defineComponent({
         return Object.keys(config.animation).includes(value)
       }
     },
-    class: {
-      type: [String, Object, Array] as PropType<any>,
-      default: undefined
-    },
     size: {
       type: String as PropType<ProgressSize>,
       default: () => config.default.size,
@@ -73,35 +71,33 @@ export default defineComponent({
         return appConfig.ui.colors.includes(value)
       }
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui } = useUI('progress', toRef(props, 'ui'), config, toRef(props, 'class'))
-
-    const wrapperClass = computed(() => {
-      return twMerge(twJoin(
-        ui.value.wrapper
-      ), props.class)
-    })
+    const { ui, attrs } = useUI('progress', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const indicatorContainerClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(
         ui.value.indicator.container.base,
         ui.value.indicator.container.width,
         ui.value.indicator.container.transition
-      ))
+      )
     })
 
     const indicatorClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(
         ui.value.indicator.align,
         ui.value.indicator.width,
         ui.value.indicator.color,
         ui.value.indicator.size[props.size]
-      ))
+      )
     })
 
     const progressClass = computed(() => {
@@ -113,7 +109,7 @@ export default defineComponent({
         ui.value.progress.track,
         ui.value.progress.bar,
         // Intermediate class to allow thumb ring or background color (set to `current`) as it's impossible to safelist with arbitrary values
-        ui.value.progress.color.replaceAll('{color}', props.color),
+        ui.value.progress.color?.replaceAll('{color}', props.color),
         ui.value.progress.background,
         ui.value.progress.indeterminate.base,
         ui.value.progress.indeterminate.rounded
@@ -123,34 +119,34 @@ export default defineComponent({
         classes.push(ui.value.animation[props.animation])
       }
 
-      return twMerge(twJoin(...classes))
+      return twJoin(...classes)
     })
 
     const stepsClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(
         ui.value.steps.base,
-        ui.value.steps.color.replaceAll('{color}', props.color),
+        ui.value.steps.color?.replaceAll('{color}', props.color),
         ui.value.steps.size[props.size]
-      ))
+      )
     })
 
     const stepClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(
         ui.value.step.base,
         ui.value.step.align
-      ))
+      )
     })
 
     const stepActiveClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(
         ui.value.step.active
-      ))
+      )
     })
 
     const stepFirstClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(
         ui.value.step.first
-      ))
+      )
     })
 
     function isActive (index: number) {
@@ -201,7 +197,9 @@ export default defineComponent({
     })
 
     return {
-      wrapperClass,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      attrs,
       indicatorContainerClass,
       indicatorClass,
       progressClass,

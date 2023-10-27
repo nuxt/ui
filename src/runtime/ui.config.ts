@@ -380,14 +380,14 @@ export const progress = {
     },
     align: 'text-end',
     width: 'w-fit',
-    color: 'text-gray-500',
+    color: 'text-gray-400 dark:text-gray-500',
     size: {
+      '2xs': 'text-xs',
       xs: 'text-xs',
       sm: 'text-sm',
-      md: 'text-md',
-      lg: 'text-lg',
-      xl: 'text-xl',
-      '2xl': 'text-2xl'
+      md: 'text-sm',
+      lg: 'text-sm',
+      xl: 'text-base'
     }
   },
   progress: {
@@ -404,7 +404,7 @@ export const progress = {
     rounded: 'rounded-full [&::-webkit-progress-bar]:rounded-full',
     track: '[&::-webkit-progress-bar]:bg-gray-200 [&::-webkit-progress-bar]:dark:bg-gray-700 [@supports(selector(&::-moz-progress-bar))]:bg-gray-200 [@supports(selector(&::-moz-progress-bar))]:dark:bg-gray-700',
     bar: '[&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:transition-all [&::-webkit-progress-value]:ease-in-out [&::-moz-progress-bar]:rounded-full',
-    color: 'text-{color}-500',
+    color: 'text-{color}-500 dark:text-{color}-400',
     background: '[&::-webkit-progress-value]:bg-current [&::-moz-progress-bar]:bg-current',
     indeterminate: {
       base: 'indeterminate:relative',
@@ -413,14 +413,14 @@ export const progress = {
   },
   steps: {
     base: 'grid grid-cols-1',
-    color: 'text-{color}-500',
+    color: 'text-{color}-500 dark:text-{color}-400',
     size: {
+      '2xs': 'text-xs',
       xs: 'text-xs',
       sm: 'text-sm',
-      md: 'text-md',
-      lg: 'text-lg',
-      xl: 'text-xl',
-      '2xl': 'text-2xl'
+      md: 'text-sm',
+      lg: 'text-sm',
+      xl: 'text-base'
     }
   },
   step: {

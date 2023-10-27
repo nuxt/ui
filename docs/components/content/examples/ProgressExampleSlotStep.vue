@@ -10,21 +10,21 @@ const steps = [
 
 <template>
   <UProgress :value="task" :max="steps" indicator>
-    <template #0-step="{ step }">
+    <template #step-0="{ step }">
       <span class="text-lime-500">
-        <UIcon name="i-heroicons-circle-arrow-down-on-square-stack" /> {{ step }}
+        <UIcon name="i-heroicons-arrow-down-circle" /> {{ step }}
       </span>
     </template>
 
-    <template #1-step="{ step }">
+    <template #step-1="{ step }">
       <span class="text-amber-500">
         <UIcon name="i-heroicons-circle-stack" /> {{ step }}
       </span>
     </template>
 
-    <template #2-step="{ step }">
+    <template #step-2="{ step }">
       <span class="text-blue-500">
-        <UIcon name="i-heroicons-circle-hand-thumb-up" /> {{ step }}
+        <UIcon name="i-heroicons-hand-thumb-up" /> {{ step }}
       </span>
     </template>
   </UProgress>
