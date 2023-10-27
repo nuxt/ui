@@ -1,6 +1,4 @@
-// Data
-
-const _popperArrowPresets = {
+const _popperArrow = {
   base: 'before:w-2 before:h-2',
   ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-800',
   rounded: 'before:rounded-sm',
@@ -8,6 +6,8 @@ const _popperArrowPresets = {
   shadow: 'before:shadow',
   placement: 'group-data-[popper-placement*="right"]:-left-1 group-data-[popper-placement*="left"]:-right-1 group-data-[popper-placement*="top"]:-bottom-1 group-data-[popper-placement*="bottom"]:-top-1'
 }
+
+// Data
 
 export const table = {
   wrapper: 'relative overflow-x-auto',
@@ -302,7 +302,7 @@ export const dropdown = {
     strategy: 'fixed'
   },
   arrow: {
-    ..._popperArrowPresets,
+    ..._popperArrow,
     ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
     background: 'before:bg-white dark:before:bg-gray-700'
   }
@@ -756,7 +756,7 @@ export const selectMenu = {
     selectedIcon: 'i-heroicons-check-20-solid'
   },
   arrow: {
-    ..._popperArrowPresets,
+    ..._popperArrow,
     ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
     background: 'before:bg-white dark:before:bg-gray-700'
   }
@@ -1216,7 +1216,7 @@ export const tooltip = {
   popper: {
     strategy: 'fixed'
   },
-  arrow: _popperArrowPresets
+  arrow: _popperArrow
 }
 
 export const popover = {
@@ -1240,7 +1240,7 @@ export const popover = {
   popper: {
     strategy: 'fixed'
   },
-  arrow: _popperArrowPresets
+  arrow: _popperArrow
 }
 
 export const contextMenu = {
@@ -1265,7 +1265,7 @@ export const contextMenu = {
     placement: 'bottom-start',
     scroll: false
   },
-  arrow: _popperArrowPresets
+  arrow: _popperArrow
 }
 
 export const notification = {
