@@ -301,7 +301,11 @@ export const dropdown = {
     placement: 'bottom-end',
     strategy: 'fixed'
   },
-  arrow: _popperArrowPresets
+  arrow: {
+    ..._popperArrowPresets,
+    ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
+    background: 'before:bg-white dark:before:bg-gray-700'
+  }
 }
 
 export const accordion = {
@@ -587,7 +591,11 @@ export const selectMenu = {
   default: {
     selectedIcon: 'i-heroicons-check-20-solid'
   },
-  arrow: _popperArrowPresets
+  arrow: {
+    ..._popperArrowPresets,
+    ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
+    background: 'before:bg-white dark:before:bg-gray-700'
+  }
 }
 
 export const radio = {
