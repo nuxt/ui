@@ -444,7 +444,7 @@ export const progress = {
     base: 'transition-all opacity-0 truncate row-start-1 col-start-1',
     align: 'text-end',
     active: 'opacity-100',
-    first: 'text-gray-500'
+    first: 'text-gray-500 dark:text-gray-400'
   },
   animation: {
     carousel: 'bar-animation-carousel',
@@ -463,30 +463,32 @@ export const meter = {
   wrapper: 'w-full flex flex-col gap-2',
   indicator: {
     container: 'min-w-fit transition-all',
-    text: 'text-gray-500 text-end',
+    text: 'text-gray-400 dark:text-gray-500 text-end',
     size: {
+      '2xs': 'text-xs',
       xs: 'text-xs',
       sm: 'text-sm',
-      md: 'text-md',
-      lg: 'text-lg',
-      xl: 'text-xl',
-      '2xl': 'text-2xl'
+      md: 'text-sm',
+      lg: 'text-sm',
+      xl: 'text-base',
+      '2xl': 'text-base'
     }
   },
   meter: {
     base: 'appearance-none block w-full bg-none overflow-y-hidden',
     background: 'bg-gray-200 dark:bg-gray-700',
-    color: 'text-{color}-500',
+    color: 'text-{color}-500 dark:text-{color}-400',
     ring: '',
     rounded: 'rounded-full',
     shadow: '',
     size: {
-      xs: 'h-px',
+      '2xs': 'h-px',
+      xs: 'h-0.5',
       sm: 'h-1',
       md: 'h-2',
       lg: 'h-3',
       xl: 'h-4',
-      '2xl': 'h-6'
+      '2xl': 'h-5'
     },
     appearance: {
       inner: '[&::-webkit-meter-inner-element]:block [&::-webkit-meter-inner-element]:relative [&::-webkit-meter-inner-element]:border-none [&::-webkit-meter-inner-element]:bg-none [&::-webkit-meter-inner-element]:bg-transparent',
@@ -499,32 +501,34 @@ export const meter = {
       ring: '',
       rounded: '[&::-webkit-meter-optimum-value]:rounded-full [&::-moz-meter-bar]:rounded-full',
       size: {
-        xs: '[&::-webkit-meter-optimum-value]:h-px [&::-moz-meter-bar]:h-px',
+        '2xs': '[&::-webkit-meter-optimum-value]:h-px [&::-moz-meter-bar]:h-px',
+        xs: '[&::-webkit-meter-optimum-value]:h-0.5 [&::-moz-meter-bar]:h-0.5',
         sm: '[&::-webkit-meter-optimum-value]:h-1 [&::-moz-meter-bar]:h-1',
         md: '[&::-webkit-meter-optimum-value]:h-2 [&::-moz-meter-bar]:h-2',
         lg: '[&::-webkit-meter-optimum-value]:h-3 [&::-moz-meter-bar]:h-3',
         xl: '[&::-webkit-meter-optimum-value]:h-4 [&::-moz-meter-bar]:h-4',
-        '2xl': '[&::-webkit-meter-optimum-value]:h-6 [&::-moz-meter-bar]:h-6'
+        '2xl': '[&::-webkit-meter-optimum-value]:h-5 [&::-moz-meter-bar]:h-5'
       }
     }
   },
   label: {
     base: 'flex gap-2 items-center',
     text: 'truncate',
-    color: 'text-{color}-500',
+    color: 'text-{color}-500 dark:text-{color}-400',
     size: {
+      '2xs': 'text-xs',
       xs: 'text-xs',
       sm: 'text-sm',
-      md: 'text-md',
-      lg: 'text-lg',
-      xl: 'text-xl',
-      '2xl': 'text-2xl'
+      md: 'text-sm',
+      lg: 'text-sm',
+      xl: 'text-base',
+      '2xl': 'text-base'
     }
   },
   color: {
     white: 'text-white dark:text-black',
     black: 'text-black dark:text-white',
-    gray: 'text-gray-500'
+    gray: 'text-gray-500 dark:text-gray-400'
   },
   default: {
     size: 'md',

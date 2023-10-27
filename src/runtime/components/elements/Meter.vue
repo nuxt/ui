@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass" v-bind="attrs">
+  <div :class="ui.wrapper" v-bind="attrs">
     <template v-if="$props.indicator || $slots.indicator">
       <slot name="indicator" v-bind="{ percent, value: $props.value }">
         <div :class="indicatorContainerClass" :style="{ width: `${percent}%` }">
@@ -95,7 +95,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('meter', toRef(props, 'ui'), config)
+    const { ui, attrs } = useUI('meter', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     function clampPercent (value: number, min: number, max: number): number {
       if (min == max) {
@@ -110,12 +110,6 @@ export default defineComponent({
 
       return Math.max(0, Math.min(100, percent))
     }
-
-    const wrapperClass = computed(() => {
-      return twMerge(twJoin(
-        ui.value.wrapper
-      ), props.class)
-    })
 
     const indicatorContainerClass = computed(() => {
       return twMerge(twJoin(
@@ -161,12 +155,12 @@ export default defineComponent({
     })
 
     const labelClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(
         ui.value.label.base,
         ui.value.label.text,
         ui.value.color[props.color] ?? ui.value.label.color.replaceAll('{color}', props.color),
         ui.value.label.size[props.size]
-      ))
+      )
     })
 
     const normalizedMin = computed(() => props.min > props.max ? props.max : props.min)
@@ -175,8 +169,9 @@ export default defineComponent({
     const percent = computed(() => clampPercent(Number(props.value), normalizedMin.value, normalizedMax.value))
 
     return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
-      wrapperClass,
       indicatorContainerClass,
       indicatorClass,
       meterClass,
