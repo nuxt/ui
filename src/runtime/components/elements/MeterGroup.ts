@@ -2,7 +2,7 @@ import { h, cloneVNode, computed, toRef, defineComponent } from 'vue'
 import type { ComputedRef, VNode, SlotsType, PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from './Icon.vue'
-import type Meter from './Meter.vue'
+import Meter from './Meter.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getSlotsChildren } from '../../utils'
 import type { Strategy, MeterSize } from '../../types'
@@ -42,7 +42,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    listIcon: {
+    icon: {
       type: String,
       default: 'i-heroicons-minus'
     },
@@ -213,7 +213,7 @@ export default defineComponent({
         })
 
         return h('li', { class: labelClass.value }, [
-          h(UIcon, { name: clones.value[key]?.props.icon ?? props.listIcon }),
+          h(UIcon, { name: clones.value[key]?.props.icon ?? props.icon }),
           `${label} (${ Math.round(percents.value[key]) }%)`
         ])
       }))
