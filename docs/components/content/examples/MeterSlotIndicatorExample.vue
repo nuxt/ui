@@ -7,7 +7,7 @@ const total = 238.42
 <template>
   <UMeter :value="used" :max="total">
     <template #indicator="{ percent }">
-      <div class="text-right">
+      <div class="text-sm text-right">
         {{ used }}GB used ({{ Math.round(percent) }}%)
       </div>
     </template>

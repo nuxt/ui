@@ -1,9 +1,11 @@
 <template>
   <UMeterGroup :max="128">
     <template #indicator>
-      <div class="flex flex-row gap-2 justify-between">
-        <div>86GB used</div>
-        <div class="text-gray-500">42GB remaining</div>
+      <div class="flex gap-1.5 justify-between text-sm">
+        <p>86GB used</p>
+        <p class="text-gray-500 dark:text-gray-400">
+          42GB remaining
+        </p>
       </div>
     </template>
 
