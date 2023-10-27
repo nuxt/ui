@@ -33,7 +33,7 @@ import type { SlotsType, PropType } from 'vue'
 import { twJoin, twMerge } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy, MeterColors, MeterSize } from '../../types'
+import type { Strategy, MeterColor, MeterSize } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { meter } from '#ui/ui.config'
@@ -75,7 +75,7 @@ export default defineComponent({
       }
     },
     color: {
-      type: String as PropType<MeterColors>,
+      type: String as PropType<MeterColor>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
