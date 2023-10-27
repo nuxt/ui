@@ -56,8 +56,8 @@ export default defineComponent({
     }
   },
   setup (props, { slots }) {
-    const { ui: meterGroupUi, attrs } = useUI('meterGroup', toRef(props, 'ui'), meterGroupConfig)
-    const { ui: meterUi } = useUI('meter', undefined, meterConfig)
+    const { ui, attrs } = useUI('meterGroup', toRef(props, 'ui'), meterGroupConfig)
+    const { ui: uiMeter } = useUI('meter', undefined, meterConfig)
 
     // If there is no children, throw an expressive error.
     if (!slots.default) {
@@ -83,7 +83,7 @@ export default defineComponent({
         'rounded-full': { left: 'rounded-s-full', right: 'rounded-e-full' }
       }
 
-      return roundedMap[meterGroupUi.value.rounded]
+      return roundedMap[ui.value.rounded]
     })
 
     function clampPercent (value: number, min: number, max: number): number {
@@ -128,8 +128,8 @@ export default defineComponent({
       vProps.ui.wrapper = node.props?.ui?.wrapper || ''
       vProps.ui.wrapper += [
         node.props?.ui?.wrapper,
-        props.ui?.meter?.background || meterGroupUi.value.background,
-        meterGroupUi.value.transition
+        props.ui?.meter?.background || ui.value.background,
+        ui.value.transition
       ].filter(Boolean).join(' ')
 
       // Override the background to make the bar appear "full"
@@ -160,36 +160,32 @@ export default defineComponent({
     }))
 
     const baseClass = computed(() => {
-      return twMerge(meterGroupUi.value.base, props.class)
-    })
-
-    const wrapperClass = computed(() => {
-      return twMerge(twJoin(
-        meterGroupUi.value.wrapper,
-        meterGroupUi.value.background,
-        meterGroupUi.value.rounded,
-        meterGroupUi.value.shadow,
-        meterUi.value.meter.size[props.size]
-      ), props.class)
+      return twJoin(
+        ui.value.base,
+        ui.value.background,
+        ui.value.rounded,
+        ui.value.shadow,
+        uiMeter.value.meter.size[props.size]
+      )
     })
 
     const indicatorContainerClass = computed(() => {
       return twJoin(
-        meterUi.value.indicator.container
+        uiMeter.value.indicator.container
       )
     })
 
     const indicatorClass = computed(() => {
       return twJoin(
-        meterUi.value.indicator.text,
-        meterUi.value.indicator.size[props.size]
+        uiMeter.value.indicator.text,
+        uiMeter.value.indicator.size[props.size]
       )
     })
 
     const vNodeChildren = computed(() => {
       const vNodeSlots = [
         undefined,
-        h('div', { class: wrapperClass.value }, clones.value),
+        h('div', { class: baseClass.value }, clones.value),
         undefined
       ]
 
@@ -205,10 +201,10 @@ export default defineComponent({
       vNodeSlots[2] = h('ol', { class: 'list-disc list-inside' }, labels.value.map((label, key) => {
         const labelClass = computed(() => {
           return twJoin(
-            meterUi.value.label.base,
-            meterUi.value.label.text,
-            meterUi.value.color[clones.value[key]?.props.color] ?? meterUi.value.label.color.replaceAll('{color}', clones.value[key]?.props.color ?? meterUi.value.default.color),
-            meterUi.value.label.size[props.size]
+            uiMeter.value.label.base,
+            uiMeter.value.label.text,
+            uiMeter.value.color[clones.value[key]?.props.color] ?? uiMeter.value.label.color.replaceAll('{color}', clones.value[key]?.props.color ?? uiMeter.value.default.color),
+            uiMeter.value.label.size[props.size]
           )
         })
 
@@ -221,6 +217,6 @@ export default defineComponent({
       return vNodeSlots
     })
 
-    return () => h('div', { class: baseClass.value, ...attrs }, vNodeChildren.value)
+    return () => h('div', { class: ui.value.wrapper, ...attrs.value }, vNodeChildren.value)
   }
 })
