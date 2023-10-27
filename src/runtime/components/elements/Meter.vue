@@ -1,7 +1,7 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
-    <template v-if="$props.indicator || $slots.indicator">
-      <slot name="indicator" v-bind="{ percent, value: $props.value }">
+    <template v-if="indicator || $slots.indicator">
+      <slot name="indicator" v-bind="{ percent, value }">
         <div :class="indicatorContainerClass" :style="{ width: `${percent}%` }">
           <div :class="indicatorClass">
             {{ Math.round(percent) }}%
@@ -11,16 +11,16 @@
     </template>
 
     <meter
-      :value="$props.value"
+      :value="value"
       :min="normalizedMin"
       :max="normalizedMax"
       :class="[meterClass, meterAppearanceClass, meterBarClass]"
     />
 
-    <template v-if="$props.label || $slots.label">
-      <slot name="label" v-bind="{ percent, value: $props.value }">
+    <template v-if="label || $slots.label">
+      <slot name="label" v-bind="{ percent, value }">
         <div :class="labelClass">
-          <UIcon v-if="$props.icon" :name="$props.icon" /> {{ label }}
+          <UIcon v-if="icon" :name="icon" /> {{ label }}
         </div>
       </slot>
     </template>
