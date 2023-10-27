@@ -30,7 +30,7 @@
 <script lang="ts">
 import { computed, defineComponent, toRef } from 'vue'
 import type { SlotsType, PropType } from 'vue'
-import { twJoin, twMerge } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
 import type { Strategy, MeterColor, MeterSize } from '../../types'
@@ -112,16 +112,16 @@ export default defineComponent({
     }
 
     const indicatorContainerClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(
         ui.value.indicator.container
-      ))
+      )
     })
 
     const indicatorClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(
         ui.value.indicator.text,
         ui.value.indicator.size[props.size]
-      ))
+      )
     })
 
     const meterClass = computed(() => {
