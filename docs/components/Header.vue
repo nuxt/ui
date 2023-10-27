@@ -26,7 +26,6 @@
         target="_blank"
         icon="i-simple-icons-github"
         aria-label="GitHub"
-        class="hidden lg:inline-flex"
         v-bind="($ui.button.secondary as any)"
       />
     </template>
@@ -59,6 +58,10 @@ const links = computed(() => {
     label: 'Playground',
     icon: 'i-simple-icons-stackblitz',
     to: '/playground'
+  }, {
+    label: 'Pro',
+    icon: 'i-heroicons-square-3-stack-3d',
+    to: '/pro'
   }, {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch-solid',

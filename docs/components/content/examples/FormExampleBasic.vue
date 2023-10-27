@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { FormError, FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
+import type { FormError, FormSubmitEvent } from '#ui/types'
 
-const state = ref({
+const state = reactive({
   email: undefined,
   password: undefined
 })
@@ -14,18 +13,14 @@ const validate = (state: any): FormError[] => {
   return errors
 }
 
-async function submit (event: FormSubmitEvent<any>) {
+async function onSubmit (event: FormSubmitEvent<any>) {
   // Do something with data
   console.log(event.data)
 }
 </script>
 
 <template>
-  <UForm
-    :validate="validate"
-    :state="state"
-    @submit="submit"
-  >
+  <UForm :validate="validate" :state="state" @submit="onSubmit">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormGroup>
