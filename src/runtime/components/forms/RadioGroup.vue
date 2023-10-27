@@ -13,7 +13,7 @@
         :model-value="modelValue"
         :value="option.value"
         :disabled="disabled"
-        :ui="radioUI"
+        :ui="uiRadio"
         @change="onUpdate(option.value)"
       >
         <template #label>
@@ -97,7 +97,7 @@ export default defineComponent({
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
     const { ui, attrs } = useUI('radioGroup', toRef(props, 'ui'), config, toRef(props, 'class'))
-    const { ui: radioUI } = useUI('radio', toRef(props, 'uiRadio'), configRadio)
+    const { ui: uiRadio } = useUI('radio', toRef(props, 'uiRadio'), configRadio)
 
     const { emitFormChange, color, name } = useFormGroup(props, config)
     provide('radio-group', { color, name })
@@ -138,7 +138,8 @@ export default defineComponent({
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      radioUI,
+      // eslint-disable-next-line vue/no-dupe-keys
+      uiRadio,
       attrs,
       normalizedOptions,
       // eslint-disable-next-line vue/no-dupe-keys
