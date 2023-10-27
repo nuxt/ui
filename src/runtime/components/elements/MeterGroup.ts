@@ -1,14 +1,14 @@
 import { h, cloneVNode, computed, toRef, defineComponent } from 'vue'
 import type { ComputedRef, VNode, SlotsType, PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
+import UIcon from './Icon.vue'
+import type Meter from './Meter.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getSlotsChildren } from '../../utils'
 import type { Strategy, MeterSize } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { meter, meterGroup } from '#ui/ui.config'
-import type Meter from './Meter.vue'
-import UIcon from './Icon.vue'
 
 const meterConfig = mergeConfig<typeof meter>(appConfig.ui.strategy, appConfig.ui.meter, meter)
 const meterGroupConfig = mergeConfig<typeof meterGroup>(appConfig.ui.strategy, appConfig.ui.meterGroup, meterGroup)
@@ -160,9 +160,7 @@ export default defineComponent({
     }))
 
     const baseClass = computed(() => {
-      return twMerge(twJoin(
-        meterGroupUi.value.base
-      ), props.class)
+      return twMerge(meterGroupUi.value.base, props.class)
     })
 
     const wrapperClass = computed(() => {
@@ -176,16 +174,16 @@ export default defineComponent({
     })
 
     const indicatorContainerClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(
         meterUi.value.indicator.container
-      ))
+      )
     })
 
     const indicatorClass = computed(() => {
-      return twMerge(twJoin(
+      return twJoin(
         meterUi.value.indicator.text,
         meterUi.value.indicator.size[props.size]
-      ))
+      )
     })
 
     const vNodeChildren = computed(() => {
@@ -206,12 +204,12 @@ export default defineComponent({
 
       vNodeSlots[2] = h('ol', { class: 'list-disc list-inside' }, labels.value.map((label, key) => {
         const labelClass = computed(() => {
-          return twMerge(twJoin(
+          return twJoin(
             meterUi.value.label.base,
             meterUi.value.label.text,
             meterUi.value.color[clones.value[key]?.props.color] ?? meterUi.value.label.color.replaceAll('{color}', clones.value[key]?.props.color ?? meterUi.value.default.color),
             meterUi.value.label.size[props.size]
-          ))
+          )
         })
 
         return h('li', { class: labelClass.value }, [
