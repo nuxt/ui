@@ -135,8 +135,6 @@ export default defineComponent({
       attrs,
       pick,
       // eslint-disable-next-line vue/no-dupe-keys
-      color,
-      // eslint-disable-next-line vue/no-dupe-keys
       name,
       // eslint-disable-next-line vue/no-dupe-keys
       inputClass
