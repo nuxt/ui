@@ -134,7 +134,7 @@ export default defineComponent({
 
       // Override the background to make the bar appear "full"
       vProps.ui.meter = node.props?.ui?.meter || {}
-      vProps.ui.meter.background = `bg-${node.props.color}-500 dark:bg-${node.props.color}-500`
+      vProps.ui.meter.background = `bg-${node.props.color}-500 dark:bg-${node.props.color}-400`
       vProps.ui.meter.rounded = 'rounded-none'
       vProps.ui.meter.bar = node.props?.ui?.meter?.bar || {}
 

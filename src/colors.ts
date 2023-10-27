@@ -177,6 +177,17 @@ const safelistByComponent = {
   }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-500`)
   }],
+  meter: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }],
   notification: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
@@ -195,8 +206,7 @@ const safelistComponentAliasesMap = {
   'USelectMenu': 'UInput',
   'UTextarea': 'UInput',
   'URadioGroup': 'URadio',
-  'UMeter': 'UProgress',
-  'UMeterGroup': 'UProgress'
+  'UMeterGroup': 'UMeter'
 }
 
 const colorsAsRegex = (colors: string[]): string => colors.join('|')
