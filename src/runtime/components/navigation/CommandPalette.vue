@@ -237,7 +237,8 @@ export default defineComponent({
       }
       for (const key in groupedCommands) {
         const group = props.groups.find(group => group.key === key)
-        const commands = groupedCommands[key].slice(0, options.value.resultLimit).map((result) => {
+
+        let commands = groupedCommands[key].map((result) => {
           const { item, ...data } = result
 
           return {
@@ -246,12 +247,22 @@ export default defineComponent({
           } as Command
         })
 
-        groups.push({ ...group, commands })
+        if (group.filter && typeof group.filter === 'function') {
+          commands = group.filter(query.value, commands)
+        }
+
+        groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
       }
 
       for (const group of props.groups) {
         if (group.search && searchResults.value[group.key]?.length) {
-          groups.push({ ...group, commands: (searchResults.value[group.key] || []).slice(0, options.value.resultLimit) })
+          let commands = (searchResults.value[group.key] || [])
+
+          if (group.filter && typeof group.filter === 'function') {
+            commands = group.filter(query.value, commands)
+          }
+
+          groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
         }
       }
 
