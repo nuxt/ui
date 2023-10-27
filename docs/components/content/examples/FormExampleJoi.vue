@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Joi from 'joi'
-import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '#ui/types'
 
 const schema = Joi.object({
   email: Joi.string().required(),
@@ -14,18 +14,14 @@ const state = reactive({
   password: undefined
 })
 
-async function submit (event: FormSubmitEvent<any>) {
+async function onSubmit (event: FormSubmitEvent<any>) {
   // Do something with event.data
   console.log(event.data)
 }
 </script>
 
 <template>
-  <UForm
-    :schema="schema"
-    :state="state"
-    @submit="submit"
-  >
+  <UForm :schema="schema" :state="state" @submit="onSubmit">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormGroup>

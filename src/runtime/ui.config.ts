@@ -869,6 +869,16 @@ export const pagination = {
     inactiveButton: {
       color: 'white'
     },
+    firstButton: {
+      color: 'white',
+      class: 'rtl:[&_span:first-child]:rotate-180',
+      icon: 'i-heroicons-chevron-double-left-20-solid'
+    },
+    lastButton: {
+      color: 'white',
+      class: 'rtl:[&_span:last-child]:rotate-180',
+      icon: 'i-heroicons-chevron-double-right-20-solid'
+    },
     prevButton: {
       color: 'white',
       class: 'rtl:[&_span:first-child]:rotate-180',
@@ -902,7 +912,7 @@ export const tabs = {
       shadow: 'shadow-sm'
     },
     tab: {
-      base: 'relative inline-flex items-center justify-center flex-shrink-0 w-full whitespace-nowrap ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
+      base: 'relative inline-flex items-center justify-center flex-shrink-0 w-full ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out',
       background: '',
       active: 'text-gray-900 dark:text-white',
       inactive: 'text-gray-500 dark:text-gray-400',
@@ -986,14 +996,14 @@ export const slideover = {
 
 export const tooltip = {
   wrapper: 'relative inline-flex',
-  container: 'z-20',
+  container: 'z-20 group',
   width: 'max-w-xs',
   background: 'bg-white dark:bg-gray-900',
   color: 'text-gray-900 dark:text-white',
   shadow: 'shadow',
   rounded: 'rounded',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
-  base: '[@media(pointer:coarse)]:hidden h-6 px-2 py-1 text-xs font-normal truncate',
+  base: '[@media(pointer:coarse)]:hidden h-6 px-2 py-1 text-xs font-normal truncate relative',
   shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5',
   // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
   transition: {
@@ -1006,6 +1016,14 @@ export const tooltip = {
   },
   popper: {
     strategy: 'fixed'
+  },
+  arrow: {
+    base: 'before:w-2 before:h-2',
+    ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-800',
+    rounded: 'before:rounded-sm',
+    background: 'before:bg-white dark:before:bg-gray-900',
+    shadow: 'before:shadow',
+    placement: 'group-data-[popper-placement=right]:-left-1 group-data-[popper-placement=left]:-right-1 group-data-[popper-placement=top]:-bottom-1 group-data-[popper-placement=bottom]:-top-1'
   }
 }
 
