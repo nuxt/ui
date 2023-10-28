@@ -17,7 +17,12 @@ import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types/form'
+import { mergeConfig } from '../../utils'
 import { uid } from '../../utils/uid'
+import appConfig from '#build/app.config'
+import { form } from '#ui/ui.config'
+
+const config = mergeConfig<typeof formGroup>(appConfig.ui.strategy, appConfig.ui.form, form)
 
 class FormException extends Error {
   constructor (message: string) {
