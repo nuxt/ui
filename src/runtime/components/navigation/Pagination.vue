@@ -1,10 +1,23 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
+    <slot name="first" :on-click="onClickFirst">
+      <UButton
+        v-if="firstButton && showFirst"
+        :size="size"
+        :disabled="!canGoFirstOrPrev"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...ui.default.firstButton, ...firstButton }"
+        :ui="{ rounded: '' }"
+        aria-label="First"
+        @click="onClickFirst"
+      />
+    </slot>
+
     <slot name="prev" :on-click="onClickPrev">
       <UButton
         v-if="prevButton"
         :size="size"
-        :disabled="!canGoPrev"
+        :disabled="!canGoFirstOrPrev"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.prevButton, ...prevButton }"
         :ui="{ rounded: '' }"
@@ -28,7 +41,7 @@
       <UButton
         v-if="nextButton"
         :size="size"
-        :disabled="!canGoNext"
+        :disabled="!canGoLastOrNext"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.nextButton, ...nextButton }"
         :ui="{ rounded: '' }"
@@ -36,11 +49,24 @@
         @click="onClickNext"
       />
     </slot>
+
+    <slot name="last" :on-click="onClickLast">
+      <UButton
+        v-if="lastButton && showLast"
+        :size="size"
+        :disabled="!canGoLastOrNext"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...ui.default.lastButton, ...lastButton }"
+        :ui="{ rounded: '' }"
+        aria-label="Last"
+        @click="onClickLast"
+      />
+    </slot>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
@@ -76,7 +102,7 @@ export default defineComponent({
       type: Number,
       default: 7,
       validate (value) {
-        return value >= 7 && value < Number.MAX_VALUE
+        return value >= 5 && value < Number.MAX_VALUE
       }
     },
     size: {
@@ -94,6 +120,22 @@ export default defineComponent({
       type: Object as PropType<Button>,
       default: () => config.default.inactiveButton as Button
     },
+    showFirst: {
+      type: Boolean,
+      default: false
+    },
+    showLast: {
+      type: Boolean,
+      default: false
+    },
+    firstButton: {
+      type: Object as PropType<Button>,
+      default: () => config.default.firstButton as Button
+    },
+    lastButton: {
+      type: Object as PropType<Button>,
+      default: () => config.default.lastButton as Button
+    },
     prevButton: {
       type: Object as PropType<Button>,
       default: () => config.default.prevButton as Button
@@ -106,6 +148,10 @@ export default defineComponent({
       type: String,
       default: '…'
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -113,7 +159,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('pagination', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('pagination', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const currentPage = computed({
       get () {
@@ -127,57 +173,85 @@ export default defineComponent({
     const pages = computed(() => Array.from({ length: Math.ceil(props.total / props.pageCount) }, (_, i) => i + 1))
 
     const displayedPages = computed(() => {
-      if (!props.max || pages.value.length <= 5) {
-        return pages.value
-      } else {
-        const current = currentPage.value
-        const max = pages.value.length
-        const r = Math.floor((Math.min(props.max, max) - 5) / 2)
-        const r1 = current - r
-        const r2 = current + r
-        const beforeWrapped = r1 - 1 > 1
-        const afterWrapped = r2 + 1 < max
-        const items: Array<number | string> = [1]
+      const totalPages = pages.value.length
+      const current = currentPage.value
+      const maxDisplayedPages = Math.max(props.max, 5)
 
-        if (beforeWrapped) items.push(props.divider)
+      const r = Math.floor((Math.min(maxDisplayedPages, totalPages) - 5) / 2)
+      const r1 = current - r
+      const r2 = current + r
 
-        if (!afterWrapped) {
-          const addedItems = (current + r + 2) - max
-          for (let i = current - r - addedItems; i <= current - r - 1; i++) {
-            items.push(i)
-          }
-        }
+      const beforeWrapped = r1 - 1 > 1
+      const afterWrapped = r2 + 1 < totalPages
 
-        for (let i = r1 > 2 ? (r1) : 2; i <= Math.min(max, r2); i++) {
+      const items: Array<number | string> = []
+
+      if (totalPages <= maxDisplayedPages) {
+        for (let i = 1; i <= totalPages; i++) {
           items.push(i)
         }
-
-        if (!beforeWrapped) {
-          const addedItems = 1 - (current - r - 2)
-          for (let i = current + r + 1; i <= current + r + addedItems; i++) {
-            items.push(i)
-          }
-        }
-
-        if (afterWrapped) items.push(props.divider)
-
-        if (r2 < max) items.push(max)
-
-        // Replace divider by number on start edge case [1, '…', 3, ...]
-        if (items.length >= 3 && items[1] === props.divider && items[2] === 3) {
-          items[1] = 2
-        }
-        // Replace divider by number on end edge case [..., 48, '…', 50]
-        if (items.length >= 3 && items[items.length - 2] === props.divider && items[items.length - 1] === items.length) {
-          items[items.length - 2] = items.length - 1
-        }
-
         return items
       }
+
+      items.push(1)
+
+      if (beforeWrapped) items.push(props.divider)
+
+      if (!afterWrapped) {
+        const addedItems = (current + r + 2) - totalPages
+        for (let i = current - r - addedItems; i <= current - r - 1; i++) {
+          items.push(i)
+        }
+      }
+
+      for (let i = Math.max(2, r1); i <= Math.min(totalPages, r2); i++) {
+        items.push(i)
+      }
+
+      if (!beforeWrapped) {
+        const addedItems = 1 - (current - r - 2)
+        for (let i = current + r + 1; i <= current + r + addedItems; i++) {
+          items.push(i)
+        }
+      }
+
+      if (afterWrapped) items.push(props.divider)
+
+      if (r2 < totalPages) {
+        items.push(totalPages)
+      }
+
+      // Replace divider by number on start edge case [1, '…', 3, ...]
+      if (items.length >= 3 && items[1] === props.divider && items[2] === 3) {
+        items[1] = 2
+      }
+
+      // Replace divider by number on end edge case [..., 48, '…', 50]
+      if (items.length >= 3 && items[items.length - 2] === props.divider && items[items.length - 1] === items.length) {
+        items[items.length - 2] = items.length - 1
+      }
+
+      return items
     })
 
-    const canGoPrev = computed(() => currentPage.value > 1)
-    const canGoNext = computed(() => currentPage.value < pages.value.length)
+    const canGoFirstOrPrev = computed(() => currentPage.value > 1)
+    const canGoLastOrNext = computed(() => currentPage.value < pages.value.length)
+
+    function onClickFirst () {
+      if (!canGoFirstOrPrev.value) {
+        return
+      }
+
+      currentPage.value = 1
+    }
+
+    function onClickLast () {
+      if (!canGoLastOrNext.value) {
+        return
+      }
+
+      currentPage.value = pages.value.length
+    }
 
     function onClickPage (page: number | string) {
       if (typeof page === 'string') {
@@ -188,7 +262,7 @@ export default defineComponent({
     }
 
     function onClickPrev () {
-      if (!canGoPrev.value) {
+      if (!canGoFirstOrPrev.value) {
         return
       }
 
@@ -196,7 +270,7 @@ export default defineComponent({
     }
 
     function onClickNext () {
-      if (!canGoNext.value) {
+      if (!canGoLastOrNext.value) {
         return
       }
 
@@ -210,11 +284,13 @@ export default defineComponent({
       currentPage,
       pages,
       displayedPages,
-      canGoPrev,
-      canGoNext,
+      canGoLastOrNext,
+      canGoFirstOrPrev,
       onClickPrev,
       onClickNext,
-      onClickPage
+      onClickPage,
+      onClickFirst,
+      onClickLast
     }
   }
 })

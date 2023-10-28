@@ -16,17 +16,16 @@ import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
-import { useUI } from '../../composables/useUI'
-import { mergeConfig } from '../../utils'
-import { Strategy } from '../../types'
-import type { FormError, FormEvent, FormEventType, FormSubmitEvent, Form } from '../../types/form'
+import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types/form'
 import { uid } from '../../utils/uid'
 
-// @ts-expect-error
-import appConfig from '#build/app.config'
-import { form } from '#ui/ui.config'
-
-const config = mergeConfig<typeof form>(appConfig.ui.strategy, appConfig.ui.form, form)
+class FormException extends Error {
+  constructor (message: string) {
+    super(message)
+    this.message = message
+    Object.setPrototypeOf(this, FormException.prototype)
+  }
+}
 
 export default defineComponent({
   props: {
@@ -57,7 +56,7 @@ export default defineComponent({
       default: undefined
     }
   },
-  emits: ['submit'],
+  emits: ['submit', 'error'],
   setup (props, { expose, emit }) {
     const { ui } = useUI('form', props.ui, config, { mergeWrapper: true })
 
@@ -74,6 +73,8 @@ export default defineComponent({
 
     provide('form-errors', errors)
     provide('form-events', bus)
+    const inputs = ref({})
+    provide('form-inputs', inputs)
 
     async function getErrors (): Promise<FormError[]> {
       let errs = await props.validate(props.state)
@@ -109,7 +110,7 @@ export default defineComponent({
       }
 
       if (!opts.silent && errors.value.length > 0) {
-        throw new Error(
+        throw new FormException(
           `Form validation failed: ${JSON.stringify(errors.value, null, 2)}`
         )
       }
@@ -117,12 +118,29 @@ export default defineComponent({
     }
 
     async function onSubmit (event: SubmitEvent) {
-      if (props.validateOn?.includes('submit')) {
-        await validate()
+      try {
+        if (props.validateOn?.includes('submit')) {
+          await validate()
+        }
+        const submitEvent: FormSubmitEvent<any> = {
+          ...event,
+          data: props.state
+        }
+        emit('submit', submitEvent)
+      } catch (error) {
+        if (!(error instanceof FormException)) {
+          throw error
+        }
+
+        const errorEvent: FormErrorEvent = {
+          ...event,
+          errors: errors.value.map((err) => ({
+            ...err,
+            id: inputs.value[err.path]
+          }))
+        }
+        emit('error', errorEvent)
       }
-      const submitEvent = event as FormSubmitEvent<any>
-      submitEvent.data = props.state
-      emit('submit', event)
     }
 
     expose({

@@ -49,12 +49,12 @@
         </tr>
 
         <template v-else>
-          <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active]" @click="() => onSelect(row)">
+          <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
             <td v-if="modelValue" :class="ui.checkbox.padding">
               <UCheckbox v-model="selected" :value="row" aria-label="Select row" @click.stop />
             </td>
 
-            <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]">
+            <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, row[column.key]?.class]">
               <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue) => getRowData(row, column.key, defaultValue)">
                 {{ getRowData(row, column.key) }}
               </slot>
@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, toRaw } from 'vue'
+import { ref, computed, defineComponent, toRaw, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -143,18 +143,24 @@ export default defineComponent({
       type: Object as PropType<{ icon: string, label: string }>,
       default: () => config.default.emptyState
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'update:sort'],
   setup (props, { emit, attrs: $attrs }) {
-    const { ui, attrs } = useUI('table', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: upperFirst(key), sortable: false })))
 
     const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
+
+    const defaultSort = { column: sort.value.column, direction: null }
 
     const rows = computed(() => {
       if (!sort.value?.column) {
@@ -164,8 +170,8 @@ export default defineComponent({
       const { column, direction } = sort.value
 
       return props.rows.slice().sort((a, b) => {
-        const aValue = a[column]
-        const bValue = b[column]
+        const aValue = get(a, column)
+        const bValue = get(b, column)
 
         if (aValue === bValue) {
           return 0
@@ -221,13 +227,15 @@ export default defineComponent({
         const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
 
         if (sort.value.direction === direction) {
-          sort.value = defu({}, props.sort, { column: null, direction: 'asc' })
+          sort.value = defu({}, defaultSort, { column: null, direction: 'asc' })
         } else {
           sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
         }
       } else {
         sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
+
+      emit('update:sort', sort.value)
     }
 
     function onSelect (row) {
@@ -242,12 +250,12 @@ export default defineComponent({
     function selectAllRows () {
       props.rows.forEach((row) => {
         // If the row is already selected, don't select it again
-        if (selected.value.some((item) => compare(toRaw(item), toRaw(row)))) {
+        if (isSelected(row)) {
           return
         }
 
         // @ts-ignore
-        $attrs.onSelect ? $attrs.onSelect(row) : selected.value.push(row)
+        selected.value.push(row)
       })
     }
 

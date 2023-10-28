@@ -1,6 +1,12 @@
 <template>
   <Transition appear v-bind="ui.transition">
-    <div :class="wrapperClass" v-bind="attrs" @mouseover="onMouseover" @mouseleave="onMouseleave">
+    <div
+      :class="wrapperClass"
+      role="status" 
+      v-bind="attrs"
+      @mouseover="onMouseover" 
+      @mouseleave="onMouseleave"
+    >
       <div :class="[ui.container, ui.rounded, ui.ring]">
         <div :class="ui.padding">
           <div class="flex gap-3" :class="{ 'items-start': description || $slots.description, 'items-center': !description && !$slots.description }">
@@ -39,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted, onUnmounted, watchEffect, defineComponent } from 'vue'
+import { ref, computed, toRef, onMounted, onUnmounted, watchEffect, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -106,6 +112,10 @@ export default defineComponent({
         return ['gray', ...appConfig.ui.colors].includes(value)
       }
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -113,7 +123,7 @@ export default defineComponent({
   },
   emits: ['close'],
   setup (props, { emit }) {
-    const { ui, attrs, attrsClass } = useUI('notification', props.ui, config)
+    const { ui, attrs } = useUI('notification', toRef(props, 'ui'), config)
 
     let timer: any = null
     const remaining = ref(props.timeout)
@@ -124,7 +134,7 @@ export default defineComponent({
         ui.value.background,
         ui.value.rounded,
         ui.value.shadow
-      ), attrsClass)
+      ), props.class)
     })
 
     const progressClass = computed(() => {

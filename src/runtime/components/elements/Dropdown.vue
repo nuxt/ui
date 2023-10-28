@@ -17,35 +17,38 @@
 
     <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
-        <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
-          <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
-            <HMenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
-              <ULink
-                v-bind="omit(item, ['label', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'click'])"
-                :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
-                @click="item.click"
-              >
-                <slot :name="item.slot || 'item'" :item="item">
-                  <UIcon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
-                  <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
-
-                  <span class="truncate">{{ item.label }}</span>
-
-                  <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
-                    <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
-                  </span>
-                </slot>
-              </ULink>
-            </HMenuItem>
-          </div>
-        </HMenuItems>
+        <div>
+          <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(ui.arrow)]" />
+          <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
+            <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
+              <HMenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
+                <ULink
+                  v-bind="omit(item, ['label', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'click'])"
+                  :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
+                  @click="item.click"
+                >
+                  <slot :name="item.slot || 'item'" :item="item">
+                    <UIcon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
+                    <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
+  
+                    <span class="truncate">{{ item.label }}</span>
+  
+                    <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
+                      <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
+                    </span>
+                  </slot>
+                </ULink>
+              </HMenuItem>
+            </div>
+          </HMenuItems>
+        </div>
       </Transition>
     </div>
   </HMenu>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted } from 'vue'
+import { defineComponent, ref, computed, toRef, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem } from '@headlessui/vue'
 import { defu } from 'defu'
@@ -101,13 +104,17 @@ export default defineComponent({
       type: Number,
       default: 0
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('dropdown', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('dropdown', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 
@@ -181,6 +188,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      popper,
       trigger,
       container,
       containerStyle,

@@ -1,8 +1,11 @@
 <template>
   <div v-if="isOpen" ref="container" :class="wrapperClass" v-bind="attrs">
     <Transition appear v-bind="ui.transition">
-      <div :class="[ui.base, ui.ring, ui.rounded, ui.shadow, ui.background]">
-        <slot />
+      <div>
+        <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(ui.arrow)]" />
+        <div :class="[ui.base, ui.ring, ui.rounded, ui.shadow, ui.background]">
+          <slot />
+        </div>
       </div>
     </Transition>
   </div>
@@ -40,6 +43,10 @@ export default defineComponent({
       type: Object as PropType<PopperOptions>,
       default: () => ({})
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -47,7 +54,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'close'],
   setup (props, { emit }) {
-    const { ui, attrs, attrsClass } = useUI('contextMenu', props.ui, config)
+    const { ui, attrs } = useUI('contextMenu', toRef(props, 'ui'), config)
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
@@ -68,7 +75,7 @@ export default defineComponent({
       return twMerge(twJoin(
         ui.value.container,
         ui.value.width
-      ), attrsClass)
+      ), props.class)
     })
 
     onClickOutside(container, () => {
@@ -81,6 +88,8 @@ export default defineComponent({
       attrs,
       isOpen,
       wrapperClass,
+      // eslint-disable-next-line vue/no-dupe-keys
+      popper,
       container
     }
   }

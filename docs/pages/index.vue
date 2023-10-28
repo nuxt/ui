@@ -60,9 +60,9 @@
       <template #features>
         <ULandingGrid class="lg:-mb-20 lg:auto-rows-[3rem]">
           <ULandingCard
-            v-for="(feature, subIndex) of section.features"
+            v-for="(card, subIndex) of section.cards"
             :key="subIndex"
-            v-bind="feature"
+            v-bind="card"
             :ui="{
               background: 'dark:bg-gray-900/50 dark:lg:bg-gradient-to-b from-gray-700/50 to-gray-950/50',
               body: {
@@ -72,13 +72,13 @@
             }"
             class="flex flex-col"
           >
-            <div v-if="feature.image">
+            <div v-if="card.image">
               <UColorModeImage
-                :light="`${feature.image.path}-light.svg`"
-                :dark="`${feature.image.path}-dark.svg`"
-                :width="feature.image.width"
-                :height="feature.image.height"
-                :alt="feature.title"
+                :light="`${card.image.path}-light.svg`"
+                :dark="`${card.image.path}-dark.svg`"
+                :width="card.image.width"
+                :height="card.image.height"
+                :alt="card.title"
                 class="object-cover w-full"
               />
             </div>

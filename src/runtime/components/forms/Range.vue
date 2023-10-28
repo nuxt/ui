@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
@@ -83,6 +83,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -90,7 +94,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
-    const { ui, attrs, attrsClass } = useUI('range', props.ui, config)
+    const { ui, attrs } = useUI('range', toRef(props, 'ui'), config)
 
     const { emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
 
@@ -112,7 +116,7 @@ export default defineComponent({
       return twMerge(twJoin(
         ui.value.wrapper,
         ui.value.size[size.value]
-      ), attrsClass)
+      ), props.class)
     })
 
     const inputClass = computed(() => {

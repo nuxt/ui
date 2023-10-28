@@ -11,4 +11,5 @@ export interface PopperOptions {
   adaptive?: boolean
   scroll?: boolean
   resize?: boolean
+  arrow?: boolean
 }

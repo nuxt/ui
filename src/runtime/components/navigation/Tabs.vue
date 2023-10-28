@@ -26,7 +26,7 @@
       >
         <button :class="[ui.list.tab.base, ui.list.tab.background, ui.list.tab.height, ui.list.tab.padding, ui.list.tab.size, ui.list.tab.font, ui.list.tab.rounded, ui.list.tab.shadow, selected ? ui.list.tab.active : ui.list.tab.inactive]">
           <slot :item="item" :index="index" :selected="selected" :disabled="disabled">
-            {{ item.label }}
+            <span class="truncate">{{ item.label }}</span>
           </slot>
         </button>
       </HTab>
@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { ref, watch, onMounted, defineComponent } from 'vue'
+import { toRef, ref, watch, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel } from '@headlessui/vue'
 import { useResizeObserver } from '@vueuse/core'
@@ -89,6 +89,10 @@ export default defineComponent({
       type: Array as PropType<TabItem[]>,
       default: () => []
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -96,7 +100,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
-    const { ui, attrs } = useUI('tabs', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('tabs', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const listRef = ref<HTMLElement>()
     const itemRefs = ref<HTMLElement[]>([])

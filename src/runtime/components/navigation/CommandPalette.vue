@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, onMounted, defineComponent } from 'vue'
+import { ref, computed, watch, toRef, onMounted, defineComponent } from 'vue'
 import { Combobox as HCombobox, ComboboxInput as HComboboxInput, ComboboxOptions as HComboboxOptions } from '@headlessui/vue'
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
@@ -169,6 +169,10 @@ export default defineComponent({
       type: Object as PropType<UseFuseOptions<Command>>,
       default: () => ({})
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -176,7 +180,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'close'],
   setup (props, { emit, expose }) {
-    const { ui, attrs } = useUI('commandPalette', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('commandPalette', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const query = ref('')
     const comboboxInput = ref<ComponentPublicInstance<HTMLInputElement>>()
@@ -233,7 +237,8 @@ export default defineComponent({
       }
       for (const key in groupedCommands) {
         const group = props.groups.find(group => group.key === key)
-        const commands = groupedCommands[key].slice(0, options.value.resultLimit).map((result) => {
+
+        let commands = groupedCommands[key].map((result) => {
           const { item, ...data } = result
 
           return {
@@ -242,12 +247,22 @@ export default defineComponent({
           } as Command
         })
 
-        groups.push({ ...group, commands })
+        if (group.filter && typeof group.filter === 'function') {
+          commands = group.filter(query.value, commands)
+        }
+
+        groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
       }
 
       for (const group of props.groups) {
         if (group.search && searchResults.value[group.key]?.length) {
-          groups.push({ ...group, commands: (searchResults.value[group.key] || []).slice(0, options.value.resultLimit) })
+          let commands = (searchResults.value[group.key] || [])
+
+          if (group.filter && typeof group.filter === 'function') {
+            commands = group.filter(query.value, commands)
+          }
+
+          groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
         }
       }
 

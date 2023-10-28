@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { object, string, InferType } from 'yup'
-import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
+import { object, string, type InferType } from 'yup'
+import type { FormSubmitEvent } from '#ui/types'
 
 const schema = object({
   email: string().email('Invalid email').required('Required'),
@@ -12,23 +11,19 @@ const schema = object({
 
 type Schema = InferType<typeof schema>
 
-const state = ref({
+const state = reactive({
   email: undefined,
   password: undefined
 })
 
-async function submit (event: FormSubmitEvent<Schema>) {
+async function onSubmit (event: FormSubmitEvent<Schema>) {
   // Do something with event.data
   console.log(event.data)
 }
 </script>
 
 <template>
-  <UForm
-    :schema="schema"
-    :state="state"
-    @submit="submit"
-  >
+  <UForm :schema="schema" :state="state" @submit="onSubmit">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormGroup>

@@ -6,17 +6,21 @@
 
     <div v-if="open && !prevent" ref="container" :class="[ui.container, ui.width]">
       <Transition appear v-bind="ui.transition">
-        <div :class="[ui.base, ui.background, ui.color, ui.rounded, ui.shadow, ui.ring]">
-          <slot name="text">
-            {{ text }}
-          </slot>
+        <div>
+          <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(ui.arrow)]" />
 
-          <span v-if="shortcuts?.length" :class="ui.shortcuts">
-            <span class="mx-1 text-gray-700 dark:text-gray-200">&middot;</span>
-            <UKbd v-for="shortcut of shortcuts" :key="shortcut" size="xs">
-              {{ shortcut }}
-            </Ukbd>
-          </span>
+          <div :class="[ui.base, ui.background, ui.color, ui.rounded, ui.shadow, ui.ring]">
+            <slot name="text">
+              {{ text }}
+            </slot>
+  
+            <span v-if="shortcuts?.length" :class="ui.shortcuts">
+              <span class="mx-1 text-gray-700 dark:text-gray-200">&middot;</span>
+              <UKbd v-for="shortcut of shortcuts" :key="shortcut" size="xs">
+                {{ shortcut }}
+              </Ukbd>
+            </span>
+          </div>
         </div>
       </Transition>
     </div>
@@ -24,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ref, defineComponent } from 'vue'
+import { computed, ref, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UKbd from '../elements/Kbd.vue'
@@ -68,13 +72,17 @@ export default defineComponent({
       type: Object as PropType<PopperOptions>,
       default: () => ({})
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('tooltip', props.ui, config, { mergeWrapper: true })
+    const { ui, attrs } = useUI('tooltip', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
@@ -123,6 +131,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      popper,
       trigger,
       container,
       open,
