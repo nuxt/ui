@@ -3,7 +3,9 @@
     <slot />
 
     <span :class="chipClass">
-      {{ text }}
+      <slot name="text">
+        {{ text }}
+      </slot>
     </span>
   </div>
 </template>
