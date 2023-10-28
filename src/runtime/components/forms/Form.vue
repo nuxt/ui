@@ -16,7 +16,7 @@ import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
-import type {  InjectedFormGroupValue, Strategy, FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types'
+import type { Strategy, FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types'
 import { mergeConfig } from '../../utils'
 import { uid } from '../../utils/uid'
 import { useUI } from '../../composables/useUI'
@@ -65,7 +65,7 @@ export default defineComponent({
   },
   emits: ['submit', 'error'],
   setup (props, { expose, emit }) {
-    const { ui  } = useUI('form', toRef(props, 'ui'), config)
+    const { ui } = useUI('form', toRef(props, 'ui'), config)
 
     const bus = useEventBus<FormEvent>(`form-${uid()}`)
 
