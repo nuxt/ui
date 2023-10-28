@@ -14,7 +14,7 @@
         v-bind="attrs"
       >
     </div>
-    <div v-if="label || $slots.label" class="ms-3 text-sm">
+    <div v-if="label || $slots.label" class="ms-3 inline-flex items-center">
       <label :for="id" :class="ui.label">
         <slot name="label">{{ label }}</slot>
         <span v-if="required" :class="ui.required">*</span>
