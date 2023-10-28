@@ -3,30 +3,25 @@
     <slot />
 
     <span :class="chipClass">
-        {{ text }}
+      {{ text }}
     </span>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, toRef, watch } from 'vue'
+import { defineComponent, computed, toRef } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
-import UIcon from '../elements/Icon.vue'
+import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
 import type { ChipSize, ChipColor, ChipPosition, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
-import { value } from 'valibot'
 import { chip } from '#ui/ui.config'
 
 const config = mergeConfig<typeof chip>(appConfig.ui.strategy, appConfig.ui.chip, chip)
 
 export default defineComponent({
-  components: {
-    UIcon
-  },
   inheritAttrs: false,
   props: {
     size: {
