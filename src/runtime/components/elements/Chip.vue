@@ -3,7 +3,7 @@
     <slot />
 
     <span v-if="show" :class="chipClass">
-      <slot name="text">
+      <slot name="content">
         {{ text }}
       </slot>
     </span>
