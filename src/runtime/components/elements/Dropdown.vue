@@ -22,7 +22,8 @@
           <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
             <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
               <HMenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
-                <ULink
+                <component
+                  :is="!!item.to ? NuxtLink : 'button'"
                   v-bind="omit(item, ['label', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'click'])"
                   :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
                   @click="item.click"
@@ -30,14 +31,14 @@
                   <slot :name="item.slot || 'item'" :item="item">
                     <UIcon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
                     <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
-  
+
                     <span class="truncate">{{ item.label }}</span>
-  
+
                     <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
                       <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
                     </span>
                   </slot>
-                </ULink>
+                </component>
               </HMenuItem>
             </div>
           </HMenuItems>
@@ -48,14 +49,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, toRef, onMounted } from 'vue'
+import { defineComponent, ref, computed, toRef, onMounted, resolveComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem } from '@headlessui/vue'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
-import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { mergeConfig, omit } from '../../utils'
@@ -74,8 +74,7 @@ export default defineComponent({
     HMenuItem,
     UIcon,
     UAvatar,
-    UKbd,
-    ULink
+    UKbd
   },
   inheritAttrs: false,
   props: {
@@ -184,6 +183,8 @@ export default defineComponent({
       }, props.closeDelay)
     }
 
+    const NuxtLink = resolveComponent('NuxtLink')
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -195,7 +196,8 @@ export default defineComponent({
       containerStyle,
       onMouseOver,
       onMouseLeave,
-      omit
+      omit,
+      NuxtLink
     }
   }
 })
