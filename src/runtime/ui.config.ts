@@ -258,7 +258,7 @@ export const buttonGroup = {
 }
 
 export const chip = {
-  base: 'absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium',
+  base: 'absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium p-1 whitespace-nowrap',
   background: 'bg-{color}-500 dark:bg-{color}-400',
   inset: {
     '3xs': 'm-[.125rem]',
