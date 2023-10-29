@@ -177,8 +177,8 @@ export default defineComponent({
     }
 
     const onInput = (event: InputEvent) => {
-      if (!props.modelModifiers.lazy) {
-        autoResize()
+      autoResize()
+      if (!props.modelModifiers.lazy) {        
         updateInput((event.target as HTMLInputElement).value)
       }
     }
@@ -187,7 +187,6 @@ export default defineComponent({
       const value = (event.target as HTMLInputElement).value
 
       if (props.modelModifiers.lazy) {
-        autoResize()
         updateInput(value)
       }
 
