@@ -2,7 +2,7 @@
   <div class="relative inline-flex items-center justify-center flex-shrink-0">
     <slot />
 
-    <span :class="chipClass">
+    <span v-if="show" :class="chipClass">
       <slot name="text">
         {{ text }}
       </slot>
@@ -54,6 +54,10 @@ export default defineComponent({
     inset: {
       type: Boolean,
       default: () => config.default.inset
+    },
+    show: {
+      type: Boolean,
+      default: true
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
