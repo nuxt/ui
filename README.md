@@ -71,14 +71,16 @@ Visit https://ui.nuxt.com to explore the documentation.
 - [vueuse/vueuse](https://github.com/vueuse/vueuse)
 - [egoist/tailwindcss-icons](https://github.com/egoist/tailwindcss-icons)
 
-## Development
+## Contributing
 
-- Clone this repository.
-- Enable [Corepack](https://github.com/nodejs/corepack) using `corepack enable`.
-- Install dependencies using `pnpm install`.
-- Run `pnpm dev:prepare` to generate type stubs.
-- Use `pnpm play` to start [playground](https://github.com/nuxt/ui/tree/main/playground) in development mode.
-- Use `pnpm dev` to start [docs](https://github.com/nuxt/ui/tree/main/docs) in development mode.
+Thank you for considering contributing to Nuxt UI. Here are a few ways you can get involved:
+
+- Reporting Bugs: If you come across any bugs or issues, please check out the reporting bugs guide to learn how to submit a bug report.
+- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/getting-started/contributing) to share your suggestions.
+
+## Local Development
+
+Follow the docs to [Set up your local development environment](https://ui.nuxt.com/getting-started/contributing#_2-local-development-setup) and contribute.
 
 ## License
 
