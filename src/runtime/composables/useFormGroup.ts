@@ -54,7 +54,10 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     return {
       inputId,
       name: computed(() => inputProps?.name ?? formGroup?.name.value),
-      size: computed(() => inputProps?.size ?? formGroup?.size.value ?? config?.default?.size),
+      size: computed(() => {
+        const formGroupSize = config.size[formGroup?.size.value] ? formGroup?.size.value : null
+        return inputProps?.size ?? formGroupSize ?? config?.default?.size
+      }),
       color: computed(() => formGroup?.error?.value ? 'red' : inputProps?.color),
       emitFormBlur,
       emitFormInput,

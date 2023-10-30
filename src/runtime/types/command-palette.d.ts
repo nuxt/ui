@@ -23,5 +23,6 @@ export interface Group {
   inactive?: string
   commands?: Command[]
   search?: Function
+  filter?: Function
   [key: string]: any
 }
