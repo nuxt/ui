@@ -1,8 +1,7 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, afterEach } from 'vitest'
 import module from '../src/module'
 import { loadNuxt } from '@nuxt/kit'
 import { join } from 'path'
-import { getIconCollections, iconsPlugin } from '@egoist/tailwindcss-icons'
 
 // TODO: fix these anys
 async function getTailwindCSSConfig (overrides: any = {}): Promise<[any, any]> {
@@ -40,21 +39,89 @@ describe('nuxt', () => {
         primary: 'green',
         gray: 'cool'
       })
+      // TODO: this should be done inside getTailwindCSSConfig
+      nuxt.close()
     })
   })
 })
 
-describe.only('tailwind', () => {
+describe('tailwindcss config', () => {
+  let nuxt
+  afterEach(async () => {
+    // TODO: this should be done inside getTailwindCSSConfig
+    await nuxt.then((n) => {
+      n.close()
+    })
+  })
   it.each([
-    [ ['myColor'], '', /bg-(myColor|primary)-50/ ]
-  ])('smart safelist %s should %s generate safelist %s', async (safelistColors, not, safelistPattern) => {
+    /* format:
+     name,
+     tailwindcss config, safelistColors,
+     expected safelistPatterns (add "!" before a pattern to negate it)
+    */
+    [
+      'default safelist',
+      {}, [],
+      ['bg-(primary)-50', 'bg-(red)-500'] // these both should be in the safelist
+    ],
+    [
+      'safelisting single new color',
+      {}, ['myColor'],
+      'bg-(myColor|primary)-50'
+    ],
+    [
+      'reducing amount of theme colors',
+      { theme: { colors: { plainBlue: '#00F' } } }, ['plainBlue'],
+      ['bg-(plainBlue|primary)-50', '!', /orange/] // the word "orange" should _not_ be found in any safelist pattern
+    ]
+  ])('%s', async (_description, tailwindcss, safelistColors, safelistPatterns) => {
     const [config, _nuxt] = await getTailwindCSSConfig({
       ui: {
         safelistColors
+      },
+      tailwindcss: {
+        config: tailwindcss
       }
     })
-    expect(config.safelist).toContainEqual({
-      pattern: safelistPattern
+    nuxt = _nuxt
+    expect.extend({
+      toBeRegExp: (received, expected) => {
+        if (typeof expected === 'string' || expected instanceof String) {
+          return {
+            message: () => `expected ${received} to be exact regex ${expected}`,
+            pass: received.toString() === RegExp(expected).toString()
+          }
+        } else if (expected instanceof RegExp) {
+          return {
+            message: () => `expected ${received} to be a regex like ${expected.toString()}`,
+            pass: received.toString().match(expected)
+          }
+        }
+        return {
+          message: () => `expected ${received} to be a regex`,
+          pass: false
+        }
+      }
     })
+    safelistPatterns = safelistPatterns instanceof Array ? safelistPatterns : [safelistPatterns]
+
+    let negate = false
+    for (const safelistPattern of safelistPatterns) {
+      if (safelistPattern === '!') {
+        // negate next!
+        negate = true
+        continue
+      }
+      if (negate) {
+        expect(config.safelist).not.toContainEqual({
+          pattern: expect.toBeRegExp(safelistPattern)
+        })
+      } else {
+        expect(config.safelist).toContainEqual({
+          pattern: expect.toBeRegExp(safelistPattern)
+        })
+      }
+      negate = false
+    }
   })
 })
