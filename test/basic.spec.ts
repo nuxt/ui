@@ -25,15 +25,18 @@ async function getTailwindCSSConfig (): Promise<[any, any]> {
 
 describe('basic', () => {
   it('should add plugins and modules to nuxt', async () => {
-    const [_config, nuxt] = await getTailwindCSSConfig()
-    await nuxt.then((n) => {
-      console.log(n.options.plugins)
-      expect(n.options.plugins).toContainEqual(
+    const [_config, lnuxt] = await getTailwindCSSConfig()
+    await lnuxt.then((nuxt) => {
+      expect(nuxt.options.plugins).toContainEqual(
         expect.objectContaining({
           src: expect.stringContaining('plugins/colors'),
           mode: 'all'
         })
       )
+      expect(nuxt.options._requiredModules).toContain({
+        '@nuxtjs/color-mode': true,
+        '@nuxtjs/tailwindcss': true
+      })
     })
   })
 })
