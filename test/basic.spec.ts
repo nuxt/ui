@@ -8,7 +8,7 @@ async function getTailwindCSSConfig (overrides: any = {}): Promise<[any, any]> {
   overrides.modules = [ module ]
   overrides.ssr = overrides.ssr ?? false
   overrides.hooks = overrides.hooks ?? {}
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     overrides.hooks['tailwindcss:resolvedConfig'] = async (config) => {
         resolve([config, nuxt])
       }
@@ -22,7 +22,7 @@ async function getTailwindCSSConfig (overrides: any = {}): Promise<[any, any]> {
 
 describe('nuxt', () => {
   it('should add plugins and modules to nuxt', async () => {
-    const [_config, lnuxt] = await getTailwindCSSConfig()
+    const [, lnuxt] = await getTailwindCSSConfig()
     await lnuxt.then((nuxt) => {
       expect(nuxt.options.plugins).toContainEqual(
         expect.objectContaining({
