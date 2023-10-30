@@ -438,7 +438,9 @@ export default defineComponent({
     })
 
     function onUpdate (event: any) {
-      query.value = ''
+      if (props.multiple || (!props.multple && props.clearSearchOnClose)) {
+        query.value = ''
+      }
       emit('update:modelValue', event)
       emit('change', event)
       emitFormChange()
