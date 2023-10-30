@@ -23,6 +23,7 @@
 import { ref, computed, toRef, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
+import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, looseToNumber } from '../../utils'
@@ -132,6 +133,8 @@ export default defineComponent({
 
     const { emitFormBlur, emitFormInput, inputId, color, size, name } = useFormGroup(props, config)
 
+    const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
+
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
     const autoFocus = () => {
@@ -164,11 +167,11 @@ export default defineComponent({
 
     // Custom function to handle the v-model properties
     const updateInput = (value: string) => {
-      if (props.modelModifiers.trim) {
+      if (modelModifiers.value.trim) {
         value = value.trim()
       }
 
-      if (props.modelModifiers.number) {
+      if (modelModifiers.value.number) {
         value = looseToNumber(value)
       }
 
@@ -178,7 +181,7 @@ export default defineComponent({
 
     const onInput = (event: InputEvent) => {
       autoResize()
-      if (!props.modelModifiers.lazy) {        
+      if (!modelModifiers.value.lazy) {        
         updateInput((event.target as HTMLInputElement).value)
       }
     }
@@ -186,12 +189,12 @@ export default defineComponent({
     const onChange = (event: InputEvent) => {
       const value = (event.target as HTMLInputElement).value
 
-      if (props.modelModifiers.lazy) {
+      if (modelModifiers.value.lazy) {
         updateInput(value)
       }
 
       // Update trimmed input so that it has same behaviour as native input
-      if (props.modelModifiers.trim) {
+      if (modelModifiers.value.trim) {
         (event.target as HTMLInputElement).value = value.trim()
       }
     }

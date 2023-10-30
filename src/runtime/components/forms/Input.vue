@@ -37,6 +37,7 @@ import { ref, computed, toRef, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
+import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, looseToNumber } from '../../utils'
@@ -169,6 +170,8 @@ export default defineComponent({
 
     const { emitFormBlur, emitFormInput, size, color, inputId, name } = useFormGroup(props, config)
 
+    const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
+    
     const input = ref<HTMLInputElement | null>(null)
 
     const autoFocus = () => {
@@ -180,11 +183,11 @@ export default defineComponent({
     // Custom function to handle the v-model properties
     const updateInput = (value: string) => {
 
-      if (props.modelModifiers.trim) {
+      if (modelModifiers.value.trim) {
         value = value.trim()
       }
 
-      if (props.modelModifiers.number || props.type === 'number') {
+      if (modelModifiers.value.number || props.type === 'number') {
         value = looseToNumber(value)
       }
 
@@ -193,7 +196,7 @@ export default defineComponent({
     }
 
     const onInput = (event: InputEvent) => {
-      if (!props.modelModifiers.lazy) {
+      if (!modelModifiers.value.lazy) {
         updateInput((event.target as HTMLInputElement).value)
       }
     }
@@ -201,12 +204,12 @@ export default defineComponent({
     const onChange = (event: InputEvent) => {
       const value = (event.target as HTMLInputElement).value
 
-      if (props.modelModifiers.lazy) {
+      if (modelModifiers.value.lazy) {
         updateInput(value)
       }
 
       // Update trimmed input so that it has same behaviour as native input https://github.com/vuejs/core/blob/5ea8a8a4fab4e19a71e123e4d27d051f5e927172/packages/runtime-dom/src/directives/vModel.ts#L63
-      if (props.modelModifiers.trim) {
+      if (modelModifiers.value.trim) {
         (event.target as HTMLInputElement).value = value.trim()
       }
     }
