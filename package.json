@@ -27,7 +27,8 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit && nuxi typecheck docs",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare docs",
-    "release": "release-it"
+    "release": "release-it",
+    "test": "vitest"
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.4.0",
