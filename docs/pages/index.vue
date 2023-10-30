@@ -86,16 +86,14 @@
             }"
             class="flex flex-col"
           >
-            <div v-if="card.image">
-              <UColorModeImage
-                :light="`${card.image.path}-light.svg`"
-                :dark="`${card.image.path}-dark.svg`"
-                :width="card.image.width"
-                :height="card.image.height"
-                :alt="card.title"
-                class="object-cover w-full"
-              />
-            </div>
+            <UColorModeImage
+              :light="`${card.image.path}-light.svg`"
+              :dark="`${card.image.path}-dark.svg`"
+              :width="card.image.width"
+              :height="card.image.height"
+              :alt="card.title"
+              class="object-cover w-full"
+            />
           </ULandingCard>
         </ULandingGrid>
       </template>
