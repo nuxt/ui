@@ -121,12 +121,7 @@ const { $prettier } = useNuxtApp()
 const appConfig = useAppConfig()
 const route = useRoute()
 
-let name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
-
-// TODO: Remove once merged on `main` branch
-if (['AvatarGroup', 'ButtonGroup'].includes(name)) {
-  name = `U${name}`
-}
+const name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
 
 const meta = await fetchComponentMeta(name)
 
