@@ -57,7 +57,6 @@
           <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.divide, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
             <HComboboxInput
               v-if="searchable"
-              ref="searchInput"
               :display-value="() => query"
               name="q"
               :placeholder="searchablePlaceholder"
@@ -120,7 +119,7 @@
 
 <script lang="ts">
 import { ref, computed, toRef, watch, defineComponent } from 'vue'
-import type { PropType, ComponentPublicInstance } from 'vue'
+import type { PropType } from 'vue'
 import {
   Combobox as HCombobox,
   ComboboxButton as HComboboxButton,
@@ -310,6 +309,10 @@ export default defineComponent({
     uiMenu: {
       type: Object as PropType<Partial<typeof configMenu & { strategy?: Strategy }>>,
       default: undefined
+    },
+    clearSearchOnClose: {
+      type: Boolean,
+      default: () => configMenu.default.clearSearchOnClose
     }
   },
   emits: ['update:modelValue', 'open', 'close', 'change'],
@@ -324,7 +327,6 @@ export default defineComponent({
     const { emitFormBlur, emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
 
     const query = ref('')
-    const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
 
     const selectClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -427,17 +429,16 @@ export default defineComponent({
       if (value) {
         emit('open')
       } else {
+        if (props.clearSearchOnClose) {
+          query.value = ''
+        }
         emit('close')
         emitFormBlur()
       }
     })
 
     function onUpdate (event: any) {
-      if (query.value && searchInput.value?.$el) {
-        query.value = ''
-        // explicitly set input text because `ComboboxInput` `displayValue` is not reactive
-        searchInput.value.$el.value = ''
-      }
+      query.value = ''
       emit('update:modelValue', event)
       emit('change', event)
       emitFormChange()
