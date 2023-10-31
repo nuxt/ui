@@ -1,5 +1,40 @@
 # Changelog
 
+## [2.10.0](https://github.com/nuxt/ui/compare/v2.9.0...v2.10.0) (2023-10-31)
+
+
+### Features
+
+* **CommandPalette:** handle `filter` attribute in groups ([#871](https://github.com/nuxt/ui/issues/871)) ([8ba2a79](https://github.com/nuxt/ui/commit/8ba2a791e4877682705bd752d4ab6f9c52d0b37b))
+* **Divider:** new component ([#757](https://github.com/nuxt/ui/issues/757)) ([eb9ce6a](https://github.com/nuxt/ui/commit/eb9ce6a0ddb7d73e3d3accee000ac71c20b96d1b))
+* **Form:** handle `[@error](https://github.com/error)` event ([#718](https://github.com/nuxt/ui/issues/718)) ([e16379f](https://github.com/nuxt/ui/commit/e16379fdbdff6c98e96dc03cc67f3912f2f61075))
+* **Input/Textarea:** allow specifying autofocus delay for page transitions ([#816](https://github.com/nuxt/ui/issues/816)) ([8bfd359](https://github.com/nuxt/ui/commit/8bfd3591a624ad7b77bcd9d3c38961a1ba59f23c))
+* **Meter:** new component ([#827](https://github.com/nuxt/ui/issues/827)) ([abbcc37](https://github.com/nuxt/ui/commit/abbcc37fbb4b52b1503a69f8312cbecfe222f675))
+* **Pagination:** add first and last page buttons ([#842](https://github.com/nuxt/ui/issues/842)) ([c5ce997](https://github.com/nuxt/ui/commit/c5ce997ba9d7abdb8282fcd34b88c380a7a4c592))
+* **Popover:** manual mode & horizontal offset ([#781](https://github.com/nuxt/ui/issues/781)) ([92b8618](https://github.com/nuxt/ui/commit/92b86186e7b8a987eec1da9cf45a0ec378d421cf))
+* **popper:** `arrow` option & docs consistency across components ([#875](https://github.com/nuxt/ui/issues/875)) ([f785ecd](https://github.com/nuxt/ui/commit/f785ecd46fdff77ecb8579d8a7edc463bcce2407))
+* **Progress:** new component ([#697](https://github.com/nuxt/ui/issues/697)) ([2c5559b](https://github.com/nuxt/ui/commit/2c5559b73ea22f1021c18c2561de1e6cd6f9741f))
+* **RadioGroup:** configurable label size ([#881](https://github.com/nuxt/ui/issues/881)) ([5a2644b](https://github.com/nuxt/ui/commit/5a2644b329dd1bb85a8ca70f849e108dbb93c776))
+* **RadioGroup:** new component ([#730](https://github.com/nuxt/ui/issues/730)) ([23d5dc7](https://github.com/nuxt/ui/commit/23d5dc7b981d56127dd2bd3f03d752a76f36653c))
+* **Range:** add `2xs`, `xs`, `xl` and `2xl` sizes to match progress component ([3cb3914](https://github.com/nuxt/ui/commit/3cb3914386e465180337ff8bf3f78e07a14bbafb)), closes [#673](https://github.com/nuxt/ui/issues/673)
+* **Table:** add `v-model:sort` prop ([#803](https://github.com/nuxt/ui/issues/803)) ([9f4d88e](https://github.com/nuxt/ui/commit/9f4d88e0aa7ec8cbbdae3fccd372d8c5e81d7ad0))
+* **Tooltip:** adding option to show popper arrow ([#868](https://github.com/nuxt/ui/issues/868)) ([4ce2374](https://github.com/nuxt/ui/commit/4ce23746da27ad0ef9b1833e41105165045f1cb8))
+
+
+### Bug Fixes
+
+* **Accordion:** toggle correct element when keyboard press ([#805](https://github.com/nuxt/ui/issues/805)) ([96296c3](https://github.com/nuxt/ui/commit/96296c3d388a4f65f08e4a062f720d37f2c84ebc))
+* **Divider:** display a single border when no content ([3c5c338](https://github.com/nuxt/ui/commit/3c5c3389f8cdfcf9b70f1bb7d5553d0be55278a4))
+* **Dropdown:** use `NuxtLink` instead of `ULink` ([#882](https://github.com/nuxt/ui/issues/882)) ([c37ad8b](https://github.com/nuxt/ui/commit/c37ad8b79a61ffccbb8959ca07fdf54923313e00))
+* **FormGroup:** ensure size exists in config ([#695](https://github.com/nuxt/ui/issues/695)) ([f5f3388](https://github.com/nuxt/ui/commit/f5f33882f9ad48944e54f31cb784bedf26dccbd1))
+* **Modal:** remove padding on mobile with `fullscreen` enabled ([550ac10](https://github.com/nuxt/ui/commit/550ac10e49d15e0b5435e031ec61f7defdaee445)), closes [#811](https://github.com/nuxt/ui/issues/811)
+* **Notification:** add roles for accessibility ([#724](https://github.com/nuxt/ui/issues/724)) ([40f3b16](https://github.com/nuxt/ui/commit/40f3b161003f71ecacf57b9641de66acd14e3fab))
+* **Table:** enable sorting for nested column keys ([#835](https://github.com/nuxt/ui/issues/835)) ([b4f7b03](https://github.com/nuxt/ui/commit/b4f7b035f7e802427e57fc7359020648a23eb71e))
+* **Table:** prevent `[@select](https://github.com/select)` event call when selecting all rows ([#838](https://github.com/nuxt/ui/issues/838)) ([51f4d54](https://github.com/nuxt/ui/commit/51f4d549998c0d570adc843e1f3835cbd163ae69))
+* **Tabs:** truncate buttons content ([ddbb431](https://github.com/nuxt/ui/commit/ddbb4319539e9e306ed9fc6f4f2145f20f13683a)), closes [#796](https://github.com/nuxt/ui/issues/796)
+* **types:** handle sub-objects in `app.config.ts` (button colors) ([7be2af7](https://github.com/nuxt/ui/commit/7be2af7127acba2e1228b7994ecd8eb40e5c376b)), closes [#858](https://github.com/nuxt/ui/issues/858)
+* use explicit type imports ([#830](https://github.com/nuxt/ui/issues/830)) ([a8279d1](https://github.com/nuxt/ui/commit/a8279d1c97c2f2c6a5d9fd971abb27767b5beb4c))
+
 ## [2.9.0](https://github.com/nuxt/ui/compare/v2.8.1...v2.9.0) (2023-10-02)
 
 
