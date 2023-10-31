@@ -21,7 +21,7 @@ const route = useRoute()
 let name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
 
 // TODO: Remove once merged on `main` branch
-if (['AvatarGroup', 'ButtonGroup'].includes(name)) {
+if (['AvatarGroup', 'ButtonGroup', 'MeterGroup'].includes(name)) {
   name = `U${name}`
 }
 if (['avatar-group', 'button-group', 'radio'].includes(name)) {
