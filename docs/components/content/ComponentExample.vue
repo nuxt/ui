@@ -69,8 +69,14 @@ const props = defineProps({
   }
 })
 
+let component = props.component
+// TODO: Remove once merged on `main` branch
+if (['command-palette-theme-algolia', 'command-palette-theme-raycast', 'vertical-navigation-theme-tailwind', 'pagination-theme-rounded'].includes(component)) {
+  component = component.replace('-theme', '-example-theme')
+}
+
 const instance = getCurrentInstance()
-const camelName = camelCase(props.component)
+const camelName = camelCase(component)
 const data = await fetchContentExampleCode(camelName)
 
 const hasCode = computed(() => !props.hiddenCode && (data?.code || instance.slots.code))
