@@ -785,6 +785,14 @@ export const radio = {
   }
 }
 
+export const checkboxGroup = {
+  wrapper: 'relative flex items-start',
+  legend: 'text-sm font-medium text-gray-700 dark:text-gray-200 mb-1',
+  default: {
+    color: 'primary'
+  }
+}
+
 export const checkbox = {
   wrapper: 'relative flex items-start',
   base: 'h-4 w-4 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
