@@ -127,6 +127,9 @@ let name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params
 if (['AvatarGroup', 'ButtonGroup'].includes(name)) {
   name = `U${name}`
 }
+if (['avatar-group', 'button-group'].includes(name)) {
+  name = `U${upperFirst(camelCase(name))}`
+}
 
 const meta = await fetchComponentMeta(name)
 
