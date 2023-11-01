@@ -96,10 +96,9 @@ export default defineNuxtConfig({
       'nuxt/dist',
       'nuxt-og-image',
       'nuxt-site-config',
-      '.c12',
       resolve('./components'),
-      process.env.NUXT_UI_PRO_PATH && resolve(process.env.NUXT_UI_PRO_PATH, '.docs', 'components')
-    ].filter(Boolean),
+      process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, '.docs', 'components') : '.c12'
+    ],
     metaFields: {
       props: true,
       slots: true,
