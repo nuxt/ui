@@ -89,7 +89,7 @@ describe('tailwindcss config', () => {
         if (typeof expected === 'string' || expected instanceof String) {
           return {
             message: () => `expected ${received} to be exact regex ${expected}`,
-            pass: received.toString() === RegExp(expected).toString()
+            pass: received.toString() === RegExp(expected as string).toString()
           }
         } else if (expected instanceof RegExp) {
           return {
