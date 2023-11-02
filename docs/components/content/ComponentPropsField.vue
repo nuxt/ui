@@ -1,21 +1,24 @@
 <template>
   <Field v-bind="prop">
     <code v-if="prop.default">{{ prop.default }}</code>
+    <p v-if="prop.description">
+      {{ prop.description }}
+    </p>
 
     <Collapsible v-if="prop.schema?.kind === 'array' && prop.schema?.schema?.filter(schema => schema.kind === 'object').length">
-      <FieldGroup v-for="schema in prop.schema.schema" :key="schema.name" class="!mt-0">
+      <FieldGroup v-for="schema in prop.schema.schema" :key="schema.name">
         <ComponentPropsField v-for="subProp in Object.values(schema.schema)" :key="(subProp as any).name" :prop="subProp" />
       </FieldGroup>
     </Collapsible>
     <Collapsible v-else-if="prop.schema?.kind === 'array' && prop.schema?.schema?.filter(schema => schema.kind === 'array').length">
-      <FieldGroup v-for="schema in prop.schema.schema" :key="schema.name" class="!mt-0">
+      <FieldGroup v-for="schema in prop.schema.schema" :key="schema.name">
         <template v-for="subSchema in schema.schema" :key="subSchema.name">
           <ComponentPropsField v-for="subProp in Object.values(subSchema.schema)" :key="(subProp as any).name" :prop="subProp" />
         </template>
       </FieldGroup>
     </Collapsible>
     <Collapsible v-else-if="prop.schema?.kind === 'object' && prop.schema.type !== 'Function' && Object.values(prop.schema.schema)?.length">
-      <FieldGroup class="!mt-0">
+      <FieldGroup>
         <ComponentPropsField v-for="subProp in Object.values(prop.schema.schema)" :key="(subProp as any).name" :prop="subProp" />
       </FieldGroup>
     </Collapsible>
