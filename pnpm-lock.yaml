@@ -176,8 +176,8 @@ importers:
         specifier: ^1.0.8
         version: 1.0.8(rollup@3.29.1)
       nuxt-component-meta:
-        specifier: ^0.5.4
-        version: 0.5.4(rollup@3.29.1)
+        specifier: npm:nuxt-component-meta-edge@0.5.5-28315603.0a285c7
+        version: /nuxt-component-meta-edge@0.5.5-28315603.0a285c7(rollup@3.29.1)
       nuxt-og-image:
         specifier: ^2.2.3
         version: 2.2.3(rollup@3.29.1)(vue@3.3.4)
@@ -9246,10 +9246,22 @@ packages:
       - supports-color
     dev: true
 
+  /nuxt-component-meta-edge@0.5.5-28315603.0a285c7(rollup@3.29.1):
+    resolution: {integrity: sha512-Hw2ByxuO1Itd7i2AyZ8oJhE+kbHAjI6FccCvJgKP2K/b2TgzfQSecjs5FNPtD1URa/4aCIFB8PVHpdNxoW5Piw==}
+    dependencies:
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
+      scule: 1.0.0
+      typescript: 5.2.2
+      vue-component-meta: 1.8.22(typescript@5.2.2)
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
   /nuxt-component-meta@0.5.4(rollup@3.29.1):
     resolution: {integrity: sha512-0ou1O5Dky/avUAm6XrO4r4aZiRgP3wCwBlOe49FcyVZo0uAULFw8b3j48BvKWzBdOywf8hJEL4V5o7FWnd1E+A==}
     dependencies:
-      '@nuxt/kit': 3.7.4(rollup@3.29.1)
+      '@nuxt/kit': 3.8.0(rollup@3.29.1)
       scule: 1.0.0
       typescript: 5.2.2
       vue-component-meta: 1.8.22(typescript@5.2.2)
