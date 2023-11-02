@@ -13,8 +13,8 @@ export default defineNuxtConfig({
     resolve(process.env.NUXT_UI_PRO_PATH, '.docs')
   ] : [
     '@nuxt/ui-pro',
-    ['github:nuxt/ui-pro/.docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
-  ],
+    process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/.docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
+  ].filter(Boolean),
   modules: [
     '@nuxt/content',
     'nuxt-og-image',
@@ -57,14 +57,14 @@ export default defineNuxtConfig({
         prefix: '/pro',
         driver: 'fs',
         base: resolve(process.env.NUXT_UI_PRO_PATH, '.docs/content/pro')
-      } : {
+      } : process.env.NUXT_GITHUB_TOKEN ? {
         prefix: '/pro',
         driver: 'github',
         repo: 'nuxt/ui-pro',
         branch: 'dev',
         dir: '.docs/content/pro',
         token: process.env.NUXT_GITHUB_TOKEN || ''
-      }
+      } : undefined
     }
   },
   fontMetrics: {
