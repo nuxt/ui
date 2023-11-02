@@ -1,4 +1,4 @@
-import { describe, expect, it, afterEach } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import module from '../src/module'
 import { loadNuxt } from '@nuxt/kit'
 import { join } from 'path'
