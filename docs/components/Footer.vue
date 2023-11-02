@@ -7,7 +7,10 @@
 
   <UFooter>
     <template #left>
-      <span class="text-sm text-gray-500 dark:text-gray-400">
+      <a v-if="$route.path.startsWith('/pro')" class="text-sm text-gray-500 dark:text-gray-400 hover:underline" href="https://ui.nuxt.com/pro/purchase" target="_blank">
+        Purchase Nuxt UI Pro
+      </a>
+      <span v-else class="text-sm text-gray-500 dark:text-gray-400">
         Published under <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="text-gray-900 dark:text-white">
           MIT License
         </NuxtLink>
