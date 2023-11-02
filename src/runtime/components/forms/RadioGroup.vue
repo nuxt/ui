@@ -13,6 +13,7 @@
         :model-value="modelValue"
         :value="option.value"
         :disabled="disabled"
+        :ui="uiRadio"
         @change="onUpdate(option.value)"
       >
         <template #label>
@@ -33,10 +34,11 @@ import { mergeConfig, get } from '../../utils'
 import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
-import { radioGroup } from '#ui/ui.config'
+import { radioGroup, radio } from '#ui/ui.config'
 import colors from '#ui-colors'
 
-const config = mergeConfig<typeof radioGroup>(appConfig.ui.strategy, appConfig.ui.select, radioGroup)
+const config = mergeConfig<typeof radioGroup>(appConfig.ui.strategy, appConfig.ui.radioGroup, radioGroup)
+const configRadio = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
 
 export default defineComponent({
   components: {
@@ -86,11 +88,16 @@ export default defineComponent({
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
+    },
+    uiRadio: {
+      type: Object as PropType<Partial<typeof configRadio & { strategy?: Strategy }>>,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
     const { ui, attrs } = useUI('radioGroup', toRef(props, 'ui'), config, toRef(props, 'class'))
+    const { ui: uiRadio } = useUI('radio', toRef(props, 'uiRadio'), configRadio)
 
     const { emitFormChange, color, name } = useFormGroup(props, config)
     provide('radio-group', { color, name })
@@ -131,6 +138,8 @@ export default defineComponent({
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      uiRadio,
       attrs,
       normalizedOptions,
       // eslint-disable-next-line vue/no-dupe-keys

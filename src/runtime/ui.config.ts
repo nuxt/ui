@@ -1,6 +1,4 @@
-// Data
-
-const _popperArrowPresets = {
+const _popperArrow = {
   base: 'before:w-2 before:h-2',
   ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-800',
   rounded: 'before:rounded-sm',
@@ -8,6 +6,8 @@ const _popperArrowPresets = {
   shadow: 'before:shadow',
   placement: 'group-data-[popper-placement*="right"]:-left-1 group-data-[popper-placement*="left"]:-right-1 group-data-[popper-placement*="top"]:-bottom-1 group-data-[popper-placement*="bottom"]:-top-1'
 }
+
+// Data
 
 export const table = {
   wrapper: 'relative overflow-x-auto',
@@ -302,7 +302,7 @@ export const dropdown = {
     strategy: 'fixed'
   },
   arrow: {
-    ..._popperArrowPresets,
+    ..._popperArrow,
     ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
     background: 'before:bg-white dark:before:bg-gray-700'
   }
@@ -401,7 +401,8 @@ export const progress = {
       sm: 'text-sm',
       md: 'text-sm',
       lg: 'text-sm',
-      xl: 'text-base'
+      xl: 'text-base',
+      '2xl': 'text-base'
     }
   },
   progress: {
@@ -435,14 +436,15 @@ export const progress = {
       sm: 'text-sm',
       md: 'text-sm',
       lg: 'text-sm',
-      xl: 'text-base'
+      xl: 'text-base',
+      '2xl': 'text-base'
     }
   },
   step: {
     base: 'transition-all opacity-0 truncate row-start-1 col-start-1',
     align: 'text-end',
     active: 'opacity-100',
-    first: 'text-gray-500'
+    first: 'text-gray-500 dark:text-gray-400'
   },
   animation: {
     carousel: 'bar-animation-carousel',
@@ -454,6 +456,95 @@ export const progress = {
     color: 'primary',
     size: 'md',
     animation: 'carousel'
+  }
+}
+
+export const meter = {
+  wrapper: 'w-full flex flex-col gap-2',
+  indicator: {
+    container: 'min-w-fit transition-all',
+    text: 'text-gray-400 dark:text-gray-500 text-end',
+    size: {
+      '2xs': 'text-xs',
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-sm',
+      lg: 'text-sm',
+      xl: 'text-base',
+      '2xl': 'text-base'
+    }
+  },
+  meter: {
+    base: 'appearance-none block w-full bg-none overflow-y-hidden',
+    background: 'bg-gray-200 dark:bg-gray-700',
+    color: 'text-{color}-500 dark:text-{color}-400',
+    ring: '',
+    rounded: 'rounded-full',
+    shadow: '',
+    size: {
+      '2xs': 'h-px',
+      xs: 'h-0.5',
+      sm: 'h-1',
+      md: 'h-2',
+      lg: 'h-3',
+      xl: 'h-4',
+      '2xl': 'h-5'
+    },
+    appearance: {
+      inner: '[&::-webkit-meter-inner-element]:block [&::-webkit-meter-inner-element]:relative [&::-webkit-meter-inner-element]:border-none [&::-webkit-meter-inner-element]:bg-none [&::-webkit-meter-inner-element]:bg-transparent',
+      meter: '[&::-webkit-meter-bar]:border-none [&::-webkit-meter-bar]:bg-none [&::-webkit-meter-bar]:bg-transparent',
+      bar: '[&::-webkit-meter-optimum-value]:border-none [&::-webkit-meter-optimum-value]:bg-none [&::-webkit-meter-optimum-value]:bg-current',
+      value: '[&::-moz-meter-bar]:border-none [&::-moz-meter-bar]:bg-none [&::-moz-meter-bar]:bg-current'
+    },
+    bar: {
+      transition: '[&::-webkit-meter-optimum-value]:transition-all [&::-moz-meter-bar]:transition-all',
+      ring: '',
+      rounded: '[&::-webkit-meter-optimum-value]:rounded-full [&::-moz-meter-bar]:rounded-full',
+      size: {
+        '2xs': '[&::-webkit-meter-optimum-value]:h-px [&::-moz-meter-bar]:h-px',
+        xs: '[&::-webkit-meter-optimum-value]:h-0.5 [&::-moz-meter-bar]:h-0.5',
+        sm: '[&::-webkit-meter-optimum-value]:h-1 [&::-moz-meter-bar]:h-1',
+        md: '[&::-webkit-meter-optimum-value]:h-2 [&::-moz-meter-bar]:h-2',
+        lg: '[&::-webkit-meter-optimum-value]:h-3 [&::-moz-meter-bar]:h-3',
+        xl: '[&::-webkit-meter-optimum-value]:h-4 [&::-moz-meter-bar]:h-4',
+        '2xl': '[&::-webkit-meter-optimum-value]:h-5 [&::-moz-meter-bar]:h-5'
+      }
+    }
+  },
+  label: {
+    base: 'flex gap-2 items-center',
+    text: 'truncate',
+    color: 'text-{color}-500 dark:text-{color}-400',
+    size: {
+      '2xs': 'text-xs',
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-sm',
+      lg: 'text-sm',
+      xl: 'text-base',
+      '2xl': 'text-base'
+    }
+  },
+  color: {
+    white: 'text-white dark:text-black',
+    black: 'text-black dark:text-white',
+    gray: 'text-gray-500 dark:text-gray-400'
+  },
+  default: {
+    size: 'md',
+    color: 'primary'
+  }
+}
+
+export const meterGroup = {
+  wrapper: 'flex flex-col gap-2 w-full',
+  base: 'flex flex-row flex-nowrap flex-shrink overflow-hidden',
+  background: 'bg-gray-200 dark:bg-gray-700',
+  transition: 'transition-all',
+  rounded: 'rounded-full',
+  shadow: '',
+  default: {
+    size: 'md'
   }
 }
 
@@ -665,7 +756,7 @@ export const selectMenu = {
     selectedIcon: 'i-heroicons-check-20-solid'
   },
   arrow: {
-    ..._popperArrowPresets,
+    ..._popperArrow,
     ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
     background: 'before:bg-white dark:before:bg-gray-700'
   }
@@ -686,9 +777,9 @@ export const radio = {
   background: 'bg-white dark:bg-gray-900',
   border: 'border border-gray-300 dark:border-gray-700',
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
-  label: 'font-medium text-gray-700 dark:text-gray-200',
-  required: 'text-red-500 dark:text-red-400',
-  help: 'text-gray-500 dark:text-gray-400',
+  label: 'text-sm font-medium text-gray-700 dark:text-gray-200',
+  required: 'text-sm text-red-500 dark:text-red-400',
+  help: 'text-sm text-gray-500 dark:text-gray-400',
   default: {
     color: 'primary'
   }
@@ -1144,7 +1235,7 @@ export const tooltip = {
   popper: {
     strategy: 'fixed'
   },
-  arrow: _popperArrowPresets
+  arrow: _popperArrow
 }
 
 export const popover = {
@@ -1168,7 +1259,7 @@ export const popover = {
   popper: {
     strategy: 'fixed'
   },
-  arrow: _popperArrowPresets
+  arrow: _popperArrow
 }
 
 export const contextMenu = {
@@ -1193,7 +1284,7 @@ export const contextMenu = {
     placement: 'bottom-start',
     scroll: false
   },
-  arrow: _popperArrowPresets
+  arrow: _popperArrow
 }
 
 export const notification = {
