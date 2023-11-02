@@ -35,7 +35,7 @@
 
       <BranchSelect />
 
-      <UNavigationTree :links="mapContentNavigation(navigation)" />
+      <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
     </template>
   </UHeader>
 </template>
@@ -48,9 +48,16 @@ defineProps<{
   links: Link[]
 }>()
 
+const route = useRoute()
 const { metaSymbol } = useShortcuts()
 
 const nav = inject<Ref<NavItem[]>>('navigation')
 
-const navigation = computed(() => nav.value.filter(item => !item._path.startsWith('/pro')))
+const navigation = computed(() => {
+  if (route.path.startsWith('/pro')) {
+    return nav.value.find(item => item._path === '/pro')?.children
+  }
+
+  return nav.value.filter(item => !item._path.startsWith('/pro'))
+})
 </script>
