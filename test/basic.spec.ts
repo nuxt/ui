@@ -46,13 +46,6 @@ describe('nuxt', () => {
 })
 
 describe('tailwindcss config', () => {
-  let nuxt
-  afterEach(async () => {
-    // TODO: this should be done inside getTailwindCSSConfig
-    await nuxt.then((n) => {
-      n.close()
-    })
-  })
   it.each([
     /* format:
      name,
@@ -83,7 +76,6 @@ describe('tailwindcss config', () => {
         config: tailwindcss
       }
     })
-    nuxt = _nuxt
     expect.extend({
       toBeRegExp: (received, expected) => {
         if (typeof expected === 'string' || expected instanceof String) {
@@ -123,5 +115,9 @@ describe('tailwindcss config', () => {
       }
       negate = false
     }
+
+    await _nuxt.then((n) => {
+      n.close()
+    })
   })
 })
