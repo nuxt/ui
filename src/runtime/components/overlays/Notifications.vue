@@ -1,20 +1,22 @@
 <template>
-  <div :class="wrapperClass" role="region" v-bind="attrs">
-    <div v-if="notifications.length" :class="ui.container">
-      <div v-for="notification of notifications" :key="notification.id">
-        <UNotification
-          v-bind="notification"
-          :class="notification.click && 'cursor-pointer'"
-          @click="notification.click && notification.click(notification)"
-          @close="toast.remove(notification.id)"
-        >
-          <template v-for="(_, name) in $slots" #[name]="slotData">
-            <slot :name="name" v-bind="slotData" />
-          </template>
-        </UNotification>
+  <Teleport to="body">
+    <div :class="wrapperClass" role="region" v-bind="attrs">
+      <div v-if="notifications.length" :class="ui.container">
+        <div v-for="notification of notifications" :key="notification.id">
+          <UNotification
+            v-bind="notification"
+            :class="notification.click && 'cursor-pointer'"
+            @click="notification.click && notification.click(notification)"
+            @close="toast.remove(notification.id)"
+          >
+            <template v-for="(_, name) in $slots" #[name]="slotData">
+              <slot :name="name" v-bind="slotData" />
+            </template>
+          </UNotification>
+        </div>
       </div>
     </div>
-  </div>
+  </Teleport>
 </template>
 
 <script lang="ts">
