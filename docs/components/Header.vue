@@ -33,7 +33,9 @@
     <template #panel>
       <UAsideLinks :links="links" />
 
-      <BranchSelect />
+      <UDivider type="dashed" class="mt-4 mb-3" />
+
+      <BranchSelect v-if="!route.path.startsWith('/pro')" />
 
       <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
     </template>
