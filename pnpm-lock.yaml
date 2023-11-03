@@ -143,8 +143,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(eslint@8.52.0)
       '@nuxt/ui-pro':
-        specifier: ^0.4.1
-        version: 0.4.1(rollup@3.29.1)(vue@3.3.4)(webpack@5.88.2)
+        specifier: ^0.4.2
+        version: 0.4.2(rollup@3.29.1)(vue@3.3.4)(webpack@5.88.2)
       '@nuxthq/studio':
         specifier: ^1.0.3
         version: 1.0.3(rollup@3.29.1)
@@ -1872,8 +1872,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/ui-pro@0.4.1(rollup@3.29.1)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-Ue82QTXo0oh5gM/nn3PkCFgiZvtAi40plxs3hiIkHpOijfXU1sLv9As/r2m3d3c6vRLbvBOpb82YuVkt7mi/bw==}
+  /@nuxt/ui-pro@0.4.2(rollup@3.29.1)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-TmP2+dAaulIaxoAKB6lxIckluflTeanZ6NVdtL7TTxMduscVgzEWZ3ierDUTHKf8u4D3KtB9jXL0vZcNdnf5zg==}
     dependencies:
       '@nuxt/ui': 2.10.0(rollup@3.29.1)(vue@3.3.4)(webpack@5.88.2)
       '@vueuse/core': 10.5.0(vue@3.3.4)
