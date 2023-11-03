@@ -47,7 +47,7 @@ const navigation = computed(() => {
     const pro = nav.value.find(item => item._path === '/pro')
 
     return [
-      pro,
+      ...(pro ? [pro] : []),
       ...dev
     ]
   }
