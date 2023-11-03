@@ -39,10 +39,17 @@ const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', { defa
 // Computed
 
 const navigation = computed(() => {
-  const main = nav.value.filter(item => item._path !== '/dev')
-  const dev = nav.value.find(item => item._path === '/dev')?.children
+  if (branch.value?.name === 'dev') {
+    const dev = nav.value.find(item => item._path === '/dev')?.children
+    const pro = nav.value.find(item => item._path === '/pro')
 
-  return branch.value?.name === 'dev' ? dev : main
+    return [
+      ...(pro ? [pro] : []),
+      ...dev
+    ]
+  }
+
+  return nav.value.filter(item => item._path !== '/dev')
 })
 
 const links = computed(() => {
@@ -58,7 +65,7 @@ const links = computed(() => {
     label: 'Roadmap',
     icon: 'i-heroicons-academic-cap',
     to: '/roadmap'
-  }, {
+  }, !!navigation.value.find(item => item._path === '/pro') && {
     label: 'Pro',
     icon: 'i-heroicons-square-3-stack-3d',
     to: '/pro',
@@ -90,7 +97,7 @@ const links = computed(() => {
     icon: 'i-heroicons-rocket-launch',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
-  }]
+  }].filter(Boolean)
 })
 
 // Provide
