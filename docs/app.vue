@@ -47,7 +47,7 @@ const navigation = computed(() => {
     const pro = nav.value.find(item => item._path === '/pro')
 
     return [
-      pro,
+      ...(pro ? [pro] : []),
       ...dev
     ]
   }
@@ -78,7 +78,7 @@ const links = computed(() => {
     label: 'Roadmap',
     icon: 'i-heroicons-academic-cap',
     to: '/roadmap'
-  }, {
+  }, !!navigation.value.find(item => item._path === '/pro') && {
     label: 'Pro',
     icon: 'i-heroicons-square-3-stack-3d',
     to: '/pro',
@@ -110,7 +110,7 @@ const links = computed(() => {
     icon: 'i-heroicons-rocket-launch',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
-  }]
+  }].filter(Boolean)
 })
 
 // Watch
