@@ -10,7 +10,7 @@
       <UDocsSurround :surround="surround" />
     </UPageBody>
 
-    <template v-if="page.body?.toc?.links?.length" #right>
+    <template v-if="page?.body?.toc?.links?.length" #right>
       <UDocsToc :links="page.body.toc.links">
         <template #bottom>
           <div class="hidden lg:block space-y-6 !mt-6">
