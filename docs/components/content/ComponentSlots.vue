@@ -1,19 +1,8 @@
 <template>
   <div>
-    <table>
-      <thead>
-        <tr>
-          <th>Slot</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="slot in (meta.meta.slots as any[])" :key="slot.name">
-          <td class="whitespace-nowrap">
-            <code>{{ slot.name }}</code>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <FieldGroup>
+      <Field v-for="slot in meta?.meta.slots" :key="slot.name" v-bind="slot" />
+    </FieldGroup>
   </div>
 </template>
 
@@ -28,10 +17,8 @@ const props = defineProps({
 })
 
 const route = useRoute()
-// eslint-disable-next-line vue/no-dupe-keys
-const slug = props.slug || route.params.slug[route.params.slug.length - 1]
-const camelName = camelCase(slug)
-const name = `U${upperFirst(camelName)}`
+
+const name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
 
 const meta = await fetchComponentMeta(name)
 </script>

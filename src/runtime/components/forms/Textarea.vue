@@ -72,6 +72,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    autofocusDelay: {
+      type: Number,
+      default: 100
+    },
     resize: {
       type: Boolean,
       default: false
@@ -168,7 +172,7 @@ export default defineComponent({
     onMounted(() => {
       setTimeout(() => {
         autoFocus()
-      }, 100)
+      }, props.autofocusDelay)
     })
 
     watch(() => props.modelValue, () => {

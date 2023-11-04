@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { string, objectAsync, email, minLength, Input } from 'valibot'
+import { string, objectAsync, email, minLength, type Input } from 'valibot'
 import type { FormSubmitEvent } from '#ui/types'
 
 const schema = objectAsync({
