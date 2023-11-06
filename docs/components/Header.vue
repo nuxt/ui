@@ -31,42 +31,35 @@
     </template>
 
     <template #panel>
-      <BranchSelect />
+      <UAsideLinks :links="links" />
 
-      <UNavigationTree :links="mapContentNavigation(navigation)" />
+      <UDivider type="dashed" class="mt-4 mb-3" />
+
+      <BranchSelect v-if="!route.path.startsWith('/pro')" />
+
+      <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
     </template>
   </UHeader>
 </template>
 
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
+import type { Link } from '#ui-pro/types'
 
+defineProps<{
+  links: Link[]
+}>()
+
+const route = useRoute()
 const { metaSymbol } = useShortcuts()
 
-const navigation = inject<Ref<NavItem[]>>('navigation')
+const nav = inject<Ref<NavItem[]>>('navigation')
 
-const links = computed(() => {
-  return [{
-    label: 'Documentation',
-    icon: 'i-heroicons-book-open-solid',
-    to: '/getting-started'
-  }, {
-    label: 'Examples',
-    icon: 'i-heroicons-square-3-stack-3d',
-    to: '/getting-started/examples'
-  }, {
-    label: 'Playground',
-    icon: 'i-simple-icons-stackblitz',
-    to: '/playground'
-  }, {
-    label: 'Pro',
-    icon: 'i-heroicons-square-3-stack-3d',
-    to: '/pro'
-  }, {
-    label: 'Releases',
-    icon: 'i-heroicons-rocket-launch-solid',
-    to: 'https://github.com/nuxt/ui/releases',
-    target: '_blank'
-  }]
+const navigation = computed(() => {
+  if (route.path.startsWith('/pro')) {
+    return nav.value.find(item => item._path === '/pro')?.children
+  }
+
+  return nav.value.filter(item => !item._path.startsWith('/pro'))
 })
 </script>

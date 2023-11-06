@@ -36,8 +36,8 @@
       </div>
     </div>
 
-    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass, overflowClass]">
-      <component :is="name" v-model="vModel" v-bind="fullProps">
+    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass, extraClass]">
+      <component :is="name" v-model="vModel" v-bind="fullProps" :class="componentClass">
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
 
         <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
@@ -99,13 +99,17 @@ const props = defineProps({
     type: String,
     default: 'bg-white dark:bg-gray-900'
   },
-  overflowClass: {
+  extraClass: {
     type: String,
     default: ''
   },
   previewOnly: {
     type: Boolean,
     default: false
+  },
+  componentClass: {
+    type: String,
+    default: ''
   }
 })
 
@@ -116,10 +120,16 @@ const componentProps = reactive({ ...props.props })
 const { $prettier } = useNuxtApp()
 const appConfig = useAppConfig()
 const route = useRoute()
-// eslint-disable-next-line vue/no-dupe-keys
-const slug = props.slug || route.params.slug[route.params.slug.length - 1]
-const camelName = camelCase(slug)
-const name = `U${upperFirst(camelName)}`
+
+let name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
+
+// TODO: Remove once merged on `main` branch
+if (['AvatarGroup', 'ButtonGroup', 'MeterGroup'].includes(name)) {
+  name = `U${name}`
+}
+if (['avatar-group', 'button-group', 'radio'].includes(name)) {
+  name = `U${upperFirst(camelCase(name))}`
+}
 
 const meta = await fetchComponentMeta(name)
 

@@ -1,7 +1,19 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
-    <ULandingHero v-bind="page.hero" :ui="{ base: 'relative z-[1]', container: 'max-w-3xl' }" class="mb-[calc(var(--header-height)*2)]">
+    <ULandingHero :ui="{ base: 'relative z-[1]', container: 'max-w-4xl' }" class="mb-[calc(var(--header-height)*2)]">
+      <template #headline>
+        <UBadge variant="subtle" size="md" class="hover:bg-primary-100 dark:bg-primary-950/100 dark:hover:bg-primary-900 transition-color relative font-medium rounded-full shadow-none">
+          <NuxtLink :to="`https://github.com/nuxt/ui/releases/tag/v${config.version}`" target="_blank" class="focus:outline-none" tabindex="-1">
+            <span class="absolute inset-0" aria-hidden="true" />
+          </NuxtLink>
+
+          <span class="flex items-center gap-1">
+            Nuxt UI {{ config.version.split('.').slice(0, -1).join('.') }} is out!
+          </span>
+        </UBadge>
+      </template>
+
       <template #title>
         <span v-html="page.hero?.title" />
       </template>
@@ -72,16 +84,14 @@
             }"
             class="flex flex-col"
           >
-            <div v-if="card.image">
-              <UColorModeImage
-                :light="`${card.image.path}-light.svg`"
-                :dark="`${card.image.path}-dark.svg`"
-                :width="card.image.width"
-                :height="card.image.height"
-                :alt="card.title"
-                class="object-cover w-full"
-              />
-            </div>
+            <UColorModeImage
+              :light="`${card.image.path}-light.svg`"
+              :dark="`${card.image.path}-dark.svg`"
+              :width="card.image.width"
+              :height="card.image.height"
+              :alt="card.title"
+              class="object-cover w-full"
+            />
           </ULandingCard>
         </ULandingGrid>
       </template>
@@ -199,6 +209,7 @@ const { data: module } = await useFetch<{
 
 const source = ref('npm i @nuxt/ui')
 
+const config = useRuntimeConfig().public
 const { copy, copied } = useClipboard({ source })
 const breakpoints = useBreakpoints(breakpointsTailwind)
 

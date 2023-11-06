@@ -1,10 +1,14 @@
 <template>
   <div class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0">
     <div
-      class="flex border border-gray-200 dark:border-gray-700 relative not-prose rounded-t-md"
-      :class="[{ 'p-4': padding, 'rounded-b-md': !hasCode, 'border-b-0': hasCode }, backgroundClass, overflowClass]"
+      class="flex border border-gray-200 dark:border-gray-700 relative rounded-t-md"
+      :class="[{ 'p-4': padding, 'rounded-b-md': !hasCode, 'border-b-0': hasCode, 'not-prose': !prose }, backgroundClass, extraClass]"
     >
-      <component :is="camelName" v-if="component" v-bind="componentProps" />
+      <template v-if="component">
+        <iframe v-if="iframe" :src="`/examples/${component}`" v-bind="iframeProps" :class="backgroundClass" class="w-full" />
+        <component :is="camelName" v-else v-bind="componentProps" :class="componentClass" />
+      </template>
+
       <ContentSlot v-if="$slots.default" :use="$slots.default" />
     </div>
     <template v-if="hasCode">
@@ -43,18 +47,36 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
+  prose: {
+    type: Boolean,
+    default: false
+  },
+  iframe: {
+    type: Boolean,
+    default: false
+  },
+  iframeProps: {
+    type: Object,
+    default: () => ({})
+  },
   backgroundClass: {
     type: String,
     default: 'bg-white dark:bg-gray-900'
   },
-  overflowClass: {
+  extraClass: {
     type: String,
     default: ''
   }
 })
 
+let component = props.component
+// TODO: Remove once merged on `main` branch
+if (['command-palette-theme-algolia', 'command-palette-theme-raycast', 'vertical-navigation-theme-tailwind', 'pagination-theme-rounded'].includes(component)) {
+  component = component.replace('-theme', '-example-theme')
+}
+
 const instance = getCurrentInstance()
-const camelName = camelCase(props.component)
+const camelName = camelCase(component)
 const data = await fetchContentExampleCode(camelName)
 
 const hasCode = computed(() => !props.hiddenCode && (data?.code || instance.slots.code))

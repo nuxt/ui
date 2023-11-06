@@ -1,5 +1,5 @@
 navigation: false
-title: 'Nuxt UI: Fully styled and customizable components for Nuxt'
+title: 'Nuxt UI: A UI Library for Modern Web Apps'
 description: 'It provides everything related to UI when building your Nuxt app. This includes components, icons, colors, dark mode but also keyboard shortcuts. Built with Headless UI and Tailwind CSS, published under MIT License.'
 hero:
   title: 'A <span class="text-primary">UI Library</span> for<br class="hidden lg:block"> Modern Web Apps'
