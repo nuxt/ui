@@ -12,8 +12,6 @@ export default async function (nameOrHtml: string, options: any, component: any)
     const result = await mountSuspended(app)
     html = result.html()
   } else {
-    options.slots = options.slots || { default: () => 'label' }
-    options.slots.default = options.slots.default || (() => 'label')
     const cResult = await mountSuspended(component, options)
     html = cResult.html()
   }
