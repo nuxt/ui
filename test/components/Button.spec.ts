@@ -6,7 +6,7 @@ import ComponentRender from './component-render'
 
 type ButtonOptions = TypeOf<typeof Button.props>
 
-describe.only('Button', () => {
+describe('Button', () => {
   it.each([
     [ 'basic case', { } ],
     [ 'leading icon', { props: { leading: true, icon: 'heroicons-check' } } ],
