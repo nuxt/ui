@@ -10,5 +10,5 @@ export interface DropdownItem extends Link {
   shortcuts?: string[]
   disabled?: boolean
   click?: Function
-  to?: string
+  to?: string | object
 }
