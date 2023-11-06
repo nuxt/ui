@@ -23,7 +23,7 @@
     "nuxt": "^3.8.0",
     "nuxt-cloudflare-analytics": "^1.0.8",
     "nuxt-component-meta": "npm:nuxt-component-meta-edge@0.5.5-28315603.0a285c7",
-    "nuxt-og-image": "^2.2.3",
+    "nuxt-og-image": "^2.2.4",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2",
     "ufo": "^1.3.1",
