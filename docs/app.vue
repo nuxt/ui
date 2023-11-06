@@ -84,16 +84,10 @@ const links = computed(() => {
     to: '/pro',
     children: [{
       label: 'Features',
-      to: '/pro#features',
-      exactHash: true,
+      to: '/pro',
+      exact: true,
       icon: 'i-heroicons-beaker',
       description: 'Discover all the features of Nuxt UI Pro.'
-    }, {
-      label: 'Pricing',
-      to: '/pro#pricing',
-      exactHash: true,
-      icon: 'i-heroicons-credit-card',
-      description: 'A simple pricing, for solo developers or teams.'
     }, {
       label: 'Guide',
       to: '/pro/guide',
