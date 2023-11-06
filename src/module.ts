@@ -168,6 +168,7 @@ export default defineNuxtModule<ModuleOptions>({
             vue: (content) => {
               return [
                 ...defaultExtractor(content),
+                // @ts-ignore
                 ...customSafelistExtractor(options.prefix, content, nuxt.options.appConfig.ui.colors, options.safelistColors)
               ]
             }
