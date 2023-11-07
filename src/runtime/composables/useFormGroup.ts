@@ -3,10 +3,11 @@ import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
 import type { FormEvent, FormEventType, InjectedFormGroupValue } from '../types/form'
 
 type InputProps = {
-  id?: string
+  id?: string | null
   size?: string | number | symbol
   color?: string
   name?: string
+  isFieldset?: boolean
 }
 
 export const useFormGroup = (inputProps?: InputProps, config?: any) => {
@@ -17,7 +18,7 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     const inputId = ref(inputProps?.id)
 
     onMounted(() => {
-      inputId.value = inputProps?.id ?? formGroup?.inputId.value
+      inputId.value = inputProps?.isFieldset ? null : inputProps?.id ?? formGroup?.inputId.value
       if (formGroup) {
         // Updates for="..." attribute on label if inputProps.id is provided
         formGroup.inputId.value = inputId.value

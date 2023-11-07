@@ -99,7 +99,7 @@ export default defineComponent({
     const { ui, attrs } = useUI('radioGroup', toRef(props, 'ui'), config, toRef(props, 'class'))
     const { ui: uiRadio } = useUI('radio', toRef(props, 'uiRadio'), configRadio)
 
-    const { emitFormChange, color, name } = useFormGroup(props, config)
+    const { emitFormChange, color, name } = useFormGroup({ ...props, isFieldset: true }, config)
     provide('radio-group', { color, name })
 
     const onUpdate = (value: any) => {

@@ -7,10 +7,10 @@
 
       <hr v-if="surround?.length">
 
-      <UDocsSurround :surround="(surround as ParsedContent[])" />
+      <UDocsSurround :surround="surround" />
     </UPageBody>
 
-    <template v-if="page.body?.toc?.links?.length" #right>
+    <template v-if="page?.body?.toc?.links?.length" #right>
       <UDocsToc :links="page.body.toc.links">
         <template #bottom>
           <div class="hidden lg:block space-y-6 !mt-6">
@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 
 const route = useRoute()
 const { branch } = useContentSource()
