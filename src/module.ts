@@ -158,7 +158,7 @@ export default defineNuxtModule<ModuleOptions>({
         content: {
           files: [
             resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'),
-            resolve(runtimeDir, '*.{mjs,js,ts}')
+            resolve(runtimeDir, 'ui.config/**/*.{mjs,js,ts}')
           ],
           transform: {
             vue: (content) => {
