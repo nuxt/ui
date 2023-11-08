@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "version": "2.10.0",
   "repository": "nuxt/ui",
-  "homepage": "https://image.nuxt.com",
+  "homepage": "https://ui.nuxt.com",
   "license": "MIT",
   "exports": {
     ".": {
