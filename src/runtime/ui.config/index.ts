@@ -13,6 +13,7 @@ export { default as alert } from './elements/alert'
 export { default as kbd } from './elements/kbd'
 export { default as progress } from './elements/progress'
 export { default as meter } from './elements/meter'
+export { default as meterGroup } from './elements/meterGroup'
 
 // Forms
 export { default as input } from './forms/input'
