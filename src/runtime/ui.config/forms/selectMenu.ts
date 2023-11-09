@@ -1,4 +1,4 @@
-import _popperArrow from "../_popperArrow"
+import _popperArrow from '../_popperArrow'
 
 export default {
   container: 'z-20 group',

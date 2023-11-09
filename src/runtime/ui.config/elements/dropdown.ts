@@ -1,4 +1,4 @@
-import _popperArrow from "../_popperArrow"
+import _popperArrow from '../_popperArrow'
 
 export default {
   wrapper: 'relative inline-flex text-left rtl:text-right',
