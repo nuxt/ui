@@ -4,9 +4,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-// @ts-expect-error
-import appConfig from '#build/app.config'
+import { defineComponent, computed } from 'vue'
+import { useAppConfig } from '#imports'
 
 export default defineComponent({
   props: {
@@ -16,7 +15,18 @@ export default defineComponent({
     },
     dynamic: {
       type: Boolean,
-      default: () => !!appConfig.ui?.icons?.dynamic
+      default: false
+    }
+  },
+  setup (props) {
+    const appConfig = useAppConfig()
+
+    // @ts-ignore
+    const dynamic = computed(() => props.dynamic || appConfig.ui?.icons?.dynamic)
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      dynamic
     }
   }
 })
