@@ -109,7 +109,7 @@ export default defineComponent({
     })
 
     const size = computed(() => ui.value.size[props.size ?? config.default.size])
-    const inputId = ref(uid())
+    const inputId = ref()
 
     provide<InjectedFormGroupValue>('form-group', {
       error,
