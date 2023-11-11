@@ -811,7 +811,7 @@ export const toggle = {
     '2xs': 'h-3 w-5',
     xs: 'h-3.5 w-6',
     sm: 'h-4 w-7',
-    md: 'h-5 aspect-[1.8]',
+    md: 'h-5 w-9',
     lg: 'h-6 w-11',
     xl: 'h-7 w-[3.25rem]',
     '2xl': 'h-8 w-[3.75rem]'
