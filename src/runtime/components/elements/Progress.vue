@@ -191,7 +191,7 @@ export default defineComponent({
     const percent = computed(() => {
       switch (true) {
       case props.value < 0: return 0
-      case props.value > 100: return 100
+      case props.value > realMax.value: return 100
       default: return (props.value / realMax.value) * 100
       }
     })
