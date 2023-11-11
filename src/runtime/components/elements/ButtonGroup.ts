@@ -21,6 +21,13 @@ export default defineComponent({
         return Object.keys(buttonConfig.size).includes(value)
       }
     },
+    rounded: {
+      type: String as PropType<'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'>,
+      default: 'md',
+      validator (value: string) {
+        return ['none', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'].includes(value)
+      }
+    },
     orientation: {
       type: String as PropType<'horizontal' | 'vertical'>,
       default: 'horizontal',
@@ -42,21 +49,6 @@ export default defineComponent({
 
     const children = computed(() => getSlotsChildren(slots))
 
-    const rounded = computed(() => {
-      const roundedMap = {
-        'rounded-none': { horizontal: { left: 'rounded-s-none', right: 'rounded-e-none' }, vertical: { top: 'rounded-t-none', bottom: 'rounded-b-none' } },
-        'rounded-sm': { horizontal: { left: 'rounded-s-sm', right: 'rounded-e-sm' }, vertical: { top: 'rounded-t-sm', bottom: 'rounded-b-sm' } },
-        rounded: { horizontal: { left: 'rounded-s', right: 'rounded-e' }, vertical: { top: 'rounded-t', bottom: 'rounded-b' } },
-        'rounded-md': { horizontal: { left: 'rounded-s-md', right: 'rounded-e-md' }, vertical: { top: 'rounded-t-md', bottom: 'rounded-b-md' } },
-        'rounded-lg': { horizontal: { left: 'rounded-s-lg', right: 'rounded-e-lg' }, vertical: { top: 'rounded-t-lg', bottom: 'rounded-b-lg' } },
-        'rounded-xl': { horizontal: { left: 'rounded-s-xl', right: 'rounded-e-xl' }, vertical: { top: 'rounded-t-xl', bottom: 'rounded-b-xl' } },
-        'rounded-2xl': { horizontal: { left: 'rounded-s-2xl', right: 'rounded-e-2xl' }, vertical: { top: 'rounded-t-2xl', bottom: 'rounded-b-2xl' } },
-        'rounded-3xl': { horizontal: { left: 'rounded-s-3xl', right: 'rounded-e-3xl' }, vertical: { top: 'rounded-t-3xl', bottom: 'rounded-b-3xl' } },
-        'rounded-full': { horizontal: { left: 'rounded-s-full', right: 'rounded-e-full' }, vertical: { top: 'rounded-t-full', bottom: 'rounded-b-full' } }
-      }
-      return roundedMap[ui.value.rounded][props.orientation]
-    })
-
     const clones = computed(() => children.value.map((node, index) => {
       const vProps: any = {}
 
@@ -65,16 +57,7 @@ export default defineComponent({
       }
 
       vProps.ui = node.props?.ui || {}
-      vProps.ui.rounded = 'rounded-none'
       vProps.ui.base = '!shadow-none'
-
-      if (index === 0) {
-        vProps.ui.rounded += ` ${rounded.value.left || rounded.value.top}`
-      }
-
-      if (index === children.value.length - 1) {
-        vProps.ui.rounded += ` ${rounded.value.right || rounded.value.bottom}`
-      }
 
       return cloneVNode(node, vProps)
     }))
@@ -82,7 +65,7 @@ export default defineComponent({
     const wrapperClass = computed(() => {
       return twMerge(twJoin(
         ui.value.wrapper[props.orientation],
-        ui.value.rounded,
+        ui.value.rounded[props.orientation][props.rounded],
         ui.value.shadow
       ), props.class)
     })
