@@ -1024,10 +1024,10 @@ export const verticalNavigation = {
   },
   divider: {
     border: {
-      base: divider.border.base,
+      base: divider.border.base
     },
     wrapper: {
-      base: `p-2`,
+      base: 'p-2'
     }
   }
 }
