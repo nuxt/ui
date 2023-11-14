@@ -8,34 +8,32 @@
       @mouseleave="onMouseleave"
     >
       <div :class="[ui.container, ui.rounded, ui.ring]">
-        <div :class="ui.padding">
-          <div class="flex gap-3" :class="{ 'items-start': description || $slots.description, 'items-center': !description && !$slots.description }">
-            <UIcon v-if="icon" :name="icon" :class="iconClass" />
-            <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
+        <div class="flex" :class="[ui.padding, ui.gap, { 'items-start': description || $slots.description, 'items-center': !description && !$slots.description }]">
+          <UIcon v-if="icon" :name="icon" :class="iconClass" />
+          <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
 
-            <div class="w-0 flex-1">
-              <p :class="ui.title">
-                <slot name="title" :title="title">
-                  {{ title }}
-                </slot>
-              </p>
-              <p v-if="(description || $slots.description)" :class="ui.description">
-                <slot name="description" :description="description">
-                  {{ description }}
-                </slot>
-              </p>
+          <div class="w-0 flex-1">
+            <p :class="ui.title">
+              <slot name="title" :title="title">
+                {{ title }}
+              </slot>
+            </p>
+            <p v-if="(description || $slots.description)" :class="ui.description">
+              <slot name="description" :description="description">
+                {{ description }}
+              </slot>
+            </p>
 
-              <div v-if="(description || $slots.description) && actions.length" class="mt-3 flex items-center gap-2">
-                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
-              </div>
+            <div v-if="(description || $slots.description) && actions.length" :class="ui.actions">
+              <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
             </div>
-            <div v-if="closeButton || (!description && !$slots.description && actions.length)" class="flex-shrink-0 flex items-center gap-3">
-              <div v-if="!description && !$slots.description && actions.length" class="flex items-center gap-2">
-                <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
-              </div>
+          </div>
+          <div v-if="closeButton || (!description && !$slots.description && actions.length)" :class="twMerge(ui.actions, 'mt-0')">
+            <template v-if="!description && !$slots.description && actions.length">
+              <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="onAction(action)" />
+            </template>
 
-              <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="onClose" />
-            </div>
+            <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="onClose" />
           </div>
         </div>
         <div v-if="timeout" :class="progressClass" :style="progressStyle" />
@@ -224,7 +222,8 @@ export default defineComponent({
       onMouseover,
       onMouseleave,
       onClose,
-      onAction
+      onAction,
+      twMerge
     }
   }
 })
