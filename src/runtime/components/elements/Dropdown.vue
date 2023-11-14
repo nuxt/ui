@@ -21,25 +21,29 @@
           <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(ui.arrow)]" />
           <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
             <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
-              <HMenuItem v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ active, disabled: itemDisabled }" :disabled="item.disabled">
-                <component
-                  :is="!!item.to ? NuxtLink : 'button'"
-                  v-bind="omit(item, ['label', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'click'])"
-                  :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
-                  @click="item.click"
-                >
-                  <slot :name="item.slot || 'item'" :item="item">
-                    <UIcon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
-                    <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
+              <NuxtLink v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ href, target, rel, navigate, isExternal }" v-bind="omit(item, ['label', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'click'])" custom>
+                <HMenuItem v-slot="{ active, disabled: itemDisabled, close }" :disabled="item.disabled">
+                  <component
+                    :is="!!href ? 'a' : 'button'"
+                    :href="!itemDisabled ? href : undefined"
+                    :rel="rel"
+                    :target="target"
+                    :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
+                    @click="(e) => [!!item.click && item.click(), !!href && !isExternal && navigate(e), close()]"
+                  >
+                    <slot :name="item.slot || 'item'" :item="item">
+                      <UIcon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
+                      <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
 
-                    <span class="truncate">{{ item.label }}</span>
+                      <span class="truncate">{{ item.label }}</span>
 
-                    <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
-                      <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
-                    </span>
-                  </slot>
-                </component>
-              </HMenuItem>
+                      <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
+                        <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
+                      </span>
+                    </slot>
+                  </component>
+                </HMenuItem>
+              </NuxtLink>
             </div>
           </HMenuItems>
         </div>
