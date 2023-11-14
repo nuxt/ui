@@ -47,8 +47,7 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      // A default value is needed here to bind the label
-      default: () => null,
+      default: () => null
     },
     value: {
       type: [String, Number, Boolean],
