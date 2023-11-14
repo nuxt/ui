@@ -333,9 +333,11 @@ export const alert = {
   wrapper: 'w-full relative overflow-hidden',
   title: 'text-sm font-medium',
   description: 'mt-1 text-sm leading-4 opacity-90',
+  actions: 'flex items-center gap-2 mt-3 flex-shrink-0',
   shadow: '',
   rounded: 'rounded-lg',
-  padding: 'p-3',
+  padding: 'p-4',
+  gap: 'gap-3',
   icon: {
     base: 'flex-shrink-0 w-5 h-5'
   },
@@ -1331,10 +1333,12 @@ export const notification = {
   container: 'relative overflow-hidden',
   title: 'text-sm font-medium text-gray-900 dark:text-white',
   description: 'mt-1 text-sm leading-4 text-gray-500 dark:text-gray-400',
+  actions: 'flex items-center gap-2 mt-3 flex-shrink-0',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-lg',
   padding: 'p-4',
+  gap: 'gap-3',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   icon: {
     base: 'flex-shrink-0 w-5 h-5',

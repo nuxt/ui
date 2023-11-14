@@ -32,6 +32,9 @@ interface Shortcut {
   // keyCode?: number
 }
 
+const chainedShortcutRegex = /^[^-]+.*-.*[^-]+$/
+const combinedShortcutRegex = /^[^_]+.*_.*[^_]+$/
+
 export const defineShortcuts = (config: ShortcutsConfig, options: ShortcutsOptions = {}) => {
   const { macOS, usingInput } = useShortcuts()
 
@@ -98,12 +101,15 @@ export const defineShortcuts = (config: ShortcutsConfig, options: ShortcutsOptio
     // Parse key and modifiers
     let shortcut: Partial<Shortcut>
 
-    if (key.includes('-') && key.includes('_')) {
-      console.trace('[Shortcut] Invalid key')
-      return null
+    if (key.includes('-') && key !== '-' && !key.match(chainedShortcutRegex)?.length) {
+      console.trace(`[Shortcut] Invalid key: "${key}"`)
     }
 
-    const chained = key.includes('-')
+    if (key.includes('_') && key !== '_' && !key.match(combinedShortcutRegex)?.length) {
+      console.trace(`[Shortcut] Invalid key: "${key}"`)
+    }
+
+    const chained = key.includes('-') && key !== '-'
     if (chained) {
       shortcut = {
         key: key.toLowerCase(),
