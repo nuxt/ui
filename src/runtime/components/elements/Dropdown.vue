@@ -29,7 +29,7 @@
                     :rel="rel"
                     :target="target"
                     :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
-                    @click="(e) => [!!item.click && item.click(), !!href && !isExternal && navigate(e), close()]"
+                    @click="(e) => [!!item.click && item.click(e), !!href && !isExternal && navigate(e), close()]"
                   >
                     <slot :name="item.slot || 'item'" :item="item">
                       <UIcon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
