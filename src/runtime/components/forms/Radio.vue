@@ -2,7 +2,7 @@
   <div :class="ui.wrapper">
     <div class="flex items-center h-5">
       <input
-        :id="id"
+        :id="inputId"
         v-model="pick"
         :name="name"
         :required="required"
@@ -15,7 +15,7 @@
       >
     </div>
     <div v-if="label || $slots.label" class="ms-3 flex flex-col">
-      <label :for="id" :class="ui.label">
+      <label :for="inputId" :class="ui.label">
         <slot name="label">{{ label }}</slot>
         <span v-if="required" :class="ui.required">*</span>
       </label>
@@ -48,7 +48,7 @@ export default defineComponent({
     id: {
       type: String,
       // A default value is needed here to bind the label
-      default: () => uid()
+      default: () => null,
     },
     value: {
       type: [String, Number, Boolean],
@@ -103,7 +103,14 @@ export default defineComponent({
     const { ui, attrs } = useUI('radio', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const radioGroup = inject('radio-group', null)
-    const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config)
+    const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config) 
+    const inputId = ref(props.id)
+
+    onMounted(() => {
+      if (!inputId.value) {
+        inputId.value = uid()
+      }
+    })
 
     const pick = computed({
       get () {
@@ -130,6 +137,7 @@ export default defineComponent({
     })
 
     return {
+      inputId,
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
