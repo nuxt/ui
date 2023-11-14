@@ -1,6 +1,6 @@
 <template>
   <div :class="alertClass" v-bind="attrs">
-    <div class="flex gap-3" :class="{ 'items-start': (description || $slots.description), 'items-center': !description && !$slots.description }">
+    <div class="flex" :class="[ui.gap, { 'items-start': (description || $slots.description), 'items-center': !description && !$slots.description }]">
       <UIcon v-if="icon" :name="icon" :class="ui.icon.base" />
       <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
 
@@ -16,14 +16,14 @@
           </slot>
         </p>
 
-        <div v-if="(description || $slots.description) && actions.length" class="mt-3 flex items-center gap-2">
+        <div v-if="(description || $slots.description) && actions.length" :class="ui.actions">
           <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="action.click" />
         </div>
       </div>
-      <div v-if="closeButton || (!description && !$slots.description && actions.length)" class="flex-shrink-0 flex items-center gap-3">
-        <div v-if="!description && !$slots.description && actions.length" class="flex items-center gap-2">
+      <div v-if="closeButton || (!description && !$slots.description && actions.length)" :class="twMerge(ui.actions, 'mt-0')">
+        <template v-if="!description && !$slots.description && actions.length">
           <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="action.click" />
-        </div>
+        </template>
 
         <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="$emit('close')" />
       </div>
@@ -126,7 +126,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
-      alertClass
+      alertClass,
+      twMerge
     }
   }
 })

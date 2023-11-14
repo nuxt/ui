@@ -333,9 +333,11 @@ export const alert = {
   wrapper: 'w-full relative overflow-hidden',
   title: 'text-sm font-medium',
   description: 'mt-1 text-sm leading-4 opacity-90',
+  actions: 'flex items-center gap-2 mt-3 flex-shrink-0',
   shadow: '',
   rounded: 'rounded-lg',
-  padding: 'p-3',
+  padding: 'p-4',
+  gap: 'gap-3',
   icon: {
     base: 'flex-shrink-0 w-5 h-5'
   },
