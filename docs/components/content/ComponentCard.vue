@@ -247,7 +247,7 @@ function renderObject (obj: any) {
 const shikiHighlighter = useShikiHighlighter({})
 const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
 const { data: ast } = await useAsyncData(
-  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`,
+  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`,
   async () => {
     let formatted = ''
     try {
