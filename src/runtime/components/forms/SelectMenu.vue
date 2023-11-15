@@ -86,17 +86,17 @@
                       aria-hidden="true"
                     />
                     <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
-  
+
                     <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : option[optionAttribute] }}</span>
                   </slot>
                 </div>
-  
+
                 <span v-if="selected" :class="[uiMenu.option.selectedIcon.wrapper, uiMenu.option.selectedIcon.padding]">
                   <UIcon :name="selectedIcon" :class="uiMenu.option.selectedIcon.base" aria-hidden="true" />
                 </span>
               </li>
             </component>
-  
+
             <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
@@ -291,6 +291,14 @@ export default defineComponent({
       type: Array,
       default: null
     },
+    clearSearchOnClose: {
+      type: Boolean,
+      default: false
+    },
+    clearSearchOnUpdate: {
+      type: Boolean,
+      default: false
+    },
     popper: {
       type: Object as PropType<PopperOptions>,
       default: () => ({})
@@ -423,21 +431,37 @@ export default defineComponent({
       return query.value === '' ? null : { [props.optionAttribute]: query.value }
     })
 
+    function clearOnClose () {
+      if (props.clearSearchOnClose) {
+        query.value = ''
+      }
+    }
+
+    function clearOnChange () {
+      if (props.clearSearchOnUpdate) {
+        query.value = ''
+      }
+    }
+
     watch(container, (value) => {
       if (value) {
         emit('open')
       } else {
+        clearOnClose()
         emit('close')
         emitFormBlur()
       }
     })
 
     function onUpdate (event: any) {
+      clearOnChange()
+
       if (query.value && searchInput.value?.$el) {
         query.value = ''
         // explicitly set input text because `ComboboxInput` `displayValue` is not reactive
         searchInput.value.$el.value = ''
       }
+
       emit('update:modelValue', event)
       emit('change', event)
       emitFormChange()
