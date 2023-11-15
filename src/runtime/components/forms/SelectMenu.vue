@@ -295,10 +295,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    clearSearchOnUpdate: {
-      type: Boolean,
-      default: false
-    },
     popper: {
       type: Object as PropType<PopperOptions>,
       default: () => ({})
@@ -437,12 +433,6 @@ export default defineComponent({
       }
     }
 
-    function clearOnChange () {
-      if (props.clearSearchOnUpdate) {
-        query.value = ''
-      }
-    }
-
     watch(container, (value) => {
       if (value) {
         emit('open')
@@ -454,8 +444,6 @@ export default defineComponent({
     })
 
     function onUpdate (event: any) {
-      clearOnChange()
-
       if (query.value && searchInput.value?.$el) {
         query.value = ''
         // explicitly set input text because `ComboboxInput` `displayValue` is not reactive
