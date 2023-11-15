@@ -202,7 +202,7 @@ const code = computed(() => {
       continue
     }
 
-    code += ` ${(typeof value === 'boolean' && value !== true) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'value' : kebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
+    code += ` ${(typeof value === 'boolean' && (value !== true || key === 'modelValue')) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'model-value' : kebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
   }
 
   if (props.slots) {
@@ -247,7 +247,7 @@ function renderObject (obj: any) {
 const shikiHighlighter = useShikiHighlighter({})
 const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
 const { data: ast } = await useAsyncData(
-  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`,
+  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`,
   async () => {
     let formatted = ''
     try {
