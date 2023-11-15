@@ -140,7 +140,7 @@ import UAvatar from '../elements/Avatar.vue'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { mergeConfig } from '../../utils'
+import { get, mergeConfig } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
@@ -422,7 +422,13 @@ export default defineComponent({
 
       return (props.options as any[]).filter((option: any) => {
         return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
-          return ['string', 'number'].includes(typeof option) ? option.toString().search(new RegExp(query.value, 'i')) !== -1 : (option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1)
+          if (['string', 'number'].includes(typeof option)) {
+            return String(option).search(new RegExp(query.value, 'i')) !== -1
+          }
+
+          const child = get(option, searchAttribute)
+
+          return child !== null && child !== undefined && String(child).search(new RegExp(query.value, 'i')) !== -1
         })
       })
     })
