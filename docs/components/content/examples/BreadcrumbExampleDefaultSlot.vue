@@ -5,8 +5,7 @@ const links = [{
 }, {
   label: 'Navigation'
 }, {
-  label: 'Breadcrumb',
-  to: '/navigation/breadcrumb'
+  label: 'Breadcrumb'
 }]
 </script>
 

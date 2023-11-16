@@ -8,8 +8,7 @@ const links = [{
   icon: 'i-heroicons-square-3-stack-3d'
 }, {
   label: 'Breadcrumb',
-  icon: 'i-heroicons-link',
-  to: '/navigation/breadcrumb'
+  icon: 'i-heroicons-link'
 }]
 </script>
 

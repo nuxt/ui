@@ -5,13 +5,12 @@ const links = [{
 }, {
   label: 'Navigation'
 }, {
-  label: 'Breadcrumb',
-  to: '/navigation/breadcrumb'
+  label: 'Breadcrumb'
 }]
 </script>
 
 <template>
-  <UBreadcrumb :links="links" :divider="null" :ui="{ container: 'gap-x-3' }">
+  <UBreadcrumb :links="links" :divider="null" :ui="{ ol: 'gap-x-3' }">
     <template #icon="{ link, index, isActive }">
       <UAvatar
         :alt="(index + 1 ).toString()"
