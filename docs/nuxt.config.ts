@@ -36,7 +36,7 @@ export default defineNuxtConfig({
   },
   ui: {
     global: true,
-    icons: ['heroicons', 'logos', 'simple-icons'],
+    icons: ['heroicons', 'simple-icons'],
     safelistColors: excludeColors(colors)
   },
   content: {
