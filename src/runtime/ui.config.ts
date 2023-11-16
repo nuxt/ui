@@ -550,6 +550,44 @@ export const meterGroup = {
   }
 }
 
+export const feed = {
+  base: 'flex flex-col',
+  item: 'flex flex-row',
+  indicator: {
+    base: 'h-full',
+    container: 'h-full flex flex-col items-center transition-all',
+    margin: 'mt-3',
+    icon: {
+      base: 'flex items-center justify-center transition-all',
+      background: 'bg-{color}-200 dark:bg-{color}-700',
+      color: '',
+      rounded: 'rounded-full',
+      size: 'h-8 w-8',
+      dot: 'h-2 w-2'
+    }
+  },
+  separator: {
+    base: 'h-full w-px my-1',
+    background: 'bg-gray-200 dark:bg-gray-700'
+  },
+  body: {
+    base: 'grow px-4 pb-4 mt-0.5',
+    title: 'text-gray-900 dark:text-gray-50',
+    description: 'text-gray-500 dark:text-gray-500'
+  },
+  trailing: {
+    base: 'mt-0.5',
+    text: {
+      base: '',
+      align: 'text-right',
+      color: 'text-gray-500 dark:text-gray-500'
+    }
+  },
+  default: {
+    color: 'gray'
+  }
+}
+
 // Forms
 
 export const input = {
