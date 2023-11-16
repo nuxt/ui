@@ -1,23 +1,19 @@
-<script setup lang="ts">
-const items = [{
-  text: 'Documentation',
+<script setup>
+const links = [{
+  label: 'Documentation',
   icon: 'i-heroicons-home',
-  to: '/getting-started'
+  to: '/'
 }, {
-  text: 'Installation',
-  icon: 'i-heroicons-arrow-down-tray',
-  to: '/getting-started/installation'
+  label: 'Navigation',
+  icon: 'i-heroicons-square-3-stack-3d',
+  to: '/navigation'
 }, {
-  text: 'Navigation',
-  icon: 'i-heroicons-bars-3',
-  disabled: true
-}, {
-  text: 'Breadcrumb',
+  label: 'Breadcrumb',
   icon: 'i-heroicons-link',
   to: '/navigation/breadcrumb'
 }]
 </script>
 
 <template>
-  <UBreadcrumb :items="items" />
+  <UBreadcrumb :links="links" />
 </template>

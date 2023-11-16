@@ -1,6 +1,7 @@
 import type { Link } from './link'
 
-export interface BreadcrumbItem extends Link {
-  text: string
+export interface BreadcrumbLink extends Link {
+  label: string
   icon?: string
+  iconClass?: string
 }

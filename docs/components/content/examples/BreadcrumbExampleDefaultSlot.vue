@@ -1,0 +1,22 @@
+<script setup>
+const links = [{
+  label: 'Documentation',
+  to: '/'
+}, {
+  label: 'Navigation',
+  to: '/navigation'
+}, {
+  label: 'Breadcrumb',
+  to: '/navigation/breadcrumb'
+}]
+</script>
+
+<template>
+  <UBreadcrumb :links="links">
+    <template #default="{ link, isActive, index }">
+      <UBadge :color="isActive ? 'primary' : 'gray'" class="rounded-full">
+        {{ index + 1 }}. {{ link.label }}
+      </UBadge>
+    </template>
+  </UBreadcrumb>
+</template>

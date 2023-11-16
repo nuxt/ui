@@ -1,23 +1,23 @@
-<script setup lang="ts">
-const items = [{
-  text: 'Documentation',
+<script setup>
+const links = [{
+  label: 'Documentation',
   icon: 'i-heroicons-home',
-  to: '/getting-started'
+  to: '/'
 }, {
-  text: 'Navigation',
-  to: '/getting-started'
+  label: 'Navigation',
+  icon: 'i-heroicons-square-3-stack-3d',
+  to: '/navigation'
 }, {
-  text: 'Breadcrumb',
+  label: 'Breadcrumb',
+  icon: 'i-heroicons-link',
   to: '/navigation/breadcrumb'
 }]
 </script>
 
 <template>
-  <UBreadcrumb :items="items">
+  <UBreadcrumb :links="links" :ui="{ container: 'gap-x-3' }">
     <template #divider>
-      <span class="w-1 h-1 rounded-full bg-gray-200" />
-      <span class="w-8 h-1 rounded-full bg-gray-300" />
-      <span class="w-1 h-1 rounded-full bg-gray-200" />
+      <span class="w-8 h-1 rounded-full bg-gray-300 dark:bg-gray-700" />
     </template>
   </UBreadcrumb>
 </template>

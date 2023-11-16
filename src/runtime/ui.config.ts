@@ -1124,7 +1124,7 @@ export const pagination = {
     nextButton: {
       color: 'white',
       class: 'rtl:[&_span:last-child]:rotate-180',
-      icon: 'i-heroicons-chevron-right-20-solid '
+      icon: 'i-heroicons-chevron-right-20-solid'
     }
   }
 }
@@ -1164,39 +1164,26 @@ export const tabs = {
 }
 
 export const breadcrumb = {
-  wrapper: 'w-full rounded p-3',
-  base: 'flex items-center gap-x-3 w-full',
-  size: {
-    '2xs': 'text-xs',
-    xs: 'text-xs',
-    sm: 'text-sm',
-    md: 'text-sm',
-    lg: 'text-sm',
-    xl: 'text-base'
+  wrapper: 'relative',
+  container: 'flex items-center gap-x-1.5',
+  link: {
+    base: 'flex items-center gap-x-1.5 text-sm group font-medium',
+    icon: {
+      base: 'flex-shrink-0 w-4 h-4',
+      active: '',
+      inactive: ''
+    },
+    active: 'text-primary-500 dark:text-primary-400',
+    inactive: 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
   },
-  icon: {
-    size: {
-      '2xs': 'h-4 w-4',
-      xs: 'h-4 w-4',
-      sm: 'h-5 w-5',
-      md: 'h-5 w-5',
-      lg: 'h-5 w-5',
-      xl: 'h-6 w-6'
+  divider: {
+    base: 'text-gray-500 dark:text-gray-400 text-sm',
+    icon: {
+      base: 'flex-shrink-0 w-4 h-4'
     }
   },
-  item: {
-    base: 'flex items-center',
-    link: 'flex items-center gap-x-1 disabled:cursor-not-allowed disabled:opacity-75',
-    active: 'text-primary-500 dark:text-primary-400 font-semibold',
-    inactive: 'text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
-    divider: 'ms-1 flex'
-  },
   default: {
-    divider: {
-      icon: 'i-heroicons-chevron-right',
-      text: ''
-    },
-    size: 'md'
+    divider: 'i-heroicons-chevron-right-20-solid'
   }
 }
 
