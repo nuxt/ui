@@ -12,7 +12,7 @@
             <UIcon
               v-if="link.icon"
               :name="link.icon"
-              :class="[ui.icon.base, index === links.length - 1 ? ui.icon.active : ui.icon.inactive, link.iconClass]"
+              :class="[ui.icon.base, index === links.length - 1 ? ui.icon.active : !!link.to ? ui.icon.inactive : '', link.iconClass]"
             />
           </slot>
 
