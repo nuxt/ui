@@ -3,31 +3,28 @@
     <ol :class="ui.ol">
       <li v-for="(link, index) in links" :key="index" :class="ui.li">
         <ULink
-          v-slot="{ isActive }"
           as="span"
-          :class="ui.base"
-          :active-class="ui.active"
-          :inactive-class="!!link.to ? ui.inactive : ''"
+          :class="[ui.base, index === links.length - 1 ? ui.active : !!link.to ? ui.inactive : '']"
           v-bind="omit(link, ['label', 'icon', 'iconClass'])"
           :aria-current="index === links.length - 1 ? 'page' : undefined"
         >
-          <slot name="icon" :link="link" :index="index" :is-active="isActive">
+          <slot name="icon" :link="link" :index="index" :is-active="index === links.length - 1">
             <UIcon
               v-if="link.icon"
               :name="link.icon"
-              :class="[ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive, link.iconClass]"
+              :class="[ui.icon.base, index === links.length - 1 ? ui.icon.active : ui.icon.inactive, link.iconClass]"
             />
           </slot>
 
-          <slot :link="link" :index="index" :is-active="isActive">
+          <slot :link="link" :index="index" :is-active="index === links.length - 1">
             {{ link.label }}
           </slot>
         </ULink>
 
         <slot v-if="index < links.length - 1" name="divider">
           <template v-if="divider">
-            <UIcon v-if="divider.startsWith('i-')" :name="divider" :class="ui.divider.base" />
-            <span v-else>{{ divider }}</span>
+            <UIcon v-if="divider.startsWith('i-')" :name="divider" :class="ui.divider.base" role="presentation" />
+            <span v-else role="presentation">{{ divider }}</span>
           </template>
         </slot>
       </li>
