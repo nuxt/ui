@@ -1,10 +1,9 @@
 <script setup>
 const links = [{
-  label: 'Documentation',
+  label: 'Home',
   to: '/'
 }, {
-  label: 'Navigation',
-  to: '/navigation'
+  label: 'Navigation'
 }, {
   label: 'Breadcrumb',
   to: '/navigation/breadcrumb'

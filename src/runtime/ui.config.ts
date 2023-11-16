@@ -1165,23 +1165,19 @@ export const tabs = {
 
 export const breadcrumb = {
   wrapper: 'relative',
-  container: 'flex items-center gap-x-1.5',
-  link: {
-    base: 'flex items-center gap-x-1.5 text-sm group font-medium',
-    icon: {
-      base: 'flex-shrink-0 w-4 h-4',
-      active: '',
-      inactive: ''
-    },
-    active: 'text-primary-500 dark:text-primary-400',
-    inactive: 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
+  ol: 'flex items-center gap-x-1.5',
+  li: 'flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm',
+  base: 'flex items-center gap-x-1.5 group font-medium',
+  icon: {
+    base: 'flex-shrink-0 w-4 h-4',
+    active: '',
+    inactive: ''
   },
   divider: {
-    base: 'text-gray-500 dark:text-gray-400 text-sm',
-    icon: {
-      base: 'flex-shrink-0 w-4 h-4'
-    }
+    base: 'flex-shrink-0 w-5 h-5'
   },
+  active: 'text-primary-500 dark:text-primary-400',
+  inactive: ' hover:text-gray-700 dark:hover:text-gray-200',
   default: {
     divider: 'i-heroicons-chevron-right-20-solid'
   }

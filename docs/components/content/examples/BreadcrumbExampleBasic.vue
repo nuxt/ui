@@ -1,12 +1,11 @@
 <script setup>
 const links = [{
-  label: 'Documentation',
+  label: 'Home',
   icon: 'i-heroicons-home',
   to: '/'
 }, {
   label: 'Navigation',
-  icon: 'i-heroicons-square-3-stack-3d',
-  to: '/navigation'
+  icon: 'i-heroicons-square-3-stack-3d'
 }, {
   label: 'Breadcrumb',
   icon: 'i-heroicons-link',

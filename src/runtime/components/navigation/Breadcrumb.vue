@@ -1,14 +1,13 @@
 <template>
   <nav aria-label="Breadcrumb" :class="ui.wrapper" v-bind="attrs">
-    <ol :class="ui.container">
-      <li v-for="(link, index) in links" :key="index" :class="ui.container">
+    <ol :class="ui.ol">
+      <li v-for="(link, index) in links" :key="index" :class="ui.li">
         <ULink
           v-slot="{ isActive }"
           as="span"
-          :to="link.to"
-          :class="ui.link.base"
-          :active-class="ui.link.active"
-          :inactive-class="ui.link.inactive"
+          :class="ui.base"
+          :active-class="ui.active"
+          :inactive-class="!!link.to ? ui.inactive : ''"
           v-bind="omit(link, ['label', 'icon', 'iconClass'])"
           :aria-current="index === links.length - 1 ? 'page' : undefined"
         >
@@ -16,7 +15,7 @@
             <UIcon
               v-if="link.icon"
               :name="link.icon"
-              :class="[ui.link.icon.base, isActive ? ui.link.icon.active : ui.link.icon.inactive, link.iconClass]"
+              :class="[ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive, link.iconClass]"
             />
           </slot>
 
@@ -27,8 +26,8 @@
 
         <slot v-if="index < links.length - 1" name="divider">
           <template v-if="divider">
-            <UIcon v-if="divider.startsWith('i-')" :name="divider" :class="[ui.divider.base, ui.divider.icon.base]" />
-            <span v-else :class="ui.divider.base">{{ divider }}</span>
+            <UIcon v-if="divider.startsWith('i-')" :name="divider" :class="ui.divider.base" />
+            <span v-else>{{ divider }}</span>
           </template>
         </slot>
       </li>
