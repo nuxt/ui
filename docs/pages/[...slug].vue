@@ -7,10 +7,10 @@
 
       <hr v-if="surround?.length">
 
-      <UDocsSurround :surround="(surround as ParsedContent[])" />
+      <UDocsSurround :surround="surround" />
     </UPageBody>
 
-    <template v-if="page.body?.toc?.links?.length" #right>
+    <template v-if="page?.body?.toc?.links?.length" #right>
       <UDocsToc :links="page.body.toc.links">
         <template #bottom>
           <div class="hidden lg:block space-y-6 !mt-6">
@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 
 const route = useRoute()
 const { branch } = useContentSource()
@@ -37,7 +36,7 @@ definePageMeta({
 
 const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found' })
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
@@ -55,6 +54,8 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
     .findSurround(withoutTrailingSlash(route.path))
 })
 
+const headline = computed(() => findPageHeadline(page.value))
+
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title: page.value.title,
@@ -66,10 +67,9 @@ useSeoMeta({
 defineOgImage({
   component: 'Docs',
   title: page.value.title,
-  description: page.value.description
+  description: page.value.description,
+  headline: headline.value
 })
-
-const headline = computed(() => findPageHeadline(page.value))
 
 const links = computed(() => [{
   icon: 'i-heroicons-pencil-square',

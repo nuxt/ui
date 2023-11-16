@@ -1,7 +1,19 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
-    <ULandingHero v-bind="page.hero" :ui="{ base: 'relative z-[1]', container: 'max-w-3xl' }" class="mb-[calc(var(--header-height)*2)]">
+    <ULandingHero :ui="{ base: 'relative z-[1]', container: 'max-w-4xl' }" class="mb-[calc(var(--header-height)*2)]">
+      <template #headline>
+        <UBadge variant="subtle" size="md" class="hover:bg-primary-100 dark:bg-primary-950/100 dark:hover:bg-primary-900 transition-color relative font-medium rounded-full shadow-none">
+          <NuxtLink :to="`https://github.com/nuxt/ui/releases/tag/v${config.version}`" target="_blank" class="focus:outline-none" tabindex="-1">
+            <span class="absolute inset-0" aria-hidden="true" />
+          </NuxtLink>
+
+          <span class="flex items-center gap-1">
+            Nuxt UI {{ config.version.split('.').slice(0, -1).join('.') }} is out!
+          </span>
+        </UBadge>
+      </template>
+
       <template #title>
         <span v-html="page.hero?.title" />
       </template>
@@ -60,9 +72,9 @@
       <template #features>
         <ULandingGrid class="lg:-mb-20 lg:auto-rows-[3rem]">
           <ULandingCard
-            v-for="(feature, subIndex) of section.features"
+            v-for="(card, subIndex) of section.cards"
             :key="subIndex"
-            v-bind="feature"
+            v-bind="card"
             :ui="{
               background: 'dark:bg-gray-900/50 dark:lg:bg-gradient-to-b from-gray-700/50 to-gray-950/50',
               body: {
@@ -72,16 +84,14 @@
             }"
             class="flex flex-col"
           >
-            <div v-if="feature.image">
-              <UColorModeImage
-                :light="`${feature.image.path}-light.svg`"
-                :dark="`${feature.image.path}-dark.svg`"
-                :width="feature.image.width"
-                :height="feature.image.height"
-                :alt="feature.title"
-                class="object-cover w-full"
-              />
-            </div>
+            <UColorModeImage
+              :light="`${card.image.path}-light.svg`"
+              :dark="`${card.image.path}-dark.svg`"
+              :width="card.image.width"
+              :height="card.image.height"
+              :alt="card.title"
+              class="object-cover w-full"
+            />
           </ULandingCard>
         </ULandingGrid>
       </template>
@@ -199,6 +209,7 @@ const { data: module } = await useFetch<{
 
 const source = ref('npm i @nuxt/ui')
 
+const config = useRuntimeConfig().public
 const { copy, copied } = useClipboard({ source })
 const breakpoints = useBreakpoints(breakpointsTailwind)
 

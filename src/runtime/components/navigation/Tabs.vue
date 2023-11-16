@@ -26,7 +26,7 @@
       >
         <button :class="[ui.list.tab.base, ui.list.tab.background, ui.list.tab.height, ui.list.tab.padding, ui.list.tab.size, ui.list.tab.font, ui.list.tab.rounded, ui.list.tab.shadow, selected ? ui.list.tab.active : ui.list.tab.inactive]">
           <slot :item="item" :index="index" :selected="selected" :disabled="disabled">
-            {{ item.label }}
+            <span class="truncate">{{ item.label }}</span>
           </slot>
         </button>
       </HTab>

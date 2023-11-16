@@ -7,5 +7,5 @@ export type NestedKeyOf<ObjectType extends object> = {
 }[keyof ObjectType];
 
 export type DeepPartial<T> = Partial<{
-  [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string };
+  [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string | object };
 }>;

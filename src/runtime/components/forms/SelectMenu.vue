@@ -52,64 +52,67 @@
 
     <div v-if="open" ref="container" :class="[uiMenu.container, uiMenu.width]">
       <Transition appear v-bind="uiMenu.transition">
-        <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.divide, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
-          <HComboboxInput
-            v-if="searchable"
-            ref="searchInput"
-            :display-value="() => query"
-            name="q"
-            :placeholder="searchablePlaceholder"
-            autofocus
-            autocomplete="off"
-            :class="uiMenu.input"
-            @change="query = $event.target.value"
-          />
-          <component
-            :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
-            v-for="(option, index) in filteredOptions"
-            v-slot="{ active, selected, disabled: optionDisabled }"
-            :key="index"
-            as="template"
-            :value="valueAttribute ? option[valueAttribute] : option"
-            :disabled="option.disabled"
-          >
-            <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, selected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]">
-              <div :class="uiMenu.option.container">
-                <slot name="option" :option="option" :active="active" :selected="selected">
-                  <UIcon v-if="option.icon" :name="option.icon" :class="[uiMenu.option.icon.base, active ? uiMenu.option.icon.active : uiMenu.option.icon.inactive, option.iconClass]" aria-hidden="true" />
-                  <UAvatar
-                    v-else-if="option.avatar"
-                    v-bind="{ size: uiMenu.option.avatar.size, ...option.avatar }"
-                    :class="uiMenu.option.avatar.base"
-                    aria-hidden="true"
-                  />
-                  <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
-
-                  <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : option[optionAttribute] }}</span>
-                </slot>
-              </div>
-
-              <span v-if="selected" :class="[uiMenu.option.selectedIcon.wrapper, uiMenu.option.selectedIcon.padding]">
-                <UIcon :name="selectedIcon" :class="uiMenu.option.selectedIcon.base" aria-hidden="true" />
-              </span>
-            </li>
+        <div>
+          <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(uiMenu.arrow)]" />
+          <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.divide, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
+            <HComboboxInput
+              v-if="searchable"
+              ref="searchInput"
+              :display-value="() => query"
+              name="q"
+              :placeholder="searchablePlaceholder"
+              autofocus
+              autocomplete="off"
+              :class="uiMenu.input"
+              @change="query = $event.target.value"
+            />
+            <component
+              :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
+              v-for="(option, index) in filteredOptions"
+              v-slot="{ active, selected, disabled: optionDisabled }"
+              :key="index"
+              as="template"
+              :value="valueAttribute ? option[valueAttribute] : option"
+              :disabled="option.disabled"
+            >
+              <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, selected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]">
+                <div :class="uiMenu.option.container">
+                  <slot name="option" :option="option" :active="active" :selected="selected">
+                    <UIcon v-if="option.icon" :name="option.icon" :class="[uiMenu.option.icon.base, active ? uiMenu.option.icon.active : uiMenu.option.icon.inactive, option.iconClass]" aria-hidden="true" />
+                    <UAvatar
+                      v-else-if="option.avatar"
+                      v-bind="{ size: uiMenu.option.avatar.size, ...option.avatar }"
+                      :class="uiMenu.option.avatar.base"
+                      aria-hidden="true"
+                    />
+                    <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
+  
+                    <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : option[optionAttribute] }}</span>
+                  </slot>
+                </div>
+  
+                <span v-if="selected" :class="[uiMenu.option.selectedIcon.wrapper, uiMenu.option.selectedIcon.padding]">
+                  <UIcon :name="selectedIcon" :class="uiMenu.option.selectedIcon.base" aria-hidden="true" />
+                </span>
+              </li>
+            </component>
+  
+            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
+              <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
+                <div :class="uiMenu.option.container">
+                  <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
+                    <span class="block truncate">Create "{{ queryOption[optionAttribute] }}"</span>
+                  </slot>
+                </div>
+              </li>
+            </component>
+            <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
+              <slot name="option-empty" :query="query">
+                No results for "{{ query }}".
+              </slot>
+            </p>
           </component>
-
-          <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
-            <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
-              <div :class="uiMenu.option.container">
-                <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
-                  <span class="block truncate">Create "{{ queryOption[optionAttribute] }}"</span>
-                </slot>
-              </div>
-            </li>
-          </component>
-          <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
-            <slot name="option-empty" :query="query">
-              No results for "{{ query }}".
-            </slot>
-          </p>
-        </component>
+        </div>
       </Transition>
     </div>
   </component>
@@ -449,6 +452,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       name,
       inputId,
+      // eslint-disable-next-line vue/no-dupe-keys
+      popper,
       trigger,
       container,
       isLeading,

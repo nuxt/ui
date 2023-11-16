@@ -1,10 +1,23 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
+    <slot name="first" :on-click="onClickFirst">
+      <UButton
+        v-if="firstButton && showFirst"
+        :size="size"
+        :disabled="!canGoFirstOrPrev"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...ui.default.firstButton, ...firstButton }"
+        :ui="{ rounded: '' }"
+        aria-label="First"
+        @click="onClickFirst"
+      />
+    </slot>
+
     <slot name="prev" :on-click="onClickPrev">
       <UButton
         v-if="prevButton"
         :size="size"
-        :disabled="!canGoPrev"
+        :disabled="!canGoFirstOrPrev"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.prevButton, ...prevButton }"
         :ui="{ rounded: '' }"
@@ -28,12 +41,25 @@
       <UButton
         v-if="nextButton"
         :size="size"
-        :disabled="!canGoNext"
+        :disabled="!canGoLastOrNext"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...ui.default.nextButton, ...nextButton }"
         :ui="{ rounded: '' }"
         aria-label="Next"
         @click="onClickNext"
+      />
+    </slot>
+
+    <slot name="last" :on-click="onClickLast">
+      <UButton
+        v-if="lastButton && showLast"
+        :size="size"
+        :disabled="!canGoLastOrNext"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...ui.default.lastButton, ...lastButton }"
+        :ui="{ rounded: '' }"
+        aria-label="Last"
+        @click="onClickLast"
       />
     </slot>
   </div>
@@ -93,6 +119,22 @@ export default defineComponent({
     inactiveButton: {
       type: Object as PropType<Button>,
       default: () => config.default.inactiveButton as Button
+    },
+    showFirst: {
+      type: Boolean,
+      default: false
+    },
+    showLast: {
+      type: Boolean,
+      default: false
+    },
+    firstButton: {
+      type: Object as PropType<Button>,
+      default: () => config.default.firstButton as Button
+    },
+    lastButton: {
+      type: Object as PropType<Button>,
+      default: () => config.default.lastButton as Button
     },
     prevButton: {
       type: Object as PropType<Button>,
@@ -192,8 +234,24 @@ export default defineComponent({
       return items
     })
 
-    const canGoPrev = computed(() => currentPage.value > 1)
-    const canGoNext = computed(() => currentPage.value < pages.value.length)
+    const canGoFirstOrPrev = computed(() => currentPage.value > 1)
+    const canGoLastOrNext = computed(() => currentPage.value < pages.value.length)
+
+    function onClickFirst () {
+      if (!canGoFirstOrPrev.value) {
+        return
+      }
+
+      currentPage.value = 1
+    }
+
+    function onClickLast () {
+      if (!canGoLastOrNext.value) {
+        return
+      }
+
+      currentPage.value = pages.value.length
+    }
 
     function onClickPage (page: number | string) {
       if (typeof page === 'string') {
@@ -204,7 +262,7 @@ export default defineComponent({
     }
 
     function onClickPrev () {
-      if (!canGoPrev.value) {
+      if (!canGoFirstOrPrev.value) {
         return
       }
 
@@ -212,7 +270,7 @@ export default defineComponent({
     }
 
     function onClickNext () {
-      if (!canGoNext.value) {
+      if (!canGoLastOrNext.value) {
         return
       }
 
@@ -226,11 +284,13 @@ export default defineComponent({
       currentPage,
       pages,
       displayedPages,
-      canGoPrev,
-      canGoNext,
+      canGoLastOrNext,
+      canGoFirstOrPrev,
       onClickPrev,
       onClickNext,
-      onClickPage
+      onClickPage,
+      onClickFirst,
+      onClickLast
     }
   }
 })
