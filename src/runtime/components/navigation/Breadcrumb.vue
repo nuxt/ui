@@ -4,6 +4,7 @@
       <li v-for="(link, index) in links" :key="index" :class="ui.container">
         <ULink
           v-slot="{ isActive }"
+          as="span"
           :to="link.to"
           :class="ui.link.base"
           :active-class="ui.link.active"
