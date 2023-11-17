@@ -27,7 +27,7 @@ import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types'
+import type { ToggleSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { toggle } from '#ui/ui.config'
@@ -78,7 +78,7 @@ export default defineComponent({
       default: undefined
     },
     size: {
-      type: String as PropType<keyof typeof config.size>,
+      type: String as PropType<ToggleSize>,
       default: config.default.size,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
