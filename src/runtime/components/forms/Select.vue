@@ -61,11 +61,10 @@ import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, get } from '../../utils'
-import type { NestedKeyOf, Strategy } from '../../types'
+import type { SelectSize, SelectColor, SelectVariant, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { select } from '#ui/ui.config'
-import colors from '#ui-colors'
 
 const config = mergeConfig<typeof select>(appConfig.ui.strategy, appConfig.ui.select, select)
 
@@ -136,21 +135,21 @@ export default defineComponent({
       default: () => []
     },
     size: {
-      type: String as PropType<keyof typeof config.size>,
+      type: String as PropType<SelectSize>,
       default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      type: String as PropType<SelectColor>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      type: String as PropType<SelectVariant>,
       default: () => config.default.variant,
       validator (value: string) {
         return [

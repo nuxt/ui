@@ -17,7 +17,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     size: {
-      type: String as PropType<keyof typeof avatarConfig.size>,
+      type: String as PropType<AvatarSize>,
       default: null,
       validator (value: string) {
         return Object.keys(avatarConfig.size).includes(value)
