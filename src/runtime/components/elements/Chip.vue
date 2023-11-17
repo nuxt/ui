@@ -1,5 +1,5 @@
 <template>
-  <div class="relative inline-flex items-center justify-center flex-shrink-0">
+  <div :class="ui.wrapper" v-bind="attrs">
     <slot />
 
     <span v-if="show" :class="chipClass">
@@ -69,7 +69,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('chip', toRef(props, 'ui'), config)
+    const { ui, attrs } = useUI('chip', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const chipClass = computed(() => {
       return twJoin(
