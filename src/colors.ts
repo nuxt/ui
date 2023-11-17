@@ -182,9 +182,6 @@ const safelistByComponent = {
   }, {
     pattern: new RegExp(`bg-(${colorsAsRegex})-700`),
     variants: ['dark']
-  }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-900`),
-    variants: ['dark']
   }],
   meter: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),

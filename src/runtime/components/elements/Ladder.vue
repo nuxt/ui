@@ -1,23 +1,23 @@
 <template>
-  <ol :class="ladderClass" v-bind="attrs">
-    <template v-for="(step, key) in computedSteps" :key="key">
-      <li :class="ladderStepContainerClass">
-        <div :class="ladderStepClass">
-          <div :class="ladderStepIndicatorClass">
-            <div v-if="hasSeparators" :class="ladderStepSeparatorsWrapperClass">
-              <div :class="[ladderStepSeparatorClass, key < 1 ? 'invisible' : '']" />
-              <div :class="[ladderStepSeparatorClass, key > computedSteps.length - 2 ? 'invisible' : '']" />
+  <ol :class="ui.base" v-bind="attrs">
+    <template v-for="(wrapper, key) in computedSteps" :key="key">
+      <li :class="ui.container">
+        <div :class="ui.step">
+          <div :class="ui.indicator">
+            <div v-if="hasSeparators" :class="ui.separator.wrapper">
+              <div :class="[ui.separator.base, ui.separator.color, key < 1 ? 'invisible' : '']" />
+              <div :class="[ui.separator.base, ui.separator.color, key > computedSteps.length - 2 ? 'invisible' : '']" class="ml-10" />
             </div>
-            <div :class="ladderStepIconWrapperClass">
+            <div :class="ui.icon.wrapper">
               <component
-                :is="step.step.click || step.step.to ? 'UButton' : 'div'"
-                :class="[ladderStepIconClass, step.isActive ? ladderStepActiveIconClass : ladderStepInactiveIconClass]"
+                :is="wrapper.step.click || wrapper.step.to ? 'UButton' : 'div'"
+                :class="[ui.icon.base, ui.icon.rounded, ui.icon.shadow, ui.icon.size, ui.icon.ring, getIconClass(wrapper)]"
                 type="button"
                 variant="ghost"
-                v-bind="omit(step.step, ['label', 'click', 'icon'])"
-                @click="step.step.click"
+                v-bind="omit(wrapper.step, ['label', 'click', 'icon'])"
+                @click="wrapper.step.click"
               >
-                <UIcon v-if="step.step.icon" :name="step.step.icon" />
+                <UIcon v-if="wrapper.step.icon" :name="wrapper.step.icon" />
                 <div v-else>
                   {{ key + 1 }}
                 </div>
@@ -25,8 +25,8 @@
             </div>
           </div>
 
-          <div :class="[ladderStepLabelClass, step.isActive ? ladderStepActiveLabelClass : ladderStepInactiveLabelClass]">
-            {{ step.step.label }}
+          <div :class="[ui.label.base, ui.label.size, getLabelClass(wrapper)]">
+            {{ wrapper.step.label }}
           </div>
         </div>
       </li>
@@ -84,13 +84,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    size: {
-      type: String as PropType<LadderSize>,
-      default: () => config.default.size,
-      validator (value: string) {
-        return Object.keys(config.label.size).includes(value)
-      }
-    },
     class: {
       type: [String, Object, Array] as PropType<any>,
       default: undefined
@@ -106,58 +99,40 @@ export default defineComponent({
 
     const hasSeparators = computed(() => props.separators)
 
-    const ladderClass = computed(() => {
-      return twJoin(
-        ui.value.base
-      )
-    })
+    function getIconClass (wrapper: LadderStepWrapper) {
+      const color = {
+        key: 'inactive',
+        name: wrapper.step.inactiveColor ?? props.inactiveColor
+      }
 
-    const ladderStepContainerClass = computed(() => {
-      return twJoin(
-        ui.value.container
-      )
-    })
+      if (wrapper.isActive) {
+        color.key = 'active'
+        color.name = wrapper.step.color ?? props.color
+      }
 
-    const ladderStepClass = computed(() => {
       return twJoin(
-        ui.value.step
+        ui.value.icon[color.key].background.replaceAll('{color}', color.name),
+        ui.value.icon[color.key].ring.replaceAll('{color}', color.name),
+        ui.value.icon[color.key].color.replaceAll('{color}', color.name),
+        ui.value.icon[color.key].shadow
       )
-    })
+    }
 
-    const ladderStepIndicatorClass = computed(() => {
-      return twJoin(
-        ui.value.indicator
-      )
-    })
+    function getLabelClass (wrapper: LadderStepWrapper) {
+      const color = {
+        key: 'inactive',
+        name: wrapper.step.inactiveColor ?? props.inactiveColor
+      }
 
-    const ladderStepSeparatorsWrapperClass = computed(() => {
-      return twJoin(
-        ui.value.separator.wrapper
-      )
-    })
+      if (wrapper.isActive) {
+        color.key = 'active'
+        color.name = wrapper.step.color ?? props.color
+      }
 
-    const ladderStepSeparatorClass = computed(() => {
       return twJoin(
-        ui.value.separator.base,
-        ui.value.separator.color.replaceAll('{color}', props.inactiveColor),
-        ui.value.separator.size[props.size]
+        ui.value.label[color.key].replaceAll('{color}', color.name)
       )
-    })
-
-    const ladderStepIconWrapperClass = computed(() => {
-      return twJoin(
-        ui.value.icon.wrapper
-      )
-    })
-
-    const ladderStepIconClass = computed(() => {
-      return twJoin(
-        ui.value.icon.base,
-        ui.value.icon.rounded,
-        ui.value.icon.shadow,
-        ui.value.icon.size[props.size]
-      )
-    })
+    }
 
     const ladderStepActiveIconClass = computed(() => {
       return twJoin(
@@ -174,25 +149,6 @@ export default defineComponent({
         ui.value.icon.inactive.ring.replaceAll('{color}', props.inactiveColor),
         ui.value.icon.inactive.color.replaceAll('{color}', props.inactiveColor),
         ui.value.icon.inactive.shadow
-      )
-    })
-
-    const ladderStepLabelClass = computed(() => {
-      return twJoin(
-        ui.value.label.base,
-        ui.value.label.size[props.size]
-      )
-    })
-
-    const ladderStepActiveLabelClass = computed(() => {
-      return twJoin(
-        ui.value.label.active.replaceAll('{color}', props.color)
-      )
-    })
-
-    const ladderStepInactiveLabelClass = computed(() => {
-      return twJoin(
-        ui.value.label.inactive.replaceAll('{color}', props.inactiveColor)
       )
     })
 
@@ -214,20 +170,13 @@ export default defineComponent({
 
     return {
       attrs,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       hasSeparators,
-      ladderClass,
-      ladderStepContainerClass,
-      ladderStepClass,
-      ladderStepIndicatorClass,
-      ladderStepSeparatorsWrapperClass,
-      ladderStepSeparatorClass,
-      ladderStepIconWrapperClass,
-      ladderStepIconClass,
+      getIconClass,
+      getLabelClass,
       ladderStepActiveIconClass,
       ladderStepInactiveIconClass,
-      ladderStepLabelClass,
-      ladderStepActiveLabelClass,
-      ladderStepInactiveLabelClass,
       computedSteps,
       omit
     }

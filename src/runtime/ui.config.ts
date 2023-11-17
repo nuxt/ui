@@ -557,57 +557,33 @@ export const ladder = {
   indicator: 'w-full grid',
   separator: {
     wrapper: 'row-start-1 col-start-1 flex items-center',
-    base: 'grow w-1/2',
-    color: 'bg-{color}-200 dark:bg-{color}-700',
-    shadow: '',
-    size: {
-      '2xs': 'h-px',
-      xs: 'h-1',
-      sm: 'h-2',
-      md: 'h-2',
-      lg: 'h-2',
-      xl: 'h-3',
-      '2xl': 'h-3'
-    }
+    base: 'grow h-px w-1/2',
+    color: 'bg-gray-200 dark:bg-gray-700',
+    shadow: ''
   },
   icon: {
     wrapper: 'row-start-1 col-start-1 flex justify-center',
     base: 'flex items-center justify-center transition-all disabled:cursor-not-allowed',
     rounded: 'rounded-full',
+    ring: '',
     shadow: '',
-    size: {
-      '2xs': 'text-xs h-5 w-5 ring-1',
-      xs: 'text-xs h-6 w-6 ring-1',
-      sm: 'text-sm h-7 w-7 ring-2',
-      md: 'text-md h-8 w-8 ring-2',
-      lg: 'text-lg h-9 w-9 ring-2',
-      xl: 'text-xl h-10 w-10 ring-4',
-      '2xl': 'text-2xl h-12 w-12 ring-4'
-    },
+    size: 'text-md h-8 w-8',
     active: {
-      background: 'bg-white dark:bg-gray-900',
-      ring: 'ring-{color}-500',
+      background: 'bg-{color}-500 dark:bg-{color}-500',
+      ring: '',
       color: '',
       shadow: ''
     },
     inactive: {
       background: 'bg-{color}-200 dark:bg-{color}-700',
-      ring: 'ring-transparent',
+      ring: '',
       color: '',
       shadow: ''
     }
   },
   label: {
     base: 'px-2 text-center truncate transition-colors',
-    size: {
-      '2xs': 'text-xs',
-      xs: 'text-xs',
-      sm: 'text-sm',
-      md: 'text-md',
-      lg: 'text-lg',
-      xl: 'text-xl',
-      '2xl': 'text-2xl'
-    },
+    size: 'text-md',
     active: 'text-{color}-500',
     inactive: 'text-{color}-500'
   },
