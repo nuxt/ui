@@ -1,31 +1,20 @@
 <script setup>
 const links = [{
-  label: 'Navigation',
-  children: [{
-    label: 'Vertical Navigation',
-    to: '/navigation/vertical-navigation'
-  }, {
-    label: 'Command Palette',
-    to: '/navigation/command-palette'
-  }]
+  label: 'Vertical Navigation',
+  to: '/navigation/vertical-navigation'
 }, {
-  label: 'Data',
-  children: [{
-    label: 'Table',
-    to: '/data/table'
-  }]
+  label: 'Command Palette',
+  to: '/navigation/command-palette'
+}, {
+  label: 'Table',
+  to: '/data/table'
 }]
 </script>
 
 <template>
   <UVerticalNavigation :links="links">
     <template #default="{ link }">
-      <div class="relative text-left w-full">
-        <div class="mb-2">
-          {{ link.label }}
-        </div>
-        <UVerticalNavigation v-if="link.children" :links="link.children" />
-      </div>
+      <span class="group-hover:text-primary relative">{{ link.label }}</span>
     </template>
   </UVerticalNavigation>
 </template>

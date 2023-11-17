@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { object, string, InferType } from 'yup'
+import { object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
 
 const schema = object({
@@ -23,7 +23,7 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UForm :schema="schema" :state="state" @submit="onSubmit">
+  <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormGroup>

@@ -189,7 +189,7 @@ export default defineComponent({
 
     onMounted(() => {
       if (props.autoselect) {
-        activateFirstOption()
+        activateNextOption()
       }
     })
 
@@ -237,7 +237,8 @@ export default defineComponent({
       }
       for (const key in groupedCommands) {
         const group = props.groups.find(group => group.key === key)
-        const commands = groupedCommands[key].slice(0, options.value.resultLimit).map((result) => {
+
+        let commands = groupedCommands[key].map((result) => {
           const { item, ...data } = result
 
           return {
@@ -246,12 +247,22 @@ export default defineComponent({
           } as Command
         })
 
-        groups.push({ ...group, commands })
+        if (group.filter && typeof group.filter === 'function') {
+          commands = group.filter(query.value, commands)
+        }
+
+        groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
       }
 
       for (const group of props.groups) {
         if (group.search && searchResults.value[group.key]?.length) {
-          groups.push({ ...group, commands: (searchResults.value[group.key] || []).slice(0, options.value.resultLimit) })
+          let commands = (searchResults.value[group.key] || [])
+
+          if (group.filter && typeof group.filter === 'function') {
+            commands = group.filter(query.value, commands)
+          }
+
+          groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
         }
       }
 
@@ -271,16 +282,14 @@ export default defineComponent({
       }))
 
       isLoading.value = false
+
+      activateFirstOption()
     }, props.debounce)
 
     watch(query, () => {
       debouncedSearch()
 
-      // Select first item on search changes
-      setTimeout(() => {
-        // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
-        comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
-      }, 0)
+      activateFirstOption()
     })
 
     const iconName = computed(() => {
@@ -304,9 +313,15 @@ export default defineComponent({
     // Methods
 
     function activateFirstOption () {
-      // hack combobox by using keyboard event
-      // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L769
       setTimeout(() => {
+        // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
+        comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
+      }, 0)
+    }
+
+    function activateNextOption () {
+      setTimeout(() => {
+        // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L769
         comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
       }, 0)
     }

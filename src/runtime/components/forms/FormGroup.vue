@@ -46,7 +46,6 @@ import type { FormError, InjectedFormGroupValue, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { formGroup } from '#ui/ui.config'
-import { uid } from '../../utils/uid'
 
 const config = mergeConfig<typeof formGroup>(appConfig.ui.strategy, appConfig.ui.formGroup, formGroup)
 
@@ -109,7 +108,7 @@ export default defineComponent({
     })
 
     const size = computed(() => ui.value.size[props.size ?? config.default.size])
-    const inputId = ref(uid())
+    const inputId = ref()
 
     provide<InjectedFormGroupValue>('form-group', {
       error,

@@ -16,6 +16,7 @@ const state = reactive({
   checkbox: undefined,
   toggle: undefined,
   radio: undefined,
+  radioGroup: undefined,
   switch: undefined,
   range: undefined
 })
@@ -38,6 +39,9 @@ const schema = z.object({
   radio: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
   }),
+  radioGroup: z.string().refine(value => value === 'option-2', {
+    message: 'Select Option 2'
+  }),
   range: z.number().max(20, { message: 'Must be less than 20' })
 })
 
@@ -52,7 +56,7 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UForm ref="form" :schema="schema" :state="state" @submit="onSubmit">
+  <UForm ref="form" :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
     <UFormGroup name="input" label="Input">
       <UInput v-model="state.input" />
     </UFormGroup>
@@ -75,6 +79,10 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
 
     <UFormGroup name="checkbox" label="Checkbox">
       <UCheckbox v-model="state.checkbox" label="Check me" />
+    </UFormGroup>
+
+    <UFormGroup name="radioGroup" label="Radio Group">
+      <URadioGroup v-model="state.radioGroup" :options="options" />
     </UFormGroup>
 
     <UFormGroup name="radio" label="Radio">

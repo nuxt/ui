@@ -26,7 +26,7 @@ async function onError (event: FormErrorEvent) {
 </script>
 
 <template>
-  <UForm :validate="validate" :state="state" @submit="onSubmit" @error="onError">
+  <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit" @error="onError">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormGroup>

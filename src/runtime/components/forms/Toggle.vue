@@ -7,7 +7,7 @@
     :class="switchClass"
     v-bind="attrs"
   >
-    <span :class="[active ? ui.container.active : ui.container.inactive, ui.container.base]">
+    <span :class="containerClass">
       <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
         <UIcon :name="onIcon" :class="onIconClass" />
       </span>
@@ -77,6 +77,13 @@ export default defineComponent({
       type: [String, Object, Array] as PropType<any>,
       default: undefined
     },
+    size: {
+      type: String as PropType<keyof typeof config.size>,
+      default: config.default.size,
+      validator (value: string) {
+        return Object.keys(config.size).includes(value)
+      }
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
@@ -101,20 +108,31 @@ export default defineComponent({
     const switchClass = computed(() => {
       return twMerge(twJoin(
         ui.value.base,
+        ui.value.size[props.size],
         ui.value.rounded,
         ui.value.ring.replaceAll('{color}', color.value),
         (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', color.value)
       ), props.class)
     })
 
+    const containerClass = computed(() => {
+      return twJoin(
+        ui.value.container.base,
+        ui.value.container.size[props.size],
+        (active.value ? ui.value.container.active[props.size] : ui.value.container.inactive)
+      )
+    })
+
     const onIconClass = computed(() => {
       return twJoin(
+        ui.value.icon.size[props.size],
         ui.value.icon.on.replaceAll('{color}', color.value)
       )
     })
 
     const offIconClass = computed(() => {
       return twJoin(
+        ui.value.icon.size[props.size],
         ui.value.icon.off.replaceAll('{color}', color.value)
       )
     })
@@ -128,6 +146,7 @@ export default defineComponent({
       inputId,
       active,
       switchClass,
+      containerClass,
       onIconClass,
       offIconClass
     }
