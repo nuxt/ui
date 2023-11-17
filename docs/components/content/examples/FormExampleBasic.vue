@@ -20,7 +20,7 @@ async function onSubmit (event: FormSubmitEvent<any>) {
 </script>
 
 <template>
-  <UForm :validate="validate" :state="state" @submit="onSubmit">
+  <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormGroup>

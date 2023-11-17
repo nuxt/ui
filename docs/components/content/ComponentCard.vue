@@ -36,8 +36,8 @@
       </div>
     </div>
 
-    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass, overflowClass]">
-      <component :is="name" v-model="vModel" v-bind="fullProps">
+    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass, extraClass]">
+      <component :is="name" v-model="vModel" v-bind="fullProps" :class="componentClass">
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
 
         <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
@@ -99,13 +99,17 @@ const props = defineProps({
     type: String,
     default: 'bg-white dark:bg-gray-900'
   },
-  overflowClass: {
+  extraClass: {
     type: String,
     default: ''
   },
   previewOnly: {
     type: Boolean,
     default: false
+  },
+  componentClass: {
+    type: String,
+    default: ''
   }
 })
 
@@ -116,10 +120,16 @@ const componentProps = reactive({ ...props.props })
 const { $prettier } = useNuxtApp()
 const appConfig = useAppConfig()
 const route = useRoute()
-// eslint-disable-next-line vue/no-dupe-keys
-const slug = props.slug || route.params.slug[route.params.slug.length - 1]
-const camelName = camelCase(slug)
-const name = `U${upperFirst(camelName)}`
+
+let name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
+
+// TODO: Remove once merged on `main` branch
+if (['AvatarGroup', 'ButtonGroup', 'MeterGroup'].includes(name)) {
+  name = `U${name}`
+}
+if (['avatar-group', 'button-group', 'radio'].includes(name)) {
+  name = `U${upperFirst(camelCase(name))}`
+}
 
 const meta = await fetchComponentMeta(name)
 
@@ -192,7 +202,7 @@ const code = computed(() => {
       continue
     }
 
-    code += ` ${(typeof value === 'boolean' && value !== true) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'value' : kebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
+    code += ` ${(typeof value === 'boolean' && (value !== true || key === 'modelValue')) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'model-value' : kebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
   }
 
   if (props.slots) {
@@ -237,7 +247,7 @@ function renderObject (obj: any) {
 const shikiHighlighter = useShikiHighlighter({})
 const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
 const { data: ast } = await useAsyncData(
-  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`,
+  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`,
   async () => {
     let formatted = ''
     try {
