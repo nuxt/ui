@@ -86,17 +86,17 @@
                       aria-hidden="true"
                     />
                     <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
-  
+
                     <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : option[optionAttribute] }}</span>
                   </slot>
                 </div>
-  
+
                 <span v-if="selected" :class="[uiMenu.option.selectedIcon.wrapper, uiMenu.option.selectedIcon.padding]">
                   <UIcon :name="selectedIcon" :class="uiMenu.option.selectedIcon.base" aria-hidden="true" />
                 </span>
               </li>
             </component>
-  
+
             <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
@@ -141,11 +141,10 @@ import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
-import type { PopperOptions, NestedKeyOf, Strategy } from '../../types'
+import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { select, selectMenu } from '#ui/ui.config'
-import colors from '#ui-colors'
 
 const config = mergeConfig<typeof select>(appConfig.ui.strategy, appConfig.ui.select, select)
 
@@ -256,21 +255,21 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String as PropType<keyof typeof config.size>,
+      type: String as PropType<SelectSize>,
       default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      type: String as PropType<SelectColor>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      type: String as PropType<SelectVariant>,
       default: () => config.default.variant,
       validator (value: string) {
         return [
