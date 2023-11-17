@@ -1,8 +1,14 @@
 <script setup>
 const title = 'Playground'
 const description = 'Play online with our interactive Nuxt Image playground.'
-
 useSeoMeta({
+  ogDescription: '[og:description]',
+  ogImage: '[og:image]',
+  ogUrl: '[og:url]',
+  twitterTitle: '[twitter:title]',
+  twitterDescription: '[twitter:description]',
+  twitterImage: '[twitter:image]',
+  twitterCard: 'summary',
   title,
   ogTitle: 'Nuxt UI Playground',
   description
