@@ -10,7 +10,9 @@ export interface LadderStep {
   to?: RouteParams | string,
   click?: Function | boolean,
   icon?: string,
-  disabled?: boolean
+  disabled?: boolean,
+  color?: LadderStepColor,
+  inactiveColor?: LadderStepColor
 }
 
 export interface LadderStepWrapper {

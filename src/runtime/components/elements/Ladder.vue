@@ -40,7 +40,7 @@ import type { ComputedRef, PropType } from 'vue'
 import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, omit } from '../../utils'
-import { Strategy, LadderSize, LadderStep, LadderStepWrapper, LadderStepColor } from '../../types'
+import type { Strategy, LadderSize, LadderStep, LadderStepWrapper, LadderStepColor } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { ladder } from '#ui/ui.config'
