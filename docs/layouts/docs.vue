@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed, inject, type Ref } from '#imports'
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
 
 const nav = inject<Ref<NavItem[]>>('navigation')
