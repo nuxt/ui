@@ -1,5 +1,5 @@
 <template>
-  <UChip size="md" position="bottom-right" inset :ui="{ base: 'p-0 rounded-none ring-0', background: 'bg-transparent dark:bg-transparent' }">
+  <UChip size="md" position="bottom-right" inset :ui="{ base: 'p-0 rounded-none ring-0', background: '' }">
     <UAvatar
       src="https://avatars.githubusercontent.com/u/739984?v=4"
       alt="Avatar"
