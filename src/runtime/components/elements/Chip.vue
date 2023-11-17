@@ -76,7 +76,7 @@ export default defineComponent({
         ui.value.base,
         ui.value.size[props.size],
         ui.value.position[props.position],
-        props.inset ? ui.value.inset[props.size] : null,
+        props.inset ? null : ui.value.translate[props.position],
         ui.value.background.replaceAll('{color}', props.color)
       )
     })

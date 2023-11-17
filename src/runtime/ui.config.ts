@@ -261,22 +261,17 @@ export const chip = {
   wrapper: 'relative inline-flex items-center justify-center flex-shrink-0',
   base: 'absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap',
   background: 'bg-{color}-500 dark:bg-{color}-400',
-  inset: {
-    '3xs': 'm-[.125rem]',
-    '2xs': 'm-[.1575rem]',
-    xs: 'm-[.1875rem]',
-    sm: 'm-[.225rem]',
-    md: 'm-[.3125rem]',
-    lg: 'm-[.375rem]',
-    xl: 'm-[.4375rem]',
-    '2xl': 'm-[.5rem]',
-    '3xl': 'm-[.625rem]'
-  },
   position: {
-    'top-right': 'right-0 top-0 -translate-y-1/2 translate-x-1/2 transform',
-    'bottom-right': 'bottom-0 right-0 translate-y-1/2 translate-x-1/2 transform',
-    'top-left': 'top-0 left-0 -translate-y-1/2 -translate-x-1/2 transform',
-    'bottom-left': 'bottom-0 left-0 translate-y-1/2 -translate-x-1/2 transform'
+    'top-right': 'top-0 right-0',
+    'bottom-right': 'bottom-0 right-0',
+    'top-left': 'top-0 left-0',
+    'bottom-left': 'bottom-0 left-0'
+  },
+  translate: {
+    'top-right': '-translate-y-1/2 translate-x-1/2 transform',
+    'bottom-right': 'translate-y-1/2 translate-x-1/2 transform',
+    'top-left': '-translate-y-1/2 -translate-x-1/2 transform',
+    'bottom-left': 'translate-y-1/2 -translate-x-1/2 transform'
   },
   size: {
     '3xs': 'h-[4px] min-w-[4px] text-[4px] p-px',
