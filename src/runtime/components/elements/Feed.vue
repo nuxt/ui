@@ -46,6 +46,7 @@ import type { PropType, ComputedRef } from 'vue'
 import { twJoin } from 'tailwind-merge'
 import type { Strategy, FeedItem, FeedIndicatorColor } from '../../types'
 import UIcon from './Icon.vue'
+// @ts-expect-error
 import appConfig from '#build/app.config'
 import { mergeConfig } from '#ui/utils'
 import { feed } from '#ui/ui.config'
