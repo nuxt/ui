@@ -16,12 +16,17 @@
       @blur="onBlur"
       @change="onChange"
     />
+    <slot name="counter" v-bind="{ focused, letterCount, maxValue }">
+      <span v-if="counterVisible" :class="counterClass">{{ maxValue ? `${letterCount} / ${maxValue}` :
+        String(letterCount) }}</span>
+    </slot>
   </div>
 </template>
 
 <script lang="ts">
 import { ref, computed, toRef, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
+import { useFocus } from '@vueuse/core'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
@@ -125,6 +130,14 @@ export default defineComponent({
     modelModifiers: {
       type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean }>,
       default: () => ({})
+    },
+    counter: {
+      type: [Boolean, Number, String] as PropType<true | number | string>,
+      default: false
+    },
+    persistentCounter: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:modelValue', 'blur'],
@@ -136,6 +149,21 @@ export default defineComponent({
     const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
 
     const textarea = ref<HTMLTextAreaElement | null>(null)
+    
+    const { focused } = useFocus(textarea)
+    const counterVisible = computed(() => (props.counter && focused.value) || props.persistentCounter)
+
+    const maxValue = computed(() => {
+      if (
+        !props.counter ||
+        (typeof props.counter !== 'number' &&
+          typeof props.counter !== 'string')
+      ) return undefined
+
+      return props.counter
+    })
+
+    const letterCount = ref(props.modelValue.toString().length)
 
     const autoFocus = () => {
       if (props.autofocus) {
@@ -175,13 +203,15 @@ export default defineComponent({
         value = looseToNumber(value)
       }
 
+      letterCount.value = value.length
+
       emit('update:modelValue', value)
       emitFormInput()
     }
 
     const onInput = (event: InputEvent) => {
       autoResize()
-      if (!modelModifiers.value.lazy) {        
+      if (!modelModifiers.value.lazy) {
         updateInput((event.target as HTMLInputElement).value)
       }
     }
@@ -221,6 +251,11 @@ export default defineComponent({
       }, 100)
     })
 
+    const counterClass = computed(() => {
+      return twJoin(ui.value.counter.wrapper,
+                    ui.value.size[size.value])
+    })
+
     const textareaClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
@@ -245,9 +280,14 @@ export default defineComponent({
       textarea,
       // eslint-disable-next-line vue/no-dupe-keys
       textareaClass,
+      counterClass,
       onInput,
       onChange,
-      onBlur
+      onBlur,
+      focused,
+      counterVisible,
+      maxValue,
+      letterCount
     }
   }
 })
