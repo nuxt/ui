@@ -1,43 +1,19 @@
 <template>
   <UContainer class="min-h-screen flex items-center">
+    <UCard class="flex-1" :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50', ring: 'ring-1 ring-gray-300 dark:ring-gray-700', divide: 'divide-y divide-gray-300 dark:divide-gray-700', header: { base: 'font-bold' } }">
+      <template #header>
+        Welcome to the playground!
+      </template>
 
-      <UButtonGroup rounded="full">
-        <UButton icon="i-heroicons-academic-cap-solid" color="white" />
-        <UButton icon="i-heroicons-academic-cap-solid" color="white" />
-        <UDropdown
-          :items="[
-            [
-              {
-                label: 'Edit',
-                icon: 'i-heroicons-academic-cap-solid',
-              },
-              {
-                label: 'Remove',
-                icon: 'i-heroicons-academic-cap-solid',
-              },
-            ],
-          ]"
-          :popper="{ placement: 'bottom-start' }"
-        >
-          <UButton icon="i-heroicons-adjustments-horizontal-solid" color="white" />
-        </UDropdown>
-        <!-- <USelectMenu v-model="selected" :options="people" /> -->
-        <!-- <UButton icon="i-heroicons-academic-cap-solid" color="white" /> -->
-      </UButtonGroup>
-
-      <br/>
-
-      <div class="flex [&>*:first-child_button]:rounded-s-md [&>*:first-child_input]:rounded-s-md [&>*:first-child:not(.popper)]:rounded-s-md [&_:not(.popper)]:rounded-none [&>*:last-child_button]:rounded-e-md [&>*:last-child:not(.popper)]:rounded-e-md">
-        <UInput />
-        <UButton icon="i-heroicons-clipboard-document" color="gray" />
-      </div>
+      <p class="text-gray-500 dark:text-gray-400">
+        Try your components here!
+      </p>
+    </UCard>
   </UContainer>
 </template>
 
 <script setup>
-const people = ['Wade Cooper', 'Arlene Mccoy', 'Devon Webb', 'Tom Cook', 'Tanya Fox', 'Hellen Schmidt', 'Caroline Schultz', 'Mason Heaney', 'Claudie Smitham', 'Emil Schaefer']
 
-const selected = ref(people[0])
 </script>
 
 <style>
