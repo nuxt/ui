@@ -39,7 +39,7 @@ export function hexToRgb (hex: string) {
 
 export function getSlotsChildren (slots: any) {
   let children = slots.default?.()
-  if (children.length) {
+  if (children?.length) {
     children = children.flatMap(c => {
       if (typeof c.type === 'symbol') {
         if (typeof c.children === 'string') {
@@ -53,7 +53,7 @@ export function getSlotsChildren (slots: any) {
       return c
     }).filter(Boolean)
   }
-  return children
+  return children || []
 }
 
 /**
