@@ -49,7 +49,7 @@ export default defineComponent({
 
     const children = computed(() => getSlotsChildren(slots))
 
-    const clones = computed(() => children.value.map((node, index) => {
+    const clones = computed(() => children.value.map((node) => {
       const vProps: any = {}
 
       if (props.size) {
