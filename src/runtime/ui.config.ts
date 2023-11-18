@@ -279,7 +279,7 @@ export const buttonGroup = {
 }
 
 export const dropdown = {
-  wrapper: 'relative inline-flex text-left rtl:text-right popper',
+  wrapper: 'relative inline-flex text-left rtl:text-right',
   container: 'z-20 group',
   width: 'w-48',
   height: '',
