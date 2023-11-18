@@ -161,6 +161,10 @@ export default defineComponent({
     modelModifiers: {
       type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean }>,
       default: () => ({})
+    },
+    eagerValidation: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:modelValue', 'blur'],
