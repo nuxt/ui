@@ -255,24 +255,24 @@ export const buttonGroup = {
   },
   rounded: {
     horizontal: {
-      none: '[&>*:first-child_button]:rounded-none [&>*:first-child:not(div)]:rounded-none [&_button]:rounded-none [&>*:last-child_button]:rounded-none [&>*:last-child:not(div)]:rounded-none',
-      sm: '[&>*:first-child_button]:rounded-s-sm [&>*:first-child:not(div)]:rounded-s-sm [&_button]:rounded-none [&>*:last-child_button]:rounded-e-sm [&>*:last-child:not(div)]:rounded-e-sm',
-      md: '[&>*:first-child_button]:rounded-s-md [&>*:first-child:not(div)]:rounded-s-md [&_button]:rounded-none [&>*:last-child_button]:rounded-e-md [&>*:last-child:not(div)]:rounded-e-md',
-      lg: '[&>*:first-child_button]:rounded-s-lg [&>*:first-child:not(div)]:rounded-s-lg [&_button]:rounded-none [&>*:last-child_button]:rounded-e-lg [&>*:last-child:not(div)]:rounded-e-lg',
-      xl: '[&>*:first-child_button]:rounded-s-xl [&>*:first-child:not(div)]:rounded-s-xl [&_button]:rounded-none [&>*:last-child_button]:rounded-e-xl [&>*:last-child:not(div)]:rounded-e-xl',
-      '2xl': '[&>*:first-child_button]:rounded-s-2xl [&>*:first-child:not(div)]:rounded-s-2xl [&_button]:rounded-none [&>*:last-child_button]:rounded-e-2xl [&>*:last-child:not(div)]:rounded-e-2xl',
-      '3xl': '[&>*:first-child_button]:rounded-s-3xl [&>*:first-child:not(div)]:rounded-s-3xl [&_button]:rounded-none [&>*:last-child_button]:rounded-e-3xl [&>*:last-child:not(div)]:rounded-e-3xl',
-      full: '[&>*:first-child_button]:rounded-s-full [&>*:first-child:not(div)]:rounded-s-full [&_button]:rounded-none [&>*:last-child_button]:rounded-e-full [&>*:last-child:not(div)]:rounded-e-full'
+      none: '[&>*:first-child_button]::rounded-s-none [&>*:first-child_input]:rounded-s-none [&>*:first-child:not(div)]:rounded-s-none [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-e-none [&>*:last-child_input]:rounded-e-none [&>*:last-child:not(div)]:rounded-e-none',
+      sm: '[&>*:first-child_button]::rounded-s-sm [&>*:first-child_input]:rounded-s-sm [&>*:first-child:not(div)]:rounded-s-sm [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-e-sm [&>*:last-child_input]:rounded-e-sm [&>*:last-child:not(div)]:rounded-e-sm',
+      md: '[&>*:first-child_button]::rounded-s-md [&>*:first-child_input]:rounded-s-md [&>*:first-child:not(div)]:rounded-s-md [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-e-md [&>*:last-child_input]:rounded-e-md [&>*:last-child:not(div)]:rounded-e-md',
+      lg: '[&>*:first-child_button]::rounded-s-lg [&>*:first-child_input]:rounded-s-lg [&>*:first-child:not(div)]:rounded-s-lg [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-e-lg [&>*:last-child_input]:rounded-e-lg [&>*:last-child:not(div)]:rounded-e-lg',
+      xl: '[&>*:first-child_button]::rounded-s-xl [&>*:first-child_input]:rounded-s-xl [&>*:first-child:not(div)]:rounded-s-xl [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-e-xl [&>*:last-child_input]:rounded-e-xl [&>*:last-child:not(div)]:rounded-e-xl',
+      '2xl': '[&>*:first-child_button]::rounded-s-2xl [&>*:first-child_input]:rounded-s-2xl [&>*:first-child:not(div)]:rounded-s-2xl [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-e-2xl [&>*:last-child_input]:rounded-e-2xl [&>*:last-child:not(div)]:rounded-e-2xl',
+      '3xl': '[&>*:first-child_button]::rounded-s-3xl [&>*:first-child_input]:rounded-s-3xl [&>*:first-child:not(div)]:rounded-s-3xl [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-e-3xl [&>*:last-child_input]:rounded-e-3xl [&>*:last-child:not(div)]:rounded-e-3xl',
+      full: '[&>*:first-child_button]::rounded-s-full [&>*:first-child_input]:rounded-s-full [&>*:first-child:not(div)]:rounded-s-full [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-e-full [&>*:last-child_input]:rounded-e-full [&>*:last-child:not(div)]:rounded-e-full'
     },
     vertical: {
-      none: '[&>*:first-child_button]:rounded-none [&>*:first-child:not(div)]:rounded-none [&_button]:rounded-none [&>*:last-child_button]:rounded-none [&>*:last-child:not(div)]:rounded-none',
-      sm: '[&>*:first-child_button]:rounded-t-sm [&>*:first-child:not(div)]:rounded-t-sm [&_button]:rounded-none [&>*:last-child_button]:rounded-b-sm [&>*:last-child:not(div)]:rounded-b-sm',
-      md: '[&>*:first-child_button]:rounded-t-md [&>*:first-child:not(div)]:rounded-t-md [&_button]:rounded-none [&>*:last-child_button]:rounded-b-md [&>*:last-child:not(div)]:rounded-b-md',
-      lg: '[&>*:first-child_button]:rounded-t-lg [&>*:first-child:not(div)]:rounded-t-lg [&_button]:rounded-none [&>*:last-child_button]:rounded-b-lg [&>*:last-child:not(div)]:rounded-b-lg',
-      xl: '[&>*:first-child_button]:rounded-t-xl [&>*:first-child:not(div)]:rounded-t-xl [&_button]:rounded-none [&>*:last-child_button]:rounded-b-xl [&>*:last-child:not(div)]:rounded-b-xl',
-      '2xl': '[&>*:first-child_button]:rounded-t-2xl [&>*:first-child:not(div)]:rounded-t-2xl [&_button]:rounded-none [&>*:last-child_button]:rounded-b-2xl [&>*:last-child:not(div)]:rounded-b-2xl',
-      '3xl': '[&>*:first-child_button]:rounded-t-3xl [&>*:first-child:not(div)]:rounded-t-3xl [&_button]:rounded-none [&>*:last-child_button]:rounded-b-3xl [&>*:last-child:not(div)]:rounded-b-3xl',
-      full: '[&>*:first-child_button]:rounded-t-full [&>*:first-child:not(div)]:rounded-t-full [&_button]:rounded-none [&>*:last-child_button]:rounded-b-full [&>*:last-child:not(div)]:rounded-b-full'
+      none: '[&>*:first-child_button]:rounded-t-none [&>*:first-child_input]:rounded-t-none [&>*:first-child:not(div)]:rounded-t-none [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-b-none [&>*:last-child_input]:rounded-b-none [&>*:last-child:not(div)]:rounded-b-none',
+      sm: '[&>*:first-child_button]:rounded-t-sm [&>*:first-child_input]:rounded-t-sm [&>*:first-child:not(div)]:rounded-t-sm [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-b-sm [&>*:last-child_input]:rounded-b-sm [&>*:last-child:not(div)]:rounded-b-sm',
+      md: '[&>*:first-child_button]:rounded-t-md [&>*:first-child_input]:rounded-t-md [&>*:first-child:not(div)]:rounded-t-md [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-b-md [&>*:last-child_input]:rounded-b-md [&>*:last-child:not(div)]:rounded-b-md',
+      lg: '[&>*:first-child_button]:rounded-t-lg [&>*:first-child_input]:rounded-t-lg [&>*:first-child:not(div)]:rounded-t-lg [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-b-lg [&>*:last-child_input]:rounded-b-lg [&>*:last-child:not(div)]:rounded-b-lg',
+      xl: '[&>*:first-child_button]:rounded-t-xl [&>*:first-child_input]:rounded-t-xl [&>*:first-child:not(div)]:rounded-t-xl [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-b-xl [&>*:last-child_input]:rounded-b-xl [&>*:last-child:not(div)]:rounded-b-xl',
+      '2xl': '[&>*:first-child_button]:rounded-t-2xl [&>*:first-child_input]:rounded-t-2xl [&>*:first-child:not(div)]:rounded-t-2xl [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-b-2xl [&>*:last-child_input]:rounded-b-2xl [&>*:last-child:not(div)]:rounded-b-2xl',
+      '3xl': '[&>*:first-child_button]:rounded-t-3xl [&>*:first-child_input]:rounded-t-3xl [&>*:first-child:not(div)]:rounded-t-3xl [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-b-3xl [&>*:last-child_input]:rounded-b-3xl [&>*:last-child:not(div)]:rounded-b-3xl',
+      full: '[&>*:first-child_button]:rounded-t-full [&>*:first-child_input]:rounded-t-full [&>*:first-child:not(div)]:rounded-t-full [&_button]:rounded-none [&_input]:rounded-none [&>*:last-child_button]:rounded-b-full [&>*:last-child_input]:rounded-b-full [&>*:last-child:not(div)]:rounded-b-full'
     }
   },
   shadow: 'shadow-sm'
