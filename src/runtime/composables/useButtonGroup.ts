@@ -65,15 +65,10 @@ export function useInjectButtonGroup ({ ui, props }: { ui: any, props: any }) {
     size: computed(() => groupContext?.value.size || props.size),
     rounded: computed(() => {
       if (!groupContext) return ui.value.rounded
-      if (groupContext.value.children.length === 1) {
-        return groupContext.value.ui.rounded
-      } else if (positionInGroup.value === 0 || positionInGroup.value === -1) {
-        return groupContext.value.rounded.start
-      } else if (positionInGroup.value === groupContext.value.children.length - 1) {
-        return groupContext.value.rounded.end
-      } else {
-        return 'rounded-none'
-      }
+      if (groupContext.value.children.length === 1) return groupContext.value.ui.rounded
+      if (positionInGroup.value === 0 || positionInGroup.value === -1) return groupContext.value.rounded.start
+      if (positionInGroup.value === groupContext.value.children.length - 1) return groupContext.value.rounded.end
+      return 'rounded-none'
     })
   }
 }
