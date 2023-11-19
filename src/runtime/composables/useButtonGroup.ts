@@ -52,9 +52,7 @@ export function useInjectButtonGroup ({ ui, props }: { ui: any, props: any }) {
     parent = parent.parent
   }
 
-  const positionInGroup = computed(() => {
-    return groupContext?.value.children.indexOf(instance)
-  })
+  const positionInGroup = computed(() => groupContext?.value.children.indexOf(instance))
   onMounted(() => {
     groupContext?.value.register(instance)
   })
