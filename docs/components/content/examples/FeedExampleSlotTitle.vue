@@ -16,8 +16,8 @@ const feed = [
     icon: 'i-heroicons-truck'
   },
   {
-    title: 'Packaged failed to deliver!',
-    description: 'Call us to re-deliver your package, or pick it up at our store',
+    title: 'Delivery failed!',
+    description: 'Call us to re-schedule your delivery, or pick it up at our store',
     color: 'red',
     icon: 'i-heroicons-x-mark'
   }
