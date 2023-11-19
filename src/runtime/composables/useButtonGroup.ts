@@ -1,6 +1,6 @@
 import { computed, ref, provide, inject, onMounted, onUnmounted, getCurrentInstance } from 'vue'
 import type { Ref, ComponentInternalInstance } from 'vue'
-import { button, buttonGroup } from '#ui/ui.config'
+import { buttonGroup } from '#ui/ui.config'
 
 type ButtonGroupProps = {
   orientation?: 'horizontal' | 'vertical'
@@ -17,15 +17,15 @@ type ButtonGroupContext = ButtonGroupProps & {
   rounded: { start: string, end: string }
 }
 
-export function useProvideButtonGroup(buttonGroupProps: ButtonGroupProps) {
+export function useProvideButtonGroup (buttonGroupProps: ButtonGroupProps) {
   const instance = getCurrentInstance()
   const groupKey = `group-${instance.uid}`
   const state = ref({
     children: [],
-    register(child) {
+    register (child) {
       this.children.push(child)
     },
-    unregister(child) {
+    unregister (child) {
       const index = this.children.indexOf(child)
       if (index > -1) {
         this.children.splice(index, 1)
@@ -37,7 +37,7 @@ export function useProvideButtonGroup(buttonGroupProps: ButtonGroupProps) {
   provide(groupKey, state as Ref<ButtonGroupContext>)
 }
 
-export function useInjectButtonGroup({ ui, props }: { ui: any, props: any }) {
+export function useInjectButtonGroup ({ ui, props }: { ui: any, props: any }) {
   const instance = getCurrentInstance()
 
   let parent = instance.parent
@@ -47,9 +47,9 @@ export function useInjectButtonGroup({ ui, props }: { ui: any, props: any }) {
   while (parent && !groupContext) {
     if (parent.type.name === 'ButtonGroup') {
       groupContext = inject(`group-${parent.uid}`)
-      break;
+      break
     }
-    parent = parent.parent;
+    parent = parent.parent
   }
 
   const positionInGroup = computed(() => {

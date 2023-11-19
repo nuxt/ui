@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, toRef, inject } from 'vue'
+import { computed, defineComponent, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -132,8 +132,6 @@ export default defineComponent({
     const { ui, attrs } = useUI('button', toRef(props, 'ui'), config)
 
     const { size, rounded } = useInjectButtonGroup({ ui, props })
-
-    const buttonSize = computed(() => size.value || props.size)
 
     const isLeading = computed(() => {
       return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
