@@ -1,40 +1,52 @@
 <template>
-  <ol :class="ui.base" v-bind="attrs">
+  <ol :class="ui.base" v-bind="attrs" :style="ui.style">
     <template v-for="(item, key) in items" :key="key">
       <li :class="ui.item">
-        <div :class="ui.indicator.base">
-          <div :class="indicatorContainerClass">
-            <div>
-              <slot name="icon" v-bind="{ item, key }">
-                <div :class="[indicatorIconClass, getIndicatorColorClass(item)]">
-                  <template v-if="isDot" />
-                  <UIcon v-else-if="item.icon" :name="item.icon" />
-                  <template v-else>
-                    {{ key + 1 }}
-                  </template>
-                </div>
-              </slot>
+        <div>
+          <slot name="icon" v-bind="{ item, key }">
+            <div v-if="hasIcons" :class="getIconClass(item)">
+              <UIcon v-if="item.icon" :name="item.icon" />
+              <template v-else>
+                {{ key + 1 }}
+              </template>
             </div>
-            <div v-if="withSeparators && key < items.length - 1" :class="separatorClass" />
-          </div>
+            <div v-else :class="getIconClass(item)" />
+          </slot>
         </div>
-        <div :class="ui.body.base" class="">
-          <slot name="body" v-bind="{ item, key }">
-            <div :class="titleClass">
+
+        <div>
+          <slot name="title" v-bind="{ item, key }">
+            <div :class="[ui.title.base, ui.title.align, ui.title.size, ui.title.color]">
               {{ item.title }}
             </div>
-            <div v-if="item.description" :class="descriptionClass">
-              <small>{{ item.description }}</small>
-            </div>
           </slot>
         </div>
-        <div :class="ui.trailing.base">
+
+        <div>
           <slot name="trailing" v-bind="{ item, key }">
-            <div :class="trailingTextClass">
-              <small>{{ item.trailing }}</small>
+            <div :class="[ui.trailing.base, ui.trailing.align, ui.trailing.size, ui.trailing.color]">
+              {{ item.trailing }}
             </div>
           </slot>
         </div>
+
+        <div>
+          <div v-if="hasSeparators && key < items.length - 1" :class="ui.separator.wrapper">
+            <div :class="ui.separator.container">
+              <div :class="[ui.separator.size, ui.separator.background, hasIcons ? '' : ui.separator.withoutIndicators]" />
+            </div>
+          </div>
+        </div>
+
+        <div :class="key < items.length - 1 ? ui.padding : ''">
+          <slot name="description" v-bind="{ item, key }">
+            <div :class="[ui.description.base, ui.description.align, ui.description.size, ui.description.color]">
+              {{ item.description }}
+            </div>
+          </slot>
+        </div>
+
+        <div />
       </li>
     </template>
   </ol>
@@ -64,7 +76,7 @@ export default defineComponent({
       type: Array as PropType<String[] | FeedItem[]>,
       default: () => []
     },
-    indicators: {
+    icons: {
       type: Boolean,
       default: true
     },
@@ -91,72 +103,29 @@ export default defineComponent({
       return typeof item === 'string' ? { title: item } : item
     }))
 
-    const isDot = computed(() => !props.indicators)
+    const hasIcons = computed(() => props.icons)
+    const hasSeparators = computed(() => props.separators)
 
-    const withSeparators = computed(() => props.separators)
+    function getIconClass (item: FeedItem) {
+      const key = hasIcons.value ? 'large' : 'small'
 
-    const indicatorContainerClass = computed(() => {
       return twJoin(
-        ui.value.indicator.container,
-        isDot.value ? ui.value.indicator.margin : ''
-      )
-    })
-
-    const indicatorIconClass = computed(() => {
-      return twJoin(
-        ui.value.indicator.icon.base,
-        ui.value.indicator.icon.rounded,
-        isDot.value ? ui.value.indicator.icon.dot : ui.value.indicator.icon.size
-      )
-    })
-
-    function getIndicatorColorClass (item: FeedItem) {
-      return twJoin(
-        ui.value.indicator.icon.background.replaceAll('{color}', item.color ?? props.color)
+        ui.value.indicator[key].base,
+        ui.value.indicator[key].size,
+        ui.value.indicator[key].ring,
+        ui.value.indicator[key].rounded,
+        ui.value.indicator.color.replaceAll('{color}', item.color ?? props.color)
       )
     }
-
-    const separatorClass = computed(() => {
-      return twJoin(
-        ui.value.separator.base,
-        ui.value.separator.background.replaceAll('{color}', props.color)
-      )
-    })
-
-    const titleClass = computed(() => {
-      return twJoin(
-        ui.value.body.title.replaceAll('{color}', props.color)
-      )
-    })
-
-    const descriptionClass = computed(() => {
-      return twJoin(
-        ui.value.body.description.replaceAll('{color}', props.color)
-      )
-    })
-
-    const trailingTextClass = computed(() => {
-      return twJoin(
-        ui.value.trailing.text.base,
-        ui.value.trailing.text.align,
-        ui.value.trailing.text.color.replaceAll('{color}', props.color)
-      )
-    })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
       items,
-      isDot,
-      withSeparators,
-      indicatorContainerClass,
-      indicatorIconClass,
-      getIndicatorColorClass,
-      separatorClass,
-      titleClass,
-      descriptionClass,
-      trailingTextClass
+      hasIcons,
+      hasSeparators,
+      getIconClass
     }
   }
 })

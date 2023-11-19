@@ -1,7 +1,7 @@
 <template>
   <UFeed :feed="feed">
     <template #trailing="{ item }">
-      <div v-if="item.trailing" class="mt-1.5 font-mono text-xs text-gray-500 flex items-center gap-2">
+      <div v-if="item.trailing" class="mt-1.5 font-mono text-xs text-gray-500 flex items-center justify-end gap-2">
         {{ item.trailing }} <UIcon name="i-heroicons-clock" />
       </div>
     </template>

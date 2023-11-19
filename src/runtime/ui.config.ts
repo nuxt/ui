@@ -551,37 +551,52 @@ export const meterGroup = {
 }
 
 export const feed = {
-  base: 'flex flex-col',
-  item: 'flex flex-row',
+  base: 'grid gap-x-4',
+  style: {
+    'grid-template-columns': 'max-content max-content max-content',
+    'grid-auto-rows': 'min-content min-content'
+  },
+  padding: 'pb-8',
+  item: 'contents',
   indicator: {
-    base: 'h-full',
-    container: 'h-full flex flex-col items-center transition-all',
-    margin: 'mt-3',
-    icon: {
-      base: 'flex items-center justify-center transition-all',
-      background: 'bg-{color}-200 dark:bg-{color}-700',
-      color: '',
-      rounded: 'rounded-full',
+    color: 'bg-{color}-200 dark:bg-{color}-700',
+    large: {
+      base: 'grid place-items-center transition-colors',
       size: 'h-8 w-8',
-      dot: 'h-2 w-2'
+      ring: '',
+      rounded: 'rounded-full'
+    },
+    small: {
+      base: 'mt-2',
+      size: 'h-2 w-2',
+      ring: '',
+      rounded: 'rounded-full'
     }
   },
-  separator: {
-    base: 'h-full w-px my-1',
-    background: 'bg-gray-200 dark:bg-gray-700'
-  },
-  body: {
-    base: 'grow px-4 pb-4 mt-0.5',
-    title: 'text-gray-900 dark:text-gray-50',
-    description: 'text-gray-500 dark:text-gray-500'
+  title: {
+    base: 'h-full flex items-center truncate',
+    align: '',
+    size: 'text-md',
+    color: 'text-gray-900 dark:text-gray-50'
   },
   trailing: {
-    base: 'mt-0.5',
-    text: {
-      base: '',
-      align: 'text-right',
-      color: 'text-gray-500 dark:text-gray-500'
-    }
+    base: 'h-full flex items-center truncate',
+    align: 'justify-end',
+    size: 'text-xs',
+    color: 'text-gray-500 dark:text-gray-500'
+  },
+  separator: {
+    wrapper: 'h-full w-full flex',
+    container: 'w-full flex justify-center py-1',
+    size: 'w-px',
+    background: 'bg-gray-200 dark:bg-gray-700',
+    withoutIndicators: '-mt-3 -mb-2'
+  },
+  description: {
+    base: '',
+    align: '',
+    size: 'text-sm',
+    color: 'text-gray-500 dark:text-gray-500'
   },
   default: {
     color: 'gray'
