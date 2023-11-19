@@ -830,9 +830,9 @@ export const checkbox = {
   background: 'bg-white dark:bg-gray-900',
   border: 'border border-gray-300 dark:border-gray-700',
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
-  label: 'font-medium text-gray-700 dark:text-gray-200',
-  required: 'text-red-500 dark:text-red-400',
-  help: 'text-gray-500 dark:text-gray-400',
+  label: 'text-sm font-medium text-gray-700 dark:text-gray-200',
+  required: 'text-sm text-red-500 dark:text-red-400',
+  help: 'text-sm text-gray-500 dark:text-gray-400',
   default: {
     color: 'primary'
   }
