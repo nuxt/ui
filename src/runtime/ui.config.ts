@@ -996,6 +996,21 @@ export const divider = {
   label: 'text-sm'
 }
 
+export const list = {
+  orientation: 'vertical',
+  vertical: {
+    base: 'flex flex-col',
+    gap: 'gap-4'
+  },
+  horizontal: {
+    base: 'flex flex-row',
+    gap: 'gap-4'
+  },
+  wrapItems: false,
+  wrap: 'flex-wrap',
+  nowrap: 'flex-nowrap'
+}
+
 // Navigation
 
 export const verticalNavigation = {
