@@ -239,6 +239,10 @@ export default defineComponent({
       type: String,
       default: 'Search...'
     },
+    clearSearchOnClose: {
+      type: Boolean,
+      default: () => configMenu.default.clearOnClose
+    },
     debounce: {
       type: Number,
       default: 200
@@ -290,10 +294,6 @@ export default defineComponent({
     searchAttributes: {
       type: Array,
       default: null
-    },
-    clearSearchOnClose: {
-      type: Boolean,
-      default: false
     },
     popper: {
       type: Object as PropType<PopperOptions>,
