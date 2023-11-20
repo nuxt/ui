@@ -16,6 +16,8 @@
       @blur="onBlur"
       @change="onChange"
     />
+
+    <slot />
   </div>
 </template>
 
