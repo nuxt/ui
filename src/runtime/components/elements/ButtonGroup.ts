@@ -18,7 +18,7 @@ export default defineComponent({
   props: {
     size: {
       type: String as PropType<ButtonSize>,
-      default: buttonConfig.default.size,
+      default: null,
       validator (value: string) {
         return Object.keys(buttonConfig.size).includes(value)
       }
