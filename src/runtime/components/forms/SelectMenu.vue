@@ -141,6 +141,7 @@ import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
+import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -320,7 +321,11 @@ export default defineComponent({
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
-    const { emitFormBlur, emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
+
+    const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
+    const { emitFormBlur, emitFormChange, inputId, color, size: sizeFormGroup, name } = useFormGroup(props, config)
+
+    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
@@ -330,7 +335,7 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
-        ui.value.rounded,
+        rounded.value,
         'text-left cursor-default',
         ui.value.size[size.value],
         ui.value.gap[size.value],

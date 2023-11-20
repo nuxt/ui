@@ -41,6 +41,7 @@ import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, looseToNumber } from '../../utils'
+import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { InputSize, InputColor, InputVariant, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -167,7 +168,11 @@ export default defineComponent({
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { emitFormBlur, emitFormInput, size, color, inputId, name } = useFormGroup(props, config)
+    const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
+
+    const { emitFormBlur, emitFormInput, size: sizeFormGroup, color, inputId, name } = useFormGroup(props, config)
+
+    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
     const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
 
@@ -229,7 +234,7 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
-        ui.value.rounded,
+        rounded.value,
         ui.value.placeholder,
         ui.value.size[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
