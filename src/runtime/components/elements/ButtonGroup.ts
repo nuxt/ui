@@ -47,6 +47,7 @@ export default defineComponent({
     const wrapperClass = computed(() => {
       return twMerge(twJoin(
         ui.value.wrapper[props.orientation],
+        ui.value.rounded,
         ui.value.shadow
       ), props.class)
     })
@@ -66,12 +67,7 @@ export default defineComponent({
       return roundedMap[ui.value.rounded][props.orientation]
     })
 
-    useProvideButtonGroup({
-      orientation: props.orientation,
-      size: props.size,
-      ui: ui.value,
-      rounded: rounded.value
-    })
+    useProvideButtonGroup({ orientation: toRef(props, 'orientation'), size: toRef(props, 'size'), ui, rounded })
 
     return () => h('div', { class: wrapperClass.value, ...attrs.value }, children.value)
   }

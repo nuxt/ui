@@ -3,17 +3,20 @@ import type { Ref, ComponentInternalInstance } from 'vue'
 import { buttonGroup } from '#ui/ui.config'
 
 type ButtonGroupProps = {
-  orientation?: 'horizontal' | 'vertical'
-  size?: string
-  ui?: Partial<typeof buttonGroup>
-  rounded?: { start: string, end: string }
+  orientation?: Ref<'horizontal' | 'vertical'>
+  size?: Ref<string>
+  ui?: Ref<Partial<typeof buttonGroup>>
+  rounded?: Ref<{ start: string, end: string }>
 }
 
 // make a ButtonGroupContext type for injection. Should include ButtonGroupProps
-type ButtonGroupContext = ButtonGroupProps & {
+type ButtonGroupContext = {
   children: ComponentInternalInstance[]
   register(child: ComponentInternalInstance): void
   unregister(child: ComponentInternalInstance): void
+  orientation: 'horizontal' | 'vertical'
+  size: string
+  ui: Partial<typeof buttonGroup>
   rounded: { start: string, end: string }
 }
 
@@ -31,7 +34,6 @@ export function useProvideButtonGroup (buttonGroupProps: ButtonGroupProps) {
         this.children.splice(index, 1)
       }
     },
-    rounded: buttonGroup.rounded,
     ...buttonGroupProps
   })
   provide(groupKey, state as Ref<ButtonGroupContext>)
@@ -62,9 +64,9 @@ export function useInjectButtonGroup ({ ui, props }: { ui: any, props: any }) {
   return {
     size: computed(() => groupContext?.value.size || props.size),
     rounded: computed(() => {
-      if (!groupContext) return ui.value.rounded
+      if (!groupContext || positionInGroup.value === -1) return ui.value.rounded
       if (groupContext.value.children.length === 1) return groupContext.value.ui.rounded
-      if (positionInGroup.value === 0 || positionInGroup.value === -1) return groupContext.value.rounded.start
+      if (positionInGroup.value === 0) return groupContext.value.rounded.start
       if (positionInGroup.value === groupContext.value.children.length - 1) return groupContext.value.rounded.end
       return 'rounded-none'
     })
