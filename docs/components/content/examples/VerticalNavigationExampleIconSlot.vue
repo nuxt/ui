@@ -32,7 +32,10 @@ const links = [{
 </script>
 
 <template>
-  <UVerticalNavigation :links="links">
+  <UVerticalNavigation 
+    :links="links"
+    :ui="{ wrapper: 'truncate' }"
+  >
     <template #icon="{ link }">
       <UIcon v-if="link.type" :name="types[link.type].icon" :class="types[link.type].color" class="text-base" />
       <UIcon v-else :name="types.default.icon" :class="types.default.color" class="text-base" />
