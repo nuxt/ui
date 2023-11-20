@@ -10,7 +10,7 @@ import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types'
+import type { KbdSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { kbd } from '#ui/ui.config'
@@ -25,7 +25,7 @@ export default defineComponent({
       default: null
     },
     size: {
-      type: String as PropType<keyof typeof config.size>,
+      type: String as PropType<KbdSize>,
       default: () => config.default.size,
       validator (value: string) {
         return Object.keys(config.size).includes(value)

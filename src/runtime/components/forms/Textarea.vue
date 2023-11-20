@@ -16,6 +16,8 @@
       @blur="onBlur"
       @change="onChange"
     />
+
+    <slot />
   </div>
 </template>
 
@@ -27,11 +29,10 @@ import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, looseToNumber } from '../../utils'
-import type { NestedKeyOf, Strategy } from '../../types'
+import type { TextareaSize, TextareaColor, TextareaVariant, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { textarea } from '#ui/ui.config'
-import colors from '#ui-colors'
 
 const config = mergeConfig<typeof textarea>(appConfig.ui.strategy, appConfig.ui.textarea, textarea)
 
@@ -87,21 +88,21 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String as PropType<keyof typeof config.size>,
+      type: String as PropType<TextareaSize>,
       default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      type: String as PropType<TextareaColor>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      type: String as PropType<TextareaVariant>,
       default: () => config.default.variant,
       validator (value: string) {
         return [
@@ -181,7 +182,7 @@ export default defineComponent({
 
     const onInput = (event: InputEvent) => {
       autoResize()
-      if (!modelModifiers.value.lazy) {        
+      if (!modelModifiers.value.lazy) {
         updateInput((event.target as HTMLInputElement).value)
       }
     }

@@ -29,7 +29,7 @@
                     :rel="rel"
                     :target="target"
                     :class="[ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled]"
-                    @click="(e) => [!!item.click && item.click(e), !!href && !isExternal && navigate(e), close()]"
+                    @click="onClick($event, item, { href, navigate, close, isExternal })"
                   >
                     <slot :name="item.slot || 'item'" :item="item">
                       <UIcon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
@@ -187,6 +187,18 @@ export default defineComponent({
       }, props.closeDelay)
     }
 
+    function onClick (e, item, { href, navigate, close, isExternal }) {
+      if (item.click) {
+        item.click(e)
+      }
+
+      if (href && !isExternal) {
+        navigate(e)
+
+        close()
+      }
+    }
+
     const NuxtLink = resolveComponent('NuxtLink')
 
     return {
@@ -200,6 +212,7 @@ export default defineComponent({
       containerStyle,
       onMouseOver,
       onMouseLeave,
+      onClick,
       omit,
       NuxtLink
     }

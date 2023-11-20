@@ -189,7 +189,7 @@ export default defineComponent({
 
     onMounted(() => {
       if (props.autoselect) {
-        activateFirstOption()
+        activateNextOption()
       }
     })
 
@@ -282,16 +282,14 @@ export default defineComponent({
       }))
 
       isLoading.value = false
+
+      activateFirstOption()
     }, props.debounce)
 
     watch(query, () => {
       debouncedSearch()
 
-      // Select first item on search changes
-      setTimeout(() => {
-        // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
-        comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
-      }, 0)
+      activateFirstOption()
     })
 
     const iconName = computed(() => {
@@ -315,9 +313,15 @@ export default defineComponent({
     // Methods
 
     function activateFirstOption () {
-      // hack combobox by using keyboard event
-      // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L769
       setTimeout(() => {
+        // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
+        comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
+      }, 0)
+    }
+
+    function activateNextOption () {
+      setTimeout(() => {
+        // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L769
         comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
       }, 0)
     }
