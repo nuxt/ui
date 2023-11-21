@@ -77,6 +77,8 @@
     "zod": "^3.22.4"
   },
   "resolutions": {
-    "@nuxt/schema": "^3.8.2"
+    "@nuxt/kit": "3.8.2",
+    "@nuxt/schema": "3.8.2",
+    "vue": "3.3.8"
   }
 }
