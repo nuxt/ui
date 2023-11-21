@@ -50,7 +50,7 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     }
 
     const emitFormInput = useDebounceFn(() => {
-      if (blurred.value || inputProps?.eagerValidation) {
+      if (blurred.value || formGroup?.eagerValidation.value) {
         emitFormEvent('input', formGroup?.name.value)
       }
     }, 300)
