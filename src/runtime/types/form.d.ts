@@ -32,4 +32,5 @@ export interface InjectedFormGroupValue {
   name: Ref<string>
   size: Ref<string | number | symbol>
   error: Ref<string | boolean>
+  eagerValidation: Ref<boolean>
 }

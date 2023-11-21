@@ -9,6 +9,7 @@ type InputProps = {
   color?: string
   name?: string
   isFieldset?: boolean
+  eagerValidation?: boolean
 }
 
 export const useFormGroup = (inputProps?: InputProps, config?: any) => {
@@ -49,7 +50,7 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     }
 
     const emitFormInput = useDebounceFn(() => {
-      if (blurred.value) {
+      if (blurred.value || formGroup?.eagerValidation.value) {
         emitFormEvent('input', formGroup?.name.value)
       }
     }, 300)
