@@ -160,8 +160,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(eslint@8.54.0)
       '@nuxt/ui-pro':
-        specifier: npm:@nuxt/ui-pro-edge@0.4.2-28335912.79968d9
-        version: /@nuxt/ui-pro-edge@0.4.2-28335912.79968d9(nuxt@3.8.2)(rollup@3.29.4)(vite@4.5.0)(vue@3.3.8)(webpack@5.88.2)
+        specifier: npm:@nuxt/ui-pro-edge@0.4.2-28343172.54e30a6
+        version: /@nuxt/ui-pro-edge@0.4.2-28343172.54e30a6(nuxt@3.8.2)(rollup@3.29.4)(vite@4.5.0)(vue@3.3.8)(webpack@5.88.2)
       '@nuxthq/studio':
         specifier: ^1.0.5
         version: 1.0.5(rollup@3.29.4)
@@ -1571,8 +1571,8 @@ packages:
       - rollup
       - supports-color
 
-  /@nuxt/ui-edge@2.10.0-28335908.a35bfc7(nuxt@3.8.2)(rollup@3.29.4)(vite@4.5.0)(vue@3.3.8)(webpack@5.88.2):
-    resolution: {integrity: sha512-bs5lUnBYfw4umAcxJ6pxqXCPWE0o9eWvqJinB5txMMUDgNoVUAQcqttK52MwmH73kunbFfTc/ugmlgA0xkt2nw==}
+  /@nuxt/ui-edge@2.10.0-28343161.11ccbbb(nuxt@3.8.2)(rollup@3.29.4)(vite@4.5.0)(vue@3.3.8)(webpack@5.88.2):
+    resolution: {integrity: sha512-crxQr6K/eP01htBKDzmd1N/lIbV+U5VouKvt+IMyoMDBh4vOw9bT5OCI74o5z7yd6jW9I1xnumjhfAQTziP2hw==}
     engines: {node: '>=v16.20.2'}
     dependencies:
       '@egoist/tailwindcss-icons': 1.4.0(tailwindcss@3.3.5)
@@ -1620,11 +1620,11 @@ packages:
       - webpack
     dev: true
 
-  /@nuxt/ui-pro-edge@0.4.2-28335912.79968d9(nuxt@3.8.2)(rollup@3.29.4)(vite@4.5.0)(vue@3.3.8)(webpack@5.88.2):
-    resolution: {integrity: sha512-Ow/SBpO1KTd3Xm/dQXKcvos9IZHsYjVF709TbPXOJ67EYrsx4rwvf9m7zJ2ncDawpq1tuoibOzuC8Xl+whusSQ==}
+  /@nuxt/ui-pro-edge@0.4.2-28343172.54e30a6(nuxt@3.8.2)(rollup@3.29.4)(vite@4.5.0)(vue@3.3.8)(webpack@5.88.2):
+    resolution: {integrity: sha512-YCTCc09+MnJH0gAjb3lOsau4gGkwJnvRYMe45RmzZxSDs079a7MTBDO4N7bhJhOYT+rXD5EZyPbXfNaznHC5vA==}
     dependencies:
-      '@nuxt/ui': /@nuxt/ui-edge@2.10.0-28335908.a35bfc7(nuxt@3.8.2)(rollup@3.29.4)(vite@4.5.0)(vue@3.3.8)(webpack@5.88.2)
-      '@vueuse/core': 10.5.0(vue@3.3.8)
+      '@nuxt/ui': /@nuxt/ui-edge@2.10.0-28343161.11ccbbb(nuxt@3.8.2)(rollup@3.29.4)(vite@4.5.0)(vue@3.3.8)(webpack@5.88.2)
+      '@vueuse/core': 10.6.1(vue@3.3.8)
       defu: 6.1.3
       ofetch: 1.3.3
       pathe: 1.1.1
