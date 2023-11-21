@@ -1397,6 +1397,7 @@ export const notification = {
   default: {
     color: 'primary',
     icon: null,
+    timeout: 5000,
     closeButton: {
       icon: 'i-heroicons-x-mark-20-solid',
       color: 'gray',
