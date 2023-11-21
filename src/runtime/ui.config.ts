@@ -790,7 +790,8 @@ export const selectMenu = {
     placement: 'bottom-end'
   },
   default: {
-    selectedIcon: 'i-heroicons-check-20-solid'
+    selectedIcon: 'i-heroicons-check-20-solid',
+    clearOnClose: false
   },
   arrow: {
     ..._popperArrow,
