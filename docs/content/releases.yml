@@ -1,6 +1,6 @@
 navigation: false
 title: Releases
-description: Discover the releases of Nuxt UI alongside the biggest contributions from the community.
+description: Follow the latest releases and updates of Nuxt UI.
 links:
   - label: View on GitHub
     icon: i-simple-icons-github
