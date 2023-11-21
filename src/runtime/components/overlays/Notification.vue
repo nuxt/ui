@@ -93,7 +93,7 @@ export default defineComponent({
     },
     timeout: {
       type: Number,
-      default: 5000
+      default: () => config.default.timeout
     },
     actions: {
       type: Array as PropType<NotificationAction[]>,
