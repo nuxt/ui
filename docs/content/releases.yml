@@ -1,0 +1,10 @@
+navigation: false
+title: Releases
+description: Discover the releases of Nuxt UI alongside the biggest contributions from the community.
+links:
+  - label: View on GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/releases
+    target: _blank
+    size: md
+    color: white
