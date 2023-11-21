@@ -10,6 +10,7 @@ import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
+import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { BadgeColor, BadgeSize, BadgeVariant, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -60,14 +61,16 @@ export default defineComponent({
   setup (props) {
     const { ui, attrs } = useUI('badge', toRef(props, 'ui'), config)
 
+    const { size, rounded } = useInjectButtonGroup({ ui, props })
+
     const badgeClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
       return twMerge(twJoin(
         ui.value.base,
         ui.value.font,
-        ui.value.rounded,
-        ui.value.size[props.size],
+        rounded.value,
+        ui.value.size[size.value],
         variant?.replaceAll('{color}', props.color)
       ), props.class)
     })
