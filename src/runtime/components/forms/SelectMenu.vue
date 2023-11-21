@@ -239,6 +239,10 @@ export default defineComponent({
       type: String,
       default: 'Search...'
     },
+    clearSearchOnClose: {
+      type: Boolean,
+      default: () => configMenu.default.clearOnClose
+    },
     debounce: {
       type: Number,
       default: 200
@@ -427,10 +431,17 @@ export default defineComponent({
       return query.value === '' ? null : { [props.optionAttribute]: query.value }
     })
 
+    function clearOnClose () {
+      if (props.clearSearchOnClose) {
+        query.value = ''
+      }
+    }
+
     watch(container, (value) => {
       if (value) {
         emit('open')
       } else {
+        clearOnClose()
         emit('close')
         emitFormBlur()
       }
@@ -442,6 +453,7 @@ export default defineComponent({
         // explicitly set input text because `ComboboxInput` `displayValue` is not reactive
         searchInput.value.$el.value = ''
       }
+
       emit('update:modelValue', event)
       emit('change', event)
       emitFormChange()
