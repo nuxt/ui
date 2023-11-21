@@ -14,7 +14,10 @@
       v-bind="attrs"
       @input="onInput"
       @blur="onBlur"
+      @change="onChange"
     />
+
+    <slot />
   </div>
 </template>
 
@@ -22,14 +25,14 @@
 import { ref, computed, toRef, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
+import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { mergeConfig } from '../../utils'
-import type { NestedKeyOf, Strategy } from '../../types'
+import { mergeConfig, looseToNumber } from '../../utils'
+import type { TextareaSize, TextareaColor, TextareaVariant, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { textarea } from '#ui/ui.config'
-import colors from '#ui-colors'
 
 const config = mergeConfig<typeof textarea>(appConfig.ui.strategy, appConfig.ui.textarea, textarea)
 
@@ -85,21 +88,21 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String as PropType<keyof typeof config.size>,
+      type: String as PropType<TextareaSize>,
       default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      type: String as PropType<TextareaColor>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      type: String as PropType<TextareaVariant>,
       default: () => config.default.variant,
       validator (value: string) {
         return [
@@ -119,6 +122,10 @@ export default defineComponent({
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
+    },
+    modelModifiers: {
+      type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'blur'],
@@ -126,6 +133,8 @@ export default defineComponent({
     const { ui, attrs } = useUI('textarea', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const { emitFormBlur, emitFormInput, inputId, color, size, name } = useFormGroup(props, config)
+
+    const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
 
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
@@ -157,11 +166,38 @@ export default defineComponent({
       }
     }
 
+    // Custom function to handle the v-model properties
+    const updateInput = (value: string) => {
+      if (modelModifiers.value.trim) {
+        value = value.trim()
+      }
+
+      if (modelModifiers.value.number) {
+        value = looseToNumber(value)
+      }
+
+      emit('update:modelValue', value)
+      emitFormInput()
+    }
+
     const onInput = (event: InputEvent) => {
       autoResize()
+      if (!modelModifiers.value.lazy) {
+        updateInput((event.target as HTMLInputElement).value)
+      }
+    }
 
-      emit('update:modelValue', (event.target as HTMLInputElement).value)
-      emitFormInput()
+    const onChange = (event: InputEvent) => {
+      const value = (event.target as HTMLInputElement).value
+
+      if (modelModifiers.value.lazy) {
+        updateInput(value)
+      }
+
+      // Update trimmed input so that it has same behaviour as native input
+      if (modelModifiers.value.trim) {
+        (event.target as HTMLInputElement).value = value.trim()
+      }
     }
 
     const onBlur = (event: FocusEvent) => {
@@ -211,6 +247,7 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       textareaClass,
       onInput,
+      onChange,
       onBlur
     }
   }

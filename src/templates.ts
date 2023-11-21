@@ -1,4 +1,3 @@
-import { dirname } from 'pathe'
 import { useNuxt, addTemplate } from '@nuxt/kit'
 
 export default function createTemplates (nuxt = useNuxt()) {
@@ -13,7 +12,7 @@ export default function createTemplates (nuxt = useNuxt()) {
     write: true
   })
 
-  nuxt.options.alias['#ui-colors'] = dirname(template.dst)
+  nuxt.options.alias['#ui-colors'] = template.dst
 
   nuxt.hook('prepare:types', (opts) => {
     opts.references.push({ path: typesTemplate.dst })

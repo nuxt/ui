@@ -14,6 +14,7 @@
       v-bind="attrs"
       @input="onInput"
       @blur="onBlur"
+      @change="onChange"
     >
     <slot />
 
@@ -36,14 +37,15 @@ import { ref, computed, toRef, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
+import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { mergeConfig } from '../../utils'
-import type { NestedKeyOf, Strategy } from '../../types'
+import { mergeConfig, looseToNumber } from '../../utils'
+import { useInjectButtonGroup } from '../../composables/useButtonGroup'
+import type { InputSize, InputColor, InputVariant, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { input } from '#ui/ui.config'
-import colors from '#ui-colors'
 
 const config = mergeConfig<typeof input>(appConfig.ui.strategy, appConfig.ui.input, input)
 
@@ -122,21 +124,21 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String as PropType<keyof typeof config.size>,
+      type: String as PropType<InputSize>,
       default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      type: String as PropType<InputColor>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      type: String as PropType<InputVariant>,
       default: () => config.default.variant,
       validator (value: string) {
         return [
@@ -156,13 +158,23 @@ export default defineComponent({
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined
+    },
+    modelModifiers: {
+      type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'blur'],
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { emitFormBlur, emitFormInput, size, color, inputId, name } = useFormGroup(props, config)
+    const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
+
+    const { emitFormBlur, emitFormInput, size: sizeFormGroup, color, inputId, name } = useFormGroup(props, config)
+
+    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
+
+    const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
 
     const input = ref<HTMLInputElement | null>(null)
 
@@ -172,9 +184,38 @@ export default defineComponent({
       }
     }
 
-    const onInput = (event: InputEvent) => {
-      emit('update:modelValue', (event.target as HTMLInputElement).value)
+    // Custom function to handle the v-model properties
+    const updateInput = (value: string) => {
+
+      if (modelModifiers.value.trim) {
+        value = value.trim()
+      }
+
+      if (modelModifiers.value.number || props.type === 'number') {
+        value = looseToNumber(value)
+      }
+
+      emit('update:modelValue', value)
       emitFormInput()
+    }
+
+    const onInput = (event: InputEvent) => {
+      if (!modelModifiers.value.lazy) {
+        updateInput((event.target as HTMLInputElement).value)
+      }
+    }
+
+    const onChange = (event: InputEvent) => {
+      const value = (event.target as HTMLInputElement).value
+
+      if (modelModifiers.value.lazy) {
+        updateInput(value)
+      }
+
+      // Update trimmed input so that it has same behaviour as native input https://github.com/vuejs/core/blob/5ea8a8a4fab4e19a71e123e4d27d051f5e927172/packages/runtime-dom/src/directives/vModel.ts#L63
+      if (modelModifiers.value.trim) {
+        (event.target as HTMLInputElement).value = value.trim()
+      }
     }
 
     const onBlur = (event: FocusEvent) => {
@@ -193,7 +234,7 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
-        ui.value.rounded,
+        rounded.value,
         ui.value.placeholder,
         ui.value.size[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
@@ -280,6 +321,7 @@ export default defineComponent({
       trailingIconClass,
       trailingWrapperIconClass,
       onInput,
+      onChange,
       onBlur
     }
   }

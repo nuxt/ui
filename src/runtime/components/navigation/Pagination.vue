@@ -71,7 +71,7 @@ import type { PropType } from 'vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Button, Strategy } from '../../types'
+import type { Button, ButtonSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { pagination, button } from '#ui/ui.config'
@@ -106,7 +106,7 @@ export default defineComponent({
       }
     },
     size: {
-      type: String as PropType<keyof typeof buttonConfig.size>,
+      type: String as PropType<ButtonSize>,
       default: () => config.default.size,
       validator (value: string) {
         return Object.keys(buttonConfig.size).includes(value)

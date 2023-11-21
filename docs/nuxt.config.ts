@@ -8,7 +8,13 @@ const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
   // @ts-ignore
-  extends: process.env.NUXT_UI_PRO_PATH || '@nuxt/ui-pro',
+  extends: process.env.NUXT_UI_PRO_PATH ? [
+    process.env.NUXT_UI_PRO_PATH,
+    resolve(process.env.NUXT_UI_PRO_PATH, '.docs')
+  ] : [
+    '@nuxt/ui-pro',
+    process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/.docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
+  ].filter(Boolean),
   modules: [
     '@nuxt/content',
     'nuxt-og-image',
@@ -46,7 +52,19 @@ export default defineNuxtConfig({
         repo: 'nuxt/ui',
         branch: 'main',
         dir: 'docs/content'
-      }
+      },
+      pro: process.env.NUXT_UI_PRO_PATH ? {
+        prefix: '/pro',
+        driver: 'fs',
+        base: resolve(process.env.NUXT_UI_PRO_PATH, '.docs/content/pro')
+      } : process.env.NUXT_GITHUB_TOKEN ? {
+        prefix: '/pro',
+        driver: 'github',
+        repo: 'nuxt/ui-pro',
+        branch: 'dev',
+        dir: '.docs/content/pro',
+        token: process.env.NUXT_GITHUB_TOKEN || ''
+      } : undefined
     }
   },
   fontMetrics: {
@@ -65,16 +83,27 @@ export default defineNuxtConfig({
         '/',
         '/getting-started',
         '/dev/getting-started',
-        '/api/search.json'
+        '/api/search.json',
+        '/api/releases.json',
+        '/api/pulls.json'
       ]
     }
   },
   componentMeta: {
-    globalsOnly: true,
-    exclude: ['@nuxtjs/mdc', resolve('./components'), resolve('@nuxt/ui-pro/components')],
+    exclude: [
+      '@nuxt/content',
+      '@nuxt/ui-templates',
+      '@nuxtjs/color-mode',
+      '@nuxtjs/mdc',
+      'nuxt/dist',
+      'nuxt-og-image',
+      'nuxt-site-config',
+      resolve('./components'),
+      process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, '.docs', 'components') : '.c12'
+    ],
     metaFields: {
       props: true,
-      slots: false,
+      slots: true,
       events: false,
       exposed: false
     }
@@ -87,7 +116,9 @@ export default defineNuxtConfig({
     // Related to https://github.com/nuxt/nuxt/pull/22558
     'components:extend': (components) => {
       components.forEach((component) => {
-        if (component.global) {
+        if (component.shortPath.includes(process.env.NUXT_UI_PRO_PATH || '@nuxt/ui-pro')) {
+          component.global = true
+        } else if (component.global) {
           component.global = 'sync'
         }
       })

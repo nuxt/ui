@@ -257,6 +257,41 @@ export const buttonGroup = {
   shadow: 'shadow-sm'
 }
 
+export const chip = {
+  wrapper: 'relative inline-flex items-center justify-center flex-shrink-0',
+  base: 'absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap',
+  background: 'bg-{color}-500 dark:bg-{color}-400',
+  position: {
+    'top-right': 'top-0 right-0',
+    'bottom-right': 'bottom-0 right-0',
+    'top-left': 'top-0 left-0',
+    'bottom-left': 'bottom-0 left-0'
+  },
+  translate: {
+    'top-right': '-translate-y-1/2 translate-x-1/2 transform',
+    'bottom-right': 'translate-y-1/2 translate-x-1/2 transform',
+    'top-left': '-translate-y-1/2 -translate-x-1/2 transform',
+    'bottom-left': 'translate-y-1/2 -translate-x-1/2 transform'
+  },
+  size: {
+    '3xs': 'h-[4px] min-w-[4px] text-[4px] p-px',
+    '2xs': 'h-[5px] min-w-[5px] text-[5px] p-px',
+    xs: 'h-1.5 min-w-[0.375rem] text-[6px] p-px',
+    sm: 'h-2 min-w-[0.5rem] text-[7px] p-0.5',
+    md: 'h-2.5 min-w-[0.625rem] text-[8px] p-0.5',
+    lg: 'h-3 min-w-[0.75rem] text-[10px] p-0.5',
+    xl: 'h-3.5 min-w-[0.875rem] text-[11px] p-1',
+    '2xl': 'h-4 min-w-[1rem] text-[12px] p-1',
+    '3xl': 'h-5 min-w-[1.25rem] text-[14px] p-1'
+  },
+  default: {
+    size: 'sm',
+    color: 'primary',
+    position: 'top-right',
+    inset: false
+  }
+}
+
 export const dropdown = {
   wrapper: 'relative inline-flex text-left rtl:text-right',
   container: 'z-20 group',
@@ -333,9 +368,11 @@ export const alert = {
   wrapper: 'w-full relative overflow-hidden',
   title: 'text-sm font-medium',
   description: 'mt-1 text-sm leading-4 opacity-90',
+  actions: 'flex items-center gap-2 mt-3 flex-shrink-0',
   shadow: '',
   rounded: 'rounded-lg',
-  padding: 'p-3',
+  padding: 'p-4',
+  gap: 'gap-3',
   icon: {
     base: 'flex-shrink-0 w-5 h-5'
   },
@@ -753,7 +790,8 @@ export const selectMenu = {
     placement: 'bottom-end'
   },
   default: {
-    selectedIcon: 'i-heroicons-check-20-solid'
+    selectedIcon: 'i-heroicons-check-20-solid',
+    clearOnClose: false
   },
   arrow: {
     ..._popperArrow,
@@ -793,36 +831,72 @@ export const checkbox = {
   background: 'bg-white dark:bg-gray-900',
   border: 'border border-gray-300 dark:border-gray-700',
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
-  label: 'font-medium text-gray-700 dark:text-gray-200',
-  required: 'text-red-500 dark:text-red-400',
-  help: 'text-gray-500 dark:text-gray-400',
+  label: 'text-sm font-medium text-gray-700 dark:text-gray-200',
+  required: 'text-sm text-red-500 dark:text-red-400',
+  help: 'text-sm text-gray-500 dark:text-gray-400',
   default: {
     color: 'primary'
   }
 }
 
 export const toggle = {
-  base: 'relative inline-flex h-5 w-9 flex-shrink-0 border-2 border-transparent disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none',
+  base: 'relative inline-flex flex-shrink-0 border-2 border-transparent disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none',
   rounded: 'rounded-full',
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   active: 'bg-{color}-500 dark:bg-{color}-400',
   inactive: 'bg-gray-200 dark:bg-gray-700',
+  size: {
+    '2xs': 'h-3 w-5',
+    xs: 'h-3.5 w-6',
+    sm: 'h-4 w-7',
+    md: 'h-5 w-9',
+    lg: 'h-6 w-11',
+    xl: 'h-7 w-[3.25rem]',
+    '2xl': 'h-8 w-[3.75rem]'
+  },
   container: {
-    base: 'pointer-events-none relative inline-block h-4 w-4 rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200',
-    active: 'translate-x-4 rtl:-translate-x-4',
-    inactive: 'translate-x-0 rtl:-translate-x-0'
+    base: 'pointer-events-none relative inline-block rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200',
+    active: {
+      '2xs': 'translate-x-2 rtl:-translate-x-2',
+      xs: 'translate-x-2.5 rtl:-translate-x-2.5',
+      sm: 'translate-x-3 rtl:-translate-x-3',
+      md: 'translate-x-4 rtl:-translate-x-4',
+      lg: 'translate-x-5 rtl:-translate-x-5',
+      xl: 'translate-x-6 rtl:-translate-x-6',
+      '2xl': 'translate-x-7 rtl:-translate-x-7'
+    },
+    inactive: 'translate-x-0 rtl:-translate-x-0',
+    size: {
+      '2xs': 'h-2 w-2',
+      xs: 'h-2.5 w-2.5',
+      sm: 'h-3 w-3',
+      md: 'h-4 w-4',
+      lg: 'h-5 w-5',
+      xl: 'h-6 w-6',
+      '2xl': 'h-7 w-7'
+    }
   },
   icon: {
     base: 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity',
     active: 'opacity-100 ease-in duration-200',
     inactive: 'opacity-0 ease-out duration-100',
-    on: 'h-3 w-3 text-{color}-500 dark:text-{color}-400',
-    off: 'h-3 w-3 text-gray-400 dark:text-gray-500'
+    size: {
+      '2xs': 'h-2 w-2',
+      xs: 'h-2 w-2',
+      sm: 'h-2 w-2',
+      md: 'h-3 w-3',
+      lg: 'h-4 w-4',
+      xl: 'h-5 w-5',
+      '2xl': 'h-6 w-6'
+    },
+    on: 'text-{color}-500 dark:text-{color}-400',
+    off: 'text-gray-400 dark:text-gray-500'
   },
   default: {
     onIcon: null,
     offIcon: null,
-    color: 'primary'
+    color: 'primary',
+    size: 'md'
   }
 }
 
@@ -1086,7 +1160,7 @@ export const pagination = {
     nextButton: {
       color: 'white',
       class: 'rtl:[&_span:last-child]:rotate-180',
-      icon: 'i-heroicons-chevron-right-20-solid '
+      icon: 'i-heroicons-chevron-right-20-solid'
     }
   }
 }
@@ -1122,6 +1196,26 @@ export const tabs = {
       rounded: 'rounded-md',
       shadow: ''
     }
+  }
+}
+
+export const breadcrumb = {
+  wrapper: 'relative',
+  ol: 'flex items-center gap-x-1.5',
+  li: 'flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm',
+  base: 'flex items-center gap-x-1.5 group font-semibold',
+  icon: {
+    base: 'flex-shrink-0 w-4 h-4',
+    active: '',
+    inactive: ''
+  },
+  divider: {
+    base: 'flex-shrink-0 w-5 h-5'
+  },
+  active: 'text-primary-500 dark:text-primary-400',
+  inactive: ' hover:text-gray-700 dark:hover:text-gray-200',
+  default: {
+    divider: 'i-heroicons-chevron-right-20-solid'
   }
 }
 
@@ -1273,10 +1367,12 @@ export const notification = {
   container: 'relative overflow-hidden',
   title: 'text-sm font-medium text-gray-900 dark:text-white',
   description: 'mt-1 text-sm leading-4 text-gray-500 dark:text-gray-400',
+  actions: 'flex items-center gap-2 mt-3 flex-shrink-0',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
   rounded: 'rounded-lg',
   padding: 'p-4',
+  gap: 'gap-3',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   icon: {
     base: 'flex-shrink-0 w-5 h-5',
@@ -1302,6 +1398,7 @@ export const notification = {
   default: {
     color: 'primary',
     icon: null,
+    timeout: 5000,
     closeButton: {
       icon: 'i-heroicons-x-mark-20-solid',
       color: 'gray',

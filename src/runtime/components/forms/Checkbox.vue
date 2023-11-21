@@ -17,7 +17,7 @@
         @change="onChange"
       >
     </div>
-    <div v-if="label || $slots.label" class="ms-3 text-sm">
+    <div v-if="label || $slots.label" class="ms-3 flex flex-col">
       <label :for="inputId" :class="ui.label">
         <slot name="label">{{ label }}</slot>
         <span v-if="required" :class="ui.required">*</span>
@@ -36,7 +36,6 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
-import { uid } from '../../utils/uid'
 import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -50,8 +49,7 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      // A default value is needed here to bind the label
-      default: () => uid()
+      default: () => null
     },
     value: {
       type: [String, Number, Boolean, Object],

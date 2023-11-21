@@ -4,7 +4,7 @@
     v-if="!to"
     :disabled="disabled"
     v-bind="$attrs"
-    :class="inactiveClass"
+    :class="active ? activeClass : inactiveClass"
   >
     <slot />
   </component>
