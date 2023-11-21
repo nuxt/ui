@@ -16,7 +16,7 @@
           <div v-for="(date, index) in dates" :key="index" class="relative py-3 min-h-[24px] flex items-center justify-center">
             <div class="h-full w-0.5 bg-gray-200 dark:bg-gray-800 absolute top-0 inset-x-[50%] -ml-[1px] flex-shrink-0" />
 
-            <template v-if="date.release || date.pull || isToday(date.day)">
+            <template v-if="date.release || date.pulls?.length || isToday(date.day)">
               <div class="flex items-start gap-8 relative w-[50%]" :class="index % 2 === 0 ? 'translate-x-[50%] -ml-2' : '-translate-x-[50%] ml-2 flex-row-reverse'">
                 <div class="h-[8px] w-[8px] bg-gray-400 dark:bg-gray-400 rounded-full z-[1] mt-2 ring-2 ring-gray-300 dark:ring-gray-600 flex-shrink-0" />
 
@@ -48,13 +48,10 @@ const dates = computed(() => {
   const days = eachDayOfInterval({ start: new Date(first.published_at), end: new Date() })
 
   return days.reverse().map(day => {
-    const release = releases.value.find(release => isSameDay(new Date(release.published_at), day))
-    const pull = pulls.value.find(pull => isSameDay(new Date(pull.merged_at), day))
-
     return {
       day,
-      release,
-      pull
+      release: releases.value.find(release => isSameDay(new Date(release.published_at), day)),
+      pulls: pulls.value.filter(pull => isSameDay(new Date(pull.merged_at), day))
     }
   })
 })
