@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 
 export interface FormError<T extends string = string> {
-  path: T
+  path?: T
   message: string
 }
 
