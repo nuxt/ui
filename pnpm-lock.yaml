@@ -90,8 +90,8 @@ importers:
         specifier: ^0.5.4
         version: 0.5.4(@nuxt/kit@3.8.2)(nuxi@3.10.0)(typescript@5.3.2)
       '@release-it/conventional-changelog':
-        specifier: ^7.0.2
-        version: 7.0.2(release-it@17.0.0)
+        specifier: ^8.0.1
+        version: 8.0.1(release-it@17.0.0)
       '@testing-library/vue':
         specifier: ^8.0.1
         version: 8.0.1(@vue/compiler-sfc@3.3.8)(vue@3.3.8)
@@ -2116,15 +2116,15 @@ packages:
   /@popperjs/core@2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
 
-  /@release-it/conventional-changelog@7.0.2(release-it@17.0.0):
-    resolution: {integrity: sha512-rsUKWNnU39xivgC2IanjRkEOPsTu2X2jgJGpNHF+mndpOUr1WAROmIaix1o3ne2zseT+GLyZII2NC8FgYaM7xA==}
-    engines: {node: '>=16'}
+  /@release-it/conventional-changelog@8.0.1(release-it@17.0.0):
+    resolution: {integrity: sha512-pwc9jaBYDaSX5TXw6rEnPfqDkKJN2sFBhYpON1kBi9T3sA9EOBncC4ed0Bv3L1ciNb6eqEJXPfp+tQMqVlv/eg==}
+    engines: {node: '>=18'}
     peerDependencies:
-      release-it: ^16.0.0
+      release-it: ^17.0.0
     dependencies:
       concat-stream: 2.0.0
       conventional-changelog: 5.1.0
-      conventional-recommended-bump: 8.0.0
+      conventional-recommended-bump: 9.0.0
       release-it: 17.0.0(typescript@5.3.2)
       semver: 7.5.4
     dev: true
@@ -4578,17 +4578,16 @@ packages:
       split2: 4.2.0
     dev: true
 
-  /conventional-recommended-bump@8.0.0:
-    resolution: {integrity: sha512-yvGN+VMy00WIe/pJufpmN+I4B2cM/WFK+CFCmDcjyVLyQR6J1KT2iecmA4NQ58gQAiNkvStEjcZp/W9h1JDM1A==}
+  /conventional-recommended-bump@9.0.0:
+    resolution: {integrity: sha512-HR1yD0G5HgYAu6K0wJjLd7QGRK8MQDqqj6Tn1n/ja1dFwBCE6QmV+iSgQ5F7hkx7OUR/8bHpxJqYtXj2f/opPQ==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      concat-stream: 2.0.0
       conventional-changelog-preset-loader: 4.1.0
       conventional-commits-filter: 4.0.0
       conventional-commits-parser: 5.0.0
       git-raw-commits: 4.0.0
-      git-semver-tags: 6.0.0
+      git-semver-tags: 7.0.1
       meow: 12.1.1
     dev: true
 
@@ -5984,15 +5983,6 @@ packages:
       dargs: 8.1.0
       meow: 12.1.1
       split2: 4.2.0
-    dev: true
-
-  /git-semver-tags@6.0.0:
-    resolution: {integrity: sha512-v5BL6psuUy+Ftuo99141XlOIDoJtKw5+YyDANS7fknSP0iT4cVIanc3toDsH4K+VpIWc19l2/xkwQmXMfloeUA==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dependencies:
-      meow: 12.1.1
-      semver: 7.5.4
     dev: true
 
   /git-semver-tags@7.0.1:
