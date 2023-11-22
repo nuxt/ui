@@ -15,6 +15,10 @@
       </slot>
     </HPopoverButton>
 
+    <Transition v-if="overlay" appear v-bind="ui.overlay.transition">
+      <div v-if="(open !== undefined) ? open : headlessOpen" :class="[ui.overlay.base, ui.overlay.background]" />
+    </Transition>
+
     <div v-if="(open !== undefined) ? open : headlessOpen" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
         <div>
@@ -71,6 +75,10 @@ export default defineComponent({
     closeDelay: {
       type: Number,
       default: 0
+    },
+    overlay: {
+      type: Boolean,
+      default: false
     },
     popper: {
       type: Object as PropType<PopperOptions>,

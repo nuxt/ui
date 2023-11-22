@@ -1331,6 +1331,18 @@ export const popover = {
     leaveFromClass: 'opacity-100 translate-y-0',
     leaveToClass: 'opacity-0 translate-y-1'
   },
+  overlay: {
+    base: 'fixed inset-0 transition-opacity',
+    background: 'bg-gray-200/75 dark:bg-gray-800/75',
+    transition: {
+      enterActiveClass: 'ease-out duration-200',
+      enterFromClass: 'opacity-0',
+      enterToClass: 'opacity-100',
+      leaveActiveClass: 'ease-in duration-150',
+      leaveFromClass: 'opacity-100',
+      leaveToClass: 'opacity-0'
+    }
+  },
   popper: {
     strategy: 'fixed'
   },
