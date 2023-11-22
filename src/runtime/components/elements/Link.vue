@@ -21,7 +21,7 @@
       :role="disabled ? 'link' : undefined"
       :rel="rel"
       :target="target"
-      :class="resolveLinkClass(route, $route, { isActive, isExactActive })"
+      :class="active ? activeClass : resolveLinkClass(route, $route, { isActive, isExactActive })"
       @click="(e) => !isExternal && navigate(e)"
     >
       <slot v-bind="{ isActive: exact ? isExactActive : isActive }" />
@@ -69,10 +69,6 @@ export default defineComponent({
   },
   setup (props) {
     function resolveLinkClass (route, $route, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
-      if (props.active) {
-        return props.activeClass
-      }
-
       if (props.exactQuery && !isEqual(route.query, $route.query)) {
         return props.inactiveClass
       }
