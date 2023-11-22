@@ -2,7 +2,7 @@ import arrow from '../_popperArrow'
 
 export default {
   wrapper: 'relative',
-  container: 'z-20 group',
+  container: 'z-50 group',
   width: '',
   background: 'bg-white dark:bg-gray-900',
   shadow: 'shadow-lg',
@@ -19,7 +19,7 @@ export default {
     leaveToClass: 'opacity-0 translate-y-1'
   },
   overlay: {
-    base: 'fixed inset-0 transition-opacity z-20',
+    base: 'fixed inset-0 transition-opacity z-50',
     background: 'bg-gray-200/75 dark:bg-gray-800/75',
     transition: {
       enterActiveClass: 'ease-out duration-200',
