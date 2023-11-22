@@ -1,7 +1,7 @@
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
 import defaultColors from 'tailwindcss/colors.js'
 import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/defaultExtractor.js'
-import { iconsPlugin, getIconCollections, type CollectionNames } from '@egoist/tailwindcss-icons'
+import { iconsPlugin, getIconCollections, type CollectionNames, type IconsPluginOptions } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
 import createTemplates from './templates'
@@ -46,7 +46,7 @@ export interface ModuleOptions {
    */
   global?: boolean
 
-  icons: CollectionNames[] | 'all'
+  icons: CollectionNames[] | 'all' | IconsPluginOptions
 
   safelistColors?: string[]
 }
@@ -135,7 +135,7 @@ export default defineNuxtModule<ModuleOptions>({
       tailwindConfig.safelist.push(...generateSafelist(options.safelistColors, colors))
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
-      tailwindConfig.plugins.push(iconsPlugin({ collections: getIconCollections(options.icons as any[]) }))
+      tailwindConfig.plugins.push(iconsPlugin(Array.isArray(options.icons) || options.icons === 'all' ? { collections: getIconCollections(options.icons) } : typeof options.icons === 'object' ? options.icons as IconsPluginOptions : {}))
     })
 
     createTemplates(nuxt)
