@@ -16,7 +16,7 @@
     </HPopoverButton>
 
     <Transition v-if="overlay" appear v-bind="ui.overlay.transition">
-      <div v-if="(open !== undefined) ? open : headlessOpen" :class="[ui.overlay.base, ui.overlay.background]" />
+      <div v-if="(open !== undefined) ? open : headlessOpen" :class="[ui.overlay.base, ui.overlay.background]" @click="$emit('update:open')" />
     </Transition>
 
     <div v-if="(open !== undefined) ? open : headlessOpen" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
@@ -93,6 +93,7 @@ export default defineComponent({
       default: undefined
     }
   },
+  emits: ['update:open'],
   setup (props) {
     const { ui, attrs } = useUI('popover', toRef(props, 'ui'), config, toRef(props, 'class'))
 
