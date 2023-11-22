@@ -71,6 +71,17 @@ Visit https://ui.nuxt.com to explore the documentation.
 - [vueuse/vueuse](https://github.com/vueuse/vueuse)
 - [egoist/tailwindcss-icons](https://github.com/egoist/tailwindcss-icons)
 
+## Contributing
+
+Thank you for considering contributing to Nuxt UI. Here are a few ways you can get involved:
+
+- Reporting Bugs: If you come across any bugs or issues, please check out the reporting bugs guide to learn how to submit a bug report.
+- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/getting-started/contributing) to share your suggestions.
+
+## Local Development
+
+Follow the docs to [Set up your local development environment](https://ui.nuxt.com/getting-started/contributing#_2-local-development-setup) and contribute.
+
 ## License
 
 Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md).
