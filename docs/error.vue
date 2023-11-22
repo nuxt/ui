@@ -89,8 +89,7 @@ const links = computed(() => {
   }, {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch',
-    to: 'https://github.com/nuxt/ui/releases',
-    target: '_blank'
+    to: '/releases'
   }].filter(Boolean)
 })
 

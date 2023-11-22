@@ -1,6 +1,7 @@
 import { inject, ref, computed, onMounted } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
 import type { FormEvent, FormEventType, InjectedFormGroupValue } from '../types/form'
+import { uid } from '../utils/uid'
 
 type InputProps = {
   id?: string | null
@@ -8,6 +9,7 @@ type InputProps = {
   color?: string
   name?: string
   isFieldset?: boolean
+  eagerValidation?: boolean
 }
 
 export const useFormGroup = (inputProps?: InputProps, config?: any) => {
@@ -18,7 +20,8 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     const inputId = ref(inputProps?.id)
 
     onMounted(() => {
-      inputId.value = inputProps?.isFieldset ? null : inputProps?.id ?? formGroup?.inputId.value
+      inputId.value = inputProps?.isFieldset ? null : inputProps?.id ?? uid()
+
       if (formGroup) {
         // Updates for="..." attribute on label if inputProps.id is provided
         formGroup.inputId.value = inputId.value
@@ -47,7 +50,7 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     }
 
     const emitFormInput = useDebounceFn(() => {
-      if (blurred.value) {
+      if (blurred.value || formGroup?.eagerValidation.value) {
         emitFormEvent('input', formGroup?.name.value)
       }
     }, 300)

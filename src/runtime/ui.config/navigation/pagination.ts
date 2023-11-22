@@ -28,7 +28,7 @@ export default {
     nextButton: {
       color: 'white',
       class: 'rtl:[&_span:last-child]:rotate-180',
-      icon: 'i-heroicons-chevron-right-20-solid '
+      icon: 'i-heroicons-chevron-right-20-solid'
     }
   }
 }

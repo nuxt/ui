@@ -198,6 +198,12 @@ const safelistByComponent = {
     variants: ['dark']
   }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }],
+  chip: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
   }]
 }
 

@@ -36,7 +36,7 @@ export default defineNuxtConfig({
   },
   ui: {
     global: true,
-    icons: ['heroicons', 'logos', 'simple-icons'],
+    icons: ['heroicons', 'simple-icons'],
     safelistColors: excludeColors(colors)
   },
   content: {
@@ -83,7 +83,9 @@ export default defineNuxtConfig({
         '/',
         '/getting-started',
         '/dev/getting-started',
-        '/api/search.json'
+        '/api/search.json',
+        '/api/releases.json',
+        '/api/pulls.json'
       ]
     }
   },
