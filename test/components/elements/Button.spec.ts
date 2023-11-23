@@ -2,7 +2,7 @@
 import { describe, it, expect } from 'vitest'
 import Button from '../../src/runtime/components/elements/Button.vue'
 import type { TypeOf } from 'zod'
-import ComponentRender from './component-render'
+import ComponentRender from '../component-render'
 
 type ButtonOptions = TypeOf<typeof Button.props>
 
