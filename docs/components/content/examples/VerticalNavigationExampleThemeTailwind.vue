@@ -14,9 +14,6 @@ const links = [{
 }, {
   label: 'Examples',
   to: '/getting-started/examples'
-}, {
-  label: 'Roadmap',
-  to: '/getting-started/roadmap'
 }]
 </script>
 
