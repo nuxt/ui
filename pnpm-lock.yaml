@@ -126,7 +126,7 @@ importers:
         specifier: ^0.21.0
         version: 0.21.0
       vitest:
-        specifier: ^0.33.0
+        specifier: 0.33.0
         version: 0.33.0(happy-dom@12.10.3)
       vue-tsc:
         specifier: ^1.8.22
