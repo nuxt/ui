@@ -2,6 +2,10 @@ export default {
   base: 'focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0',
   font: 'font-medium',
   rounded: 'rounded-md',
+  truncate: 'text-left break-all line-clamp-1',
+  block: '',
+  inline: '',
+  loading: 'animate-spin',
   size: {
     '2xs': 'text-xs',
     xs: 'text-xs',
