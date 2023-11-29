@@ -73,10 +73,6 @@ export default defineComponent({
         return appConfig.ui.colors.includes(value)
       }
     },
-    class: {
-      type: [String, Object, Array] as PropType<any>,
-      default: undefined
-    },
     size: {
       type: String as PropType<ToggleSize>,
       default: config.default.size,
@@ -84,9 +80,13 @@ export default defineComponent({
         return Object.keys(config.size).includes(value)
       }
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: () => ''
+    },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      default: () => ({})
     }
   },
   emits: ['update:modelValue'],

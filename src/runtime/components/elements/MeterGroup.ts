@@ -48,11 +48,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
       type: Object as PropType<Partial<typeof meterGroupConfig & { strategy?: Strategy }>>,
-      default: undefined
+      default: () => ({})
     }
   },
   setup (props, { slots }) {
