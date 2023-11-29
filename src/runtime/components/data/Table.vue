@@ -64,19 +64,13 @@
                 :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
               >
                 <UButton
-                  color="white"
-                  variant="link"
+                  color="gray"
+                  variant="ghost"
                   :padded="false"
+                  size="2xs"
+                  :icon="openedRows.includes(index) ? 'i-heroicons-chevron-up' : 'i-heroicons-chevron-down'"
                   @click="toggleOpened(index)"
-                >
-                  <UIcon
-                    name="i-heroicons-chevron-down"
-                    aria-hidden="true"
-                    :class="{
-                      'rotate-180': openedRows.includes(index),
-                    }"
-                  />
-                </UButton>
+                />
               </td>
 
               <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, row[column.key]?.class]">
