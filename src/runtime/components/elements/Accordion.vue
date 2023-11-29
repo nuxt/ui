@@ -16,7 +16,7 @@
                 :name="!open ? openIcon : closeIcon ? closeIcon : openIcon"
                 :class="[
                   open && !closeIcon ? '-rotate-180' : '',
-                  uiButton.icon.size[item.size || uiButton.default.size],
+                  uiButton.icon?.size[item.size || uiButton.default.size],
                   ui.item.icon
                 ]"
               />
@@ -96,7 +96,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
@@ -114,7 +114,7 @@ export default defineComponent({
 
       buttonRefs.value.forEach((button) => {
         if (button.open) {
-          button.close(e.target)
+          button.close(e.target as EventTarget)
         }
       })
     }

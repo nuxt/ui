@@ -153,8 +153,8 @@ export default defineComponent({
 
       // @ts-expect-error
       delete(clone.children?.label)
-      delete(clone.props.indicator)
-      delete(clone.props.label)
+      delete(clone.props?.indicator)
+      delete(clone.props?.label)
 
       return clone
     }))

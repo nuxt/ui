@@ -308,7 +308,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     },
     uiMenu: {
@@ -386,7 +386,7 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
         props.loading && 'animate-spin'
       )

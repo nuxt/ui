@@ -13,7 +13,7 @@
             <slot name="text">
               {{ text }}
             </slot>
-  
+
             <span v-if="shortcuts?.length" :class="ui.shortcuts">
               <span class="mx-1 text-gray-700 dark:text-gray-200">&middot;</span>
               <UKbd v-for="shortcut of shortcuts" :key="shortcut" size="xs">
@@ -77,7 +77,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },

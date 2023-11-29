@@ -39,7 +39,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     value: {
-      type: [Number, null, undefined],
+      type: Number,
       default: null
     },
     max: {
@@ -76,7 +76,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },

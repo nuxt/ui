@@ -88,7 +88,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
@@ -124,7 +124,7 @@ export default defineComponent({
         ui.value.base,
         ui.value.background,
         ui.value.rounded,
-        ui.value.ring.replaceAll('{color}', color.value),
+        color.value && ui.value.ring.replaceAll('{color}', color.value),
         ui.value.size[size.value]
       ), props.inputClass)
     })
@@ -133,7 +133,7 @@ export default defineComponent({
       return twJoin(
         ui.value.thumb.base,
         // Intermediate class to allow thumb ring or background color (set to `current`) as it's impossible to safelist with arbitrary values
-        ui.value.thumb.color.replaceAll('{color}', color.value),
+        color.value && ui.value.thumb.color.replaceAll('{color}', color.value),
         ui.value.thumb.ring,
         ui.value.thumb.background,
         ui.value.thumb.size[size.value]
