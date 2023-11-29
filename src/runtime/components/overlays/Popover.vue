@@ -172,7 +172,7 @@ export default defineComponent({
     watch(() => popoverApi.value?.popoverState, (newValue: number, oldValue: number) => {
       if (oldValue === undefined) return
       emit(newValue === 0 ? 'open' : 'close')
-    }, { immediate: false })
+    })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
