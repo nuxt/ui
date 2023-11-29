@@ -6,7 +6,6 @@
       :value="modelValue"
       :required="required"
       :disabled="disabled || loading"
-      class="form-select"
       :class="selectClass"
       v-bind="attrs"
       @input="onInput"
@@ -256,6 +255,7 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
+        ui.value.form,
         rounded.value,
         ui.value.size[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',

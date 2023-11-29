@@ -340,15 +340,14 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
+        uiMenu.value.select,
         rounded.value,
-        'text-left cursor-default',
         ui.value.size[size.value],
         ui.value.gap[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
         variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
-        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value],
-        'inline-flex items-center'
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
       ), props.selectClass)
     })
 

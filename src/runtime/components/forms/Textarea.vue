@@ -9,7 +9,6 @@
       :required="required"
       :disabled="disabled"
       :placeholder="placeholder"
-      class="form-textarea"
       :class="textareaClass"
       v-bind="attrs"
       @input="onInput"
@@ -227,6 +226,7 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
+        ui.value.form,
         ui.value.rounded,
         ui.value.placeholder,
         ui.value.size[size.value],

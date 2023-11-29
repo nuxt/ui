@@ -1,6 +1,7 @@
 import { arrow } from '../popper'
 
 export default {
+  select: 'inline-flex items-center text-left cursor-default',
   container: 'z-20 group',
   width: 'w-full',
   height: 'max-h-60',

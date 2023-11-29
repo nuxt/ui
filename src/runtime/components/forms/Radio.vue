@@ -1,6 +1,6 @@
 <template>
   <div :class="ui.wrapper">
-    <div class="flex items-center h-5">
+    <div :class="ui.container">
       <input
         :id="inputId"
         v-model="pick"
@@ -9,12 +9,11 @@
         :value="value"
         :disabled="disabled"
         type="radio"
-        class="form-radio"
         :class="inputClass"
         v-bind="attrs"
       >
     </div>
-    <div v-if="label || $slots.label" class="ms-3 flex flex-col">
+    <div v-if="label || $slots.label" :class="ui.inner">
       <label :for="inputId" :class="ui.label">
         <slot name="label">{{ label }}</slot>
         <span v-if="required" :class="ui.required">*</span>
@@ -102,7 +101,7 @@ export default defineComponent({
     const { ui, attrs } = useUI('radio', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const radioGroup = inject('radio-group', null)
-    const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config) 
+    const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config)
     const inputId = ref(props.id)
 
     onMounted(() => {
@@ -128,6 +127,7 @@ export default defineComponent({
     const inputClass = computed(() => {
       return twMerge(twJoin(
         ui.value.base,
+        ui.value.form,
         ui.value.background,
         ui.value.border,
         ui.value.ring.replaceAll('{color}', color.value),

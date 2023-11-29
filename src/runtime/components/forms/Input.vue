@@ -9,7 +9,6 @@
       :required="required"
       :placeholder="placeholder"
       :disabled="disabled || loading"
-      class="form-input"
       :class="inputClass"
       v-bind="attrs"
       @input="onInput"
@@ -234,6 +233,7 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
+        ui.value.form,
         rounded.value,
         ui.value.placeholder,
         ui.value.size[size.value],
