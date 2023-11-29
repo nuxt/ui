@@ -3,8 +3,8 @@ export default {
   font: 'font-medium',
   rounded: 'rounded-md',
   truncate: 'text-left break-all line-clamp-1',
-  block: '',
-  inline: '',
+  block: 'w-full flex justify-center items-center',
+  inline: 'inline-flex items-center',
   loading: 'animate-spin',
   size: {
     '2xs': 'text-xs',
