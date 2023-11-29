@@ -1,4 +1,4 @@
-import arrow from '../_popperArrow'
+import { arrow } from '../popper'
 
 export default {
   wrapper: 'relative',

@@ -1,4 +1,4 @@
-import _popperArrow from '../_popperArrow'
+import { arrow } from '../popper'
 
 export default {
   wrapper: 'relative inline-flex text-left rtl:text-right',
@@ -45,7 +45,7 @@ export default {
     strategy: 'fixed'
   },
   arrow: {
-    ..._popperArrow,
+    ...arrow,
     ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
     background: 'before:bg-white dark:before:bg-gray-700'
   }

@@ -53,7 +53,8 @@
     <div v-if="open" ref="container" :class="[uiMenu.container, uiMenu.width]">
       <Transition appear v-bind="uiMenu.transition">
         <div>
-          <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(uiMenu.arrow)]" />
+          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(uiMenu.arrow)" />
+
           <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.divide, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
             <HComboboxInput
               v-if="searchable"

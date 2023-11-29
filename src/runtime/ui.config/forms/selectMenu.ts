@@ -1,4 +1,4 @@
-import _popperArrow from '../_popperArrow'
+import { arrow } from '../popper'
 
 export default {
   container: 'z-20 group',
@@ -55,7 +55,7 @@ export default {
     clearOnClose: false
   },
   arrow: {
-    ..._popperArrow,
+    ...arrow,
     ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
     background: 'before:bg-white dark:before:bg-gray-700'
   }
