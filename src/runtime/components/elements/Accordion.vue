@@ -16,7 +16,7 @@
                 :name="!open ? openIcon : closeIcon ? closeIcon : openIcon"
                 :class="[
                   open && !closeIcon ? '-rotate-180' : '',
-                  uiButton.icon?.size[item.size || uiButton.default.size],
+                  uiButton.icon.size[item.size || uiButton.default.size],
                   ui.item.icon
                 ]"
               />
@@ -103,7 +103,7 @@ export default defineComponent({
   setup (props) {
     const { ui, attrs } = useUI('accordion', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const uiButton = computed<Partial<typeof configButton>>(() => configButton)
+    const uiButton = computed<typeof configButton>(() => configButton)
 
     const buttonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
 

@@ -1,3 +1,5 @@
+import type { ButtonColor, ButtonVariant } from '../../types'
+
 export default {
   wrapper: 'relative overflow-x-auto',
   base: 'min-w-full table-fixed',
@@ -43,8 +45,8 @@ export default {
       icon: 'i-heroicons-arrows-up-down-20-solid',
       trailing: true,
       square: true,
-      color: 'gray',
-      variant: 'ghost',
+      color: 'gray' as ButtonColor,
+      variant: 'ghost' as ButtonVariant,
       class: '-m-1.5'
     },
     loadingState: {

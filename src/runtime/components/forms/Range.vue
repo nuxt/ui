@@ -153,7 +153,7 @@ export default defineComponent({
       return twJoin(
         ui.value.progress.base,
         ui.value.progress.rounded,
-        ui.value.progress.background.replaceAll('{color}', color.value),
+        color.value && ui.value.progress.background.replaceAll('{color}', color.value),
         ui.value.progress.size[size.value]
       )
     })

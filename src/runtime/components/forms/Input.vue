@@ -199,13 +199,13 @@ export default defineComponent({
       emitFormInput()
     }
 
-    const onInput = (event: InputEvent) => {
+    const onInput = (event: Event) => {
       if (!modelModifiers.value.lazy) {
         updateInput((event.target as HTMLInputElement).value)
       }
     }
 
-    const onChange = (event: InputEvent) => {
+    const onChange = (event: Event) => {
       const value = (event.target as HTMLInputElement).value
 
       if (modelModifiers.value.lazy) {

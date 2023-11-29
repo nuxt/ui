@@ -8,7 +8,7 @@
       </div>
     </slot>
 
-    <progress :class="progressClass" v-bind="{ value, max: realMax }">
+    <progress :class="progressClass" v-bind="{ value, max: (realMax as number) }">
       {{ Math.round(percent) }}%
     </progress>
 
@@ -173,7 +173,7 @@ export default defineComponent({
       return classes.join(' ')
     }
 
-    const isIndeterminate = computed(() => [undefined, null].includes(props.value))
+    const isIndeterminate = computed(() => props.value === undefined || props.value === null)
     const isSteps = computed(() => Array.isArray(props.max))
 
     const realMax = computed(() => {
@@ -191,8 +191,8 @@ export default defineComponent({
     const percent = computed(() => {
       switch (true) {
       case props.value < 0: return 0
-      case props.value > realMax.value: return 100
-      default: return (props.value / realMax.value) * 100
+      case props.value > (realMax.value as number): return 100
+      default: return (props.value / (realMax.value as number)) * 100
       }
     })
 
