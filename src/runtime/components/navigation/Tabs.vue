@@ -117,6 +117,10 @@ export default defineComponent({
         return
       }
 
+      if (!markerRef.value) {
+        return
+      }
+
       markerRef.value.style.top = `${tab.offsetTop}px`
       markerRef.value.style.left = `${tab.offsetLeft}px`
       markerRef.value.style.width = `${tab.offsetWidth}px`
@@ -141,6 +145,7 @@ export default defineComponent({
 
     watch(() => props.modelValue, (value) => {
       selectedIndex.value = value
+
       calcMarkerSize(value)
     })
 

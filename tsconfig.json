@@ -1,4 +1,7 @@
 {
   "extends": "./.nuxt/tsconfig.json",
-  "exclude": ["docs"]
+  "exclude": ["docs", "dist"],
+  "compilerOptions": {
+    "noImplicitAny": false
+  }
 }

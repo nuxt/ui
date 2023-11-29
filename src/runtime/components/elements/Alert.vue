@@ -25,7 +25,7 @@
           <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="action.click" />
         </template>
 
-        <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="$emit('close')" />
+        <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(ui.default.closeButton || {}), ...closeButton }" @click.stop="$emit('close')" />
       </div>
     </div>
   </div>
@@ -73,7 +73,7 @@ export default defineComponent({
     },
     closeButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.closeButton as Button
+      default: () => config.default.closeButton as unknown as Button
     },
     actions: {
       type: Array as PropType<(Button & { click?: Function })[]>,

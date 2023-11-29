@@ -243,7 +243,7 @@ export const generateSafelist = (colors: string[], globalColors) => {
 }
 
 export const customSafelistExtractor = (prefix, content: string, colors: string[], safelistColors: string[]) => {
-  const classes = []
+  const classes: string[] = []
   const regex = /<([A-Za-z][A-Za-z0-9]*(?:-[A-Za-z][A-Za-z0-9]*)*)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/gs
 
   const matches = content.matchAll(regex)
