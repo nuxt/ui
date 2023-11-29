@@ -128,7 +128,7 @@ export default defineComponent({
       vProps.ui.wrapper = node.props?.ui?.wrapper || ''
       vProps.ui.wrapper += [
         node.props?.ui?.wrapper,
-        props.ui?.meter?.background || ui.value.background,
+        ui.value.background,
         ui.value.transition
       ].filter(Boolean).join(' ')
 
