@@ -1,5 +1,47 @@
 # Changelog
 
+## [2.11.0](https://github.com/nuxt/ui/compare/v2.10.0...v2.11.0) (2023-11-23)
+
+
+### Features
+
+* **Breadcrumb:** new component ([#506](https://github.com/nuxt/ui/issues/506)) ([a35bfc7](https://github.com/nuxt/ui/commit/a35bfc734372cd24a8f86fca7b69f091051ce918))
+* **Checkbox:** config `label`, `required` and `help` size ([a1b38c4](https://github.com/nuxt/ui/commit/a1b38c4b66a16fefe8b514ec699a84309fcb7225))
+* **Chip:** new component ([#886](https://github.com/nuxt/ui/issues/886)) ([d4f1b5e](https://github.com/nuxt/ui/commit/d4f1b5ef82f58c2df4dd9491ceb61b55da7ba4c3))
+* **FormGroup:** add eager validation ([#992](https://github.com/nuxt/ui/issues/992)) ([d39e2de](https://github.com/nuxt/ui/commit/d39e2de935bcbbaf86c4b4b368e81bb08859b2e6))
+* **Icon:** switch to `nuxt-icon` with `dynamic` prop or app config ([#862](https://github.com/nuxt/ui/issues/862)) ([c601fc6](https://github.com/nuxt/ui/commit/c601fc6c5583763a2cdf6c575dda55c46311612a))
+* **module:** allow options override of `@egoist/tailwindcss-icons` plugin ([#1013](https://github.com/nuxt/ui/issues/1013)) ([ec58948](https://github.com/nuxt/ui/commit/ec58948153eb9c3048c41187ae505072a817b746))
+* **Notification:** customize default timeout ([#1003](https://github.com/nuxt/ui/issues/1003)) ([83c3be7](https://github.com/nuxt/ui/commit/83c3be716aa42eee70a1bbc3b8a28b7fa483c9bf))
+* **Popover:** ability to add overlay ([#1014](https://github.com/nuxt/ui/issues/1014)) ([06d4510](https://github.com/nuxt/ui/commit/06d4510d1c485ede49d1572454aeb8581384626e))
+* **SelectMenu:** allows to clear search query on close ([#968](https://github.com/nuxt/ui/issues/968)) ([11ccbbb](https://github.com/nuxt/ui/commit/11ccbbb24ef61e6bd3bb703f950955dd21d6a3eb))
+* **Textarea:** add default slot for complex usages ([55697e6](https://github.com/nuxt/ui/commit/55697e601e9b94e2159aa27613edd7265d5d06af)), closes [#971](https://github.com/nuxt/ui/issues/971)
+* **Toggle:** add `size` prop ([#950](https://github.com/nuxt/ui/issues/950)) ([3c71bf3](https://github.com/nuxt/ui/commit/3c71bf36b0232745765c6860af2be7f44bf948a0))
+* **types:** support custom values from `app.config.ts` ([#863](https://github.com/nuxt/ui/issues/863)) ([7339324](https://github.com/nuxt/ui/commit/7339324355362eebd30707fdd1944270e41525f4))
+
+
+### Bug Fixes
+
+* **Alert:** improve config options ([91511b9](https://github.com/nuxt/ui/commit/91511b921d65150f8da9c71e361d305477234f84)), closes [#760](https://github.com/nuxt/ui/issues/760)
+* **Alert:** prevent `gap` when no close button or action ([9a1a1b8](https://github.com/nuxt/ui/commit/9a1a1b8caf1c040c458230458b9fa9cbfb32a1bb)), closes [#831](https://github.com/nuxt/ui/issues/831)
+* **ButtonGroup:** handle components with children ([#999](https://github.com/nuxt/ui/issues/999)) ([f4be95d](https://github.com/nuxt/ui/commit/f4be95dcf5a07c964ae9f2555070d437e0388c13))
+* **CommandPalette:** activate first option after async search ([#981](https://github.com/nuxt/ui/issues/981)) ([a975939](https://github.com/nuxt/ui/commit/a97593985c93d4cc30ceff0e3bdf8070f17b63f6))
+* **defineShortcuts:** support minus `-` key ([#962](https://github.com/nuxt/ui/issues/962)) ([de38afd](https://github.com/nuxt/ui/commit/de38afd97b7bfd9af2619a17a42f27177abfec7e))
+* **Dropdown:** pass event to `click` function ([60fa2be](https://github.com/nuxt/ui/commit/60fa2beed0ef0dbac6429033cc96803edf847120))
+* **Dropdown:** use `NuxtLink` with `custom` prop to close on select ([f323379](https://github.com/nuxt/ui/commit/f3233799096b18b1d6c86391799a7c98a110fa4d)), closes [#899](https://github.com/nuxt/ui/issues/899)
+* **FormGroup:** hydration mismatch on inputId ([#942](https://github.com/nuxt/ui/issues/942)) ([a3046aa](https://github.com/nuxt/ui/commit/a3046aa25626ca50e9d9fc6288321940445e88a1))
+* **FormGroup:** remove inputId if the input is a fieldset ([#914](https://github.com/nuxt/ui/issues/914)) ([e81d5cf](https://github.com/nuxt/ui/commit/e81d5cf99831cfc320049051eeaf36f15951282b))
+* **Input/Textarea:** add `v-model` modifiers ([#856](https://github.com/nuxt/ui/issues/856)) ([68f6956](https://github.com/nuxt/ui/commit/68f6956d6e0cb5155e19b8d464a42953b8e30475))
+* **Link:** handle `active` state when `to` prop is not provided ([6cc77a3](https://github.com/nuxt/ui/commit/6cc77a3e6cbb263b649de0ea044894e0b7c4258a)), closes [#988](https://github.com/nuxt/ui/issues/988)
+* **Link:** reactivity issue with `active` prop ([15a40f5](https://github.com/nuxt/ui/commit/15a40f53f218bbe768262efc03dd7eaaf147ed6e)), closes [nuxt/nuxt.com#1432](https://github.com/nuxt/nuxt.com/issues/1432)
+* **module:** `boolean` types and bump nuxt to `3.8.2` ([#1006](https://github.com/nuxt/ui/issues/1006)) ([ca62ce1](https://github.com/nuxt/ui/commit/ca62ce13d3238819475528de0340416e6db9e5e6))
+* **module:** use correct alias for `[#ui](https://github.com/nuxt/ui/issues/ui)-colors` ([#913](https://github.com/nuxt/ui/issues/913)) ([c84438f](https://github.com/nuxt/ui/commit/c84438f491e7e3f8af5c6d892a2141b9ada2c155))
+* **Notification:** improve config options ([7cb987d](https://github.com/nuxt/ui/commit/7cb987de42ad89efc227eef47a8e06e7bc93206f))
+* **Notification:** prevent `gap` when no close button or action ([ded6a7f](https://github.com/nuxt/ui/commit/ded6a7f73d9ea57b5e771ce192c9ee36e6f98bba))
+* **Notifications:** teleport to `body` ([#909](https://github.com/nuxt/ui/issues/909)) ([8451f4d](https://github.com/nuxt/ui/commit/8451f4d9bbe51972688966f529cf0713060adb7a))
+* **Progress:** percentage calculation ([#939](https://github.com/nuxt/ui/issues/939)) ([c55871b](https://github.com/nuxt/ui/commit/c55871b8449e9947e84ecb2f9667eea287b579e6))
+* **Radio:** prevent `help` text from inlining with label ([#894](https://github.com/nuxt/ui/issues/894)) ([a2d70f0](https://github.com/nuxt/ui/commit/a2d70f04e98ce181ac217eaf6b66a8728af95805))
+* **SelectMenu:** fixes non-strings and nested searchable attributes ([#967](https://github.com/nuxt/ui/issues/967)) ([37fdf22](https://github.com/nuxt/ui/commit/37fdf224c07e47312c731b20080533ad7d8d786c))
+
 ## [2.10.0](https://github.com/nuxt/ui/compare/v2.9.0...v2.10.0) (2023-10-31)
 
 

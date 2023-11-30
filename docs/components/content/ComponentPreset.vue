@@ -24,7 +24,7 @@ const name = `U${upperFirst(camelName)}`
 const preset = config[camelName]
 
 const { data: ast } = await useAsyncData(`${name}-preset`, () => transformContent('content:_markdown.md', `
-\`\`\`json [${name}.vue]
+\`\`\`json
 ${JSON.stringify(preset, null, 2)}
 \`\`\`\
 `, {

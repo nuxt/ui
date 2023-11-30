@@ -5,13 +5,13 @@ import { join } from 'path'
 
 // TODO: fix these anys
 async function getTailwindCSSConfig (overrides: any = {}): Promise<[any, any]> {
-  overrides.modules = [ module ]
+  overrides.modules = [module]
   overrides.ssr = overrides.ssr ?? false
   overrides.hooks = overrides.hooks ?? {}
   return new Promise((resolve) => {
-    overrides.hooks['tailwindcss:resolvedConfig'] = async (config) => {
-        resolve([config, nuxt])
-      }
+    overrides.hooks['tailwindcss:resolvedConfig'] = async (config: any) => {
+      resolve([config, nuxt])
+    }
     const nuxt = loadNuxt({
       cwd: join(process.cwd(), 'fixtures', 'empty'),
       dev: false,
@@ -23,7 +23,7 @@ async function getTailwindCSSConfig (overrides: any = {}): Promise<[any, any]> {
 describe('nuxt', () => {
   it('should add plugins and modules to nuxt', async () => {
     const [, lnuxt] = await getTailwindCSSConfig()
-    await lnuxt.then((nuxt) => {
+    await lnuxt.then((nuxt: { options: { plugins: any; _requiredModules: any; appConfig: { ui: any } }; close: () => void }) => {
       expect(nuxt.options.plugins).toContainEqual(
         expect.objectContaining({
           src: expect.stringContaining('plugins/colors'),
@@ -116,7 +116,7 @@ describe('tailwindcss config', () => {
       negate = false
     }
 
-    await _nuxt.then((n) => {
+    await _nuxt.then((n: { close: () => void }) => {
       n.close()
     })
   })

@@ -2,7 +2,8 @@
   <div v-if="isOpen" ref="container" :class="wrapperClass" v-bind="attrs">
     <Transition appear v-bind="ui.transition">
       <div>
-        <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(ui.arrow)]" />
+        <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
+
         <div :class="[ui.base, ui.ring, ui.rounded, ui.shadow, ui.background]">
           <slot />
         </div>
@@ -45,11 +46,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close'],
