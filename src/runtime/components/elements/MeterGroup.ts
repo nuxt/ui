@@ -48,11 +48,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
       type: Object as PropType<Partial<typeof meterGroupConfig & { strategy?: Strategy }>>,
-      default: undefined
+      default: () => ({})
     }
   },
   setup (props, { slots }) {
@@ -128,7 +128,7 @@ export default defineComponent({
       vProps.ui.wrapper = node.props?.ui?.wrapper || ''
       vProps.ui.wrapper += [
         node.props?.ui?.wrapper,
-        props.ui?.meter?.background || ui.value.background,
+        ui.value.background,
         ui.value.transition
       ].filter(Boolean).join(' ')
 
@@ -153,8 +153,8 @@ export default defineComponent({
 
       // @ts-expect-error
       delete(clone.children?.label)
-      delete(clone.props.indicator)
-      delete(clone.props.label)
+      delete(clone.props?.indicator)
+      delete(clone.props?.label)
 
       return clone
     }))

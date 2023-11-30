@@ -91,11 +91,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
@@ -106,14 +106,18 @@ export default defineComponent({
     const itemRefs = ref<HTMLElement[]>([])
     const markerRef = ref<HTMLElement>()
 
-    const selectedIndex = ref(props.modelValue || props.defaultIndex)
+    const selectedIndex = ref<number | undefined>(props.modelValue || props.defaultIndex)
 
     // Methods
 
-    function calcMarkerSize (index: number) {
+    function calcMarkerSize (index: number | undefined) {
       // @ts-ignore
       const tab = itemRefs.value[index]?.$el
       if (!tab) {
+        return
+      }
+
+      if (!markerRef.value) {
         return
       }
 
@@ -123,16 +127,16 @@ export default defineComponent({
       markerRef.value.style.height = `${tab.offsetHeight}px`
     }
 
-    function onChange (index) {
+    function onChange (index: number) {
       selectedIndex.value = index
 
       emit('change', index)
 
       if (props.modelValue !== undefined) {
-        emit('update:modelValue', index)
+        emit('update:modelValue', selectedIndex.value)
       }
 
-      calcMarkerSize(index)
+      calcMarkerSize(selectedIndex.value)
     }
 
     useResizeObserver(listRef, () => {
@@ -141,7 +145,8 @@ export default defineComponent({
 
     watch(() => props.modelValue, (value) => {
       selectedIndex.value = value
-      calcMarkerSize(value)
+
+      calcMarkerSize(selectedIndex.value)
     })
 
     onMounted(() => calcMarkerSize(selectedIndex.value))

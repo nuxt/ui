@@ -5,28 +5,28 @@ export default {
   default: {
     size: 'sm',
     activeButton: {
-      color: 'primary'
+      color: 'primary' as const
     },
     inactiveButton: {
-      color: 'white'
+      color: 'white' as const
     },
     firstButton: {
-      color: 'white',
+      color: 'white' as const,
       class: 'rtl:[&_span:first-child]:rotate-180',
       icon: 'i-heroicons-chevron-double-left-20-solid'
     },
     lastButton: {
-      color: 'white',
+      color: 'white' as const,
       class: 'rtl:[&_span:last-child]:rotate-180',
       icon: 'i-heroicons-chevron-double-right-20-solid'
     },
     prevButton: {
-      color: 'white',
+      color: 'white' as const,
       class: 'rtl:[&_span:first-child]:rotate-180',
       icon: 'i-heroicons-chevron-left-20-solid'
     },
     nextButton: {
-      color: 'white',
+      color: 'white' as const,
       class: 'rtl:[&_span:last-child]:rotate-180',
       icon: 'i-heroicons-chevron-right-20-solid'
     }

@@ -21,7 +21,7 @@
         @change="query = $event.target.value"
       />
 
-      <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" :class="ui.input.closeButton" @click="onClear" />
+      <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(ui.default.closeButton || {}), ...closeButton }" :class="ui.input.closeButton" @click="onClear" />
     </div>
 
     <HComboboxOptions
@@ -135,7 +135,7 @@ export default defineComponent({
     },
     closeButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.closeButton as Button
+      default: () => config.default.closeButton as unknown as Button
     },
     emptyState: {
       type: Object as PropType<{ icon: string, label: string, queryLabel: string }>,
@@ -171,11 +171,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close'],
@@ -217,7 +217,7 @@ export default defineComponent({
       const commands: Command[] = []
       for (const group of props.groups) {
         if (!group.search) {
-          commands.push(...group.commands.map(command => ({ ...command, group: group.key })))
+          commands.push(...(group.commands?.map(command => ({ ...command, group: group.key })) || []))
         }
       }
       return commands
@@ -232,11 +232,17 @@ export default defineComponent({
 
       const groupedCommands: Record<string, typeof results['value']> = {}
       for (const command of results.value) {
+        if (!command.item.group) {
+          continue
+        }
         groupedCommands[command.item.group] ||= []
         groupedCommands[command.item.group].push(command)
       }
       for (const key in groupedCommands) {
         const group = props.groups.find(group => group.key === key)
+        if (!group) {
+          continue
+        }
 
         let commands = groupedCommands[key].map((result) => {
           const { item, ...data } = result
@@ -278,6 +284,7 @@ export default defineComponent({
       isLoading.value = true
 
       await Promise.all(searchableGroups.map(async (group) => {
+        // @ts-ignore
         searchResults.value[group.key] = await group.search(query.value)
       }))
 

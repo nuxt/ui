@@ -17,7 +17,7 @@ export default {
   },
   avatar: {
     base: 'flex-shrink-0',
-    size: '3xs'
+    size: '3xs' as const
   },
   badge: {
     base: 'relative ms-auto inline-block py-0.5 px-2 text-xs rounded-md -me-1 -my-0.5',

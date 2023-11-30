@@ -10,10 +10,15 @@ import type { DeepPartial, Strategy } from './runtime/types/utils'
 
 const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
+// @ts-ignore
 delete defaultColors.lightBlue
+// @ts-ignore
 delete defaultColors.warmGray
+// @ts-ignore
 delete defaultColors.trueGray
+// @ts-ignore
 delete defaultColors.coolGray
+// @ts-ignore
 delete defaultColors.blueGray
 
 type UI = {
@@ -79,12 +84,15 @@ export default defineNuxtModule<ModuleOptions>({
 
     // @ts-ignore
     nuxt.hook('tailwindcss:config', function (tailwindConfig) {
+      tailwindConfig.theme = tailwindConfig.theme || {}
+      tailwindConfig.theme.extend = tailwindConfig.theme.extend || {}
+      tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {}
+
       const globalColors: any = {
         ...(tailwindConfig.theme.colors || defaultColors),
         ...tailwindConfig.theme.extend?.colors
       }
 
-      tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {}
       // @ts-ignore
       globalColors.primary = tailwindConfig.theme.extend.colors.primary = {
         50: 'rgb(var(--color-primary-50) / <alpha-value>)',
@@ -132,7 +140,7 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
-      tailwindConfig.safelist.push(...generateSafelist(options.safelistColors, colors))
+      tailwindConfig.safelist.push(...generateSafelist(options.safelistColors || [], colors))
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
       tailwindConfig.plugins.push(iconsPlugin(Array.isArray(options.icons) || options.icons === 'all' ? { collections: getIconCollections(options.icons) } : typeof options.icons === 'object' ? options.icons as IconsPluginOptions : {}))

@@ -23,7 +23,7 @@ export default {
   },
   avatar: {
     base: 'flex-shrink-0',
-    size: '2xs'
+    size: '2xs' as const
   },
   label: 'text-sm'
 }

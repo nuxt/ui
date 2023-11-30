@@ -12,7 +12,7 @@ export default {
   },
   avatar: {
     base: 'flex-shrink-0 self-center',
-    size: 'md'
+    size: 'md' as const
   },
   color: {
     white: {
@@ -31,9 +31,9 @@ export default {
     icon: null,
     closeButton: null,
     actionButton: {
-      size: 'xs',
-      color: 'primary',
-      variant: 'link'
+      size: 'xs' as const,
+      color: 'primary' as const,
+      variant: 'link' as const
     }
   }
 }
