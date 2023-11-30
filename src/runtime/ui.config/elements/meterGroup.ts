@@ -6,6 +6,7 @@ export default {
   rounded: 'rounded-full',
   shadow: '',
   default: {
-    size: 'md'
+    size: 'md',
+    icon: 'i-heroicons-minus-20-solid'
   }
 }

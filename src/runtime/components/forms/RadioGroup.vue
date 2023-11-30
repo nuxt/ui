@@ -90,7 +90,7 @@ export default defineComponent({
       default: () => ({})
     },
     uiRadio: {
-      type: Object as PropType<Partial<typeof configRadio & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof configRadio> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },

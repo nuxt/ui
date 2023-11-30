@@ -15,7 +15,7 @@
       v-if="required"
       :value="modelValue"
       :required="required"
-      class="absolute inset-0 w-px opacity-0 cursor-default"
+      :class="uiMenu.required"
       tabindex="-1"
       aria-hidden="true"
     >
@@ -36,9 +36,9 @@
           </span>
 
           <slot name="label">
-            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" class="block truncate">{{ modelValue.length }} selected</span>
-            <span v-else-if="!multiple && modelValue" class="block truncate">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
-            <span v-else class="block truncate">{{ placeholder || '&nbsp;' }}</span>
+            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" :class="uiMenu.label">{{ modelValue.length }} selected</span>
+            <span v-else-if="!multiple && modelValue" :class="uiMenu.label">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
+            <span v-else :class="uiMenu.label">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
           <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
@@ -102,7 +102,7 @@
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
                   <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
-                    <span class="block truncate">Create "{{ queryOption[optionAttribute] }}"</span>
+                    <span :class="uiMenu.option.create">Create "{{ queryOption[optionAttribute] }}"</span>
                   </slot>
                 </div>
               </li>
@@ -313,7 +313,7 @@ export default defineComponent({
       default: () => ({})
     },
     uiMenu: {
-      type: Object as PropType<Partial<typeof configMenu & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof configMenu> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },

@@ -35,7 +35,7 @@
                       <UIcon v-if="item.icon" :name="item.icon" :class="[ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive, item.iconClass]" />
                       <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
 
-                      <span class="truncate">{{ item.label }}</span>
+                      <span :class="ui.item.label">{{ item.label }}</span>
 
                       <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
                         <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>

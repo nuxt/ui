@@ -30,6 +30,7 @@ export default {
       base: 'flex-shrink-0',
       size: '3xs' as const
     },
+    label: 'truncate',
     shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ms-auto'
   },
   // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions

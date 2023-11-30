@@ -44,14 +44,14 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: 'i-heroicons-minus'
+      default: () => meterGroupConfig.default.icon
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof meterGroupConfig & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof meterGroupConfig> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
