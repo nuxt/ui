@@ -63,11 +63,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close'],
@@ -90,10 +90,10 @@ export default defineComponent({
 
       return {
         ...ui.value.transition,
-        enterFrom: props.side === 'left' ? '-translate-x-full' : 'translate-x-full',
-        enterTo: 'translate-x-0',
-        leaveFrom: 'translate-x-0',
-        leaveTo: props.side === 'left' ? '-translate-x-full' : 'translate-x-full'
+        enterFrom: props.side === 'left' ? ui.value.translate.left : ui.value.translate.right,
+        enterTo: ui.value.translate.base,
+        leaveFrom: ui.value.translate.base,
+        leaveTo: props.side === 'left' ? ui.value.translate.left : ui.value.translate.right
       }
     })
 

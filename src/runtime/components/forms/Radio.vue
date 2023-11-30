@@ -1,21 +1,20 @@
 <template>
   <div :class="ui.wrapper">
-    <div class="flex items-center h-5">
+    <div :class="ui.container">
       <input
-        :id="id"
+        :id="inputId"
         v-model="pick"
         :name="name"
         :required="required"
         :value="value"
         :disabled="disabled"
         type="radio"
-        class="form-radio"
         :class="inputClass"
         v-bind="attrs"
       >
     </div>
-    <div v-if="label || $slots.label" class="ms-3 flex flex-col">
-      <label :for="id" :class="ui.label">
+    <div v-if="label || $slots.label" :class="ui.inner">
+      <label :for="inputId" :class="ui.label">
         <slot name="label">{{ label }}</slot>
         <span v-if="required" :class="ui.required">*</span>
       </label>
@@ -27,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, toRef } from 'vue'
+import { computed, defineComponent, inject, toRef, onMounted, ref } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
@@ -47,8 +46,7 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      // A default value is needed here to bind the label
-      default: () => uid()
+      default: () => null
     },
     value: {
       type: [String, Number, Boolean],
@@ -91,11 +89,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
@@ -104,6 +102,13 @@ export default defineComponent({
 
     const radioGroup = inject('radio-group', null)
     const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config)
+    const inputId = ref(props.id)
+
+    onMounted(() => {
+      if (!inputId.value) {
+        inputId.value = uid()
+      }
+    })
 
     const pick = computed({
       get () {
@@ -122,14 +127,16 @@ export default defineComponent({
     const inputClass = computed(() => {
       return twMerge(twJoin(
         ui.value.base,
+        ui.value.form,
         ui.value.background,
         ui.value.border,
-        ui.value.ring.replaceAll('{color}', color.value),
-        ui.value.color.replaceAll('{color}', color.value)
+        color.value && ui.value.ring.replaceAll('{color}', color.value),
+        color.value && ui.value.color.replaceAll('{color}', color.value)
       ), props.inputClass)
     })
 
     return {
+      inputId,
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,

@@ -7,7 +7,7 @@ import { useShortcuts } from './useShortcuts'
 export interface ShortcutConfig {
   handler: Function
   usingInput?: string | boolean
-  whenever?: WatchSource<Boolean>[]
+  whenever?: WatchSource<boolean>[]
 }
 
 export interface ShortcutsConfig {
@@ -20,7 +20,7 @@ export interface ShortcutsOptions {
 
 interface Shortcut {
   handler: Function
-  condition: ComputedRef<Boolean>
+  condition: ComputedRef<boolean>
   chained: boolean
   // KeyboardEvent attributes
   key: string
@@ -32,12 +32,15 @@ interface Shortcut {
   // keyCode?: number
 }
 
+const chainedShortcutRegex = /^[^-]+.*-.*[^-]+$/
+const combinedShortcutRegex = /^[^_]+.*_.*[^_]+$/
+
 export const defineShortcuts = (config: ShortcutsConfig, options: ShortcutsOptions = {}) => {
   const { macOS, usingInput } = useShortcuts()
 
   let shortcuts: Shortcut[] = []
 
-  const chainedInputs = ref([])
+  const chainedInputs = ref<string[]>([])
   const clearChainedInput = () => {
     chainedInputs.value.splice(0, chainedInputs.value.length)
   }
@@ -98,12 +101,15 @@ export const defineShortcuts = (config: ShortcutsConfig, options: ShortcutsOptio
     // Parse key and modifiers
     let shortcut: Partial<Shortcut>
 
-    if (key.includes('-') && key.includes('_')) {
-      console.trace('[Shortcut] Invalid key')
-      return null
+    if (key.includes('-') && key !== '-' && !key.match(chainedShortcutRegex)?.length) {
+      console.trace(`[Shortcut] Invalid key: "${key}"`)
     }
 
-    const chained = key.includes('-')
+    if (key.includes('_') && key !== '_' && !key.match(combinedShortcutRegex)?.length) {
+      console.trace(`[Shortcut] Invalid key: "${key}"`)
+    }
+
+    const chained = key.includes('-') && key !== '-'
     if (chained) {
       shortcut = {
         key: key.toLowerCase(),
@@ -143,7 +149,7 @@ export const defineShortcuts = (config: ShortcutsConfig, options: ShortcutsOptio
     }
 
     // Create shortcut computed
-    const conditions: ComputedRef<Boolean>[] = []
+    const conditions: ComputedRef<boolean>[] = []
     if (!(shortcutConfig as ShortcutConfig).usingInput) {
       conditions.push(logicNot(usingInput))
     } else if (typeof (shortcutConfig as ShortcutConfig).usingInput === 'string') {
