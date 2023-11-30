@@ -6,7 +6,7 @@
         :size="size"
         :disabled="!canGoFirstOrPrev"
         :class="[ui.base, ui.rounded]"
-        v-bind="{ ...ui.default.firstButton, ...firstButton }"
+        v-bind="{ ...(ui.default.firstButton || {}), ...firstButton }"
         :ui="{ rounded: '' }"
         aria-label="First"
         @click="onClickFirst"
@@ -19,7 +19,7 @@
         :size="size"
         :disabled="!canGoFirstOrPrev"
         :class="[ui.base, ui.rounded]"
-        v-bind="{ ...ui.default.prevButton, ...prevButton }"
+        v-bind="{ ...(ui.default.prevButton || {}), ...prevButton }"
         :ui="{ rounded: '' }"
         aria-label="Prev"
         @click="onClickPrev"
@@ -31,7 +31,7 @@
       :key="`${page}-${index}`"
       :size="size"
       :label="`${page}`"
-      v-bind="page === currentPage ? { ...ui.default.activeButton, ...activeButton } : { ...ui.default.inactiveButton, ...inactiveButton }"
+      v-bind="page === currentPage ? { ...(ui.default.activeButton || {}), ...activeButton } : { ...(ui.default.inactiveButton || {}), ...inactiveButton }"
       :class="[{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }, ui.base, ui.rounded]"
       :ui="{ rounded: '' }"
       @click="() => onClickPage(page)"
@@ -43,7 +43,7 @@
         :size="size"
         :disabled="!canGoLastOrNext"
         :class="[ui.base, ui.rounded]"
-        v-bind="{ ...ui.default.nextButton, ...nextButton }"
+        v-bind="{ ...(ui.default.nextButton || {}), ...nextButton }"
         :ui="{ rounded: '' }"
         aria-label="Next"
         @click="onClickNext"
@@ -56,7 +56,7 @@
         :size="size"
         :disabled="!canGoLastOrNext"
         :class="[ui.base, ui.rounded]"
-        v-bind="{ ...ui.default.lastButton, ...lastButton }"
+        v-bind="{ ...(ui.default.lastButton || {}), ...lastButton }"
         :ui="{ rounded: '' }"
         aria-label="Last"
         @click="onClickLast"
@@ -71,7 +71,7 @@ import type { PropType } from 'vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Button, Strategy } from '../../types'
+import type { Button, ButtonSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { pagination, button } from '#ui/ui.config'
@@ -106,7 +106,7 @@ export default defineComponent({
       }
     },
     size: {
-      type: String as PropType<keyof typeof buttonConfig.size>,
+      type: String as PropType<ButtonSize>,
       default: () => config.default.size,
       validator (value: string) {
         return Object.keys(buttonConfig.size).includes(value)
@@ -150,11 +150,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue'],

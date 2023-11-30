@@ -247,7 +247,7 @@ async function getValibotError (
   const result = await schema._parse(state)
   if (result.issues) {
     return result.issues.map((issue) => ({
-      path: issue.path.map(p => p.key).join('.'),
+      path: issue.path?.map(p => p.key).join('.') || '',
       message: issue.message
     }))
   }
