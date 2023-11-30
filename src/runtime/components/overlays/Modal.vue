@@ -14,10 +14,7 @@
                 ui.background,
                 ui.ring,
                 ui.shadow,
-                fullscreen ? 'w-screen' : ui.width,
-                fullscreen ? 'h-screen' : ui.height,
-                fullscreen ? 'rounded-none' : ui.rounded,
-                fullscreen ? 'm-0' : ui.margin
+                fullscreen ? ui.fullscreen : [ui.width, ui.height, ui.rounded, ui.margin],
               ]"
             >
               <slot />

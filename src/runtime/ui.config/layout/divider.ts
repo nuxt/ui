@@ -16,6 +16,11 @@ export default {
     size: {
       horizontal: 'border-t',
       vertical: 'border-s'
+    },
+    type: {
+      solid: 'border-solid',
+      dotted: 'border-dotted',
+      dashed: 'border-dashed'
     }
   },
   icon: {

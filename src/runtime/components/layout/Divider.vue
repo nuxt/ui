@@ -91,17 +91,11 @@ export default defineComponent({
     })
 
     const borderClass = computed(() => {
-      const typeClass = ({
-        solid: 'border-solid',
-        dotted: 'border-dotted',
-        dashed: 'border-dashed'
-      })[props.type]
-
       return twJoin(
         ui.value.border.base,
         isHorizontal.value ? ui.value.border.horizontal : ui.value.border.vertical,
         isHorizontal.value ? ui.value.border.size.horizontal : ui.value.border.size.vertical,
-        typeClass
+        ui.value.border.type[props.type]
       )
     })
 
