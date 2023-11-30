@@ -52,9 +52,7 @@ export default defineComponent({
       ), props.class)
     })
 
-    const rounded = computed(() => {
-      return ui.value.orientation[ui.value.rounded][props.orientation]
-    })
+    const rounded = computed(() => ui.value.orientation[ui.value.rounded][props.orientation])
 
     useProvideButtonGroup({ orientation: toRef(props, 'orientation'), size: toRef(props, 'size'), ui, rounded })
 
