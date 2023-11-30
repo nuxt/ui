@@ -4,7 +4,7 @@
       <UIcon v-if="icon" :name="icon" :class="ui.icon.base" />
       <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
 
-      <div class="w-0 flex-1">
+      <div :class="ui.inner">
         <p :class="ui.title">
           <slot name="title" :title="title">
             {{ title }}
@@ -17,15 +17,15 @@
         </p>
 
         <div v-if="(description || $slots.description) && actions.length" :class="ui.actions">
-          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="action.click" />
+          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="action.click" />
         </div>
       </div>
       <div v-if="closeButton || (!description && !$slots.description && actions.length)" :class="twMerge(ui.actions, 'mt-0')">
         <template v-if="!description && !$slots.description && actions.length">
-          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...ui.default.actionButton, ...action }" @click.stop="action.click" />
+          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="action.click" />
         </template>
 
-        <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" @click.stop="$emit('close')" />
+        <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(ui.default.closeButton || {}), ...closeButton }" @click.stop="$emit('close')" />
       </div>
     </div>
   </div>
@@ -39,12 +39,11 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
-import type { Avatar, Button, NestedKeyOf, Strategy } from '../../types'
+import type { Avatar, Button, AlertColor, AlertVariant, Strategy } from '../../types'
 import { mergeConfig } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { alert } from '#ui/ui.config'
-import colors from '#ui-colors'
 
 const config = mergeConfig<typeof alert>(appConfig.ui.strategy, appConfig.ui.alert, alert)
 
@@ -74,21 +73,21 @@ export default defineComponent({
     },
     closeButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.closeButton as Button
+      default: () => config.default.closeButton as unknown as Button
     },
     actions: {
       type: Array as PropType<(Button & { click?: Function })[]>,
       default: () => []
     },
     color: {
-      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      type: String as PropType<AlertColor>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      type: String as PropType<AlertVariant>,
       default: () => config.default.variant,
       validator (value: string) {
         return [
@@ -99,11 +98,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['close'],

@@ -188,6 +188,26 @@
         </div>
       </ULandingCTA>
     </ULandingSection>
+
+    <ULandingSection :links="page.pro.links">
+      <template #title>
+        <span v-html="page.pro.title" />
+      </template>
+
+      <template #description>
+        <span v-html="page.pro.description" />
+      </template>
+
+      <UColorModeImage
+        :light="`${page.pro.image.path}-light.svg`"
+        :dark="`${page.pro.image.path}-dark.svg`"
+        :width="page.pro.image.width"
+        :height="page.pro.image.height"
+        :alt="page.pro.title"
+        loading="lazy"
+        class="w-full lg:-mb-16"
+      />
+    </ULandingSection>
   </div>
 </template>
 

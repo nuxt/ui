@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 
 export interface FormError<T extends string = string> {
   path: T
@@ -31,5 +31,6 @@ export interface InjectedFormGroupValue {
   inputId: Ref<string | undefined>
   name: Ref<string>
   size: Ref<string | number | symbol>
-  error: Ref<string | boolean>
+  error: Ref<string | boolean | undefined>
+  eagerValidation: Ref<boolean>
 }

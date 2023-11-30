@@ -27,7 +27,7 @@ import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types'
+import type { ToggleSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { toggle } from '#ui/ui.config'
@@ -73,20 +73,20 @@ export default defineComponent({
         return appConfig.ui.colors.includes(value)
       }
     },
-    class: {
-      type: [String, Object, Array] as PropType<any>,
-      default: undefined
-    },
     size: {
-      type: String as PropType<keyof typeof config.size>,
+      type: String as PropType<ToggleSize>,
       default: config.default.size,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: () => ''
+    },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue'],
@@ -110,8 +110,8 @@ export default defineComponent({
         ui.value.base,
         ui.value.size[props.size],
         ui.value.rounded,
-        ui.value.ring.replaceAll('{color}', color.value),
-        (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', color.value)
+        color.value && ui.value.ring.replaceAll('{color}', color.value),
+        color.value && (active.value ? ui.value.active : ui.value.inactive).replaceAll('{color}', color.value)
       ), props.class)
     })
 
@@ -126,14 +126,14 @@ export default defineComponent({
     const onIconClass = computed(() => {
       return twJoin(
         ui.value.icon.size[props.size],
-        ui.value.icon.on.replaceAll('{color}', color.value)
+        color.value && ui.value.icon.on.replaceAll('{color}', color.value)
       )
     })
 
     const offIconClass = computed(() => {
       return twJoin(
         ui.value.icon.size[props.size],
-        ui.value.icon.off.replaceAll('{color}', color.value)
+        color.value && ui.value.icon.off.replaceAll('{color}', color.value)
       )
     })
 

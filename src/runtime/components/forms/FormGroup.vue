@@ -42,7 +42,7 @@ import { computed, defineComponent, provide, inject, ref, toRef } from 'vue'
 import type { Ref, PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { FormError, InjectedFormGroupValue, Strategy } from '../../types'
+import type { FormError, InjectedFormGroupValue, FormGroupSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { formGroup } from '#ui/ui.config'
@@ -57,7 +57,7 @@ export default defineComponent({
       default: null
     },
     size: {
-      type: String as PropType<keyof typeof config.size>,
+      type: String as PropType<FormGroupSize>,
       default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
@@ -89,11 +89,15 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
+    },
+    eagerValidation: {
+      type: Boolean,
+      default: false
     }
   },
   setup (props) {
@@ -114,7 +118,8 @@ export default defineComponent({
       error,
       inputId,
       name: computed(() => props.name),
-      size: computed(() => props.size)
+      size: computed(() => props.size),
+      eagerValidation: computed(() => props.eagerValidation)
     })
 
     return {
