@@ -6,7 +6,6 @@
       :value="modelValue"
       :required="required"
       :disabled="disabled || loading"
-      class="form-select"
       :class="selectClass"
       v-bind="attrs"
       @input="onInput"
@@ -61,6 +60,7 @@ import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, get } from '../../utils'
+import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { SelectSize, SelectColor, SelectVariant, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -172,20 +172,24 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
+    const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
 
-    const onInput = (event: InputEvent) => {
+    const { emitFormChange, inputId, color, size: sizeFormGroup, name } = useFormGroup(props, config)
+
+    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
+
+    const onInput = (event: Event) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
@@ -251,7 +255,8 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
-        ui.value.rounded,
+        ui.value.form,
+        rounded.value,
         ui.value.size[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
         variant?.replaceAll('{color}', color.value),
@@ -295,9 +300,9 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && 'animate-spin'
+        props.loading && ui.value.icon.loading
       )
     })
 
@@ -312,9 +317,9 @@ export default defineComponent({
     const trailingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && !isLeading.value && 'animate-spin'
+        props.loading && !isLeading.value && ui.value.icon.loading
       )
     })
 

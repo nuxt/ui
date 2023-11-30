@@ -93,17 +93,17 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   setup (props) {
     const { ui, attrs } = useUI('accordion', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const uiButton = computed<Partial<typeof configButton>>(() => configButton)
+    const uiButton = computed<typeof configButton>(() => configButton)
 
     const buttonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
 
@@ -114,7 +114,7 @@ export default defineComponent({
 
       buttonRefs.value.forEach((button) => {
         if (button.open) {
-          button.close(e.target)
+          button.close(e.target as EventTarget)
         }
       })
     }

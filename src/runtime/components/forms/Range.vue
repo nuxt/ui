@@ -85,11 +85,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
@@ -124,7 +124,7 @@ export default defineComponent({
         ui.value.base,
         ui.value.background,
         ui.value.rounded,
-        ui.value.ring.replaceAll('{color}', color.value),
+        color.value && ui.value.ring.replaceAll('{color}', color.value),
         ui.value.size[size.value]
       ), props.inputClass)
     })
@@ -133,7 +133,7 @@ export default defineComponent({
       return twJoin(
         ui.value.thumb.base,
         // Intermediate class to allow thumb ring or background color (set to `current`) as it's impossible to safelist with arbitrary values
-        ui.value.thumb.color.replaceAll('{color}', color.value),
+        color.value && ui.value.thumb.color.replaceAll('{color}', color.value),
         ui.value.thumb.ring,
         ui.value.thumb.background,
         ui.value.thumb.size[size.value]
@@ -153,7 +153,7 @@ export default defineComponent({
       return twJoin(
         ui.value.progress.base,
         ui.value.progress.rounded,
-        ui.value.progress.background.replaceAll('{color}', color.value),
+        color.value && ui.value.progress.background.replaceAll('{color}', color.value),
         ui.value.progress.size[size.value]
       )
     })

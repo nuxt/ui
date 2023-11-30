@@ -83,7 +83,9 @@ export default defineNuxtConfig({
         '/',
         '/getting-started',
         '/dev/getting-started',
-        '/api/search.json'
+        '/api/search.json',
+        '/api/releases.json',
+        '/api/pulls.json'
       ]
     }
   },
@@ -121,5 +123,8 @@ export default defineNuxtConfig({
         }
       })
     }
+  },
+  typescript: {
+    strict: false
   }
 })

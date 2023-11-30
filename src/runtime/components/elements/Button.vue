@@ -5,7 +5,7 @@
     </slot>
 
     <slot>
-      <span v-if="label" :class="[truncate ? 'text-left break-all line-clamp-1' : '']">
+      <span v-if="label" :class="[truncate ? ui.truncate : '']">
         {{ label }}
       </span>
     </slot>
@@ -24,6 +24,7 @@ import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
+import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { ButtonColor, ButtonSize, ButtonVariant, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -120,15 +121,17 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   setup (props, { slots }) {
     const { ui, attrs } = useUI('button', toRef(props, 'ui'), config)
+
+    const { size, rounded } = useInjectButtonGroup({ ui, props })
 
     const isLeading = computed(() => {
       return (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon
@@ -146,12 +149,12 @@ export default defineComponent({
       return twMerge(twJoin(
         ui.value.base,
         ui.value.font,
-        ui.value.rounded,
-        ui.value.size[props.size],
-        ui.value.gap[props.size],
-        props.padded && ui.value[isSquare.value ? 'square' : 'padding'][props.size],
+        rounded.value,
+        ui.value.size[size.value],
+        ui.value.gap[size.value],
+        props.padded && ui.value[isSquare.value ? 'square' : 'padding'][size.value],
         variant?.replaceAll('{color}', props.color),
-        props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
+        props.block ? ui.value.block : ui.value.inline
       ), props.class)
     })
 
@@ -174,20 +177,22 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        ui.value.icon.size[props.size],
-        props.loading && 'animate-spin'
+        ui.value.icon.size[size.value],
+        props.loading && ui.value.icon.loading
       )
     })
 
     const trailingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        ui.value.icon.size[props.size],
-        props.loading && !isLeading.value && 'animate-spin'
+        ui.value.icon.size[size.value],
+        props.loading && !isLeading.value && ui.value.icon.loading
       )
     })
 
     return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       isLeading,
       isTrailing,

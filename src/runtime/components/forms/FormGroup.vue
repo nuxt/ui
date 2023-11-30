@@ -89,11 +89,15 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
+    },
+    eagerValidation: {
+      type: Boolean,
+      default: false
     }
   },
   setup (props) {
@@ -114,7 +118,8 @@ export default defineComponent({
       error,
       inputId,
       name: computed(() => props.name),
-      size: computed(() => props.size)
+      size: computed(() => props.size),
+      eagerValidation: computed(() => props.eagerValidation)
     })
 
     return {

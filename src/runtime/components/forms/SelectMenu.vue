@@ -15,7 +15,7 @@
       v-if="required"
       :value="modelValue"
       :required="required"
-      class="absolute inset-0 w-px opacity-0 cursor-default"
+      :class="uiMenu.required"
       tabindex="-1"
       aria-hidden="true"
     >
@@ -25,7 +25,7 @@
       ref="trigger"
       as="div"
       role="button"
-      class="inline-flex w-full"
+      :class="uiMenu.trigger"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
         <button :id="inputId" :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
@@ -36,9 +36,9 @@
           </span>
 
           <slot name="label">
-            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" class="block truncate">{{ modelValue.length }} selected</span>
-            <span v-else-if="!multiple && modelValue" class="block truncate">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
-            <span v-else class="block truncate" :class="uiMenu.placeholder">{{ placeholder || '&nbsp;' }}</span>
+            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" :class="uiMenu.label">{{ modelValue.length }} selected</span>
+            <span v-else-if="!multiple && modelValue" :class="uiMenu.label">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
+            <span v-else :class="uiMenu.label">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
           <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
@@ -53,8 +53,9 @@
     <div v-if="open" ref="container" :class="[uiMenu.container, uiMenu.width]">
       <Transition appear v-bind="uiMenu.transition">
         <div>
-          <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(uiMenu.arrow)]" />
-          <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.divide, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
+          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(uiMenu.arrow)" />
+
+          <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
             <HComboboxInput
               v-if="searchable"
               ref="searchInput"
@@ -101,7 +102,7 @@
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
                   <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
-                    <span class="block truncate">Create "{{ queryOption[optionAttribute] }}"</span>
+                    <span :class="uiMenu.option.create">Create "{{ queryOption[optionAttribute] }}"</span>
                   </slot>
                 </div>
               </li>
@@ -140,7 +141,8 @@ import UAvatar from '../elements/Avatar.vue'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { mergeConfig } from '../../utils'
+import { get, mergeConfig } from '../../utils'
+import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -238,6 +240,10 @@ export default defineComponent({
       type: String,
       default: 'Search...'
     },
+    clearSearchOnClose: {
+      type: Boolean,
+      default: () => configMenu.default.clearOnClose
+    },
     debounce: {
       type: Number,
       default: 200
@@ -300,15 +306,15 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     },
     uiMenu: {
-      type: Object as PropType<Partial<typeof configMenu & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof configMenu> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'open', 'close', 'change'],
@@ -320,7 +326,11 @@ export default defineComponent({
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
-    const { emitFormBlur, emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
+
+    const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
+    const { emitFormBlur, emitFormChange, inputId, color, size: sizeFormGroup, name } = useFormGroup(props, config)
+
+    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
     const query = ref('')
     const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
@@ -330,15 +340,14 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
-        ui.value.rounded,
-        'text-left cursor-default',
+        uiMenu.value.select,
+        rounded.value,
         ui.value.size[size.value],
         ui.value.gap[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
         variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
-        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value],
-        'inline-flex items-center'
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
       ), props.selectClass)
     })
 
@@ -377,9 +386,9 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && 'animate-spin'
+        props.loading && ui.value.icon.loading
       )
     })
 
@@ -394,9 +403,9 @@ export default defineComponent({
     const trailingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && !isLeading.value && 'animate-spin'
+        props.loading && !isLeading.value && ui.value.icon.loading
       )
     })
 
@@ -413,7 +422,13 @@ export default defineComponent({
 
       return (props.options as any[]).filter((option: any) => {
         return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
-          return ['string', 'number'].includes(typeof option) ? option.toString().search(new RegExp(query.value, 'i')) !== -1 : (option[searchAttribute] && option[searchAttribute].search(new RegExp(query.value, 'i')) !== -1)
+          if (['string', 'number'].includes(typeof option)) {
+            return String(option).search(new RegExp(query.value, 'i')) !== -1
+          }
+
+          const child = get(option, searchAttribute)
+
+          return child !== null && child !== undefined && String(child).search(new RegExp(query.value, 'i')) !== -1
         })
       })
     })
@@ -422,10 +437,17 @@ export default defineComponent({
       return query.value === '' ? null : { [props.optionAttribute]: query.value }
     })
 
+    function clearOnClose () {
+      if (props.clearSearchOnClose) {
+        query.value = ''
+      }
+    }
+
     watch(container, (value) => {
       if (value) {
         emit('open')
       } else {
+        clearOnClose()
         emit('close')
         emitFormBlur()
       }
@@ -437,6 +459,7 @@ export default defineComponent({
         // explicitly set input text because `ComboboxInput` `displayValue` is not reactive
         searchInput.value.$el.value = ''
       }
+
       emit('update:modelValue', event)
       emit('change', event)
       emitFormChange()

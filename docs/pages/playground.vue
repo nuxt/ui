@@ -3,6 +3,7 @@ const title = 'Playground'
 const description = 'Play online with our interactive Nuxt Image playground.'
 
 useSeoMeta({
+  titleTemplate: '%s - Nuxt UI',
   title,
   ogTitle: 'Nuxt UI Playground',
   description
