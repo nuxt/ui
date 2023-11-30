@@ -3,6 +3,7 @@ import { arrow } from '../popper'
 export default {
   wrapper: 'relative inline-flex text-left rtl:text-right',
   container: 'z-20 group',
+  trigger: 'inline-flex w-full',
   width: 'w-48',
   height: '',
   background: 'bg-white dark:bg-gray-800',

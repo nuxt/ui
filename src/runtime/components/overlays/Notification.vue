@@ -12,7 +12,7 @@
           <UIcon v-if="icon" :name="icon" :class="iconClass" />
           <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
 
-          <div class="w-0 flex-1">
+          <div :class="ui.inner">
             <p :class="ui.title">
               <slot name="title" :title="title">
                 {{ title }}

@@ -178,7 +178,7 @@ export default defineComponent({
       return twJoin(
         ui.value.icon.base,
         ui.value.icon.size[size.value],
-        props.loading && ui.value.loading
+        props.loading && ui.value.icon.loading
       )
     })
 
@@ -186,11 +186,13 @@ export default defineComponent({
       return twJoin(
         ui.value.icon.base,
         ui.value.icon.size[size.value],
-        props.loading && !isLeading.value && ui.value.loading
+        props.loading && !isLeading.value && ui.value.icon.loading
       )
     })
 
     return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       isLeading,
       isTrailing,

@@ -25,7 +25,7 @@
       ref="trigger"
       as="div"
       role="button"
-      class="inline-flex w-full"
+      :class="uiMenu.trigger"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
         <button :id="inputId" :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
@@ -388,7 +388,7 @@ export default defineComponent({
         ui.value.icon.base,
         color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && 'animate-spin'
+        props.loading && ui.value.icon.loading
       )
     })
 
@@ -405,7 +405,7 @@ export default defineComponent({
         ui.value.icon.base,
         color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && !isLeading.value && 'animate-spin'
+        props.loading && !isLeading.value && ui.value.icon.loading
       )
     })
 

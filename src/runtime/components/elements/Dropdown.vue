@@ -4,7 +4,7 @@
       ref="trigger"
       as="div"
       :disabled="disabled"
-      class="inline-flex w-full"
+      :class="ui.trigger"
       role="button"
       @mouseover="onMouseOver"
     >
