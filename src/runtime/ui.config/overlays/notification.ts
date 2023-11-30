@@ -37,13 +37,13 @@ export default {
     timeout: 5000,
     closeButton: {
       icon: 'i-heroicons-x-mark-20-solid',
-      color: 'gray',
-      variant: 'link',
+      color: 'gray' as const,
+      variant: 'link' as const,
       padded: false
     },
     actionButton: {
-      size: 'xs',
-      color: 'white'
+      size: 'xs' as const,
+      color: 'white' as const
     }
   }
 }

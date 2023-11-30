@@ -7,6 +7,7 @@ describe('Skeleton', () => {
   it.each([
     [ 'basic case', { } ],
     [ '<USkeleton class="h-12 w-12" :ui="{ rounded: \'rounded-full\' }" />' ]
+    // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Skeleton.props>) => {
     const html = await ComponentRender(nameOrHtml, options, Skeleton)
     expect(html).toMatchSnapshot()

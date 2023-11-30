@@ -90,11 +90,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
@@ -102,7 +102,7 @@ export default defineComponent({
     const { ui, attrs } = useUI('radio', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const radioGroup = inject('radio-group', null)
-    const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config) 
+    const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config)
     const inputId = ref(props.id)
 
     onMounted(() => {
@@ -130,8 +130,8 @@ export default defineComponent({
         ui.value.base,
         ui.value.background,
         ui.value.border,
-        ui.value.ring.replaceAll('{color}', color.value),
-        ui.value.color.replaceAll('{color}', color.value)
+        color.value && ui.value.ring.replaceAll('{color}', color.value),
+        color.value && ui.value.color.replaceAll('{color}', color.value)
       ), props.inputClass)
     })
 
