@@ -15,7 +15,7 @@
       v-if="required"
       :value="modelValue"
       :required="required"
-      class="absolute inset-0 w-px opacity-0 cursor-default"
+      :class="uiMenu.required"
       tabindex="-1"
       aria-hidden="true"
     >
@@ -25,7 +25,7 @@
       ref="trigger"
       as="div"
       role="button"
-      class="inline-flex w-full"
+      :class="uiMenu.trigger"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
         <button :id="inputId" :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
@@ -36,9 +36,9 @@
           </span>
 
           <slot name="label">
-            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" class="block truncate">{{ modelValue.length }} selected</span>
-            <span v-else-if="!multiple && modelValue" class="block truncate">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
-            <span v-else class="block truncate">{{ placeholder || '&nbsp;' }}</span>
+            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" :class="uiMenu.label">{{ modelValue.length }} selected</span>
+            <span v-else-if="!multiple && modelValue" :class="uiMenu.label">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
+            <span v-else :class="uiMenu.label">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
           <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
@@ -53,7 +53,8 @@
     <div v-if="open" ref="container" :class="[uiMenu.container, uiMenu.width]">
       <Transition appear v-bind="uiMenu.transition">
         <div>
-          <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(uiMenu.arrow)]" />
+          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(uiMenu.arrow)" />
+
           <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
             <HComboboxInput
               v-if="searchable"
@@ -101,7 +102,7 @@
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
                   <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
-                    <span class="block truncate">Create "{{ queryOption[optionAttribute] }}"</span>
+                    <span :class="uiMenu.option.create">Create "{{ queryOption[optionAttribute] }}"</span>
                   </slot>
                 </div>
               </li>
@@ -312,7 +313,7 @@ export default defineComponent({
       default: () => ({})
     },
     uiMenu: {
-      type: Object as PropType<Partial<typeof configMenu & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof configMenu> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
@@ -339,15 +340,14 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
+        uiMenu.value.select,
         rounded.value,
-        'text-left cursor-default',
         ui.value.size[size.value],
         ui.value.gap[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
         variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
-        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value],
-        'inline-flex items-center'
+        (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
       ), props.selectClass)
     })
 
@@ -388,7 +388,7 @@ export default defineComponent({
         ui.value.icon.base,
         color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && 'animate-spin'
+        props.loading && ui.value.icon.loading
       )
     })
 
@@ -405,7 +405,7 @@ export default defineComponent({
         ui.value.icon.base,
         color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && !isLeading.value && 'animate-spin'
+        props.loading && !isLeading.value && ui.value.icon.loading
       )
     })
 

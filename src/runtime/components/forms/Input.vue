@@ -9,7 +9,6 @@
       :required="required"
       :placeholder="placeholder"
       :disabled="disabled || loading"
-      class="form-input"
       :class="inputClass"
       v-bind="attrs"
       @input="onInput"
@@ -234,6 +233,7 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
+        ui.value.form,
         rounded.value,
         ui.value.placeholder,
         ui.value.size[size.value],
@@ -281,7 +281,7 @@ export default defineComponent({
         ui.value.icon.base,
         color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && 'animate-spin'
+        props.loading && ui.value.icon.loading
       )
     })
 
@@ -298,7 +298,7 @@ export default defineComponent({
         ui.value.icon.base,
         color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && !isLeading.value && 'animate-spin'
+        props.loading && !isLeading.value && ui.value.icon.loading
       )
     })
 

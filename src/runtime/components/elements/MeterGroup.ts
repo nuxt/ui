@@ -44,14 +44,14 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      default: 'i-heroicons-minus'
+      default: () => meterGroupConfig.default.icon
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof meterGroupConfig & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof meterGroupConfig> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
@@ -70,21 +70,7 @@ export default defineComponent({
 
     const children = computed(() => getSlotsChildren(slots))
 
-    const rounded = computed(() => {
-      const roundedMap = {
-        'rounded-none': { left: 'rounded-s-none', right: 'rounded-e-none' },
-        'rounded-sm': { left: 'rounded-s-sm', right: 'rounded-e-sm' },
-        rounded: { left: 'rounded-s', right: 'rounded-e' },
-        'rounded-md': { left: 'rounded-s-md', right: 'rounded-e-md' },
-        'rounded-lg': { left: 'rounded-s-lg', right: 'rounded-e-lg' },
-        'rounded-xl': { left: 'rounded-s-xl', right: 'rounded-e-xl' },
-        'rounded-2xl': { left: 'rounded-s-2xl', right: 'rounded-e-2xl' },
-        'rounded-3xl': { left: 'rounded-s-3xl', right: 'rounded-e-3xl' },
-        'rounded-full': { left: 'rounded-s-full', right: 'rounded-e-full' }
-      }
-
-      return roundedMap[ui.value.rounded]
-    })
+    const rounded = computed(() => ui.value.orientation[ui.value.rounded])
 
     function clampPercent (value: number, min: number, max: number): number {
       if (min == max) {
@@ -198,7 +184,7 @@ export default defineComponent({
         vNodeSlots[0] = slots.indicator({ percent: percent.value })
       }
 
-      vNodeSlots[2] = h('ol', { class: 'list-disc list-inside' }, labels.value.map((label, key) => {
+      vNodeSlots[2] = h('ol', { class: ui.value.list }, labels.value.map((label, key) => {
         const labelClass = computed(() => {
           return twJoin(
             uiMeter.value.label.base,

@@ -32,7 +32,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof avatarGroupConfig & { strategy?: Strategy }>>,
+      type: Object as PropType<Partial<typeof avatarGroupConfig> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },

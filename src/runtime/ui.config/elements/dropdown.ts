@@ -1,8 +1,9 @@
-import _popperArrow from '../_popperArrow'
+import { arrow } from '../popper'
 
 export default {
   wrapper: 'relative inline-flex text-left rtl:text-right',
   container: 'z-20 group',
+  trigger: 'inline-flex w-full',
   width: 'w-48',
   height: '',
   background: 'bg-white dark:bg-gray-800',
@@ -29,6 +30,7 @@ export default {
       base: 'flex-shrink-0',
       size: '3xs' as const
     },
+    label: 'truncate',
     shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ms-auto'
   },
   // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
@@ -45,7 +47,7 @@ export default {
     strategy: 'fixed'
   },
   arrow: {
-    ..._popperArrow,
+    ...arrow,
     ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
     background: 'before:bg-white dark:before:bg-gray-700'
   }

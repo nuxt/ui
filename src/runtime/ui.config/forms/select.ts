@@ -2,6 +2,7 @@ import input from './input'
 
 export default {
   ...input,
+  form: 'form-select',
   placeholder: 'text-gray-900 dark:text-white',
   default: {
     size: 'sm',

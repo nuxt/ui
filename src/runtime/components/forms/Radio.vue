@@ -1,6 +1,6 @@
 <template>
   <div :class="ui.wrapper">
-    <div class="flex items-center h-5">
+    <div :class="ui.container">
       <input
         :id="inputId"
         v-model="pick"
@@ -9,12 +9,11 @@
         :value="value"
         :disabled="disabled"
         type="radio"
-        class="form-radio"
         :class="inputClass"
         v-bind="attrs"
       >
     </div>
-    <div v-if="label || $slots.label" class="ms-3 flex flex-col">
+    <div v-if="label || $slots.label" :class="ui.inner">
       <label :for="inputId" :class="ui.label">
         <slot name="label">{{ label }}</slot>
         <span v-if="required" :class="ui.required">*</span>
@@ -128,6 +127,7 @@ export default defineComponent({
     const inputClass = computed(() => {
       return twMerge(twJoin(
         ui.value.base,
+        ui.value.form,
         ui.value.background,
         ui.value.border,
         color.value && ui.value.ring.replaceAll('{color}', color.value),

@@ -7,7 +7,7 @@
     <div v-if="open && !prevent" ref="container" :class="[ui.container, ui.width]">
       <Transition appear v-bind="ui.transition">
         <div>
-          <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(ui.arrow)]" />
+          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
 
           <div :class="[ui.base, ui.background, ui.color, ui.rounded, ui.shadow, ui.ring]">
             <slot name="text">
@@ -15,7 +15,8 @@
             </slot>
 
             <span v-if="shortcuts?.length" :class="ui.shortcuts">
-              <span class="mx-1 text-gray-700 dark:text-gray-200">&middot;</span>
+              <span :class="ui.middot">&middot;</span>
+
               <UKbd v-for="shortcut of shortcuts" :key="shortcut" size="xs">
                 {{ shortcut }}
               </Ukbd>

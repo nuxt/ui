@@ -311,7 +311,7 @@ export default defineComponent({
       return twJoin(
         ui.value.input.icon.base,
         ui.value.input.icon.size,
-        ((props.loading || isLoading.value) && props.loadingIcon) && 'animate-spin'
+        ((props.loading || isLoading.value) && props.loadingIcon) && ui.value.input.icon.loading
       )
     })
 

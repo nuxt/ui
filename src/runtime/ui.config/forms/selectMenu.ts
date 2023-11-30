@@ -1,7 +1,9 @@
-import _popperArrow from '../_popperArrow'
+import { arrow } from '../popper'
 
 export default {
   container: 'z-20 group',
+  trigger: 'inline-flex w-full',
+  select: 'inline-flex items-center text-left cursor-default',
   width: 'w-full',
   height: 'max-h-60',
   base: 'relative focus:outline-none overflow-y-auto scroll-py-1',
@@ -11,6 +13,8 @@ export default {
   padding: 'p-1',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-700',
   input: 'block w-[calc(100%+0.5rem)] focus:ring-transparent text-sm px-3 py-1.5 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border-0 border-b border-gray-200 dark:border-gray-700 focus:border-inherit sticky -top-1 -mt-1 mb-1 -mx-1 z-10 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none',
+  required: 'absolute inset-0 w-px opacity-0 cursor-default',
+  label: 'block truncate',
   option: {
     base: 'cursor-default select-none relative flex items-center justify-between gap-1',
     rounded: 'rounded-md',
@@ -23,6 +27,7 @@ export default {
     selected: 'pe-7',
     disabled: 'cursor-not-allowed opacity-50',
     empty: 'text-sm text-gray-400 dark:text-gray-500 px-2 py-1.5',
+    create: 'block truncate',
     icon: {
       base: 'flex-shrink-0 h-4 w-4',
       active: 'text-gray-900 dark:text-white',
@@ -55,7 +60,7 @@ export default {
     clearOnClose: false
   },
   arrow: {
-    ..._popperArrow,
+    ...arrow,
     ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
     background: 'before:bg-white dark:before:bg-gray-700'
   }

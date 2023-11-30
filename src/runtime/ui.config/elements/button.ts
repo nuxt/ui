@@ -2,6 +2,9 @@ export default {
   base: 'focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0',
   font: 'font-medium',
   rounded: 'rounded-md',
+  truncate: 'text-left break-all line-clamp-1',
+  block: 'w-full flex justify-center items-center',
+  inline: 'inline-flex items-center',
   size: {
     '2xs': 'text-xs',
     xs: 'text-xs',
@@ -58,6 +61,7 @@ export default {
   },
   icon: {
     base: 'flex-shrink-0',
+    loading: 'animate-spin',
     size: {
       '2xs': 'h-4 w-4',
       xs: 'h-4 w-4',
