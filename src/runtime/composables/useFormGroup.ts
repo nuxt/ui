@@ -4,7 +4,7 @@ import type { FormEvent, FormEventType, InjectedFormGroupValue } from '../types/
 import { uid } from '../utils/uid'
 
 type InputProps = {
-  id?: string | null
+  id?: string
   size?: string | number | symbol
   color?: string
   name?: string
@@ -20,7 +20,7 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     const inputId = ref(inputProps?.id)
 
     onMounted(() => {
-      inputId.value = inputProps?.isFieldset ? null : inputProps?.id ?? uid()
+      inputId.value = inputProps?.isFieldset ? undefined : inputProps?.id ?? uid()
 
       if (formGroup) {
         // Updates for="..." attribute on label if inputProps.id is provided
@@ -41,17 +41,17 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     }
 
     function emitFormBlur () {
-      emitFormEvent('blur', formGroup?.name.value)
+      emitFormEvent('blur', formGroup?.name.value as string)
       blurred.value = true
     }
 
     function emitFormChange () {
-      emitFormEvent('change', formGroup?.name.value)
+      emitFormEvent('change', formGroup?.name.value as string)
     }
 
     const emitFormInput = useDebounceFn(() => {
       if (blurred.value || formGroup?.eagerValidation.value) {
-        emitFormEvent('input', formGroup?.name.value)
+        emitFormEvent('input', formGroup?.name.value as string)
       }
     }, 300)
 
@@ -59,7 +59,7 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
       inputId,
       name: computed(() => inputProps?.name ?? formGroup?.name.value),
       size: computed(() => {
-        const formGroupSize = config.size[formGroup?.size.value] ? formGroup?.size.value : null
+        const formGroupSize = config.size[formGroup?.size.value as string] ? formGroup?.size.value : null
         return inputProps?.size ?? formGroupSize ?? config?.default?.size
       }),
       color: computed(() => formGroup?.error?.value ? 'red' : inputProps?.color),

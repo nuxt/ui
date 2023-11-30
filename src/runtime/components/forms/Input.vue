@@ -153,11 +153,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     },
     modelModifiers: {
       type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean }>,
@@ -199,13 +199,13 @@ export default defineComponent({
       emitFormInput()
     }
 
-    const onInput = (event: InputEvent) => {
+    const onInput = (event: Event) => {
       if (!modelModifiers.value.lazy) {
         updateInput((event.target as HTMLInputElement).value)
       }
     }
 
-    const onChange = (event: InputEvent) => {
+    const onChange = (event: Event) => {
       const value = (event.target as HTMLInputElement).value
 
       if (modelModifiers.value.lazy) {
@@ -279,7 +279,7 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
         props.loading && 'animate-spin'
       )
@@ -296,7 +296,7 @@ export default defineComponent({
     const trailingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
         props.loading && !isLeading.value && 'animate-spin'
       )

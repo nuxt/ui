@@ -83,15 +83,15 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     },
     uiRadio: {
       type: Object as PropType<Partial<typeof configRadio & { strategy?: Strategy }>>,
-      default: undefined
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],

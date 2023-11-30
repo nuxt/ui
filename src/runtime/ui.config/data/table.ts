@@ -43,8 +43,8 @@ export default {
       icon: 'i-heroicons-arrows-up-down-20-solid',
       trailing: true,
       square: true,
-      color: 'gray',
-      variant: 'ghost',
+      color: 'gray' as const,
+      variant: 'ghost' as const,
       class: '-m-1.5'
     },
     loadingState: {
