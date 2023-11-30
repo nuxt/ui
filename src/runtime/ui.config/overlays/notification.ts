@@ -1,5 +1,3 @@
-import type { AvatarSize, ButtonColor, ButtonSize, ButtonVariant } from '../../types'
-
 export default {
   wrapper: 'w-full pointer-events-auto',
   container: 'relative overflow-hidden',
@@ -18,7 +16,7 @@ export default {
   },
   avatar: {
     base: 'flex-shrink-0 self-center',
-    size: 'md' as AvatarSize
+    size: 'md' as const
   },
   progress: {
     base: 'absolute bottom-0 end-0 start-0 h-1',
@@ -39,13 +37,13 @@ export default {
     timeout: 5000,
     closeButton: {
       icon: 'i-heroicons-x-mark-20-solid',
-      color: 'gray' as ButtonColor,
-      variant: 'link' as ButtonVariant,
+      color: 'gray' as const,
+      variant: 'link' as const,
       padded: false
     },
     actionButton: {
-      size: 'xs' as ButtonSize,
-      color: 'white' as ButtonColor
+      size: 'xs' as const,
+      color: 'white' as const
     }
   }
 }

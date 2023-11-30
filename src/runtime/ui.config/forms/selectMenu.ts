@@ -1,4 +1,3 @@
-import type { AvatarSize } from '../../types'
 import _popperArrow from '../_popperArrow'
 
 export default {
@@ -36,7 +35,7 @@ export default {
     },
     avatar: {
       base: 'flex-shrink-0',
-      size: '3xs' as AvatarSize
+      size: '3xs' as const
     },
     chip: {
       base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'

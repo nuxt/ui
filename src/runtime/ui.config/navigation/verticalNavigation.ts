@@ -1,5 +1,3 @@
-import type { AvatarSize } from '../../types'
-
 export default {
   wrapper: 'relative',
   base: 'group relative flex items-center gap-2 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
@@ -19,7 +17,7 @@ export default {
   },
   avatar: {
     base: 'flex-shrink-0',
-    size: '3xs' as AvatarSize
+    size: '3xs' as const
   },
   badge: {
     base: 'relative ms-auto inline-block py-0.5 px-2 text-xs rounded-md -me-1 -my-0.5',

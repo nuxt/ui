@@ -1,5 +1,3 @@
-import type { ButtonVariant } from '../../types'
-
 export default {
   wrapper: 'w-full flex flex-col',
   item: {
@@ -17,6 +15,6 @@ export default {
     openIcon: 'i-heroicons-chevron-down-20-solid',
     closeIcon: '',
     class: 'mb-1.5 w-full',
-    variant: 'soft' as ButtonVariant
+    variant: 'soft' as const
   }
 }

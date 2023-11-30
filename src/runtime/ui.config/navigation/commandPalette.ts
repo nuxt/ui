@@ -1,5 +1,3 @@
-import type { AvatarSize } from '../../types'
-
 export default {
   wrapper: 'flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800',
   container: 'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
@@ -44,7 +42,7 @@ export default {
       },
       avatar: {
         base: 'flex-shrink-0',
-        size: '3xs' as AvatarSize
+        size: '3xs' as const
       },
       chip: {
         base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
