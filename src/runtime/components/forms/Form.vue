@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { provide, ref, type PropType, defineComponent } from 'vue'
+import { provide, ref, type PropType, defineComponent, toRef } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
@@ -45,7 +45,11 @@ export default defineComponent({
     validateOn: {
       type: Array as PropType<FormEventType[]>,
       default: () => ['blur', 'input', 'change', 'submit']
-    }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
   },
   emits: ['submit', 'error'],
   setup (props, { expose, emit }) {
@@ -62,6 +66,9 @@ export default defineComponent({
     provide('form-events', bus)
     const inputs = ref({})
     provide('form-inputs', inputs)
+    const disabled = toRef(props.disabled);
+    console.log(disabled);
+    provide('form-disabled', disabled);
 
     async function getErrors (): Promise<FormError[]> {
       let errs = await props.validate(props.state)

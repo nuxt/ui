@@ -8,7 +8,7 @@
       :type="type"
       :required="required"
       :placeholder="placeholder"
-      :disabled="disabled || loading"
+      :disabled="disabled || loading || formDisabled"
       :class="inputClass"
       v-bind="attrs"
       @input="onInput"
@@ -32,8 +32,8 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, onMounted, defineComponent } from 'vue'
-import type { PropType } from 'vue'
+import { ref, computed, toRef, onMounted, defineComponent, inject } from 'vue'
+import type { PropType, Ref } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { defu } from 'defu'
@@ -302,6 +302,9 @@ export default defineComponent({
       )
     })
 
+    const formDisabled = inject<Ref<boolean>>('form-disabled', ref(false))
+    const isFormDisabled = computed(() => formDisabled.value);
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -320,6 +323,7 @@ export default defineComponent({
       trailingIconName,
       trailingIconClass,
       trailingWrapperIconClass,
+      formDisabled: isFormDisabled,
       onInput,
       onChange,
       onBlur

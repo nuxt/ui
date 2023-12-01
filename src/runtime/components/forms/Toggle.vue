@@ -3,7 +3,7 @@
     :id="inputId"
     v-model="active"
     :name="name"
-    :disabled="disabled"
+    :disabled="disabled || formDisabled"
     :class="switchClass"
     v-bind="attrs"
   >
@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import { computed, toRef, defineComponent } from 'vue'
-import type { PropType } from 'vue'
+import {computed, toRef, defineComponent, inject, ref} from 'vue'
+import type { PropType, Ref } from 'vue'
 import { Switch as HSwitch } from '@headlessui/vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -137,6 +137,9 @@ export default defineComponent({
       )
     })
 
+    const formDisabled = inject<Ref<boolean>>('form-disabled', ref(false))
+    const isFormDisabled = computed(() => formDisabled.value);
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -148,7 +151,8 @@ export default defineComponent({
       switchClass,
       containerClass,
       onIconClass,
-      offIconClass
+      offIconClass,
+      formDisabled: isFormDisabled,
     }
   }
 })

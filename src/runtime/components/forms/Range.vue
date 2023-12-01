@@ -7,7 +7,7 @@
       :name="name"
       :min="min"
       :max="max"
-      :disabled="disabled"
+      :disabled="disabled || formDisabled"
       :step="step"
       type="range"
       :class="[inputClass, thumbClass, trackClass]"
@@ -20,8 +20,8 @@
 </template>
 
 <script lang="ts">
-import { computed, toRef, defineComponent } from 'vue'
-import type { PropType } from 'vue'
+import {computed, toRef, defineComponent, inject, ref} from 'vue'
+import type { PropType, Ref } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
@@ -167,6 +167,9 @@ export default defineComponent({
       }
     })
 
+    const formDisabled = inject<Ref<boolean>>('form-disabled', ref(false))
+    const isFormDisabled = computed(() => formDisabled.value);
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -182,6 +185,7 @@ export default defineComponent({
       trackClass,
       progressClass,
       progressStyle,
+      formDisabled: isFormDisabled,
       onChange
     }
   }

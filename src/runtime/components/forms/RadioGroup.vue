@@ -12,7 +12,7 @@
         :label="option.label"
         :model-value="modelValue"
         :value="option.value"
-        :disabled="disabled"
+        :disabled="disabled || formDisabled"
         :ui="uiRadio"
         @change="onUpdate(option.value)"
       >
@@ -26,8 +26,8 @@
 
 <script lang="ts">
 import URadio from './Radio.vue'
-import { computed, defineComponent, provide, toRef } from 'vue'
-import type { PropType } from 'vue'
+import {computed, defineComponent, provide, toRef, inject, ref} from 'vue'
+import type { PropType, Ref } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, get } from '../../utils'
@@ -135,6 +135,9 @@ export default defineComponent({
       return props.options.map(option => normalizeOption(option))
     })
 
+    const formDisabled = inject<Ref<boolean>>('form-disabled', ref(false))
+    const isFormDisabled = computed(() => formDisabled.value);
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -142,6 +145,7 @@ export default defineComponent({
       uiRadio,
       attrs,
       normalizedOptions,
+      formDisabled: isFormDisabled,
       // eslint-disable-next-line vue/no-dupe-keys
       onUpdate
     }

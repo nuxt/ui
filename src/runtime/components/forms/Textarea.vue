@@ -7,7 +7,7 @@
       :name="name"
       :rows="rows"
       :required="required"
-      :disabled="disabled"
+      :disabled="disabled || formDisabled"
       :placeholder="placeholder"
       :class="textareaClass"
       v-bind="attrs"
@@ -21,8 +21,8 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, watch, onMounted, nextTick, defineComponent } from 'vue'
-import type { PropType } from 'vue'
+import { ref, computed, toRef, watch, onMounted, nextTick, defineComponent, inject } from 'vue'
+import type { PropType, Ref } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
@@ -236,6 +236,9 @@ export default defineComponent({
       ), props.textareaClass)
     })
 
+    const formDisabled = inject<Ref<boolean>>('form-disabled', ref(false))
+    const isFormDisabled = computed(() => formDisabled.value);
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -246,6 +249,7 @@ export default defineComponent({
       textarea,
       // eslint-disable-next-line vue/no-dupe-keys
       textareaClass,
+      formDisabled: isFormDisabled,
       onInput,
       onChange,
       onBlur

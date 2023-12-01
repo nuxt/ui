@@ -7,7 +7,7 @@
         :name="name"
         :required="required"
         :value="value"
-        :disabled="disabled"
+        :disabled="disabled || formDisabled"
         type="radio"
         :class="inputClass"
         v-bind="attrs"
@@ -26,8 +26,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, toRef, onMounted, ref } from 'vue'
-import type { PropType } from 'vue'
+import {computed, defineComponent, inject, toRef, onMounted, ref} from 'vue'
+import type { PropType, Ref } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
@@ -135,6 +135,9 @@ export default defineComponent({
       ), props.inputClass)
     })
 
+    const formDisabled = inject<Ref<boolean>>('form-disabled', ref(false))
+    const isFormDisabled = computed(() => formDisabled.value);
+
     return {
       inputId,
       // eslint-disable-next-line vue/no-dupe-keys
@@ -144,7 +147,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       name,
       // eslint-disable-next-line vue/no-dupe-keys
-      inputClass
+      inputClass,
+      formDisabled: isFormDisabled,
     }
   }
 })

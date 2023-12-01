@@ -6,7 +6,7 @@
     :name="name"
     :model-value="modelValue"
     :multiple="multiple"
-    :disabled="disabled || loading"
+    :disabled="disabled || loading || formDisabled"
     as="div"
     :class="ui.wrapper"
     @update:model-value="onUpdate"
@@ -120,8 +120,8 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, watch, defineComponent } from 'vue'
-import type { PropType, ComponentPublicInstance } from 'vue'
+import { ref, computed, toRef, watch, defineComponent, inject } from 'vue'
+import type { PropType, ComponentPublicInstance, Ref } from 'vue'
 import {
   Combobox as HCombobox,
   ComboboxButton as HComboboxButton,
@@ -465,6 +465,9 @@ export default defineComponent({
       emitFormChange()
     }
 
+    const formDisabled = inject<Ref<boolean>>('form-disabled', ref(false))
+    const isFormDisabled = computed(() => formDisabled.value);
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -491,6 +494,7 @@ export default defineComponent({
       filteredOptions,
       queryOption,
       query,
+      formDisabled: isFormDisabled,
       onUpdate
     }
   }

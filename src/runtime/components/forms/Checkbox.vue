@@ -7,7 +7,7 @@
         :name="name"
         :required="required"
         :value="value"
-        :disabled="disabled"
+        :disabled="disabled || formDisabled"
         :checked="checked"
         :indeterminate="indeterminate"
         type="checkbox"
@@ -29,8 +29,8 @@
 </template>
 
 <script lang="ts">
-import { computed, toRef, defineComponent } from 'vue'
-import type { PropType } from 'vue'
+import {computed, toRef, defineComponent, inject, ref} from 'vue'
+import type { PropType, Ref } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
@@ -40,6 +40,7 @@ import type { Strategy } from '../../types'
 import appConfig from '#build/app.config'
 import { checkbox } from '#ui/ui.config'
 import colors from '#ui-colors'
+import {FormError} from "../../types";
 
 const config = mergeConfig<typeof checkbox>(appConfig.ui.strategy, appConfig.ui.checkbox, checkbox)
 
@@ -138,6 +139,9 @@ export default defineComponent({
       ), props.inputClass)
     })
 
+    const formDisabled = inject<Ref<boolean>>('form-disabled', ref(false))
+    const isFormDisabled = computed(() => formDisabled.value);
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -148,7 +152,8 @@ export default defineComponent({
       name,
       // eslint-disable-next-line vue/no-dupe-keys
       inputClass,
-      onChange
+      onChange,
+      formDisabled: isFormDisabled
     }
   }
 })

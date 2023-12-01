@@ -5,7 +5,7 @@
       :name="name"
       :value="modelValue"
       :required="required"
-      :disabled="disabled || loading"
+      :disabled="disabled || loading || formDisabled"
       :class="selectClass"
       v-bind="attrs"
       @input="onInput"
@@ -53,8 +53,8 @@
 </template>
 
 <script lang="ts">
-import { computed, toRef, defineComponent } from 'vue'
-import type { PropType, ComputedRef } from 'vue'
+import { computed, toRef, defineComponent, inject, ref} from 'vue'
+import type { PropType, ComputedRef, Ref } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
@@ -323,6 +323,9 @@ export default defineComponent({
       )
     })
 
+    const formDisabled = inject<Ref<boolean>>('form-disabled', ref(false))
+    const isFormDisabled = computed(() => formDisabled.value);
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -342,6 +345,7 @@ export default defineComponent({
       trailingIconName,
       trailingIconClass,
       trailingWrapperIconClass,
+      formDisabled: isFormDisabled,
       onInput,
       onChange
     }
