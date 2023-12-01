@@ -1,6 +1,7 @@
 export default {
   wrapper: 'w-full pointer-events-auto',
   container: 'relative overflow-hidden',
+  inner: 'w-0 flex-1',
   title: 'text-sm font-medium text-gray-900 dark:text-white',
   description: 'mt-1 text-sm leading-4 text-gray-500 dark:text-gray-400',
   actions: 'flex items-center gap-2 mt-3 flex-shrink-0',
@@ -37,13 +38,13 @@ export default {
     timeout: 5000,
     closeButton: {
       icon: 'i-heroicons-x-mark-20-solid',
-      color: 'gray',
-      variant: 'link',
+      color: 'gray' as const,
+      variant: 'link' as const,
       padded: false
     },
     actionButton: {
-      size: 'xs',
-      color: 'white'
+      size: 'xs' as const,
+      color: 'white' as const
     }
   }
 }

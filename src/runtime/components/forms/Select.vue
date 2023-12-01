@@ -6,7 +6,6 @@
       :value="modelValue"
       :required="required"
       :disabled="disabled || loading"
-      class="form-select"
       :class="selectClass"
       v-bind="attrs"
       @input="onInput"
@@ -173,11 +172,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
@@ -190,7 +189,7 @@ export default defineComponent({
 
     const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
-    const onInput = (event: InputEvent) => {
+    const onInput = (event: Event) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
@@ -256,6 +255,7 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
+        ui.value.form,
         rounded.value,
         ui.value.size[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
@@ -300,9 +300,9 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && 'animate-spin'
+        props.loading && ui.value.icon.loading
       )
     })
 
@@ -317,9 +317,9 @@ export default defineComponent({
     const trailingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && !isLeading.value && 'animate-spin'
+        props.loading && !isLeading.value && ui.value.icon.loading
       )
     })
 

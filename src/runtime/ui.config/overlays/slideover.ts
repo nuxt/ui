@@ -20,6 +20,11 @@ export default {
   padding: '',
   shadow: 'shadow-xl',
   width: 'w-screen max-w-md',
+  translate: {
+    base: 'translate-x-0',
+    left: '-translate-x-full',
+    right: 'translate-x-full'
+  },
   // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
   transition: {
     enter: 'transform transition ease-in-out duration-300',

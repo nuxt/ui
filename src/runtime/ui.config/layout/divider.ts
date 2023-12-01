@@ -16,6 +16,11 @@ export default {
     size: {
       horizontal: 'border-t',
       vertical: 'border-s'
+    },
+    type: {
+      solid: 'border-solid',
+      dotted: 'border-dotted',
+      dashed: 'border-dashed'
     }
   },
   icon: {
@@ -23,7 +28,7 @@ export default {
   },
   avatar: {
     base: 'flex-shrink-0',
-    size: '2xs'
+    size: '2xs' as const
   },
   label: 'text-sm'
 }

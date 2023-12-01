@@ -13,6 +13,7 @@ describe('Button', () => {
     [ 'black solid', { props: { color: 'black', variant: 'solid' } } ],
     [ 'rounded full', { props: { ui: { rounded: 'rounded-full' } } } ],
     [ '<UButton icon="i-heroicons-pencil-square" size="sm" color="primary" square variant="solid" />' ]
+    // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: ButtonOptions) => {
     if (options !== undefined) {
       options.slots = options.slots || { default: () => 'label' }

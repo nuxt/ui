@@ -1,6 +1,7 @@
 export default {
   wrapper: 'relative',
   base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0',
+  form: 'form-input',
   rounded: 'rounded-md',
   placeholder: 'placeholder-gray-400 dark:placeholder-gray-500',
   size: {
@@ -62,6 +63,7 @@ export default {
   icon: {
     base: 'flex-shrink-0 text-gray-400 dark:text-gray-500',
     color: 'text-{color}-500 dark:text-{color}-400',
+    loading: 'animate-spin',
     size: {
       '2xs': 'h-4 w-4',
       xs: 'h-4 w-4',

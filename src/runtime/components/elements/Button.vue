@@ -5,7 +5,7 @@
     </slot>
 
     <slot>
-      <span v-if="label" :class="[truncate ? 'text-left break-all line-clamp-1' : '']">
+      <span v-if="label" :class="[truncate ? ui.truncate : '']">
         {{ label }}
       </span>
     </slot>
@@ -121,11 +121,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   setup (props, { slots }) {
@@ -154,7 +154,7 @@ export default defineComponent({
         ui.value.gap[size.value],
         props.padded && ui.value[isSquare.value ? 'square' : 'padding'][size.value],
         variant?.replaceAll('{color}', props.color),
-        props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center'
+        props.block ? ui.value.block : ui.value.inline
       ), props.class)
     })
 
@@ -178,7 +178,7 @@ export default defineComponent({
       return twJoin(
         ui.value.icon.base,
         ui.value.icon.size[size.value],
-        props.loading && 'animate-spin'
+        props.loading && ui.value.icon.loading
       )
     })
 
@@ -186,11 +186,13 @@ export default defineComponent({
       return twJoin(
         ui.value.icon.base,
         ui.value.icon.size[size.value],
-        props.loading && !isLeading.value && 'animate-spin'
+        props.loading && !isLeading.value && ui.value.icon.loading
       )
     })
 
     return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       isLeading,
       isTrailing,
