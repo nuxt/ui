@@ -1,7 +1,7 @@
 <script setup>
-const value = ref([0, 100])
+const value = ref([30, 100])
 </script>
 
 <template>
-  <URange v-model="value" name="range" />
+  <URange v-model="value" multiple name="range" />
 </template>
