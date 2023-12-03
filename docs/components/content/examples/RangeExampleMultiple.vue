@@ -1,5 +1,5 @@
 <script setup>
-const value = ref([30, 100])
+const value = ref([30, 70])
 </script>
 
 <template>
