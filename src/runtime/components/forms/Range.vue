@@ -28,8 +28,7 @@
 </template>
 
 <script lang="ts">
-import { computed, onMounted, onUnmounted, toRef, defineComponent, type StyleValue } from 'vue'
-import { type PropType, ref } from 'vue'
+import { ref, computed, onMounted, onUnmounted, toRef, defineComponent, type StyleValue, type PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
@@ -52,21 +51,7 @@ export default defineComponent({
       type: String,
       default: null
     },
-    color: {
-      type: String as PropType<typeof colors[number]>,
-      default: () => config.default.color,
-      validator (value: string) {
-        return appConfig.ui.colors.includes(value)
-      }
-    },
-    size: {
-      type: String as PropType<RangeSize>,
-      default: null,
-      validator (value: string) {
-        return Object.keys(config.size).includes(value)
-      }
-    },
-    multiple: {
+    disabled: {
       type: Boolean,
       default: false
     },
@@ -78,13 +63,27 @@ export default defineComponent({
       type: Number,
       default: 100
     },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
     step: {
       type: Number,
       default: 1
+    },
+    size: {
+      type: String as PropType<RangeSize>,
+      default: null,
+      validator (value: string) {
+        return Object.keys(config.size).includes(value)
+      }
+    },
+    color: {
+      type: String as PropType<typeof colors[number]>,
+      default: () => config.default.color,
+      validator (value: string) {
+        return appConfig.ui.colors.includes(value)
+      }
+    },
+    multiple: {
+      type: Boolean,
+      default: false
     },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
