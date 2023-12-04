@@ -6,6 +6,7 @@
       v-if="multiple"
       :class="[thumbClassLeft]"
       :style="leftThumbStyle"
+      v-bind="$attrs"
       role="slider"
       tabindex="0"
       @mousedown="onDragStart"
@@ -17,6 +18,7 @@
     <span
       :class="[thumbClassRight]"
       :style="rightThumbStyle"
+      v-bind="$attrs"
       role="slider"
       tabindex="0"
       @mousedown="onDragStart"
@@ -42,6 +44,7 @@ import colors from '#ui-colors'
 const config = mergeConfig<typeof range>(appConfig.ui.strategy, appConfig.ui.range, range)
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: [Number, Array] as PropType<number | [number, number]>,
