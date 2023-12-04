@@ -93,10 +93,10 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
     const { ui } = useUI('range', toRef(props, 'ui'), config)
-    const { color, size } = useFormGroup(props, config)
+    const { emitFormChange, color, size } = useFormGroup(props, config)
 
     const track = ref<HTMLElement | null>(null)
     const dragging = ref(false)
@@ -192,10 +192,10 @@ export default defineComponent({
     const onDrag = (event: MouseEvent | TouchEvent) => {
       if (!dragging.value || props.disabled) return
 
-      updateValue(getOffset(event))
+      updateValue(getOffset(event), event)
     }
 
-    const updateValue = (offset: number) => {
+    const updateValue = (offset: number, event: Event) => {
       const rounded = Math.round(offset / props.step) * props.step
 
       if (
@@ -215,6 +215,9 @@ export default defineComponent({
       } else {
         emit('update:modelValue', rounded)
       }
+
+      emit('change', event)
+      emitFormChange()
     }
 
     const onDragStart = () => {
@@ -232,7 +235,7 @@ export default defineComponent({
     const onBarClick = (event: MouseEvent | TouchEvent) => {
       if (props.disabled) return
 
-      updateValue(getOffset(event))
+      updateValue(getOffset(event), event)
     }
 
     const onKeyDown = (event: KeyboardEvent, index: number) => {
@@ -241,11 +244,11 @@ export default defineComponent({
       switch (event.code) {
       case 'ArrowDown':
       case 'ArrowLeft':
-        updateValue(currentValue - props.step)
+        updateValue(currentValue - props.step, event)
         break
       case 'ArrowUp':
       case 'ArrowRight':
-        updateValue(currentValue + props.step)
+        updateValue(currentValue + props.step, event)
       }
     }
 
