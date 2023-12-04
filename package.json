@@ -60,8 +60,6 @@
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/module-builder": "^0.5.4",
     "@release-it/conventional-changelog": "^8.0.1",
-    "@testing-library/vue": "^8.0.1",
-    "@vitejs/plugin-vue": "^4.5.0",
     "eslint": "^8.54.0",
     "happy-dom": "^12.10.3",
     "joi": "^17.11.0",
