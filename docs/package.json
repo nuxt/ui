@@ -10,7 +10,7 @@
     "@nuxt/content": "^2.9.0",
     "@nuxt/devtools": "^1.0.4",
     "@nuxt/eslint-config": "^0.2.0",
-    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@0.5.0-28361768.07f8ae4",
+    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@0.5.0-28363178.1124b1b",
     "@nuxthq/studio": "^1.0.5",
     "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/google-fonts": "^3.1.0",
