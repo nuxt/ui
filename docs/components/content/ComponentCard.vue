@@ -36,8 +36,8 @@
       </div>
     </div>
 
-    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass, overflowClass]">
-      <component :is="name" v-model="vModel" v-bind="fullProps">
+    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass, extraClass]">
+      <component :is="name" v-model="vModel" v-bind="fullProps" :class="componentClass">
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
 
         <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
@@ -99,13 +99,17 @@ const props = defineProps({
     type: String,
     default: 'bg-white dark:bg-gray-900'
   },
-  overflowClass: {
+  extraClass: {
     type: String,
     default: ''
   },
   previewOnly: {
     type: Boolean,
     default: false
+  },
+  componentClass: {
+    type: String,
+    default: ''
   }
 })
 
@@ -116,10 +120,16 @@ const componentProps = reactive({ ...props.props })
 const { $prettier } = useNuxtApp()
 const appConfig = useAppConfig()
 const route = useRoute()
-// eslint-disable-next-line vue/no-dupe-keys
-const slug = props.slug || route.params.slug[route.params.slug.length - 1]
-const camelName = camelCase(slug)
-const name = `U${upperFirst(camelName)}`
+
+let name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
+
+// TODO: Remove once merged on `main` branch
+if (['AvatarGroup', 'ButtonGroup', 'MeterGroup'].includes(name)) {
+  name = `U${name}`
+}
+if (['avatar-group', 'button-group', 'radio'].includes(name)) {
+  name = `U${upperFirst(camelCase(name))}`
+}
 
 const meta = await fetchComponentMeta(name)
 
@@ -141,6 +151,23 @@ const generateOptions = (key: string, schema: { kind: string, schema: [], type: 
 
   if (key.toLowerCase().endsWith('color')) {
     options = [...appConfig.ui.colors]
+  }
+
+  if (key.toLowerCase() === 'size' && schema?.schema?.length > 0) {
+    const baseSizeOrder = { 'xs': 1, 'sm': 2, 'md': 3, 'lg': 4, 'xl': 5 }
+    schema.schema.sort((a: string, b: string) => {
+      const aBase = a.match(/[a-zA-Z]+/)[0].toLowerCase()
+      const bBase = b.match(/[a-zA-Z]+/)[0].toLowerCase()
+
+      const aNum = parseInt(a.match(/\d+/)?.[0]) || 1
+      const bNum = parseInt(b.match(/\d+/)?.[0]) || 1
+
+      if (aBase === bBase) {
+        return aBase === 'xs' ? bNum - aNum : aNum - bNum
+      }
+
+      return baseSizeOrder[aBase] - baseSizeOrder[bBase]
+    })
   }
 
   if (schema?.schema?.length > 0 && schema?.kind === 'enum' && !hasIgnoredTypes && optionItem?.restriction !== 'only') {
@@ -192,7 +219,7 @@ const code = computed(() => {
       continue
     }
 
-    code += ` ${(typeof value === 'boolean' && value !== true) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'value' : kebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
+    code += ` ${(typeof value === 'boolean' && (value !== true || key === 'modelValue')) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'model-value' : kebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
   }
 
   if (props.slots) {
@@ -237,7 +264,7 @@ function renderObject (obj: any) {
 const shikiHighlighter = useShikiHighlighter({})
 const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
 const { data: ast } = await useAsyncData(
-  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`,
+  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`,
   async () => {
     let formatted = ''
     try {

@@ -84,11 +84,11 @@ const pageFrom = computed(() => (page.value - 1) * pageCount.value + 1)
 const pageTo = computed(() => Math.min(page.value * pageCount.value, pageTotal.value))
 
 // Data
-const { data: todos, pending } = await useLazyAsyncData('todos', () => $fetch<{
+const { data: todos, pending } = await useLazyAsyncData<{
   id: number
   title: string
   completed: string
-}[]>(`https://jsonplaceholder.typicode.com/todos${searchStatus.value}`, {
+}[]>('todos', () => ($fetch as any)(`https://jsonplaceholder.typicode.com/todos${searchStatus.value}`, {
   query: {
     q: search.value,
     '_page': page.value,

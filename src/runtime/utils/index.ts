@@ -39,7 +39,7 @@ export function hexToRgb (hex: string) {
 
 export function getSlotsChildren (slots: any) {
   let children = slots.default?.()
-  if (children.length) {
+  if (children?.length) {
     children = children.flatMap(c => {
       if (typeof c.type === 'symbol') {
         if (typeof c.children === 'string') {
@@ -53,7 +53,16 @@ export function getSlotsChildren (slots: any) {
       return c
     }).filter(Boolean)
   }
-  return children
+  return children || []
+}
+
+/**
+ * "123-foo" will be parsed to 123
+ * This is used for the .number modifier in v-model
+ */
+export function looseToNumber (val: any): any {
+  const n = parseFloat(val)
+  return isNaN(n) ? val : n
 }
 
 export * from './lodash'

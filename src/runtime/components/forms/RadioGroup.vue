@@ -83,15 +83,15 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     },
     uiRadio: {
-      type: Object as PropType<Partial<typeof configRadio & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof configRadio> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
@@ -99,7 +99,7 @@ export default defineComponent({
     const { ui, attrs } = useUI('radioGroup', toRef(props, 'ui'), config, toRef(props, 'class'))
     const { ui: uiRadio } = useUI('radio', toRef(props, 'uiRadio'), configRadio)
 
-    const { emitFormChange, color, name } = useFormGroup(props, config)
+    const { emitFormChange, color, name } = useFormGroup({ ...props, isFieldset: true }, config)
     provide('radio-group', { color, name })
 
     const onUpdate = (value: any) => {

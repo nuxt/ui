@@ -56,7 +56,7 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UForm ref="form" :schema="schema" :state="state" @submit="onSubmit">
+  <UForm ref="form" :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
     <UFormGroup name="input" label="Input">
       <UInput v-model="state.input" />
     </UFormGroup>

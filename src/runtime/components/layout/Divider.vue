@@ -64,11 +64,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   setup (props) {
@@ -91,17 +91,11 @@ export default defineComponent({
     })
 
     const borderClass = computed(() => {
-      const typeClass = ({
-        solid: 'border-solid',
-        dotted: 'border-dotted',
-        dashed: 'border-dashed'
-      })[props.type]
-
       return twJoin(
         ui.value.border.base,
         isHorizontal.value ? ui.value.border.horizontal : ui.value.border.vertical,
         isHorizontal.value ? ui.value.border.size.horizontal : ui.value.border.size.vertical,
-        typeClass
+        ui.value.border.type[props.type]
       )
     })
 
