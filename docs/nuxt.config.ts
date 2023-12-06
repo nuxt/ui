@@ -102,6 +102,7 @@ export default defineNuxtConfig({
       process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, '.docs', 'components') : '.c12'
     ],
     metaFields: {
+      type: false,
       props: true,
       slots: true,
       events: false,
