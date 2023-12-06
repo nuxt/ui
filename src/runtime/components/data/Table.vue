@@ -108,7 +108,7 @@ export default defineComponent({
       default: () => []
     },
     columns: {
-      type: Array as PropType<{ key: string, sortable?: boolean, sortFn?: (a: any, b: any) => number, direction?: 'asc' | 'desc', class?: string, [key: string]: any }[]>,
+      type: Array as PropType<{ key: string, sortable?: boolean, sortFn?: (a: any, b: any, direction: 'asc' | 'desc') => number, direction?: 'asc' | 'desc', class?: string, [key: string]: any }[]>,
       default: null
     },
     columnAttribute: {
