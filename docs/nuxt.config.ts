@@ -127,5 +127,10 @@ export default defineNuxtConfig({
   },
   typescript: {
     strict: false
+  },
+  vite: {
+    optimizeDeps: {
+      include: ['date-fns']
+    }
   }
 })
