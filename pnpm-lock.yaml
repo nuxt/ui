@@ -154,8 +154,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(eslint@8.55.0)
       '@nuxt/ui-pro':
-        specifier: npm:@nuxt/ui-pro-edge@0.5.0-28363178.1124b1b
-        version: /@nuxt/ui-pro-edge@0.5.0-28363178.1124b1b(nuxt@3.8.2)(rollup@3.29.4)(vite@5.0.5)(vue@3.3.8)
+        specifier: npm:@nuxt/ui-pro-edge@0.5.0-28364581.a71e7bf
+        version: /@nuxt/ui-pro-edge@0.5.0-28364581.a71e7bf(nuxt@3.8.2)(rollup@3.29.4)(vite@5.0.5)(vue@3.3.8)
       '@nuxthq/studio':
         specifier: ^1.0.5
         version: 1.0.5(rollup@3.29.4)
@@ -1694,8 +1694,8 @@ packages:
       - vue
     dev: true
 
-  /@nuxt/ui-pro-edge@0.5.0-28363178.1124b1b(nuxt@3.8.2)(rollup@3.29.4)(vite@5.0.5)(vue@3.3.8):
-    resolution: {integrity: sha512-zXyGinoXa8BmsfkohnVV27xac1gLuvzJ0bnVQtctwLaxVmF1fjKyaC3+7mYSor4RfBWk/HdLUP87wRipGNnXkQ==}
+  /@nuxt/ui-pro-edge@0.5.0-28364581.a71e7bf(nuxt@3.8.2)(rollup@3.29.4)(vite@5.0.5)(vue@3.3.8):
+    resolution: {integrity: sha512-5BZjTK7pEDkMhz5ZlqIbgsjWuIj5tsVYQ97th7W+i14EvDik4HCMjlpWDu2BoAXO0mwclxAtvjUeo7CK8AHKlg==}
     dependencies:
       '@nuxt/ui': /@nuxt/ui-edge@2.11.0-28361677.76e1cc8(nuxt@3.8.2)(rollup@3.29.4)(vite@5.0.5)(vue@3.3.8)
       '@vueuse/core': 10.6.1(vue@3.3.8)
