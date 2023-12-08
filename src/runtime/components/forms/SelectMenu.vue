@@ -98,7 +98,7 @@
               </li>
             </component>
 
-            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
+            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="showCreateOption" v-slot="{ active, selected }" :value="queryOption" as="template">
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
                   <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
@@ -249,7 +249,7 @@ export default defineComponent({
       default: 200
     },
     creatable: {
-      type: Boolean,
+      type: [Boolean, String] as PropType<boolean | 'always'>,
       default: false
     },
     placeholder: {
@@ -437,6 +437,31 @@ export default defineComponent({
       return query.value === '' ? null : { [props.optionAttribute]: query.value }
     })
 
+    const showCreateOption = computed(() =>
+      props.creatable
+      && queryOption.value
+      && (
+        props.creatable !== 'always'
+          ? !filteredOptions.value.length
+          : (
+            filteredOptions.value.length === 1
+              ? query.value !== (['string', 'number'].includes(typeof filteredOptions.value[0])
+                ? String(filteredOptions.value[0])
+                : (
+                  props.searchAttributes?.length
+                    ? props.searchAttributes
+                    : [props.optionAttribute]
+                ).some((searchAttribute: any) => {
+                  const child = get(filteredOptions.value[0], searchAttribute)
+
+                  return child !== null && child !== undefined && String(child) !== query.value
+                })
+              )
+              : true
+          )
+      )
+    )
+
     function clearOnClose () {
       if (props.clearSearchOnClose) {
         query.value = ''
@@ -490,6 +515,7 @@ export default defineComponent({
       trailingWrapperIconClass,
       filteredOptions,
       queryOption,
+      showCreateOption,
       query,
       onUpdate
     }
