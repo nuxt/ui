@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, toRef, onMounted, defineComponent, toRaw } from 'vue'
+import { ref, computed, watch, toRef, onMounted, defineComponent } from 'vue'
 import { Combobox as HCombobox, ComboboxInput as HComboboxInput, ComboboxOptions as HComboboxOptions } from '@headlessui/vue'
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
@@ -232,16 +232,13 @@ export default defineComponent({
         return
       }
 
-      const q = toRaw(query)
-      let newCommands = [...commands]
-
       if (group.filter && typeof group.filter === 'function') {
-        newCommands = group.filter(q, newCommands)
+        commands = group.filter(query.value, commands)
       }
 
       return {
         ...group,
-        commands: newCommands.slice(0, options.value.resultLimit)
+        commands: commands.slice(0, options.value.resultLimit)
       }
     }
 
@@ -256,8 +253,8 @@ export default defineComponent({
           return acc
         }
 
-        acc[command.item.group] ||= []
-        acc[command.item.group].push({ ...item, ...data })
+        acc[item.group] ||= []
+        acc[item.group].push({ ...item, ...data })
 
         return acc
       }, {})
@@ -274,7 +271,7 @@ export default defineComponent({
       const searchGroups = props.groups.filter(group => !!group.search && searchResults.value[group.key]?.length).map(group => {
         const commands = (searchResults.value[group.key] || [])
 
-        return getGroupWithCommands(group, commands)
+        return getGroupWithCommands(group, [...commands])
       })
 
       return [
