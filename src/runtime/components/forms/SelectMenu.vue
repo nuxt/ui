@@ -97,17 +97,8 @@
                 </span>
               </li>
             </component>
-
-            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="showCreateOption" v-slot="{ active, selected }" :value="queryOption" as="template">
-              <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
-                <div :class="uiMenu.option.container">
-                  <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
-                    <span :class="uiMenu.option.create">Create "{{ queryOption[optionAttribute] }}"</span>
-                  </slot>
-                </div>
-              </li>
-            </component>
-            <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
+            {{showCreateOption && createOptionVNode}}
+            <p v-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
                 No results for "{{ query }}".
               </slot>
@@ -120,7 +111,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, watch, defineComponent } from 'vue'
+import { ref, computed, toRef, watch, defineComponent, h } from 'vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import {
   Combobox as HCombobox,
@@ -462,6 +453,33 @@ export default defineComponent({
       )
     )
 
+    const createOptionVNode = h(
+      props.searchable ? 'HComboboxOption' : 'HListboxOption',
+      { value: queryOption },
+      {
+        default: ({ active, selected }) => h(
+          'li',
+          {
+            class: [
+              uiMenu.value.option.base,
+              uiMenu.value.option.rounded,
+              uiMenu.value.option.padding,
+              uiMenu.value.option.size,
+              uiMenu.value.option.color,
+              active ? uiMenu.value.option.active : uiMenu.value.option.inactive
+            ]
+          },
+          h(
+            'div',
+            { class: uiMenu.value.option.container },
+            slots['option-create']
+              ? slots['option-create']({ option: queryOption.value, active, selected })
+              : h('span', { class: uiMenu.value.option.create }, [`Create ${queryOption.value[props.optionAttribute]}`])
+          )
+        )
+      }
+    )
+
     function clearOnClose () {
       if (props.clearSearchOnClose) {
         query.value = ''
@@ -516,6 +534,7 @@ export default defineComponent({
       filteredOptions,
       queryOption,
       showCreateOption,
+      createOptionVNode,
       query,
       onUpdate
     }
