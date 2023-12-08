@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch, toRef, onMounted, defineComponent } from 'vue'
+import { ref, computed, watch, toRef, onMounted, defineComponent, toRaw } from 'vue'
 import { Combobox as HCombobox, ComboboxInput as HComboboxInput, ComboboxOptions as HComboboxOptions } from '@headlessui/vue'
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
@@ -227,52 +227,60 @@ export default defineComponent({
 
     const { results } = useFuse(query, commands, options)
 
-    const groups = computed(() => {
-      const groups: Group[] = []
-
-      const groupedCommands: Record<string, typeof results['value']> = {}
-      for (const command of results.value) {
-        if (!command.item.group) {
-          continue
-        }
-        groupedCommands[command.item.group] ||= []
-        groupedCommands[command.item.group].push(command)
+    function getGroupWithCommands (group: Group, commands: Command[]) {
+      if (!group) {
+        return
       }
-      for (const key in groupedCommands) {
+
+      const q = toRaw(query)
+      let newCommands = [...commands]
+
+      if (group.filter && typeof group.filter === 'function') {
+        newCommands = group.filter(q, newCommands)
+      }
+
+      return {
+        ...group,
+        commands: newCommands.slice(0, options.value.resultLimit)
+      }
+    }
+
+    const groups = computed(() => {
+      if (!results.value) {
+        return []
+      }
+
+      const groupedCommands: Record<string, Command[]> = results.value.reduce((acc, command) => {
+        const { item, ...data } = command
+        if (!item.group) {
+          return acc
+        }
+
+        acc[command.item.group] ||= []
+        acc[command.item.group].push({ ...item, ...data })
+
+        return acc
+      }, {})
+
+      const groups: Group[] = Object.entries(groupedCommands).map(([key, commands]) => {
         const group = props.groups.find(group => group.key === key)
         if (!group) {
-          continue
+          return null
         }
 
-        let commands = groupedCommands[key].map((result) => {
-          const { item, ...data } = result
+        return getGroupWithCommands(group, commands)
+      }).filter(Boolean)
 
-          return {
-            ...item,
-            ...data
-          } as Command
-        })
+      const searchGroups = props.groups.filter(group => !!group.search && searchResults.value[group.key]?.length).map(group => {
+        const commands = (searchResults.value[group.key] || [])
 
-        if (group.filter && typeof group.filter === 'function') {
-          commands = group.filter(query.value, commands)
-        }
+        return getGroupWithCommands(group, commands)
+      })
 
-        groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
-      }
-
-      for (const group of props.groups) {
-        if (group.search && searchResults.value[group.key]?.length) {
-          let commands = (searchResults.value[group.key] || [])
-
-          if (group.filter && typeof group.filter === 'function') {
-            commands = group.filter(query.value, commands)
-          }
-
-          groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
-        }
-      }
-
-      return groups
+      return [
+        ...groups,
+        ...searchGroups
+      ]
     })
 
     const debouncedSearch = useDebounceFn(async () => {
