@@ -67,6 +67,9 @@
               :class="uiMenu.input"
               @change="query = $event.target.value"
             />
+
+            <component :is="createOptionVNode" v-if="creatable === 'always' && showCreateOption" as="template" />
+
             <component
               :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
               v-for="(option, index) in filteredOptions"
@@ -98,7 +101,7 @@
               </li>
             </component>
 
-            <component :is="createOptionVNode" v-if="showCreateOption" as="template" />
+            <component :is="createOptionVNode" v-if="creatable === true && showCreateOption" as="template" />
             <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
                 No results for "{{ query }}".
