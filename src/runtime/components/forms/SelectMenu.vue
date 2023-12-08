@@ -97,8 +97,9 @@
                 </span>
               </li>
             </component>
-            {{showCreateOption && createOptionVNode}}
-            <p v-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
+
+            <component :is="createOptionVNode" v-if="showCreateOption" as="template" />
+            <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
                 No results for "{{ query }}".
               </slot>
