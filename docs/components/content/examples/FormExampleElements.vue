@@ -19,7 +19,7 @@ const state = reactive({
   radioGroup: undefined,
   switch: undefined,
   range: undefined,
-  multirange: [10, 40]
+  multirange: [10, 40] as [number, number]
 })
 
 const schema = z.object({
@@ -97,11 +97,11 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
       </URadio>
     </UFormGroup>
 
-    <UFormGroup name="range" label="Range">
+    <UFormGroup name="range" label="Range" max="20" min="10">
       <URange v-model="state.range" />
     </UFormGroup>
 
-    <UFormGroup name="multirange" label="Multi Range">
+    <UFormGroup name="multirange" label="Multi Range" max="20" min="10">
       <URange v-model="state.multirange" multiple />
     </UFormGroup>
 
