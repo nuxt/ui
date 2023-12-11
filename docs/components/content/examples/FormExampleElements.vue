@@ -18,7 +18,8 @@ const state = reactive({
   radio: undefined,
   radioGroup: undefined,
   switch: undefined,
-  range: undefined
+  range: undefined,
+  multirange: [10, 40]
 })
 
 const schema = z.object({
@@ -42,7 +43,12 @@ const schema = z.object({
   radioGroup: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
   }),
-  range: z.number().max(20, { message: 'Must be less than 20' })
+  range: z.number().max(20, { message: 'Must be less than 20' }),
+  multirange: z.array(z.number()).length(2, { message: 'Must be 2 numbers' }).refine(([min, max]) => min < max, {
+    message: 'Min must be less than max'
+  }).refine(([min, max]) => max - min < 20, {
+    message: 'Difference must be less than 20'
+  })
 })
 
 type Schema = z.infer<typeof schema>
@@ -93,6 +99,10 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
 
     <UFormGroup name="range" label="Range">
       <URange v-model="state.range" />
+    </UFormGroup>
+
+    <UFormGroup name="multirange" label="Multi Range">
+      <URange v-model="state.multirange" multiple />
     </UFormGroup>
 
     <UButton type="submit">
