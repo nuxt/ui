@@ -5,5 +5,5 @@ const selected = ref(people[0])
 </script>
 
 <template>
-  <UInputMenu v-model="selected" :options="people" :popper="{ placement: 'left-end' }" />
+  <UInputMenu v-model="selected" :options="people" :popper="{ placement: 'right-start' }" />
 </template>

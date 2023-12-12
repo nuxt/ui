@@ -88,12 +88,12 @@ export default {
       wrapper: 'absolute inset-y-0 end-0 flex items-center',
       pointer: 'pointer-events-none',
       padding: {
-        '2xs': 'pe-2',
-        xs: 'pe-2.5',
-        sm: 'pe-2.5',
-        md: 'pe-3',
-        lg: 'pe-3.5',
-        xl: 'pe-3.5'
+        '2xs': 'px-2',
+        xs: 'px-2.5',
+        sm: 'px-2.5',
+        md: 'px-3',
+        lg: 'px-3.5',
+        xl: 'px-3.5'
       }
     }
   },

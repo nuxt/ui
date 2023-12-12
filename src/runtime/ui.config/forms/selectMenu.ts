@@ -1,3 +1,4 @@
+import { arrow } from '../popper'
 import inputMenu from './inputMenu'
 
 export default {
@@ -10,8 +11,22 @@ export default {
     ...inputMenu.option,
     create: 'block truncate'
   },
+  // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
+  transition: {
+    leaveActiveClass: 'transition ease-in duration-100',
+    leaveFromClass: 'opacity-100',
+    leaveToClass: 'opacity-0'
+  },
+  popper: {
+    placement: 'bottom-end'
+  },
   default: {
     selectedIcon: 'i-heroicons-check-20-solid',
     clearOnClose: false
+  },
+  arrow: {
+    ...arrow,
+    ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',
+    background: 'before:bg-white dark:before:bg-gray-700'
   }
 }
