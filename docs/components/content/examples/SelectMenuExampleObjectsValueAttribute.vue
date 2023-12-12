@@ -13,9 +13,7 @@ const people = [{
   name: 'Tom Cook'
 }]
 
-const selected = ref(people[0].id)
-
-const current = computed(() => people.find(person => person.id === selected.value))
+const selected = ref(people[0].name)
 </script>
 
 <template>
@@ -23,11 +21,7 @@ const current = computed(() => people.find(person => person.id === selected.valu
     v-model="selected"
     :options="people"
     placeholder="Select people"
-    value-attribute="id"
+    value-attribute="name"
     option-attribute="name"
-  >
-    <template #label>
-      {{ current.name }}
-    </template>
-  </USelectMenu>
+  />
 </template>
