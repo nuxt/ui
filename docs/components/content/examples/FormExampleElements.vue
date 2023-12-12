@@ -10,6 +10,7 @@ const options = [
 
 const state = reactive({
   input: undefined,
+  inputMenu: undefined,
   textarea: undefined,
   select: undefined,
   selectMenu: undefined,
@@ -23,6 +24,9 @@ const state = reactive({
 
 const schema = z.object({
   input: z.string().min(10),
+  inputMenu: z.any().refine(option => option?.value === 'option-2', {
+    message: 'Select Option 2'
+  }),
   textarea: z.string().min(10),
   select: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
@@ -59,6 +63,10 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
   <UForm ref="form" :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
     <UFormGroup name="input" label="Input">
       <UInput v-model="state.input" />
+    </UFormGroup>
+
+    <UFormGroup name="inputMenu" label="Input Menu">
+      <UInputMenu v-model="state.inputMenu" :options="options" />
     </UFormGroup>
 
     <UFormGroup name="textarea" label="Textarea">
