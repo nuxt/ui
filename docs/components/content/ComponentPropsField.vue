@@ -22,8 +22,8 @@
         <ComponentPropsField v-for="subProp in Object.values(prop.schema.schema)" :key="(subProp as any).name" :prop="subProp" />
       </FieldGroup>
     </Collapsible>
-    <div v-else-if="prop.schema?.kind === 'enum' && prop.schema.type !== 'boolean' && startsWithCapital(prop.schema.type) && !prop.schema.type.startsWith(prop.schema.schema[0])" class="space-x-1 leading-6 -my-1">
-      <code v-for="value in prop.schema.schema.filter(value => typeof value === 'string')" :key="value" class="whitespace-pre-wrap break-words">{{ value }}</code>
+    <div v-else-if="prop.schema?.kind === 'enum' && prop.schema.type !== 'boolean' && startsWithCapital(prop.schema.type) && !prop.schema.type.startsWith(prop.schema.schema[0])" class="flex items-center flex-wrap gap-1 -my-1">
+      <code v-for="value in prop.schema.schema.filter(value => typeof value === 'string')" :key="value" class="whitespace-pre-wrap break-words leading-6">{{ value }}</code>
     </div>
   </Field>
 </template>
