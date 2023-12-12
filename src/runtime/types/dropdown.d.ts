@@ -3,6 +3,7 @@ import type { Avatar } from './avatar'
 
 export interface DropdownItem extends NuxtLinkProps {
   label: string
+  labelClass?: string
   slot?: string
   icon?: string
   iconClass?: string
