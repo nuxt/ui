@@ -112,6 +112,11 @@
                 No results for "{{ query }}".
               </slot>
             </p>
+            <p v-else-if="!filteredOptions.length" :class="uiMenu.empty">
+              <slot name="empty" :query="query">
+                No options.
+              </slot>
+            </p>
           </component>
         </div>
       </Transition>
