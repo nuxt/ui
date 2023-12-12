@@ -4,7 +4,7 @@
       v-for="(link, index) of links"
       v-slot="{ isActive }"
       :key="index"
-      v-bind="omit(link, ['label', 'icon', 'iconClass', 'avatar', 'badge', 'click'])"
+      v-bind="omit(link, ['label', 'labelClass', 'icon', 'iconClass', 'avatar', 'badge', 'click'])"
       :class="[ui.base, ui.padding, ui.width, ui.ring, ui.rounded, ui.font, ui.size]"
       :active-class="ui.active"
       :inactive-class="ui.inactive"
@@ -22,11 +22,11 @@
         <UIcon
           v-if="link.icon"
           :name="link.icon"
-          :class="[ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive, link.iconClass]"
+          :class="twMerge(twJoin(ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive), link.iconClass)"
         />
       </slot>
       <slot :link="link" :is-active="isActive">
-        <span v-if="link.label" :class="ui.label">{{ link.label }}</span>
+        <span v-if="link.label" :class="twMerge(ui.label, link.labelClass)">{{ link.label }}</span>
       </slot>
       <slot name="badge" :link="link" :is-active="isActive">
         <span v-if="link.badge" :class="[ui.badge.base, isActive ? ui.badge.active : ui.badge.inactive]">
@@ -40,6 +40,7 @@
 <script lang="ts">
 import { toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULink from '../elements/Link.vue'
@@ -80,7 +81,9 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
-      omit
+      omit,
+      twMerge,
+      twJoin
     }
   }
 })
