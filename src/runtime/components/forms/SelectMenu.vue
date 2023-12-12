@@ -36,7 +36,21 @@
           </span>
 
           <slot name="label">
-            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" class="block truncate">{{ modelValue.length }} selected</span>
+            <span v-if="multiple && badge && Array.isArray(modelValue) && modelValue.length" class="flex flex-wrap gap-2 w-full h-full">
+              <UBadge
+                v-for="(item, index) in selectedOptionsValues"
+                :key="index"
+                :disabled="disabled"
+                :color="badgeColor"
+                :variant="badgeVariant"
+                :trailing-icon="badgeDeleteIcon"
+                :size="badgeSize"
+                @on-trailing-icon-click="handleDeSelectBadgeOption(valueAttribute ? item[valueAttribute] : item)"
+              >
+                {{ optionAttribute ? item[optionAttribute] : item }}
+              </UBadge>
+            </span>
+            <span v-else-if="multiple && !badge && Array.isArray(modelValue) && modelValue.length" class="block truncate">{{ modelValue.length }} selected</span>
             <span v-else-if="!multiple && modelValue" class="block truncate">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
             <span v-else class="block truncate" :class="uiMenu.placeholder">{{ placeholder || '&nbsp;' }}</span>
           </slot>
@@ -137,6 +151,7 @@ import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
+import UBadge from '../elements/Badge.vue'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
@@ -144,12 +159,14 @@ import { mergeConfig } from '../../utils'
 import type { PopperOptions, NestedKeyOf, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
-import { select, selectMenu } from '#ui/ui.config'
+import { select, selectMenu, badge } from '#ui/ui.config'
 import colors from '#ui-colors'
 
 const config = mergeConfig<typeof select>(appConfig.ui.strategy, appConfig.ui.select, select)
 
 const configMenu = mergeConfig<typeof selectMenu>(appConfig.ui.strategy, appConfig.ui.selectMenu, selectMenu)
+
+const configBadge = mergeConfig<typeof badge>(appConfig.ui.strategy, appConfig.ui.badge, badge)
 
 export default defineComponent({
   components: {
@@ -163,7 +180,8 @@ export default defineComponent({
     HListboxOptions,
     HListboxOption,
     UIcon,
-    UAvatar
+    UAvatar,
+    UBadge
   },
   inheritAttrs: false,
   props: {
@@ -310,6 +328,35 @@ export default defineComponent({
     uiMenu: {
       type: Object as PropType<Partial<typeof configMenu & { strategy?: Strategy }>>,
       default: undefined
+    },
+    badge: {
+      type: Boolean,
+      default: false
+    },
+    badgeVariant: {
+      type: String as PropType<keyof typeof configBadge.variant>,
+      default: 'solid',
+      validator (value: string) {
+        return Object.keys(configBadge.variant).includes(value)
+      }
+    },
+    badgeColor: {
+      type: String as PropType<keyof typeof configBadge.color>,
+      default: 'primary',
+      validator (value: string) {
+        return Object.keys(configBadge.color).includes(value)
+      }
+    },
+    badgeSize: {
+      type: String as PropType<keyof typeof configBadge.size>,
+      default: 'sm',
+      validator (value: string) {
+        return Object.keys(configBadge.size).includes(value)
+      }
+    },
+    badgeDeleteIcon: {
+      type: String,
+      default: 'i-heroicons-x-mark-20-solid'
     }
   },
   emits: ['update:modelValue', 'open', 'close', 'change'],
@@ -423,6 +470,13 @@ export default defineComponent({
       return query.value === '' ? null : { [props.optionAttribute]: query.value }
     })
 
+    const selectedOptionsValues = computed(() => {
+      console.log('before Condition')
+      if (!props.options?.length && !props.modelValue) return []
+      console.log('After Condition', props.modelValue)
+      return props.options.filter(opt => Object.values(props.modelValue).includes(props.valueAttribute ? opt[props.valueAttribute] : opt))
+    })
+
     watch(container, (value) => {
       if (value) {
         emit('open')
@@ -441,6 +495,13 @@ export default defineComponent({
       emit('update:modelValue', event)
       emit('change', event)
       emitFormChange()
+    }
+
+    function handleDeSelectBadgeOption (opt: any) {
+      if (props.modelValue) {
+        const excludedOptions = Object.values(props.modelValue).filter(i => i !== opt)
+        onUpdate(excludedOptions)
+      }
     }
 
     return {
@@ -469,6 +530,8 @@ export default defineComponent({
       filteredOptions,
       queryOption,
       query,
+      selectedOptionsValues,
+      handleDeSelectBadgeOption,
       onUpdate
     }
   }

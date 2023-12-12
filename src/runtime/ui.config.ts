@@ -138,7 +138,7 @@ export const avatarGroup = {
 }
 
 export const badge = {
-  base: 'inline-flex items-center',
+  base: 'inline-flex items-center gap-x-2',
   rounded: 'rounded-md',
   font: 'font-medium',
   size: {
@@ -158,6 +158,7 @@ export const badge = {
       solid: 'text-white dark:text-gray-900 bg-gray-900 dark:bg-white'
     }
   },
+  disabled: 'cursor-not-allowed opacity-50',
   variant: {
     solid: 'bg-{color}-500 dark:bg-{color}-400 text-white dark:text-gray-900',
     outline: 'text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400',

@@ -1,6 +1,12 @@
 <template>
   <span :class="badgeClass" v-bind="attrs">
+    <slot name="leading">
+      <UIcon v-if="isLeading && leadingIcon" :name="leadingIcon" aria-hidden="true" @click.stop="handleLeadingIconClick" />
+    </slot>
     <slot>{{ label }}</slot>
+    <slot name="trailing">
+      <UIcon v-if="isTrailing && trailingIcon" :name="trailingIcon" aria-hidden="true" @click.stop="handleTrailingIconClick" />
+    </slot>
   </span>
 </template>
 
@@ -48,6 +54,30 @@ export default defineComponent({
       type: [String, Number],
       default: null
     },
+    icon: {
+      type: String,
+      default: null
+    },
+    leadingIcon: {
+      type: String,
+      default: null
+    },
+    trailingIcon: {
+      type: String,
+      default: null
+    },
+    leading: {
+      type: Boolean,
+      default: false
+    },
+    trailing: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     class: {
       type: [String, Object, Array] as PropType<any>,
       default: undefined
@@ -57,24 +87,43 @@ export default defineComponent({
       default: undefined
     }
   },
-  setup (props) {
+  emits: ['onLeadingIconClick', 'onTrailingIconClick'],
+  setup (props, { emit }) {
     const { ui, attrs } = useUI('badge', toRef(props, 'ui'), config)
+
+    const isLeading = computed(() => {
+      return (props.icon && props.leading) || (props.icon && !props.trailing) || props.leadingIcon
+    })
+
+    const isTrailing = computed(() => {
+      return (props.icon && props.trailing) || props.trailingIcon
+    })
 
     const badgeClass = computed(() => {
       const variant = ui.value.color?.[props.color as string]?.[props.variant as string] || ui.value.variant[props.variant]
-
+      const disabled = props.disabled ? config.disabled : ''
       return twMerge(twJoin(
         ui.value.base,
         ui.value.font,
         ui.value.rounded,
         ui.value.size[props.size],
-        variant?.replaceAll('{color}', props.color)
+        variant?.replaceAll('{color}', props.color),
+        disabled
       ), props.class)
     })
 
+    const handleLeadingIconClick = e => emit('onLeadingIconClick', e)
+    const handleTrailingIconClick = e => emit('onTrailingIconClick', e)
+   
+
     return {
       attrs,
-      badgeClass
+      badgeClass,
+      isLeading,
+      isTrailing,
+      handleLeadingIconClick,
+      handleTrailingIconClick
+
     }
   }
 })
