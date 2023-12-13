@@ -17,10 +17,9 @@ const selected = ref(people[0].name)
 </script>
 
 <template>
-  <USelectMenu
+  <UInputMenu
     v-model="selected"
     :options="people"
-    placeholder="Select people"
     value-attribute="name"
     option-attribute="name"
   />
