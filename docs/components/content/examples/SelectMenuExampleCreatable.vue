@@ -79,6 +79,7 @@ function generateColorFromString (str) {
         <span class="text-gray-500 dark:text-gray-400 truncate">Select labels</span>
       </template>
     </template>
+
     <template #option="{ option }">
       <span
         class="flex-shrink-0 w-2 h-2 mt-px rounded-full"
@@ -86,6 +87,7 @@ function generateColorFromString (str) {
       />
       <span class="truncate">{{ option.name }}</span>
     </template>
+
     <template #option-create="{ option }">
       <span class="flex-shrink-0">New label:</span>
       <span
