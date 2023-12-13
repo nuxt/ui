@@ -406,6 +406,8 @@ export default defineComponent({
       )
     })
 
+    const objectOptions = computed(() => props.options.length > 0 && !!props.options.find((option) => typeof option === 'object'))
+
     const debouncedSearch = typeof props.searchable === 'function' ? useDebounceFn(props.searchable, props.debounce) : undefined
 
     const matchOption = (searchFrom: any, searchFor: string, method: 'search' | 'exact') =>
@@ -414,7 +416,7 @@ export default defineComponent({
     const _search = (searchFrom: any[], searchFor: string, method: 'search' | 'exact' = 'search') =>
       (searchFrom).filter((option: any) => {
         return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
-          if (['string', 'number'].includes(typeof option)) {
+          if (!objectOptions.value) {
             return matchOption(option, searchFor, method)
           }
 
@@ -437,7 +439,7 @@ export default defineComponent({
     })
 
     const queryOption = computed(() => {
-      return query.value === '' ? null : { [props.optionAttribute]: query.value }
+      return query.value === '' ? null : objectOptions.value ? { [props.optionAttribute]: query.value } : query.value
     })
 
     const showCreateOption = computed(() =>
@@ -471,7 +473,7 @@ export default defineComponent({
             { class: uiMenu.value.option.container },
             slots['option-create']
               ? slots['option-create']({ option: queryOption.value, active, selected })
-              : h('span', { class: uiMenu.value.option.create }, [`Create "${queryOption.value[props.optionAttribute]}"`])
+              : h('span', { class: uiMenu.value.option.create }, [`Create "${objectOptions.value ? queryOption.value[props.optionAttribute] : queryOption.value}"`])
           )
         )
       }
