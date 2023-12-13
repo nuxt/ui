@@ -58,62 +58,41 @@ function generateColorFromString (str) {
 </script>
 
 <template>
-  <div>
-    <USelectMenu
-      v-model="labels"
-      by="id"
-      name="labels"
-      :options="options"
-      option-attribute="name"
-      multiple
-      searchable
-      creatable
-    >
-      <template #label>
-        <template v-if="labels.length">
-          <span class="flex items-center -space-x-1">
-            <span v-for="label of labels" :key="label.id" class="flex-shrink-0 w-2 h-2 mt-px rounded-full" :style="{ background: `#${label.color}` }" />
-          </span>
-          <span>{{ labels.length }} label{{ labels.length > 1 ? 's' : '' }}</span>
-        </template>
-        <template v-else>
-          <span class="text-gray-500 dark:text-gray-400 truncate">Select labels</span>
-        </template>
+  <USelectMenu
+    v-model="labels"
+    by="id"
+    name="labels"
+    :options="options"
+    option-attribute="name"
+    multiple
+    searchable
+    creatable
+  >
+    <template #label>
+      <template v-if="labels.length">
+        <span class="flex items-center -space-x-1">
+          <span v-for="label of labels" :key="label.id" class="flex-shrink-0 w-2 h-2 mt-px rounded-full" :style="{ background: `#${label.color}` }" />
+        </span>
+        <span>{{ labels.length }} label{{ labels.length > 1 ? 's' : '' }}</span>
       </template>
-      <template #option="{ option }">
-        <span
-          class="flex-shrink-0 w-2 h-2 mt-px rounded-full"
-          :style="{ background: `#${option.color}` }"
-        />
-        <span class="truncate">{{ option.name }}</span>
+      <template v-else>
+        <span class="text-gray-500 dark:text-gray-400 truncate">Select labels</span>
       </template>
-      <template #option-create="{ option }">
-        <span class="flex-shrink-0">New label:</span>
-        <span
-          class="flex-shrink-0 w-2 h-2 mt-px rounded-full -mx-1"
-          :style="{ background: `#${generateColorFromString(option.name)}` }"
-        />
-        <span class="block truncate">{{ option.name }}</span>
-      </template>
-    </USelectMenu>
-
-
-    <USelectMenu
-      v-model="labels"
-      by="id"
-      name="labels"
-      :options="options"
-      option-attribute="name"
-      multiple
-      searchable
-      creatable="always"
-      class="mt-2"
-    >
-      <template #label>
-        <template v-if="!labels.length">
-          <span class="text-gray-500 dark:text-gray-400 truncate">Select labels</span>
-        </template>
-      </template>
-    </USelectMenu>
-  </div>
+    </template>
+    <template #option="{ option }">
+      <span
+        class="flex-shrink-0 w-2 h-2 mt-px rounded-full"
+        :style="{ background: `#${option.color}` }"
+      />
+      <span class="truncate">{{ option.name }}</span>
+    </template>
+    <template #option-create="{ option }">
+      <span class="flex-shrink-0">New label:</span>
+      <span
+        class="flex-shrink-0 w-2 h-2 mt-px rounded-full -mx-1"
+        :style="{ background: `#${generateColorFromString(option.name)}` }"
+      />
+      <span class="block truncate">{{ option.name }}</span>
+    </template>
+  </USelectMenu>
 </template>
