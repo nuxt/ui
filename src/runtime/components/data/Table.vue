@@ -104,7 +104,7 @@ export default defineComponent({
       default: () => defaultComparator
     },
     rows: {
-      type: Array as PropType<{ [key: string]: any, click?: Function }[]>,
+      type: Array as PropType<{ [key: string]: any }[]>,
       default: () => []
     },
     columns: {
@@ -156,7 +156,7 @@ export default defineComponent({
   setup (props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: upperFirst(key), sortable: false })))
+    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false })))
 
     const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
 
