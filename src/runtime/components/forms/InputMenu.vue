@@ -1,74 +1,49 @@
 <template>
-  <component
-    :is="searchable ? 'HCombobox' : 'HListbox'"
+  <HCombobox
     v-slot="{ open }"
     :by="by"
     :name="name"
     :model-value="modelValue"
-    :multiple="multiple"
     :disabled="disabled || loading"
     as="div"
     :class="ui.wrapper"
     @update:model-value="onUpdate"
   >
-    <input
-      v-if="required"
-      :value="modelValue"
-      :required="required"
-      :class="uiMenu.required"
-      tabindex="-1"
-      aria-hidden="true"
-    >
+    <div :class="uiMenu.trigger">
+      <HComboboxInput
+        :id="inputId"
+        ref="input"
+        :name="name"
+        :required="required"
+        :placeholder="placeholder"
+        :disabled="disabled || loading"
+        :class="inputClass"
+        autocomplete="off"
+        v-bind="attrs"
+        :display-value="() => ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute]"
+        @change="query = $event.target.value"
+      />
 
-    <component
-      :is="searchable ? 'HComboboxButton' : 'HListboxButton'"
-      ref="trigger"
-      as="div"
-      role="button"
-      :class="uiMenu.trigger"
-    >
-      <slot :open="open" :disabled="disabled" :loading="loading">
-        <button :id="inputId" :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
-          <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
-            <slot name="leading" :disabled="disabled" :loading="loading">
-              <UIcon :name="leadingIconName" :class="leadingIconClass" />
-            </slot>
-          </span>
+      <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
+        <slot name="leading" :disabled="disabled" :loading="loading">
+          <UIcon :name="leadingIconName" :class="leadingIconClass" />
+        </slot>
+      </span>
 
-          <slot name="label">
-            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" :class="uiMenu.label">{{ modelValue.length }} selected</span>
-            <span v-else-if="!multiple && modelValue" :class="uiMenu.label">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
-            <span v-else :class="uiMenu.label">{{ placeholder || '&nbsp;' }}</span>
-          </slot>
-
-          <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
-            <slot name="trailing" :disabled="disabled" :loading="loading">
-              <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
-            </slot>
-          </span>
-        </button>
-      </slot>
-    </component>
+      <HComboboxButton v-if="(isTrailing && trailingIconName) || $slots.trailing" ref="trigger" :class="trailingWrapperIconClass">
+        <slot name="trailing" :disabled="disabled" :loading="loading">
+          <UIcon :name="trailingIconName" :class="trailingIconClass" />
+        </slot>
+      </HComboboxButton>
+    </div>
 
     <div v-if="open" ref="container" :class="[uiMenu.container, uiMenu.width]">
       <Transition appear v-bind="uiMenu.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(uiMenu.arrow)" />
 
-          <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
-            <HComboboxInput
-              v-if="searchable"
-              ref="searchInput"
-              :display-value="() => query"
-              name="q"
-              :placeholder="searchablePlaceholder"
-              autofocus
-              autocomplete="off"
-              :class="uiMenu.input"
-              @change="query = $event.target.value"
-            />
-            <component
-              :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
+          <HComboboxOptions static :class="[uiMenu.base, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
+            <HComboboxOption
               v-for="(option, index) in filteredOptions"
               v-slot="{ active, selected, disabled: optionDisabled }"
               :key="index"
@@ -96,18 +71,9 @@
                   <UIcon :name="selectedIcon" :class="uiMenu.option.selectedIcon.base" aria-hidden="true" />
                 </span>
               </li>
-            </component>
+            </HComboboxOption>
 
-            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
-              <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
-                <div :class="uiMenu.option.container">
-                  <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
-                    <span :class="uiMenu.option.create">Create "{{ queryOption[optionAttribute] }}"</span>
-                  </slot>
-                </div>
-              </li>
-            </component>
-            <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
+            <p v-if="query && !filteredOptions.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
                 No results for "{{ query }}".
               </slot>
@@ -117,28 +83,24 @@
                 No options.
               </slot>
             </p>
-          </component>
+          </HComboboxOptions>
         </div>
       </Transition>
     </div>
-  </component>
+  </HCombobox>
 </template>
 
 <script lang="ts">
 import { ref, computed, toRef, watch, defineComponent } from 'vue'
-import type { PropType, ComponentPublicInstance } from 'vue'
+import type { PropType } from 'vue'
 import {
   Combobox as HCombobox,
   ComboboxButton as HComboboxButton,
   ComboboxOptions as HComboboxOptions,
   ComboboxOption as HComboboxOption,
-  ComboboxInput as HComboboxInput,
-  Listbox as HListbox,
-  ListboxButton as HListboxButton,
-  ListboxOptions as HListboxOptions,
-  ListboxOption as HListboxOption
+  ComboboxInput as HComboboxInput
 } from '@headlessui/vue'
-import { computedAsync, useDebounceFn } from '@vueuse/core'
+import { computedAsync } from '@vueuse/core'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -148,14 +110,14 @@ import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { get, mergeConfig } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy } from '../../types'
+import type { InputSize, InputColor, InputVariant, PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
-import { select, selectMenu } from '#ui/ui.config'
+import { input, inputMenu } from '#ui/ui.config'
 
-const config = mergeConfig<typeof select>(appConfig.ui.strategy, appConfig.ui.select, select)
+const config = mergeConfig<typeof input>(appConfig.ui.strategy, appConfig.ui.input, input)
 
-const configMenu = mergeConfig<typeof selectMenu>(appConfig.ui.strategy, appConfig.ui.selectMenu, selectMenu)
+const configMenu = mergeConfig<typeof inputMenu>(appConfig.ui.strategy, appConfig.ui.inputMenu, inputMenu)
 
 export default defineComponent({
   components: {
@@ -164,10 +126,6 @@ export default defineComponent({
     HComboboxOptions,
     HComboboxOption,
     HComboboxInput,
-    HListbox,
-    HListboxButton,
-    HListboxOptions,
-    HListboxOption,
     UIcon,
     UAvatar
   },
@@ -211,7 +169,7 @@ export default defineComponent({
     },
     trailingIcon: {
       type: String,
-      default: () => config.default.trailingIcon
+      default: () => configMenu.default.trailingIcon
     },
     trailing: {
       type: Boolean,
@@ -233,30 +191,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
-    searchable: {
-      type: [Boolean, Function] as PropType<boolean | ((query: string) => Promise<any[]> | any[])>,
-      default: false
-    },
-    searchablePlaceholder: {
-      type: String,
-      default: 'Search...'
-    },
-    clearSearchOnClose: {
-      type: Boolean,
-      default: () => configMenu.default.clearOnClose
-    },
-    debounce: {
-      type: Number,
-      default: 200
-    },
-    creatable: {
-      type: Boolean,
-      default: false
-    },
     placeholder: {
       type: String,
       default: null
@@ -266,21 +200,21 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String as PropType<SelectSize>,
+      type: String as PropType<InputSize>,
       default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String as PropType<SelectColor>,
+      type: String as PropType<InputColor>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String as PropType<SelectVariant>,
+      type: String as PropType<InputVariant>,
       default: () => config.default.variant,
       validator (value: string) {
         return [
@@ -305,7 +239,7 @@ export default defineComponent({
       type: Object as PropType<PopperOptions>,
       default: () => ({})
     },
-    selectClass: {
+    inputClass: {
       type: String,
       default: null
     },
@@ -324,9 +258,9 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
-    const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
+    const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { ui: uiMenu } = useUI('selectMenu', toRef(props, 'uiMenu'), configMenu)
+    const { ui: uiMenu } = useUI('inputMenu', toRef(props, 'uiMenu'), configMenu)
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
@@ -338,22 +272,21 @@ export default defineComponent({
     const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
     const query = ref('')
-    const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
 
-    const selectClass = computed(() => {
+    const inputClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
       return twMerge(twJoin(
         ui.value.base,
-        uiMenu.value.select,
+        ui.value.form,
         rounded.value,
+        ui.value.placeholder,
         ui.value.size[size.value],
-        ui.value.gap[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
         variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
-      ), props.selectClass)
+      ), props.inputClass)
     })
 
     const isLeading = computed(() => {
@@ -400,7 +333,6 @@ export default defineComponent({
     const trailingWrapperIconClass = computed(() => {
       return twJoin(
         ui.value.icon.trailing.wrapper,
-        ui.value.icon.trailing.pointer,
         ui.value.icon.trailing.padding[size.value]
       )
     })
@@ -414,13 +346,7 @@ export default defineComponent({
       )
     })
 
-    const debouncedSearch = typeof props.searchable === 'function' ? useDebounceFn(props.searchable, props.debounce) : undefined
-
     const filteredOptions = computedAsync(async () => {
-      if (props.searchable && debouncedSearch) {
-        return await debouncedSearch(query.value)
-      }
-
       if (query.value === '') {
         return props.options
       }
@@ -438,33 +364,16 @@ export default defineComponent({
       })
     })
 
-    const queryOption = computed(() => {
-      return query.value === '' ? null : { [props.optionAttribute]: query.value }
-    })
-
-    function clearOnClose () {
-      if (props.clearSearchOnClose) {
-        query.value = ''
-      }
-    }
-
     watch(container, (value) => {
       if (value) {
         emit('open')
       } else {
-        clearOnClose()
         emit('close')
         emitFormBlur()
       }
     })
 
     function onUpdate (event: any) {
-      if (query.value && searchInput.value?.$el) {
-        query.value = ''
-        // explicitly set input text because `ComboboxInput` `displayValue` is not reactive
-        searchInput.value.$el.value = ''
-      }
-
       emit('update:modelValue', event)
       emit('change', event)
       emitFormChange()
@@ -486,7 +395,7 @@ export default defineComponent({
       isLeading,
       isTrailing,
       // eslint-disable-next-line vue/no-dupe-keys
-      selectClass,
+      inputClass,
       leadingIconName,
       leadingIconClass,
       leadingWrapperIconClass,
@@ -494,7 +403,6 @@ export default defineComponent({
       trailingIconClass,
       trailingWrapperIconClass,
       filteredOptions,
-      queryOption,
       query,
       onUpdate
     }

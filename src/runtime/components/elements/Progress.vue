@@ -8,7 +8,7 @@
       </div>
     </slot>
 
-    <progress :class="progressClass" v-bind="{ value, max: (realMax as number) }">
+    <progress :class="progressClass" v-bind="{ value, max: realMax }">
       {{ Math.round(percent) }}%
     </progress>
 

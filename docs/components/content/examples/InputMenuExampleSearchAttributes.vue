@@ -12,19 +12,17 @@ const selected = ref(options[1])
 </script>
 
 <template>
-  <USelectMenu
+  <UInputMenu
     v-model="selected"
     :options="options"
     placeholder="Select a person"
-    searchable
-    searchable-placeholder="Search by name or color"
-    option-attribute="name"
     by="id"
+    option-attribute="name"
     :search-attributes="['name', 'colors']"
   >
     <template #option="{ option: person }">
       <span v-for="color in person.colors" :key="color.id" class="h-2 w-2 rounded-full" :class="`bg-${color}-500 dark:bg-${color}-400`" />
       <span class="truncate">{{ person.name }}</span>
     </template>
-  </USelectMenu>
+  </UInputMenu>
 </template>

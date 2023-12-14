@@ -17,6 +17,13 @@
             <UDivider v-if="page.body?.toc?.links?.length" type="dashed" />
 
             <UPageLinks title="Community" :links="links" />
+
+            <UDivider type="dashed" />
+
+            <div class="space-y-3">
+              <AdsPro />
+              <AdsCarbon />
+            </div>
           </div>
         </template>
       </UDocsToc>
