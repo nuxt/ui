@@ -23,11 +23,11 @@
 <script lang="ts">
 import { ref, computed, toRef, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { mergeConfig, looseToNumber } from '../../utils'
+import { mergeConfig, twMerge, looseToNumber } from '../../utils'
 import type { TextareaSize, TextareaColor, TextareaVariant, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'

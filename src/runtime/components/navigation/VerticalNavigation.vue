@@ -40,12 +40,12 @@
 <script lang="ts">
 import { toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, omit } from '../../utils'
+import { mergeConfig, twMerge, omit } from '../../utils'
 import type { VerticalNavigationLink, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'

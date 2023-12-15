@@ -7,9 +7,9 @@
 <script lang="ts">
 import { toRef, defineComponent, computed } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig } from '../../utils'
+import { mergeConfig, twMerge } from '../../utils'
 import type { KbdSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'

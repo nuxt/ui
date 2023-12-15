@@ -22,11 +22,11 @@
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Switch as HSwitch } from '@headlessui/vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { mergeConfig } from '../../utils'
+import { mergeConfig, twMerge } from '../../utils'
 import type { ToggleSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'

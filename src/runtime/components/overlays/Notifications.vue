@@ -22,11 +22,11 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UNotification from './Notification.vue'
 import { useUI } from '../../composables/useUI'
 import { useToast } from '../../composables/useToast'
-import { mergeConfig } from '../../utils'
+import { mergeConfig, twMerge } from '../../utils'
 import type { Notification, Strategy } from '../../types'
 import { useState } from '#imports'
 // @ts-expect-error

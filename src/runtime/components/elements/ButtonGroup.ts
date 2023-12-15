@@ -1,8 +1,8 @@
 import { h, computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, getSlotsChildren } from '../../utils'
+import { mergeConfig, twMerge, getSlotsChildren } from '../../utils'
 import { useProvideButtonGroup } from '../../composables/useButtonGroup'
 import type { ButtonSize, Strategy } from '../../types'
 // @ts-expect-error
