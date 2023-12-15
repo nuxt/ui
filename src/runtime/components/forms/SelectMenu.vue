@@ -98,7 +98,15 @@
               </li>
             </component>
 
-            <component :is="createOptionVNode" v-if="showCreateOption" :value="queryOption" />
+            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && createOption" v-slot="{ active, selected }" :value="createOption" as="template">
+              <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
+                <div :class="uiMenu.option.container">
+                  <slot name="option-create" :option="createOption" :active="active" :selected="selected">
+                    <span :class="uiMenu.option.create">Create "{{ createOption[optionAttribute] }}"</span>
+                  </slot>
+                </div>
+              </li>
+            </component>
             <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
                 No results for "{{ query }}".
@@ -117,7 +125,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, watch, defineComponent, h } from 'vue'
+import { ref, computed, toRef, watch, defineComponent } from 'vue'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import {
   Combobox as HCombobox,
@@ -239,15 +247,19 @@ export default defineComponent({
     },
     clearSearchOnClose: {
       type: Boolean,
-      default: () => configMenu.default.clearOnClose
+      default: () => configMenu.default.clearSearchOnClose
     },
     debounce: {
       type: Number,
       default: 200
     },
     creatable: {
-      type: [Boolean, String] as PropType<boolean | 'always'>,
+      type: Boolean,
       default: false
+    },
+    showCreateOptionWhen: {
+      type: String as PropType<'always' | 'empty'>,
+      default: () => configMenu.default.showCreateOptionWhen
     },
     placeholder: {
       type: String,
@@ -406,25 +418,7 @@ export default defineComponent({
       )
     })
 
-    const objectOptions = computed(() => props.options.length > 0 && !!props.options.find((option) => typeof option === 'object'))
-
     const debouncedSearch = typeof props.searchable === 'function' ? useDebounceFn(props.searchable, props.debounce) : undefined
-
-    const matchOption = (searchFrom: any, searchFor: string, method: 'search' | 'exact') =>
-      method === 'exact' ? String(searchFrom) === searchFor : String(searchFrom).search(new RegExp(searchFor, 'i')) !== -1
-
-    const _search = (searchFrom: any[], searchFor: string, method: 'search' | 'exact' = 'search') =>
-      (searchFrom).filter((option: any) => {
-        return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
-          if (!objectOptions.value) {
-            return matchOption(option, searchFor, method)
-          }
-
-          const child = get(option, searchAttribute)
-
-          return child !== null && child !== undefined && matchOption(child, searchFor, method)
-        })
-      })
 
     const filteredOptions = computedAsync(async () => {
       if (props.searchable && debouncedSearch) {
@@ -435,49 +429,35 @@ export default defineComponent({
         return props.options
       }
 
-      return _search(props.options, query.value)
+      return (props.options as any[]).filter((option: any) => {
+        return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
+          if (['string', 'number'].includes(typeof option)) {
+            return String(option).search(new RegExp(query.value, 'i')) !== -1
+          }
+
+          const child = get(option, searchAttribute)
+
+          return child !== null && child !== undefined && String(child).search(new RegExp(query.value, 'i')) !== -1
+        })
+      })
     })
 
-    const queryOption = computed(() => {
-      return query.value === '' ? null : objectOptions.value ? { [props.optionAttribute]: query.value } : query.value
-    })
-
-    const showCreateOption = computed(() =>
-      props.creatable
-      && queryOption.value
-      && (
-        props.creatable !== 'always'
-          ? !filteredOptions.value.length
-          : !_search(filteredOptions.value, query.value, 'exact').length
-      )
-    )
-
-    const createOptionVNode = h(
-      props.searchable ? HComboboxOption : HListboxOption,
-      { as: 'template' },
-      {
-        default: ({ active, selected }) => h(
-          'li',
-          {
-            class: [
-              uiMenu.value.option.base,
-              uiMenu.value.option.rounded,
-              uiMenu.value.option.padding,
-              uiMenu.value.option.size,
-              uiMenu.value.option.color,
-              active ? uiMenu.value.option.active : uiMenu.value.option.inactive
-            ]
-          },
-          h(
-            'div',
-            { class: uiMenu.value.option.container },
-            slots['option-create']
-              ? slots['option-create']({ option: queryOption.value, active, selected })
-              : h('span', { class: uiMenu.value.option.create }, [`Create "${objectOptions.value ? queryOption.value[props.optionAttribute] : queryOption.value}"`])
-          )
-        )
+    const createOption = computed(() => {
+      if (query.value === '') {
+        return null
       }
-    )
+      if (props.showCreateOptionWhen === 'empty' && filteredOptions.value.length) {
+        return null
+      }
+      if (props.showCreateOptionWhen === 'always') {
+        const existingOption = filteredOptions.value.find(option => ['string', 'number'].includes(typeof option) ? option === query.value : option[props.optionAttribute] === query.value)
+        if (existingOption) {
+          return null
+        }
+      }
+
+      return ['string', 'number'].includes(typeof props.modelValue) ? query.value : { [props.optionAttribute]: query.value }
+    })
 
     function clearOnClose () {
       if (props.clearSearchOnClose) {
@@ -531,9 +511,7 @@ export default defineComponent({
       trailingIconClass,
       trailingWrapperIconClass,
       filteredOptions,
-      queryOption,
-      showCreateOption,
-      createOptionVNode,
+      createOption,
       query,
       onUpdate
     }

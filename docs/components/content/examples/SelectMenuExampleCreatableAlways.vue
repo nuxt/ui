@@ -23,6 +23,7 @@ const labels = computed({
 
       // In a real app, you would make an API call to create the label
       const response = {
+        id: options.value.length + 1,
         name: label.name
       }
 
@@ -45,7 +46,8 @@ const labels = computed({
     option-attribute="name"
     multiple
     searchable
-    creatable="always"
+    creatable
+    show-create-option-when="always"
     placeholder="Select labels"
   />
 </template>

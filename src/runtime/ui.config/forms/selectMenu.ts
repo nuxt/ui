@@ -22,7 +22,8 @@ export default {
   },
   default: {
     selectedIcon: 'i-heroicons-check-20-solid',
-    clearOnClose: false
+    clearSearchOnClose: false,
+    showCreateOptionWhen: 'empty'
   },
   arrow: {
     ...arrow,
