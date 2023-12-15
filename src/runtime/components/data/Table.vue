@@ -75,7 +75,7 @@ import UButton from '../elements/Button.vue'
 import UIcon from '../elements/Icon.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, omit, get } from '../../utils'
+import { mergeConfig, get } from '../../utils'
 import type { Strategy, Button } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
