@@ -98,11 +98,11 @@
               </li>
             </component>
 
-            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
+            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && createOption" v-slot="{ active, selected }" :value="createOption" as="template">
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
-                  <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
-                    <span :class="uiMenu.option.create">Create "{{ queryOption[optionAttribute] }}"</span>
+                  <slot name="option-create" :option="createOption" :active="active" :selected="selected">
+                    <span :class="uiMenu.option.create">Create "{{ createOption[optionAttribute] }}"</span>
                   </slot>
                 </div>
               </li>
@@ -247,7 +247,7 @@ export default defineComponent({
     },
     clearSearchOnClose: {
       type: Boolean,
-      default: () => configMenu.default.clearOnClose
+      default: () => configMenu.default.clearSearchOnClose
     },
     debounce: {
       type: Number,
@@ -256,6 +256,10 @@ export default defineComponent({
     creatable: {
       type: Boolean,
       default: false
+    },
+    showCreateOptionWhen: {
+      type: String as PropType<'always' | 'empty'>,
+      default: () => configMenu.default.showCreateOptionWhen
     },
     placeholder: {
       type: String,
@@ -438,8 +442,21 @@ export default defineComponent({
       })
     })
 
-    const queryOption = computed(() => {
-      return query.value === '' ? null : { [props.optionAttribute]: query.value }
+    const createOption = computed(() => {
+      if (query.value === '') {
+        return null
+      }
+      if (props.showCreateOptionWhen === 'empty' && filteredOptions.value.length) {
+        return null
+      }
+      if (props.showCreateOptionWhen === 'always') {
+        const existingOption = filteredOptions.value.find(option => ['string', 'number'].includes(typeof option) ? option === query.value : option[props.optionAttribute] === query.value)
+        if (existingOption) {
+          return null
+        }
+      }
+
+      return ['string', 'number'].includes(typeof props.modelValue) ? query.value : { [props.optionAttribute]: query.value }
     })
 
     function clearOnClose () {
@@ -494,7 +511,7 @@ export default defineComponent({
       trailingIconClass,
       trailingWrapperIconClass,
       filteredOptions,
-      queryOption,
+      createOption,
       query,
       onUpdate
     }
