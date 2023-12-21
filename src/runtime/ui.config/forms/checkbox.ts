@@ -1,7 +1,7 @@
 export default {
   wrapper: 'relative flex items-start',
   container: 'flex items-center h-5',
-  base: 'h-4 w-4 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  base: 'size-4 dark:checked:bg-current dark:checked:border-transparent dark:indeterminate:bg-current dark:indeterminate:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
   form: 'form-checkbox',
   rounded: 'rounded',
   color: 'text-{color}-500 dark:text-{color}-400',

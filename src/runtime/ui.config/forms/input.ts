@@ -50,14 +50,17 @@ export default {
   },
   color: {
     white: {
-      outline: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
+      outline:
+        'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
     },
     gray: {
-      outline: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
+      outline:
+        'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
     }
   },
   variant: {
-    outline: 'shadow-sm bg-transparent text-gray-900 dark:text-white ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 focus:ring-2 focus:ring-{color}-500 dark:focus:ring-{color}-400',
+    outline:
+      'shadow-sm bg-transparent text-gray-900 dark:text-white ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 focus:ring-2 focus:ring-{color}-500 dark:focus:ring-{color}-400',
     none: 'bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
@@ -65,12 +68,12 @@ export default {
     color: 'text-{color}-500 dark:text-{color}-400',
     loading: 'animate-spin',
     size: {
-      '2xs': 'h-4 w-4',
-      xs: 'h-4 w-4',
-      sm: 'h-5 w-5',
-      md: 'h-5 w-5',
-      lg: 'h-5 w-5',
-      xl: 'h-6 w-6'
+      '2xs': 'size-4',
+      xs: 'size-4',
+      sm: 'size-5',
+      md: 'size-5',
+      lg: 'size-5',
+      xl: 'size-6'
     },
     leading: {
       wrapper: 'absolute inset-y-0 start-0 flex items-center',

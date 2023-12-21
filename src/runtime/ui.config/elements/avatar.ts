@@ -3,17 +3,18 @@ export default {
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
   text: 'font-medium leading-none text-gray-900 dark:text-white truncate',
-  placeholder: 'font-medium leading-none text-gray-500 dark:text-gray-400 truncate',
+  placeholder:
+    'font-medium leading-none text-gray-500 dark:text-gray-400 truncate',
   size: {
-    '3xs': 'h-4 w-4 text-[8px]',
-    '2xs': 'h-5 w-5 text-[10px]',
-    xs: 'h-6 w-6 text-xs',
-    sm: 'h-8 w-8 text-sm',
-    md: 'h-10 w-10 text-base',
-    lg: 'h-12 w-12 text-lg',
-    xl: 'h-14 w-14 text-xl',
-    '2xl': 'h-16 w-16 text-2xl',
-    '3xl': 'h-20 w-20 text-3xl'
+    '3xs': 'size-4 text-[8px]',
+    '2xs': 'size-5 text-[10px]',
+    xs: 'size-6 text-xs',
+    sm: 'size-8 text-sm',
+    md: 'size-10 text-base',
+    lg: 'size-12 text-lg',
+    xl: 'size-14 text-xl',
+    '2xl': 'size-16 text-2xl',
+    '3xl': 'size-20 text-3xl'
   },
   chip: {
     base: 'absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium',
@@ -39,15 +40,15 @@ export default {
   icon: {
     base: 'text-gray-500 dark:text-gray-400 flex-shrink-0',
     size: {
-      '3xs': 'h-2 w-2',
-      '2xs': 'h-2.5 w-2.5',
-      xs: 'h-3 w-3',
-      sm: 'h-4 w-4',
-      md: 'h-5 w-5',
-      lg: 'h-6 w-6',
-      xl: 'h-7 w-7',
-      '2xl': 'h-8 w-8',
-      '3xl': 'h-10 w-10'
+      '3xs': 'size-2',
+      '2xs': 'size-2.5',
+      xs: 'size-3',
+      sm: 'size-4',
+      md: 'size-5',
+      lg: 'size-6',
+      xl: 'size-7',
+      '2xl': 'size-8',
+      '3xl': 'size-10'
     }
   },
   default: {

@@ -27,14 +27,16 @@ export default {
     padding: 'ps-4'
   },
   loadingState: {
-    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    wrapper:
+      'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
-    icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4 animate-spin'
+    icon: 'size-6 mx-auto text-gray-400 dark:text-gray-500 mb-4 animate-spin'
   },
   emptyState: {
-    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    wrapper:
+      'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
-    icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
+    icon: 'size-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
   },
   default: {
     sortAscIcon: 'i-heroicons-bars-arrow-up-20-solid',

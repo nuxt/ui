@@ -5,16 +5,17 @@ export default {
   base: 'flex items-center gap-x-1.5 group font-semibold',
   label: '',
   icon: {
-    base: 'flex-shrink-0 w-4 h-4',
+    base: 'flex-shrink-0 size-4',
     active: '',
     inactive: ''
   },
   divider: {
-    base: 'flex-shrink-0 w-5 h-5'
+    base: 'flex-shrink-0 size-5'
   },
   active: 'text-primary-500 dark:text-primary-400',
   inactive: ' hover:text-gray-700 dark:hover:text-gray-200',
   default: {
-    divider: 'i-heroicons-chevron-right-20-solid rtl:i-heroicons-chevron-left-20-solid'
+    divider:
+      'i-heroicons-chevron-right-20-solid rtl:i-heroicons-chevron-left-20-solid'
   }
 }
