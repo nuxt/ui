@@ -7,16 +7,13 @@ export default {
   rounded: 'rounded-md',
   font: 'font-medium',
   size: 'text-sm',
-  active:
-    'text-gray-900 dark:text-white before:bg-gray-100 dark:before:bg-gray-800',
-  inactive:
-    'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50',
+  active: 'text-gray-900 dark:text-white before:bg-gray-100 dark:before:bg-gray-800',
+  inactive: 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50',
   label: 'truncate relative',
   icon: {
     base: 'flex-shrink-0 size-4',
     active: 'text-gray-700 dark:text-gray-200',
-    inactive:
-      'text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200'
+    inactive: 'text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200'
   },
   avatar: {
     base: 'flex-shrink-0',
@@ -25,7 +22,6 @@ export default {
   badge: {
     base: 'relative ms-auto inline-block py-0.5 px-2 text-xs rounded-md -me-1 -my-0.5',
     active: 'bg-white dark:bg-gray-900',
-    inactive:
-      'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-900'
+    inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-900'
   }
 }

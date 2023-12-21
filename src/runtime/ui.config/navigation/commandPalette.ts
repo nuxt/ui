@@ -1,8 +1,6 @@
 export default {
-  wrapper:
-    'flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800',
-  container:
-    'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
+  wrapper: 'flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800',
+  container: 'relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2',
   input: {
     wrapper: 'relative flex items-center',
     base: 'w-full placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0 focus:outline-none',
@@ -21,8 +19,7 @@ export default {
     }
   },
   emptyState: {
-    wrapper:
-      'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
+    wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
     queryLabel: 'text-sm text-center text-gray-900 dark:text-white',
     icon: 'size-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
@@ -66,8 +63,7 @@ export default {
     emptyState: {
       icon: 'i-heroicons-magnifying-glass-20-solid',
       label: 'We couldn\'t find any items.',
-      queryLabel:
-        'We couldn\'t find any items with that term. Please try again.'
+      queryLabel: 'We couldn\'t find any items with that term. Please try again.'
     },
     closeButton: null,
     selectedIcon: 'i-heroicons-check-20-solid'
