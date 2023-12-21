@@ -61,7 +61,7 @@ export default defineNuxtConfig({
         prefix: '/pro',
         driver: 'github',
         repo: 'nuxt/ui-pro',
-        branch: 'dev',
+        branch: 'main',
         dir: '.docs/content/pro',
         token: process.env.NUXT_GITHUB_TOKEN || ''
       } : undefined
