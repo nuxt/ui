@@ -3,8 +3,7 @@ export default {
   background: 'bg-gray-100 dark:bg-gray-800',
   rounded: 'rounded-full',
   text: 'font-medium leading-none text-gray-900 dark:text-white truncate',
-  placeholder:
-    'font-medium leading-none text-gray-500 dark:text-gray-400 truncate',
+  placeholder: 'font-medium leading-none text-gray-500 dark:text-gray-400 truncate',
   size: {
     '3xs': 'size-4 text-[8px]',
     '2xs': 'size-5 text-[10px]',
