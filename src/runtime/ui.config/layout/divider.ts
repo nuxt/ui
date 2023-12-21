@@ -24,7 +24,7 @@ export default {
     }
   },
   icon: {
-    base: 'flex-shrink-0 size-5'
+    base: 'flex-shrink-0 w-5 h-5'
   },
   avatar: {
     base: 'flex-shrink-0',

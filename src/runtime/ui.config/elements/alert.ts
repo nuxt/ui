@@ -9,7 +9,7 @@ export default {
   padding: 'p-4',
   gap: 'gap-3',
   icon: {
-    base: 'flex-shrink-0 size-5'
+    base: 'flex-shrink-0 w-5 h-5'
   },
   avatar: {
     base: 'flex-shrink-0 self-center',

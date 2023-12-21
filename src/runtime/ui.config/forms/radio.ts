@@ -1,7 +1,7 @@
 export default {
   wrapper: 'relative flex items-start',
   container: 'flex items-center h-5',
-  base: 'size-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
+  base: 'h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent',
   form: 'form-radio',
   color: 'text-{color}-500 dark:text-{color}-400',
   background: 'bg-white dark:bg-gray-900',

@@ -22,7 +22,7 @@ export default {
     inactive: 'text-gray-700 dark:text-gray-200',
     disabled: 'cursor-not-allowed opacity-50',
     icon: {
-      base: 'flex-shrink-0 size-4',
+      base: 'flex-shrink-0 h-4 w-4',
       active: 'text-gray-500 dark:text-gray-400',
       inactive: 'text-gray-400 dark:text-gray-500'
     },

@@ -26,13 +26,13 @@ export default {
     },
     inactive: 'translate-x-0 rtl:-translate-x-0',
     size: {
-      '2xs': 'size-2',
-      xs: 'size-2.5',
-      sm: 'size-3',
-      md: 'size-4',
-      lg: 'size-5',
-      xl: 'size-6',
-      '2xl': 'size-7'
+      '2xs': 'h-2 w-2',
+      xs: 'h-2.5 w-2.5',
+      sm: 'h-3 w-3',
+      md: 'h-4 w-4',
+      lg: 'h-5 w-5',
+      xl: 'h-6 w-6',
+      '2xl': 'h-7 w-7'
     }
   },
   icon: {
@@ -40,13 +40,13 @@ export default {
     active: 'opacity-100 ease-in duration-200',
     inactive: 'opacity-0 ease-out duration-100',
     size: {
-      '2xs': 'size-2',
-      xs: 'size-2',
-      sm: 'size-2',
-      md: 'size-3',
-      lg: 'size-4',
-      xl: 'size-5',
-      '2xl': 'size-6'
+      '2xs': 'h-2 w-2',
+      xs: 'h-2 w-2',
+      sm: 'h-2 w-2',
+      md: 'h-3 w-3',
+      lg: 'h-4 w-4',
+      xl: 'h-5 w-5',
+      '2xl': 'h-6 w-6'
     },
     on: 'text-{color}-500 dark:text-{color}-400',
     off: 'text-gray-400 dark:text-gray-500'

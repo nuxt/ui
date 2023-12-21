@@ -12,7 +12,7 @@ export default {
   gap: 'gap-3',
   ring: 'ring-1 ring-gray-200 dark:ring-gray-800',
   icon: {
-    base: 'flex-shrink-0 size-5',
+    base: 'flex-shrink-0 w-5 h-5',
     color: 'text-{color}-500 dark:text-{color}-400'
   },
   avatar: {

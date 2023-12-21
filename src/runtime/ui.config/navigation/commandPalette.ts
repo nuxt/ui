@@ -10,7 +10,7 @@ export default {
     icon: {
       base: 'pointer-events-none absolute start-4 text-gray-400 dark:text-gray-500',
       loading: 'animate-spin',
-      size: 'size-4',
+      size: 'h-4 w-4',
       padding: 'ps-10'
     },
     closeButton: {
@@ -22,7 +22,7 @@ export default {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
     label: 'text-sm text-center text-gray-900 dark:text-white',
     queryLabel: 'text-sm text-center text-gray-900 dark:text-white',
-    icon: 'size-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
+    icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
   },
   group: {
     wrapper: 'p-2',
@@ -37,19 +37,19 @@ export default {
       suffix: 'text-gray-400 dark:text-gray-500',
       container: 'flex items-center gap-2 min-w-0',
       icon: {
-        base: 'flex-shrink-0 size-4',
+        base: 'flex-shrink-0 w-4 h-4',
         active: 'text-gray-900 dark:text-white',
         inactive: 'text-gray-400 dark:text-gray-500'
       },
       selectedIcon: {
-        base: 'size-4 text-gray-900 dark:text-white flex-shrink-0'
+        base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
       },
       avatar: {
         base: 'flex-shrink-0',
         size: '3xs' as const
       },
       chip: {
-        base: 'flex-shrink-0 size-2 mx-1 rounded-full'
+        base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
       },
       disabled: 'opacity-50',
       shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5'

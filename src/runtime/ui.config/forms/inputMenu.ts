@@ -25,21 +25,21 @@ export default {
     disabled: 'cursor-not-allowed opacity-50',
     empty: 'text-sm text-gray-400 dark:text-gray-500 px-2 py-1.5',
     icon: {
-      base: 'flex-shrink-0 size-4',
+      base: 'flex-shrink-0 h-4 w-4',
       active: 'text-gray-900 dark:text-white',
       inactive: 'text-gray-400 dark:text-gray-500'
     },
     selectedIcon: {
       wrapper: 'absolute inset-y-0 end-0 flex items-center',
       padding: 'pe-2',
-      base: 'size-4 text-gray-900 dark:text-white flex-shrink-0'
+      base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
     },
     avatar: {
       base: 'flex-shrink-0',
       size: '3xs' as const
     },
     chip: {
-      base: 'flex-shrink-0 size-2 mx-1 rounded-full'
+      base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
     }
   },
   // Syntax for `<Transition>` component https://vuejs.org/guide/built-ins/transition.html#css-based-transitions

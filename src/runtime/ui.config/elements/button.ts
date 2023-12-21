@@ -63,12 +63,12 @@ export default {
     base: 'flex-shrink-0',
     loading: 'animate-spin',
     size: {
-      '2xs': 'size-4',
-      xs: 'size-4',
-      sm: 'size-5',
-      md: 'size-5',
-      lg: 'size-5',
-      xl: 'size-6'
+      '2xs': 'h-4 w-4',
+      xs: 'h-4 w-4',
+      sm: 'h-5 w-5',
+      md: 'h-5 w-5',
+      lg: 'h-5 w-5',
+      xl: 'h-6 w-6'
     }
   },
   default: {
