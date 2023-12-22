@@ -26,7 +26,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { mergeConfig } from '../../utils'
+import { mergeConfig, isEqual } from '../../utils'
 import type { ToggleSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -34,6 +34,8 @@ import { toggle } from '#ui/ui.config'
 import colors from '#ui-colors'
 
 const config = mergeConfig<typeof toggle>(appConfig.ui.strategy, appConfig.ui.toggle, toggle)
+
+const AnyType = [Boolean, String, Number, Object]
 
 export default defineComponent({
   components: {
@@ -51,7 +53,15 @@ export default defineComponent({
       default: null
     },
     modelValue: {
-      type: Boolean,
+      type: AnyType,
+      default: false
+    },
+    value: {
+      type: AnyType,
+      default: true
+    },
+    unselectedValue: {
+      type: AnyType,
       default: false
     },
     disabled: {
@@ -97,10 +107,13 @@ export default defineComponent({
 
     const active = computed({
       get () {
-        return props.modelValue
+        if (typeof props.value === 'object') {
+          return isEqual(<unknown>props.modelValue, <unknown>props.value)
+        }
+        return props.modelValue === props.value
       },
       set (value) {
-        emit('update:modelValue', value)
+        emit('update:modelValue', !value ? props.unselectedValue : props.value)
         emitFormChange()
       }
     })
