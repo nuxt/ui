@@ -44,7 +44,7 @@ export default {
     base: '',
     align: '',
     size: 'text-sm',
-    color: 'text-gray-500 dark:text-gray-500'
+    color: 'text-gray-500 dark:text-gray-400'
   },
   default: {
     color: 'gray'
