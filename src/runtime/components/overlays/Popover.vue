@@ -4,7 +4,7 @@
       ref="trigger"
       as="div"
       :disabled="disabled"
-      class="inline-flex w-full"
+      :class="ui.trigger"
       role="button"
       @mouseover="onMouseOver"
     >
@@ -15,10 +15,15 @@
       </slot>
     </HPopoverButton>
 
+    <Transition v-if="overlay" appear v-bind="ui.overlay.transition">
+      <div v-if="(open !== undefined) ? open : headlessOpen" :class="[ui.overlay.base, ui.overlay.background]" @click="$emit('update:open')" />
+    </Transition>
+
     <div v-if="(open !== undefined) ? open : headlessOpen" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
         <div>
-          <div v-if="popper.arrow" data-popper-arrow :class="['invisible before:visible before:block before:rotate-45 before:z-[-1]', Object.values(ui.arrow)]" />
+          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
+
           <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
             <slot name="panel" :open="(open !== undefined) ? open : headlessOpen" :close="close" />
           </HPopoverPanel>
@@ -29,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ref, toRef, onMounted, defineComponent } from 'vue'
+import { computed, ref, toRef, onMounted, defineComponent, watch } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel } from '@headlessui/vue'
@@ -72,20 +77,25 @@ export default defineComponent({
       type: Number,
       default: 0
     },
+    overlay: {
+      type: Boolean,
+      default: false
+    },
     popper: {
       type: Object as PropType<PopperOptions>,
       default: () => ({})
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
-  setup (props) {
+  emits: ['update:open', 'open', 'close'],
+  setup (props, { emit }) {
     const { ui, attrs } = useUI('popover', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
@@ -159,6 +169,11 @@ export default defineComponent({
         closeTimeout = null
       }, props.closeDelay)
     }
+
+    watch(() => popoverApi.value?.popoverState, (newValue: number, oldValue: number) => {
+      if (oldValue === undefined) return
+      emit(newValue === 0 ? 'open' : 'close')
+    })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

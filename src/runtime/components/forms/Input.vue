@@ -9,7 +9,6 @@
       :required="required"
       :placeholder="placeholder"
       :disabled="disabled || loading"
-      class="form-input"
       :class="inputClass"
       v-bind="attrs"
       @input="onInput"
@@ -41,11 +40,11 @@ import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, looseToNumber } from '../../utils'
-import type { NestedKeyOf, Strategy } from '../../types'
+import { useInjectButtonGroup } from '../../composables/useButtonGroup'
+import type { InputSize, InputColor, InputVariant, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { input } from '#ui/ui.config'
-import colors from '#ui-colors'
 
 const config = mergeConfig<typeof input>(appConfig.ui.strategy, appConfig.ui.input, input)
 
@@ -124,21 +123,21 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: String as PropType<keyof typeof config.size>,
+      type: String as PropType<InputSize>,
       default: null,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
-      type: String as PropType<keyof typeof config.color | typeof colors[number]>,
+      type: String as PropType<InputColor>,
       default: () => config.default.color,
       validator (value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
-      type: String as PropType<keyof typeof config.variant | NestedKeyOf<typeof config.color>>,
+      type: String as PropType<InputVariant>,
       default: () => config.default.variant,
       validator (value: string) {
         return [
@@ -153,11 +152,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     },
     modelModifiers: {
       type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean }>,
@@ -168,10 +167,14 @@ export default defineComponent({
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { emitFormBlur, emitFormInput, size, color, inputId, name } = useFormGroup(props, config)
+    const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
+
+    const { emitFormBlur, emitFormInput, size: sizeFormGroup, color, inputId, name } = useFormGroup(props, config)
+
+    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
     const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
-    
+
     const input = ref<HTMLInputElement | null>(null)
 
     const autoFocus = () => {
@@ -195,13 +198,13 @@ export default defineComponent({
       emitFormInput()
     }
 
-    const onInput = (event: InputEvent) => {
+    const onInput = (event: Event) => {
       if (!modelModifiers.value.lazy) {
         updateInput((event.target as HTMLInputElement).value)
       }
     }
 
-    const onChange = (event: InputEvent) => {
+    const onChange = (event: Event) => {
       const value = (event.target as HTMLInputElement).value
 
       if (modelModifiers.value.lazy) {
@@ -230,7 +233,8 @@ export default defineComponent({
 
       return twMerge(twJoin(
         ui.value.base,
-        ui.value.rounded,
+        ui.value.form,
+        rounded.value,
         ui.value.placeholder,
         ui.value.size[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
@@ -275,9 +279,9 @@ export default defineComponent({
     const leadingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && 'animate-spin'
+        props.loading && ui.value.icon.loading
       )
     })
 
@@ -292,9 +296,9 @@ export default defineComponent({
     const trailingIconClass = computed(() => {
       return twJoin(
         ui.value.icon.base,
-        appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && !isLeading.value && 'animate-spin'
+        props.loading && !isLeading.value && ui.value.icon.loading
       )
     })
 

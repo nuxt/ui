@@ -104,7 +104,8 @@ export default defineComponent({
       return props.state
     }
 
-    async function onSubmit (event: SubmitEvent) {
+    async function onSubmit (payload: Event) {
+      const event = payload as SubmitEvent
       try {
         if (props.validateOn?.includes('submit')) {
           await validate()
@@ -247,7 +248,7 @@ async function getValibotError (
   const result = await schema._parse(state)
   if (result.issues) {
     return result.issues.map((issue) => ({
-      path: issue.path.map(p => p.key).join('.'),
+      path: issue.path?.map(p => p.key).join('.') || '',
       message: issue.message
     }))
   }

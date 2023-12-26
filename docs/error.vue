@@ -49,7 +49,7 @@ const navigation = computed(() => {
     ]
   }
 
-  return nav.value.filter(item => item._path !== '/dev')
+  return nav.value?.filter(item => item._path !== '/dev') || []
 })
 
 const links = computed(() => {
@@ -89,8 +89,7 @@ const links = computed(() => {
   }, {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch',
-    to: 'https://github.com/nuxt/ui/releases',
-    target: '_blank'
+    to: '/releases'
   }].filter(Boolean)
 })
 

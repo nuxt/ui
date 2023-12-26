@@ -17,6 +17,13 @@
             <UDivider v-if="page.body?.toc?.links?.length" type="dashed" />
 
             <UPageLinks title="Community" :links="links" />
+
+            <UDivider type="dashed" />
+
+            <div class="space-y-3">
+              <AdsPro />
+              <AdsCarbon />
+            </div>
           </div>
         </template>
       </UDocsToc>
@@ -54,6 +61,8 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
     .findSurround(withoutTrailingSlash(route.path))
 })
 
+const headline = computed(() => findPageHeadline(page.value))
+
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title: page.value.title,
@@ -65,10 +74,9 @@ useSeoMeta({
 defineOgImage({
   component: 'Docs',
   title: page.value.title,
-  description: page.value.description
+  description: page.value.description,
+  headline: headline.value
 })
-
-const headline = computed(() => findPageHeadline(page.value))
 
 const links = computed(() => [{
   icon: 'i-heroicons-pencil-square',

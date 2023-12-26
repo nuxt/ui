@@ -4,7 +4,7 @@
     v-if="!to"
     :disabled="disabled"
     v-bind="$attrs"
-    :class="inactiveClass"
+    :class="active ? activeClass : inactiveClass"
   >
     <slot />
   </component>
@@ -21,7 +21,7 @@
       :role="disabled ? 'link' : undefined"
       :rel="rel"
       :target="target"
-      :class="resolveLinkClass(route, $route, { isActive, isExactActive })"
+      :class="active !== undefined ? (active ? activeClass : inactiveClass) : resolveLinkClass(route, $route, { isActive, isExactActive })"
       @click="(e) => !isExternal && navigate(e)"
     >
       <slot v-bind="{ isActive: exact ? isExactActive : isActive }" />
@@ -48,7 +48,7 @@ export default defineComponent({
     },
     active: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     exact: {
       type: Boolean,
@@ -69,10 +69,6 @@ export default defineComponent({
   },
   setup (props) {
     function resolveLinkClass (route, $route, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
-      if (props.active) {
-        return props.activeClass
-      }
-
       if (props.exactQuery && !isEqual(route.query, $route.query)) {
         return props.inactiveClass
       }

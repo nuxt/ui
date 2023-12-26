@@ -62,17 +62,17 @@ sections:
           height: 160
         orientation: 'horizontal'
     links:
-      - label: Explore the docs
+      - label: Explore docs
         to: /getting-started/theming
         color: white
         size: lg
         trailingIcon: i-heroicons-arrow-right-20-solid
-  - title: 'A collection of <span class="text-primary">30+</span> components'
-    description: 'Get access to 30+ beautifully designed and fully customizable components built for Nuxt. These components<br class="hidden lg:block"> are updated regularly to ensure that you always have the latest features and functionalities.'
+  - title: 'A collection of <span class="text-primary">40+</span> components'
+    description: 'Get access to 40+ beautifully designed and fully customizable components built for Nuxt. These components<br class="hidden lg:block"> are updated regularly to ensure that you always have the latest features and functionalities.'
     class: 'dark:bg-gradient-to-b from-gray-950/50 to-gray-900'
     slot: categories
     links:
-      - label: View all components
+      - label: Explore components
         to: /elements/accordion
         color: white
         size: lg
@@ -82,12 +82,12 @@ sections:
         to: /elements/dropdown
         image:
           path: /illustrations/elements
-        badge: 9
+        badge: 15
       - label: Forms
         to: /forms/form
         image:
           path: /illustrations/forms
-        badge: 10
+        badge: 12
       - label: Data
         to: /data/table
         image:
@@ -97,16 +97,29 @@ sections:
         to: /navigation/command-palette
         image:
           path: /illustrations/navigation
-        badge: 4
+        badge: 5
       - label: Overlays
         to: /overlays/modal
         image:
           path: /illustrations/overlays
-        badge: 6
+        badge: 7
       - label: Layout
         to: /layout/card
         image:
           path: /illustrations/layout
-        badge: 3
+        badge: 4
 cta:
   title: Trusted and supported by our<br class="hidden lg:block"> amazing community
+pro:
+  title: 'Upgrade to <span class="text-primary">UI Pro</span> for more components'
+  description: 'Nuxt UI Pro is a collection of premium components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.<br>It includes all primitives to build landing pages, documentation, blogs, changelog, dashboards or entire SaaS products.'
+  image:
+    path: /illustrations/pro
+    width: 1216
+    height: 424
+  links:
+    - label: Explore Pro
+      to: /pro
+      color: white
+      size: lg
+      trailingIcon: i-heroicons-arrow-right-20-solid

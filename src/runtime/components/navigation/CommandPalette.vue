@@ -14,14 +14,14 @@
       <HComboboxInput
         ref="comboboxInput"
         :value="query"
-        :class="[ui.input.base, ui.input.size, ui.input.height, ui.input.padding, icon && ui.input.icon.padding]"
+        :class="[ui.input.base, ui.input.size, ui.input.height, ui.input.padding, icon && ui.input.icon.padding, closeButton && ui.input.closeButton.padding]"
         :placeholder="placeholder"
         :aria-label="placeholder"
         autocomplete="off"
         @change="query = $event.target.value"
       />
 
-      <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...ui.default.closeButton, ...closeButton }" :class="ui.input.closeButton" @click="onClear" />
+      <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(ui.default.closeButton || {}), ...closeButton }" :class="ui.input.closeButton.base" @click="onClear" />
     </div>
 
     <HComboboxOptions
@@ -135,7 +135,7 @@ export default defineComponent({
     },
     closeButton: {
       type: Object as PropType<Button>,
-      default: () => config.default.closeButton as Button
+      default: () => config.default.closeButton as unknown as Button
     },
     emptyState: {
       type: Object as PropType<{ icon: string, label: string, queryLabel: string }>,
@@ -171,11 +171,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close'],
@@ -189,7 +189,7 @@ export default defineComponent({
 
     onMounted(() => {
       if (props.autoselect) {
-        activateFirstOption()
+        activateNextOption()
       }
     })
 
@@ -217,7 +217,7 @@ export default defineComponent({
       const commands: Command[] = []
       for (const group of props.groups) {
         if (!group.search) {
-          commands.push(...group.commands.map(command => ({ ...command, group: group.key })))
+          commands.push(...(group.commands?.map(command => ({ ...command, group: group.key })) || []))
         }
       }
       return commands
@@ -227,46 +227,57 @@ export default defineComponent({
 
     const { results } = useFuse(query, commands, options)
 
+    function getGroupWithCommands (group: Group, commands: Command[]) {
+      if (!group) {
+        return
+      }
+
+      if (group.filter && typeof group.filter === 'function') {
+        commands = group.filter(query.value, commands)
+      }
+
+      return {
+        ...group,
+        commands: commands.slice(0, options.value.resultLimit)
+      }
+    }
+
     const groups = computed(() => {
-      const groups: Group[] = []
-
-      const groupedCommands: Record<string, typeof results['value']> = {}
-      for (const command of results.value) {
-        groupedCommands[command.item.group] ||= []
-        groupedCommands[command.item.group].push(command)
+      if (!results.value) {
+        return []
       }
-      for (const key in groupedCommands) {
+
+      const groupedCommands: Record<string, Command[]> = results.value.reduce((acc, command) => {
+        const { item, ...data } = command
+        if (!item.group) {
+          return acc
+        }
+
+        acc[item.group] ||= []
+        acc[item.group].push({ ...item, ...data })
+
+        return acc
+      }, {})
+
+      const groups: Group[] = Object.entries(groupedCommands).map(([key, commands]) => {
         const group = props.groups.find(group => group.key === key)
-
-        let commands = groupedCommands[key].map((result) => {
-          const { item, ...data } = result
-
-          return {
-            ...item,
-            ...data
-          } as Command
-        })
-
-        if (group.filter && typeof group.filter === 'function') {
-          commands = group.filter(query.value, commands)
+        if (!group) {
+          return null
         }
 
-        groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
-      }
+        return getGroupWithCommands(group, commands)
+      }).filter(Boolean)
 
-      for (const group of props.groups) {
-        if (group.search && searchResults.value[group.key]?.length) {
-          let commands = (searchResults.value[group.key] || [])
+      const searchGroups = props.groups.filter(group => !!group.search && searchResults.value[group.key]?.length).map(group => {
+        const commands = (searchResults.value[group.key] || [])
 
-          if (group.filter && typeof group.filter === 'function') {
-            commands = group.filter(query.value, commands)
-          }
+        return getGroupWithCommands(group, [...commands])
+      })
 
-          groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
-        }
-      }
-
-      return groups
+      return [
+        ...groups,
+        ...searchGroups
+      ]
     })
 
     const debouncedSearch = useDebounceFn(async () => {
@@ -278,20 +289,19 @@ export default defineComponent({
       isLoading.value = true
 
       await Promise.all(searchableGroups.map(async (group) => {
+        // @ts-ignore
         searchResults.value[group.key] = await group.search(query.value)
       }))
 
       isLoading.value = false
+
+      activateFirstOption()
     }, props.debounce)
 
     watch(query, () => {
       debouncedSearch()
 
-      // Select first item on search changes
-      setTimeout(() => {
-        // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
-        comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
-      }, 0)
+      activateFirstOption()
     })
 
     const iconName = computed(() => {
@@ -306,7 +316,7 @@ export default defineComponent({
       return twJoin(
         ui.value.input.icon.base,
         ui.value.input.icon.size,
-        ((props.loading || isLoading.value) && props.loadingIcon) && 'animate-spin'
+        ((props.loading || isLoading.value) && props.loadingIcon) && ui.value.input.icon.loading
       )
     })
 
@@ -315,9 +325,15 @@ export default defineComponent({
     // Methods
 
     function activateFirstOption () {
-      // hack combobox by using keyboard event
-      // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L769
       setTimeout(() => {
+        // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
+        comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
+      }, 0)
+    }
+
+    function activateNextOption () {
+      setTimeout(() => {
+        // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L769
         comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
       }, 0)
     }

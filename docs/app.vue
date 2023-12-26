@@ -17,10 +17,6 @@
       <template #title="{ title }">
         <span v-html="title" />
       </template>
-
-      <template #description="{ description }">
-        <span v-html="description" />
-      </template>
     </UNotifications>
   </div>
 </template>
@@ -102,8 +98,7 @@ const links = computed(() => {
   }, {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch',
-    to: 'https://github.com/nuxt/ui/releases',
-    target: '_blank'
+    to: '/releases'
   }].filter(Boolean)
 })
 

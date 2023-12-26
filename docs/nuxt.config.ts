@@ -36,7 +36,7 @@ export default defineNuxtConfig({
   },
   ui: {
     global: true,
-    icons: ['heroicons', 'logos', 'simple-icons'],
+    icons: ['heroicons', 'simple-icons'],
     safelistColors: excludeColors(colors)
   },
   content: {
@@ -83,7 +83,9 @@ export default defineNuxtConfig({
         '/',
         '/getting-started',
         '/dev/getting-started',
-        '/api/search.json'
+        '/api/search.json',
+        '/api/releases.json',
+        '/api/pulls.json'
       ]
     }
   },
@@ -100,6 +102,7 @@ export default defineNuxtConfig({
       process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, '.docs', 'components') : '.c12'
     ],
     metaFields: {
+      type: false,
       props: true,
       slots: true,
       events: false,
@@ -120,6 +123,14 @@ export default defineNuxtConfig({
           component.global = 'sync'
         }
       })
+    }
+  },
+  typescript: {
+    strict: false
+  },
+  vite: {
+    optimizeDeps: {
+      include: ['date-fns']
     }
   }
 })

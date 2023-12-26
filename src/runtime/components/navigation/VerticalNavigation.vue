@@ -1,13 +1,10 @@
 <template>
   <nav :class="ui.wrapper" v-bind="attrs">
     <ul>
-      <li
-        v-for="(link, index) of links"
-        :key="index"
-      >
+      <li v-for="(link, index) of links" :key="index">
         <ULink
           v-slot="{ isActive }"
-          v-bind="omit(link, ['label', 'icon', 'iconClass', 'avatar', 'badge', 'click'])"
+          v-bind="omit(link, ['label', 'labelClass', 'icon', 'iconClass', 'avatar', 'badge', 'click'])"
           :class="[ui.base, ui.padding, ui.width, ui.ring, ui.rounded, ui.font, ui.size]"
           :active-class="ui.active"
           :inactive-class="ui.inactive"
@@ -25,11 +22,11 @@
             <UIcon
               v-if="link.icon"
               :name="link.icon"
-              :class="[ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive, link.iconClass]"
+              :class="twMerge(twJoin(ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive), link.iconClass)"
             />
           </slot>
           <slot :link="link" :is-active="isActive">
-            <span v-if="link.label" :class="ui.label">
+            <span v-if="link.label" :class="twMerge(ui.label, link.labelClass)">
               <span v-if="isActive" class="sr-only">
                 Current page:
               </span>
@@ -50,6 +47,7 @@
 <script lang="ts">
 import { toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULink from '../elements/Link.vue'
@@ -76,11 +74,11 @@ export default defineComponent({
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
-      default: undefined
+      default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined
+      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({})
     }
   },
   setup (props) {
@@ -90,7 +88,9 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
-      omit
+      omit,
+      twMerge,
+      twJoin
     }
   }
 })

@@ -110,6 +110,10 @@ const props = defineProps({
   componentClass: {
     type: String,
     default: ''
+  },
+  ignoreVModel: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -151,6 +155,23 @@ const generateOptions = (key: string, schema: { kind: string, schema: [], type: 
 
   if (key.toLowerCase().endsWith('color')) {
     options = [...appConfig.ui.colors]
+  }
+
+  if (key.toLowerCase() === 'size' && schema?.schema?.length > 0) {
+    const baseSizeOrder = { 'xs': 1, 'sm': 2, 'md': 3, 'lg': 4, 'xl': 5 }
+    schema.schema.sort((a: string, b: string) => {
+      const aBase = a.match(/[a-zA-Z]+/)[0].toLowerCase()
+      const bBase = b.match(/[a-zA-Z]+/)[0].toLowerCase()
+
+      const aNum = parseInt(a.match(/\d+/)?.[0]) || 1
+      const bNum = parseInt(b.match(/\d+/)?.[0]) || 1
+
+      if (aBase === bBase) {
+        return aBase === 'xs' ? bNum - aNum : aNum - bNum
+      }
+
+      return baseSizeOrder[aBase] - baseSizeOrder[bBase]
+    })
   }
 
   if (schema?.schema?.length > 0 && schema?.kind === 'enum' && !hasIgnoredTypes && optionItem?.restriction !== 'only') {
@@ -201,8 +222,11 @@ const code = computed(() => {
     if (value === 'undefined' || value === null) {
       continue
     }
+    if (key === 'modelValue' && props.ignoreVModel) {
+      continue
+    }
 
-    code += ` ${(typeof value === 'boolean' && value !== true) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'value' : kebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
+    code += ` ${(typeof value === 'boolean' && (value !== true || key === 'modelValue')) || typeof value === 'object' || typeof value === 'number' ? ':' : ''}${key === 'modelValue' ? 'model-value' : kebabCase(key)}${typeof value === 'boolean' && !!value && key !== 'modelValue' ? '' : `="${typeof value === 'object' ? renderObject(value) : value}"`}`
   }
 
   if (props.slots) {
@@ -247,7 +271,7 @@ function renderObject (obj: any) {
 const shikiHighlighter = useShikiHighlighter({})
 const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
 const { data: ast } = await useAsyncData(
-  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots })}`,
+  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`,
   async () => {
     let formatted = ''
     try {
