@@ -8,6 +8,7 @@ overrides:
   '@nuxt/kit': 3.8.2
   '@nuxt/schema': 3.8.2
   vue: 3.3.11
+  tailwindcss: 3.4.0
 
 importers:
 
@@ -80,7 +81,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
       tailwindcss:
-        specifier: ^3.4.0
+        specifier: 3.4.0
         version: 3.4.0
     devDependencies:
       '@nuxt/eslint-config':
@@ -638,7 +639,7 @@ packages:
   /@egoist/tailwindcss-icons@1.7.1(tailwindcss@3.4.0):
     resolution: {integrity: sha512-7DqxXxKNr7f1uZbfsIOj8c1d2pJxm+k1+BgUcqvwCQeGcp4zDf/bICv4vc0JTDZG1JpY0ZO4a2PsBb0hKEwD2A==}
     peerDependencies:
-      tailwindcss: '*'
+      tailwindcss: 3.4.0
     dependencies:
       '@iconify/utils': 2.1.12
       tailwindcss: 3.4.0
@@ -1048,7 +1049,7 @@ packages:
     resolution: {integrity: sha512-fpL830Fln1SykOCboExsWr3JIVeQKieLJ3XytLe/tt1A0XzqUthOftDmjcCYLW62w7mQI7wXcoPXr3tZ9QfGxw==}
     engines: {node: '>=10'}
     peerDependencies:
-      tailwindcss: ^3.0
+      tailwindcss: 3.4.0
     dependencies:
       tailwindcss: 3.4.0
 
@@ -1998,8 +1999,8 @@ packages:
       postcss-custom-properties: 13.3.2(postcss@8.4.32)
       postcss-nesting: 12.0.1(postcss@8.4.32)
       radix3: 1.1.0
-      tailwind-config-viewer: 1.7.3(tailwindcss@3.3.7)
-      tailwindcss: 3.3.7
+      tailwind-config-viewer: 1.7.3(tailwindcss@3.4.0)
+      tailwindcss: 3.4.0
       ufo: 1.3.2
       uncrypto: 0.1.3
     transitivePeerDependencies:
@@ -2825,21 +2826,21 @@ packages:
   /@tailwindcss/aspect-ratio@0.4.2(tailwindcss@3.4.0):
     resolution: {integrity: sha512-8QPrypskfBa7QIMuKHg2TA7BqES6vhBrDLOv8Unb6FcFyd3TjKbc6lcmb9UPQHxfl24sXoJ41ux/H7qQQvfaSQ==}
     peerDependencies:
-      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+      tailwindcss: 3.4.0
     dependencies:
       tailwindcss: 3.4.0
 
   /@tailwindcss/container-queries@0.1.1(tailwindcss@3.4.0):
     resolution: {integrity: sha512-p18dswChx6WnTSaJCSGx6lTmrGzNNvm2FtXmiO6AuA1V4U5REyoqwmT6kgAsIMdjo07QdAfYXHJ4hnMtfHzWgA==}
     peerDependencies:
-      tailwindcss: '>=3.2.0'
+      tailwindcss: 3.4.0
     dependencies:
       tailwindcss: 3.4.0
 
   /@tailwindcss/forms@0.5.7(tailwindcss@3.4.0):
     resolution: {integrity: sha512-QE7X69iQI+ZXwldE+rzasvbJiyV/ju1FGHH0Qn2W3FKbuYtqp8LKcy6iSw79fVUT5/Vvf+0XgLCeYVG+UV6hOw==}
     peerDependencies:
-      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
+      tailwindcss: 3.4.0
     dependencies:
       mini-svg-data-uri: 1.4.4
       tailwindcss: 3.4.0
@@ -2847,7 +2848,7 @@ packages:
   /@tailwindcss/typography@0.5.10(tailwindcss@3.4.0):
     resolution: {integrity: sha512-Pe8BuPJQJd3FfRnm6H0ulKIGoMEQS+Vq01R6M5aCrFB/ccR/shT+0kXLjouGC1gFLm9hopTFN+DMP0pfwRWzPw==}
     peerDependencies:
-      tailwindcss: '>=3.0.0 || insiders'
+      tailwindcss: 3.4.0
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
@@ -11371,12 +11372,12 @@ packages:
   /tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
 
-  /tailwind-config-viewer@1.7.3(tailwindcss@3.3.7):
+  /tailwind-config-viewer@1.7.3(tailwindcss@3.4.0):
     resolution: {integrity: sha512-rgeFXe9vL4njtaSI1y2uUAD1aRx05RYHbReN72ARAVEVSlNmS0Zf46pj3/ORc3xQwLK/AzbaIs6UFcK7hJSIlA==}
     engines: {node: '>=8'}
     hasBin: true
     peerDependencies:
-      tailwindcss: 1 || 2 || 2.0.1-compat || 3
+      tailwindcss: 3.4.0
     dependencies:
       '@koa/router': 12.0.1
       commander: 6.2.1
@@ -11386,7 +11387,7 @@ packages:
       open: 7.4.2
       portfinder: 1.0.32
       replace-in-file: 6.3.5
-      tailwindcss: 3.3.7
+      tailwindcss: 3.4.0
     transitivePeerDependencies:
       - supports-color
 
@@ -11399,36 +11400,6 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.5
     dev: false
-
-  /tailwindcss@3.3.7:
-    resolution: {integrity: sha512-pjgQxDZPvyS/nG3ZYkyCvsbONJl7GdOejfm24iMt2ElYQQw8Jc4p0m8RdMp7mznPD0kUhfzwV3zAwa80qI0zmQ==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
-    dependencies:
-      '@alloc/quick-lru': 5.2.0
-      arg: 5.0.2
-      chokidar: 3.5.3
-      didyoumean: 1.2.2
-      dlv: 1.1.3
-      fast-glob: 3.3.2
-      glob-parent: 6.0.2
-      is-glob: 4.0.3
-      jiti: 1.21.0
-      lilconfig: 2.1.0
-      micromatch: 4.0.5
-      normalize-path: 3.0.0
-      object-hash: 3.0.0
-      picocolors: 1.0.0
-      postcss: 8.4.32
-      postcss-import: 15.1.0(postcss@8.4.32)
-      postcss-js: 4.0.1(postcss@8.4.32)
-      postcss-load-config: 4.0.2(postcss@8.4.32)
-      postcss-nested: 6.0.1(postcss@8.4.32)
-      postcss-selector-parser: 6.0.13
-      resolve: 1.22.8
-      sucrase: 3.34.0
-    transitivePeerDependencies:
-      - ts-node
 
   /tailwindcss@3.4.0:
     resolution: {integrity: sha512-VigzymniH77knD1dryXbyxR+ePHihHociZbXnLZHUyzf2MMs2ZVqlUrZ3FvpXP8pno9JzmILt1sZPD19M3IxtA==}
