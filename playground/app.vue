@@ -1,45 +1,19 @@
 <template>
   <UContainer class="min-h-screen flex items-center">
-    <UVerticalNavigation :links="links" />
+    <UCard class="flex-1" :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50', ring: 'ring-1 ring-gray-300 dark:ring-gray-700', divide: 'divide-y divide-gray-300 dark:divide-gray-700', header: { base: 'font-bold' } }">
+      <template #header>
+        Welcome to the playground!
+      </template>
+
+      <p class="text-gray-500 dark:text-gray-400">
+        Try your components here!
+      </p>
+    </UCard>
   </UContainer>
 </template>
 
 <script setup>
-const links = [
-  [
-    {
-      label: 'Profile',
-      avatar: {
-        src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-      },
-      badge: 100
-    }, {
-      label: 'Installation',
-      icon: 'i-heroicons-home',
-      to: '/getting-started/installation'
-    }, {
-      label: 'Vertical Navigation',
-      icon: 'i-heroicons-chart-bar',
-      to: '/navigation/vertical-navigation'
-    }, {
-      label: 'Command Palette',
-      icon: 'i-heroicons-command-line',
-      to: '/navigation/command-palette'
-    }
-  ],
-  [
-    {
-      label: 'Examples',
-      icon: 'i-heroicons-light-bulb',
-      to: '/getting-started/examples#verticalnavigation'
-    },
-    {
-      label: 'Help',
-      icon: 'i-heroicons-question-mark-circle',
-      to: '/getting-started/examples'
-    }
-  ]
-]
+
 </script>
 
 <style>
