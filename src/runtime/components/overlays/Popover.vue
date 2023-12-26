@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ref, toRef, onMounted, defineComponent } from 'vue'
+import { computed, ref, toRef, onMounted, defineComponent, watch } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel } from '@headlessui/vue'
@@ -94,8 +94,8 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:open'],
-  setup (props) {
+  emits: ['update:open', 'open', 'close'],
+  setup (props, { emit }) {
     const { ui, attrs } = useUI('popover', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
@@ -169,6 +169,11 @@ export default defineComponent({
         closeTimeout = null
       }, props.closeDelay)
     }
+
+    watch(() => popoverApi.value?.popoverState, (newValue: number, oldValue: number) => {
+      if (oldValue === undefined) return
+      emit(newValue === 0 ? 'open' : 'close')
+    })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

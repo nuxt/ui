@@ -102,6 +102,7 @@ export default defineNuxtConfig({
       process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, '.docs', 'components') : '.c12'
     ],
     metaFields: {
+      type: false,
       props: true,
       slots: true,
       events: false,
@@ -126,5 +127,10 @@ export default defineNuxtConfig({
   },
   typescript: {
     strict: false
+  },
+  vite: {
+    optimizeDeps: {
+      include: ['date-fns']
+    }
   }
 })

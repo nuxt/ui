@@ -104,7 +104,8 @@ export default defineComponent({
       return props.state
     }
 
-    async function onSubmit (event: SubmitEvent) {
+    async function onSubmit (payload: Event) {
+      const event = payload as SubmitEvent
       try {
         if (props.validateOn?.includes('submit')) {
           await validate()

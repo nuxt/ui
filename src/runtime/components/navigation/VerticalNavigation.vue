@@ -1,48 +1,54 @@
 <template>
   <nav :class="ui.wrapper" v-bind="attrs">
-    <div v-for="(section, sectionIndex) of linkSections" :key="`linkSection${sectionIndex}`">
-      <ULink
-        v-for="(link, index) of section"
-        v-slot="{ isActive }"
-        :key="`linkSection${sectionIndex}-${index}`"
-        v-bind="omit(link, ['label', 'icon', 'iconClass', 'avatar', 'badge', 'click'])"
-        :class="[ui.base, ui.padding, ui.width, ui.ring, ui.rounded, ui.font, ui.size]"
-        :active-class="ui.active"
-        :inactive-class="ui.inactive"
-        @click="link.click"
-        @keyup.enter="$event.target.blur()"
-      >
-        <slot name="avatar" :link="link" :is-active="isActive">
-          <UAvatar
-            v-if="link.avatar"
-            v-bind="{ size: ui.avatar.size, ...link.avatar }"
-            :class="[ui.avatar.base]"
-          />
-        </slot>
-        <slot name="icon" :link="link" :is-active="isActive">
-          <UIcon
-            v-if="link.icon"
-            :name="link.icon"
-            :class="[ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive, link.iconClass]"
-          />
-        </slot>
-        <slot :link="link" :is-active="isActive">
-          <span v-if="link.label" :class="ui.label">{{ link.label }}</span>
-        </slot>
-        <slot name="badge" :link="link" :is-active="isActive">
-          <span v-if="link.badge" :class="[ui.badge.base, isActive ? ui.badge.active : ui.badge.inactive]">
-            {{ link.badge }}
-          </span>
-        </slot>
-      </ULink>
+    <ul v-for="(section, sectionIndex) of linkSections" :key="`linkSection${sectionIndex}`">
+      <li v-for="(link, index) of section" :key="`linkSection${sectionIndex}-${index}`">
+        <ULink
+          v-slot="{ isActive }"
+          v-bind="omit(link, ['label', 'labelClass', 'icon', 'iconClass', 'avatar', 'badge', 'click'])"
+          :class="[ui.base, ui.padding, ui.width, ui.ring, ui.rounded, ui.font, ui.size]"
+          :active-class="ui.active"
+          :inactive-class="ui.inactive"
+          @click="link.click"
+          @keyup.enter="$event.target.blur()"
+        >
+          <slot name="avatar" :link="link" :is-active="isActive">
+            <UAvatar
+              v-if="link.avatar"
+              v-bind="{ size: ui.avatar.size, ...link.avatar }"
+              :class="[ui.avatar.base]"
+            />
+          </slot>
+          <slot name="icon" :link="link" :is-active="isActive">
+            <UIcon
+              v-if="link.icon"
+              :name="link.icon"
+              :class="twMerge(twJoin(ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive), link.iconClass)"
+            />
+          </slot>
+          <slot :link="link" :is-active="isActive">
+            <span v-if="link.label" :class="twMerge(ui.label, link.labelClass)">
+              <span v-if="isActive" class="sr-only">
+                Current page:
+              </span>
+              {{ link.label }}
+            </span>
+          </slot>
+          <slot name="badge" :link="link" :is-active="isActive">
+            <span v-if="link.badge" :class="[ui.badge.base, isActive ? ui.badge.active : ui.badge.inactive]">
+              {{ link.badge }}
+            </span>
+          </slot>
+        </ULink>
+      </li>
       <UDivider v-if="sectionIndex < linkSections.length - 1" :ui="ui.divider" />
-    </div>
+    </ul>
   </nav>
 </template>
 
 <script lang="ts">
 import { toRef, defineComponent, computed } from 'vue'
 import type { PropType } from 'vue'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULink from '../elements/Link.vue'
@@ -90,7 +96,9 @@ export default defineComponent({
       ui,
       attrs,
       omit,
-      linkSections
+      linkSections,
+      twMerge,
+      twJoin
     }
   }
 })
