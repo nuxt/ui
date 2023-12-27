@@ -1,7 +1,7 @@
 <template>
   <nav :class="ui.wrapper" v-bind="attrs">
-    <ul>
-      <li v-for="(link, index) of links" :key="index">
+    <ul v-for="(section, sectionIndex) of linkSections" :key="`linkSection${sectionIndex}`">
+      <li v-for="(link, index) of section" :key="`linkSection${sectionIndex}-${index}`">
         <ULink
           v-slot="{ isActive }"
           v-bind="omit(link, ['label', 'labelClass', 'icon', 'iconClass', 'avatar', 'badge', 'click'])"
@@ -40,17 +40,19 @@
           </slot>
         </ULink>
       </li>
+      <UDivider v-if="sectionIndex < linkSections.length - 1" :ui="ui.divider" />
     </ul>
   </nav>
 </template>
 
 <script lang="ts">
-import { toRef, defineComponent } from 'vue'
+import { toRef, defineComponent, computed } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import ULink from '../elements/Link.vue'
+import UDivider from '../layout/Divider.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, omit } from '../../utils'
 import type { VerticalNavigationLink, Strategy } from '../../types'
@@ -64,12 +66,13 @@ export default defineComponent({
   components: {
     UIcon,
     UAvatar,
-    ULink
+    ULink,
+    UDivider
   },
   inheritAttrs: false,
   props: {
     links: {
-      type: Array as PropType<VerticalNavigationLink[]>,
+      type: Array as PropType<VerticalNavigationLink[][] | VerticalNavigationLink[]>,
       default: () => []
     },
     class: {
@@ -84,11 +87,16 @@ export default defineComponent({
   setup (props) {
     const { ui, attrs } = useUI('verticalNavigation', toRef(props, 'ui'), config, toRef(props, 'class'))
 
+    const linkSections = computed(() => {
+      return (Array.isArray(props.links[0]) ? props.links : [props.links]) as VerticalNavigationLink[][]
+    })
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
       omit,
+      linkSections,
       twMerge,
       twJoin
     }
