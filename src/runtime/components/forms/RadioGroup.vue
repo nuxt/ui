@@ -12,7 +12,7 @@
         :label="option.label"
         :model-value="modelValue"
         :value="option.value"
-        :disabled="disabled"
+        :disabled="option.disabled || disabled"
         :ui="uiRadio"
         @change="onUpdate(option.value)"
       >
@@ -99,7 +99,7 @@ export default defineComponent({
     const { ui, attrs } = useUI('radioGroup', toRef(props, 'ui'), config, toRef(props, 'class'))
     const { ui: uiRadio } = useUI('radio', toRef(props, 'uiRadio'), configRadio)
 
-    const { emitFormChange, color, name } = useFormGroup({ ...props, isFieldset: true }, config)
+    const { emitFormChange, color, name } = useFormGroup(props, config)
     provide('radio-group', { color, name })
 
     const onUpdate = (value: any) => {

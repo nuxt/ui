@@ -5,19 +5,19 @@
         <ULink
           as="span"
           :class="[ui.base, index === links.length - 1 ? ui.active : !!link.to ? ui.inactive : '']"
-          v-bind="omit(link, ['label', 'icon', 'iconClass'])"
+          v-bind="omit(link, ['label', 'labelClass', 'icon', 'iconClass'])"
           :aria-current="index === links.length - 1 ? 'page' : undefined"
         >
           <slot name="icon" :link="link" :index="index" :is-active="index === links.length - 1">
             <UIcon
               v-if="link.icon"
               :name="link.icon"
-              :class="[ui.icon.base, index === links.length - 1 ? ui.icon.active : !!link.to ? ui.icon.inactive : '', link.iconClass]"
+              :class="twMerge(twJoin(ui.icon.base, index === links.length - 1 ? ui.icon.active : !!link.to ? ui.icon.inactive : ''), link.iconClass)"
             />
           </slot>
 
           <slot :link="link" :index="index" :is-active="index === links.length - 1">
-            {{ link.label }}
+            <span v-if="link.label" :class="twMerge(ui.label, link.labelClass)">{{ link.label }}</span>
           </slot>
         </ULink>
 
@@ -35,6 +35,7 @@
 <script lang="ts">
 import { defineComponent, toRef } from 'vue'
 import type { PropType } from 'vue'
+import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
@@ -77,7 +78,9 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
-      omit
+      omit,
+      twMerge,
+      twJoin
     }
   }
 })

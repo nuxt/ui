@@ -110,6 +110,10 @@ const props = defineProps({
   componentClass: {
     type: String,
     default: ''
+  },
+  ignoreVModel: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -216,6 +220,9 @@ const code = computed(() => {
 <${name}`
   for (const [key, value] of Object.entries(fullProps.value)) {
     if (value === 'undefined' || value === null) {
+      continue
+    }
+    if (key === 'modelValue' && props.ignoreVModel) {
       continue
     }
 

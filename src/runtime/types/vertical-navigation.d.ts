@@ -3,6 +3,7 @@ import type { Avatar } from './avatar'
 
 export interface VerticalNavigationLink extends Link {
   label: string
+  labelClass?: string
   icon?: string
   iconClass?: string
   avatar?: Avatar

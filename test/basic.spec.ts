@@ -1,46 +1,58 @@
 import { describe, expect, it } from 'vitest'
-import module from '../src/module'
+import { defu } from 'defu'
+import { join } from 'pathe'
 import { loadNuxt } from '@nuxt/kit'
-import { join } from 'path'
+import type { NuxtConfig } from '@nuxt/schema'
+import type * as tailwindcss from 'tailwindcss'
+type TWConfig = tailwindcss.Config;
+import type resolveConfig from 'tailwindcss/resolveConfig'
 
-// TODO: fix these anys
-async function getTailwindCSSConfig (overrides: any = {}): Promise<[any, any]> {
-  overrides.modules = [module]
-  overrides.ssr = overrides.ssr ?? false
-  overrides.hooks = overrides.hooks ?? {}
-  return new Promise((resolve) => {
-    overrides.hooks['tailwindcss:resolvedConfig'] = async (config: any) => {
-      resolve([config, nuxt])
-    }
-    const nuxt = loadNuxt({
-      cwd: join(process.cwd(), 'fixtures', 'empty'),
-      dev: false,
-      overrides
-    })
+async function getTailwindCSSConfig (overrides: Partial<NuxtConfig> = {}) {
+  let tailwindConfig: ReturnType<typeof resolveConfig<TWConfig>>
+  const nuxt = await loadNuxt({
+    ready: true,
+    cwd: join(process.cwd(), 'fixtures', 'empty'),
+    dev: false,
+    overrides: defu(overrides, {
+      ssr: false,
+      modules: ['../../src/module'],
+      hooks: {
+        'tailwindcss:resolvedConfig' (config) {
+          tailwindConfig = config
+        }
+      }
+    } satisfies NuxtConfig) as NuxtConfig
   })
+  const nuxtOptions = structuredClone({
+    plugins: nuxt.options.plugins.map(p => typeof p !== 'string' && ({ src: p.src, mode: p.mode })),
+    _requiredModules: nuxt.options._requiredModules,
+    appConfig: nuxt.options.appConfig
+  })
+  await nuxt.close()
+
+  return {
+    nuxtOptions,
+    tailwindConfig
+  }
 }
 
 describe('nuxt', () => {
   it('should add plugins and modules to nuxt', async () => {
-    const [, lnuxt] = await getTailwindCSSConfig()
-    await lnuxt.then((nuxt: { options: { plugins: any; _requiredModules: any; appConfig: { ui: any } }; close: () => void }) => {
-      expect(nuxt.options.plugins).toContainEqual(
-        expect.objectContaining({
-          src: expect.stringContaining('plugins/colors'),
-          mode: 'all'
-        })
-      )
-      expect(nuxt.options._requiredModules).toContain({
-        '@nuxtjs/color-mode': true,
-        '@nuxtjs/tailwindcss': true
+    const { nuxtOptions } = await getTailwindCSSConfig()
+    expect(nuxtOptions.plugins).toContainEqual(
+      expect.objectContaining({
+        src: expect.stringContaining('plugins/colors'),
+        mode: 'all'
       })
-      // default values in appConfig
-      expect(nuxt.options.appConfig.ui).toContain({
-        primary: 'green',
-        gray: 'cool'
-      })
-      // TODO: this should be done inside getTailwindCSSConfig
-      nuxt.close()
+    )
+    expect(nuxtOptions._requiredModules).toMatchObject({
+      '@nuxtjs/color-mode': true,
+      '@nuxtjs/tailwindcss': true
+    })
+    // default values in appConfig
+    expect(nuxtOptions.appConfig.ui).toMatchObject({
+      primary: 'green',
+      gray: 'cool'
     })
   })
 })
@@ -68,7 +80,7 @@ describe('tailwindcss config', () => {
       ['bg-(plainBlue|primary)-50', '!', /orange/] // the word "orange" should _not_ be found in any safelist pattern
     ]
   ])('%s', async (_description, tailwindcss, safelistColors, safelistPatterns) => {
-    const [config, _nuxt] = await getTailwindCSSConfig({
+    const { tailwindConfig } = await getTailwindCSSConfig({
       ui: {
         safelistColors
       },
@@ -105,19 +117,15 @@ describe('tailwindcss config', () => {
         continue
       }
       if (negate) {
-        expect(config.safelist).not.toContainEqual({
+        expect(tailwindConfig.safelist).not.toContainEqual({
           pattern: expect.toBeRegExp(safelistPattern)
         })
       } else {
-        expect(config.safelist).toContainEqual({
+        expect(tailwindConfig.safelist).toContainEqual({
           pattern: expect.toBeRegExp(safelistPattern)
         })
       }
       negate = false
     }
-
-    await _nuxt.then((n: { close: () => void }) => {
-      n.close()
-    })
   })
 })

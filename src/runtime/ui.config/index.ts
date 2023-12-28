@@ -19,6 +19,7 @@ export { default as ladder } from './elements/ladder'
 
 // Forms
 export { default as input } from './forms/input'
+export { default as inputMenu } from './forms/inputMenu'
 export { default as formGroup } from './forms/formGroup'
 export { default as textarea } from './forms/textarea'
 export { default as select } from './forms/select'
