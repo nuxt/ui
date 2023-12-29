@@ -89,7 +89,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
     const { ui, attrs } = useUI('toggle', toRef(props, 'ui'), config)
 
