@@ -152,7 +152,7 @@ export default defineComponent({
       },
       clear (path?: string) {
         if (path) {
-          errors.value = errors.value.filter((err) => err.path === path)
+          errors.value = errors.value.filter((err) => err.path !== path)
         } else {
           errors.value = []
         }
