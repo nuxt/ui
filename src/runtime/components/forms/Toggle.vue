@@ -107,8 +107,8 @@ export default defineComponent({
 
     const active = computed({
       get () {
-        if (typeof props.selectedValue === 'object') {
-          return isEqual(<unknown>props.modelValue, <unknown>props.selectedValue)
+        if (typeof props?.selectedValue === 'object') {
+          return isEqual((props.modelValue as Record<string, unknown> | unknown[]), (props.selectedValue as Record<string, unknown> | unknown[]))
         }
         return props.modelValue === props.selectedValue
       },
