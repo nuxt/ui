@@ -4,7 +4,7 @@
 
 ### 🔗 Linked issue
 
-<!-- Please ensure there is an open issue and mention its number as #123 -->
+<!-- Please ensure there is an open issue and mention its number as: Fixes #123 -->
 
 ### ❓ Type of change
 
