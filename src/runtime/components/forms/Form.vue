@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { provide, ref, type PropType, defineComponent } from 'vue'
+import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
@@ -51,10 +51,16 @@ export default defineComponent({
   setup (props, { expose, emit }) {
     const bus = useEventBus<FormEvent>(`form-${uid()}`)
 
-    bus.on(async (event) => {
-      if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
-        await validate(event.path, { silent: true })
-      }
+    onMounted(() => {
+      bus.on(async (event) => {
+        if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
+          await validate(event.path, { silent: true })
+        }
+      })
+    })
+
+    onUnmounted(() => {
+      bus.reset()
     })
 
     const errors = ref<FormError[]>([])
