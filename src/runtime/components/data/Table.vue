@@ -267,7 +267,7 @@ export default defineComponent({
       }
     }
 
-    function getRowData (row: Object, rowKey: string | string[], defaultValue: any = 'Failed to get cell value') {
+    function getRowData (row: Object, rowKey: string | string[], defaultValue: any = '') {
       return get(row, rowKey, defaultValue)
     }
 
