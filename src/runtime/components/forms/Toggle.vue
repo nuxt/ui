@@ -56,7 +56,7 @@ export default defineComponent({
       type: AnyType,
       default: false
     },
-    value: {
+    selectedValue: {
       type: AnyType,
       default: true
     },
@@ -107,13 +107,13 @@ export default defineComponent({
 
     const active = computed({
       get () {
-        if (typeof props.value === 'object') {
-          return isEqual(<unknown>props.modelValue, <unknown>props.value)
+        if (typeof props.selectedValue === 'object') {
+          return isEqual(<unknown>props.modelValue, <unknown>props.selectedValue)
         }
-        return props.modelValue === props.value
+        return props.modelValue === props.selectedValue
       },
       set (value) {
-        emit('update:modelValue', !value ? props.unselectedValue : props.value)
+        emit('update:modelValue', !value ? props.unselectedValue : props.selectedValue)
         emitFormChange()
       }
     })
