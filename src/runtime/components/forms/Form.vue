@@ -144,6 +144,9 @@ export default defineComponent({
           errors.value = errs
         }
       },
+      async submit () {
+        await onSubmit(new Event('submit'))
+      },
       getErrors (path?: string) {
         if (path) {
           return errors.value.filter((err) => err.path === path)

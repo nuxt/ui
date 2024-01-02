@@ -15,6 +15,7 @@ export interface Form<T> {
   errors: Ref<FormError[]>
   setErrors(errs: FormError[], path?: string): void
   getErrors(path?: string): FormError[]
+  submit(): Promise<void>
 }
 
 export type FormSubmitEvent<T> = SubmitEvent & { data: T }
