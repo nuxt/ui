@@ -75,7 +75,7 @@ import UButton from '../elements/Button.vue'
 import UIcon from '../elements/Icon.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, omit, get } from '../../utils'
+import { mergeConfig, get } from '../../utils'
 import type { Strategy, Button } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -104,7 +104,7 @@ export default defineComponent({
       default: () => defaultComparator
     },
     rows: {
-      type: Array as PropType<{ [key: string]: any, click?: Function }[]>,
+      type: Array as PropType<{ [key: string]: any }[]>,
       default: () => []
     },
     columns: {
@@ -156,7 +156,7 @@ export default defineComponent({
   setup (props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: upperFirst(key), sortable: false, sortFn: defaultSortFn })))
+    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined, sortFn: defaultSortFn })))
 
     const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
 

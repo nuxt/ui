@@ -13,7 +13,10 @@ export default {
       size: 'h-4 w-4',
       padding: 'ps-10'
     },
-    closeButton: 'absolute end-4'
+    closeButton: {
+      base: 'absolute end-4',
+      padding: 'pe-10'
+    }
   },
   emptyState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',

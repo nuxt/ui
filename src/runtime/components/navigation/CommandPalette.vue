@@ -14,14 +14,14 @@
       <HComboboxInput
         ref="comboboxInput"
         :value="query"
-        :class="[ui.input.base, ui.input.size, ui.input.height, ui.input.padding, icon && ui.input.icon.padding]"
+        :class="[ui.input.base, ui.input.size, ui.input.height, ui.input.padding, icon && ui.input.icon.padding, closeButton && ui.input.closeButton.padding]"
         :placeholder="placeholder"
         :aria-label="placeholder"
         autocomplete="off"
         @change="query = $event.target.value"
       />
 
-      <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(ui.default.closeButton || {}), ...closeButton }" :class="ui.input.closeButton" @click="onClear" />
+      <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(ui.default.closeButton || {}), ...closeButton }" :class="ui.input.closeButton.base" @click="onClear" />
     </div>
 
     <HComboboxOptions
@@ -227,52 +227,57 @@ export default defineComponent({
 
     const { results } = useFuse(query, commands, options)
 
-    const groups = computed(() => {
-      const groups: Group[] = []
-
-      const groupedCommands: Record<string, typeof results['value']> = {}
-      for (const command of results.value) {
-        if (!command.item.group) {
-          continue
-        }
-        groupedCommands[command.item.group] ||= []
-        groupedCommands[command.item.group].push(command)
+    function getGroupWithCommands (group: Group, commands: Command[]) {
+      if (!group) {
+        return
       }
-      for (const key in groupedCommands) {
+
+      if (group.filter && typeof group.filter === 'function') {
+        commands = group.filter(query.value, commands)
+      }
+
+      return {
+        ...group,
+        commands: commands.slice(0, options.value.resultLimit)
+      }
+    }
+
+    const groups = computed(() => {
+      if (!results.value) {
+        return []
+      }
+
+      const groupedCommands: Record<string, Command[]> = results.value.reduce((acc, command) => {
+        const { item, ...data } = command
+        if (!item.group) {
+          return acc
+        }
+
+        acc[item.group] ||= []
+        acc[item.group].push({ ...item, ...data })
+
+        return acc
+      }, {})
+
+      const groups: Group[] = Object.entries(groupedCommands).map(([key, commands]) => {
         const group = props.groups.find(group => group.key === key)
         if (!group) {
-          continue
+          return null
         }
 
-        let commands = groupedCommands[key].map((result) => {
-          const { item, ...data } = result
+        return getGroupWithCommands(group, commands)
+      }).filter(Boolean)
 
-          return {
-            ...item,
-            ...data
-          } as Command
-        })
+      const searchGroups = props.groups.filter(group => !!group.search && searchResults.value[group.key]?.length).map(group => {
+        const commands = (searchResults.value[group.key] || [])
 
-        if (group.filter && typeof group.filter === 'function') {
-          commands = group.filter(query.value, commands)
-        }
+        return getGroupWithCommands(group, [...commands])
+      })
 
-        groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
-      }
-
-      for (const group of props.groups) {
-        if (group.search && searchResults.value[group.key]?.length) {
-          let commands = (searchResults.value[group.key] || [])
-
-          if (group.filter && typeof group.filter === 'function') {
-            commands = group.filter(query.value, commands)
-          }
-
-          groups.push({ ...group, commands: commands.slice(0, options.value.resultLimit) })
-        }
-      }
-
-      return groups
+      return [
+        ...groups,
+        ...searchGroups
+      ]
     })
 
     const debouncedSearch = useDebounceFn(async () => {

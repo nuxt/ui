@@ -1,8 +1,8 @@
-import { mountSuspended } from 'nuxt-vitest/utils'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import path from 'path'
 
 export default async function (nameOrHtml: string, options: any, component: any) {
-  let html
+  let html: string
   const name = path.parse(component.__file).name
   if (options === undefined) {
     const app = {

@@ -49,7 +49,7 @@ const navigation = computed(() => {
     ]
   }
 
-  return nav.value.filter(item => item._path !== '/dev')
+  return nav.value?.filter(item => item._path !== '/dev') || []
 })
 
 const links = computed(() => {

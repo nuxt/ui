@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.11.1](https://github.com/nuxt/ui/compare/v2.11.0...v2.11.1) (2023-12-11)
+
+
+### Bug Fixes
+
+* **Breadcrumb:** handle divider in rtl ([#1049](https://github.com/nuxt/ui/issues/1049)) ([e53cdea](https://github.com/nuxt/ui/commit/e53cdeaf0b3746da76cb6a658a5f71064d97fc9a))
+* **CommandPalette:** improve performances and avoid multiple recompute ([db508b2](https://github.com/nuxt/ui/commit/db508b218f5277b2522566f790bd268eae2ee1e5))
+* **CommandPalette:** missing right padding on input with close button ([ad33b26](https://github.com/nuxt/ui/commit/ad33b26729b1bf3d21f8d480e04c197f4fbb6119))
+* **components:** move remaining classes to config ([#1039](https://github.com/nuxt/ui/issues/1039)) ([e408eab](https://github.com/nuxt/ui/commit/e408eabd8b841cdf8c71ce27c35c9675f2db8625))
+* **module:** prevent class merging on `default` children ([f07968a](https://github.com/nuxt/ui/commit/f07968afef263d38183ce6c9cd9185ef7eee0494)), closes [#1076](https://github.com/nuxt/ui/issues/1076)
+* **Notification:** handle dynamic backgrounds ([#1063](https://github.com/nuxt/ui/issues/1063)) ([1f0f618](https://github.com/nuxt/ui/commit/1f0f6181db7fa1ab45b8f7fec8df1cedccaec688))
+* **RadioGroup:** props reactivity issues ([#1065](https://github.com/nuxt/ui/issues/1065)) ([7196d81](https://github.com/nuxt/ui/commit/7196d81b4cecf1711a01bed5fed1236ab3b2398b))
+* **types:** favor `Record<string, any>>` instead of `object` ([4d72a75](https://github.com/nuxt/ui/commit/4d72a758fad5cffa09f3aaf6b3df9baf7edc2a9f))
+* **types:** improve with strict mode ([#1041](https://github.com/nuxt/ui/issues/1041)) ([4a9b66a](https://github.com/nuxt/ui/commit/4a9b66aeb32a332e2d5be7e236e5d4567044b3e2))
+* **types:** workaround for `popper` weak type ([5718dfd](https://github.com/nuxt/ui/commit/5718dfd69a7040987354485b30f7da7aee342abb)), closes [#644](https://github.com/nuxt/ui/issues/644)
+
+
+### Reverts
+
+* Revert "chore(deps): pin `vitest`" ([6984989](https://github.com/nuxt/ui/commit/6984989a2c20fbde177d1e64ea1a7cae07f03c4d))
+
 ## [2.11.0](https://github.com/nuxt/ui/compare/v2.10.0...v2.11.0) (2023-11-23)
 
 
