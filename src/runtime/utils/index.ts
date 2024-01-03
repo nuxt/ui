@@ -64,15 +64,6 @@ export function getSlotsChildren (slots: any) {
   return children || []
 }
 
-export function isEqual<T extends { [K: string]: any }> (x: T, y: T): boolean {
-  const ok = Object.keys
-  const tx = typeof x
-  const ty = typeof y
-  return x && y && tx === 'object' && tx === ty
-      ? (ok(x).length === ok(y).length && ok(x).every(key => isEqual(x[key], y[key])))
-      : (x === y)
-}
-
 /**
  * "123-foo" will be parsed to 123
  * This is used for the .number modifier in v-model
