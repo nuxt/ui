@@ -79,7 +79,7 @@
   "resolutions": {
     "@nuxt/kit": "3.9.0",
     "@nuxt/schema": "3.9.0",
-    "vue": "3.4.3",
+    "vue": "3.4.4",
     "tailwindcss": "3.4.0"
   }
 }
