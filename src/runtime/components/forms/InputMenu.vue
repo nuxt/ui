@@ -21,7 +21,7 @@
         autocomplete="off"
         v-bind="attrs"
         :display-value="() => ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute]"
-        @change="query = $event.target.value"
+        @change="onChange"
       />
 
       <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
@@ -373,10 +373,14 @@ export default defineComponent({
       }
     })
 
-    function onUpdate (event: any) {
-      emit('update:modelValue', event)
-      emit('change', event)
-      emitFormChange()
+    function onUpdate(event: any) {
+      emit('update:modelValue', event);
+      emitFormChange();
+    }
+
+    function onChange(event: any) {
+      query.value = event.target.value
+      emit('change', query.value);
     }
 
     return {
@@ -404,7 +408,8 @@ export default defineComponent({
       trailingWrapperIconClass,
       filteredOptions,
       query,
-      onUpdate
+      onUpdate,
+      onChange
     }
   }
 })
