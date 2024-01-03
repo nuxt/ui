@@ -119,7 +119,8 @@ export default defineComponent({
       })
     }
 
-    function onEnter (el: HTMLElement, done) {
+    function onEnter (_el: Element, done: () => void) {
+      const el = _el as HTMLElement
       el.style.height = '0'
       el.offsetHeight // Trigger a reflow, flushing the CSS changes
       el.style.height = el.scrollHeight + 'px'
@@ -127,16 +128,19 @@ export default defineComponent({
       el.addEventListener('transitionend', done, { once: true })
     }
 
-    function onBeforeLeave (el: HTMLElement) {
+    function onBeforeLeave (_el: Element) {
+      const el = _el as HTMLElement
       el.style.height = el.scrollHeight + 'px'
       el.offsetHeight // Trigger a reflow, flushing the CSS changes
     }
 
-    function onAfterEnter (el: HTMLElement) {
+    function onAfterEnter (_el: Element) {
+      const el = _el as HTMLElement
       el.style.height = 'auto'
     }
 
-    function onLeave (el: HTMLElement, done) {
+    function onLeave (_el: Element, done: () => void) {
+      const el = _el as HTMLElement
       el.style.height = '0'
 
       el.addEventListener('transitionend', done, { once: true })
