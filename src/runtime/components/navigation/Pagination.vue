@@ -4,7 +4,7 @@
       <UButton
         v-if="firstButton && showFirst"
         :size="size"
-        :disabled="!canGoFirstOrPrev"
+        :disabled="!canGoFirstOrPrev || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.firstButton || {}), ...firstButton }"
         :ui="{ rounded: '' }"
@@ -17,7 +17,7 @@
       <UButton
         v-if="prevButton"
         :size="size"
-        :disabled="!canGoFirstOrPrev"
+        :disabled="!canGoFirstOrPrev || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.prevButton || {}), ...prevButton }"
         :ui="{ rounded: '' }"
@@ -30,6 +30,7 @@
       v-for="(page, index) of displayedPages"
       :key="`${page}-${index}`"
       :size="size"
+      :disabled="disabled"
       :label="`${page}`"
       v-bind="page === currentPage ? { ...(ui.default.activeButton || {}), ...activeButton } : { ...(ui.default.inactiveButton || {}), ...inactiveButton }"
       :class="[{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }, ui.base, ui.rounded]"
@@ -41,7 +42,7 @@
       <UButton
         v-if="nextButton"
         :size="size"
-        :disabled="!canGoLastOrNext"
+        :disabled="!canGoLastOrNext || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.nextButton || {}), ...nextButton }"
         :ui="{ rounded: '' }"
@@ -54,7 +55,7 @@
       <UButton
         v-if="lastButton && showLast"
         :size="size"
-        :disabled="!canGoLastOrNext"
+        :disabled="!canGoLastOrNext || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.lastButton || {}), ...lastButton }"
         :ui="{ rounded: '' }"
@@ -104,6 +105,10 @@ export default defineComponent({
       validate (value) {
         return value >= 5 && value < Number.MAX_VALUE
       }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     },
     size: {
       type: String as PropType<ButtonSize>,
