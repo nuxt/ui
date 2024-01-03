@@ -152,9 +152,32 @@ export default defineComponent({
     })
 
     const containerStyle = computed(() => {
-      const offsetDistance = (props.popper as PopperOptions)?.offsetDistance || (ui.value.popper as PopperOptions)?.offsetDistance || 8
+      if (props.mode !== 'hover') {
+        return {}
+      }
 
-      return props.mode === 'hover' ? { paddingTop: `${offsetDistance}px`, paddingBottom: `${offsetDistance}px` } : {}
+      const offsetDistance = (props.popper as PopperOptions)?.offsetDistance || (ui.value.popper as PopperOptions)?.offsetDistance || 8
+      const placement = popper.value.placement?.split('-')[0]
+      const padding = `${offsetDistance}px`
+
+      if (placement === 'top' || placement === 'bottom') {
+        return {
+          paddingTop: padding,
+          paddingBottom: padding
+        }
+      } else if (placement === 'left' || placement === 'right') {
+        return {
+          paddingLeft: padding,
+          paddingRight: padding
+        }
+      } else {
+        return {
+          paddingTop: padding,
+          paddingBottom: padding,
+          paddingLeft: padding,
+          paddingRight: padding
+        }
+      }
     })
 
     function onMouseOver () {
