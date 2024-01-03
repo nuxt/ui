@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable-next-line vue/no-template-shadow -->
   <HMenu v-slot="{ open }" as="div" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HMenuButton
       ref="trigger"
@@ -19,6 +20,7 @@
       <Transition appear v-bind="ui.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
+
           <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
             <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
               <NuxtLink v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ href, target, rel, navigate, isExternal }" v-bind="omit(item, ['label', 'labelClass', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'class', 'click'])" custom>
@@ -53,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, toRef, onMounted, resolveComponent } from 'vue'
+import { defineComponent, ref, computed, watch, toRef, onMounted, resolveComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem } from '@headlessui/vue'
 import { defu } from 'defu'
@@ -92,6 +94,10 @@ export default defineComponent({
       default: 'click',
       validator: (value: string) => ['click', 'hover'].includes(value)
     },
+    open: {
+      type: Boolean,
+      default: undefined
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -117,7 +123,8 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  emits: ['update:open'],
+  setup (props, { emit }) {
     const { ui, attrs } = useUI('dropdown', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
@@ -131,15 +138,17 @@ export default defineComponent({
     let closeTimeout: NodeJS.Timeout | null = null
 
     onMounted(() => {
-      setTimeout(() => {
-        // @ts-expect-error internals
-        const menuProvides = trigger.value?.$.provides
-        if (!menuProvides) {
-          return
-        }
-        const menuProvidesSymbols = Object.getOwnPropertySymbols(menuProvides)
-        menuApi.value = menuProvidesSymbols.length && menuProvides[menuProvidesSymbols[0]]
-      }, 200)
+      // @ts-expect-error internals
+      const menuProvides = trigger.value?.$.provides
+      if (!menuProvides) {
+        return
+      }
+      const menuProvidesSymbols = Object.getOwnPropertySymbols(menuProvides)
+      menuApi.value = menuProvidesSymbols.length && menuProvides[menuProvidesSymbols[0]]
+
+      if (props.open) {
+        menuApi.value?.openMenu()
+      }
     })
 
     const containerStyle = computed(() => {
@@ -199,6 +208,23 @@ export default defineComponent({
         close()
       }
     }
+
+    watch(() => props.open, (newValue: boolean, oldValue: boolean) => {
+      if (!menuApi.value) return
+      if (oldValue === undefined || newValue === oldValue) return
+
+      if (newValue) {
+        menuApi.value.openMenu()
+      } else {
+        menuApi.value.closeMenu()
+      }
+    })
+
+    watch(() => menuApi.value?.menuState, (newValue: number, oldValue: number) => {
+      if (oldValue === undefined || newValue === oldValue) return
+
+      emit('update:open', newValue === 0)
+    })
 
     const NuxtLink = resolveComponent('NuxtLink')
 
