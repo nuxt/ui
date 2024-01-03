@@ -57,11 +57,11 @@ export default defineComponent({
       type: AnyType,
       default: false
     },
-    onValue: {
+    selectedValue: {
       type: AnyType,
       default: true
     },
-    offValue: {
+    unselectedValue: {
       type: AnyType,
       default: false
     },
@@ -108,13 +108,13 @@ export default defineComponent({
 
     const active = computed({
       get () {
-        if (typeof props?.onValue === 'object') {
-          return isEqual((props.modelValue as Record<string, unknown> | unknown[]), (props.onValue as Record<string, unknown> | unknown[]))
+        if (typeof props?.selectedValue === 'object') {
+          return isEqual((props.modelValue as Record<string, unknown> | unknown[]), (props.selectedValue as Record<string, unknown> | unknown[]))
         }
-        return props.modelValue === props.onValue
+        return props.modelValue === props.selectedValue
       },
       set (value) {
-        emit('update:modelValue', !value ? props.offValue : props.onValue)
+        emit('update:modelValue', !value ? props.unselectedValue : props.selectedValue)
         emitFormChange()
       }
     })
