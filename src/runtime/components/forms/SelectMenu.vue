@@ -58,14 +58,13 @@
           <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
             <HComboboxInput
               v-if="searchable"
-              ref="searchInput"
               :display-value="() => query"
               name="q"
               :placeholder="searchablePlaceholder"
               autofocus
               autocomplete="off"
               :class="uiMenu.input"
-              @change="query = $event.target.value"
+              @change="onChange"
             />
             <component
               :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
@@ -126,7 +125,7 @@
 
 <script lang="ts">
 import { ref, computed, toRef, watch, defineComponent } from 'vue'
-import type { PropType, ComponentPublicInstance } from 'vue'
+import type { PropType } from 'vue'
 import {
   Combobox as HCombobox,
   ComboboxButton as HComboboxButton,
@@ -176,6 +175,10 @@ export default defineComponent({
     modelValue: {
       type: [String, Number, Object, Array],
       default: ''
+    },
+    query: {
+      type: String,
+      default: null
     },
     by: {
       type: String,
@@ -326,7 +329,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'open', 'close', 'change'],
+  emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -341,8 +344,16 @@ export default defineComponent({
 
     const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
-    const query = ref('')
-    const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
+    const internalQuery = ref('')
+    const query = computed({
+      get () {
+        return props.query ?? internalQuery.value
+      },
+      set (value) {
+        internalQuery.value = value
+        emit('update:query', value)
+      }
+    })
 
     const selectClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -476,15 +487,13 @@ export default defineComponent({
     })
 
     function onUpdate (event: any) {
-      if (query.value && searchInput.value?.$el) {
-        query.value = ''
-        // explicitly set input text because `ComboboxInput` `displayValue` is not reactive
-        searchInput.value.$el.value = ''
-      }
-
       emit('update:modelValue', event)
       emit('change', event)
       emitFormChange()
+    }
+
+    function onChange (event: any) {
+      query.value = event.target.value
     }
 
     return {
@@ -512,8 +521,10 @@ export default defineComponent({
       trailingWrapperIconClass,
       filteredOptions,
       createOption,
+      // eslint-disable-next-line vue/no-dupe-keys
       query,
-      onUpdate
+      onUpdate,
+      onChange
     }
   }
 })
