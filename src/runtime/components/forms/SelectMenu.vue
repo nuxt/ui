@@ -22,6 +22,7 @@
 
     <component
       :is="searchable ? 'HComboboxButton' : 'HListboxButton'"
+      :id="listboxButtonId"
       ref="trigger"
       as="div"
       role="button"
@@ -151,6 +152,8 @@ import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy } 
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { select, selectMenu } from '#ui/ui.config'
+// @ts-ignore
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof select>(appConfig.ui.strategy, appConfig.ui.select, select)
 
@@ -332,8 +335,9 @@ export default defineComponent({
   emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
-
     const { ui: uiMenu } = useUI('selectMenu', toRef(props, 'uiMenu'), configMenu)
+
+    const listboxButtonId = useId('headlessui-listbox-button')
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
@@ -502,6 +506,7 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       uiMenu,
       attrs,
+      listboxButtonId,
       // eslint-disable-next-line vue/no-dupe-keys
       name,
       inputId,

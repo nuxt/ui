@@ -2,6 +2,7 @@
   <!-- eslint-disable-next-line vue/no-template-shadow -->
   <HMenu v-slot="{ open }" as="div" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HMenuButton
+      :id="menuButtonId"
       ref="trigger"
       as="div"
       :disabled="disabled"
@@ -70,6 +71,8 @@ import type { DropdownItem, PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { dropdown } from '#ui/ui.config'
+// @ts-ignore
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof dropdown>(appConfig.ui.strategy, appConfig.ui.dropdown, dropdown)
 
@@ -133,6 +136,7 @@ export default defineComponent({
 
     // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/menu/menu.ts#L131
     const menuApi = ref<any>(null)
+    const menuButtonId = useId('headlessui-menu-button')
 
     let openTimeout: NodeJS.Timeout | null = null
     let closeTimeout: NodeJS.Timeout | null = null
@@ -260,6 +264,7 @@ export default defineComponent({
       trigger,
       container,
       containerStyle,
+      menuButtonId,
       onMouseOver,
       onMouseLeave,
       onClick,

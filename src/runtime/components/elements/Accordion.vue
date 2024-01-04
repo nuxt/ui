@@ -1,8 +1,9 @@
 <template>
   <div :class="ui.wrapper">
-    <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
+    <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" as="div" :default-open="defaultOpen || item.defaultOpen">
       <HDisclosureButton
-        :ref="() => buttonRefs[index] = { open, close }"
+        :id="disclosureButtonIds[index]"
+        :ref="() => disclosureButtonRefs[index] = { open, close }"
         as="template"
         :disabled="item.disabled"
         @click="closeOthers(index, $event)"
@@ -33,7 +34,7 @@
         @leave="onLeave"
       >
         <div v-show="open">
-          <HDisclosurePanel :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]" static>
+          <HDisclosurePanel :id="disclosurePanelIds[index]" :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]" static>
             <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
               {{ item.content }}
             </slot>
@@ -56,6 +57,8 @@ import type { AccordionItem, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { accordion, button } from '#ui/ui.config'
+// @ts-ignore
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof accordion>(appConfig.ui.strategy, appConfig.ui.accordion, accordion)
 
@@ -105,14 +108,16 @@ export default defineComponent({
 
     const uiButton = computed<typeof configButton>(() => configButton)
 
-    const buttonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
+    const disclosureButtonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
+    const disclosureButtonIds = props.items.map(() => useId('headlessui-disclosure-button'))
+    const disclosurePanelIds = props.items.map(() => useId('headlessui-disclosure-panel'))
 
     function closeOthers (currentIndex: number, e: Event) {
       if (!props.items[currentIndex].closeOthers && props.multiple) {
         return
       }
 
-      buttonRefs.value.forEach((button) => {
+      disclosureButtonRefs.value.forEach((button) => {
         if (button.open) {
           button.close(e.target as EventTarget)
         }
@@ -151,7 +156,9 @@ export default defineComponent({
       ui,
       uiButton,
       attrs,
-      buttonRefs,
+      disclosureButtonRefs,
+      disclosureButtonIds,
+      disclosurePanelIds,
       closeOthers,
       omit,
       onEnter,
