@@ -29,7 +29,7 @@
         </slot>
       </span>
 
-      <HComboboxButton v-if="(isTrailing && trailingIconName) || $slots.trailing" ref="trigger" :class="trailingWrapperIconClass">
+      <HComboboxButton v-if="(isTrailing && trailingIconName) || $slots.trailing" :id="comboboxButtonId" ref="trigger" :class="trailingWrapperIconClass">
         <slot name="trailing" :disabled="disabled" :loading="loading">
           <UIcon :name="trailingIconName" :class="trailingIconClass" />
         </slot>
@@ -113,6 +113,8 @@ import type { InputSize, InputColor, InputVariant, PopperOptions, Strategy } fro
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { input, inputMenu } from '#ui/ui.config'
+// @ts-ignore
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof input>(appConfig.ui.strategy, appConfig.ui.input, input)
 
@@ -262,8 +264,9 @@ export default defineComponent({
   emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
-
     const { ui: uiMenu } = useUI('inputMenu', toRef(props, 'uiMenu'), configMenu)
+
+    const comboboxButtonId = useId('headlessui-combobox-button')
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
@@ -402,6 +405,7 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       uiMenu,
       attrs,
+      comboboxButtonId,
       // eslint-disable-next-line vue/no-dupe-keys
       name,
       inputId,
