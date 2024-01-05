@@ -99,7 +99,7 @@ import {
   ComboboxOption as HComboboxOption,
   ComboboxInput as HComboboxInput
 } from '@headlessui/vue'
-import { computedAsync } from '@vueuse/core'
+import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -234,9 +234,17 @@ export default defineComponent({
       type: String,
       default: null
     },
+    search: {
+      type: Function as PropType<((query: string) => Promise<any[]> | any[])>,
+      default: undefined
+    },
     searchAttributes: {
       type: Array,
       default: null
+    },
+    debounce: {
+      type: Number,
+      default: 200
     },
     popper: {
       type: Object as PropType<PopperOptions>,
@@ -358,7 +366,13 @@ export default defineComponent({
       )
     })
 
+    const debouncedSearch = props.search && typeof props.search === 'function' ? useDebounceFn(props.search, props.debounce) : undefined
+
     const filteredOptions = computedAsync(async () => {
+      if (debouncedSearch) {
+        return await debouncedSearch(query.value)
+      }
+
       if (query.value === '') {
         return props.options
       }
