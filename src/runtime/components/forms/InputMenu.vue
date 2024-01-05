@@ -12,7 +12,6 @@
     <div :class="uiMenu.trigger">
       <HComboboxInput
         :id="inputId"
-        ref="input"
         :name="name"
         :required="required"
         :placeholder="placeholder"
@@ -20,8 +19,8 @@
         :class="inputClass"
         autocomplete="off"
         v-bind="attrs"
-        :display-value="() => ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute]"
-        @change="query = $event.target.value"
+        :display-value="() => query ? query : ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute]"
+        @change="onChange"
       />
 
       <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
@@ -134,6 +133,10 @@ export default defineComponent({
     modelValue: {
       type: [String, Number, Object, Array],
       default: ''
+    },
+    query: {
+      type: String,
+      default: null
     },
     by: {
       type: String,
@@ -256,7 +259,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'open', 'close', 'change'],
+  emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -271,7 +274,16 @@ export default defineComponent({
 
     const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
-    const query = ref('')
+    const internalQuery = ref('')
+    const query = computed({
+      get () {
+        return props.query ?? internalQuery.value
+      },
+      set (value) {
+        internalQuery.value = value
+        emit('update:query', value)
+      }
+    })
 
     const inputClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -374,9 +386,14 @@ export default defineComponent({
     })
 
     function onUpdate (event: any) {
+      query.value = ''
       emit('update:modelValue', event)
       emit('change', event)
       emitFormChange()
+    }
+
+    function onChange (event: any) {
+      query.value = event.target.value
     }
 
     return {
@@ -403,8 +420,10 @@ export default defineComponent({
       trailingIconClass,
       trailingWrapperIconClass,
       filteredOptions,
+      // eslint-disable-next-line vue/no-dupe-keys
       query,
-      onUpdate
+      onUpdate,
+      onChange
     }
   }
 })
