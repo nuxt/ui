@@ -5,7 +5,7 @@
       :name="name"
       :value="modelValue"
       :required="required"
-      :disabled="disabled || loading"
+      :disabled="disabled"
       :class="selectClass"
       v-bind="attrs"
       @input="onInput"

@@ -8,7 +8,7 @@
       :type="type"
       :required="required"
       :placeholder="placeholder"
-      :disabled="disabled || loading"
+      :disabled="disabled"
       :class="inputClass"
       v-bind="attrs"
       @input="onInput"
