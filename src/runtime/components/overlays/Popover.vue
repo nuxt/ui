@@ -20,7 +20,7 @@
       <div v-if="open" :class="[ui.overlay.base, ui.overlay.background]" />
     </Transition>
 
-    <div v-if="open" ref="container" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
+    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
@@ -99,7 +99,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('popover', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const popper = computed<PopperOptions>(() => defu(props.popper, ui.value.popper as PopperOptions))
+    const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
 
@@ -120,6 +120,35 @@ export default defineComponent({
 
       if (props.open) {
         popoverApi.value?.togglePopover()
+      }
+    })
+
+    const containerStyle = computed(() => {
+      if (props.mode !== 'hover') {
+        return {}
+      }
+
+      const offsetDistance = (props.popper as PopperOptions)?.offsetDistance || (ui.value.popper as PopperOptions)?.offsetDistance || 8
+      const placement = popper.value.placement?.split('-')[0]
+      const padding = `${offsetDistance}px`
+
+      if (placement === 'top' || placement === 'bottom') {
+        return {
+          paddingTop: padding,
+          paddingBottom: padding
+        }
+      } else if (placement === 'left' || placement === 'right') {
+        return {
+          paddingLeft: padding,
+          paddingRight: padding
+        }
+      } else {
+        return {
+          paddingTop: padding,
+          paddingBottom: padding,
+          paddingLeft: padding,
+          paddingRight: padding
+        }
       }
     })
 
@@ -144,7 +173,6 @@ export default defineComponent({
     }
 
     function onMouseLeave () {
-      return
       if (props.mode !== 'hover' || !popoverApi.value) {
         return
       }
@@ -191,6 +219,7 @@ export default defineComponent({
       popper,
       trigger,
       container,
+      containerStyle,
       onMouseOver,
       onMouseLeave
     }
