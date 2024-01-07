@@ -36,7 +36,6 @@ import type { Strategy } from '../../types'
 import appConfig from '#build/app.config'
 import { radio } from '#ui/ui.config'
 import colors from '#ui-colors'
-import { uid } from '../../utils/uid'
 import { useFormGroup } from '../../composables/useFormGroup'
 
 const config = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
@@ -46,7 +45,7 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      default: () => null
+      default: null
     },
     value: {
       type: [String, Number, Boolean],
@@ -100,15 +99,11 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('radio', toRef(props, 'ui'), config, toRef(props, 'class'))
 
+    const randomId = ref(useId())
+    const inputId = ref(props.id ?? randomId.value)
+
     const radioGroup = inject('radio-group', null)
     const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config)
-    const inputId = ref(props.id)
-
-    onMounted(() => {
-      if (!inputId.value) {
-        inputId.value = uid()
-      }
-    })
 
     const pick = computed({
       get () {

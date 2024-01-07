@@ -65,7 +65,7 @@
     "eslint": "^8.56.0",
     "happy-dom": "^12.10.3",
     "joi": "^17.11.0",
-    "nuxt": "^3.9.0",
+    "nuxt": "npm:nuxt-nightly@3.10.0-28403219.544bc2b0",
     "release-it": "^17.0.1",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0",
@@ -77,9 +77,6 @@
     "zod": "^3.22.4"
   },
   "resolutions": {
-    "@nuxt/kit": "3.9.0",
-    "@nuxt/schema": "3.9.0",
-    "vue": "3.3.13",
     "tailwindcss": "3.4.0"
   }
 }

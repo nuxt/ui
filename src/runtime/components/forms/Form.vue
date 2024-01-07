@@ -12,7 +12,6 @@ import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types/form'
-import { uid } from '../../utils/uid'
 
 class FormException extends Error {
   constructor (message: string) {
@@ -49,7 +48,7 @@ export default defineComponent({
   },
   emits: ['submit', 'error'],
   setup (props, { expose, emit }) {
-    const bus = useEventBus<FormEvent>(`form-${uid()}`)
+    const bus = useEventBus<FormEvent>(`form-${useId()}`)
 
     onMounted(() => {
       bus.on(async (event) => {
