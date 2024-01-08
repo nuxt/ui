@@ -41,7 +41,6 @@ import { useFormGroup } from '../../composables/useFormGroup'
 const config = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
 
 export default defineComponent({
-  inheritAttrs: false,
   props: {
     id: {
       type: String,
