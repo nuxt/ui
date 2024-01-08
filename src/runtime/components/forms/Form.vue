@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmit">
+  <form :id="formId" @submit.prevent="onSubmit">
     <slot />
   </form>
 </template>
@@ -48,7 +48,8 @@ export default defineComponent({
   },
   emits: ['submit', 'error'],
   setup (props, { expose, emit }) {
-    const bus = useEventBus<FormEvent>(`form-${useId()}`)
+    const formId = useId()
+    const bus = useEventBus<FormEvent>(`form-${formId}`)
 
     onMounted(() => {
       bus.on(async (event) => {
@@ -168,6 +169,7 @@ export default defineComponent({
     } as Form<any>)
 
     return {
+      formId,
       onSubmit
     }
   }
