@@ -108,7 +108,7 @@ export default defineComponent({
       default: () => []
     },
     columns: {
-      type: Array as PropType<{ key: string, sortable?: boolean, direction?: 'asc' | 'desc', class?: string, [key: string]: any }[]>,
+      type: Array as PropType<{ key: string, sortable?: boolean, sortFn?: (a: any, b: any, direction: 'asc' | 'desc') => number, direction?: 'asc' | 'desc', class?: string, [key: string]: any }[]>,
       default: null
     },
     columnAttribute: {
@@ -156,11 +156,23 @@ export default defineComponent({
   setup (props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined })))
+    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined, sortFn: defaultSortFn })))
 
     const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
 
     const defaultSort = { column: sort.value.column, direction: null }
+
+    function defaultSortFn (a: any, b: any, direction: 'asc' | 'desc') {
+      if (a === b) {
+        return 0
+      }
+
+      if (direction === 'asc') {
+        return a < b ? -1 : 1
+      } else {
+        return a > b ? -1 : 1
+      }
+    }
 
     const rows = computed(() => {
       if (!sort.value?.column) {
@@ -173,15 +185,8 @@ export default defineComponent({
         const aValue = get(a, column)
         const bValue = get(b, column)
 
-        if (aValue === bValue) {
-          return 0
-        }
-
-        if (direction === 'asc') {
-          return aValue < bValue ? -1 : 1
-        } else {
-          return aValue > bValue ? -1 : 1
-        }
+        const sortFn = columns.value.find((col) => col.key === column)?.sortFn ?? defaultSortFn
+        return sortFn(aValue, bValue, direction)
       })
     })
 
