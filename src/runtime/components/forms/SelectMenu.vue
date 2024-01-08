@@ -6,7 +6,7 @@
     :name="name"
     :model-value="modelValue"
     :multiple="multiple"
-    :disabled="disabled || loading"
+    :disabled="disabled"
     as="div"
     :class="ui.wrapper"
     @update:model-value="onUpdate"
@@ -28,7 +28,7 @@
       :class="uiMenu.trigger"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
-        <button :id="inputId" :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
+        <button :id="inputId" :class="selectClass" :disabled="disabled" type="button" v-bind="attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
             <slot name="leading" :disabled="disabled" :loading="loading">
               <UIcon :name="leadingIconName" :class="leadingIconClass" />

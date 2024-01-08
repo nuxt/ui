@@ -86,7 +86,8 @@ export default defineNuxtConfig({
         '/api/search.json',
         '/api/releases.json',
         '/api/pulls.json'
-      ]
+      ],
+      ignore: !process.env.NUXT_UI_PRO_PATH && !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     }
   },
   componentMeta: {
