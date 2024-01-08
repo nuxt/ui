@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import { useId } from '#imports'
-import { computed, defineComponent, inject, toRef, ref } from 'vue'
+import { computed, defineComponent, inject, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
