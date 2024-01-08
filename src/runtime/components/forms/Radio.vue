@@ -99,8 +99,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('radio', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const randomId = ref(useId())
-    const inputId = ref(props.id ?? randomId.value)
+    const inputId = props.id ?? useId()
 
     const radioGroup = inject('radio-group', null)
     const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config)
