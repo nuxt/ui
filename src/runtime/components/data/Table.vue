@@ -67,10 +67,11 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, toRaw, toRef } from 'vue'
+import { computed, defineComponent, toRaw, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
+import { useVModel } from '@vueuse/core'
 import UButton from '../elements/Button.vue'
 import UIcon from '../elements/Icon.vue'
 import UCheckbox from '../forms/Checkbox.vue'
@@ -170,7 +171,7 @@ export default defineComponent({
 
     const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort })))
 
-    const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
+    const sort = useVModel(props, 'sort', emit, { passive: true, defaultValue: defu({}, props.sort, { column: null, direction: 'asc' }) })
 
     const savedSort = { column: sort.value.column, direction: null }
 
@@ -235,13 +236,11 @@ export default defineComponent({
         if (sort.value.direction === direction) {
           sort.value = defu({}, savedSort, { column: null, direction: 'asc' })
         } else {
-          sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+          sort.value = { column: sort.value.column, direction: sort.value.direction === 'asc' ? 'desc' : 'asc' }
         }
       } else {
         sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
-
-      emit('update:sort', sort.value)
     }
 
     function onSelect (row) {
