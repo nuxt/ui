@@ -17,8 +17,8 @@ export default defineNuxtConfig({
   ].filter(Boolean),
   modules: [
     '@nuxt/content',
+    '@nuxt/image',
     'nuxt-og-image',
-    // '@nuxt/devtools',
     // '@nuxthq/studio',
     module,
     '@nuxtjs/fontaine',
