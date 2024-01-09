@@ -132,6 +132,10 @@ export default defineComponent({
       type: Object as PropType<{ column: string, direction: 'asc' | 'desc' }>,
       default: () => ({})
     },
+    sortMode: {
+      type: String as PropType<'manual' | 'auto'>,
+      default: 'auto'
+    },
     sortButton: {
       type: Object as PropType<Button>,
       default: () => config.default.sortButton as Button
@@ -176,7 +180,7 @@ export default defineComponent({
     const savedSort = { column: sort.value.column, direction: null }
 
     const rows = computed(() => {
-      if (!sort.value?.column) {
+      if (!sort.value?.column || props.sortMode === 'manual') {
         return props.rows
       }
 
