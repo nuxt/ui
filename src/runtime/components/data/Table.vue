@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, toRaw, toRef } from 'vue'
+import { computed, defineComponent, toRaw, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
