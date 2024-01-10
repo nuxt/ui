@@ -24,6 +24,7 @@ import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
+import { nuxtLinkProps } from '../../utils/nuxt-link'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { ButtonColor, ButtonSize, ButtonVariant, Strategy } from '../../types'
 // @ts-expect-error
@@ -39,6 +40,7 @@ export default defineComponent({
   },
   inheritAttrs: false,
   props: {
+    ...nuxtLinkProps,
     type: {
       type: String,
       default: 'button'

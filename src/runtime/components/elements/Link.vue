@@ -32,12 +32,12 @@
 <script lang="ts">
 import { isEqual } from 'ohash'
 import { defineComponent } from 'vue'
-import { NuxtLink } from '#components'
+import { nuxtLinkProps } from '../../utils/nuxt-link'
 
 export default defineComponent({
   inheritAttrs: false,
   props: {
-    ...NuxtLink.props,
+    ...nuxtLinkProps,
     as: {
       type: String,
       default: 'button'
