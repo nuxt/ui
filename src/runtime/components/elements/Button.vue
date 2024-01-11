@@ -1,5 +1,5 @@
 <template>
-  <ULink :type="type" :disabled="disabled || loading" :class="buttonClass" v-bind="attrs">
+  <ULink :type="type" :disabled="disabled || loading" :class="buttonClass" v-bind="{ ...linkProps, ...attrs }">
     <slot name="leading" :disabled="disabled" :loading="loading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     </slot>
@@ -23,7 +23,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig } from '../../utils'
+import { mergeConfig, omit } from '../../utils'
 import { nuxtLinkProps } from '../../utils/nuxt-link'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { ButtonColor, ButtonSize, ButtonVariant, Strategy } from '../../types'
@@ -192,6 +192,13 @@ export default defineComponent({
       )
     })
 
+    const linkProps = computed(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { type, block, label, loading, disabled, padded, size, color, variant, icon, loadingIcon, leadingIcon, trailingIcon, trailing, leading, square, truncate, class: className, ui, ...rest } = props
+
+      return rest
+    })
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -203,7 +210,8 @@ export default defineComponent({
       leadingIconName,
       trailingIconName,
       leadingIconClass,
-      trailingIconClass
+      trailingIconClass,
+      linkProps
     }
   }
 })
