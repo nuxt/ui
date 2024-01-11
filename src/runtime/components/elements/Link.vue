@@ -2,6 +2,7 @@
   <component
     :is="as"
     v-if="!to"
+    :type="type"
     :disabled="disabled"
     v-bind="$attrs"
     :class="active ? activeClass : inactiveClass"
@@ -39,6 +40,10 @@ export default defineComponent({
   props: {
     ...nuxtLinkProps,
     as: {
+      type: String,
+      default: 'button'
+    },
+    type: {
       type: String,
       default: 'button'
     },
