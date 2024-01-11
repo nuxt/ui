@@ -74,3 +74,4 @@ export function looseToNumber (val: any): any {
 }
 
 export * from './lodash'
+export * from './link'

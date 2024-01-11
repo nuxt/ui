@@ -61,12 +61,47 @@ export const nuxtLinkProps = {
   }
 } as const
 
-export const getNuxtLinkProps = (props: Record<string, unknown>) => {
-  const nuxtLinkPropsKeys = Object.keys(nuxtLinkProps)
-  return nuxtLinkPropsKeys.reduce((acc, key) => {
+const uLinkProps = {
+  active: {
+    type: Boolean,
+    default: undefined
+  },
+  exact: {
+    type: Boolean,
+    default: false
+  },
+  exactQuery: {
+    type: Boolean,
+    default: false
+  },
+  exactHash: {
+    type: Boolean,
+    default: false
+  },
+  inactiveClass: {
+    type: String,
+    default: undefined
+  }
+} as const
+
+export const getNuxtLinkProps = (props) => {
+  const keys = Object.keys(nuxtLinkProps)
+
+  return keys.reduce((acc, key) => {
     if (props[key] !== undefined) {
       acc[key] = props[key]
     }
     return acc
-  }, {} as Record<string, unknown>)
+  }, {})
+}
+
+export const getULinkProps = (props) => {
+  const keys = [...Object.keys(nuxtLinkProps), ...Object.keys(uLinkProps)]
+
+  return keys.reduce((acc, key) => {
+    if (props[key] !== undefined) {
+      acc[key] = props[key]
+    }
+    return acc
+  }, {})
 }

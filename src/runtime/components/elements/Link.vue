@@ -33,7 +33,7 @@
 <script lang="ts">
 import { isEqual } from 'ohash'
 import { defineComponent } from 'vue'
-import { nuxtLinkProps } from '../../utils/nuxt-link'
+import { nuxtLinkProps } from '../../utils'
 
 export default defineComponent({
   inheritAttrs: false,
