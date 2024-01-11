@@ -23,8 +23,8 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, omit } from '../../utils'
-import { nuxtLinkProps } from '../../utils/nuxt-link'
+import { mergeConfig } from '../../utils'
+import { nuxtLinkProps, getNuxtLinkProps } from '../../utils/nuxt-link'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { ButtonColor, ButtonSize, ButtonVariant, Strategy } from '../../types'
 // @ts-expect-error
@@ -192,12 +192,7 @@ export default defineComponent({
       )
     })
 
-    const linkProps = computed(() => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type, block, label, loading, disabled, padded, size, color, variant, icon, loadingIcon, leadingIcon, trailingIcon, trailing, leading, square, truncate, class: className, ui, ...rest } = props
-
-      return rest
-    })
+    const linkProps = computed(() => getNuxtLinkProps(props))
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

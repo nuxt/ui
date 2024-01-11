@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { RouteLocationRaw } from '#vue-router'
+import type { RouteLocationRaw } from 'vue-router'
 
 export const nuxtLinkProps = {
   to: {
@@ -60,3 +60,13 @@ export const nuxtLinkProps = {
     default: undefined
   }
 } as const
+
+export const getNuxtLinkProps = (props: Record<string, unknown>) => {
+  const nuxtLinkPropsKeys = Object.keys(nuxtLinkProps)
+  return nuxtLinkPropsKeys.reduce((acc, key) => {
+    if (props[key] !== undefined) {
+      acc[key] = props[key]
+    }
+    return acc
+  }, {} as Record<string, unknown>)
+}
