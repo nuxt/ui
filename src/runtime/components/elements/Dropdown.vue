@@ -23,7 +23,7 @@
 
           <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
             <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
-              <NuxtLink v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ href, target, rel, navigate, isExternal }" v-bind="omit(item, ['label', 'labelClass', 'slot', 'icon', 'iconClass', 'avatar', 'shortcuts', 'disabled', 'class', 'click'])" custom>
+              <NuxtLink v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ href, target, rel, navigate, isExternal }" v-bind="getNuxtLinkProps(item)" custom>
                 <HMenuItem v-slot="{ active, disabled: itemDisabled, close }" :disabled="item.disabled">
                   <component
                     :is="!!href ? 'a' : 'button'"
@@ -65,7 +65,7 @@ import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
-import { mergeConfig, omit } from '../../utils'
+import { mergeConfig, getNuxtLinkProps } from '../../utils'
 import type { DropdownItem, PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -263,7 +263,7 @@ export default defineComponent({
       onMouseOver,
       onMouseLeave,
       onClick,
-      omit,
+      getNuxtLinkProps,
       twMerge,
       twJoin,
       NuxtLink
