@@ -44,10 +44,10 @@
 
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content/dist/runtime/types'
-import type { Link } from '#ui-pro/types'
+import type { HeaderLink } from '#ui-pro/types'
 
 defineProps<{
-  links: Link[]
+  links: HeaderLink[]
 }>()
 
 const route = useRoute()
