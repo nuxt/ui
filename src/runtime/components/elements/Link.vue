@@ -2,6 +2,7 @@
   <component
     :is="as"
     v-if="!to"
+    :type="type"
     :disabled="disabled"
     v-bind="$attrs"
     :class="active ? activeClass : inactiveClass"
@@ -32,13 +33,17 @@
 <script lang="ts">
 import { isEqual } from 'ohash'
 import { defineComponent } from 'vue'
-import { NuxtLink } from '#components'
+import { nuxtLinkProps } from '../../utils'
 
 export default defineComponent({
   inheritAttrs: false,
   props: {
-    ...NuxtLink.props,
+    ...nuxtLinkProps,
     as: {
+      type: String,
+      default: 'button'
+    },
+    type: {
       type: String,
       default: 'button'
     },

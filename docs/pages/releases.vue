@@ -41,6 +41,8 @@ const { data: pulls } = await useLazyFetch('/api/pulls.json', { default: () => [
 
 const dates = computed(() => {
   const first = releases.value[releases.value.length - 1]
+  if (!first) return []
+
   const days = eachDayOfInterval({ start: new Date(first.published_at), end: new Date() })
 
   return days.reverse().map(day => {

@@ -4,7 +4,7 @@
     :by="by"
     :name="name"
     :model-value="modelValue"
-    :disabled="disabled || loading"
+    :disabled="disabled"
     as="div"
     :class="ui.wrapper"
     @update:model-value="onUpdate"
@@ -12,16 +12,15 @@
     <div :class="uiMenu.trigger">
       <HComboboxInput
         :id="inputId"
-        ref="input"
         :name="name"
         :required="required"
         :placeholder="placeholder"
-        :disabled="disabled || loading"
+        :disabled="disabled"
         :class="inputClass"
         autocomplete="off"
         v-bind="attrs"
-        :display-value="() => ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute]"
-        @change="query = $event.target.value"
+        :display-value="() => query ? query : ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute]"
+        @change="onChange"
       />
 
       <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
@@ -100,7 +99,7 @@ import {
   ComboboxOption as HComboboxOption,
   ComboboxInput as HComboboxInput
 } from '@headlessui/vue'
-import { computedAsync } from '@vueuse/core'
+import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -134,6 +133,10 @@ export default defineComponent({
     modelValue: {
       type: [String, Number, Object, Array],
       default: ''
+    },
+    query: {
+      type: String,
+      default: null
     },
     by: {
       type: String,
@@ -231,9 +234,17 @@ export default defineComponent({
       type: String,
       default: null
     },
+    search: {
+      type: Function as PropType<((query: string) => Promise<any[]> | any[])>,
+      default: undefined
+    },
     searchAttributes: {
       type: Array,
       default: null
+    },
+    debounce: {
+      type: Number,
+      default: 200
     },
     popper: {
       type: Object as PropType<PopperOptions>,
@@ -256,7 +267,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'open', 'close', 'change'],
+  emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -271,7 +282,16 @@ export default defineComponent({
 
     const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
-    const query = ref('')
+    const internalQuery = ref('')
+    const query = computed({
+      get () {
+        return props.query ?? internalQuery.value
+      },
+      set (value) {
+        internalQuery.value = value
+        emit('update:query', value)
+      }
+    })
 
     const inputClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -346,7 +366,13 @@ export default defineComponent({
       )
     })
 
+    const debouncedSearch = props.search && typeof props.search === 'function' ? useDebounceFn(props.search, props.debounce) : undefined
+
     const filteredOptions = computedAsync(async () => {
+      if (debouncedSearch) {
+        return await debouncedSearch(query.value)
+      }
+
       if (query.value === '') {
         return props.options
       }
@@ -374,9 +400,14 @@ export default defineComponent({
     })
 
     function onUpdate (event: any) {
+      query.value = ''
       emit('update:modelValue', event)
       emit('change', event)
       emitFormChange()
+    }
+
+    function onChange (event: any) {
+      query.value = event.target.value
     }
 
     return {
@@ -403,8 +434,10 @@ export default defineComponent({
       trailingIconClass,
       trailingWrapperIconClass,
       filteredOptions,
+      // eslint-disable-next-line vue/no-dupe-keys
       query,
-      onUpdate
+      onUpdate,
+      onChange
     }
   }
 })

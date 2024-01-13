@@ -17,12 +17,12 @@
         </p>
 
         <div v-if="(description || $slots.description) && actions.length" :class="ui.actions">
-          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="action.click" />
+          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
         </div>
       </div>
       <div v-if="closeButton || (!description && !$slots.description && actions.length)" :class="twMerge(ui.actions, 'mt-0')">
         <template v-if="!description && !$slots.description && actions.length">
-          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="action.click" />
+          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
         </template>
 
         <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(ui.default.closeButton || {}), ...closeButton }" @click.stop="$emit('close')" />
@@ -39,7 +39,7 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
-import type { Avatar, Button, AlertColor, AlertVariant, Strategy } from '../../types'
+import type { Avatar, Button, AlertColor, AlertVariant, AlertAction, Strategy } from '../../types'
 import { mergeConfig } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -76,7 +76,7 @@ export default defineComponent({
       default: () => config.default.closeButton as unknown as Button
     },
     actions: {
-      type: Array as PropType<(Button & { click?: Function })[]>,
+      type: Array as PropType<AlertAction[]>,
       default: () => []
     },
     color: {
@@ -121,11 +121,18 @@ export default defineComponent({
       ), props.class)
     })
 
+    function onAction (action: AlertAction) {
+      if (action.click) {
+        action.click()
+      }
+    }
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
       alertClass,
+      onAction,
       twMerge
     }
   }
