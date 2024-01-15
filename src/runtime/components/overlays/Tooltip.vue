@@ -19,7 +19,7 @@
 
               <UKbd v-for="shortcut of shortcuts" :key="shortcut" size="xs">
                 {{ shortcut }}
-              </Ukbd>
+              </UKbd>
             </span>
           </div>
         </div>
