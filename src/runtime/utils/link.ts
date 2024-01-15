@@ -62,6 +62,18 @@ export const nuxtLinkProps = {
 } as const
 
 const uLinkProps = {
+  as: {
+    type: String,
+    default: 'button'
+  },
+  type: {
+    type: String,
+    default: 'button'
+  },
+  disabled: {
+    type: Boolean,
+    default: null
+  },
   active: {
     type: Boolean,
     default: undefined
