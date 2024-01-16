@@ -217,6 +217,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
 // eslint-disable-next-line vue/no-dupe-keys
 const code = computed(() => {
   let code = `\`\`\`html
+<template>
 <${name}`
   for (const [key, value] of Object.entries(fullProps.value)) {
     if (value === 'undefined' || value === null) {
@@ -246,7 +247,7 @@ const code = computed(() => {
   } else {
     code += ' />'
   }
-  code += `
+  code += `\n</template>
 \`\`\`
 `
   return code
