@@ -19,7 +19,7 @@
         :class="inputClass"
         autocomplete="off"
         v-bind="attrs"
-        :display-value="() => query ? query : ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute]"
+        :display-value="() => query ? query : label"
         @change="onChange"
       />
 
@@ -293,6 +293,15 @@ export default defineComponent({
       }
     })
 
+    const label = computed(() => {
+      if (props.valueAttribute) {
+        const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
+        return option ? option[props.optionAttribute] : null
+      } else {
+        return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
+      }
+    })
+
     const inputClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
@@ -423,6 +432,7 @@ export default defineComponent({
       popper,
       trigger,
       container,
+      label,
       isLeading,
       isTrailing,
       // eslint-disable-next-line vue/no-dupe-keys
