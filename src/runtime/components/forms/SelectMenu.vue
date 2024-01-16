@@ -36,8 +36,7 @@
           </span>
 
           <slot name="label">
-            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" :class="uiMenu.label">{{ modelValue.length }} selected</span>
-            <span v-else-if="!multiple && modelValue" :class="uiMenu.label">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
+            <span v-if="label" :class="uiMenu.label">{{ label }}</span>
             <span v-else :class="uiMenu.label">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
@@ -355,6 +354,23 @@ export default defineComponent({
       }
     })
 
+    const label = computed(() => {
+      if (props.multiple) {
+        if (Array.isArray(props.modelValue) && props.modelValue.length) {
+          return `${props.modelValue.length} selected`
+        } else {
+          return null
+        }
+      } else {
+        if (props.valueAttribute) {
+          const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
+          return option ? option[props.optionAttribute] : null
+        } else {
+          return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
+        }
+      }
+    })
+
     const selectClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
 
@@ -509,6 +525,7 @@ export default defineComponent({
       popper,
       trigger,
       container,
+      label,
       isLeading,
       isTrailing,
       // eslint-disable-next-line vue/no-dupe-keys
