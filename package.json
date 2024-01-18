@@ -34,7 +34,7 @@
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.7.2",
     "@headlessui/tailwindcss": "^0.2.0",
-    "@headlessui/vue": "^1.7.17",
+    "@headlessui/vue": "1.7.16",
     "@iconify-json/heroicons": "^1.1.19",
     "@nuxt/kit": "^3.9.3",
     "@nuxtjs/color-mode": "^3.3.2",
@@ -77,7 +77,6 @@
     "zod": "^3.22.4"
   },
   "resolutions": {
-    "@headlessui/vue": "1.7.16",
     "@nuxt/kit": "3.9.3",
     "@nuxt/schema": "3.9.3",
     "tailwindcss": "3.4.1",

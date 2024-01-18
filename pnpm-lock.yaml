@@ -5,7 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@headlessui/vue': 1.7.16
   '@nuxt/kit': 3.9.3
   '@nuxt/schema': 3.9.3
   tailwindcss: 3.4.1
