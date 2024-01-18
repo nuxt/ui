@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.12.1](https://github.com/nuxt/ui/compare/v2.12.0...v2.12.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* **Button:** inherit nuxt link props without breaking `nuxt-component-meta` ([d3e19dc](https://github.com/nuxt/ui/commit/d3e19dc65a530201c3adc7738e95e5a09b0a9274)), closes [#578](https://github.com/nuxt/ui/issues/578)
+* **Button:** pass-through nuxt link props to `ULink` ([a44bfc8](https://github.com/nuxt/ui/commit/a44bfc85114bed15ed25bb8c79d7ed52adc8d43c))
+* **InputMenu:** take `option-attribute` into account to display label ([1a93791](https://github.com/nuxt/ui/commit/1a937919a26546cfd7edb3f6a11ef790d401999d))
+* **Link:** prevent `type` bind on `<a>` ([b0df864](https://github.com/nuxt/ui/commit/b0df86437902696b594e5e7042601506a8bf4436))
+* **SelectMenu:** take `option-attribute` into account to display label ([b9fe74b](https://github.com/nuxt/ui/commit/b9fe74bca5f48555e76c16237c2acc868f69e243)), closes [#1151](https://github.com/nuxt/ui/issues/1151)
+* **Tooltip:** typo in kbd component ([4405d32](https://github.com/nuxt/ui/commit/4405d3239f7e19d399659347f079555318b3231b))
+
 ## [2.12.0](https://github.com/nuxt/ui/compare/v2.11.1...v2.12.0) (2024-01-09)
 
 
