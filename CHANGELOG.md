@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.12.3](https://github.com/nuxt/ui/compare/v2.12.2...v2.12.3) (2024-01-18)
+
+
+### Bug Fixes
+
+* **link:** import type from `[#vue](https://github.com/nuxt/ui/issues/vue)-router` ([79ec3fd](https://github.com/nuxt/ui/commit/79ec3fd031e28d15854e2f0d4fb978df337e43d5)), closes [#1253](https://github.com/nuxt/ui/issues/1253)
+
 ## [2.12.2](https://github.com/nuxt/ui/compare/v2.12.1...v2.12.2) (2024-01-18)
 
 
