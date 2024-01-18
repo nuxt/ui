@@ -11,7 +11,7 @@
     "@nuxt/devtools": "^1.0.8",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/image": "^1.3.0",
-    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@0.7.0-28425529.a466815",
+    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@0.7.0-28426506.d5bac36",
     "@nuxthq/studio": "^1.0.8",
     "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/google-fonts": "^3.1.3",
