@@ -5,10 +5,11 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  '@headlessui/vue': 1.7.16
   '@nuxt/kit': 3.9.3
   '@nuxt/schema': 3.9.3
-  vue: 3.3.13
   tailwindcss: 3.4.1
+  vue: 3.3.13
 
 importers:
 
@@ -21,8 +22,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(tailwindcss@3.4.1)
       '@headlessui/vue':
-        specifier: ^1.7.17
-        version: 1.7.17(vue@3.3.13)
+        specifier: 1.7.16
+        version: 1.7.16(vue@3.3.13)
       '@iconify-json/heroicons':
         specifier: ^1.1.19
         version: 1.1.19
@@ -1105,13 +1106,12 @@ packages:
     dependencies:
       tailwindcss: 3.4.1
 
-  /@headlessui/vue@1.7.17(vue@3.3.13):
-    resolution: {integrity: sha512-hmJChv8HzKorxd9F70RGnECAwZfkvmmwOqreuKLWY/19d5qbWnSdw+DNbuA/Uo6X5rb4U5B3NrT+qBKPmjhRqw==}
+  /@headlessui/vue@1.7.16(vue@3.3.13):
+    resolution: {integrity: sha512-nKT+nf/q6x198SsyK54mSszaQl/z+QxtASmgMEJtpxSX2Q0OPJX0upS/9daDyiECpeAsvjkoOrm2O/6PyBQ+Qg==}
     engines: {node: '>=10'}
     peerDependencies:
       vue: 3.3.13
     dependencies:
-      '@tanstack/vue-virtual': 3.0.2(vue@3.3.13)
       vue: 3.3.13(typescript@5.3.3)
 
   /@humanwhocodes/config-array@0.11.13:
@@ -2051,7 +2051,7 @@ packages:
     dependencies:
       '@egoist/tailwindcss-icons': 1.7.2(tailwindcss@3.4.1)
       '@headlessui/tailwindcss': 0.2.0(tailwindcss@3.4.1)
-      '@headlessui/vue': 1.7.17(vue@3.3.13)
+      '@headlessui/vue': 1.7.16(vue@3.3.13)
       '@iconify-json/heroicons': 1.1.19
       '@nuxt/kit': 3.9.3(rollup@3.29.4)
       '@nuxtjs/color-mode': 3.3.2(rollup@3.29.4)
@@ -3132,17 +3132,6 @@ packages:
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.1
-
-  /@tanstack/virtual-core@3.0.0:
-    resolution: {integrity: sha512-SYXOBTjJb05rXa2vl55TTwO40A6wKu0R5i1qQwhJYNDIqaIGF7D0HsLw+pJAyi2OvntlEIVusx3xtbbgSUi6zg==}
-
-  /@tanstack/vue-virtual@3.0.2(vue@3.3.13):
-    resolution: {integrity: sha512-1iFpX+yZswHuf4wrA6GU9yJ/YzQ/8SacABwqghwCkcwrkZbOPLlRSdOAqZ1WQ50SftmfhZpaiZl2KmpV7cgfMQ==}
-    peerDependencies:
-      vue: 3.3.13
-    dependencies:
-      '@tanstack/virtual-core': 3.0.0
-      vue: 3.3.13(typescript@5.3.3)
 
   /@tootallnate/quickjs-emscripten@0.23.0:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
