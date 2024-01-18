@@ -16,7 +16,7 @@ export const nuxtLinkProps = {
     default: undefined
   },
   rel: {
-    type: String,
+    type: String as PropType<string | null>,
     default: undefined
   },
   noRel: {
