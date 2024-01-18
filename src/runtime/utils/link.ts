@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { RouteLocationRaw } from 'vue-router'
+import type { RouteLocationRaw } from '#vue-router'
 
 export const nuxtLinkProps = {
   to: {
