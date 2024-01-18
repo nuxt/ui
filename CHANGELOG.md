@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.12.2](https://github.com/nuxt/ui/compare/v2.12.1...v2.12.2) (2024-01-18)
+
+
+### Bug Fixes
+
+* **link:** improve nuxt link `rel` type ([05e90aa](https://github.com/nuxt/ui/commit/05e90aa1d13ab1772189d33278f482405ff88975))
+
 ## [2.12.1](https://github.com/nuxt/ui/compare/v2.12.0...v2.12.1) (2024-01-18)
 
 
