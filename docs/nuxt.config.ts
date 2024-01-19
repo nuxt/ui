@@ -17,8 +17,8 @@ export default defineNuxtConfig({
   ].filter(Boolean),
   modules: [
     '@nuxt/content',
+    '@nuxt/image',
     'nuxt-og-image',
-    // '@nuxt/devtools',
     // '@nuxthq/studio',
     module,
     '@nuxtjs/fontaine',
@@ -86,7 +86,8 @@ export default defineNuxtConfig({
         '/api/search.json',
         '/api/releases.json',
         '/api/pulls.json'
-      ]
+      ],
+      ignore: !process.env.NUXT_UI_PRO_PATH && !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     }
   },
   componentMeta: {
@@ -102,6 +103,7 @@ export default defineNuxtConfig({
       process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, '.docs', 'components') : '.c12'
     ],
     metaFields: {
+      type: false,
       props: true,
       slots: true,
       events: false,
@@ -126,5 +128,10 @@ export default defineNuxtConfig({
   },
   typescript: {
     strict: false
+  },
+  vite: {
+    optimizeDeps: {
+      include: ['date-fns']
+    }
   }
 })

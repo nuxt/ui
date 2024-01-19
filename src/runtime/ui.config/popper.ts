@@ -4,5 +4,6 @@ export const arrow = {
 	rounded: 'before:rounded-sm',
 	background: 'before:bg-gray-200 dark:before:bg-gray-800',
 	shadow: 'before:shadow',
-	placement: 'group-data-[popper-placement*="right"]:-left-1 group-data-[popper-placement*="left"]:-right-1 group-data-[popper-placement*="top"]:-bottom-1 group-data-[popper-placement*="bottom"]:-top-1'
+	// eslint-disable-next-line quotes
+	placement: `group-data-[popper-placement*='right']:-left-1 group-data-[popper-placement*='left']:-right-1 group-data-[popper-placement*='top']:-bottom-1 group-data-[popper-placement*='bottom']:-top-1`
 }

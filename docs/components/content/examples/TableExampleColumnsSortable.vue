@@ -60,5 +60,5 @@ const people = [{
 </script>
 
 <template>
-  <UTable :columns="columns" :rows="people" :sort="{ column: 'title' }" />
+  <UTable :columns="columns" :rows="people" />
 </template>

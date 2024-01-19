@@ -2,6 +2,7 @@
   <component
     :is="as"
     v-if="!to"
+    :type="type"
     :disabled="disabled"
     v-bind="$attrs"
     :class="active ? activeClass : inactiveClass"
@@ -21,7 +22,7 @@
       :role="disabled ? 'link' : undefined"
       :rel="rel"
       :target="target"
-      :class="active ? activeClass : resolveLinkClass(route, $route, { isActive, isExactActive })"
+      :class="active !== undefined ? (active ? activeClass : inactiveClass) : resolveLinkClass(route, $route, { isActive, isExactActive })"
       @click="(e) => !isExternal && navigate(e)"
     >
       <slot v-bind="{ isActive: exact ? isExactActive : isActive }" />
@@ -32,13 +33,17 @@
 <script lang="ts">
 import { isEqual } from 'ohash'
 import { defineComponent } from 'vue'
-import { NuxtLink } from '#components'
+import { nuxtLinkProps } from '../../utils'
 
 export default defineComponent({
   inheritAttrs: false,
   props: {
-    ...NuxtLink.props,
+    ...nuxtLinkProps,
     as: {
+      type: String,
+      default: 'button'
+    },
+    type: {
       type: String,
       default: 'button'
     },
@@ -48,7 +53,7 @@ export default defineComponent({
     },
     active: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     exact: {
       type: Boolean,

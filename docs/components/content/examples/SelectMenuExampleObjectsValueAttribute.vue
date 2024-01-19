@@ -14,8 +14,6 @@ const people = [{
 }]
 
 const selected = ref(people[0].id)
-
-const current = computed(() => people.find(person => person.id === selected.value))
 </script>
 
 <template>
@@ -25,9 +23,5 @@ const current = computed(() => people.find(person => person.id === selected.valu
     placeholder="Select people"
     value-attribute="id"
     option-attribute="name"
-  >
-    <template #label>
-      {{ current.name }}
-    </template>
-  </USelectMenu>
+  />
 </template>

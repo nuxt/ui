@@ -1,5 +1,6 @@
 <template>
-  <HPopover ref="popover" v-slot="{ open: headlessOpen, close }" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
+  <!-- eslint-disable-next-line vue/no-template-shadow -->
+  <HPopover ref="popover" v-slot="{ open, close }" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HPopoverButton
       ref="trigger"
       as="div"
@@ -8,7 +9,7 @@
       role="button"
       @mouseover="onMouseOver"
     >
-      <slot :open="(open !== undefined) ? open : headlessOpen" :close="close">
+      <slot :open="open" :close="close">
         <button :disabled="disabled">
           Open
         </button>
@@ -16,16 +17,16 @@
     </HPopoverButton>
 
     <Transition v-if="overlay" appear v-bind="ui.overlay.transition">
-      <div v-if="(open !== undefined) ? open : headlessOpen" :class="[ui.overlay.base, ui.overlay.background]" @click="$emit('update:open')" />
+      <div v-if="open" :class="[ui.overlay.base, ui.overlay.background]" />
     </Transition>
 
-    <div v-if="(open !== undefined) ? open : headlessOpen" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
+    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
 
           <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
-            <slot name="panel" :open="(open !== undefined) ? open : headlessOpen" :close="close" />
+            <slot name="panel" :open="open" :close="close" />
           </HPopoverPanel>
         </div>
       </Transition>
@@ -34,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ref, toRef, onMounted, defineComponent } from 'vue'
+import { computed, ref, toRef, onMounted, defineComponent, watch } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel } from '@headlessui/vue'
@@ -95,15 +96,15 @@ export default defineComponent({
     }
   },
   emits: ['update:open'],
-  setup (props) {
+  setup (props, { emit }) {
     const { ui, attrs } = useUI('popover', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
 
-    // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
     const popover = ref<any>(null)
+    // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
     const popoverApi = ref<any>(null)
 
     let openTimeout: NodeJS.Timeout | null = null
@@ -116,18 +117,39 @@ export default defineComponent({
       }
       const popoverProvidesSymbols = Object.getOwnPropertySymbols(popoverProvides)
       popoverApi.value = popoverProvidesSymbols.length && popoverProvides[popoverProvidesSymbols[0]]
+
+      if (props.open) {
+        popoverApi.value?.togglePopover()
+      }
     })
 
     const containerStyle = computed(() => {
+      if (props.mode !== 'hover') {
+        return {}
+      }
+
       const offsetDistance = (props.popper as PopperOptions)?.offsetDistance || (ui.value.popper as PopperOptions)?.offsetDistance || 8
+      const placement = popper.value.placement?.split('-')[0]
       const padding = `${offsetDistance}px`
 
-      return props.mode === 'hover' ? {
-        paddingTop: padding,
-        paddingBottom: padding,
-        paddingLeft: padding,
-        paddingRight: padding
-      } : {}
+      if (placement === 'top' || placement === 'bottom') {
+        return {
+          paddingTop: padding,
+          paddingBottom: padding
+        }
+      } else if (placement === 'left' || placement === 'right') {
+        return {
+          paddingLeft: padding,
+          paddingRight: padding
+        }
+      } else {
+        return {
+          paddingTop: padding,
+          paddingBottom: padding,
+          paddingLeft: padding,
+          paddingRight: padding
+        }
+      }
     })
 
     function onMouseOver () {
@@ -169,6 +191,24 @@ export default defineComponent({
         closeTimeout = null
       }, props.closeDelay)
     }
+
+    watch(() => props.open, (newValue: boolean, oldValue: boolean) => {
+      if (!popoverApi.value) return
+      if (oldValue === undefined || newValue === oldValue) return
+
+      if (newValue) {
+        // No `openPopover` method and `popoverApi.value.togglePopover` won't work because of the `watch` below
+        popoverApi.value.popoverState = 0
+      } else {
+        popoverApi.value.closePopover()
+      }
+    })
+
+    watch(() => popoverApi.value?.popoverState, (newValue: number, oldValue: number) => {
+      if (oldValue === undefined || newValue === oldValue) return
+
+      emit('update:open', newValue === 0)
+    })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

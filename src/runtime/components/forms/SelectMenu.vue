@@ -6,7 +6,7 @@
     :name="name"
     :model-value="modelValue"
     :multiple="multiple"
-    :disabled="disabled || loading"
+    :disabled="disabled"
     as="div"
     :class="ui.wrapper"
     @update:model-value="onUpdate"
@@ -28,7 +28,7 @@
       :class="uiMenu.trigger"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
-        <button :id="inputId" :class="selectClass" :disabled="disabled || loading" type="button" v-bind="attrs">
+        <button :id="inputId" :class="selectClass" :disabled="disabled" type="button" v-bind="attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
             <slot name="leading" :disabled="disabled" :loading="loading">
               <UIcon :name="leadingIconName" :class="leadingIconClass" />
@@ -36,8 +36,7 @@
           </span>
 
           <slot name="label">
-            <span v-if="multiple && Array.isArray(modelValue) && modelValue.length" :class="uiMenu.label">{{ modelValue.length }} selected</span>
-            <span v-else-if="!multiple && modelValue" :class="uiMenu.label">{{ ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute] }}</span>
+            <span v-if="label" :class="uiMenu.label">{{ label }}</span>
             <span v-else :class="uiMenu.label">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
@@ -58,14 +57,13 @@
           <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
             <HComboboxInput
               v-if="searchable"
-              ref="searchInput"
               :display-value="() => query"
               name="q"
               :placeholder="searchablePlaceholder"
               autofocus
               autocomplete="off"
               :class="uiMenu.input"
-              @change="query = $event.target.value"
+              @change="onChange"
             />
             <component
               :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
@@ -98,11 +96,11 @@
               </li>
             </component>
 
-            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && queryOption && !filteredOptions.length" v-slot="{ active, selected }" :value="queryOption" as="template">
+            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && createOption" v-slot="{ active, selected }" :value="createOption" as="template">
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
-                  <slot name="option-create" :option="queryOption" :active="active" :selected="selected">
-                    <span :class="uiMenu.option.create">Create "{{ queryOption[optionAttribute] }}"</span>
+                  <slot name="option-create" :option="createOption" :active="active" :selected="selected">
+                    <span :class="uiMenu.option.create">Create "{{ createOption[optionAttribute] }}"</span>
                   </slot>
                 </div>
               </li>
@@ -110,6 +108,11 @@
             <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
                 No results for "{{ query }}".
+              </slot>
+            </p>
+            <p v-else-if="!filteredOptions.length" :class="uiMenu.empty">
+              <slot name="empty" :query="query">
+                No options.
               </slot>
             </p>
           </component>
@@ -121,7 +124,7 @@
 
 <script lang="ts">
 import { ref, computed, toRef, watch, defineComponent } from 'vue'
-import type { PropType, ComponentPublicInstance } from 'vue'
+import type { PropType } from 'vue'
 import {
   Combobox as HCombobox,
   ComboboxButton as HComboboxButton,
@@ -171,6 +174,10 @@ export default defineComponent({
     modelValue: {
       type: [String, Number, Object, Array],
       default: ''
+    },
+    query: {
+      type: String,
+      default: null
     },
     by: {
       type: String,
@@ -242,7 +249,7 @@ export default defineComponent({
     },
     clearSearchOnClose: {
       type: Boolean,
-      default: () => configMenu.default.clearOnClose
+      default: () => configMenu.default.clearSearchOnClose
     },
     debounce: {
       type: Number,
@@ -251,6 +258,10 @@ export default defineComponent({
     creatable: {
       type: Boolean,
       default: false
+    },
+    showCreateOptionWhen: {
+      type: String as PropType<'always' | 'empty'>,
+      default: () => configMenu.default.showCreateOptionWhen
     },
     placeholder: {
       type: String,
@@ -317,7 +328,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'open', 'close', 'change'],
+  emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -332,8 +343,33 @@ export default defineComponent({
 
     const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
-    const query = ref('')
-    const searchInput = ref<ComponentPublicInstance<HTMLElement>>()
+    const internalQuery = ref('')
+    const query = computed({
+      get () {
+        return props.query ?? internalQuery.value
+      },
+      set (value) {
+        internalQuery.value = value
+        emit('update:query', value)
+      }
+    })
+
+    const label = computed(() => {
+      if (props.multiple) {
+        if (Array.isArray(props.modelValue) && props.modelValue.length) {
+          return `${props.modelValue.length} selected`
+        } else {
+          return null
+        }
+      } else {
+        if (props.valueAttribute) {
+          const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
+          return option ? option[props.optionAttribute] : null
+        } else {
+          return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
+        }
+      }
+    })
 
     const selectClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -433,8 +469,21 @@ export default defineComponent({
       })
     })
 
-    const queryOption = computed(() => {
-      return query.value === '' ? null : { [props.optionAttribute]: query.value }
+    const createOption = computed(() => {
+      if (query.value === '') {
+        return null
+      }
+      if (props.showCreateOptionWhen === 'empty' && filteredOptions.value.length) {
+        return null
+      }
+      if (props.showCreateOptionWhen === 'always') {
+        const existingOption = filteredOptions.value.find(option => ['string', 'number'].includes(typeof option) ? option === query.value : option[props.optionAttribute] === query.value)
+        if (existingOption) {
+          return null
+        }
+      }
+
+      return ['string', 'number'].includes(typeof props.modelValue) ? query.value : { [props.optionAttribute]: query.value }
     })
 
     function clearOnClose () {
@@ -454,15 +503,13 @@ export default defineComponent({
     })
 
     function onUpdate (event: any) {
-      if (query.value && searchInput.value?.$el) {
-        query.value = ''
-        // explicitly set input text because `ComboboxInput` `displayValue` is not reactive
-        searchInput.value.$el.value = ''
-      }
-
       emit('update:modelValue', event)
       emit('change', event)
       emitFormChange()
+    }
+
+    function onChange (event: any) {
+      query.value = event.target.value
     }
 
     return {
@@ -478,6 +525,7 @@ export default defineComponent({
       popper,
       trigger,
       container,
+      label,
       isLeading,
       isTrailing,
       // eslint-disable-next-line vue/no-dupe-keys
@@ -489,9 +537,11 @@ export default defineComponent({
       trailingIconClass,
       trailingWrapperIconClass,
       filteredOptions,
-      queryOption,
+      createOption,
+      // eslint-disable-next-line vue/no-dupe-keys
       query,
-      onUpdate
+      onUpdate,
+      onChange
     }
   }
 })

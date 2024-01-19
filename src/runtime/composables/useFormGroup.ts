@@ -8,8 +8,8 @@ type InputProps = {
   size?: string | number | symbol
   color?: string
   name?: string
-  isFieldset?: boolean
   eagerValidation?: boolean
+  legend?: string | null
 }
 
 export const useFormGroup = (inputProps?: InputProps, config?: any) => {
@@ -20,7 +20,8 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     const inputId = ref(inputProps?.id)
 
     onMounted(() => {
-      inputId.value = inputProps?.isFieldset ? undefined : inputProps?.id ?? uid()
+      // Remove FormGroup label bindings for RadioGroup elements to avoid label conflicts
+      inputId.value = inputProps?.legend === null || inputProps.legend ? undefined : inputProps?.id ?? uid()
 
       if (formGroup) {
         // Updates for="..." attribute on label if inputProps.id is provided

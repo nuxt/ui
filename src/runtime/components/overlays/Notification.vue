@@ -129,7 +129,7 @@ export default defineComponent({
     const wrapperClass = computed(() => {
       return twMerge(twJoin(
         ui.value.wrapper,
-        ui.value.background,
+        ui.value.background?.replaceAll('{color}', props.color),
         ui.value.rounded,
         ui.value.shadow
       ), props.class)
