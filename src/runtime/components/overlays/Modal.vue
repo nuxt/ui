@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template">
-    <HDialog :class="ui.wrapper" v-bind="attrs" @close="(e) => !preventClose && close(e)">
+    <HDialog :class="ui.wrapper" v-bind="attrs" @close="close">
       <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
@@ -81,7 +81,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'close'],
+  emits: ['update:modelValue', 'close', 'close-prevented'],
   setup (props, { emit }) {
     const { ui, attrs } = useUI('modal', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -105,6 +105,12 @@ export default defineComponent({
     })
 
     function close (value: boolean) {
+      if (props.preventClose) {
+        emit('close-prevented')
+        
+        return
+      }
+
       isOpen.value = value
 
       emit('close')
