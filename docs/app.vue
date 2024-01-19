@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
+    <NuxtLoadingIndicator />
     <Header v-if="!$route.path.startsWith('/examples')" :links="links" />
 
     <NuxtLayout>

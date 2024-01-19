@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const loading = ref(false)
 const selected = ref([])
 

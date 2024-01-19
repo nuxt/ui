@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const links = [{
   label: 'Introduction',
   to: '/getting-started'

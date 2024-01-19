@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const sort = ref({
   column: 'name',
   direction: 'desc'

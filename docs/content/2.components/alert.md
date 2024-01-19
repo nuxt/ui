@@ -4,6 +4,7 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/elements/Alert.vue
+icon: i-nuxt-ui-alert
 ---
 
 ## Usage

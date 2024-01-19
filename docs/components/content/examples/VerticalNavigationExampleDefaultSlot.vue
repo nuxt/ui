@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const links = [{
   label: 'Vertical Navigation',
   to: '/navigation/vertical-navigation'

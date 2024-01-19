@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const groups = [{
   key: 'users',
   label: q => q && `Users matching “${q}”...`,

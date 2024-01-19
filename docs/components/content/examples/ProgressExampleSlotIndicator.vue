@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const temp = ref(35)
 
 const color = computed(() => {

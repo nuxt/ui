@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const date = ref(new Date())
 
 const label = computed(() => date.value.toLocaleDateString('en-us', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })
