@@ -188,6 +188,22 @@ const safelistByComponent = {
   }, {
     pattern: new RegExp(`text-(${colorsAsRegex})-500`)
   }],
+  feed: (colorsAsRegex) => [{
+    pattern: new RegExp(`bg-(${colorsAsRegex})-200`)
+  }, {
+    pattern: new RegExp(`bg-(${colorsAsRegex})-700`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-900`)
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-50`),
+    variants: ['dark']
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+  }, {
+    pattern: new RegExp(`text-(${colorsAsRegex})-500`),
+    variants: ['dark']
+  }],
   notification: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
     variants: ['dark']
