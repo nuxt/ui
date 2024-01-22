@@ -348,3 +348,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.form-select {
+  background-image: none;
+}
+</style>
