@@ -75,7 +75,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     items: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => []
     },
     arrows: {
