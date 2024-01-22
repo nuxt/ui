@@ -27,7 +27,7 @@ const items = [
     </template>
 
     <template #indicator="{ onClick, index, active }">
-      <UButton :label="index" :variant="active ? 'solid' : 'outline'" size="2xs" class="rounded-full min-w-6 justify-center" @click="onClick(index)" />
+      <UButton :label="String(index)" :variant="active ? 'solid' : 'outline'" size="2xs" class="rounded-full min-w-6 justify-center" @click="onClick(index)" />
     </template>
   </UCarousel>
 </template>
