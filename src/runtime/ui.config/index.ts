@@ -15,6 +15,7 @@ export { default as kbd } from './elements/kbd'
 export { default as progress } from './elements/progress'
 export { default as meter } from './elements/meter'
 export { default as meterGroup } from './elements/meterGroup'
+export { default as carousel } from './elements/carousel'
 
 // Forms
 export { default as input } from './forms/input'

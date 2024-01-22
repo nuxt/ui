@@ -22,8 +22,8 @@ export default {
   width: 'w-screen max-w-md',
   translate: {
     base: 'translate-x-0',
-    left: '-translate-x-full',
-    right: 'translate-x-full'
+    left: '-translate-x-full rtl:translate-x-full',
+    right: 'translate-x-full rtl:-translate-x-full'
   },
   // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
   transition: {

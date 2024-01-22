@@ -14,7 +14,7 @@ links:
 Pass an array of arrays to the `items` prop of the Dropdown component. Each array represents a group of items. Each item can have the following properties:
 
 - `label` - The label of the item.
-- `labelClass` - The class of the item label. :u-badge{label="New" class="!rounded-full" variant="subtle"}
+- `labelClass` - The class of the item label.
 - `icon` - The icon of the item.
 - `iconClass` - The class of the item icon.
 - `avatar` - The avatar of the item. You can pass all the props of the [Avatar](/elements/avatar) component.
@@ -34,7 +34,7 @@ Use the `mode` prop to switch between `click` and `hover` modes.
 
 :component-example{component="dropdown-example-mode"}
 
-### Manual :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### Manual
 
 Use a `v-model:open` to manually control the state. In this example, press :shortcut{value="O"} to toggle the dropdown.
 

@@ -132,7 +132,7 @@ props:
 ---
 ::
 
-### Control the query :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### Control the query
 
 Use a `v-model:query` to control the search query.
 
@@ -260,7 +260,7 @@ Use the `#option-create` slot to customize the content displayed when the `creat
 An example is available in the [Create option](#create-option) section.
 ::
 
-### `empty` :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### `empty`
 
 Use the `#empty` slot to customize the content displayed when there is no options. Defaults to `No options.`.
 
