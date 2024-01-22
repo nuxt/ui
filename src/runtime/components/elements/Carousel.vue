@@ -1,43 +1,50 @@
 <template>
-  <div :class="ui.wrapper">
-    <div ref="carouselRef" :class="ui.carousel">
-      <div v-for="(item, index) in items" :key="index" :class="ui.item">
-        <slot name="item" :item="item">
-          <pre>{{ item }}</pre>
-        </slot>
+  <div :class="ui.wrapper" v-bind="attrs">
+    <div ref="carouselRef" :class="ui.container" class="no-scrollbar">
+      <div
+        v-for="(item, index) in items"
+        :key="index"
+        :class="ui.item"
+      >
+        <slot :item="item" :index="index" />
       </div>
     </div>
-    <template v-if="showArrows">
-      <slot name="prev" :on-click="onClickPrev" :is-disabled="isFirst">
+
+    <div v-if="arrows" :class="ui.arrows.wrapper">
+      <slot name="prev" :on-click="onClickPrev" :disabled="isFirst">
         <UButton
           v-if="prevButton"
           :disabled="isFirst"
-          v-bind="{ ...ui.prevButton, ...prevButton }"
+          v-bind="{ ...ui.default.prevButton, ...prevButton }"
+          :class="twMerge(ui.default.prevButton.class, prevButton?.class)"
           aria-label="Prev"
           @click="onClickPrev"
         />
       </slot>
-      <slot name="next" :on-click="onClickNext" :is-disabled="isLast">
+
+      <slot name="next" :on-click="onClickNext" :disabled="isLast">
         <UButton
           v-if="nextButton"
           :disabled="isLast"
-          v-bind="{ ...ui.nextButton, ...nextButton }"
+          v-bind="{ ...ui.default.nextButton, ...nextButton }"
+          :class="twMerge(ui.default.nextButton.class, nextButton?.class)"
           aria-label="Next"
           @click="onClickNext"
         />
       </slot>
-    </template>
-    <div v-if="showIndicators" :class="ui.indicatorWrapper">
-      <template v-for="indicator in indicatorsCount" :key="indicator">
-        <slot name="indicator" :on-click="onSelectItem" :is-current="indicator === currentSlide" :indicator="indicator">
+    </div>
+
+    <div v-if="indicators" :class="ui.indicators.wrapper">
+      <template v-for="index in indicatorsCount" :key="index">
+        <slot name="indicator" :on-click="onClick" :active="index === currentIndex" :index="index">
           <button
             type="button"
             :class="[
-              { [ui.indicatorActive]: indicator === currentSlide },
-              { [ui.indicator]: indicator !== currentSlide },
+              ui.indicators.base,
+              index === currentIndex ? ui.indicators.active : ui.indicators.inactive
             ]"
-            :aria-label="`set slide ${indicator}`"
-            @click="onSelectItem(indicator)"
+            :aria-label="`set slide ${index}`"
+            @click="onClick(index)"
           />
         </slot>
       </template>
@@ -48,10 +55,12 @@
 <script lang="ts">
 import { ref, toRef, toRefs, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
+import { twMerge } from 'tailwind-merge'
 import { mergeConfig } from '../../utils'
 import UButton from '../elements/Button.vue'
 import type { Strategy, Button } from '../../types'
 import { useUI } from '../../composables/useUI'
+import { useCarouselScroll } from '../../composables/useCarouselScroll'
 import { useScroll, useResizeObserver, useElementSize } from '@vueuse/core'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -66,24 +75,28 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     items: {
-      type: Array as PropType<{}[]>,
+      type: Array,
       default: () => []
     },
-    showArrows: {
+    arrows: {
       type: Boolean,
       default: false
     },
-    showIndicators: {
+    indicators: {
       type: Boolean,
       default: false
     },
     prevButton: {
-      type: Object as PropType<Button>,
-      default: () => config.prevButton as Button
+      type: Object as PropType<Button & { class?: string }>,
+      default: () => config.default.prevButton as Button & { class?: string }
     },
     nextButton: {
-      type: Object as PropType<Button>,
-      default: () => config.nextButton as Button
+      type: Object as PropType<Button & { class?: string }>,
+      default: () => config.default.nextButton as Button & { class?: string }
+    },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: () => ''
     },
     ui: {
       type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
@@ -91,31 +104,31 @@ export default defineComponent({
     }
   },
   setup (props) {
-
-    const { ui } = useUI('carousel', toRef(props, 'ui'), config)
+    const { ui, attrs } = useUI('carousel', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const carouselRef = ref<HTMLElement>()
+    const itemWidth = ref(0)
 
-    const { x, arrivedState } = useScroll(carouselRef, {
-      behavior: 'smooth'
-    })
+    const { x, arrivedState } = useScroll(carouselRef, { behavior: 'smooth' })
+    const { width: carouselWidth } = useElementSize(carouselRef)
 
     const { left: isFirst, right: isLast } = toRefs(arrivedState)
 
-    const itemWidth = ref(1)
+    useCarouselScroll(carouselRef)
 
     useResizeObserver(carouselRef, (entries) => {
       const [entry] = entries
+
       itemWidth.value = entry?.target?.firstElementChild?.clientWidth || 0
     })
 
-    const currentSlide = computed(() => {
-      return Math.round(x.value / itemWidth.value) + 1
-    })
-
-    const { width: carouselWidth } = useElementSize(carouselRef)
+    const currentIndex = computed(() => Math.round(x.value / itemWidth.value) + 1)
 
     const indicatorsCount = computed(() => {
+      if (!itemWidth.value) {
+        return 0
+      }
+
       return props.items.length - Math.round(carouselWidth.value / itemWidth.value) + 1
     })
 
@@ -127,22 +140,37 @@ export default defineComponent({
       x.value -= itemWidth.value
     }
 
-    function onSelectItem (slideNumber: number) {
-      x.value = (slideNumber - 1) * itemWidth.value
+    function onClick (index: number) {
+      x.value = (index - 1) * itemWidth.value
     }
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
-      onClickNext,
-      onClickPrev,
-      onSelectItem,
+      attrs,
       isFirst,
       isLast,
       carouselRef,
       indicatorsCount,
-      currentSlide
+      currentIndex,
+      onClickNext,
+      onClickPrev,
+      onClick,
+      twMerge
     }
   }
 })
 </script>
+
+<style scoped>
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+</style>
