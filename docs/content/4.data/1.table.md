@@ -117,7 +117,7 @@ You can use a `v-model:sort` to make the sorting reactive. You may also use `@up
 
 When fetching data from an API, we can take advantage of the [`useFetch`](https://nuxt.com/docs/api/composables/use-fetch) or [`useAsyncData`](https://nuxt.com/docs/api/composables/use-async-data) composables to fetch the data based on the sorting column and direction every time the `sort` reactive element changes.
 
-When doing so, you might want to set the `sort-mode` prop to `manual` to disable the automatic sorting and return the rows as is. :u-badge{label="New" class="!rounded-full" variant="subtle"}
+When doing so, you might want to set the `sort-mode` prop to `manual` to disable the automatic sorting and return the rows as is.
 
 ```vue
 <script setup>

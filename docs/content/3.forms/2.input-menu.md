@@ -8,8 +8,6 @@ links:
   - label: 'Combobox'
     icon: i-simple-icons-headlessui
     to: 'https://headlessui.com/vue/combobox'
-navigation:
-  badge: New
 ---
 
 ## Usage
