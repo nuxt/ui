@@ -193,7 +193,7 @@ export default defineComponent({
         updateInput(value)
       }
 
-      // Update trimmed input so that it has same behaviour as native input
+      // Update trimmed input so that it has same behavior as native input
       if (modelModifiers.value.trim) {
         (event.target as HTMLInputElement).value = value.trim()
       }
