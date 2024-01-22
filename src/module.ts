@@ -1,14 +1,11 @@
-import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
+import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin, addTemplate } from '@nuxt/kit'
 import defaultColors from 'tailwindcss/colors.js'
-import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/defaultExtractor.js'
 import { iconsPlugin, getIconCollections, type CollectionNames, type IconsPluginOptions } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
 import createTemplates from './templates'
 import * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types/utils'
-
-const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
 // @ts-ignore
 delete defaultColors.lightBlue
@@ -154,36 +151,7 @@ export default defineNuxtModule<ModuleOptions>({
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
       exposeConfig: true,
-      config: {
-        darkMode: 'class',
-        plugins: [
-          require('@tailwindcss/forms')({ strategy: 'class' }),
-          require('@tailwindcss/aspect-ratio'),
-          require('@tailwindcss/typography'),
-          require('@tailwindcss/container-queries'),
-          require('@headlessui/tailwindcss')
-        ],
-        content: {
-          files: [
-            resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'),
-            resolve(runtimeDir, 'ui.config/**/*.{mjs,js,ts}')
-          ],
-          transform: {
-            vue: (content) => {
-              return content.replaceAll(/(?:\r\n|\r|\n)/g, ' ')
-            }
-          },
-          extract: {
-            vue: (content) => {
-              return [
-                ...defaultExtractor(content),
-                // @ts-ignore
-                ...customSafelistExtractor(options.prefix, content, nuxt.options.appConfig.ui.colors, options.safelistColors)
-              ]
-            }
-          }
-        }
-      }
+      configPath: addTemplate({ src: resolve(runtimeDir, 'tailwind.config.cjs'), write: true, options: { runtimeDir } }).dst
     })
 
     // Plugins
