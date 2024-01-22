@@ -24,7 +24,8 @@ export default {
     size: 'text-sm'
   },
   checkbox: {
-    padding: 'ps-4'
+    padding: 'ps-4',
+    base: ''
   },
   loadingState: {
     wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14',
