@@ -202,6 +202,8 @@ componentProps:
 
 ## API
 
+When accessing the component via a template ref, you can use the following:
+
 ::field-group
   ::field{name="submit ()" type="Promise<void>"}
     Triggers form submission.
@@ -209,16 +211,16 @@ componentProps:
   ::field{name="validate (path?: string, opts: { silent?: boolean })" type="Promise<T>"}
     Triggers form validation. Will raise any errors unless `opts.silent` is set to true.
   ::
-  ::field{name="clear (path?: string)" type="void"}
+  ::field{name="clear (path?: string)"}
     Clears form errors associated with a specific path. If no path is provided, clears all form errors.
   ::
   ::field{name="getErrors (path?: string)" type="FormError[]"}
     Retrieves form errors associated with a specific path. If no path is provided, returns all form errors.
   ::
-  ::field{name="setErrors (errors: FormError[], path?: string)" type="void"}
+  ::field{name="setErrors (errors: FormError[], path?: string)"}
     Sets form errors for a given path. If no path is provided, overrides all errors.
   ::
   ::field{name="errors" type="Ref<FormError[]>"}
     A reference to the array containing validation errors. Use this to access or manipulate the error information.
-  :: 
+  ::
 ::
