@@ -7,7 +7,6 @@ links:
   - label: Disclosure
     icon: i-simple-icons-headlessui
     to: 'https://headlessui.com/vue/disclosure'
-icon: i-nuxt-ui-accordion
 ---
 
 ## Usage
