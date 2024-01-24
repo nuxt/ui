@@ -20,9 +20,10 @@ export default {
     size: '3xs' as const
   },
   badge: {
-    base: 'relative ms-auto inline-block py-0.5 px-2 text-xs rounded-md -me-1 -my-0.5',
-    active: 'bg-white dark:bg-gray-900',
-    inactive: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-900'
+    base: 'flex-shrink-0 ml-auto relative rounded',
+    color: 'gray' as const,
+    variant: 'solid' as const,
+    size: 'xs' as const
   },
   divider: {
     wrapper: {
