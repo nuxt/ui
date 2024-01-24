@@ -384,7 +384,7 @@ export default defineComponent({
         variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
-      ), props.selectClass)
+      ), props.placeholder && !props.modelValue && ui.value.placeholder, props.selectClass)
     })
 
     const isLeading = computed(() => {
