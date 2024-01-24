@@ -1,7 +1,9 @@
 <script setup>
+const route = useRoute()
+
 const links = [{
   label: 'Horizontal Navigation',
-  to: '/navigation/horizontal-navigation'
+  to: `${route.path.startsWith('/dev') ? '/dev' : ''}/navigation/horizontal-navigation`
 }, {
   label: 'Command Palette',
   to: '/navigation/command-palette'
