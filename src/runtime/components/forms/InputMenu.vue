@@ -5,6 +5,7 @@
     :name="name"
     :model-value="modelValue"
     :disabled="disabled"
+    :nullable="nullable"
     as="div"
     :class="ui.wrapper"
     @update:model-value="onUpdate"
@@ -194,6 +195,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    nullable: {
+      type: Boolean,
+      default: false
+    },
     placeholder: {
       type: String,
       default: null
@@ -294,6 +299,10 @@ export default defineComponent({
     })
 
     const label = computed(() => {
+      if (!props.modelValue) {
+        return
+      }
+
       if (props.valueAttribute) {
         const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
         return option ? option[props.optionAttribute] : null
