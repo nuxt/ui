@@ -1,7 +1,7 @@
 <template>
   <nav :class="ui.wrapper" v-bind="attrs">
     <ul v-for="(section, sectionIndex) of sections" :key="`section${sectionIndex}`" :class="ui.container">
-      <li v-for="(link, index) of section" :key="`section${sectionIndex}-${index}`">
+      <li v-for="(link, index) of section" :key="`section${sectionIndex}-${index}`" :class="ui.inner">
         <ULink
           v-slot="{ isActive }"
           v-bind="getULinkProps(link)"
