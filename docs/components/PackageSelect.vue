@@ -1,14 +1,13 @@
 <template>
   <div class="mb-3 lg:mb-6">
     <UDropdown
-      mode="hover"
       class="w-full"
       :items="[branches]"
       color="gray"
       :ui="{ width: 'w-full' }"
       :popper="{ strategy: 'absolute', placement: 'bottom' }"
     >
-      <UButton color="gray" class="w-full pl-3 pr-1.5 gap-2">
+      <UButton color="gray" class="w-full">
         <UIcon v-if="branch.icon" :name="branch.icon" class="w-4 h-4 flex-shrink-0 text-gray-600 dark:text-gray-300" />
 
         <span class="font-medium text-gray-900 dark:text-white">{{ branch.label }}</span>
