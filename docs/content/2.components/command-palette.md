@@ -257,3 +257,39 @@ When accessing the component via a template ref, you can use the following:
 ## Config
 
 :component-preset
+
+## Example
+
+Here are a few examples illustrating how you can customize the appearance of the `CommandPalette` component by utilizing its `ui` prop.
+
+### Algolia
+
+::component-example
+---
+padding: false
+component: 'command-palette-example-theme-algolia'
+componentProps:
+  class: 'max-h-[480px] rounded-md'
+hiddenCode: true
+---
+::
+
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/dev/docs/components/content/examples/CommandPaletteExampleThemeAlgolia.vue#L23" target="_blank"}
+Take a look at the component!
+::
+
+### Raycast
+
+::component-example
+---
+padding: false
+component: 'command-palette-example-theme-raycast'
+componentProps:
+  class: 'max-h-[480px] rounded-md'
+hiddenCode: true
+---
+::
+
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/dev/docs/components/content/examples/CommandPaletteExampleThemeRaycast.vue#L30" target="_blank"}
+Take a look at the component!
+::

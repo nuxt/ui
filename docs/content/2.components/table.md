@@ -6,10 +6,6 @@ links:
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/data/Table.vue
 ---
 
-::callout{icon="i-heroicons-puzzle-piece" to="/getting-started/examples#table"}
-Check out an example of a Table with advanced features like sorting, pagination, search, etc.
-::
-
 ## Usage
 
 Use the `rows` prop to set the data to display in the table. By default, the table will display all the fields of the rows.
@@ -51,6 +47,19 @@ padding: false
 component: 'table-example-columns-selectable'
 componentProps:
   class: 'flex-1'
+---
+::
+
+You can apply styles to `tr` and `td` elements by passing a `class` to rows.
+
+Also, you can apply styles to `th` elements by passing a `class` to columns.
+
+::component-example{class="grid"}
+---
+padding: false
+component: 'table-example-style'
+componentProps:
+  class: 'w-full'
 ---
 ::
 
@@ -362,21 +371,6 @@ excludedProps:
 ---
 ::
 
-## Styling
-
-You can apply styles to `tr` and `td` elements by passing a `class` to rows.
-
-Also, you can apply styles to `th` elements by passing a `class` to columns.
-
-::component-example{class="grid"}
----
-padding: false
-component: 'table-example-style'
-componentProps:
-  class: 'w-full'
----
-::
-
 ## Slots
 
 You can use slots to customize the header and data cells of the table.
@@ -444,3 +438,13 @@ componentProps:
 ## Config
 
 :component-preset
+
+## Example
+
+Here is an example of a Table component with all its features implemented.
+
+:component-example{component="table-example-advanced" hiddenCode :padding="false" }
+
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/dev/docs/components/content/examples/TableExampleAdvanced.vue" target="_blank"}
+Take a look at the component!
+::

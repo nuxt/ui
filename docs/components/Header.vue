@@ -7,8 +7,10 @@
     }"
   >
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white" aria-label="Nuxt UI">
+      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white" aria-label="Nuxt UI">
         <Logo class="w-auto h-6" />
+
+        <UBadge v-if="$route.path.startsWith('/pro')" label="Pro" variant="subtle" size="xs" class="-mb-[2px] rounded font-semibold" />
       </NuxtLink>
     </template>
 
@@ -35,7 +37,7 @@
 
       <UDivider type="dashed" class="mt-4 mb-3" />
 
-      <BranchSelect v-if="!route.path.startsWith('/pro')" />
+      <PackageSelect />
 
       <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
     </template>

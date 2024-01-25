@@ -7,14 +7,12 @@
 
   <UFooter>
     <template #left>
-      <a v-if="$route.path.startsWith('/pro')" class="text-sm text-gray-500 dark:text-gray-400 hover:underline" href="https://ui.nuxt.com/pro/purchase" target="_blank">
-        Purchase Nuxt UI Pro
-      </a>
-      <span v-else class="text-sm text-gray-500 dark:text-gray-400">
-        Published under <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="text-gray-900 dark:text-white">
-          MIT License
-        </NuxtLink>
-      </span>
+      <NuxtLink v-if="$route.path.startsWith('/pro')" to="https://ui.nuxt.com/pro/purchase" target="_blank" class="text-sm text-gray-500 dark:text-gray-400">
+        Purchase <span class="text-gray-900 dark:text-white">Nuxt UI Pro</span>
+      </NuxtLink>
+      <NuxtLink v-else to="https://github.com/nuxt/ui" target="_blank" class="text-sm text-gray-500 dark:text-gray-400">
+        Published under <span class="text-gray-900 dark:text-white">MIT License</span>
+      </NuxtLink>
     </template>
 
     <template #right>

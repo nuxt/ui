@@ -68,3 +68,9 @@ Use the `#badge` slot to customize the link badge. You will have access to the `
 ## Config
 
 :component-preset
+
+## Example
+
+Here is an example illustrating how you can customize the appearance of the `VerticalNavigation` component by utilizing its `ui` prop.
+
+:component-example{component="vertical-navigation-example-theme-tailwind"}
