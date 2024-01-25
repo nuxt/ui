@@ -46,6 +46,10 @@ export default {
     placement: 'bottom-end',
     strategy: 'fixed'
   },
+  default: {
+    openDelay: 0,
+    closeDelay: 0
+  },
   arrow: {
     ...arrow,
     ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-700',

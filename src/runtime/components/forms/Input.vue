@@ -211,7 +211,7 @@ export default defineComponent({
         updateInput(value)
       }
 
-      // Update trimmed input so that it has same behaviour as native input https://github.com/vuejs/core/blob/5ea8a8a4fab4e19a71e123e4d27d051f5e927172/packages/runtime-dom/src/directives/vModel.ts#L63
+      // Update trimmed input so that it has same behavior as native input https://github.com/vuejs/core/blob/5ea8a8a4fab4e19a71e123e4d27d051f5e927172/packages/runtime-dom/src/directives/vModel.ts#L63
       if (modelModifiers.value.trim) {
         (event.target as HTMLInputElement).value = value.trim()
       }
