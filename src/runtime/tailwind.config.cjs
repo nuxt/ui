@@ -1,5 +1,6 @@
 const { resolve } = require('path')
 const { defaultExtractor: createDefaultExtractor } = require('tailwindcss/lib/lib/defaultExtractor.js')
+const { customSafelistExtractor } = require('<%= options.runtimeDir %>/utils/colors')
 
 const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
@@ -27,7 +28,7 @@ module.exports = {
       vue: (content) => {
         return [
           ...defaultExtractor(content),
-          // ...customSafelistExtractor(options.prefix, content, nuxt.options.appConfig.ui.colors, options.safelistColors)
+          ...customSafelistExtractor('<%= options.prefix %>', content, '<%= nuxt.options.appConfig.ui.colors %>', '<%= options.safelistColors %>')
         ]
       }
     }

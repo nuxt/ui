@@ -2,7 +2,7 @@ import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, creat
 import defaultColors from 'tailwindcss/colors.js'
 import { iconsPlugin, getIconCollections, type CollectionNames, type IconsPluginOptions } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
-import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
+import { generateSafelist, excludeColors } from './runtime/utils/colors'
 import createTemplates from './templates'
 import * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types/utils'
@@ -151,7 +151,7 @@ export default defineNuxtModule<ModuleOptions>({
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installModule('@nuxtjs/tailwindcss', {
       exposeConfig: true,
-      configPath: addTemplate({ src: resolve(runtimeDir, 'tailwind.config.cjs'), write: true, options: { runtimeDir } }).dst
+      configPath: addTemplate({ src: resolve(runtimeDir, 'tailwind.config.cjs'), write: true, options: { ...options, runtimeDir } }).dst
     })
 
     // Plugins

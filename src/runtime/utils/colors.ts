@@ -1,4 +1,4 @@
-import { omit } from './runtime/utils/lodash'
+import { omit } from './lodash'
 import { kebabCase, camelCase, upperFirst } from 'scule'
 
 const colorsToExclude = [
@@ -242,9 +242,12 @@ export const generateSafelist = (colors: string[], globalColors) => {
   ]
 }
 
-export const customSafelistExtractor = (prefix, content: string, colors: string[], safelistColors: string[]) => {
+export const customSafelistExtractor = (prefix: string, content: string, colorList: string | string[], safelistColorList: string | string[]) => {
   const classes: string[] = []
   const regex = /<([A-Za-z][A-Za-z0-9]*(?:-[A-Za-z][A-Za-z0-9]*)*)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/gs
+
+  const colors = Array.isArray(colorList) ? colorList : colorList.split(',')
+  const safelistColors = Array.isArray(safelistColorList) ? safelistColorList : safelistColorList.split(',')
 
   const matches = content.matchAll(regex)
 
