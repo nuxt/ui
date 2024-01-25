@@ -5,6 +5,7 @@
     :name="name"
     :model-value="modelValue"
     :disabled="disabled"
+    :nullable="nullable"
     as="div"
     :class="ui.wrapper"
     @update:model-value="onUpdate"
@@ -19,7 +20,7 @@
         :class="inputClass"
         autocomplete="off"
         v-bind="attrs"
-        :display-value="() => query ? query : ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute]"
+        :display-value="() => query ? query : label"
         @change="onChange"
       />
 
@@ -194,6 +195,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    nullable: {
+      type: Boolean,
+      default: false
+    },
     placeholder: {
       type: String,
       default: null
@@ -290,6 +295,19 @@ export default defineComponent({
       set (value) {
         internalQuery.value = value
         emit('update:query', value)
+      }
+    })
+
+    const label = computed(() => {
+      if (!props.modelValue) {
+        return
+      }
+
+      if (props.valueAttribute) {
+        const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
+        return option ? option[props.optionAttribute] : null
+      } else {
+        return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
       }
     })
 
@@ -423,6 +441,7 @@ export default defineComponent({
       popper,
       trigger,
       container,
+      label,
       isLeading,
       isTrailing,
       // eslint-disable-next-line vue/no-dupe-keys

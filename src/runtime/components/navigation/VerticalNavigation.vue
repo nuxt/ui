@@ -34,9 +34,16 @@
             </span>
           </slot>
           <slot name="badge" :link="link" :is-active="isActive">
-            <span v-if="link.badge" :class="[ui.badge.base, isActive ? ui.badge.active : ui.badge.inactive]">
-              {{ link.badge }}
-            </span>
+            <UBadge
+              v-if="link.badge"
+              v-bind="{
+                size: ui.badge.size,
+                color: ui.badge.color,
+                variant: ui.badge.variant,
+                ...((typeof link.badge === 'string' || typeof link.badge === 'number') ? { label: link.badge } : link.badge)
+              }"
+              :class="ui.badge.base"
+            />
           </slot>
         </ULink>
       </li>
@@ -51,6 +58,7 @@ import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
+import UBadge from '../elements/Badge.vue'
 import ULink from '../elements/Link.vue'
 import UDivider from '../layout/Divider.vue'
 import { useUI } from '../../composables/useUI'
@@ -66,6 +74,7 @@ export default defineComponent({
   components: {
     UIcon,
     UAvatar,
+    UBadge,
     ULink,
     UDivider
   },

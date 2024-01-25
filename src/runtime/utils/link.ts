@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { RouteLocationRaw } from 'vue-router'
+import type { RouteLocationRaw } from '#vue-router'
 
 export const nuxtLinkProps = {
   to: {
@@ -16,7 +16,7 @@ export const nuxtLinkProps = {
     default: undefined
   },
   rel: {
-    type: String,
+    type: String as PropType<string | null>,
     default: undefined
   },
   noRel: {
@@ -62,6 +62,18 @@ export const nuxtLinkProps = {
 } as const
 
 const uLinkProps = {
+  as: {
+    type: String,
+    default: 'button'
+  },
+  type: {
+    type: String,
+    default: 'button'
+  },
+  disabled: {
+    type: Boolean,
+    default: null
+  },
   active: {
     type: Boolean,
     default: undefined

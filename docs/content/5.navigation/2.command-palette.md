@@ -235,6 +235,25 @@ componentProps:
 
 :component-props
 
+## API
+
+When accessing the component via a template ref, you can use the following:
+
+::field-group
+  ::field{name="query" type="string"}
+    The current query.
+  ::
+  ::field{name="updateQuery (query)"}
+    Updates the current query.
+  ::
+  ::field{name="results" type="ComputedRef<Fuse.FuseResult<Command>[]>"}
+    The results exposed by [useFuse](https://vueuse.org/integrations/useFuse/#usefuse).
+  ::
+  ::field{name="comboboxApi"}
+    The Combobox [API](https://github.com/tailwindlabs/headlessui/blob/main/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L384) exposed by Headless UI.
+  ::
+::
+
 ## Config
 
 :component-preset

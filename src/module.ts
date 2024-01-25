@@ -54,6 +54,10 @@ export interface ModuleOptions {
   icons: CollectionNames[] | 'all' | IconsPluginOptions
 
   safelistColors?: string[]
+  /**
+   * Disables the global css styles added by the module.
+   */
+  disableGlobalStyles?: boolean
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -68,7 +72,8 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     prefix: 'U',
     icons: ['heroicons'],
-    safelistColors: ['primary']
+    safelistColors: ['primary'],
+    disableGlobalStyles: false
   },
   async setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
@@ -80,7 +85,9 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.alias['#ui'] = runtimeDir
 
-    nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
+    if (!options.disableGlobalStyles) {
+      nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
+    }
 
     // @ts-ignore
     nuxt.hook('tailwindcss:config', function (tailwindConfig) {

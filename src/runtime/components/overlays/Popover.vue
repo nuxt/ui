@@ -72,11 +72,11 @@ export default defineComponent({
     },
     openDelay: {
       type: Number,
-      default: 0
+      default: () => config.default.openDelay
     },
     closeDelay: {
       type: Number,
-      default: 0
+      default: () => config.default.closeDelay
     },
     overlay: {
       type: Boolean,

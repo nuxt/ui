@@ -8,7 +8,7 @@ description: A list of links that indicate the current page's location within a 
 Pass an array to the `links` prop of the Breadcrumb component. Each link can have the following properties:
 
 - `label` - The label of the link.
-- `labelClass` - The class of the link label. :u-badge{label="New" class="!rounded-full" variant="subtle"}
+- `labelClass` - The class of the link label.
 - `icon` - The icon of the link.
 - `iconClass` - The class of the link icon.
 

@@ -46,7 +46,7 @@ props:
 ---
 ::
 
-### Disabled :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### Disabled
 
 Use the `disabled` prop to disable all the buttons.
 

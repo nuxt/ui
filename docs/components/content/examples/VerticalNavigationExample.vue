@@ -1,4 +1,6 @@
 <script setup>
+const route = useRoute()
+
 const links = [{
   label: 'Profile',
   avatar: {
@@ -12,7 +14,7 @@ const links = [{
 }, {
   label: 'Vertical Navigation',
   icon: 'i-heroicons-chart-bar',
-  to: '/navigation/vertical-navigation'
+  to: `${route.path.startsWith('/dev') ? '/dev' : ''}/navigation/vertical-navigation`
 }, {
   label: 'Command Palette',
   icon: 'i-heroicons-command-line',
