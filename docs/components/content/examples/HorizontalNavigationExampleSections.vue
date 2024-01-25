@@ -3,19 +3,13 @@ const route = useRoute()
 
 const links = [
   [{
-    label: 'Profile',
-    avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-    },
-    badge: 100
-  }, {
     label: 'Installation',
     icon: 'i-heroicons-home',
     to: '/getting-started/installation'
   }, {
-    label: 'Vertical Navigation',
+    label: 'Horizontal Navigation',
     icon: 'i-heroicons-chart-bar',
-    to: `${route.path.startsWith('/dev') ? '/dev' : ''}/navigation/vertical-navigation`
+    to: `${route.path.startsWith('/dev') ? '/dev' : ''}/navigation/horizontal-navigation`
   }, {
     label: 'Command Palette',
     icon: 'i-heroicons-command-line',
@@ -31,5 +25,5 @@ const links = [
 </script>
 
 <template>
-  <UVerticalNavigation :links="links" />
+  <UHorizontalNavigation :links="links" class="border-b border-gray-200 dark:border-gray-800" />
 </template>
