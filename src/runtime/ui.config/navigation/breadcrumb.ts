@@ -5,7 +5,7 @@ export default {
   base: 'flex items-center gap-x-1.5 group font-semibold min-w-0',
   label: 'block truncate',
   icon: {
-    base: 'flex-shrink-0 w-4 h-4',
+    base: 'flex-shrink-0 w-5 h-5',
     active: '',
     inactive: ''
   },
