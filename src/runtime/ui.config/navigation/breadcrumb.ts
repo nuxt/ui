@@ -1,7 +1,7 @@
 export default {
   wrapper: 'relative',
   ol: 'flex items-center gap-x-1.5',
-  li: 'flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm',
+  li: 'flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm leading-6',
   base: 'flex items-center gap-x-1.5 group font-semibold',
   label: '',
   icon: {
