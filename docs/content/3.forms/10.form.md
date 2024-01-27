@@ -208,7 +208,7 @@ When accessing the component via a template ref, you can use the following:
   ::field{name="submit ()" type="Promise<void>"}
     Triggers form submission.
   ::
-  ::field{name="validate (path?: string, opts: { silent?: boolean })" type="Promise<T>"}
+  ::field{name="validate (path?: string | string[], opts: { silent?: boolean })" type="Promise<T>"}
     Triggers form validation. Will raise any errors unless `opts.silent` is set to true.
   ::
   ::field{name="clear (path?: string)"}
