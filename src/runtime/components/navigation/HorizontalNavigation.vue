@@ -1,11 +1,11 @@
 <template>
   <nav :class="ui.wrapper" v-bind="attrs">
-    <ul v-for="(section, sectionIndex) of sections" :key="`section${sectionIndex}`">
-      <li v-for="(link, index) of section" :key="`section${sectionIndex}-${index}`">
+    <ul v-for="(section, sectionIndex) of sections" :key="`section${sectionIndex}`" :class="ui.container">
+      <li v-for="(link, index) of section" :key="`section${sectionIndex}-${index}`" :class="ui.inner">
         <ULink
           v-slot="{ isActive }"
           v-bind="getULinkProps(link)"
-          :class="[ui.base, ui.padding, ui.width, ui.ring, ui.rounded, ui.font, ui.size]"
+          :class="[ui.base, ui.before, ui.after]"
           :active-class="ui.active"
           :inactive-class="ui.inactive"
           @click="link.click"
@@ -47,7 +47,6 @@
           </slot>
         </ULink>
       </li>
-      <UDivider v-if="sectionIndex < sections.length - 1" :ui="ui.divider" />
     </ul>
   </nav>
 </template>
@@ -60,28 +59,26 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UBadge from '../elements/Badge.vue'
 import ULink from '../elements/Link.vue'
-import UDivider from '../layout/Divider.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getULinkProps } from '../../utils'
-import type { VerticalNavigationLink, Strategy } from '../../types'
+import type { HorizontalNavigationLink, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
-import { verticalNavigation } from '#ui/ui.config'
+import { horizontalNavigation } from '#ui/ui.config'
 
-const config = mergeConfig<typeof verticalNavigation>(appConfig.ui.strategy, appConfig.ui.verticalNavigation, verticalNavigation)
+const config = mergeConfig<typeof horizontalNavigation>(appConfig.ui.strategy, appConfig.ui.horizontalNavigation, horizontalNavigation)
 
 export default defineComponent({
   components: {
     UIcon,
     UAvatar,
     UBadge,
-    ULink,
-    UDivider
+    ULink
   },
   inheritAttrs: false,
   props: {
     links: {
-      type: Array as PropType<VerticalNavigationLink[][] | VerticalNavigationLink[]>,
+      type: Array as PropType<HorizontalNavigationLink[][] | HorizontalNavigationLink[]>,
       default: () => []
     },
     class: {
@@ -94,9 +91,9 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { ui, attrs } = useUI('verticalNavigation', toRef(props, 'ui'), config, toRef(props, 'class'))
+    const { ui, attrs } = useUI('horizontalNavigation', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const sections = computed(() => (Array.isArray(props.links[0]) ? props.links : [props.links]) as VerticalNavigationLink[][])
+    const sections = computed(() => (Array.isArray(props.links[0]) ? props.links : [props.links]) as HorizontalNavigationLink[][])
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

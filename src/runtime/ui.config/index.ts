@@ -38,6 +38,7 @@ export { default as divider } from './layout/divider'
 
 // Navigation
 export { default as verticalNavigation } from './navigation/verticalNavigation'
+export { default as horizontalNavigation } from './navigation/horizontalNavigation'
 export { default as commandPalette } from './navigation/commandPalette'
 export { default as pagination } from './navigation/pagination'
 export { default as tabs } from './navigation/tabs'

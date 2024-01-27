@@ -89,13 +89,19 @@ export default defineComponent({
       return errs
     }
 
-    async function validate (path?: string, opts: { silent?: boolean } = { silent: false }) {
-      if (path) {
+    async function validate (path?: string | string[], opts: { silent?: boolean } = { silent: false }) {
+      let paths = path
+
+      if (path && !Array.isArray(path)) {
+        paths = [path]
+      }
+
+      if (paths) {
         const otherErrors = errors.value.filter(
-          (error) => error.path !== path
+          (error) => !paths.includes(error.path)
         )
         const pathErrors = (await getErrors()).filter(
-          (error) => error.path === path
+          (error) => paths.includes(error.path)
         )
         errors.value = otherErrors.concat(pathErrors)
       } else {

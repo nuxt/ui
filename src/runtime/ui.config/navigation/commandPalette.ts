@@ -10,8 +10,8 @@ export default {
     icon: {
       base: 'pointer-events-none absolute start-4 text-gray-400 dark:text-gray-500',
       loading: 'animate-spin',
-      size: 'h-4 w-4',
-      padding: 'ps-10'
+      size: 'h-5 w-5',
+      padding: 'ps-11'
     },
     closeButton: {
       base: 'absolute end-4',
@@ -26,27 +26,27 @@ export default {
   },
   group: {
     wrapper: 'p-2',
-    label: 'px-2 my-2 text-xs font-semibold text-gray-900 dark:text-white',
+    label: 'px-2.5 my-2 text-xs font-semibold text-gray-900 dark:text-white',
     container: 'text-sm text-gray-700 dark:text-gray-200',
     command: {
-      base: 'flex justify-between select-none items-center rounded-md px-2 py-1.5 gap-2 relative',
+      base: 'flex justify-between select-none items-center rounded-md px-2.5 py-1.5 gap-2 relative',
       active: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
       inactive: '',
       label: 'flex items-center gap-1.5 min-w-0',
       prefix: 'text-gray-400 dark:text-gray-500',
       suffix: 'text-gray-400 dark:text-gray-500',
-      container: 'flex items-center gap-2 min-w-0',
+      container: 'flex items-center gap-1.5 min-w-0',
       icon: {
-        base: 'flex-shrink-0 w-4 h-4',
+        base: 'flex-shrink-0 w-5 h-5',
         active: 'text-gray-900 dark:text-white',
         inactive: 'text-gray-400 dark:text-gray-500'
       },
       selectedIcon: {
-        base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
+        base: 'h-5 w-5 text-gray-900 dark:text-white flex-shrink-0'
       },
       avatar: {
         base: 'flex-shrink-0',
-        size: '3xs' as const
+        size: '2xs' as const
       },
       chip: {
         base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'
