@@ -83,7 +83,6 @@ export default async function installTailwind (
     filename: 'nuxtui-tailwind.config.cjs',
     write: true,
     getContents: () => `
-      const { resolve } = require('path')
       const { defaultExtractor: createDefaultExtractor } = require('tailwindcss/lib/lib/defaultExtractor.js')
       const { customSafelistExtractor } = require('${runtimeDir}/utils/colors')
       const { iconsPlugin, getIconCollections } = require('@egoist/tailwindcss-icons')
@@ -102,8 +101,8 @@ export default async function installTailwind (
         ],
         content: {
           files: [
-            resolve('${runtimeDir}', 'components/**/*.{vue,mjs,ts}'),
-            resolve('${runtimeDir}', 'ui.config/**/*.{mjs,js,ts}')
+            "${resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}')}",
+            "${resolve(runtimeDir, 'ui.config/**/*.{mjs,js,ts}')}"
           ],
           transform: {
             vue: (content) => {
