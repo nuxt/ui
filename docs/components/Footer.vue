@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <UFooter>
+  <UFooter :links="links">
     <template #left>
       <NuxtLink v-if="$route.path.startsWith('/pro')" to="https://ui.nuxt.com/pro/purchase" target="_blank" class="text-sm text-gray-500 dark:text-gray-400">
         Purchase <span class="text-gray-900 dark:text-white">Nuxt UI Pro</span>
@@ -25,5 +25,23 @@
 </template>
 
 <script setup lang="ts">
-// force typescript
+const links = [{
+  icon: 'i-simple-icons-figma',
+  label: 'Figma Kit',
+  to: 'https://www.figma.com/community/file/1288455405058138934/nuxt-ui',
+  target: '_blank'
+}, {
+  label: 'Playground',
+  icon: 'i-simple-icons-stackblitz',
+  to: 'https://stackblitz.com/edit/nuxt-ui',
+  target: '_blank'
+}, {
+  label: 'Roadmap',
+  icon: 'i-heroicons-academic-cap',
+  to: '/roadmap'
+}, {
+  label: 'Releases',
+  icon: 'i-heroicons-rocket-launch',
+  to: '/releases'
+}]
 </script>

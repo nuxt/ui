@@ -64,24 +64,23 @@ sections:
     links:
       - label: Explore Components
         to: /elements/accordion
-        color: white
-        size: lg
+        color: gray
+        size: xl
         trailingIcon: i-heroicons-arrow-right-20-solid
 cta:
   title: Trusted and supported by our<br class="hidden lg:block"> amazing community
 pro:
   title: Upgrade to <span class="text-primary">Nuxt UI Pro</span>
-  description: 'Nuxt UI Pro is a collection of premium components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.<br>It includes all primitives to build landing pages, documentation, blogs, changelog, dashboards or entire SaaS products.'
+  description: 'Nuxt UI Pro is a collection of premium Vue components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.<br>It includes all primitives to build landing pages, documentation, blogs, changelog, dashboards or entire SaaS products.'
   links:
-    - label: Get Started
-      to: /pro/getting-started/installation
-      size: lg
-      icon: i-heroicons-rocket-launch
-    - label: Buy now
-      to: /pro/getting-started/license
+    - label: View pricing
+      to: /pro/pricing
+      size: xl
+    - label: Read documentation
+      to: /pro/getting-started
       color: gray
-      icon: i-heroicons-credit-card
-      size: lg
+      trailingIcon: i-heroicons-arrow-right-20-solid
+      size: xl
   sections:
     - title: The freedom to build anything
       description: Nuxt UI Pro ships with an extensive set of advanced components that cover a wide range of use-cases. Carefully crafted to reduce boilerplate code without sacrificing flexibility.
@@ -98,12 +97,12 @@ pro:
           description: Nuxt UI Pro components aims to structure your content, they are responsive by design and will adapt to any screen size.
           icon: i-heroicons-device-phone-mobile
       links:
-        - label: Explore components
+        - label: Explore Components
           to: /pro/components
           color: gray
           icon: i-heroicons-arrow-right-20-solid
           trailing: true
-          size: md
+          size: lg
           class: ml-8
       code: |
         ```vue [app.vue]
@@ -147,8 +146,8 @@ pro:
           description: 'Nuxt UI Pro ships with a ready to use command palette component. No need to setup Algolia DocSearch anymore.'
           icon: i-heroicons-magnifying-glass
       links:
-        - label: Learn more
-          to: /pro/guide/content
+        - label: Nuxt Content integration
+          to: /pro/getting-started/content
           color: gray
           icon: i-heroicons-arrow-right-20-solid
           trailing: true
@@ -182,36 +181,3 @@ pro:
   docs:
     title: Build your docs in seconds
     description: Whether you're creating documentation for your open source project or explaining your product, Nuxt UI Pro has you covered.
-  testimonials:
-    title: What people are saying
-    description: Nuxt UI Pro is already loved by many developers and companies around the world.
-    items:
-      - quote: "We were using a SaaS service for the docs site, but were left unfulfilled. We put in the effort to do it in house, with UI Pro and not only did we get complimented by a prospect on our site, but they wanted to know our platform."
-        author:
-          name: 'Anthony Bettini'
-          description: 'CEO and founder of VulnCheck'
-          to: 'https://www.linkedin.com/in/anthonybettini/'
-          target: _blank
-          avatar:
-            src: 'https://media.licdn.com/dms/image/C4E03AQEY3pmXsH8hDg/profile-displayphoto-shrink_800_800/0/1519741248598?e=1704326400&v=beta&t=2h1d5FR3vzkeuGPwFfbAhJ0fsaIc77kymZ54UTxXuEU'
-            loading: lazy
-      - quote: "UI Pro saves 100s of hours of dev and design time while delivering a clean professional look on any device."
-        author:
-          name: 'Kevin Olson'
-          description:  'Founder of Fume.app'
-          to: 'https://github.com/acidjazz'
-          target: _blank
-          avatar:
-            src: 'https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/acidjazz'
-            srcset: 'https://ipx.nuxt.com/f_auto,s_80x80/gh_avatar/acidjazz 2x'
-            loading: lazy
-      - quote: "Nuxt UI Pro is my go to component library. Out-of-the-box it handles all of the UI demands I throw at it while looking great. The customisation is really worth thought out, allowing you to override components in a breeze. Always amazed at the improvements dropped in each update as well, the team is doing an amazing job."
-        author:
-          name: 'Harlan Wilton'
-          description:  'Nuxt core team member'
-          to: 'https://github.com/harlan-zw'
-          target: _blank
-          avatar:
-            src: 'https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/harlan-zw'
-            srcset: 'https://ipx.nuxt.com/f_auto,s_80x80/gh_avatar/harlan-zw 2x'
-            loading: lazy

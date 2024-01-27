@@ -33,6 +33,7 @@ defineProps<{
   error: NuxtError
 }>()
 
+const route = useRoute()
 const { branch } = useContentSource()
 
 const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
@@ -58,20 +59,22 @@ const links = computed(() => {
   return [{
     label: 'Docs',
     icon: 'i-heroicons-book-open',
-    to: `${branch.value?.name === 'dev' ? '/dev' : ''}/getting-started`
-  }, !!navigation.value.find(item => item._path === '/pro') && {
+    to: branch.value?.name === 'dev' ? '/dev/getting-started' : '/getting-started',
+    active: branch.value?.name === 'dev' ? (route.path.startsWith('/dev/getting-started') || route.path.startsWith('/dev/components')) : (route.path.startsWith('/getting-started') || route.path.startsWith('/components'))
+  }, ...(navigation.value.find(item => item._path === '/pro') ? [{
     label: 'Pro',
     icon: 'i-heroicons-square-3-stack-3d',
-    to: '/pro/getting-started'
+    to: '/pro',
+    active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components')
+  }, {
+    label: 'Pricing',
+    icon: 'i-heroicons-currency-dollar',
+    to: '/pro/pricing'
   }, {
     label: 'Templates',
     icon: 'i-heroicons-computer-desktop',
-    to: '/pro/getting-started/templates'
-  }, {
-    label: 'Roadmap',
-    icon: 'i-heroicons-academic-cap',
-    to: '/roadmap'
-  }, {
+    to: '/pro/templates'
+  }] : []), {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch',
     to: '/releases'

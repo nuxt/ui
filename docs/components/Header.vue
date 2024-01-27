@@ -35,9 +35,9 @@
     <template #panel>
       <UAsideLinks :links="links" />
 
-      <UDivider type="dashed" class="mt-4 mb-3" />
+      <UDivider type="dashed" class="my-4" />
 
-      <PackageSelect />
+      <BranchSelect />
 
       <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
     </template>

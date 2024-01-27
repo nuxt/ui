@@ -1,5 +1,5 @@
 <template>
-  <UPage>
+  <UPage v-if="page">
     <UPageHeader :title="page.title" :description="page.description" :links="page.links" :headline="headline" />
 
     <UPageBody prose>
@@ -97,6 +97,14 @@ const communityLinks = computed(() => [{
   label: 'Chat on Discord',
   to: 'https://discord.com/channels/473401852243869706/1153996761426300948',
   target: '_blank'
+}, {
+  icon: 'i-heroicons-heart',
+  label: 'Contributing',
+  to: '/getting-started/contributing'
+}, {
+  label: 'Roadmap',
+  icon: 'i-heroicons-academic-cap',
+  to: '/roadmap'
 }])
 
 const resourcesLinks = [{
