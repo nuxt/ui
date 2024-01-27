@@ -84,7 +84,7 @@ export default async function installTailwind (
     write: true,
     getContents: () => `
       const { defaultExtractor: createDefaultExtractor } = require('tailwindcss/lib/lib/defaultExtractor.js')
-      const { customSafelistExtractor } = require('${runtimeDir}/utils/colors')
+      const { customSafelistExtractor } = require(${JSON.stringify(resolve(runtimeDir, 'utils', 'colors'))})
       const { iconsPlugin, getIconCollections } = require('@egoist/tailwindcss-icons')
 
       const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
@@ -101,8 +101,8 @@ export default async function installTailwind (
         ],
         content: {
           files: [
-            "${resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}')}",
-            "${resolve(runtimeDir, 'ui.config/**/*.{mjs,js,ts}')}"
+            ${JSON.stringify(resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'))},
+            ${JSON.stringify(resolve(runtimeDir, 'ui.config/**/*.{mjs,js,ts}'))}
           ],
           transform: {
             vue: (content) => {
@@ -113,7 +113,7 @@ export default async function installTailwind (
             vue: (content) => {
               return [
                 ...defaultExtractor(content),
-                ...customSafelistExtractor('${moduleOptions.prefix}', content, ${JSON.stringify(nuxt.options.appConfig.ui.colors)}, ${JSON.stringify(moduleOptions.safelistColors)})
+                ...customSafelistExtractor(${JSON.stringify(moduleOptions.prefix)}, content, ${JSON.stringify(nuxt.options.appConfig.ui.colors)}, ${JSON.stringify(moduleOptions.safelistColors)})
               ]
             }
           }
