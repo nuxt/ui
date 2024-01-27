@@ -174,7 +174,7 @@
         </template>
       </ULandingHero>
 
-      <ULandingSection v-for="(section, index) in page.pro.sections" :key="index" v-bind="section">
+      <ULandingSection v-for="(section, index) in page.pro.sections" :key="index" v-bind="section" class="!pt-0">
         <MDC
           v-if="section.code"
           :value="section.code"

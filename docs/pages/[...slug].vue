@@ -98,7 +98,7 @@ const communityLinks = computed(() => [{
   to: 'https://discord.com/channels/473401852243869706/1153996761426300948',
   target: '_blank'
 }, {
-  icon: 'i-heroicons-heart',
+  icon: 'i-heroicons-lifebuoy',
   label: 'Contributing',
   to: '/getting-started/contributing'
 }, {

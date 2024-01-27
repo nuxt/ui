@@ -46,26 +46,25 @@ export const useContentSource = () => {
       return
     }
 
+    if (branch.value.name === 'pro') {
+      if (b.name === 'dev') {
+        router.push('/dev/getting-started')
+      } else {
+        router.push('/getting-started')
+      }
+
+      return
+    }
+
     if (b.name === 'dev') {
-      router.push('/dev/getting-started')
-      return
+      if (route.path.startsWith('/dev')) {
+        return
+      }
+
+      router.push(`/dev${route.path}`)
+    } else {
+      router.push(route.path.replace('/dev', ''))
     }
-
-    if (b.name === 'main') {
-      router.push('/getting-started')
-      return
-    }
-
-    // TODO: Put this back once merged on `main`
-    // if (b.name === 'dev') {
-    //   if (route.path.startsWith('/dev')) {
-    //     return
-    //   }
-
-    //   router.push(`/dev${route.path}`)
-    // } else {
-    //   router.push(route.path.replace('/dev', ''))
-    // }
   }
 
   return {

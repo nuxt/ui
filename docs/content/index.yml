@@ -62,11 +62,17 @@ sections:
           height: 160
         orientation: 'horizontal'
     links:
-      - label: Explore Components
+      - label: Explore 40+ components
         to: /elements/accordion
+        color: primary
+        size: xl
+        icon: i-heroicons-cube
+      - label: nuxt/ui
+        to: https://github.com/nuxt/ui
+        target: _blank
         color: gray
         size: xl
-        trailingIcon: i-heroicons-arrow-right-20-solid
+        icon: i-simple-icons-github
 cta:
   title: Trusted and supported by our<br class="hidden lg:block"> amazing community
 pro:
