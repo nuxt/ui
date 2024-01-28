@@ -68,7 +68,7 @@ const links = computed(() => {
     active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components')
   }, {
     label: 'Pricing',
-    icon: 'i-heroicons-currency-dollar',
+    icon: 'i-heroicons-credit-card',
     to: '/pro/pricing'
   }, {
     label: 'Templates',
