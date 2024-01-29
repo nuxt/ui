@@ -17,7 +17,7 @@
 
     <template #right>
       <UButton aria-label="Nuxt Website" icon="i-simple-icons-nuxtdotjs" to="https://nuxt.com" target="_blank" v-bind="($ui.button.secondary as any)" />
-      <UButton aria-label="Nuxt UI on Discord" icon="i-simple-icons-discord" to="https://discord.com/invite/ps2h6QT" target="_blank" v-bind="($ui.button.secondary as any)" />
+      <UButton aria-label="Nuxt UI on Discord" icon="i-simple-icons-discord" to="https://chat.nuxt.dev" target="_blank" v-bind="($ui.button.secondary as any)" />
       <UButton aria-label="Nuxt on X" icon="i-simple-icons-x" to="https://x.com/nuxt_js" target="_blank" v-bind="($ui.button.secondary as any)" />
       <UButton aria-label="Nuxt UI on GitHub" icon="i-simple-icons-github" to="https://github.com/nuxt/ui" target="_blank" v-bind="($ui.button.secondary as any)" />
     </template>
@@ -37,7 +37,7 @@ const links = [{
   target: '_blank'
 }, {
   label: 'Roadmap',
-  icon: 'i-heroicons-academic-cap',
+  icon: 'i-heroicons-map',
   to: '/roadmap'
 }, {
   label: 'Releases',
