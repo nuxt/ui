@@ -93,11 +93,6 @@ const communityLinks = computed(() => [{
   to: 'https://github.com/nuxt/ui',
   target: '_blank'
 }, {
-  icon: 'i-heroicons-chat-bubble-bottom-center-text',
-  label: 'Chat on Discord',
-  to: 'https://chat.nuxt.dev',
-  target: '_blank'
-}, {
   icon: 'i-heroicons-lifebuoy',
   label: 'Contributing',
   to: '/getting-started/contributing'
