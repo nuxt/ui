@@ -34,7 +34,7 @@ const attrs = {
 </script>
 
 <template>
-  <VCalendarDatePicker v-if="date?.start && date?.end" v-model.range="date" :columns="2" v-bind="{ ...attrs, ...$attrs }" />
+  <VCalendarDatePicker v-if="date && (date as DatePickerRangeObject)?.start && (date as DatePickerRangeObject)?.end" v-model.range="date" :columns="2" v-bind="{ ...attrs, ...$attrs }" />
   <VCalendarDatePicker v-else v-model="date" v-bind="{ ...attrs, ...$attrs }" />
 </template>
 
