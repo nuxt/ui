@@ -1,12 +1,6 @@
 ---
 title: DatePicker
 description: 'An example of a date picker component built with v-calendar.'
-navigation:
-  badge:
-    label: Updated
-    color: gray
-    variant: solid
-    class: text-gray-700 dark:text-gray-200
 ---
 
 ## Installation
