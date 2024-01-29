@@ -23,7 +23,7 @@
       </template>
 
       <template #links>
-        <UButton label="Get Started" trailing-icon="i-heroicons-arrow-right-20-solid" size="xl" to="/getting-started/installation" />
+        <UButton label="Get Started" trailing-icon="i-heroicons-arrow-right-20-solid" size="lg" to="/getting-started/installation" />
 
         <UInput
           v-model="source"
@@ -33,7 +33,7 @@
           icon="i-heroicons-command-line"
           input-class="select-none"
           aria-label="Install @nuxt/ui"
-          size="xl"
+          size="lg"
           :ui="{ base: 'disabled:cursor-default', icon: { trailing: { pointer: '' } } }"
         >
           <template #trailing>
@@ -164,7 +164,7 @@
     </ULandingSection>
 
     <template v-if="navigation.find(item => item._path === '/pro')">
-      <ULandingHero :links="page.pro.links">
+      <ULandingHero :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }">
         <template #title>
           <span v-html="page.pro.title" />
         </template>

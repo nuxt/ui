@@ -65,28 +65,28 @@ sections:
       - label: Explore 40+ components
         to: /elements/accordion
         color: primary
-        size: xl
+        size: lg
         icon: i-heroicons-cube
       - label: nuxt/ui
         to: https://github.com/nuxt/ui
         target: _blank
         color: gray
-        size: xl
+        size: lg
         icon: i-simple-icons-github
 cta:
   title: Trusted and supported by our<br class="hidden lg:block"> amazing community
 pro:
   title: Upgrade to <span class="text-primary">Nuxt UI Pro</span>
-  description: 'Nuxt UI Pro is a collection of premium Vue components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.<br>It includes all primitives to build landing pages, documentation, blogs, changelog, dashboards or entire SaaS products.'
+  description: 'Nuxt UI Pro is a collection of premium Vue components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.<br>It includes all primitives to build landing pages, documentations, blogs, dashboards or entire SaaS products.'
   links:
     - label: View pricing
       to: /pro/pricing
-      size: xl
+      size: lg
     - label: Read documentation
       to: /pro/getting-started
       color: gray
       trailingIcon: i-heroicons-arrow-right-20-solid
-      size: xl
+      size: lg
   sections:
     - title: The freedom to build anything
       description: Nuxt UI Pro ships with an extensive set of advanced components that cover a wide range of use-cases. Carefully crafted to reduce boilerplate code without sacrificing flexibility.
@@ -108,7 +108,7 @@ pro:
           color: gray
           icon: i-heroicons-arrow-right-20-solid
           trailing: true
-          size: lg
+          size: md
           class: ml-8
       code: |
         ```vue [app.vue]
