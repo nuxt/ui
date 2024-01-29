@@ -12,7 +12,7 @@ links:
 
 ## Usage
 
-The `SelectMenu` component renders by default a [Select](/forms/select) component and is based on the `ui.select` preset. You can use most of the `Select` props to configure the display if you don't want to override the default slot such as [color](/forms/select#style), [variant](/forms/select#style), [size](/forms/select#size), [placeholder](/forms/select#placeholder), [icon](/forms/select#icon), [disabled](/forms/select#disabled), etc.
+The `SelectMenu` component renders by default a [Select](/components/select) component and is based on the `ui.select` preset. You can use most of the `Select` props to configure the display if you don't want to override the default slot such as [color](/components/select#style), [variant](/components/select#style), [size](/components/select#size), [placeholder](/components/select#placeholder), [icon](/components/select#icon), [disabled](/components/select#disabled), etc.
 
 You can use the `ui` prop like the `Select` component to override the default config. The `uiMenu` prop can be used to override the default menu config.
 
@@ -78,7 +78,7 @@ excludedProps:
 ::
 
 ::callout{icon="i-heroicons-light-bulb"}
-Learn how to customize icons from the [Select](/forms/select#icon) component.
+Learn how to customize icons from the [Select](/components/select#icon) component.
 ::
 
 ## Searchable

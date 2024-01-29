@@ -71,7 +71,7 @@ props:
 
 Use the `type` prop to change the input type, the default `type` is set to `text`, you can check all the available types at [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types).
 
-We have improved the implementation of certain types such as [Checkbox](/forms/checkbox), [Radio](/forms/radio-group), etc.
+We have improved the implementation of certain types such as [Checkbox](/components/checkbox), [Radio](/components/radio-group), etc.
 
 ::component-card
 ---
@@ -197,7 +197,7 @@ baseProps:
   [EUR]{class="text-gray-500 dark:text-gray-400 text-xs"}
 ::
 
-You can for example create a clearable Input by injecting a [Button](/elements/button) in the `trailing` slot that displays when some text is entered.
+You can for example create a clearable Input by injecting a [Button](/components/button) in the `trailing` slot that displays when some text is entered.
 
 :component-example{component="input-example-clearable"}
 

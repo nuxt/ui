@@ -11,7 +11,7 @@ links:
 
 ## Usage
 
-Pass an array to the `items` prop of the Accordion component. Each item can have any property from the [Button](/elements/button) component such as `label`, `icon`, `color`, `variant`, `size`, etc. but also:
+Pass an array to the `items` prop of the Accordion component. Each item can have any property from the [Button](/components/button) component such as `label`, `icon`, `color`, `variant`, `size`, etc. but also:
 
 - `slot` - A key to customize the item with a slot.
 - `content` - The content to display in the panel by default.
@@ -23,7 +23,7 @@ Pass an array to the `items` prop of the Accordion component. Each item can have
 
 ### Style
 
-You can also pass any prop from the [Button](/elements/button) component directly to the Accordion component to style the buttons.
+You can also pass any prop from the [Button](/components/button) component directly to the Accordion component to style the buttons.
 
 ::component-card
 ---

@@ -48,7 +48,7 @@ excludedProps:
 
 ### Avatar
 
-Use the [avatar](/elements/avatar) prop as an `object` and configure it with any of its props.
+Use the [avatar](/components/avatar) prop as an `object` and configure it with any of its props.
 
 ::component-card
 ---
@@ -93,7 +93,7 @@ excludedProps:
 
 Use the `close-button` prop to hide or customize the close button on the Alert.
 
-You can pass all the props of the [Button](/elements/button) component to customize it through the `close-button` prop or globally through `ui.alert.default.closeButton`.
+You can pass all the props of the [Button](/components/button) component to customize it through the `close-button` prop or globally through `ui.alert.default.closeButton`.
 
 It defaults to `null` which means no close button will be displayed. A `close` event will be emitted when the close button is clicked.
 
@@ -116,7 +116,7 @@ excludedProps:
 
 Use the `actions` prop to add actions to the Alert.
 
-Like for `closeButton`, you can pass all the props of the [Button](/elements/button) component plus a `click` function in the action but also customize the default style for the actions globally through `ui.alert.default.actionButton`.
+Like for `closeButton`, you can pass all the props of the [Button](/components/button) component plus a `click` function in the action but also customize the default style for the actions globally through `ui.alert.default.actionButton`.
 
 ::component-card
 ---

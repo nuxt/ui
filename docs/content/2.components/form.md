@@ -162,7 +162,7 @@ async function onSubmit (event: FormSubmitEvent<any>) {
 The Form component automatically triggers validation upon `submit`, `input`, `blur` or `change` events. This ensures that any errors are displayed as soon as the user interacts with the form elements. You can control when validation happens this using the `validate-on` prop.
 
 ::callout{icon="i-heroicons-light-bulb"}
-Note that the `input` event is not triggered until after the initial `blur` event. This is to prevent the form from being validated as the user is typing. You can override this behavior by setting the [`eager-validation`](/forms/form-group#eager-validation) prop on [`FormGroup`](/forms/form-group) to `true`.
+Note that the `input` event is not triggered until after the initial `blur` event. This is to prevent the form from being validated as the user is typing. You can override this behavior by setting the [`eager-validation`](/components/form-group#eager-validation) prop on [`FormGroup`](/components/form-group) to `true`.
 ::
 
 ::component-example

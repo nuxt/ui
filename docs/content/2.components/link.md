@@ -20,7 +20,7 @@ The incentive behind this is to provide the same API as NuxtLink back in Nuxt 2 
 ::component-card
 ---
 props:
-  to: /elements/link
+  to: /components/link
   activeClass: 'text-primary'
   inactiveClass: 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
 code: ' Link '
@@ -31,7 +31,7 @@ Link
 
 It also renders an `<a>` tag when a `to` prop is provided, otherwise it defaults to rendering a `<button>` tag. The default behavior can be customized using the `as` prop.
 
-It is used underneath by the [Button](/elements/button), [Dropdown](/elements/dropdown) and [VerticalNavigation](/navigation/vertical-navigation) components.
+It is used underneath by the [Button](/components/button), [Dropdown](/components/dropdown) and [VerticalNavigation](/components/vertical-navigation) components.
 
 ## Props
 

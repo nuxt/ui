@@ -19,7 +19,7 @@ props:
 ::
 
 ::callout{icon="i-heroicons-light-bulb"}
-Check out the [Range](/forms/range) component for forms.
+Check out the [Range](/components/range) component for forms.
 ::
 
 ### Max

@@ -56,6 +56,6 @@ const attrs = [{
 </template>
 ```
 
-You can use it inside a [Popover](/overlays/popover) component to display it when clicking on a [Button](/elements/button).
+You can use it inside a [Popover](/components/popover) component to display it when clicking on a [Button](/components/button).
 
 :component-example{component="date-picker-example"}

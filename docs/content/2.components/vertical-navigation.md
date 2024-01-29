@@ -15,8 +15,8 @@ Pass an array to the `links` prop of the VerticalNavigation component. Each link
 - `labelClass` - The class of the link label.
 - `icon` - The icon of the link.
 - `iconClass` - The class of the link icon.
-- `avatar` - The avatar of the link. You can pass all the props of the [Avatar](/elements/avatar) component.
-- `badge` - A badge to display next to the label. You can pass all the props of the [Badge](/elements/badge) component.
+- `avatar` - The avatar of the link. You can pass all the props of the [Avatar](/components/avatar) component.
+- `badge` - A badge to display next to the label. You can pass all the props of the [Badge](/components/badge) component.
 - `click` - The click handler of the link.
 
 You can also pass any property from the [NuxtLink](https://nuxt.com/docs/api/components/nuxt-link#props) component such as `to`, `exact`, etc.

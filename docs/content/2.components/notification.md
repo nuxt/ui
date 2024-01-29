@@ -114,7 +114,7 @@ excludedProps:
 
 ### Avatar
 
-Use the [avatar](/elements/avatar) prop as an `object` and configure it with any of its props.
+Use the [avatar](/components/avatar) prop as an `object` and configure it with any of its props.
 
 ::component-card
 ---
@@ -188,7 +188,7 @@ Use the `callback` prop to execute a function when the Notification expires.
 
 Use the `close-button` prop to hide or customize the close button on the Notification.
 
-You can pass all the props of the [Button](/elements/button) component to customize it through the `close-button` prop or globally through `ui.notification.default.closeButton`.
+You can pass all the props of the [Button](/components/button) component to customize it through the `close-button` prop or globally through `ui.notification.default.closeButton`.
 
 ::component-card
 ---
@@ -216,7 +216,7 @@ Use the `actions` prop to add actions to the Notification.
 
 :component-example{component="notification-example-actions"}
 
-Like for `closeButton`, you can pass all the props of the [Button](/elements/button) component inside the action or globally through `ui.notification.default.actionButton`.
+Like for `closeButton`, you can pass all the props of the [Button](/components/button) component inside the action or globally through `ui.notification.default.actionButton`.
 
 ::component-card
 ---

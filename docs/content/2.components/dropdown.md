@@ -17,7 +17,7 @@ Pass an array of arrays to the `items` prop of the Dropdown component. Each arra
 - `labelClass` - The class of the item label.
 - `icon` - The icon of the item.
 - `iconClass` - The class of the item icon.
-- `avatar` - The avatar of the item. You can pass all the props of the [Avatar](/elements/avatar) component.
+- `avatar` - The avatar of the item. You can pass all the props of the [Avatar](/components/avatar) component.
 - `shortcuts` - The shortcuts of the item.
 - `slot` - The slot of the item.
 - `disabled` - Whether the item is disabled.

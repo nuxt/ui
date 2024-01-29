@@ -15,7 +15,7 @@ Use a `v-model` to control the Modal state.
 
 :component-example{component="modal-example-basic"}
 
-You can put a [Card](/layout/card) component inside your Modal to handle forms and take advantage of `header` and `footer` slots:
+You can put a [Card](/components/card) component inside your Modal to handle forms and take advantage of `header` and `footer` slots:
 
 :component-example{component="modal-example-card"}
 

@@ -12,7 +12,7 @@ links:
 
 ## Usage
 
-The `InputMenu` component renders by default an [Input](/forms/input) component and is based on the `ui.input` preset. You can use most of the `Input` props to configure the display such as [color](/forms/input#style), [variant](/forms/input#style), [size](/forms/input#size), [placeholder](/forms/input#placeholder), [icon](/forms/input#icon), [disabled](/forms/input#disabled), etc.
+The `InputMenu` component renders by default an [Input](/components/input) component and is based on the `ui.input` preset. You can use most of the `Input` props to configure the display such as [color](/components/input#style), [variant](/components/input#style), [size](/components/input#size), [placeholder](/components/input#placeholder), [icon](/components/input#icon), [disabled](/components/input#disabled), etc.
 
 You can use the `ui` prop like the `Input` component to override the default config. The `uiMenu` prop can be used to override the default menu config.
 
@@ -27,7 +27,7 @@ componentProps:
 ::
 
 ::callout{icon="i-heroicons-exclamation-triangle"}
-This component does not support multiple values. Use the [SelectMenu](/forms/select-menu#multiple) component instead.
+This component does not support multiple values. Use the [SelectMenu](/components/select-menu#multiple) component instead.
 ::
 
 ### Objects
@@ -95,7 +95,7 @@ excludedProps:
 ::
 
 ::callout{icon="i-heroicons-light-bulb"}
-Learn how to customize icons from the [Input](/forms/input#icon) component.
+Learn how to customize icons from the [Input](/components/input#icon) component.
 ::
 
 ## Searchable

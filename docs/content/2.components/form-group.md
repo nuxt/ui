@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-Use the FormGroup component around an [Input](/forms/input), [Textarea](/forms/textarea), [Select](/forms/select) or a [SelectMenu](/forms/select-menu) with a `label`. The `<label>` will automatically be associated with the form element so it gets focused on click.
+Use the FormGroup component around an [Input](/components/input), [Textarea](/components/textarea), [Select](/components/select) or a [SelectMenu](/components/select-menu) with a `label`. The `<label>` will automatically be associated with the form element so it gets focused on click.
 
 ::component-card
 ---

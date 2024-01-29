@@ -96,7 +96,7 @@ excludedProps:
 
 Use the `close-button` prop to display a close button on the right side of the input.
 
-You can pass all the props of the [Button](/elements/button) component to customize it through the `close-button` prop or globally through `ui.commandPalette.default.closeButton`.
+You can pass all the props of the [Button](/components/button) component to customize it through the `close-button` prop or globally through `ui.commandPalette.default.closeButton`.
 
 ::component-card
 ---

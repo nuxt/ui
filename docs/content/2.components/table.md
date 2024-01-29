@@ -39,7 +39,7 @@ componentProps:
 ---
 ::
 
-You can easily use the [SelectMenu](/forms/select-menu) component to change the columns to display.
+You can easily use the [SelectMenu](/components/select-menu) component to change the columns to display.
 
 ::component-example{class="grid"}
 ---
@@ -156,7 +156,7 @@ We pass a function to `useLazyFetch` here make the url reactive but you can use 
 
 #### Custom sorting
 
-Use the `sort-button` prop to customize the sort button in the header. You can pass all the props of the [Button](/elements/button) component to customize it through this prop or globally through `ui.table.default.sortButton`. Its icon defaults to `i-heroicons-arrows-up-down-20-solid`.
+Use the `sort-button` prop to customize the sort button in the header. You can pass all the props of the [Button](/components/button) component to customize it through this prop or globally through `ui.table.default.sortButton`. Its icon defaults to `i-heroicons-arrows-up-down-20-solid`.
 
 ::component-card{class="grid"}
 ---
@@ -266,7 +266,7 @@ componentProps:
 
 ### Searchable
 
-You can easily use the [Input](/forms/input) component to filter the rows.
+You can easily use the [Input](/components/input) component to filter the rows.
 
 ::component-example{class="grid"}
 ---
@@ -279,7 +279,7 @@ componentProps:
 
 ### Paginable
 
-You can easily use the [Pagination](/navigation/pagination) component to paginate the rows.
+You can easily use the [Pagination](/components/pagination) component to paginate the rows.
 
 ::component-example{class="grid"}
 ---
@@ -394,7 +394,7 @@ Even though you can customize the sort button as mentioned in the [Sortable](#so
 
 Use the `#<column>-data` slot to customize the data cell of a column. You will have access to the `row`, `column` and `getRowData` properties in the slot scope.
 
-You can for example create an extra column for actions with a [Dropdown](/elements/dropdown) component inside or change the color of the rows based on a selection.
+You can for example create an extra column for actions with a [Dropdown](/components/dropdown) component inside or change the color of the rows based on a selection.
 
 ::component-example{class="grid"}
 ---

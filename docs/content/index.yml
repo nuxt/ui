@@ -63,11 +63,11 @@ sections:
         orientation: 'horizontal'
     links:
       - label: Explore 40+ components
-        to: /elements/accordion
+        to: /components/accordion
         color: primary
         size: lg
         icon: i-heroicons-cube
-      - label: nuxt/ui
+      - label: Star on GitHub
         to: https://github.com/nuxt/ui
         target: _blank
         color: gray

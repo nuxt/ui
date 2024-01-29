@@ -310,7 +310,7 @@ code: |
 :u-button{icon="i-heroicons-chevron-down-20-solid" color="gray"}
 ::
 
-This can also work with an [Input](/forms/input) component for example:
+This can also work with an [Input](/components/input) component for example:
 
 ::component-card{slug="UButtonGroup"}
 ---

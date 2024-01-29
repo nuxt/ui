@@ -34,7 +34,7 @@ excludedProps:
 
 ### Avatar
 
-Use the [avatar](/elements/avatar) prop as an `object` and configure it with any of its props.
+Use the [avatar](/components/avatar) prop as an `object` and configure it with any of its props.
 
 ::component-card
 ---

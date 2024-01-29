@@ -15,7 +15,7 @@ Use a `v-model` to control the Slideover state.
 
 :component-example{component="slideover-example-basic"}
 
-You can put a [Card](/layout/card) component inside your Slideover to handle forms and take advantage of `header` and `footer` slots:
+You can put a [Card](/components/card) component inside your Slideover to handle forms and take advantage of `header` and `footer` slots:
 
 :component-example{component="slideover-example-card"}
 
