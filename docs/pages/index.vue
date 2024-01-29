@@ -700,7 +700,9 @@ function getStepY (step: number) {
 // Hooks
 
 onMounted(() => {
-  start.value = top.value + y.value
+  nextTick(() => {
+    start.value = top.value
+  })
 })
 
 // Slots Data
