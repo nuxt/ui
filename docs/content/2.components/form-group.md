@@ -129,7 +129,7 @@ code: >-
 :u-input{model-value="benjamincanac" placeholder="you@example.com"}
 ::
 
-::callout{icon="i-heroicons-light-bulb" to="/forms/form"}
+::callout{icon="i-heroicons-light-bulb" to="/components/form"}
   Learn more about form validation in the `Form` component.
 ::
 

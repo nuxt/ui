@@ -23,10 +23,6 @@ You can also pass any property from the [NuxtLink](https://nuxt.com/docs/api/com
 
 :component-example{component="vertical-navigation-example"}
 
-::callout{icon="i-heroicons-light-bulb"}
-Learn how to build a Tailwind like vertical navigation in the [Examples](/getting-started/examples#verticalnavigation) page.
-::
-
 ## Sections
 
 Group your navigation links into distinct sections, separated by a divider. You can do this by passing an array of arrays to the `links` prop of the VerticalNavigation component.
