@@ -6,7 +6,7 @@ navigation:
     label: Updated
     color: gray
     variant: solid
-    class: text-gray-500 dark:text-gray-400
+    class: text-gray-700 dark:text-gray-200
 ---
 
 ## Installation
