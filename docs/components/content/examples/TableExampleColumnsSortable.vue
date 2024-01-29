@@ -14,7 +14,7 @@ const columns = [{
   key: 'email',
   label: 'Email',
   sortable: true,
-  direction: 'desc'
+  direction: 'desc' as const
 }, {
   key: 'role',
   label: 'Role'
