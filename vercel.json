@@ -4,6 +4,11 @@
   },
   "redirects": [
     {
+      "source": "/getting-started/examples",
+      "destination": "/components/date-picker",
+      "permanent": true
+    },
+    {
       "source": "/elements/:path(.*)",
       "destination": "/components/:path",
       "permanent": true
