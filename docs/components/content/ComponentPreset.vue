@@ -3,7 +3,6 @@
 </template>
 
 <script setup lang="ts">
-// @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
 import { upperFirst, camelCase } from 'scule'
 import * as config from '#ui/ui.config'
