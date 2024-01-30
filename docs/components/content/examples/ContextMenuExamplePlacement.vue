@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const { x, y } = useMouse()
 const { y: windowY } = useWindowScroll()
 

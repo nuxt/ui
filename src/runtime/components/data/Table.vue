@@ -67,10 +67,11 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, toRaw, toRef } from 'vue'
+import { computed, defineComponent, toRaw, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
+import { useVModel } from '@vueuse/core'
 import UButton from '../elements/Button.vue'
 import UIcon from '../elements/Icon.vue'
 import UCheckbox from '../forms/Checkbox.vue'
@@ -85,6 +86,18 @@ const config = mergeConfig<typeof table>(appConfig.ui.strategy, appConfig.ui.tab
 
 function defaultComparator<T> (a: T, z: T): boolean {
   return a === z
+}
+
+function defaultSort (a: any, b: any, direction: 'asc' | 'desc') {
+  if (a === b) {
+    return 0
+  }
+
+  if (direction === 'asc') {
+    return a < b ? -1 : 1
+  } else {
+    return a > b ? -1 : 1
+  }
 }
 
 export default defineComponent({
@@ -108,7 +121,7 @@ export default defineComponent({
       default: () => []
     },
     columns: {
-      type: Array as PropType<{ key: string, sortable?: boolean, direction?: 'asc' | 'desc', class?: string, [key: string]: any }[]>,
+      type: Array as PropType<{ key: string, sortable?: boolean, sort?: (a: any, b: any, direction: 'asc' | 'desc') => number, direction?: 'asc' | 'desc', class?: string, [key: string]: any }[]>,
       default: null
     },
     columnAttribute: {
@@ -118,6 +131,10 @@ export default defineComponent({
     sort: {
       type: Object as PropType<{ column: string, direction: 'asc' | 'desc' }>,
       default: () => ({})
+    },
+    sortMode: {
+      type: String as PropType<'manual' | 'auto'>,
+      default: 'auto'
     },
     sortButton: {
       type: Object as PropType<Button>,
@@ -156,14 +173,14 @@ export default defineComponent({
   setup (props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined })))
+    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort })))
 
-    const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
+    const sort = useVModel(props, 'sort', emit, { passive: true, defaultValue: defu({}, props.sort, { column: null, direction: 'asc' }) })
 
-    const defaultSort = { column: sort.value.column, direction: null }
+    const savedSort = { column: sort.value.column, direction: null }
 
     const rows = computed(() => {
-      if (!sort.value?.column) {
+      if (!sort.value?.column || props.sortMode === 'manual') {
         return props.rows
       }
 
@@ -173,15 +190,9 @@ export default defineComponent({
         const aValue = get(a, column)
         const bValue = get(b, column)
 
-        if (aValue === bValue) {
-          return 0
-        }
+        const sort = columns.value.find((col) => col.key === column)?.sort ?? defaultSort
 
-        if (direction === 'asc') {
-          return aValue < bValue ? -1 : 1
-        } else {
-          return aValue > bValue ? -1 : 1
-        }
+        return sort(aValue, bValue, direction)
       })
     })
 
@@ -227,15 +238,13 @@ export default defineComponent({
         const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
 
         if (sort.value.direction === direction) {
-          sort.value = defu({}, defaultSort, { column: null, direction: 'asc' })
+          sort.value = defu({}, savedSort, { column: null, direction: 'asc' })
         } else {
-          sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+          sort.value = { column: sort.value.column, direction: sort.value.direction === 'asc' ? 'desc' : 'asc' }
         }
       } else {
         sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
-
-      emit('update:sort', sort.value)
     }
 
     function onSelect (row) {

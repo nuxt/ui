@@ -7,7 +7,3 @@ a:focus-visible {
 }
 
 ::selection { @apply bg-primary/40; }
-
-select {
-  background-image: none;
-}

@@ -1,10 +1,10 @@
 <template>
   <nav :class="ui.wrapper" v-bind="attrs">
-    <ul v-for="(section, sectionIndex) of linkSections" :key="`linkSection${sectionIndex}`">
-      <li v-for="(link, index) of section" :key="`linkSection${sectionIndex}-${index}`">
+    <ul v-for="(section, sectionIndex) of sections" :key="`section${sectionIndex}`">
+      <li v-for="(link, index) of section" :key="`section${sectionIndex}-${index}`">
         <ULink
           v-slot="{ isActive }"
-          v-bind="omit(link, ['label', 'labelClass', 'icon', 'iconClass', 'avatar', 'badge', 'click'])"
+          v-bind="getULinkProps(link)"
           :class="[ui.base, ui.padding, ui.width, ui.ring, ui.rounded, ui.font, ui.size]"
           :active-class="ui.active"
           :inactive-class="ui.inactive"
@@ -34,13 +34,20 @@
             </span>
           </slot>
           <slot name="badge" :link="link" :is-active="isActive">
-            <span v-if="link.badge" :class="[ui.badge.base, isActive ? ui.badge.active : ui.badge.inactive]">
-              {{ link.badge }}
-            </span>
+            <UBadge
+              v-if="link.badge"
+              v-bind="{
+                size: ui.badge.size,
+                color: ui.badge.color,
+                variant: ui.badge.variant,
+                ...((typeof link.badge === 'string' || typeof link.badge === 'number') ? { label: link.badge } : link.badge)
+              }"
+              :class="ui.badge.base"
+            />
           </slot>
         </ULink>
       </li>
-      <UDivider v-if="sectionIndex < linkSections.length - 1" :ui="ui.divider" />
+      <UDivider v-if="sectionIndex < sections.length - 1" :ui="ui.divider" />
     </ul>
   </nav>
 </template>
@@ -51,10 +58,11 @@ import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
+import UBadge from '../elements/Badge.vue'
 import ULink from '../elements/Link.vue'
 import UDivider from '../layout/Divider.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, omit } from '../../utils'
+import { mergeConfig, getULinkProps } from '../../utils'
 import type { VerticalNavigationLink, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -66,6 +74,7 @@ export default defineComponent({
   components: {
     UIcon,
     UAvatar,
+    UBadge,
     ULink,
     UDivider
   },
@@ -87,16 +96,14 @@ export default defineComponent({
   setup (props) {
     const { ui, attrs } = useUI('verticalNavigation', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const linkSections = computed(() => {
-      return (Array.isArray(props.links[0]) ? props.links : [props.links]) as VerticalNavigationLink[][]
-    })
+    const sections = computed(() => (Array.isArray(props.links[0]) ? props.links : [props.links]) as VerticalNavigationLink[][])
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
-      omit,
-      linkSections,
+      sections,
+      getULinkProps,
       twMerge,
       twJoin
     }
