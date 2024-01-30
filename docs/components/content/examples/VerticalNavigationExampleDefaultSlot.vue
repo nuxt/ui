@@ -1,13 +1,13 @@
-<script setup>
+<script setup lang="ts">
 const links = [{
   label: 'Vertical Navigation',
-  to: '/navigation/vertical-navigation'
+  to: '/components/vertical-navigation'
 }, {
   label: 'Command Palette',
-  to: '/navigation/command-palette'
+  to: '/components/command-palette'
 }, {
   label: 'Table',
-  to: '/data/table'
+  to: '/components/table'
 }]
 </script>
 

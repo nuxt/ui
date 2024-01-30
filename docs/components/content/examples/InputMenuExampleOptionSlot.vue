@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const people = [
   { name: 'Wade Cooper', online: true },
   { name: 'Arlene Mccoy', online: false },

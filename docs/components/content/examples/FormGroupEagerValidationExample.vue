@@ -6,7 +6,7 @@
   </UForm>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { z } from 'zod'
 
 const schema = z.object({

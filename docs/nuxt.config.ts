@@ -90,6 +90,10 @@ export default defineNuxtConfig({
       ignore: !process.env.NUXT_UI_PRO_PATH && !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     }
   },
+  routeRules: {
+    '/components': { redirect: '/components/accordion', prerender: false },
+    '/dev/components': { redirect: '/dev/components/accordion', prerender: false }
+  },
   componentMeta: {
     exclude: [
       '@nuxt/content',

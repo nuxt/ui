@@ -1,5 +1,5 @@
 <template>
-  <UPage>
+  <UPage v-if="page">
     <UPageHeader :title="page.title" :description="page.description" :links="page.links" :headline="headline" />
 
     <UPageBody prose>
@@ -16,7 +16,11 @@
           <div class="hidden lg:block space-y-6 !mt-6">
             <UDivider v-if="page.body?.toc?.links?.length" type="dashed" />
 
-            <UPageLinks title="Community" :links="links" />
+            <UPageLinks title="Community" :links="communityLinks" />
+
+            <UDivider type="dashed" />
+
+            <UPageLinks title="Resources" :links="resourcesLinks" />
 
             <UDivider type="dashed" />
 
@@ -78,7 +82,7 @@ defineOgImage({
   headline: headline.value
 })
 
-const links = computed(() => [{
+const communityLinks = computed(() => [{
   icon: 'i-heroicons-pencil-square',
   label: 'Edit this page',
   to: `https://github.com/nuxt/ui/edit/dev/docs/content/${branch.value?.name === 'dev' ? page?.value?._file.split('/').slice(1).join('/') : page?.value?._file}`,
@@ -89,19 +93,29 @@ const links = computed(() => [{
   to: 'https://github.com/nuxt/ui',
   target: '_blank'
 }, {
-  icon: 'i-heroicons-chat-bubble-bottom-center-text',
-  label: 'Chat on Discord',
-  to: 'https://discord.com/channels/473401852243869706/1153996761426300948',
-  target: '_blank'
+  icon: 'i-heroicons-lifebuoy',
+  label: 'Contributing',
+  to: '/getting-started/contributing'
 }, {
-  icon: 'i-heroicons-book-open',
-  label: 'Nuxt docs',
-  to: 'https://nuxt.com',
-  target: '_blank'
-}, {
+  label: 'Roadmap',
+  icon: 'i-heroicons-map',
+  to: '/roadmap'
+}])
+
+const resourcesLinks = [{
   icon: 'i-simple-icons-figma',
   label: 'Figma Kit',
   to: 'https://www.figma.com/community/file/1288455405058138934/nuxt-ui',
   target: '_blank'
-}])
+}, {
+  label: 'Playground',
+  icon: 'i-simple-icons-stackblitz',
+  to: 'https://stackblitz.com/edit/nuxt-ui',
+  target: '_blank'
+}, {
+  icon: 'i-simple-icons-nuxtdotjs',
+  label: 'Nuxt docs',
+  to: 'https://nuxt.com',
+  target: '_blank'
+}]
 </script>

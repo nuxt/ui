@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const route = useRoute()
 
 const links = [
@@ -15,11 +15,11 @@ const links = [
   }, {
     label: 'Vertical Navigation',
     icon: 'i-heroicons-chart-bar',
-    to: `${route.path.startsWith('/dev') ? '/dev' : ''}/navigation/vertical-navigation`
+    to: `${route.path.startsWith('/dev') ? '/dev' : ''}/components/vertical-navigation`
   }, {
     label: 'Command Palette',
     icon: 'i-heroicons-command-line',
-    to: '/navigation/command-palette'
+    to: '/components/command-palette'
   }], [{
     label: 'Examples',
     icon: 'i-heroicons-light-bulb'
