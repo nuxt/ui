@@ -1,3 +1,5 @@
+import pkg from '@nuxt/ui-pro/package.json'
+
 export const useContentSource = () => {
   const route = useRoute()
   const router = useRouter()
@@ -22,7 +24,7 @@ export const useContentSource = () => {
     name: 'pro',
     label: 'nuxt/ui-pro',
     icon: 'i-heroicons-cube',
-    suffix: `v${config.proVersion}`,
+    suffix: `v${pkg.version.split('-')[0]}`,
     click: () => select({ name: 'pro' })
   }, {
     id: 'pro-edge',
