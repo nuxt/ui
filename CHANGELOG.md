@@ -1,5 +1,33 @@
 # Changelog
 
+## [2.13.0](https://github.com/nuxt/ui/compare/v2.12.3...v2.13.0) (2024-01-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* **VerticalNavigation:** use `Badge` component for consistency
+
+### Features
+
+* **Carousel:** new component ([#927](https://github.com/nuxt/ui/issues/927)) ([f37b043](https://github.com/nuxt/ui/commit/f37b0431382867c24a0eff511ae151115cdfa2a2))
+* **Dropdown:** default delay from config ([c4a1c04](https://github.com/nuxt/ui/commit/c4a1c04174d612e8c4cdd430067a3bdf3d69f4bf))
+* **Form:** handle multiple paths in `validate` ([#1273](https://github.com/nuxt/ui/issues/1273)) ([20ac4b3](https://github.com/nuxt/ui/commit/20ac4b3332267491067f3a5a393ca97e3ec6bab5))
+* **HorizontalNavigation:** new component ([#1279](https://github.com/nuxt/ui/issues/1279)) ([b8007ba](https://github.com/nuxt/ui/commit/b8007bab5efde70a375d6e3b9be91a0b698485b1))
+* **InputMenu:** handle `nullable` prop when clearing input ([5e49fb8](https://github.com/nuxt/ui/commit/5e49fb8736e01889b8f7a60cf0edc420e49fe52c))
+* **Modal/Slideover:** emit `close-prevented` event ([#1207](https://github.com/nuxt/ui/issues/1207)) ([6faf15b](https://github.com/nuxt/ui/commit/6faf15bc7460d7473ec47de48e407d45cf7d2e26))
+* **module:** add option to disable global css styles ([#1266](https://github.com/nuxt/ui/issues/1266)) ([f96eb5e](https://github.com/nuxt/ui/commit/f96eb5e8b794af75303a98fa38e5285bcf928614))
+* **Popover:** default delay from config ([7f5711b](https://github.com/nuxt/ui/commit/7f5711bc76cc509079934fd15ebbccb82bced064))
+* **Tooltip:** default delay from config ([3400b56](https://github.com/nuxt/ui/commit/3400b56d82c1713e67838ba246bba687f3056fe6))
+* **VerticalNavigation:** use `Badge` component for consistency ([3e81eee](https://github.com/nuxt/ui/commit/3e81eee6e6dc066dda9e2270e183a76bc8695996))
+
+
+### Bug Fixes
+
+* **Breadrumb:** handle truncate ([5d3a962](https://github.com/nuxt/ui/commit/5d3a962782781e4204d24a2f240974612912f7ee))
+* **Link:** propagate `active` prop to slot as `isActive` ([b76e761](https://github.com/nuxt/ui/commit/b76e761bbb98fe7bbd19fba16220e26fd96e9731))
+* **Select:** consistent placeholder with input and textarea ([2cb41db](https://github.com/nuxt/ui/commit/2cb41db111da79f4f3f8ccd825071820050ba885)), closes [#1276](https://github.com/nuxt/ui/issues/1276)
+* **Slideover:** handle translate in RTL mode ([#1259](https://github.com/nuxt/ui/issues/1259)) ([ea58c88](https://github.com/nuxt/ui/commit/ea58c88baab3a0684e5b0140895ee630087ea044))
+
 ## [2.12.3](https://github.com/nuxt/ui/compare/v2.12.2...v2.12.3) (2024-01-18)
 
 
