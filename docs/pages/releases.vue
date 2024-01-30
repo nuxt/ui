@@ -6,7 +6,11 @@
       <div class="h-px w-px rounded-full bg-transparent" />
     </div>
 
-    <UPageHero :title="page.title" :description="page.description" :links="page.links" align="center" />
+    <ULandingHero :description="page.description" :links="page.links" align="center" :ui="{ title: 'sm:text-6xl' }" class="md:py-32">
+      <template #title>
+        <span v-html="page.title" />
+      </template>
+    </ULandingHero>
 
     <UPageBody>
       <div class="h-[96px] w-0.5 bg-gray-200 dark:bg-gray-800 mx-auto rounded-t-full" />
