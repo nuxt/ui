@@ -51,6 +51,7 @@
 </template>
 
 <script setup lang="ts">
+// @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
 // @ts-ignore
 import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
