@@ -1,6 +1,8 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
+    <NuxtLoadingIndicator />
+
     <Header v-if="!$route.path.startsWith('/examples')" :links="links" />
 
     <NuxtLayout>
@@ -10,7 +12,7 @@
     <Footer v-if="!$route.path.startsWith('/examples')" />
 
     <ClientOnly>
-      <LazyUDocsSearch ref="searchRef" :files="files" :navigation="navigation" :groups="groups" :links="links" />
+      <LazyUDocsSearch ref="searchRef" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 1000 }" />
     </ClientOnly>
 
     <UNotifications>
@@ -30,7 +32,7 @@ const searchRef = ref()
 
 const route = useRoute()
 const colorMode = useColorMode()
-const { branch, branches } = useContentSource()
+const { branch } = useContentSource()
 
 const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
 const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', { default: () => [], server: false })
@@ -51,51 +53,28 @@ const navigation = computed(() => {
   return nav.value.filter(item => item._path !== '/dev')
 })
 
-const groups = computed(() => {
-  if (route.path === '/') {
-    return []
-  }
-
-  return [{ key: 'branch', label: 'Branch', commands: branches.value }]
-})
-
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
 const links = computed(() => {
   return [{
-    label: 'Documentation',
+    label: 'Docs',
     icon: 'i-heroicons-book-open',
-    to: `${branch.value?.name === 'dev' ? '/dev' : ''}/getting-started`
-  }, {
-    label: 'Playground',
-    icon: 'i-simple-icons-stackblitz',
-    to: '/playground'
-  }, {
-    label: 'Roadmap',
-    icon: 'i-heroicons-academic-cap',
-    to: '/roadmap'
-  }, !!navigation.value.find(item => item._path === '/pro') && {
+    to: branch.value?.name === 'dev' ? '/dev/getting-started' : '/getting-started',
+    active: branch.value?.name === 'dev' ? (route.path.startsWith('/dev/getting-started') || route.path.startsWith('/dev/components')) : (route.path.startsWith('/getting-started') || route.path.startsWith('/components'))
+  }, ...(navigation.value.find(item => item._path === '/pro') ? [{
     label: 'Pro',
     icon: 'i-heroicons-square-3-stack-3d',
     to: '/pro',
-    children: [{
-      label: 'Features',
-      to: '/pro',
-      exact: true,
-      icon: 'i-heroicons-beaker',
-      description: 'Discover all the features of Nuxt UI Pro.'
-    }, {
-      label: 'Guide',
-      to: '/pro/guide',
-      icon: 'i-heroicons-book-open',
-      description: 'Learn how to use Nuxt UI Pro in your app.'
-    }, {
-      label: 'Components',
-      to: '/pro/components',
-      icon: 'i-heroicons-cube-transparent',
-      description: 'Discover all the components available in Nuxt UI Pro.'
-    }]
+    active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components')
   }, {
+    label: 'Pricing',
+    icon: 'i-heroicons-credit-card',
+    to: '/pro/pricing'
+  }, {
+    label: 'Templates',
+    icon: 'i-heroicons-computer-desktop',
+    to: '/pro/templates'
+  }] : []), {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch',
     to: '/releases'

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const items = [{
   label: 'Tab1',
   content: 'This is the content shown for Tab1'

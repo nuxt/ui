@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const links = [{
   label: 'Introduction',
   to: '/getting-started'
@@ -11,9 +11,6 @@ const links = [{
 }, {
   label: 'Shortcuts',
   to: '/getting-started/shortcuts'
-}, {
-  label: 'Examples',
-  to: '/getting-started/examples'
 }]
 </script>
 
