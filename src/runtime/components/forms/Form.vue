@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { useId } from '#imports'
+import { useId } from '#app'
 import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'

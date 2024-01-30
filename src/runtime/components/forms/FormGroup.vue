@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { useId } from '#imports'
+import { useId } from '#app'
 import { computed, defineComponent, provide, inject, ref, toRef } from 'vue'
 import type { Ref, PropType } from 'vue'
 import { useUI } from '../../composables/useUI'

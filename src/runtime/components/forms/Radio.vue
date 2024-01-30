@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { useId } from '#imports'
+import { useId } from '#app'
 import { computed, defineComponent, inject, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
