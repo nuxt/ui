@@ -1,5 +1,5 @@
 <template>
-  <form :id="formId" @submit.prevent="onSubmit">
+  <form @submit.prevent="onSubmit">
     <slot />
   </form>
 </template>
@@ -176,7 +176,6 @@ export default defineComponent({
     } as Form<any>)
 
     return {
-      formId,
       onSubmit
     }
   }
