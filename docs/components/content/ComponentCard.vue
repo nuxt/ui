@@ -51,7 +51,6 @@
 </template>
 
 <script setup lang="ts">
-// @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
 // @ts-ignore
 import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
@@ -217,6 +216,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
 // eslint-disable-next-line vue/no-dupe-keys
 const code = computed(() => {
   let code = `\`\`\`html
+<template>
 <${name}`
   for (const [key, value] of Object.entries(fullProps.value)) {
     if (value === 'undefined' || value === null) {
@@ -246,7 +246,7 @@ const code = computed(() => {
   } else {
     code += ' />'
   }
-  code += `
+  code += `\n</template>
 \`\`\`
 `
   return code

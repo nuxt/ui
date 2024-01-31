@@ -8,7 +8,7 @@
       :type="type"
       :required="required"
       :placeholder="placeholder"
-      :disabled="disabled || loading"
+      :disabled="disabled"
       :class="inputClass"
       v-bind="attrs"
       @input="onInput"
@@ -211,7 +211,7 @@ export default defineComponent({
         updateInput(value)
       }
 
-      // Update trimmed input so that it has same behaviour as native input https://github.com/vuejs/core/blob/5ea8a8a4fab4e19a71e123e4d27d051f5e927172/packages/runtime-dom/src/directives/vModel.ts#L63
+      // Update trimmed input so that it has same behavior as native input https://github.com/vuejs/core/blob/5ea8a8a4fab4e19a71e123e4d27d051f5e927172/packages/runtime-dom/src/directives/vModel.ts#L63
       if (modelModifiers.value.trim) {
         (event.target as HTMLInputElement).value = value.trim()
       }
@@ -236,6 +236,7 @@ export default defineComponent({
         ui.value.form,
         rounded.value,
         ui.value.placeholder,
+        props.type === 'file' && [ui.value.file.base, ui.value.file.padding[size.value]],
         ui.value.size[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
         variant?.replaceAll('{color}', color.value),

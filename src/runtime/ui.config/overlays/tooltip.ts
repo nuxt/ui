@@ -24,5 +24,9 @@ export default {
   popper: {
     strategy: 'fixed'
   },
+  default: {
+    openDelay: 0,
+    closeDelay: 0
+  },
   arrow
 }

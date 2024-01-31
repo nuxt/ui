@@ -15,6 +15,7 @@ export { default as kbd } from './elements/kbd'
 export { default as progress } from './elements/progress'
 export { default as meter } from './elements/meter'
 export { default as meterGroup } from './elements/meterGroup'
+export { default as carousel } from './elements/carousel'
 
 // Forms
 export { default as input } from './forms/input'
@@ -37,6 +38,7 @@ export { default as divider } from './layout/divider'
 
 // Navigation
 export { default as verticalNavigation } from './navigation/verticalNavigation'
+export { default as horizontalNavigation } from './navigation/horizontalNavigation'
 export { default as commandPalette } from './navigation/commandPalette'
 export { default as pagination } from './navigation/pagination'
 export { default as tabs } from './navigation/tabs'

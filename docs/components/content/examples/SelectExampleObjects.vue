@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const countries = [{
   name: 'United States',
   value: 'US'

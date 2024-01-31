@@ -12,7 +12,7 @@
       <ContentSlot v-if="$slots.default" :use="$slots.default" />
     </div>
     <template v-if="hasCode">
-      <ContentSlot v-if="$slots.code" :use="$slots.code" />
+      <slot v-if="$slots.code" name="code" />
       <ContentRenderer v-else :value="ast" class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0" />
     </template>
   </div>
@@ -21,7 +21,6 @@
 <script setup lang="ts">
 import { camelCase } from 'scule'
 import { fetchContentExampleCode } from '~/composables/useContentExamplesCode'
-// @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
 // @ts-ignore
 import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'

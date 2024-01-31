@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const links = [{
   avatar: {
     src: 'https://ipx.nuxt.com/s_16x16/gh_avatar/benjamincanac',

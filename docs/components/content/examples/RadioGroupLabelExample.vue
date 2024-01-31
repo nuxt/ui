@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const options = [
   { value: 'email', label: 'Email', icon: 'i-heroicons-at-symbol' },
   { value: 'sms', label: 'Phone (SMS)', icon: 'i-heroicons-phone' },

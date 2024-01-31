@@ -4,7 +4,8 @@
     :by="by"
     :name="name"
     :model-value="modelValue"
-    :disabled="disabled || loading"
+    :disabled="disabled"
+    :nullable="nullable"
     as="div"
     :class="ui.wrapper"
     @update:model-value="onUpdate"
@@ -15,11 +16,11 @@
         :name="name"
         :required="required"
         :placeholder="placeholder"
-        :disabled="disabled || loading"
+        :disabled="disabled"
         :class="inputClass"
         autocomplete="off"
         v-bind="attrs"
-        :display-value="() => query ? query : ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute]"
+        :display-value="() => query ? query : label"
         @change="onChange"
       />
 
@@ -99,7 +100,7 @@ import {
   ComboboxOption as HComboboxOption,
   ComboboxInput as HComboboxInput
 } from '@headlessui/vue'
-import { computedAsync } from '@vueuse/core'
+import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -196,6 +197,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    nullable: {
+      type: Boolean,
+      default: false
+    },
     placeholder: {
       type: String,
       default: null
@@ -236,9 +241,17 @@ export default defineComponent({
       type: String,
       default: null
     },
+    search: {
+      type: Function as PropType<((query: string) => Promise<any[]> | any[])>,
+      default: undefined
+    },
     searchAttributes: {
       type: Array,
       default: null
+    },
+    debounce: {
+      type: Number,
+      default: 200
     },
     popper: {
       type: Object as PropType<PopperOptions>,
@@ -285,6 +298,19 @@ export default defineComponent({
       set (value) {
         internalQuery.value = value
         emit('update:query', value)
+      }
+    })
+
+    const label = computed(() => {
+      if (!props.modelValue) {
+        return
+      }
+
+      if (props.valueAttribute) {
+        const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
+        return option ? option[props.optionAttribute] : null
+      } else {
+        return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
       }
     })
 
@@ -361,7 +387,13 @@ export default defineComponent({
       )
     })
 
+    const debouncedSearch = props.search && typeof props.search === 'function' ? useDebounceFn(props.search, props.debounce) : undefined
+
     const filteredOptions = computedAsync(async () => {
+      if (debouncedSearch) {
+        return await debouncedSearch(query.value)
+      }
+
       if (query.value === '') {
         return props.options
       }
@@ -413,6 +445,7 @@ export default defineComponent({
       popper,
       trigger,
       container,
+      label,
       isLeading,
       isTrailing,
       // eslint-disable-next-line vue/no-dupe-keys

@@ -75,7 +75,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<ToggleSize>,
-      default: config.default.size,
+      default: () => config.default.size,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
