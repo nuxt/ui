@@ -89,17 +89,17 @@
       "permanent": true
     },
     {
-      "source": "/pro/components/header/:path(.*)",
+      "source": "/pro/components/header/:path((?!_payload.json).*)",
       "destination": "/pro/components/:path",
       "permanent": true
     },
     {
-      "source": "/pro/components/main/:path(.*)",
+      "source": "/pro/components/main/:path((?!_payload.json).*)",
       "destination": "/pro/components/:path",
       "permanent": true
     },
     {
-      "source": "/pro/components/footer/:path(.*)",
+      "source": "/pro/components/footer/:path((?!_payload.json).*)",
       "destination": "/pro/components/:path",
       "permanent": true
     },
@@ -119,12 +119,12 @@
       "permanent": true
     },
     {
-      "source": "/pro/components/page/:path(.*)",
+      "source": "/pro/components/page/:path((?!_payload.json).*)",
       "destination": "/pro/components/:path",
       "permanent": true
     },
     {
-      "source": "/pro/components/aside/:path(.*)",
+      "source": "/pro/components/aside/:path((?!_payload.json).*)",
       "destination": "/pro/components/:path",
       "permanent": true
     },
