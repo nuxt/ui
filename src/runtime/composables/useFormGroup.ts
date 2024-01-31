@@ -1,7 +1,6 @@
-import { inject, ref, computed, onMounted } from 'vue'
+import { inject, ref, computed } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
 import type { FormEvent, FormEventType, InjectedFormGroupValue } from '../types/form'
-import { uid } from '../utils/uid'
 
 type InputProps = {
   id?: string
@@ -17,21 +16,16 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     const formGroup = inject<InjectedFormGroupValue | undefined>('form-group', undefined)
     const formInputs = inject<any>('form-inputs', undefined)
 
-    const inputId = ref(inputProps?.id)
-
-    onMounted(() => {
-      // Remove FormGroup label bindings for RadioGroup elements to avoid label conflicts
-      inputId.value = inputProps?.legend === null || inputProps.legend ? undefined : inputProps?.id ?? uid()
-
-      if (formGroup) {
+    if (formGroup) {
+      if (inputProps?.id) {
         // Updates for="..." attribute on label if inputProps.id is provided
-        formGroup.inputId.value = inputId.value
-
-        if (formInputs) {
-          formInputs.value[formGroup.name.value] = inputId
-        }
+        formGroup.inputId.value = inputProps?.id
       }
-    })
+
+      if (formInputs) {
+        formInputs.value[formGroup.name.value] = formGroup.inputId.value
+      }
+    }
 
     const blurred = ref(false)
 
@@ -57,7 +51,7 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     }, 300)
 
     return {
-      inputId,
+      inputId: computed(() => inputProps?.id ?? formGroup?.inputId.value),
       name: computed(() => inputProps?.name ?? formGroup?.name.value),
       size: computed(() => {
         const formGroupSize = config.size[formGroup?.size.value as string] ? formGroup?.size.value : null
