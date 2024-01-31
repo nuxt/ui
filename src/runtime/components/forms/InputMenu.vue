@@ -114,7 +114,6 @@ import type { InputSize, InputColor, InputVariant, PopperOptions, Strategy } fro
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { input, inputMenu } from '#ui/ui.config'
-// @ts-ignore
 import { useId } from '#imports'
 
 const config = mergeConfig<typeof input>(appConfig.ui.strategy, appConfig.ui.input, input)

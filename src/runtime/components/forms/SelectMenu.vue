@@ -151,7 +151,6 @@ import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy } 
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { select, selectMenu } from '#ui/ui.config'
-// @ts-ignore
 import { useId } from '#imports'
 
 const config = mergeConfig<typeof select>(appConfig.ui.strategy, appConfig.ui.select, select)

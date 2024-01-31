@@ -71,7 +71,6 @@ import type { DropdownItem, PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { dropdown } from '#ui/ui.config'
-// @ts-ignore
 import { useId } from '#imports'
 
 const config = mergeConfig<typeof dropdown>(appConfig.ui.strategy, appConfig.ui.dropdown, dropdown)

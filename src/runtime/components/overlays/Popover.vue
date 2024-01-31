@@ -47,7 +47,6 @@ import type { PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { popover } from '#ui/ui.config'
-// @ts-ignore
 import { useId } from '#imports'
 
 const config = mergeConfig<typeof popover>(appConfig.ui.strategy, appConfig.ui.popover, popover)
