@@ -26,7 +26,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, toRef, onMounted, ref } from 'vue'
+import { useId } from '#app'
+import { computed, defineComponent, inject, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
@@ -36,17 +37,15 @@ import type { Strategy } from '../../types'
 import appConfig from '#build/app.config'
 import { radio } from '#ui/ui.config'
 import colors from '#ui-colors'
-import { uid } from '../../utils/uid'
 import { useFormGroup } from '../../composables/useFormGroup'
 
 const config = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
 
 export default defineComponent({
-  inheritAttrs: false,
   props: {
     id: {
       type: String,
-      default: () => null
+      default: null
     },
     value: {
       type: [String, Number, Boolean],
@@ -100,15 +99,10 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('radio', toRef(props, 'ui'), config, toRef(props, 'class'))
 
+    const inputId = props.id ?? useId()
+
     const radioGroup = inject('radio-group', null)
     const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config)
-    const inputId = ref(props.id)
-
-    onMounted(() => {
-      if (!inputId.value) {
-        inputId.value = uid()
-      }
-    })
 
     const pick = computed({
       get () {
