@@ -150,7 +150,7 @@ export default defineNuxtModule<ModuleOptions>({
       tailwindConfig.safelist.push(...generateSafelist(options.safelistColors || [], colors))
 
       tailwindConfig.plugins = tailwindConfig.plugins || []
-      tailwindConfig.plugins.push(iconsPlugin(Array.isArray(options.icons) ? { collections: getIconCollections(options.icons) } : typeof options.icons === 'object' ? options.icons as IconsPluginOptions : {}))
+      tailwindConfig.plugins.push(iconsPlugin(Array.isArray(options.icons) || options.icons === 'all' ? { collections: getIconCollections(options.icons) } : typeof options.icons === 'object' ? options.icons as IconsPluginOptions : {}))
     })
 
     createTemplates(nuxt)
