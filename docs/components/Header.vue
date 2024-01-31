@@ -11,6 +11,7 @@
         <Logo class="w-auto h-6" />
 
         <UBadge v-if="$route.path.startsWith('/pro')" label="Pro" variant="subtle" size="xs" class="-mb-[2px] rounded font-semibold" />
+        <UBadge v-if="$route.path.startsWith('/dev')" label="Edge" variant="subtle" size="xs" class="-mb-[2px] rounded font-semibold" />
       </NuxtLink>
     </template>
 
