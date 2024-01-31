@@ -94,8 +94,8 @@ export default defineNuxtConfig({
     }
   },
   routeRules: {
-    '/components': { redirect: '/components/accordion' },
-    '/dev/components': { redirect: '/dev/components/accordion' }
+    '/components': { redirect: '/components/accordion', prerender: false },
+    '/dev/components': { redirect: '/dev/components/accordion', prerender: false }
   },
   componentMeta: {
     exclude: [
