@@ -66,6 +66,10 @@ export default defineComponent({
       type: Number,
       default: 3
     },
+    maxrows: {
+      type: Number,
+      default: 0
+    },
     autoresize: {
       type: Boolean,
       default: false
@@ -160,7 +164,7 @@ export default defineComponent({
         const newRows = (scrollHeight - padding) / lineHeight
 
         if (newRows > props.rows) {
-          textarea.value.rows = newRows
+          textarea.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
         }
       }
     }
