@@ -31,11 +31,13 @@ type UI = {
 
 declare module 'nuxt/schema' {
   interface AppConfigInput {
+    // @ts-ignore
     ui?: UI
   }
 }
 declare module '@nuxt/schema' {
   interface AppConfigInput {
+    // @ts-ignore
     ui?: UI
   }
 }
