@@ -35,16 +35,16 @@
     </div>
 
     <div v-if="indicators" :class="ui.indicators.wrapper">
-      <template v-for="index in indicatorsCount" :key="index">
-        <slot name="indicator" :on-click="onClick" :active="index === currentIndex" :index="index">
+      <template v-for="page in pages" :key="page">
+        <slot name="indicator" :on-click="onClick" :active="page === currentPage" :page="page">
           <button
             type="button"
             :class="[
               ui.indicators.base,
-              index === currentIndex ? ui.indicators.active : ui.indicators.inactive
+              page === currentPage ? ui.indicators.active : ui.indicators.inactive
             ]"
-            :aria-label="`set slide ${index}`"
-            @click="onClick(index)"
+            :aria-label="`set slide ${page}`"
+            @click="onClick(page)"
           />
         </slot>
       </template>
@@ -103,7 +103,7 @@ export default defineComponent({
       default: undefined
     }
   },
-  setup (props) {
+  setup (props, { expose }) {
     const { ui, attrs } = useUI('carousel', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const carouselRef = ref<HTMLElement>()
@@ -122,9 +122,9 @@ export default defineComponent({
       itemWidth.value = entry?.target?.firstElementChild?.clientWidth || 0
     })
 
-    const currentIndex = computed(() => Math.round(x.value / itemWidth.value) + 1)
+    const currentPage = computed(() => Math.round(x.value / itemWidth.value) + 1)
 
-    const indicatorsCount = computed(() => {
+    const pages = computed(() => {
       if (!itemWidth.value) {
         return 0
       }
@@ -140,9 +140,17 @@ export default defineComponent({
       x.value -= itemWidth.value
     }
 
-    function onClick (index: number) {
-      x.value = (index - 1) * itemWidth.value
+    function onClick (page: number) {
+      x.value = (page - 1) * itemWidth.value
     }
+
+    expose({
+      pages,
+      page: currentPage,
+      prev: onClickPrev,
+      next: onClickNext,
+      select: onClick
+    })
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
@@ -151,8 +159,8 @@ export default defineComponent({
       isFirst,
       isLast,
       carouselRef,
-      indicatorsCount,
-      currentIndex,
+      pages,
+      currentPage,
       onClickNext,
       onClickPrev,
       onClick,

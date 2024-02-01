@@ -100,6 +100,12 @@ The number of indicators will be automatically generated based on the number of 
 
 :component-example{component="carousel-example-indicators-size"}
 
+## Autoplay
+
+You can easily implement an autoplay behavior using the exposed [API](#api) through a template ref.
+
+:component-example{component="carousel-example-autoplay"}
+
 ## Slots
 
 ### `default`
@@ -120,7 +126,7 @@ You can customize the position of the buttons through `ui.arrows.wrapper`.
 
 ### `indicator`
 
-With the `indicators` prop enabled, use the `#indicator` slot to set the content of the indicators. You will have access to the `active`, `index` properties and `on-click` method in the slot scope.
+With the `indicators` prop enabled, use the `#indicator` slot to set the content of the indicators. You will have access to the `active`, `page` properties and `on-click` method in the slot scope.
 
 :component-example{component="carousel-example-slots-indicator"}
 
@@ -131,6 +137,28 @@ You can customize the position of the buttons through `ui.indicators.wrapper`.
 ## Props
 
 :component-props
+
+## API
+
+When accessing the component via a template ref, you can use the following:
+
+::field-group
+  ::field{name="page" type="number"}
+    The current page.
+  ::
+  ::field{name="pages" type="number"}
+    The total number of pages.
+  ::
+  ::field{name="select (page)"}
+    Go to a specific page.
+  ::
+  ::field{name="next ()"}
+    Go to the next page.
+  ::
+  ::field{name="prev ()"}
+    Go to the previous page.
+  ::
+::
 
 ## Config
 
