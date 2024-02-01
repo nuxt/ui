@@ -18,6 +18,7 @@
 
       <HTab
         v-for="(item, index) of items"
+        :id="tabsTabIds[index]"
         :key="index"
         ref="itemRefs"
         v-slot="{ selected, disabled }"
@@ -35,8 +36,10 @@
     <HTabPanels :class="ui.container">
       <HTabPanel
         v-for="(item, index) of items"
+        :id="tabsPanelIds[index]"
         :key="index"
         v-slot="{ selected }"
+        :unmount="false"
         :class="ui.base"
         tabindex="-1"
       >
@@ -59,6 +62,7 @@ import type { TabItem, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { tabs } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof tabs>(appConfig.ui.strategy, appConfig.ui.tabs, tabs)
 
@@ -105,6 +109,8 @@ export default defineComponent({
     const listRef = ref<HTMLElement>()
     const itemRefs = ref<HTMLElement[]>([])
     const markerRef = ref<HTMLElement>()
+    const tabsTabIds = props.items.map(() => useId('headlessui-tabs-tab'))
+    const tabsPanelIds = props.items.map(() => useId('headlessui-tabs-panel'))
 
     const selectedIndex = ref<number | undefined>(props.modelValue || props.defaultIndex)
 
@@ -158,6 +164,8 @@ export default defineComponent({
       listRef,
       itemRefs,
       markerRef,
+      tabsTabIds,
+      tabsPanelIds,
       selectedIndex,
       onChange
     }
