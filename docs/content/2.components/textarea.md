@@ -129,6 +129,7 @@ props:
   autoresize: true
   maxrows: 5
 ---
+::
 
 ### Resize
 
