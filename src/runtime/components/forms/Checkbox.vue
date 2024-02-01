@@ -8,7 +8,6 @@
         :required="required"
         :value="value"
         :disabled="disabled"
-        :checked="checked"
         :indeterminate="indeterminate"
         type="checkbox"
         :class="inputClass"
@@ -68,11 +67,11 @@ export default defineComponent({
     },
     checked: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     indeterminate: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     help: {
       type: String,
