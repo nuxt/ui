@@ -71,12 +71,20 @@ props:
 
 Use the `type` prop to change the input type, the default `type` is set to `text`, you can check all the available types at [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types).
 
-We have improved the implementation of certain types such as [Checkbox](/components/checkbox), [Radio](/components/radio-group), etc.
+Some types have been implemented in their own components, such as [Checkbox](/components/checkbox), [Radio](/components/radio-group), etc. and others have been styled like `file` for example.
 
 ::component-card
 ---
 props:
-  type: 'password'
+  type: 'file'
+  size: sm
+options:
+  - name: type
+    restriction: included
+    values:
+      - file
+      - password
+      - number
 ---
 ::
 

@@ -22,7 +22,7 @@ const items = [{
   <UCarousel :items="items" :ui="{ item: 'w-full' }">
     <template #default="{ item, index }">
       <div class="text-center mx-auto">
-        <img :src="item.avatar.src" :alt="item.name" class="rounded-full w-48 h-48 mb-2">
+        <img :src="item.avatar.src" :alt="item.name" class="rounded-full w-48 h-48 mb-2" draggable="false">
 
         <p class="font-semibold">
           {{ index + 1 }}. {{ item.name }}

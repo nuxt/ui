@@ -67,6 +67,9 @@ export default defineNuxtConfig({
       } : undefined
     }
   },
+  image: {
+    provider: 'ipx'
+  },
   fontMetrics: {
     fonts: ['DM Sans']
   },

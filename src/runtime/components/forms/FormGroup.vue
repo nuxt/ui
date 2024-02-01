@@ -38,6 +38,7 @@
 </template>
 
 <script lang="ts">
+import { useId } from '#app'
 import { computed, defineComponent, provide, inject, ref, toRef } from 'vue'
 import type { Ref, PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
@@ -112,7 +113,7 @@ export default defineComponent({
     })
 
     const size = computed(() => ui.value.size[props.size ?? config.default.size])
-    const inputId = ref()
+    const inputId = ref(useId())
 
     provide<InjectedFormGroupValue>('form-group', {
       error,

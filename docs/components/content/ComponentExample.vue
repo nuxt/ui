@@ -21,7 +21,6 @@
 <script setup lang="ts">
 import { camelCase } from 'scule'
 import { fetchContentExampleCode } from '~/composables/useContentExamplesCode'
-// @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
 // @ts-ignore
 import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'

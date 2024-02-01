@@ -236,6 +236,7 @@ export default defineComponent({
         ui.value.form,
         rounded.value,
         ui.value.placeholder,
+        props.type === 'file' && [ui.value.file.base, ui.value.file.padding[size.value]],
         ui.value.size[size.value],
         props.padded ? ui.value.padding[size.value] : 'p-0',
         variant?.replaceAll('{color}', color.value),

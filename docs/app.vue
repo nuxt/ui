@@ -65,7 +65,7 @@ const links = computed(() => {
     label: 'Pro',
     icon: 'i-heroicons-square-3-stack-3d',
     to: '/pro',
-    active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components')
+    active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
   }, {
     label: 'Pricing',
     icon: 'i-heroicons-credit-card',
