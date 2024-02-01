@@ -1,7 +1,7 @@
 import { createResolver } from '@nuxt/kit'
 import colors from 'tailwindcss/colors'
 import module from '../src/module'
-import { excludeColors } from '../src/colors'
+import { excludeColors } from '../src/runtime/utils/colors'
 import pkg from '../package.json'
 
 const { resolve } = createResolver(import.meta.url)
