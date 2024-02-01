@@ -8,6 +8,7 @@
 
     <ULandingHero :description="page.description" :links="page.links" align="center" :ui="{ title: 'sm:text-6xl' }" class="md:py-32">
       <template #title>
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <span v-html="page.title" />
       </template>
     </ULandingHero>
