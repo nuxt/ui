@@ -22,8 +22,13 @@
 import { camelCase } from 'scule'
 import { fetchContentExampleCode } from '~/composables/useContentExamplesCode'
 import { transformContent } from '@nuxt/content/transformers'
-// @ts-ignore
-import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
+import { createShikiHighlighter } from '@nuxtjs/mdc/runtime/highlighter/shiki'
+import MaterialTheme from 'shiki/themes/material-theme.mjs'
+import MaterialThemeLighter from 'shiki/themes/material-theme-lighter.mjs'
+import MaterialThemePalenight from 'shiki/themes/material-theme-palenight.mjs'
+import HtmlLang from 'shiki/langs/html.mjs'
+import MdcLang from 'shiki/langs/mdc.mjs'
+import VueLang from 'shiki/langs/vue.mjs'
 
 const props = defineProps({
   component: {
@@ -80,12 +85,22 @@ const data = await fetchContentExampleCode(camelName)
 
 const hasCode = computed(() => !props.hiddenCode && (data?.code || instance.slots.code))
 
-const shikiHighlighter = useShikiHighlighter({})
-const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
+const highlighter = createShikiHighlighter({
+  bundledThemes: {
+    'material-theme': MaterialTheme,
+    'material-theme-lighter': MaterialThemeLighter,
+    'material-theme-palenight': MaterialThemePalenight
+  },
+  bundledLangs: {
+    html: HtmlLang,
+    mdc: MdcLang,
+    vue: VueLang
+  }
+})
 const { data: ast } = await useAsyncData(`content-example-${camelName}-ast`, () => transformContent('content:_markdown.md', `\`\`\`vue\n${data?.code ?? ''}\n\`\`\``, {
   markdown: {
     highlight: {
-      highlighter: codeHighlighter,
+      highlighter,
       theme: {
         light: 'material-theme-lighter',
         default: 'material-theme',
