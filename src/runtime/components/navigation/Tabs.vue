@@ -18,7 +18,6 @@
 
       <HTab
         v-for="(item, index) of items"
-        :id="tabsTabIds[index]"
         :key="index"
         ref="itemRefs"
         v-slot="{ selected, disabled }"
@@ -36,7 +35,6 @@
     <HTabPanels :class="ui.container">
       <HTabPanel
         v-for="(item, index) of items"
-        :id="tabsPanelIds[index]"
         :key="index"
         v-slot="{ selected }"
         :unmount="false"
@@ -54,7 +52,7 @@
 <script lang="ts">
 import { toRef, ref, watch, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel } from '@headlessui/vue'
+import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel, provideUseId } from '@headlessui/vue'
 import { useResizeObserver } from '@vueuse/core'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
@@ -109,8 +107,6 @@ export default defineComponent({
     const listRef = ref<HTMLElement>()
     const itemRefs = ref<HTMLElement[]>([])
     const markerRef = ref<HTMLElement>()
-    const tabsTabIds = props.items.map(() => useId('headlessui-tabs-tab'))
-    const tabsPanelIds = props.items.map(() => useId('headlessui-tabs-panel'))
 
     const selectedIndex = ref<number | undefined>(props.modelValue || props.defaultIndex)
 
@@ -157,6 +153,8 @@ export default defineComponent({
 
     onMounted(() => calcMarkerSize(selectedIndex.value))
 
+    provideUseId(() => useId())
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -164,8 +162,6 @@ export default defineComponent({
       listRef,
       itemRefs,
       markerRef,
-      tabsTabIds,
-      tabsPanelIds,
       selectedIndex,
       onChange
     }

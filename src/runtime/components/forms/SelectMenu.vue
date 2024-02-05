@@ -19,13 +19,7 @@
       aria-hidden="true"
     >
 
-    <HComboboxButton
-      :id="comboboxButtonId"
-      ref="trigger"
-      as="div"
-      role="button"
-      :class="uiMenu.trigger"
-    >
+    <HComboboxButton ref="trigger" as="div" role="button" :class="uiMenu.trigger">
       <slot :open="open" :disabled="disabled" :loading="loading">
         <button :id="inputId" :class="selectClass" :disabled="disabled" type="button" v-bind="attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
@@ -128,7 +122,8 @@ import {
   ComboboxButton as HComboboxButton,
   ComboboxOptions as HComboboxOptions,
   ComboboxOption as HComboboxOption,
-  ComboboxInput as HComboboxInput
+  ComboboxInput as HComboboxInput,
+  provideUseId
 } from '@headlessui/vue'
 import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
@@ -324,8 +319,6 @@ export default defineComponent({
     const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
     const { ui: uiMenu } = useUI('selectMenu', toRef(props, 'uiMenu'), configMenu)
 
-    const comboboxButtonId = useId('headlessui-combobox-button')
-
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
 
     const [trigger, container] = usePopper(popper.value)
@@ -504,13 +497,14 @@ export default defineComponent({
       query.value = event.target.value
     }
 
+    provideUseId(() => useId())
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       // eslint-disable-next-line vue/no-dupe-keys
       uiMenu,
       attrs,
-      comboboxButtonId,
       // eslint-disable-next-line vue/no-dupe-keys
       name,
       inputId,

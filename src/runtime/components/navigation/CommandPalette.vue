@@ -63,7 +63,7 @@
 
 <script lang="ts">
 import { ref, computed, watch, toRef, onMounted, defineComponent } from 'vue'
-import { Combobox as HCombobox, ComboboxInput as HComboboxInput, ComboboxOptions as HComboboxOptions } from '@headlessui/vue'
+import { Combobox as HCombobox, ComboboxInput as HComboboxInput, ComboboxOptions as HComboboxOptions, provideUseId } from '@headlessui/vue'
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
@@ -79,6 +79,7 @@ import type { Group, Command, Button, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { commandPalette } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof commandPalette>(appConfig.ui.strategy, appConfig.ui.commandPalette, commandPalette)
 
@@ -365,6 +366,8 @@ export default defineComponent({
       comboboxApi,
       results
     })
+
+    provideUseId(() => useId())
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

@@ -2,7 +2,6 @@
   <!-- eslint-disable-next-line vue/no-template-shadow -->
   <HPopover ref="popover" v-slot="{ open, close }" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HPopoverButton
-      :id="popoverButtonId"
       ref="trigger"
       as="div"
       :disabled="disabled"
@@ -26,7 +25,7 @@
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
 
-          <HPopoverPanel :id="popoverPanelId" :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
+          <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
             <slot name="panel" :open="open" :close="close" />
           </HPopoverPanel>
         </div>
@@ -39,7 +38,7 @@
 import { computed, ref, toRef, onMounted, defineComponent, watch } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel } from '@headlessui/vue'
+import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel, provideUseId } from '@headlessui/vue'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { mergeConfig } from '../../utils'
@@ -108,8 +107,6 @@ export default defineComponent({
     const popover = ref<any>(null)
     // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
     const popoverApi = ref<any>(null)
-    const popoverButtonId = useId()
-    const popoverPanelId = useId()
 
     let openTimeout: NodeJS.Timeout | null = null
     let closeTimeout: NodeJS.Timeout | null = null
@@ -214,13 +211,13 @@ export default defineComponent({
       emit('update:open', newValue === 0)
     })
 
+    provideUseId(() => useId())
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
       popover,
-      popoverButtonId,
-      popoverPanelId,
       // eslint-disable-next-line vue/no-dupe-keys
       popper,
       trigger,

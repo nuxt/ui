@@ -2,7 +2,6 @@
   <div :class="ui.wrapper">
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" as="div" :default-open="defaultOpen || item.defaultOpen">
       <HDisclosureButton
-        :id="disclosureButtonIds[index]"
         :ref="() => disclosureButtonRefs[index] = { open, close }"
         as="template"
         :disabled="item.disabled"
@@ -34,7 +33,7 @@
         @leave="onLeave"
       >
         <div v-show="open">
-          <HDisclosurePanel :id="disclosurePanelIds[index]" :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]" static>
+          <HDisclosurePanel :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]" static>
             <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
               {{ item.content }}
             </slot>
@@ -48,7 +47,7 @@
 <script lang="ts">
 import { ref, computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel } from '@headlessui/vue'
+import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel, provideUseId } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
@@ -108,8 +107,6 @@ export default defineComponent({
     const uiButton = computed<typeof configButton>(() => configButton)
 
     const disclosureButtonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
-    const disclosureButtonIds = props.items.map(() => useId('headlessui-disclosure-button'))
-    const disclosurePanelIds = props.items.map(() => useId('headlessui-disclosure-panel'))
 
     function closeOthers (currentIndex: number, e: Event) {
       if (!props.items[currentIndex].closeOthers && props.multiple) {
@@ -150,14 +147,14 @@ export default defineComponent({
       el.addEventListener('transitionend', done, { once: true })
     }
 
+    provideUseId(() => useId())
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       uiButton,
       attrs,
       disclosureButtonRefs,
-      disclosureButtonIds,
-      disclosurePanelIds,
       closeOthers,
       omit,
       onEnter,

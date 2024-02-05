@@ -2,7 +2,6 @@
   <!-- eslint-disable-next-line vue/no-template-shadow -->
   <HMenu v-slot="{ open }" as="div" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HMenuButton
-      :id="menuButtonId"
       ref="trigger"
       as="div"
       :disabled="disabled"
@@ -58,7 +57,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch, toRef, onMounted, resolveComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem } from '@headlessui/vue'
+import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem, provideUseId } from '@headlessui/vue'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -135,7 +134,6 @@ export default defineComponent({
 
     // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/menu/menu.ts#L131
     const menuApi = ref<any>(null)
-    const menuButtonId = useId('headlessui-menu-button')
 
     let openTimeout: NodeJS.Timeout | null = null
     let closeTimeout: NodeJS.Timeout | null = null
@@ -254,6 +252,8 @@ export default defineComponent({
 
     const NuxtLink = resolveComponent('NuxtLink')
 
+    provideUseId(() => useId())
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -263,7 +263,6 @@ export default defineComponent({
       trigger,
       container,
       containerStyle,
-      menuButtonId,
       onMouseOver,
       onMouseLeave,
       onClick,
