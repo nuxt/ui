@@ -119,6 +119,18 @@ props:
 ---
 ::
 
+Use the `maxrows` prop to set a maximum number of rows when autoresizing. If set to `0`, the Textarea will infinitely grow up.
+::component-card
+---
+baseProps:
+  placeholder: 'Search...'
+  modelValue: 'Here is an autoresize Textarea, write new lines to make the Textarea grow up at a maximum of 5 rows...'
+props:
+  autoresize: true
+  maxrows: 5
+---
+::
+
 ### Resize
 
 Use the `resize` prop to enable the resize control.

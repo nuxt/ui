@@ -1,17 +1,10 @@
 import { join } from 'pathe'
-import { addTemplate, createResolver, installModule, useNuxt } from '@nuxt/kit'
+import { addTemplate, installModule, useNuxt } from '@nuxt/kit'
 import defaultColors from 'tailwindcss/colors.js'
-
 import { excludeColors, generateSafelist } from './runtime/utils/colors'
 import type { ModuleOptions } from './module'
 
-export default async function installTailwind (
-  moduleOptions: ModuleOptions,
-  nuxt = useNuxt()
-) {
-  const { resolve } = createResolver(import.meta.url)
-  const runtimeDir = resolve('./runtime')
-
+export default async function installTailwind (moduleOptions: ModuleOptions, nuxt = useNuxt(), { resolve, runtimeDir }) {
   // 1. register hook
   // @ts-ignore
   nuxt.hook('tailwindcss:config', function (tailwindConfig) {
@@ -97,7 +90,7 @@ export default async function installTailwind (
           require('@tailwindcss/typography'),
           require('@tailwindcss/container-queries'),
           require('@headlessui/tailwindcss'),
-          iconsPlugin(${Array.isArray(moduleOptions.icons) || moduleOptions.icons === 'all' ? `{ collections: getIconCollections(${JSON.stringify(moduleOptions.icons)}) }` : typeof moduleOptions.icons === 'object' ? JSON.stringify(moduleOptions.icons) : {}})
+          iconsPlugin(${Array.isArray(moduleOptions.icons) || moduleOptions.icons === 'all' ? `{ collections: getIconCollections(${JSON.stringify(moduleOptions.icons)}) }` : typeof moduleOptions.icons === 'object' ? JSON.stringify(moduleOptions.icons) : '{}'})
         ],
         content: {
           files: [
