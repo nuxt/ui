@@ -90,7 +90,7 @@ export default async function installTailwind (moduleOptions: ModuleOptions, nux
           require('@tailwindcss/typography'),
           require('@tailwindcss/container-queries'),
           require('@headlessui/tailwindcss'),
-          iconsPlugin(${Array.isArray(moduleOptions.icons) || moduleOptions.icons === 'all' ? `{ collections: getIconCollections(${JSON.stringify(moduleOptions.icons)}) }` : typeof moduleOptions.icons === 'object' ? JSON.stringify(moduleOptions.icons) : {}})
+          iconsPlugin(${Array.isArray(moduleOptions.icons) || moduleOptions.icons === 'all' ? `{ collections: getIconCollections(${JSON.stringify(moduleOptions.icons)}) }` : typeof moduleOptions.icons === 'object' ? JSON.stringify(moduleOptions.icons) : '{}'})
         ],
         content: {
           files: [
