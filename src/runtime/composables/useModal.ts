@@ -50,11 +50,24 @@ function _useModal () {
     }
   }
 
+  /**
+   * Allows updating the modal props
+   */
+  function patch (props: ModalProps = {}) {
+    modalState.value = {
+      ...modalState.value,
+      props: {
+        ...modalState.value.props,
+        ...props
+      }
+    }
+  }
 
   return {
     isOpen,
     reveal,
-    close
+    close,
+    patch
   }
 }
 
