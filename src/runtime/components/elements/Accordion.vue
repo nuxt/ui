@@ -2,7 +2,7 @@
   <div :class="ui.wrapper">
     <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" as="div" :default-open="defaultOpen || item.defaultOpen">
       <HDisclosureButton
-        :ref="() => disclosureButtonRefs[index] = { open, close }"
+        :ref="() => buttonRefs[index] = { open, close }"
         as="template"
         :disabled="item.disabled"
         @click="closeOthers(index, $event)"
@@ -106,14 +106,14 @@ export default defineComponent({
 
     const uiButton = computed<typeof configButton>(() => configButton)
 
-    const disclosureButtonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
+    const buttonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
 
     function closeOthers (currentIndex: number, e: Event) {
       if (!props.items[currentIndex].closeOthers && props.multiple) {
         return
       }
 
-      disclosureButtonRefs.value.forEach((button) => {
+      buttonRefs.value.forEach((button) => {
         if (button.open) {
           button.close(e.target as EventTarget)
         }
@@ -154,7 +154,7 @@ export default defineComponent({
       ui,
       uiButton,
       attrs,
-      disclosureButtonRefs,
+      buttonRefs,
       closeOthers,
       omit,
       onEnter,
