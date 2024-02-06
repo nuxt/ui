@@ -1,6 +1,13 @@
 <template>
   <div :class="ui.wrapper">
-    <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" as="div" :default-open="defaultOpen || item.defaultOpen">
+    <HDisclosure
+      v-for="(item, index) in items"
+      v-slot="{ open, close }"
+      :key="index"
+      as="div"
+      :class="ui.container"
+      :default-open="defaultOpen || item.defaultOpen"
+    >
       <HDisclosureButton
         :ref="() => buttonRefs[index] = { open, close }"
         as="template"
