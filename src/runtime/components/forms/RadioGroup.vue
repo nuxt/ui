@@ -12,6 +12,7 @@
         :label="option.label"
         :model-value="modelValue"
         :value="option.value"
+        :help="option.help"
         :disabled="option.disabled || disabled"
         :ui="uiRadio"
         @change="onUpdate(option.value)"
