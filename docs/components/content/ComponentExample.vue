@@ -1,7 +1,7 @@
 <template>
   <div class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0">
     <div
-      class="flex border border-gray-200 dark:border-gray-700 relative rounded-t-md"
+      class="flex border border-gray-200 dark:border-gray-700 relative rounded-t-md overflow-hidden"
       :class="[{ 'p-4': padding, 'rounded-b-md': !hasCode, 'border-b-0': hasCode, 'not-prose': !prose }, backgroundClass, extraClass]"
     >
       <template v-if="component">
