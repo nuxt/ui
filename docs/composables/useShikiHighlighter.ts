@@ -5,6 +5,7 @@ import MaterialThemePalenight from 'shiki/themes/material-theme-palenight.mjs'
 import HtmlLang from 'shiki/langs/html.mjs'
 import MdcLang from 'shiki/langs/mdc.mjs'
 import VueLang from 'shiki/langs/vue.mjs'
+import YamlLang from 'shiki/langs/yaml.mjs'
 
 let highlighter
 export const useShikiHighlighter = () => {
@@ -18,7 +19,8 @@ export const useShikiHighlighter = () => {
       bundledLangs: {
         html: HtmlLang,
         mdc: MdcLang,
-        vue: VueLang
+        vue: VueLang,
+        yml: YamlLang
       }
     })
   }

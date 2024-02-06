@@ -24,7 +24,6 @@ import { fetchContentExampleCode } from '~/composables/useContentExamplesCode'
 import { transformContent } from '@nuxt/content/transformers'
 import { useShikiHighlighter } from '~/composables/useShikiHighlighter'
 
-
 const props = defineProps({
   component: {
     type: String,
@@ -77,10 +76,10 @@ if (['command-palette-theme-algolia', 'command-palette-theme-raycast', 'vertical
 const instance = getCurrentInstance()
 const camelName = camelCase(component)
 const data = await fetchContentExampleCode(camelName)
+const highlighter = useShikiHighlighter()
 
 const hasCode = computed(() => !props.hiddenCode && (data?.code || instance.slots.code))
 
-const highlighter = useShikiHighlighter()
 const { data: ast } = await useAsyncData(`content-example-${camelName}-ast`, () => transformContent('content:_markdown.md', `\`\`\`vue\n${data?.code ?? ''}\n\`\`\``, {
   markdown: {
     highlight: {

@@ -122,6 +122,7 @@ const componentProps = reactive({ ...props.props })
 const { $prettier } = useNuxtApp()
 const appConfig = useAppConfig()
 const route = useRoute()
+const highlighter = useShikiHighlighter()
 
 let name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
 
@@ -266,8 +267,6 @@ function renderObject (obj: any) {
 
   return obj
 }
-
-const highlighter = useShikiHighlighter()
 
 const { data: ast } = await useAsyncData(
   `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`,
