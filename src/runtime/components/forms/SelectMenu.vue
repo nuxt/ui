@@ -1,5 +1,6 @@
 <template>
-  <HCombobox
+  <component
+    :is="searchable ? 'HCombobox' : 'HListbox'"
     v-slot="{ open }"
     :by="by"
     :name="name"
@@ -19,7 +20,13 @@
       aria-hidden="true"
     >
 
-    <HComboboxButton ref="trigger" as="div" role="button" :class="uiMenu.trigger">
+    <component
+      :is="searchable ? 'HComboboxButton' : 'HListboxButton'"
+      ref="trigger"
+      as="div"
+      role="button"
+      :class="uiMenu.trigger"
+    >
       <slot :open="open" :disabled="disabled" :loading="loading">
         <button :id="inputId" :class="selectClass" :disabled="disabled" type="button" v-bind="attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
@@ -40,14 +47,14 @@
           </span>
         </button>
       </slot>
-    </HComboboxButton>
+    </component>
 
     <div v-if="open" ref="container" :class="[uiMenu.container, uiMenu.width]">
       <Transition appear v-bind="uiMenu.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(uiMenu.arrow)" />
 
-          <HComboboxOptions static :class="[uiMenu.base, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
+          <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
             <HComboboxInput
               v-if="searchable"
               :display-value="() => query"
@@ -58,7 +65,8 @@
               :class="uiMenu.input"
               @change="onChange"
             />
-            <HComboboxOption
+            <component
+              :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
               v-for="(option, index) in filteredOptions"
               v-slot="{ active, selected, disabled: optionDisabled }"
               :key="index"
@@ -86,9 +94,9 @@
                   <UIcon :name="selectedIcon" :class="uiMenu.option.selectedIcon.base" aria-hidden="true" />
                 </span>
               </li>
-            </HComboboxOption>
+            </component>
 
-            <HComboboxOption v-if="creatable && createOption" v-slot="{ active, selected }" :value="createOption" as="template">
+            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && createOption" v-slot="{ active, selected }" :value="createOption" as="template">
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
                   <slot name="option-create" :option="createOption" :active="active" :selected="selected">
@@ -96,7 +104,7 @@
                   </slot>
                 </div>
               </li>
-            </HComboboxOption>
+            </component>
             <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
                 No results for "{{ query }}".
@@ -107,11 +115,11 @@
                 No options.
               </slot>
             </p>
-          </HComboboxOptions>
+          </component>
         </div>
       </Transition>
     </div>
-  </HCombobox>
+  </component>
 </template>
 
 <script lang="ts">
@@ -123,6 +131,10 @@ import {
   ComboboxOptions as HComboboxOptions,
   ComboboxOption as HComboboxOption,
   ComboboxInput as HComboboxInput,
+  Listbox as HListbox,
+  ListboxButton as HListboxButton,
+  ListboxOptions as HListboxOptions,
+  ListboxOption as HListboxOption,
   provideUseId
 } from '@headlessui/vue'
 import { computedAsync, useDebounceFn } from '@vueuse/core'
@@ -152,6 +164,10 @@ export default defineComponent({
     HComboboxOptions,
     HComboboxOption,
     HComboboxInput,
+    HListbox,
+    HListboxButton,
+    HListboxOptions,
+    HListboxOption,
     UIcon,
     UAvatar
   },
