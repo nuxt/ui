@@ -57,7 +57,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch, toRef, onMounted, resolveComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem } from '@headlessui/vue'
+import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem, provideUseId } from '@headlessui/vue'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -70,6 +70,7 @@ import type { DropdownItem, PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { dropdown } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof dropdown>(appConfig.ui.strategy, appConfig.ui.dropdown, dropdown)
 
@@ -250,6 +251,8 @@ export default defineComponent({
     })
 
     const NuxtLink = resolveComponent('NuxtLink')
+
+    provideUseId(() => useId())
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
