@@ -65,10 +65,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    checked: {
-      type: Boolean,
-      default: undefined
-    },
     indeterminate: {
       type: Boolean,
       default: undefined

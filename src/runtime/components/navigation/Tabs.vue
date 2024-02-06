@@ -33,14 +33,7 @@
     </HTabList>
 
     <HTabPanels :class="ui.container">
-      <HTabPanel
-        v-for="(item, index) of items"
-        :key="index"
-        v-slot="{ selected }"
-        :unmount="false"
-        :class="ui.base"
-        tabindex="-1"
-      >
+      <HTabPanel v-for="(item, index) of items" :key="index" v-slot="{ selected }" :class="ui.base">
         <slot :name="item.slot || 'item'" :item="item" :index="index" :selected="selected">
           {{ item.content }}
         </slot>
