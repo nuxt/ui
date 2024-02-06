@@ -1,6 +1,6 @@
 <template>
   <div :class="ui.wrapper">
-    <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" :default-open="defaultOpen || item.defaultOpen">
+    <HDisclosure v-for="(item, index) in items" v-slot="{ open, close }" :key="index" as="div" :default-open="defaultOpen || item.defaultOpen">
       <HDisclosureButton
         :ref="() => buttonRefs[index] = { open, close }"
         as="template"
@@ -47,7 +47,7 @@
 <script lang="ts">
 import { ref, computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel } from '@headlessui/vue'
+import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel, provideUseId } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
@@ -56,6 +56,7 @@ import type { AccordionItem, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { accordion, button } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof accordion>(appConfig.ui.strategy, appConfig.ui.accordion, accordion)
 
@@ -145,6 +146,8 @@ export default defineComponent({
 
       el.addEventListener('transitionend', done, { once: true })
     }
+
+    provideUseId(() => useId())
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

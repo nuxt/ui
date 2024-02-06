@@ -38,7 +38,6 @@
 </template>
 
 <script lang="ts">
-import { useId } from '#app'
 import { computed, defineComponent, provide, inject, ref, toRef } from 'vue'
 import type { Ref, PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
@@ -47,6 +46,7 @@ import type { FormError, InjectedFormGroupValue, FormGroupSize, Strategy } from 
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { formGroup } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof formGroup>(appConfig.ui.strategy, appConfig.ui.formGroup, formGroup)
 

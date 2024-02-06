@@ -26,18 +26,18 @@
 </template>
 
 <script lang="ts">
-import { useId } from '#app'
 import { computed, defineComponent, inject, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
 import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { radio } from '#ui/ui.config'
 import colors from '#ui-colors'
-import { useFormGroup } from '../../composables/useFormGroup'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
 
