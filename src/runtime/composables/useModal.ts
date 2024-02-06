@@ -2,7 +2,7 @@ import { ref, inject } from 'vue'
 import type { ShallowRef, Component, InjectionKey } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import { mergeConfig } from '../utils'
-import type { Strategy } from '../types'
+import type { ComponentProps, Strategy } from '../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { modal } from '#ui/ui.config'
@@ -34,10 +34,10 @@ function _useModal () {
   
   const isOpen = ref(false)
 
-  function reveal (component: Component, props: ModalProps = {}) {
+  function reveal<T extends Component> (component: T, props?: ModalProps & ComponentProps<T>) {
     modalState.value = {
       component,
-      props
+      props: props ?? {}
     }
     isOpen.value = true
   }
@@ -53,7 +53,7 @@ function _useModal () {
   /**
    * Allows updating the modal props
    */
-  function patch (props: ModalProps = {}) {
+  function patch <T extends Component = {}> (props: Partial<ModalProps & ComponentProps<T>>) {
     modalState.value = {
       ...modalState.value,
       props: {

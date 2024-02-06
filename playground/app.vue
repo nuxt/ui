@@ -30,7 +30,6 @@ function reveal () {
     // UModal props
     fullscreen: true,
     // Test component props
-    // @ts-ignore
     // count // Warning, this is an object and not a number. Reactive.
     count: count.value // Ok, but not reactive.
   })
