@@ -3,6 +3,7 @@
   "version": "2.13.0",
   "repository": "nuxt/ui",
   "homepage": "https://ui.nuxt.com",
+  "type": "module",
   "license": "MIT",
   "exports": {
     ".": {
