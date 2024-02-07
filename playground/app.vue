@@ -28,16 +28,11 @@ function reveal () {
   // question: do we want the props to be reactive here ?
   modal.reveal(Test, {
     // UModal props
-    fullscreen: true,
+    fullscreen: false,
     // Test component props
     // count // Warning, this is an object and not a number. Reactive.
     count: count.value // Ok, but not reactive.
   })
-  setTimeout(() => {
-    modal.patch({
-      fullscreen: false
-    })
-  }, 3000)
 }
 
 onMounted(() => {
