@@ -26,8 +26,8 @@ const items = [
       <img :src="item" class="w-full" draggable="false">
     </template>
 
-    <template #indicator="{ onClick, index, active }">
-      <UButton :label="String(index)" :variant="active ? 'solid' : 'outline'" size="2xs" class="rounded-full min-w-6 justify-center" @click="onClick(index)" />
+    <template #indicator="{ onClick, page, active }">
+      <UButton :label="String(page)" :variant="active ? 'solid' : 'outline'" size="2xs" class="rounded-full min-w-6 justify-center" @click="onClick(page)" />
     </template>
   </UCarousel>
 </template>

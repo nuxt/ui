@@ -30,7 +30,7 @@ const items = [
     </template>
 
     <template #next="{ onClick, disabled }">
-      <button :disabled="disabled" class="" @click="onClick">
+      <button :disabled="disabled" @click="onClick">
         Next
       </button>
     </template>
