@@ -68,19 +68,15 @@ excludedProps:
 
 ### Size
 
-You can change the size of the divider by using the `ui` prop
+Use the `size` prop to change the size of the divider.
 
 ::component-card
 ---
 props:
   label: Nuxt UI
-  ui:
-    border:
-      size:
-        horizontal: border-t-2
+  size: sm
 excludedProps:
   - label
-  - ui
 ---
 ::
 

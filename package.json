@@ -3,6 +3,7 @@
   "version": "2.13.0",
   "repository": "nuxt/ui",
   "homepage": "https://ui.nuxt.com",
+  "type": "module",
   "license": "MIT",
   "exports": {
     ".": {
@@ -34,11 +35,11 @@
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.7.4",
     "@headlessui/tailwindcss": "^0.2.0",
-    "@headlessui/vue": "1.7.16",
+    "@headlessui/vue": "^1.7.18",
     "@iconify-json/heroicons": "^1.1.19",
     "@nuxt/kit": "^3.10.0",
     "@nuxtjs/color-mode": "^3.3.2",
-    "@nuxtjs/tailwindcss": "^6.11.2",
+    "@nuxtjs/tailwindcss": "^6.11.3",
     "@popperjs/core": "^2.11.8",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/container-queries": "^0.1.1",
@@ -63,7 +64,7 @@
     "@release-it/conventional-changelog": "^8.0.1",
     "@vue/test-utils": "^2.4.4",
     "eslint": "^8.56.0",
-    "happy-dom": "^13.3.5",
+    "happy-dom": "^13.3.8",
     "joi": "^17.11.1",
     "nuxt": "^3.10.0",
     "release-it": "^17.0.3",
@@ -80,6 +81,7 @@
     "@nuxt/kit": "3.10.0",
     "@nuxt/schema": "3.10.0",
     "tailwindcss": "3.4.1",
-    "vue": "3.3.13"
+    "@headlessui/vue": "1.7.18",
+    "vue": "3.4.15"
   }
 }

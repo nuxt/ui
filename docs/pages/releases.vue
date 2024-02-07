@@ -59,18 +59,20 @@ const dates = computed(() => {
   })
 })
 
+const title = page.value.head?.title || page.value.title
+const description = page.value.head?.description || page.value.description
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
-  title: page.value.title,
-  ogTitle: `${page.value.title} - Nuxt UI`,
-  description: page.value.description,
-  ogDescription: page.value.description
+  title,
+  description,
+  ogTitle: `${title} - Nuxt UI`,
+  ogDescription: description
 })
 
 defineOgImage({
   component: 'Docs',
-  title: page.value.title,
-  description: page.value.description
+  title,
+  description
 })
 </script>
 

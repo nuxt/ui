@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass, extraClass]">
+    <div class="flex border border-b-0 border-gray-200 dark:border-gray-700 relative not-prose overflow-hidden" :class="[{ 'p-4': padding }, propsToSelect.length ? 'border-t-0' : 'rounded-t-md', backgroundClass, extraClass]">
       <component :is="name" v-model="vModel" v-bind="fullProps" :class="componentClass">
         <ContentSlot v-if="$slots.default" :use="$slots.default" />
 
@@ -52,9 +52,8 @@
 
 <script setup lang="ts">
 import { transformContent } from '@nuxt/content/transformers'
-// @ts-ignore
-import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
 import { upperFirst, camelCase, kebabCase } from 'scule'
+import { useShikiHighlighter } from '~/composables/useShikiHighlighter'
 
 // eslint-disable-next-line vue/no-dupe-keys
 const props = defineProps({
@@ -123,6 +122,7 @@ const componentProps = reactive({ ...props.props })
 const { $prettier } = useNuxtApp()
 const appConfig = useAppConfig()
 const route = useRoute()
+const highlighter = useShikiHighlighter()
 
 let name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
 
@@ -268,8 +268,6 @@ function renderObject (obj: any) {
   return obj
 }
 
-const shikiHighlighter = useShikiHighlighter({})
-const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
 const { data: ast } = await useAsyncData(
   `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`,
   async () => {
@@ -283,7 +281,7 @@ const { data: ast } = await useAsyncData(
     return transformContent('content:_markdown.md', formatted, {
       markdown: {
         highlight: {
-          highlighter: codeHighlighter,
+          highlighter,
           theme: {
             light: 'material-theme-lighter',
             default: 'material-theme',

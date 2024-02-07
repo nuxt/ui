@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts">
-import { useId } from '#app'
 import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
@@ -13,6 +12,7 @@ import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types/form'
+import { useId } from '#imports'
 
 class FormException extends Error {
   constructor (message: string) {

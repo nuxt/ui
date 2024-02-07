@@ -1,5 +1,6 @@
 export default {
   wrapper: 'w-full flex flex-col',
+  container: 'w-full flex flex-col',
   item: {
     base: '',
     size: 'text-sm',

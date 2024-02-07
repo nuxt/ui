@@ -72,12 +72,13 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { ComboboxOption as HComboboxOption } from '@headlessui/vue'
+import { ComboboxOption as HComboboxOption, provideUseId } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
 import type { Group } from '../../types'
 import { commandPalette } from '#ui/ui.config'
+import { useId } from '#imports'
 
 export default defineComponent({
   components: {
@@ -150,6 +151,8 @@ export default defineComponent({
 
       return content
     }
+
+    provideUseId(() => useId())
 
     return {
       label,
