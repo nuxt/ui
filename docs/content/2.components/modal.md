@@ -59,7 +59,7 @@ Set the `fullscreen` prop to `true` to enable it.
 
 :component-example{component="modal-example-fullscreen"}
 
-### Control programmatically
+### Control programmatically :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
 
 First of all, add the `Modals` component to your app, preferably inside `app.vue`.
 

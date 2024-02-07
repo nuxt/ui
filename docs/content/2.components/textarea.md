@@ -119,7 +119,8 @@ props:
 ---
 ::
 
-Use the `maxrows` prop to set a maximum number of rows when autoresizing. If set to `0`, the Textarea will infinitely grow up.
+Use the `maxrows` prop to set a maximum number of rows when autoresizing. If set to `0`, the Textarea will infinitely grow up. :u-badge{label="New" class="!rounded-full" variant="subtle"}
+
 ::component-card
 ---
 baseProps:
