@@ -1,16 +1,7 @@
 import { ref, inject } from 'vue'
 import type { ShallowRef, Component, InjectionKey } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
-import { mergeConfig } from '../utils'
-import type { ComponentProps, Strategy } from '../types'
-// @ts-expect-error
-import appConfig from '#build/app.config'
-import { modal } from '#ui/ui.config'
-
-export interface ModalState {
-  component: Component | string
-  props: ModalProps
-}
+import type { ComponentProps } from '../types/component'
 
 export const modalInjectionKey: InjectionKey<ShallowRef<ModalState>> = Symbol('nuxt-ui.modal')
 
