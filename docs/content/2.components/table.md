@@ -12,6 +12,7 @@ Use the `rows` prop to set the data to display in the table. By default, the tab
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-basic'
 componentProps:
@@ -32,6 +33,7 @@ Use the `columns` prop to configure which columns to display. It's an array of o
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-columns'
 componentProps:
@@ -43,6 +45,7 @@ You can easily use the [SelectMenu](/components/select-menu) component to change
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-columns-selectable'
 componentProps:
@@ -56,6 +59,7 @@ Also, you can apply styles to `th` elements by passing a `class` to columns.
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-style'
 componentProps:
@@ -71,6 +75,7 @@ You may specify the default direction of each column through the `direction` pro
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-columns-sortable'
 componentProps:
@@ -160,6 +165,7 @@ Use the `sort-button` prop to customize the sort button in the header. You can p
 
 ::component-card{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 baseProps:
   class: 'w-full'
@@ -240,6 +246,7 @@ Use a `v-model` to make the table selectable. The `v-model` will be an array of 
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-selectable'
 componentProps:
@@ -257,6 +264,7 @@ You can use this to navigate to a page, open a modal or even to select the row m
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-clickable'
 componentProps:
@@ -270,6 +278,7 @@ You can easily use the [Input](/components/input) component to filter the rows.
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-searchable'
 componentProps:
@@ -283,6 +292,7 @@ You can easily use the [Pagination](/components/pagination) component to paginat
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-paginable'
 componentProps:
@@ -300,6 +310,7 @@ You can also set it to `null` to hide the loading state.
 
 ::component-card
 ---
+extraClass: 'overflow-hidden'
 padding: false
 baseProps:
   class: 'w-full'
@@ -348,6 +359,7 @@ You can also set it to `null` to hide the empty state.
 
 ::component-card
 ---
+extraClass: 'overflow-hidden'
 padding: false
 baseProps:
   class: 'w-full'
@@ -398,6 +410,7 @@ You can for example create an extra column for actions with a [Dropdown](/compon
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-slots'
 componentProps:
@@ -411,6 +424,7 @@ Use the `#loading-state` slot to customize the loading state.
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-loading-slot'
 componentProps:
@@ -424,6 +438,7 @@ Use the `#empty-state` slot to customize the empty state.
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-empty-slot'
 componentProps:
@@ -443,7 +458,16 @@ componentProps:
 
 Here is an example of a Table component with all its features implemented.
 
-:component-example{component="table-example-advanced" hiddenCode :padding="false" }
+::component-example
+---
+extraClass: 'overflow-hidden'
+padding: false
+component: 'table-example-advanced'
+componentProps:
+  class: 'flex-1'
+hiddenCode: true
+---
+::
 
 ::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/dev/docs/components/content/examples/TableExampleAdvanced.vue" target="_blank"}
 Take a look at the component!
