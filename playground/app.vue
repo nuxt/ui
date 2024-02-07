@@ -8,16 +8,12 @@
       <p class="text-gray-500 dark:text-gray-400">
         Try your components here!
       </p>
-      <p>Count: {{ count }}</p>
-      <button class="mt-4 px-2 ring-1 ring-gray-400 rounded" @click="reveal">
-        Open modal
-      </button>
     </UCard>
-    <UModals />
   </UContainer>
 </template>
 
 <script setup>
+
 </script>
 
 <style>
