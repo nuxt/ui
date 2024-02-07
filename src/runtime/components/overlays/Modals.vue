@@ -1,7 +1,5 @@
 <template>
-  <Teleport to="body">
-    <component :is="modalState.component" v-bind="modalState.props" v-model="isOpen" />
-  </Teleport>
+  <component :is="modalState.component" v-bind="modalState.props" v-model="isOpen" />
 </template>
 
 <script lang="ts" setup>
