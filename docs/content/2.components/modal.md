@@ -75,8 +75,6 @@ First of all, add the `Modals` component to your app, preferably inside `app.vue
 </template>
 ```
 
-This component serves as a container for your modals.
-
 Then, you can use the `useModal` composable to control your modals within your app.
 
 :component-example{component="modal-example-composable"}
