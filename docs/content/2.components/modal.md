@@ -59,6 +59,26 @@ Set the `fullscreen` prop to `true` to enable it.
 
 :component-example{component="modal-example-fullscreen"}
 
+### Control programmatically
+
+First of all, add the `Modals` component to your app, preferably inside `app.vue`.
+
+```vue [app.vue]
+<template>
+  <div>
+    <UContainer>
+      <NuxtPage />
+    </UContainer>
+
+    <UModals />
+  </div>
+</template>
+```
+
+Then, you can use the `useModal` composable to control your modals within your app.
+
+:component-example{component="modal-example-composable"}
+
 ## Props
 
 :component-props

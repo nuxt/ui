@@ -20,6 +20,7 @@
         <span v-html="title" />
       </template>
     </UNotifications>
+    <UModals />
   </div>
 </template>
 
