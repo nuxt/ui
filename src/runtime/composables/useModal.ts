@@ -2,30 +2,16 @@ import { ref, inject } from 'vue'
 import type { ShallowRef, Component, InjectionKey } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import type { ComponentProps } from '../types/component'
+import type { Modal, ModalState } from '../types/modal'
 
 export const modalInjectionKey: InjectionKey<ShallowRef<ModalState>> = Symbol('nuxt-ui.modal')
-
-const config = mergeConfig<typeof modal>(appConfig.ui.strategy, appConfig.ui.modal, modal)
-
-interface ModalProps {
-  appear?: boolean,
-  overlay?: boolean,
-  transition?: boolean,
-  preventClose?: boolean,
-  fullscreen?: boolean,
-  class?: string | Object | string[]
-  ui?: Partial<typeof config> & { strategy?: Strategy }
-  onClose?: () => void
-  onClosePrevented?: () => void
-  'onUpdate:modelValue'?: (value: boolean) => void
-}
 
 function _useModal () {
   const modalState = inject(modalInjectionKey)
   
   const isOpen = ref(false)
 
-  function open<T extends Component> (component: T, props?: ModalProps & ComponentProps<T>) {
+  function open<T extends Component> (component: T, props?: Modal & ComponentProps<T>) {
     modalState.value = {
       component,
       props: props ?? {}
@@ -44,7 +30,7 @@ function _useModal () {
   /**
    * Allows updating the modal props
    */
-  function patch <T extends Component = {}> (props: Partial<ModalProps & ComponentProps<T>>) {
+  function patch <T extends Component = {}> (props: Partial<Modal & ComponentProps<T>>) {
     modalState.value = {
       ...modalState.value,
       props: {
