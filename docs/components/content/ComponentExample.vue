@@ -1,7 +1,7 @@
 <template>
   <div class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0">
     <div
-      class="flex border border-gray-200 dark:border-gray-700 relative rounded-t-md"
+      class="flex border border-gray-200 dark:border-gray-700 relative rounded-t-md overflow-hidden"
       :class="[{ 'p-4': padding, 'rounded-b-md': !hasCode, 'border-b-0': hasCode, 'not-prose': !prose }, backgroundClass, extraClass]"
     >
       <template v-if="component">
@@ -22,8 +22,7 @@
 import { camelCase } from 'scule'
 import { fetchContentExampleCode } from '~/composables/useContentExamplesCode'
 import { transformContent } from '@nuxt/content/transformers'
-// @ts-ignore
-import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
+import { useShikiHighlighter } from '~/composables/useShikiHighlighter'
 
 const props = defineProps({
   component: {
@@ -77,15 +76,14 @@ if (['command-palette-theme-algolia', 'command-palette-theme-raycast', 'vertical
 const instance = getCurrentInstance()
 const camelName = camelCase(component)
 const data = await fetchContentExampleCode(camelName)
+const highlighter = useShikiHighlighter()
 
 const hasCode = computed(() => !props.hiddenCode && (data?.code || instance.slots.code))
 
-const shikiHighlighter = useShikiHighlighter({})
-const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
 const { data: ast } = await useAsyncData(`content-example-${camelName}-ast`, () => transformContent('content:_markdown.md', `\`\`\`vue\n${data?.code ?? ''}\n\`\`\``, {
   markdown: {
     highlight: {
-      highlighter: codeHighlighter,
+      highlighter,
       theme: {
         light: 'material-theme-lighter',
         default: 'material-theme',

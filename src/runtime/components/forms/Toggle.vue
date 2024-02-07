@@ -21,7 +21,7 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Switch as HSwitch } from '@headlessui/vue'
+import { Switch as HSwitch, provideUseId } from '@headlessui/vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
@@ -32,6 +32,7 @@ import type { ToggleSize, Strategy } from '../../types'
 import appConfig from '#build/app.config'
 import { toggle } from '#ui/ui.config'
 import colors from '#ui-colors'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof toggle>(appConfig.ui.strategy, appConfig.ui.toggle, toggle)
 
@@ -136,6 +137,8 @@ export default defineComponent({
         color.value && ui.value.icon.off.replaceAll('{color}', color.value)
       )
     })
+
+    provideUseId(() => useId())
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
