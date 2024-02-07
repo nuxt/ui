@@ -33,7 +33,7 @@
     </HTabList>
 
     <HTabPanels :class="ui.container">
-      <HTabPanel v-for="(item, index) of items" :key="index" v-slot="{ selected }" :class="ui.base">
+      <HTabPanel v-for="(item, index) of items" :key="index" v-slot="{ selected }" :class="ui.base" :unmount="unmount">
         <slot :name="item.slot || 'item'" :item="item" :index="index" :selected="selected">
           {{ item.content }}
         </slot>
@@ -83,6 +83,10 @@ export default defineComponent({
     items: {
       type: Array as PropType<TabItem[]>,
       default: () => []
+    },
+    unmount: {
+      type: Boolean,
+      default: false
     },
     class: {
       type: [String, Object, Array] as PropType<any>,

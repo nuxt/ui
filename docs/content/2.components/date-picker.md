@@ -16,15 +16,15 @@ Let's start by installing the `v-calendar` and `date-fns` dependency:
 ::code-group
 
 ```bash [pnpm]
-pnpm add v-calendar
+pnpm add v-calendar@next
 ```
 
 ```bash [yarn]
-yarn add v-calendar
+yarn add v-calendar@next
 ```
 
 ```bash [npm]
-npm install v-calendar
+npm install v-calendar@next
 ```
 
 ::

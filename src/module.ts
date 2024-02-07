@@ -1,22 +1,10 @@
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
-import defaultColors from 'tailwindcss/colors.js'
 import type { CollectionNames, IconsPluginOptions } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import createTemplates from './templates'
 import * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types/utils'
 import installTailwind from './tailwind'
-
-// @ts-ignore
-delete defaultColors.lightBlue
-// @ts-ignore
-delete defaultColors.warmGray
-// @ts-ignore
-delete defaultColors.trueGray
-// @ts-ignore
-delete defaultColors.coolGray
-// @ts-ignore
-delete defaultColors.blueGray
 
 type UI = {
   primary?: string

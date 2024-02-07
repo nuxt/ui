@@ -6,6 +6,7 @@ import HtmlLang from 'shiki/langs/html.mjs'
 import MdcLang from 'shiki/langs/mdc.mjs'
 import VueLang from 'shiki/langs/vue.mjs'
 import YamlLang from 'shiki/langs/yaml.mjs'
+import PostcssLang from 'shiki/langs/postcss.mjs'
 
 let highlighter
 export const useShikiHighlighter = () => {
@@ -20,7 +21,8 @@ export const useShikiHighlighter = () => {
         html: HtmlLang,
         mdc: MdcLang,
         vue: VueLang,
-        yml: YamlLang
+        yml: YamlLang,
+        postcss: PostcssLang
       }
     })
   }

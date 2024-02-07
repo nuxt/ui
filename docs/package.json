@@ -1,6 +1,7 @@
 {
   "name": "@nuxt/ui-docs",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@nuxt/ui": "workspace:latest"
   },
