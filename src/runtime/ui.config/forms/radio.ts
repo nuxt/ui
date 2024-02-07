@@ -8,7 +8,7 @@ export default {
   border: 'border border-gray-300 dark:border-gray-700',
   ring: 'focus-visible:ring-2 focus-visible:ring-{color}-500 dark:focus-visible:ring-{color}-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
   inner: 'ms-3 flex flex-col',
-  label: 'text-sm font-medium text-gray-700 dark:text-gray-200',
+  label: 'text-sm font-medium text-gray-700 dark:text-gray-200 cursor-pointer',
   required: 'text-sm text-red-500 dark:text-red-400',
   help: 'text-sm text-gray-500 dark:text-gray-400',
   default: {
