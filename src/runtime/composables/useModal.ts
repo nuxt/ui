@@ -34,7 +34,7 @@ function _useModal () {
   
   const isOpen = ref(false)
 
-  function reveal<T extends Component> (component: T, props?: ModalProps & ComponentProps<T>) {
+  function open<T extends Component> (component: T, props?: ModalProps & ComponentProps<T>) {
     modalState.value = {
       component,
       props: props ?? {}
@@ -65,7 +65,7 @@ function _useModal () {
 
   return {
     isOpen,
-    reveal,
+    open,
     close,
     patch
   }
