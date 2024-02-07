@@ -17,29 +17,7 @@
   </UContainer>
 </template>
 
-<script setup lang="ts">
-import { Test } from '#components'
-
-const modal = useModal()
-
-const count = ref(0)
-
-function reveal () {
-  // question: do we want the props to be reactive here ?
-  modal.reveal(Test, {
-    // UModal props
-    fullscreen: false,
-    // Test component props
-    // count // Warning, this is an object and not a number. Reactive.
-    count: count.value // Ok, but not reactive.
-  })
-}
-
-onMounted(() => {
-  setInterval(() => {
-    count.value += 1
-  }, 1000)
-})
+<script setup>
 </script>
 
 <style>
