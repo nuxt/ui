@@ -1,8 +1,17 @@
+import { createRequire } from 'node:module'
 import { join } from 'pathe'
 import { addTemplate, installModule, useNuxt } from '@nuxt/kit'
-import defaultColors from 'tailwindcss/colors.js'
 import { excludeColors, generateSafelist } from './runtime/utils/colors'
 import type { ModuleOptions } from './module'
+
+const _require = createRequire(import.meta.url)
+const defaultColors = _require('tailwindcss/colors.js')
+
+delete defaultColors.lightBlue
+delete defaultColors.warmGray
+delete defaultColors.trueGray
+delete defaultColors.coolGray
+delete defaultColors.blueGray
 
 export default async function installTailwind (moduleOptions: ModuleOptions, nuxt = useNuxt(), { resolve, runtimeDir }) {
   // 1. register hook
