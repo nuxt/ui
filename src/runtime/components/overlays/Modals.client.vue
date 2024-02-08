@@ -1,5 +1,5 @@
 <template>
-  <component :is="modalState.component" v-bind="modalState.props" v-model="isOpen" />
+  <component :is="modalState.component" v-if="modalState" v-bind="modalState.props" v-model="isOpen" />
 </template>
 
 <script lang="ts" setup>
