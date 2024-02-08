@@ -156,7 +156,7 @@ const { data, pending } = await useLazyFetch(() => `/api/users?orderBy=${sort.va
 ```
 
 ::callout{icon="i-heroicons-light-bulb" to="https://nuxt.com/docs/api/composables/use-fetch#params" target="_blank"}
-We pass a function to `useLazyFetch` here make the url reactive but you can use the `query` / `params` options alongside `watch`.
+We pass a function to `useLazyFetch` here to make the url reactive but you can use the `query` / `params` options alongside `watch`.
 ::
 
 #### Custom sorting
