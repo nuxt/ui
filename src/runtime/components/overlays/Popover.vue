@@ -236,7 +236,7 @@ export default defineComponent({
 }
 
 /* Arrow Placement [click] */
-/* [data-popper-placement="left"][data-popper-mode="click"] [data-popper-arrow] {
+[data-popper-placement="left"][data-popper-mode="click"] [data-popper-arrow] {
   @apply -right-1;
 }
 
@@ -250,5 +250,5 @@ export default defineComponent({
 
 [data-popper-placement="bottom"][data-popper-mode="click"] [data-popper-arrow] {
   @apply -top-1;
-} */
+}
 </style>
