@@ -20,10 +20,10 @@
       <div v-if="open" :class="[ui.overlay.base, ui.overlay.background]" />
     </Transition>
 
-    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
+    <div v-if="open" ref="container" :data-popper-mode="mode" :class="[ui.container, ui.width]" @mouseover="onMouseOver">
       <Transition appear v-bind="ui.transition">
         <div>
-          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
+          <div v-if="popper.arrow" data-popper-arrow :class="arrowClass" />
 
           <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
             <slot name="panel" :open="open" :close="close" />
@@ -103,6 +103,11 @@ export default defineComponent({
 
     const [trigger, container] = usePopper(popper.value)
 
+    const offsetDistance = computed(() => {
+      const _offset = (props.popper as PopperOptions)?.offsetDistance || (ui.value.popper as PopperOptions)?.offsetDistance || 8
+      return `${_offset}px`
+    })
+
     const popover = ref<any>(null)
     // https://github.com/tailwindlabs/headlessui/blob/f66f4926c489fc15289d528294c23a3dc2aee7b1/packages/%40headlessui-vue/src/components/popover/popover.ts#L151
     const popoverApi = ref<any>(null)
@@ -120,35 +125,6 @@ export default defineComponent({
 
       if (props.open) {
         popoverApi.value?.togglePopover()
-      }
-    })
-
-    const containerStyle = computed(() => {
-      if (props.mode !== 'hover') {
-        return {}
-      }
-
-      const offsetDistance = (props.popper as PopperOptions)?.offsetDistance || (ui.value.popper as PopperOptions)?.offsetDistance || 8
-      const placement = popper.value.placement?.split('-')[0]
-      const padding = `${offsetDistance}px`
-
-      if (placement === 'top' || placement === 'bottom') {
-        return {
-          paddingTop: padding,
-          paddingBottom: padding
-        }
-      } else if (placement === 'left' || placement === 'right') {
-        return {
-          paddingLeft: padding,
-          paddingRight: padding
-        }
-      } else {
-        return {
-          paddingTop: padding,
-          paddingBottom: padding,
-          paddingLeft: padding,
-          paddingRight: padding
-        }
       }
     })
 
@@ -217,12 +193,62 @@ export default defineComponent({
       popover,
       // eslint-disable-next-line vue/no-dupe-keys
       popper,
+      offsetDistance,
       trigger,
       container,
-      containerStyle,
       onMouseOver,
       onMouseLeave
     }
   }
 })
 </script>
+
+<style scoped>
+/* Container Padding */
+[data-popper-placement="right"][data-popper-mode="hover"] {
+  padding-left: v-bind(offsetDistance) !important;
+}
+[data-popper-placement="left"][data-popper-mode="hover"] {
+  padding-right: v-bind(offsetDistance) !important;
+}
+[data-popper-placement="top"][data-popper-mode="hover"] {
+  padding-bottom: v-bind(offsetDistance) !important;
+}
+[data-popper-placement="bottom"][data-popper-mode="hover"] {
+  padding-top: v-bind(offsetDistance) !important;
+}
+
+/* Arrow Placement [hover] */
+[data-popper-placement="left"][data-popper-mode="hover"] [data-popper-arrow] {
+  right: calc(v-bind(offsetDistance) - 4px) !important;
+}
+
+[data-popper-placement="top"][data-popper-mode="hover"] [data-popper-arrow] {
+  bottom: calc(v-bind(offsetDistance) - 4px) !important;
+}
+
+[data-popper-placement="right"][data-popper-mode="hover"] [data-popper-arrow] {
+  margin-left: -4px !important
+}
+
+[data-popper-placement="bottom"][data-popper-mode="hover"] [data-popper-arrow] {
+  margin-top: -4px !important;
+}
+
+/* Arrow Placement [click] */
+/* [data-popper-placement="left"][data-popper-mode="click"] [data-popper-arrow] {
+  @apply -right-1;
+}
+
+[data-popper-placement="top"][data-popper-mode="click"] [data-popper-arrow] {
+  @apply -bottom-1;
+}
+
+[data-popper-placement="right"][data-popper-mode="click"] [data-popper-arrow] {
+  @apply -left-1;
+}
+
+[data-popper-placement="bottom"][data-popper-mode="click"] [data-popper-arrow] {
+  @apply -top-1;
+} */
+</style>

@@ -3,7 +3,7 @@ export const arrow = {
 	ring: 'before:ring-1 before:ring-gray-200 dark:before:ring-gray-800',
 	rounded: 'before:rounded-sm',
 	background: 'before:bg-gray-200 dark:before:bg-gray-800',
-	shadow: 'before:shadow',
+	shadow: 'before:shadow'
 	// eslint-disable-next-line quotes
-	placement: `group-data-[popper-placement*='right']:-left-1 group-data-[popper-placement*='left']:-right-1 group-data-[popper-placement*='top']:-bottom-1 group-data-[popper-placement*='bottom']:-top-1`
+	// placement: `group-data-[popper-placement*='right']:-left-1 group-data-[popper-placement*='left']:-right-1 group-data-[popper-placement*='top']:-bottom-1 group-data-[popper-placement*='bottom']:-top-1`
 }
