@@ -1,20 +1,39 @@
+<script setup>
+import image1 from './assets/1.jpg'
+import image2 from './assets/2.jpg'
+import image3 from './assets/3.jpg'
+import image4 from './assets/4.jpg'
+import image5 from './assets/5.jpg'
+import image6 from './assets/6.jpg'
+
+const items = [
+  image1,
+  image2,
+  image3,
+  image4,
+  image5,
+  image6
+]
+
+const isLTR = ref(true)
+</script>
+
+
 <template>
-  <UContainer class="min-h-screen flex items-center">
+  <UContainer class="min-h-screen flex items-center" :dir="isLTR ? 'ltr' : 'rtl'" >
     <UCard class="flex-1" :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50', ring: 'ring-1 ring-gray-300 dark:ring-gray-700', divide: 'divide-y divide-gray-300 dark:divide-gray-700', header: { base: 'font-bold' } }">
       <template #header>
         Welcome to the playground!
       </template>
 
-      <p class="text-gray-500 dark:text-gray-400">
-        Try your components here!
-      </p>
+      <UButton :label="`Direction: ${isLTR ? 'ltr' : 'rtl'}`" @click="isLTR = !isLTR" class="mb-4" />
+
+      <UCarousel v-slot="{ item }" :items="items" :ui="{ item: 'basis-full' }" class="rounded-lg overflow-hidden" arrows>
+        <img :src="item" class="w-full" draggable="false">
+      </UCarousel>
     </UCard>
   </UContainer>
 </template>
-
-<script setup>
-
-</script>
 
 <style>
 body {
