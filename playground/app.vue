@@ -28,7 +28,7 @@ const isLTR = ref(true)
 
       <UButton :label="`Direction: ${isLTR ? 'ltr' : 'rtl'}`" @click="isLTR = !isLTR" class="mb-4" />
 
-      <UCarousel v-slot="{ item }" :items="items" :ui="{ item: 'basis-full' }" class="rounded-lg overflow-hidden" arrows>
+      <UCarousel v-slot="{ item }" :items="items" :ui="{ item: 'basis-full' }" class="rounded-lg overflow-hidden" indicators>
         <img :src="item" class="w-full" draggable="false">
       </UCarousel>
     </UCard>
