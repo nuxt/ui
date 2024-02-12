@@ -35,7 +35,7 @@
             </slot>
           </span>
 
-          <slot name="label">
+          <slot name="label" :selected="modelValue">
             <span v-if="label" :class="uiMenu.label">{{ label }}</span>
             <span v-else :class="uiMenu.label">{{ placeholder || '&nbsp;' }}</span>
           </slot>
