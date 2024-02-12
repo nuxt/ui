@@ -143,7 +143,8 @@ export default defineComponent({
     }
 
     function onClick (page: number) {
-      x.value = (page - 1) * itemWidth.value
+      const isLTR = getComputedStyle(carouselRef.value).direction === 'ltr'
+      x.value = (page - 1) * (isLTR ? itemWidth.value : -itemWidth.value)
     }
 
     expose({
