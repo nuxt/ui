@@ -1,22 +1,24 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
-    <div v-if="label || $slots.label" :class="[ui.label.wrapper, size]">
-      <label :for="inputId" :class="[ui.label.base, required ? ui.label.required : '']">
-        <slot v-if="$slots.label" name="label" v-bind="{ error, label, name, hint, description, help }" />
-        <template v-else>{{ label }}</template>
-      </label>
-      <span v-if="hint || $slots.hint" :class="[ui.hint]">
-        <slot v-if="$slots.hint" name="hint" v-bind="{ error, label, name, hint, description, help }" />
-        <template v-else>{{ hint }}</template>
-      </span>
-    </div>
+    <div :class="ui.inner">
+      <div v-if="label || $slots.label" :class="[ui.label.wrapper, size]">
+        <label :for="inputId" :class="[ui.label.base, required ? ui.label.required : '']">
+          <slot v-if="$slots.label" name="label" v-bind="{ error, label, name, hint, description, help }" />
+          <template v-else>{{ label }}</template>
+        </label>
+        <span v-if="hint || $slots.hint" :class="[ui.hint]">
+          <slot v-if="$slots.hint" name="hint" v-bind="{ error, label, name, hint, description, help }" />
+          <template v-else>{{ hint }}</template>
+        </span>
+      </div>
 
-    <p v-if="description || $slots.description" :class="[ui.description, size]">
-      <slot v-if="$slots.description" name="description" v-bind="{ error, label, name, hint, description, help }" />
-      <template v-else>
-        {{ description }}
-      </template>
-    </p>
+      <p v-if="description || $slots.description" :class="[ui.description, size]">
+        <slot v-if="$slots.description" name="description" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>
+          {{ description }}
+        </template>
+      </p>
+    </div>
 
     <div :class="[label ? ui.container : '']">
       <slot v-bind="{ error }" />
