@@ -133,11 +133,13 @@ export default defineComponent({
     })
 
     function onClickNext () {
-      x.value += itemWidth.value
+      const isLTR = getComputedStyle(carouselRef.value).direction === 'ltr'
+      x.value += isLTR ? itemWidth.value : -itemWidth.value
     }
 
     function onClickPrev () {
-      x.value -= itemWidth.value
+      const isLTR = getComputedStyle(carouselRef.value).direction === 'ltr'
+      x.value -= isLTR ? itemWidth.value : -itemWidth.value
     }
 
     function onClick (page: number) {
