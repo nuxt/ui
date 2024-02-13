@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Badge > renders basic case correctly 1`] = `"<span class="inline-flex items-center font-medium rounded-md text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900"></span>"`;
+
+exports[`Badge > renders with color correctly 1`] = `"<span class="inline-flex items-center font-medium rounded-md text-xs px-2 py-1 bg-red-500 dark:bg-red-400 text-white dark:text-gray-900">Badge</span>"`;
+
+exports[`Badge > renders with label correctly 1`] = `"<span class="inline-flex items-center font-medium rounded-md text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
+
+exports[`Badge > renders with size correctly 1`] = `"<span class="inline-flex items-center font-medium rounded-md text-sm px-2.5 py-1.5 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
+
+exports[`Badge > renders with variant correctly 1`] = `"<span class="inline-flex items-center font-medium rounded-md text-xs px-2 py-1 text-primary-500 dark:text-primary-400 ring-1 ring-inset ring-primary-500 dark:ring-primary-400">Badge</span>"`;
