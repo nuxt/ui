@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ContextMenu > renders basic case correctly 1`] = `
+"<div class="z-20 group">
+  <transition-stub appear="true" persisted="false" css="true">
+    <div>
+      <!--v-if-->
+      <div class="">label</div>
+    </div>
+  </transition-stub>
+</div>"
+`;
+
+exports[`ContextMenu > renders with popper correctly 1`] = `
+"<div class="z-20 group">
+  <transition-stub appear="true" persisted="false" css="true">
+    <div>
+      <!--v-if-->
+      <div class="">label</div>
+    </div>
+  </transition-stub>
+</div>"
+`;
+
+exports[`ContextMenu > renders with virtualElement correctly 1`] = `
+"<div class="z-20 group">
+  <transition-stub appear="true" persisted="false" css="true">
+    <div>
+      <!--v-if-->
+      <div class="">label</div>
+    </div>
+  </transition-stub>
+</div>"
+`;

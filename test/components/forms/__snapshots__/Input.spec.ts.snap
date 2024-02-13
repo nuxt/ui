@@ -1,0 +1,71 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Input > renders basic case correctly 1`] = `
+"<div class=""><input type="text" class="">label
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with autofocus correctly 1`] = `
+"<div class=""><input type="text" class="">label
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with custom class correctly 1`] = `
+"<div class=""><input type="text" class="">label
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with custom name and placeholder correctly 1`] = `
+"<div class=""><input name="username" type="text" placeholder="Enter your username" class="">label
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with custom style correctly 1`] = `
+"<div class=""><input type="text" class="" style="color: red; font-size: 16px;">label
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with custom type correctly 1`] = `
+"<div class=""><input type="password" class="">label
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with disabled correctly 1`] = `
+"<div class=""><input type="text" disabled="" class="">label
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with readonly correctly 1`] = `
+"<div class=""><input type="text" class="" readonly="">label
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with required correctly 1`] = `
+"<div class=""><input type="text" required="" class="">label
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with value correctly 1`] = `
+"<div class=""><input type="text" class="">label
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;

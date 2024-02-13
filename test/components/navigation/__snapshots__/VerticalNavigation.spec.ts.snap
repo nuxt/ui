@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`VerticalNavigation > renders basic case correctly 1`] = `
+"<nav>
+  <ul>
+    <!--v-if-->
+  </ul>
+</nav>"
+`;
+
+exports[`VerticalNavigation > renders with links correctly 1`] = `
+"<nav>
+  <ul>
+    <!--v-if-->
+  </ul>
+</nav>"
+`;

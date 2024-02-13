@@ -1,0 +1,89 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Popover > renders basic case correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div class="" role="button" id="headlessui-popover-button-Ht54ZG1A39_0" aria-expanded="false" data-headlessui-state="">label</div>
+  <!---->
+  <!--v-if-->
+  <!--v-if-->
+</div>
+<div style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0px; display: none;"></div>"
+`;
+
+exports[`Popover > renders with closeDelay correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div class="" role="button" id="headlessui-popover-button-Ht54ZG1A39_10" aria-expanded="false" data-headlessui-state="">label</div>
+  <!---->
+  <!--v-if-->
+  <!--v-if-->
+</div>
+<div style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0px; display: none;"></div>"
+`;
+
+exports[`Popover > renders with disabled correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div class="" role="button" id="headlessui-popover-button-Ht54ZG1A39_6" aria-expanded="false" data-headlessui-state="">label</div>
+  <!---->
+  <!--v-if-->
+  <!--v-if-->
+</div>
+<div style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0px; display: none;"></div>"
+`;
+
+exports[`Popover > renders with mode correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div class="" role="button" id="headlessui-popover-button-Ht54ZG1A39_2" aria-expanded="false" data-headlessui-state="">label</div>
+  <!---->
+  <!--v-if-->
+  <!--v-if-->
+</div>
+<div style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0px; display: none;"></div>"
+`;
+
+exports[`Popover > renders with open correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div class="" role="button" id="headlessui-popover-button-Ht54ZG1A39_4" aria-expanded="false" data-headlessui-state="">label</div>
+  <!---->
+  <!--v-if-->
+  <!--v-if-->
+</div>
+<div style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0px; display: none;"></div>"
+`;
+
+exports[`Popover > renders with openDelay correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div class="" role="button" id="headlessui-popover-button-Ht54ZG1A39_8" aria-expanded="false" data-headlessui-state="">label</div>
+  <!---->
+  <!--v-if-->
+  <!--v-if-->
+</div>
+<div style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0px; display: none;"></div>"
+`;
+
+exports[`Popover > renders with overlay correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div class="" role="button" id="headlessui-popover-button-Ht54ZG1A39_12" aria-expanded="false" data-headlessui-state="">label</div>
+  <!---->
+  <!--v-if-->
+  <!--v-if-->
+</div>
+<div style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0px; display: none;"></div>"
+`;
+
+exports[`Popover > renders with popper correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div class="" role="button" id="headlessui-popover-button-Ht54ZG1A39_14" aria-expanded="false" data-headlessui-state="">label</div>
+  <!---->
+  <!--v-if-->
+  <!--v-if-->
+</div>
+<div style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0px; display: none;"></div>"
+`;

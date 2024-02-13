@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Form > renders basic case correctly 1`] = `"<form>label</form>"`;
+
+exports[`Form > renders with custom state correctly 1`] = `"<form>label</form>"`;
+
+exports[`Form > renders with custom validate function correctly 1`] = `"<form>label</form>"`;
+
+exports[`Form > renders with custom validateOn array correctly 1`] = `"<form>label</form>"`;
+
+exports[`Form > renders with custom validateOn array including other events correctly 1`] = `"<form>label</form>"`;

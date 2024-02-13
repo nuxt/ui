@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Breadcrumb > renders basic case correctly 1`] = `
+"<nav aria-label="Breadcrumb">
+  <ol class=""></ol>
+</nav>"
+`;
+
+exports[`Breadcrumb > renders with divider correctly 1`] = `
+"<nav aria-label="Breadcrumb">
+  <ol class=""></ol>
+</nav>"
+`;
+
+exports[`Breadcrumb > renders with links correctly 1`] = `
+"<nav aria-label="Breadcrumb">
+  <ol class=""></ol>
+</nav>"
+`;

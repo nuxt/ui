@@ -1,0 +1,96 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Checkbox > renders basic case correctly 1`] = `
+"<div class="">
+  <div class=""><input type="checkbox" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders disabled set to true correctly 1`] = `
+"<div class="">
+  <div class=""><input disabled="" type="checkbox" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders indeterminate set to true correctly 1`] = `
+"<div class="">
+  <div class=""><input indeterminate="" type="checkbox" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders required set to true correctly 1`] = `
+"<div class="">
+  <div class=""><input required="" type="checkbox" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with custom class correctly 1`] = `
+"<div class="">
+  <div class=""><input type="checkbox" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with custom color correctly 1`] = `
+"<div class="">
+  <div class=""><input type="checkbox" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with custom id correctly 1`] = `
+"<div class="">
+  <div class=""><input id="custom-id" type="checkbox" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with custom input class correctly 1`] = `
+"<div class="">
+  <div class=""><input type="checkbox" class="custom-input-class"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with custom modelValue correctly 1`] = `
+"<div class="">
+  <div class=""><input type="checkbox" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with custom name correctly 1`] = `
+"<div class="">
+  <div class=""><input name="custom-name" type="checkbox" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with custom value correctly 1`] = `
+"<div class="">
+  <div class=""><input type="checkbox" class="" value="custom-value"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with help text correctly 1`] = `
+"<div class="">
+  <div class=""><input type="checkbox" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with label correctly 1`] = `
+"<div class="">
+  <div class=""><input type="checkbox" class=""></div>
+  <div class=""><label class="">Label
+      <!--v-if-->
+    </label>
+    <!--v-if-->
+  </div>
+</div>"
+`;

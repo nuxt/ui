@@ -1,0 +1,114 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Select > renders basic case correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with custom class correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with custom color correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 text-blue-500 dark:text-blue-400 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with custom id correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" id="mySelect" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with custom modelValue correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with custom name correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" name="mySelectInput" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with custom options correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
+    <option data-v-cc4daab7="" value="opt1">Option 1</option>
+    <option data-v-cc4daab7="" value="opt2">Option 2</option>
+  </select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with custom size correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with custom style correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="" style="color: red; font-size: 16px;"></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with custom variant correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with disabled correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" disabled="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with icon correctly 1`] = `"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-academic-cap flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
+
+exports[`Select > renders with leading correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with leading icon correctly 1`] = `"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-adjustments-vertical flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
+
+exports[`Select > renders with loading correctly 1`] = `"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
+
+exports[`Select > renders with loading icon correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with padded correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with placeholder correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
+    <option data-v-cc4daab7="" disabled="" value="">Select an option</option>
+  </select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with trailing correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;
+
+exports[`Select > renders with trailing icon correctly 1`] = `
+"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-archive-box flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
+</div>"
+`;

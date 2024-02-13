@@ -1,0 +1,82 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Radio > renders basic case correctly 1`] = `
+"<div class="">
+  <div class=""><input id="Ooz6KnLRIo_0" type="radio" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Radio > renders with custom class correctly 1`] = `
+"<div class="">
+  <div class=""><input id="Ooz6KnLRIo_9" type="radio" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Radio > renders with custom color correctly 1`] = `
+"<div class="">
+  <div class=""><input id="Ooz6KnLRIo_8" type="radio" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Radio > renders with custom id correctly 1`] = `
+"<div class="">
+  <div class=""><input id="custom-radio-id" type="radio" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Radio > renders with disabled correctly 1`] = `
+"<div class="">
+  <div class=""><input id="Ooz6KnLRIo_4" disabled="" type="radio" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Radio > renders with help correctly 1`] = `
+"<div class="">
+  <div class=""><input id="Ooz6KnLRIo_5" type="radio" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Radio > renders with label correctly 1`] = `
+"<div class="">
+  <div class=""><input id="Ooz6KnLRIo_6" type="radio" class=""></div>
+  <div class=""><label for="Ooz6KnLRIo_6" class="">Radio Label
+      <!--v-if-->
+    </label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Radio > renders with modelValue correctly 1`] = `
+"<div class="">
+  <div class=""><input id="Ooz6KnLRIo_2" type="radio" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Radio > renders with name correctly 1`] = `
+"<div class="">
+  <div class=""><input id="Ooz6KnLRIo_3" name="radioName" type="radio" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Radio > renders with required correctly 1`] = `
+"<div class="">
+  <div class=""><input id="Ooz6KnLRIo_7" required="" type="radio" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Radio > renders with value correctly 1`] = `
+"<div class="">
+  <div class=""><input id="Ooz6KnLRIo_1" type="radio" class="" value="option1"></div>
+  <!--v-if-->
+</div>"
+`;

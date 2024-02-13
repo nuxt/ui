@@ -1,0 +1,76 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Alert > renders basic case correctly 1`] = `
+"<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
+  <div class="flex items-center">
+    <!--v-if-->
+    <!--v-if-->
+    <div class="">
+      <p class=""></p>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Alert > renders renders with custom color correctly 1`] = `
+"<div class="w-full relative overflow-hidden rounded-lg p-4 bg-red-500 dark:bg-red-400 text-white dark:text-gray-900">
+  <div class="flex items-center">
+    <!--v-if-->
+    <!--v-if-->
+    <div class="">
+      <p class="">Alert Title</p>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Alert > renders renders with custom variant correctly 1`] = `
+"<div class="w-full relative overflow-hidden rounded-lg p-4 text-white-500 dark:text-white-400 ring-1 ring-inset ring-white-500 dark:ring-white-400">
+  <div class="flex items-center">
+    <!--v-if-->
+    <!--v-if-->
+    <div class="">
+      <p class="">Alert Title</p>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Alert > renders renders with default values correctly correctly 1`] = `
+"<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
+  <div class="flex items-center">
+    <!--v-if-->
+    <!--v-if-->
+    <div class="">
+      <p class="">Alert Title</p>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Alert > renders renders with description correctly 1`] = `
+"<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
+  <div class="flex items-start">
+    <!--v-if-->
+    <!--v-if-->
+    <div class="">
+      <p class="">Alert Title</p>
+      <p class="">This is an alert description.</p>
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
