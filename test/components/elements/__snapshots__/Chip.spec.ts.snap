@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Chip > renders basic case correctly 1`] = `"<div><span class="absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap h-2 min-w-[0.5rem] text-[7px] p-0.5 top-0 right-0 -translate-y-1/2 translate-x-1/2 transform bg-primary-500 dark:bg-primary-400"></span></div>"`;
+
+exports[`Chip > renders with content slot correctly 1`] = `"<div><span class="absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap h-2 min-w-[0.5rem] text-[7px] p-0.5 top-0 right-0 -translate-y-1/2 translate-x-1/2 transform bg-primary-500 dark:bg-primary-400">Content slot</span></div>"`;
+
+exports[`Chip > renders with custom color correctly 1`] = `"<div><span class="absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap h-2 min-w-[0.5rem] text-[7px] p-0.5 top-0 right-0 -translate-y-1/2 translate-x-1/2 transform bg-red-500 dark:bg-red-400"></span></div>"`;
+
+exports[`Chip > renders with custom position correctly 1`] = `"<div><span class="absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap h-2 min-w-[0.5rem] text-[7px] p-0.5 top-0 left-0 -translate-y-1/2 -translate-x-1/2 transform bg-primary-500 dark:bg-primary-400"></span></div>"`;
+
+exports[`Chip > renders with custom size correctly 1`] = `"<div><span class="absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap h-3 min-w-[0.75rem] text-[10px] p-0.5 top-0 right-0 -translate-y-1/2 translate-x-1/2 transform bg-primary-500 dark:bg-primary-400"></span></div>"`;
+
+exports[`Chip > renders with hidden chip correctly 1`] = `
+"<div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Chip > renders with inset chip correctly 1`] = `"<div><span class="absolute rounded-full ring-1 ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap h-2 min-w-[0.5rem] text-[7px] p-0.5 top-0 right-0 bg-primary-500 dark:bg-primary-400"></span></div>"`;

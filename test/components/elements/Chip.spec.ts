@@ -6,18 +6,14 @@ import ComponentRender from '../component-render'
 describe('Chip', () => {
   it.each([
     ['basic case', {}],
-    ['with custom size', { props: { size: 'small' } }],
+    ['with custom size', { props: { size: 'lg' } }],
     ['with custom color', { props: { color: 'red' } }],
-    ['with custom position', { props: { position: 'left' } }],
+    ['with custom position', { props: { position: 'top-left' } }],
     ['with inset chip', { props: { inset: true } }],
     ['with hidden chip', { props: { show: false } }],
-    ['with custom class', { props: { class: 'custom-class' } }],
+    ['with content slot', { slots: { content: 'Content slot' } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Chip.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, UChip)
     expect(html).toMatchSnapshot()
   })
