@@ -5,17 +5,26 @@ import ComponentRender from '../component-render'
 
 describe('Button', () => {
   it.each([
-    [ 'basic case', { } ],
-    [ 'leading icon', { props: { leading: true, icon: 'heroicons-check' } } ],
-    [ 'black solid', { props: { color: 'black', variant: 'solid' } } ],
-    [ 'rounded full', { props: { ui: { rounded: 'rounded-full' } } } ],
-    [ '<UButton icon="i-heroicons-pencil-square" size="sm" color="primary" square variant="solid" />' ]
+    ['basic case', {}],
+    ['with block', { props: { block: true, ui: { block: 'w-fit' } } }],
+    ['with label', { props: { label: 'Submit' } }],
+    ['with default slot', { slots: { default: 'Default slot' } }],
+    ['with loading', { props: { loading: true } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-heroicons-sparkles' } }],
+    ['with disabled', { props: { disabled: true } }],
+    ['with padded', { props: { padded: false, size: 'lg' } }],
+    ['with size', { props: { size: 'lg' } }],
+    ['with color', { props: { color: 'red' } }],
+    ['with variant', { props: { variant: 'outline' } }],
+    ['with icon', { props: { icon: 'i-heroicons-academic-cap' } }],
+    ['with trailing slot', { slots: { trailing: 'Trailing slot' } }],
+    ['with leading slot', { slots: { leading: 'leading slot' } }],
+    ['with trailingIcon', { props: { trailing: true, trailingIcon: 'i-heroicons-arrow-right' } }],
+    ['with leadingIcon', { props: { leading: true, leadingIcon: 'i-heroicons-arrow-left' } }],
+    ['with square', { props: { label: 'submit', square: true, size: 'sm', ui: { square: { sm: 'p-1.5' } } } }],
+    ['with truncate', { props: { label: 'submit', truncate: true, ui: { truncate: 'text-left break-all line-clamp-1' } } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Button.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, UButton)
     expect(html).toMatchSnapshot()
   })
