@@ -4,7 +4,7 @@
     v-slot="{ open }"
     :by="by"
     :name="name"
-    :model-value="modelValue"
+    :model-value="multiple ? (Array.isArray(modelValue) ? modelValue : []) : modelValue"
     :multiple="multiple"
     :disabled="disabled"
     as="div"
@@ -332,6 +332,10 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
+    if (import.meta.dev && props.multiple && !Array.isArray(props.modelValue)) {
+      console.warn(`[@nuxt/ui] The USelectMenu components needs to have a modelValue of type Array when using the multiple prop. Got '${typeof props.modelValue}' instead.`, props.modelValue)
+    }
+
     const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
     const { ui: uiMenu } = useUI('selectMenu', toRef(props, 'uiMenu'), configMenu)
 
