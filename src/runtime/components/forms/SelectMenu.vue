@@ -35,7 +35,7 @@
             </slot>
           </span>
 
-          <slot name="label" :selected="modelValue">
+          <slot name="label" :selected="selected">
             <span v-if="label" :class="uiMenu.label">{{ label }}</span>
             <span v-else :class="uiMenu.label">{{ placeholder || '&nbsp;' }}</span>
           </slot>
@@ -68,15 +68,15 @@
             <component
               :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
               v-for="(option, index) in filteredOptions"
-              v-slot="{ active, selected, disabled: optionDisabled }"
+              v-slot="{ active, selected: optionSelected, disabled: optionDisabled }"
               :key="index"
               as="template"
               :value="valueAttribute ? option[valueAttribute] : option"
               :disabled="option.disabled"
             >
-              <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, selected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]">
+              <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, optionSelected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]">
                 <div :class="uiMenu.option.container">
-                  <slot name="option" :option="option" :active="active" :selected="selected">
+                  <slot name="option" :option="option" :active="active" :selected="optionSelected">
                     <UIcon v-if="option.icon" :name="option.icon" :class="[uiMenu.option.icon.base, active ? uiMenu.option.icon.active : uiMenu.option.icon.inactive, option.iconClass]" aria-hidden="true" />
                     <UAvatar
                       v-else-if="option.avatar"
@@ -90,16 +90,16 @@
                   </slot>
                 </div>
 
-                <span v-if="selected" :class="[uiMenu.option.selectedIcon.wrapper, uiMenu.option.selectedIcon.padding]">
+                <span v-if="optionSelected" :class="[uiMenu.option.selectedIcon.wrapper, uiMenu.option.selectedIcon.padding]">
                   <UIcon :name="selectedIcon" :class="uiMenu.option.selectedIcon.base" aria-hidden="true" />
                 </span>
               </li>
             </component>
 
-            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && createOption" v-slot="{ active, selected }" :value="createOption" as="template">
+            <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && createOption" v-slot="{ active, selected: optionSelected }" :value="createOption" as="template">
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
-                  <slot name="option-create" :option="createOption" :active="active" :selected="selected">
+                  <slot name="option-create" :option="createOption" :active="active" :selected="optionSelected">
                     <span :class="uiMenu.option.create">Create "{{ createOption[optionAttribute] }}"</span>
                   </slot>
                 </div>
@@ -359,6 +359,24 @@ export default defineComponent({
       }
     })
 
+    const selected = computed(() => {
+      if (props.multiple) {
+        if (!Array.isArray(props.modelValue) || !props.modelValue.length) {
+          return []
+        }
+
+        if (props.valueAttribute) {
+          return props.options.filter(option => (props.modelValue as any[]).includes(option[props.valueAttribute]))
+        }
+        return props.options.filter(option => (props.modelValue as any[]).includes(option))
+      }
+
+      if (props.valueAttribute) {
+        return props.options.find(option => option[props.valueAttribute] === props.modelValue)
+      }
+      return props.options.find(option => option === props.modelValue)
+    })
+
     const label = computed(() => {
       if (props.multiple) {
         if (Array.isArray(props.modelValue) && props.modelValue.length) {
@@ -368,8 +386,7 @@ export default defineComponent({
         }
       } else {
         if (props.valueAttribute) {
-          const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
-          return option ? option[props.optionAttribute] : null
+          return selected.value?.[props.optionAttribute] ?? null
         } else {
           return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
         }
@@ -532,6 +549,7 @@ export default defineComponent({
       popper,
       trigger,
       container,
+      selected,
       label,
       isLeading,
       isTrailing,
