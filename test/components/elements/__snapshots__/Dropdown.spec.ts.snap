@@ -1,0 +1,137 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Dropdown > renders basic case correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div disabled="false" id="headlessui-menu-button-xGn5MfiJss_0" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="" role="button">label</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Dropdown > renders disable correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div disabled="true" id="headlessui-menu-button-xGn5MfiJss_14" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="" role="button">label</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Dropdown > renders open set to false correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div disabled="false" id="headlessui-menu-button-xGn5MfiJss_9" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="" role="button">label</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Dropdown > renders open set to true correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="open">
+  <div disabled="false" id="headlessui-menu-button-xGn5MfiJss_5" aria-haspopup="menu" class="" role="button" aria-expanded="true" data-headlessui-state="open" aria-controls="headlessui-menu-items-xGn5MfiJss_6">label</div>
+  <div class="" style="position: fixed; left: auto; top: 0px; margin: 0px; right: 0px; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom-end">
+    <transition-stub appear="true" persisted="false" css="true">
+      <div>
+        <!--v-if-->
+        <div id="headlessui-menu-items-xGn5MfiJss_6" aria-labelledby="headlessui-menu-button-xGn5MfiJss_5" role="menu" tabindex="0" data-headlessui-state="open" class="">
+          <div class="" role="none"><button class="group flex items-center gap-1.5 w-full" id="headlessui-menu-item-xGn5MfiJss_7" role="menuitem" data-headlessui-state="">
+              <!--v-if--><span class=""></span>
+              <!--v-if-->
+            </button></div>
+          <div class=""><button class="group flex items-center gap-1.5 w-full" id="headlessui-menu-item-xGn5MfiJss_8" role="menuitem" data-headlessui-state="">
+              <!--v-if--><span class=""></span>
+              <!--v-if-->
+            </button></div>
+        </div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;
+
+exports[`Dropdown > renders width disabled correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div disabled="true" id="headlessui-menu-button-xGn5MfiJss_14" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="" role="button">label</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Dropdown > renders with close correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="">
+  <div disabled="false" id="headlessui-menu-button-xGn5MfiJss_9" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="" role="button">label</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Dropdown > renders with hover mode correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="open">
+  <div disabled="false" id="headlessui-menu-button-xGn5MfiJss_10" aria-haspopup="menu" class="" role="button" aria-expanded="true" data-headlessui-state="open" aria-controls="headlessui-menu-items-xGn5MfiJss_11">label</div>
+  <div class="" style="padding-top: 8px; padding-bottom: 8px; position: fixed; left: auto; top: 0px; margin: 0px; right: 0px; bottom: auto; transform: translate(0px, 0px);" data-popper-placement="bottom-end">
+    <transition-stub appear="true" persisted="false" css="true">
+      <div>
+        <!--v-if-->
+        <div id="headlessui-menu-items-xGn5MfiJss_11" aria-labelledby="headlessui-menu-button-xGn5MfiJss_10" role="menu" tabindex="0" data-headlessui-state="open" class="">
+          <div class="" role="none"><button class="group flex items-center gap-1.5 w-full" id="headlessui-menu-item-xGn5MfiJss_12" role="menuitem" data-headlessui-state="">
+              <!--v-if--><span class=""></span>
+              <!--v-if-->
+            </button></div>
+          <div class=""><button class="group flex items-center gap-1.5 w-full" id="headlessui-menu-item-xGn5MfiJss_13" role="menuitem" data-headlessui-state="">
+              <!--v-if--><span class=""></span>
+              <!--v-if-->
+            </button></div>
+        </div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;
+
+exports[`Dropdown > renders with items correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="open">
+  <div disabled="false" id="headlessui-menu-button-xGn5MfiJss_1" aria-haspopup="menu" class="" role="button" aria-expanded="true" data-headlessui-state="open" aria-controls="headlessui-menu-items-xGn5MfiJss_2">label</div>
+  <div class="" style="position: fixed; left: auto; top: 0px; margin: 0px; right: 0px; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom-end">
+    <transition-stub appear="true" persisted="false" css="true">
+      <div>
+        <!--v-if-->
+        <div id="headlessui-menu-items-xGn5MfiJss_2" aria-labelledby="headlessui-menu-button-xGn5MfiJss_1" role="menu" tabindex="0" data-headlessui-state="open" class="">
+          <div class="" role="none"><button class="group flex items-center gap-1.5 w-full" id="headlessui-menu-item-xGn5MfiJss_3" role="menuitem" data-headlessui-state="">
+              <!--v-if--><span class=""></span>
+              <!--v-if-->
+            </button></div>
+          <div class=""><button class="group flex items-center gap-1.5 w-full" id="headlessui-menu-item-xGn5MfiJss_4" role="menuitem" data-headlessui-state="">
+              <!--v-if--><span class=""></span>
+              <!--v-if-->
+            </button></div>
+        </div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;
+
+exports[`Dropdown > renders with open correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<div data-headlessui-state="open">
+  <div disabled="false" id="headlessui-menu-button-xGn5MfiJss_5" aria-haspopup="menu" class="" role="button" aria-expanded="true" data-headlessui-state="open" aria-controls="headlessui-menu-items-xGn5MfiJss_6">label</div>
+  <div class="" style="position: fixed; left: auto; top: 0px; margin: 0px; right: 0px; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom-end">
+    <transition-stub appear="true" persisted="false" css="true">
+      <div>
+        <!--v-if-->
+        <div id="headlessui-menu-items-xGn5MfiJss_6" aria-labelledby="headlessui-menu-button-xGn5MfiJss_5" role="menu" tabindex="0" data-headlessui-state="open" class="">
+          <div class="" role="none"><button class="group flex items-center gap-1.5 w-full" id="headlessui-menu-item-xGn5MfiJss_7" role="menuitem" data-headlessui-state="">
+              <!--v-if--><span class=""></span>
+              <!--v-if-->
+            </button></div>
+          <div class=""><button class="group flex items-center gap-1.5 w-full" id="headlessui-menu-item-xGn5MfiJss_8" role="menuitem" data-headlessui-state="">
+              <!--v-if--><span class=""></span>
+              <!--v-if-->
+            </button></div>
+        </div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;

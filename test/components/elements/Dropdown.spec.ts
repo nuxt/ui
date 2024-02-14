@@ -6,12 +6,11 @@ import ComponentRender from '../component-render'
 describe('Dropdown', () => {
   it.each([
     ['basic case', {}],
-    ['with custom mode', { props: { mode: 'hover' } }],
-    ['open set to true', { props: { open: true } }],
-    ['disabled set to true', { props: { disabled: true } }],
-    ['with custom openDelay', { props: { openDelay: 500 } }],
-    ['with custom closeDelay', { props: { closeDelay: 500 } }],
-    ['with custom class', { props: { class: 'custom-class' } }]
+    ['with items', { props: { open: true, items: [{ label: 'label1' }, { label: 'label2' }], ui: { item: { base: 'group flex items-center gap-1.5 w-full' } } } }],
+    ['with open', { props: { open: true, items: [{ label: 'label1' }, { label: 'label2' }], ui: { item: { base: 'group flex items-center gap-1.5 w-full' } } } }],
+    ['with close', { props: { open: false, items: [{ label: 'label1' }, { label: 'label2' }], ui: { item: { base: 'group flex items-center gap-1.5 w-full' } } } }],
+    ['with hover mode', { props: { open: true, items: [{ label: 'label1' }, { label: 'label2' }], mode: 'hover', ui: { item: { base: 'group flex items-center gap-1.5 w-full' } } } }],
+    ['width disabled', { props: { disabled: true, items: [{ label: 'label1' }, { label: 'label2' }], ui: { item: { base: 'group flex items-center gap-1.5 w-full' } } } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Dropdown.props>) => {
     if (options !== undefined) {
