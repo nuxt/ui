@@ -7,19 +7,15 @@ describe('Link', () => {
   it.each([
     ['basic case', {}],
     ['with custom as prop', { props: { as: 'a' } }],
+    ['with <component as slot', { slots: { default: 'component slot' }, props: { as: 'a' } }],
+    ['NuxtLink with to prop', { props: { to: '/' } }],
+    ['NuxtLink with slot', { slots: { default: 'nuxtlink slot' }, props: { to: '/' } }],
     ['with custom type prop', { props: { type: 'submit' } }],
     ['disabled set to true', { props: { disabled: true } }],
-    ['active set to true', { props: { active: true } }],
-    ['exact set to true', { props: { exact: true } }],
-    ['exactQuery set to true', { props: { exactQuery: true } }],
-    ['exactHash set to true', { props: { exactHash: true } }],
-    ['with inactiveClass prop', { props: { inactiveClass: 'inactive-link' } }],
+    ['with active', { props: { active: true, to: '/', activeClass: "text-sm" } }],
+    ['with inactive', { props: { active: false, to: '/', inactiveClass: 'text-gray-300' } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Link.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, ULink)
     expect(html).toMatchSnapshot()
   })
