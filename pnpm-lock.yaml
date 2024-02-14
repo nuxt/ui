@@ -167,9 +167,6 @@ importers:
       '@nuxt/ui-pro':
         specifier: npm:@nuxt/ui-pro-edge@0.7.5-28456870.1318bb3
         version: /@nuxt/ui-pro-edge@0.7.5-28456870.1318bb3(nuxt@3.10.1)(rollup@3.29.4)(vite@5.0.12)(vue@3.4.18)
-      '@nuxthq/studio':
-        specifier: ^1.0.10
-        version: 1.0.10(rollup@3.29.4)
       '@nuxtjs/fontaine':
         specifier: ^0.4.1
         version: 0.4.1(rollup@3.29.4)
@@ -2117,22 +2114,6 @@ packages:
       - vls
       - vti
       - vue-tsc
-
-  /@nuxthq/studio@1.0.10(rollup@3.29.4):
-    resolution: {integrity: sha512-F0Gd4H/YfsVorg0EZ5+++/pG7WC8S9jvWg4CNQH0ZZXCcqFE6cSvxExtkfjJEDLEswp2OYLF8tCSkrYVQsFQqQ==}
-    dependencies:
-      '@nuxt/kit': 3.10.1(rollup@3.29.4)
-      defu: 6.1.4
-      nuxt-component-meta: 0.6.3(rollup@3.29.4)
-      socket.io-client: 4.7.4
-      ufo: 1.4.0
-      untyped: 1.4.2
-    transitivePeerDependencies:
-      - bufferutil
-      - rollup
-      - supports-color
-      - utf-8-validate
-    dev: true
 
   /@nuxtjs/color-mode@3.3.2(rollup@3.29.4):
     resolution: {integrity: sha512-BLpBfrYZngV2QWFQ4HNEFwAXa3Pno43Ge+2XHcZJTTa1Z4KzRLvOwku8yiyV3ovIaaXKGwduBdv3Z5Ocdp0/+g==}
