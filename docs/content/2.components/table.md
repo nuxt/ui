@@ -93,7 +93,7 @@ You can specify a default sort for the table through the `sort` prop. It's an ob
 This will set the default sort and will work even if no column is set as `sortable`.
 
 ```vue
-<script setup>
+<script setup lang="ts">
 const sort = ref({
   column: 'name',
   direction: 'desc'
@@ -134,7 +134,7 @@ When fetching data from an API, we can take advantage of the [`useFetch`](https:
 When doing so, you might want to set the `sort-mode` prop to `manual` to disable the automatic sorting and return the rows as is.
 
 ```vue
-<script setup>
+<script setup lang="ts">
 // Ensure it uses `ref` instead of `reactive`.
 const sort = ref({
   column: 'name',
@@ -338,7 +338,7 @@ excludedProps:
 This can be easily used with Nuxt `useAsyncData` composable.
 
 ```vue
-<script setup>
+<script setup lang="ts">
 const columns = [...]
 
 const { pending, data: people } = await useLazyAsyncData('people', () => $fetch('/api/people'))
