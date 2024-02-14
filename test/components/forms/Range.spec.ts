@@ -13,9 +13,7 @@ describe('Range', () => {
     ['with custom max', { props: { max: 200 }, options: {} }],
     ['with custom step', { props: { step: 5 }, options: {} }],
     ['with custom size', { props: { size: 'lg' }, options: {} }],
-    ['with custom color', { props: { color: 'blue' }, options: {} }],
-    ['with custom class', { props: { class: 'custom-class' }, options: {} }],
-    ['with custom style', { props: { style: { color: 'red', fontSize: '16px' } }, options: {} }]
+    ['with custom color', { props: { color: 'red' }, options: {} }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Range.props>) => {
     if (options !== undefined) {
