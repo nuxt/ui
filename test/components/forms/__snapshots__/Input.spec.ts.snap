@@ -1,70 +1,132 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Input > renders basic case correctly 1`] = `
-"<div class=""><input type="text" class="">label
+"<div class=""><input type="text" class="">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
-exports[`Input > renders with autofocus correctly 1`] = `
-"<div class=""><input type="text" class="">label
-  <!--v-if-->
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Input > renders with custom class correctly 1`] = `
-"<div class=""><input type="text" class="">label
-  <!--v-if-->
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Input > renders with custom name and placeholder correctly 1`] = `
-"<div class=""><input name="username" type="text" placeholder="Enter your username" class="">label
-  <!--v-if-->
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Input > renders with custom style correctly 1`] = `
-"<div class=""><input type="text" class="" style="color: red; font-size: 16px;">label
+exports[`Input > renders with color correctly 1`] = `
+"<div class=""><input type="text" class="">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with custom type correctly 1`] = `
-"<div class=""><input type="password" class="">label
+"<div class=""><input type="password" class="">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with disabled correctly 1`] = `
-"<div class=""><input type="text" disabled="" class="">label
+"<div class=""><input type="text" disabled="" class="">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with icon correctly 1`] = `
+"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with input class correctly 1`] = `
+"<div class=""><input type="text" class="w-full">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with leading and icon correctly 1`] = `
+"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with leading slots correctly 1`] = `
+"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">leading slot</span>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with leadingIcon correctly 1`] = `
+"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with loading icon correctly 1`] = `
+"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with name correctly 1`] = `
+"<div class=""><input name="username" type="text" class="">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with placeholder correctly 1`] = `
+"<div class=""><input type="text" placeholder="Enter your username" class="">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with readonly correctly 1`] = `
-"<div class=""><input type="text" class="" readonly="">label
+"<div class=""><input type="text" class="" readonly="">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with required correctly 1`] = `
-"<div class=""><input type="text" required="" class="">label
+"<div class=""><input type="text" required="" class="">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
-exports[`Input > renders with value correctly 1`] = `
-"<div class=""><input type="text" class="">label
+exports[`Input > renders with size correctly 1`] = `
+"<div class=""><input type="text" class="">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with trailing and icon correctly 1`] = `
+"<div class=""><input type="text" class="">
+  <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
+</div>"
+`;
+
+exports[`Input > renders with trailing slots correctly 1`] = `
+"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">trailing slot</span>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with trailingIcon correctly 1`] = `
+"<div class=""><input type="text" class="">
+  <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
+</div>"
+`;
+
+exports[`Input > renders with variant correctly 1`] = `
+"<div class=""><input type="text" class="">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders without padded correctly 1`] = `
+"<div class=""><input type="text" class="">
   <!--v-if-->
   <!--v-if-->
 </div>"
