@@ -7,38 +7,14 @@ exports[`Checkbox > renders basic case correctly 1`] = `
 </div>"
 `;
 
-exports[`Checkbox > renders disabled set to true correctly 1`] = `
-"<div class="">
-  <div class=""><input disabled="" type="checkbox" class=""></div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Checkbox > renders indeterminate set to true correctly 1`] = `
-"<div class="">
-  <div class=""><input indeterminate="" type="checkbox" class=""></div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Checkbox > renders required set to true correctly 1`] = `
-"<div class="">
-  <div class=""><input required="" type="checkbox" class=""></div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Checkbox > renders with custom class correctly 1`] = `
-"<div class="">
-  <div class=""><input type="checkbox" class=""></div>
-  <!--v-if-->
-</div>"
-`;
-
 exports[`Checkbox > renders with custom color correctly 1`] = `
 "<div class="">
   <div class=""><input type="checkbox" class=""></div>
-  <!--v-if-->
+  <div class=""><label class="">Label
+      <!--v-if-->
+    </label>
+    <!--v-if-->
+  </div>
 </div>"
 `;
 
@@ -51,14 +27,7 @@ exports[`Checkbox > renders with custom id correctly 1`] = `
 
 exports[`Checkbox > renders with custom input class correctly 1`] = `
 "<div class="">
-  <div class=""><input type="checkbox" class="custom-input-class"></div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Checkbox > renders with custom modelValue correctly 1`] = `
-"<div class="">
-  <div class=""><input type="checkbox" class=""></div>
+  <div class=""><input type="checkbox" class="w-full h-full"></div>
   <!--v-if-->
 </div>"
 `;
@@ -77,9 +46,27 @@ exports[`Checkbox > renders with custom value correctly 1`] = `
 </div>"
 `;
 
-exports[`Checkbox > renders with help text correctly 1`] = `
+exports[`Checkbox > renders with disabled correctly 1`] = `
+"<div class="">
+  <div class=""><input disabled="" type="checkbox" class=""></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with help correctly 1`] = `
 "<div class="">
   <div class=""><input type="checkbox" class=""></div>
+  <div class=""><label class="">Label
+      <!--v-if-->
+    </label>
+    <p class="">Help</p>
+  </div>
+</div>"
+`;
+
+exports[`Checkbox > renders with indeterminate correctly 1`] = `
+"<div class="">
+  <div class=""><input indeterminate="" type="checkbox" class=""></div>
   <!--v-if-->
 </div>"
 `;
@@ -88,6 +75,26 @@ exports[`Checkbox > renders with label correctly 1`] = `
 "<div class="">
   <div class=""><input type="checkbox" class=""></div>
   <div class=""><label class="">Label
+      <!--v-if-->
+    </label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Checkbox > renders with required correctly 1`] = `
+"<div class="">
+  <div class=""><input required="" type="checkbox" class=""></div>
+  <div class=""><label class="">Label<span class="">*</span></label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Checkbox > renders with slot label correctly 1`] = `
+"<div class="">
+  <div class=""><input type="checkbox" class=""></div>
+  <div class=""><label class="">Label slot
       <!--v-if-->
     </label>
     <!--v-if-->
