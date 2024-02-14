@@ -6,8 +6,8 @@ import ComponentRender from '../component-render'
 describe('Icon', () => {
   it.each([
     ['basic case', {}],
-    // Cas où dynamic est à false
-    ['with name and dynamic', { props: { name: 'i-heroicons-academic-cap', dynamic: true } }],
+    ['with name', { props: { name: 'i-heroicons-academic-cap' } }],
+    ['with dynamic', { props: { name: 'i-heroicons-arrow-small-left-solid', dynamic: true } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Icon.props>) => {
     if (options !== undefined) {
