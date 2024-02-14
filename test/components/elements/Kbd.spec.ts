@@ -6,14 +6,12 @@ import ComponentRender from '../component-render'
 describe('Kbd', () => {
   it.each([
     ['basic case', {}],
-    ['with custom size', { props: { size: 'md' } }],
-    ['with custom class', { props: { class: 'custom-class' } }],
+    ['with custom size', { props: { size: 'xs' } }],
+    ['with custom class', { props: { class: 'w-full h-full' } }],
+    ['with value', { props: { value: 'label' }}],
+    ['with slot', { slots: { default: 'slot' }}],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Kbd.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, UKbd)
     expect(html).toMatchSnapshot()
   })
