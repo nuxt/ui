@@ -7,13 +7,6 @@ exports[`Radio > renders basic case correctly 1`] = `
 </div>"
 `;
 
-exports[`Radio > renders with custom class correctly 1`] = `
-"<div class="">
-  <div class=""><input id="Ooz6KnLRIo_9" type="radio" class=""></div>
-  <!--v-if-->
-</div>"
-`;
-
 exports[`Radio > renders with custom color correctly 1`] = `
 "<div class="">
   <div class=""><input id="Ooz6KnLRIo_8" type="radio" class=""></div>
@@ -30,22 +23,33 @@ exports[`Radio > renders with custom id correctly 1`] = `
 
 exports[`Radio > renders with disabled correctly 1`] = `
 "<div class="">
-  <div class=""><input id="Ooz6KnLRIo_4" disabled="" type="radio" class=""></div>
+  <div class=""><input id="Ooz6KnLRIo_3" disabled="" type="radio" class=""></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Radio > renders with help correctly 1`] = `
 "<div class="">
-  <div class=""><input id="Ooz6KnLRIo_5" type="radio" class=""></div>
+  <div class=""><input id="Ooz6KnLRIo_6" type="radio" class=""></div>
+  <div class=""><label for="Ooz6KnLRIo_6" class="">Radio Label
+      <!--v-if-->
+    </label>
+    <p class="">Help text</p>
+  </div>
+</div>"
+`;
+
+exports[`Radio > renders with inputClass correctly 1`] = `
+"<div class="">
+  <div class=""><input id="Ooz6KnLRIo_9" type="radio" class=""></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Radio > renders with label correctly 1`] = `
 "<div class="">
-  <div class=""><input id="Ooz6KnLRIo_6" type="radio" class=""></div>
-  <div class=""><label for="Ooz6KnLRIo_6" class="">Radio Label
+  <div class=""><input id="Ooz6KnLRIo_4" type="radio" class=""></div>
+  <div class=""><label for="Ooz6KnLRIo_4" class="">Radio Label
       <!--v-if-->
     </label>
     <!--v-if-->
@@ -53,16 +57,20 @@ exports[`Radio > renders with label correctly 1`] = `
 </div>"
 `;
 
-exports[`Radio > renders with modelValue correctly 1`] = `
+exports[`Radio > renders with label slot correctly 1`] = `
 "<div class="">
-  <div class=""><input id="Ooz6KnLRIo_2" type="radio" class=""></div>
-  <!--v-if-->
+  <div class=""><input id="Ooz6KnLRIo_5" type="radio" class=""></div>
+  <div class=""><label for="Ooz6KnLRIo_5" class="">label slot
+      <!--v-if-->
+    </label>
+    <!--v-if-->
+  </div>
 </div>"
 `;
 
 exports[`Radio > renders with name correctly 1`] = `
 "<div class="">
-  <div class=""><input id="Ooz6KnLRIo_3" name="radioName" type="radio" class=""></div>
+  <div class=""><input id="Ooz6KnLRIo_2" name="radioName" type="radio" class=""></div>
   <!--v-if-->
 </div>"
 `;
@@ -70,7 +78,9 @@ exports[`Radio > renders with name correctly 1`] = `
 exports[`Radio > renders with required correctly 1`] = `
 "<div class="">
   <div class=""><input id="Ooz6KnLRIo_7" required="" type="radio" class=""></div>
-  <!--v-if-->
+  <div class=""><label for="Ooz6KnLRIo_7" class="">Radio Label<span class="">*</span></label>
+    <!--v-if-->
+  </div>
 </div>"
 `;
 

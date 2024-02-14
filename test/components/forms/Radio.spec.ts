@@ -10,17 +10,14 @@ describe('Radio', () => {
     ['with value', { props: { value: 'option1' } }],
     ['with name', { props: { name: 'radioName' } }],
     ['with disabled', { props: { disabled: true } }],
-    ['with help', { props: { help: 'Some help text' } }],
     ['with label', { props: { label: 'Radio Label' } }],
-    ['with required', { props: { required: true } }],
+    ['with label slot', { slots: { label: 'label slot' } }],
+    ['with help', { props: { label: 'Radio Label', help: 'Help text' } }],
+    ['with required', { props: { label: 'Radio Label', required: true } }],
     ['with custom color', { props: { color: 'blue' } }],
-    ['with custom class', { props: { class: 'custom-class' } }]
+    ['with inputClass', { props: { class: 'w-full' } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Radio.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, URadio)
     expect(html).toMatchSnapshot()
   })
