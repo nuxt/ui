@@ -1,18 +1,11 @@
 <script setup>
-import image1 from './assets/1.jpg'
-import image2 from './assets/2.jpg'
-import image3 from './assets/3.jpg'
-import image4 from './assets/4.jpg'
-import image5 from './assets/5.jpg'
-import image6 from './assets/6.jpg'
-
 const items = [
-  image1,
-  image2,
-  image3,
-  image4,
-  image5,
-  image6
+  'https://picsum.photos/600/800?random=1',
+  'https://picsum.photos/600/800?random=2',
+  'https://picsum.photos/600/800?random=3',
+  'https://picsum.photos/600/800?random=4',
+  'https://picsum.photos/600/800?random=5',
+  'https://picsum.photos/600/800?random=6'
 ]
 
 const isLTR = ref(true)
