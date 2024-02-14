@@ -9,18 +9,15 @@ describe('Meter', () => {
     ['with custom value', { props: { value: 50 } }],
     ['with custom min', { props: { min: 20 } }],
     ['with custom max', { props: { max: 200 } }],
-    ['indicator enabled', { props: { indicator: true } }],
-    ['label provided', { props: { label: 'Progress' } }],
+    ['with indicator enabled', { props: { indicator: true } }],
+    ['with indicator slot', { slots: { indicator: 'indicator slot' }, props: { indicator: true } }],
+    ['with label', { props: { label: 'meter label' } }],
+    ['with label slot', { slots: { label: 'label slot' } }],
+    ['with icon', { slots: { label: 'label slot' }, props: { icon: 'i-heroicons-chart-bar' } }],
     ['with custom size', { props: { size: 'lg' } }],
-    ['with custom color', { props: { color: 'primary' } }],
-    ['icon provided', { props: { icon: 'check' } }],
-    ['with custom class', { props: { class: 'custom-class' } }],
+    ['with custom color', { props: { color: 'red' } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Meter.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, UMeter)
     expect(html).toMatchSnapshot()
   })
