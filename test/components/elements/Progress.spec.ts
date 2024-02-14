@@ -7,12 +7,12 @@ describe('Progress', () => {
   it.each([
     ['basic case', {}],
     ['with custom value', { props: { value: 50 } }],
-    ['with custom max', { props: { max: 200 } }],
     ['with indicator', { props: { indicator: true } }],
-    ['with custom animation', { props: { animation: 'carousel' } }],
+    ['with slot indicator', { slots: { indicator: 'indicator slot' } }],
+    ['with custom max', { props: { max: [200] } }],
+    ['with steps', { props: { max: [50, 100, 150, 200] } }],
     ['with custom size', { props: { size: 'sm' } }],
-    ['with custom color', { props: { color: 'blue' } }],
-    ['with custom class', { props: { class: 'custom-class' } }],
+    ['with custom color', { props: { color: 'red' } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Progress.props>) => {
     if (options !== undefined) {
