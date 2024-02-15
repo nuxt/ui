@@ -27,11 +27,10 @@ import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
-import type { ToggleSize, Strategy } from '../../types'
+import type { ToggleSize, ToggleColor, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { toggle } from '#ui/ui.config'
-import colors from '#ui-colors'
 import { useId } from '#imports'
 
 const config = mergeConfig<typeof toggle>(appConfig.ui.strategy, appConfig.ui.toggle, toggle)
@@ -68,7 +67,7 @@ export default defineComponent({
       default: () => config.default.offIcon
     },
     color: {
-      type: String as PropType<typeof colors[number]>,
+      type: String as PropType<ToggleColor>,
       default: () => config.default.color,
       validator (value: string) {
         return appConfig.ui.colors.includes(value)
