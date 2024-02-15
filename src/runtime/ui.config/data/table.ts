@@ -2,7 +2,7 @@ export default {
   wrapper: 'relative overflow-x-auto',
   base: 'min-w-full table-fixed',
   divide: 'divide-y divide-gray-300 dark:divide-gray-700',
-  thead: '',
+  thead: 'relative',
   tbody: 'divide-y divide-gray-200 dark:divide-gray-800',
   tr: {
     base: '',
@@ -36,6 +36,9 @@ export default {
     label: 'text-sm text-center text-gray-900 dark:text-white',
     icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
   },
+  progress: {
+    wrapper: 'absolute inset-x-0 -bottom-[0.5px] p-0'
+  },
   default: {
     sortAscIcon: 'i-heroicons-bars-arrow-up-20-solid',
     sortDescIcon: 'i-heroicons-bars-arrow-down-20-solid',
@@ -46,6 +49,10 @@ export default {
       color: 'gray' as const,
       variant: 'ghost' as const,
       class: '-m-1.5'
+    },
+    progress: {
+      color: 'primary' as const,
+      animation: 'carousel' as const
     },
     loadingState: {
       icon: 'i-heroicons-arrow-path-20-solid',
