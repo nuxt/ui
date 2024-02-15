@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import path from 'path'
 
-export default async function (nameOrHtml: string, options: any, component: any, modelValue?: any) {
+export default async function (nameOrHtml: string, options: any, component: any) {
   let html: string
   const name = path.parse(component.__file).name
   if (options === undefined) {

@@ -1,37 +1,25 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Textarea > renders basic case correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders basic case correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea></div>"`;
 
-exports[`Textarea > renders with autofocus correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders with color correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea></div>"`;
 
-exports[`Textarea > renders with autofocusDelay correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders with default slot correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>default slot</div>"`;
 
-exports[`Textarea > renders with autoresize correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders with disabled correctly 1`] = `"<div class=""><textarea rows="3" disabled="" class=""></textarea></div>"`;
 
-exports[`Textarea > renders with color correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders with id correctly 1`] = `"<div class=""><textarea id="exampleId" rows="3" class=""></textarea></div>"`;
 
-exports[`Textarea > renders with disabled correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders with name correctly 1`] = `"<div class=""><textarea name="exampleName" rows="3" class=""></textarea></div>"`;
 
-exports[`Textarea > renders with id correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders with padded correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea></div>"`;
 
-exports[`Textarea > renders with maxrows correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders with placeholder correctly 1`] = `"<div class=""><textarea rows="3" placeholder="examplePlaceholder" class=""></textarea></div>"`;
 
-exports[`Textarea > renders with modelModifiers correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders with required correctly 1`] = `"<div class=""><textarea rows="3" required="" class=""></textarea></div>"`;
 
-exports[`Textarea > renders with name correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders with rows correctly 1`] = `"<div class=""><textarea rows="5" class=""></textarea></div>"`;
 
-exports[`Textarea > renders with padded correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders with size correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea></div>"`;
 
-exports[`Textarea > renders with placeholder correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
-
-exports[`Textarea > renders with required correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
-
-exports[`Textarea > renders with resize correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
-
-exports[`Textarea > renders with rows correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
-
-exports[`Textarea > renders with size correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
-
-exports[`Textarea > renders with textareaClass correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
-
-exports[`Textarea > renders with variant correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>label</div>"`;
+exports[`Textarea > renders with variant correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea></div>"`;
