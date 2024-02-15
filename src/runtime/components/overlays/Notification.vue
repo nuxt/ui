@@ -13,7 +13,7 @@
           <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
 
           <div :class="ui.inner">
-            <p :class="ui.title">
+            <p v-if="(title || $slots.title)" :class="ui.title">
               <slot name="title" :title="title">
                 {{ title }}
               </slot>
@@ -73,7 +73,7 @@ export default defineComponent({
     },
     title: {
       type: String,
-      required: true
+      default: null
     },
     description: {
       type: String,

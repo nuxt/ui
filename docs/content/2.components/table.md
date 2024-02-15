@@ -302,11 +302,11 @@ componentProps:
 
 ### Loading
 
-Use the `loading` prop to display a loading state.
+Use the `loading` prop to indicate that data is currently loading with an indeterminate [Progress](/components/progress#indeterminate) bar.
 
-Use the `loading-state` prop to customize the `icon` and `label` or change them globally in `ui.table.default.loadingState`.
+You can use the `progress` prop to customize the `color` and `animation` of the progress bar or change them globally in `ui.table.default.progress` (you can set it to `null` to hide the progress bar).
 
-You can also set it to `null` to hide the loading state.
+If there is no rows provided, a loading state will also be displayed. You can use the `loading-state` prop to customize the `icon` and `label` or change them globally in `ui.table.default.loadingState` (you can set it to `null` to hide the loading state).
 
 ::component-card
 ---
@@ -330,8 +330,12 @@ props:
   loadingState:
     icon: 'i-heroicons-arrow-path-20-solid'
     label: "Loading..."
+  progress:
+    color: 'primary'
+    animation: 'carousel'
 excludedProps:
   - loadingState
+  - progress
 ---
 ::
 
