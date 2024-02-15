@@ -40,7 +40,7 @@ Use the `prevent-close` prop to disable the outside click alongside the `esc` ke
 You can still handle the `esc` shortcut yourself by using our [defineShortcuts](/getting-started/shortcuts#defineshortcuts) composable.
 
 ```vue
-<script setup>
+<script setup lang="ts">
 const isOpen = ref(false)
 
 defineShortcuts({

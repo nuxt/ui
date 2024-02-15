@@ -93,7 +93,7 @@ You can specify a default sort for the table through the `sort` prop. It's an ob
 This will set the default sort and will work even if no column is set as `sortable`.
 
 ```vue
-<script setup>
+<script setup lang="ts">
 const sort = ref({
   column: 'name',
   direction: 'desc'
@@ -134,7 +134,7 @@ When fetching data from an API, we can take advantage of the [`useFetch`](https:
 When doing so, you might want to set the `sort-mode` prop to `manual` to disable the automatic sorting and return the rows as is.
 
 ```vue
-<script setup>
+<script setup lang="ts">
 // Ensure it uses `ref` instead of `reactive`.
 const sort = ref({
   column: 'name',
@@ -302,11 +302,11 @@ componentProps:
 
 ### Loading
 
-Use the `loading` prop to display a loading state.
+Use the `loading` prop to indicate that data is currently loading with an indeterminate [Progress](/components/progress#indeterminate) bar.
 
-Use the `loading-state` prop to customize the `icon` and `label` or change them globally in `ui.table.default.loadingState`.
+You can use the `progress` prop to customize the `color` and `animation` of the progress bar or change them globally in `ui.table.default.progress` (you can set it to `null` to hide the progress bar).
 
-You can also set it to `null` to hide the loading state.
+If there is no rows provided, a loading state will also be displayed. You can use the `loading-state` prop to customize the `icon` and `label` or change them globally in `ui.table.default.loadingState` (you can set it to `null` to hide the loading state).
 
 ::component-card
 ---
@@ -330,15 +330,19 @@ props:
   loadingState:
     icon: 'i-heroicons-arrow-path-20-solid'
     label: "Loading..."
+  progress:
+    color: 'primary'
+    animation: 'carousel'
 excludedProps:
   - loadingState
+  - progress
 ---
 ::
 
 This can be easily used with Nuxt `useAsyncData` composable.
 
 ```vue
-<script setup>
+<script setup lang="ts">
 const columns = [...]
 
 const { pending, data: people } = await useLazyAsyncData('people', () => $fetch('/api/people'))

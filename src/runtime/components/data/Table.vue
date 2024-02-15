@@ -20,9 +20,15 @@
             </slot>
           </th>
         </tr>
+
+        <tr v-if="loading && progress">
+          <td :colspan="0" :class="ui.progress.wrapper">
+            <UProgress v-bind="{ ...(ui.default.progress || {}), ...progress }" size="2xs" />
+          </td>
+        </tr>
       </thead>
       <tbody :class="ui.tbody">
-        <tr v-if="loadingState && loading">
+        <tr v-if="loadingState && loading && !rows.length">
           <td :colspan="columns.length + (modelValue ? 1 : 0)">
             <slot name="loading-state">
               <div :class="ui.loadingState.wrapper">
@@ -72,12 +78,13 @@ import type { PropType } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { useVModel } from '@vueuse/core'
-import UButton from '../elements/Button.vue'
 import UIcon from '../elements/Icon.vue'
+import UButton from '../elements/Button.vue'
+import UProgress from '../elements/Progress.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, get } from '../../utils'
-import type { Strategy, Button } from '../../types'
+import type { Strategy, Button, ProgressColor, ProgressAnimation } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { table } from '#ui/ui.config'
@@ -102,8 +109,9 @@ function defaultSort (a: any, b: any, direction: 'asc' | 'desc') {
 
 export default defineComponent({
   components: {
-    UButton,
     UIcon,
+    UButton,
+    UProgress,
     UCheckbox
   },
   inheritAttrs: false,
@@ -159,6 +167,10 @@ export default defineComponent({
     emptyState: {
       type: Object as PropType<{ icon: string, label: string }>,
       default: () => config.default.emptyState
+    },
+    progress: {
+      type: Object as PropType<{ color: ProgressColor, animation: ProgressAnimation }>,
+      default: () => config.default.progress
     },
     class: {
       type: [String, Object, Array] as PropType<any>,

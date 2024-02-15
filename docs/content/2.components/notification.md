@@ -42,7 +42,7 @@ Then, you can use the `useToast` composable to add notifications to your app:
 When using `toast.add`, this will push a new notification to the stack displayed in `<UNotifications />`. All the props of the `Notification` component can be passed to `toast.add`.
 
 ```vue
-<script setup>
+<script setup lang="ts">
 const toast = useToast()
 
 onMounted(() => {
