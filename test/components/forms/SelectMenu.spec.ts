@@ -2,11 +2,6 @@ import { describe, it, expect } from 'vitest'
 import { USelectMenu } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-
-const selectMenu = await mountSuspended(USelectMenu)
-
-selectMenu.vm.$emit('open')
 
 describe('SelectMenu', () => {
   it.each([
