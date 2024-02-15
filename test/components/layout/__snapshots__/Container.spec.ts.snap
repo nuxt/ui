@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Container > renders basic case correctly 1`] = `"<div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">label</div>"`;
+exports[`Container > renders basic case correctly 1`] = `"<div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl"></div>"`;
 
-exports[`Container > renders wit as correctly 1`] = `"<div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">label</div>"`;
+exports[`Container > renders with as correctly 1`] = `"<article class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl"></article>"`;
 
-exports[`Container > renders with as correctly 1`] = `"<div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">label</div>"`;
+exports[`Container > renders with default slot correctly 1`] = `"<div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">default slot</div>"`;
