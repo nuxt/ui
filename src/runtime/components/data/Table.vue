@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody :class="ui.tbody">
-        <tr v-if="loadingState && loading">
+        <tr v-if="loadingState && loading && !rows.length">
           <td :colspan="columns.length + (modelValue ? 1 : 0)">
             <slot name="loading-state">
               <div :class="ui.loadingState.wrapper">
