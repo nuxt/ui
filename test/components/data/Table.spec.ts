@@ -11,7 +11,7 @@ describe('Table', () => {
       {
         props: {
           columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper } }
+          ui: ui
         }
       }
     ],
@@ -20,7 +20,7 @@ describe('Table', () => {
       {
         props: {
           sort: { column: 'name', direction: 'desc' }, columns: [{ key: 'name', label: 'Name', sortable: true }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper }, default: { sortButton: { icon: ui.default.sortButton } } }
+          ui: ui
         }
       }
     ],
@@ -29,7 +29,7 @@ describe('Table', () => {
       {
         props: {
           sortMode: 'manual', columns: [{ key: 'name', label: 'Name', sortable: true }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper }, default: { sortButton: { icon: ui.default.sortButton } } }
+          ui: ui
         }
       }
     ],
@@ -39,7 +39,7 @@ describe('Table', () => {
         props:
         {
           sortButton: { label: 'Custom button', size: 'xl', variant: 'orange', icon: 'i-heroicons-academic-cap' }, columns: [{ sortable: true, key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper }, default: { sortButton: { icon: ui.default.sortButton } } }
+          ui: ui
         }
       }
     ],
@@ -49,7 +49,7 @@ describe('Table', () => {
         props:
         {
           sortAscIcon: 'i-heroicons-adjustments-horizontal', sort: { column: 'name', direction: 'asc' }, columns: [{ sortable: true, key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper }, default: { sortButton: { icon: ui.default.sortButton } } }
+          ui: ui
         }
       }
     ],
@@ -58,7 +58,7 @@ describe('Table', () => {
       {
         props: {
           sortDescIcon: 'i-heroicons-arrow-down-left-solid', sort: { column: 'name', direction: 'desc' }, columns: [{ sortable: true, key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper }, default: { sortButton: { icon: ui.default.sortButton } } }
+          ui: ui
         }
       }
     ],
@@ -68,7 +68,7 @@ describe('Table', () => {
         props:
         {
           loading: true, loadingState: { icon: 'i-heroicons-sparkles', label: 'Loading...' }, columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, loadingState: { wrapper: ui.loadingState.wrapper } }
+          ui: ui
         }
       }
     ],
@@ -79,7 +79,7 @@ describe('Table', () => {
         props:
         {
           loading: true, loadingState: { icon: 'i-heroicons-sparkles', label: 'Loading...' }, columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, loadingState: { wrapper: ui.loadingState.wrapper } }
+          ui: ui
         }
       }
     ],
@@ -88,7 +88,7 @@ describe('Table', () => {
         props:
         {
           rows: [], emptyState: { icon: 'i-heroicons-inbox', label: 'No data available' }, columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper } }
+          ui: ui
         }
       }
     ],
@@ -97,7 +97,7 @@ describe('Table', () => {
         slots: { 'empty-state': 'Empty state slot' },
         props: {
           emptyState: { label: 'emptyStateLabel', icon: 'i-heroicons-chevron-up-down-solid' }, columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper } }
+          ui: ui
         }
       }
     ],
@@ -105,7 +105,7 @@ describe('Table', () => {
       {
         props: {
           rows: [{ id: 1, name: 'John' }, { id: 2, name: 'Jane' }, { id: 3, name: 'Doe' }], columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, td: { base: ui.td.base }, emptyState: { wrapper: ui.emptyState.wrapper } }
+          ui: ui
         }
       }
     ],

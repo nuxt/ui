@@ -6,7 +6,7 @@ exports[`Alert > renders basic case correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <div class="">
-      <p class=""></p>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </div>

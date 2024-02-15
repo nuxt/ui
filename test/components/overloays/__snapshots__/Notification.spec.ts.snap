@@ -8,7 +8,7 @@ exports[`Notification > renders basic case correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <div class="">
-          <p class=""></p>
+          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
         </div>
@@ -19,7 +19,7 @@ exports[`Notification > renders basic case correctly 1`] = `
           </button>
         </div>
       </div>
-      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" style="width: 100.02%;"></div>
+      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" ></div>
     </div>
   </div>
 </transition-stub>"
@@ -32,7 +32,7 @@ exports[`Notification > renders with avatar correctly 1`] = `
       <div class="flex items-center">
         <!--v-if--><span class="relative inline-flex items-center justify-center flex-shrink-0 rounded-full h-10 w-10 text-base"><img class="rounded-full h-10 w-10 text-base" alt="nuxtui" src="https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013"><!--v-if--></span>
         <div class="">
-          <p class=""></p>
+          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
         </div>
@@ -43,7 +43,7 @@ exports[`Notification > renders with avatar correctly 1`] = `
           </button>
         </div>
       </div>
-      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" style="width: 100%;"></div>
+      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" ></div>
     </div>
   </div>
 </transition-stub>"
@@ -57,7 +57,7 @@ exports[`Notification > renders with close button correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <div class="">
-          <p class=""></p>
+          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
         </div>
@@ -67,7 +67,7 @@ exports[`Notification > renders with close button correctly 1`] = `
           </button>
         </div>
       </div>
-      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" style="width: 100%;"></div>
+      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" ></div>
     </div>
   </div>
 </transition-stub>"
@@ -81,7 +81,7 @@ exports[`Notification > renders with color correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <div class="">
-          <p class=""></p>
+          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
         </div>
@@ -92,7 +92,7 @@ exports[`Notification > renders with color correctly 1`] = `
           </button>
         </div>
       </div>
-      <div class="absolute bottom-0 end-0 start-0 h-1 bg-red-500 dark:bg-red-400" style="width: 100%;"></div>
+      <div class="absolute bottom-0 end-0 start-0 h-1 bg-red-500 dark:bg-red-400" ></div>
     </div>
   </div>
 </transition-stub>"
@@ -106,7 +106,7 @@ exports[`Notification > renders with description correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <div class="">
-          <p class=""></p>
+          <!--v-if-->
           <p class="">Notification description</p>
           <!--v-if-->
         </div>
@@ -117,7 +117,7 @@ exports[`Notification > renders with description correctly 1`] = `
           </button>
         </div>
       </div>
-      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" style="width: 100%;"></div>
+      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" ></div>
     </div>
   </div>
 </transition-stub>"
@@ -130,7 +130,7 @@ exports[`Notification > renders with icon correctly 1`] = `
       <div class="flex items-center"><span class="i-heroicons-academic-cap flex-shrink-0 w-5 h-5 text-primary-500 dark:text-primary-400"></span>
         <!--v-if-->
         <div class="">
-          <p class=""></p>
+          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
         </div>
@@ -141,7 +141,7 @@ exports[`Notification > renders with icon correctly 1`] = `
           </button>
         </div>
       </div>
-      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" style="width: 100%;"></div>
+      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" ></div>
     </div>
   </div>
 </transition-stub>"
@@ -166,7 +166,7 @@ exports[`Notification > renders with title correctly 1`] = `
           </button>
         </div>
       </div>
-      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" style="width: 100%;"></div>
+      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" ></div>
     </div>
   </div>
 </transition-stub>"
