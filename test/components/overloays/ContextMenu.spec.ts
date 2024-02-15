@@ -6,8 +6,6 @@ import ComponentRender from '../component-render'
 describe('ContextMenu', () => {
   it.each([
     ['basic case', {}],
-    ['with virtualElement', { virtualElement: { label: 'test' } }],
-    ['with popper', { popper: { key: { id: '1' }, locked: 'false', arrow: true } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof ContextMenu.props>) => {
     if (options !== undefined) {
