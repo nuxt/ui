@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card > renders basic case correctly 1`] = `
+"<div class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with as correctly 1`] = `
+"<li class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</li>"
+`;
+
+exports[`Card > renders with default slot correctly 1`] = `
+"<div class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
+  <!--v-if-->
+  <div class="">default slot</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with footer slot correctly 1`] = `
+"<div class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
+  <!--v-if-->
+  <!--v-if-->
+  <div class="">Footer slot</div>
+</div>"
+`;
+
+exports[`Card > renders with header slot correctly 1`] = `
+"<div class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
+  <div class="">Header slot</div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
