@@ -1,0 +1,54 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Divider > renders basic case correctly 1`] = `
+"<div class="flex items-center align-center text-center w-full flex-row">
+  <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Divider > renders with avatar correctly 1`] = `
+"<div class="flex items-center align-center text-center w-full flex-row">
+  <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
+  <div class="font-medium text-gray-700 dark:text-gray-200 flex mx-3 whitespace-nowrap"><span class="relative inline-flex items-center justify-center flex-shrink-0 rounded-full h-10 w-10 text-base"><img class="rounded-full h-10 w-10 text-base" alt="nuxt-ui" src="https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013"><!--v-if--></span></div>
+  <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
+</div>"
+`;
+
+exports[`Divider > renders with default slot correctly 1`] = `
+"<div class="flex items-center align-center text-center w-full flex-row">
+  <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
+  <div class="font-medium text-gray-700 dark:text-gray-200 flex mx-3 whitespace-nowrap">Default slot</div>
+  <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
+</div>"
+`;
+
+exports[`Divider > renders with icon correctly 1`] = `
+"<div class="flex items-center align-center text-center w-full flex-row">
+  <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
+  <div class="font-medium text-gray-700 dark:text-gray-200 flex mx-3 whitespace-nowrap"><span class="i-heroicons-academic-cap flex-shrink-0 w-5 h-5"></span></div>
+  <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
+</div>"
+`;
+
+exports[`Divider > renders with label correctly 1`] = `
+"<div class="flex items-center align-center text-center w-full flex-row">
+  <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
+  <div class="font-medium text-gray-700 dark:text-gray-200 flex mx-3 whitespace-nowrap"><span class="">Divider label</span></div>
+  <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
+</div>"
+`;
+
+exports[`Divider > renders with orientation correctly 1`] = `
+"<div class="flex items-center align-center text-center w-full flex-col">
+  <div class="flex border-gray-200 dark:border-gray-800 h-full border-s border-solid"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Divider > renders with type correctly 1`] = `
+"<div class="flex items-center align-center text-center w-full flex-row">
+  <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-dotted"></div>
+  <!--v-if-->
+</div>"
+`;
