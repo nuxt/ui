@@ -11,14 +11,14 @@ export default {
   },
   th: {
     base: 'text-left rtl:text-right',
-    padding: 'px-3 py-3.5',
+    padding: 'px-4 py-3.5',
     color: 'text-gray-900 dark:text-white',
     font: 'font-semibold',
     size: 'text-sm'
   },
   td: {
     base: 'whitespace-nowrap',
-    padding: 'px-3 py-4',
+    padding: 'px-4 py-4',
     color: 'text-gray-500 dark:text-gray-400',
     font: '',
     size: 'text-sm'
