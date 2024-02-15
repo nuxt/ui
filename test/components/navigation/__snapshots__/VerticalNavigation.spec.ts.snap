@@ -11,14 +11,14 @@ exports[`VerticalNavigation > renders basic case correctly 1`] = `
 exports[`VerticalNavigation > renders with avatar slot correctly 1`] = `
 "<nav>
   <ul>
-    <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Avatar slot<span class="i-heroicons-academic-cap flex-shrink-0 w-5 h-5"></span>label
+    <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Avatar slot<span class="i-heroicons-academic-cap flex-shrink-0 w-5 h-5"></span><span class="text-sm"><!--v-if--> Home</span>
         <!--v-if-->
       </button></li>
     <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Avatar slot
-        <!--v-if-->label<span class="inline-flex items-center font-medium text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900 flex-shrink-0 ml-auto relative rounded">badge</span>
+        <!--v-if--><span class=""><!--v-if--> Settings</span><span class="inline-flex items-center font-medium text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900 flex-shrink-0 ml-auto relative rounded">badge</span>
       </button></li>
     <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Avatar slot
-        <!--v-if-->label
+        <!--v-if--><span class=""><!--v-if--> About</span>
         <!--v-if-->
       </button></li>
     <!--v-if-->
@@ -29,14 +29,14 @@ exports[`VerticalNavigation > renders with avatar slot correctly 1`] = `
 exports[`VerticalNavigation > renders with badge slot correctly 1`] = `
 "<nav>
   <ul>
-    <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Badge slot<span class="i-heroicons-academic-cap flex-shrink-0 w-5 h-5"></span>label
+    <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Badge slot<span class="i-heroicons-academic-cap flex-shrink-0 w-5 h-5"></span><span class="text-sm"><!--v-if--> Home</span>
         <!--v-if-->
       </button></li>
     <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Badge slot
-        <!--v-if-->label<span class="inline-flex items-center font-medium text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900 flex-shrink-0 ml-auto relative rounded">badge</span>
+        <!--v-if--><span class=""><!--v-if--> Settings</span><span class="inline-flex items-center font-medium text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900 flex-shrink-0 ml-auto relative rounded">badge</span>
       </button></li>
     <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Badge slot
-        <!--v-if-->label
+        <!--v-if--><span class=""><!--v-if--> About</span>
         <!--v-if-->
       </button></li>
     <!--v-if-->
@@ -47,14 +47,14 @@ exports[`VerticalNavigation > renders with badge slot correctly 1`] = `
 exports[`VerticalNavigation > renders with icon slot correctly 1`] = `
 "<nav>
   <ul>
-    <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Icon slot<span class="i-heroicons-academic-cap flex-shrink-0 w-5 h-5"></span>label
+    <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Icon slot<span class="i-heroicons-academic-cap flex-shrink-0 w-5 h-5"></span><span class="text-sm"><!--v-if--> Home</span>
         <!--v-if-->
       </button></li>
     <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Icon slot
-        <!--v-if-->label<span class="inline-flex items-center font-medium text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900 flex-shrink-0 ml-auto relative rounded">badge</span>
+        <!--v-if--><span class=""><!--v-if--> Settings</span><span class="inline-flex items-center font-medium text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900 flex-shrink-0 ml-auto relative rounded">badge</span>
       </button></li>
     <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">Icon slot
-        <!--v-if-->label
+        <!--v-if--><span class=""><!--v-if--> About</span>
         <!--v-if-->
       </button></li>
     <!--v-if-->
@@ -66,15 +66,15 @@ exports[`VerticalNavigation > renders with links correctly 1`] = `
 "<nav>
   <ul>
     <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">
-        <!--v-if--><span class="i-heroicons-academic-cap flex-shrink-0 w-5 h-5"></span>label
+        <!--v-if--><span class="i-heroicons-academic-cap flex-shrink-0 w-5 h-5"></span><span class="text-sm"><!--v-if--> Home</span>
         <!--v-if-->
       </button></li>
     <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75">
         <!--v-if-->
-        <!--v-if-->label<span class="inline-flex items-center font-medium text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900 flex-shrink-0 ml-auto relative rounded">badge</span>
+        <!--v-if--><span class=""><!--v-if--> Settings</span><span class="inline-flex items-center font-medium text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900 flex-shrink-0 ml-auto relative rounded">badge</span>
       </button></li>
     <li><button type="button" class="group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75"><span class="relative inline-flex items-center justify-center flex-shrink-0 rounded-full h-8 w-8 text-sm flex-shrink-0"><img class="rounded-full h-8 w-8 text-sm" alt="nuxtui" src="https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013"><!--v-if--></span>
-        <!--v-if-->label
+        <!--v-if--><span class=""><!--v-if--> About</span>
         <!--v-if-->
       </button></li>
     <!--v-if-->

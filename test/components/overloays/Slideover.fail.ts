@@ -14,10 +14,6 @@ describe('Slideover', () => {
     // ['with preventClose', { preventClose: true }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Slideover.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, USlideover)
     expect(html).toMatchSnapshot()
   })

@@ -14,10 +14,6 @@ describe('RadioGroup', () => {
     ['with label', { props: { label: 'label' } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof RadioGroup.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, URadioGroup)
     expect(html).toMatchSnapshot()
   })

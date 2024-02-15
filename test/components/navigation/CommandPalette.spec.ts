@@ -21,10 +21,6 @@ describe('CommandPalette', () => {
     ['with emptystate', { props: { emptyState: { icon: 'i-heroicons-academic-cap', label: 'Emptystate label', queryLabel: 'Emptystate queryLabel' }, ui: { emptyState: ui.emptyState.wrapper, input: { wrapper: ui.input.wrapper, padding: ui.input.padding, icon: { padding: ui.input.icon.padding } } } } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof CommandPalette.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, UCommandPalette)
     expect(html).toMatchSnapshot()
   })

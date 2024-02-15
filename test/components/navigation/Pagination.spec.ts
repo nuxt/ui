@@ -19,10 +19,6 @@ describe('Pagination', () => {
     ['with prev button slot', { slots: { next: 'prev button slot' }, props: { ui: { default: { prevButton: ui.default.prevButton } } } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Pagination.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, UPagination)
     expect(html).toMatchSnapshot()
   })

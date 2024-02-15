@@ -29,10 +29,6 @@ describe('Select', () => {
     ['with custom options', { props: { options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Select.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, USelect)
     expect(html).toMatchSnapshot()
   })

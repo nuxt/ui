@@ -19,7 +19,7 @@ exports[`Notification > renders basic case correctly 1`] = `
           </button>
         </div>
       </div>
-      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" style="width: 100%;"></div>
+      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" style="width: 100.02%;"></div>
     </div>
   </div>
 </transition-stub>"
@@ -117,7 +117,7 @@ exports[`Notification > renders with description correctly 1`] = `
           </button>
         </div>
       </div>
-      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" style="width: 100.02%;"></div>
+      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" style="width: 100%;"></div>
     </div>
   </div>
 </transition-stub>"

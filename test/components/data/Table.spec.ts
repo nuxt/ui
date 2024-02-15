@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { UTable } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
+import ui from '../../../src/runtime/ui.config/data/table'
 
 describe('Table', () => {
   it.each([
@@ -10,7 +11,7 @@ describe('Table', () => {
       {
         props: {
           columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: '' }, th: { base: '' }, emptyState: { wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14' } }
+          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper } }
         }
       }
     ],
@@ -19,7 +20,7 @@ describe('Table', () => {
       {
         props: {
           sort: { column: 'name', direction: 'desc' }, columns: [{ key: 'name', label: 'Name', sortable: true }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: '' }, th: { base: '' }, emptyState: { wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14' }, default: { sortButton: { icon: 'i-heroicons-academic-cap-16-solid' } } }
+          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper }, default: { sortButton: { icon: ui.default.sortButton } } }
         }
       }
     ],
@@ -28,7 +29,7 @@ describe('Table', () => {
       {
         props: {
           sortMode: 'manual', columns: [{ key: 'name', label: 'Name', sortable: true }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: '' }, th: { base: '' }, emptyState: { wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14' }, default: { sortButton: { icon: 'i-heroicons-academic-cap-16-solid' } } }
+          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper }, default: { sortButton: { icon: ui.default.sortButton } } }
         }
       }
     ],
@@ -38,7 +39,7 @@ describe('Table', () => {
         props:
         {
           sortButton: { label: 'Custom button', size: 'xl', variant: 'orange', icon: 'i-heroicons-academic-cap' }, columns: [{ sortable: true, key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: '' }, th: { base: '' }, emptyState: { wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14' }, default: { sortButton: { icon: 'i-heroicons-academic-cap' } } }
+          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper }, default: { sortButton: { icon: ui.default.sortButton } } }
         }
       }
     ],
@@ -48,7 +49,7 @@ describe('Table', () => {
         props:
         {
           sortAscIcon: 'i-heroicons-adjustments-horizontal', sort: { column: 'name', direction: 'asc' }, columns: [{ sortable: true, key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: '' }, th: { base: '' }, td: { base: '' }, emptyState: { wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14' }, default: { sortButton: { icon: 'i-heroicons-academic-cap' } } }
+          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper }, default: { sortButton: { icon: ui.default.sortButton } } }
         }
       }
     ],
@@ -57,7 +58,7 @@ describe('Table', () => {
       {
         props: {
           sortDescIcon: 'i-heroicons-arrow-down-left-solid', sort: { column: 'name', direction: 'desc' }, columns: [{ sortable: true, key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: '' }, th: { base: '' }, td: { base: '' }, emptyState: { wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14' }, default: { sortButton: { icon: 'i-heroicons-academic-cap' } } }
+          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper }, default: { sortButton: { icon: ui.default.sortButton } } }
         }
       }
     ],
@@ -67,7 +68,7 @@ describe('Table', () => {
         props:
         {
           loading: true, loadingState: { icon: 'i-heroicons-sparkles', label: 'Loading...' }, columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: '' }, th: { base: '' }, loadingState: { wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14' } }
+          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, loadingState: { wrapper: ui.loadingState.wrapper } }
         }
       }
     ],
@@ -78,7 +79,7 @@ describe('Table', () => {
         props:
         {
           loading: true, loadingState: { icon: 'i-heroicons-sparkles', label: 'Loading...' }, columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: '' }, th: { base: '' }, loadingState: { wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14' } }
+          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, loadingState: { wrapper: ui.loadingState.wrapper } }
         }
       }
     ],
@@ -87,7 +88,7 @@ describe('Table', () => {
         props:
         {
           rows: [], emptyState: { icon: 'i-heroicons-inbox', label: 'No data available' }, columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: '' }, th: { base: '' }, emptyState: { wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14' } }
+          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper } }
         }
       }
     ],
@@ -96,7 +97,7 @@ describe('Table', () => {
         slots: { 'empty-state': 'Empty state slot' },
         props: {
           emptyState: { label: 'emptyStateLabel', icon: 'i-heroicons-chevron-up-down-solid' }, columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: '' }, th: { base: '' }, emptyState: { wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14' } }
+          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, emptyState: { wrapper: ui.emptyState.wrapper } }
         }
       }
     ],
@@ -104,17 +105,13 @@ describe('Table', () => {
       {
         props: {
           rows: [{ id: 1, name: 'John' }, { id: 2, name: 'Jane' }, { id: 3, name: 'Doe' }], columns: [{ key: 'name', label: 'Name' }, { key: 'age', label: 'Age' }],
-          ui: { tr: { base: '' }, th: { base: '' }, td: { base: '' }, emptyState: { wrapper: 'flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14' } }
+          ui: { tr: { base: ui.tr.base }, th: { base: ui.th.base }, td: { base: ui.td.base }, emptyState: { wrapper: ui.emptyState.wrapper } }
         }
       }
     ],
 
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Table.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
     const html = await ComponentRender(nameOrHtml, options, UTable)
     expect(html).toMatchSnapshot()
   })

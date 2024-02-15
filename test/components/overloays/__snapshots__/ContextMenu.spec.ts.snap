@@ -5,7 +5,7 @@ exports[`ContextMenu > renders basic case correctly 1`] = `
   <transition-stub appear="true" persisted="false" css="true">
     <div>
       <!--v-if-->
-      <div class="">label</div>
+      <div class=""></div>
     </div>
   </transition-stub>
 </div>"

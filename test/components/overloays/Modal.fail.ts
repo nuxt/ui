@@ -9,10 +9,7 @@ describe('Modal', () => {
     //['basic case', { props: { show: true }}]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Modal.props>) => {
-    if (options !== undefined) {
-      options.slots = options.slots || { default: () => 'label' }
-      options.slots.default = options.slots.default || (() => 'label')
-    }
+
     const html = await ComponentRender(nameOrHtml, options, UModal)
     expect(html).toMatchSnapshot()
   })
