@@ -6,14 +6,84 @@ exports[`Breadcrumb > renders basic case correctly 1`] = `
 </nav>"
 `;
 
+exports[`Breadcrumb > renders with default slot correctly 1`] = `
+"<nav aria-label="Breadcrumb">
+  <ol class="">
+    <li class=""><a class="" href="/">
+        <!--v-if-->default slot
+      </a><span class="i-heroicons-chevron-right-20-solid rtl:i-heroicons-chevron-left-20-solid flex-shrink-0 w-5 h-5" role="presentation"></span></li>
+    <li class=""><a class="" aria-current="page" href="/about">
+        <!--v-if-->default slot
+      </a>
+      <!--v-if-->
+    </li>
+  </ol>
+</nav>"
+`;
+
 exports[`Breadcrumb > renders with divider correctly 1`] = `
 "<nav aria-label="Breadcrumb">
-  <ol class=""></ol>
+  <ol class="">
+    <li class=""><a class="" href="/">
+        <!--v-if-->label
+      </a><span role="presentation">|</span></li>
+    <li class=""><a class="" aria-current="page" href="/about">
+        <!--v-if-->label
+      </a>
+      <!--v-if-->
+    </li>
+  </ol>
+</nav>"
+`;
+
+exports[`Breadcrumb > renders with divider slot correctly 1`] = `
+"<nav aria-label="Breadcrumb">
+  <ol class="">
+    <li class=""><a class="" href="/">
+        <!--v-if-->label
+      </a>divider slot</li>
+    <li class=""><a class="" aria-current="page" href="/about">
+        <!--v-if-->label
+      </a>
+      <!--v-if-->
+    </li>
+  </ol>
+</nav>"
+`;
+
+exports[`Breadcrumb > renders with icon correctly 1`] = `
+"<nav aria-label="Breadcrumb">
+  <ol class="">
+    <li class=""><a class="" href="/"><span class="i-heroicons-academic-cap flex-shrink-0 w-5 h-5"></span>label</a><span class="i-heroicons-chevron-right-20-solid rtl:i-heroicons-chevron-left-20-solid flex-shrink-0 w-5 h-5" role="presentation"></span></li>
+    <li class=""><a class="" aria-current="page" href="/about"><span class="i-heroicons-code-bracket-square flex-shrink-0 w-5 h-5"></span>label</a>
+      <!--v-if-->
+    </li>
+  </ol>
+</nav>"
+`;
+
+exports[`Breadcrumb > renders with icon slot correctly 1`] = `
+"<nav aria-label="Breadcrumb">
+  <ol class="">
+    <li class=""><a class="" href="/">icon slotlabel</a><span class="i-heroicons-chevron-right-20-solid rtl:i-heroicons-chevron-left-20-solid flex-shrink-0 w-5 h-5" role="presentation"></span></li>
+    <li class=""><a class="" aria-current="page" href="/about">icon slotlabel</a>
+      <!--v-if-->
+    </li>
+  </ol>
 </nav>"
 `;
 
 exports[`Breadcrumb > renders with links correctly 1`] = `
 "<nav aria-label="Breadcrumb">
-  <ol class=""></ol>
+  <ol class="">
+    <li class=""><a class="" href="/">
+        <!--v-if-->label
+      </a><span class="i-heroicons-chevron-right-20-solid rtl:i-heroicons-chevron-left-20-solid flex-shrink-0 w-5 h-5" role="presentation"></span></li>
+    <li class=""><a class="" aria-current="page" href="/about">
+        <!--v-if-->label
+      </a>
+      <!--v-if-->
+    </li>
+  </ol>
 </nav>"
 `;
