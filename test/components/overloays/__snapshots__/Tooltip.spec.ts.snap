@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Tooltip > renders basic case correctly 1`] = `
-"<div>label<div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
+"<div> Hover <div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
     <transition-stub appear="true" persisted="false" css="true">
       <div>
         <!--v-if-->
@@ -29,7 +29,7 @@ exports[`Tooltip > renders with default slot correctly 1`] = `
 `;
 
 exports[`Tooltip > renders with shortcuts correctly 1`] = `
-"<div>label<div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
+"<div> Hover <div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
     <transition-stub appear="true" persisted="false" css="true">
       <div>
         <!--v-if-->
@@ -41,7 +41,7 @@ exports[`Tooltip > renders with shortcuts correctly 1`] = `
 `;
 
 exports[`Tooltip > renders with slot text correctly 1`] = `
-"<div>label<div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
+"<div> Hover <div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
     <transition-stub appear="true" persisted="false" css="true">
       <div>
         <!--v-if-->
@@ -55,7 +55,7 @@ exports[`Tooltip > renders with slot text correctly 1`] = `
 `;
 
 exports[`Tooltip > renders with text correctly 1`] = `
-"<div>label<div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
+"<div> Hover <div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
     <transition-stub appear="true" persisted="false" css="true">
       <div>
         <!--v-if-->

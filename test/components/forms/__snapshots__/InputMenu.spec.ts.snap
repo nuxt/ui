@@ -2,8 +2,8 @@
 
 exports[`InputMenu > renders basic case correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_0" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_1">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_1" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-0" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-1">
+    <!--v-if--><button id="headlessui-combobox-button-1" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -11,8 +11,8 @@ exports[`InputMenu > renders basic case correctly 1`] = `
 
 exports[`InputMenu > renders with custom type correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_10" aria-expanded="false" aria-autocomplete="list" role="combobox" type="password" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_11">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_11" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-10" aria-expanded="false" aria-autocomplete="list" role="combobox" type="password" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-11">
+    <!--v-if--><button id="headlessui-combobox-button-11" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -20,8 +20,8 @@ exports[`InputMenu > renders with custom type correctly 1`] = `
 
 exports[`InputMenu > renders with disabled correctly 1`] = `
 "<div class="" data-headlessui-state="disabled">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_6" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" disabled="" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_7">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_7" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" disabled="" data-headlessui-state="disabled" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-6" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" disabled="" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-7">
+    <!--v-if--><button id="headlessui-combobox-button-7" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" disabled="" data-headlessui-state="disabled" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -29,15 +29,15 @@ exports[`InputMenu > renders with disabled correctly 1`] = `
 
 exports[`InputMenu > renders with icon correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_17" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_18"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><button id="headlessui-combobox-button-PoJY0fGVvn_18" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
+  <div class=""><input value="" id="headlessui-combobox-input-17" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-18"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><button id="headlessui-combobox-button-18" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`InputMenu > renders with id correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="comboboxId" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_14">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_14" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="comboboxId" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-14">
+    <!--v-if--><button id="headlessui-combobox-button-14" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -45,8 +45,8 @@ exports[`InputMenu > renders with id correctly 1`] = `
 
 exports[`InputMenu > renders with inputClass correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_37" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="w-full" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_38">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_38" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-37" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="w-full" autocomplete="off" aria-labelledby="headlessui-combobox-button-38">
+    <!--v-if--><button id="headlessui-combobox-button-38" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -54,15 +54,15 @@ exports[`InputMenu > renders with inputClass correctly 1`] = `
 
 exports[`InputMenu > renders with leading and icon correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_19" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_20"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><button id="headlessui-combobox-button-PoJY0fGVvn_20" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
+  <div class=""><input value="" id="headlessui-combobox-input-19" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-20"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><button id="headlessui-combobox-button-20" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`InputMenu > renders with leading correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_15" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_16">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_16" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-15" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-16">
+    <!--v-if--><button id="headlessui-combobox-button-16" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -70,22 +70,22 @@ exports[`InputMenu > renders with leading correctly 1`] = `
 
 exports[`InputMenu > renders with leading slots correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_25" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_26"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">leading slot</span><button id="headlessui-combobox-button-PoJY0fGVvn_26" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
+  <div class=""><input value="" id="headlessui-combobox-input-25" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-26"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">leading slot</span><button id="headlessui-combobox-button-26" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`InputMenu > renders with leadingIcon correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_21" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_22"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><button id="headlessui-combobox-button-PoJY0fGVvn_22" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
+  <div class=""><input value="" id="headlessui-combobox-input-21" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-22"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><button id="headlessui-combobox-button-22" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`InputMenu > renders with loading and trailing correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_33" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_34">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_34" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-33" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-34">
+    <!--v-if--><button id="headlessui-combobox-button-34" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -93,14 +93,14 @@ exports[`InputMenu > renders with loading and trailing correctly 1`] = `
 
 exports[`InputMenu > renders with loading correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_27" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_28"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span><button id="headlessui-combobox-button-PoJY0fGVvn_28" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
+  <div class=""><input value="" id="headlessui-combobox-input-27" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-28"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span><button id="headlessui-combobox-button-28" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`InputMenu > renders with loading icon correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_23" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_24"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span><button id="headlessui-combobox-button-PoJY0fGVvn_24" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
+  <div class=""><input value="" id="headlessui-combobox-input-23" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-24"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span><button id="headlessui-combobox-button-24" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
   <!--v-if-->
 </div>"
 `;
@@ -108,8 +108,8 @@ exports[`InputMenu > renders with loading icon correctly 1`] = `
 exports[`InputMenu > renders with name correctly 1`] = `
 "<input style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0px; display: none;" type="hidden" hidden="" readonly="" name="username">
 <div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_2" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" name="username" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_3">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_3" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-2" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" name="username" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-3">
+    <!--v-if--><button id="headlessui-combobox-button-3" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -117,8 +117,8 @@ exports[`InputMenu > renders with name correctly 1`] = `
 
 exports[`InputMenu > renders with nullable correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_12" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_13">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_13" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-12" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-13">
+    <!--v-if--><button id="headlessui-combobox-button-13" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -126,8 +126,8 @@ exports[`InputMenu > renders with nullable correctly 1`] = `
 
 exports[`InputMenu > renders with placeholder correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_4" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" placeholder="Enter your username" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_5">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_5" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-4" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" placeholder="Enter your username" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-5">
+    <!--v-if--><button id="headlessui-combobox-button-5" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -135,8 +135,8 @@ exports[`InputMenu > renders with placeholder correctly 1`] = `
 
 exports[`InputMenu > renders with required correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_8" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" required="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_9">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_9" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-8" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" required="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-9">
+    <!--v-if--><button id="headlessui-combobox-button-9" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -144,8 +144,8 @@ exports[`InputMenu > renders with required correctly 1`] = `
 
 exports[`InputMenu > renders with trailing and icon correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_29" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_30">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_30" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-29" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-30">
+    <!--v-if--><button id="headlessui-combobox-button-30" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"
@@ -153,15 +153,15 @@ exports[`InputMenu > renders with trailing and icon correctly 1`] = `
 
 exports[`InputMenu > renders with trailing slots correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_35" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_36"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">trailing slot</span><button id="headlessui-combobox-button-PoJY0fGVvn_36" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
+  <div class=""><input value="" id="headlessui-combobox-input-35" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-36"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">trailing slot</span><button id="headlessui-combobox-button-36" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`InputMenu > renders with trailingIcon correctly 1`] = `
 "<div class="" data-headlessui-state="">
-  <div class=""><input value="" id="headlessui-combobox-input-PoJY0fGVvn_31" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-PoJY0fGVvn_32">
-    <!--v-if--><button id="headlessui-combobox-button-PoJY0fGVvn_32" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
+  <div class=""><input value="" id="headlessui-combobox-input-31" aria-expanded="false" aria-autocomplete="list" role="combobox" type="text" tabindex="0" data-headlessui-state="" class="" autocomplete="off" aria-labelledby="headlessui-combobox-button-32">
+    <!--v-if--><button id="headlessui-combobox-button-32" type="button" tabindex="-1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" class="absolute inset-y-0 end-0 flex items-center px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></button>
   </div>
   <!--v-if-->
 </div>"

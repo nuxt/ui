@@ -16,6 +16,4 @@ exports[`Link > renders with custom as prop correctly 1`] = `"<a type="button"><
 
 exports[`Link > renders with custom type prop correctly 1`] = `"<button type="submit"></button>"`;
 
-exports[`Link > renders with exact correctly 1`] = `"<button type="button"></button>"`;
-
 exports[`Link > renders with inactive correctly 1`] = `"<a class="text-gray-300"></a>"`;

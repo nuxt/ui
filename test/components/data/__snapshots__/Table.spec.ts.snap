@@ -23,29 +23,6 @@ exports[`Table > renders basic case correctly 1`] = `
 </div>"
 `;
 
-exports[`Table > renders columns attribute correctly 1`] = `
-"<div>
-  <table class="">
-    <thead class="">
-      <tr class="">
-        <!--v-if-->
-        <th scope="col" class=""><span></span></th>
-        <th scope="col" class=""><span></span></th>
-      </tr>
-    </thead>
-    <tbody class="">
-      <tr>
-        <td colspan="2">
-          <div class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14"><span class="i-heroicons-circle-stack-20-solid" aria-hidden="true"></span>
-            <p class="">No items.</p>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>"
-`;
-
 exports[`Table > renders custom sort button correctly 1`] = `
 "<div>
   <table class="">

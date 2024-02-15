@@ -7,13 +7,6 @@ exports[`Meter > renders basic case correctly 1`] = `
 </div>"
 `;
 
-exports[`Meter > renders with custom class correctly 1`] = `
-"<div>
-  <!--v-if--><meter min="0" max="100" class="appearance-none block w-full bg-none overflow-y-hidden bg-gray-200 dark:bg-gray-700 rounded-full text-primary-500 dark:text-primary-400 h-2 [&::-webkit-meter-inner-element]:block [&::-webkit-meter-inner-element]:relative [&::-webkit-meter-inner-element]:border-none [&::-webkit-meter-inner-element]:bg-none [&::-webkit-meter-inner-element]:bg-transparent [&::-webkit-meter-bar]:border-none [&::-webkit-meter-bar]:bg-none [&::-webkit-meter-bar]:bg-transparent [&::-webkit-meter-optimum-value]:border-none [&::-webkit-meter-optimum-value]:bg-none [&::-webkit-meter-optimum-value]:bg-current [&::-moz-meter-bar]:border-none [&::-moz-meter-bar]:bg-none [&::-moz-meter-bar]:bg-current [&::-webkit-meter-optimum-value]:transition-all [&::-moz-meter-bar]:transition-all [&::-webkit-meter-optimum-value]:rounded-full [&::-moz-meter-bar]:rounded-full [&::-webkit-meter-optimum-value]:h-2 [&::-moz-meter-bar]:h-2" value="0"></meter>
-  <!--v-if-->
-</div>"
-`;
-
 exports[`Meter > renders with custom color correctly 1`] = `
 "<div>
   <!--v-if--><meter min="0" max="100" class="appearance-none block w-full bg-none overflow-y-hidden bg-gray-200 dark:bg-gray-700 rounded-full text-red-500 dark:text-red-400 h-2 [&::-webkit-meter-inner-element]:block [&::-webkit-meter-inner-element]:relative [&::-webkit-meter-inner-element]:border-none [&::-webkit-meter-inner-element]:bg-none [&::-webkit-meter-inner-element]:bg-transparent [&::-webkit-meter-bar]:border-none [&::-webkit-meter-bar]:bg-none [&::-webkit-meter-bar]:bg-transparent [&::-webkit-meter-optimum-value]:border-none [&::-webkit-meter-optimum-value]:bg-none [&::-webkit-meter-optimum-value]:bg-current [&::-moz-meter-bar]:border-none [&::-moz-meter-bar]:bg-none [&::-moz-meter-bar]:bg-current [&::-webkit-meter-optimum-value]:transition-all [&::-moz-meter-bar]:transition-all [&::-webkit-meter-optimum-value]:rounded-full [&::-moz-meter-bar]:rounded-full [&::-webkit-meter-optimum-value]:h-2 [&::-moz-meter-bar]:h-2" value="0"></meter>

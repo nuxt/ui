@@ -3,22 +3,7 @@
 exports[`SelectMenu > renders basic case correctly 1`] = `
 "<div class="" data-headlessui-state="">
   <!--v-if-->
-  <div id="headlessui-listbox-button-Uwh3IPE507_1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" role="button" class="">label</div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`SelectMenu > renders width icon correctly 1`] = `
-"<div class="" data-headlessui-state="">
-  <!--v-if-->
-  <div id="headlessui-listbox-button-Uwh3IPE507_2" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" role="button" class="">label</div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`SelectMenu > renders width required correctly 1`] = `
-"<div class="" data-headlessui-state=""><input required="" class="" tabindex="-1" aria-hidden="true">
-  <div id="headlessui-listbox-button-Uwh3IPE507_1" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" role="button" class="">label</div>
+  <div id="headlessui-listbox-button-0" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state="" role="button" class="">label</div>
   <!--v-if-->
 </div>"
 `;
