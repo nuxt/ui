@@ -54,7 +54,6 @@
 
 <script lang="ts">
 import { ref, toRef, toRefs, computed, defineComponent } from 'vue'
-import type { MaybeRefOrGetter } from '@vueuse/shared'
 import type { PropType } from 'vue'
 import { twMerge } from 'tailwind-merge'
 import { mergeConfig } from '../../utils'
