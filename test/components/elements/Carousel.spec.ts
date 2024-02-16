@@ -6,7 +6,7 @@ import uiCarousel from '../../../src/runtime/ui.config/elements/carousel'
 
 describe('Carousel', () => {
   it.each([
-    ['basic case', { props: { ui: { wrapper: ui.wrapper } } }],
+    ['basic case', { props: { ui: { wrapper: uiCarousel.wrapper } } }],
     ['with arrows and indicators', { props: { arrows: true, indicators: true, ui: uiCarousel } }],
     ['with arrows only', { props: { arrows: true, indicators: false, ui: uiCarousel } }],
     ['with indicators only', { props: { arrows: false, indicators: true, ui: uiCarousel } }],
