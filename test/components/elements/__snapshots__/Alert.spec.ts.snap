@@ -17,15 +17,15 @@ exports[`Alert > renders basic case correctly 1`] = `
 
 exports[`Alert > renders with actions correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
-  <div class="flex items-center">
+  <div class="flex gap-3 items-center">
     <!--v-if-->
     <!--v-if-->
-    <div class="">
-      <p class="">Alert Title</p>
+    <div class="w-0 flex-1">
+      <p class="text-sm font-medium">Alert Title</p>
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="mt-0"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-xs gap-x-1.5 p-1.5 text-primary-500 hover:text-primary-600 disabled:text-primary-500 dark:text-primary-400 dark:hover:text-primary-500 dark:disabled:text-primary-400 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center"></button>
+    <div class="flex items-center gap-2 flex-shrink-0 mt-0"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-xs gap-x-1.5 p-1.5 text-primary-500 hover:text-primary-600 disabled:text-primary-500 dark:text-primary-400 dark:hover:text-primary-500 dark:disabled:text-primary-400 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center"></button>
       <!--v-if-->
     </div>
   </div>
@@ -34,10 +34,10 @@ exports[`Alert > renders with actions correctly 1`] = `
 
 exports[`Alert > renders with avatar correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
-  <div class="flex items-center">
-    <!--v-if--><span class="relative inline-flex items-center justify-center flex-shrink-0 rounded-full h-8 w-8 text-sm flex-shrink-0 self-center"><img class="rounded-full h-8 w-8 text-sm" alt="User Avatar" src="avatar.jpg"><!--v-if--></span>
-    <div class="">
-      <p class="">Alert Title</p>
+  <div class="flex gap-3 items-center">
+    <!--v-if--><span class="relative inline-flex items-center justify-center flex-shrink-0 rounded-full h-10 w-10 text-base flex-shrink-0 self-center"><img class="rounded-full h-10 w-10 text-base" alt="User Avatar" src="avatar.jpg"><!--v-if--></span>
+    <div class="w-0 flex-1">
+      <p class="text-sm font-medium">Alert Title</p>
       <!--v-if-->
       <!--v-if-->
     </div>
@@ -48,15 +48,15 @@ exports[`Alert > renders with avatar correctly 1`] = `
 
 exports[`Alert > renders with close button correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
-  <div class="flex items-center">
+  <div class="flex gap-3 items-center">
     <!--v-if-->
     <!--v-if-->
-    <div class="">
-      <p class="">Alert Title</p>
+    <div class="w-0 flex-1">
+      <p class="text-sm font-medium">Alert Title</p>
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div class="mt-0">
+    <div class="flex items-center gap-2 flex-shrink-0 mt-0">
       <!--v-if--><button type="button" class="focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 inline-flex items-center" aria-label="Close">
         <!--v-if--><span class="">Close</span>
         <!--v-if-->
@@ -113,12 +113,12 @@ exports[`Alert > renders with description correctly 1`] = `
 
 exports[`Alert > renders with description slot correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
-  <div class="flex items-start">
+  <div class="flex gap-3 items-start">
     <!--v-if-->
     <!--v-if-->
-    <div class="">
-      <p class="">Alert Title</p>
-      <p class="">This is an alert description slot</p>
+    <div class="w-0 flex-1">
+      <p class="text-sm font-medium">Alert Title</p>
+      <p class="mt-1 text-sm leading-4 opacity-90">This is an alert description slot</p>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -128,10 +128,10 @@ exports[`Alert > renders with description slot correctly 1`] = `
 
 exports[`Alert > renders with icon correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
-  <div class="flex items-center"><span class="heroicons-information-circle flex-shrink-0 w-5 h-5"></span>
+  <div class="flex gap-3 items-center"><span class="heroicons-information-circle flex-shrink-0 w-5 h-5"></span>
     <!--v-if-->
-    <div class="">
-      <p class="">Alert Title</p>
+    <div class="w-0 flex-1">
+      <p class="text-sm font-medium">Alert Title</p>
       <!--v-if-->
       <!--v-if-->
     </div>
@@ -157,11 +157,11 @@ exports[`Alert > renders with tile correctly 1`] = `
 
 exports[`Alert > renders with title slot correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
-  <div class="flex items-center">
+  <div class="flex gap-3 items-center">
     <!--v-if-->
     <!--v-if-->
-    <div class="">
-      <p class="">Alert Title slot</p>
+    <div class="w-0 flex-1">
+      <p class="text-sm font-medium">Alert Title slot</p>
       <!--v-if-->
       <!--v-if-->
     </div>

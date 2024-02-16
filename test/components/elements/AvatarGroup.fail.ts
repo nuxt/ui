@@ -5,7 +5,7 @@ import ComponentRender from '../component-render'
 
 describe('AvatarGroup', () => {
   it.each([
-    // TODO: trye to fix TypeError: The "path" argument must be of type string. Received undefined
+    // TODO: try to fix TypeError: The "path" argument must be of type string. Received undefined
     // ['basic case', {}],
     // ['with max', { props: { max: 20 } }],
     // @ts-ignore

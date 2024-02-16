@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { UButton } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
-import ui from '../../../src/runtime/ui.config/elements/button'
+import uiButton from '../../../src/runtime/ui.config/elements/button'
 
 describe('Button', () => {
   it.each([
@@ -22,8 +22,8 @@ describe('Button', () => {
     ['with leading slot', { slots: { leading: 'leading slot' } }],
     ['with trailingIcon', { props: { trailing: true, trailingIcon: 'i-heroicons-arrow-right' } }],
     ['with leadingIcon', { props: { leading: true, leadingIcon: 'i-heroicons-arrow-left' } }],
-    ['with square', { props: { label: 'submit', square: true, size: 'sm', ui: { square: { sm: ui.square.sm } } } }],
-    ['with truncate', { props: { label: 'submit', truncate: true, ui: { truncate: ui.truncate } } }],
+    ['with square', { props: { label: 'submit', square: true, size: 'sm', ui: uiButton } }],
+    ['with truncate', { props: { label: 'submit', truncate: true, ui: uiButton } }],
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Button.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UButton)
