@@ -2,52 +2,52 @@
 
 exports[`Tabs > renders basic case correctly 1`] = `
 "<button aria-hidden="true" style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0px;" type="button"></button>
-<div>
-  <div role="tablist" aria-orientation="horizontal" class="inline-grid items-center" style="grid-template-columns: repeat(0, minmax(0, 1fr));">
-    <div class="">
-      <div class="w-full h-full"></div>
+<div class="relative space-y-2">
+  <div role="tablist" aria-orientation="horizontal" class="relative bg-gray-100 dark:bg-gray-800 rounded-lg p-1 w-full h-10 inline-grid items-center" style="grid-template-columns: repeat(0, minmax(0, 1fr));">
+    <div class="absolute top-[4px] left-[4px] duration-200 ease-out focus:outline-none">
+      <div class="w-full h-full bg-white dark:bg-gray-900 rounded-md shadow-sm"></div>
     </div>
   </div>
-  <div class=""></div>
+  <div class="relative w-full"></div>
 </div>"
 `;
 
 exports[`Tabs > renders with items correctly 1`] = `
-"<div>
-  <div role="tablist" aria-orientation="horizontal" class="inline-grid items-center" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
-    <div class="" style="top: 0px; left: 0px; width: 0px; height: 0px;">
-      <div class="w-full h-full"></div>
-    </div><button class="relative inline-flex items-center justify-center flex-shrink-0 w-full ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out" id="headlessui-tabs-tab-0" role="tab" aria-selected="true" tabindex="0" data-headlessui-state="selected" type="button" aria-controls="headlessui-tabs-panel-2"><span class="truncate">Item 1</span></button><button class="relative inline-flex items-center justify-center flex-shrink-0 w-full ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out" id="headlessui-tabs-tab-1" role="tab" aria-selected="false" data-headlessui-state="" type="button" aria-controls="headlessui-tabs-panel-3"><span class="truncate">Item 2</span></button>
+"<div class="relative space-y-2">
+  <div role="tablist" aria-orientation="horizontal" class="relative bg-gray-100 dark:bg-gray-800 rounded-lg p-1 w-full h-10 inline-grid items-center" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+    <div class="absolute top-[4px] left-[4px] duration-200 ease-out focus:outline-none" style="top: 0px; left: 0px; width: 0px; height: 0px;">
+      <div class="w-full h-full bg-white dark:bg-gray-900 rounded-md shadow-sm"></div>
+    </div><button class="relative inline-flex items-center justify-center flex-shrink-0 w-full ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out h-8 px-3 text-sm font-medium rounded-md text-gray-900 dark:text-white" id="headlessui-tabs-tab-0" role="tab" aria-selected="true" tabindex="0" data-headlessui-state="selected" type="button" aria-controls="headlessui-tabs-panel-2"><span class="truncate">Item 1</span></button><button class="relative inline-flex items-center justify-center flex-shrink-0 w-full ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out h-8 px-3 text-sm font-medium rounded-md text-gray-500 dark:text-gray-400" id="headlessui-tabs-tab-1" role="tab" aria-selected="false" data-headlessui-state="" type="button" aria-controls="headlessui-tabs-panel-3"><span class="truncate">Item 2</span></button>
   </div>
-  <div class="">
-    <div id="headlessui-tabs-panel-2" role="tabpanel" tabindex="0" data-headlessui-state="selected" class="" aria-labelledby="headlessui-tabs-tab-0"></div>
-    <div id="headlessui-tabs-panel-3" role="tabpanel" hidden="" style="display: none;" data-headlessui-state="" class="" aria-labelledby="headlessui-tabs-tab-1"></div>
+  <div class="relative w-full">
+    <div id="headlessui-tabs-panel-2" role="tabpanel" tabindex="0" data-headlessui-state="selected" class="focus:outline-none" aria-labelledby="headlessui-tabs-tab-0"></div>
+    <div id="headlessui-tabs-panel-3" role="tabpanel" hidden="" style="display: none;" data-headlessui-state="" class="focus:outline-none" aria-labelledby="headlessui-tabs-tab-1"></div>
   </div>
 </div>"
 `;
 
 exports[`Tabs > renders with orientation correctly 1`] = `
 "<button aria-hidden="true" style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0px;" type="button"></button>
-<div>
-  <div role="tablist" aria-orientation="vertical" class="">
-    <div class="">
-      <div class="w-full h-full"></div>
+<div class="relative space-y-2">
+  <div role="tablist" aria-orientation="vertical" class="relative bg-gray-100 dark:bg-gray-800 rounded-lg p-1 w-full">
+    <div class="absolute top-[4px] left-[4px] duration-200 ease-out focus:outline-none">
+      <div class="w-full h-full bg-white dark:bg-gray-900 rounded-md shadow-sm"></div>
     </div>
   </div>
-  <div class=""></div>
+  <div class="relative w-full"></div>
 </div>"
 `;
 
 exports[`Tabs > renders with tabs slot correctly 1`] = `
-"<div>
-  <div role="tablist" aria-orientation="horizontal" class="inline-grid items-center" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
-    <div class="" style="top: 0px; left: 0px; width: 0px; height: 0px;">
-      <div class="w-full h-full"></div>
-    </div><button class="relative inline-flex items-center justify-center flex-shrink-0 w-full ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out" id="headlessui-tabs-tab-4" role="tab" aria-selected="true" tabindex="0" data-headlessui-state="selected" type="button" aria-controls="headlessui-tabs-panel-6">tab slot</button><button class="relative inline-flex items-center justify-center flex-shrink-0 w-full ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out" id="headlessui-tabs-tab-5" role="tab" aria-selected="false" data-headlessui-state="" type="button" aria-controls="headlessui-tabs-panel-7">tab slot</button>
+"<div class="relative space-y-2">
+  <div role="tablist" aria-orientation="horizontal" class="relative bg-gray-100 dark:bg-gray-800 rounded-lg p-1 w-full h-10 inline-grid items-center" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+    <div class="absolute top-[4px] left-[4px] duration-200 ease-out focus:outline-none" style="top: 0px; left: 0px; width: 0px; height: 0px;">
+      <div class="w-full h-full bg-white dark:bg-gray-900 rounded-md shadow-sm"></div>
+    </div><button class="relative inline-flex items-center justify-center flex-shrink-0 w-full ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out h-8 px-3 text-sm font-medium rounded-md text-gray-900 dark:text-white" id="headlessui-tabs-tab-4" role="tab" aria-selected="true" tabindex="0" data-headlessui-state="selected" type="button" aria-controls="headlessui-tabs-panel-6">tab slot</button><button class="relative inline-flex items-center justify-center flex-shrink-0 w-full ui-focus-visible:outline-0 ui-focus-visible:ring-2 ui-focus-visible:ring-primary-500 dark:ui-focus-visible:ring-primary-400 ui-not-focus-visible:outline-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out h-8 px-3 text-sm font-medium rounded-md text-gray-500 dark:text-gray-400" id="headlessui-tabs-tab-5" role="tab" aria-selected="false" data-headlessui-state="" type="button" aria-controls="headlessui-tabs-panel-7">tab slot</button>
   </div>
-  <div class="">
-    <div id="headlessui-tabs-panel-6" role="tabpanel" tabindex="0" data-headlessui-state="selected" class="" aria-labelledby="headlessui-tabs-tab-4"></div>
-    <div id="headlessui-tabs-panel-7" role="tabpanel" hidden="" style="display: none;" data-headlessui-state="" class="" aria-labelledby="headlessui-tabs-tab-5"></div>
+  <div class="relative w-full">
+    <div id="headlessui-tabs-panel-6" role="tabpanel" tabindex="0" data-headlessui-state="selected" class="focus:outline-none" aria-labelledby="headlessui-tabs-tab-4"></div>
+    <div id="headlessui-tabs-panel-7" role="tabpanel" hidden="" style="display: none;" data-headlessui-state="" class="focus:outline-none" aria-labelledby="headlessui-tabs-tab-5"></div>
   </div>
 </div>"
 `;
