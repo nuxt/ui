@@ -24,7 +24,7 @@ describe('InputMenu', () => {
     ['with trailingIcon', { props: { trailing: true, trailingIcon: 'i-heroicons-battery-50-solid' } }],
     ['with loading and trailing', { props: { trailing: true, loading: true } }],
     ['with trailing slots', { slots: { leading: 'trailing slot' } }],
-    ['with inputClass', { props: { inputClass: 'w-full' } }],
+    ['with inputClass', { props: { inputClass: 'w-full' } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof InputMenu.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UInputMenu)

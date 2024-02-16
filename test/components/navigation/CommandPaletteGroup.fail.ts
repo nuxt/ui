@@ -6,7 +6,7 @@ import ComponentRender from '../component-render'
 describe('CommandPaletteGroup', () => {
   //TODO: try to fix TypeError: Cannot read properties of undefined (reading 'undefined')
   it.each([
-    ['basic case', {}],
+    ['basic case', {}]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof CommandPaletteGroup.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UCommandPaletteGroup)

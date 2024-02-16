@@ -16,7 +16,7 @@ describe('Checkbox', () => {
     ['with help', { props: { label: 'Label', help: 'Help' } }],
     ['with required', { props: { label: 'Label', required: true } }],
     ['with custom color', { props: { label: 'Label', color: 'red' } }],
-    ['with custom input class', { props: { inputClass: 'w-full h-full' } }],
+    ['with custom input class', { props: { inputClass: 'w-full h-full' } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Checkbox.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UCheckbox)

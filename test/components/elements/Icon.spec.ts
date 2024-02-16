@@ -7,7 +7,7 @@ describe('Icon', () => {
   it.each([
     ['basic case', {}],
     ['with name', { props: { name: 'i-heroicons-academic-cap' } }],
-    ['with dynamic', { props: { name: 'i-heroicons-arrow-small-left-solid', dynamic: true } }],
+    ['with dynamic', { props: { name: 'i-heroicons-arrow-small-left-solid', dynamic: true } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Icon.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UIcon)

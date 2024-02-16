@@ -11,9 +11,9 @@ describe('Toggle', () => {
     ['with name', { props: { name: 'Toggle name' } }],
     ['with disabled', { props: { disabled: true } }],
     ['with onIcon', { props: { onIcon: 'i-heroicons-book-open', ui: uiToggle } }],
-    ['with offIcon', { props: { offIcon: 'i-heroicons-archive-box', ui: uiToggle } }],
-      ['with color', { props: { color: 'red' } }],
-      ['with size', { props: { size: 'sm' } }],
+    ['with offIcon', { props: { offIcon: 'i-heroicons-archive-box', ui: uiToggle } }],
+    ['with color', { props: { color: 'red' } }],
+    ['with size', { props: { size: 'sm' } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Toggle.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UToggle)

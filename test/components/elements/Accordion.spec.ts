@@ -2,11 +2,11 @@ import { describe, it, expect } from 'vitest'
 import { UAccordion } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
-import uiAccordion from '../../../src/runtime/ui.config/elements/accordion'
+// import uiAccordion from '../../../src/runtime/ui.config/elements/accordion'
 
 describe('Accordion', () => {
   it.each([
-    ['basic case', {}],
+    ['basic case', {}]
     //TODO: check disclosure errors
     // ['renders with multiple items', { props: { items: [{ content: 'Item 1' }, { content: 'Item 2' }] }, ui: uiAccordion }],
     // ['renders with defaultOpen set to true', { props: { items: [{ content: 'Accordion Content' }], defaultOpen: true }, ui: uiAccordion }],

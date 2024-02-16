@@ -18,7 +18,7 @@ describe('CommandPalette', () => {
     ['with icon', { props: { icon: 'i-heroicons-arrow-up-on-square-stack', ui: uiCommandpalette } }],
     ['with selected icon', { props: { selectedIcon: 'i-heroicons-check', groups: [{ key: '1', label: 'Group 1', commands: [{ label: 'Command 1' }] }], ui: uiCommandpalette } }],
     ['with close button', { props: { closeButton: { label: 'close button' }, ui: uiCommandpalette } }],
-    ['with emptystate', { props: { emptyState: { icon: 'i-heroicons-academic-cap', label: 'Emptystate label', queryLabel: 'Emptystate queryLabel' }, ui: uiCommandpalette } }],
+    ['with emptystate', { props: { emptyState: { icon: 'i-heroicons-academic-cap', label: 'Emptystate label', queryLabel: 'Emptystate queryLabel' }, ui: uiCommandpalette } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof CommandPalette.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UCommandPalette)

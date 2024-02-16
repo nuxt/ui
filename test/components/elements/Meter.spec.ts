@@ -15,7 +15,7 @@ describe('Meter', () => {
     ['with label slot', { slots: { label: 'label slot' } }],
     ['with icon', { slots: { label: 'label slot' }, props: { icon: 'i-heroicons-chart-bar' } }],
     ['with custom size', { props: { size: 'lg' } }],
-    ['with custom color', { props: { color: 'red' } }],
+    ['with custom color', { props: { color: 'red' } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Meter.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UMeter)

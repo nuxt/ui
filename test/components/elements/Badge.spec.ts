@@ -9,7 +9,7 @@ describe('Badge', () => {
     ['with label', { props: { label: 'Badge' } }],
     ['with size', { props: { label: 'Badge', size: 'lg' } }],
     ['with color', { props: { label: 'Badge', color: 'red' } }],
-    ['with variant', { props: { label: 'Badge', variant: 'outline' } }],
+    ['with variant', { props: { label: 'Badge', variant: 'outline' } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Badge.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UBadge)

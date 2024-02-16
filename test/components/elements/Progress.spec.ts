@@ -12,7 +12,7 @@ describe('Progress', () => {
     ['with custom max', { props: { max: [200] } }],
     ['with steps', { props: { max: [50, 100, 150, 200] } }],
     ['with custom size', { props: { size: 'sm' } }],
-    ['with custom color', { props: { color: 'red' } }],
+    ['with custom color', { props: { color: 'red' } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Progress.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UProgress)

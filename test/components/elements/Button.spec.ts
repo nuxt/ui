@@ -23,7 +23,7 @@ describe('Button', () => {
     ['with trailingIcon', { props: { trailing: true, trailingIcon: 'i-heroicons-arrow-right' } }],
     ['with leadingIcon', { props: { leading: true, leadingIcon: 'i-heroicons-arrow-left' } }],
     ['with square', { props: { label: 'submit', square: true, size: 'sm', ui: uiButton } }],
-    ['with truncate', { props: { label: 'submit', truncate: true, ui: uiButton } }],
+    ['with truncate', { props: { label: 'submit', truncate: true, ui: uiButton } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Button.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UButton)

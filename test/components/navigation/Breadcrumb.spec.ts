@@ -12,7 +12,7 @@ describe('Breadcrumb', () => {
     ['with icon', { props: { links: [{ label: 'Home', to: '/', icon: 'i-heroicons-academic-cap' }, { label: 'About', to: '/about', icon: 'i-heroicons-code-bracket-square' }], ui: uiBreadcrumb } }],
     ['with icon slot', { slots: { icon: 'icon slot' }, props: { links: [{ label: 'Home', to: '/', icon: 'i-heroicons-academic-cap' }, { label: 'About', to: '/about', icon: 'i-heroicons-code-bracket-square' }], ui: uiBreadcrumb } }],
     ['with divider slot', { slots: { divider: 'divider slot' }, props: { links: [{ label: 'Home', to: '/' }, { label: 'About', to: '/about' }], ui: uiBreadcrumb } }],
-    ['with default slot', { slots: { default: 'default slot' }, props: { links: [{ label: 'Home', to: '/' }, { label: 'About', to: '/about' }], ui: uiBreadcrumb } }],
+    ['with default slot', { slots: { default: 'default slot' }, props: { links: [{ label: 'Home', to: '/' }, { label: 'About', to: '/about' }], ui: uiBreadcrumb } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Breadcrumb.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UBreadcrumb)

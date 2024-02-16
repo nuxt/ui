@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { UTable } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
@@ -108,7 +108,7 @@ describe('Table', () => {
           ui: uiTable
         }
       }
-    ],
+    ]
 
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Table.props>) => {

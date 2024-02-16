@@ -24,7 +24,7 @@ describe('Input', () => {
     ['with size', { props: { size: 'xs' } }],
     ['with color', { props: { color: 'red' } }],
     ['with variant', { props: { variant: 'outline' } }],
-    ['with input class', { props: { inputClass: 'w-full' } }],
+    ['with input class', { props: { inputClass: 'w-full' } }]
 
 
     // @ts-ignore

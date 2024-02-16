@@ -6,7 +6,7 @@ import ComponentRender from '../component-render'
 
 describe('Popover', () => {
   it.each([
-    ['basic case', {}],
+    ['basic case', {}]
     //TODO: try to fix Cannot read properties of undefined (reading 'Symbol(parentNode)')
     // ['with open', { props: { open: true } }],
 

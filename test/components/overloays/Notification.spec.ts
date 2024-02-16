@@ -6,13 +6,13 @@ import uiNotification from '../../../src/runtime/ui.config/overlays/notification
 
 describe('Notification', () => {
   it.each([
-    ['basic case', { props: { ui: uiNotification }}],
-    ['with title', { props: { title: 'Notification title', ui: uiNotification }}],
-    ['with description', { props: { description: 'Notification description', ui: uiNotification }}],
-    ['with icon', { props: { icon: 'i-heroicons-academic-cap', ui: uiNotification }}],
-    ['with avatar', { props: { avatar: { src: 'https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013', alt: 'nuxtui' }, ui: uiNotification }}],
-    ['with close button', { props: { closeButton: { label: 'close', color: 'red' }, ui: uiNotification }}],
-    ['with color', { props: {color:'red', ui: uiNotification }}],
+    ['basic case', { props: { ui: uiNotification } }],
+    ['with title', { props: { title: 'Notification title', ui: uiNotification } }],
+    ['with description', { props: { description: 'Notification description', ui: uiNotification } }],
+    ['with icon', { props: { icon: 'i-heroicons-academic-cap', ui: uiNotification } }],
+    ['with avatar', { props: { avatar: { src: 'https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013', alt: 'nuxtui' }, ui: uiNotification } }],
+    ['with close button', { props: { closeButton: { label: 'close', color: 'red' }, ui: uiNotification } }],
+    ['with color', { props: { color: 'red', ui: uiNotification } }]
     // // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UNotification.props>) => {
     let html = await ComponentRender(nameOrHtml, options, UNotification)

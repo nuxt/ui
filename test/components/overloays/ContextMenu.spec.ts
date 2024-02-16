@@ -5,7 +5,7 @@ import ComponentRender from '../component-render'
 
 describe('ContextMenu', () => {
   it.each([
-    ['basic case', {}],
+    ['basic case', {}]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof ContextMenu.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UContextMenu)

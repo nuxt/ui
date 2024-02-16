@@ -6,7 +6,7 @@ import ComponentRender from '../component-render'
 describe('Slideover', () => {
   it.each([
     //TODO: try to fix Error: A <Transition /> is used but it is missing a `:show="true | false"` prop.
-    ['basic case', {}],
+    ['basic case', {}]
     // ['with appear', { appear: true }],
     // ['with side', { side: 'left' }],
     // ['with overlay', { overlay: false }],
