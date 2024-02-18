@@ -12,7 +12,7 @@ Use the Form component to validate form data using schema libraries such as [Yup
 
 It works with the [FormGroup](/components/input) component to display error messages around form elements automatically.
 
-This component requires two props:
+The form component requires two props:
 - `state` - a reactive object holding the form's state.
 - `schema` - a schema object from [Yup](#yup), [Zod](#zod), [Joi](#joi), or [Valibot](#valibot).
 
@@ -161,7 +161,9 @@ async function onSubmit (event: FormSubmitEvent<any>) {
 ```
 ## Input events
 
-The Form component automatically triggers validation upon `submit`, `input`, `blur` or `change` events. This ensures that any errors are displayed as soon as the user interacts with the form elements. You can control when validation happens this using the `validate-on` prop.
+The Form component automatically triggers validation upon `submit`, `input`, `blur` or `change` events.
+
+This ensures that any errors are displayed as soon as the user interacts with the form elements. You can control when validation happens this using the `validate-on` prop.
 
 ::callout{icon="i-heroicons-light-bulb"}
 Note that the `input` event is not triggered until after the initial `blur` event. This is to prevent the form from being validated as the user is typing. You can override this behavior by setting the [`eager-validation`](/components/form-group#eager-validation) prop on [`FormGroup`](/components/form-group) to `true`.
