@@ -10,7 +10,7 @@ export interface FormErrorWithId extends FormError {
 }
 
 export interface Form<T> {
-  validate(path?: string, opts?: { silent?: boolean }): Promise<T>
+  validate(path?: string | string[], opts?: { silent?: boolean }): Promise<T>
   clear(path?: string): void
   errors: Ref<FormError[]>
   setErrors(errs: FormError[], path?: string): void
