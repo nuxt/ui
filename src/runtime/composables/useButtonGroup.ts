@@ -12,8 +12,8 @@ type ButtonGroupProps = {
 // make a ButtonGroupContext type for injection. Should include ButtonGroupProps
 type ButtonGroupContext = {
   children: ComponentInternalInstance[]
-  register(child: ComponentInternalInstance): void
-  unregister(child: ComponentInternalInstance): void
+  register (child: ComponentInternalInstance): void
+  unregister (child: ComponentInternalInstance): void
   orientation: 'horizontal' | 'vertical'
   size: string
   ui: Partial<typeof buttonGroup>
