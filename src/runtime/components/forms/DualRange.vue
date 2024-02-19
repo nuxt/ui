@@ -12,7 +12,6 @@
       type="range"
       :class="[inputClass, thumbClass, trackClass]"
       v-bind="attrs"
-      data-index="0"
       @change="onChange"
       @input="onInput"
     >
@@ -29,7 +28,6 @@
       type="range"
       :class="[inputClass, thumbClass, trackClass]"
       v-bind="attrs"
-      data-index="1"
       @change="onChange"
       @input="onInput"
     >
@@ -39,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { computed, toRef, defineComponent } from 'vue'
+import { computed, reactive, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
@@ -82,7 +80,7 @@ export default defineComponent({
     },
     step: {
       type: Number,
-      default: 1
+      default: 1,
     },
     size: {
       type: String as PropType<DualRangeSize>,
@@ -117,14 +115,7 @@ export default defineComponent({
 
     const { emitFormChange, emitFormInput, inputId, color, size, name } = useFormGroup(props, config)
 
-    const value = computed({
-      get () {
-        return props.modelValue
-      },
-      set (value) {
-        emit('update:modelValue', value)
-      }
-    })
+    const value = reactive(props.modelValue)
 
     const onChange = (event: Event) => {
       emit('change', event)
@@ -134,10 +125,14 @@ export default defineComponent({
     const onInput = (event: Event) => {
       emit('input', event)
       emitFormInput()
+      emit('update:modelValue', value)
 
-      const { modelValue, max } = props
-      if (modelValue[1] <= modelValue[0]) {
-        value.value = [modelValue[0], Math.min(modelValue[0] + 1, max)]
+      const [start, end] = value
+      if (start >= end) {
+        value[0] = Math.max(props.min, end - props.step)
+      }
+      if (end <= start) {
+        value[1] = Math.min(props.max, start + props.step)
       }
     }
 
@@ -188,9 +183,10 @@ export default defineComponent({
     })
 
     const progressStyle = computed(() => {
-      const { modelValue, min, max } = props
-      const progressStart = ((modelValue[0] - min) / max - min) * 100
-      const progressEnd = ((modelValue[1] - min) / max - min) * 100
+      const { min, max } = props
+      const [start, end] = value
+      const progressStart = ((start - min) / (max - min)) * 100
+      const progressEnd = ((end - min) / (max - min)) * 100
       const progressWidth = progressEnd - progressStart
       return {
         left: `${progressStart}%`,
