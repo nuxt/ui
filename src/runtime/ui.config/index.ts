@@ -29,6 +29,7 @@ export { default as radio } from './forms/radio'
 export { default as checkbox } from './forms/checkbox'
 export { default as toggle } from './forms/toggle'
 export { default as range } from './forms/range'
+export { default as dualRange } from './forms/dualRange'
 
 // Layout
 export { default as card } from './layout/card'
