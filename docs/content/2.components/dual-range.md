@@ -51,11 +51,9 @@ Use the `min` and `max` prop to configure the DualRange limits.
 
 ::component-card
 ---
-baseProps:
-  model-value: [100, 200]
 props:
   min: 0
-  max: 1000
+  max: 200
 ---
 ::
 
