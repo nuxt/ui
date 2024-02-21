@@ -460,7 +460,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
   inactive: true,
   children: [{
     name: 'ULandingHero',
-    to: '/pro/components/landing/landing-hero',
+    to: '/pro/components/landing-hero',
     class: [
       'inset-4',
       isAfterStep(steps.landing + 2) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
@@ -475,7 +475,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
     }]
   }, isAfterStep(steps.landing + 2) && {
     name: 'ULandingSection',
-    to: '/pro/components/landing/landing-section',
+    to: '/pro/components/landing-section',
     class: [
       'inset-4',
       isBeforeStep(steps.landing + 6) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]',
@@ -492,7 +492,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
       class: 'inset-x-4 top-16'
     }, {
       name: 'ULandingGrid',
-      to: '/pro/components/landing/landing-grid',
+      to: '/pro/components/landing-grid',
       class: ['inset-x-4 bottom-4 top-48', isAfterStep(steps.landing + 8) && 'grid grid-cols-4 gap-4 p-4'].filter(Boolean).join(' '),
       inactive: isAfterStep(steps.landing + 8),
       children: [isAfterStep(steps.landing + 9) ? {
@@ -500,7 +500,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         class: '!relative'
       } : {
         name: 'ULandingCard',
-        to: '/pro/components/landing/landing-card',
+        to: '/pro/components/landing-card',
         class: '!relative h-full',
         inactive: false
       }, isAfterStep(steps.landing + 9) ? {
@@ -508,7 +508,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         class: '!relative h-full'
       } : {
         name: 'ULandingCard',
-        to: '/pro/components/landing/landing-card',
+        to: '/pro/components/landing-card',
         class: '!relative h-full',
         inactive: false
       }, isAfterStep(steps.landing + 9) ? {
@@ -516,7 +516,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         class: '!relative h-full'
       } : {
         name: 'ULandingCard',
-        to: '/pro/components/landing/landing-card',
+        to: '/pro/components/landing-card',
         class: '!relative h-full',
         inactive: false
       }, isAfterStep(steps.landing + 9) ? {
@@ -524,14 +524,14 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         class: '!relative h-full'
       } : {
         name: 'ULandingCard',
-        to: '/pro/components/landing/landing-card',
+        to: '/pro/components/landing-card',
         class: '!relative h-full',
         inactive: false
       }]
     }]
   }, isAfterStep(steps.landing + 10) && {
     name: 'ULandingSection',
-    to: '/pro/components/landing/landing-section',
+    to: '/pro/components/landing-section',
     class: [
       'inset-4',
       isBeforeStep(steps.landing + 14) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]'
@@ -556,12 +556,12 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
 
 const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
   name: 'UPage',
-  to: '/pro/components/page/page',
+  to: '/pro/components/page',
   class: 'inset-x-0 top-20 bottom-20',
   inactive: isAfterStep(steps.docs + 1),
   children: [isAfterStep(steps.docs + 2) ? {
     name: 'UAside',
-    to: '/pro/components/aside/aside',
+    to: '/pro/components/aside',
     class: 'left-4 inset-y-4 w-64',
     inactive: isAfterStep(steps.docs + 3),
     children: [isAfterStep(steps.docs + 4) ? {
@@ -572,7 +572,7 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
       class: 'inset-x-4 top-4 h-9'
     }, isAfterStep(steps.docs + 5) ? {
       name: 'UNavigationTree',
-      to: '/pro/components/navigation/navigation-tree',
+      to: '/pro/components/navigation-tree',
       class: ['inset-x-4 top-[4.25rem] bottom-4', isAfterStep(steps.docs + 6) && '!bg-transparent !border-0'].join(' '),
       inactive: isAfterStep(steps.docs + 6),
       children: [{
@@ -588,12 +588,12 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
     class: 'left-4 inset-y-4 w-64'
   }, isAfterStep(steps.docs + 7) ? {
     name: 'UPage',
-    to: '/pro/components/page/page',
+    to: '/pro/components/page',
     class: 'left-72 right-4 inset-y-4',
     inactive: isAfterStep(steps.docs + 8),
     children: [...(isAfterStep(steps.docs + 9) ? [{
       name: 'UPageHeader',
-      to: '/pro/components/page/page-header',
+      to: '/pro/components/page-header',
       class: 'top-4 left-4 right-72 h-32',
       inactive: isAfterStep(steps.docs + 10),
       children: [{
@@ -602,7 +602,7 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
       }]
     }, {
       name: 'UPageBody',
-      to: '/pro/components/page/page-body',
+      to: '/pro/components/page-body',
       class: 'top-40 left-4 right-72 bottom-4 overflow-y-auto',
       inactive: isAfterStep(steps.docs + 11),
       children: [{
@@ -613,7 +613,7 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
         class: 'bottom-4 inset-x-4 h-28'
       } : {
         name: 'UDocsSurround',
-        to: '/pro/components/docs/docs-surround',
+        to: '/pro/components/docs-surround',
         class: 'bottom-4 inset-x-4 h-28',
         inactive: false
       }]
@@ -622,7 +622,7 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
       class: 'left-4 right-72 inset-y-4'
     }]), isAfterStep(steps.docs + 13) ? {
       name: 'UDocsToc',
-      to: '/pro/components/docs/docs-toc',
+      to: '/pro/components/docs-toc',
       class: 'right-4 inset-y-4 w-64',
       inactive: isAfterStep(steps.docs + 14),
       children: [{
@@ -641,7 +641,7 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
 
 const blocks = computed(() => [isAfterStep(steps.header) && {
   name: 'UHeader',
-  to: '/pro/components/header/header',
+  to: '/pro/components/header',
   class: 'h-16 inset-x-0 top-0',
   inactive: isAfterStep(steps.header + 1),
   children: [isAfterStep(steps.header + 2) ? {
@@ -665,7 +665,7 @@ const blocks = computed(() => [isAfterStep(steps.header) && {
   }]
 }, isAfterStep(steps.footer) && {
   name: 'UFooter',
-  to: '/pro/components/footer/footer',
+  to: '/pro/components/footer',
   class: 'h-16 inset-x-0 bottom-0',
   inactive: isAfterStep(steps.footer + 1),
   children: [isAfterStep(steps.footer + 2) ? {
