@@ -41,7 +41,8 @@ export default defineNuxtConfig({
   content: {
     highlight: {
       langs: [
-        'postcss'
+        'postcss',
+        'mdc'
       ]
     },
     sources: {
