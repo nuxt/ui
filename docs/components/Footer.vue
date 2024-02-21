@@ -28,7 +28,7 @@
 const links = [{
   icon: 'i-simple-icons-figma',
   label: 'Figma Kit',
-  to: 'https://www.figma.com/community/file/1288455405058138934/nuxt-ui',
+  to: 'https://www.figma.com/community/file/1288455405058138934',
   target: '_blank'
 }, {
   label: 'Playground',
