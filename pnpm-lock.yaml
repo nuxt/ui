@@ -165,8 +165,8 @@ importers:
         specifier: ^1.3.0
         version: 1.3.0(rollup@3.29.4)
       '@nuxt/ui-pro':
-        specifier: npm:@nuxt/ui-pro-edge@0.7.5-28475259.4dd2c18
-        version: /@nuxt/ui-pro-edge@0.7.5-28475259.4dd2c18(nuxt@3.10.2)(rollup@3.29.4)(vite@5.1.3)(vue@3.4.19)
+        specifier: npm:@nuxt/ui-pro-edge@0.7.5-28475621.09eb8fa
+        version: /@nuxt/ui-pro-edge@0.7.5-28475621.09eb8fa(nuxt@3.10.2)(rollup@3.29.4)(vite@5.1.3)(vue@3.4.19)
       '@nuxtjs/fontaine':
         specifier: ^0.4.1
         version: 0.4.1(rollup@3.29.4)
@@ -1979,8 +1979,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/ui-edge@2.13.0-28472624.f4f6a8f(nuxt@3.10.2)(rollup@3.29.4)(vite@5.1.3)(vue@3.4.19):
-    resolution: {integrity: sha512-idY0YdHhX64k57GoWwsQcVTLOhCGWXqf9VcAjKihnnQldJ9oFpaTHZWCxHKWivjznXToyl1Q+3jvYYXGEW+TGg==}
+  /@nuxt/ui-edge@2.13.0-28475363.930337b(nuxt@3.10.2)(rollup@3.29.4)(vite@5.1.3)(vue@3.4.19):
+    resolution: {integrity: sha512-Fil+XCzIulZ6o3vSNXioKs0Tedcaq3T/0bVw8HrOZ2h65QU97ti2DlLhoYNyZlO50hjhAn7eEstGQQXReoQDyQ==}
     engines: {node: '>=v16.20.2'}
     dependencies:
       '@egoist/tailwindcss-icons': 1.7.4(tailwindcss@3.4.1)
@@ -2027,10 +2027,10 @@ packages:
       - vue
     dev: true
 
-  /@nuxt/ui-pro-edge@0.7.5-28475259.4dd2c18(nuxt@3.10.2)(rollup@3.29.4)(vite@5.1.3)(vue@3.4.19):
-    resolution: {integrity: sha512-218A5Zy3tZtBN9+R56Z4/leqH/qtrOPs3ZX+HhCcXXEWQS8urt65l8HeztY/Ms6kK2aQ203uYHghOFQbUC7wEA==}
+  /@nuxt/ui-pro-edge@0.7.5-28475621.09eb8fa(nuxt@3.10.2)(rollup@3.29.4)(vite@5.1.3)(vue@3.4.19):
+    resolution: {integrity: sha512-VJDCZyHELGbslKnOsyldoNDISAGyXrshA6+oN6QkmiqzCdV0sF1jiaicYnUtR+eSBelovd6Lc9uQLlewFvR81w==}
     dependencies:
-      '@nuxt/ui': /@nuxt/ui-edge@2.13.0-28472624.f4f6a8f(nuxt@3.10.2)(rollup@3.29.4)(vite@5.1.3)(vue@3.4.19)
+      '@nuxt/ui': /@nuxt/ui-edge@2.13.0-28475363.930337b(nuxt@3.10.2)(rollup@3.29.4)(vite@5.1.3)(vue@3.4.19)
       '@vueuse/core': 10.8.0(vue@3.4.19)
       defu: 6.1.4
       git-url-parse: 14.0.0
