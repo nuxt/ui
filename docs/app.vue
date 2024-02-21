@@ -3,6 +3,8 @@
   <div>
     <NuxtLoadingIndicator />
 
+    <Banner />
+
     <Header v-if="!$route.path.startsWith('/examples')" :links="links" />
 
     <NuxtLayout>
