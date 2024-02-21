@@ -14,6 +14,9 @@ const defuTwMerge = createDefu((obj, key, value, namespace) => {
   if (namespace === 'default' || namespace.startsWith('default.')) {
     return false
   }
+  if (namespace === 'popper' || namespace.startsWith('popper.')) {
+    return false
+  }
   if (namespace.endsWith('avatar') && key === 'size') {
     return false
   }
