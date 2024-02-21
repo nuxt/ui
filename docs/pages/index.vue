@@ -164,7 +164,7 @@
     </ULandingSection>
 
     <template v-if="navigation.find(item => item._path === '/pro')">
-      <ULandingHero :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }">
+      <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }">
         <template #title>
           <span v-html="page.pro.title" />
         </template>
@@ -172,6 +172,12 @@
         <template #description>
           <span v-html="page.pro.description" />
         </template>
+
+        <video poster="https://res.cloudinary.com/nuxt/video/upload/so_14.8/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.jpg" controls class="rounded-lg">
+          <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.webm" type="video/webm">
+          <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.mp4" type="video/mp4">
+          <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.ogg" type="video/ogg">
+        </video>
       </ULandingHero>
 
       <ULandingSection v-for="(section, index) in page.pro.sections" :key="index" v-bind="section" class="!pt-0">
