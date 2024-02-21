@@ -2,7 +2,7 @@
 const id = 'nuxt-ui-banner-1'
 const to = '/pro/pricing'
 
-const timeAgo = useTimeAgo(new Date('2024-02-25T23:00:00'))
+const timeAgo = useTimeAgo(new Date('2024-02-25T22:00:00'))
 
 const hideBanner = () => {
   localStorage.setItem(id, 'true')
