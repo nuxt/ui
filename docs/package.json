@@ -12,12 +12,12 @@
     "@nuxt/devtools": "^1.0.8",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/image": "^1.3.0",
-    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@0.7.5-28472292.ed6881a",
+    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@0.7.5-28475259.4dd2c18",
     "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/google-fonts": "^3.1.3",
     "@nuxtjs/plausible": "^0.2.4",
     "@octokit/rest": "^20.0.2",
-    "@vueuse/nuxt": "^10.7.2",
+    "@vueuse/nuxt": "^10.8.0",
     "date-fns": "^3.3.1",
     "eslint": "^8.56.0",
     "joi": "^17.12.1",
@@ -29,7 +29,7 @@
     "typescript": "^5.3.3",
     "ufo": "^1.4.0",
     "v-calendar": "^3.1.2",
-    "valibot": "^0.28.1",
+    "valibot": "^0.29.0",
     "yup": "^1.3.3",
     "zod": "^3.22.4"
   }
