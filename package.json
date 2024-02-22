@@ -37,7 +37,7 @@
     "@headlessui/tailwindcss": "^0.2.0",
     "@headlessui/vue": "^1.7.19",
     "@iconify-json/heroicons": "^1.1.20",
-    "@nuxt/kit": "^3.10.2",
+    "@nuxt/kit": "^3.10.3",
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@popperjs/core": "^2.11.8",
@@ -64,9 +64,9 @@
     "@release-it/conventional-changelog": "^8.0.1",
     "@vue/test-utils": "^2.4.4",
     "eslint": "^8.56.0",
-    "happy-dom": "^13.3.8",
-    "joi": "^17.12.1",
-    "nuxt": "^3.10.2",
+    "happy-dom": "^13.4.1",
+    "joi": "^17.12.2",
+    "nuxt": "^3.10.3",
     "release-it": "^17.1.1",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0",
@@ -78,8 +78,8 @@
     "zod": "^3.22.4"
   },
   "resolutions": {
-    "@nuxt/kit": "3.10.2",
-    "@nuxt/schema": "3.10.2",
+    "@nuxt/kit": "^3.10.3",
+    "@nuxt/schema": "3.10.3",
     "tailwindcss": "3.4.1",
     "@headlessui/vue": "1.7.19",
     "vue": "3.4.19"
