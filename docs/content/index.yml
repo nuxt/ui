@@ -79,10 +79,10 @@ pro:
   title: Upgrade to <span class="text-primary">Nuxt UI Pro</span>
   description: 'Nuxt UI Pro is a collection of premium Vue components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.<br>It includes all primitives to build landing pages, documentations, blogs, dashboards or entire SaaS products.'
   links:
-    - label: View plans
+    - label: Buy now
       to: /pro/pricing
-      color: gray
-      icon: i-heroicons-credit-card
+      color: black
+      trailingIcon: i-heroicons-arrow-right-20-solid
       size: lg
     - label: Explore templates
       to: /pro/templates

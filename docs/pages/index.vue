@@ -164,7 +164,9 @@
     </ULandingSection>
 
     <template v-if="navigation.find(item => item._path === '/pro')">
-      <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }">
+      <UDivider />
+
+      <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }" class="bg-gradient-to-b from-gray-50 dark:from-gray-950/50 to-white dark:to-gray-900 relative">
         <template #title>
           <span v-html="page.pro.title" />
         </template>
@@ -173,11 +175,13 @@
           <span v-html="page.pro.description" />
         </template>
 
-        <video poster="https://res.cloudinary.com/nuxt/video/upload/so_14.8/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.jpg" controls class="rounded-lg">
-          <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.webm" type="video/webm">
-          <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.mp4" type="video/mp4">
-          <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.ogg" type="video/ogg">
-        </video>
+        <div class="bg-gray-900/5 dark:bg-white/5 ring-1 ring-inset ring-gray-900/10 dark:ring-white/10 rounded-xl lg:-m-4 p-4">
+          <video poster="https://res.cloudinary.com/nuxt/video/upload/so_3.3/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.jpg" controls class="rounded-lg">
+            <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.webm" type="video/webm">
+            <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.mp4" type="video/mp4">
+            <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.ogg" type="video/ogg">
+          </video>
+        </div>
       </ULandingHero>
 
       <ULandingSection v-for="(section, index) in page.pro.sections" :key="index" v-bind="section" class="!pt-0">
