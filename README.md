@@ -1,4 +1,4 @@
-[![nuxt-ui-social-card](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxt.com)
+[![nuxt-ui.png](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxt.com)
 
 # Nuxt UI
 
@@ -7,9 +7,9 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-Nuxt UI provides everything related to UI when building Nuxt applications: components, icons, colors, dark mode and also keyboard shortcuts.
+Nuxt UI is a module that provides a set of Vue components and composables built with [Tailwind CSS](https://tailwindcss.com/) and [Headless UI](https://headlessui.dev/) to help you build beautiful and accessible user interfaces.
 
-Is has been developed by [NuxtLabs](https://nuxtlabs.com/) for [Volta](https://volta.net), [Nuxt Studio](https://nuxt.studio/) and the Nuxt community.
+Its goal is to provide everything related to UI when building a Nuxt app. This includes components, icons, colors, dark mode but also keyboard shortcuts.
 
 ## Features
 
@@ -27,14 +27,14 @@ Read more on [ui.nuxt.com](https://ui.nuxt.com)
 ## Installation
 
 ```bash
-# Using npm
+# npm
 npm install @nuxt/ui
-
-# Using yarn
+# yarn
 yarn add @nuxt/ui
-
-# Using pnpm
+# pnpm
 pnpm add @nuxt/ui
+# bun
+bun add @nuxt/ui
 ```
 
 Then, register the module in your `nuxt.config.ts`:

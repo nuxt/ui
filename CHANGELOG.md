@@ -1,5 +1,43 @@
 # Changelog
 
+## [2.14.0](https://github.com/nuxt/ui/compare/v2.13.0...v2.14.0) (2024-02-22)
+
+
+### Features
+
+* **Carousel:** expose methods to allow autoplay ([41ecd2a](https://github.com/nuxt/ui/commit/41ecd2a3d553886db3e32d9f48a477268d93f3c6)), closes [#1300](https://github.com/nuxt/ui/issues/1300)
+* **Divider:** handle `size` prop ([#1307](https://github.com/nuxt/ui/issues/1307)) ([cbeede6](https://github.com/nuxt/ui/commit/cbeede66bb3bd7778e03c19ebbf55bf7bd753cb8))
+* **Form:** use nuxt `useId` to bind input labels ([#1211](https://github.com/nuxt/ui/issues/1211)) ([27c71fa](https://github.com/nuxt/ui/commit/27c71fa40ecb9f8524fee7f3d17a384bc8812d25))
+* **Input:** handle type `file` ([946a39c](https://github.com/nuxt/ui/commit/946a39c73990dc352cf7b9a77bfaec339cdcab34)), closes [#563](https://github.com/nuxt/ui/issues/563)
+* **Modal:** open programmatically ([#1319](https://github.com/nuxt/ui/issues/1319)) ([6f29c62](https://github.com/nuxt/ui/commit/6f29c620ab758e27be63f8af53674828b59fb6ed))
+* **Table:** display progress bar when `loading` ([#1362](https://github.com/nuxt/ui/issues/1362)) ([3fe3521](https://github.com/nuxt/ui/commit/3fe35217cbc0cef7f41550c175e4e7ea2cc939a8))
+* **Tabs:** add `unmount` prop as `false` by default ([843a978](https://github.com/nuxt/ui/commit/843a9786445f6170c1380e3b404151da52b5a154)), closes [#663](https://github.com/nuxt/ui/issues/663)
+* **Textarea:** add `maxrows` prop to restrict autoresize ([#1302](https://github.com/nuxt/ui/issues/1302)) ([f643e7b](https://github.com/nuxt/ui/commit/f643e7b316639a79cf03da25250ab0fa85f466d5))
+
+
+### Bug Fixes
+
+* **Accordion:** style disclosure `div` after [#1199](https://github.com/nuxt/ui/issues/1199) ([882247e](https://github.com/nuxt/ui/commit/882247e5f40bf41fdfdffea501de5c898a7fb0b2))
+* **Alert:** remove `required` title to prevent warning when using slot ([e545b6f](https://github.com/nuxt/ui/commit/e545b6f0a128475166dcea3c1028798b106805f3))
+* **Card:** prevent `body` padding without default slot ([f682905](https://github.com/nuxt/ui/commit/f682905b26a22546634e9adc4b838a7741dbd7c9))
+* **components:** hydration attribute mismatch with vue `3.4` ([#1199](https://github.com/nuxt/ui/issues/1199)) ([10db144](https://github.com/nuxt/ui/commit/10db14475f7a527180be3fcf33cc5d3af52452c9))
+* **Form:** improve `validate` path type ([#1370](https://github.com/nuxt/ui/issues/1370)) ([5266591](https://github.com/nuxt/ui/commit/5266591c886422d5265e46e08e1276913d12bed1))
+* **Form:** return false when silent validation fails ([#1371](https://github.com/nuxt/ui/issues/1371)) ([d4b6147](https://github.com/nuxt/ui/commit/d4b6147fcceb7ff9cebe1586bb3094b10f50acb5))
+* **Link:** check `disabled` prop before navigating ([#1321](https://github.com/nuxt/ui/issues/1321)) ([ac42ec1](https://github.com/nuxt/ui/commit/ac42ec106ff259e1d44515e5fb3b5236559ac713))
+* **Meter:** missing import of `Icon` component ([f8b296f](https://github.com/nuxt/ui/commit/f8b296fc60b93c4656fd397f8eb6b06b4a1dcd93)), closes [#1328](https://github.com/nuxt/ui/issues/1328)
+* **module:** prevent tailwind warn with `bun` ([bb40c31](https://github.com/nuxt/ui/commit/bb40c3103174a039f65b31c65fcc5d40cb29ce6b)), closes [#809](https://github.com/nuxt/ui/issues/809)
+* **module:** put back `all` option in icons plugin ([412cd75](https://github.com/nuxt/ui/commit/412cd75eddb6140d7d9b3358b04df1e61f22b481)), closes [#1237](https://github.com/nuxt/ui/issues/1237)
+* **Notification:** remove `required` title to prevent warning when using slot ([aa2b1ca](https://github.com/nuxt/ui/commit/aa2b1cae8881dece9a629dc95a8f9df88f9bbd27))
+* **Progress:** prevent `NaN` percent display when indeterminate ([a55a08a](https://github.com/nuxt/ui/commit/a55a08a91eca6f4c7ff3ad40ee566b6445d2dfd0))
+* **RadioGroup:** pass `help` prop to radio children ([5a5b284](https://github.com/nuxt/ui/commit/5a5b284e967ca9cdb6c7df9809ed4f4569a65cfa)), closes [#1313](https://github.com/nuxt/ui/issues/1313)
+* **SelectMenu:** revert component `is` after [#1199](https://github.com/nuxt/ui/issues/1199) ([d0f4530](https://github.com/nuxt/ui/commit/d0f4530e8572a08d544041dec1f24a51bbc3b1e8))
+* **utils:** prevent merge of `popper` key ([9f35297](https://github.com/nuxt/ui/commit/9f352976ced5845a5fad00a6630d0166941a8a13)), closes [#1393](https://github.com/nuxt/ui/issues/1393)
+
+
+### Reverts
+
+* Revert "docs: add missing `overflow-hidden` on components" ([b893607](https://github.com/nuxt/ui/commit/b8936070f9e1f866a21d39f6c45140f86efebec4))
+
 ## [2.13.0](https://github.com/nuxt/ui/compare/v2.12.3...v2.13.0) (2024-01-30)
 
 

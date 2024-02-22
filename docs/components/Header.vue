@@ -19,7 +19,7 @@
       <ColorPicker />
 
       <UTooltip text="Search" :shortcuts="[metaSymbol, 'K']" :popper="{ strategy: 'absolute' }">
-        <UDocsSearchButton :label="null" />
+        <UContentSearchButton :label="null" />
       </UTooltip>
 
       <UColorModeButton />

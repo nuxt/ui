@@ -164,7 +164,13 @@
     </ULandingSection>
 
     <template v-if="navigation.find(item => item._path === '/pro')">
-      <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }">
+      <div class="relative">
+        <UDivider class="absolute inset-x-0" />
+
+        <div class="w-full relative overflow-hidden h-px bg-gradient-to-r from-gray-800 via-primary-400 to-gray-800 max-w-5xl mx-auto" />
+      </div>
+
+      <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }" class="bg-gradient-to-b from-gray-50 dark:from-gray-950/50 to-white dark:to-gray-900 relative">
         <template #title>
           <span v-html="page.pro.title" />
         </template>
@@ -173,11 +179,13 @@
           <span v-html="page.pro.description" />
         </template>
 
-        <video poster="https://res.cloudinary.com/nuxt/video/upload/so_14.8/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.jpg" controls class="rounded-lg">
-          <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.webm" type="video/webm">
-          <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.mp4" type="video/mp4">
-          <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.ogg" type="video/ogg">
-        </video>
+        <div class="bg-gray-900/5 dark:bg-white/5 ring-1 ring-inset ring-gray-900/10 dark:ring-white/10 rounded-xl lg:-m-4 p-4">
+          <video poster="https://res.cloudinary.com/nuxt/video/upload/so_3.3/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.jpg" controls class="rounded-lg">
+            <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.webm" type="video/webm">
+            <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.mp4" type="video/mp4">
+            <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.ogg" type="video/ogg">
+          </video>
+        </div>
       </ULandingHero>
 
       <ULandingSection v-for="(section, index) in page.pro.sections" :key="index" v-bind="section" class="!pt-0">
@@ -246,7 +254,7 @@
             </template>
 
             <template #aside-top>
-              <UDocsSearchButton size="md" class="w-full" />
+              <UContentSearchButton size="md" class="w-full" />
             </template>
 
             <template #aside-default>
@@ -275,7 +283,7 @@
             </template>
 
             <template #docs-surround>
-              <UDocsSurround
+              <UContentSurround
                 :surround="(surround as unknown as ParsedContent[])"
                 class="w-full gap-4"
                 :ui="{
@@ -294,7 +302,7 @@
 
             <template #docs-toc>
               <div class="absolute top-0 left-0 right-0 space-y-3">
-                <UDocsToc :links="toc" class="bg-transparent relative max-h-full overflow-hidden top-0" :ui="({ container: { base: '!pt-0 !pb-4' } } as any)" />
+                <UContentToc :links="toc" class="bg-transparent relative max-h-full overflow-hidden top-0" :ui="({ container: { base: '!pt-0 !pb-4' } } as any)" />
 
                 <UDivider type="dashed" :ui="{ border: { base: 'border-gray-800/10 dark:border-gray-200/10' } }" />
 
@@ -612,8 +620,8 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
         slot: 'docs-surround',
         class: 'bottom-4 inset-x-4 h-28'
       } : {
-        name: 'UDocsSurround',
-        to: '/pro/components/docs-surround',
+        name: 'UContentSurround',
+        to: '/pro/components/content-surround',
         class: 'bottom-4 inset-x-4 h-28',
         inactive: false
       }]
@@ -621,8 +629,8 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
       name: '#default',
       class: 'left-4 right-72 inset-y-4'
     }]), isAfterStep(steps.docs + 13) ? {
-      name: 'UDocsToc',
-      to: '/pro/components/docs-toc',
+      name: 'UContentToc',
+      to: '/pro/components/content-toc',
       class: 'right-4 inset-y-4 w-64',
       inactive: isAfterStep(steps.docs + 14),
       children: [{
