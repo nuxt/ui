@@ -186,7 +186,6 @@ describe('Form', () => {
       await setValue(passwordInput, 'validpassword')
       await triggerEvent(form, 'submit.prevent')
 
-      // Ensure submit event was emitted
       expect(wrapper.emitted()).toHaveProperty('submit')
       expect(wrapper.emitted('submit')[0][0]).toMatchObject({
         data: { email: 'bob@dylan.com', password: 'validpassword' }
@@ -470,7 +469,6 @@ describe('Form', () => {
       // Validation @input is enabled only after a blur event
       await triggerEvent(input, 'blur')
 
-      // Ideally this test would check form.errors to assert the validation errors, but it's not available from the wrapper.
       expect(wrapper.text()).toContain('Error message')
 
       await setValue(input, validInputValue)
