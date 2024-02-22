@@ -109,11 +109,14 @@ export default defineComponent({
         errors.value = await getErrors()
       }
 
-      if (!opts.silent && errors.value.length > 0) {
+      if (errors.value.length > 0) {
+        if (opts.silent) return false
+
         throw new FormException(
           `Form validation failed: ${JSON.stringify(errors.value, null, 2)}`
         )
       }
+
       return props.state
     }
 
