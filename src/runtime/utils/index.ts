@@ -14,7 +14,16 @@ const defuTwMerge = createDefu((obj, key, value, namespace) => {
   if (namespace === 'default' || namespace.startsWith('default.')) {
     return false
   }
+  if (namespace === 'popper' || namespace.startsWith('popper.')) {
+    return false
+  }
   if (namespace.endsWith('avatar') && key === 'size') {
+    return false
+  }
+  if (namespace.endsWith('chip') && key === 'size') {
+    return false
+  }
+  if (namespace.endsWith('badge') && key === 'size' || key === 'color' || key === 'variant') {
     return false
   }
   if (typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {

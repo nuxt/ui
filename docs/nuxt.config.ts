@@ -39,6 +39,12 @@ export default defineNuxtConfig({
     safelistColors: excludeColors(colors)
   },
   content: {
+    highlight: {
+      langs: [
+        'postcss',
+        'mdc'
+      ]
+    },
     sources: {
       dev: {
         prefix: '/dev',
