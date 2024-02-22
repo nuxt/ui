@@ -18,8 +18,8 @@
     <template #right>
       <ColorPicker />
 
-      <UTooltip text="Search" :shortcuts="[metaSymbol, 'K']">
-        <UDocsSearchButton :label="null" />
+      <UTooltip text="Search" :shortcuts="[metaSymbol, 'K']" :popper="{ strategy: 'absolute' }">
+        <UContentSearchButton :label="null" />
       </UTooltip>
 
       <UColorModeButton />
