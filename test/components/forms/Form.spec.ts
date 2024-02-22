@@ -4,11 +4,13 @@ import {
   UForm,
   UInput,
   UFormGroup,
+  URadioGroup,
   UTextarea,
   UCheckbox,
-  USelect
+  USelect,
+  URadio
 } from '#components'
-import { flushPromises } from '@vue/test-utils'
+import { DOMWrapper, flushPromises } from '@vue/test-utils'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
 
@@ -18,6 +20,40 @@ import * as yup from 'yup'
 import Joi from 'joi'
 import * as valibot from 'valibot'
 
+// Wrapper to trigger an event on a DOM element and flush promises.
+async function triggerEvent (el: DOMWrapper<Element>, event: string) {
+  el.trigger(event)
+  return flushPromises()
+}
+
+async function renderForm (options: {
+  props: TypeOf<typeof UForm.props>;
+  slotVars?: object;
+  slotComponents?: any;
+  slotTemplate: string;
+}) {
+  const state = reactive({})
+  return await mountSuspended(UForm, {
+    props: {
+      state,
+      ...options.props
+    },
+    slots: {
+      default: {
+        // @ts-ignore
+        setup () {
+          return { state, ...options.slotVars }
+        },
+        components: {
+          UFormGroup,
+          ...options.slotComponents
+        },
+        template: options.slotTemplate
+      }
+    }
+  })
+}
+
 describe('Form', () => {
   it.each([
     ['basic case', { props: { state: {} } }],
@@ -25,7 +61,6 @@ describe('Form', () => {
       'with default slot',
       { props: { state: {} }, slots: { default: 'Form slot' } }
     ]
-    // @ts-ignore
   ])(
     'renders %s correctly',
     async (nameOrHtml: string, options: TypeOf<typeof UForm.props>) => {
@@ -33,33 +68,6 @@ describe('Form', () => {
       expect(html).toMatchSnapshot()
     }
   )
-
-  async function renderForm (options: {
-    props: TypeOf<typeof UForm.props>;
-    slotVars?: object;
-    slotComponents?: any;
-    slotTemplate: string;
-  }) {
-    const state = reactive({})
-    return await mountSuspended(UForm, {
-      props: {
-        state,
-        ...options.props
-      },
-      slots: {
-        default: {
-          setup () {
-            return { state, ...options.slotVars }
-          },
-          components: {
-            UFormGroup,
-            ...options.slotComponents
-          },
-          template: options.slotTemplate
-        }
-      }
-    })
-  }
 
   it.each([
     [
@@ -149,10 +157,8 @@ describe('Form', () => {
       await emailInput.setValue('bob@dylan.com')
       await passwordInput.setValue('short')
 
-      await form.trigger('submit.prevent')
+      await triggerEvent(form, 'submit.prevent')
 
-      // Required to wait for the event propagation within the form's eventBus.
-      await flushPromises()
       // @ts-ignore
       expect(wrapper.emitted('error')[0][0].errors).toMatchObject([
         {
@@ -164,10 +170,7 @@ describe('Form', () => {
       expect(wrapper.html()).toMatchSnapshot('with error')
 
       await passwordInput.setValue('validpassword')
-      await form.trigger('submit.prevent')
-
-      // Required to wait for the event propagation within the form's eventBus.
-      await flushPromises()
+      await triggerEvent(form, 'submit.prevent')
 
       // Ensure submit event was emitted
       expect(wrapper.emitted()).toHaveProperty('submit')
@@ -206,15 +209,13 @@ describe('Form', () => {
       })
 
       const input = wrapper.find('#input')
-      input.trigger('blur')
-      await flushPromises()
+      await triggerEvent(input, 'blur')
 
       // Ideally this test would check form.errors to assert the validation errors, but it's not available from the wrapper.
       expect(wrapper.text()).toContain('Error message')
 
       input.setValue(validInputValue)
-      input.trigger('blur')
-      await flushPromises()
+      await triggerEvent(input, 'blur')
 
       expect(wrapper.text()).not.toContain('Error message')
     }
@@ -249,20 +250,87 @@ describe('Form', () => {
       })
 
       const input = wrapper.find('#input')
-      input.trigger('change')
 
-      await flushPromises()
-
+      await triggerEvent(input, 'change')
       // Ideally this test would check form.errors to assert the validation errors, but it's not available from the wrapper.
       expect(wrapper.text()).toContain('Error message')
 
       input.setValue(validInputValue)
-      input.trigger('change')
-      await flushPromises()
-
+      await triggerEvent(input, 'change')
       expect(wrapper.text()).not.toContain('Error message')
     }
   )
+
+  test('radio group validate on change works', async () => {
+    const wrapper = await renderForm({
+      props: {
+        validate (state: any) {
+          if (state.value !== 'Option 2')
+            return [{ path: 'value', message: 'Error message' }]
+          return []
+        }
+      },
+      slotVars: {
+        inputProps: {
+          options: ['Option 1', 'Option 2', 'Option 3']
+        }
+      },
+      slotComponents: {
+        UFormGroup,
+        URadioGroup
+      },
+      slotTemplate: `
+          <UFormGroup name="value">
+            <URadioGroup id="input" v-model="state.value" v-bind="inputProps" />
+          </UFormGroup>
+        `
+    })
+
+    const option1 = wrapper.find('[value="Option 1"]')
+    option1.setChecked()
+    await flushPromises()
+    expect(wrapper.text()).toContain('Error message')
+
+    const option2 = wrapper.find('[value="Option 2"]')
+    option2.setChecked()
+    await flushPromises()
+
+    expect(wrapper.text()).not.toContain('Error message')
+  })
+
+  test('radio validate on change works', async () => {
+    const wrapper = await renderForm({
+      props: {
+        validate (state: any) {
+          if (state.value !== 'Option 2')
+            return [{ path: 'value', message: 'Error message' }]
+          return []
+        }
+      },
+      slotComponents: {
+        UFormGroup,
+        URadio
+      },
+      slotTemplate: `
+          <UFormGroup name="value">
+            <URadio id="option-1" v-model="state.value" value="Option 1" />
+            <URadio id="option-2" v-model="state.value" value="Option 2" />
+          </UFormGroup>
+        `
+    })
+
+    const option1 = wrapper.find('#option-1')
+    option1.setChecked()
+    await flushPromises()
+
+    expect(wrapper.text()).toContain('Error message')
+
+    const option2 = wrapper.find('#option-2')
+    option2.setChecked()
+    await flushPromises()
+
+    expect(wrapper.text()).not.toContain('Error message')
+  })
 
   it.each([
     ['input', UInput, {}, 'foo'],
@@ -295,16 +363,14 @@ describe('Form', () => {
       const input = wrapper.find('#input')
 
       // Validation @input is enabled only after a blur event
-      input.trigger('blur')
-      await flushPromises()
+      await triggerEvent(input, 'blur')
 
       // Ideally this test would check form.errors to assert the validation errors, but it's not available from the wrapper.
       expect(wrapper.text()).toContain('Error message')
 
       input.setValue(validInputValue)
 
-      input.trigger('input')
-      await flushPromises()
+      await triggerEvent(input, 'input')
 
       // Waiting because of the debounced validation on input event.
       await new Promise((r) => setTimeout(r, 300))
@@ -336,15 +402,12 @@ describe('Form', () => {
     })
 
     const form = wrapper.find('form')
-
     const input = wrapper.find('input')
-    input.trigger('blur')
-    await flushPromises()
 
+    await triggerEvent(input, 'blur')
     expect(wrapper.text()).not.toContain('Error message')
 
-    await form.trigger('submit.prevent')
-    await flushPromises()
+    await triggerEvent(form, 'submit.prevent')
     expect(wrapper.text()).toContain('Error message')
   })
 })
