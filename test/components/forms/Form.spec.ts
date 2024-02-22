@@ -204,6 +204,7 @@ describe('Form', () => {
     async (_name, InputComponent, inputProps, validInputValue) => {
       const wrapper = await renderForm({
         props: {
+          validateOn: ['blur'],
           validate (state: any) {
             if (!state.value)
               return [{ path: 'value', message: 'Error message' }]
@@ -241,6 +242,7 @@ describe('Form', () => {
     async (_name, InputComponent, inputProps, validInputValue) => {
       const wrapper = await renderForm({
         props: {
+          validateOn: ['change'],
           validate (state: any) {
             if (!state.value)
               return [{ path: 'value', message: 'Error message' }]
@@ -275,6 +277,7 @@ describe('Form', () => {
   test('radio group validate on change works', async () => {
     const wrapper = await renderForm({
       props: {
+        validateOn: ['change'],
         validate (state: any) {
           if (state.value !== 'Option 2')
             return [{ path: 'value', message: 'Error message' }]
@@ -309,6 +312,7 @@ describe('Form', () => {
   test('radio validate on change works', async () => {
     const wrapper = await renderForm({
       props: {
+        validateOn: ['change'],
         validate (state: any) {
           if (state.value !== 'Option 2')
             return [{ path: 'value', message: 'Error message' }]
@@ -339,6 +343,7 @@ describe('Form', () => {
   test('toggle validate on change', async () => {
     const wrapper = await renderForm({
       props: {
+        validateOn: ['change'],
         validate (state: any) {
           if (state.value) return [{ path: 'value', message: 'Error message' }]
           return []
@@ -366,6 +371,7 @@ describe('Form', () => {
   test('select menu validate on change', async () => {
     const wrapper = await renderForm({
       props: {
+        validateOn: ['change'],
         validate (state: any) {
           if (state.value !== 'Option 2')
             return [{ path: 'value', message: 'Error message' }]
@@ -399,6 +405,7 @@ describe('Form', () => {
   test('input menu validate on change', async () => {
     const wrapper = await renderForm({
       props: {
+        validateOn: ['change'],
         validate (state: any) {
           if (state.value !== 'Option 2')
             return [{ path: 'value', message: 'Error message' }]
@@ -437,6 +444,7 @@ describe('Form', () => {
     async (_name, InputComponent, inputProps, validInputValue) => {
       const wrapper = await renderForm({
         props: {
+          validateOn: ['input', 'blur'],
           validate (state: any) {
             if (!state.value)
               return [{ path: 'value', message: 'Error message' }]
