@@ -287,12 +287,12 @@ describe('Form', () => {
     })
 
     const option1 = wrapper.find('[value="Option 1"]')
-    option1.setChecked()
+    option1.setValue(true)
     await flushPromises()
     expect(wrapper.text()).toContain('Error message')
 
     const option2 = wrapper.find('[value="Option 2"]')
-    option2.setChecked()
+    option2.setValue(true)
     await flushPromises()
 
     expect(wrapper.text()).not.toContain('Error message')
@@ -320,13 +320,13 @@ describe('Form', () => {
     })
 
     const option1 = wrapper.find('#option-1')
-    option1.setChecked()
+    option1.setValue(true)
     await flushPromises()
 
     expect(wrapper.text()).toContain('Error message')
 
     const option2 = wrapper.find('#option-2')
-    option2.setChecked()
+    option2.setValue(true)
     await flushPromises()
 
     expect(wrapper.text()).not.toContain('Error message')
