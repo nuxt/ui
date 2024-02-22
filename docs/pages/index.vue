@@ -164,7 +164,11 @@
     </ULandingSection>
 
     <template v-if="navigation.find(item => item._path === '/pro')">
-      <UDivider />
+      <div class="relative">
+        <UDivider class="absolute inset-x-0" />
+
+        <div class="w-full relative overflow-hidden h-px bg-gradient-to-r from-gray-800 via-primary-400 to-gray-800 max-w-5xl mx-auto" />
+      </div>
 
       <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }" class="bg-gradient-to-b from-gray-50 dark:from-gray-950/50 to-white dark:to-gray-900 relative">
         <template #title>
