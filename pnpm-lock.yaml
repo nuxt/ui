@@ -34,8 +34,8 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2(rollup@3.29.4)
       '@nuxtjs/tailwindcss':
-        specifier: ^6.11.4
-        version: 6.11.4(rollup@3.29.4)
+        specifier: 6.11.5-1708058948.25b9f9e
+        version: 6.11.5-1708058948.25b9f9e(rollup@3.29.4)
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
@@ -2236,6 +2236,31 @@ packages:
       - rollup
       - supports-color
       - ts-node
+    dev: true
+
+  /@nuxtjs/tailwindcss@6.11.5-1708058948.25b9f9e(rollup@3.29.4):
+    resolution: {integrity: sha512-CzDt4W5PG4SI3l28KLHnAOXt0bQfY3eedZVuNZM8BLk6pnBzaMPCqELmqihqYEMXHjwS6R6+cwnVDhFQxhIfnA==}
+    dependencies:
+      '@nuxt/kit': 3.10.2(rollup@3.29.4)
+      autoprefixer: 10.4.17(postcss@8.4.35)
+      chokidar: 3.6.0
+      clear-module: 4.1.2
+      consola: 3.2.3
+      defu: 6.1.4
+      h3: 1.10.1
+      micromatch: 4.0.5
+      pathe: 1.1.2
+      postcss: 8.4.35
+      postcss-custom-properties: 13.3.5(postcss@8.4.35)
+      postcss-nesting: 12.0.3(postcss@8.4.35)
+      tailwind-config-viewer: 1.7.3(tailwindcss@3.4.1)
+      tailwindcss: 3.4.1
+      ufo: 1.4.0
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+      - ts-node
+    dev: false
 
   /@octokit/auth-token@4.0.0:
     resolution: {integrity: sha512-tY/msAuJo6ARbK6SPIxZrPBms3xPbfwBrulZe0Wtr/DIY9lje2HeV1uoebShn6mx7SjCHif6EjMvoREj+gZ+SA==}
