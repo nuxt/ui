@@ -14,7 +14,7 @@ import {
   UToggle,
   URange
 } from '#components'
-import { DOMWrapper, flushPromises } from '@vue/test-utils'
+import { DOMWrapper, flushPromises, VueWrapper } from '@vue/test-utils'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
 
@@ -24,9 +24,19 @@ import * as yup from 'yup'
 import Joi from 'joi'
 import * as valibot from 'valibot'
 
-// Wrapper to trigger an event on a DOM element and flush promises.
-async function triggerEvent (el: DOMWrapper<Element>, event: string) {
+async function triggerEvent (
+  el: DOMWrapper<Element> | VueWrapper<any, any>,
+  event: string
+) {
   el.trigger(event)
+  return flushPromises()
+}
+
+async function setValue (
+  el: DOMWrapper<Element> | VueWrapper<any, any>,
+  value: any
+) {
+  el.setValue(value)
   return flushPromises()
 }
 
@@ -158,8 +168,8 @@ describe('Form', () => {
       const emailInput = wrapper.find('#email')
       const passwordInput = wrapper.find('#password')
 
-      await emailInput.setValue('bob@dylan.com')
-      await passwordInput.setValue('short')
+      await setValue(emailInput, 'bob@dylan.com')
+      await setValue(passwordInput, 'short')
 
       await triggerEvent(form, 'submit.prevent')
 
@@ -173,7 +183,7 @@ describe('Form', () => {
       ])
       expect(wrapper.html()).toMatchSnapshot('with error')
 
-      await passwordInput.setValue('validpassword')
+      await setValue(passwordInput, 'validpassword')
       await triggerEvent(form, 'submit.prevent')
 
       // Ensure submit event was emitted
@@ -214,13 +224,10 @@ describe('Form', () => {
 
       const input = wrapper.find('#input')
       await triggerEvent(input, 'blur')
-
-      // Ideally this test would check form.errors to assert the validation errors, but it's not available from the wrapper.
       expect(wrapper.text()).toContain('Error message')
 
-      input.setValue(validInputValue)
+      await setValue(input, validInputValue)
       await triggerEvent(input, 'blur')
-
       expect(wrapper.text()).not.toContain('Error message')
     }
   )
@@ -257,10 +264,9 @@ describe('Form', () => {
       const input = wrapper.find('#input')
 
       await triggerEvent(input, 'change')
-      // Ideally this test would check form.errors to assert the validation errors, but it's not available from the wrapper.
       expect(wrapper.text()).toContain('Error message')
 
-      input.setValue(validInputValue)
+      await setValue(input, validInputValue)
       await triggerEvent(input, 'change')
       expect(wrapper.text()).not.toContain('Error message')
     }
@@ -292,14 +298,11 @@ describe('Form', () => {
     })
 
     const option1 = wrapper.find('[value="Option 1"]')
-    option1.setValue(true)
-    await flushPromises()
+    await setValue(option1, true)
     expect(wrapper.text()).toContain('Error message')
 
     const option2 = wrapper.find('[value="Option 2"]')
-    option2.setValue(true)
-    await flushPromises()
-
+    await setValue(option2, true)
     expect(wrapper.text()).not.toContain('Error message')
   })
 
@@ -325,15 +328,11 @@ describe('Form', () => {
     })
 
     const option1 = wrapper.find('#option-1')
-    option1.setValue(true)
-    await flushPromises()
-
+    await setValue(option1, true)
     expect(wrapper.text()).toContain('Error message')
 
     const option2 = wrapper.find('#option-2')
-    option2.setValue(true)
-    await flushPromises()
-
+    await setValue(option2, true)
     expect(wrapper.text()).not.toContain('Error message')
   })
 
@@ -357,14 +356,10 @@ describe('Form', () => {
     })
 
     const input = wrapper.findComponent({ name: 'Switch' })
-    input.setValue(true)
-    await flushPromises()
-
+    await setValue(input, true)
     expect(wrapper.text()).toContain('Error message')
 
-    input.setValue(false)
-    await flushPromises()
-
+    await setValue(input, false)
     expect(wrapper.text()).not.toContain('Error message')
   })
 
@@ -394,14 +389,10 @@ describe('Form', () => {
     })
 
     const input = wrapper.findComponent({ name: 'Listbox' })
-    input.setValue('Option 1')
-    await flushPromises()
-
+    await setValue(input, 'Option 1')
     expect(wrapper.text()).toContain('Error message')
 
-    input.setValue('Option 2')
-    await flushPromises()
-
+    await setValue(input, 'Option 2')
     expect(wrapper.text()).not.toContain('Error message')
   })
 
@@ -431,14 +422,10 @@ describe('Form', () => {
     })
 
     const input = wrapper.findComponent({ name: 'Combobox' })
-    input.setValue('Option 1')
-    await flushPromises()
-
+    await setValue(input, 'Option 1')
     expect(wrapper.text()).toContain('Error message')
 
-    input.setValue('Option 2')
-    await flushPromises()
-
+    await setValue(input, 'Option 2')
     expect(wrapper.text()).not.toContain('Error message')
   })
 
@@ -478,13 +465,9 @@ describe('Form', () => {
       // Ideally this test would check form.errors to assert the validation errors, but it's not available from the wrapper.
       expect(wrapper.text()).toContain('Error message')
 
-      input.setValue(validInputValue)
-
-      await triggerEvent(input, 'input')
-
+      await setValue(input, validInputValue)
       // Waiting because of the debounced validation on input event.
       await new Promise((r) => setTimeout(r, 300))
-
       expect(wrapper.text()).not.toContain('Error message')
     }
   )
