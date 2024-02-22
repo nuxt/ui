@@ -53,7 +53,7 @@ onMounted(() => {
 
         <p class="text-sm font-medium text-white dark:text-gray-900">
           <UIcon name="i-heroicons-gift" class="w-5 h-5 align-top flex-shrink-0 pointer-events-none mr-2" />
-          <span class="font-semibold">Nuxt UI Pro v1.0</span> is out with dashboard components! Discounted prices <span class="font-semibold">end {{ timeAgo }}</span>.
+          <span class="font-semibold">Nuxt UI Pro v1.0</span> is out with dashboard components! Discount ends <span class="font-semibold">{{ timeAgo }}</span>.
         </p>
 
         <div class="flex items-center justify-end lg:flex-1">
