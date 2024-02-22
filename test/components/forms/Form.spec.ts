@@ -8,7 +8,11 @@ import {
   UTextarea,
   UCheckbox,
   USelect,
-  URadio
+  URadio,
+  USelectMenu,
+  UInputMenu,
+  UToggle,
+  URange
 } from '#components'
 import { DOMWrapper, flushPromises } from '@vue/test-utils'
 import type { TypeOf } from 'zod'
@@ -223,6 +227,7 @@ describe('Form', () => {
 
   it.each([
     ['checkbox', UCheckbox, {}, true],
+    ['range', URange, {}, 2],
     ['select', USelect, { options: ['Option 1', 'Option 2'] }, 'Option 2']
   ])(
     '%s validate on change works',
@@ -327,6 +332,111 @@ describe('Form', () => {
 
     const option2 = wrapper.find('#option-2')
     option2.setValue(true)
+    await flushPromises()
+
+    expect(wrapper.text()).not.toContain('Error message')
+  })
+
+  test('toggle validate on change', async () => {
+    const wrapper = await renderForm({
+      props: {
+        validate (state: any) {
+          if (state.value) return [{ path: 'value', message: 'Error message' }]
+          return []
+        }
+      },
+      slotComponents: {
+        UFormGroup,
+        UToggle
+      },
+      slotTemplate: `
+          <UFormGroup name="value">
+            <UToggle id="input" v-model="state.value" />
+          </UFormGroup>
+        `
+    })
+
+    const input = wrapper.findComponent({ name: 'Switch' })
+    input.setValue(true)
+    await flushPromises()
+
+    expect(wrapper.text()).toContain('Error message')
+
+    input.setValue(false)
+    await flushPromises()
+
+    expect(wrapper.text()).not.toContain('Error message')
+  })
+
+  test('select menu validate on change', async () => {
+    const wrapper = await renderForm({
+      props: {
+        validate (state: any) {
+          if (state.value !== 'Option 2')
+            return [{ path: 'value', message: 'Error message' }]
+          return []
+        }
+      },
+      slotVars: {
+        inputProps: {
+          options: ['Option 1', 'Option 2', 'Option 3']
+        }
+      },
+      slotComponents: {
+        UFormGroup,
+        USelectMenu
+      },
+      slotTemplate: `
+          <UFormGroup name="value">
+            <USelectMenu id="input" v-model="state.value" v-bind="inputProps" />
+          </UFormGroup>
+        `
+    })
+
+    const input = wrapper.findComponent({ name: 'Listbox' })
+    input.setValue('Option 1')
+    await flushPromises()
+
+    expect(wrapper.text()).toContain('Error message')
+
+    input.setValue('Option 2')
+    await flushPromises()
+
+    expect(wrapper.text()).not.toContain('Error message')
+  })
+
+  test('input menu validate on change', async () => {
+    const wrapper = await renderForm({
+      props: {
+        validate (state: any) {
+          if (state.value !== 'Option 2')
+            return [{ path: 'value', message: 'Error message' }]
+          return []
+        }
+      },
+      slotVars: {
+        inputProps: {
+          options: ['Option 1', 'Option 2', 'Option 3']
+        }
+      },
+      slotComponents: {
+        UFormGroup,
+        UInputMenu
+      },
+      slotTemplate: `
+          <UFormGroup name="value">
+            <UInputMenu id="input" v-model="state.value" v-bind="inputProps" />
+          </UFormGroup>
+        `
+    })
+
+    const input = wrapper.findComponent({ name: 'Combobox' })
+    input.setValue('Option 1')
+    await flushPromises()
+
+    expect(wrapper.text()).toContain('Error message')
+
+    input.setValue('Option 2')
     await flushPromises()
 
     expect(wrapper.text()).not.toContain('Error message')
