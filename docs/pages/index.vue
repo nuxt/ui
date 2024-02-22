@@ -254,7 +254,7 @@
             </template>
 
             <template #aside-top>
-              <UDocsSearchButton size="md" class="w-full" />
+              <UContentSearchButton size="md" class="w-full" />
             </template>
 
             <template #aside-default>
@@ -283,7 +283,7 @@
             </template>
 
             <template #docs-surround>
-              <UDocsSurround
+              <UContentSurround
                 :surround="(surround as unknown as ParsedContent[])"
                 class="w-full gap-4"
                 :ui="{
@@ -302,7 +302,7 @@
 
             <template #docs-toc>
               <div class="absolute top-0 left-0 right-0 space-y-3">
-                <UDocsToc :links="toc" class="bg-transparent relative max-h-full overflow-hidden top-0" :ui="({ container: { base: '!pt-0 !pb-4' } } as any)" />
+                <UContentToc :links="toc" class="bg-transparent relative max-h-full overflow-hidden top-0" :ui="({ container: { base: '!pt-0 !pb-4' } } as any)" />
 
                 <UDivider type="dashed" :ui="{ border: { base: 'border-gray-800/10 dark:border-gray-200/10' } }" />
 
@@ -620,8 +620,8 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
         slot: 'docs-surround',
         class: 'bottom-4 inset-x-4 h-28'
       } : {
-        name: 'UDocsSurround',
-        to: '/pro/components/docs-surround',
+        name: 'UContentSurround',
+        to: '/pro/components/content-surround',
         class: 'bottom-4 inset-x-4 h-28',
         inactive: false
       }]
@@ -629,8 +629,8 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
       name: '#default',
       class: 'left-4 right-72 inset-y-4'
     }]), isAfterStep(steps.docs + 13) ? {
-      name: 'UDocsToc',
-      to: '/pro/components/docs-toc',
+      name: 'UContentToc',
+      to: '/pro/components/content-toc',
       class: 'right-4 inset-y-4 w-64',
       inactive: isAfterStep(steps.docs + 14),
       children: [{

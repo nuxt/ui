@@ -12,7 +12,7 @@
     <Footer v-if="!$route.path.startsWith('/examples')" />
 
     <ClientOnly>
-      <LazyUDocsSearch ref="searchRef" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 1000 }" />
+      <LazyUContentSearch ref="searchRef" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 1000 }" />
     </ClientOnly>
 
     <UNotifications>
