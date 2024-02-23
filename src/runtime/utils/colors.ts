@@ -1,5 +1,6 @@
 import { omit } from './lodash'
 import { kebabCase, camelCase, upperFirst } from 'scule'
+import type { Config as TWConfig } from 'tailwindcss'
 
 const colorsToExclude = [
   'inherit',
@@ -15,7 +16,7 @@ const colorsToExclude = [
   'cool'
 ]
 
-const safelistByComponent = {
+const safelistByComponent: Record<string, (colorsAsRegex: string) => TWConfig['safelist']> = {
   alert: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-50`)
   }, {
@@ -223,7 +224,7 @@ export const excludeColors = (colors: object): string[] => {
     .map(([key]) => kebabCase(key))
 }
 
-export const generateSafelist = (colors: string[], globalColors) => {
+export const generateSafelist = (colors: string[], globalColors: string[]) => {
   const baseSafelist = Object.keys(safelistByComponent).flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
 
   // Ensure `red` color is safelisted for form elements so that `error` prop of `UFormGroup` always works
@@ -268,6 +269,8 @@ export const customSafelistExtractor = (prefix, content: string, colors: string[
     name = name.replace(prefix, '').toLowerCase()
 
     const matchClasses = safelistByComponent[name](color).flatMap(group => {
+      if (typeof group === 'string') return
+
       return ['', ...(group.variants || [])].flatMap(variant => {
         const matches = group.pattern.source.match(/\(([^)]+)\)/g)
 

@@ -74,10 +74,19 @@ export default async function installTailwind (moduleOptions: ModuleOptions, nux
       strategy: 'merge'
     }
 
-    tailwindConfig.safelist = tailwindConfig.safelist || []
-    tailwindConfig.safelist.push(
-      ...generateSafelist(moduleOptions.safelistColors || [], colors)
-    )
+    nuxt.hook('app:templates', (app) => {
+      const twConfigTemplate = app.templates.find((t) => t.filename === 'tailwind.config.cjs')
+      const { getContents: oldContents } = twConfigTemplate
+      twConfigTemplate.getContents = async (data) => {
+        let content = await oldContents(data)
+        content = content.replace('return cfg;})()', `
+          cfg.safelist = cfg.safelist ?? [];
+          cfg.safelist.push(...[${(generateSafelist(moduleOptions.safelistColors || [], colors).map((safelistConfig): string => typeof safelistConfig === 'string' ? JSON.stringify(safelistConfig) : `{ pattern: ${safelistConfig.pattern.toString()}, ${safelistConfig.variants ? `variants: ${JSON.stringify(safelistConfig.variants)}` : ''} }`))}]);
+          return cfg;})()
+        `)
+        return content
+      }
+    })
   })
 
   // 2. add config template
