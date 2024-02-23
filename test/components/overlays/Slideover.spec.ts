@@ -13,7 +13,7 @@ describe('Slideover', () => {
     // ['with transition', { transition: false }],
     // ['with preventClose', { preventClose: true }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Slideover.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof USlideover.props>) => {
     const html = await ComponentRender(nameOrHtml, options, USlideover)
     expect(html).toMatchSnapshot()
   })

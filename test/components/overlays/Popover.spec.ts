@@ -9,9 +9,8 @@ describe('Popover', () => {
     ['basic case', {}]
     //TODO: try to fix Cannot read properties of undefined (reading 'Symbol(parentNode)')
     // ['with open', { props: { open: true } }],
-
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Popover.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UPopover.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UPopover)
     expect(html).toMatchSnapshot()
   })

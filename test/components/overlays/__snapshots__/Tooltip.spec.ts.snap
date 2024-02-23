@@ -67,3 +67,17 @@ exports[`Tooltip > renders with text correctly 1`] = `
   </div>
 </div>"
 `;
+
+exports[`Tooltip > renders with text slot correctly 1`] = `
+"<div> Hover <div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
+    <transition-stub appear="true" persisted="false" css="true">
+      <div>
+        <!--v-if-->
+        <div class="">Text slot
+          <!--v-if-->
+        </div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;

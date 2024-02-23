@@ -7,9 +7,9 @@ describe('Container', () => {
   it.each([
     ['basic case', {}],
     ['with as', { props: { as: 'article' } }],
-    ['with default slot', { slots: { default: 'default slot' } }]
+    ['with default slot', { slots: { default: () => 'Default slot' } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Container.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UContainer.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UContainer)
     expect(html).toMatchSnapshot()
   })

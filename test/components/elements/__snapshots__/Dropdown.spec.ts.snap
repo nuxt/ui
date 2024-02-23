@@ -10,148 +10,24 @@ exports[`Dropdown > renders basic case correctly 1`] = `
 
 exports[`Dropdown > renders width disabled correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<div data-headlessui-state="" class="relative inline-flex text-left rtl:text-right">
-  <div disabled="true" id="headlessui-menu-button-14" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="inline-flex w-full" role="button"><button disabled=""> Open </button></div>
+<div data-headlessui-state="">
+  <div disabled="true" id="headlessui-menu-button-11" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="" role="button"><button disabled=""> Open </button></div>
   <!--v-if-->
-</div>"
-`;
-
-exports[`Dropdown > renders width item slot correctly 1`] = `
-"<!-- eslint-disable-next-line vue/no-template-shadow -->
-<div class="relative inline-flex text-left rtl:text-right" data-headlessui-state="open">
-  <div disabled="false" id="headlessui-menu-button-20" aria-haspopup="menu" class="inline-flex w-full" role="button" aria-expanded="true" data-headlessui-state="open" aria-controls="headlessui-menu-items-21"><button> Open </button></div>
-  <div class="z-20 group w-48" style="position: fixed; left: 0px; top: 0px; margin: 0px;">
-    <transition-stub enteractiveclass="transition duration-100 ease-out" enterfromclass="transform scale-95 opacity-0" entertoclass="transform scale-100 opacity-100" leaveactiveclass="transition duration-75 ease-in" leavefromclass="transform scale-100 opacity-100" leavetoclass="transform scale-95 opacity-0" appear="true" persisted="false" css="true">
-      <div>
-        <!--v-if-->
-        <div id="headlessui-menu-items-21" aria-labelledby="headlessui-menu-button-20" role="menu" tabindex="0" data-headlessui-state="open" class="relative focus:outline-none overflow-y-auto scroll-py-1 divide-y divide-gray-200 dark:divide-gray-700 ring-1 ring-gray-200 dark:ring-gray-700 rounded-md shadow-lg bg-white dark:bg-gray-800">
-          <div class="p-1" role="none"><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-22" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-23" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-24" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button></div>
-          <div class="p-1"><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-25" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-26" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button></div>
-        </div>
-      </div>
-    </transition-stub>
-  </div>
-</div>"
-`;
-
-exports[`Dropdown > renders width slot correctly 1`] = `
-"<!-- eslint-disable-next-line vue/no-template-shadow -->
-<div class="relative inline-flex text-left rtl:text-right" data-headlessui-state="open">
-  <div disabled="false" id="headlessui-menu-button-15" aria-haspopup="menu" class="inline-flex w-full" role="button" aria-expanded="true" data-headlessui-state="open" aria-controls="headlessui-menu-items-16">Open slot</div>
-  <div class="z-20 group w-48" style="position: fixed; left: 0px; top: 0px; margin: 0px;">
-    <transition-stub enteractiveclass="transition duration-100 ease-out" enterfromclass="transform scale-95 opacity-0" entertoclass="transform scale-100 opacity-100" leaveactiveclass="transition duration-75 ease-in" leavefromclass="transform scale-100 opacity-100" leavetoclass="transform scale-95 opacity-0" appear="true" persisted="false" css="true">
-      <div>
-        <!--v-if-->
-        <div id="headlessui-menu-items-16" aria-labelledby="headlessui-menu-button-15" role="menu" tabindex="0" data-headlessui-state="open" class="relative focus:outline-none overflow-y-auto scroll-py-1 divide-y divide-gray-200 dark:divide-gray-700 ring-1 ring-gray-200 dark:ring-gray-700 rounded-md shadow-lg bg-white dark:bg-gray-800">
-          <div class="p-1" role="none"><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-17" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button></div>
-          <div class="p-1"><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-18" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-19" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button></div>
-        </div>
-      </div>
-    </transition-stub>
-  </div>
 </div>"
 `;
 
 exports[`Dropdown > renders with close correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<div data-headlessui-state="" class="relative inline-flex text-left rtl:text-right">
-  <div disabled="false" id="headlessui-menu-button-9" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="inline-flex w-full" role="button"><button> Open </button></div>
+<div data-headlessui-state="">
+  <div disabled="false" id="headlessui-menu-button-7" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="" role="button"><button> Open </button></div>
   <!--v-if-->
 </div>"
 `;
 
-exports[`Dropdown > renders with hover mode correctly 1`] = `
+exports[`Dropdown > renders with disabled correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<div class="relative inline-flex text-left rtl:text-right" data-headlessui-state="open">
-  <div disabled="false" id="headlessui-menu-button-10" aria-haspopup="menu" class="inline-flex w-full" role="button" aria-expanded="true" data-headlessui-state="open" aria-controls="headlessui-menu-items-11"><button> Open </button></div>
-  <div class="z-20 group w-48" style="padding-top: 8px; padding-bottom: 8px; position: fixed; left: 0px; top: 0px; margin: 0px;">
-    <transition-stub enteractiveclass="transition duration-100 ease-out" enterfromclass="transform scale-95 opacity-0" entertoclass="transform scale-100 opacity-100" leaveactiveclass="transition duration-75 ease-in" leavefromclass="transform scale-100 opacity-100" leavetoclass="transform scale-95 opacity-0" appear="true" persisted="false" css="true">
-      <div>
-        <!--v-if-->
-        <div id="headlessui-menu-items-11" aria-labelledby="headlessui-menu-button-10" role="menu" tabindex="0" data-headlessui-state="open" class="relative focus:outline-none overflow-y-auto scroll-py-1 divide-y divide-gray-200 dark:divide-gray-700 ring-1 ring-gray-200 dark:ring-gray-700 rounded-md shadow-lg bg-white dark:bg-gray-800">
-          <div class="p-1" role="none"><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-12" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button></div>
-          <div class="p-1"><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-13" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button></div>
-        </div>
-      </div>
-    </transition-stub>
-  </div>
-</div>"
-`;
-
-exports[`Dropdown > renders with items correctly 1`] = `
-"<!-- eslint-disable-next-line vue/no-template-shadow -->
-<div class="relative inline-flex text-left rtl:text-right" data-headlessui-state="open">
-  <div disabled="false" id="headlessui-menu-button-1" aria-haspopup="menu" class="inline-flex w-full" role="button" aria-expanded="true" data-headlessui-state="open" aria-controls="headlessui-menu-items-2"><button> Open </button></div>
-  <div class="z-20 group w-48" style="position: fixed; left: 0px; top: 0px; margin: 0px;">
-    <transition-stub enteractiveclass="transition duration-100 ease-out" enterfromclass="transform scale-95 opacity-0" entertoclass="transform scale-100 opacity-100" leaveactiveclass="transition duration-75 ease-in" leavefromclass="transform scale-100 opacity-100" leavetoclass="transform scale-95 opacity-0" appear="true" persisted="false" css="true">
-      <div>
-        <!--v-if-->
-        <div id="headlessui-menu-items-2" aria-labelledby="headlessui-menu-button-1" role="menu" tabindex="0" data-headlessui-state="open" class="relative focus:outline-none overflow-y-auto scroll-py-1 divide-y divide-gray-200 dark:divide-gray-700 ring-1 ring-gray-200 dark:ring-gray-700 rounded-md shadow-lg bg-white dark:bg-gray-800">
-          <div class="p-1" role="none"><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-3" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button></div>
-          <div class="p-1"><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-4" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button></div>
-        </div>
-      </div>
-    </transition-stub>
-  </div>
-</div>"
-`;
-
-exports[`Dropdown > renders with open correctly 1`] = `
-"<!-- eslint-disable-next-line vue/no-template-shadow -->
-<div class="relative inline-flex text-left rtl:text-right" data-headlessui-state="open">
-  <div disabled="false" id="headlessui-menu-button-5" aria-haspopup="menu" class="inline-flex w-full" role="button" aria-expanded="true" data-headlessui-state="open" aria-controls="headlessui-menu-items-6"><button> Open </button></div>
-  <div class="z-20 group w-48" style="position: fixed; left: 0px; top: 0px; margin: 0px;">
-    <transition-stub enteractiveclass="transition duration-100 ease-out" enterfromclass="transform scale-95 opacity-0" entertoclass="transform scale-100 opacity-100" leaveactiveclass="transition duration-75 ease-in" leavefromclass="transform scale-100 opacity-100" leavetoclass="transform scale-95 opacity-0" appear="true" persisted="false" css="true">
-      <div>
-        <!--v-if-->
-        <div id="headlessui-menu-items-6" aria-labelledby="headlessui-menu-button-5" role="menu" tabindex="0" data-headlessui-state="open" class="relative focus:outline-none overflow-y-auto scroll-py-1 divide-y divide-gray-200 dark:divide-gray-700 ring-1 ring-gray-200 dark:ring-gray-700 rounded-md shadow-lg bg-white dark:bg-gray-800">
-          <div class="p-1" role="none"><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-7" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button></div>
-          <div class="p-1"><button class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200" id="headlessui-menu-item-8" role="menuitem" data-headlessui-state="">
-              <!--v-if--><span class="truncate"></span>
-              <!--v-if-->
-            </button></div>
-        </div>
-      </div>
-    </transition-stub>
-  </div>
+<div data-headlessui-state="">
+  <div disabled="true" id="headlessui-menu-button-11" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="" role="button"><button disabled=""> Open </button></div>
+  <!--v-if-->
 </div>"
 `;

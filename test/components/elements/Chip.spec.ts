@@ -11,9 +11,9 @@ describe('Chip', () => {
     ['with custom position', { props: { position: 'top-left' } }],
     ['with inset chip', { props: { inset: true } }],
     ['with hidden chip', { props: { show: false } }],
-    ['with content slot', { slots: { content: 'Content slot' } }]
+    ['with content slot', { slots: { content: () => 'Content slot' } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Chip.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UChip.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UChip)
     expect(html).toMatchSnapshot()
   })

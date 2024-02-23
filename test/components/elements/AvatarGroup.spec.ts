@@ -5,11 +5,10 @@ import ComponentRender from '../component-render'
 
 describe('AvatarGroup', () => {
   it.each([
-    // TODO: try to fix TypeError: The "path" argument must be of type string. Received undefined
-    // ['basic case', {}],
-    // ['with max', { props: { max: 20 } }],
+    ['basic case', {}],
+    ['with max', { props: { max: 20 } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof AvatarGroup.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UAvatarGroup.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UAvatarGroup)
     expect(html).toMatchSnapshot()
   })

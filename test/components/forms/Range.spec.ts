@@ -15,7 +15,7 @@ describe('Range', () => {
     ['with custom size', { props: { size: 'lg' } }],
     ['with custom color', { props: { color: 'red' } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Range.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof URange.props>) => {
     const html = await ComponentRender(nameOrHtml, options, URange)
     expect(html).toMatchSnapshot()
   })

@@ -11,13 +11,13 @@ describe('Radio', () => {
     ['with name', { props: { name: 'radioName' } }],
     ['with disabled', { props: { disabled: true } }],
     ['with label', { props: { label: 'Radio Label' } }],
-    ['with label slot', { slots: { label: 'label slot' } }],
     ['with help', { props: { label: 'Radio Label', help: 'Help text' } }],
     ['with required', { props: { label: 'Radio Label', required: true } }],
     ['with custom color', { props: { color: 'blue' } }],
-    ['with inputClass', { props: { class: 'w-full' } }]
+    ['with inputClass', { props: { class: 'w-full' } }],
+    ['with label slot', { slots: { label: () => 'Label slot' } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Radio.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof URadio.props>) => {
     const html = await ComponentRender(nameOrHtml, options, URadio)
     expect(html).toMatchSnapshot()
   })

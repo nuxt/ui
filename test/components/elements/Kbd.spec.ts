@@ -9,9 +9,9 @@ describe('Kbd', () => {
     ['with custom size', { props: { size: 'xs' } }],
     ['with custom class', { props: { class: 'w-full h-full' } }],
     ['with value', { props: { value: 'label' } }],
-    ['with slot', { slots: { default: 'slot' } }]
+    ['with default slot', { slots: { default: () => 'Default slot' } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Kbd.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UKbd.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UKbd)
     expect(html).toMatchSnapshot()
   })

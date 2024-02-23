@@ -6,7 +6,7 @@ import ComponentRender from '../component-render'
 describe('FormGroup', () => {
   it.each([
     // TODO: try to fix TypeError: 'set' on proxy: trap returned falsish for property 'error'
-    //['basic case', { }],
+    ['basic case', {}]
     // ['with custom name and size', { props: { name: 'username', size: 'medium' } }],
     // ['with label and description', { props: { label: 'Username', description: 'Enter your username' } }],
     // ['with required flag set to true', { props: { required: true } }],
@@ -17,7 +17,7 @@ describe('FormGroup', () => {
     // ['with custom UI size mapping', { props: { ui: { size: { medium: 'medium-size' } } } }],
     // ['with eagerValidation', { props: { eagerValidation: true } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof FormGroup.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UFormGroup.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UFormGroup)
     expect(html).toMatchSnapshot()
   })
