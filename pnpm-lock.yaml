@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@nuxt/kit': ^3.10.3
+  '@nuxt/kit': 3.10.3
   '@nuxt/schema': 3.10.3
   tailwindcss: 3.4.1
   '@headlessui/vue': 1.7.19
@@ -28,7 +28,7 @@ importers:
         specifier: ^1.1.20
         version: 1.1.20
       '@nuxt/kit':
-        specifier: ^3.10.3
+        specifier: 3.10.3
         version: 3.10.3(rollup@3.29.4)
       '@nuxtjs/color-mode':
         specifier: ^3.3.2
@@ -1847,7 +1847,7 @@ packages:
     resolution: {integrity: sha512-ifFfwA1rbSXSae25RmqA2kAbV3xoShZNrq1yK8VXB/EnIcDn4WiaYR1PytaSxIt5zsvWPn92BJXiIUBiMQZ0hw==}
     hasBin: true
     peerDependencies:
-      '@nuxt/kit': ^3.10.3
+      '@nuxt/kit': 3.10.3
       nuxi: ^3.10.0
     dependencies:
       '@nuxt/kit': 3.10.3(rollup@3.29.4)
