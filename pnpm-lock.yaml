@@ -165,8 +165,8 @@ importers:
         specifier: ^1.3.0
         version: 1.3.0(rollup@3.29.4)
       '@nuxt/ui-pro':
-        specifier: npm:@nuxt/ui-pro-edge@1.0.0-28476869.809f447
-        version: /@nuxt/ui-pro-edge@1.0.0-28476869.809f447(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.19)
+        specifier: npm:@nuxt/ui-pro-edge@1.0.0-28478433.ed477f1
+        version: /@nuxt/ui-pro-edge@1.0.0-28478433.ed477f1(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.19)
       '@nuxtjs/fontaine':
         specifier: ^0.4.1
         version: 0.4.1(rollup@3.29.4)
@@ -1979,10 +1979,10 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/ui-pro-edge@1.0.0-28476869.809f447(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.19):
-    resolution: {integrity: sha512-AAJ8FVVtcYbSBoGdu/di5g/L6nxSxssaSK9eZkvW0z58WumghzRX+7cOzNvogN7acaR0YCj3NNbe7JHFhEjLXQ==}
+  /@nuxt/ui-pro-edge@1.0.0-28478433.ed477f1(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.19):
+    resolution: {integrity: sha512-bDpIhCwPzQQ7l2J+lPzJ3a7IK509/fJUOhLERZDP0UiNMU8e1aA8Q1VaC8yOIc54/LT7tVFh9k2mjDm0qrjdpg==}
     dependencies:
-      '@nuxt/ui': 2.14.0(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.19)
+      '@nuxt/ui': 2.14.1(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.19)
       '@vueuse/core': 10.8.0(vue@3.4.19)
       defu: 6.1.4
       git-url-parse: 14.0.0
@@ -2016,8 +2016,8 @@ packages:
   /@nuxt/ui-templates@1.3.1:
     resolution: {integrity: sha512-5gc02Pu1HycOVUWJ8aYsWeeXcSTPe8iX8+KIrhyEtEoOSkY0eMBuo0ssljB8wALuEmepv31DlYe5gpiRwkjESA==}
 
-  /@nuxt/ui@2.14.0(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.19):
-    resolution: {integrity: sha512-WLjHv1zdJCmSU//wiigMXz7C4k0sroL8tCSNXnBRJAD5UIQiZ70gN+RFV9YRv4Ofv/soeYUgXZoiYTu4u3NHbA==}
+  /@nuxt/ui@2.14.1(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.19):
+    resolution: {integrity: sha512-yz6S05a37Q5PRskw1eXtRet4q8C463WMJFSu1Lw7zpKSl2yCyPJYegzwXqQV/fLo/NvM9j62XTuEy7+Xe7j0Kw==}
     engines: {node: '>=v16.20.2'}
     dependencies:
       '@egoist/tailwindcss-icons': 1.7.4(tailwindcss@3.4.1)
@@ -3132,6 +3132,7 @@ packages:
   /@trysound/sax@0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
+    requiresBuild: true
 
   /@tufjs/canonical-json@2.0.0:
     resolution: {integrity: sha512-yVtV8zsdo8qFHe+/3kw81dSLyF7D576A5cCFCi4X7B39tWT7SekaEFUnvnWJHz+9qO7qJTah1JbrDjWKqFtdWA==}
@@ -4979,6 +4980,7 @@ packages:
   /commander@7.2.0:
     resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
     engines: {node: '>= 10'}
+    requiresBuild: true
 
   /commander@8.3.0:
     resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
@@ -5288,6 +5290,7 @@ packages:
 
   /css-select@5.1.0:
     resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
+    requiresBuild: true
     dependencies:
       boolbase: 1.0.0
       css-what: 6.1.0
@@ -5321,6 +5324,7 @@ packages:
   /css-what@6.1.0:
     resolution: {integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==}
     engines: {node: '>= 6'}
+    requiresBuild: true
 
   /cssesc@3.0.0:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
@@ -5391,6 +5395,7 @@ packages:
   /csso@5.0.5:
     resolution: {integrity: sha512-0LrrStPOdJj+SPCCrGhzryycLjwcgUSHBtxNA8aIDxf0GLsRh1cKYhB00Gd1lDOS4yGH69+SNn13+TWbVHETFQ==}
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
+    requiresBuild: true
     dependencies:
       css-tree: 2.2.1
 
