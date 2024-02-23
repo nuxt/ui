@@ -9,7 +9,7 @@ exports[`Radio > renders basic case correctly 1`] = `
 
 exports[`Radio > renders with custom color correctly 1`] = `
 "<div class="">
-  <div class=""><input id="8" type="radio" class=""></div>
+  <div class=""><input id="7" type="radio" class=""></div>
   <!--v-if-->
 </div>"
 `;
@@ -30,8 +30,8 @@ exports[`Radio > renders with disabled correctly 1`] = `
 
 exports[`Radio > renders with help correctly 1`] = `
 "<div class="">
-  <div class=""><input id="6" type="radio" class=""></div>
-  <div class=""><label for="6" class="">Radio Label
+  <div class=""><input id="5" type="radio" class=""></div>
+  <div class=""><label for="5" class="">Radio Label
       <!--v-if-->
     </label>
     <p class="">Help text</p>
@@ -41,7 +41,7 @@ exports[`Radio > renders with help correctly 1`] = `
 
 exports[`Radio > renders with inputClass correctly 1`] = `
 "<div class="">
-  <div class=""><input id="9" type="radio" class=""></div>
+  <div class=""><input id="8" type="radio" class=""></div>
   <!--v-if-->
 </div>"
 `;
@@ -59,8 +59,8 @@ exports[`Radio > renders with label correctly 1`] = `
 
 exports[`Radio > renders with label slot correctly 1`] = `
 "<div class="">
-  <div class=""><input id="5" type="radio" class=""></div>
-  <div class=""><label for="5" class="">label slot
+  <div class=""><input id="9" type="radio" class=""></div>
+  <div class=""><label for="9" class="">Label slot
       <!--v-if-->
     </label>
     <!--v-if-->
@@ -77,8 +77,8 @@ exports[`Radio > renders with name correctly 1`] = `
 
 exports[`Radio > renders with required correctly 1`] = `
 "<div class="">
-  <div class=""><input id="7" required="" type="radio" class=""></div>
-  <div class=""><label for="7" class="">Radio Label<span class="">*</span></label>
+  <div class=""><input id="6" required="" type="radio" class=""></div>
+  <div class=""><label for="6" class="">Radio Label<span class="">*</span></label>
     <!--v-if-->
   </div>
 </div>"

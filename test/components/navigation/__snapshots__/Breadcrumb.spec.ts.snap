@@ -26,7 +26,7 @@ exports[`Breadcrumb > renders with divider slot correctly 1`] = `
   <ol class="">
     <li class=""><a class="" href="/">
         <!--v-if--><span class="">Home</span>
-      </a>divider slot</li>
+      </a>Divider slot</li>
     <li class=""><a class="" aria-current="page" href="/about">
         <!--v-if--><span class="">About</span>
       </a>

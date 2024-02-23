@@ -67,14 +67,14 @@ exports[`Select > renders with leading slot + iconName correctly 1`] = `
 "<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="" iconname="i-heroicons-cloud">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
-  </select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">leading slot</span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"
+  </select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">Leading slot</span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"
 `;
 
 exports[`Select > renders with leading slot correctly 1`] = `
 "<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
-  </select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">leading slot</span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"
+  </select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">Leading slot</span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"
 `;
 
 exports[`Select > renders with leadingIcon correctly 1`] = `"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-adjustments-vertical flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
@@ -125,7 +125,9 @@ exports[`Select > renders with trailing slot + iconName correctly 1`] = `
 "<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="" iconname="i-heroicons-bookmark-solid">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
-  </select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">trailing slot</span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"
+  </select>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5">Trailing slot</span>
+</div>"
 `;
 
 exports[`Select > renders with trailing slot correctly 1`] = `
@@ -133,20 +135,6 @@ exports[`Select > renders with trailing slot correctly 1`] = `
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
   </select>
-  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5">trailing slot</span>
+  <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5">Trailing slot</span>
 </div>"
-`;
-
-exports[`Select > renders with training slot + iconName correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="" iconname="i-heroicons-bookmark-solid">
-    <option data-v-cc4daab7="" value="opt1">Option 1</option>
-    <option data-v-cc4daab7="" value="opt2">Option 2</option>
-  </select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">trailing slot</span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"
-`;
-
-exports[`Select > renders with training slot correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
-    <option data-v-cc4daab7="" value="opt1">Option 1</option>
-    <option data-v-cc4daab7="" value="opt2">Option 2</option>
-  </select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">trailing slot</span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"
 `;

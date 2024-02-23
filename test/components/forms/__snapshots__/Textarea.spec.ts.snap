@@ -4,7 +4,7 @@ exports[`Textarea > renders basic case correctly 1`] = `"<div class=""><textarea
 
 exports[`Textarea > renders with color correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea></div>"`;
 
-exports[`Textarea > renders with default slot correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>default slot</div>"`;
+exports[`Textarea > renders with default slot correctly 1`] = `"<div class=""><textarea rows="3" class=""></textarea>Default slot</div>"`;
 
 exports[`Textarea > renders with disabled correctly 1`] = `"<div class=""><textarea rows="3" disabled="" class=""></textarea></div>"`;
 

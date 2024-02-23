@@ -45,29 +45,14 @@ exports[`Alert > renders with custom variant correctly 1`] = `
 </div>"
 `;
 
-exports[`Alert > renders with description correctly 1`] = `
-"<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
-  <div class="flex items-start">
-    <!--v-if-->
-    <!--v-if-->
-    <div class="">
-      <p class="">Alert Title</p>
-      <p class="">This is an alert description.</p>
-      <!--v-if-->
-    </div>
-    <!--v-if-->
-  </div>
-</div>"
-`;
-
 exports[`Alert > renders with description slot correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
   <div class="flex items-start">
     <!--v-if-->
     <!--v-if-->
     <div class="">
-      <p class="">Alert Title</p>
-      <p class="">This is an alert description slot</p>
+      <!--v-if-->
+      <p class="">Description slot</p>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -96,7 +81,7 @@ exports[`Alert > renders with title slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <div class="">
-      <p class="">Alert Title slot</p>
+      <p class="">Title slot</p>
       <!--v-if-->
       <!--v-if-->
     </div>

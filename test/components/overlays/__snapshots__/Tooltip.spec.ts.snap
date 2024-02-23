@@ -15,7 +15,7 @@ exports[`Tooltip > renders basic case correctly 1`] = `
 `;
 
 exports[`Tooltip > renders with default slot correctly 1`] = `
-"<div>default slot<div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
+"<div>Default slot<div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
     <transition-stub appear="true" persisted="false" css="true">
       <div>
         <!--v-if-->
@@ -33,21 +33,7 @@ exports[`Tooltip > renders with shortcuts correctly 1`] = `
     <transition-stub appear="true" persisted="false" css="true">
       <div>
         <!--v-if-->
-        <div class=""><span class=""><span class="">·</span><kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white h-4 min-w-[16px] text-[10px] px-1 rounded font-medium font-sans bg-gray-100 dark:bg-gray-800 ring-1 ring-gray-300 dark:ring-gray-700 ring-inset">Cmd+k</kbd><kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white h-4 min-w-[16px] text-[10px] px-1 rounded font-medium font-sans bg-gray-100 dark:bg-gray-800 ring-1 ring-gray-300 dark:ring-gray-700 ring-inset">Cmd+S</kbd></span></div>
-      </div>
-    </transition-stub>
-  </div>
-</div>"
-`;
-
-exports[`Tooltip > renders with slot text correctly 1`] = `
-"<div> Hover <div class="" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
-    <transition-stub appear="true" persisted="false" css="true">
-      <div>
-        <!--v-if-->
-        <div class="">tooltip slot text
-          <!--v-if-->
-        </div>
+        <div class=""><span class=""><span class="">·</span><kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white h-4 min-w-[16px] text-[10px] px-1 rounded font-medium font-sans bg-gray-100 dark:bg-gray-800 ring-1 ring-gray-300 dark:ring-gray-700 ring-inset">G</kbd><kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white h-4 min-w-[16px] text-[10px] px-1 rounded font-medium font-sans bg-gray-100 dark:bg-gray-800 ring-1 ring-gray-300 dark:ring-gray-700 ring-inset">I</kbd></span></div>
       </div>
     </transition-stub>
   </div>

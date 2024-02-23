@@ -2,4 +2,4 @@
 
 exports[`Form > renders basic case correctly 1`] = `"<form></form>"`;
 
-exports[`Form > renders with default slot correctly 1`] = `"<form>Form slot</form>"`;
+exports[`Form > renders with default slot correctly 1`] = `"<form>Default slot</form>"`;

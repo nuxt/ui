@@ -8,14 +8,6 @@ exports[`Dropdown > renders basic case correctly 1`] = `
 </div>"
 `;
 
-exports[`Dropdown > renders width disabled correctly 1`] = `
-"<!-- eslint-disable-next-line vue/no-template-shadow -->
-<div data-headlessui-state="">
-  <div disabled="true" id="headlessui-menu-button-11" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="" role="button"><button disabled=""> Open </button></div>
-  <!--v-if-->
-</div>"
-`;
-
 exports[`Dropdown > renders with close correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
 <div data-headlessui-state="">
