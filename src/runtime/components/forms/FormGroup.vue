@@ -90,6 +90,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    eagerValidation: {
+      type: Boolean,
+      default: false
+    },
     class: {
       type: [String, Object, Array] as PropType<any>,
       default: () => ''
@@ -97,10 +101,6 @@ export default defineComponent({
     ui: {
       type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
-    },
-    eagerValidation: {
-      type: Boolean,
-      default: false
     }
   },
   setup (props) {

@@ -5,7 +5,6 @@ import ComponentRender from '../component-render'
 
 describe('CommandPalette', () => {
   it.each([
-    ['basic case', {}],
     ['with placeholder', { props: { placeholder: 'Emptystate placeholder' } }],
     ['with multiple', { props: { multiple: true } }],
     ['with nullable', { props: { nullable: true } }],

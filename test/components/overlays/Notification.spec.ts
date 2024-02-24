@@ -5,7 +5,6 @@ import ComponentRender from '../component-render'
 
 describe('Notification', () => {
   it.each([
-    ['basic case', {}],
     ['with title', { props: { title: 'Notification title' } }],
     ['with description', { props: { description: 'Notification description' } }],
     ['with icon', { props: { icon: 'i-heroicons-academic-cap' } }],

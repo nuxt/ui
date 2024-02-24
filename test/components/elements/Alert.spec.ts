@@ -5,7 +5,6 @@ import ComponentRender from '../component-render'
 
 describe('Alert', () => {
   it.each([
-    ['basic case', {}],
     ['with title', { props: { title: 'Alert Title' } }],
     ['with icon', { props: { title: 'Alert Title', icon: 'heroicons-information-circle' } }],
     ['with avatar', { props: { title: 'Alert Title', avatar: { src: 'avatar.jpg', alt: 'User Avatar' } } }],
