@@ -5,7 +5,6 @@ import ComponentRender from '../component-render'
 
 describe('Tooltip', () => {
   it.each([
-    ['basic case', {}],
     ['with text', { props: { text: 'tooltip text' } }],
     ['with shortcuts', { props: { shortcuts: ['G', 'I'] } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],

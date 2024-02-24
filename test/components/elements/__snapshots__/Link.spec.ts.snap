@@ -8,8 +8,20 @@ exports[`Link > renders disabled set to true correctly 1`] = `"<button type="but
 
 exports[`Link > renders with active correctly 1`] = `"<a class="text-sm"></a>"`;
 
+exports[`Link > renders with activeClass correctly 1`] = `"<a class="text-sm"></a>"`;
+
+exports[`Link > renders with as correctly 1`] = `"<div type="button"></div>"`;
+
 exports[`Link > renders with custom as prop correctly 1`] = `"<a type="button"></a>"`;
 
 exports[`Link > renders with custom type prop correctly 1`] = `"<button type="submit"></button>"`;
 
+exports[`Link > renders with disabled correctly 1`] = `"<button type="button" disabled=""></button>"`;
+
 exports[`Link > renders with inactive correctly 1`] = `"<a class="text-gray-300"></a>"`;
+
+exports[`Link > renders with inactiveClass correctly 1`] = `"<a class="text-gray-300"></a>"`;
+
+exports[`Link > renders with to correctly 1`] = `"<a></a>"`;
+
+exports[`Link > renders with type correctly 1`] = `"<button type="submit"></button>"`;

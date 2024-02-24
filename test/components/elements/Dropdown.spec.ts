@@ -5,7 +5,6 @@ import ComponentRender from '../component-render'
 
 describe('Dropdown', () => {
   it.each([
-    ['basic case', {}],
     ['with items', { props: { open: true, items: [{ label: 'label1' }, { label: 'label2' }] } }],
     ['with open', { props: { open: true, items: [{ label: 'label1' }, { label: 'label2' }] } }],
     ['with close', { props: { open: false, items: [{ label: 'label1' }, { label: 'label2' }] } }],

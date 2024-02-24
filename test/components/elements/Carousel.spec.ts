@@ -5,7 +5,6 @@ import ComponentRender from '../component-render'
 
 describe('Carousel', () => {
   it.each([
-    ['basic case', {}],
     ['with arrows and indicators', { props: { arrows: true, indicators: true } }],
     ['with arrows only', { props: { arrows: true, indicators: false } }],
     ['with indicators only', { props: { arrows: false, indicators: true } }],

@@ -3,12 +3,9 @@ import { UPopover } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
 
-
 describe('Popover', () => {
   it.each([
-    ['basic case', {}]
-    //TODO: try to fix Cannot read properties of undefined (reading 'Symbol(parentNode)')
-    // ['with open', { props: { open: true } }],
+    ['basic case', { props: { modelValue: true } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UPopover.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UPopover)

@@ -5,17 +5,12 @@ import ComponentRender from '../component-render'
 
 describe('FormGroup', () => {
   it.each([
-    // TODO: try to fix TypeError: 'set' on proxy: trap returned falsish for property 'error'
-    ['basic case', {}]
-    // ['with custom name and size', { props: { name: 'username', size: 'medium' } }],
-    // ['with label and description', { props: { label: 'Username', description: 'Enter your username' } }],
-    // ['with required flag set to true', { props: { required: true } }],
-    // ['with help text', { props: { help: 'Username must be unique' } }],
-    // ['with error message', { props: { error: 'Username is already taken' } }],
-    // ['with hint', { props: { hint: 'Use letters, numbers, and special characters' } }],
-    // ['with custom class', { props: { class: 'custom-class' } }],
-    // ['with custom UI size mapping', { props: { ui: { size: { medium: 'medium-size' } } } }],
-    // ['with eagerValidation', { props: { eagerValidation: true } }]
+    ['with label and description', { props: { label: 'Username', description: 'Enter your username' } }],
+    ['with size', { props: { label: 'Username', description: 'Enter your username', size: 'xl' } }],
+    ['with required', { props: { label: 'Username', required: true } }],
+    ['with help', { props: { help: 'Username must be unique' } }],
+    ['with error', { props: { error: 'Username is already taken' } }],
+    ['with hint', { props: { hint: 'Use letters, numbers, and special characters' } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UFormGroup.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UFormGroup)

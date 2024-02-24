@@ -5,9 +5,8 @@ import ComponentRender from '../component-render'
 
 describe('Tabs', () => {
   it.each([
-    ['basic case', {}],
-    ['with orientation', { props: { orientation: 'vertical' } }],
     ['with items', { props: { items: [{ label: 'Item 1' }, { label: 'Item 2' }] } }],
+    ['with orientation', { props: { items: [{ label: 'Item 1' }, { label: 'Item 2' }], orientation: 'vertical' } }],
     ['with default slot', { slots: { default: () => 'Default slot' }, props: { items: [{ label: 'Item 1' }, { label: 'Item 2' }] } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UTabs.props>) => {

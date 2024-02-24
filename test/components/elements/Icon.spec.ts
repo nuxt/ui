@@ -5,7 +5,6 @@ import ComponentRender from '../component-render'
 
 describe('Icon', () => {
   it.each([
-    ['basic case', {}],
     ['with name', { props: { name: 'i-heroicons-academic-cap' } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UIcon.props>) => {

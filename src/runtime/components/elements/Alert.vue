@@ -1,31 +1,31 @@
 <template>
   <div :class="alertClass" v-bind="attrs">
-    <div class="flex" :class="[ui.gap, { 'items-start': (description || $slots.description), 'items-center': !description && !$slots.description }]">
-      <UIcon v-if="icon" :name="icon" :class="ui.icon.base" />
-      <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
+    <div class="flex" :class="[_ui.gap, { 'items-start': (description || $slots.description), 'items-center': !description && !$slots.description }]">
+      <UIcon v-if="icon" :name="icon" :class="_ui.icon.base" />
+      <UAvatar v-if="avatar" v-bind="{ size: _ui.avatar.size, ...avatar }" :class="_ui.avatar.base" />
 
-      <div :class="ui.inner">
-        <p v-if="(title || $slots.title)" :class="ui.title">
+      <div :class="_ui.inner">
+        <p v-if="(title || $slots.title)" :class="_ui.title">
           <slot name="title" :title="title">
             {{ title }}
           </slot>
         </p>
-        <p v-if="description || $slots.description" :class="ui.description">
+        <p v-if="description || $slots.description" :class="_ui.description">
           <slot name="description" :description="description">
             {{ description }}
           </slot>
         </p>
 
-        <div v-if="(description || $slots.description) && actions.length" :class="ui.actions">
-          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
+        <div v-if="(description || $slots.description) && actions.length" :class="_ui.actions">
+          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(_ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
         </div>
       </div>
-      <div v-if="closeButton || (!description && !$slots.description && actions.length)" :class="twMerge(ui.actions, 'mt-0')">
+      <div v-if="closeButton || (!description && !$slots.description && actions.length)" :class="twMerge(_ui.actions, 'mt-0')">
         <template v-if="!description && !$slots.description && actions.length">
-          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
+          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(_ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
         </template>
 
-        <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(ui.default.closeButton || {}), ...closeButton }" @click.stop="$emit('close')" />
+        <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(_ui.default.closeButton || {}), ...closeButton }" @click.stop="$emit('close')" />
       </div>
     </div>
   </div>
@@ -128,8 +128,7 @@ export default defineComponent({
     }
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       alertClass,
       onAction,

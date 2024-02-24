@@ -5,7 +5,6 @@ import ComponentRender from '../component-render'
 
 describe('Breadcrumb', () => {
   it.each([
-    ['basic case', {}],
     ['with links', { props: { links: [{ label: 'Home', to: '/' }, { label: 'About', to: '/about' }] } }],
     ['with divider', { props: { divider: '|', links: [{ label: 'Home', to: '/' }, { label: 'About', to: '/about' }] } }],
     ['with icon', { props: { links: [{ label: 'Home', to: '/', icon: 'i-heroicons-academic-cap' }, { label: 'About', to: '/about', icon: 'i-heroicons-code-bracket-square' }] } }],

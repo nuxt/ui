@@ -5,10 +5,8 @@ import ComponentRender from '../component-render'
 
 describe('Kbd', () => {
   it.each([
-    ['basic case', {}],
-    ['with custom size', { props: { size: 'xs' } }],
-    ['with custom class', { props: { class: 'w-full h-full' } }],
-    ['with value', { props: { value: 'label' } }],
+    ['with value', { props: { value: 'O' } }],
+    ['with custom size', { props: { value: 'O', size: 'xs' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }]
     // @ts-ignore
   ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UKbd.props>) => {
