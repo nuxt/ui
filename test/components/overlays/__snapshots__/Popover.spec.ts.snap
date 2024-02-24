@@ -2,8 +2,8 @@
 
 exports[`Popover > renders basic case correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<div data-headlessui-state="">
-  <div class="" role="button" id="headlessui-popover-button-0" aria-expanded="false" data-headlessui-state=""><button> Open </button></div>
+<div class="relative" data-headlessui-state="">
+  <div class="inline-flex w-full" role="button" id="headlessui-popover-button-0" aria-expanded="false" data-headlessui-state=""><button> Open </button></div>
   <!---->
   <!--v-if-->
   <!--v-if-->

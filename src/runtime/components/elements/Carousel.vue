@@ -1,22 +1,22 @@
 <template>
-  <div :class="ui.wrapper" v-bind="attrs">
-    <div ref="carouselRef" :class="ui.container" class="no-scrollbar">
+  <div :class="_ui.wrapper" v-bind="attrs">
+    <div ref="carouselRef" :class="_ui.container" class="no-scrollbar">
       <div
         v-for="(item, index) in items"
         :key="index"
-        :class="ui.item"
+        :class="_ui.item"
       >
         <slot :item="item" :index="index" />
       </div>
     </div>
 
-    <div v-if="arrows" :class="ui.arrows.wrapper">
+    <div v-if="arrows" :class="_ui.arrows.wrapper">
       <slot name="prev" :on-click="onClickPrev" :disabled="isFirst">
         <UButton
           v-if="prevButton"
           :disabled="isFirst"
-          v-bind="{ ...ui.default.prevButton, ...prevButton }"
-          :class="twMerge(ui.default.prevButton.class, prevButton?.class)"
+          v-bind="{ ..._ui.default.prevButton, ...prevButton }"
+          :class="twMerge(_ui.default.prevButton.class, prevButton?.class)"
           aria-label="Prev"
           @click="onClickPrev"
         />
@@ -26,22 +26,22 @@
         <UButton
           v-if="nextButton"
           :disabled="isLast"
-          v-bind="{ ...ui.default.nextButton, ...nextButton }"
-          :class="twMerge(ui.default.nextButton.class, nextButton?.class)"
+          v-bind="{ ..._ui.default.nextButton, ...nextButton }"
+          :class="twMerge(_ui.default.nextButton.class, nextButton?.class)"
           aria-label="Next"
           @click="onClickNext"
         />
       </slot>
     </div>
 
-    <div v-if="indicators" :class="ui.indicators.wrapper">
+    <div v-if="indicators" :class="_ui.indicators.wrapper">
       <template v-for="page in pages" :key="page">
         <slot name="indicator" :on-click="onClick" :active="page === currentPage" :page="page">
           <button
             type="button"
             :class="[
-              ui.indicators.base,
-              page === currentPage ? ui.indicators.active : ui.indicators.inactive
+              _ui.indicators.base,
+              page === currentPage ? _ui.indicators.active : _ui.indicators.inactive
             ]"
             :aria-label="`set slide ${page}`"
             @click="onClick(page)"
@@ -153,8 +153,7 @@ export default defineComponent({
     })
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       isFirst,
       isLast,

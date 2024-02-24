@@ -1,11 +1,11 @@
 <template>
   <!-- eslint-disable-next-line vue/no-template-shadow -->
-  <HMenu v-slot="{ open }" as="div" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
+  <HMenu v-slot="{ open }" as="div" :class="_ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HMenuButton
       ref="trigger"
       as="div"
       :disabled="disabled"
-      :class="ui.trigger"
+      :class="_ui.trigger"
       role="button"
       @mouseover="onMouseOver"
     >
@@ -16,13 +16,13 @@
       </slot>
     </HMenuButton>
 
-    <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
-      <Transition appear v-bind="ui.transition">
+    <div v-if="open && items.length" ref="container" :class="[_ui.container, _ui.width]" :style="containerStyle" @mouseover="onMouseOver">
+      <Transition appear v-bind="_ui.transition">
         <div>
-          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
+          <div v-if="_popper.arrow" data-popper-arrow :class="Object.values(_ui.arrow)" />
 
-          <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
-            <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
+          <HMenuItems :class="[_ui.base, _ui.divide, _ui.ring, _ui.rounded, _ui.shadow, _ui.background, _ui.height]" static>
+            <div v-for="(subItems, index) of items" :key="index" :class="_ui.padding">
               <NuxtLink v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ href, target, rel, navigate, isExternal }" v-bind="getNuxtLinkProps(item)" custom>
                 <HMenuItem v-slot="{ active, disabled: itemDisabled, close }" :disabled="item.disabled">
                   <component
@@ -30,16 +30,16 @@
                     :href="!itemDisabled ? href : undefined"
                     :rel="rel"
                     :target="target"
-                    :class="twMerge(twJoin(ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled), item.class)"
+                    :class="twMerge(twJoin(_ui.item.base, _ui.item.padding, _ui.item.size, _ui.item.rounded, active ? _ui.item.active : _ui.item.inactive, itemDisabled && _ui.item.disabled), item.class)"
                     @click="onClick($event, item, { href, navigate, close, isExternal })"
                   >
                     <slot :name="item.slot || 'item'" :item="item">
-                      <UIcon v-if="item.icon" :name="item.icon" :class="twMerge(twJoin(ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive), item.iconClass)" />
-                      <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
+                      <UIcon v-if="item.icon" :name="item.icon" :class="twMerge(twJoin(_ui.item.icon.base, active ? _ui.item.icon.active : _ui.item.icon.inactive), item.iconClass)" />
+                      <UAvatar v-else-if="item.avatar" v-bind="{ size: _ui.item.avatar.size, ...item.avatar }" :class="_ui.item.avatar.base" />
 
-                      <span :class="twMerge(ui.item.label, item.labelClass)">{{ item.label }}</span>
+                      <span :class="twMerge(_ui.item.label, item.labelClass)">{{ item.label }}</span>
 
-                      <span v-if="item.shortcuts?.length" :class="ui.item.shortcuts">
+                      <span v-if="item.shortcuts?.length" :class="_ui.item.shortcuts">
                         <UKbd v-for="shortcut of item.shortcuts" :key="shortcut">{{ shortcut }}</UKbd>
                       </span>
                     </slot>
@@ -255,11 +255,9 @@ export default defineComponent({
     provideUseId(() => useId())
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
-      // eslint-disable-next-line vue/no-dupe-keys
-      popper,
+      _popper: popper,
       trigger,
       container,
       containerStyle,

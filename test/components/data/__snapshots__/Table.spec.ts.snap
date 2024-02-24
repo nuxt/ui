@@ -1,0 +1,289 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Table > renders basic case correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700">
+    <thead class="relative">
+      <tr class="">
+        <!--v-if-->
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Name</span></th>
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Age</span></th>
+      </tr>
+      <!--v-if-->
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+      <tr>
+        <td colspan="2">
+          <div class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14"><span class="i-heroicons-circle-stack-20-solid w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4" aria-hidden="true"></span>
+            <p class="text-sm text-center text-gray-900 dark:text-white">No items.</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;
+
+exports[`Table > renders custom sort button correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700">
+    <thead class="relative">
+      <tr class="">
+        <!--v-if-->
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-base gap-x-2.5 p-2.5 inline-flex items-center -m-1.5">
+            <!--v-if--><span class="">Name</span><span class="i-heroicons-academic-cap flex-shrink-0 h-6 w-6" aria-hidden="true"></span>
+          </button></th>
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Age</span></th>
+      </tr>
+      <!--v-if-->
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+      <tr>
+        <td colspan="2">
+          <div class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14"><span class="i-heroicons-circle-stack-20-solid w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4" aria-hidden="true"></span>
+            <p class="text-sm text-center text-gray-900 dark:text-white">No items.</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;
+
+exports[`Table > renders empty state props correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700">
+    <thead class="relative">
+      <tr class="">
+        <!--v-if-->
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Name</span></th>
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Age</span></th>
+      </tr>
+      <!--v-if-->
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+      <tr>
+        <td colspan="2">
+          <div class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14"><span class="i-heroicons-inbox w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4" aria-hidden="true"></span>
+            <p class="text-sm text-center text-gray-900 dark:text-white">No data available</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;
+
+exports[`Table > renders empty state slot correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700">
+    <thead class="relative">
+      <tr class="">
+        <!--v-if-->
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Name</span></th>
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Age</span></th>
+      </tr>
+      <!--v-if-->
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+      <tr>
+        <td colspan="2">Empty state slot</td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;
+
+exports[`Table > renders loading state correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700">
+    <thead class="relative">
+      <tr class="">
+        <!--v-if-->
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Name</span></th>
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Age</span></th>
+      </tr>
+      <tr>
+        <td colspan="0" class="absolute inset-x-0 -bottom-[0.5px] p-0">
+          <div data-v-0f229b8a="" class="w-full flex flex-col gap-2">
+            <!--v-if--><progress data-v-0f229b8a="" class="block appearance-none border-none overflow-hidden w-full [&::-webkit-progress-bar]:w-full h-px rounded-full [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-gray-200 [&::-webkit-progress-bar]:dark:bg-gray-700 [@supports(selector(&::-moz-progress-bar))]:bg-gray-200 [@supports(selector(&::-moz-progress-bar))]:dark:bg-gray-700 [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:transition-all [&::-webkit-progress-value]:ease-in-out [&::-moz-progress-bar]:rounded-full text-primary-500 dark:text-primary-400 [&::-webkit-progress-value]:bg-current [&::-moz-progress-bar]:bg-current indeterminate:relative indeterminate:after:rounded-full [&:indeterminate::-webkit-progress-value]:rounded-full [&:indeterminate::-moz-progress-bar]:rounded-full bar-animation-carousel"></progress>
+            <!--v-if-->
+          </div>
+        </td>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+      <tr>
+        <td colspan="2">
+          <div class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14"><span class="i-heroicons-sparkles w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4 animate-spin" aria-hidden="true"></span>
+            <p class="text-sm text-center text-gray-900 dark:text-white">Loading...</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;
+
+exports[`Table > renders loading state slot correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700">
+    <thead class="relative">
+      <tr class="">
+        <!--v-if-->
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Name</span></th>
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Age</span></th>
+      </tr>
+      <tr>
+        <td colspan="0" class="absolute inset-x-0 -bottom-[0.5px] p-0">
+          <div data-v-0f229b8a="" class="w-full flex flex-col gap-2">
+            <!--v-if--><progress data-v-0f229b8a="" class="block appearance-none border-none overflow-hidden w-full [&::-webkit-progress-bar]:w-full h-px rounded-full [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-gray-200 [&::-webkit-progress-bar]:dark:bg-gray-700 [@supports(selector(&::-moz-progress-bar))]:bg-gray-200 [@supports(selector(&::-moz-progress-bar))]:dark:bg-gray-700 [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:transition-all [&::-webkit-progress-value]:ease-in-out [&::-moz-progress-bar]:rounded-full text-primary-500 dark:text-primary-400 [&::-webkit-progress-value]:bg-current [&::-moz-progress-bar]:bg-current indeterminate:relative indeterminate:after:rounded-full [&:indeterminate::-webkit-progress-value]:rounded-full [&:indeterminate::-moz-progress-bar]:rounded-full bar-animation-carousel"></progress>
+            <!--v-if-->
+          </div>
+        </td>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+      <tr>
+        <td colspan="2">Loading state slot</td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;
+
+exports[`Table > renders selected rows correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700">
+    <thead class="relative">
+      <tr class="">
+        <!--v-if-->
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Name</span></th>
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Age</span></th>
+      </tr>
+      <!--v-if-->
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+      <tr class="">
+        <!--v-if-->
+        <td class="whitespace-nowrap px-4 py-4 text-gray-500 dark:text-gray-400 text-sm">John</td>
+        <td class="whitespace-nowrap px-4 py-4 text-gray-500 dark:text-gray-400 text-sm"></td>
+      </tr>
+      <tr class="">
+        <!--v-if-->
+        <td class="whitespace-nowrap px-4 py-4 text-gray-500 dark:text-gray-400 text-sm">Jane</td>
+        <td class="whitespace-nowrap px-4 py-4 text-gray-500 dark:text-gray-400 text-sm"></td>
+      </tr>
+      <tr class="">
+        <!--v-if-->
+        <td class="whitespace-nowrap px-4 py-4 text-gray-500 dark:text-gray-400 text-sm">Doe</td>
+        <td class="whitespace-nowrap px-4 py-4 text-gray-500 dark:text-gray-400 text-sm"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;
+
+exports[`Table > renders sort asc icon correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700">
+    <thead class="relative">
+      <tr class="">
+        <!--v-if-->
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center -m-1.5">
+            <!--v-if--><span class="">Name</span><span class="i-heroicons-arrows-up-down-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+          </button></th>
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Age</span></th>
+      </tr>
+      <!--v-if-->
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+      <tr>
+        <td colspan="2">
+          <div class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14"><span class="i-heroicons-circle-stack-20-solid w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4" aria-hidden="true"></span>
+            <p class="text-sm text-center text-gray-900 dark:text-white">No items.</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;
+
+exports[`Table > renders sort correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700">
+    <thead class="relative">
+      <tr class="">
+        <!--v-if-->
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center -m-1.5">
+            <!--v-if--><span class="">Name</span><span class="i-heroicons-arrows-up-down-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+          </button></th>
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Age</span></th>
+      </tr>
+      <!--v-if-->
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+      <tr>
+        <td colspan="2">
+          <div class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14"><span class="i-heroicons-circle-stack-20-solid w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4" aria-hidden="true"></span>
+            <p class="text-sm text-center text-gray-900 dark:text-white">No items.</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;
+
+exports[`Table > renders sort desc icon correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700">
+    <thead class="relative">
+      <tr class="">
+        <!--v-if-->
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center -m-1.5">
+            <!--v-if--><span class="">Name</span><span class="i-heroicons-arrows-up-down-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+          </button></th>
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Age</span></th>
+      </tr>
+      <!--v-if-->
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+      <tr>
+        <td colspan="2">
+          <div class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14"><span class="i-heroicons-circle-stack-20-solid w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4" aria-hidden="true"></span>
+            <p class="text-sm text-center text-gray-900 dark:text-white">No items.</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;
+
+exports[`Table > renders sort mode correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-700">
+    <thead class="relative">
+      <tr class="">
+        <!--v-if-->
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center -m-1.5">
+            <!--v-if--><span class="">Name</span><span class="i-heroicons-arrows-up-down-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+          </button></th>
+        <th scope="col" class="text-left rtl:text-right px-4 py-3.5 text-gray-900 dark:text-white font-semibold text-sm"><span>Age</span></th>
+      </tr>
+      <!--v-if-->
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+      <tr>
+        <td colspan="2">
+          <div class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14"><span class="i-heroicons-circle-stack-20-solid w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4" aria-hidden="true"></span>
+            <p class="text-sm text-center text-gray-900 dark:text-white">No items.</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;

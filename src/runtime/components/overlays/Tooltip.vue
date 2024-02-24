@@ -1,21 +1,21 @@
 <template>
-  <div ref="trigger" :class="ui.wrapper" v-bind="attrs" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
+  <div ref="trigger" :class="_ui.wrapper" v-bind="attrs" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
     <slot :open="open">
       Hover
     </slot>
 
-    <div v-if="open && !prevent" ref="container" :class="[ui.container, ui.width]">
-      <Transition appear v-bind="ui.transition">
+    <div v-if="open && !prevent" ref="container" :class="[_ui.container, _ui.width]">
+      <Transition appear v-bind="_ui.transition">
         <div>
-          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
+          <div v-if="_popper.arrow" data-popper-arrow :class="Object.values(_ui.arrow)" />
 
-          <div :class="[ui.base, ui.background, ui.color, ui.rounded, ui.shadow, ui.ring]">
+          <div :class="[_ui.base, _ui.background, _ui.color, _ui.rounded, _ui.shadow, _ui.ring]">
             <slot name="text">
               {{ text }}
             </slot>
 
-            <span v-if="shortcuts?.length" :class="ui.shortcuts">
-              <span :class="ui.middot">&middot;</span>
+            <span v-if="shortcuts?.length" :class="_ui.shortcuts">
+              <span :class="_ui.middot">&middot;</span>
 
               <UKbd v-for="shortcut of shortcuts" :key="shortcut" size="xs">
                 {{ shortcut }}
@@ -129,11 +129,9 @@ export default defineComponent({
     }
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
-      // eslint-disable-next-line vue/no-dupe-keys
-      popper,
+      _popper: popper,
       trigger,
       container,
       open,

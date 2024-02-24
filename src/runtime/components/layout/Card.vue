@@ -4,13 +4,13 @@
     :class="cardClass"
     v-bind="attrs"
   >
-    <div v-if="$slots.header" :class="[ui.header.base, ui.header.padding, ui.header.background]">
+    <div v-if="$slots.header" :class="[_ui.header.base, _ui.header.padding, _ui.header.background]">
       <slot name="header" />
     </div>
-    <div v-if="$slots.default" :class="[ui.body.base, ui.body.padding, ui.body.background]">
+    <div v-if="$slots.default" :class="[_ui.body.base, _ui.body.padding, _ui.body.background]">
       <slot />
     </div>
-    <div v-if="$slots.footer" :class="[ui.footer.base, ui.footer.padding, ui.footer.background]">
+    <div v-if="$slots.footer" :class="[_ui.footer.base, _ui.footer.padding, _ui.footer.background]">
       <slot name="footer" />
     </div>
   </component>
@@ -60,8 +60,7 @@ export default defineComponent({
     })
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       cardClass
     }

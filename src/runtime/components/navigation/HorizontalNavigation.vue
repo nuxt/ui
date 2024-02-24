@@ -1,32 +1,32 @@
 <template>
-  <nav :class="ui.wrapper" v-bind="attrs">
-    <ul v-for="(section, sectionIndex) of sections" :key="`section${sectionIndex}`" :class="ui.container">
-      <li v-for="(link, index) of section" :key="`section${sectionIndex}-${index}`" :class="ui.inner">
+  <nav :class="_ui.wrapper" v-bind="attrs">
+    <ul v-for="(section, sectionIndex) of sections" :key="`section${sectionIndex}`" :class="_ui.container">
+      <li v-for="(link, index) of section" :key="`section${sectionIndex}-${index}`" :class="_ui.inner">
         <ULink
           v-slot="{ isActive }"
           v-bind="getULinkProps(link)"
-          :class="[ui.base, ui.before, ui.after]"
-          :active-class="ui.active"
-          :inactive-class="ui.inactive"
+          :class="[_ui.base, _ui.before, _ui.after]"
+          :active-class="_ui.active"
+          :inactive-class="_ui.inactive"
           @click="link.click"
           @keyup.enter="$event.target.blur()"
         >
           <slot name="avatar" :link="link" :is-active="isActive">
             <UAvatar
               v-if="link.avatar"
-              v-bind="{ size: ui.avatar.size, ...link.avatar }"
-              :class="[ui.avatar.base]"
+              v-bind="{ size: _ui.avatar.size, ...link.avatar }"
+              :class="[_ui.avatar.base]"
             />
           </slot>
           <slot name="icon" :link="link" :is-active="isActive">
             <UIcon
               v-if="link.icon"
               :name="link.icon"
-              :class="twMerge(twJoin(ui.icon.base, isActive ? ui.icon.active : ui.icon.inactive), link.iconClass)"
+              :class="twMerge(twJoin(_ui.icon.base, isActive ? _ui.icon.active : _ui.icon.inactive), link.iconClass)"
             />
           </slot>
           <slot :link="link" :is-active="isActive">
-            <span v-if="link.label" :class="twMerge(ui.label, link.labelClass)">
+            <span v-if="link.label" :class="twMerge(_ui.label, link.labelClass)">
               <span v-if="isActive" class="sr-only">
                 Current page:
               </span>
@@ -37,12 +37,12 @@
             <UBadge
               v-if="link.badge"
               v-bind="{
-                size: ui.badge.size,
-                color: ui.badge.color,
-                variant: ui.badge.variant,
+                size: _ui.badge.size,
+                color: _ui.badge.color,
+                variant: _ui.badge.variant,
                 ...((typeof link.badge === 'string' || typeof link.badge === 'number') ? { label: link.badge } : link.badge)
               }"
-              :class="ui.badge.base"
+              :class="_ui.badge.base"
             />
           </slot>
         </ULink>
@@ -96,8 +96,7 @@ export default defineComponent({
     const sections = computed(() => (Array.isArray(props.links[0]) ? props.links : [props.links]) as HorizontalNavigationLink[][])
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       sections,
       getULinkProps,

@@ -1,0 +1,136 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Pagination > renders basic case correctly 1`] = `
+"<div class="flex items-center -space-x-px">
+  <!--v-if--><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="Prev"><span class="i-heroicons-chevron-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:last-child]:rotate-180" aria-label="Next"><span class="i-heroicons-chevron-right-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Pagination > renders with disabled correctly 1`] = `
+"<div class="flex items-center -space-x-px">
+  <!--v-if--><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="Prev"><span class="i-heroicons-chevron-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:last-child]:rotate-180" aria-label="Next"><span class="i-heroicons-chevron-right-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Pagination > renders with first button correctly 1`] = `
+"<div class="flex items-center -space-x-px"><button type="button" disabled="" class="focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white dark:text-gray-900 bg-red-500 hover:bg-red-600 disabled:bg-red-500 dark:bg-red-400 dark:hover:bg-red-500 dark:disabled:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="First"><span class="i-heroicons-chevron-double-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span><span class="">Start</span>
+    <!--v-if-->
+  </button><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="Prev"><span class="i-heroicons-chevron-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:last-child]:rotate-180" aria-label="Next"><span class="i-heroicons-chevron-right-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Pagination > renders with first button slot correctly 1`] = `
+"<div class="flex items-center -space-x-px">First button slot<button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="Prev"><span class="i-heroicons-chevron-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:last-child]:rotate-180" aria-label="Next"><span class="i-heroicons-chevron-right-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Pagination > renders with last button correctly 1`] = `
+"<div class="flex items-center -space-x-px">
+  <!--v-if--><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="Prev"><span class="i-heroicons-chevron-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:last-child]:rotate-180" aria-label="Next"><span class="i-heroicons-chevron-right-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button><button type="button" disabled="" class="focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white dark:text-gray-900 bg-red-500 hover:bg-red-600 disabled:bg-red-500 dark:bg-red-400 dark:hover:bg-red-500 dark:disabled:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:last-child]:rotate-180" aria-label="Last"><span class="i-heroicons-chevron-double-right-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span><span class="">Last</span>
+    <!--v-if-->
+  </button>
+</div>"
+`;
+
+exports[`Pagination > renders with last button slot correctly 1`] = `
+"<div class="flex items-center -space-x-px">
+  <!--v-if--><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="Prev"><span class="i-heroicons-chevron-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:last-child]:rotate-180" aria-label="Next"><span class="i-heroicons-chevron-right-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button>Last button slot
+</div>"
+`;
+
+exports[`Pagination > renders with next button correctly 1`] = `
+"<div class="flex items-center -space-x-px">
+  <!--v-if--><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="Prev"><span class="i-heroicons-chevron-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button><button type="button" disabled="" class="focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white dark:text-gray-900 bg-red-500 hover:bg-red-600 disabled:bg-red-500 dark:bg-red-400 dark:hover:bg-red-500 dark:disabled:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:last-child]:rotate-180" aria-label="Next"><span class="i-heroicons-chevron-right-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span><span class="">Next</span>
+    <!--v-if-->
+  </button>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Pagination > renders with next button slot correctly 1`] = `
+"<div class="flex items-center -space-x-px">
+  <!--v-if--><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="Prev"><span class="i-heroicons-chevron-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button>Next button slot
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Pagination > renders with prev button correctly 1`] = `
+"<div class="flex items-center -space-x-px">
+  <!--v-if--><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="Prev"><span class="i-heroicons-chevron-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button><button type="button" disabled="" class="focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white dark:text-gray-900 bg-red-500 hover:bg-red-600 disabled:bg-red-500 dark:bg-red-400 dark:hover:bg-red-500 dark:disabled:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:last-child]:rotate-180" aria-label="Next"><span class="i-heroicons-chevron-right-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span><span class="">Prev</span>
+    <!--v-if-->
+  </button>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Pagination > renders with prev button slot correctly 1`] = `
+"<div class="flex items-center -space-x-px">
+  <!--v-if--><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-1.5 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="Prev"><span class="i-heroicons-chevron-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button>Prev button slot
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Pagination > renders with size correctly 1`] = `
+"<div class="flex items-center -space-x-px">
+  <!--v-if--><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-2.5 p-2.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:first-child]:rotate-180" aria-label="Prev"><span class="i-heroicons-chevron-left-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button><button type="button" disabled="" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium text-sm gap-x-2.5 p-2.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center first:rounded-s-md last:rounded-e-md rtl:[&_span:last-child]:rotate-180" aria-label="Next"><span class="i-heroicons-chevron-right-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button>
+  <!--v-if-->
+</div>"
+`;

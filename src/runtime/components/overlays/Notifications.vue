@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <div :class="wrapperClass" role="region" v-bind="attrs">
-      <div v-if="notifications.length" :class="ui.container">
+      <div v-if="notifications.length" :class="_ui.container">
         <div v-for="notification of notifications" :key="notification.id">
           <UNotification
             v-bind="notification"
@@ -65,8 +65,7 @@ export default defineComponent({
     })
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       toast,
       notifications,

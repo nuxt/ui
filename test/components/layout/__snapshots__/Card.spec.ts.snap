@@ -15,3 +15,27 @@ exports[`Card > renders with as correctly 1`] = `
   <!--v-if-->
 </article>"
 `;
+
+exports[`Card > renders with default slot correctly 1`] = `
+"<div class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
+  <!--v-if-->
+  <div class="px-4 py-5 sm:p-6">Default slot</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with footer slot correctly 1`] = `
+"<div class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
+  <!--v-if-->
+  <!--v-if-->
+  <div class="px-4 py-4 sm:px-6">Footer slot</div>
+</div>"
+`;
+
+exports[`Card > renders with header slot correctly 1`] = `
+"<div class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
+  <div class="px-4 py-5 sm:px-6">Header slot</div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;

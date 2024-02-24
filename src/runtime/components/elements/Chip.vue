@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper" v-bind="attrs">
+  <div :class="_ui.wrapper" v-bind="attrs">
     <slot />
 
     <span v-if="show" :class="chipClass">
@@ -82,8 +82,7 @@ export default defineComponent({
     })
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       chipClass
     }
