@@ -6,7 +6,7 @@ import ComponentRender from '../component-render'
 describe('Button', () => {
   it.each([
     ['basic case', {}],
-    ['with block', { props: { block: true, ui: { block: 'w-fit' } } }],
+    ['with block', { props: { block: true } }],
     ['with label', { props: { label: 'Submit' } }],
     ['with loading', { props: { loading: true } }],
     ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-heroicons-sparkles' } }],

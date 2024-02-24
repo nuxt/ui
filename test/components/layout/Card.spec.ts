@@ -6,7 +6,7 @@ import ComponentRender from '../component-render'
 describe('Card', () => {
   it.each([
     ['basic case', {}],
-    ['with as', { props: { as: 'li' } }],
+    ['with as', { props: { as: 'article' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with header slot', { slots: { header: () => 'Header slot' } }],
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }]

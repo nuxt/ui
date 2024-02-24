@@ -9,9 +9,9 @@ exports[`Card > renders basic case correctly 1`] = `
 `;
 
 exports[`Card > renders with as correctly 1`] = `
-"<li class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
+"<article class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
-</li>"
+</article>"
 `;
