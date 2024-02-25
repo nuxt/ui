@@ -1,12 +1,12 @@
 ---
 description: Display a list of actions in a dropdown menu.
 links:
-  - label: GitHub
-    icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/elements/Dropdown.vue
   - label: Menu
     icon: i-simple-icons-headlessui
     to: https://headlessui.com/vue/menu
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/elements/Dropdown.vue
 ---
 
 ## Usage
