@@ -3,6 +3,7 @@ import { UFormGroup } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
 
+// FIXME: Remove skip
 describe.skip('FormGroup', () => {
   it.each([
     ['with label and description', { props: { label: 'Username', description: 'Enter your username' } }],

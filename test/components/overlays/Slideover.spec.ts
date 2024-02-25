@@ -3,6 +3,7 @@ import { USlideover } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
 
+// FIXME: Remove skip
 describe.skip('Slideover', () => {
   it.each([
     ['basic case', { props: { modelValue: true } }]

@@ -3,6 +3,7 @@ import { UAvatar } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
 
+// FIXME: Remove skip
 describe.skip('Avatar', () => {
   it.each([
     ['with src', { props: { src: 'https://avatars.githubusercontent.com/u/739984?v=4', alt: 'User Avatar' } }],

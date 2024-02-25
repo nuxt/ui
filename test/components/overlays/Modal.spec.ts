@@ -3,6 +3,7 @@ import { UModal } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
 
+// FIXME: Remove skip
 describe.skip('Modal', () => {
   it.each([
     ['basic case', { props: { modelValue: true } }]
