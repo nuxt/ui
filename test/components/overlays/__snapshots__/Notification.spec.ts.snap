@@ -1,30 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Notification > renders basic case correctly 1`] = `
-"<transition-stub enteractiveclass="transform ease-out duration-300 transition" enterfromclass="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2" entertoclass="translate-y-0 opacity-100 sm:translate-x-0" leaveactiveclass="transition ease-in duration-100" leavefromclass="opacity-100" leavetoclass="opacity-0" appear="true" persisted="false" css="true">
-  <div class="w-full pointer-events-auto bg-white dark:bg-gray-900 rounded-lg shadow-lg" role="status">
-    <div class="relative overflow-hidden rounded-lg ring-1 ring-gray-200 dark:ring-gray-800">
-      <div class="flex p-4 gap-3 items-center">
-        <!--v-if-->
-        <!--v-if-->
-        <div class="w-0 flex-1">
-          <!--v-if-->
-          <!--v-if-->
-          <!--v-if-->
-        </div>
-        <div class="flex items-center gap-2 flex-shrink-0 mt-0">
-          <!--v-if--><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline-offset-4 hover:underline focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center" aria-label="Close"><span class="i-heroicons-x-mark-20-solid flex-shrink-0 h-5 w-5" aria-hidden="true"></span>
-            <!--v-if-->
-            <!--v-if-->
-          </button>
-        </div>
-      </div>
-      <div class="absolute bottom-0 end-0 start-0 h-1 bg-primary-500 dark:bg-primary-400" ></div>
-    </div>
-  </div>
-</transition-stub>"
-`;
-
 exports[`Notification > renders with avatar correctly 1`] = `
 "<transition-stub enteractiveclass="transform ease-out duration-300 transition" enterfromclass="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2" entertoclass="translate-y-0 opacity-100 sm:translate-x-0" leaveactiveclass="transition ease-in duration-100" leavefromclass="opacity-100" leavetoclass="opacity-0" appear="true" persisted="false" css="true">
   <div class="w-full pointer-events-auto bg-white dark:bg-gray-900 rounded-lg shadow-lg" role="status">

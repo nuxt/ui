@@ -3,17 +3,17 @@
     <div :class="_ui.inner">
       <div v-if="label || $slots.label" :class="[_ui.label.wrapper, _size]">
         <label :for="inputId" :class="[_ui.label.base, required ? _ui.label.required : '']">
-          <slot v-if="$slots.label" name="label" v-bind="{ _error, label, name, hint, description, help }" />
+          <slot v-if="$slots.label" name="label" v-bind="{ error: _error, label, name, hint, description, help }" />
           <template v-else>{{ label }}</template>
         </label>
         <span v-if="hint || $slots.hint" :class="[_ui.hint]">
-          <slot v-if="$slots.hint" name="hint" v-bind="{ _error, label, name, hint, description, help }" />
+          <slot v-if="$slots.hint" name="hint" v-bind="{ error: _error, label, name, hint, description, help }" />
           <template v-else>{{ hint }}</template>
         </span>
       </div>
 
       <p v-if="description || $slots.description" :class="[_ui.description, _size]">
-        <slot v-if="$slots.description" name="description" v-bind="{ _error, label, name, hint, description, help }" />
+        <slot v-if="$slots.description" name="description" v-bind="{ error: _error, label, name, hint, description, help }" />
         <template v-else>
           {{ description }}
         </template>
@@ -21,16 +21,16 @@
     </div>
 
     <div :class="[label ? _ui.container : '']">
-      <slot v-bind="{ _error }" />
+      <slot v-bind="{ error: _error }" />
 
       <p v-if="(typeof _error === 'string' && _error) || $slots.error" :class="[_ui.error, _size]">
-        <slot v-if="$slots.error" name="error" v-bind="{ _error, label, name, hint, description, help }" />
+        <slot v-if="$slots.error" name="error" v-bind="{ error: _error, label, name, hint, description, help }" />
         <template v-else>
           {{ _error }}
         </template>
       </p>
       <p v-else-if="help || $slots.help" :class="[_ui.help, _size]">
-        <slot v-if="$slots.help" name="help" v-bind="{ _error, label, name, hint, description, help }" />
+        <slot v-if="$slots.help" name="help" v-bind="{ error: _error, label, name, hint, description, help }" />
         <template v-else>
           {{ help }}
         </template>

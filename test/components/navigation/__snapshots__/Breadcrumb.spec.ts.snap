@@ -1,11 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Breadcrumb > renders basic case correctly 1`] = `
-"<nav aria-label="Breadcrumb" class="relative">
-  <ol class="flex items-center gap-x-1.5"></ol>
-</nav>"
-`;
-
 exports[`Breadcrumb > renders with default slot correctly 1`] = `
 "<nav aria-label="Breadcrumb" class="relative">
   <ol class="flex items-center gap-x-1.5">

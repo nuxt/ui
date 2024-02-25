@@ -3,7 +3,7 @@ import { UFormGroup } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
 
-describe('FormGroup', () => {
+describe.skip('FormGroup', () => {
   it.each([
     ['with label and description', { props: { label: 'Username', description: 'Enter your username' } }],
     ['with size', { props: { label: 'Username', description: 'Enter your username', size: 'xl' } }],

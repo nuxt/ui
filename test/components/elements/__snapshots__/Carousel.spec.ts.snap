@@ -1,13 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Carousel > renders basic case correctly 1`] = `
-"<div data-v-2a90c2d4="" class="relative">
-  <div data-v-2a90c2d4="" class="relative w-full flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"></div>
-  <!--v-if-->
-  <!--v-if-->
-</div>"
-`;
-
 exports[`Carousel > renders with arrows and indicators correctly 1`] = `
 "<div data-v-2a90c2d4="" class="relative">
   <div data-v-2a90c2d4="" class="relative w-full flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"></div>

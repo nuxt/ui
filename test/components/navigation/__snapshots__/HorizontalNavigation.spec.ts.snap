@@ -1,11 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`HorizontalNavigation > renders basic case correctly 1`] = `
-"<nav class="relative w-full flex items-center justify-between">
-  <ul class="flex items-center min-w-0"></ul>
-</nav>"
-`;
-
 exports[`HorizontalNavigation > renders with avatar slot correctly 1`] = `
 "<nav class="relative w-full flex items-center justify-between">
   <ul class="flex items-center min-w-0">

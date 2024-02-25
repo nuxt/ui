@@ -1,20 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Alert > renders basic case correctly 1`] = `
-"<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
-  <div class="flex gap-3 items-center">
-    <!--v-if-->
-    <!--v-if-->
-    <div class="w-0 flex-1">
-      <!--v-if-->
-      <!--v-if-->
-      <!--v-if-->
-    </div>
-    <!--v-if-->
-  </div>
-</div>"
-`;
-
 exports[`Alert > renders with actions correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
   <div class="flex gap-3 items-center">

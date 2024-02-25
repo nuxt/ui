@@ -1,19 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Tooltip > renders basic case correctly 1`] = `
-"<div class="relative inline-flex"> Hover <div class="z-20 group max-w-xs" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
-    <transition-stub enteractiveclass="transition ease-out duration-200" enterfromclass="opacity-0 translate-y-1" entertoclass="opacity-100 translate-y-0" leaveactiveclass="transition ease-in duration-150" leavefromclass="opacity-100 translate-y-0" leavetoclass="opacity-0 translate-y-1" appear="true" persisted="false" css="true">
-      <div>
-        <!--v-if-->
-        <div class="[@media(pointer:coarse)]:hidden h-6 px-2 py-1 text-xs font-normal truncate relative bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded shadow ring-1 ring-gray-200 dark:ring-gray-800">
-          <!--v-if-->
-        </div>
-      </div>
-    </transition-stub>
-  </div>
-</div>"
-`;
-
 exports[`Tooltip > renders with default slot correctly 1`] = `
 "<div class="relative inline-flex">Default slot<div class="z-20 group max-w-xs" style="position: fixed; left: 0px; top: 0px; margin: 0px; right: auto; bottom: auto; transform: translate(0px, 8px);" data-popper-placement="bottom">
     <transition-stub enteractiveclass="transition ease-out duration-200" enterfromclass="opacity-0 translate-y-1" entertoclass="opacity-100 translate-y-0" leaveactiveclass="transition ease-in duration-150" leavefromclass="opacity-100 translate-y-0" leavetoclass="opacity-0 translate-y-1" appear="true" persisted="false" css="true">
