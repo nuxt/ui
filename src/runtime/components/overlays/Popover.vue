@@ -167,10 +167,14 @@ export default defineComponent({
       if (popoverApi.value.popoverState === 0) {
         return
       }
+     const currentState = popoverApi.value.popoverState;
       openTimeout = openTimeout || setTimeout(() => {
-        popoverApi.value.togglePopover && popoverApi.value.togglePopover()
-        openTimeout = null
-      }, props.openDelay)
+        popoverApi.value.togglePopover && popoverApi.value.togglePopover();
+        if (popoverApi.value.popoverState === currentState) {
+          popoverApi.value.popoverState = popoverApi.value.popoverState === 0 ? 1 : 0;
+        }
+        openTimeout = null;
+      }, props.openDelay);
     }
 
     function onMouseLeave () {
