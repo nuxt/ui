@@ -1,7 +1,7 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="_ui.wrapper">
     <fieldset v-bind="attrs">
-      <legend v-if="legend || $slots.legend" :class="ui.legend">
+      <legend v-if="legend || $slots.legend" :class="_ui.legend">
         <slot name="legend">
           {{ legend }}
         </slot>
@@ -14,7 +14,7 @@
         :value="option.value"
         :help="option.help"
         :disabled="option.disabled || disabled"
-        :ui="uiRadio"
+        :ui="_uiRadio"
         @change="onUpdate(option.value)"
       >
         <template #label>
@@ -137,13 +137,10 @@ export default defineComponent({
     })
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
-      // eslint-disable-next-line vue/no-dupe-keys
-      uiRadio,
+      _ui: ui,
+      _uiRadio: uiRadio,
       attrs,
       normalizedOptions,
-      // eslint-disable-next-line vue/no-dupe-keys
       onUpdate
     }
   }

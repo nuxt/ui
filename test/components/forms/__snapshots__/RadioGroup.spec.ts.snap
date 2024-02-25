@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`RadioGroup > renders basic case correctly 1`] = `
-"<div class="">
+"<div class="relative flex items-start">
   <fieldset>
     <!--v-if-->
   </fieldset>
@@ -9,11 +9,11 @@ exports[`RadioGroup > renders basic case correctly 1`] = `
 `;
 
 exports[`RadioGroup > renders with custom color correctly 1`] = `
-"<div class="">
+"<div class="relative flex items-start">
   <fieldset>
     <!--v-if-->
     <div class="relative flex items-start">
-      <div class="flex items-center h-5"><input id="4" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-red-500 dark:focus-visible:ring-red-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-red-500 dark:text-red-400" value="option1"></div>
+      <div class="flex items-center h-5"><input id="4" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-red-500 dark:focus-visible:ring-red-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-red-500 dark:text-red-400" value="option1"></div>
       <div class="ms-3 flex flex-col"><label for="4" class="text-sm font-medium text-gray-700 dark:text-gray-200">Option 1
           <!--v-if-->
         </label>
@@ -21,7 +21,7 @@ exports[`RadioGroup > renders with custom color correctly 1`] = `
       </div>
     </div>
     <div class="relative flex items-start">
-      <div class="flex items-center h-5"><input id="5" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-red-500 dark:focus-visible:ring-red-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-red-500 dark:text-red-400" value="option2"></div>
+      <div class="flex items-center h-5"><input id="5" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-red-500 dark:focus-visible:ring-red-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-red-500 dark:text-red-400" value="option2"></div>
       <div class="ms-3 flex flex-col"><label for="5" class="text-sm font-medium text-gray-700 dark:text-gray-200">Option 2
           <!--v-if-->
         </label>
@@ -33,11 +33,11 @@ exports[`RadioGroup > renders with custom color correctly 1`] = `
 `;
 
 exports[`RadioGroup > renders with disabled correctly 1`] = `
-"<div class="">
+"<div class="relative flex items-start">
   <fieldset>
     <!--v-if-->
     <div class="relative flex items-start">
-      <div class="flex items-center h-5"><input id="2" disabled="" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400" value="option1"></div>
+      <div class="flex items-center h-5"><input id="2" disabled="" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400" value="option1"></div>
       <div class="ms-3 flex flex-col"><label for="2" class="text-sm font-medium text-gray-700 dark:text-gray-200">Option 1
           <!--v-if-->
         </label>
@@ -45,7 +45,7 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
       </div>
     </div>
     <div class="relative flex items-start">
-      <div class="flex items-center h-5"><input id="3" disabled="" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400" value="option2"></div>
+      <div class="flex items-center h-5"><input id="3" disabled="" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400" value="option2"></div>
       <div class="ms-3 flex flex-col"><label for="3" class="text-sm font-medium text-gray-700 dark:text-gray-200">Option 2
           <!--v-if-->
         </label>
@@ -57,7 +57,7 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
 `;
 
 exports[`RadioGroup > renders with label correctly 1`] = `
-"<div class="">
+"<div class="relative flex items-start">
   <fieldset label="label">
     <!--v-if-->
   </fieldset>
@@ -65,19 +65,19 @@ exports[`RadioGroup > renders with label correctly 1`] = `
 `;
 
 exports[`RadioGroup > renders with legend correctly 1`] = `
-"<div class="">
+"<div class="relative flex items-start">
   <fieldset>
-    <legend class="">Radio Group Legend</legend>
+    <legend class="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Radio Group Legend</legend>
   </fieldset>
 </div>"
 `;
 
 exports[`RadioGroup > renders with options and legend correctly 1`] = `
-"<div class="">
+"<div class="relative flex items-start">
   <fieldset>
     <!--v-if-->
     <div class="relative flex items-start">
-      <div class="flex items-center h-5"><input id="0" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400" value="option1"></div>
+      <div class="flex items-center h-5"><input id="0" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400" value="option1"></div>
       <div class="ms-3 flex flex-col"><label for="0" class="text-sm font-medium text-gray-700 dark:text-gray-200">Option 1
           <!--v-if-->
         </label>
@@ -85,7 +85,7 @@ exports[`RadioGroup > renders with options and legend correctly 1`] = `
       </div>
     </div>
     <div class="relative flex items-start">
-      <div class="flex items-center h-5"><input id="1" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400" value="option2"></div>
+      <div class="flex items-center h-5"><input id="1" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400" value="option2"></div>
       <div class="ms-3 flex flex-col"><label for="1" class="text-sm font-medium text-gray-700 dark:text-gray-200">Option 2
           <!--v-if-->
         </label>
@@ -97,9 +97,9 @@ exports[`RadioGroup > renders with options and legend correctly 1`] = `
 `;
 
 exports[`RadioGroup > renders with slot legend correctly 1`] = `
-"<div class="">
+"<div class="relative flex items-start">
   <fieldset>
-    <legend class="">Radio Group Slot Legend</legend>
+    <legend class="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Radio Group Slot Legend</legend>
   </fieldset>
 </div>"
 `;

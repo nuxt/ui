@@ -1,132 +1,132 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Input > renders basic case correctly 1`] = `
-"<div class=""><input type="text" class="">
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with color correctly 1`] = `
-"<div class=""><input type="text" class="">
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-transparent text-gray-900 dark:text-white ring-1 ring-inset ring-red-500 dark:ring-red-400 focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with custom type correctly 1`] = `
-"<div class=""><input type="password" class="">
+"<div class="relative"><input type="password" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with disabled correctly 1`] = `
-"<div class=""><input type="text" disabled="" class="">
+"<div class="relative"><input type="text" disabled="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with icon correctly 1`] = `
-"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with input class correctly 1`] = `
-"<div class=""><input type="text" class="w-full">
+"<div class="relative"><input type="text" class="relative block disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 w-full">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with leading and icon correctly 1`] = `
-"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with leading slots correctly 1`] = `
-"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">leading slot</span>
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">leading slot</span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with leadingIcon correctly 1`] = `
-"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with loading icon correctly 1`] = `
-"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span>
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with name correctly 1`] = `
-"<div class=""><input name="username" type="text" class="">
+"<div class="relative"><input name="username" type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with placeholder correctly 1`] = `
-"<div class=""><input type="text" placeholder="Enter your username" class="">
+"<div class="relative"><input type="text" placeholder="Enter your username" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with readonly correctly 1`] = `
-"<div class=""><input type="text" class="" readonly="">
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400" readonly="">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with required correctly 1`] = `
-"<div class=""><input type="text" required="" class="">
+"<div class="relative"><input type="text" required="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with size correctly 1`] = `
-"<div class=""><input type="text" class="">
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-xs px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with trailing and icon correctly 1`] = `
-"<div class=""><input type="text" class="">
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9">
   <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
 </div>"
 `;
 
 exports[`Input > renders with trailing slots correctly 1`] = `
-"<div class=""><input type="text" class=""><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">trailing slot</span>
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9"><span class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">trailing slot</span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with trailingIcon correctly 1`] = `
-"<div class=""><input type="text" class="">
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9">
   <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span class="i-heroicons-battery-50-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span>
 </div>"
 `;
 
 exports[`Input > renders with variant correctly 1`] = `
-"<div class=""><input type="text" class="">
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders without padded correctly 1`] = `
-"<div class=""><input type="text" class="">
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm p-0 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
   <!--v-if-->
   <!--v-if-->
 </div>"

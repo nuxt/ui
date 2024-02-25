@@ -4,13 +4,13 @@
       :id="inputId"
       ref="input"
       v-model.number="value"
-      :name="name"
+      :name="_name"
       :min="min"
       :max="max"
       :disabled="disabled"
       :step="step"
       type="range"
-      :class="[inputClass, thumbClass, trackClass]"
+      :class="[_inputClass, thumbClass, trackClass]"
       v-bind="attrs"
       @change="onChange"
     >
@@ -167,16 +167,12 @@ export default defineComponent({
     })
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
       attrs,
-      // eslint-disable-next-line vue/no-dupe-keys
-      name,
+      _name: name,
       inputId,
       value,
       wrapperClass,
-      // eslint-disable-next-line vue/no-dupe-keys
-      inputClass,
+      _inputClass: inputClass,
       thumbClass,
       trackClass,
       progressClass,

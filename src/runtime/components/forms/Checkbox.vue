@@ -1,26 +1,26 @@
 <template>
-  <div :class="ui.wrapper">
-    <div :class="ui.container">
+  <div :class="_ui.wrapper">
+    <div :class="_ui.container">
       <input
         :id="inputId"
         v-model="toggle"
-        :name="name"
+        :name="_name"
         :required="required"
         :value="value"
         :disabled="disabled"
         :indeterminate="indeterminate"
         type="checkbox"
-        :class="inputClass"
+        :class="_inputClass"
         v-bind="attrs"
         @change="onChange"
       >
     </div>
-    <div v-if="label || $slots.label" :class="ui.inner">
-      <label :for="inputId" :class="ui.label">
+    <div v-if="label || $slots.label" :class="_ui.inner">
+      <label :for="inputId" :class="_ui.label">
         <slot name="label">{{ label }}</slot>
-        <span v-if="required" :class="ui.required">*</span>
+        <span v-if="required" :class="_ui.required">*</span>
       </label>
-      <p v-if="help" :class="ui.help">
+      <p v-if="help" :class="_ui.help">
         {{ help }}
       </p>
     </div>
@@ -134,15 +134,12 @@ export default defineComponent({
     })
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       toggle,
       inputId,
-      // eslint-disable-next-line vue/no-dupe-keys
-      name,
-      // eslint-disable-next-line vue/no-dupe-keys
-      inputClass,
+      _name: name,
+      _inputClass: inputClass,
       onChange
     }
   }

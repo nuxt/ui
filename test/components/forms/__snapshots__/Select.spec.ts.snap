@@ -1,13 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Select > renders basic case correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9"></select>
   <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
 exports[`Select > renders with custom color correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-transparent text-gray-900 dark:text-white ring-1 ring-inset ring-red-500 dark:ring-red-400 focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400 pe-9">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
   </select>
@@ -16,19 +16,19 @@ exports[`Select > renders with custom color correctly 1`] = `
 `;
 
 exports[`Select > renders with custom id correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" id="mySelect" class=""></select>
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" id="mySelect" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9"></select>
   <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
 exports[`Select > renders with custom name correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" name="mySelectInput" class=""></select>
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" name="mySelectInput" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9"></select>
   <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
 exports[`Select > renders with custom options correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
   </select>
@@ -37,54 +37,54 @@ exports[`Select > renders with custom options correctly 1`] = `
 `;
 
 exports[`Select > renders with custom size correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-3.5 py-2.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-11"></select>
   <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
 exports[`Select > renders with custom variant correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 pe-9"></select>
   <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
 exports[`Select > renders with disabled correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" disabled="" class=""></select>
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" disabled="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9"></select>
   <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
-exports[`Select > renders with icon correctly 1`] = `"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-academic-cap flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
+exports[`Select > renders with icon correctly 1`] = `"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9 pe-9"></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-academic-cap flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
 
 exports[`Select > renders with leading + icon correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9 pe-9">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
   </select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-adjustments-vertical flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"
 `;
 
 exports[`Select > renders with leading slot + iconName correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="" iconname="i-heroicons-cloud">
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9 pe-9" iconname="i-heroicons-cloud">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
   </select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">Leading slot</span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"
 `;
 
 exports[`Select > renders with leading slot correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9 pe-9">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
   </select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5">Leading slot</span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"
 `;
 
-exports[`Select > renders with leadingIcon correctly 1`] = `"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-adjustments-vertical flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
+exports[`Select > renders with leadingIcon correctly 1`] = `"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9 pe-9"></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-adjustments-vertical flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
 
-exports[`Select > renders with loading correctly 1`] = `"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
+exports[`Select > renders with loading correctly 1`] = `"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9 pe-9"></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
 
-exports[`Select > renders with loadingIcon correctly 1`] = `"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-adjustments-horizontal flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
+exports[`Select > renders with loadingIcon correctly 1`] = `"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ps-9 pe-9"></select><span data-v-cc4daab7="" class="absolute inset-y-0 start-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-adjustments-horizontal flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin"></span></span><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span></div>"`;
 
 exports[`Select > renders with padded correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm p-0 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
   </select>
@@ -93,7 +93,7 @@ exports[`Select > renders with padded correctly 1`] = `
 `;
 
 exports[`Select > renders with placeholder correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9 text-gray-400 dark:text-gray-500">
     <option data-v-cc4daab7="" disabled="" value="">Select an option</option>
   </select>
   <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
@@ -101,7 +101,7 @@ exports[`Select > renders with placeholder correctly 1`] = `
 `;
 
 exports[`Select > renders with trailing + icon correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
   </select>
@@ -110,19 +110,19 @@ exports[`Select > renders with trailing + icon correctly 1`] = `
 `;
 
 exports[`Select > renders with trailing correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9"></select>
   <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-chevron-down-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
 exports[`Select > renders with trailing icon correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class=""></select>
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9"></select>
   <!--v-if--><span data-v-cc4daab7="" class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-2.5"><span data-v-cc4daab7="" class="i-heroicons-archive-box flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
 exports[`Select > renders with trailing slot + iconName correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="" iconname="i-heroicons-bookmark-solid">
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9" iconname="i-heroicons-bookmark-solid">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
   </select>
@@ -131,7 +131,7 @@ exports[`Select > renders with trailing slot + iconName correctly 1`] = `
 `;
 
 exports[`Select > renders with trailing slot correctly 1`] = `
-"<div data-v-cc4daab7="" class=""><select data-v-cc4daab7="" class="">
+"<div data-v-cc4daab7="" class="relative"><select data-v-cc4daab7="" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pe-9">
     <option data-v-cc4daab7="" value="opt1">Option 1</option>
     <option data-v-cc4daab7="" value="opt2">Option 2</option>
   </select>
