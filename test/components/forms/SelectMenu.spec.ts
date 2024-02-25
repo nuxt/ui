@@ -17,12 +17,8 @@ describe('SelectMenu', () => {
         { label: 'Option 3', value: 'option3', disabled: true }
       ]
     } }]
-
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof SelectMenu.props>) => {
-
-
-
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof USelectMenu.props>) => {
     const html = await ComponentRender(nameOrHtml, options, USelectMenu)
     expect(html).toMatchSnapshot()
   })

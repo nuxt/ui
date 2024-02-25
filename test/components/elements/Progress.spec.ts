@@ -8,13 +8,13 @@ describe('Progress', () => {
     ['basic case', {}],
     ['with custom value', { props: { value: 50 } }],
     ['with indicator', { props: { indicator: true } }],
-    ['with slot indicator', { slots: { indicator: 'indicator slot' } }],
+    ['with slot indicator', { slots: { indicator: () => 'indicator slot' } }],
     ['with custom max', { props: { max: [200] } }],
     ['with steps', { props: { max: [50, 100, 150, 200] } }],
     ['with custom size', { props: { size: 'sm' } }],
     ['with custom color', { props: { color: 'red' } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Progress.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UProgress.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UProgress)
     expect(html).toMatchSnapshot()
   })

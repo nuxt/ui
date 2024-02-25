@@ -16,9 +16,9 @@ describe('Textarea', () => {
     ['with size', { props: { size: 'sm' } }],
     ['with color', { color: 'blue' }],
     ['with variant', { variant: 'outline' }],
-    ['with default slot', { slots: { default: 'default slot' } }]
+    ['with default slot', { slots: { default: () => 'Default slot' } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Textarea.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UTextarea.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UTextarea)
     expect(html).toMatchSnapshot()
   })

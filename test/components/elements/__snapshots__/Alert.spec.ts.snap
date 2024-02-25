@@ -1,20 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Alert > renders basic case correctly 1`] = `
-"<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
-  <div class="flex items-center">
-    <!--v-if-->
-    <!--v-if-->
-    <div class="">
-      <!--v-if-->
-      <!--v-if-->
-      <!--v-if-->
-    </div>
-    <!--v-if-->
-  </div>
-</div>"
-`;
-
 exports[`Alert > renders with actions correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
   <div class="flex gap-3 items-center">
@@ -68,11 +53,11 @@ exports[`Alert > renders with close button correctly 1`] = `
 
 exports[`Alert > renders with custom color correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 bg-red-500 dark:bg-red-400 text-white dark:text-gray-900">
-  <div class="flex items-center">
+  <div class="flex gap-3 items-center">
     <!--v-if-->
     <!--v-if-->
-    <div class="">
-      <p class="">Alert Title</p>
+    <div class="w-0 flex-1">
+      <p class="text-sm font-medium">Alert Title</p>
       <!--v-if-->
       <!--v-if-->
     </div>
@@ -83,27 +68,12 @@ exports[`Alert > renders with custom color correctly 1`] = `
 
 exports[`Alert > renders with custom variant correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 text-white-500 dark:text-white-400 ring-1 ring-inset ring-white-500 dark:ring-white-400">
-  <div class="flex items-center">
+  <div class="flex gap-3 items-center">
     <!--v-if-->
     <!--v-if-->
-    <div class="">
-      <p class="">Alert Title</p>
+    <div class="w-0 flex-1">
+      <p class="text-sm font-medium">Alert Title</p>
       <!--v-if-->
-      <!--v-if-->
-    </div>
-    <!--v-if-->
-  </div>
-</div>"
-`;
-
-exports[`Alert > renders with description correctly 1`] = `
-"<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
-  <div class="flex items-start">
-    <!--v-if-->
-    <!--v-if-->
-    <div class="">
-      <p class="">Alert Title</p>
-      <p class="">This is an alert description.</p>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -117,8 +87,8 @@ exports[`Alert > renders with description slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <div class="w-0 flex-1">
-      <p class="text-sm font-medium">Alert Title</p>
-      <p class="mt-1 text-sm leading-4 opacity-90">This is an alert description slot</p>
+      <!--v-if-->
+      <p class="mt-1 text-sm leading-4 opacity-90">Description slot</p>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -140,13 +110,13 @@ exports[`Alert > renders with icon correctly 1`] = `
 </div>"
 `;
 
-exports[`Alert > renders with tile correctly 1`] = `
+exports[`Alert > renders with title correctly 1`] = `
 "<div class="w-full relative overflow-hidden rounded-lg p-4 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
-  <div class="flex items-center">
+  <div class="flex gap-3 items-center">
     <!--v-if-->
     <!--v-if-->
-    <div class="">
-      <p class="">Alert Title</p>
+    <div class="w-0 flex-1">
+      <p class="text-sm font-medium">Alert Title</p>
       <!--v-if-->
       <!--v-if-->
     </div>
@@ -161,7 +131,7 @@ exports[`Alert > renders with title slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <div class="w-0 flex-1">
-      <p class="text-sm font-medium">Alert Title slot</p>
+      <p class="text-sm font-medium">Title slot</p>
       <!--v-if-->
       <!--v-if-->
     </div>

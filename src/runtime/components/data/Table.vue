@@ -1,18 +1,18 @@
 <template>
-  <div :class="ui.wrapper" v-bind="attrs">
-    <table :class="[ui.base, ui.divide]">
-      <thead :class="ui.thead">
-        <tr :class="ui.tr.base">
-          <th v-if="modelValue" scope="col" :class="ui.checkbox.padding">
-            <UCheckbox :model-value="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" aria-label="Select all" @change="onChange" />
+  <div :class="_ui.wrapper" v-bind="attrs">
+    <table :class="[_ui.base, _ui.divide]">
+      <thead :class="_ui.thead">
+        <tr :class="_ui.tr.base">
+          <th v-if="modelValue" scope="col" :class="_ui.checkbox.padding">
+            <UCheckbox :model-value="indeterminate || selected.length === _rows.length" :indeterminate="indeterminate" aria-label="Select all" @change="onChange" />
           </th>
 
-          <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]">
-            <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
+          <th v-for="(column, index) in _columns" :key="index" scope="col" :class="[_ui.th.base, _ui.th.padding, _ui.th.color, _ui.th.font, _ui.th.size, column.class]">
+            <slot :name="`${column.key}-header`" :column="column" :sort="_sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
-                v-bind="{ ...(ui.default.sortButton || {}), ...sortButton }"
-                :icon="(!sort.column || sort.column !== column.key) ? (sortButton.icon || ui.default.sortButton.icon) : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
+                v-bind="{ ...(_ui.default.sortButton || {}), ...sortButton }"
+                :icon="(!_sort.column || _sort.column !== column.key) ? (sortButton.icon || _ui.default.sortButton.icon) : _sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
                 :label="column[columnAttribute]"
                 @click="onSort(column)"
               />
@@ -22,32 +22,32 @@
         </tr>
 
         <tr v-if="loading && progress">
-          <td :colspan="0" :class="ui.progress.wrapper">
-            <UProgress v-bind="{ ...(ui.default.progress || {}), ...progress }" size="2xs" />
+          <td :colspan="0" :class="_ui.progress.wrapper">
+            <UProgress v-bind="{ ...(_ui.default.progress || {}), ...progress }" size="2xs" />
           </td>
         </tr>
       </thead>
-      <tbody :class="ui.tbody">
-        <tr v-if="loadingState && loading && !rows.length">
-          <td :colspan="columns.length + (modelValue ? 1 : 0)">
+      <tbody :class="_ui.tbody">
+        <tr v-if="_loadingState && loading && !_rows.length">
+          <td :colspan="_columns.length + (modelValue ? 1 : 0)">
             <slot name="loading-state">
-              <div :class="ui.loadingState.wrapper">
-                <UIcon v-if="loadingState.icon" :name="loadingState.icon" :class="ui.loadingState.icon" aria-hidden="true" />
-                <p :class="ui.loadingState.label">
-                  {{ loadingState.label }}
+              <div :class="_ui.loadingState.wrapper">
+                <UIcon v-if="_loadingState.icon" :name="_loadingState.icon" :class="_ui.loadingState.icon" aria-hidden="true" />
+                <p :class="_ui.loadingState.label">
+                  {{ _loadingState.label }}
                 </p>
               </div>
             </slot>
           </td>
         </tr>
 
-        <tr v-else-if="emptyState && !rows.length">
-          <td :colspan="columns.length + (modelValue ? 1 : 0)">
+        <tr v-else-if="_emptyState && !_rows.length">
+          <td :colspan="_columns.length + (modelValue ? 1 : 0)">
             <slot name="empty-state">
-              <div :class="ui.emptyState.wrapper">
-                <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
-                <p :class="ui.emptyState.label">
-                  {{ emptyState.label }}
+              <div :class="_ui.emptyState.wrapper">
+                <UIcon v-if="_emptyState.icon" :name="_emptyState.icon" :class="_ui.emptyState.icon" aria-hidden="true" />
+                <p :class="_ui.emptyState.label">
+                  {{ _emptyState.label }}
                 </p>
               </div>
             </slot>
@@ -55,12 +55,12 @@
         </tr>
 
         <template v-else>
-          <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
-            <td v-if="modelValue" :class="ui.checkbox.padding">
+          <tr v-for="(row, index) in _rows" :key="index" :class="[_ui.tr.base, isSelected(row) && _ui.tr.selected, $attrs.onSelect && _ui.tr.active, row?.class]" @click="() => onSelect(row)">
+            <td v-if="modelValue" :class="_ui.checkbox.padding">
               <UCheckbox v-model="selected" :value="row" aria-label="Select row" @click.stop />
             </td>
 
-            <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, row[column.key]?.class]">
+            <td v-for="(column, subIndex) in _columns" :key="subIndex" :class="[_ui.td.base, _ui.td.padding, _ui.td.color, _ui.td.font, _ui.td.size, row[column.key]?.class]">
               <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue) => getRowData(row, column.key, defaultValue)">
                 {{ getRowData(row, column.key) }}
               </slot>
@@ -293,21 +293,15 @@ export default defineComponent({
     }
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
-      // eslint-disable-next-line vue/no-dupe-keys
-      sort,
-      // eslint-disable-next-line vue/no-dupe-keys
-      columns,
-      // eslint-disable-next-line vue/no-dupe-keys
-      rows,
+      _sort: sort,
+      _columns: columns,
+      _rows: rows,
       selected,
       indeterminate,
-      // eslint-disable-next-line vue/no-dupe-keys
-      emptyState,
-      // eslint-disable-next-line vue/no-dupe-keys
-      loadingState,
+      _emptyState: emptyState,
+      _loadingState: loadingState,
       isSelected,
       onSort,
       onSelect,

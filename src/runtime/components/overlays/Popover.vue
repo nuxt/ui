@@ -1,11 +1,11 @@
 <template>
   <!-- eslint-disable-next-line vue/no-template-shadow -->
-  <HPopover ref="popover" v-slot="{ open, close }" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
+  <HPopover ref="popover" v-slot="{ open, close }" :class="_ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HPopoverButton
       ref="trigger"
       as="div"
       :disabled="disabled"
-      :class="ui.trigger"
+      :class="_ui.trigger"
       role="button"
       @mouseover="onMouseOver"
     >
@@ -16,16 +16,16 @@
       </slot>
     </HPopoverButton>
 
-    <Transition v-if="overlay" appear v-bind="ui.overlay.transition">
-      <div v-if="open" :class="[ui.overlay.base, ui.overlay.background]" />
+    <Transition v-if="overlay" appear v-bind="_ui.overlay.transition">
+      <div v-if="open" :class="[_ui.overlay.base, _ui.overlay.background]" />
     </Transition>
 
-    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
-      <Transition appear v-bind="ui.transition">
+    <div v-if="open" ref="container" :class="[_ui.container, _ui.width]" :style="containerStyle" @mouseover="onMouseOver">
+      <Transition appear v-bind="_ui.transition">
         <div>
-          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
+          <div v-if="_popper.arrow" data-popper-arrow :class="Object.values(_ui.arrow)" />
 
-          <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
+          <HPopoverPanel :class="[_ui.base, _ui.background, _ui.ring, _ui.rounded, _ui.shadow]" static>
             <slot name="panel" :open="open" :close="close" />
           </HPopoverPanel>
         </div>
@@ -214,12 +214,10 @@ export default defineComponent({
     provideUseId(() => useId())
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       popover,
-      // eslint-disable-next-line vue/no-dupe-keys
-      popper,
+      _popper: popper,
       trigger,
       container,
       containerStyle,

@@ -5,11 +5,11 @@
     <template v-if="label || icon || avatar || $slots.default">
       <div :class="containerClass">
         <slot>
-          <span v-if="label" :class="ui.label">
+          <span v-if="label" :class="_ui.label">
             {{ label }}
           </span>
-          <UIcon v-else-if="icon" :name="icon" :class="ui.icon.base" />
-          <UAvatar v-else-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
+          <UIcon v-else-if="icon" :name="icon" :class="_ui.icon.base" />
+          <UAvatar v-else-if="avatar" v-bind="{ size: _ui.avatar.size, ...avatar }" :class="_ui.avatar.base" />
         </slot>
       </div>
 
@@ -105,8 +105,7 @@ export default defineComponent({
     })
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       wrapperClass,
       containerClass,

@@ -1,3 +1,96 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Accordion > renders basic case correctly 1`] = `"<div class=""></div>"`;
+exports[`Accordion > renders renders with custom closeIcon correctly 1`] = `
+"<div class="w-full flex flex-col">
+  <div data-headlessui-state="" class="w-full flex flex-col"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-primary-500 dark:text-primary-400 bg-primary-50 hover:bg-primary-100 disabled:bg-primary-50 dark:bg-primary-950 dark:hover:bg-primary-900 dark:disabled:bg-primary-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center mb-1.5 w-full" id="headlessui-disclosure-button-8" aria-expanded="false" data-headlessui-state="" aria-controls="headlessui-disclosure-panel-9">
+      <!--v-if-->
+      <!--v-if--><span class="i-heroicons-chevron-down-20-solid h-5 w-5 ms-auto transform transition-transform duration-200"></span>
+    </button>
+    <transition-stub enteractiveclass="overflow-hidden transition-[height] duration-200 ease-out" leaveactiveclass="overflow-hidden transition-[height] duration-200 ease-out" appear="false" persisted="true" css="true">
+      <div style="display: none;">
+        <div id="headlessui-disclosure-panel-9" data-headlessui-state="" class="text-sm text-gray-500 dark:text-gray-400 pt-1.5 pb-3">Accordion Content</div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;
+
+exports[`Accordion > renders renders with custom openIcon correctly 1`] = `
+"<div class="w-full flex flex-col">
+  <div data-headlessui-state="" class="w-full flex flex-col"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-primary-500 dark:text-primary-400 bg-primary-50 hover:bg-primary-100 disabled:bg-primary-50 dark:bg-primary-950 dark:hover:bg-primary-900 dark:disabled:bg-primary-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center mb-1.5 w-full" id="headlessui-disclosure-button-6" aria-expanded="false" data-headlessui-state="" aria-controls="headlessui-disclosure-panel-7">
+      <!--v-if-->
+      <!--v-if--><span class="heroicons-plus h-5 w-5 ms-auto transform transition-transform duration-200"></span>
+    </button>
+    <transition-stub enteractiveclass="overflow-hidden transition-[height] duration-200 ease-out" leaveactiveclass="overflow-hidden transition-[height] duration-200 ease-out" appear="false" persisted="true" css="true">
+      <div style="display: none;">
+        <div id="headlessui-disclosure-panel-7" data-headlessui-state="" class="text-sm text-gray-500 dark:text-gray-400 pt-1.5 pb-3">Accordion Content</div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;
+
+exports[`Accordion > renders renders with defaultOpen set to true correctly 1`] = `
+"<div class="w-full flex flex-col">
+  <div data-headlessui-state="open" class="w-full flex flex-col"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-primary-500 dark:text-primary-400 bg-primary-50 hover:bg-primary-100 disabled:bg-primary-50 dark:bg-primary-950 dark:hover:bg-primary-900 dark:disabled:bg-primary-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center mb-1.5 w-full" id="headlessui-disclosure-button-4" aria-expanded="true" aria-controls="headlessui-disclosure-panel-5" data-headlessui-state="open">
+      <!--v-if-->
+      <!--v-if--><span class="i-heroicons-chevron-down-20-solid -rotate-180 h-5 w-5 ms-auto transform transition-transform duration-200"></span>
+    </button>
+    <transition-stub enteractiveclass="overflow-hidden transition-[height] duration-200 ease-out" leaveactiveclass="overflow-hidden transition-[height] duration-200 ease-out" appear="false" persisted="true" css="true">
+      <div>
+        <div id="headlessui-disclosure-panel-5" data-headlessui-state="open" class="text-sm text-gray-500 dark:text-gray-400 pt-1.5 pb-3">Accordion Content</div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;
+
+exports[`Accordion > renders renders with multiple allowed to be open correctly 1`] = `
+"<div class="w-full flex flex-col">
+  <div data-headlessui-state="" class="w-full flex flex-col"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-primary-500 dark:text-primary-400 bg-primary-50 hover:bg-primary-100 disabled:bg-primary-50 dark:bg-primary-950 dark:hover:bg-primary-900 dark:disabled:bg-primary-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center mb-1.5 w-full" id="headlessui-disclosure-button-10" aria-expanded="false" data-headlessui-state="" aria-controls="headlessui-disclosure-panel-11">
+      <!--v-if-->
+      <!--v-if--><span class="i-heroicons-chevron-down-20-solid h-5 w-5 ms-auto transform transition-transform duration-200"></span>
+    </button>
+    <transition-stub enteractiveclass="overflow-hidden transition-[height] duration-200 ease-out" leaveactiveclass="overflow-hidden transition-[height] duration-200 ease-out" appear="false" persisted="true" css="true">
+      <div style="display: none;">
+        <div id="headlessui-disclosure-panel-11" data-headlessui-state="" class="text-sm text-gray-500 dark:text-gray-400 pt-1.5 pb-3">Item 1</div>
+      </div>
+    </transition-stub>
+  </div>
+  <div data-headlessui-state="" class="w-full flex flex-col"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-primary-500 dark:text-primary-400 bg-primary-50 hover:bg-primary-100 disabled:bg-primary-50 dark:bg-primary-950 dark:hover:bg-primary-900 dark:disabled:bg-primary-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center mb-1.5 w-full" id="headlessui-disclosure-button-12" aria-expanded="false" data-headlessui-state="" aria-controls="headlessui-disclosure-panel-13">
+      <!--v-if-->
+      <!--v-if--><span class="i-heroicons-chevron-down-20-solid h-5 w-5 ms-auto transform transition-transform duration-200"></span>
+    </button>
+    <transition-stub enteractiveclass="overflow-hidden transition-[height] duration-200 ease-out" leaveactiveclass="overflow-hidden transition-[height] duration-200 ease-out" appear="false" persisted="true" css="true">
+      <div style="display: none;">
+        <div id="headlessui-disclosure-panel-13" data-headlessui-state="" class="text-sm text-gray-500 dark:text-gray-400 pt-1.5 pb-3">Item 2</div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;
+
+exports[`Accordion > renders renders with multiple items correctly 1`] = `
+"<div class="w-full flex flex-col">
+  <div data-headlessui-state="" class="w-full flex flex-col"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-primary-500 dark:text-primary-400 bg-primary-50 hover:bg-primary-100 disabled:bg-primary-50 dark:bg-primary-950 dark:hover:bg-primary-900 dark:disabled:bg-primary-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center mb-1.5 w-full" id="headlessui-disclosure-button-0" aria-expanded="false" data-headlessui-state="" aria-controls="headlessui-disclosure-panel-1">
+      <!--v-if-->
+      <!--v-if--><span class="i-heroicons-chevron-down-20-solid h-5 w-5 ms-auto transform transition-transform duration-200"></span>
+    </button>
+    <transition-stub enteractiveclass="overflow-hidden transition-[height] duration-200 ease-out" leaveactiveclass="overflow-hidden transition-[height] duration-200 ease-out" appear="false" persisted="true" css="true">
+      <div style="display: none;">
+        <div id="headlessui-disclosure-panel-1" data-headlessui-state="" class="text-sm text-gray-500 dark:text-gray-400 pt-1.5 pb-3">Item 1</div>
+      </div>
+    </transition-stub>
+  </div>
+  <div data-headlessui-state="" class="w-full flex flex-col"><button type="button" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-primary-500 dark:text-primary-400 bg-primary-50 hover:bg-primary-100 disabled:bg-primary-50 dark:bg-primary-950 dark:hover:bg-primary-900 dark:disabled:bg-primary-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center mb-1.5 w-full" id="headlessui-disclosure-button-2" aria-expanded="false" data-headlessui-state="" aria-controls="headlessui-disclosure-panel-3">
+      <!--v-if-->
+      <!--v-if--><span class="i-heroicons-chevron-down-20-solid h-5 w-5 ms-auto transform transition-transform duration-200"></span>
+    </button>
+    <transition-stub enteractiveclass="overflow-hidden transition-[height] duration-200 ease-out" leaveactiveclass="overflow-hidden transition-[height] duration-200 ease-out" appear="false" persisted="true" css="true">
+      <div style="display: none;">
+        <div id="headlessui-disclosure-panel-3" data-headlessui-state="" class="text-sm text-gray-500 dark:text-gray-400 pt-1.5 pb-3">Item 2</div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;

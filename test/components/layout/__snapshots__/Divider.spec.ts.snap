@@ -10,7 +10,7 @@ exports[`Divider > renders basic case correctly 1`] = `
 exports[`Divider > renders with avatar correctly 1`] = `
 "<div class="flex items-center align-center text-center w-full flex-row">
   <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
-  <div class="font-medium text-gray-700 dark:text-gray-200 flex mx-3 whitespace-nowrap"><span class="relative inline-flex items-center justify-center flex-shrink-0 rounded-full h-10 w-10 text-base"><img class="rounded-full h-10 w-10 text-base" alt="nuxt-ui" src="https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013"><!--v-if--></span></div>
+  <div class="font-medium text-gray-700 dark:text-gray-200 flex mx-3 whitespace-nowrap"><span class="relative inline-flex items-center justify-center flex-shrink-0 rounded-full h-5 w-5 text-[10px] flex-shrink-0"><img class="rounded-full h-5 w-5 text-[10px]" alt="nuxt-ui" src="https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013"><!--v-if--></span></div>
   <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
 </div>"
 `;
@@ -34,7 +34,7 @@ exports[`Divider > renders with icon correctly 1`] = `
 exports[`Divider > renders with label correctly 1`] = `
 "<div class="flex items-center align-center text-center w-full flex-row">
   <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
-  <div class="font-medium text-gray-700 dark:text-gray-200 flex mx-3 whitespace-nowrap"><span class="">Divider label</span></div>
+  <div class="font-medium text-gray-700 dark:text-gray-200 flex mx-3 whitespace-nowrap"><span class="text-sm">Divider label</span></div>
   <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
 </div>"
 `;

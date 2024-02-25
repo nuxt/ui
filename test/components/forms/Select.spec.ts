@@ -18,17 +18,17 @@ describe('Select', () => {
     ['with trailing', { props: { trailing: true, icon: '' }, options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] }],
     ['with leading + icon', { props: { leading: true, icon: 'i-heroicons-adjustments-vertical', options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
     ['with trailing + icon', { props: { trailing: true, icon: 'i-heroicons-archive-box', options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
-    ['with leading slot', { slots: { leading: 'leading slot' }, props: { options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
-    ['with leading slot + iconName', { slots: { leading: 'leading slot' }, props: { iconName: 'i-heroicons-cloud', options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
-    ['with training slot', { slots: { leading: 'trailing slot' }, props: { options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
-    ['with training slot + iconName', { slots: { leading: 'trailing slot' }, props: { iconName: 'i-heroicons-bookmark-solid', options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
     ['with padded', { props: { padded: false, options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
     ['with custom size', { props: { size: 'lg' }, options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] }],
     ['with custom color', { props: { color: 'red', options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
     ['with custom variant', { props: { variant: 'outlined' }, options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] }],
-    ['with custom options', { props: { options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }]
+    ['with custom options', { props: { options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
+    ['with leading slot', { slots: { leading: () => 'Leading slot' }, props: { options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
+    ['with leading slot + iconName', { slots: { leading: () => 'Leading slot' }, props: { iconName: 'i-heroicons-cloud', options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
+    ['with trailing slot', { slots: { trailing: () => 'Trailing slot' }, props: { options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }],
+    ['with trailing slot + iconName', { slots: { trailing: () => 'Trailing slot' }, props: { iconName: 'i-heroicons-bookmark-solid', options: [{ value: 'opt1', label: 'Option 1' }, { value: 'opt2', label: 'Option 2' }] } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Select.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof USelect.props>) => {
     const html = await ComponentRender(nameOrHtml, options, USelect)
     expect(html).toMatchSnapshot()
   })

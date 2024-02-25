@@ -1,10 +1,10 @@
 <template>
-  <nav aria-label="Breadcrumb" :class="ui.wrapper" v-bind="attrs">
-    <ol :class="ui.ol">
-      <li v-for="(link, index) in links" :key="index" :class="ui.li">
+  <nav aria-label="Breadcrumb" :class="_ui.wrapper" v-bind="attrs">
+    <ol :class="_ui.ol">
+      <li v-for="(link, index) in links" :key="index" :class="_ui.li">
         <ULink
           as="span"
-          :class="[ui.base, index === links.length - 1 ? ui.active : !!link.to ? ui.inactive : '']"
+          :class="[_ui.base, index === links.length - 1 ? _ui.active : !!link.to ? _ui.inactive : '']"
           v-bind="getULinkProps(link)"
           :aria-current="index === links.length - 1 ? 'page' : undefined"
         >
@@ -12,18 +12,18 @@
             <UIcon
               v-if="link.icon"
               :name="link.icon"
-              :class="twMerge(twJoin(ui.icon.base, index === links.length - 1 ? ui.icon.active : !!link.to ? ui.icon.inactive : ''), link.iconClass)"
+              :class="twMerge(twJoin(_ui.icon.base, index === links.length - 1 ? _ui.icon.active : !!link.to ? _ui.icon.inactive : ''), link.iconClass)"
             />
           </slot>
 
           <slot :link="link" :index="index" :is-active="index === links.length - 1">
-            <span v-if="link.label" :class="twMerge(ui.label, link.labelClass)">{{ link.label }}</span>
+            <span v-if="link.label" :class="twMerge(_ui.label, link.labelClass)">{{ link.label }}</span>
           </slot>
         </ULink>
 
         <slot v-if="index < links.length - 1" name="divider">
           <template v-if="divider">
-            <UIcon v-if="divider.startsWith('i-')" :name="divider" :class="ui.divider.base" role="presentation" />
+            <UIcon v-if="divider.startsWith('i-')" :name="divider" :class="_ui.divider.base" role="presentation" />
             <span v-else role="presentation">{{ divider }}</span>
           </template>
         </slot>
@@ -75,8 +75,7 @@ export default defineComponent({
     const { ui, attrs } = useUI('breadcrumb', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       getULinkProps,
       twMerge,

@@ -3,19 +3,19 @@
     :is="searchable ? 'HCombobox' : 'HListbox'"
     v-slot="{ open }"
     :by="by"
-    :name="name"
+    :name="_name"
     :model-value="modelValue"
     :multiple="multiple"
     :disabled="disabled"
     as="div"
-    :class="ui.wrapper"
+    :class="_ui.wrapper"
     @update:model-value="onUpdate"
   >
     <input
       v-if="required"
       :value="modelValue"
       :required="required"
-      :class="uiMenu.required"
+      :class="_uiMenu.required"
       tabindex="-1"
       aria-hidden="true"
     >
@@ -25,10 +25,10 @@
       ref="trigger"
       as="div"
       role="button"
-      :class="uiMenu.trigger"
+      :class="_uiMenu.trigger"
     >
       <slot :open="open" :disabled="disabled" :loading="loading">
-        <button :id="inputId" :class="selectClass" :disabled="disabled" type="button" v-bind="attrs">
+        <button :id="inputId" :class="_selectClass" :disabled="disabled" type="button" v-bind="attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
             <slot name="leading" :disabled="disabled" :loading="loading">
               <UIcon :name="leadingIconName" :class="leadingIconClass" />
@@ -36,8 +36,8 @@
           </span>
 
           <slot name="label">
-            <span v-if="label" :class="uiMenu.label">{{ label }}</span>
-            <span v-else :class="uiMenu.label">{{ placeholder || '&nbsp;' }}</span>
+            <span v-if="label" :class="_uiMenu.label">{{ label }}</span>
+            <span v-else :class="_uiMenu.label">{{ placeholder || '&nbsp;' }}</span>
           </slot>
 
           <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
@@ -49,20 +49,20 @@
       </slot>
     </component>
 
-    <div v-if="open" ref="container" :class="[uiMenu.container, uiMenu.width]">
-      <Transition appear v-bind="uiMenu.transition">
+    <div v-if="open" ref="container" :class="[_uiMenu.container, _uiMenu.width]">
+      <Transition appear v-bind="_uiMenu.transition">
         <div>
-          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(uiMenu.arrow)" />
+          <div v-if="_popper.arrow" data-popper-arrow :class="Object.values(_uiMenu.arrow)" />
 
-          <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[uiMenu.base, uiMenu.ring, uiMenu.rounded, uiMenu.shadow, uiMenu.background, uiMenu.padding, uiMenu.height]">
+          <component :is="searchable ? 'HComboboxOptions' : 'HListboxOptions'" static :class="[_uiMenu.base, _uiMenu.ring, _uiMenu.rounded, _uiMenu.shadow, _uiMenu.background, _uiMenu.padding, _uiMenu.height]">
             <HComboboxInput
               v-if="searchable"
-              :display-value="() => query"
+              :display-value="() => _query"
               name="q"
               :placeholder="searchablePlaceholder"
               autofocus
               autocomplete="off"
-              :class="uiMenu.input"
+              :class="_uiMenu.input"
               @change="onChange"
             />
             <component
@@ -74,44 +74,44 @@
               :value="valueAttribute ? option[valueAttribute] : option"
               :disabled="option.disabled"
             >
-              <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, selected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]">
-                <div :class="uiMenu.option.container">
+              <li :class="[_uiMenu.option.base, _uiMenu.option.rounded, _uiMenu.option.padding, _uiMenu.option.size, _uiMenu.option.color, active ? _uiMenu.option.active : _uiMenu.option.inactive, selected && _uiMenu.option.selected, optionDisabled && _uiMenu.option.disabled]">
+                <div :class="_uiMenu.option.container">
                   <slot name="option" :option="option" :active="active" :selected="selected">
-                    <UIcon v-if="option.icon" :name="option.icon" :class="[uiMenu.option.icon.base, active ? uiMenu.option.icon.active : uiMenu.option.icon.inactive, option.iconClass]" aria-hidden="true" />
+                    <UIcon v-if="option.icon" :name="option.icon" :class="[_uiMenu.option.icon.base, active ? _uiMenu.option.icon.active : _uiMenu.option.icon.inactive, option.iconClass]" aria-hidden="true" />
                     <UAvatar
                       v-else-if="option.avatar"
-                      v-bind="{ size: uiMenu.option.avatar.size, ...option.avatar }"
-                      :class="uiMenu.option.avatar.base"
+                      v-bind="{ size: _uiMenu.option.avatar.size, ...option.avatar }"
+                      :class="_uiMenu.option.avatar.base"
                       aria-hidden="true"
                     />
-                    <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
+                    <span v-else-if="option.chip" :class="_uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
 
                     <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : option[optionAttribute] }}</span>
                   </slot>
                 </div>
 
-                <span v-if="selected" :class="[uiMenu.option.selectedIcon.wrapper, uiMenu.option.selectedIcon.padding]">
-                  <UIcon :name="selectedIcon" :class="uiMenu.option.selectedIcon.base" aria-hidden="true" />
+                <span v-if="selected" :class="[_uiMenu.option.selectedIcon.wrapper, _uiMenu.option.selectedIcon.padding]">
+                  <UIcon :name="selectedIcon" :class="_uiMenu.option.selectedIcon.base" aria-hidden="true" />
                 </span>
               </li>
             </component>
 
             <component :is="searchable ? 'HComboboxOption' : 'HListboxOption'" v-if="creatable && createOption" v-slot="{ active, selected }" :value="createOption" as="template">
-              <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
-                <div :class="uiMenu.option.container">
+              <li :class="[_uiMenu.option.base, _uiMenu.option.rounded, _uiMenu.option.padding, _uiMenu.option.size, _uiMenu.option.color, active ? _uiMenu.option.active : _uiMenu.option.inactive]">
+                <div :class="_uiMenu.option.container">
                   <slot name="option-create" :option="createOption" :active="active" :selected="selected">
-                    <span :class="uiMenu.option.create">Create "{{ createOption[optionAttribute] }}"</span>
+                    <span :class="_uiMenu.option.create">Create "{{ createOption[optionAttribute] }}"</span>
                   </slot>
                 </div>
               </li>
             </component>
-            <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
-              <slot name="option-empty" :query="query">
-                No results for "{{ query }}".
+            <p v-else-if="searchable && _query && !filteredOptions.length" :class="_uiMenu.option.empty">
+              <slot name="option-empty" :query="_query">
+                No results for "{{ _query }}".
               </slot>
             </p>
-            <p v-else-if="!filteredOptions.length" :class="uiMenu.empty">
-              <slot name="empty" :query="query">
+            <p v-else-if="!filteredOptions.length" :class="_uiMenu.empty">
+              <slot name="empty" :query="_query">
                 No options.
               </slot>
             </p>
@@ -516,23 +516,18 @@ export default defineComponent({
     provideUseId(() => useId())
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
-      // eslint-disable-next-line vue/no-dupe-keys
-      uiMenu,
+      _ui: ui,
+      _uiMenu: uiMenu,
       attrs,
-      // eslint-disable-next-line vue/no-dupe-keys
-      name,
+      _name: name,
       inputId,
-      // eslint-disable-next-line vue/no-dupe-keys
-      popper,
+      _popper: popper,
       trigger,
       container,
       label,
       isLeading,
       isTrailing,
-      // eslint-disable-next-line vue/no-dupe-keys
-      selectClass,
+      _selectClass: selectClass,
       leadingIconName,
       leadingIconClass,
       leadingWrapperIconClass,
@@ -541,8 +536,7 @@ export default defineComponent({
       trailingWrapperIconClass,
       filteredOptions,
       createOption,
-      // eslint-disable-next-line vue/no-dupe-keys
-      query,
+      _query: query,
       onUpdate,
       onChange
     }

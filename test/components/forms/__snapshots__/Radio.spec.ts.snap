@@ -1,55 +1,55 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Radio > renders basic case correctly 1`] = `
-"<div class="">
-  <div class=""><input id="0" type="radio" class=""></div>
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><input id="0" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400"></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Radio > renders with custom color correctly 1`] = `
-"<div class="">
-  <div class=""><input id="8" type="radio" class=""></div>
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><input id="7" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-blue-500 dark:text-blue-400"></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Radio > renders with custom id correctly 1`] = `
-"<div class="">
-  <div class=""><input id="custom-radio-id" type="radio" class=""></div>
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><input id="custom-radio-id" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400"></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Radio > renders with disabled correctly 1`] = `
-"<div class="">
-  <div class=""><input id="3" disabled="" type="radio" class=""></div>
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><input id="3" disabled="" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400"></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Radio > renders with help correctly 1`] = `
-"<div class="">
-  <div class=""><input id="6" type="radio" class=""></div>
-  <div class=""><label for="6" class="">Radio Label
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><input id="5" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400"></div>
+  <div class="ms-3 flex flex-col"><label for="5" class="text-sm font-medium text-gray-700 dark:text-gray-200">Radio Label
       <!--v-if-->
     </label>
-    <p class="">Help text</p>
+    <p class="text-sm text-gray-500 dark:text-gray-400">Help text</p>
   </div>
 </div>"
 `;
 
 exports[`Radio > renders with inputClass correctly 1`] = `
-"<div class="">
-  <div class=""><input id="9" type="radio" class=""></div>
+"<div class="relative flex items-start w-full">
+  <div class="flex items-center h-5"><input id="8" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400"></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Radio > renders with label correctly 1`] = `
-"<div class="">
-  <div class=""><input id="4" type="radio" class=""></div>
-  <div class=""><label for="4" class="">Radio Label
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><input id="4" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400"></div>
+  <div class="ms-3 flex flex-col"><label for="4" class="text-sm font-medium text-gray-700 dark:text-gray-200">Radio Label
       <!--v-if-->
     </label>
     <!--v-if-->
@@ -58,9 +58,9 @@ exports[`Radio > renders with label correctly 1`] = `
 `;
 
 exports[`Radio > renders with label slot correctly 1`] = `
-"<div class="">
-  <div class=""><input id="5" type="radio" class=""></div>
-  <div class=""><label for="5" class="">label slot
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><input id="9" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400"></div>
+  <div class="ms-3 flex flex-col"><label for="9" class="text-sm font-medium text-gray-700 dark:text-gray-200">Label slot
       <!--v-if-->
     </label>
     <!--v-if-->
@@ -69,24 +69,24 @@ exports[`Radio > renders with label slot correctly 1`] = `
 `;
 
 exports[`Radio > renders with name correctly 1`] = `
-"<div class="">
-  <div class=""><input id="2" name="radioName" type="radio" class=""></div>
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><input id="2" name="radioName" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400"></div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Radio > renders with required correctly 1`] = `
-"<div class="">
-  <div class=""><input id="7" required="" type="radio" class=""></div>
-  <div class=""><label for="7" class="">Radio Label<span class="">*</span></label>
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><input id="6" required="" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400"></div>
+  <div class="ms-3 flex flex-col"><label for="6" class="text-sm font-medium text-gray-700 dark:text-gray-200">Radio Label<span class="text-sm text-red-500 dark:text-red-400">*</span></label>
     <!--v-if-->
   </div>
 </div>"
 `;
 
 exports[`Radio > renders with value correctly 1`] = `
-"<div class="">
-  <div class=""><input id="1" type="radio" class="" value="option1"></div>
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><input id="1" type="radio" class="h-4 w-4 dark:checked:bg-current dark:checked:border-transparent disabled:opacity-50 disabled:cursor-not-allowed focus:ring-0 focus:ring-transparent focus:ring-offset-transparent form-radio bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 text-primary-500 dark:text-primary-400" value="option1"></div>
   <!--v-if-->
 </div>"
 `;

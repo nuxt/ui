@@ -9,17 +9,17 @@ exports[`Card > renders basic case correctly 1`] = `
 `;
 
 exports[`Card > renders with as correctly 1`] = `
-"<li class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
+"<article class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
-</li>"
+</article>"
 `;
 
 exports[`Card > renders with default slot correctly 1`] = `
 "<div class="rounded-lg divide-y divide-gray-200 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900">
   <!--v-if-->
-  <div class="px-4 py-5 sm:p-6">default slot</div>
+  <div class="px-4 py-5 sm:p-6">Default slot</div>
   <!--v-if-->
 </div>"
 `;

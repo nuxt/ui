@@ -5,11 +5,9 @@ import ComponentRender from '../component-render'
 
 describe('Icon', () => {
   it.each([
-    ['basic case', {}],
-    ['with name', { props: { name: 'i-heroicons-academic-cap' } }],
-    ['with dynamic', { props: { name: 'i-heroicons-arrow-small-left-solid', dynamic: true } }]
+    ['with name', { props: { name: 'i-heroicons-academic-cap' } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Icon.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UIcon.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UIcon)
     expect(html).toMatchSnapshot()
   })

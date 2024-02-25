@@ -1,19 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Breadcrumb > renders basic case correctly 1`] = `
-"<nav aria-label="Breadcrumb">
-  <ol class=""></ol>
-</nav>"
-`;
-
 exports[`Breadcrumb > renders with default slot correctly 1`] = `
 "<nav aria-label="Breadcrumb" class="relative">
   <ol class="flex items-center gap-x-1.5">
     <li class="flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm leading-6 min-w-0"><a class="flex items-center gap-x-1.5 group font-semibold min-w-0 hover:text-gray-700 dark:hover:text-gray-200" href="/">
-        <!--v-if-->default slot
+        <!--v-if-->Default slot
       </a><span class="i-heroicons-chevron-right-20-solid rtl:i-heroicons-chevron-left-20-solid flex-shrink-0 w-5 h-5" role="presentation"></span></li>
     <li class="flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm leading-6 min-w-0"><a class="flex items-center gap-x-1.5 group font-semibold min-w-0 text-primary-500 dark:text-primary-400" aria-current="page" href="/about">
-        <!--v-if-->default slot
+        <!--v-if-->Default slot
       </a>
       <!--v-if-->
     </li>
@@ -41,7 +35,7 @@ exports[`Breadcrumb > renders with divider slot correctly 1`] = `
   <ol class="flex items-center gap-x-1.5">
     <li class="flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm leading-6 min-w-0"><a class="flex items-center gap-x-1.5 group font-semibold min-w-0 hover:text-gray-700 dark:hover:text-gray-200" href="/">
         <!--v-if--><span class="block truncate">Home</span>
-      </a>divider slot</li>
+      </a>Divider slot</li>
     <li class="flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm leading-6 min-w-0"><a class="flex items-center gap-x-1.5 group font-semibold min-w-0 text-primary-500 dark:text-primary-400" aria-current="page" href="/about">
         <!--v-if--><span class="block truncate">About</span>
       </a>
@@ -65,8 +59,8 @@ exports[`Breadcrumb > renders with icon correctly 1`] = `
 exports[`Breadcrumb > renders with icon slot correctly 1`] = `
 "<nav aria-label="Breadcrumb" class="relative">
   <ol class="flex items-center gap-x-1.5">
-    <li class="flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm leading-6 min-w-0"><a class="flex items-center gap-x-1.5 group font-semibold min-w-0 hover:text-gray-700 dark:hover:text-gray-200" href="/">icon slot<span class="block truncate">Home</span></a><span class="i-heroicons-chevron-right-20-solid rtl:i-heroicons-chevron-left-20-solid flex-shrink-0 w-5 h-5" role="presentation"></span></li>
-    <li class="flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm leading-6 min-w-0"><a class="flex items-center gap-x-1.5 group font-semibold min-w-0 text-primary-500 dark:text-primary-400" aria-current="page" href="/about">icon slot<span class="block truncate">About</span></a>
+    <li class="flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm leading-6 min-w-0"><a class="flex items-center gap-x-1.5 group font-semibold min-w-0 hover:text-gray-700 dark:hover:text-gray-200" href="/">Icon slot<span class="block truncate">Home</span></a><span class="i-heroicons-chevron-right-20-solid rtl:i-heroicons-chevron-left-20-solid flex-shrink-0 w-5 h-5" role="presentation"></span></li>
+    <li class="flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm leading-6 min-w-0"><a class="flex items-center gap-x-1.5 group font-semibold min-w-0 text-primary-500 dark:text-primary-400" aria-current="page" href="/about">Icon slot<span class="block truncate">About</span></a>
       <!--v-if-->
     </li>
   </ol>

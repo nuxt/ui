@@ -3,17 +3,17 @@
     :vertical="orientation === 'vertical'"
     :selected-index="selectedIndex"
     as="div"
-    :class="ui.wrapper"
+    :class="_ui.wrapper"
     v-bind="attrs"
     @change="onChange"
   >
     <HTabList
       ref="listRef"
-      :class="[ui.list.base, ui.list.background, ui.list.rounded, ui.list.shadow, ui.list.padding, ui.list.width, orientation === 'horizontal' && ui.list.height, orientation === 'horizontal' && 'inline-grid items-center']"
+      :class="[_ui.list.base, _ui.list.background, _ui.list.rounded, _ui.list.shadow, _ui.list.padding, _ui.list.width, orientation === 'horizontal' && _ui.list.height, orientation === 'horizontal' && 'inline-grid items-center']"
       :style="[orientation === 'horizontal' && `grid-template-columns: repeat(${items.length}, minmax(0, 1fr))`]"
     >
-      <div ref="markerRef" :class="ui.list.marker.wrapper">
-        <div :class="[ui.list.marker.base, ui.list.marker.background, ui.list.marker.rounded, ui.list.marker.shadow]" />
+      <div ref="markerRef" :class="_ui.list.marker.wrapper">
+        <div :class="[_ui.list.marker.base, _ui.list.marker.background, _ui.list.marker.rounded, _ui.list.marker.shadow]" />
       </div>
 
       <HTab
@@ -24,7 +24,7 @@
         :disabled="item.disabled"
         as="template"
       >
-        <button :class="[ui.list.tab.base, ui.list.tab.background, ui.list.tab.height, ui.list.tab.padding, ui.list.tab.size, ui.list.tab.font, ui.list.tab.rounded, ui.list.tab.shadow, selected ? ui.list.tab.active : ui.list.tab.inactive]">
+        <button :class="[_ui.list.tab.base, _ui.list.tab.background, _ui.list.tab.height, _ui.list.tab.padding, _ui.list.tab.size, _ui.list.tab.font, _ui.list.tab.rounded, _ui.list.tab.shadow, selected ? _ui.list.tab.active : _ui.list.tab.inactive]">
           <slot :item="item" :index="index" :selected="selected" :disabled="disabled">
             <span class="truncate">{{ item.label }}</span>
           </slot>
@@ -32,8 +32,8 @@
       </HTab>
     </HTabList>
 
-    <HTabPanels :class="ui.container">
-      <HTabPanel v-for="(item, index) of items" :key="index" v-slot="{ selected }" :class="ui.base" :unmount="unmount">
+    <HTabPanels :class="_ui.container">
+      <HTabPanel v-for="(item, index) of items" :key="index" v-slot="{ selected }" :class="_ui.base" :unmount="unmount">
         <slot :name="item.slot || 'item'" :item="item" :index="index" :selected="selected">
           {{ item.content }}
         </slot>
@@ -153,8 +153,7 @@ export default defineComponent({
     provideUseId(() => useId())
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       listRef,
       itemRefs,

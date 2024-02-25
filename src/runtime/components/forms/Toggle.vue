@@ -2,16 +2,16 @@
   <HSwitch
     :id="inputId"
     v-model="active"
-    :name="name"
+    :name="_name"
     :disabled="disabled"
     :class="switchClass"
     v-bind="attrs"
   >
     <span :class="containerClass">
-      <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
+      <span v-if="onIcon" :class="[active ? _ui.icon.active : _ui.icon.inactive, _ui.icon.base]" aria-hidden="true">
         <UIcon :name="onIcon" :class="onIconClass" />
       </span>
-      <span v-if="offIcon" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]" aria-hidden="true">
+      <span v-if="offIcon" :class="[active ? _ui.icon.inactive : _ui.icon.active, _ui.icon.base]" aria-hidden="true">
         <UIcon :name="offIcon" :class="offIconClass" />
       </span>
     </span>
@@ -140,11 +140,9 @@ export default defineComponent({
     provideUseId(() => useId())
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
-      // eslint-disable-next-line vue/no-dupe-keys
-      name,
+      _name: name,
       inputId,
       active,
       switchClass,

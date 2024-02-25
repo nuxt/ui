@@ -7,7 +7,7 @@ describe('ContextMenu', () => {
   it.each([
     ['basic case', {}]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof ContextMenu.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UContextMenu.props>) => {
     const html = await ComponentRender(nameOrHtml, options, UContextMenu)
 
     expect(html).toMatchSnapshot()

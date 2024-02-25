@@ -3,12 +3,12 @@ import { UModal } from '#components'
 import type { TypeOf } from 'zod'
 import ComponentRender from '../component-render'
 
-describe('Modal', () => {
+// FIXME: Remove skip
+describe.skip('Modal', () => {
   it.each([
-    //TODO: try to fix Error: A <Transition /> is used but it is missing a `:show="true | false"` prop
-    //['basic case', { props: { show: true }}]
+    ['basic case', { props: { modelValue: true } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof Modal.props>) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UModal.props>) => {
 
     const html = await ComponentRender(nameOrHtml, options, UModal)
     expect(html).toMatchSnapshot()

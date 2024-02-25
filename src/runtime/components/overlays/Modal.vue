@@ -1,20 +1,20 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template">
-    <HDialog :class="ui.wrapper" v-bind="attrs" @close="close">
-      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
-        <div :class="[ui.overlay.base, ui.overlay.background]" />
+    <HDialog :class="_ui.wrapper" v-bind="attrs" @close="close">
+      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="_ui.overlay.transition">
+        <div :class="[_ui.overlay.base, _ui.overlay.background]" />
       </TransitionChild>
 
-      <div :class="ui.inner">
-        <div :class="[ui.container, !fullscreen && ui.padding]">
+      <div :class="_ui.inner">
+        <div :class="[_ui.container, !fullscreen && _ui.padding]">
           <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
             <HDialogPanel
               :class="[
-                ui.base,
-                ui.background,
-                ui.ring,
-                ui.shadow,
-                fullscreen ? ui.fullscreen : [ui.width, ui.height, ui.rounded, ui.margin],
+                _ui.base,
+                _ui.background,
+                _ui.ring,
+                _ui.shadow,
+                fullscreen ? _ui.fullscreen : [_ui.width, _ui.height, _ui.rounded, _ui.margin],
               ]"
             >
               <slot />
@@ -120,8 +120,7 @@ export default defineComponent({
     provideUseId(() => useId())
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
+      _ui: ui,
       attrs,
       isOpen,
       transitionClass,
