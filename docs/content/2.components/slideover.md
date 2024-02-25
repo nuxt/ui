@@ -1,12 +1,12 @@
 ---
 description: Display a dialog that slides in from the edge of the screen.
 links:
-  - label: GitHub
-    icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/overlays/Slideover.vue
   - label: 'Dialog'
     icon: i-simple-icons-headlessui
     to: 'https://headlessui.com/vue/dialog'
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/overlays/Slideover.vue
 ---
 
 ## Usage
