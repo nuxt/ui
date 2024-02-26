@@ -29,9 +29,9 @@ exports[`CommandPalette > renders with groups correctly 1`] = `
     <!--v-if-->
   </div>
   <div id="headlessui-combobox-options-6" role="listbox" data-headlessui-state="" aria-label="Commands" class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2">
-    <div class="p-2" role="option">
+    <div class="p-2">
       <h2 class="px-2.5 my-2 text-xs font-semibold text-gray-900 dark:text-white">Group 1</h2>
-      <div class="text-sm text-gray-700 dark:text-gray-200" role="listbox" aria-label="Group 1">
+      <div class="text-sm text-gray-700 dark:text-gray-200" aria-label="Group 1">
         <div id="headlessui-combobox-option-7" role="option" aria-selected="true" class="flex justify-between select-none items-center rounded-md px-2.5 py-1.5 gap-2 relative bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white cursor-pointer" data-headlessui-state="active selected">
           <div class="flex items-center gap-1.5 min-w-0">
             <!--v-if-->
@@ -141,9 +141,9 @@ exports[`CommandPalette > renders with selected icon correctly 1`] = `
     <!--v-if-->
   </div>
   <div id="headlessui-combobox-options-12" role="listbox" data-headlessui-state="" aria-label="Commands" class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-2">
-    <div class="p-2" role="option">
+    <div class="p-2">
       <h2 class="px-2.5 my-2 text-xs font-semibold text-gray-900 dark:text-white">Group 1</h2>
-      <div class="text-sm text-gray-700 dark:text-gray-200" role="listbox" aria-label="Group 1">
+      <div class="text-sm text-gray-700 dark:text-gray-200" aria-label="Group 1">
         <div id="headlessui-combobox-option-13" role="option" aria-selected="true" class="flex justify-between select-none items-center rounded-md px-2.5 py-1.5 gap-2 relative bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white cursor-pointer" data-headlessui-state="active selected">
           <div class="flex items-center gap-1.5 min-w-0">
             <!--v-if-->
