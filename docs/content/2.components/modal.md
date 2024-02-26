@@ -79,6 +79,8 @@ Then, you can use the `useModal` composable to control your modals within your a
 
 :component-example{component="modal-example-composable"}
 
+Additionally, you can close the modal within the modal component by calling `modal.close()`. 
+
 ## Props
 
 :component-props
