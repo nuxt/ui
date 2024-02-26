@@ -362,7 +362,7 @@ export default defineComponent({
         } else {
           return null
         }
-      } else {
+      } else if (props.modelValue) {
         if (props.valueAttribute) {
           const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
           return option ? option[props.optionAttribute] : null
@@ -370,6 +370,8 @@ export default defineComponent({
           return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
         }
       }
+
+      return null
     })
 
     const selectClass = computed(() => {
