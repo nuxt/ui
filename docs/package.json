@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.1.20",
-    "@iconify-json/simple-icons": "^1.1.92",
+    "@iconify-json/simple-icons": "^1.1.93",
     "@nuxt/content": "^2.12.0",
     "@nuxt/devtools": "^1.0.8",
     "@nuxt/eslint-config": "^0.2.0",
@@ -19,7 +19,7 @@
     "@octokit/rest": "^20.0.2",
     "@vueuse/nuxt": "^10.8.0",
     "date-fns": "^3.3.1",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "joi": "^17.12.2",
     "nuxt": "^3.10.3",
     "nuxt-cloudflare-analytics": "^1.0.8",

@@ -63,8 +63,8 @@
     "@nuxt/test-utils": "^3.11.0",
     "@release-it/conventional-changelog": "^8.0.1",
     "@vue/test-utils": "^2.4.4",
-    "eslint": "^8.56.0",
-    "happy-dom": "^13.4.1",
+    "eslint": "^8.57.0",
+    "happy-dom": "^13.6.2",
     "joi": "^17.12.2",
     "nuxt": "^3.10.3",
     "release-it": "^17.1.1",
@@ -82,6 +82,6 @@
     "@nuxt/schema": "3.10.3",
     "tailwindcss": "3.4.1",
     "@headlessui/vue": "1.7.19",
-    "vue": "3.4.19"
+    "vue": "3.4.20"
   }
 }
