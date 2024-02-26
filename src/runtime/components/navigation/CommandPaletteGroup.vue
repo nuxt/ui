@@ -1,10 +1,10 @@
 <template>
-  <div :class="ui.group.wrapper" role="option">
+  <div :class="ui.group.wrapper">
     <h2 v-if="label" :class="ui.group.label">
       {{ label }}
     </h2>
 
-    <div :class="ui.group.container" role="listbox" :aria-label="group[groupAttribute]">
+    <div :class="ui.group.container" :aria-label="group[groupAttribute]">
       <HComboboxOption
         v-for="(command, index) of group.commands"
         :key="`${group.key}-${index}`"
