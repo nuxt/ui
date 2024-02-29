@@ -31,7 +31,21 @@ Link
 
 It also renders an `<a>` tag when a `to` prop is provided, otherwise it defaults to rendering a `<button>` tag. The default behavior can be customized using the `as` prop.
 
+You can also add 
+
 It is used underneath by the [Button](/components/button), [Dropdown](/components/dropdown) and [VerticalNavigation](/components/vertical-navigation) components.
+
+## IntelliSense
+If you're using VSCode and wish to get autocompletion for the classes `active-class` and `inactive-class`, you can add the following settings to your `.vscode/settings.json`:
+
+```json [.vscode/settings.json]
+{
+    "tailwindCSS.classAttributes": [
+      "active-class",
+      "inactive-class"
+  ],
+}
+```
 
 ## Props
 
