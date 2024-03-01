@@ -1,12 +1,12 @@
 ---
 description: Display togglable accordion panels.
 links:
-  - label: GitHub
-    icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/elements/Accordion.vue
   - label: Disclosure
     icon: i-simple-icons-headlessui
     to: 'https://headlessui.com/vue/disclosure'
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/elements/Accordion.vue
 ---
 
 ## Usage
