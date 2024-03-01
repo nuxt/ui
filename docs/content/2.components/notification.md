@@ -298,5 +298,5 @@ Slots defined in the `<UNotifications />` component are automatically passed dow
 
 ::tabs
   :component-preset{label="Notification"}
-  :component-preset{label="Notifications" slug="UNotifications"}
+  :component-preset{label="Notifications" slug="Notifications"}
 ::
