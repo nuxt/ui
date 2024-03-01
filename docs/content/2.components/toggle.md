@@ -1,12 +1,12 @@
 ---
 description: Display a toggle field.
 links:
-  - label: GitHub
-    icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/Toggle.vue
   - label: 'Switch'
     icon: i-simple-icons-headlessui
     to: 'https://headlessui.com/vue/switch'
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/Toggle.vue
 ---
 
 ## Usage
