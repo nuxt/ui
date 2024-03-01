@@ -27,8 +27,8 @@ function selectRange (duration: Duration) {
     </UButton>
 
     <template #panel="{ close }">
-      <div class="flex items-center divide-x divide-gray-200 dark:divide-gray-800">
-        <div class="flex flex-col py-4">
+      <div class="flex items-center sm:divide-x divide-gray-200 dark:divide-gray-800">
+        <div class="hidden sm:flex flex-col py-4">
           <UButton
             v-for="(range, index) in ranges"
             :key="index"
@@ -37,6 +37,7 @@ function selectRange (duration: Duration) {
             variant="ghost"
             class="rounded-none px-6"
             :class="[isRangeSelected(range.duration) ? 'bg-gray-100 dark:bg-gray-800' : 'hover:bg-gray-50 dark:hover:bg-gray-800/50']"
+            truncate
             @click="selectRange(range.duration)"
           />
         </div>

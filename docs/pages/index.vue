@@ -4,7 +4,7 @@
     <ULandingHero :ui="{ base: 'relative z-[1]', container: 'max-w-4xl' }" class="mb-[calc(var(--header-height)*2)]">
       <template #headline>
         <UBadge variant="subtle" size="md" class="hover:bg-primary-100 dark:bg-primary-950/100 dark:hover:bg-primary-900 transition-color relative font-medium rounded-full shadow-none">
-          <NuxtLink :to="`https://github.com/nuxt/ui/releases/tag/v${config.version.split('.').slice(0, -1).join('.')}.0`" target="_blank" class="focus:outline-none" tabindex="-1">
+          <NuxtLink :to="`https://github.com/nuxt/ui/releases/tag/v${config.version.split('.').slice(0, -1).join('.')}.0`" target="_blank" class="focus:outline-none" aria-label="Go to last relase" tabindex="-1">
             <span class="absolute inset-0" aria-hidden="true" />
           </NuxtLink>
 
@@ -90,6 +90,7 @@
               :width="card.image.width"
               :height="card.image.height"
               :alt="card.title"
+              loading="lazy"
               class="object-cover w-full"
             />
           </ULandingCard>
@@ -180,7 +181,7 @@
         </template>
 
         <div class="bg-gray-900/5 dark:bg-white/5 ring-1 ring-inset ring-gray-900/10 dark:ring-white/10 rounded-xl lg:-m-4 p-4">
-          <video poster="https://res.cloudinary.com/nuxt/video/upload/so_3.3/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.jpg" controls class="rounded-lg">
+          <video preload="none" poster="https://res.cloudinary.com/nuxt/video/upload/so_3.3/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.jpg" controls class="rounded-lg">
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.webm" type="video/webm">
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.mp4" type="video/mp4">
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.ogg" type="video/ogg">
@@ -282,7 +283,7 @@
               </div>
             </template>
 
-            <template #docs-surround>
+            <template #content-surround>
               <UContentSurround
                 :surround="(surround as unknown as ParsedContent[])"
                 class="w-full gap-4"
@@ -300,7 +301,7 @@
               />
             </template>
 
-            <template #docs-toc>
+            <template #content-toc>
               <div class="absolute top-0 left-0 right-0 space-y-3">
                 <UContentToc :links="toc" class="bg-transparent relative max-h-full overflow-hidden top-0" :ui="({ container: { base: '!pt-0 !pb-4' } } as any)" />
 
@@ -380,7 +381,7 @@
           <template #description>
             <span v-html="page.pro.landing?.description" />
           </template>
-          <video poster="https://res.cloudinary.com/nuxt/video/upload/so_14.4/v1698923423/ui-pro/nuxt-ui-pro-landing-demo_yrh6nr.jpg" controls>
+          <video preload="none" poster="https://res.cloudinary.com/nuxt/video/upload/so_14.4/v1698923423/ui-pro/nuxt-ui-pro-landing-demo_yrh6nr.jpg" controls>
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923423/ui-pro/nuxt-ui-pro-landing-demo_yrh6nr.webm" type="video/webm">
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923423/ui-pro/nuxt-ui-pro-landing-demo_yrh6nr.mp4" type="video/mp4">
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923423/ui-pro/nuxt-ui-pro-landing-demo_yrh6nr.ogg" type="video/ogg">
@@ -393,7 +394,7 @@
           <template #description>
             <span v-html="page.pro.docs?.description" />
           </template>
-          <video poster="https://res.cloudinary.com/nuxt/video/upload/v1698923398/ui-pro/nuxt-ui-pro-docs-demo_jm6ubr.jpg" controls>
+          <video preload="none" poster="https://res.cloudinary.com/nuxt/video/upload/v1698923398/ui-pro/nuxt-ui-pro-docs-demo_jm6ubr.jpg" controls>
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923398/ui-pro/nuxt-ui-pro-docs-demo_jm6ubr.webm" type="video/webm">
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923398/ui-pro/nuxt-ui-pro-docs-demo_jm6ubr.mp4" type="video/mp4">
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923398/ui-pro/nuxt-ui-pro-docs-demo_jm6ubr.ogg" type="video/ogg">
@@ -617,7 +618,7 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
         slot: 'page-body',
         class: 'inset-x-4 top-4 justify-start'
       }, isAfterStep(steps.docs + 12) ? {
-        slot: 'docs-surround',
+        slot: 'content-surround',
         class: 'bottom-4 inset-x-4 h-28'
       } : {
         name: 'UContentSurround',
@@ -634,7 +635,7 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
       class: 'right-4 inset-y-4 w-64',
       inactive: isAfterStep(steps.docs + 14),
       children: [{
-        slot: 'docs-toc',
+        slot: 'content-toc',
         class: 'inset-4 overflow-y-auto'
       }]
     } : {
@@ -763,10 +764,12 @@ const navigationLinks = [{
 
 const surround = [{
   title: 'Introduction',
-  description: 'Fully styled and customizable components for Nuxt.'
+  description: 'Fully styled and customizable components for Nuxt.',
+  _path: '/'
 }, {
   title: 'Theming',
-  description: 'Learn how to customize the look and feel of the components.'
+  description: 'Learn how to customize the look and feel of the components.',
+  _path: '/'
 }]
 
 const md = `
