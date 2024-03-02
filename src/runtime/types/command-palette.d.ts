@@ -24,5 +24,6 @@ export interface Group {
   commands?: Command[]
   search?: Function
   filter?: Function
+  notSearchable: Boolean
   [key: string]: any
 }
