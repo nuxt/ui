@@ -53,6 +53,24 @@ defineShortcuts({
 </script>
 ```
 
+### Control programmatically
+
+First of all, add the `USlideovers` component to your app, preferably inside `app.vue`.
+
+```vue [app.vue]
+<template>
+  <div>
+    <UContainer>
+      <NuxtPage />
+    </UContainer>
+    <USlideovers />
+  </div>
+</template>
+```
+
+Then, you can use the `useSlideover` composable to control your modals within your app.
+
+:component-example{component="slideover-example-composable"}
 ## Props
 
 :component-props

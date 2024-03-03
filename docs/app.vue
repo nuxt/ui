@@ -23,6 +23,7 @@
       </template>
     </UNotifications>
     <UModals />
+    <USlideovers />
   </div>
 </template>
 
