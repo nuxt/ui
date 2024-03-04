@@ -24,18 +24,18 @@
 
           <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
             <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
-              <NuxtLink v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ href, target, rel, navigate, isExternal }" v-bind="getNuxtLinkProps(item)" custom>
+              <NuxtLink v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ href, target, rel, navigate, isExternal, isActive }" v-bind="getNuxtLinkProps(item)" custom>
                 <HMenuItem v-slot="{ active, disabled: itemDisabled, close }" :disabled="item.disabled">
                   <component
                     :is="!!href ? 'a' : 'button'"
                     :href="!itemDisabled ? href : undefined"
                     :rel="rel"
                     :target="target"
-                    :class="twMerge(twJoin(ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled), item.class)"
+                    :class="twMerge(twJoin(ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active || isActive ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled), item.class)"
                     @click="onClick($event, item, { href, navigate, close, isExternal })"
                   >
                     <slot :name="item.slot || 'item'" :item="item">
-                      <UIcon v-if="item.icon" :name="item.icon" :class="twMerge(twJoin(ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive), item.iconClass)" />
+                      <UIcon v-if="item.icon" :name="item.icon" :class="twMerge(twJoin(ui.item.icon.base, active || isActive ? ui.item.icon.active : ui.item.icon.inactive), item.iconClass)" />
                       <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
 
                       <span :class="twMerge(ui.item.label, item.labelClass)">{{ item.label }}</span>
