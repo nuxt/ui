@@ -16,7 +16,7 @@
     <Footer />
 
     <ClientOnly>
-      <LazyUContentSearch :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 1000 }" />
+      <LazyUContentSearch :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
     </ClientOnly>
 
     <UNotifications>
