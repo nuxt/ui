@@ -17,11 +17,10 @@ export default defineNuxtConfig({
   ].filter(Boolean),
   modules: [
     '@nuxt/content',
+    '@nuxt/fonts',
     '@nuxt/image',
     'nuxt-og-image',
     module,
-    '@nuxtjs/fontaine',
-    '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
