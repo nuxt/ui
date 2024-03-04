@@ -7,7 +7,8 @@
       :disabled="disabled"
       :class="ui.trigger"
       role="button"
-      @mouseover="onMouseOver"
+      @mouseenter="onMouseEnter"
+      @touchstart.prevent="onTouchStart"
     >
       <slot :open="open" :disabled="disabled">
         <button :disabled="disabled">
@@ -16,7 +17,7 @@
       </slot>
     </HMenuButton>
 
-    <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
+    <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" :style="containerStyle">
       <Transition appear v-bind="ui.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
@@ -181,7 +182,19 @@ export default defineComponent({
       }
     })
 
-    function onMouseOver () {
+    function onTouchStart () {
+      if (!menuApi.value) {
+        return
+      }
+
+      if (menuApi.value.menuState === 0) {
+        menuApi.value.closeMenu()
+      } else {
+        menuApi.value.openMenu()
+      }
+    }
+
+    function onMouseEnter () {
       if (props.mode !== 'hover' || !menuApi.value) {
         return
       }
@@ -263,7 +276,8 @@ export default defineComponent({
       trigger,
       container,
       containerStyle,
-      onMouseOver,
+      onTouchStart,
+      onMouseEnter,
       onMouseLeave,
       onClick,
       getNuxtLinkProps,
