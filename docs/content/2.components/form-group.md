@@ -236,7 +236,7 @@ Use the `#help` slot to set the custom content for help.
 ::component-card
 ---
 slots:
-  help: Here are some examples <UIcon name="i-heroicons-arrow-right-20-solid" />
+  help: Here are some examples <UIcon name="i-heroicons-information-circle" />
   default: <UInput model-value="benjamincanac" placeholder="you@example.com" />
 props:
   label: 'Email'
