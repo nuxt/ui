@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { SlideoverExampleComponent } from '#components'
-const modal = useModal()
+const slideover = useSlideover()
 const count = ref(0)
 function openSlideover () {
   count.value += 1
-  modal.open(SlideoverExampleComponent, {
+  slideover.open(SlideoverExampleComponent, {
     count: count.value
   })
 }
 </script>
 
 <template>
-  <UButton label="Reveal modal" @click="openSlideover" />
+  <UButton label="Reveal slideover" @click="openSlideover" />
 </template>

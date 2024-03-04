@@ -37,7 +37,7 @@ function _useSlideover () {
     }
 
     /**
-     * Allows updating the modal props
+     * Allows updating the slideover props
      */
     function patch<T extends Component = {}> (props: Partial<Slideover & ComponentProps<T>>) {
         if (!slideoverState) return

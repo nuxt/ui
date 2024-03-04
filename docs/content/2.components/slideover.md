@@ -33,7 +33,7 @@ Set the `transition` prop to `false` to disable it.
 
 ### Prevent close
 
-Use the `prevent-close` prop to disable the outside click alongside the `esc` keyboard shortcut. A `close-prevented` event will be emitted when the user tries to close the modal.
+Use the `prevent-close` prop to disable the outside click alongside the `esc` keyboard shortcut. A `close-prevented` event will be emitted when the user tries to close the slideover.
 
 :component-example{component="slideover-example-prevent-close"}
 
@@ -68,7 +68,7 @@ First of all, add the `USlideovers` component to your app, preferably inside `ap
 </template>
 ```
 
-Then, you can use the `useSlideover` composable to control your modals within your app.
+Then, you can use the `useSlideover` composable to control your slideovers within your app.
 
 :component-example{component="slideover-example-composable"}
 ## Props
