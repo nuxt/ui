@@ -7,11 +7,11 @@ import type { Slideover, SlideoverState } from '../types/slideover'
 export const slidOverInjectionKey: InjectionKey<ShallowRef<SlideoverState>> =
     Symbol('nuxt-ui.slideover')
 
-function _useSlideover () {
+function _useSlideover() {
     const slideoverState = inject(slidOverInjectionKey)
     const isOpen = ref(false)
 
-    function open<T extends Component> (component: T, props?: Slideover & ComponentProps<T>) {
+    function open<T extends Component>(component: T, props?: Slideover & ComponentProps<T>) {
         if (!slideoverState) {
             throw new Error('useSlideover() is called without provider')
         }
@@ -24,22 +24,16 @@ function _useSlideover () {
         isOpen.value = true
     }
 
-    function close () {
+    function close() {
         if (!slideoverState) return
 
         isOpen.value = false
-        setTimeout(() => {
-            slideoverState.value = {
-                component: 'div',
-                props: {}
-            }
-        }, 300)
     }
 
     /**
      * Allows updating the slideover props
      */
-    function patch<T extends Component = {}> (props: Partial<Slideover & ComponentProps<T>>) {
+    function patch<T extends Component = {}>(props: Partial<Slideover & ComponentProps<T>>) {
         if (!slideoverState) return
 
         slideoverState.value = {
