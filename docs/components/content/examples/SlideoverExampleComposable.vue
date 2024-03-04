@@ -5,7 +5,8 @@ const count = ref(0)
 function openSlideover () {
   count.value += 1
   slideover.open(SlideoverExampleComponent, {
-    count: count.value
+    count: count.value,
+    onClose: slideover.close
   })
 }
 </script>
