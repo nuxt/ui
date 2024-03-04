@@ -257,7 +257,7 @@ componentProps:
 Use the `#option-create` slot to customize the content displayed when the `creatable` prop is `true` and there is no options. You will have access to the `query` property in the slot scope.
 
 ::callout{icon="i-heroicons-light-bulb"}
-An example is available in the [Create option](#create-option) section.
+An example is available in the [Creatable](#creatable) section.
 ::
 
 ### `empty`
