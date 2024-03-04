@@ -1,12 +1,12 @@
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
-    <HDialog :class="[_ui.wrapper, { 'justify-end': side === 'right' }]" v-bind="attrs" @close="close">
-      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="_ui.overlay.transition">
-        <div :class="[_ui.overlay.base, _ui.overlay.background]" />
+    <HDialog :class="[ui.wrapper, { 'justify-end': side === 'right' }]" v-bind="attrs" @close="close">
+      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
+        <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
       <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-        <HDialogPanel :class="[_ui.base, _ui.width, _ui.background, _ui.ring, _ui.padding]">
+        <HDialogPanel :class="[ui.base, ui.width, ui.background, ui.ring, ui.padding]">
           <slot />
         </HDialogPanel>
       </TransitionChild>
@@ -112,7 +112,8 @@ export default defineComponent({
     provideUseId(() => useId())
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       isOpen,
       transitionClass,

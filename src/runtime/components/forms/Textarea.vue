@@ -1,15 +1,15 @@
 <template>
-  <div :class="_ui.wrapper">
+  <div :class="ui.wrapper">
     <textarea
       :id="inputId"
       ref="textarea"
       :value="modelValue"
-      :name="_name"
+      :name="name"
       :rows="rows"
       :required="required"
       :disabled="disabled"
       :placeholder="placeholder"
-      :class="_textareaClass"
+      :class="textareaClass"
       v-bind="attrs"
       @input="onInput"
       @blur="onBlur"
@@ -241,12 +241,15 @@ export default defineComponent({
     })
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
-      _name: name,
+      // eslint-disable-next-line vue/no-dupe-keys
+      name,
       inputId,
       textarea,
-      _textareaClass: textareaClass,
+      // eslint-disable-next-line vue/no-dupe-keys
+      textareaClass,
       onInput,
       onChange,
       onBlur

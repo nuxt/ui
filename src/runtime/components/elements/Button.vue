@@ -5,7 +5,7 @@
     </slot>
 
     <slot>
-      <span v-if="label" :class="[truncate ? _ui.truncate : '']">
+      <span v-if="label" :class="[truncate ? ui.truncate : '']">
         {{ label }}
       </span>
     </slot>
@@ -194,7 +194,8 @@ export default defineComponent({
     const linkProps = computed(() => getNuxtLinkProps(props))
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       isLeading,
       isTrailing,

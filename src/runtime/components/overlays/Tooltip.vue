@@ -1,21 +1,21 @@
 <template>
-  <div ref="trigger" :class="_ui.wrapper" v-bind="attrs" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
+  <div ref="trigger" :class="ui.wrapper" v-bind="attrs" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <slot :open="open">
       Hover
     </slot>
 
-    <div v-if="open && !prevent" ref="container" :class="[_ui.container, _ui.width]">
-      <Transition appear v-bind="_ui.transition">
+    <div v-if="open && !prevent" ref="container" :class="[ui.container, ui.width]">
+      <Transition appear v-bind="ui.transition">
         <div>
-          <div v-if="_popper.arrow" data-popper-arrow :class="Object.values(_ui.arrow)" />
+          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
 
-          <div :class="[_ui.base, _ui.background, _ui.color, _ui.rounded, _ui.shadow, _ui.ring]">
+          <div :class="[ui.base, ui.background, ui.color, ui.rounded, ui.shadow, ui.ring]">
             <slot name="text">
               {{ text }}
             </slot>
 
-            <span v-if="shortcuts?.length" :class="_ui.shortcuts">
-              <span :class="_ui.middot">&middot;</span>
+            <span v-if="shortcuts?.length" :class="ui.shortcuts">
+              <span :class="ui.middot">&middot;</span>
 
               <UKbd v-for="shortcut of shortcuts" :key="shortcut" size="xs">
                 {{ shortcut }}
@@ -96,7 +96,7 @@ export default defineComponent({
 
     // Methods
 
-    function onMouseOver () {
+    function onMouseEnter () {
       // cancel programmed closing
       if (closeTimeout) {
         clearTimeout(closeTimeout)
@@ -129,13 +129,15 @@ export default defineComponent({
     }
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
-      _popper: popper,
+      // eslint-disable-next-line vue/no-dupe-keys
+      popper,
       trigger,
       container,
       open,
-      onMouseOver,
+      onMouseEnter,
       onMouseLeave
     }
   }

@@ -1,15 +1,15 @@
 <template>
-  <div :class="_ui.wrapper">
+  <div :class="ui.wrapper">
     <input
       :id="inputId"
       ref="input"
-      :name="_name"
+      :name="name"
       :value="modelValue"
       :type="type"
       :required="required"
       :placeholder="placeholder"
       :disabled="disabled"
-      :class="_inputClass"
+      :class="inputClass"
       v-bind="attrs"
       @input="onInput"
       @blur="onBlur"
@@ -304,14 +304,17 @@ export default defineComponent({
     })
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
-      _name: name,
+      // eslint-disable-next-line vue/no-dupe-keys
+      name,
       inputId,
       input,
       isLeading,
       isTrailing,
-      _inputClass: inputClass,
+      // eslint-disable-next-line vue/no-dupe-keys
+      inputClass,
       leadingIconName,
       leadingIconClass,
       leadingWrapperIconClass,

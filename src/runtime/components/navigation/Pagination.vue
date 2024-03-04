@@ -1,12 +1,12 @@
 <template>
-  <div :class="_ui.wrapper" v-bind="attrs">
+  <div :class="ui.wrapper" v-bind="attrs">
     <slot name="first" :on-click="onClickFirst">
       <UButton
         v-if="firstButton && showFirst"
         :size="size"
         :disabled="!canGoFirstOrPrev || disabled"
-        :class="[_ui.base, _ui.rounded]"
-        v-bind="{ ...(_ui.default.firstButton || {}), ...firstButton }"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...(ui.default.firstButton || {}), ...firstButton }"
         :ui="{ rounded: '' }"
         aria-label="First"
         @click="onClickFirst"
@@ -18,8 +18,8 @@
         v-if="prevButton"
         :size="size"
         :disabled="!canGoFirstOrPrev || disabled"
-        :class="[_ui.base, _ui.rounded]"
-        v-bind="{ ...(_ui.default.prevButton || {}), ...prevButton }"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...(ui.default.prevButton || {}), ...prevButton }"
         :ui="{ rounded: '' }"
         aria-label="Prev"
         @click="onClickPrev"
@@ -32,8 +32,8 @@
       :size="size"
       :disabled="disabled"
       :label="`${page}`"
-      v-bind="page === currentPage ? { ...(_ui.default.activeButton || {}), ...activeButton } : { ...(_ui.default.inactiveButton || {}), ...inactiveButton }"
-      :class="[{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }, _ui.base, _ui.rounded]"
+      v-bind="page === currentPage ? { ...(ui.default.activeButton || {}), ...activeButton } : { ...(ui.default.inactiveButton || {}), ...inactiveButton }"
+      :class="[{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }, ui.base, ui.rounded]"
       :ui="{ rounded: '' }"
       @click="() => onClickPage(page)"
     />
@@ -43,8 +43,8 @@
         v-if="nextButton"
         :size="size"
         :disabled="!canGoLastOrNext || disabled"
-        :class="[_ui.base, _ui.rounded]"
-        v-bind="{ ...(_ui.default.nextButton || {}), ...nextButton }"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...(ui.default.nextButton || {}), ...nextButton }"
         :ui="{ rounded: '' }"
         aria-label="Next"
         @click="onClickNext"
@@ -56,8 +56,8 @@
         v-if="lastButton && showLast"
         :size="size"
         :disabled="!canGoLastOrNext || disabled"
-        :class="[_ui.base, _ui.rounded]"
-        v-bind="{ ...(_ui.default.lastButton || {}), ...lastButton }"
+        :class="[ui.base, ui.rounded]"
+        v-bind="{ ...(ui.default.lastButton || {}), ...lastButton }"
         :ui="{ rounded: '' }"
         aria-label="Last"
         @click="onClickLast"
@@ -283,7 +283,8 @@ export default defineComponent({
     }
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       currentPage,
       pages,

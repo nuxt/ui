@@ -4,43 +4,43 @@
     :model-value="modelValue"
     :multiple="multiple"
     :nullable="nullable"
-    :class="_ui.wrapper"
+    :class="ui.wrapper"
     v-bind="attrs"
     as="div"
     @update:model-value="onSelect"
   >
-    <div v-show="searchable" :class="_ui.input.wrapper">
+    <div v-show="searchable" :class="ui.input.wrapper">
       <UIcon v-if="iconName" :name="iconName" :class="iconClass" aria-hidden="true" />
       <HComboboxInput
         ref="comboboxInput"
         :value="query"
-        :class="[_ui.input.base, _ui.input.size, _ui.input.height, _ui.input.padding, icon && _ui.input.icon.padding, closeButton && _ui.input.closeButton.padding]"
+        :class="[ui.input.base, ui.input.size, ui.input.height, ui.input.padding, icon && ui.input.icon.padding, closeButton && ui.input.closeButton.padding]"
         :placeholder="placeholder"
         :aria-label="placeholder"
         autocomplete="off"
         @change="query = $event.target.value"
       />
 
-      <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(_ui.default.closeButton || {}), ...closeButton }" :class="_ui.input.closeButton.base" @click="onClear" />
+      <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(ui.default.closeButton || {}), ...closeButton }" :class="ui.input.closeButton.base" @click="onClear" />
     </div>
 
     <HComboboxOptions
-      v-if="_groups.length"
+      v-if="groups.length"
       static
       hold
       as="div"
       aria-label="Commands"
-      :class="_ui.container"
+      :class="ui.container"
     >
       <CommandPaletteGroup
-        v-for="group of _groups"
+        v-for="group of groups"
         :key="group.key"
         :query="query"
         :group="group"
         :group-attribute="groupAttribute"
         :command-attribute="commandAttribute"
         :selected-icon="selectedIcon"
-        :ui="_ui"
+        :ui="ui"
       >
         <template v-for="(_, name) in $slots" #[name]="slotData">
           <slot :name="name" v-bind="slotData" />
@@ -48,12 +48,12 @@
       </CommandPaletteGroup>
     </HComboboxOptions>
 
-    <template v-else-if="_emptyState">
+    <template v-else-if="emptyState">
       <slot name="empty-state">
-        <div :class="_ui.emptyState.wrapper">
-          <UIcon v-if="_emptyState.icon" :name="_emptyState.icon" :class="_ui.emptyState.icon" aria-hidden="true" />
-          <p :class="query ? _ui.emptyState.queryLabel : _ui.emptyState.label">
-            {{ query ? _emptyState.queryLabel : _emptyState.label }}
+        <div :class="ui.emptyState.wrapper">
+          <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
+          <p :class="query ? ui.emptyState.queryLabel : ui.emptyState.label">
+            {{ query ? emptyState.queryLabel : emptyState.label }}
           </p>
         </div>
       </slot>
@@ -370,14 +370,17 @@ export default defineComponent({
     provideUseId(() => useId())
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
-      _groups: groups,
+      // eslint-disable-next-line vue/no-dupe-keys
+      groups,
       comboboxInput,
       query,
       iconName,
       iconClass,
-      _emptyState: emptyState,
+      // eslint-disable-next-line vue/no-dupe-keys
+      emptyState,
       onSelect,
       onClear
     }

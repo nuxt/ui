@@ -1,11 +1,11 @@
 <template>
-  <div :class="_ui.wrapper">
+  <div :class="ui.wrapper">
     <HDisclosure
       v-for="(item, index) in items"
       v-slot="{ open, close }"
       :key="index"
       as="div"
-      :class="_ui.container"
+      :class="ui.container"
       :default-open="defaultOpen || item.defaultOpen"
     >
       <HDisclosureButton
@@ -17,14 +17,14 @@
         @keydown.space="closeOthers(index, $event)"
       >
         <slot :item="item" :index="index" :open="open" :close="close">
-          <UButton v-bind="{ ...omit(_ui.default, ['openIcon', 'closeIcon']), ...attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }">
+          <UButton v-bind="{ ...omit(ui.default, ['openIcon', 'closeIcon']), ...attrs, ...omit(item, ['slot', 'disabled', 'content', 'defaultOpen']) }">
             <template #trailing>
               <UIcon
                 :name="!open ? openIcon : closeIcon ? closeIcon : openIcon"
                 :class="[
                   open && !closeIcon ? '-rotate-180' : '',
-                  _uiButton.icon.size[item.size || _uiButton.default.size],
-                  _ui.item.icon
+                  uiButton.icon.size[item.size || uiButton.default.size],
+                  ui.item.icon
                 ]"
               />
             </template>
@@ -33,14 +33,14 @@
       </HDisclosureButton>
 
       <Transition
-        v-bind="_ui.transition"
+        v-bind="ui.transition"
         @enter="onEnter"
         @after-enter="onAfterEnter"
         @before-leave="onBeforeLeave"
         @leave="onLeave"
       >
         <div v-show="open">
-          <HDisclosurePanel :class="[_ui.item.base, _ui.item.size, _ui.item.color, _ui.item.padding]" static>
+          <HDisclosurePanel :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]" static>
             <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
               {{ item.content }}
             </slot>
@@ -157,8 +157,9 @@ export default defineComponent({
     provideUseId(() => useId())
 
     return {
-      _ui: ui,
-      _uiButton: uiButton,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      uiButton,
       attrs,
       buttonRefs,
       closeOthers,

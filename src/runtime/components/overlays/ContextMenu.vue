@@ -1,10 +1,10 @@
 <template>
   <div v-if="isOpen" ref="container" :class="wrapperClass" v-bind="attrs">
-    <Transition appear v-bind="_ui.transition">
+    <Transition appear v-bind="ui.transition">
       <div>
-        <div v-if="_popper.arrow" data-popper-arrow :class="Object.values(_ui.arrow)" />
+        <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
 
-        <div :class="[_ui.base, _ui.ring, _ui.rounded, _ui.shadow, _ui.background]">
+        <div :class="[ui.base, ui.ring, ui.rounded, ui.shadow, ui.background]">
           <slot />
         </div>
       </div>
@@ -84,11 +84,13 @@ export default defineComponent({
     })
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       isOpen,
       wrapperClass,
-      _popper: popper,
+      // eslint-disable-next-line vue/no-dupe-keys
+      popper,
       container
     }
   }

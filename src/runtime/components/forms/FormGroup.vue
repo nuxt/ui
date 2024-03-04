@@ -1,36 +1,36 @@
 <template>
-  <div :class="_ui.wrapper" v-bind="attrs">
-    <div :class="_ui.inner">
-      <div v-if="label || $slots.label" :class="[_ui.label.wrapper, _size]">
-        <label :for="inputId" :class="[_ui.label.base, required ? _ui.label.required : '']">
-          <slot v-if="$slots.label" name="label" v-bind="{ error: _error, label, name, hint, description, help }" />
+  <div :class="ui.wrapper" v-bind="attrs">
+    <div :class="ui.inner">
+      <div v-if="label || $slots.label" :class="[ui.label.wrapper, size]">
+        <label :for="inputId" :class="[ui.label.base, required ? ui.label.required : '']">
+          <slot v-if="$slots.label" name="label" v-bind="{ error, label, name, hint, description, help }" />
           <template v-else>{{ label }}</template>
         </label>
-        <span v-if="hint || $slots.hint" :class="[_ui.hint]">
-          <slot v-if="$slots.hint" name="hint" v-bind="{ error: _error, label, name, hint, description, help }" />
+        <span v-if="hint || $slots.hint" :class="[ui.hint]">
+          <slot v-if="$slots.hint" name="hint" v-bind="{ error, label, name, hint, description, help }" />
           <template v-else>{{ hint }}</template>
         </span>
       </div>
 
-      <p v-if="description || $slots.description" :class="[_ui.description, _size]">
-        <slot v-if="$slots.description" name="description" v-bind="{ error: _error, label, name, hint, description, help }" />
+      <p v-if="description || $slots.description" :class="[ui.description, size]">
+        <slot v-if="$slots.description" name="description" v-bind="{ error, label, name, hint, description, help }" />
         <template v-else>
           {{ description }}
         </template>
       </p>
     </div>
 
-    <div :class="[label ? _ui.container : '']">
-      <slot v-bind="{ error: _error }" />
+    <div :class="[label ? ui.container : '']">
+      <slot v-bind="{ error }" />
 
-      <p v-if="(typeof _error === 'string' && _error) || $slots.error" :class="[_ui.error, _size]">
-        <slot v-if="$slots.error" name="error" v-bind="{ error: _error, label, name, hint, description, help }" />
+      <p v-if="(typeof error === 'string' && error) || $slots.error" :class="[ui.error, size]">
+        <slot v-if="$slots.error" name="error" v-bind="{ error, label, name, hint, description, help }" />
         <template v-else>
-          {{ _error }}
+          {{ error }}
         </template>
       </p>
-      <p v-else-if="help || $slots.help" :class="[_ui.help, _size]">
-        <slot v-if="$slots.help" name="help" v-bind="{ error: _error, label, name, hint, description, help }" />
+      <p v-else-if="help || $slots.help" :class="[ui.help, size]">
+        <slot v-if="$slots.help" name="help" v-bind="{ error, label, name, hint, description, help }" />
         <template v-else>
           {{ help }}
         </template>
@@ -90,10 +90,6 @@ export default defineComponent({
       type: String,
       default: null
     },
-    eagerValidation: {
-      type: Boolean,
-      default: false
-    },
     class: {
       type: [String, Object, Array] as PropType<any>,
       default: () => ''
@@ -101,6 +97,10 @@ export default defineComponent({
     ui: {
       type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
+    },
+    eagerValidation: {
+      type: Boolean,
+      default: false
     }
   },
   setup (props) {
@@ -126,11 +126,14 @@ export default defineComponent({
     })
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       inputId,
-      _size: size,
-      _error: error
+      // eslint-disable-next-line vue/no-dupe-keys
+      size,
+      // eslint-disable-next-line vue/no-dupe-keys
+      error
     }
   }
 })

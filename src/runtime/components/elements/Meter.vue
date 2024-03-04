@@ -1,5 +1,5 @@
 <template>
-  <div :class="_ui.wrapper" v-bind="attrs">
+  <div :class="ui.wrapper" v-bind="attrs">
     <template v-if="indicator || $slots.indicator">
       <slot name="indicator" v-bind="{ percent, value }">
         <div :class="indicatorContainerClass" :style="{ width: `${percent}%` }">
@@ -173,7 +173,8 @@ export default defineComponent({
     const percent = computed(() => clampPercent(Number(props.value), normalizedMin.value, normalizedMax.value))
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       indicatorContainerClass,
       indicatorClass,

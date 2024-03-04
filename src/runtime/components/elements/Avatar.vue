@@ -2,15 +2,15 @@
   <span :class="wrapperClass">
     <img
       v-if="url && !error"
-      :class="_imgClass"
+      :class="imgClass"
       :alt="alt"
       :src="url"
       v-bind="attrs"
       @error="onError"
     >
-    <span v-else-if="text" :class="_ui.text">{{ text }}</span>
+    <span v-else-if="text" :class="ui.text">{{ text }}</span>
     <UIcon v-else-if="icon" :name="icon" :class="iconClass" />
-    <span v-else-if="placeholder" :class="_ui.placeholder">{{ placeholder }}</span>
+    <span v-else-if="placeholder" :class="ui.placeholder">{{ placeholder }}</span>
 
     <span v-if="chipColor" :class="chipClass">
       {{ chipText }}
@@ -152,10 +152,12 @@ export default defineComponent({
     }
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       wrapperClass,
-      _imgClass: imgClass,
+      // eslint-disable-next-line vue/no-dupe-keys
+      imgClass,
       iconClass,
       chipClass,
       url,

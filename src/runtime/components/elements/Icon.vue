@@ -1,5 +1,5 @@
 <template>
-  <Icon v-if="_dynamic" :name="name" />
+  <Icon v-if="dynamic" :name="name" />
   <span v-else :class="name" />
 </template>
 
@@ -25,7 +25,8 @@ export default defineComponent({
     const dynamic = computed(() => props.dynamic || appConfig.ui?.icons?.dynamic)
 
     return {
-      _dynamic: dynamic
+      // eslint-disable-next-line vue/no-dupe-keys
+      dynamic
     }
   }
 })

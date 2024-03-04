@@ -1,24 +1,24 @@
 <template>
-  <div :class="_ui.wrapper">
-    <div :class="_ui.container">
+  <div :class="ui.wrapper">
+    <div :class="ui.container">
       <input
         :id="inputId"
         v-model="pick"
-        :name="_name"
+        :name="name"
         :required="required"
         :value="value"
         :disabled="disabled"
         type="radio"
-        :class="_inputClass"
+        :class="inputClass"
         v-bind="attrs"
       >
     </div>
-    <div v-if="label || $slots.label" :class="_ui.inner">
-      <label :for="inputId" :class="_ui.label">
+    <div v-if="label || $slots.label" :class="ui.inner">
+      <label :for="inputId" :class="ui.label">
         <slot name="label">{{ label }}</slot>
-        <span v-if="required" :class="_ui.required">*</span>
+        <span v-if="required" :class="ui.required">*</span>
       </label>
-      <p v-if="help" :class="_ui.help">
+      <p v-if="help" :class="ui.help">
         {{ help }}
       </p>
     </div>
@@ -131,11 +131,14 @@ export default defineComponent({
 
     return {
       inputId,
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       pick,
-      _name: name,
-      _inputClass: inputClass
+      // eslint-disable-next-line vue/no-dupe-keys
+      name,
+      // eslint-disable-next-line vue/no-dupe-keys
+      inputClass
     }
   }
 })

@@ -1,13 +1,14 @@
 <template>
   <!-- eslint-disable-next-line vue/no-template-shadow -->
-  <HPopover ref="popover" v-slot="{ open, close }" :class="_ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
+  <HPopover ref="popover" v-slot="{ open, close }" :class="ui.wrapper" v-bind="attrs" @mouseleave="onMouseLeave">
     <HPopoverButton
       ref="trigger"
       as="div"
       :disabled="disabled"
-      :class="_ui.trigger"
+      :class="ui.trigger"
       role="button"
-      @mouseover="onMouseOver"
+      @mouseenter="onMouseEnter"
+      @touchstart.prevent="onTouchStart"
     >
       <slot :open="open" :close="close">
         <button :disabled="disabled">
@@ -16,16 +17,16 @@
       </slot>
     </HPopoverButton>
 
-    <Transition v-if="overlay" appear v-bind="_ui.overlay.transition">
-      <div v-if="open" :class="[_ui.overlay.base, _ui.overlay.background]" />
+    <Transition v-if="overlay" appear v-bind="ui.overlay.transition">
+      <div v-if="open" :class="[ui.overlay.base, ui.overlay.background]" />
     </Transition>
 
-    <div v-if="open" ref="container" :class="[_ui.container, _ui.width]" :style="containerStyle" @mouseover="onMouseOver">
-      <Transition appear v-bind="_ui.transition">
+    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle">
+      <Transition appear v-bind="ui.transition">
         <div>
-          <div v-if="_popper.arrow" data-popper-arrow :class="Object.values(_ui.arrow)" />
+          <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
 
-          <HPopoverPanel :class="[_ui.base, _ui.background, _ui.ring, _ui.rounded, _ui.shadow]" static>
+          <HPopoverPanel :class="[ui.base, ui.background, ui.ring, ui.rounded, ui.shadow]" static>
             <slot name="panel" :open="open" :close="close" />
           </HPopoverPanel>
         </div>
@@ -153,7 +154,19 @@ export default defineComponent({
       }
     })
 
-    function onMouseOver () {
+    function onTouchStart () {
+      if (!popoverApi.value) {
+        return
+      }
+
+      if (popoverApi.value.popoverState === 0) {
+        popoverApi.value.closePopover()
+      } else {
+        popoverApi.value.togglePopover()
+      }
+    }
+
+    function onMouseEnter () {
       if (props.mode !== 'hover' || !popoverApi.value) {
         return
       }
@@ -214,14 +227,17 @@ export default defineComponent({
     provideUseId(() => useId())
 
     return {
-      _ui: ui,
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
       attrs,
       popover,
-      _popper: popper,
+      // eslint-disable-next-line vue/no-dupe-keys
+      popper,
       trigger,
       container,
       containerStyle,
-      onMouseOver,
+      onTouchStart,
+      onMouseEnter,
       onMouseLeave
     }
   }
