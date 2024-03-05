@@ -208,14 +208,14 @@ export default defineComponent({
 
       const { column, direction } = sort.value
       
-      return props.rows.slice(start.value, end.value).sort((a, b) => {
+      return props.rows.toSorted((a, b) => {
         const aValue = get(a, column)
         const bValue = get(b, column)
 
         const sort = columns.value.find((col) => col.key === column)?.sort ?? defaultSort
 
         return sort(aValue, bValue, direction)
-      })
+      }).slice(start.value, end.value)
     })
 
     const selected = computed({
