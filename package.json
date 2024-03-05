@@ -1,31 +1,45 @@
 {
-  "name": "nuxt-app",
+  "name": "nuxt-ui3",
   "private": true,
   "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "eslint ."
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
   },
-  "devDependencies": {
-    "@nuxt/eslint-config": "^0.2.0",
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "lint": "eslint .",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
     "@nuxt/kit": "^3.10.3",
+    "@nuxtjs/tailwindcss": "^6.11.4",
     "autoprefixer": "^10.4.18",
     "defu": "^6.1.4",
-    "eslint": "^8.57.0",
-    "nuxt": "npm:nuxt-nightly@pr-26085",
+    "nuxt-icon": "^0.6.8",
     "postcss": "^8.4.35",
     "radix-vue": "^1.4.9",
     "tailwind-variants": "^0.2.0",
-    "tailwindcss": "^3.4.1",
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0",
-    "vue-tsc": "^2.0.5"
+    "tailwindcss": "^3.4.1"
   },
-  "dependencies": {
-    "ohash": "^1.1.3"
+  "devDependencies": {
+    "@nuxt/eslint-config": "^0.2.0",
+    "@nuxt/module-builder": "^0.5.5",
+    "@nuxt/schema": "^3.10.3",
+    "eslint": "^8.57.0",
+    "nuxt": "npm:nuxt-nightly@pr-26085",
+    "ohash": "^1.1.3",
+    "vue-tsc": "^2.0.5"
   }
 }

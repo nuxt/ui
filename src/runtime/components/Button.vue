@@ -5,7 +5,7 @@ import type { LinkProps } from './Link.vue'
 
 export const theme = {
   slots: {
-    base: 'focus:outline-none rounded-md font-medium',
+    base: 'inline-flex items-center focus:outline-none rounded-md font-medium',
     label: '',
     icon: 'flex-shrink-0'
   },
@@ -16,9 +16,15 @@ export const theme = {
       green: 'bg-green-500 hover:bg-green-700'
     },
     size: {
-      '2xs': 'px-2 py-1 text-xs gap-x-1',
-      xs: 'px-2.5 py-1.5 text-xs gap-x-1.5',
-      sm: 'px-2.5 py-1.5 text-sm gap-x-1.5',
+      '2xs': {
+        base: 'px-2 py-1 text-xs gap-x-1'
+      },
+      xs: {
+        base: 'px-2.5 py-1.5 text-xs gap-x-1.5'
+      },
+      sm: {
+        base: 'px-2.5 py-1.5 text-sm gap-x-1.5'
+      },
       md: 'px-3 py-2 text-sm gap-x-2',
       lg: 'px-3.5 py-2.5 text-sm gap-x-2.5',
       xl: 'px-3.5 py-2.5 text-base gap-x-2.5'
@@ -173,9 +179,9 @@ const trailingIconName = computed(() => {
 
 <template>
   <ULink :type="type" :disabled="disabled || loading" :class="ui.base()" v-bind="$attrs">
-    <!-- <slot name="leading" :disabled="disabled" :loading="loading">
+    <slot name="leading" :disabled="disabled" :loading="loading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.icon({ isLeading })" aria-hidden="true" />
-    </slot> -->
+    </slot>
 
     <span v-if="label || $slots.default" :class="ui.label({ truncate })">
       <slot>
