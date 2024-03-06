@@ -12,8 +12,8 @@
     "@nuxt/devtools": "^1.0.8",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/fonts": "^0.0.1",
-    "@nuxt/image": "^1.3.0",
-    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@1.0.1-28492961.4d49b9c",
+    "@nuxt/image": "^1.4.0",
+    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@1.0.2-28495431.409e874",
     "@nuxtjs/plausible": "^0.2.4",
     "@octokit/rest": "^20.0.2",
     "@vueuse/nuxt": "^10.9.0",
@@ -25,11 +25,11 @@
     "nuxt-component-meta": "^0.6.3",
     "nuxt-og-image": "^2.2.4",
     "prettier": "^3.2.5",
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.2",
     "ufo": "^1.4.0",
     "v-calendar": "^3.1.2",
     "valibot": "^0.29.0",
-    "yup": "^1.3.3",
+    "yup": "^1.4.0",
     "zod": "^3.22.4"
   }
 }
