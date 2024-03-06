@@ -29,10 +29,16 @@ export interface ButtonProps extends LinkProps {
   class?: any
   ui?: Partial<typeof appButton>
 }
+
+export interface ButtonSlots {
+  leading(props?: { disabled?: boolean; loading?: boolean }): any
+  default(): any
+  trailing(props?: { disabled?: boolean; loading?: boolean }): any
+}
 </script>
 
 <script setup lang="ts">
-import { useSlots, computed } from 'vue'
+import { computed } from 'vue'
 import { useForwardProps } from 'radix-vue'
 import { reactiveOmit } from '@vueuse/core'
 import UIcon from './Icon.vue'
@@ -40,8 +46,8 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = defineProps<ButtonProps>()
+const slots = defineSlots<ButtonSlots>()
 
-const slots = useSlots()
 const appConfig = useAppConfig()
 const forward = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'padded', 'truncate', 'class', 'ui'))
 
