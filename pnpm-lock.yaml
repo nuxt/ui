@@ -168,8 +168,8 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0(rollup@3.29.4)
       '@nuxt/ui-pro':
-        specifier: npm:@nuxt/ui-pro-edge@1.0.1-28493984.dcbbd7d
-        version: /@nuxt/ui-pro-edge@1.0.1-28493984.dcbbd7d(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.21)
+        specifier: npm:@nuxt/ui-pro-edge@1.0.2-28495431.409e874
+        version: /@nuxt/ui-pro-edge@1.0.2-28495431.409e874(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.21)
       '@nuxtjs/plausible':
         specifier: ^0.2.4
         version: 0.2.4(rollup@3.29.4)
@@ -1820,8 +1820,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/ui-pro-edge@1.0.1-28493984.dcbbd7d(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.21):
-    resolution: {integrity: sha512-twvaXf/2X0t8GDZG0qjEi7XHpRpw2YVotT+KpsmeS1/PpdtK+noC5SHrYG13uwvG3uwIAUJ+jvbwdat8U8A1pw==}
+  /@nuxt/ui-pro-edge@1.0.2-28495431.409e874(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.21):
+    resolution: {integrity: sha512-+Ardy6DZSt9ygzf3TPAR/MZxz0zmXMgAPzwAYfTffmqdSBcli4tXJY+ekCDi4fvN5XXtl6v5LauBDHF+YSRD0g==}
     dependencies:
       '@nuxt/ui': 2.14.2(nuxt@3.10.3)(rollup@3.29.4)(vite@5.1.4)(vue@3.4.21)
       '@vueuse/core': 10.9.0(vue@3.4.21)
