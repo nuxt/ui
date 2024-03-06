@@ -103,7 +103,7 @@ export const linkProps = {
   },
   disabled: {
     type: Boolean as PropType<LinkProps['disabled']>,
-    default: null
+    default: false
   },
   active: {
     type: Boolean as PropType<LinkProps['active']>,
@@ -125,27 +125,24 @@ export const linkProps = {
     type: String as PropType<LinkProps['inactiveClass']>,
     default: undefined
   }
-}
-
-export const getLinkProps = (props: any) => {
-  const keys = Object.keys(linkProps)
-
-  return keys.reduce((acc, key) => {
-    if (props[key] !== undefined) {
-      acc[key] = props[key]
-    }
-    return acc
-  }, {} as Record<string, any>)
-}
+} as const
 </script>
 
 <script setup lang="ts">
 import { isEqual } from 'ohash'
+import { useForwardProps } from 'radix-vue'
+import { reactiveOmit } from '@vueuse/core'
 import type { RouteLocation } from '#vue-router'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps(linkProps)
+const props = withDefaults(defineProps<LinkProps>(), {
+  as: 'button',
+  type: 'button',
+  inactiveClass: undefined
+})
+
+const forward = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'inactiveClass'))
 
 function resolveLinkClass (route: RouteLocation, currentRoute: RouteLocation, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
   if (props.exactQuery && !isEqual(route.query, currentRoute.query)) {
@@ -179,7 +176,7 @@ function resolveLinkClass (route: RouteLocation, currentRoute: RouteLocation, { 
   >
     <slot v-bind="{ isActive: active }" />
   </component>
-  <NuxtLink v-else v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }" v-bind="$props" custom>
+  <NuxtLink v-else v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }" v-bind="forward" custom>
     <a
       v-bind="$attrs"
       :href="!disabled ? href : undefined"

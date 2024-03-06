@@ -1,14 +1,18 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
 // import appConfig from '#build/app.config'
-import { getLinkProps, type LinkProps } from '#ui/components/Link.vue'
+import type { LinkProps } from '#ui/components/Link.vue'
 import theme from '#ui/theme/button'
 
 const appButton = tv(theme)
 // const appButton = tv({ extend: button, ...(appConfig.ui?.button || {}) })
 
-export interface ButtonProps extends VariantProps<typeof appButton>, LinkProps {
+type ButtonVariants = VariantProps<typeof appButton>
+
+export interface ButtonProps extends LinkProps {
   label?: string
+  color?: ButtonVariants['color']
+  size?: ButtonVariants['size']
   icon?: string
   leading?: boolean
   leadingIcon?: string
@@ -27,86 +31,19 @@ export interface ButtonProps extends VariantProps<typeof appButton>, LinkProps {
 </script>
 
 <script setup lang="ts">
-import { useSlots, computed, type PropType } from 'vue'
+import { useSlots, computed } from 'vue'
+import { useForwardProps } from 'radix-vue'
+import { reactivePick } from '@vueuse/core'
 import { linkProps } from './Link.vue'
 import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps({
-  ...linkProps,
-  label: {
-    type: String as PropType<ButtonProps['label']>,
-    default: undefined
-  },
-  color: {
-    type: String as PropType<ButtonProps['color']>,
-    default: undefined
-  },
-  size: {
-    type: String as PropType<ButtonProps['size']>,
-    default: undefined
-  },
-  icon: {
-    type: String as PropType<ButtonProps['icon']>,
-    default: undefined
-  },
-  leading: {
-    type: Boolean as PropType<ButtonProps['leading']>,
-    default: false
-  },
-  leadingIcon: {
-    type: String as PropType<ButtonProps['leadingIcon']>,
-    default: undefined
-  },
-  trailing: {
-    type: Boolean as PropType<ButtonProps['trailing']>,
-    default: false
-  },
-  trailingIcon: {
-    type: String as PropType<ButtonProps['trailingIcon']>,
-    default: undefined
-  },
-  loading: {
-    type: Boolean as PropType<ButtonProps['loading']>,
-    default: false
-  },
-  loadingIcon: {
-    type: String as PropType<ButtonProps['loadingIcon']>,
-    default: undefined
-  },
-  square: {
-    type: Boolean as PropType<ButtonProps['square']>,
-    default: false
-  },
-  block: {
-    type: Boolean as PropType<ButtonProps['block']>,
-    default: false
-  },
-  disabled: {
-    type: Boolean as PropType<ButtonProps['disabled']>,
-    default: false
-  },
-  padded: {
-    type: Boolean as PropType<ButtonProps['padded']>,
-    default: false
-  },
-  truncate: {
-    type: Boolean as PropType<ButtonProps['truncate']>,
-    default: false
-  },
-  class: {
-    type: String as PropType<ButtonProps['class']>,
-    default: undefined
-  },
-  ui: {
-    type: Object as PropType<ButtonProps['ui']>,
-    default: undefined
-  }
-})
+const props = defineProps<ButtonProps>()
 
 const slots = useSlots()
 const appConfig = useAppConfig()
+const forward = useForwardProps(reactivePick(props, Object.keys(linkProps)))
 
 // Computed
 
@@ -142,7 +79,7 @@ const trailingIconName = computed(() => {
 </script>
 
 <template>
-  <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: $props.class })" v-bind="{ ...getLinkProps($props), ...$attrs }">
+  <ULink :disabled="disabled || loading" :class="ui.base({ class: $props.class })" v-bind="{ ...forward, ...$attrs }">
     <slot name="leading" :disabled="disabled" :loading="loading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.icon()" aria-hidden="true" />
     </slot>
