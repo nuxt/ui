@@ -10,6 +10,7 @@ const appButton = tv(theme)
 type ButtonVariants = VariantProps<typeof appButton>
 
 export interface ButtonProps extends LinkProps {
+  type?: string
   label?: string
   color?: ButtonVariants['color']
   size?: ButtonVariants['size']
@@ -33,8 +34,7 @@ export interface ButtonProps extends LinkProps {
 <script setup lang="ts">
 import { useSlots, computed } from 'vue'
 import { useForwardProps } from 'radix-vue'
-import { reactivePick } from '@vueuse/core'
-import { linkProps } from './Link.vue'
+import { reactiveOmit } from '@vueuse/core'
 import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -43,7 +43,7 @@ const props = defineProps<ButtonProps>()
 
 const slots = useSlots()
 const appConfig = useAppConfig()
-const forward = useForwardProps(reactivePick(props, Object.keys(linkProps)))
+const forward = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'padded', 'truncate', 'class', 'ui'))
 
 // Computed
 
@@ -79,7 +79,7 @@ const trailingIconName = computed(() => {
 </script>
 
 <template>
-  <ULink :disabled="disabled || loading" :class="ui.base({ class: $props.class })" v-bind="{ ...forward, ...$attrs }">
+  <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: $props.class })" v-bind="{ ...forward, ...$attrs }">
     <slot name="leading" :disabled="disabled" :loading="loading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.icon()" aria-hidden="true" />
     </slot>
