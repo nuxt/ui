@@ -1,5 +1,6 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, installModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, installModule } from '@nuxt/kit'
+import tailwindcss from '@tailwindcss/vite'
 import type { DeepPartial } from './runtime/types'
 import * as theme from './runtime/theme'
 
@@ -32,6 +33,9 @@ export default defineNuxtModule({
     const resolver = createResolver(import.meta.url)
 
     nuxt.options.alias['#ui'] = resolver.resolve('./runtime')
+
+    nuxt.options.css.push(resolver.resolve('./runtime/main.css'))
+
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
       primary: 'green',
       gray: 'cool',
@@ -41,18 +45,8 @@ export default defineNuxtModule({
     })
 
     await installModule('nuxt-icon')
-    await installModule('@nuxtjs/tailwindcss', {
-      exposeConfig: true,
-      config: {
-        darkMode: 'class',
-        content: {
-          files: [
-            resolver.resolve('./runtime/components/**/*.{vue,ts}'),
-            resolver.resolve('./runtime/theme/**/*.ts')
-          ]
-        }
-      }
-    })
+
+    addVitePlugin(tailwindcss)
 
     addComponentsDir({
       path: resolver.resolve('./runtime/components'),
