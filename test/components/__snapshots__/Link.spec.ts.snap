@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Link > renders with activeClass correctly 1`] = `"<a href="/" class="text-sm"></a>"`;
+
+exports[`Link > renders with as correctly 1`] = `"<div type="button" disabled="false"></div>"`;
+
+exports[`Link > renders with disabled correctly 1`] = `"<button type="button" disabled=""></button>"`;
+
+exports[`Link > renders with inactiveClass correctly 1`] = `"<a href="/" class="text-gray-300"></a>"`;
+
+exports[`Link > renders with to correctly 1`] = `"<a href="/"></a>"`;
+
+exports[`Link > renders with type correctly 1`] = `"<button type="submit"></button>"`;
