@@ -39,6 +39,14 @@ const props = defineProps({
     type: String as PropType<ButtonProps['label']>,
     default: undefined
   },
+  color: {
+    type: String as PropType<ButtonProps['color']>,
+    default: undefined
+  },
+  size: {
+    type: String as PropType<ButtonProps['size']>,
+    default: undefined
+  },
   icon: {
     type: String as PropType<ButtonProps['icon']>,
     default: undefined
@@ -86,14 +94,6 @@ const props = defineProps({
   truncate: {
     type: Boolean as PropType<ButtonProps['truncate']>,
     default: false
-  },
-  color: {
-    type: String as PropType<ButtonProps['color']>,
-    default: undefined
-  },
-  size: {
-    type: String as PropType<ButtonProps['size']>,
-    default: undefined
   },
   class: {
     type: String as PropType<ButtonProps['class']>,
