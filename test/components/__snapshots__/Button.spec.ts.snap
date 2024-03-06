@@ -7,6 +7,8 @@ exports[`Button > renders with block correctly 1`] = `
 </button>"
 `;
 
+exports[`Button > renders with class correctly 1`] = `"<button type="button" class="inline-flex items-center focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 bg-blue-500 hover:bg-blue-700 text-sm gap-x-1.5 p-1 rounded-full font-bold"></button>"`;
+
 exports[`Button > renders with color correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 bg-red-500 hover:bg-red-700 px-2.5 py-1.5 text-sm gap-x-1.5">
   <!--v-if--><span class="">Button</span>
@@ -118,13 +120,6 @@ exports[`Button > renders with trailingIcon correctly 1`] = `
 exports[`Button > renders with truncate correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 bg-blue-500 hover:bg-blue-700 px-2.5 py-1.5 text-sm gap-x-1.5">
   <!--v-if--><span class="truncate">Button</span>
-  <!--v-if-->
-</button>"
-`;
-
-exports[`Button > renders with variant correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 bg-blue-500 hover:bg-blue-700 px-2.5 py-1.5 text-sm gap-x-1.5">
-  <!--v-if--><span class="">Button</span>
   <!--v-if-->
 </button>"
 `;

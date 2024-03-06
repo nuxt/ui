@@ -5,6 +5,7 @@ import ComponentRender from '../component-render'
 describe('Button', () => {
   it.each([
     ['with label', { props: { label: 'Button' } }],
+    ['with class', { props: { class: 'rounded-full font-bold' } }],
     ['with size', { props: { label: 'Button', size: 'lg' as const } }],
     ['with color', { props: { label: 'Button', color: 'red' as const } }],
     // ['with variant', { props: { label: 'Button', variant: 'outline' } }],

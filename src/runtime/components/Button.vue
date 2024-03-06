@@ -85,7 +85,7 @@ const trailingIconName = computed(() => {
 </script>
 
 <template>
-  <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: $props.class })" v-bind="{ ...forward, ...$attrs }">
+  <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="{ ...forward, ...$attrs }">
     <slot name="leading" :disabled="disabled" :loading="loading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.icon()" aria-hidden="true" />
     </slot>
