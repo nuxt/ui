@@ -63,8 +63,20 @@ export default defineNuxtModule({
       @import "tailwindcss";
 
       @theme {
-        ${shades.map(shade => `--color-primary-${shade}: var(--color-primary-${shade});`).join('\n')}
-        ${shades.map(shade => `--color-gray-${shade}: var(--color-gray-${shade});`).join('\n')}
+        --color-cool-50: #f9fafb;
+        --color-cool-100: #f3f4f6;
+        --color-cool-200: #e5e7eb;
+        --color-cool-300: #d1d5db;
+        --color-cool-400: #9ca3af;
+        --color-cool-500: #6b7280;
+        --color-cool-600: #4b5563;
+        --color-cool-700: #374151;
+        --color-cool-800: #1f2937;
+        --color-cool-900: #111827;
+        --color-cool-950: #030712;
+
+        ${shades.map(shade => `--color-primary-${shade}: var(--color-${nuxt.options.appConfig.ui.primary}-${shade});`).join('\n')}
+        ${shades.map(shade => `--color-gray-${shade}: var(--color-${nuxt.options.appConfig.ui.gray}-${shade});`).join('\n')}
       }
       `
     })
