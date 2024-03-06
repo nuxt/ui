@@ -27,7 +27,7 @@ export interface ButtonProps extends LinkProps {
   padded?: boolean
   truncate?: boolean
   class?: any
-  ui?: Partial<typeof appButton>
+  ui?: Partial<typeof appButton.slots>
 }
 
 export interface ButtonSlots {
@@ -53,7 +53,10 @@ const forward = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 's
 
 // Computed
 
-const ui = computed(() => tv({ extend: appButton, ...props.ui })({
+const ui = computed(() => tv({
+  extend: appButton,
+  slots: props.ui
+})({
   color: props.color,
   size: props.size,
   loading: props.loading,
