@@ -1,5 +1,7 @@
 <template>
-  <div>{{ $route.path }}</div>
+  <div class="text-primary-500">
+    Route: {{ $route.path }}
+  </div>
 </template>
 
 <script setup lang="ts">
