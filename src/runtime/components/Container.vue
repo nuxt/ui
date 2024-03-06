@@ -9,7 +9,6 @@ const appContainer = tv(theme)
 export interface ContainerProps {
   as?: string
   class?: any
-  ui?: Partial<typeof appContainer>
 }
 </script>
 
@@ -20,17 +19,16 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ContainerProps>(), {
   as: 'div',
-  class: undefined,
-  ui: undefined
+  class: undefined
 })
 
 // Computed
 
-const ui = computed(() => tv({ extend: appContainer, ...props.ui })({ class: props.class }))
+const base = computed(() => appContainer({ class: props.class }))
 </script>
 
 <template>
-  <component :is="as" :class="ui" v-bind="$attrs">
+  <component :is="as" :class="base" v-bind="$attrs">
     <slot />
   </component>
 </template>
