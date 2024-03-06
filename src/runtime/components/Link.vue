@@ -126,6 +126,17 @@ export const linkProps = {
     default: undefined
   }
 }
+
+export const getLinkProps = (props: any) => {
+  const keys = Object.keys(linkProps)
+
+  return keys.reduce((acc, key) => {
+    if (props[key] !== undefined) {
+      acc[key] = props[key]
+    }
+    return acc
+  }, {} as Record<string, any>)
+}
 </script>
 
 <script setup lang="ts">
@@ -156,6 +167,7 @@ function resolveLinkClass (route: RouteLocation, currentRoute: RouteLocation, { 
 }
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
   <component
     :is="as"

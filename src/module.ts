@@ -1,5 +1,24 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, installModule } from '@nuxt/kit'
+import type { DeepPartial } from './runtime/types'
+import * as theme from './runtime/theme'
+
+type UI = {
+  primary?: string
+  gray?: string
+  [key: string]: any
+} & DeepPartial<typeof theme>
+
+declare module 'nuxt/schema' {
+  interface AppConfigInput {
+    ui?: UI
+  }
+}
+declare module '@nuxt/schema' {
+  interface AppConfigInput {
+    ui?: UI
+  }
+}
 
 export default defineNuxtModule({
   meta: {
@@ -12,6 +31,7 @@ export default defineNuxtModule({
   async setup (_, nuxt) {
     const resolver = createResolver(import.meta.url)
 
+    nuxt.options.alias['#ui'] = resolver.resolve('./runtime')
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
       primary: 'green',
       gray: 'cool',
@@ -27,7 +47,8 @@ export default defineNuxtModule({
         darkMode: 'class',
         content: {
           files: [
-            resolver.resolve('./runtime/components/**/*.{vue,mjs,ts}')
+            resolver.resolve('./runtime/components/**/*.{vue,ts}'),
+            resolver.resolve('./runtime/theme/**/*.ts')
           ]
         }
       }

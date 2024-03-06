@@ -1,52 +1,13 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { LinkProps } from './Link.vue'
 // import appConfig from '#build/app.config'
+import { getLinkProps, type LinkProps } from '#ui/components/Link.vue'
+import theme from '#ui/theme/button'
 
-export const theme = {
-  slots: {
-    base: 'inline-flex items-center focus:outline-none rounded-md font-medium',
-    label: '',
-    icon: 'flex-shrink-0'
-  },
-  variants: {
-    color: {
-      blue: 'bg-blue-500 hover:bg-blue-700',
-      red: 'bg-red-500 hover:bg-red-700',
-      green: 'bg-green-500 hover:bg-green-700'
-    },
-    size: {
-      '2xs': {
-        base: 'px-2 py-1 text-xs gap-x-1'
-      },
-      xs: {
-        base: 'px-2.5 py-1.5 text-xs gap-x-1.5'
-      },
-      sm: {
-        base: 'px-2.5 py-1.5 text-sm gap-x-1.5'
-      },
-      md: 'px-3 py-2 text-sm gap-x-2',
-      lg: 'px-3.5 py-2.5 text-sm gap-x-2.5',
-      xl: 'px-3.5 py-2.5 text-base gap-x-2.5'
-    },
-    truncate: {
-      true: {
-        label: 'text-left break-all line-clamp-1'
-      }
-    }
-  },
-  defaultVariants: {
-    color: 'blue',
-    size: 'md'
-  }
-} as const
+const appButton = tv(theme)
+// const appButton = tv({ extend: button, ...(appConfig.ui?.button || {}) })
 
-// export const button = tv({ extend: tv(theme), ...appConfig.ui.button })
-export const button = tv(theme)
-
-type ButtonVariants = VariantProps<typeof button>
-
-export interface ButtonProps extends ButtonVariants, LinkProps {
+export interface ButtonProps extends VariantProps<typeof appButton>, LinkProps {
   label?: string
   icon?: string
   leading?: boolean
@@ -61,12 +22,12 @@ export interface ButtonProps extends ButtonVariants, LinkProps {
   padded?: boolean
   truncate?: boolean
   class?: any
-  ui?: Partial<typeof button>
+  ui?: Partial<typeof appButton>
 }
 </script>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
+import { useSlots, computed, type PropType } from 'vue'
 import { linkProps } from './Link.vue'
 import UIcon from './Icon.vue'
 
@@ -144,25 +105,28 @@ const props = defineProps({
   }
 })
 
-
 const slots = useSlots()
+const appConfig = useAppConfig()
 
 // Computed
+
+const ui = computed(() => tv({ extend: appButton, ...props.ui })({
+  color: props.color,
+  size: props.size,
+  loading: props.loading,
+  truncate: props.truncate,
+  block: props.block,
+  padded: props.padded,
+  square: props.square || (!slots.default && !props.label)
+}))
 
 const isLeading = computed(() => (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon)
 
 const isTrailing = computed(() => (props.icon && props.trailing) || (props.loading && props.trailing) || props.trailingIcon)
 
-const ui = computed(() => tv({ extend: button, ...props.ui })({
-  color: props.color,
-  size: props.size,
-  square: props.square || (!slots.default && !props.label),
-  class: props.class
-}))
-
 const leadingIconName = computed(() => {
   if (props.loading) {
-    return props.loadingIcon
+    return props.loadingIcon || appConfig.ui.icons.loading
   }
 
   return props.leadingIcon || props.icon
@@ -170,7 +134,7 @@ const leadingIconName = computed(() => {
 
 const trailingIconName = computed(() => {
   if (props.loading && !isLeading.value) {
-    return props.loadingIcon
+    return props.loadingIcon || appConfig.ui.icons.loading
   }
 
   return props.trailingIcon || props.icon
@@ -178,19 +142,19 @@ const trailingIconName = computed(() => {
 </script>
 
 <template>
-  <ULink :type="type" :disabled="disabled || loading" :class="ui.base()" v-bind="$attrs">
+  <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: $props.class })" v-bind="{ ...getLinkProps($props), ...$attrs }">
     <slot name="leading" :disabled="disabled" :loading="loading">
-      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.icon({ isLeading })" aria-hidden="true" />
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.icon()" aria-hidden="true" />
     </slot>
 
-    <span v-if="label || $slots.default" :class="ui.label({ truncate })">
+    <span v-if="label || $slots.default" :class="ui.label()">
       <slot>
         {{ label }}
       </slot>
     </span>
 
-    <!-- <slot name="trailing" :disabled="disabled" :loading="loading">
-      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
-    </slot> -->
+    <slot name="trailing" :disabled="disabled" :loading="loading">
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.icon()" aria-hidden="true" />
+    </slot>
   </ULink>
 </template>
