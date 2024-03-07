@@ -5,7 +5,12 @@ export default (config: any) => ({
     icon: 'shrink-0'
   },
   variants: {
-    color: Object.fromEntries(config.colors.map((color: string) => [color, ''])),
+    color: {
+      ...Object.fromEntries(config.colors.map((color: string) => [color, ''])),
+      white: '',
+      gray: '',
+      black: ''
+    },
     variant: {
       solid: '',
       outline: '',

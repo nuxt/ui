@@ -1,10 +1,9 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-// import appConfig from '#build/app.config'
+import appConfig from '#build/app.config'
 import theme from '#build/ui/container'
 
-const container = tv(theme)
-// const appContainer = tv({ extend: container, ...(appConfig.ui?.container || {}) })
+const container = tv({ extend: tv(theme), ...(appConfig.ui?.container || {}) })
 
 export interface ContainerProps {
   as?: string

@@ -2,25 +2,6 @@ import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule } from '@nuxt/kit'
 import tailwindcss from '@tailwindcss/vite'
 import createTemplates from './templates'
-// import type { DeepPartial } from './runtime/types'
-// import * as theme from './runtime/theme'
-
-// type UI = {
-//   primary?: string
-//   gray?: string
-//   [key: string]: any
-// } & DeepPartial<typeof theme>
-
-// declare module 'nuxt/schema' {
-//   interface AppConfigInput {
-//     ui?: UI
-//   }
-// }
-// declare module '@nuxt/schema' {
-//   interface AppConfigInput {
-//     ui?: UI
-//   }
-// }
 
 export interface ModuleOptions {
   colors: string[]

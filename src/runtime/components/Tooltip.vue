@@ -5,7 +5,7 @@ import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps } from 'ra
 import theme from '#build/ui/tooltip'
 
 const tooltip = tv(theme)
-// const appTooltip = tv({ extend: tooltip, ...(appConfig.ui?.tooltip || {}) })
+// const tooltip = tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })
 
 export interface TooltipProps extends TooltipRootProps, Omit<TooltipContentProps, 'as' | 'asChild'> {
   text?: string
