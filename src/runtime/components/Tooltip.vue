@@ -44,7 +44,10 @@ defineSlots<TooltipSlots>()
 const forwardRoot = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration'), emits)
 const forwardContent = useForwardProps(reactivePick(props, 'side', 'sideOffset', 'align', 'alignOffset', 'avoidCollisions', 'collisionBoundary', 'collisionPadding', 'arrowPadding', 'sticky', 'hideWhenDetached'))
 
-const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
+// FIXME: Cannot extend multiple times
+// const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tooltip())
 </script>
 
 <template>
@@ -54,7 +57,7 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
     </TooltipTrigger>
 
     <TooltipPortal :disabled="!portal">
-      <TooltipContent class="TooltipContent" v-bind="{ ...forwardContent, ...$attrs }" :class="ui.content({ class: props.class })">
+      <TooltipContent v-bind="{ ...forwardContent, ...$attrs }" :class="ui.content({ class: props.class })">
         <slot name="text">
           {{ text }}
         </slot>
@@ -65,20 +68,45 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
   </TooltipRoot>
 </template>
 
-<style scoped>
-.TooltipContent {
-  transform-origin: var(--radix-tooltip-content-transform-origin);
-  animation: scaleIn 0.5s ease-out;
-}
-
-@keyframes scaleIn {
+<style>
+@keyframes slideDown {
   from {
     opacity: 0;
-    transform: scale(0);
+    transform: translateY(-0.25rem);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
+  }
+}
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>
