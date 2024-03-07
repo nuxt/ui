@@ -4,9 +4,7 @@ import appConfig from '#build/app.config'
 import type { LinkProps } from '#ui/components/Link.vue'
 import theme from '#build/ui/button'
 
-// @ts-ignore
-const button = tv(theme)
-// const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
+const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
 
 type ButtonVariants = VariantProps<typeof button>
 

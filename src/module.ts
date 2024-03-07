@@ -1,11 +1,12 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule } from '@nuxt/kit'
 import tailwindcss from '@tailwindcss/vite'
-import createTemplates from './templates'
+import addTemplates from './templates'
 import icons from './theme/icons'
 
 export interface ModuleOptions {
-  colors: string[]
+  prefix?: string
+  colors?: string[]
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -17,6 +18,7 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults: {
+    prefix: 'U',
     colors: ['primary', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchia', 'pink', 'rose']
   },
   async setup (options, nuxt) {
@@ -30,7 +32,7 @@ export default defineNuxtModule<ModuleOptions>({
       icons
     })
 
-    createTemplates(options, nuxt)
+    addTemplates(options, nuxt)
 
     addVitePlugin(tailwindcss)
 
@@ -43,7 +45,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addComponentsDir({
       path: resolve('./runtime/components'),
-      prefix: 'U',
+      prefix: options.prefix,
       pathPrefix: false
     })
 

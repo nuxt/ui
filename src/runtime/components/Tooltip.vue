@@ -1,11 +1,10 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps } from 'radix-vue'
-// import appConfig from '#build/app.config'
+import appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
 
-const tooltip = tv(theme)
-// const tooltip = tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })
+const tooltip = tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })
 
 export interface TooltipProps extends TooltipRootProps, Omit<TooltipContentProps, 'as' | 'asChild'> {
   text?: string
@@ -35,7 +34,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   text: '',
   side: 'bottom',
   delayDuration: 0,
-
+  sideOffset: 8,
   class: undefined,
   ui: undefined
 })

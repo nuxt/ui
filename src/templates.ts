@@ -25,8 +25,8 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
         --color-cool-900: #111827;
         --color-cool-950: #030712;
 
-        ${shades.map(shade => `--color-primary-${shade}: var(--color-${nuxt.options.appConfig.ui.primary}-${shade});`).join('\n')}
-        ${shades.map(shade => `--color-gray-${shade}: var(--color-${nuxt.options.appConfig.ui.gray}-${shade});`).join('\n')}
+        ${shades.map(shade => `--color-primary-${shade}: var(--color-primary-${shade});`).join('\n')}
+        ${shades.map(shade => `--color-gray-${shade}: var(--color-gray-${shade});`).join('\n')}
       }
     `
   })
@@ -37,10 +37,18 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
     const template = (theme as any)[component]
     const result = typeof template === 'function' ? template({ colors: options.colors }) : template
 
+    const variants = Object.keys(result.variants || {})
+
+    let json = JSON.stringify(result, null, 2)
+
+    for (const variant of variants) {
+      json = json.replaceAll(new RegExp(`("${variant}": "[0-9a-z]+")`, 'g'), '$1 as const')
+    }
+
     addTemplate({
       filename: `ui/${component}.ts`,
       write: true,
-      getContents: () => `export default ${JSON.stringify(result, null, 2)}`
+      getContents: () => `export default ${json}`
     })
   }
 
