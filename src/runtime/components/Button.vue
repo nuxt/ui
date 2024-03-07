@@ -4,15 +4,16 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { LinkProps } from '#ui/components/Link.vue'
 import theme from '#ui/theme/button'
 
-const appButton = tv(theme)
+const button = tv(theme)
 // const appButton = tv({ extend: button, ...(appConfig.ui?.button || {}) })
 
-type ButtonVariants = VariantProps<typeof appButton>
+type ButtonVariants = VariantProps<typeof button>
 
 export interface ButtonProps extends LinkProps {
   type?: string
   label?: string
   color?: ButtonVariants['color']
+  variant?: ButtonVariants['variant']
   size?: ButtonVariants['size']
   icon?: string
   leading?: boolean
@@ -24,16 +25,15 @@ export interface ButtonProps extends LinkProps {
   square?: boolean
   block?: boolean
   disabled?: boolean
-  padded?: boolean
   truncate?: boolean
   class?: any
-  ui?: Partial<typeof appButton.slots>
+  ui?: Partial<typeof button.slots>
 }
 
 export interface ButtonSlots {
-  leading(props?: { disabled?: boolean; loading?: boolean }): any
+  leading(props?: { disabled?: boolean; loading?: boolean, ui?: string }): any
   default(): any
-  trailing(props?: { disabled?: boolean; loading?: boolean }): any
+  trailing(props?: { disabled?: boolean; loading?: boolean, ui?: string }): any
 }
 </script>
 
@@ -49,20 +49,17 @@ const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
 const appConfig = useAppConfig()
-const forward = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'padded', 'truncate', 'class', 'ui'))
+const forward = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'variant', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'truncate', 'class', 'ui'))
 
 // Computed
 
-const ui = computed(() => tv({
-  extend: appButton,
-  slots: props.ui
-})({
+const ui = computed(() => tv({ extend: button, slots: props.ui })({
   color: props.color,
+  variant: props.variant,
   size: props.size,
   loading: props.loading,
   truncate: props.truncate,
   block: props.block,
-  padded: props.padded,
   square: props.square || (!slots.default && !props.label)
 }))
 
@@ -88,8 +85,26 @@ const trailingIconName = computed(() => {
 </script>
 
 <template>
-  <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="{ ...forward, ...$attrs }">
-    <slot name="leading" :disabled="disabled" :loading="loading">
+  <ULink
+    :type="type"
+    :disabled="disabled || loading"
+    :class="ui.base({ class: props.class })"
+    v-bind="{ ...forward, ...$attrs }"
+    :style="color && {
+      '--color-current-50': `var(--color-${color}-50)`,
+      '--color-current-100': `var(--color-${color}-100)`,
+      '--color-current-200': `var(--color-${color}-200)`,
+      '--color-current-300': `var(--color-${color}-300)`,
+      '--color-current-400': `var(--color-${color}-400)`,
+      '--color-current-500': `var(--color-${color}-500)`,
+      '--color-current-600': `var(--color-${color}-600)`,
+      '--color-current-700': `var(--color-${color}-700)`,
+      '--color-current-800': `var(--color-${color}-800)`,
+      '--color-current-900': `var(--color-${color}-900)`,
+      '--color-current-950': `var(--color-${color}-950)`
+    }"
+  >
+    <slot name="leading" :disabled="disabled" :loading="loading" :ui="ui.icon()">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.icon()" aria-hidden="true" />
     </slot>
 
@@ -99,7 +114,7 @@ const trailingIconName = computed(() => {
       </slot>
     </span>
 
-    <slot name="trailing" :disabled="disabled" :loading="loading">
+    <slot name="trailing" :disabled="disabled" :loading="loading" :ui="ui.icon()">
       <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.icon()" aria-hidden="true" />
     </slot>
   </ULink>
