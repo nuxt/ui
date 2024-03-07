@@ -2,7 +2,7 @@
 import { tv } from 'tailwind-variants'
 import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps } from 'radix-vue'
 // import appConfig from '#build/app.config'
-import theme from '#ui/theme/tooltip'
+import theme from '#build/ui/tooltip'
 
 const tooltip = tv(theme)
 // const appTooltip = tv({ extend: tooltip, ...(appConfig.ui?.tooltip || {}) })

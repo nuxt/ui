@@ -1,7 +1,7 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 // import appConfig from '#build/app.config'
-import theme from '#ui/theme/container'
+import theme from '#build/ui/container'
 
 const container = tv(theme)
 // const appContainer = tv({ extend: container, ...(appConfig.ui?.container || {}) })

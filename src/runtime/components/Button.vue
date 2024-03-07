@@ -2,10 +2,11 @@
 import { tv, type VariantProps } from 'tailwind-variants'
 // import appConfig from '#build/app.config'
 import type { LinkProps } from '#ui/components/Link.vue'
-import theme from '#ui/theme/button'
+import theme from '#build/ui/button'
 
+// @ts-ignore
 const button = tv(theme)
-// const appButton = tv({ extend: button, ...(appConfig.ui?.button || {}) })
+// const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
 
 type ButtonVariants = VariantProps<typeof button>
 
@@ -90,19 +91,6 @@ const trailingIconName = computed(() => {
     :disabled="disabled || loading"
     :class="ui.base({ class: props.class })"
     v-bind="{ ...forward, ...$attrs }"
-    :style="color && {
-      '--color-current-50': `var(--color-${color}-50)`,
-      '--color-current-100': `var(--color-${color}-100)`,
-      '--color-current-200': `var(--color-${color}-200)`,
-      '--color-current-300': `var(--color-${color}-300)`,
-      '--color-current-400': `var(--color-${color}-400)`,
-      '--color-current-500': `var(--color-${color}-500)`,
-      '--color-current-600': `var(--color-${color}-600)`,
-      '--color-current-700': `var(--color-${color}-700)`,
-      '--color-current-800': `var(--color-${color}-800)`,
-      '--color-current-900': `var(--color-${color}-900)`,
-      '--color-current-950': `var(--color-${color}-950)`
-    }"
   >
     <slot name="leading" :disabled="disabled" :loading="loading" :ui="ui.icon()">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.icon()" aria-hidden="true" />

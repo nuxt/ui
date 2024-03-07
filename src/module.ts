@@ -2,27 +2,31 @@ import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule } from '@nuxt/kit'
 import tailwindcss from '@tailwindcss/vite'
 import createTemplates from './templates'
-import type { DeepPartial } from './runtime/types'
-import * as theme from './runtime/theme'
+// import type { DeepPartial } from './runtime/types'
+// import * as theme from './runtime/theme'
 
-type UI = {
-  primary?: string
-  gray?: string
-  [key: string]: any
-} & DeepPartial<typeof theme>
+// type UI = {
+//   primary?: string
+//   gray?: string
+//   [key: string]: any
+// } & DeepPartial<typeof theme>
 
-declare module 'nuxt/schema' {
-  interface AppConfigInput {
-    ui?: UI
-  }
+// declare module 'nuxt/schema' {
+//   interface AppConfigInput {
+//     ui?: UI
+//   }
+// }
+// declare module '@nuxt/schema' {
+//   interface AppConfigInput {
+//     ui?: UI
+//   }
+// }
+
+export interface ModuleOptions {
+  colors: string[]
 }
-declare module '@nuxt/schema' {
-  interface AppConfigInput {
-    ui?: UI
-  }
-}
 
-export default defineNuxtModule({
+export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'ui',
     configKey: 'ui',
@@ -30,10 +34,13 @@ export default defineNuxtModule({
       nuxt: '^3.10.0'
     }
   },
-  async setup (_, nuxt) {
-    const resolver = createResolver(import.meta.url)
+  defaults: {
+    colors: ['primary', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchia', 'pink', 'rose']
+  },
+  async setup (options, nuxt) {
+    const { resolve } = createResolver(import.meta.url)
 
-    nuxt.options.alias['#ui'] = resolver.resolve('./runtime')
+    nuxt.options.alias['#ui'] = resolve('./runtime')
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
       primary: 'green',
@@ -49,21 +56,21 @@ export default defineNuxtModule({
 
     addVitePlugin(tailwindcss)
 
-    createTemplates(nuxt)
+    createTemplates(options, nuxt)
 
     await installModule('nuxt-icon')
     // await installModule('@nuxtjs/color-mode', { classSuffix: '' })
 
     addPlugin({
-      src: resolver.resolve('./runtime/plugins/index')
+      src: resolve('./runtime/plugins/index')
     })
 
     addComponentsDir({
-      path: resolver.resolve('./runtime/components'),
+      path: resolve('./runtime/components'),
       prefix: 'U',
       pathPrefix: false
     })
 
-    addImportsDir(resolver.resolve('./runtime/composables'))
+    addImportsDir(resolve('./runtime/composables'))
   }
 })
