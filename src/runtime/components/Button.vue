@@ -1,8 +1,8 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
 import appConfig from '#build/app.config'
-import type { LinkProps } from '#ui/components/Link.vue'
 import theme from '#build/ui/button'
+import type { LinkProps } from '#ui/components/Link.vue'
 
 const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
 
@@ -53,7 +53,9 @@ const forward = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'v
 
 // Computed
 
-const ui = computed(() => tv({ extend: button, slots: props.ui })({
+// FIXME: Cannot extend multiple times
+// const ui = computed(() => tv({ extend: button, slots: props.ui })({
+const ui = computed(() => button({
   color: props.color,
   variant: props.variant,
   size: props.size,
