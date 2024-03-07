@@ -1,4 +1,4 @@
-export default (config: any) => ({
+export default (config: { colors: string[] }) => ({
   slots: {
     base: 'rounded-md font-medium inline-flex items-center focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 shrink-0',
     label: '',

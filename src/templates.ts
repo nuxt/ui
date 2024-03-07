@@ -34,10 +34,13 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
   nuxt.options.css.push(template.dst)
 
   for (const component in theme) {
+    const template = (theme as any)[component]
+    const result = typeof template === 'function' ? template({ colors: options.colors }) : template
+
     addTemplate({
       filename: `ui/${component}.ts`,
       write: true,
-      getContents: () => `export default ${JSON.stringify((theme as any)[component]({ colors: options.colors }), null, 2)}`
+      getContents: () => `export default ${JSON.stringify(result, null, 2)}`
     })
   }
 
@@ -55,25 +58,31 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
         [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string | object }
       }>
 
-      type UI = {
+      type AppConfigUI = {
+        primary: string
+        gray: string
+      } & typeof ui
+
+      type AppConfigInputUI = {
         primary?: string
         gray?: string
+        [key: string]: any
       } & DeepPartial<typeof ui>
 
       declare module 'nuxt/schema' {
         interface AppConfig {
-          ui: UI
+          ui: AppConfigUI
         }
         interface AppConfigInput {
-          ui?: UI
+          ui?: AppConfigInputUI
         }
       }
       declare module '@nuxt/schema' {
         interface AppConfig {
-          ui: UI
+          ui: AppConfigUI
         }
         interface AppConfigInput {
-          ui?: UI
+          ui?: AppConfigInputUI
         }
       }
       export {}
