@@ -5,9 +5,12 @@ export default defineAppConfig({
       base: 'font-semibold',
       variants: {
         color: {
-          pink: 'bg-pink-500 text-white'
+          toto: 'bg-pink-500 text-white'
         }
       }
+    },
+    container: {
+      base: 'max-w-5xl'
     }
   }
 })
