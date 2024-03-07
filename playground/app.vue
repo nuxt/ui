@@ -1,16 +1,23 @@
 <script setup lang="ts">
+useHead({
+  bodyAttrs: {
+    class: 'antialiased font-sans text-gray-900 dark:text-white bg-white dark:bg-gray-900'
+  }
+})
+
+const components = ['button', 'tooltip']
 </script>
 
 <template>
-  <UContainer class="min-h-screen flex flex-col gap-4 items-center justify-center">
-    <div class="flex gap-1">
-      <UButton icon="i-heroicons-rocket-launch" to="/" label="/" />
+  <UProvider>
+    <UContainer class="min-h-screen flex flex-col gap-4 items-center justify-center">
+      <div class="flex gap-1">
+        <ULink v-for="component in components" :key="component" :to="`/${component}`" active-class="text-primary capitalize text-sm">
+          {{ component }}
+        </ULink>
+      </div>
 
-      <UButton color="green" trailing-icon="i-heroicons-light-bulb" to="/about" label="/about" />
-
-      <UButton color="red" label="Button" class="font-bold" />
-    </div>
-
-    <NuxtPage />
-  </UContainer>
+      <NuxtPage />
+    </UContainer>
+  </UProvider>
 </template>
