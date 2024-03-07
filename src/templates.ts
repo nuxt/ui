@@ -7,7 +7,7 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
   const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
   const template = addTemplate({
-    filename: 'ui/index.css',
+    filename: 'tailwind.css',
     write: true,
     getContents: () => `@import "tailwindcss";
 
@@ -49,8 +49,7 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
 
   addTypeTemplate({
     filename: 'types/ui.d.ts',
-    getContents: () => `
-      import * as ui from '#build/ui'
+    getContents: () => `import * as ui from '#build/ui'
 
       type DeepPartial<T> = Partial<{
         [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string | object }
@@ -59,19 +58,25 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
       type UI = {
         primary?: string
         gray?: string
-        [key: string]: any
       } & DeepPartial<typeof ui>
 
       declare module 'nuxt/schema' {
+        interface AppConfig {
+          ui: UI
+        }
         interface AppConfigInput {
           ui?: UI
         }
       }
       declare module '@nuxt/schema' {
+        interface AppConfig {
+          ui: UI
+        }
         interface AppConfigInput {
           ui?: UI
         }
       }
-      export {}`
+      export {}
+    `
   })
 }

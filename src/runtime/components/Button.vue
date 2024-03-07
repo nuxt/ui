@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-// import appConfig from '#build/app.config'
+import appConfig from '#build/app.config'
 import type { LinkProps } from '#ui/components/Link.vue'
 import theme from '#build/ui/button'
 
@@ -42,6 +42,7 @@ export interface ButtonSlots {
 import { computed } from 'vue'
 import { useForwardProps } from 'radix-vue'
 import { reactiveOmit } from '@vueuse/core'
+import { useAppConfig } from '#app'
 import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
