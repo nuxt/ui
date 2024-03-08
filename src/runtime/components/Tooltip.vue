@@ -7,8 +7,7 @@ import theme from '#build/ui/tooltip'
 const tooltip = tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })
 
 export interface TooltipProps extends TooltipRootProps, Omit<TooltipContentProps, 'as' | 'asChild'> {
-  text?: string
-  disabled?: boolean
+  content?: string
   arrow?: boolean
   portal?: boolean
   class?: any
@@ -19,7 +18,7 @@ export interface TooltipEmits extends TooltipRootEmits {}
 
 export interface TooltipSlots {
   default(): any
-  text(): any
+  content(): any
 }
 </script>
 
@@ -31,7 +30,7 @@ import { reactivePick } from '@vueuse/core'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TooltipProps>(), {
-  text: '',
+  content: undefined,
   side: 'bottom',
   delayDuration: 0,
   sideOffset: 8,
@@ -58,18 +57,18 @@ const ui = computed(() => tooltip())
 
     <TooltipPortal :disabled="!portal">
       <TooltipContent v-bind="{ ...forwardContent, ...$attrs }" :class="ui.content({ class: props.class })">
-        <slot name="text">
-          {{ text }}
+        <slot name="content">
+          {{ content }}
         </slot>
 
-        <TooltipArrow v-if="arrow" :width="11" :height="5" :class="ui.arrow()" />
+        <TooltipArrow v-if="arrow" :class="ui.arrow()" />
       </TooltipContent>
     </TooltipPortal>
   </TooltipRoot>
 </template>
 
 <style>
-@keyframes slideDown {
+@keyframes tooltipSlideDown {
   from {
     opacity: 0;
     transform: translateY(-0.25rem);
@@ -79,7 +78,7 @@ const ui = computed(() => tooltip())
     transform: translateY(0);
   }
 }
-@keyframes slideRight {
+@keyframes tooltipSlideRight {
   from {
     opacity: 0;
     transform: translateX(-0.25rem);
@@ -89,7 +88,7 @@ const ui = computed(() => tooltip())
     transform: translateY(0);
   }
 }
-@keyframes slideUp {
+@keyframes tooltipSlideUp {
   from {
     opacity: 0;
     transform: translateY(0.25rem);
@@ -99,7 +98,7 @@ const ui = computed(() => tooltip())
     transform: translateY(0);
   }
 }
-@keyframes slideLeft {
+@keyframes tooltipSlideLeft {
   from {
     opacity: 0;
     transform: translateX(0.25rem);
