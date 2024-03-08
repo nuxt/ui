@@ -5,7 +5,7 @@ useHead({
   }
 })
 
-const components = ['button', 'tooltip']
+const components = ['button', 'collapsible', 'tooltip']
 </script>
 
 <template>
