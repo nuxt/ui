@@ -89,7 +89,7 @@ const trailingIconName = computed(() => {
 <template>
   <ULink
     :type="type"
-    :disabled="disabled || loading"
+    :disabled="disabled"
     :class="ui.base({ class: props.class })"
     v-bind="{ ...forward, ...$attrs }"
   >
