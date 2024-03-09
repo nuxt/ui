@@ -28,5 +28,8 @@ export default {
     openDelay: 0,
     closeDelay: 0
   },
-  arrow
+  arrow: {
+    ...arrow,
+    base: '[@media(pointer:coarse)]:hidden invisible before:visible before:block before:rotate-45 before:z-[-1] before:w-2 before:h-2'
+  }
 }

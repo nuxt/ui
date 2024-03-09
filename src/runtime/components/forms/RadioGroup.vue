@@ -1,6 +1,6 @@
 <template>
   <div :class="ui.wrapper">
-    <fieldset v-bind="attrs">
+    <fieldset v-bind="attrs" :class="ui.fieldset">
       <legend v-if="legend || $slots.legend" :class="ui.legend">
         <slot name="legend">
           {{ legend }}
