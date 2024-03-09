@@ -23,6 +23,7 @@ import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Switch as HSwitch, provideUseId } from '@headlessui/vue'
 import { twMerge, twJoin } from 'tailwind-merge'
+import { isEqual } from 'ohash'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
@@ -34,6 +35,8 @@ import { toggle } from '#ui/ui.config'
 import { useId } from '#imports'
 
 const config = mergeConfig<typeof toggle>(appConfig.ui.strategy, appConfig.ui.toggle, toggle)
+
+const AnyType = [Boolean, String, Number, Object]
 
 export default defineComponent({
   components: {
@@ -51,7 +54,15 @@ export default defineComponent({
       default: null
     },
     modelValue: {
-      type: Boolean,
+      type: AnyType,
+      default: false
+    },
+    selectedValue: {
+      type: AnyType,
+      default: true
+    },
+    unselectedValue: {
+      type: AnyType,
       default: false
     },
     disabled: {
@@ -97,10 +108,13 @@ export default defineComponent({
 
     const active = computed({
       get () {
-        return props.modelValue
+        if (typeof props?.selectedValue === 'object') {
+          return isEqual((props.modelValue as Record<string, unknown> | unknown[]), (props.selectedValue as Record<string, unknown> | unknown[]))
+        }
+        return props.modelValue === props.selectedValue
       },
       set (value) {
-        emit('update:modelValue', value)
+        emit('update:modelValue', !value ? props.unselectedValue : props.selectedValue)
         emitFormChange()
       }
     })
