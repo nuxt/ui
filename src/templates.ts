@@ -66,31 +66,22 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
         [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string | object }
       }>
 
-      type AppConfigUI = {
-        primary: string
-        gray: string
-      } & typeof ui
+      const colors = ${JSON.stringify(options.colors)} as const;
 
-      type AppConfigInputUI = {
-        primary?: string
-        gray?: string
+      type UI = {
+        primary?: typeof colors[number]
+        gray?: 'slate' | 'cool' | 'zinc' | 'neutral' | 'stone'
         [key: string]: any
       } & DeepPartial<typeof ui>
 
       declare module 'nuxt/schema' {
-        interface AppConfig {
-          ui: AppConfigUI
-        }
         interface AppConfigInput {
-          ui?: AppConfigInputUI
+          ui?: UI
         }
       }
       declare module '@nuxt/schema' {
-        interface AppConfig {
-          ui: AppConfigUI
-        }
         interface AppConfigInput {
-          ui?: AppConfigInputUI
+          ui?: UI
         }
       }
       export {}

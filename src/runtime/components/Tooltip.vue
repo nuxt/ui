@@ -1,8 +1,11 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps } from 'radix-vue'
-import appConfig from '#build/app.config'
+import _appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
+import type { AppConfig } from '@nuxt/schema'
+
+const appConfig = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof theme> } }
 
 const tooltip = tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })
 

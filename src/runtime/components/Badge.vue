@@ -1,8 +1,11 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import appConfig from '#build/app.config'
+import _appConfig from '#build/app.config'
 import theme from '#build/ui/badge'
 import type { LinkProps } from '#ui/components/Link.vue'
+import type { AppConfig } from '@nuxt/schema'
+
+const appConfig = _appConfig as AppConfig & { ui: { badge: Partial<typeof theme> } }
 
 const badge = tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })
 

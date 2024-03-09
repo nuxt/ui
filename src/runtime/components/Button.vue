@@ -1,8 +1,11 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import appConfig from '#build/app.config'
+import _appConfig from '#build/app.config'
 import theme from '#build/ui/button'
 import type { LinkProps } from '#ui/components/Link.vue'
+import type { AppConfig } from '@nuxt/schema'
+
+const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
 const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
 

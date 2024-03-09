@@ -1,8 +1,11 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { CollapsibleRootProps, CollapsibleRootEmits } from 'radix-vue'
-import appConfig from '#build/app.config'
+import _appConfig from '#build/app.config'
 import theme from '#build/ui/collapsible'
+import type { AppConfig } from '@nuxt/schema'
+
+const appConfig = _appConfig as AppConfig & { ui: { collapsible: Partial<typeof theme> } }
 
 const collapsible = tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })
 
