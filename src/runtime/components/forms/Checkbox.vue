@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="ui.wrapper" :data-n-ids="attrs['data-n-ids']">
     <div :class="ui.container">
       <input
         :id="inputId"
