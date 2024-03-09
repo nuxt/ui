@@ -15,8 +15,7 @@ export interface ContainerProps {
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ContainerProps>(), {
-  as: 'div',
-  class: undefined
+  as: 'div'
 })
 </script>
 
