@@ -30,9 +30,9 @@ export interface ButtonProps extends LinkProps {
 }
 
 export interface ButtonSlots {
-  leading(props?: { disabled?: boolean; loading?: boolean, ui?: string }): any
+  leading(props: { disabled?: boolean; loading?: boolean, icon?: string, class: string }): any
   default(): any
-  trailing(props?: { disabled?: boolean; loading?: boolean, ui?: string }): any
+  trailing(props: { disabled?: boolean; loading?: boolean, icon?: string, class: string }): any
 }
 </script>
 
@@ -43,8 +43,6 @@ import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#app'
 import UIcon from './Icon.vue'
 
-defineOptions({ inheritAttrs: false })
-
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
@@ -52,6 +50,9 @@ const appConfig = useAppConfig()
 const forward = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'variant', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'truncate', 'class', 'ui'))
 
 // Computed
+
+const isLeading = computed(() => (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || !!props.leadingIcon)
+const isTrailing = computed(() => (props.icon && props.trailing) || (props.loading && props.trailing) || !!props.trailingIcon)
 
 // FIXME: Cannot extend multiple times
 // const ui = computed(() => tv({ extend: button, slots: props.ui })({
@@ -62,12 +63,10 @@ const ui = computed(() => button({
   loading: props.loading,
   truncate: props.truncate,
   block: props.block,
-  square: props.square || (!slots.default && !props.label)
+  square: props.square || (!slots.default && !props.label),
+  leading: isLeading.value,
+  trailing: isTrailing.value
 }))
-
-const isLeading = computed(() => (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || props.leadingIcon)
-
-const isTrailing = computed(() => (props.icon && props.trailing) || (props.loading && props.trailing) || props.trailingIcon)
 
 const leadingIconName = computed(() => {
   if (props.loading) {
@@ -76,6 +75,7 @@ const leadingIconName = computed(() => {
 
   return props.leadingIcon || props.icon
 })
+const leadingIconClass = computed(() => ui.value.leadingIcon())
 
 const trailingIconName = computed(() => {
   if (props.loading && !isLeading.value) {
@@ -84,6 +84,7 @@ const trailingIconName = computed(() => {
 
   return props.trailingIcon || props.icon
 })
+const trailingIconClass = computed(() => ui.value.trailingIcon())
 </script>
 
 <template>
@@ -91,10 +92,10 @@ const trailingIconName = computed(() => {
     :type="type"
     :disabled="disabled"
     :class="ui.base({ class: props.class })"
-    v-bind="{ ...forward, ...$attrs }"
+    v-bind="forward"
   >
-    <slot name="leading" :disabled="disabled" :loading="loading" :ui="ui.icon()">
-      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.icon()" aria-hidden="true" />
+    <slot name="leading" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="leadingIconClass">
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     </slot>
 
     <span v-if="label || $slots.default" :class="ui.label()">
@@ -103,8 +104,8 @@ const trailingIconName = computed(() => {
       </slot>
     </span>
 
-    <slot name="trailing" :disabled="disabled" :loading="loading" :ui="ui.icon()">
-      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.icon()" aria-hidden="true" />
+    <slot name="trailing" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="trailingIconClass">
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
     </slot>
   </ULink>
 </template>

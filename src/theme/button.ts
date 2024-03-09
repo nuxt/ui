@@ -1,8 +1,9 @@
 export default (config: { colors: string[] }) => ({
   slots: {
-    base: 'rounded-md font-medium inline-flex items-center focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 shrink-0',
+    base: 'rounded-md font-medium inline-flex items-center focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75',
     label: '',
-    icon: 'shrink-0'
+    leadingIcon: 'shrink-0',
+    trailingIcon: 'shrink-0'
   },
   variants: {
     color: {
@@ -21,27 +22,33 @@ export default (config: { colors: string[] }) => ({
     size: {
       '2xs': {
         base: 'px-2 py-1 text-xs gap-x-1',
-        icon: 'h-4 w-4'
+        leadingIcon: 'h-4 w-4',
+        trailingIcon: 'h-4 w-4'
       },
       xs: {
         base: 'px-2.5 py-1.5 text-xs gap-x-1.5',
-        icon: 'h-4 w-4'
+        leadingIcon: 'h-4 w-4',
+        trailingIcon: 'h-4 w-4'
       },
       sm: {
         base: 'px-2.5 py-1.5 text-sm gap-x-1.5',
-        icon: 'h-5 w-5'
+        leadingIcon: 'h-5 w-5',
+        trailingIcon: 'h-5 w-5'
       },
       md: {
         base: 'px-3 py-2 text-sm gap-x-2',
-        icon: 'h-5 w-5'
+        leadingIcon: 'h-5 w-5',
+        trailingIcon: 'h-5 w-5'
       },
       lg: {
         base: 'px-3.5 py-2.5 text-sm gap-x-2.5',
-        icon: 'h-6 w-6'
+        leadingIcon: 'h-6 w-6',
+        trailingIcon: 'h-6 w-6'
       },
       xl: {
         base: 'px-3.5 py-2.5 text-base gap-x-2.5',
-        icon: 'h-6 w-6'
+        leadingIcon: 'h-6 w-6',
+        trailingIcon: 'h-6 w-6'
       }
     },
     truncate: {
@@ -51,13 +58,22 @@ export default (config: { colors: string[] }) => ({
     },
     loading: {
       true: {
-        icon: 'animate-spin'
+        leadingIcon: 'animate-spin'
       }
     },
     block: {
-      true: 'w-full justify-center'
+      true: {
+        base: 'w-full',
+        trailingIcon: 'ms-auto'
+      }
     },
     square: {
+      true: ''
+    },
+    leading: {
+      true: ''
+    },
+    trailing: {
       true: ''
     }
   },
@@ -112,38 +128,32 @@ export default (config: { colors: string[] }) => ({
   }, {
     size: '2xs',
     square: true,
-    class: {
-      base: 'p-1'
-    }
+    class: 'p-1'
   }, {
     size: 'xs',
     square: true,
-    class: {
-      base: 'p-1'
-    }
+    class: 'p-1.5'
   }, {
     size: 'sm',
     square: true,
-    class: {
-      base: 'p-1'
-    }
+    class: 'p-1.5'
   }, {
     size: 'md',
     square: true,
-    class: {
-      base: 'p-2'
-    }
+    class: 'p-2'
   }, {
     size: 'lg',
     square: true,
-    class: {
-      base: 'p-2'
-    }
+    class: 'p-2.5'
   }, {
     size: 'xl',
     square: true,
+    class: 'p-2.5'
+  }, {
+    loading: true,
+    leading: false,
     class: {
-      base: 'p-2'
+      trailingIcon: 'animate-spin'
     }
   }],
   defaultVariants: {
