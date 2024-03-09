@@ -1,21 +1,28 @@
 <template>
   <div class="flex flex-col gap-2">
     <div class="flex items-center gap-2">
-      <UButton>Button</UButton>
+      <UButton class="font-bold">
+        Button
+      </UButton>
+    </div>
+    <div class="flex items-center gap-2">
       <UButton disabled>
         Disabled
       </UButton>
+    </div>
+    <div class="flex items-center gap-2">
       <UButton loading>
         Loading
       </UButton>
-      <UButton square>
-        Square
+    </div>
+    <div class="flex items-center gap-2">
+      <UButton loading trailing>
+        Loading
       </UButton>
-      <UButton icon="i-heroicons-rocket-launch">
-        Icon
-      </UButton>
-      <UButton icon="i-heroicons-rocket-launch" trailing-icon="i-heroicons-chevron-down-20-solid" block>
-        Block
+    </div>
+    <div class="flex items-center gap-2">
+      <UButton truncate class="w-16">
+        Truncate
       </UButton>
     </div>
     <div class="flex items-center gap-2">
@@ -45,6 +52,32 @@
       <UButton icon="i-heroicons-rocket-launch" label="Button" size="md" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" size="lg" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" size="xl" />
+    </div>
+    <div class="flex items-center gap-2 -ml-[162px]">
+      <UButton icon="i-heroicons-rocket-launch" label="Square" square size="2xs" />
+      <UButton icon="i-heroicons-rocket-launch" label="Square" square size="xs" />
+      <UButton icon="i-heroicons-rocket-launch" label="Square" square size="sm" />
+      <UButton icon="i-heroicons-rocket-launch" label="Square" square size="md" />
+      <UButton icon="i-heroicons-rocket-launch" label="Square" square size="lg" />
+      <UButton icon="i-heroicons-rocket-launch" label="Square" square size="xl" />
+    </div>
+    <div class="flex items-center gap-2 -ml-[68px]">
+      <UButton icon="i-heroicons-rocket-launch" size="2xs" />
+      <UButton icon="i-heroicons-rocket-launch" size="xs" />
+      <UButton icon="i-heroicons-rocket-launch" size="sm" />
+      <UButton icon="i-heroicons-rocket-launch" size="md" />
+      <UButton icon="i-heroicons-rocket-launch" size="lg" />
+      <UButton icon="i-heroicons-rocket-launch" size="xl" />
+    </div>
+    <div class="flex items-center gap-2">
+      <UButton icon="i-heroicons-rocket-launch" trailing-icon="i-heroicons-chevron-down-20-solid" label="Block" loading block />
+    </div>
+    <div class="flex items-center gap-2">
+      <UButton icon="i-heroicons-rocket-launch" label="Button" class="group">
+        <template #leading="leadingProps">
+          <UIcon v-if="leadingProps.icon" :name="leadingProps.icon" :class="[leadingProps.class, 'group-hover:text-white']" aria-hidden="true" />
+        </template>
+      </UButton>
     </div>
   </div>
 </template>
