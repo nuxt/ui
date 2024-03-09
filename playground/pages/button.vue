@@ -1,33 +1,50 @@
 <template>
-  <div class="flex flex-col gap-3">
-    <div class="flex gap-1.5">
+  <div class="flex flex-col gap-2">
+    <div class="flex items-center gap-2">
+      <UButton>Button</UButton>
+      <UButton disabled>
+        Disabled
+      </UButton>
+      <UButton loading>
+        Loading
+      </UButton>
+      <UButton square>
+        Square
+      </UButton>
+      <UButton icon="i-heroicons-rocket-launch">
+        Icon
+      </UButton>
+      <UButton icon="i-heroicons-rocket-launch" trailing-icon="i-heroicons-chevron-down-20-solid" block>
+        Block
+      </UButton>
+    </div>
+    <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" label="Button" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" variant="outline" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" variant="soft" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" variant="ghost" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" variant="link" />
     </div>
-
-    <div class="flex gap-1.5">
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="green" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="green" variant="outline" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="green" variant="soft" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="green" variant="ghost" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="green" variant="link" />
-    </div>
-
-    <div class="flex gap-1">
+    <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="white" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="white" variant="ghost" />
     </div>
-    <div class="flex gap-1">
+    <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="gray" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="gray" variant="ghost" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="gray" variant="link" />
     </div>
-    <div class="flex gap-1">
+    <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" variant="link" />
+    </div>
+    <div class="flex items-center gap-2 -ml-[174px]">
+      <UButton icon="i-heroicons-rocket-launch" label="Button" size="2xs" />
+      <UButton icon="i-heroicons-rocket-launch" label="Button" size="xs" />
+      <UButton icon="i-heroicons-rocket-launch" label="Button" size="sm" />
+      <UButton icon="i-heroicons-rocket-launch" label="Button" size="md" />
+      <UButton icon="i-heroicons-rocket-launch" label="Button" size="lg" />
+      <UButton icon="i-heroicons-rocket-launch" label="Button" size="xl" />
     </div>
   </div>
 </template>
