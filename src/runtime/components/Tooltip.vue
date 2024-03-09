@@ -30,12 +30,9 @@ import { reactivePick } from '@vueuse/core'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TooltipProps>(), {
-  content: undefined,
   side: 'bottom',
   delayDuration: 0,
-  sideOffset: 8,
-  class: undefined,
-  ui: undefined
+  sideOffset: 8
 })
 const emits = defineEmits<TooltipEmits>()
 defineSlots<TooltipSlots>()
