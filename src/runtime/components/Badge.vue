@@ -23,8 +23,6 @@ export interface BadgeSlots {
 </script>
 
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 const props = withDefaults(defineProps<BadgeProps>(), {
   as: 'span'
 })
@@ -32,7 +30,7 @@ defineSlots<BadgeSlots>()
 </script>
 
 <template>
-  <component :is="as" v-bind="$attrs" :class="badge({ color, variant, size, class: props.class })">
+  <component :is="as" :class="badge({ color, variant, size, class: props.class })">
     <slot>
       {{ label }}
     </slot>
