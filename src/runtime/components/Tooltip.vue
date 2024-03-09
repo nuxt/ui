@@ -27,8 +27,6 @@ import { computed } from 'vue'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardProps, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 
-defineOptions({ inheritAttrs: false })
-
 const props = withDefaults(defineProps<TooltipProps>(), {
   side: 'bottom',
   delayDuration: 0,
@@ -53,7 +51,7 @@ const ui = computed(() => tooltip())
     </TooltipTrigger>
 
     <TooltipPortal :disabled="!portal">
-      <TooltipContent v-bind="{ ...forwardContent, ...$attrs }" :class="ui.content({ class: props.class })">
+      <TooltipContent v-bind="forwardContent" :class="ui.content({ class: props.class })">
         <slot name="content">
           {{ content }}
         </slot>
