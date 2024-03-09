@@ -6,7 +6,7 @@ import theme from '#build/ui/collapsible'
 
 const collapsible = tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })
 
-export interface CollapsibleProps extends Omit<CollapsibleRootProps, 'as' | 'asChild'> {
+export interface CollapsibleProps extends Omit<CollapsibleRootProps, 'asChild'> {
   content?: string
   class?: any
   ui?: Partial<typeof collapsible.slots>
@@ -29,9 +29,9 @@ defineOptions({ inheritAttrs: false })
 
 const props = defineProps<CollapsibleProps>()
 const emits = defineEmits<CollapsibleEmits>()
-const slots = defineSlots<CollapsibleSlots>()
+defineSlots<CollapsibleSlots>()
 
-const forwardRoot = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'disabled'), emits)
+const forward = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'disabled'), emits)
 
 // FIXME: Cannot extend multiple times
 // const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
@@ -40,12 +40,12 @@ const ui = computed(() => collapsible())
 </script>
 
 <template>
-  <CollapsibleRoot v-bind="forwardRoot">
+  <CollapsibleRoot :class="ui.root({ class: props.class })" v-bind="{ ...forward, ...$attrs }">
     <CollapsibleTrigger as-child>
       <slot />
     </CollapsibleTrigger>
 
-    <CollapsibleContent v-bind="$attrs" :class="ui.content({ class: props.class })">
+    <CollapsibleContent :class="ui.content()">
       <slot name="content">
         {{ content }}
       </slot>
