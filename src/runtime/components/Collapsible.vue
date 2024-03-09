@@ -25,8 +25,6 @@ import { computed } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 
-defineOptions({ inheritAttrs: false })
-
 const props = defineProps<CollapsibleProps>()
 const emits = defineEmits<CollapsibleEmits>()
 defineSlots<CollapsibleSlots>()
@@ -40,7 +38,7 @@ const ui = computed(() => collapsible())
 </script>
 
 <template>
-  <CollapsibleRoot :class="ui.root({ class: props.class })" v-bind="{ ...forward, ...$attrs }">
+  <CollapsibleRoot v-bind="forward" :class="ui.root({ class: props.class })">
     <CollapsibleTrigger as-child>
       <slot />
     </CollapsibleTrigger>
