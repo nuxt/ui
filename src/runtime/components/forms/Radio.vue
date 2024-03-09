@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="ui.wrapper" :data-n-ids="attrs['data-n-ids']">
     <div :class="ui.container">
       <input
         :id="inputId"
@@ -42,6 +42,7 @@ import { useId } from '#imports'
 const config = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     id: {
       type: String,
