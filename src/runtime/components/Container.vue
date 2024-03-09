@@ -12,15 +12,13 @@ export interface ContainerProps {
 </script>
 
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 const props = withDefaults(defineProps<ContainerProps>(), {
   as: 'div'
 })
 </script>
 
 <template>
-  <component :is="as" :class="container({ class: props.class })" v-bind="$attrs">
+  <component :is="as" :class="container({ class: props.class })">
     <slot />
   </component>
 </template>
