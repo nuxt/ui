@@ -23,8 +23,7 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<LinkProps>(), {
   as: 'button',
-  type: 'button',
-  inactiveClass: undefined
+  type: 'button'
 })
 
 const forward = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'inactiveClass'))
