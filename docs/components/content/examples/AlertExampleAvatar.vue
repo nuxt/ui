@@ -7,10 +7,9 @@
       alt: 'Avatar' 
     }"
   >
-    <template #avatar="{ avatar, ui }">
+    <template #avatar="{ avatar }">
       <UAvatar 
-        v-bind="{ size: ui.size, ...avatar }" 
-        :class="ui.base" 
+        v-bind="avatar" 
         chip-color="primary"
         chip-text=""
         chip-position="top-right"
