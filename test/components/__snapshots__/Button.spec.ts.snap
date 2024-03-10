@@ -132,7 +132,7 @@ exports[`Button > renders with variant link correctly 1`] = `
 `;
 
 exports[`Button > renders with variant outline correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm gap-x-1.5 ring-1 ring-inset ring-current text-primary-500 dark:text-primary-400 hover:bg-primary-50 disabled:bg-transparent dark:hover:bg-primary-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm gap-x-1.5 ring ring-inset ring-current text-primary-500 dark:text-primary-400 hover:bg-primary-50 disabled:bg-transparent dark:hover:bg-primary-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
   <!--v-if--><span class="">Button</span>
   <!--v-if-->
 </button>"

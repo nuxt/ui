@@ -27,7 +27,7 @@ export default (config: { colors: string[] }) => ({
   })), ...config.colors.map((color: string) => ({
     color,
     variant: 'outline',
-    class: `text-${color}-500 dark:text-${color}-400 ring-1 ring-inset ring-${color}-500 dark:ring-${color}-400`
+    class: `text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500 dark:ring-${color}-400`
   })), ...config.colors.map((color: string) => ({
     color,
     variant: 'soft',
@@ -35,15 +35,15 @@ export default (config: { colors: string[] }) => ({
   })), ...config.colors.map((color: string) => ({
     color,
     variant: 'subtle',
-    class: `bg-${color}-50 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400 ring-1 ring-inset ring-${color}-500/25 dark:ring-${color}-400/25`
+    class: `bg-${color}-50 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/25 dark:ring-${color}-400/25`
   })), {
     color: 'white',
     variant: 'solid',
-    class: 'ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900'
+    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900'
   }, {
     color: 'gray',
     variant: 'solid',
-    class: 'ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800'
+    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800'
   }, {
     color: 'black',
     variant: 'solid',
