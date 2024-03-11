@@ -50,7 +50,7 @@ const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
 const appConfig = useAppConfig()
-const forward = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'variant', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'truncate', 'class', 'ui'))
+const linkProps = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'variant', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'truncate', 'class', 'ui'))
 
 const isLeading = computed(() => (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || !!props.leadingIcon)
 const isTrailing = computed(() => (props.icon && props.trailing) || (props.loading && props.trailing) || !!props.trailingIcon)
@@ -93,7 +93,7 @@ const trailingIconClass = computed(() => ui.value.trailingIcon())
     :type="type"
     :disabled="disabled"
     :class="ui.base({ class: props.class })"
-    v-bind="forward"
+    v-bind="linkProps"
   >
     <slot name="leading" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="leadingIconClass">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
