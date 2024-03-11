@@ -45,7 +45,7 @@
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" variant="link" />
     </div>
-    <div class="flex items-center gap-2 -ml-[174px]">
+    <div class="flex items-center gap-2 -ml-[171px]">
       <UButton icon="i-heroicons-rocket-launch" label="Button" size="2xs" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" size="xs" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" size="sm" />
@@ -53,7 +53,7 @@
       <UButton icon="i-heroicons-rocket-launch" label="Button" size="lg" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" size="xl" />
     </div>
-    <div class="flex items-center gap-2 -ml-[162px]">
+    <div class="flex items-center gap-2 -ml-[159px]">
       <UButton icon="i-heroicons-rocket-launch" label="Square" square size="2xs" />
       <UButton icon="i-heroicons-rocket-launch" label="Square" square size="xs" />
       <UButton icon="i-heroicons-rocket-launch" label="Square" square size="sm" />
@@ -61,7 +61,7 @@
       <UButton icon="i-heroicons-rocket-launch" label="Square" square size="lg" />
       <UButton icon="i-heroicons-rocket-launch" label="Square" square size="xl" />
     </div>
-    <div class="flex items-center gap-2 -ml-[68px]">
+    <div class="flex items-center gap-2 -ml-[67px]">
       <UButton icon="i-heroicons-rocket-launch" size="2xs" />
       <UButton icon="i-heroicons-rocket-launch" size="xs" />
       <UButton icon="i-heroicons-rocket-launch" size="sm" />

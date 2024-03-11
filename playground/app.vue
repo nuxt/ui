@@ -5,19 +5,21 @@ useHead({
   }
 })
 
-const components = ['badge', 'button', 'collapsible', 'tooltip']
+const components = ['avatar', 'badge', 'button', 'collapsible', 'tooltip']
 </script>
 
 <template>
   <UProvider>
-    <UContainer class="min-h-screen flex flex-col gap-4 items-center justify-center">
-      <div class="flex gap-1.5">
+    <UContainer class="min-h-screen flex flex-col gap-4 items-center justify-center overflow-y-auto">
+      <div class="flex gap-1.5 py-4">
         <ULink v-for="component in components" :key="component" :to="`/${component}`" active-class="text-primary capitalize text-sm">
           {{ component }}
         </ULink>
       </div>
 
-      <NuxtPage />
+      <div class="flex-1 flex flex-col justify-center">
+        <NuxtPage />
+      </div>
     </UContainer>
   </UProvider>
 </template>
