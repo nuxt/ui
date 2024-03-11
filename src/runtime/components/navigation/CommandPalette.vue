@@ -1,3 +1,4 @@
+
 <template>
   <HCombobox
     :by="by"
@@ -27,7 +28,6 @@
     <HComboboxOptions
       v-if="groups.length"
       static
-      hold
       as="div"
       aria-label="Commands"
       :class="ui.container"
@@ -340,13 +340,32 @@ export default defineComponent({
     }
 
     function onSelect (option: Command | Command[]) {
-      emit('update:modelValue', option, { query: query.value })
+      if (Array.isArray(option)) {
+        // Handle multiple selections
+        const selectedCommands = option.map((cmd) => ({
+          ...cmd,
+          query: query.value
+        }))
+        emit('update:modelValue', selectedCommands)
+      } else if (option.click) {
+        option.click()
+      } else if (option.to) {
+        if (typeof option.to === 'function') {
+          option.to() 
+        } 
+      } else if (option.href) {
+        window.open(option.href, '_blank') 
+      } else {
+        const selectedCommand = {
+          ...option,
+          query: query.value
+        }
+        emit('update:modelValue', selectedCommand)
+      }
 
       // Clear input after selection
       if (props.autoclear) {
-        setTimeout(() => {
-          query.value = ''
-        }, 0)
+        query.value = ''
       }
     }
 
@@ -357,7 +376,6 @@ export default defineComponent({
         emit('close')
       }
     }
-
     expose({
       query,
       updateQuery: (q: string) => {
@@ -387,3 +405,4 @@ export default defineComponent({
   }
 })
 </script>
+
