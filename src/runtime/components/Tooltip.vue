@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps } from 'radix-vue'
+import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
@@ -9,9 +9,10 @@ const appConfig = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof them
 
 const tooltip = tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })
 
-export interface TooltipProps extends TooltipRootProps, Omit<TooltipContentProps, 'as' | 'asChild'> {
-  content?: string
-  arrow?: boolean
+export interface TooltipProps extends TooltipRootProps {
+  text?: string
+  content?: Omit<TooltipContentProps, 'as' | 'asChild'>
+  arrow?: boolean | Omit<TooltipArrowProps, 'as' | 'asChild'>
   portal?: boolean
   class?: any
   ui?: Partial<typeof tooltip.slots>
@@ -21,42 +22,40 @@ export interface TooltipEmits extends TooltipRootEmits {}
 
 export interface TooltipSlots {
   default(): any
-  content(): any
+  text(): any
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardProps, useForwardPropsEmits } from 'radix-vue'
+import { computed, toRef } from 'vue'
+import { defu } from 'defu'
+import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 
-const props = withDefaults(defineProps<TooltipProps>(), {
-  side: 'bottom',
-  delayDuration: 0,
-  sideOffset: 8
-})
+const props = defineProps<TooltipProps>()
 const emits = defineEmits<TooltipEmits>()
 defineSlots<TooltipSlots>()
 
-const forwardRoot = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration'), emits)
-const forwardContent = useForwardProps(reactivePick(props, 'side', 'sideOffset', 'align', 'alignOffset', 'avoidCollisions', 'collisionBoundary', 'collisionPadding', 'arrowPadding', 'sticky', 'hideWhenDetached'))
+const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration'), emits)
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as TooltipContentProps)
+const arrowProps = toRef(() => props.arrow as TooltipArrowProps)
 
 const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
 </script>
 
 <template>
-  <TooltipRoot v-bind="forwardRoot">
+  <TooltipRoot v-bind="rootProps">
     <TooltipTrigger as-child>
       <slot />
     </TooltipTrigger>
 
     <TooltipPortal :disabled="!portal">
-      <TooltipContent v-bind="forwardContent" :class="ui.content({ class: props.class })">
-        <slot name="content">
-          {{ content }}
+      <TooltipContent v-bind="contentProps" :class="ui.content({ class: props.class })">
+        <slot name="text">
+          {{ text }}
         </slot>
 
-        <TooltipArrow v-if="arrow" :class="ui.arrow()" />
+        <TooltipArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow()" />
       </TooltipContent>
     </TooltipPortal>
   </TooltipRoot>
