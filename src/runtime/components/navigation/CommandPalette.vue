@@ -1,4 +1,3 @@
-
 <template>
   <HCombobox
     :by="by"
@@ -28,6 +27,7 @@
     <HComboboxOptions
       v-if="groups.length"
       static
+      hold
       as="div"
       aria-label="Commands"
       :class="ui.container"
@@ -405,4 +405,3 @@ export default defineComponent({
   }
 })
 </script>
-
