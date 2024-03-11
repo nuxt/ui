@@ -32,13 +32,13 @@ const props = defineProps<CollapsibleProps>()
 const emits = defineEmits<CollapsibleEmits>()
 defineSlots<CollapsibleSlots>()
 
-const forward = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled'), emits)
 
 const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
 </script>
 
 <template>
-  <CollapsibleRoot v-bind="forward" :class="ui.root({ class: props.class })">
+  <CollapsibleRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
     <CollapsibleTrigger as-child>
       <slot />
     </CollapsibleTrigger>
@@ -52,7 +52,7 @@ const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
 </template>
 
 <style>
-@keyframes collapsibleSlideDown {
+@keyframes collapsible-down {
   from {
     height: 0;
   }
@@ -61,7 +61,7 @@ const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
   }
 }
 
-@keyframes collapsibleSlideUp {
+@keyframes collapsible-up {
   from {
     height: var(--radix-collapsible-content-height);
   }
