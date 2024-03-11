@@ -16,7 +16,7 @@ export interface AvatarProps extends Omit<AvatarRootProps, 'asChild'>, Omit<Avat
   src?: string
   alt?: string
   icon?: string
-  fallback?: string
+  text?: string
   size?: AvatarVariants['size']
   class?: any
   ui?: Partial<typeof avatar.slots>
@@ -30,18 +30,19 @@ import { reactivePick } from '@vueuse/core'
 
 const props = defineProps<AvatarProps>()
 
-const forwardRoot = useForwardProps(reactivePick(props, 'as'))
-const forwardFallback = useForwardProps(reactivePick(props, 'delayMs'))
+const rootProps = useForwardProps(reactivePick(props, 'as'))
+const fallbackProps = useForwardProps(reactivePick(props, 'delayMs'))
 
-const fallback = computed(() => props.fallback || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
+const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
 
 const ui = computed(() => tv({ extend: avatar, slots: props.ui })({ size: props.size }))
 </script>
 
 <template>
-  <AvatarRoot v-bind="forwardRoot" :class="ui.root({ class: props.class })">
+  <AvatarRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
     <AvatarImage v-if="src" :src="src" :alt="alt" :class="ui.image()" />
-    <AvatarFallback as-child v-bind="forwardFallback">
+
+    <AvatarFallback as-child v-bind="fallbackProps">
       <UIcon v-if="icon" :name="icon" :class="ui.icon()" />
       <span v-else :class="ui.fallback()">{{ fallback }}</span>
     </AvatarFallback>

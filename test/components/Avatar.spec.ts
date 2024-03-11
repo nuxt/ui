@@ -7,7 +7,7 @@ describe('Avatar', () => {
     ['with src', { props: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' } }],
     ['with alt', { props: { alt: 'Benjamin Canac' } }],
     ['with class', { props: { class: 'bg-white dark:bg-gray-900' } }],
-    ['with fallback', { props: { fallback: '+1' } }],
+    ['with text', { props: { text: '+1' } }],
     ['with icon', { props: { icon: 'i-heroicons-photo' } }],
     ['with size 3xs', { props: { size: '3xs' as const } }],
     ['with size 2xs', { props: { size: '2xs' as const } }],
