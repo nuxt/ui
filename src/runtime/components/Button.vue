@@ -1,9 +1,9 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
+import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/button'
 import type { LinkProps } from '#ui/components/Link.vue'
-import type { AppConfig } from '@nuxt/schema'
 
 const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
@@ -51,8 +51,6 @@ const slots = defineSlots<ButtonSlots>()
 
 const appConfig = useAppConfig()
 const forward = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'variant', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'truncate', 'class', 'ui'))
-
-// Computed
 
 const isLeading = computed(() => (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing) || !!props.leadingIcon)
 const isTrailing = computed(() => (props.icon && props.trailing) || (props.loading && props.trailing) || !!props.trailingIcon)

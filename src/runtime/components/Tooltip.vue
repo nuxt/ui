@@ -1,9 +1,9 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps } from 'radix-vue'
+import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
-import type { AppConfig } from '@nuxt/schema'
 
 const appConfig = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof theme> } }
 
@@ -41,10 +41,7 @@ defineSlots<TooltipSlots>()
 const forwardRoot = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration'), emits)
 const forwardContent = useForwardProps(reactivePick(props, 'side', 'sideOffset', 'align', 'alignOffset', 'avoidCollisions', 'collisionBoundary', 'collisionPadding', 'arrowPadding', 'sticky', 'hideWhenDetached'))
 
-// FIXME: Cannot extend multiple times
-// const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tooltip())
+const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
 </script>
 
 <template>

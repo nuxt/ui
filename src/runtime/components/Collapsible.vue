@@ -1,9 +1,9 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { CollapsibleRootProps, CollapsibleRootEmits } from 'radix-vue'
+import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/collapsible'
-import type { AppConfig } from '@nuxt/schema'
 
 const appConfig = _appConfig as AppConfig & { ui: { collapsible: Partial<typeof theme> } }
 
@@ -32,12 +32,9 @@ const props = defineProps<CollapsibleProps>()
 const emits = defineEmits<CollapsibleEmits>()
 defineSlots<CollapsibleSlots>()
 
-const forward = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'disabled'), emits)
+const forward = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled'), emits)
 
-// FIXME: Cannot extend multiple times
-// const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => collapsible())
+const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
 </script>
 
 <template>

@@ -1,8 +1,8 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
+import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/container'
-import type { AppConfig } from '@nuxt/schema'
 
 const appConfig = _appConfig as AppConfig & { ui: { container: Partial<typeof theme> } }
 
