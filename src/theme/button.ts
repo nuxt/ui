@@ -22,33 +22,33 @@ export default (config: { colors: string[] }) => ({
     size: {
       '2xs': {
         base: 'px-2 py-1 text-xs gap-x-1',
-        leadingIcon: 'h-4 w-4',
-        trailingIcon: 'h-4 w-4'
+        leadingIcon: 'size-4',
+        trailingIcon: 'size-4'
       },
       xs: {
         base: 'px-2.5 py-1.5 text-xs gap-x-1.5',
-        leadingIcon: 'h-4 w-4',
-        trailingIcon: 'h-4 w-4'
+        leadingIcon: 'size-4',
+        trailingIcon: 'size-4'
       },
       sm: {
         base: 'px-2.5 py-1.5 text-sm gap-x-1.5',
-        leadingIcon: 'h-5 w-5',
-        trailingIcon: 'h-5 w-5'
+        leadingIcon: 'size-5',
+        trailingIcon: 'size-5'
       },
       md: {
         base: 'px-3 py-2 text-sm gap-x-2',
-        leadingIcon: 'h-5 w-5',
-        trailingIcon: 'h-5 w-5'
+        leadingIcon: 'size-5',
+        trailingIcon: 'size-5'
       },
       lg: {
         base: 'px-3.5 py-2.5 text-sm gap-x-2.5',
-        leadingIcon: 'h-6 w-6',
-        trailingIcon: 'h-6 w-6'
+        leadingIcon: 'size-6',
+        trailingIcon: 'size-6'
       },
       xl: {
         base: 'px-3.5 py-2.5 text-base gap-x-2.5',
-        leadingIcon: 'h-6 w-6',
-        trailingIcon: 'h-6 w-6'
+        leadingIcon: 'size-6',
+        trailingIcon: 'size-6'
       }
     },
     truncate: {
