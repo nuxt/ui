@@ -34,15 +34,15 @@
       <UAvatar alt="Benjamin Canac" size="3xl" />
     </div>
     <div class="flex items-center gap-1.5">
-      <UAvatar fallback="+1" size="3xs" />
-      <UAvatar fallback="+1" size="2xs" />
-      <UAvatar fallback="+1" size="xs" />
-      <UAvatar fallback="+1" size="sm" />
-      <UAvatar fallback="+1" size="md" />
-      <UAvatar fallback="+1" size="lg" />
-      <UAvatar fallback="+1" size="xl" />
-      <UAvatar fallback="+1" size="2xl" />
-      <UAvatar fallback="+1" size="3xl" />
+      <UAvatar text="+1" size="3xs" />
+      <UAvatar text="+1" size="2xs" />
+      <UAvatar text="+1" size="xs" />
+      <UAvatar text="+1" size="sm" />
+      <UAvatar text="+1" size="md" />
+      <UAvatar text="+1" size="lg" />
+      <UAvatar text="+1" size="xl" />
+      <UAvatar text="+1" size="2xl" />
+      <UAvatar text="+1" size="3xl" />
     </div>
   </div>
 </template>
