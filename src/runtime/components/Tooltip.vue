@@ -63,7 +63,7 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
 </template>
 
 <style>
-@keyframes tooltipSlideDown {
+@keyframes tooltip-down {
   from {
     opacity: 0;
     transform: translateY(-0.25rem);
@@ -73,7 +73,7 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
     transform: translateY(0);
   }
 }
-@keyframes tooltipSlideRight {
+@keyframes tooltip-right {
   from {
     opacity: 0;
     transform: translateX(-0.25rem);
@@ -83,7 +83,7 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
     transform: translateY(0);
   }
 }
-@keyframes tooltipSlideUp {
+@keyframes tooltip-up {
   from {
     opacity: 0;
     transform: translateY(0.25rem);
@@ -93,7 +93,7 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
     transform: translateY(0);
   }
 }
-@keyframes tooltipSlideLeft {
+@keyframes tooltip-left {
   from {
     opacity: 0;
     transform: translateX(0.25rem);
