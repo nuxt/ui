@@ -14,8 +14,6 @@ exports[`Badge > renders with default slot correctly 1`] = `"<span class="rounde
 
 exports[`Badge > renders with label correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
 
-exports[`Badge > renders with size correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-sm px-2.5 py-1.5 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
-
 exports[`Badge > renders with size lg correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-sm px-2.5 py-1.5 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
 
 exports[`Badge > renders with size md correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-sm px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
