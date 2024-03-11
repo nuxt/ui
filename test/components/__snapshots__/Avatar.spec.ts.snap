@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar > renders with alt correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-8 text-sm"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate">BC</span></span>"`;
+
+exports[`Avatar > renders with fallback correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-8 text-sm"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate">+1</span></span>"`;
+
+exports[`Avatar > renders with size 2xl correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-16 text-2xl"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;
+
+exports[`Avatar > renders with size 2xs correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-5 text-[10px]"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;
+
+exports[`Avatar > renders with size 3xl correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-20 text-3xl"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;
+
+exports[`Avatar > renders with size 3xs correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-4 text-[8px]"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;
+
+exports[`Avatar > renders with size lg correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-12 text-lg"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;
+
+exports[`Avatar > renders with size md correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-10 text-base"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;
+
+exports[`Avatar > renders with size sm correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-8 text-sm"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;
+
+exports[`Avatar > renders with size xl correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-14 text-xl"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;
+
+exports[`Avatar > renders with size xs correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-6 text-xs"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;
+
+exports[`Avatar > renders with src correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-8 text-sm"><!----><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;

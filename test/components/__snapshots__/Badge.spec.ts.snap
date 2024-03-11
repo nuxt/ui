@@ -16,6 +16,14 @@ exports[`Badge > renders with label correctly 1`] = `"<span class="rounded-md fo
 
 exports[`Badge > renders with size correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-sm px-2.5 py-1.5 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
 
+exports[`Badge > renders with size lg correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-sm px-2.5 py-1.5 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
+
+exports[`Badge > renders with size md correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-sm px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
+
+exports[`Badge > renders with size sm correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
+
+exports[`Badge > renders with size xs correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-1.5 py-0.5 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
+
 exports[`Badge > renders with variant link correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-2 py-1 bg-primary-50 dark:bg-primary-400/10 text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">Badge</span>"`;
 
 exports[`Badge > renders with variant outline correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-2 py-1 text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500 dark:ring-primary-400">Badge</span>"`;

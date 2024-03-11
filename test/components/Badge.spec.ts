@@ -6,7 +6,10 @@ describe('Badge', () => {
   it.each([
     ['with label', { props: { label: 'Badge' } }],
     ['with class', { props: { class: 'rounded-full font-bold' } }],
-    ['with size', { props: { label: 'Badge', size: 'lg' as const } }],
+    ['with size xs', { props: { label: 'Badge', size: 'xs' as const } }],
+    ['with size sm', { props: { label: 'Badge', size: 'sm' as const } }],
+    ['with size md', { props: { label: 'Badge', size: 'md' as const } }],
+    ['with size lg', { props: { label: 'Badge', size: 'lg' as const } }],
     ['with color green', { props: { label: 'Badge', color: 'green' as const } }],
     ['with color white', { props: { label: 'Badge', color: 'white' as const } }],
     ['with color gray', { props: { label: 'Badge', color: 'gray' as const } }],

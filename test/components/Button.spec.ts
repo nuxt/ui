@@ -6,7 +6,12 @@ describe('Button', () => {
   it.each([
     ['with label', { props: { label: 'Button' } }],
     ['with class', { props: { class: 'rounded-full font-bold' } }],
-    ['with size', { props: { label: 'Button', size: 'lg' as const } }],
+    ['with size 2xs', { props: { label: 'Button', size: '2xs' as const } }],
+    ['with size xs', { props: { label: 'Button', size: 'xs' as const } }],
+    ['with size sm', { props: { label: 'Button', size: 'sm' as const } }],
+    ['with size md', { props: { label: 'Button', size: 'md' as const } }],
+    ['with size lg', { props: { label: 'Button', size: 'lg' as const } }],
+    ['with size xl', { props: { label: 'Button', size: 'xl' as const } }],
     ['with color', { props: { label: 'Button', color: 'red' as const } }],
     ['with variant outline', { props: { label: 'Button', variant: 'outline' as const } }],
     ['with variant soft', { props: { label: 'Button', variant: 'soft' as const } }],
