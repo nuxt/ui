@@ -1,7 +1,9 @@
 <template>
   <div class="flex flex-col gap-2">
     <div class="flex items-center gap-2">
-      <UBadge>Badge</UBadge>
+      <UBadge class="font-bold">
+        Badge
+      </UBadge>
     </div>
     <div class="flex items-center gap-2">
       <UBadge label="Badge" />
