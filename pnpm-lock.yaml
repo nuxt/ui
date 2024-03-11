@@ -30,8 +30,8 @@ dependencies:
     specifier: ^1.1.3
     version: 1.1.3
   radix-vue:
-    specifier: ^1.5.0
-    version: 1.5.1(vue@3.4.21)
+    specifier: ^1.5.2
+    version: 1.5.2(vue@3.4.21)
   tailwind-variants:
     specifier: ^0.2.0
     version: 0.2.0(tailwindcss@4.0.0-alpha.7)
@@ -1399,7 +1399,7 @@ packages:
       externality: 1.0.2
       fs-extra: 11.2.0
       get-port-please: 3.1.2
-      h3: /h3-nightly@1.11.2-1709170351.107ec8e
+      h3: /h3-nightly@1.11.2-1710122014.107ec8e
       knitwork: 1.0.0
       magic-string: 0.30.8
       mlly: 1.6.1
@@ -1532,6 +1532,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     bundledDependencies:
       - napi-wasm
 
@@ -3402,7 +3403,7 @@ packages:
     dev: true
 
   /ee-first@1.1.1:
-    resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
+    resolution: {integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=}
 
   /electron-to-chromium@1.4.699:
     resolution: {integrity: sha512-I7q3BbQi6e4tJJN5CRcyvxhK0iJb34TV8eJQcgh+fR2fQ8miMgZcEInckCo1U9exDHbfz7DLDnFn8oqH/VcRKw==}
@@ -3973,8 +3974,8 @@ packages:
     dependencies:
       duplexer: 0.1.2
 
-  /h3-nightly@1.11.2-1709170351.107ec8e:
-    resolution: {integrity: sha512-pHyGRmR9rfo4X0MR1dPVANBnFtPnOPjR9cnN0ZEy+a1OhUyt8Tw9RPrqLj5hZHWmofmEmfgrZjyhllLU24ocmw==}
+  /h3-nightly@1.11.2-1710122014.107ec8e:
+    resolution: {integrity: sha512-ND29WjdwBc6zw8yO1jz9IoBzAyBqNCvnLtFqcCYL7ETnEWk6bsbUvVjkyjKr1k1TvJIN+0e6G017ofLNfP71eQ==}
     dependencies:
       cookie-es: 1.0.0
       crossws: 0.2.4
@@ -4871,6 +4872,9 @@ packages:
     hasBin: true
     dev: false
 
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
+
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
@@ -4919,7 +4923,7 @@ packages:
       fs-extra: 11.2.0
       globby: 14.0.1
       gzip-size: 7.0.0
-      h3: /h3-nightly@1.11.2-1709170351.107ec8e
+      h3: /h3-nightly@1.11.2-1710122014.107ec8e
       hookable: 5.5.3
       httpxy: 0.1.5
       is-primitive: 3.0.1
@@ -5197,7 +5201,7 @@ packages:
       estree-walker: 3.0.3
       fs-extra: 11.2.0
       globby: 14.0.1
-      h3: /h3-nightly@1.11.2-1709170351.107ec8e
+      h3: /h3-nightly@1.11.2-1710122014.107ec8e
       hookable: 5.5.3
       jiti: 1.21.0
       klona: 2.0.6
@@ -5843,8 +5847,8 @@ packages:
   /queue-tick@1.0.1:
     resolution: {integrity: sha512-kJt5qhMxoszgU/62PLP1CJytzd2NKetjSRnyuj31fDd3Rlcz3fzlFdFLD1SItunPwyqEOkca6GbV612BWfaBag==}
 
-  /radix-vue@1.5.1(vue@3.4.21):
-    resolution: {integrity: sha512-9zsWk9iTA29pjk7wl4e9PqaWpOQCuf4i3q0ISohDQl/TAr44CBt8d48FKKssthvrNIvln17XpnG5XWt8v+RMBw==}
+  /radix-vue@1.5.2(vue@3.4.21):
+    resolution: {integrity: sha512-XyXB6mYm7dthW56LDHG4ttR3x+XtspTi48nSq4vHoHldgGZzAEa5VXlqUCr2J21fNKrt3NIYhIIRLB6kKwWwrA==}
     dependencies:
       '@floating-ui/dom': 1.6.3
       '@floating-ui/vue': 1.0.6(vue@3.4.21)
