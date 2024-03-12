@@ -1,5 +1,5 @@
 <template>
   <UTooltip text="Tooltip" :shortcuts="['⌘', 'K']" arrow>
-    <UButton label="Hover me" color="white" />
+    <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" />
   </UTooltip>
 </template>
