@@ -1,6 +1,7 @@
 export { default as avatar } from './avatar'
 export { default as badge } from './badge'
 export { default as button } from './button'
+export { default as card } from './card'
 export { default as collapsible } from './collapsible'
 export { default as container } from './container'
 export { default as icons } from './icons'

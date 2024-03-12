@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card > renders basic case correctly 1`] = `
+"<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-lg shadow">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with default slot correctly 1`] = `
+"<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-lg shadow">
+  <!--v-if-->
+  <div class="px-4 py-5 sm:p-6">Default slot</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with footer slot correctly 1`] = `
+"<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-lg shadow">
+  <!--v-if-->
+  <!--v-if-->
+  <div class="p-4 sm:px-6">Footer slot</div>
+</div>"
+`;
+
+exports[`Card > renders with header slot correctly 1`] = `
+"<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-lg shadow">
+  <div class="p-4 sm:px-6">Header slot</div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
