@@ -56,11 +56,6 @@ export default (config: { colors: string[] }) => ({
         label: 'truncate'
       }
     },
-    loading: {
-      true: {
-        leadingIcon: 'animate-spin'
-      }
-    },
     block: {
       true: {
         base: 'w-full',
@@ -74,6 +69,9 @@ export default (config: { colors: string[] }) => ({
       true: ''
     },
     trailing: {
+      true: ''
+    },
+    loading: {
       true: ''
     }
   },
@@ -151,7 +149,14 @@ export default (config: { colors: string[] }) => ({
     class: 'p-2.5'
   }, {
     loading: true,
+    leading: true,
+    class: {
+      leadingIcon: 'animate-spin'
+    }
+  }, {
+    loading: true,
     leading: false,
+    trailing: true,
     class: {
       trailingIcon: 'animate-spin'
     }
