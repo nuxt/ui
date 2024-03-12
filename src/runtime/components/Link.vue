@@ -21,9 +21,9 @@ import type { RouteLocation } from '#vue-router'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<LinkProps>(), { as: 'button', type: 'button' })
+const props = withDefaults(defineProps<LinkProps>(), { as: 'button', type: 'button', active: undefined })
 
-const forward = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'inactiveClass'))
+const forward = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass'))
 
 function resolveLinkClass (route: RouteLocation, currentRoute: RouteLocation, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
   if (props.exactQuery && !isEqual(route.query, currentRoute.query)) {
