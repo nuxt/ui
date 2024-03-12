@@ -15,9 +15,9 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
   shortcuts?: string[] | KbdProps[]
   /**
    * The mode of the popover.
-   * @default 'click'
+   * @defaultValue "click"
    */
-  mode?: 'hover' | 'click'
+  mode?: 'click' | 'hover'
   content?: Omit<PopoverContentProps, 'as' | 'asChild' | 'forceMount'>
   arrow?: boolean | Omit<PopoverArrowProps, 'as' | 'asChild'>
   portal?: boolean
