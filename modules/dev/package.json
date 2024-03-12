@@ -1,0 +1,11 @@
+{
+  "name": "nuxt-ui-dev-module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "@nuxt/kit": "latest",
+    "chokidar": "^3.6.0",
+    "perfect-debounce": "^1.0.0"
+  }
+}

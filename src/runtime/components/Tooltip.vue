@@ -4,6 +4,7 @@ import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipAr
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
+import type { KbdProps } from '#ui/components/Kbd.vue'
 
 const appConfig = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof theme> } }
 
@@ -11,6 +12,7 @@ const tooltip = tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })
 
 export interface TooltipProps extends TooltipRootProps {
   text?: string
+  shortcuts?: string[] | KbdProps[]
   content?: Omit<TooltipContentProps, 'as' | 'asChild'>
   arrow?: boolean | Omit<TooltipArrowProps, 'as' | 'asChild'>
   portal?: boolean
@@ -22,7 +24,7 @@ export interface TooltipEmits extends TooltipRootEmits {}
 
 export interface TooltipSlots {
   default(): any
-  text(): any
+  content(): any
 }
 </script>
 
@@ -31,6 +33,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
+import UKbd from './Kbd.vue'
 
 const props = defineProps<TooltipProps>()
 const emits = defineEmits<TooltipEmits>()
@@ -51,8 +54,12 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
 
     <TooltipPortal :disabled="!portal">
       <TooltipContent v-bind="contentProps" :class="ui.content({ class: props.class })">
-        <slot name="text">
-          {{ text }}
+        <slot name="content">
+          <span :class="ui.text()">{{ text }}</span>
+
+          <span v-if="shortcuts?.length" :class="ui.shortcuts()">
+            <UKbd v-for="(shortcut, index) in shortcuts" :key="index" v-bind="typeof shortcut === 'string' ? { value: shortcut, size: 'xs' } : { size: 'xs', ...shortcut }" />
+          </span>
         </slot>
 
         <TooltipArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow()" />

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Badge > renders with class correctly 1`] = `"<span class="inline-flex items-center text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900 rounded-full font-bold"></span>"`;
+exports[`Badge > renders with class correctly 1`] = `"<span class="inline-flex items-center text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900 rounded-full font-bold">Badge</span>"`;
 
 exports[`Badge > renders with color black correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-2 py-1 text-white dark:text-gray-900 bg-gray-900 dark:bg-white">Badge</span>"`;
 

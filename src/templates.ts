@@ -34,21 +34,23 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
   nuxt.options.css.push(template.dst)
 
   for (const component in theme) {
-    const template = (theme as any)[component]
-    const result = typeof template === 'function' ? template({ colors: options.colors }) : template
-
-    const variants = Object.keys(result.variants || {})
-
-    let json = JSON.stringify(result, null, 2)
-
-    for (const variant of variants) {
-      json = json.replaceAll(new RegExp(`("${variant}": "[0-9a-z]+")`, 'g'), '$1 as const')
-    }
-
     addTemplate({
       filename: `ui/${component}.ts`,
       write: true,
-      getContents: () => `export default ${json}`
+      getContents: async () => {
+        const template = (theme as any)[component]
+        const result = typeof template === 'function' ? template({ colors: options.colors }) : template
+
+        const variants = Object.keys(result.variants || {})
+
+        let json = JSON.stringify(result, null, 2)
+
+        for (const variant of variants) {
+          json = json.replaceAll(new RegExp(`("${variant}": "[0-9a-z]+")`, 'g'), '$1 as const')
+        }
+
+        return `export default ${json}`
+      }
     })
   }
 

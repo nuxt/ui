@@ -10,7 +10,6 @@ const appConfig = _appConfig as AppConfig & { ui: { collapsible: Partial<typeof 
 const collapsible = tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })
 
 export interface CollapsibleProps extends Omit<CollapsibleRootProps, 'asChild'> {
-  content?: string
   class?: any
   ui?: Partial<typeof collapsible.slots>
 }
@@ -44,9 +43,7 @@ const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
     </CollapsibleTrigger>
 
     <CollapsibleContent :class="ui.content()">
-      <slot name="content">
-        {{ content }}
-      </slot>
+      <slot name="content" />
     </CollapsibleContent>
   </CollapsibleRoot>
 </template>

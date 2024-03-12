@@ -21,10 +21,7 @@ import type { RouteLocation } from '#vue-router'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<LinkProps>(), {
-  as: 'button',
-  type: 'button'
-})
+const props = withDefaults(defineProps<LinkProps>(), { as: 'button', type: 'button' })
 
 const forward = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'inactiveClass'))
 

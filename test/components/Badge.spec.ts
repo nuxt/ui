@@ -5,7 +5,7 @@ import ComponentRender from '../component-render'
 describe('Badge', () => {
   it.each([
     ['with label', { props: { label: 'Badge' } }],
-    ['with class', { props: { class: 'rounded-full font-bold' } }],
+    ['with class', { props: { label: 'Badge', class: 'rounded-full font-bold' } }],
     ['with size xs', { props: { label: 'Badge', size: 'xs' as const } }],
     ['with size sm', { props: { label: 'Badge', size: 'sm' as const } }],
     ['with size md', { props: { label: 'Badge', size: 'md' as const } }],

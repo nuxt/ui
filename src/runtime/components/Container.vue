@@ -15,9 +15,7 @@ export interface ContainerProps {
 </script>
 
 <script setup lang="ts">
-const props = withDefaults(defineProps<ContainerProps>(), {
-  as: 'div'
-})
+const props = withDefaults(defineProps<ContainerProps>(), { as: 'div' })
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 export default {
   slots: {
-    root: 'inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800',
+    root: 'inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-50 dark:bg-gray-800',
     image: 'h-full w-full rounded-[inherit] object-cover',
     fallback: 'font-medium leading-none text-gray-500 dark:text-gray-400 truncate',
     icon: 'text-gray-500 dark:text-gray-400 shrink-0'

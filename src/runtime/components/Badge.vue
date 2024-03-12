@@ -3,7 +3,6 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/badge'
-import type { LinkProps } from '#ui/components/Link.vue'
 
 const appConfig = _appConfig as AppConfig & { ui: { badge: Partial<typeof theme> } }
 
@@ -11,7 +10,7 @@ const badge = tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })
 
 type BadgeVariants = VariantProps<typeof badge>
 
-export interface BadgeProps extends LinkProps {
+export interface BadgeProps {
   as?: string
   label?: string
   color?: BadgeVariants['color']
@@ -26,9 +25,7 @@ export interface BadgeSlots {
 </script>
 
 <script setup lang="ts">
-const props = withDefaults(defineProps<BadgeProps>(), {
-  as: 'span'
-})
+const props = withDefaults(defineProps<BadgeProps>(), { as: 'span' })
 defineSlots<BadgeSlots>()
 </script>
 
