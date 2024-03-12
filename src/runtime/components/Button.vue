@@ -91,7 +91,7 @@ const trailingIconClass = computed(() => ui.value.trailingIcon())
 <template>
   <ULink
     :type="type"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     :class="ui.base({ class: props.class })"
     v-bind="linkProps"
   >
