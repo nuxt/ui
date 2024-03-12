@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { PopoverRootProps, PopoverRootEmits, PopoverContentProps, PopoverArrowProps } from 'radix-vue'
+import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverContentProps, PopoverArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/popover'
@@ -10,10 +10,15 @@ const appConfig = _appConfig as AppConfig & { ui: { popover: Partial<typeof them
 
 const popover = tv({ extend: tv(theme), ...(appConfig.ui?.popover || {}) })
 
-export interface PopoverProps extends PopoverRootProps {
+export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'>{
   text?: string
   shortcuts?: string[] | KbdProps[]
-  content?: Omit<PopoverContentProps, 'as' | 'asChild'>
+  /**
+   * The mode of the popover.
+   * @default 'click'
+   */
+  mode?: 'hover' | 'click'
+  content?: Omit<PopoverContentProps, 'as' | 'asChild' | 'forceMount'>
   arrow?: boolean | Omit<PopoverArrowProps, 'as' | 'asChild'>
   portal?: boolean
   class?: any
@@ -31,34 +36,37 @@ export interface PopoverSlots {
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
-import { PopoverRoot, PopoverTrigger, PopoverPortal, PopoverContent, PopoverArrow, useForwardPropsEmits } from 'radix-vue'
+import { useForwardPropsEmits } from 'radix-vue'
+import { Popover, HoverCard } from 'radix-vue/namespaced'
 import { reactivePick } from '@vueuse/core'
 
-const props = defineProps<PopoverProps>()
+const props = withDefaults(defineProps<PopoverProps>(), { mode: 'click', openDelay: 0, closeDelay: 0 })
 const emits = defineEmits<PopoverEmits>()
 defineSlots<PopoverSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal', 'openDelay', 'closeDelay'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as PopoverContentProps)
 const arrowProps = toRef(() => props.arrow as PopoverArrowProps)
 
 const ui = computed(() => tv({ extend: popover, slots: props.ui })())
+
+const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 </script>
 
 <template>
-  <PopoverRoot v-bind="rootProps">
-    <PopoverTrigger as-child>
+  <Component.Root v-bind="rootProps">
+    <Component.Trigger as-child>
       <slot />
-    </PopoverTrigger>
+    </Component.Trigger>
 
-    <PopoverPortal :disabled="!portal">
-      <PopoverContent v-bind="contentProps" :class="ui.content({ class: props.class })">
+    <Component.Portal :disabled="!portal">
+      <Component.Content v-bind="contentProps" :class="ui.content({ class: props.class })">
         <slot name="content" />
 
-        <PopoverArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow()" />
-      </PopoverContent>
-    </PopoverPortal>
-  </PopoverRoot>
+        <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow()" />
+      </Component.Content>
+    </Component.Portal>
+  </Component.Root>
 </template>
 
 <style>

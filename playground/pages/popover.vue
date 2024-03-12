@@ -1,6 +1,6 @@
 <template>
-  <UPopover v-model:open="open" arrow>
-    <UButton label="Click me" color="white" />
+  <UPopover v-model:open="open" arrow mode="hover">
+    <UButton label="Hover me" color="white" />
 
     <template #content>
       <div class="flex gap-2 p-4">
