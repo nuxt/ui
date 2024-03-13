@@ -44,7 +44,8 @@ const props = withDefaults(defineProps<PopoverProps>(), { mode: 'click', openDel
 const emits = defineEmits<PopoverEmits>()
 defineSlots<PopoverSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal', 'openDelay', 'closeDelay'), emits)
+const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay') : reactivePick(props, 'defaultOpen', 'open', 'modal')
+const rootProps = useForwardPropsEmits(pick, emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as PopoverContentProps)
 const arrowProps = toRef(() => props.arrow as PopoverArrowProps)
 
