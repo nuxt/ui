@@ -8,6 +8,22 @@ exports[`Card > renders basic case correctly 1`] = `
 </div>"
 `;
 
+exports[`Card > renders with as correctly 1`] = `
+"<section class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-lg shadow">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</section>"
+`;
+
+exports[`Card > renders with class correctly 1`] = `
+"<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 shadow rounded-xl">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Card > renders with default slot correctly 1`] = `
 "<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-lg shadow">
   <!--v-if-->

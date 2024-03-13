@@ -5,6 +5,7 @@ import ComponentRender from '../component-render'
 describe('Kbd', () => {
   it.each([
     ['with value', { props: { value: 'K' } }],
+    ['with as', { props: { value: 'K', as: 'span' } }],
     ['with class', { props: { value: 'K', class: 'font-bold' } }],
     ['with size xs', { props: { value: 'K', size: 'xs' as const } }],
     ['with size sm', { props: { value: 'K', size: 'sm' as const } }],
