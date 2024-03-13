@@ -56,7 +56,7 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
         let json = JSON.stringify(result, null, 2)
 
         for (const variant of variants) {
-          json = json.replaceAll(new RegExp(`("${variant}": "[0-9a-z]+")`, 'g'), '$1 as const')
+          json = json.replaceAll(new RegExp(`("${variant}": "[0-9a-z-]+")`, 'g'), '$1 as const')
         }
 
         return `export default ${json}`
