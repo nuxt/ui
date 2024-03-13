@@ -1,8 +1,8 @@
 <script lang="ts">
+import type { PrimitiveProps } from 'radix-vue'
 import type { NuxtLinkProps } from '#app'
 
-export interface LinkProps extends NuxtLinkProps {
-  as?: string
+export interface LinkProps extends NuxtLinkProps, Omit<PrimitiveProps, 'asChild'> {
   type?: string
   disabled?: boolean
   active?: boolean
@@ -15,7 +15,7 @@ export interface LinkProps extends NuxtLinkProps {
 
 <script setup lang="ts">
 import { isEqual } from 'ohash'
-import { useForwardProps } from 'radix-vue'
+import { Primitive, useForwardProps } from 'radix-vue'
 import { reactiveOmit } from '@vueuse/core'
 import type { RouteLocation } from '#vue-router'
 
@@ -45,18 +45,17 @@ function resolveLinkClass (route: RouteLocation, currentRoute: RouteLocation, { 
 }
 </script>
 
-<!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <component
-    :is="as"
+  <Primitive
     v-if="!to"
+    :as="as"
     :type="type"
     :disabled="disabled"
     v-bind="$attrs"
     :class="active ? activeClass : inactiveClass"
   >
     <slot v-bind="{ isActive: active }" />
-  </component>
+  </Primitive>
   <NuxtLink v-else v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }" v-bind="forward" custom>
     <a
       v-bind="$attrs"

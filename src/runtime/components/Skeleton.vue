@@ -1,5 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
+import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/skeleton'
@@ -8,18 +9,19 @@ const appConfig = _appConfig as AppConfig & { ui: { skeleton: Partial<typeof the
 
 const skeleton = tv({ extend: tv(theme), ...(appConfig.ui?.skeleton || {}) })
 
-export interface SkeletonProps {
-  as?: string
+export interface SkeletonProps extends Omit<PrimitiveProps, 'asChild'> {
   class?: any
 }
 </script>
 
 <script setup lang="ts">
+import { Primitive } from 'radix-vue'
+
 const props = withDefaults(defineProps<SkeletonProps>(), { as: 'div' })
 </script>
 
 <template>
-  <component :is="as" :class="skeleton({ class: props.class })">
+  <Primitive :as="as" :class="skeleton({ class: props.class })">
     <slot />
-  </component>
+  </Primitive>
 </template>
