@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 const props = withDefaults(defineProps<{count: number}>(), {
   count: 0
 })
