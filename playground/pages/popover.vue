@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const open = ref(false)
 const loading = ref(false)
 
