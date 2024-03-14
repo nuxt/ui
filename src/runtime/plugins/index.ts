@@ -24,7 +24,8 @@ ${shades.map(shade => `--color-gray-${shade}: var(--color-${appConfig.ui.gray}-$
     style: [{
       innerHTML: () => root.value,
       tagPriority: -2,
-      id: 'nuxt-ui-colors'
+      id: 'nuxt-ui-colors',
+      type: 'text/css'
     }]
   }
 
