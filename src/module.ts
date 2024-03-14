@@ -57,6 +57,10 @@ export interface ModuleOptions {
    * Disables the global css styles added by the module.
    */
   disableGlobalStyles?: boolean
+  /**
+   * Disables the global css styles overrided by the module.
+   */
+  overrideGlobalStyles?: boolean
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -72,7 +76,8 @@ export default defineNuxtModule<ModuleOptions>({
     prefix: 'U',
     icons: ['heroicons'],
     safelistColors: ['primary'],
-    disableGlobalStyles: false
+    disableGlobalStyles: false,
+    overrideGlobalStyles: true
   },
   async setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
@@ -100,7 +105,7 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       // @ts-ignore
-      globalColors.primary = tailwindConfig.theme.extend.colors.primary = {
+      globalColors.primary = {
         50: 'rgb(var(--color-primary-50) / <alpha-value>)',
         100: 'rgb(var(--color-primary-100) / <alpha-value>)',
         200: 'rgb(var(--color-primary-200) / <alpha-value>)',
@@ -117,11 +122,11 @@ export default defineNuxtModule<ModuleOptions>({
 
       if (globalColors.gray) {
         // @ts-ignore
-        globalColors.cool = tailwindConfig.theme.extend.colors.cool = defaultColors.gray
+        globalColors.cool = defaultColors.gray
       }
 
       // @ts-ignore
-      globalColors.gray = tailwindConfig.theme.extend.colors.gray = {
+      globalColors.gray = {
         50: 'rgb(var(--color-gray-50) / <alpha-value>)',
         100: 'rgb(var(--color-gray-100) / <alpha-value>)',
         200: 'rgb(var(--color-gray-200) / <alpha-value>)',
@@ -133,6 +138,12 @@ export default defineNuxtModule<ModuleOptions>({
         800: 'rgb(var(--color-gray-800) / <alpha-value>)',
         900: 'rgb(var(--color-gray-900) / <alpha-value>)',
         950: 'rgb(var(--color-gray-950) / <alpha-value>)'
+      }
+
+      if(options.overrideGlobalStyles) {
+        tailwindConfig.theme.extend.colors.primary = globalColors.primary
+        tailwindConfig.theme.extend.colors.cool = globalColors.cool
+        tailwindConfig.theme.extend.colors.gray = globalColors.gray
       }
 
       const colors = excludeColors(globalColors)
@@ -192,9 +203,11 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Plugins
 
-    addPlugin({
-      src: resolve(runtimeDir, 'plugins', 'colors')
-    })
+    if(options.overrideGlobalStyles) {
+      addPlugin({
+        src: resolve(runtimeDir, 'plugins', 'colors')
+      })
+    }
 
     addPlugin({
       src: resolve(runtimeDir, 'plugins', 'modals')
