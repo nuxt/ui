@@ -5,6 +5,7 @@
         v-for="(item, index) in items"
         :key="index"
         :class="ui.item"
+        :role="indicators ? 'tabpanel' : null"
       >
         <slot :item="item" :index="index" />
       </div>
@@ -34,11 +35,13 @@
       </slot>
     </div>
 
-    <div v-if="indicators" :class="ui.indicators.wrapper">
+    <div v-if="indicators" role="tablist" :class="ui.indicators.wrapper">
       <template v-for="page in pages" :key="page">
         <slot name="indicator" :on-click="onClick" :active="page === currentPage" :page="page">
           <button
             type="button"
+            role="tab"
+            :aria-selected="page === currentPage"
             :class="[
               ui.indicators.base,
               page === currentPage ? ui.indicators.active : ui.indicators.inactive
