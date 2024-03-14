@@ -34,8 +34,6 @@ export default defineNuxtModule<ModuleOptions>({
       icons
     })
 
-    addTemplates(options, nuxt)
-
     addVitePlugin(tailwindcss)
 
     await installModule('nuxt-icon')
@@ -52,5 +50,7 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     addImportsDir(resolve('./runtime/composables'))
+
+    addTemplates(options, nuxt)
   }
 })
