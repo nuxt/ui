@@ -1,0 +1,71 @@
+<script lang="ts">
+import { tv } from 'tailwind-variants'
+import type { TabsRootProps, TabsRootEmits } from 'radix-vue'
+import type { AppConfig } from '@nuxt/schema'
+import _appConfig from '#build/app.config'
+import theme from '#build/ui/tabs'
+
+const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
+
+const tabs = tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })
+
+export interface TabsItem {
+  label: string
+  value?: string
+  slot?: string
+  disabled?: boolean
+  content?: string
+}
+
+export interface TabsProps extends Omit<TabsRootProps, 'asChild'> {
+  items: TabsItem[]
+  class?: any
+  ui?: Partial<typeof tabs.slots>
+}
+
+export interface TabsEmits extends TabsRootEmits {}
+
+export interface TabsSlots {
+  default(): any
+}
+</script>
+
+<script setup lang="ts" generic="T extends TabsItem">
+import { computed } from 'vue'
+import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'radix-vue'
+
+const props = withDefaults(defineProps<TabsProps & { items: T[] }>(), { defaultValue: '0' })
+const emits = defineEmits<TabsEmits>()
+
+type SlotFunction<T> = (props: { item: T, index: number }) => any
+
+defineSlots<TabsSlots & {
+  item(): SlotFunction<T>
+} & {
+  [key in T['slot'] as string]?: SlotFunction<T>
+}>()
+
+const rootProps = useForwardPropsEmits(props, emits)
+
+const ui = computed(() => tv({ extend: tabs, slots: props.ui })())
+</script>
+
+<template>
+  <TabsRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
+    <TabsList :class="ui.list()">
+      <TabsIndicator :class="ui.indicator()" />
+
+      <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger()">
+        <slot :item="item" :index="index">
+          <span class="truncate">{{ item.label }}</span>
+        </slot>
+      </TabsTrigger>
+    </TabsList>
+
+    <TabsContent v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :class="ui.content()">
+      <slot :name="item.slot || 'item'" :item="item" :index="index">
+        {{ item.content }}
+      </slot>
+    </TabsContent>
+  </TabsRoot>
+</template>
