@@ -2,7 +2,7 @@
   <UCollapsible class="space-y-2 w-48">
     <UButton class="group" color="gray" label="Open" block>
       <template #trailing="trailingProps">
-        <UIcon name="i-heroicons-chevron-right-20-solid" :class="trailingProps.class" class="group-data-[state=open]:rotate-90 transition duration-200" />
+        <UIcon name="i-heroicons-chevron-right-20-solid" :class="trailingProps.class" class="group-data-[state=open]:rotate-90 transition-transform duration-200" />
       </template>
     </UButton>
 
