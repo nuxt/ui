@@ -336,7 +336,7 @@ Use the `#leading` slot to set the content of the leading icon.
 ::component-card
 ---
 slots:
-  leading: <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" size="3xs" />
+  leading: <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" size="2xs" />
 baseProps:
   color: 'gray'
 props:
@@ -347,7 +347,7 @@ excludedProps:
 ---
 
 #leading
-  :u-avatar{src="https://avatars.githubusercontent.com/u/739984?v=4" size="3xs"}
+  :u-avatar{src="https://avatars.githubusercontent.com/u/739984?v=4" size="2xs"}
 ::
 
 ### `trailing`
@@ -357,7 +357,7 @@ Use the `#trailing` slot to set the content of the trailing icon.
 ::component-card
 ---
 slots:
-  trailing: <UIcon name="i-heroicons-arrow-right-20-solid" />
+  trailing: <UIcon name="i-heroicons-arrow-right-20-solid" class="w-5 h-5" />
 props:
   label: Button
   color: 'gray'
@@ -366,7 +366,7 @@ excludedProps:
 ---
 
 #trailing
-  :u-icon{name="i-heroicons-arrow-right-20-solid"}
+  :u-icon{name="i-heroicons-arrow-right-20-solid" class="w-5 h-5"}
 ::
 
 ## Props

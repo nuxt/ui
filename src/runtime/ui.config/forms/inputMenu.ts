@@ -2,7 +2,7 @@ import { arrow } from '../popper'
 
 export default {
   container: 'z-20 group',
-  trigger: 'inline-flex w-full',
+  trigger: 'flex items-center w-full',
   width: 'w-full',
   height: 'max-h-60',
   base: 'relative focus:outline-none overflow-y-auto scroll-py-1',
