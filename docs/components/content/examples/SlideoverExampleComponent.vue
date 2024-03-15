@@ -1,6 +1,10 @@
 <script lang="ts" setup>
-const props = withDefaults(defineProps<{count: number}>(), {
-  count: 0
+
+const props = defineProps({
+  count: {
+    type: Number,
+    default: 0
+  }
 })
 
 const emits = defineEmits<{
