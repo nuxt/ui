@@ -8,7 +8,7 @@
       :class="ui.trigger"
       role="button"
       @mouseenter="onMouseEnter"
-      @touchstart.prevent="onTouchStart"
+      @touchstart.passive="onTouchStart"
     >
       <slot :open="open" :disabled="disabled">
         <button :disabled="disabled">
