@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-2">
+  <div class="text-center">
     <UPopover v-model:open="open" arrow>
       <UButton label="Click me" color="white" />
 
@@ -11,13 +11,41 @@
       </template>
     </UPopover>
 
-    <UPopover arrow mode="hover">
-      <UButton label="Hover me" color="white" />
+    <div class="mt-24">
+      <UPopover mode="hover" :content="{ side: 'top' }">
+        <UButton label="Hover me top" color="white" />
 
-      <template #content>
-        <div class="w-48 h-16" />
-      </template>
-    </UPopover>
+        <template #content>
+          <div class="w-48 h-16" />
+        </template>
+      </UPopover>
+
+      <div class="flex items-center gap-2 my-2">
+        <UPopover mode="hover" :content="{ side: 'left' }">
+          <UButton label="Hover me left" color="white" />
+
+          <template #content>
+            <div class="w-48 h-16" />
+          </template>
+        </UPopover>
+
+        <UPopover mode="hover" :content="{ side: 'right' }">
+          <UButton label="Hover me right" color="white" />
+
+          <template #content>
+            <div class="w-48 h-16" />
+          </template>
+        </UPopover>
+      </div>
+
+      <UPopover mode="hover">
+        <UButton label="Hover me bottom" color="white" />
+
+        <template #content>
+          <div class="w-48 h-16" />
+        </template>
+      </UPopover>
+    </div>
   </div>
 </template>
 
