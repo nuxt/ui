@@ -35,9 +35,7 @@ const show = defineModel<boolean>('show', { default: true })
 const props = withDefaults(defineProps<ChipProps>(), { as: 'div' })
 defineSlots<ChipSlots>()
 
-// FIXME: Cannot extend multiple times: https://github.com/nextui-org/tailwind-variants/issues/168
-// const ui = computed(() => tv({ extend: chip, slots: props.ui })({
-const ui = computed(() => chip({
+const ui = computed(() => tv({ extend: chip, slots: props.ui })({
   color: props.color,
   size: props.size,
   position: props.position,
