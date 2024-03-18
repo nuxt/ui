@@ -7,7 +7,7 @@
     </UButton>
 
     <template #content>
-      <div class="bg-primary-500 dark:bg-primary-400 rounded-md h-12 w-full" />
+      <Placeholder class="h-24 w-full" />
     </template>
   </UCollapsible>
 </template>
