@@ -11,9 +11,5 @@
         <Placeholder class="h-8" />
       </template>
     </UCard>
-
-    <UCard class="w-96">
-      <Placeholder class="h-32" />
-    </UCard>
   </div>
 </template>
