@@ -26,20 +26,24 @@
       <UButton label="Open without transition" color="white" />
     </UModal>
 
+    <UModal title="Modal without portal" description="This modal has `portal: false` prop." :portal="false">
+      <UButton label="Open without portal" color="gray" />
+    </UModal>
+
     <UModal title="Modal fullscreen" description="This modal has `fullscreen: true` prop." fullscreen>
-      <UButton label="Open fullscreen" color="gray" />
+      <UButton label="Open fullscreen" color="white" />
     </UModal>
 
     <UModal title="Modal prevent close" description="This modal has `prevent-close: true` prop so it won't close when clicking outside." prevent-close>
-      <UButton label="Open unclosable" color="white" />
+      <UButton label="Open unclosable" color="gray" />
     </UModal>
 
     <UModal title="Modal without close button" description="This modal has `close: null` prop." :close="null">
-      <UButton label="Open without close button" color="gray" />
+      <UButton label="Open without close button" color="white" />
     </UModal>
 
     <UModal title="Modal with custom close button" description="The `close` prop inherits from the Button props." :close="{ color: 'primary', variant: 'solid', size: 'xs' }" :ui="{ close: 'top-3.5 rounded-full' }">
-      <UButton label="Open with custom close button" color="white" />
+      <UButton label="Open with custom close button" color="gray" />
     </UModal>
   </div>
 </template>
