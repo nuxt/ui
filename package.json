@@ -43,7 +43,7 @@
     "@nuxt/test-utils": "^3.12.0",
     "@vue/test-utils": "^2.4.5",
     "eslint": "^8.57.0",
-    "happy-dom": "^13.9.0",
+    "happy-dom": "^13.10.1",
     "nuxt": "^3.11.0",
     "nuxt-ui-dev-module": "workspace:*",
     "vitest": "^1.4.0",
