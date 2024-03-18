@@ -28,11 +28,12 @@
     "@nuxt/kit": "^3.11.0",
     "@nuxt/schema": "^3.11.0",
     "@nuxtjs/color-mode": "^3.3.2",
+    "@tailwindcss/postcss": "4.0.0-alpha.9",
     "@tailwindcss/vite": "4.0.0-alpha.9",
     "@vueuse/core": "^10.9.0",
     "defu": "^6.1.4",
-    "ohash": "^1.1.3",
     "nuxt-icon": "^0.6.9",
+    "ohash": "^1.1.3",
     "radix-vue": "^1.5.2",
     "tailwind-variants": "^0.2.1",
     "tailwindcss": "4.0.0-alpha.9"

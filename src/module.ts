@@ -34,7 +34,11 @@ export default defineNuxtModule<ModuleOptions>({
       icons
     })
 
-    addVitePlugin(tailwindcss)
+    nuxt.options.postcss = nuxt.options.postcss || {}
+    nuxt.options.postcss.plugins = nuxt.options.postcss.plugins || {}
+    nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
+
+    // addVitePlugin(tailwindcss)
 
     await installModule('nuxt-icon')
     // await installModule('@nuxtjs/color-mode', { classSuffix: '' })
