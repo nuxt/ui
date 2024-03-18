@@ -23,7 +23,7 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<LinkProps>(), { as: 'button', type: 'button', active: undefined })
 
-const forward = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass'))
+const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass'))
 
 function resolveLinkClass (route: RouteLocation, currentRoute: RouteLocation, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
   if (props.exactQuery && !isEqual(route.query, currentRoute.query)) {
@@ -56,7 +56,7 @@ function resolveLinkClass (route: RouteLocation, currentRoute: RouteLocation, { 
   >
     <slot v-bind="{ isActive: active }" />
   </Primitive>
-  <NuxtLink v-else v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }" v-bind="forward" custom>
+  <NuxtLink v-else v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }" v-bind="nuxtLinkProps" custom>
     <a
       v-bind="$attrs"
       :href="!disabled ? href : undefined"
