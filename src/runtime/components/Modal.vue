@@ -80,7 +80,7 @@ const ui = computed(() => tv({ extend: modal, slots: props.ui })({
 
       <DialogContent :class="ui.content({ class: props.class })" v-bind="contentProps" v-on="contentEvents">
         <slot name="content">
-          <div :class="ui.header({ body: !!$slots.body, footer: !!$slots.footer })">
+          <div :class="ui.header()">
             <slot name="header">
               <DialogTitle v-if="title || $slots.title" :class="ui.title()">
                 <slot name="title">
@@ -95,7 +95,7 @@ const ui = computed(() => tv({ extend: modal, slots: props.ui })({
               </DialogDescription>
 
               <DialogClose as-child>
-                <slot name="close">
+                <slot name="close" :class="ui.close()">
                   <UButton
                     v-if="close !== null"
                     :icon="appConfig.ui.icons.close"
@@ -114,7 +114,7 @@ const ui = computed(() => tv({ extend: modal, slots: props.ui })({
             <slot name="body" />
           </div>
 
-          <div v-if="$slots.footer" :class="ui.footer({ body: !!$slots.body })">
+          <div v-if="$slots.footer" :class="ui.footer()">
             <slot name="footer" />
           </div>
         </slot>

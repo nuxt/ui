@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col gap-2">
-    <UModal title="First" description="My first modal">
+    <UModal title="First modal">
       <UButton color="white" label="Open with nested" />
 
       <template #footer>
-        <UModal title="Second" description="My second modal">
+        <UModal title="Second modal">
           <UButton label="Open second" />
         </UModal>
       </template>
