@@ -25,8 +25,8 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.11.0",
-    "@nuxt/schema": "^3.11.0",
+    "@nuxt/kit": "^3.11.1",
+    "@nuxt/schema": "^3.11.1",
     "@nuxtjs/color-mode": "^3.3.2",
     "@tailwindcss/postcss": "4.0.0-alpha.9",
     "@tailwindcss/vite": "4.0.0-alpha.9",
@@ -45,7 +45,7 @@
     "@vue/test-utils": "^2.4.5",
     "eslint": "^8.57.0",
     "happy-dom": "^13.10.1",
-    "nuxt": "^3.11.0",
+    "nuxt": "^3.11.1",
     "nuxt-ui-dev-module": "workspace:*",
     "vitest": "^1.4.0",
     "vitest-environment-nuxt": "^1.0.0",
