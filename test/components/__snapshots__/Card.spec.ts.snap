@@ -27,7 +27,7 @@ exports[`Card > renders with class correctly 1`] = `
 exports[`Card > renders with default slot correctly 1`] = `
 "<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-lg shadow">
   <!--v-if-->
-  <div class="px-4 py-5 sm:p-6">Default slot</div>
+  <div class="p-4 sm:p-6">Default slot</div>
   <!--v-if-->
 </div>"
 `;
