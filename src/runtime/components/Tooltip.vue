@@ -48,7 +48,7 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
 
 <template>
   <TooltipRoot v-bind="rootProps">
-    <TooltipTrigger as-child>
+    <TooltipTrigger v-if="$slots.default" as-child>
       <slot />
     </TooltipTrigger>
 
