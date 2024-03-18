@@ -49,8 +49,9 @@ import UIcon from './Icon.vue'
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
-const appConfig = useAppConfig()
 const linkProps = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'variant', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'truncate', 'class', 'ui'))
+
+const appConfig = useAppConfig()
 
 const isLeading = computed(() => (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing && !props.trailingIcon) || !!props.leadingIcon)
 const isTrailing = computed(() => (props.icon && props.trailing) || (props.loading && props.trailing) || !!props.trailingIcon)
@@ -87,12 +88,7 @@ const trailingIconClass = computed(() => ui.value.trailingIcon())
 </script>
 
 <template>
-  <ULink
-    :type="type"
-    :disabled="disabled || loading"
-    :class="ui.base({ class: props.class })"
-    v-bind="linkProps"
-  >
+  <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="linkProps">
     <slot name="leading" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="leadingIconClass">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     </slot>
