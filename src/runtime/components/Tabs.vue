@@ -62,7 +62,7 @@ const ui = computed(() => tv({ extend: tabs, slots: props.ui })())
       </TabsTrigger>
     </TabsList>
 
-    <TabsContent v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :class="ui.content()">
+    <TabsContent v-for="(item, index) of items" :key="index" force-mount :value="item.value || String(index)" :class="ui.content()">
       <slot :name="item.slot || 'item'" :item="item" :index="index">
         {{ item.content }}
       </slot>
