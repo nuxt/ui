@@ -16,7 +16,7 @@ export interface SlideoverProps extends DialogRootProps {
   content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
   overlay?: boolean
   transition?: boolean
-  side?: 'left' | 'right'
+  side?: 'left' | 'right' | 'top' | 'bottom'
   preventClose?: boolean
   portal?: boolean
   close?: ButtonProps | null
@@ -171,6 +171,38 @@ const ui = computed(() => tv({ extend: slideover, slots: props.ui })({
   }
   to {
     transform: translateX(-100%);
+  }
+}
+@keyframes slideover-content-top-open {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slideover-content-top-closed {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+@keyframes slideover-content-bottom-open {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slideover-content-bottom-closed {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
   }
 }
 </style>

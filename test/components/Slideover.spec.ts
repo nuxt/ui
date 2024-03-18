@@ -8,6 +8,8 @@ describe('Slideover', () => {
     ['with title', { props: { open: true, portal: false, title: 'Title' } }],
     ['with description', { props: { open: true, portal: false, title: 'Title', description: 'Description' } }],
     ['with left side', { props: { open: true, portal: false, side: 'left' as const, title: 'Title', description: 'Description' } }],
+    ['with top side', { props: { open: true, portal: false, side: 'top' as const, title: 'Title', description: 'Description' } }],
+    ['with bottom side', { props: { open: true, portal: false, side: 'bottom' as const, title: 'Title', description: 'Description' } }],
     ['without overlay', { props: { open: true, portal: false, overlay: false, title: 'Title', description: 'Description' } }],
     ['without transition', { props: { open: true, portal: false, transition: false, title: 'Title', description: 'Description' } }],
     ['with class', { props: { open: true, portal: false, class: 'bg-gray-50 dark:bg-gray-800' } }],
