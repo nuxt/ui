@@ -58,7 +58,7 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
           <span :class="ui.text()">{{ text }}</span>
 
           <span v-if="shortcuts?.length" :class="ui.shortcuts()">
-            <UKbd v-for="(shortcut, index) in shortcuts" :key="index" v-bind="typeof shortcut === 'string' ? { value: shortcut, size: 'xs' } : { size: 'xs', ...shortcut }" />
+            <UKbd v-for="(shortcut, index) in shortcuts" :key="index" size="xs" v-bind="typeof shortcut === 'string' ? { value: shortcut } : shortcut" />
           </span>
         </slot>
 
