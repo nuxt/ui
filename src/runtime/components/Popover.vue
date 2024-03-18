@@ -56,7 +56,7 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 
 <template>
   <Component.Root v-bind="rootProps">
-    <Component.Trigger as-child>
+    <Component.Trigger v-if="$slots.default" as-child>
       <slot />
     </Component.Trigger>
 
