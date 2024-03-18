@@ -5,13 +5,13 @@ useHead({
   }
 })
 
-const components = ['avatar', 'badge', 'button', 'chip', 'collapsible', 'kbd', 'popover', 'skeleton', 'tabs', 'tooltip']
+const components = ['avatar', 'badge', 'button', 'card', 'chip', 'collapsible', 'kbd', 'modal', 'popover', 'skeleton', 'tabs', 'tooltip']
 </script>
 
 <template>
   <UProvider>
     <UContainer class="min-h-screen flex flex-col gap-4 items-center justify-center overflow-y-auto">
-      <div class="flex gap-1.5 py-4">
+      <div class="flex gap-1.5 py-4 overflow-x-auto w-full">
         <ULink v-for="component in components" :key="component" :to="`/${component}`" active-class="text-primary-500 dark:text-primary-400 font-medium" class="capitalize text-sm">
           {{ component }}
         </ULink>
