@@ -55,9 +55,7 @@ const linkProps = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 
 const isLeading = computed(() => (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing && !props.trailingIcon) || !!props.leadingIcon)
 const isTrailing = computed(() => (props.icon && props.trailing) || (props.loading && props.trailing) || !!props.trailingIcon)
 
-// FIXME: Cannot extend multiple times: https://github.com/nextui-org/tailwind-variants/issues/168
-// const ui = computed(() => tv({ extend: button, slots: props.ui })({
-const ui = computed(() => button({
+const ui = computed(() => tv({ extend: button, slots: props.ui })({
   color: props.color,
   variant: props.variant,
   size: props.size,
