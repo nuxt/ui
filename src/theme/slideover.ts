@@ -27,7 +27,7 @@ export default {
     transition: {
       true: {
         overlay: 'data-[state=open]:animate-[slideover-overlay-open_200ms_ease-out] data-[state=closed]:animate-[slideover-overlay-closed_200ms_ease-in]',
-        content: 'data-[state=open]:data-[side=left]:animate-[slideover-content-left-open_200ms_ease-in-out] data-[state=open]:data-[side=right]:animate-[slideover-content-right-open_200ms_ease-in-out] data-[state=closed]:data-[side=left]:animate-[slideover-content-left-closed_200ms_ease-in-out] data-[state=closed]:data-[side=right]:animate-[slideover-content-right-closed_200ms_ease-in-out] data-[state=open]:data-[side=top]:animate-[slideover-content-top-open_200ms_ease-in-out] data-[state=open]:data-[side=bottom]:animate-[slideover-content-bottom-open_200ms_ease-in-out] data-[state=closed]:data-[side=top]:animate-[slideover-content-top-closed_200ms_ease-in-out] data-[state=closed]:data-[side=bottom]:animate-[slideover-content-bottom-closed_200ms_ease-in-out]'
+        content: 'data-[state=open]:data-[side=left]:animate-[slideover-content-left-open_200ms_ease-in-out] data-[state=closed]:data-[side=left]:animate-[slideover-content-left-closed_200ms_ease-in-out] data-[state=open]:data-[side=right]:animate-[slideover-content-right-open_200ms_ease-in-out] data-[state=closed]:data-[side=right]:animate-[slideover-content-right-closed_200ms_ease-in-out] data-[state=open]:data-[side=top]:animate-[slideover-content-top-open_200ms_ease-in-out] data-[state=closed]:data-[side=top]:animate-[slideover-content-top-closed_200ms_ease-in-out] data-[state=open]:data-[side=bottom]:animate-[slideover-content-bottom-open_200ms_ease-in-out] data-[state=closed]:data-[side=bottom]:animate-[slideover-content-bottom-closed_200ms_ease-in-out]'
       }
     }
   }
