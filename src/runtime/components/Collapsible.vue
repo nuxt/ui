@@ -38,7 +38,7 @@ const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
 
 <template>
   <CollapsibleRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
-    <CollapsibleTrigger as-child>
+    <CollapsibleTrigger v-if="$slots.default" as-child>
       <slot />
     </CollapsibleTrigger>
 
