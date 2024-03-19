@@ -1,9 +1,25 @@
-import { splitByCase, upperFirst, camelCase, snakeCase } from 'scule'
+import { splitByCase, upperFirst, camelCase, kebabCase } from 'scule'
+
+const playground = ({ name }) => {
+  const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
+  const kebabName = kebabCase(name)
+
+  return {
+    filename: `playground/pages/${kebabName}.vue`,
+    contents: `
+<template>
+  <div>
+    <U${upperName} />
+  </div>
+</template>
+    `
+  }
+}
 
 const component = ({ name }) => {
-  const upperName = splitByCase(name).map(p => upperFirst(p))
+  const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
   const camelName = camelCase(name)
-  const snakeName = snakeCase(name)
+  const kebabName = kebabCase(name)
 
   return {
     filename: `src/runtime/components/${upperName}.vue`,
@@ -12,7 +28,7 @@ const component = ({ name }) => {
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
-import theme from '#build/ui/${snakeName}'
+import theme from '#build/ui/${kebabName}'
 
 const appConfig = _appConfig as AppConfig & { ui: { ${camelName}: Partial<typeof theme> } }
 
@@ -46,10 +62,10 @@ const ui = computed(() => tv({ extend: ${camelName}, slots: props.ui })())
 }
 
 const theme = ({ name }) => {
-  const snakeName = snakeCase(name)
+  const kebabName = kebabCase(name)
 
   return {
-    filename: `src/theme/${snakeName}.ts`,
+    filename: `src/theme/${kebabName}.ts`,
     contents: `
 export default {
   slots: {
@@ -66,24 +82,8 @@ export default {
   }
 }
 
-const page = ({ name }) => {
-  const upperName = splitByCase(name).map(p => upperFirst(p))
-  const snakeName = snakeCase(name)
-
-  return {
-    filename: `playground/pages/${snakeName}.vue`,
-    contents: `
-<template>
-  <div>
-    <U${upperName} />
-  </div>
-</template>
-    `
-  }
-}
-
 const test = ({ name }) => {
-  const upperName = splitByCase(name).map(p => upperFirst(p))
+  const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
 
   return {
     filename: `test/components/${upperName}.spec.ts`,
@@ -107,8 +107,8 @@ describe('${upperName}', () => {
 }
 
 export default {
+  playground,
   component,
   theme,
-  page,
   test
 }
