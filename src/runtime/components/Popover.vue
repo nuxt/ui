@@ -4,15 +4,12 @@ import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverCon
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/popover'
-import type { KbdProps } from '#ui/components/Kbd.vue'
 
 const appConfig = _appConfig as AppConfig & { ui: { popover: Partial<typeof theme> } }
 
 const popover = tv({ extend: tv(theme), ...(appConfig.ui?.popover || {}) })
 
 export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'>{
-  text?: string
-  shortcuts?: string[] | KbdProps[]
   /**
    * The mode of the popover.
    * @defaultValue "click"
