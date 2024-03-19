@@ -38,7 +38,7 @@
     "@headlessui/vue": "^1.7.19",
     "@iconify-json/heroicons": "^1.1.20",
     "@nuxt/kit": "^3.11.1",
-    "@nuxtjs/color-mode": "^3.3.2",
+    "@nuxtjs/color-mode": "^3.3.3",
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@popperjs/core": "^2.11.8",
     "@tailwindcss/aspect-ratio": "^0.4.2",
