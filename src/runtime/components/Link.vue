@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { PrimitiveProps } from 'radix-vue'
 import type { NuxtLinkProps } from '#app'
+import { pick } from '#ui/utils'
 
 export interface LinkProps extends NuxtLinkProps, Omit<PrimitiveProps, 'asChild'> {
   type?: string
@@ -10,6 +11,10 @@ export interface LinkProps extends NuxtLinkProps, Omit<PrimitiveProps, 'asChild'
   exactQuery?: boolean
   exactHash?: boolean
   inactiveClass?: string
+}
+
+export function getNuxtLinkProps (props: NuxtLinkProps) {
+  return pick(props, ['to', 'href', 'target', 'rel', 'noRel', 'prefetch', 'noPrefetch'])
 }
 </script>
 

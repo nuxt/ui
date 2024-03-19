@@ -19,6 +19,7 @@ const components = [
   'input',
   'kbd',
   'modal',
+  'navigation-menu',
   'popover',
   'skeleton',
   'slideover',
@@ -34,17 +35,7 @@ function upperName (name: string) {
 <template>
   <UProvider>
     <UContainer class="min-h-screen flex flex-col gap-4 items-center justify-center overflow-y-auto">
-      <div class="flex gap-1.5 py-4">
-        <ULink
-          v-for="component in components"
-          :key="component"
-          :to="`/${component}`"
-          active-class="text-primary-500 dark:text-primary-400 font-medium"
-          class="capitalize text-sm"
-        >
-          {{ upperName(component) }}
-        </ULink>
-      </div>
+      <UNavigationMenu :links="components.map(component => ({ label: upperName(component), to: `/${component}` }))" class="border-b border-gray-200 dark:border-gray-800" />
 
       <div class="flex-1 flex flex-col justify-center">
         <NuxtPage />
