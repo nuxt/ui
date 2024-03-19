@@ -54,7 +54,7 @@ function resolveLinkClass (route: RouteLocation, currentRoute: RouteLocation, { 
     v-bind="$attrs"
     :class="active ? activeClass : inactiveClass"
   >
-    <slot v-bind="{ isActive: active }" />
+    <slot v-bind="{ active }" />
   </Primitive>
   <NuxtLink v-else v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }" v-bind="nuxtLinkProps" custom>
     <a
@@ -67,7 +67,7 @@ function resolveLinkClass (route: RouteLocation, currentRoute: RouteLocation, { 
       :class="active !== undefined ? (active ? activeClass : inactiveClass) : resolveLinkClass(route, $route, { isActive, isExactActive })"
       @click="(e: any) => (!isExternal && !disabled) && navigate(e)"
     >
-      <slot v-bind="{ isActive: active !== undefined ? active : (exact ? isExactActive : isActive) }" />
+      <slot v-bind="{ active: active !== undefined ? active : (exact ? isExactActive : isActive) }" />
     </a>
   </NuxtLink>
 </template>
