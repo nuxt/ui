@@ -1,11 +1,3 @@
-<template>
-  <UTabs :items="items" class="w-96">
-    <template #tab1="{ item }">
-      {{ item.label }}
-    </template>
-  </UTabs>
-</template>
-
 <script setup lang="ts">
 const items = [{
   label: 'Tab1',
@@ -19,3 +11,11 @@ const items = [{
   content: 'Finally, this is the content for Tab3'
 }]
 </script>
+
+<template>
+  <UTabs :items="items" class="w-96">
+    <template #tab1="{ item }">
+      {{ item.label }}
+    </template>
+  </UTabs>
+</template>

@@ -1,3 +1,20 @@
+<script setup lang="ts">
+import chip from '#build/ui/chip'
+
+const sizes = Object.keys(chip.variants.size)
+const positions = Object.keys(chip.variants.position)
+
+const items = [{
+  name: 'messages',
+  icon: 'i-heroicons-chat-bubble-oval-left',
+  count: 3
+}, {
+  name: 'notifications',
+  icon: 'i-heroicons-bell',
+  count: 0
+}]
+</script>
+
 <template>
   <div class="flex flex-col gap-4">
     <div class="flex items-center gap-2">
@@ -19,20 +36,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import chip from '#build/ui/chip'
-
-const sizes = Object.keys(chip.variants.size)
-const positions = Object.keys(chip.variants.position)
-
-const items = [{
-  name: 'messages',
-  icon: 'i-heroicons-chat-bubble-oval-left',
-  count: 3
-}, {
-  name: 'notifications',
-  icon: 'i-heroicons-bell',
-  count: 0
-}]
-</script>

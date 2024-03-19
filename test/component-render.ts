@@ -3,7 +3,7 @@ import path from 'path'
 
 export default async function (nameOrHtml: string, options: any, component: any) {
   let html: string
-  const name = path.parse(component.__file).name
+  const name = component.__file ? path.parse(component.__file).name : undefined
   if (options === undefined) {
     const app = {
       template: nameOrHtml,

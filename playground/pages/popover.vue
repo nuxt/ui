@@ -1,3 +1,17 @@
+<script setup lang="ts">
+const open = ref(false)
+const loading = ref(false)
+
+function send () {
+  loading.value = true
+
+  setTimeout(() => {
+    loading.value = false
+    open.value = false
+  }, 1000)
+}
+</script>
+
 <template>
   <div class="text-center">
     <UPopover v-model:open="open" arrow>
@@ -48,17 +62,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-const open = ref(false)
-const loading = ref(false)
-
-function send () {
-  loading.value = true
-
-  setTimeout(() => {
-    loading.value = false
-    open.value = false
-  }, 1000)
-}
-</script>

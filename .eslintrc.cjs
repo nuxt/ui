@@ -18,6 +18,7 @@ module.exports = {
 
     // Typescript
     '@typescript-eslint/type-annotation-spacing': 'error',
+    '@typescript-eslint/semi': ['error', 'never'],
 
     // Vuejs
     'vue/multi-word-component-names': 0,

@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const open = ref(false)
+</script>
+
 <template>
   <div class="flex flex-col gap-2">
     <UModal title="First modal">
@@ -47,7 +51,3 @@
     </UModal>
   </div>
 </template>
-
-<script setup lang="ts">
-const open = ref(false)
-</script>

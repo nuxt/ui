@@ -17,16 +17,21 @@ export interface TabsItem {
   content?: string
 }
 
-export interface TabsProps extends Omit<TabsRootProps, 'asChild'> {
-  items: TabsItem[]
+export interface TabsProps<T extends TabsItem> extends Omit<TabsRootProps, 'asChild'> {
+  items: T[]
   class?: any
   ui?: Partial<typeof tabs.slots>
 }
 
 export interface TabsEmits extends TabsRootEmits {}
 
-export interface TabsSlots {
+type SlotFunction<T> = (props: { item: T, index: number }) => any
+
+export type TabsSlots<T extends TabsItem> = {
   default(): any
+  item(): SlotFunction<T>
+} & {
+  [key in T['slot'] as string]?: SlotFunction<T>
 }
 </script>
 
@@ -34,16 +39,9 @@ export interface TabsSlots {
 import { computed } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'radix-vue'
 
-const props = withDefaults(defineProps<TabsProps & { items: T[] }>(), { defaultValue: '0' })
+const props = withDefaults(defineProps<TabsProps<T>>(), { defaultValue: '0' })
 const emits = defineEmits<TabsEmits>()
-
-type SlotFunction<T> = (props: { item: T, index: number }) => any
-
-defineSlots<TabsSlots & {
-  item(): SlotFunction<T>
-} & {
-  [key in T['slot'] as string]?: SlotFunction<T>
-}>()
+defineSlots<TabsSlots<T>>()
 
 const rootProps = useForwardPropsEmits(props, emits)
 

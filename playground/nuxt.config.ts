@@ -2,6 +2,6 @@
 export default defineNuxtConfig({
   modules: ['../src/module'],
   ui: {
-    colors: ['primary']
+    colors: ['primary', 'red']
   }
 })

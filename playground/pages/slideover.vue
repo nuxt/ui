@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const open = ref(false)
+</script>
+
 <template>
   <div class="flex flex-col gap-2">
     <USlideover title="First slideover">
@@ -103,7 +107,3 @@
     </USlideover>
   </div>
 </template>
-
-<script setup lang="ts">
-const open = ref(false)
-</script>
