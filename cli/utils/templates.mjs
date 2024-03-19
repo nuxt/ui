@@ -19,7 +19,6 @@ const playground = ({ name }) => {
 const component = ({ name }) => {
   const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
   const camelName = camelCase(name)
-  const kebabName = kebabCase(name)
 
   return {
     filename: `src/runtime/components/${upperName}.vue`,
@@ -28,7 +27,7 @@ const component = ({ name }) => {
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
-import theme from '#build/ui/${kebabName}'
+import theme from '#build/ui/${camelName}'
 
 const appConfig = _appConfig as AppConfig & { ui: { ${camelName}: Partial<typeof theme> } }
 
@@ -62,10 +61,10 @@ const ui = computed(() => tv({ extend: ${camelName}, slots: props.ui })())
 }
 
 const theme = ({ name }) => {
-  const kebabName = kebabCase(name)
+  const camelName = camelCase(name)
 
   return {
-    filename: `src/theme/${kebabName}.ts`,
+    filename: `src/theme/${camelName}.ts`,
     contents: `
 export default {
   slots: {
