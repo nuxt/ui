@@ -4,7 +4,7 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'radix
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/modal'
-import type { ButtonProps } from './Button.vue'
+import type { ButtonProps } from '#ui/components/Button.vue'
 
 const appConfig = _appConfig as AppConfig & { ui: { modal: Partial<typeof theme> } }
 
@@ -43,6 +43,7 @@ import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#app'
+import UButton from '#ui/components/Button.vue'
 
 const props = withDefaults(defineProps<ModalProps>(), { portal: true, overlay: true, transition: true })
 const emits = defineEmits<ModalEmits>()

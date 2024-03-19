@@ -33,7 +33,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import UKbd from './Kbd.vue'
+import UKbd from '#ui/components/Kbd.vue'
 
 const props = defineProps<TooltipProps>()
 const emits = defineEmits<TooltipEmits>()
