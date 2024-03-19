@@ -12,7 +12,7 @@ const badge = tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })
 type BadgeVariants = VariantProps<typeof badge>
 
 export interface BadgeProps extends Omit<PrimitiveProps, 'asChild'> {
-  label?: string
+  label?: string | number
   color?: BadgeVariants['color']
   variant?: BadgeVariants['variant']
   size?: BadgeVariants['size']
