@@ -33,19 +33,9 @@ export interface ButtonProps extends LinkProps {
 }
 
 export interface ButtonSlots {
-  leading(props: {
-    disabled?: boolean
-    loading?: boolean
-    icon?: string
-    class: string
-  }): any
+  leading(props: { disabled?: boolean; loading?: boolean; icon?: string; class: string }): any
   default(): any
-  trailing(props: {
-    disabled?: boolean
-    loading?: boolean
-    icon?: string
-    class: string
-  }): any
+  trailing(props: { disabled?: boolean; loading?: boolean; icon?: string; class: string }): any
 }
 </script>
 
