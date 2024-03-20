@@ -1,10 +1,11 @@
 <script lang="ts">
+import type { ButtonHTMLAttributes } from 'vue'
 import type { PrimitiveProps } from 'radix-vue'
 import type { NuxtLinkProps } from '#app'
 import { pick } from '#ui/utils'
 
 export interface LinkProps extends NuxtLinkProps, Omit<PrimitiveProps, 'asChild'> {
-  type?: string
+  type?: ButtonHTMLAttributes['type']
   disabled?: boolean
   active?: boolean
   exact?: boolean
