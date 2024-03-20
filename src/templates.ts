@@ -70,6 +70,7 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
     getContents: () => Object.keys(theme).map(component => `export { default as ${component} } from './${component}'`).join('\n')
   })
 
+  // FIXME: `typeof colors[number]` should include all colors from the theme
   addTypeTemplate({
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
