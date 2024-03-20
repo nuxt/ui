@@ -4,6 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/button'
 import type { LinkProps } from '#ui/components/Link.vue'
+import type { UseComponentIconsProps } from '#ui/composables/useComponentIcons'
 
 const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
@@ -11,22 +12,13 @@ const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
 
 type ButtonVariants = VariantProps<typeof button>
 
-export interface ButtonProps extends LinkProps {
-  type?: string
+export interface ButtonProps extends UseComponentIconsProps, LinkProps {
   label?: string
   color?: ButtonVariants['color']
   variant?: ButtonVariants['variant']
   size?: ButtonVariants['size']
-  icon?: string
-  leading?: boolean
-  leadingIcon?: string
-  trailing?: boolean
-  trailingIcon?: string
-  loading?: boolean
-  loadingIcon?: string
   square?: boolean
   block?: boolean
-  disabled?: boolean
   truncate?: boolean
   class?: any
   ui?: Partial<typeof button.slots>
@@ -43,18 +35,16 @@ export interface ButtonSlots {
 import { computed } from 'vue'
 import { useForwardProps } from 'radix-vue'
 import { reactiveOmit } from '@vueuse/core'
-import { useAppConfig } from '#app'
 import UIcon from '#ui/components/Icon.vue'
+import { useComponentIcons } from '#ui/composables/useComponentIcons'
 
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
 const linkProps = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'variant', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'truncate', 'class', 'ui'))
 
-const appConfig = useAppConfig()
-
-const isLeading = computed(() => (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing && !props.trailingIcon) || !!props.leadingIcon)
-const isTrailing = computed(() => (props.icon && props.trailing) || (props.loading && props.trailing) || !!props.trailingIcon)
+// const { size, rounded } = useInjectButtonGroup({ ui, props })
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const ui = computed(() => tv({ extend: button, slots: props.ui })({
   color: props.color,
@@ -67,30 +57,12 @@ const ui = computed(() => tv({ extend: button, slots: props.ui })({
   leading: isLeading.value,
   trailing: isTrailing.value
 }))
-
-const leadingIconName = computed(() => {
-  if (props.loading) {
-    return props.loadingIcon || appConfig.ui.icons.loading
-  }
-
-  return props.leadingIcon || props.icon
-})
-const leadingIconClass = computed(() => ui.value.leadingIcon())
-
-const trailingIconName = computed(() => {
-  if (props.loading && !isLeading.value) {
-    return props.loadingIcon || appConfig.ui.icons.loading
-  }
-
-  return props.trailingIcon || props.icon
-})
-const trailingIconClass = computed(() => ui.value.trailingIcon())
 </script>
 
 <template>
   <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="linkProps">
-    <slot name="leading" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="leadingIconClass">
-      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
+    <slot name="leading" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="ui.leadingIcon()">
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" aria-hidden="true" />
     </slot>
 
     <span v-if="label || $slots.default" :class="ui.label()">
@@ -99,8 +71,8 @@ const trailingIconClass = computed(() => ui.value.trailingIcon())
       </slot>
     </span>
 
-    <slot name="trailing" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="trailingIconClass">
-      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+    <slot name="trailing" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="ui.trailingIcon()">
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" aria-hidden="true" />
     </slot>
   </ULink>
 </template>
