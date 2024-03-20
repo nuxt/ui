@@ -45,7 +45,6 @@ import { computed } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuLink, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { NuxtLink, UIcon, UAvatar, UBadge } from '#components'
-import { omit } from '../utils'
 
 const props = withDefaults(defineProps<NavigationMenuProps<T>>(), { orientation: 'horizontal' })
 const emits = defineEmits<NavigationMenuEmits>()
@@ -57,7 +56,7 @@ const ui = computed(() => tv({ extend: navigationMenu, slots: props.ui })({
   orientation: props.orientation
 }))
 
-const lists = computed(() => (Array.isArray(props.links[0]) ? props.links : [props.links]) as T[][])
+const lists = computed(() => props.links?.length ? (Array.isArray(props.links[0]) ? props.links : [props.links]) as T[][] : [])
 
 function onClick (e: MouseEvent, link: NavigationMenuLink, { href, navigate, isExternal }: { href: string; navigate: Function; isExternal: boolean }) {
   if (link.click) {
