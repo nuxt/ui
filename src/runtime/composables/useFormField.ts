@@ -12,7 +12,7 @@ type InputProps = {
   disabled?: boolean | null
 }
 
-export const useFormField = (inputProps?: InputProps) => {
+export function useFormField (inputProps?: InputProps) {
   const formOptions = inject<InjectedFormOptions | undefined>('form-options', undefined)
   const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
   const formField = inject<InjectedFormFieldOptions | undefined>('form-field', undefined)
