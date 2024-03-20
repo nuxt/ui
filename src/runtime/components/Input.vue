@@ -1,11 +1,12 @@
 <script lang="ts">
-// TODO: Add missing props / slots (e.g. icons)
+import type { InputHTMLAttributes } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import { defu } from 'defu'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input'
-import { looseToNumber } from '../utils'
+import { looseToNumber } from '#ui/utils'
+import type { UseComponentIconsProps } from '#ui/composables/useComponentIcons'
 
 const appConfig = _appConfig as AppConfig & { ui: { input: Partial<typeof theme> } }
 
@@ -13,23 +14,23 @@ const input = tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })
 
 type InputVariants = VariantProps<typeof input>
 
-export interface InputProps {
-  id?: string | number
+export interface InputProps extends UseComponentIconsProps {
+  id?: string
   name?: string
-  type?: string
-  required?: boolean
-  color?: InputVariants['color']
-  variant?: InputVariants['variant']
-  size?: InputVariants['size']
+  type?: InputHTMLAttributes['type']
   modelValue?: string
-  placeholder?: string
-  autofocus?: boolean
-  autofocusDelay?: number
   modelModifiers?: {
     trim?: boolean
     lazy?: boolean
     number?: boolean
   }
+  placeholder?: string
+  color?: InputVariants['color']
+  variant?: InputVariants['variant']
+  size?: InputVariants['size']
+  required?: boolean
+  autofocus?: boolean
+  autofocusDelay?: number
   disabled?: boolean
   class?: any
   ui?: Partial<typeof input.slots>
@@ -49,7 +50,8 @@ export interface InputSlots {
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
-import { useFormField } from '../composables/useFormField'
+import { useFormField } from '#ui/composables/useFormField'
+import { useComponentIcons } from '#ui/composables/useComponentIcons'
 
 defineOptions({ inheritAttrs: false })
 
@@ -60,30 +62,33 @@ const props = withDefaults(defineProps<InputProps>(), {
 const emit = defineEmits<InputEmits>()
 defineSlots<InputSlots>()
 
-const { emitFormBlur, emitFormInput, size, color, inputId, name, disabled } = useFormField(props)
+const { emitFormBlur, emitFormInput, size, color, inputId, name, disabled } = useFormField<InputProps>(props)
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
+// const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
+
+// const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
 const ui = computed(() => tv({ extend: input, slots: props.ui })({
   color: color.value,
   variant: props.variant,
-  size: size?.value
+  size: size?.value,
+  loading: props.loading,
+  leading: isLeading.value,
+  trailing: isTrailing.value
 }))
-
-// const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
-
-// const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
 const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
 
 const inputRef = ref<HTMLInputElement | null>(null)
 
-const autoFocus = () => {
+function autoFocus () {
   if (props.autofocus) {
     inputRef.value?.focus()
   }
 }
 
 // Custom function to handle the v-model properties
-const updateInput = (value: string) => {
+function updateInput (value: string) {
   if (modelModifiers.value.trim) {
     value = value.trim()
   }
@@ -96,13 +101,13 @@ const updateInput = (value: string) => {
   emitFormInput()
 }
 
-const onInput = (event: Event) => {
+function onInput (event: Event) {
   if (!modelModifiers.value.lazy) {
     updateInput((event.target as HTMLInputElement).value)
   }
 }
 
-const onChange = (event: Event) => {
+function onChange (event: Event) {
   const value = (event.target as HTMLInputElement).value
 
   if (modelModifiers.value.lazy) {
@@ -115,7 +120,7 @@ const onChange = (event: Event) => {
   }
 }
 
-const onBlur = (event: FocusEvent) => {
+function onBlur (event: FocusEvent) {
   emitFormBlur()
   emit('blur', event)
 }
@@ -143,24 +148,19 @@ onMounted(() => {
       @blur="onBlur"
       @change="onChange"
     >
+
     <slot />
 
-    <!-- span
-      v-if="(isLeading && leadingIconName) || $slots.leading"
-      :class="leadingWrapperIconClass"
-    >
-      <slot name="leading" :disabled="disabled" :loading="loading">
-        <UIcon :name="leadingIconName" :class="leadingIconClass" />
+    <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="ui.leading()">
+      <slot name="leading" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="ui.leadingIcon()">
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
       </slot>
     </span>
 
-    <span
-      v-if="(isTrailing && trailingIconName) || $slots.trailing"
-      :class="trailingWrapperIconClass"
-    >
-      <slot name="trailing" :disabled="disabled" :loading="loading">
-        <UIcon :name="trailingIconName" :class="trailingIconClass" />
+    <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="ui.trailing()">
+      <slot name="trailing" :disabled="disabled" :loading="loading" :icon="trailingIconName" :class="ui.trailingIcon()">
+        <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
       </slot>
-    </span -->
+    </span>
   </div>
 </template>

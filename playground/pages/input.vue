@@ -5,15 +5,37 @@ import input from '#build/ui/input'
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 -ml-[258px]">
-      <UInput placeholder="Write something..." autofocus />
-      <UInput placeholder="Write something..." />
-      <UInput placeholder="Write something..." color="gray" />
-      <UInput placeholder="Write something..." color="primary" />
-      <UInput placeholder="Write something..." color="red" />
-      <UInput placeholder="Write something..." disabled />
+      <UInput placeholder="Search..." autofocus />
+      <UInput placeholder="Search..." color="gray" />
+      <UInput placeholder="Search..." color="primary" />
+      <UInput placeholder="Search..." disabled />
+      <UInput placeholder="Search..." type="number" />
+      <UInput icon="i-heroicons-folder" placeholder="Search..." type="file" />
+      <UInput icon="i-heroicons-calendar" placeholder="Search..." type="date" />
+      <UInput icon="i-heroicons-lock-closed" placeholder="Search..." type="password" value="password" />
+      <UInput loading placeholder="Search..." />
+      <UInput loading leading-icon="i-heroicons-magnifying-glass" placeholder="Search..." />
+      <UInput loading trailing placeholder="Search..." />
+      <UInput loading trailing-icon="i-heroicons-magnifying-glass" placeholder="Search..." />
     </div>
     <div class="flex items-center gap-4">
-      <UInput v-for="size in Object.keys(input.variants.size)" :key="size" placeholder="Write something..." :size="(size as any)" />
+      <UInput
+        v-for="size in Object.keys(input.variants.size)"
+        :key="size"
+        icon="i-heroicons-magnifying-glass"
+        placeholder="Search..."
+        :size="(size as any)"
+      />
+    </div>
+    <div class="flex items-center gap-4">
+      <UInput
+        v-for="size in Object.keys(input.variants.size)"
+        :key="size"
+        icon="i-heroicons-magnifying-glass"
+        trailing
+        placeholder="Search..."
+        :size="(size as any)"
+      />
     </div>
   </div>
 </template>
