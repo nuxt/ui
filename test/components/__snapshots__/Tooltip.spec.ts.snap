@@ -1,8 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Tooltip > renders with arrow correctly 1`] = `
-"Hover me
-<!--teleport start-->
+"<!--teleport start-->
 
 
 <div data-radix-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -16,8 +15,7 @@ exports[`Tooltip > renders with arrow correctly 1`] = `
 `;
 
 exports[`Tooltip > renders with shortcuts correctly 1`] = `
-"Hover me
-<!--teleport start-->
+"<!--teleport start-->
 
 
 <div data-radix-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -31,8 +29,7 @@ exports[`Tooltip > renders with shortcuts correctly 1`] = `
 `;
 
 exports[`Tooltip > renders with text correctly 1`] = `
-"Hover me
-<!--teleport start-->
+"<!--teleport start-->
 
 
 <div data-radix-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
