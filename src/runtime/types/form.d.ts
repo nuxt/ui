@@ -1,3 +1,5 @@
+import type { ComputedRef, Ref } from 'vue'
+
 export interface Form<T> {
   validate (path?: string | string[], opts?: { silent?: true }): Promise<T | false>
   validate (path?: string | string[], opts?: { silent?: false }): Promise<T | false>
@@ -36,16 +38,16 @@ export interface FormEvent {
   name?: string
 }
 
-export interface InjectedFormFieldOptions {
-  inputId: Ref<string | number | undefined>
-  name: Computed<string>
-  size: Computed<string | number | symbol>
-  error: Computed<string | boolean | undefined>
-  eagerValidation: Computed<boolean>
-  validateOnInputDelay: Computed<number | undefined>
+export interface InjectedFormFieldOptions<T> {
+  inputId: Ref<string | undefined>
+  name: ComputedRef<string | undefined>
+  size: ComputedRef<T['size']>
+  error: ComputedRef<string | boolean | undefined>
+  eagerValidation: ComputedRef<boolean | undefined>
+  validateOnInputDelay: ComputedRef<number | undefined>
 }
 
 export interface InjectedFormOptions {
-  disabled?: Computed<boolean>
-  validateOnInputDelay?: Computed<number>
+  disabled?: ComputedRef<boolean>
+  validateOnInputDelay?: ComputedRef<number>
 }

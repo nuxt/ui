@@ -59,7 +59,7 @@ const error = computed(() => {
 
 const inputId = ref(useId())
 
-provide<InjectedFormFieldOptions>('form-field', {
+provide<InjectedFormFieldOptions<FormFieldProps>>('form-field', {
   error,
   inputId,
   name: computed(() => props.name),

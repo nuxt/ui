@@ -2,20 +2,22 @@ import { inject, ref, computed } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
 import type { FormEvent, FormInputEvents, InjectedFormFieldOptions, InjectedFormOptions } from '../types/form'
 
-type InputProps = {
-  id?: string | number
-  size?: string | number | symbol
-  color?: string // FIXME: Replace by enum
+type Props<T> = {
+  id?: string
   name?: string
+  // @ts-ignore FIXME: TS doesn't like this
+  size?: T['size']
+  // @ts-ignore FIXME: TS doesn't like this
+  color?: T['color']
   eagerValidation?: boolean
-  legend?: string | null
-  disabled?: boolean | null
+  legend?: string
+  disabled?: boolean
 }
 
-export function useFormField (inputProps?: InputProps) {
+export function useFormField <T> (inputProps?: Props<T>) {
   const formOptions = inject<InjectedFormOptions | undefined>('form-options', undefined)
   const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
-  const formField = inject<InjectedFormFieldOptions | undefined>('form-field', undefined)
+  const formField = inject<InjectedFormFieldOptions<T> | undefined>('form-field', undefined)
   const formInputs = inject<any>('form-inputs', undefined)
 
   if (formField) {
@@ -24,7 +26,7 @@ export function useFormField (inputProps?: InputProps) {
       formField.inputId.value = inputProps?.id
     }
 
-    if (formInputs) {
+    if (formInputs && formField.name.value) {
       formInputs.value[formField.name.value] = formField.inputId.value
     }
   }
@@ -52,9 +54,7 @@ export function useFormField (inputProps?: InputProps) {
         emitFormEvent('input', formField?.name.value as string)
       }
     },
-    formField?.validateOnInputDelay.value ??
-    formOptions?.validateOnInputDelay.value ??
-    0
+    formField?.validateOnInputDelay.value ?? formOptions?.validateOnInputDelay?.value ?? 0
   )
 
   return {
