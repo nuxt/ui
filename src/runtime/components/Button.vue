@@ -25,9 +25,9 @@ export interface ButtonProps extends UseComponentIconsProps, LinkProps {
 }
 
 export interface ButtonSlots {
-  leading(props: { disabled?: boolean; loading?: boolean; icon?: string; class: string }): any
+  leading(props: { disabled?: boolean; loading?: boolean; icon?: string }): any
   default(): any
-  trailing(props: { disabled?: boolean; loading?: boolean; icon?: string; class: string }): any
+  trailing(props: { disabled?: boolean; loading?: boolean; icon?: string }): any
 }
 </script>
 
@@ -61,7 +61,7 @@ const ui = computed(() => tv({ extend: button, slots: props.ui })({
 
 <template>
   <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="linkProps">
-    <slot name="leading" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="ui.leadingIcon()">
+    <slot name="leading" :disabled="disabled" :loading="loading" :icon="leadingIconName">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" aria-hidden="true" />
     </slot>
 
@@ -71,7 +71,7 @@ const ui = computed(() => tv({ extend: button, slots: props.ui })({
       </slot>
     </span>
 
-    <slot name="trailing" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="ui.trailingIcon()">
+    <slot name="trailing" :disabled="disabled" :loading="loading" :icon="leadingIconName">
       <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" aria-hidden="true" />
     </slot>
   </ULink>
