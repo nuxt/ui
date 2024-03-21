@@ -37,7 +37,7 @@ export interface FormFieldSlots {
 
 <script lang="ts" setup>
 import { computed, ref, inject, provide, type Ref } from 'vue'
-import type { FormError, InjectedFormFieldOptions } from '../types/form'
+import type { FormError, FormFieldInjectedOptions } from '../types/form'
 import { useId } from '#imports'
 
 const props = defineProps<FormFieldProps>()
@@ -59,7 +59,7 @@ const error = computed(() => {
 
 const inputId = ref(useId())
 
-provide<InjectedFormFieldOptions<FormFieldProps>>('form-field', {
+provide<FormFieldInjectedOptions<FormFieldProps>>('form-field', {
   error,
   inputId,
   name: computed(() => props.name),

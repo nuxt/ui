@@ -1,6 +1,6 @@
 import { inject, ref, computed } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
-import type { FormEvent, FormInputEvents, InjectedFormFieldOptions, InjectedFormOptions } from '../types/form'
+import type { FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '../types/form'
 
 type Props<T> = {
   id?: string
@@ -15,9 +15,9 @@ type Props<T> = {
 }
 
 export function useFormField <T> (inputProps?: Props<T>) {
-  const formOptions = inject<InjectedFormOptions | undefined>('form-options', undefined)
+  const formOptions = inject<FormInjectedOptions | undefined>('form-options', undefined)
   const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
-  const formField = inject<InjectedFormFieldOptions<T> | undefined>('form-field', undefined)
+  const formField = inject<FormFieldInjectedOptions<T> | undefined>('form-field', undefined)
   const formInputs = inject<any>('form-inputs', undefined)
 
   if (formField) {

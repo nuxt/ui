@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Form > custom validation works > with error 1`] = `
-"<form class="">
+"<form id="42" class="">
   <div data-v-0fd934a4="" class="text-sm">
     <div data-v-0fd934a4="" class="">
       <!--v-if-->
@@ -36,7 +36,7 @@ exports[`Form > custom validation works > with error 1`] = `
 `;
 
 exports[`Form > custom validation works > without error 1`] = `
-"<form class="">
+"<form id="42" class="">
   <div data-v-0fd934a4="" class="text-sm">
     <div data-v-0fd934a4="" class="">
       <!--v-if-->
@@ -71,7 +71,7 @@ exports[`Form > custom validation works > without error 1`] = `
 `;
 
 exports[`Form > joi validation works > with error 1`] = `
-"<form class="">
+"<form id="42" class="">
   <div data-v-0fd934a4="" class="text-sm">
     <div data-v-0fd934a4="" class="">
       <!--v-if-->
@@ -106,7 +106,7 @@ exports[`Form > joi validation works > with error 1`] = `
 `;
 
 exports[`Form > joi validation works > without error 1`] = `
-"<form class="">
+"<form id="42" class="">
   <div data-v-0fd934a4="" class="text-sm">
     <div data-v-0fd934a4="" class="">
       <!--v-if-->
@@ -140,12 +140,12 @@ exports[`Form > joi validation works > without error 1`] = `
 </form>"
 `;
 
-exports[`Form > renders basic case correctly 1`] = `"<form class=""></form>"`;
+exports[`Form > renders basic case correctly 1`] = `"<form id="0" class=""></form>"`;
 
-exports[`Form > renders with default slot correctly 1`] = `"<form class="">Form slot</form>"`;
+exports[`Form > renders with default slot correctly 1`] = `"<form id="1" class="">Form slot</form>"`;
 
 exports[`Form > valibot validation works > with error 1`] = `
-"<form class="">
+"<form id="42" class="">
   <div data-v-0fd934a4="" class="text-sm">
     <div data-v-0fd934a4="" class="">
       <!--v-if-->
@@ -180,7 +180,7 @@ exports[`Form > valibot validation works > with error 1`] = `
 `;
 
 exports[`Form > valibot validation works > without error 1`] = `
-"<form class="">
+"<form id="42" class="">
   <div data-v-0fd934a4="" class="text-sm">
     <div data-v-0fd934a4="" class="">
       <!--v-if-->
@@ -215,7 +215,7 @@ exports[`Form > valibot validation works > without error 1`] = `
 `;
 
 exports[`Form > yup validation works > with error 1`] = `
-"<form class="">
+"<form id="42" class="">
   <div data-v-0fd934a4="" class="text-sm">
     <div data-v-0fd934a4="" class="">
       <!--v-if-->
@@ -250,7 +250,7 @@ exports[`Form > yup validation works > with error 1`] = `
 `;
 
 exports[`Form > yup validation works > without error 1`] = `
-"<form class="">
+"<form id="42" class="">
   <div data-v-0fd934a4="" class="text-sm">
     <div data-v-0fd934a4="" class="">
       <!--v-if-->
@@ -285,7 +285,7 @@ exports[`Form > yup validation works > without error 1`] = `
 `;
 
 exports[`Form > zod validation works > with error 1`] = `
-"<form class="">
+"<form id="42" class="">
   <div data-v-0fd934a4="" class="text-sm">
     <div data-v-0fd934a4="" class="">
       <!--v-if-->
@@ -320,7 +320,7 @@ exports[`Form > zod validation works > with error 1`] = `
 `;
 
 exports[`Form > zod validation works > without error 1`] = `
-"<form class="">
+"<form id="42" class="">
   <div data-v-0fd934a4="" class="text-sm">
     <div data-v-0fd934a4="" class="">
       <!--v-if-->

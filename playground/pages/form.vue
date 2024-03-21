@@ -24,81 +24,88 @@ function onSubmit (event: FormSubmitEvent<User>) {
 </script>
 
 <template>
-  <div class="flex gap-4">
-    <UForm
-      :state="state"
-      :schema="schema"
-      class="gap-4 flex flex-col w-60"
-      @submit="(event) => onSubmit(event)"
-    >
-      <UFormField label="Email" name="email">
-        <UInput v-model="state.email" placeholder="john@lennon.com" />
-      </UFormField>
-
-      <UFormField label="Password" name="password">
-        <UInput v-model="state.password" type="password" />
-      </UFormField>
-
-      <div>
-        <UButton color="gray" type="submit">
-          Submit
-        </UButton>
-      </div>
-    </UForm>
-
-    <UForm
-      :state="state2"
-      :schema="schema"
-      class="gap-4 flex flex-col w-60"
-      :validate-on-input-delay="2000"
-      @submit="(event) => onSubmit(event)"
-    >
-      <UFormField label="Email" name="email">
-        <UInput v-model="state2.email" placeholder="john@lennon.com" />
-      </UFormField>
-
-      <UFormField
-        label="Password"
-        name="password"
-        :validate-on-input-delay="50"
-        eager-validation
+  <div class="flex flex-col gap-4">
+    <div class="flex gap-4">
+      <UForm
+        :state="state"
+        :schema="schema"
+        class="gap-4 flex flex-col w-60"
+        @submit="(event) => onSubmit(event)"
       >
-        <UInput v-model="state2.password" type="password" />
-      </UFormField>
+        <UFormField label="Email" name="email">
+          <UInput v-model="state.email" placeholder="john@lennon.com" />
+        </UFormField>
 
-      <div>
-        <UButton color="gray" type="submit">
-          Submit
-        </UButton>
-      </div>
-    </UForm>
+        <UFormField label="Password" name="password">
+          <UInput v-model="state.password" type="password" />
+        </UFormField>
 
-    <UForm
-      ref="disabledForm"
-      :state="state3"
-      :schema="schema"
-      class="gap-4 flex flex-col w-60"
-      disabled
-      @submit="(event) => onSubmit(event)"
-    >
-      <UFormField label="Email" name="email">
-        <UInput v-model="state2.email" placeholder="john@lennon.com" />
-      </UFormField>
+        <div>
+          <UButton color="gray" type="submit">
+            Submit
+          </UButton>
+        </div>
+      </UForm>
 
-      <UFormField
-        label="Password"
-        name="password"
-        :validate-on-input-delay="50"
-        eager-validation
+      <UForm
+        :state="state2"
+        :schema="schema"
+        class="gap-4 flex flex-col w-60"
+        :validate-on-input-delay="2000"
+        @submit="(event) => onSubmit(event)"
       >
-        <UInput v-model="state2.password" type="password" />
-      </UFormField>
+        <UFormField label="Email" name="email">
+          <UInput v-model="state2.email" placeholder="john@lennon.com" />
+        </UFormField>
 
-      <div>
-        <UButton color="gray" type="submit" :disabled="disabledForm?.disabled">
-          Submit
-        </UButton>
-      </div>
-    </UForm>
+        <UFormField
+          label="Password"
+          name="password"
+          :validate-on-input-delay="50"
+          eager-validation
+        >
+          <UInput v-model="state2.password" type="password" />
+        </UFormField>
+
+        <div>
+          <UButton color="gray" type="submit">
+            Submit
+          </UButton>
+        </div>
+      </UForm>
+
+      <UForm
+        ref="disabledForm"
+        :state="state3"
+        :schema="schema"
+        class="gap-4 flex flex-col w-60"
+        disabled
+        @submit="(event) => onSubmit(event)"
+      >
+        <UFormField label="Email" name="email">
+          <UInput v-model="state3.email" placeholder="john@lennon.com" />
+        </UFormField>
+
+        <UFormField
+          label="Password"
+          name="password"
+          :validate-on-input-delay="50"
+          eager-validation
+        >
+          <UInput v-model="state3.password" type="password" />
+        </UFormField>
+
+        <div>
+          <UButton color="gray" type="submit" :disabled="disabledForm?.disabled">
+            Submit
+          </UButton>
+        </div>
+      </UForm>
+    </div>
+
+    <div class="flex gap-4">
+      <FormNestedExample />
+      <FormNestedListExample />
+    </div>
   </div>
 </template>

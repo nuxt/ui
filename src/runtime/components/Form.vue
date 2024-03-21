@@ -4,13 +4,14 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
 import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '../utils/form'
-import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, InjectedFormOptions, Form } from '../types/form'
+import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, FormInjectedOptions, Form, FormErrorWithId } from '../types/form'
 
 const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
 
 const form = tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) })
 
 export interface FormProps<T extends object> {
+  id?: string | number
   schema?: FormSchema<T>
   state: Partial<T>
   validate?: (state: Partial<T>) => Promise<FormError[] | void>
@@ -29,18 +30,24 @@ export interface FormSlots {
   default(): any
 }
 
-export class FormException extends Error {
-  constructor (message: string) {
-    super(message)
-    this.message = message
-    Object.setPrototypeOf(this, FormException.prototype)
+export class FormValidationException extends Error {
+  formId: string | number
+  errors: FormErrorWithId[]
+  childrens: FormValidationException[]
+
+  constructor (formId: string | number, errors: FormErrorWithId[], childErrors: FormValidationException[]) {
+    super('Form validation exception')
+    this.formId = formId
+    this.errors = errors
+    this.childrens = childErrors
+    Object.setPrototypeOf(this, FormValidationException.prototype)
   }
 }
 </script>
 
 <script lang="ts" setup generic="T extends object">
-import { provide, ref, onUnmounted, onMounted, computed } from 'vue'
-import { useEventBus } from '@vueuse/core'
+import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed } from 'vue'
+import { useEventBus, type UseEventBusReturn } from '@vueuse/core'
 import { useId } from '#imports'
 
 const props = withDefaults(defineProps<FormProps<T>>(), {
@@ -52,16 +59,26 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
 const emit = defineEmits<FormEmits<T>>()
 defineSlots<FormSlots>()
 
-const formId = useId()
-const bus = useEventBus<FormEvent>(`form-${formId}`)
+const formId = props.id ?? useId()
 
-onMounted(() => {
+const bus = useEventBus<FormEvent>(`form-${formId}`)
+const parentBus = inject<UseEventBusReturn<FormEvent, string> | undefined>(
+  'form-events',
+  undefined
+)
+provide('form-events', bus)
+
+
+const nestedForms = ref<Map<string | number, { validate: () => any }>>(new Map())
+
+onMounted(async () => {
   bus.on(async (event) => {
-    if (
-      event.type !== 'submit' &&
-      props.validateOn?.includes(event.type as FormInputEvents)
-    ) {
-      await _validate(event.name, { silent: true })
+    if (event.type === 'attach') {
+      nestedForms.value.set(event.formId, { validate: event.validate })
+    } else if (event.type === 'detach') {
+      nestedForms.value.delete(event.formId)
+    } else if (props.validateOn?.includes(event.type as FormInputEvents)) {
+      await _validate({ name: event.name, silent: true, nested: false })
     }
   })
 })
@@ -70,20 +87,40 @@ onUnmounted(() => {
   bus.reset()
 })
 
+onMounted(async () => {
+  if (parentBus) {
+    await nextTick()
+    parentBus.emit({ type: 'attach', validate: _validate, formId })
+  }
+})
+
+onUnmounted(() => {
+  if (parentBus) {
+    parentBus.emit({ type: 'detach', formId })
+  }
+})
+
 const options = {
   disabled: computed(() => props.disabled),
   validateOnInputDelay: computed(() => props.validateOnInputDelay)
 }
-provide<InjectedFormOptions>('form-options', options)
+provide<FormInjectedOptions>('form-options', options)
 
-const errors = ref<FormError[]>([])
+const errors = ref<FormErrorWithId[]>([])
 provide('form-errors', errors)
-provide('form-events', bus)
+
 const inputs = ref<Record<string, string>>({})
 provide('form-inputs', inputs)
+function resolveErrorIds (errs: FormError[]): FormErrorWithId[] {
+  return errs.map((err) => ({
+    ...err,
+    id: inputs.value[err.name]
+  }))
+}
 
-async function getErrors (): Promise<FormError[]> {
+async function getErrors (): Promise<FormErrorWithId[]> {
   let errs = props.validate ? (await props.validate(props.state)) ?? [] : []
+
   if (props.schema) {
     if (isZodSchema(props.schema)) {
       errs = errs.concat(await getZodErrors(props.state, props.schema))
@@ -98,34 +135,39 @@ async function getErrors (): Promise<FormError[]> {
     }
   }
 
-  return errs
+  return resolveErrorIds(errs)
 }
 
 async function _validate (
-  name?: string | string[],
-  opts: { silent?: boolean } = { silent: false }
+  opts: { name?: string | string[], silent?: boolean, nested?: boolean } = { silent: false, nested: true }
 ): Promise<T | false> {
-  let paths = name
-  if (name && !Array.isArray(name)) {
-    paths = [name]
-  }
+  const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name
 
-  if (paths) {
+  const nestedValidatePromises = !names && opts.nested ? Array.from(nestedForms.value.values()).map(
+    ({ validate }) => validate().then(() => undefined).catch((error: Error) => {
+      if (!(error instanceof FormValidationException)) {
+        throw error
+      }
+      return error
+    })
+  ) : []
+
+  if (names) {
     const otherErrors = errors.value.filter(
-      (error) => !paths!.includes(error.name)
+      (error) => !names!.includes(error.name)
     )
     const pathErrors = (await getErrors()).filter((error) =>
-      paths!.includes(error.name)
+      names!.includes(error.name)
     )
     errors.value = otherErrors.concat(pathErrors)
   } else {
     errors.value = await getErrors()
   }
 
-  if (errors.value.length > 0) {
+  const childErrors = nestedValidatePromises ? await Promise.all(nestedValidatePromises) : []
+  if (errors.value.length + childErrors.length > 0) {
     if (opts.silent) return false
-
-    throw new FormException(`Form validation failed: ${JSON.stringify(errors.value, null, 2)}`)
+    throw new FormValidationException(formId, errors.value, childErrors)
   }
 
   return props.state as T
@@ -133,25 +175,26 @@ async function _validate (
 
 async function onSubmit (payload: Event) {
   const event = payload as SubmitEvent
+
   try {
-    await _validate()
+    await _validate({ nested: true })
     const submitEvent: FormSubmitEvent<any> = {
       ...event,
       data: props.state
     }
     emit('submit', submitEvent)
+
   } catch (error) {
-    if (!(error instanceof FormException)) {
+    if (!(error instanceof FormValidationException)) {
       throw error
     }
 
     const errorEvent: FormErrorEvent = {
       ...event,
-      errors: errors.value.map((err) => ({
-        ...err,
-        id: inputs.value[err.name]
-      }))
+      errors: error.errors,
+      childrens: error.childrens
     }
+
     emit('error', errorEvent)
   }
 }
@@ -159,25 +202,28 @@ async function onSubmit (payload: Event) {
 defineExpose<Form<T>>({
   validate: _validate,
   errors,
+
   setErrors (errs: FormError[], name?: string) {
-    errors.value = errs
     if (name) {
       errors.value = errors.value
         .filter((error) => error.name !== name)
-        .concat(errs)
+        .concat(resolveErrorIds(errs))
     } else {
-      errors.value = errs
+      errors.value = resolveErrorIds(errs)
     }
   },
+
   async submit () {
     await onSubmit(new Event('submit'))
   },
+
   getErrors (name?: string) {
     if (name) {
       return errors.value.filter((err) => err.name === name)
     }
     return errors.value
   },
+
   clear (name?: string) {
     if (name) {
       errors.value = errors.value.filter((err) => err.name !== name)
@@ -190,7 +236,12 @@ defineExpose<Form<T>>({
 </script>
 
 <template>
-  <form :class="form({ class: props.class })" @submit.prevent="onSubmit">
+  <component
+    :is="parentBus ? 'div' : 'form'"
+    :id="formId"
+    :class="form({ class: props.class })"
+    @submit.prevent="onSubmit"
+  >
     <slot />
-  </form>
+  </component>
 </template>
