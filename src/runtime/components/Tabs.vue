@@ -29,7 +29,7 @@ type SlotFunction<T> = (props: { item: T, index: number }) => any
 
 export type TabsSlots<T extends TabsItem> = {
   default(): any
-  item(): SlotFunction<T>
+  content(): SlotFunction<T>
 } & {
   [key in T['slot'] as string]?: SlotFunction<T>
 }
@@ -61,7 +61,7 @@ const ui = computed(() => tv({ extend: tabs, slots: props.ui })())
     </TabsList>
 
     <TabsContent v-for="(item, index) of items" :key="index" force-mount :value="item.value || String(index)" :class="ui.content()">
-      <slot :name="item.slot || 'item'" :item="item" :index="index">
+      <slot :name="item.slot || 'content'" :item="item" :index="index">
         {{ item.content }}
       </slot>
     </TabsContent>
