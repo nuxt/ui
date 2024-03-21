@@ -14,11 +14,8 @@ const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu 
 
 export interface NavigationMenuLink extends LinkProps {
   label: string | number
-  labelClass?: any
   icon?: string
-  iconClass?: any
   avatar?: AvatarProps
-  avatarClass?: any
   click?: Function
   class?: any
   badge?: string | number | BadgeProps
@@ -32,11 +29,12 @@ export interface NavigationMenuProps<T extends NavigationMenuLink> extends Omit<
 
 export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
+type SlotProps<T> = (props: { link: T, active: boolean }) => any
+
 export interface NavigationMenuSlots<T extends NavigationMenuLink> {
-  avatar(props: { link: T; active: boolean }): any
-  icon(props: { link: T; active: boolean }): any
-  badge(props: { link: T; active: boolean }): any
-  default(props: { link: T; active: boolean }): any
+  leading: SlotProps<T>
+  default: SlotProps<T>
+  trailing: SlotProps<T>
 }
 </script>
 
@@ -83,30 +81,18 @@ function onClick (e: MouseEvent, link: NavigationMenuLink, { href, navigate, isE
               :class="ui.base({ active: isActive, class: link.class })"
               @click="onClick($event, link, { href, navigate, isExternal })"
             >
-              <slot name="avatar" :link="link" :active="isActive">
-                <UAvatar
-                  v-if="link.avatar"
-                  size="2xs"
-                  v-bind="link.avatar"
-                  :class="ui.avatar({ active: isActive, class: link.avatarClass })"
-                />
+              <slot name="leading" :link="link" :active="isActive">
+                <UAvatar v-if="link.avatar" size="2xs" v-bind="link.avatar" :class="ui.avatar({ active: isActive })" />
+                <UIcon v-else-if="link.icon" :name="link.icon" :class="ui.icon({ active: isActive })" />
               </slot>
 
-              <slot name="icon" :link="link" :active="isActive">
-                <UIcon
-                  v-if="link.icon"
-                  :name="link.icon"
-                  :class="ui.icon({ active: isActive, class: link.iconClass })"
-                />
-              </slot>
-
-              <slot :link="link" :active="isActive">
-                <span v-if="link.label" :class="ui.label({ class: link.labelClass })">
+              <span v-if="link.label || $slots.default" :class="ui.label()">
+                <slot :link="link" :active="isActive">
                   {{ link.label }}
-                </span>
-              </slot>
+                </slot>
+              </span>
 
-              <slot name="badge" :link="link" :active="isActive">
+              <slot name="trailing" :link="link" :active="isActive">
                 <UBadge
                   v-if="link.badge"
                   color="gray"
