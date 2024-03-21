@@ -42,9 +42,9 @@ export interface InputEmits {
 }
 
 export interface InputSlots {
-  leading(props: { disabled?: boolean; loading?: boolean; icon?: string; class: string }): any
+  leading(): any
   default(): any
-  trailing(props: { disabled?: boolean; loading?: boolean; icon?: string; class: string }): any
+  trailing(): any
 }
 </script>
 
@@ -152,13 +152,13 @@ onMounted(() => {
     <slot />
 
     <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="ui.leading()">
-      <slot name="leading" :disabled="disabled" :loading="loading" :icon="leadingIconName" :class="ui.leadingIcon()">
+      <slot name="leading">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
       </slot>
     </span>
 
     <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="ui.trailing()">
-      <slot name="trailing" :disabled="disabled" :loading="loading" :icon="trailingIconName" :class="ui.trailingIcon()">
+      <slot name="trailing">
         <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
       </slot>
     </span>
