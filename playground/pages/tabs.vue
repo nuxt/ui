@@ -1,8 +1,7 @@
 <script setup lang="ts">
 const items = [{
   label: 'Tab1',
-  content: 'This is the content shown for Tab1',
-  slot: 'tab1'
+  content: 'This is the content shown for Tab1'
 }, {
   label: 'Tab2',
   content: 'And, this is the content for Tab2'
@@ -13,9 +12,5 @@ const items = [{
 </script>
 
 <template>
-  <UTabs :items="items" class="w-96">
-    <template #tab1="{ item }">
-      {{ item.label }}
-    </template>
-  </UTabs>
+  <UTabs :items="items" />
 </template>
