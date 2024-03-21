@@ -200,6 +200,10 @@ export default defineNuxtModule<ModuleOptions>({
       src: resolve(runtimeDir, 'plugins', 'modals')
     })
 
+    addPlugin({
+      src: resolve(runtimeDir, 'plugins', 'slideovers')
+    })
+
     // Components
 
     addComponentsDir({
