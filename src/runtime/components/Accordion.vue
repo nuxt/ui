@@ -18,7 +18,7 @@ export interface AccordionItem {
   disabled?: boolean
 }
 
-export interface AccordionProps<T extends AccordionItem> extends Omit<AccordionRootProps, 'asChild' | 'dir'> {
+export interface AccordionProps<T extends AccordionItem> extends Omit<AccordionRootProps, 'asChild' | 'dir' | 'orientation'> {
   items?: T[]
   class?: any
   ui?: Partial<typeof accordion.slots>
@@ -46,13 +46,14 @@ import { useAppConfig } from '#app'
 
 const props = withDefaults(defineProps<AccordionProps<T>>(), {
   type: 'single',
-  collapsible: true
+  collapsible: true,
+  defaultValue: '0'
 })
 const emits = defineEmits<AccordionEmits>()
 defineSlots<AccordionSlots<T>>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'orientation', 'type'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'type'), emits)
 
 const ui = computed(() => tv({ extend: accordion, slots: props.ui })())
 </script>

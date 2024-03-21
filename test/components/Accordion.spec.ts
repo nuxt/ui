@@ -33,8 +33,16 @@ const items = [{
 describe('Accordion', () => {
   it.each([
     ['basic case', { props: { items } }],
-    ['with class', { props: { class: 'w-96' } }],
-    ['with ui', { props: { ui: { item: 'border' } } }]
+    ['with class', { props: { items, class: 'w-96' } }],
+    ['with ui', { props: { ui: { items, item: 'border-gray-300 dark:border-gray-700' } } }],
+    ['with as', { props: { items, as: 'section' } }],
+    ['with type', { props: { items, type: 'multiple' as const } }],
+    ['with disabled', { props: { items, disabled: true } }],
+    ['with collapsible', { props: { items, collapsible: false } }],
+    ['with modelValue', { props: { items, modelValue: '1' } }],
+    ['with defaultValue', { props: { items, defaultValue: '1' } }],
+    ['with default slot', { props: { items }, slots: { default: () => 'Default slot' } }],
+    ['with content slot', { props: { items }, slots: { content: () => 'Content slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps<typeof items[number]>, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, Accordion)
     expect(html).toMatchSnapshot()
