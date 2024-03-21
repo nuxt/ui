@@ -38,12 +38,13 @@ export type TabsSlots<T extends TabsItem> = {
 <script setup lang="ts" generic="T extends TabsItem">
 import { computed } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'radix-vue'
+import { reactivePick } from '@vueuse/core'
 
 const props = withDefaults(defineProps<TabsProps<T>>(), { defaultValue: '0' })
 const emits = defineEmits<TabsEmits>()
 defineSlots<TabsSlots<T>>()
 
-const rootProps = useForwardPropsEmits(props, emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'activationMode', 'modelValue'), emits)
 
 const ui = computed(() => tv({ extend: tabs, slots: props.ui })())
 </script>

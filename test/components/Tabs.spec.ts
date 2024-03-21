@@ -22,7 +22,7 @@ describe('Tabs', () => {
     ['with modelValue', { props: { items, modelValue: '1' } }],
     ['with defaultValue', { props: { items, defaultValue: '1' } }],
     ['with default slot', { props: { items }, slots: { default: () => 'Default slot' } }],
-    ['with item slot', { props: { items }, slots: { item: () => 'Item slot' } }]
+    ['with content slot', { props: { items }, slots: { content: () => 'Content slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TabsProps<typeof items[number]>, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, Tabs)
     expect(html).toMatchSnapshot()
