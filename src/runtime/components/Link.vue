@@ -2,7 +2,6 @@
 import type { ButtonHTMLAttributes } from 'vue'
 import type { PrimitiveProps } from 'radix-vue'
 import type { NuxtLinkProps } from '#app'
-import { pick } from '#ui/utils'
 
 export interface LinkProps extends NuxtLinkProps, Omit<PrimitiveProps, 'asChild'> {
   type?: ButtonHTMLAttributes['type']
@@ -12,68 +11,58 @@ export interface LinkProps extends NuxtLinkProps, Omit<PrimitiveProps, 'asChild'
   exactQuery?: boolean
   exactHash?: boolean
   inactiveClass?: string
-}
-
-export function getNuxtLinkProps (props: NuxtLinkProps) {
-  return pick(props, ['to', 'href', 'target', 'rel', 'noRel', 'prefetch', 'noPrefetch'])
+  custom?: boolean
 }
 </script>
 
 <script setup lang="ts">
 import { isEqual } from 'ohash'
-import { Primitive, useForwardProps } from 'radix-vue'
+import { useForwardProps } from 'radix-vue'
 import { reactiveOmit } from '@vueuse/core'
-import type { RouteLocation } from '#vue-router'
+import { useRoute } from '#imports'
 
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<LinkProps>(), { as: 'button', type: 'button', active: undefined })
 
+const route = useRoute()
 const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass'))
 
-function resolveLinkClass (route: RouteLocation, currentRoute: RouteLocation, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
-  if (props.exactQuery && !isEqual(route.query, currentRoute.query)) {
-    return props.inactiveClass
-  }
-  if (props.exactHash && route.hash !== currentRoute.hash) {
-    return props.inactiveClass
+function resolveLinkClass (slotProps: any) {
+  return isLinkActive(slotProps) ? props.activeClass : props.inactiveClass
+}
+
+function isLinkActive (slotProps: any) {
+  if (props.active !== undefined) {
+    return props.active
   }
 
-  if (props.exact && isExactActive) {
-    return props.activeClass
+  if (props.exactQuery && !isEqual(slotProps.route.query, route.query)) {
+    return false
+  }
+  if (props.exactHash && slotProps.route.hash !== route.hash) {
+    return false
   }
 
-  if (!props.exact && isActive) {
-    return props.activeClass
+  if (props.exact && slotProps.isExactActive) {
+    return true
   }
 
-  return props.inactiveClass
+  if (!props.exact && slotProps.isActive) {
+    return true
+  }
+
+  return false
 }
 </script>
 
 <template>
-  <Primitive
-    v-if="!to"
-    :as="as"
-    :type="type"
-    :disabled="disabled"
-    v-bind="$attrs"
-    :class="active ? activeClass : inactiveClass"
-  >
-    <slot v-bind="{ active }" />
-  </Primitive>
-  <NuxtLink v-else v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }" v-bind="nuxtLinkProps" custom>
-    <a
-      v-bind="$attrs"
-      :href="!disabled ? href : undefined"
-      :aria-disabled="disabled ? 'true' : undefined"
-      :role="disabled ? 'link' : undefined"
-      :rel="rel"
-      :target="target"
-      :class="active !== undefined ? (active ? activeClass : inactiveClass) : resolveLinkClass(route, $route, { isActive, isExactActive })"
-      @click="(e: any) => (!isExternal && !disabled) && navigate(e)"
-    >
-      <slot v-bind="{ active: active !== undefined ? active : (exact ? isExactActive : isActive) }" />
-    </a>
+  <NuxtLink v-slot="slotProps" v-bind="nuxtLinkProps" custom>
+    <template v-if="custom">
+      <slot v-bind="{ ...$attrs, ...slotProps, as, type, disabled, active: isLinkActive(slotProps) }" />
+    </template>
+    <ULinkBase v-else v-bind="{ ...$attrs, ...slotProps, as, type, disabled }" :class="resolveLinkClass(slotProps)">
+      <slot v-bind="{ ...slotProps, as, type, disabled, active: isLinkActive(slotProps) }" />
+    </ULinkBase>
   </NuxtLink>
 </template>
