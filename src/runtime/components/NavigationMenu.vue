@@ -4,7 +4,7 @@ import type { NavigationMenuRootProps, NavigationMenuRootEmits } from 'radix-vue
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigationMenu'
-import { getNuxtLinkProps, type LinkProps } from '#ui/components/Link.vue'
+import type { LinkProps } from '#ui/components/Link.vue'
 import type { AvatarProps } from '#ui/components/Avatar.vue'
 import type { BadgeProps } from '#ui/components/Badge.vue'
 
@@ -16,8 +16,6 @@ export interface NavigationMenuLink extends LinkProps {
   label: string | number
   icon?: string
   avatar?: AvatarProps
-  click?: Function
-  class?: any
   badge?: string | number | BadgeProps
 }
 
@@ -42,7 +40,8 @@ export interface NavigationMenuSlots<T extends NavigationMenuLink> {
 import { computed } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuLink, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { NuxtLink, UIcon, UAvatar, UBadge } from '#components'
+import { UIcon, UAvatar, UBadge, ULink, ULinkBase } from '#components'
+import { omit } from '#ui/utils'
 
 const props = withDefaults(defineProps<NavigationMenuProps<T>>(), { orientation: 'horizontal' })
 const emits = defineEmits<NavigationMenuEmits>()
@@ -50,49 +49,30 @@ defineSlots<NavigationMenuSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'delayDuration', 'skipDelayDuration', 'orientation'), emits)
 
-const ui = computed(() => tv({ extend: navigationMenu, slots: props.ui })({
-  orientation: props.orientation
-}))
+const ui = computed(() => tv({ extend: navigationMenu, slots: props.ui })({ orientation: props.orientation }))
 
 const lists = computed(() => props.links?.length ? (Array.isArray(props.links[0]) ? props.links : [props.links]) as T[][] : [])
-
-function onClick (e: MouseEvent, link: NavigationMenuLink, { href, navigate, isExternal }: { href: string; navigate: Function; isExternal: boolean }) {
-  if (link.click) {
-    link.click(e)
-  }
-
-  if (href && !isExternal) {
-    navigate(e)
-  }
-}
 </script>
 
 <template>
   <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
     <NavigationMenuList v-for="(list, index) in lists" :key="`list-${index}`" :class="ui.list()">
       <NavigationMenuItem v-for="(link, subIndex) in list" :key="`list-${index}-${subIndex}`" :class="ui.item()">
-        <NuxtLink v-slot="{ href, target, rel, navigate, isExternal, isActive }" v-bind="getNuxtLinkProps(link)" custom>
-          <NavigationMenuLink as-child :active="isActive">
-            <component
-              :is="href ? 'a' : 'button'"
-              :href="href"
-              :rel="rel"
-              :target="target"
-              :class="ui.base({ active: isActive, class: link.class })"
-              @click="onClick($event, link, { href, navigate, isExternal })"
-            >
-              <slot name="leading" :link="link" :active="isActive">
-                <UAvatar v-if="link.avatar" size="2xs" v-bind="link.avatar" :class="ui.avatar({ active: isActive })" />
-                <UIcon v-else-if="link.icon" :name="link.icon" :class="ui.icon({ active: isActive })" />
+        <ULink v-slot="{ active, ...slotProps }" v-bind="omit(link, ['label', 'icon', 'avatar', 'badge'])" custom>
+          <NavigationMenuLink as-child :active="active">
+            <ULinkBase v-bind="slotProps" :class="ui.base({ active })">
+              <slot name="leading" :link="link" :active="active">
+                <UAvatar v-if="link.avatar" size="2xs" v-bind="link.avatar" :class="ui.avatar({ active })" />
+                <UIcon v-else-if="link.icon" :name="link.icon" :class="ui.icon({ active })" />
               </slot>
 
               <span v-if="link.label || $slots.default" :class="ui.label()">
-                <slot :link="link" :active="isActive">
+                <slot :link="link" :active="active">
                   {{ link.label }}
                 </slot>
               </span>
 
-              <slot name="trailing" :link="link" :active="isActive">
+              <slot name="trailing" :link="link" :active="active">
                 <UBadge
                   v-if="link.badge"
                   color="gray"
@@ -102,9 +82,9 @@ function onClick (e: MouseEvent, link: NavigationMenuLink, { href, navigate, isE
                   :class="ui.badge()"
                 />
               </slot>
-            </component>
+            </ULinkBase>
           </NavigationMenuLink>
-        </NuxtLink>
+        </ULink>
       </NavigationMenuItem>
     </NavigationMenuList>
   </NavigationMenuRoot>

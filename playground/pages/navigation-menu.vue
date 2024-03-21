@@ -2,11 +2,11 @@
 const links = [
   [{
     label: 'Profile',
+    active: true,
     avatar: {
       src: 'https://avatars.githubusercontent.com/u/739984?v=4'
     },
     badge: 100,
-    coucou: 'test',
     click () {
       console.log('Profile clicked')
     }
