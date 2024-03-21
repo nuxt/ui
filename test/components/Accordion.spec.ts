@@ -1,0 +1,42 @@
+import { describe, it, expect } from 'vitest'
+import Accordion, { type AccordionProps } from '../../src/runtime/components/Accordion.vue'
+import ComponentRender from '../component-render'
+
+const items = [{
+  label: 'Getting Started',
+  icon: 'i-heroicons-information-circle',
+  content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+}, {
+  label: 'Installation',
+  icon: 'i-heroicons-arrow-down-tray',
+  disabled: true,
+  content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+}, {
+  label: 'Theming',
+  icon: 'i-heroicons-eye-dropper',
+  content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+}, {
+  label: 'Layouts',
+  icon: 'i-heroicons-rectangle-group',
+  content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+}, {
+  label: 'Components',
+  icon: 'i-heroicons-square-3-stack-3d',
+  content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+}, {
+  label: 'Utilities',
+  slot: 'toto',
+  icon: 'i-heroicons-wrench-screwdriver',
+  content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+}]
+
+describe('Accordion', () => {
+  it.each([
+    ['basic case', { props: { items } }],
+    ['with class', { props: { class: 'w-96' } }],
+    ['with ui', { props: { ui: { item: 'border' } } }]
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps<typeof items[number]>, slots?: any }) => {
+    const html = await ComponentRender(nameOrHtml, options, Accordion)
+    expect(html).toMatchSnapshot()
+  })
+})

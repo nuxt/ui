@@ -8,6 +8,7 @@ useHead({
 })
 
 const components = [
+  'accordion',
   'avatar',
   'badge',
   'button',
