@@ -1,17 +1,16 @@
 <template>
-  <HSwitch
-    :id="inputId"
-    v-model="active"
-    :name="name"
-    :disabled="disabled"
-    :class="switchClass"
-    v-bind="attrs"
-  >
+  <HSwitch :id="inputId" v-model="active" :name="name" :disabled="disabled || loading" :class="switchClass"
+    v-bind="attrs">
     <span :class="containerClass">
-      <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
+      <span v-if="loading" :class="[ui.icon.active, ui.icon.base]" aria-hidden="true">
+        <UIcon :name="loadingIcon" :class="loadingIconClass" />
+      </span>
+      <span v-if="!loading && onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]"
+        aria-hidden="true">
         <UIcon :name="onIcon" :class="onIconClass" />
       </span>
-      <span v-if="offIcon" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]" aria-hidden="true">
+      <span v-if="!loading && offIcon" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]"
+        aria-hidden="true">
         <UIcon :name="offIcon" :class="offIconClass" />
       </span>
     </span>
@@ -58,6 +57,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    loading: {
+      type: Boolean,
+      default: false
+    },
     onIcon: {
       type: String,
       default: () => config.default.onIcon
@@ -66,17 +69,21 @@ export default defineComponent({
       type: String,
       default: () => config.default.offIcon
     },
+    loadingIcon: {
+      type: String,
+      default: () => config.default.loadingIcon
+    },
     color: {
       type: String as PropType<ToggleColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return appConfig.ui.colors.includes(value)
       }
     },
     size: {
       type: String as PropType<ToggleSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
@@ -90,16 +97,16 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('toggle', toRef(props, 'ui'), config)
 
     const { emitFormChange, color, inputId, name } = useFormGroup(props)
 
     const active = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
         emitFormChange()
       }
@@ -137,6 +144,13 @@ export default defineComponent({
       )
     })
 
+    const loadingIconClass = computed(() => {
+      return twJoin(
+        ui.value.icon.size[props.size],
+        color.value && ui.value.icon.loading.replaceAll('{color}', color.value)
+      )
+    })
+
     provideUseId(() => useId())
 
     return {
@@ -150,7 +164,8 @@ export default defineComponent({
       switchClass,
       containerClass,
       onIconClass,
-      offIconClass
+      offIconClass,
+      loadingIconClass
     }
   }
 })
