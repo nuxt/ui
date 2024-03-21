@@ -45,7 +45,11 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#app'
 import UButton from '#ui/components/Button.vue'
 
-const props = withDefaults(defineProps<ModalProps>(), { portal: true, overlay: true, transition: true })
+const props = withDefaults(defineProps<ModalProps>(), {
+  portal: true,
+  overlay: true,
+  transition: true
+})
 const emits = defineEmits<ModalEmits>()
 defineSlots<ModalSlots>()
 

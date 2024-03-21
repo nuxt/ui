@@ -37,7 +37,11 @@ import { useForwardPropsEmits } from 'radix-vue'
 import { Popover, HoverCard } from 'radix-vue/namespaced'
 import { reactivePick } from '@vueuse/core'
 
-const props = withDefaults(defineProps<PopoverProps>(), { mode: 'click', openDelay: 0, closeDelay: 0 })
+const props = withDefaults(defineProps<PopoverProps>(), {
+  mode: 'click',
+  openDelay: 0,
+  closeDelay: 0
+})
 const emits = defineEmits<PopoverEmits>()
 defineSlots<PopoverSlots>()
 

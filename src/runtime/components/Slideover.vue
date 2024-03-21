@@ -45,7 +45,12 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#app'
 import UButton from '#ui/components/Button.vue'
 
-const props = withDefaults(defineProps<SlideoverProps>(), { portal: true, overlay: true, transition: true, side: 'right' })
+const props = withDefaults(defineProps<SlideoverProps>(), {
+  portal: true,
+  overlay: true,
+  transition: true,
+  side: 'right'
+})
 const emits = defineEmits<SlideoverEmits>()
 defineSlots<SlideoverSlots>()
 
