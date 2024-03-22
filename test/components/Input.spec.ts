@@ -18,7 +18,12 @@ describe('Input', () => {
     ['with trailing and icon', { props: { trailing: true, icon: 'i-heroicons-magnifying-glass' } }],
     ['with trailingIcon', { props: { trailingIcon: 'i-heroicons-magnifying-glass' } }],
     ['with trailing slot', { slots: { leading: () => 'trailing slot' } }],
-    ['with size', { props: { size: 'xs' as const } }],
+    ['with size 2xs', { props: { size: '2xs' as const } }],
+    ['with size xs', { props: { size: 'xs' as const } }],
+    ['with size sm', { props: { size: 'sm' as const } }],
+    ['with size md', { props: { size: 'md' as const } }],
+    ['with size lg', { props: { size: 'lg' as const } }],
+    ['with size xl', { props: { size: 'xl' as const } }],
     ['with color', { props: { color: 'red' as const } }],
     ['with variant', { props: { variant: 'outline' as const } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputProps, slots?: any }) => {
