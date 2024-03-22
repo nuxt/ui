@@ -10,7 +10,7 @@ export default (config: { colors: string[] }) => ({
         base: 'text-xs gap-x-1 px-2 py-1'
       },
       xs: {
-        base: 'text-sm gap-x-1.5 px-2.5 py-1.5'
+        base: 'text-sm gap-x-1.5 px-2.5 py-1'
       },
       sm: {
         base: 'text-sm gap-x-1.5 px-2.5 py-1.5'
