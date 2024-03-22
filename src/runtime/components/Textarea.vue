@@ -28,6 +28,7 @@ export interface TextareaProps {
   autoresize?: boolean
   ui?: Partial<typeof textarea.slots>
 }
+
 export interface TextareaEmits {
   (e: 'blur', event: FocusEvent): void
 }
@@ -61,7 +62,6 @@ const ui = computed(() => tv({ extend: textarea, slots: props.ui })({
   variant: props.variant,
   size: size?.value
 }))
-
 
 const inputRef = ref<HTMLTextAreaElement | null>(null)
 
@@ -117,7 +117,7 @@ onMounted(() => {
   }, props.autofocusDelay)
 })
 
-const autoResize = () => {
+function autoResize () {
   if (props.autoresize) {
 
     if (!inputRef.value) {
@@ -139,7 +139,6 @@ const autoResize = () => {
     }
   }
 }
-
 
 watch(() => modelValue, () => {
   nextTick(autoResize)
