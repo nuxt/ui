@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import textarea from '#build/ui/textarea'
+import theme from '#build/ui/textarea'
+
+const sizes = Object.keys(theme.variants.size)
 </script>
 
 <template>
@@ -15,7 +17,7 @@ import textarea from '#build/ui/textarea'
     </div>
     <div class="flex items-center gap-4">
       <UTextarea
-        v-for="size in Object.keys(textarea.variants.size)"
+        v-for="size in sizes"
         :key="size"
         placeholder="Search..."
         :size="(size as any)"
