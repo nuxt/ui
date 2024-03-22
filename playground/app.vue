@@ -25,6 +25,7 @@ const components = [
   'popover',
   'skeleton',
   'slideover',
+  'switch',
   'tabs',
   'tooltip'
 ]

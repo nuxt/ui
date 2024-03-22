@@ -1,0 +1,91 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Switch > renders basic case correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with as correctly 1`] = `
+"<section class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" role="switch" aria-checked="false" aria-required="false" data-state="unchecked" disabled="false" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></section>
+<!---->"
+`;
+
+exports[`Switch > renders with checked correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with class correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with defaultChecked correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with disabled correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with id correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" id="test" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with name correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with required correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="true" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with size 2xl correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-8 w-[3.75rem]" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-7"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with size 2xs correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-3 w-5" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-2"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with size lg correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-6 w-11" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-5"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with size md correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with size sm correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-4 w-7" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-3"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with size xl correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-7 w-[3.25rem]" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-6"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with size xs correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-3.5 w-6" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-2.5"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with ui correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with value correctly 1`] = `
+"<button class="peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="switch"><span data-state="unchecked" class="pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 size-4"></span></button>
+<!---->"
+`;
