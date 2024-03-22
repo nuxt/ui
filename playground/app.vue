@@ -27,6 +27,7 @@ const components = [
   'slideover',
   'switch',
   'tabs',
+  'textarea',
   'tooltip'
 ]
 
