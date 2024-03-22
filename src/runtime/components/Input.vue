@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { InputHTMLAttributes } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
-import { defu } from 'defu'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input'
@@ -18,12 +17,6 @@ export interface InputProps extends UseComponentIconsProps {
   id?: string
   name?: string
   type?: InputHTMLAttributes['type']
-  modelValue?: string
-  modelModifiers?: {
-    trim?: boolean
-    lazy?: boolean
-    number?: boolean
-  }
   placeholder?: string
   color?: InputVariants['color']
   variant?: InputVariants['variant']
@@ -37,7 +30,6 @@ export interface InputProps extends UseComponentIconsProps {
 }
 
 export interface InputEmits {
-  (e: 'update:modelValue', value: string): void
   (e: 'blur', event: FocusEvent): void
 }
 
@@ -59,6 +51,9 @@ const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
   autofocusDelay: 100
 })
+
+const [modelValue, modelModifiers] = defineModel<string | number>()
+
 const emit = defineEmits<InputEmits>()
 defineSlots<InputSlots>()
 
@@ -77,8 +72,6 @@ const ui = computed(() => tv({ extend: input, slots: props.ui })({
   trailing: isTrailing.value
 }))
 
-const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
-
 const inputRef = ref<HTMLInputElement | null>(null)
 
 function autoFocus () {
@@ -89,20 +82,20 @@ function autoFocus () {
 
 // Custom function to handle the v-model properties
 function updateInput (value: string) {
-  if (modelModifiers.value.trim) {
+  if (modelModifiers.trim) {
     value = value.trim()
   }
 
-  if (modelModifiers.value.number || props.type === 'number') {
+  if (modelModifiers.number || props.type === 'number') {
     value = looseToNumber(value)
   }
 
-  emit('update:modelValue', value)
+  modelValue.value = value
   emitFormInput()
 }
 
 function onInput (event: Event) {
-  if (!modelModifiers.value.lazy) {
+  if (!modelModifiers.lazy) {
     updateInput((event.target as HTMLInputElement).value)
   }
 }
@@ -110,12 +103,12 @@ function onInput (event: Event) {
 function onChange (event: Event) {
   const value = (event.target as HTMLInputElement).value
 
-  if (modelModifiers.value.lazy) {
+  if (modelModifiers.lazy) {
     updateInput(value)
   }
 
   // Update trimmed input so that it has same behavior as native input https://github.com/vuejs/core/blob/5ea8a8a4fab4e19a71e123e4d27d051f5e927172/packages/runtime-dom/src/directives/vModel.ts#L63
-  if (modelModifiers.value.trim) {
+  if (modelModifiers.trim) {
     (event.target as HTMLInputElement).value = value.trim()
   }
 }

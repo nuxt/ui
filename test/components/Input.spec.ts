@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import Input, { type InputProps } from '../../src/runtime/components/Input.vue'
 import ComponentRender from '../component-render'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Input', () => {
   it.each([
@@ -29,5 +30,37 @@ describe('Input', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputProps, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, Input)
     expect(html).toMatchSnapshot()
+  })
+
+  // See: https://github.com/nuxt/test-utils/issues/572
+  it.skip.each([
+    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' } ],
+    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 } ],
+    ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' } ]
+  ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
+    const wrapper = await mountSuspended(Input, {
+      ...options
+    })
+
+    const input = wrapper.find('input')
+    await input.setValue(spec.input)
+
+    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+  })
+
+  // See: https://github.com/nuxt/test-utils/issues/572
+  test.skip('with .lazy modifier updates on change only', async () => {
+    const wrapper = await mountSuspended(Input, {
+      props: {
+        modelModifiers: { lazy: true }
+      }
+    })
+
+    const input = wrapper.find('input')
+    await input.trigger('update')
+    expect(wrapper.emitted()).toMatchObject({ })
+
+    await input.trigger('change')
+    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['']] })
   })
 })
