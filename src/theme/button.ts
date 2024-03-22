@@ -42,8 +42,8 @@ export default (config: { colors: string[] }) => ({
       },
       lg: {
         base: 'px-3.5 py-2.5 text-sm gap-x-2.5',
-        leadingIcon: 'size-6',
-        trailingIcon: 'size-6'
+        leadingIcon: 'size-5',
+        trailingIcon: 'size-5'
       },
       xl: {
         base: 'px-3.5 py-2.5 text-base gap-x-2.5',
