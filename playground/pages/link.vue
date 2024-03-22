@@ -1,24 +1,51 @@
-<script setup lang="ts">
-const activeClass = 'text-primary-500 dark:text-primary-400'
-const inactiveClass = 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-</script>
-
 <template>
   <div class="flex flex-col items-start gap-2 text-sm">
-    <ULink v-slot="{ active }" active :active-class="activeClass" :inactive-class="inactiveClass">
-      Button active ({{ active }})
+    <ULink raw>
+      Button raw
     </ULink>
-    <ULink v-slot="{ active }" disabled :active-class="activeClass" :inactive-class="inactiveClass">
-      Button disabled ({{ active }})
+
+    <ULink active>
+      Button active
     </ULink>
-    <ULink v-slot="{ active }" to="/link" :active-class="activeClass" :inactive-class="inactiveClass">
-      Link ({{ active }})
+    <ULink active class="font-medium" active-class="text-gray-900 dark:text-white">
+      Button active with class
     </ULink>
-    <ULink v-slot="{ active }" to="/link" disabled :active-class="activeClass" :inactive-class="inactiveClass">
-      Link disabled ({{ active }})
+    <ULink active disabled>
+      Button active disabled
     </ULink>
-    <ULink v-slot="{ active }" to="/modal" :active-class="activeClass" :inactive-class="inactiveClass">
-      Modal ({{ active }})
+
+    <ULink>
+      Button inactive
+    </ULink>
+    <ULink class="font-medium" inactive-class="hover:text-primary-500 dark:hover:text-primary-400">
+      Button inactive with class
+    </ULink>
+    <ULink disabled>
+      Button inactive disabled
+    </ULink>
+
+    <ULink to="/link" raw>
+      Link raw
+    </ULink>
+
+    <ULink to="/link">
+      Link active
+    </ULink>
+    <ULink to="/link" class="font-medium" active-class="text-gray-900 dark:text-white">
+      Link active with class
+    </ULink>
+    <ULink to="/link" disabled>
+      Link active disabled
+    </ULink>
+
+    <ULink to="/button">
+      Link inactive
+    </ULink>
+    <ULink to="/button" class="font-medium" inactive-class="hover:text-primary-500 dark:hover:text-primary-400">
+      Link inactive with class
+    </ULink>
+    <ULink to="/button" disabled>
+      Link inactive disabled
     </ULink>
   </div>
 </template>

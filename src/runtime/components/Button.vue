@@ -60,7 +60,7 @@ const ui = computed(() => tv({ extend: button, slots: props.ui })({
 </script>
 
 <template>
-  <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="linkProps">
+  <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="linkProps" raw>
     <slot name="leading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" aria-hidden="true" />
     </slot>

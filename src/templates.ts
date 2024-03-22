@@ -12,10 +12,6 @@ export default function createTemplates (options: ModuleOptions, nuxt: Nuxt) {
     getContents: () => `@import "tailwindcss";
 
       @layer base {
-        a:focus-visible {
-          outline-color: var(--color-primary-500);
-        }
-
         :root {
           color-scheme: light dark;
         }
