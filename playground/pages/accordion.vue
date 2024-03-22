@@ -29,5 +29,7 @@ const items = [{
 </script>
 
 <template>
-  <UAccordion :items="items" class="w-96" />
+  <UCard :ui="{ body: 'p-0 sm:p-0' }">
+    <UAccordion :items="items" class="w-96" :ui="{ trigger: 'px-3.5', content: 'px-3.5' }" />
+  </UCard>
 </template>
