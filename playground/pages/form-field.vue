@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import formField from '#build/ui/formField'
+import theme from '#build/ui/formField'
 
+const sizes = Object.keys(theme.variants.size)
 const feedbacks = [
   { description: 'This is a description' },
   { error: 'This is an error' },
@@ -22,7 +23,7 @@ const feedbacks = [
 
     <div class="flex items-center gap-4">
       <UFormField
-        v-for="size in Object.keys(formField.variants.size)"
+        v-for="size in sizes"
         :key="size"
         :size="(size as any)"
         label="Email"

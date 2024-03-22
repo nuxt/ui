@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import chip from '#build/ui/chip'
+import theme from '#build/ui/chip'
 
-const sizes = Object.keys(chip.variants.size)
-const positions = Object.keys(chip.variants.position)
+const sizes = Object.keys(theme.variants.size)
+const positions = Object.keys(theme.variants.position)
 
 const items = [{
   name: 'messages',

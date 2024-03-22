@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import input from '#build/ui/input'
+import theme from '#build/ui/input'
+
+const sizes = Object.keys(theme.variants.size)
 </script>
 
 <template>
@@ -20,7 +22,7 @@ import input from '#build/ui/input'
     </div>
     <div class="flex items-center gap-4">
       <UInput
-        v-for="size in Object.keys(input.variants.size)"
+        v-for="size in sizes"
         :key="size"
         icon="i-heroicons-magnifying-glass"
         placeholder="Search..."
@@ -29,7 +31,7 @@ import input from '#build/ui/input'
     </div>
     <div class="flex items-center gap-4">
       <UInput
-        v-for="size in Object.keys(input.variants.size)"
+        v-for="size in sizes"
         :key="size"
         icon="i-heroicons-magnifying-glass"
         trailing
