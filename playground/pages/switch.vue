@@ -13,10 +13,10 @@ const checked = ref(false)
     <div>
       <USwitch v-model:checked="checked" disabled />
     </div>
-    <div class="flex items-center gap-2 ml-[-96px]">
+    <div class="flex items-center gap-2 ml-[-36px]">
       <USwitch v-for="size in sizes" :key="size" v-model:checked="checked" :size="(size as any)" />
     </div>
-    <div class="flex items-center gap-2 ml-[-96px]">
+    <div class="flex items-center gap-2 ml-[-36px]">
       <USwitch
         v-for="size in sizes"
         :key="size"
