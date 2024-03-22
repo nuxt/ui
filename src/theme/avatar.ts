@@ -20,28 +20,28 @@ export default {
         icon: 'size-3'
       },
       sm: {
-        root: 'size-8 text-sm',
-        icon: 'size-4'
+        root: 'size-7 text-sm',
+        icon: 'size-3.5'
       },
       md: {
-        root: 'size-10 text-base',
-        icon: 'size-5'
+        root: 'size-8 text-base',
+        icon: 'size-4'
       },
       lg: {
-        root: 'size-12 text-lg',
-        icon: 'size-6'
+        root: 'size-9 text-lg',
+        icon: 'size-4.5'
       },
       xl: {
-        root: 'size-14 text-xl',
-        icon: 'size-7'
+        root: 'size-10 text-xl',
+        icon: 'size-5'
       },
       '2xl': {
-        root: 'size-16 text-2xl',
-        icon: 'size-8'
+        root: 'size-11 text-[22px]',
+        icon: 'size-5.5'
       },
       '3xl': {
-        root: 'size-20 text-3xl',
-        icon: 'size-10'
+        root: 'size-12 text-2xl',
+        icon: 'size-6'
       }
     }
   },

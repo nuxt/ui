@@ -16,7 +16,7 @@ const sizes = Object.keys(theme.variants.size)
       <UAvatar v-for="size in sizes" :key="size" alt="Benjamin Canac" :size="(size as any)" />
     </div>
     <div class="flex items-center gap-1.5">
-      <UAvatar v-for="size in sizes" :key="size" text="+1" :size="(size as any)" />
+      <UAvatar v-for="size in sizes" :key="size" :text="size" :size="(size as any)" />
     </div>
   </div>
 </template>
