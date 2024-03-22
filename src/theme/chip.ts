@@ -11,15 +11,15 @@ export default (config: { colors: string[] }) => ({
       black: 'bg-gray-900 dark:bg-white'
     },
     size: {
-      '3xs': 'h-[4px] min-w-[4px] text-[4px] p-px',
-      '2xs': 'h-[5px] min-w-[5px] text-[5px] p-px',
-      xs: 'h-1.5 min-w-[0.375rem] text-[6px] p-px',
-      sm: 'h-2 min-w-[0.5rem] text-[7px] p-0.5',
-      md: 'h-2.5 min-w-[0.625rem] text-[8px] p-0.5',
-      lg: 'h-3 min-w-[0.75rem] text-[10px] p-0.5',
-      xl: 'h-3.5 min-w-[0.875rem] text-[11px] p-1',
-      '2xl': 'h-4 min-w-[1rem] text-[12px] p-1',
-      '3xl': 'h-5 min-w-[1.25rem] text-[14px] p-1'
+      '3xs': 'h-[4px] min-w-[4px] text-[4px]',
+      '2xs': 'h-[5px] min-w-[5px] text-[5px]',
+      xs: 'h-[6px] min-w-[6px] text-[6px]',
+      sm: 'h-[7px] min-w-[7px] text-[7px]',
+      md: 'h-[8px] min-w-[8px] text-[8px]',
+      lg: 'h-[9px] min-w-[9px] text-[9px]',
+      xl: 'h-[10px] min-w-[10px] text-[10px]',
+      '2xl': 'h-[11px] min-w-[11px] text-[11px]',
+      '3xl': 'h-[12px] min-w-[12px] text-[12px]'
     },
     position: {
       'top-right': 'top-0 right-0',
