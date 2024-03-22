@@ -18,7 +18,7 @@ export default (config: { colors: string[] }) => {
           trailingIcon: 'size-4'
         },
         xs: {
-          base: 'text-sm gap-x-1.5 px-2.5 py-1.5',
+          base: 'text-sm gap-x-1.5 px-2.5 py-1',
           leading: 'px-2.5',
           trailing: 'px-2.5',
           leadingIcon: 'size-4',

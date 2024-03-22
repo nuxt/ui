@@ -24,6 +24,14 @@ const sizes = Object.keys(theme.variants.size)
       <UInput
         v-for="size in sizes"
         :key="size"
+        placeholder="Search..."
+        :size="(size as any)"
+      />
+    </div>
+    <div class="flex items-center gap-4">
+      <UInput
+        v-for="size in sizes"
+        :key="size"
         icon="i-heroicons-magnifying-glass"
         placeholder="Search..."
         :size="(size as any)"
