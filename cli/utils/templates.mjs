@@ -25,6 +25,7 @@ const component = ({ name }) => {
     contents: `
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
+import type { ${upperName}RootProps, ${upperName}RootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/${camelName}'
@@ -35,26 +36,32 @@ const ${camelName} = tv({ extend: tv(theme), ...(appConfig.ui?.${camelName} || {
 
 type ${upperName}Variants = VariantProps<typeof ${camelName}>
 
-export interface ${upperName}Props {
+export interface ${upperName}Props extends Omit<${upperName}RootProps, 'asChild'> {
   class?: any
   ui?: Partial<typeof ${camelName}.slots>
 }
 
-export interface ${upperName}Slots {
-}
+export interface ${upperName}Emits extends ${upperName}RootEmits {}
+
+export interface ${upperName}Slots {}
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { ${upperName}Root, useForwardPropsEmits } from 'radix-vue'
+import { reactivePick } from '@vueuse/core'
 
 const props = defineProps<${upperName}Props>()
+const emits = defineEmits<${upperName}Emits>()
 const slots = defineSlots<${upperName}Slots>()
+
+const rootProps = useForwardPropsEmits(reactivePick(props), emits)
 
 const ui = computed(() => tv({ extend: ${camelName}, slots: props.ui })())
 </script>
 
 <template>
-  <div />
+  <${upperName}Root v-bind="rootProps" :class="ui.root({ class: props.class })" />
 </template>
     `
   }
@@ -66,7 +73,7 @@ const theme = ({ name }) => {
   return {
     filename: `src/theme/${camelName}.ts`,
     contents: `
-export default {
+export default (config: { colors: string[] }) => ({
   slots: {
     root: ''
   },
@@ -76,7 +83,7 @@ export default {
   defaultVariants: {
 
   }
-}
+})
     `
   }
 }
