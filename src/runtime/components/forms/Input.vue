@@ -163,7 +163,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'blur'],
+  emits: ['update:modelValue', 'blur', 'change'],
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -206,6 +206,7 @@ export default defineComponent({
 
     const onChange = (event: Event) => {
       const value = (event.target as HTMLInputElement).value
+      emit('change', value)
 
       if (modelModifiers.value.lazy) {
         updateInput(value)

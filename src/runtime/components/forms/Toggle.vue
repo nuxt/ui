@@ -120,6 +120,8 @@ export default defineComponent({
       },
       set (value) {
         emit('update:modelValue', value)
+        emit('change', value)
+
         emitFormChange()
       }
     })
