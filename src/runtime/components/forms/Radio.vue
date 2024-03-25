@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="ui.wrapper" :data-n-ids="attrs['data-n-ids']">
     <div :class="ui.container">
       <input
         :id="inputId"
@@ -11,6 +11,7 @@
         type="radio"
         :class="inputClass"
         v-bind="attrs"
+        @change="onChange"
       >
     </div>
     <div v-if="label || $slots.label" :class="ui.inner">
@@ -42,6 +43,7 @@ import { useId } from '#imports'
 const config = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     id: {
       type: String,
@@ -110,13 +112,15 @@ export default defineComponent({
       },
       set (value) {
         emit('update:modelValue', value)
-        emit('change', value)
-
         if (!radioGroup) {
           emitFormChange()
         }
       }
     })
+
+    function onChange (event: Event) {
+      emit('change', (event.target as HTMLInputElement).value)
+    }
 
     const inputClass = computed(() => {
       return twMerge(twJoin(
@@ -138,7 +142,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       name,
       // eslint-disable-next-line vue/no-dupe-keys
-      inputClass
+      inputClass,
+      onChange
     }
   }
 })

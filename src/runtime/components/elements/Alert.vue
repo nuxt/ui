@@ -1,8 +1,12 @@
 <template>
   <div :class="alertClass" v-bind="attrs">
     <div class="flex" :class="[ui.gap, { 'items-start': (description || $slots.description), 'items-center': !description && !$slots.description }]">
-      <UIcon v-if="icon" :name="icon" :class="ui.icon.base" />
-      <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
+      <slot name="icon" :icon="icon">
+        <UIcon v-if="icon" :name="icon" :ui="ui.icon.base" />
+      </slot>
+      <slot name="avatar" :avatar="avatar">
+        <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
+      </slot>
 
       <div :class="ui.inner">
         <p v-if="(title || $slots.title)" :class="ui.title">
@@ -10,7 +14,7 @@
             {{ title }}
           </slot>
         </p>
-        <p v-if="description || $slots.description" :class="ui.description">
+        <p v-if="description || $slots.description" :class="twMerge(ui.description, !(title && $slots.title) && 'mt-0 leading-5')">
           <slot name="description" :description="description">
             {{ description }}
           </slot>

@@ -180,13 +180,13 @@ Use the `#leading` slot to set the content of the leading icon.
 ::component-card
 ---
 slots:
-  leading: <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" size="3xs" class="mx-0.5" />
+  leading: <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" size="2xs" />
 baseProps:
   placeholder: 'Search...'
 ---
 
 #leading
-  :u-avatar{src="https://avatars.githubusercontent.com/u/739984?v=4" size="3xs" class="mx-0.5"}
+  :u-avatar{src="https://avatars.githubusercontent.com/u/739984?v=4" size="2xs"}
 ::
 
 ### `trailing`

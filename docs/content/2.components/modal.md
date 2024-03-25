@@ -1,12 +1,12 @@
 ---
 description: Display a modal within your application.
 links:
-  - label: GitHub
-    icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/overlays/Modal.vue
   - label: 'Dialog'
     icon: i-simple-icons-headlessui
     to: 'https://headlessui.com/vue/dialog'
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/overlays/Modal.vue
 ---
 
 ## Usage
@@ -78,6 +78,8 @@ First of all, add the `Modals` component to your app, preferably inside `app.vue
 Then, you can use the `useModal` composable to control your modals within your app.
 
 :component-example{component="modal-example-composable"}
+
+Additionally, you can close the modal within the modal component by calling `modal.close()`. 
 
 ## Props
 

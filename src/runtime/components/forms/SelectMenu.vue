@@ -105,12 +105,12 @@
                 </div>
               </li>
             </component>
-            <p v-else-if="searchable && query && !filteredOptions.length" :class="uiMenu.option.empty">
+            <p v-else-if="searchable && query && !filteredOptions?.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
                 No results for "{{ query }}".
               </slot>
             </p>
-            <p v-else-if="!filteredOptions.length" :class="uiMenu.empty">
+            <p v-else-if="!filteredOptions?.length" :class="uiMenu.empty">
               <slot name="empty" :query="query">
                 No options.
               </slot>
@@ -362,7 +362,7 @@ export default defineComponent({
         } else {
           return null
         }
-      } else {
+      } else if (props.modelValue) {
         if (props.valueAttribute) {
           const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
           return option ? option[props.optionAttribute] : null
@@ -370,6 +370,8 @@ export default defineComponent({
           return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
         }
       }
+
+      return null
     })
 
     const selectClass = computed(() => {
@@ -505,11 +507,12 @@ export default defineComponent({
 
     function onUpdate (event: any) {
       emit('update:modelValue', event)
-      emit('change', event)
-      emitFormChange()
     }
 
     function onChange (event: any) {
+      emit('change', (event.target as HTMLInputElement).value)
+      emitFormChange()
+
       query.value = event.target.value
     }
 

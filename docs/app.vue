@@ -3,7 +3,7 @@
   <div>
     <NuxtLoadingIndicator />
 
-    <Banner />
+    <Banner v-if="!$route.path.startsWith('/examples')" />
 
     <Header v-if="!$route.path.startsWith('/examples')" :links="links" />
 
@@ -14,7 +14,7 @@
     <Footer v-if="!$route.path.startsWith('/examples')" />
 
     <ClientOnly>
-      <LazyUContentSearch ref="searchRef" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 1000 }" />
+      <LazyUContentSearch ref="searchRef" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
     </ClientOnly>
 
     <UNotifications>
@@ -23,6 +23,7 @@
       </template>
     </UNotifications>
     <UModals />
+    <USlideovers />
   </div>
 </template>
 

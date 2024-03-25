@@ -1,7 +1,7 @@
 import { createResolver } from '@nuxt/kit'
 import colors from 'tailwindcss/colors'
 import module from '../src/module'
-import { excludeColors } from '../src/runtime/utils/colors'
+import { excludeColors } from '../src/colors'
 import pkg from '../package.json'
 
 const { resolve } = createResolver(import.meta.url)
@@ -17,11 +17,10 @@ export default defineNuxtConfig({
   ].filter(Boolean),
   modules: [
     '@nuxt/content',
+    '@nuxt/fonts',
     '@nuxt/image',
     'nuxt-og-image',
     module,
-    '@nuxtjs/fontaine',
-    '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
