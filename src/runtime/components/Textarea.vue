@@ -63,11 +63,11 @@ const ui = computed(() => tv({ extend: textarea, slots: props.ui })({
   size: size?.value
 }))
 
-const inputRef = ref<HTMLTextAreaElement | null>(null)
+const textareaRef = ref<HTMLTextAreaElement | null>(null)
 
 function autoFocus () {
   if (props.autofocus) {
-    inputRef.value?.focus()
+    textareaRef.value?.focus()
   }
 }
 
@@ -120,22 +120,22 @@ onMounted(() => {
 function autoResize () {
   if (props.autoresize) {
 
-    if (!inputRef.value) {
+    if (!textareaRef.value) {
       return
     }
 
-    inputRef.value.rows = props.rows
+    textareaRef.value.rows = props.rows
 
-    const styles = window.getComputedStyle(inputRef.value)
+    const styles = window.getComputedStyle(textareaRef.value)
     const paddingTop = parseInt(styles.paddingTop)
     const paddingBottom = parseInt(styles.paddingBottom)
     const padding = paddingTop + paddingBottom
     const lineHeight = parseInt(styles.lineHeight)
-    const { scrollHeight } = inputRef.value
+    const { scrollHeight } = textareaRef.value
     const newRows = (scrollHeight - padding) / lineHeight
 
     if (newRows > props.rows) {
-      inputRef.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
+      textareaRef.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
     }
   }
 }
@@ -155,7 +155,7 @@ onMounted(() => {
   <div :class="ui.root({ class: props.class })">
     <textarea
       :id="inputId"
-      ref="inputRef"
+      ref="textareaRef"
       :value="modelValue"
       :name="name"
       :rows="rows"
