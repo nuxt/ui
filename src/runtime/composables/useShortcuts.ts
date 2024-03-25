@@ -3,7 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import type {} from '@vueuse/shared'
 
 export const _useShortcuts = () => {
-  const macOS = computed(() => process.client && navigator && navigator.userAgent && navigator.userAgent.match(/Macintosh;/))
+  const macOS = computed(() => import.meta.client && navigator && navigator.userAgent && navigator.userAgent.match(/Macintosh;/))
 
   const metaSymbol = ref(' ')
 
