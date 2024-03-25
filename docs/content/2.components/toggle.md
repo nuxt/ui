@@ -52,6 +52,19 @@ excludedProps:
 ---
 ::
 
+### Loading :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+
+Use the `loading` prop to show a loading icon and disable the Toggle.
+
+Use the `loading-icon` prop to set a different icon or change it globally in `ui.toggle.default.loadingIcon`. Defaults to `i-heroicons-arrow-path-20-solid`.
+
+::component-card
+---
+props:
+  loading: true
+---
+::
+
 ### Disabled
 
 Use the `disabled` prop to disable the Toggle.
