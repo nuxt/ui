@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, defineComponent } from 'vue'
+import { ref, computed, toRef, defineComponent, watch } from 'vue'
 import type { PropType } from 'vue'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel, provideUseId } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
@@ -108,12 +108,25 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  emits: ['open'],
+  setup (props, { emit }) {
     const { ui, attrs } = useUI('accordion', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const uiButton = computed<typeof configButton>(() => configButton)
 
     const buttonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
+    
+    const openedStates = computed(() => buttonRefs.value.map(({ open }) => open))
+    watch(openedStates, (newValue, oldValue) => {
+      for (const index in newValue) {
+        const isOpenBefore = oldValue[index]
+        const isOpenAfter = newValue[index]
+
+        if (!isOpenBefore && isOpenAfter) {
+          emit('open', index)
+        }
+      }
+    }, { immediate: true })
 
     function closeOthers (currentIndex: number, e: Event) {
       if (!props.items[currentIndex].closeOthers && props.multiple) {
