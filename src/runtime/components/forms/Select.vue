@@ -194,8 +194,8 @@ export default defineComponent({
     }
 
     const onChange = (event: Event) => {
+      emit('change', (event.target as HTMLInputElement).value)
       emitFormChange()
-      emit('change', event)
     }
 
     const guessOptionValue = (option: any) => {

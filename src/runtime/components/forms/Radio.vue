@@ -11,6 +11,7 @@
         type="radio"
         :class="inputClass"
         v-bind="attrs"
+        @change="onChange"
       >
     </div>
     <div v-if="label || $slots.label" :class="ui.inner">
@@ -110,13 +111,15 @@ export default defineComponent({
       },
       set (value) {
         emit('update:modelValue', value)
-        emit('change', value)
-
         if (!radioGroup) {
           emitFormChange()
         }
       }
     })
+
+    function onChange (event: Event) {
+      emit('change', (event.target as HTMLInputElement).value)
+    }
 
     const inputClass = computed(() => {
       return twMerge(twJoin(
@@ -138,7 +141,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       name,
       // eslint-disable-next-line vue/no-dupe-keys
-      inputClass
+      inputClass,
+      onChange
     }
   }
 })

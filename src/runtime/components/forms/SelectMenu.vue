@@ -507,11 +507,12 @@ export default defineComponent({
 
     function onUpdate (event: any) {
       emit('update:modelValue', event)
-      emit('change', event)
-      emitFormChange()
     }
 
     function onChange (event: any) {
+      emit('change', (event.target as HTMLInputElement).value)
+      emitFormChange()
+
       query.value = event.target.value
     }
 

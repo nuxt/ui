@@ -21,7 +21,7 @@
         autocomplete="off"
         v-bind="attrs"
         :display-value="() => query ? query : label"
-        @change="onChange"
+        @change="onQueryChange"
       />
 
       <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
@@ -418,14 +418,15 @@ export default defineComponent({
       }
     })
 
-    function onUpdate (event: any) {
+    function onUpdate (value: any) {
       query.value = ''
-      emit('update:modelValue', event)
-      emit('change', event)
+      emit('update:modelValue', value)
+      emit('change', value)
+
       emitFormChange()
     }
 
-    function onChange (event: any) {
+    function onQueryChange (event: any) {
       query.value = event.target.value
     }
 
@@ -459,7 +460,7 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       query,
       onUpdate,
-      onChange
+      onQueryChange
     }
   }
 })
