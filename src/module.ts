@@ -1,24 +1,21 @@
+import { createRequire } from 'node:module'
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
-import defaultColors from 'tailwindcss/colors.js'
 import { defaultExtractor as createDefaultExtractor } from 'tailwindcss/lib/lib/defaultExtractor.js'
 import { iconsPlugin, getIconCollections, type CollectionNames, type IconsPluginOptions } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
-import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
 import createTemplates from './templates'
+import { generateSafelist, excludeColors, customSafelistExtractor } from './colors'
 import * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types/utils'
 
 const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
+const _require = createRequire(import.meta.url)
+const defaultColors = _require('tailwindcss/colors.js')
 
-// @ts-ignore
 delete defaultColors.lightBlue
-// @ts-ignore
 delete defaultColors.warmGray
-// @ts-ignore
 delete defaultColors.trueGray
-// @ts-ignore
 delete defaultColors.coolGray
-// @ts-ignore
 delete defaultColors.blueGray
 
 type UI = {
@@ -31,11 +28,13 @@ type UI = {
 
 declare module 'nuxt/schema' {
   interface AppConfigInput {
+    // @ts-ignore
     ui?: UI
   }
 }
 declare module '@nuxt/schema' {
   interface AppConfigInput {
+    // @ts-ignore
     ui?: UI
   }
 }
@@ -54,6 +53,10 @@ export interface ModuleOptions {
   icons: CollectionNames[] | 'all' | IconsPluginOptions
 
   safelistColors?: string[]
+  /**
+   * Disables the global css styles added by the module.
+   */
+  disableGlobalStyles?: boolean
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -62,13 +65,14 @@ export default defineNuxtModule<ModuleOptions>({
     version,
     configKey: 'ui',
     compatibility: {
-      nuxt: '^3.0.0-rc.8'
+      nuxt: '^3.10.0'
     }
   },
   defaults: {
     prefix: 'U',
     icons: ['heroicons'],
-    safelistColors: ['primary']
+    safelistColors: ['primary'],
+    disableGlobalStyles: false
   },
   async setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
@@ -80,7 +84,9 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.alias['#ui'] = runtimeDir
 
-    nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
+    if (!options.disableGlobalStyles) {
+      nuxt.options.css.push(resolve(runtimeDir, 'ui.css'))
+    }
 
     // @ts-ignore
     nuxt.hook('tailwindcss:config', function (tailwindConfig) {
@@ -141,9 +147,6 @@ export default defineNuxtModule<ModuleOptions>({
 
       tailwindConfig.safelist = tailwindConfig.safelist || []
       tailwindConfig.safelist.push(...generateSafelist(options.safelistColors || [], colors))
-
-      tailwindConfig.plugins = tailwindConfig.plugins || []
-      tailwindConfig.plugins.push(iconsPlugin(Array.isArray(options.icons) || options.icons === 'all' ? { collections: getIconCollections(options.icons) } : typeof options.icons === 'object' ? options.icons as IconsPluginOptions : {}))
     })
 
     createTemplates(nuxt)
@@ -161,7 +164,8 @@ export default defineNuxtModule<ModuleOptions>({
           require('@tailwindcss/aspect-ratio'),
           require('@tailwindcss/typography'),
           require('@tailwindcss/container-queries'),
-          require('@headlessui/tailwindcss')
+          require('@headlessui/tailwindcss'),
+          iconsPlugin(Array.isArray(options.icons) || options.icons === 'all' ? { collections: getIconCollections(options.icons) } : typeof options.icons === 'object' ? options.icons as IconsPluginOptions : {})
         ],
         content: {
           files: [
@@ -190,6 +194,14 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({
       src: resolve(runtimeDir, 'plugins', 'colors')
+    })
+
+    addPlugin({
+      src: resolve(runtimeDir, 'plugins', 'modals')
+    })
+
+    addPlugin({
+      src: resolve(runtimeDir, 'plugins', 'slideovers')
     })
 
     // Components

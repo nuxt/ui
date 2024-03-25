@@ -9,7 +9,10 @@ export const _useShortcuts = () => {
 
   const activeElement = useActiveElement()
   const usingInput = computed(() => {
-    const usingInput = !!(activeElement.value?.tagName === 'INPUT' || activeElement.value?.tagName === 'TEXTAREA' || activeElement.value?.contentEditable === 'true')
+    const tagName = activeElement.value?.tagName
+    const contentEditable = activeElement.value?.contentEditable
+
+    const usingInput = !!(tagName === 'INPUT' || tagName === 'TEXTAREA' || contentEditable === 'true' || contentEditable === 'plaintext-only')
 
     if (usingInput) {
       return ((activeElement.value as any)?.name as string) || true

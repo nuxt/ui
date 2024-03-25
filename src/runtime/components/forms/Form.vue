@@ -5,14 +5,14 @@
 </template>
 
 <script lang="ts">
-import { provide, ref, type PropType, defineComponent } from 'vue'
+import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types/form'
-import { uid } from '../../utils/uid'
+import { useId } from '#imports'
 
 class FormException extends Error {
   constructor (message: string) {
@@ -49,12 +49,19 @@ export default defineComponent({
   },
   emits: ['submit', 'error'],
   setup (props, { expose, emit }) {
-    const bus = useEventBus<FormEvent>(`form-${uid()}`)
+    const formId = useId()
+    const bus = useEventBus<FormEvent>(`form-${formId}`)
 
-    bus.on(async (event) => {
-      if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
-        await validate(event.path, { silent: true })
-      }
+    onMounted(() => {
+      bus.on(async (event) => {
+        if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
+          await validate(event.path, { silent: true })
+        }
+      })
+    })
+
+    onUnmounted(() => {
+      bus.reset()
     })
 
     const errors = ref<FormError[]>([])
@@ -83,28 +90,38 @@ export default defineComponent({
       return errs
     }
 
-    async function validate (path?: string, opts: { silent?: boolean } = { silent: false }) {
-      if (path) {
+    async function validate (path?: string | string[], opts: { silent?: boolean } = { silent: false }) {
+      let paths = path
+
+      if (path && !Array.isArray(path)) {
+        paths = [path]
+      }
+
+      if (paths) {
         const otherErrors = errors.value.filter(
-          (error) => error.path !== path
+          (error) => !paths.includes(error.path)
         )
         const pathErrors = (await getErrors()).filter(
-          (error) => error.path === path
+          (error) => paths.includes(error.path)
         )
         errors.value = otherErrors.concat(pathErrors)
       } else {
         errors.value = await getErrors()
       }
 
-      if (!opts.silent && errors.value.length > 0) {
+      if (errors.value.length > 0) {
+        if (opts.silent) return false
+
         throw new FormException(
           `Form validation failed: ${JSON.stringify(errors.value, null, 2)}`
         )
       }
+
       return props.state
     }
 
-    async function onSubmit (event: SubmitEvent) {
+    async function onSubmit (payload: Event) {
+      const event = payload as SubmitEvent
       try {
         if (props.validateOn?.includes('submit')) {
           await validate()
@@ -143,6 +160,9 @@ export default defineComponent({
           errors.value = errs
         }
       },
+      async submit () {
+        await onSubmit(new Event('submit'))
+      },
       getErrors (path?: string) {
         if (path) {
           return errors.value.filter((err) => err.path === path)
@@ -151,7 +171,7 @@ export default defineComponent({
       },
       clear (path?: string) {
         if (path) {
-          errors.value = errors.value.filter((err) => err.path === path)
+          errors.value = errors.value.filter((err) => err.path !== path)
         } else {
           errors.value = []
         }

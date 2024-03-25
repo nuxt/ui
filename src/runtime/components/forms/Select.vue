@@ -5,7 +5,7 @@
       :name="name"
       :value="modelValue"
       :required="required"
-      :disabled="disabled || loading"
+      :disabled="disabled"
       :class="selectClass"
       v-bind="attrs"
       @input="onInput"
@@ -194,8 +194,8 @@ export default defineComponent({
     }
 
     const onChange = (event: Event) => {
+      emit('change', (event.target as HTMLInputElement).value)
       emitFormChange()
-      emit('change', event)
     }
 
     const guessOptionValue = (option: any) => {
@@ -262,7 +262,7 @@ export default defineComponent({
         variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
-      ), props.selectClass)
+      ), props.placeholder && !props.modelValue && ui.value.placeholder, props.selectClass)
     })
 
     const isLeading = computed(() => {
@@ -348,3 +348,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.form-select {
+  background-image: none;
+}
+</style>

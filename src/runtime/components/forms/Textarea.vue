@@ -66,6 +66,10 @@ export default defineComponent({
       type: Number,
       default: 3
     },
+    maxrows: {
+      type: Number,
+      default: 0
+    },
     autoresize: {
       type: Boolean,
       default: false
@@ -127,7 +131,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'blur'],
+  emits: ['update:modelValue', 'blur', 'change'],
   setup (props, { emit }) {
     const { ui, attrs } = useUI('textarea', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -160,7 +164,7 @@ export default defineComponent({
         const newRows = (scrollHeight - padding) / lineHeight
 
         if (newRows > props.rows) {
-          textarea.value.rows = newRows
+          textarea.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
         }
       }
     }
@@ -188,12 +192,13 @@ export default defineComponent({
 
     const onChange = (event: Event) => {
       const value = (event.target as HTMLInputElement).value
+      emit('change', value)
 
       if (modelModifiers.value.lazy) {
         updateInput(value)
       }
 
-      // Update trimmed input so that it has same behaviour as native input
+      // Update trimmed input so that it has same behavior as native input
       if (modelModifiers.value.trim) {
         (event.target as HTMLInputElement).value = value.trim()
       }

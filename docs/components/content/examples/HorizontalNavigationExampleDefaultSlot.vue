@@ -1,0 +1,22 @@
+<script setup lang="ts">
+const route = useRoute()
+
+const links = [{
+  label: 'Horizontal Navigation',
+  to: `${route.path.startsWith('/dev') ? '/dev' : ''}/components/horizontal-navigation`
+}, {
+  label: 'Command Palette',
+  to: '/components/command-palette'
+}, {
+  label: 'Table',
+  to: '/components/table'
+}]
+</script>
+
+<template>
+  <UHorizontalNavigation :links="links">
+    <template #default="{ link }">
+      <span class="group-hover:text-primary relative">{{ link.label }}</span>
+    </template>
+  </UHorizontalNavigation>
+</template>

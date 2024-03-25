@@ -17,12 +17,10 @@ export default defineNuxtConfig({
   ].filter(Boolean),
   modules: [
     '@nuxt/content',
+    '@nuxt/fonts',
+    '@nuxt/image',
     'nuxt-og-image',
-    // '@nuxt/devtools',
-    // '@nuxthq/studio',
     module,
-    '@nuxtjs/fontaine',
-    '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
@@ -40,6 +38,12 @@ export default defineNuxtConfig({
     safelistColors: excludeColors(colors)
   },
   content: {
+    highlight: {
+      langs: [
+        'postcss',
+        'mdc'
+      ]
+    },
     sources: {
       dev: {
         prefix: '/dev',
@@ -67,6 +71,9 @@ export default defineNuxtConfig({
       } : undefined
     }
   },
+  image: {
+    provider: 'ipx'
+  },
   fontMetrics: {
     fonts: ['DM Sans']
   },
@@ -86,8 +93,13 @@ export default defineNuxtConfig({
         '/api/search.json',
         '/api/releases.json',
         '/api/pulls.json'
-      ]
+      ],
+      ignore: !process.env.NUXT_UI_PRO_PATH && !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     }
+  },
+  routeRules: {
+    '/components': { redirect: '/components/accordion', prerender: false },
+    '/dev/components': { redirect: '/dev/components/accordion', prerender: false }
   },
   componentMeta: {
     exclude: [

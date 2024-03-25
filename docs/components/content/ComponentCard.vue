@@ -51,11 +51,9 @@
 </template>
 
 <script setup lang="ts">
-// @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
-// @ts-ignore
-import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
 import { upperFirst, camelCase, kebabCase } from 'scule'
+import { useShikiHighlighter } from '~/composables/useShikiHighlighter'
 
 // eslint-disable-next-line vue/no-dupe-keys
 const props = defineProps({
@@ -124,6 +122,7 @@ const componentProps = reactive({ ...props.props })
 const { $prettier } = useNuxtApp()
 const appConfig = useAppConfig()
 const route = useRoute()
+const highlighter = useShikiHighlighter()
 
 let name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
 
@@ -217,6 +216,7 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
 // eslint-disable-next-line vue/no-dupe-keys
 const code = computed(() => {
   let code = `\`\`\`html
+<template>
 <${name}`
   for (const [key, value] of Object.entries(fullProps.value)) {
     if (value === 'undefined' || value === null) {
@@ -246,7 +246,7 @@ const code = computed(() => {
   } else {
     code += ' />'
   }
-  code += `
+  code += `\n</template>
 \`\`\`
 `
   return code
@@ -268,8 +268,6 @@ function renderObject (obj: any) {
   return obj
 }
 
-const shikiHighlighter = useShikiHighlighter({})
-const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
 const { data: ast } = await useAsyncData(
   `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`,
   async () => {
@@ -283,7 +281,7 @@ const { data: ast } = await useAsyncData(
     return transformContent('content:_markdown.md', formatted, {
       markdown: {
         highlight: {
-          highlighter: codeHighlighter,
+          highlighter,
           theme: {
             light: 'material-theme-lighter',
             default: 'material-theme',

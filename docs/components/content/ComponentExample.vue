@@ -12,7 +12,7 @@
       <ContentSlot v-if="$slots.default" :use="$slots.default" />
     </div>
     <template v-if="hasCode">
-      <ContentSlot v-if="$slots.code" :use="$slots.code" />
+      <slot v-if="$slots.code" name="code" />
       <ContentRenderer v-else :value="ast" class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0" />
     </template>
   </div>
@@ -21,10 +21,8 @@
 <script setup lang="ts">
 import { camelCase } from 'scule'
 import { fetchContentExampleCode } from '~/composables/useContentExamplesCode'
-// @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
-// @ts-ignore
-import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
+import { useShikiHighlighter } from '~/composables/useShikiHighlighter'
 
 const props = defineProps({
   component: {
@@ -78,15 +76,14 @@ if (['command-palette-theme-algolia', 'command-palette-theme-raycast', 'vertical
 const instance = getCurrentInstance()
 const camelName = camelCase(component)
 const data = await fetchContentExampleCode(camelName)
+const highlighter = useShikiHighlighter()
 
 const hasCode = computed(() => !props.hiddenCode && (data?.code || instance.slots.code))
 
-const shikiHighlighter = useShikiHighlighter({})
-const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
 const { data: ast } = await useAsyncData(`content-example-${camelName}-ast`, () => transformContent('content:_markdown.md', `\`\`\`vue\n${data?.code ?? ''}\n\`\`\``, {
   markdown: {
     highlight: {
-      highlighter: codeHighlighter,
+      highlighter,
       theme: {
         light: 'material-theme-lighter',
         default: 'material-theme',

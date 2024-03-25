@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const people = [
   { id: 1, label: 'Wade Cooper' },
   { id: 2, label: 'Arlene Mccoy' },
