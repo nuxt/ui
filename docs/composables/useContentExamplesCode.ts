@@ -11,7 +11,7 @@ export async function fetchContentExampleCode (name?: string) {
   if (state.value[name]) { return state.value[name] }
 
   // add to nitro prerender
-  if (process.server) {
+  if (import.meta.server) {
     const event = useRequestEvent()
     event.node.res.setHeader(
       'x-nitro-prerender',
