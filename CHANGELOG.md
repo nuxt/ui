@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.15.0](https://github.com/nuxt/ui/compare/v2.14.2...v2.15.0) (2024-03-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **forms:** normalize input emits (#1560)
+
+### Features
+
+* **Accordion:** emit `open` event with index ([#1559](https://github.com/nuxt/ui/issues/1559)) ([224ec3c](https://github.com/nuxt/ui/commit/224ec3c1fbfb9875398d3af60e5fe49e47ce55b1))
+* **Alert:** add `icon` & `avatar` slots ([#1401](https://github.com/nuxt/ui/issues/1401)) ([cee3e12](https://github.com/nuxt/ui/commit/cee3e126a472735c0e484de315868bb28287164f))
+* **Slideover:** open programmatically ([#1465](https://github.com/nuxt/ui/issues/1465)) ([e769759](https://github.com/nuxt/ui/commit/e7697595c8769ceea61690f6c2f294206de50972))
+* **Toggle:** add `loading` prop ([#1546](https://github.com/nuxt/ui/issues/1546)) ([e1e05af](https://github.com/nuxt/ui/commit/e1e05af0bafd1e5d1b91f374562ed8d389fb0cae))
+
+
+### Bug Fixes
+
+* **ButtonGroup:** nested group elements ([#1530](https://github.com/nuxt/ui/issues/1530)) ([7658211](https://github.com/nuxt/ui/commit/765821153753d1a49276421511224336aebcdd2f))
+* **Carousel:** add tab-based ARIA roles ([#1516](https://github.com/nuxt/ui/issues/1516)) ([e736eca](https://github.com/nuxt/ui/commit/e736ecafff59f9d4eb88b366ef1e9d26449b8ca3))
+* **Checkbox:** bind `data-n-ids` to root element ([#1495](https://github.com/nuxt/ui/issues/1495)) ([a2b8b70](https://github.com/nuxt/ui/commit/a2b8b700df6ad0907a5d4d622d178d1345b55b83))
+* **forms:** normalize input emits ([#1560](https://github.com/nuxt/ui/issues/1560)) ([92e7362](https://github.com/nuxt/ui/commit/92e736213b221d5ec8cfb8881fda4fc65ce7dfa0))
+* **InputMenu:** trigger alignement on safari ([f4a48f6](https://github.com/nuxt/ui/commit/f4a48f6016ede664e4f46741e7811b0dbe0acfbe)), closes [#1505](https://github.com/nuxt/ui/issues/1505)
+* opt in to `import.meta.*` properties ([#1561](https://github.com/nuxt/ui/issues/1561)) ([cc62e34](https://github.com/nuxt/ui/commit/cc62e345eb96a632730bed796c77afe7ecdadf2a))
+* **Popover/Dropdown:** use `[@touchstart](https://github.com/touchstart).passive` instead of `[@touchstart](https://github.com/touchstart).prevent` ([#1520](https://github.com/nuxt/ui/issues/1520)) ([a563d8f](https://github.com/nuxt/ui/commit/a563d8fed44535107080fee094995d87ca5dc2b6))
+* **SelectMenu:** `filteredOptions` might be undefined ([#1541](https://github.com/nuxt/ui/issues/1541)) ([b0ecac5](https://github.com/nuxt/ui/commit/b0ecac563c5702fe40cf42a8861b1d2d1366d423))
+* **SelectMenu:** handle `Boolean` type as model value ([#1550](https://github.com/nuxt/ui/issues/1550)) ([c49f899](https://github.com/nuxt/ui/commit/c49f8999d319ec487672ebd68e8b3f0031843cd6))
+
 ## [2.14.2](https://github.com/nuxt/ui/compare/v2.14.1...v2.14.2) (2024-03-05)
 
 
