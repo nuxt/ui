@@ -34,9 +34,16 @@ export default (config: { colors: string[] }) => ({
     checked: {
       true: {
         icon: 'group-data-[state=checked]:opacity-100'
-      },
-      false: {
+      }
+    },
+    unchecked: {
+      true: {
         icon: 'group-data-[state=unchecked]:opacity-100'
+      }
+    },
+    loading: {
+      true: {
+        icon: 'animate-spin'
       }
     }
   },

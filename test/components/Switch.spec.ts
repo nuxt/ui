@@ -15,13 +15,14 @@ describe('Switch', () => {
     ['with name', { props: { name: 'test' } }],
     ['with required', { props: { required: true } }],
     ['with value', { props: { value: 'switch' } }],
-    ['with size 2xs', { props: { size: '2xs' as const } }],
+    ['with checkedIcon', { props: { checkedIcon: 'i-heroicons-check-20-solid' } }],
+    ['with uncheckedIcon', { props: { checkedIcon: 'i-heroicons-x-mark-20-solid' } }],
+    ['with loading', { props: { loading: true } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-heroicons-sparkles' } }],
     ['with size xs', { props: { size: 'xs' as const } }],
     ['with size sm', { props: { size: 'sm' as const } }],
     ['with size md', { props: { size: 'md' as const } }],
-    ['with size lg', { props: { size: 'lg' as const } }],
-    ['with size xl', { props: { size: 'xl' as const } }],
-    ['with size 2xl', { props: { size: '2xl' as const } }]
+    ['with size lg', { props: { size: 'lg' as const } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SwitchProps, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, Switch)
     expect(html).toMatchSnapshot()

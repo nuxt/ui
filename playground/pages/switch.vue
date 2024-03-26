@@ -26,5 +26,16 @@ const checked = ref(false)
         checked-icon="i-heroicons-check-20-solid"
       />
     </div>
+    <div class="flex items-center gap-2 ml-[-36px]">
+      <USwitch
+        v-for="size in sizes"
+        :key="size"
+        v-model:checked="checked"
+        :size="(size as any)"
+        unchecked-icon="i-heroicons-x-mark-20-solid"
+        checked-icon="i-heroicons-check-20-solid"
+        loading
+      />
+    </div>
   </div>
 </template>

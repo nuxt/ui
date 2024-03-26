@@ -14,6 +14,8 @@ type SwitchVariants = VariantProps<typeof switchTv>
 export interface SwitchProps extends Omit<SwitchRootProps, 'asChild'> {
   color?: SwitchVariants['color']
   size?: SwitchVariants['size']
+  loading?: boolean
+  loadingIcon?: string
   checkedIcon?: string
   uncheckedIcon?: string
   class?: any
@@ -27,23 +29,29 @@ export interface SwitchEmits extends SwitchRootEmits {}
 import { computed } from 'vue'
 import { SwitchRoot, SwitchThumb, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#app'
 
 const props = defineProps<SwitchProps>()
 const emits = defineEmits<SwitchEmits>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultChecked', 'checked', 'disabled', 'required', 'name', 'id', 'value'), emits)
+const appConfig = useAppConfig()
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultChecked', 'checked', 'required', 'name', 'id', 'value'), emits)
 
 const ui = computed(() => tv({ extend: switchTv, slots: props.ui })({
   color: props.color,
-  size: props.size
+  size: props.size,
+  loading: props.loading
 }))
 </script>
 
 <template>
-  <SwitchRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
+  <SwitchRoot :disabled="disabled || loading" v-bind="rootProps" :class="ui.root({ class: props.class })">
     <SwitchThumb :class="ui.thumb()">
-      <UIcon v-if="checkedIcon" :name="checkedIcon" :class="ui.icon({ checked: true })" />
-      <UIcon v-if="uncheckedIcon" :name="uncheckedIcon" :class="ui.icon({ checked: false })" />
+      <UIcon v-if="loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.icon({ checked: true, unchecked: true })" />
+      <template v-else>
+        <UIcon v-if="checkedIcon" :name="checkedIcon" :class="ui.icon({ checked: true })" />
+        <UIcon v-if="uncheckedIcon" :name="uncheckedIcon" :class="ui.icon({ unchecked: true })" />
+      </template>
     </SwitchThumb>
   </SwitchRoot>
 </template>
