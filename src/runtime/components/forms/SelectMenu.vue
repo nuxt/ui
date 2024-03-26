@@ -174,7 +174,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: [String, Number, Object, Array],
+      type: [String, Number, Object, Array, Boolean],
       default: ''
     },
     query: {
@@ -362,7 +362,7 @@ export default defineComponent({
         } else {
           return null
         }
-      } else if (props.modelValue) {
+      } else if (props.modelValue !== undefined && props.modelValue !== null) {
         if (props.valueAttribute) {
           const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
           return option ? option[props.optionAttribute] : null
@@ -387,7 +387,7 @@ export default defineComponent({
         variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
-      ), props.placeholder && !props.modelValue && ui.value.placeholder, props.selectClass)
+      ), props.placeholder && (props.modelValue === undefined && props.modelValue === null) && ui.value.placeholder, props.selectClass)
     })
 
     const isLeading = computed(() => {

@@ -50,7 +50,7 @@ componentProps:
 ---
 ::
 
-If you only want to select a single object property rather than the whole object as value, you can set the `value-attribute` property. This prop defaults to `null`.
+If you only want to select a single object property rather than the whole object as value, you can set the `value-attribute` property. This prop defaults to `null`.The value of the `value-attribute` field in options must be unique.
 
 ::component-example
 ---
