@@ -278,7 +278,7 @@ export default defineComponent({
       return [
         ...groups,
         ...searchGroups
-      ]
+      ].sort((a, b) => props.groups.findIndex(item => item.key === a.key) - props.groups.findIndex(item => item.key === b.key))
     })
 
     const debouncedSearch = useDebounceFn(async () => {
