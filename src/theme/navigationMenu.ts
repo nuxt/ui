@@ -4,7 +4,7 @@ export default {
     list: '',
     item: '',
     base: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 disabled:cursor-not-allowed disabled:opacity-75',
-    icon: 'shrink-0 w-5 h-5 relative',
+    icon: 'shrink-0 size-5 relative',
     avatar: 'shrink-0 relative',
     label: 'truncate relative',
     badge: 'shrink-0 ms-auto relative rounded'

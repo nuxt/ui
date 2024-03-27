@@ -1,0 +1,40 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DropdownMenu > renders default correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`DropdownMenu > renders with class correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`DropdownMenu > renders with ui correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;

@@ -18,6 +18,7 @@ export interface NavigationMenuLink extends LinkProps {
   icon?: IconProps['name']
   avatar?: AvatarProps
   badge?: string | number | BadgeProps
+  select? (e: MouseEvent): void
 }
 
 export interface NavigationMenuProps<T extends NavigationMenuLink> extends Omit<NavigationMenuRootProps, 'asChild' | 'dir'> {
@@ -59,8 +60,8 @@ const lists = computed(() => props.links?.length ? (Array.isArray(props.links[0]
   <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
     <NavigationMenuList v-for="(list, index) in lists" :key="`list-${index}`" :class="ui.list()">
       <NavigationMenuItem v-for="(link, linkIndex) in list" :key="`list-${index}-${linkIndex}`" :class="ui.item()">
-        <ULink v-slot="{ active, ...slotProps }" v-bind="omit(link, ['label', 'icon', 'avatar', 'badge'])" custom>
-          <NavigationMenuLink as-child :active="active">
+        <ULink v-slot="{ active, ...slotProps }" v-bind="omit(link, ['label', 'icon', 'avatar', 'badge', 'select'])" custom>
+          <NavigationMenuLink as-child :active="active" @select="link.select">
             <ULinkBase v-bind="slotProps" :class="ui.base({ active })">
               <slot name="leading" :link="link" :active="active">
                 <UAvatar v-if="link.avatar" size="2xs" v-bind="link.avatar" :class="ui.avatar({ active })" />
