@@ -18,7 +18,7 @@ props:
 ::
 
 ::callout{icon="i-heroicons-exclamation-triangle"}
-You won't be able to use any icon in the `name` prop here as icons are bundled using [egoist/tailwindcss-icons](https://github.com/egoist/tailwindcss-icons), read more about this in [Theming](/getting-started/theming#icons).
+You won't be able to use all icons in the `name` prop here as icons are bundled using [egoist/tailwindcss-icons](https://github.com/egoist/tailwindcss-icons).
 ::
 
 ::callout{icon="i-heroicons-light-bulb"}
