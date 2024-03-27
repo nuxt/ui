@@ -21,7 +21,7 @@ export interface NavigationMenuLink extends LinkProps {
 }
 
 export interface NavigationMenuProps<T extends NavigationMenuLink> extends Omit<NavigationMenuRootProps, 'asChild' | 'dir'> {
-  links: T[][] | T[]
+  links?: T[] | T[][]
   class?: any
   ui?: Partial<typeof navigationMenu.slots>
 }
