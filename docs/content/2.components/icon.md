@@ -21,6 +21,10 @@ props:
 You won't be able to use any icon in the `name` prop here as icons are bundled using [egoist/tailwindcss-icons](https://github.com/egoist/tailwindcss-icons), read more about this in [Theming](/getting-started/theming#icons).
 ::
 
+::callout{icon="i-heroicons-light-bulb"}
+Don't forget to specify the icon pack that you are using in `app.config.ts`! See [here](/getting-started/theming#collections) for more information.
+::
+
 ### Dynamic
 
 You can use the `dynamic` prop to enable dynamic icon loading. This will use [`nuxt-icon`](https://github.com/nuxt-modules/icon) instead and allow you to use any icon from [Iconify](https://iconify.design/) as well as the `{collection_name}:{icon_name}` pattern.
