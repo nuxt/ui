@@ -7,7 +7,7 @@ import { debounce } from 'perfect-debounce'
  */
 export default defineNuxtModule({
   meta: {
-    name: 'nuxt-ui-dev-module'
+    name: '@nuxt/ui-dev'
   },
   setup () {
     const nuxt = useNuxt()
