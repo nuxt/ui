@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Kbd > renders with as correctly 1`] = `"<span class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-5 min-w-[20px] text-[11px]">K</span>"`;
+
+exports[`Kbd > renders with class correctly 1`] = `"<kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-5 min-w-[20px] text-[11px] font-bold">K</kbd>"`;
+
+exports[`Kbd > renders with default slot correctly 1`] = `"<kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-5 min-w-[20px] text-[11px]">Default slot</kbd>"`;
+
+exports[`Kbd > renders with size md correctly 1`] = `"<kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-6 min-w-[24px] text-[12px]">K</kbd>"`;
+
+exports[`Kbd > renders with size sm correctly 1`] = `"<kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-5 min-w-[20px] text-[11px]">K</kbd>"`;
+
+exports[`Kbd > renders with size xs correctly 1`] = `"<kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-4 min-w-[16px] text-[10px]">K</kbd>"`;
+
+exports[`Kbd > renders with value correctly 1`] = `"<kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-5 min-w-[20px] text-[11px]">K</kbd>"`;

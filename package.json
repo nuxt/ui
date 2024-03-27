@@ -7,6 +7,7 @@
   "license": "MIT",
   "exports": {
     ".": {
+      "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
     }
@@ -20,56 +21,46 @@
     "node": ">=v16.20.2"
   },
   "scripts": {
-    "build": "nuxt-module-build build",
-    "prepack": "pnpm build",
-    "dev": "nuxi dev docs",
-    "play": "nuxi dev playground",
-    "build:docs": "nuxi generate docs",
+    "prepack": "nuxt-module-build build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "docs": "nuxi dev docs",
+    "docs:build": "nuxi generate docs",
+    "cli": "node ./cli/index.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxi typecheck docs",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare docs",
-    "release": "release-it",
-    "test": "vitest"
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest",
+    "release": "release-it"
   },
   "dependencies": {
-    "@egoist/tailwindcss-icons": "^1.7.4",
-    "@headlessui/tailwindcss": "^0.2.0",
-    "@headlessui/vue": "^1.7.19",
-    "@iconify-json/heroicons": "^1.1.20",
     "@nuxt/kit": "^3.11.1",
     "@nuxtjs/color-mode": "^3.3.3",
-    "@nuxtjs/tailwindcss": "^6.11.4",
-    "@popperjs/core": "^2.11.8",
-    "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/container-queries": "^0.1.1",
-    "@tailwindcss/forms": "^0.5.7",
-    "@tailwindcss/typography": "^0.5.10",
+    "@tailwindcss/postcss": "4.0.0-alpha.10",
+    "@tailwindcss/vite": "4.0.0-alpha.10",
     "@vueuse/core": "^10.9.0",
-    "@vueuse/integrations": "^10.9.0",
-    "@vueuse/math": "^10.9.0",
     "defu": "^6.1.4",
-    "fuse.js": "^6.6.2",
-    "nuxt-icon": "^0.6.10",
+    "nuxt-icon": "^0.6.9",
     "ohash": "^1.1.3",
-    "pathe": "^1.1.2",
-    "scule": "^1.3.0",
-    "tailwind-merge": "^2.2.2",
-    "tailwindcss": "^3.4.1"
+    "radix-vue": "^1.5.3",
+    "tailwind-variants": "^0.2.1",
+    "tailwindcss": "4.0.0-alpha.10"
   },
   "devDependencies": {
+    "@types/node": "^20.11.29",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/module-builder": "^0.5.5",
+    "@nuxt/schema": "^3.11.1",
     "@nuxt/test-utils": "^3.12.0",
     "@release-it/conventional-changelog": "^8.0.1",
     "@vue/test-utils": "^2.4.5",
     "eslint": "^8.57.0",
-    "happy-dom": "^14.3.6",
+    "happy-dom": "^14.1.0",
     "joi": "^17.12.2",
     "nuxt": "^3.11.1",
+    "nuxt-ui-dev-module": "workspace:*",
     "release-it": "^17.1.1",
-    "typescript": "^5.4.3",
-    "unbuild": "^2.0.0",
     "valibot": "^0.30.0",
     "vitest": "^1.4.0",
     "vitest-environment-nuxt": "^1.0.0",
@@ -78,10 +69,6 @@
     "zod": "^3.22.4"
   },
   "resolutions": {
-    "@nuxt/kit": "^3.11.1",
-    "@nuxt/schema": "3.11.1",
-    "tailwindcss": "3.4.1",
-    "@headlessui/vue": "1.7.19",
-    "vue": "3.4.21"
+    "@nuxt/ui": "workspace:*"
   }
 }

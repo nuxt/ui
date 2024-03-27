@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Skeleton > renders basic case correctly 1`] = `"<div class="animate-pulse rounded-md bg-gray-100 dark:bg-gray-800"></div>"`;
+
+exports[`Skeleton > renders with as correctly 1`] = `"<span class="animate-pulse rounded-md bg-gray-100 dark:bg-gray-800"></span>"`;
+
+exports[`Skeleton > renders with class correctly 1`] = `"<div class="animate-pulse bg-gray-100 dark:bg-gray-800 rounded-full size-12"></div>"`;

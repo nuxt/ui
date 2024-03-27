@@ -18,9 +18,11 @@ module.exports = {
 
     // Typescript
     '@typescript-eslint/type-annotation-spacing': 'error',
+    '@typescript-eslint/semi': ['error', 'never'],
 
     // Vuejs
     'vue/multi-word-component-names': 0,
+    'vue/require-default-prop': 0,
     'vue/html-indent': ['error', 2],
     'vue/comma-spacing': ['error', { before: false, after: true }],
     'vue/script-indent': ['error', 2, { baseIndent: 0 }],

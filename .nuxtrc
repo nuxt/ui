@@ -1,1 +1,1 @@
-typescript.includeWorkspace=true
+modules[]=nuxt-ui-dev-module

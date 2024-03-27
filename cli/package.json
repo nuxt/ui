@@ -1,0 +1,12 @@
+{
+  "name": "nuxt-ui-cli",
+  "exports": {
+    ".": "./index.mjs"
+  },
+  "dependencies": {
+    "citty": "^0.1.6",
+    "consola": "^3.2.3",
+    "pathe": "^1.1.2",
+    "scule": "^1.3.0"
+  }
+}

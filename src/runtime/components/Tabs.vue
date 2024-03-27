@@ -1,0 +1,70 @@
+<script lang="ts">
+import { tv } from 'tailwind-variants'
+import type { TabsRootProps, TabsRootEmits } from 'radix-vue'
+import type { AppConfig } from '@nuxt/schema'
+import _appConfig from '#build/app.config'
+import theme from '#build/ui/tabs'
+
+const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
+
+const tabs = tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })
+
+export interface TabsItem {
+  label?: string
+  value?: string
+  slot?: string
+  disabled?: boolean
+  content?: string
+}
+
+export interface TabsProps<T extends TabsItem> extends Omit<TabsRootProps, 'asChild'> {
+  items: T[]
+  class?: any
+  ui?: Partial<typeof tabs.slots>
+}
+
+export interface TabsEmits extends TabsRootEmits {}
+
+type SlotProps<T> = (props: { item: T, index: number }) => any
+
+export type TabsSlots<T extends TabsItem> = {
+  default: SlotProps<T>
+  content: SlotProps<T>
+} & {
+  [key in T['slot'] as string]?: SlotProps<T>
+}
+</script>
+
+<script setup lang="ts" generic="T extends TabsItem">
+import { computed } from 'vue'
+import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'radix-vue'
+import { reactivePick } from '@vueuse/core'
+
+const props = withDefaults(defineProps<TabsProps<T>>(), { defaultValue: '0' })
+const emits = defineEmits<TabsEmits>()
+defineSlots<TabsSlots<T>>()
+
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'activationMode', 'modelValue'), emits)
+
+const ui = computed(() => tv({ extend: tabs, slots: props.ui })())
+</script>
+
+<template>
+  <TabsRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
+    <TabsList :class="ui.list()">
+      <TabsIndicator :class="ui.indicator()" />
+
+      <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger()">
+        <span v-if="item.label || $slots.default" :class="ui.label()">
+          <slot :item="item" :index="index">{{ item.label }}</slot>
+        </span>
+      </TabsTrigger>
+    </TabsList>
+
+    <TabsContent v-for="(item, index) of items" :key="index" force-mount :value="item.value || String(index)" :class="ui.content()">
+      <slot :name="item.slot || 'content'" :item="item" :index="index">
+        {{ item.content }}
+      </slot>
+    </TabsContent>
+  </TabsRoot>
+</template>
