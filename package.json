@@ -71,6 +71,7 @@
     "zod": "^3.22.4"
   },
   "resolutions": {
-    "@nuxt/ui": "workspace:*"
+    "@nuxt/ui": "workspace:*",
+    "vite": "5.2.4"
   }
 }
