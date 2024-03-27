@@ -58,7 +58,7 @@ const lists = computed(() => props.links?.length ? (Array.isArray(props.links[0]
 <template>
   <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
     <NavigationMenuList v-for="(list, index) in lists" :key="`list-${index}`" :class="ui.list()">
-      <NavigationMenuItem v-for="(link, subIndex) in list" :key="`list-${index}-${subIndex}`" :class="ui.item()">
+      <NavigationMenuItem v-for="(link, linkIndex) in list" :key="`list-${index}-${linkIndex}`" :class="ui.item()">
         <ULink v-slot="{ active, ...slotProps }" v-bind="omit(link, ['label', 'icon', 'avatar', 'badge'])" custom>
           <NavigationMenuLink as-child :active="active">
             <ULinkBase v-bind="slotProps" :class="ui.base({ active })">
