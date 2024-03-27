@@ -1,7 +1,7 @@
 export default {
   wrapper: {
     base: 'flex items-center align-center text-center',
-    horizontal: 'flex-row',
+    horizontal: 'w-full flex-row',
     vertical: 'flex-col'
   },
   container: {
