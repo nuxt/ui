@@ -16,7 +16,7 @@ export default {
       xs: { root: 'text-xs' },
       sm: { root: 'text-sm' },
       md: { root: 'text-sm' },
-      lg: { root: 'text-sm' },
+      lg: { root: 'text-base' },
       xl: { root: 'text-base' }
     },
     required: {

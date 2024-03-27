@@ -13,6 +13,7 @@ const components = [
   'badge',
   'button',
   'card',
+  'checkbox',
   'chip',
   'collapsible',
   'form',

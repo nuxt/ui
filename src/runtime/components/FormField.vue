@@ -37,7 +37,8 @@ export interface FormFieldSlots {
 
 <script lang="ts" setup>
 import { computed, ref, inject, provide, type Ref } from 'vue'
-import type { FormError, FormFieldInjectedOptions } from '../types/form'
+import { Label } from 'radix-vue'
+import type { FormError, FormFieldInjectedOptions } from '#ui/types/form'
 import { useId } from '#imports'
 
 const props = defineProps<FormFieldProps>()
@@ -73,11 +74,11 @@ provide<FormFieldInjectedOptions<FormFieldProps>>('form-field', {
   <div :class="ui.root({ class: props.class })">
     <div :class="ui.wrapper()">
       <div v-if="label || $slots.label" :class="ui.labelWrapper()">
-        <label :for="inputId" :class="ui.label()">
+        <Label :for="inputId" :class="ui.label()">
           <slot name="label" :label="label">
             {{ label }}
           </slot>
-        </label>
+        </Label>
         <span v-if="hint || $slots.hint" :class="ui.hint()">
           <slot name="hint" :hint="hint">
             {{ hint }}
@@ -95,38 +96,16 @@ provide<FormFieldInjectedOptions<FormFieldProps>>('form-field', {
     <div :class="label ? ui.container() : ''">
       <slot :error="error" />
 
-      <Transition name="slide-fade" mode="out-in">
-        <p v-if="(typeof error === 'string' && error) || $slots.error" :class="ui.error()">
-          <slot name="error" :error="error">
-            {{ error }}
-          </slot>
-        </p>
-        <p v-else-if="help || $slots.help" :class="ui.help()">
-          <slot name="help" :help="help">
-            {{ help }}
-          </slot>
-        </p>
-      </Transition>
+      <p v-if="(typeof error === 'string' && error) || $slots.error" :class="ui.error()">
+        <slot name="error" :error="error">
+          {{ error }}
+        </slot>
+      </p>
+      <p v-else-if="help || $slots.help" :class="ui.help()">
+        <slot name="help" :help="help">
+          {{ help }}
+        </slot>
+      </p>
     </div>
   </div>
 </template>
-
-<style scoped>
-.slide-fade-enter-active {
-  transition: all 0.15s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.15s ease-out;
-}
-
-.slide-fade-enter-from {
-  transform: translateY(-10px);
-  opacity: 0;
-}
-
-.slide-fade-leave-to {
-  transform: translateY(10px);
-  opacity: 0;
-}
-</style>

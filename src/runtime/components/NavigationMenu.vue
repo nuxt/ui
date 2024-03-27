@@ -7,6 +7,7 @@ import theme from '#build/ui/navigationMenu'
 import type { LinkProps } from '#ui/components/Link.vue'
 import type { AvatarProps } from '#ui/components/Avatar.vue'
 import type { BadgeProps } from '#ui/components/Badge.vue'
+import type { IconProps } from '#ui/components/Icon.vue'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -14,7 +15,7 @@ const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu 
 
 export interface NavigationMenuLink extends LinkProps {
   label: string | number
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps
   badge?: string | number | BadgeProps
 }

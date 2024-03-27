@@ -59,13 +59,13 @@ const sizes = Object.keys(theme.variants.size)
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" variant="link" />
     </div>
-    <div class="flex items-center gap-2 -ml-[129px]">
+    <div class="flex items-center gap-2 ml-[-129px]">
       <UButton v-for="size in sizes" :key="size" label="Button" :size="(size as any)" />
     </div>
-    <div class="flex items-center gap-2 -ml-[171px]">
+    <div class="flex items-center gap-2 ml-[-171px]">
       <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" label="Button" :size="(size as any)" />
     </div>
-    <div class="flex items-center gap-2 -ml-[159px]">
+    <div class="flex items-center gap-2 ml-[-159px]">
       <UButton
         v-for="size in sizes"
         :key="size"
@@ -75,7 +75,7 @@ const sizes = Object.keys(theme.variants.size)
         :size="(size as any)"
       />
     </div>
-    <div class="flex items-center gap-2 -ml-[67px]">
+    <div class="flex items-center gap-2 ml-[-67px]">
       <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" :size="(size as any)" />
     </div>
     <div class="flex items-center gap-2">

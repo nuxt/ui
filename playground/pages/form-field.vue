@@ -13,7 +13,7 @@ const feedbacks = [
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 -ml-[258px]">
+    <div class="flex flex-col gap-4 ml-[-258px]">
       <div v-for="(feedback, count) in feedbacks" :key="count" class="flex items-center">
         <UFormField v-bind="feedback" label="Email" name="email">
           <UInput placeholder="john@lennon.com" />
@@ -27,6 +27,19 @@ const feedbacks = [
         :key="size"
         :size="(size as any)"
         label="Email"
+        name="email"
+      >
+        <UInput placeholder="john@lennon.com" />
+      </UFormField>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <UFormField
+        v-for="size in sizes"
+        :key="size"
+        :size="(size as any)"
+        label="Email"
+        description="This is a description"
         name="email"
       >
         <UInput placeholder="john@lennon.com" />

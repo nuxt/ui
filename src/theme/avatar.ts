@@ -8,40 +8,31 @@ export default {
   variants: {
     size: {
       '3xs': {
-        root: 'size-4 text-[8px]',
-        icon: 'size-2'
+        root: 'size-4 text-[8px]'
       },
       '2xs': {
-        root: 'size-5 text-[10px]',
-        icon: 'size-2.5'
+        root: 'size-5 text-[10px]'
       },
       xs: {
-        root: 'size-6 text-xs',
-        icon: 'size-3'
+        root: 'size-6 text-xs'
       },
       sm: {
-        root: 'size-7 text-sm',
-        icon: 'size-3.5'
+        root: 'size-7 text-sm'
       },
       md: {
-        root: 'size-8 text-base',
-        icon: 'size-4'
+        root: 'size-8 text-base'
       },
       lg: {
-        root: 'size-9 text-lg',
-        icon: 'size-4.5'
+        root: 'size-9 text-lg'
       },
       xl: {
-        root: 'size-10 text-xl',
-        icon: 'size-5'
+        root: 'size-10 text-xl'
       },
       '2xl': {
-        root: 'size-11 text-[22px]',
-        icon: 'size-5.5'
+        root: 'size-11 text-[22px]'
       },
       '3xl': {
-        root: 'size-12 text-2xl',
-        icon: 'size-6'
+        root: 'size-12 text-2xl'
       }
     }
   },

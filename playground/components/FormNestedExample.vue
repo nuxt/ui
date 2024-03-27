@@ -47,8 +47,7 @@ function onError (event: any) {
     </UFormField>
 
     <div>
-      <input id="check" v-model="checked" type="checkbox" name="check" @change="state.nested = {}">
-      <label for="check"> Check me </label>
+      <UCheckbox v-model="checked" name="check" label="Check me" @change="state.nested = {}" />
     </div>
 
     <UForm v-if="checked && state.nested" :state="state.nested" :schema="nestedSchema">

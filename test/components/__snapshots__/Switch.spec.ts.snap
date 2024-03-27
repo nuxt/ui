@@ -60,8 +60,13 @@ exports[`Switch > renders with required correctly 1`] = `
 <!---->"
 `;
 
+exports[`Switch > renders with size 2xs correctly 1`] = `
+"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-3 w-5" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-2 data-[state=checked]:translate-x-2"></span></button>
+<!---->"
+`;
+
 exports[`Switch > renders with size lg correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-7 w-[3.25rem]" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-6 data-[state=checked]:translate-x-6"></span></button>
+"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-7 w-[52px]" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-6 data-[state=checked]:translate-x-6"></span></button>
 <!---->"
 `;
 
@@ -72,6 +77,11 @@ exports[`Switch > renders with size md correctly 1`] = `
 
 exports[`Switch > renders with size sm correctly 1`] = `
 "<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+<!---->"
+`;
+
+exports[`Switch > renders with size xl correctly 1`] = `
+"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-8 w-[60px]" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-7 data-[state=checked]:translate-x-7"></span></button>
 <!---->"
 `;
 

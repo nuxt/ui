@@ -5,15 +5,17 @@ import type { Form, FormSubmitEvent } from '#ui/types/form'
 type User = {
   email: string
   password: string
+  tos: boolean
 }
 
-const state = ref<User>({ email: '', password: '' })
-const state2 = ref<User>({ email: '', password: '' })
-const state3 = ref<User>({ email: '', password: '' })
+const state = reactive<Partial<User>>({})
+const state2 = reactive<Partial<User>>({})
+const state3 = reactive<Partial<User>>({})
 
 const schema = z.object({
   email: z.string().email(),
-  password: z.string().min(8)
+  password: z.string().min(8),
+  tos: z.literal(true)
 })
 
 const disabledForm = ref<Form<User>>()
@@ -38,6 +40,10 @@ function onSubmit (event: FormSubmitEvent<User>) {
 
         <UFormField label="Password" name="password">
           <UInput v-model="state.password" type="password" />
+        </UFormField>
+
+        <UFormField name="tos">
+          <UCheckbox v-model="state.tos" label="I accept the terms and conditions" />
         </UFormField>
 
         <div>
@@ -93,6 +99,10 @@ function onSubmit (event: FormSubmitEvent<User>) {
           eager-validation
         >
           <UInput v-model="state3.password" type="password" />
+        </UFormField>
+
+        <UFormField name="tos">
+          <UCheckbox v-model="state3.tos" label="I accept the terms and conditions" />
         </UFormField>
 
         <div>

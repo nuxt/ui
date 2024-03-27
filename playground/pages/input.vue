@@ -6,7 +6,7 @@ const sizes = Object.keys(theme.variants.size)
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 -ml-[258px]">
+    <div class="flex flex-col gap-4 ml-[-120px]">
       <UInput placeholder="Search..." autofocus />
       <UInput placeholder="Search..." color="gray" />
       <UInput placeholder="Search..." color="primary" />

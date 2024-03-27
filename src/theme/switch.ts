@@ -10,10 +10,15 @@ export default (config: { colors: string[] }) => ({
       icon: `group-data-[state=checked]:text-${color}-500 dark:group-data-[state=checked]:text-${color}-400`
     }])),
     size: {
+      '2xs': {
+        root: 'h-3 w-5',
+        thumb: 'size-2 data-[state=checked]:translate-x-2',
+        icon: 'size-1'
+      },
       xs: {
         root: 'h-4 w-7',
         thumb: 'size-3 data-[state=checked]:translate-x-3',
-        icon: 'size-2.5'
+        icon: 'size-2'
       },
       sm: {
         root: 'h-5 w-9',
@@ -26,9 +31,14 @@ export default (config: { colors: string[] }) => ({
         icon: 'size-4'
       },
       lg: {
-        root: 'h-7 w-[3.25rem]',
+        root: 'h-7 w-[52px]',
         thumb: 'size-6 data-[state=checked]:translate-x-6',
         icon: 'size-5'
+      },
+      xl: {
+        root: 'h-8 w-[60px]',
+        thumb: 'size-7 data-[state=checked]:translate-x-7',
+        icon: 'size-6'
       }
     },
     checked: {

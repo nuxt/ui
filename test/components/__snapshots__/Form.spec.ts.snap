@@ -2,34 +2,30 @@
 
 exports[`Form > custom validation works > with error 1`] = `
 "<form id="42" class="">
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="email" type="text" name="email" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="password" type="text" name="password" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-transparent text-gray-900 dark:text-white ring ring-inset ring-red-500 dark:ring-red-400 focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <p data-v-0fd934a4="" class="mt-2 text-red-500 dark:text-red-400">Must be at least 8 characters</p>
-      </transition-stub>
+      <p class="mt-2 text-red-500 dark:text-red-400">Must be at least 8 characters</p>
     </div>
   </div>
 </form>"
@@ -37,34 +33,30 @@ exports[`Form > custom validation works > with error 1`] = `
 
 exports[`Form > custom validation works > without error 1`] = `
 "<form id="42" class="">
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="email" type="text" name="email" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="password" type="text" name="password" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
 </form>"
@@ -72,34 +64,30 @@ exports[`Form > custom validation works > without error 1`] = `
 
 exports[`Form > joi validation works > with error 1`] = `
 "<form id="42" class="">
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="email" type="text" name="email" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="password" type="text" name="password" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-transparent text-gray-900 dark:text-white ring ring-inset ring-red-500 dark:ring-red-400 focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <p data-v-0fd934a4="" class="mt-2 text-red-500 dark:text-red-400">Must be at least 8 characters</p>
-      </transition-stub>
+      <p class="mt-2 text-red-500 dark:text-red-400">Must be at least 8 characters</p>
     </div>
   </div>
 </form>"
@@ -107,34 +95,30 @@ exports[`Form > joi validation works > with error 1`] = `
 
 exports[`Form > joi validation works > without error 1`] = `
 "<form id="42" class="">
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="email" type="text" name="email" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="password" type="text" name="password" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
 </form>"
@@ -146,34 +130,30 @@ exports[`Form > renders with default slot correctly 1`] = `"<form id="1" class="
 
 exports[`Form > valibot validation works > with error 1`] = `
 "<form id="42" class="">
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="email" type="text" name="email" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="password" type="text" name="password" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-transparent text-gray-900 dark:text-white ring ring-inset ring-red-500 dark:ring-red-400 focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <p data-v-0fd934a4="" class="mt-2 text-red-500 dark:text-red-400">Must be at least 8 characters</p>
-      </transition-stub>
+      <p class="mt-2 text-red-500 dark:text-red-400">Must be at least 8 characters</p>
     </div>
   </div>
 </form>"
@@ -181,34 +161,30 @@ exports[`Form > valibot validation works > with error 1`] = `
 
 exports[`Form > valibot validation works > without error 1`] = `
 "<form id="42" class="">
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="email" type="text" name="email" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="password" type="text" name="password" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
 </form>"
@@ -216,34 +192,30 @@ exports[`Form > valibot validation works > without error 1`] = `
 
 exports[`Form > yup validation works > with error 1`] = `
 "<form id="42" class="">
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="email" type="text" name="email" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="password" type="text" name="password" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-transparent text-gray-900 dark:text-white ring ring-inset ring-red-500 dark:ring-red-400 focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <p data-v-0fd934a4="" class="mt-2 text-red-500 dark:text-red-400">Must be at least 8 characters</p>
-      </transition-stub>
+      <p class="mt-2 text-red-500 dark:text-red-400">Must be at least 8 characters</p>
     </div>
   </div>
 </form>"
@@ -251,34 +223,30 @@ exports[`Form > yup validation works > with error 1`] = `
 
 exports[`Form > yup validation works > without error 1`] = `
 "<form id="42" class="">
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="email" type="text" name="email" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="password" type="text" name="password" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
 </form>"
@@ -286,34 +254,30 @@ exports[`Form > yup validation works > without error 1`] = `
 
 exports[`Form > zod validation works > with error 1`] = `
 "<form id="42" class="">
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="email" type="text" name="email" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="password" type="text" name="password" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-transparent text-gray-900 dark:text-white ring ring-inset ring-red-500 dark:ring-red-400 focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <p data-v-0fd934a4="" class="mt-2 text-red-500 dark:text-red-400">Must be at least 8 characters</p>
-      </transition-stub>
+      <p class="mt-2 text-red-500 dark:text-red-400">Must be at least 8 characters</p>
     </div>
   </div>
 </form>"
@@ -321,34 +285,30 @@ exports[`Form > zod validation works > with error 1`] = `
 
 exports[`Form > zod validation works > without error 1`] = `
 "<form id="42" class="">
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="email" type="text" name="email" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
-  <div data-v-0fd934a4="" class="text-sm">
-    <div data-v-0fd934a4="" class="">
+  <div class="text-sm">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-0fd934a4="" class="">
+    <div class="">
       <div class="relative"><input id="password" type="text" name="password" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <transition-stub data-v-0fd934a4="" name="slide-fade" mode="out-in" appear="false" persisted="false" css="true">
-        <!--v-if-->
-      </transition-stub>
+      <!--v-if-->
     </div>
   </div>
 </form>"

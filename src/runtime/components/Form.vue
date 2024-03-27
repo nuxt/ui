@@ -3,8 +3,8 @@ import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
-import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '../utils/form'
-import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, FormInjectedOptions, Form, FormErrorWithId } from '../types/form'
+import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '#ui/utils/form'
+import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, FormInjectedOptions, Form, FormErrorWithId } from '#ui/types/form'
 
 const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
 

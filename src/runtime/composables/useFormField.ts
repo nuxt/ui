@@ -1,6 +1,6 @@
 import { inject, ref, computed } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
-import type { FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '../types/form'
+import type { FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '#ui/types/form'
 
 type Props<T> = {
   id?: string

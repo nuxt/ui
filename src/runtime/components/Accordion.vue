@@ -4,6 +4,7 @@ import type { AccordionRootProps, AccordionRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
+import type { IconProps } from '#ui/components/Icon.vue'
 
 const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
 
@@ -11,7 +12,7 @@ const accordion = tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })
 
 export interface AccordionItem {
   slot?: string
-  icon?: string
+  icon?: IconProps['name']
   label?: string
   value?: string
   content?: string

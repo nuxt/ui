@@ -4,6 +4,7 @@ import type { SwitchRootProps, SwitchRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/switch'
+import type { IconProps } from '#ui/components/Icon.vue'
 
 const appConfig = _appConfig as AppConfig & { ui: { switch: Partial<typeof theme> } }
 
@@ -15,9 +16,9 @@ export interface SwitchProps extends Omit<SwitchRootProps, 'asChild'> {
   color?: SwitchVariants['color']
   size?: SwitchVariants['size']
   loading?: boolean
-  loadingIcon?: string
-  checkedIcon?: string
-  uncheckedIcon?: string
+  loadingIcon?: IconProps['name']
+  checkedIcon?: IconProps['name']
+  uncheckedIcon?: IconProps['name']
   class?: any
   ui?: Partial<typeof switchTv.slots>
 }

@@ -26,7 +26,7 @@ const sizes = Object.keys(theme.variants.size)
     <div class="flex items-center gap-2">
       <UBadge label="Badge" color="black" />
     </div>
-    <div class="flex items-center gap-2 -ml-[56px]">
+    <div class="flex items-center gap-2 ml-[-56px]">
       <UBadge v-for="size in sizes" :key="size" label="Badge" :size="(size as any)" />
     </div>
   </div>
