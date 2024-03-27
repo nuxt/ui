@@ -63,7 +63,7 @@
               autofocus
               autocomplete="off"
               :class="uiMenu.input"
-              @change="onChange"
+              @change="onQueryChange"
             />
             <component
               :is="searchable ? 'HComboboxOption' : 'HListboxOption'"
@@ -505,14 +505,13 @@ export default defineComponent({
       }
     })
 
-    function onUpdate (event: any) {
-      emit('update:modelValue', event)
+    function onUpdate (value: any) {
+      emit('update:modelValue', value)
+      emit('change', value)
+      emitFormChange()
     }
 
-    function onChange (event: any) {
-      emit('change', (event.target as HTMLInputElement).value)
-      emitFormChange()
-
+    function onQueryChange (event: any) {
       query.value = event.target.value
     }
 
@@ -547,7 +546,7 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       query,
       onUpdate,
-      onChange
+      onQueryChange
     }
   }
 })
