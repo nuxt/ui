@@ -205,7 +205,7 @@ export default defineComponent({
     }
 
     const onChange = (event: Event) => {
-      const value = (event.target as HTMLInputElement).value
+      const value = props.type === 'file' ? (event.target as HTMLInputElement).files : (event.target as HTMLInputElement).value
       emit('change', value)
 
       if (modelModifiers.value.lazy) {
