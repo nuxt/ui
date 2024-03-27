@@ -18,7 +18,7 @@ export interface TabsItem {
 }
 
 export interface TabsProps<T extends TabsItem> extends Omit<TabsRootProps, 'asChild'> {
-  items: T[]
+  items?: T[]
   class?: any
   ui?: Partial<typeof tabs.slots>
 }
