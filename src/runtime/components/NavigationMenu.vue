@@ -14,7 +14,7 @@ const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<type
 const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })
 
 export interface NavigationMenuLink extends LinkProps {
-  label: string | number
+  label: string
   icon?: IconProps['name']
   avatar?: AvatarProps
   badge?: string | number | BadgeProps
