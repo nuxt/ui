@@ -135,16 +135,23 @@ export default defineComponent({
       return props.items.length - Math.round(carouselWidth.value / itemWidth.value) + 1
     })
 
+    function getDirectionMultiplier () {
+      return getComputedStyle(carouselRef.value).direction === 'ltr' ? 1 : -1
+    }
+
     function onClickNext () {
-      x.value += itemWidth.value
+      const dirMultiplier = getDirectionMultiplier()
+      x.value += itemWidth.value * dirMultiplier
     }
 
     function onClickPrev () {
-      x.value -= itemWidth.value
+      const dirMultiplier = getDirectionMultiplier()
+      x.value -= itemWidth.value * dirMultiplier
     }
 
     function onClick (page: number) {
-      x.value = (page - 1) * itemWidth.value
+      const dirMultiplier = getDirectionMultiplier()
+      x.value = (page - 1) * (itemWidth.value * dirMultiplier)
     }
 
     expose({
