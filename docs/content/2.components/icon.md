@@ -22,7 +22,7 @@ You won't be able to use any icon in the `name` prop here as icons are bundled u
 ::
 
 ::callout{icon="i-heroicons-light-bulb"}
-Don't forget to specify the icon pack that you are using in `nuxt.config.ts`! See [here](/getting-started/theming#collections) for more information.
+Don't forget to install and specify the icon collections you need in your `nuxt.config.ts`, read more about this in [Theming](/getting-started/theming#icons).
 ::
 
 ### Dynamic
