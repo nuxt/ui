@@ -175,6 +175,12 @@ Use the `#avatar` slot to customize the displayable avatar.
 
 :component-example{component="alert-example-avatar"}
 
+### `default`
+
+Use the default slot to customize the content of the alert.
+
+:component-example{component="alert-example-default"}
+
 ## Props
 
 :component-props
