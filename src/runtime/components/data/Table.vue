@@ -280,7 +280,7 @@ export default defineComponent({
       })
     }
 
-    function onChange (checked: bolean) {
+    function onChange (checked: boolean) {
       if (checked) {
         selectAllRows()
       } else {
