@@ -1,13 +1,14 @@
 <template>
   <span :class="wrapperClass">
-    <img
+    <component
+      :is="as"
       v-if="url && !error"
       :class="imgClass"
       :alt="alt"
       :src="url"
       v-bind="attrs"
       @error="onError"
-    >
+    />
     <span v-else-if="text" :class="ui.text">{{ text }}</span>
     <UIcon v-else-if="icon" :name="icon" :class="iconClass" />
     <span v-else-if="placeholder" :class="ui.placeholder">{{ placeholder }}</span>
@@ -39,6 +40,10 @@ export default defineComponent({
   },
   inheritAttrs: false,
   props: {
+    as: {
+      type: [String, Object],
+      default: 'img'
+    },
     src: {
       type: [String, Boolean],
       default: null
