@@ -280,8 +280,8 @@ export default defineComponent({
       })
     }
 
-    function onChange (event: any) {
-      if (event.target.checked) {
+    function onChange (checked: boolean) {
+      if (checked) {
         selectAllRows()
       } else {
         selected.value = []
