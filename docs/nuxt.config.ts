@@ -74,17 +74,8 @@ export default defineNuxtConfig({
   image: {
     provider: 'ipx'
   },
-  fontMetrics: {
-    fonts: ['DM Sans']
-  },
-  googleFonts: {
-    display: 'swap',
-    download: true,
-    families: {
-      'DM+Sans': [400, 500, 600, 700]
-    }
-  },
   nitro: {
+    compressPublicAssets: true,
     prerender: {
       routes: [
         '/',
