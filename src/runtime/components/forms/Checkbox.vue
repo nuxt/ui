@@ -119,7 +119,7 @@ export default defineComponent({
     })
 
     const onChange = (event: Event) => {
-      emit('change', (event.target as HTMLInputElement).value)
+      emit('change', (event.target as HTMLInputElement).checked)
       emitFormChange()
     }
 
