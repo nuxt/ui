@@ -101,7 +101,7 @@ const items = computed(() => [
 </script>
 
 <template>
-  <div class="flex-1 flex flex-col pt-12">
+  <div class="flex-1">
     <UDropdownMenu :items="items" arrow :content="{ side: 'bottom' }">
       <UButton label="Open" color="white" />
     </UDropdownMenu>

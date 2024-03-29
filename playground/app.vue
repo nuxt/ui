@@ -40,12 +40,12 @@ function upperName (name: string) {
 
 <template>
   <UProvider>
-    <UContainer class="min-h-screen flex flex-col gap-4 items-center justify-center overflow-y-auto">
-      <UNavigationMenu :links="components.map(component => ({ label: upperName(component), to: `/${component}` }))" class="border-b border-gray-200 dark:border-gray-800 overflow-x-auto" />
+    <div class="min-h-screen w-screen flex flex-col items-center justify-center overflow-y-auto">
+      <UNavigationMenu :links="components.map(component => ({ label: upperName(component), to: `/${component}` }))" class="border-b border-gray-200 dark:border-gray-800 overflow-x-auto px-2" />
 
-      <div class="flex-1 flex flex-col justify-center pb-12">
+      <div class="flex-1 flex flex-col justify-center py-12">
         <NuxtPage />
       </div>
-    </UContainer>
+    </div>
   </UProvider>
 </template>
