@@ -12,5 +12,5 @@ const items = [{
 </script>
 
 <template>
-  <UTabs :items="items" />
+  <UTabs :items="items" class="w-96" />
 </template>
