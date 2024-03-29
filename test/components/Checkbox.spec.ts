@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { UCheckbox } from '#components'
-import type { TypeOf } from 'zod'
+import Checkbox, { type CheckboxProps } from '../../src/runtime/components/Checkbox.vue'
 import ComponentRender from '../component-render'
 import { defu } from 'defu'
 
@@ -25,8 +24,8 @@ describe('Checkbox', () => {
     ['with size lg', { props: { size: 'lg' as const } }],
     ['with size xl', { props: { size: 'xl' as const } }]
     // @ts-ignore
-  ])('renders %s correctly', async (nameOrHtml: string, options: TypeOf<typeof UCheckbox.props>) => {
-    const html = await ComponentRender(nameOrHtml, defu(options, { props: { id: 42 } }), UCheckbox)
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxProps }) => {
+    const html = await ComponentRender(nameOrHtml, defu(options, { props: { id: 42 } }), Checkbox)
     expect(html).toMatchSnapshot()
   })
 })

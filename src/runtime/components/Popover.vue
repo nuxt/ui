@@ -38,6 +38,7 @@ import { Popover, HoverCard } from 'radix-vue/namespaced'
 import { reactivePick } from '@vueuse/core'
 
 const props = withDefaults(defineProps<PopoverProps>(), {
+  portal: true,
   mode: 'click',
   openDelay: 0,
   closeDelay: 0

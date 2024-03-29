@@ -1,20 +1,27 @@
-<script setup lang="ts">
-import { Primitive } from 'radix-vue'
-
-const props = defineProps<{
-  as: string
-  type: string
+<script lang="ts">
+export interface LinkBaseProps {
+  as?: string
+  type?: string
   disabled?: boolean
   click?: (e: MouseEvent) => void
   href?: string
-  navigate: (e: MouseEvent) => void
+  navigate?: (e: MouseEvent) => void
   route?: object
   rel?: string
   target?: string
   isExternal?: boolean
-  isActive: boolean
-  isExactActive: boolean
-}>()
+  isActive?: boolean
+  isExactActive?: boolean
+}
+</script>
+
+<script setup lang="ts">
+import { Primitive } from 'radix-vue'
+
+const props = withDefaults(defineProps<LinkBaseProps>(), {
+  as: 'button',
+  type: 'button'
+})
 
 function onClick (e: MouseEvent) {
   if (props.disabled) {
@@ -27,7 +34,7 @@ function onClick (e: MouseEvent) {
     props.click(e)
   }
 
-  if (props.href && !props.isExternal) {
+  if (props.href && props.navigate && !props.isExternal) {
     props.navigate(e)
   }
 }
@@ -40,10 +47,12 @@ function onClick (e: MouseEvent) {
       href: disabled ? undefined : href,
       'aria-disabled': disabled ? 'true' : undefined,
       role: disabled ? 'link' : undefined
-    } : {
+    } : as === 'button' ? {
       as,
       type,
       disabled
+    } : {
+      as
     }"
     :rel="rel"
     :target="target"

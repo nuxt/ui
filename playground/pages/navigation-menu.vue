@@ -7,7 +7,7 @@ const links = [
       src: 'https://avatars.githubusercontent.com/u/739984?v=4'
     },
     badge: 100,
-    click () {
+    select () {
       console.log('Profile clicked')
     }
   }, {
@@ -29,7 +29,8 @@ const links = [
     target: '_blank'
   }, {
     label: 'Help',
-    icon: 'i-heroicons-question-mark-circle'
+    icon: 'i-heroicons-question-mark-circle',
+    disabled: true
   }]
 ]
 </script>

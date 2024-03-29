@@ -19,7 +19,7 @@ export interface AccordionItem {
   disabled?: boolean
 }
 
-export interface AccordionProps<T extends AccordionItem> extends Omit<AccordionRootProps, 'asChild' | 'dir' | 'orientation'> {
+export interface AccordionProps<T> extends Omit<AccordionRootProps, 'asChild' | 'dir' | 'orientation'> {
   items?: T[]
   class?: any
   ui?: Partial<typeof accordion.slots>
@@ -29,13 +29,12 @@ export interface AccordionEmits extends AccordionRootEmits {}
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export type AccordionSlots<T extends AccordionItem> = {
+export type AccordionSlots<T> = {
   leading: SlotProps<T>
   default: SlotProps<T>
   trailing: SlotProps<T>
   content: SlotProps<T>
-} & {
-  [key in T['slot'] as string]?: SlotProps<T>
+  [key: string]: SlotProps<T>
 }
 </script>
 

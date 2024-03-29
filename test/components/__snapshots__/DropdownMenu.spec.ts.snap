@@ -1,0 +1,70 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DropdownMenu > renders basic case correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<div data-radix-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-radix-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; --radix-dropdown-menu-content-transform-origin: var(--radix-popper-transform-origin); --radix-dropdown-menu-content-available-width: var(--radix-popper-available-width); --radix-dropdown-menu-content-available-height: var(--radix-popper-available-height); --radix-dropdown-menu-trigger-width: var(--radix-popper-anchor-width); --radix-dropdown-menu-trigger-height: var(--radix-popper-anchor-height); animation: none; pointer-events: auto;" data-dismissable-layer="" id="radix-vue-dropdown-menu-content-1" aria-labelledby="" class="min-w-48 bg-white dark:bg-gray-900 shadow-lg rounded-md ring ring-gray-200 dark:ring-gray-800 divide-y divide-gray-200 dark:divide-gray-800 will-change-[transform,opacity] data-[state=open]:animate-[dropdown-menu-open_100ms_ease-out] data-[state=closed]:animate-[dropdown-menu-closed_100ms_ease-in]" data-side="bottom" data-align="center">
+    <div role="group" class="p-1"><button type="button" role="menuitem" tabindex="-1" data-radix-vue-collection-item="" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75 text-gray-700 dark:text-gray-200 data-[highlighted]:text-gray-900 dark:data-[highlighted]:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[highlighted]:before:bg-gray-50 dark:data-[highlighted]:before:bg-gray-800/50 data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-5 text-[10px] shrink-0"><!----><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span><span class="truncate">Profile</span>
+        <!--v-if-->
+      </button><button type="button" role="menuitem" tabindex="-1" data-radix-vue-collection-item="" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75 text-gray-700 dark:text-gray-200 data-[highlighted]:text-gray-900 dark:data-[highlighted]:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[highlighted]:before:bg-gray-50 dark:data-[highlighted]:before:bg-gray-800/50 data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50">
+        <!----><span class="truncate">Edit</span><span class="ms-auto inline-flex"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-5 min-w-[20px] text-[11px]">E</kbd></span></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-radix-vue-collection-item="" aria-disabled="true" data-disabled="" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75 text-gray-700 dark:text-gray-200 data-[highlighted]:text-gray-900 dark:data-[highlighted]:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[highlighted]:before:bg-gray-50 dark:data-[highlighted]:before:bg-gray-800/50 data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50">
+        <!----><span class="truncate">Duplicate</span><span class="ms-auto inline-flex"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-5 min-w-[20px] text-[11px]">D</kbd></span></span>
+      </button></div>
+  </div>
+</div>
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`DropdownMenu > renders with class correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<div data-radix-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-radix-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --radix-dropdown-menu-content-transform-origin: var(--radix-popper-transform-origin); --radix-dropdown-menu-content-available-width: var(--radix-popper-available-width); --radix-dropdown-menu-content-available-height: var(--radix-popper-available-height); --radix-dropdown-menu-trigger-width: var(--radix-popper-anchor-width); --radix-dropdown-menu-trigger-height: var(--radix-popper-anchor-height); animation: none;" data-dismissable-layer="" id="radix-vue-dropdown-menu-content-2" aria-labelledby="" class="bg-white dark:bg-gray-900 shadow-lg rounded-md ring ring-gray-200 dark:ring-gray-800 divide-y divide-gray-200 dark:divide-gray-800 will-change-[transform,opacity] data-[state=open]:animate-[dropdown-menu-open_100ms_ease-out] data-[state=closed]:animate-[dropdown-menu-closed_100ms_ease-in] min-w-96" data-side="bottom" data-align="center">
+    <div role="group" class="p-1"><button type="button" role="menuitem" tabindex="-1" data-radix-vue-collection-item="" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75 text-gray-700 dark:text-gray-200 data-[highlighted]:text-gray-900 dark:data-[highlighted]:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[highlighted]:before:bg-gray-50 dark:data-[highlighted]:before:bg-gray-800/50 data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-5 text-[10px] shrink-0"><!----><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span><span class="truncate">Profile</span>
+        <!--v-if-->
+      </button><button type="button" role="menuitem" tabindex="-1" data-radix-vue-collection-item="" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75 text-gray-700 dark:text-gray-200 data-[highlighted]:text-gray-900 dark:data-[highlighted]:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[highlighted]:before:bg-gray-50 dark:data-[highlighted]:before:bg-gray-800/50 data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50">
+        <!----><span class="truncate">Edit</span><span class="ms-auto inline-flex"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-5 min-w-[20px] text-[11px]">E</kbd></span></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-radix-vue-collection-item="" aria-disabled="true" data-disabled="" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75 text-gray-700 dark:text-gray-200 data-[highlighted]:text-gray-900 dark:data-[highlighted]:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[highlighted]:before:bg-gray-50 dark:data-[highlighted]:before:bg-gray-800/50 data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50">
+        <!----><span class="truncate">Duplicate</span><span class="ms-auto inline-flex"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-5 min-w-[20px] text-[11px]">D</kbd></span></span>
+      </button></div>
+  </div>
+</div>
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`DropdownMenu > renders with ui correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<div data-radix-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-radix-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --radix-dropdown-menu-content-transform-origin: var(--radix-popper-transform-origin); --radix-dropdown-menu-content-available-width: var(--radix-popper-available-width); --radix-dropdown-menu-content-available-height: var(--radix-popper-available-height); --radix-dropdown-menu-trigger-width: var(--radix-popper-anchor-width); --radix-dropdown-menu-trigger-height: var(--radix-popper-anchor-height); animation: none;" data-dismissable-layer="" id="radix-vue-dropdown-menu-content-3" aria-labelledby="" class="min-w-48 bg-white dark:bg-gray-900 shadow-lg rounded-md ring ring-gray-200 dark:ring-gray-800 divide-y divide-gray-200 dark:divide-gray-800 will-change-[transform,opacity] data-[state=open]:animate-[dropdown-menu-open_100ms_ease-out] data-[state=closed]:animate-[dropdown-menu-closed_100ms_ease-in]" data-side="bottom" data-align="center">
+    <div role="group" class="p-1"><button type="button" role="menuitem" tabindex="-1" data-radix-vue-collection-item="" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75 text-gray-700 dark:text-gray-200 data-[highlighted]:text-gray-900 dark:data-[highlighted]:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[highlighted]:before:bg-gray-50 dark:data-[highlighted]:before:bg-gray-800/50 data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-5 text-[10px] shrink-0"><!----><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span><span class="truncate">Profile</span>
+        <!--v-if-->
+      </button><button type="button" role="menuitem" tabindex="-1" data-radix-vue-collection-item="" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75 text-gray-700 dark:text-gray-200 data-[highlighted]:text-gray-900 dark:data-[highlighted]:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[highlighted]:before:bg-gray-50 dark:data-[highlighted]:before:bg-gray-800/50 data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50">
+        <!----><span class="truncate">Edit</span><span class="ms-auto inline-flex"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-5 min-w-[20px] text-[11px]">E</kbd></span></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-radix-vue-collection-item="" aria-disabled="true" data-disabled="" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75 text-gray-700 dark:text-gray-200 data-[highlighted]:text-gray-900 dark:data-[highlighted]:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[highlighted]:before:bg-gray-50 dark:data-[highlighted]:before:bg-gray-800/50 data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50">
+        <!----><span class="truncate">Duplicate</span><span class="ms-auto inline-flex"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset h-5 min-w-[20px] text-[11px]">D</kbd></span></span>
+      </button></div>
+  </div>
+</div>
+
+
+
+<!--teleport end-->"
+`;

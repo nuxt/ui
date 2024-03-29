@@ -2,7 +2,7 @@
 
 exports[`Link > renders with activeClass correctly 1`] = `"<button type="button" class="focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 text-gray-900 dark:text-white"></button>"`;
 
-exports[`Link > renders with as correctly 1`] = `"<div type="button" disabled="false" class="focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"></div>"`;
+exports[`Link > renders with as correctly 1`] = `"<div class="focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"></div>"`;
 
 exports[`Link > renders with class correctly 1`] = `"<button type="button" class="focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 font-medium"></button>"`;
 

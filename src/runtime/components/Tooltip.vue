@@ -37,7 +37,7 @@ import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArro
 import { reactivePick } from '@vueuse/core'
 import UKbd from '#ui/components/Kbd.vue'
 
-const props = defineProps<TooltipProps>()
+const props = withDefaults(defineProps<TooltipProps>(), { portal: true })
 const emits = defineEmits<TooltipEmits>()
 defineSlots<TooltipSlots>()
 

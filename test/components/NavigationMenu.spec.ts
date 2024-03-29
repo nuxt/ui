@@ -27,7 +27,7 @@ describe('NavigationMenu', () => {
     ['basic case', { props: { links } }],
     ['with vertical orientation', { props: { links, orientation: 'vertical' as const } }],
     ['with class', { props: { links, class: 'w-48' } }],
-    ['with ui', { props: { links, ui: { icon: 'w-4 h-4' } } }]
+    ['with ui', { props: { links, ui: { linkLeadingIcon: 'size-4' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps<typeof links[number]>, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, NavigationMenu)
     expect(html).toMatchSnapshot()

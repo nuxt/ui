@@ -17,7 +17,7 @@ export interface TabsItem {
   content?: string
 }
 
-export interface TabsProps<T extends TabsItem> extends Omit<TabsRootProps, 'asChild'> {
+export interface TabsProps<T> extends Omit<TabsRootProps, 'asChild'> {
   items?: T[]
   class?: any
   ui?: Partial<typeof tabs.slots>
@@ -27,11 +27,10 @@ export interface TabsEmits extends TabsRootEmits {}
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export type TabsSlots<T extends TabsItem> = {
+export type TabsSlots<T> = {
   default: SlotProps<T>
   content: SlotProps<T>
-} & {
-  [key in T['slot'] as string]?: SlotProps<T>
+  [key: string]: SlotProps<T>
 }
 </script>
 

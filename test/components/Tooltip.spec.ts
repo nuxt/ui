@@ -15,9 +15,9 @@ const TooltipWrapper = defineComponent({
 
 describe('Tooltip', () => {
   it.each([
-    ['with text', { props: { text: 'Tooltip', open: true } }],
-    ['with arrow', { props: { text: 'Tooltip', arrow: true, open: true } }],
-    ['with shortcuts', { props: { text: 'Tooltip', shortcuts: ['⌘', 'K'], open: true } }]
+    ['with text', { props: { text: 'Tooltip', open: true, portal: false } }],
+    ['with arrow', { props: { text: 'Tooltip', arrow: true, open: true, portal: false } }],
+    ['with shortcuts', { props: { text: 'Tooltip', shortcuts: ['⌘', 'K'], open: true, portal: false } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TooltipProps, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, TooltipWrapper)
     expect(html).toMatchSnapshot()
