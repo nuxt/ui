@@ -1,7 +1,7 @@
 export default (config: { colors: string[] }) => ({
   slots: {
     root: 'relative flex items-start',
-    base: 'shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
+    base: 'shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
     container: 'flex items-center',
     wrapper: 'ms-2',
     indicator: 'flex',
@@ -10,7 +10,7 @@ export default (config: { colors: string[] }) => ({
     description: 'text-gray-500 dark:text-gray-400'
   },
   variants: {
-    color: Object.fromEntries(config.colors.map((color: string) => [color, `focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`])),
+    color: Object.fromEntries(config.colors.map((color: string) => [color, `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`])),
     size: {
       '2xs': {
         base: 'size-3',

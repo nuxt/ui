@@ -1,6 +1,6 @@
 export default (config: { colors: string[] }) => ({
   slots: {
-    base: 'rounded-md font-medium inline-flex items-center focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75',
+    base: 'rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
     label: '',
     leadingIcon: 'shrink-0',
     trailingIcon: 'shrink-0'
@@ -78,7 +78,7 @@ export default (config: { colors: string[] }) => ({
   compoundVariants: [...config.colors.map((color: string) => ({
     color,
     variant: 'solid',
-    class: `shadow-sm text-white dark:text-gray-900 bg-${color}-500 hover:bg-${color}-600 disabled:bg-${color}-500 dark:bg-${color}-400 dark:hover:bg-${color}-500 dark:disabled:bg-${color}-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
+    class: `shadow-sm text-white dark:text-gray-900 bg-${color}-500 hover:bg-${color}-600 disabled:bg-${color}-500 dark:bg-${color}-400 dark:hover:bg-${color}-500 dark:disabled:bg-${color}-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
   })), ...config.colors.map((color: string) => ({
     color,
     variant: 'outline',

@@ -2,7 +2,7 @@
 
 exports[`Checkbox > renders basic case correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -13,7 +13,7 @@ exports[`Checkbox > renders basic case correctly 1`] = `
 
 exports[`Checkbox > renders with custom color correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-red-500 dark:focus-visible:ring-red-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -26,7 +26,7 @@ exports[`Checkbox > renders with custom color correctly 1`] = `
 
 exports[`Checkbox > renders with custom id correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4" id="custom-id" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" id="custom-id" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -37,7 +37,7 @@ exports[`Checkbox > renders with custom id correctly 1`] = `
 
 exports[`Checkbox > renders with custom name correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -48,7 +48,7 @@ exports[`Checkbox > renders with custom name correctly 1`] = `
 
 exports[`Checkbox > renders with custom value correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -59,7 +59,7 @@ exports[`Checkbox > renders with custom value correctly 1`] = `
 
 exports[`Checkbox > renders with disabled correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4 cursor-not-allowed opacity-75" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4 cursor-not-allowed opacity-75" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="">
       <!---->
     </button>
     <!---->
@@ -70,7 +70,7 @@ exports[`Checkbox > renders with disabled correctly 1`] = `
 
 exports[`Checkbox > renders with help correctly 1`] = `
 "<div class="relative flex items-start" help="Help">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -83,7 +83,7 @@ exports[`Checkbox > renders with help correctly 1`] = `
 
 exports[`Checkbox > renders with indeterminate correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4 ring-2 ring-inset ring-primary-500 dark:ring-primary-400 bg-primary-500 dark:bg-primary-400" id="42" role="checkbox" type="button" aria-checked="mixed" aria-required="false" data-state="indeterminate"><span data-state="indeterminate" style="pointer-events: none;" class="flex"><svg data-v-b97f0f09="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon size-full" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10" clip-rule="evenodd"></path></svg></span></button>
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4 ring-2 ring-inset ring-primary-500 dark:ring-primary-400 bg-primary-500 dark:bg-primary-400" id="42" role="checkbox" type="button" aria-checked="mixed" aria-required="false" data-state="indeterminate"><span data-state="indeterminate" style="pointer-events: none;" class="flex"><svg data-v-b97f0f09="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon size-full" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10" clip-rule="evenodd"></path></svg></span></button>
     <!---->
   </div>
   <!--v-if-->
@@ -92,7 +92,7 @@ exports[`Checkbox > renders with indeterminate correctly 1`] = `
 
 exports[`Checkbox > renders with label correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -105,7 +105,7 @@ exports[`Checkbox > renders with label correctly 1`] = `
 
 exports[`Checkbox > renders with required correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -118,7 +118,7 @@ exports[`Checkbox > renders with required correctly 1`] = `
 
 exports[`Checkbox > renders with size 2xs correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-4"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-3" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-4"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -129,7 +129,7 @@ exports[`Checkbox > renders with size 2xs correctly 1`] = `
 
 exports[`Checkbox > renders with size lg correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-6"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-5" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-6"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-5" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -140,7 +140,7 @@ exports[`Checkbox > renders with size lg correctly 1`] = `
 
 exports[`Checkbox > renders with size md correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-[18px]" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-[18px]" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -151,7 +151,7 @@ exports[`Checkbox > renders with size md correctly 1`] = `
 
 exports[`Checkbox > renders with size sm correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -162,7 +162,7 @@ exports[`Checkbox > renders with size sm correctly 1`] = `
 
 exports[`Checkbox > renders with size xl correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-6"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-[22px]" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-6"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-[22px]" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -173,7 +173,7 @@ exports[`Checkbox > renders with size xl correctly 1`] = `
 
 exports[`Checkbox > renders with size xs correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-4"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-3.5" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-4"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3.5" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -184,7 +184,7 @@ exports[`Checkbox > renders with size xs correctly 1`] = `
 
 exports[`Checkbox > renders with slot correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
@@ -195,7 +195,7 @@ exports[`Checkbox > renders with slot correctly 1`] = `
 
 exports[`Checkbox > renders with slot label correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div class="flex items-center h-5"><button class="shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" id="42" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!---->
