@@ -2,7 +2,7 @@ import { existsSync, promises as fsp } from 'node:fs'
 import { resolve } from 'pathe'
 import { defineCommand } from 'citty'
 import { consola } from 'consola'
-import { camelCase } from 'scule'
+import { splitByCase, upperFirst, camelCase } from 'scule'
 import templates from '../utils/templates.mjs'
 
 export default defineCommand({
@@ -42,9 +42,16 @@ export default defineCommand({
 
     const themePath = resolve(path, 'src/theme/index.ts')
     const theme = await fsp.readFile(themePath, 'utf-8')
-    const contents = `export { default as ${camelCase(name)} } from './${camelCase(name)}'`
-    if (!theme.includes(contents)) {
-      await fsp.writeFile(themePath, theme.trim() + '\n' + contents + '\n')
+    const themeContents = `export { default as ${camelCase(name)} } from './${camelCase(name)}'`
+    if (!theme.includes(themeContents)) {
+      await fsp.writeFile(themePath, theme.trim() + '\n' + themeContents + '\n')
+    }
+
+    const typesPath = resolve(path, 'src/runtime/types/index.d.ts')
+    const types = await fsp.readFile(typesPath, 'utf-8')
+    const typesContents = `export * from '../components/${splitByCase(name).map(p => upperFirst(p)).join('')}.vue'`
+    if (!types.includes(typesContents)) {
+      await fsp.writeFile(typesPath, types.trim() + '\n' + typesContents + '\n')
     }
   }
 })
