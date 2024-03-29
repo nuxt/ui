@@ -4,7 +4,7 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'radix
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/slideover'
-import type { ButtonProps } from '#ui/components/Button.vue'
+import type { ButtonProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { slideover: Partial<typeof theme> } }
 
@@ -42,8 +42,8 @@ export interface SlideoverSlots {
 import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#app'
-import UButton from '#ui/components/Button.vue'
+import { useAppConfig } from '#imports'
+import { UButton } from '#components'
 
 const props = withDefaults(defineProps<SlideoverProps>(), {
   portal: true,

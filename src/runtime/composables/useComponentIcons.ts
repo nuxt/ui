@@ -1,6 +1,6 @@
 import { computed } from 'vue'
-import { useAppConfig } from '#app'
-import type { IconProps } from '#ui/components/Icon.vue'
+import { useAppConfig } from '#imports'
+import type { IconProps } from '#ui/types'
 
 export interface UseComponentIconsProps {
   icon?: IconProps['name']

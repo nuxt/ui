@@ -4,11 +4,7 @@ import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentP
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdownMenu'
-import type { LinkProps } from '#ui/components/Link.vue'
-import type { AvatarProps } from '#ui/components/Avatar.vue'
-import type { IconProps } from '#ui/components/Icon.vue'
-import type { KbdProps } from '#ui/components/Kbd.vue'
-import type { DropdownMenuContentSlots } from '#ui/components/DropdownMenuContent.vue'
+import type { AvatarProps, IconProps, KbdProps, LinkProps, DropdownMenuContentSlots } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 

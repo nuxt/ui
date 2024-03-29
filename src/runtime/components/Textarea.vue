@@ -3,7 +3,6 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/textarea'
-import { looseToNumber } from '#ui/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { textarea: Partial<typeof theme> } }
 
@@ -40,7 +39,8 @@ export interface TextareaSlots {
 
 <script lang="ts" setup>
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
-import { useFormField } from '#ui/composables/useFormField'
+import { useFormField } from '#imports'
+import { looseToNumber } from '#ui/utils'
 
 defineOptions({ inheritAttrs: false })
 

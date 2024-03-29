@@ -4,7 +4,7 @@ import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipAr
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
-import type { KbdProps } from '#ui/components/Kbd.vue'
+import type { KbdProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof theme> } }
 
@@ -35,7 +35,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import UKbd from '#ui/components/Kbd.vue'
+import { UKbd } from '#components'
 
 const props = withDefaults(defineProps<TooltipProps>(), { portal: true })
 const emits = defineEmits<TooltipEmits>()

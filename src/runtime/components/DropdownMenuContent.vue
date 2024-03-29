@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { DropdownMenuContentProps as RadixDropdownMenuContentProps, DropdownMenuContentEmits as RadixDropdownMenuContentEmits } from 'radix-vue'
-import type { DropdownMenuItem } from '#ui/components/DropdownMenu.vue'
+import type { DropdownMenuItem } from '#ui/types'
 
 export interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T[] | T[][]
@@ -27,9 +27,9 @@ import { computed } from 'vue'
 import { DropdownMenu } from 'radix-vue/namespaced'
 import { useForwardPropsEmits } from 'radix-vue'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { ULink } from '#components'
 import { omit } from '#ui/utils'
-import { useAppConfig } from '#imports'
 
 const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()

@@ -4,7 +4,7 @@ import type { CheckboxRootProps, CheckboxRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/checkbox'
-import type { IconProps } from '#ui/components/Icon.vue'
+import type { IconProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { checkbox: Partial<typeof theme> } }
 
@@ -38,9 +38,7 @@ export interface CheckboxSlots {
 import { computed } from 'vue'
 import { CheckboxRoot, CheckboxIndicator, Label, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { useId } from '#imports'
-import { useFormField } from '#ui/composables/useFormField'
-import { useAppConfig } from '#app'
+import { useId, useAppConfig, useFormField } from '#imports'
 
 const props = defineProps<CheckboxProps>()
 const emits = defineEmits<CheckboxEmits>()

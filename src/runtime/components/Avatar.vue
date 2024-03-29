@@ -4,7 +4,7 @@ import type { AvatarFallbackProps, AvatarRootProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar'
-import type { IconProps } from '#ui/components/Icon.vue'
+import type { IconProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { avatar: Partial<typeof theme> } }
 
@@ -27,7 +27,7 @@ export interface AvatarProps extends Omit<AvatarRootProps, 'asChild'>, Omit<Avat
 import { computed } from 'vue'
 import { AvatarRoot, AvatarImage, AvatarFallback, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import UIcon from '#ui/components/Icon.vue'
+import { UIcon } from '#components'
 
 const props = defineProps<AvatarProps>()
 

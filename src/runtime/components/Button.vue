@@ -35,8 +35,8 @@ export interface ButtonSlots {
 import { computed } from 'vue'
 import { useForwardProps } from 'radix-vue'
 import { reactiveOmit } from '@vueuse/core'
-import UIcon from '#ui/components/Icon.vue'
-import { useComponentIcons } from '#ui/composables/useComponentIcons'
+import { useComponentIcons } from '#imports'
+import { UIcon, ULink } from '#components'
 
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()

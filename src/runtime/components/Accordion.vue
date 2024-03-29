@@ -4,7 +4,7 @@ import type { AccordionRootProps, AccordionRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
-import type { IconProps } from '#ui/components/Icon.vue'
+import type { IconProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
 
@@ -42,7 +42,7 @@ export type AccordionSlots<T> = {
 import { computed } from 'vue'
 import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#app'
+import { useAppConfig } from '#imports'
 
 const props = withDefaults(defineProps<AccordionProps<T>>(), {
   type: 'single',

@@ -3,7 +3,6 @@ import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
-import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '#ui/utils/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, FormInjectedOptions, Form, FormErrorWithId } from '#ui/types/form'
 
 const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
@@ -49,6 +48,7 @@ export class FormValidationException extends Error {
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed } from 'vue'
 import { useEventBus, type UseEventBusReturn } from '@vueuse/core'
 import { useId } from '#imports'
+import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '#ui/utils/form'
 
 const props = withDefaults(defineProps<FormProps<T>>(), {
   validateOn () {

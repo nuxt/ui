@@ -4,7 +4,7 @@ import type { SwitchRootProps, SwitchRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/switch'
-import type { IconProps } from '#ui/components/Icon.vue'
+import type { IconProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { switch: Partial<typeof theme> } }
 
@@ -30,7 +30,7 @@ export interface SwitchEmits extends SwitchRootEmits {}
 import { computed } from 'vue'
 import { SwitchRoot, SwitchThumb, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#app'
+import { useAppConfig } from '#imports'
 
 const props = defineProps<SwitchProps>()
 const emits = defineEmits<SwitchEmits>()
