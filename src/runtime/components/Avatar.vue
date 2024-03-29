@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { AvatarFallbackProps, AvatarRootProps } from 'radix-vue'
+import type { AvatarFallbackProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar'
@@ -12,7 +12,8 @@ const avatar = tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}) })
 
 type AvatarVariants = VariantProps<typeof avatar>
 
-export interface AvatarProps extends Omit<AvatarRootProps, 'asChild'>, Omit<AvatarFallbackProps, 'as' | 'asChild'> {
+export interface AvatarProps extends Omit<AvatarFallbackProps, 'as' | 'asChild'> {
+  as?: string | object
   src?: string
   alt?: string
   icon?: IconProps['name']
@@ -31,7 +32,6 @@ import { UIcon } from '#components'
 
 const props = defineProps<AvatarProps>()
 
-const rootProps = useForwardProps(reactivePick(props, 'as'))
 const fallbackProps = useForwardProps(reactivePick(props, 'delayMs'))
 
 const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
@@ -40,8 +40,8 @@ const ui = computed(() => tv({ extend: avatar, slots: props.ui })({ size: props.
 </script>
 
 <template>
-  <AvatarRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
-    <AvatarImage v-if="src" :src="src" :alt="alt" :class="ui.image()" />
+  <AvatarRoot :class="ui.root({ class: props.class })">
+    <AvatarImage v-if="src" :as="as" :src="src" :alt="alt" :class="ui.image()" />
 
     <AvatarFallback as-child v-bind="fallbackProps">
       <UIcon v-if="icon" :name="icon" :class="ui.icon()" />
