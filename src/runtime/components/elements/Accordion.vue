@@ -39,22 +39,11 @@
         @before-leave="onBeforeLeave"
         @leave="onLeave"
       >
-        <DefinePanelTemplate>
-          <HDisclosurePanel :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]" static>
-            <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
-              {{ item.content }}
-            </slot>
-          </HDisclosurePanel>
-        </DefinePanelTemplate>
-        
-        <div v-if="unmount && open">
-          <PanelTemplate />  
-        </div>
-        <template v-else>
-          <div v-show="open">
-            <PanelTemplate />
-          </div>
-        </template>
+      <HDisclosurePanel :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]" :unmount="unmount">
+        <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
+          {{ item.content }}
+        </slot>
+      </HDisclosurePanel>
       </Transition>
     </HDisclosure>
   </div>
@@ -63,7 +52,6 @@
 <script lang="ts">
 import { ref, computed, toRef, defineComponent, watch } from 'vue'
 import type { PropType } from 'vue'
-import { createReusableTemplate } from '@vueuse/core'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel, provideUseId } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
@@ -183,8 +171,6 @@ export default defineComponent({
 
     provideUseId(() => useId())
 
-    const [DefinePanelTemplate, PanelTemplate] = createReusableTemplate()
-
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -197,8 +183,6 @@ export default defineComponent({
       onBeforeLeave,
       onAfterEnter,
       onLeave,
-      DefinePanelTemplate,
-      PanelTemplate,
     }
   }
 })
