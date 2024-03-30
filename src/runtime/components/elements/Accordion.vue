@@ -83,7 +83,6 @@ const configButton = mergeConfig<typeof button>(appConfig.ui.strategy, appConfig
 
 const [DefinePanelTemplate, PanelTemplate] = createReusableTemplate()
 
-
 export default defineComponent({
   components: {
     HDisclosure,
@@ -201,7 +200,7 @@ export default defineComponent({
       onEnter,
       onBeforeLeave,
       onAfterEnter,
-      onLeave,
+      onLeave
     }
   }
 })
