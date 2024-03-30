@@ -32,6 +32,18 @@
         </slot>
       </HDisclosureButton>
 
+      <DefinePanelTemplate>
+        <HDisclosurePanel
+          :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]"
+          :unmount="unmount"
+          :static="!unmount"
+        >
+          <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
+            {{ item.content }}
+          </slot>
+        </HDisclosurePanel>
+      </DefinePanelTemplate>
+
       <Transition
         v-bind="ui.transition"
         @enter="onEnter"
@@ -39,11 +51,12 @@
         @before-leave="onBeforeLeave"
         @leave="onLeave"
       >
-      <HDisclosurePanel :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]" :unmount="unmount">
-        <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
-          {{ item.content }}
-        </slot>
-      </HDisclosurePanel>
+        <PanelTemplate v-if="unmount" />
+        <template v-else>
+          <div v-show="open">
+            <PanelTemplate />
+          </div>
+        </template>
       </Transition>
     </HDisclosure>
   </div>
@@ -52,6 +65,7 @@
 <script lang="ts">
 import { ref, computed, toRef, defineComponent, watch } from 'vue'
 import type { PropType } from 'vue'
+import { createReusableTemplate } from '@vueuse/core'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel, provideUseId } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
@@ -67,13 +81,18 @@ const config = mergeConfig<typeof accordion>(appConfig.ui.strategy, appConfig.ui
 
 const configButton = mergeConfig<typeof button>(appConfig.ui.strategy, appConfig.ui.button, button)
 
+const [DefinePanelTemplate, PanelTemplate] = createReusableTemplate()
+
+
 export default defineComponent({
   components: {
     HDisclosure,
     HDisclosureButton,
     HDisclosurePanel,
     UIcon,
-    UButton
+    UButton,
+    DefinePanelTemplate,
+    PanelTemplate,
   },
   inheritAttrs: false,
   props: {
