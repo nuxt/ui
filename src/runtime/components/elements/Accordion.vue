@@ -91,7 +91,7 @@ export default defineComponent({
     UIcon,
     UButton,
     DefinePanelTemplate,
-    PanelTemplate,
+    PanelTemplate
   },
   inheritAttrs: false,
   props: {
@@ -109,7 +109,7 @@ export default defineComponent({
     },
     unmount: {
       type: Boolean,
-      default: false,
+      default: false
     },
     closeIcon: {
       type: String,
