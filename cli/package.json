@@ -1,5 +1,8 @@
 {
-  "name": "nuxt-ui-cli",
+  "name": "@nuxt/ui-cli",
+  "bin": {
+    "nuxt-ui": "./index.mjs"
+  },
   "exports": {
     ".": "./index.mjs"
   },
