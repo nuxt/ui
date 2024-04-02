@@ -68,6 +68,9 @@ const checked = computed({
   }
 })
 
+// FIXME: I think there's a race condition between this and the v-model event.
+// This must be triggered after the value updates, otherwise the form validates
+// the previous value.
 function onChecked () {
   emitFormChange()
 }

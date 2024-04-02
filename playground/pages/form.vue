@@ -116,6 +116,7 @@ function onSubmit (event: FormSubmitEvent<User>) {
     <div class="flex gap-4">
       <FormNestedExample />
       <FormNestedListExample />
+      <FormElementsExample />
     </div>
   </div>
 </template>

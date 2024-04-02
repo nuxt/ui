@@ -25,6 +25,7 @@ const components = [
   'modal',
   'navigation-menu',
   'popover',
+  'radio-group',
   'skeleton',
   'slideover',
   'switch',
