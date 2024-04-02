@@ -1,7 +1,7 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule } from '@nuxt/kit'
 import tailwindcss from '@tailwindcss/vite'
-import addTemplates from './templates'
+import { addTemplates } from './templates'
 import icons from './theme/icons'
 
 export interface ModuleOptions {
