@@ -73,10 +73,12 @@ export function addTemplates (options: ModuleOptions, nuxt: Nuxt) {
 import type { DeepPartial } from '#ui/types/utils'
 
 const colors = ${JSON.stringify(options.colors)} as const;
+const icons = ${JSON.stringify(nuxt.options.appConfig.ui.icons)};
 
 type AppConfigUI = {
   primary?: typeof colors[number]
   gray?: 'slate' | 'cool' | 'zinc' | 'neutral' | 'stone'
+  icons?: Partial<typeof icons>
 } & DeepPartial<typeof ui>
 
 declare module 'nuxt/schema' {
@@ -90,6 +92,6 @@ declare module '@nuxt/schema' {
   }
 }
 export {}
-    `
+`
   })
 }
