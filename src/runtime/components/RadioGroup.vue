@@ -3,7 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { RadioGroupRootProps, RadioGroupRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
-import theme from '#build/ui/radioGroup'
+import theme from '#build/ui/radio-group'
 
 const appConfig = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
 

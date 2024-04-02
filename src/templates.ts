@@ -1,3 +1,4 @@
+import { kebabCase } from 'scule'
 import { addTemplate, addTypeTemplate } from '@nuxt/kit'
 import type { Nuxt } from '@nuxt/schema'
 import type { ModuleOptions } from './module'
@@ -41,7 +42,7 @@ export function addTemplates (options: ModuleOptions, nuxt: Nuxt) {
 
   for (const component in theme) {
     addTemplate({
-      filename: `ui/${component}.ts`,
+      filename: `ui/${kebabCase(component)}.ts`,
       write: true,
       getContents: async () => {
         const template = (theme as any)[component]
@@ -63,7 +64,7 @@ export function addTemplates (options: ModuleOptions, nuxt: Nuxt) {
   addTemplate({
     filename: 'ui/index.ts',
     write: true,
-    getContents: () => Object.keys(theme).map(component => `export { default as ${component} } from './${component}'`).join('\n')
+    getContents: () => Object.keys(theme).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
   })
 
   // FIXME: `typeof colors[number]` should include all colors from the theme

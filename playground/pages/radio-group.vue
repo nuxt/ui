@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import theme from '#build/ui/checkbox'
+import theme from '#build/ui/radio-group'
 
 const sizes = Object.keys(theme.variants.size)
 
@@ -13,7 +13,6 @@ const options = [
   { value: '2', label: 'Option 2' },
   { value: '3', label: 'Option 3' }
 ]
-
 
 const optionsWithDescription = [
   { value: '1', label: 'Option 1', description: 'Description 1' },

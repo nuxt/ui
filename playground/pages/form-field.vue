@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import theme from '#build/ui/formField'
+import theme from '#build/ui/form-field'
 
 const sizes = Object.keys(theme.variants.size)
 const feedbacks = [

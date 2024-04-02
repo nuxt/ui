@@ -2,7 +2,7 @@
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
-import theme from '#build/ui/formField'
+import theme from '#build/ui/form-field'
 
 const appConfig = _appConfig as AppConfig & { ui: { formField: Partial<typeof theme> } }
 

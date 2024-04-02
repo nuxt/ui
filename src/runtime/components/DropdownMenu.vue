@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants'
 import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
-import theme from '#build/ui/dropdownMenu'
+import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, IconProps, KbdProps, LinkProps, DropdownMenuContentSlots } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }

@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants'
 import type { NavigationMenuRootProps, NavigationMenuRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
-import theme from '#build/ui/navigationMenu'
+import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, IconProps, LinkProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
