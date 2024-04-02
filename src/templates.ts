@@ -70,30 +70,26 @@ export function addTemplates (options: ModuleOptions, nuxt: Nuxt) {
   addTypeTemplate({
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
+import type { DeepPartial } from '#ui/types/utils'
 
-      type DeepPartial<T> = Partial<{
-        [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string | object }
-      }>
+const colors = ${JSON.stringify(options.colors)} as const;
 
-      const colors = ${JSON.stringify(options.colors)} as const;
+type AppConfigUI = {
+  primary?: typeof colors[number]
+  gray?: 'slate' | 'cool' | 'zinc' | 'neutral' | 'stone'
+} & DeepPartial<typeof ui>
 
-      type UI = {
-        primary?: typeof colors[number]
-        gray?: 'slate' | 'cool' | 'zinc' | 'neutral' | 'stone'
-        [key: string]: any
-      } & DeepPartial<typeof ui>
-
-      declare module 'nuxt/schema' {
-        interface AppConfigInput {
-          ui?: UI
-        }
-      }
-      declare module '@nuxt/schema' {
-        interface AppConfigInput {
-          ui?: UI
-        }
-      }
-      export {}
+declare module 'nuxt/schema' {
+  interface AppConfigInput {
+    ui?: AppConfigUI
+  }
+}
+declare module '@nuxt/schema' {
+  interface AppConfigInput {
+    ui?: AppConfigUI
+  }
+}
+export {}
     `
   })
 }
