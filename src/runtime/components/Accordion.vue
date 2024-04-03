@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { AccordionRootProps, AccordionRootEmits } from 'radix-vue'
+import type { AccordionRootProps, AccordionRootEmits, AccordionContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
@@ -21,6 +21,7 @@ export interface AccordionItem {
 
 export interface AccordionProps<T> extends Omit<AccordionRootProps, 'asChild' | 'dir' | 'orientation'> {
   items?: T[]
+  content?: Omit<AccordionContentProps, 'asChild'>
   class?: any
   ui?: Partial<typeof accordion.slots>
 }
@@ -39,7 +40,7 @@ export type AccordionSlots<T> = {
 </script>
 
 <script setup lang="ts" generic="T extends AccordionItem">
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -53,6 +54,7 @@ defineSlots<AccordionSlots<T>>()
 
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'type'), emits)
+const contentProps = toRef(() => props.content)
 
 const ui = computed(() => tv({ extend: accordion, slots: props.ui })())
 </script>
@@ -76,7 +78,7 @@ const ui = computed(() => tv({ extend: accordion, slots: props.ui })())
         </AccordionTrigger>
       </AccordionHeader>
 
-      <AccordionContent v-if="item.content || $slots.content || (item.slot && $slots[item.slot])" :class="ui.content()" :value="item.value || String(index)">
+      <AccordionContent v-if="item.content || $slots.content || (item.slot && $slots[item.slot])" v-bind="contentProps" :class="ui.content()">
         <slot :name="item.slot || 'content'" :item="item" :index="index">
           {{ item.content }}
         </slot>
