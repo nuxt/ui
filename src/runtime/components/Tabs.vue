@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { TabsRootProps, TabsRootEmits } from 'radix-vue'
+import type { TabsRootProps, TabsRootEmits, TabsContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
@@ -19,6 +19,7 @@ export interface TabsItem {
 
 export interface TabsProps<T> extends Omit<TabsRootProps, 'asChild'> {
   items?: T[]
+  content?: Omit<TabsContentProps, 'asChild' | 'value'>
   class?: any
   ui?: Partial<typeof tabs.slots>
 }
@@ -35,7 +36,8 @@ export type TabsSlots<T> = {
 </script>
 
 <script setup lang="ts" generic="T extends TabsItem">
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
+import { defu } from 'defu'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 
@@ -44,6 +46,7 @@ const emits = defineEmits<TabsEmits>()
 defineSlots<TabsSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'activationMode', 'modelValue'), emits)
+const contentProps = toRef(() => defu(props.content, { forceMount: true }) as TabsContentProps)
 
 const ui = computed(() => tv({ extend: tabs, slots: props.ui })())
 </script>
@@ -60,7 +63,7 @@ const ui = computed(() => tv({ extend: tabs, slots: props.ui })())
       </TabsTrigger>
     </TabsList>
 
-    <TabsContent v-for="(item, index) of items" :key="index" force-mount :value="item.value || String(index)" :class="ui.content()">
+    <TabsContent v-for="(item, index) of items" :key="index" v-bind="contentProps" :value="item.value || String(index)" :class="ui.content()">
       <slot :name="item.slot || 'content'" :item="item" :index="index">
         {{ item.content }}
       </slot>
