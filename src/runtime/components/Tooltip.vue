@@ -13,8 +13,8 @@ const tooltip = tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })
 export interface TooltipProps extends TooltipRootProps {
   text?: string
   shortcuts?: string[] | KbdProps[]
-  content?: Omit<TooltipContentProps, 'as' | 'asChild'>
-  arrow?: boolean | Omit<TooltipArrowProps, 'as' | 'asChild'>
+  content?: Omit<TooltipContentProps, 'asChild'>
+  arrow?: boolean | Omit<TooltipArrowProps, 'asChild'>
   portal?: boolean
   class?: any
   ui?: Partial<typeof tooltip.slots>

@@ -13,7 +13,7 @@ const slideover = tv({ extend: tv(theme), ...(appConfig.ui?.slideover || {}) })
 export interface SlideoverProps extends DialogRootProps {
   title?: string
   description?: string
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<DialogContentProps, 'asChild' | 'forceMount'>
   overlay?: boolean
   transition?: boolean
   side?: 'left' | 'right' | 'top' | 'bottom'

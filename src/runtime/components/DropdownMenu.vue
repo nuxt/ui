@@ -15,7 +15,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type'> {
   icon?: IconProps['name']
   avatar?: AvatarProps
   disabled?: boolean
-  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<DropdownMenuContentProps, 'asChild' | 'forceMount'>
   shortcuts?: string[] | KbdProps[]
   type?: 'label' | 'item'
   slot?: string
@@ -28,8 +28,8 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type'> {
 export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'> {
   items?: T[] | T[][]
   disabled?: boolean
-  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'>
-  arrow?: boolean | Omit<DropdownMenuArrowProps, 'as' | 'asChild'>
+  content?: Omit<DropdownMenuContentProps, 'asChild' | 'forceMount'>
+  arrow?: boolean | Omit<DropdownMenuArrowProps, 'asChild'>
   portal?: boolean
   class?: any
   ui?: Partial<typeof dropdownMenu.slots>

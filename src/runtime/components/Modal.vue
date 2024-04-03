@@ -13,7 +13,7 @@ const modal = tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })
 export interface ModalProps extends DialogRootProps {
   title?: string
   description?: string
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<DialogContentProps, 'asChild' | 'forceMount'>
   overlay?: boolean
   transition?: boolean
   fullscreen?: boolean

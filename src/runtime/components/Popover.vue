@@ -15,8 +15,8 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
    * @defaultValue "click"
    */
   mode?: 'click' | 'hover'
-  content?: Omit<PopoverContentProps, 'as' | 'asChild' | 'forceMount'>
-  arrow?: boolean | Omit<PopoverArrowProps, 'as' | 'asChild'>
+  content?: Omit<PopoverContentProps, 'asChild' | 'forceMount'>
+  arrow?: boolean | Omit<PopoverArrowProps, 'asChild'>
   portal?: boolean
   class?: any
   ui?: Partial<typeof popover.slots>
