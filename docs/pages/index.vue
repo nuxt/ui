@@ -227,7 +227,7 @@ const { data: module } = await useFetch<{
   transform: ({ stats, contributors }) => ({ stats, contributors })
 })
 
-const source = ref('npm i @nuxt/ui')
+const source = ref('npx nuxi@latest module add ui
 
 const config = useRuntimeConfig().public
 const { copy, copied } = useClipboard({ source })
