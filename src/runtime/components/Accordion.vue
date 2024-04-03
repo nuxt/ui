@@ -46,8 +46,7 @@ import { useAppConfig } from '#imports'
 
 const props = withDefaults(defineProps<AccordionProps<T>>(), {
   type: 'single',
-  collapsible: true,
-  defaultValue: '0'
+  collapsible: true
 })
 const emits = defineEmits<AccordionEmits>()
 defineSlots<AccordionSlots<T>>()
