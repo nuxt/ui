@@ -17,20 +17,11 @@ export function addTemplates (options: ModuleOptions, nuxt: Nuxt) {
     color-scheme: light dark;
   }
 
-  @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
-  }
-  @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
-  }
-
-  @keyframes collapsible-up {
+  @keyframes slide-up {
     from { height: var(--radix-collapsible-content-height); }
     to { height: 0; }
   }
-  @keyframes collapsible-down {
+  @keyframes slide-down {
     from { height: 0; }
     to { height: var(--radix-collapsible-content-height); }
   }
