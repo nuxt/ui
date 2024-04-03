@@ -9,9 +9,9 @@ export default defineNuxtPlugin(() => {
 
   const root = computed(() => {
     return `:root {
-${shades.map(shade => `--color-primary-${shade}: var(--color-${appConfig.ui.primary}-${shade});`).join('\n')}
---color-primary-DEFAULT: var(--color-primary-500);
-${shades.map(shade => `--color-gray-${shade}: var(--color-${appConfig.ui.gray}-${shade});`).join('\n')}
+  ${shades.map(shade => `--color-primary-${shade}: var(--color-${appConfig.ui.primary}-${shade});`).join('\n')}
+  --color-primary-DEFAULT: var(--color-primary-500);
+  ${shades.map(shade => `--color-gray-${shade}: var(--color-${appConfig.ui.gray}-${shade});`).join('\n')}
 }
 .dark {
   --color-primary-DEFAULT: var(--color-primary-400);

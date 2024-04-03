@@ -44,7 +44,7 @@ export default defineNuxtModule<ModuleOptions>({
     // await installModule('@nuxtjs/color-mode', { classSuffix: '' })
 
     addPlugin({
-      src: resolve('./runtime/plugins/index')
+      src: resolve('./runtime/plugins/colors')
     })
 
     addComponentsDir({
