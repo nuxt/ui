@@ -1,7 +1,7 @@
 export default {
   wrapper: {
-    base: 'flex items-center align-center text-center w-full',
-    horizontal: 'flex-row',
+    base: 'flex items-center align-center text-center',
+    horizontal: 'w-full flex-row',
     vertical: 'flex-col'
   },
   container: {
@@ -14,8 +14,22 @@ export default {
     horizontal: 'w-full',
     vertical: 'h-full',
     size: {
-      horizontal: 'border-t',
-      vertical: 'border-s'
+      horizontal: {
+        '2xs': 'border-t',
+        xs: 'border-t-[2px]',
+        sm: 'border-t-[3px]',
+        md: 'border-t-[4px]',
+        lg: 'border-t-[5px]',
+        xl: 'border-t-[6px]'
+      },
+      vertical: {
+        '2xs': 'border-s',
+        xs: 'border-s-[2px]',
+        sm: 'border-s-[3px]',
+        md: 'border-s-[4px]',
+        lg: 'border-s-[5px]',
+        xl: 'border-s-[6px]'
+      }
     },
     type: {
       solid: 'border-solid',
@@ -30,5 +44,8 @@ export default {
     base: 'flex-shrink-0',
     size: '2xs' as const
   },
-  label: 'text-sm'
+  label: 'text-sm',
+  default: {
+    size: '2xs' as const
+  }
 }

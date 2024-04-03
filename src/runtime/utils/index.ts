@@ -2,14 +2,31 @@ import { defu, createDefu } from 'defu'
 import { extendTailwindMerge } from 'tailwind-merge'
 import type { Strategy } from '../types'
 
-const customTwMerge = extendTailwindMerge({
-  classGroups: {
-    icons: [(classPart: string) => /^i-/.test(classPart)]
+const customTwMerge = extendTailwindMerge<string, string>({
+  extend: {
+    classGroups: {
+      icons: [(classPart: string) => /^i-/.test(classPart)]
+    }
   }
 })
 
 const defuTwMerge = createDefu((obj, key, value, namespace) => {
-  if (namespace !== 'default' && !namespace.startsWith('default.') && typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
+  if (namespace === 'default' || namespace.startsWith('default.')) {
+    return false
+  }
+  if (namespace === 'popper' || namespace.startsWith('popper.')) {
+    return false
+  }
+  if (namespace.endsWith('avatar') && key === 'size') {
+    return false
+  }
+  if (namespace.endsWith('chip') && key === 'size') {
+    return false
+  }
+  if (namespace.endsWith('badge') && key === 'size' || key === 'color' || key === 'variant') {
+    return false
+  }
+  if (typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
     // @ts-ignore
     obj[key] = customTwMerge(obj[key], value)
     return true
@@ -66,3 +83,4 @@ export function looseToNumber (val: any): any {
 }
 
 export * from './lodash'
+export * from './link'

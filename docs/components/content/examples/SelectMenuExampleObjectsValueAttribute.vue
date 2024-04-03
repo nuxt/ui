@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const people = [{
   id: 1,
   name: 'Wade Cooper'
@@ -13,7 +13,7 @@ const people = [{
   name: 'Tom Cook'
 }]
 
-const selected = ref(people[0].name)
+const selected = ref(people[0].id)
 </script>
 
 <template>
@@ -21,7 +21,7 @@ const selected = ref(people[0].name)
     v-model="selected"
     :options="people"
     placeholder="Select people"
-    value-attribute="name"
+    value-attribute="id"
     option-attribute="name"
   />
 </template>

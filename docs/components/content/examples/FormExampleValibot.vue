@@ -10,8 +10,8 @@ const schema = objectAsync({
 type Schema = Input<typeof schema>
 
 const state = reactive({
-  email: undefined,
-  password: undefined
+  email: '',
+  password: ''
 })
 
 async function onSubmit (event: FormSubmitEvent<Schema>) {

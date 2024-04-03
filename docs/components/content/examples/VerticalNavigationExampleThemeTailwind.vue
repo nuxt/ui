@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const links = [{
   label: 'Introduction',
   to: '/getting-started'
@@ -11,9 +11,6 @@ const links = [{
 }, {
   label: 'Shortcuts',
   to: '/getting-started/shortcuts'
-}, {
-  label: 'Examples',
-  to: '/getting-started/examples'
 }]
 </script>
 
@@ -22,7 +19,7 @@ const links = [{
     :links="links"
     :ui="{
       wrapper: 'border-s border-gray-200 dark:border-gray-800 space-y-2',
-      base: 'group block border-s -ms-px lg:leading-6 before:hidden',
+      base: 'group block border-s -ms-px leading-6 before:hidden',
       padding: 'p-0 ps-4',
       rounded: '',
       font: '',

@@ -7,7 +7,7 @@
     <div v-if="$slots.header" :class="[ui.header.base, ui.header.padding, ui.header.background]">
       <slot name="header" />
     </div>
-    <div :class="[ui.body.base, ui.body.padding, ui.body.background]">
+    <div v-if="$slots.default" :class="[ui.body.base, ui.body.padding, ui.body.background]">
       <slot />
     </div>
     <div v-if="$slots.footer" :class="[ui.footer.base, ui.footer.padding, ui.footer.background]">
