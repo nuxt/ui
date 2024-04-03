@@ -47,23 +47,3 @@ const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
     </CollapsibleContent>
   </CollapsibleRoot>
 </template>
-
-<style>
-@keyframes collapsible-down {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-collapsible-content-height);
-  }
-}
-
-@keyframes collapsible-up {
-  from {
-    height: var(--radix-collapsible-content-height);
-  }
-  to {
-    height: 0;
-  }
-}
-</style>

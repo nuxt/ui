@@ -85,23 +85,3 @@ const ui = computed(() => tv({ extend: accordion, slots: props.ui })())
     </AccordionItem>
   </AccordionRoot>
 </template>
-
-<style>
-@keyframes accordion-down {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-  }
-}
-
-@keyframes accordion-up {
-  from {
-    height: var(--radix-accordion-content-height);
-  }
-  to {
-    height: 0;
-  }
-}
-</style>

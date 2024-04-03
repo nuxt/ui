@@ -12,30 +12,149 @@ export function addTemplates (options: ModuleOptions, nuxt: Nuxt) {
     write: true,
     getContents: () => `@import "tailwindcss";
 
-      @layer base {
-        :root {
-          color-scheme: light dark;
-        }
-      }
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
 
-      @theme {
-        --color-gray-*: initial;
-        --color-cool-50: #f9fafb;
-        --color-cool-100: #f3f4f6;
-        --color-cool-200: #e5e7eb;
-        --color-cool-300: #d1d5db;
-        --color-cool-400: #9ca3af;
-        --color-cool-500: #6b7280;
-        --color-cool-600: #4b5563;
-        --color-cool-700: #374151;
-        --color-cool-800: #1f2937;
-        --color-cool-900: #111827;
-        --color-cool-950: #030712;
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
 
-        ${shades.map(shade => `--color-primary-${shade}: var(--color-primary-${shade});`).join('\n')}
-        ${shades.map(shade => `--color-gray-${shade}: var(--color-gray-${shade});`).join('\n')}
-      }
-    `
+  @keyframes collapsible-up {
+    from { height: var(--radix-collapsible-content-height); }
+    to { height: 0; }
+  }
+  @keyframes collapsible-down {
+    from { height: 0; }
+    to { height: var(--radix-collapsible-content-height); }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes scale-out {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.95); }
+  }
+
+  @keyframes slide-in-from-top {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+  @keyframes slide-out-to-top {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100%); }
+  }
+  @keyframes slide-in-from-right {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes slide-out-to-right {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+  }
+  @keyframes slide-in-from-bottom {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  @keyframes slide-out-to-bottom {
+    from { transform: translateY(0); }
+    to { transform: translateY(100%); }
+  }
+  @keyframes slide-in-from-left {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes slide-out-to-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  @keyframes slide-in-from-top-and-fade {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-out-to-top-and-fade {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-4px); }
+  }
+  @keyframes slide-in-from-right-and-fade {
+    from { opacity: 0; transform: translateX(4px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slide-out-to-right-and-fade {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(4px); }
+  }
+  @keyframes slide-in-from-bottom-and-fade {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-out-to-bottom-and-fade {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(4px); }
+  }
+  @keyframes slide-in-from-left-and-fade {
+    from { opacity: 0; transform: translateX(-4px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slide-out-to-left-and-fade {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-4px); }
+  }
+
+  @keyframes enter-from-right {
+    from { opacity: 0; transform: translateX(200px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes enter-from-left {
+    from { opacity: 0; transform: translateX(-200px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes exit-to-right {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(200px); }
+  }
+  @keyframes exit-to-left {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-200px); }
+  }
+}
+
+@theme {
+  --color-gray-*: initial;
+  --color-cool-50: #f9fafb;
+  --color-cool-100: #f3f4f6;
+  --color-cool-200: #e5e7eb;
+  --color-cool-300: #d1d5db;
+  --color-cool-400: #9ca3af;
+  --color-cool-500: #6b7280;
+  --color-cool-600: #4b5563;
+  --color-cool-700: #374151;
+  --color-cool-800: #1f2937;
+  --color-cool-900: #111827;
+  --color-cool-950: #030712;
+
+  ${shades.map(shade => `--color-primary-${shade}: var(--color-primary-${shade});`).join('\n\t')}
+  ${shades.map(shade => `--color-gray-${shade}: var(--color-gray-${shade});`).join('\n\t')}
+}
+`
   })
 
   nuxt.options.css.push(template.dst)

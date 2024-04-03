@@ -45,7 +45,7 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open'
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as TooltipContentProps)
 const arrowProps = toRef(() => props.arrow as TooltipArrowProps)
 
-const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
+const ui = computed(() => tv({ extend: tooltip, slots: props.ui })({ side: contentProps.value.side }))
 </script>
 
 <template>
@@ -73,46 +73,3 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })())
     </TooltipPortal>
   </TooltipRoot>
 </template>
-
-<style>
-@keyframes tooltip-down {
-  from {
-    opacity: 0;
-    transform: translateY(-0.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes tooltip-right {
-  from {
-    opacity: 0;
-    transform: translateX(-0.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes tooltip-up {
-  from {
-    opacity: 0;
-    transform: translateY(0.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes tooltip-left {
-  from {
-    opacity: 0;
-    transform: translateX(0.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>

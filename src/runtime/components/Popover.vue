@@ -51,7 +51,7 @@ const rootProps = useForwardPropsEmits(pick, emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as PopoverContentProps)
 const arrowProps = toRef(() => props.arrow as PopoverArrowProps)
 
-const ui = computed(() => tv({ extend: popover, slots: props.ui })())
+const ui = computed(() => tv({ extend: popover, slots: props.ui })({ side: contentProps.value.side }))
 
 const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 </script>
@@ -71,86 +71,3 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
     </Component.Portal>
   </Component.Root>
 </template>
-
-<style>
-@keyframes popover-down-open {
-  from {
-    opacity: 0;
-    transform: translateY(-0.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes popover-down-closed {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-0.25rem);
-  }
-}
-@keyframes popover-right-open {
-  from {
-    opacity: 0;
-    transform: translateX(-0.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes popover-right-closed {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-0.25rem);
-  }
-}
-@keyframes popover-up-open {
-  from {
-    opacity: 0;
-    transform: translateY(0.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes popover-up-closed {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(0.25rem);
-  }
-}
-@keyframes popover-left-open {
-  from {
-    opacity: 0;
-    transform: translateX(0.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes popover-left-closed {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(0.25rem);
-  }
-}
-</style>
