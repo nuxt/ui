@@ -28,6 +28,11 @@ function _useSlideover () {
         if (!slideoverState) return
 
         isOpen.value = false
+        
+        slideoverState.value = {
+            component: 'div',
+            props: {}
+          }
     }
 
     /**
