@@ -182,8 +182,8 @@ export default defineComponent({
       }
     })
 
-    function onTouchStart () {
-      if (!menuApi.value) {
+    function onTouchStart (event: TouchEvent) {
+      if (!event.cancelable || !menuApi.value) {
         return
       }
 

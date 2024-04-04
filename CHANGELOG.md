@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.15.1](https://github.com/nuxt/ui/compare/v2.15.0...v2.15.1) (2024-04-02)
+
+
+### Features
+
+* **Avatar:** add `as` prop to use `NuxtImg` underneath ([49b73aa](https://github.com/nuxt/ui/commit/49b73aa024be14a9aa150a2804f4dcb18542fa49)), closes [#1577](https://github.com/nuxt/ui/issues/1577)
+
+
+### Bug Fixes
+
+* **Checkbox:** `[@change](https://github.com/change)` event value ([#1580](https://github.com/nuxt/ui/issues/1580)) ([c98d6e3](https://github.com/nuxt/ui/commit/c98d6e31c0e3f46b97957d5cf3de7f9da1f70c58))
+* **Divider:** add `w-full` only on horizontal wrapper ([#1565](https://github.com/nuxt/ui/issues/1565)) ([bd8b737](https://github.com/nuxt/ui/commit/bd8b737642280e6a83b67f9a27dd7a823a77e963))
+* **Dropdown:** missing `mouseenter` event on container ([7288953](https://github.com/nuxt/ui/commit/72889535e7e9763e7ebf59498f22c39bf09d6477))
+* **Input/SelectMenu:** handle `file` type and `change` events ([#1570](https://github.com/nuxt/ui/issues/1570)) ([878f707](https://github.com/nuxt/ui/commit/878f7078a28c5e70a662682d1293db466d518c7d))
+* **Popover:** missing `mouseenter` event on container ([8517897](https://github.com/nuxt/ui/commit/8517897c34adaa9e3624f867b43106deb59fcbe8)), closes [#1564](https://github.com/nuxt/ui/issues/1564)
+
 ## [2.15.0](https://github.com/nuxt/ui/compare/v2.14.2...v2.15.0) (2024-03-26)
 
 

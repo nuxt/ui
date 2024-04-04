@@ -154,8 +154,8 @@ export default defineComponent({
       }
     })
 
-    function onTouchStart () {
-      if (!popoverApi.value) {
+    function onTouchStart (event: TouchEvent) {
+      if (!event.cancelable || !popoverApi.value) {
         return
       }
 
