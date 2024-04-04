@@ -3,7 +3,7 @@ import init from './commands/init.mjs'
 
 const main = defineCommand({
   meta: {
-    name: 'nuxtui',
+    name: 'nuxt-ui',
     description: 'Nuxt UI CLI'
   },
   subCommands: {

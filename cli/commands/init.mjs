@@ -2,8 +2,8 @@ import { existsSync, promises as fsp } from 'node:fs'
 import { resolve } from 'pathe'
 import { defineCommand } from 'citty'
 import { consola } from 'consola'
-import { splitByCase, upperFirst, camelCase } from 'scule'
-import templates from '../utils/templates.mjs'
+import { splitByCase, upperFirst, camelCase, kebabCase } from 'scule'
+import templates from '../templates.mjs'
 
 export default defineCommand({
   meta: {
@@ -42,7 +42,7 @@ export default defineCommand({
 
     const themePath = resolve(path, 'src/theme/index.ts')
     const theme = await fsp.readFile(themePath, 'utf-8')
-    const themeContents = `export { default as ${camelCase(name)} } from './${camelCase(name)}'`
+    const themeContents = `export { default as ${camelCase(name)} } from './${kebabCase(name)}'`
     if (!theme.includes(themeContents)) {
       await fsp.writeFile(themePath, theme.trim() + '\n' + themeContents + '\n')
     }
