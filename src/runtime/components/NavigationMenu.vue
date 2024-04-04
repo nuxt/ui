@@ -12,6 +12,7 @@ const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu 
 
 export interface NavigationMenuLink extends LinkProps {
   label: string
+  value?: string
   icon?: IconProps['name']
   avatar?: AvatarProps
   badge?: string | number | BadgeProps
@@ -56,7 +57,7 @@ const lists = computed(() => props.links?.length ? (Array.isArray(props.links[0]
 <template>
   <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
     <NavigationMenuList v-for="(list, index) in lists" :key="`list-${index}`" :class="ui.list()">
-      <NavigationMenuItem v-for="(link, linkIndex) in list" :key="`list-${index}-${linkIndex}`" :class="ui.item()">
+      <NavigationMenuItem v-for="(link, linkIndex) in list" :key="`list-${index}-${linkIndex}`" :value="link.value || String(index)" :class="ui.item()">
         <ULink v-slot="{ active, ...slotProps }" v-bind="omit(link, ['label', 'icon', 'avatar', 'badge', 'select'])" custom>
           <NavigationMenuLink as-child :active="active" @select="link.select">
             <ULinkBase v-bind="slotProps" :class="ui.link({ active })">
