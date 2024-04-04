@@ -4,7 +4,7 @@ import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentP
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
-import type { AvatarProps, IconProps, KbdProps, LinkProps, DropdownMenuContentSlots } from '#ui/types'
+import type { AvatarProps, IconProps, KbdProps, LinkProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -37,8 +37,13 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-export interface DropdownMenuSlots<T> extends DropdownMenuContentSlots<T> {
-  default (): any
+type SlotProps<T> = (props: { item: T, active?: boolean }) => any
+
+export interface DropdownMenuSlots<T> {
+  default(): any
+  leading: SlotProps<T>
+  label: SlotProps<T>
+  trailing: SlotProps<T>
 }
 </script>
 

@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { DropdownMenuContentProps as RadixDropdownMenuContentProps, DropdownMenuContentEmits as RadixDropdownMenuContentEmits } from 'radix-vue'
-import type { DropdownMenuItem } from '#ui/types'
+import type { DropdownMenuItem, DropdownMenuSlots } from '#ui/types'
 
-export interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps, 'asChild' | 'forceMount'> {
+interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps, 'asChild' | 'forceMount'> {
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean
@@ -10,16 +10,9 @@ export interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuConte
   ui: any
 }
 
-export interface DropdownMenuContentEmits extends RadixDropdownMenuContentEmits {}
+interface DropdownMenuContentEmits extends RadixDropdownMenuContentEmits {}
 
-type SlotProps<T> = (props: { item: T, active?: boolean }) => any
-
-export interface DropdownMenuContentSlots<T> {
-  default(): any
-  leading: SlotProps<T>
-  label: SlotProps<T>
-  trailing: SlotProps<T>
-}
+interface DropdownMenuContentSlots<T> extends DropdownMenuSlots<T> {}
 </script>
 
 <script setup lang="ts" generic="T extends DropdownMenuItem">
