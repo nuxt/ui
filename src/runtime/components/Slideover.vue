@@ -1,5 +1,5 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
@@ -10,13 +10,15 @@ const appConfig = _appConfig as AppConfig & { ui: { slideover: Partial<typeof th
 
 const slideover = tv({ extend: tv(theme), ...(appConfig.ui?.slideover || {}) })
 
+type SlideoverVariants = VariantProps<typeof slideover>
+
 export interface SlideoverProps extends DialogRootProps {
   title?: string
   description?: string
   content?: Omit<DialogContentProps, 'asChild' | 'forceMount'>
   overlay?: boolean
   transition?: boolean
-  side?: 'left' | 'right' | 'top' | 'bottom'
+  side?: SlideoverVariants['side']
   preventClose?: boolean
   portal?: boolean
   close?: ButtonProps | null
