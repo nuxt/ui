@@ -93,7 +93,7 @@ provide<FormFieldInjectedOptions<FormFieldProps>>('form-field', {
       </p>
     </div>
 
-    <div :class="label ? ui.container() : ''">
+    <div :class="[label && ui.container()]">
       <slot :error="error" />
 
       <p v-if="(typeof error === 'string' && error) || $slots.error" :class="ui.error()">
