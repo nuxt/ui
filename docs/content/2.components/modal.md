@@ -77,7 +77,63 @@ First of all, add the `Modals` component to your app, preferably inside `app.vue
 
 Then, you can use the `useModal` composable to control your modals within your app.
 
-:component-example{component="modal-example-composable"}
+:component-example{component="modal-example-composable" hiddenCode }
+
+::code-group
+```vue [app.vue]
+<script setup lang="ts">
+import { ModalExampleComponent } from '#components'
+
+const toast = useToast()
+const modal = useModal()
+const count = ref(0)
+
+function openModal () {
+  count.value += 1
+  modal.open(ModalExampleComponent, {
+    count: count.value,
+    onSuccess() {
+      toast.add({
+        title: 'Success !',
+      })
+    }
+  })
+}
+</script>
+
+<template>
+  <UButton label="Reveal modal" @click="openModal" />
+</template>
+```
+
+```vue [modal.vue]
+<script lang="ts" setup>
+defineProps({
+  count: {
+    type: Number,
+    default: 0
+  }
+})
+
+const emit = defineEmits(['success'])
+
+function onSuccess () {
+  emit('success')
+}
+</script>
+
+<template>
+  <UModal>
+    <UCard>
+      <p>This modal was opened programmatically !</p>
+      <p>Count: {{ count }}</p>
+      <UButton @click="onSuccess">Click to emit a success event</UButton>
+    </UCard>
+  </UModal>
+</template>
+
+```
+:: 
 
 Additionally, you can close the modal within the modal component by calling `modal.close()`. 
 
