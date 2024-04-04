@@ -61,7 +61,7 @@ const items = [{
       </div>
 
       <div class="flex flex-col items-center">
-        <code>$ npx nuxi@latest module add ui
+        <code>$ npx nuxi@latest module add ui</code>
       </div>
     </template>
   </UAccordion>
