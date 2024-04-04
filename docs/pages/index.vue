@@ -31,10 +31,11 @@
           readonly
           autocomplete="off"
           icon="i-heroicons-command-line"
-          input-class="select-none"
+          class="w-72"
+          input-class="focus:ring-1 focus:ring-gray-300 dark:focus:ring-gray-700"
           aria-label="Install @nuxt/ui"
           size="lg"
-          :ui="{ base: 'disabled:cursor-default', icon: { trailing: { pointer: '' } } }"
+          :ui="{ icon: { trailing: { pointer: '' } } }"
         >
           <template #trailing>
             <UButton
