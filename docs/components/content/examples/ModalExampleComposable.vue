@@ -9,10 +9,10 @@ function openModal () {
   count.value += 1
   modal.open(ModalExampleComponent, {
     count: count.value,
-    onSuccess() {
+    onSuccess () {
       toast.add({
         title: 'Success !',
-        id: 'modal-success',
+        id: 'modal-success'
       })
     }
   })
