@@ -19,8 +19,11 @@ function _useModal () {
     isOpen.value = true
   }
 
-  function close () {
+  async function close () {
     isOpen.value = false
+  }
+
+  function reset() {
     modalState.value = {
       component: 'div',
       props: {}
@@ -44,7 +47,8 @@ function _useModal () {
     isOpen,
     open,
     close,
-    patch
+    reset,
+    patch,
   }
 }
 
