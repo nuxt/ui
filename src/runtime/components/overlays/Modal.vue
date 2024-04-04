@@ -130,7 +130,7 @@ export default defineComponent({
       isOpen,
       transitionClass,
       onAfterLeave,
-      close,
+      close
     }
   }
 })
