@@ -39,13 +39,27 @@
         @before-leave="onBeforeLeave"
         @leave="onLeave"
       >
-        <div v-show="open">
-          <HDisclosurePanel :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]" static>
-            <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
-              {{ item.content }}
-            </slot>
-          </HDisclosurePanel>
-        </div>
+        <HDisclosurePanel
+          v-if="unmount"
+          :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]"
+          unmount
+        >
+          <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
+            {{ item.content }}
+          </slot>
+        </HDisclosurePanel>
+        <template v-else>
+          <div v-show="open">
+            <HDisclosurePanel
+              :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]"
+              static
+            >
+              <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
+                {{ item.content }}
+              </slot>
+            </HDisclosurePanel>
+          </div>
+        </template>
       </Transition>
     </HDisclosure>
   </div>
@@ -90,6 +104,10 @@ export default defineComponent({
     openIcon: {
       type: String,
       default: () => config.default.openIcon
+    },
+    unmount: {
+      type: Boolean,
+      default: false
     },
     closeIcon: {
       type: String,
