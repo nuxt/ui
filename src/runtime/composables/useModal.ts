@@ -8,19 +8,27 @@ export const modalInjectionKey: InjectionKey<ShallowRef<ModalState>> = Symbol('n
 
 function _useModal () {
   const modalState = inject(modalInjectionKey)
-  
+
   const isOpen = ref(false)
 
   function open<T extends Component> (component: T, props?: Modal & ComponentProps<T>) {
+    if (!modalState) {
+      throw new Error('useModal() is called without provider')
+    }
+
     modalState.value = {
       component,
       props: props ?? {}
     }
+
     isOpen.value = true
   }
 
   function close () {
+    if (!modalState) return
+
     isOpen.value = false
+
     modalState.value = {
       component: 'div',
       props: {}
@@ -31,6 +39,8 @@ function _useModal () {
    * Allows updating the modal props
    */
   function patch <T extends Component = {}> (props: Partial<Modal & ComponentProps<T>>) {
+    if (!modalState) return
+
     modalState.value = {
       ...modalState.value,
       props: {
@@ -41,10 +51,10 @@ function _useModal () {
   }
 
   return {
-    isOpen,
     open,
     close,
-    patch
+    patch,
+    isOpen
   }
 }
 
