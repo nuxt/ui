@@ -13,6 +13,7 @@ type KbdVariants = VariantProps<typeof kbd>
 
 export interface KbdProps extends Omit<PrimitiveProps, 'asChild'> {
   value?: string
+  color?: KbdVariants['color']
   size?: KbdVariants['size']
   class?: any
 }
@@ -30,7 +31,7 @@ defineSlots<KbdSlots>()
 </script>
 
 <template>
-  <Primitive :as="as" :class="kbd({ size, class: props.class })">
+  <Primitive :as="as" :class="kbd({ color, size, class: props.class })">
     <slot>
       {{ value }}
     </slot>

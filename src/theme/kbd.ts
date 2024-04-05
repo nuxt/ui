@@ -1,6 +1,11 @@
 export default {
-  base: 'inline-flex items-center justify-center text-gray-900 dark:text-white px-1 rounded font-medium font-sans bg-gray-50 dark:bg-gray-800 ring ring-gray-300 dark:ring-gray-700 ring-inset',
+  base: 'inline-flex items-center justify-center px-1 rounded font-medium font-sans',
   variants: {
+    color: {
+      white: 'bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700',
+      gray: 'bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 ring ring-inset ring-gray-300 dark:ring-gray-700',
+      black: 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+    },
     size: {
       xs: 'h-4 min-w-[16px] text-[10px]',
       sm: 'h-5 min-w-[20px] text-[11px]',
@@ -8,6 +13,7 @@ export default {
     }
   },
   defaultVariants: {
+    color: 'white',
     size: 'sm'
   }
 }
