@@ -165,8 +165,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0(rollup@3.29.4)
       '@nuxt/ui-pro':
-        specifier: npm:@nuxt/ui-pro-edge@1.1.0-28538504.d4106a4
-        version: /@nuxt/ui-pro-edge@1.1.0-28538504.d4106a4(nuxt@3.11.2)(rollup@3.29.4)(vite@5.2.8)(vue@3.4.21)
+        specifier: npm:@nuxt/ui-pro-edge@1.1.0-28538540.a353e68
+        version: /@nuxt/ui-pro-edge@1.1.0-28538540.a353e68(nuxt@3.11.2)(rollup@3.29.4)(vite@5.2.8)(vue@3.4.21)
       '@nuxtjs/plausible':
         specifier: ^1.0.0
         version: 1.0.0(rollup@3.29.4)
@@ -1991,8 +1991,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/ui-pro-edge@1.1.0-28538504.d4106a4(nuxt@3.11.2)(rollup@3.29.4)(vite@5.2.8)(vue@3.4.21):
-    resolution: {integrity: sha512-x8pbErwp7Pp/3MDiVZUtSIJzENxBP3ZupY+h9Td087KfOC68mRbTkJLXDWruYiyoEieRYHp+ULtDtXqDNzuRdA==}
+  /@nuxt/ui-pro-edge@1.1.0-28538540.a353e68(nuxt@3.11.2)(rollup@3.29.4)(vite@5.2.8)(vue@3.4.21):
+    resolution: {integrity: sha512-S68w78cUjBHBi6B94E35g3s/HTRWFmcFaNQR4nKn7T3qvJGqOS9ydVSqW5Ik3jHpcm9hlV0li35nMKZH5ha0zw==}
     dependencies:
       '@nuxt/ui': 2.15.1(nuxt@3.11.2)(rollup@3.29.4)(vite@5.2.8)(vue@3.4.21)
       '@vueuse/core': 10.9.0(vue@3.4.21)
@@ -2020,6 +2020,7 @@ packages:
       - sortablejs
       - supports-color
       - ts-node
+      - uWebSockets.js
       - universal-cookie
       - vite
       - vue
@@ -2071,6 +2072,7 @@ packages:
       - sortablejs
       - supports-color
       - ts-node
+      - uWebSockets.js
       - universal-cookie
       - vite
       - vue
@@ -3985,7 +3987,7 @@ packages:
       '@vue/shared': 3.4.21
       estree-walker: 2.0.2
       magic-string: 0.30.9
-      postcss: 8.4.36
+      postcss: 8.4.38
       source-map-js: 1.2.0
 
   /@vue/compiler-ssr@3.4.21:
