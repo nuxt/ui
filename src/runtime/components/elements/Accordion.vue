@@ -32,18 +32,6 @@
         </slot>
       </HDisclosureButton>
 
-      <DefinePanelTemplate>
-        <HDisclosurePanel
-          :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]"
-          :unmount="unmount"
-          :static="!unmount"
-        >
-          <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
-            {{ item.content }}
-          </slot>
-        </HDisclosurePanel>
-      </DefinePanelTemplate>
-
       <Transition
         v-bind="ui.transition"
         @enter="onEnter"
@@ -51,10 +39,25 @@
         @before-leave="onBeforeLeave"
         @leave="onLeave"
       >
-        <PanelTemplate v-if="unmount" />
+        <HDisclosurePanel
+          v-if="unmount"
+          :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]"
+          unmount
+        >
+          <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
+            {{ item.content }}
+          </slot>
+        </HDisclosurePanel>
         <template v-else>
           <div v-show="open">
-            <PanelTemplate />
+            <HDisclosurePanel
+              :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]"
+              static
+            >
+              <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
+                {{ item.content }}
+              </slot>
+            </HDisclosurePanel>
           </div>
         </template>
       </Transition>
@@ -65,7 +68,6 @@
 <script lang="ts">
 import { ref, computed, toRef, defineComponent, watch } from 'vue'
 import type { PropType } from 'vue'
-import { createReusableTemplate } from '@vueuse/core'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel, provideUseId } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
@@ -81,17 +83,13 @@ const config = mergeConfig<typeof accordion>(appConfig.ui.strategy, appConfig.ui
 
 const configButton = mergeConfig<typeof button>(appConfig.ui.strategy, appConfig.ui.button, button)
 
-const [DefinePanelTemplate, PanelTemplate] = createReusableTemplate()
-
 export default defineComponent({
   components: {
     HDisclosure,
     HDisclosureButton,
     HDisclosurePanel,
     UIcon,
-    UButton,
-    DefinePanelTemplate,
-    PanelTemplate
+    UButton
   },
   inheritAttrs: false,
   props: {
