@@ -4,6 +4,7 @@ import type { TabsRootProps, TabsRootEmits, TabsContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
+import type { IconProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
 
@@ -11,8 +12,9 @@ const tabs = tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })
 
 export interface TabsItem {
   label?: string
-  value?: string
+  icon?: IconProps['name']
   slot?: string
+  value?: string
   disabled?: boolean
   content?: string
 }
@@ -57,9 +59,15 @@ const ui = computed(() => tv({ extend: tabs, slots: props.ui })())
       <TabsIndicator :class="ui.indicator()" />
 
       <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger()">
+        <slot name="leading" :item="item" :index="index">
+          <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
+        </slot>
+
         <span v-if="item.label || $slots.default" :class="ui.label()">
           <slot :item="item" :index="index">{{ item.label }}</slot>
         </span>
+
+        <slot name="trailing" :item="item" :index="index" />
       </TabsTrigger>
     </TabsList>
 

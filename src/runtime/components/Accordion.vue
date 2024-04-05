@@ -11,9 +11,9 @@ const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof th
 const accordion = tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })
 
 export interface AccordionItem {
-  slot?: string
-  icon?: IconProps['name']
   label?: string
+  icon?: IconProps['name']
+  slot?: string
   value?: string
   content?: string
   disabled?: boolean
