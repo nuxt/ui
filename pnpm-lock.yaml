@@ -168,8 +168,8 @@ importers:
         specifier: npm:@nuxt/ui-pro-edge@1.1.0-28525551.37ca2f6
         version: /@nuxt/ui-pro-edge@1.1.0-28525551.37ca2f6(nuxt@3.11.2)(rollup@3.29.4)(vite@5.2.8)(vue@3.4.21)
       '@nuxtjs/plausible':
-        specifier: ^0.2.4
-        version: 0.2.4(rollup@3.29.4)
+        specifier: ^1.0.0
+        version: 1.0.0(rollup@3.29.4)
       '@octokit/rest':
         specifier: ^20.1.0
         version: 20.1.0
@@ -579,6 +579,10 @@ packages:
       '@babel/helper-string-parser': 7.23.4
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
+
+  /@barbapapazes/plausible-tracker@0.4.0:
+    resolution: {integrity: sha512-4hhXK62ORb4feJfjnIILXRnb6xfejHM6yvGCid6MwNdKiQyj6YLW0M779zXLH5IBS4mQObmrNul2HUleeavSKw==}
+    dev: true
 
   /@capsizecss/metrics@2.1.1:
     resolution: {integrity: sha512-c+anvlfk5+EYO8tnf9a6bmKQpniw+Nd7ZyiQpA9lRBCwM93zDZEGiTO5w04xVckj7fpPsiYuzNUS78AKMShnIw==}
@@ -2016,7 +2020,6 @@ packages:
       - sortablejs
       - supports-color
       - ts-node
-      - uWebSockets.js
       - universal-cookie
       - vite
       - vue
@@ -2068,7 +2071,6 @@ packages:
       - sortablejs
       - supports-color
       - ts-node
-      - uWebSockets.js
       - universal-cookie
       - vite
       - vue
@@ -2187,13 +2189,12 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxtjs/plausible@0.2.4(rollup@3.29.4):
-    resolution: {integrity: sha512-9HrSl9ZGKS/7bULAt8uzAGo9BJyIZebzRSLQD8ZhiODaGyRdEQlgcJBw5JgUzjcC5n4T0ZlX3FC6C3Wyp7opgA==}
+  /@nuxtjs/plausible@1.0.0(rollup@3.29.4):
+    resolution: {integrity: sha512-2K0/AbPJAEr3yMA8oDD0I6WB+SXs/YlF297azjR5eSZVQjuimDAwLf4bEXk9ilbrzoMFmm0Tpzn4CC6f0rISBA==}
     dependencies:
+      '@barbapapazes/plausible-tracker': 0.4.0
       '@nuxt/kit': 3.11.2(rollup@3.29.4)
       defu: 6.1.4
-      pathe: 1.1.2
-      plausible-tracker: 0.3.8
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -10304,11 +10305,6 @@ packages:
       jsonc-parser: 3.2.1
       mlly: 1.6.1
       pathe: 1.1.2
-
-  /plausible-tracker@0.3.8:
-    resolution: {integrity: sha512-lmOWYQ7s9KOUJ1R+YTOR3HrjdbxIS2Z4de0P/Jx2dQPteznJl2eX3tXxKClpvbfyGP59B5bbhW8ftN59HbbFSg==}
-    engines: {node: '>=10'}
-    dev: true
 
   /playwright-core@1.41.2:
     resolution: {integrity: sha512-VaTvwCA4Y8kxEe+kfm2+uUUw5Lubf38RxF7FpBxLPmGe5sdNkSg5e3ChEigaGrX7qdqT3pt2m/98LiyvU2x6CA==}

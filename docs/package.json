@@ -13,7 +13,7 @@
     "@nuxt/fonts": "^0.6.1",
     "@nuxt/image": "^1.5.0",
     "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@1.1.0-28525551.37ca2f6",
-    "@nuxtjs/plausible": "^0.2.4",
+    "@nuxtjs/plausible": "^1.0.0",
     "@octokit/rest": "^20.1.0",
     "@vueuse/nuxt": "^10.9.0",
     "date-fns": "^3.6.0",
