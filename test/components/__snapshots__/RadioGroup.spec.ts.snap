@@ -110,7 +110,7 @@ exports[`RadioGroup > renders with default value correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-active="true" id="1:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full rounded-full after:bg-white after:rounded-full bg-primary-500 dark:bg-primary-400 after:size-1.5"></span>
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-active="true" id="1:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full rounded-full after:bg-white dark:after:bg-gray-900 after:rounded-full bg-primary-500 dark:bg-primary-400 after:size-1.5"></span>
           <!---->
         </button></div>
       <div class="ms-2"><label for="1:1" class="block font-medium text-gray-700 dark:text-gray-200">Option 1</label>
