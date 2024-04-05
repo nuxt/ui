@@ -79,7 +79,7 @@ const links = computed(() => {
     active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
   }, {
     label: 'Pricing',
-    icon: 'i-heroicons-credit-card',
+    icon: 'i-heroicons-ticket',
     to: '/pro/pricing'
   }, {
     label: 'Templates',
