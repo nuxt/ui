@@ -4,6 +4,7 @@
     v-if="slideoverState"
     v-bind="slideoverState.props"
     v-model="isOpen"
+    @after-leave="reset"
   />
 </template>
 
@@ -13,5 +14,5 @@ import { useSlideover, slidOverInjectionKey } from '../../composables/useSlideov
 
 const slideoverState = inject(slidOverInjectionKey)
 
-const { isOpen } = useSlideover()
+const { isOpen, reset } = useSlideover()
 </script>
