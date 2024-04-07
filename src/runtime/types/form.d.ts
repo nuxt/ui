@@ -9,7 +9,7 @@ export interface FormErrorWithId extends FormError {
   id: string
 }
 
-export interface Form<T> {
+export interface Form<T> extends HTMLFormElement {
   validate(path?: string | string[], opts?: { silent?: true }): Promise<T | false>;
   validate(path?: string | string[], opts?: { silent?: false }): Promise<T>;
   clear(path?: string): void
