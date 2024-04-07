@@ -29,6 +29,7 @@ Use the `columns` prop to configure which columns to display. It's an array of o
 - `sortable` - Whether the column is sortable. Defaults to `false`.
 - `direction` - The sort direction to use on first click. Defaults to `asc`.
 - `class` - The class to apply to the column cells.
+- `rowClass` - The class to apply to the data column cells.
 - `sort` - Pass your own `sort` function. Defaults to a simple _greater than_ / _less than_ comparison.
 
 ::component-example{class="grid"}
