@@ -13,6 +13,8 @@ const switchTv = tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })
 type SwitchVariants = VariantProps<typeof switchTv>
 
 export interface SwitchProps extends Omit<SwitchRootProps, 'asChild'> {
+  id?: string
+  name?: string
   color?: SwitchVariants['color']
   size?: SwitchVariants['size']
   loading?: boolean
@@ -30,23 +32,40 @@ export interface SwitchEmits extends SwitchRootEmits {}
 import { computed } from 'vue'
 import { SwitchRoot, SwitchThumb, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useFormField } from '#imports'
 
 const props = defineProps<SwitchProps>()
 const emits = defineEmits<SwitchEmits>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultChecked', 'checked', 'required', 'name', 'id', 'value'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultChecked', 'checked', 'required', 'value'), emits)
+
+
+const { inputId, emitFormChange, size, color, name, disabled } = useFormField<SwitchProps>(props)
 
 const ui = computed(() => tv({ extend: switchTv, slots: props.ui })({
-  color: props.color,
-  size: props.size,
+  color: color.value,
+  size: size.value,
   loading: props.loading
 }))
+
+// FIXME: I think there's a race condition between this and the v-model event.
+// This must be triggered after the value updates, otherwise the form validates
+// the previous value.
+async function onChecked () {
+  emitFormChange()
+}
 </script>
 
 <template>
-  <SwitchRoot :disabled="disabled || loading" v-bind="rootProps" :class="ui.root({ class: props.class })">
+  <SwitchRoot
+    :id="inputId"
+    :name="name"
+    :disabled="disabled || loading"
+    v-bind="rootProps"
+    :class="ui.root({ class: props.class })"
+    @update:checked="onChecked"
+  >
     <SwitchThumb :class="ui.thumb()">
       <UIcon v-if="loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.icon({ checked: true, unchecked: true })" />
       <template v-else>

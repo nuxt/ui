@@ -14,7 +14,7 @@ type RadioGroupVariants = VariantProps<typeof radioGroup>
 export type RadioGroupOption<T> = {
   label: string
   value: T
-  description: string
+  description?: string
 }
 
 export interface RadioGroupProps<T> extends Omit<RadioGroupRootProps, 'asChild' | 'dir'> {
@@ -49,15 +49,15 @@ const props = defineProps<RadioGroupProps<T>>()
 const emits = defineEmits<RadioGroupEmits>()
 defineSlots<RadioGroupSlots<T>>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'orientation', 'disabled', 'loop', 'name', 'required'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'orientation', 'loop', 'name', 'required'), emits)
 
-const { emitFormChange, color, name, size, inputId: _inputId } = useFormField<RadioGroupProps<T>>(props)
+const { emitFormChange, color, name, size, inputId: _inputId, disabled } = useFormField<RadioGroupProps<T>>(props)
 const inputId = _inputId.value ?? useId()
 
 const ui = computed(() => tv({ extend: radioGroup, slots: props.ui })({
   size: size.value,
   color: color.value,
-  disabled: props.disabled,
+  disabled: disabled.value,
   required: props.required
 }))
 
@@ -102,6 +102,7 @@ function onUpdate () {
     v-model="modelValue"
     v-bind="rootProps"
     :name="name"
+    :disabled="disabled"
     :class="ui.root({ class: props.class })"
     @update:model-value="onUpdate"
   >
@@ -116,6 +117,7 @@ function onUpdate () {
           <RadioGroupItem
             :id="option.id"
             :value="option.value"
+            :disabled="disabled"
             :class="ui.base()"
           >
             <RadioGroupIndicator :class="ui.indicator()" />
