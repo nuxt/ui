@@ -1,4 +1,8 @@
 import type { ComputedRef, Ref } from 'vue'
+import type { ZodSchema } from 'zod'
+import type { Schema as JoiSchema } from 'joi'
+import type { ObjectSchema as YupObjectSchema } from 'yup'
+import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
 
 export interface Form<T> {
   validate (opts?: { name: string | string[], silent?: false, nested?: boolean }): Promise<T | false>
@@ -10,7 +14,7 @@ export interface Form<T> {
   disabled: ComputedRef<boolean>
 }
 
-export type FormSchema<T extends object> =
+export type FormSchema<T extends Record<string, any>> =
   | ZodSchema
   | YupObjectSchema<T>
   | ValibotObjectSchema<T>
@@ -67,8 +71,23 @@ export interface FormInjectedOptions {
 export interface FormFieldInjectedOptions<T> {
   inputId: Ref<string | undefined>
   name: ComputedRef<string | undefined>
+  // @ts-ignore FIXME: TS doesn't like this
   size: ComputedRef<T['size']>
   error: ComputedRef<string | boolean | undefined>
   eagerValidation: ComputedRef<boolean | undefined>
   validateOnInputDelay: ComputedRef<number | undefined>
+}
+
+export class FormValidationException extends Error {
+  formId: string | number
+  errors: FormErrorWithId[]
+  childrens: FormValidationException[]
+
+  constructor (formId: string | number, errors: FormErrorWithId[], childErrors: FormValidationException[]) {
+    super('Form validation exception')
+    this.formId = formId
+    this.errors = errors
+    this.childrens = childErrors
+    Object.setPrototypeOf(this, FormValidationException.prototype)
+  }
 }

@@ -4,6 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, FormInjectedOptions, Form, FormErrorWithId } from '#ui/types/form'
+import { FormValidationException } from '#ui/types/form'
 
 const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
 
@@ -27,20 +28,6 @@ export interface FormEmits<T extends object> {
 
 export interface FormSlots {
   default(): any
-}
-
-export class FormValidationException extends Error {
-  formId: string | number
-  errors: FormErrorWithId[]
-  childrens: FormValidationException[]
-
-  constructor (formId: string | number, errors: FormErrorWithId[], childErrors: FormValidationException[]) {
-    super('Form validation exception')
-    this.formId = formId
-    this.errors = errors
-    this.childrens = childErrors
-    Object.setPrototypeOf(this, FormValidationException.prototype)
-  }
 }
 </script>
 
