@@ -40,7 +40,6 @@ const emits = defineEmits<SwitchEmits>()
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultChecked', 'checked', 'required', 'value'), emits)
 
-
 const { inputId, emitFormChange, size, color, name, disabled } = useFormField<SwitchProps>(props)
 
 const ui = computed(() => tv({ extend: switchTv, slots: props.ui })({
