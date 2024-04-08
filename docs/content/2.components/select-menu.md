@@ -204,7 +204,7 @@ Use the `clearable-icon` prop to change the default clear icon. Defaults to `i-h
 
 ::component-example
 ---
-component: 'select-menu-example-clearableIcon'
+component: 'select-menu-example-clearable-icon'
 componentProps:
   class: 'w-full lg:w-48'
 ---
