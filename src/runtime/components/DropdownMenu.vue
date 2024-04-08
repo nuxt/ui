@@ -17,6 +17,10 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type'> {
   disabled?: boolean
   content?: Omit<DropdownMenuContentProps, 'asChild' | 'forceMount'>
   shortcuts?: string[] | KbdProps[]
+  /**
+   * The item type.
+   * @defaultValue "item"
+   */
   type?: 'label' | 'item'
   slot?: string
   open?: boolean
