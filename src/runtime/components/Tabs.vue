@@ -4,7 +4,7 @@ import type { TabsRootProps, TabsRootEmits, TabsContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
-import type { IconProps } from '#ui/types'
+import type { IconProps, AvatarProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
 
@@ -13,6 +13,7 @@ const tabs = tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })
 export interface TabsItem {
   label?: string
   icon?: IconProps['name']
+  avatar?: AvatarProps
   slot?: string
   value?: string
   disabled?: boolean
@@ -60,7 +61,8 @@ const ui = computed(() => tv({ extend: tabs, slots: props.ui })())
 
       <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger()">
         <slot name="leading" :item="item" :index="index">
-          <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
+          <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.leadingAvatar()" />
+          <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
         </slot>
 
         <span v-if="item.label || $slots.default" :class="ui.label()">

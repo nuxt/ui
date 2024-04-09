@@ -1,7 +1,9 @@
 <script setup lang="ts">
 const items = [{
   label: 'Tab1',
-  icon: 'i-heroicons-home',
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+  },
   content: 'This is the content shown for Tab1'
 }, {
   label: 'Tab2',

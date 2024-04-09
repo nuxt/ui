@@ -7,6 +7,7 @@ export default {
     trigger: 'relative inline-flex items-center justify-center gap-1.5 shrink-0 flex-1 h-8 text-gray-500 data-[state=active]:text-gray-900 dark:text-gray-400 dark:data-[state=active]:text-white px-3 text-sm font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus:outline-none',
     content: 'focus:outline-none',
     leadingIcon: 'shrink-0 size-5',
+    leadingAvatar: 'shrink-0',
     label: 'truncate'
   }
 }
