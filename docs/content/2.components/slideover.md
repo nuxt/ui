@@ -71,6 +71,21 @@ First of all, add the `USlideovers` component to your app, preferably inside `ap
 Then, you can use the `useSlideover` composable to control your slideovers within your app.
 
 :component-example{component="slideover-example-composable"}
+
+### Enable resize :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+
+**Drag** or **click** (automatically decide whether to reach 50% or 100% of the screen according to the current width) to change the prop of the slideover body width
+
+Set the `resize` prop to enable it. Similarly, the aforementioned props can be employed in conjunction.
+
+:component-example{component="slideover-example-enable-resize"}
+
+Set the `resize.width` prop to establish the initial width of the Slideover's main section. Moreover, you can customize the drag icon and its size by set `resize.icon` and `resize.size` respectively.
+
+:component-example{component="slideover-example-enable-resize-options"}
+
+By adjusting the `resize.duration` and `resize.transition` props, you can modify the transition effects (Please refer to the [`@vueuse/core: useTransition()`](https://vueuse.org/core/useTransition/#usetransition) for further details). Additionally, setting `resize.percentage` allows you to change the proportion at which the width automatically snaps while adjusting, aligning it seamlessly to full screen.
+
 ## Props
 
 :component-props

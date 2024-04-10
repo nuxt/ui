@@ -29,5 +29,41 @@ export default {
   transition: {
     enter: 'transform transition ease-in-out duration-300',
     leave: 'transform transition ease-in-out duration-200'
+  },
+  resize: {
+    wrapper: 'absolute top-0 cursor-col-resize h-full flex z-50 w-4 justify-center flex-col group',
+    base: 'flex h-8 w-4 flex-col items-center justify-center opacity-30 dark:opacity-40 group-hover:dark:opacity-80 group-hover:opacity-80',
+    shield: 'w-full h-full absolute z-50 opacity-0 bg-transparent cursor-col-resize',
+    width: {
+      class: 'w-screen max-w-[var(--width)]',
+      init: {
+        xs: 320,
+        sm: 384,
+        md: 448,
+        lg: 512,
+        xl: 576,
+        '2xl': 672
+      }
+    },
+    icon: {
+      base: 'flex-shrink-0',
+      defaultIconBase: 'h-12 w-1 rounded-full transform rotate-0 group-hover:transform bg-gray-500 dark:bg-gray-400',
+      defaultIconRotatePos: 'group-hover:rotate-[15deg]',
+      defaultIconRotateNeg: 'group-hover:rotate-[-15deg]',
+      size: {
+        '2xs': 'h-4 w-4',
+        xs: 'h-4 w-4',
+        sm: 'h-5 w-5',
+        md: 'h-5 w-5',
+        lg: 'h-5 w-5',
+        xl: 'h-6 w-6'
+      }
+    }
+  },
+  default: {
+    resize: {
+      width: 'md',
+      size: 'xs'
+    }
   }
 }
