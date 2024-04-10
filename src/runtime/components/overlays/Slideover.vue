@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot as="template" :appear="appear" :show="isOpen">
+  <TransitionRoot as="template" :appear="appear" :show="isOpen" @after-leave="onAfterLeave">
     <HDialog :class="[ui.wrapper, { 'justify-end': side === 'right' }]" v-bind="attrs" @close="close">
       <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
@@ -71,7 +71,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'close', 'close-prevented'],
+  emits: ['update:modelValue', 'close', 'close-prevented', 'after-leave'],
   setup (props, { emit }) {
     const { ui, attrs } = useUI('slideover', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -109,6 +109,10 @@ export default defineComponent({
       emit('close')
     }
 
+    const onAfterLeave = () => {
+      emit('after-leave')
+    }
+
     provideUseId(() => useId())
 
     return {
@@ -117,6 +121,7 @@ export default defineComponent({
       attrs,
       isOpen,
       transitionClass,
+      onAfterLeave,
       close
     }
   }

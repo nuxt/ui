@@ -24,11 +24,13 @@ function _useSlideover () {
     isOpen.value = true
   }
 
-  function close () {
+  async function close () {
     if (!slideoverState) return
 
     isOpen.value = false
+  }
 
+  function reset () {
     slideoverState.value = {
       component: 'div',
       props: {}
@@ -53,6 +55,7 @@ function _useSlideover () {
   return {
     open,
     close,
+    reset,
     patch,
     isOpen
   }
