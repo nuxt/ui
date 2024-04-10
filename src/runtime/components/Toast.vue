@@ -96,7 +96,17 @@ defineExpose({
       </template>
 
       <ToastClose as-child>
-        <UButton v-if="close !== null" :icon="appConfig.ui.icons.close" size="sm" color="gray" variant="link" aria-label="Close" v-bind="close" :class="ui.close()" @click.stop />
+        <UButton
+          v-if="close !== null"
+          :icon="appConfig.ui.icons.close"
+          size="sm"
+          color="gray"
+          variant="link"
+          aria-label="Close"
+          v-bind="close"
+          :class="ui.close()"
+          @click.stop
+        />
       </ToastClose>
     </div>
 
