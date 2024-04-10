@@ -1,6 +1,7 @@
 <template>
   <div class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0">
     <div
+      v-if="hasPreview"
       class="flex border border-gray-200 dark:border-gray-700 relative rounded-t-md"
       :class="[{ 'p-4': padding, 'rounded-b-md': !hasCode, 'border-b-0': hasCode, 'not-prose': !prose }, backgroundClass, extraClass]"
     >
@@ -36,6 +37,10 @@ const props = defineProps({
   componentProps: {
     type: Object,
     default: () => ({})
+  },
+  hiddenPreview: {
+    type: Boolean,
+    default: false
   },
   hiddenCode: {
     type: Boolean,
@@ -79,6 +84,7 @@ const data = await fetchContentExampleCode(camelName)
 const highlighter = useShikiHighlighter()
 
 const hasCode = computed(() => !props.hiddenCode && (data?.code || instance.slots.code))
+const hasPreview = computed(() => !props.hiddenPreview && (props.component || instance.slots.default))
 
 const { data: ast } = await useAsyncData(`content-example-${camelName}-ast`, () => transformContent('content:_markdown.md', `\`\`\`vue\n${data?.code ?? ''}\n\`\`\``, {
   markdown: {
