@@ -28,6 +28,7 @@ const components = [
   'navigation-menu',
   'popover',
   'radio-group',
+  'separator',
   'skeleton',
   'slideover',
   'switch',
