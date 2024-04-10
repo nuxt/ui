@@ -50,6 +50,9 @@ export default {
       variant: 'ghost' as const,
       class: '-m-1.5'
     },
+    checkbox: {
+      color: 'primary' as const
+    },
     progress: {
       color: 'primary' as const,
       animation: 'carousel' as const

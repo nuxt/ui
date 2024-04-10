@@ -31,10 +31,11 @@
           readonly
           autocomplete="off"
           icon="i-heroicons-command-line"
-          input-class="select-none"
+          class="w-72"
+          input-class="focus:ring-1 focus:ring-gray-300 dark:focus:ring-gray-700"
           aria-label="Install @nuxt/ui"
           size="lg"
-          :ui="{ base: 'disabled:cursor-default', icon: { trailing: { pointer: '' } } }"
+          :ui="{ icon: { trailing: { pointer: '' } } }"
         >
           <template #trailing>
             <UButton
@@ -435,7 +436,7 @@ useSeoMeta({
   twitterImage: 'https://ui.nuxt.com/social-card.png'
 })
 
-const source = ref('npm i @nuxt/ui')
+const source = ref('npx nuxi@latest module add ui')
 const sectionRef = ref()
 const demoRef = ref()
 const start = ref(0)
