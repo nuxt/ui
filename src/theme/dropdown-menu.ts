@@ -1,6 +1,6 @@
 export default {
   slots: {
-    content: 'min-w-48 bg-white dark:bg-gray-900 shadow-lg rounded-md ring ring-gray-200 dark:ring-gray-800 divide-y divide-gray-200 dark:divide-gray-800 will-change-[transform,opacity] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
+    content: 'min-w-48 bg-white dark:bg-gray-900 shadow-lg rounded-md ring ring-gray-200 dark:ring-gray-800 divide-y divide-gray-200 dark:divide-gray-800 overflow-y-auto scroll-py-1 will-change-[transform,opacity] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
     arrow: 'fill-gray-200 dark:fill-gray-800',
     group: 'p-1',
     label: 'w-full flex items-center gap-1.5 p-1.5 text-sm font-medium select-none',
