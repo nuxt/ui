@@ -61,7 +61,7 @@ function _useSlideover () {
   }
 }
 
-function _useResizeSlideover (A: Arguments) {
+export function useResizeSlideover (A: Arguments) {
 
   if (!A._enable) return
 
@@ -195,4 +195,3 @@ function _useResizeSlideover (A: Arguments) {
 }
 
 export const useSlideover = createSharedComposable(_useSlideover)
-export const useResizeSlideover = createSharedComposable(_useResizeSlideover)
