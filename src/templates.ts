@@ -35,6 +35,23 @@ export function addTemplates (options: ModuleOptions, nuxt: Nuxt) {
     to { height: var(--radix-collapsible-content-height); }
   }
 
+  @keyframes toast-slide-down {
+    from { transform: var(--transform); }
+    to { transform: translateY(calc((var(--offset) - var(--height)) * -1px)); }
+  }
+  @keyframes toast-slide-up {
+    from { transform: var(--transform); }
+    to { transform: translateY(calc((var(--offset) - var(--height)) * 1px)); }
+  }
+  @keyframes toast-slide-left {
+    from { transform: translateX(0) translateY(var(--translate)); }
+    to { transform: translateX(-100%) translateY(var(--translate)); }
+  }
+  @keyframes toast-slide-right {
+    from { transform: translateX(0) translateY(var(--translate)); }
+    to { transform: translateX(100%) translateY(var(--translate)); }
+  }
+
   @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -172,7 +189,11 @@ export function addTemplates (options: ModuleOptions, nuxt: Nuxt) {
         let json = JSON.stringify(result, null, 2)
 
         for (const variant of variants) {
-          json = json.replaceAll(new RegExp(`("${variant}": "[0-9a-z-]+")`, 'g'), '$1 as const')
+          json = json.replace(new RegExp(`("${variant}": "[^"]+")`, 'g'), '$1 as const')
+          json = json.replace(new RegExp(`("${variant}": \\[\\s*)((?:"[^"]+",?\\s*)+)(\\])`, 'g'), (_, before, match, after) => {
+            const replaced = match.replace(/("[^"]+")/g, '$1 as const')
+            return `${before}${replaced}${after}`
+          })
         }
 
         return `export default ${json}`

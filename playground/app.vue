@@ -7,6 +7,8 @@ useHead({
   }
 })
 
+const appConfig = useAppConfig()
+
 const components = [
   'accordion',
   'avatar',
@@ -31,6 +33,7 @@ const components = [
   'switch',
   'tabs',
   'textarea',
+  'toast',
   'tooltip'
 ]
 
@@ -40,7 +43,7 @@ function upperName (name: string) {
 </script>
 
 <template>
-  <UApp>
+  <UApp :toaster="appConfig.toaster">
     <div class="min-h-screen w-screen flex flex-col items-center justify-center overflow-y-auto">
       <UNavigationMenu :links="components.map(component => ({ label: upperName(component), to: `/${component}` }))" class="border-b border-gray-200 dark:border-gray-800 overflow-x-auto px-2" />
 
