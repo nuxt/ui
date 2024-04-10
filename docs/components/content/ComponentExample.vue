@@ -1,5 +1,5 @@
 <template>
-  <div class="[&>div>pre]:!rounded-t-none [&>div:last-child]:rounded-t-none [&>div>pre]:!mt-0">
+  <div class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0">
     <div
       v-if="hasPreview"
       class="flex border border-gray-200 dark:border-gray-700 relative rounded-t-md"
