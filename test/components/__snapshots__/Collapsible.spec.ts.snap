@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Collapsible > renders basic case correctly 1`] = `
-"<div data-state="open">Click me<div class="data-[state=open]:animate-[slide-down_200ms_ease-out] data-[state=closed]:animate-[slide-up_200ms_ease-out] overflow-hidden" id="radix-vue-collapsible-content-1" data-state="open" style="--radix-collapsible-content-height: 0px; --radix-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">Collapsible content</div>
+"<div data-state="open">Click me<div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="radix-vue-collapsible-content-1" data-state="open" style="--radix-collapsible-content-height: 0px; --radix-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">Collapsible content</div>
 </div>"
 `;

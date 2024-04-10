@@ -11,7 +11,12 @@ exports[`Tooltip > renders with arrow correctly 1`] = `
 </div>
 
 
-<!--teleport end-->"
+<!--teleport end-->
+<div role="region" aria-label="Notifications (F8)" tabindex="-1" style="pointer-events: none;">
+  <!---->
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;"></ol>
+  <!---->
+</div>"
 `;
 
 exports[`Tooltip > renders with shortcuts correctly 1`] = `
@@ -25,7 +30,12 @@ exports[`Tooltip > renders with shortcuts correctly 1`] = `
 </div>
 
 
-<!--teleport end-->"
+<!--teleport end-->
+<div role="region" aria-label="Notifications (F8)" tabindex="-1" style="pointer-events: none;">
+  <!---->
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;"></ol>
+  <!---->
+</div>"
 `;
 
 exports[`Tooltip > renders with text correctly 1`] = `
@@ -40,5 +50,10 @@ exports[`Tooltip > renders with text correctly 1`] = `
 </div>
 
 
-<!--teleport end-->"
+<!--teleport end-->
+<div role="region" aria-label="Notifications (F8)" tabindex="-1" style="pointer-events: none;">
+  <!---->
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;"></ol>
+  <!---->
+</div>"
 `;
