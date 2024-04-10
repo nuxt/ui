@@ -60,7 +60,7 @@
     "@nuxt/ui-dev": "workspace:*",
     "@release-it/conventional-changelog": "^8.0.1",
     "@vue/test-utils": "^2.4.5",
-    "eslint": "^9.0.0",
+    "eslint": "^8.57.0",
     "happy-dom": "^14.7.1",
     "joi": "^17.12.3",
     "nuxt": "^3.11.2",
