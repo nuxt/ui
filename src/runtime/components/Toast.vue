@@ -5,7 +5,7 @@ import type { ToastRootProps, ToastRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toast'
-import type { AvatarProps, ButtonProps, IconProps } from '#ui/types'
+import type { AvatarProps, ButtonProps, IconProps, ToasterContext } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { toast: Partial<typeof theme> } }
 
@@ -19,17 +19,17 @@ export interface ToastProps extends Omit<ToastRootProps, 'asChild' | 'forceMount
   icon?: IconProps['name']
   avatar?: AvatarProps
   color?: ToastVariants['color']
-  actions?: (ButtonProps & { click?: () => void })[]
+  actions?: ButtonProps[]
   close?: ButtonProps | null
   class?: any
   ui?: Partial<typeof toast.slots>
 }
 
-export interface ToastEmits extends ToastRootEmits { }
+export interface ToastEmits extends ToastRootEmits {}
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, inject, onMounted } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -38,14 +38,15 @@ import { UIcon, UAvatar } from '#components'
 const props = defineProps<ToastProps>()
 const emits = defineEmits<ToastEmits>()
 
+const toaster = inject<ToasterContext>('Toaster')
+
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'duration', 'open', 'type'), emits)
 
 const multiline = computed(() => !!props.title && !!props.description)
+const duration = computed(() => props.duration || toaster?.value.duration)
 
-const ui = computed(() => tv({ extend: toast, slots: props.ui })({
-  color: props.color
-}))
+const ui = computed(() => tv({ extend: toast, slots: props.ui })({ color: props.color }))
 
 const el = ref()
 const height = ref(0)
@@ -56,7 +57,7 @@ onMounted(() => {
   }
 
   setTimeout(() => {
-    height.value = el.value.$el.getBoundingClientRect().height
+    height.value = el.value.$el.getBoundingClientRect()?.height
   }, 0)
 })
 
@@ -66,7 +67,13 @@ defineExpose({
 </script>
 
 <template>
-  <ToastRoot ref="el" v-bind="rootProps" :class="ui.root({ class: props.class, multiline })" :style="{ '--height': height }">
+  <ToastRoot
+    ref="el"
+    v-slot="{ remaining }"
+    v-bind="rootProps"
+    :class="ui.root({ class: props.class, multiline })"
+    :style="{ '--height': height }"
+  >
     <UAvatar v-if="avatar" size="2xl" v-bind="avatar" :class="ui.avatar()" />
     <UIcon v-else-if="icon" :name="icon" :class="ui.icon()" />
 
@@ -110,7 +117,6 @@ defineExpose({
       </ToastClose>
     </div>
 
-    <div :class="ui.progress()" />
-    <div :class="ui.mask()" />
+    <div v-if="remaining && duration" :class="ui.progress()" :style="{ width: `${remaining / duration * 100}%` }" />
   </ToastRoot>
 </template>

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { ComputedRef } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { ToastProviderProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
@@ -17,17 +18,21 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
   class?: any
   ui?: Partial<typeof toaster.slots>
 }
+
+export type ToasterContext = ComputedRef<{
+  duration: number
+}>
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, provide } from 'vue'
 import { ToastProvider, ToastViewport, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useToast } from '#imports'
 import { UToast } from '#components'
 import { omit } from '#ui/utils'
 
-const props = withDefaults(defineProps<ToasterProps>(), { expand: true })
+const props = withDefaults(defineProps<ToasterProps>(), { expand: true, duration: 5000 })
 
 const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold'))
 
@@ -73,6 +78,8 @@ const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 
 function getOffset (index: number) {
   return refs.value.slice(index + 1).reduce((acc, { height }) => acc + height + 16, 0)
 }
+
+provide<ToasterContext>('Toaster', providerProps)
 </script>
 
 <template>

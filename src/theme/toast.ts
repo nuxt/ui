@@ -7,8 +7,7 @@ export default (config: { colors: string[] }) => ({
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
     actions: 'flex gap-1.5 shrink-0',
-    progress: 'absolute inset-0 rounded-lg border-b-2 z-[-1]',
-    mask: 'absolute top-0 inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]',
+    progress: 'absolute inset-0 border-b-2 z-[-1]',
     close: 'p-1'
   },
   variants: {
