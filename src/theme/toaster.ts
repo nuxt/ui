@@ -1,7 +1,7 @@
 export default {
   slots: {
     viewport: 'fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height]',
-    base: 'absolute inset-x-0 z-[--index] transform-[--transform] data-[expanded=false]:data-[front=false]:h-[--front-height] data-[expanded=false]:data-[front=false]:*:invisible data-[swipe=move]:transition-none transition-[transform,height] will-change-[transform,height] duration-200 ease-out'
+    base: 'absolute inset-x-0 z-[--index] transform-[--transform] data-[expanded=false]:data-[front=false]:h-[--front-height] data-[expanded=false]:data-[front=false]:*:invisible data-[state=closed]:animate-[toast-closed_200ms_ease-in-out] data-[state=closed]:data-[expanded=false]:data-[front=false]:animate-[toast-collapsed-closed_200ms_ease-in-out] data-[swipe=move]:transition-none transition-[transform,height] will-change-[transform,height] duration-200 ease-out'
   },
   variants: {
     position: {
@@ -35,13 +35,13 @@ export default {
     position: ['top-left', 'top-center', 'top-right'],
     class: {
       viewport: 'top-4',
-      base: 'top-0 data-[state=open]:animate-[slide-in-from-top_200ms_ease-in-out] data-[state=closed]:animate-[toast-slide-up_200ms_ease-in-out]'
+      base: 'top-0 data-[state=open]:animate-[slide-in-from-top_200ms_ease-in-out]'
     }
   }, {
     position: ['bottom-left', 'bottom-center', 'bottom-right'],
     class: {
       viewport: 'bottom-4',
-      base: 'bottom-0 data-[state=open]:animate-[slide-in-from-bottom_200ms_ease-in-out] data-[state=closed]:animate-[toast-slide-down_200ms_ease-in-out]'
+      base: 'bottom-0 data-[state=open]:animate-[slide-in-from-bottom_200ms_ease-in-out]'
     }
   }, {
     swipeDirection: ['left', 'right'],

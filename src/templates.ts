@@ -35,13 +35,13 @@ export function addTemplates (options: ModuleOptions, nuxt: Nuxt) {
     to { height: var(--radix-collapsible-content-height); }
   }
 
-  @keyframes toast-slide-down {
+  @keyframes toast-collapsed-closed {
     from { transform: var(--transform); }
-    to { transform: translateY(calc((var(--offset) - var(--height)) * -1px)); }
+    to { transform: translateY(calc((var(--before) - var(--height)) * var(--gap))) scale(var(--scale)); }
   }
-  @keyframes toast-slide-up {
+  @keyframes toast-closed {
     from { transform: var(--transform); }
-    to { transform: translateY(calc((var(--offset) - var(--height)) * 1px)); }
+    to { transform: translateY(calc((var(--offset) - var(--height)) * var(--translate-factor))); }
   }
   @keyframes toast-slide-left {
     from { transform: translateX(0) translateY(var(--translate)); }
