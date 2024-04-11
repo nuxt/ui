@@ -51,7 +51,8 @@
     "radix-vue": "^1.6.2",
     "scule": "^1.3.0",
     "tailwind-variants": "^0.2.1",
-    "tailwindcss": "4.0.0-alpha.14"
+    "tailwindcss": "4.0.0-alpha.14",
+    "vaul-vue": "^0.1.0"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.3.5",

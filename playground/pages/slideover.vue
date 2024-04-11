@@ -42,7 +42,7 @@ const open = ref(false)
       </template>
     </USlideover>
 
-    <USlideover v-model:open="open" title="Slideover with v-model" description="This can be useful to control the state of the slideover yourself.">
+    <USlideover v-model:open="open" title="Slideover with v-model" description="This is useful to control the state yourself.">
       <template #body>
         <Placeholder class="h-full w-full" />
       </template>

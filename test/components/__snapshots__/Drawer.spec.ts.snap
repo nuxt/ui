@@ -1,0 +1,258 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Drawer > renders basic case correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="--snap-point-height: 0; pointer-events: auto;" id="radix-1" role="dialog" aria-describedby="radix-3" aria-labelledby="radix-2" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with body slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-44" role="dialog" aria-describedby="radix-46" aria-labelledby="radix-45" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <!--v-if-->
+    <div class="flex-1">Body slot</div>
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with class correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-16" role="dialog" aria-describedby="radix-18" aria-labelledby="radix-17" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none bg-gray-50 dark:bg-gray-800">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with content slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-28" role="dialog" aria-describedby="radix-30" aria-labelledby="radix-29" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>Content slot
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with default slot correctly 1`] = `
+"Default slot
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-24" role="dialog" aria-describedby="radix-26" aria-labelledby="radix-25" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with description correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-9" role="dialog" aria-describedby="radix-11" aria-labelledby="radix-10" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <div class="">
+      <h2 id="radix-10" class="text-gray-900 dark:text-white font-semibold">Title</h2>
+      <p id="radix-11" class="mt-1 text-gray-500 dark:text-gray-400 text-sm">Description</p>
+    </div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with description slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-40" role="dialog" aria-describedby="radix-42" aria-labelledby="radix-41" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <div class="">
+      <!--v-if-->
+      <p id="radix-42" class="mt-1 text-gray-500 dark:text-gray-400 text-sm">Description slot</p>
+    </div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with footer slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-48" role="dialog" aria-describedby="radix-50" aria-labelledby="radix-49" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <!--v-if-->
+    <!--v-if-->
+    <div class="flex flex-col gap-1.5">Footer slot</div>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with header slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-32" role="dialog" aria-describedby="radix-34" aria-labelledby="radix-33" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <div class="">Header slot</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with title correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-5" role="dialog" aria-describedby="radix-7" aria-labelledby="radix-6" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <div class="">
+      <h2 id="radix-6" class="text-gray-900 dark:text-white font-semibold">Title</h2>
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with title slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-36" role="dialog" aria-describedby="radix-38" aria-labelledby="radix-37" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <div class="">
+      <h2 id="radix-37" class="text-gray-900 dark:text-white font-semibold">Title slot</h2>
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with ui correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-20" role="dialog" aria-describedby="radix-22" aria-labelledby="radix-21" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700 w-20"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders without overlay correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<!--v-if-->
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-13" role="dialog" aria-describedby="radix-15" aria-labelledby="radix-14" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+  <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+  <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
+    <div class="">
+      <h2 id="radix-14" class="text-gray-900 dark:text-white font-semibold">Title</h2>
+      <p id="radix-15" class="mt-1 text-gray-500 dark:text-gray-400 text-sm">Description</p>
+    </div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;

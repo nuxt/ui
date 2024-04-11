@@ -51,6 +51,9 @@ importers:
       tailwindcss:
         specifier: 4.0.0-alpha.14
         version: 4.0.0-alpha.14
+      vaul-vue:
+        specifier: ^0.1.0
+        version: 0.1.0(typescript@5.4.4)
     devDependencies:
       '@nuxt/eslint-config':
         specifier: ^0.3.5
@@ -12856,6 +12859,17 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
       builtins: 5.0.1
+
+  /vaul-vue@0.1.0(typescript@5.4.4):
+    resolution: {integrity: sha512-3PYWMbN3cSdsciv3fzewskxZFnX61PYq1uNsbvizXDo/8sN4SMrWkYDqWaPdTD3GTEm6wpx7j5flRLg7A5ZXbQ==}
+    dependencies:
+      '@vueuse/core': 10.9.0(vue@3.4.21)
+      radix-vue: 1.6.2(vue@3.4.21)
+      vue: 3.4.21(typescript@5.4.4)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - typescript
+    dev: false
 
   /vfile-location@5.0.2:
     resolution: {integrity: sha512-NXPYyxyBSH7zB5U6+3uDdd6Nybz6o6/od9rk8bp9H8GR3L+cm/fC0uUTbqBmUTnMCUDslAGBOIKNfvvb+gGlDg==}
