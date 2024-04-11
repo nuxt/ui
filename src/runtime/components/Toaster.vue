@@ -77,6 +77,8 @@ function getOffset (index: number) {
 
 <template>
   <ToastProvider :swipe-direction="swipeDirection" v-bind="providerProps">
+    <slot />
+
     <UToast
       v-for="(toast, index) of toasts"
       :key="toast.id"
@@ -112,7 +114,5 @@ function getOffset (index: number) {
       @mouseenter="hovered = true"
       @mouseleave="hovered = false"
     />
-
-    <slot />
   </ToastProvider>
 </template>
