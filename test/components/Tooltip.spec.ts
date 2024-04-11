@@ -1,16 +1,16 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
-import App from '../../src/runtime/components/App.vue'
+import { TooltipProvider } from 'radix-vue'
 import Tooltip, { type TooltipProps } from '../../src/runtime/components/Tooltip.vue'
 import ComponentRender from '../component-render'
 
 const TooltipWrapper = defineComponent({
   components: {
-    UApp: App,
+    TooltipProvider,
     UTooltip: Tooltip
   },
   inheritAttrs: false,
-  template: '<UApp><UTooltip v-bind="$attrs"><slot /></UTooltip></UApp>'
+  template: '<TooltipProvider><UTooltip v-bind="$attrs"><slot /></UTooltip></TooltipProvider>'
 })
 
 describe('Tooltip', () => {
