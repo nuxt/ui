@@ -27,9 +27,9 @@ const toasterProps = toRef(() => props.toaster)
 <template>
   <ConfigProvider v-bind="configProviderProps">
     <TooltipProvider v-bind="tooltipProps">
-      <slot />
-
-      <UToaster v-if="toaster !== null" v-bind="toasterProps" />
+      <UToaster v-if="toaster !== null" v-bind="toasterProps">
+        <slot />
+      </UToaster>
     </TooltipProvider>
   </ConfigProvider>
 </template>

@@ -112,5 +112,7 @@ function getOffset (index: number) {
       @mouseenter="hovered = true"
       @mouseleave="hovered = false"
     />
+
+    <slot />
   </ToastProvider>
 </template>
