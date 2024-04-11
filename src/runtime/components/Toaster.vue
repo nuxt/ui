@@ -72,7 +72,7 @@ const expanded = computed(() => props.expand || hovered.value)
 
 const refs = ref<{ height: number }[]>([])
 
-const height = computed(() => refs.value.reduce((acc, { height }) => acc + height + 16, 0) - 16)
+const height = computed(() => refs.value.reduce((acc, { height }) => acc + height + 16, 0))
 const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 0)
 
 function getOffset (index: number) {
