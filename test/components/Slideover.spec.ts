@@ -12,6 +12,7 @@ describe('Slideover', () => {
     ['with bottom side', { props: { open: true, portal: false, side: 'bottom' as const, title: 'Title', description: 'Description' } }],
     ['without overlay', { props: { open: true, portal: false, overlay: false, title: 'Title', description: 'Description' } }],
     ['without transition', { props: { open: true, portal: false, transition: false, title: 'Title', description: 'Description' } }],
+    ['without close', { props: { open: true, portal: false, close: null, title: 'Title', description: 'Description' } }],
     ['with class', { props: { open: true, portal: false, class: 'bg-gray-50 dark:bg-gray-800' } }],
     ['with ui', { props: { open: true, portal: false, ui: { close: 'right-2' } } }],
     ['with default slot', { props: { open: true, portal: false }, slots: { default: () => 'Default slot' } }],
