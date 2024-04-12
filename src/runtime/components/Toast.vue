@@ -26,6 +26,14 @@ export interface ToastProps extends Omit<ToastRootProps, 'asChild' | 'forceMount
 }
 
 export interface ToastEmits extends ToastRootEmits {}
+
+export interface ToastSlots {
+  default(): any
+  leading(): any
+  title(): any
+  description(): any
+  close(): any
+}
 </script>
 
 <script setup lang="ts">
@@ -37,6 +45,7 @@ import { UIcon, UAvatar } from '#components'
 
 const props = defineProps<ToastProps>()
 const emits = defineEmits<ToastEmits>()
+defineSlots<ToastSlots>()
 
 const toaster = inject<ToasterContext>('Toaster')
 
@@ -74,17 +83,23 @@ defineExpose({
     :class="ui.root({ class: props.class, multiline })"
     :style="{ '--height': height }"
   >
-    <UAvatar v-if="avatar" size="2xl" v-bind="avatar" :class="ui.avatar()" />
-    <UIcon v-else-if="icon" :name="icon" :class="ui.icon()" />
+    <slot name="leading">
+      <UAvatar v-if="avatar" size="2xl" v-bind="avatar" :class="ui.avatar()" />
+      <UIcon v-else-if="icon" :name="icon" :class="ui.icon()" />
+    </slot>
 
     <div :class="ui.wrapper()">
-      <ToastTitle v-if="title" :class="ui.title()">
-        {{ title }}
+      <ToastTitle v-if="title || $slots.title" :class="ui.title()">
+        <slot name="title">
+          {{ title }}
+        </slot>
       </ToastTitle>
-      <template v-if="description">
-        <ToastDescription v-if="isVNode(description)" :as="description" />
+      <template v-if="description || $slots.description">
+        <ToastDescription v-if="description && isVNode(description)" :as="description" />
         <ToastDescription v-else :class="ui.description()">
-          {{ description }}
+          <slot name="description">
+            {{ description }}
+          </slot>
         </ToastDescription>
       </template>
 
@@ -103,17 +118,19 @@ defineExpose({
       </template>
 
       <ToastClose as-child>
-        <UButton
-          v-if="close !== null"
-          :icon="appConfig.ui.icons.close"
-          size="sm"
-          color="gray"
-          variant="link"
-          aria-label="Close"
-          v-bind="close"
-          :class="ui.close()"
-          @click.stop
-        />
+        <slot name="close" :class="ui.close()">
+          <UButton
+            v-if="close !== null"
+            :icon="appConfig.ui.icons.close"
+            size="sm"
+            color="gray"
+            variant="link"
+            aria-label="Close"
+            v-bind="close"
+            :class="ui.close()"
+            @click.stop
+          />
+        </slot>
       </ToastClose>
     </div>
 
