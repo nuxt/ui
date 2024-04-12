@@ -87,51 +87,51 @@ export default (config: { colors: string[] }) => {
     }, {
       leading: true,
       size: '2xs',
-      class: 'ps-7'
+      class: 'pl-7'
     }, {
       leading: true,
       size: 'xs',
-      class: 'ps-8'
+      class: 'pl-8'
     }, {
       leading: true,
       size: 'sm',
-      class: 'ps-9'
+      class: 'pl-9'
     }, {
       leading: true,
       size: 'md',
-      class: 'ps-10'
+      class: 'pl-10'
     }, {
       leading: true,
       size: 'lg',
-      class: 'ps-11'
+      class: 'pl-11'
     }, {
       leading: true,
       size: 'xl',
-      class: 'ps-12'
+      class: 'pl-12'
     }, {
       trailing: true,
       size: '2xs',
-      class: 'pe-7'
+      class: 'pr-7'
     }, {
       trailing: true,
       size: 'xs',
-      class: 'pe-8'
+      class: 'pr-8'
     }, {
       trailing: true,
       size: 'sm',
-      class: 'pe-9'
+      class: 'pr-9'
     }, {
       trailing: true,
       size: 'md',
-      class: 'pe-10'
+      class: 'pr-10'
     }, {
       trailing: true,
       size: 'lg',
-      class: 'pe-11'
+      class: 'pr-11'
     }, {
       trailing: true,
       size: 'xl',
-      class: 'pe-12'
+      class: 'pr-12'
     }, {
       loading: true,
       leading: true,
