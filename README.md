@@ -30,16 +30,6 @@ Read more on [ui.nuxt.com](https://ui.nuxt.com)
 npx nuxi@latest module add ui
 ```
 
-Then, register the module in your `nuxt.config.ts`:
-
-```js
-export default defineNuxtConfig({
-  modules: [
-    '@nuxt/ui'
-  ]
-})
-```
-
 If you want latest updates, please use `@nuxt/ui-edge` in your `package.json`:
 
 ```json
