@@ -65,7 +65,6 @@ const templates = (id: number) => [{
   icon: 'i-heroicons-rocket-launch',
   actions: [{
     label: 'Action',
-    color: 'primary' as const,
     variant: 'outline' as const,
     click() {
       console.log(`Toast ${id} action clicked`)
