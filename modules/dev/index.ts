@@ -9,7 +9,7 @@ export default defineNuxtModule({
   meta: {
     name: '@nuxt/ui-dev'
   },
-  setup () {
+  setup() {
     const nuxt = useNuxt()
     const resolver = createResolver(import.meta.url)
     const watcher = watch(resolver.resolve('../../src/theme'))
