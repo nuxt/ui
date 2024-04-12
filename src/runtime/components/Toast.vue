@@ -28,7 +28,6 @@ export interface ToastProps extends Omit<ToastRootProps, 'asChild' | 'forceMount
 export interface ToastEmits extends ToastRootEmits {}
 
 export interface ToastSlots {
-  default(): any
   leading(): any
   title(): any
   description(): any
