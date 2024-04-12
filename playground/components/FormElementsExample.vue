@@ -2,7 +2,6 @@
 import { z } from 'zod'
 import type { FormSubmitEvent, Form } from '#ui/types/form'
 
-
 const schema = z.object({
   input: z.string().min(10),
   // inputMenu: z.any().refine(option => option?.value === 'option-2', {
@@ -38,7 +37,7 @@ const options = [
   { label: 'Option 3', value: 'option-3' }
 ]
 
-function onSubmit (event: FormSubmitEvent<Schema>) {
+function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data)
 }
 </script>
@@ -76,7 +75,7 @@ function onSubmit (event: FormSubmitEvent<Schema>) {
         Submit
       </UButton>
 
-      <UButton variant="outline" :disabled="form?.disabled" @click="form.clear()">
+      <UButton variant="outline" :disabled="form?.disabled" @click="form?.clear()">
         Clear
       </UButton>
     </div>

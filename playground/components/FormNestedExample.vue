@@ -21,11 +21,11 @@ const state = reactive<Partial<Schema & { nested: Partial<NestedSchema> }>>({
 
 const checked = ref(false)
 
-function onSubmit (event: FormSubmitEvent<Schema>) {
+function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log('Success', event.data)
 }
 
-function onError (event: any) {
+function onError(event: any) {
   console.log('Error', event)
 }
 </script>

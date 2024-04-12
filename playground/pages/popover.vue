@@ -2,7 +2,7 @@
 const open = ref(false)
 const loading = ref(false)
 
-function send () {
+function send() {
   loading.value = true
 
   setTimeout(() => {

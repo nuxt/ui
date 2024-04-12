@@ -40,7 +40,7 @@ const templates = (id: number) => [{
   },
   actions: [{
     label: 'Action',
-    click () {
+    click() {
       console.log(`Toast ${id} action clicked`)
     }
   }]
@@ -50,13 +50,13 @@ const templates = (id: number) => [{
   actions: [{
     label: 'Action 1',
     color: 'gray' as const,
-    click () {
+    click() {
       console.log(`Toast ${id} action 1 clicked`)
     }
   }, {
     label: 'Action 2',
     color: 'black' as const,
-    click () {
+    click() {
       console.log(`Toast ${id} action 2 clicked`)
     }
   }]
@@ -67,13 +67,13 @@ const templates = (id: number) => [{
     label: 'Action',
     color: 'primary' as const,
     variant: 'outline' as const,
-    click () {
+    click() {
       console.log(`Toast ${id} action clicked`)
     }
   }]
 }]
 
-function addToast () {
+function addToast() {
   const id = count.value++
 
   const template = templates(id)[Math.floor(Math.random() * templates(id).length)]
@@ -81,13 +81,13 @@ function addToast () {
   add({
     id,
     ...template,
-    click (toast) {
+    click(toast) {
       console.log(`Toast ${toast.id} clicked`)
     }
   })
 }
 
-function updateToast () {
+function updateToast() {
   if (!last.value) {
     return
   }
@@ -98,7 +98,7 @@ function updateToast () {
   })
 }
 
-function removeToast () {
+function removeToast() {
   if (!last.value) {
     return
   }

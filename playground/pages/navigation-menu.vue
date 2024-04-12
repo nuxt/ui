@@ -7,7 +7,7 @@ const links = [
       src: 'https://avatars.githubusercontent.com/u/739984?v=4'
     },
     badge: 100,
-    select () {
+    select() {
       console.log('Profile clicked')
     }
   }, {

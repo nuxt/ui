@@ -12,7 +12,7 @@ const items = computed(() => [
   [{
     label: 'Profile',
     icon: 'i-heroicons-user',
-    select (e: Event) {
+    select(e: Event) {
       e.preventDefault()
       console.log('Profile clicked')
     }
@@ -37,7 +37,7 @@ const items = computed(() => [
       label: 'Invite by link',
       icon: 'i-heroicons-link',
       shortcuts: [metaSymbol.value, 'I'],
-      select (e: Event) {
+      select(e: Event) {
         e.preventDefault()
         console.log('Invite by link clicked')
       }
@@ -49,21 +49,21 @@ const items = computed(() => [
         icon: 'i-simple-icons-slack',
         to: 'https://slack.com',
         target: '_blank',
-        select (e: Event) {
+        select(e: Event) {
           e.preventDefault()
           console.log('Import from Slack clicked')
         }
       }, {
         label: 'Import from Trello',
         icon: 'i-simple-icons-trello',
-        select (e: Event) {
+        select(e: Event) {
           e.preventDefault()
           console.log('Import from Trello clicked')
         }
       }, {
         label: 'Import from Asana',
         icon: 'i-simple-icons-asana',
-        select (e: Event) {
+        select(e: Event) {
           e.preventDefault()
           console.log('Import from Asana clicked')
         }
@@ -78,7 +78,7 @@ const items = computed(() => [
     icon: 'i-simple-icons-github',
     to: 'https://github.com/nuxt/ui',
     target: '_blank',
-    select (e: Event) {
+    select(e: Event) {
       e.preventDefault()
     }
   }, {

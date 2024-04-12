@@ -18,25 +18,25 @@ type ItemSchema = z.output<typeof itemSchema>
 
 const state = reactive<Partial<Schema & { items: Partial<ItemSchema>[] }>>({})
 
-function addItem () {
+function addItem() {
   if (!state.items) {
     state.items = []
   }
   state.items.push({})
 }
 
-function removeItem () {
+function removeItem() {
   if (state.items) {
     state.items.pop()
   }
 }
 const formItemRef = ref()
 
-function onSubmit (event: FormSubmitEvent<Schema>) {
+function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log('Success', event.data)
 }
 
-function onError (event: any) {
+function onError(event: any) {
   console.log('Error', event)
 }
 </script>

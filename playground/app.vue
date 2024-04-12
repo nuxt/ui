@@ -39,7 +39,7 @@ const components = [
   'tooltip'
 ]
 
-function upperName (name: string) {
+function upperName(name: string) {
   return splitByCase(name).map(p => upperFirst(p)).join('')
 }
 </script>
