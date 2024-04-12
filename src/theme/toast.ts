@@ -7,13 +7,13 @@ export default (config: { colors: string[] }) => ({
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
     actions: 'flex gap-1.5 shrink-0',
-    progress: 'absolute inset-0 border-b-2 z-[-1]',
-    close: 'p-1'
+    progress: 'absolute inset-x-0 bottom-0 h-1 z-[-1]',
+    close: 'p-0'
   },
   variants: {
     color: Object.fromEntries(config.colors.map((color: string) => [color, {
       icon: `text-${color}-500 dark:text-${color}-400`,
-      progress: `border-${color}-500 dark:border-${color}-400`
+      progress: `bg-${color}-500 dark:bg-${color}-400`
     }])),
     multiline: {
       true: {
