@@ -2,6 +2,7 @@
 import theme from '#build/ui/badge'
 
 const sizes = Object.keys(theme.variants.size)
+const variants = Object.keys(theme.variants.variant)
 </script>
 
 <template>
@@ -12,10 +13,7 @@ const sizes = Object.keys(theme.variants.size)
       </UBadge>
     </div>
     <div class="flex items-center gap-2">
-      <UBadge label="Badge" />
-      <UBadge label="Badge" variant="outline" />
-      <UBadge label="Badge" variant="soft" />
-      <UBadge label="Badge" variant="subtle" />
+      <UBadge v-for="variant in variants" :key="variant" label="Badge" :variant="(variant as any)" />
     </div>
     <div class="flex items-center gap-2">
       <UBadge label="Badge" color="white" />
