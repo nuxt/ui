@@ -1,5 +1,6 @@
 export * from '../components/App.vue'
 export * from '../components/Accordion.vue'
+export * from '../components/Alert.vue'
 export * from '../components/Avatar.vue'
 export * from '../components/Badge.vue'
 export * from '../components/Button.vue'

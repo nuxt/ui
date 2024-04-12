@@ -11,6 +11,7 @@ const appConfig = useAppConfig()
 
 const components = [
   'accordion',
+  'alert',
   'avatar',
   'badge',
   'button',

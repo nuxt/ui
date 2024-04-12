@@ -1,0 +1,106 @@
+<script lang="ts">
+import { isVNode, type VNode } from 'vue'
+import { tv, type VariantProps } from 'tailwind-variants'
+import type { PrimitiveProps } from 'radix-vue'
+import type { AppConfig } from '@nuxt/schema'
+import _appConfig from '#build/app.config'
+import theme from '#build/ui/alert'
+import type { AvatarProps, ButtonProps, IconProps } from '#ui/types'
+
+const appConfig = _appConfig as AppConfig & { ui: { alert: Partial<typeof theme> } }
+
+const alert = tv({ extend: tv(theme), ...(appConfig.ui?.alert || {}) })
+
+type AlertVariants = VariantProps<typeof alert>
+
+export interface AlertProps extends Omit<PrimitiveProps, 'asChild'> {
+  title?: string
+  description?: string | VNode | (() => VNode)
+  icon?: IconProps['name']
+  avatar?: AvatarProps
+  color?: AlertVariants['color']
+  variant?: AlertVariants['variant']
+  actions?: ButtonProps[]
+  close?: ButtonProps | boolean
+  class?: any
+  ui?: Partial<typeof alert.slots>
+}
+
+export interface AlertEmits {
+  (e: 'close'): void
+}
+
+export interface AlertSlots {
+  leading(): any
+  title(): any
+  description(): any
+  close(): any
+}
+</script>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import { Primitive } from 'radix-vue'
+import { useAppConfig } from '#imports'
+import { UIcon, UAvatar } from '#components'
+
+const props = withDefaults(defineProps<AlertProps>(), { as: 'div' })
+const emits = defineEmits<AlertEmits>()
+defineSlots<AlertSlots>()
+
+const appConfig = useAppConfig()
+
+const multiline = computed(() => !!props.title && !!props.description)
+
+const ui = computed(() => tv({ extend: alert, slots: props.ui })({
+  color: props.color,
+  variant: props.variant
+}))
+</script>
+
+<template>
+  <Primitive :as="as" :class="ui.root({ class: props.class, multiline })">
+    <slot name="leading">
+      <UAvatar v-if="avatar" size="2xl" v-bind="avatar" :class="ui.avatar()" />
+      <UIcon v-else-if="icon" :name="icon" :class="ui.icon()" />
+    </slot>
+
+    <div :class="ui.wrapper()">
+      <div v-if="title || $slots.title" :class="ui.title()">
+        <slot name="title">
+          {{ title }}
+        </slot>
+      </div>
+      <template v-if="description || $slots.description">
+        <component :is="description" v-if="description && isVNode(description)" />
+        <div v-else :class="ui.description()">
+          <slot name="description">
+            {{ description }}
+          </slot>
+        </div>
+      </template>
+
+      <div v-if="multiline && actions?.length" :class="ui.actions({ multiline: true })">
+        <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
+      </div>
+    </div>
+
+    <div v-if="(!multiline && actions?.length) || close" :class="ui.actions({ multiline: false })">
+      <template v-if="!multiline">
+        <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
+      </template>
+
+      <UButton
+        v-if="close"
+        :icon="appConfig.ui.icons.close"
+        size="sm"
+        color="gray"
+        variant="link"
+        aria-label="Close"
+        v-bind="typeof close === 'object' ? close : {}"
+        :class="ui.close()"
+        @click="emits('close')"
+      />
+    </div>
+  </Primitive>
+</template>
