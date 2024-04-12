@@ -12,7 +12,7 @@ export interface UseComponentIconsProps {
   loadingIcon?: IconProps['name']
 }
 
-export function useComponentIcons (props: UseComponentIconsProps) {
+export function useComponentIcons(props: UseComponentIconsProps) {
   const appConfig = useAppConfig()
 
   const isLeading = computed(() => (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing && !props.trailingIcon) || !!props.leadingIcon)

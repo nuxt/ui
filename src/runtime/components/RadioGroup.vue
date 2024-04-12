@@ -35,7 +35,7 @@ export type RadioGroupEmits = {
 export interface RadioGroupSlots<T> {
   legend(): any
   label(props: { option: RadioGroupOption<T> }): any
-  description(props: { option: RadioGroupOption<T>}): any
+  description(props: { option: RadioGroupOption<T> }): any
 }
 </script>
 
@@ -61,7 +61,7 @@ const ui = computed(() => tv({ extend: radioGroup, slots: props.ui })({
   required: props.required
 }))
 
-function normalizeOption (option: any) {
+function normalizeOption(option: any) {
   if (['string', 'number', 'boolean'].includes(typeof option)) {
     return {
       id: `${inputId}:${option}`,
@@ -82,7 +82,7 @@ const normalizedOptions = computed(() => {
 })
 
 const modelValue = defineModel<T>({
-  set (value) {
+  set(value) {
     emits('change', value)
     return value
   }
@@ -91,7 +91,7 @@ const modelValue = defineModel<T>({
 // FIXME: I think there's a race condition between this and the v-model event.
 // This must be triggered after the value updates, otherwise the form validates
 // the previous value.
-function onUpdate () {
+function onUpdate() {
   emitFormChange()
 }
 </script>

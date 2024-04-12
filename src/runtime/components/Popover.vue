@@ -9,7 +9,7 @@ const appConfig = _appConfig as AppConfig & { ui: { popover: Partial<typeof them
 
 const popover = tv({ extend: tv(theme), ...(appConfig.ui?.popover || {}) })
 
-export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'>{
+export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'> {
   /**
    * The mode of the popover.
    * @defaultValue "click"

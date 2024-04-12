@@ -61,8 +61,8 @@ const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
   if (props.preventClose) {
     return {
-      'pointerDownOutside': (e: Event) => e.preventDefault(),
-      'interactOutside': (e: Event) => e.preventDefault()
+      pointerDownOutside: (e: Event) => e.preventDefault(),
+      interactOutside: (e: Event) => e.preventDefault()
     }
   }
 

@@ -5,16 +5,16 @@ import type { FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjected
 type Props<T> = {
   id?: string
   name?: string
-  // @ts-ignore FIXME: TS doesn't like this
+  // @ts-expect-error FIXME: TS doesn't like this
   size?: T['size']
-  // @ts-ignore FIXME: TS doesn't like this
+  // @ts-expect-error FIXME: TS doesn't like this
   color?: T['color']
   eagerValidation?: boolean
   legend?: string
   disabled?: boolean
 }
 
-export function useFormField <T> (inputProps?: Props<T>) {
+export function useFormField<T>(inputProps?: Props<T>) {
   const formOptions = inject<FormInjectedOptions | undefined>('form-options', undefined)
   const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
   const formField = inject<FormFieldInjectedOptions<T> | undefined>('form-field', undefined)
@@ -33,18 +33,18 @@ export function useFormField <T> (inputProps?: Props<T>) {
 
   const blurred = ref(false)
 
-  function emitFormEvent (type: FormInputEvents, name: string) {
+  function emitFormEvent(type: FormInputEvents, name: string) {
     if (formBus && formField) {
       formBus.emit({ type, name })
     }
   }
 
-  function emitFormBlur () {
+  function emitFormBlur() {
     emitFormEvent('blur', formField?.name.value as string)
     blurred.value = true
   }
 
-  function emitFormChange () {
+  function emitFormChange() {
     emitFormEvent('change', formField?.name.value as string)
   }
 

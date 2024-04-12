@@ -14,7 +14,7 @@ export interface FormProps<T extends object> {
   id?: string | number
   schema?: FormSchema<T>
   state: Partial<T>
-  validate?: (state: Partial<T>) => Promise<FormError[] | void>
+  validate?: (state: Partial<T>) => Promise<FormError[]>
   validateOn?: FormInputEvents[]
   disabled?: boolean
   validateOnInputDelay?: number
@@ -38,7 +38,7 @@ import { useId } from '#imports'
 import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '#ui/utils/form'
 
 const props = withDefaults(defineProps<FormProps<T>>(), {
-  validateOn () {
+  validateOn() {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
   validateOnInputDelay: 300
@@ -54,7 +54,6 @@ const parentBus = inject<UseEventBusReturn<FormEvent, string> | undefined>(
   undefined
 )
 provide('form-events', bus)
-
 
 const nestedForms = ref<Map<string | number, { validate: () => any }>>(new Map())
 
@@ -98,14 +97,14 @@ provide('form-errors', errors)
 
 const inputs = ref<Record<string, string>>({})
 provide('form-inputs', inputs)
-function resolveErrorIds (errs: FormError[]): FormErrorWithId[] {
-  return errs.map((err) => ({
+function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
+  return errs.map(err => ({
     ...err,
     id: inputs.value[err.name]
   }))
 }
 
-async function getErrors (): Promise<FormErrorWithId[]> {
+async function getErrors(): Promise<FormErrorWithId[]> {
   let errs = props.validate ? (await props.validate(props.state)) ?? [] : []
 
   if (props.schema) {
@@ -125,26 +124,23 @@ async function getErrors (): Promise<FormErrorWithId[]> {
   return resolveErrorIds(errs)
 }
 
-async function _validate (
-  opts: { name?: string | string[], silent?: boolean, nested?: boolean } = { silent: false, nested: true }
-): Promise<T | false> {
+async function _validate(opts: { name?: string | string[], silent?: boolean, nested?: boolean } = { silent: false, nested: true }): Promise<T | false> {
   const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name
 
-  const nestedValidatePromises = !names && opts.nested ? Array.from(nestedForms.value.values()).map(
-    ({ validate }) => validate().then(() => undefined).catch((error: Error) => {
-      if (!(error instanceof FormValidationException)) {
-        throw error
-      }
-      return error
-    })
-  ) : []
+  const nestedValidatePromises = !names && opts.nested
+    ? Array.from(nestedForms.value.values()).map(
+      ({ validate }) => validate().then(() => undefined).catch((error: Error) => {
+        if (!(error instanceof FormValidationException)) {
+          throw error
+        }
+        return error
+      })
+    )
+    : []
 
   if (names) {
-    const otherErrors = errors.value.filter(
-      (error) => !names!.includes(error.name)
-    )
-    const pathErrors = (await getErrors()).filter((error) =>
-      names!.includes(error.name)
+    const otherErrors = errors.value.filter(error => !names!.includes(error.name))
+    const pathErrors = (await getErrors()).filter(error => names!.includes(error.name)
     )
     errors.value = otherErrors.concat(pathErrors)
   } else {
@@ -160,7 +156,7 @@ async function _validate (
   return props.state as T
 }
 
-async function onSubmit (payload: Event) {
+async function onSubmit(payload: Event) {
   const event = payload as SubmitEvent
 
   try {
@@ -170,7 +166,6 @@ async function onSubmit (payload: Event) {
       data: props.state
     }
     emit('submit', submitEvent)
-
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
       throw error
@@ -190,30 +185,30 @@ defineExpose<Form<T>>({
   validate: _validate,
   errors,
 
-  setErrors (errs: FormError[], name?: string) {
+  setErrors(errs: FormError[], name?: string) {
     if (name) {
       errors.value = errors.value
-        .filter((error) => error.name !== name)
+        .filter(error => error.name !== name)
         .concat(resolveErrorIds(errs))
     } else {
       errors.value = resolveErrorIds(errs)
     }
   },
 
-  async submit () {
+  async submit() {
     await onSubmit(new Event('submit'))
   },
 
-  getErrors (name?: string) {
+  getErrors(name?: string) {
     if (name) {
-      return errors.value.filter((err) => err.name === name)
+      return errors.value.filter(err => err.name === name)
     }
     return errors.value
   },
 
-  clear (name?: string) {
+  clear(name?: string) {
     if (name) {
-      errors.value = errors.value.filter((err) => err.name !== name)
+      errors.value = errors.value.filter(err => err.name !== name)
     } else {
       errors.value = []
     }

@@ -52,10 +52,10 @@ const ui = computed(() => tv({ extend: formField, slots: props.ui })({
 const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
 const error = computed(() => {
-  return (props.error && typeof props.error === 'string') ||
-    typeof props.error === 'boolean'
+  return (props.error && typeof props.error === 'string')
+    || typeof props.error === 'boolean'
     ? props.error
-    : formErrors?.value?.find((error) => error.name === props.name)?.message
+    : formErrors?.value?.find(error => error.name === props.name)?.message
 })
 
 const inputId = ref(useId())

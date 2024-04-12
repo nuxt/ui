@@ -4,7 +4,7 @@ import type { Nuxt } from '@nuxt/schema'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 
-export function addTemplates (options: ModuleOptions, nuxt: Nuxt) {
+export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
   const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
   const template = addTemplate({

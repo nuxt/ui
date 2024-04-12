@@ -40,16 +40,16 @@ const { toasts, remove } = useToast()
 
 const swipeDirection = computed(() => {
   switch (props.position) {
-  case 'top-center':
-    return 'up'
-  case 'top-right':
-  case 'bottom-right':
-    return 'right'
-  case 'bottom-center':
-    return 'down'
-  case 'top-left':
-  case 'bottom-left':
-    return 'left'
+    case 'top-center':
+      return 'up'
+    case 'top-right':
+    case 'bottom-right':
+      return 'right'
+    case 'bottom-center':
+      return 'down'
+    case 'top-left':
+    case 'bottom-left':
+      return 'left'
   }
   return 'right'
 })
@@ -59,7 +59,7 @@ const ui = computed(() => tv({ extend: toaster, slots: props.ui })({
   swipeDirection: swipeDirection.value
 }))
 
-function onUpdateOpen (value: boolean, id: string | number) {
+function onUpdateOpen(value: boolean, id: string | number) {
   if (value) {
     return
   }
@@ -75,7 +75,7 @@ const refs = ref<{ height: number }[]>([])
 const height = computed(() => refs.value.reduce((acc, { height }) => acc + height + 16, 0))
 const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 0)
 
-function getOffset (index: number) {
+function getOffset(index: number) {
   return refs.value.slice(index + 1).reduce((acc, { height }) => acc + height + 16, 0)
 }
 

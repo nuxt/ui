@@ -65,14 +65,14 @@ const ui = computed(() => tv({ extend: textarea, slots: props.ui })({
 
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
 
-function autoFocus () {
+function autoFocus() {
   if (props.autofocus) {
     textareaRef.value?.focus()
   }
 }
 
 // Custom function to handle the v-model properties
-function updateInput (value: string) {
+function updateInput(value: string) {
   if (modelModifiers.trim) {
     value = value.trim()
   }
@@ -85,7 +85,7 @@ function updateInput (value: string) {
   emitFormInput()
 }
 
-function onInput (event: Event) {
+function onInput(event: Event) {
   autoResize()
 
   if (!modelModifiers.lazy) {
@@ -93,7 +93,7 @@ function onInput (event: Event) {
   }
 }
 
-function onChange (event: Event) {
+function onChange(event: Event) {
   const value = (event.target as HTMLInputElement).value
 
   if (modelModifiers.lazy) {
@@ -106,7 +106,7 @@ function onChange (event: Event) {
   }
 }
 
-function onBlur (event: FocusEvent) {
+function onBlur(event: FocusEvent) {
   emitFormBlur()
   emit('blur', event)
 }
@@ -117,9 +117,8 @@ onMounted(() => {
   }, props.autofocusDelay)
 })
 
-function autoResize () {
+function autoResize() {
   if (props.autoresize) {
-
     if (!textareaRef.value) {
       return
     }
@@ -127,10 +126,10 @@ function autoResize () {
     textareaRef.value.rows = props.rows
 
     const styles = window.getComputedStyle(textareaRef.value)
-    const paddingTop = parseInt(styles.paddingTop)
-    const paddingBottom = parseInt(styles.paddingBottom)
+    const paddingTop = Number.parseInt(styles.paddingTop)
+    const paddingBottom = Number.parseInt(styles.paddingBottom)
     const padding = paddingTop + paddingBottom
-    const lineHeight = parseInt(styles.lineHeight)
+    const lineHeight = Number.parseInt(styles.lineHeight)
     const { scrollHeight } = textareaRef.value
     const newRows = (scrollHeight - padding) / lineHeight
 

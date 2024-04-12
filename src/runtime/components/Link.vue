@@ -55,7 +55,7 @@ const ui = computed(() => tv({
   }
 }))
 
-function isLinkActive (slotProps: any) {
+function isLinkActive(slotProps: any) {
   if (props.active !== undefined) {
     return props.active
   }
@@ -78,7 +78,7 @@ function isLinkActive (slotProps: any) {
   return false
 }
 
-function resolveLinkClass (slotProps: any) {
+function resolveLinkClass(slotProps: any) {
   const active = isLinkActive(slotProps)
 
   if (props.raw) {

@@ -6,10 +6,10 @@ export interface Toast extends Omit<ToastProps, 'defaultOpen'> {
   click?: (toast: Toast) => void
 }
 
-export function useToast () {
+export function useToast() {
   const toasts = useState<Toast[]>('toasts', () => [])
 
-  function add (toast: Partial<Toast>): Toast {
+  function add(toast: Partial<Toast>): Toast {
     const body = {
       id: new Date().getTime().toString(),
       open: true,
@@ -26,7 +26,7 @@ export function useToast () {
     return body
   }
 
-  function update (id: string | number, toast: Partial<Toast>) {
+  function update(id: string | number, toast: Partial<Toast>) {
     const index = toasts.value.findIndex((t: Toast) => t.id === id)
     if (index !== -1) {
       toasts.value[index] = {
@@ -36,7 +36,7 @@ export function useToast () {
     }
   }
 
-  function remove (id: string | number) {
+  function remove(id: string | number) {
     const index = toasts.value.findIndex((t: Toast) => t.id === id)
     if (index !== -1) {
       toasts.value[index] = {

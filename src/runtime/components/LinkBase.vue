@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<LinkBaseProps>(), {
   type: 'button'
 })
 
-function onClick (e: MouseEvent) {
+function onClick(e: MouseEvent) {
   if (props.disabled) {
     e.stopPropagation()
     e.preventDefault()
@@ -43,10 +43,10 @@ function onClick (e: MouseEvent) {
 <template>
   <Primitive
     v-bind="href ? {
-      as: 'a',
-      href: disabled ? undefined : href,
+      'as': 'a',
+      'href': disabled ? undefined : href,
       'aria-disabled': disabled ? 'true' : undefined,
-      role: disabled ? 'link' : undefined
+      'role': disabled ? 'link' : undefined
     } : as === 'button' ? {
       as,
       type,

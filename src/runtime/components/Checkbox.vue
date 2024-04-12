@@ -52,7 +52,7 @@ const inputId = _inputId.value ?? useId()
 
 const modelValue = defineModel<boolean | undefined>({
   default: undefined,
-  set (value) {
+  set(value) {
     return value
   }
 })
@@ -60,10 +60,10 @@ const modelValue = defineModel<boolean | undefined>({
 const indeterminate = computed(() => (modelValue.value === undefined && props.indeterminate))
 
 const checked = computed({
-  get () {
+  get() {
     return indeterminate.value ? 'indeterminate' : modelValue.value
   },
-  set (value) {
+  set(value) {
     modelValue.value = value === 'indeterminate' ? undefined : value
   }
 })
@@ -71,7 +71,7 @@ const checked = computed({
 // FIXME: I think there's a race condition between this and the v-model event.
 // This must be triggered after the value updates, otherwise the form validates
 // the previous value.
-function onChecked () {
+function onChecked() {
   emitFormChange()
 }
 

@@ -21,7 +21,7 @@ export default defineNuxtModule<ModuleOptions>({
     prefix: 'U',
     colors: undefined
   },
-  async setup (options, nuxt) {
+  async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
     options.colors = options.colors || ['primary', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchia', 'pink', 'rose']

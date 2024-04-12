@@ -71,7 +71,7 @@ export interface FormInjectedOptions {
 export interface FormFieldInjectedOptions<T> {
   inputId: Ref<string | undefined>
   name: ComputedRef<string | undefined>
-  // @ts-ignore FIXME: TS doesn't like this
+  // @ts-expect-error FIXME: TS doesn't like this
   size: ComputedRef<T['size']>
   error: ComputedRef<string | boolean | undefined>
   eagerValidation: ComputedRef<boolean | undefined>
@@ -83,7 +83,7 @@ export class FormValidationException extends Error {
   errors: FormErrorWithId[]
   childrens: FormValidationException[]
 
-  constructor (formId: string | number, errors: FormErrorWithId[], childErrors: FormValidationException[]) {
+  constructor(formId: string | number, errors: FormErrorWithId[], childErrors: FormValidationException[]) {
     super('Form validation exception')
     this.formId = formId
     this.errors = errors

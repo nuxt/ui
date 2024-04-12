@@ -73,14 +73,14 @@ const ui = computed(() => tv({ extend: input, slots: props.ui })({
 
 const inputRef = ref<HTMLInputElement | null>(null)
 
-function autoFocus () {
+function autoFocus() {
   if (props.autofocus) {
     inputRef.value?.focus()
   }
 }
 
 // Custom function to handle the v-model properties
-function updateInput (value: string) {
+function updateInput(value: string) {
   if (modelModifiers.trim) {
     value = value.trim()
   }
@@ -93,13 +93,13 @@ function updateInput (value: string) {
   emitFormInput()
 }
 
-function onInput (event: Event) {
+function onInput(event: Event) {
   if (!modelModifiers.lazy) {
     updateInput((event.target as HTMLInputElement).value)
   }
 }
 
-function onChange (event: Event) {
+function onChange(event: Event) {
   const value = (event.target as HTMLInputElement).value
 
   if (modelModifiers.lazy) {
@@ -112,7 +112,7 @@ function onChange (event: Event) {
   }
 }
 
-function onBlur (event: FocusEvent) {
+function onBlur(event: FocusEvent) {
   emitFormBlur()
   emit('blur', event)
 }
