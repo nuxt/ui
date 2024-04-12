@@ -15,27 +15,27 @@ export default (config: { colors: string[] }) => ({
         thumb: 'size-2 data-[state=checked]:translate-x-2',
         icon: 'size-1'
       },
-      xs: {
+      'xs': {
         root: 'h-4 w-7',
         thumb: 'size-3 data-[state=checked]:translate-x-3',
         icon: 'size-2'
       },
-      sm: {
+      'sm': {
         root: 'h-5 w-9',
         thumb: 'size-4 data-[state=checked]:translate-x-4',
         icon: 'size-3'
       },
-      md: {
+      'md': {
         root: 'h-6 w-11',
         thumb: 'size-5 data-[state=checked]:translate-x-5',
         icon: 'size-4'
       },
-      lg: {
+      'lg': {
         root: 'h-7 w-[52px]',
         thumb: 'size-6 data-[state=checked]:translate-x-6',
         icon: 'size-5'
       },
-      xl: {
+      'xl': {
         root: 'h-8 w-[60px]',
         thumb: 'size-7 data-[state=checked]:translate-x-7',
         icon: 'size-6'

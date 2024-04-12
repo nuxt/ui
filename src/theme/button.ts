@@ -25,27 +25,27 @@ export default (config: { colors: string[] }) => ({
         leadingIcon: 'size-4',
         trailingIcon: 'size-4'
       },
-      xs: {
+      'xs': {
         base: 'px-2.5 py-1.5 text-xs gap-x-1.5',
         leadingIcon: 'size-4',
         trailingIcon: 'size-4'
       },
-      sm: {
+      'sm': {
         base: 'px-2.5 py-1.5 text-sm gap-x-1.5',
         leadingIcon: 'size-5',
         trailingIcon: 'size-5'
       },
-      md: {
+      'md': {
         base: 'px-3 py-2 text-sm gap-x-2',
         leadingIcon: 'size-5',
         trailingIcon: 'size-5'
       },
-      lg: {
+      'lg': {
         base: 'px-3.5 py-2.5 text-sm gap-x-2.5',
         leadingIcon: 'size-5',
         trailingIcon: 'size-5'
       },
-      xl: {
+      'xl': {
         base: 'px-3.5 py-2.5 text-base gap-x-2.5',
         leadingIcon: 'size-6',
         trailingIcon: 'size-6'

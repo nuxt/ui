@@ -13,19 +13,19 @@ export default {
       '2xs': {
         root: 'size-5 text-[10px]'
       },
-      xs: {
+      'xs': {
         root: 'size-6 text-xs'
       },
-      sm: {
+      'sm': {
         root: 'size-7 text-sm'
       },
-      md: {
+      'md': {
         root: 'size-8 text-base'
       },
-      lg: {
+      'lg': {
         root: 'size-9 text-lg'
       },
-      xl: {
+      'xl': {
         root: 'size-10 text-xl'
       },
       '2xl': {

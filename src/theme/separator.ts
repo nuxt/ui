@@ -28,11 +28,11 @@ export default (config: { colors: string[] }) => ({
     },
     size: {
       '2xs': '',
-      xs: '',
-      sm: '',
-      md: '',
-      lg: '',
-      xl: ''
+      'xs': '',
+      'sm': '',
+      'md': '',
+      'lg': '',
+      'xl': ''
     },
     type: {
       solid: {

@@ -17,35 +17,35 @@ export default (config: { colors: string[] }) => {
           leadingIcon: 'size-4',
           trailingIcon: 'size-4'
         },
-        xs: {
+        'xs': {
           base: 'text-sm gap-x-1.5 px-2.5 py-1',
           leading: 'px-2.5',
           trailing: 'px-2.5',
           leadingIcon: 'size-4',
           trailingIcon: 'size-4'
         },
-        sm: {
+        'sm': {
           base: 'text-sm gap-x-1.5 px-2.5 py-1.5',
           leading: 'px-2.5',
           trailing: 'px-2.5',
           leadingIcon: 'size-5',
           trailingIcon: 'size-5'
         },
-        md: {
+        'md': {
           base: 'text-sm gap-x-1.5 px-3 py-2',
           leading: 'px-3',
           trailing: 'px-3',
           leadingIcon: 'size-5',
           trailingIcon: 'size-5'
         },
-        lg: {
+        'lg': {
           base: 'text-sm gap-x-2.5 px-3.5 py-2.5',
           leading: 'px-3.5',
           trailing: 'px-3.5',
           leadingIcon: 'size-5',
           trailingIcon: 'size-5'
         },
-        xl: {
+        'xl': {
           base: 'text-base gap-x-2.5 px-3.5 py-2.5',
           leading: 'px-3.5',
           trailing: 'px-3.5',

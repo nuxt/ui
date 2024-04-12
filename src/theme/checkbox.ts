@@ -17,27 +17,27 @@ export default (config: { colors: string[] }) => ({
         container: 'h-4',
         wrapper: 'text-xs'
       },
-      xs: {
+      'xs': {
         base: 'size-3.5',
         container: 'h-4',
         wrapper: 'text-xs'
       },
-      sm: {
+      'sm': {
         base: 'size-4',
         container: 'h-5',
         wrapper: 'text-sm'
       },
-      md: {
+      'md': {
         base: 'size-[18px]',
         container: 'h-5',
         wrapper: 'text-sm'
       },
-      lg: {
+      'lg': {
         base: 'size-5',
         container: 'h-6',
         wrapper: 'text-base'
       },
-      xl: {
+      'xl': {
         base: 'size-[22px]',
         container: 'h-6',
         wrapper: 'text-base'
@@ -62,7 +62,7 @@ export default (config: { colors: string[] }) => ({
       true: ''
     }
   },
-  compoundVariants: config.colors.flatMap((color) => ([{
+  compoundVariants: config.colors.flatMap(color => ([{
     color,
     checked: true,
     class: `ring-2 ring-inset ring-${color}-500 dark:ring-${color}-400 bg-${color}-500 dark:bg-${color}-400`
