@@ -5,7 +5,7 @@ exports[`Toast > renders with actions correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
@@ -21,8 +21,7 @@ exports[`Toast > renders with actions correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-primary-500 dark:border-primary-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-primary-500 dark:border-primary-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -33,7 +32,7 @@ exports[`Toast > renders with avatar correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-11 text-[22px] shrink-0"><img role="img" src="https://avatars.githubusercontent.com/u/739984?v=4" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-gray-900 dark:text-white">Toast</div>
@@ -45,8 +44,7 @@ exports[`Toast > renders with avatar correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-primary-500 dark:border-primary-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-primary-500 dark:border-primary-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -57,7 +55,7 @@ exports[`Toast > renders with class correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center bg-gray-50 dark:bg-gray-800/50" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
@@ -70,8 +68,7 @@ exports[`Toast > renders with class correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-primary-500 dark:border-primary-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-primary-500 dark:border-primary-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -82,7 +79,7 @@ exports[`Toast > renders with color correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
@@ -95,8 +92,7 @@ exports[`Toast > renders with color correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-green-500 dark:border-green-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-green-500 dark:border-green-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -107,7 +103,7 @@ exports[`Toast > renders with description actions correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
@@ -125,8 +121,7 @@ exports[`Toast > renders with description actions correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-primary-500 dark:border-primary-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-primary-500 dark:border-primary-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -137,7 +132,7 @@ exports[`Toast > renders with description correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
@@ -150,8 +145,7 @@ exports[`Toast > renders with description correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-primary-500 dark:border-primary-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-primary-500 dark:border-primary-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -162,7 +156,7 @@ exports[`Toast > renders with icon correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!---->
       <div class="w-0 flex-1 flex flex-col gap-1">
@@ -175,8 +169,7 @@ exports[`Toast > renders with icon correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-primary-500 dark:border-primary-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-primary-500 dark:border-primary-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -187,7 +180,7 @@ exports[`Toast > renders with title & description correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
@@ -202,8 +195,7 @@ exports[`Toast > renders with title & description correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-primary-500 dark:border-primary-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-primary-500 dark:border-primary-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -214,7 +206,7 @@ exports[`Toast > renders with title correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
@@ -227,8 +219,7 @@ exports[`Toast > renders with title correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-primary-500 dark:border-primary-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-primary-500 dark:border-primary-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -239,7 +230,7 @@ exports[`Toast > renders with type correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
@@ -252,8 +243,7 @@ exports[`Toast > renders with type correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-primary-500 dark:border-primary-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-primary-500 dark:border-primary-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -264,7 +254,7 @@ exports[`Toast > renders with ui correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
@@ -277,8 +267,7 @@ exports[`Toast > renders with ui correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-primary-500 dark:border-primary-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-primary-500 dark:border-primary-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -289,7 +278,7 @@ exports[`Toast > renders without close correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: -16px;">
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
@@ -298,8 +287,7 @@ exports[`Toast > renders without close correctly 1`] = `
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="absolute inset-0 rounded-lg border-b-2 z-[-1] border-primary-500 dark:border-primary-400"></div>
-      <div class="absolute inset-0 bottom-[2px] bg-white dark:bg-gray-900 z-[-1]"></div>
+      <div class="absolute inset-0 border-b-2 z-[-1] border-primary-500 dark:border-primary-400" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
