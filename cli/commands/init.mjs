@@ -17,7 +17,7 @@ export default defineCommand({
       description: 'Name of the component.'
     }
   },
-  async setup ({ args }) {
+  async setup({ args }) {
     const name = args.name
     if (!name) {
       consola.error('name argument is missing!')
