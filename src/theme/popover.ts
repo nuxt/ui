@@ -1,6 +1,6 @@
 export default {
   slots: {
-    content: 'bg-white dark:bg-gray-900 shadow-lg rounded-md ring ring-gray-200 dark:ring-gray-800 will-change-[transform,opacity]',
+    content: 'bg-white dark:bg-gray-900 shadow-lg rounded-md ring ring-gray-200 dark:ring-gray-800',
     arrow: 'fill-gray-200 dark:fill-gray-800'
   },
   variants: {
