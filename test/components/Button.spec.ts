@@ -15,6 +15,7 @@ describe('Button', () => {
     ['with color', { props: { label: 'Button', color: 'red' as const } }],
     ['with variant outline', { props: { label: 'Button', variant: 'outline' as const } }],
     ['with variant soft', { props: { label: 'Button', variant: 'soft' as const } }],
+    ['with variant subtle', { props: { label: 'Button', variant: 'subtle' as const } }],
     ['with variant ghost', { props: { label: 'Button', variant: 'ghost' as const } }],
     ['with variant link', { props: { label: 'Button', variant: 'link' as const } }],
     ['with icon', { props: { icon: 'i-heroicons-rocket-launch' } }],

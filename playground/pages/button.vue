@@ -2,6 +2,7 @@
 import theme from '#build/ui/button'
 
 const sizes = Object.keys(theme.variants.size)
+const variants = Object.keys(theme.variants.variant)
 </script>
 
 <template>
@@ -40,11 +41,7 @@ const sizes = Object.keys(theme.variants.size)
       </UButton>
     </div>
     <div class="flex items-center gap-2">
-      <UButton icon="i-heroicons-rocket-launch" label="Button" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" variant="outline" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" variant="soft" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" variant="ghost" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" variant="link" />
+      <UButton v-for="variant in variants" :key="variant" icon="i-heroicons-rocket-launch" label="Button" :variant="(variant as any)" />
     </div>
     <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="white" />
@@ -79,7 +76,7 @@ const sizes = Object.keys(theme.variants.size)
       <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" :size="(size as any)" />
     </div>
     <div class="flex items-center gap-2">
-      <UButton icon="i-heroicons-rocket-launch" trailing-icon="i-heroicons-chevron-down-20-solid" label="Block" loading block />
+      <UButton icon="i-heroicons-rocket-launch" trailing-icon="i-heroicons-chevron-down-20-solid" label="Block" block />
     </div>
     <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-cloud-arrow-down" label="Button" class="group" :ui="{ leadingIcon: 'group-hover:animate-pulse' }" />
