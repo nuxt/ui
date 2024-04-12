@@ -1,5 +1,13 @@
 import { reactive, ref, nextTick } from 'vue'
 import { describe, it, expect, test, beforeEach, vi } from 'vitest'
+import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
+import { flushPromises } from '@vue/test-utils'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { z } from 'zod'
+import * as yup from 'yup'
+import Joi from 'joi'
+import * as valibot from 'valibot'
+import ComponentRender from '../component-render'
 import type { FormProps } from '../../src/runtime/components/Form.vue'
 import {
   UForm,
@@ -15,16 +23,8 @@ import {
   // UToggle,
   // URange
 } from '#components'
-import { DOMWrapper, flushPromises, VueWrapper } from '@vue/test-utils'
-import ComponentRender from '../component-render'
 
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { z } from 'zod'
-import * as yup from 'yup'
-import Joi from 'joi'
-import * as valibot from 'valibot'
-
-async function triggerEvent (
+async function triggerEvent(
   el: DOMWrapper<Element> | VueWrapper<any, any>,
   event: string
 ) {
@@ -32,7 +32,7 @@ async function triggerEvent (
   return flushPromises()
 }
 
-async function setValue (
+async function setValue(
   el: DOMWrapper<Element> | VueWrapper<any, any>,
   value: any
 ) {
@@ -40,13 +40,14 @@ async function setValue (
   return flushPromises()
 }
 
-async function renderForm (options: {
+async function renderForm(options: {
   props: Partial<FormProps<any>>
   slotVars?: object
   slotComponents?: any
   slotTemplate: string
 }) {
   const state = reactive({})
+
   return await mountSuspended(UForm, {
     props: {
       id: 42,
@@ -55,8 +56,8 @@ async function renderForm (options: {
     },
     slots: {
       default: {
-        // @ts-ignore
-        setup () {
+        // @ts-expect-error setup does not exist on type
+        setup() {
           return { state, ...options.slotVars }
         },
         components: {
@@ -112,7 +113,7 @@ describe('Form', () => {
     }
     ],
     ['custom', {
-      async validate (state: any) {
+      async validate(state: any) {
         const errs = []
         if (!state.email)
           errs.push({ name: 'email', message: 'Email is required' })
@@ -152,7 +153,7 @@ describe('Form', () => {
 
     await triggerEvent(form, 'submit.prevent')
 
-    // @ts-ignore
+    // @ts-expect-error object is possibly undefined
     expect(wrapper.emitted('error')[0][0].errors).toMatchObject([
       {
         id: 'password',
@@ -181,7 +182,7 @@ describe('Form', () => {
     const wrapper = await renderForm({
       props: {
         validateOn: ['blur'],
-        async validate (state: any) {
+        async validate(state: any) {
           if (!state.value)
             return [{ name: 'value', message: 'Error message' }]
           return []
@@ -216,7 +217,7 @@ describe('Form', () => {
     const wrapper = await renderForm({
       props: {
         validateOn: ['change'],
-        async validate (state: any) {
+        async validate(state: any) {
           if (!state.value)
             return [{ name: 'value', message: 'Error message' }]
           return []
@@ -416,7 +417,7 @@ describe('Form', () => {
     const wrapper = await renderForm({
       props: {
         validateOn: ['input', 'blur'],
-        async validate (state: any) {
+        async validate(state: any) {
           if (!state.value)
             return [{ name: 'value', message: 'Error message' }]
           return []
@@ -445,10 +446,9 @@ describe('Form', () => {
 
     await setValue(input, validInputValue)
     // Waiting because of the debounced validation on input event.
-    await new Promise((r) => setTimeout(r, 50))
+    await new Promise(r => setTimeout(r, 50))
     expect(wrapper.text()).not.toContain('Error message')
   })
-
 
   describe('api', async () => {
     let wrapper: any
@@ -462,7 +462,7 @@ describe('Form', () => {
           UForm,
           UInput
         },
-        setup () {
+        setup() {
           const form = ref()
           const state = reactive({})
           const schema = z.object({
@@ -605,7 +605,7 @@ describe('Form', () => {
           UForm,
           UInput
         },
-        setup () {
+        setup() {
           const form = ref()
           const state = reactive({ nested: {} })
           const schema = z.object({
@@ -617,7 +617,6 @@ describe('Form', () => {
           const nestedSchema = z.object({
             field: z.string().min(1)
           })
-
 
           const onError = vi.fn()
           const onSubmit = vi.fn()
@@ -651,7 +650,7 @@ describe('Form', () => {
       expect(wrapper.setupState.onSubmit).not.toHaveBeenCalled()
       expect(wrapper.setupState.onError).toHaveBeenCalledTimes(1)
       const onErrorCallArgs = wrapper.setupState.onError.mock.lastCall[0]
-      expect(onErrorCallArgs.childrens[0].errors).toMatchObject([ { id: 'nestedInput', name: 'field', message: 'Required' } ])
+      expect(onErrorCallArgs.childrens[0].errors).toMatchObject([{ id: 'nestedInput', name: 'field', message: 'Required' }])
       expect(onErrorCallArgs.errors).toMatchObject([
         { id: 'emailInput', name: 'email', message: 'Required' },
         { id: 'passwordInput', name: 'password', message: 'Required' }

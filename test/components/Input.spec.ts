@@ -1,7 +1,7 @@
 import { describe, it, expect, test } from 'vitest'
+import { mount } from '@vue/test-utils'
 import Input, { type InputProps } from '../../src/runtime/components/Input.vue'
 import ComponentRender from '../component-render'
-import { mount } from '@vue/test-utils'
 
 describe('Input', () => {
   it.each([
@@ -35,9 +35,9 @@ describe('Input', () => {
   })
 
   it.each([
-    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' } ],
-    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 } ],
-    ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' } ]
+    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+    ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }]
   ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
     const wrapper = mount(Input, {
       ...options

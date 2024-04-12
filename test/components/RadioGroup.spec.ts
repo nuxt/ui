@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
+import { defu } from 'defu'
 import RadioGroup, { type RadioGroupProps } from '../../src/runtime/components/RadioGroup.vue'
 import ComponentRender from '../component-render'
-import { defu } from 'defu'
 
 const defaultOptions = [
   { value: '1', label: 'Option 1' },
