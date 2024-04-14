@@ -90,7 +90,6 @@ export default async function installTailwind (
       const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
       module.exports = {
-        darkMode: 'class',
         plugins: [
           require('@tailwindcss/forms')({ strategy: 'class' }),
           require('@tailwindcss/aspect-ratio'),
