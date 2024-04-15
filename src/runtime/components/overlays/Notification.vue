@@ -191,7 +191,7 @@ export default defineComponent({
       emit('close')
     }
 
-    function initTimer() {
+    function initTimer () {
       if (timer) {
         timer.stop()
       }
