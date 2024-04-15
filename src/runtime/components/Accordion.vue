@@ -56,7 +56,7 @@ const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'type'), emits)
 const contentProps = toRef(() => props.content)
 
-const ui = computed(() => tv({ extend: accordion, slots: props.ui })())
+const ui = computed(() => tv({ extend: accordion, slots: props.ui })({ disabled: props.disabled }))
 </script>
 
 <template>
