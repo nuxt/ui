@@ -137,7 +137,7 @@ exports[`FormField > renders with label slot correctly 1`] = `
 exports[`FormField > renders with required correctly 1`] = `
 "<div class="text-sm">
   <div class="">
-    <div class="flex content-center items-center justify-between"><label for="2" class="block font-medium text-gray-700 dark:text-gray-200 after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400">Username</label>
+    <div class="flex content-center items-center justify-between"><label for="1" class="block font-medium text-gray-700 dark:text-gray-200 after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400">Username</label>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -148,10 +148,66 @@ exports[`FormField > renders with required correctly 1`] = `
 </div>"
 `;
 
-exports[`FormField > renders with size correctly 1`] = `
+exports[`FormField > renders with size lg correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="8" class="block font-medium text-gray-700 dark:text-gray-200">Username</label>
+      <!--v-if-->
+    </div>
+    <p class="text-gray-500 dark:text-gray-400">Enter your username</p>
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with size md correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="7" class="block font-medium text-gray-700 dark:text-gray-200">Username</label>
+      <!--v-if-->
+    </div>
+    <p class="text-gray-500 dark:text-gray-400">Enter your username</p>
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with size sm correctly 1`] = `
+"<div class="text-xs">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="6" class="block font-medium text-gray-700 dark:text-gray-200">Username</label>
+      <!--v-if-->
+    </div>
+    <p class="text-gray-500 dark:text-gray-400">Enter your username</p>
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with size xl correctly 1`] = `
 "<div class="text-base">
   <div class="">
-    <div class="flex content-center items-center justify-between"><label for="1" class="block font-medium text-gray-700 dark:text-gray-200">Username</label>
+    <div class="flex content-center items-center justify-between"><label for="9" class="block font-medium text-gray-700 dark:text-gray-200">Username</label>
+      <!--v-if-->
+    </div>
+    <p class="text-gray-500 dark:text-gray-400">Enter your username</p>
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with size xs correctly 1`] = `
+"<div class="text-xs">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="5" class="block font-medium text-gray-700 dark:text-gray-200">Username</label>
       <!--v-if-->
     </div>
     <p class="text-gray-500 dark:text-gray-400">Enter your username</p>

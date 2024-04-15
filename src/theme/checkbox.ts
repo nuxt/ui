@@ -12,33 +12,28 @@ export default (config: { colors: string[] }) => ({
   variants: {
     color: Object.fromEntries(config.colors.map((color: string) => [color, `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`])),
     size: {
-      '2xs': {
+      xs: {
         base: 'size-3',
         container: 'h-4',
         wrapper: 'text-xs'
       },
-      'xs': {
+      sm: {
         base: 'size-3.5',
         container: 'h-4',
         wrapper: 'text-xs'
       },
-      'sm': {
+      md: {
         base: 'size-4',
         container: 'h-5',
         wrapper: 'text-sm'
       },
-      'md': {
+      lg: {
         base: 'size-[18px]',
         container: 'h-5',
         wrapper: 'text-sm'
       },
-      'lg': {
+      xl: {
         base: 'size-5',
-        container: 'h-6',
-        wrapper: 'text-base'
-      },
-      'xl': {
-        base: 'size-[22px]',
         container: 'h-6',
         wrapper: 'text-base'
       }
@@ -73,7 +68,7 @@ export default (config: { colors: string[] }) => ({
   }
   ])),
   defaultVariants: {
-    size: 'sm',
+    size: 'md',
     color: 'primary'
   }
 })

@@ -93,7 +93,7 @@ const ui = computed(() => tv({ extend: alert, slots: props.ui })({
       <UButton
         v-if="close"
         :icon="appConfig.ui.icons.close"
-        size="sm"
+        size="md"
         color="gray"
         variant="link"
         aria-label="Close"

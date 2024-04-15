@@ -54,7 +54,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
       <slot name="trailing" :item="item" :active="active">
         <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon()" />
         <span v-else-if="item.shortcuts?.length" :class="ui.itemTrailingShortcuts()">
-          <UKbd v-for="(shortcut, shortcutIndex) in item.shortcuts" :key="shortcutIndex" size="sm" v-bind="typeof shortcut === 'string' ? { value: shortcut } : shortcut" />
+          <UKbd v-for="(shortcut, shortcutIndex) in item.shortcuts" :key="shortcutIndex" size="md" v-bind="typeof shortcut === 'string' ? { value: shortcut } : shortcut" />
         </span>
       </slot>
     </span>

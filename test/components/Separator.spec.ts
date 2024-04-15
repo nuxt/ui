@@ -7,7 +7,6 @@ describe('Separator', () => {
     ['basic case', {}],
     ['with as', { props: { as: 'span' } }],
     ['with class', { props: { class: 'flex-row-reverse' } }],
-    ['with size 2xs', { props: { size: '2xs' as const } }],
     ['with size xs', { props: { size: 'xs' as const } }],
     ['with size sm', { props: { size: 'sm' as const } }],
     ['with size md', { props: { size: 'md' as const } }],

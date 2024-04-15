@@ -4,9 +4,11 @@ import ComponentRender from '../component-render'
 
 describe('Card', () => {
   it.each([
-    ['basic case', {}],
+    // Props
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'rounded-xl' } }],
+    ['with ui', { props: { ui: { body: 'font-bold' } } }],
+    // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with header slot', { slots: { header: () => 'Header slot' } }],
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }]

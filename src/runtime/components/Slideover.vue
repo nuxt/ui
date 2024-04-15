@@ -107,7 +107,7 @@ const ui = computed(() => tv({ extend: slideover, slots: props.ui })({
                   <UButton
                     v-if="close !== null"
                     :icon="appConfig.ui.icons.close"
-                    size="sm"
+                    size="md"
                     color="gray"
                     variant="ghost"
                     aria-label="Close"

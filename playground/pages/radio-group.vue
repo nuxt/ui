@@ -23,7 +23,7 @@ const optionsWithDescription = [
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 ml-[-142px]">
+    <div class="flex flex-col gap-4">
       <URadioGroup :options="options" default-value="1" />
       <URadioGroup :options="literalOptions" />
       <URadioGroup :options="options" label="Disabled" disabled />
@@ -31,15 +31,15 @@ const optionsWithDescription = [
       <URadioGroup :options="options" orientation="horizontal" />
     </div>
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-4 ml-[34px]">
       <URadioGroup v-for="size in sizes" :key="size" :size="(size as any)" :options="options" />
     </div>
 
-    <div class="flex items-center gap-4 ml-[75px]">
+    <div class="flex items-center gap-4 ml-[74px]">
       <URadioGroup v-for="size in sizes" :key="size" :size="(size as any)" :options="optionsWithDescription" />
     </div>
 
-    <div class="flex gap-4 ml-[-142px]">
+    <div class="flex gap-4">
       <URadioGroup :options="options" legend="Legend" />
       <URadioGroup :options="options" legend="Legend" required />
       <URadioGroup :options="options">

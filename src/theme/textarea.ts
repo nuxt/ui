@@ -5,23 +5,20 @@ export default (config: { colors: string[] }) => ({
   },
   variants: {
     size: {
-      '2xs': {
+      xs: {
         base: 'text-xs gap-x-1 px-2 py-1'
       },
-      'xs': {
+      sm: {
         base: 'text-sm gap-x-1.5 px-2.5 py-1'
       },
-      'sm': {
+      md: {
         base: 'text-sm gap-x-1.5 px-2.5 py-1.5'
       },
-      'md': {
+      lg: {
         base: 'text-sm gap-x-1.5 px-3 py-2'
       },
-      'lg': {
+      xl: {
         base: 'text-sm gap-x-2.5 px-3.5 py-2.5'
-      },
-      'xl': {
-        base: 'text-base gap-x-2.5 px-3.5 py-2.5'
       }
     },
     variant: {
@@ -50,7 +47,7 @@ export default (config: { colors: string[] }) => ({
     }
   ],
   defaultVariants: {
-    size: 'sm',
+    size: 'md',
     color: 'white',
     variant: 'outline'
   }

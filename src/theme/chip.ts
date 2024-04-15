@@ -49,7 +49,7 @@ export default (config: { colors: string[] }) => ({
     class: 'translate-y-1/2 -translate-x-1/2 transform'
   }],
   defaultVariants: {
-    size: 'sm',
+    size: 'md',
     color: 'primary',
     position: 'top-right'
   }

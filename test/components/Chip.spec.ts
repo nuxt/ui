@@ -1,32 +1,24 @@
 import { describe, it, expect } from 'vitest'
 import Chip, { type ChipProps } from '../../src/runtime/components/Chip.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/chip'
 
 describe('Chip', () => {
+  const sizes = Object.keys(theme.variants.size) as any
+  const colors = Object.keys(theme.variants.color) as any
+  const positions = Object.keys(theme.variants.position) as any
+
   it.each([
-    ['basic case', {}],
+    // Props
     ['with as', { props: { as: 'span' } }],
-    ['with class', { props: { class: 'mx-auto' } }],
-    ['with ui', { props: { ui: { base: 'text-gray-500 dark:text-gray-400' } } }],
     ['with show', { props: { show: true } }],
     ['with inset', { props: { inset: true } }],
-    ['with position top-right', { props: { show: true, position: 'top-right' as const } }],
-    ['with position bottom-right', { props: { show: true, position: 'bottom-right' as const } }],
-    ['with position top-left', { props: { show: true, position: 'top-left' as const } }],
-    ['with position bottom-left', { props: { show: true, position: 'bottom-left' as const } }],
-    ['with size 3xs', { props: { show: true, size: '3xs' as const } }],
-    ['with size 2xs', { props: { show: true, size: '2xs' as const } }],
-    ['with size xs', { props: { show: true, size: 'xs' as const } }],
-    ['with size sm', { props: { show: true, size: 'sm' as const } }],
-    ['with size md', { props: { show: true, size: 'md' as const } }],
-    ['with size lg', { props: { show: true, size: 'lg' as const } }],
-    ['with size xl', { props: { show: true, size: 'xl' as const } }],
-    ['with size 2xl', { props: { show: true, size: '2xl' as const } }],
-    ['with size 3xl', { props: { show: true, size: '3xl' as const } }],
-    ['with color green', { props: { show: true, color: 'green' as const } }],
-    ['with color white', { props: { show: true, color: 'white' as const } }],
-    ['with color gray', { props: { show: true, color: 'gray' as const } }],
-    ['with color black', { props: { show: true, color: 'black' as const } }],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { show: true, size } }]),
+    ...colors.map((color: string) => [`with color ${color}`, { props: { show: true, color } }]),
+    ...positions.map((position: string) => [`with position ${position}`, { props: { show: true, position } }]),
+    ['with class', { props: { class: 'mx-auto' } }],
+    ['with ui', { props: { ui: { base: 'text-gray-500 dark:text-gray-400' } } }],
+    // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChipProps & { show?: boolean }, slots?: any }) => {

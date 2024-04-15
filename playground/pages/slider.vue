@@ -25,7 +25,7 @@ const value = ref(50)
     </div>
 
     <div class="flex items-center gap-4">
-      <USlider v-for="size in sizes" :key="size" :size="(size as any)" class="w-32" />
+      <USlider v-for="size in sizes" :key="size" v-model="value" :size="(size as any)" class="w-48" />
     </div>
 
     <div class="h-48">

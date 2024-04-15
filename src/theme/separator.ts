@@ -27,12 +27,11 @@ export default (config: { colors: string[] }) => ({
       }
     },
     size: {
-      '2xs': '',
-      'xs': '',
-      'sm': '',
-      'md': '',
-      'lg': '',
-      'xl': ''
+      xs: '',
+      sm: '',
+      md: '',
+      lg: '',
+      xl: ''
     },
     type: {
       solid: {
@@ -48,56 +47,48 @@ export default (config: { colors: string[] }) => ({
   },
   compoundVariants: [{
     orientation: 'horizontal',
-    size: '2xs',
+    size: 'xs',
     class: { border: 'border-t' }
   }, {
     orientation: 'horizontal',
-    size: 'xs',
+    size: 'sm',
     class: { border: 'border-t-[2px]' }
   }, {
     orientation: 'horizontal',
-    size: 'sm',
+    size: 'md',
     class: { border: 'border-t-[3px]' }
   }, {
     orientation: 'horizontal',
-    size: 'md',
+    size: 'lg',
     class: { border: 'border-t-[4px]' }
   }, {
     orientation: 'horizontal',
-    size: 'lg',
-    class: { border: 'border-t-[5px]' }
-  }, {
-    orientation: 'horizontal',
     size: 'xl',
-    class: { border: 'border-t-[6px]' }
-  }, {
-    orientation: 'vertical',
-    size: '2xs',
-    class: { border: 'border-s' }
+    class: { border: 'border-t-[5px]' }
   }, {
     orientation: 'vertical',
     size: 'xs',
-    class: { border: 'border-s-[2px]' }
+    class: { border: 'border-s' }
   }, {
     orientation: 'vertical',
     size: 'sm',
-    class: { border: 'border-s-[3px]' }
+    class: { border: 'border-s-[2px]' }
   }, {
     orientation: 'vertical',
     size: 'md',
-    class: { border: 'border-s-[4px]' }
+    class: { border: 'border-s-[3px]' }
   }, {
     orientation: 'vertical',
     size: 'lg',
-    class: { border: 'border-s-[5px]' }
+    class: { border: 'border-s-[4px]' }
   }, {
     orientation: 'vertical',
     size: 'xl',
-    class: { border: 'border-s-[6px]' }
+    class: { border: 'border-s-[5px]' }
   }],
   defaultVariants: {
     color: 'gray',
-    size: '2xs',
+    size: 'xs',
     type: 'solid'
   }
 })

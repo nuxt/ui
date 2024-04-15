@@ -12,12 +12,11 @@ export default {
   },
   variants: {
     size: {
-      '2xs': { root: 'text-xs' },
-      'xs': { root: 'text-xs' },
-      'sm': { root: 'text-sm' },
-      'md': { root: 'text-sm' },
-      'lg': { root: 'text-base' },
-      'xl': { root: 'text-base' }
+      xs: { root: 'text-xs' },
+      sm: { root: 'text-xs' },
+      md: { root: 'text-sm' },
+      lg: { root: 'text-sm' },
+      xl: { root: 'text-base' }
     },
     required: {
       true: {
@@ -26,6 +25,6 @@ export default {
     }
   },
   defaultVariants: {
-    size: 'sm'
+    size: 'md'
   }
 }

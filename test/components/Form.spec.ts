@@ -72,7 +72,9 @@ async function renderForm(options: {
 
 describe('Form', () => {
   it.each([
-    ['basic case', { props: { state: {} } }],
+    // Props
+    ['with state', { props: { state: {} } }],
+    // Slots
     ['with default slot', { props: { state: {} }, slots: { default: 'Form slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props: FormProps<any> }) => {
     const html = await ComponentRender(nameOrHtml, options, UForm)

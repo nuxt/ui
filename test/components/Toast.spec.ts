@@ -17,6 +17,7 @@ const ToastWrapper = defineComponent({
 
 describe('Toast', () => {
   it.each([
+    // Props
     ['with title', { props: { title: 'Toast' } }],
     ['with description', { props: { description: 'This is a toast' } }],
     ['with title & description', { props: { title: 'Toast', description: 'This is a toast' } }],
@@ -29,6 +30,7 @@ describe('Toast', () => {
     ['with type', { props: { type: 'background' as const } }],
     ['with class', { props: { class: 'bg-gray-50 dark:bg-gray-800/50' } }],
     ['with ui', { props: { title: 'Toast', ui: { title: 'font-bold' } } }],
+    // Slots
     ['with leading slot', { slots: { title: () => 'Leading slot' } }],
     ['with title slot', { slots: { title: () => 'Title slot' } }],
     ['with description slot', { slots: { description: () => 'Description slot' } }],

@@ -63,6 +63,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 // const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
 const ui = computed(() => tv({ extend: input, slots: props.ui })({
+  type: props.type,
   color: color.value,
   variant: props.variant,
   size: size?.value,

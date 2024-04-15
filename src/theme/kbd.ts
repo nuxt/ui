@@ -7,13 +7,13 @@ export default {
       black: 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
     },
     size: {
-      xs: 'h-4 min-w-[16px] text-[10px]',
-      sm: 'h-5 min-w-[20px] text-[11px]',
-      md: 'h-6 min-w-[24px] text-[12px]'
+      sm: 'h-4 min-w-[16px] text-[10px]',
+      md: 'h-5 min-w-[20px] text-[11px]',
+      lg: 'h-6 min-w-[24px] text-[12px]'
     }
   },
   defaultVariants: {
     color: 'white',
-    size: 'sm'
+    size: 'md'
   }
 }

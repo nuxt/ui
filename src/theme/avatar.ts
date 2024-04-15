@@ -37,6 +37,6 @@ export default {
     }
   },
   defaultVariants: {
-    size: 'sm'
+    size: 'md'
   }
 }

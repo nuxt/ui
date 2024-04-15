@@ -4,9 +4,10 @@ import ComponentRender from '../component-render'
 
 describe('Container', () => {
   it.each([
-    ['basic case', {}],
+    // Props
     ['with as', { props: { as: 'article' } }],
     ['with class', { props: { class: 'max-w-5xl' } }],
+    // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContainerProps, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, Container)

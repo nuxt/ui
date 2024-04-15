@@ -15,47 +15,40 @@ export default (config: { colors: string[] }) => ({
       icon: `group-data-[state=checked]:text-${color}-500 dark:group-data-[state=checked]:text-${color}-400`
     }])),
     size: {
-      '2xs': {
+      xs: {
         base: 'h-3 w-5',
         container: 'h-4',
         thumb: 'size-2 data-[state=checked]:translate-x-2',
         wrapper: 'text-xs',
         icon: 'size-1'
       },
-      'xs': {
+      sm: {
         base: 'h-4 w-7',
         container: 'h-4',
         thumb: 'size-3 data-[state=checked]:translate-x-3',
         wrapper: 'text-xs',
         icon: 'size-2'
       },
-      'sm': {
+      md: {
         base: 'h-5 w-9',
         container: 'h-5',
         thumb: 'size-4 data-[state=checked]:translate-x-4',
         wrapper: 'text-sm',
         icon: 'size-3'
       },
-      'md': {
+      lg: {
         base: 'h-6 w-11',
         container: 'h-5',
         thumb: 'size-5 data-[state=checked]:translate-x-5',
         wrapper: 'text-sm',
         icon: 'size-4'
       },
-      'lg': {
+      xl: {
         base: 'h-7 w-[52px]',
         container: 'h-6',
         thumb: 'size-6 data-[state=checked]:translate-x-6',
         wrapper: 'text-base',
         icon: 'size-5'
-      },
-      'xl': {
-        base: 'h-8 w-[60px]',
-        container: 'h-6',
-        thumb: 'size-7 data-[state=checked]:translate-x-7',
-        wrapper: 'text-base',
-        icon: 'size-6'
       }
     },
     checked: {
@@ -88,6 +81,6 @@ export default (config: { colors: string[] }) => ({
   },
   defaultVariants: {
     color: 'primary',
-    size: 'sm'
+    size: 'md'
   }
 })

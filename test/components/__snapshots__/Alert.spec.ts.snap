@@ -48,10 +48,10 @@ exports[`Alert > renders with close slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with color black correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-white dark:text-gray-900 bg-gray-900 dark:bg-white">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-white dark:text-gray-900 bg-gray-900 dark:bg-white" label="Badge">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Title</div>
+    <!--v-if-->
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -60,10 +60,10 @@ exports[`Alert > renders with color black correctly 1`] = `
 `;
 
 exports[`Alert > renders with color gray correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800" label="Badge">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Title</div>
+    <!--v-if-->
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -72,10 +72,34 @@ exports[`Alert > renders with color gray correctly 1`] = `
 `;
 
 exports[`Alert > renders with color green correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-green-500 dark:bg-green-400 text-white dark:text-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-green-500 dark:bg-green-400 text-white dark:text-gray-900" label="Badge">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Title</div>
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Alert > renders with color primary correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900" label="Badge">
+  <!--v-if-->
+  <div class="min-w-0 flex-1 flex flex-col gap-1">
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Alert > renders with color red correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-red-500 dark:bg-red-400 text-white dark:text-gray-900" label="Badge">
+  <!--v-if-->
+  <div class="min-w-0 flex-1 flex flex-col gap-1">
+    <!--v-if-->
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -84,10 +108,10 @@ exports[`Alert > renders with color green correctly 1`] = `
 `;
 
 exports[`Alert > renders with color white correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900" label="Badge">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Title</div>
+    <!--v-if-->
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -180,23 +204,11 @@ exports[`Alert > renders with ui correctly 1`] = `
 </div>"
 `;
 
-exports[`Alert > renders with variant link correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center">
-  <!--v-if-->
-  <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Title</div>
-    <!--v-if-->
-    <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
 exports[`Alert > renders with variant outline correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center" label="Badge">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Title</div>
+    <!--v-if-->
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -205,10 +217,34 @@ exports[`Alert > renders with variant outline correctly 1`] = `
 `;
 
 exports[`Alert > renders with variant soft correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center" label="Badge">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Title</div>
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Alert > renders with variant solid correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900" label="Badge">
+  <!--v-if-->
+  <div class="min-w-0 flex-1 flex flex-col gap-1">
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Alert > renders with variant subtle correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center" label="Badge">
+  <!--v-if-->
+  <div class="min-w-0 flex-1 flex flex-col gap-1">
+    <!--v-if-->
     <!--v-if-->
     <!--v-if-->
   </div>

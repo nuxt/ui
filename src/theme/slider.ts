@@ -11,22 +11,19 @@ export default (config: { colors: string[] }) => ({
       thumb: `ring-${color}-500 dark:ring-${color}-400 focus-visible:outline-${color}-500/50 dark:focus-visible:outline-${color}-400/50`
     }])),
     size: {
-      '2xs': {
-        thumb: 'size-1.5'
-      },
-      'xs': {
+      xs: {
         thumb: 'size-2'
       },
-      'sm': {
+      sm: {
         thumb: 'size-3'
       },
-      'md': {
+      md: {
         thumb: 'size-4'
       },
-      'lg': {
+      lg: {
         thumb: 'size-5'
       },
-      'xl': {
+      xl: {
         thumb: 'size-6'
       }
     },
@@ -47,13 +44,6 @@ export default (config: { colors: string[] }) => ({
     }
   },
   compoundVariants: [{
-    orientation: 'horizontal',
-    size: '2xs',
-    class: {
-      root: 'h-1.5',
-      track: 'h-px'
-    }
-  }, {
     orientation: 'horizontal',
     size: 'xs',
     class: {
@@ -87,13 +77,6 @@ export default (config: { colors: string[] }) => ({
     class: {
       root: 'h-6',
       track: 'h-4'
-    }
-  }, {
-    orientation: 'vertical',
-    size: '2xs',
-    class: {
-      root: 'w-1.5',
-      track: 'w-px'
     }
   }, {
     orientation: 'vertical',
@@ -132,7 +115,7 @@ export default (config: { colors: string[] }) => ({
     }
   }],
   defaultVariants: {
-    size: 'sm',
+    size: 'md',
     color: 'primary'
   }
 })

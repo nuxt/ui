@@ -12,10 +12,10 @@ exports[`Kbd > renders with color white correctly 1`] = `"<kbd class="inline-fle
 
 exports[`Kbd > renders with default slot correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded font-medium font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 h-5 min-w-[20px] text-[11px]">Default slot</kbd>"`;
 
-exports[`Kbd > renders with size md correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded font-medium font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 h-6 min-w-[24px] text-[12px]">K</kbd>"`;
+exports[`Kbd > renders with size lg correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded font-medium font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 h-6 min-w-[24px] text-[12px]">K</kbd>"`;
 
-exports[`Kbd > renders with size sm correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded font-medium font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 h-5 min-w-[20px] text-[11px]">K</kbd>"`;
+exports[`Kbd > renders with size md correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded font-medium font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 h-5 min-w-[20px] text-[11px]">K</kbd>"`;
 
-exports[`Kbd > renders with size xs correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded font-medium font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 h-4 min-w-[16px] text-[10px]">K</kbd>"`;
+exports[`Kbd > renders with size sm correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded font-medium font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 h-4 min-w-[16px] text-[10px]">K</kbd>"`;
 
 exports[`Kbd > renders with value correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded font-medium font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 h-5 min-w-[20px] text-[11px]">K</kbd>"`;
