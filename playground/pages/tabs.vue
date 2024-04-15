@@ -17,5 +17,8 @@ const items = [{
 </script>
 
 <template>
-  <UTabs :items="items" class="w-96" />
+  <div class="flex flex-col gap-4">
+    <UTabs :items="items" class="w-96" />
+    <UTabs :items="items" orientation="vertical" />
+  </div>
 </template>

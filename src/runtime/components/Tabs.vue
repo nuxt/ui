@@ -44,14 +44,17 @@ import { defu } from 'defu'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 
-const props = withDefaults(defineProps<TabsProps<T>>(), { defaultValue: '0' })
+const props = withDefaults(defineProps<TabsProps<T>>(), {
+  defaultValue: '0',
+  orientation: 'horizontal'
+})
 const emits = defineEmits<TabsEmits>()
 defineSlots<TabsSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'activationMode', 'modelValue'), emits)
 const contentProps = toRef(() => defu(props.content, { forceMount: true }) as TabsContentProps)
 
-const ui = computed(() => tv({ extend: tabs, slots: props.ui })())
+const ui = computed(() => tv({ extend: tabs, slots: props.ui })({ orientation: props.orientation }))
 </script>
 
 <template>
