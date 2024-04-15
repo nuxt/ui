@@ -4,7 +4,7 @@ import type { NavigationMenuRootProps, NavigationMenuRootEmits } from 'radix-vue
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
-import type { AvatarProps, BadgeProps, IconProps, LinkProps } from '#ui/types'
+import type { AvatarProps, BadgeProps, IconProps, LinkProps, SeparatorProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -21,6 +21,7 @@ export interface NavigationMenuLink extends LinkProps {
 
 export interface NavigationMenuProps<T> extends Omit<NavigationMenuRootProps, 'asChild' | 'dir'> {
   links?: T[] | T[][]
+  separator?: SeparatorProps
   class?: any
   ui?: Partial<typeof navigationMenu.slots>
 }
@@ -56,38 +57,42 @@ const lists = computed(() => props.links?.length ? (Array.isArray(props.links[0]
 
 <template>
   <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
-    <NavigationMenuList v-for="(list, index) in lists" :key="`list-${index}`" :class="ui.list()">
-      <NavigationMenuItem v-for="(link, linkIndex) in list" :key="`list-${index}-${linkIndex}`" :value="link.value || String(index)" :class="ui.item()">
-        <ULink v-slot="{ active, ...slotProps }" v-bind="omit(link, ['label', 'icon', 'avatar', 'badge', 'select'])" custom>
-          <NavigationMenuLink as-child :active="active" @select="link.select">
-            <ULinkBase v-bind="slotProps" :class="ui.link({ active })">
-              <slot name="leading" :link="link" :active="active">
-                <UAvatar v-if="link.avatar" size="2xs" v-bind="link.avatar" :class="ui.linkLeadingAvatar({ active })" />
-                <UIcon v-else-if="link.icon" :name="link.icon" :class="ui.linkLeadingIcon({ active })" />
-              </slot>
-
-              <span v-if="link.label || $slots.default" :class="ui.linkLabel()">
-                <slot :link="link" :active="active">
-                  {{ link.label }}
+    <template v-for="(list, index) in lists" :key="`list-${index}`">
+      <NavigationMenuList :class="ui.list()">
+        <NavigationMenuItem v-for="(link, linkIndex) in list" :key="`list-${index}-${linkIndex}`" :value="link.value || String(index)" :class="ui.item()">
+          <ULink v-slot="{ active, ...slotProps }" v-bind="omit(link, ['label', 'icon', 'avatar', 'badge', 'select'])" custom>
+            <NavigationMenuLink as-child :active="active" @select="link.select">
+              <ULinkBase v-bind="slotProps" :class="ui.link({ active, disabled: link.disabled })">
+                <slot name="leading" :link="link" :active="active">
+                  <UAvatar v-if="link.avatar" size="2xs" v-bind="link.avatar" :class="ui.linkLeadingAvatar({ active })" />
+                  <UIcon v-else-if="link.icon" :name="link.icon" :class="ui.linkLeadingIcon({ active })" />
                 </slot>
-              </span>
 
-              <span v-if="$slots.trailing || link.badge" :class="ui.linkTrailing()">
-                <slot name="trailing" :link="link" :active="active">
-                  <UBadge
-                    v-if="link.badge"
-                    color="gray"
-                    variant="solid"
-                    size="xs"
-                    v-bind="(typeof link.badge === 'string' || typeof link.badge === 'number') ? { label: link.badge } : link.badge"
-                    :class="ui.linkTrailingBadge()"
-                  />
-                </slot>
-              </span>
-            </ULinkBase>
-          </NavigationMenuLink>
-        </ULink>
-      </NavigationMenuItem>
-    </NavigationMenuList>
+                <span v-if="link.label || $slots.default" :class="ui.linkLabel()">
+                  <slot :link="link" :active="active">
+                    {{ link.label }}
+                  </slot>
+                </span>
+
+                <span v-if="$slots.trailing || link.badge" :class="ui.linkTrailing()">
+                  <slot name="trailing" :link="link" :active="active">
+                    <UBadge
+                      v-if="link.badge"
+                      color="gray"
+                      variant="solid"
+                      size="xs"
+                      v-bind="(typeof link.badge === 'string' || typeof link.badge === 'number') ? { label: link.badge } : link.badge"
+                      :class="ui.linkTrailingBadge()"
+                    />
+                  </slot>
+                </span>
+              </ULinkBase>
+            </NavigationMenuLink>
+          </ULink>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+
+      <USeparator v-if="orientation === 'vertical' && index < lists.length - 1" v-bind="separator" orientation="horizontal" :class="ui.separator()" />
+    </template>
   </NavigationMenuRoot>
 </template>
