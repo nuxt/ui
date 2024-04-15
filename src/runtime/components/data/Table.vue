@@ -7,7 +7,13 @@
             <UCheckbox :model-value="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" v-bind="ui.default.checkbox" aria-label="Select all" @change="onChange" />
           </th>
 
-          <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]">
+          <th
+            v-for="(column, index) in columns"
+            :key="index"
+            scope="col"
+            :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]"
+            :aria-sort="getAriaSort(column)"
+          >
             <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
@@ -74,7 +80,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, toRaw, toRef } from 'vue'
-import type { PropType } from 'vue'
+import type { PropType, AriaAttributes } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { useVModel } from '@vueuse/core'
@@ -107,6 +113,15 @@ function defaultSort (a: any, b: any, direction: 'asc' | 'desc') {
   }
 }
 
+interface Column {
+  key: string
+  sortable?: boolean
+  sort?: (a: any, b: any, direction: 'asc' | 'desc') => number
+  direction?: 'asc' | 'desc'
+  class?: string
+  [key: string]: any
+}
+
 export default defineComponent({
   components: {
     UIcon,
@@ -129,7 +144,7 @@ export default defineComponent({
       default: () => []
     },
     columns: {
-      type: Array as PropType<{ key: string, sortable?: boolean, sort?: (a: any, b: any, direction: 'asc' | 'desc') => number, direction?: 'asc' | 'desc', class?: string, [key: string]: any }[]>,
+      type: Array as PropType<Column[]>,
       default: null
     },
     columnAttribute: {
@@ -292,6 +307,26 @@ export default defineComponent({
       return get(row, rowKey, defaultValue)
     }
 
+    function getAriaSort (column: Column): AriaAttributes['aria-sort'] {
+      if (!column.sortable) {
+        return undefined
+      }
+
+      if (sort.value.column !== column.key) {
+        return 'none'
+      }
+
+      if (sort.value.direction === 'asc') {
+        return 'ascending'
+      }
+
+      if (sort.value.direction === 'desc') {
+        return 'descending'
+      }
+
+      return undefined
+    }
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -312,7 +347,8 @@ export default defineComponent({
       onSort,
       onSelect,
       onChange,
-      getRowData
+      getRowData,
+      getAriaSort
     }
   }
 })
