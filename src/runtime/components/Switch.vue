@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { SwitchRootProps, SwitchRootEmits } from 'radix-vue'
+import type { SwitchRootProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/switch'
@@ -12,9 +12,7 @@ const switchTv = tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })
 
 type SwitchVariants = VariantProps<typeof switchTv>
 
-export interface SwitchProps extends Omit<SwitchRootProps, 'asChild'> {
-  id?: string
-  name?: string
+export interface SwitchProps extends Omit<SwitchRootProps, 'asChild' | 'checked' | 'defaultChecked'> {
   color?: SwitchVariants['color']
   size?: SwitchVariants['size']
   loading?: boolean
@@ -23,36 +21,37 @@ export interface SwitchProps extends Omit<SwitchRootProps, 'asChild'> {
   uncheckedIcon?: IconProps['name']
   label?: string
   description?: string
+  defaultValue?: boolean
   class?: any
   ui?: Partial<typeof switchTv.slots>
 }
 
-export interface CheckboxSlots {
+export interface SwitchSlots {
   label(props: { label?: string }): any
   description(props: { description?: string }): any
 }
-
-export interface SwitchEmits extends SwitchRootEmits {}
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { SwitchRoot, SwitchThumb, useForwardPropsEmits, Label } from 'radix-vue'
+import { SwitchRoot, SwitchThumb, useForwardProps, Label } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useId, useAppConfig, useFormField } from '#imports'
 
 const props = defineProps<SwitchProps>()
-const emits = defineEmits<SwitchEmits>()
+defineSlots<SwitchSlots>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultChecked', 'checked', 'required', 'value'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'required', 'value'))
+
+const modelValue = defineModel<boolean | undefined>({ default: undefined })
 
 const { inputId: _inputId, emitFormChange, size, color, name, disabled } = useFormField<SwitchProps>(props)
 const inputId = _inputId.value ?? useId()
 
 const ui = computed(() => tv({ extend: switchTv, slots: props.ui })({
-  color: color.value,
   size: size.value,
+  color: color.value,
   required: props.required,
   loading: props.loading,
   disabled: disabled.value || props.loading
@@ -71,9 +70,11 @@ async function onChecked() {
     <div :class="ui.container()">
       <SwitchRoot
         :id="inputId"
+        v-model:checked="modelValue"
+        :default-checked="defaultValue"
+        v-bind="rootProps"
         :name="name"
         :disabled="disabled || loading"
-        v-bind="rootProps"
         :class="ui.base()"
         @update:checked="onChecked"
       >

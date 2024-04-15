@@ -1,106 +1,228 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Switch > renders basic case correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with as correctly 1`] = `
-"<section class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" aria-checked="false" aria-required="false" data-state="unchecked" disabled="false" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></section>
-<!---->"
-`;
-
-exports[`Switch > renders with checked correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5">
+    <section class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="3" role="switch" aria-checked="false" aria-required="false" data-state="unchecked" disabled="false" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></section>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with checkedIcon correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon absolute shrink-0 group-data-[state=unchecked]:text-gray-400 dark:group-data-[state=unchecked]:text-gray-500 transition-[color,opacity] duration-200 opacity-0 group-data-[state=checked]:text-primary-500 dark:group-data-[state=checked]:text-primary-400 size-3 group-data-[state=checked]:opacity-100" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M16.705 4.153a.75.75 0 0 1 .142 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893l7.48-9.817a.75.75 0 0 1 1.05-.143" clip-rule="evenodd"></path></svg><!--v-if--></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="8" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon absolute shrink-0 group-data-[state=unchecked]:text-gray-400 dark:group-data-[state=unchecked]:text-gray-500 transition-[color,opacity] duration-200 opacity-0 group-data-[state=checked]:text-primary-500 dark:group-data-[state=checked]:text-primary-400 size-3 group-data-[state=checked]:opacity-100" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M16.705 4.153a.75.75 0 0 1 .142 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893l7.48-9.817a.75.75 0 0 1 1.05-.143" clip-rule="evenodd"></path></svg><!--v-if--></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with class correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-<!---->"
+"<div class="relative items-start inline-flex">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="1" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
-exports[`Switch > renders with defaultChecked correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-<!---->"
+exports[`Switch > renders with defaultValue correctly 1`] = `
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="4" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Switch > renders with description correctly 1`] = `
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="14" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <div class="ms-2 text-sm"><label for="14" class="block font-medium text-gray-700 dark:text-gray-200">Label</label>
+    <p class="text-gray-500 dark:text-gray-400">Description</p>
+  </div>
+</div>"
+`;
+
+exports[`Switch > renders with description slot correctly 1`] = `
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="22" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <div class="ms-2 text-sm"><label for="22" class="block font-medium text-gray-700 dark:text-gray-200">Description slot</label>
+    <!--v-if-->
+  </div>
+</div>"
 `;
 
 exports[`Switch > renders with disabled correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9 cursor-not-allowed opacity-75" id="7" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with id correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="test" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="custom-id" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Switch > renders with label correctly 1`] = `
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="12" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <div class="ms-2 text-sm"><label for="12" class="block font-medium text-gray-700 dark:text-gray-200">Label</label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Switch > renders with label slot correctly 1`] = `
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="21" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <div class="ms-2 text-sm"><label for="21" class="block font-medium text-gray-700 dark:text-gray-200">Label slot</label>
+    <!--v-if-->
+  </div>
+</div>"
 `;
 
 exports[`Switch > renders with loading correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon absolute shrink-0 group-data-[state=unchecked]:text-gray-400 dark:group-data-[state=unchecked]:text-gray-500 transition-[color,opacity] duration-200 opacity-0 group-data-[state=checked]:text-primary-500 dark:group-data-[state=checked]:text-primary-400 size-3 group-data-[state=checked]:opacity-100 group-data-[state=unchecked]:opacity-100 animate-spin" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 0 1-9.201 2.466l-.312-.311h2.433a.75.75 0 0 0 0-1.5H3.989a.75.75 0 0 0-.75.75v4.242a.75.75 0 0 0 1.5 0v-2.43l.31.31a7 7 0 0 0 11.712-3.138a.75.75 0 0 0-1.449-.39m1.23-3.723a.75.75 0 0 0 .219-.53V2.929a.75.75 0 0 0-1.5 0V5.36l-.31-.31A7 7 0 0 0 3.239 8.188a.75.75 0 1 0 1.448.389A5.5 5.5 0 0 1 13.89 6.11l.311.31h-2.432a.75.75 0 0 0 0 1.5h4.243a.75.75 0 0 0 .53-.219" clip-rule="evenodd"></path></svg></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9 cursor-not-allowed opacity-75" id="10" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon absolute shrink-0 group-data-[state=unchecked]:text-gray-400 dark:group-data-[state=unchecked]:text-gray-500 transition-[color,opacity] duration-200 opacity-0 group-data-[state=checked]:text-primary-500 dark:group-data-[state=checked]:text-primary-400 size-3 group-data-[state=checked]:opacity-100 group-data-[state=unchecked]:opacity-100 animate-spin" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 0 1-9.201 2.466l-.312-.311h2.433a.75.75 0 0 0 0-1.5H3.989a.75.75 0 0 0-.75.75v4.242a.75.75 0 0 0 1.5 0v-2.43l.31.31a7 7 0 0 0 11.712-3.138a.75.75 0 0 0-1.449-.39m1.23-3.723a.75.75 0 0 0 .219-.53V2.929a.75.75 0 0 0-1.5 0V5.36l-.31-.31A7 7 0 0 0 3.239 8.188a.75.75 0 1 0 1.448.389A5.5 5.5 0 0 1 13.89 6.11l.311.31h-2.432a.75.75 0 0 0 0 1.5h4.243a.75.75 0 0 0 .53-.219" clip-rule="evenodd"></path></svg></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with loadingIcon correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon absolute shrink-0 group-data-[state=unchecked]:text-gray-400 dark:group-data-[state=unchecked]:text-gray-500 transition-[color,opacity] duration-200 opacity-0 group-data-[state=checked]:text-primary-500 dark:group-data-[state=checked]:text-primary-400 size-3 group-data-[state=checked]:opacity-100 group-data-[state=unchecked]:opacity-100 animate-spin" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09m8.445-7.188L18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456m-1.365 11.852L16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183l.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394l-1.183.394a2.25 2.25 0 0 0-1.423 1.423"></path></svg></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9 cursor-not-allowed opacity-75" id="11" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon absolute shrink-0 group-data-[state=unchecked]:text-gray-400 dark:group-data-[state=unchecked]:text-gray-500 transition-[color,opacity] duration-200 opacity-0 group-data-[state=checked]:text-primary-500 dark:group-data-[state=checked]:text-primary-400 size-3 group-data-[state=checked]:opacity-100 group-data-[state=unchecked]:opacity-100 animate-spin" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09m8.445-7.188L18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456m-1.365 11.852L16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183l.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394l-1.183.394a2.25 2.25 0 0 0-1.423 1.423"></path></svg></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with name correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="5" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with required correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="true" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="13" role="switch" type="button" aria-checked="false" aria-required="true" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <div class="ms-2 text-sm"><label for="13" class="block font-medium text-gray-700 dark:text-gray-200 after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400">Label</label>
+    <!--v-if-->
+  </div>
+</div>"
 `;
 
 exports[`Switch > renders with size 2xs correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-3 w-5" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-2 data-[state=checked]:translate-x-2"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-4"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-3 w-5" id="15" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-2 data-[state=checked]:translate-x-2"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with size lg correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-7 w-[52px]" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-6 data-[state=checked]:translate-x-6"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-6"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-7 w-[52px]" id="19" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-6 data-[state=checked]:translate-x-6"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with size md correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-6 w-11" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-5 data-[state=checked]:translate-x-5"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-6 w-11" id="18" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-5 data-[state=checked]:translate-x-5"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with size sm correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="17" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with size xl correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-8 w-[60px]" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-7 data-[state=checked]:translate-x-7"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-6"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-8 w-[60px]" id="20" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-7 data-[state=checked]:translate-x-7"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with size xs correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-4 w-7" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-3 data-[state=checked]:translate-x-3"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-4"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-4 w-7" id="16" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-3 data-[state=checked]:translate-x-3"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with ui correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="2" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with uncheckedIcon correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon absolute shrink-0 group-data-[state=unchecked]:text-gray-400 dark:group-data-[state=unchecked]:text-gray-500 transition-[color,opacity] duration-200 opacity-0 group-data-[state=checked]:text-primary-500 dark:group-data-[state=checked]:text-primary-400 size-3 group-data-[state=checked]:opacity-100" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94z"></path></svg><!--v-if--></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"><!--v-if--><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon absolute shrink-0 group-data-[state=unchecked]:text-gray-400 dark:group-data-[state=unchecked]:text-gray-500 transition-[color,opacity] duration-200 opacity-0 group-data-[state=checked]:text-primary-500 dark:group-data-[state=checked]:text-primary-400 size-3 group-data-[state=unchecked]:opacity-100" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94z"></path></svg></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;
 
 exports[`Switch > renders with value correctly 1`] = `
-"<button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-75 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="switch"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-<!---->"
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="peer inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 h-5 w-9" id="6" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="custom-value"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+    <!---->
+  </div>
+  <!--v-if-->
+</div>"
 `;

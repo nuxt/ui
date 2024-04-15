@@ -67,7 +67,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
     </UFormField>
 
     <UFormField name="switch">
-      <USwitch v-model:checked="state.switch" />
+      <USwitch v-model="state.switch" />
     </UFormField>
 
     <div class="flex gap-2">

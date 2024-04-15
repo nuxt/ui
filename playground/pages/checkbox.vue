@@ -2,15 +2,16 @@
 import theme from '#build/ui/checkbox'
 
 const sizes = Object.keys(theme.variants.size)
+
+const checked = ref(false)
 </script>
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 ml-[-272px]">
-      <UCheckbox label="Normal" />
-      <UCheckbox label="Checked" :model-value="true" />
+    <div class="flex flex-col gap-4 ml-[-286px]">
+      <UCheckbox v-model="checked" label="Model" />
+      <UCheckbox label="Default value" :default-value="true" />
       <UCheckbox label="Indeterminate" indeterminate />
-      <UCheckbox label="Default checked" default-checked />
       <UCheckbox label="Required" required />
       <UCheckbox label="Disabled" disabled />
       <UCheckbox label="Custom icon" color="red" icon="i-heroicons-heart-solid" :model-value="true" />

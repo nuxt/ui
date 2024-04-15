@@ -6,6 +6,7 @@ import ComponentRender from '../component-render'
 describe('Input', () => {
   it.each([
     ['basic case', {}],
+    ['with id', { props: { name: 'id' } }],
     ['with name', { props: { name: 'username' } }],
     ['with type', { props: { type: 'password' } }],
     ['with placeholder', { props: { placeholder: 'Enter your username' } }],

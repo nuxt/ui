@@ -34,6 +34,13 @@ exports[`Input > renders with icon correctly 1`] = `
 </div>"
 `;
 
+exports[`Input > renders with id correctly 1`] = `
+"<div class="relative"><input type="text" name="id" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Input > renders with leading and icon correctly 1`] = `
 "<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pl-9"><span class="absolute inset-y-0 start-0 flex items-center px-2.5"><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon shrink-0 text-gray-400 dark:text-gray-500 size-5" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607"></path></svg></span>
   <!--v-if-->

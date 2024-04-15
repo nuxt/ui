@@ -2,14 +2,15 @@
 import theme from '#build/ui/switch'
 
 const sizes = Object.keys(theme.variants.size)
+
+const checked = ref(false)
 </script>
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 ml-[-348px]">
-      <USwitch label="Normal" />
-      <USwitch label="Checked" :checked="true" />
-      <USwitch label="Default checked" default-checked />
+    <div class="flex flex-col gap-4 ml-[-369px]">
+      <USwitch v-model="checked" label="Model" />
+      <USwitch label="Default value" :default-value="true" />
       <USwitch label="Required" required />
       <USwitch label="Disabled" disabled />
     </div>

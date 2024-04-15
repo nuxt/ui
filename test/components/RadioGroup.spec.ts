@@ -12,19 +12,22 @@ const defaultOptions = [
 describe('RadioGroup', () => {
   it.each([
     ['basic case', {}],
+    ['with class', { props: { class: 'absolute' } }],
+    ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
     ['with default value', { props: { defaultValue: '1' } }],
     ['with disabled', { props: { disabled: true } }],
     ['with description', { props: { options: defaultOptions.map((opt, count) => ({ ...opt, description: `Description ${count}` })) } }],
     ['with required', { props: { legend: 'Legend', required: true } }],
-    ['with custom color', { props: { color: 'red' as const } }],
+    ['with color', { props: { color: 'red' as const } }],
     ['with size 2xs', { props: { size: '2xs' as const } }],
     ['with size xs', { props: { size: 'xs' as const } }],
     ['with size sm', { props: { size: 'sm' as const } }],
     ['with size md', { props: { size: 'md' as const } }],
     ['with size lg', { props: { size: 'lg' as const } }],
     ['with size xl', { props: { size: 'xl' as const } }],
-    ['with class', { props: { class: 'bg-red-500' } }],
-    ['with ui', { props: { ui: {} } }]
+    ['with legend slot', { slots: { label: () => 'Legend slot' } }],
+    ['with label slot', { slots: { label: () => 'Label slot' } }],
+    ['with description slot', { slots: { label: () => 'Description slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: RadioGroupProps<any>, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, defu(options, { props: { options: defaultOptions } }), RadioGroup)
     expect(html).toMatchSnapshot()
