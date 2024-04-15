@@ -39,9 +39,9 @@ export interface RadioGroupSlots<T> {
 
 <script setup lang="ts" generic="T extends string | undefined">
 import { computed } from 'vue'
-import { useId, useFormField } from '#imports'
 import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
+import { useId, useFormField } from '#imports'
 
 const props = defineProps<RadioGroupProps<T>>()
 const emits = defineEmits<RadioGroupEmits>()

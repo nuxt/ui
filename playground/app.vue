@@ -33,6 +33,7 @@ const components = [
   'separator',
   'skeleton',
   'slideover',
+  'slider',
   'switch',
   'tabs',
   'textarea',
