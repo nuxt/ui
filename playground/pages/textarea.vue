@@ -14,12 +14,7 @@ const sizes = Object.keys(theme.variants.size)
       <UTextarea placeholder="You can't see me" variant="none" />
     </div>
     <div class="flex items-center gap-4">
-      <UTextarea
-        v-for="size in sizes"
-        :key="size"
-        placeholder="Search..."
-        :size="(size as any)"
-      />
+      <UTextarea v-for="size in sizes" :key="size" placeholder="Search..." :size="(size as any)" />
     </div>
     <div class="flex gap-4">
       <UTextarea autofocus />
