@@ -450,6 +450,19 @@ componentProps:
 ---
 ::
 
+### `caption`
+
+Use the `#caption` slot to customize the table's caption.
+
+::component-example
+---
+padding: false
+component: 'table-example-caption-slot'
+componentProps:
+  class: 'flex-1'
+---
+::
+
 ## Props
 
 :component-props
