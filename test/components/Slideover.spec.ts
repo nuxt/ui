@@ -4,7 +4,8 @@ import ComponentRender from '../component-render'
 
 describe('Slideover', () => {
   it.each([
-    ['basic case', { props: { open: true, portal: false } }],
+    // Props
+    ['with open', { props: { open: true, portal: false } }],
     ['with title', { props: { open: true, portal: false, title: 'Title' } }],
     ['with description', { props: { open: true, portal: false, title: 'Title', description: 'Description' } }],
     ['with left side', { props: { open: true, portal: false, side: 'left' as const, title: 'Title', description: 'Description' } }],
@@ -15,6 +16,7 @@ describe('Slideover', () => {
     ['without close', { props: { open: true, portal: false, close: null, title: 'Title', description: 'Description' } }],
     ['with class', { props: { open: true, portal: false, class: 'bg-gray-50 dark:bg-gray-800' } }],
     ['with ui', { props: { open: true, portal: false, ui: { close: 'right-2' } } }],
+    // Slots
     ['with default slot', { props: { open: true, portal: false }, slots: { default: () => 'Default slot' } }],
     ['with content slot', { props: { open: true, portal: false }, slots: { content: () => 'Content slot' } }],
     ['with header slot', { props: { open: true, portal: false }, slots: { header: () => 'Header slot' } }],

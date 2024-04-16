@@ -121,7 +121,7 @@ defineExpose({
           <UButton
             v-if="close !== null"
             :icon="appConfig.ui.icons.close"
-            size="sm"
+            size="md"
             color="gray"
             variant="link"
             aria-label="Close"

@@ -1,23 +1,24 @@
 import { describe, it, expect } from 'vitest'
 import Alert, { type AlertProps } from '../../src/runtime/components/Alert.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/alert'
 
 describe('Alert', () => {
+  const colors = Object.keys(theme.variants.color) as any
+  const variants = Object.keys(theme.variants.variant) as any
+
   it.each([
+    // Props
     ['with title', { props: { title: 'Title' } }],
     ['with description', { props: { title: 'Title', description: 'Description' } }],
     ['with icon', { props: { title: 'Title', icon: 'i-heroicons-light-bulb' } }],
     ['with avatar', { props: { title: 'Title', avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' } } }],
     ['with as', { props: { title: 'Title', as: 'article' } }],
-    ['with color green', { props: { title: 'Title', color: 'green' as const } }],
-    ['with color white', { props: { title: 'Title', color: 'white' as const } }],
-    ['with color gray', { props: { title: 'Title', color: 'gray' as const } }],
-    ['with color black', { props: { title: 'Title', color: 'black' as const } }],
-    ['with variant outline', { props: { title: 'Title', variant: 'outline' as const } }],
-    ['with variant soft', { props: { title: 'Title', variant: 'soft' as const } }],
-    ['with variant link', { props: { title: 'Title', variant: 'subtle' as const } }],
+    ...colors.map((color: string) => [`with color ${color}`, { props: { label: 'Badge', color } }]),
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { label: 'Badge', variant } }]),
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { title: 'font-bold' } } }],
+    // Slots
     ['with leading slot', { slots: { title: () => 'Leading slot' } }],
     ['with title slot', { slots: { title: () => 'Title slot' } }],
     ['with description slot', { slots: { description: () => 'Description slot' } }],

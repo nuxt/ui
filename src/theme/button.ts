@@ -21,35 +21,30 @@ export default (config: { colors: string[] }) => ({
       link: ''
     },
     size: {
-      '2xs': {
+      xs: {
         base: 'px-2 py-1 text-xs gap-x-1',
         leadingIcon: 'size-4',
         trailingIcon: 'size-4'
       },
-      'xs': {
+      sm: {
         base: 'px-2.5 py-1.5 text-xs gap-x-1.5',
         leadingIcon: 'size-4',
         trailingIcon: 'size-4'
       },
-      'sm': {
+      md: {
         base: 'px-2.5 py-1.5 text-sm gap-x-1.5',
         leadingIcon: 'size-5',
         trailingIcon: 'size-5'
       },
-      'md': {
+      lg: {
         base: 'px-3 py-2 text-sm gap-x-2',
         leadingIcon: 'size-5',
         trailingIcon: 'size-5'
       },
-      'lg': {
+      xl: {
         base: 'px-3.5 py-2.5 text-sm gap-x-2.5',
         leadingIcon: 'size-5',
         trailingIcon: 'size-5'
-      },
-      'xl': {
-        base: 'px-3.5 py-2.5 text-base gap-x-2.5',
-        leadingIcon: 'size-6',
-        trailingIcon: 'size-6'
       }
     },
     truncate: {
@@ -129,13 +124,9 @@ export default (config: { colors: string[] }) => ({
     variant: 'link',
     class: 'text-gray-900 dark:text-white underline-offset-4 hover:underline focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
   }, {
-    size: '2xs',
-    square: true,
-    class: 'p-1'
-  }, {
     size: 'xs',
     square: true,
-    class: 'p-1.5'
+    class: 'p-1'
   }, {
     size: 'sm',
     square: true,
@@ -143,11 +134,11 @@ export default (config: { colors: string[] }) => ({
   }, {
     size: 'md',
     square: true,
-    class: 'p-2'
+    class: 'p-1.5'
   }, {
     size: 'lg',
     square: true,
-    class: 'p-2.5'
+    class: 'p-2'
   }, {
     size: 'xl',
     square: true,
@@ -169,6 +160,6 @@ export default (config: { colors: string[] }) => ({
   defaultVariants: {
     color: 'primary',
     variant: 'solid',
-    size: 'sm'
+    size: 'md'
   }
 })

@@ -168,6 +168,8 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
   --color-cool-900: #111827;
   --color-cool-950: #030712;
 
+  --spacing-4_5: 1.125rem;
+
   ${shades.map(shade => `--color-primary-${shade}: var(--color-primary-${shade});`).join('\n\t')}
   ${shades.map(shade => `--color-gray-${shade}: var(--color-gray-${shade});`).join('\n\t')}
 }

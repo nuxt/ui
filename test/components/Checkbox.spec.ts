@@ -1,13 +1,14 @@
 import { describe, it, expect } from 'vitest'
-import { defu } from 'defu'
 import Checkbox, { type CheckboxProps } from '../../src/runtime/components/Checkbox.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/checkbox'
 
 describe('Checkbox', () => {
+  const sizes = Object.keys(theme.variants.size) as any
+  const colors = Object.keys(theme.variants.color) as any
+
   it.each([
-    ['basic case', {}],
-    ['with class', { props: { class: 'inline-flex' } }],
-    ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
+    // Props
     ['with defaultValue', { props: { defaultValue: true } }],
     ['with id', { props: { id: 'custom-id' } }],
     ['with name', { props: { name: 'custom-name' } }],
@@ -19,17 +20,15 @@ describe('Checkbox', () => {
     ['with label', { props: { label: 'Label' } }],
     ['with required', { props: { label: 'Label', required: true } }],
     ['with description', { props: { label: 'Label', description: 'Description' } }],
-    ['with color', { props: { label: 'Label', color: 'red' as const } }],
-    ['with size 2xs', { props: { size: '2xs' as const } }],
-    ['with size xs', { props: { size: 'xs' as const } }],
-    ['with size sm', { props: { size: 'sm' as const } }],
-    ['with size md', { props: { size: 'md' as const } }],
-    ['with size lg', { props: { size: 'lg' as const } }],
-    ['with size xl', { props: { size: 'xl' as const } }],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
+    ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
+    ['with class', { props: { class: 'inline-flex' } }],
+    ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
+    // Slots
     ['with label slot', { slots: { label: () => 'Label slot' } }],
     ['with description slot', { slots: { label: () => 'Description slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxProps, slots?: any }) => {
-    const html = await ComponentRender(nameOrHtml, defu(options, { props: { id: 42 } }), Checkbox)
+    const html = await ComponentRender(nameOrHtml, options, Checkbox)
     expect(html).toMatchSnapshot()
   })
 })

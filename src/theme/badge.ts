@@ -14,10 +14,9 @@ export default (config: { colors: string[] }) => ({
       subtle: ''
     },
     size: {
-      xs: 'text-xs px-1.5 py-0.5',
-      sm: 'text-xs px-2 py-1',
-      md: 'text-sm px-2 py-1',
-      lg: 'text-sm px-2.5 py-1.5'
+      sm: 'text-xs px-1.5 py-0.5',
+      md: 'text-xs px-2 py-1',
+      lg: 'text-sm px-2 py-1'
     }
   },
   compoundVariants: [...config.colors.map((color: string) => ({
@@ -52,6 +51,6 @@ export default (config: { colors: string[] }) => ({
   defaultVariants: {
     color: 'primary',
     variant: 'solid',
-    size: 'sm'
+    size: 'md'
   }
 })

@@ -8,16 +8,16 @@ const checked = ref(false)
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 ml-[-369px]">
+    <div class="flex flex-col gap-4 ml-[-114px]">
       <USwitch v-model="checked" label="Model" />
       <USwitch label="Default value" :default-value="true" />
       <USwitch label="Required" required />
       <USwitch label="Disabled" disabled />
     </div>
-    <div class="flex items-center gap-4 ml-[-150px]">
+    <div class="flex items-center gap-4 ml-[-82px]">
       <USwitch v-for="size in sizes" :key="size" :size="(size as any)" label="Switch me" />
     </div>
-    <div class="flex items-center gap-4 ml-[-150px]">
+    <div class="flex items-center gap-4 ml-[-82px]">
       <USwitch
         v-for="size in sizes"
         :key="size"
@@ -27,7 +27,7 @@ const checked = ref(false)
         checked-icon="i-heroicons-check-20-solid"
       />
     </div>
-    <div class="flex items-center gap-4 ml-[-150px]">
+    <div class="flex items-center gap-4 ml-[-82px]">
       <USwitch
         v-for="size in sizes"
         :key="size"
@@ -45,6 +45,17 @@ const checked = ref(false)
         :size="(size as any)"
         label="Switch me"
         description="This is a description"
+      />
+    </div>
+    <div class="flex items-center gap-4">
+      <USwitch
+        v-for="size in sizes"
+        :key="size"
+        :size="(size as any)"
+        label="Switch me"
+        description="This is a description"
+        unchecked-icon="i-heroicons-x-mark-20-solid"
+        checked-icon="i-heroicons-check-20-solid"
       />
     </div>
   </div>

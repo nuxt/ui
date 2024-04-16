@@ -10,47 +10,40 @@ export default (config: { colors: string[] }) => {
     },
     variants: {
       size: {
-        '2xs': {
+        xs: {
           base: 'text-xs gap-x-1 px-2 py-1',
-          leading: 'px-2',
-          trailing: 'px-2',
+          leading: 'pl-2',
+          trailing: 'pr-2',
           leadingIcon: 'size-4',
           trailingIcon: 'size-4'
         },
-        'xs': {
+        sm: {
           base: 'text-sm gap-x-1.5 px-2.5 py-1',
-          leading: 'px-2.5',
-          trailing: 'px-2.5',
+          leading: 'pl-2.5',
+          trailing: 'pr-2.5',
           leadingIcon: 'size-4',
           trailingIcon: 'size-4'
         },
-        'sm': {
+        md: {
           base: 'text-sm gap-x-1.5 px-2.5 py-1.5',
-          leading: 'px-2.5',
-          trailing: 'px-2.5',
+          leading: 'pl-2.5',
+          trailing: 'pr-2.5',
           leadingIcon: 'size-5',
           trailingIcon: 'size-5'
         },
-        'md': {
+        lg: {
           base: 'text-sm gap-x-1.5 px-3 py-2',
-          leading: 'px-3',
-          trailing: 'px-3',
+          leading: 'pl-3',
+          trailing: 'pr-3',
           leadingIcon: 'size-5',
           trailingIcon: 'size-5'
         },
-        'lg': {
+        xl: {
           base: 'text-sm gap-x-2.5 px-3.5 py-2.5',
-          leading: 'px-3.5',
-          trailing: 'px-3.5',
+          leading: 'pl-3.5',
+          trailing: 'pr-3.5',
           leadingIcon: 'size-5',
           trailingIcon: 'size-5'
-        },
-        'xl': {
-          base: 'text-base gap-x-2.5 px-3.5 py-2.5',
-          leading: 'px-3.5',
-          trailing: 'px-3.5',
-          leadingIcon: 'size-6',
-          trailingIcon: 'size-6'
         }
       },
       variant: {
@@ -70,6 +63,9 @@ export default (config: { colors: string[] }) => {
       },
       loading: {
         true: ''
+      },
+      type: {
+        file: 'file:mr-1.5 file:font-medium file:text-gray-500 dark:text-gray-400 file:outline-none'
       }
     },
     compoundVariants: [...config.colors.map((color: string) => ({
@@ -86,52 +82,44 @@ export default (config: { colors: string[] }) => {
       class: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
     }, {
       leading: true,
-      size: '2xs',
+      size: 'xs',
       class: 'pl-7'
     }, {
       leading: true,
-      size: 'xs',
+      size: 'sm',
       class: 'pl-8'
     }, {
       leading: true,
-      size: 'sm',
+      size: 'md',
       class: 'pl-9'
     }, {
       leading: true,
-      size: 'md',
+      size: 'lg',
       class: 'pl-10'
     }, {
       leading: true,
-      size: 'lg',
-      class: 'pl-11'
-    }, {
-      leading: true,
       size: 'xl',
-      class: 'pl-12'
-    }, {
-      trailing: true,
-      size: '2xs',
-      class: 'pr-7'
+      class: 'pl-11'
     }, {
       trailing: true,
       size: 'xs',
-      class: 'pr-8'
+      class: 'pr-7'
     }, {
       trailing: true,
       size: 'sm',
-      class: 'pr-9'
+      class: 'pr-8'
     }, {
       trailing: true,
       size: 'md',
-      class: 'pr-10'
+      class: 'pr-9'
     }, {
       trailing: true,
       size: 'lg',
-      class: 'pr-11'
+      class: 'pr-10'
     }, {
       trailing: true,
       size: 'xl',
-      class: 'pr-12'
+      class: 'pr-11'
     }, {
       loading: true,
       leading: true,
@@ -147,7 +135,7 @@ export default (config: { colors: string[] }) => {
       }
     }],
     defaultVariants: {
-      size: 'sm',
+      size: 'md',
       color: 'white',
       variant: 'outline'
     }

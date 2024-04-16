@@ -15,7 +15,7 @@
       </div>
 
       <USeparator
-        :avatar="{ size: 'sm', src: 'https://avatars.githubusercontent.com/u/739984?v=4' }"
+        :avatar="{ src: 'https://avatars.githubusercontent.com/u/739984?v=4' }"
         decorative
         orientation="vertical"
       />
@@ -25,7 +25,7 @@
       </div>
 
       <USeparator decorative orientation="vertical">
-        <UAvatar src="https://avatars.githubusercontent.com/u/13056429?v=4" />
+        <UAvatar size="2xs" src="https://avatars.githubusercontent.com/u/13056429?v=4" />
       </USeparator>
 
       <div class="flex-1 text-center">

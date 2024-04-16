@@ -63,7 +63,7 @@ const ui = computed(() => tv({ extend: accordion, slots: props.ui })({ disabled:
   <AccordionRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
     <AccordionItem v-for="(item, index) in items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.item()">
       <AccordionHeader :class="ui.header()">
-        <AccordionTrigger :class="ui.trigger()">
+        <AccordionTrigger :class="ui.trigger({ disabled: item.disabled })">
           <slot name="leading" :item="item" :index="index">
             <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
           </slot>

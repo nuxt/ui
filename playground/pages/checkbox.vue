@@ -8,7 +8,7 @@ const checked = ref(false)
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 ml-[-286px]">
+    <div class="flex flex-col gap-4">
       <UCheckbox v-model="checked" label="Model" />
       <UCheckbox label="Default value" :default-value="true" />
       <UCheckbox label="Indeterminate" indeterminate />
@@ -16,10 +16,10 @@ const checked = ref(false)
       <UCheckbox label="Disabled" disabled />
       <UCheckbox label="Custom icon" color="red" icon="i-heroicons-heart-solid" :model-value="true" />
     </div>
-    <div class="flex items-center gap-4 ml-[-156px]">
+    <div class="flex items-center gap-4 mr-[-11px]">
       <UCheckbox v-for="size in sizes" :key="size" label="Check me" :size="(size as any)" />
     </div>
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-4 mr-[-96px]">
       <UCheckbox v-for="size in sizes" :key="size" label="Check me" description="This is a description" :size="(size as any)" />
     </div>
   </div>

@@ -101,7 +101,7 @@ import ComponentRender from '../component-render'
 
 describe('${upperName}', () => {
   it.each([
-    ['basic case', {}],
+    // Props
     ['with class', { props: { class: '' } }],
     ['with ui', { props: { ui: {} } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ${upperName}Props, slots?: any }) => {

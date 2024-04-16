@@ -78,9 +78,8 @@ const lists = computed(() => props.links?.length ? (Array.isArray(props.links[0]
                   <slot name="trailing" :link="link" :active="active">
                     <UBadge
                       v-if="link.badge"
-                      color="gray"
-                      variant="solid"
-                      size="xs"
+                      color="white"
+                      size="sm"
                       v-bind="(typeof link.badge === 'string' || typeof link.badge === 'number') ? { label: link.badge } : link.badge"
                       :class="ui.linkTrailingBadge()"
                     />

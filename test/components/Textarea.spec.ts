@@ -2,25 +2,27 @@ import { describe, it, expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
 import Textarea, { type TextareaProps } from '../../src/runtime/components/Textarea.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/textarea'
 
 describe('Textarea', () => {
+  const sizes = Object.keys(theme.variants.size) as any
+  const colors = Object.keys(theme.variants.color) as any
+  const variants = Object.keys(theme.variants.variant) as any
+
   it.each([
-    ['basic case', {}],
+    // Props
     ['with id', { props: { id: 'exampleId' } }],
     ['with name', { props: { name: 'exampleName' } }],
     ['with placeholder', { props: { placeholder: 'examplePlaceholder' } }],
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with rows', { props: { rows: 5 } }],
-    ['with size', { props: { size: 'sm' as const } }],
-    ['with color', { props: { color: 'blue' as const } }],
-    ['with size 2xs', { props: { size: '2xs' as const } }],
-    ['with size xs', { props: { size: 'xs' as const } }],
-    ['with size sm', { props: { size: 'sm' as const } }],
-    ['with size md', { props: { size: 'md' as const } }],
-    ['with size lg', { props: { size: 'lg' as const } }],
-    ['with size xl', { props: { size: 'xl' as const } }],
-    ['with variant', { props: { variant: 'outline' as const } }],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
+    ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
+    ['with class', { props: { class: 'w-48' } }],
+    ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
+    // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TextareaProps, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, Textarea)

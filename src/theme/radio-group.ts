@@ -17,44 +17,37 @@ export default (config: { colors: string[] }) => ({
       indicator: `bg-${color}-500 dark:bg-${color}-400`
     }])),
     size: {
-      '2xs': {
+      xs: {
         fieldset: 'gap-0.5',
         base: 'size-3',
         option: 'text-xs',
         container: 'h-4',
         indicator: 'after:size-1'
       },
-      'xs': {
+      sm: {
         fieldset: 'gap-0.5',
         base: 'size-3.5',
         option: 'text-xs',
         container: 'h-4',
         indicator: 'after:size-1'
       },
-      'sm': {
+      md: {
         fieldset: 'gap-1',
         base: 'size-4',
         option: 'text-sm',
         container: 'h-5',
         indicator: 'after:size-1.5'
       },
-      'md': {
+      lg: {
         fieldset: 'gap-1',
-        base: 'size-[18px]',
+        base: 'size-4.5',
         option: 'text-sm',
         container: 'h-5',
         indicator: 'after:size-1.5'
       },
-      'lg': {
+      xl: {
         fieldset: 'gap-1.5',
         base: 'size-5',
-        option: 'text-base',
-        container: 'h-6',
-        indicator: 'after:size-2'
-      },
-      'xl': {
-        fieldset: 'gap-1.5',
-        base: 'size-[22px]',
         option: 'text-base',
         container: 'h-6',
         indicator: 'after:size-2'
@@ -73,7 +66,7 @@ export default (config: { colors: string[] }) => ({
     }
   },
   defaultVariants: {
-    size: 'sm',
+    size: 'md',
     color: 'primary'
   }
 })

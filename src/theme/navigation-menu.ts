@@ -17,7 +17,7 @@ export default {
         root: 'w-full items-center justify-between',
         list: 'flex items-center min-w-0',
         item: 'min-w-0',
-        link: 'px-2.5 py-3.5 before:inset-x-0 before:inset-y-2 hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 after:absolute after:bottom-0 after:inset-x-2.5 after:block after:h-[2px] after:mt-2 after:rounded-full'
+        link: 'px-2.5 py-3.5 before:inset-x-0 before:inset-y-2 hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 after:absolute after:bottom-0 after:inset-x-2.5 after:block after:h-0.5 after:mt-2 after:rounded-full'
       },
       vertical: {
         root: 'flex-col',

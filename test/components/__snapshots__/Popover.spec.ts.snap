@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Popover > renders basic case correctly 1`] = `
+exports[`Popover > renders with open correctly 1`] = `
 "Click me
 <!--teleport start-->
 

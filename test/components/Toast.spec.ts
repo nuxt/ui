@@ -4,6 +4,7 @@ import Toaster from '../../src/runtime/components/Toaster.vue'
 import Toast, { type ToastProps } from '../../src/runtime/components/Toast.vue'
 import ComponentRender from '../component-render'
 import { ClientOnly } from '#components'
+import theme from '#build/ui/toast'
 
 const ToastWrapper = defineComponent({
   components: {
@@ -16,19 +17,23 @@ const ToastWrapper = defineComponent({
 })
 
 describe('Toast', () => {
+  const colors = Object.keys(theme.variants.color) as any
+
   it.each([
+    // Props
     ['with title', { props: { title: 'Toast' } }],
     ['with description', { props: { description: 'This is a toast' } }],
     ['with title & description', { props: { title: 'Toast', description: 'This is a toast' } }],
     ['with icon', { props: { icon: 'i-heroicons-rocket-launch', title: 'Toast' } }],
     ['with avatar', { props: { avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' }, title: 'Toast' } }],
-    ['with color', { props: { color: 'green' as const, title: 'Toast' } }],
     ['with actions', { props: { title: 'Toast', actions: [{ label: 'Action' }] } }],
     ['with description actions', { props: { title: 'Toast', description: 'This is a toast', actions: [{ label: 'Action' }] } }],
     ['without close', { props: { title: 'Toast', close: null } }],
     ['with type', { props: { type: 'background' as const } }],
+    ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
     ['with class', { props: { class: 'bg-gray-50 dark:bg-gray-800/50' } }],
     ['with ui', { props: { title: 'Toast', ui: { title: 'font-bold' } } }],
+    // Slots
     ['with leading slot', { slots: { title: () => 'Leading slot' } }],
     ['with title slot', { slots: { title: () => 'Title slot' } }],
     ['with description slot', { slots: { description: () => 'Description slot' } }],
