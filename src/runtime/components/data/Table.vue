@@ -2,7 +2,9 @@
   <div :class="ui.wrapper" v-bind="attrs">
     <table :class="[ui.base, ui.divide]">
       <slot v-if="$slots.caption || caption" name="caption">
-        <caption :class="ui.caption">{{ caption }}</caption>
+        <caption :class="ui.caption">
+          {{ caption }}
+        </caption>
       </slot>
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
@@ -188,7 +190,7 @@ export default defineComponent({
     },
     caption: {
       type: String,
-      default: null,
+      default: null
     },
     progress: {
       type: Object as PropType<{ color: ProgressColor, animation: ProgressAnimation }>,
