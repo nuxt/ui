@@ -38,20 +38,20 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 </script>
 
 <template>
-  <DefineItemTemplate v-slot="{ item, active }">
-    <slot name="leading" :item="item" :active="active">
+  <DefineItemTemplate v-slot="{ item, active, index }">
+    <slot name="leading" :item="item" :active="active" :index="index">
       <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ active })" />
       <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ active })" />
     </slot>
 
     <span v-if="item.label || $slots.default" :class="ui.itemLabel()">
-      <slot name="label" :item="item" :active="active">
+      <slot name="label" :item="item" :active="active" :index="index">
         {{ item.label }}
       </slot>
     </span>
 
     <span v-if="$slots.trailing || item.children?.length || item.shortcuts?.length" :class="ui.itemTrailing()">
-      <slot name="trailing" :item="item" :active="active">
+      <slot name="trailing" :item="item" :active="active" :index="index">
         <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon()" />
         <span v-else-if="item.shortcuts?.length" :class="ui.itemTrailingShortcuts()">
           <UKbd v-for="(shortcut, shortcutIndex) in item.shortcuts" :key="shortcutIndex" size="md" v-bind="typeof shortcut === 'string' ? { value: shortcut } : shortcut" />
@@ -62,10 +62,10 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 
   <DropdownMenu.Portal :disabled="!portal">
     <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" :class="props.class" v-bind="contentProps">
-      <DropdownMenu.Group v-for="(group, index) in groups" :key="`group-${index}`" :class="ui.group()">
-        <template v-for="(item, itemIndex) in group" :key="`group-${index}-${itemIndex}`">
+      <DropdownMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group()">
+        <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
           <DropdownMenu.Label v-if="item.type === 'label'" :class="ui.label()">
-            <ReuseItemTemplate :item="item" />
+            <ReuseItemTemplate :item="item" :index="index" />
           </DropdownMenu.Label>
           <DropdownMenu.Sub v-else-if="item?.children?.length">
             <DropdownMenu.SubTrigger
@@ -77,7 +77,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               :text-value="item.label"
               :class="ui.item()"
             >
-              <ReuseItemTemplate :item="item" />
+              <ReuseItemTemplate :item="item" :index="index" />
             </DropdownMenu.SubTrigger>
 
             <UDropdownMenuContent
@@ -100,7 +100,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
           <DropdownMenu.Item v-else as-child :disabled="item.disabled" :text-value="item.label" @select="item.select">
             <ULink v-slot="{ active, ...slotProps }" v-bind="omit((item as DropdownMenuItem), ['label', 'icon', 'avatar', 'shortcuts', 'slot', 'open', 'defaultOpen', 'select', 'children', 'type'])" custom>
               <ULinkBase v-bind="slotProps" :class="ui.item({ active })">
-                <ReuseItemTemplate :item="item" :active="active" />
+                <ReuseItemTemplate :item="item" :active="active" :index="index" />
               </ULinkBase>
             </ULink>
           </DropdownMenu.Item>

@@ -41,7 +41,7 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T> = (props: { item: T, active?: boolean }) => any
+type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
 export interface DropdownMenuSlots<T> {
   default(): any
@@ -59,7 +59,10 @@ import { reactivePick } from '@vueuse/core'
 import { UDropdownMenuContent } from '#components'
 import { omit } from '#ui/utils'
 
-const props = withDefaults(defineProps<DropdownMenuProps<T>>(), { portal: true })
+const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
+  portal: true,
+  modal: false
+})
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
 
