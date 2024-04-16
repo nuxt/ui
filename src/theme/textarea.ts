@@ -6,19 +6,19 @@ export default (config: { colors: string[] }) => ({
   variants: {
     size: {
       xs: {
-        base: 'text-xs gap-x-1 px-2 py-1'
+        base: 'text-xs gap-1 px-2 py-1'
       },
       sm: {
-        base: 'text-sm gap-x-1.5 px-2.5 py-1'
+        base: 'text-sm gap-1.5 px-2.5 py-1'
       },
       md: {
-        base: 'text-sm gap-x-1.5 px-2.5 py-1.5'
+        base: 'text-sm gap-1.5 px-2.5 py-1.5'
       },
       lg: {
-        base: 'text-sm gap-x-1.5 px-3 py-2'
+        base: 'text-sm gap-1.5 px-3 py-2'
       },
       xl: {
-        base: 'text-sm gap-x-2.5 px-3.5 py-2.5'
+        base: 'text-sm gap-2.5 px-3.5 py-2.5'
       }
     },
     variant: {

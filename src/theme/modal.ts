@@ -4,7 +4,7 @@ export default {
     content: 'fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none',
     header: 'px-4 py-5 sm:px-6',
     body: 'flex-1 p-4 sm:p-6',
-    footer: 'flex items-center gap-x-1.5 p-4 sm:px-6',
+    footer: 'flex items-center gap-1.5 p-4 sm:px-6',
     title: 'text-gray-900 dark:text-white font-semibold',
     description: 'mt-1 text-gray-500 dark:text-gray-400 text-sm',
     close: 'absolute top-4 right-4'
