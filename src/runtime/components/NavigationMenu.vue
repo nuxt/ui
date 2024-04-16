@@ -28,7 +28,7 @@ export interface NavigationMenuProps<T> extends Omit<NavigationMenuRootProps, 'a
 
 export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
-type SlotProps<T> = (props: { link: T, active: boolean }) => any
+type SlotProps<T> = (props: { link: T, active: boolean, index: number }) => any
 
 export interface NavigationMenuSlots<T> {
   leading: SlotProps<T>
@@ -57,25 +57,25 @@ const lists = computed(() => props.links?.length ? (Array.isArray(props.links[0]
 
 <template>
   <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
-    <template v-for="(list, index) in lists" :key="`list-${index}`">
+    <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list()">
-        <NavigationMenuItem v-for="(link, linkIndex) in list" :key="`list-${index}-${linkIndex}`" :value="link.value || String(index)" :class="ui.item()">
+        <NavigationMenuItem v-for="(link, index) in list" :key="`list-${listIndex}-${index}`" :value="link.value || String(index)" :class="ui.item()">
           <ULink v-slot="{ active, ...slotProps }" v-bind="omit(link, ['label', 'icon', 'avatar', 'badge', 'select'])" custom>
             <NavigationMenuLink as-child :active="active" @select="link.select">
               <ULinkBase v-bind="slotProps" :class="ui.link({ active, disabled: link.disabled })">
-                <slot name="leading" :link="link" :active="active">
+                <slot name="leading" :link="link" :active="active" :index="index">
                   <UAvatar v-if="link.avatar" size="2xs" v-bind="link.avatar" :class="ui.linkLeadingAvatar({ active })" />
                   <UIcon v-else-if="link.icon" :name="link.icon" :class="ui.linkLeadingIcon({ active })" />
                 </slot>
 
                 <span v-if="link.label || $slots.default" :class="ui.linkLabel()">
-                  <slot :link="link" :active="active">
+                  <slot :link="link" :active="active" :index="index">
                     {{ link.label }}
                   </slot>
                 </span>
 
                 <span v-if="$slots.trailing || link.badge" :class="ui.linkTrailing()">
-                  <slot name="trailing" :link="link" :active="active">
+                  <slot name="trailing" :link="link" :active="active" :index="index">
                     <UBadge
                       v-if="link.badge"
                       color="white"
@@ -91,7 +91,7 @@ const lists = computed(() => props.links?.length ? (Array.isArray(props.links[0]
         </NavigationMenuItem>
       </NavigationMenuList>
 
-      <USeparator v-if="orientation === 'vertical' && index < lists.length - 1" v-bind="separator" orientation="horizontal" :class="ui.separator()" />
+      <USeparator v-if="orientation === 'vertical' && listIndex < lists.length - 1" v-bind="separator" orientation="horizontal" :class="ui.separator()" />
     </template>
   </NavigationMenuRoot>
 </template>
