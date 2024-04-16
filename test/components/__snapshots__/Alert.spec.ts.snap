@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Alert > renders with as correctly 1`] = `
-"<article class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<article class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Title</div>
@@ -13,7 +13,7 @@ exports[`Alert > renders with as correctly 1`] = `
 `;
 
 exports[`Alert > renders with avatar correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-11 text-[22px] shrink-0"><img role="img" src="https://avatars.githubusercontent.com/u/739984?v=4" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-11 text-[22px] shrink-0"><img role="img" src="https://avatars.githubusercontent.com/u/739984?v=4" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Title</div>
     <!--v-if-->
@@ -24,7 +24,7 @@ exports[`Alert > renders with avatar correctly 1`] = `
 `;
 
 exports[`Alert > renders with class correctly 1`] = `
-"<div class="relative overflow-hidden rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900 w-48">
+"<div class="relative overflow-hidden rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900 w-48">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <!--v-if-->
@@ -36,7 +36,7 @@ exports[`Alert > renders with class correctly 1`] = `
 `;
 
 exports[`Alert > renders with close slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <!--v-if-->
@@ -108,7 +108,7 @@ exports[`Alert > renders with color red correctly 1`] = `
 `;
 
 exports[`Alert > renders with color white correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900" label="Badge">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900" label="Badge">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <!--v-if-->
@@ -120,7 +120,7 @@ exports[`Alert > renders with color white correctly 1`] = `
 `;
 
 exports[`Alert > renders with description correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Title</div>
@@ -132,7 +132,7 @@ exports[`Alert > renders with description correctly 1`] = `
 `;
 
 exports[`Alert > renders with description slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <!--v-if-->
@@ -144,7 +144,7 @@ exports[`Alert > renders with description slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with icon correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900"><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon shrink-0 size-5" width="1em" height="1em" viewBox="0 0 24 24">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900"><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon shrink-0 size-5" width="1em" height="1em" viewBox="0 0 24 24">
     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"></path>
   </svg>
   <div class="min-w-0 flex-1 flex flex-col gap-1">
@@ -157,7 +157,7 @@ exports[`Alert > renders with icon correctly 1`] = `
 `;
 
 exports[`Alert > renders with leading slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Leading slot</div>
@@ -169,7 +169,7 @@ exports[`Alert > renders with leading slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with title correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Title</div>
@@ -181,7 +181,7 @@ exports[`Alert > renders with title correctly 1`] = `
 `;
 
 exports[`Alert > renders with title slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Title slot</div>
@@ -193,7 +193,7 @@ exports[`Alert > renders with title slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with ui correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <!--v-if-->
@@ -229,7 +229,7 @@ exports[`Alert > renders with variant soft correctly 1`] = `
 `;
 
 exports[`Alert > renders with variant solid correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900" label="Badge">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900" label="Badge">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <!--v-if-->

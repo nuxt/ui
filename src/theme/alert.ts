@@ -61,7 +61,7 @@ export default (config: { colors: string[] }) => ({
     color: 'white',
     variant: 'solid',
     class: {
-      root: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900'
+      root: 'ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900'
     }
   }, {
     color: 'gray',
