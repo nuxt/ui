@@ -32,7 +32,9 @@ export interface TabsEmits extends TabsRootEmits {}
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type TabsSlots<T> = {
+  leading: SlotProps<T>
   default: SlotProps<T>
+  trailing: SlotProps<T>
   content: SlotProps<T>
   [key: string]: SlotProps<T>
 }
