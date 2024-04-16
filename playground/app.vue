@@ -14,6 +14,7 @@ const components = [
   'alert',
   'avatar',
   'badge',
+  'breadcrumb',
   'button',
   'card',
   'checkbox',
