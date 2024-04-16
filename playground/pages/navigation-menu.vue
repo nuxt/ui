@@ -36,7 +36,7 @@ const links = [
 </script>
 
 <template>
-  <div class="flex flex-col gap-12 w-4xl">
+  <div class="flex flex-col gap-12 w-full max-w-4xl">
     <UNavigationMenu :links="links" class="border-b border-gray-200 dark:border-gray-800" />
 
     <UNavigationMenu :links="links" orientation="vertical" class="w-48" />
