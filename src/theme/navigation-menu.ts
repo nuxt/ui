@@ -1,8 +1,8 @@
 export default {
   slots: {
     root: 'relative flex gap-1.5',
-    list: 'isolate',
-    item: '',
+    list: 'isolate min-w-0',
+    item: 'min-w-0',
     link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
@@ -15,8 +15,7 @@ export default {
     orientation: {
       horizontal: {
         root: 'w-full items-center justify-between',
-        list: 'flex items-center min-w-0',
-        item: 'min-w-0',
+        list: 'flex items-center',
         link: 'px-2.5 py-3.5 before:inset-x-0 before:inset-y-2 hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 after:absolute after:bottom-0 after:inset-x-2.5 after:block after:h-0.5 after:mt-2 after:rounded-full'
       },
       vertical: {
