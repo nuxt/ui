@@ -1,6 +1,11 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
     <table :class="[ui.base, ui.divide]">
+      <slot v-if="$slots.caption || caption" name="caption">
+        <caption :class="ui.caption">
+          {{ caption }}
+        </caption>
+      </slot>
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
           <th v-if="modelValue" scope="col" :class="ui.checkbox.padding">
@@ -182,6 +187,10 @@ export default defineComponent({
     emptyState: {
       type: Object as PropType<{ icon: string, label: string }>,
       default: () => config.default.emptyState
+    },
+    caption: {
+      type: String,
+      default: null
     },
     progress: {
       type: Object as PropType<{ color: ProgressColor, animation: ProgressAnimation }>,
