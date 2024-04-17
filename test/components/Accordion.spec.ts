@@ -26,25 +26,31 @@ describe('Accordion', () => {
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
   }, {
     label: 'Utilities',
-    slot: 'toto',
     icon: 'i-heroicons-wrench-screwdriver',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.',
+    slot: 'custom'
   }]
+
+  const props = { items }
 
   it.each([
     // Props
-    ['with items', { props: { items } }],
-    ['with modelValue', { props: { items, modelValue: '1' } }],
-    ['with defaultValue', { props: { items, defaultValue: '1' } }],
-    ['with as', { props: { items, as: 'section' } }],
-    ['with type', { props: { items, type: 'multiple' as const } }],
-    ['with disabled', { props: { items, disabled: true } }],
-    ['with collapsible', { props: { items, collapsible: false } }],
-    ['with class', { props: { items, class: 'w-96' } }],
-    ['with ui', { props: { ui: { items, item: 'border-gray-300 dark:border-gray-700' } } }],
+    ['with items', { props }],
+    ['with modelValue', { props: { ...props, modelValue: '1' } }],
+    ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
+    ['with as', { props: { ...props, as: 'section' } }],
+    ['with type', { props: { ...props, type: 'multiple' as const } }],
+    ['with disabled', { props: { ...props, disabled: true } }],
+    ['with collapsible', { props: { ...props, collapsible: false } }],
+    ['with class', { props: { ...props, class: 'w-96' } }],
+    ['with ui', { props: { ui: { ...props, item: 'border-gray-300 dark:border-gray-700' } } }],
     // Slots
-    ['with default slot', { props: { items }, slots: { default: () => 'Default slot' } }],
-    ['with content slot', { props: { items }, slots: { content: () => 'Content slot' } }]
+    ['with default slot', { props, slots: { default: () => 'Default slot' } }],
+    ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
+    ['with label slot', { props, slots: { label: () => 'Label slot' } }],
+    ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
+    ['with content slot', { props, slots: { content: () => 'Content slot' } }],
+    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps<typeof items[number]>, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, Accordion)
     expect(html).toMatchSnapshot()
