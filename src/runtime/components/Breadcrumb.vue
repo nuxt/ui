@@ -10,33 +10,37 @@ const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof t
 
 const breadcrumb = tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb || {}) })
 
-export interface BreadcrumbLink extends LinkProps {
-  label: string
+export interface BreadcrumbItem extends LinkProps {
+  label?: string
   icon?: IconProps['name']
   avatar?: AvatarProps
+  slot?: string
 }
 
 export interface BreadcrumbProps<T> extends Omit<PrimitiveProps, 'asChild'> {
-  links?: T[]
+  items?: T[]
   separatorIcon?: IconProps['name']
   class?: any
   ui?: Partial<typeof breadcrumb.slots>
 }
 
-type SlotProps<T> = (props: { link: T, active: boolean, index: number }) => any
+type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any
 
 export interface BreadcrumbSlots<T> {
   leading: SlotProps<T>
-  default: SlotProps<T>
+  label: SlotProps<T>
   trailing: SlotProps<T>
+  item: SlotProps<T>
+  [key: string]: SlotProps<T>
   separator(): any
 }
 </script>
 
-<script setup lang="ts" generic="T extends BreadcrumbLink">
+<script setup lang="ts" generic="T extends BreadcrumbItem">
 import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useAppConfig } from '#imports'
+import { ULink, UIcon, UAvatar } from '#components'
 import { omit } from '#ui/utils'
 
 const props = defineProps<BreadcrumbProps<T>>()
@@ -50,25 +54,27 @@ const ui = computed(() => tv({ extend: breadcrumb, slots: props.ui })())
 <template>
   <Primitive :as="as" aria-label="breadcrumb" :class="ui.root({ class: props.class })">
     <ol :class="ui.list()">
-      <template v-for="(link, index) in links" :key="index">
+      <template v-for="(item, index) in items" :key="index">
         <li :class="ui.item()">
-          <ULink as="span" v-bind="omit(link, ['label', 'icon', 'avatar'])" :aria-current="index === links!.length - 1 ? 'page' : undefined" :class="ui.link({ active: index === links!.length - 1, disabled: link.disabled })" raw>
-            <slot name="leading" :link="link" :active="index === links!.length - 1" :index="index">
-              <UAvatar v-if="link.avatar" size="2xs" v-bind="link.avatar" :class="ui.linkLeadingAvatar({ active: index === links!.length - 1 })" />
-              <UIcon v-else-if="link.icon" :name="link.icon" :class="ui.linkLeadingIcon({ active: index === links!.length - 1 })" />
-            </slot>
-
-            <span v-if="link.label || $slots.default" :class="ui.linkLabel()">
-              <slot :link="link" :active="index === links!.length - 1" :index="index">
-                {{ link.label }}
+          <slot :name="item.slot || 'item'" :item="item" :index="index">
+            <ULink as="span" v-bind="omit(item, ['label', 'icon', 'avatar'])" :aria-current="index === items!.length - 1 ? 'page' : undefined" :class="ui.link({ active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })" raw>
+              <slot name="leading" :item="item" :active="index === items!.length - 1" :index="index">
+                <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ active: index === items!.length - 1 })" />
+                <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ active: index === items!.length - 1 })" />
               </slot>
-            </span>
 
-            <slot name="trailing" :link="link" :active="index === links!.length - 1" :index="index" />
-          </ULink>
+              <span v-if="item.label || $slots.label" :class="ui.linkLabel()">
+                <slot name="label" :item="item" :active="index === items!.length - 1" :index="index">
+                  {{ item.label }}
+                </slot>
+              </span>
+
+              <slot name="trailing" :item="item" :active="index === items!.length - 1" :index="index" />
+            </ULink>
+          </slot>
         </li>
 
-        <li v-if="index < links!.length - 1" role="presentation" :class="ui.separator()">
+        <li v-if="index < items!.length - 1" role="presentation" :class="ui.separator()">
           <slot name="separator">
             <UIcon :name="separatorIcon || appConfig.ui.icons.chevronRight" :class="ui.separatorIcon()" />
           </slot>

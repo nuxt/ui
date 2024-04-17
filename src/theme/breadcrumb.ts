@@ -16,13 +16,24 @@ export default {
         link: 'text-primary-500 dark:text-primary-400'
       },
       false: {
-        link: 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+        link: 'text-gray-500 dark:text-gray-400'
       }
     },
     disabled: {
       true: {
         link: 'cursor-not-allowed opacity-75'
       }
+    },
+    to: {
+      true: ''
     }
-  }
+  },
+  compoundVariants: [{
+    disabled: false,
+    active: false,
+    to: true,
+    class: {
+      link: 'hover:text-gray-900 dark:hover:text-white'
+    }
+  }]
 }

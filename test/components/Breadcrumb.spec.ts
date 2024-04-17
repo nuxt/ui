@@ -3,7 +3,7 @@ import Breadcrumb, { type BreadcrumbProps } from '../../src/runtime/components/B
 import ComponentRender from '../component-render'
 
 describe('Breadcrumb', () => {
-  const links = [{
+  const items = [{
     label: 'Home',
     avatar: {
       src: 'https://avatars.githubusercontent.com/u/739984?v=4'
@@ -15,21 +15,26 @@ describe('Breadcrumb', () => {
     disabled: true
   }, {
     label: 'Breadcrumb',
-    icon: 'i-heroicons-link'
+    icon: 'i-heroicons-link',
+    slot: 'custom'
   }]
+
+  const props = { items }
 
   it.each([
     // Props
-    ['with links', { props: { links } }],
-    ['with separatorIcon', { props: { links, separatorIcon: 'i-heroicons-minus' } }],
-    ['with class', { props: { class: 'w-48' } }],
-    ['with ui', { props: { ui: { link: 'font-bold' } } }],
+    ['with items', { props }],
+    ['with separatorIcon', { props: { ...props, separatorIcon: 'i-heroicons-minus' } }],
+    ['with class', { props: { ...props, class: 'w-48' } }],
+    ['with ui', { props: { ui: { ...props, link: 'font-bold' } } }],
     // Slots
-    ['with default slot', { slots: { default: () => 'Default slot' } }],
-    ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
-    ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
-    ['with separator slot', { slots: { separator: () => '/' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps<typeof links[number]>, slots?: any }) => {
+    ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
+    ['with label slot', { props, slots: { default: () => 'Label slot' } }],
+    ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
+    ['with item slot', { props, slots: { item: () => 'Item slot' } }],
+    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ['with separator slot', { props, slots: { separator: () => '/' } }]
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps<typeof items[number]>, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, Breadcrumb)
     expect(html).toMatchSnapshot()
   })

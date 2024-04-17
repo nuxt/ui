@@ -1,20 +1,31 @@
 <script setup lang="ts">
-const links = [{
+const items = [{
   label: 'Home',
-  avatar: {
-    src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-  },
   to: '/'
 }, {
-  label: 'Navigation',
-  icon: 'i-heroicons-square-3-stack-3d',
+  slot: 'dropdown',
+  icon: 'i-heroicons-ellipsis-horizontal',
+  children: [{
+    label: 'Documentation'
+  }, {
+    label: 'Themes'
+  }, {
+    label: 'GitHub'
+  }]
+}, {
+  label: 'Components',
   disabled: true
 }, {
-  label: 'Breadcrumb',
-  icon: 'i-heroicons-link'
+  label: 'Breadcrumb'
 }]
 </script>
 
 <template>
-  <UBreadcrumb :links="links" />
+  <UBreadcrumb :items="items">
+    <template #dropdown="{ item }">
+      <UDropdownMenu :items="item.children">
+        <UButton :icon="item.icon" color="gray" variant="link" class="p-0" />
+      </UDropdownMenu>
+    </template>
+  </UBreadcrumb>
 </template>
