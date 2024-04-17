@@ -13,6 +13,12 @@ export interface CardProps extends Omit<PrimitiveProps, 'asChild'> {
   class?: any
   ui?: Partial<typeof card.slots>
 }
+
+export interface CardSlots {
+  header(): any
+  default(): any
+  footer(): any
+}
 </script>
 
 <script setup lang="ts">
@@ -20,6 +26,7 @@ import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 
 const props = withDefaults(defineProps<CardProps>(), { as: 'div' })
+defineSlots<CardSlots>()
 
 const ui = computed(() => tv({ extend: card, slots: props.ui })())
 </script>
