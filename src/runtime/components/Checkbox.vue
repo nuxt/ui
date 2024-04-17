@@ -18,8 +18,8 @@ export interface CheckboxProps extends Omit<CheckboxRootProps, 'asChild' | 'chec
   color?: CheckboxVariants['color']
   size?: CheckboxVariants['size']
   icon?: IconProps['name']
-  indeterminateIcon?: IconProps['name']
   indeterminate?: boolean
+  indeterminateIcon?: IconProps['name']
   defaultValue?: boolean
   class?: any
   ui?: Partial<typeof checkbox.slots>
