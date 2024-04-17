@@ -25,8 +25,6 @@ export interface TooltipEmits extends TooltipRootEmits {}
 export interface TooltipSlots {
   default(): any
   content(): any
-  text(): any
-  shortcuts(): any
 }
 </script>
 
@@ -57,14 +55,10 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })({ side: conte
     <TooltipPortal :disabled="!portal">
       <TooltipContent v-bind="contentProps" :class="ui.content({ class: props.class })">
         <slot name="content">
-          <span v-if="text || $slots.text" :class="ui.text()">
-            <slot name="text">{{ text }}</slot>
-          </span>
+          <span v-if="text" :class="ui.text()">{{ text }}</span>
 
-          <span v-if="shortcuts?.length || $slots.shortcuts" :class="ui.shortcuts()">
-            <slot name="shortcuts">
-              <UKbd v-for="(shortcut, index) in shortcuts" :key="index" size="sm" v-bind="typeof shortcut === 'string' ? { value: shortcut } : shortcut" />
-            </slot>
+          <span v-if="shortcuts?.length" :class="ui.shortcuts()">
+            <UKbd v-for="(shortcut, index) in shortcuts" :key="index" size="sm" v-bind="typeof shortcut === 'string' ? { value: shortcut } : shortcut" />
           </span>
         </slot>
 

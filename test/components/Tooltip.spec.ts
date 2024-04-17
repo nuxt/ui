@@ -20,7 +20,8 @@ describe('Tooltip', () => {
     ['with arrow', { props: { text: 'Tooltip', arrow: true, open: true, portal: false } }],
     ['with shortcuts', { props: { text: 'Tooltip', shortcuts: ['⌘', 'K'], open: true, portal: false } }],
     // Slots
-    ['with default slot', { props: { text: 'Tooltip', shortcuts: ['⌘', 'K'], open: true, portal: false }, slots: { default: () => 'Default slot' } }]
+    ['with default slot', { props: { text: 'Tooltip', shortcuts: ['⌘', 'K'], open: true, portal: false }, slots: { default: () => 'Default slot' } }],
+    ['with content slot', { props: { open: true, portal: false }, slots: { content: () => 'Content slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TooltipProps, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, TooltipWrapper)
     expect(html).toMatchSnapshot()
