@@ -19,9 +19,9 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type'> {
   shortcuts?: string[] | KbdProps[]
   /**
    * The item type.
-   * @defaultValue "item"
+   * @defaultValue "link"
    */
-  type?: 'label' | 'item'
+  type?: 'label' | 'link'
   slot?: string
   open?: boolean
   defaultOpen?: boolean
@@ -48,6 +48,8 @@ export interface DropdownMenuSlots<T> {
   leading: SlotProps<T>
   label: SlotProps<T>
   trailing: SlotProps<T>
+  item: SlotProps<T>
+  [key: string]: SlotProps<T>
 }
 </script>
 

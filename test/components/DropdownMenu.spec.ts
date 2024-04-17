@@ -16,14 +16,24 @@ describe('DropdownMenu', () => {
     label: 'Duplicate',
     icon: 'i-heroicons-document-duplicate-20-solid',
     shortcuts: ['D'],
-    disabled: true
+    disabled: true,
+    slot: 'custom'
   }]
+
+  const props = { open: true, portal: false, items }
 
   it.each([
     // Props
-    ['with items', { props: { open: true, portal: false, items } }],
-    ['with class', { props: { open: true, portal: false, items, class: 'min-w-96' } }],
-    ['with ui', { props: { open: true, portal: false, items, ui: { itemLeadingIcon: 'size-4' } } }]
+    ['with items', { props }],
+    ['with class', { props: { ...props, class: 'min-w-96' } }],
+    ['with ui', { props: { ...props, ui: { linkLeadingIcon: 'size-4' } } }],
+    // Slots
+    ['with default slot', { props, slots: { default: () => 'Default slot' } }],
+    ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
+    ['with label slot', { props, slots: { label: () => 'Label slot' } }],
+    ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
+    ['with item slot', { props, slots: { item: () => 'Item slot' } }],
+    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DropdownMenuProps<typeof items[number]>, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, DropdownMenu)
     expect(html).toMatchSnapshot()
