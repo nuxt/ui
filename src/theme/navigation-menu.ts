@@ -29,8 +29,8 @@ export default {
         linkLeadingIcon: 'text-gray-700 dark:text-gray-200'
       },
       false: {
-        link: 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white',
-        linkLeadingIcon: 'text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200'
+        link: 'text-gray-500 dark:text-gray-400',
+        linkLeadingIcon: 'text-gray-400 dark:text-gray-500'
       }
     },
     disabled: {
@@ -40,6 +40,13 @@ export default {
     }
   },
   compoundVariants: [{
+    disabled: false,
+    active: false,
+    class: {
+      link: 'hover:text-gray-900 dark:hover:text-white',
+      linkLeadingIcon: 'group-hover:text-gray-700 dark:group-hover:text-gray-200'
+    }
+  }, {
     orientation: 'horizontal',
     active: true,
     class: {

@@ -10,17 +10,18 @@ const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<type
 
 const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })
 
-export interface NavigationMenuLink extends LinkProps {
-  label: string
+export interface NavigationMenuItem extends LinkProps {
+  label?: string
   value?: string
   icon?: IconProps['name']
   avatar?: AvatarProps
   badge?: string | number | BadgeProps
+  slot?: string
   select? (e: MouseEvent): void
 }
 
 export interface NavigationMenuProps<T> extends Omit<NavigationMenuRootProps, 'asChild' | 'dir'> {
-  links?: T[] | T[][]
+  items?: T[] | T[][]
   separator?: SeparatorProps
   class?: any
   ui?: Partial<typeof navigationMenu.slots>
@@ -28,16 +29,18 @@ export interface NavigationMenuProps<T> extends Omit<NavigationMenuRootProps, 'a
 
 export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
-type SlotProps<T> = (props: { link: T, active: boolean, index: number }) => any
+type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any
 
 export interface NavigationMenuSlots<T> {
   leading: SlotProps<T>
-  default: SlotProps<T>
+  label: SlotProps<T>
   trailing: SlotProps<T>
+  item: SlotProps<T>
+  [key: string]: SlotProps<T>
 }
 </script>
 
-<script setup lang="ts" generic="T extends NavigationMenuLink">
+<script setup lang="ts" generic="T extends NavigationMenuItem">
 import { computed } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuLink, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
@@ -52,42 +55,44 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', '
 
 const ui = computed(() => tv({ extend: navigationMenu, slots: props.ui })({ orientation: props.orientation }))
 
-const lists = computed(() => props.links?.length ? (Array.isArray(props.links[0]) ? props.links : [props.links]) as T[][] : [])
+const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as T[][] : [])
 </script>
 
 <template>
   <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list()">
-        <NavigationMenuItem v-for="(link, index) in list" :key="`list-${listIndex}-${index}`" :value="link.value || String(index)" :class="ui.item()">
-          <ULink v-slot="{ active, ...slotProps }" v-bind="omit(link, ['label', 'icon', 'avatar', 'badge', 'select'])" custom>
-            <NavigationMenuLink as-child :active="active" @select="link.select">
-              <ULinkBase v-bind="slotProps" :class="ui.link({ active, disabled: link.disabled })">
-                <slot name="leading" :link="link" :active="active" :index="index">
-                  <UAvatar v-if="link.avatar" size="2xs" v-bind="link.avatar" :class="ui.linkLeadingAvatar({ active })" />
-                  <UIcon v-else-if="link.icon" :name="link.icon" :class="ui.linkLeadingIcon({ active })" />
-                </slot>
-
-                <span v-if="link.label || $slots.default" :class="ui.linkLabel()">
-                  <slot :link="link" :active="active" :index="index">
-                    {{ link.label }}
+        <NavigationMenuItem v-for="(item, index) in list" :key="`list-${listIndex}-${index}`" :value="item.value || String(index)" :class="ui.item()">
+          <slot :name="item.slot || 'item'" :item="item" :index="index">
+            <ULink v-slot="{ active, ...slotProps }" v-bind="omit(item, ['label', 'icon', 'avatar', 'badge', 'select'])" custom>
+              <NavigationMenuLink as-child :active="active" @select="item.select">
+                <ULinkBase v-bind="slotProps" :class="ui.link({ active, disabled: !!item.disabled })">
+                  <slot name="leading" :item="item" :active="active" :index="index">
+                    <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ active, disabled: !!item.disabled })" />
+                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ active, disabled: !!item.disabled })" />
                   </slot>
-                </span>
 
-                <span v-if="$slots.trailing || link.badge" :class="ui.linkTrailing()">
-                  <slot name="trailing" :link="link" :active="active" :index="index">
-                    <UBadge
-                      v-if="link.badge"
-                      color="white"
-                      size="sm"
-                      v-bind="(typeof link.badge === 'string' || typeof link.badge === 'number') ? { label: link.badge } : link.badge"
-                      :class="ui.linkTrailingBadge()"
-                    />
-                  </slot>
-                </span>
-              </ULinkBase>
-            </NavigationMenuLink>
-          </ULink>
+                  <span v-if="item.label || $slots.label" :class="ui.linkLabel()">
+                    <slot name="label" :item="item" :active="active" :index="index">
+                      {{ item.label }}
+                    </slot>
+                  </span>
+
+                  <span v-if="$slots.trailing || item.badge" :class="ui.linkTrailing()">
+                    <slot name="trailing" :item="item" :active="active" :index="index">
+                      <UBadge
+                        v-if="item.badge"
+                        color="white"
+                        size="sm"
+                        v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
+                        :class="ui.linkTrailingBadge()"
+                      />
+                    </slot>
+                  </span>
+                </ULinkBase>
+              </NavigationMenuLink>
+            </ULink>
+          </slot>
         </NavigationMenuItem>
       </NavigationMenuList>
 
