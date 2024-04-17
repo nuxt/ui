@@ -1,6 +1,6 @@
 {
   "name": "@nuxt/ui",
-  "version": "2.15.0",
+  "version": "3.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
