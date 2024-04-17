@@ -29,6 +29,7 @@ const components = [
   'link',
   'modal',
   'navigation-menu',
+  'pagination',
   'popover',
   'radio-group',
   'separator',
