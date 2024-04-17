@@ -47,7 +47,7 @@ const props = defineProps<RadioGroupProps<T>>()
 const emits = defineEmits<RadioGroupEmits>()
 defineSlots<RadioGroupSlots<T>>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'orientation', 'loop', 'required'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 
 const { emitFormChange, color, name, size, inputId: _inputId, disabled } = useFormField<RadioGroupProps<T>>(props)
 const inputId = _inputId.value ?? useId()
