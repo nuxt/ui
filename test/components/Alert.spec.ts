@@ -15,7 +15,7 @@ describe('Alert', () => {
     ['with avatar', { props: { title: 'Title', avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' } } }],
     ['with as', { props: { title: 'Title', as: 'article' } }],
     ...colors.map((color: string) => [`with color ${color}`, { props: { label: 'Badge', color } }]),
-    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { label: 'Badge', variant } }]),
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { label: 'Badge', color: 'primary', variant } }]),
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { title: 'font-bold' } } }],
     // Slots
