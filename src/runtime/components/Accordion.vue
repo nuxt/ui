@@ -13,6 +13,7 @@ const accordion = tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })
 export interface AccordionItem {
   label?: string
   icon?: IconProps['name']
+  trailingIcon?: IconProps['name']
   slot?: string
   value?: string
   content?: string
@@ -21,6 +22,7 @@ export interface AccordionItem {
 
 export interface AccordionProps<T> extends Omit<AccordionRootProps, 'asChild' | 'dir' | 'orientation'> {
   items?: T[]
+  trailingIcon?: IconProps['name']
   content?: Omit<AccordionContentProps, 'asChild'>
   class?: any
   ui?: Partial<typeof accordion.slots>
@@ -75,7 +77,7 @@ const ui = computed(() => tv({ extend: accordion, slots: props.ui })({ disabled:
             </span>
 
             <slot name="trailing" :item="item" :index="index">
-              <UIcon :name="appConfig.ui.icons.chevronDown" :class="ui.trailingIcon()" />
+              <UIcon :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon()" />
             </slot>
           </slot>
         </AccordionTrigger>

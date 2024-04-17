@@ -27,6 +27,7 @@ describe('Accordion', () => {
   }, {
     label: 'Utilities',
     icon: 'i-heroicons-wrench-screwdriver',
+    trailingIcon: 'i-heroicons-sun',
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.',
     slot: 'custom'
   }]
@@ -42,6 +43,7 @@ describe('Accordion', () => {
     ['with type', { props: { ...props, type: 'multiple' as const } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with collapsible', { props: { ...props, collapsible: false } }],
+    ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-plus' } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
     ['with ui', { props: { ui: { ...props, item: 'border-gray-300 dark:border-gray-700' } } }],
     // Slots
