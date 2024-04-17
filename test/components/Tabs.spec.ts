@@ -17,17 +17,23 @@ describe('Tabs', () => {
     content: 'Finally, this is the content for Tab3'
   }]
 
+  const props = { items }
+
   it.each([
     // Props
-    ['with items', { props: { items } }],
-    ['with modelValue', { props: { items, modelValue: '1' } }],
-    ['with defaultValue', { props: { items, defaultValue: '1' } }],
-    ['with orientation vertical', { props: { items, orientation: 'vertical' as const } }],
-    ['with class', { props: { items, class: 'w-96' } }],
-    ['with ui', { props: { items, ui: { content: 'w-full ring ring-gray-200 dark:ring-gray-800' } } }],
+    ['with items', { props }],
+    ['with modelValue', { props: { ...props, modelValue: '1' } }],
+    ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['with class', { props: { ...props, class: 'w-96' } }],
+    ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-gray-200 dark:ring-gray-800' } } }],
     // Slots
-    ['with default slot', { props: { items }, slots: { default: () => 'Default slot' } }],
-    ['with content slot', { props: { items }, slots: { content: () => 'Content slot' } }]
+    ['with default slot', { props, slots: { default: () => 'Default slot' } }],
+    ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
+    ['with label slot', { props, slots: { label: () => 'Label slot' } }],
+    ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
+    ['with content slot', { props, slots: { content: () => 'Content slot' } }],
+    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TabsProps<typeof items[number]>, slots?: any }) => {
     const html = await ComponentRender(nameOrHtml, options, Tabs)
     expect(html).toMatchSnapshot()
