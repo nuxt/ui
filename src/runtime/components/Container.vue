@@ -12,12 +12,17 @@ const container = tv({ extend: tv(theme), ...(appConfig.ui?.container || {}) })
 export interface ContainerProps extends Omit<PrimitiveProps, 'asChild'> {
   class?: any
 }
+
+export interface ContainerSlots {
+  default(): any
+}
 </script>
 
 <script setup lang="ts">
 import { Primitive } from 'radix-vue'
 
 const props = withDefaults(defineProps<ContainerProps>(), { as: 'div' })
+defineSlots<ContainerSlots>()
 </script>
 
 <template>
