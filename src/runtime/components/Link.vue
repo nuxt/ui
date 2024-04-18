@@ -23,6 +23,10 @@ export interface LinkProps extends NuxtLinkProps, Omit<PrimitiveProps, 'asChild'
   raw?: boolean
   class?: any
 }
+
+export interface LinkSlots {
+  default(props: { active: boolean }): any
+}
 </script>
 
 <script setup lang="ts">
@@ -41,6 +45,7 @@ const props = withDefaults(defineProps<LinkProps>(), {
   activeClass: '',
   inactiveClass: ''
 })
+defineSlots<LinkSlots>()
 
 const route = useRoute()
 const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass'))
