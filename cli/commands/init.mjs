@@ -3,6 +3,7 @@ import { resolve } from 'pathe'
 import { defineCommand } from 'citty'
 import { consola } from 'consola'
 import { splitByCase, upperFirst, camelCase, kebabCase } from 'scule'
+import { appendFile, sortFile } from '../utils.mjs'
 import templates from '../templates.mjs'
 
 export default defineCommand({
@@ -41,17 +42,14 @@ export default defineCommand({
     }
 
     const themePath = resolve(path, 'src/theme/index.ts')
-    const theme = await fsp.readFile(themePath, 'utf-8')
-    const themeContents = `export { default as ${camelCase(name)} } from './${kebabCase(name)}'`
-    if (!theme.includes(themeContents)) {
-      await fsp.writeFile(themePath, theme.trim() + '\n' + themeContents + '\n')
-    }
+    const themeContent = `export { default as ${camelCase(name)} } from './${kebabCase(name)}'`
+    await appendFile(themePath, themeContent)
 
     const typesPath = resolve(path, 'src/runtime/types/index.d.ts')
-    const types = await fsp.readFile(typesPath, 'utf-8')
-    const typesContents = `export * from '../components/${splitByCase(name).map(p => upperFirst(p)).join('')}.vue'`
-    if (!types.includes(typesContents)) {
-      await fsp.writeFile(typesPath, types.trim() + '\n' + typesContents + '\n')
-    }
+    const typesContent = `export * from '../components/${splitByCase(name).map(p => upperFirst(p)).join('')}.vue'`
+    await appendFile(typesPath, typesContent)
+
+    await sortFile(themePath)
+    await sortFile(typesPath)
   }
 })
