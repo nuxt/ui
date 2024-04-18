@@ -16,6 +16,14 @@ export default defineCommand({
       type: 'positional',
       required: true,
       description: 'Name of the component.'
+    },
+    primitive: {
+      type: 'boolean',
+      description: 'Create a primitive component.'
+    },
+    pro: {
+      type: 'boolean',
+      description: 'Create a pro component.'
     }
   },
   async setup({ args }) {
@@ -28,7 +36,11 @@ export default defineCommand({
     const path = resolve('.')
 
     for (const template of Object.keys(templates)) {
-      const { filename, contents } = templates[template]({ name })
+      const { filename, contents } = templates[template](args)
+      if (!contents) {
+        continue
+      }
+
       const filePath = resolve(path, filename)
 
       if (existsSync(filePath)) {
@@ -42,14 +54,11 @@ export default defineCommand({
     }
 
     const themePath = resolve(path, 'src/theme/index.ts')
-    const themeContent = `export { default as ${camelCase(name)} } from './${kebabCase(name)}'`
-    await appendFile(themePath, themeContent)
+    await appendFile(themePath, `export { default as ${camelCase(name)} } from './${kebabCase(name)}'`)
+    await sortFile(themePath)
 
     const typesPath = resolve(path, 'src/runtime/types/index.d.ts')
-    const typesContent = `export * from '../components/${splitByCase(name).map(p => upperFirst(p)).join('')}.vue'`
-    await appendFile(typesPath, typesContent)
-
-    await sortFile(themePath)
+    await appendFile(typesPath, `export * from '../components/${splitByCase(name).map(p => upperFirst(p)).join('')}.vue'`)
     await sortFile(typesPath)
   }
 })

@@ -8,10 +8,10 @@ export async function sortFile(path) {
   await fsp.writeFile(path, lines.join('\n') + '\n')
 }
 
-export async function appendFile(path, content) {
+export async function appendFile(path, contents) {
   const file = await fsp.readFile(path, 'utf-8')
 
-  if (!file.includes(content)) {
-    await fsp.writeFile(path, file.trim() + '\n' + content + '\n')
+  if (!file.includes(contents)) {
+    await fsp.writeFile(path, file.trim() + '\n' + contents + '\n')
   }
 }
