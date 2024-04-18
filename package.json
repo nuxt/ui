@@ -15,10 +15,14 @@
       "require": "./dist/module.cjs"
     }
   },
+  "bin": {
+    "nuxt-ui": "./cli/index.mjs"
+  },
   "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "cli"
   ],
   "engines": {
     "node": ">=v16.20.2"
@@ -31,7 +35,6 @@
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
     "docs": "nuxi dev docs",
     "docs:build": "nuxi generate docs",
-    "cli": "node ./cli/index.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit",
