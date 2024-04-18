@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Alert, { type AlertProps } from '../../src/runtime/components/Alert.vue'
+import Alert, { type AlertProps, type AlertSlots } from '../../src/runtime/components/Alert.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/alert'
 
@@ -23,7 +23,7 @@ describe('Alert', () => {
     ['with title slot', { slots: { title: () => 'Title slot' } }],
     ['with description slot', { slots: { description: () => 'Description slot' } }],
     ['with close slot', { slots: { close: () => 'Close slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AlertProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AlertProps, slots?: Partial<AlertSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Alert)
     expect(html).toMatchSnapshot()
   })

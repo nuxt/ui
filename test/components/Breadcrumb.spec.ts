@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Breadcrumb, { type BreadcrumbProps } from '../../src/runtime/components/Breadcrumb.vue'
+import Breadcrumb, { type BreadcrumbProps, type BreadcrumbSlots } from '../../src/runtime/components/Breadcrumb.vue'
 import ComponentRender from '../component-render'
 
 describe('Breadcrumb', () => {
@@ -34,7 +34,7 @@ describe('Breadcrumb', () => {
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
     ['with separator slot', { props, slots: { separator: () => '/' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps<typeof items[number]>, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps<typeof items[number]>, slots?: Partial<BreadcrumbSlots<typeof items[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, Breadcrumb)
     expect(html).toMatchSnapshot()
   })

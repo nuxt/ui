@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
 import Toaster from '../../src/runtime/components/Toaster.vue'
-import Toast, { type ToastProps } from '../../src/runtime/components/Toast.vue'
+import Toast, { type ToastProps, type ToastSlots } from '../../src/runtime/components/Toast.vue'
 import ComponentRender from '../component-render'
 import { ClientOnly } from '#components'
 import theme from '#build/ui/toast'
@@ -38,7 +38,7 @@ describe('Toast', () => {
     ['with title slot', { slots: { title: () => 'Title slot' } }],
     ['with description slot', { slots: { description: () => 'Description slot' } }],
     ['with close slot', { slots: { close: () => 'Close slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ToastProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ToastProps, slots?: Partial<ToastSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ToastWrapper)
     expect(html).toMatchSnapshot()
   })

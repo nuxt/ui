@@ -8,7 +8,7 @@ import * as yup from 'yup'
 import Joi from 'joi'
 import * as valibot from 'valibot'
 import ComponentRender from '../component-render'
-import type { FormProps } from '../../src/runtime/components/Form.vue'
+import type { FormProps, FormSlots } from '../../src/runtime/components/Form.vue'
 import {
   UForm,
   UInput,
@@ -75,8 +75,8 @@ describe('Form', () => {
     // Props
     ['with state', { props: { state: {} } }],
     // Slots
-    ['with default slot', { props: { state: {} }, slots: { default: 'Form slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props: FormProps<any> }) => {
+    ['with default slot', { props: { state: {} }, slots: { default: () => 'Form slot' } }]
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props: FormProps<any>, slots?: Partial<FormSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, UForm)
     expect(html).toMatchSnapshot()
   })

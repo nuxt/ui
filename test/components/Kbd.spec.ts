@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Kbd, { type KbdProps } from '../../src/runtime/components/Kbd.vue'
+import Kbd, { type KbdProps, type KbdSlots } from '../../src/runtime/components/Kbd.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/kbd'
 
@@ -16,7 +16,7 @@ describe('Kbd', () => {
     ['with class', { props: { value: 'K', class: 'font-bold' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: KbdProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: KbdProps, slots?: Partial<KbdSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Kbd)
     expect(html).toMatchSnapshot()
   })

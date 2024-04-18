@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Slideover, { type SlideoverProps } from '../../src/runtime/components/Slideover.vue'
+import Slideover, { type SlideoverProps, type SlideoverSlots } from '../../src/runtime/components/Slideover.vue'
 import ComponentRender from '../component-render'
 
 describe('Slideover', () => {
@@ -25,7 +25,7 @@ describe('Slideover', () => {
     ['with close slot', { props: { open: true, portal: false }, slots: { close: () => 'Close slot' } }],
     ['with body slot', { props: { open: true, portal: false }, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props: { open: true, portal: false }, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SlideoverProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SlideoverProps, slots?: Partial<SlideoverSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Slideover)
     expect(html).toMatchSnapshot()
   })

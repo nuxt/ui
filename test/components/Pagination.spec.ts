@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Pagination, { type PaginationProps } from '../../src/runtime/components/Pagination.vue'
+import Pagination, { type PaginationProps, type PaginationSlots } from '../../src/runtime/components/Pagination.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/button'
 
@@ -40,7 +40,7 @@ describe('Pagination', () => {
     ['with last slot', { props, slots: { last: () => 'Last slot' } }],
     ['with ellipsis slot', { props: { ...props, siblingCount: 1, showEdges: true, page: 5 }, slots: { ellipsis: () => 'Ellipsis slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PaginationProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PaginationProps, slots?: Partial<PaginationSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Pagination)
     expect(html).toMatchSnapshot()
   })

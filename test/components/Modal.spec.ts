@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Modal, { type ModalProps } from '../../src/runtime/components/Modal.vue'
+import Modal, { type ModalProps, type ModalSlots } from '../../src/runtime/components/Modal.vue'
 import ComponentRender from '../component-render'
 
 describe('Modal', () => {
@@ -23,7 +23,7 @@ describe('Modal', () => {
     ['with close slot', { props: { open: true, portal: false }, slots: { close: () => 'Close slot' } }],
     ['with body slot', { props: { open: true, portal: false }, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props: { open: true, portal: false }, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ModalProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ModalProps, slots?: Partial<ModalSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Modal)
     expect(html).toMatchSnapshot()
   })

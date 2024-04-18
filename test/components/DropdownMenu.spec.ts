@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import DropdownMenu, { type DropdownMenuProps } from '../../src/runtime/components/DropdownMenu.vue'
+import DropdownMenu, { type DropdownMenuProps, type DropdownMenuSlots } from '../../src/runtime/components/DropdownMenu.vue'
 import ComponentRender from '../component-render'
 
 describe('DropdownMenu', () => {
@@ -34,7 +34,7 @@ describe('DropdownMenu', () => {
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DropdownMenuProps<typeof items[number]>, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DropdownMenuProps<typeof items[number]>, slots?: Partial<DropdownMenuSlots<typeof items[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, DropdownMenu)
     expect(html).toMatchSnapshot()
   })

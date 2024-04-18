@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Link, { type LinkProps } from '../../src/runtime/components/Link.vue'
+import Link, { type LinkProps, type LinkSlots } from '../../src/runtime/components/Link.vue'
 import ComponentRender from '../component-render'
 
 describe('Link', () => {
@@ -15,7 +15,7 @@ describe('Link', () => {
     ['with inactiveClass', { props: { active: false, inactiveClass: 'hover:text-primary-500 dark:hover:text-primary-400' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: LinkProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: LinkProps, slots?: Partial<LinkSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Link)
     expect(html).toMatchSnapshot()
   })

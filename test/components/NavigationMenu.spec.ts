@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import NavigationMenu, { type NavigationMenuProps } from '../../src/runtime/components/NavigationMenu.vue'
+import NavigationMenu, { type NavigationMenuProps, type NavigationMenuSlots } from '../../src/runtime/components/NavigationMenu.vue'
 import ComponentRender from '../component-render'
 
 describe('NavigationMenu', () => {
@@ -38,7 +38,7 @@ describe('NavigationMenu', () => {
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps<typeof items[number]>, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps<typeof items[number]>, slots?: Partial<NavigationMenuSlots<typeof items[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, NavigationMenu)
     expect(html).toMatchSnapshot()
   })

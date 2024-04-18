@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
-import FormField, { type FormFieldProps } from '../../src/runtime/components/FormField.vue'
+import FormField, { type FormFieldProps, type FormFieldSlots } from '../../src/runtime/components/FormField.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/form-field'
 
@@ -33,7 +33,7 @@ describe('FormField', () => {
     ['with error slot', { slots: { error: () => 'Error slot' } }],
     ['with hint slot', { slots: { hint: () => 'Hint slot' } }],
     ['with help slot', { slots: { help: () => 'Help slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FormFieldProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FormFieldProps, slots?: Partial<FormFieldSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, FormFieldWrapper)
     expect(html).toMatchSnapshot()
   })

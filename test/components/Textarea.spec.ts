@@ -1,6 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Textarea, { type TextareaProps } from '../../src/runtime/components/Textarea.vue'
+import Textarea, { type TextareaProps, type TextareaSlots } from '../../src/runtime/components/Textarea.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/textarea'
 
@@ -24,7 +24,7 @@ describe('Textarea', () => {
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TextareaProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TextareaProps, slots?: Partial<TextareaSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Textarea)
     expect(html).toMatchSnapshot()
   })

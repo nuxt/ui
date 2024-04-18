@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Separator, { type SeparatorProps } from '../../src/runtime/components/Separator.vue'
+import Separator, { type SeparatorProps, type SeparatorSlots } from '../../src/runtime/components/Separator.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/separator'
 
@@ -21,7 +21,7 @@ describe('Separator', () => {
     ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
     ['with class', { props: { class: 'flex-row-reverse' } }],
     ['with ui', { props: { ui: { label: 'text-lg' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SeparatorProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SeparatorProps, slots?: Partial<SeparatorSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Separator)
     expect(html).toMatchSnapshot()
   })

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Chip, { type ChipProps } from '../../src/runtime/components/Chip.vue'
+import Chip, { type ChipProps, type ChipSlots } from '../../src/runtime/components/Chip.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/chip'
 
@@ -21,7 +21,7 @@ describe('Chip', () => {
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChipProps & { show?: boolean }, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChipProps & { show?: boolean }, slots?: Partial<ChipSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Chip)
     expect(html).toMatchSnapshot()
   })

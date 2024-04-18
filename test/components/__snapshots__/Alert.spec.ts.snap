@@ -144,7 +144,7 @@ exports[`Alert > renders with description slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with icon correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900"><svg data-v-9533427c="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon shrink-0 size-5" width="1em" height="1em" viewBox="0 0 24 24">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900"><svg data-v-f1d9e076="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon shrink-0 size-5" width="1em" height="1em" viewBox="0 0 24 24">
     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"></path>
   </svg>
   <div class="min-w-0 flex-1 flex flex-col gap-1">

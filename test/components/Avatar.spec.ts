@@ -15,7 +15,7 @@ describe('Avatar', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { src: 'https://avatars.githubusercontent.com/u/739984?v=4', size } }]),
     ['with class', { props: { class: 'bg-white dark:bg-gray-900' } }],
     ['with ui', { props: { ui: { fallback: 'font-bold' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarProps }) => {
     const html = await ComponentRender(nameOrHtml, options, Avatar)
     expect(html).toMatchSnapshot()
   })

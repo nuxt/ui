@@ -21,7 +21,7 @@ describe('Slider', () => {
     ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { track: 'bg-gray-100 dark:bg-gray-800' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SliderProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SliderProps }) => {
     const html = await ComponentRender(nameOrHtml, options, Slider)
     expect(html).toMatchSnapshot()
   })

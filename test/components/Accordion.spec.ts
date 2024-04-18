@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Accordion, { type AccordionProps } from '../../src/runtime/components/Accordion.vue'
+import Accordion, { type AccordionProps, type AccordionSlots } from '../../src/runtime/components/Accordion.vue'
 import ComponentRender from '../component-render'
 
 describe('Accordion', () => {
@@ -53,7 +53,7 @@ describe('Accordion', () => {
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps<typeof items[number]>, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps<typeof items[number]>, slots?: Partial<AccordionSlots<typeof items[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, Accordion)
     expect(html).toMatchSnapshot()
   })

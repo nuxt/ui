@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Badge, { type BadgeProps } from '../../src/runtime/components/Badge.vue'
+import Badge, { type BadgeProps, type BadgeSlots } from '../../src/runtime/components/Badge.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/badge'
 
@@ -18,7 +18,7 @@ describe('Badge', () => {
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { label: 'Badge', variant } }]),
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BadgeProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BadgeProps, slots?: Partial<BadgeSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Badge)
     expect(html).toMatchSnapshot()
   })

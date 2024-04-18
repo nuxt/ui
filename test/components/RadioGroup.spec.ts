@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import RadioGroup, { type RadioGroupProps } from '../../src/runtime/components/RadioGroup.vue'
+import RadioGroup, { type RadioGroupProps, type RadioGroupSlots } from '../../src/runtime/components/RadioGroup.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/radio-group'
 
@@ -27,7 +27,7 @@ describe('RadioGroup', () => {
     ['with legend slot', { props: { options }, slots: { label: () => 'Legend slot' } }],
     ['with label slot', { props: { options }, slots: { label: () => 'Label slot' } }],
     ['with description slot', { slots: { label: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: RadioGroupProps<any>, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: RadioGroupProps<any>, slots?: Partial<RadioGroupSlots<any>> }) => {
     const html = await ComponentRender(nameOrHtml, options, RadioGroup)
     expect(html).toMatchSnapshot()
   })

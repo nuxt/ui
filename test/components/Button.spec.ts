@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Button, { type ButtonProps } from '../../src/runtime/components/Button.vue'
+import Button, { type ButtonProps, type ButtonSlots } from '../../src/runtime/components/Button.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/button'
 
@@ -31,7 +31,7 @@ describe('Button', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ButtonProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ButtonProps, slots?: Partial<ButtonSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Button)
     expect(html).toMatchSnapshot()
   })

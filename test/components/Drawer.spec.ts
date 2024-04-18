@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Drawer, { type DrawerProps } from '../../src/runtime/components/Drawer.vue'
+import Drawer, { type DrawerProps, type DrawerSlots } from '../../src/runtime/components/Drawer.vue'
 import ComponentRender from '../component-render'
 
 describe('Drawer', () => {
@@ -18,7 +18,7 @@ describe('Drawer', () => {
     ['with description slot', { props: { open: true, portal: false }, slots: { description: () => 'Description slot' } }],
     ['with body slot', { props: { open: true, portal: false }, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props: { open: true, portal: false }, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DrawerProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DrawerProps, slots?: Partial<DrawerSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Drawer)
     expect(html).toMatchSnapshot()
   })

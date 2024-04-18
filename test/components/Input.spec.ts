@@ -1,6 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Input, { type InputProps } from '../../src/runtime/components/Input.vue'
+import Input, { type InputProps, type InputSlots } from '../../src/runtime/components/Input.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 
@@ -33,7 +33,7 @@ describe('Input', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputProps, slots?: any }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputProps, slots?: Partial<InputSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Input)
     expect(html).toMatchSnapshot()
   })
