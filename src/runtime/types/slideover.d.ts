@@ -1,6 +1,6 @@
 import type { Component } from 'vue'
 
-interface Slideover {
+export interface Slideover {
     ui?: any;
     side?: 'right' | 'left';
     transition?: boolean;
@@ -10,7 +10,7 @@ interface Slideover {
     modelValue?: boolean;
 }
 
-interface SlideoverState {
+export interface SlideoverState {
     component: Component | string;
     props: Slideover;
 }
