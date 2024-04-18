@@ -8,20 +8,12 @@ export default createConfigForNuxt({
       braceStyle: '1tbs'
     }
   }
-}).override('nuxt/vue/rules', {
-  rules: {
-    'vue/multi-word-component-names': 'off',
-    'vue/max-attributes-per-line': ['error', { singleline: 5 }]
-  }
-}).override('nuxt/import/rules', {
-  rules: {
-    'import/first': 'off',
-    'import/order': 'off'
-  }
-}).override('nuxt/typescript/rules', {
-  rules: {
-    '@typescript-eslint/no-explicit-any': 'off'
-  }
+}).overrideRules({
+  'import/first': 'off',
+  'import/order': 'off',
+  'vue/multi-word-component-names': 'off',
+  'vue/max-attributes-per-line': ['error', { singleline: 5 }],
+  '@typescript-eslint/no-explicit-any': 'off'
 }).append({
   ignores: [
     'docs/**'
