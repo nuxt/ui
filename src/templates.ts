@@ -176,7 +176,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
 `
   })
 
-  nuxt.options.css.push(template.dst)
+  nuxt.options.css.unshift(template.dst)
 
   for (const component in theme) {
     addTemplate({
