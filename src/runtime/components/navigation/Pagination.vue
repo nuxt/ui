@@ -29,7 +29,7 @@
     <UButton
       v-for="(page, index) of displayedPages"
       :key="`${page}-${index}`"
-      :to="typeof page === 'number' && to?.(page)"
+      :to="typeof page === 'number' ? to?.(page) : null"
       :size="size"
       :disabled="disabled"
       :label="`${page}`"
