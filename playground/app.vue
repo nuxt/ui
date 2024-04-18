@@ -33,6 +33,7 @@ const components = [
   'popover',
   'radio-group',
   'separator',
+  'shortcuts',
   'skeleton',
   'slideover',
   'slider',
