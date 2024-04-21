@@ -46,6 +46,12 @@ props:
 ---
 ::
 
+### Links
+
+Use the `to` property to transform buttons into links. Note that it must be a function that receives the page number and returns a route destination.
+
+:component-example{component="pagination-example-to"}
+
 ### Disabled
 
 Use the `disabled` prop to disable all the buttons.
