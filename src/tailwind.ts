@@ -2,7 +2,7 @@ import { join } from 'pathe'
 import { addTemplate, createResolver, installModule, useNuxt } from '@nuxt/kit'
 import defaultColors from 'tailwindcss/colors.js'
 
-import { excludeColors, generateSafelist } from './runtime/utils/colors'
+import { excludeColors } from './runtime/utils/colors'
 import type { ModuleOptions } from './module'
 
 export default async function installTailwind (
@@ -71,20 +71,15 @@ export default async function installTailwind (
       colors,
       strategy: 'merge'
     }
-
-    tailwindConfig.safelist = tailwindConfig.safelist || []
-    tailwindConfig.safelist.push(
-      ...generateSafelist(moduleOptions.safelistColors || [], colors)
-    )
   })
 
   // 2. add config template
   const configTemplate = addTemplate({
     filename: 'nuxtui-tailwind.config.cjs',
     write: true,
-    getContents: () => `
+    getContents: ({ nuxt }) => `
       const { defaultExtractor: createDefaultExtractor } = require('tailwindcss/lib/lib/defaultExtractor.js')
-      const { customSafelistExtractor } = require(${JSON.stringify(resolve(runtimeDir, 'utils', 'colors'))})
+      const { customSafelistExtractor, generateSafelist } = require(${JSON.stringify(resolve(runtimeDir, 'utils', 'colors'))})
       const { iconsPlugin, getIconCollections } = require('@egoist/tailwindcss-icons')
 
       const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
@@ -116,7 +111,8 @@ export default async function installTailwind (
               ]
             }
           }
-        }
+        },
+        safelist: generateSafelist(${JSON.stringify(moduleOptions.safelistColors || [])}, ${JSON.stringify(nuxt.options.appConfig.ui.colors)}),
       }
     `
   })
@@ -124,6 +120,7 @@ export default async function installTailwind (
   // 3. install module
   await installModule('@nuxtjs/tailwindcss', {
     exposeConfig: true,
+    config: { darkMode: 'class' },
     configPath: [
       configTemplate.dst,
       join(nuxt.options.rootDir, 'tailwind.config')
