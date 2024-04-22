@@ -30,9 +30,14 @@ export function useToast () {
     }
   }
 
+  function clear () {
+    notifications.value = []
+  }
+
   return {
     add,
     remove,
-    update
+    update,
+    clear
   }
 }
