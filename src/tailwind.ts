@@ -1,4 +1,5 @@
 import { join } from 'pathe'
+import { defu } from 'defu'
 import { addTemplate, createResolver, installModule, useNuxt } from '@nuxt/kit'
 
 import { setGlobalColors } from './runtime/utils/colors'
@@ -75,12 +76,12 @@ export default async function installTailwind (
   })
 
   // 3. install module
-  await installModule('@nuxtjs/tailwindcss', {
+  await installModule('@nuxtjs/tailwindcss', defu({
     exposeConfig: true,
     config: { darkMode: 'class' },
     configPath: [
       configTemplate.dst,
       join(nuxt.options.rootDir, 'tailwind.config')
     ]
-  })
+  }, nuxt.options.tailwindcss))
 }
