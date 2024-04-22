@@ -4,6 +4,7 @@ export default {
   divide: 'divide-y divide-gray-300 dark:divide-gray-700',
   thead: 'relative',
   tbody: 'divide-y divide-gray-200 dark:divide-gray-800',
+  caption: 'sr-only',
   tr: {
     base: '',
     selected: 'bg-gray-50 dark:bg-gray-800/50',

@@ -12,7 +12,7 @@
     "@nuxt/eslint-config": "^0.3.6",
     "@nuxt/fonts": "^0.6.1",
     "@nuxt/image": "^1.5.0",
-    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@1.1.0-28546155.4b9828b",
+    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@1.1.0-28548740.d20325b",
     "@nuxtjs/plausible": "^1.0.0",
     "@octokit/rest": "^20.1.0",
     "@vueuse/nuxt": "^10.9.0",

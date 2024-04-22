@@ -1,5 +1,5 @@
 export default {
-  wrapper: 'relative',
+  wrapper: 'relative min-w-0',
   ol: 'flex items-center gap-x-1.5',
   li: 'flex items-center gap-x-1.5 text-gray-500 dark:text-gray-400 text-sm leading-6 min-w-0',
   base: 'flex items-center gap-x-1.5 group font-semibold min-w-0',

@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, onMounted, onUnmounted, watchEffect, defineComponent } from 'vue'
+import { ref, computed, toRef, onMounted, onUnmounted, watch, watchEffect, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -123,7 +123,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('notification', toRef(props, 'ui'), config)
 
-    let timer: any = null
+    let timer: null | ReturnType<typeof useTimer> = null
     const remaining = ref(props.timeout)
 
     const wrapperClass = computed(() => {
@@ -191,7 +191,11 @@ export default defineComponent({
       emit('close')
     }
 
-    onMounted(() => {
+    function initTimer () {
+      if (timer) {
+        timer.stop()
+      }
+
       if (!props.timeout) {
         return
       }
@@ -203,7 +207,11 @@ export default defineComponent({
       watchEffect(() => {
         remaining.value = timer.remaining.value
       })
-    })
+    }
+
+    watch(() => props.timeout, initTimer)
+
+    onMounted(initTimer)
 
     onUnmounted(() => {
       if (timer) {

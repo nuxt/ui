@@ -7,6 +7,7 @@
           :class="[ui.base, index === links.length - 1 ? ui.active : !!link.to ? ui.inactive : '']"
           v-bind="getULinkProps(link)"
           :aria-current="index === links.length - 1 ? 'page' : undefined"
+          @click="link.click"
         >
           <slot name="icon" :link="link" :index="index" :is-active="index === links.length - 1">
             <UIcon

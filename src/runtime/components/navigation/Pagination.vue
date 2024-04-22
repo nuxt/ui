@@ -29,6 +29,7 @@
     <UButton
       v-for="(page, index) of displayedPages"
       :key="`${page}-${index}`"
+      :to="typeof page === 'number' ? to?.(page) : null"
       :size="size"
       :disabled="disabled"
       :label="`${page}`"
@@ -69,6 +70,7 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
+import type { RouteLocationRaw } from '#vue-router'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
@@ -116,6 +118,10 @@ export default defineComponent({
       validator (value: string) {
         return Object.keys(buttonConfig.size).includes(value)
       }
+    },
+    to: {
+      type: Function as PropType<(page: number) => RouteLocationRaw>,
+      default: null
     },
     activeButton: {
       type: Object as PropType<Button>,

@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.15.2](https://github.com/nuxt/ui/compare/v2.15.1...v2.15.2) (2024-04-12)
+
+
+### Features
+
+* **Accordion:** add `unmount` prop to allow lazy mounting for heavy components ([#1590](https://github.com/nuxt/ui/issues/1590)) ([91e5002](https://github.com/nuxt/ui/commit/91e50020507ac66992dfb52b3e0ad1a1ae5614b5))
+* **Table:** add `checkbox` ui config ([#1409](https://github.com/nuxt/ui/issues/1409)) ([8b54660](https://github.com/nuxt/ui/commit/8b546600dbfbff187d9c5be1b35ea1772e94f83f))
+
+
+### Bug Fixes
+
+* **Breadcrumb:** missing `min-w-0` on wrapper to truncate ([9f01145](https://github.com/nuxt/ui/commit/9f01145bc674378371ff34d7110f3235b57d2459)), closes [#1650](https://github.com/nuxt/ui/issues/1650)
+* **Carousel:** next and prev buttons disabled ([#1619](https://github.com/nuxt/ui/issues/1619)) ([e909884](https://github.com/nuxt/ui/commit/e909884d0327bfd7b4d5551382123f8998beff6a))
+* **Popover/Dropdown:** prevent unintended closure on touchstart in mobile devices ([#1609](https://github.com/nuxt/ui/issues/1609)) ([2392b4a](https://github.com/nuxt/ui/commit/2392b4aa405430fc22766f130448a7cc5ced9a3a))
+* **Slideover:** remove dynamic component when closing ([#1615](https://github.com/nuxt/ui/issues/1615)) ([58faa10](https://github.com/nuxt/ui/commit/58faa1053b9be3f627c3fcff1bcaa14850bb9e7f))
+* **Slideover:** wait for transition to complete to reset state ([#1624](https://github.com/nuxt/ui/issues/1624)) ([07a4d13](https://github.com/nuxt/ui/commit/07a4d13c0fcb05c87fb42e02a3a2d6c5c52ccf09))
+
 ## [2.15.1](https://github.com/nuxt/ui/compare/v2.15.0...v2.15.1) (2024-04-02)
 
 
