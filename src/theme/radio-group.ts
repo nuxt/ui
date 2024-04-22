@@ -1,7 +1,7 @@
 export default (config: { colors: string[] }) => ({
   slots: {
     root: 'relative',
-    fieldset: 'flex flex-col',
+    fieldset: 'flex',
     legend: 'mb-1 block font-medium text-gray-700 dark:text-gray-200',
     option: 'flex items-start',
     base: 'rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-offset-white dark:focus-visible:outline-offset-gray-900',
@@ -16,6 +16,15 @@ export default (config: { colors: string[] }) => ({
       base: `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`,
       indicator: `bg-${color}-500 dark:bg-${color}-400`
     }])),
+    orientation: {
+      horizontal: {
+        fieldset: 'flex-row',
+        wrapper: 'me-2'
+      },
+      vertical: {
+        fieldset: 'flex-col'
+      }
+    },
     size: {
       xs: {
         fieldset: 'gap-0.5',

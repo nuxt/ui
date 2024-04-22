@@ -55,5 +55,6 @@ const optionsWithDescription = [
         </template>
       </URadioGroup>
     </div>
+    <URadioGroup :options="options" legend="Legend" orientation="horizontal" required />
   </div>
 </template>

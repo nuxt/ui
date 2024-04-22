@@ -23,6 +23,7 @@ describe('RadioGroup', () => {
     ...colors.map((color: string) => [`with color ${color}`, { props: { options, color } }]),
     ['with class', { props: { options, class: 'absolute' } }],
     ['with ui', { props: { ui: { options, wrapper: 'ms-4' } } }],
+    ['with orientation', { props: { options, orientation: 'horizontal' } }],
     // Slots
     ['with legend slot', { props: { options }, slots: { label: () => 'Legend slot' } }],
     ['with label slot', { props: { options }, slots: { label: () => 'Label slot' } }],

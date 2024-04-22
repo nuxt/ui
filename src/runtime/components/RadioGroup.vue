@@ -43,7 +43,7 @@ import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardP
 import { reactivePick } from '@vueuse/core'
 import { useId, useFormField } from '#imports'
 
-const props = defineProps<RadioGroupProps<T>>()
+const props = withDefaults(defineProps<RadioGroupProps<T>>(), { orientation: 'vertical' })
 const emits = defineEmits<RadioGroupEmits>()
 defineSlots<RadioGroupSlots<T>>()
 
@@ -56,7 +56,8 @@ const ui = computed(() => tv({ extend: radioGroup, slots: props.ui })({
   size: size.value,
   color: color.value,
   disabled: disabled.value,
-  required: props.required
+  required: props.required,
+  orientation: props.orientation
 }))
 
 function normalizeOption(option: any) {

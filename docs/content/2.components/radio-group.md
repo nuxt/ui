@@ -53,6 +53,20 @@ props:
 This prop also work on the Radio component.
 ::
 
+### Orientation
+
+You can change the orientation of the divider by setting the `orientation` prop to `horizontal` or `vertical`. Defaults to `vertical`.
+
+::component-card
+---
+baseProps:
+  options: [{ value: 'email', label: 'Email' }, { value: 'sms', label: 'Phone (SMS)' }, { value: 'push', label: 'Push notification' }]
+  modelValue: 'sms'
+props:
+  orientation: 'horizontal'
+---
+::
+
 ### Disabled
 
 Use the `disabled` prop to disable the RadioGroup.
