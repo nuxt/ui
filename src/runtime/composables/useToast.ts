@@ -50,10 +50,15 @@ export function useToast() {
     }, 200)
   }
 
+  function clear() {
+    toasts.value = []
+  }
+
   return {
     toasts,
     add,
     update,
-    remove
+    remove,
+    clear
   }
 }
