@@ -1,9 +1,9 @@
 import { ref, computed, toValue } from 'vue'
 import type { MaybeRef } from 'vue'
-import { useEventListener, useDebounceFn } from '@vueuse/core'
-import { useShortcuts } from './useShortcuts'
+import { useEventListener, useActiveElement, useDebounceFn } from '@vueuse/core'
+import { useKbd } from '#imports'
 
-type Handler = () => void
+type Handler = (e?: any) => void
 
 export interface ShortcutConfig {
   handler: Handler
@@ -35,14 +35,35 @@ interface Shortcut {
 const chainedShortcutRegex = /^[^-]+.*-.*[^-]+$/
 const combinedShortcutRegex = /^[^_]+.*_.*[^_]+$/
 
-export const defineShortcuts = (config: MaybeRef<ShortcutsConfig>, options: ShortcutsOptions = {}) => {
-  const { macOS, usingInput } = useShortcuts()
+export function extractShortcuts(items: any[] | any[][]) {
+  const shortcuts: Record<string, Handler> = {}
 
+  function traverse(items: any[]) {
+    items.forEach((item) => {
+      if (item.kbds?.length && (item.select || item.click)) {
+        const shortcutKey = item.kbds.join('_')
+        shortcuts[shortcutKey] = item.select || item.click
+      }
+      if (item.children) {
+        traverse(item.children.flat())
+      }
+    })
+  }
+
+  traverse(items.flat())
+
+  return shortcuts
+}
+
+export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: ShortcutsOptions = {}) {
   const chainedInputs = ref<string[]>([])
   const clearChainedInput = () => {
     chainedInputs.value.splice(0, chainedInputs.value.length)
   }
   const debouncedClearChainedInput = useDebounceFn(clearChainedInput, options.chainDelay ?? 800)
+
+  const { macOS } = useKbd()
+  const activeElement = useActiveElement()
 
   const onKeyDown = (e: KeyboardEvent) => {
     // Input autocomplete triggers a keydown event
@@ -65,7 +86,7 @@ export const defineShortcuts = (config: MaybeRef<ShortcutsConfig>, options: Shor
 
         if (shortcut.enabled) {
           e.preventDefault()
-          shortcut.handler()
+          shortcut.handler(e)
         }
         clearChainedInput()
         return
@@ -102,6 +123,19 @@ export const defineShortcuts = (config: MaybeRef<ShortcutsConfig>, options: Shor
     debouncedClearChainedInput()
   }
 
+  const usingInput = computed(() => {
+    const tagName = activeElement.value?.tagName
+    const contentEditable = activeElement.value?.contentEditable
+
+    const usingInput = !!(tagName === 'INPUT' || tagName === 'TEXTAREA' || contentEditable === 'true' || contentEditable === 'plaintext-only')
+
+    if (usingInput) {
+      return ((activeElement.value as any)?.name as string) || true
+    }
+
+    return false
+  })
+
   // Map config to full detailled shortcuts
   const shortcuts = computed<Shortcut[]>(() => {
     return Object.entries(toValue(config)).map(([key, shortcutConfig]) => {
@@ -132,11 +166,11 @@ export const defineShortcuts = (config: MaybeRef<ShortcutsConfig>, options: Shor
       } else {
         const keySplit = key.toLowerCase().split('_').map(k => k)
         shortcut = {
-          key: keySplit.filter(k => !['meta', 'ctrl', 'shift', 'alt'].includes(k)).join('_'),
-          metaKey: keySplit.includes('meta'),
+          key: keySplit.filter(k => !['meta', 'command', 'ctrl', 'shift', 'alt', 'option'].includes(k)).join('_'),
+          metaKey: keySplit.includes('meta') || keySplit.includes('command'),
           ctrlKey: keySplit.includes('ctrl'),
           shiftKey: keySplit.includes('shift'),
-          altKey: keySplit.includes('alt')
+          altKey: keySplit.includes('alt') || keySplit.includes('option')
         }
       }
       shortcut.chained = chained

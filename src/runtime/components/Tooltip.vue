@@ -12,7 +12,7 @@ const tooltip = tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })
 
 export interface TooltipProps extends TooltipRootProps {
   text?: string
-  shortcuts?: string[] | KbdProps[]
+  kbds?: KbdProps['value'][] | KbdProps[]
   content?: Omit<TooltipContentProps, 'asChild'>
   arrow?: boolean | Omit<TooltipArrowProps, 'asChild'>
   portal?: boolean
@@ -57,8 +57,8 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })({ side: conte
         <slot name="content">
           <span v-if="text" :class="ui.text()">{{ text }}</span>
 
-          <span v-if="shortcuts?.length" :class="ui.shortcuts()">
-            <UKbd v-for="(shortcut, index) in shortcuts" :key="index" size="sm" v-bind="typeof shortcut === 'string' ? { value: shortcut } : shortcut" />
+          <span v-if="kbds?.length" :class="ui.kbds()">
+            <UKbd v-for="(kbd, index) in kbds" :key="index" size="sm" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
 

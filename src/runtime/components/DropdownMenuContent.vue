@@ -54,11 +54,11 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
       </slot>
     </span>
 
-    <span v-if="$slots.trailing || item.children?.length || item.shortcuts?.length" :class="ui.linkTrailing()">
+    <span v-if="$slots.trailing || item.children?.length || item.kbds?.length" :class="ui.linkTrailing()">
       <slot name="trailing" :item="item" :active="active" :index="index">
         <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.linkTrailingIcon()" />
-        <span v-else-if="item.shortcuts?.length" :class="ui.linkTrailingShortcuts()">
-          <UKbd v-for="(shortcut, shortcutIndex) in item.shortcuts" :key="shortcutIndex" size="md" v-bind="typeof shortcut === 'string' ? { value: shortcut } : shortcut" />
+        <span v-else-if="item.kbds?.length" :class="ui.linkTrailingKbds()">
+          <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" size="md" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
         </span>
       </slot>
     </span>
@@ -107,7 +107,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
           </DropdownMenu.Sub>
           <DropdownMenu.Item v-else as-child :disabled="item.disabled" :text-value="item.label" @select="item.select">
             <slot :name="item.slot || 'item'" :item="item" :index="index">
-              <ULink v-slot="{ active, ...slotProps }" v-bind="omit((item as DropdownMenuItem), ['label', 'icon', 'avatar', 'shortcuts', 'slot', 'open', 'defaultOpen', 'select', 'children', 'type'])" custom>
+              <ULink v-slot="{ active, ...slotProps }" v-bind="omit((item as DropdownMenuItem), ['label', 'icon', 'avatar', 'kbds', 'slot', 'open', 'defaultOpen', 'select', 'children', 'type'])" custom>
                 <ULinkBase v-bind="slotProps" :class="ui.link({ active })">
                   <ReuseItemTemplate :item="item" :active="active" :index="index" />
                 </ULinkBase>

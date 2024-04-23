@@ -11,11 +11,11 @@ describe('DropdownMenu', () => {
   }, {
     label: 'Edit',
     icon: 'i-heroicons-pencil-square-20-solid',
-    shortcuts: ['E']
+    kbds: ['E']
   }, {
     label: 'Duplicate',
     icon: 'i-heroicons-document-duplicate-20-solid',
-    shortcuts: ['D'],
+    kbds: ['D'],
     disabled: true,
     slot: 'custom'
   }]

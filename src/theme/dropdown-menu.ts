@@ -9,7 +9,7 @@ export default {
     linkLeadingAvatar: 'shrink-0',
     linkTrailing: 'ms-auto inline-flex',
     linkTrailingIcon: 'shrink-0 size-5',
-    linkTrailingShortcuts: 'hidden lg:inline-flex items-center shrink-0 gap-0.5',
+    linkTrailingKbds: 'hidden lg:inline-flex items-center shrink-0 gap-0.5',
     linkLabel: 'truncate'
   },
   variants: {
