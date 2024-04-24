@@ -65,7 +65,7 @@ export default (config: { colors: string[] }) => {
         true: ''
       },
       type: {
-        file: 'file:mr-1.5 file:font-medium file:text-gray-500 dark:text-gray-400 file:outline-none'
+        file: 'file:mr-1.5 file:font-medium file:text-gray-500 dark:file:text-gray-400 file:outline-none'
       }
     },
     compoundVariants: [...config.colors.map((color: string) => ({
