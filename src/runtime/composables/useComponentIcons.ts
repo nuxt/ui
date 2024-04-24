@@ -1,15 +1,14 @@
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import type { IconProps } from '#ui/types'
 
 export interface UseComponentIconsProps {
-  icon?: IconProps['name']
+  icon?: string
   leading?: boolean
-  leadingIcon?: IconProps['name']
+  leadingIcon?: string
   trailing?: boolean
-  trailingIcon?: IconProps['name']
+  trailingIcon?: string
   loading?: boolean
-  loadingIcon?: IconProps['name']
+  loadingIcon?: string
 }
 
 export function useComponentIcons(props: UseComponentIconsProps) {

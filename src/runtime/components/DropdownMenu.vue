@@ -4,7 +4,7 @@ import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentP
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
-import type { AvatarProps, IconProps, KbdProps, LinkProps } from '#ui/types'
+import type { AvatarProps, KbdProps, LinkProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -12,7 +12,7 @@ const dropdownMenu = tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {
 
 export interface DropdownMenuItem extends Omit<LinkProps, 'type'> {
   label?: string
-  icon?: IconProps['name']
+  icon?: string
   avatar?: AvatarProps
   disabled?: boolean
   content?: Omit<DropdownMenuContentProps, 'asChild' | 'forceMount'>

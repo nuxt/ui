@@ -4,7 +4,6 @@ import type { AccordionRootProps, AccordionRootEmits, AccordionContentProps } fr
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
-import type { IconProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
 
@@ -12,8 +11,8 @@ const accordion = tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })
 
 export interface AccordionItem {
   label?: string
-  icon?: IconProps['name']
-  trailingIcon?: IconProps['name']
+  icon?: string
+  trailingIcon?: string
   slot?: string
   value?: string
   content?: string
@@ -22,7 +21,7 @@ export interface AccordionItem {
 
 export interface AccordionProps<T> extends Omit<AccordionRootProps, 'asChild' | 'dir' | 'orientation'> {
   items?: T[]
-  trailingIcon?: IconProps['name']
+  trailingIcon?: string
   content?: Omit<AccordionContentProps, 'asChild'>
   class?: any
   ui?: Partial<typeof accordion.slots>

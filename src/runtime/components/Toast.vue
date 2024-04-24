@@ -5,7 +5,7 @@ import type { ToastRootProps, ToastRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toast'
-import type { AvatarProps, ButtonProps, IconProps, ToasterContext } from '#ui/types'
+import type { AvatarProps, ButtonProps, ToasterContext } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { toast: Partial<typeof theme> } }
 
@@ -16,7 +16,7 @@ type ToastVariants = VariantProps<typeof toast>
 export interface ToastProps extends Omit<ToastRootProps, 'asChild' | 'forceMount'> {
   title?: string
   description?: string | VNode | (() => VNode)
-  icon?: IconProps['name']
+  icon?: string
   avatar?: AvatarProps
   color?: ToastVariants['color']
   actions?: ButtonProps[]

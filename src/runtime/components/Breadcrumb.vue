@@ -4,7 +4,7 @@ import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
-import type { AvatarProps, IconProps, LinkProps } from '#ui/types'
+import type { AvatarProps, LinkProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
 
@@ -12,14 +12,14 @@ const breadcrumb = tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb || {}) }
 
 export interface BreadcrumbItem extends LinkProps {
   label?: string
-  icon?: IconProps['name']
+  icon?: string
   avatar?: AvatarProps
   slot?: string
 }
 
 export interface BreadcrumbProps<T> extends Omit<PrimitiveProps, 'asChild'> {
   items?: T[]
-  separatorIcon?: IconProps['name']
+  separatorIcon?: string
   class?: any
   ui?: Partial<typeof breadcrumb.slots>
 }

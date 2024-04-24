@@ -4,7 +4,6 @@ import type { CheckboxRootProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/checkbox'
-import type { IconProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { checkbox: Partial<typeof theme> } }
 
@@ -17,9 +16,9 @@ export interface CheckboxProps extends Omit<CheckboxRootProps, 'asChild' | 'chec
   description?: string
   color?: CheckboxVariants['color']
   size?: CheckboxVariants['size']
-  icon?: IconProps['name']
+  icon?: string
   indeterminate?: boolean
-  indeterminateIcon?: IconProps['name']
+  indeterminateIcon?: string
   defaultValue?: boolean
   class?: any
   ui?: Partial<typeof checkbox.slots>

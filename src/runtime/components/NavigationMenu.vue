@@ -4,7 +4,7 @@ import type { NavigationMenuRootProps, NavigationMenuRootEmits } from 'radix-vue
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
-import type { AvatarProps, BadgeProps, IconProps, LinkProps, SeparatorProps } from '#ui/types'
+import type { AvatarProps, BadgeProps, LinkProps, SeparatorProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -13,7 +13,7 @@ const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu 
 export interface NavigationMenuItem extends LinkProps {
   label?: string
   value?: string
-  icon?: IconProps['name']
+  icon?: string
   avatar?: AvatarProps
   badge?: string | number | BadgeProps
   slot?: string

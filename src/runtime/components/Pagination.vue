@@ -4,18 +4,18 @@ import type { PaginationRootProps, PaginationRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/pagination'
-import type { ButtonProps, IconProps } from '#ui/types'
+import type { ButtonProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { pagination: Partial<typeof theme> } }
 
 const pagination = tv({ extend: tv(theme), ...(appConfig.ui?.pagination || {}) })
 
 export interface PaginationProps extends Omit<PaginationRootProps, 'asChild'> {
-  firstIcon?: IconProps['name']
-  prevIcon?: IconProps['name']
-  nextIcon?: IconProps['name']
-  lastIcon?: IconProps['name']
-  ellipsisIcon?: IconProps['name']
+  firstIcon?: string
+  prevIcon?: string
+  nextIcon?: string
+  lastIcon?: string
+  ellipsisIcon?: string
   color?: ButtonProps['color']
   variant?: ButtonProps['variant']
   activeColor?: ButtonProps['color']

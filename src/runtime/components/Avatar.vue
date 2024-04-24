@@ -4,7 +4,6 @@ import type { AvatarFallbackProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar'
-import type { IconProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { avatar: Partial<typeof theme> } }
 
@@ -16,7 +15,7 @@ export interface AvatarProps extends Omit<AvatarFallbackProps, 'as' | 'asChild'>
   as?: string | object
   src?: string
   alt?: string
-  icon?: IconProps['name']
+  icon?: string
   text?: string
   size?: AvatarVariants['size']
   class?: any

@@ -4,7 +4,7 @@ import type { TabsRootProps, TabsRootEmits, TabsContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
-import type { IconProps, AvatarProps } from '#ui/types'
+import type { AvatarProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
 
@@ -12,7 +12,7 @@ const tabs = tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })
 
 export interface TabsItem {
   label?: string
-  icon?: IconProps['name']
+  icon?: string
   avatar?: AvatarProps
   slot?: string
   value?: string

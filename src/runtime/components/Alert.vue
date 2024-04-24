@@ -5,7 +5,7 @@ import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/alert'
-import type { AvatarProps, ButtonProps, IconProps } from '#ui/types'
+import type { AvatarProps, ButtonProps } from '#ui/types'
 
 const appConfig = _appConfig as AppConfig & { ui: { alert: Partial<typeof theme> } }
 
@@ -16,7 +16,7 @@ type AlertVariants = VariantProps<typeof alert>
 export interface AlertProps extends Omit<PrimitiveProps, 'asChild'> {
   title?: string
   description?: string | VNode | (() => VNode)
-  icon?: IconProps['name']
+  icon?: string
   avatar?: AvatarProps
   color?: AlertVariants['color']
   variant?: AlertVariants['variant']
