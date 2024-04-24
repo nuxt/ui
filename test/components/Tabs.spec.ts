@@ -14,7 +14,8 @@ describe('Tabs', () => {
   }, {
     label: 'Tab3',
     icon: 'i-heroicons-bell',
-    content: 'Finally, this is the content for Tab3'
+    content: 'Finally, this is the content for Tab3',
+    slot: 'custom'
   }]
 
   const props = { items }

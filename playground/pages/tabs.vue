@@ -12,13 +12,19 @@ const items = [{
 }, {
   label: 'Tab3',
   icon: 'i-heroicons-bell',
-  content: 'Finally, this is the content for Tab3'
+  content: 'Finally, this is the content for Tab3',
+  slot: 'custom' as const
 }]
 </script>
 
 <template>
   <div class="flex flex-col gap-4">
-    <UTabs :items="items" class="w-96" />
+    <UTabs :items="items" class="w-96">
+      <template #custom="{ item }">
+        <span class="text-gray-500 dark:text-gray-400">Custom: {{ item.content }}</span>
+      </template>
+    </UTabs>
+
     <UTabs :items="items" orientation="vertical" />
   </div>
 </template>

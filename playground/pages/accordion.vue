@@ -22,7 +22,7 @@ const items = [{
   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
 }, {
   label: 'Utilities',
-  slot: 'toto',
+  slot: 'custom' as const,
   icon: 'i-heroicons-wrench-screwdriver',
   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
 }]
@@ -30,6 +30,10 @@ const items = [{
 
 <template>
   <UCard :ui="{ body: 'p-0 sm:p-0' }">
-    <UAccordion :items="items" class="w-96" :ui="{ trigger: 'px-3.5', content: 'px-3.5' }" />
+    <UAccordion :items="items" class="w-96" :ui="{ trigger: 'px-3.5', content: 'px-3.5' }">
+      <template #custom="{ item }">
+        <span class="text-gray-500 dark:text-gray-400">Custom: {{ item.content }}</span>
+      </template>
+    </UAccordion>
   </UCard>
 </template>

@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, LinkProps, SeparatorProps } from '#ui/types'
+import type { DynamicSlots } from '#ui/types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -31,13 +32,12 @@ export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any
 
-export interface NavigationMenuSlots<T> {
+export type NavigationMenuSlots<T extends { slot?: string }> = {
   leading: SlotProps<T>
   label: SlotProps<T>
   trailing: SlotProps<T>
   item: SlotProps<T>
-  [key: string]: SlotProps<T>
-}
+} & DynamicSlots<T, SlotProps<T>>
 </script>
 
 <script setup lang="ts" generic="T extends NavigationMenuItem">
@@ -63,10 +63,10 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list()">
         <NavigationMenuItem v-for="(item, index) in list" :key="`list-${listIndex}-${index}`" :value="item.value || String(index)" :class="ui.item()">
-          <slot :name="item.slot || 'item'" :item="item" :index="index">
-            <ULink v-slot="{ active, ...slotProps }" v-bind="omit(item, ['label', 'icon', 'avatar', 'badge', 'select'])" custom>
-              <NavigationMenuLink as-child :active="active" @select="item.select">
-                <ULinkBase v-bind="slotProps" :class="ui.link({ active, disabled: !!item.disabled })">
+          <ULink v-slot="{ active, ...slotProps }" v-bind="omit(item, ['label', 'icon', 'avatar', 'badge', 'slot', 'select'])" custom>
+            <NavigationMenuLink as-child :active="active" @select="item.select">
+              <ULinkBase v-bind="slotProps" :class="ui.link({ active, disabled: !!item.disabled })">
+                <slot :name="item.slot || 'item'" :item="item" :index="index">
                   <slot name="leading" :item="item" :active="active" :index="index">
                     <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ active, disabled: !!item.disabled })" />
                     <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ active, disabled: !!item.disabled })" />
@@ -89,10 +89,10 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                       />
                     </slot>
                   </span>
-                </ULinkBase>
-              </NavigationMenuLink>
-            </ULink>
-          </slot>
+                </slot>
+              </ULinkBase>
+            </NavigationMenuLink>
+          </ULink>
         </NavigationMenuItem>
       </NavigationMenuList>
 

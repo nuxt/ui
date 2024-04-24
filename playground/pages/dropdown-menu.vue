@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const appConfig = useAppConfig()
+
 const items = [
   [{
     label: 'My account',
@@ -10,6 +12,7 @@ const items = [
   [{
     label: 'Profile',
     icon: 'i-heroicons-user',
+    slot: 'custom' as const,
     select(e: Event) {
       e.preventDefault()
       console.log('Profile clicked')
@@ -116,6 +119,14 @@ defineShortcuts(extractShortcuts(items))
   <div class="flex-1">
     <UDropdownMenu :items="items" arrow :content="{ side: 'bottom' }" class="min-w-48">
       <UButton label="Open" color="white" />
+
+      <template #custom="{ item }">
+        <UIcon :name="item.icon" class="shrink-0 size-5" />
+
+        <span class="truncate">{{ item.label }}</span>
+
+        <UIcon :name="appConfig.ui.icons.check" class="shrink-0 size-5 text-primary-500 dark:text-primary-400 ms-auto" />
+      </template>
     </UDropdownMenu>
   </div>
 </template>

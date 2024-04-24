@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '#ui/types'
+import type { DynamicSlots } from '#ui/types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -43,14 +44,13 @@ export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
-export interface DropdownMenuSlots<T> {
+export type DropdownMenuSlots<T extends { slot?: string }> = {
   default(): any
   leading: SlotProps<T>
   label: SlotProps<T>
   trailing: SlotProps<T>
   item: SlotProps<T>
-  [key: string]: SlotProps<T>
-}
+} & DynamicSlots<T, SlotProps<T>>
 </script>
 
 <script setup lang="ts" generic="T extends DropdownMenuItem">
@@ -71,7 +71,7 @@ const slots = defineSlots<DropdownMenuSlots<T>>()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
-const proxySlots = omit(slots, ['default'])
+const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[string]>
 
 const ui = computed(() => tv({ extend: dropdownMenu, slots: props.ui })())
 </script>
