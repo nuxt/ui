@@ -10,7 +10,6 @@ import computeStyles from '@popperjs/core/lib/modifiers/computeStyles'
 import eventListeners from '@popperjs/core/lib/modifiers/eventListeners'
 import arrowModifier from '@popperjs/core/lib/modifiers/arrow'
 import { unrefElement } from '@vueuse/core'
-import type { MaybeElement } from '@vueuse/core'
 import type { PopperOptions } from '../types/popper'
 
 export const createPopper = popperGenerator({
@@ -30,8 +29,8 @@ export function usePopper ({
   placement,
   strategy
 }: PopperOptions, virtualReference?: Ref<Element | VirtualElement>) {
-  const reference = ref<MaybeElement>(null)
-  const popper = ref<MaybeElement>(null)
+  const reference = ref(null)
+  const popper = ref(null)
   const instance = ref<Instance | null>(null)
 
   onMounted(() => {

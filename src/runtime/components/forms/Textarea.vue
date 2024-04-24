@@ -155,6 +155,7 @@ export default defineComponent({
 
         textarea.value.rows = props.rows
 
+        // @ts-ignore
         const styles = window.getComputedStyle(textarea.value)
         const paddingTop = parseInt(styles.paddingTop)
         const paddingBottom = parseInt(styles.paddingBottom)

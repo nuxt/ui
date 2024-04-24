@@ -140,7 +140,6 @@ export default defineComponent({
     let closeTimeout: NodeJS.Timeout | null = null
 
     onMounted(() => {
-      // @ts-expect-error internals
       const menuProvides = trigger.value?.$.provides
       if (!menuProvides) {
         return
