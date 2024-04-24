@@ -5,15 +5,7 @@ export default {
   rounded: 'rounded-md',
   placeholder: 'placeholder-gray-400 dark:placeholder-gray-500',
   file: {
-    base: 'file:cursor-pointer file:rounded-l-md file:absolute file:left-0 file:inset-y-0 file:font-medium file:m-0 file:border-0 file:ring-1 file:ring-gray-300 dark:file:ring-gray-700 file:text-gray-900 dark:file:text-white file:bg-gray-50 hover:file:bg-gray-100 dark:file:bg-gray-800 dark:hover:file:bg-gray-700/50',
-    padding: {
-      '2xs': 'ps-[85px]',
-      xs: 'ps-[87px]',
-      sm: 'ps-[96px]',
-      md: 'ps-[98px]',
-      lg: 'ps-[100px]',
-      xl: 'ps-[109px]'
-    }
+    base: 'file:mr-1.5 file:font-medium file:text-gray-500 dark:file:text-gray-400 file:bg-transparent file:border-0 file:p-0 file:outline-none'
   },
   size: {
     '2xs': 'text-xs',
