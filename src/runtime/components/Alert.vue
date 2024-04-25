@@ -90,17 +90,19 @@ const ui = computed(() => tv({ extend: alert, slots: props.ui })({
         <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
       </template>
 
-      <UButton
-        v-if="close"
-        :icon="appConfig.ui.icons.close"
-        size="md"
-        color="gray"
-        variant="link"
-        aria-label="Close"
-        v-bind="typeof close === 'object' ? close : {}"
-        :class="ui.close()"
-        @click="emits('close')"
-      />
+      <slot name="close" :class="ui.close()">
+        <UButton
+          v-if="close"
+          :icon="appConfig.ui.icons.close"
+          size="md"
+          color="gray"
+          variant="link"
+          aria-label="Close"
+          v-bind="typeof close === 'object' ? close : {}"
+          :class="ui.close()"
+          @click="emits('close')"
+        />
+      </slot>
     </div>
   </Primitive>
 </template>
