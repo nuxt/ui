@@ -3,26 +3,41 @@ import NavigationMenu, { type NavigationMenuProps, type NavigationMenuSlots } fr
 import ComponentRender from '../component-render'
 
 describe('NavigationMenu', () => {
-  const items = [{
-    label: 'Profile',
-    avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-    },
-    badge: 100
-  }, {
-    label: 'Modal',
-    icon: 'i-heroicons-home',
-    to: '/modal'
-  }, {
-    label: 'NavigationMenu',
-    icon: 'i-heroicons-chart-bar',
-    to: '/navigation-menu'
-  }, {
-    label: 'Popover',
-    icon: 'i-heroicons-command-line',
-    to: '/popover',
-    slot: 'custom'
-  }]
+  const items = [
+    [{
+      label: 'Profile',
+      active: true,
+      avatar: {
+        src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+      },
+      badge: 100,
+      select() {
+        console.log('Profile clicked')
+      }
+    }, {
+      label: 'Modal',
+      icon: 'i-heroicons-home',
+      to: '/modal'
+    }, {
+      label: 'NavigationMenu',
+      icon: 'i-heroicons-chart-bar',
+      to: '/navigation-menu'
+    }, {
+      label: 'Popover',
+      icon: 'i-heroicons-command-line',
+      to: '/popover'
+    }], [{
+      label: 'Examples',
+      icon: 'i-heroicons-light-bulb',
+      to: 'https://ui.nuxt.com',
+      target: '_blank',
+      slot: 'custom'
+    }, {
+      label: 'Help',
+      icon: 'i-heroicons-question-mark-circle',
+      disabled: true
+    }]
+  ]
 
   const props = { items }
 
@@ -38,7 +53,7 @@ describe('NavigationMenu', () => {
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps<typeof items[number]>, slots?: Partial<NavigationMenuSlots<typeof items[number]>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps<typeof items[number][number]>, slots?: Partial<NavigationMenuSlots<any>> }) => {
     const html = await ComponentRender(nameOrHtml, options, NavigationMenu)
     expect(html).toMatchSnapshot()
   })
