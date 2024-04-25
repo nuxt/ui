@@ -15,7 +15,6 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
-  disabled?: boolean
   content?: Omit<DropdownMenuContentProps, 'asChild' | 'forceMount'>
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
