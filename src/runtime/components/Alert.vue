@@ -34,6 +34,7 @@ export interface AlertSlots {
   leading(): any
   title(): any
   description(): any
+  actions(): any
   close(): any
 }
 </script>
@@ -81,13 +82,17 @@ const ui = computed(() => tv({ extend: alert, slots: props.ui })({
       </template>
 
       <div v-if="multiline && actions?.length" :class="ui.actions({ multiline: true })">
-        <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
+        <slot name="actions">
+          <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
+        </slot>
       </div>
     </div>
 
     <div v-if="(!multiline && actions?.length) || close" :class="ui.actions({ multiline: false })">
       <template v-if="!multiline">
-        <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
+        <slot name="actions">
+          <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
+        </slot>
       </template>
 
       <slot name="close" :class="ui.close()">
