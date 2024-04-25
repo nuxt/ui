@@ -31,6 +31,7 @@ export interface ToastSlots {
   leading(): any
   title(): any
   description(): any
+  actions(): any
   close(): any
 }
 </script>
@@ -103,17 +104,21 @@ defineExpose({
       </template>
 
       <div v-if="multiline && actions?.length" :class="ui.actions({ multiline: true })">
-        <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
-          <UButton size="xs" :color="color" v-bind="action" />
-        </ToastAction>
+        <slot name="actions">
+          <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
+            <UButton size="xs" :color="color" v-bind="action" />
+          </ToastAction>
+        </slot>
       </div>
     </div>
 
     <div v-if="(!multiline && actions?.length) || close !== null" :class="ui.actions({ multiline: false })">
       <template v-if="!multiline">
-        <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
-          <UButton size="xs" :color="color" v-bind="action" />
-        </ToastAction>
+        <slot name="actions">
+          <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
+            <UButton size="xs" :color="color" v-bind="action" />
+          </ToastAction>
+        </slot>
       </template>
 
       <ToastClose as-child>
