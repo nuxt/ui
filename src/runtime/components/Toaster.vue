@@ -19,6 +19,10 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
   ui?: Partial<typeof toaster.slots>
 }
 
+export interface ToasterSlots {
+  default(): any
+}
+
 export type ToasterContext = ComputedRef<{
   duration: number
 }>
@@ -32,7 +36,11 @@ import { useToast } from '#imports'
 import { UToast } from '#components'
 import { omit } from '#ui/utils'
 
-const props = withDefaults(defineProps<ToasterProps>(), { expand: true, duration: 5000 })
+const props = withDefaults(defineProps<ToasterProps>(), {
+  expand: true,
+  duration: 5000
+})
+defineSlots<ToasterSlots>()
 
 const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold'))
 
