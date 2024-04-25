@@ -14,14 +14,16 @@ const TooltipWrapper = defineComponent({
 })
 
 describe('Tooltip', () => {
+  const props = { text: 'Tooltip', open: true, portal: false }
+
   it.each([
     // Props
-    ['with text', { props: { text: 'Tooltip', open: true, portal: false } }],
-    ['with arrow', { props: { text: 'Tooltip', arrow: true, open: true, portal: false } }],
-    ['with kbds', { props: { text: 'Tooltip', kbds: ['meta', 'K'], open: true, portal: false } }],
+    ['with text', { props }],
+    ['with arrow', { props: { ...props, arrow: true } }],
+    ['with kbds', { props: { ...props, kbds: ['meta', 'K'] } }],
     // Slots
-    ['with default slot', { props: { text: 'Tooltip', kbds: ['meta', 'K'], open: true, portal: false }, slots: { default: () => 'Default slot' } }],
-    ['with content slot', { props: { open: true, portal: false }, slots: { content: () => 'Content slot' } }]
+    ['with default slot', { props, slots: { default: () => 'Default slot' } }],
+    ['with content slot', { props, slots: { content: () => 'Content slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TooltipProps, slots?: Partial<TooltipSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, TooltipWrapper)
     expect(html).toMatchSnapshot()

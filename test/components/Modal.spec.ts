@@ -3,26 +3,28 @@ import Modal, { type ModalProps, type ModalSlots } from '../../src/runtime/compo
 import ComponentRender from '../component-render'
 
 describe('Modal', () => {
+  const props = { open: true, portal: false }
+
   it.each([
     // Props
-    ['with open', { props: { open: true, portal: false } }],
-    ['with title', { props: { open: true, portal: false, title: 'Title' } }],
-    ['with description', { props: { open: true, portal: false, title: 'Title', description: 'Description' } }],
-    ['with fullscreen', { props: { open: true, portal: false, fullscreen: true, title: 'Title', description: 'Description' } }],
-    ['without overlay', { props: { open: true, portal: false, overlay: false, title: 'Title', description: 'Description' } }],
-    ['without transition', { props: { open: true, portal: false, transition: false, title: 'Title', description: 'Description' } }],
-    ['without close', { props: { open: true, portal: false, close: null, title: 'Title', description: 'Description' } }],
-    ['with class', { props: { open: true, portal: false, class: 'bg-gray-50 dark:bg-gray-800' } }],
-    ['with ui', { props: { open: true, portal: false, ui: { close: 'right-2' } } }],
+    ['with open', { props }],
+    ['with title', { props: { ...props, title: 'Title' } }],
+    ['with description', { props: { ...props, title: 'Title', description: 'Description' } }],
+    ['with fullscreen', { props: { ...props, fullscreen: true, title: 'Title', description: 'Description' } }],
+    ['without overlay', { props: { ...props, overlay: false, title: 'Title', description: 'Description' } }],
+    ['without transition', { props: { ...props, transition: false, title: 'Title', description: 'Description' } }],
+    ['without close', { props: { ...props, close: null, title: 'Title', description: 'Description' } }],
+    ['with class', { props: { ...props, class: 'bg-gray-50 dark:bg-gray-800' } }],
+    ['with ui', { props: { ...props, ui: { close: 'right-2' } } }],
     // Slots
-    ['with default slot', { props: { open: true, portal: false }, slots: { default: () => 'Default slot' } }],
-    ['with content slot', { props: { open: true, portal: false }, slots: { content: () => 'Content slot' } }],
-    ['with header slot', { props: { open: true, portal: false }, slots: { header: () => 'Header slot' } }],
-    ['with title slot', { props: { open: true, portal: false }, slots: { title: () => 'Title slot' } }],
-    ['with description slot', { props: { open: true, portal: false }, slots: { description: () => 'Description slot' } }],
-    ['with close slot', { props: { open: true, portal: false }, slots: { close: () => 'Close slot' } }],
-    ['with body slot', { props: { open: true, portal: false }, slots: { body: () => 'Body slot' } }],
-    ['with footer slot', { props: { open: true, portal: false }, slots: { footer: () => 'Footer slot' } }]
+    ['with default slot', { props, slots: { default: () => 'Default slot' } }],
+    ['with content slot', { props, slots: { content: () => 'Content slot' } }],
+    ['with header slot', { props, slots: { header: () => 'Header slot' } }],
+    ['with title slot', { props, slots: { title: () => 'Title slot' } }],
+    ['with description slot', { props, slots: { description: () => 'Description slot' } }],
+    ['with close slot', { props, slots: { close: () => 'Close slot' } }],
+    ['with body slot', { props, slots: { body: () => 'Body slot' } }],
+    ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ModalProps, slots?: Partial<ModalSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Modal)
     expect(html).toMatchSnapshot()
