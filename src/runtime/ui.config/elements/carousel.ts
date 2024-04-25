@@ -9,7 +9,7 @@ export default {
     wrapper: 'absolute flex items-center justify-center gap-3 bottom-4 inset-x-0',
     base: 'rounded-full h-3 w-3',
     active: 'bg-primary-500 dark:bg-primary-400',
-    inactive: 'bg-gray-100 dark:bg-gray-800 mix-blend-overlay'
+    inactive: 'bg-gray-100 dark:bg-gray-800'
   },
   default: {
     prevButton: {
