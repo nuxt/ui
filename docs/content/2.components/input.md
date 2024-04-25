@@ -75,6 +75,8 @@ Some types have been implemented in their own components, such as [Checkbox](/co
 
 ::component-card
 ---
+baseProps:
+  icon: 'i-heroicons-folder'
 props:
   type: 'file'
   size: sm
