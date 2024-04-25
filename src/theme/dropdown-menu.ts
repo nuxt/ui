@@ -4,6 +4,7 @@ export default {
     arrow: 'fill-gray-200 dark:fill-gray-800',
     group: 'p-1 isolate',
     label: 'w-full flex items-center gap-1.5 p-1.5 text-sm font-medium select-none',
+    separator: '-mx-1 my-1 h-px bg-gray-200 dark:bg-gray-800',
     link: 'group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',

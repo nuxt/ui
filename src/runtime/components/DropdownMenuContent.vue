@@ -73,6 +73,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
           <DropdownMenu.Label v-if="item.type === 'label'" :class="ui.label()">
             <ReuseItemTemplate :item="item" :index="index" />
           </DropdownMenu.Label>
+          <DropdownMenu.Separator v-else-if="item.type === 'separator'" :class="ui.separator()" />
           <DropdownMenu.Sub v-else-if="item?.children?.length">
             <DropdownMenu.SubTrigger
               as="button"

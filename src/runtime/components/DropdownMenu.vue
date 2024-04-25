@@ -22,7 +22,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type'> {
    * The item type.
    * @defaultValue "link"
    */
-  type?: 'label' | 'link'
+  type?: 'label' | 'separator' | 'link'
   slot?: string
   open?: boolean
   defaultOpen?: boolean

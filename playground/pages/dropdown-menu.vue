@@ -96,6 +96,8 @@ const items = [
     icon: 'i-heroicons-lifebuoy',
     to: '/dropdown-menu'
   }, {
+    type: 'separator' as const
+  }, {
     label: 'Keyboard Shortcuts',
     icon: 'i-heroicons-key'
   }, {
