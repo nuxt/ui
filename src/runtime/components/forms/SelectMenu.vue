@@ -249,7 +249,7 @@ export default defineComponent({
       type: String,
       default: 'Search...'
     },
-    searchLazy: {
+    searchableLazy: {
       type: Boolean,
       default: false
     },
@@ -475,7 +475,7 @@ export default defineComponent({
         })
       })
     }, [], {
-      lazy: props.searchLazy
+      lazy: props.searchableLazy
     })
 
     const createOption = computed(() => {
