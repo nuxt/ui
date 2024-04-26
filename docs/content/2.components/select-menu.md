@@ -150,6 +150,8 @@ Pass a function to the `searchable` prop to customize the search behavior and fi
 
 Use the `debounce` prop to adjust the delay of the function.
 
+Use the `searchableLazy` prop to control the immediacy of data requests. :u-badge{label="New" class="!rounded-full" variant="subtle"}
+
 ::component-example
 ---
 component: 'select-menu-example-search-async'

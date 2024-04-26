@@ -249,6 +249,10 @@ export default defineComponent({
       type: String,
       default: 'Search...'
     },
+    searchableLazy: {
+      type: Boolean,
+      default: false
+    },
     clearSearchOnClose: {
       type: Boolean,
       default: () => configMenu.default.clearSearchOnClose
@@ -470,6 +474,8 @@ export default defineComponent({
           return child !== null && child !== undefined && String(child).search(new RegExp(query.value, 'i')) !== -1
         })
       })
+    }, [], {
+      lazy: props.searchableLazy
     })
 
     const createOption = computed(() => {
