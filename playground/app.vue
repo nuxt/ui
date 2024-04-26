@@ -20,6 +20,7 @@ const components = [
   'checkbox',
   'chip',
   'collapsible',
+  'context-menu',
   'drawer',
   'dropdown-menu',
   'form',
