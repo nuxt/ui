@@ -219,14 +219,8 @@ importers:
         specifier: workspace:*
         version: link:..
       nuxt:
-        specifier: latest
+        specifier: ^3.11.2
         version: 3.11.2(@parcel/watcher@2.4.1)(@types/node@20.12.7)(@unocss/reset@0.59.4)(encoding@0.1.13)(eslint@9.1.1)(floating-vue@5.2.2(@nuxt/kit@3.11.2(rollup@4.16.4))(vue@3.4.24(typescript@5.4.3)))(ioredis@5.4.1)(lightningcss@1.24.1)(meow@12.1.1)(optionator@0.9.3)(rollup@4.16.4)(terser@5.30.4)(typescript@5.4.3)(unocss@0.59.4(@unocss/webpack@0.59.4(rollup@4.16.4)(webpack@5.91.0))(postcss@8.4.38)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4)))(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vue-tsc@2.0.14(typescript@5.4.3))
-      vue:
-        specifier: latest
-        version: 3.4.24(typescript@5.4.3)
-      vue-router:
-        specifier: latest
-        version: 4.3.2(vue@3.4.24(typescript@5.4.3))
 
 packages:
 
@@ -3589,8 +3583,8 @@ packages:
   floating-vue@5.2.2:
     resolution: {integrity: sha512-afW+h2CFafo+7Y9Lvw/xsqjaQlKLdJV7h1fCHfcYQ1C4SVMlu7OAekqWgu5d4SgvkBVU0pVpLlVsrSTBURFRkg==}
     peerDependencies:
-      '@nuxt/kit': ^3.11.2
-      vue: 3.4.21
+      '@nuxt/kit': ^3.2.0
+      vue: ^3.2.0
     peerDependenciesMeta:
       '@nuxt/kit':
         optional: true
