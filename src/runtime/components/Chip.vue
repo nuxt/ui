@@ -28,19 +28,24 @@ export interface ChipSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, provide } from 'vue'
 import { Primitive } from 'radix-vue'
+import { useAvatarGroup } from '#imports'
 
 const show = defineModel<boolean>('show', { default: true })
 const props = withDefaults(defineProps<ChipProps>(), { as: 'div' })
 defineSlots<ChipSlots>()
 
+const { size } = useAvatarGroup(props)
+
 const ui = computed(() => tv({ extend: chip, slots: props.ui })({
   color: props.color,
-  size: props.size,
+  size: size.value,
   position: props.position,
   inset: props.inset
 }))
+
+provide('avatar-size', size)
 </script>
 
 <template>

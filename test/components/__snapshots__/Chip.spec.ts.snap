@@ -50,4 +50,12 @@ exports[`Chip > renders with size xl correctly 1`] = `"<div class="relative inli
 
 exports[`Chip > renders with size xs correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="absolute rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap bg-primary-500 dark:bg-primary-400 h-[6px] min-w-[6px] text-[6px] top-0 right-0 -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
 
+exports[`Chip > renders with text correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="absolute rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap bg-primary-500 dark:bg-primary-400 h-[8px] min-w-[8px] text-[8px] top-0 right-0 -translate-y-1/2 translate-x-1/2 transform">Text</span></div>"`;
+
 exports[`Chip > renders with ui correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="absolute rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center font-medium whitespace-nowrap text-gray-500 dark:text-gray-400 bg-primary-500 dark:bg-primary-400 h-[8px] min-w-[8px] text-[8px] top-0 right-0 -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders without show correctly 1`] = `
+"<div class="relative inline-flex items-center justify-center shrink-0">
+  <!--v-if-->
+</div>"
+`;

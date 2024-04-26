@@ -28,6 +28,7 @@ import { computed } from 'vue'
 import { AvatarRoot, AvatarImage, AvatarFallback, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { UIcon } from '#components'
+import { useAvatarGroup } from '#imports'
 
 const props = defineProps<AvatarProps>()
 
@@ -35,7 +36,9 @@ const fallbackProps = useForwardProps(reactivePick(props, 'delayMs'))
 
 const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
 
-const ui = computed(() => tv({ extend: avatar, slots: props.ui })({ size: props.size }))
+const { size } = useAvatarGroup(props)
+
+const ui = computed(() => tv({ extend: avatar, slots: props.ui })({ size: size.value }))
 </script>
 
 <template>

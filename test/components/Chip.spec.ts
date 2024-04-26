@@ -11,11 +11,12 @@ describe('Chip', () => {
   it.each([
     // Props
     ['with as', { props: { as: 'span' } }],
-    ['with show', { props: { show: true } }],
+    ['with text', { props: { text: 'Text' } }],
     ['with inset', { props: { inset: true } }],
-    ...sizes.map((size: string) => [`with size ${size}`, { props: { show: true, size } }]),
-    ...colors.map((color: string) => [`with color ${color}`, { props: { show: true, color } }]),
-    ...positions.map((position: string) => [`with position ${position}`, { props: { show: true, position } }]),
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
+    ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
+    ...positions.map((position: string) => [`with position ${position}`, { props: { position } }]),
+    ['without show', { props: { show: false } }],
     ['with class', { props: { class: 'mx-auto' } }],
     ['with ui', { props: { ui: { base: 'text-gray-500 dark:text-gray-400' } } }],
     // Slots
