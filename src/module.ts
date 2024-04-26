@@ -6,6 +6,7 @@ import createTemplates from './templates'
 import * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types/utils'
 import installTailwind from './tailwind'
+import installUnocss from './uno'
 
 const _require = createRequire(import.meta.url)
 const defaultColors = _require('tailwindcss/colors.js')
@@ -47,6 +48,15 @@ export interface ModuleOptions {
    * @default false
    */
   global?: boolean
+
+  /**
+   * Specify different CSS Framework to use with Nuxt UI.
+   *
+   * Note: this is highly experimental.
+   *
+   * @default 'tailwind'
+   */
+  cssFramework?: `${'tailwind' | 'uno'}${'css' | ''}`
 
   icons: CollectionNames[] | 'all' | IconsPluginOptions
 
@@ -92,7 +102,12 @@ export default defineNuxtModule<ModuleOptions>({
 
     await installModule('nuxt-icon')
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
-    await installTailwind(options, nuxt, resolve)
+
+    if (options.cssFramework?.startsWith('uno')) {
+      await installUnocss(options, nuxt, resolve)
+    } else {
+      await installTailwind(options, nuxt, resolve)
+    }
 
     // Plugins
 
