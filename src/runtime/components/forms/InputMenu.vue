@@ -272,6 +272,10 @@ export default defineComponent({
     uiMenu: {
       type: Object as PropType<Partial<typeof configMenu> & { strategy?: Strategy }>,
       default: () => ({})
+    },
+    searchableLazy: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
@@ -407,6 +411,8 @@ export default defineComponent({
           return child !== null && child !== undefined && String(child).search(new RegExp(query.value, 'i')) !== -1
         })
       })
+    }, [], {
+      lazy: props.searchableLazy
     })
 
     watch(container, (value) => {
