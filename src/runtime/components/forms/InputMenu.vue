@@ -273,7 +273,7 @@ export default defineComponent({
       type: Object as PropType<Partial<typeof configMenu> & { strategy?: Strategy }>,
       default: () => ({})
     },
-    searchableLazy: {
+    searchLazy: {
       type: Boolean,
       default: false
     }
@@ -412,7 +412,7 @@ export default defineComponent({
         })
       })
     }, [], {
-      lazy: props.searchableLazy
+      lazy: props.searchLazy
     })
 
     watch(container, (value) => {
