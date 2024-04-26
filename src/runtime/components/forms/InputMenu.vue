@@ -249,6 +249,10 @@ export default defineComponent({
       type: Array,
       default: null
     },
+    searchLazy: {
+      type: Boolean,
+      default: false
+    },
     debounce: {
       type: Number,
       default: 200
@@ -272,10 +276,6 @@ export default defineComponent({
     uiMenu: {
       type: Object as PropType<Partial<typeof configMenu> & { strategy?: Strategy }>,
       default: () => ({})
-    },
-    searchLazy: {
-      type: Boolean,
-      default: false
     }
   },
   emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
