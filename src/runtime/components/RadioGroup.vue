@@ -47,6 +47,13 @@ const props = withDefaults(defineProps<RadioGroupProps<T>>(), { orientation: 've
 const emits = defineEmits<RadioGroupEmits>()
 defineSlots<RadioGroupSlots<T>>()
 
+const modelValue = defineModel<T>({
+  set(value) {
+    emits('change', value)
+    return value
+  }
+})
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 
 const { emitFormChange, color, name, size, inputId: _inputId, disabled } = useFormField<RadioGroupProps<T>>(props)
@@ -78,13 +85,6 @@ function normalizeOption(option: any) {
 const normalizedOptions = computed(() => {
   if (!props.options) return []
   return props.options.map(normalizeOption)
-})
-
-const modelValue = defineModel<T>({
-  set(value) {
-    emits('change', value)
-    return value
-  }
 })
 
 // FIXME: I think there's a race condition between this and the v-model event.

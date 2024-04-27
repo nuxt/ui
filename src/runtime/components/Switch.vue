@@ -40,10 +40,10 @@ import { useId, useAppConfig, useFormField } from '#imports'
 const props = defineProps<SwitchProps>()
 defineSlots<SwitchSlots>()
 
+const modelValue = defineModel<boolean | undefined>({ default: undefined })
+
 const appConfig = useAppConfig()
 const rootProps = useForwardProps(reactivePick(props, 'as', 'required', 'value'))
-
-const modelValue = defineModel<boolean | undefined>({ default: undefined })
 
 const { inputId: _inputId, emitFormChange, size, color, name, disabled } = useFormField<SwitchProps>(props)
 const inputId = _inputId.value ?? useId()

@@ -49,9 +49,8 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   maxrows: 0,
   autofocusDelay: 100
 })
-
-const emit = defineEmits<TextareaEmits>()
 defineSlots<TextareaSlots>()
+const emits = defineEmits<TextareaEmits>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
@@ -108,7 +107,7 @@ function onChange(event: Event) {
 
 function onBlur(event: FocusEvent) {
   emitFormBlur()
-  emit('blur', event)
+  emits('blur', event)
 }
 
 onMounted(() => {

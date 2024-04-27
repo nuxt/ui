@@ -32,9 +32,10 @@ import { computed, provide } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useAvatarGroup } from '#imports'
 
-const show = defineModel<boolean>('show', { default: true })
 const props = withDefaults(defineProps<ChipProps>(), { as: 'div' })
 defineSlots<ChipSlots>()
+
+const show = defineModel<boolean>('show', { default: true })
 
 const { size } = useAvatarGroup(props)
 

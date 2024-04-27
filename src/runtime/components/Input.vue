@@ -50,11 +50,10 @@ const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
   autofocusDelay: 100
 })
+const emits = defineEmits<InputEmits>()
+defineSlots<InputSlots>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
-
-const emit = defineEmits<InputEmits>()
-defineSlots<InputSlots>()
 
 const { emitFormBlur, emitFormInput, size, color, inputId, name, disabled } = useFormField<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
@@ -115,7 +114,7 @@ function onChange(event: Event) {
 
 function onBlur(event: FocusEvent) {
   emitFormBlur()
-  emit('blur', event)
+  emits('blur', event)
 }
 
 onMounted(() => {

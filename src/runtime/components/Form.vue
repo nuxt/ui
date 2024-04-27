@@ -43,7 +43,7 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
   },
   validateOnInputDelay: 300
 })
-const emit = defineEmits<FormEmits<T>>()
+const emits = defineEmits<FormEmits<T>>()
 defineSlots<FormSlots>()
 
 const formId = props.id ?? useId()
@@ -165,7 +165,7 @@ async function onSubmit(payload: Event) {
       ...event,
       data: props.state
     }
-    emit('submit', submitEvent)
+    emits('submit', submitEvent)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
       throw error
@@ -177,7 +177,7 @@ async function onSubmit(payload: Event) {
       childrens: error.childrens
     }
 
-    emit('error', errorEvent)
+    emits('error', errorEvent)
   }
 }
 
