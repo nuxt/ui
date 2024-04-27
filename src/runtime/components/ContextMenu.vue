@@ -16,7 +16,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type'> {
   icon?: string
   avatar?: AvatarProps
   content?: Omit<ContextMenuContentProps, 'asChild' | 'forceMount'>
-  kbds?: string[] | KbdProps[]
+  kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
    * @defaultValue "link"
