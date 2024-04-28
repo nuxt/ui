@@ -44,8 +44,8 @@ const modelValue = defineModel<boolean | undefined>({ default: undefined })
 const rootProps = useForwardProps(reactivePick(props, 'as', 'required', 'value'))
 
 const appConfig = useAppConfig()
-const { inputId: _inputId, emitFormChange, size, color, name, disabled } = useFormField<CheckboxProps>(props)
-const inputId = _inputId.value ?? useId()
+const { id: _id, emitFormChange, size, color, name, disabled } = useFormField<CheckboxProps>(props)
+const id = _id.value ?? useId()
 
 const indeterminate = computed(() => (modelValue.value === undefined && props.indeterminate))
 
@@ -79,7 +79,7 @@ function onChecked() {
   <div :class="ui.root({ class: props.class })">
     <div :class="ui.container()">
       <CheckboxRoot
-        :id="inputId"
+        :id="id"
         v-model:checked="checked"
         :default-checked="defaultValue"
         v-bind="rootProps"
@@ -96,7 +96,7 @@ function onChecked() {
     </div>
 
     <div v-if="(label || $slots.label) || (description || $slots.description)" :class="ui.wrapper()">
-      <Label v-if="label || $slots.label" :for="inputId" :class="ui.label()">
+      <Label v-if="label || $slots.label" :for="id" :class="ui.label()">
         <slot name="label" :label="label">
           {{ label }}
         </slot>

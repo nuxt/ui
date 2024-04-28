@@ -55,7 +55,7 @@ defineSlots<InputSlots>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, size, color, inputId, name, disabled } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormInput, size, color, id, name, disabled } = useFormField<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 // const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
 
@@ -127,7 +127,7 @@ onMounted(() => {
 <template>
   <div :class="ui.root({ class: props.class })">
     <input
-      :id="inputId"
+      :id="id"
       ref="inputRef"
       :type="type"
       :value="modelValue"

@@ -58,11 +58,11 @@ const error = computed(() => {
     : formErrors?.value?.find(error => error.name === props.name)?.message
 })
 
-const inputId = ref(useId())
+const id = ref(useId())
 
 provide<FormFieldInjectedOptions<FormFieldProps>>('form-field', {
   error,
-  inputId,
+  id,
   name: computed(() => props.name),
   size: computed(() => props.size),
   eagerValidation: computed(() => props.eagerValidation),
@@ -74,7 +74,7 @@ provide<FormFieldInjectedOptions<FormFieldProps>>('form-field', {
   <div :class="ui.root({ class: props.class })">
     <div :class="ui.wrapper()">
       <div v-if="label || $slots.label" :class="ui.labelWrapper()">
-        <Label :for="inputId" :class="ui.label()">
+        <Label :for="id" :class="ui.label()">
           <slot name="label" :label="label">
             {{ label }}
           </slot>

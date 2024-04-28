@@ -69,7 +69,7 @@ export interface FormInjectedOptions {
 }
 
 export interface FormFieldInjectedOptions<T> {
-  inputId: Ref<string | undefined>
+  id: Ref<string | undefined>
   name: ComputedRef<string | undefined>
   // @ts-expect-error FIXME: TS doesn't like this
   size: ComputedRef<T['size']>

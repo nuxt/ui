@@ -45,8 +45,8 @@ const modelValue = defineModel<boolean | undefined>({ default: undefined })
 const appConfig = useAppConfig()
 const rootProps = useForwardProps(reactivePick(props, 'as', 'required', 'value'))
 
-const { inputId: _inputId, emitFormChange, size, color, name, disabled } = useFormField<SwitchProps>(props)
-const inputId = _inputId.value ?? useId()
+const { id: _id, emitFormChange, size, color, name, disabled } = useFormField<SwitchProps>(props)
+const id = _id.value ?? useId()
 
 const ui = computed(() => tv({ extend: switchTv, slots: props.ui })({
   size: size.value,
@@ -68,7 +68,7 @@ async function onChecked() {
   <div :class="ui.root({ class: props.class })">
     <div :class="ui.container()">
       <SwitchRoot
-        :id="inputId"
+        :id="id"
         v-model:checked="modelValue"
         :default-checked="defaultValue"
         v-bind="rootProps"
@@ -87,7 +87,7 @@ async function onChecked() {
       </SwitchRoot>
     </div>
     <div v-if="(label || $slots.label) || (description || $slots.description)" :class="ui.wrapper()">
-      <Label v-if="label || $slots.label" :for="inputId" :class="ui.label()">
+      <Label v-if="label || $slots.label" :for="id" :class="ui.label()">
         <slot name="label" :label="label">
           {{ label }}
         </slot>

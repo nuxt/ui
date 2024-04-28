@@ -40,7 +40,7 @@ const modelValue = defineModel<number | number[]>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'), emits)
 
-const { inputId, emitFormChange, size, color, name, disabled } = useFormField<SliderProps>(props)
+const { id, emitFormChange, size, color, name, disabled } = useFormField<SliderProps>(props)
 
 const defaultSliderValue = computed(() => {
   if (typeof props.defaultValue === 'number') {
@@ -74,7 +74,7 @@ const ui = computed(() => tv({ extend: slider, slots: props.ui })({
 <template>
   <SliderRoot
     v-bind="rootProps"
-    :id="inputId"
+    :id="id"
     v-model="sliderValue"
     :name="name"
     :disabled="disabled"

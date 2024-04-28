@@ -54,7 +54,7 @@ const emits = defineEmits<TextareaEmits>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, size, color, inputId, name, disabled } = useFormField<TextareaProps>(props)
+const { emitFormBlur, emitFormInput, size, color, id, name, disabled } = useFormField<TextareaProps>(props)
 
 const ui = computed(() => tv({ extend: textarea, slots: props.ui })({
   color: color.value,
@@ -152,7 +152,7 @@ onMounted(() => {
 <template>
   <div :class="ui.root({ class: props.class })">
     <textarea
-      :id="inputId"
+      :id="id"
       ref="textareaRef"
       :value="modelValue"
       :name="name"

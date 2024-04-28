@@ -14,20 +14,20 @@ type Props<T> = {
   disabled?: boolean
 }
 
-export function useFormField<T>(inputProps?: Props<T>) {
+export function useFormField<T>(props?: Props<T>) {
   const formOptions = inject<FormInjectedOptions | undefined>('form-options', undefined)
   const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
   const formField = inject<FormFieldInjectedOptions<T> | undefined>('form-field', undefined)
   const formInputs = inject<any>('form-inputs', undefined)
 
   if (formField) {
-    if (inputProps?.id) {
-      // Updates for="..." attribute on label if inputProps.id is provided
-      formField.inputId.value = inputProps?.id
+    if (props?.id) {
+      // Updates for="..." attribute on label if props.id is provided
+      formField.id.value = props?.id
     }
 
     if (formInputs && formField.name.value) {
-      formInputs.value[formField.name.value] = formField.inputId.value
+      formInputs.value[formField.name.value] = formField.id.value
     }
   }
 
@@ -58,11 +58,11 @@ export function useFormField<T>(inputProps?: Props<T>) {
   )
 
   return {
-    inputId: computed(() => inputProps?.id ?? formField?.inputId.value),
-    name: computed(() => inputProps?.name ?? formField?.name.value),
-    size: computed(() => inputProps?.size ?? formField?.size?.value),
-    color: computed(() => formField?.error?.value ? 'red' : inputProps?.color),
-    disabled: computed(() => formOptions?.disabled?.value || inputProps?.disabled),
+    id: computed(() => props?.id ?? formField?.id.value),
+    name: computed(() => props?.name ?? formField?.name.value),
+    size: computed(() => props?.size ?? formField?.size?.value),
+    color: computed(() => formField?.error?.value ? 'red' : props?.color),
+    disabled: computed(() => formOptions?.disabled?.value || props?.disabled),
     emitFormBlur,
     emitFormInput,
     emitFormChange

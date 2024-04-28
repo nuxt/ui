@@ -56,8 +56,8 @@ const modelValue = defineModel<T>({
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 
-const { emitFormChange, color, name, size, inputId: _inputId, disabled } = useFormField<RadioGroupProps<T>>(props)
-const inputId = _inputId.value ?? useId()
+const { emitFormChange, color, name, size, id: _id, disabled } = useFormField<RadioGroupProps<T>>(props)
+const id = _id.value ?? useId()
 
 const ui = computed(() => tv({ extend: radioGroup, slots: props.ui })({
   size: size.value,
@@ -70,7 +70,7 @@ const ui = computed(() => tv({ extend: radioGroup, slots: props.ui })({
 function normalizeOption(option: any) {
   if (['string', 'number', 'boolean'].includes(typeof option)) {
     return {
-      id: `${inputId}:${option}`,
+      id: `${id}:${option}`,
       value: option,
       label: option
     }
@@ -78,7 +78,7 @@ function normalizeOption(option: any) {
 
   return {
     ...option,
-    id: `${inputId}:${option.value}`
+    id: `${id}:${option.value}`
   }
 }
 
@@ -97,7 +97,7 @@ function onUpdate() {
 
 <template>
   <RadioGroupRoot
-    :id="inputId"
+    :id="id"
     v-model="modelValue"
     v-bind="rootProps"
     :name="name"
