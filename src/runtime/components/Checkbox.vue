@@ -88,7 +88,7 @@ function onChecked() {
         :class="ui.base()"
         @update:checked="onChecked"
       >
-        <CheckboxIndicator :class="ui.indicator()">
+        <CheckboxIndicator as-child>
           <UIcon v-if="indeterminate" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon()" />
           <UIcon v-else :name="icon || appConfig.ui.icons.check" :class="ui.icon()" />
         </CheckboxIndicator>

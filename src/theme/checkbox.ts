@@ -1,11 +1,10 @@
 export default (config: { colors: string[] }) => ({
   slots: {
     root: 'relative flex items-start',
-    base: 'shrink-0 text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
+    base: 'shrink-0 flex items-center justify-center text-white dark:text-gray-900 rounded ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
     container: 'flex items-center',
     wrapper: 'ms-2',
-    indicator: 'flex items-center justify-center',
-    icon: 'size-10/12',
+    icon: 'shrink-0 size-full',
     label: 'block font-medium text-gray-700 dark:text-gray-200',
     description: 'text-gray-500 dark:text-gray-400'
   },
