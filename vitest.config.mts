@@ -12,6 +12,6 @@ export default defineVitestConfig({
         rootDir: fileURLToPath(new URL('test/nuxt/', import.meta.url))
       }
     },
-    setupFiles: './setup.ts'
+    setupFiles: fileURLToPath(new URL('test/nuxt/setup.ts', import.meta.url))
   }
 })
