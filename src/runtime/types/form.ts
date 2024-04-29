@@ -3,6 +3,7 @@ import type { ZodSchema } from 'zod'
 import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
+import type { GetObjectField } from './utils'
 
 export interface Form<T> {
   validate (opts?: { name: string | string[], silent?: false, nested?: boolean }): Promise<T | false>
@@ -71,8 +72,7 @@ export interface FormInjectedOptions {
 export interface FormFieldInjectedOptions<T> {
   id: Ref<string | undefined>
   name: ComputedRef<string | undefined>
-  // @ts-expect-error FIXME: TS doesn't like this
-  size: ComputedRef<T['size']>
+  size: ComputedRef<GetObjectField<T, 'size'>>
   error: ComputedRef<string | boolean | undefined>
   eagerValidation: ComputedRef<boolean | undefined>
   validateOnInputDelay: ComputedRef<number | undefined>

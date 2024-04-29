@@ -1,14 +1,13 @@
 import { inject, ref, computed } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
 import type { FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '#ui/types/form'
+import type { GetObjectField } from '#ui/types/utils'
 
 type Props<T> = {
   id?: string
   name?: string
-  // @ts-expect-error FIXME: TS doesn't like this
-  size?: T['size']
-  // @ts-expect-error FIXME: TS doesn't like this
-  color?: T['color']
+  size?: GetObjectField<T, 'size'>
+  color?: GetObjectField<T, 'color'>
   eagerValidation?: boolean
   legend?: string
   disabled?: boolean
