@@ -62,7 +62,7 @@ const ui = computed(() => tv({ extend: button, slots: props.ui })({
 <template>
   <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="linkProps" raw>
     <slot name="leading">
-      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" aria-hidden="true" />
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
     </slot>
 
     <span v-if="label || $slots.default" :class="ui.label()">
@@ -72,7 +72,7 @@ const ui = computed(() => tv({ extend: button, slots: props.ui })({
     </span>
 
     <slot name="trailing">
-      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" aria-hidden="true" />
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
     </slot>
   </ULink>
 </template>

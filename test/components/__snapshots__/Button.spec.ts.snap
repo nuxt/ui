@@ -66,7 +66,7 @@ exports[`Button > renders with disabled correctly 1`] = `
 `;
 
 exports[`Button > renders with icon correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:rocket-launch shrink-0 size-5" aria-hidden="true"></span>
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:rocket-launch shrink-0 size-5"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
@@ -80,7 +80,7 @@ exports[`Button > renders with label correctly 1`] = `
 `;
 
 exports[`Button > renders with leading and icon correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:arrow-left shrink-0 size-5" aria-hidden="true"></span>
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:arrow-left shrink-0 size-5"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
@@ -94,21 +94,21 @@ exports[`Button > renders with leading slot correctly 1`] = `
 `;
 
 exports[`Button > renders with leadingIcon correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:arrow-left shrink-0 size-5" aria-hidden="true"></span>
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:arrow-left shrink-0 size-5"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with loading correctly 1`] = `
-"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:arrow-path-20-solid shrink-0 size-5 animate-spin" aria-hidden="true"></span>
+"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:arrow-path-20-solid shrink-0 size-5 animate-spin"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with loadingIcon correctly 1`] = `
-"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:sparkles shrink-0 size-5 animate-spin" aria-hidden="true"></span>
+"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:sparkles shrink-0 size-5 animate-spin"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
@@ -159,7 +159,7 @@ exports[`Button > renders with square correctly 1`] = `
 exports[`Button > renders with trailing and icon correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5">
   <!--v-if-->
-  <!--v-if--><span class="iconify i-heroicons:arrow-right shrink-0 size-5" aria-hidden="true"></span>
+  <!--v-if--><span class="iconify i-heroicons:arrow-right shrink-0 size-5"></span>
 </button>"
 `;
 
@@ -173,7 +173,7 @@ exports[`Button > renders with trailing slot correctly 1`] = `
 exports[`Button > renders with trailingIcon correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5">
   <!--v-if-->
-  <!--v-if--><span class="iconify i-heroicons:arrow-right shrink-0 size-5" aria-hidden="true"></span>
+  <!--v-if--><span class="iconify i-heroicons:arrow-right shrink-0 size-5"></span>
 </button>"
 `;
 
