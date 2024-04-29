@@ -11,35 +11,35 @@ export default (config: { colors: string[] }) => {
     variants: {
       size: {
         xs: {
-          base: 'text-xs gap-1 px-2 py-1',
+          base: 'text-xs px-2 py-1',
           leading: 'pl-2',
           trailing: 'pr-2',
           leadingIcon: 'size-4',
           trailingIcon: 'size-4'
         },
         sm: {
-          base: 'text-sm gap-1.5 px-2.5 py-1',
+          base: 'text-sm px-2.5 py-1',
           leading: 'pl-2.5',
           trailing: 'pr-2.5',
           leadingIcon: 'size-4',
           trailingIcon: 'size-4'
         },
         md: {
-          base: 'text-sm gap-1.5 px-2.5 py-1.5',
+          base: 'text-sm px-2.5 py-1.5',
           leading: 'pl-2.5',
           trailing: 'pr-2.5',
           leadingIcon: 'size-5',
           trailingIcon: 'size-5'
         },
         lg: {
-          base: 'text-sm gap-1.5 px-3 py-2',
+          base: 'text-sm px-3 py-2',
           leading: 'pl-3',
           trailing: 'pr-3',
           leadingIcon: 'size-5',
           trailingIcon: 'size-5'
         },
         xl: {
-          base: 'text-sm gap-2.5 px-3.5 py-2.5',
+          base: 'text-sm px-3.5 py-2.5',
           leading: 'pl-3.5',
           trailing: 'pr-3.5',
           leadingIcon: 'size-5',
