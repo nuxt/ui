@@ -40,8 +40,8 @@ importers:
         specifier: ^1.1.3
         version: 1.1.3
       radix-vue:
-        specifier: ^1.7.2
-        version: 1.7.2(vue@3.4.24(typescript@5.4.3))
+        specifier: ^1.7.3
+        version: 1.7.3(vue@3.4.24(typescript@5.4.3))
       scule:
         specifier: ^1.3.0
         version: 1.3.0
@@ -147,8 +147,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0(ioredis@5.4.1)(rollup@4.16.4)
       '@nuxt/ui-pro':
-        specifier: npm:@nuxt/ui-pro-edge@1.1.0-28525551.37ca2f6
-        version: '@nuxt/ui-pro-edge@1.1.0-28525551.37ca2f6(vue@3.4.24(typescript@5.4.3))'
+        specifier: file:../../ui-pro2
+        version: file:../ui-pro2(rollup@4.16.4)(vue@3.4.24(typescript@5.4.3))
       '@nuxtjs/plausible':
         specifier: ^1.0.0
         version: 1.0.0(rollup@4.16.4)
@@ -1053,8 +1053,9 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro-edge@1.1.0-28525551.37ca2f6':
-    resolution: {integrity: sha512-P4jnFYQ4MJJ/IxRx5QIyzhbCmW8NIXVrKV/vHwJ4py/wDS7m8TnhFLLcFK3HeZ2Sopg4YU/NznrdwXsbW26QRg==}
+  '@nuxt/ui-pro@file:../ui-pro2':
+    resolution: {directory: ../ui-pro2, type: directory}
+    engines: {node: '>=v16.20.2'}
 
   '@nuxt/ui-templates@1.3.3':
     resolution: {integrity: sha512-3BG5doAREcD50dbKyXgmjD4b1GzY8CUy3T41jMhHZXNDdaNwOd31IBq+D6dV00OSrDVhzrTVj0IxsUsnMyHvIQ==}
@@ -5683,8 +5684,8 @@ packages:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
 
-  radix-vue@1.7.2:
-    resolution: {integrity: sha512-KczYzzflm8todIk3flaQIWQ6P1wqtUh0cwMBRhp8Pr2JXs8FMG2qfL4lJly2mhMFXc199bG0U4bNLLsrhn5xoA==}
+  radix-vue@1.7.3:
+    resolution: {integrity: sha512-GgUagGvpO1EtNvkQ27x3Hv26VrTffZ4XRyx8eMabXRxXtbo2GbjAd2HvGjL9A/D7QVHxw1ZUMBDcYWcpw4LEiQ==}
     peerDependencies:
       vue: '>= 3.2.0'
 
@@ -8427,20 +8428,24 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxt/ui-pro-edge@1.1.0-28525551.37ca2f6(vue@3.4.24(typescript@5.4.3))':
+  '@nuxt/ui-pro@file:../ui-pro2(rollup@4.16.4)(vue@3.4.24(typescript@5.4.3))':
     dependencies:
+      '@nuxt/kit': 3.11.2(rollup@4.16.4)
+      '@nuxt/schema': 3.11.2(rollup@4.16.4)
       '@nuxt/ui': 'link:'
       '@vueuse/core': 10.9.0(vue@3.4.24(typescript@5.4.3))
+      consola: 3.2.3
       defu: 6.1.4
       git-url-parse: 14.0.0
       ofetch: 1.3.4
       parse-git-config: 3.0.0
-      pathe: 1.1.2
       pkg-types: 1.1.0
-      tailwind-merge: 2.3.0
+      scule: 1.3.0
       vue3-smooth-dnd: 0.0.6(vue@3.4.24(typescript@5.4.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
+      - rollup
+      - supports-color
       - vue
 
   '@nuxt/ui-templates@1.3.3': {}
@@ -14524,7 +14529,7 @@ snapshots:
 
   quick-lru@5.1.1: {}
 
-  radix-vue@1.7.2(vue@3.4.24(typescript@5.4.3)):
+  radix-vue@1.7.3(vue@3.4.24(typescript@5.4.3)):
     dependencies:
       '@floating-ui/dom': 1.6.3
       '@floating-ui/vue': 1.0.6(vue@3.4.24(typescript@5.4.3))
@@ -15888,7 +15893,7 @@ snapshots:
   vaul-vue@0.1.0(typescript@5.4.3):
     dependencies:
       '@vueuse/core': 10.9.0(vue@3.4.24(typescript@5.4.3))
-      radix-vue: 1.7.2(vue@3.4.24(typescript@5.4.3))
+      radix-vue: 1.7.3(vue@3.4.24(typescript@5.4.3))
       vue: 3.4.24(typescript@5.4.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
