@@ -13,7 +13,15 @@ const ToastWrapper = defineComponent({
     ClientOnly
   },
   inheritAttrs: false,
-  template: '<UToaster><ClientOnly><UToast v-bind="$attrs" /></ClientOnly></UToaster>'
+  template: `<UToaster>
+  <ClientOnly>
+    <UToast v-bind="$attrs">
+      <template v-for="(_, name) in $slots" #[name]="slotData">
+        <slot :name="name" v-bind="slotData" />
+      </template>
+    </UToast>
+  </ClientOnly>
+</UToaster>`
 })
 
 describe('Toast', () => {
@@ -34,7 +42,7 @@ describe('Toast', () => {
     ['with class', { props: { class: 'bg-gray-50 dark:bg-gray-800/50' } }],
     ['with ui', { props: { title: 'Toast', ui: { title: 'font-bold' } } }],
     // Slots
-    ['with leading slot', { slots: { title: () => 'Leading slot' } }],
+    ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with title slot', { slots: { title: () => 'Title slot' } }],
     ['with description slot', { slots: { description: () => 'Description slot' } }],
     ['with close slot', { slots: { close: () => 'Close slot' } }]

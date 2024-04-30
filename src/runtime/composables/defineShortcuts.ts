@@ -47,6 +47,9 @@ export function extractShortcuts(items: any[] | any[][]) {
       if (item.children) {
         traverse(item.children.flat())
       }
+      if (item.items) {
+        traverse(item.items.flat())
+      }
     })
   }
 

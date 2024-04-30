@@ -12,11 +12,15 @@ const chip = tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })
 type ChipVariants = VariantProps<typeof chip>
 
 export interface ChipProps extends Omit<PrimitiveProps, 'asChild'> {
+  /** Display some text inside the chip. */
   text?: string | number
-  inset?: boolean
   color?: ChipVariants['color']
   size?: ChipVariants['size']
   position?: ChipVariants['position']
+  /** When `true`, translate the chip at the edge for non rounded elements. */
+  inset?: boolean
+  /** When `true`, render the chip relatively to the parent. */
+  standalone?: boolean
   class?: any
   ui?: Partial<typeof theme.slots>
 }
@@ -43,7 +47,8 @@ const ui = computed(() => tv({ extend: chip, slots: props.ui })({
   color: props.color,
   size: size.value,
   position: props.position,
-  inset: props.inset
+  inset: props.inset,
+  standalone: props.standalone
 }))
 
 provide('avatar-size', size)

@@ -119,8 +119,8 @@ defineShortcuts(extractShortcuts(items))
 
 <template>
   <div class="flex-1">
-    <UDropdownMenu :items="items" arrow :content="{ side: 'bottom' }" class="min-w-48">
-      <UButton label="Open" color="white" />
+    <UDropdownMenu :items="items" arrow :content="{ side: 'bottom', align: 'start' }" class="min-w-48">
+      <UButton label="Open" color="white" icon="i-heroicons-user" />
 
       <template #custom="{ item }">
         <UIcon :name="item.icon" class="shrink-0 size-5" />

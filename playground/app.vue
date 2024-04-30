@@ -21,6 +21,7 @@ const components = [
   'chip',
   'collapsible',
   'context-menu',
+  'command-palette',
   'drawer',
   'dropdown-menu',
   'form',

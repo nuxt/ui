@@ -3,11 +3,20 @@ import { useAppConfig } from '#imports'
 
 export interface UseComponentIconsProps {
   icon?: string
+  /** When `true`, the icon will be displayed on the left side. */
   leading?: boolean
+  /** Display an icon on the left side. */
   leadingIcon?: string
+  /** When `true`, the icon will be displayed on the right side. */
   trailing?: boolean
+  /** Display an icon on the right side. */
   trailingIcon?: string
+  /** When `true`, the loading icon will be displayed. */
   loading?: boolean
+  /**
+   * The icon when the `loading` prop is `true`.
+   * @defaultValue `appConfig.ui.icons.loading`
+   */
   loadingIcon?: string
 }
 

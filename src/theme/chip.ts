@@ -1,7 +1,7 @@
 export default (config: { colors: string[] }) => ({
   slots: {
     root: 'relative inline-flex items-center justify-center shrink-0',
-    base: 'absolute rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap'
+    base: 'rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap'
   },
   variants: {
     color: {
@@ -29,6 +29,9 @@ export default (config: { colors: string[] }) => ({
     },
     inset: {
       false: ''
+    },
+    standalone: {
+      false: 'absolute'
     }
   },
   compoundVariants: [{

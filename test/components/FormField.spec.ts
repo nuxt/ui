@@ -10,7 +10,11 @@ const FormFieldWrapper = defineComponent({
   components: {
     UFormField: FormField
   },
-  template: '<UFormField > <slot /> </UFormField>'
+  template: `<UFormField>
+  <template v-for="(_, name) in $slots" #[name]="slotData">
+    <slot :name="name" v-bind="slotData" />
+  </template>
+</UFormField>`
 })
 
 describe('FormField', () => {
