@@ -63,7 +63,6 @@
     "@nuxt/eslint-config": "^0.3.10",
     "@nuxt/module-builder": "^0.6.0",
     "@nuxt/test-utils": "^3.12.1",
-    "@nuxt/ui-dev": "workspace:*",
     "@release-it/conventional-changelog": "^8.0.1",
     "@vue/test-utils": "^2.4.5",
     "eslint": "^9.1.1",

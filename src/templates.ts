@@ -183,6 +183,16 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
       filename: `ui/${kebabCase(component)}.ts`,
       write: true,
       getContents: async () => {
+        // For local development, directly import from theme
+        if (process.env.NUXT_UI_LOCAL_DEV) {
+          return [
+            `import * as themes from ${JSON.stringify(new URL('./theme/index.ts', import.meta.url).toString())}`,
+            `const themeFn = themes[${JSON.stringify(component)}]`,
+            `const theme = typeof themeFn === 'function' ? themeFn(${JSON.stringify({ colors: options.colors })}) : themeFn`,
+            `export default theme`
+          ].join('\n')
+        }
+
         const template = (theme as any)[component]
         const result = typeof template === 'function' ? template({ colors: options.colors }) : template
 
