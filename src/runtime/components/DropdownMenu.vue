@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps, DropdownMenuTriggerProps } from 'radix-vue'
+import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps, DropdownMenuTriggerProps, DropdownMenuItemProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
@@ -11,7 +11,7 @@ const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof
 
 const dropdownMenu = tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })
 
-export interface DropdownMenuItem extends Omit<LinkProps, 'type'> {
+export interface DropdownMenuItem extends Omit<LinkProps, 'type'>, Pick<DropdownMenuItemProps, 'disabled'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -19,9 +19,9 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type'> {
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
-   * @defaultValue `'link'`
+   * @defaultValue `'item'`
    */
-  type?: 'label' | 'separator' | 'link'
+  type?: 'label' | 'separator' | 'item'
   slot?: string
   open?: boolean
   defaultOpen?: boolean
