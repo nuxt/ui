@@ -127,7 +127,7 @@ defineShortcuts(extractShortcuts(items))
 
         <span class="truncate">{{ item.label }}</span>
 
-        <UIcon :name="appConfig.ui.icons.check" class="shrink-0 size-5 text-primary-500 dark:text-primary-400 ms-auto" />
+        <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-primary-500 dark:text-primary-400 ms-auto" />
       </template>
     </UDropdownMenu>
   </div>
