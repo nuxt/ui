@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { TabsRootProps, TabsRootEmits, TabsContentProps } from 'radix-vue'
+import type { TabsRootProps, TabsRootEmits, TabsContentProps, TabsTriggerProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
@@ -11,13 +11,11 @@ const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> 
 
 const tabs = tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })
 
-export interface TabsItem {
+export interface TabsItem extends Partial<Pick<TabsTriggerProps, 'disabled' | 'value'>> {
   label?: string
   icon?: string
   avatar?: AvatarProps
   slot?: string
-  value?: string
-  disabled?: boolean
   content?: string
 }
 
