@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { AccordionRootProps, AccordionRootEmits, AccordionContentProps } from 'radix-vue'
+import type { AccordionRootProps, AccordionRootEmits, AccordionContentProps, AccordionItemProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
@@ -10,14 +10,12 @@ const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof th
 
 const accordion = tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })
 
-export interface AccordionItem {
+export interface AccordionItem extends Partial<Pick<AccordionItemProps, 'disabled' | 'value'>> {
   label?: string
   icon?: string
   trailingIcon?: string
   slot?: string
-  value?: string
   content?: string
-  disabled?: boolean
 }
 
 export interface AccordionProps<T> extends Omit<AccordionRootProps, 'asChild' | 'dir' | 'orientation'> {
