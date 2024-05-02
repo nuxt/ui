@@ -6,7 +6,7 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '#ui/composables/useComponentIcons'
-import type { AvatarProps, ButtonProps, ChipProps, KbdProps } from '#ui/types'
+import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '#ui/types'
 import type { DynamicSlots } from '#ui/types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { commandPalette: Partial<typeof theme> } }
@@ -45,11 +45,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'as' 
    * @defaultValue `appConfig.ui.icons.check`
    */
   selectedIcon?: string
-  /**
-   * The placeholder text when the input is empty.
-   * @defaultValue `'Type a command or search...'`
-   */
-  placeholder?: string
+  placeholder?: InputProps['placeholder']
   /** Display a close button in the input, clicking it will emit the `close` event. */
   close?: ButtonProps | boolean
   groups?: G[]

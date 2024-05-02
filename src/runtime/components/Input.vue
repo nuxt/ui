@@ -16,6 +16,10 @@ export interface InputProps extends UseComponentIconsProps {
   id?: string
   name?: string
   type?: InputHTMLAttributes['type']
+  /**
+   * The placeholder text when the input is empty.
+   * @defaultValue `'Type a command or search...'`
+   */
   placeholder?: string
   color?: InputVariants['color']
   variant?: InputVariants['variant']
