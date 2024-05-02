@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { InputHTMLAttributes } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { CheckboxRootProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
@@ -16,8 +17,16 @@ export interface CheckboxProps extends Omit<CheckboxRootProps, 'asChild' | 'chec
   description?: string
   color?: CheckboxVariants['color']
   size?: CheckboxVariants['size']
+  /**
+   * The icon displayed when checked.
+   * @defaultValue `appConfig.ui.icons.check`
+   */
   icon?: string
-  indeterminate?: boolean
+  indeterminate?: InputHTMLAttributes['indeterminate']
+  /**
+   * The icon displayed when the checkbox is indeterminate.
+   * @defaultValue `appConfig.ui.icons.minus`
+   */
   indeterminateIcon?: string
   defaultValue?: boolean
   class?: any
