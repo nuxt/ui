@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { NavigationMenuRootProps, NavigationMenuRootEmits } from 'radix-vue'
+import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuItemProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
@@ -11,9 +11,8 @@ const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<type
 
 const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })
 
-export interface NavigationMenuItem extends LinkProps {
+export interface NavigationMenuItem extends LinkProps, Pick<NavigationMenuItemProps, 'value'> {
   label?: string
-  value?: string
   icon?: string
   avatar?: AvatarProps
   badge?: string | number | BadgeProps
