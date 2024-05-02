@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuArrowProps, ContextMenuTriggerProps } from 'radix-vue'
+import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuArrowProps, ContextMenuTriggerProps, ContextMenuItemProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
@@ -11,7 +11,7 @@ const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof 
 
 const contextMenu = tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu || {}) })
 
-export interface ContextMenuItem extends Omit<LinkProps, 'type'> {
+export interface ContextMenuItem extends Omit<LinkProps, 'type'>, Pick<ContextMenuItemProps, 'disabled'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -19,9 +19,9 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type'> {
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
-   * @defaultValue `'link'`
+   * @defaultValue `'item'`
    */
-  type?: 'label' | 'separator' | 'link'
+  type?: 'label' | 'separator' | 'item'
   slot?: string
   open?: boolean
   defaultOpen?: boolean
