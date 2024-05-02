@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { ComboboxRootProps, ComboboxRootEmits } from 'radix-vue'
+import type { ComboboxRootProps, ComboboxRootEmits, ComboboxItemProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import _appConfig from '#build/app.config'
@@ -13,7 +13,7 @@ const appConfig = _appConfig as AppConfig & { ui: { commandPalette: Partial<type
 
 const commandPalette = tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })
 
-export interface CommandPaletteItem {
+export interface CommandPaletteItem extends Pick<ComboboxItemProps, 'disabled'> {
   prefix?: string
   label?: string
   suffix?: string
@@ -21,7 +21,6 @@ export interface CommandPaletteItem {
   avatar?: AvatarProps
   chip?: ChipProps
   kbds?: KbdProps['value'][] | KbdProps[]
-  disabled?: boolean
   slot?: string
   select? (e: Event): void
 }
