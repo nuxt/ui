@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuArrowProps, ContextMenuTriggerProps, ContextMenuItemProps } from 'radix-vue'
+import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuTriggerProps, ContextMenuItemProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
@@ -32,7 +32,6 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type'>, Pick<ContextMe
 export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'>, Pick<ContextMenuTriggerProps, 'disabled'> {
   items?: T[] | T[][]
   content?: Omit<ContextMenuContentProps, 'asChild' | 'forceMount'>
-  arrow?: boolean | Omit<ContextMenuArrowProps, 'asChild'>
   portal?: boolean
   class?: any
   ui?: Partial<typeof contextMenu.slots>
@@ -53,7 +52,7 @@ export type ContextMenuSlots<T extends { slot?: string }> = {
 
 <script setup lang="ts" generic="T extends ContextMenuItem">
 import { computed, toRef } from 'vue'
-import { ContextMenuRoot, ContextMenuTrigger, ContextMenuArrow, useForwardPropsEmits } from 'radix-vue'
+import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { UContextMenuContent } from '#components'
 import { omit } from '#ui/utils'
@@ -67,7 +66,6 @@ const slots = defineSlots<ContextMenuSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content as ContextMenuContentProps)
-const arrowProps = toRef(() => props.arrow as ContextMenuArrowProps)
 const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[string]>
 
 const ui = computed(() => tv({ extend: contextMenu, slots: props.ui })())
@@ -83,8 +81,6 @@ const ui = computed(() => tv({ extend: contextMenu, slots: props.ui })())
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />
       </template>
-
-      <ContextMenuArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow()" />
     </UContextMenuContent>
   </ContextMenuRoot>
 </template>
