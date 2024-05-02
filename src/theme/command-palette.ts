@@ -15,7 +15,6 @@ export default {
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     itemTrailingSelectedIcon: 'shrink-0 size-5',
     itemTrailingHighlightedIcon: 'shrink-0 size-5 text-gray-400 dark:text-gray-500 hidden group-data-highlighted:inline-flex',
-    itemTrailingHighlightedText: 'text-gray-400 dark:text-gray-500 hidden group-data-highlighted:inline-flex',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0 gap-0.5',
     itemLabel: 'truncate space-x-1',
     itemLabelBase: '[&>mark]:text-[initial] [&>mark]:bg-[initial]',
