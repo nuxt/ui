@@ -63,7 +63,7 @@ The validation function must return a list of errors with the following attribut
 - `path` - Path to the form element corresponding to the `name` attribute.
 
 ::callout{icon="i-heroicons-light-bulb"}
-Note: this can be used alongside the `schema` prop to handle complex use cases. 
+Note that it can be used alongside the `schema` prop to handle complex use cases. 
 ::
 
 ::component-example
@@ -184,13 +184,13 @@ Take a look at the component!
 
 ## Error event
 
-You can listen to the `@error` event to handle errors. This event is triggered when the form is validated and contains an array of `FormError` objects with the following fields:
+You can listen to the `@error` event to handle errors. This event is triggered when the form is submitted and contains an array of `FormError` objects with the following fields:
 
 - `id` - the identifier of the form element.
 - `path` - the path to the form element matching the `name`.
 - `message` - the error message to display.
 
-Here is an example of how to focus the first form element with an error:
+Here's an example that focuses the first input element with an error after the form is submitted:
 
 ::component-example
 ---
