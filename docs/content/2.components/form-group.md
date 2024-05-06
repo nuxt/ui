@@ -196,7 +196,7 @@ Use the `#description` slot to set the custom content for description.
 ::component-card
 ---
 slots:
-  description: Write only valid email address <UIcon name="i-heroicons-arrow-right-20-solid" />
+  description: Write only valid email address <UIcon name="i-heroicons-information-circle" />
   default: <UInput model-value="benjamincanac" placeholder="you@example.com" />
 props:
   label: 'Email'
