@@ -4,7 +4,7 @@ exports[`Avatar > renders with alt correctly 1`] = `"<span class="inline-flex it
 
 exports[`Avatar > renders with class correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle size-8 text-base bg-white dark:bg-gray-900"><!--v-if--><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;
 
-exports[`Avatar > renders with icon correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-8 text-base"><!--v-if--><span class="iconify i-heroicons:photo text-gray-500 dark:text-gray-400 shrink-0"></span></span>"`;
+exports[`Avatar > renders with icon correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-8 text-base"><!--v-if--><span class="iconify i-heroicons:photo text-gray-500 dark:text-gray-400 shrink-0" aria-hidden="true"></span></span>"`;
 
 exports[`Avatar > renders with size 2xl correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-11 text-[22px]"><img role="img" src="https://avatars.githubusercontent.com/u/739984?v=4" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>"`;
 

@@ -57,7 +57,7 @@ exports[`Input > renders with disabled correctly 1`] = `
 `;
 
 exports[`Input > renders with icon correctly 1`] = `
-"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pl-9"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5"></span></span>
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pl-9"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
   <!--v-if-->
 </div>"
 `;
@@ -70,7 +70,7 @@ exports[`Input > renders with id correctly 1`] = `
 `;
 
 exports[`Input > renders with leading and icon correctly 1`] = `
-"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pl-9"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5"></span></span>
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pl-9"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
   <!--v-if-->
 </div>"
 `;
@@ -82,19 +82,19 @@ exports[`Input > renders with leading slot correctly 1`] = `
 `;
 
 exports[`Input > renders with leadingIcon correctly 1`] = `
-"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pl-9"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5"></span></span>
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pl-9"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with loading correctly 1`] = `
-"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pl-9"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:arrow-path-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5 animate-spin"></span></span>
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pl-9"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:arrow-path-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5 animate-spin" aria-hidden="true"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with loadingIcon correctly 1`] = `
-"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pl-9"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:sparkles shrink-0 text-gray-400 dark:text-gray-500 size-5 animate-spin"></span></span>
+"<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pl-9"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:sparkles shrink-0 text-gray-400 dark:text-gray-500 size-5 animate-spin" aria-hidden="true"></span></span>
   <!--v-if-->
 </div>"
 `;
@@ -157,7 +157,7 @@ exports[`Input > renders with size xs correctly 1`] = `
 
 exports[`Input > renders with trailing and icon correctly 1`] = `
 "<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pr-9">
-  <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pr-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5"></span></span>
+  <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pr-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
@@ -169,7 +169,7 @@ exports[`Input > renders with trailing slot correctly 1`] = `
 
 exports[`Input > renders with trailingIcon correctly 1`] = `
 "<div class="relative"><input type="text" class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 pr-9">
-  <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pr-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5"></span></span>
+  <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pr-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
