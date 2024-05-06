@@ -6,6 +6,7 @@ settings:
 
 overrides:
   '@nuxt/ui': workspace:*
+  '@nuxt/module-builder': 0.5.5
 
 importers:
 
@@ -85,8 +86,8 @@ importers:
         specifier: ^0.3.10
         version: 0.3.10(eslint@8.57.0)(typescript@5.4.5)
       '@nuxt/module-builder':
-        specifier: ^0.6.0
-        version: 0.6.0(@nuxt/kit@3.11.2(rollup@3.29.4))(nuxi@3.11.1)(typescript@5.4.5)
+        specifier: 0.5.5
+        version: 0.5.5(@nuxt/kit@3.11.2(rollup@3.29.4))(nuxi@3.11.1)(typescript@5.4.5)
       '@nuxt/test-utils':
         specifier: ^3.12.1
         version: 3.12.1(@vue/test-utils@2.4.5)(h3@1.11.1)(happy-dom@14.7.1)(playwright-core@1.41.2)(rollup@3.29.4)(vite@5.2.8(@types/node@20.11.19)(terser@5.27.2))(vitest@1.6.0(@types/node@20.11.19)(happy-dom@14.7.1)(terser@5.27.2))(vue-router@4.3.0(vue@3.4.25(typescript@5.4.5)))(vue@3.4.25(typescript@5.4.5))
@@ -160,8 +161,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: npm:@nuxt/ui-pro-edge@1.1.0-28574649.05ee055
-        version: '@nuxt/ui-pro-edge@1.1.0-28574649.05ee055(vue@3.4.25(typescript@5.4.5))'
+        specifier: npm:@nuxt/ui-pro-edge@1.1.0-28583092.cb265b3
+        version: '@nuxt/ui-pro-edge@1.1.0-28583092.cb265b3(vue@3.4.25(typescript@5.4.5))'
       '@nuxtjs/plausible':
         specifier: ^1.0.0
         version: 1.0.0(rollup@4.14.0)
@@ -1026,12 +1027,12 @@ packages:
     resolution: {integrity: sha512-yiYKP0ZWMW7T3TCmsv4H8+jEsB/nFriRAR8bKoSqSV9bkVYWPE36sf7JDux30dQ91jSlQG6LQkB3vCHYTS2cIg==}
     engines: {node: ^14.18.0 || >=16.10.0}
 
-  '@nuxt/module-builder@0.6.0':
-    resolution: {integrity: sha512-d/sn+6n23qB+yGuItNvGnNlPpDzwcsW6riyISdo4H2MO/3TWFsIzB5+JZK104t0G6ftxB71xWHmBBYEdkXOhVw==}
+  '@nuxt/module-builder@0.5.5':
+    resolution: {integrity: sha512-ifFfwA1rbSXSae25RmqA2kAbV3xoShZNrq1yK8VXB/EnIcDn4WiaYR1PytaSxIt5zsvWPn92BJXiIUBiMQZ0hw==}
     hasBin: true
     peerDependencies:
-      '@nuxt/kit': ^3.11.2
-      nuxi: ^3.11.1
+      '@nuxt/kit': ^3.8.2
+      nuxi: ^3.10.0
 
   '@nuxt/schema@3.11.2':
     resolution: {integrity: sha512-Z0bx7N08itD5edtpkstImLctWMNvxTArsKXzS35ZuqyAyKBPcRjO1CU01slH0ahO30Gg9kbck3/RKNZPwfOjJg==}
@@ -1081,8 +1082,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro-edge@1.1.0-28574649.05ee055':
-    resolution: {integrity: sha512-jak7M32fNtwkSUkgLG+bcJBejdki2w0m/6zKoI6zniNCiVYCJMkc79ICu+lg1+6bKv/1bSZBlOgPToBXLAMJBQ==}
+  '@nuxt/ui-pro-edge@1.1.0-28583092.cb265b3':
+    resolution: {integrity: sha512-JAUoGbJYM8n7se/ypYhoPDlpp4/IbodByV0TYtcPtW7aC7qgqKvoETiAH4yqOmTp/t1ov9zJvMeN2Yapq2oBwg==}
 
   '@nuxt/ui-templates@1.3.2':
     resolution: {integrity: sha512-aLHpV7Nj2cAHM2hPtwOtT2OIeOy4p6GN5qvNm6zBt6wke33t1jn0PR/FNwvKROIxM0xTAwB6jdmRJLXRPVGNhA==}
@@ -8718,16 +8719,14 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxt/module-builder@0.6.0(@nuxt/kit@3.11.2(rollup@3.29.4))(nuxi@3.11.1)(typescript@5.4.5)':
+  '@nuxt/module-builder@0.5.5(@nuxt/kit@3.11.2(rollup@3.29.4))(nuxi@3.11.1)(typescript@5.4.5)':
     dependencies:
       '@nuxt/kit': 3.11.2(rollup@3.29.4)
       citty: 0.1.6
       consola: 3.2.3
-      defu: 6.1.4
       mlly: 1.6.1
       nuxi: 3.11.1
       pathe: 1.1.2
-      pkg-types: 1.1.0
       unbuild: 2.0.0(typescript@5.4.5)
     transitivePeerDependencies:
       - sass
@@ -8852,7 +8851,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxt/ui-pro-edge@1.1.0-28574649.05ee055(vue@3.4.25(typescript@5.4.5))':
+  '@nuxt/ui-pro-edge@1.1.0-28583092.cb265b3(vue@3.4.25(typescript@5.4.5))':
     dependencies:
       '@nuxt/ui': 'link:'
       '@vueuse/core': 10.9.0(vue@3.4.25(typescript@5.4.5))
