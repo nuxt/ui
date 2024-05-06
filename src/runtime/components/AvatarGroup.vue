@@ -27,6 +27,7 @@ export interface AvatarGroupSlots {
 import { computed, provide } from 'vue'
 import { Primitive } from 'radix-vue'
 import { UAvatar } from '#components'
+import { avatarGroupInjectionKey } from '#imports'
 
 const props = defineProps<AvatarGroupProps>()
 const slots = defineSlots<AvatarGroupSlots>()
@@ -59,7 +60,9 @@ const hiddenCount = computed(() => {
   return children?.length - visibleAvatars.value.length
 })
 
-provide('avatar-size', computed(() => props.size))
+provide(avatarGroupInjectionKey, computed(() => ({
+  size: props.size
+})))
 </script>
 
 <template>

@@ -1,7 +1,8 @@
-import { inject, ref, computed } from 'vue'
+import { inject, ref, computed, type InjectionKey, type Ref, type ComputedRef } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
 import type { FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '#ui/types/form'
 import type { GetObjectField } from '#ui/types/utils'
+import type { FormFieldProps } from '#ui/types'
 
 type Props<T> = {
   id?: string
@@ -13,55 +14,60 @@ type Props<T> = {
   disabled?: boolean
 }
 
+export const formOptionsInjectionKey: InjectionKey<ComputedRef<FormInjectedOptions>> = Symbol('nuxt-ui.form-options')
+export const formBusInjectionKey: InjectionKey<UseEventBusReturn<FormEvent, string>> = Symbol('nuxt-ui.form-events')
+export const formFieldInjectionKey: InjectionKey<ComputedRef<FormFieldInjectedOptions<FormFieldProps>>> = Symbol('nuxt-ui.form-field')
+export const formInputsInjectionKey: InjectionKey<Ref<Record<string, string>>> = Symbol('nuxt-ui.form-inputs')
+
 export function useFormField<T>(props?: Props<T>) {
-  const formOptions = inject<FormInjectedOptions | undefined>('form-options', undefined)
-  const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
-  const formField = inject<FormFieldInjectedOptions<T> | undefined>('form-field', undefined)
-  const formInputs = inject<any>('form-inputs', undefined)
+  const formOptions = inject(formOptionsInjectionKey, undefined)
+  const formBus = inject(formBusInjectionKey, undefined)
+  const formField = inject(formFieldInjectionKey, undefined)
+  const formInputs = inject(formInputsInjectionKey, undefined)
 
   if (formField) {
     if (props?.id) {
       // Updates for="..." attribute on label if props.id is provided
-      formField.id.value = props?.id
+      formField.value.id = props?.id
     }
 
-    if (formInputs && formField.name.value) {
-      formInputs.value[formField.name.value] = formField.id.value
+    if (formInputs && formField.value.name) {
+      formInputs.value[formField.value.name] = formField.value.id
     }
   }
 
   const blurred = ref(false)
 
-  function emitFormEvent(type: FormInputEvents, name: string) {
-    if (formBus && formField) {
+  function emitFormEvent(type: FormInputEvents, name?: string) {
+    if (formBus && formField && name) {
       formBus.emit({ type, name })
     }
   }
 
   function emitFormBlur() {
-    emitFormEvent('blur', formField?.name.value as string)
+    emitFormEvent('blur', formField?.value.name)
     blurred.value = true
   }
 
   function emitFormChange() {
-    emitFormEvent('change', formField?.name.value as string)
+    emitFormEvent('change', formField?.value.name)
   }
 
   const emitFormInput = useDebounceFn(
     () => {
-      if (blurred.value || formField?.eagerValidation.value) {
-        emitFormEvent('input', formField?.name.value as string)
+      if (blurred.value || formField?.value.eagerValidation) {
+        emitFormEvent('input', formField?.value.name)
       }
     },
-    formField?.validateOnInputDelay.value ?? formOptions?.validateOnInputDelay?.value ?? 0
+    formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
   )
 
   return {
-    id: computed(() => props?.id ?? formField?.id.value),
-    name: computed(() => props?.name ?? formField?.name.value),
-    size: computed(() => props?.size ?? formField?.size?.value),
-    color: computed(() => formField?.error?.value ? 'red' : props?.color),
-    disabled: computed(() => formOptions?.disabled?.value || props?.disabled),
+    id: computed(() => props?.id ?? formField?.value.id),
+    name: computed(() => props?.name ?? formField?.value.name),
+    size: computed(() => props?.size ?? formField?.value.size),
+    color: computed(() => formField?.value.error ? 'red' : props?.color),
+    disabled: computed(() => formOptions?.value.disabled || props?.disabled),
     emitFormBlur,
     emitFormInput,
     emitFormChange

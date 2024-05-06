@@ -38,8 +38,8 @@ export interface FormFieldSlots {
 <script lang="ts" setup>
 import { computed, ref, inject, provide, type Ref } from 'vue'
 import { Label } from 'radix-vue'
-import type { FormError, FormFieldInjectedOptions } from '#ui/types/form'
-import { useId } from '#imports'
+import type { FormError } from '#ui/types/form'
+import { useId, formFieldInjectionKey } from '#imports'
 
 const props = defineProps<FormFieldProps>()
 defineSlots<FormFieldSlots>()
@@ -60,14 +60,14 @@ const error = computed(() => {
 
 const id = ref(useId())
 
-provide<FormFieldInjectedOptions<FormFieldProps>>('form-field', {
-  error,
-  id,
-  name: computed(() => props.name),
-  size: computed(() => props.size),
-  eagerValidation: computed(() => props.eagerValidation),
-  validateOnInputDelay: computed(() => props.validateOnInputDelay)
-})
+provide(formFieldInjectionKey, computed(() => ({
+  id: id.value,
+  error: error.value,
+  name: props.name,
+  size: props.size,
+  eagerValidation: props.eagerValidation,
+  validateOnInputDelay: props.validateOnInputDelay
+})))
 </script>
 
 <template>

@@ -65,17 +65,17 @@ export type FormEvent =
   | FormChildDetachEvent
 
 export interface FormInjectedOptions {
-  disabled?: ComputedRef<boolean>
-  validateOnInputDelay?: ComputedRef<number>
+  disabled?: boolean
+  validateOnInputDelay?: number
 }
 
 export interface FormFieldInjectedOptions<T> {
-  id: Ref<string | undefined>
-  name: ComputedRef<string | undefined>
-  size: ComputedRef<GetObjectField<T, 'size'>>
-  error: ComputedRef<string | boolean | undefined>
-  eagerValidation: ComputedRef<boolean | undefined>
-  validateOnInputDelay: ComputedRef<number | undefined>
+  id: string
+  name?: string
+  size?: GetObjectField<T, 'size'>
+  error?: string | boolean
+  eagerValidation?: boolean
+  validateOnInputDelay?: number
 }
 
 export class FormValidationException extends Error {

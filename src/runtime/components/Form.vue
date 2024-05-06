@@ -3,8 +3,10 @@ import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
-import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, FormInjectedOptions, Form, FormErrorWithId } from '#ui/types/form'
+import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '#ui/types/form'
 import { FormValidationException } from '#ui/types/form'
+
+import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, useId } from '#imports'
 
 const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
 
@@ -33,8 +35,7 @@ export interface FormSlots {
 
 <script lang="ts" setup generic="T extends object">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed } from 'vue'
-import { useEventBus, type UseEventBusReturn } from '@vueuse/core'
-import { useId } from '#imports'
+import { useEventBus } from '@vueuse/core'
 import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '#ui/utils/form'
 
 const props = withDefaults(defineProps<FormProps<T>>(), {
@@ -49,11 +50,11 @@ defineSlots<FormSlots>()
 const formId = props.id ?? useId()
 
 const bus = useEventBus<FormEvent>(`form-${formId}`)
-const parentBus = inject<UseEventBusReturn<FormEvent, string> | undefined>(
-  'form-events',
+const parentBus = inject(
+  formBusInjectionKey,
   undefined
 )
-provide('form-events', bus)
+provide(formBusInjectionKey, bus)
 
 const nestedForms = ref<Map<string | number, { validate: () => any }>>(new Map())
 
@@ -86,17 +87,17 @@ onUnmounted(() => {
   }
 })
 
-const options = {
-  disabled: computed(() => props.disabled),
-  validateOnInputDelay: computed(() => props.validateOnInputDelay)
-}
-provide<FormInjectedOptions>('form-options', options)
+provide(formOptionsInjectionKey, computed(() => ({
+  disabled: props.disabled,
+  validateOnInputDelay: props.validateOnInputDelay
+})))
 
 const errors = ref<FormErrorWithId[]>([])
 provide('form-errors', errors)
 
 const inputs = ref<Record<string, string>>({})
-provide('form-inputs', inputs)
+provide(formInputsInjectionKey, inputs)
+
 function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   return errs.map(err => ({
     ...err,
@@ -213,7 +214,8 @@ defineExpose<Form<T>>({
       errors.value = []
     }
   },
-  ...options
+
+  disabled: computed(() => props.disabled)
 })
 </script>
 

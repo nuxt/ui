@@ -32,7 +32,7 @@ export interface ChipSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, provide } from 'vue'
+import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useAvatarGroup } from '#imports'
 
@@ -50,8 +50,6 @@ const ui = computed(() => tv({ extend: chip, slots: props.ui })({
   inset: props.inset,
   standalone: props.standalone
 }))
-
-provide('avatar-size', size)
 </script>
 
 <template>
