@@ -43,11 +43,11 @@ export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
 export type DropdownMenuSlots<T extends { slot?: string }> = {
-  default(): any
-  leading: SlotProps<T>
-  label: SlotProps<T>
-  trailing: SlotProps<T>
-  item: SlotProps<T>
+  'default'(): any
+  'item': SlotProps<T>
+  'item-leading': SlotProps<T>
+  'item-label': SlotProps<T>
+  'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 </script>
 

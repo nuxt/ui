@@ -26,12 +26,12 @@ describe('Breadcrumb', () => {
     ['with items', { props }],
     ['with separatorIcon', { props: { ...props, separatorIcon: 'i-heroicons-minus' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
-    ['with ui', { props: { ui: { ...props, link: 'font-bold' } } }],
+    ['with ui', { props: { ui: { ...props, item: 'font-bold' } } }],
     // Slots
-    ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
-    ['with label slot', { props, slots: { default: () => 'Label slot' } }],
-    ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
+    ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
+    ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
+    ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
     ['with separator slot', { props, slots: { separator: () => '/' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps<typeof items[number]>, slots?: Partial<BreadcrumbSlots<typeof items[number]>> }) => {

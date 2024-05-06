@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const appConfig = useAppConfig()
-
 const items = [
   [{
     label: 'My account',
@@ -122,12 +120,8 @@ defineShortcuts(extractShortcuts(items))
     <UDropdownMenu :items="items" arrow :content="{ side: 'bottom', align: 'start' }" class="min-w-48">
       <UButton label="Open" color="white" icon="i-heroicons-user" />
 
-      <template #custom="{ item }">
-        <UIcon :name="item.icon" class="shrink-0 size-5" />
-
-        <span class="truncate">{{ item.label }}</span>
-
-        <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-primary-500 dark:text-primary-400 ms-auto" />
+      <template #custom-trailing>
+        <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-primary-500 dark:text-primary-400" />
       </template>
     </UDropdownMenu>
   </div>

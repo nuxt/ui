@@ -36,7 +36,7 @@ import { computed } from 'vue'
 import { useForwardProps } from 'radix-vue'
 import { reactiveOmit } from '@vueuse/core'
 import { useComponentIcons } from '#imports'
-import { UIcon, ULink } from '#components'
+import { UIcon, UAvatar, ULink } from '#components'
 
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
@@ -44,7 +44,7 @@ const slots = defineSlots<ButtonSlots>()
 const linkProps = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'variant', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'truncate', 'class', 'ui'))
 
 // const { size, rounded } = useInjectButtonGroup({ ui, props })
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
+const { isLeading, isTrailing, leadingIconName, trailingIconName, avatarSize } = useComponentIcons<ButtonProps>(props)
 
 const ui = computed(() => tv({ extend: button, slots: props.ui })({
   color: props.color,
@@ -63,6 +63,7 @@ const ui = computed(() => tv({ extend: button, slots: props.ui })({
   <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="linkProps" raw>
     <slot name="leading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
+      <UAvatar v-else-if="avatar" :size="avatarSize" v-bind="avatar" :class="ui.leadingAvatar()" />
     </slot>
 
     <span v-if="label || $slots.default" :class="ui.label()">

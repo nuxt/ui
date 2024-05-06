@@ -32,10 +32,10 @@ export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any
 
 export type NavigationMenuSlots<T extends { slot?: string }> = {
-  leading: SlotProps<T>
-  label: SlotProps<T>
-  trailing: SlotProps<T>
-  item: SlotProps<T>
+  'item': SlotProps<T>
+  'item-leading': SlotProps<T>
+  'item-label': SlotProps<T>
+  'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 </script>
 
@@ -61,30 +61,30 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
   <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list()">
-        <NavigationMenuItem v-for="(item, index) in list" :key="`list-${listIndex}-${index}`" :value="item.value || String(index)" :class="ui.item()">
+        <NavigationMenuItem v-for="(item, index) in list" :key="`list-${listIndex}-${index}`" :value="item.value || String(index)" :class="ui.itemWrapper()">
           <ULink v-slot="{ active, ...slotProps }" v-bind="omit(item, ['label', 'value', 'icon', 'avatar', 'badge', 'slot', 'select'])" custom>
             <NavigationMenuLink as-child :active="active" @select="item.select">
-              <ULinkBase v-bind="slotProps" :class="ui.link({ active, disabled: !!item.disabled })">
+              <ULinkBase v-bind="slotProps" :class="ui.item({ active, disabled: !!item.disabled })">
                 <slot :name="item.slot || 'item'" :item="item" :index="index">
-                  <slot name="leading" :item="item" :active="active" :index="index">
-                    <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ active, disabled: !!item.disabled })" />
-                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ active, disabled: !!item.disabled })" />
+                  <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="active" :index="index">
+                    <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ active, disabled: !!item.disabled })" />
+                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ active, disabled: !!item.disabled })" />
                   </slot>
 
-                  <span v-if="item.label || $slots.label" :class="ui.linkLabel()">
-                    <slot name="label" :item="item" :active="active" :index="index">
+                  <span v-if="item.label || $slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel()">
+                    <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="active" :index="index">
                       {{ item.label }}
                     </slot>
                   </span>
 
-                  <span v-if="$slots.trailing || item.badge" :class="ui.linkTrailing()">
-                    <slot name="trailing" :item="item" :active="active" :index="index">
+                  <span v-if="item.badge || $slots[item.slot ? `${item.slot}-trailing`: 'item-trailing']" :class="ui.itemTrailing()">
+                    <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="item" :active="active" :index="index">
                       <UBadge
                         v-if="item.badge"
                         color="white"
                         size="sm"
                         v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
-                        :class="ui.linkTrailingBadge()"
+                        :class="ui.itemTrailingBadge()"
                       />
                     </slot>
                   </span>

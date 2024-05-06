@@ -44,21 +44,21 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 <template>
   <DefineItemTemplate v-slot="{ item, active, index }">
     <slot :name="item.slot || 'item'" :item="item" :index="index">
-      <slot name="leading" :item="item" :active="active" :index="index">
-        <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ active })" />
-        <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ active })" />
+      <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="active" :index="index">
+        <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ active })" />
+        <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ active })" />
       </slot>
 
-      <span v-if="item.label || $slots.label" :class="ui.linkLabel()">
-        <slot name="label" :item="item" :active="active" :index="index">
+      <span v-if="item.label || $slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel()">
+        <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="active" :index="index">
           {{ item.label }}
         </slot>
       </span>
 
-      <span v-if="$slots.trailing || item.children?.length || item.kbds?.length" :class="ui.linkTrailing()">
-        <slot name="trailing" :item="item" :active="active" :index="index">
-          <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.linkTrailingIcon()" />
-          <span v-else-if="item.kbds?.length" :class="ui.linkTrailingKbds()">
+      <span v-if="item.children?.length || item.kbds?.length || $slots[item.slot ? `${item.slot}-trailing`: 'item-trailing']" :class="ui.itemTrailing()">
+        <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="item" :active="active" :index="index">
+          <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon()" />
+          <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds()">
             <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" size="md" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
@@ -82,7 +82,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               :open="item.open"
               :default-open="item.defaultOpen"
               :text-value="item.label"
-              :class="ui.link()"
+              :class="ui.item()"
             >
               <ReuseItemTemplate :item="item" :index="index" />
             </DropdownMenu.SubTrigger>
@@ -106,7 +106,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
           </DropdownMenu.Sub>
           <DropdownMenu.Item v-else as-child :disabled="item.disabled" :text-value="item.label" @select="item.select">
             <ULink v-slot="{ active, ...slotProps }" v-bind="omit((item as DropdownMenuItem), ['label', 'icon', 'avatar', 'content', 'kbds', 'slot', 'open', 'defaultOpen', 'select', 'children', 'type'])" custom>
-              <ULinkBase v-bind="slotProps" :class="ui.link({ active })">
+              <ULinkBase v-bind="slotProps" :class="ui.item({ active })">
                 <ReuseItemTemplate :item="item" :active="active" :index="index" />
               </ULinkBase>
             </ULink>

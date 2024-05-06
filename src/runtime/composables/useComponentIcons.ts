@@ -1,7 +1,12 @@
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
+import type { AvatarProps } from '#ui/types'
+import type { GetObjectField } from '#ui/types/utils'
 
 export interface UseComponentIconsProps {
+  /** Display an avatar. */
+  avatar?: AvatarProps
+  /** Display an icon. */
   icon?: string
   /** When `true`, the icon will be displayed on the left side. */
   leading?: boolean
@@ -20,10 +25,10 @@ export interface UseComponentIconsProps {
   loadingIcon?: string
 }
 
-export function useComponentIcons(props: UseComponentIconsProps) {
+export function useComponentIcons<T>(props: UseComponentIconsProps & { size: GetObjectField<T, 'size'> }) {
   const appConfig = useAppConfig()
 
-  const isLeading = computed(() => (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing && !props.trailingIcon) || !!props.leadingIcon)
+  const isLeading = computed(() => !!props.avatar || (props.icon && props.leading) || (props.icon && !props.trailing) || (props.loading && !props.trailing && !props.trailingIcon) || !!props.leadingIcon)
   const isTrailing = computed(() => (props.icon && props.trailing) || (props.loading && props.trailing) || !!props.trailingIcon)
 
   const leadingIconName = computed(() => {
@@ -41,10 +46,21 @@ export function useComponentIcons(props: UseComponentIconsProps) {
     return props.trailingIcon || props.icon
   })
 
+  const avatarSize = computed<AvatarProps['size']>(() => {
+    return ({
+      xs: '3xs' as const,
+      sm: '3xs' as const,
+      md: '2xs' as const,
+      lg: '2xs' as const,
+      xl: 'xs' as const
+    })[props.size || 'md']
+  })
+
   return {
     isLeading,
     isTrailing,
     leadingIconName,
-    trailingIconName
+    trailingIconName,
+    avatarSize
   }
 }

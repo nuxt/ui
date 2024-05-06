@@ -5,45 +5,46 @@ export default (config: { colors: string[] }) => {
       base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500',
       leading: 'absolute inset-y-0 start-0 flex items-center',
       leadingIcon: 'shrink-0 text-gray-400 dark:text-gray-500',
+      leadingAvatar: 'shrink-0',
       trailing: 'absolute inset-y-0 end-0 flex items-center',
       trailingIcon: 'shrink-0 text-gray-400 dark:text-gray-500'
     },
     variants: {
       size: {
         xs: {
-          base: 'text-xs px-2 py-1',
+          base: 'px-2 py-1 text-xs',
           leading: 'pl-2',
           trailing: 'pr-2',
           leadingIcon: 'size-4',
           trailingIcon: 'size-4'
         },
         sm: {
-          base: 'text-sm px-2.5 py-1',
+          base: 'px-2.5 py-1.5 text-xs',
           leading: 'pl-2.5',
           trailing: 'pr-2.5',
           leadingIcon: 'size-4',
           trailingIcon: 'size-4'
         },
         md: {
-          base: 'text-sm px-2.5 py-1.5',
+          base: 'px-2.5 py-1.5 text-sm',
           leading: 'pl-2.5',
           trailing: 'pr-2.5',
           leadingIcon: 'size-5',
           trailingIcon: 'size-5'
         },
         lg: {
-          base: 'text-sm px-3 py-2',
+          base: 'px-3 py-2 text-sm',
           leading: 'pl-3',
           trailing: 'pr-3',
           leadingIcon: 'size-5',
           trailingIcon: 'size-5'
         },
         xl: {
-          base: 'text-sm px-3.5 py-2.5',
-          leading: 'pl-3.5',
-          trailing: 'pr-3.5',
-          leadingIcon: 'size-5',
-          trailingIcon: 'size-5'
+          base: 'px-3 py-2 text-base',
+          leading: 'pl-3',
+          trailing: 'pr-3',
+          leadingIcon: 'size-6',
+          trailingIcon: 'size-6'
         }
       },
       variant: {

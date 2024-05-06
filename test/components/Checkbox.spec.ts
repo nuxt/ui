@@ -10,9 +10,9 @@ describe('Checkbox', () => {
   it.each([
     // Props
     ['with defaultValue', { props: { defaultValue: true } }],
-    ['with id', { props: { id: 'custom-id' } }],
-    ['with name', { props: { name: 'custom-name' } }],
-    ['with value', { props: { value: 'custom-value' } }],
+    ['with id', { props: { id: 'id' } }],
+    ['with name', { props: { name: 'name' } }],
+    ['with value', { props: { value: 'value' } }],
     ['with disabled', { props: { disabled: true } }],
     ['with icon', { props: { icon: 'i-heroicons-heart' } }],
     ['with indeterminate', { props: { indeterminate: true } }],

@@ -1,4 +1,4 @@
-import type { FuseResultMatch } from 'fuse.js'
+import type { FuseResult, FuseResultMatch } from 'fuse.js'
 
 function truncateHTMLFromStart(html: string, maxLength: number) {
   let truncated = ''
@@ -32,7 +32,7 @@ function truncateHTMLFromStart(html: string, maxLength: number) {
   return truncated
 }
 
-export function highlight(item: { matches?: FuseResultMatch[] }, searchTerm: string, forceKey?: string, omitKeys?: string[]) {
+export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, searchTerm: string, forceKey?: string, omitKeys?: string[]) {
   const generateHighlightedText = (value: FuseResultMatch['value'], indices: FuseResultMatch['indices'] = []) => {
     value = value || ''
     let content = ''

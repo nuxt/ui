@@ -63,6 +63,7 @@ describe('CommandPalette', () => {
     // Props
     ['with groups', { props }],
     ['with modelValue', { props: { ...props, modelValue: groups[2].items[0] } }],
+    ['with defaultValue', { props: { ...props, defaultValue: groups[2].items[0] } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with icon', { props: { ...props, icon: 'i-heroicons-command-line' } }],
@@ -74,10 +75,10 @@ describe('CommandPalette', () => {
     ['with ui', { props: { ...props, ui: { input: '[&>input]:h-10' } } }],
     // Slots
     ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }],
-    ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
-    ['with label slot', { props, slots: { label: () => 'Label slot' } }],
-    ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
+    ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
+    ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
+    ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
     ['with close slot', { props: { ...props, close: true }, slots: { close: () => 'Close slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps<typeof groups[number], typeof groups[number]['items'][number]>, slots?: Partial<any> }) => {

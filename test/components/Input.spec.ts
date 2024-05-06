@@ -11,8 +11,8 @@ describe('Input', () => {
 
   it.each([
     // Props
-    ['with id', { props: { name: 'id' } }],
-    ['with name', { props: { name: 'username' } }],
+    ['with id', { props: { id: 'id' } }],
+    ['with name', { props: { name: 'name' } }],
     ['with type', { props: { type: 'password' } }],
     ['with placeholder', { props: { placeholder: 'Enter your username' } }],
     ['with disabled', { props: { disabled: true } }],

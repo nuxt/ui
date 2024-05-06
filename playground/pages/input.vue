@@ -6,7 +6,7 @@ const sizes = Object.keys(theme.variants.size)
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 ml-[86px]">
+    <div class="flex flex-col gap-4 ml-[46px]">
       <UInput placeholder="Search..." autofocus />
       <UInput placeholder="Search..." color="gray" />
       <UInput placeholder="Search..." color="primary" />
@@ -20,7 +20,7 @@ const sizes = Object.keys(theme.variants.size)
       <UInput loading trailing placeholder="Search..." />
       <UInput loading trailing-icon="i-heroicons-magnifying-glass" placeholder="Search..." />
     </div>
-    <div class="flex items-center gap-4 -ml-[42px]">
+    <div class="flex items-center gap-4 ml-[-44px]">
       <UInput
         v-for="size in sizes"
         :key="size"
@@ -33,6 +33,15 @@ const sizes = Object.keys(theme.variants.size)
         v-for="size in sizes"
         :key="size"
         icon="i-heroicons-magnifying-glass"
+        placeholder="Search..."
+        :size="(size as any)"
+      />
+    </div>
+    <div class="flex items-center gap-4">
+      <UInput
+        v-for="size in sizes"
+        :key="size"
+        :avatar="{ src: 'https://avatars.githubusercontent.com/u/739984?v=4' }"
         placeholder="Search..."
         :size="(size as any)"
       />

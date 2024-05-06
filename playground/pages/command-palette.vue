@@ -1,13 +1,7 @@
 <script setup lang="ts">
 // import { createReusableTemplate, refDebounced } from '@vueuse/core'
 import { createReusableTemplate } from '@vueuse/core'
-
-type User = {
-  id: number
-  name: string
-  email: string
-  phone: string
-}
+import type { User } from '~/types'
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 const toast = useToast()
@@ -28,7 +22,7 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
 const groups = computed(() => [{
   id: 'users',
   label: searchTerm.value ? `Users matching “${searchTerm.value}”...` : 'Users',
-  items: users.value!
+  items: users.value || []
 }, {
   id: 'actions',
   items: [{

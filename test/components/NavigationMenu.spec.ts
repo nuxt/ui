@@ -46,12 +46,12 @@ describe('NavigationMenu', () => {
     ['with items', { props }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
-    ['with ui', { props: { items, ui: { linkLeadingIcon: 'size-4' } } }],
+    ['with ui', { props: { items, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots
-    ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
-    ['with label slot', { props, slots: { label: () => 'Label slot' } }],
-    ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
+    ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
+    ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
+    ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps<typeof items[number][number]>, slots?: Partial<NavigationMenuSlots<any>> }) => {
     const html = await ComponentRender(nameOrHtml, options, NavigationMenu)

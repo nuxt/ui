@@ -11,9 +11,9 @@ describe('Switch', () => {
     // Props
     ['with as', { props: { as: 'section' } }],
     ['with defaultValue', { props: { defaultValue: true } }],
-    ['with id', { props: { id: 'custom-id' } }],
-    ['with name', { props: { name: 'custom-name' } }],
-    ['with value', { props: { value: 'custom-value' } }],
+    ['with id', { props: { id: 'id' } }],
+    ['with name', { props: { name: 'name' } }],
+    ['with value', { props: { value: 'value' } }],
     ['with disabled', { props: { disabled: true } }],
     ['with checkedIcon', { props: { checkedIcon: 'i-heroicons-check-20-solid', defaultValue: true } }],
     ['with uncheckedIcon', { props: { uncheckedIcon: 'i-heroicons-x-mark-20-solid' } }],

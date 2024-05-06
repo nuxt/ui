@@ -65,46 +65,46 @@ exports[`ContextMenu > renders with item slot correctly 1`] = `
 <!--teleport end-->"
 `;
 
+exports[`ContextMenu > renders with item-label slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with item-leading slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with item-trailing slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
 exports[`ContextMenu > renders with items correctly 1`] = `
-"<!--v-if-->
-<!--teleport start-->
-
-
-
-<!---->
-
-
-
-<!--teleport end-->"
-`;
-
-exports[`ContextMenu > renders with label slot correctly 1`] = `
-"<!--v-if-->
-<!--teleport start-->
-
-
-
-<!---->
-
-
-
-<!--teleport end-->"
-`;
-
-exports[`ContextMenu > renders with leading slot correctly 1`] = `
-"<!--v-if-->
-<!--teleport start-->
-
-
-
-<!---->
-
-
-
-<!--teleport end-->"
-`;
-
-exports[`ContextMenu > renders with trailing slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 

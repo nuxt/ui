@@ -31,9 +31,8 @@ export interface TabsEmits extends TabsRootEmits {}
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type TabsSlots<T extends { slot?: string }> = {
-  default: SlotProps<T>
   leading: SlotProps<T>
-  label: SlotProps<T>
+  default: SlotProps<T>
   trailing: SlotProps<T>
   content: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
@@ -64,18 +63,16 @@ const ui = computed(() => tv({ extend: tabs, slots: props.ui })({ orientation: p
       <TabsIndicator :class="ui.indicator()" />
 
       <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger()">
-        <slot :item="item" :index="index">
-          <slot name="leading" :item="item" :index="index">
-            <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.leadingAvatar()" />
-            <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
-          </slot>
-
-          <span v-if="item.label || $slots.label" :class="ui.label()">
-            <slot name="label" :item="item" :index="index">{{ item.label }}</slot>
-          </span>
-
-          <slot name="trailing" :item="item" :index="index" />
+        <slot name="leading" :item="item" :index="index">
+          <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.leadingAvatar()" />
+          <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
         </slot>
+
+        <span v-if="item.label || $slots.default" :class="ui.label()">
+          <slot :item="item" :index="index">{{ item.label }}</slot>
+        </span>
+
+        <slot name="trailing" :item="item" :index="index" />
       </TabsTrigger>
     </TabsList>
 

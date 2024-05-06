@@ -3,6 +3,7 @@ export default (config: { colors: string[] }) => ({
     base: 'rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
     label: '',
     leadingIcon: 'shrink-0',
+    leadingAvatar: 'shrink-0',
     trailingIcon: 'shrink-0'
   },
   variants: {
@@ -42,9 +43,9 @@ export default (config: { colors: string[] }) => ({
         trailingIcon: 'size-5'
       },
       xl: {
-        base: 'px-3.5 py-2.5 text-sm gap-2.5',
-        leadingIcon: 'size-5',
-        trailingIcon: 'size-5'
+        base: 'px-3 py-2 text-base gap-2',
+        leadingIcon: 'size-6',
+        trailingIcon: 'size-6'
       }
     },
     truncate: {
@@ -142,7 +143,7 @@ export default (config: { colors: string[] }) => ({
   }, {
     size: 'xl',
     square: true,
-    class: 'p-2.5'
+    class: 'p-2'
   }, {
     loading: true,
     leading: true,

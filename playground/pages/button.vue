@@ -62,6 +62,16 @@ const variants = Object.keys(theme.variants.variant)
     <div class="flex items-center gap-2 ml-[-171px]">
       <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" label="Button" :size="(size as any)" />
     </div>
+    <div class="flex items-center gap-2 ml-[-171px]">
+      <UButton
+        v-for="size in sizes"
+        :key="size"
+        :avatar="{ src: 'https://avatars.githubusercontent.com/u/739984?v=4' }"
+        label="Button"
+        color="white"
+        :size="(size as any)"
+      />
+    </div>
     <div class="flex items-center gap-2 ml-[-159px]">
       <UButton
         v-for="size in sizes"
@@ -72,8 +82,11 @@ const variants = Object.keys(theme.variants.variant)
         :size="(size as any)"
       />
     </div>
-    <div class="flex items-center gap-2 ml-[-67px]">
+    <div class="flex items-center gap-2 ml-[-68px]">
       <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" :size="(size as any)" />
+    </div>
+    <div class="flex items-center gap-2 ml-[-68px]">
+      <UButton v-for="size in sizes" :key="size" :avatar="{ src: 'https://avatars.githubusercontent.com/u/739984?v=4' }" color="white" :size="(size as any)" />
     </div>
     <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" trailing-icon="i-heroicons-chevron-down-20-solid" label="Block" block />

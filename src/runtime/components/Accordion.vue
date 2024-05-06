@@ -31,9 +31,8 @@ export interface AccordionEmits extends AccordionRootEmits {}
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type AccordionSlots<T extends { slot?: string }> = {
-  default: SlotProps<T>
   leading: SlotProps<T>
-  label: SlotProps<T>
+  default: SlotProps<T>
   trailing: SlotProps<T>
   content: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
@@ -64,18 +63,16 @@ const ui = computed(() => tv({ extend: accordion, slots: props.ui })({ disabled:
     <AccordionItem v-for="(item, index) in items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.item()">
       <AccordionHeader :class="ui.header()">
         <AccordionTrigger :class="ui.trigger({ disabled: item.disabled })">
-          <slot :item="item" :index="index">
-            <slot name="leading" :item="item" :index="index">
-              <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
-            </slot>
+          <slot name="leading" :item="item" :index="index">
+            <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
+          </slot>
 
-            <span v-if="item.label || $slots.label" :class="ui.label()">
-              <slot name="label" :item="item" :index="index">{{ item.label }}</slot>
-            </span>
+          <span v-if="item.label || $slots.default" :class="ui.label()">
+            <slot :item="item" :index="index">{{ item.label }}</slot>
+          </span>
 
-            <slot name="trailing" :item="item" :index="index">
-              <UIcon :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon()" />
-            </slot>
+          <slot name="trailing" :item="item" :index="index">
+            <UIcon :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon()" />
           </slot>
         </AccordionTrigger>
       </AccordionHeader>

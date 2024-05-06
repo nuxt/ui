@@ -11,9 +11,9 @@ describe('Textarea', () => {
 
   it.each([
     // Props
-    ['with id', { props: { id: 'exampleId' } }],
-    ['with name', { props: { name: 'exampleName' } }],
-    ['with placeholder', { props: { placeholder: 'examplePlaceholder' } }],
+    ['with id', { props: { id: 'id' } }],
+    ['with name', { props: { name: 'name' } }],
+    ['with placeholder', { props: { placeholder: 'Search...' } }],
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with rows', { props: { rows: 5 } }],
