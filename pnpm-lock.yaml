@@ -46,8 +46,8 @@ importers:
         specifier: ^1.1.3
         version: 1.1.3
       radix-vue:
-        specifier: ^1.7.3
-        version: 1.7.3(vue@3.4.24(typescript@5.4.3))
+        specifier: ^1.7.4
+        version: 1.7.4(vue@3.4.24(typescript@5.4.3))
       scule:
         specifier: ^1.3.0
         version: 1.3.0
@@ -69,7 +69,7 @@ importers:
         version: 0.6.0(@nuxt/kit@3.11.2(rollup@4.16.4))(nuxi@3.11.1)(typescript@5.4.3)
       '@nuxt/test-utils':
         specifier: ^3.12.1
-        version: 3.12.1(@vue/test-utils@2.4.5)(h3@1.11.1)(happy-dom@14.7.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.7.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3))
+        version: 3.12.1(@vue/test-utils@2.4.6)(h3@1.11.1)(happy-dom@14.10.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.10.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3))
       '@nuxt/ui-dev':
         specifier: workspace:*
         version: link:modules/dev
@@ -77,14 +77,14 @@ importers:
         specifier: ^8.0.1
         version: 8.0.1(release-it@17.2.1(typescript@5.4.3))
       '@vue/test-utils':
-        specifier: ^2.4.5
-        version: 2.4.5
+        specifier: ^2.4.6
+        version: 2.4.6
       eslint:
         specifier: ^9.2.0
         version: 9.2.0
       happy-dom:
-        specifier: ^14.7.1
-        version: 14.7.1
+        specifier: ^14.10.1
+        version: 14.10.1
       joi:
         specifier: ^17.13.1
         version: 17.13.1
@@ -99,10 +99,10 @@ importers:
         version: 0.30.0
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.12.7)(happy-dom@14.7.1)(lightningcss@1.24.1)(terser@5.30.4)
+        version: 1.6.0(@types/node@20.12.7)(happy-dom@14.10.1)(lightningcss@1.24.1)(terser@5.30.4)
       vitest-environment-nuxt:
         specifier: ^1.0.0
-        version: 1.0.0(@vue/test-utils@2.4.5)(h3@1.11.1)(happy-dom@14.7.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.7.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3))
+        version: 1.0.0(@vue/test-utils@2.4.6)(h3@1.11.1)(happy-dom@14.10.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.10.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3))
       vue-tsc:
         specifier: ^2.0.16
         version: 2.0.16(typescript@5.4.3)
@@ -225,7 +225,7 @@ importers:
         version: link:..
       nuxt:
         specifier: ^3.11.2
-        version: 3.11.2(@parcel/watcher@2.4.1)(@types/node@20.12.7)(@unocss/reset@0.59.4)(encoding@0.1.13)(eslint@8.57.0)(floating-vue@5.2.2(@nuxt/kit@3.11.2(rollup@4.16.4))(vue@3.4.24(typescript@5.4.3)))(fuse.js@7.0.0)(ioredis@5.4.1)(lightningcss@1.24.1)(meow@12.1.1)(optionator@0.9.3)(rollup@4.16.4)(terser@5.30.4)(typescript@5.4.3)(unocss@0.59.4(@unocss/webpack@0.59.4(rollup@4.16.4)(webpack@5.91.0))(postcss@8.4.38)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4)))(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vue-tsc@2.0.16(typescript@5.4.3))
+        version: 3.11.2(@parcel/watcher@2.4.1)(@types/node@20.12.7)(@unocss/reset@0.59.4)(encoding@0.1.13)(eslint@9.2.0)(floating-vue@5.2.2(@nuxt/kit@3.11.2(rollup@4.16.4))(vue@3.4.24(typescript@5.4.3)))(fuse.js@7.0.0)(ioredis@5.4.1)(lightningcss@1.24.1)(meow@12.1.1)(optionator@0.9.3)(rollup@4.16.4)(terser@5.30.4)(typescript@5.4.3)(unocss@0.59.4(@unocss/webpack@0.59.4(rollup@4.16.4)(webpack@5.91.0))(postcss@8.4.38)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4)))(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vue-tsc@2.0.16(typescript@5.4.3))
 
 packages:
 
@@ -2135,8 +2135,8 @@ packages:
   '@vue/shared@3.4.24':
     resolution: {integrity: sha512-BW4tajrJBM9AGAknnyEw5tO2xTmnqgup0VTnDAMcxYmqOX0RG0b9aSUGAbEKolD91tdwpA6oCwbltoJoNzpItw==}
 
-  '@vue/test-utils@2.4.5':
-    resolution: {integrity: sha512-oo2u7vktOyKUked36R93NB7mg2B+N7Plr8lxp2JBGwr18ch6EggFjixSCdIVVLkT6Qr0z359Xvnafc9dcKyDUg==}
+  '@vue/test-utils@2.4.6':
+    resolution: {integrity: sha512-FMxEjOpYNYiFe0GkaHsnJPXFHxQ6m4t8vI/ElPGpMWxZKpmRvQ33OIrvRXemy6yha03RxhOlQuy+gZMC3CQSow==}
 
   '@vueuse/components@10.9.0':
     resolution: {integrity: sha512-BHQpA0yIi3y7zKa1gYD0FUzLLkcRTqVhP8smnvsCK6GFpd94Nziq1XVPD7YpFeho0k5BzbBiNZF7V/DpkJ967A==}
@@ -3845,8 +3845,8 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
 
-  happy-dom@14.7.1:
-    resolution: {integrity: sha512-v60Q0evZ4clvMcrAh5/F8EdxDdfHdFrtffz/CNe10jKD+nFweZVxM91tW+UyY2L4AtpgIaXdZ7TQmiO1pfcwbg==}
+  happy-dom@14.10.1:
+    resolution: {integrity: sha512-GRbrZYIezi8+tTtffF4v2QcF8bk1h2loUTO5VYQz3GZdrL08Vk0fI+bwf/vFEBf4C/qVf/easLJ/MY1wwdhytA==}
     engines: {node: '>=16.0.0'}
 
   has-bigints@1.0.2:
@@ -5697,8 +5697,8 @@ packages:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
 
-  radix-vue@1.7.3:
-    resolution: {integrity: sha512-GgUagGvpO1EtNvkQ27x3Hv26VrTffZ4XRyx8eMabXRxXtbo2GbjAd2HvGjL9A/D7QVHxw1ZUMBDcYWcpw4LEiQ==}
+  radix-vue@1.7.4:
+    resolution: {integrity: sha512-Z75iJVb2rNL6347pWwqDIP02ktTowiDKVsScrLRv9y7uj8tMsEcD4pC0oTogVScRP5voZd3rov6zKE20MQTj+A==}
     peerDependencies:
       vue: '>= 3.2.0'
 
@@ -8391,7 +8391,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxt/test-utils@3.12.1(@vue/test-utils@2.4.5)(h3@1.11.1)(happy-dom@14.7.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.7.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3))':
+  '@nuxt/test-utils@3.12.1(@vue/test-utils@2.4.6)(h3@1.11.1)(happy-dom@14.10.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.10.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3))':
     dependencies:
       '@nuxt/kit': 3.11.2(rollup@4.16.4)
       '@nuxt/schema': 3.11.2(rollup@4.16.4)
@@ -8417,14 +8417,14 @@ snapshots:
       unenv: 1.9.0
       unplugin: 1.10.1
       vite: 5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4)
-      vitest-environment-nuxt: 1.0.0(@vue/test-utils@2.4.5)(h3@1.11.1)(happy-dom@14.7.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.7.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3))
+      vitest-environment-nuxt: 1.0.0(@vue/test-utils@2.4.6)(h3@1.11.1)(happy-dom@14.10.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.10.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3))
       vue: 3.4.24(typescript@5.4.3)
       vue-router: 4.3.2(vue@3.4.24(typescript@5.4.3))
     optionalDependencies:
-      '@vue/test-utils': 2.4.5
-      happy-dom: 14.7.1
+      '@vue/test-utils': 2.4.6
+      happy-dom: 14.10.1
       playwright-core: 1.43.1
-      vitest: 1.6.0(@types/node@20.12.7)(happy-dom@14.7.1)(lightningcss@1.24.1)(terser@5.30.4)
+      vitest: 1.6.0(@types/node@20.12.7)(happy-dom@14.10.1)(lightningcss@1.24.1)(terser@5.30.4)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -9972,7 +9972,7 @@ snapshots:
 
   '@vue/shared@3.4.24': {}
 
-  '@vue/test-utils@2.4.5':
+  '@vue/test-utils@2.4.6':
     dependencies:
       js-beautify: 1.15.1
       vue-component-type-helpers: 2.0.14
@@ -12058,7 +12058,7 @@ snapshots:
     optionalDependencies:
       uglify-js: 3.17.4
 
-  happy-dom@14.7.1:
+  happy-dom@14.10.1:
     dependencies:
       entities: 4.5.0
       webidl-conversions: 7.0.0
@@ -14552,7 +14552,7 @@ snapshots:
 
   quick-lru@5.1.1: {}
 
-  radix-vue@1.7.3(vue@3.4.24(typescript@5.4.3)):
+  radix-vue@1.7.4(vue@3.4.24(typescript@5.4.3)):
     dependencies:
       '@floating-ui/dom': 1.6.3
       '@floating-ui/vue': 1.0.6(vue@3.4.24(typescript@5.4.3))
@@ -15916,7 +15916,7 @@ snapshots:
   vaul-vue@0.1.2(typescript@5.4.3):
     dependencies:
       '@vueuse/core': 10.9.0(vue@3.4.24(typescript@5.4.3))
-      radix-vue: 1.7.3(vue@3.4.24(typescript@5.4.3))
+      radix-vue: 1.7.4(vue@3.4.24(typescript@5.4.3))
       vue: 3.4.24(typescript@5.4.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -16070,9 +16070,9 @@ snapshots:
       lightningcss: 1.24.1
       terser: 5.30.4
 
-  vitest-environment-nuxt@1.0.0(@vue/test-utils@2.4.5)(h3@1.11.1)(happy-dom@14.7.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.7.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3)):
+  vitest-environment-nuxt@1.0.0(@vue/test-utils@2.4.6)(h3@1.11.1)(happy-dom@14.10.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.10.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3)):
     dependencies:
-      '@nuxt/test-utils': 3.12.1(@vue/test-utils@2.4.5)(h3@1.11.1)(happy-dom@14.7.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.7.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3))
+      '@nuxt/test-utils': 3.12.1(@vue/test-utils@2.4.6)(h3@1.11.1)(happy-dom@14.10.1)(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.10.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.3)))(vue@3.4.24(typescript@5.4.3))
     transitivePeerDependencies:
       - '@cucumber/cucumber'
       - '@jest/globals'
@@ -16091,7 +16091,7 @@ snapshots:
       - vue
       - vue-router
 
-  vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.7.1)(lightningcss@1.24.1)(terser@5.30.4):
+  vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.10.1)(lightningcss@1.24.1)(terser@5.30.4):
     dependencies:
       '@vitest/expect': 1.6.0
       '@vitest/runner': 1.6.0
@@ -16115,7 +16115,7 @@ snapshots:
       why-is-node-running: 2.2.2
     optionalDependencies:
       '@types/node': 20.12.7
-      happy-dom: 14.7.1
+      happy-dom: 14.10.1
     transitivePeerDependencies:
       - less
       - lightningcss
