@@ -45,7 +45,7 @@ import { useId, useFormField } from '#imports'
 
 const props = withDefaults(defineProps<RadioGroupProps<T>>(), { orientation: 'vertical' })
 const emits = defineEmits<RadioGroupEmits>()
-defineSlots<RadioGroupSlots<T>>()
+const slots = defineSlots<RadioGroupSlots<T>>()
 
 const modelValue = defineModel<T>({
   set(value) {
@@ -106,7 +106,7 @@ function onUpdate() {
     @update:model-value="onUpdate"
   >
     <fieldset :class="ui.fieldset()">
-      <legend v-if="legend || $slots.legend" :class="ui.legend()">
+      <legend v-if="legend || !!slots.legend" :class="ui.legend()">
         <slot name="legend">
           {{ legend }}
         </slot>
@@ -127,7 +127,7 @@ function onUpdate() {
           <Label :class="ui.label()" :for="option.id">
             <slot name="label" v-bind="{ option }">{{ option.label }}</slot>
           </Label>
-          <p v-if="option.description || $slots.description" :class="ui.description()">
+          <p v-if="option.description || !!slots.description" :class="ui.description()">
             <slot name="description" v-bind="{ option }">
               {{ option.description }}
             </slot>

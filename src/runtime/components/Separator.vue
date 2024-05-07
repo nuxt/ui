@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<SeparatorProps>(), {
   as: 'div',
   orientation: 'horizontal'
 })
-defineSlots<SeparatorSlots>()
+const slots = defineSlots<SeparatorSlots>()
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'decorative', 'orientation'))
 
@@ -54,7 +54,7 @@ const ui = computed(() => tv({ extend: separator, slots: props.ui })({
   <Separator v-bind="rootProps" :class="ui.root({ class: props.class })">
     <div :class="ui.border()" />
 
-    <template v-if="label || icon || avatar || $slots.default">
+    <template v-if="label || icon || avatar || !!slots.default">
       <div :class="ui.container()">
         <slot>
           <span v-if="label" :class="ui.label()">{{ label }}</span>

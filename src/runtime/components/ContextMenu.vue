@@ -73,7 +73,7 @@ const ui = computed(() => tv({ extend: contextMenu, slots: props.ui })())
 
 <template>
   <ContextMenuRoot v-bind="rootProps">
-    <ContextMenuTrigger v-if="$slots.default" as-child :disabled="disabled">
+    <ContextMenuTrigger v-if="!!slots.default" as-child :disabled="disabled">
       <slot />
     </ContextMenuTrigger>
 

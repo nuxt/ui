@@ -45,7 +45,7 @@ import { UIcon, UAvatar } from '#components'
 
 const props = defineProps<ToastProps>()
 const emits = defineEmits<ToastEmits>()
-defineSlots<ToastSlots>()
+const slots = defineSlots<ToastSlots>()
 
 const toaster = inject<ToasterContext>('Toaster')
 
@@ -89,12 +89,12 @@ defineExpose({
     </slot>
 
     <div :class="ui.wrapper()">
-      <ToastTitle v-if="title || $slots.title" :class="ui.title()">
+      <ToastTitle v-if="title || !!slots.title" :class="ui.title()">
         <slot name="title">
           {{ title }}
         </slot>
       </ToastTitle>
-      <template v-if="description || $slots.description">
+      <template v-if="description || !!slots.description">
         <ToastDescription v-if="description && isVNode(description)" :as="description" />
         <ToastDescription v-else :class="ui.description()">
           <slot name="description">

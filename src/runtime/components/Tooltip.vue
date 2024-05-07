@@ -37,7 +37,7 @@ import { UKbd } from '#components'
 
 const props = withDefaults(defineProps<TooltipProps>(), { portal: true })
 const emits = defineEmits<TooltipEmits>()
-defineSlots<TooltipSlots>()
+const slots = defineSlots<TooltipSlots>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as TooltipContentProps)
@@ -48,7 +48,7 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })({ side: conte
 
 <template>
   <TooltipRoot v-bind="rootProps">
-    <TooltipTrigger v-if="$slots.default" as-child>
+    <TooltipTrigger v-if="!!slots.default" as-child>
       <slot />
     </TooltipTrigger>
 

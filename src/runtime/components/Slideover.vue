@@ -54,7 +54,7 @@ const props = withDefaults(defineProps<SlideoverProps>(), {
   side: 'right'
 })
 const emits = defineEmits<SlideoverEmits>()
-defineSlots<SlideoverSlots>()
+const slots = defineSlots<SlideoverSlots>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const contentProps = toRef(() => props.content)
@@ -79,7 +79,7 @@ const ui = computed(() => tv({ extend: slideover, slots: props.ui })({
 
 <template>
   <DialogRoot v-bind="rootProps">
-    <DialogTrigger v-if="$slots.default" as-child>
+    <DialogTrigger v-if="!!slots.default" as-child>
       <slot />
     </DialogTrigger>
 
@@ -88,15 +88,15 @@ const ui = computed(() => tv({ extend: slideover, slots: props.ui })({
 
       <DialogContent :data-side="side" :class="ui.content({ class: props.class })" v-bind="contentProps" v-on="contentEvents">
         <slot name="content">
-          <div v-if="$slots.header || (title || $slots.title) || (description || $slots.description) || (close !== null || $slots.close)" :class="ui.header()">
+          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close !== null || !!slots.close)" :class="ui.header()">
             <slot name="header">
-              <DialogTitle v-if="title || $slots.title" :class="ui.title()">
+              <DialogTitle v-if="title || !!slots.title" :class="ui.title()">
                 <slot name="title">
                   {{ title }}
                 </slot>
               </DialogTitle>
 
-              <DialogDescription v-if="description || $slots.description" :class="ui.description()">
+              <DialogDescription v-if="description || !!slots.description" :class="ui.description()">
                 <slot name="description">
                   {{ description }}
                 </slot>
@@ -123,7 +123,7 @@ const ui = computed(() => tv({ extend: slideover, slots: props.ui })({
             <slot name="body" />
           </div>
 
-          <div v-if="$slots.footer" :class="ui.footer()">
+          <div v-if="!!slots.footer" :class="ui.footer()">
             <slot name="footer" />
           </div>
         </slot>

@@ -45,7 +45,7 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   overlay: true
 })
 const emits = defineEmits<DrawerEmits>()
-defineSlots<DrawerSlots>()
+const slots = defineSlots<DrawerSlots>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'defaultOpen', 'dismissible', 'fadeFromIndex', 'fixed', 'modal', 'nested', 'open', 'scrollLockTimeout', 'shouldScaleBackground', 'snapPoints'), emits)
 const contentProps = toRef(() => props.content)
@@ -55,7 +55,7 @@ const ui = computed(() => tv({ extend: drawer, slots: props.ui })())
 
 <template>
   <DrawerRoot v-bind="rootProps">
-    <DrawerTrigger v-if="$slots.default" as-child>
+    <DrawerTrigger v-if="!!slots.default" as-child>
       <slot />
     </DrawerTrigger>
 
@@ -69,15 +69,15 @@ const ui = computed(() => tv({ extend: drawer, slots: props.ui })())
 
         <slot name="content">
           <div :class="ui.container()">
-            <div v-if="$slots.header || (title || $slots.title) || (description || $slots.description)" :class="ui.header()">
+            <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)" :class="ui.header()">
               <slot name="header">
-                <DrawerTitle v-if="title || $slots.title" :class="ui.title()">
+                <DrawerTitle v-if="title || !!slots.title" :class="ui.title()">
                   <slot name="title">
                     {{ title }}
                   </slot>
                 </DrawerTitle>
 
-                <DrawerDescription v-if="description || $slots.description" :class="ui.description()">
+                <DrawerDescription v-if="description || !!slots.description" :class="ui.description()">
                   <slot name="description">
                     {{ description }}
                   </slot>
@@ -85,11 +85,11 @@ const ui = computed(() => tv({ extend: drawer, slots: props.ui })())
               </slot>
             </div>
 
-            <div v-if="$slots.body" :class="ui.body()">
+            <div v-if="!!slots.body" :class="ui.body()">
               <slot name="body" />
             </div>
 
-            <div v-if="$slots.footer" :class="ui.footer()">
+            <div v-if="!!slots.footer" :class="ui.footer()">
               <slot name="footer" />
             </div>
           </div>

@@ -29,7 +29,7 @@ import { reactivePick } from '@vueuse/core'
 
 const props = defineProps<CollapsibleProps>()
 const emits = defineEmits<CollapsibleEmits>()
-defineSlots<CollapsibleSlots>()
+const slots = defineSlots<CollapsibleSlots>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled'), emits)
 
@@ -38,7 +38,7 @@ const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
 
 <template>
   <CollapsibleRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
-    <CollapsibleTrigger v-if="$slots.default" as-child>
+    <CollapsibleTrigger v-if="!!slots.default" as-child>
       <slot />
     </CollapsibleTrigger>
 

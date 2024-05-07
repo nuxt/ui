@@ -47,7 +47,7 @@ import { UIcon, UAvatar } from '#components'
 
 const props = withDefaults(defineProps<AlertProps>(), { as: 'div' })
 const emits = defineEmits<AlertEmits>()
-defineSlots<AlertSlots>()
+const slots = defineSlots<AlertSlots>()
 
 const appConfig = useAppConfig()
 
@@ -67,12 +67,12 @@ const ui = computed(() => tv({ extend: alert, slots: props.ui })({
     </slot>
 
     <div :class="ui.wrapper()">
-      <div v-if="title || $slots.title" :class="ui.title()">
+      <div v-if="title || !!slots.title" :class="ui.title()">
         <slot name="title">
           {{ title }}
         </slot>
       </div>
-      <template v-if="description || $slots.description">
+      <template v-if="description || !!slots.description">
         <component :is="description" v-if="description && isVNode(description)" />
         <div v-else :class="ui.description()">
           <slot name="description">

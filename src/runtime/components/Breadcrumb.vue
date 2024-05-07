@@ -44,7 +44,7 @@ import { ULink, UIcon, UAvatar } from '#components'
 import { omit } from '#ui/utils'
 
 const props = defineProps<BreadcrumbProps<T>>()
-defineSlots<BreadcrumbSlots<T>>()
+const slots = defineSlots<BreadcrumbSlots<T>>()
 
 const appConfig = useAppConfig()
 
@@ -63,7 +63,7 @@ const ui = computed(() => tv({ extend: breadcrumb, slots: props.ui })())
                 <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ active: index === items!.length - 1 })" />
               </slot>
 
-              <span v-if="item.label || $slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel()">
+              <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel()">
                 <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="index === items!.length - 1" :index="index">
                   {{ item.label }}
                 </slot>

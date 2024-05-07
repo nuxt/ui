@@ -42,7 +42,7 @@ import type { FormError } from '#ui/types/form'
 import { useId, formFieldInjectionKey } from '#imports'
 
 const props = defineProps<FormFieldProps>()
-defineSlots<FormFieldSlots>()
+const slots = defineSlots<FormFieldSlots>()
 
 const ui = computed(() => tv({ extend: formField, slots: props.ui })({
   size: props.size,
@@ -73,20 +73,20 @@ provide(formFieldInjectionKey, computed(() => ({
 <template>
   <div :class="ui.root({ class: props.class })">
     <div :class="ui.wrapper()">
-      <div v-if="label || $slots.label" :class="ui.labelWrapper()">
+      <div v-if="label || !!slots.label" :class="ui.labelWrapper()">
         <Label :for="id" :class="ui.label()">
           <slot name="label" :label="label">
             {{ label }}
           </slot>
         </Label>
-        <span v-if="hint || $slots.hint" :class="ui.hint()">
+        <span v-if="hint || !!slots.hint" :class="ui.hint()">
           <slot name="hint" :hint="hint">
             {{ hint }}
           </slot>
         </span>
       </div>
 
-      <p v-if="description || $slots.description" :class="ui.description()">
+      <p v-if="description || !!slots.description" :class="ui.description()">
         <slot name="description" :description="description">
           {{ description }}
         </slot>
@@ -96,12 +96,12 @@ provide(formFieldInjectionKey, computed(() => ({
     <div :class="[label && ui.container()]">
       <slot :error="error" />
 
-      <p v-if="(typeof error === 'string' && error) || $slots.error" :class="ui.error()">
+      <p v-if="(typeof error === 'string' && error) || !!slots.error" :class="ui.error()">
         <slot name="error" :error="error">
           {{ error }}
         </slot>
       </p>
-      <p v-else-if="help || $slots.help" :class="ui.help()">
+      <p v-else-if="help || !!slots.help" :class="ui.help()">
         <slot name="help" :help="help">
           {{ help }}
         </slot>

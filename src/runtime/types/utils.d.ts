@@ -8,3 +8,7 @@ export type DynamicSlots<T extends { slot?: string }, SlotProps, Slot = T['slot'
 export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extends Record<string, any>
   ? MaybeObject[Key]
   : never
+
+export type AcceptableValue = string | number | boolean | Record<string, any>
+
+export type ArrayOrWrapped<T> = T extends any[] ? T : Array<T>

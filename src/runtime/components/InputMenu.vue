@@ -1,14 +1,13 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
+import type { InputHTMLAttributes } from 'vue'
+import { tv, type VariantProps } from 'tailwind-variants'
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxItemProps, ComboboxArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '#ui/composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '#ui/types'
-
-type AcceptableValue = string | number | boolean | Record<string, any>
-type ArrayOrWrapped<T> = T extends any[] ? T : Array<T>
+import type { AcceptableValue, ArrayOrWrapped } from '#ui/types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
 
@@ -26,9 +25,21 @@ export interface InputMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
   type?: 'label' | 'separator' | 'item'
 }
 
-export interface InputMenuProps<T> extends Omit<ComboboxRootProps, 'asChild' | 'dir' | 'filterFunction' | 'displayValue' | 'multiple'>, Omit<UseComponentIconsProps, 'leading' | 'trailing' | 'trailingIcon'> {
+type InputMenuVariants = VariantProps<typeof inputMenu>
+
+export interface InputMenuProps<T> extends Omit<ComboboxRootProps, 'asChild' | 'dir' | 'filterFunction' | 'displayValue' | 'multiple'>, UseComponentIconsProps {
+  id?: string
+  type?: InputHTMLAttributes['type']
+  /** The placeholder text when the input is empty. */
+  placeholder?: string
+  color?: InputMenuVariants['color']
+  variant?: InputMenuVariants['variant']
+  size?: InputMenuVariants['size']
+  required?: boolean
+  autofocus?: boolean
+  autofocusDelay?: number
   /**
-   * The icon displayed in the input.
+   * The icon displayed to open the menu.
    * @defaultValue `appConfig.ui.icons.chevronDown`
    */
   trailingIcon?: string
@@ -37,12 +48,6 @@ export interface InputMenuProps<T> extends Omit<ComboboxRootProps, 'asChild' | '
    * @defaultValue `appConfig.ui.icons.check`
    */
   selectedIcon?: string
-  placeholder?: InputProps['placeholder']
-  required?: InputProps['required']
-  avatar?: InputProps['avatar']
-  color?: InputProps['color']
-  variant?: InputProps['variant']
-  size?: InputProps['size']
   content?: Omit<ComboboxContentProps, 'asChild' | 'forceMount'>
   arrow?: boolean | Omit<ComboboxArrowProps, 'asChild'>
   portal?: boolean
@@ -63,6 +68,8 @@ type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type InputMenuSlots<T> = {
   'leading'(): any
+  'default'(): any
+  'trailing'(): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -72,29 +79,44 @@ export type InputMenuSlots<T> = {
 </script>
 
 <script setup lang="ts" generic="T extends InputMenuItem | AcceptableValue">
-import { computed, toRef } from 'vue'
-import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'radix-vue'
+import { computed, ref, toRef, onMounted } from 'vue'
+import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useFormField, useButtonGroup, useComponentIcons } from '#imports'
 import { UIcon, UChip, UAvatar } from '#components'
 import { get } from '#ui/utils'
 
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputMenuProps<T>>(), {
+  type: 'text',
+  autofocusDelay: 0,
   portal: true,
   filter: () => ['label']
 })
 const emits = defineEmits<InputMenuEmits<T>>()
-defineSlots<InputMenuSlots<T>>()
+const slots = defineSlots<InputMenuSlots<T>>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'name'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
-const inputProps = useForwardProps(reactivePick(props, 'name', 'loading', 'loadingIcon', 'placeholder', 'required', 'color', 'variant', 'size'))
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const { emitFormBlur, emitFormInput, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
+const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons<InputProps>(defu(props, { trailingIcon: appConfig.ui.icons.chevronDown }))
 
-const ui = computed(() => tv({ extend: inputMenu, slots: props.ui })())
+const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
+
+const ui = computed(() => tv({ extend: inputMenu, slots: props.ui })({
+  color: color.value,
+  variant: props.variant,
+  size: inputSize?.value,
+  loading: props.loading,
+  leading: isLeading.value || !!slots.leading,
+  trailing: isTrailing.value || !!slots.trailing,
+  buttonGroup: orientation.value
+}))
 
 function displayValue(val: AcceptableValue) {
   if (typeof val === 'object') {
@@ -125,24 +147,53 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
 }
 
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as InputMenuItem[][] : [])
+
+const inputRef = ref<InstanceType<typeof ComboboxInput> | null>(null)
+
+function autoFocus() {
+  if (props.autofocus) {
+    inputRef.value?.$el?.focus()
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
 </script>
 
 <template>
-  <ComboboxRoot v-slot="{ modelValue }" v-bind="rootProps" :display-value="displayValue" :filter-function="filterFunction" :class="ui.root({ class: props.class })">
+  <ComboboxRoot
+    :id="id"
+    :name="name"
+    :disabled="disabled"
+    v-bind="rootProps"
+    :display-value="displayValue"
+    :filter-function="filterFunction"
+    :class="ui.root({ class: props.class })"
+  >
     <ComboboxAnchor as-child>
-      <ComboboxInput as-child>
-        <UInput v-bind="{ ...inputProps, ...$attrs }" :icon="(modelValue as InputMenuItem)?.icon || icon" :avatar="(modelValue as InputMenuItem)?.avatar || avatar" :class="ui.input()">
-          <template v-if="$slots.leading" #leading>
-            <slot name="leading" />
-          </template>
+      <ComboboxInput
+        ref="inputRef"
+        v-bind="$attrs"
+        :type="type"
+        :placeholder="placeholder"
+        :required="required"
+        :class="ui.base()"
+      />
 
-          <template #trailing="{ iconClass }">
-            <ComboboxTrigger :class="ui.trigger()">
-              <UIcon :name="trailingIcon || appConfig.ui.icons.chevronDown" :class="iconClass" />
-            </ComboboxTrigger>
-          </template>
-        </UInput>
-      </ComboboxInput>
+      <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
+        <slot name="leading">
+          <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
+        </slot>
+      </span>
+
+      <ComboboxTrigger v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
+        <slot name="trailing">
+          <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
+        </slot>
+      </ComboboxTrigger>
     </ComboboxAnchor>
 
     <ComboboxPortal :disabled="!portal">

@@ -76,7 +76,7 @@ const ui = computed(() => tv({ extend: dropdownMenu, slots: props.ui })())
 
 <template>
   <DropdownMenuRoot v-bind="rootProps">
-    <DropdownMenuTrigger v-if="$slots.default" as-child :disabled="disabled">
+    <DropdownMenuTrigger v-if="!!slots.default" as-child :disabled="disabled">
       <slot />
     </DropdownMenuTrigger>
 

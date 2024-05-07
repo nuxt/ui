@@ -2,10 +2,12 @@
   <div class="w-full flex flex-col gap-4">
     <UCard class="flex-1">
       <template #header>
-        <span>Shortcuts</span>
+        <h3 class="font-bold">
+          Shortcuts
+        </h3>
       </template>
 
-      <div>
+      <div class="space-y-2">
         <div>
           <span>{{ shortcutsState.a.label }} shortcut</span>
           <UCheckbox v-model="shortcutsState.a.disabled" :label="`Disable ${shortcutsState.a.label}`" />
@@ -28,7 +30,9 @@
     <UCard :ui="{ body: 'h-[200px] overflow-y-auto' }" class="flex-1">
       <template #header>
         <div class="flex items-center justify-between gap-4">
-          <span>Logs</span>
+          <h3 class="font-bold">
+            Logs
+          </h3>
           <UButton icon="i-heroicons-trash" size="sm" color="gray" class="-my-1" @click="logs = []" />
         </div>
       </template>

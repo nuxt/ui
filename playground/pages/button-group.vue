@@ -6,7 +6,7 @@ const sizes = Object.keys(theme.variants.size)
 
 <template>
   <div class="flex flex-col gap-4 items-center">
-    <div class="flex flex-col gap-4 -ml-[70px]">
+    <div class="flex flex-col gap-4 -ml-[110px]">
       <UButtonGroup>
         <UButton> Click me! </UButton>
       </UButtonGroup>

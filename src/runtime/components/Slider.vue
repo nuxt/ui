@@ -11,7 +11,7 @@ const slider = tv({ extend: tv(theme), ...(appConfig.ui?.slider || {}) })
 
 type SliderVariants = VariantProps<typeof slider>
 
-export interface SliderProps extends Omit<SliderRootProps, 'asChild' | 'defaultValue' | 'dir'> {
+export interface SliderProps extends Omit<SliderRootProps, 'asChild' | 'modelValue' | 'defaultValue' | 'dir'> {
   size?: SliderVariants['size']
   color?: SliderVariants['color']
   defaultValue?: number | number[]

@@ -21,7 +21,8 @@ export default (config: { colors: string[] }) => {
     }
   }, {
     slots: {
-      trailing: 'absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75'
+      base: 'relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
+      placeholder: 'truncate group-data-placeholder:text-current/50'
     }
   }, input(config))
 }

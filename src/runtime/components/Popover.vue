@@ -44,7 +44,7 @@ const props = withDefaults(defineProps<PopoverProps>(), {
   closeDelay: 0
 })
 const emits = defineEmits<PopoverEmits>()
-defineSlots<PopoverSlots>()
+const slots = defineSlots<PopoverSlots>()
 
 const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay') : reactivePick(props, 'defaultOpen', 'open', 'modal')
 const rootProps = useForwardPropsEmits(pick, emits)
@@ -58,7 +58,7 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 
 <template>
   <Component.Root v-bind="rootProps">
-    <Component.Trigger v-if="$slots.default" as-child>
+    <Component.Trigger v-if="!!slots.default" as-child>
       <slot />
     </Component.Trigger>
 

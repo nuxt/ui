@@ -46,7 +46,7 @@ import { reactivePick } from '@vueuse/core'
 import { useId, useAppConfig, useFormField } from '#imports'
 
 const props = defineProps<CheckboxProps>()
-defineSlots<CheckboxSlots>()
+const slots = defineSlots<CheckboxSlots>()
 
 const modelValue = defineModel<boolean | undefined>({ default: undefined })
 
@@ -104,13 +104,13 @@ function onChecked() {
       </CheckboxRoot>
     </div>
 
-    <div v-if="(label || $slots.label) || (description || $slots.description)" :class="ui.wrapper()">
-      <Label v-if="label || $slots.label" :for="id" :class="ui.label()">
+    <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper()">
+      <Label v-if="label || !!slots.label" :for="id" :class="ui.label()">
         <slot name="label" :label="label">
           {{ label }}
         </slot>
       </Label>
-      <p v-if="description || $slots.description" :class="ui.description()">
+      <p v-if="description || !!slots.description" :class="ui.description()">
         <slot name="description" :description="description">
           {{ description }}
         </slot>

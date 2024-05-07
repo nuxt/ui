@@ -49,7 +49,7 @@ const props = withDefaults(defineProps<TabsProps<T>>(), {
   orientation: 'horizontal'
 })
 const emits = defineEmits<TabsEmits>()
-defineSlots<TabsSlots<T>>()
+const slots = defineSlots<TabsSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'activationMode', 'modelValue'), emits)
 const contentProps = toRef(() => defu(props.content, { forceMount: true }) as TabsContentProps)
@@ -68,7 +68,7 @@ const ui = computed(() => tv({ extend: tabs, slots: props.ui })({ orientation: p
           <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
         </slot>
 
-        <span v-if="item.label || $slots.default" :class="ui.label()">
+        <span v-if="item.label || !!slots.default" :class="ui.label()">
           <slot :item="item" :index="index">{{ item.label }}</slot>
         </span>
 

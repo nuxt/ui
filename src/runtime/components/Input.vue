@@ -16,10 +16,7 @@ export interface InputProps extends UseComponentIconsProps {
   id?: string
   name?: string
   type?: InputHTMLAttributes['type']
-  /**
-   * The placeholder text when the input is empty.
-   * @defaultValue `'Type a command or search...'`
-   */
+  /** The placeholder text when the input is empty. */
   placeholder?: string
   color?: InputVariants['color']
   variant?: InputVariants['variant']
@@ -39,21 +36,21 @@ export interface InputEmits {
 export interface InputSlots {
   leading(): any
   default(): any
-  trailing(props: { iconClass: string }): any
+  trailing(): any
 }
 </script>
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
 import { useComponentIcons, useFormField, useButtonGroup } from '#imports'
-import { UIcon, UAvatar } from '#components'
+import { UIcon } from '#components'
 import { looseToNumber } from '#ui/utils'
 
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
-  autofocusDelay: 100
+  autofocusDelay: 0
 })
 const emits = defineEmits<InputEmits>()
 const slots = defineSlots<InputSlots>()
@@ -62,7 +59,7 @@ const [modelValue, modelModifiers] = defineModel<string | number>()
 
 const { emitFormBlur, emitFormInput, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
-const { isLeading, isTrailing, leadingIconName, trailingIconName, avatarSize } = useComponentIcons<InputProps>(props)
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons<InputProps>(props)
 
 const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
@@ -150,15 +147,14 @@ onMounted(() => {
 
     <slot />
 
-    <span v-if="isLeading || $slots.leading" :class="ui.leading()">
+    <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
       <slot name="leading">
-        <UAvatar v-if="avatar" :size="avatarSize" v-bind="avatar" :class="ui.leadingAvatar()" />
-        <UIcon v-else-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
+        <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || $slots.trailing" :class="ui.trailing()">
-      <slot name="trailing" :icon-class="ui.trailingIcon()">
+    <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
+      <slot name="trailing">
         <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
       </slot>
     </span>

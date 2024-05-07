@@ -26,22 +26,22 @@ import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 
 const props = withDefaults(defineProps<CardProps>(), { as: 'div' })
-defineSlots<CardSlots>()
+const slots = defineSlots<CardSlots>()
 
 const ui = computed(() => tv({ extend: card, slots: props.ui })())
 </script>
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: props.class })">
-    <div v-if="$slots.header" :class="ui.header()">
+    <div v-if="!!slots.header" :class="ui.header()">
       <slot name="header" />
     </div>
 
-    <div v-if="$slots.default" :class="ui.body()">
+    <div v-if="!!slots.default" :class="ui.body()">
       <slot />
     </div>
 
-    <div v-if="$slots.footer" :class="ui.footer()">
+    <div v-if="!!slots.footer" :class="ui.footer()">
       <slot name="footer" />
     </div>
   </Primitive>

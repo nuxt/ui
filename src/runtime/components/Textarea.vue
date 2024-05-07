@@ -47,7 +47,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<TextareaProps>(), {
   rows: 3,
   maxrows: 0,
-  autofocusDelay: 100
+  autofocusDelay: 0
 })
 defineSlots<TextareaSlots>()
 const emits = defineEmits<TextareaEmits>()

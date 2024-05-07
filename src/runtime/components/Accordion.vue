@@ -49,7 +49,7 @@ const props = withDefaults(defineProps<AccordionProps<T>>(), {
   collapsible: true
 })
 const emits = defineEmits<AccordionEmits>()
-defineSlots<AccordionSlots<T>>()
+const slots = defineSlots<AccordionSlots<T>>()
 
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'type'), emits)
@@ -67,7 +67,7 @@ const ui = computed(() => tv({ extend: accordion, slots: props.ui })({ disabled:
             <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
           </slot>
 
-          <span v-if="item.label || $slots.default" :class="ui.label()">
+          <span v-if="item.label || !!slots.default" :class="ui.label()">
             <slot :item="item" :index="index">{{ item.label }}</slot>
           </span>
 
@@ -77,7 +77,7 @@ const ui = computed(() => tv({ extend: accordion, slots: props.ui })({ disabled:
         </AccordionTrigger>
       </AccordionHeader>
 
-      <AccordionContent v-if="item.content || $slots.content || (item.slot && $slots[item.slot])" v-bind="contentProps" :class="ui.content()">
+      <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot])" v-bind="contentProps" :class="ui.content()">
         <slot :name="item.slot || 'content'" :item="item" :index="index">
           {{ item.content }}
         </slot>

@@ -6,11 +6,13 @@ const sizes = Object.keys(theme.variants.size)
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 ml-[46px]">
+    <div class="flex flex-col gap-4 w-60">
       <UInput placeholder="Search..." autofocus />
       <UInput placeholder="Search..." color="gray" />
       <UInput placeholder="Search..." color="primary" />
-      <UInput placeholder="Search..." disabled />
+      <UInput placeholder="Search..." variant="none" />
+      <UInput placeholder="Disabled" disabled />
+      <UInput placeholder="Required" required />
       <UInput file="i-heroicons-calculator" type="number" :model-value="10" />
       <UInput icon="i-heroicons-folder" type="file" />
       <UInput icon="i-heroicons-calendar" type="date" :model-value="new Date().toISOString().substring(0, 10)" />
@@ -20,12 +22,13 @@ const sizes = Object.keys(theme.variants.size)
       <UInput loading trailing placeholder="Search..." />
       <UInput loading trailing-icon="i-heroicons-magnifying-glass" placeholder="Search..." />
     </div>
-    <div class="flex items-center gap-4 ml-[-44px]">
+    <div class="flex items-center gap-4">
       <UInput
         v-for="size in sizes"
         :key="size"
         placeholder="Search..."
         :size="(size as any)"
+        class="w-60"
       />
     </div>
     <div class="flex items-center gap-4">
@@ -35,15 +38,7 @@ const sizes = Object.keys(theme.variants.size)
         icon="i-heroicons-magnifying-glass"
         placeholder="Search..."
         :size="(size as any)"
-      />
-    </div>
-    <div class="flex items-center gap-4">
-      <UInput
-        v-for="size in sizes"
-        :key="size"
-        :avatar="{ src: 'https://avatars.githubusercontent.com/u/739984?v=4' }"
-        placeholder="Search..."
-        :size="(size as any)"
+        class="w-60"
       />
     </div>
     <div class="flex items-center gap-4">
@@ -54,6 +49,7 @@ const sizes = Object.keys(theme.variants.size)
         trailing
         placeholder="Search..."
         :size="(size as any)"
+        class="w-60"
       />
     </div>
   </div>

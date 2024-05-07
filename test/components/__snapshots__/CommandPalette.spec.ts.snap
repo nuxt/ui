@@ -2,7 +2,7 @@
 
 exports[`CommandPalette > renders with as correctly 1`] = `
 "<section style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -65,7 +65,7 @@ exports[`CommandPalette > renders with as correctly 1`] = `
 
 exports[`CommandPalette > renders with class correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-300 dark:divide-gray-700">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -128,7 +128,7 @@ exports[`CommandPalette > renders with class correctly 1`] = `
 
 exports[`CommandPalette > renders with close slot correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9 pr-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span><span class="absolute inset-y-0 end-0 flex items-center pr-2.5">Close slot</span></div>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9 pr-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span><span class="absolute inset-y-0 end-0 flex items-center pr-2.5">Close slot</span></div>
   <!--teleport start-->
   <div id="radix-vue-combobox-content-206" role="listbox" data-state="open" style="display: flex; flex-direction: column; outline-color: none; outline-style: none; outline-width: initial;" class="relative overflow-hidden">
     <!---->
@@ -189,7 +189,7 @@ exports[`CommandPalette > renders with close slot correctly 1`] = `
 
 exports[`CommandPalette > renders with custom slot correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -249,7 +249,7 @@ exports[`CommandPalette > renders with custom slot correctly 1`] = `
 
 exports[`CommandPalette > renders with defaultValue correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -312,7 +312,7 @@ exports[`CommandPalette > renders with defaultValue correctly 1`] = `
 
 exports[`CommandPalette > renders with disabled correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" disabled="" aria-expanded="true" aria-controls="" aria-disabled="true" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" disabled="" aria-expanded="true" aria-controls="" aria-disabled="true" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -375,7 +375,7 @@ exports[`CommandPalette > renders with disabled correctly 1`] = `
 
 exports[`CommandPalette > renders with empty slot correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -438,7 +438,7 @@ exports[`CommandPalette > renders with empty slot correctly 1`] = `
 
 exports[`CommandPalette > renders with groups correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -501,7 +501,7 @@ exports[`CommandPalette > renders with groups correctly 1`] = `
 
 exports[`CommandPalette > renders with icon correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:command-line shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:command-line shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -564,7 +564,7 @@ exports[`CommandPalette > renders with icon correctly 1`] = `
 
 exports[`CommandPalette > renders with item slot correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -612,7 +612,7 @@ exports[`CommandPalette > renders with item slot correctly 1`] = `
 
 exports[`CommandPalette > renders with item-label slot correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -675,7 +675,7 @@ exports[`CommandPalette > renders with item-label slot correctly 1`] = `
 
 exports[`CommandPalette > renders with item-leading slot correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -729,7 +729,7 @@ exports[`CommandPalette > renders with item-leading slot correctly 1`] = `
 
 exports[`CommandPalette > renders with item-trailing slot correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -789,7 +789,7 @@ exports[`CommandPalette > renders with item-trailing slot correctly 1`] = `
 
 exports[`CommandPalette > renders with loading correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:arrow-path-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5 animate-spin" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:arrow-path-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5 animate-spin" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -852,7 +852,7 @@ exports[`CommandPalette > renders with loading correctly 1`] = `
 
 exports[`CommandPalette > renders with loadingIcon correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:sparkles shrink-0 text-gray-400 dark:text-gray-500 size-5 animate-spin" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:sparkles shrink-0 text-gray-400 dark:text-gray-500 size-5 animate-spin" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -879,7 +879,7 @@ exports[`CommandPalette > renders with loadingIcon correctly 1`] = `
 
 exports[`CommandPalette > renders with modelValue correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -942,7 +942,7 @@ exports[`CommandPalette > renders with modelValue correctly 1`] = `
 
 exports[`CommandPalette > renders with placeholder correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -1005,7 +1005,7 @@ exports[`CommandPalette > renders with placeholder correctly 1`] = `
 
 exports[`CommandPalette > renders with selectedIcon correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->
@@ -1068,7 +1068,7 @@ exports[`CommandPalette > renders with selectedIcon correctly 1`] = `
 
 exports[`CommandPalette > renders with ui correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800">
-  <div class="relative [&>input]:h-10"><input type="text" placeholder="Type a command or search..." class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 rounded-md placeholder-gray-400 dark:placeholder-gray-500 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&>input]:h-10"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm bg-transparent focus:ring-0 focus:shadow-none pl-9" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <!--teleport start-->

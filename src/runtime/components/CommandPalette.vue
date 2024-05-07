@@ -35,7 +35,7 @@ export interface CommandPaletteGroup<T> {
   highlightedIcon?: string
 }
 
-export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'as' | 'multiple' | 'disabled' | 'modelValue' | 'defaultValue'>, Omit<UseComponentIconsProps, 'leading' | 'trailing' | 'icon' | 'avatar'> {
+export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'as' | 'multiple' | 'disabled' | 'modelValue' | 'defaultValue'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The icon displayed in the input.
    * @defaultValue `appConfig.ui.icons.search`
@@ -55,9 +55,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'as' 
   ui?: Partial<typeof commandPalette.slots>
 }
 
-export type CommandPaletteEmits<T> = {
-  close: []
-} & Omit<ComboboxRootEmits<T>, 'update:open'>
+export type CommandPaletteEmits<T> = ComboboxRootEmits<T>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
@@ -87,7 +85,7 @@ const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   placeholder: 'Type a command or search...'
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
-defineSlots<CommandPaletteSlots<G, T>>()
+const slots = defineSlots<CommandPaletteSlots<G, T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -150,7 +148,7 @@ const groups = computed(() => {
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input()"
       >
-        <template v-if="close || $slots.close" #trailing>
+        <template v-if="close || !!slots.close" #trailing>
           <slot name="close" :class="ui.close()">
             <UButton
               v-if="close"
@@ -161,7 +159,7 @@ const groups = computed(() => {
               aria-label="Close"
               v-bind="typeof close === 'object' ? close : {}"
               :class="ui.close()"
-              @click="emits('close')"
+              @click="emits('update:open', false)"
             />
           </slot>
         </template>
@@ -204,7 +202,7 @@ const groups = computed(() => {
                   />
                 </slot>
 
-                <span v-if="item.label || $slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" :class="ui.itemLabel()">
+                <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" :class="ui.itemLabel()">
                   <slot :name="item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`" :item="item" :index="index">
                     <span v-if="item.prefix" :class="ui.itemLabelPrefix()">{{ item.prefix }}</span>
 
