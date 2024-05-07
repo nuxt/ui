@@ -33,7 +33,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@egoist/tailwindcss-icons": "^1.7.4",
+    "@egoist/tailwindcss-icons": "^1.8.0",
     "@headlessui/tailwindcss": "^0.2.0",
     "@headlessui/vue": "^1.7.21",
     "@iconify-json/heroicons": "^1.1.21",
@@ -62,9 +62,9 @@
     "@nuxt/module-builder": "^0.5.5",
     "@nuxt/test-utils": "^3.12.1",
     "@release-it/conventional-changelog": "^8.0.1",
-    "@vue/test-utils": "^2.4.5",
+    "@vue/test-utils": "^2.4.6",
     "eslint": "^8.57.0",
-    "happy-dom": "^14.7.1",
+    "happy-dom": "^14.10.1",
     "joi": "^17.13.1",
     "nuxt": "^3.11.2",
     "release-it": "^17.2.1",
