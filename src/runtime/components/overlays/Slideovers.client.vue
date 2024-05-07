@@ -1,7 +1,4 @@
 <template>
-  <pre>
-    {{ slideoverStates }}
-  </pre>
   <component
     :is="slideoverState.component"
     v-for="(slideoverState, index) in slideoverStates"
