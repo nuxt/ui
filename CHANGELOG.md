@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.16.0](https://github.com/nuxt/ui/compare/v2.15.2...v2.16.0) (2024-05-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Input:** redesign `file` type without absolute positioning (#1712)
+
+### Features
+
+* **InputMenu/SelectMenu:** allow lazy search ([#1705](https://github.com/nuxt/ui/issues/1705)) ([7e6ba78](https://github.com/nuxt/ui/commit/7e6ba786816516ab5007a2ff15fc974cfdd796ab))
+* **module:** HMR support with `@nuxtjs/tailwindcss` ([#1665](https://github.com/nuxt/ui/issues/1665)) ([821e15b](https://github.com/nuxt/ui/commit/821e15b696b03d0f5e20e001d39f86a8b3cec426))
+* **Table:** allow providing a `<caption>` ([#1680](https://github.com/nuxt/ui/issues/1680)) ([3fca668](https://github.com/nuxt/ui/commit/3fca66857d3616bf24a1b0579c90179a7883869d))
+* **useToast:** allow clearing all notifications ([#1695](https://github.com/nuxt/ui/issues/1695)) ([82d619b](https://github.com/nuxt/ui/commit/82d619b2a75b9d08f3f5b314d37c30d77d8341e9))
+
+
+### Bug Fixes
+
+* **Breadcrumb:** pass `click` event to `ULink` ([5481dab](https://github.com/nuxt/ui/commit/5481dab53dbe0b28188b4a16811f3e8816d93edf))
+* **Input:** redesign `file` type without absolute positioning ([#1712](https://github.com/nuxt/ui/issues/1712)) ([ed5c74d](https://github.com/nuxt/ui/commit/ed5c74dc17df784485eabc39c83e62ada9210a49))
+* **Notification:** update timer when timeout prop changes ([#1673](https://github.com/nuxt/ui/issues/1673)) ([cba9ad7](https://github.com/nuxt/ui/commit/cba9ad78db58cb9228bb9c96f0469d43bde2bf3e))
+* **Slideover:** export and clean types ([#1692](https://github.com/nuxt/ui/issues/1692)) ([bd3fa86](https://github.com/nuxt/ui/commit/bd3fa8658f84fb7bd96d322968462c5eaa987b86))
+* **Table:** provide `aria-sort` for sortable table headings ([#1675](https://github.com/nuxt/ui/issues/1675)) ([6f60fa9](https://github.com/nuxt/ui/commit/6f60fa9a980020f6a5afc2916e699a7f9a47e8ce))
+
 ## [2.15.2](https://github.com/nuxt/ui/compare/v2.15.1...v2.15.2) (2024-04-12)
 
 
