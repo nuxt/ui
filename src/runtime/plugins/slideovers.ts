@@ -4,10 +4,7 @@ import { slidOverInjectionKey } from '../composables/useSlideover'
 import type { SlideoverState } from '../types/slideover'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const slideoverState = shallowRef<SlideoverState>({
-    component: 'div',
-    props: {}
-  })
+  const slideoverState = shallowRef<SlideoverState[]>([])
 
   nuxtApp.vueApp.provide(slidOverInjectionKey, slideoverState)
 })

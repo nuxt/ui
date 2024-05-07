@@ -11,6 +11,8 @@ export interface Slideover {
 }
 
 export interface SlideoverState {
+  id?: number
+  isOpen: boolean
   component: Component | string
   props: Slideover
 }
