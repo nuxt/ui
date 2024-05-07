@@ -16,6 +16,7 @@ const components = [
   'badge',
   'breadcrumb',
   'button',
+  'button-group',
   'card',
   'checkbox',
   'chip',

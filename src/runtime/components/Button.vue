@@ -35,7 +35,7 @@ export interface ButtonSlots {
 import { computed } from 'vue'
 import { useForwardProps } from 'radix-vue'
 import { reactiveOmit } from '@vueuse/core'
-import { useComponentIcons } from '#imports'
+import { useComponentIcons, useButtonGroup } from '#imports'
 import { UIcon, UAvatar, ULink } from '#components'
 
 const props = defineProps<ButtonProps>()
@@ -43,19 +43,20 @@ const slots = defineSlots<ButtonSlots>()
 
 const linkProps = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'variant', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'truncate', 'class', 'ui'))
 
-// const { size, rounded } = useInjectButtonGroup({ ui, props })
+const { orientation, size: buttonSize } = useButtonGroup<ButtonProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName, avatarSize } = useComponentIcons<ButtonProps>(props)
 
 const ui = computed(() => tv({ extend: button, slots: props.ui })({
   color: props.color,
   variant: props.variant,
-  size: props.size,
+  size: buttonSize.value,
   loading: props.loading,
   truncate: props.truncate,
   block: props.block,
   square: props.square || (!slots.default && !props.label),
   leading: isLeading.value,
-  trailing: isTrailing.value
+  trailing: isTrailing.value,
+  buttonGroup: orientation.value
 }))
 </script>
 
