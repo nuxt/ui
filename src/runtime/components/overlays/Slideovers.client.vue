@@ -1,11 +1,11 @@
 <template>
   <component
-    :is="slideoverState.component"
-    v-for="(slideoverState, index) in slideoverInstances"
+    :is="slideoverInstance.component"
+    v-for="(slideoverInstance, index) in slideoverInstances"
     :key="index"
-    v-bind="slideoverState.props"
-    :model-value="slideoverState.isOpen"
-    @after-leave="reset(slideoverState.id)"
+    v-bind="slideoverInstance.props"
+    :model-value="slideoverInstance.isOpen"
+    @after-leave="reset(slideoverInstance.id)"
   />
 </template>
 
