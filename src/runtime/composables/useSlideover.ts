@@ -33,9 +33,7 @@ function _useSlideover () {
     
     slideoverInstances.value = [
       ...slideoverInstances.value.filter((slideover) => slideover.id !== id),
-      {
-        ...slideoverInstance
-      }
+      slideoverInstance
     ]
   }
 
