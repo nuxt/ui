@@ -13,7 +13,7 @@ function _useSlideover () {
     if (!slideoverInstances) {
       throw new Error('useSlideover() is called without provider')
     }
-    
+
     const instance = createInstance(component, props)
 
     slideoverInstances.value = [
@@ -26,19 +26,19 @@ function _useSlideover () {
 
   function close (id: number) {
     const slideoverInstance = slideoverInstances.value.find((slideover) => slideover.id === id)
-    
+
     if (!slideoverInstance) return
 
     slideoverInstance.isOpen = false
-    
+
     slideoverInstances.value = [
       ...slideoverInstances.value.filter((slideover) => slideover.id !== id),
       slideoverInstance
     ]
   }
 
-  function remove (id: number) {     
-    slideoverInstances.value = slideoverInstances.value.filter((slideover) => slideover.id !== id)    
+  function remove (id: number) {
+    slideoverInstances.value = slideoverInstances.value.filter((slideover) => slideover.id !== id)
   }
 
   /**
@@ -55,7 +55,7 @@ function _useSlideover () {
         ...slideoverInstance,
         props: {
           ...slideoverInstance.props,
-        ...props
+          ...props
         }
       }
     ]
@@ -65,13 +65,20 @@ function _useSlideover () {
     // Random short id
     const id = Math.floor(Math.random() * 1000000)
 
-    return {      
+    return {
         id,
         isOpen: true,
         component,
-        props: props ?? {},
-        close: () => close(id)        
-      } 
+        props: {
+          ...props,
+          onClose () {
+            props?.onClose?.()
+            close(id)
+          }
+        },
+        patch: (props) => patch(id, props),
+        close: () => close(id)
+      }
 }
 
   return {
