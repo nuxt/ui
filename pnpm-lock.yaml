@@ -7,6 +7,7 @@ settings:
 overrides:
   '@nuxt/ui': workspace:*
   '@nuxt/module-builder': 0.5.5
+  '@headlessui/vue': 1.7.20
 
 importers:
 
@@ -19,8 +20,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(tailwindcss@3.4.3)
       '@headlessui/vue':
-        specifier: ^1.7.21
-        version: 1.7.21(vue@3.4.25(typescript@5.4.5))
+        specifier: 1.7.20
+        version: 1.7.20(vue@3.4.25(typescript@5.4.5))
       '@iconify-json/heroicons':
         specifier: ^1.1.21
         version: 1.1.21
@@ -793,8 +794,8 @@ packages:
     peerDependencies:
       tailwindcss: ^3.0
 
-  '@headlessui/vue@1.7.21':
-    resolution: {integrity: sha512-95cPFP5X9luB8/+smPENFv0ruaotT6epFnqK9EKldX2YpNkYM/qkN44oFoqQo+higlCAxDK5Pkg2E3FuD1Anyg==}
+  '@headlessui/vue@1.7.20':
+    resolution: {integrity: sha512-y83833wFo/+0FOrblgESiuvGwcHnfu8T2XQHb3iVA9GVSUVs3VLptp2bXlF5IR4IFD3Klr+jQEfreF6bSJNdOA==}
     engines: {node: '>=10'}
     peerDependencies:
       vue: ^3.2.0
@@ -8042,7 +8043,7 @@ snapshots:
     dependencies:
       tailwindcss: 3.4.3
 
-  '@headlessui/vue@1.7.21(vue@3.4.25(typescript@5.4.5))':
+  '@headlessui/vue@1.7.20(vue@3.4.25(typescript@5.4.5))':
     dependencies:
       '@tanstack/vue-virtual': 3.1.2(vue@3.4.25(typescript@5.4.5))
       vue: 3.4.25(typescript@5.4.5)
