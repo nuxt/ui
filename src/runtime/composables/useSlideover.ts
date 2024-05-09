@@ -4,7 +4,7 @@ import { createSharedComposable } from '@vueuse/core'
 import type { ComponentProps } from '../types/component'
 import type { Slideover, SlideoverInstance } from '../types/slideover'
 
-export const slidOverInjectionKey: InjectionKey<ShallowRef<SlideoverInstance[]>> = Symbol('nuxt-ui.slideover')
+export const slidOverInjectionKey: InjectionKey<ShallowRef<SlideoverInstance<any>[]>> = Symbol('nuxt-ui.slideover')
 
 function _useSlideover () {
   const slideoverInstances = inject(slidOverInjectionKey)
@@ -53,12 +53,15 @@ function _useSlideover () {
       ...slideoverInstances.value.filter((slideover) => slideover.id !== id),
       {
         ...slideoverInstance,
+        props: {
+          ...slideoverInstance.props,
         ...props
+        }
       }
     ]
   }
 
-  function createInstance<T extends Component> (component: T, props?: Slideover & ComponentProps<T>): SlideoverInstance {
+  function createInstance<T extends Component> (component: T, props?: Slideover & ComponentProps<T>): SlideoverInstance<ComponentProps<T>> {
     // Random short id
     const id = Math.floor(Math.random() * 1000000)
 

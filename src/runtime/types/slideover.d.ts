@@ -10,10 +10,11 @@ export interface Slideover {
   modelValue?: boolean
 }
 
-export interface SlideoverInstance {
+export interface SlideoverInstance<T> {
   id: number,
   isOpen: boolean
   component: Component | string
-  props: Slideover
+  props: Slideover & T
+  patch (props: Partial<Slideover & T>): void
   close: () => void,
 }
