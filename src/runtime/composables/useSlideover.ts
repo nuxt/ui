@@ -24,7 +24,7 @@ function _useSlideover () {
     return instance
   }
 
-  async function close (id: number) {
+  function close (id: number) {
     const slideoverInstance = slideoverInstances.value.find((slideover) => slideover.id === id)
     
     if (!slideoverInstance) return
