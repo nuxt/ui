@@ -5,7 +5,7 @@
     :key="instance.id"
     v-bind="instance.props"
     :model-value="instance.isOpen"
-    @after-leave="reset(instance.id)"
+    @after-leave="remove(instance.id)"
   />
 </template>
 
@@ -15,5 +15,5 @@ import { useSlideover, slidOverInjectionKey } from '../../composables/useSlideov
 
 const slideoverInstances = inject(slidOverInjectionKey)
 
-const { reset } = useSlideover()
+const { remove } = useSlideover()
 </script>

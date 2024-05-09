@@ -40,7 +40,7 @@ function _useSlideover () {
     ]
   }
 
-  function reset (id: number) {     
+  function remove (id: number) {     
     slideoverInstances.value = slideoverInstances.value.filter((slideover) => slideover.id !== id)    
   }
 
@@ -77,7 +77,7 @@ function _useSlideover () {
   return {
     open,
     close,
-    reset,
+    remove,
     patch
   }
 }
