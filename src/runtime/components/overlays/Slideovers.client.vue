@@ -1,8 +1,8 @@
 <template>
   <component
     :is="instance.component"
-    v-for="(instance, index) in slideoverInstances"
-    :key="index"
+    v-for="instance in slideoverInstances"
+    :key="instance.id"
     v-bind="instance.props"
     :model-value="instance.isOpen"
     @after-leave="reset(instance.id)"
