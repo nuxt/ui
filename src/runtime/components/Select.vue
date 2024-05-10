@@ -117,7 +117,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
         </slot>
       </span>
 
-      <SelectValue :placeholder="placeholder ?? '&nbsp'" :class="ui.value()" />
+      <SelectValue :placeholder="placeholder ?? '&nbsp;'" :class="ui.value()" />
 
       <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
         <slot name="trailing">
