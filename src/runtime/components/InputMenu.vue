@@ -97,6 +97,8 @@ const props = withDefaults(defineProps<InputMenuProps<T>>(), {
 const emits = defineEmits<InputMenuEmits<T>>()
 const slots = defineSlots<InputMenuSlots<T>>()
 
+const searchTerm = defineModel<string>('searchTerm', { default: '' })
+
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
@@ -121,7 +123,7 @@ function displayValue(val: AcceptableValue) {
     return val.label
   }
 
-  return String(val)
+  return val && String(val)
 }
 
 function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: string): ArrayOrWrapped<AcceptableValue> {
@@ -165,9 +167,10 @@ onMounted(() => {
   <ComboboxRoot
     :id="id"
     v-slot="{ modelValue, open }"
+    v-bind="rootProps"
+    v-model:search-term="searchTerm"
     :name="name"
     :disabled="disabled"
-    v-bind="rootProps"
     :display-value="displayValue"
     :filter-function="filterFunction"
     :class="ui.root({ class: props.class })"
