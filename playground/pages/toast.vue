@@ -109,7 +109,7 @@ function removeToast() {
 <template>
   <div class="flex flex-col items-center gap-8">
     <div class="flex flex-col gap-2">
-      <URadioGroup v-model="appConfig.toaster.position" :options="positions" />
+      <URadioGroup v-model="appConfig.toaster.position" :items="positions" />
       <UCheckbox v-model="appConfig.toaster.expand" label="Expand" class="mt-1" />
       <UInput v-model="appConfig.toaster.duration" label="Duration" type="number" class="mt-1" />
     </div>

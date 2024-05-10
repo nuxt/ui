@@ -63,7 +63,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
     </UFormField>
 
     <UFormField name="radioGroup">
-      <URadioGroup v-model="state.radioGroup" legend="Radio group" :options="options" />
+      <URadioGroup v-model="state.radioGroup" legend="Radio group" :items="options" />
     </UFormField>
 
     <UFormField name="switch">
