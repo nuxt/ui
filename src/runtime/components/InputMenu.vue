@@ -103,7 +103,7 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', '
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const { emitFormBlur, emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons<InputProps>(defu(props, { trailingIcon: appConfig.ui.icons.chevronDown }))
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
 const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
