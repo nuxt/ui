@@ -34,14 +34,15 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
   params: { q: searchTermDebounced },
   transform: (data: User[]) => {
     return data?.map(user => ({ id: user.id, label: user.name, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
-  }
+  },
+  lazy: true
 })
 </script>
 
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 w-60">
-      <UInputMenu :items="items" placeholder="Search..." autofocus />
+      <UInputMenu :items="items" autofocus />
       <UInputMenu :items="items" placeholder="Search..." color="gray" />
       <UInputMenu :items="items" placeholder="Search..." color="primary" />
       <UInputMenu :items="items" placeholder="Search..." variant="none" />

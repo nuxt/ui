@@ -35,14 +35,15 @@ const statuses = [{
 const { data: users, pending } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   transform: (data: User[]) => {
     return data?.map(user => ({ label: user.name, value: user.id, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
-  }
+  },
+  lazy: true
 })
 </script>
 
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 w-60">
-      <USelect :items="items" placeholder="Search..." autofocus />
+      <USelect :items="items" />
       <USelect :items="items" placeholder="Search..." color="gray" />
       <USelect :items="items" placeholder="Search..." color="primary" />
       <USelect :items="items" placeholder="Search..." variant="none" />

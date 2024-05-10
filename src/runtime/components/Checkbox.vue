@@ -75,13 +75,6 @@ const ui = computed(() => tv({ extend: checkbox, slots: props.ui })({
   checked: modelValue.value ?? props.defaultValue,
   indeterminate: indeterminate.value
 }))
-
-// FIXME: I think there's a race condition between this and the v-model event.
-// This must be triggered after the value updates, otherwise the form validates
-// the previous value.
-function onChecked() {
-  emitFormChange()
-}
 </script>
 
 <template>
@@ -95,7 +88,7 @@ function onChecked() {
         :name="name"
         :disabled="disabled"
         :class="ui.base()"
-        @update:checked="onChecked"
+        @update:checked="emitFormChange()"
       >
         <CheckboxIndicator as-child>
           <UIcon v-if="indeterminate" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon()" />

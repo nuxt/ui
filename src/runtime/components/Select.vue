@@ -82,8 +82,8 @@ const slots = defineSlots<SelectSlots<T>>()
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as SelectContentProps)
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { emitFormBlur, emitFormInput, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
+
+const { emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons<InputProps>(defu(props, { trailingIcon: appConfig.ui.icons.chevronDown }))
 
@@ -103,7 +103,13 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 </script>
 
 <template>
-  <SelectRoot v-bind="rootProps" :id="id" :name="name" :disabled="disabled">
+  <SelectRoot
+    v-bind="rootProps"
+    :id="id"
+    :name="name"
+    :disabled="disabled"
+    @update:model-value="emitFormChange()"
+  >
     <SelectTrigger :class="ui.base({ class: props.class })">
       <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
         <slot name="leading">
@@ -111,7 +117,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
         </slot>
       </span>
 
-      <SelectValue :placeholder="placeholder" :class="ui.placeholder()" />
+      <SelectValue :placeholder="placeholder ?? '&nbsp'" :class="ui.value()" />
 
       <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
         <slot name="trailing">

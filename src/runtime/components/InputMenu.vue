@@ -101,8 +101,7 @@ const slots = defineSlots<InputMenuSlots<T>>()
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { emitFormBlur, emitFormInput, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons<InputProps>(defu(props, { trailingIcon: appConfig.ui.icons.chevronDown }))
 
@@ -172,6 +171,8 @@ onMounted(() => {
     :display-value="displayValue"
     :filter-function="filterFunction"
     :class="ui.root({ class: props.class })"
+    @update:model-value="emitFormChange()"
+    @keydown.enter="$event.preventDefault()"
   >
     <ComboboxAnchor as-child>
       <ComboboxInput
@@ -181,6 +182,7 @@ onMounted(() => {
         :placeholder="placeholder"
         :required="required"
         :class="ui.base()"
+        @blur="emitFormBlur()"
       />
 
       <span v-if="isLeading || !!slots.leading" :class="ui.leading()">

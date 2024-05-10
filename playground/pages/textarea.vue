@@ -7,7 +7,7 @@ const sizes = Object.keys(theme.variants.size)
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 w-60">
-      <UTextarea placeholder="Search..." autofocus />
+      <UTextarea autofocus />
       <UTextarea placeholder="Search..." color="gray" />
       <UTextarea placeholder="Search..." color="primary" />
       <UTextarea placeholder="Search..." variant="none" />

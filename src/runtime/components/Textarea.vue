@@ -30,6 +30,7 @@ export interface TextareaProps {
 
 export interface TextareaEmits {
   (e: 'blur', event: FocusEvent): void
+  (e: 'change', event: Event): void
 }
 
 export interface TextareaSlots {
@@ -103,6 +104,8 @@ function onChange(event: Event) {
   if (modelModifiers.trim) {
     (event.target as HTMLInputElement).value = value.trim()
   }
+
+  emits('change', event)
 }
 
 function onBlur(event: FocusEvent) {
