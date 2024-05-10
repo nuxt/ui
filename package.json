@@ -75,9 +75,9 @@
     "valibot": "^0.30.0",
     "vitest": "^1.6.0",
     "vitest-environment-nuxt": "^1.0.0",
-    "vue-tsc": "^2.0.16",
+    "vue-tsc": "^2.0.17",
     "yup": "^1.4.0",
-    "zod": "^3.23.6"
+    "zod": "^3.23.8"
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
