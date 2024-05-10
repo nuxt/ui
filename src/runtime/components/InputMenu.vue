@@ -27,7 +27,7 @@ export interface InputMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
 
-export interface InputMenuProps<T> extends Omit<ComboboxRootProps, 'asChild' | 'dir' | 'filterFunction' | 'displayValue' | 'multiple'>, UseComponentIconsProps {
+export interface InputMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild' | 'dir' | 'filterFunction' | 'displayValue' | 'multiple'>, UseComponentIconsProps {
   id?: string
   type?: InputHTMLAttributes['type']
   /** The placeholder text when the input is empty. */
@@ -67,9 +67,8 @@ export type InputMenuEmits<T> = ComboboxRootEmits<T>
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type InputMenuSlots<T> = {
-  'leading'(): any
-  'default'(): any
-  'trailing'(): any
+  'leading'(props: { modelValue: T, open: boolean }): any
+  'trailing'(props: { modelValue: T, open: boolean }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -165,6 +164,7 @@ onMounted(() => {
 <template>
   <ComboboxRoot
     :id="id"
+    v-slot="{ modelValue, open }"
     :name="name"
     :disabled="disabled"
     v-bind="rootProps"
@@ -186,13 +186,13 @@ onMounted(() => {
       />
 
       <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
-        <slot name="leading">
+        <slot name="leading" :model-value="(modelValue as T)" :open="open">
           <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
         </slot>
       </span>
 
       <ComboboxTrigger v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
-        <slot name="trailing">
+        <slot name="trailing" :model-value="(modelValue as T)" :open="open">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
         </slot>
       </ComboboxTrigger>

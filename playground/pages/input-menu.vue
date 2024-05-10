@@ -50,7 +50,11 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
       <UInputMenu :items="items" placeholder="Required" required />
       <UInputMenu :items="items" loading placeholder="Search..." />
       <UInputMenu :items="items" loading leading-icon="i-heroicons-magnifying-glass" placeholder="Search..." />
-      <UInputMenu :items="statuses" placeholder="Search status..." icon="i-heroicons-magnifying-glass" trailing-icon="i-heroicons-chevron-up-down-20-solid" />
+      <UInputMenu :items="statuses" placeholder="Search status..." icon="i-heroicons-magnifying-glass" trailing-icon="i-heroicons-chevron-up-down-20-solid">
+        <template #leading="{ modelValue }">
+          <UIcon v-if="modelValue" :name="modelValue.icon" class="size-5" />
+        </template>
+      </UInputMenu>
       <UInputMenu
         v-model:search-term="searchTerm"
         :items="users || []"
@@ -59,7 +63,11 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
         icon="i-heroicons-user"
         placeholder="Search users..."
         @update:open="searchTerm = ''"
-      />
+      >
+        <template #leading="{ modelValue }">
+          <UAvatar v-if="modelValue?.avatar" size="2xs" v-bind="modelValue.avatar" />
+        </template>
+      </UInputMenu>
     </div>
     <div class="flex items-center gap-4">
       <UInputMenu
