@@ -1,9 +1,10 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { RadioGroupRootProps, RadioGroupRootEmits } from 'radix-vue'
+import type { RadioGroupRootProps, RadioGroupRootEmits, RadioGroupItemProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/radio-group'
+import type { AcceptableValue } from '#ui/types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
 
@@ -11,9 +12,8 @@ const radioGroup = tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup || {}) }
 
 type RadioGroupVariants = VariantProps<typeof radioGroup>
 
-export type RadioGroupItem = {
-  label: string
-  value: string
+export interface RadioGroupItem extends Pick<RadioGroupItemProps, 'disabled' | 'value'> {
+  label?: string
   description?: string
 }
 
@@ -37,7 +37,7 @@ export interface RadioGroupSlots<T> {
 }
 </script>
 
-<script setup lang="ts" generic="T extends RadioGroupItem | string">
+<script setup lang="ts" generic="T extends RadioGroupItem | AcceptableValue">
 import { computed } from 'vue'
 import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'

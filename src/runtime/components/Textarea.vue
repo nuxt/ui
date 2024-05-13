@@ -13,6 +13,7 @@ type TextareaVariants = VariantProps<typeof textarea>
 export interface TextareaProps {
   id?: string
   name?: string
+  /** The placeholder text when the textarea is empty. */
   placeholder?: string
   color?: TextareaVariants['color']
   variant?: TextareaVariants['variant']

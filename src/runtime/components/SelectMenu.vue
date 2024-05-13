@@ -1,19 +1,18 @@
 <script lang="ts">
-import type { InputHTMLAttributes } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxItemProps, ComboboxArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
-import theme from '#build/ui/input-menu'
+import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '#ui/composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '#ui/types'
 import type { AcceptableValue, ArrayOrWrapped } from '#ui/types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
+const appConfig = _appConfig as AppConfig & { ui: { selectMenu: Partial<typeof theme> } }
 
-const inputMenu = tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu || {}) })
+const selectMenu = tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu || {}) })
 
-export interface InputMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
+export interface SelectMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -25,19 +24,18 @@ export interface InputMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
   type?: 'label' | 'separator' | 'item'
 }
 
-type InputMenuVariants = VariantProps<typeof inputMenu>
+type SelectMenuVariants = VariantProps<typeof selectMenu>
 
-export interface InputMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild' | 'dir' | 'filterFunction' | 'displayValue' | 'multiple'>, UseComponentIconsProps {
+export interface SelectMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild' | 'dir' | 'filterFunction' | 'displayValue' | 'multiple'>, UseComponentIconsProps {
   id?: string
-  type?: InputHTMLAttributes['type']
-  /** The placeholder text when the input is empty. */
+  /** The placeholder text when the select is empty. */
   placeholder?: string
-  color?: InputMenuVariants['color']
-  variant?: InputMenuVariants['variant']
-  size?: InputMenuVariants['size']
+  /** The placeholder text when the search input is empty. */
+  searchPlaceholder?: string
+  color?: SelectMenuVariants['color']
+  variant?: SelectMenuVariants['variant']
+  size?: SelectMenuVariants['size']
   required?: boolean
-  autofocus?: boolean
-  autofocusDelay?: number
   /**
    * The icon displayed to open the menu.
    * @defaultValue `appConfig.ui.icons.chevronDown`
@@ -59,15 +57,16 @@ export interface InputMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild' 
   filter?: boolean | string[]
   items?: T[] | T[][]
   class?: any
-  ui?: Partial<typeof inputMenu.slots>
+  ui?: Partial<typeof selectMenu.slots>
 }
 
-export type InputMenuEmits<T> = ComboboxRootEmits<T>
+export type SelectMenuEmits<T> = ComboboxRootEmits<T>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export type InputMenuSlots<T> = {
+export type SelectMenuSlots<T> = {
   'leading'(props: { modelValue: T, open: boolean }): any
+  'default'(props: { modelValue: T, open: boolean }): any
   'trailing'(props: { modelValue: T, open: boolean }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
@@ -77,8 +76,8 @@ export type InputMenuSlots<T> = {
 }
 </script>
 
-<script setup lang="ts" generic="T extends InputMenuItem | AcceptableValue">
-import { computed, ref, toRef, onMounted } from 'vue'
+<script setup lang="ts" generic="T extends SelectMenuItem | AcceptableValue">
+import { computed, toRef } from 'vue'
 import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
@@ -86,16 +85,14 @@ import { useAppConfig, useFormField, useButtonGroup, useComponentIcons } from '#
 import { UIcon, UChip, UAvatar } from '#components'
 import { get } from '#ui/utils'
 
-defineOptions({ inheritAttrs: false })
-
-const props = withDefaults(defineProps<InputMenuProps<T>>(), {
-  type: 'text',
-  autofocusDelay: 0,
+const props = withDefaults(defineProps<SelectMenuProps<T>>(), {
   portal: true,
+  autofocusDelay: 0,
+  searchPlaceholder: 'Search...',
   filter: () => ['label']
 })
-const emits = defineEmits<InputMenuEmits<T>>()
-const slots = defineSlots<InputMenuSlots<T>>()
+const emits = defineEmits<SelectMenuEmits<T>>()
+const slots = defineSlots<SelectMenuSlots<T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -108,7 +105,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 
 const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
-const ui = computed(() => tv({ extend: inputMenu, slots: props.ui })({
+const ui = computed(() => tv({ extend: selectMenu, slots: props.ui })({
   color: color.value,
   variant: props.variant,
   size: inputSize?.value,
@@ -146,21 +143,7 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
   }) as ArrayOrWrapped<T>
 }
 
-const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as InputMenuItem[][] : [])
-
-const inputRef = ref<InstanceType<typeof ComboboxInput> | null>(null)
-
-function autoFocus() {
-  if (props.autofocus) {
-    inputRef.value?.$el?.focus()
-  }
-}
-
-onMounted(() => {
-  setTimeout(() => {
-    autoFocus()
-  }, props.autofocusDelay)
-})
+const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as SelectMenuItem[][] : [])
 </script>
 
 <template>
@@ -169,35 +152,35 @@ onMounted(() => {
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
     v-model:search-term="searchTerm"
+    as-child
     :name="name"
     :disabled="disabled"
     :display-value="displayValue"
     :filter-function="filterFunction"
-    :class="ui.root({ class: props.class })"
     @update:model-value="emitFormChange()"
-    @keydown.enter="$event.preventDefault()"
   >
     <ComboboxAnchor as-child>
-      <ComboboxInput
-        ref="inputRef"
-        v-bind="$attrs"
-        :type="type"
-        :placeholder="placeholder"
-        :required="required"
-        :class="ui.base()"
-        @blur="emitFormBlur()"
-      />
+      <ComboboxTrigger :class="ui.base({ class: props.class })" tabindex="0">
+        <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
+          <slot name="leading" :model-value="(modelValue as T)" :open="open">
+            <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
+          </slot>
+        </span>
 
-      <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
-        <slot name="leading" :model-value="(modelValue as T)" :open="open">
-          <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
+        <slot :model-value="(modelValue as T)" :open="open">
+          <span v-if="displayValue(modelValue)" :class="ui.value()">
+            {{ displayValue(modelValue) }}
+          </span>
+          <span v-else :class="ui.placeholder()">
+            {{ placeholder ?? '&nbsp;' }}
+          </span>
         </slot>
-      </span>
 
-      <ComboboxTrigger v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
-        <slot name="trailing" :model-value="(modelValue as T)" :open="open">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
-        </slot>
+        <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
+          <slot name="trailing" :model-value="(modelValue as T)" :open="open">
+            <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
+          </slot>
+        </span>
       </ComboboxTrigger>
     </ComboboxAnchor>
 
@@ -208,6 +191,8 @@ onMounted(() => {
             {{ searchTerm ? `No results for ${searchTerm}` : 'No results' }}
           </slot>
         </ComboboxEmpty>
+
+        <ComboboxInput :placeholder="searchPlaceholder" :class="ui.input()" autofocus autocomplete="off" @blur="emitFormBlur()" />
 
         <ComboboxViewport :class="ui.viewport()">
           <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group()">

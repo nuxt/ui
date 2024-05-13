@@ -135,12 +135,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
                 {{ item.label }}
               </SelectLabel>
               <SelectSeparator v-else-if="item?.type === 'separator'" :class="ui.separator()" />
-              <SelectItem
-                v-else
-                :class="ui.item()"
-                :disabled="item.disabled"
-                :value="typeof item === 'object' ? item.value : item"
-              >
+              <SelectItem v-else :class="ui.item()" :disabled="item.disabled" :value="typeof item === 'object' ? item.value : item">
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
                     <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.itemLeadingAvatar()" />

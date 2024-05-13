@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import theme from '#build/ui/select'
+import type { User } from '~/types'
 
 const sizes = Object.keys(theme.variants.size)
-
-import type { User } from '~/types'
 
 const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']

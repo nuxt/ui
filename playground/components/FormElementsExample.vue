@@ -54,7 +54,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
       <UInput v-model="state.input" placeholder="john@lennon.com" />
     </UFormField>
 
-    <UFormField label="Text area" name="textarea">
+    <UFormField label="Textarea" name="textarea">
       <UTextarea v-model="state.textarea" />
     </UFormField>
 

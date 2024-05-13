@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { refDebounced } from '@vueuse/core'
+import theme from '#build/ui/select-menu'
 import type { User } from '~/types'
-import theme from '#build/ui/input-menu'
 
 const sizes = Object.keys(theme.variants.size)
 
@@ -12,18 +12,23 @@ const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Veget
 
 const statuses = [{
   label: 'Backlog',
+  value: 'backlog',
   icon: 'i-heroicons-question-mark-circle'
 }, {
   label: 'Todo',
+  value: 'todo',
   icon: 'i-heroicons-plus-circle'
 }, {
   label: 'In Progress',
+  value: 'in_progress',
   icon: 'i-heroicons-arrow-up-circle'
 }, {
   label: 'Done',
+  value: 'done',
   icon: 'i-heroicons-check-circle'
 }, {
   label: 'Canceled',
+  value: 'canceled',
   icon: 'i-heroicons-x-circle'
 }]
 
@@ -33,7 +38,7 @@ const searchTermDebounced = refDebounced(searchTerm, 200)
 const { data: users, pending } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   params: { q: searchTermDebounced },
   transform: (data: User[]) => {
-    return data?.map(user => ({ id: user.id, label: user.name, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
+    return data?.map(user => ({ label: user.name, value: user.id, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
   },
   lazy: true
 })
@@ -42,20 +47,20 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 w-60">
-      <UInputMenu :items="items" autofocus />
-      <UInputMenu :items="items" placeholder="Search..." color="gray" />
-      <UInputMenu :items="items" placeholder="Search..." color="primary" />
-      <UInputMenu :items="items" placeholder="Search..." variant="none" />
-      <UInputMenu :items="items" placeholder="Disabled" disabled />
-      <UInputMenu :items="items" placeholder="Required" required />
-      <UInputMenu :items="items" loading placeholder="Search..." />
-      <UInputMenu :items="items" loading leading-icon="i-heroicons-magnifying-glass" placeholder="Search..." />
-      <UInputMenu :items="statuses" placeholder="Search status..." icon="i-heroicons-magnifying-glass" trailing-icon="i-heroicons-chevron-up-down-20-solid">
+      <USelectMenu :items="items" />
+      <USelectMenu :items="items" placeholder="Search..." color="gray" />
+      <USelectMenu :items="items" placeholder="Search..." color="primary" />
+      <USelectMenu :items="items" placeholder="Search..." variant="none" />
+      <USelectMenu :items="items" placeholder="Disabled" disabled />
+      <USelectMenu :items="items" placeholder="Required" required />
+      <USelectMenu :items="items" loading placeholder="Search..." />
+      <USelectMenu :items="items" loading leading-icon="i-heroicons-magnifying-glass" placeholder="Search..." />
+      <USelectMenu :items="statuses" placeholder="Search status..." icon="i-heroicons-magnifying-glass" trailing-icon="i-heroicons-chevron-up-down-20-solid">
         <template #leading="{ modelValue }">
           <UIcon v-if="modelValue" :name="modelValue.icon" class="size-5" />
         </template>
-      </UInputMenu>
-      <UInputMenu
+      </USelectMenu>
+      <USelectMenu
         v-model:search-term="searchTerm"
         :items="users || []"
         :loading="pending"
@@ -66,10 +71,10 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
         <template #leading="{ modelValue }">
           <UAvatar v-if="modelValue?.avatar" size="2xs" v-bind="modelValue.avatar" />
         </template>
-      </UInputMenu>
+      </USelectMenu>
     </div>
     <div class="flex items-center gap-4">
-      <UInputMenu
+      <USelectMenu
         v-for="size in sizes"
         :key="size"
         :items="items"
@@ -79,7 +84,7 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
       />
     </div>
     <div class="flex items-center gap-4">
-      <UInputMenu
+      <USelectMenu
         v-for="size in sizes"
         :key="size"
         :items="items"
@@ -90,7 +95,7 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
       />
     </div>
     <div class="flex items-center gap-4">
-      <UInputMenu
+      <USelectMenu
         v-for="size in sizes"
         :key="size"
         :items="items"

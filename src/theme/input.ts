@@ -52,7 +52,7 @@ export default (config: { colors: string[] }) => {
       },
       variant: {
         outline: '',
-        none: 'bg-transparent focus:ring-0 focus:shadow-none'
+        none: 'bg-transparent'
       },
       color: {
         ...Object.fromEntries(config.colors.map((color: string) => [color, ''])),
@@ -75,15 +75,15 @@ export default (config: { colors: string[] }) => {
     compoundVariants: [...config.colors.map((color: string) => ({
       color,
       variant: 'outline',
-      class: `shadow-sm bg-transparent text-gray-900 dark:text-white ring ring-inset ring-${color}-500 dark:ring-${color}-400 focus:ring-2 focus:ring-${color}-500 dark:focus:ring-${color}-400`
+      class: `shadow-sm bg-transparent text-gray-900 dark:text-white ring ring-inset ring-${color}-500 dark:ring-${color}-400 focus-visible:ring-2 focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
     })), {
       color: 'white',
       variant: 'outline',
-      class: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
+      class: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
     }, {
       color: 'gray',
       variant: 'outline',
-      class: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400'
+      class: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
     }, {
       leading: true,
       size: 'xs',

@@ -38,6 +38,7 @@ const components = [
   'popover',
   'radio-group',
   'select',
+  'select-menu',
   'separator',
   'shortcuts',
   'skeleton',
