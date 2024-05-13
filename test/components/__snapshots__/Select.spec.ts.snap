@@ -1287,7 +1287,7 @@ exports[`Select > renders with name correctly 1`] = `
 
 exports[`Select > renders with placeholder correctly 1`] = `
 "<button role="combobox" type="button" aria-controls="radix-vue-select-content-36" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 pr-9">
-  <!--v-if--><span style="pointer-events: none;" class="truncate group-data-placeholder:text-current/50">Enter your username</span><span class="absolute inset-y-0 end-0 flex items-center pr-2.5"><span class="iconify i-heroicons:chevron-down-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+  <!--v-if--><span style="pointer-events: none;" class="truncate group-data-placeholder:text-current/50">Search...</span><span class="absolute inset-y-0 end-0 flex items-center pr-2.5"><span class="iconify i-heroicons:chevron-down-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
 </button>
 <!--teleport start-->
 

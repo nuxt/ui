@@ -26,7 +26,7 @@ export interface SelectMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
 
 type SelectMenuVariants = VariantProps<typeof selectMenu>
 
-export interface SelectMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild' | 'dir' | 'filterFunction' | 'displayValue' | 'multiple'>, UseComponentIconsProps {
+export interface SelectMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild' | 'dir' | 'filterFunction' | 'displayValue'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -97,7 +97,7 @@ const slots = defineSlots<SelectMenuSlots<T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const { emitFormBlur, emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -115,7 +115,11 @@ const ui = computed(() => tv({ extend: selectMenu, slots: props.ui })({
   buttonGroup: orientation.value
 }))
 
-function displayValue(val: AcceptableValue) {
+function displayValue(val: T, multiple?: boolean): string {
+  if (multiple && Array.isArray(val)) {
+    return val.map(v => displayValue(v)).join(', ')
+  }
+
   if (typeof val === 'object') {
     return val.label
   }
@@ -155,7 +159,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
     as-child
     :name="name"
     :disabled="disabled"
-    :display-value="displayValue"
+    :display-value="() => searchTerm"
     :filter-function="filterFunction"
     @update:model-value="emitFormChange()"
   >
@@ -168,8 +172,8 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
         </span>
 
         <slot :model-value="(modelValue as T)" :open="open">
-          <span v-if="displayValue(modelValue)" :class="ui.value()">
-            {{ displayValue(modelValue) }}
+          <span v-if="multiple ? !!modelValue?.length : !!modelValue" :class="ui.value()">
+            {{ displayValue(modelValue as T, multiple) }}
           </span>
           <span v-else :class="ui.placeholder()">
             {{ placeholder ?? '&nbsp;' }}

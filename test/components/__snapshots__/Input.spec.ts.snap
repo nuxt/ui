@@ -107,7 +107,7 @@ exports[`Input > renders with name correctly 1`] = `
 `;
 
 exports[`Input > renders with placeholder correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" placeholder="Enter your username" class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
+"<div class="relative inline-flex items-center"><input type="text" placeholder="Search..." class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
   <!--v-if-->
   <!--v-if-->
 </div>"

@@ -38,7 +38,7 @@ const searchTermDebounced = refDebounced(searchTerm, 200)
 const { data: users, pending } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   params: { q: searchTermDebounced },
   transform: (data: User[]) => {
-    return data?.map(user => ({ label: user.name, value: user.id, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
+    return data?.map(user => ({ id: user.id, label: user.name, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
   },
   lazy: true
 })
@@ -53,6 +53,7 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
       <USelectMenu :items="items" placeholder="Search..." variant="none" />
       <USelectMenu :items="items" placeholder="Disabled" disabled />
       <USelectMenu :items="items" placeholder="Required" required />
+      <USelectMenu :items="items" placeholder="Multiple" multiple />
       <USelectMenu :items="items" loading placeholder="Search..." />
       <USelectMenu :items="items" loading leading-icon="i-heroicons-magnifying-glass" placeholder="Search..." />
       <USelectMenu :items="statuses" placeholder="Search status..." icon="i-heroicons-magnifying-glass" trailing-icon="i-heroicons-chevron-up-down-20-solid">
@@ -67,6 +68,7 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
         :filter="false"
         icon="i-heroicons-user"
         placeholder="Search users..."
+        @update:open="searchTerm = ''"
       >
         <template #leading="{ modelValue }">
           <UAvatar v-if="modelValue?.avatar" size="2xs" v-bind="modelValue.avatar" />
