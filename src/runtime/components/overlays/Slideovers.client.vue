@@ -1,7 +1,4 @@
 <template>
-  <pre class="fixed left-0 top-0">
-    props: {{ slideoverInstances }}
-  </pre>
   <component
     :is="instance.component"
     v-for="instance in slideoverInstances"
