@@ -7,7 +7,7 @@ export function useAvatarGroup(props: { size: AvatarGroupProps['size'] }) {
   const injectedSize = inject(avatarGroupInjectionKey, undefined)
 
   const size = computed(() => props.size ?? injectedSize?.value.size)
-  provide('avatar-size', size)
+  provide(avatarGroupInjectionKey, computed(() => ({ size: size.value })))
 
   return {
     size
