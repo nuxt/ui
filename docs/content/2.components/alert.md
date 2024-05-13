@@ -175,6 +175,12 @@ Use the `#avatar` slot to customize the displayable avatar.
 
 :component-example{component="alert-example-avatar"}
 
+### `actions` :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+
+Use the `#actions` slot to add custom user interaction elements.
+
+:component-example{component="alert-example-actions"}
+
 ## Props
 
 :component-props
