@@ -1,10 +1,14 @@
 <template>
+  <pre class="fixed left-0 top-0">
+    props: {{ slideoverInstances }}
+  </pre>
   <component
     :is="instance.component"
     v-for="instance in slideoverInstances"
     :key="instance.id"
     v-bind="instance.props"
     :model-value="instance.isOpen"
+    @update:model-value="close(instance.id)"
     @after-leave="remove(instance.id)"
   />
 </template>
@@ -15,5 +19,5 @@ import { useSlideover, slidOverInjectionKey } from '../../composables/useSlideov
 
 const slideoverInstances = inject(slidOverInjectionKey)
 
-const { remove } = useSlideover()
+const { remove, close } = useSlideover()
 </script>
