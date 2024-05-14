@@ -16,7 +16,7 @@ export const useCarouselScroll = (el: Ref<HTMLElement>) => {
   function onMouseUp () {
     el.value.style.removeProperty('scroll-behavior')
     el.value.style.removeProperty('scroll-snap-type')
-    el.value.style.removeProperty("pointer-events")
+    el.value.style.removeProperty('pointer-events')
 
     window.removeEventListener('mousemove', onMouseMove)
     window.removeEventListener('mouseup', onMouseUp)
@@ -25,7 +25,7 @@ export const useCarouselScroll = (el: Ref<HTMLElement>) => {
   function onMouseMove (e) {
     e.preventDefault()
 
-    el.value.style.pointerEvents = "none"
+    el.value.style.pointerEvents = 'none'
 
     const delta = e.pageX - x.value
 
