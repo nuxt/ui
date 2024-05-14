@@ -27,7 +27,7 @@ export interface InputMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
 
-export interface InputMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild' | 'dir' | 'filterFunction' | 'displayValue' | 'multiple'>, UseComponentIconsProps {
+export interface InputMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild' | 'dir' | 'filterFunction' | 'displayValue'>, UseComponentIconsProps {
   id?: string
   type?: InputHTMLAttributes['type']
   /** The placeholder text when the input is empty. */
@@ -48,6 +48,12 @@ export interface InputMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild' 
    * @defaultValue `appConfig.ui.icons.check`
    */
   selectedIcon?: string
+  /**
+   * The icon displayed to delete a tag.
+   * Works only when `multiple` is `true`.
+   * @defaultValue `appConfig.ui.icons.close`
+   */
+  deleteIcon?: string
   content?: Omit<ComboboxContentProps, 'asChild' | 'forceMount'>
   arrow?: boolean | Omit<ComboboxArrowProps, 'asChild'>
   portal?: boolean
@@ -74,12 +80,14 @@ export type InputMenuSlots<T> = {
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
+  'tags-item-text': SlotProps<T>
+  'tags-item-delete': SlotProps<T>
 }
 </script>
 
 <script setup lang="ts" generic="T extends InputMenuItem | AcceptableValue">
 import { computed, ref, toRef, onMounted } from 'vue'
-import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
+import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig, useFormField, useButtonGroup, useComponentIcons } from '#imports'
@@ -100,7 +108,7 @@ const slots = defineSlots<InputMenuSlots<T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const { emitFormBlur, emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -115,6 +123,7 @@ const ui = computed(() => tv({ extend: inputMenu, slots: props.ui })({
   loading: props.loading,
   leading: isLeading.value || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
+  multiple: props.multiple,
   buttonGroup: orientation.value
 }))
 
@@ -174,11 +183,47 @@ onMounted(() => {
     :display-value="displayValue"
     :filter-function="filterFunction"
     :class="ui.root({ class: props.class })"
+    :as-child="!!multiple"
     @update:model-value="emitFormChange()"
     @keydown.enter="$event.preventDefault()"
   >
-    <ComboboxAnchor as-child>
+    <ComboboxAnchor :as-child="!multiple" :class="ui.base()">
+      <TagsInputRoot
+        v-if="multiple"
+        v-slot="{ modelValue: tags }: { modelValue: AcceptableValue[] }"
+        :model-value="(modelValue as string[])"
+        :disabled="disabled"
+        delimiter=""
+        as-child
+      >
+        <TagsInputItem v-for="(item, index) in tags" :key="index" :value="(item as string)" :class="ui.tagsItem()">
+          <TagsInputItemText :class="ui.tagsItemText()">
+            <slot name="tags-item-text" :item="(item as T)" :index="index">
+              {{ typeof item === 'object' ? item.label : item }}
+            </slot>
+          </TagsInputItemText>
+
+          <TagsInputItemDelete :class="ui.tagsItemDelete()" :disabled="disabled">
+            <slot name="tags-item-delete" :item="(item as T)" :index="index">
+              <UIcon :name="deleteIcon || appConfig.ui.icons.close" :class="ui.tagsItemDeleteIcon()" />
+            </slot>
+          </TagsInputItemDelete>
+        </TagsInputItem>
+
+        <ComboboxInput as-child>
+          <TagsInputInput
+            ref="inputRef"
+            v-bind="$attrs"
+            :placeholder="placeholder"
+            :required="required"
+            :class="ui.tagsInput()"
+            @keydown.enter.prevent
+          />
+        </ComboboxInput>
+      </TagsInputRoot>
+
       <ComboboxInput
+        v-else
         ref="inputRef"
         v-bind="$attrs"
         :type="type"

@@ -9,6 +9,7 @@ const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
 const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Vegetables', type: 'label' }, ...vegetables]]
+const selectedItems = ref([fruits[0], vegetables[0]])
 
 const statuses = [{
   label: 'Backlog',
@@ -48,11 +49,11 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
       <UInputMenu :items="items" placeholder="Search..." variant="none" />
       <UInputMenu :items="items" placeholder="Disabled" disabled />
       <UInputMenu :items="items" placeholder="Required" required />
+      <UInputMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple />
       <UInputMenu :items="items" loading placeholder="Search..." />
-      <UInputMenu :items="items" loading leading-icon="i-heroicons-magnifying-glass" placeholder="Search..." />
       <UInputMenu :items="statuses" placeholder="Search status..." icon="i-heroicons-magnifying-glass" trailing-icon="i-heroicons-chevron-up-down-20-solid">
         <template #leading="{ modelValue }">
-          <UIcon v-if="modelValue" :name="modelValue.icon" class="size-5" />
+          <UIcon v-if="modelValue?.icon" :name="modelValue.icon" class="size-5" />
         </template>
       </UInputMenu>
       <UInputMenu
@@ -96,6 +97,19 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
         :items="items"
         icon="i-heroicons-magnifying-glass"
         trailing
+        placeholder="Search..."
+        :size="(size as any)"
+        class="w-60"
+      />
+    </div>
+    <div class="flex items-center gap-4">
+      <UInputMenu
+        v-for="size in sizes"
+        :key="size"
+        :items="items"
+        :model-value="[fruits[0]]"
+        multiple
+        icon="i-heroicons-magnifying-glass"
         placeholder="Search..."
         :size="(size as any)"
         class="w-60"

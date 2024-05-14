@@ -9,6 +9,7 @@ const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
 const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Vegetables', type: 'label' }, ...vegetables]]
+const selectedItems = ref([fruits[0], vegetables[0]])
 
 const statuses = [{
   label: 'Backlog',
@@ -53,9 +54,8 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
       <USelectMenu :items="items" placeholder="Search..." variant="none" />
       <USelectMenu :items="items" placeholder="Disabled" disabled />
       <USelectMenu :items="items" placeholder="Required" required />
-      <USelectMenu :items="items" placeholder="Multiple" multiple />
+      <USelectMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple />
       <USelectMenu :items="items" loading placeholder="Search..." />
-      <USelectMenu :items="items" loading leading-icon="i-heroicons-magnifying-glass" placeholder="Search..." />
       <USelectMenu :items="statuses" placeholder="Search status..." icon="i-heroicons-magnifying-glass" trailing-icon="i-heroicons-chevron-up-down-20-solid">
         <template #leading="{ modelValue }">
           <UIcon v-if="modelValue" :name="modelValue.icon" class="size-5" />
