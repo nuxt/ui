@@ -27,7 +27,7 @@
         </div>
       </div>
       <div v-if="closeButton || (!description && !$slots.description && actions.length)" :class="twMerge(ui.actions, 'mt-0')">
-        <template v-if="!description && !$slots.description && actions.length">
+        <template v-if="!description && !$slots.description && (actions.length || $slots.actions)">
           <slot name="actions">
             <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
           </slot>
