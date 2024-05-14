@@ -90,7 +90,9 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Modules
 
-    await installModule('nuxt-icon')
+    await installModule('nuxt-icon', {
+      componentName: 'UIcon'
+    })
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installTailwind(options, nuxt, resolve)
 

@@ -69,8 +69,7 @@
 import { ref, computed, toRef, defineComponent, watch } from 'vue'
 import type { PropType } from 'vue'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel, provideUseId } from '@headlessui/vue'
-import UIcon from '../elements/Icon.vue'
-import UButton from '../elements/Button.vue'
+import { UIcon, UButton } from '#components'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, omit } from '../../utils'
 import type { AccordionItem, Strategy } from '../../types'
@@ -133,7 +132,7 @@ export default defineComponent({
     const uiButton = computed<typeof configButton>(() => configButton)
 
     const buttonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
-    
+
     const openedStates = computed(() => buttonRefs.value.map(({ open }) => open))
     watch(openedStates, (newValue, oldValue) => {
       for (const index in newValue) {
