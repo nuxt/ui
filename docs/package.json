@@ -5,6 +5,7 @@
   "dependencies": {
     "@iconify-json/heroicons": "^1.1.21",
     "@iconify-json/simple-icons": "^1.1.101",
+    "@iconify-json/vscode-icons": "^1.1.34",
     "@nuxt/content": "^2.12.1",
     "@nuxt/eslint-config": "^0.3.10",
     "@nuxt/fonts": "^0.7.0",

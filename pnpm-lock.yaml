@@ -145,6 +145,9 @@ importers:
       '@iconify-json/simple-icons':
         specifier: ^1.1.101
         version: 1.1.101
+      '@iconify-json/vscode-icons':
+        specifier: ^1.1.34
+        version: 1.1.34
       '@nuxt/content':
         specifier: ^2.12.1
         version: 2.12.1(nuxt@3.11.2(@parcel/watcher@2.4.1)(@types/node@20.11.19)(@unocss/reset@0.58.5)(encoding@0.1.13)(eslint@8.57.0)(floating-vue@5.2.2(@nuxt/kit@3.11.2(rollup@4.14.0))(vue@3.4.25(typescript@5.4.5)))(fuse.js@6.6.2)(ioredis@5.3.2)(optionator@0.9.3)(rollup@4.14.0)(terser@5.27.2)(typescript@5.4.5)(unocss@0.58.5(@unocss/webpack@0.58.5(rollup@4.14.0)(webpack@5.90.3))(postcss@8.4.38)(rollup@4.14.0)(vite@5.2.8(@types/node@20.11.19)(terser@5.27.2)))(vite@5.2.8(@types/node@20.11.19)(terser@5.27.2))(vue-tsc@2.0.16(typescript@5.4.5)))(rollup@4.14.0)(vue@3.4.25(typescript@5.4.5))
@@ -834,6 +837,9 @@ packages:
 
   '@iconify-json/tabler@1.1.105':
     resolution: {integrity: sha512-USJbNfa0fAHBLilxTKn70wkvFnopmfcomfpqD0ul/69uyZnonztHhyrbM8MI9Ua4eYXaPymoB7tuZ+Ionx6xfg==}
+
+  '@iconify-json/vscode-icons@1.1.34':
+    resolution: {integrity: sha512-aBNizvBp+I1r1Fs5YUhFqLPmw8nY8PBe0N8hov9Ri1KdEqILILOMT5k+3Vvk0koEMLENyLbOTYtOVf0/KU4HiA==}
 
   '@iconify/collections@1.0.422':
     resolution: {integrity: sha512-VTubzzAfXIHmdsfdHtnnP8PxboK2o4k56HQxas+j0WHxNUWsdwYI7IUIBfmwVEf4JF4wR72vsIBDPxpF5Y0xSQ==}
@@ -8075,6 +8081,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/tabler@1.1.105':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/vscode-icons@1.1.34':
     dependencies:
       '@iconify/types': 2.0.0
 
