@@ -20,7 +20,7 @@
           </slot>
         </p>
 
-        <div v-if="(description || $slots.description || $slots.actions) && (actions.length || $slots.actions)" :class="ui.actions">
+        <div v-if="(description || $slots.description) && (actions.length || $slots.actions)" :class="ui.actions">
           <slot name="actions">
             <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
           </slot>
