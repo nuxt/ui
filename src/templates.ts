@@ -152,6 +152,106 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
     from { opacity: 1; transform: translateX(0); }
     to { opacity: 0; transform: translateX(-200px); }
   }
+  @keyframes carousel {
+    0%,
+    100% {
+      width: 50%
+    }
+    0% {
+      transform: translateX(-100%)
+    }
+    100% {
+      transform: translateX(200%)
+    }
+  }
+  @keyframes carousel-vertical {
+    0%,
+    100% {
+      height: 50%
+    }
+    0% {
+      transform: translateY(-100%)
+    }
+    100% {
+      transform: translateY(200%)
+    }
+  }
+  
+  @keyframes carousel-inverse {
+    0%,
+    100% {
+      width: 50%
+    }
+    0% {
+      transform: translateX(200%)
+    }
+    100% {
+      transform: translateX(-100%)
+    }
+  }
+  @keyframes carousel-inverse-vertical {
+    0%
+    100% {
+      height: 50%
+    }
+    0% {
+      transform: translateY(200%)
+    }
+    100% {
+      transform: translateY(-100%)
+    }
+  }
+  
+  @keyframes swing {
+    0%,
+    100% {
+      width: 50%
+    }
+    0%,
+    100% {
+      transform: translateX(-25%)
+    }
+    50% {
+      transform: translateX(125%)
+    }
+  }
+  @keyframes swing-vertical {
+    0%,
+    100% {
+      height: 50%
+    }
+    0%,
+    100% {
+      transform: translateY(-25%)
+    }
+    50% {
+      transform: translateY(125%)
+    }
+  }
+  
+  @keyframes elastic {
+    /* Firefox doesn't do "margin: 0 auto", we have to play with margin-left */
+    0%,
+    100% {
+      width: 50%;
+      margin-left: 25%;
+    }
+    50% {
+      width: 90%;
+      margin-left: 5%;
+    }
+  }
+  @keyframes elastic-vertical {
+    0%,
+    100% {
+      height: 50%;
+      margin-top: 25%;
+    }
+    50% {
+      height: 90%;
+      margin-top: 5%;
+    }
+  }
 }
 
 @theme {
