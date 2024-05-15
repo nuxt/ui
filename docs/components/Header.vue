@@ -25,7 +25,7 @@
       <UColorModeButton />
 
       <UButton
-        to="https://github.com/nuxt/ui"
+        :to="`https://github.com/nuxt/${$route.path.startsWith('/pro') ? 'ui-pro' : 'ui'}`"
         target="_blank"
         icon="i-simple-icons-github"
         aria-label="GitHub"
