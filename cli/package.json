@@ -1,5 +1,6 @@
 {
   "name": "@nuxt/ui-cli",
+  "type": "module",
   "exports": {
     ".": "./index.mjs"
   },
