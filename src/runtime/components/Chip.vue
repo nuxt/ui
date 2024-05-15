@@ -22,7 +22,7 @@ export interface ChipProps extends Omit<PrimitiveProps, 'asChild'> {
   /** When `true`, render the chip relatively to the parent. */
   standalone?: boolean
   class?: any
-  ui?: Partial<typeof theme.slots>
+  ui?: Partial<typeof chip.slots>
 }
 
 export interface ChipSlots {
