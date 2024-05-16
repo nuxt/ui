@@ -14,7 +14,8 @@ const checked = ref(false)
       <UCheckbox label="Indeterminate" indeterminate />
       <UCheckbox label="Required" required />
       <UCheckbox label="Disabled" disabled />
-      <UCheckbox label="Custom icon" color="red" icon="i-heroicons-heart-solid" :model-value="true" />
+      <UCheckbox label="Black" color="black" :default-value="true" />
+      <UCheckbox label="Icon" color="red" icon="i-heroicons-heart-solid" :model-value="true" />
     </div>
     <div class="flex items-center gap-4 mr-[-11px]">
       <UCheckbox v-for="size in sizes" :key="size" label="Check me" :size="(size as any)" />

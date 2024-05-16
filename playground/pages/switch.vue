@@ -13,6 +13,8 @@ const checked = ref(false)
       <USwitch label="Default value" :default-value="true" />
       <USwitch label="Required" required />
       <USwitch label="Disabled" disabled />
+      <USwitch color="black" label="Black" :default-value="true" />
+      <USwitch color="red" label="Red" :default-value="true" />
     </div>
     <div class="flex items-center gap-4 ml-[-82px]">
       <USwitch v-for="size in sizes" :key="size" :size="(size as any)" label="Switch me" />

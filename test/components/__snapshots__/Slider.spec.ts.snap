@@ -6,6 +6,12 @@ exports[`Slider > renders with class correctly 1`] = `
 <!---->"
 `;
 
+exports[`Slider > renders with color black correctly 1`] = `
+"<span data-slider-impl="" dir="ltr" data-orientation="horizontal" style="--radix-slider-thumb-transform: translateX(-50%);" class="relative flex items-center select-none touch-none w-full" aria-disabled="false"><span data-orientation="horizontal" class="relative bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-full grow h-[8px]"><span data-orientation="horizontal" style="left: 0%; right: 100%;" class="absolute rounded-full bg-gray-900 dark:bg-white h-full"></span></span>
+<div class="rounded-full bg-white dark:bg-gray-900 ring-2 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 ring-gray-900 dark:ring-white focus-visible:outline-gray-900/50 dark:focus-visible:outline-white/50 size-4" role="slider" data-radix-vue-collection-item="" tabindex="0" data-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-orientation="horizontal" style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(0% + 0px);" aria-valuenow="0"></div></span>
+<!---->"
+`;
+
 exports[`Slider > renders with color green correctly 1`] = `
 "<span data-slider-impl="" dir="ltr" data-orientation="horizontal" style="--radix-slider-thumb-transform: translateX(-50%);" class="relative flex items-center select-none touch-none w-full" aria-disabled="false"><span data-orientation="horizontal" class="relative bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-full grow h-[8px]"><span data-orientation="horizontal" style="left: 0%; right: 100%;" class="absolute rounded-full bg-green-500 dark:bg-green-400 h-full"></span></span>
 <div class="rounded-full bg-white dark:bg-gray-900 ring-2 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 ring-green-500 dark:ring-green-400 focus-visible:outline-green-500/50 dark:focus-visible:outline-green-400/50 size-4" role="slider" data-radix-vue-collection-item="" tabindex="0" data-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-orientation="horizontal" style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(0% + 0px);" aria-valuenow="0"></div></span>

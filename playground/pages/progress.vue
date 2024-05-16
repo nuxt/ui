@@ -33,7 +33,8 @@ onMounted(() => {
   <div class="flex flex-col gap-8 items-center">
     <div class="flex flex-col gap-4 w-48">
       <UProgress />
-      <UProgress color="green" />
+      <UProgress color="black" />
+      <UProgress color="red" />
       <UProgress animation="carousel-inverse" />
       <UProgress animation="swing" />
       <UProgress animation="elastic" />

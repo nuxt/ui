@@ -12,10 +12,16 @@ export default (config: { colors: string[] }) => ({
     description: 'text-gray-500 dark:text-gray-400'
   },
   variants: {
-    color: Object.fromEntries(config.colors.map((color: string) => [color, {
-      base: `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`,
-      indicator: `bg-${color}-500 dark:bg-${color}-400`
-    }])),
+    color: {
+      ...Object.fromEntries(config.colors.map((color: string) => [color, {
+        base: `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`,
+        indicator: `bg-${color}-500 dark:bg-${color}-400`
+      }])),
+      black: {
+        base: 'focus-visible:outline-gray-900 dark:focus-visible:outline-white',
+        indicator: 'bg-gray-900 dark:bg-white'
+      }
+    },
     orientation: {
       horizontal: {
         fieldset: 'flex-row',

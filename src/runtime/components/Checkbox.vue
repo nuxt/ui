@@ -72,8 +72,7 @@ const ui = computed(() => tv({ extend: checkbox, slots: props.ui })({
   color: color.value,
   required: props.required,
   disabled: disabled.value,
-  checked: modelValue.value ?? props.defaultValue,
-  indeterminate: indeterminate.value
+  checked: (modelValue.value ?? props.defaultValue) || indeterminate.value
 }))
 </script>
 

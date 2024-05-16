@@ -10,10 +10,16 @@ export default (config: { colors: string[] }) => ({
     description: 'text-gray-500 dark:text-gray-400'
   },
   variants: {
-    color: Object.fromEntries(config.colors.map((color: string) => [color, {
-      base: `data-[state=checked]:bg-${color}-500 dark:data-[state=checked]:bg-${color}-400 focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`,
-      icon: `group-data-[state=checked]:text-${color}-500 dark:group-data-[state=checked]:text-${color}-400`
-    }])),
+    color: {
+      ...Object.fromEntries(config.colors.map((color: string) => [color, {
+        base: `data-[state=checked]:bg-${color}-500 dark:data-[state=checked]:bg-${color}-400 focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`,
+        icon: `group-data-[state=checked]:text-${color}-500 dark:group-data-[state=checked]:text-${color}-400`
+      }])),
+      black: {
+        base: 'data-[state=checked]:bg-gray-900 dark:data-[state=checked]:bg-white focus-visible:ring-gray-900 dark:focus-visible:ring-white',
+        icon: 'group-data-[state=checked]:text-gray-900 dark:group-data-[state=checked]:text-white'
+      }
+    },
     size: {
       xs: {
         base: 'w-7',

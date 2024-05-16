@@ -14,10 +14,16 @@ export default (config: { colors: string[] }) => ({
       'swing': '',
       'elastic': ''
     },
-    color: Object.fromEntries(config.colors.map((color: string) => [color, {
-      indicator: `bg-${color}-500 dark:bg-${color}-400`,
-      steps: `text-${color}-500 dark:text-${color}-400`
-    }])),
+    color: {
+      ...Object.fromEntries(config.colors.map((color: string) => [color, {
+        indicator: `bg-${color}-500 dark:bg-${color}-400`,
+        steps: `text-${color}-500 dark:text-${color}-400`
+      }])),
+      black: {
+        indicator: 'bg-gray-900 dark:bg-white',
+        steps: 'text-white dark:text-gray-900'
+      }
+    },
     size: {
       '2xs': {
         status: 'text-xs',

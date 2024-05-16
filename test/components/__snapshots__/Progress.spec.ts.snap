@@ -57,6 +57,16 @@ exports[`Progress > renders with class correctly 1`] = `
 </div>"
 `;
 
+exports[`Progress > renders with color black correctly 1`] = `
+"<div class="gap-2 w-full flex flex-col">
+  <!--v-if-->
+  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700 w-full h-2" style="transform: translateZ(0);">
+    <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-gray-900 dark:bg-white data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite]"></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Progress > renders with color green correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
