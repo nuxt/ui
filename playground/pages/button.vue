@@ -21,17 +21,9 @@ const variants = Object.keys(theme.variants.variant)
       <UButton loading>
         Loading
       </UButton>
-
-      <UButton loading leading-icon="i-heroicons-rocket-launch">
-        Loading
-      </UButton>
     </div>
     <div class="flex items-center gap-2">
       <UButton loading trailing>
-        Loading
-      </UButton>
-
-      <UButton loading trailing-icon="i-heroicons-paper-airplane">
         Loading
       </UButton>
     </div>

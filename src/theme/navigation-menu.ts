@@ -16,7 +16,7 @@ export default {
       horizontal: {
         root: 'w-full items-center justify-between',
         list: 'flex items-center',
-        item: 'px-2.5 py-3.5 before:inset-x-0 before:inset-y-2 hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 after:absolute after:bottom-0 after:inset-x-2.5 after:block after:h-0.5 after:mt-2 after:rounded-full'
+        item: 'px-2.5 py-3.5 before:inset-x-0 before:inset-y-2 after:absolute after:bottom-0 after:inset-x-2.5 after:block after:h-0.5 after:mt-2 after:rounded-full'
       },
       vertical: {
         root: 'flex-col',
@@ -43,14 +43,20 @@ export default {
     disabled: false,
     active: false,
     class: {
-      item: 'hover:text-gray-900 dark:hover:text-white',
-      itemLeadingIcon: 'group-hover:text-gray-700 dark:group-hover:text-gray-200'
+      item: 'hover:text-gray-900 dark:hover:text-white transition-colors',
+      itemLeadingIcon: 'group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors'
     }
   }, {
     orientation: 'horizontal',
     active: true,
     class: {
       item: 'after:bg-primary-500 dark:after:bg-primary-400'
+    }
+  }, {
+    orientation: 'horizontal',
+    disabled: false,
+    class: {
+      item: 'hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors'
     }
   }, {
     orientation: 'vertical',
@@ -61,8 +67,9 @@ export default {
   }, {
     orientation: 'vertical',
     active: false,
+    disabled: false,
     class: {
-      item: 'hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50'
+      item: 'hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors'
     }
   }]
 }
