@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="(type === 'hidden') ? 'hidden' : ui.wrapper">
     <input
       :id="inputId"
       ref="input"
