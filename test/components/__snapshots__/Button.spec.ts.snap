@@ -222,7 +222,7 @@ exports[`Button > renders with variant solid correctly 1`] = `
 `;
 
 exports[`Button > renders with variant subtle correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm gap-1.5 text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25 bg-primary-500/10 hover:bg-primary-100 disabled:bg-primary-50 dark:bg-primary-400/10 dark:hover:bg-primary-950 dark:disabled:bg-primary-400/10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm gap-1.5 text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25 bg-primary-500/10 hover:bg-primary-500/20 disabled:bg-primary-500/10 dark:bg-primary-400/10 dark:hover:bg-primary-400/20 dark:disabled:bg-primary-400/10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
   <!--v-if--><span class="">Button</span>
   <!--v-if-->
 </button>"
