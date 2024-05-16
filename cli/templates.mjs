@@ -46,7 +46,7 @@ export interface ${upperName}Props extends Omit<PrimitiveProps, 'asChild'> {
 }
 
 export interface ${upperName}Slots {
-  default: any
+  default(): any
 }
 </script>
 
