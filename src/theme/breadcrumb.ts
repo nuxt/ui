@@ -33,7 +33,7 @@ export default {
     active: false,
     to: true,
     class: {
-      item: 'hover:text-gray-900 dark:hover:text-white transition-colors'
+      item: 'hover:text-gray-700 dark:hover:text-gray-200 transition-colors'
     }
   }]
 }
