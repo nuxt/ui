@@ -11,7 +11,7 @@ const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<type
 
 const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })
 
-export interface NavigationMenuItem extends LinkProps, Pick<NavigationMenuItemProps, 'value'> {
+export interface NavigationMenuItem extends Omit<LinkProps, 'custom'>, Pick<NavigationMenuItemProps, 'value'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -44,7 +44,7 @@ import { computed } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuLink, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { UIcon, UAvatar, UBadge, ULink, ULinkBase } from '#components'
-import { omit } from '#ui/utils'
+import { pickLinkProps } from '#ui/utils/link'
 
 const props = withDefaults(defineProps<NavigationMenuProps<T>>(), { orientation: 'horizontal' })
 const emits = defineEmits<NavigationMenuEmits>()
@@ -62,7 +62,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list()">
         <NavigationMenuItem v-for="(item, index) in list" :key="`list-${listIndex}-${index}`" :value="item.value || String(index)" :class="ui.itemWrapper()">
-          <ULink v-slot="{ active, ...slotProps }" v-bind="omit(item, ['label', 'value', 'icon', 'avatar', 'badge', 'slot', 'select'])" custom>
+          <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
             <NavigationMenuLink as-child :active="active" @select="item.select">
               <ULinkBase v-bind="slotProps" :class="ui.item({ active, disabled: !!item.disabled })">
                 <slot :name="item.slot || 'item'" :item="item" :index="index">

@@ -12,7 +12,7 @@ const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
 
 type ButtonVariants = VariantProps<typeof button>
 
-export interface ButtonProps extends UseComponentIconsProps, LinkProps {
+export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'custom'> {
   label?: string
   color?: ButtonVariants['color']
   variant?: ButtonVariants['variant']
@@ -34,14 +34,14 @@ export interface ButtonSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useForwardProps } from 'radix-vue'
-import { reactiveOmit } from '@vueuse/core'
 import { useComponentIcons, useButtonGroup } from '#imports'
 import { UIcon, ULink } from '#components'
+import { pickLinkProps } from '#ui/utils/link'
 
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
-const linkProps = useForwardProps(reactiveOmit(props, 'type', 'label', 'color', 'variant', 'size', 'icon', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'square', 'block', 'disabled', 'truncate', 'class', 'ui'))
+const linkProps = useForwardProps(pickLinkProps(props))
 
 const { orientation, size: buttonSize } = useButtonGroup<ButtonProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)

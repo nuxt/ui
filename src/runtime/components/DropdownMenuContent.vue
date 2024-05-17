@@ -15,8 +15,6 @@ interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps
 }
 
 interface DropdownMenuContentEmits extends RadixDropdownMenuContentEmits {}
-
-type DropdownMenuContentSlots<T extends { slot?: string }> = DropdownMenuSlots<T>
 </script>
 
 <script setup lang="ts" generic="T extends DropdownMenuItem">
@@ -27,14 +25,15 @@ import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { ULink } from '#components'
 import { omit } from '#ui/utils'
+import { pickLinkProps } from '#ui/utils/link'
 
 const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()
-const slots = defineSlots<DropdownMenuContentSlots<T>>()
+const slots = defineSlots<DropdownMenuSlots<T>>()
 
 const appConfig = useAppConfig()
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'class', 'ui'), emits)
-const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuContentSlots<T>[string]>
+const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[string]>
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate()
 
@@ -105,7 +104,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
             </UDropdownMenuContent>
           </DropdownMenu.Sub>
           <DropdownMenu.Item v-else as-child :disabled="item.disabled" :text-value="item.label" @select="item.select">
-            <ULink v-slot="{ active, ...slotProps }" v-bind="omit((item as DropdownMenuItem), ['label', 'icon', 'avatar', 'content', 'kbds', 'slot', 'open', 'defaultOpen', 'select', 'children', 'type'])" custom>
+            <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<DropdownMenuItem, 'type'>)" custom>
               <ULinkBase v-bind="slotProps" :class="ui.item({ active })">
                 <ReuseItemTemplate :item="item" :active="active" :index="index" />
               </ULinkBase>

@@ -11,7 +11,7 @@ const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof
 
 const dropdownMenu = tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })
 
-export interface DropdownMenuItem extends Omit<LinkProps, 'type'>, Pick<DropdownMenuItemProps, 'disabled'> {
+export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'custom'>, Pick<DropdownMenuItemProps, 'disabled'> {
   label?: string
   icon?: string
   avatar?: AvatarProps

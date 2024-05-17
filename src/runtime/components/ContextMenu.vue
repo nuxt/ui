@@ -11,7 +11,7 @@ const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof 
 
 const contextMenu = tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu || {}) })
 
-export interface ContextMenuItem extends Omit<LinkProps, 'type'>, Pick<ContextMenuItemProps, 'disabled'> {
+export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'custom'>, Pick<ContextMenuItemProps, 'disabled'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
