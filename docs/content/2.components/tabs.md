@@ -89,6 +89,14 @@ Use the `#default` slot to customize the content of the trigger buttons. You wil
 
 :component-example{component="tabs-example-default-slot"}
 
+
+### `icon`
+
+Use the `#icon` slot to customize the icon of the trigger buttons. You will have access to the `item`, `index`, `selected` and `disabled` in the slot scope.
+
+:component-example{component="tabs-example-icon-slot"}
+
+
 ### `item`
 
 Use the `#item` slot to customize the items content. You will have access to the `item`, `index` and `selected` properties in the slot scope.
