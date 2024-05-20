@@ -56,8 +56,8 @@ export interface SelectEmits extends SelectRootEmits {}
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export interface SelectSlots<T> {
-  'leading'(): any
-  'trailing'(): any
+  'leading'(props: { modelValue: string, open: boolean }): any
+  'trailing'(props: { modelValue: string, open: boolean }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -104,15 +104,16 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 
 <template>
   <SelectRoot
-    v-bind="rootProps"
     :id="id"
+    v-slot="{ modelValue, open }"
+    v-bind="rootProps"
     :name="name"
     :disabled="disabled"
     @update:model-value="emitFormChange()"
   >
     <SelectTrigger :class="ui.base({ class: props.class })">
       <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
-        <slot name="leading">
+        <slot name="leading" :model-value="modelValue" :open="open">
           <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
         </slot>
       </span>
@@ -120,7 +121,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
       <SelectValue :placeholder="placeholder ?? '&nbsp;'" :class="ui.value()" />
 
       <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
-        <slot name="trailing">
+        <slot name="trailing" :model-value="modelValue" :open="open">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
         </slot>
       </span>
