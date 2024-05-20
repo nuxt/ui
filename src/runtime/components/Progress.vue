@@ -75,7 +75,7 @@ const percent = computed(() => {
 })
 
 const indicatorStyle = computed(() => {
-  if (!percent.value) {
+  if (percent.value === undefined) {
     return
   }
 
