@@ -7,13 +7,19 @@ const schema = z.object({
   inputMenu: z.any().refine(option => option?.value === 'option-2', {
     message: 'Select Option 2'
   }),
+  inputMenuMultiple: z.any().refine(values => !!values?.find((option: any) => option.value === 'option-2'), {
+    message: 'Include Option 2'
+  }),
   textarea: z.string().min(10),
   select: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
   }),
-  // selectMenu: z.any().refine(option => option?.value === 'option-2', {
-  //   message: 'Select Option 2'
-  // }),
+  selectMenu: z.any().refine(option => option?.value === 'option-2', {
+    message: 'Select Option 2'
+  }),
+  selectMenuMultiple: z.any().refine(values => !!values?.find((option: any) => option.value === 'option-2'), {
+    message: 'Include Option 2'
+  }),
   switch: z.boolean().refine(value => value === true, {
     message: 'Toggle me'
   }),
@@ -58,16 +64,28 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
       <UTextarea v-model="state.textarea" />
     </UFormField>
 
-    <UFormField name="select">
-      <USelect v-model="state.select" :items="items" />
+    <UFormField name="select" label="Select">
+      <USelect v-model="state.select" class="w-44" :items="items" />
     </UFormField>
 
-    <UFormField name="inputMenu">
+    <UFormField name="selectMenu" label="Select Menu">
+      <USelectMenu v-model="state.selectMenu" class="w-44" :items="items" />
+    </UFormField>
+
+    <UFormField name="selectMenuMultiple" label="Select Menu (Multiple)">
+      <USelectMenu v-model="state.selectMenuMultiple" class="w-44" multiple :items="items" />
+    </UFormField>
+
+    <UFormField name="inputMenu" label="Input Menu">
       <UInputMenu v-model="state.inputMenu" :items="items" />
     </UFormField>
 
+    <UFormField name="inputMenuMultiple" label="Input Menu (Multiple)">
+      <UInputMenu v-model="state.inputMenuMultiple" multiple :items="items" />
+    </UFormField>
+
     <UFormField name="checkbox">
-      <UCheckbox v-model="state.checkbox" label="I accept the terms and conditions" />
+      <UCheckbox v-model="state.checkbox" label="Check me" />
     </UFormField>
 
     <UFormField name="radioGroup">
@@ -75,10 +93,10 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
     </UFormField>
 
     <UFormField name="switch">
-      <USwitch v-model="state.switch" />
+      <USwitch v-model="state.switch" label="Switch me" />
     </UFormField>
 
-    <UFormField name="slider">
+    <UFormField name="slider" label="Slider">
       <USlider v-model="state.slider" />
     </UFormField>
 
