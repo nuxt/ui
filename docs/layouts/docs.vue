@@ -3,11 +3,11 @@
     <UContainer>
       <UPage>
         <template #left>
-          <UAside>
-            <BranchSelect />
+          <UPageAside>
+            <!-- <BranchSelect /> -->
 
-            <UNavigationTree :links="mapContentNavigation(navigation)" />
-          </UAside>
+            <!-- <UNavigationTree :links="mapContentNavigation(navigation)" /> -->
+          </UPageAside>
         </template>
 
         <slot />

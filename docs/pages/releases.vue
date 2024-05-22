@@ -1,38 +1,3 @@
-<template>
-  <div class="relative px-4 sm:px-6 lg:px-8">
-    <div class="stars w-screen fixed pointer-events-none inset-x-0 -top-[--header-height] bottom-0 opacity-75">
-      <div class="h-px w-px rounded-full bg-transparent" />
-      <div class="h-px w-px rounded-full bg-transparent" />
-      <div class="h-px w-px rounded-full bg-transparent" />
-    </div>
-
-    <ULandingHero :description="page.description" :links="page.links" align="center" :ui="{ title: 'sm:text-6xl' }" class="md:py-32">
-      <template #title>
-        <!-- eslint-disable-next-line vue/no-v-html -->
-        <span v-html="page.title" />
-      </template>
-    </ULandingHero>
-
-    <UPageBody>
-      <div class="h-[96px] w-0.5 bg-gray-200 dark:bg-gray-800 mx-auto rounded-t-full" />
-
-      <div v-for="(date, index) in dates" :key="index" class="relative py-3 min-h-[24px] flex items-center justify-center">
-        <div class="h-full w-0.5 bg-gray-200 dark:bg-gray-800 absolute top-0 inset-x-[50%] -ml-[1px] flex-shrink-0" />
-
-        <template v-if="date.release || date.pulls?.length || isToday(date.day)">
-          <div class="flex items-start gap-8 relative w-[50%]" :class="index % 2 === 0 ? 'translate-x-[50%] -ml-2' : '-translate-x-[50%] ml-2 flex-row-reverse'">
-            <div class="h-[8px] w-[8px] bg-gray-400 dark:bg-gray-400 rounded-full z-[1] mt-2 ring-2 ring-gray-300 dark:ring-gray-600 flex-shrink-0" />
-
-            <ReleasesItem :date="date" :class="index % 2 === 0 ? '' : 'text-right'" />
-          </div>
-        </template>
-      </div>
-
-      <div class="h-[96px] w-0.5 bg-gray-200 dark:bg-gray-800 mx-auto rounded-b-full" />
-    </UPageBody>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { eachDayOfInterval, isSameDay, isToday } from 'date-fns'
 
@@ -75,6 +40,41 @@ defineOgImage({
   description
 })
 </script>
+
+<template>
+  <div class="relative px-4 sm:px-6 lg:px-8">
+    <div class="stars w-screen fixed pointer-events-none inset-x-0 -top-[--header-height] bottom-0 opacity-75">
+      <div class="h-px w-px rounded-full bg-transparent" />
+      <div class="h-px w-px rounded-full bg-transparent" />
+      <div class="h-px w-px rounded-full bg-transparent" />
+    </div>
+
+    <ULandingHero :description="page.description" :links="page.links" align="center" :ui="{ title: 'sm:text-6xl' }" class="md:py-32">
+      <template #title>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <span v-html="page.title" />
+      </template>
+    </ULandingHero>
+
+    <UPageBody>
+      <div class="h-[96px] w-0.5 bg-gray-200 dark:bg-gray-800 mx-auto rounded-t-full" />
+
+      <div v-for="(date, index) in dates" :key="index" class="relative py-3 min-h-[24px] flex items-center justify-center">
+        <div class="h-full w-0.5 bg-gray-200 dark:bg-gray-800 absolute top-0 inset-x-[50%] -ml-[1px] flex-shrink-0" />
+
+        <template v-if="date.release || date.pulls?.length || isToday(date.day)">
+          <div class="flex items-start gap-8 relative w-[50%]" :class="index % 2 === 0 ? 'translate-x-[50%] -ml-2' : '-translate-x-[50%] ml-2 flex-row-reverse'">
+            <div class="h-[8px] w-[8px] bg-gray-400 dark:bg-gray-400 rounded-full z-[1] mt-2 ring-2 ring-gray-300 dark:ring-gray-600 flex-shrink-0" />
+
+            <ReleasesItem :date="date" :class="index % 2 === 0 ? '' : 'text-right'" />
+          </div>
+        </template>
+      </div>
+
+      <div class="h-[96px] w-0.5 bg-gray-200 dark:bg-gray-800 mx-auto rounded-b-full" />
+    </UPageBody>
+  </div>
+</template>
 
 <style scoped>
 /* Credits: https://reflect.app/ */

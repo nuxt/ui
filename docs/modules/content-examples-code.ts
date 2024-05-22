@@ -1,13 +1,7 @@
-import {
-  defineNuxtModule,
-  addTemplate,
-  addServerHandler,
-  createResolver
-} from '@nuxt/kit'
-
 import { existsSync, readFileSync } from 'fs'
-import { dirname, join } from 'pathe'
 import fsp from 'fs/promises'
+import { dirname, join } from 'pathe'
+import { defineNuxtModule, addTemplate, addServerHandler, createResolver } from '@nuxt/kit'
 
 export default defineNuxtModule({
   meta: {

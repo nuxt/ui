@@ -1,45 +1,8 @@
-<template>
-  <UPage v-if="page">
-    <UPageHeader :title="page.title" :description="page.description" :links="page.links" :headline="headline" />
-
-    <UPageBody prose>
-      <ContentRenderer v-if="page.body" :value="page" />
-
-      <hr v-if="surround?.length">
-
-      <UContentSurround :surround="surround" />
-    </UPageBody>
-
-    <template v-if="page?.body?.toc?.links?.length" #right>
-      <UContentToc :links="page.body.toc.links">
-        <template #bottom>
-          <div class="hidden lg:block space-y-6 !mt-6">
-            <UDivider v-if="page.body?.toc?.links?.length" type="dashed" />
-
-            <UPageLinks title="Community" :links="communityLinks" />
-
-            <UDivider type="dashed" />
-
-            <UPageLinks title="Resources" :links="resourcesLinks" />
-
-            <UDivider type="dashed" />
-
-            <div class="space-y-3">
-              <AdsPro />
-              <AdsCarbon />
-            </div>
-          </div>
-        </template>
-      </UContentToc>
-    </template>
-  </UPage>
-</template>
-
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
 
 const route = useRoute()
-const { branch } = useContentSource()
+// const { branch } = useContentSource()
 
 definePageMeta({
   layout: 'docs'
@@ -50,22 +13,22 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryContent()
-    .where({
-      _extension: 'md',
-      _path: {
-        [branch.value?.name === 'dev' ? '$eq' : '$ne']: new RegExp('^/dev')
-      },
-      navigation: {
-        $ne: false
-      }
-    })
-    .only(['title', 'description', '_path'])
-    .findSurround(withoutTrailingSlash(route.path))
-})
+// const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
+//   return queryContent()
+//     .where({
+//       _extension: 'md',
+//       _path: {
+//         [branch.value?.name === 'dev' ? '$eq' : '$ne']: new RegExp('^/dev')
+//       },
+//       navigation: {
+//         $ne: false
+//       }
+//     })
+//     .only(['title', 'description', '_path'])
+//     .findSurround(withoutTrailingSlash(route.path))
+// })
 
-const headline = computed(() => findPageHeadline(page.value))
+// const headline = computed(() => findPageHeadline(page.value))
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
@@ -79,7 +42,7 @@ defineOgImage({
   component: 'Docs',
   title: page.value.title,
   description: page.value.description,
-  headline: headline.value
+  // headline: headline.value
 })
 
 const communityLinks = computed(() => [{
@@ -119,3 +82,40 @@ const resourcesLinks = [{
   target: '_blank'
 }]
 </script>
+
+<template>
+  <UPage>
+    <!-- <UPageHeader :title="page.title" :description="page.description" :links="page.links" :headline="headline" />
+
+    <UPageBody prose>
+      <ContentRenderer v-if="page.body" :value="page" />
+
+      <hr v-if="surround?.length">
+
+      <UContentSurround :surround="surround" />
+    </UPageBody>
+
+    <template v-if="page?.body?.toc?.links?.length" #right>
+      <UContentToc :links="page.body.toc.links">
+        <template #bottom>
+          <div class="hidden lg:block space-y-6 !mt-6">
+            <UDivider v-if="page.body?.toc?.links?.length" type="dashed" />
+
+            <UPageLinks title="Community" :links="communityLinks" />
+
+            <UDivider type="dashed" />
+
+            <UPageLinks title="Resources" :links="resourcesLinks" />
+
+            <UDivider type="dashed" />
+
+            <div class="space-y-3">
+              <AdsPro />
+              <AdsCarbon />
+            </div>
+          </div>
+        </template>
+      </UContentToc>
+    </template> -->
+  </UPage>
+</template>

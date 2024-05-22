@@ -3,8 +3,9 @@
     <h1 class="font-semibold mb-1">
       Playground
     </h1>
-    <p>
+
+    <div class="flex items-center justify-center gap-1">
       <UKbd value="meta" /> <UKbd value="K" />
-    </p>
+    </div>
   </div>
 </template>

@@ -1,31 +1,23 @@
 import { createResolver } from '@nuxt/kit'
-import colors from 'tailwindcss/colors'
 import module from '../src/module'
-import { excludeColors } from '../src/colors'
 import pkg from '../package.json'
 
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  // @ts-ignore
-  extends: process.env.NUXT_UI_PRO_PATH ? [
-    process.env.NUXT_UI_PRO_PATH,
-    resolve(process.env.NUXT_UI_PRO_PATH, '.docs')
-  ] : [
-    '@nuxt/ui-pro',
-    process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/.docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
-  ].filter(Boolean),
+  extends: [
+    process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
+  ],
   modules: [
     '@nuxt/content',
     '@nuxt/fonts',
     '@nuxt/image',
-    'nuxt-og-image',
     module,
+    '@nuxt/ui-pro',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
-    'nuxt-component-meta',
-    'nuxt-cloudflare-analytics',
-    'modules/content-examples-code'
+    'nuxt-og-image',
+    // 'modules/content-examples-code'
   ],
   runtimeConfig: {
     public: {
@@ -33,56 +25,26 @@ export default defineNuxtConfig({
     }
   },
   ui: {
-    global: true,
-    icons: ['heroicons', 'simple-icons'],
-    safelistColors: excludeColors(colors)
+    global: true
   },
   content: {
-    highlight: {
-      langs: [
-        'postcss',
-        'mdc'
-      ]
-    },
     sources: {
-      dev: {
-        prefix: '/dev',
-        driver: 'fs',
-        base: resolve('./content')
-      },
-      // overwrite default source AKA `content` directory
-      content: {
-        driver: 'github',
-        repo: 'nuxt/ui',
-        branch: 'main',
-        dir: 'docs/content'
-      },
       pro: process.env.NUXT_UI_PRO_PATH ? {
         prefix: '/pro',
         driver: 'fs',
-        base: resolve(process.env.NUXT_UI_PRO_PATH, '.docs/content/pro')
-      } : process.env.NUXT_GITHUB_TOKEN ? {
+        base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/content/pro')
+      } : process.env.NUXT_GITHUB_TOKEN && {
         prefix: '/pro',
         driver: 'github',
         repo: 'nuxt/ui-pro',
         branch: 'dev',
-        dir: '.docs/content/pro',
+        dir: 'docs/content/pro',
         token: process.env.NUXT_GITHUB_TOKEN || ''
-      } : undefined
+      }
     }
   },
   image: {
     provider: 'ipx'
-  },
-  fontMetrics: {
-    fonts: ['DM Sans']
-  },
-  googleFonts: {
-    display: 'swap',
-    download: true,
-    families: {
-      'DM+Sans': [400, 500, 600, 700]
-    }
   },
   nitro: {
     prerender: {
@@ -94,48 +56,44 @@ export default defineNuxtConfig({
         '/api/releases.json',
         '/api/pulls.json'
       ],
-      ignore: !process.env.NUXT_UI_PRO_PATH && !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
+      ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     }
   },
   routeRules: {
-    '/components': { redirect: '/components/accordion', prerender: false },
-    '/dev/components': { redirect: '/dev/components/accordion', prerender: false }
+    '/components': { redirect: '/components/app', prerender: false },
+    '/dev/components': { redirect: '/dev/components/app', prerender: false }
   },
   componentMeta: {
     exclude: [
-      '@nuxt/content',
-      '@nuxt/ui-templates',
-      '@nuxtjs/color-mode',
-      '@nuxtjs/mdc',
-      'nuxt/dist',
-      'nuxt-og-image',
-      'nuxt-site-config',
+      // '@nuxt/content',
+      // '@nuxt/ui-templates',
+      // '@nuxtjs/color-mode',
+      // '@nuxtjs/mdc',
+      // 'nuxt/dist',
+      // 'nuxt-og-image',
+      // 'nuxt-site-config',
       resolve('./components'),
-      process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, '.docs', 'components') : '.c12'
+      // process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
     ],
-    metaFields: {
-      type: false,
-      props: true,
-      slots: true,
-      events: false,
-      exposed: false
-    }
-  },
-  cloudflareAnalytics: {
-    token: '1e2b0c5e9a214f0390b9b94e043d8d4c',
-    scriptPath: false
+    // metaFields: {
+    //   type: false,
+    //   props: true,
+    //   slots: true,
+    //   events: false,
+    //   exposed: false
+    // }
   },
   hooks: {
     // Related to https://github.com/nuxt/nuxt/pull/22558
-    'components:extend': (components) => {
-      components.forEach((component) => {
-        if (component.shortPath.includes(process.env.NUXT_UI_PRO_PATH || '@nuxt/ui-pro')) {
-          component.global = true
-        } else if (component.global) {
-          component.global = 'sync'
-        }
-      })
-    }
+    // 'components:extend': (components) => {
+    //   components.forEach((component) => {
+    //     if (component.shortPath.includes('@nuxt/ui-pro')) {
+    //       component.global = true
+    //     } else if (component.global) {
+    //       component.global = 'sync'
+    //     }
+    //   })
+    // }
   },
   typescript: {
     strict: false

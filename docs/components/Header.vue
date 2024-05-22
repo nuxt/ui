@@ -10,37 +10,38 @@
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white" aria-label="Nuxt UI">
         <Logo class="w-auto h-6" />
 
-        <UBadge v-if="$route.path.startsWith('/pro')" label="Pro" variant="subtle" size="xs" class="-mb-[2px] rounded font-semibold" />
-        <UBadge v-if="$route.path.startsWith('/dev')" label="Edge" variant="subtle" size="xs" class="-mb-[2px] rounded font-semibold" />
+        <UBadge v-if="$route.path.startsWith('/pro')" label="Pro" variant="subtle" size="sm" class="-mb-[2px] rounded font-semibold" />
+        <UBadge v-if="$route.path.startsWith('/dev')" label="Edge" variant="subtle" size="sm" class="-mb-[2px] rounded font-semibold" />
       </NuxtLink>
     </template>
 
     <template #right>
-      <ColorPicker />
+      <!-- <ColorPicker /> -->
 
-      <UTooltip text="Search" :shortcuts="[metaSymbol, 'K']" :popper="{ strategy: 'absolute' }">
+      <!-- <UTooltip text="Search" :shortcuts="[metaSymbol, 'K']" :popper="{ strategy: 'absolute' }">
         <UContentSearchButton :label="null" />
-      </UTooltip>
+      </UTooltip> -->
 
-      <UColorModeButton />
+      <!-- <UColorModeButton /> -->
 
       <UButton
+        color="gray"
+        variant="ghost"
         to="https://github.com/nuxt/ui"
         target="_blank"
         icon="i-simple-icons-github"
         aria-label="GitHub"
-        v-bind="($ui.button.secondary as any)"
       />
     </template>
 
     <template #panel>
-      <UAsideLinks :links="links" />
+      <!-- <UAsideLinks :links="links" /> -->
 
-      <UDivider type="dashed" class="my-4" />
+      <!-- <UDivider type="dashed" class="my-4" /> -->
 
-      <BranchSelect />
+      <!-- <BranchSelect /> -->
 
-      <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
+      <!-- <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open /> -->
     </template>
   </UHeader>
 </template>
@@ -54,7 +55,6 @@ defineProps<{
 }>()
 
 const route = useRoute()
-const { metaSymbol } = useShortcuts()
 
 const nav = inject<Ref<NavItem[]>>('navigation')
 
