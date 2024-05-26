@@ -321,7 +321,10 @@ export default defineComponent({
       )
     })
 
-    const emptyState = computed(() => ({ ...ui.value.default.emptyState, ...props.emptyState }))
+    const emptyState = computed(() => {
+      if (props.emptyState === null) return null
+      return { ...ui.value.default.emptyState, ...props.emptyState }
+    })
 
     // Methods
 
