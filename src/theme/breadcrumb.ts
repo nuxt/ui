@@ -2,26 +2,26 @@ export default {
   slots: {
     root: 'relative min-w-0',
     list: 'flex items-center gap-1.5',
-    itemWrapper: 'flex min-w-0',
-    item: 'group relative flex items-center gap-1.5 font-medium text-sm min-w-0',
-    itemLeadingIcon: 'shrink-0 size-5',
-    itemLeadingAvatar: 'shrink-0',
-    itemLabel: 'truncate',
+    item: 'flex min-w-0',
+    link: 'group relative flex items-center gap-1.5 font-medium text-sm min-w-0',
+    linkLeadingIcon: 'shrink-0 size-5',
+    linkLeadingAvatar: 'shrink-0',
+    linkLabel: 'truncate',
     separator: 'flex',
     separatorIcon: 'shrink-0 size-5 text-gray-500 dark:text-gray-400'
   },
   variants: {
     active: {
       true: {
-        item: 'text-primary-500 dark:text-primary-400'
+        link: 'text-primary-500 dark:text-primary-400'
       },
       false: {
-        item: 'text-gray-500 dark:text-gray-400'
+        link: 'text-gray-500 dark:text-gray-400'
       }
     },
     disabled: {
       true: {
-        item: 'cursor-not-allowed opacity-75'
+        link: 'cursor-not-allowed opacity-75'
       }
     },
     to: {
@@ -33,7 +33,7 @@ export default {
     active: false,
     to: true,
     class: {
-      item: 'hover:text-gray-700 dark:hover:text-gray-200 transition-colors'
+      link: 'hover:text-gray-700 dark:hover:text-gray-200 transition-colors'
     }
   }]
 }
