@@ -11,7 +11,8 @@ export default {
     itemTrailing: 'ms-auto inline-flex',
     itemTrailingIcon: 'shrink-0 size-5',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0 gap-0.5',
-    itemLabel: 'truncate'
+    itemLabel: 'truncate',
+    itemLabelExternalIcon: 'size-3 align-top text-gray-400 dark:text-gray-500'
   },
   variants: {
     active: {

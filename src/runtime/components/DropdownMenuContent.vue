@@ -48,15 +48,17 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
         <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ active })" />
       </slot>
 
-      <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel()">
+      <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel({ active })">
         <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="active" :index="index">
           {{ item.label }}
         </slot>
+
+        <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ active })" />
       </span>
 
       <span v-if="item.children?.length || item.kbds?.length || !!slots[item.slot ? `${item.slot}-trailing`: 'item-trailing']" :class="ui.itemTrailing()">
         <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="item" :active="active" :index="index">
-          <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon()" />
+          <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon({ active })" />
           <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds()">
             <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" size="md" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
