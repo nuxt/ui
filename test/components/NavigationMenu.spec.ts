@@ -1,37 +1,73 @@
 import { describe, it, expect } from 'vitest'
 import NavigationMenu, { type NavigationMenuProps, type NavigationMenuSlots } from '../../src/runtime/components/NavigationMenu.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/navigation-menu'
 
 describe('NavigationMenu', () => {
+  const colors = Object.keys(theme.variants.color) as any
+  const variants = Object.keys(theme.variants.variant) as any
+
   const items = [
     [{
-      label: 'Profile',
+      label: 'Documentation',
+      icon: 'i-heroicons-book-open',
+      children: [{
+        label: 'Introduction',
+        description: 'Fully styled and customizable components for Nuxt.',
+        icon: 'i-heroicons-home'
+      }, {
+        label: 'Installation',
+        description: 'Learn how to install and configure Nuxt UI in your application.',
+        icon: 'i-heroicons-cloud-arrow-down'
+      }, {
+        label: 'Theming',
+        description: 'Learn how to customize the look and feel of the components.',
+        icon: 'i-heroicons-swatch'
+      }, {
+        label: 'Shortcuts',
+        description: 'Learn how to display and define keyboard shortcuts in your app.',
+        icon: 'i-heroicons-computer-desktop'
+      }]
+    }, {
+      label: 'Components',
+      icon: 'i-heroicons-cube-transparent',
       active: true,
-      avatar: {
-        src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-      },
-      badge: 100,
-      select() {
-        console.log('Profile clicked')
-      }
-    }, {
-      label: 'Modal',
-      icon: 'i-heroicons-home',
-      to: '/modal'
-    }, {
-      label: 'NavigationMenu',
-      icon: 'i-heroicons-chart-bar',
-      to: '/navigation-menu'
-    }, {
-      label: 'Popover',
-      icon: 'i-heroicons-command-line',
-      to: '/popover'
+      children: [{
+        label: 'Link',
+        icon: 'i-heroicons-document',
+        description: 'Use NuxtLink with superpowers.',
+        to: '/link'
+      }, {
+        label: 'Modal',
+        icon: 'i-heroicons-document',
+        description: 'Display a modal within your application.',
+        to: '/modal'
+      }, {
+        label: 'NavigationMenu',
+        icon: 'i-heroicons-document',
+        description: 'Display a list of links.',
+        to: '/navigation-menu'
+      }, {
+        label: 'Pagination',
+        icon: 'i-heroicons-document',
+        description: 'Display a list of pages.',
+        to: '/pagination'
+      }, {
+        label: 'Popover',
+        icon: 'i-heroicons-document',
+        description: 'Display a non-modal dialog that floats around a trigger element.',
+        to: '/popover'
+      }, {
+        label: 'Progress',
+        icon: 'i-heroicons-document',
+        description: 'Show a horizontal bar to indicate task progression.',
+        to: '/progress'
+      }]
     }], [{
-      label: 'Examples',
-      icon: 'i-heroicons-light-bulb',
-      to: 'https://ui.nuxt.com',
-      target: '_blank',
-      slot: 'custom'
+      label: 'GitHub',
+      icon: 'i-simple-icons-github',
+      to: 'https://github.com/nuxt/ui',
+      target: '_blank'
     }, {
       label: 'Help',
       icon: 'i-heroicons-question-mark-circle',
@@ -44,7 +80,11 @@ describe('NavigationMenu', () => {
   it.each([
     // Props
     ['with items', { props }],
+    ['with arrow', { props: { ...props, arrow: true } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
+    ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-plus' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { items, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots
