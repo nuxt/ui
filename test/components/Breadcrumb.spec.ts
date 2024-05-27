@@ -26,7 +26,7 @@ describe('Breadcrumb', () => {
     ['with items', { props }],
     ['with separatorIcon', { props: { ...props, separatorIcon: 'i-heroicons-minus' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
-    ['with ui', { props: { ui: { ...props, item: 'font-bold' } } }],
+    ['with ui', { props: { ...props, ui: { link: 'font-bold' } } }],
     // Slots
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],

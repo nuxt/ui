@@ -45,7 +45,7 @@ describe('Accordion', () => {
     ['with collapsible', { props: { ...props, collapsible: false } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-plus' } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
-    ['with ui', { props: { ui: { ...props, item: 'border-gray-300 dark:border-gray-700' } } }],
+    ['with ui', { props: { ...props, ui: { item: 'border-gray-300 dark:border-gray-700' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],

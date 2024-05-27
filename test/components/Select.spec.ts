@@ -53,7 +53,7 @@ describe('Select', () => {
     ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
     ['with class', { props: { ...props, class: 'rounded-full' } }],
-    ['with ui', { props: { ui: { ...props, group: 'p-2' } } }],
+    ['with ui', { props: { ...props, ui: { group: 'p-2' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
