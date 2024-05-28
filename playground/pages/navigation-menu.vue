@@ -86,6 +86,14 @@ const items = [
       <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
     </div>
 
-    <UNavigationMenu :color="color" :variant="variant" :orientation="orientation" :items="items" arrow />
+    <UNavigationMenu
+      :color="color"
+      :variant="variant"
+      :orientation="orientation"
+      :items="items"
+      arrow
+      class="border-gray-200 dark:border-gray-800"
+      :class="orientation === 'vertical' as any ? 'border-l' : 'border-b'"
+    />
   </div>
 </template>
