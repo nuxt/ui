@@ -167,6 +167,7 @@ export default (config: { colors: string[] }) => ({
   }],
   defaultVariants: {
     color: 'primary',
+    highlightColor: 'primary',
     variant: 'pill'
   }
 })
