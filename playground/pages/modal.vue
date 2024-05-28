@@ -1,5 +1,17 @@
 <script setup lang="ts">
+import { LazyModalProgrammaticExample } from '#components'
+
 const open = ref(false)
+
+const modal = useModal()
+const count = ref(0)
+const openModal = () => {
+  count.value++
+  modal.open(LazyModalProgrammaticExample, {
+    description: 'And you can even provide a description !',
+    count: count.value
+  })
+}
 </script>
 
 <template>
@@ -49,5 +61,7 @@ const open = ref(false)
     <UModal title="Modal with custom close button" description="The `close` prop inherits from the Button props." :close="{ color: 'primary', variant: 'solid', size: 'xs' }" :ui="{ close: 'top-3.5 rounded-full' }">
       <UButton label="Open with custom close button" color="gray" />
     </UModal>
+
+    <UButton label="Open programmatically" color="white" @click="openModal" />
   </div>
 </template>

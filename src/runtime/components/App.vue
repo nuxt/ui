@@ -13,7 +13,7 @@ import { toRef } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useId } from '#imports'
-import { UToaster } from '#components'
+import { UToaster, UModalProvider } from '#components'
 
 const props = withDefaults(defineProps<ProviderProps>(), {
   useId: () => useId()
@@ -31,5 +31,7 @@ const toasterProps = toRef(() => props.toaster)
         <slot />
       </UToaster>
     </TooltipProvider>
+
+    <UModalProvider />
   </ConfigProvider>
 </template>
