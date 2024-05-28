@@ -26,6 +26,8 @@ export default defineNuxtModule<ModuleOptions>({
 
     options.colors = options.colors?.length ? ['primary', ...options.colors] : ['primary', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchia', 'pink', 'rose']
 
+    nuxt.options.ui = options
+
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
