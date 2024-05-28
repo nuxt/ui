@@ -85,7 +85,7 @@ const ui = computed(() => tv({ extend: navigationMenu, slots: props.ui })({
   color: props.color,
   variant: props.variant,
   highlight: props.highlight,
-  highlightColor: props.highlightColor
+  highlightColor: props.highlightColor || props.color
 }))
 
 const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as T[][] : [])

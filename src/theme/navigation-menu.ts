@@ -58,7 +58,6 @@ export default (config: { colors: string[] }) => ({
         linkLeadingIcon: 'text-gray-700 dark:text-gray-200',
         childLink: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
         childLinkIcon: 'text-gray-700 dark:text-gray-200'
-
       },
       false: {
         link: 'text-gray-500 dark:text-gray-400',
@@ -168,7 +167,6 @@ export default (config: { colors: string[] }) => ({
   }],
   defaultVariants: {
     color: 'primary',
-    highlightColor: 'primary',
     variant: 'pill'
   }
 })

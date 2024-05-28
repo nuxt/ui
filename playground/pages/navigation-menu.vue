@@ -6,7 +6,7 @@ const variants = Object.keys(theme.variants.variant)
 const orientations = Object.keys(theme.variants.orientation)
 
 const color = ref(theme.defaultVariants.color)
-const highlightColor = ref(theme.defaultVariants.highlightColor)
+const highlightColor = ref()
 const variant = ref(theme.defaultVariants.variant)
 const orientation = ref('horizontal' as const)
 const highlight = ref(true)
