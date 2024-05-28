@@ -40,6 +40,11 @@ export interface NavigationMenuProps<T> extends Omit<NavigationMenuRootProps, 'a
   items?: T[] | T[][]
   color?: NavigationMenuVariants['color']
   variant?: NavigationMenuVariants['variant']
+  /**
+   * Display a line next to the active item.
+   */
+  highlight?: boolean
+  highlightColor?: NavigationMenuVariants['highlightColor']
   content?: Omit<NavigationMenuContentProps, 'asChild' | 'forceMount'>
   arrow?: boolean
   class?: any
@@ -78,7 +83,9 @@ const contentProps = toRef(() => props.content)
 const ui = computed(() => tv({ extend: navigationMenu, slots: props.ui })({
   orientation: props.orientation,
   color: props.color,
-  variant: props.variant
+  variant: props.variant,
+  highlight: props.highlight,
+  highlightColor: props.highlightColor
 }))
 
 const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as T[][] : [])

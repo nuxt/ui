@@ -47,13 +47,13 @@ exports[`NavigationMenu > renders with class correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 items-center justify-between w-48">
   <div style="position: relative;">
     <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-12-trigger-0" aria-controls="radix-navigation-menu-12-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-17-trigger-0" aria-controls="radix-navigation-menu-17-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
         <!--teleport end-->
       </li>
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-12-trigger-1" aria-controls="radix-navigation-menu-12-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-17-trigger-1" aria-controls="radix-navigation-menu-17-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
@@ -252,13 +252,13 @@ exports[`NavigationMenu > renders with custom slot correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
   <div style="position: relative;">
     <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-18-trigger-0" aria-controls="radix-navigation-menu-18-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-23-trigger-0" aria-controls="radix-navigation-menu-23-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
         <!--teleport end-->
       </li>
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-18-trigger-1" aria-controls="radix-navigation-menu-18-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-23-trigger-1" aria-controls="radix-navigation-menu-23-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
@@ -289,17 +289,263 @@ exports[`NavigationMenu > renders with custom slot correctly 1`] = `
 </nav>"
 `;
 
-exports[`NavigationMenu > renders with item slot correctly 1`] = `
+exports[`NavigationMenu > renders with highlight color black correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
   <div style="position: relative;">
     <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-14-trigger-0" aria-controls="radix-navigation-menu-14-content-0">Item slot</button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-15-trigger-0" aria-controls="radix-navigation-menu-15-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
         <!--teleport end-->
       </li>
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-14-trigger-1" aria-controls="radix-navigation-menu-14-content-1">Item slot</button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full text-primary-500 dark:text-primary-400 hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors after:bg-gray-900 dark:after:bg-white" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-15-trigger-1" aria-controls="radix-navigation-menu-15-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-radix-vue-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">GitHub<span class="iconify i-heroicons:arrow-up-right-20-solid size-3 align-top text-gray-400 dark:text-gray-500" aria-hidden="true"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 cursor-not-allowed opacity-75 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full" data-radix-vue-collection-item=""><span class="iconify i-heroicons:question-mark-circle shrink-0 size-5 text-gray-400 dark:text-gray-500" aria-hidden="true"></span><span class="truncate">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div class="absolute top-full inset-x-0 flex w-full">
+    <!--v-if-->
+    <!---->
+  </div>
+</nav>"
+`;
+
+exports[`NavigationMenu > renders with highlight color green correctly 1`] = `
+"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-13-trigger-0" aria-controls="radix-navigation-menu-13-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full text-primary-500 dark:text-primary-400 hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors after:bg-green-500 dark:after:bg-green-400" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-13-trigger-1" aria-controls="radix-navigation-menu-13-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-radix-vue-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">GitHub<span class="iconify i-heroicons:arrow-up-right-20-solid size-3 align-top text-gray-400 dark:text-gray-500" aria-hidden="true"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 cursor-not-allowed opacity-75 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full" data-radix-vue-collection-item=""><span class="iconify i-heroicons:question-mark-circle shrink-0 size-5 text-gray-400 dark:text-gray-500" aria-hidden="true"></span><span class="truncate">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div class="absolute top-full inset-x-0 flex w-full">
+    <!--v-if-->
+    <!---->
+  </div>
+</nav>"
+`;
+
+exports[`NavigationMenu > renders with highlight color primary correctly 1`] = `
+"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-12-trigger-0" aria-controls="radix-navigation-menu-12-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full text-primary-500 dark:text-primary-400 hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors after:bg-primary-500 dark:after:bg-primary-400" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-12-trigger-1" aria-controls="radix-navigation-menu-12-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-radix-vue-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">GitHub<span class="iconify i-heroicons:arrow-up-right-20-solid size-3 align-top text-gray-400 dark:text-gray-500" aria-hidden="true"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 cursor-not-allowed opacity-75 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full" data-radix-vue-collection-item=""><span class="iconify i-heroicons:question-mark-circle shrink-0 size-5 text-gray-400 dark:text-gray-500" aria-hidden="true"></span><span class="truncate">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div class="absolute top-full inset-x-0 flex w-full">
+    <!--v-if-->
+    <!---->
+  </div>
+</nav>"
+`;
+
+exports[`NavigationMenu > renders with highlight color red correctly 1`] = `
+"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-14-trigger-0" aria-controls="radix-navigation-menu-14-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full text-primary-500 dark:text-primary-400 hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors after:bg-red-500 dark:after:bg-red-400" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-14-trigger-1" aria-controls="radix-navigation-menu-14-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-radix-vue-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">GitHub<span class="iconify i-heroicons:arrow-up-right-20-solid size-3 align-top text-gray-400 dark:text-gray-500" aria-hidden="true"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 cursor-not-allowed opacity-75 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full" data-radix-vue-collection-item=""><span class="iconify i-heroicons:question-mark-circle shrink-0 size-5 text-gray-400 dark:text-gray-500" aria-hidden="true"></span><span class="truncate">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div class="absolute top-full inset-x-0 flex w-full">
+    <!--v-if-->
+    <!---->
+  </div>
+</nav>"
+`;
+
+exports[`NavigationMenu > renders with highlight link correctly 1`] = `
+"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-11-trigger-0" aria-controls="radix-navigation-menu-11-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full text-primary-500 dark:text-primary-400 after:bg-primary-500 dark:after:bg-primary-400" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-11-trigger-1" aria-controls="radix-navigation-menu-11-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors" data-radix-vue-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">GitHub<span class="iconify i-heroicons:arrow-up-right-20-solid size-3 align-top text-gray-400 dark:text-gray-500" aria-hidden="true"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 cursor-not-allowed opacity-75 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full" data-radix-vue-collection-item=""><span class="iconify i-heroicons:question-mark-circle shrink-0 size-5 text-gray-400 dark:text-gray-500" aria-hidden="true"></span><span class="truncate">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div class="absolute top-full inset-x-0 flex w-full">
+    <!--v-if-->
+    <!---->
+  </div>
+</nav>"
+`;
+
+exports[`NavigationMenu > renders with highlight pill correctly 1`] = `
+"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-10-trigger-0" aria-controls="radix-navigation-menu-10-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full text-primary-500 dark:text-primary-400 hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors after:bg-primary-500 dark:after:bg-primary-400" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-10-trigger-1" aria-controls="radix-navigation-menu-10-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-radix-vue-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">GitHub<span class="iconify i-heroicons:arrow-up-right-20-solid size-3 align-top text-gray-400 dark:text-gray-500" aria-hidden="true"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 cursor-not-allowed opacity-75 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full" data-radix-vue-collection-item=""><span class="iconify i-heroicons:question-mark-circle shrink-0 size-5 text-gray-400 dark:text-gray-500" aria-hidden="true"></span><span class="truncate">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div class="absolute top-full inset-x-0 flex w-full">
+    <!--v-if-->
+    <!---->
+  </div>
+</nav>"
+`;
+
+exports[`NavigationMenu > renders with item slot correctly 1`] = `
+"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-19-trigger-0" aria-controls="radix-navigation-menu-19-content-0">Item slot</button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-19-trigger-1" aria-controls="radix-navigation-menu-19-content-1">Item slot</button>
         <!---->
         <!--teleport start-->
         <!---->
@@ -330,13 +576,13 @@ exports[`NavigationMenu > renders with item-label slot correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
   <div style="position: relative;">
     <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-16-trigger-0" aria-controls="radix-navigation-menu-16-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-21-trigger-0" aria-controls="radix-navigation-menu-21-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
         <!--teleport end-->
       </li>
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-16-trigger-1" aria-controls="radix-navigation-menu-16-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-21-trigger-1" aria-controls="radix-navigation-menu-21-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
@@ -371,13 +617,13 @@ exports[`NavigationMenu > renders with item-leading slot correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
   <div style="position: relative;">
     <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-15-trigger-0" aria-controls="radix-navigation-menu-15-content-0">Item leading slot<span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-20-trigger-0" aria-controls="radix-navigation-menu-20-content-0">Item leading slot<span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
         <!--teleport end-->
       </li>
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-15-trigger-1" aria-controls="radix-navigation-menu-15-content-1">Item leading slot<span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-20-trigger-1" aria-controls="radix-navigation-menu-20-content-1">Item leading slot<span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
@@ -412,13 +658,13 @@ exports[`NavigationMenu > renders with item-trailing slot correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
   <div style="position: relative;">
     <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-17-trigger-0" aria-controls="radix-navigation-menu-17-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex">Item trailing slot</span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-22-trigger-0" aria-controls="radix-navigation-menu-22-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex">Item trailing slot</span></button>
         <!---->
         <!--teleport start-->
         <!---->
         <!--teleport end-->
       </li>
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-17-trigger-1" aria-controls="radix-navigation-menu-17-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex">Item trailing slot</span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-22-trigger-1" aria-controls="radix-navigation-menu-22-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex">Item trailing slot</span></button>
         <!---->
         <!--teleport start-->
         <!---->
@@ -528,13 +774,13 @@ exports[`NavigationMenu > renders with trailingIcon correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
   <div style="position: relative;">
     <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-11-trigger-0" aria-controls="radix-navigation-menu-11-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:plus size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-16-trigger-0" aria-controls="radix-navigation-menu-16-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:plus size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
         <!--teleport end-->
       </li>
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-11-trigger-1" aria-controls="radix-navigation-menu-11-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:plus size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-16-trigger-1" aria-controls="radix-navigation-menu-16-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:plus size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
@@ -569,13 +815,13 @@ exports[`NavigationMenu > renders with ui correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
   <div style="position: relative;">
     <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-13-trigger-0" aria-controls="radix-navigation-menu-13-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-18-trigger-0" aria-controls="radix-navigation-menu-18-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
         <!--teleport end-->
       </li>
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-13-trigger-1" aria-controls="radix-navigation-menu-13-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400 before:bg-gray-100 dark:before:bg-gray-800" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-18-trigger-1" aria-controls="radix-navigation-menu-18-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
@@ -606,58 +852,17 @@ exports[`NavigationMenu > renders with ui correctly 1`] = `
 </nav>"
 `;
 
-exports[`NavigationMenu > renders with variant line correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
-  <div style="position: relative;">
-    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-0.5 after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-9-trigger-0" aria-controls="radix-navigation-menu-9-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
-        <!---->
-        <!--teleport start-->
-        <!---->
-        <!--teleport end-->
-      </li>
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-900 dark:text-white after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-0.5 after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors after:bg-primary-500 dark:after:bg-primary-400" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-9-trigger-1" aria-controls="radix-navigation-menu-9-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-gray-700 dark:text-gray-200 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
-        <!---->
-        <!--teleport start-->
-        <!---->
-        <!--teleport end-->
-      </li>
-    </ul>
-  </div>
-  <!--v-if-->
-  <div style="position: relative;">
-    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-0.5 after:rounded-full hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors" data-radix-vue-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">GitHub<span class="iconify i-heroicons:arrow-up-right-20-solid size-3 align-top text-gray-400 dark:text-gray-500" aria-hidden="true"></span></span>
-          <!--v-if-->
-        </a>
-        <!--v-if-->
-      </li>
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 cursor-not-allowed opacity-75 after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-0.5 after:rounded-full" data-radix-vue-collection-item=""><span class="iconify i-heroicons:question-mark-circle shrink-0 size-5 text-gray-400 dark:text-gray-500" aria-hidden="true"></span><span class="truncate">Help<!--v-if--></span>
-          <!--v-if-->
-        </button>
-        <!--v-if-->
-      </li>
-    </ul>
-  </div>
-  <!--v-if-->
-  <div class="absolute top-full inset-x-0 flex w-full">
-    <!--v-if-->
-    <!---->
-  </div>
-</nav>"
-`;
-
 exports[`NavigationMenu > renders with variant link correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" class="relative flex gap-1.5 w-full items-center justify-between">
   <div style="position: relative;">
     <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-10-trigger-0" aria-controls="radix-navigation-menu-10-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" data-state="closed" aria-expanded="false" active="false" data-radix-vue-collection-item="" id="radix-navigation-menu-9-trigger-0" aria-controls="radix-navigation-menu-9-content-0"><span class="iconify i-heroicons:book-open shrink-0 size-5 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->
         <!--teleport end-->
       </li>
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-10-trigger-1" aria-controls="radix-navigation-menu-10-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary-500 dark:text-primary-400" data-state="closed" aria-expanded="false" active="true" data-radix-vue-collection-item="" id="radix-navigation-menu-9-trigger-1" aria-controls="radix-navigation-menu-9-content-1"><span class="iconify i-heroicons:cube-transparent shrink-0 size-5 text-primary-500 dark:text-primary-400" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-heroicons:chevron-down-20-solid size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span></button>
         <!---->
         <!--teleport start-->
         <!---->

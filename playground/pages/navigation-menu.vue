@@ -6,8 +6,10 @@ const variants = Object.keys(theme.variants.variant)
 const orientations = Object.keys(theme.variants.orientation)
 
 const color = ref(theme.defaultVariants.color)
+const highlightColor = ref(theme.defaultVariants.highlightColor)
 const variant = ref(theme.defaultVariants.variant)
 const orientation = ref('horizontal' as const)
+const highlight = ref(true)
 
 const items = [
   [{
@@ -84,16 +86,22 @@ const items = [
       <USelect v-model="color" :items="colors" placeholder="Color" />
       <USelect v-model="variant" :items="variants" placeholder="Variant" />
       <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
+      <USwitch v-model="highlight" label="Highlight" />
+      <USelect v-model="highlightColor" :items="colors" placeholder="Highlight color" />
     </div>
 
     <UNavigationMenu
+      :items="items"
       :color="color"
       :variant="variant"
       :orientation="orientation"
-      :items="items"
+      :highlight="highlight"
+      :highlight-color="highlightColor"
       arrow
-      class="border-gray-200 dark:border-gray-800"
-      :class="orientation === 'vertical' as any ? 'border-l' : 'border-b'"
+      :class="highlight ? [
+        'border-gray-200 dark:border-gray-800',
+        orientation === 'vertical' as any ? 'border-l' : 'border-b'
+      ] : undefined"
     />
   </div>
 </template>

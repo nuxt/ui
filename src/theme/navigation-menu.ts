@@ -32,9 +32,12 @@ export default (config: { colors: string[] }) => ({
       ...Object.fromEntries(config.colors.map((color: string) => [color, ''])),
       black: ''
     },
+    highlightColor: {
+      ...Object.fromEntries(config.colors.map((color: string) => [color, ''])),
+      black: ''
+    },
     variant: {
       pill: '',
-      line: '',
       link: ''
     },
     orientation: {
@@ -68,20 +71,23 @@ export default (config: { colors: string[] }) => ({
       true: {
         link: 'cursor-not-allowed opacity-75'
       }
+    },
+    highlight: {
+      true: ''
     }
   },
   compoundVariants: [{
-    variant: 'line',
+    highlight: true,
     orientation: 'horizontal',
     class: {
-      link: 'after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-0.5 after:rounded-full'
+      link: 'after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full'
     }
   }, {
-    variant: 'line',
+    highlight: true,
     orientation: 'vertical',
     class: {
       item: 'px-2',
-      link: 'after:absolute after:-left-[calc(var(--spacing-2)+1px)] after:inset-y-0.5 after:block after:w-0.5 after:rounded-full'
+      link: 'after:absolute after:-left-[calc(var(--spacing-2)+1px)] after:inset-y-0.5 after:block after:w-px after:rounded-full'
     }
   }, {
     disabled: false,
@@ -96,7 +102,7 @@ export default (config: { colors: string[] }) => ({
     variant: 'pill',
     active: true,
     class: {
-      link: `text-${color}-500 dark:text-${color}-400 before:bg-gray-100 dark:before:bg-gray-800`,
+      link: `text-${color}-500 dark:text-${color}-400`,
       linkLeadingIcon: `text-${color}-500 dark:text-${color}-400`
     }
   })), {
@@ -104,29 +110,22 @@ export default (config: { colors: string[] }) => ({
     variant: 'pill',
     active: true,
     class: {
-      link: 'text-gray-900 dark:text-white before:bg-gray-100 dark:before:bg-gray-800',
+      link: 'text-gray-900 dark:text-white',
       linkLeadingIcon: 'text-gray-900 dark:text-white'
     }
   }, {
-    disabled: false,
-    variant: 'line',
-    class: {
-      link: 'hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors',
-      linkLeadingIcon: 'group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors'
-    }
-  }, ...config.colors.map((color: string) => ({
-    color,
-    variant: 'line',
+    variant: 'pill',
     active: true,
+    highlight: false,
     class: {
-      link: `after:bg-${color}-500 dark:after:bg-${color}-400`
+      link: 'before:bg-gray-100 dark:before:bg-gray-800'
     }
-  })), {
-    color: 'black',
-    variant: 'line',
+  }, {
+    variant: 'pill',
     active: true,
+    highlight: true,
     class: {
-      link: 'after:bg-gray-900 dark:after:bg-white'
+      link: 'hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors'
     }
   }, {
     disabled: false,
@@ -152,42 +151,24 @@ export default (config: { colors: string[] }) => ({
       link: 'text-gray-900 dark:text-white',
       linkLeadingIcon: 'text-gray-900 dark:text-white'
     }
+  }, ...config.colors.map((highlightColor: string) => ({
+    highlightColor,
+    highlight: true,
+    active: true,
+    class: {
+      link: `after:bg-${highlightColor}-500 dark:after:bg-${highlightColor}-400`
+    }
+  })), {
+    highlightColor: 'black',
+    highlight: true,
+    active: true,
+    class: {
+      link: 'after:bg-gray-900 dark:after:bg-white'
+    }
   }],
-  // compoundVariants: [{
-  //   disabled: false,
-  //   active: false,
-  //   class: {
-  //     item: 'hover:text-gray-900 dark:hover:text-white transition-colors',
-  //     itemLeadingIcon: 'group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors'
-  //   }
-  // }, {
-  //   orientation: 'horizontal',
-  //   active: true,
-  //   class: {
-  //     item: 'after:bg-primary-500 dark:after:bg-primary-400'
-  //   }
-  // }, {
-  //   orientation: 'horizontal',
-  //   disabled: false,
-  //   class: {
-  //     item: 'hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors'
-  //   }
-  // }, {
-  //   orientation: 'vertical',
-  //   active: true,
-  //   class: {
-  //     item: 'before:bg-gray-100 dark:before:bg-gray-800'
-  //   }
-  // }, {
-  //   orientation: 'vertical',
-  //   active: false,
-  //   disabled: false,
-  //   class: {
-  //     item: 'hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors'
-  //   }
-  // }],
   defaultVariants: {
     color: 'primary',
+    highlightColor: 'primary',
     variant: 'pill'
   }
 })

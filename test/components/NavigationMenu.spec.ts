@@ -84,6 +84,8 @@ describe('NavigationMenu', () => {
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
     ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with highlight ${variant}`, { props: { ...props, highlight: true, variant } }]),
+    ...colors.map((highlightColor: string) => [`with highlight color ${highlightColor}`, { props: { ...props, highlight: true, highlightColor } }]),
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-plus' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { items, ui: { itemLeadingIcon: 'size-4' } } }],
