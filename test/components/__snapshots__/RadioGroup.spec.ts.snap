@@ -665,9 +665,36 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
 `;
 
 exports[`RadioGroup > renders with ui correctly 1`] = `
-"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="15" class="relative">
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="15" class="relative" tabindex="0">
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="15:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-4"><label for="15:1" class="block font-medium text-gray-700 dark:text-gray-200">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="15:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-4"><label for="15:2" class="block font-medium text-gray-700 dark:text-gray-200">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="15:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-4"><label for="15:3" class="block font-medium text-gray-700 dark:text-gray-200">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
   </fieldset>
 </div>"
 `;
