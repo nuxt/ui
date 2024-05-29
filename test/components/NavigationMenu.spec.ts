@@ -88,7 +88,7 @@ describe('NavigationMenu', () => {
     ...colors.map((highlightColor: string) => [`with highlight color ${highlightColor}`, { props: { ...props, highlight: true, highlightColor } }]),
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-plus' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
-    ['with ui', { props: { items, ui: { itemLeadingIcon: 'size-4' } } }],
+    ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
