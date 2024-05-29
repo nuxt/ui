@@ -9,9 +9,8 @@ describe('ButtonGroup', () => {
 
   it.each([
     // Props
-    ['with as', { props: { as: 'div' } }],
-    ['with class', { props: { class: '' } }],
-    ['with ui', { props: { ui: {} } }],
+    ['with as', { props: { as: 'section' } }],
+    ['with class', { props: { class: 'absolute' } }],
     // Slots
     ['with default slot', {
       slots: {

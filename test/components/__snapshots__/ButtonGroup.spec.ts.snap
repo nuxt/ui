@@ -12,7 +12,7 @@ exports[`ButtonGroup > renders orientation vertical with default slot correctly 
 </div>"
 `;
 
-exports[`ButtonGroup > renders with as correctly 1`] = `"<div class="relative inline-flex -space-x-px" as="div"></div>"`;
+exports[`ButtonGroup > renders with as correctly 1`] = `"<section class="relative inline-flex -space-x-px"></section>"`;
 
 exports[`ButtonGroup > renders with class correctly 1`] = `"<div class="relative inline-flex -space-x-px"></div>"`;
 
@@ -87,5 +87,3 @@ exports[`ButtonGroup > renders with size xs correctly 1`] = `
   </button>
 </div>"
 `;
-
-exports[`ButtonGroup > renders with ui correctly 1`] = `"<div class="relative inline-flex -space-x-px"></div>"`;

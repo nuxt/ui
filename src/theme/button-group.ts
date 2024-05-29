@@ -19,10 +19,7 @@ export const buttonGroupVariantWithRoot = {
 }
 
 export default {
-  slots: {
-    base: 'relative'
-  },
-
+  base: 'relative',
   variants: {
     orientation: {
       horizontal: 'inline-flex -space-x-px',
