@@ -54,8 +54,6 @@ export default (config: { colors: string[] }) => ({
     },
     active: {
       true: {
-        link: 'text-gray-900 dark:text-white',
-        linkLeadingIcon: 'text-gray-700 dark:text-gray-200',
         childLink: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
         childLinkIcon: 'text-gray-700 dark:text-gray-200'
       },
@@ -79,14 +77,15 @@ export default (config: { colors: string[] }) => ({
     highlight: true,
     orientation: 'horizontal',
     class: {
-      link: 'after:absolute after:-bottom-[calc(var(--spacing-2)+1px)] after:inset-x-2.5 after:block after:h-px after:rounded-full'
+      item: '-mb-px',
+      link: 'after:absolute after:-bottom-2 after:inset-x-2.5 after:block after:h-px after:rounded-full'
     }
   }, {
     highlight: true,
     orientation: 'vertical',
     class: {
-      item: 'px-2',
-      link: 'after:absolute after:-left-[calc(var(--spacing-2)+1px)] after:inset-y-0.5 after:block after:w-px after:rounded-full'
+      item: 'px-1.5 -ml-px',
+      link: 'after:absolute after:-left-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full'
     }
   }, {
     disabled: false,
