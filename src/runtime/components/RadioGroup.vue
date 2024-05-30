@@ -26,7 +26,7 @@ export interface RadioGroupProps<T> extends Omit<RadioGroupRootProps, 'asChild' 
   ui?: Partial<typeof radioGroup.slots>
 }
 
-export type RadioGroupEmits = RadioGroupRootEmits
+export interface RadioGroupEmits extends RadioGroupRootEmits {}
 
 type SlotProps<T> = (props: { item: T }) => any
 
