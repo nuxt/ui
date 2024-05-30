@@ -25,7 +25,7 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
 export interface PopoverEmits extends PopoverRootEmits {}
 
 export interface PopoverSlots {
-  default(): any
+  default(props: { open: boolean }): any
   content(): any
 }
 </script>
@@ -57,9 +57,9 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 </script>
 
 <template>
-  <Component.Root v-bind="rootProps">
+  <Component.Root v-slot="{ open }" v-bind="rootProps">
     <Component.Trigger v-if="!!slots.default" as-child>
-      <slot />
+      <slot :open="open" />
     </Component.Trigger>
 
     <Component.Portal :disabled="!portal">

@@ -27,7 +27,7 @@ export interface ModalProps extends DialogRootProps {
 export interface ModalEmits extends DialogRootEmits {}
 
 export interface ModalSlots {
-  default(): any
+  default(props: { open: boolean }): any
   content(): any
   header(): any
   title(): any
@@ -75,9 +75,9 @@ const ui = computed(() => tv({ extend: modal, slots: props.ui })({
 </script>
 
 <template>
-  <DialogRoot v-bind="rootProps">
+  <DialogRoot v-slot="{ open }" v-bind="rootProps">
     <DialogTrigger v-if="!!slots.default" as-child>
-      <slot />
+      <slot :open="open" />
     </DialogTrigger>
 
     <DialogPortal :disabled="!portal">

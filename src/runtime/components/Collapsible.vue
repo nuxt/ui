@@ -17,7 +17,7 @@ export interface CollapsibleProps extends Omit<CollapsibleRootProps, 'asChild'> 
 export interface CollapsibleEmits extends CollapsibleRootEmits {}
 
 export interface CollapsibleSlots {
-  default(): any
+  default(props: { open: boolean }): any
   content(): any
 }
 </script>
@@ -37,9 +37,9 @@ const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
 </script>
 
 <template>
-  <CollapsibleRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
+  <CollapsibleRoot v-slot="{ open }" v-bind="rootProps" :class="ui.root({ class: props.class })">
     <CollapsibleTrigger v-if="!!slots.default" as-child>
-      <slot />
+      <slot :open="open" />
     </CollapsibleTrigger>
 
     <CollapsibleContent :class="ui.content()">

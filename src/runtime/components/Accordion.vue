@@ -28,7 +28,7 @@ export interface AccordionProps<T> extends Omit<AccordionRootProps, 'asChild' | 
 
 export interface AccordionEmits extends AccordionRootEmits {}
 
-type SlotProps<T> = (props: { item: T, index: number }) => any
+type SlotProps<T> = (props: { item: T, index: number, open: boolean }) => any
 
 export type AccordionSlots<T extends { slot?: string }> = {
   leading: SlotProps<T>
@@ -60,25 +60,32 @@ const ui = computed(() => tv({ extend: accordion, slots: props.ui })({ disabled:
 
 <template>
   <AccordionRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
-    <AccordionItem v-for="(item, index) in items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.item()">
+    <AccordionItem
+      v-for="(item, index) in items"
+      v-slot="{ open }"
+      :key="index"
+      :value="item.value || String(index)"
+      :disabled="item.disabled"
+      :class="ui.item()"
+    >
       <AccordionHeader :class="ui.header()">
         <AccordionTrigger :class="ui.trigger({ disabled: item.disabled })">
-          <slot name="leading" :item="item" :index="index">
+          <slot name="leading" :item="item" :index="index" :open="open">
             <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
           </slot>
 
           <span v-if="item.label || !!slots.default" :class="ui.label()">
-            <slot :item="item" :index="index">{{ item.label }}</slot>
+            <slot :item="item" :index="index" :open="open">{{ item.label }}</slot>
           </span>
 
-          <slot name="trailing" :item="item" :index="index">
+          <slot name="trailing" :item="item" :index="index" :open="open">
             <UIcon :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon()" />
           </slot>
         </AccordionTrigger>
       </AccordionHeader>
 
       <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot])" v-bind="contentProps" :class="ui.content()">
-        <slot :name="item.slot || 'content'" :item="item" :index="index">
+        <slot :name="item.slot || 'content'" :item="item" :index="index" :open="open">
           {{ item.content }}
         </slot>
       </AccordionContent>

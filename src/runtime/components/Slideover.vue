@@ -29,7 +29,7 @@ export interface SlideoverProps extends DialogRootProps {
 export interface SlideoverEmits extends DialogRootEmits {}
 
 export interface SlideoverSlots {
-  default(): any
+  default(props: { open: boolean }): any
   content(): any
   header(): any
   title(): any
@@ -78,9 +78,9 @@ const ui = computed(() => tv({ extend: slideover, slots: props.ui })({
 </script>
 
 <template>
-  <DialogRoot v-bind="rootProps">
+  <DialogRoot v-slot="{ open }" v-bind="rootProps">
     <DialogTrigger v-if="!!slots.default" as-child>
-      <slot />
+      <slot :open="open" />
     </DialogTrigger>
 
     <DialogPortal :disabled="!portal">

@@ -23,7 +23,7 @@ export interface TooltipProps extends TooltipRootProps {
 export interface TooltipEmits extends TooltipRootEmits {}
 
 export interface TooltipSlots {
-  default(): any
+  default(props: { open: boolean }): any
   content(): any
 }
 </script>
@@ -47,9 +47,9 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })({ side: conte
 </script>
 
 <template>
-  <TooltipRoot v-bind="rootProps">
+  <TooltipRoot v-slot="{ open }" v-bind="rootProps">
     <TooltipTrigger v-if="!!slots.default" as-child>
-      <slot />
+      <slot :open="open" />
     </TooltipTrigger>
 
     <TooltipPortal :disabled="!portal">
