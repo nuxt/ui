@@ -49,13 +49,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UForm
-    ref="form"
-    :state="state"
-    :schema="schema"
-    class="gap-4 flex flex-col w-60"
-    @submit="onSubmit"
-  >
+  <UForm ref="form" :state="state" :schema="schema" class="gap-4 flex flex-col w-60" @submit="onSubmit">
     <UFormField label="Input" name="input">
       <UInput v-model="state.input" placeholder="john@lennon.com" />
     </UFormField>
