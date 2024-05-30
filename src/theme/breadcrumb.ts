@@ -13,10 +13,10 @@ export default {
   variants: {
     active: {
       true: {
-        link: 'text-primary-500 dark:text-primary-400 font-medium'
+        link: 'text-primary-500 dark:text-primary-400 font-semibold'
       },
       false: {
-        link: 'text-gray-500 dark:text-gray-400'
+        link: 'text-gray-500 dark:text-gray-400 font-medium'
       }
     },
     disabled: {
