@@ -49,7 +49,7 @@ extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-columns-selectable'
 componentProps:
-  class: 'flex-1'
+  class: 'flex-1 flex-col overflow-hidden'
 ---
 ::
 
@@ -282,7 +282,7 @@ extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-searchable'
 componentProps:
-  class: 'flex-1'
+  class: 'flex-1 flex-col overflow-hidden'
 ---
 ::
 
@@ -296,7 +296,7 @@ extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-paginable'
 componentProps:
-  class: 'flex-1'
+  class: 'flex-1 flex-col overflow-hidden'
 ---
 ::
 
