@@ -18,7 +18,9 @@ const items = [{
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="flex gap-4">
+    <UTabs :items="[{ label: 'Monthly' }, { label: 'Yearly' }]" :content="false" />
+
     <UTabs :items="items" class="w-96">
       <template #custom="{ item }">
         <span class="text-gray-500 dark:text-gray-400">Custom: {{ item.content }}</span>

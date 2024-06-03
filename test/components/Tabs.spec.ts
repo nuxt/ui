@@ -28,6 +28,7 @@ describe('Tabs', () => {
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['without content', { props: { ...props, content: false } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
     ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-gray-200 dark:ring-gray-800' } } }],
     // Slots
