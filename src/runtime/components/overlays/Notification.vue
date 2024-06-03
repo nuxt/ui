@@ -132,7 +132,7 @@ export default defineComponent({
         ui.value.background?.replaceAll('{color}', props.color),
         ui.value.rounded,
         ui.value.shadow,
-        ui.value.ring?.replaceAll("{color}", props.color);
+        ui.value.ring?.replaceAll('{color}', props.color)
       ), props.class)
     })
 
