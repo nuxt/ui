@@ -20,13 +20,17 @@
           </slot>
         </p>
 
-        <div v-if="(description || $slots.description) && actions.length" :class="ui.actions">
-          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
+        <div v-if="(description || $slots.description) && (actions.length || $slots.actions)" :class="ui.actions">
+          <slot name="actions">
+            <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
+          </slot>
         </div>
       </div>
       <div v-if="closeButton || (!description && !$slots.description && actions.length)" :class="twMerge(ui.actions, 'mt-0')">
-        <template v-if="!description && !$slots.description && actions.length">
-          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
+        <template v-if="!description && !$slots.description && (actions.length || $slots.actions)">
+          <slot name="actions">
+            <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
+          </slot>
         </template>
 
         <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(ui.default.closeButton || {}), ...closeButton }" @click.stop="$emit('close')" />
