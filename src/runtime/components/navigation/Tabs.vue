@@ -32,7 +32,7 @@
       </HTab>
     </HTabList>
 
-    <HTabPanels v-if="!$props.contentless" :class="ui.container">
+    <HTabPanels v-if="!contentless" :class="ui.container">
       <HTabPanel v-for="(item, index) of items" :key="index" v-slot="{ selected }" :class="ui.base" :unmount="unmount">
         <slot :name="item.slot || 'item'" :item="item" :index="index" :selected="selected">
           {{ item.content }}
