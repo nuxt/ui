@@ -10,7 +10,7 @@ links:
 
 Use the Form component to validate form data using schema libraries such as [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi), [Valibot](https://valibot.dev/), or your own validation logic.
 
-It works with the [FormGroup](/components/input) component to display error messages around form elements automatically.
+It works with the [FormGroup](/components/form-group) component to display error messages around form elements automatically.
 
 The form component requires two props:
 - `state` - a reactive object holding the form's state.
