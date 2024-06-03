@@ -179,8 +179,6 @@ Use the `#avatar` slot to customize the displayable avatar.
 
 Use the `#actions` slot to add custom user interaction elements.
 
-:component-example{component="alert-example-actions"}
-
 ## Props
 
 :component-props
