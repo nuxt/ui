@@ -23,7 +23,9 @@ export default {
   translate: {
     base: 'translate-x-0',
     left: '-translate-x-full rtl:translate-x-full',
-    right: 'translate-x-full rtl:-translate-x-full'
+    right: 'translate-x-full rtl:-translate-x-full',
+    top: '-translate-y-full',
+    bottom: 'translate-y-full'
   },
   // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
   transition: {
