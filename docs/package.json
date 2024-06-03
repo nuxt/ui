@@ -4,16 +4,16 @@
   "type": "module",
   "dependencies": {
     "@iconify-json/heroicons": "^1.1.21",
-    "@iconify-json/simple-icons": "^1.1.101",
+    "@iconify-json/simple-icons": "^1.1.104",
     "@nuxt/content": "^2.12.1",
-    "@nuxt/eslint-config": "^0.3.10",
+    "@nuxt/eslint-config": "^0.3.13",
     "@nuxt/fonts": "^0.7.0",
     "@nuxt/image": "^1.7.0",
     "@nuxt/ui": "latest",
-    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@1.2.0-28584828.9fd6689",
+    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@1.2.0-28614875.8eede69",
     "@nuxtjs/plausible": "^1.0.0",
     "@octokit/rest": "^20.1.1",
-    "@vueuse/nuxt": "^10.9.0",
+    "@vueuse/nuxt": "^10.10.0",
     "date-fns": "^3.6.0",
     "eslint": "^8.57.0",
     "joi": "^17.13.1",
@@ -21,12 +21,12 @@
     "nuxt-cloudflare-analytics": "^1.0.8",
     "nuxt-component-meta": "^0.6.4",
     "nuxt-og-image": "^2.2.4",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.0",
     "typescript": "^5.4.5",
     "ufo": "^1.5.3",
     "v-calendar": "^3.1.2",
     "valibot": "^0.30.0",
     "yup": "^1.4.0",
-    "zod": "^3.23.6"
+    "zod": "^3.23.8"
   }
 }
