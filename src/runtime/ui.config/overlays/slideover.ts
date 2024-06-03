@@ -20,6 +20,16 @@ export default {
   padding: '',
   shadow: 'shadow-xl',
   width: 'w-screen max-w-md',
+  side: {
+    horizontal: {
+      width: 'w-screen max-w-md',
+      height: 'h-full'
+    },
+    vertical: {
+      height: 'h-screen max-h-96',
+      width: 'w-full'
+    }
+  },  
   translate: {
     base: 'translate-x-0',
     left: '-translate-x-full rtl:translate-x-full',
