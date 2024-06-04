@@ -74,7 +74,7 @@ defineShortcuts({
     <div class="h-screen w-screen overflow-hidden flex min-h-0 bg-white dark:bg-gray-900" vaul-drawer-wrapper>
       <UNavigationMenu :items="items" orientation="vertical" class="border-r border-gray-200 dark:border-gray-800 overflow-y-auto w-48 p-4" />
 
-      <div class="flex-1 flex flex-col items-center justify-center overflow-y-auto w-full py-12 px-4">
+      <div class="flex-1 flex flex-col items-center justify-around overflow-y-auto w-full py-12 px-4">
         <NuxtPage />
       </div>
     </div>
