@@ -15,10 +15,10 @@ export default (config: { colors: string[] }) => ({
     childItem: '',
     childLink: 'group size-full px-3 py-2 rounded-md flex items-start gap-2 text-left',
     childLinkWrapper: 'flex flex-col items-start',
-    childLinkLabel: 'font-semibold text-sm relative inline-flex',
-    childLinkDescription: 'text-sm text-gray-500 dark:text-gray-400',
     childLinkIcon: 'size-5 shrink-0',
-    childLinkExternalIcon: 'size-3 align-top text-gray-400 dark:text-gray-500',
+    childLinkLabel: 'font-semibold text-sm relative inline-flex',
+    childLinkLabelExternalIcon: 'size-3 align-top text-gray-400 dark:text-gray-500',
+    childLinkDescription: 'text-sm text-gray-500 dark:text-gray-400',
     separator: 'px-2 h-px bg-gray-200 dark:bg-gray-800',
     viewportWrapper: 'absolute top-full inset-x-0 flex w-full',
     // FIXME: add `sm:w-[var(--radix-navigation-menu-viewport-width)]` / `transition-[width,height]` / `origin-[top_center]` once position is based on trigger

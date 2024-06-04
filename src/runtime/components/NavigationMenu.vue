@@ -147,7 +147,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                           <p :class="ui.childLinkLabel({ active: childActive })">
                             {{ childItem.label }}
 
-                            <UIcon v-if="childItem.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.childLinkExternalIcon({ active: childActive })" />
+                            <UIcon v-if="childItem.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.childLinkLabelExternalIcon({ active: childActive })" />
                           </p>
                           <p v-if="childItem.description" :class="ui.childLinkDescription({ active: childActive })">
                             {{ childItem.description }}
