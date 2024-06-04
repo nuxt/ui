@@ -63,6 +63,8 @@ componentProps:
 ---
 ::
 
+You can use the `content` prop and set it to `false` to avoid the rendering of the HTML content if you don't need it.
+
 ### Control the selected index
 
 Use a `v-model` to control the selected index.
