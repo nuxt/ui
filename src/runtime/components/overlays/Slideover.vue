@@ -6,7 +6,7 @@
       </TransitionChild>
 
       <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-        <HDialogPanel :class="[ui.base, ui.side[sideType].width, ui.side[sideType].height, ui.background, ui.ring, ui.padding]">
+        <HDialogPanel :class="[ui.base, sideType === 'horizontal' ? [ui.width, 'h-full'] : [ui.height, 'w-full'], ui.background, ui.ring, ui.padding]">
           <slot />
         </HDialogPanel>
       </TransitionChild>
