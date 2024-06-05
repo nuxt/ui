@@ -5,7 +5,15 @@ import { addTemplates } from './templates'
 import icons from './theme/icons'
 
 export interface ModuleOptions {
+  /**
+   * Prefix for components
+   * @defaultValue U
+   */
   prefix?: string
+  /**
+   * Colors to generate classes for (based on TailwindCSS colors)
+   * @defaultValue ['primary', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchia', 'pink', 'rose']
+   */
   colors?: string[]
 }
 
