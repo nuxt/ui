@@ -1,4 +1,6 @@
-export default (config: { colors: string[] }) => ({
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-start',
     base: 'inline-flex items-center shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700',
@@ -11,7 +13,7 @@ export default (config: { colors: string[] }) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, {
+      ...Object.fromEntries(options.colors.map((color: string) => [color, {
         base: `data-[state=checked]:bg-${color}-500 dark:data-[state=checked]:bg-${color}-400 focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`,
         icon: `group-data-[state=checked]:text-${color}-500 dark:group-data-[state=checked]:text-${color}-400`
       }])),

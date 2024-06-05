@@ -1,11 +1,13 @@
-export default (config: { colors: string[] }) => ({
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center justify-center shrink-0',
     base: 'rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap'
   },
   variants: {
     color: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, `bg-${color}-500 dark:bg-${color}-400`])),
+      ...Object.fromEntries(options.colors.map((color: string) => [color, `bg-${color}-500 dark:bg-${color}-400`])),
       gray: 'bg-gray-500 dark:bg-gray-400',
       white: 'bg-white dark:bg-gray-900',
       black: 'bg-gray-900 dark:bg-white'

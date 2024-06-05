@@ -1,4 +1,6 @@
-export default (config: { colors: string[] }) => ({
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex gap-1.5',
     list: 'isolate min-w-0',
@@ -29,11 +31,11 @@ export default (config: { colors: string[] }) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, ''])),
+      ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
       black: ''
     },
     highlightColor: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, ''])),
+      ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
       black: ''
     },
     variant: {
@@ -95,7 +97,7 @@ export default (config: { colors: string[] }) => ({
       link: 'hover:text-gray-900 dark:hover:text-white transition-colors hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 before:transition-colors',
       linkLeadingIcon: 'group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors'
     }
-  }, ...config.colors.map((color: string) => ({
+  }, ...options.colors.map((color: string) => ({
     color,
     variant: 'pill',
     active: true,
@@ -133,7 +135,7 @@ export default (config: { colors: string[] }) => ({
       link: 'hover:text-gray-900 dark:hover:text-white transition-colors',
       linkLeadingIcon: 'group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors'
     }
-  }, ...config.colors.map((color: string) => ({
+  }, ...options.colors.map((color: string) => ({
     color,
     variant: 'link',
     active: true,
@@ -149,7 +151,7 @@ export default (config: { colors: string[] }) => ({
       link: 'text-gray-900 dark:text-white',
       linkLeadingIcon: 'text-gray-900 dark:text-white'
     }
-  }, ...config.colors.map((highlightColor: string) => ({
+  }, ...options.colors.map((highlightColor: string) => ({
     highlightColor,
     highlight: true,
     active: true,

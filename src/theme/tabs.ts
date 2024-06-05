@@ -1,4 +1,6 @@
-export default (config: { colors: string[] }) => ({
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
@@ -11,7 +13,7 @@ export default (config: { colors: string[] }) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, ''])),
+      ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
       white: '',
       black: ''
     },
@@ -64,7 +66,7 @@ export default (config: { colors: string[] }) => ({
       list: 'border-l',
       indicator: '-left-px w-px'
     }
-  }, ...config.colors.map((color: string) => ({
+  }, ...options.colors.map((color: string) => ({
     color,
     variant: 'pill',
     class: {
@@ -85,7 +87,7 @@ export default (config: { colors: string[] }) => ({
       indicator: 'bg-gray-900 dark:bg-white',
       trigger: 'data-[state=active]:text-white dark:data-[state=active]:text-gray-900'
     }
-  }, ...config.colors.map((color: string) => ({
+  }, ...options.colors.map((color: string) => ({
     color,
     variant: 'link',
     class: {

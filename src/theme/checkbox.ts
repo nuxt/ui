@@ -1,4 +1,6 @@
-export default (config: { colors: string[] }) => ({
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-start',
     base: 'shrink-0 flex items-center justify-center rounded text-white dark:text-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
@@ -10,7 +12,7 @@ export default (config: { colors: string[] }) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`])),
+      ...Object.fromEntries(options.colors.map((color: string) => [color, `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`])),
       black: 'focus-visible:outline-gray-900 dark:focus-visible:outline-white'
     },
     size: {
@@ -56,7 +58,7 @@ export default (config: { colors: string[] }) => ({
       true: ''
     }
   },
-  compoundVariants: [...config.colors.map((color: string) => ({
+  compoundVariants: [...options.colors.map((color: string) => ({
     color,
     checked: true,
     class: `ring-2 ring-${color}-500 dark:ring-${color}-400 bg-${color}-500 dark:bg-${color}-400`

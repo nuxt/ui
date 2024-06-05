@@ -1,4 +1,6 @@
-export default (config: { colors: string[] }) => ({
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'gap-2',
     base: 'relative overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700',
@@ -15,7 +17,7 @@ export default (config: { colors: string[] }) => ({
       'elastic': ''
     },
     color: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, {
+      ...Object.fromEntries(options.colors.map((color: string) => [color, {
         indicator: `bg-${color}-500 dark:bg-${color}-400`,
         steps: `text-${color}-500 dark:text-${color}-400`
       }])),

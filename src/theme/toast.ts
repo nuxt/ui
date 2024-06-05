@@ -1,4 +1,6 @@
-export default (config: { colors: string[] }) => ({
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5',
     wrapper: 'w-0 flex-1 flex flex-col gap-1',
@@ -11,7 +13,7 @@ export default (config: { colors: string[] }) => ({
     close: 'p-0'
   },
   variants: {
-    color: Object.fromEntries(config.colors.map((color: string) => [color, {
+    color: Object.fromEntries(options.colors.map((color: string) => [color, {
       icon: `text-${color}-500 dark:text-${color}-400`,
       progress: `bg-${color}-500 dark:bg-${color}-400`
     }])),

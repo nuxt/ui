@@ -1,5 +1,6 @@
+import type { ModuleOptions } from '../module'
 import input from './input'
 
-export default (config: { colors: string[] }) => {
-  return input(config)
+export default (options: Required<ModuleOptions>) => {
+  return input(options)
 }

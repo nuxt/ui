@@ -1,8 +1,10 @@
-export default (config: { colors: string[] }) => ({
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   base: 'rounded-md font-medium inline-flex items-center',
   variants: {
     color: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, ''])),
+      ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
       white: '',
       gray: '',
       black: ''
@@ -19,19 +21,19 @@ export default (config: { colors: string[] }) => ({
       lg: 'text-sm px-2 py-1'
     }
   },
-  compoundVariants: [...config.colors.map((color: string) => ({
+  compoundVariants: [...options.colors.map((color: string) => ({
     color,
     variant: 'solid',
     class: `bg-${color}-500 dark:bg-${color}-400 text-white dark:text-gray-900`
-  })), ...config.colors.map((color: string) => ({
+  })), ...options.colors.map((color: string) => ({
     color,
     variant: 'outline',
     class: `text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500 dark:ring-${color}-400`
-  })), ...config.colors.map((color: string) => ({
+  })), ...options.colors.map((color: string) => ({
     color,
     variant: 'soft',
     class: `bg-${color}-50 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400`
-  })), ...config.colors.map((color: string) => ({
+  })), ...options.colors.map((color: string) => ({
     color,
     variant: 'subtle',
     class: `bg-${color}-50 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/25 dark:ring-${color}-400/25`

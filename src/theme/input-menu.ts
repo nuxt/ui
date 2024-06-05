@@ -1,7 +1,8 @@
 import { defu } from 'defu'
+import type { ModuleOptions } from '../module'
 import input from './input'
 
-export default (config: { colors: string[] }) => {
+export default (options: Required<ModuleOptions>) => {
   return defu({
     slots: {
       arrow: 'fill-gray-200 dark:fill-gray-800',
@@ -62,5 +63,5 @@ export default (config: { colors: string[] }) => {
         }
       }
     }
-  }, input(config))
+  }, input(options))
 }

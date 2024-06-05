@@ -1,4 +1,6 @@
-export default (config: { colors: string[] }) => ({
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative',
     fieldset: 'flex',
@@ -13,7 +15,7 @@ export default (config: { colors: string[] }) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, {
+      ...Object.fromEntries(options.colors.map((color: string) => [color, {
         base: `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`,
         indicator: `bg-${color}-500 dark:bg-${color}-400`
       }])),

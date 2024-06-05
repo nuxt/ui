@@ -1,4 +1,6 @@
-export default (config: { colors: string[] }) => ({
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5',
     wrapper: 'min-w-0 flex-1 flex flex-col gap-1',
@@ -11,7 +13,7 @@ export default (config: { colors: string[] }) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, ''])),
+      ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
       white: '',
       gray: '',
       black: ''
@@ -33,25 +35,25 @@ export default (config: { colors: string[] }) => ({
       }
     }
   },
-  compoundVariants: [...config.colors.map((color: string) => ({
+  compoundVariants: [...options.colors.map((color: string) => ({
     color,
     variant: 'solid',
     class: {
       root: `bg-${color}-500 dark:bg-${color}-400 text-white dark:text-gray-900`
     }
-  })), ...config.colors.map((color: string) => ({
+  })), ...options.colors.map((color: string) => ({
     color,
     variant: 'outline',
     class: {
       root: `text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500 dark:ring-${color}-400`
     }
-  })), ...config.colors.map((color: string) => ({
+  })), ...options.colors.map((color: string) => ({
     color,
     variant: 'soft',
     class: {
       root: `bg-${color}-50 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400`
     }
-  })), ...config.colors.map((color: string) => ({
+  })), ...options.colors.map((color: string) => ({
     color,
     variant: 'subtle',
     class: {

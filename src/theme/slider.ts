@@ -1,4 +1,6 @@
-export default (config: { colors: string[] }) => ({
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-center select-none touch-none',
     track: 'relative bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-full grow',
@@ -7,7 +9,7 @@ export default (config: { colors: string[] }) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, {
+      ...Object.fromEntries(options.colors.map((color: string) => [color, {
         range: `bg-${color}-500 dark:bg-${color}-400`,
         thumb: `ring-${color}-500 dark:ring-${color}-400 focus-visible:outline-${color}-500/50 dark:focus-visible:outline-${color}-400/50`
       }])),

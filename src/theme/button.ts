@@ -1,6 +1,7 @@
+import type { ModuleOptions } from '../module'
 import { buttonGroupVariant } from './button-group'
 
-export default (config: { colors: string[] }) => ({
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     base: 'rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
     label: '',
@@ -11,7 +12,7 @@ export default (config: { colors: string[] }) => ({
   variants: {
     ...buttonGroupVariant,
     color: {
-      ...Object.fromEntries(config.colors.map((color: string) => [color, ''])),
+      ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
       white: '',
       gray: '',
       black: ''
@@ -75,27 +76,27 @@ export default (config: { colors: string[] }) => ({
       true: ''
     }
   },
-  compoundVariants: [...config.colors.map((color: string) => ({
+  compoundVariants: [...options.colors.map((color: string) => ({
     color,
     variant: 'solid',
     class: `shadow-sm text-white dark:text-gray-900 bg-${color}-500 hover:bg-${color}-600 disabled:bg-${color}-500 dark:bg-${color}-400 dark:hover:bg-${color}-500 dark:disabled:bg-${color}-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
-  })), ...config.colors.map((color: string) => ({
+  })), ...options.colors.map((color: string) => ({
     color,
     variant: 'outline',
     class: `ring ring-inset ring-current text-${color}-500 dark:text-${color}-400 hover:bg-${color}-50 disabled:bg-transparent dark:hover:bg-${color}-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
-  })), ...config.colors.map((color: string) => ({
+  })), ...options.colors.map((color: string) => ({
     color,
     variant: 'soft',
     class: `text-${color}-500 dark:text-${color}-400 bg-${color}-50 hover:bg-${color}-100 disabled:bg-${color}-50 dark:bg-${color}-950 dark:hover:bg-${color}-900 dark:disabled:bg-${color}-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
-  })), ...config.colors.map((color: string) => ({
+  })), ...options.colors.map((color: string) => ({
     color,
     variant: 'subtle',
     class: `text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/25 dark:ring-${color}-400/25 bg-${color}-500/10 hover:bg-${color}-500/20 disabled:bg-${color}-500/10 dark:bg-${color}-400/10 dark:hover:bg-${color}-400/20 dark:disabled:bg-${color}-400/10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
-  })), ...config.colors.map((color: string) => ({
+  })), ...options.colors.map((color: string) => ({
     color,
     variant: 'ghost',
     class: `text-${color}-500 dark:text-${color}-400 hover:bg-${color}-50 disabled:bg-transparent dark:hover:bg-${color}-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
-  })), ...config.colors.map((color: string) => ({
+  })), ...options.colors.map((color: string) => ({
     color,
     variant: 'link',
     class: `text-${color}-500 hover:text-${color}-600 disabled:text-${color}-500 dark:text-${color}-400 dark:hover:text-${color}-500 dark:disabled:text-${color}-400 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
