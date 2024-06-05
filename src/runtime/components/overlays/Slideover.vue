@@ -1,12 +1,12 @@
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen" @after-leave="onAfterLeave">
-    <HDialog :class="[ui.wrapper, { 'justify-end': side === 'right' }]" v-bind="attrs" @close="close">
+    <HDialog :class="[ui.wrapper, { 'justify-end': side === 'right' }, { 'items-end': side === 'bottom' }]" v-bind="attrs" @close="close">
       <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
       <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-        <HDialogPanel :class="[ui.base, ui.width, ui.background, ui.ring, ui.padding]">
+        <HDialogPanel :class="[ui.base, sideType === 'horizontal' ? [ui.width, 'h-full'] : [ui.height, 'w-full'], ui.background, ui.ring, ui.padding]">
           <slot />
         </HDialogPanel>
       </TransitionChild>
@@ -46,9 +46,9 @@ export default defineComponent({
       default: false
     },
     side: {
-      type: String as PropType<'left' | 'right'>,
+      type: String as PropType<'left' | 'right' | 'top' | 'bottom'>,
       default: 'right',
-      validator: (value: string) => ['left', 'right'].includes(value)
+      validator: (value: string) => ['left', 'right', 'top', 'bottom'].includes(value)
     },
     overlay: {
       type: Boolean,
@@ -89,14 +89,52 @@ export default defineComponent({
         return {}
       }
 
+      let enterFrom, leaveTo
+      switch (props.side) {
+      case 'left':
+        enterFrom = ui.value.translate.left
+        leaveTo = ui.value.translate.left
+        break
+      case 'right':
+        enterFrom = ui.value.translate.right
+        leaveTo = ui.value.translate.right
+        break
+      case 'top':
+        enterFrom = ui.value.translate.top
+        leaveTo = ui.value.translate.top
+        break
+      case 'bottom':
+        enterFrom = ui.value.translate.bottom
+        leaveTo = ui.value.translate.bottom
+        break
+      default:
+        enterFrom = ui.value.translate.right
+        leaveTo = ui.value.translate.right
+      }
+
       return {
         ...ui.value.transition,
-        enterFrom: props.side === 'left' ? ui.value.translate.left : ui.value.translate.right,
+        enterFrom,
         enterTo: ui.value.translate.base,
         leaveFrom: ui.value.translate.base,
-        leaveTo: props.side === 'left' ? ui.value.translate.left : ui.value.translate.right
+        leaveTo
       }
     })
+    const sideType = computed(() => {
+      switch (props.side) {
+      case 'left':
+        return 'horizontal'
+      case 'right':
+        return 'horizontal'
+      case 'top':
+        return 'vertical'
+      case 'bottom':
+        return 'vertical'
+      default:
+        return 'right'
+      }
+    })
+
 
     function close (value: boolean) {
       if (props.preventClose) {
@@ -121,6 +159,7 @@ export default defineComponent({
       attrs,
       isOpen,
       transitionClass,
+      sideType,
       onAfterLeave,
       close
     }
