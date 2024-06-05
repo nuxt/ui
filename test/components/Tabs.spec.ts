@@ -1,8 +1,12 @@
 import { describe, it, expect } from 'vitest'
 import Tabs, { type TabsProps, type TabsSlots } from '../../src/runtime/components/Tabs.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/tabs'
 
 describe('Tabs', () => {
+  const colors = Object.keys(theme.variants.color) as any
+  const variants = Object.keys(theme.variants.variant) as any
+
   const items = [{
     label: 'Tab1',
     avatar: {
@@ -28,6 +32,8 @@ describe('Tabs', () => {
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
     ['without content', { props: { ...props, content: false } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
     ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-gray-200 dark:ring-gray-800' } } }],

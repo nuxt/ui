@@ -1,5 +1,5 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 import type { TabsRootProps, TabsRootEmits, TabsContentProps, TabsTriggerProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
@@ -19,8 +19,12 @@ export interface TabsItem extends Partial<Pick<TabsTriggerProps, 'disabled' | 'v
   content?: string
 }
 
+type TabsVariants = VariantProps<typeof tabs>
+
 export interface TabsProps<T> extends Omit<TabsRootProps, 'asChild'> {
   items?: T[]
+  color?: TabsVariants['color']
+  variant?: TabsVariants['variant']
   content?: boolean | Omit<TabsContentProps, 'asChild' | 'value'>
   class?: any
   ui?: Partial<typeof tabs.slots>
@@ -55,7 +59,11 @@ const slots = defineSlots<TabsSlots<T>>()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'activationMode', 'modelValue'), emits)
 const contentProps = toRef(() => defu(props.content || {}, { forceMount: true }) as TabsContentProps)
 
-const ui = computed(() => tv({ extend: tabs, slots: props.ui })({ orientation: props.orientation }))
+const ui = computed(() => tv({ extend: tabs, slots: props.ui })({
+  color: props.color,
+  variant: props.variant,
+  orientation: props.orientation
+}))
 </script>
 
 <template>
