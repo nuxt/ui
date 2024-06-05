@@ -69,7 +69,7 @@ export default (config: { colors: string[] }) => ({
     variant: 'pill',
     class: {
       indicator: `bg-${color}-500 dark:bg-${color}-400`,
-      trigger: 'data-[state=active]:text-white'
+      trigger: 'data-[state=active]:text-white dark:data-[state=active]:text-gray-900'
     }
   })), {
     color: 'white',
