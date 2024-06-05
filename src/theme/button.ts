@@ -3,7 +3,7 @@ import { buttonGroupVariant } from './button-group'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    base: 'rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    base: ['rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.transitions && 'transition-colors'],
     label: '',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',

@@ -176,7 +176,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
       transform: translateY(200%)
     }
   }
-  
+
   @keyframes carousel-inverse {
     0%,
     100% {
@@ -201,7 +201,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
       transform: translateY(-100%)
     }
   }
-  
+
   @keyframes swing {
     0%,
     100% {
@@ -228,7 +228,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
       transform: translateY(125%)
     }
   }
-  
+
   @keyframes elastic {
     /* Firefox doesn't do "margin: 0 auto", we have to play with margin-left */
     0%,
@@ -284,7 +284,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
       write: true,
       getContents: async () => {
         const template = (theme as any)[component]
-        const result = typeof template === 'function' ? template({ colors: options.colors }) : template
+        const result = typeof template === 'function' ? template(options) : template
 
         const variants = Object.keys(result.variants || {})
 

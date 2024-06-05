@@ -5,9 +5,9 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'gap-2',
     base: 'relative overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700',
     indicator: 'rounded-full size-full transition-transform duration-200 ease-out',
-    status: 'flex justify-end text-gray-400 dark:text-gray-500 transition-transform',
+    status: 'flex justify-end text-gray-400 dark:text-gray-500 transition-[width] duration-200',
     steps: 'grid items-end',
-    step: 'transition-opacity truncate text-end row-start-1 col-start-1'
+    step: 'truncate text-end row-start-1 col-start-1 transition-opacity'
   },
   variants: {
     animation: {

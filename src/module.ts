@@ -15,6 +15,11 @@ export interface ModuleOptions {
    * @defaultValue ['primary', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchia', 'pink', 'rose']
    */
   colors?: string[]
+  /**
+   * Disable color transitions
+   * @defaultValue true
+   */
+  transitions?: boolean
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -27,7 +32,8 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {
     prefix: 'U',
-    colors: undefined
+    colors: undefined,
+    transitions: true
   },
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)

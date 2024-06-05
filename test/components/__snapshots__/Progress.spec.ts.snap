@@ -99,32 +99,32 @@ exports[`Progress > renders with color red correctly 1`] = `
 
 exports[`Progress > renders with max correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
-  <div class="flex justify-end text-gray-400 dark:text-gray-500 transition-transform text-sm flex-row" style="width: 50%;">50% </div>
+  <div class="flex justify-end text-gray-400 dark:text-gray-500 transition-[width] duration-200 text-sm flex-row" style="width: 50%;">50% </div>
   <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-valuetext="50%" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" class="relative overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700 w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary-500 dark:bg-primary-400 data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
   </div>
   <div class="grid items-end text-primary-500 dark:text-primary-400 text-sm">
-    <div class="transition-opacity truncate text-end row-start-1 col-start-1 opacity-0">Waiting...</div>
-    <div class="transition-opacity truncate text-end row-start-1 col-start-1 opacity-0">Cloning...</div>
-    <div class="transition-opacity truncate text-end row-start-1 col-start-1 opacity-100">Migrating...</div>
-    <div class="transition-opacity truncate text-end row-start-1 col-start-1 opacity-0">Deploying...</div>
-    <div class="transition-opacity truncate text-end row-start-1 col-start-1 opacity-0">Done!</div>
+    <div class="truncate text-end row-start-1 col-start-1 transition-opacity opacity-0">Waiting...</div>
+    <div class="truncate text-end row-start-1 col-start-1 transition-opacity opacity-0">Cloning...</div>
+    <div class="truncate text-end row-start-1 col-start-1 transition-opacity opacity-100">Migrating...</div>
+    <div class="truncate text-end row-start-1 col-start-1 transition-opacity opacity-0">Deploying...</div>
+    <div class="truncate text-end row-start-1 col-start-1 transition-opacity opacity-0">Done!</div>
   </div>
 </div>"
 `;
 
 exports[`Progress > renders with max inverted correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
-  <div class="flex justify-end text-gray-400 dark:text-gray-500 transition-transform text-sm self-end flex-row-reverse" style="width: 50%;">50% </div>
+  <div class="flex justify-end text-gray-400 dark:text-gray-500 transition-[width] duration-200 text-sm self-end flex-row-reverse" style="width: 50%;">50% </div>
   <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-valuetext="50%" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" class="relative overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700 w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary-500 dark:bg-primary-400 data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite]" style="transform: translateX(50%);"></div>
   </div>
   <div class="grid items-end text-primary-500 dark:text-primary-400 text-sm">
-    <div class="transition-opacity truncate row-start-1 col-start-1 opacity-0 text-start">Waiting...</div>
-    <div class="transition-opacity truncate row-start-1 col-start-1 opacity-0 text-start">Cloning...</div>
-    <div class="transition-opacity truncate row-start-1 col-start-1 opacity-100 text-start">Migrating...</div>
-    <div class="transition-opacity truncate row-start-1 col-start-1 opacity-0 text-start">Deploying...</div>
-    <div class="transition-opacity truncate row-start-1 col-start-1 opacity-0 text-start">Done!</div>
+    <div class="truncate row-start-1 col-start-1 transition-opacity opacity-0 text-start">Waiting...</div>
+    <div class="truncate row-start-1 col-start-1 transition-opacity opacity-0 text-start">Cloning...</div>
+    <div class="truncate row-start-1 col-start-1 transition-opacity opacity-100 text-start">Migrating...</div>
+    <div class="truncate row-start-1 col-start-1 transition-opacity opacity-0 text-start">Deploying...</div>
+    <div class="truncate row-start-1 col-start-1 transition-opacity opacity-0 text-start">Done!</div>
   </div>
 </div>"
 `;
@@ -231,7 +231,7 @@ exports[`Progress > renders with size xs correctly 1`] = `
 
 exports[`Progress > renders with status correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
-  <div class="flex justify-end text-gray-400 dark:text-gray-500 transition-transform text-sm flex-row" style="width: 50%;">50% </div>
+  <div class="flex justify-end text-gray-400 dark:text-gray-500 transition-[width] duration-200 text-sm flex-row" style="width: 50%;">50% </div>
   <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-valuetext="50%" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700 w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="50" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary-500 dark:bg-primary-400 data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
   </div>
@@ -241,7 +241,7 @@ exports[`Progress > renders with status correctly 1`] = `
 
 exports[`Progress > renders with status inverted correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
-  <div class="flex justify-end text-gray-400 dark:text-gray-500 transition-transform text-sm self-end flex-row-reverse" style="width: 50%;">50% </div>
+  <div class="flex justify-end text-gray-400 dark:text-gray-500 transition-[width] duration-200 text-sm self-end flex-row-reverse" style="width: 50%;">50% </div>
   <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-valuetext="50%" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700 w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="50" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary-500 dark:bg-primary-400 data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite]" style="transform: translateX(50%);"></div>
   </div>

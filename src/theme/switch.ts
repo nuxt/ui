@@ -3,10 +3,10 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-start',
-    base: 'inline-flex items-center shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700',
+    base: ['inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700', options.transitions && 'transition-colors duration-200'],
     container: 'flex items-center',
     thumb: 'group pointer-events-none block rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center',
-    icon: 'absolute shrink-0 group-data-[state=unchecked]:text-gray-400 dark:group-data-[state=unchecked]:text-gray-500 transition-[color,opacity] duration-200 opacity-0 size-10/12',
+    icon: ['absolute shrink-0 group-data-[state=unchecked]:text-gray-400 dark:group-data-[state=unchecked]:text-gray-500 opacity-0 size-10/12', options.transitions && 'transition-[color,opacity] duration-200'],
     wrapper: 'ms-2',
     label: 'block font-medium text-gray-700 dark:text-gray-200',
     description: 'text-gray-500 dark:text-gray-400'
