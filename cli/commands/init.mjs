@@ -24,12 +24,29 @@ export default defineCommand({
     pro: {
       type: 'boolean',
       description: 'Create a pro component.'
+    },
+    prose: {
+      type: 'boolean',
+      description: 'Create a prose component (with --pro).'
+    },
+    content: {
+      type: 'boolean',
+      description: 'Create a content component (with --pro).'
     }
   },
   async setup({ args }) {
     const name = args.name
     if (!name) {
-      consola.error('name argument is missing!')
+      consola.error('`name` argument is missing!')
+      process.exit(1)
+    }
+
+    if (args.prose && !args.pro) {
+      consola.error('`--prose` flag can only be used with `--pro` flag!')
+      process.exit(1)
+    }
+    if (args.content && !args.pro) {
+      consola.error('`--content` flag can only be used with `--pro` flag!')
       process.exit(1)
     }
 
@@ -53,12 +70,14 @@ export default defineCommand({
       consola.success(`🪄 Generated ${filePath}!`)
     }
 
-    const themePath = resolve(path, 'src/theme/index.ts')
+    const themePath = resolve(path, `src/theme/${args.prose ? 'prose/' : ''}${args.content ? 'content/' : ''}index.ts`)
     await appendFile(themePath, `export { default as ${camelCase(name)} } from './${kebabCase(name)}'`)
     await sortFile(themePath)
 
-    const typesPath = resolve(path, 'src/runtime/types/index.d.ts')
-    await appendFile(typesPath, `export * from '../components/${splitByCase(name).map(p => upperFirst(p)).join('')}.vue'`)
-    await sortFile(typesPath)
+    if (!args.prose) {
+      const typesPath = resolve(path, 'src/runtime/types/index.d.ts')
+      await appendFile(typesPath, `export * from '../components/${args.content && 'content/'}${splitByCase(name).map(p => upperFirst(p)).join('')}.vue'`)
+      await sortFile(typesPath)
+    }
   }
 })

@@ -14,11 +14,11 @@ const playground = ({ name, pro }) => {
     <U${upperName} />
   </div>
 </template>
-    `
+`
   }
 }
 
-const component = ({ name, primitive, pro }) => {
+const component = ({ name, primitive, pro, prose, content }) => {
   const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
   const camelName = camelCase(name)
   const kebabName = kebabCase(name)
@@ -26,7 +26,7 @@ const component = ({ name, primitive, pro }) => {
   const path = pro ? 'ui-pro' : 'ui'
 
   return {
-    filename: `src/runtime/components/${upperName}.vue`,
+    filename: `src/runtime/components/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${upperName}.vue`,
     contents: primitive
       ? `
 <script lang="ts">
@@ -34,11 +34,11 @@ import { tv } from 'tailwind-variants'
 import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
-import theme from '#build/${path}/${kebabName}'
+import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
 
-const appConfig = _appConfig as AppConfig & { ${key}: { ${camelName}: Partial<typeof theme> } }
+const appConfig = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
 
-const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${camelName} || {}) })
+const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${prose ? 'prose?.' : ''}${camelName} || {}) })
 
 export interface ${upperName}Props extends Omit<PrimitiveProps, 'asChild'> {
   class?: any
@@ -72,11 +72,11 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { ${upperName}RootProps, ${upperName}RootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
-import theme from '#build/${path}/${kebabName}'
+import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
 
-const appConfig = _appConfig as AppConfig & { ${key}: { ${camelName}: Partial<typeof theme> } }
+const appConfig = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
 
-const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${camelName} || {}) })
+const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${prose ? 'prose?.' : ''}${camelName} || {}) })
 
 type ${upperName}Variants = VariantProps<typeof ${camelName}>
 
@@ -111,30 +111,38 @@ const ui = computed(() => tv({ extend: ${camelName}, slots: props.ui })())
   }
 }
 
-const theme = ({ name }) => {
+const theme = ({ name, prose, content }) => {
   const kebabName = kebabCase(name)
 
   return {
-    filename: `src/theme/${kebabName}.ts`,
-    contents: `
+    filename: `src/theme/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}.ts`,
+    contents: prose
+      ? `
+export default {
+  base: ''
+}
+`
+      : `
 export default {
   slots: {
     root: ''
   }
 }
-    `
+`
   }
 }
 
-const test = ({ name }) => {
+const test = ({ name, prose, content }) => {
   const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
 
   return {
-    filename: `test/components/${upperName}.spec.ts`,
-    contents: `
+    filename: `test/components/${content ? 'content/' : ''}${upperName}.spec.ts`,
+    contents: prose
+      ? undefined
+      : `
 import { describe, it, expect } from 'vitest'
-import ${upperName}, { type ${upperName}Props, type ${upperName}Slots } from '../../src/runtime/components/${upperName}.vue'
-import ComponentRender from '../component-render'
+import ${upperName}, { type ${upperName}Props, type ${upperName}Slots } from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
+import ComponentRender from '../${content ? '../' : ''}component-render'
 
 describe('${upperName}', () => {
   it.each([
@@ -149,7 +157,7 @@ describe('${upperName}', () => {
     expect(html).toMatchSnapshot()
   })
 })
-    `
+`
   }
 }
 
