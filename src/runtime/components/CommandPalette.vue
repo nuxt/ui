@@ -31,6 +31,7 @@ export interface CommandPaletteGroup<T> {
   label?: string
   slot?: string
   items?: T[]
+  filter?: (searchTerm: string, items: T[]) => T[]
   /** The icon displayed when an item is highlighted. */
   highlightedIcon?: string
 }
@@ -111,7 +112,13 @@ const items = computed(() => props.groups?.filter((group) => {
   }
 
   return true
-}).flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
+}).flatMap((group) => {
+  let items = group.items || []
+  if (group.filter) {
+    items = group.filter(searchTerm.value, items)
+  }
+  return items?.map(item => ({ ...item, group: group.id })) || []
+}) || [])
 
 const { results: fuseResults } = useFuse<T>(searchTerm, items, fuse)
 
