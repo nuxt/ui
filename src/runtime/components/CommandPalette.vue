@@ -150,7 +150,7 @@ const groups = computed(() => {
       <UInput
         variant="none"
         autofocus
-        size="md"
+        size="lg"
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input()"
