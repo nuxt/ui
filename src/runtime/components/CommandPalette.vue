@@ -104,7 +104,14 @@ const fuse = computed(() => defu({}, props.fuse, {
   matchAllWhenSearchEmpty: true
 }))
 
-const items = computed(() => props.groups?.flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
+const items = computed(() => props.groups?.filter((group) => {
+  if (!group.id) {
+    console.warn(`[@nuxt/ui] CommandPalette group is missing an \`id\` property`)
+    return false
+  }
+
+  return true
+}).flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
 
 const { results: fuseResults } = useFuse<T>(searchTerm, items, fuse)
 
