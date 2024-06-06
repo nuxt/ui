@@ -1,6 +1,6 @@
 export default {
   slots: {
-    overlay: 'fixed inset-0 z-30 bg-gray-200/75 dark:bg-gray-800/75',
+    overlay: 'fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75',
     content: 'fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none',
     header: 'px-4 py-5 sm:px-6',
     body: 'flex-1 p-4 sm:p-6',
