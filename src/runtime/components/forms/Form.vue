@@ -151,7 +151,6 @@ export default defineComponent({
       validate,
       errors,
       setErrors (errs: FormError[], path?: string) {
-        errors.value = errs
         if (path) {
           errors.value = errors.value.filter(
             (error) => error.path !== path

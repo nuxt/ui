@@ -199,11 +199,11 @@ export default defineComponent({
     }
 
     const guessOptionValue = (option: any) => {
-      return get(option, props.valueAttribute, get(option, props.optionAttribute))
+      return get(option, props.valueAttribute, '')
     }
 
     const guessOptionText = (option: any) => {
-      return get(option, props.optionAttribute, get(option, props.valueAttribute))
+      return get(option, props.optionAttribute, '')
     }
 
     const normalizeOption = (option: any) => {
