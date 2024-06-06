@@ -14,8 +14,8 @@ importers:
   .:
     dependencies:
       '@egoist/tailwindcss-icons':
-        specifier: ^1.8.0
-        version: 1.8.0(tailwindcss@3.4.3)
+        specifier: ^1.8.1
+        version: 1.8.1(tailwindcss@3.4.3)
       '@headlessui/tailwindcss':
         specifier: ^0.2.1
         version: 0.2.1(tailwindcss@3.4.3)
@@ -462,8 +462,8 @@ packages:
     peerDependencies:
       postcss-selector-parser: ^6.0.13
 
-  '@egoist/tailwindcss-icons@1.8.0':
-    resolution: {integrity: sha512-75LfllKL2lq0sGH+wcpsn/sLtJ0kMkDWmcZTLAB76QLDTmfsFu4QHwZVbtCD2woGyKl9c8KvtOUW9JSjRqOVtA==}
+  '@egoist/tailwindcss-icons@1.8.1':
+    resolution: {integrity: sha512-hqZeASrhT6BOeaBHYDPB0yBH/zgMKqmm7y2Rsq0c4iRnNVv1RWEiXMBMJB38JsDMTHME450FKa/wvdaIhED+Iw==}
     peerDependencies:
       tailwindcss: '*'
 
@@ -852,6 +852,9 @@ packages:
 
   '@iconify/utils@2.1.23':
     resolution: {integrity: sha512-YGNbHKM5tyDvdWZ92y2mIkrfvm5Fvhe6WJSkWu7vvOFhMtYDP0casZpoRz0XEHZCrYsR4stdGT3cZ52yp5qZdQ==}
+
+  '@iconify/utils@2.1.24':
+    resolution: {integrity: sha512-H8r2KpL5uKyrkb3z9/3HD/22JcxqW3BJyjEWZhX2T7DehnYVZthEap1cNsEl/UtCDC3TlpNmwiPX8wg3y8E4dg==}
 
   '@iconify/vue@4.1.2':
     resolution: {integrity: sha512-CQnYqLiQD5LOAaXhBrmj1mdL2/NCJvwcC4jtW2Z8ukhThiFkLDkutarTOV2trfc9EXqUqRs0KqXOL9pZ/IyysA==}
@@ -7874,9 +7877,9 @@ snapshots:
     dependencies:
       postcss-selector-parser: 6.0.16
 
-  '@egoist/tailwindcss-icons@1.8.0(tailwindcss@3.4.3)':
+  '@egoist/tailwindcss-icons@1.8.1(tailwindcss@3.4.3)':
     dependencies:
-      '@iconify/utils': 2.1.23
+      '@iconify/utils': 2.1.24
       tailwindcss: 3.4.3
     transitivePeerDependencies:
       - supports-color
@@ -8152,6 +8155,18 @@ snapshots:
       kolorist: 1.8.0
       local-pkg: 0.5.0
       mlly: 1.6.1
+    transitivePeerDependencies:
+      - supports-color
+
+  '@iconify/utils@2.1.24':
+    dependencies:
+      '@antfu/install-pkg': 0.1.1
+      '@antfu/utils': 0.7.7
+      '@iconify/types': 2.0.0
+      debug: 4.3.4
+      kolorist: 1.8.0
+      local-pkg: 0.5.0
+      mlly: 1.7.0
     transitivePeerDependencies:
       - supports-color
 

@@ -34,7 +34,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@egoist/tailwindcss-icons": "^1.8.0",
+    "@egoist/tailwindcss-icons": "^1.8.1",
     "@headlessui/tailwindcss": "^0.2.1",
     "@headlessui/vue": "^1.7.22",
     "@iconify-json/heroicons": "^1.1.21",
