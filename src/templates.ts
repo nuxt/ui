@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url'
 import { kebabCase } from 'scule'
 import { addTemplate, addTypeTemplate } from '@nuxt/kit'
 import type { Nuxt } from '@nuxt/schema'
@@ -296,6 +297,16 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
             const replaced = match.replace(/("[^"]+")/g, '$1 as const')
             return `${before}${replaced}${after}`
           })
+        }
+
+        // For local development, directly import from theme
+        if (process.env.DEV) {
+          return [
+            `import template from ${JSON.stringify(fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url)))}`,
+            `const result = typeof template === 'function' ? template(${JSON.stringify({ colors: options.colors })}) : template`,
+            `export default result`,
+            `/* export default ${json} */`
+          ].join('\n')
         }
 
         return `export default ${json}`

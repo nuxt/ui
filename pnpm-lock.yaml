@@ -70,9 +70,6 @@ importers:
       '@nuxt/test-utils':
         specifier: ^3.13.1
         version: 3.13.1(@vue/test-utils@2.4.6)(h3@1.11.1)(happy-dom@14.7.1)(nitropack@2.9.6(encoding@0.1.13))(playwright-core@1.43.1)(rollup@4.16.4)(vite@5.2.4(@types/node@20.12.7)(lightningcss@1.24.1)(terser@5.30.4))(vitest@1.6.0(@types/node@20.12.7)(happy-dom@14.7.1)(lightningcss@1.24.1)(terser@5.30.4))(vue-router@4.3.2(vue@3.4.24(typescript@5.4.5)))(vue@3.4.24(typescript@5.4.5))
-      '@nuxt/ui-dev':
-        specifier: workspace:*
-        version: link:modules/dev
       '@release-it/conventional-changelog':
         specifier: ^8.0.1
         version: 8.0.1(release-it@17.3.0(typescript@5.4.5))
@@ -196,18 +193,6 @@ importers:
       zod:
         specifier: ^3.23.8
         version: 3.23.8
-
-  modules/dev:
-    dependencies:
-      '@nuxt/kit':
-        specifier: latest
-        version: 3.11.2(rollup@4.16.4)
-      chokidar:
-        specifier: ^3.6.0
-        version: 3.6.0
-      perfect-debounce:
-        specifier: ^1.0.0
-        version: 1.0.0
 
   playground:
     dependencies:
