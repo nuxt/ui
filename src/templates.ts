@@ -190,7 +190,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
     }
   }
   @keyframes carousel-inverse-vertical {
-    0%
+    0%,
     100% {
       height: 50%
     }
