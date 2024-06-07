@@ -26,7 +26,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'custom'>, Pi
   open?: boolean
   defaultOpen?: boolean
   children?: DropdownMenuItem[] | DropdownMenuItem[][]
-  select? (e: Event): void
+  select?(e: Event): void
 }
 
 export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>, Pick<DropdownMenuTriggerProps, 'disabled'> {

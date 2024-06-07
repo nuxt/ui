@@ -23,7 +23,7 @@ export interface CommandPaletteItem extends Pick<ComboboxItemProps, 'disabled'> 
   chip?: ChipProps
   kbds?: KbdProps['value'][] | KbdProps[]
   slot?: string
-  select? (e: Event): void
+  select?(e?: Event): void
 }
 
 export interface CommandPaletteGroup<T> {

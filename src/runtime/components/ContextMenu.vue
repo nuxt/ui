@@ -26,7 +26,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'custom'>, Pic
   open?: boolean
   defaultOpen?: boolean
   children?: ContextMenuItem[] | ContextMenuItem[][]
-  select? (e: Event): void
+  select?(e: Event): void
 }
 
 export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'>, Pick<ContextMenuTriggerProps, 'disabled'> {

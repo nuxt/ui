@@ -15,7 +15,7 @@ export interface NavigationMenuChildItem extends Omit<LinkProps, 'custom'> {
   label: string
   description?: string
   icon?: string
-  select? (e: MouseEvent): void
+  select?(e: MouseEvent): void
 }
 
 export interface NavigationMenuItem extends Omit<LinkProps, 'custom'>, Pick<NavigationMenuItemProps, 'value'> {
@@ -26,7 +26,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'custom'>, Pick<Navi
   trailingIcon?: string
   slot?: string
   children?: NavigationMenuChildItem[]
-  select? (e: MouseEvent): void
+  select?(e: MouseEvent): void
 }
 
 type NavigationMenuVariants = VariantProps<typeof navigationMenu>
