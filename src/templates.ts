@@ -303,7 +303,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
         if (process.env.DEV) {
           return [
             `import template from ${JSON.stringify(fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url)))}`,
-            `const result = typeof template === 'function' ? template(${JSON.stringify({ colors: options.colors })}) : template`,
+            `const result = typeof template === 'function' ? template(${JSON.stringify(options)}) : template`,
             `export default result`,
             `/* export default ${json} */`
           ].join('\n')
