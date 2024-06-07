@@ -1,3 +1,5 @@
+/* eslint-disable regexp/no-useless-quantifier */
+/* eslint-disable regexp/no-super-linear-backtracking */
 import { ref, computed, toValue } from 'vue'
 import type { MaybeRef } from 'vue'
 import { useEventListener, useActiveElement, useDebounceFn } from '@vueuse/core'
