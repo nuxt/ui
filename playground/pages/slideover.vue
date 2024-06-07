@@ -1,5 +1,17 @@
 <script setup lang="ts">
+import { LazySlideoverProgrammaticExample } from '#components'
+
 const open = ref(false)
+
+const slideover = useSlideover()
+const count = ref(0)
+const openSlideover = () => {
+  count.value++
+  slideover.open(LazySlideoverProgrammaticExample, {
+    description: 'And you can even provide a description!',
+    count: count.value
+  })
+}
 </script>
 
 <template>
@@ -105,5 +117,7 @@ const open = ref(false)
         <Placeholder class="h-full w-full" />
       </template>
     </USlideover>
+
+    <UButton label="Open programmatically" color="white" @click="openSlideover" />
   </div>
 </template>
