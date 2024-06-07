@@ -19,8 +19,8 @@ export default (options: Required<ModuleOptions>) => ({
     itemTrailingHighlightedIcon: 'shrink-0 size-5 text-gray-400 dark:text-gray-500 hidden group-data-highlighted:inline-flex',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0 gap-0.5',
     itemLabel: 'truncate space-x-1',
-    itemLabelBase: '[&>mark]:text-[initial] [&>mark]:bg-[initial]',
-    itemLabelPrefix: 'text-gray-400 dark:text-gray-500',
+    itemLabelBase: 'text-gray-900 dark:text-white [&>mark]:bg-primary-500 dark:[&>mark]:bg-primary-400 [&>mark]:text-white dark:[&>mark]:text-gray-900',
+    itemLabelPrefix: 'text-gray-700 dark:text-gray-200',
     itemLabelSuffix: 'text-gray-400 dark:text-gray-500 [&>mark]:bg-primary-500 dark:[&>mark]:bg-primary-400 [&>mark]:text-white dark:[&>mark]:text-gray-900'
   }
 })

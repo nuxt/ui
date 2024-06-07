@@ -54,9 +54,9 @@ export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, s
 
     content += value.substring(nextUnhighlightedRegionStartingIndex)
 
-    const endIndex = content.indexOf('</mark>')
-    if (endIndex > 50) {
-      content = truncateHTMLFromStart(content, 45)
+    const markIndex = content.indexOf('<mark>')
+    if (markIndex !== -1) {
+      content = truncateHTMLFromStart(content, content.length - markIndex)
     }
 
     return content

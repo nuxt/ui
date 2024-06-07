@@ -102,7 +102,6 @@ defineShortcuts({
       :groups="groups"
       :fuse="{
         fuseOptions: {
-          threshold: 0.1,
           includeMatches: true
         }
       }"

@@ -99,6 +99,7 @@ const ui = computed(() => tv({ extend: commandPalette, slots: props.ui })())
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     ignoreLocation: true,
+    threshold: 0.1,
     keys: ['label', 'suffix']
   },
   resultLimit: 12,
@@ -112,13 +113,7 @@ const items = computed(() => props.groups?.filter((group) => {
   }
 
   return true
-}).flatMap((group) => {
-  let items = group.items || []
-  if (group.filter) {
-    items = group.filter(searchTerm.value, items)
-  }
-  return items?.map(item => ({ ...item, group: group.id })) || []
-}) || [])
+}).flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
 
 const { results: fuseResults } = useFuse<T>(searchTerm, items, fuse)
 
@@ -127,7 +122,7 @@ const groups = computed(() => {
     return []
   }
 
-  const groups: Record<string, (T & { matches: FuseResult<T>['matches'] })[]> = fuseResults.value.reduce((acc, result) => {
+  const groupsById: Record<string, (T & { matches?: FuseResult<T>['matches'] })[]> = fuseResults.value.reduce((acc, result) => {
     const { item, matches } = result
     if (!item.group) {
       return acc
@@ -139,12 +134,22 @@ const groups = computed(() => {
     return acc
   }, {})
 
-  return Object.entries(groups).map(([id, items]) => {
+  return Object.entries(groupsById).map(([id, items]) => {
     const group = props.groups?.find(group => group.id === id)
+
+    if (group?.filter && typeof group.filter === 'function') {
+      items = group.filter(searchTerm.value, items)
+    }
 
     return {
       ...group,
-      items: items.slice(0, fuse.value.resultLimit)
+      items: items.slice(0, fuse.value.resultLimit).map((item) => {
+        return {
+          ...item,
+          labelHtml: highlight<T>(item, searchTerm.value, 'label'),
+          suffixHtml: highlight<T>(item, searchTerm.value, undefined, ['label'])
+        }
+      })
     }
   })
 })
@@ -180,7 +185,7 @@ const groups = computed(() => {
       </UInput>
     </ComboboxInput>
 
-    <ComboboxPortal :disabled="true">
+    <ComboboxPortal disabled>
       <ComboboxContent :class="ui.content()" :dismissable="false">
         <ComboboxEmpty :class="ui.empty()">
           <slot name="empty" :search-term="searchTerm">
@@ -197,7 +202,7 @@ const groups = computed(() => {
             <ComboboxItem
               v-for="(item, index) in group.items"
               :key="`group-${groupIndex}-${index}`"
-              :value="omit(item, ['matches' as any, 'group' as any, 'select'])"
+              :value="omit(item, ['matches' as any, 'group' as any, 'select', 'labelHtml', 'suffixHtml'])"
               :disabled="item.disabled"
               :class="ui.item()"
               @select="item.select"
@@ -220,9 +225,9 @@ const groups = computed(() => {
                   <slot :name="item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`" :item="item" :index="index">
                     <span v-if="item.prefix" :class="ui.itemLabelPrefix()">{{ item.prefix }}</span>
 
-                    <span :class="ui.itemLabelBase()" v-html="highlight<T>(item, searchTerm, 'label') || item.label" />
+                    <span :class="ui.itemLabelBase()" v-html="item.labelHtml || item.label" />
 
-                    <span :class="ui.itemLabelSuffix()" v-html="highlight<T>(item, searchTerm, undefined, ['label']) || item.suffix" />
+                    <span :class="ui.itemLabelSuffix()" v-html="item.suffixHtml || item.suffix" />
                   </slot>
                 </span>
 
