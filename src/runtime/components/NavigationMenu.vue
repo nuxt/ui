@@ -11,7 +11,7 @@ const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<type
 
 const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })
 
-export interface NavigationMenuchildItem extends Omit<LinkProps, 'custom'> {
+export interface NavigationMenuChildItem extends Omit<LinkProps, 'custom'> {
   label: string
   description?: string
   icon?: string
@@ -25,7 +25,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'custom'>, Pick<Navi
   badge?: string | number | BadgeProps
   trailingIcon?: string
   slot?: string
-  children?: NavigationMenuchildItem[]
+  children?: NavigationMenuChildItem[]
   select? (e: MouseEvent): void
 }
 
