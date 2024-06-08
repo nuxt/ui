@@ -25,6 +25,7 @@ export interface TabsProps<T> extends Omit<TabsRootProps, 'asChild'> {
   items?: T[]
   color?: TabsVariants['color']
   variant?: TabsVariants['variant']
+  size?: TabsVariants['size']
   content?: boolean | Omit<TabsContentProps, 'asChild' | 'value'>
   class?: any
   ui?: Partial<typeof tabs.slots>
@@ -62,6 +63,7 @@ const contentProps = toRef(() => defu(props.content || {}, { forceMount: true })
 const ui = computed(() => tv({ extend: tabs, slots: props.ui })({
   color: props.color,
   variant: props.variant,
+  size: props.size,
   orientation: props.orientation
 }))
 </script>
@@ -73,7 +75,7 @@ const ui = computed(() => tv({ extend: tabs, slots: props.ui })({
 
       <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger()">
         <slot name="leading" :item="item" :index="index">
-          <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.leadingAvatar()" />
+          <UAvatar v-if="item.avatar" :size="(ui.leadingAvatarSize() as any)" v-bind="item.avatar" :class="ui.leadingAvatar()" />
           <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
         </slot>
 
