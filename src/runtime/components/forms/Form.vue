@@ -10,7 +10,8 @@ import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
-import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
+import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync } from 'valibot'
+import { getDotPath as valibotPath, safeParseAsync as valibotParse } from 'valibot'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types/form'
 import { useId } from '#imports'
 
@@ -29,7 +30,7 @@ export default defineComponent({
         | PropType<ZodSchema>
         | PropType<YupObjectSchema<any>>
         | PropType<JoiSchema>
-        | PropType<ValibotObjectSchema<any>>,
+        | PropType<ValibotSchema | ValibotSchemaAsync>,
       default: undefined
     },
     state: {
@@ -255,21 +256,18 @@ async function getJoiErrors (
   }
 }
 
-function isValibotSchema (schema: any): schema is ValibotObjectSchema<any> {
-  return schema._parse !== undefined
+function isValibotSchema (schema: any): schema is ValibotSchema | ValibotSchemaAsync {
+  return schema._run !== undefined
 }
 
 async function getValibotError (
   state: any,
-  schema: ValibotObjectSchema<any>
+  schema: ValibotSchema | ValibotSchemaAsync
 ): Promise<FormError[]> {
-  const result = await schema._parse(state)
-  if (result.issues) {
-    return result.issues.map((issue) => ({
-      path: issue.path?.map(p => p.key).join('.') || '',
-      message: issue.message
-    }))
-  }
-  return []
+  const result = await valibotParse(schema, state)
+  return result.issues?.map((issue) => ({
+    path: valibotPath(issue) || '',
+    message: issue.message
+  })) || []
 }
 </script>
