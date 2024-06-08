@@ -207,8 +207,8 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2(@popperjs/core@2.11.8)(vue@3.4.25(typescript@5.4.5))
       valibot:
-        specifier: ^0.30.0
-        version: 0.30.0
+        specifier: ^0.31.1
+        version: 0.31.1
       yup:
         specifier: ^1.4.0
         version: 1.4.0
@@ -224,6 +224,10 @@ importers:
       nuxt:
         specifier: ^3.11.2
         version: 3.11.2(@parcel/watcher@2.4.1)(@types/node@20.14.2)(@unocss/reset@0.60.4)(encoding@0.1.13)(eslint@9.4.0)(floating-vue@5.2.2(@nuxt/kit@3.11.2(rollup@4.14.0))(vue@3.4.25(typescript@5.4.5)))(fuse.js@7.0.0)(ioredis@5.3.2)(optionator@0.9.4)(rollup@4.14.0)(terser@5.31.1)(typescript@5.4.5)(unocss@0.60.4(postcss@8.4.38)(rollup@4.14.0)(vite@5.2.8(@types/node@20.14.2)(terser@5.31.1)))(vite@5.2.8(@types/node@20.14.2)(terser@5.31.1))(vue-tsc@2.0.21(typescript@5.4.5))
+    devDependencies:
+      valibot:
+        specifier: ^0.31.1
+        version: 0.31.1
 
 packages:
 
@@ -7800,9 +7804,6 @@ packages:
     resolution: {integrity: sha512-Lx9Str2i+HTh+zGzs9O3YyhGAZOAAfU+6MUUPcQPPiPxQO1sHBEv9sH3MO9bPc4T09gsjsS2+sbaCWQ1MdhpJQ==}
     peerDependencies:
       '@vue/compiler-core': ^3.3
-
-  valibot@0.30.0:
-    resolution: {integrity: sha512-5POBdbSkM+3nvJ6ZlyQHsggisfRtyT4tVTo1EIIShs6qCdXJnyWU5TJ68vr8iTg5zpOLjXLRiBqNx+9zwZz/rA==}
 
   valibot@0.31.1:
     resolution: {integrity: sha512-2YYIhPrnVSz/gfT2/iXVTrSj92HwchCt9Cga/6hX4B26iCz9zkIsGTS0HjDYTZfTi1Un0X6aRvhBi1cfqs/i0Q==}
@@ -19255,8 +19256,6 @@ snapshots:
   v-lazy-show@0.2.4(@vue/compiler-core@3.4.27):
     dependencies:
       '@vue/compiler-core': 3.4.27
-
-  valibot@0.30.0: {}
 
   valibot@0.31.1: {}
 
