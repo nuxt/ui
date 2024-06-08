@@ -29,7 +29,7 @@ export default defineComponent({
         | PropType<ZodSchema>
         | PropType<YupObjectSchema<any>>
         | PropType<JoiSchema>
-        | PropType<ValibotObjectSchema<any>>,
+        | PropType<ValibotObjectSchema<any, any>>,
       default: undefined
     },
     state: {
@@ -255,15 +255,15 @@ async function getJoiErrors (
   }
 }
 
-function isValibotSchema (schema: any): schema is ValibotObjectSchema<any> {
-  return schema._parse !== undefined
+function isValibotSchema (schema: any): schema is ValibotObjectSchema<any, any> {
+  return schema._run !== undefined
 }
 
 async function getValibotError (
   state: any,
-  schema: ValibotObjectSchema<any>
+  schema: ValibotObjectSchema<any, any>
 ): Promise<FormError[]> {
-  const result = await schema._parse(state)
+  const result = await schema._run({ typed: false, value: state }, {})
   if (result.issues) {
     return result.issues.map((issue) => ({
       path: issue.path?.map(p => p.key).join('.') || '',
