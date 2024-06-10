@@ -10,8 +10,8 @@ import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
-import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync } from 'valibot'
-import { getDotPath as valibotPath, safeParseAsync as valibotParse } from 'valibot'
+import type { BaseSchema as ValibotSchema30, BaseSchemaAsync as ValibotSchemaAsync30 } from 'valibot30'
+import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync, SafeParser as ValibotSafeParser, SafeParserAsync as ValibotSafeParserAsync } from 'valibot31'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types/form'
 import { useId } from '#imports'
 
@@ -256,17 +256,18 @@ async function getJoiErrors (
   }
 }
 
-function isValibotSchema (schema: any): schema is ValibotSchema | ValibotSchemaAsync {
-  return schema._run !== undefined
+function isValibotSchema (schema: any): schema is ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any> {
+  return '_parse' in schema || '_run' in schema || (typeof schema === 'function' && 'schema' in schema)
 }
 
 async function getValibotError (
   state: any,
-  schema: ValibotSchema | ValibotSchemaAsync
+  schema: ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>
 ): Promise<FormError[]> {
-  const result = await valibotParse(schema, state)
+  const result = await ('_parse' in schema ? schema._parse(state) : '_run' in schema ? schema._run({ typed: false, value: state }, {}) : schema(state))
   return result.issues?.map((issue) => ({
-    path: valibotPath(issue) || '',
+    // We know that the key for a form schema is always a string or a number
+    path: issue.path?.map((item) => item.key).join('.') || '',
     message: issue.message
   })) || []
 }

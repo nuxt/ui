@@ -82,9 +82,6 @@ importers:
       tailwindcss:
         specifier: ^3.4.3
         version: 3.4.3
-      valibot:
-        specifier: ^0.31.0
-        version: 0.31.1
     devDependencies:
       '@nuxt/eslint-config':
         specifier: ^0.3.13
@@ -122,6 +119,12 @@ importers:
       unbuild:
         specifier: ^2.0.0
         version: 2.0.0(typescript@5.4.5)
+      valibot30:
+        specifier: npm:valibot@0.30.0
+        version: valibot@0.30.0
+      valibot31:
+        specifier: npm:valibot@^0.31.1
+        version: valibot@0.31.1
       vitest:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.11.19)(happy-dom@14.10.1)(terser@5.27.2)
@@ -7147,6 +7150,9 @@ packages:
     resolution: {integrity: sha512-Lx9Str2i+HTh+zGzs9O3YyhGAZOAAfU+6MUUPcQPPiPxQO1sHBEv9sH3MO9bPc4T09gsjsS2+sbaCWQ1MdhpJQ==}
     peerDependencies:
       '@vue/compiler-core': ^3.3
+
+  valibot@0.30.0:
+    resolution: {integrity: sha512-5POBdbSkM+3nvJ6ZlyQHsggisfRtyT4tVTo1EIIShs6qCdXJnyWU5TJ68vr8iTg5zpOLjXLRiBqNx+9zwZz/rA==}
 
   valibot@0.31.1:
     resolution: {integrity: sha512-2YYIhPrnVSz/gfT2/iXVTrSj92HwchCt9Cga/6hX4B26iCz9zkIsGTS0HjDYTZfTi1Un0X6aRvhBi1cfqs/i0Q==}
@@ -17294,6 +17300,8 @@ snapshots:
   v-lazy-show@0.2.4(@vue/compiler-core@3.4.25):
     dependencies:
       '@vue/compiler-core': 3.4.25
+
+  valibot@0.30.0: {}
 
   valibot@0.31.1: {}
 
