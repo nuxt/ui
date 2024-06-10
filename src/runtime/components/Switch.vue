@@ -14,9 +14,16 @@ type SwitchVariants = VariantProps<typeof switchTv>
 export interface SwitchProps extends Omit<SwitchRootProps, 'asChild' | 'checked' | 'defaultChecked'> {
   color?: SwitchVariants['color']
   size?: SwitchVariants['size']
+  /** When `true`, the loading icon will be displayed. */
   loading?: boolean
+  /**
+   * The icon when the `loading` prop is `true`.
+   * @defaultValue `appConfig.ui.icons.loading`
+   */
   loadingIcon?: string
+  /** Display an icon when the switch is checked. */
   checkedIcon?: string
+  /** Display an icon when the switch is unchecked. */
   uncheckedIcon?: string
   label?: string
   description?: string
