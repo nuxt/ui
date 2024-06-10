@@ -26,7 +26,7 @@ class FormException extends Error {
 export default defineComponent({
   props: {
     schema: {
-      type: Object as
+      type: [Object, Function] as
         | PropType<ZodSchema>
         | PropType<YupObjectSchema<any>>
         | PropType<JoiSchema>
