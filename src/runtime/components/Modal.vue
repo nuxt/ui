@@ -32,7 +32,7 @@ export interface ModalSlots {
   header(): any
   title(): any
   description(): any
-  close(): any
+  close(props: { class: string }): any
   body(): any
   footer(): any
 }

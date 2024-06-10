@@ -35,7 +35,7 @@ export interface AlertSlots {
   title(): any
   description(): any
   actions(): any
-  close(): any
+  close(props: { class: string }): any
 }
 </script>
 
