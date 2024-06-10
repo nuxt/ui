@@ -72,7 +72,7 @@
     "typescript": "^5.4.5",
     "unbuild": "^2.0.0",
     "valibot30": "npm:valibot@0.30.0",
-    "valibot31": "npm:valibot@^0.31.1",
+    "valibot": "^0.31.1",
     "vitest": "^1.6.0",
     "vitest-environment-nuxt": "^1.0.0",
     "vue-tsc": "^2.0.16",
