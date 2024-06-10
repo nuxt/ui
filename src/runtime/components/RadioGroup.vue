@@ -28,7 +28,7 @@ export interface RadioGroupProps<T> extends Omit<RadioGroupRootProps, 'asChild' 
 
 export interface RadioGroupEmits extends RadioGroupRootEmits {}
 
-type SlotProps<T> = (props: { item: T }) => any
+type SlotProps<T> = (props: { item: T, modelValue?: string }) => any
 
 export interface RadioGroupSlots<T> {
   legend(): any
@@ -84,6 +84,7 @@ const normalizedItems = computed(() => {
 <template>
   <RadioGroupRoot
     :id="id"
+    v-slot="{ modelValue }"
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
@@ -110,10 +111,10 @@ const normalizedItems = computed(() => {
 
         <div :class="ui.wrapper()">
           <Label :class="ui.label()" :for="item.id">
-            <slot name="label" :item="item">{{ item.label }}</slot>
+            <slot name="label" :item="item" :model-value="modelValue">{{ item.label }}</slot>
           </Label>
           <p v-if="item.description || !!slots.description" :class="ui.description()">
-            <slot name="description" :item="item">
+            <slot name="description" :item="item" :model-value="modelValue">
               {{ item.description }}
             </slot>
           </p>
