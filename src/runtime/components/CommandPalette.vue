@@ -47,10 +47,18 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'as' 
    * @defaultValue `appConfig.ui.icons.check`
    */
   selectedIcon?: string
+  /**
+   * The placeholder text for the input.
+   * @defaultValue `'Type a command or search...'`
+   */
   placeholder?: InputProps['placeholder']
   /** Display a close button in the input, clicking it will emit the `close` event. */
   close?: ButtonProps | boolean
   groups?: G[]
+  /**
+   * Options for [useFuse](https://vueuse.org/integrations/useFuse).
+   * @defaultValue `{ ignoreLocation: true, threshold: 0.1, keys: ['label', 'suffix'], resultLimit: 12, matchAllWhenSearchEmpty: true }`
+   */
   fuse?: UseFuseOptions<T>
   class?: any
   ui?: Partial<typeof commandPalette.slots>
