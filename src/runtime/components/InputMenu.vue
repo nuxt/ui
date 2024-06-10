@@ -193,6 +193,7 @@ onMounted(() => {
         v-slot="{ modelValue: tags }: { modelValue: AcceptableValue[] }"
         :model-value="(modelValue as string[])"
         :disabled="disabled"
+        @blur="emitFormBlur()"
         delimiter=""
         as-child
       >

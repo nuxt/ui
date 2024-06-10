@@ -83,7 +83,7 @@ const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as SelectContentProps)
 
-const { emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
+const { emitFormChange, emitFormBlur, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
@@ -100,6 +100,10 @@ const ui = computed(() => tv({ extend: select, slots: props.ui })({
 }))
 
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as SelectItem[][] : [])
+
+function onUpdateOpen(value: boolean) {
+  if (!value) emitFormBlur()
+}
 </script>
 
 <template>
@@ -110,6 +114,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
     :name="name"
     :disabled="disabled"
     @update:model-value="emitFormChange()"
+    @update:open="onUpdateOpen"
   >
     <SelectTrigger :class="ui.base({ class: props.class })">
       <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
