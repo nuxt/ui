@@ -30,7 +30,9 @@ export default defineComponent({
         | PropType<ZodSchema>
         | PropType<YupObjectSchema<any>>
         | PropType<JoiSchema>
-        | PropType<ValibotSchema | ValibotSchemaAsync>,
+        | PropType<ValibotSchema30 | ValibotSchemaAsync30>
+        | PropType<ValibotSchema | ValibotSchemaAsync>
+        | PropType<ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>>,
       default: undefined
     },
     state: {
