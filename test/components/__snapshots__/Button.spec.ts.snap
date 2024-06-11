@@ -2,7 +2,7 @@
 
 exports[`Button > renders with block correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
@@ -11,56 +11,56 @@ exports[`Button > renders with class correctly 1`] = `"<button type="button" cla
 
 exports[`Button > renders with color black correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 dark:disabled:bg-white focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with color gray correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 hover:bg-gray-100 disabled:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700/50 dark:disabled:bg-gray-800 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with color green correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-green-500 hover:bg-green-600 disabled:bg-green-500 dark:bg-green-400 dark:hover:bg-green-500 dark:disabled:bg-green-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 dark:focus-visible:outline-green-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with color primary correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with color red correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-red-500 hover:bg-red-600 disabled:bg-red-500 dark:bg-red-400 dark:hover:bg-red-500 dark:disabled:bg-red-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with color white correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white hover:bg-gray-50 disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800/50 dark:disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with default slot correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="">Default slot</span>
+  <!--v-if--><span class="truncate">Default slot</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with disabled correctly 1`] = `
 "<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
@@ -74,7 +74,7 @@ exports[`Button > renders with icon correctly 1`] = `
 
 exports[`Button > renders with label correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
@@ -116,42 +116,42 @@ exports[`Button > renders with loadingIcon correctly 1`] = `
 
 exports[`Button > renders with size lg correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size md correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size sm correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-xs gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size xl correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size xs correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with square correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
@@ -177,53 +177,46 @@ exports[`Button > renders with trailingIcon correctly 1`] = `
 </button>"
 `;
 
-exports[`Button > renders with truncate correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="truncate">Button</span>
-  <!--v-if-->
-</button>"
-`;
-
 exports[`Button > renders with ui correctly 1`] = `"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"></button>"`;
 
 exports[`Button > renders with variant ghost correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-primary-500 dark:text-primary-400 hover:bg-primary-50 disabled:bg-transparent dark:hover:bg-primary-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with variant link correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-primary-500 hover:text-primary-600 disabled:text-primary-500 dark:text-primary-400 dark:hover:text-primary-500 dark:disabled:text-primary-400 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with variant outline correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 ring ring-inset ring-current text-primary-500 dark:text-primary-400 hover:bg-primary-50 disabled:bg-transparent dark:hover:bg-primary-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with variant soft correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-primary-500 dark:text-primary-400 bg-primary-50 hover:bg-primary-100 disabled:bg-primary-50 dark:bg-primary-950 dark:hover:bg-primary-900 dark:disabled:bg-primary-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with variant solid correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with variant subtle correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25 bg-primary-500/10 hover:bg-primary-500/20 disabled:bg-primary-500/10 dark:bg-primary-400/10 dark:hover:bg-primary-400/20 dark:disabled:bg-primary-400/10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
-  <!--v-if--><span class="">Button</span>
+  <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;

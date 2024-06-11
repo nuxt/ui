@@ -19,7 +19,6 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'cu
   size?: ButtonVariants['size']
   square?: boolean
   block?: boolean
-  truncate?: boolean
   class?: any
   ui?: Partial<typeof button.slots>
 }
@@ -51,7 +50,6 @@ const ui = computed(() => tv({ extend: button, slots: props.ui })({
   variant: props.variant,
   size: buttonSize.value,
   loading: props.loading,
-  truncate: props.truncate,
   block: props.block,
   square: props.square || (!slots.default && !props.label),
   leading: isLeading.value,

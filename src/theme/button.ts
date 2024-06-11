@@ -4,7 +4,7 @@ import { buttonGroupVariant } from './button-group'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     base: ['rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.transitions && 'transition-colors'],
-    label: '',
+    label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     trailingIcon: 'shrink-0'
@@ -50,11 +50,6 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'px-3 py-2 text-base gap-2',
         leadingIcon: 'size-6',
         trailingIcon: 'size-6'
-      }
-    },
-    truncate: {
-      true: {
-        label: 'truncate'
       }
     },
     block: {

@@ -6,7 +6,7 @@ exports[`ButtonGroup > renders orientation vertical with default slot correctly 
     <!--v-if-->
     <!--v-if-->
   </div> <button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-    <!--v-if--><span class=""> Click me! </span>
+    <!--v-if--><span class="truncate"> Click me! </span>
     <!--v-if-->
   </button>
 </div>"
@@ -22,7 +22,7 @@ exports[`ButtonGroup > renders with default slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div> <button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-    <!--v-if--><span class=""> Click me! </span>
+    <!--v-if--><span class="truncate"> Click me! </span>
     <!--v-if-->
   </button>
 </div>"
@@ -34,7 +34,7 @@ exports[`ButtonGroup > renders with size lg correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div> <button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-3 py-2 text-sm gap-2 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-    <!--v-if--><span class=""> Click me! </span>
+    <!--v-if--><span class="truncate"> Click me! </span>
     <!--v-if-->
   </button>
 </div>"
@@ -46,7 +46,7 @@ exports[`ButtonGroup > renders with size md correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div> <button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-    <!--v-if--><span class=""> Click me! </span>
+    <!--v-if--><span class="truncate"> Click me! </span>
     <!--v-if-->
   </button>
 </div>"
@@ -58,7 +58,7 @@ exports[`ButtonGroup > renders with size sm correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div> <button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2.5 py-1.5 text-xs gap-1.5 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-    <!--v-if--><span class=""> Click me! </span>
+    <!--v-if--><span class="truncate"> Click me! </span>
     <!--v-if-->
   </button>
 </div>"
@@ -70,7 +70,7 @@ exports[`ButtonGroup > renders with size xl correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div> <button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-3 py-2 text-base gap-2 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-    <!--v-if--><span class=""> Click me! </span>
+    <!--v-if--><span class="truncate"> Click me! </span>
     <!--v-if-->
   </button>
 </div>"
@@ -82,7 +82,7 @@ exports[`ButtonGroup > renders with size xs correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div> <button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2 py-1 text-xs gap-1 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-    <!--v-if--><span class=""> Click me! </span>
+    <!--v-if--><span class="truncate"> Click me! </span>
     <!--v-if-->
   </button>
 </div>"

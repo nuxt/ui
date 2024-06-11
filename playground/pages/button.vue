@@ -28,11 +28,6 @@ const variants = Object.keys(theme.variants.variant)
       </UButton>
     </div>
     <div class="flex items-center gap-2">
-      <UButton truncate class="w-16">
-        Truncate
-      </UButton>
-    </div>
-    <div class="flex items-center gap-2">
       <UButton v-for="variant in variants" :key="variant" icon="i-heroicons-rocket-launch" label="Button" :variant="(variant as any)" />
     </div>
     <div class="flex items-center gap-2">

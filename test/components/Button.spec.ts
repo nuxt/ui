@@ -24,7 +24,6 @@ describe('Button', () => {
     ['with disabled', { props: { label: 'Button', disabled: true } }],
     ['with block', { props: { label: 'Button', block: true } }],
     ['with square', { props: { label: 'Button', square: true } }],
-    ['with truncate', { props: { label: 'Button', truncate: true } }],
     ['with class', { props: { class: 'rounded-full font-bold' } }],
     ['with ui', { props: { ui: { label: 'font-bold' } } }],
     // Slots
