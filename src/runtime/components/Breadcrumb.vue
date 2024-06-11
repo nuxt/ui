@@ -56,21 +56,23 @@ const ui = computed(() => tv({ extend: breadcrumb, slots: props.ui })())
     <ol :class="ui.list()">
       <template v-for="(item, index) in items" :key="index">
         <li :class="ui.item()">
-          <ULink v-bind="pickLinkProps(item)" as="span" :aria-current="index === items!.length - 1 ? 'page' : undefined" :class="ui.link({ active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })" raw>
-            <slot :name="item.slot || 'item'" :item="item" :index="index">
-              <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="index === items!.length - 1" :index="index">
-                <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ active: index === items!.length - 1 })" />
-                <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ active: index === items!.length - 1 })" />
-              </slot>
-
-              <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel()">
-                <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="index === items!.length - 1" :index="index">
-                  {{ item.label }}
+          <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
+            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
+              <slot :name="item.slot || 'item'" :item="item" :index="index">
+                <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="index === items!.length - 1" :index="index">
+                  <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ active: index === items!.length - 1 })" />
+                  <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ active: index === items!.length - 1 })" />
                 </slot>
-              </span>
 
-              <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="item" :active="index === items!.length - 1" :index="index" />
-            </slot>
+                <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel()">
+                  <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="index === items!.length - 1" :index="index">
+                    {{ item.label }}
+                  </slot>
+                </span>
+
+                <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="item" :active="index === items!.length - 1" :index="index" />
+              </slot>
+            </ULinkBase>
           </ULink>
         </li>
 

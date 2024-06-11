@@ -15,6 +15,7 @@ describe('Breadcrumb', () => {
     disabled: true
   }, {
     label: 'Breadcrumb',
+    to: '/breadcrumb',
     icon: 'i-heroicons-link',
     slot: 'custom'
   }]

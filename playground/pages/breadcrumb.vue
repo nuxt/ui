@@ -16,7 +16,8 @@ const items = [{
   label: 'Components',
   disabled: true
 }, {
-  label: 'Breadcrumb'
+  label: 'Breadcrumb',
+  to: '/breadcrumb'
 }]
 </script>
 

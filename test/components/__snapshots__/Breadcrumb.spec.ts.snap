@@ -7,7 +7,7 @@ exports[`Breadcrumb > renders with class correctly 1`] = `
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
     <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 text-gray-500 dark:text-gray-400 font-medium cursor-not-allowed opacity-75"><span class="iconify i-heroicons:square-3-stack-3d shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Navigation</span></span></li>
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span aria-current="page" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></span></li>
+    <li class="flex min-w-0"><a href="/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </div>"
@@ -20,7 +20,7 @@ exports[`Breadcrumb > renders with custom slot correctly 1`] = `
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
     <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 text-gray-500 dark:text-gray-400 font-medium cursor-not-allowed opacity-75"><span class="iconify i-heroicons:square-3-stack-3d shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Navigation</span></span></li>
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span aria-current="page" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold">Custom slot</span></li>
+    <li class="flex min-w-0"><a href="/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold">Custom slot</a></li>
     <!--v-if-->
   </ol>
 </div>"
@@ -33,7 +33,7 @@ exports[`Breadcrumb > renders with item slot correctly 1`] = `
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
     <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 text-gray-500 dark:text-gray-400 font-medium cursor-not-allowed opacity-75">Item slot</span></li>
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span aria-current="page" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></span></li>
+    <li class="flex min-w-0"><a href="/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </div>"
@@ -46,7 +46,7 @@ exports[`Breadcrumb > renders with item-label slot correctly 1`] = `
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
     <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 text-gray-500 dark:text-gray-400 font-medium cursor-not-allowed opacity-75"><span class="iconify i-heroicons:square-3-stack-3d shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Item label slot</span></span></li>
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span aria-current="page" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></span></li>
+    <li class="flex min-w-0"><a href="/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </div>"
@@ -59,7 +59,7 @@ exports[`Breadcrumb > renders with item-leading slot correctly 1`] = `
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
     <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 text-gray-500 dark:text-gray-400 font-medium cursor-not-allowed opacity-75">Item leading slot<span class="truncate">Navigation</span></span></li>
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span aria-current="page" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></span></li>
+    <li class="flex min-w-0"><a href="/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </div>"
@@ -72,7 +72,7 @@ exports[`Breadcrumb > renders with item-trailing slot correctly 1`] = `
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
     <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 text-gray-500 dark:text-gray-400 font-medium cursor-not-allowed opacity-75"><span class="iconify i-heroicons:square-3-stack-3d shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Navigation</span>Item trailing slot</span></li>
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span aria-current="page" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></span></li>
+    <li class="flex min-w-0"><a href="/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </div>"
@@ -85,7 +85,7 @@ exports[`Breadcrumb > renders with items correctly 1`] = `
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
     <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 text-gray-500 dark:text-gray-400 font-medium cursor-not-allowed opacity-75"><span class="iconify i-heroicons:square-3-stack-3d shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Navigation</span></span></li>
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span aria-current="page" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></span></li>
+    <li class="flex min-w-0"><a href="/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </div>"
@@ -98,7 +98,7 @@ exports[`Breadcrumb > renders with separator slot correctly 1`] = `
     <li role="presentation" class="flex">/</li>
     <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 text-gray-500 dark:text-gray-400 font-medium cursor-not-allowed opacity-75"><span class="iconify i-heroicons:square-3-stack-3d shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Navigation</span></span></li>
     <li role="presentation" class="flex">/</li>
-    <li class="flex min-w-0"><span aria-current="page" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></span></li>
+    <li class="flex min-w-0"><a href="/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </div>"
@@ -111,7 +111,7 @@ exports[`Breadcrumb > renders with separatorIcon correctly 1`] = `
     <li role="presentation" class="flex"><span class="iconify i-heroicons:minus shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
     <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 text-gray-500 dark:text-gray-400 font-medium cursor-not-allowed opacity-75"><span class="iconify i-heroicons:square-3-stack-3d shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Navigation</span></span></li>
     <li role="presentation" class="flex"><span class="iconify i-heroicons:minus shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span aria-current="page" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></span></li>
+    <li class="flex min-w-0"><a href="/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </div>"
@@ -124,7 +124,7 @@ exports[`Breadcrumb > renders with ui correctly 1`] = `
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
     <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 text-gray-500 dark:text-gray-400 font-medium cursor-not-allowed opacity-75"><span class="iconify i-heroicons:square-3-stack-3d shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Navigation</span></span></li>
     <li role="presentation" class="flex"><span class="iconify i-heroicons:chevron-right-20-solid shrink-0 size-5 text-gray-500 dark:text-gray-400" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span aria-current="page" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></span></li>
+    <li class="flex min-w-0"><a href="/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 text-primary-500 dark:text-primary-400 font-semibold"><span class="iconify i-heroicons:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </div>"
