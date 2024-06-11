@@ -80,6 +80,7 @@
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
-    "vite": "5.2.4"
+    "vite": "5.2.4",
+    "happy-dom": "14.7.1"
   }
 }
