@@ -17,7 +17,7 @@
     "date-fns": "^3.6.0",
     "eslint": "^8.57.0",
     "joi": "^17.13.1",
-    "nuxt": "^3.11.2",
+    "nuxt": "^3.12.0",
     "nuxt-cloudflare-analytics": "^1.0.8",
     "nuxt-component-meta": "^0.6.4",
     "nuxt-og-image": "^2.2.4",
@@ -25,7 +25,7 @@
     "typescript": "^5.4.5",
     "ufo": "^1.5.3",
     "v-calendar": "^3.1.2",
-    "valibot": "^0.30.0",
+    "valibot": "^0.31.0",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
   }

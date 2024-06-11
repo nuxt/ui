@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { string, objectAsync, email, minLength, type Input } from 'valibot'
+import * as v from 'valibot'
 import type { FormSubmitEvent } from '#ui/types'
 
-const schema = objectAsync({
-  email: string([email('Invalid email')]),
-  password: string([minLength(8, 'Must be at least 8 characters')])
+const schema = v.object({
+  email: v.pipe(v.string(), v.email('Invalid email')),
+  password: v.pipe(v.string(), v.minLength(8, 'Must be at least 8 characters'))
 })
 
-type Schema = Input<typeof schema>
+type Schema = v.InferOutput<typeof schema>
 
 const state = reactive({
   email: '',
@@ -21,7 +21,7 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
+  <UForm :schema="v.safeParser(schema)" :state="state" class="space-y-4" @submit="onSubmit">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormGroup>
