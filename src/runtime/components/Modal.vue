@@ -17,9 +17,19 @@ export interface ModalProps extends DialogRootProps {
   overlay?: boolean
   transition?: boolean
   fullscreen?: boolean
-  preventClose?: boolean
   portal?: boolean
-  close?: ButtonProps | null
+  /**
+   * Display a close button to dismiss the modal.
+   * @defaultValue `true` (`{ size: 'md', color: 'gray', variant: 'ghost' }`)
+   */
+  close?: ButtonProps | boolean
+  /**
+   * The icon displayed in the close button.
+   * @defaultValue `appConfig.ui.icons.close`
+   */
+  closeIcon?: string
+  /** When `true`, the modal will not close when clicking outside. */
+  preventClose?: boolean
   class?: any
   ui?: Partial<typeof modal.slots>
 }
@@ -46,6 +56,7 @@ import { useAppConfig } from '#imports'
 import { UButton } from '#components'
 
 const props = withDefaults(defineProps<ModalProps>(), {
+  close: true,
   portal: true,
   overlay: true,
   transition: true
@@ -85,7 +96,7 @@ const ui = computed(() => tv({ extend: modal, slots: props.ui })({
 
       <DialogContent :class="ui.content({ class: props.class })" v-bind="contentProps" v-on="contentEvents">
         <slot name="content">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close !== null || !!slots.close)" :class="ui.header()">
+          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header()">
             <slot name="header">
               <DialogTitle v-if="title || !!slots.title" :class="ui.title()">
                 <slot name="title">
@@ -102,13 +113,13 @@ const ui = computed(() => tv({ extend: modal, slots: props.ui })({
               <DialogClose as-child>
                 <slot name="close" :class="ui.close()">
                   <UButton
-                    v-if="close !== null"
-                    :icon="appConfig.ui.icons.close"
+                    v-if="close"
+                    :icon="closeIcon || appConfig.ui.icons.close"
                     size="md"
                     color="gray"
                     variant="ghost"
                     aria-label="Close"
-                    v-bind="close"
+                    v-bind="typeof close === 'object' ? close : undefined"
                     :class="ui.close()"
                   />
                 </slot>

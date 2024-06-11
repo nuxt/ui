@@ -52,8 +52,16 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'as' 
    * @defaultValue `'Type a command or search...'`
    */
   placeholder?: InputProps['placeholder']
-  /** Display a close button in the input, clicking it will emit the `close` event. */
+  /**
+   * Display a close button in the input (useful when inside a `UModal`).
+   * @defaultValue `false` (`{ size: 'md', color: 'gray', variant: 'ghost' }`)
+   */
   close?: ButtonProps | boolean
+  /**
+   * The icon displayed in the close button.
+   * @defaultValue `appConfig.ui.icons.close`
+   */
+  closeIcon?: string
   groups?: G[]
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
@@ -179,12 +187,12 @@ const groups = computed(() => {
           <slot name="close" :class="ui.close()">
             <UButton
               v-if="close"
-              :icon="appConfig.ui.icons.close"
+              :icon="closeIcon || appConfig.ui.icons.close"
               size="md"
               color="gray"
               variant="ghost"
               aria-label="Close"
-              v-bind="typeof close === 'object' ? close : {}"
+              v-bind="typeof close === 'object' ? close : undefined"
               :class="ui.close()"
               @click="emits('update:open', false)"
             />

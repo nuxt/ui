@@ -21,7 +21,17 @@ export interface AlertProps extends Omit<PrimitiveProps, 'asChild'> {
   color?: AlertVariants['color']
   variant?: AlertVariants['variant']
   actions?: ButtonProps[]
+  /**
+   * Display a close button to dismiss the alert.
+   * @emits `close`
+   * @defaultValue `false` (`{ size: 'md', color: 'gray', variant: 'link' }`)
+   */
   close?: ButtonProps | boolean
+  /**
+   * The icon displayed in the close button.
+   * @defaultValue `appConfig.ui.icons.close`
+   */
+  closeIcon?: string
   class?: any
   ui?: Partial<typeof alert.slots>
 }
@@ -98,12 +108,12 @@ const ui = computed(() => tv({ extend: alert, slots: props.ui })({
       <slot name="close" :class="ui.close()">
         <UButton
           v-if="close"
-          :icon="appConfig.ui.icons.close"
+          :icon="closeIcon || appConfig.ui.icons.close"
           size="md"
           color="gray"
           variant="link"
           aria-label="Close"
-          v-bind="typeof close === 'object' ? close : {}"
+          v-bind="typeof close === 'object' ? close : undefined"
           :class="ui.close()"
           @click="emits('close')"
         />

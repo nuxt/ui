@@ -54,7 +54,7 @@ const openModal = () => {
       <UButton label="Open unclosable" color="gray" />
     </UModal>
 
-    <UModal title="Modal without close button" description="This modal has `close: null` prop." :close="null">
+    <UModal title="Modal without close button" description="This modal has `close: false` prop." :close="false">
       <UButton label="Open without close button" color="white" />
     </UModal>
 

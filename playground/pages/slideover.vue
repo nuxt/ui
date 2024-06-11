@@ -102,7 +102,7 @@ const openSlideover = () => {
       </template>
     </USlideover>
 
-    <USlideover title="Slideover without close button" description="This slideover has `close: null` prop." :close="null">
+    <USlideover title="Slideover without close button" description="This slideover has `close: false` prop." :close="false">
       <UButton label="Open without close button" color="white" />
 
       <template #body>

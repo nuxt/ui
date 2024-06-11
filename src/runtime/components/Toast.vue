@@ -20,7 +20,16 @@ export interface ToastProps extends Omit<ToastRootProps, 'asChild' | 'forceMount
   avatar?: AvatarProps
   color?: ToastVariants['color']
   actions?: ButtonProps[]
-  close?: ButtonProps | null
+  /**
+   * Display a close button to dismiss the toast.
+   * @defaultValue `true` (`{ size: 'md', color: 'gray', variant: 'link' }`)
+   */
+  close?: ButtonProps | boolean
+  /**
+   * The icon displayed in the close button.
+   * @defaultValue `appConfig.ui.icons.close`
+   */
+  closeIcon?: string
   class?: any
   ui?: Partial<typeof toast.slots>
 }
@@ -43,7 +52,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { UIcon, UAvatar } from '#components'
 
-const props = defineProps<ToastProps>()
+const props = withDefaults(defineProps<ToastProps>(), { close: true })
 const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
 
@@ -124,13 +133,13 @@ defineExpose({
       <ToastClose as-child>
         <slot name="close" :class="ui.close()">
           <UButton
-            v-if="close !== null"
-            :icon="appConfig.ui.icons.close"
+            v-if="close"
+            :icon="closeIcon || appConfig.ui.icons.close"
             size="md"
             color="gray"
             variant="link"
             aria-label="Close"
-            v-bind="close"
+            v-bind="typeof close === 'object' ? close : undefined"
             :class="ui.close()"
             @click.stop
           />

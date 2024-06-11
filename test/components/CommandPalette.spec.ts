@@ -70,6 +70,8 @@ describe('CommandPalette', () => {
     ['with loading', { props: { ...props, loading: true } }],
     ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-heroicons-sparkles' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-heroicons-check-badge', modelValue: groups[2].items[0] } }],
+    ['with close', { props: { ...props, close: true } }],
+    ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-heroicons-trash' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'divide-gray-300 dark:divide-gray-700' } }],
     ['with ui', { props: { ...props, ui: { input: '[&>input]:h-10' } } }],

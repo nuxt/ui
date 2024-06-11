@@ -15,7 +15,8 @@ describe('Slideover', () => {
     ['with bottom side', { props: { ...props, side: 'bottom' as const, title: 'Title', description: 'Description' } }],
     ['without overlay', { props: { ...props, overlay: false, title: 'Title', description: 'Description' } }],
     ['without transition', { props: { ...props, transition: false, title: 'Title', description: 'Description' } }],
-    ['without close', { props: { ...props, close: null, title: 'Title', description: 'Description' } }],
+    ['without close', { props: { ...props, close: false, title: 'Title', description: 'Description' } }],
+    ['with closeIcon', { props: { ...props, closeIcon: 'i-heroicons-trash' } }],
     ['with class', { props: { ...props, class: 'bg-gray-50 dark:bg-gray-800' } }],
     ['with ui', { props: { ...props, ui: { close: 'right-2' } } }],
     // Slots
