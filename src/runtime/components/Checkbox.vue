@@ -28,6 +28,7 @@ export interface CheckboxProps extends Omit<CheckboxRootProps, 'asChild' | 'chec
    * @defaultValue `appConfig.ui.icons.minus`
    */
   indeterminateIcon?: string
+  /** The checked state of the checkbox when it is initially rendered. Use when you do not need to control its checked state. */
   defaultValue?: boolean
   class?: any
   ui?: Partial<typeof checkbox.slots>

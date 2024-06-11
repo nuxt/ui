@@ -20,6 +20,10 @@ export interface BreadcrumbItem extends Omit<LinkProps, 'custom'> {
 
 export interface BreadcrumbProps<T> extends Omit<PrimitiveProps, 'asChild'> {
   items?: T[]
+  /**
+   * The icon to use as a separator.
+   * @defaultValue `appConfig.ui.icons.chevronRight`
+   */
   separatorIcon?: string
   class?: any
   ui?: Partial<typeof breadcrumb.slots>

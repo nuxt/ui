@@ -19,6 +19,11 @@ export interface ToastProps extends Omit<ToastRootProps, 'asChild' | 'forceMount
   icon?: string
   avatar?: AvatarProps
   color?: ToastVariants['color']
+  /**
+   * Display a list of actions:
+   * - under the title and description if multiline
+   * - next to the close button if not multiline
+   */
   actions?: ButtonProps[]
   /**
    * Display a close button to dismiss the toast.

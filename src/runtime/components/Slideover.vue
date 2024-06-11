@@ -15,10 +15,23 @@ type SlideoverVariants = VariantProps<typeof slideover>
 export interface SlideoverProps extends DialogRootProps {
   title?: string
   description?: string
+  /** The content of the slideover. */
   content?: Omit<DialogContentProps, 'asChild' | 'forceMount'>
+  /**
+   * Display an overlay behind the slideover.
+   * @defaultValue `true`
+   */
   overlay?: boolean
+  /**
+   * Open & close the slideover with a transition.
+   * @defaultValue `true`
+   */
   transition?: boolean
   side?: SlideoverVariants['side']
+  /**
+   * Render the slideover in a portal.
+   * @defaultValue `true`
+   */
   portal?: boolean
   /**
    * Display a close button to dismiss the slideover.

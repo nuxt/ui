@@ -14,6 +14,10 @@ type ToasterVariants = VariantProps<typeof toaster>
 
 export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'> {
   position?: ToasterVariants['position']
+  /**
+   * Expand the toasts to show multiple toasts at once.
+   * @defaultValue `true`
+   */
   expand?: boolean
   class?: any
   ui?: Partial<typeof toaster.slots>

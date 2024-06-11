@@ -31,7 +31,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'custom'>, Pick<Navi
 
 type NavigationMenuVariants = VariantProps<typeof navigationMenu>
 
-export interface NavigationMenuProps<T> extends Omit<NavigationMenuRootProps, 'asChild' | 'dir'> {
+export interface NavigationMenuProps<T> extends Omit<NavigationMenuRootProps, 'asChild' | 'dir' | 'orientation'> {
   /**
    * The icon displayed to open the menu.
    * @defaultValue `appConfig.ui.icons.chevronDown`
@@ -41,11 +41,19 @@ export interface NavigationMenuProps<T> extends Omit<NavigationMenuRootProps, 'a
   color?: NavigationMenuVariants['color']
   variant?: NavigationMenuVariants['variant']
   /**
-   * Display a line next to the active item.
+   * The orientation of the menu.
+   * @defaultValue `'horizontal'`
    */
+  orientation?: NavigationMenuRootProps['orientation']
+  /** Display a line next to the active item. */
   highlight?: boolean
   highlightColor?: NavigationMenuVariants['highlightColor']
+  /** The content of the menu. */
   content?: Omit<NavigationMenuContentProps, 'asChild' | 'forceMount'>
+  /**
+   * Display an arrow alongside the menu.
+   * @defaultValue `false`
+   */
   arrow?: boolean
   class?: any
   ui?: Partial<typeof navigationMenu.slots>

@@ -17,12 +17,17 @@ export interface RadioGroupItem extends Pick<RadioGroupItemProps, 'disabled' | '
   description?: string
 }
 
-export interface RadioGroupProps<T> extends Omit<RadioGroupRootProps, 'asChild' | 'dir'> {
+export interface RadioGroupProps<T> extends Omit<RadioGroupRootProps, 'asChild' | 'dir' | 'orientation'> {
   legend?: string
   items?: T[]
-  class?: any
   size?: RadioGroupVariants['size']
   color?: RadioGroupVariants['color']
+  /**
+   * The orientation the radio buttons are laid out.
+   * @defaultValue `'vertical'`
+   */
+  orientation?: RadioGroupRootProps['orientation']
+  class?: any
   ui?: Partial<typeof radioGroup.slots>
 }
 
@@ -43,7 +48,9 @@ import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardP
 import { reactivePick } from '@vueuse/core'
 import { useId, useFormField } from '#imports'
 
-const props = withDefaults(defineProps<RadioGroupProps<T>>(), { orientation: 'vertical' })
+const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
+  orientation: 'vertical'
+})
 const emits = defineEmits<RadioGroupEmits>()
 const slots = defineSlots<RadioGroupSlots<T>>()
 

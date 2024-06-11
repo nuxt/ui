@@ -27,6 +27,7 @@ export interface SwitchProps extends Omit<SwitchRootProps, 'asChild' | 'checked'
   uncheckedIcon?: string
   label?: string
   description?: string
+  /** The state of the switch when it is initially rendered. Use when you do not need to control its state. */
   defaultValue?: boolean
   class?: any
   ui?: Partial<typeof switchTv.slots>

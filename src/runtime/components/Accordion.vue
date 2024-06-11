@@ -20,7 +20,12 @@ export interface AccordionItem extends Partial<Pick<AccordionItemProps, 'disable
 
 export interface AccordionProps<T> extends Omit<AccordionRootProps, 'asChild' | 'dir' | 'orientation'> {
   items?: T[]
+  /**
+   * The icon displayed on the right side of the trigger.
+   * @defaultValue `appConfig.ui.icons.chevronDown`
+   */
   trailingIcon?: string
+  /** The content of the accordion. */
   content?: Omit<AccordionContentProps, 'asChild'>
   class?: any
   ui?: Partial<typeof accordion.slots>

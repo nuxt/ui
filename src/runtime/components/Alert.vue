@@ -20,6 +20,11 @@ export interface AlertProps extends Omit<PrimitiveProps, 'asChild'> {
   avatar?: AvatarProps
   color?: AlertVariants['color']
   variant?: AlertVariants['variant']
+  /**
+   * Display a list of actions:
+   * - under the title and description if multiline
+   * - next to the close button if not multiline
+   */
   actions?: ButtonProps[]
   /**
    * Display a close button to dismiss the alert.

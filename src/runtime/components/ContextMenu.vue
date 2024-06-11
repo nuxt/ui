@@ -31,7 +31,12 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'custom'>, Pic
 
 export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'>, Pick<ContextMenuTriggerProps, 'disabled'> {
   items?: T[] | T[][]
+  /** The content of the menu. */
   content?: Omit<ContextMenuContentProps, 'asChild' | 'forceMount'>
+  /**
+   * Render the menu in a portal.
+   * @defaultValue `true`
+   */
   portal?: boolean
   class?: any
   ui?: Partial<typeof contextMenu.slots>

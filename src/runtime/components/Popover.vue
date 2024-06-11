@@ -15,8 +15,20 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
    * @defaultValue `"click"`
    */
   mode?: 'click' | 'hover'
+  /**
+   * The content of the popover.
+   * @defaultValue `{ side: 'bottom', sideOffset: 8 }`
+   */
   content?: Omit<PopoverContentProps, 'asChild' | 'forceMount'>
+  /**
+   * Display an arrow alongside the popover.
+   * @defaultValue `false`
+   */
   arrow?: boolean | Omit<PopoverArrowProps, 'asChild'>
+  /**
+   * Render the popover in a portal.
+   * @defaultValue `true`
+   */
   portal?: boolean
   class?: any
   ui?: Partial<typeof popover.slots>

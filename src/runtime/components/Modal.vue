@@ -13,10 +13,15 @@ const modal = tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })
 export interface ModalProps extends DialogRootProps {
   title?: string
   description?: string
+  /** The content of the modal. */
   content?: Omit<DialogContentProps, 'asChild' | 'forceMount'>
   overlay?: boolean
   transition?: boolean
   fullscreen?: boolean
+  /**
+   * Render the modal in a portal.
+   * @defaultValue `true`
+   */
   portal?: boolean
   /**
    * Display a close button to dismiss the modal.

@@ -43,8 +43,20 @@ export interface SelectProps<T> extends Omit<SelectRootProps, 'asChild' | 'dir'>
    * @defaultValue `appConfig.ui.icons.check`
    */
   selectedIcon?: string
+  /**
+   * The content of the menu.
+   * @defaultValue `{ side: 'bottom', sideOffset: 8, position: 'popper' }`
+   */
   content?: Omit<SelectContentProps, 'asChild' | 'forceMount'>
+  /**
+   * Display an arrow alongside the menu.
+   * @defaultValue `false`
+   */
   arrow?: boolean | Omit<SelectArrowProps, 'asChild'>
+  /**
+   * Render the menu in a portal.
+   * @defaultValue `true`
+   */
   portal?: boolean
   items?: T[] | T[][]
   class?: any

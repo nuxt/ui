@@ -12,19 +12,63 @@ const appConfig = _appConfig as AppConfig & { ui: { pagination: Partial<typeof t
 const pagination = tv({ extend: tv(theme), ...(appConfig.ui?.pagination || {}) })
 
 export interface PaginationProps extends Omit<PaginationRootProps, 'asChild'> {
+  /**
+   * The icon to use for the first page control.
+   * @defaultValue `appConfig.ui.icons.chevronDoubleLeft`
+   */
   firstIcon?: string
+  /**
+   * The icon to use for the previous page control.
+   * @defaultValue `appConfig.ui.icons.chevronLeft`
+   */
   prevIcon?: string
+  /**
+   * The icon to use for the next page control.
+   * @defaultValue `appConfig.ui.icons.chevronRight`
+   */
   nextIcon?: string
+  /**
+   * The icon to use for the last page control.
+   * @defaultValue `appConfig.ui.icons.chevronDoubleRight`
+   */
   lastIcon?: string
+  /**
+   * The icon to use for the ellipsis control.
+   * @defaultValue `appConfig.ui.icons.ellipsis`
+   */
   ellipsisIcon?: string
+  /**
+   * The color of the pagination controls.
+   * @defaultValue `'white'`
+   */
   color?: ButtonProps['color']
+  /**
+   * The variant of the pagination controls.
+   * @defaultValue `'solid'`
+   */
   variant?: ButtonProps['variant']
+  /**
+   * The color of the active pagination control.
+   * @defaultValue `'black'`
+   */
   activeColor?: ButtonProps['color']
+  /**
+   * The variant of the active pagination control.
+   * @defaultValue `'solid'`
+   */
   activeVariant?: ButtonProps['variant']
+  /**
+   * Whether to show the first, previous, next, and last controls.
+   * @defaultValue `true`
+   */
   showControls?: boolean
   size?: ButtonProps['size']
-  class?: any
+  /**
+   * A function to render page controls as links.
+   * @param page The page number to navigate to.
+   */
   to?: (page: number) => RouteLocationRaw
+  class?: any
   ui?: Partial<typeof pagination.slots>
 }
 

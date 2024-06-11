@@ -11,10 +11,24 @@ const appConfig = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof them
 const tooltip = tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })
 
 export interface TooltipProps extends TooltipRootProps {
+  /** The text content of the tooltip. */
   text?: string
+  /** The keyboard keys to display in the tooltip. */
   kbds?: KbdProps['value'][] | KbdProps[]
+  /**
+   * The content of the tooltip.
+   * @defaultValue `{ side: 'bottom', sideOffset: 8 }`
+   */
   content?: Omit<TooltipContentProps, 'asChild'>
+  /**
+   * Display an arrow alongside the tooltip.
+   * @defaultValue `false`
+   */
   arrow?: boolean | Omit<TooltipArrowProps, 'asChild'>
+  /**
+   * Render the tooltip in a portal.
+   * @defaultValue `true`
+   */
   portal?: boolean
   class?: any
   ui?: Partial<typeof tooltip.slots>

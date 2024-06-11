@@ -17,6 +17,10 @@ export interface ProgressProps extends Omit<ProgressRootProps, 'asChild' | 'max'
   inverted?: boolean
   size?: ProgressVariants['size']
   color?: ProgressVariants['color']
+  /**
+   * The orientation of the progress bar.
+   * @defaultValue `'horizontal'`
+   */
   orientation?: ProgressVariants['orientation']
   animation?: ProgressVariants['animation']
   class?: any

@@ -14,6 +14,10 @@ type ButtonGroupVariants = VariantProps<typeof buttonGroup>
 
 export interface ButtonGroupProps extends Omit<PrimitiveProps, 'asChild'> {
   size?: ButtonProps['size']
+  /**
+   * The orientation the buttons are laid out.
+   * @defaultValue `'horizontal'`
+   */
   orientation?: ButtonGroupVariants['orientation']
   class?: any
 }

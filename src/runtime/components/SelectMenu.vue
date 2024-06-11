@@ -46,8 +46,20 @@ export interface SelectMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild'
    * @defaultValue `appConfig.ui.icons.check`
    */
   selectedIcon?: string
+  /**
+   * The content of the menu.
+   * @defaultValue `{ side: 'bottom', sideOffset: 8, position: 'popper' }`
+   */
   content?: Omit<ComboboxContentProps, 'asChild' | 'forceMount'>
+  /**
+   * Display an arrow alongside the menu.
+   * @defaultValue `false`
+   */
   arrow?: boolean | Omit<ComboboxArrowProps, 'asChild'>
+  /**
+   * Render the menu in a portal.
+   * @defaultValue `true`
+   */
   portal?: boolean
   /**
    * Whether to filter items or not, can be an array of fields to filter.

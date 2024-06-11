@@ -12,13 +12,21 @@ const separator = tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })
 
 type SeparatorVariants = VariantProps<typeof separator>
 
-export interface SeparatorProps extends Omit<_SeparatorProps, 'asChild'> {
+export interface SeparatorProps extends Omit<_SeparatorProps, 'asChild' | 'orientation'> {
+  /** Display a label in the middle. */
   label?: string
+  /** Display an icon in the middle. */
   icon?: string
+  /** Display an avatar in the middle. */
   avatar?: AvatarProps
   color?: SeparatorVariants['color']
   size?: SeparatorVariants['size']
   type?: SeparatorVariants['type']
+  /**
+   * The orientation of the separator.
+   * @defaultValue `'horizontal'`
+   */
+  orientation?: _SeparatorProps['orientation']
   class?: any
   ui?: Partial<typeof separator.slots>
 }

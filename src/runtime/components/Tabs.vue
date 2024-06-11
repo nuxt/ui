@@ -21,11 +21,20 @@ export interface TabsItem extends Partial<Pick<TabsTriggerProps, 'disabled' | 'v
 
 type TabsVariants = VariantProps<typeof tabs>
 
-export interface TabsProps<T> extends Omit<TabsRootProps, 'asChild'> {
+export interface TabsProps<T> extends Omit<TabsRootProps, 'asChild' | 'orientation'> {
   items?: T[]
   color?: TabsVariants['color']
   variant?: TabsVariants['variant']
   size?: TabsVariants['size']
+  /**
+   * The orientation of the tabs.
+   * @defaultValue `'horizontal'`
+   */
+  orientation?: TabsRootProps['orientation']
+  /**
+   * The content of the tabs, can be disabled to prevent rendering the content.
+   * @defaultValue `true`
+   */
   content?: boolean | Omit<TabsContentProps, 'asChild' | 'value'>
   class?: any
   ui?: Partial<typeof tabs.slots>

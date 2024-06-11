@@ -13,8 +13,13 @@ const drawer = tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })
 export interface DrawerProps extends Omit<DrawerRootProps, 'asChild'> {
   title?: string
   description?: string
+  /** The content of the drawer. */
   content?: Omit<DialogContentProps, 'asChild' | 'forceMount'>
   overlay?: boolean
+  /**
+   * Render the drawer in a portal.
+   * @defaultValue `true`
+   */
   portal?: boolean
   class?: any
   ui?: Partial<typeof drawer.slots>

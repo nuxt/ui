@@ -54,8 +54,20 @@ export interface InputMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild' 
    * @defaultValue `appConfig.ui.icons.close`
    */
   deleteIcon?: string
+  /**
+   * The content of the menu.
+   * @defaultValue `{ side: 'bottom', sideOffset: 8, position: 'popper' }`
+   */
   content?: Omit<ComboboxContentProps, 'asChild' | 'forceMount'>
+  /**
+   * Display an arrow alongside the menu.
+   * @defaultValue `false`
+   */
   arrow?: boolean | Omit<ComboboxArrowProps, 'asChild'>
+  /**
+   * Render the menu in a portal.
+   * @defaultValue `true`
+   */
   portal?: boolean
   /**
    * Whether to filter items or not, can be an array of fields to filter.
@@ -193,9 +205,9 @@ onMounted(() => {
         v-slot="{ modelValue: tags }: { modelValue: AcceptableValue[] }"
         :model-value="(modelValue as string[])"
         :disabled="disabled"
-        @blur="emitFormBlur()"
         delimiter=""
         as-child
+        @blur="emitFormBlur()"
       >
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="(item as string)" :class="ui.tagsItem()">
           <TagsInputItemText :class="ui.tagsItemText()">

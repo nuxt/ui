@@ -13,6 +13,9 @@ type AvatarGroupVariants = VariantProps<typeof avatarGroup>
 
 export interface AvatarGroupProps extends Omit<PrimitiveProps, 'asChild'> {
   size?: AvatarGroupVariants['size']
+  /**
+   * The maximum number of avatars to display.
+   */
   max?: number | string
   class?: any
   ui?: Partial<typeof avatarGroup.slots>
