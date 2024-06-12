@@ -5,6 +5,13 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      bodyAttrs: {
+        class: 'antialiased font-sans text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900'
+      }
+    }
+  },
   extends: [
     process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
   ],
@@ -19,28 +26,31 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     // 'modules/content-examples-code'
   ],
+  future: {
+    compatibilityVersion: 4
+  },
   runtimeConfig: {
     public: {
       version: pkg.version
     }
   },
-  ui: {
-    global: true
-  },
+  // ui: {
+  //   global: true
+  // },
   content: {
     sources: {
       pro: process.env.NUXT_UI_PRO_PATH ? {
         prefix: '/pro',
         driver: 'fs',
         base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/content/pro')
-      } : process.env.NUXT_GITHUB_TOKEN && {
+      } : process.env.NUXT_GITHUB_TOKEN ? {
         prefix: '/pro',
         driver: 'github',
         repo: 'nuxt/ui-pro',
         branch: 'dev',
         dir: 'docs/content/pro',
         token: process.env.NUXT_GITHUB_TOKEN || ''
-      }
+      } : undefined
     }
   },
   image: {
@@ -52,7 +62,6 @@ export default defineNuxtConfig({
         '/',
         '/getting-started',
         '/dev/getting-started',
-        '/api/search.json',
         '/api/releases.json',
         '/api/pulls.json'
       ],
@@ -63,26 +72,26 @@ export default defineNuxtConfig({
     '/components': { redirect: '/components/app', prerender: false },
     '/dev/components': { redirect: '/dev/components/app', prerender: false }
   },
-  componentMeta: {
-    exclude: [
-      // '@nuxt/content',
-      // '@nuxt/ui-templates',
-      // '@nuxtjs/color-mode',
-      // '@nuxtjs/mdc',
-      // 'nuxt/dist',
-      // 'nuxt-og-image',
-      // 'nuxt-site-config',
-      resolve('./components'),
-      // process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
-    ],
-    // metaFields: {
-    //   type: false,
-    //   props: true,
-    //   slots: true,
-    //   events: false,
-    //   exposed: false
-    // }
-  },
+  // componentMeta: {
+  //   exclude: [
+  //     // '@nuxt/content',
+  //     // '@nuxt/ui-templates',
+  //     // '@nuxtjs/color-mode',
+  //     // '@nuxtjs/mdc',
+  //     // 'nuxt/dist',
+  //     // 'nuxt-og-image',
+  //     // 'nuxt-site-config',
+  //     resolve('./components'),
+  //     // process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
+  //   ],
+  //   // metaFields: {
+  //   //   type: false,
+  //   //   props: true,
+  //   //   slots: true,
+  //   //   events: false,
+  //   //   exposed: false
+  //   // }
+  // },
   hooks: {
     // Related to https://github.com/nuxt/nuxt/pull/22558
     // 'components:extend': (components) => {
@@ -94,9 +103,6 @@ export default defineNuxtConfig({
     //     }
     //   })
     // }
-  },
-  typescript: {
-    strict: false
   },
   vite: {
     optimizeDeps: {

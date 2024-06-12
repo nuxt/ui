@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
-import { debounce } from 'perfect-debounce'
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+// import { debounce } from 'perfect-debounce'
+import type { ContentSearchFile } from '#ui-pro/types'
 
-const searchRef = ref()
+const searchTerm = ref('')
 
 const route = useRoute()
-const colorMode = useColorMode()
+// const colorMode = useColorMode()
 // const { branch } = useContentSource()
+const runtimeConfig = useRuntimeConfig()
+const { integrity, api } = runtimeConfig.public.content
 
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
-const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', { default: () => [], server: false })
+const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
+const { data: files } = await useLazyFetch<ContentSearchFile[]>(`${api.baseURL}/search${integrity ? '.' + integrity : ''}`, { default: () => [] })
 
 // Computed
 
-const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
+// const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
 const links = computed(() => {
   return [{
@@ -44,20 +46,20 @@ const links = computed(() => {
 
 // Watch
 
-watch(() => searchRef.value?.commandPaletteRef?.query, debounce((query: string) => {
-  if (!query) {
-    return
-  }
+// watch(searchTerm, debounce((query: string) => {
+//   if (!query) {
+//     return
+//   }
 
-  useTrackEvent('Search', { props: { query: `${query} - ${searchRef.value?.commandPaletteRef.results.length} results` } })
-}, 500))
+//   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
+// }, 500))
 
 // Head
 
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { key: 'theme-color', name: 'theme-color', content: color }
+    // { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
     { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
@@ -93,8 +95,6 @@ provide('files', files)
 
     <Footer v-if="!$route.path.startsWith('/examples')" />
 
-    <!-- <ClientOnly>
-      <LazyUContentSearch ref="searchRef" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
-    </ClientOnly> -->
+    <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
   </UApp>
 </template>

@@ -1,12 +1,12 @@
 {
-  "name": "@nuxt/ui-docs",
   "private": true,
+  "name": "@nuxt/ui-docs",
   "type": "module",
   "dependencies": {
     "@iconify-json/heroicons": "^1.1.21",
     "@iconify-json/simple-icons": "^1.1.105",
     "@iconify-json/vscode-icons": "^1.1.35",
-    "@nuxt/content": "^2.12.1",
+    "@nuxt/content": "npm:@nuxt/content-edge@2.12.1-28635002.f66778a",
     "@nuxt/fonts": "^0.7.0",
     "@nuxt/image": "^1.7.0",
     "@nuxt/ui": "latest",

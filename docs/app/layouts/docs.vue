@@ -6,7 +6,7 @@
           <UPageAside>
             <!-- <BranchSelect /> -->
 
-            <!-- <UNavigationTree :links="mapContentNavigation(navigation)" /> -->
+            <UContentNavigation :navigation="navigation" />
           </UPageAside>
         </template>
 
