@@ -165,8 +165,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: npm:@nuxt/ui-pro-edge@1.2.0-28637819.42c6d9b
-        version: '@nuxt/ui-pro-edge@1.2.0-28637819.42c6d9b(vue@3.4.27(typescript@5.4.5))'
+        specifier: npm:@nuxt/ui-pro-edge@1.3.0-28637896.6f86d07
+        version: '@nuxt/ui-pro-edge@1.3.0-28637896.6f86d07(vue@3.4.27(typescript@5.4.5))'
       '@nuxtjs/plausible':
         specifier: ^1.0.0
         version: 1.0.0(magicast@0.3.4)(rollup@4.18.0)
@@ -1209,8 +1209,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro-edge@1.2.0-28637819.42c6d9b':
-    resolution: {integrity: sha512-PV5bC6eVqEH0INu/BJRWFQcQ0qZ16dy6cGlq8EZHXIM0f+oPxx14/4pJ3U0/cOZRhvC22NcuHQRz/2zn0UFLMw==}
+  '@nuxt/ui-pro-edge@1.3.0-28637896.6f86d07':
+    resolution: {integrity: sha512-jEwEKVLt0VZv2K/pfXJov6kL9PUg3vVfOBq7nVcwXtSzhDoTceFXijSFJoeCjlL7YxGjQhCFIKpfeF/N5NggIQ==}
 
   '@nuxt/vite-builder@3.12.1':
     resolution: {integrity: sha512-Op6m/jm0MMWgpD+evKZR7L5zATa2gQhWrP0uZJjZc8yuo3TutkUyfTR5GzbH/ujJgk0TnqED6vYhmjLsT6n8pA==}
@@ -8952,7 +8952,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxt/ui-pro-edge@1.2.0-28637819.42c6d9b(vue@3.4.27(typescript@5.4.5))':
+  '@nuxt/ui-pro-edge@1.3.0-28637896.6f86d07(vue@3.4.27(typescript@5.4.5))':
     dependencies:
       '@nuxt/ui': 'link:'
       '@vueuse/core': 10.11.0(vue@3.4.27(typescript@5.4.5))
