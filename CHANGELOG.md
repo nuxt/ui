@@ -1,5 +1,30 @@
 # Changelog
 
+## [2.17.0](https://github.com/nuxt/ui/compare/v2.16.0...v2.17.0) (2024-06-13)
+
+
+### Features
+
+* **Alert:** add `actions` slot ([#1785](https://github.com/nuxt/ui/issues/1785)) ([c8dd71c](https://github.com/nuxt/ui/commit/c8dd71c4f5a5239811b07b50f1dc802101af07d5))
+* **Form:** update and migrate `valibot` to v0.31.0 ([#1848](https://github.com/nuxt/ui/issues/1848)) ([1d5bd89](https://github.com/nuxt/ui/commit/1d5bd89d5881163fc6dc917e138b9d8304dff6c4))
+* **Notification:** allow ring customization with `{color}` ([#1830](https://github.com/nuxt/ui/issues/1830)) ([3ebff4d](https://github.com/nuxt/ui/commit/3ebff4d133372e339e2c4c439576e9e192b29cc3))
+* **Slideover:** handle `top` and `bottom` side ([#1834](https://github.com/nuxt/ui/issues/1834)) ([50ad14f](https://github.com/nuxt/ui/commit/50ad14f9dffe4f76bef888cd10d30b417c75bca5))
+* **Tabs:** add `content` prop to avoid the render of the HTML markup ([#1831](https://github.com/nuxt/ui/issues/1831)) ([6e2678d](https://github.com/nuxt/ui/commit/6e2678d1d8a498322eb3eff909ccbba55e40a2b7))
+
+
+### Bug Fixes
+
+* **Alert/Notification:** use `div` for description ([e8898d1](https://github.com/nuxt/ui/commit/e8898d15a667ba66e78828315e3cc4e92845cd3f)), closes [#1551](https://github.com/nuxt/ui/issues/1551)
+* **Alert:** base style not applied on icon ([#1859](https://github.com/nuxt/ui/issues/1859)) ([f65aefb](https://github.com/nuxt/ui/commit/f65aefb7067c1c64c1355b5d699129e716ef1281))
+* **Breadcrumb:** allow `aria-current` to be overrideable ([ebfb835](https://github.com/nuxt/ui/commit/ebfb8350339725c0a6f88c73f16bff01d61538c2)), closes [#1856](https://github.com/nuxt/ui/issues/1856)
+* **Carousel:** prevent mouse click when dragging ([#1781](https://github.com/nuxt/ui/issues/1781)) ([4f0d00f](https://github.com/nuxt/ui/commit/4f0d00f7a6eebf05adceaf1e7c2869ad91949cf3))
+* **CommandPalette:** hide `empty-state` when `null` ([249bbd4](https://github.com/nuxt/ui/commit/249bbd49dc8420603e8d561543d237abeb400908)), closes [#1787](https://github.com/nuxt/ui/issues/1787)
+* **Form:** maintain other errors when using `setErrors` with a path ([#1818](https://github.com/nuxt/ui/issues/1818)) ([06990be](https://github.com/nuxt/ui/commit/06990beabf67f668322b4d3fb2ec93cc4f3bdcd4))
+* **Input:** hide wrapper when type is `hidden` ([#1797](https://github.com/nuxt/ui/issues/1797)) ([e7c2f78](https://github.com/nuxt/ui/commit/e7c2f7856c05ed96f48c83d64d8e1d3f41ab58fe))
+* **Link:** typo in `exactHash` type ([581b470](https://github.com/nuxt/ui/commit/581b470cc79c2315bb2d56e02a7c134a7861c616)), closes [#1767](https://github.com/nuxt/ui/issues/1767)
+* **SelectMenu:** wrong placeholder color when `modelValue` is an empty string ([9b9ccdb](https://github.com/nuxt/ui/commit/9b9ccdb59e98fed096dd18809af646b10de46b9f)), closes [#1862](https://github.com/nuxt/ui/issues/1862)
+* **Select:** remove defaults for `value` and `text` ([6c124bb](https://github.com/nuxt/ui/commit/6c124bb1ac2fef116161da56a3a8e5f92144ce3a)), closes [#1702](https://github.com/nuxt/ui/issues/1702)
+
 ## [2.16.0](https://github.com/nuxt/ui/compare/v2.15.2...v2.16.0) (2024-05-07)
 
 
