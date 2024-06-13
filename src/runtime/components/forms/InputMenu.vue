@@ -290,7 +290,7 @@ export default defineComponent({
     const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
     const { emitFormBlur, emitFormChange, inputId, color, size: sizeFormGroup, name } = useFormGroup(props, config)
 
-    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
+    const size = computed(() => sizeButtonGroup.value ?? sizeFormGroup.value)
 
     const internalQuery = ref('')
     const query = computed({

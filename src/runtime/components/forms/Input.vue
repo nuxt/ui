@@ -171,7 +171,7 @@ export default defineComponent({
 
     const { emitFormBlur, emitFormInput, size: sizeFormGroup, color, inputId, name } = useFormGroup(props, config)
 
-    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
+    const size = computed(() => sizeButtonGroup.value ?? sizeFormGroup.value)
 
     const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
 
