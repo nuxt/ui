@@ -53,7 +53,7 @@ defineShortcuts({
 </script>
 ```
 
-### Control programmatically :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### Control programmatically
 
 First of all, add the `USlideovers` component to your app, preferably inside `app.vue`.
 

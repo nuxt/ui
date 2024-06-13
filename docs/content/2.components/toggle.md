@@ -52,7 +52,7 @@ excludedProps:
 ---
 ::
 
-### Loading :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### Loading
 
 Use the `loading` prop to show a loading icon and disable the Toggle.
 
