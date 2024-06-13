@@ -309,7 +309,7 @@ export default defineComponent({
       }
 
       if (props.valueAttribute) {
-        const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
+        const option = filteredOptions.value.find(option => option[props.valueAttribute] === props.modelValue)
         return option ? option[props.optionAttribute] : null
       } else {
         return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
