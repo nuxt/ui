@@ -130,7 +130,7 @@ Pass a function to the `search` prop to customize the search behavior and filter
 
 Use the `debounce` prop to adjust the delay of the function.
 
-Use the `searchLazy` prop to control the immediacy of data requests. :u-badge{label="New" class="!rounded-full" variant="subtle"}
+Use the `searchLazy` prop to control the immediacy of data requests.
 
 ::component-example
 ---

@@ -98,7 +98,7 @@ The number of indicators will be automatically generated based on the number of 
 
 :component-example{component="carousel-example-indicators-size"}
 
-## Autoplay :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+## Autoplay
 
 You can easily implement an autoplay behavior using the exposed [API](#api) through a template ref.
 

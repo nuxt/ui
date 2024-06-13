@@ -63,7 +63,7 @@ componentProps:
 ---
 ::
 
-You can use the `content` prop and set it to `false` to avoid the rendering of the HTML content if you don't need it.
+You can use the `content` prop and set it to `false` to avoid the rendering of the HTML content if you don't need it. :u-badge{label="New" class="!rounded-full" variant="subtle"}
 
 ### Control the selected index
 
