@@ -492,7 +492,7 @@ export default defineComponent({
         }
       }
       if (typeof props.showCreateOptionWhen === 'function') {
-        if(props.showCreateOptionWhen(query.value, filteredOptions.value)){
+        if(!props.showCreateOptionWhen(query.value, filteredOptions.value)){
           return null
         }
       }
