@@ -202,13 +202,13 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 
     <ComboboxPortal :disabled="!portal">
       <ComboboxContent :class="ui.content()" v-bind="contentProps">
+        <ComboboxInput :placeholder="searchPlaceholder" :class="ui.input()" autofocus autocomplete="off" @blur="emitFormBlur()" />
+
         <ComboboxEmpty :class="ui.empty()">
           <slot name="empty" :search-term="searchTerm">
             {{ searchTerm ? `No results for ${searchTerm}` : 'No results' }}
           </slot>
         </ComboboxEmpty>
-
-        <ComboboxInput :placeholder="searchPlaceholder" :class="ui.input()" autofocus autocomplete="off" @blur="emitFormBlur()" />
 
         <ComboboxViewport :class="ui.viewport()">
           <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group()">
