@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="ui.wrapper" role="progressbar">
     <slot v-if="indicator || $slots.indicator" name="indicator" v-bind="{ percent }">
       <div v-if="!isSteps" :class="indicatorContainerClass" :style="{ width: `${percent}%` }">
         <div :class="indicatorClass">
