@@ -8,13 +8,13 @@ links:
 
 ## Usage
 
-Use the Form component to validate form data using schema libraries such as [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi), [Valibot](https://valibot.dev/), or your own validation logic.
+Use the Form component to validate form data using schema libraries such as [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi), [Valibot](https://github.com/fabian-hiller/valibot), or your own validation logic.
 
 It works with the [FormGroup](/components/form-group) component to display error messages around form elements automatically.
 
 The form component requires two props:
 - `state` - a reactive object holding the form's state.
-- `schema` - a schema object from a validation library like [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi) or [Valibot](https://valibot.dev/).
+- `schema` - a schema object from a validation library like [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi) or [Valibot](https://github.com/fabian-hiller/valibot).
 
 ::callout{icon="i-heroicons-light-bulb"}
 Note that **no validation library is included** by default, so ensure you **install the one you need**.
