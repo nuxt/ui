@@ -35,21 +35,21 @@ const appConfig = useAppConfig()
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'class', 'ui'), emits)
 const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[string]>
 
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate()
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ContextMenuItem, active?: boolean, index: number }>()
 
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as T[][] : [])
 </script>
 
 <template>
   <DefineItemTemplate v-slot="{ item, active, index }">
-    <slot :name="item.slot || 'item'" :item="item" :index="index">
-      <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="active" :index="index">
+    <slot :name="item.slot || 'item'" :item="(item as T)" :index="index">
+      <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="(item as T)" :active="active" :index="index">
         <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ active })" />
         <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ active })" />
       </slot>
 
       <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel({ active })">
-        <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="active" :index="index">
+        <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="(item as T)" :active="active" :index="index">
           {{ item.label }}
         </slot>
 
@@ -57,7 +57,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
       </span>
 
       <span v-if="item.children?.length || item.kbds?.length || !!slots[item.slot ? `${item.slot}-trailing`: 'item-trailing']" :class="ui.itemTrailing()">
-        <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="item" :active="active" :index="index">
+        <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="(item as T)" :active="active" :index="index">
           <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon({ active })" />
           <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds()">
             <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" size="md" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
