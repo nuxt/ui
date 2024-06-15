@@ -52,6 +52,10 @@ export default defineNuxtModule<ModuleOptions>({
       icons
     })
 
+    // Isolate root node from portaled components
+    nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
+    nuxt.options.app.rootAttrs.class = 'isolate'
+
     addVitePlugin(tailwindcss)
 
     await installModule('nuxt-icon', {
