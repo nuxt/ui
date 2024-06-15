@@ -12,8 +12,8 @@ type ButtonGroupProps = {
 // make a ButtonGroupContext type for injection. Should include ButtonGroupProps
 type ButtonGroupContext = {
   children: ComponentInternalInstance[]
-  register(child: ComponentInternalInstance): void
-  unregister(child: ComponentInternalInstance): void
+  register (child: ComponentInternalInstance): void
+  unregister (child: ComponentInternalInstance): void
   orientation: 'horizontal' | 'vertical'
   size: string
   ui: Partial<typeof buttonGroup>
@@ -41,6 +41,17 @@ export function useProvideButtonGroup (buttonGroupProps: ButtonGroupProps) {
 
 export function useInjectButtonGroup ({ ui, props }: { ui: any, props: any }) {
   const instance = getCurrentInstance()
+
+  provide('ButtonGroupContextConsumer', true)
+  const isParentPartOfGroup = inject('ButtonGroupContextConsumer', false)
+
+  // early return if a parent is already part of the group
+  if (isParentPartOfGroup) {
+    return {
+      size: computed(() => props.size),
+      rounded: computed(() => ui.value.rounded)
+    }
+  }
 
   let parent = instance.parent
   let groupContext: Ref<ButtonGroupContext> | undefined

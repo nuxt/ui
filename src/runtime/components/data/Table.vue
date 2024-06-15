@@ -1,13 +1,24 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
     <table :class="[ui.base, ui.divide]">
+      <slot v-if="$slots.caption || caption" name="caption">
+        <caption :class="ui.caption">
+          {{ caption }}
+        </caption>
+      </slot>
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
           <th v-if="modelValue" scope="col" :class="ui.checkbox.padding">
-            <UCheckbox :checked="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" aria-label="Select all" @change="onChange" />
+            <UCheckbox :model-value="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" v-bind="ui.default.checkbox" aria-label="Select all" @change="onChange" />
           </th>
 
-          <th v-for="(column, index) in columns" :key="index" scope="col" :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]">
+          <th
+            v-for="(column, index) in columns"
+            :key="index"
+            scope="col"
+            :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]"
+            :aria-sort="getAriaSort(column)"
+          >
             <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
@@ -20,9 +31,15 @@
             </slot>
           </th>
         </tr>
+
+        <tr v-if="loading && progress">
+          <td :colspan="0" :class="ui.progress.wrapper">
+            <UProgress v-bind="{ ...(ui.default.progress || {}), ...progress }" size="2xs" />
+          </td>
+        </tr>
       </thead>
       <tbody :class="ui.tbody">
-        <tr v-if="loadingState && loading">
+        <tr v-if="loadingState && loading && !rows.length">
           <td :colspan="columns.length + (modelValue ? 1 : 0)">
             <slot name="loading-state">
               <div :class="ui.loadingState.wrapper">
@@ -51,7 +68,7 @@
         <template v-else>
           <tr v-for="(row, index) in rows" :key="index" :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
             <td v-if="modelValue" :class="ui.checkbox.padding">
-              <UCheckbox v-model="selected" :value="row" aria-label="Select row" @click.stop />
+              <UCheckbox v-model="selected" :value="row" v-bind="ui.default.checkbox" aria-label="Select row" @click.stop />
             </td>
 
             <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, row[column.key]?.class]">
@@ -67,16 +84,18 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, toRaw, toRef } from 'vue'
-import type { PropType } from 'vue'
+import { computed, defineComponent, toRaw, toRef } from 'vue'
+import type { PropType, AriaAttributes } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
-import UButton from '../elements/Button.vue'
+import { useVModel } from '@vueuse/core'
 import UIcon from '../elements/Icon.vue'
+import UButton from '../elements/Button.vue'
+import UProgress from '../elements/Progress.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, omit, get } from '../../utils'
-import type { Strategy, Button } from '../../types'
+import { mergeConfig, get } from '../../utils'
+import type { Strategy, Button, ProgressColor, ProgressAnimation } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { table } from '#ui/ui.config'
@@ -87,10 +106,32 @@ function defaultComparator<T> (a: T, z: T): boolean {
   return a === z
 }
 
+function defaultSort (a: any, b: any, direction: 'asc' | 'desc') {
+  if (a === b) {
+    return 0
+  }
+
+  if (direction === 'asc') {
+    return a < b ? -1 : 1
+  } else {
+    return a > b ? -1 : 1
+  }
+}
+
+interface Column {
+  key: string
+  sortable?: boolean
+  sort?: (a: any, b: any, direction: 'asc' | 'desc') => number
+  direction?: 'asc' | 'desc'
+  class?: string
+  [key: string]: any
+}
+
 export default defineComponent({
   components: {
-    UButton,
     UIcon,
+    UButton,
+    UProgress,
     UCheckbox
   },
   inheritAttrs: false,
@@ -104,11 +145,11 @@ export default defineComponent({
       default: () => defaultComparator
     },
     rows: {
-      type: Array as PropType<{ [key: string]: any, click?: Function }[]>,
+      type: Array as PropType<{ [key: string]: any }[]>,
       default: () => []
     },
     columns: {
-      type: Array as PropType<{ key: string, sortable?: boolean, direction?: 'asc' | 'desc', class?: string, [key: string]: any }[]>,
+      type: Array as PropType<Column[]>,
       default: null
     },
     columnAttribute: {
@@ -118,6 +159,10 @@ export default defineComponent({
     sort: {
       type: Object as PropType<{ column: string, direction: 'asc' | 'desc' }>,
       default: () => ({})
+    },
+    sortMode: {
+      type: String as PropType<'manual' | 'auto'>,
+      default: 'auto'
     },
     sortButton: {
       type: Object as PropType<Button>,
@@ -143,6 +188,14 @@ export default defineComponent({
       type: Object as PropType<{ icon: string, label: string }>,
       default: () => config.default.emptyState
     },
+    caption: {
+      type: String,
+      default: null
+    },
+    progress: {
+      type: Object as PropType<{ color: ProgressColor, animation: ProgressAnimation }>,
+      default: () => config.default.progress
+    },
     class: {
       type: [String, Object, Array] as PropType<any>,
       default: () => ''
@@ -156,14 +209,14 @@ export default defineComponent({
   setup (props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const columns = computed(() => props.columns ?? Object.keys(omit(props.rows[0] ?? {}, ['click'])).map((key) => ({ key, label: upperFirst(key), sortable: false })))
+    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort })))
 
-    const sort = ref(defu({}, props.sort, { column: null, direction: 'asc' }))
+    const sort = useVModel(props, 'sort', emit, { passive: true, defaultValue: defu({}, props.sort, { column: null, direction: 'asc' }) })
 
-    const defaultSort = { column: sort.value.column, direction: null }
+    const savedSort = { column: sort.value.column, direction: null }
 
     const rows = computed(() => {
-      if (!sort.value?.column) {
+      if (!sort.value?.column || props.sortMode === 'manual') {
         return props.rows
       }
 
@@ -173,15 +226,9 @@ export default defineComponent({
         const aValue = get(a, column)
         const bValue = get(b, column)
 
-        if (aValue === bValue) {
-          return 0
-        }
+        const sort = columns.value.find((col) => col.key === column)?.sort ?? defaultSort
 
-        if (direction === 'asc') {
-          return aValue < bValue ? -1 : 1
-        } else {
-          return aValue > bValue ? -1 : 1
-        }
+        return sort(aValue, bValue, direction)
       })
     })
 
@@ -227,15 +274,13 @@ export default defineComponent({
         const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
 
         if (sort.value.direction === direction) {
-          sort.value = defu({}, defaultSort, { column: null, direction: 'asc' })
+          sort.value = defu({}, savedSort, { column: null, direction: 'asc' })
         } else {
-          sort.value.direction = sort.value.direction === 'asc' ? 'desc' : 'asc'
+          sort.value = { column: sort.value.column, direction: sort.value.direction === 'asc' ? 'desc' : 'asc' }
         }
       } else {
         sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
-
-      emit('update:sort', sort.value)
     }
 
     function onSelect (row) {
@@ -259,16 +304,36 @@ export default defineComponent({
       })
     }
 
-    function onChange (event: any) {
-      if (event.target.checked) {
+    function onChange (checked: boolean) {
+      if (checked) {
         selectAllRows()
       } else {
         selected.value = []
       }
     }
 
-    function getRowData (row: Object, rowKey: string | string[], defaultValue: any = 'Failed to get cell value') {
+    function getRowData (row: Object, rowKey: string | string[], defaultValue: any = '') {
       return get(row, rowKey, defaultValue)
+    }
+
+    function getAriaSort (column: Column): AriaAttributes['aria-sort'] {
+      if (!column.sortable) {
+        return undefined
+      }
+
+      if (sort.value.column !== column.key) {
+        return 'none'
+      }
+
+      if (sort.value.direction === 'asc') {
+        return 'ascending'
+      }
+
+      if (sort.value.direction === 'desc') {
+        return 'descending'
+      }
+
+      return undefined
     }
 
     return {
@@ -291,7 +356,8 @@ export default defineComponent({
       onSort,
       onSelect,
       onChange,
-      getRowData
+      getRowData,
+      getAriaSort
     }
   }
 })

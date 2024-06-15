@@ -3,15 +3,26 @@
     :id="inputId"
     v-model="active"
     :name="name"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     :class="switchClass"
     v-bind="attrs"
   >
     <span :class="containerClass">
-      <span v-if="onIcon" :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]" aria-hidden="true">
+      <span v-if="loading" :class="[ui.icon.active, ui.icon.base]" aria-hidden="true">
+        <UIcon :name="loadingIcon" :class="loadingIconClass" />
+      </span>
+      <span
+        v-if="!loading && onIcon"
+        :class="[active ? ui.icon.active : ui.icon.inactive, ui.icon.base]"
+        aria-hidden="true"
+      >
         <UIcon :name="onIcon" :class="onIconClass" />
       </span>
-      <span v-if="offIcon" :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]" aria-hidden="true">
+      <span
+        v-if="!loading && offIcon"
+        :class="[active ? ui.icon.inactive : ui.icon.active, ui.icon.base]"
+        aria-hidden="true"
+      >
         <UIcon :name="offIcon" :class="offIconClass" />
       </span>
     </span>
@@ -21,17 +32,17 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Switch as HSwitch } from '@headlessui/vue'
+import { Switch as HSwitch, provideUseId } from '@headlessui/vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
-import type { ToggleSize, Strategy } from '../../types'
+import type { ToggleSize, ToggleColor, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { toggle } from '#ui/ui.config'
-import colors from '#ui-colors'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof toggle>(appConfig.ui.strategy, appConfig.ui.toggle, toggle)
 
@@ -58,6 +69,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    loading: {
+      type: Boolean,
+      default: false
+    },
     onIcon: {
       type: String,
       default: () => config.default.onIcon
@@ -66,8 +81,12 @@ export default defineComponent({
       type: String,
       default: () => config.default.offIcon
     },
+    loadingIcon: {
+      type: String,
+      default: () => config.default.loadingIcon
+    },
     color: {
-      type: String as PropType<typeof colors[number]>,
+      type: String as PropType<ToggleColor>,
       default: () => config.default.color,
       validator (value: string) {
         return appConfig.ui.colors.includes(value)
@@ -75,7 +94,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<ToggleSize>,
-      default: config.default.size,
+      default: () => config.default.size,
       validator (value: string) {
         return Object.keys(config.size).includes(value)
       }
@@ -89,7 +108,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
     const { ui, attrs } = useUI('toggle', toRef(props, 'ui'), config)
 
@@ -101,6 +120,8 @@ export default defineComponent({
       },
       set (value) {
         emit('update:modelValue', value)
+        emit('change', value)
+
         emitFormChange()
       }
     })
@@ -137,6 +158,15 @@ export default defineComponent({
       )
     })
 
+    const loadingIconClass = computed(() => {
+      return twJoin(
+        ui.value.icon.size[props.size],
+        color.value && ui.value.icon.loading.replaceAll('{color}', color.value)
+      )
+    })
+
+    provideUseId(() => useId())
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -148,7 +178,8 @@ export default defineComponent({
       switchClass,
       containerClass,
       onIconClass,
-      offIconClass
+      offIconClass,
+      loadingIconClass
     }
   }
 })

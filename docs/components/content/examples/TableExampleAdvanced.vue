@@ -77,6 +77,7 @@ const resetFilters = () => {
 }
 
 // Pagination
+const sort = ref({ column: 'id', direction: 'asc' as const })
 const page = ref(1)
 const pageCount = ref(10)
 const pageTotal = ref(200) // This value should be dynamic coming from the API
@@ -92,11 +93,13 @@ const { data: todos, pending } = await useLazyAsyncData<{
   query: {
     q: search.value,
     '_page': page.value,
-    '_limit': pageCount.value
+    '_limit': pageCount.value,
+    '_sort': sort.value.column,
+    '_order': sort.value.direction
   }
 }), {
   default: () => [],
-  watch: [page, search, searchStatus, pageCount]
+  watch: [page, search, searchStatus, pageCount, sort]
 })
 </script>
 
@@ -175,13 +178,15 @@ const { data: todos, pending } = await useLazyAsyncData<{
     <!-- Table -->
     <UTable
       v-model="selectedRows"
+      v-model:sort="sort"
       :rows="todos"
       :columns="columnsTable"
       :loading="pending"
       sort-asc-icon="i-heroicons-arrow-up"
       sort-desc-icon="i-heroicons-arrow-down"
+      sort-mode="manual"
       class="w-full"
-      :ui="{ td: { base: 'max-w-[0] truncate' } }"
+      :ui="{ td: { base: 'max-w-[0] truncate' }, default: { checkbox: { color: 'gray' } } }"
       @select="select"
     >
       <template #completed-data="{ row }">

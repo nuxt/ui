@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const items = [{
   label: 'Getting Started',
   icon: 'i-heroicons-information-circle',

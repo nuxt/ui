@@ -1,28 +1,36 @@
 <template>
   <div :class="alertClass" v-bind="attrs">
     <div class="flex" :class="[ui.gap, { 'items-start': (description || $slots.description), 'items-center': !description && !$slots.description }]">
-      <UIcon v-if="icon" :name="icon" :class="ui.icon.base" />
-      <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
+      <slot name="icon" :icon="icon">
+        <UIcon v-if="icon" :name="icon" :class="ui.icon.base" />
+      </slot>
+      <slot name="avatar" :avatar="avatar">
+        <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
+      </slot>
 
       <div :class="ui.inner">
-        <p :class="ui.title">
+        <p v-if="(title || $slots.title)" :class="ui.title">
           <slot name="title" :title="title">
             {{ title }}
           </slot>
         </p>
-        <p v-if="description || $slots.description" :class="ui.description">
+        <div v-if="description || $slots.description" :class="twMerge(ui.description, !(title && $slots.title) && 'mt-0 leading-5')">
           <slot name="description" :description="description">
             {{ description }}
           </slot>
-        </p>
+        </div>
 
-        <div v-if="(description || $slots.description) && actions.length" :class="ui.actions">
-          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="action.click" />
+        <div v-if="(description || $slots.description) && (actions.length || $slots.actions)" :class="ui.actions">
+          <slot name="actions">
+            <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
+          </slot>
         </div>
       </div>
       <div v-if="closeButton || (!description && !$slots.description && actions.length)" :class="twMerge(ui.actions, 'mt-0')">
-        <template v-if="!description && !$slots.description && actions.length">
-          <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="action.click" />
+        <template v-if="!description && !$slots.description && (actions.length || $slots.actions)">
+          <slot name="actions">
+            <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
+          </slot>
         </template>
 
         <UButton v-if="closeButton" aria-label="Close" v-bind="{ ...(ui.default.closeButton || {}), ...closeButton }" @click.stop="$emit('close')" />
@@ -39,7 +47,7 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
-import type { Avatar, Button, AlertColor, AlertVariant, Strategy } from '../../types'
+import type { Avatar, Button, AlertColor, AlertVariant, AlertAction, Strategy } from '../../types'
 import { mergeConfig } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -57,7 +65,7 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      required: true
+      default: null
     },
     description: {
       type: String,
@@ -76,7 +84,7 @@ export default defineComponent({
       default: () => config.default.closeButton as unknown as Button
     },
     actions: {
-      type: Array as PropType<(Button & { click?: Function })[]>,
+      type: Array as PropType<AlertAction[]>,
       default: () => []
     },
     color: {
@@ -121,11 +129,18 @@ export default defineComponent({
       ), props.class)
     })
 
+    function onAction (action: AlertAction) {
+      if (action.click) {
+        action.click()
+      }
+    }
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
       alertClass,
+      onAction,
       twMerge
     }
   }

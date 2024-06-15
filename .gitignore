@@ -9,3 +9,4 @@ dist
 .vercel
 .idea
 .env
+.data

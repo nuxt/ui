@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const items = [{
   name: 'messages',
   icon: 'i-heroicons-chat-bubble-oval-left',

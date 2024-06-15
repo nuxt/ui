@@ -1,0 +1,157 @@
+{
+  "github": {
+    "silent": true
+  },
+  "redirects": [
+    {
+      "source": "/getting-started/examples",
+      "destination": "/components/date-picker",
+      "permanent": true
+    },
+    {
+      "source": "/elements/:path(.*)",
+      "destination": "/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/forms/:path(.*)",
+      "destination": "/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/data/:path(.*)",
+      "destination": "/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/navigation/:path(.*)",
+      "destination": "/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/overlays/:path(.*)",
+      "destination": "/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/layout/:path(.*)",
+      "destination": "/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/dev/elements/:path(.*)",
+      "destination": "/dev/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/dev/forms/:path(.*)",
+      "destination": "/dev/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/dev/data/:path(.*)",
+      "destination": "/dev/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/dev/navigation/:path(.*)",
+      "destination": "/dev/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/dev/overlays/:path(.*)",
+      "destination": "/dev/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/dev/layout/:path(.*)",
+      "destination": "/dev/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/guide",
+      "destination": "/pro/getting-started",
+      "permanent": true
+    },
+    {
+      "source": "/pro/guide/usage",
+      "destination": "/pro/getting-started/theming",
+      "permanent": true
+    },
+    {
+      "source": "/pro/guide/content",
+      "destination": "/pro/getting-started/content",
+      "permanent": true
+    },
+    {
+      "source": "/pro/guide/templates",
+      "destination": "/pro/templates",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/header/:path((?!_payload.json).*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/main/:path((?!_payload.json).*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/footer/:path((?!_payload.json).*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/landing/:path(.*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/pricing/:path(.*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/blog/:path(.*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/page/:path((?!_payload.json).*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/aside/:path((?!_payload.json).*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/navigation/:path(.*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/auth/:path(.*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/docs/:path(.*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/color-mode/:path(.*)",
+      "destination": "/pro/components/:path",
+      "permanent": true
+    },
+    {
+      "source": "/pro/components/prose/:path(.*)",
+      "destination": "/pro/prose/:path",
+      "permanent": true
+    }
+  ]
+}

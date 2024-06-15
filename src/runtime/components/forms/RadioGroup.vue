@@ -1,6 +1,6 @@
 <template>
   <div :class="ui.wrapper">
-    <fieldset v-bind="attrs">
+    <fieldset v-bind="attrs" :class="ui.fieldset">
       <legend v-if="legend || $slots.legend" :class="ui.legend">
         <slot name="legend">
           {{ legend }}
@@ -12,7 +12,8 @@
         :label="option.label"
         :model-value="modelValue"
         :value="option.value"
-        :disabled="disabled"
+        :help="option.help"
+        :disabled="option.disabled || disabled"
         :ui="uiRadio"
         @change="onUpdate(option.value)"
       >

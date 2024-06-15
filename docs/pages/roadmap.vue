@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const title = 'Roadmap'
 const description = 'Discover our Volta board for @nuxt/ui development status.'
 

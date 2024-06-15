@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const options = [
   { id: 1, name: 'Wade Cooper', colors: ['red', 'yellow'] },
   { id: 2, name: 'Arlene Mccoy', colors: ['blue', 'yellow'] },

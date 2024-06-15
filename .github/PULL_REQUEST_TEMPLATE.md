@@ -4,7 +4,7 @@
 
 ### 🔗 Linked issue
 
-<!-- Please ensure there is an open issue and mention its number as #123 -->
+<!-- If it resolves an open issue, please link the issue here. For example "Resolves #123" -->
 
 ### ❓ Type of change
 
@@ -21,7 +21,6 @@
 
 <!-- Describe your changes in detail -->
 <!-- Why is this change required? What problem does it solve? -->
-<!-- If it resolves an open issue, please link to the issue here. For example "Resolves #1337" -->
 
 ### 📝 Checklist
 

@@ -4,7 +4,8 @@
     :by="by"
     :name="name"
     :model-value="modelValue"
-    :disabled="disabled || loading"
+    :disabled="disabled"
+    :nullable="nullable"
     as="div"
     :class="ui.wrapper"
     @update:model-value="onUpdate"
@@ -12,16 +13,15 @@
     <div :class="uiMenu.trigger">
       <HComboboxInput
         :id="inputId"
-        ref="input"
         :name="name"
         :required="required"
         :placeholder="placeholder"
-        :disabled="disabled || loading"
+        :disabled="disabled"
         :class="inputClass"
         autocomplete="off"
         v-bind="attrs"
-        :display-value="() => ['string', 'number'].includes(typeof modelValue) ? modelValue : modelValue[optionAttribute]"
-        @change="query = $event.target.value"
+        :display-value="() => query ? query : label"
+        @change="onQueryChange"
       />
 
       <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
@@ -98,9 +98,10 @@ import {
   ComboboxButton as HComboboxButton,
   ComboboxOptions as HComboboxOptions,
   ComboboxOption as HComboboxOption,
-  ComboboxInput as HComboboxInput
+  ComboboxInput as HComboboxInput,
+  provideUseId
 } from '@headlessui/vue'
-import { computedAsync } from '@vueuse/core'
+import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
@@ -114,6 +115,7 @@ import type { InputSize, InputColor, InputVariant, PopperOptions, Strategy } fro
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { input, inputMenu } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof input>(appConfig.ui.strategy, appConfig.ui.input, input)
 
@@ -134,6 +136,10 @@ export default defineComponent({
     modelValue: {
       type: [String, Number, Object, Array],
       default: ''
+    },
+    query: {
+      type: String,
+      default: null
     },
     by: {
       type: String,
@@ -191,6 +197,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    nullable: {
+      type: Boolean,
+      default: false
+    },
     placeholder: {
       type: String,
       default: null
@@ -231,9 +241,21 @@ export default defineComponent({
       type: String,
       default: null
     },
+    search: {
+      type: Function as PropType<((query: string) => Promise<any[]> | any[])>,
+      default: undefined
+    },
     searchAttributes: {
       type: Array,
       default: null
+    },
+    searchLazy: {
+      type: Boolean,
+      default: false
+    },
+    debounce: {
+      type: Number,
+      default: 200
     },
     popper: {
       type: Object as PropType<PopperOptions>,
@@ -256,10 +278,9 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'open', 'close', 'change'],
+  emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
-
     const { ui: uiMenu } = useUI('inputMenu', toRef(props, 'uiMenu'), configMenu)
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
@@ -271,7 +292,29 @@ export default defineComponent({
 
     const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
 
-    const query = ref('')
+    const internalQuery = ref('')
+    const query = computed({
+      get () {
+        return props.query ?? internalQuery.value
+      },
+      set (value) {
+        internalQuery.value = value
+        emit('update:query', value)
+      }
+    })
+
+    const label = computed(() => {
+      if (!props.modelValue) {
+        return
+      }
+
+      if (props.valueAttribute) {
+        const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
+        return option ? option[props.optionAttribute] : null
+      } else {
+        return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
+      }
+    })
 
     const inputClass = computed(() => {
       const variant = ui.value.color?.[color.value as string]?.[props.variant as string] || ui.value.variant[props.variant]
@@ -346,7 +389,13 @@ export default defineComponent({
       )
     })
 
+    const debouncedSearch = props.search && typeof props.search === 'function' ? useDebounceFn(props.search, props.debounce) : undefined
+
     const filteredOptions = computedAsync(async () => {
+      if (debouncedSearch) {
+        return await debouncedSearch(query.value)
+      }
+
       if (query.value === '') {
         return props.options
       }
@@ -362,6 +411,8 @@ export default defineComponent({
           return child !== null && child !== undefined && String(child).search(new RegExp(query.value, 'i')) !== -1
         })
       })
+    }, [], {
+      lazy: props.searchLazy
     })
 
     watch(container, (value) => {
@@ -373,11 +424,19 @@ export default defineComponent({
       }
     })
 
-    function onUpdate (event: any) {
-      emit('update:modelValue', event)
-      emit('change', event)
+    function onUpdate (value: any) {
+      query.value = ''
+      emit('update:modelValue', value)
+      emit('change', value)
+
       emitFormChange()
     }
+
+    function onQueryChange (event: any) {
+      query.value = event.target.value
+    }
+
+    provideUseId(() => useId())
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
@@ -392,6 +451,7 @@ export default defineComponent({
       popper,
       trigger,
       container,
+      label,
       isLeading,
       isTrailing,
       // eslint-disable-next-line vue/no-dupe-keys
@@ -403,8 +463,10 @@ export default defineComponent({
       trailingIconClass,
       trailingWrapperIconClass,
       filteredOptions,
+      // eslint-disable-next-line vue/no-dupe-keys
       query,
-      onUpdate
+      onUpdate,
+      onQueryChange
     }
   }
 })

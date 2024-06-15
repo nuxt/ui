@@ -4,6 +4,9 @@ export default {
   form: 'form-input',
   rounded: 'rounded-md',
   placeholder: 'placeholder-gray-400 dark:placeholder-gray-500',
+  file: {
+    base: 'file:mr-1.5 file:font-medium file:text-gray-500 dark:file:text-gray-400 file:bg-transparent file:border-0 file:p-0 file:outline-none'
+  },
   size: {
     '2xs': 'text-xs',
     xs: 'text-xs',

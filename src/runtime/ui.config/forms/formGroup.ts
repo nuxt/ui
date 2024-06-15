@@ -1,5 +1,6 @@
 export default {
   wrapper: '',
+  inner: '',
   label: {
     wrapper: 'flex content-center items-center justify-between',
     base: 'block font-medium text-gray-700 dark:text-gray-200',

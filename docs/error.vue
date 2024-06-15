@@ -1,5 +1,8 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
+    <NuxtLoadingIndicator />
+
     <Header :links="links" />
 
     <UContainer>
@@ -10,11 +13,18 @@
       </UMain>
     </UContainer>
 
+    <Footer />
+
     <ClientOnly>
-      <LazyUDocsSearch :files="files" :navigation="navigation" :links="links" />
+      <LazyUContentSearch :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
     </ClientOnly>
 
-    <UNotifications />
+    <UNotifications>
+      <template #title="{ title }">
+        <span v-html="title" />
+      </template>
+    </UNotifications>
+    <UModals />
   </div>
 </template>
 
@@ -31,6 +41,8 @@ defineProps<{
   error: NuxtError
 }>()
 
+const route = useRoute()
+const colorMode = useColorMode()
 const { branch } = useContentSource()
 
 const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
@@ -44,53 +56,55 @@ const navigation = computed(() => {
     const pro = nav.value.find(item => item._path === '/pro')
 
     return [
-      ...(pro ? [pro] : []),
-      ...dev
+      ...dev,
+      ...(pro ? [pro] : [])
     ]
   }
 
   return nav.value?.filter(item => item._path !== '/dev') || []
 })
 
+const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
+
 const links = computed(() => {
   return [{
-    label: 'Documentation',
+    label: 'Docs',
     icon: 'i-heroicons-book-open',
-    to: `${branch.value?.name === 'dev' ? '/dev' : ''}/getting-started`
-  }, {
-    label: 'Playground',
-    icon: 'i-simple-icons-stackblitz',
-    to: '/playground'
-  }, {
-    label: 'Roadmap',
-    icon: 'i-heroicons-academic-cap',
-    to: '/roadmap'
-  }, !!navigation.value.find(item => item._path === '/pro') && {
+    to: branch.value?.name === 'dev' ? '/dev/getting-started' : '/getting-started',
+    active: branch.value?.name === 'dev' ? (route.path.startsWith('/dev/getting-started') || route.path.startsWith('/dev/components')) : (route.path.startsWith('/getting-started') || route.path.startsWith('/components'))
+  }, ...(navigation.value.find(item => item._path === '/pro') ? [{
     label: 'Pro',
     icon: 'i-heroicons-square-3-stack-3d',
     to: '/pro',
-    children: [{
-      label: 'Features',
-      to: '/pro',
-      exact: true,
-      icon: 'i-heroicons-beaker',
-      description: 'Discover all the features of Nuxt UI Pro.'
-    }, {
-      label: 'Guide',
-      to: '/pro/guide',
-      icon: 'i-heroicons-book-open',
-      description: 'Learn how to use Nuxt UI Pro in your app.'
-    }, {
-      label: 'Components',
-      to: '/pro/components',
-      icon: 'i-heroicons-cube-transparent',
-      description: 'Discover all the components available in Nuxt UI Pro.'
-    }]
+    active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
   }, {
+    label: 'Pricing',
+    icon: 'i-heroicons-ticket',
+    to: '/pro/pricing'
+  }, {
+    label: 'Templates',
+    icon: 'i-heroicons-computer-desktop',
+    to: '/pro/templates'
+  }] : []), {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch',
     to: '/releases'
   }].filter(Boolean)
+})
+
+// Head
+
+useHead({
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { key: 'theme-color', name: 'theme-color', content: color }
+  ],
+  link: [
+    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
+  ],
+  htmlAttrs: {
+    lang: 'en'
+  }
 })
 
 // Provide

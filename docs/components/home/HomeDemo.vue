@@ -75,7 +75,7 @@ onMounted(() => {
         />
       </UAvatarGroup>
 
-      <UButton label="Button" icon="i-heroicons-pencil-square" />
+      <UButton label="Button" loading />
 
       <UBadge label="Badge" />
 

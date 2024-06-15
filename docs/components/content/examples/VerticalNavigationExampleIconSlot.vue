@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const types = {
   bug: {
     icon: 'i-heroicons-bug-ant-20-solid',
@@ -32,7 +32,7 @@ const links = [{
 </script>
 
 <template>
-  <UVerticalNavigation 
+  <UVerticalNavigation
     :links="links"
     :ui="{ wrapper: 'truncate' }"
   >
