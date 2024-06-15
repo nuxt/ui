@@ -40,6 +40,8 @@ export default defineNuxtModule<ModuleOptions>({
 
     options.colors = options.colors?.length ? [...new Set(['primary', ...options.colors])] : ['primary', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchia', 'pink', 'rose']
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     nuxt.options.ui = options
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
