@@ -20,7 +20,7 @@
     "nuxt": "^3.12.2",
     "nuxt-cloudflare-analytics": "^1.0.8",
     "nuxt-component-meta": "^0.6.4",
-    "nuxt-og-image": "^2.2.4",
+    "nuxt-og-image": "^3.0.0-rc.53",
     "prettier": "^3.3.2",
     "typescript": "^5.4.5",
     "ufo": "^1.5.3",
