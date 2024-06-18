@@ -67,14 +67,9 @@ sections:
         color: black
         size: lg
         icon: i-heroicons-cube
-      - label: Star on GitHub
-        to: https://github.com/nuxt/ui
-        target: _blank
-        color: white
-        size: lg
-        icon: i-simple-icons-github
 cta:
-  title: Trusted and supported by our amazing community
+  title: Built and driven by an <span class="text-primary">amazing community</span>
+  align: center
   users:
     - name: Benjamin Canac
       username: benjamincanac

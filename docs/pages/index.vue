@@ -109,7 +109,7 @@
           },
           title: 'text-center lg:text-left lg:text-5xl',
           description: 'mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8 lg:gap-16',
-          links: '-ml-3 justify-center lg:justify-start'
+          links: '-ml-3 justify-center lg:justify-start flex-wrap gap-y-3'
         }"
       >
         <template #title>
@@ -163,15 +163,16 @@
           </UButton>
         </template>
 
-        <HomeContributors :contributors="module.contributors" />
+        <div class="p-5 overflow-hidden flex">
+          <HomeContributors :contributors="module.contributors" />
+        </div>
       </ULandingCTA>
     </ULandingSection>
 
     <template v-if="navigation.find(item => item._path === '/pro')">
       <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }" class="bg-gradient-to-b from-gray-50 dark:from-gray-950/50 to-white dark:to-gray-900 relative">
         <template #top>
-          <!-- <img src="/gradient.svg" width="1441" height="181" class="absolute top-0 w-full right-0" alt="Tailored section background"> -->
-          <Gradient class="absolute top-0 w-full right-0 object-fill" />
+          <Gradient class="absolute inset-x-0 top-0 w-full block" />
         </template>
 
         <template #title>
@@ -439,7 +440,7 @@ useSeoMeta({
 
 const source = ref('npx nuxi@latest module add ui')
 const sectionRef = ref()
-const demoRef = ref()
+const demoRef = ref(null)
 const start = ref(0)
 
 const { height } = useElementSize(demoRef)
@@ -449,9 +450,7 @@ const config = useRuntimeConfig().public
 const { copy, copied } = useClipboard({ source })
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
-const mdAndLarger = breakpoints.greaterOrEqual('md')
 const lgAndLarger = breakpoints.greaterOrEqual('lg')
-const xlAndLarger = breakpoints.greaterOrEqual('xl')
 
 const { format } = Intl.NumberFormat('en', { notation: 'compact' })
 
