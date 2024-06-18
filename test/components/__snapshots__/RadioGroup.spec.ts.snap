@@ -5,7 +5,7 @@ exports[`RadioGroup > renders with class correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="14:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="14:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -14,7 +14,7 @@ exports[`RadioGroup > renders with class correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="14:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="14:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -23,7 +23,7 @@ exports[`RadioGroup > renders with class correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="14:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="14:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -40,7 +40,7 @@ exports[`RadioGroup > renders with color black correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:focus-visible:outline-white size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="13:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:focus-visible:outline-white size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="13:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -49,7 +49,7 @@ exports[`RadioGroup > renders with color black correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:focus-visible:outline-white size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="13:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:focus-visible:outline-white size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="13:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -58,7 +58,7 @@ exports[`RadioGroup > renders with color black correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:focus-visible:outline-white size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="13:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:focus-visible:outline-white size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="13:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -75,7 +75,7 @@ exports[`RadioGroup > renders with color green correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 dark:focus-visible:outline-green-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="11:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 dark:focus-visible:outline-green-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="11:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -84,7 +84,7 @@ exports[`RadioGroup > renders with color green correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 dark:focus-visible:outline-green-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="11:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 dark:focus-visible:outline-green-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="11:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -93,7 +93,7 @@ exports[`RadioGroup > renders with color green correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 dark:focus-visible:outline-green-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="11:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 dark:focus-visible:outline-green-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="11:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -110,7 +110,7 @@ exports[`RadioGroup > renders with color primary correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="10:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="10:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -119,7 +119,7 @@ exports[`RadioGroup > renders with color primary correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="10:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="10:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -128,7 +128,7 @@ exports[`RadioGroup > renders with color primary correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="10:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="10:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -145,7 +145,7 @@ exports[`RadioGroup > renders with color red correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="12:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="12:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -154,7 +154,7 @@ exports[`RadioGroup > renders with color red correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="12:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="12:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -163,7 +163,7 @@ exports[`RadioGroup > renders with color red correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="12:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 dark:focus-visible:outline-red-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="12:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -180,7 +180,7 @@ exports[`RadioGroup > renders with defaultValue correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="true" id="1:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full rounded-full after:bg-white dark:after:bg-gray-900 after:rounded-full bg-primary-500 dark:bg-primary-400 after:size-1.5"></span>
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="true" id="1:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" aria-label="1" value="1"><span data-state="checked" class="flex items-center justify-center size-full rounded-full after:bg-white dark:after:bg-gray-900 after:rounded-full bg-primary-500 dark:bg-primary-400 after:size-1.5"></span>
           <!---->
         </button></div>
       <div class="ms-2"><label for="1:1" class="block font-medium text-gray-700 dark:text-gray-200">Option 1</label>
@@ -188,7 +188,7 @@ exports[`RadioGroup > renders with defaultValue correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="1:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="1:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -197,7 +197,7 @@ exports[`RadioGroup > renders with defaultValue correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="1:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="1:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -214,7 +214,7 @@ exports[`RadioGroup > renders with description correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="3:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="3:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -223,7 +223,7 @@ exports[`RadioGroup > renders with description correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="3:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="3:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -232,7 +232,7 @@ exports[`RadioGroup > renders with description correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="3:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="3:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -249,7 +249,7 @@ exports[`RadioGroup > renders with description slot correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="19:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="19:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -258,7 +258,7 @@ exports[`RadioGroup > renders with description slot correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="19:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="19:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -267,7 +267,7 @@ exports[`RadioGroup > renders with description slot correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="19:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="19:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -284,7 +284,7 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4 cursor-not-allowed opacity-75" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" data-disabled="true" id="2:1" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4 cursor-not-allowed opacity-75" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" data-disabled="true" id="2:1" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -293,7 +293,7 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4 cursor-not-allowed opacity-75" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" data-disabled="true" id="2:2" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4 cursor-not-allowed opacity-75" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" data-disabled="true" id="2:2" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -302,7 +302,7 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4 cursor-not-allowed opacity-75" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" data-disabled="true" id="2:3" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4 cursor-not-allowed opacity-75" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" data-disabled="true" id="2:3" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -319,7 +319,7 @@ exports[`RadioGroup > renders with items correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -328,7 +328,7 @@ exports[`RadioGroup > renders with items correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -337,7 +337,7 @@ exports[`RadioGroup > renders with items correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -354,7 +354,7 @@ exports[`RadioGroup > renders with label slot correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="18:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="18:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -363,7 +363,7 @@ exports[`RadioGroup > renders with label slot correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="18:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="18:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -372,7 +372,7 @@ exports[`RadioGroup > renders with label slot correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="18:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="18:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -389,7 +389,7 @@ exports[`RadioGroup > renders with legend slot correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="17:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="17:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -398,7 +398,7 @@ exports[`RadioGroup > renders with legend slot correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="17:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="17:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -407,7 +407,7 @@ exports[`RadioGroup > renders with legend slot correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="17:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="17:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -424,7 +424,7 @@ exports[`RadioGroup > renders with orientation correctly 1`] = `
   <fieldset class="flex flex-row gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="false" id="16:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="false" id="16:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -433,7 +433,7 @@ exports[`RadioGroup > renders with orientation correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="false" id="16:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="false" id="16:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -442,7 +442,7 @@ exports[`RadioGroup > renders with orientation correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="false" id="16:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="false" id="16:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -459,7 +459,7 @@ exports[`RadioGroup > renders with required correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <legend class="mb-1 block font-medium text-gray-700 dark:text-gray-200 after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400">Legend</legend>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="4:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="4:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -468,7 +468,7 @@ exports[`RadioGroup > renders with required correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="4:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="4:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -477,7 +477,7 @@ exports[`RadioGroup > renders with required correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="4:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="4:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -494,7 +494,7 @@ exports[`RadioGroup > renders with size lg correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="8:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="8:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -503,7 +503,7 @@ exports[`RadioGroup > renders with size lg correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="8:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="8:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -512,7 +512,7 @@ exports[`RadioGroup > renders with size lg correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="8:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="8:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -529,7 +529,7 @@ exports[`RadioGroup > renders with size md correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="7:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="7:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -538,7 +538,7 @@ exports[`RadioGroup > renders with size md correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="7:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="7:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -547,7 +547,7 @@ exports[`RadioGroup > renders with size md correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="7:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="7:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -564,7 +564,7 @@ exports[`RadioGroup > renders with size sm correctly 1`] = `
   <fieldset class="flex flex-col gap-0.5">
     <!--v-if-->
     <div class="flex items-start text-xs">
-      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="6:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="6:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -573,7 +573,7 @@ exports[`RadioGroup > renders with size sm correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-xs">
-      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="6:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="6:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -582,7 +582,7 @@ exports[`RadioGroup > renders with size sm correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-xs">
-      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="6:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3.5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="6:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -599,7 +599,7 @@ exports[`RadioGroup > renders with size xl correctly 1`] = `
   <fieldset class="flex flex-col gap-1.5">
     <!--v-if-->
     <div class="flex items-start text-base">
-      <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="9:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="9:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -608,7 +608,7 @@ exports[`RadioGroup > renders with size xl correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-base">
-      <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="9:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="9:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -617,7 +617,7 @@ exports[`RadioGroup > renders with size xl correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-base">
-      <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="9:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-5" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="9:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -634,7 +634,7 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
   <fieldset class="flex flex-col gap-0.5">
     <!--v-if-->
     <div class="flex items-start text-xs">
-      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="5:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="5:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -643,7 +643,7 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-xs">
-      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="5:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="5:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -652,7 +652,7 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-xs">
-      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="5:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-3" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="5:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>
@@ -669,7 +669,7 @@ exports[`RadioGroup > renders with ui correctly 1`] = `
   <fieldset class="flex flex-col gap-1">
     <!--v-if-->
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="15:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="15:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
           <!---->
           <!---->
         </button></div>
@@ -678,7 +678,7 @@ exports[`RadioGroup > renders with ui correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="15:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="15:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
           <!---->
           <!---->
         </button></div>
@@ -687,7 +687,7 @@ exports[`RadioGroup > renders with ui correctly 1`] = `
       </div>
     </div>
     <div class="flex items-start text-sm">
-      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="15:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 size-4" data-radix-vue-collection-item="" tabindex="-1" data-orientation="vertical" data-active="false" id="15:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
           <!---->
           <!---->
         </button></div>

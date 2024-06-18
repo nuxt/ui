@@ -50,7 +50,7 @@ exports[`Select > renders with class correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -110,7 +110,7 @@ exports[`Select > renders with color gray correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -170,7 +170,7 @@ exports[`Select > renders with color green correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -230,7 +230,7 @@ exports[`Select > renders with color primary correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -290,7 +290,7 @@ exports[`Select > renders with color red correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -350,7 +350,7 @@ exports[`Select > renders with color white correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -410,7 +410,7 @@ exports[`Select > renders with defaultValue correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="[object Object]" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="[object Object]" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="[object Object]">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -470,7 +470,7 @@ exports[`Select > renders with disabled correctly 1`] = `
 
 
 <!--teleport end-->
-<select disabled="" default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select disabled="" default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -528,7 +528,7 @@ exports[`Select > renders with icon correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -588,7 +588,7 @@ exports[`Select > renders with id correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" id="id" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" id="id" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -633,7 +633,7 @@ exports[`Select > renders with item slot correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1"></select>"
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value=""></select>"
 `;
 
 exports[`Select > renders with item-label slot correctly 1`] = `
@@ -686,7 +686,7 @@ exports[`Select > renders with item-label slot correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Item label slot</option>
   <option value="todo">Item label slot</option>
@@ -741,7 +741,7 @@ exports[`Select > renders with item-leading slot correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -801,7 +801,7 @@ exports[`Select > renders with item-trailing slot correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -861,7 +861,7 @@ exports[`Select > renders with items correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -919,7 +919,7 @@ exports[`Select > renders with leading and icon correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -977,7 +977,7 @@ exports[`Select > renders with leading slot correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1035,7 +1035,7 @@ exports[`Select > renders with leadingIcon correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1093,7 +1093,7 @@ exports[`Select > renders with loading correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1151,7 +1151,7 @@ exports[`Select > renders with loadingIcon correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1211,7 +1211,7 @@ exports[`Select > renders with modelValue correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="[object Object]" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="[object Object]" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="[object Object]">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1271,7 +1271,7 @@ exports[`Select > renders with name correctly 1`] = `
 
 
 <!--teleport end-->
-<select name="name" default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select name="name" default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1331,7 +1331,7 @@ exports[`Select > renders with placeholder correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1391,7 +1391,7 @@ exports[`Select > renders with required correctly 1`] = `
 
 
 <!--teleport end-->
-<select required="" default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select required="" default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1451,7 +1451,7 @@ exports[`Select > renders with size lg correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1511,7 +1511,7 @@ exports[`Select > renders with size md correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1571,7 +1571,7 @@ exports[`Select > renders with size sm correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1631,7 +1631,7 @@ exports[`Select > renders with size xl correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1691,7 +1691,7 @@ exports[`Select > renders with size xs correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1751,7 +1751,7 @@ exports[`Select > renders with trailing and icon correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1811,7 +1811,7 @@ exports[`Select > renders with trailing slot correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1871,7 +1871,7 @@ exports[`Select > renders with trailingIcon correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1931,7 +1931,7 @@ exports[`Select > renders with ui correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -1991,7 +1991,7 @@ exports[`Select > renders with variant none correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>
@@ -2051,7 +2051,7 @@ exports[`Select > renders with variant outline correctly 1`] = `
 
 
 <!--teleport end-->
-<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1">
+<select default-value="" style="position: absolute; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="-1" value="">
   <!---->
   <option value="backlog">Backlog</option>
   <option value="todo">Todo</option>

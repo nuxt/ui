@@ -6,7 +6,7 @@ exports[`Drawer > renders with body slot correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-23" aria-labelledby="radix-vue-dialog-title-22" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-23" aria-labelledby="radix-vue-dialog-title-22" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
   <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
   <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
     <!--v-if-->
@@ -25,7 +25,7 @@ exports[`Drawer > renders with class correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-8" aria-labelledby="radix-vue-dialog-title-7" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none bg-gray-50 dark:bg-gray-800">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-8" aria-labelledby="radix-vue-dialog-title-7" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none bg-gray-50 dark:bg-gray-800">
   <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
   <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
     <!--v-if-->
@@ -44,7 +44,7 @@ exports[`Drawer > renders with content slot correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-15" aria-labelledby="radix-vue-dialog-title-14" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-15" aria-labelledby="radix-vue-dialog-title-14" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
   <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>Content slot
 </div>
 
@@ -58,7 +58,7 @@ exports[`Drawer > renders with default slot correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-vue-dialog-content-11" role="dialog" aria-describedby="radix-vue-dialog-description-13" aria-labelledby="radix-vue-dialog-title-12" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="radix-vue-dialog-content-11" role="dialog" aria-describedby="radix-vue-dialog-description-13" aria-labelledby="radix-vue-dialog-title-12" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
   <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
   <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
     <!--v-if-->
@@ -77,7 +77,7 @@ exports[`Drawer > renders with description correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-4" aria-labelledby="radix-vue-dialog-title-3" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-4" aria-labelledby="radix-vue-dialog-title-3" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
   <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
   <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
     <div class="">
@@ -99,7 +99,7 @@ exports[`Drawer > renders with description slot correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-21" aria-labelledby="radix-vue-dialog-title-20" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-21" aria-labelledby="radix-vue-dialog-title-20" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
   <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
   <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
     <div class="">
@@ -121,7 +121,7 @@ exports[`Drawer > renders with footer slot correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-25" aria-labelledby="radix-vue-dialog-title-24" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-25" aria-labelledby="radix-vue-dialog-title-24" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
   <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
   <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
     <!--v-if-->
@@ -140,7 +140,7 @@ exports[`Drawer > renders with header slot correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-17" aria-labelledby="radix-vue-dialog-title-16" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-17" aria-labelledby="radix-vue-dialog-title-16" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
   <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
   <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
     <div class="">Header slot</div>
@@ -159,7 +159,7 @@ exports[`Drawer > renders with title correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="--snap-point-height: 0; pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-2" aria-labelledby="radix-vue-dialog-title-1" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+<div data-dismissable-layer="" style="--snap-point-height: 0; pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-2" aria-labelledby="radix-vue-dialog-title-1" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
   <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
   <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
     <div class="">
@@ -181,7 +181,7 @@ exports[`Drawer > renders with title slot correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-19" aria-labelledby="radix-vue-dialog-title-18" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-19" aria-labelledby="radix-vue-dialog-title-18" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
   <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
   <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
     <div class="">
@@ -203,7 +203,7 @@ exports[`Drawer > renders with ui correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" vaul-drawer-visible="false" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-10" aria-labelledby="radix-vue-dialog-title-9" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-10" aria-labelledby="radix-vue-dialog-title-9" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
   <div class="mx-auto my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700 w-20"></div>
   <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
     <!--v-if-->
@@ -222,7 +222,7 @@ exports[`Drawer > renders without overlay correctly 1`] = `
 
 
 <!--v-if-->
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-6" aria-labelledby="radix-vue-dialog-title-5" data-state="open" vaul-drawer="" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-6" aria-labelledby="radix-vue-dialog-title-5" data-state="open" vaul-drawer="" vaul-drawer-direction="bottom" vaul-drawer-visible="false" tabindex="-1" class="fixed inset-x-0 bottom-0 z-50 mt-24 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 rounded-t-lg h-auto max-h-[96%] flex flex-col focus:outline-none">
   <div class="mx-auto w-12 my-4 h-1.5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-700"></div>
   <div class="mx-auto w-full max-w-md flex flex-col gap-4 px-4 pb-8 overflow-y-auto">
     <div class="">
