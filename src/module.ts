@@ -65,7 +65,6 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {
     prefix: 'U',
-    icons: ['heroicons'],
     safelistColors: ['primary'],
     disableGlobalStyles: false
   },
