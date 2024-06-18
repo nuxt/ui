@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [18]
+        node: [20]
 
     env:
       NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
@@ -29,7 +29,6 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 8
           run_install: false
 
       - name: Get pnpm store directory
@@ -58,11 +57,11 @@ jobs:
       - name: Typecheck
         run: pnpm run typecheck
 
-      - name: Build
-        run: pnpm run build
-
       - name: Test
         run: pnpm run test run
+
+      - name: Build
+        run: pnpm run build
 
       - name: Version Check
         id: check
