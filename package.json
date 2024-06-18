@@ -51,7 +51,7 @@
     "@vueuse/math": "^10.11.0",
     "defu": "^6.1.4",
     "fuse.js": "^6.6.2",
-    "nuxt-icon": "1.0.0-beta.4",
+    "nuxt-icon": "1.0.0-beta.6",
     "ohash": "^1.1.3",
     "pathe": "^1.1.2",
     "scule": "^1.3.0",
