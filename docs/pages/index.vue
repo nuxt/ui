@@ -102,77 +102,78 @@
     <ULandingSection class="!pt-0 dark:bg-gradient-to-b from-gray-950/50 to-gray-900">
       <ULandingCTA
         align="left"
-        card
+        :card="false"
         :ui="{
-          background: 'dark:bg-gradient-to-b from-gray-800 to-gray-900',
-          shadow: 'dark:shadow-2xl',
           body: {
-            background: 'bg-gray-50/50 dark:bg-gray-900/50'
+            padding: '!p-0'
           },
-          title: 'text-center lg:text-left',
-          links: 'justify-center lg:justify-start'
+          title: 'text-center lg:text-left lg:text-5xl',
+          description: 'mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8 lg:gap-16',
+          links: '-ml-3 justify-center lg:justify-start'
         }"
       >
         <template #title>
           <span v-html="page.cta.title" />
         </template>
 
-        <template #links>
-          <ClientOnly>
-            <UAvatarGroup :max="xlAndLarger ? 13 : lgAndLarger ? 10 : mdAndLarger ? 16 : 8" size="md" class="flex-wrap-reverse [&_span:first-child]:text-xs justify-center">
-              <UTooltip
-                v-for="(contributor, index) of module.contributors"
-                :key="index"
-                :text="contributor.username"
-                class="rounded-full"
-                :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50' }"
-                :popper="{ offsetDistance: 16 }"
-              >
-                <UAvatar
-                  :alt="contributor.username"
-                  :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
-                  :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
-                  class="lg:hover:scale-125 lg:hover:ring-2 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
-                  width="40"
-                  height="40"
-                  size="md"
-                  loading="lazy"
-                >
-                  <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
-                    <span class="absolute inset-0" aria-hidden="true" />
-                  </NuxtLink>
-                </UAvatar>
-              </UTooltip>
-            </UAvatarGroup>
-          </ClientOnly>
-        </template>
-
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-8 lg:gap-16">
-          <NuxtLink class="text-center group" to="https://npmjs.org/package/@nuxt/ui" target="_blank">
-            <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
+        <template #description>
+          <NuxtLink class="text-center lg:text-left group" to="https://npmjs.org/package/@nuxt/ui" target="_blank">
+            <p class="text-5xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ format(module.stats.downloads) }}+
             </p>
             <p>monthly downloads</p>
           </NuxtLink>
 
-          <NuxtLink class="text-center group" to="https://github.com/nuxt/ui" target="_blank">
-            <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
+          <NuxtLink class="text-center lg:text-left group" to="https://github.com/nuxt/ui" target="_blank">
+            <p class="text-5xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ format(module.stats.stars) }}+
             </p>
-            <p>stars</p>
+            <p>GitHub stars</p>
           </NuxtLink>
-        </div>
+        </template>
+
+        <template #links>
+          <UButton
+            v-for="user in page.cta.users"
+            :key="user.username"
+            :to="user.to"
+            size="md"
+            color="gray"
+            variant="ghost"
+            target="_blank"
+          >
+            <UAvatar
+              :alt="user.username"
+              :src="`https://ipx.nuxt.com/s_80x80/gh_avatar/${user.username}`"
+              :srcset="`https://ipx.nuxt.com/s_160x160/gh_avatar/${user.username} 2x`"
+              width="80"
+              height="80"
+              size="md"
+              loading="lazy"
+            />
+
+            <div class="text-left">
+              <p class="font-medium">
+                {{ user.name }}
+              </p>
+              <p class="text-gray-500 dark:text-gray-400 leading-4">
+                {{ `@${user.username}` }}
+              </p>
+            </div>
+          </UButton>
+        </template>
+
+        <HomeContributors :contributors="module.contributors" />
       </ULandingCTA>
     </ULandingSection>
 
     <template v-if="navigation.find(item => item._path === '/pro')">
-      <div class="relative">
-        <UDivider class="absolute inset-x-0" />
-
-        <div class="w-full relative overflow-hidden h-px bg-gradient-to-r from-gray-800 via-primary-400 to-gray-800 max-w-5xl mx-auto" />
-      </div>
-
       <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }" class="bg-gradient-to-b from-gray-50 dark:from-gray-950/50 to-white dark:to-gray-900 relative">
+        <template #top>
+          <!-- <img src="/gradient.svg" width="1441" height="181" class="absolute top-0 w-full right-0" alt="Tailored section background"> -->
+          <Gradient class="absolute top-0 w-full right-0 object-fill" />
+        </template>
+
         <template #title>
           <span v-html="page.pro.title" />
         </template>
