@@ -1,6 +1,5 @@
 import { createRequire } from 'node:module'
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
-import type { CollectionNames, IconsPluginOptions } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import createTemplates from './templates'
 import * as config from './runtime/ui.config'
@@ -48,8 +47,6 @@ export interface ModuleOptions {
    */
   global?: boolean
 
-  icons: CollectionNames[] | 'all' | IconsPluginOptions
-
   safelistColors?: string[]
   /**
    * Disables the global css styles added by the module.
@@ -90,7 +87,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Modules
 
-    await installModule('nuxt-icon', { componentName: 'UIcon' })
+    await installModule('@nuxt/icon', { componentName: 'UIcon' })
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
     await installTailwind(options, nuxt, resolve)
 
