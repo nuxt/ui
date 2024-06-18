@@ -63,7 +63,7 @@ export default defineNuxtModule<ModuleOptions>({
     version,
     configKey: 'ui',
     compatibility: {
-      nuxt: '^3.10.0'
+      nuxt: '>=3.10.0'
     }
   },
   defaults: {

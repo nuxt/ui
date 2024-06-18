@@ -1,8 +1,4 @@
 <script lang="ts" setup>
-defineOptions({
-  inheritAttrs: false
-})
-
 defineProps({
   title: {
     type: String,

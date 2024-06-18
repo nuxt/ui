@@ -18,11 +18,11 @@
                 {{ title }}
               </slot>
             </p>
-            <p v-if="(description || $slots.description)" :class="twMerge(ui.description, !(title && $slots.title) && 'mt-0 leading-5')">
+            <div v-if="(description || $slots.description)" :class="twMerge(ui.description, !(title && $slots.title) && 'mt-0 leading-5')">
               <slot name="description" :description="description">
                 {{ description }}
               </slot>
-            </p>
+            </div>
 
             <div v-if="(description || $slots.description) && actions.length" :class="ui.actions">
               <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
@@ -129,7 +129,8 @@ export default defineComponent({
         ui.value.wrapper,
         ui.value.background?.replaceAll('{color}', props.color),
         ui.value.rounded,
-        ui.value.shadow
+        ui.value.shadow,
+        ui.value.ring?.replaceAll('{color}', props.color)
       ), props.class)
     })
 
