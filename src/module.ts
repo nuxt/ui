@@ -58,7 +58,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addVitePlugin(tailwindcss)
 
-    await installModule('nuxt-icon', {
+    await installModule('@nuxt/icon', {
       componentName: 'UIcon',
       cssLayer: 'components'
     })
