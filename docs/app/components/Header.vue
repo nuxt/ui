@@ -1,26 +1,43 @@
+<script setup lang="ts">
+import type { NavItem } from '@nuxt/content/dist/runtime/types'
+import type { NavigationMenuItem } from '#ui/types'
+
+const props = defineProps<{
+  links: NavigationMenuItem[]
+}>()
+
+const route = useRoute()
+const config = useRuntimeConfig().public
+
+const open = inject<Ref<boolean>>('open')
+const navigation = inject<Ref<NavItem[]>>('navigation')
+
+const items = computed(() => props.links.map(({ icon, ...link }) => link))
+</script>
+
 <template>
   <UHeader
-    :links="links"
     :class="{
-      'border-primary-200/75 dark:border-primary-900/50': $route.path === '/',
-      'border-gray-200 dark:border-gray-800': $route.path !== '/'
+      'border-primary-200/75 dark:border-primary-900/50': route.path === '/',
+      'border-gray-200 dark:border-gray-800': route.path !== '/'
     }"
   >
     <template #left>
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white" aria-label="Nuxt UI">
         <Logo class="w-auto h-6" />
 
-        <UBadge v-if="$route.path.startsWith('/pro')" label="Pro" variant="subtle" size="sm" class="-mb-[2px] rounded font-semibold" />
-        <UBadge v-if="$route.path.startsWith('/dev')" label="Edge" variant="subtle" size="sm" class="-mb-[2px] rounded font-semibold" />
+        <UBadge :label="`v${config.version}`" variant="subtle" size="sm" class="-mb-[2px] rounded font-semibold" />
       </NuxtLink>
     </template>
+
+    <UNavigationMenu :items="items" variant="link" />
 
     <template #right>
       <!-- <ColorPicker /> -->
 
-      <!-- <UTooltip text="Search" :shortcuts="[metaSymbol, 'K']" :popper="{ strategy: 'absolute' }">
-        <UContentSearchButton :label="null" />
-      </UTooltip> -->
+      <UTooltip text="Search" :kbds="['meta', 'K']">
+        <UButton aria-label="Search" icon="i-heroicons-magnifying-glass-20-solid" color="gray" variant="ghost" @click="open = true" />
+      </UTooltip>
 
       <!-- <UColorModeButton /> -->
 
@@ -34,35 +51,12 @@
       />
     </template>
 
-    <template #panel>
-      <!-- <UAsideLinks :links="links" /> -->
+    <template #content>
+      <UNavigationMenu orientation="vertical" :items="items" class="-ml-2.5" />
 
-      <!-- <UDivider type="dashed" class="my-4" /> -->
+      <USeparator type="dashed" class="my-4" />
 
-      <!-- <BranchSelect /> -->
-
-      <!-- <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open /> -->
+      <UContentNavigation :navigation="navigation" />
     </template>
   </UHeader>
 </template>
-
-<script setup lang="ts">
-import type { NavItem } from '@nuxt/content/dist/runtime/types'
-import type { HeaderLink } from '#ui-pro/types'
-
-defineProps<{
-  links: HeaderLink[]
-}>()
-
-const route = useRoute()
-
-const nav = inject<Ref<NavItem[]>>('navigation')
-
-const navigation = computed(() => {
-  if (route.path.startsWith('/pro')) {
-    return nav.value.find(item => item._path === '/pro')?.children
-  }
-
-  return nav.value.filter(item => !item._path.startsWith('/pro'))
-})
-</script>

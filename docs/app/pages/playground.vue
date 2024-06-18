@@ -14,12 +14,14 @@ defineOgImage({
   title,
   description
 })
+
+const colorMode = useColorMode()
 </script>
 
 <template>
   <div class="h-[calc(100vh-var(--header-height)-var(--header-height)-1px)]">
     <ClientOnly>
-      <iframe :src="`https://stackblitz.com/edit/nuxt-ui?embed=1&file=app.config.ts,app.vue&theme=${$colorMode.preference}`" width="100%" height="100%" />
+      <iframe :src="`https://stackblitz.com/edit/nuxt-ui?embed=1&file=app.config.ts,app.vue&theme=${colorMode.preference}`" width="100%" height="100%" />
     </ClientOnly>
   </div>
 </template>

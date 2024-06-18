@@ -12,19 +12,19 @@ export default defineNuxtConfig({
       }
     }
   },
-  extends: [
-    process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
-  ],
+  // extends: [
+  //   process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
+  // ],
   modules: [
+    module,
+    '@nuxt/ui-pro',
     '@nuxt/content',
     '@nuxt/fonts',
     '@nuxt/image',
-    module,
-    '@nuxt/ui-pro',
-    '@nuxtjs/plausible',
+    // '@nuxtjs/plausible',
     '@vueuse/nuxt',
-    'nuxt-og-image',
     // 'modules/content-examples-code'
+    'nuxt-og-image'
   ],
   future: {
     compatibilityVersion: 4
@@ -39,18 +39,22 @@ export default defineNuxtConfig({
   // },
   content: {
     sources: {
-      pro: process.env.NUXT_UI_PRO_PATH ? {
-        prefix: '/pro',
-        driver: 'fs',
-        base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/content/pro')
-      } : process.env.NUXT_GITHUB_TOKEN ? {
-        prefix: '/pro',
-        driver: 'github',
-        repo: 'nuxt/ui-pro',
-        branch: 'dev',
-        dir: 'docs/content/pro',
-        token: process.env.NUXT_GITHUB_TOKEN || ''
-      } : undefined
+      pro: process.env.NUXT_UI_PRO_PATH
+        ? {
+            prefix: '/pro',
+            driver: 'fs',
+            base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/app/content/pro')
+          }
+        : process.env.NUXT_GITHUB_TOKEN
+          ? {
+              prefix: '/pro',
+              driver: 'github',
+              repo: 'nuxt/ui-pro',
+              branch: 'dev',
+              dir: 'docs/app/content/pro',
+              token: process.env.NUXT_GITHUB_TOKEN || ''
+            }
+          : undefined
     }
   },
   image: {
@@ -69,6 +73,7 @@ export default defineNuxtConfig({
     }
   },
   routeRules: {
+    '/': { redirect: '/getting-started', prerender: false },
     '/components': { redirect: '/components/app', prerender: false },
     '/dev/components': { redirect: '/dev/components/app', prerender: false }
   },
@@ -104,9 +109,12 @@ export default defineNuxtConfig({
     //   })
     // }
   },
-  vite: {
-    optimizeDeps: {
-      include: ['date-fns']
-    }
+  // vite: {
+  //   optimizeDeps: {
+  //     include: ['date-fns']
+  //   }
+  // },
+  typescript: {
+    strict: false
   }
 })

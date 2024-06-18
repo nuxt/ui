@@ -3,48 +3,16 @@ import { withoutTrailingSlash } from 'ufo'
 // import { debounce } from 'perfect-debounce'
 import type { ContentSearchFile } from '#ui-pro/types'
 
-const searchTerm = ref('')
-
 const route = useRoute()
 // const colorMode = useColorMode()
-// const { branch } = useContentSource()
 const runtimeConfig = useRuntimeConfig()
 const { integrity, api } = runtimeConfig.public.content
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
 const { data: files } = await useLazyFetch<ContentSearchFile[]>(`${api.baseURL}/search${integrity ? '.' + integrity : ''}`, { default: () => [] })
 
-// Computed
-
-// const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
-
-const links = computed(() => {
-  return [{
-    label: 'Docs',
-    icon: 'i-heroicons-book-open',
-    to: '/getting-started',
-    active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value.find(item => item._path === '/pro') ? [{
-    label: 'Pro',
-    icon: 'i-heroicons-square-3-stack-3d',
-    to: '/pro',
-    active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
-  }, {
-    label: 'Pricing',
-    icon: 'i-heroicons-credit-card',
-    to: '/pro/pricing'
-  }, {
-    label: 'Templates',
-    icon: 'i-heroicons-computer-desktop',
-    to: '/pro/templates'
-  }] : []), {
-    label: 'Releases',
-    icon: 'i-heroicons-rocket-launch',
-    to: '/releases'
-  }].filter(Boolean)
-})
-
-// Watch
+const open = ref(false)
+const searchTerm = ref('')
 
 // watch(searchTerm, debounce((query: string) => {
 //   if (!query) {
@@ -54,7 +22,19 @@ const links = computed(() => {
 //   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
 // }, 500))
 
-// Head
+const links = computed(() => [{
+  label: 'Docs',
+  icon: 'i-heroicons-book-open',
+  to: '/getting-started',
+  active: route.path.startsWith('/getting-started')
+}, {
+  label: 'Components',
+  icon: 'i-heroicons-cube-transparent',
+  to: '/components',
+  active: route.path.startsWith('/components')
+}].filter(Boolean))
+
+// const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
 useHead({
   meta: [
@@ -75,8 +55,7 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-// Provide
-
+provide('open', open)
 provide('navigation', navigation)
 provide('files', files)
 </script>
@@ -85,16 +64,16 @@ provide('files', files)
   <UApp>
     <NuxtLoadingIndicator />
 
-    <Banner v-if="!$route.path.startsWith('/examples')" />
+    <Banner v-if="!route.path.startsWith('/examples')" />
 
-    <Header v-if="!$route.path.startsWith('/examples')" :links="links" />
+    <Header v-if="!route.path.startsWith('/examples')" :links="links" />
 
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
 
-    <Footer v-if="!$route.path.startsWith('/examples')" />
+    <Footer v-if="!route.path.startsWith('/examples')" />
 
-    <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
+    <LazyUContentSearch v-model:open="open" v-model:search-term="searchTerm" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
   </UApp>
 </template>

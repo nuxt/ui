@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
+import { findPageHeadline } from '#ui-pro/utils/content'
 
 const route = useRoute()
-// const { branch } = useContentSource()
 
 definePageMeta({
   layout: 'docs'
@@ -13,22 +13,19 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-// const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-//   return queryContent()
-//     .where({
-//       _extension: 'md',
-//       _path: {
-//         [branch.value?.name === 'dev' ? '$eq' : '$ne']: new RegExp('^/dev')
-//       },
-//       navigation: {
-//         $ne: false
-//       }
-//     })
-//     .only(['title', 'description', '_path'])
-//     .findSurround(withoutTrailingSlash(route.path))
-// })
+const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
+  return queryContent()
+    .where({
+      _extension: 'md',
+      navigation: {
+        $ne: false
+      }
+    })
+    .only(['title', 'description', '_path'])
+    .findSurround(withoutTrailingSlash(route.path))
+}, { default: () => [] })
 
-// const headline = computed(() => findPageHeadline(page.value))
+const headline = computed(() => findPageHeadline(page.value))
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
@@ -42,13 +39,13 @@ defineOgImage({
   component: 'Docs',
   title: page.value.title,
   description: page.value.description,
-  // headline: headline.value
+  headline: headline.value
 })
 
 const communityLinks = computed(() => [{
   icon: 'i-heroicons-pencil-square',
   label: 'Edit this page',
-  to: `https://github.com/nuxt/ui/edit/dev/docs/content/${branch.value?.name === 'dev' ? page?.value?._file.split('/').slice(1).join('/') : page?.value?._file}`,
+  to: `https://github.com/nuxt/ui/edit/dev/docs/content/${page?.value?._file}`,
   target: '_blank'
 }, {
   icon: 'i-heroicons-star',
@@ -84,13 +81,13 @@ const resourcesLinks = [{
 </script>
 
 <template>
-  <UPage>
-    <!-- <UPageHeader :title="page.title" :description="page.description" :links="page.links" :headline="headline" />
+  <UPage v-if="page">
+    <UPageHeader :title="page.title" :description="page.description" :links="page.links" :headline="headline" />
 
-    <UPageBody prose>
+    <UPageBody>
       <ContentRenderer v-if="page.body" :value="page" />
 
-      <hr v-if="surround?.length">
+      <USeparator />
 
       <UContentSurround :surround="surround" />
     </UPageBody>
@@ -98,24 +95,20 @@ const resourcesLinks = [{
     <template v-if="page?.body?.toc?.links?.length" #right>
       <UContentToc :links="page.body.toc.links">
         <template #bottom>
-          <div class="hidden lg:block space-y-6 !mt-6">
-            <UDivider v-if="page.body?.toc?.links?.length" type="dashed" />
+          <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
 
-            <UPageLinks title="Community" :links="communityLinks" />
+          <UPageLinks title="Community" :links="communityLinks" />
 
-            <UDivider type="dashed" />
+          <USeparator type="dashed" />
 
-            <UPageLinks title="Resources" :links="resourcesLinks" />
+          <UPageLinks title="Resources" :links="resourcesLinks" />
 
-            <UDivider type="dashed" />
+          <!-- <USeparator type="dashed" />
 
-            <div class="space-y-3">
-              <AdsPro />
-              <AdsCarbon />
-            </div>
-          </div>
+          <AdsPro />
+          <AdsCarbon /> -->
         </template>
       </UContentToc>
-    </template> -->
+    </template>
   </UPage>
 </template>
