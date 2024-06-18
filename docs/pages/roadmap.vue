@@ -9,11 +9,7 @@ useSeoMeta({
   description
 })
 
-defineOgImage({
-  component: 'Docs',
-  title,
-  description
-})
+defineOgImageComponent('Docs')
 
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
