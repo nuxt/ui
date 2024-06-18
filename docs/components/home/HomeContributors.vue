@@ -44,38 +44,38 @@ const smallerThanSm = breakpoints.smaller('sm')
         '--offset': `${width / 2}px`
       }"
     >
-      <div
+      <UTooltip
         v-for="(contributor, index) in contributors"
         :key="contributor.username"
+        :text="contributor.username"
         :style="{
           '--index': index + 1
         }"
         class="avatar flex absolute"
       >
-        <UTooltip :text="contributor.username">
-          <UAvatar
-            :alt="contributor.username"
-            :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
-            :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
-            class="ring-2 ring-gray-200 dark:ring-gray-700 lg:hover:ring-gray-900 dark:lg:hover:ring-white transition"
-            width="40"
-            height="40"
-            :size="smallerThanSm ? 'xs' : 'sm'"
-            loading="lazy"
-          >
-            <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
-              <span class="absolute inset-0" aria-hidden="true" />
-            </NuxtLink>
-          </UAvatar>
-        </UTooltip>
-      </div>
+        <UAvatar
+          :alt="contributor.username"
+          :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
+          :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
+          class="ring-2 ring-gray-200 dark:ring-gray-700 lg:hover:ring-gray-900 dark:lg:hover:ring-white transition"
+          width="40"
+          height="40"
+          :size="smallerThanSm ? 'xs' : 'sm'"
+          loading="lazy"
+        >
+          <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
+            <span class="absolute inset-0" aria-hidden="true" />
+          </NuxtLink>
+        </UAvatar>
+      </UTooltip>
     </div>
   </div>
 </template>
 
 <style scoped>
 .circle:after {
-  --angle: 0deg;
+  --start: 0deg;
+  --end: 360deg;
   --border-color: rgb(var(--color-gray-200));
   --highlight-color: rgb(var(--color-gray-700));
 
@@ -103,23 +103,27 @@ const smallerThanSm = breakpoints.smaller('sm')
 }
 
 .avatars {
-  --angle: calc(var(--level) * 36deg);
+  --start: calc(var(--level) * 36deg);
+  --end: calc(360deg + (var(--level) * 36deg));
 
   transform: rotate(var(--angle));
   animation: calc(var(--duration) + 60s) rotate linear infinite;
 }
 
 .avatar {
-  --degrees: calc(var(--index) * (360deg / var(--total)));
-  --transformX: calc(cos(var(--degrees)) * var(--offset));
-  --transformY: calc(sin(var(--degrees)) * var(--offset));
+  --deg: calc(var(--index) * (360deg / var(--total)));
+  --transformX: calc(cos(var(--deg)) * var(--offset));
+  --transformY: calc(sin(var(--deg)) * var(--offset));
 
   transform: translate(var(--transformX), var(--transformY)) rotate(calc(360deg - var(--angle)));
 }
 
 @keyframes rotate {
+  from {
+    --angle: var(--start);
+  }
   to {
-    --angle: 360deg;
+    --angle: var(--end);
   }
 }
 
