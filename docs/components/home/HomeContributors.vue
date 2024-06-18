@@ -23,7 +23,7 @@ const smallerThanSm = breakpoints.smaller('sm')
 
 <template>
   <div
-    class="isolate rounded-full relative circle w-full aspect-[1/1] p-8 sm:p-12 md:p-14 lg:p-10 xl:p-16 before:absolute before:inset-px before:bg-gradient-to-b before:from-gray-950 before:to-gray-900 before:rounded-full z-[--level]"
+    class="isolate rounded-full relative circle w-full aspect-[1/1] p-8 sm:p-12 md:p-14 lg:p-10 xl:p-16 before:absolute before:inset-px before:bg-white dark:before:bg-gradient-to-b dark:before:from-gray-950 dark:before:to-gray-900 before:rounded-full z-[--level]"
     :style="{
       '--duration': `${((level + 1) * 5)}s`,
       '--level': level + 1
@@ -52,20 +52,22 @@ const smallerThanSm = breakpoints.smaller('sm')
         }"
         class="avatar flex absolute"
       >
-        <UAvatar
-          :alt="contributor.username"
-          :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
-          :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
-          class="ring-2 ring-gray-300 dark:ring-gray-700 lg:hover:ring-gray-900 dark:lg:hover:ring-white transition"
-          width="40"
-          height="40"
-          :size="smallerThanSm ? 'xs' : 'sm'"
-          loading="lazy"
-        >
-          <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
-            <span class="absolute inset-0" aria-hidden="true" />
-          </NuxtLink>
-        </UAvatar>
+        <UTooltip :text="contributor.username">
+          <UAvatar
+            :alt="contributor.username"
+            :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
+            :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
+            class="ring-2 ring-gray-200 dark:ring-gray-700 lg:hover:ring-gray-900 dark:lg:hover:ring-white transition"
+            width="40"
+            height="40"
+            :size="smallerThanSm ? 'xs' : 'sm'"
+            loading="lazy"
+          >
+            <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
+              <span class="absolute inset-0" aria-hidden="true" />
+            </NuxtLink>
+          </UAvatar>
+        </UTooltip>
       </div>
     </div>
   </div>
@@ -74,8 +76,8 @@ const smallerThanSm = breakpoints.smaller('sm')
 <style scoped>
 .circle:after {
   --angle: 0deg;
-  --border-color: rgb(var(--color-gray-300));
-  --highlight-color: rgb(var(--color-gray-900));
+  --border-color: rgb(var(--color-gray-200));
+  --highlight-color: rgb(var(--color-gray-700));
 
   content: '';
   position: absolute;
