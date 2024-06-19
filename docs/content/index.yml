@@ -67,14 +67,19 @@ sections:
         color: black
         size: lg
         icon: i-heroicons-cube
-      - label: Star on GitHub
-        to: https://github.com/nuxt/ui
-        target: _blank
-        color: white
-        size: lg
-        icon: i-simple-icons-github
 cta:
-  title: Trusted and supported by our<br class="hidden lg:block"> amazing community
+  title: Built and driven by an <span class="text-primary">amazing community</span>
+  align: center
+  users:
+    - name: Benjamin Canac
+      username: benjamincanac
+      to: https://twitter.com/benjamincanac
+    - name: Romain Hamel
+      username: romhml
+      to: https://github.com/romhml
+    - name: Neil Richter
+      username: noook
+      to: https://nook.sh/
 pro:
   title: Upgrade to <span class="text-primary">Nuxt UI Pro</span>
   description: 'Nuxt UI Pro is a collection of premium Vue components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.<br>It includes all primitives to build landing pages, documentations, blogs, dashboards or entire SaaS products.'
