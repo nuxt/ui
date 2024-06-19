@@ -126,7 +126,7 @@ defineShortcuts(extractShortcuts(items))
     <div class="flex items-center gap-2">
       <UButtonGroup :size="size">
         <UDropdownMenu :items="items" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" class="min-w-48">
-          <UButton label="Open" color="white" icon="i-simple-icons-github" />
+          <UButton label="Open" color="white" icon="i-heroicons-user" />
 
           <template #custom-trailing>
             <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-primary-500 dark:text-primary-400" />
