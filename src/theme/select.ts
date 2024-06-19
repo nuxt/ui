@@ -1,6 +1,7 @@
 import { defu } from 'defu'
 import type { ModuleOptions } from '../module'
 import input from './input'
+import { buttonGroupVariant } from './button-group'
 
 export default (options: Required<ModuleOptions>) => {
   return defu({
@@ -24,6 +25,9 @@ export default (options: Required<ModuleOptions>) => {
     slots: {
       base: 'relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
       value: 'truncate group-data-placeholder:text-current/50'
+    },
+    variants: {
+      ...buttonGroupVariant
     }
   }, input(options))
 }
