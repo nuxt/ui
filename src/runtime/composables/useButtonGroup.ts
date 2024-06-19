@@ -1,11 +1,6 @@
 import { computed, ref, provide, inject, onMounted, onUnmounted, getCurrentInstance } from 'vue'
 import type { Ref, ComponentInternalInstance } from 'vue'
 import { buttonGroup } from '#ui/ui.config'
-import { mergeConfig } from '../utils'
-// @ts-expect-error
-import appConfig from '#build/app.config'
-
-const buttonGroupConfig = mergeConfig<typeof buttonGroup>(appConfig.ui.strategy, appConfig.ui.buttonGroup, buttonGroup)
 
 type ButtonGroupProps = {
   orientation?: Ref<'horizontal' | 'vertical'>
