@@ -43,7 +43,7 @@ exports[`Alert > renders with close correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline-offset-4 hover:underline focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button></div>
@@ -70,7 +70,7 @@ exports[`Alert > renders with closeIcon correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline-offset-4 hover:underline focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0"><span class="iconify i-heroicons:trash shrink-0 size-5" aria-hidden="true"></span>
+  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0"><span class="iconify i-heroicons:trash shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button></div>

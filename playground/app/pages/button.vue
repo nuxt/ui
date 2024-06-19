@@ -33,6 +33,7 @@ const variants = Object.keys(theme.variants.variant)
     <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="white" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="white" variant="ghost" />
+      <UButton icon="i-heroicons-rocket-launch" label="Button" color="white" variant="link" />
     </div>
     <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="gray" />
@@ -41,6 +42,7 @@ const variants = Object.keys(theme.variants.variant)
     </div>
     <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" />
+      <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" variant="ghost" />
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" variant="link" />
     </div>
     <div class="flex items-center gap-2 ml-[-129px]">
