@@ -49,6 +49,7 @@ describe('Select', () => {
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-magnifying-glass' } }],
     ['with loading', { props: { ...props, loading: true } }],
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-heroicons-sparkles' } }],
+    ['with arrow', { props: { ...props, arrow: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),

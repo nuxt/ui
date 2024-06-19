@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import theme from '#build/ui/dropdown-menu'
+
 const items = [
   [{
     label: 'My account',
@@ -112,17 +114,27 @@ const items = [
   }]
 ]
 
+const sizes = Object.keys(theme.variants.size)
+
+const size = ref('md' as const)
+
 defineShortcuts(extractShortcuts(items))
 </script>
 
 <template>
   <div class="flex-1">
-    <UDropdownMenu :items="items" arrow :content="{ side: 'bottom', align: 'start' }" class="min-w-48">
-      <UButton label="Open" color="white" icon="i-heroicons-user" />
+    <div class="flex items-center gap-2">
+      <UButtonGroup :size="size">
+        <UDropdownMenu :items="items" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" class="min-w-48">
+          <UButton label="Open" color="white" icon="i-simple-icons-github" />
 
-      <template #custom-trailing>
-        <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-primary-500 dark:text-primary-400" />
-      </template>
-    </UDropdownMenu>
+          <template #custom-trailing>
+            <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-primary-500 dark:text-primary-400" />
+          </template>
+        </UDropdownMenu>
+
+        <USelectMenu v-model="size" :items="sizes" placeholder="Size" />
+      </UButtonGroup>
+    </div>
   </div>
 </template>

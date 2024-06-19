@@ -1,8 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import DropdownMenu, { type DropdownMenuProps, type DropdownMenuSlots } from '../../src/runtime/components/DropdownMenu.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/dropdown-menu'
 
 describe('DropdownMenu', () => {
+  const sizes = Object.keys(theme.variants.size) as any
+
   const items = [
     [{
       label: 'My account',
@@ -122,6 +125,8 @@ describe('DropdownMenu', () => {
     // Props
     ['with items', { props }],
     ['with disabled', { props: { ...props, disabled: true } }],
+    ['with arrow', { props: { ...props, arrow: true } }],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with class', { props: { ...props, class: 'min-w-96' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots

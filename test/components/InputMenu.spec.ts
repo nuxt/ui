@@ -46,6 +46,7 @@ describe('InputMenu', () => {
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-heroicons-sparkles' } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-chevron-down' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-heroicons-check' } }],
+    ['with arrow', { props: { ...props, arrow: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
