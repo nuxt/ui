@@ -16,7 +16,7 @@ const { module, modules } = useModule()
           <UPageAside>
             <USelect v-model="module" :items="modules" icon="i-heroicons-cube" class="w-full mb-3 lg:mb-6" />
 
-            <UContentNavigation :navigation="navigation" />
+            <UContentNavigation :navigation="navigation" highlight />
           </UPageAside>
         </template>
 
