@@ -156,6 +156,10 @@ export default defineComponent({
       type: String,
       default: 'label'
     },
+    pagination: {
+      type: Object as PropType<{ pageCount: number, page: number }>,
+      default: () => ({})
+    },
     sort: {
       type: Object as PropType<{ column: string, direction: 'asc' | 'desc' }>,
       default: () => ({})
@@ -215,21 +219,27 @@ export default defineComponent({
 
     const savedSort = { column: sort.value.column, direction: null }
 
+    const page = toRef(() => props.pagination?.page ?? 1)
+    const pageCount = toRef(() => props.pagination?.pageCount ?? props.rows.length)
+
+    const start = computed(() => pageCount.value * (page.value - 1))
+    const end = computed(() => pageCount.value * page.value)
+
     const rows = computed(() => {
       if (!sort.value?.column || props.sortMode === 'manual') {
-        return props.rows
+        return props.rows.slice(start.value, end.value)
       }
 
       const { column, direction } = sort.value
-
-      return props.rows.slice().sort((a, b) => {
+      
+      return props.rows.toSorted((a, b) => {
         const aValue = get(a, column)
         const bValue = get(b, column)
 
         const sort = columns.value.find((col) => col.key === column)?.sort ?? defaultSort
 
         return sort(aValue, bValue, direction)
-      })
+      }).slice(start.value, end.value)
     })
 
     const selected = computed({
