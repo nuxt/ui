@@ -35,49 +35,46 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImage({
-  component: 'Docs',
-  title: page.value.title,
-  description: page.value.description,
+defineOgImageComponent('Docs', {
   headline: headline.value
 })
 
-const communityLinks = computed(() => [{
-  icon: 'i-heroicons-pencil-square',
-  label: 'Edit this page',
-  to: `https://github.com/nuxt/ui/edit/dev/docs/content/${page?.value?._file}`,
-  target: '_blank'
-}, {
-  icon: 'i-heroicons-star',
-  label: 'Star on GitHub',
-  to: 'https://github.com/nuxt/ui',
-  target: '_blank'
-}, {
-  icon: 'i-heroicons-lifebuoy',
-  label: 'Contributing',
-  to: '/getting-started/contributing'
-}, {
-  label: 'Roadmap',
-  icon: 'i-heroicons-map',
-  to: '/roadmap'
-}])
+// const communityLinks = computed(() => [{
+//   icon: 'i-heroicons-pencil-square',
+//   label: 'Edit this page',
+//   to: `https://github.com/nuxt/ui/edit/dev/docs/content/${page?.value?._file}`,
+//   target: '_blank'
+// }, {
+//   icon: 'i-heroicons-star',
+//   label: 'Star on GitHub',
+//   to: 'https://github.com/nuxt/ui',
+//   target: '_blank'
+// }, {
+//   icon: 'i-heroicons-lifebuoy',
+//   label: 'Contributing',
+//   to: '/getting-started/contributing'
+// }, {
+//   label: 'Roadmap',
+//   icon: 'i-heroicons-map',
+//   to: '/roadmap'
+// }])
 
-const resourcesLinks = [{
-  icon: 'i-simple-icons-figma',
-  label: 'Figma Kit',
-  to: 'https://www.figma.com/community/file/1288455405058138934',
-  target: '_blank'
-}, {
-  label: 'Playground',
-  icon: 'i-simple-icons-stackblitz',
-  to: 'https://stackblitz.com/edit/nuxt-ui',
-  target: '_blank'
-}, {
-  icon: 'i-simple-icons-nuxtdotjs',
-  label: 'Nuxt docs',
-  to: 'https://nuxt.com',
-  target: '_blank'
-}]
+// const resourcesLinks = [{
+//   icon: 'i-simple-icons-figma',
+//   label: 'Figma Kit',
+//   to: 'https://www.figma.com/community/file/1288455405058138934',
+//   target: '_blank'
+// }, {
+//   label: 'Playground',
+//   icon: 'i-simple-icons-stackblitz',
+//   to: 'https://stackblitz.com/edit/nuxt-ui',
+//   target: '_blank'
+// }, {
+//   icon: 'i-simple-icons-nuxtdotjs',
+//   label: 'Nuxt docs',
+//   to: 'https://nuxt.com',
+//   target: '_blank'
+// }]
 </script>
 
 <template>
@@ -94,7 +91,7 @@ const resourcesLinks = [{
 
     <template v-if="page?.body?.toc?.links?.length" #right>
       <UContentToc :links="page.body.toc.links">
-        <template #bottom>
+        <!-- <template #bottom>
           <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
 
           <UPageLinks title="Community" :links="communityLinks" />
@@ -103,11 +100,11 @@ const resourcesLinks = [{
 
           <UPageLinks title="Resources" :links="resourcesLinks" />
 
-          <!-- <USeparator type="dashed" />
+          <USeparator type="dashed" />
 
           <AdsPro />
-          <AdsCarbon /> -->
-        </template>
+          <AdsCarbon />
+        </template> -->
       </UContentToc>
     </template>
   </UPage>

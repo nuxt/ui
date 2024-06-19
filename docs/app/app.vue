@@ -38,7 +38,7 @@ const links = computed(() => [{
 
 useHead({
   meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     // { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
@@ -74,6 +74,6 @@ provide('files', files)
 
     <Footer v-if="!route.path.startsWith('/examples')" />
 
-    <LazyUContentSearch v-model:open="open" v-model:search-term="searchTerm" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
+    <LazyUContentSearch v-model:open="open" v-model:search-term="searchTerm" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
   </UApp>
 </template>
