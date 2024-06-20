@@ -290,7 +290,7 @@ export default defineComponent({
     const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
     const { emitFormBlur, emitFormChange, inputId, color, size: sizeFormGroup, name } = useFormGroup(props, config)
 
-    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
+    const size = computed(() => sizeButtonGroup.value ?? sizeFormGroup.value)
 
     const internalQuery = ref('')
     const query = computed({
@@ -309,7 +309,7 @@ export default defineComponent({
       }
 
       if (props.valueAttribute) {
-        const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
+        const option = options.value.find(option => option[props.valueAttribute] === props.modelValue)
         return option ? option[props.optionAttribute] : null
       } else {
         return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
@@ -391,16 +391,22 @@ export default defineComponent({
 
     const debouncedSearch = props.search && typeof props.search === 'function' ? useDebounceFn(props.search, props.debounce) : undefined
 
-    const filteredOptions = computedAsync(async () => {
-      if (debouncedSearch) {
+    const options = computedAsync(async () => {
+      if (props.search && debouncedSearch) {
         return await debouncedSearch(query.value)
       }
 
-      if (query.value === '') {
-        return props.options
+      return props.options || []
+    }, [], {
+      lazy: props.searchLazy
+    })
+
+    const filteredOptions = computed(() => {
+      if (!query.value) {
+        return options.value
       }
 
-      return (props.options as any[]).filter((option: any) => {
+      return options.value.filter((option: any) => {
         return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
           if (['string', 'number'].includes(typeof option)) {
             return String(option).search(new RegExp(query.value, 'i')) !== -1
@@ -411,8 +417,6 @@ export default defineComponent({
           return child !== null && child !== undefined && String(child).search(new RegExp(query.value, 'i')) !== -1
         })
       })
-    }, [], {
-      lazy: props.searchLazy
     })
 
     watch(container, (value) => {

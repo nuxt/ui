@@ -187,7 +187,7 @@ export default defineComponent({
 
     const { emitFormChange, inputId, color, size: sizeFormGroup, name } = useFormGroup(props, config)
 
-    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
+    const size = computed(() => sizeButtonGroup.value ?? sizeFormGroup.value)
 
     const onInput = (event: Event) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
