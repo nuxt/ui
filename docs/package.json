@@ -6,7 +6,7 @@
     "@iconify-json/heroicons": "^1.1.21",
     "@iconify-json/simple-icons": "^1.1.106",
     "@iconify-json/vscode-icons": "^1.1.35",
-    "@nuxt/content": "npm:@nuxt/content-edge@2.12.1-28635002.f66778a",
+    "@nuxt/content": "npm:@nuxt/content-edge@2.12.1-28647038.d6463f3",
     "@nuxt/fonts": "^0.7.0",
     "@nuxt/image": "^1.7.0",
     "@nuxt/ui": "latest",
