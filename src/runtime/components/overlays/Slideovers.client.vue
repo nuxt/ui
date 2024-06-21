@@ -1,10 +1,12 @@
 <template>
   <component
-    :is="slideoverState.component"
-    v-if="slideoverState"
-    v-bind="slideoverState.props"
-    v-model="isOpen"
-    @after-leave="reset"
+    :is="instance.component"
+    v-for="instance in slideoverInstances"
+    :key="instance.id"
+    v-bind="instance.props"
+    :model-value="instance.isOpen"
+    @update:model-value="close(instance.id)"
+    @after-leave="remove(instance.id)"
   />
 </template>
 
@@ -12,7 +14,7 @@
 import { inject } from 'vue'
 import { useSlideover, slidOverInjectionKey } from '../../composables/useSlideover'
 
-const slideoverState = inject(slidOverInjectionKey)
+const slideoverInstances = inject(slidOverInjectionKey)
 
-const { isOpen, reset } = useSlideover()
+const { remove, close } = useSlideover()
 </script>

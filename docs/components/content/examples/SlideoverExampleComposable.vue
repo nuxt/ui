@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { SlideoverExampleComponent } from '#components'
+
 const slideover = useSlideover()
 const count = ref(0)
 function openSlideover () {
   count.value += 1
-  slideover.open(SlideoverExampleComponent, {
+  const instance = slideover.open(SlideoverExampleComponent, {
     count: count.value,
-    onClose: slideover.close
+    side: 'right',
+    onClose: () => {
+      instance.close()
+    }
   })
 }
 </script>

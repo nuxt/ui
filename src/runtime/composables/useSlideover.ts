@@ -1,63 +1,91 @@
-import { ref, inject } from 'vue'
+import { inject } from 'vue'
 import type { ShallowRef, Component, InjectionKey } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import type { ComponentProps } from '../types/component'
-import type { Slideover, SlideoverState } from '../types/slideover'
+import type { Slideover, SlideoverInstance } from '../types/slideover'
 
-export const slidOverInjectionKey: InjectionKey<ShallowRef<SlideoverState>> = Symbol('nuxt-ui.slideover')
+export const slidOverInjectionKey: InjectionKey<ShallowRef<SlideoverInstance<any>[]>> = Symbol('nuxt-ui.slideover')
 
 function _useSlideover () {
-  const slideoverState = inject(slidOverInjectionKey)
-
-  const isOpen = ref(false)
+  const slideoverInstances = inject(slidOverInjectionKey)
 
   function open<T extends Component> (component: T, props?: Slideover & ComponentProps<T>) {
-    if (!slideoverState) {
+    if (!slideoverInstances) {
       throw new Error('useSlideover() is called without provider')
     }
 
-    slideoverState.value = {
-      component,
-      props: props ?? {}
-    }
+    const instance = createInstance(component, props)
 
-    isOpen.value = true
+    slideoverInstances.value = [
+      ...slideoverInstances.value,
+      instance
+    ]
+
+    return instance
   }
 
-  async function close () {
-    if (!slideoverState) return
+  function close (id: number) {
+    const slideoverInstance = slideoverInstances.value.find((slideover) => slideover.id === id)
 
-    isOpen.value = false
+    if (!slideoverInstance) return
+
+    slideoverInstance.isOpen = false
+
+    slideoverInstances.value = [
+      ...slideoverInstances.value.filter((slideover) => slideover.id !== id),
+      slideoverInstance
+    ]
   }
 
-  function reset () {
-    slideoverState.value = {
-      component: 'div',
-      props: {}
-    }
+  function remove (id: number) {
+    slideoverInstances.value = slideoverInstances.value.filter((slideover) => slideover.id !== id)
   }
 
   /**
    * Allows updating the slideover props
    */
-  function patch<T extends Component = {}> (props: Partial<Slideover & ComponentProps<T>>) {
-    if (!slideoverState) return
+  function patch<T extends Component = {}> (id: number, props: Partial<Slideover & ComponentProps<T>>) {
+    const slideoverInstance = slideoverInstances.value.find((slideover) => slideover.id === id)
 
-    slideoverState.value = {
-      ...slideoverState.value,
-      props: {
-        ...slideoverState.value.props,
-        ...props
+    if (!slideoverInstance) return
+
+    slideoverInstances.value = [
+      ...slideoverInstances.value.filter((slideover) => slideover.id !== id),
+      {
+        ...slideoverInstance,
+        props: {
+          ...slideoverInstance.props,
+          ...props
+        }
       }
-    }
+    ]
   }
+
+  function createInstance<T extends Component> (component: T, props?: Slideover & ComponentProps<T>): SlideoverInstance<ComponentProps<T>> {
+    // Random short id
+    const id = Math.floor(Math.random() * 1000000)
+
+    return {
+        id,
+        isOpen: true,
+        component,
+        props: {
+          ...props,
+          onClose () {
+            props?.onClose?.()
+            close(id)
+          }
+        },
+        patch: (props) => patch(id, props),
+        close: () => close(id)
+      }
+}
 
   return {
     open,
     close,
-    reset,
-    patch,
-    isOpen
+    remove,
+    patch
   }
 }
 
