@@ -15,6 +15,7 @@ module.exports = {
     'space-before-blocks': ['error', 'always'],
     'space-infix-ops': ['error', { int32Hint: false }],
     'no-multi-spaces': ['error', { ignoreEOLComments: true }],
+    'no-trailing-spaces': ['error'],
 
     // Typescript
     '@typescript-eslint/type-annotation-spacing': 'error',

@@ -133,7 +133,7 @@ export default defineComponent({
     const uiButton = computed<typeof configButton>(() => configButton)
 
     const buttonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
-    
+
     const openedStates = computed(() => buttonRefs.value.map(({ open }) => open))
     watch(openedStates, (newValue, oldValue) => {
       for (const index in newValue) {
