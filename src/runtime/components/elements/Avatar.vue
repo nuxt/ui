@@ -45,15 +45,15 @@ export default defineComponent({
       default: 'img'
     },
     src: {
-      type: [String, Boolean],
+      type: [String, Boolean, null] as PropType<string | boolean | null>,
       default: null
     },
     alt: {
-      type: String,
+      type: [String, null] as PropType<string | null>,
       default: null
     },
     text: {
-      type: String,
+      type: [String, null] as PropType<string | null>,
       default: null
     },
     icon: {
