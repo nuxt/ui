@@ -1,7 +1,7 @@
 {
   "name": "@nuxt/ui",
   "version": "2.17.0",
-  "packageManager": "pnpm@9.1.1",
+  "packageManager": "pnpm@9.4.0",
   "repository": "nuxt/ui",
   "homepage": "https://ui.nuxt.com",
   "type": "module",
