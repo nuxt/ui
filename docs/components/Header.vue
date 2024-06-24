@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import type { NavItem } from '@nuxt/content/dist/runtime/types'
+import type { NavItem } from '@nuxt/content'
 import type { HeaderLink } from '#ui-pro/types'
 
 defineProps<{

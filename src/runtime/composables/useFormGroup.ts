@@ -1,6 +1,10 @@
 import { inject, ref, computed } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
 import type { FormEvent, FormEventType, InjectedFormGroupValue } from '../types/form'
+import { mergeConfig } from '../utils'
+// @ts-expect-error
+import appConfig from '#build/app.config'
+import { formGroup } from '#ui/ui.config'
 
 type InputProps = {
   id?: string
@@ -10,6 +14,9 @@ type InputProps = {
   eagerValidation?: boolean
   legend?: string | null
 }
+
+
+const formGroupConfig = mergeConfig<typeof formGroup>(appConfig.ui.strategy, appConfig.ui.formGroup, formGroup)
 
 export const useFormGroup = (inputProps?: InputProps, config?: any) => {
   const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
@@ -55,7 +62,7 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     name: computed(() => inputProps?.name ?? formGroup?.name.value),
     size: computed(() => {
       const formGroupSize = config.size[formGroup?.size.value as string] ? formGroup?.size.value : null
-      return inputProps?.size ?? formGroupSize ?? config?.default?.size
+      return inputProps?.size ?? formGroupSize ?? formGroupConfig?.default?.size
     }),
     color: computed(() => formGroup?.error?.value ? 'red' : inputProps?.color),
     emitFormBlur,
