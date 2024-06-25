@@ -55,8 +55,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Isolate root node from portaled components
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
-    // TODO: Check if already set
-    nuxt.options.app.rootAttrs.class = 'isolate'
+    nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, 'isolate'].filter(Boolean).join(' ')
 
     addVitePlugin(tailwindcss)
 
