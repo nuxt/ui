@@ -409,7 +409,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ParsedContent, NavItem } from '@nuxt/content/dist/runtime/types'
+import type { ParsedContent, NavItem } from '@nuxt/content'
 import { useElementBounding, useWindowScroll, useElementSize, breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { HomeProBlock } from '~/types'
 

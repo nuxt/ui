@@ -24,7 +24,7 @@
 import { defineComponent, ref, computed, toRef, watch } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
-import UIcon from '../elements/Icon.vue'
+import { UIcon } from '#components'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
 import type { AvatarSize, AvatarChipColor, AvatarChipPosition, Strategy } from '../../types'

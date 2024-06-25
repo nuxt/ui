@@ -35,7 +35,7 @@
 import { ref, computed, toRef, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
-import UIcon from '../elements/Icon.vue'
+import { UIcon } from '#components'
 import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
