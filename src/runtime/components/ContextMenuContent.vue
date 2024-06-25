@@ -2,7 +2,7 @@
 import { tv } from 'tailwind-variants'
 import type { ContextMenuContentProps as RadixContextMenuContentProps, ContextMenuContentEmits as RadixContextMenuContentEmits } from 'radix-vue'
 import theme from '#build/ui/context-menu'
-import type { ContextMenuItem, ContextMenuSlots } from '#ui/types'
+import type { ContextMenuItem, ContextMenuSlots } from '../types'
 
 const contextMenu = tv(theme)()
 
@@ -24,8 +24,8 @@ import { useForwardPropsEmits } from 'radix-vue'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { ULink } from '#components'
-import { omit } from '#ui/utils'
-import { pickLinkProps } from '#ui/utils/link'
+import { omit } from '../utils'
+import { pickLinkProps } from '../utils/link'
 
 const props = defineProps<ContextMenuContentProps<T>>()
 const emits = defineEmits<ContextMenuContentEmits>()

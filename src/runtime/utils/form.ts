@@ -2,7 +2,7 @@ import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
-import type { FormError } from '#ui/types/form'
+import type { FormError } from '../types/form'
 
 export function isYupSchema(schema: any): schema is YupObjectSchema<any> {
   return schema.validate && schema.__isYupSchema__

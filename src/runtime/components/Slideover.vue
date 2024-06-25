@@ -4,7 +4,7 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'radix
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/slideover'
-import type { ButtonProps } from '#ui/types'
+import type { ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { slideover: Partial<typeof theme> } }
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { z } from 'zod'
-import type { FormSubmitEvent } from '#ui/types/form'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = z.object({
   email: z.string().min(2),

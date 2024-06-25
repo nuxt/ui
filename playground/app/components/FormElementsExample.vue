@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { z } from 'zod'
-import type { FormSubmitEvent, Form } from '#ui/types/form'
+import type { FormSubmitEvent, Form } from '@nuxt/ui'
 
 const schema = z.object({
   input: z.string().min(10),

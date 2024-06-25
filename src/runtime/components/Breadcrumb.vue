@@ -4,8 +4,8 @@ import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
-import type { AvatarProps, LinkProps } from '#ui/types'
-import type { DynamicSlots } from '#ui/types/utils'
+import type { AvatarProps, LinkProps } from '../types'
+import type { DynamicSlots } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
 
@@ -45,7 +45,7 @@ import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useAppConfig } from '#imports'
 import { ULink, UIcon, UAvatar } from '#components'
-import { pickLinkProps } from '#ui/utils/link'
+import { pickLinkProps } from '../utils/link'
 
 const props = defineProps<BreadcrumbProps<T>>()
 const slots = defineSlots<BreadcrumbSlots<T>>()

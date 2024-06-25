@@ -4,7 +4,7 @@ import type { RadioGroupRootProps, RadioGroupRootEmits, RadioGroupItemProps } fr
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/radio-group'
-import type { AcceptableValue } from '#ui/types/utils'
+import type { AcceptableValue } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
 

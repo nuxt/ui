@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
 // import { debounce } from 'perfect-debounce'
-import type { ContentSearchFile } from '#ui-pro/types'
+import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 const route = useRoute()
 // const colorMode = useColorMode()

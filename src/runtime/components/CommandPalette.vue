@@ -6,9 +6,9 @@ import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
-import type { UseComponentIconsProps } from '#ui/composables/useComponentIcons'
-import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '#ui/types'
-import type { DynamicSlots } from '#ui/types/utils'
+import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '../types'
+import type { DynamicSlots } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { commandPalette: Partial<typeof theme> } }
 
@@ -94,8 +94,8 @@ import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { UInput, UAvatar, UIcon, UKbd, UChip } from '#components'
 import { useAppConfig } from '#imports'
-import { omit } from '#ui/utils'
-import { highlight } from '#ui/utils/fuse'
+import { omit } from '../utils'
+import { highlight } from '../utils/fuse'
 
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',

@@ -4,7 +4,7 @@ import type { AccordionRootProps, AccordionRootEmits, AccordionContentProps, Acc
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
-import type { DynamicSlots } from '#ui/types/utils'
+import type { DynamicSlots } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
 

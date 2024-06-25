@@ -3,8 +3,8 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/button'
-import type { LinkProps } from '#ui/components/Link.vue'
-import type { UseComponentIconsProps } from '#ui/composables/useComponentIcons'
+import type { LinkProps } from './Link.vue'
+import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 
 const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
@@ -37,7 +37,7 @@ import { computed } from 'vue'
 import { useForwardProps } from 'radix-vue'
 import { useComponentIcons, useButtonGroup } from '#imports'
 import { UIcon, ULink } from '#components'
-import { pickLinkProps } from '#ui/utils/link'
+import { pickLinkProps } from '../utils/link'
 
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()

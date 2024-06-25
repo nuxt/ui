@@ -5,9 +5,9 @@ import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, Combob
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
-import type { UseComponentIconsProps } from '#ui/composables/useComponentIcons'
-import type { AvatarProps, ChipProps, InputProps } from '#ui/types'
-import type { AcceptableValue, ArrayOrWrapped } from '#ui/types/utils'
+import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import type { AvatarProps, ChipProps, InputProps } from '../types'
+import type { AcceptableValue, ArrayOrWrapped } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
 
@@ -104,7 +104,7 @@ import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig, useFormField, useButtonGroup, useComponentIcons } from '#imports'
 import { UIcon, UChip, UAvatar } from '#components'
-import { get } from '#ui/utils'
+import { get } from '../utils'
 
 defineOptions({ inheritAttrs: false })
 

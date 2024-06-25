@@ -4,7 +4,7 @@ import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/kbd'
-import type { KbdKey } from '#ui/composables/useKbd'
+import type { KbdKey } from '../composables/useKbd'
 
 const appConfig = _appConfig as AppConfig & { ui: { kbd: Partial<typeof theme> } }
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
-import type { ContentSearchFile } from '#ui-pro/types'
+import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 useSeoMeta({
   title: 'Page not found',

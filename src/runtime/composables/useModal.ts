@@ -1,8 +1,8 @@
 import { ref, inject } from 'vue'
 import type { ShallowRef, Component, InjectionKey } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
-import type { ModalProps } from '#ui/types'
-import type { ComponentProps } from '#ui/types/component'
+import type { ModalProps } from '../types'
+import type { ComponentProps } from '../types/component'
 
 export interface ModalState {
   component: Component | string

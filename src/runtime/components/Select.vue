@@ -4,9 +4,9 @@ import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowP
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
-import type { UseComponentIconsProps } from '#ui/composables/useComponentIcons'
-import type { AvatarProps, ChipProps, InputProps } from '#ui/types'
-import type { AcceptableValue } from '#ui/types/utils'
+import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import type { AvatarProps, ChipProps, InputProps } from '../types'
+import type { AcceptableValue } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 

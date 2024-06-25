@@ -4,8 +4,8 @@ import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuIt
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
-import type { AvatarProps, BadgeProps, LinkProps } from '#ui/types'
-import type { DynamicSlots } from '#ui/types/utils'
+import type { AvatarProps, BadgeProps, LinkProps } from '../types'
+import type { DynamicSlots } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -76,7 +76,7 @@ import { computed, toRef } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { UIcon, UAvatar, UBadge, ULink, ULinkBase } from '#components'
-import { pickLinkProps } from '#ui/utils/link'
+import { pickLinkProps } from '../utils/link'
 
 const props = withDefaults(defineProps<NavigationMenuProps<T>>(), {
   orientation: 'horizontal',

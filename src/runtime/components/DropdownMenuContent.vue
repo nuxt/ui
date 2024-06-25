@@ -2,7 +2,7 @@
 import { tv } from 'tailwind-variants'
 import type { DropdownMenuContentProps as RadixDropdownMenuContentProps, DropdownMenuContentEmits as RadixDropdownMenuContentEmits } from 'radix-vue'
 import theme from '#build/ui/dropdown-menu'
-import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '#ui/types'
+import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
 
 const dropdownMenu = tv(theme)()
 
@@ -28,8 +28,8 @@ import { useForwardPropsEmits } from 'radix-vue'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { ULink } from '#components'
-import { omit } from '#ui/utils'
-import { pickLinkProps } from '#ui/utils/link'
+import { omit } from '../utils'
+import { pickLinkProps } from '../utils/link'
 
 const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()

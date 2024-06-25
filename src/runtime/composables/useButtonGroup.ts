@@ -1,7 +1,7 @@
 import { type InjectionKey, type ComputedRef } from 'vue'
 import { inject, computed } from 'vue'
-import type { GetObjectField } from '#ui/types/utils'
 import type { ButtonGroupProps } from '../components/ButtonGroup.vue'
+import type { GetObjectField } from '../types/utils'
 
 export const buttonGroupInjectionKey: InjectionKey<ComputedRef<{
   size: ButtonGroupProps ['size']

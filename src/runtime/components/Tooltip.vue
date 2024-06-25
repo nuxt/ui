@@ -4,7 +4,7 @@ import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipAr
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
-import type { KbdProps } from '#ui/types'
+import type { KbdProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof theme> } }
 

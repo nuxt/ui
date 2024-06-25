@@ -3,8 +3,8 @@ import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
-import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '#ui/types/form'
-import { FormValidationException } from '#ui/types/form'
+import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
+import { FormValidationException } from '../types/form'
 
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, useId } from '#imports'
 
@@ -36,7 +36,7 @@ export interface FormSlots {
 <script lang="ts" setup generic="T extends object">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed } from 'vue'
 import { useEventBus } from '@vueuse/core'
-import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '#ui/utils/form'
+import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '../utils/form'
 
 const props = withDefaults(defineProps<FormProps<T>>(), {
   validateOn() {

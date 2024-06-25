@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content'
-import type { NavigationMenuItem } from '#ui/types'
+import type { NavigationMenuItem } from '@nuxt/ui'
 
 const props = defineProps<{
   links: NavigationMenuItem[]
