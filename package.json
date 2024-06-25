@@ -81,7 +81,6 @@
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
-    "vite": "5.2.4",
-    "vue-tsc": "2.0.19"
+    "vite": "5.2.4"
   }
 }
