@@ -30,20 +30,22 @@ const links = computed(() => {
     icon: 'i-heroicons-book-open',
     to: '/getting-started',
     active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value.find(item => item._path === '/pro') ? [{
-    label: 'Pro',
-    icon: 'i-heroicons-square-3-stack-3d',
-    to: '/pro',
-    active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
-  }, {
-    label: 'Pricing',
-    icon: 'i-heroicons-credit-card',
-    to: '/pro/pricing'
-  }, {
-    label: 'Templates',
-    icon: 'i-heroicons-computer-desktop',
-    to: '/pro/templates'
-  }] : []), {
+  }, ...(navigation.value.find(item => item._path === '/pro')
+    ? [{
+        label: 'Pro',
+        icon: 'i-heroicons-square-3-stack-3d',
+        to: '/pro',
+        active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
+      }, {
+        label: 'Pricing',
+        icon: 'i-heroicons-credit-card',
+        to: '/pro/pricing'
+      }, {
+        label: 'Templates',
+        icon: 'i-heroicons-computer-desktop',
+        to: '/pro/templates'
+      }]
+    : []), {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch',
     to: '/releases'
@@ -54,7 +56,7 @@ const links = computed(() => {
 
 useHead({
   meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     // { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [

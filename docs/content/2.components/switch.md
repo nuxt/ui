@@ -1,12 +1,12 @@
 ---
-description: Display a select field.
+description: Display a toggle field.
 links:
   - label: Radix Vue
     icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/select.html
+    to: https://www.radix-vue.com/components/switch.html
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/Select.vue
+    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/Toggle.vue
 ---
 
 ## Usage

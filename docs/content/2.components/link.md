@@ -4,7 +4,7 @@ description: Render a NuxtLink but with superpowers.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/elements/Link.vue
+    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/Link.vue
 ---
 
 ## Usage

@@ -3,7 +3,7 @@ description: Collect and validate form data.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/Form.vue
+    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/Form.vue
 ---
 
 ## Usage
@@ -63,7 +63,7 @@ The validation function must return a list of errors with the following attribut
 - `path` - Path to the form element corresponding to the `name` attribute.
 
 ::callout{icon="i-heroicons-light-bulb"}
-Note: this can be used alongside the `schema` prop to handle complex use cases. 
+Note: this can be used alongside the `schema` prop to handle complex use cases.
 ::
 
 ::component-example

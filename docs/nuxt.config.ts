@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     // '@nuxtjs/plausible',
     '@vueuse/nuxt',
     // 'modules/content-examples-code'
+    'nuxt-component-meta',
     'nuxt-og-image'
   ],
   future: {
@@ -37,6 +38,12 @@ export default defineNuxtConfig({
   // ui: {
   //   global: true
   // },
+  icon: {
+    customCollections: [{
+      prefix: 'custom',
+      dir: resolve('./app/assets/icons')
+    }]
+  },
   content: {
     sources: {
       pro: process.env.NUXT_UI_PRO_PATH
@@ -74,26 +81,28 @@ export default defineNuxtConfig({
     '/': { redirect: '/getting-started/installation', prerender: false },
     '/components': { redirect: '/components/app', prerender: false }
   },
-  // componentMeta: {
-  //   exclude: [
-  //     // '@nuxt/content',
-  //     // '@nuxt/ui-templates',
-  //     // '@nuxtjs/color-mode',
-  //     // '@nuxtjs/mdc',
-  //     // 'nuxt/dist',
-  //     // 'nuxt-og-image',
-  //     // 'nuxt-site-config',
-  //     resolve('./components'),
-  //     // process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
-  //   ],
-  //   // metaFields: {
-  //   //   type: false,
-  //   //   props: true,
-  //   //   slots: true,
-  //   //   events: false,
-  //   //   exposed: false
-  //   // }
-  // },
+  componentMeta: {
+    exclude: [
+      '@nuxt/content',
+      '@nuxt/icon',
+      '@nuxt/image',
+      // '@nuxt/ui-templates',
+      '@nuxtjs/color-mode',
+      '@nuxtjs/mdc',
+      'nuxt/dist',
+      'nuxt-og-image',
+      // 'nuxt-site-config',
+      resolve('./app/components')
+      // process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
+    ],
+    metaFields: {
+      type: false,
+      props: true,
+      slots: true,
+      events: true,
+      exposed: false
+    }
+  },
   hooks: {
     // Related to https://github.com/nuxt/nuxt/pull/22558
     // 'components:extend': (components) => {

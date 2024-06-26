@@ -30,7 +30,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="items" variant="link" />
+    <!-- <UNavigationMenu :items="items" variant="link" /> -->
 
     <template #right>
       <!-- <ColorPicker /> -->

@@ -1,5 +1,6 @@
 ---
-description: Create a button with icon or link capabilities.
+title: ButtonGroup
+description: ''
 links:
   - label: GitHub
     icon: i-simple-icons-github

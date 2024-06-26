@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
-import { findPageHeadline } from '@nuxt/ui-pro/runtime/utils/content'
+import { findPageHeadline } from '#ui-pro/utils/content'
 
 const route = useRoute()
 
