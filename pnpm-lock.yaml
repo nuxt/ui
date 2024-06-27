@@ -117,11 +117,14 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(sass@1.77.6)(typescript@5.4.5)(vue-tsc@2.0.16(typescript@5.4.5))
       valibot:
-        specifier: ^0.31.1
-        version: 0.31.1
+        specifier: ^0.33.0
+        version: 0.33.3
       valibot30:
         specifier: npm:valibot@0.30.0
         version: valibot@0.30.0
+      valibot31:
+        specifier: npm:valibot@0.31.0
+        version: valibot@0.31.0
       vitest:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.14.2)(happy-dom@14.12.0)(sass@1.77.6)(terser@5.31.1)
@@ -210,8 +213,8 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2(@popperjs/core@2.11.8)(vue@3.4.29(typescript@5.4.5))
       valibot:
-        specifier: ^0.31.1
-        version: 0.31.1
+        specifier: ^0.35.0
+        version: 0.35.0
       yup:
         specifier: ^1.4.0
         version: 1.4.0
@@ -7253,8 +7256,14 @@ packages:
   valibot@0.30.0:
     resolution: {integrity: sha512-5POBdbSkM+3nvJ6ZlyQHsggisfRtyT4tVTo1EIIShs6qCdXJnyWU5TJ68vr8iTg5zpOLjXLRiBqNx+9zwZz/rA==}
 
-  valibot@0.31.1:
-    resolution: {integrity: sha512-2YYIhPrnVSz/gfT2/iXVTrSj92HwchCt9Cga/6hX4B26iCz9zkIsGTS0HjDYTZfTi1Un0X6aRvhBi1cfqs/i0Q==}
+  valibot@0.31.0:
+    resolution: {integrity: sha512-bleS8aVFpRGTUgbMoXzsRJhpxJGiZ3MG1nuNSORuDvio+sI1EyT1+lQHg+77Pfnlxz+25Uj5HiwdaklcDcYdiQ==}
+
+  valibot@0.33.3:
+    resolution: {integrity: sha512-/fuY1DlX8uiQ7aphlzrrI2DbG0YJk84JMgvz2qKpUIdXRNsS53varfo4voPjSrjUr5BSV2K0miSEJUOlA5fQFg==}
+
+  valibot@0.35.0:
+    resolution: {integrity: sha512-+i2aCRkReTrd5KBN/dW2BrPOvFnU5LXTV2xjZnjnqUIO8YUx6P2+MgRrkwF2FhkexgyKq/NIZdPdknhHf5A/Ww==}
 
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
@@ -17622,7 +17631,11 @@ snapshots:
 
   valibot@0.30.0: {}
 
-  valibot@0.31.1: {}
+  valibot@0.31.0: {}
+
+  valibot@0.33.3: {}
+
+  valibot@0.35.0: {}
 
   validate-npm-package-license@3.0.4:
     dependencies:
