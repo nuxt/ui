@@ -60,7 +60,7 @@ export default {
     }
   },
   variant: {
-    outline: 'shadow-sm bg-white text-gray-900 dark:text-white ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 focus:ring-2 focus:ring-{color}-500 dark:focus:ring-{color}-400',
+    outline: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 focus:ring-2 focus:ring-{color}-500 dark:focus:ring-{color}-400',
     none: 'bg-transparent focus:ring-0 focus:shadow-none'
   },
   icon: {
