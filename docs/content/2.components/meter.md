@@ -17,6 +17,20 @@ navigation:
 
 ## Examples
 
-:component-api
+## API
+
+### Props
+
+:component-props
+
+### Slots
+
+:component-slots
+
+### Events
+
+:component-events
+
+## Theme
 
 :component-theme

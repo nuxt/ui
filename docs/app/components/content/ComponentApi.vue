@@ -1,16 +1,28 @@
 <script setup lang="ts">
 import { upperFirst, camelCase } from 'scule'
 import type { ComponentMeta } from 'vue-component-meta'
-
-const props = defineProps<{ slug?: string }>()
+import * as theme from '#build/ui'
 
 const route = useRoute()
 
-const name = props.slug || `U${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
+const camelName = camelCase(route.params.slug[route.params.slug.length - 1])
+const name = `U${upperFirst(camelName)}`
 
+const componentTheme = theme[camelName]
 const componentMeta = await useComponentMeta(name as any)
 
-const meta: ComputedRef<ComponentMeta> = computed(() => componentMeta.value.meta)
+const meta: ComputedRef<ComponentMeta> = computed(() => {
+  const meta = componentMeta.value.meta
+
+  if (meta.props?.length) {
+    meta.props = meta.props.map((prop) => {
+      prop.default = prop.default ?? componentTheme.defaultVariants?.[prop.name]
+      return prop
+    })
+  }
+
+  return meta
+})
 
 const { data: ast } = await useAsyncData(`${name}-api`, () => parseMarkdown(`
 ## API
@@ -66,7 +78,7 @@ function table(items: any[], columns?: { key: string, addKey?: string, label: st
       let code = item[col.key] ? `<code>${item[col.key].replaceAll('|', '&#124;')}</code>` : ''
 
       if (col.addKey) {
-        code += item[col.addKey] ? `<p class="!mt-1">${item[col.addKey].replaceAll('\n\n', '<br>').replaceAll('\n', '<br>')}</p>` : ''
+        code += item[col.addKey] ? `<p class="!mt-2">${item[col.addKey].replaceAll('\n\n', '<br>').replaceAll('\n', '<br>')}</p>` : ''
       }
 
       return code
@@ -78,5 +90,5 @@ function table(items: any[], columns?: { key: string, addKey?: string, label: st
 </script>
 
 <template>
-  <MDCRenderer v-if="ast && (meta.props?.length || meta.slots?.length || meta.events?.length)" :body="ast.body" :data="ast.data" :tag="false" />
+  <MDCRenderer v-if="ast && (meta.props?.length || meta.slots?.length || meta.events?.length)" :body="ast.body" :data="ast.data" />
 </template>
