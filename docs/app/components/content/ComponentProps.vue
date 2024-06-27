@@ -50,14 +50,10 @@ console.log('meta.value', meta.value)
           </ProseCodeInline>
         </ProseTd>
         <ProseTd>
-          <ProseCodeInline v-if="prop.default">
-            {{ prop.default }}
-          </ProseCodeInline>
+          <HighlightInlineType v-if="prop.default" :type="prop.default" />
         </ProseTd>
         <ProseTd>
-          <ProseCodeInline v-if="prop.type" lang="ts">
-            {{ prop.type }}
-          </ProseCodeInline>
+          <HighlightInlineType v-if="prop.type" :type="prop.type" />
 
           <ProseP class="mt-1 mb-0 text-gray-500 dark:text-gray-400">
             {{ prop.description }}

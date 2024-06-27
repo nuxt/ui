@@ -32,9 +32,7 @@ const meta: ComputedRef<ComponentMeta> = computed(() => componentMeta.value.meta
           </ProseCodeInline>
         </ProseTd>
         <ProseTd>
-          <ProseCodeInline v-if="event.type" lang="ts">
-            {{ event.type }}
-          </ProseCodeInline>
+          <HighlightInlineType v-if="event.type" :type="event.type" />
         </ProseTd>
       </ProseTr>
     </ProseTbody>

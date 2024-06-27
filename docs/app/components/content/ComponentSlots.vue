@@ -32,9 +32,7 @@ const meta: ComputedRef<ComponentMeta> = computed(() => componentMeta.value.meta
           </ProseCodeInline>
         </ProseTd>
         <ProseTd>
-          <ProseCodeInline v-if="slot.type" lang="ts">
-            {{ slot.type }}
-          </ProseCodeInline>
+          <HighlightInlineType v-if="slot.type" :type="slot.type" />
 
           <ProseP class="mt-1 mb-0 text-gray-500 dark:text-gray-400">
             {{ slot.description }}
