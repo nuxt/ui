@@ -54,7 +54,8 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'as' 
   placeholder?: InputProps['placeholder']
   /**
    * Display a close button in the input (useful when inside a `UModal`).
-   * @defaultValue false ({ size: 'md', color: 'gray', variant: 'ghost' })
+   * Will render with `{ size: 'md', color: 'gray', variant: 'ghost' }`.
+   * @defaultValue false
    */
   close?: ButtonProps | boolean
   /**
