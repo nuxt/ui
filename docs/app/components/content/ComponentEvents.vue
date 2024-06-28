@@ -24,7 +24,7 @@ const meta = await fetchComponentMeta(name as any)
     <ProseTbody>
       <ProseTr v-for="event in meta.meta.events" :key="event.name">
         <ProseTd>
-          <ProseCodeInline class="text-primary-500 dark:text-primary-400">
+          <ProseCodeInline>
             {{ event.name }}
           </ProseCodeInline>
         </ProseTd>
