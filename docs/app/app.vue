@@ -11,7 +11,6 @@ const { integrity, api } = runtimeConfig.public.content
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
 const { data: files } = await useLazyFetch<ContentSearchFile[]>(`${api.baseURL}/search${integrity ? '.' + integrity : ''}`, { default: () => [] })
 
-const open = ref(false)
 const searchTerm = ref('')
 
 // watch(searchTerm, debounce((query: string) => {
@@ -55,7 +54,6 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-provide('open', open)
 provide('navigation', navigation)
 provide('files', files)
 </script>
@@ -74,6 +72,6 @@ provide('files', files)
 
     <Footer v-if="!route.path.startsWith('/examples')" />
 
-    <LazyUContentSearch v-model:open="open" v-model:search-term="searchTerm" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+    <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
   </UApp>
 </template>
