@@ -17,7 +17,7 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
   }
 
   return meta.meta.props.map((prop) => {
-    prop.default = prop.default ?? componentTheme?.defaultVariants?.[prop.name]
+    prop.default = prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name]
     return prop
   })
 })
