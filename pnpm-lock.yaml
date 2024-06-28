@@ -6,6 +6,7 @@ settings:
 
 overrides:
   '@nuxt/ui': workspace:*
+  '@nuxtjs/mdc': npm:@nuxtjs/mdc-edge@0.8.3-28659854.8659fe0
   vite: 5.2.4
 
 importers:
@@ -1270,8 +1271,8 @@ packages:
   '@nuxtjs/color-mode@3.4.2':
     resolution: {integrity: sha512-6A+lDP8R6fFXc1Ip5tDepKq9MJW6oxbRlz1plvW52yacnpeDFXv5S5rDS0ax31AuSFUPlgzHymFSdjcylBwZ6w==}
 
-  '@nuxtjs/mdc@0.8.2':
-    resolution: {integrity: sha512-Cle6P65jWolHOAGqILHCIlCrt7t9T4HD60Ao6BqKEXTTdAbp/oLjfW9vtv0KbJBG8F3+euVAFAd8SIIpJgb3wQ==}
+  '@nuxtjs/mdc-edge@0.8.3-28659854.8659fe0':
+    resolution: {integrity: sha512-bxAtr4FpY08JBbwdPF8lj9Z0DQ2UWTfVhnj+GKmMu/Dei6tIJJqzDyj1xMtO6icLkSBCSBvCBtbhPf0Ci6y4aA==}
 
   '@nuxtjs/plausible@1.0.0':
     resolution: {integrity: sha512-2K0/AbPJAEr3yMA8oDD0I6WB+SXs/YlF297azjR5eSZVQjuimDAwLf4bEXk9ilbrzoMFmm0Tpzn4CC6f0rISBA==}
@@ -8322,7 +8323,7 @@ snapshots:
   '@nuxt/content@2.13.0(ioredis@5.4.1)(magicast@0.3.4)(nuxt@3.12.2(@opentelemetry/api@1.9.0)(@parcel/watcher@2.4.1)(@types/node@20.14.9)(encoding@0.1.13)(eslint@9.5.0)(ioredis@5.4.1)(lightningcss@1.25.1)(magicast@0.3.4)(optionator@0.9.4)(rollup@4.18.0)(sass@1.77.6)(terser@5.31.1)(typescript@5.5.2)(vite@5.2.4(@types/node@20.14.9)(lightningcss@1.25.1)(sass@1.77.6)(terser@5.31.1))(vue-tsc@2.0.22(typescript@5.5.2)))(rollup@4.18.0)(vue@3.4.31(typescript@5.5.2))':
     dependencies:
       '@nuxt/kit': 3.12.2(magicast@0.3.4)(rollup@4.18.0)
-      '@nuxtjs/mdc': 0.8.2(magicast@0.3.4)(rollup@4.18.0)
+      '@nuxtjs/mdc': '@nuxtjs/mdc-edge@0.8.3-28659854.8659fe0(magicast@0.3.4)(rollup@4.18.0)'
       '@vueuse/core': 10.11.0(vue@3.4.31(typescript@5.5.2))
       '@vueuse/head': 2.0.0(vue@3.4.31(typescript@5.5.2))
       '@vueuse/nuxt': 10.11.0(magicast@0.3.4)(nuxt@3.12.2(@opentelemetry/api@1.9.0)(@parcel/watcher@2.4.1)(@types/node@20.14.9)(encoding@0.1.13)(eslint@9.5.0)(ioredis@5.4.1)(lightningcss@1.25.1)(magicast@0.3.4)(optionator@0.9.4)(rollup@4.18.0)(sass@1.77.6)(terser@5.31.1)(typescript@5.5.2)(vite@5.2.4(@types/node@20.14.9)(lightningcss@1.25.1)(sass@1.77.6)(terser@5.31.1))(vue-tsc@2.0.22(typescript@5.5.2)))(rollup@4.18.0)(vue@3.4.31(typescript@5.5.2))
@@ -9020,7 +9021,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxtjs/mdc@0.8.2(magicast@0.3.4)(rollup@4.18.0)':
+  '@nuxtjs/mdc-edge@0.8.3-28659854.8659fe0(magicast@0.3.4)(rollup@4.18.0)':
     dependencies:
       '@nuxt/kit': 3.12.2(magicast@0.3.4)(rollup@4.18.0)
       '@shikijs/transformers': 1.10.0

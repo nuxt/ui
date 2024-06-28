@@ -81,6 +81,7 @@
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
+    "@nuxtjs/mdc": "npm:@nuxtjs/mdc-edge@0.8.3-28659854.8659fe0",
     "vite": "5.2.4"
   }
 }
