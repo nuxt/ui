@@ -26,7 +26,7 @@ export interface AvatarGroupProps {
 }
 
 export interface AvatarGroupSlots {
-  default(props?: any): any
+  default(props?: {}): any
 }
 </script>
 

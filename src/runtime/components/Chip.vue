@@ -30,8 +30,8 @@ export interface ChipProps {
 }
 
 export interface ChipSlots {
-  default(props?: any): any
-  content(props?: any): any
+  default(props?: {}): any
+  content(props?: {}): any
 }
 
 export interface ChipEmits {

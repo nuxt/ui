@@ -36,7 +36,7 @@ export interface TextareaEmits {
 }
 
 export interface TextareaSlots {
-  default(props?: any): any
+  default(props?: {}): any
 }
 </script>
 

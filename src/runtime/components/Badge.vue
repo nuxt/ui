@@ -24,7 +24,7 @@ export interface BadgeProps {
 }
 
 export interface BadgeSlots {
-  default(props?: any): any
+  default(props?: {}): any
 }
 </script>
 

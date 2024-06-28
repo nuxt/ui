@@ -80,11 +80,11 @@ export interface PaginationProps extends Pick<PaginationRootProps, 'defaultPage'
 export interface PaginationEmits extends PaginationRootEmits {}
 
 export interface PaginationSlots {
-  first(props?: any): any
-  prev(props?: any): any
-  next(props?: any): any
-  last(props?: any): any
-  ellipsis(props?: any): any
+  first(props?: {}): any
+  prev(props?: {}): any
+  next(props?: {}): any
+  last(props?: {}): any
+  ellipsis(props?: {}): any
   item(props: {
     page: number
     pageCount: number

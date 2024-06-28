@@ -23,7 +23,7 @@ export interface CollapsibleEmits extends CollapsibleRootEmits {}
 
 export interface CollapsibleSlots {
   default(props: { open: boolean }): any
-  content(props?: any): any
+  content(props?: {}): any
 }
 </script>
 

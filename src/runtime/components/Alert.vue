@@ -50,10 +50,10 @@ export interface AlertEmits {
 }
 
 export interface AlertSlots {
-  leading(props?: any): any
-  title(props?: any): any
-  description(props?: any): any
-  actions(props?: any): any
+  leading(props?: {}): any
+  title(props?: {}): any
+  description(props?: {}): any
+  actions(props?: {}): any
   close(props: { class: string }): any
 }
 </script>

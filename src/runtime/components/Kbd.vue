@@ -24,7 +24,7 @@ export interface KbdProps {
 }
 
 export interface KbdSlots {
-  default(props?: any): any
+  default(props?: {}): any
 }
 </script>
 

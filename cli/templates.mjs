@@ -50,7 +50,7 @@ export interface ${upperName}Props {
 }
 
 export interface ${upperName}Slots {
-  default(props?: any): any
+  default(props?: {}): any
 }
 </script>
 

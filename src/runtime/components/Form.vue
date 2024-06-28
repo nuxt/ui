@@ -29,7 +29,7 @@ export interface FormEmits<T extends object> {
 }
 
 export interface FormSlots {
-  default(props?: any): any
+  default(props?: {}): any
 }
 </script>
 

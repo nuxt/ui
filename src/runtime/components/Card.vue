@@ -19,9 +19,9 @@ export interface CardProps {
 }
 
 export interface CardSlots {
-  header(props?: any): any
-  default(props?: any): any
-  footer(props?: any): any
+  header(props?: {}): any
+  default(props?: {}): any
+  footer(props?: {}): any
 }
 </script>
 

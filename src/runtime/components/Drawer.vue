@@ -33,14 +33,14 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
 export interface DrawerEmits extends DrawerRootEmits {}
 
 export interface DrawerSlots {
-  default(props?: any): any
-  handle(props?: any): any
-  content(props?: any): any
-  header(props?: any): any
-  title(props?: any): any
-  description(props?: any): any
-  body(props?: any): any
-  footer(props?: any): any
+  default(props?: {}): any
+  handle(props?: {}): any
+  content(props?: {}): any
+  header(props?: {}): any
+  title(props?: {}): any
+  description(props?: {}): any
+  body(props?: {}): any
+  footer(props?: {}): any
 }
 </script>
 

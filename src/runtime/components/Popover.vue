@@ -38,7 +38,7 @@ export interface PopoverEmits extends PopoverRootEmits {}
 
 export interface PopoverSlots {
   default(props: { open: boolean }): any
-  content(props?: any): any
+  content(props?: {}): any
 }
 </script>
 

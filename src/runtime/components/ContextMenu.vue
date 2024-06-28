@@ -47,7 +47,7 @@ export interface ContextMenuEmits extends ContextMenuRootEmits {}
 type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
 export type ContextMenuSlots<T extends { slot?: string }> = {
-  'default'(props?: any): any
+  'default'(props?: {}): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>

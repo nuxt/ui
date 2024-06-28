@@ -37,7 +37,7 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
 }
 
 export interface SeparatorSlots {
-  default(props?: any): any
+  default(props?: {}): any
 }
 </script>
 

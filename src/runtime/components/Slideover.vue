@@ -54,13 +54,13 @@ export interface SlideoverEmits extends DialogRootEmits {}
 
 export interface SlideoverSlots {
   default(props: { open: boolean }): any
-  content(props?: any): any
-  header(props?: any): any
-  title(props?: any): any
-  description(props?: any): any
+  content(props?: {}): any
+  header(props?: {}): any
+  title(props?: {}): any
+  description(props?: {}): any
   close(props: { class: string }): any
-  body(props?: any): any
-  footer(props?: any): any
+  body(props?: {}): any
+  footer(props?: {}): any
 }
 </script>
 

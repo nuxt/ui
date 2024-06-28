@@ -27,7 +27,7 @@ export interface ButtonGroupProps {
 }
 
 export interface ButtonGroupSlots {
-  default(props?: any): any
+  default(props?: {}): any
 }
 </script>
 

@@ -38,7 +38,7 @@ export interface TooltipEmits extends TooltipRootEmits {}
 
 export interface TooltipSlots {
   default(props: { open: boolean }): any
-  content(props?: any): any
+  content(props?: {}): any
 }
 </script>
 

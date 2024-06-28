@@ -18,7 +18,7 @@ export interface ContainerProps {
 }
 
 export interface ContainerSlots {
-  default(props?: any): any
+  default(props?: {}): any
 }
 </script>
 

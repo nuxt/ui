@@ -24,7 +24,7 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
 }
 
 export interface ToasterSlots {
-  default(props?: any): any
+  default(props?: {}): any
 }
 
 export type ToasterContext = ComputedRef<{

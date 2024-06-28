@@ -40,7 +40,7 @@ export type BreadcrumbSlots<T extends { slot?: string }> = {
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
-  'separator'(props?: any): any
+  'separator'(props?: {}): any
 } & DynamicSlots<T, SlotProps<T>>
 </script>
 
