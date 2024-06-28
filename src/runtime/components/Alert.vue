@@ -1,5 +1,4 @@
 <script lang="ts">
-import { isVNode, type VNode } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
@@ -15,7 +14,7 @@ type AlertVariants = VariantProps<typeof alert>
 
 export interface AlertProps extends Omit<PrimitiveProps, 'asChild'> {
   title?: string
-  description?: string | VNode | (() => VNode)
+  description?: string
   icon?: string
   avatar?: AvatarProps
   color?: AlertVariants['color']
@@ -88,8 +87,7 @@ const ui = computed(() => tv({ extend: alert, slots: props.ui })({
         </slot>
       </div>
       <template v-if="description || !!slots.description">
-        <component :is="description" v-if="description && isVNode(description)" />
-        <div v-else :class="ui.description()">
+        <div :class="ui.description()">
           <slot name="description">
             {{ description }}
           </slot>

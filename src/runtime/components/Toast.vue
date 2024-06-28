@@ -1,5 +1,4 @@
 <script lang="ts">
-import { isVNode, type VNode } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { ToastRootProps, ToastRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
@@ -15,7 +14,7 @@ type ToastVariants = VariantProps<typeof toast>
 
 export interface ToastProps extends Omit<ToastRootProps, 'asChild' | 'forceMount'> {
   title?: string
-  description?: string | VNode | (() => VNode)
+  description?: string
   icon?: string
   avatar?: AvatarProps
   color?: ToastVariants['color']
@@ -109,8 +108,7 @@ defineExpose({
         </slot>
       </ToastTitle>
       <template v-if="description || !!slots.description">
-        <ToastDescription v-if="description && isVNode(description)" :as="description" />
-        <ToastDescription v-else :class="ui.description()">
+        <ToastDescription :class="ui.description()">
           <slot name="description">
             {{ description }}
           </slot>
