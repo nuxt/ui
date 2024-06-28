@@ -50,12 +50,12 @@ export interface SelectMenuProps<T> extends Omit<ComboboxRootProps<T>, 'asChild'
    * The content of the menu.
    * @defaultValue `{ side: 'bottom', sideOffset: 8, position: 'popper' }`
    */
-  content?: Omit<ComboboxContentProps, 'asChild' | 'forceMount'>
+  content?: Omit<ComboboxContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
    * Display an arrow alongside the menu.
    * @defaultValue `false`
    */
-  arrow?: boolean | Omit<ComboboxArrowProps, 'asChild'>
+  arrow?: boolean | Omit<ComboboxArrowProps, 'as' | 'asChild'>
   /**
    * Render the menu in a portal.
    * @defaultValue `true`

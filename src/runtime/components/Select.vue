@@ -47,12 +47,12 @@ export interface SelectProps<T> extends Omit<SelectRootProps, 'asChild' | 'dir'>
    * The content of the menu.
    * @defaultValue `{ side: 'bottom', sideOffset: 8, position: 'popper' }`
    */
-  content?: Omit<SelectContentProps, 'asChild' | 'forceMount'>
+  content?: Omit<SelectContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
    * Display an arrow alongside the menu.
    * @defaultValue `false`
    */
-  arrow?: boolean | Omit<SelectArrowProps, 'asChild'>
+  arrow?: boolean | Omit<SelectArrowProps, 'as' | 'asChild'>
   /**
    * Render the menu in a portal.
    * @defaultValue `true`
@@ -92,7 +92,7 @@ const emits = defineEmits<SelectEmits>()
 const slots = defineSlots<SelectSlots<T>>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as SelectContentProps)
 
 const { emitFormChange, emitFormBlur, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)

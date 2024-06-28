@@ -14,7 +14,7 @@ export interface DrawerProps extends Omit<DrawerRootProps, 'asChild'> {
   title?: string
   description?: string
   /** The content of the drawer. */
-  content?: Omit<DialogContentProps, 'asChild' | 'forceMount'>
+  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
   overlay?: boolean
   /**
    * Render the drawer in a portal.

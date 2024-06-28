@@ -15,7 +15,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'custom'>, Pic
   label?: string
   icon?: string
   avatar?: AvatarProps
-  content?: Omit<ContextMenuContentProps, 'asChild' | 'forceMount'>
+  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
@@ -32,7 +32,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'custom'>, Pic
 export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'>, Pick<ContextMenuTriggerProps, 'disabled'> {
   items?: T[] | T[][]
   /** The content of the menu. */
-  content?: Omit<ContextMenuContentProps, 'asChild' | 'forceMount'>
+  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
    * Render the menu in a portal.
    * @defaultValue `true`

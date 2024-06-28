@@ -35,7 +35,7 @@ export interface TabsProps<T> extends Omit<TabsRootProps, 'asChild' | 'orientati
    * The content of the tabs, can be disabled to prevent rendering the content.
    * @defaultValue `true`
    */
-  content?: boolean | Omit<TabsContentProps, 'asChild' | 'value'>
+  content?: boolean | Omit<TabsContentProps, 'as' | 'asChild' | 'value'>
   class?: any
   ui?: Partial<typeof tabs.slots>
 }

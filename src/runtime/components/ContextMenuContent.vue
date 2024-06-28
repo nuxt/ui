@@ -6,7 +6,7 @@ import type { ContextMenuItem, ContextMenuSlots } from '../types'
 
 const contextMenu = tv(theme)()
 
-interface ContextMenuContentProps<T> extends Omit<RadixContextMenuContentProps, 'asChild' | 'forceMount'> {
+interface ContextMenuContentProps<T> extends Omit<RadixContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean

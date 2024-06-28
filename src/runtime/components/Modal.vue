@@ -14,7 +14,7 @@ export interface ModalProps extends DialogRootProps {
   title?: string
   description?: string
   /** The content of the modal. */
-  content?: Omit<DialogContentProps, 'asChild' | 'forceMount'>
+  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
   overlay?: boolean
   transition?: boolean
   fullscreen?: boolean

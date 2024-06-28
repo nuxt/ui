@@ -26,7 +26,7 @@ export interface AccordionProps<T> extends Omit<AccordionRootProps, 'asChild' | 
    */
   trailingIcon?: string
   /** The content of the accordion. */
-  content?: Omit<AccordionContentProps, 'asChild'>
+  content?: Omit<AccordionContentProps, 'as' | 'asChild'>
   class?: any
   ui?: Partial<typeof accordion.slots>
 }

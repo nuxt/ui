@@ -16,7 +16,7 @@ export interface SlideoverProps extends DialogRootProps {
   title?: string
   description?: string
   /** The content of the slideover. */
-  content?: Omit<DialogContentProps, 'asChild' | 'forceMount'>
+  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
    * Display an overlay behind the slideover.
    * @defaultValue `true`

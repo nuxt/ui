@@ -19,12 +19,12 @@ export interface TooltipProps extends TooltipRootProps {
    * The content of the tooltip.
    * @defaultValue `{ side: 'bottom', sideOffset: 8 }`
    */
-  content?: Omit<TooltipContentProps, 'asChild'>
+  content?: Omit<TooltipContentProps, 'as' | 'asChild'>
   /**
    * Display an arrow alongside the tooltip.
    * @defaultValue `false`
    */
-  arrow?: boolean | Omit<TooltipArrowProps, 'asChild'>
+  arrow?: boolean | Omit<TooltipArrowProps, 'as' | 'asChild'>
   /**
    * Render the tooltip in a portal.
    * @defaultValue `true`

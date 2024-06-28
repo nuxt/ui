@@ -49,7 +49,7 @@ export interface NavigationMenuProps<T> extends Omit<NavigationMenuRootProps, 'a
   highlight?: boolean
   highlightColor?: NavigationMenuVariants['highlightColor']
   /** The content of the menu. */
-  content?: Omit<NavigationMenuContentProps, 'asChild' | 'forceMount'>
+  content?: Omit<NavigationMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
    * Display an arrow alongside the menu.
    * @defaultValue `false`
