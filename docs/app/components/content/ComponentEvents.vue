@@ -27,7 +27,7 @@ const meta: ComputedRef<ComponentMeta> = computed(() => componentMeta.value.meta
     <ProseTbody>
       <ProseTr v-for="event in meta.events" :key="event.name">
         <ProseTd>
-          <ProseCodeInline>
+          <ProseCodeInline class="text-primary-500 dark:text-primary-400">
             {{ event.name }}
           </ProseCodeInline>
         </ProseTd>

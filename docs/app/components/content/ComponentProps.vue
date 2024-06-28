@@ -45,7 +45,7 @@ console.log('meta.value', meta.value)
     <ProseTbody>
       <ProseTr v-for="prop in meta.props" :key="prop.name">
         <ProseTd>
-          <ProseCodeInline>
+          <ProseCodeInline class="text-primary-500 dark:text-primary-400">
             {{ prop.name }}
           </ProseCodeInline>
         </ProseTd>
@@ -55,9 +55,7 @@ console.log('meta.value', meta.value)
         <ProseTd>
           <HighlightInlineType v-if="prop.type" :type="prop.type" />
 
-          <ProseP class="mt-1 mb-0 text-gray-500 dark:text-gray-400">
-            {{ prop.description }}
-          </ProseP>
+          <MDC v-if="prop.description" :value="prop.description" class="text-gray-600 dark:text-gray-300 mt-1" />
         </ProseTd>
       </ProseTr>
     </ProseTbody>

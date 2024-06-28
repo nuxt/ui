@@ -8,7 +8,7 @@ const route = useRoute()
 
 const name = camelCase(route.params.slug[route.params.slug.length - 1])
 
-const { data: ast } = await useAsyncData(`${name}-theme`, () => parseMarkdown(`
+const { data: ast } = await useAsyncData<any>(`${name}-theme`, () => parseMarkdown(`
 \`\`\`yml
 ${json5.stringify(theme[name], null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')}
 \`\`\`\

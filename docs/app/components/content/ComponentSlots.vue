@@ -27,16 +27,14 @@ const meta: ComputedRef<ComponentMeta> = computed(() => componentMeta.value.meta
     <ProseTbody>
       <ProseTr v-for="slot in meta.slots" :key="slot.name">
         <ProseTd>
-          <ProseCodeInline>
+          <ProseCodeInline class="text-primary-500 dark:text-primary-400">
             {{ slot.name }}
           </ProseCodeInline>
         </ProseTd>
         <ProseTd>
           <HighlightInlineType v-if="slot.type" :type="slot.type" />
 
-          <ProseP class="mt-1 mb-0 text-gray-500 dark:text-gray-400">
-            {{ slot.description }}
-          </ProseP>
+          <MDC v-if="slot.description" :value="slot.description" class="text-gray-600 dark:text-gray-300 mt-1" />
         </ProseTd>
       </ProseTr>
     </ProseTbody>
