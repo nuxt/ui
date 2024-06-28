@@ -164,8 +164,8 @@ importers:
         specifier: ^3.12.2
         version: 3.12.2(@opentelemetry/api@1.9.0)(@parcel/watcher@2.4.1)(@types/node@20.14.9)(encoding@0.1.13)(eslint@9.5.0)(ioredis@5.4.1)(lightningcss@1.25.1)(magicast@0.3.4)(optionator@0.9.4)(rollup@4.18.0)(sass@1.77.6)(terser@5.31.1)(typescript@5.5.2)(vite@5.2.4(@types/node@20.14.9)(lightningcss@1.25.1)(sass@1.77.6)(terser@5.31.1))(vue-tsc@2.0.22(typescript@5.5.2))
       nuxt-component-meta:
-        specifier: ^0.6.5
-        version: 0.6.5(magicast@0.3.4)(rollup@4.18.0)
+        specifier: ^0.6.6
+        version: 0.6.6(magicast@0.3.4)(rollup@4.18.0)
       nuxt-og-image:
         specifier: ^3.0.0-rc.53
         version: 3.0.0-rc.54(@lezer/common@1.2.1)(@nuxt/devtools@1.3.7(rollup@4.18.0)(vite@5.2.4(@types/node@20.14.9)(lightningcss@1.25.1)(sass@1.77.6)(terser@5.31.1)))(@unocss/webpack@0.61.0(rollup@4.18.0)(webpack@5.92.1))(@vue/compiler-core@3.4.31)(fuse.js@7.0.0)(magicast@0.3.4)(nuxt@3.12.2(@opentelemetry/api@1.9.0)(@parcel/watcher@2.4.1)(@types/node@20.14.9)(encoding@0.1.13)(eslint@9.5.0)(ioredis@5.4.1)(lightningcss@1.25.1)(magicast@0.3.4)(optionator@0.9.4)(rollup@4.18.0)(sass@1.77.6)(terser@5.31.1)(typescript@5.5.2)(vite@5.2.4(@types/node@20.14.9)(lightningcss@1.25.1)(sass@1.77.6)(terser@5.31.1))(vue-tsc@2.0.22(typescript@5.5.2)))(postcss@8.4.38)(rollup@4.18.0)(vite@5.2.4(@types/node@20.14.9)(lightningcss@1.25.1)(sass@1.77.6)(terser@5.31.1))(vue@3.4.31(typescript@5.5.2))(webpack@5.92.1)
@@ -5377,8 +5377,8 @@ packages:
     engines: {node: ^16.10.0 || >=18.0.0}
     hasBin: true
 
-  nuxt-component-meta@0.6.5:
-    resolution: {integrity: sha512-hWtviEYqQLZVpitVUKGHUy1NNOPKskbyu8wsLQPdAGKO48HjONV5ZudPoF5nxswb6sdxRmL+dNIIK4VymrtT+w==}
+  nuxt-component-meta@0.6.6:
+    resolution: {integrity: sha512-Y5/tuZuZOlD4GluAjcTU6JlhtEeg7/92VEfoV814t2uTuZK+b9RokJeGtrMotXuCJ4vuT1Is7M+pkPm+vY/tXA==}
     hasBin: true
 
   nuxt-icon@0.6.10:
@@ -13999,7 +13999,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  nuxt-component-meta@0.6.5(magicast@0.3.4)(rollup@4.18.0):
+  nuxt-component-meta@0.6.6(magicast@0.3.4)(rollup@4.18.0):
     dependencies:
       '@nuxt/kit': 3.12.2(magicast@0.3.4)(rollup@4.18.0)
       citty: 0.1.6
