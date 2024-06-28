@@ -25,7 +25,7 @@ export interface SliderProps extends Omit<SliderRootProps, 'asChild' | 'modelVal
   ui?: Partial<typeof slider.slots>
 }
 
-export interface SliderEmits extends Omit<SliderRootEmits, 'update:modelValue'> {}
+export interface SliderEmits extends SliderRootEmits {}
 </script>
 
 <script setup lang="ts">

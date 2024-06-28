@@ -37,6 +37,10 @@ export interface SwitchSlots {
   label(props: { label?: string }): any
   description(props: { description?: string }): any
 }
+
+export interface SwitchEmits {
+  (e: 'update:modelValue', payload: boolean): void
+}
 </script>
 
 <script setup lang="ts">
@@ -47,6 +51,7 @@ import { useId, useAppConfig, useFormField } from '#imports'
 
 const props = defineProps<SwitchProps>()
 const slots = defineSlots<SwitchSlots>()
+defineEmits<SwitchEmits>()
 
 const modelValue = defineModel<boolean | undefined>({ default: undefined })
 

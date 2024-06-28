@@ -38,6 +38,10 @@ export interface CheckboxSlots {
   label(props: { label?: string }): any
   description(props: { description?: string }): any
 }
+
+export interface CheckboxEmits {
+  (e: 'update:modelValue', payload: boolean): void
+}
 </script>
 
 <script setup lang="ts">
@@ -48,6 +52,7 @@ import { useId, useAppConfig, useFormField } from '#imports'
 
 const props = defineProps<CheckboxProps>()
 const slots = defineSlots<CheckboxSlots>()
+defineEmits<CheckboxEmits>()
 
 const modelValue = defineModel<boolean | undefined>({ default: undefined })
 

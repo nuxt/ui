@@ -29,6 +29,10 @@ export interface ChipSlots {
   default(props?: any): any
   content(props?: any): any
 }
+
+export interface ChipEmits {
+  (e: 'update:show', payload: boolean): void
+}
 </script>
 
 <script setup lang="ts">
