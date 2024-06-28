@@ -5,18 +5,7 @@ const props = defineProps<{
   type: string
 }>()
 
-const { data: ast } = await useAsyncData<any>(`hightlight-inline-code-` + props.type, async () => {
-  const ast = await parseMarkdown(`\`type _ = ${props.type}\`{lang="ts"}`)
-
-  const p = ast.body.children[0]
-  const code = p.children[0]
-
-  // Remove the `type _ = ` part
-  code.children = code.children.slice(3)
-  ast.body.children = [code]
-
-  return ast
-})
+const { data: ast } = await useAsyncData<any>(`hightlight-inline-code-` + props.type, () => parseMarkdown(`\`${props.type}\`{lang="ts-type"}`))
 </script>
 
 <template>
