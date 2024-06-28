@@ -19,28 +19,28 @@ export interface SlideoverProps extends DialogRootProps {
   content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
    * Display an overlay behind the slideover.
-   * @defaultValue `true`
+   * @defaultValue true
    */
   overlay?: boolean
   /**
    * Open & close the slideover with a transition.
-   * @defaultValue `true`
+   * @defaultValue true
    */
   transition?: boolean
   side?: SlideoverVariants['side']
   /**
    * Render the slideover in a portal.
-   * @defaultValue `true`
+   * @defaultValue true
    */
   portal?: boolean
   /**
    * Display a close button to dismiss the slideover.
-   * @defaultValue `true` (`{ size: 'md', color: 'gray', variant: 'ghost' }`)
+   * @defaultValue true ({ size: 'md', color: 'gray', variant: 'ghost' })
    */
   close?: ButtonProps | boolean
   /**
    * The icon displayed in the close button.
-   * @defaultValue `appConfig.ui.icons.close`
+   * @defaultValue appConfig.ui.icons.close
    */
   closeIcon?: string
   /** When `true`, the slideover will not close when clicking outside. */

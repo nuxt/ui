@@ -11,7 +11,7 @@ const avatar = tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}) })
 
 type AvatarVariants = VariantProps<typeof avatar>
 
-export interface AvatarProps extends Omit<AvatarFallbackProps, 'as' | 'asChild'> {
+export interface AvatarProps extends Pick<AvatarFallbackProps, 'delayMs'> {
   as?: string | object
   src?: string
   alt?: string

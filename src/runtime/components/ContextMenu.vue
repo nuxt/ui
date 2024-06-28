@@ -19,7 +19,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'custom'>, Pic
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
-   * @defaultValue `'link'`
+   * @defaultValue 'link'
    */
   type?: 'label' | 'separator' | 'link'
   slot?: string
@@ -35,7 +35,7 @@ export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'>, 
   content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
    * Render the menu in a portal.
-   * @defaultValue `true`
+   * @defaultValue true
    */
   portal?: boolean
   class?: any

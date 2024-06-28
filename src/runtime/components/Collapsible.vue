@@ -9,7 +9,12 @@ const appConfig = _appConfig as AppConfig & { ui: { collapsible: Partial<typeof 
 
 const collapsible = tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })
 
-export interface CollapsibleProps extends Omit<CollapsibleRootProps, 'asChild'> {
+export interface CollapsibleProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   class?: any
   ui?: Partial<typeof collapsible.slots>
 }

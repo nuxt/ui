@@ -11,14 +11,19 @@ const switchTv = tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })
 
 type SwitchVariants = VariantProps<typeof switchTv>
 
-export interface SwitchProps extends Omit<SwitchRootProps, 'asChild' | 'checked' | 'defaultChecked'> {
+export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue `div`
+   */
+  as?: any
   color?: SwitchVariants['color']
   size?: SwitchVariants['size']
   /** When `true`, the loading icon will be displayed. */
   loading?: boolean
   /**
    * The icon when the `loading` prop is `true`.
-   * @defaultValue `appConfig.ui.icons.loading`
+   * @defaultValue appConfig.ui.icons.loading
    */
   loadingIcon?: string
   /** Display an icon when the switch is checked. */

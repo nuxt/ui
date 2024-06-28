@@ -19,14 +19,14 @@ export interface SelectItem extends Pick<SelectItemProps, 'disabled' | 'value'> 
   chip?: ChipProps
   /**
    * The item type.
-   * @defaultValue `'item'`
+   * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
 }
 
 type SelectVariants = VariantProps<typeof select>
 
-export interface SelectProps<T> extends Omit<SelectRootProps, 'asChild' | 'dir'>, UseComponentIconsProps {
+export interface SelectProps<T> extends Omit<SelectRootProps, 'dir'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -35,27 +35,27 @@ export interface SelectProps<T> extends Omit<SelectRootProps, 'asChild' | 'dir'>
   size?: SelectVariants['size']
   /**
    * The icon displayed to open the menu.
-   * @defaultValue `appConfig.ui.icons.chevronDown`
+   * @defaultValue appConfig.ui.icons.chevronDown
    */
   trailingIcon?: string
   /**
    * The icon displayed when an item is selected.
-   * @defaultValue `appConfig.ui.icons.check`
+   * @defaultValue appConfig.ui.icons.check
    */
   selectedIcon?: string
   /**
    * The content of the menu.
-   * @defaultValue `{ side: 'bottom', sideOffset: 8, position: 'popper' }`
+   * @defaultValue { side: 'bottom', sideOffset: 8, position: 'popper' }
    */
   content?: Omit<SelectContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
    * Display an arrow alongside the menu.
-   * @defaultValue `false`
+   * @defaultValue false
    */
   arrow?: boolean | Omit<SelectArrowProps, 'as' | 'asChild'>
   /**
    * Render the menu in a portal.
-   * @defaultValue `true`
+   * @defaultValue true
    */
   portal?: boolean
   items?: T[] | T[][]
@@ -92,7 +92,7 @@ const emits = defineEmits<SelectEmits>()
 const slots = defineSlots<SelectSlots<T>>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as SelectContentProps)
 
 const { emitFormChange, emitFormBlur, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)

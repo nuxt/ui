@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { ButtonHTMLAttributes } from 'vue'
 import { tv } from 'tailwind-variants'
-import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/link'
@@ -11,7 +10,16 @@ const appConfig = _appConfig as AppConfig & { ui: { link: Partial<typeof theme> 
 
 const link = tv({ extend: tv(theme), ...(appConfig.ui?.link || {}) })
 
-export interface LinkProps extends NuxtLinkProps, Omit<PrimitiveProps, 'asChild'> {
+export interface LinkProps extends NuxtLinkProps {
+  /**
+   * The element or component this component should render as when not a link.
+   * @defaultValue 'button'
+   */
+  as?: any
+  /**
+   * The type of the button when not a link.
+   * @defaultValue 'button'
+   */
   type?: ButtonHTMLAttributes['type']
   disabled?: boolean
   active?: boolean

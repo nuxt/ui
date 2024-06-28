@@ -12,7 +12,12 @@ const separator = tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })
 
 type SeparatorVariants = VariantProps<typeof separator>
 
-export interface SeparatorProps extends Omit<_SeparatorProps, 'asChild' | 'orientation'> {
+export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue `div`
+   */
+  as?: any
   /** Display a label in the middle. */
   label?: string
   /** Display an icon in the middle. */
@@ -24,7 +29,7 @@ export interface SeparatorProps extends Omit<_SeparatorProps, 'asChild' | 'orien
   type?: SeparatorVariants['type']
   /**
    * The orientation of the separator.
-   * @defaultValue `'horizontal'`
+   * @defaultValue 'horizontal'
    */
   orientation?: _SeparatorProps['orientation']
   class?: any
@@ -43,7 +48,6 @@ import { reactivePick } from '@vueuse/core'
 import { UAvatar, UIcon } from '#components'
 
 const props = withDefaults(defineProps<SeparatorProps>(), {
-  as: 'div',
   orientation: 'horizontal'
 })
 const slots = defineSlots<SeparatorSlots>()

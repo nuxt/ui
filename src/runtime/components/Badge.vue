@@ -1,6 +1,5 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/badge'
@@ -11,7 +10,12 @@ const badge = tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })
 
 type BadgeVariants = VariantProps<typeof badge>
 
-export interface BadgeProps extends Omit<PrimitiveProps, 'asChild'> {
+export interface BadgeProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'span'
+   */
+  as?: any
   label?: string | number
   color?: BadgeVariants['color']
   variant?: BadgeVariants['variant']
@@ -27,7 +31,9 @@ export interface BadgeSlots {
 <script setup lang="ts">
 import { Primitive } from 'radix-vue'
 
-const props = withDefaults(defineProps<BadgeProps>(), { as: 'span' })
+const props = withDefaults(defineProps<BadgeProps>(), {
+  as: 'span'
+})
 defineSlots<BadgeSlots>()
 </script>
 

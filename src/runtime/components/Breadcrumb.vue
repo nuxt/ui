@@ -1,6 +1,5 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
@@ -18,11 +17,16 @@ export interface BreadcrumbItem extends Omit<LinkProps, 'custom'> {
   slot?: string
 }
 
-export interface BreadcrumbProps<T> extends Omit<PrimitiveProps, 'asChild'> {
+export interface BreadcrumbProps<T> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   items?: T[]
   /**
    * The icon to use as a separator.
-   * @defaultValue `appConfig.ui.icons.chevronRight`
+   * @defaultValue appConfig.ui.icons.chevronRight
    */
   separatorIcon?: string
   class?: any

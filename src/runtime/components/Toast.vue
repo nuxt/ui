@@ -12,7 +12,12 @@ const toast = tv({ extend: tv(theme), ...(appConfig.ui?.toast || {}) })
 
 type ToastVariants = VariantProps<typeof toast>
 
-export interface ToastProps extends Omit<ToastRootProps, 'asChild' | 'forceMount'> {
+export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' | 'type' | 'duration'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   title?: string
   description?: string
   icon?: string
@@ -26,12 +31,12 @@ export interface ToastProps extends Omit<ToastRootProps, 'asChild' | 'forceMount
   actions?: ButtonProps[]
   /**
    * Display a close button to dismiss the toast.
-   * @defaultValue `true` (`{ size: 'md', color: 'gray', variant: 'link' }`)
+   * @defaultValue true ({ size: 'md', color: 'gray', variant: 'link' })
    */
   close?: ButtonProps | boolean
   /**
    * The icon displayed in the close button.
-   * @defaultValue `appConfig.ui.icons.close`
+   * @defaultValue appConfig.ui.icons.close
    */
   closeIcon?: string
   class?: any
@@ -56,7 +61,9 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { UIcon, UAvatar } from '#components'
 
-const props = withDefaults(defineProps<ToastProps>(), { close: true })
+const props = withDefaults(defineProps<ToastProps>(), {
+  close: true
+})
 const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
 

@@ -11,12 +11,17 @@ const slider = tv({ extend: tv(theme), ...(appConfig.ui?.slider || {}) })
 
 type SliderVariants = VariantProps<typeof slider>
 
-export interface SliderProps extends Omit<SliderRootProps, 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'orientation'> {
+export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' | 'inverted' | 'min' | 'max' | 'step' | 'minStepsBetweenThumbs'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue `div`
+   */
+  as?: any
   size?: SliderVariants['size']
   color?: SliderVariants['color']
   /**
    * The orientation of the slider.
-   * @defaultValue `'horizontal'`
+   * @defaultValue 'horizontal'
    */
   orientation?: SliderRootProps['orientation']
   /** The value of the slider when initially rendered. Use when you do not need to control the state of the slider. */

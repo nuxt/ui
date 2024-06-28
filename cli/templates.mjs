@@ -31,7 +31,6 @@ const component = ({ name, primitive, pro, prose, content }) => {
       ? `
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
@@ -40,7 +39,12 @@ const appConfig = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : 
 
 const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${prose ? 'prose?.' : ''}${camelName} || {}) })
 
-export interface ${upperName}Props extends Omit<PrimitiveProps, 'asChild'> {
+export interface ${upperName}Props {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue \`div\`
+   */
+  as?: any
   class?: any
   ui?: Partial<typeof ${camelName}.slots>
 }
@@ -80,7 +84,7 @@ const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${prose ? 'pr
 
 type ${upperName}Variants = VariantProps<typeof ${camelName}>
 
-export interface ${upperName}Props extends Omit<${upperName}RootProps, 'asChild'> {
+export interface ${upperName}Props extends Pick<${upperName}RootProps> {
   class?: any
   ui?: Partial<typeof ${camelName}.slots>
 }

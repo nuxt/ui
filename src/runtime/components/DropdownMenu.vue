@@ -19,7 +19,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'custom'>, Pi
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
-   * @defaultValue `'link'`
+   * @defaultValue 'link'
    */
   type?: 'label' | 'separator' | 'link'
   slot?: string
@@ -36,17 +36,17 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
   items?: T[] | T[][]
   /**
    * The content of the menu.
-   * @defaultValue `{ side: 'bottom', sideOffset: 8 }`
+   * @defaultValue { side: 'bottom', sideOffset: 8 }
    */
   content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
    * Display an arrow alongside the menu.
-   * @defaultValue `false`
+   * @defaultValue false
    */
   arrow?: boolean | Omit<DropdownMenuArrowProps, 'as' | 'asChild'>
   /**
    * Render the menu in a portal.
-   * @defaultValue `true`
+   * @defaultValue true
    */
   portal?: boolean
   class?: any

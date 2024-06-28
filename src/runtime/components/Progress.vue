@@ -11,7 +11,12 @@ const progress = tv({ extend: tv(theme), ...(appConfig.ui?.progress || {}) })
 
 type ProgressVariants = VariantProps<typeof progress>
 
-export interface ProgressProps extends Omit<ProgressRootProps, 'asChild' | 'max'> {
+export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' | 'modelValue'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue `div`
+   */
+  as?: any
   max?: number | Array<any>
   status?: boolean
   inverted?: boolean
@@ -19,7 +24,7 @@ export interface ProgressProps extends Omit<ProgressRootProps, 'asChild' | 'max'
   color?: ProgressVariants['color']
   /**
    * The orientation of the progress bar.
-   * @defaultValue `'horizontal'`
+   * @defaultValue 'horizontal'
    */
   orientation?: ProgressVariants['orientation']
   animation?: ProgressVariants['animation']

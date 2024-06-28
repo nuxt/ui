@@ -17,14 +17,19 @@ export interface RadioGroupItem extends Pick<RadioGroupItemProps, 'disabled' | '
   description?: string
 }
 
-export interface RadioGroupProps<T> extends Omit<RadioGroupRootProps, 'asChild' | 'dir' | 'orientation'> {
+export interface RadioGroupProps<T> extends Pick<RadioGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue `div`
+   */
+  as?: any
   legend?: string
   items?: T[]
   size?: RadioGroupVariants['size']
   color?: RadioGroupVariants['color']
   /**
    * The orientation the radio buttons are laid out.
-   * @defaultValue `'vertical'`
+   * @defaultValue 'vertical'
    */
   orientation?: RadioGroupRootProps['orientation']
   class?: any

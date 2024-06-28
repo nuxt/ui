@@ -1,6 +1,5 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar-group'
@@ -11,7 +10,12 @@ const avatarGroup = tv({ extend: tv(theme), ...(appConfig.ui?.avatarGroup || {})
 
 type AvatarGroupVariants = VariantProps<typeof avatarGroup>
 
-export interface AvatarGroupProps extends Omit<PrimitiveProps, 'asChild'> {
+export interface AvatarGroupProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   size?: AvatarGroupVariants['size']
   /**
    * The maximum number of avatars to display.

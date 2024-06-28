@@ -1,6 +1,5 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/chip'
@@ -11,7 +10,12 @@ const chip = tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })
 
 type ChipVariants = VariantProps<typeof chip>
 
-export interface ChipProps extends Omit<PrimitiveProps, 'asChild'> {
+export interface ChipProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   /** Display some text inside the chip. */
   text?: string | number
   color?: ChipVariants['color']
@@ -40,7 +44,7 @@ import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useAvatarGroup } from '#imports'
 
-const props = withDefaults(defineProps<ChipProps>(), { as: 'div' })
+const props = defineProps<ChipProps>()
 defineSlots<ChipSlots>()
 
 const show = defineModel<boolean>('show', { default: true })

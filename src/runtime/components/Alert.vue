@@ -1,6 +1,5 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/alert'
@@ -12,7 +11,12 @@ const alert = tv({ extend: tv(theme), ...(appConfig.ui?.alert || {}) })
 
 type AlertVariants = VariantProps<typeof alert>
 
-export interface AlertProps extends Omit<PrimitiveProps, 'asChild'> {
+export interface AlertProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   title?: string
   description?: string
   icon?: string
@@ -28,12 +32,12 @@ export interface AlertProps extends Omit<PrimitiveProps, 'asChild'> {
   /**
    * Display a close button to dismiss the alert.
    * @emits `close`
-   * @defaultValue `false` (`{ size: 'md', color: 'gray', variant: 'link' }`)
+   * @defaultValue false ({ size: 'md', color: 'gray', variant: 'link' })
    */
   close?: ButtonProps | boolean
   /**
    * The icon displayed in the close button.
-   * @defaultValue `appConfig.ui.icons.close`
+   * @defaultValue appConfig.ui.icons.close
    */
   closeIcon?: string
   class?: any
@@ -59,7 +63,7 @@ import { Primitive } from 'radix-vue'
 import { useAppConfig } from '#imports'
 import { UIcon, UAvatar } from '#components'
 
-const props = withDefaults(defineProps<AlertProps>(), { as: 'div' })
+const props = defineProps<AlertProps>()
 const emits = defineEmits<AlertEmits>()
 const slots = defineSlots<AlertSlots>()
 

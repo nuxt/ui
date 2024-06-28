@@ -11,55 +11,60 @@ const appConfig = _appConfig as AppConfig & { ui: { pagination: Partial<typeof t
 
 const pagination = tv({ extend: tv(theme), ...(appConfig.ui?.pagination || {}) })
 
-export interface PaginationProps extends Omit<PaginationRootProps, 'asChild'> {
+export interface PaginationProps extends Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue `div`
+   */
+  as?: any
   /**
    * The icon to use for the first page control.
-   * @defaultValue `appConfig.ui.icons.chevronDoubleLeft`
+   * @defaultValue appConfig.ui.icons.chevronDoubleLeft
    */
   firstIcon?: string
   /**
    * The icon to use for the previous page control.
-   * @defaultValue `appConfig.ui.icons.chevronLeft`
+   * @defaultValue appConfig.ui.icons.chevronLeft
    */
   prevIcon?: string
   /**
    * The icon to use for the next page control.
-   * @defaultValue `appConfig.ui.icons.chevronRight`
+   * @defaultValue appConfig.ui.icons.chevronRight
    */
   nextIcon?: string
   /**
    * The icon to use for the last page control.
-   * @defaultValue `appConfig.ui.icons.chevronDoubleRight`
+   * @defaultValue appConfig.ui.icons.chevronDoubleRight
    */
   lastIcon?: string
   /**
    * The icon to use for the ellipsis control.
-   * @defaultValue `appConfig.ui.icons.ellipsis`
+   * @defaultValue appConfig.ui.icons.ellipsis
    */
   ellipsisIcon?: string
   /**
    * The color of the pagination controls.
-   * @defaultValue `'white'`
+   * @defaultValue 'white'
    */
   color?: ButtonProps['color']
   /**
    * The variant of the pagination controls.
-   * @defaultValue `'solid'`
+   * @defaultValue 'solid'
    */
   variant?: ButtonProps['variant']
   /**
    * The color of the active pagination control.
-   * @defaultValue `'black'`
+   * @defaultValue 'black'
    */
   activeColor?: ButtonProps['color']
   /**
    * The variant of the active pagination control.
-   * @defaultValue `'solid'`
+   * @defaultValue 'solid'
    */
   activeVariant?: ButtonProps['variant']
   /**
    * Whether to show the first, previous, next, and last controls.
-   * @defaultValue `true`
+   * @defaultValue true
    */
   showControls?: boolean
   size?: ButtonProps['size']

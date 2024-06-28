@@ -1,6 +1,5 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { PrimitiveProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/button-group'
@@ -12,11 +11,16 @@ const buttonGroup = tv({ extend: tv(theme), ...(appConfig.ui?.buttonGroup) })
 
 type ButtonGroupVariants = VariantProps<typeof buttonGroup>
 
-export interface ButtonGroupProps extends Omit<PrimitiveProps, 'asChild'> {
+export interface ButtonGroupProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   size?: ButtonProps['size']
   /**
    * The orientation the buttons are laid out.
-   * @defaultValue `'horizontal'`
+   * @defaultValue 'horizontal'
    */
   orientation?: ButtonGroupVariants['orientation']
   class?: any
@@ -33,7 +37,6 @@ import { Primitive } from 'radix-vue'
 import { buttonGroupInjectionKey } from '#imports'
 
 const props = withDefaults(defineProps<ButtonGroupProps>(), {
-  as: 'div',
   orientation: 'horizontal'
 })
 defineSlots<ButtonGroupSlots>()

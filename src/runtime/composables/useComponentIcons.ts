@@ -16,7 +16,7 @@ export interface UseComponentIconsProps {
   loading?: boolean
   /**
    * The icon when the `loading` prop is `true`.
-   * @defaultValue `appConfig.ui.icons.loading`
+   * @defaultValue appConfig.ui.icons.loading
    */
   loadingIcon?: string
 }

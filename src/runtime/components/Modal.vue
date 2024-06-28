@@ -20,17 +20,17 @@ export interface ModalProps extends DialogRootProps {
   fullscreen?: boolean
   /**
    * Render the modal in a portal.
-   * @defaultValue `true`
+   * @defaultValue true
    */
   portal?: boolean
   /**
    * Display a close button to dismiss the modal.
-   * @defaultValue `true` (`{ size: 'md', color: 'gray', variant: 'ghost' }`)
+   * @defaultValue true ({ size: 'md', color: 'gray', variant: 'ghost' })
    */
   close?: ButtonProps | boolean
   /**
    * The icon displayed in the close button.
-   * @defaultValue `appConfig.ui.icons.close`
+   * @defaultValue appConfig.ui.icons.close
    */
   closeIcon?: string
   /** When `true`, the modal will not close when clicking outside. */

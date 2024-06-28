@@ -12,22 +12,22 @@ const popover = tv({ extend: tv(theme), ...(appConfig.ui?.popover || {}) })
 export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'> {
   /**
    * The display mode of the popover.
-   * @defaultValue `"click"`
+   * @defaultValue 'click'
    */
   mode?: 'click' | 'hover'
   /**
    * The content of the popover.
-   * @defaultValue `{ side: 'bottom', sideOffset: 8 }`
+   * @defaultValue { side: 'bottom', sideOffset: 8 }
    */
   content?: Omit<PopoverContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
    * Display an arrow alongside the popover.
-   * @defaultValue `false`
+   * @defaultValue false
    */
   arrow?: boolean | Omit<PopoverArrowProps, 'as' | 'asChild'>
   /**
    * Render the popover in a portal.
-   * @defaultValue `true`
+   * @defaultValue true
    */
   portal?: boolean
   class?: any

@@ -10,7 +10,12 @@ const appConfig = _appConfig as AppConfig & { ui: { drawer: Partial<typeof theme
 
 const drawer = tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })
 
-export interface DrawerProps extends Omit<DrawerRootProps, 'asChild'> {
+export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'defaultOpen' | 'direction' | 'dismissible' | 'fadeFromIndex' | 'fixed' | 'modal' | 'nested' | 'open' | 'scrollLockTimeout' | 'shouldScaleBackground' | 'snapPoints'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   title?: string
   description?: string
   /** The content of the drawer. */
@@ -18,7 +23,7 @@ export interface DrawerProps extends Omit<DrawerRootProps, 'asChild'> {
   overlay?: boolean
   /**
    * Render the drawer in a portal.
-   * @defaultValue `true`
+   * @defaultValue true
    */
   portal?: boolean
   class?: any
