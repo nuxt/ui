@@ -34,6 +34,7 @@ It also renders an `<a>` tag when a `to` prop is provided, otherwise it defaults
 It is used underneath by the [Button](/components/button), [Dropdown](/components/dropdown) and [VerticalNavigation](/components/vertical-navigation) components.
 
 ## IntelliSense
+
 If you're using VSCode and wish to get autocompletion for the classes `active-class` and `inactive-class`, you can add the following settings to your `.vscode/settings.json`:
 
 ```json [.vscode/settings.json]
@@ -45,6 +46,12 @@ If you're using VSCode and wish to get autocompletion for the classes `active-cl
 }
 ```
 
-## Props
+## API
+
+### Props
 
 :component-props
+
+### Slots
+
+:component-slots

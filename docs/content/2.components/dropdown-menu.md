@@ -1,4 +1,5 @@
 ---
+title: DropdownMenu
 description: Display a list of actions in a dropdown menu.
 links:
   - label: Radix Vue

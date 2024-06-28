@@ -19,14 +19,6 @@ links:
 
 :component-props
 
-### Slots
-
-:component-slots
-
-### Events
-
-:component-events
-
 ## Theme
 
 :component-theme

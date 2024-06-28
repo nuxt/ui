@@ -9,22 +9,18 @@ const camelName = camelCase(route.params.slug[route.params.slug.length - 1])
 const name = `U${upperFirst(camelName)}`
 
 const componentTheme = theme[camelName]
-const componentMeta = await useComponentMeta(name as any)
+const meta = await fetchComponentMeta(name as any)
 
-const meta: ComputedRef<ComponentMeta> = computed(() => {
-  const meta = componentMeta.value.meta
-
-  if (meta.props?.length) {
-    meta.props = meta.props.map((prop) => {
-      prop.default = prop.default ?? componentTheme.defaultVariants?.[prop.name]
-      return prop
-    })
+const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
+  if (!meta?.meta?.props?.length) {
+    return []
   }
 
-  return meta
+  return meta.meta.props.map((prop) => {
+    prop.default = prop.default ?? componentTheme?.defaultVariants?.[prop.name]
+    return prop
+  })
 })
-
-console.log('meta.value', meta.value)
 </script>
 
 <template>
@@ -43,9 +39,9 @@ console.log('meta.value', meta.value)
       </ProseTr>
     </ProseThead>
     <ProseTbody>
-      <ProseTr v-for="prop in meta.props" :key="prop.name">
+      <ProseTr v-for="prop in metaProps" :key="prop.name">
         <ProseTd>
-          <ProseCodeInline class="text-primary-500 dark:text-primary-400">
+          <ProseCodeInline>
             {{ prop.name }}
           </ProseCodeInline>
         </ProseTd>

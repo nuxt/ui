@@ -82,7 +82,6 @@ export default defineNuxtConfig({
     '/components': { redirect: '/components/app', prerender: false }
   },
   componentMeta: {
-    debug: 2,
     exclude: [
       '@nuxt/content',
       '@nuxt/icon',

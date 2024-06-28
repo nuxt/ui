@@ -20,10 +20,6 @@ links:
 
 :component-slots
 
-### Events
-
-:component-events
-
 ## Theme
 
 :component-theme

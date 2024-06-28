@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { upperFirst, camelCase } from 'scule'
-import type { ComponentMeta } from 'vue-component-meta'
 
 const route = useRoute()
 
 const camelName = camelCase(route.params.slug[route.params.slug.length - 1])
 const name = `U${upperFirst(camelName)}`
 
-const componentMeta = await useComponentMeta(name as any)
-
-const meta: ComputedRef<ComponentMeta> = computed(() => componentMeta.value.meta)
+const meta = await fetchComponentMeta(name as any)
 </script>
 
 <template>
@@ -25,9 +22,9 @@ const meta: ComputedRef<ComponentMeta> = computed(() => componentMeta.value.meta
       </ProseTr>
     </ProseThead>
     <ProseTbody>
-      <ProseTr v-for="slot in meta.slots" :key="slot.name">
+      <ProseTr v-for="slot in meta.meta.slots" :key="slot.name">
         <ProseTd>
-          <ProseCodeInline class="text-primary-500 dark:text-primary-400">
+          <ProseCodeInline>
             {{ slot.name }}
           </ProseCodeInline>
         </ProseTd>
