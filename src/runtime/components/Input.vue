@@ -35,9 +35,9 @@ export interface InputEmits {
 }
 
 export interface InputSlots {
-  leading(): any
-  default(): any
-  trailing(): any
+  leading(props?: any): any
+  default(props?: any): any
+  trailing(props?: any): any
 }
 </script>
 

@@ -20,7 +20,7 @@ export interface KbdProps extends Omit<PrimitiveProps, 'asChild'> {
 }
 
 export interface KbdSlots {
-  default(): any
+  default(props?: any): any
 }
 </script>
 

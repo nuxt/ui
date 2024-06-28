@@ -26,9 +26,9 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'cu
 }
 
 export interface ButtonSlots {
-  leading(): any
-  default(): any
-  trailing(): any
+  leading(props?: any): any
+  default(props?: any): any
+  trailing(props?: any): any
 }
 </script>
 

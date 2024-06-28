@@ -17,7 +17,7 @@ interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps
 interface DropdownMenuContentEmits extends RadixDropdownMenuContentEmits {}
 
 type DropdownMenuContentSlots<T extends { slot?: string }> = Omit<DropdownMenuSlots<T>, 'default'> & {
-  default(): any
+  default(props?: any): any
 }
 </script>
 

@@ -15,9 +15,9 @@ export interface CardProps extends Omit<PrimitiveProps, 'asChild'> {
 }
 
 export interface CardSlots {
-  header(): any
-  default(): any
-  footer(): any
+  header(props?: any): any
+  default(props?: any): any
+  footer(props?: any): any
 }
 </script>
 

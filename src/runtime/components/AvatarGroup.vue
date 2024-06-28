@@ -22,7 +22,7 @@ export interface AvatarGroupProps extends Omit<PrimitiveProps, 'asChild'> {
 }
 
 export interface AvatarGroupSlots {
-  default(): any
+  default(props?: any): any
 }
 </script>
 

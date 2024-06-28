@@ -28,14 +28,14 @@ export interface DrawerProps extends Omit<DrawerRootProps, 'asChild'> {
 export interface DrawerEmits extends DrawerRootEmits {}
 
 export interface DrawerSlots {
-  default(): any
-  handle(): any
-  content(): any
-  header(): any
-  title(): any
-  description(): any
-  body(): any
-  footer(): any
+  default(props?: any): any
+  handle(props?: any): any
+  content(props?: any): any
+  header(props?: any): any
+  title(props?: any): any
+  description(props?: any): any
+  body(props?: any): any
+  footer(props?: any): any
 }
 </script>
 

@@ -75,11 +75,11 @@ export interface PaginationProps extends Omit<PaginationRootProps, 'asChild'> {
 export interface PaginationEmits extends PaginationRootEmits {}
 
 export interface PaginationSlots {
-  first(): any
-  prev(): any
-  next(): any
-  last(): any
-  ellipsis(): any
+  first(props?: any): any
+  prev(props?: any): any
+  next(props?: any): any
+  last(props?: any): any
+  ellipsis(props?: any): any
   item(props: {
     page: number
     pageCount: number

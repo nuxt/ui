@@ -26,8 +26,8 @@ export interface ChipProps extends Omit<PrimitiveProps, 'asChild'> {
 }
 
 export interface ChipSlots {
-  default(): any
-  content(): any
+  default(props?: any): any
+  content(props?: any): any
 }
 </script>
 

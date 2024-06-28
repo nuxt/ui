@@ -32,7 +32,7 @@ export interface SeparatorProps extends Omit<_SeparatorProps, 'asChild' | 'orien
 }
 
 export interface SeparatorSlots {
-  default(): any
+  default(props?: any): any
 }
 </script>
 

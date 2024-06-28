@@ -20,7 +20,7 @@ export interface BadgeProps extends Omit<PrimitiveProps, 'asChild'> {
 }
 
 export interface BadgeSlots {
-  default(): any
+  default(props?: any): any
 }
 </script>
 

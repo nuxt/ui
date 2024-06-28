@@ -42,10 +42,10 @@ export interface ToastProps extends Omit<ToastRootProps, 'asChild' | 'forceMount
 export interface ToastEmits extends ToastRootEmits {}
 
 export interface ToastSlots {
-  leading(): any
-  title(): any
-  description(): any
-  actions(): any
+  leading(props?: any): any
+  title(props?: any): any
+  description(props?: any): any
+  actions(props?: any): any
   close(props: { class: string }): any
 }
 </script>

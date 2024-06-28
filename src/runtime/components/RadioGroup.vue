@@ -36,7 +36,7 @@ export interface RadioGroupEmits extends RadioGroupRootEmits {}
 type SlotProps<T> = (props: { item: T, modelValue?: string }) => any
 
 export interface RadioGroupSlots<T> {
-  legend(): any
+  legend(props?: any): any
   label: SlotProps<T>
   description: SlotProps<T>
 }

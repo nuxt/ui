@@ -14,7 +14,7 @@ export interface ContainerProps extends Omit<PrimitiveProps, 'asChild'> {
 }
 
 export interface ContainerSlots {
-  default(): any
+  default(props?: any): any
 }
 </script>
 

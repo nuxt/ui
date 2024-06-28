@@ -23,7 +23,7 @@ export interface ButtonGroupProps extends Omit<PrimitiveProps, 'asChild'> {
 }
 
 export interface ButtonGroupSlots {
-  default(): any
+  default(props?: any): any
 }
 </script>
 
