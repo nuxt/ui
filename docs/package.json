@@ -16,7 +16,7 @@
     "@vueuse/nuxt": "^10.11.0",
     "joi": "^17.13.3",
     "nuxt": "^3.12.2",
-    "nuxt-component-meta": "^0.6.6",
+    "nuxt-component-meta": "^0.7.0",
     "nuxt-og-image": "^3.0.0-rc.53",
     "prettier": "^3.3.2",
     "ufo": "^1.5.3",
