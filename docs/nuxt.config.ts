@@ -129,6 +129,9 @@ export default defineNuxtConfig({
   typescript: {
     strict: false
   },
+  site: {
+    url: 'https://ui.nuxt.com'
+  },
   vite: {
     optimizeDeps: {
       include: ['date-fns']
