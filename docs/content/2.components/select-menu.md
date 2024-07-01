@@ -188,6 +188,30 @@ componentProps:
 ---
 ::
 
+## Clearable
+
+Use the `clearable` prop to open clear button, click the button clear the selected value.
+
+::component-example
+---
+component: 'select-menu-example-clearable'
+componentProps:
+  class: 'w-full lg:w-48'
+---
+::
+
+### ClearableIcon
+
+Use the `clearable-icon` prop to change the default clear icon. Defaults to `i-heroicons-x-mark-20-solid`.
+
+::component-example
+---
+component: 'select-menu-example-clearable-icon'
+componentProps:
+  class: 'w-full lg:w-48'
+---
+::
+
 ## Popper
 
 Use the `popper` prop to customize the popper instance.

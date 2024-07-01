@@ -42,7 +42,7 @@
 
           <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
             <slot name="trailing" :disabled="disabled" :loading="loading">
-              <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+              <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" @click="onTrailingClick" />
             </slot>
           </span>
         </button>
@@ -219,6 +219,14 @@ export default defineComponent({
     trailing: {
       type: Boolean,
       default: false
+    },
+    clearable: {
+      type: Boolean,
+      default: false
+    },
+    clearableIcon: {
+      type: String,
+      default: 'i-heroicons-x-mark-20-solid'
     },
     leading: {
       type: Boolean,
@@ -413,6 +421,9 @@ export default defineComponent({
       if (props.loading && !isLeading.value) {
         return props.loadingIcon
       }
+      if (props.clearable && (Array.isArray(props.modelValue) ? props.modelValue.length : props.modelValue)) {
+        return props.clearableIcon
+      }
 
       return props.trailingIcon || props.icon
     })
@@ -443,11 +454,16 @@ export default defineComponent({
     })
 
     const trailingIconClass = computed(() => {
+      let clearableClass = ''
+      if (props.clearable && (Array.isArray(props.modelValue) ? props.modelValue.length : props.modelValue)) {
+        clearableClass = 'hover:bg-gray-500 dark:hover:bg-gray-400 cursor-pointer pointer-events-auto'
+      }
       return twJoin(
         ui.value.icon.base,
         color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
         ui.value.icon.size[size.value],
-        props.loading && !isLeading.value && ui.value.icon.loading
+        props.loading && !isLeading.value && ui.value.icon.loading,
+        clearableClass
       )
     })
 
@@ -524,6 +540,13 @@ export default defineComponent({
       query.value = event.target.value
     }
 
+    function onTrailingClick (event: any) {
+      if (props.clearable && (Array.isArray(props.modelValue) ? props.modelValue.length : props.modelValue)) {
+        event.stopPropagation()
+        emit('update:modelValue', Array.isArray(props.modelValue) ? [] : '')
+      }
+    }
+
     provideUseId(() => useId())
 
     return {
@@ -555,7 +578,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       query,
       onUpdate,
-      onQueryChange
+      onQueryChange,
+      onTrailingClick
     }
   }
 })
