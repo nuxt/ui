@@ -66,7 +66,7 @@ excludedProps:
 ---
 ::
 
-### Size :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### Size
 
 Use the `size` prop to change the size of the divider.
 

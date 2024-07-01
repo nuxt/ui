@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavItem, ParsedContent } from '@nuxt/content/dist/runtime/types'
+import type { NavItem, ParsedContent } from '@nuxt/content'
 import type { Button } from '#ui/types'
 
 const commandPaletteRef = ref()

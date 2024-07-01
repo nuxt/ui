@@ -2,7 +2,7 @@
   <div :class="alertClass" v-bind="attrs">
     <div class="flex" :class="[ui.gap, { 'items-start': (description || $slots.description), 'items-center': !description && !$slots.description }]">
       <slot name="icon" :icon="icon">
-        <UIcon v-if="icon" :name="icon" :ui="ui.icon.base" />
+        <UIcon v-if="icon" :name="icon" :class="ui.icon.base" />
       </slot>
       <slot name="avatar" :avatar="avatar">
         <UAvatar v-if="avatar" v-bind="{ size: ui.avatar.size, ...avatar }" :class="ui.avatar.base" />
@@ -14,11 +14,11 @@
             {{ title }}
           </slot>
         </p>
-        <p v-if="description || $slots.description" :class="twMerge(ui.description, !(title && $slots.title) && 'mt-0 leading-5')">
+        <div v-if="description || $slots.description" :class="twMerge(ui.description, !(title && $slots.title) && 'mt-0 leading-5')">
           <slot name="description" :description="description">
             {{ description }}
           </slot>
-        </p>
+        </div>
 
         <div v-if="(description || $slots.description) && (actions.length || $slots.actions)" :class="ui.actions">
           <slot name="actions">
@@ -43,9 +43,7 @@
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
-import UIcon from '../elements/Icon.vue'
-import UAvatar from '../elements/Avatar.vue'
-import UButton from '../elements/Button.vue'
+import { UIcon, UAvatar, UButton } from '#components'
 import { useUI } from '../../composables/useUI'
 import type { Avatar, Button, AlertColor, AlertVariant, AlertAction, Strategy } from '../../types'
 import { mergeConfig } from '../../utils'

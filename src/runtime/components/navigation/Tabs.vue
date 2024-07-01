@@ -42,7 +42,7 @@
       </HTab>
     </HTabList>
 
-    <HTabPanels :class="ui.container">
+    <HTabPanels v-if="content" :class="ui.container">
       <HTabPanel v-for="(item, index) of items" :key="index" v-slot="{ selected }" :class="ui.base" :unmount="unmount">
         <slot :name="item.slot || 'item'" :item="item" :index="index" :selected="selected">
           {{ item.content }}
@@ -97,6 +97,10 @@ export default defineComponent({
     unmount: {
       type: Boolean,
       default: false
+    },
+    content: {
+      type: Boolean,
+      default: true
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
