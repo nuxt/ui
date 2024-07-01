@@ -57,6 +57,9 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
     nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, 'isolate'].filter(Boolean).join(' ')
 
+    // Add keyframes for animations
+    nuxt.options.css.push(resolve('./runtime/assets/css/animations.css'))
+
     addVitePlugin(tailwindcss)
 
     await installModule('@nuxt/icon', {
