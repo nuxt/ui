@@ -59,29 +59,29 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.3.13",
-    "@nuxt/module-builder": "^0.5.5",
+    "@nuxt/module-builder": "^0.8.1",
     "@nuxt/test-utils": "^3.13.1",
     "@release-it/conventional-changelog": "^8.0.1",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^8.57.0",
-    "happy-dom": "^14.10.1",
-    "joi": "^17.13.1",
+    "happy-dom": "^14.12.3",
+    "joi": "^17.13.3",
     "nuxt": "^3.12.2",
-    "release-it": "^17.3.0",
-    "typescript": "^5.4.5",
+    "release-it": "^17.4.1",
+    "typescript": "^5.5.3",
     "unbuild": "^2.0.0",
-    "valibot": "^0.33.0",
-    "valibot31": "npm:valibot@0.31.0",
-    "valibot30": "npm:valibot@0.30.0",
+    "valibot": "^0.35.0",
+    "valibot31": "npm:valibot@0.35.0",
+    "valibot30": "npm:valibot@0.35.0",
     "vitest": "^1.6.0",
     "vitest-environment-nuxt": "^1.0.0",
-    "vue-tsc": "^2.0.16",
+    "vue-tsc": "^2.0.24",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
-    "@nuxt/module-builder": "0.5.5",
-    "vue-tsc": "2.0.16"
+    "@nuxt/module-builder": "^0.8.1",
+    "vue-tsc": "^2.0.24"
   }
 }
