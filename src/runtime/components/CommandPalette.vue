@@ -36,7 +36,12 @@ export interface CommandPaletteGroup<T> {
   highlightedIcon?: string
 }
 
-export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'as' | 'multiple' | 'disabled' | 'modelValue' | 'defaultValue'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
@@ -54,7 +59,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'as' 
   placeholder?: InputProps['placeholder']
   /**
    * Display a close button in the input (useful when inside a `UModal`).
-   * Will render with `{ size: 'md', color: 'gray', variant: 'ghost' }`.
+   * `{ size: 'md', color: 'gray', variant: 'ghost' }`
    * @defaultValue false
    */
   close?: ButtonProps | boolean
