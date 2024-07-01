@@ -5,7 +5,18 @@ const props = defineProps<{
   type: string
 }>()
 
-const { data: ast } = await useAsyncData<any>(`hightlight-inline-code-` + props.type, () => parseMarkdown(`\`${props.type}\`{lang="ts-type"}`))
+const type = computed(() => {
+  if (props.type.includes(', "as" | "asChild" | "forceMount">')) {
+    return props.type.replace(`, "as" | "asChild" | "forceMount">`, ``).replace('Omit<', '')
+  }
+  if (props.type.includes(', "as" | "asChild">')) {
+    return props.type.replace(', "as" | "asChild">', '').replace('Omit<', '')
+  }
+
+  return props.type
+})
+
+const { data: ast } = await useAsyncData<any>(`hightlight-inline-code-` + props.type, () => parseMarkdown(`\`${type.value}\`{lang="ts-type"}`))
 </script>
 
 <template>
