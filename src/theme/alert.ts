@@ -51,13 +51,13 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     variant: 'soft',
     class: {
-      root: `bg-${color}-50 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400`
+      root: `bg-${color}-500/10 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400`
     }
   })), ...options.colors.map((color: string) => ({
     color,
     variant: 'subtle',
     class: {
-      root: `bg-${color}-50 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/25 dark:ring-${color}-400/25`
+      root: `bg-${color}-500/10 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/25 dark:ring-${color}-400/25`
     }
   })), {
     color: 'white',
