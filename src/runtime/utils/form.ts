@@ -1,7 +1,7 @@
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
-import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
+import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync, SafeParser as ValibotSafeParser, SafeParserAsync as ValibotSafeParserAsync } from 'valibot'
 import type { FormError } from '../types/form'
 
 export function isYupSchema(schema: any): schema is YupObjectSchema<any> {
@@ -67,17 +67,18 @@ export async function getJoiErrors(state: any, schema: JoiSchema): Promise<FormE
   }
 }
 
-export function isValibotSchema(schema: any): schema is ValibotObjectSchema<any> {
-  return schema._parse !== undefined
+export function isValibotSchema(schema: any): schema is ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any> {
+  return '_run' in schema || (typeof schema === 'function' && 'schema' in schema)
 }
 
-export async function getValibotError(state: any, schema: ValibotObjectSchema<any>): Promise<FormError[]> {
-  const result = await schema._parse(state)
-  if (result.issues) {
-    return result.issues.map(issue => ({
-      name: issue.path?.map(p => p.key).join('.') || '',
-      message: issue.message
-    }))
-  }
-  return []
+export async function getValibotError(
+  state: any,
+  schema: ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>
+): Promise<FormError[]> {
+  const result = await ('_run' in schema ? schema._run({ typed: false, value: state }, {}) : schema(state))
+  return result.issues?.map(issue => ({
+    // We know that the key for a form schema is always a string or a number
+    name: issue.path?.map((item: any) => item.key).join('.') || '',
+    message: issue.message
+  })) || []
 }

@@ -106,12 +106,17 @@ describe('Form', () => {
     }
     ],
     ['valibot', {
-      schema: valibot.objectAsync({
+      schema: valibot.object({
         email: valibot.string(),
-        password: valibot.string([
-          valibot.minLength(8, 'Must be at least 8 characters')
-        ])
+        password: valibot.pipe(valibot.string(), valibot.minLength(8, 'Must be at least 8 characters'))
       })
+    }
+    ],
+    ['valibot safeParser', {
+      schema: valibot.safeParser(valibot.object({
+        email: valibot.string(),
+        password: valibot.pipe(valibot.string(), valibot.minLength(8, 'Must be at least 8 characters'))
+      }))
     }
     ],
     ['custom', {

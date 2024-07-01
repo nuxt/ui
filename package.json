@@ -72,7 +72,7 @@
     "joi": "^17.13.3",
     "nuxt": "^3.12.2",
     "release-it": "^17.4.0",
-    "valibot": "^0.30.0",
+    "valibot": "^0.33.0",
     "vitest": "^1.6.0",
     "vitest-environment-nuxt": "^1.0.0",
     "vue-tsc": "^2.0.22",

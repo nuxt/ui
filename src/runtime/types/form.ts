@@ -2,7 +2,7 @@ import type { ComputedRef, Ref } from 'vue'
 import type { ZodSchema } from 'zod'
 import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
-import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
+import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync, SafeParser as ValibotSafeParser, SafeParserAsync as ValibotSafeParserAsync } from 'valibot'
 import type { GetObjectField } from './utils'
 
 export interface Form<T> {
@@ -18,7 +18,8 @@ export interface Form<T> {
 export type FormSchema<T extends Record<string, any>> =
   | ZodSchema
   | YupObjectSchema<T>
-  | ValibotObjectSchema<T>
+  | ValibotSchema | ValibotSchemaAsync
+  | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>
   | JoiSchema<T>
 
 export type FormInputEvents = 'input' | 'blur' | 'change'

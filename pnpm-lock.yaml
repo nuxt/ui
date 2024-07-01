@@ -90,8 +90,8 @@ importers:
         specifier: ^17.4.0
         version: 17.4.0(typescript@5.5.2)
       valibot:
-        specifier: ^0.30.0
-        version: 0.30.0
+        specifier: ^0.33.0
+        version: 0.33.3
       vitest:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.14.9)(happy-dom@14.12.3)(lightningcss@1.25.1)(sass@1.77.6)(terser@5.31.1)
@@ -7009,6 +7009,9 @@ packages:
 
   valibot@0.30.0:
     resolution: {integrity: sha512-5POBdbSkM+3nvJ6ZlyQHsggisfRtyT4tVTo1EIIShs6qCdXJnyWU5TJ68vr8iTg5zpOLjXLRiBqNx+9zwZz/rA==}
+
+  valibot@0.33.3:
+    resolution: {integrity: sha512-/fuY1DlX8uiQ7aphlzrrI2DbG0YJk84JMgvz2qKpUIdXRNsS53varfo4voPjSrjUr5BSV2K0miSEJUOlA5fQFg==}
 
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
@@ -16315,6 +16318,8 @@ snapshots:
       '@vue/compiler-core': 3.4.31
 
   valibot@0.30.0: {}
+
+  valibot@0.33.3: {}
 
   validate-npm-package-license@3.0.4:
     dependencies:

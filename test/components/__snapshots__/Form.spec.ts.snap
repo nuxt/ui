@@ -128,6 +128,68 @@ exports[`Form > renders with default slot correctly 1`] = `"<form id="1" class="
 
 exports[`Form > renders with state correctly 1`] = `"<form id="0" class=""></form>"`;
 
+exports[`Form > valibot safeParser validation works > with error 1`] = `
+"<form id="42" class="">
+  <div class="text-sm">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm gap-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" value="bob@dylan.com">
+        <!--v-if-->
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="text-sm">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm gap-1.5 shadow-sm bg-transparent text-gray-900 dark:text-white ring ring-inset ring-red-500 dark:ring-red-400 focus-visible:ring-2 focus-visible:ring-red-500 dark:focus-visible:ring-red-400" value="short">
+        <!--v-if-->
+        <!--v-if-->
+      </div>
+      <p class="mt-2 text-red-500 dark:text-red-400">Must be at least 8 characters</p>
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`Form > valibot safeParser validation works > without error 1`] = `
+"<form id="42" class="">
+  <div class="text-sm">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm gap-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" value="bob@dylan.com">
+        <!--v-if-->
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="text-sm">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm gap-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" value="validpassword">
+        <!--v-if-->
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+</form>"
+`;
+
 exports[`Form > valibot validation works > with error 1`] = `
 "<form id="42" class="">
   <div class="text-sm">
