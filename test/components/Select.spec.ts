@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { flushPromises, mount } from '@vue/test-utils'
 import Select, { type SelectProps, type SelectSlots } from '../../src/runtime/components/Select.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
+import { renderForm } from '../utils/form'
+import type { FormInputEvents } from '~/src/module'
 
 describe('Select', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -65,5 +68,94 @@ describe('Select', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps<typeof items[number]>, slots?: Partial<SelectSlots<typeof items[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, Select)
     expect(html).toMatchSnapshot()
+  })
+
+  describe('emits', () => {
+    test('update:modelValue event', async () => {
+      const wrapper = mount(Select, { props: { items: ['Option 1', 'Option 2'] } })
+      const input = wrapper.findComponent({ name: 'SelectRoot' })
+      await input.setValue('Option 1')
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] })
+    })
+
+    test('change event', async () => {
+      const wrapper = mount(Select, { props: { items: ['Option 1', 'Option 2'] } })
+      const input = wrapper.findComponent({ name: 'SelectRoot' })
+      await input.setValue('Option 1')
+      expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+    })
+
+    test('blur event', async () => {
+      const wrapper = mount(Select, { props: { items: ['Option 1', 'Option 2'] } })
+      const input = wrapper.findComponent({ name: 'SelectRoot' })
+      await input.vm.$emit('update:open', false)
+      expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+    })
+  })
+
+  describe('form integration', async () => {
+    async function createForm(validateOn?: FormInputEvents[]) {
+      const wrapper = await renderForm({
+        props: {
+          validateOn,
+          validateOnInputDelay: 0,
+          async validate(state: any) {
+            if (state.value !== 'Option 2')
+              return [{ name: 'value', message: 'Error message' }]
+            return []
+          }
+        },
+        slotVars: {
+          items: ['Option 1', 'Option 2']
+        },
+        slotTemplate: `
+        <UFormField name="value">
+          <USelect id="input" v-model="state.value" :items="items" />
+        </UFormField>
+        `
+      })
+      const input = wrapper.findComponent({ name: 'SelectRoot' })
+      return {
+        wrapper,
+        input
+      }
+    }
+
+    test('validate on blur works', async () => {
+      const { input, wrapper } = await createForm(['blur'])
+      await input.vm.$emit('update:open', false)
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      await input.setValue('Option 2')
+      await input.vm.$emit('update:open', false)
+      await flushPromises()
+
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on change works', async () => {
+      const { input, wrapper } = await createForm(['change'])
+
+      input.setValue('Option 1')
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      input.setValue('Option 2')
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on input works', async () => {
+      const { input, wrapper } = await createForm(['input'])
+
+      input.setValue('Option 1')
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      input.setValue('Option 2')
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
   })
 })

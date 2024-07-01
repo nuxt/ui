@@ -57,7 +57,7 @@ const emits = defineEmits<TextareaEmits>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, size, color, id, name, disabled } = useFormField<TextareaProps>(props)
+const { emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, disabled } = useFormField<TextareaProps>(props)
 
 const ui = computed(() => tv({ extend: textarea, slots: props.ui })({
   color: color.value,
@@ -107,6 +107,7 @@ function onChange(event: Event) {
     (event.target as HTMLInputElement).value = value.trim()
   }
 
+  emitFormChange()
   emits('change', event)
 }
 

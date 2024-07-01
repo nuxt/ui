@@ -55,9 +55,7 @@ export function useFormField<T>(props?: Props<T>) {
 
   const emitFormInput = useDebounceFn(
     () => {
-      if (blurred.value || formField?.value.eagerValidation) {
-        emitFormEvent('input', formField?.value.name)
-      }
+      emitFormEvent('input', formField?.value.name)
     },
     formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
   )

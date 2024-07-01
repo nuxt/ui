@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import SelectMenu, { type SelectMenuProps, type SelectMenuSlots } from '../../src/runtime/components/SelectMenu.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
+import { renderForm } from '../utils/form'
+import { flushPromises, mount } from '@vue/test-utils'
+import type { FormInputEvents } from '~/src/module'
 
 describe('SelectMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -69,5 +72,84 @@ describe('SelectMenu', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectMenuProps<typeof items[number]>, slots?: Partial<SelectMenuSlots<typeof items[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, SelectMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  describe('emits', () => {
+    test('update:modelValue event', async () => {
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'] } })
+      const input = wrapper.findComponent({ name: 'ComboboxRoot' })
+      await input.setValue('Option 1')
+
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] })
+    })
+
+    test('change event', async () => {
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'] } })
+      const input = wrapper.findComponent({ name: 'ComboboxRoot' })
+      await input.setValue('Option 1')
+      expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+    })
+
+    test('blur event', async () => {
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'] } })
+      const input = wrapper.findComponent({ name: 'ComboboxRoot' })
+      input.vm.$emit('update:open', false)
+      expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+    })
+  })
+
+  describe('form integration', async () => {
+    async function createForm(validateOn?: FormInputEvents[]) {
+      const wrapper = await renderForm({
+        props: {
+          validateOn,
+          validateOnInputDelay: 0,
+          async validate(state: any) {
+            if (state.value !== 'Option 2')
+              return [{ name: 'value', message: 'Error message' }]
+            return []
+          }
+        },
+        slotVars: {
+          items: ['Option 1', 'Option 2']
+        },
+        slotTemplate: `
+        <UFormField name="value">
+          <USelectMenu id="input" v-model="state.value" :items="items" />
+        </UFormField>
+        `
+      })
+      const input = wrapper.findComponent({ name: 'ComboboxRoot' })
+      return {
+        wrapper,
+        input
+      }
+    }
+
+    test('validate on blur works', async () => {
+      const { input, wrapper } = await createForm(['blur'])
+      input.vm.$emit('update:open', false)
+      await flushPromises()
+
+      expect(wrapper.text()).toContain('Error message')
+
+      await input.setValue('Option 2')
+      input.vm.$emit('update:open', false)
+      await flushPromises()
+
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on change works', async () => {
+      const { input, wrapper } = await createForm(['change'])
+
+      input.setValue('Option 1')
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      input.setValue('Option 2')
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
   })
 })

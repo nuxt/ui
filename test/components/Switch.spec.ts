@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import Switch, { type SwitchProps, type SwitchSlots } from '../../src/runtime/components/Switch.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/switch'
+import { flushPromises, mount } from '@vue/test-utils'
+import { renderForm } from '../utils/form'
+import type { FormInputEvents } from '~/src/module'
 
 describe('Switch', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -32,5 +35,70 @@ describe('Switch', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SwitchProps, slots?: Partial<SwitchSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Switch)
     expect(html).toMatchSnapshot()
+  })
+
+  describe('emits', () => {
+    test('update:modelValue event', async () => {
+      const wrapper = mount(Switch)
+      const input = wrapper.findComponent({ name: 'SwitchRoot' })
+      await input.vm.$emit('update:checked', true)
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[true]] })
+    })
+
+    test('change event', async () => {
+      const wrapper = mount(Switch)
+      const input = wrapper.findComponent({ name: 'SwitchRoot' })
+      await input.vm.$emit('update:checked', true)
+      expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+    })
+  })
+
+  describe('form integration', async () => {
+    async function createForm(validateOn?: FormInputEvents[]) {
+      const wrapper = await renderForm({
+        props: {
+          validateOn,
+          validateOnInputDelay: 0,
+          async validate(state: any) {
+            if (!state.value)
+              return [{ name: 'value', message: 'Error message' }]
+            return []
+          }
+        },
+        slotTemplate: `
+        <UFormField name="value">
+          <USwitch v-model="state.value" />
+        </UFormField>
+        `
+      })
+      const input = wrapper.findComponent({ name: 'SwitchRoot' })
+      return {
+        wrapper,
+        input
+      }
+    }
+
+    test('validate on change works', async () => {
+      const { input, wrapper } = await createForm(['change'])
+      await input.setValue(false)
+      await input.vm.$emit('update:checked', false)
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      await input.vm.$emit('update:checked', true)
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on input works', async () => {
+      const { input, wrapper } = await createForm(['input'])
+      await input.vm.$emit('update:checked', false)
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      await input.vm.$emit('update:checked', true)
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
   })
 })

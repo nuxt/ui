@@ -36,7 +36,9 @@ export interface RadioGroupProps<T> extends Pick<RadioGroupRootProps, 'defaultVa
   ui?: Partial<typeof radioGroup.slots>
 }
 
-export interface RadioGroupEmits extends RadioGroupRootEmits {}
+export type RadioGroupEmits = RadioGroupRootEmits & {
+  change: [payload: Event]
+}
 
 type SlotProps<T> = (props: { item: T, modelValue?: string }) => any
 
@@ -48,7 +50,7 @@ export interface RadioGroupSlots<T> {
 </script>
 
 <script setup lang="ts" generic="T extends RadioGroupItem | AcceptableValue">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useId, useFormField } from '#imports'
@@ -61,7 +63,7 @@ const slots = defineSlots<RadioGroupSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 
-const { emitFormChange, color, name, size, id: _id, disabled } = useFormField<RadioGroupProps<T>>(props)
+const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled } = useFormField<RadioGroupProps<T>>(props)
 const id = _id.value ?? useId()
 
 const ui = computed(() => tv({ extend: radioGroup, slots: props.ui })({
@@ -91,6 +93,13 @@ const normalizedItems = computed(() => {
   if (!props.items) return []
   return props.items.map(normalizeItem)
 })
+
+function onUpdate(value: any) {
+  const event = new Event('change', { target: { value } })
+  emits('change', event)
+  emitFormChange()
+  emitFormInput()
+}
 </script>
 
 <template>
@@ -101,7 +110,7 @@ const normalizedItems = computed(() => {
     :name="name"
     :disabled="disabled"
     :class="ui.root({ class: props.class })"
-    @update:model-value="emitFormChange()"
+    @update:model-value="onUpdate"
   >
     <fieldset :class="ui.fieldset()">
       <legend v-if="legend || !!slots.legend" :class="ui.legend()">

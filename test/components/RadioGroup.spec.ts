@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import RadioGroup, { type RadioGroupProps, type RadioGroupSlots } from '../../src/runtime/components/RadioGroup.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/radio-group'
+import { flushPromises, mount } from '@vue/test-utils'
+import { renderForm } from '../utils/form'
+import type { FormInputEvents } from '~/src/module'
 
 describe('RadioGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -33,5 +36,77 @@ describe('RadioGroup', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: RadioGroupProps<any>, slots?: Partial<RadioGroupSlots<any>> }) => {
     const html = await ComponentRender(nameOrHtml, options, RadioGroup)
     expect(html).toMatchSnapshot()
+  })
+
+  describe('emits', () => {
+    test('update:modelValue event', async () => {
+      const wrapper = mount(RadioGroup, { props: { items: ['Option 1', 'Option 2'] } })
+      const input = wrapper.findComponent({ name: 'RadioGroupRoot' })
+      await input.setValue('Option 1')
+
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] })
+    })
+
+    test('change event', async () => {
+      const wrapper = mount(RadioGroup, { props: { items: ['Option 1', 'Option 2'] } })
+
+      const input = wrapper.findComponent({ name: 'RadioGroupRoot' })
+      await input.setValue('Option 1')
+
+      expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+    })
+  })
+
+  describe('form integration', async () => {
+    async function createForm(validateOn?: FormInputEvents[]) {
+      const wrapper = await renderForm({
+        props: {
+          validateOn,
+          validateOnInputDelay: 0,
+          async validate(state: any) {
+            if (state.value !== 'Option 2')
+              return [{ name: 'value', message: 'Error message' }]
+            return []
+          }
+        },
+        slotVars: {
+          items: ['Option 1', 'Option 2']
+        },
+        slotTemplate: `
+        <UFormField name="value">
+          <URadioGroup id="input" v-model="state.value" :items="items" />
+        </UFormField>
+        `
+      })
+      const input = wrapper.findComponent({ name: 'RadioGroupRoot' })
+      return {
+        wrapper,
+        input
+      }
+    }
+
+    test('validate on change works', async () => {
+      const { input, wrapper } = await createForm(['change'])
+
+      input.setValue('Option 1')
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      input.setValue('Option 2')
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on input works', async () => {
+      const { input, wrapper } = await createForm(['input'])
+
+      input.setValue('Option 1')
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      input.setValue('Option 2')
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
   })
 })

@@ -59,7 +59,7 @@ const slots = defineSlots<InputSlots>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
@@ -116,6 +116,7 @@ function onChange(event: Event) {
     (event.target as HTMLInputElement).value = value.trim()
   }
 
+  emitFormChange()
   emits('change', event)
 }
 

@@ -85,7 +85,11 @@ export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValu
   ui?: Partial<typeof inputMenu.slots>
 }
 
-export type InputMenuEmits<T> = ComboboxRootEmits<T>
+export type InputMenuEmits<T> = ComboboxRootEmits<T> & {
+  change: [payload: Event]
+  blur: [payload: FocusEvent]
+  focus: [payload: FocusEvent]
+}
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
@@ -127,7 +131,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
-const { emitFormBlur, emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
@@ -187,6 +191,29 @@ onMounted(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+function onUpdate(value: any) {
+  const event = new Event('change', { target: { value } })
+  emits('change', event)
+  emitFormChange()
+  emitFormInput()
+}
+
+function onBlur(event: FocusEvent) {
+  emits('blur', event)
+  emitFormBlur()
+}
+
+function onUpdateOpen(value: boolean) {
+  if (!value) {
+    const event = new FocusEvent('blur')
+    emits('blur', event)
+    emitFormBlur()
+  } else {
+    const event = new FocusEvent('focus')
+    emits('focus', event)
+  }
+}
 </script>
 
 <template>
@@ -201,7 +228,8 @@ onMounted(() => {
     :filter-function="filterFunction"
     :class="ui.root({ class: props.class })"
     :as-child="!!multiple"
-    @update:model-value="emitFormChange()"
+    @update:model-value="onUpdate"
+    @update:open="onUpdateOpen"
     @keydown.enter="$event.preventDefault()"
   >
     <ComboboxAnchor :as-child="!multiple" :class="ui.base()">
@@ -212,7 +240,7 @@ onMounted(() => {
         :disabled="disabled"
         delimiter=""
         as-child
-        @blur="emitFormBlur()"
+        @blur="onBlur"
       >
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="(item as string)" :class="ui.tagsItem()">
           <TagsInputItemText :class="ui.tagsItemText()">
@@ -248,7 +276,7 @@ onMounted(() => {
         :placeholder="placeholder"
         :required="required"
         :class="ui.base()"
-        @blur="emitFormBlur()"
+        @blur="onBlur"
       />
 
       <span v-if="isLeading || !!slots.leading" :class="ui.leading()">

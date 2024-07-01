@@ -72,7 +72,11 @@ export interface SelectMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelVal
   ui?: Partial<typeof selectMenu.slots>
 }
 
-export type SelectMenuEmits<T> = ComboboxRootEmits<T>
+export type SelectMenuEmits<T> = ComboboxRootEmits<T> & {
+  change: [payload: Event]
+  blur: [payload: FocusEvent]
+  focus: [payload: FocusEvent]
+}
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
@@ -111,7 +115,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
-const { emitFormBlur, emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
@@ -160,6 +164,24 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
 }
 
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as SelectMenuItem[][] : [])
+
+function onUpdate(value: any) {
+  const event = new Event('change', { target: { value } })
+  emits('change', event)
+  emitFormChange()
+  emitFormInput()
+}
+
+function onUpdateOpen(value: boolean) {
+  if (!value) {
+    const event = new FocusEvent('blur')
+    emits('blur', event)
+    emitFormBlur()
+  } else {
+    const event = new FocusEvent('focus')
+    emits('focus', event)
+  }
+}
 </script>
 
 <template>
@@ -173,7 +195,8 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
     :disabled="disabled"
     :display-value="() => searchTerm"
     :filter-function="filterFunction"
-    @update:model-value="emitFormChange()"
+    @update:model-value="onUpdate"
+    @update:open="onUpdateOpen"
   >
     <ComboboxAnchor as-child>
       <ComboboxTrigger :class="ui.base({ class: props.class })" tabindex="0">
@@ -202,7 +225,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 
     <ComboboxPortal :disabled="!portal">
       <ComboboxContent :class="ui.content()" v-bind="contentProps">
-        <ComboboxInput :placeholder="searchPlaceholder" :class="ui.input()" autofocus autocomplete="off" @blur="emitFormBlur()" />
+        <ComboboxInput :placeholder="searchPlaceholder" :class="ui.input()" autofocus autocomplete="off" />
 
         <ComboboxEmpty :class="ui.empty()">
           <slot name="empty" :search-term="searchTerm">

@@ -72,14 +72,43 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
           </UButton>
         </div>
       </UForm>
-    </div>
-
-    <div class="flex gap-4">
       <FormNestedExample />
       <FormNestedListExample />
-      <FormElementsExample />
-      <FormElementsExample disabled />
     </div>
-    <div class="flex gap-4" />
+
+    <USeparator class="my-8" />
+
+    <div class="flex gap-4 flex-wrap">
+      <div>
+        <p class="text-lg font-bold underline mb-4">
+          Validate on input
+        </p>
+        <FormElementsExample :validate-on="['input']" />
+      </div>
+      <div>
+        <p class="text-lg font-bold underline mb-4">
+          Validate on change
+        </p>
+        <FormElementsExample :validate-on="['change']" />
+      </div>
+      <div>
+        <p class="text-lg font-bold underline mb-4">
+          Validate on blur
+        </p>
+        <FormElementsExample :validate-on="['blur']" />
+      </div>
+      <div>
+        <p class="text-lg font-bold underline mb-4">
+          Default
+        </p>
+        <FormElementsExample />
+      </div>
+      <div>
+        <p class="text-lg font-bold underline mb-4">
+          Disabled
+        </p>
+        <FormElementsExample disabled />
+      </div>
+    </div>
   </div>
 </template>
