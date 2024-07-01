@@ -28,8 +28,8 @@ exports[`Badge > renders with size sm correctly 1`] = `"<span class="rounded-md 
 
 exports[`Badge > renders with variant outline correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-2 py-1 text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500 dark:ring-primary-400">Badge</span>"`;
 
-exports[`Badge > renders with variant soft correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-2 py-1 bg-primary-50 dark:bg-primary-400/10 text-primary-500 dark:text-primary-400">Badge</span>"`;
+exports[`Badge > renders with variant soft correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-2 py-1 bg-primary-500/10 dark:bg-primary-400/10 text-primary-500 dark:text-primary-400">Badge</span>"`;
 
 exports[`Badge > renders with variant solid correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-2 py-1 bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">Badge</span>"`;
 
-exports[`Badge > renders with variant subtle correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-2 py-1 bg-primary-50 dark:bg-primary-400/10 text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">Badge</span>"`;
+exports[`Badge > renders with variant subtle correctly 1`] = `"<span class="rounded-md font-medium inline-flex items-center text-xs px-2 py-1 bg-primary-500/10 dark:bg-primary-400/10 text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">Badge</span>"`;
