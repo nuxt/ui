@@ -16,7 +16,7 @@
     "@octokit/rest": "^20.1.1",
     "@vueuse/nuxt": "^10.11.0",
     "date-fns": "^3.6.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.6.0",
     "joi": "^17.13.1",
     "nuxt": "^3.12.2",
     "nuxt-cloudflare-analytics": "^1.0.8",
