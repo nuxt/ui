@@ -5,7 +5,9 @@ export default defineAppConfig({
     duration: 5000
   },
   ui: {
-    primary: 'sky',
-    gray: 'cool'
+    colors: {
+      primary: 'red',
+      gray: 'cool'
+    }
   }
 })

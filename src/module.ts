@@ -48,8 +48,10 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
-      primary: 'green',
-      gray: 'cool',
+      colors: {
+        primary: 'green',
+        gray: 'cool'
+      },
       icons
     })
 

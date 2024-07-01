@@ -94,8 +94,10 @@ const colors = ${JSON.stringify(options.colors)} as const;
 const icons = ${JSON.stringify(nuxt.options.appConfig.ui.icons)};
 
 type AppConfigUI = {
-  primary?: typeof colors[number]
-  gray?: 'slate' | 'cool' | 'zinc' | 'neutral' | 'stone'
+  colors?: {
+    primary?: typeof colors[number]
+    gray?: 'slate' | 'cool' | 'zinc' | 'neutral' | 'stone'
+  }
   icons?: Partial<typeof icons>
 } & DeepPartial<typeof ui>
 
