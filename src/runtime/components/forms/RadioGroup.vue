@@ -48,7 +48,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: [String, Number, Object],
+      type: [String, Number, Object, Boolean],
       default: ''
     },
     name: {
