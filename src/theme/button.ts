@@ -78,11 +78,11 @@ export default (options: Required<ModuleOptions>) => ({
   })), ...options.colors.map((color: string) => ({
     color,
     variant: 'outline',
-    class: `ring ring-inset ring-current text-${color}-500 dark:text-${color}-400 hover:bg-${color}-50 disabled:bg-transparent dark:hover:bg-${color}-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
+    class: `ring ring-inset ring-current text-${color}-500 dark:text-${color}-400 hover:bg-${color}-500/20 disabled:bg-transparent dark:hover:bg-${color}-400/20 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
   })), ...options.colors.map((color: string) => ({
     color,
     variant: 'soft',
-    class: `text-${color}-500 dark:text-${color}-400 bg-${color}-50 hover:bg-${color}-100 disabled:bg-${color}-50 dark:bg-${color}-950 dark:hover:bg-${color}-900 dark:disabled:bg-${color}-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
+    class: `text-${color}-500 dark:text-${color}-400 bg-${color}-500/10 hover:bg-${color}-500/20 disabled:bg-${color}-500/10 dark:bg-${color}-400/10 dark:hover:bg-${color}-400/20 dark:disabled:bg-${color}-400/10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
   })), ...options.colors.map((color: string) => ({
     color,
     variant: 'subtle',
@@ -90,7 +90,7 @@ export default (options: Required<ModuleOptions>) => ({
   })), ...options.colors.map((color: string) => ({
     color,
     variant: 'ghost',
-    class: `text-${color}-500 dark:text-${color}-400 hover:bg-${color}-50 disabled:bg-transparent dark:hover:bg-${color}-950 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
+    class: `text-${color}-500 dark:text-${color}-400 hover:bg-${color}-500/20 disabled:bg-transparent dark:hover:bg-${color}-400/20 dark:disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
   })), ...options.colors.map((color: string) => ({
     color,
     variant: 'link',
