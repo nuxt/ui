@@ -34,14 +34,14 @@ export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'req
   ui?: Partial<typeof checkbox.slots>
 }
 
-export interface CheckboxSlots {
-  label(props: { label?: string }): any
-  description(props: { description?: string }): any
-}
-
 export interface CheckboxEmits {
   (e: 'update:modelValue', payload: boolean): void
   (e: 'change', payload: Event): void
+}
+
+export interface CheckboxSlots {
+  label(props: { label?: string }): any
+  description(props: { description?: string }): any
 }
 </script>
 

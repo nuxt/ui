@@ -29,13 +29,13 @@ export interface ChipProps {
   ui?: Partial<typeof chip.slots>
 }
 
+export interface ChipEmits {
+  (e: 'update:show', payload: boolean): void
+}
+
 export interface ChipSlots {
   default(props?: {}): any
   content(props?: {}): any
-}
-
-export interface ChipEmits {
-  (e: 'update:show', payload: boolean): void
 }
 </script>
 

@@ -38,14 +38,14 @@ export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | '
   ui?: Partial<typeof switchTv.slots>
 }
 
-export interface SwitchSlots {
-  label(props: { label?: string }): any
-  description(props: { description?: string }): any
-}
-
 export interface SwitchEmits {
   (e: 'update:modelValue', payload: boolean): void
   (e: 'change', payload: Event): void
+}
+
+export interface SwitchSlots {
+  label(props: { label?: string }): any
+  description(props: { description?: string }): any
 }
 </script>
 
