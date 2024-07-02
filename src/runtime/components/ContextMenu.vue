@@ -1,5 +1,5 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuTriggerProps, ContextMenuItemProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
@@ -29,7 +29,10 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'custom'>, Pic
   select?(e: Event): void
 }
 
+type ContextMenuVariants = VariantProps<typeof contextMenu>
+
 export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'>, Pick<ContextMenuTriggerProps, 'disabled'> {
+  size?: ContextMenuVariants['size']
   items?: T[] | T[][]
   /** The content of the menu. */
   content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
@@ -73,7 +76,9 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content as ContextMenuContentProps)
 const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[string]>
 
-const ui = computed(() => tv({ extend: contextMenu, slots: props.ui })())
+const ui = computed(() => tv({ extend: contextMenu, slots: props.ui })({
+  size: props.size
+}))
 </script>
 
 <template>

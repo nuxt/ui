@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import theme from '#build/ui/context-menu'
+
 const items = [
+  [{
+    label: 'My account',
+    avatar: {
+      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+    }
+  }],
   [{
     label: 'Appearance',
     children: [{
@@ -66,13 +74,20 @@ const items = [
   }]
 ]
 
+const sizes = Object.keys(theme.variants.size)
+
+const size = ref('md' as const)
+
 defineShortcuts(extractShortcuts(items))
 </script>
 
 <template>
-  <UContextMenu :items="items" class="min-w-48">
-    <div class="flex items-center justify-center rounded-md border border-dashed border-gray-300 dark:border-gray-700 text-sm aspect-video w-72">
-      Right click here
-    </div>
-  </UContextMenu>
+  <div class="flex items-center gap-2">
+    <USelectMenu v-model="size" :items="sizes" placeholder="Size" />
+    <UContextMenu :items="items" class="min-w-48" :size="size">
+      <div class="flex items-center justify-center rounded-md border border-dashed border-gray-300 dark:border-gray-700 text-sm aspect-video w-72">
+        Right click here
+      </div>
+    </UContextMenu>
+  </div>
 </template>

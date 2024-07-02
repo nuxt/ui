@@ -117,6 +117,71 @@ exports[`ContextMenu > renders with items correctly 1`] = `
 <!--teleport end-->"
 `;
 
+exports[`ContextMenu > renders with size lg correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with size md correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with size sm correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with size xl correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with size xs correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
 exports[`ContextMenu > renders with ui correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->

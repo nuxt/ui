@@ -1,9 +1,12 @@
 import { describe, it, expect } from 'vitest'
 import ContextMenu, { type ContextMenuProps, type ContextMenuSlots } from '../../src/runtime/components/ContextMenu.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/context-menu'
 
 // FIXME: Can't force open state
 describe('ContextMenu', () => {
+  const sizes = Object.keys(theme.variants.size as any)
+
   const items = [
     [{
       label: 'Appearance',
@@ -78,6 +81,7 @@ describe('ContextMenu', () => {
     // Props
     ['with items', { props }],
     ['with disabled', { props: { ...props, disabled: true } }],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with class', { props: { ...props, class: 'min-w-96' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots
