@@ -68,8 +68,8 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
           return [
             `import template from ${JSON.stringify(fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url)))}`,
             `const result = typeof template === 'function' ? template(${JSON.stringify(options)}) : template`,
-            `export default result`,
-            `/* export default ${json} */`
+            `const json = ${json}`,
+            `export default result as typeof json`
           ].join('\n')
         }
 
