@@ -22,25 +22,25 @@ To begin local development, follow these steps:
 
 1. Clone the `nuxt/ui` repository to your local machine:
 
-```sh
+```bash
 git clone https://github.com/nuxt/ui.git
 ```
 
 2. Enable [Corepack](https://github.com/nodejs/corepack):
 
-```sh
+```bash
 corepack enable
 ```
 
 3. Install dependencies:
 
-```sh
+```bash
 pnpm install
 ```
 
 4. Generate type stubs:
 
-```sh
+```bash
 pnpm run dev:prepare
 ```
 
@@ -48,13 +48,13 @@ pnpm run dev:prepare
 
 - To work on the **documentation** located in the `docs` folder, run:
 
-```sh
+```bash
 pnpm run dev
 ```
 
 - To test the components using **playground**, run:
 
-```sh
+```bash
 pnpm run play
 ```
 
@@ -73,7 +73,7 @@ We recommend using VS Code along with the ESLint extension. You can enable auto-
 
 You can also use the `lint` command:
 
-```sh
+```bash
 pnpm run lint # check for linting errors
 pnpm run lint:fix # fix linting errors
 ```
@@ -88,7 +88,7 @@ If you have Prettier installed in your editor, we recommend disabling it to avoi
 
 We use TypeScript for type checking. You can use the `typecheck` command to check for type errors:
 
-```sh
+```bash
 pnpm run typecheck
 ```
 
