@@ -8,7 +8,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { commandPalette: Partial<typeof theme> } }
 
@@ -75,7 +75,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'mult
    */
   fuse?: UseFuseOptions<T>
   class?: any
-  ui?: Partial<typeof commandPalette.slots>
+  ui?: PartialString<typeof commandPalette.slots>
 }
 
 export type CommandPaletteEmits<T> = ComboboxRootEmits<T>

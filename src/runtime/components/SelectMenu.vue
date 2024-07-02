@@ -6,7 +6,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrWrapped } from '../types/utils'
+import type { AcceptableValue, ArrayOrWrapped, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { selectMenu: Partial<typeof theme> } }
 
@@ -69,7 +69,7 @@ export interface SelectMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelVal
   filter?: boolean | string[]
   items?: T[] | T[][]
   class?: any
-  ui?: Partial<typeof selectMenu.slots>
+  ui?: PartialString<typeof selectMenu.slots>
 }
 
 export type SelectMenuEmits<T> = ComboboxRootEmits<T> & {

@@ -5,7 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
 import type { AvatarProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
 
@@ -42,7 +42,7 @@ export interface TabsProps<T> extends Pick<TabsRootProps, 'defaultValue' | 'mode
    */
   content?: boolean | Omit<TabsContentProps, 'as' | 'asChild' | 'value'>
   class?: any
-  ui?: Partial<typeof tabs.slots>
+  ui?: PartialString<typeof tabs.slots>
 }
 
 export interface TabsEmits extends TabsRootEmits {}

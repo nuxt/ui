@@ -5,6 +5,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/button'
 import type { LinkProps } from './Link.vue'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import type { PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
@@ -22,7 +23,7 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   /** Render the button full width. */
   block?: boolean
   class?: any
-  ui?: Partial<typeof button.slots>
+  ui?: PartialString<typeof button.slots>
 }
 
 export interface ButtonSlots {

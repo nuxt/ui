@@ -4,6 +4,7 @@ import type { SwitchRootProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/switch'
+import type { PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { switch: Partial<typeof theme> } }
 
@@ -35,7 +36,7 @@ export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | '
   /** The state of the switch when it is initially rendered. Use when you do not need to control its state. */
   defaultValue?: boolean
   class?: any
-  ui?: Partial<typeof switchTv.slots>
+  ui?: PartialString<typeof switchTv.slots>
 }
 
 export interface SwitchEmits {

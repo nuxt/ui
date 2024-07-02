@@ -6,7 +6,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue } from '../types/utils'
+import type { AcceptableValue, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 
@@ -60,7 +60,7 @@ export interface SelectProps<T> extends Omit<SelectRootProps, 'dir'>, UseCompone
   portal?: boolean
   items?: T[] | T[][]
   class?: any
-  ui?: Partial<typeof select.slots>
+  ui?: PartialString<typeof select.slots>
 }
 
 export type SelectEmits = SelectRootEmits & {
