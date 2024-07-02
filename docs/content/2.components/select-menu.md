@@ -188,6 +188,18 @@ componentProps:
 ---
 ::
 
+Pass a function to the `show-create-option-when` prop to control wether or not to show the create option. This function takes two arguments: the query (as the first argument) and an array of current results (as the second argument). It should return true to display the create option.
+
+The example below shows how to make the create option visible when the query is at least three characters long and does not exactly match any of the current results (case insensitive).
+
+::component-example
+---
+component: 'select-menu-example-creatable-function'
+componentProps:
+  class: 'w-full lg:w-48'
+---
+::
+
 ## Popper
 
 Use the `popper` prop to customize the popper instance.
