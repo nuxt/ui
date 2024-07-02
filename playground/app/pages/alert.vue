@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/alert'
 
-const variants = Object.keys(theme.variants.variant)
+const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
 
 const actions = (variant?: string) => [{
   label: 'Action',
@@ -37,7 +37,7 @@ const data = {
       v-bind="data"
       :actions="actions(variant)"
       color="primary"
-      :variant="(variant as any)"
+      :variant="variant"
     />
   </div>
 </template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import theme from '#build/ui/button'
 
-const sizes = Object.keys(theme.variants.size)
-const variants = Object.keys(theme.variants.variant)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
 </script>
 
 <template>
@@ -28,7 +28,7 @@ const variants = Object.keys(theme.variants.variant)
       </UButton>
     </div>
     <div class="flex items-center gap-2">
-      <UButton v-for="variant in variants" :key="variant" icon="i-heroicons-rocket-launch" label="Button" :variant="(variant as any)" />
+      <UButton v-for="variant in variants" :key="variant" icon="i-heroicons-rocket-launch" label="Button" :variant="variant" />
     </div>
     <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="white" />
@@ -46,10 +46,10 @@ const variants = Object.keys(theme.variants.variant)
       <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" variant="link" />
     </div>
     <div class="flex items-center gap-2 ml-[-129px]">
-      <UButton v-for="size in sizes" :key="size" label="Button" :size="(size as any)" />
+      <UButton v-for="size in sizes" :key="size" label="Button" :size="size" />
     </div>
     <div class="flex items-center gap-2 ml-[-171px]">
-      <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" label="Button" :size="(size as any)" />
+      <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" label="Button" :size="size" />
     </div>
     <div class="flex items-center gap-2 ml-[-159px]">
       <UButton
@@ -58,11 +58,11 @@ const variants = Object.keys(theme.variants.variant)
         icon="i-heroicons-rocket-launch"
         label="Square"
         square
-        :size="(size as any)"
+        :size="size"
       />
     </div>
     <div class="flex items-center gap-2 ml-[-68px]">
-      <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" :size="(size as any)" />
+      <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" :size="size" />
     </div>
     <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" trailing-icon="i-heroicons-chevron-down-20-solid" label="Block" block />

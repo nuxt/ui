@@ -30,6 +30,7 @@ export async function renderForm(options: {
     },
     slots: {
       default: {
+        // @ts-expect-error - Object literal may only specify known properties, and setup does not exist in type
         setup() {
           return { state, ...options.slotVars }
         },

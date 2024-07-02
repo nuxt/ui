@@ -72,8 +72,8 @@ export type SelectEmits = SelectRootEmits & {
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export interface SelectSlots<T> {
-  'leading'(props: { modelValue: string, open: boolean }): any
-  'trailing'(props: { modelValue: string, open: boolean }): any
+  'leading'(props: { modelValue: string, open: boolean, ui: any }): any
+  'trailing'(props: { modelValue: string, open: boolean, ui: any }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -118,6 +118,7 @@ const ui = computed(() => tv({ extend: select, slots: props.ui })({
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as SelectItem[][] : [])
 
 function onUpdate(value: any) {
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
 
@@ -148,7 +149,7 @@ function onUpdateOpen(value: boolean) {
   >
     <SelectTrigger :class="ui.base({ class: props.class })">
       <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
-        <slot name="leading" :model-value="modelValue" :open="open">
+        <slot name="leading" :model-value="modelValue" :open="open" :ui="ui">
           <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
         </slot>
       </span>
@@ -156,7 +157,7 @@ function onUpdateOpen(value: boolean) {
       <SelectValue :placeholder="placeholder ?? '&nbsp;'" :class="ui.value()" />
 
       <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
-        <slot name="trailing" :model-value="modelValue" :open="open">
+        <slot name="trailing" :model-value="modelValue" :open="open" :ui="ui">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
         </slot>
       </span>
@@ -174,11 +175,11 @@ function onUpdateOpen(value: boolean) {
               <SelectItem v-else :class="ui.item()" :disabled="item.disabled" :value="typeof item === 'object' ? item.value : item">
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
-                    <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.itemLeadingAvatar()" />
+                    <UAvatar v-if="item.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar()" />
                     <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon()" />
                     <UChip
                       v-else-if="item.chip"
-                      size="md"
+                      :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"
@@ -196,7 +197,7 @@ function onUpdateOpen(value: boolean) {
                     <slot name="item-trailing" :item="(item as T)" :index="index" />
 
                     <SelectItemIndicator as-child>
-                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingSelectedIcon()" />
+                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon()" />
                     </SelectItemIndicator>
                   </span>
                 </slot>

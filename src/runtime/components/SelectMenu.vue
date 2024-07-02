@@ -81,9 +81,9 @@ export type SelectMenuEmits<T> = ComboboxRootEmits<T> & {
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type SelectMenuSlots<T> = {
-  'leading'(props: { modelValue: T, open: boolean }): any
+  'leading'(props: { modelValue: T, open: boolean, ui: any }): any
   'default'(props: { modelValue: T, open: boolean }): any
-  'trailing'(props: { modelValue: T, open: boolean }): any
+  'trailing'(props: { modelValue: T, open: boolean, ui: any }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -119,12 +119,12 @@ const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color,
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
-const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
+const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
 const ui = computed(() => tv({ extend: selectMenu, slots: props.ui })({
   color: color.value,
   variant: props.variant,
-  size: inputSize?.value,
+  size: selectSize?.value,
   loading: props.loading,
   leading: isLeading.value || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
@@ -166,6 +166,7 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as SelectMenuItem[][] : [])
 
 function onUpdate(value: any) {
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
   emitFormChange()
@@ -201,7 +202,7 @@ function onUpdateOpen(value: boolean) {
     <ComboboxAnchor as-child>
       <ComboboxTrigger :class="ui.base({ class: props.class })" tabindex="0">
         <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
-          <slot name="leading" :model-value="(modelValue as T)" :open="open">
+          <slot name="leading" :model-value="(modelValue as T)" :open="open" :ui="ui">
             <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
           </slot>
         </span>
@@ -216,7 +217,7 @@ function onUpdateOpen(value: boolean) {
         </slot>
 
         <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
-          <slot name="trailing" :model-value="(modelValue as T)" :open="open">
+          <slot name="trailing" :model-value="(modelValue as T)" :open="open" :ui="ui">
             <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
           </slot>
         </span>
@@ -245,11 +246,11 @@ function onUpdateOpen(value: boolean) {
               <ComboboxItem v-else :class="ui.item()" :disabled="item.disabled" :value="item">
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
-                    <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.itemLeadingAvatar()" />
+                    <UAvatar v-if="item.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar()" />
                     <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon()" />
                     <UChip
                       v-else-if="item.chip"
-                      size="md"
+                      :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"
@@ -267,7 +268,7 @@ function onUpdateOpen(value: boolean) {
                     <slot name="item-trailing" :item="(item as T)" :index="index" />
 
                     <ComboboxItemIndicator as-child>
-                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingSelectedIcon()" />
+                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon()" />
                     </ComboboxItemIndicator>
                   </span>
                 </slot>

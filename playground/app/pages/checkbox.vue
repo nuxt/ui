@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/checkbox'
 
-const sizes = Object.keys(theme.variants.size)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 
 const checked = ref(false)
 </script>
@@ -18,10 +18,10 @@ const checked = ref(false)
       <UCheckbox label="Icon" color="red" icon="i-heroicons-heart-solid" :model-value="true" />
     </div>
     <div class="flex items-center gap-4 mr-[-11px]">
-      <UCheckbox v-for="size in sizes" :key="size" label="Check me" :size="(size as any)" />
+      <UCheckbox v-for="size in sizes" :key="size" label="Check me" :size="size" />
     </div>
     <div class="flex items-center gap-4 mr-[-96px]">
-      <UCheckbox v-for="size in sizes" :key="size" label="Check me" description="This is a description" :size="(size as any)" />
+      <UCheckbox v-for="size in sizes" :key="size" label="Check me" description="This is a description" :size="size" />
     </div>
   </div>
 </template>

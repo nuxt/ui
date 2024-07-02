@@ -5,7 +5,7 @@ import theme from '#build/ui/context-menu'
 
 // FIXME: Can't force open state
 describe('ContextMenu', () => {
-  const sizes = Object.keys(theme.variants.size as any)
+  const sizes = Object.keys(theme.variants.size) as any
 
   const items = [
     [{

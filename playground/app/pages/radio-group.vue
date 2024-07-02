@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/radio-group'
 
-const sizes = Object.keys(theme.variants.size)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 
 const literalOptions = [
   'Option 1',
@@ -33,11 +33,11 @@ const itemsWithDescription = [
     </div>
 
     <div class="flex items-center gap-4 ml-[34px]">
-      <URadioGroup v-for="size in sizes" :key="size" :size="(size as any)" :items="items" />
+      <URadioGroup v-for="size in sizes" :key="size" :size="size" :items="items" />
     </div>
 
     <div class="flex items-center gap-4 ml-[74px]">
-      <URadioGroup v-for="size in sizes" :key="size" :size="(size as any)" :items="itemsWithDescription" />
+      <URadioGroup v-for="size in sizes" :key="size" :size="size" :items="itemsWithDescription" />
     </div>
 
     <div class="flex gap-4">

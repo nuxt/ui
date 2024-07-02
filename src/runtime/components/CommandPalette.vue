@@ -262,7 +262,7 @@ const groups = computed(() => {
                   </slot>
 
                   <ComboboxItemIndicator as-child>
-                    <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingSelectedIcon()" />
+                    <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon()" />
                   </ComboboxItemIndicator>
                 </span>
               </slot>

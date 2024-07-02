@@ -11,7 +11,7 @@ const searchTerm = ref('')
 // const searchTermDebounced = refDebounced(searchTerm, 200)
 const selected = ref([])
 
-const { data: users, pending } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   // params: { q: searchTermDebounced },
   transform: (data: User[]) => {
     return data?.map(user => ({ id: user.id, label: user.name, suffix: user.email, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
@@ -98,7 +98,7 @@ defineShortcuts({
     <UCommandPalette
       v-model="selected"
       v-model:search-term="searchTerm"
-      :loading="pending"
+      :loading="status === 'pending'"
       :groups="groups"
       :fuse="{
         fuseOptions: {

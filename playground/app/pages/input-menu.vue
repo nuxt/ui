@@ -3,7 +3,7 @@ import { refDebounced } from '@vueuse/core'
 import type { User } from '~/types'
 import theme from '#build/ui/input-menu'
 
-const sizes = Object.keys(theme.variants.size)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 
 const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
@@ -31,7 +31,7 @@ const statuses = [{
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
-const { data: users, pending } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   params: { q: searchTermDebounced },
   transform: (data: User[]) => {
     return data?.map(user => ({ id: user.id, label: user.name, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
@@ -51,56 +51,50 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
       <UInputMenu :items="items" placeholder="Required" required />
       <UInputMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple />
       <UInputMenu :items="items" loading placeholder="Search..." />
-      <UInputMenu :items="statuses" placeholder="Search status..." icon="i-heroicons-magnifying-glass" trailing-icon="i-heroicons-chevron-up-down-20-solid">
-        <template #leading="{ modelValue }">
-          <UIcon v-if="modelValue?.icon" :name="modelValue.icon" class="size-5" />
+    </div>
+    <div class="flex items-center gap-4">
+      <UInputMenu
+        v-for="size in sizes"
+        :key="size"
+        :items="items"
+        placeholder="Search..."
+        :size="size"
+        class="w-60"
+      />
+    </div>
+    <div class="flex items-center gap-4">
+      <UInputMenu
+        v-for="size in sizes"
+        :key="size"
+        :items="statuses"
+        placeholder="Search status..."
+        icon="i-heroicons-magnifying-glass"
+        trailing-icon="i-heroicons-chevron-up-down-20-solid"
+        :size="size"
+        class="w-60"
+      >
+        <template #leading="{ modelValue, ui }">
+          <UIcon v-if="modelValue?.icon" :name="modelValue.icon" :class="ui.leadingIcon()" />
         </template>
       </UInputMenu>
+    </div>
+    <div class="flex items-center gap-4">
       <UInputMenu
+        v-for="size in sizes"
+        :key="size"
         v-model:search-term="searchTerm"
         :items="users || []"
-        :loading="pending"
+        :loading="status === 'pending'"
         :filter="false"
         icon="i-heroicons-user"
         placeholder="Search users..."
+        :size="size"
+        class="w-60"
       >
-        <template #leading="{ modelValue }">
-          <UAvatar v-if="modelValue?.avatar" size="2xs" v-bind="modelValue.avatar" />
+        <template #leading="{ modelValue, ui }">
+          <UAvatar v-if="modelValue?.avatar" :size="ui.itemLeadingAvatarSize()" v-bind="modelValue.avatar" />
         </template>
       </UInputMenu>
-    </div>
-    <div class="flex items-center gap-4">
-      <UInputMenu
-        v-for="size in sizes"
-        :key="size"
-        :items="items"
-        placeholder="Search..."
-        :size="(size as any)"
-        class="w-60"
-      />
-    </div>
-    <div class="flex items-center gap-4">
-      <UInputMenu
-        v-for="size in sizes"
-        :key="size"
-        :items="items"
-        icon="i-heroicons-magnifying-glass"
-        placeholder="Search..."
-        :size="(size as any)"
-        class="w-60"
-      />
-    </div>
-    <div class="flex items-center gap-4">
-      <UInputMenu
-        v-for="size in sizes"
-        :key="size"
-        :items="items"
-        icon="i-heroicons-magnifying-glass"
-        trailing
-        placeholder="Search..."
-        :size="(size as any)"
-        class="w-60"
-      />
     </div>
     <div class="flex items-center gap-4">
       <UInputMenu
@@ -111,7 +105,7 @@ const { data: users, pending } = await useFetch('https://jsonplaceholder.typicod
         multiple
         icon="i-heroicons-magnifying-glass"
         placeholder="Search..."
-        :size="(size as any)"
+        :size="size"
         class="w-60"
       />
     </div>

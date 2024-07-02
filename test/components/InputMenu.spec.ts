@@ -37,7 +37,7 @@ describe('InputMenu', () => {
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
     ['with id', { props: { ...props, id: 'id' } }],
     ['with name', { props: { ...props, name: 'name' } }],
-    ['with placeholder', { props: { ...props, placeholder: 'InputMenu a status' } }],
+    ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with required', { props: { ...props, required: true } }],
     ['with icon', { props: { ...props, icon: 'i-heroicons-magnifying-glass' } }],

@@ -2,11 +2,13 @@
 import { LazySlideoverProgrammaticExample } from '#components'
 
 const open = ref(false)
+const count = ref(0)
 
 const slideover = useSlideover()
-const count = ref(0)
-const openSlideover = () => {
+
+function openSlideover() {
   count.value++
+
   slideover.open(LazySlideoverProgrammaticExample, {
     description: 'And you can even provide a description!',
     count: count.value

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import theme from '#build/ui/badge'
 
-const sizes = Object.keys(theme.variants.size)
-const variants = Object.keys(theme.variants.variant)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const variants = Object.keys(theme.variants.variant)
       </UBadge>
     </div>
     <div class="flex items-center gap-2">
-      <UBadge v-for="variant in variants" :key="variant" label="Badge" :variant="(variant as any)" />
+      <UBadge v-for="variant in variants" :key="variant" label="Badge" :variant="variant" />
     </div>
     <div class="flex items-center gap-2">
       <UBadge label="Badge" color="white" />
@@ -25,7 +25,7 @@ const variants = Object.keys(theme.variants.variant)
       <UBadge label="Badge" color="black" />
     </div>
     <div class="flex items-center gap-2 ml-[-56px]">
-      <UBadge v-for="size in sizes" :key="size" label="Badge" :size="(size as any)" />
+      <UBadge v-for="size in sizes" :key="size" label="Badge" :size="size" />
     </div>
   </div>
 </template>

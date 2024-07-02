@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/textarea'
 
-const sizes = Object.keys(theme.variants.size)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 </script>
 
 <template>
@@ -15,7 +15,7 @@ const sizes = Object.keys(theme.variants.size)
       <UTextarea autoresize :maxrows="5" :rows="1" />
     </div>
     <div class="flex items-center gap-4">
-      <UTextarea v-for="size in sizes" :key="size" placeholder="Search..." :size="(size as any)" class="w-60" />
+      <UTextarea v-for="size in sizes" :key="size" placeholder="Search..." :size="size" class="w-60" />
     </div>
   </div>
 </template>

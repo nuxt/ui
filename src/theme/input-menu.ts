@@ -17,7 +17,7 @@ export default (options: Required<ModuleOptions>) => {
       itemLeadingAvatar: 'shrink-0',
       itemLeadingChip: 'shrink-0 mx-1.5',
       itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
-      itemTrailingSelectedIcon: 'shrink-0 size-5',
+      itemTrailingIcon: 'shrink-0 size-5',
       itemLabel: 'truncate',
       tagsItem: 'px-1.5 py-0.5 rounded font-medium inline-flex items-center gap-0.5 ring ring-inset ring-gray-300 dark:ring-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 data-disabled:cursor-not-allowed data-disabled:opacity-75',
       tagsItemText: 'truncate',

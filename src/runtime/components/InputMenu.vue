@@ -94,8 +94,8 @@ export type InputMenuEmits<T> = ComboboxRootEmits<T> & {
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type InputMenuSlots<T> = {
-  'leading'(props: { modelValue: T, open: boolean }): any
-  'trailing'(props: { modelValue: T, open: boolean }): any
+  'leading'(props: { modelValue: T, open: boolean, ui: any }): any
+  'trailing'(props: { modelValue: T, open: boolean, ui: any }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -193,6 +193,7 @@ onMounted(() => {
 })
 
 function onUpdate(value: any) {
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
   emitFormChange()
@@ -280,13 +281,13 @@ function onUpdateOpen(value: boolean) {
       />
 
       <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
-        <slot name="leading" :model-value="(modelValue as T)" :open="open">
+        <slot name="leading" :model-value="(modelValue as T)" :open="open" :ui="ui">
           <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
         </slot>
       </span>
 
       <ComboboxTrigger v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
-        <slot name="trailing" :model-value="(modelValue as T)" :open="open">
+        <slot name="trailing" :model-value="(modelValue as T)" :open="open" :ui="ui">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
         </slot>
       </ComboboxTrigger>
@@ -334,7 +335,7 @@ function onUpdateOpen(value: boolean) {
                     <slot name="item-trailing" :item="(item as T)" :index="index" />
 
                     <ComboboxItemIndicator as-child>
-                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingSelectedIcon()" />
+                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon()" />
                     </ComboboxItemIndicator>
                   </span>
                 </slot>

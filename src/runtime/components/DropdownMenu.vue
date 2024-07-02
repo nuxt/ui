@@ -29,10 +29,10 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'custom'>, Pi
   select?(e: Event): void
 }
 
-type DropdownVariants = VariantProps<typeof dropdownMenu>
+type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
 export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>, Pick<DropdownMenuTriggerProps, 'disabled'> {
-  size?: DropdownVariants['size']
+  size?: DropdownMenuVariants['size']
   items?: T[] | T[][]
   /**
    * The content of the menu.

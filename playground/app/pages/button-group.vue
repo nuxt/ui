@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/button'
 
-const sizes = Object.keys(theme.variants.size)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 </script>
 
 <template>
@@ -46,7 +46,7 @@ const sizes = Object.keys(theme.variants.size)
     </div>
 
     <div class="flex gap-4 items-center justify-center">
-      <UButtonGroup v-for="size in sizes" :key="size" :size="(size as any)">
+      <UButtonGroup v-for="size in sizes" :key="size" :size="size">
         <UInput />
         <UButton color="white">
           Click me!

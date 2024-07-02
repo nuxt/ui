@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/switch'
 
-const sizes = Object.keys(theme.variants.size)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 
 const checked = ref(false)
 </script>
@@ -17,13 +17,13 @@ const checked = ref(false)
       <USwitch color="red" label="Red" :default-value="true" />
     </div>
     <div class="flex items-center gap-4 ml-[-82px]">
-      <USwitch v-for="size in sizes" :key="size" :size="(size as any)" label="Switch me" />
+      <USwitch v-for="size in sizes" :key="size" :size="size" label="Switch me" />
     </div>
     <div class="flex items-center gap-4 ml-[-82px]">
       <USwitch
         v-for="size in sizes"
         :key="size"
-        :size="(size as any)"
+        :size="size"
         label="Switch me"
         unchecked-icon="i-heroicons-x-mark-20-solid"
         checked-icon="i-heroicons-check-20-solid"
@@ -33,7 +33,7 @@ const checked = ref(false)
       <USwitch
         v-for="size in sizes"
         :key="size"
-        :size="(size as any)"
+        :size="size"
         label="Switch me"
         unchecked-icon="i-heroicons-x-mark-20-solid"
         checked-icon="i-heroicons-check-20-solid"
@@ -44,7 +44,7 @@ const checked = ref(false)
       <USwitch
         v-for="size in sizes"
         :key="size"
-        :size="(size as any)"
+        :size="size"
         label="Switch me"
         description="This is a description"
       />
@@ -53,7 +53,7 @@ const checked = ref(false)
       <USwitch
         v-for="size in sizes"
         :key="size"
-        :size="(size as any)"
+        :size="size"
         label="Switch me"
         description="This is a description"
         unchecked-icon="i-heroicons-x-mark-20-solid"

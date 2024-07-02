@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/slider'
 
-const sizes = Object.keys(theme.variants.size)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 
 const value = ref(50)
 </script>
@@ -26,7 +26,7 @@ const value = ref(50)
     </div>
 
     <div class="flex items-center gap-6">
-      <USlider v-for="size in sizes" :key="size" v-model="value" :size="(size as any)" class="w-48" />
+      <USlider v-for="size in sizes" :key="size" v-model="value" :size="size" class="w-48" />
     </div>
 
     <div class="h-48 flex items-center gap-6">

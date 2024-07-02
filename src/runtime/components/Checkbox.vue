@@ -83,6 +83,7 @@ const ui = computed(() => tv({ extend: checkbox, slots: props.ui })({
 }))
 
 function onUpdate(value: any) {
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
   emitFormChange()

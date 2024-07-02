@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import theme from '#build/ui/form-field'
 
-const sizes = Object.keys(theme.variants.size)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+
 const feedbacks = [
   { description: 'This is a description' },
   { error: 'This is an error' },
@@ -25,7 +26,7 @@ const feedbacks = [
       <UFormField
         v-for="size in sizes"
         :key="size"
-        :size="(size as any)"
+        :size="size"
         label="Email"
         name="email"
       >
@@ -37,7 +38,7 @@ const feedbacks = [
       <UFormField
         v-for="size in sizes"
         :key="size"
-        :size="(size as any)"
+        :size="size"
         label="Email"
         description="This is a description"
         name="email"

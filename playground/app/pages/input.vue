@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/input'
 
-const sizes = Object.keys(theme.variants.size)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const sizes = Object.keys(theme.variants.size)
         v-for="size in sizes"
         :key="size"
         placeholder="Search..."
-        :size="(size as any)"
+        :size="size"
         class="w-60"
       />
     </div>
@@ -36,7 +36,7 @@ const sizes = Object.keys(theme.variants.size)
         :key="size"
         icon="i-heroicons-magnifying-glass"
         placeholder="Search..."
-        :size="(size as any)"
+        :size="size"
         class="w-60"
       />
     </div>
@@ -47,7 +47,7 @@ const sizes = Object.keys(theme.variants.size)
         icon="i-heroicons-magnifying-glass"
         trailing
         placeholder="Search..."
-        :size="(size as any)"
+        :size="size"
         class="w-60"
       />
     </div>

@@ -31,8 +31,8 @@ export default (options: Required<ModuleOptions>) => ({
     },
     size: {
       xs: {
-        label: 'gap-1 p-1 text-xs',
-        item: 'gap-1 p-1 text-xs',
+        label: 'p-1 text-xs gap-1',
+        item: 'p-1 text-xs gap-1',
         itemLeadingIcon: 'size-4',
         itemLeadingAvatarSize: '3xs',
         itemTrailingIcon: 'size-4',
@@ -40,8 +40,8 @@ export default (options: Required<ModuleOptions>) => ({
         itemTrailingKbdsSize: 'sm'
       },
       sm: {
-        label: 'gap-1.5 p-1.5 text-xs',
-        item: 'gap-1.5 p-1.5 text-xs',
+        label: 'p-1.5 text-xs gap-1.5',
+        item: 'p-1.5 text-xs gap-1.5',
         itemLeadingIcon: 'size-4',
         itemLeadingAvatarSize: '3xs',
         itemTrailingIcon: 'size-4',
@@ -49,8 +49,8 @@ export default (options: Required<ModuleOptions>) => ({
         itemTrailingKbdsSize: 'sm'
       },
       md: {
-        label: 'gap-1.5 p-1.5 text-sm',
-        item: 'gap-1.5 p-1.5 text-sm',
+        label: 'p-1.5 text-sm gap-1.5',
+        item: 'p-1.5 text-sm gap-1.5',
         itemLeadingIcon: 'size-5',
         itemLeadingAvatarSize: '2xs',
         itemTrailingIcon: 'size-5',

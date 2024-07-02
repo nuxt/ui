@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue'
 import theme from '#build/ui/progress'
 
-const sizes = Object.keys(theme.variants.size)
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 
 const value1 = ref(0)
 const value2 = ref(0)
@@ -43,7 +43,7 @@ onMounted(() => {
     </div>
 
     <div class="flex items-center gap-4">
-      <UProgress v-for="size in sizes" :key="size" v-model="value1" :size="(size as any)" class="w-48" />
+      <UProgress v-for="size in sizes" :key="size" v-model="value1" :size="size" class="w-48" />
     </div>
 
     <div class="h-48 flex items-center gap-8">
@@ -63,7 +63,7 @@ onMounted(() => {
     </div>
 
     <div class="h-48 flex items-center gap-8">
-      <UProgress v-for="size in sizes" :key="size" v-model="value1" orientation="vertical" :size="(size as any)" />
+      <UProgress v-for="size in sizes" :key="size" v-model="value1" orientation="vertical" :size="size" />
     </div>
   </div>
 </template>

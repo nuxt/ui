@@ -2,11 +2,13 @@
 import { LazyModalProgrammaticExample } from '#components'
 
 const open = ref(false)
+const count = ref(0)
 
 const modal = useModal()
-const count = ref(0)
-const openModal = () => {
+
+function openModal() {
   count.value++
+
   modal.open(LazyModalProgrammaticExample, {
     description: 'And you can even provide a description !',
     count: count.value
