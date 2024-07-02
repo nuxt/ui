@@ -123,18 +123,16 @@ defineShortcuts(extractShortcuts(items))
 
 <template>
   <div class="flex-1">
-    <div class="flex items-center gap-2">
-      <UButtonGroup :size="size">
-        <UDropdownMenu :items="items" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" class="min-w-48">
-          <UButton label="Open" color="white" icon="i-heroicons-user" />
+    <div class="flex flex-col items-center gap-8">
+      <USelectMenu v-model="size" :items="sizes" placeholder="Size" />
 
-          <template #custom-trailing>
-            <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-primary-500 dark:text-primary-400" />
-          </template>
-        </UDropdownMenu>
+      <UDropdownMenu :items="items" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" class="min-w-48">
+        <UButton label="Open" color="white" icon="i-heroicons-user" />
 
-        <USelectMenu v-model="size" :items="sizes" placeholder="Size" />
-      </UButtonGroup>
+        <template #custom-trailing>
+          <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-primary-500 dark:text-primary-400" />
+        </template>
+      </UDropdownMenu>
     </div>
   </div>
 </template>
