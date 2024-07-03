@@ -6,7 +6,7 @@ const props = defineProps<{
 }>()
 
 function getSchemaProps(schema: PropertyMeta['schema']) {
-  if (!schema || typeof schema === 'string') {
+  if (!schema || typeof schema === 'string' || !schema.schema) {
     return []
   }
 
