@@ -74,7 +74,7 @@ const checked = computed({
   }
 })
 
-const ui = computed(() => tv({ extend: checkbox, slots: props.ui })({
+const ui = computed(() => checkbox({
   size: size.value,
   color: color.value,
   required: props.required,
@@ -93,7 +93,7 @@ function onUpdate(value: any) {
 
 <template>
   <div :class="ui.root({ class: props.class })">
-    <div :class="ui.container()">
+    <div :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
         v-model:checked="checked"
@@ -101,23 +101,23 @@ function onUpdate(value: any) {
         v-bind="rootProps"
         :name="name"
         :disabled="disabled"
-        :class="ui.base()"
+        :class="ui.base({ class: props.ui?.base })"
         @update:checked="onUpdate"
       >
         <CheckboxIndicator as-child>
-          <UIcon v-if="indeterminate" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon()" />
-          <UIcon v-else :name="icon || appConfig.ui.icons.check" :class="ui.icon()" />
+          <UIcon v-if="indeterminate" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon({ class: props.ui?.icon })" />
+          <UIcon v-else :name="icon || appConfig.ui.icons.check" :class="ui.icon({ class: props.ui?.icon })" />
         </CheckboxIndicator>
       </CheckboxRoot>
     </div>
 
-    <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper()">
-      <Label v-if="label || !!slots.label" :for="id" :class="ui.label()">
+    <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <Label v-if="label || !!slots.label" :for="id" :class="ui.label({ class: props.ui?.label })">
         <slot name="label" :label="label">
           {{ label }}
         </slot>
       </Label>
-      <p v-if="description || !!slots.description" :class="ui.description()">
+      <p v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description" :description="description">
           {{ description }}
         </slot>

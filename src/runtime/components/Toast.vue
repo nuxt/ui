@@ -51,7 +51,7 @@ export interface ToastSlots {
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { class: string }): any
+  close(props: { ui: any }): any
 }
 </script>
 
@@ -76,7 +76,9 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 
 const multiline = computed(() => !!props.title && !!props.description)
 const duration = computed(() => props.duration || toaster?.value.duration)
 
-const ui = computed(() => tv({ extend: toast, slots: props.ui })({ color: props.color }))
+const ui = computed(() => toast({
+  color: props.color
+}))
 
 const el = ref()
 const height = ref(0)
@@ -105,25 +107,25 @@ defineExpose({
     :style="{ '--height': height }"
   >
     <slot name="leading">
-      <UAvatar v-if="avatar" size="2xl" v-bind="avatar" :class="ui.avatar()" />
-      <UIcon v-else-if="icon" :name="icon" :class="ui.icon()" />
+      <UAvatar v-if="avatar" size="2xl" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+      <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
     </slot>
 
-    <div :class="ui.wrapper()">
-      <ToastTitle v-if="title || !!slots.title" :class="ui.title()">
+    <div :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <ToastTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
         <slot name="title">
           {{ title }}
         </slot>
       </ToastTitle>
       <template v-if="description || !!slots.description">
-        <ToastDescription :class="ui.description()">
+        <ToastDescription :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
             {{ description }}
           </slot>
         </ToastDescription>
       </template>
 
-      <div v-if="multiline && actions?.length" :class="ui.actions({ multiline: true })">
+      <div v-if="multiline && actions?.length" :class="ui.actions({ class: props.ui?.actions, multiline: true })">
         <slot name="actions">
           <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
             <UButton size="xs" :color="color" v-bind="action" />
@@ -132,7 +134,7 @@ defineExpose({
       </div>
     </div>
 
-    <div v-if="(!multiline && actions?.length) || close !== null" :class="ui.actions({ multiline: false })">
+    <div v-if="(!multiline && actions?.length) || close !== null" :class="ui.actions({ class: props.ui?.actions, multiline: false })">
       <template v-if="!multiline">
         <slot name="actions">
           <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
@@ -142,7 +144,7 @@ defineExpose({
       </template>
 
       <ToastClose as-child>
-        <slot name="close" :class="ui.close()">
+        <slot name="close" :ui="ui">
           <UButton
             v-if="close"
             :icon="closeIcon || appConfig.ui.icons.close"
@@ -151,13 +153,13 @@ defineExpose({
             variant="link"
             aria-label="Close"
             v-bind="typeof close === 'object' ? close : undefined"
-            :class="ui.close()"
+            :class="ui.close({ class: props.ui?.close })"
             @click.stop
           />
         </slot>
       </ToastClose>
     </div>
 
-    <div v-if="remaining > 0 && duration" :class="ui.progress()" :style="{ width: `${remaining / duration * 100}%` }" />
+    <div v-if="remaining > 0 && duration" :class="ui.progress({ class: props.ui?.progress })" :style="{ width: `${remaining / duration * 100}%` }" />
   </ToastRoot>
 </template>

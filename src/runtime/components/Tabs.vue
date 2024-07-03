@@ -74,7 +74,7 @@ const slots = defineSlots<TabsSlots<T>>()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'activationMode', 'modelValue'), emits)
 const contentProps = toRef(() => defu(props.content || {}, { forceMount: true }) as TabsContentProps)
 
-const ui = computed(() => tv({ extend: tabs, slots: props.ui })({
+const ui = computed(() => tabs({
   color: props.color,
   variant: props.variant,
   size: props.size,
@@ -84,16 +84,16 @@ const ui = computed(() => tv({ extend: tabs, slots: props.ui })({
 
 <template>
   <TabsRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
-    <TabsList :class="ui.list()">
-      <TabsIndicator :class="ui.indicator()" />
+    <TabsList :class="ui.list({ class: props.ui?.list })">
+      <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
 
-      <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger()">
+      <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger({ class: props.ui?.trigger })">
         <slot name="leading" :item="item" :index="index">
-          <UAvatar v-if="item.avatar" :size="(ui.leadingAvatarSize() as any)" v-bind="item.avatar" :class="ui.leadingAvatar()" />
-          <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
+          <UAvatar v-if="item.avatar" :size="(ui.leadingAvatarSize() as any)" v-bind="item.avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+          <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
         </slot>
 
-        <span v-if="item.label || !!slots.default" :class="ui.label()">
+        <span v-if="item.label || !!slots.default" :class="ui.label({ class: props.ui?.label })">
           <slot :item="item" :index="index">{{ item.label }}</slot>
         </span>
 
@@ -102,7 +102,7 @@ const ui = computed(() => tv({ extend: tabs, slots: props.ui })({
     </TabsList>
 
     <template v-if="!!content">
-      <TabsContent v-for="(item, index) of items" :key="index" v-bind="contentProps" :value="item.value || String(index)" :class="ui.content()">
+      <TabsContent v-for="(item, index) of items" :key="index" v-bind="contentProps" :value="item.value || String(index)" :class="ui.content({ class: props.ui?.content })">
         <slot :name="item.slot || 'content'" :item="item" :index="index">
           {{ item.content }}
         </slot>

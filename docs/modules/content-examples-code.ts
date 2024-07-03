@@ -1,5 +1,5 @@
-import { existsSync, readFileSync } from 'fs'
-import fsp from 'fs/promises'
+import { existsSync, readFileSync } from 'node:fs'
+import fsp from 'node:fs/promises'
 import { dirname, join } from 'pathe'
 import { defineNuxtModule, addTemplate, addServerHandler, createResolver } from '@nuxt/kit'
 
@@ -7,20 +7,20 @@ export default defineNuxtModule({
   meta: {
     name: 'content-examples-code'
   },
-  async setup (_options, nuxt) {
+  async setup(_options, nuxt) {
     const resolver = createResolver(import.meta.url)
     let _configResolved: any
     let components: Record<string, any>
     const outputPath = join(nuxt.options.buildDir, 'content-examples-code')
 
-    async function stubOutput () {
+    async function stubOutput() {
       if (existsSync(outputPath + '.mjs')) {
         return
       }
       await updateOutput('export default {}')
     }
 
-    async function fetchComponent (component: string | any) {
+    async function fetchComponent(component: string | any) {
       if (typeof component === 'string') {
         if (components[component]) {
           component = components[component]
@@ -51,7 +51,7 @@ export default defineNuxtModule({
     const getVirtualModuleContent = () =>
       `export default ${getStringifiedComponents()}`
 
-    async function updateOutput (content?: string) {
+    async function updateOutput(content?: string) {
       const path = outputPath + '.mjs'
       if (!existsSync(dirname(path))) {
         await fsp.mkdir(dirname(path), { recursive: true })
@@ -62,13 +62,13 @@ export default defineNuxtModule({
       await fsp.writeFile(path, content || getVirtualModuleContent(), 'utf-8')
     }
 
-    async function fetchComponents () {
+    async function fetchComponents() {
       await Promise.all(Object.keys(components).map(fetchComponent))
     }
 
     nuxt.hook('components:extend', async (_components) => {
       components = _components
-        .filter((v) => v.shortPath.includes('components/content/examples/'))
+        .filter(v => v.shortPath.includes('components/content/examples/'))
         .reduce((acc, component) => {
           acc[component.pascalName] = component
           return acc
@@ -87,17 +87,17 @@ export default defineNuxtModule({
       vite.config.plugins.push({
         name: 'content-examples-code',
         enforce: 'post',
-        async buildStart () {
+        async buildStart() {
           if (_configResolved?.build.ssr) {
             return
           }
           await fetchComponents()
           await updateOutput()
         },
-        configResolved (config) {
+        configResolved(config) {
           _configResolved = config
         },
-        async handleHotUpdate ({ file }) {
+        async handleHotUpdate({ file }) {
           if (
             Object.entries(components).some(
               ([, comp]: any) => comp.filePath === file

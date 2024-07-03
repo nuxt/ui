@@ -12,6 +12,7 @@ interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps
   sub?: boolean
   class?: any
   ui: typeof dropdownMenu
+  uiOverride?: any
 }
 
 interface DropdownMenuContentEmits extends RadixDropdownMenuContentEmits {}
@@ -48,22 +49,22 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
   <DefineItemTemplate v-slot="{ item, active, index }">
     <slot :name="item.slot || 'item'" :item="(item as T)" :index="index">
       <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="(item as T)" :active="active" :index="index">
-        <UAvatar v-if="item.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ active })" />
-        <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ active })" />
+        <UAvatar v-if="item.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: uiOverride?.itemLeadingAvatar, active })" />
+        <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: uiOverride?.itemLeadingIcon, active })" />
       </slot>
 
-      <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel({ active })">
+      <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel({ class: uiOverride?.itemLabel, active })">
         <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="(item as T)" :active="active" :index="index">
           {{ item.label }}
         </slot>
 
-        <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ active })" />
+        <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: uiOverride?.itemLabelExternalIcon, active })" />
       </span>
 
-      <span v-if="item.children?.length || item.kbds?.length || !!slots[item.slot ? `${item.slot}-trailing`: 'item-trailing']" :class="ui.itemTrailing()">
+      <span v-if="item.children?.length || item.kbds?.length || !!slots[item.slot ? `${item.slot}-trailing`: 'item-trailing']" :class="ui.itemTrailing({ class: uiOverride?.itemTrailing })">
         <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="(item as T)" :active="active" :index="index">
-          <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon({ active })" />
-          <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds()">
+          <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon({ class: uiOverride?.itemTrailingIcon, active })" />
+          <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: uiOverride?.itemTrailingKbds })">
             <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="(ui.itemTrailingKbdsSize() as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
@@ -73,12 +74,12 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 
   <DropdownMenu.Portal :disabled="!portal">
     <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" :class="props.class" v-bind="contentProps">
-      <DropdownMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group()">
+      <DropdownMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: uiOverride?.group })">
         <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-          <DropdownMenu.Label v-if="item.type === 'label'" :class="ui.label()">
+          <DropdownMenu.Label v-if="item.type === 'label'" :class="ui.label({ class: uiOverride?.label })">
             <ReuseItemTemplate :item="item" :index="index" />
           </DropdownMenu.Label>
-          <DropdownMenu.Separator v-else-if="item.type === 'separator'" :class="ui.separator()" />
+          <DropdownMenu.Separator v-else-if="item.type === 'separator'" :class="ui.separator({ class: uiOverride?.separator })" />
           <DropdownMenu.Sub v-else-if="item?.children?.length">
             <DropdownMenu.SubTrigger
               as="button"
@@ -87,7 +88,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               :open="item.open"
               :default-open="item.defaultOpen"
               :text-value="item.label"
-              :class="ui.item()"
+              :class="ui.item({ class: uiOverride?.item })"
             >
               <ReuseItemTemplate :item="item" :index="index" />
             </DropdownMenu.SubTrigger>
@@ -96,6 +97,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               sub
               :class="props.class"
               :ui="ui"
+              :ui-override="uiOverride"
               :portal="portal"
               :items="item.children"
               side="right"
@@ -111,7 +113,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
           </DropdownMenu.Sub>
           <DropdownMenu.Item v-else as-child :disabled="item.disabled" :text-value="item.label" @select="item.select">
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<DropdownMenuItem, 'type'>)" custom>
-              <ULinkBase v-bind="slotProps" :class="ui.item({ active })">
+              <ULinkBase v-bind="slotProps" :class="ui.item({ class: uiOverride?.item, active })">
                 <ReuseItemTemplate :item="item" :active="active" :index="index" />
               </ULinkBase>
             </ULink>

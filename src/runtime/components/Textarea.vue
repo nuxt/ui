@@ -59,7 +59,7 @@ const [modelValue, modelModifiers] = defineModel<string | number>()
 
 const { emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, disabled } = useFormField<TextareaProps>(props)
 
-const ui = computed(() => tv({ extend: textarea, slots: props.ui })({
+const ui = computed(() => textarea({
   color: color.value,
   variant: props.variant,
   size: size?.value
@@ -164,7 +164,7 @@ onMounted(() => {
       :name="name"
       :rows="rows"
       :placeholder="placeholder"
-      :class="ui.base()"
+      :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       :required="required"
       v-bind="$attrs"

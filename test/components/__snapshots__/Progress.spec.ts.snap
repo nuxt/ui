@@ -262,7 +262,7 @@ exports[`Progress > renders with status slot correctly 1`] = `
 exports[`Progress > renders with ui correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-white dark:bg-gray-900 w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full w-full h-2 bg-white dark:bg-gray-900" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary-500 dark:bg-primary-400 data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->

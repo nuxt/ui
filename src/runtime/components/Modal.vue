@@ -48,7 +48,7 @@ export interface ModalSlots {
   header(props?: {}): any
   title(props?: {}): any
   description(props?: {}): any
-  close(props: { class: string }): any
+  close(props: { ui: any }): any
   body(props?: {}): any
   footer(props?: {}): any
 }
@@ -85,7 +85,7 @@ const contentEvents = computed(() => {
 
 const appConfig = useAppConfig()
 
-const ui = computed(() => tv({ extend: modal, slots: props.ui })({
+const ui = computed(() => modal({
   transition: props.transition,
   fullscreen: props.fullscreen
 }))
@@ -98,26 +98,26 @@ const ui = computed(() => tv({ extend: modal, slots: props.ui })({
     </DialogTrigger>
 
     <DialogPortal :disabled="!portal">
-      <DialogOverlay v-if="overlay" :class="ui.overlay()" />
+      <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
       <DialogContent :class="ui.content({ class: props.class })" v-bind="contentProps" v-on="contentEvents">
         <slot name="content">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header()">
+          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
             <slot name="header">
-              <DialogTitle v-if="title || !!slots.title" :class="ui.title()">
+              <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
                 <slot name="title">
                   {{ title }}
                 </slot>
               </DialogTitle>
 
-              <DialogDescription v-if="description || !!slots.description" :class="ui.description()">
+              <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
                 <slot name="description">
                   {{ description }}
                 </slot>
               </DialogDescription>
 
               <DialogClose as-child>
-                <slot name="close" :class="ui.close()">
+                <slot name="close" :ui="ui">
                   <UButton
                     v-if="close"
                     :icon="closeIcon || appConfig.ui.icons.close"
@@ -126,18 +126,18 @@ const ui = computed(() => tv({ extend: modal, slots: props.ui })({
                     variant="ghost"
                     aria-label="Close"
                     v-bind="typeof close === 'object' ? close : undefined"
-                    :class="ui.close()"
+                    :class="ui.close({ class: props.ui?.close })"
                   />
                 </slot>
               </DialogClose>
             </slot>
           </div>
 
-          <div v-if="!!slots.body" :class="ui.body()">
+          <div v-if="!!slots.body" :class="ui.body({ class: props.ui?.body })">
             <slot name="body" />
           </div>
 
-          <div v-if="!!slots.footer" :class="ui.footer()">
+          <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
             <slot name="footer" />
           </div>
         </slot>

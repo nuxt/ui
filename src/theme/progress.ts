@@ -65,6 +65,9 @@ export default (options: Required<ModuleOptions>) => ({
       },
       other: {
         step: 'opacity-0'
+      },
+      last: {
+        step: ''
       }
     },
     orientation: {

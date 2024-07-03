@@ -65,7 +65,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 
 const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
-const ui = computed(() => tv({ extend: input, slots: props.ui })({
+const ui = computed(() => input({
   type: props.type as InputVariants['type'],
   color: color.value,
   variant: props.variant,
@@ -141,7 +141,7 @@ onMounted(() => {
       :value="modelValue"
       :name="name"
       :placeholder="placeholder"
-      :class="ui.base()"
+      :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       :required="required"
       v-bind="$attrs"
@@ -152,15 +152,15 @@ onMounted(() => {
 
     <slot />
 
-    <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
+    <span v-if="isLeading || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading">
-        <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
+        <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
+    <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </div>

@@ -54,7 +54,7 @@ const slots = defineSlots<SeparatorSlots>()
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'decorative', 'orientation'))
 
-const ui = computed(() => tv({ extend: separator, slots: props.ui })({
+const ui = computed(() => separator({
   color: props.color,
   orientation: props.orientation,
   size: props.size,
@@ -64,18 +64,18 @@ const ui = computed(() => tv({ extend: separator, slots: props.ui })({
 
 <template>
   <Separator v-bind="rootProps" :class="ui.root({ class: props.class })">
-    <div :class="ui.border()" />
+    <div :class="ui.border({ class: props.ui?.border })" />
 
     <template v-if="label || icon || avatar || !!slots.default">
-      <div :class="ui.container()">
+      <div :class="ui.container({ class: props.ui?.container })">
         <slot>
-          <span v-if="label" :class="ui.label()">{{ label }}</span>
-          <UIcon v-else-if="icon" :name="icon" :class="ui.icon()" />
-          <UAvatar v-else-if="avatar" size="2xs" v-bind="avatar" :class="ui.avatar()" />
+          <span v-if="label" :class="ui.label({ class: props.ui?.label })">{{ label }}</span>
+          <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
+          <UAvatar v-else-if="avatar" size="2xs" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
         </slot>
       </div>
 
-      <div :class="ui.border()" />
+      <div :class="ui.border({ class: props.ui?.border })" />
     </template>
   </Separator>
 </template>

@@ -76,7 +76,7 @@ const sliderValue = computed({
 
 const thumbsCount = computed(() => sliderValue.value?.length ?? 1)
 
-const ui = computed(() => tv({ extend: slider, slots: props.ui })({
+const ui = computed(() => slider({
   disabled: disabled.value,
   size: size.value,
   color: color.value,
@@ -103,10 +103,10 @@ function onChange(value: any) {
     @update:model-value="emitFormInput()"
     @value-commit="onChange"
   >
-    <SliderTrack :class="ui.track()">
-      <SliderRange :class="ui.range()" />
+    <SliderTrack :class="ui.track({ class: props.ui?.track })">
+      <SliderRange :class="ui.range({ class: props.ui?.range })" />
     </SliderTrack>
 
-    <SliderThumb v-for="count in thumbsCount" :key="count" :class="ui.thumb()" />
+    <SliderThumb v-for="count in thumbsCount" :key="count" :class="ui.thumb({ class: props.ui?.thumb })" />
   </SliderRoot>
 </template>

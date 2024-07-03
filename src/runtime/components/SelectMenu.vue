@@ -121,7 +121,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 
 const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
-const ui = computed(() => tv({ extend: selectMenu, slots: props.ui })({
+const ui = computed(() => selectMenu({
   color: color.value,
   variant: props.variant,
   size: selectSize?.value,
@@ -201,74 +201,74 @@ function onUpdateOpen(value: boolean) {
   >
     <ComboboxAnchor as-child>
       <ComboboxTrigger :class="ui.base({ class: props.class })" tabindex="0">
-        <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
+        <span v-if="isLeading || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as T)" :open="open" :ui="ui">
-            <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
+            <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           </slot>
         </span>
 
         <slot :model-value="(modelValue as T)" :open="open">
-          <span v-if="multiple ? !!modelValue?.length : !!modelValue" :class="ui.value()">
+          <span v-if="multiple ? !!modelValue?.length : !!modelValue" :class="ui.value({ class: props.ui?.value })">
             {{ displayValue(modelValue as T, multiple) }}
           </span>
-          <span v-else :class="ui.placeholder()">
+          <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
             {{ placeholder ?? '&nbsp;' }}
           </span>
         </slot>
 
-        <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
+        <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :model-value="(modelValue as T)" :open="open" :ui="ui">
-            <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
+            <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
           </slot>
         </span>
       </ComboboxTrigger>
     </ComboboxAnchor>
 
     <ComboboxPortal :disabled="!portal">
-      <ComboboxContent :class="ui.content()" v-bind="contentProps">
-        <ComboboxInput :placeholder="searchPlaceholder" :class="ui.input()" autofocus autocomplete="off" />
+      <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
+        <ComboboxInput :placeholder="searchPlaceholder" :class="ui.input({ class: props.ui?.input })" autofocus autocomplete="off" />
 
-        <ComboboxEmpty :class="ui.empty()">
+        <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
             {{ searchTerm ? `No results for ${searchTerm}` : 'No results' }}
           </slot>
         </ComboboxEmpty>
 
-        <ComboboxViewport :class="ui.viewport()">
-          <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group()">
+        <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
+          <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label()">
+              <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
                 {{ item.label }}
               </ComboboxLabel>
 
-              <ComboboxSeparator v-else-if="item?.type === 'separator'" :class="ui.separator()" />
+              <ComboboxSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
 
-              <ComboboxItem v-else :class="ui.item()" :disabled="item.disabled" :value="item">
+              <ComboboxItem v-else :class="ui.item({ class: props.ui?.item })" :disabled="item.disabled" :value="item">
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
-                    <UAvatar v-if="item.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar()" />
-                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon()" />
+                    <UAvatar v-if="item.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
                     <UChip
                       v-else-if="item.chip"
                       :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"
-                      :class="ui.itemLeadingChip()"
+                      :class="ui.itemLeadingChip({ class: props.ui?.itemLeadingChip })"
                     />
                   </slot>
 
-                  <span :class="ui.itemLabel()">
+                  <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                     <slot name="item-label" :item="(item as T)" :index="index">
                       {{ displayValue(item as T) }}
                     </slot>
                   </span>
 
-                  <span :class="ui.itemTrailing()">
+                  <span :class="ui.itemTrailing({ class: props.ui?.itemTrailing })">
                     <slot name="item-trailing" :item="(item as T)" :index="index" />
 
                     <ComboboxItemIndicator as-child>
-                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon()" />
+                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: props.ui?.itemTrailingIcon })" />
                     </ComboboxItemIndicator>
                   </span>
                 </slot>

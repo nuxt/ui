@@ -100,7 +100,6 @@ export interface PaginationSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { PaginationRoot, PaginationList, PaginationListItem, PaginationFirst, PaginationPrev, PaginationEllipsis, PaginationNext, PaginationLast, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -119,12 +118,13 @@ const appConfig = useAppConfig()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
 
-const ui = computed(() => tv({ extend: pagination, slots: props.ui })())
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = pagination()
 </script>
 
 <template>
   <PaginationRoot v-slot="{ page, pageCount }" v-bind="rootProps" :class="ui.root({ class: props.class })">
-    <PaginationList v-slot="{ items }" :class="ui.list()">
+    <PaginationList v-slot="{ items }" :class="ui.list({ class: props.ui?.list })">
       <PaginationFirst v-if="showControls || !!slots.first" as-child>
         <slot name="first">
           <UButton :color="color" :variant="variant" :size="size" :icon="firstIcon || appConfig.ui.icons.chevronDoubleLeft" :to="to?.(1)" />
@@ -153,7 +153,7 @@ const ui = computed(() => tv({ extend: pagination, slots: props.ui })())
 
         <PaginationEllipsis v-else :key="item.type" :index="index" as-child>
           <slot name="ellipsis">
-            <UButton :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" :class="ui.ellipsis()" />
+            <UButton :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" :class="ui.ellipsis({ class: props.ui?.ellipsis })" />
           </slot>
         </PaginationEllipsis>
       </template>

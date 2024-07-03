@@ -45,7 +45,7 @@ export interface DrawerSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, toRef } from 'vue'
+import { toRef } from 'vue'
 import { useForwardPropsEmits } from 'radix-vue'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
@@ -60,7 +60,8 @@ const slots = defineSlots<DrawerSlots>()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'defaultOpen', 'dismissible', 'fadeFromIndex', 'fixed', 'modal', 'nested', 'open', 'scrollLockTimeout', 'shouldScaleBackground', 'snapPoints'), emits)
 const contentProps = toRef(() => props.content)
 
-const ui = computed(() => tv({ extend: drawer, slots: props.ui })())
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = drawer()
 </script>
 
 <template>
@@ -70,24 +71,24 @@ const ui = computed(() => tv({ extend: drawer, slots: props.ui })())
     </DrawerTrigger>
 
     <DrawerPortal :disabled="!portal">
-      <DrawerOverlay v-if="overlay" :class="ui.overlay()" />
+      <DrawerOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
       <DrawerContent :class="ui.content({ class: props.class })" v-bind="contentProps">
         <slot name="handle">
-          <div :class="ui.handle()" />
+          <div :class="ui.handle({ class: props.ui?.handle })" />
         </slot>
 
         <slot name="content">
-          <div :class="ui.container()">
-            <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)" :class="ui.header()">
+          <div :class="ui.container({ class: props.ui?.container })">
+            <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)" :class="ui.header({ class: props.ui?.header })">
               <slot name="header">
-                <DrawerTitle v-if="title || !!slots.title" :class="ui.title()">
+                <DrawerTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
                   <slot name="title">
                     {{ title }}
                   </slot>
                 </DrawerTitle>
 
-                <DrawerDescription v-if="description || !!slots.description" :class="ui.description()">
+                <DrawerDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
                   <slot name="description">
                     {{ description }}
                   </slot>
@@ -95,11 +96,11 @@ const ui = computed(() => tv({ extend: drawer, slots: props.ui })())
               </slot>
             </div>
 
-            <div v-if="!!slots.body" :class="ui.body()">
+            <div v-if="!!slots.body" :class="ui.body({ class: props.ui?.body })">
               <slot name="body" />
             </div>
 
-            <div v-if="!!slots.footer" :class="ui.footer()">
+            <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
               <slot name="footer" />
             </div>
           </div>

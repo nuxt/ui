@@ -10,14 +10,14 @@ self.onmessage = async function (event) {
   })
 }
 
-function handleMessage (message) {
+function handleMessage(message) {
   switch (message.type) {
     case 'format':
       return handleFormatMessage(message)
   }
 }
 
-async function handleFormatMessage (message) {
+async function handleFormatMessage(message) {
   const { options, source } = message
   const formatted = await prettier.format(source, {
     parser: 'markdown',

@@ -48,7 +48,7 @@ const linkProps = useForwardProps(pickLinkProps(props))
 const { orientation, size: buttonSize } = useButtonGroup<ButtonProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const ui = computed(() => tv({ extend: button, slots: props.ui })({
+const ui = computed(() => button({
   color: props.color,
   variant: props.variant,
   size: buttonSize.value,
@@ -64,17 +64,17 @@ const ui = computed(() => tv({ extend: button, slots: props.ui })({
 <template>
   <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="linkProps" raw>
     <slot name="leading">
-      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
     </slot>
 
-    <span v-if="label || !!slots.default" :class="ui.label()">
+    <span v-if="label || !!slots.default" :class="ui.label({ class: props.ui?.label })">
       <slot>
         {{ label }}
       </slot>
     </span>
 
     <slot name="trailing">
-      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
     </slot>
   </ULink>
 </template>

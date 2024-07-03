@@ -105,7 +105,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 
 const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
-const ui = computed(() => tv({ extend: select, slots: props.ui })({
+const ui = computed(() => select({
   color: color.value,
   variant: props.variant,
   size: selectSize?.value,
@@ -148,56 +148,56 @@ function onUpdateOpen(value: boolean) {
     @update:open="onUpdateOpen"
   >
     <SelectTrigger :class="ui.base({ class: props.class })">
-      <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
+      <span v-if="isLeading || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="modelValue" :open="open" :ui="ui">
-          <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
+          <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
         </slot>
       </span>
 
-      <SelectValue :placeholder="placeholder ?? '&nbsp;'" :class="ui.value()" />
+      <SelectValue :placeholder="placeholder ?? '&nbsp;'" :class="ui.value({ class: props.ui?.value })" />
 
-      <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
+      <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
         <slot name="trailing" :model-value="modelValue" :open="open" :ui="ui">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
+          <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </span>
     </SelectTrigger>
 
     <SelectPortal :disabled="!portal">
-      <SelectContent :class="ui.content()" v-bind="contentProps">
-        <SelectViewport :class="ui.viewport()">
-          <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group()">
+      <SelectContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
+        <SelectViewport :class="ui.viewport({ class: props.ui?.viewport })">
+          <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <SelectLabel v-if="item?.type === 'label'" :class="ui.label()">
+              <SelectLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
                 {{ item.label }}
               </SelectLabel>
-              <SelectSeparator v-else-if="item?.type === 'separator'" :class="ui.separator()" />
-              <SelectItem v-else :class="ui.item()" :disabled="item.disabled" :value="typeof item === 'object' ? item.value : item">
+              <SelectSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
+              <SelectItem v-else :class="ui.item({ class: props.ui?.item })" :disabled="item.disabled" :value="typeof item === 'object' ? item.value : item">
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
-                    <UAvatar v-if="item.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar()" />
-                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon()" />
+                    <UAvatar v-if="item.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
                     <UChip
                       v-else-if="item.chip"
                       :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"
-                      :class="ui.itemLeadingChip()"
+                      :class="ui.itemLeadingChip({ class: props.ui?.itemLeadingChip })"
                     />
                   </slot>
 
-                  <SelectItemText :class="ui.itemLabel()">
+                  <SelectItemText :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                     <slot name="item-label" :item="(item as T)" :index="index">
                       {{ typeof item === 'object' ? item.label : item }}
                     </slot>
                   </SelectItemText>
 
-                  <span :class="ui.itemTrailing()">
+                  <span :class="ui.itemTrailing({ class: props.ui?.itemTrailing })">
                     <slot name="item-trailing" :item="(item as T)" :index="index" />
 
                     <SelectItemIndicator as-child>
-                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon()" />
+                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: props.ui?.itemTrailingIcon })" />
                     </SelectItemIndicator>
                   </span>
                 </slot>

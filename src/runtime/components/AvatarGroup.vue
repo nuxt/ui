@@ -39,7 +39,7 @@ import { avatarGroupInjectionKey } from '#imports'
 const props = defineProps<AvatarGroupProps>()
 const slots = defineSlots<AvatarGroupSlots>()
 
-const ui = computed(() => tv({ extend: avatarGroup, slots: props.ui })({
+const ui = computed(() => avatarGroup({
   size: props.size
 }))
 
@@ -74,7 +74,7 @@ provide(avatarGroupInjectionKey, computed(() => ({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: props.class })">
-    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" :class="ui.base()" />
-    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" :class="ui.base()" />
+    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" :class="ui.base({ class: props.ui?.base })" />
+    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" :class="ui.base({ class: props.ui?.base })" />
   </Primitive>
 </template>

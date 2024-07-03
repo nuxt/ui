@@ -66,7 +66,7 @@ const swipeDirection = computed(() => {
   return 'right'
 })
 
-const ui = computed(() => tv({ extend: toaster, slots: props.ui })({
+const ui = computed(() => toaster({
   position: props.position,
   swipeDirection: swipeDirection.value
 }))

@@ -63,7 +63,10 @@ const rootProps = useForwardPropsEmits(pick, emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as PopoverContentProps)
 const arrowProps = toRef(() => props.arrow as PopoverArrowProps)
 
-const ui = computed(() => tv({ extend: popover, slots: props.ui })({ side: contentProps.value.side }))
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => popover({
+  side: contentProps.value.side
+}))
 
 const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 </script>
@@ -78,7 +81,7 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
       <Component.Content v-bind="contentProps" :class="ui.content({ class: props.class })">
         <slot name="content" />
 
-        <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow()" />
+        <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </Component.Content>
     </Component.Portal>
   </Component.Root>

@@ -28,7 +28,6 @@ export interface CollapsibleSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 
@@ -38,7 +37,8 @@ const slots = defineSlots<CollapsibleSlots>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled'), emits)
 
-const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = collapsible()
 </script>
 
 <template>
@@ -47,7 +47,7 @@ const ui = computed(() => tv({ extend: collapsible, slots: props.ui })())
       <slot :open="open" />
     </CollapsibleTrigger>
 
-    <CollapsibleContent :class="ui.content()">
+    <CollapsibleContent :class="ui.content({ class: props.ui?.content })">
       <slot name="content" />
     </CollapsibleContent>
   </CollapsibleRoot>

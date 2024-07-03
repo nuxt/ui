@@ -50,7 +50,7 @@ export interface RadioGroupSlots<T> {
 </script>
 
 <script setup lang="ts" generic="T extends RadioGroupItem | AcceptableValue">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useId, useFormField } from '#imports'
@@ -66,7 +66,7 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', '
 const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled } = useFormField<RadioGroupProps<T>>(props)
 const id = _id.value ?? useId()
 
-const ui = computed(() => tv({ extend: radioGroup, slots: props.ui })({
+const ui = computed(() => radioGroup({
   size: size.value,
   color: color.value,
   disabled: disabled.value,
@@ -113,29 +113,29 @@ function onUpdate(value: any) {
     :class="ui.root({ class: props.class })"
     @update:model-value="onUpdate"
   >
-    <fieldset :class="ui.fieldset()">
-      <legend v-if="legend || !!slots.legend" :class="ui.legend()">
+    <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })">
+      <legend v-if="legend || !!slots.legend" :class="ui.legend({ class: props.ui?.legend })">
         <slot name="legend">
           {{ legend }}
         </slot>
       </legend>
-      <div v-for="item in normalizedItems" :key="item.value" :class="ui.item()">
-        <div :class="ui.container()">
+      <div v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: props.ui?.item })">
+        <div :class="ui.container({ class: props.ui?.container })">
           <RadioGroupItem
             :id="item.id"
             :value="item.value"
             :disabled="disabled"
-            :class="ui.base()"
+            :class="ui.base({ class: props.ui?.base })"
           >
-            <RadioGroupIndicator :class="ui.indicator()" />
+            <RadioGroupIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
           </RadioGroupItem>
         </div>
 
-        <div :class="ui.wrapper()">
-          <Label :class="ui.label()" :for="item.id">
+        <div :class="ui.wrapper({ class: props.ui?.wrapper })">
+          <Label :class="ui.label({ class: props.ui?.label })" :for="item.id">
             <slot name="label" :item="item" :model-value="modelValue">{{ item.label }}</slot>
           </Label>
-          <p v-if="item.description || !!slots.description" :class="ui.description()">
+          <p v-if="item.description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
             <slot name="description" :item="item" :model-value="modelValue">
               {{ item.description }}
             </slot>

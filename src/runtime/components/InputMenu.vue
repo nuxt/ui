@@ -137,7 +137,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 
 const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
-const ui = computed(() => tv({ extend: inputMenu, slots: props.ui })({
+const ui = computed(() => inputMenu({
   color: color.value,
   variant: props.variant,
   size: inputSize?.value,
@@ -233,7 +233,7 @@ function onUpdateOpen(value: boolean) {
     @update:open="onUpdateOpen"
     @keydown.enter="$event.preventDefault()"
   >
-    <ComboboxAnchor :as-child="!multiple" :class="ui.base()">
+    <ComboboxAnchor :as-child="!multiple" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
         v-if="multiple"
         v-slot="{ modelValue: tags }: { modelValue: AcceptableValue[] }"
@@ -243,16 +243,16 @@ function onUpdateOpen(value: boolean) {
         as-child
         @blur="onBlur"
       >
-        <TagsInputItem v-for="(item, index) in tags" :key="index" :value="(item as string)" :class="ui.tagsItem()">
-          <TagsInputItemText :class="ui.tagsItemText()">
+        <TagsInputItem v-for="(item, index) in tags" :key="index" :value="(item as string)" :class="ui.tagsItem({ class: props.ui?.tagsItem })">
+          <TagsInputItemText :class="ui.tagsItemText({ class: props.ui?.tagsItemText })">
             <slot name="tags-item-text" :item="(item as T)" :index="index">
               {{ typeof item === 'object' ? item.label : item }}
             </slot>
           </TagsInputItemText>
 
-          <TagsInputItemDelete :class="ui.tagsItemDelete()" :disabled="disabled">
+          <TagsInputItemDelete :class="ui.tagsItemDelete({ class: props.ui?.tagsItemDelete })" :disabled="disabled">
             <slot name="tags-item-delete" :item="(item as T)" :index="index">
-              <UIcon :name="deleteIcon || appConfig.ui.icons.close" :class="ui.tagsItemDeleteIcon()" />
+              <UIcon :name="deleteIcon || appConfig.ui.icons.close" :class="ui.tagsItemDeleteIcon({ class: props.ui?.tagsItemDeleteIcon })" />
             </slot>
           </TagsInputItemDelete>
         </TagsInputItem>
@@ -263,7 +263,7 @@ function onUpdateOpen(value: boolean) {
             v-bind="$attrs"
             :placeholder="placeholder"
             :required="required"
-            :class="ui.tagsInput()"
+            :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @keydown.enter.prevent
           />
         </ComboboxInput>
@@ -276,66 +276,66 @@ function onUpdateOpen(value: boolean) {
         :type="type"
         :placeholder="placeholder"
         :required="required"
-        :class="ui.base()"
+        :class="ui.base({ class: props.ui?.base })"
         @blur="onBlur"
       />
 
-      <span v-if="isLeading || !!slots.leading" :class="ui.leading()">
+      <span v-if="isLeading || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as T)" :open="open" :ui="ui">
-          <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon()" />
+          <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
         </slot>
       </span>
 
-      <ComboboxTrigger v-if="isTrailing || !!slots.trailing" :class="ui.trailing()">
+      <ComboboxTrigger v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
         <slot name="trailing" :model-value="(modelValue as T)" :open="open" :ui="ui">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon()" />
+          <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </ComboboxTrigger>
     </ComboboxAnchor>
 
     <ComboboxPortal :disabled="!portal">
-      <ComboboxContent :class="ui.content()" v-bind="contentProps">
-        <ComboboxEmpty :class="ui.empty()">
+      <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
+        <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
             {{ searchTerm ? `No results for ${searchTerm}` : 'No results' }}
           </slot>
         </ComboboxEmpty>
 
-        <ComboboxViewport :class="ui.viewport()">
-          <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group()">
+        <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
+          <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label()">
+              <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
                 {{ item.label }}
               </ComboboxLabel>
 
-              <ComboboxSeparator v-else-if="item?.type === 'separator'" :class="ui.separator()" />
+              <ComboboxSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
 
-              <ComboboxItem v-else :class="ui.item()" :disabled="item.disabled" :value="item">
+              <ComboboxItem v-else :class="ui.item({ class: props.ui?.item })" :disabled="item.disabled" :value="item">
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
-                    <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.itemLeadingAvatar()" />
-                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon()" />
+                    <UAvatar v-if="item.avatar" size="2xs" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
                     <UChip
                       v-else-if="item.chip"
                       size="md"
                       inset
                       standalone
                       v-bind="item.chip"
-                      :class="ui.itemLeadingChip()"
+                      :class="ui.itemLeadingChip({ class: props.ui?.itemLeadingChip })"
                     />
                   </slot>
 
-                  <span :class="ui.itemLabel()">
+                  <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                     <slot name="item-label" :item="(item as T)" :index="index">
                       {{ displayValue(item as T) }}
                     </slot>
                   </span>
 
-                  <span :class="ui.itemTrailing()">
+                  <span :class="ui.itemTrailing({ class: props.ui?.itemTrailing })">
                     <slot name="item-trailing" :item="(item as T)" :index="index" />
 
                     <ComboboxItemIndicator as-child>
-                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon()" />
+                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: props.ui?.itemTrailingIcon })" />
                     </ComboboxItemIndicator>
                   </span>
                 </slot>

@@ -59,7 +59,10 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open'
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as TooltipContentProps)
 const arrowProps = toRef(() => props.arrow as TooltipArrowProps)
 
-const ui = computed(() => tv({ extend: tooltip, slots: props.ui })({ side: contentProps.value.side }))
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tooltip({
+  side: contentProps.value.side
+}))
 </script>
 
 <template>
@@ -71,14 +74,14 @@ const ui = computed(() => tv({ extend: tooltip, slots: props.ui })({ side: conte
     <TooltipPortal :disabled="!portal">
       <TooltipContent v-bind="contentProps" :class="ui.content({ class: props.class })">
         <slot name="content">
-          <span v-if="text" :class="ui.text()">{{ text }}</span>
+          <span v-if="text" :class="ui.text({ class: props.ui?.text })">{{ text }}</span>
 
-          <span v-if="kbds?.length" :class="ui.kbds()">
+          <span v-if="kbds?.length" :class="ui.kbds({ class: props.ui?.kbds })">
             <UKbd v-for="(kbd, index) in kbds" :key="index" size="sm" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
 
-        <TooltipArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow()" />
+        <TooltipArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </TooltipContent>
     </TooltipPortal>
   </TooltipRoot>

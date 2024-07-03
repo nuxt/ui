@@ -181,7 +181,7 @@ exports[`Input > renders with type correctly 1`] = `
 `;
 
 exports[`Input > renders with ui correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 rounded-full px-2.5 py-1.5 text-sm gap-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 px-2.5 py-1.5 text-sm gap-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 rounded-full">
   <!--v-if-->
   <!--v-if-->
 </div>"

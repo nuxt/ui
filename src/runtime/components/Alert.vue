@@ -54,7 +54,7 @@ export interface AlertSlots {
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { class: string }): any
+  close(props: { ui: any }): any
 }
 </script>
 
@@ -72,7 +72,7 @@ const appConfig = useAppConfig()
 
 const multiline = computed(() => !!props.title && !!props.description)
 
-const ui = computed(() => tv({ extend: alert, slots: props.ui })({
+const ui = computed(() => alert({
   color: props.color,
   variant: props.variant
 }))
@@ -81,39 +81,39 @@ const ui = computed(() => tv({ extend: alert, slots: props.ui })({
 <template>
   <Primitive :as="as" :class="ui.root({ class: props.class, multiline })">
     <slot name="leading">
-      <UAvatar v-if="avatar" size="2xl" v-bind="avatar" :class="ui.avatar()" />
-      <UIcon v-else-if="icon" :name="icon" :class="ui.icon()" />
+      <UAvatar v-if="avatar" size="2xl" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+      <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
     </slot>
 
-    <div :class="ui.wrapper()">
-      <div v-if="title || !!slots.title" :class="ui.title()">
+    <div :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <div v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
         <slot name="title">
           {{ title }}
         </slot>
       </div>
       <template v-if="description || !!slots.description">
-        <div :class="ui.description()">
+        <div :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
             {{ description }}
           </slot>
         </div>
       </template>
 
-      <div v-if="multiline && actions?.length" :class="ui.actions({ multiline: true })">
+      <div v-if="multiline && actions?.length" :class="ui.actions({ class: props.ui?.actions, multiline: true })">
         <slot name="actions">
           <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
         </slot>
       </div>
     </div>
 
-    <div v-if="(!multiline && actions?.length) || close" :class="ui.actions({ multiline: false })">
+    <div v-if="(!multiline && actions?.length) || close" :class="ui.actions({ class: props.ui?.actions, multiline: false })">
       <template v-if="!multiline">
         <slot name="actions">
           <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
         </slot>
       </template>
 
-      <slot name="close" :class="ui.close()">
+      <slot name="close" :ui="ui">
         <UButton
           v-if="close"
           :icon="closeIcon || appConfig.ui.icons.close"
@@ -122,7 +122,7 @@ const ui = computed(() => tv({ extend: alert, slots: props.ui })({
           variant="link"
           aria-label="Close"
           v-bind="typeof close === 'object' ? close : undefined"
-          :class="ui.close()"
+          :class="ui.close({ class: props.ui?.close })"
           @click="emits('close')"
         />
       </slot>

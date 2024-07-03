@@ -65,7 +65,9 @@ const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'type'), emits)
 const contentProps = toRef(() => props.content)
 
-const ui = computed(() => tv({ extend: accordion, slots: props.ui })({ disabled: props.disabled }))
+const ui = computed(() => accordion({
+  disabled: props.disabled
+}))
 </script>
 
 <template>
@@ -76,25 +78,25 @@ const ui = computed(() => tv({ extend: accordion, slots: props.ui })({ disabled:
       :key="index"
       :value="item.value || String(index)"
       :disabled="item.disabled"
-      :class="ui.item()"
+      :class="ui.item({ class: props.ui?.item })"
     >
-      <AccordionHeader :class="ui.header()">
-        <AccordionTrigger :class="ui.trigger({ disabled: item.disabled })">
+      <AccordionHeader :class="ui.header({ class: props.ui?.header })">
+        <AccordionTrigger :class="ui.trigger({ class: props.ui?.trigger, disabled: item.disabled })">
           <slot name="leading" :item="item" :index="index" :open="open">
-            <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon()" />
+            <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           </slot>
 
-          <span v-if="item.label || !!slots.default" :class="ui.label()">
+          <span v-if="item.label || !!slots.default" :class="ui.label({ class: props.ui?.label })">
             <slot :item="item" :index="index" :open="open">{{ item.label }}</slot>
           </span>
 
           <slot name="trailing" :item="item" :index="index" :open="open">
-            <UIcon :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon()" />
+            <UIcon :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
           </slot>
         </AccordionTrigger>
       </AccordionHeader>
 
-      <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot])" v-bind="contentProps" :class="ui.content()">
+      <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot])" v-bind="contentProps" :class="ui.content({ class: props.ui?.content })">
         <slot :name="item.slot || 'content'" :item="item" :index="index" :open="open">
           {{ item.content }}
         </slot>

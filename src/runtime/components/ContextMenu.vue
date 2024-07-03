@@ -76,7 +76,7 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content as ContextMenuContentProps)
 const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[string]>
 
-const ui = computed(() => tv({ extend: contextMenu, slots: props.ui })({
+const ui = computed(() => contextMenu({
   size: props.size
 }))
 </script>
@@ -87,7 +87,14 @@ const ui = computed(() => tv({ extend: contextMenu, slots: props.ui })({
       <slot />
     </ContextMenuTrigger>
 
-    <UContextMenuContent :class="ui.content({ class: props.class })" :ui="ui" v-bind="contentProps" :items="items" :portal="portal">
+    <UContextMenuContent
+      :class="ui.content({ class: props.class })"
+      :ui="ui"
+      :ui-override="props.ui"
+      v-bind="contentProps"
+      :items="items"
+      :portal="portal"
+    >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />
       </template>

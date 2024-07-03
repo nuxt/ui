@@ -86,7 +86,7 @@ const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffse
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
 const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[string]>
 
-const ui = computed(() => tv({ extend: dropdownMenu, slots: props.ui })({
+const ui = computed(() => dropdownMenu({
   size: props.size
 }))
 </script>
@@ -97,12 +97,19 @@ const ui = computed(() => tv({ extend: dropdownMenu, slots: props.ui })({
       <slot :open="open" />
     </DropdownMenuTrigger>
 
-    <UDropdownMenuContent :class="ui.content({ class: props.class })" :ui="ui" v-bind="contentProps" :items="items" :portal="portal">
+    <UDropdownMenuContent
+      :class="ui.content({ class: props.class })"
+      :ui="ui"
+      :ui-override="props.ui"
+      v-bind="contentProps"
+      :items="items"
+      :portal="portal"
+    >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />
       </template>
 
-      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow()" />
+      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
     </UDropdownMenuContent>
   </DropdownMenuRoot>
 </template>

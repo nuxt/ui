@@ -38,16 +38,19 @@ const fallback = computed(() => props.text || (props.alt || '').split(' ').map(w
 
 const { size } = useAvatarGroup(props)
 
-const ui = computed(() => tv({ extend: avatar, slots: props.ui })({ size: size.value }))
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => avatar({
+  size: size.value
+}))
 </script>
 
 <template>
   <AvatarRoot :class="ui.root({ class: props.class })">
-    <AvatarImage v-if="src" :as="as" :src="src" :alt="alt" :class="ui.image()" />
+    <AvatarImage v-if="src" :as="as" :src="src" :alt="alt" :class="ui.image({ class: props.ui?.image })" />
 
     <AvatarFallback as-child v-bind="fallbackProps">
-      <UIcon v-if="icon" :name="icon" :class="ui.icon()" />
-      <span v-else :class="ui.fallback()">{{ fallback }}</span>
+      <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
+      <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback }}</span>
     </AvatarFallback>
   </AvatarRoot>
 </template>
