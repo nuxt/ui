@@ -7,6 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     container: 'font-medium text-gray-700 dark:text-gray-200 flex',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
+    avatarSize: '2xs',
     label: 'text-sm'
   },
   variants: {

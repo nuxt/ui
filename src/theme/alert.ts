@@ -8,6 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
     description: 'text-sm',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
+    avatarSize: '2xl',
     actions: 'flex gap-1.5 shrink-0',
     close: 'p-0'
   },

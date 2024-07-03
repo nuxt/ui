@@ -8,6 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
     description: 'text-sm text-gray-500 dark:text-gray-400',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
+    avatarSize: '2xl',
     actions: 'flex gap-1.5 shrink-0',
     progress: 'absolute inset-x-0 bottom-0 h-1 z-[-1]',
     close: 'p-0'

@@ -77,7 +77,7 @@ const ui = computed(() => tooltip({
           <span v-if="text" :class="ui.text({ class: props.ui?.text })">{{ text }}</span>
 
           <span v-if="kbds?.length" :class="ui.kbds({ class: props.ui?.kbds })">
-            <UKbd v-for="(kbd, index) in kbds" :key="index" size="sm" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+            <UKbd v-for="(kbd, index) in kbds" :key="index" :size="(ui.kbdsSize() as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
 

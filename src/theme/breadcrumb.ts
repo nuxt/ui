@@ -8,6 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
     link: 'group relative flex items-center gap-1.5 text-sm min-w-0',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
+    linkLeadingAvatarSize: '2xs',
     linkLabel: 'truncate',
     separator: 'flex',
     separatorIcon: 'shrink-0 size-5 text-gray-500 dark:text-gray-400'
