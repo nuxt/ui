@@ -10,14 +10,16 @@ export default (options: Required<ModuleOptions>) => {
       viewport: 'divide-y divide-gray-200 dark:divide-gray-800 scroll-py-1',
       group: 'p-1 isolate',
       empty: 'py-2 text-center text-sm text-gray-500 dark:text-gray-400',
-      label: 'p-1.5 text-xs font-semibold text-gray-900 dark:text-white',
+      label: 'font-semibold text-gray-900 dark:text-white',
       separator: '-mx-1 my-1 h-px bg-gray-200 dark:bg-gray-800',
       item: ['group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-gray-700 dark:text-gray-200 data-highlighted:text-gray-900 dark:data-highlighted:text-white data-highlighted:before:bg-gray-50 dark:data-highlighted:before:bg-gray-800/50', options.transitions && 'transition-colors before:transition-colors'],
-      itemLeadingIcon: ['shrink-0 size-5 text-gray-400 dark:text-gray-500 group-data-highlighted:text-gray-700 dark:group-data-highlighted:text-gray-200', options.transitions && 'transition-colors'],
+      itemLeadingIcon: ['shrink-0 text-gray-400 dark:text-gray-500 group-data-highlighted:text-gray-700 dark:group-data-highlighted:text-gray-200', options.transitions && 'transition-colors'],
       itemLeadingAvatar: 'shrink-0',
+      itemLeadingAvatarSize: '',
       itemLeadingChip: 'shrink-0 mx-1.5',
+      itemLeadingChipSize: '',
       itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
-      itemTrailingIcon: 'shrink-0 size-5',
+      itemTrailingIcon: 'shrink-0',
       itemLabel: 'truncate',
       tagsItem: 'px-1.5 py-0.5 rounded font-medium inline-flex items-center gap-0.5 ring ring-inset ring-gray-300 dark:ring-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 data-disabled:cursor-not-allowed data-disabled:opacity-75',
       tagsItemText: 'truncate',
@@ -42,22 +44,52 @@ export default (options: Required<ModuleOptions>) => {
       },
       size: {
         xs: {
+          label: 'p-1 text-[10px]/3 gap-1',
+          item: 'p-1 text-xs gap-1',
+          itemLeadingIcon: 'size-4',
+          itemLeadingAvatarSize: '3xs',
+          itemLeadingChipSize: 'sm',
+          itemTrailingIcon: 'size-4',
           tagsItem: 'text-[10px]/3',
           tagsItemDeleteIcon: 'size-3'
         },
         sm: {
+          label: 'p-1.5 text-[10px]/3 gap-1.5',
+          item: 'p-1.5 text-xs gap-1.5',
+          itemLeadingIcon: 'size-4',
+          itemLeadingAvatarSize: '3xs',
+          itemLeadingChipSize: 'sm',
+          itemTrailingIcon: 'size-4',
           tagsItem: 'text-[10px]/3',
           tagsItemDeleteIcon: 'size-3'
         },
         md: {
+          label: 'p-1.5 text-xs gap-1.5',
+          item: 'p-1.5 text-sm gap-1.5',
+          itemLeadingIcon: 'size-5',
+          itemLeadingAvatarSize: '2xs',
+          itemLeadingChipSize: 'md',
+          itemTrailingIcon: 'size-5',
           tagsItem: 'text-xs',
           tagsItemDeleteIcon: 'size-3.5'
         },
         lg: {
+          label: 'p-2 text-xs gap-2',
+          item: 'p-2 text-sm gap-2',
+          itemLeadingIcon: 'size-5',
+          itemLeadingAvatarSize: '2xs',
+          itemLeadingChipSize: 'md',
+          itemTrailingIcon: 'size-5',
           tagsItem: 'text-xs',
           tagsItemDeleteIcon: 'size-3.5'
         },
         xl: {
+          label: 'p-2 text-sm gap-2',
+          item: 'p-2 text-base gap-2',
+          itemLeadingIcon: 'size-6',
+          itemLeadingAvatarSize: 'xs',
+          itemLeadingChipSize: 'lg',
+          itemTrailingIcon: 'size-6',
           tagsItem: 'text-sm',
           tagsItemDeleteIcon: 'size-4'
         }
