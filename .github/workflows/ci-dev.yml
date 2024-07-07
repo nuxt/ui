@@ -25,6 +25,9 @@ jobs:
       NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
 
     steps:
+      - name: checkout
+        uses: actions/checkout@master
+
       - uses: pnpm/action-setup@v4
         name: Install pnpm
 

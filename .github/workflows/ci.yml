@@ -18,6 +18,9 @@ jobs:
       NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
 
     steps:
+      - name: checkout
+        uses: actions/checkout@master
+
       - uses: pnpm/action-setup@v4
         name: Install pnpm
 
@@ -25,9 +28,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
-
-      - name: checkout
-        uses: actions/checkout@master
 
       - name: Install dependencies
         run: pnpm install
