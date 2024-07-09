@@ -2,5 +2,5 @@
   "extends": [
     "github>nuxt/renovate-config-nuxt"
   ],
-  "ignoreDeps": ["valibot30", "valibot31"]
+  "ignoreDeps": ["valibot30", "valibot31", "vue-tsc"]
 }
