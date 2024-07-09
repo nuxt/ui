@@ -67,6 +67,11 @@ export interface SelectMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelVal
    * @defaultValue ['label']
    */
   filter?: boolean | string[]
+  /**
+   * When `items` is an array of objects, select the field to use as the value instead of the object itself.
+   * @defaultValue undefined
+   */
+  valueKey?: keyof T
   items?: T[] | T[][]
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -246,7 +251,7 @@ function onUpdateOpen(value: boolean) {
 
               <ComboboxSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
 
-              <ComboboxItem v-else :class="ui.item({ class: props.ui?.item })" :disabled="item.disabled" :value="item">
+              <ComboboxItem v-else :class="ui.item({ class: props.ui?.item })" :disabled="item.disabled" :value="valueKey && typeof item === 'object' ? (item[valueKey as keyof SelectMenuItem]) as AcceptableValue : item">
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
                     <UAvatar v-if="item.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />

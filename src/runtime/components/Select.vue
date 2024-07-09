@@ -58,6 +58,11 @@ export interface SelectProps<T> extends Omit<SelectRootProps, 'dir'>, UseCompone
    * @defaultValue true
    */
   portal?: boolean
+  /**
+   * When `items` is an array of objects, select the field to use as the value.
+   * @defaultValue 'value'
+   */
+  valueKey?: string
   items?: T[] | T[][]
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -92,6 +97,7 @@ import { useAppConfig, useComponentIcons, useFormField, useButtonGroup } from '#
 import { UIcon, UChip, UAvatar } from '#components'
 
 const props = withDefaults(defineProps<SelectProps<T>>(), {
+  valueKey: 'value' as any,
   portal: true
 })
 const emits = defineEmits<SelectEmits>()
@@ -175,7 +181,7 @@ function onUpdateOpen(value: boolean) {
                 {{ item.label }}
               </SelectLabel>
               <SelectSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
-              <SelectItem v-else :class="ui.item({ class: props.ui?.item })" :disabled="item.disabled" :value="typeof item === 'object' ? item.value : item">
+              <SelectItem v-else :class="ui.item({ class: props.ui?.item })" :disabled="item.disabled" :value="typeof item === 'object' ? (item[valueKey as keyof SelectItem] as string) : item">
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
                     <UAvatar v-if="item.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
