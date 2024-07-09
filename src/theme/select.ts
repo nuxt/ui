@@ -17,7 +17,7 @@ export default (options: Required<ModuleOptions>) => {
       itemLeadingIcon: ['shrink-0 text-gray-400 dark:text-gray-500 group-data-highlighted:text-gray-700 dark:group-data-highlighted:text-gray-200', options.transitions && 'transition-colors'],
       itemLeadingAvatar: 'shrink-0',
       itemLeadingAvatarSize: '',
-      itemLeadingChip: 'shrink-0 mx-1.5',
+      itemLeadingChip: 'shrink-0',
       itemLeadingChipSize: '',
       itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
       itemTrailingIcon: 'shrink-0',
@@ -30,6 +30,7 @@ export default (options: Required<ModuleOptions>) => {
           item: 'p-1 text-xs gap-1',
           itemLeadingIcon: 'size-4',
           itemLeadingAvatarSize: '3xs',
+          itemLeadingChip: 'size-4',
           itemLeadingChipSize: 'sm',
           itemTrailingIcon: 'size-4'
         },
@@ -38,6 +39,7 @@ export default (options: Required<ModuleOptions>) => {
           item: 'p-1.5 text-xs gap-1.5',
           itemLeadingIcon: 'size-4',
           itemLeadingAvatarSize: '3xs',
+          itemLeadingChip: 'size-4',
           itemLeadingChipSize: 'sm',
           itemTrailingIcon: 'size-4'
         },
@@ -46,6 +48,7 @@ export default (options: Required<ModuleOptions>) => {
           item: 'p-1.5 text-sm gap-1.5',
           itemLeadingIcon: 'size-5',
           itemLeadingAvatarSize: '2xs',
+          itemLeadingChip: 'size-5',
           itemLeadingChipSize: 'md',
           itemTrailingIcon: 'size-5'
         },
@@ -54,6 +57,7 @@ export default (options: Required<ModuleOptions>) => {
           item: 'p-2 text-sm gap-2',
           itemLeadingIcon: 'size-5',
           itemLeadingAvatarSize: '2xs',
+          itemLeadingChip: 'size-5',
           itemLeadingChipSize: 'md',
           itemTrailingIcon: 'size-5'
         },
@@ -62,6 +66,7 @@ export default (options: Required<ModuleOptions>) => {
           item: 'p-2 text-base gap-2',
           itemLeadingIcon: 'size-6',
           itemLeadingAvatarSize: 'xs',
+          itemLeadingChip: 'size-6',
           itemLeadingChipSize: 'lg',
           itemTrailingIcon: 'size-6'
         }

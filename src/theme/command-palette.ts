@@ -14,7 +14,7 @@ export default (options: Required<ModuleOptions>) => ({
     itemLeadingIcon: ['shrink-0 size-5 text-gray-400 dark:text-gray-500 group-data-highlighted:text-gray-700 dark:group-data-highlighted:text-gray-200', options.transitions && 'transition-colors'],
     itemLeadingAvatar: 'shrink-0',
     itemLeadingAvatarSize: '2xs',
-    itemLeadingChip: 'shrink-0 mx-1.5',
+    itemLeadingChip: 'shrink-0 size-5',
     itemLeadingChipSize: 'md',
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     itemTrailingIcon: 'shrink-0 size-5',
