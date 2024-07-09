@@ -34,7 +34,6 @@ export default defineNuxtConfig({
   },
   ui: {
     global: true,
-    icons: ['heroicons', 'simple-icons'],
     safelistColors: excludeColors(colors)
   },
   content: {
@@ -129,6 +128,9 @@ export default defineNuxtConfig({
   },
   typescript: {
     strict: false
+  },
+  site: {
+    url: 'https://ui.nuxt.com'
   },
   vite: {
     optimizeDeps: {

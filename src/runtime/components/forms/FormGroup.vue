@@ -23,7 +23,7 @@
     <div :class="[label ? ui.container : '']">
       <slot v-bind="{ error }" />
 
-      <p v-if="(typeof error === 'string' && error) || $slots.error" :class="[ui.error, size]">
+      <p v-if="typeof error === 'string' && error" :class="[ui.error, size]">
         <slot v-if="$slots.error" name="error" v-bind="{ error, label, name, hint, description, help }" />
         <template v-else>
           {{ error }}

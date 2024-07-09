@@ -140,8 +140,7 @@ import {
 import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
-import UIcon from '../elements/Icon.vue'
-import UAvatar from '../elements/Avatar.vue'
+import { UIcon, UAvatar } from '#components'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
@@ -346,7 +345,7 @@ export default defineComponent({
     const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
     const { emitFormBlur, emitFormChange, inputId, color, size: sizeFormGroup, name } = useFormGroup(props, config)
 
-    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
+    const size = computed(() => sizeButtonGroup.value ?? sizeFormGroup.value)
 
     const internalQuery = ref('')
     const query = computed({
@@ -368,7 +367,7 @@ export default defineComponent({
         }
       } else if (props.modelValue !== undefined && props.modelValue !== null) {
         if (props.valueAttribute) {
-          const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
+          const option = options.value.find(option => option[props.valueAttribute] === props.modelValue)
           return option ? option[props.optionAttribute] : null
         } else {
           return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
@@ -452,18 +451,24 @@ export default defineComponent({
       )
     })
 
-    const debouncedSearch = typeof props.searchable === 'function' ? useDebounceFn(props.searchable, props.debounce) : undefined
+    const debouncedSearch = props.searchable && typeof props.searchable === 'function' ? useDebounceFn(props.searchable, props.debounce) : undefined
 
-    const filteredOptions = computedAsync(async () => {
+    const options = computedAsync(async () => {
       if (props.searchable && debouncedSearch) {
         return await debouncedSearch(query.value)
       }
 
-      if (query.value === '') {
-        return props.options
+      return props.options || []
+    }, [], {
+      lazy: props.searchableLazy
+    })
+
+    const filteredOptions = computed(() => {
+      if (!query.value) {
+        return options.value
       }
 
-      return (props.options as any[]).filter((option: any) => {
+      return options.value.filter((option: any) => {
         return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
           if (['string', 'number'].includes(typeof option)) {
             return String(option).search(new RegExp(query.value, 'i')) !== -1
@@ -474,8 +479,6 @@ export default defineComponent({
           return child !== null && child !== undefined && String(child).search(new RegExp(query.value, 'i')) !== -1
         })
       })
-    }, [], {
-      lazy: props.searchableLazy
     })
 
     const createOption = computed(() => {

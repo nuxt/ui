@@ -72,8 +72,12 @@ export function useInjectButtonGroup ({ ui, props }: { ui: any, props: any }) {
   onUnmounted(() => {
     groupContext?.value.unregister(instance)
   })
+
   return {
-    size: computed(() => groupContext?.value.size || props.size),
+    size: computed(() => {
+      if (!groupContext?.value) return props.size
+      return groupContext?.value.size ?? ui.value.default.size
+    }),
     rounded: computed(() => {
       if (!groupContext || positionInGroup.value === -1) return ui.value.rounded
       if (groupContext.value.children.length === 1) return groupContext.value.ui.rounded
