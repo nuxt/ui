@@ -46,7 +46,7 @@ const components = [
   'tooltip'
 ]
 
-const items = components.map(component => ({ label: upperName(component), to: `/${component}` }))
+const items = components.map(component => ({ label: upperName(component), to: `/components/${component}` }))
 
 function upperName(name: string) {
   return splitByCase(name).map(p => upperFirst(p)).join('')
