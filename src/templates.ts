@@ -101,7 +101,7 @@ type AppConfigUI = {
     gray?: 'slate' | 'cool' | 'zinc' | 'neutral' | 'stone'
   }
   icons?: Partial<typeof icons>
-} & DeepPartial<typeof ui>
+} & DeepPartial<typeof ui, string>
 
 declare module 'nuxt/schema' {
   interface AppConfigInput {

@@ -1,6 +1,14 @@
-export type DeepPartial<T> = Partial<{
-  [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string | object }
-}>
+export interface TightMap<O = any> {
+  [key: string]: TightMap | O
+}
+
+export type DeepPartial<T, O = any> = {
+  [P in keyof T]?: T[P] extends object
+    ? DeepPartial<T[P], O>
+    : T[P];
+} & {
+  [key: string]: O | TightMap<O>
+}
 
 export type DynamicSlots<T extends { slot?: string }, SlotProps, Slot = T['slot']> =
   Record<string, SlotProps> & (Slot extends string ? Record<Slot, SlotProps> : Record<string, never>)
