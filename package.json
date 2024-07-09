@@ -73,7 +73,7 @@
     "valibot": "^0.33.0",
     "valibot31": "npm:valibot@0.31.0",
     "valibot30": "npm:valibot@0.30.0",
-    "vitest": "^1.6.0",
+    "vitest": "^2.0.1",
     "vitest-environment-nuxt": "^1.0.0",
     "vue-tsc": "^2.0.16",
     "yup": "^1.4.0",
