@@ -17,7 +17,7 @@ export default (options: Required<ModuleOptions>) => ({
         base: `data-[state=checked]:bg-${color}-500 dark:data-[state=checked]:bg-${color}-400 focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`,
         icon: `group-data-[state=checked]:text-${color}-500 dark:group-data-[state=checked]:text-${color}-400`
       }])),
-      black: {
+      gray: {
         base: 'data-[state=checked]:bg-gray-900 dark:data-[state=checked]:bg-white focus-visible:ring-gray-900 dark:focus-visible:ring-white',
         icon: 'group-data-[state=checked]:text-gray-900 dark:group-data-[state=checked]:text-white'
       }
@@ -71,7 +71,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     required: {
       true: {
-        label: 'after:content-[\'*\'] after:ms-0.5 after:text-red-500 dark:after:text-red-400'
+        label: 'after:content-[\'*\'] after:ms-0.5 after:text-error-500 dark:after:text-error-400'
       }
     },
     disabled: {

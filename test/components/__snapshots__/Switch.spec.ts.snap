@@ -23,43 +23,16 @@ exports[`Switch > renders with checkedIcon correctly 1`] = `
 
 exports[`Switch > renders with class correctly 1`] = `
 "<div class="relative items-start inline-flex">
-  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 w-9" id="21" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 w-9" id="18" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
     <!---->
   </div>
   <!--v-if-->
 </div>"
 `;
 
-exports[`Switch > renders with color black correctly 1`] = `
+exports[`Switch > renders with color gray correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-gray-900 dark:data-[state=checked]:bg-white focus-visible:ring-gray-900 dark:focus-visible:ring-white w-9" id="20" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-    <!---->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Switch > renders with color green correctly 1`] = `
-"<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-green-500 dark:data-[state=checked]:bg-green-400 focus-visible:ring-green-500 dark:focus-visible:ring-green-400 w-9" id="18" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-    <!---->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Switch > renders with color primary correctly 1`] = `
-"<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 w-9" id="17" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
-    <!---->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Switch > renders with color red correctly 1`] = `
-"<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-red-500 dark:data-[state=checked]:bg-red-400 focus-visible:ring-red-500 dark:focus-visible:ring-red-400 w-9" id="19" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-gray-900 dark:data-[state=checked]:bg-white focus-visible:ring-gray-900 dark:focus-visible:ring-white w-9" id="17" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
     <!---->
   </div>
   <!--v-if-->
@@ -88,10 +61,10 @@ exports[`Switch > renders with description correctly 1`] = `
 
 exports[`Switch > renders with description slot correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 w-9" id="24" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 w-9" id="21" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
     <!---->
   </div>
-  <div class="ms-2 text-sm"><label for="24" class="block font-medium text-gray-700 dark:text-gray-200">Description slot</label>
+  <div class="ms-2 text-sm"><label for="21" class="block font-medium text-gray-700 dark:text-gray-200">Description slot</label>
     <!--v-if-->
   </div>
 </div>"
@@ -128,10 +101,10 @@ exports[`Switch > renders with label correctly 1`] = `
 
 exports[`Switch > renders with label slot correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 w-9" id="23" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 w-9" id="20" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
     <!---->
   </div>
-  <div class="ms-2 text-sm"><label for="23" class="block font-medium text-gray-700 dark:text-gray-200">Label slot</label>
+  <div class="ms-2 text-sm"><label for="20" class="block font-medium text-gray-700 dark:text-gray-200">Label slot</label>
     <!--v-if-->
   </div>
 </div>"
@@ -169,7 +142,7 @@ exports[`Switch > renders with required correctly 1`] = `
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 w-9" id="10" role="switch" type="button" aria-checked="false" aria-required="true" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
     <!---->
   </div>
-  <div class="ms-2 text-sm"><label for="10" class="block font-medium text-gray-700 dark:text-gray-200 after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400">Label</label>
+  <div class="ms-2 text-sm"><label for="10" class="block font-medium text-gray-700 dark:text-gray-200 after:content-['*'] after:ms-0.5 after:text-error-500 dark:after:text-error-400">Label</label>
     <!--v-if-->
   </div>
 </div>"
@@ -222,7 +195,7 @@ exports[`Switch > renders with size xs correctly 1`] = `
 
 exports[`Switch > renders with ui correctly 1`] = `
 "<div class="relative flex items-start">
-  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 w-9" id="22" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
+  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700 transition-colors duration-200 data-[state=checked]:bg-primary-500 dark:data-[state=checked]:bg-primary-400 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 w-9" id="19" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
     <!---->
   </div>
   <!--v-if-->

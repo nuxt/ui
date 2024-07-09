@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Alert > renders with as correctly 1`] = `
-"<article class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<article class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -13,7 +13,7 @@ exports[`Alert > renders with as correctly 1`] = `
 `;
 
 exports[`Alert > renders with avatar correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-11 text-[22px] shrink-0"><img role="img" src="https://avatars.githubusercontent.com/u/739984?v=4" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-gray-100 dark:bg-gray-800 size-11 text-[22px] shrink-0"><img role="img" src="https://avatars.githubusercontent.com/u/739984?v=4" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-gray-500 dark:text-gray-400 truncate"></span></span>
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
     <!--v-if-->
@@ -24,7 +24,7 @@ exports[`Alert > renders with avatar correctly 1`] = `
 `;
 
 exports[`Alert > renders with class correctly 1`] = `
-"<div class="relative overflow-hidden rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900 w-48">
+"<div class="relative overflow-hidden rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25 w-48">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -36,14 +36,14 @@ exports[`Alert > renders with class correctly 1`] = `
 `;
 
 exports[`Alert > renders with close correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button></div>
@@ -51,7 +51,7 @@ exports[`Alert > renders with close correctly 1`] = `
 `;
 
 exports[`Alert > renders with close slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -63,21 +63,69 @@ exports[`Alert > renders with close slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with closeIcon correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0"><span class="iconify i-heroicons:trash shrink-0 size-5" aria-hidden="true"></span>
+  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5"><span class="iconify i-heroicons:trash shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button></div>
 </div>"
 `;
 
-exports[`Alert > renders with color black correctly 1`] = `
+exports[`Alert > renders with description correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
+  <!--v-if-->
+  <div class="min-w-0 flex-1 flex flex-col gap-1">
+    <div class="text-sm font-medium">Alert</div>
+    <div class="text-sm opacity-90">Description</div>
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Alert > renders with description slot correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
+  <!--v-if-->
+  <div class="min-w-0 flex-1 flex flex-col gap-1">
+    <div class="text-sm font-medium">Alert</div>
+    <div class="text-sm opacity-90">Description slot</div>
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Alert > renders with gray variant outline correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900">
+  <!--v-if-->
+  <div class="min-w-0 flex-1 flex flex-col gap-1">
+    <div class="text-sm font-medium">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Alert > renders with gray variant soft correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800/50">
+  <!--v-if-->
+  <div class="min-w-0 flex-1 flex flex-col gap-1">
+    <div class="text-sm font-medium">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Alert > renders with gray variant solid correctly 1`] = `
 "<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-white dark:text-gray-900 bg-gray-900 dark:bg-white">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
@@ -89,84 +137,12 @@ exports[`Alert > renders with color black correctly 1`] = `
 </div>"
 `;
 
-exports[`Alert > renders with color gray correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800">
+exports[`Alert > renders with gray variant subtle correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800/50">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
     <!--v-if-->
-    <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with color green correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-green-500 dark:bg-green-400 text-white dark:text-gray-900">
-  <!--v-if-->
-  <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Alert</div>
-    <!--v-if-->
-    <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with color primary correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">
-  <!--v-if-->
-  <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Alert</div>
-    <!--v-if-->
-    <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with color red correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-red-500 dark:bg-red-400 text-white dark:text-gray-900">
-  <!--v-if-->
-  <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Alert</div>
-    <!--v-if-->
-    <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with color white correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
-  <!--v-if-->
-  <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Alert</div>
-    <!--v-if-->
-    <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with description correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
-  <!--v-if-->
-  <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Alert</div>
-    <div class="text-sm">Description</div>
-    <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with description slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
-  <!--v-if-->
-  <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Alert</div>
-    <div class="text-sm">Description slot</div>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -174,7 +150,7 @@ exports[`Alert > renders with description slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with icon correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900"><span class="iconify i-heroicons:light-bulb shrink-0 size-5" aria-hidden="true"></span>
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25"><span class="iconify i-heroicons:light-bulb shrink-0 size-5" aria-hidden="true"></span>
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
     <!--v-if-->
@@ -185,7 +161,7 @@ exports[`Alert > renders with icon correctly 1`] = `
 `;
 
 exports[`Alert > renders with leading slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Leading slot</div>
@@ -196,8 +172,8 @@ exports[`Alert > renders with leading slot correctly 1`] = `
 </div>"
 `;
 
-exports[`Alert > renders with title correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
+exports[`Alert > renders with primary variant outline correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -208,43 +184,7 @@ exports[`Alert > renders with title correctly 1`] = `
 </div>"
 `;
 
-exports[`Alert > renders with title slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
-  <!--v-if-->
-  <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Title slot</div>
-    <!--v-if-->
-    <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with ui correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-900 dark:text-white bg-white dark:bg-gray-900">
-  <!--v-if-->
-  <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-bold">Alert</div>
-    <!--v-if-->
-    <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with variant outline correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500 dark:ring-primary-400">
-  <!--v-if-->
-  <div class="min-w-0 flex-1 flex flex-col gap-1">
-    <div class="text-sm font-medium">Alert</div>
-    <!--v-if-->
-    <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with variant soft correctly 1`] = `
+exports[`Alert > renders with primary variant soft correctly 1`] = `
 "<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-primary-500/10 dark:bg-primary-400/10 text-primary-500 dark:text-primary-400">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
@@ -256,7 +196,7 @@ exports[`Alert > renders with variant soft correctly 1`] = `
 </div>"
 `;
 
-exports[`Alert > renders with variant solid correctly 1`] = `
+exports[`Alert > renders with primary variant solid correctly 1`] = `
 "<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-primary-500 dark:bg-primary-400 text-white dark:text-gray-900">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
@@ -268,11 +208,47 @@ exports[`Alert > renders with variant solid correctly 1`] = `
 </div>"
 `;
 
-exports[`Alert > renders with variant subtle correctly 1`] = `
+exports[`Alert > renders with primary variant subtle correctly 1`] = `
 "<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-primary-500/10 dark:bg-primary-400/10 text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Alert > renders with title correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
+  <!--v-if-->
+  <div class="min-w-0 flex-1 flex flex-col gap-1">
+    <div class="text-sm font-medium">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Alert > renders with title slot correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
+  <!--v-if-->
+  <div class="min-w-0 flex-1 flex flex-col gap-1">
+    <div class="text-sm font-medium">Title slot</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Alert > renders with ui correctly 1`] = `
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25">
+  <!--v-if-->
+  <div class="min-w-0 flex-1 flex flex-col gap-1">
+    <div class="text-sm font-bold">Alert</div>
     <!--v-if-->
     <!--v-if-->
   </div>

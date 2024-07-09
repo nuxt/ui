@@ -13,10 +13,10 @@ exports[`Toast > renders with actions correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" data-radix-toast-announce-exclude="" data-radix-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" data-radix-toast-announce-exclude="" data-radix-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
           <!--v-if--><span class="truncate">Action</span>
           <!--v-if-->
-        </button><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+        </button><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -39,7 +39,7 @@ exports[`Toast > renders with avatar correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -63,7 +63,7 @@ exports[`Toast > renders with class correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -107,7 +107,7 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -118,7 +118,7 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
 </div>"
 `;
 
-exports[`Toast > renders with color green correctly 1`] = `
+exports[`Toast > renders with color gray correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
@@ -131,60 +131,12 @@ exports[`Toast > renders with color green correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-green-500 dark:bg-green-400" style="width: 100%;"></div>
-    </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-</div>"
-`;
-
-exports[`Toast > renders with color primary correctly 1`] = `
-"<!---->
-<!--teleport start-->
-<!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
-      <!--v-if-->
-      <div class="w-0 flex-1 flex flex-col gap-1">
-        <div class="text-sm font-medium text-gray-900 dark:text-white">Toast</div>
-        <!--v-if-->
-        <!--v-if-->
-      </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
-          <!---->
-          <!--v-if-->
-          <!--v-if-->
-        </button></div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary-500 dark:bg-primary-400" style="width: 100%;"></div>
-    </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-</div>"
-`;
-
-exports[`Toast > renders with color red correctly 1`] = `
-"<!---->
-<!--teleport start-->
-<!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
-  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height] right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
-      <!--v-if-->
-      <div class="w-0 flex-1 flex flex-col gap-1">
-        <div class="text-sm font-medium text-gray-900 dark:text-white">Toast</div>
-        <!--v-if-->
-        <!--v-if-->
-      </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
-          <!---->
-          <!--v-if-->
-          <!--v-if-->
-        </button></div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-red-500 dark:bg-red-400" style="width: 100%;"></div>
+      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-gray-900 dark:bg-white" style="width: 100%;"></div>
     </li>
   </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="" tabindex="0"></span>
 </div>"
@@ -201,13 +153,13 @@ exports[`Toast > renders with description actions correctly 1`] = `
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-gray-900 dark:text-white">Toast</div>
         <div class="text-sm text-gray-500 dark:text-gray-400">This is a toast</div>
-        <div class="flex gap-1.5 shrink-0 items-start mt-1"><button type="button" data-radix-toast-announce-exclude="" data-radix-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 shadow-sm text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+        <div class="flex gap-1.5 shrink-0 items-start mt-1"><button type="button" data-radix-toast-announce-exclude="" data-radix-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
             <!--v-if--><span class="truncate">Action</span>
             <!--v-if-->
           </button></div>
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+        <!--v-if--><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -233,7 +185,7 @@ exports[`Toast > renders with description correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+        <!--v-if--><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -258,7 +210,7 @@ exports[`Toast > renders with description slot correctly 1`] = `
         <div class="text-sm text-gray-500 dark:text-gray-400">Description slot</div>
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -282,7 +234,7 @@ exports[`Toast > renders with icon correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -304,7 +256,7 @@ exports[`Toast > renders with leading slot correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -328,7 +280,7 @@ exports[`Toast > renders with title correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -352,7 +304,7 @@ exports[`Toast > renders with title slot correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -376,7 +328,7 @@ exports[`Toast > renders with type correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->
@@ -400,7 +352,7 @@ exports[`Toast > renders with ui correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 p-0">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-500 hover:text-gray-700 disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white p-0.5">
           <!---->
           <!--v-if-->
           <!--v-if-->

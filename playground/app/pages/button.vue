@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { upperFirst } from 'scule'
 import theme from '#build/ui/button'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
@@ -28,22 +29,17 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
       </UButton>
     </div>
     <div class="flex items-center gap-2">
-      <UButton v-for="variant in variants" :key="variant" icon="i-heroicons-rocket-launch" label="Button" :variant="variant" />
+      <UButton v-for="variant in variants" :key="variant" icon="i-heroicons-rocket-launch" :label="upperFirst(variant)" :variant="variant" />
     </div>
     <div class="flex items-center gap-2">
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="white" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="white" variant="ghost" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="white" variant="link" />
-    </div>
-    <div class="flex items-center gap-2">
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="gray" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="gray" variant="ghost" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="gray" variant="link" />
-    </div>
-    <div class="flex items-center gap-2">
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" variant="ghost" />
-      <UButton icon="i-heroicons-rocket-launch" label="Button" color="black" variant="link" />
+      <UButton
+        v-for="variant in variants"
+        :key="variant"
+        icon="i-heroicons-rocket-launch"
+        :label="upperFirst(variant)"
+        :variant="variant"
+        color="gray"
+      />
     </div>
     <div class="flex items-center gap-2 ml-[-129px]">
       <UButton v-for="size in sizes" :key="size" label="Button" :size="size" />

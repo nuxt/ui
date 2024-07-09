@@ -4,8 +4,6 @@ import type { NavItem } from '@nuxt/content'
 const nav = inject<Ref<NavItem[]>>('navigation')
 
 const navigation = computed(() => nav.value.filter(item => !item._path.startsWith('/pro')))
-
-// const { module, modules } = useModule()
 </script>
 
 <template>
@@ -14,8 +12,6 @@ const navigation = computed(() => nav.value.filter(item => !item._path.startsWit
       <UPage>
         <template #left>
           <UPageAside>
-            <!-- <USelect v-model="module" :items="modules" icon="i-heroicons-cube" class="w-full mb-3 lg:mb-6" /> -->
-
             <UContentNavigation :navigation="navigation" highlight />
           </UPageAside>
         </template>

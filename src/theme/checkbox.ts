@@ -13,7 +13,7 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries(options.colors.map((color: string) => [color, `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`])),
-      black: 'focus-visible:outline-gray-900 dark:focus-visible:outline-white'
+      gray: 'focus-visible:outline-gray-900 dark:focus-visible:outline-white'
     },
     size: {
       xs: {
@@ -44,7 +44,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     required: {
       true: {
-        label: 'after:content-[\'*\'] after:ms-0.5 after:text-red-500 dark:after:text-red-400'
+        label: 'after:content-[\'*\'] after:ms-0.5 after:text-error-500 dark:after:text-error-400'
       }
     },
     disabled: {
@@ -63,7 +63,7 @@ export default (options: Required<ModuleOptions>) => ({
     checked: true,
     class: `ring-2 ring-${color}-500 dark:ring-${color}-400 bg-${color}-500 dark:bg-${color}-400`
   })), {
-    color: 'black',
+    color: 'gray',
     checked: true,
     class: 'ring-2 ring-gray-900 dark:ring-white bg-gray-900 dark:bg-white'
   }],

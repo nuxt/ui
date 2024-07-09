@@ -8,7 +8,6 @@ import type { FormInputEvents } from '~/src/module'
 
 describe('RadioGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
-  const colors = Object.keys(theme.variants.color) as any
 
   const items = [
     { value: '1', label: 'Option 1' },
@@ -25,7 +24,7 @@ describe('RadioGroup', () => {
     ['with description', { props: { items: items.map((opt, count) => ({ ...opt, description: `Description ${count}` })) } }],
     ['with required', { props: { ...props, legend: 'Legend', required: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
-    ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
+    ['with color gray', { props: { color: 'gray', defaultValue: '1' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { wrapper: 'ms-4' } } }],
     ['with orientation', { props: { ...props, orientation: 'horizontal' } }],

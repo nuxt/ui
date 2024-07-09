@@ -8,7 +8,6 @@ navigation:
   badge:
     label: Soon
     color: gray
-    variant: solid
   disabled: true
 ---
 

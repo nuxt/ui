@@ -5,15 +5,14 @@ import theme from '#build/ui/button'
 
 describe('Button', () => {
   const sizes = Object.keys(theme.variants.size) as any
-  const colors = Object.keys(theme.variants.color) as any
   const variants = Object.keys(theme.variants.variant) as any
 
   it.each([
     // Props
     ['with label', { props: { label: 'Button' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Button', size } }]),
-    ...colors.map((color: string) => [`with color ${color}`, { props: { label: 'Button', color } }]),
-    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { label: 'Button', variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { label: 'Button', variant } }]),
+    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { label: 'Button', variant, color: 'gray' } }]),
     ['with icon', { props: { icon: 'i-heroicons-rocket-launch' } }],
     ['with leading and icon', { props: { leading: true, icon: 'i-heroicons-arrow-left' } }],
     ['with leadingIcon', { props: { leadingIcon: 'i-heroicons-arrow-left' } }],

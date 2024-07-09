@@ -8,7 +8,6 @@ import type { FormInputEvents } from '~/src/module'
 
 describe('Checkbox', () => {
   const sizes = Object.keys(theme.variants.size) as any
-  const colors = Object.keys(theme.variants.color) as any
 
   it.each([
     // Props
@@ -24,7 +23,7 @@ describe('Checkbox', () => {
     ['with required', { props: { label: 'Label', required: true } }],
     ['with description', { props: { label: 'Label', description: 'Description' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
+    ['with color gray', { props: { color: 'gray', defaultValue: true } }],
     ['with class', { props: { class: 'inline-flex' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
     // Slots

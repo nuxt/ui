@@ -26,6 +26,8 @@ export interface TextareaProps {
   rows?: number
   maxrows?: number
   autoresize?: boolean
+  /** Highlight the ring color like a focus state. */
+  highlight?: boolean
   ui?: Partial<typeof textarea.slots>
 }
 
@@ -57,12 +59,13 @@ const emits = defineEmits<TextareaEmits>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, disabled } = useFormField<TextareaProps>(props)
+const { emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled } = useFormField<TextareaProps>(props)
 
 const ui = computed(() => textarea({
   color: color.value,
   variant: props.variant,
-  size: size?.value
+  size: size?.value,
+  highlight: highlight.value
 }))
 
 const textareaRef = ref<HTMLTextAreaElement | null>(null)

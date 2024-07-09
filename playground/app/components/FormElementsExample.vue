@@ -99,7 +99,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
         Submit
       </UButton>
 
-      <UButton variant="outline" :disabled="form?.disabled" @click="form?.clear()">
+      <UButton color="gray" variant="outline" :disabled="form?.disabled" @click="form?.clear()">
         Clear
       </UButton>
     </div>

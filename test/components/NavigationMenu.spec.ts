@@ -4,7 +4,6 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/navigation-menu'
 
 describe('NavigationMenu', () => {
-  const colors = Object.keys(theme.variants.color) as any
   const variants = Object.keys(theme.variants.variant) as any
 
   const items = [
@@ -82,10 +81,11 @@ describe('NavigationMenu', () => {
     ['with items', { props }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
-    ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
-    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
-    ...variants.map((variant: string) => [`with highlight ${variant}`, { props: { ...props, highlight: true, variant } }]),
-    ...colors.map((highlightColor: string) => [`with highlight color ${highlightColor}`, { props: { ...props, highlight: true, highlightColor } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant, color: 'gray' } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
+    ...variants.map((variant: string) => [`with gray variant ${variant} highlight`, { props: { ...props, variant, color: 'gray', highlight: true } }]),
+    ...variants.map((variant: string) => [`with gray variant ${variant} highlight gray`, { props: { ...props, variant, color: 'gray', highlight: true, highlightColor: 'gray' } }]),
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-plus' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],

@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative flex gap-1.5',
     list: 'isolate min-w-0',
     item: 'min-w-0',
-    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400',
+    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -33,12 +33,18 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
-      black: ''
+      ...Object.fromEntries(options.colors.map((color: string) => [color, {
+        link: `focus-visible:before:ring-${color}-500 dark:focus-visible:before:ring-${color}-400`,
+        childLink: `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
+      }])),
+      gray: {
+        link: 'focus-visible:before:ring-gray-900 dark:focus-visible:before:ring-white',
+        childLink: 'focus-visible:outline-gray-900 dark:focus-visible:outline-white'
+      }
     },
     highlightColor: {
       ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
-      black: ''
+      gray: ''
     },
     variant: {
       pill: '',
@@ -108,7 +114,7 @@ export default (options: Required<ModuleOptions>) => ({
       linkLeadingIcon: `text-${color}-500 dark:text-${color}-400`
     }
   })), {
-    color: 'black',
+    color: 'gray',
     variant: 'pill',
     active: true,
     class: {
@@ -146,7 +152,7 @@ export default (options: Required<ModuleOptions>) => ({
       linkLeadingIcon: `text-${color}-500 dark:text-${color}-400`
     }
   })), {
-    color: 'black',
+    color: 'gray',
     variant: 'link',
     active: true,
     class: {
@@ -161,7 +167,7 @@ export default (options: Required<ModuleOptions>) => ({
       link: `after:bg-${highlightColor}-500 dark:after:bg-${highlightColor}-400`
     }
   })), {
-    highlightColor: 'black',
+    highlightColor: 'gray',
     highlight: true,
     active: true,
     class: {

@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
     indicator: 'absolute transition-[translate,width] duration-200',
-    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-gray-500 dark:data-[state=inactive]:text-gray-400 hover:data-[state=inactive]:text-gray-700 dark:hover:data-[state=inactive]:text-gray-200 font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus:outline-none', options.transitions && 'transition-colors'],
+    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-gray-500 dark:data-[state=inactive]:text-gray-400 hover:data-[state=inactive]:text-gray-700 dark:hover:data-[state=inactive]:text-gray-200 font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none', options.transitions && 'transition-colors'],
     content: 'focus:outline-none w-full',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -15,12 +15,11 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
-      white: '',
-      black: ''
+      gray: ''
     },
     variant: {
       pill: {
-        list: 'bg-gray-50 dark:bg-gray-800 rounded-lg',
+        list: 'bg-gray-100 dark:bg-gray-800 rounded-lg',
         trigger: 'flex-1',
         indicator: 'rounded-md shadow-sm'
       },
@@ -101,39 +100,32 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'pill',
     class: {
       indicator: `bg-${color}-500 dark:bg-${color}-400`,
-      trigger: 'data-[state=active]:text-white dark:data-[state=active]:text-gray-900'
+      trigger: `data-[state=active]:text-white dark:data-[state=active]:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
     }
   })), {
-    color: 'white',
-    variant: 'pill',
-    class: {
-      indicator: 'bg-white dark:bg-gray-900',
-      trigger: 'data-[state=active]:text-gray-900 dark:data-[state=active]:text-white'
-    }
-  }, {
-    color: 'black',
+    color: 'gray',
     variant: 'pill',
     class: {
       indicator: 'bg-gray-900 dark:bg-white',
-      trigger: 'data-[state=active]:text-white dark:data-[state=active]:text-gray-900'
+      trigger: 'data-[state=active]:text-white dark:data-[state=active]:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:focus-visible:outline-white'
     }
   }, ...options.colors.map((color: string) => ({
     color,
     variant: 'link',
     class: {
       indicator: `bg-${color}-500 dark:bg-${color}-400`,
-      trigger: `data-[state=active]:text-${color}-500 dark:data-[state=active]:text-${color}-400`
+      trigger: `data-[state=active]:text-${color}-500 dark:data-[state=active]:text-${color}-400 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
     }
   })), {
-    color: ['white', 'black'],
+    color: 'gray',
     variant: 'link',
     class: {
       indicator: 'bg-gray-900 dark:bg-white',
-      trigger: 'data-[state=active]:text-gray-900 dark:data-[state=active]:text-white'
+      trigger: 'data-[state=active]:text-gray-900 dark:data-[state=active]:text-white focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-900 dark:focus-visible:ring-white'
     }
   }],
   defaultVariants: {
-    color: 'white',
+    color: 'primary',
     variant: 'pill',
     size: 'md'
   }

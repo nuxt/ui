@@ -17,44 +17,9 @@ exports[`Separator > renders with class correctly 1`] = `
 </div>"
 `;
 
-exports[`Separator > renders with color black correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
-  <div class="border-gray-900 dark:border-white w-full border-solid border-t"></div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Separator > renders with color gray correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
-  <div class="border-gray-200 dark:border-gray-800 w-full border-solid border-t"></div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Separator > renders with color green correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
-  <div class="border-green-500 dark:border-green-400 w-full border-solid border-t"></div>
-  <!--v-if-->
-</div>"
-`;
-
 exports[`Separator > renders with color primary correctly 1`] = `
 "<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
   <div class="border-primary-500 dark:border-primary-400 w-full border-solid border-t"></div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Separator > renders with color red correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
-  <div class="border-red-500 dark:border-red-400 w-full border-solid border-t"></div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Separator > renders with color white correctly 1`] = `
-"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
-  <div class="border-white dark:border-gray-900 w-full border-solid border-t"></div>
   <!--v-if-->
 </div>"
 `;

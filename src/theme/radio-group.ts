@@ -19,7 +19,7 @@ export default (options: Required<ModuleOptions>) => ({
         base: `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`,
         indicator: `bg-${color}-500 dark:bg-${color}-400`
       }])),
-      black: {
+      gray: {
         base: 'focus-visible:outline-gray-900 dark:focus-visible:outline-white',
         indicator: 'bg-gray-900 dark:bg-white'
       }
@@ -78,7 +78,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     required: {
       true: {
-        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-red-500 dark:after:text-red-400'
+        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-error-500 dark:after:text-error-400'
       }
     }
   },

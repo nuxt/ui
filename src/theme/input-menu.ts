@@ -21,25 +21,25 @@ export default (options: Required<ModuleOptions>) => {
       itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
       itemTrailingIcon: 'shrink-0',
       itemLabel: 'truncate',
-      tagsItem: 'px-1.5 py-0.5 rounded font-medium inline-flex items-center gap-0.5 ring ring-inset ring-gray-300 dark:ring-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 data-disabled:cursor-not-allowed data-disabled:opacity-75',
+      tagsItem: 'px-1.5 py-0.5 rounded font-medium inline-flex items-center gap-0.5 ring ring-inset ring-gray-300 dark:ring-gray-700 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 data-disabled:cursor-not-allowed data-disabled:opacity-75',
       tagsItemText: 'truncate',
-      tagsItemDelete: ['inline-flex items-center rounded-sm text-gray-400 dark:text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-200 dark:hover:bg-gray-700/50 disabled:pointer-events-none', options.transitions && 'transition-colors'],
+      tagsItemDelete: ['inline-flex items-center rounded-sm text-gray-400 dark:text-gray-500 hover:text-gray-700 hover:bg-gray-200 dark:hover:text-gray-200 dark:hover:bg-gray-700/50 disabled:pointer-events-none', options.transitions && 'transition-colors'],
       tagsItemDeleteIcon: '',
       tagsInput: 'border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
     }
   }, {
     slots: {
-      base: 'rounded-md',
+      base: ['rounded-md', options.transitions && 'transition-colors'],
       trailing: 'absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75'
     },
     variants: {
       multiple: {
         true: {
           root: 'flex-wrap',
-          base: 'has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary-500 dark:has-[:focus-visible]:ring-primary-400'
+          base: ''
         },
         false: {
-          base: 'w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+          base: 'w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
         }
       },
       size: {
@@ -94,6 +94,17 @@ export default (options: Required<ModuleOptions>) => {
           tagsItemDeleteIcon: 'size-4'
         }
       }
-    }
+    },
+    compoundVariants: [...options.colors.map((color: string) => ({
+      color,
+      multiple: true,
+      variant: ['outline', 'subtle'],
+      class: `has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-${color}-500 dark:has-[:focus-visible]:ring-${color}-400`
+    })), {
+      color: 'gray',
+      multiple: true,
+      variant: ['outline', 'subtle'],
+      class: 'has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-gray-500 dark:has-[:focus-visible]:ring-white'
+    }]
   }, input(options))
 }

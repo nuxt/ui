@@ -105,9 +105,9 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 
 const props = withDefaults(defineProps<PaginationProps>(), {
-  color: 'white',
-  activeColor: 'black',
-  variant: 'solid',
+  color: 'gray',
+  activeColor: 'primary',
+  variant: 'outline',
   activeVariant: 'solid',
   showControls: true
 })

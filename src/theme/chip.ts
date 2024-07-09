@@ -8,9 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries(options.colors.map((color: string) => [color, `bg-${color}-500 dark:bg-${color}-400`])),
-      gray: 'bg-gray-500 dark:bg-gray-400',
-      white: 'bg-white dark:bg-gray-900',
-      black: 'bg-gray-900 dark:bg-white'
+      gray: 'bg-gray-500 dark:bg-gray-400'
     },
     size: {
       '3xs': 'h-[4px] min-w-[4px] text-[4px]',

@@ -5,7 +5,6 @@ import theme from '#build/ui/progress'
 
 describe('Progress', () => {
   const sizes = Object.keys(theme.variants.size) as any
-  const colors = Object.keys(theme.variants.color) as any
   const orientations = Object.keys(theme.variants.orientation) as any
   const animations = Object.keys(theme.variants.animation) as any
   const max = ['Waiting...', 'Cloning...', 'Migrating...', 'Deploying...', 'Done!']
@@ -19,9 +18,9 @@ describe('Progress', () => {
     ['with max inverted', { props: { modelValue: 2, status: true, inverted: true, max } }],
     ['with as', { props: { as: 'span' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
     ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { orientation } }]),
     ...animations.map((animation: string) => [`with animation ${animation}`, { props: { animation } }]),
+    ['with color gray', { props: { color: 'gray', modelValue: 50 } }],
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { base: 'bg-white dark:bg-gray-900' } } }],
     // Slots

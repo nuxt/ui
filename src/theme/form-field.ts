@@ -6,7 +6,7 @@ export default {
     label: 'block font-medium text-gray-700 dark:text-gray-200',
     container: 'mt-1 relative',
     description: 'text-gray-500 dark:text-gray-400',
-    error: 'mt-2 text-red-500 dark:text-red-400',
+    error: 'mt-2 text-error-500 dark:text-error-400',
     hint: 'text-gray-500 dark:text-gray-400',
     help: 'mt-2 text-gray-500 dark:text-gray-400'
   },
@@ -20,7 +20,7 @@ export default {
     },
     required: {
       true: {
-        label: `after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400`
+        label: `after:content-['*'] after:ms-0.5 after:text-error-500 dark:after:text-error-400`
       }
     }
   },

@@ -8,48 +8,52 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
   <div class="flex flex-col gap-4 items-center">
     <div class="flex flex-col gap-4 -ml-[110px]">
       <UButtonGroup>
-        <UButton> Click me! </UButton>
+        <UButton>Button</UButton>
       </UButtonGroup>
 
       <UButtonGroup>
-        <UInput />
+        <UInput placeholder="Search..." />
       </UButtonGroup>
 
       <UButtonGroup>
-        <UButton> Click me! </UButton>
-        <UButton color="white">
-          Click me!
+        <UButton color="gray" variant="outline">
+          Button
         </UButton>
-        <UButton> Click me! </UButton>
+        <UButton color="gray" variant="subtle">
+          Button
+        </UButton>
+        <UButton color="gray" variant="outline">
+          Button
+        </UButton>
       </UButtonGroup>
 
       <UButtonGroup orientation="vertical">
-        <UButton color="white">
-          Click me!
+        <UButton color="gray" variant="outline">
+          Button
         </UButton>
-        <UInput />
+        <UInput placeholder="Search..." />
       </UButtonGroup>
 
       <UButtonGroup>
-        <UButton color="white">
-          Click me!
+        <UButton color="gray" variant="outline">
+          Button
         </UButton>
-        <UInput />
+        <UInput placeholder="Search..." />
       </UButtonGroup>
 
       <UButtonGroup>
-        <UInput />
-        <UButton color="white">
-          Click me!
+        <UInput placeholder="Search..." />
+        <UButton color="gray" variant="outline">
+          Button
         </UButton>
       </UButtonGroup>
     </div>
 
     <div class="flex gap-4 items-center justify-center">
       <UButtonGroup v-for="size in sizes" :key="size" :size="size">
-        <UInput />
-        <UButton color="white">
-          Click me!
+        <UInput placeholder="Search..." />
+        <UButton color="gray" variant="outline">
+          Button
         </UButton>
       </UButtonGroup>
     </div>

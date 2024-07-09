@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import type { PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { input: Partial<typeof theme> } }
 
@@ -25,8 +26,10 @@ export interface InputProps extends UseComponentIconsProps {
   autofocus?: boolean
   autofocusDelay?: number
   disabled?: boolean
+  /** Highlight the ring color like a focus state. */
+  highlight?: boolean
   class?: any
-  ui?: Partial<typeof input.slots>
+  ui?: PartialString<typeof input.slots>
 }
 
 export interface InputEmits {
@@ -59,7 +62,7 @@ const slots = defineSlots<InputSlots>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
@@ -71,6 +74,7 @@ const ui = computed(() => input({
   variant: props.variant,
   size: inputSize?.value,
   loading: props.loading,
+  highlight: highlight.value,
   leading: isLeading.value || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   buttonGroup: orientation.value

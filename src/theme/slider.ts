@@ -13,7 +13,7 @@ export default (options: Required<ModuleOptions>) => ({
         range: `bg-${color}-500 dark:bg-${color}-400`,
         thumb: `ring-${color}-500 dark:ring-${color}-400 focus-visible:outline-${color}-500/50 dark:focus-visible:outline-${color}-400/50`
       }])),
-      black: {
+      gray: {
         range: 'bg-gray-900 dark:bg-white',
         thumb: 'ring-gray-900 dark:ring-white focus-visible:outline-gray-900/50 dark:focus-visible:outline-white/50'
       }

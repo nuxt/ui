@@ -31,7 +31,7 @@ const route = useRoute()
       </NuxtLink>
     </template>
 
-    <!-- <UNavigationMenu :items="items" variant="link" color="black" /> -->
+    <!-- <UNavigationMenu :items="items" variant="link" color="gray" /> -->
 
     <template #right>
       <UButton

@@ -36,6 +36,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
   --spacing-4_5: 1.125rem;
 
   ${shades.map(shade => `--color-primary-${shade}: var(--color-primary-${shade});`).join('\n\t')}
+  ${shades.map(shade => `--color-error-${shade}: var(--color-error-${shade});`).join('\n\t')}
   ${shades.map(shade => `--color-gray-${shade}: var(--color-gray-${shade});`).join('\n\t')}
 }
 `

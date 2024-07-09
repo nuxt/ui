@@ -14,7 +14,7 @@ export interface ModuleOptions {
   prefix?: string
   /**
    * Colors to generate classes for (based on TailwindCSS colors)
-   * @defaultValue ['primary', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchia', 'pink', 'rose']
+   * @defaultValue ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchia', 'pink', 'rose']
    */
   colors?: string[]
   /**
@@ -40,7 +40,7 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
-    options.colors = options.colors?.length ? [...new Set(['primary', ...options.colors])] : ['primary', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchia', 'pink', 'rose']
+    options.colors = options.colors?.length ? [...new Set(['primary', 'error', ...options.colors])] : ['primary', 'error', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchia', 'pink', 'rose']
 
     // @ts-expect-error - Add ui options to nuxt
     nuxt.options.ui = options
@@ -50,6 +50,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
       colors: {
         primary: 'green',
+        error: 'red',
         gray: 'cool'
       },
       icons

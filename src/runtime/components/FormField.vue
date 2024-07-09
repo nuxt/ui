@@ -93,7 +93,7 @@ provide(formFieldInjectionKey, computed(() => ({
       </p>
     </div>
 
-    <div :class="[label && ui.container()]">
+    <div :class="[label && ui.container({ class: props.ui?.container })]">
       <slot :error="error" />
 
       <p v-if="(typeof error === 'string' && error) || !!slots.error" :class="ui.error({ class: props.ui?.error })">

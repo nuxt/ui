@@ -8,7 +8,6 @@ import type { FormInputEvents } from '~/src/module'
 
 describe('InputMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any
-  const colors = Object.keys(theme.variants.color) as any
   const variants = Object.keys(theme.variants.variant) as any
 
   const items = [{
@@ -51,8 +50,8 @@ describe('InputMenu', () => {
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-heroicons-check' } }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
-    ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
-    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant, color: 'gray' } }]),
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { group: 'p-2' } } }],

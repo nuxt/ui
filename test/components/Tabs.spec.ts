@@ -4,7 +4,6 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/tabs'
 
 describe('Tabs', () => {
-  const colors = Object.keys(theme.variants.color) as any
   const variants = Object.keys(theme.variants.variant) as any
   const sizes = Object.keys(theme.variants.size) as any
 
@@ -33,9 +32,9 @@ describe('Tabs', () => {
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
-    ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
-    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant, color: 'gray' } }]),
     ['without content', { props: { ...props, content: false } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
     ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-gray-200 dark:ring-gray-800' } } }],

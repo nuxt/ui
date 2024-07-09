@@ -9,7 +9,6 @@ import type { FormInputEvents } from '~/src/module'
 
 describe('Input', () => {
   const sizes = Object.keys(theme.variants.size) as any
-  const colors = Object.keys(theme.variants.color) as any
   const variants = Object.keys(theme.variants.variant) as any
 
   it.each([
@@ -28,8 +27,8 @@ describe('Input', () => {
     ['with loading', { props: { loading: true } }],
     ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-heroicons-sparkles' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
-    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
+    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { variant, color: 'gray' } }]),
     ['with class', { props: { class: 'absolute' } }],
     ['with ui', { props: { ui: { base: 'rounded-full' } } }],
     // Slots

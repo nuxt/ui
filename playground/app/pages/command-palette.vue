@@ -114,7 +114,7 @@ defineShortcuts({
   <div class="flex-1 flex flex-col gap-12 w-full max-w-lg">
     <div class="flex items-center justify-between gap-2 mt-[58px]">
       <UModal v-model:open="open">
-        <UButton label="Open modal" color="gray" />
+        <UButton label="Open modal" color="gray" variant="outline" />
 
         <template #content>
           <ReuseTemplate :close="true" @close="open = false" />
@@ -122,7 +122,7 @@ defineShortcuts({
       </UModal>
 
       <UDrawer should-scale-background>
-        <UButton label="Open drawer" color="gray" />
+        <UButton label="Open drawer" color="gray" variant="outline" />
 
         <template #content>
           <ReuseTemplate class="border-t border-gray-200 dark:border-gray-800" />
@@ -130,7 +130,7 @@ defineShortcuts({
       </UDrawer>
 
       <UPopover :content="{ side: 'right', align: 'start' }">
-        <UButton label="Select label (popover)" color="gray" />
+        <UButton label="Select label (popover)" color="gray" variant="outline" />
 
         <template #content>
           <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-9' }" />

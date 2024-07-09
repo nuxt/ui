@@ -21,7 +21,7 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: `bg-${color}-500 dark:bg-${color}-400`,
         steps: `text-${color}-500 dark:text-${color}-400`
       }])),
-      black: {
+      gray: {
         indicator: 'bg-gray-900 dark:bg-white',
         steps: 'text-white dark:text-gray-900'
       }

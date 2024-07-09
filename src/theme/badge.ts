@@ -5,9 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
-      white: '',
-      gray: '',
-      black: ''
+      gray: ''
     },
     variant: {
       solid: '',
@@ -28,7 +26,7 @@ export default (options: Required<ModuleOptions>) => ({
   })), ...options.colors.map((color: string) => ({
     color,
     variant: 'outline',
-    class: `text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500 dark:ring-${color}-400`
+    class: `text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/50 dark:ring-${color}-400/50`
   })), ...options.colors.map((color: string) => ({
     color,
     variant: 'soft',
@@ -38,17 +36,21 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'subtle',
     class: `bg-${color}-500/10 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/25 dark:ring-${color}-400/25`
   })), {
-    color: 'white',
-    variant: 'solid',
-    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900'
-  }, {
     color: 'gray',
     variant: 'solid',
-    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800'
-  }, {
-    color: 'black',
-    variant: 'solid',
     class: 'text-white dark:text-gray-900 bg-gray-900 dark:bg-white'
+  }, {
+    color: 'gray',
+    variant: 'outline',
+    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900'
+  }, {
+    color: 'gray',
+    variant: 'soft',
+    class: 'text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800'
+  }, {
+    color: 'gray',
+    variant: 'subtle',
+    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800'
   }],
   defaultVariants: {
     color: 'primary',

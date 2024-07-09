@@ -68,6 +68,8 @@ export interface SelectMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelVal
    */
   filter?: boolean | string[]
   items?: T[] | T[][]
+  /** Highlight the ring color like a focus state. */
+  highlight?: boolean
   class?: any
   ui?: PartialString<typeof selectMenu.slots>
 }
@@ -115,7 +117,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
-const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, disabled } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
@@ -126,6 +128,7 @@ const ui = computed(() => selectMenu({
   variant: props.variant,
   size: selectSize?.value,
   loading: props.loading,
+  highlight: highlight.value,
   leading: isLeading.value || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   buttonGroup: orientation.value

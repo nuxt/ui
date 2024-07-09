@@ -5,7 +5,6 @@ import theme from '#build/ui/button'
 
 describe('Pagination', () => {
   const sizes = Object.keys(theme.variants.size) as any
-  const colors = Object.keys(theme.variants.color) as any
   const variants = Object.keys(theme.variants.variant) as any
 
   const props = { total: 100 }
@@ -27,10 +26,10 @@ describe('Pagination', () => {
     ['with lastIcon', { props: { ...props, lastIcon: 'i-heroicons-arrow-right' } }],
     ['with ellipsisIcon', { props: { ...props, ellipsisIcon: 'i-heroicons-ellipsis-vertical', siblingCount: 1, showEdges: true, page: 5 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
-    ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
-    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, color: 'primary', variant } }]),
-    ...colors.map((activeColor: string) => [`with active color ${activeColor}`, { props: { ...props, activeColor } }]),
-    ...variants.map((activeVariant: string) => [`with active variant ${activeVariant}`, { props: { ...props, color: 'primary', activeVariant } }]),
+    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant, color: 'primary' } }]),
+    ...variants.map((activeVariant: string) => [`with primary active variant ${activeVariant}`, { props: { ...props, activeVariant } }]),
+    ...variants.map((activeVariant: string) => [`with gray active variant ${activeVariant}`, { props: { ...props, activeVariant, color: 'gray' } }]),
     ['with class', { props: { ...props, class: 'relative' } }],
     ['with ui', { props: { ...props, ui: { list: 'gap-3' } } }],
     // Slots

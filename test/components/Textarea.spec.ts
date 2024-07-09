@@ -8,7 +8,6 @@ import type { FormInputEvents } from '~/src/module'
 
 describe('Textarea', () => {
   const sizes = Object.keys(theme.variants.size) as any
-  const colors = Object.keys(theme.variants.color) as any
   const variants = Object.keys(theme.variants.variant) as any
 
   it.each([
@@ -20,8 +19,8 @@ describe('Textarea', () => {
     ['with disabled', { props: { disabled: true } }],
     ['with rows', { props: { rows: 5 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
-    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
+    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { variant, color: 'gray' } }]),
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
     // Slots

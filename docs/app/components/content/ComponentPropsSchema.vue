@@ -21,7 +21,7 @@ const schemaProps = computed(() => getSchemaProps(props.prop.schema))
 </script>
 
 <template>
-  <Collapsible v-if="schemaProps?.length" class="mt-1" :ui="{ trigger: 'ml-1.5' }">
+  <Collapsible v-if="schemaProps?.length" class="mt-1">
     <ProseUl>
       <ProseLi v-for="schemaProp in schemaProps" :key="schemaProp.name">
         <HighlightInlineType :type="`${schemaProp.name}: ${schemaProp.type}`" />

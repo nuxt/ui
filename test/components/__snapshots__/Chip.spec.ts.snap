@@ -4,17 +4,7 @@ exports[`Chip > renders with as correctly 1`] = `"<span class="relative inline-f
 
 exports[`Chip > renders with class correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0 mx-auto"><span class="rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap bg-primary-500 dark:bg-primary-400 h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
 
-exports[`Chip > renders with color black correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap bg-gray-900 dark:bg-white h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
-
 exports[`Chip > renders with color gray correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap bg-gray-500 dark:bg-gray-400 h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
-
-exports[`Chip > renders with color green correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap bg-green-500 dark:bg-green-400 h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
-
-exports[`Chip > renders with color primary correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap bg-primary-500 dark:bg-primary-400 h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
-
-exports[`Chip > renders with color red correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap bg-red-500 dark:bg-red-400 h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
-
-exports[`Chip > renders with color white correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap bg-white dark:bg-gray-900 h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
 
 exports[`Chip > renders with content slot correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap bg-primary-500 dark:bg-primary-400 h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform">Content slot</span></div>"`;
 

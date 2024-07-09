@@ -18,7 +18,7 @@ export interface KbdProps {
    */
   as?: any
   value: KbdKey | string
-  color?: KbdVariants['color']
+  variant?: KbdVariants['variant']
   size?: KbdVariants['size']
   class?: any
 }
@@ -41,7 +41,7 @@ const { getKbdKey } = useKbd()
 </script>
 
 <template>
-  <Primitive :as="as" :class="kbd({ color, size, class: props.class })">
+  <Primitive :as="as" :class="kbd({ variant, size, class: props.class })">
     <slot>
       {{ getKbdKey(value) }}
     </slot>

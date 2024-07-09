@@ -11,13 +11,19 @@ export default (options: Required<ModuleOptions>) => ({
     avatarSize: '2xl',
     actions: 'flex gap-1.5 shrink-0',
     progress: 'absolute inset-x-0 bottom-0 h-1 z-[-1]',
-    close: 'p-0'
+    close: 'p-0.5'
   },
   variants: {
-    color: Object.fromEntries(options.colors.map((color: string) => [color, {
-      icon: `text-${color}-500 dark:text-${color}-400`,
-      progress: `bg-${color}-500 dark:bg-${color}-400`
-    }])),
+    color: {
+      ...Object.fromEntries(options.colors.map((color: string) => [color, {
+        icon: `text-${color}-500 dark:text-${color}-400`,
+        progress: `bg-${color}-500 dark:bg-${color}-400`
+      }])),
+      gray: {
+        icon: 'text-gray-900 dark:text-white',
+        progress: 'bg-gray-900 dark:bg-white'
+      }
+    },
     multiline: {
       true: {
         root: 'items-start',

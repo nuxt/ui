@@ -1,16 +1,41 @@
 <script setup lang="ts">
+import { upperFirst } from 'scule'
 import theme from '#build/ui/input'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
 </script>
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 w-60">
-      <UInput autofocus />
-      <UInput placeholder="Search..." color="gray" />
-      <UInput placeholder="Search..." color="primary" />
-      <UInput placeholder="Search..." variant="none" />
+    <div class="flex flex-col gap-4 w-48">
+      <UInput autofocus placeholder="Search..." />
+    </div>
+    <div class="flex items-center gap-2">
+      <UInput v-for="variant in variants" :key="variant" :placeholder="upperFirst(variant)" :variant="variant" class="w-48" />
+    </div>
+    <div class="flex items-center gap-2">
+      <UInput
+        v-for="variant in variants"
+        :key="variant"
+        :placeholder="upperFirst(variant)"
+        :variant="variant"
+        color="gray"
+        class="w-48"
+      />
+    </div>
+    <div class="flex items-center gap-2">
+      <UInput
+        v-for="variant in variants"
+        :key="variant"
+        :placeholder="upperFirst(variant)"
+        :variant="variant"
+        color="error"
+        highlight
+        class="w-48"
+      />
+    </div>
+    <div class="flex flex-col gap-4 w-48">
       <UInput placeholder="Disabled" disabled />
       <UInput placeholder="Required" required />
       <UInput file="i-heroicons-calculator" type="number" :model-value="10" />
@@ -27,7 +52,7 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
         :key="size"
         placeholder="Search..."
         :size="size"
-        class="w-60"
+        class="w-48"
       />
     </div>
     <div class="flex items-center gap-4">
@@ -37,7 +62,7 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
         icon="i-heroicons-magnifying-glass"
         placeholder="Search..."
         :size="size"
-        class="w-60"
+        class="w-48"
       />
     </div>
     <div class="flex items-center gap-4">
@@ -48,7 +73,7 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
         trailing
         placeholder="Search..."
         :size="size"
-        class="w-60"
+        class="w-48"
       />
     </div>
   </div>

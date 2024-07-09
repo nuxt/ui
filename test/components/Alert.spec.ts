@@ -4,7 +4,6 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/alert'
 
 describe('Alert', () => {
-  const colors = Object.keys(theme.variants.color) as any
   const variants = Object.keys(theme.variants.variant) as any
 
   const props = { title: 'Alert' }
@@ -17,8 +16,8 @@ describe('Alert', () => {
     ['with avatar', { props: { ...props, avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' } } }],
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-heroicons-trash' } }],
-    ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
-    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, color: 'primary', variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant, color: 'gray' } }]),
     ['with as', { props: { ...props, as: 'article' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],

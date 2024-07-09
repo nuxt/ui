@@ -10,6 +10,7 @@ const appConfig = useAppConfig()
         icon="i-heroicons-light-bulb"
         :trailing-icon="appConfig.ui.icons.chevronDown"
         color="gray"
+        variant="outline"
         label="Open"
         block
         :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"

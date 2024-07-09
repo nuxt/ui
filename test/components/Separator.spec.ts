@@ -6,7 +6,6 @@ import theme from '#build/ui/separator'
 describe('Separator', () => {
   const types = Object.keys(theme.variants.type) as any
   const sizes = Object.keys(theme.variants.size) as any
-  const colors = Object.keys(theme.variants.color) as any
 
   it.each([
     // Props
@@ -18,7 +17,7 @@ describe('Separator', () => {
     ['with decorative', { props: { decorative: true } }],
     ...types.map((type: string) => [`with type ${type}`, { props: { type } }]),
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
+    ['with color primary', { props: { color: 'primary' } }],
     ['with class', { props: { class: 'flex-row-reverse' } }],
     ['with ui', { props: { ui: { label: 'text-lg' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SeparatorProps, slots?: Partial<SeparatorSlots> }) => {

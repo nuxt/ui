@@ -55,7 +55,8 @@ const templates = (id: number) => [{
     }
   }, {
     label: 'Action 2',
-    color: 'black' as const,
+    color: 'gray' as const,
+    variant: 'outline' as const,
     click() {
       console.log(`Toast ${id} action 2 clicked`)
     }
@@ -115,9 +116,9 @@ function removeToast() {
     </div>
 
     <div class="flex items-center gap-2">
-      <UButton label="Add new" color="gray" @click="addToast" />
-      <UButton label="Update last" color="gray" @click="updateToast" />
-      <UButton label="Remove last" color="gray" @click="removeToast" />
+      <UButton label="Add new" color="gray" variant="outline" @click="addToast" />
+      <UButton label="Update last" color="gray" variant="outline" @click="updateToast" />
+      <UButton label="Remove last" color="gray" variant="outline" @click="removeToast" />
     </div>
   </div>
 </template>

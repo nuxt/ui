@@ -4,7 +4,6 @@ import Toaster from '../../src/runtime/components/Toaster.vue'
 import Toast, { type ToastProps, type ToastSlots } from '../../src/runtime/components/Toast.vue'
 import ComponentRender from '../component-render'
 import { ClientOnly } from '#components'
-import theme from '#build/ui/toast'
 
 const ToastWrapper = defineComponent({
   components: {
@@ -25,8 +24,6 @@ const ToastWrapper = defineComponent({
 })
 
 describe('Toast', () => {
-  const colors = Object.keys(theme.variants.color) as any
-
   const props = { title: 'Toast' }
 
   it.each([
@@ -40,7 +37,7 @@ describe('Toast', () => {
     ['without close', { props: { ...props, close: false } }],
     ['with closeIcon', { props: { ...props, closeIcon: 'i-heroicons-trash' } }],
     ['with type', { props: { ...props, type: 'background' as const } }],
-    ...colors.map((color: string) => [`with color ${color}`, { props: { ...props, color } }]),
+    ['with color gray', { props: { ...props, color: 'gray' as const } }],
     ['with class', { props: { ...props, class: 'bg-gray-50 dark:bg-gray-800/50' } }],
     ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],
     // Slots

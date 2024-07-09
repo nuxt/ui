@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { upperFirst } from 'scule'
 import theme from '#build/ui/select'
 import type { User } from '~/types'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
 
 const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
@@ -49,11 +51,43 @@ function getUserAvatar(value: string) {
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 w-60">
-      <USelect :items="items" />
-      <USelect :items="items" placeholder="Search..." color="gray" />
-      <USelect :items="items" placeholder="Search..." color="primary" />
-      <USelect :items="items" placeholder="Search..." variant="none" />
+    <div class="flex flex-col gap-4 w-48">
+      <USelect :items="items" placeholder="Search..." />
+    </div>
+    <div class="flex items-center gap-2">
+      <USelect
+        v-for="variant in variants"
+        :key="variant"
+        :items="items"
+        :placeholder="upperFirst(variant)"
+        :variant="variant"
+        class="w-48"
+      />
+    </div>
+    <div class="flex items-center gap-2">
+      <USelect
+        v-for="variant in variants"
+        :key="variant"
+        :items="items"
+        :placeholder="upperFirst(variant)"
+        :variant="variant"
+        color="gray"
+        class="w-48"
+      />
+    </div>
+    <div class="flex items-center gap-2">
+      <USelect
+        v-for="variant in variants"
+        :key="variant"
+        :items="items"
+        :placeholder="upperFirst(variant)"
+        :variant="variant"
+        color="error"
+        highlight
+        class="w-48"
+      />
+    </div>
+    <div class="flex flex-col gap-4 w-48">
       <USelect :items="items" placeholder="Disabled" disabled />
       <USelect :items="items" placeholder="Required" required />
       <USelect :items="items" loading placeholder="Search..." />
@@ -65,7 +99,7 @@ function getUserAvatar(value: string) {
         :items="items"
         placeholder="Search..."
         :size="size"
-        class="w-60"
+        class="w-48"
       />
     </div>
     <div class="flex items-center gap-4">
@@ -77,7 +111,7 @@ function getUserAvatar(value: string) {
         icon="i-heroicons-magnifying-glass"
         trailing-icon="i-heroicons-chevron-up-down-20-solid"
         :size="size"
-        class="w-60"
+        class="w-48"
       >
         <template #leading="{ modelValue, ui }">
           <UIcon v-if="modelValue" :name="getStatusIcon(modelValue)" :class="ui.leadingIcon()" />
@@ -93,7 +127,7 @@ function getUserAvatar(value: string) {
         icon="i-heroicons-user"
         placeholder="Search users..."
         :size="size"
-        class="w-60"
+        class="w-48"
       >
         <template #leading="{ modelValue, ui }">
           <UAvatar v-if="modelValue" :size="ui.itemLeadingAvatarSize()" v-bind="getUserAvatar(modelValue)" />

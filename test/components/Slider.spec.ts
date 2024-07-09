@@ -8,7 +8,6 @@ import type { FormInputEvents } from '~/src/module'
 
 describe('Slider', () => {
   const sizes = Object.keys(theme.variants.size) as any
-  const colors = Object.keys(theme.variants.color) as any
 
   it.each([
     // Props
@@ -21,7 +20,7 @@ describe('Slider', () => {
     ['with min max step', { props: { min: 4, max: 12, step: 2 } }],
     ['with min steps between thumbs', { props: { defaultValue: [0, 30], minStepsBetweenThumbs: 30 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ...colors.map((color: string) => [`with color ${color}`, { props: { color } }]),
+    ['with color gray', { props: { color: 'gray', defaultValue: 10 } }],
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { track: 'bg-gray-100 dark:bg-gray-800' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SliderProps }) => {

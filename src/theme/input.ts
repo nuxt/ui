@@ -4,7 +4,7 @@ import { buttonGroupVariantWithRoot } from './button-group'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center',
-    base: 'w-full rounded-md border-0 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
+    base: ['w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.transitions && 'transition-colors'],
     leading: 'absolute inset-y-0 start-0 flex items-center',
     leadingIcon: 'shrink-0 text-gray-400 dark:text-gray-500',
     leadingAvatar: 'shrink-0',
@@ -51,12 +51,14 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     variant: {
-      outline: '',
-      none: 'bg-transparent'
+      outline: 'text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700',
+      soft: 'text-gray-900 dark:text-white bg-gray-50 hover:bg-gray-100 focus:bg-gray-100 disabled:bg-gray-50 dark:bg-gray-800/50 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:disabled:bg-gray-800/50',
+      subtle: 'text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 ring ring-inset ring-gray-300 dark:ring-gray-700',
+      ghost: 'text-gray-900 dark:text-white hover:bg-gray-100 focus:bg-gray-100 disabled:bg-transparent dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:disabled:bg-transparent',
+      none: 'text-gray-900 dark:text-white'
     },
     color: {
       ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
-      white: '',
       gray: ''
     },
     leading: {
@@ -68,22 +70,29 @@ export default (options: Required<ModuleOptions>) => ({
     loading: {
       true: ''
     },
+    highlight: {
+      true: ''
+    },
     type: {
       file: 'file:mr-1.5 file:font-medium file:text-gray-500 dark:file:text-gray-400 file:outline-none'
     }
   },
   compoundVariants: [...options.colors.map((color: string) => ({
     color,
-    variant: 'outline',
-    class: `shadow-sm bg-transparent text-gray-900 dark:text-white ring ring-inset ring-${color}-500 dark:ring-${color}-400 focus-visible:ring-2 focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
+    variant: ['outline', 'subtle'],
+    class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
+  })), ...options.colors.map((color: string) => ({
+    color,
+    highlight: true,
+    class: `ring ring-inset ring-${color}-500 dark:ring-${color}-400`
   })), {
-    color: 'white',
-    variant: 'outline',
-    class: 'shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
+    color: 'gray',
+    variant: ['outline', 'subtle'],
+    class: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-900 dark:focus-visible:ring-white'
   }, {
     color: 'gray',
-    variant: 'outline',
-    class: 'shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
+    highlight: true,
+    class: 'ring ring-inset ring-gray-900 dark:ring-white'
   }, {
     leading: true,
     size: 'xs',
@@ -140,7 +149,7 @@ export default (options: Required<ModuleOptions>) => ({
   }],
   defaultVariants: {
     size: 'md',
-    color: 'white',
+    color: 'primary',
     variant: 'outline'
   }
 })

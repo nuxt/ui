@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { upperFirst } from 'scule'
 import { refDebounced } from '@vueuse/core'
 import theme from '#build/ui/select-menu'
 import type { User } from '~/types'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
 
 const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
@@ -47,11 +49,43 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 w-60">
+    <div class="flex flex-col gap-4 w-48">
       <USelectMenu :items="items" />
-      <USelectMenu :items="items" placeholder="Search..." color="gray" />
-      <USelectMenu :items="items" placeholder="Search..." color="primary" />
-      <USelectMenu :items="items" placeholder="Search..." variant="none" />
+    </div>
+    <div class="flex items-center gap-2">
+      <USelectMenu
+        v-for="variant in variants"
+        :key="variant"
+        :items="items"
+        :placeholder="upperFirst(variant)"
+        :variant="variant"
+        class="w-48"
+      />
+    </div>
+    <div class="flex items-center gap-2">
+      <USelectMenu
+        v-for="variant in variants"
+        :key="variant"
+        :items="items"
+        :placeholder="upperFirst(variant)"
+        :variant="variant"
+        color="gray"
+        class="w-48"
+      />
+    </div>
+    <div class="flex items-center gap-2">
+      <USelectMenu
+        v-for="variant in variants"
+        :key="variant"
+        :items="items"
+        :placeholder="upperFirst(variant)"
+        :variant="variant"
+        color="error"
+        highlight
+        class="w-48"
+      />
+    </div>
+    <div class="flex flex-col gap-4 w-48">
       <USelectMenu :items="items" placeholder="Disabled" disabled />
       <USelectMenu :items="items" placeholder="Required" required />
       <USelectMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple />
@@ -64,7 +98,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         :items="items"
         placeholder="Search..."
         :size="size"
-        class="w-60"
+        class="w-48"
       />
     </div>
     <div class="flex items-center gap-4">
@@ -76,7 +110,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         icon="i-heroicons-magnifying-glass"
         trailing-icon="i-heroicons-chevron-up-down-20-solid"
         :size="size"
-        class="w-60"
+        class="w-48"
       >
         <template #leading="{ modelValue, ui }">
           <UIcon v-if="modelValue" :name="modelValue.icon" :class="ui.leadingIcon()" />
@@ -94,7 +128,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         icon="i-heroicons-user"
         placeholder="Search users..."
         :size="size"
-        class="w-60"
+        class="w-48"
         @update:open="searchTerm = ''"
       >
         <template #leading="{ modelValue, ui }">
