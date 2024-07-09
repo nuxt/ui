@@ -96,7 +96,8 @@ const icons = ${JSON.stringify(nuxt.options.appConfig.ui.icons)};
 
 type AppConfigUI = {
   colors?: {
-    primary?: typeof colors[number]
+    primary?: Exclude<typeof colors[number], 'error'>
+    error?: Exclude<typeof colors[number], 'primary'>
     gray?: 'slate' | 'cool' | 'zinc' | 'neutral' | 'stone'
   }
   icons?: Partial<typeof icons>
