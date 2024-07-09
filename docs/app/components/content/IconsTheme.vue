@@ -3,12 +3,12 @@ import json5 from 'json5'
 
 const appConfig = useAppConfig()
 
-const { data: ast } = await useAsyncData<any>(`icons-theme`, () => parseMarkdown(`
+const { data: ast } = await useAsyncData(`icons-theme`, () => parseMarkdown(`
 \`\`\`yml
 ${json5.stringify(appConfig.ui.icons, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')}
 \`\`\`\
 
-::callout{icon="i-heroicons-light-bulb"}
+::tip
 You can customize this component in your \`app.config.ts\` under \`ui.icons\` key.
 ::
 `))

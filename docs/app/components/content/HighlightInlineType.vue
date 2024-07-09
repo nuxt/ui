@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { parseMarkdown } from '@nuxtjs/mdc/runtime'
-
 const props = defineProps<{
   type: string
 }>()
@@ -16,7 +14,7 @@ const type = computed(() => {
   return props.type
 })
 
-const { data: ast } = await useAsyncData<any>(`hightlight-inline-code-` + props.type, () => parseMarkdown(`\`${type.value}\`{lang="ts-type"}`))
+const { data: ast } = await useAsyncData(`hightlight-inline-code-` + props.type, () => parseMarkdown(`\`${type.value}\`{lang="ts-type"}`))
 </script>
 
 <template>
