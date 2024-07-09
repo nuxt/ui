@@ -89,8 +89,6 @@ provide('files', files)
 
     <Footer />
 
-    <!-- <ClientOnly>
-      <LazyUContentSearch :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
-    </ClientOnly> -->
+    <LazyUContentSearch :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
   </UApp>
 </template>
