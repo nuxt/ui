@@ -105,7 +105,7 @@ defineExpose({
 </script>
 
 <template>
-  <UForm ref="form" :model="model" :validate="validateWithVuelidate">
+  <UForm ref="form" :state="model" :validate="validateWithVuelidate">
     <slot />
   </UForm>
 </template>
