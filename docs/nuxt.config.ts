@@ -12,9 +12,11 @@ export default defineNuxtConfig({
       }
     }
   },
+
   // extends: [
   //   process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
   // ],
+
   modules: [
     module,
     '@nuxt/ui-pro',
@@ -27,23 +29,24 @@ export default defineNuxtConfig({
     'nuxt-component-meta',
     'nuxt-og-image'
   ],
+
   future: {
     compatibilityVersion: 4
   },
+
   runtimeConfig: {
     public: {
       version: pkg.version
     }
   },
-  // ui: {
-  //   global: true
-  // },
+
   icon: {
     customCollections: [{
       prefix: 'custom',
       dir: resolve('./app/assets/icons')
     }]
   },
+
   content: {
     sources: {
       pro: process.env.NUXT_UI_PRO_PATH
@@ -67,9 +70,11 @@ export default defineNuxtConfig({
       langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
     }
   },
+
   image: {
     provider: 'ipx'
   },
+
   nitro: {
     prerender: {
       routes: [
@@ -80,10 +85,12 @@ export default defineNuxtConfig({
       ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     }
   },
+
   routeRules: {
     '/': { redirect: '/getting-started/installation', prerender: false },
     '/components': { redirect: '/components/app', prerender: false }
   },
+
   componentMeta: {
     exclude: [
       '@nuxt/content',
@@ -107,6 +114,7 @@ export default defineNuxtConfig({
       exposed: false
     }
   },
+
   hooks: {
     // Related to https://github.com/nuxt/nuxt/pull/22558
     // 'components:extend': (components) => {
@@ -119,15 +127,20 @@ export default defineNuxtConfig({
     //   })
     // }
   },
+
   // vite: {
   //   optimizeDeps: {
   //     include: ['date-fns']
   //   }
   // },
+
   site: {
     url: 'https://ui3.nuxt.com'
   },
+
   typescript: {
     strict: false
-  }
+  },
+
+  compatibilityDate: '2024-07-09'
 })
