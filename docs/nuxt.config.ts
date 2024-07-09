@@ -116,16 +116,11 @@ export default defineNuxtConfig({
   },
 
   hooks: {
-    // Related to https://github.com/nuxt/nuxt/pull/22558
-    // 'components:extend': (components) => {
-    //   components.forEach((component) => {
-    //     if (component.shortPath.includes('@nuxt/ui-pro')) {
-    //       component.global = true
-    //     } else if (component.global) {
-    //       component.global = 'sync'
-    //     }
-    //   })
-    // }
+    'components:extend': (components) => {
+      const globals = components.filter(c => ['UBadge'].includes(c.pascalName))
+
+      globals.forEach(c => c.global = 'sync')
+    }
   },
 
   // vite: {
