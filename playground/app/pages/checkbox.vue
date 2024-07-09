@@ -11,7 +11,7 @@ const checked = ref(true)
     <div class="flex flex-col gap-4">
       <UCheckbox v-model="checked" label="Primary" />
       <UCheckbox label="Gray" color="gray" :default-value="true" />
-      <UCheckbox label="Error" color="error" icon="i-heroicons-heart-solid" :model-value="true" />
+      <UCheckbox label="Error" color="error" :model-value="true" />
       <UCheckbox label="Icon" icon="i-heroicons-heart-solid" :model-value="true" />
       <UCheckbox label="Default value" :default-value="true" />
       <UCheckbox label="Indeterminate" indeterminate />
