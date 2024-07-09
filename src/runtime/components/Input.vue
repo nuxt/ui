@@ -23,6 +23,7 @@ export interface InputProps extends UseComponentIconsProps {
   variant?: InputVariants['variant']
   size?: InputVariants['size']
   required?: boolean
+  autocomplete?: InputHTMLAttributes['autocomplete']
   autofocus?: boolean
   autofocusDelay?: number
   disabled?: boolean
@@ -55,6 +56,7 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
+  autocomplete: 'off',
   autofocusDelay: 0
 })
 const emits = defineEmits<InputEmits>()
@@ -148,6 +150,7 @@ onMounted(() => {
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       :required="required"
+      :autocomplete="autocomplete"
       v-bind="$attrs"
       @input="onInput"
       @blur="onBlur"
