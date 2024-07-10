@@ -17,21 +17,62 @@ The Link component is a wrapper around [`<NuxtLink>`](https://nuxt.com/docs/api/
 
 The incentive behind this is to provide the same API as NuxtLink back in Nuxt 2 / Vue 2. You can read more about it in the Vue Router [migration from Vue 2](https://router.vuejs.org/guide/migration/#removal-of-the-exact-prop-in-router-link) guide.
 
-::component-card
+::note
+It is used by the [Breadcrumb](/components/breadcrumb), [Button](/components/button), [ContextMenu](/components/context-menu), [DropdownMenu](/components/dropdown-menu) and [NavigationMenu](/components/navigation-menu) components.
+::
+
+### Tag
+
+The `Link` components renders an `<a>` tag when a `to` prop is provided, otherwise it renders a `<button>` tag. You can use the `as` prop to change fallback tag.
+
+::component-code
+---
+props:
+  to: ''
+  as: 'button'
+slots:
+  default: Link
+---
+::
+
+::tip
+You can inspect the rendered HTML by changing the `to` prop.
+::
+
+### Style
+
+By default, the link has default active and inactive styles, check out the [#theme](#theme) section.
+
+::component-code
 ---
 props:
   to: /components/link
-  activeClass: 'text-primary'
-  inactiveClass: 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
-code: ' Link '
+slots:
+  default: Link
+---
+::
+
+::tip
+Try changing the `to` prop to see the active and inactive states.
+::
+
+You can override this behavior by using the `raw` prop and provide your own styles using `class`, `active-class` and `inactive-class`.
+
+::component-code
+---
+ignore:
+  - raw
+props:
+  raw: true
+  to: /components/link
+  active-class: 'font-bold'
+  inactive-class: 'text-gray-500 dark:text-gray-500'
+slots:
+  default: Link
 ---
 
 Link
 ::
-
-It also renders an `<a>` tag when a `to` prop is provided, otherwise it defaults to rendering a `<button>` tag. The default behavior can be customized using the `as` prop.
-
-It is used underneath by the [Button](/components/button), [Dropdown](/components/dropdown) and [VerticalNavigation](/components/vertical-navigation) components.
 
 ## IntelliSense
 
@@ -39,10 +80,10 @@ If you're using VSCode and wish to get autocompletion for the classes `active-cl
 
 ```json [.vscode/settings.json]
 {
-    "tailwindCSS.classAttributes": [
-      "active-class",
-      "inactive-class"
-  ],
+  "tailwindCSS.classAttributes": [
+    "active-class",
+    "inactive-class"
+  ]
 }
 ```
 
@@ -50,8 +91,17 @@ If you're using VSCode and wish to get autocompletion for the classes `active-cl
 
 ### Props
 
-:component-props
+::component-props
+---
+ignore:
+  - custom
+---
+::
 
 ### Slots
 
 :component-slots
+
+## Theme
+
+:component-theme

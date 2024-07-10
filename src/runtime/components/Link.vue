@@ -22,12 +22,18 @@ export interface LinkProps extends NuxtLinkProps {
    */
   type?: ButtonHTMLAttributes['type']
   disabled?: boolean
+  /** Force the link to be active independent of the current route. */
   active?: boolean
+  /** Will only be active if the current route is an exact match. */
   exact?: boolean
+  /** Will only be active if the current route query is an exact match. */
   exactQuery?: boolean
+  /** Will only be active if the current route hash is an exact match. */
   exactHash?: boolean
+  /** The class to apply when the link is inactive. */
   inactiveClass?: string
   custom?: boolean
+  /** When `true`, only styles from `class`, `activeClass`, and `inactiveClass` will be applied. */
   raw?: boolean
   class?: any
 }
