@@ -222,7 +222,7 @@ function onUpdateOpen(value: boolean) {
         </span>
 
         <slot :model-value="(modelValue as T)" :open="open">
-          <span v-if="multiple ? !!modelValue?.length : !!modelValue" :class="ui.value({ class: props.ui?.value })">
+          <span v-if="multiple ? modelValue?.length : modelValue !== undefined" :class="ui.value({ class: props.ui?.value })">
             {{ displayValue(modelValue as T, multiple) }}
           </span>
           <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
