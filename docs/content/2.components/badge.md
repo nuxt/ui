@@ -15,8 +15,6 @@ Use the default slot to set the label of the Badge.
 slots:
   default: Badge
 ---
-
-Badge
 ::
 
 You can achieve the same result by using the `label` prop.
@@ -34,18 +32,12 @@ Use the `color` and `variant` props to change the style of the Badge.
 
 ::component-code
 ---
+props:
+  color: gray
+  variant: solid
 slots:
   default: Badge
-props:
-  color: primary
-  variant: solid
 ---
-
-Badge
-::
-
-::tip
-Try out the `gray` color for a neutral style.
 ::
 
 ### Size
@@ -54,13 +46,11 @@ Use the `size` prop to change the size of the Badge.
 
 ::component-code
 ---
-slots:
-  default: Badge
 props:
   size: md
+slots:
+  default: Badge
 ---
-
-Badge
 ::
 
 ## API
