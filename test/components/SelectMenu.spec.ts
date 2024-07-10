@@ -45,6 +45,7 @@ describe('SelectMenu', () => {
     ['with name', { props: { ...props, name: 'name' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
     ['with searchPlaceholder', { props: { ...props, searchPlaceholder: 'Filter items...' } }],
+    ['without search', { props: { ...props, search: false } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with required', { props: { ...props, required: true } }],
     ['with icon', { props: { ...props, icon: 'i-heroicons-magnifying-glass' } }],

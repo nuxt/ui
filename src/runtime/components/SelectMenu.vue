@@ -30,6 +30,11 @@ export interface SelectMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelVal
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
+  /**
+   * Wether to display the search input or not.
+   * @defaultValue true
+   */
+  search?: boolean
   /** The placeholder text when the search input is empty. */
   searchPlaceholder?: string
   color?: SelectMenuVariants['color']
@@ -109,6 +114,7 @@ import { UIcon, UChip, UAvatar } from '#components'
 import { get } from '../utils'
 
 const props = withDefaults(defineProps<SelectMenuProps<T>>(), {
+  search: true,
   portal: true,
   autofocusDelay: 0,
   searchPlaceholder: 'Search...',
@@ -234,7 +240,7 @@ function onUpdateOpen(value: boolean) {
 
     <ComboboxPortal :disabled="!portal">
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-        <ComboboxInput :placeholder="searchPlaceholder" :class="ui.input({ class: props.ui?.input })" autofocus autocomplete="off" />
+        <ComboboxInput v-if="search" :placeholder="searchPlaceholder" :class="ui.input({ class: props.ui?.input })" autofocus autocomplete="off" />
 
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
