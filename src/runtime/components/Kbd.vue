@@ -17,7 +17,7 @@ export interface KbdProps {
    * @defaultValue 'kbd'
    */
   as?: any
-  value: KbdKey | string
+  value?: KbdKey | string
   variant?: KbdVariants['variant']
   size?: KbdVariants['size']
   class?: any

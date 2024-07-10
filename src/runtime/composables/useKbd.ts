@@ -35,7 +35,10 @@ const _useKbd = () => {
     metaSymbol.value = macOS.value ? kbdKeysMap.command : kbdKeysMap.ctrl
   })
 
-  function getKbdKey(value: KbdKey | string) {
+  function getKbdKey(value?: KbdKey | string) {
+    if (!value) {
+      return
+    }
     if (value === 'meta') {
       return metaSymbol.value
     }
