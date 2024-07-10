@@ -3,6 +3,10 @@ import { upperFirst, camelCase } from 'scule'
 import type { ComponentMeta } from 'vue-component-meta'
 import * as theme from '#build/ui'
 
+const props = defineProps<{
+  ignore?: string[]
+}>()
+
 const route = useRoute()
 
 const camelName = camelCase(route.params.slug[route.params.slug.length - 1])
@@ -16,7 +20,9 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
     return []
   }
 
-  return meta.meta.props.map((prop) => {
+  return meta.meta.props.filter((prop) => {
+    return !props.ignore?.includes(prop.name)
+  }).map((prop) => {
     prop.default = prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name]
     return prop
   })
