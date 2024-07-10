@@ -82,6 +82,7 @@
   "resolutions": {
     "@nuxt/ui": "workspace:*",
     "@nuxt/module-builder": "0.5.5",
+    "nuxt-component-meta": "0.6.4",
     "vue-tsc": "2.0.16"
   }
 }
