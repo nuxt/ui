@@ -5,6 +5,7 @@ import * as theme from '#build/ui'
 
 const props = defineProps<{
   ignore?: string[]
+  items?: { [key: string]: string[] }
   props?: { [key: string]: any }
   slots?: { [key: string]: any }
 }>()
@@ -24,14 +25,18 @@ const options = computed(() => Object.keys(props.props || {}).filter((key) => {
   return !props.ignore?.includes(key)
 }).map((key) => {
   const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
-  const variants = Object.keys(componentTheme.variants?.[key] || {})
-  const items = prop?.type === 'boolean'
-    ? [{ value: true, label: 'true' }, { value: false, label: 'false' }]
-    : variants.map(variant => ({
-      value: variant,
-      label: variant,
-      chip: key === 'color' ? { color: variant } : undefined
-    })).filter(variant => key === 'color' ? !['error'].includes(variant.value) : true)
+  const items = props.items?.[key]?.length
+    ? props.items[key].map(item => ({
+      value: item,
+      label: item
+    }))
+    : prop?.type === 'boolean'
+      ? [{ value: true, label: 'true' }, { value: false, label: 'false' }]
+      : Object.keys(componentTheme.variants?.[key] || {}).map(variant => ({
+        value: variant,
+        label: variant,
+        chip: key === 'color' ? { color: variant } : undefined
+      })).filter(variant => key === 'color' ? !['error'].includes(variant.value) : true)
 
   return {
     name: key,
