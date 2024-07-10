@@ -145,6 +145,40 @@ slots:
 Button
 ::
 
+## Examples
+
+### `class` prop
+
+Use the `class` prop to override the base styles of the Button.
+
+::component-code
+---
+props:
+  class: 'font-bold rounded-full'
+slots:
+  default: Button
+---
+::
+
+### `ui` prop
+
+Use the `ui` prop to override the slots styles of the Button.
+
+::component-code
+---
+ignore:
+  - ui
+props:
+  icon: i-heroicons-rocket-launch
+  color: gray
+  variant: outline
+  ui:
+    leadingIcon: 'text-primary-500 dark:text-primary-400'
+slots:
+  default: Button
+---
+::
+
 ## API
 
 ### Props

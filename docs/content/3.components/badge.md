@@ -53,6 +53,21 @@ slots:
 ---
 ::
 
+## Examples
+
+### `class` prop
+
+Use the `class` prop to override the base styles of the Badge.
+
+::component-code
+---
+props:
+  class: 'font-bold rounded-full'
+slots:
+  default: Badge
+---
+::
+
 ## API
 
 ### Props
