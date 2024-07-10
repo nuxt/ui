@@ -184,11 +184,11 @@ function onUpdateOpen(value: boolean) {
               <SelectItem v-else :class="ui.item({ class: props.ui?.item })" :disabled="item.disabled" :value="typeof item === 'object' ? (item[valueKey as keyof SelectItem] as string) : item">
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
-                    <UAvatar v-if="item.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+                    <UAvatar v-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
                     <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
                     <UChip
                       v-else-if="item.chip"
-                      :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
+                      :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"

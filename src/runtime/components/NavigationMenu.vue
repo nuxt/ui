@@ -120,7 +120,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               <ULinkBase v-bind="slotProps" :class="ui.link({ class: props.ui?.link, active, disabled: !!item.disabled })">
                 <slot :name="item.slot || 'item'" :item="item" :index="index">
                   <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="active" :index="index">
-                    <UAvatar v-if="item.avatar" :size="(ui.linkLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active, disabled: !!item.disabled })" />
+                    <UAvatar v-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active, disabled: !!item.disabled })" />
                     <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active, disabled: !!item.disabled })" />
                   </slot>
 
@@ -138,7 +138,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                         v-if="item.badge"
                         color="gray"
                         variant="outline"
-                        :size="(ui.linkTrailingBadgeSize() as BadgeProps['size'])"
+                        :size="((props.ui?.linkTrailingBadgeSize || ui.linkTrailingBadgeSize()) as BadgeProps['size'])"
                         v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
                         :class="ui.linkTrailingBadge({ class: props.ui?.linkTrailingBadge })"
                       />

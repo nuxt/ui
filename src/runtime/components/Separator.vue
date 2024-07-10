@@ -71,7 +71,7 @@ const ui = computed(() => separator({
         <slot>
           <span v-if="label" :class="ui.label({ class: props.ui?.label })">{{ label }}</span>
           <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
-          <UAvatar v-else-if="avatar" :size="(ui.avatarSize() as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+          <UAvatar v-else-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
         </slot>
       </div>
 
