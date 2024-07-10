@@ -4,7 +4,7 @@ description: Display a gauge meter that fills or depletes.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/Meter.vue
+    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Meter.vue
 navigation:
   badge:
     label: Soon
