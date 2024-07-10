@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import json5 from 'json5'
 import { upperFirst, camelCase } from 'scule'
 import * as theme from '#build/ui'
 
@@ -59,6 +60,8 @@ const code = computed(() => {
       }
 
       code += value ? ` ${key}` : ` :${key}="false"`
+    } else if (typeof value === 'object') {
+      code += ` :${key}="${json5.stringify(value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')}"`
     } else {
       const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
       if (propDefault === value) {
@@ -156,5 +159,5 @@ const { data: ast } = await useAsyncData(`${name}-code-${JSON.stringify({ props:
     </div>
   </div>
 
-  <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0" />
+  <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&>div>pre]:!rounded-t-none [&>div]:!mt-0" />
 </template>
