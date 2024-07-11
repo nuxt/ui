@@ -8,7 +8,13 @@ links:
 
 ## Usage
 
-## Examples
+::component-example
+---
+name: 'container-example'
+props:
+  class: 'w-full'
+---
+::
 
 ## API
 

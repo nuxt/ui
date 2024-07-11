@@ -16,8 +16,6 @@ props:
 ---
 ::
 
-## Examples
-
 ## API
 
 ### Props
