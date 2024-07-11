@@ -1,7 +1,7 @@
 import { defineEventHandler, createError, appendHeader } from 'h3'
 import { pascalCase } from 'scule'
 // @ts-expect-error - no types available
-import components from '#content-examples-code/nitro'
+import components from '#component-example/nitro'
 
 export default defineEventHandler((event) => {
   appendHeader(event, 'Access-Control-Allow-Origin', '*')
@@ -10,7 +10,7 @@ export default defineEventHandler((event) => {
     const component = components[pascalCase(componentName)]
     if (!component) {
       throw createError({
-        statusMessage: 'Examples not found!',
+        statusMessage: 'Example not found!',
         statusCode: 404
       })
     }

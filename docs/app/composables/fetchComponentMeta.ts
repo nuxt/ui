@@ -1,6 +1,6 @@
 import type { ComponentMeta } from 'vue-component-meta'
 
-const useComponentsMetaState = () => useState('components-meta', () => ({}))
+const useComponentsMetaState = () => useState('component-meta-state', () => ({}))
 
 export async function fetchComponentMeta(name: string): Promise<{ meta: ComponentMeta }> {
   const state = useComponentsMetaState()

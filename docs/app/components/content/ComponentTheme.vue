@@ -33,7 +33,7 @@ const component = computed(() => {
   return stripCompoundVariants(component)
 })
 
-const { data: ast } = await useAsyncData(`${name}-theme`, () => parseMarkdown(`
+const { data: ast } = await useAsyncData(`component-theme-${name}`, () => parseMarkdown(`
 \`\`\`yml
 ${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')}
 \`\`\`\

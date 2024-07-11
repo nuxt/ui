@@ -5,13 +5,13 @@ import { defineNuxtModule, addTemplate, addServerHandler, createResolver } from 
 
 export default defineNuxtModule({
   meta: {
-    name: 'content-examples-code'
+    name: 'component-example'
   },
   async setup(_options, nuxt) {
     const resolver = createResolver(import.meta.url)
     let _configResolved: any
     let components: Record<string, any>
-    const outputPath = join(nuxt.options.buildDir, 'content-examples-code')
+    const outputPath = join(nuxt.options.buildDir, 'component-example')
 
     async function stubOutput() {
       if (existsSync(outputPath + '.mjs')) {
@@ -77,7 +77,7 @@ export default defineNuxtModule({
     })
 
     addTemplate({
-      filename: 'content-examples-code.mjs',
+      filename: 'component-example.mjs',
       getContents: () => 'export default {}',
       write: true
     })
@@ -85,7 +85,7 @@ export default defineNuxtModule({
     nuxt.hook('vite:extend', (vite: any) => {
       vite.config.plugins = vite.config.plugins || []
       vite.config.plugins.push({
-        name: 'content-examples-code',
+        name: 'component-example',
         enforce: 'post',
         async buildStart() {
           if (_configResolved?.build.ssr) {
@@ -112,17 +112,17 @@ export default defineNuxtModule({
 
     nuxt.hook('nitro:config', (nitroConfig) => {
       nitroConfig.virtual = nitroConfig.virtual || {}
-      nitroConfig.virtual['#content-examples-code/nitro'] = () =>
+      nitroConfig.virtual['#component-example/nitro'] = () =>
         readFileSync(
-          join(nuxt.options.buildDir, '/content-examples-code.mjs'),
+          join(nuxt.options.buildDir, '/component-example.mjs'),
           'utf-8'
         )
     })
 
     addServerHandler({
       method: 'get',
-      route: '/api/content-examples-code/:component?',
-      handler: resolver.resolve('../server/api/content-examples-code.get')
+      route: '/api/component-example/:component?',
+      handler: resolver.resolve('../server/api/component-example.get')
     })
   }
 })

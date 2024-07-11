@@ -101,7 +101,7 @@ const code = computed(() => {
   return code
 })
 
-const { data: ast } = await useAsyncData(`${name}-code-${JSON.stringify({ props: componentProps, slots: props.slots })}`, async () => {
+const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringify({ props: componentProps, slots: props.slots })}`, async () => {
   let formatted = ''
   try {
     formatted = await $prettier.format(code.value)

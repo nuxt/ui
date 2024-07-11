@@ -14,7 +14,7 @@ const type = computed(() => {
   return props.type
 })
 
-const { data: ast } = await useAsyncData(`hightlight-inline-code-` + props.type, () => parseMarkdown(`\`${type.value}\`{lang="ts-type"}`))
+const { data: ast } = await useAsyncData(`hightlight-inline-code-${props.type}`, () => parseMarkdown(`\`${type.value}\`{lang="ts-type"}`))
 </script>
 
 <template>
