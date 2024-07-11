@@ -4,7 +4,7 @@ import type { ToastRootProps, ToastRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toast'
-import type { AvatarProps, ButtonProps, ToasterContext } from '../types'
+import type { AvatarProps, ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { toast: Partial<typeof theme> } }
 
@@ -56,7 +56,7 @@ export interface ToastSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, inject, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -68,13 +68,10 @@ const props = withDefaults(defineProps<ToastProps>(), {
 const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
 
-const toaster = inject<ToasterContext>('Toaster')
-
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'duration', 'open', 'type'), emits)
 
 const multiline = computed(() => !!props.title && !!props.description)
-const duration = computed(() => props.duration || toaster?.value.duration)
 
 const ui = computed(() => toast({
   color: props.color
@@ -101,7 +98,7 @@ defineExpose({
 <template>
   <ToastRoot
     ref="el"
-    v-slot="{ remaining }"
+    v-slot="{ remaining, duration }"
     v-bind="rootProps"
     :class="ui.root({ class: props.class, multiline })"
     :style="{ '--height': height }"
