@@ -11,7 +11,7 @@ export async function fetchComponentExample(name: string) {
     return state.value[name]
   }
 
-  // add to nitro prerender
+  // Add to nitro prerender
   if (import.meta.server) {
     const event = useRequestEvent()
     event.node.res.setHeader(
@@ -19,8 +19,12 @@ export async function fetchComponentExample(name: string) {
       [event.node.res.getHeader('x-nitro-prerender'), `/api/component-example/${name}.json`].filter(Boolean).join(',')
     )
   }
+
+  // Store promise to avoid multiple calls
   state.value[name] = $fetch(`/api/component-example/${name}.json`).then((data) => {
     state.value[name] = data
+  }).catch(() => {
+    state.value[name] = {}
   })
 
   await state.value[name]
