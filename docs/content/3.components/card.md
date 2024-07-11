@@ -10,13 +10,11 @@ links:
 
 ::component-example
 ---
-component: 'card-example'
-componentProps:
+name: 'card-example'
+props:
   class: 'w-full'
 ---
 ::
-
-## Usage
 
 ## Examples
 
