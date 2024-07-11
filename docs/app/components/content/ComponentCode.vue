@@ -4,7 +4,9 @@ import { upperFirst, camelCase } from 'scule'
 import * as theme from '#build/ui'
 
 const props = defineProps<{
+  /** List of props to ignore */
   ignore?: string[]
+  /** List of items for each prop */
   items?: { [key: string]: string[] }
   props?: { [key: string]: any }
   slots?: { [key: string]: any }
@@ -32,7 +34,7 @@ const options = computed(() => Object.keys(props.props || {}).filter((key) => {
     }))
     : prop?.type === 'boolean'
       ? [{ value: true, label: 'true' }, { value: false, label: 'false' }]
-      : Object.keys(componentTheme.variants?.[key] || {}).map(variant => ({
+      : Object.keys(componentTheme?.variants?.[key] || {}).map(variant => ({
         value: variant,
         label: variant,
         chip: key === 'color' ? { color: variant } : undefined
