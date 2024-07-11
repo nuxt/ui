@@ -1,5 +1,4 @@
 ---
-title: 'Link'
 description: Render a NuxtLink but with superpowers.
 links:
   - label: GitHub

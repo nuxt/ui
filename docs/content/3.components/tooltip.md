@@ -1,7 +1,7 @@
 ---
 description: Display content that appears on hover next to an element.
 links:
-  - label: Radix Vue
+  - label: Tooltip
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/tooltip.html
   - label: GitHub

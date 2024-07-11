@@ -1,7 +1,7 @@
 ---
 description: A set of tab panels that are displayed one at a time.
 links:
-  - label: Radix Vue
+  - label: Tabs
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/tabs.html
   - label: GitHub

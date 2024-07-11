@@ -2,7 +2,7 @@
 title: CommandPalette
 description: Add a customizable command palette to your app.
 links:
-  - label: Radix Vue
+  - label: Combobox
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/combobox.html
   - label: GitHub

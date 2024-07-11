@@ -2,7 +2,7 @@
 title: DropdownMenu
 description: Display a list of actions in a dropdown menu.
 links:
-  - label: Radix Vue
+  - label: DropdownMenu
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/dropdown-menu.html
   - label: GitHub

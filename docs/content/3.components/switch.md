@@ -1,7 +1,7 @@
 ---
-description: Display a toggle field.
+description: A control that toggles between two states.
 links:
-  - label: Radix Vue
+  - label: Switch
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/switch.html
   - label: GitHub

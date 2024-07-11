@@ -1,5 +1,5 @@
 ---
-description: 'Display data in a table.'
+description: Display data in a table.
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -1,5 +1,4 @@
 ---
-title: Breadcrumb
 description: A list of links that indicate the current page's location within a navigational hierarchy.
 links:
   - label: GitHub

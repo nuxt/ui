@@ -1,5 +1,4 @@
 ---
-title: 'Meter'
 description: Display a gauge meter that fills or depletes.
 links:
   - label: GitHub

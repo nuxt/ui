@@ -1,7 +1,7 @@
 ---
 description: Display togglable accordion panels.
 links:
-  - label: Radix Vue
+  - label: Accordion
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/accordion.html
   - label: GitHub

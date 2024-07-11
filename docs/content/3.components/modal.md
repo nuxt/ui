@@ -1,7 +1,7 @@
 ---
 description: Display a modal within your application.
 links:
-  - label: Radix Vue
+  - label: Dialog
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/dialog.html
   - label: GitHub

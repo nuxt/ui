@@ -1,7 +1,7 @@
 ---
 description: A container lets you center and constrain the width of your content.
 links:
-  - label: Radix Vue
+  - label: Collapsible
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/collapsible.html
   - label: GitHub

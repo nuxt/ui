@@ -1,8 +1,7 @@
 ---
-title: 'Progress'
 description: Show a horizontal bar to indicate task progression.
 links:
-  - label: Radix Vue
+  - label: Progress
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/progress.html
   - label: GitHub

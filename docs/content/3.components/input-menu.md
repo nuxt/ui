@@ -2,7 +2,7 @@
 title: InputMenu
 description: Display an autocomplete input with real-time suggestions.
 links:
-  - label: Radix Vue
+  - label: Combobox
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/combobox.html
   - label: GitHub

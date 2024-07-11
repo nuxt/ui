@@ -1,7 +1,7 @@
 ---
 description: Display a select field.
 links:
-  - label: Radix Vue
+  - label: Select
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/select.html
   - label: GitHub

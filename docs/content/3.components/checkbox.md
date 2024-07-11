@@ -1,7 +1,7 @@
 ---
 description: Display a checkbox field.
 links:
-  - label: Radix Vue
+  - label: Checkbox
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/checkbox.html
   - label: GitHub

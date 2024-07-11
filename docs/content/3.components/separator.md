@@ -1,7 +1,7 @@
 ---
 description: Display a separator between content.
 links:
-  - label: Radix Vue
+  - label: Separator
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/separator.html
   - label: GitHub

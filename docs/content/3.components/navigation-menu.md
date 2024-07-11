@@ -2,7 +2,7 @@
 title: NavigationMenu
 description: Display a list of horizontal links.
 links:
-  - label: Radix Vue
+  - label: NavigationMenu
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/navigation-menu.html
   - label: GitHub

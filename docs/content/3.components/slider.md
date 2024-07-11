@@ -1,7 +1,7 @@
 ---
-description: Display a range field
+description: An input to select a numeric value within a range.
 links:
-  - label: Radix Vue
+  - label: Slider
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/slider.html
   - label: GitHub

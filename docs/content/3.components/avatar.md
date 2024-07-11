@@ -1,7 +1,7 @@
 ---
 description: Display an image that represents a resource or a group of resources.
 links:
-  - label: Radix Vue
+  - label: Avatar
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/avatar.html
   - label: GitHub

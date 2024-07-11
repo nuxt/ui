@@ -1,7 +1,7 @@
 ---
 description: Add a pagination to handle pages.
 links:
-  - label: Radix Vue
+  - label: Pagination
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/pagination.html
   - label: GitHub

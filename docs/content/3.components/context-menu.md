@@ -2,7 +2,7 @@
 title: ContextMenu
 description: Display a menu that appears on right click.
 links:
-  - label: Radix Vue
+  - label: ContextMenu
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/context-menu.html
   - label: GitHub

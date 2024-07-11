@@ -2,7 +2,7 @@
 title: SelectMenu
 description: Display a select menu with advanced features.
 links:
-  - label: Radix Vue
+  - label: Combobox
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/combobox.html
   - label: GitHub

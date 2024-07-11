@@ -1,7 +1,7 @@
 ---
 description: Display a non-modal dialog that floats around a trigger element.
 links:
-  - label: Radix Vue
+  - label: Popover
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/popover.html
   - label: GitHub

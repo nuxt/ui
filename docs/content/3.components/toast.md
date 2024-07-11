@@ -1,7 +1,7 @@
 ---
 description: Display a toast notification in your app.
 links:
-  - label: Radix Vue
+  - label: Toast
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/toast.html
   - label: GitHub
