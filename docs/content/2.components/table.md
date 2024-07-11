@@ -255,7 +255,7 @@ componentProps:
 ::
 
 ::callout{icon="i-heroicons-light-bulb"}
-You can use the `by` prop to compare objects by a field instead of comparing object instances. We've replicated the behavior of Headless UI [Combobox](https://headlessui.com/vue/combobox#binding-objects-as-values).
+You can use the `by` prop to compare objects by a field instead of comparing object instances. We've replicated the behavior of Headless UI [Combobox](https://headlessui.com/v1/vue/combobox#binding-objects-as-values).
 ::
 
 You can also add a `select` listener on your Table to make the rows clickable. The function will receive the row as the first argument.

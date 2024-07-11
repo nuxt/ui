@@ -3,7 +3,7 @@ description: Display a toggle field.
 links:
   - label: 'Switch'
     icon: i-simple-icons-headlessui
-    to: 'https://headlessui.com/vue/switch'
+    to: 'https://headlessui.com/v1/vue/switch'
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/Toggle.vue

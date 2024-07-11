@@ -4,7 +4,7 @@ description: Display a select menu with advanced features.
 links:
   - label: 'Listbox'
     icon: i-simple-icons-headlessui
-    to: 'https://headlessui.com/vue/listbox'
+    to: 'https://headlessui.com/v1/vue/listbox'
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/SelectMenu.vue
@@ -87,7 +87,7 @@ Use the `searchable` prop to enable search.
 
 Use the `searchable-placeholder` prop to set a different placeholder.
 
-This will use Headless UI [Combobox](https://headlessui.com/vue/combobox) component instead of [Listbox](https://headlessui.com/vue/listbox).
+This will use Headless UI [Combobox](https://headlessui.com/v1/vue/combobox) component instead of [Listbox](https://headlessui.com/v1/vue/listbox).
 
 ::component-card
 ---

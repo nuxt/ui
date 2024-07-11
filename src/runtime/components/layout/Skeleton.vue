@@ -1,5 +1,5 @@
 <template>
-  <div :class="skeletonClass" v-bind="attrs" />
+  <component :is="as" :class="skeletonClass" v-bind="attrs" />
 </template>
 
 <script lang="ts">
@@ -18,6 +18,10 @@ const config = mergeConfig<typeof skeleton>(appConfig.ui.strategy, appConfig.ui.
 export default defineComponent({
   inheritAttrs: false,
   props: {
+    as: {
+      type: String,
+      default: 'div'
+    },
     class: {
       type: [String, Object, Array] as PropType<any>,
       default: () => ''

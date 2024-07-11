@@ -3,7 +3,7 @@ description: Display a modal within your application.
 links:
   - label: 'Dialog'
     icon: i-simple-icons-headlessui
-    to: 'https://headlessui.com/vue/dialog'
+    to: 'https://headlessui.com/v1/vue/dialog'
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/overlays/Modal.vue
