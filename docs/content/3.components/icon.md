@@ -13,15 +13,14 @@ links:
 
 You can use any name from the https://icones.js.org collection such as the `i-` prefix:
 
-::component-card
+::component-code
 ---
-baseProps:
-  class: 'w-5 h-5'
 props:
   name: 'i-heroicons-light-bulb'
+  class: 'w-5 h-5'
 ---
 ::
 
-::callout{icon="i-heroicons-light-bulb"}
+::tip
 It's highly recommended to install the icons collections you need, read more about this in [Theming](/getting-started/theming#icons).
 ::

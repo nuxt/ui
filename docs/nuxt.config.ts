@@ -120,6 +120,7 @@ export default defineNuxtConfig({
       const globals = components.filter(c => [
         'UBadge',
         'UButton',
+        'UIcon',
         'UKbd',
         'ULink'
       ].includes(c.pascalName))
