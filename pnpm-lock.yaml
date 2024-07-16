@@ -169,8 +169,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: npm:@nuxt/ui-pro-edge@1.3.1-28675466.58ab657
-        version: '@nuxt/ui-pro-edge@1.3.1-28675466.58ab657(vue@3.4.31(typescript@5.5.3))'
+        specifier: npm:@nuxt/ui-pro-edge@1.3.1-28685420.013fedd
+        version: '@nuxt/ui-pro-edge@1.3.1-28685420.013fedd(vue@3.4.31(typescript@5.5.3))'
       '@nuxtjs/plausible':
         specifier: ^1.0.0
         version: 1.0.0(magicast@0.3.4)(rollup@4.18.0)
@@ -1380,8 +1380,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro-edge@1.3.1-28675466.58ab657':
-    resolution: {integrity: sha512-hyuwMlDFZAf0tIZwRZMDk3OqrkRy4w2Ynu2gg6c0ADXWHOzRwRac+5RzNFPI6G+YShl6cD8pQKKuOklmRR4dMg==}
+  '@nuxt/ui-pro-edge@1.3.1-28685420.013fedd':
+    resolution: {integrity: sha512-miiUJTtxQQPG4MVavrbFwRBqcO9M3npWn1FSrh3/Pkcs1FOTJr/rsAzNwsNbu8yJ1U3vivk4PAsfA+SzzXyMnA==}
 
   '@nuxt/vite-builder@3.12.3':
     resolution: {integrity: sha512-8xfeOgSUaXTYgLx1DA5qEFwU3/vL5DVAIv8sgPn2rnmB50nPJVXrVa+tXhO0I1Q8L4ycXRqq2dxOPGq8CSYo+A==}
@@ -4033,6 +4033,9 @@ packages:
 
   git-url-parse@14.0.0:
     resolution: {integrity: sha512-NnLweV+2A4nCvn4U/m2AoYu0pPKlsmhK9cknG7IMwsjFY1S2jxM+mAhsDxyxfCIGfGaD+dozsyX4b6vkYc83yQ==}
+
+  git-url-parse@14.1.0:
+    resolution: {integrity: sha512-8xg65dTxGHST3+zGpycMMFZcoTzAdZ2dOtu4vmgIfkTFnVHBxHMzBC2L1k8To7EmrSiHesT8JgPLT91VKw1B5g==}
 
   github-from-package@0.0.0:
     resolution: {integrity: sha512-SyHy3T1v2NUXn29OsWdxmK6RwHD+vkj3v8en8AOBZ1wBQ/hCAQ5bAQTD02kW4W9tUp/3Qh6J8r9EvntiyCmOOw==}
@@ -8798,12 +8801,12 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxt/ui-pro-edge@1.3.1-28675466.58ab657(vue@3.4.31(typescript@5.5.3))':
+  '@nuxt/ui-pro-edge@1.3.1-28685420.013fedd(vue@3.4.31(typescript@5.5.3))':
     dependencies:
       '@nuxt/ui': 'link:'
       '@vueuse/core': 10.11.0(vue@3.4.31(typescript@5.5.3))
       defu: 6.1.4
-      git-url-parse: 14.0.0
+      git-url-parse: 14.1.0
       ofetch: 1.3.4
       parse-git-config: 3.0.0
       pathe: 1.1.2
@@ -12106,6 +12109,10 @@ snapshots:
       parse-url: 8.1.0
 
   git-url-parse@14.0.0:
+    dependencies:
+      git-up: 7.0.0
+
+  git-url-parse@14.1.0:
     dependencies:
       git-up: 7.0.0
 
