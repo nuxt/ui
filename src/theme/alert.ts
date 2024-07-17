@@ -68,19 +68,19 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'gray',
     variant: 'outline',
     class: {
-      root: 'ring ring-inset ring-gray-200 dark:ring-gray-800 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900'
+      root: 'text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-200 dark:ring-gray-800'
     }
   }, {
     color: 'gray',
     variant: 'soft',
     class: {
-      root: 'text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800/50'
+      root: 'text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800/50'
     }
   }, {
     color: 'gray',
     variant: 'subtle',
     class: {
-      root: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800/50'
+      root: 'text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800/50 ring ring-inset ring-gray-300 dark:ring-gray-700'
     }
   }],
   defaultVariants: {
