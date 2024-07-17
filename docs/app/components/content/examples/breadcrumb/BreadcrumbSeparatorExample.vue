@@ -12,5 +12,5 @@ const items = [{
 </script>
 
 <template>
-  <UBreadcrumb :items="items" separator-icon="i-mdi-slash-forward" />
+  <UBreadcrumb :items="items" separator-icon="i-heroicons-arrow-right-20-solid" />
 </template>
