@@ -2,6 +2,7 @@
 import json5 from 'json5'
 import { upperFirst, camelCase } from 'scule'
 import * as theme from '#build/ui'
+import { get, set } from '#ui/utils'
 
 const props = defineProps<{
   /** List of props to ignore */
@@ -20,32 +21,54 @@ const name = `U${upperFirst(camelName)}`
 
 const componentProps = reactive({ ...(props.props || {}) })
 
+function getComponentProp(name: string) {
+  return get(componentProps, name)
+}
+
+function setComponentProp(name: string, value: any) {
+  set(componentProps, name, value)
+}
+
 const componentTheme = theme[camelName]
 const meta = await fetchComponentMeta(name as any)
 
-const options = computed(() => Object.keys(props.props || {}).filter((key) => {
-  return !props.ignore?.includes(key)
-}).map((key) => {
-  const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
-  const items = props.items?.[key]?.length
-    ? props.items[key].map(item => ({
-      value: item,
-      label: item
-    }))
-    : prop?.type === 'boolean'
-      ? [{ value: true, label: 'true' }, { value: false, label: 'false' }]
-      : Object.keys(componentTheme?.variants?.[key] || {}).map(variant => ({
-        value: variant,
-        label: variant,
-        chip: key === 'color' ? { color: variant } : undefined
-      })).filter(variant => key === 'color' ? !['error'].includes(variant.value) : true)
+function mapKeys(obj, parentKey = '') {
+  return Object.entries(obj).flatMap(([key, value]) => {
+    if (typeof value === 'object' && !Array.isArray(value)) {
+      return mapKeys(value, key)
+    }
 
-  return {
-    name: key,
-    label: key,
-    items
-  }
-}))
+    const fullKey = parentKey ? `${parentKey}.${key}` : key
+
+    return !props.ignore?.includes(fullKey) ? fullKey : undefined
+  }).filter(Boolean)
+}
+
+const options = computed(() => {
+  const keys = mapKeys(props.props || {})
+
+  return keys.map((key) => {
+    const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
+    const items = props.items?.[key]?.length
+      ? props.items[key].map(item => ({
+        value: item,
+        label: item
+      }))
+      : prop?.type === 'boolean'
+        ? [{ value: true, label: 'true' }, { value: false, label: 'false' }]
+        : Object.keys(componentTheme?.variants?.[key] || {}).map(variant => ({
+          value: variant,
+          label: variant,
+          chip: key === 'color' ? { color: variant } : undefined
+        })).filter(variant => key === 'color' ? !['error'].includes(variant.value) : true)
+
+    return {
+      name: key,
+      label: key,
+      items
+    }
+  })
+})
 
 const code = computed(() => {
   let code = `\`\`\`vue
@@ -151,7 +174,14 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
                 />
               </template>
             </USelectMenu>
-            <UInput v-else v-model="componentProps[option.name]" color="gray" variant="soft" :ui="{ base: 'rounded rounded-l-none' }" />
+            <UInput
+              v-else
+              :model-value="getComponentProp(option.name)"
+              color="gray"
+              variant="soft"
+              :ui="{ base: 'rounded rounded-l-none' }"
+              @update:model-value="setComponentProp(option.name, $event)"
+            />
           </UFormField>
         </template>
       </div>
