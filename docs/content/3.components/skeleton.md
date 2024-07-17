@@ -8,7 +8,7 @@ links:
 
 ## Usage
 
-## Examples
+:component-example{name="skeleton-example"}
 
 ## API
 
