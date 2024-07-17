@@ -24,7 +24,7 @@ const schemaProps = computed(() => getSchemaProps(props.prop.schema))
   <Collapsible v-if="schemaProps?.length" class="mt-1">
     <ProseUl>
       <ProseLi v-for="schemaProp in schemaProps" :key="schemaProp.name">
-        <HighlightInlineType :type="`${schemaProp.name}: ${schemaProp.type}`" />
+        <HighlightInlineType :type="`${schemaProp.name}${schemaProp.required === false ? '?' : ''}: ${schemaProp.type}`" />
       </ProseLi>
     </ProseUl>
   </Collapsible>
