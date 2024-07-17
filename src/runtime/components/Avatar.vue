@@ -12,6 +12,10 @@ const avatar = tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}) })
 type AvatarVariants = VariantProps<typeof avatar>
 
 export interface AvatarProps extends Pick<AvatarFallbackProps, 'delayMs'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'img'
+   */
   as?: string | object
   src?: string
   alt?: string
@@ -30,6 +34,8 @@ import { reactivePick } from '@vueuse/core'
 import { UIcon } from '#components'
 import { useAvatarGroup } from '#imports'
 
+defineOptions({ inheritAttrs: false })
+
 const props = defineProps<AvatarProps>()
 
 const fallbackProps = useForwardProps(reactivePick(props, 'delayMs'))
@@ -46,7 +52,14 @@ const ui = computed(() => avatar({
 
 <template>
   <AvatarRoot :class="ui.root({ class: props.class })">
-    <AvatarImage v-if="src" :as="as" :src="src" :alt="alt" :class="ui.image({ class: props.ui?.image })" />
+    <AvatarImage
+      v-if="src"
+      :as="as"
+      :src="src"
+      :alt="alt"
+      v-bind="$attrs"
+      :class="ui.image({ class: props.ui?.image })"
+    />
 
     <AvatarFallback as-child v-bind="fallbackProps">
       <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
