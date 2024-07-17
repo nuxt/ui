@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import json5 from 'json5'
-import { upperFirst, camelCase } from 'scule'
+import { upperFirst, camelCase, kebabCase } from 'scule'
 import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
@@ -64,7 +64,7 @@ const options = computed(() => {
 
     return {
       name: key,
-      label: key,
+      label: kebabCase(key),
       type: prop?.type,
       items
     }
@@ -81,6 +81,7 @@ const code = computed(() => {
     }
 
     const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
+    const name = kebabCase(key)
 
     if (typeof value === 'boolean') {
       if (value && prop?.default === 'true') {
@@ -90,16 +91,16 @@ const code = computed(() => {
         continue
       }
 
-      code += value ? ` ${key}` : ` :${key}="false"`
+      code += value ? ` ${name}` : ` :${key}="false"`
     } else if (typeof value === 'object') {
-      code += ` :${key}="${json5.stringify(value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')}"`
+      code += ` :${name}="${json5.stringify(value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')}"`
     } else {
       const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
       if (propDefault === value) {
         continue
       }
 
-      code += ` ${key}="${value}"`
+      code += ` ${prop?.type === 'number' ? ':' : ''}${name}="${value}"`
     }
   }
 
@@ -177,7 +178,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
             </USelectMenu>
             <UInput
               v-else
-              :type="option.type.includes('number') ? 'number' : 'text'"
+              :type="option.type?.includes('number') ? 'number' : 'text'"
               :model-value="getComponentProp(option.name)"
               color="gray"
               variant="soft"
