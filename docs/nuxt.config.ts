@@ -119,6 +119,7 @@ export default defineNuxtConfig({
       const globals = components.filter(c => [
         'UAlert',
         'UAvatar',
+        'UAvatarGroup',
         'UBadge',
         'UButton',
         'UIcon',
