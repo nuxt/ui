@@ -25,6 +25,22 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
   }).map((prop) => {
     prop.default = prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name]
     return prop
+  }).sort((a, b) => {
+    if (a.name === 'as') {
+      return -1
+    }
+
+    if (b.name === 'as') {
+      return 1
+    }
+
+    if (a.name === 'ui') {
+      return 1
+    }
+
+    if (b.name === 'ui') {
+      return -1
+    }
   })
 })
 </script>
