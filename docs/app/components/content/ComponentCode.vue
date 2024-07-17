@@ -65,6 +65,7 @@ const options = computed(() => {
     return {
       name: key,
       label: key,
+      type: prop?.type,
       items
     }
   })
@@ -176,6 +177,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
             </USelectMenu>
             <UInput
               v-else
+              :type="option.type.includes('number') ? 'number' : 'text'"
               :model-value="getComponentProp(option.name)"
               color="gray"
               variant="soft"
