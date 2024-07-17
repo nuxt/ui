@@ -16,11 +16,13 @@ const { data: ast } = await useAsyncData(`component-example-${camelName}`, () =>
 </script>
 
 <template>
-  <div>
-    <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4 rounded-t-md">
-      <component :is="camelName" v-bind="componentProps" />
+  <div class="my-5">
+    <div>
+      <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4 rounded-t-md">
+        <component :is="camelName" v-bind="componentProps" />
+      </div>
     </div>
-  </div>
 
-  <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&>div>pre]:!rounded-t-none [&>div]:!mt-0" />
+    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&>div>pre]:!rounded-t-none [&>div]:!mt-0" />
+  </div>
 </template>
