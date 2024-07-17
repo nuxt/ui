@@ -454,7 +454,7 @@ export default defineComponent({
     const debouncedSearch = props.searchable && typeof props.searchable === 'function' ? useDebounceFn(props.searchable, props.debounce) : undefined
 
     const options = computedAsync(async () => {
-      if (props.searchable && debouncedSearch) {
+      if (debouncedSearch) {
         return await debouncedSearch(query.value)
       }
 
@@ -464,7 +464,7 @@ export default defineComponent({
     })
 
     const filteredOptions = computed(() => {
-      if (!query.value) {
+      if (!query.value || debouncedSearch) {
         return options.value
       }
 
