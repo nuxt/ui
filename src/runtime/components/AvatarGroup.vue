@@ -45,26 +45,44 @@ const ui = computed(() => avatarGroup({
 
 const max = computed(() => typeof props.max === 'string' ? Number.parseInt(props.max, 10) : props.max)
 
+const children = computed(() => {
+  let children = slots.default?.()
+  if (children?.length) {
+    children = children.flatMap((child: any) => {
+      if (typeof child.type === 'symbol') {
+        // `v-if="false"` or commented node
+        if (typeof child.children === 'string') {
+          return
+        }
+
+        return child.children
+      }
+
+      return child
+    }).filter(Boolean)
+  }
+
+  return children || []
+})
+
 const visibleAvatars = computed(() => {
-  const children = slots.default?.()
-  if (!children?.length) {
+  if (!children.value.length) {
     return []
   }
 
   if (!max.value || max.value <= 0) {
-    return children.reverse()
+    return [...children.value].reverse()
   }
 
-  return children.slice(0, max.value).reverse()
+  return [...children.value].slice(0, max.value).reverse()
 })
 
 const hiddenCount = computed(() => {
-  const children = slots.default?.()
-  if (!children?.length) {
+  if (!children.value.length) {
     return 0
   }
 
-  return children?.length - visibleAvatars.value.length
+  return children.value.length - visibleAvatars.value.length
 })
 
 provide(avatarGroupInjectionKey, computed(() => ({
