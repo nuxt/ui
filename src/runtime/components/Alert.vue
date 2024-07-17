@@ -31,7 +31,7 @@ export interface AlertProps {
   actions?: ButtonProps[]
   /**
    * Display a close button to dismiss the alert.
-   * `{ size: 'md', color: 'gray', variant: 'link' }`
+   * `{ size: 'md', color: 'gray', variant: 'link' }`{lang="ts-type"}
    * @emits `close`
    * @defaultValue false
    */

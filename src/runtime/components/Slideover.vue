@@ -35,7 +35,7 @@ export interface SlideoverProps extends DialogRootProps {
   portal?: boolean
   /**
    * Display a close button to dismiss the slideover.
-   * `{ size: 'md', color: 'gray', variant: 'ghost' }`
+   * `{ size: 'md', color: 'gray', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
   close?: ButtonProps | boolean

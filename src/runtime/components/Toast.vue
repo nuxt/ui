@@ -31,7 +31,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
   actions?: ButtonProps[]
   /**
    * Display a close button to dismiss the toast.
-   * `{ size: 'md', color: 'gray', variant: 'link' }`
+   * `{ size: 'md', color: 'gray', variant: 'link' }`{lang="ts-type"}
    * @defaultValue true
    */
   close?: ButtonProps | boolean
