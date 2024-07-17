@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import('https://unpkg.com/prettier@3.0.3/standalone.js')
-import('https://unpkg.com/prettier@3.0.3/plugins/html.js')
-import('https://unpkg.com/prettier@3.0.3/plugins/markdown.js')
+import('https://unpkg.com/prettier@3.3.3/standalone.js')
+import('https://unpkg.com/prettier@3.3.3/plugins/html.js')
+import('https://unpkg.com/prettier@3.3.3/plugins/markdown.js')
 
 self.onmessage = async function (event) {
   self.postMessage({

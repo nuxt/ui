@@ -127,7 +127,7 @@ const code = computed(() => {
 const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringify({ props: componentProps, slots: props.slots })}`, async () => {
   let formatted = ''
   try {
-    formatted = await $prettier.format(code.value)
+    formatted = await $prettier.format(code.value, { trailingComma: 'none', vueIndentScriptAndStyle: true })
   } catch (e) {
     formatted = code.value
   }

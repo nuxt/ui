@@ -1,4 +1,5 @@
 import type { Options } from 'prettier'
+import { defu } from 'defu'
 import PrettierWorker from '@/workers/prettier.js?worker&inline'
 
 export interface SimplePrettier {
@@ -48,10 +49,10 @@ export default defineNuxtPlugin({
     if (import.meta.server) {
       const prettierModule = await import('prettier')
       prettier = {
-        format(source, options = {
-          parser: 'markdown'
-        }) {
-          return prettierModule.format(source, options)
+        format(source, options = {}) {
+          return prettierModule.format(source, defu(options, {
+            parser: 'markdown'
+          }))
         }
       }
     } else {
