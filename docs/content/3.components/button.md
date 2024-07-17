@@ -72,7 +72,7 @@ slots:
 
 ### Icon
 
-Use the `icon` prop to show any icon from [Iconify](https://icones.js.org).
+Use the `icon` prop to show an [Icon](/components/icon) inside the Button.
 
 ::component-code
 ---
@@ -115,7 +115,7 @@ props:
 
 Use the `loading` prop to show a loading icon and disable the Button.
 
-Use the `loading-icon` prop or globally in `appConfig.ui.icons.loading` to set a different icon.
+Use the `loading-icon` prop to customize this icon. Defaults to `i-heroicons-arrow-path-20-solid`.
 
 ::component-code
 ---
@@ -128,6 +128,10 @@ slots:
 ---
 
 Button
+::
+
+::tip
+You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 ::
 
 ### Disabled

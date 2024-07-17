@@ -25,7 +25,7 @@ A `span` will be rendered instead of a link when the `to` property is not define
 
 ### Separator
 
-Use the `separatorIcon` prop to customize the icon between each item. Defaults to `i-heroicons-chevron-right-20-solid`.
+Use the `separator-icon` prop to customize the [Icon](/components/icon) between each item. Defaults to `i-heroicons-chevron-right-20-solid`.
 
 :component-example{name="breadcrumb-separator-example"}
 

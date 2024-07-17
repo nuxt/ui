@@ -13,7 +13,7 @@ const actions = (color: string) => [{
 
 const data = {
   title: 'Heads up!',
-  description: 'You can add components to your app using the cli.',
+  description: 'You can change the primary color in your app config.',
   icon: 'i-heroicons-command-line',
   close: true
 }

@@ -117,6 +117,7 @@ export default defineNuxtConfig({
   hooks: {
     'components:extend': (components) => {
       const globals = components.filter(c => [
+        'UAlert',
         'UBadge',
         'UButton',
         'UIcon',
