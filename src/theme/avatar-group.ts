@@ -33,5 +33,8 @@ export default {
         base: 'ring-2.5 -me-2'
       }
     }
+  },
+  defaultVariants: {
+    size: 'md'
   }
 }
