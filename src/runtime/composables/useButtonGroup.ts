@@ -4,7 +4,7 @@ import type { ButtonGroupProps } from '../components/ButtonGroup.vue'
 import type { GetObjectField } from '../types/utils'
 
 export const buttonGroupInjectionKey: InjectionKey<ComputedRef<{
-  size: ButtonGroupProps ['size']
+  size: ButtonGroupProps['size']
   orientation: ButtonGroupProps['orientation']
 }>> = Symbol('nuxt-ui.button-group')
 

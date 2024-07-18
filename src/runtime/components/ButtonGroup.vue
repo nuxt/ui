@@ -3,7 +3,6 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/button-group'
-import type { ButtonProps } from './Button.vue'
 
 const appConfig = _appConfig as AppConfig & { ui: { buttonGroup: Partial<typeof theme> } }
 
@@ -17,7 +16,7 @@ export interface ButtonGroupProps {
    * @defaultValue 'div'
    */
   as?: any
-  size?: ButtonProps['size']
+  size?: ButtonGroupVariants['size']
   /**
    * The orientation the buttons are laid out.
    * @defaultValue 'horizontal'
