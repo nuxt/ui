@@ -6,13 +6,30 @@ const props = defineProps<{
   props?: { [key: string]: any }
 }>()
 
+const { $prettier } = useNuxtApp()
+
 const camelName = camelCase(props.name)
 
 const data = await fetchComponentExample(camelName)
 
 const componentProps = reactive({ ...(props.props || {}) })
 
-const { data: ast } = await useAsyncData(`component-example-${camelName}`, () => parseMarkdown(`\`\`\`vue\n${data?.code ?? ''}\n\`\`\``))
+const code = computed(() => `\`\`\`vue\n${data?.code ?? ''}\n\`\`\``)
+
+const { data: ast } = await useAsyncData(`component-example-${camelName}`, async () => {
+  let formatted = ''
+  try {
+    formatted = await $prettier.format(code.value, {
+      trailingComma: 'none',
+      semi: false,
+      singleQuote: true
+    })
+  } catch (e) {
+    formatted = code.value
+  }
+
+  return parseMarkdown(formatted)
+}, { watch: [code] })
 </script>
 
 <template>
