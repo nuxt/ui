@@ -265,7 +265,7 @@ export default defineComponent({
       default: false
     },
     showCreateOptionWhen: {
-      type: [String, Function] as PropType<'always' | 'empty' | ((query:string, results: any[]) => boolean)>,
+      type: [String, Function] as PropType<'always' | 'empty' | ((query: string, results: any[]) => boolean)>,
       default: () => configMenu.default.showCreateOptionWhen
     },
     placeholder: {
@@ -495,7 +495,7 @@ export default defineComponent({
         }
       }
       if (typeof props.showCreateOptionWhen === 'function') {
-        if(!props.showCreateOptionWhen(query.value, filteredOptions.value)){
+        if (!props.showCreateOptionWhen(query.value, filteredOptions.value)) {
           return null
         }
       }

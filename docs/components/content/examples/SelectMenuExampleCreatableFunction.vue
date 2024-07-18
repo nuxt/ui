@@ -37,9 +37,9 @@ const labels = computed({
 })
 
 const showCreateOption = (query, results) => {
-  const lowercaseQuery = String.prototype.toLowerCase.apply(query || "")
+  const lowercaseQuery = String.prototype.toLowerCase.apply(query || '')
   return lowercaseQuery.length >= 3 && !results.find(option => {
-    return String.prototype.toLowerCase.apply(option["name"] || "") === lowercaseQuery
+    return String.prototype.toLowerCase.apply(option['name'] || '') === lowercaseQuery
   })
 }
 </script>
