@@ -128,7 +128,8 @@ export default defineNuxtConfig({
         'UInput',
         'UKbd',
         'ULink',
-        'UProgress'
+        'UProgress',
+        'UTabs'
       ].includes(c.pascalName))
 
       globals.forEach(c => c.global = 'sync')
