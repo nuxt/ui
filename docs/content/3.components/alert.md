@@ -149,6 +149,44 @@ props:
 Actions will render differently when the description is not set. You can try to remove it.
 ::
 
+## Examples
+
+### `class` prop
+
+Use the `class` prop to override the base styles of the Button.
+
+::component-code
+---
+ignore:
+  - title
+  - description
+props:
+  title: 'Heads up!'
+  description: 'You can change the primary color in your app config.'
+  class: 'rounded-none'
+---
+::
+
+### `ui` prop
+
+Use the `ui` prop to override the slots styles of the Button.
+
+::component-code
+---
+ignore:
+  - ui
+  - title
+  - description
+  - icon
+props:
+  title: 'Heads up!'
+  description: 'You can change the primary color in your app config.'
+  icon: i-heroicons-rocket-launch
+  ui:
+    icon: 'size-11'
+---
+::
+
 ## API
 
 ### Props
