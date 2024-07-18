@@ -6,12 +6,14 @@
         alt="Benjamin Canac"
       />
     </UChip>
+
     <UChip inset color="amber">
       <UAvatar
         src="https://avatars.githubusercontent.com/u/25613751?v=4"
         alt="Romain Hamel"
       />
     </UChip>
+
     <UChip inset color="red">
       <UAvatar
         src="https://avatars.githubusercontent.com/u/19751938?v=4"
