@@ -4,7 +4,7 @@ export default {
   rounded: 'rounded-md',
   truncate: 'text-left break-all line-clamp-1',
   block: 'w-full flex justify-center items-center',
-  inline: 'inline-flex items-center',
+  inline: 'inline-flex justify-center items-center',
   size: {
     '2xs': 'text-xs',
     xs: 'text-xs',
