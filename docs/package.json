@@ -18,7 +18,7 @@
     "date-fns": "^3.6.0",
     "eslint": "^8.57.0",
     "joi": "^17.13.3",
-    "nuxt": "^3.12.3",
+    "nuxt": "^3.12.4",
     "nuxt-cloudflare-analytics": "^1.0.8",
     "nuxt-component-meta": "^0.6.4",
     "nuxt-og-image": "^3.0.0-rc.64",
