@@ -59,6 +59,25 @@ props:
 ---
 ::
 
+### Style
+
+Use the `color` and `variant` props to change the style of the Alert.
+
+::component-code
+---
+ignore:
+  - title
+  - description
+  - icon
+props:
+  color: gray
+  variant: outline
+  title: 'Heads up!'
+  description: 'You can change the primary color in your app config.'
+  icon: 'i-heroicons-command-line'
+---
+::
+
 ### Close
 
 Use the `close` prop to display a [Button](/components/button) to dismiss the Alert.
@@ -128,25 +147,6 @@ props:
 
 ::tip
 Actions will render differently when the description is not set. You can try to remove it.
-::
-
-### Style
-
-Use the `color` and `variant` props to change the style of the Alert.
-
-::component-code
----
-ignore:
-  - title
-  - description
-  - icon
-props:
-  color: gray
-  variant: outline
-  title: 'Heads up!'
-  description: 'You can change the primary color in your app config.'
-  icon: 'i-heroicons-command-line'
----
 ::
 
 ## API
