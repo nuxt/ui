@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import json5 from 'json5'
 import { upperFirst, camelCase, kebabCase } from 'scule'
@@ -5,8 +6,12 @@ import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
 const props = defineProps<{
-  /** List of props to ignore */
+  /** List of props to ignore in selection */
   ignore?: string[]
+  /** List of props to hide from code and selection */
+  hide?: string[]
+  /** List of props to externalize in script setup */
+  external?: string[]
   /** List of items for each prop */
   items?: { [key: string]: string[] }
   props?: { [key: string]: any }
@@ -40,7 +45,7 @@ function mapKeys(obj, parentKey = '') {
 
     const fullKey = parentKey ? `${parentKey}.${key}` : key
 
-    return !props.ignore?.includes(fullKey) ? fullKey : undefined
+    return !props.ignore?.includes(fullKey) && !props.hide?.includes(fullKey) && !props.external?.includes(fullKey) ? fullKey : undefined
   }).filter(Boolean)
 }
 
@@ -72,11 +77,27 @@ const options = computed(() => {
 })
 
 const code = computed(() => {
-  let code = `\`\`\`vue
+  let code = `\`\`\`vue`
+
+  if (props.external?.length) {
+    code += `
+<script setup lang="ts">
+`
+    for (const key of props.external) {
+      code += `const ${key} = ${json5.stringify(componentProps[key], null, 2).replace(/,([ |\t\n]+[}|\]])/g, '$1')}
+
+`
+    }
+    code += `
+<\/script>
+`
+  }
+
+  code += `
 <template>
 <${name}`
   for (const [key, value] of Object.entries(componentProps)) {
-    if (value === undefined || value === null || value === '') {
+    if (value === undefined || value === null || value === '' || props.hide?.includes(key)) {
       continue
     }
 
@@ -93,7 +114,9 @@ const code = computed(() => {
 
       code += value ? ` ${name}` : ` :${key}="false"`
     } else if (typeof value === 'object') {
-      code += ` :${name}="${json5.stringify(value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')}"`
+      const parsedValue = !props.external?.includes(key) ? json5.stringify(value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1') : key
+
+      code += ` :${name}="${parsedValue}"`
     } else {
       const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
       if (propDefault === value) {
