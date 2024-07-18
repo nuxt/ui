@@ -69,7 +69,7 @@ const options = computed(() => {
 
     return {
       name: key,
-      label: kebabCase(key),
+      label: key,
       type: prop?.type,
       items
     }

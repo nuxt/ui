@@ -98,7 +98,7 @@ props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
   close: true
-  close-icon: ''
+  closeIcon: ''
 ---
 ::
 

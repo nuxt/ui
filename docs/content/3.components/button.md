@@ -91,8 +91,8 @@ Use the `leading` and `trailing` props to set the icon position or the `leading-
 ::component-code
 ---
 props:
-  leading-icon: ''
-  trailing-icon: i-heroicons-arrow-right
+  leadingIcon: ''
+  trailingIcon: i-heroicons-arrow-right
   size: md
 slots:
   default: Button
@@ -121,7 +121,7 @@ Use the `loading-icon` prop to customize this icon. Defaults to `i-heroicons-arr
 ---
 props:
   loading: true
-  loading-icon: ''
+  loadingIcon: ''
   trailing: false
 slots:
   default: Button
@@ -172,6 +172,9 @@ Use the `ui` prop to override the slots styles of the Button.
 ---
 ignore:
   - ui
+  - color
+  - variant
+  - icon
 props:
   icon: i-heroicons-rocket-launch
   color: gray
