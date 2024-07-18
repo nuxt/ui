@@ -121,6 +121,7 @@ export default defineNuxtConfig({
         'UAvatar',
         'UAvatarGroup',
         'UBadge',
+        'UBreadcrumb',
         'UButton',
         'UButtonGroup',
         'UIcon',
