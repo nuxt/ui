@@ -128,10 +128,14 @@ const code = computed(() => {
   }
 
   if (props.slots) {
-    const hasOnlyDefaultSlot = props.slots && Object.keys(props.slots).length === 1 && props.slots.default
-
-    if (hasOnlyDefaultSlot) {
-      code += `>${props.slots.default}</${name}>`
+    if (props.slots && Object.keys(props.slots).length === 1 && props.slots.default) {
+      if (Object.keys(props.props || {}).length > 0) {
+        code += `>
+${props.slots.default}
+</${name}>`
+      } else {
+        code += `>${props.slots.default}</${name}>`
+      }
     } else {
       code += `>
   ${Object.entries(props.slots).map(([key, value]) => `<template #${key}>
