@@ -11,6 +11,13 @@ links:
 
 ## Usage
 
+::component-code
+---
+props:
+  modelValue: 50
+---
+::
+
 ## Examples
 
 ## API
