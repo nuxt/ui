@@ -17,5 +17,7 @@ jobs:
         with:
           exempt-issue-labels: triage,v3
           stale-issue-message: 'This issue is stale because it has been open for 30 days with no activity.'
+          stale-issue-label: stale
+          stale-pr-label: stale
           days-before-stale: 30
           days-before-close: -1
