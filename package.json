@@ -45,7 +45,7 @@
     "release": "release-it"
   },
   "dependencies": {
-    "@nuxt/icon": "1.2.0",
+    "@nuxt/icon": "^1.2.0",
     "@nuxt/kit": "^3.12.4",
     "@nuxt/schema": "^3.12.4",
     "@nuxtjs/color-mode": "^3.4.2",

@@ -13,7 +13,7 @@ importers:
   .:
     dependencies:
       '@nuxt/icon':
-        specifier: 1.2.0
+        specifier: ^1.2.0
         version: 1.2.0(magicast@0.3.4)(rollup@3.29.4)(vite@5.2.4(@types/node@20.14.11)(lightningcss@1.25.1)(terser@5.31.3))(vue@3.4.33(typescript@5.5.3))
       '@nuxt/kit':
         specifier: ^3.12.4
