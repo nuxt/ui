@@ -10,12 +10,12 @@ describe('Breadcrumb', () => {
     },
     to: '/'
   }, {
-    label: 'Navigation',
-    icon: 'i-heroicons-square-3-stack-3d',
+    label: 'Components',
+    icon: 'i-heroicons-cube-transparent',
     disabled: true
   }, {
     label: 'Breadcrumb',
-    to: '/breadcrumb',
+    to: '/components/breadcrumb',
     icon: 'i-heroicons-link',
     slot: 'custom'
   }]

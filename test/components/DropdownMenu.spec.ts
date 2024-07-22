@@ -99,7 +99,7 @@ describe('DropdownMenu', () => {
     }, {
       label: 'Support',
       icon: 'i-heroicons-lifebuoy',
-      to: '/dropdown-menu'
+      to: '/components/dropdown-menu'
     }, {
       type: 'separator'
     }, {

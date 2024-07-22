@@ -35,32 +35,32 @@ describe('NavigationMenu', () => {
         label: 'Link',
         icon: 'i-heroicons-document',
         description: 'Use NuxtLink with superpowers.',
-        to: '/link'
+        to: '/components/link'
       }, {
         label: 'Modal',
         icon: 'i-heroicons-document',
         description: 'Display a modal within your application.',
-        to: '/modal'
+        to: '/components/modal'
       }, {
         label: 'NavigationMenu',
         icon: 'i-heroicons-document',
         description: 'Display a list of links.',
-        to: '/navigation-menu'
+        to: '/components/navigation-menu'
       }, {
         label: 'Pagination',
         icon: 'i-heroicons-document',
         description: 'Display a list of pages.',
-        to: '/pagination'
+        to: '/components/pagination'
       }, {
         label: 'Popover',
         icon: 'i-heroicons-document',
         description: 'Display a non-modal dialog that floats around a trigger element.',
-        to: '/popover'
+        to: '/components/popover'
       }, {
         label: 'Progress',
         icon: 'i-heroicons-document',
         description: 'Show a horizontal bar to indicate task progression.',
-        to: '/progress'
+        to: '/components/progress'
       }]
     }], [{
       label: 'GitHub',
