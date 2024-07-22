@@ -83,7 +83,9 @@ defineShortcuts(extractShortcuts(items))
 
 <template>
   <div class="flex flex-col items-center gap-8">
-    <USelectMenu v-model="size" :items="sizes" placeholder="Size" />
+    <div class="flex items-center gap-2">
+      <USelect v-model="size" :items="sizes" placeholder="Size" />
+    </div>
 
     <UContextMenu :items="items" class="min-w-48" :size="size">
       <div class="flex items-center justify-center rounded-md border border-dashed border-gray-300 dark:border-gray-700 text-sm aspect-video w-72">
