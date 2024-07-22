@@ -1,5 +1,11 @@
 <template>
-  <component :is="modalState.component" v-if="modalState" v-bind="modalState.props" v-model="isOpen" />
+  <component
+    :is="modalState.component"
+    v-if="modalState"
+    v-bind="modalState.props"
+    v-model="isOpen"
+    @after-leave="reset"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -8,5 +14,5 @@ import { useModal, modalInjectionKey } from '../../composables/useModal'
 
 const modalState = inject(modalInjectionKey)
 
-const { isOpen } = useModal()
+const { isOpen, reset } = useModal()
 </script>

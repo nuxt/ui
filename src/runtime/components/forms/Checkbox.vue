@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="ui.wrapper" :data-n-ids="attrs['data-n-ids']">
     <div :class="ui.container">
       <input
         :id="inputId"
@@ -39,6 +39,7 @@ import type { Strategy } from '../../types'
 import appConfig from '#build/app.config'
 import { checkbox } from '#ui/ui.config'
 import colors from '#ui-colors'
+import { useId } from '#app'
 
 const config = mergeConfig<typeof checkbox>(appConfig.ui.strategy, appConfig.ui.checkbox, checkbox)
 
@@ -105,7 +106,8 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('checkbox', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const { emitFormChange, color, name, inputId } = useFormGroup(props)
+    const { emitFormChange, color, name, inputId: _inputId } = useFormGroup(props)
+    const inputId = _inputId.value ?? useId()
 
     const toggle = computed({
       get () {
@@ -117,7 +119,7 @@ export default defineComponent({
     })
 
     const onChange = (event: Event) => {
-      emit('change', event)
+      emit('change', (event.target as HTMLInputElement).checked)
       emitFormChange()
     }
 

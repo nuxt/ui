@@ -1,19 +1,17 @@
-import { createRequire } from 'node:module'
 import { join } from 'pathe'
-import { addTemplate, installModule, useNuxt } from '@nuxt/kit'
-import { excludeColors, generateSafelist } from './runtime/utils/colors'
+import { defu } from 'defu'
+import { addTemplate, createResolver, installModule, useNuxt } from '@nuxt/kit'
+
+import { setGlobalColors } from './runtime/utils/colors'
 import type { ModuleOptions } from './module'
 
-const _require = createRequire(import.meta.url)
-const defaultColors = _require('tailwindcss/colors.js')
+export default async function installTailwind (
+  moduleOptions: ModuleOptions,
+  nuxt = useNuxt(),
+  resolve = createResolver(import.meta.url).resolve
+) {
+  const runtimeDir = resolve('./runtime')
 
-delete defaultColors.lightBlue
-delete defaultColors.warmGray
-delete defaultColors.trueGray
-delete defaultColors.coolGray
-delete defaultColors.blueGray
-
-export default async function installTailwind (moduleOptions: ModuleOptions, nuxt = useNuxt(), { resolve, runtimeDir }) {
   // 1. register hook
   // @ts-ignore
   nuxt.hook('tailwindcss:config', function (tailwindConfig) {
@@ -22,49 +20,7 @@ export default async function installTailwind (moduleOptions: ModuleOptions, nux
     tailwindConfig.theme.extend.colors =
       tailwindConfig.theme.extend.colors || {}
 
-    const globalColors: any = {
-      ...(tailwindConfig.theme.colors || defaultColors),
-      ...tailwindConfig.theme.extend?.colors
-    }
-
-    // @ts-ignore
-    globalColors.primary = tailwindConfig.theme.extend.colors.primary = {
-      50: 'rgb(var(--color-primary-50) / <alpha-value>)',
-      100: 'rgb(var(--color-primary-100) / <alpha-value>)',
-      200: 'rgb(var(--color-primary-200) / <alpha-value>)',
-      300: 'rgb(var(--color-primary-300) / <alpha-value>)',
-      400: 'rgb(var(--color-primary-400) / <alpha-value>)',
-      500: 'rgb(var(--color-primary-500) / <alpha-value>)',
-      600: 'rgb(var(--color-primary-600) / <alpha-value>)',
-      700: 'rgb(var(--color-primary-700) / <alpha-value>)',
-      800: 'rgb(var(--color-primary-800) / <alpha-value>)',
-      900: 'rgb(var(--color-primary-900) / <alpha-value>)',
-      950: 'rgb(var(--color-primary-950) / <alpha-value>)',
-      DEFAULT: 'rgb(var(--color-primary-DEFAULT) / <alpha-value>)'
-    }
-
-    if (globalColors.gray) {
-      // @ts-ignore
-      globalColors.cool = tailwindConfig.theme.extend.colors.cool =
-        defaultColors.gray
-    }
-
-    // @ts-ignore
-    globalColors.gray = tailwindConfig.theme.extend.colors.gray = {
-      50: 'rgb(var(--color-gray-50) / <alpha-value>)',
-      100: 'rgb(var(--color-gray-100) / <alpha-value>)',
-      200: 'rgb(var(--color-gray-200) / <alpha-value>)',
-      300: 'rgb(var(--color-gray-300) / <alpha-value>)',
-      400: 'rgb(var(--color-gray-400) / <alpha-value>)',
-      500: 'rgb(var(--color-gray-500) / <alpha-value>)',
-      600: 'rgb(var(--color-gray-600) / <alpha-value>)',
-      700: 'rgb(var(--color-gray-700) / <alpha-value>)',
-      800: 'rgb(var(--color-gray-800) / <alpha-value>)',
-      900: 'rgb(var(--color-gray-900) / <alpha-value>)',
-      950: 'rgb(var(--color-gray-950) / <alpha-value>)'
-    }
-
-    const colors = excludeColors(globalColors)
+    const colors = setGlobalColors(tailwindConfig.theme)
 
     // @ts-ignore
     nuxt.options.appConfig.ui = {
@@ -73,33 +29,25 @@ export default async function installTailwind (moduleOptions: ModuleOptions, nux
       colors,
       strategy: 'merge'
     }
-
-    tailwindConfig.safelist = tailwindConfig.safelist || []
-    tailwindConfig.safelist.push(
-      ...generateSafelist(moduleOptions.safelistColors || [], colors)
-    )
   })
 
   // 2. add config template
   const configTemplate = addTemplate({
     filename: 'nuxtui-tailwind.config.cjs',
     write: true,
-    getContents: () => `
+    getContents: ({ nuxt }) => `
       const { defaultExtractor: createDefaultExtractor } = require('tailwindcss/lib/lib/defaultExtractor.js')
-      const { customSafelistExtractor } = require(${JSON.stringify(resolve(runtimeDir, 'utils', 'colors'))})
-      const { iconsPlugin, getIconCollections } = require('@egoist/tailwindcss-icons')
+      const { customSafelistExtractor, generateSafelist } = require(${JSON.stringify(resolve(runtimeDir, 'utils', 'colors'))})
 
       const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
       module.exports = {
-        darkMode: 'class',
         plugins: [
           require('@tailwindcss/forms')({ strategy: 'class' }),
           require('@tailwindcss/aspect-ratio'),
           require('@tailwindcss/typography'),
           require('@tailwindcss/container-queries'),
-          require('@headlessui/tailwindcss'),
-          iconsPlugin(${Array.isArray(moduleOptions.icons) || moduleOptions.icons === 'all' ? `{ collections: getIconCollections(${JSON.stringify(moduleOptions.icons)}) }` : typeof moduleOptions.icons === 'object' ? JSON.stringify(moduleOptions.icons) : '{}'})
+          require('@headlessui/tailwindcss')
         ],
         content: {
           files: [
@@ -119,17 +67,20 @@ export default async function installTailwind (moduleOptions: ModuleOptions, nux
               ]
             }
           }
-        }
+        },
+        safelist: generateSafelist(${JSON.stringify(moduleOptions.safelistColors || [])}, ${JSON.stringify(nuxt.options.appConfig.ui.colors)}),
       }
     `
   })
 
   // 3. install module
-  await installModule('@nuxtjs/tailwindcss', {
+  await installModule('@nuxtjs/tailwindcss', defu({
     exposeConfig: true,
+    config: { darkMode: 'class' },
     configPath: [
       configTemplate.dst,
       join(nuxt.options.rootDir, 'tailwind.config')
     ]
-  })
+  // @ts-expect-error - `@nuxtjs/tailwindcss` not installed yet
+  }, nuxt.options.tailwindcss))
 }

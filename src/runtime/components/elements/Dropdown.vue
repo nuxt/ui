@@ -7,7 +7,8 @@
       :disabled="disabled"
       :class="ui.trigger"
       role="button"
-      @mouseover="onMouseOver"
+      @mouseenter="onMouseEnter"
+      @touchstart.passive="onTouchStart"
     >
       <slot :open="open" :disabled="disabled">
         <button :disabled="disabled">
@@ -16,25 +17,25 @@
       </slot>
     </HMenuButton>
 
-    <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
+    <div v-if="open && items.length" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseenter="onMouseEnter">
       <Transition appear v-bind="ui.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
 
           <HMenuItems :class="[ui.base, ui.divide, ui.ring, ui.rounded, ui.shadow, ui.background, ui.height]" static>
             <div v-for="(subItems, index) of items" :key="index" :class="ui.padding">
-              <NuxtLink v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ href, target, rel, navigate, isExternal }" v-bind="getNuxtLinkProps(item)" custom>
+              <NuxtLink v-for="(item, subIndex) of subItems" :key="subIndex" v-slot="{ href, target, rel, navigate, isExternal, isActive }" v-bind="getNuxtLinkProps(item)" custom>
                 <HMenuItem v-slot="{ active, disabled: itemDisabled, close }" :disabled="item.disabled">
                   <component
                     :is="!!href ? 'a' : 'button'"
                     :href="!itemDisabled ? href : undefined"
                     :rel="rel"
                     :target="target"
-                    :class="twMerge(twJoin(ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled), item.class)"
+                    :class="twMerge(twJoin(ui.item.base, ui.item.padding, ui.item.size, ui.item.rounded, active || isActive ? ui.item.active : ui.item.inactive, itemDisabled && ui.item.disabled), item.class)"
                     @click="onClick($event, item, { href, navigate, close, isExternal })"
                   >
                     <slot :name="item.slot || 'item'" :item="item">
-                      <UIcon v-if="item.icon" :name="item.icon" :class="twMerge(twJoin(ui.item.icon.base, active ? ui.item.icon.active : ui.item.icon.inactive), item.iconClass)" />
+                      <UIcon v-if="item.icon" :name="item.icon" :class="twMerge(twJoin(ui.item.icon.base, active || isActive ? ui.item.icon.active : ui.item.icon.inactive), item.iconClass)" />
                       <UAvatar v-else-if="item.avatar" v-bind="{ size: ui.item.avatar.size, ...item.avatar }" :class="ui.item.avatar.base" />
 
                       <span :class="twMerge(ui.item.label, item.labelClass)">{{ item.label }}</span>
@@ -60,9 +61,7 @@ import type { PropType } from 'vue'
 import { Menu as HMenu, MenuButton as HMenuButton, MenuItems as HMenuItems, MenuItem as HMenuItem, provideUseId } from '@headlessui/vue'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
-import UIcon from '../elements/Icon.vue'
-import UAvatar from '../elements/Avatar.vue'
-import UKbd from '../elements/Kbd.vue'
+import { UIcon, UAvatar, UKbd } from '#components'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { mergeConfig, getNuxtLinkProps } from '../../utils'
@@ -181,7 +180,19 @@ export default defineComponent({
       }
     })
 
-    function onMouseOver () {
+    function onTouchStart (event: TouchEvent) {
+      if (!event.cancelable || !menuApi.value) {
+        return
+      }
+
+      if (menuApi.value.menuState === 0) {
+        menuApi.value.closeMenu()
+      } else {
+        menuApi.value.openMenu()
+      }
+    }
+
+    function onMouseEnter () {
       if (props.mode !== 'hover' || !menuApi.value) {
         return
       }
@@ -263,7 +274,8 @@ export default defineComponent({
       trigger,
       container,
       containerStyle,
-      onMouseOver,
+      onTouchStart,
+      onMouseEnter,
       onMouseLeave,
       onClick,
       getNuxtLinkProps,

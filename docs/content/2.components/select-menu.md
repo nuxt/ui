@@ -2,12 +2,12 @@
 title: SelectMenu
 description: Display a select menu with advanced features.
 links:
+  - label: 'Listbox'
+    icon: i-simple-icons-headlessui
+    to: 'https://headlessui.com/v1/vue/listbox'
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/SelectMenu.vue
-  - label: 'Listbox'
-    icon: i-simple-icons-headlessui
-    to: 'https://headlessui.com/vue/listbox'
 ---
 
 ## Usage
@@ -50,7 +50,7 @@ componentProps:
 ---
 ::
 
-If you only want to select a single object property rather than the whole object as value, you can set the `value-attribute` property. This prop defaults to `null`.
+If you only want to select a single object property rather than the whole object as value, you can set the `value-attribute` property. This prop defaults to `null`.The value of the `value-attribute` field in options must be unique.
 
 ::component-example
 ---
@@ -87,7 +87,7 @@ Use the `searchable` prop to enable search.
 
 Use the `searchable-placeholder` prop to set a different placeholder.
 
-This will use Headless UI [Combobox](https://headlessui.com/vue/combobox) component instead of [Listbox](https://headlessui.com/vue/listbox).
+This will use Headless UI [Combobox](https://headlessui.com/v1/vue/combobox) component instead of [Listbox](https://headlessui.com/v1/vue/listbox).
 
 ::component-card
 ---
@@ -150,6 +150,8 @@ Pass a function to the `searchable` prop to customize the search behavior and fi
 
 Use the `debounce` prop to adjust the delay of the function.
 
+Use the `searchableLazy` prop to control the immediacy of data requests.
+
 ::component-example
 ---
 component: 'select-menu-example-search-async'
@@ -181,6 +183,18 @@ Try to search for something that exists in the example below, but not an exact m
 ::component-example
 ---
 component: 'select-menu-example-creatable-always'
+componentProps:
+  class: 'w-full lg:w-48'
+---
+::
+
+Pass a function to the `show-create-option-when` prop to control wether or not to show the create option. This function takes two arguments: the query (as the first argument) and an array of current results (as the second argument). It should return true to display the create option.
+
+The example below shows how to make the create option visible when the query is at least three characters long and does not exactly match any of the current results (case insensitive).
+
+::component-example
+---
+component: 'select-menu-example-creatable-function'
 componentProps:
   class: 'w-full lg:w-48'
 ---
@@ -257,7 +271,7 @@ componentProps:
 Use the `#option-create` slot to customize the content displayed when the `creatable` prop is `true` and there is no options. You will have access to the `query` property in the slot scope.
 
 ::callout{icon="i-heroicons-light-bulb"}
-An example is available in the [Create option](#create-option) section.
+An example is available in the [Creatable](#creatable) section.
 ::
 
 ### `empty`

@@ -31,8 +31,8 @@ const selected = ref(people[0])
 <template>
   <USelectMenu v-model="selected" :options="people">
     <template #leading>
-      <UIcon v-if="selected.icon" :name="(selected.icon as string)" class="w-4 h-4 mx-0.5" />
-      <UAvatar v-else-if="selected.avatar" v-bind="(selected.avatar as Avatar)" size="3xs" class="mx-0.5" />
+      <UIcon v-if="selected.icon" :name="(selected.icon as string)" class="w-5 h-5" />
+      <UAvatar v-else-if="selected.avatar" v-bind="(selected.avatar as Avatar)" size="2xs" />
     </template>
   </USelectMenu>
 </template>

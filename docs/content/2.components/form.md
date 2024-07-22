@@ -8,14 +8,63 @@ links:
 
 ## Usage
 
-Use the Form component to validate form data using schema libraries such as [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi), [Valibot](https://valibot.dev/) or your own validation logic. It works seamlessly with the FormGroup component to automatically display error messages around form elements.
+Use the Form component to validate form data using schema libraries such as [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi), [Valibot](https://github.com/fabian-hiller/valibot), or your own validation logic.
 
-The Form component requires the `validate` and `state` props for form validation.
+It works with the [FormGroup](/components/form-group) component to display error messages around form elements automatically.
 
-- `state` - a reactive object that holds the current state of the form.
-- `validate` - a function that takes the form's state as input and returns an array of `FormError` objects with the following fields:
-  - `message` - the error message to display.
-  - `path` - the path to the form element matching the `name`.
+The form component requires two props:
+- `state` - a reactive object holding the form's state.
+- `schema` - a schema object from a validation library like [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi) or [Valibot](https://github.com/fabian-hiller/valibot).
+
+::callout{icon="i-heroicons-light-bulb"}
+Note that **no validation library is included** by default, so ensure you **install the one you need**.
+::
+
+::tabs
+  ::component-example{label="Yup"}
+  ---
+  component: 'form-example-yup'
+  componentProps:
+    class: 'w-60'
+  ---
+  ::
+
+  ::component-example{label="Zod"}
+  ---
+  component: 'form-example-zod'
+  componentProps:
+    class: 'w-60'
+  ---
+  ::
+
+  ::component-example{label="Joi"}
+  ---
+  component: 'form-example-joi'
+  componentProps:
+    class: 'w-60'
+  ---
+  ::
+
+  ::component-example{label="Valibot"}
+  ---
+  component: 'form-example-valibot'
+  componentProps:
+    class: 'w-60'
+  ---
+  ::
+::
+
+## Custom validation
+
+Use the `validate` prop to apply your own validation logic.
+
+The validation function must return a list of errors with the following attributes:
+- `message` - Error message for display.
+- `path` - Path to the form element corresponding to the `name` attribute.
+
+::callout{icon="i-heroicons-light-bulb"}
+Note that it can be used alongside the `schema` prop to handle complex use cases.
+::
 
 ::component-example
 ---
@@ -25,55 +74,7 @@ componentProps:
 ---
 ::
 
-## Schema
-
-You can provide a schema from [Yup](#yup), [Zod](#zod) or [Joi](#joi), [Valibot](#valibot) through the `schema` prop to validate the state. It's important to note that **none of these libraries are included** by default, so make sure to **install the one you need**.
-
-### Yup
-
-::component-example
----
-component: 'form-example-yup'
-componentProps:
-  class: 'w-60'
----
-::
-
-### Zod
-
-::component-example
----
-component: 'form-example-zod'
-componentProps:
-  class: 'w-60'
----
-::
-
-### Joi
-
-::component-example
----
-component: 'form-example-joi'
-componentProps:
-  class: 'w-60'
----
-::
-
-### Valibot
-
-::component-example
----
-component: 'form-example-valibot'
-componentProps:
-  class: 'w-60'
----
-::
-
-## Other libraries
-
-For other validation libraries, you can define your own component with custom validation logic.
-
-Here is an example with [Vuelidate](https://github.com/vuelidate/vuelidate):
+This can also be used to integrate with other validation libraries. Here is an example with [Vuelidate](https://github.com/vuelidate/vuelidate):
 
 ```vue
 <script setup lang="ts">
@@ -104,7 +105,7 @@ defineExpose({
 </script>
 
 <template>
-  <UForm ref="form" :model="model" :validate="validateWithVuelidate">
+  <UForm ref="form" :state="model" :validate="validateWithVuelidate">
     <slot />
   </UForm>
 </template>
@@ -132,9 +133,11 @@ async function onSubmit (event: FormSubmitEvent<any>) {
     // ...
   } catch (err) {
     if (err.statusCode === 422) {
-      form.value.setErrors(err.data.errors.map((err) => {
+      form.value.setErrors(err.data.errors.map((err) => ({
         // Map validation errors to { path: string, message: string }
-      }))
+        message: err.message,
+        path: err.path,
+      })))
     }
   }
 }
@@ -156,10 +159,11 @@ async function onSubmit (event: FormSubmitEvent<any>) {
   </UForm>
 </template>
 ```
-
 ## Input events
 
-The Form component automatically triggers validation upon `submit`, `input`, `blur` or `change` events. This ensures that any errors are displayed as soon as the user interacts with the form elements. You can control when validation happens this using the `validate-on` prop.
+The Form component automatically triggers validation upon `submit`, `input`, `blur` or `change` events.
+
+This ensures that any errors are displayed as soon as the user interacts with the form elements. You can control when validation happens this using the `validate-on` prop.
 
 ::callout{icon="i-heroicons-light-bulb"}
 Note that the `input` event is not triggered until after the initial `blur` event. This is to prevent the form from being validated as the user is typing. You can override this behavior by setting the [`eager-validation`](/components/form-group#eager-validation) prop on [`FormGroup`](/components/form-group) to `true`.
@@ -180,13 +184,13 @@ Take a look at the component!
 
 ## Error event
 
-You can listen to the `@error` event to handle errors. This event is triggered when the form is validated and contains an array of `FormError` objects with the following fields:
+You can listen to the `@error` event to handle errors. This event is triggered when the form is submitted and contains an array of `FormError` objects with the following fields:
 
 - `id` - the identifier of the form element.
 - `path` - the path to the form element matching the `name`.
 - `message` - the error message to display.
 
-Here is an example of how to focus the first form element with an error:
+Here's an example that focuses the first input element with an error after the form is submitted:
 
 ::component-example
 ---

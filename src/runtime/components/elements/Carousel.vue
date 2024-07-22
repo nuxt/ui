@@ -5,6 +5,7 @@
         v-for="(item, index) in items"
         :key="index"
         :class="ui.item"
+        :role="indicators ? 'tabpanel' : null"
       >
         <slot :item="item" :index="index" />
       </div>
@@ -34,11 +35,13 @@
       </slot>
     </div>
 
-    <div v-if="indicators" :class="ui.indicators.wrapper">
+    <div v-if="indicators" role="tablist" :class="ui.indicators.wrapper">
       <template v-for="page in pages" :key="page">
         <slot name="indicator" :on-click="onClick" :active="page === currentPage" :page="page">
           <button
             type="button"
+            role="tab"
+            :aria-selected="page === currentPage"
             :class="[
               ui.indicators.base,
               page === currentPage ? ui.indicators.active : ui.indicators.inactive
@@ -53,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import { ref, toRef, toRefs, computed, defineComponent } from 'vue'
+import { ref, toRef, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge } from 'tailwind-merge'
 import { mergeConfig } from '../../utils'
@@ -109,10 +112,9 @@ export default defineComponent({
     const carouselRef = ref<HTMLElement>()
     const itemWidth = ref(0)
 
-    const { x, arrivedState } = useScroll(carouselRef, { behavior: 'smooth' })
-    const { width: carouselWidth } = useElementSize(carouselRef)
+    const { x } = useScroll(carouselRef, { behavior: 'smooth' })
 
-    const { left: isFirst, right: isLast } = toRefs(arrivedState)
+    const { width: carouselWidth } = useElementSize(carouselRef)
 
     useCarouselScroll(carouselRef)
 
@@ -122,7 +124,13 @@ export default defineComponent({
       itemWidth.value = entry?.target?.firstElementChild?.clientWidth || 0
     })
 
-    const currentPage = computed(() => Math.round(x.value / itemWidth.value) + 1)
+    const currentPage = computed(() => {
+      if (!itemWidth.value) {
+        return 0
+      }
+
+      return Math.round(x.value / itemWidth.value) + 1
+    })
 
     const pages = computed(() => {
       if (!itemWidth.value) {
@@ -131,6 +139,9 @@ export default defineComponent({
 
       return props.items.length - Math.round(carouselWidth.value / itemWidth.value) + 1
     })
+
+    const isFirst = computed(() => currentPage.value <= 1)
+    const isLast = computed(() => currentPage.value === pages.value)
 
     function onClickNext () {
       x.value += itemWidth.value

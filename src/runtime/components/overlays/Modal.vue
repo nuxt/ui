@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot :appear="appear" :show="isOpen" as="template">
+  <TransitionRoot :appear="appear" :show="isOpen" as="template" @after-leave="onAfterLeave">
     <HDialog :class="ui.wrapper" v-bind="attrs" @close="close">
       <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
@@ -82,7 +82,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'close', 'close-prevented'],
+  emits: ['update:modelValue', 'close', 'close-prevented', 'after-leave'],
   setup (props, { emit }) {
     const { ui, attrs } = useUI('modal', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -117,6 +117,10 @@ export default defineComponent({
       emit('close')
     }
 
+    const onAfterLeave = () => {
+      emit('after-leave')
+    }
+
     provideUseId(() => useId())
 
     return {
@@ -125,6 +129,7 @@ export default defineComponent({
       attrs,
       isOpen,
       transitionClass,
+      onAfterLeave,
       close
     }
   }

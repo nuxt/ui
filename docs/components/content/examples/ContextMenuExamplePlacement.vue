@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useMouse, useWindowScroll } from '@vueuse/core'
+
 const { x, y } = useMouse()
 const { y: windowY } = useWindowScroll()
 

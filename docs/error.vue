@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
     <NuxtLoadingIndicator />
@@ -12,17 +13,24 @@
       </UMain>
     </UContainer>
 
+    <Footer />
+
     <ClientOnly>
-      <LazyUDocsSearch :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 1000 }" />
+      <LazyUContentSearch :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
     </ClientOnly>
 
-    <UNotifications />
+    <UNotifications>
+      <template #title="{ title }">
+        <span v-html="title" />
+      </template>
+    </UNotifications>
+    <UModals />
   </div>
 </template>
 
 <script setup lang="ts">
 import type { NuxtError } from '#app'
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import type { ParsedContent } from '@nuxt/content'
 
 useSeoMeta({
   title: 'Page not found',
@@ -34,6 +42,7 @@ defineProps<{
 }>()
 
 const route = useRoute()
+const colorMode = useColorMode()
 const { branch } = useContentSource()
 
 const { data: nav } = await useAsyncData('navigation', () => fetchContentNavigation())
@@ -52,8 +61,10 @@ const navigation = computed(() => {
     ]
   }
 
-  return nav.value.filter(item => item._path !== '/dev')
+  return nav.value?.filter(item => item._path !== '/dev') || []
 })
+
+const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
 
 const links = computed(() => {
   return [{
@@ -65,10 +76,10 @@ const links = computed(() => {
     label: 'Pro',
     icon: 'i-heroicons-square-3-stack-3d',
     to: '/pro',
-    active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components')
+    active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
   }, {
     label: 'Pricing',
-    icon: 'i-heroicons-credit-card',
+    icon: 'i-heroicons-ticket',
     to: '/pro/pricing'
   }, {
     label: 'Templates',
@@ -79,6 +90,21 @@ const links = computed(() => {
     icon: 'i-heroicons-rocket-launch',
     to: '/releases'
   }].filter(Boolean)
+})
+
+// Head
+
+useHead({
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { key: 'theme-color', name: 'theme-color', content: color }
+  ],
+  link: [
+    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
+  ],
+  htmlAttrs: {
+    lang: 'en'
+  }
 })
 
 // Provide

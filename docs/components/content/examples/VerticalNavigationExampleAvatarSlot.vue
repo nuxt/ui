@@ -32,13 +32,7 @@ const links = [{
 <template>
   <UVerticalNavigation :links="links">
     <template #avatar="{ link }">
-      <UAvatar
-        v-if="link.avatar"
-        v-bind="link.avatar"
-        size="3xs"
-        loading="lazy"
-      />
-      <UIcon v-else name="i-heroicons-user-circle-20-solid" class="text-lg" />
+      <UAvatar v-bind="link.avatar" size="2xs" loading="lazy" />
     </template>
   </UVerticalNavigation>
 </template>

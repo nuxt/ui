@@ -11,7 +11,7 @@ export default {
   inactive: 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50',
   label: 'truncate relative',
   icon: {
-    base: 'flex-shrink-0 w-5 h-5',
+    base: 'flex-shrink-0 w-5 h-5 relative',
     active: 'text-gray-700 dark:text-gray-200',
     inactive: 'text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200'
   },

@@ -17,12 +17,10 @@ export default defineNuxtConfig({
   ].filter(Boolean),
   modules: [
     '@nuxt/content',
+    '@nuxt/fonts',
     '@nuxt/image',
     'nuxt-og-image',
-    // '@nuxthq/studio',
     module,
-    '@nuxtjs/fontaine',
-    '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
@@ -36,10 +34,15 @@ export default defineNuxtConfig({
   },
   ui: {
     global: true,
-    icons: ['heroicons', 'simple-icons'],
     safelistColors: excludeColors(colors)
   },
   content: {
+    highlight: {
+      langs: [
+        'postcss',
+        'mdc'
+      ]
+    },
     sources: {
       dev: {
         prefix: '/dev',
@@ -69,16 +72,6 @@ export default defineNuxtConfig({
   },
   image: {
     provider: 'ipx'
-  },
-  fontMetrics: {
-    fonts: ['DM Sans']
-  },
-  googleFonts: {
-    display: 'swap',
-    download: true,
-    families: {
-      'DM+Sans': [400, 500, 600, 700]
-    }
   },
   nitro: {
     prerender: {
@@ -135,6 +128,9 @@ export default defineNuxtConfig({
   },
   typescript: {
     strict: false
+  },
+  site: {
+    url: 'https://ui.nuxt.com'
   },
   vite: {
     optimizeDeps: {

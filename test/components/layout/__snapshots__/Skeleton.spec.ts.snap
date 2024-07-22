@@ -1,5 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Skeleton > renders <USkeleton as="span" /> correctly 1`] = `"<span class="animate-pulse bg-gray-100 dark:bg-gray-800 rounded-md"></span>"`;
+
 exports[`Skeleton > renders <USkeleton class="h-12 w-12" :ui="{ rounded: 'rounded-full' }" /> correctly 1`] = `"<div class="animate-pulse bg-gray-100 dark:bg-gray-800 rounded-full h-12 w-12"></div>"`;
 
 exports[`Skeleton > renders basic case correctly 1`] = `"<div class="animate-pulse bg-gray-100 dark:bg-gray-800 rounded-md"></div>"`;

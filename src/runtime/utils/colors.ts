@@ -1,5 +1,7 @@
 import { omit } from './lodash'
 import { kebabCase, camelCase, upperFirst } from 'scule'
+import type { Config as TWConfig } from 'tailwindcss'
+import defaultColors from 'tailwindcss/colors.js'
 
 const colorsToExclude = [
   'inherit',
@@ -15,7 +17,7 @@ const colorsToExclude = [
   'cool'
 ]
 
-const safelistByComponent = {
+const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist']> = {
   alert: (colorsAsRegex) => [{
     pattern: new RegExp(`bg-(${colorsAsRegex})-50`)
   }, {
@@ -217,13 +219,61 @@ const safelistComponentAliasesMap = {
 
 const colorsAsRegex = (colors: string[]): string => colors.join('|')
 
-export const excludeColors = (colors: object): string[] => {
+type ColorConfig = Exclude<TWConfig['theme']['colors'], Function>
+
+export const excludeColors = (colors: ColorConfig | typeof defaultColors): string[] => {
   return Object.entries(omit(colors, colorsToExclude))
     .filter(([, value]) => typeof value === 'object')
     .map(([key]) => kebabCase(key))
 }
 
-export const generateSafelist = (colors: string[], globalColors) => {
+export const setGlobalColors = (theme: TWConfig['theme']) => {
+  const globalColors: ColorConfig = {
+    ...(theme.colors || defaultColors),
+    ...theme.extend?.colors
+  }
+
+  // @ts-ignore
+  globalColors.primary = theme.extend.colors.primary = {
+    50: 'rgb(var(--color-primary-50) / <alpha-value>)',
+    100: 'rgb(var(--color-primary-100) / <alpha-value>)',
+    200: 'rgb(var(--color-primary-200) / <alpha-value>)',
+    300: 'rgb(var(--color-primary-300) / <alpha-value>)',
+    400: 'rgb(var(--color-primary-400) / <alpha-value>)',
+    500: 'rgb(var(--color-primary-500) / <alpha-value>)',
+    600: 'rgb(var(--color-primary-600) / <alpha-value>)',
+    700: 'rgb(var(--color-primary-700) / <alpha-value>)',
+    800: 'rgb(var(--color-primary-800) / <alpha-value>)',
+    900: 'rgb(var(--color-primary-900) / <alpha-value>)',
+    950: 'rgb(var(--color-primary-950) / <alpha-value>)',
+    DEFAULT: 'rgb(var(--color-primary-DEFAULT) / <alpha-value>)'
+  }
+
+  if (globalColors.gray) {
+    // @ts-ignore
+    globalColors.cool = theme.extend.colors.cool =
+      defaultColors.gray
+  }
+
+  // @ts-ignore
+  globalColors.gray = theme.extend.colors.gray = {
+    50: 'rgb(var(--color-gray-50) / <alpha-value>)',
+    100: 'rgb(var(--color-gray-100) / <alpha-value>)',
+    200: 'rgb(var(--color-gray-200) / <alpha-value>)',
+    300: 'rgb(var(--color-gray-300) / <alpha-value>)',
+    400: 'rgb(var(--color-gray-400) / <alpha-value>)',
+    500: 'rgb(var(--color-gray-500) / <alpha-value>)',
+    600: 'rgb(var(--color-gray-600) / <alpha-value>)',
+    700: 'rgb(var(--color-gray-700) / <alpha-value>)',
+    800: 'rgb(var(--color-gray-800) / <alpha-value>)',
+    900: 'rgb(var(--color-gray-900) / <alpha-value>)',
+    950: 'rgb(var(--color-gray-950) / <alpha-value>)'
+  }
+
+  return excludeColors(globalColors)
+}
+
+export const generateSafelist = (colors: string[], globalColors: string[]) => {
   const baseSafelist = Object.keys(safelistByComponent).flatMap(component => safelistByComponent[component](colorsAsRegex(colors)))
 
   // Ensure `red` color is safelisted for form elements so that `error` prop of `UFormGroup` always works
@@ -242,7 +292,8 @@ export const generateSafelist = (colors: string[], globalColors) => {
   ]
 }
 
-export const customSafelistExtractor = (prefix, content: string, colors: string[], safelistColors: string[]) => {
+type SafelistFn = Exclude<NonNullable<Extract<TWConfig['content'], { extract?: unknown }>['extract']>, Record<string, unknown>>
+export const customSafelistExtractor = (prefix: string, content: string, colors: string[], safelistColors: string[]): ReturnType<SafelistFn> => {
   const classes: string[] = []
   const regex = /<([A-Za-z][A-Za-z0-9]*(?:-[A-Za-z][A-Za-z0-9]*)*)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/gs
 
@@ -268,7 +319,7 @@ export const customSafelistExtractor = (prefix, content: string, colors: string[
     name = name.replace(prefix, '').toLowerCase()
 
     const matchClasses = safelistByComponent[name](color).flatMap(group => {
-      return ['', ...(group.variants || [])].flatMap(variant => {
+      return typeof group === 'string' ? '' : ['', ...(group.variants || [])].flatMap(variant => {
         const matches = group.pattern.source.match(/\(([^)]+)\)/g)
 
         return matches.map(match => {

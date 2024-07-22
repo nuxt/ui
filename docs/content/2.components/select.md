@@ -203,7 +203,7 @@ Use the `#leading` slot to set the content of the leading icon.
 ::component-card
 ---
 slots:
-  leading: <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" size="3xs" class="mx-0.5" />
+  leading: <UIcon name="i-heroicons-flag" class="w-5 h-5" />
 baseProps:
   options:
     - 'United States'
@@ -213,7 +213,7 @@ baseProps:
 ---
 
 #leading
-  :u-avatar{src="https://avatars.githubusercontent.com/u/739984?v=4" size="3xs" class="mx-0.5"}
+  :u-icon{name="i-heroicons-flag" class="w-5 h-5"}
 ::
 
 ### `trailing`
@@ -223,13 +223,13 @@ Use the `#trailing` slot to set the content of the trailing icon.
 ::component-card
 ---
 slots:
-  trailing: <UIcon name="i-heroicons-arrows-up-down-20-solid" />
+  trailing: <UIcon name="i-heroicons-arrows-up-down-20-solid" class="w-5 h-5" />
 baseProps:
   placeholder: 'Search...'
 ---
 
 #trailing
-  :u-icon{name="i-heroicons-arrows-up-down-20-solid"}
+  :u-icon{name="i-heroicons-arrows-up-down-20-solid" class="w-5 h-5"}
 ::
 
 ## Props

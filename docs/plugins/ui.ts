@@ -23,7 +23,7 @@ export default defineNuxtPlugin({
         `
     })
 
-    if (process.client) {
+    if (import.meta.client) {
       watch(root, () => {
         window.localStorage.setItem('nuxt-ui-root', root.value)
       })
@@ -31,7 +31,7 @@ export default defineNuxtPlugin({
       appConfig.ui.primary = window.localStorage.getItem('nuxt-ui-primary') || appConfig.ui.primary
       appConfig.ui.gray = window.localStorage.getItem('nuxt-ui-gray') || appConfig.ui.gray
     }
-    if (process.server) {
+    if (import.meta.server) {
       useHead({
         script: [
           {

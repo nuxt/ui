@@ -3,6 +3,8 @@
   <div>
     <NuxtLoadingIndicator />
 
+    <Banner v-if="!$route.path.startsWith('/examples')" />
+
     <Header v-if="!$route.path.startsWith('/examples')" :links="links" />
 
     <NuxtLayout>
@@ -12,7 +14,7 @@
     <Footer v-if="!$route.path.startsWith('/examples')" />
 
     <ClientOnly>
-      <LazyUDocsSearch ref="searchRef" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 1000 }" />
+      <LazyUContentSearch ref="searchRef" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
     </ClientOnly>
 
     <UNotifications>
@@ -21,13 +23,14 @@
       </template>
     </UNotifications>
     <UModals />
+    <USlideovers />
   </div>
 </template>
 
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
 import { debounce } from 'perfect-debounce'
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import type { ParsedContent } from '@nuxt/content'
 
 const searchRef = ref()
 
@@ -51,7 +54,7 @@ const navigation = computed(() => {
     ]
   }
 
-  return nav.value.filter(item => item._path !== '/dev')
+  return nav.value?.filter(item => item._path !== '/dev') || []
 })
 
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
@@ -69,7 +72,7 @@ const links = computed(() => {
     active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
   }, {
     label: 'Pricing',
-    icon: 'i-heroicons-credit-card',
+    icon: 'i-heroicons-ticket',
     to: '/pro/pricing'
   }, {
     label: 'Templates',

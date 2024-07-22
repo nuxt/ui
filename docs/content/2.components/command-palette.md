@@ -2,12 +2,12 @@
 title: CommandPalette
 description: Add a customizable command palette to your app.
 links:
+  - label: 'Combobox'
+    icon: i-simple-icons-headlessui
+    to: 'https://headlessui.com/v1/vue/combobox'
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/navigation/CommandPalette.vue
-  - label: 'Combobox'
-    icon: i-simple-icons-headlessui
-    to: 'https://headlessui.com/vue/combobox'
 ---
 
 ## Usage

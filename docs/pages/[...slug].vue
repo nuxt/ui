@@ -7,11 +7,11 @@
 
       <hr v-if="surround?.length">
 
-      <UDocsSurround :surround="surround" />
+      <UContentSurround :surround="surround" />
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
-      <UDocsToc :links="page.body.toc.links">
+      <UContentToc :links="page.body.toc.links">
         <template #bottom>
           <div class="hidden lg:block space-y-6 !mt-6">
             <UDivider v-if="page.body?.toc?.links?.length" type="dashed" />
@@ -30,7 +30,7 @@
             </div>
           </div>
         </template>
-      </UDocsToc>
+      </UContentToc>
     </template>
   </UPage>
 </template>
@@ -75,10 +75,7 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImage({
-  component: 'Docs',
-  title: page.value.title,
-  description: page.value.description,
+defineOgImageComponent('Docs', {
   headline: headline.value
 })
 
@@ -105,7 +102,7 @@ const communityLinks = computed(() => [{
 const resourcesLinks = [{
   icon: 'i-simple-icons-figma',
   label: 'Figma Kit',
-  to: 'https://www.figma.com/community/file/1288455405058138934/nuxt-ui',
+  to: 'https://www.figma.com/community/file/1288455405058138934',
   target: '_blank'
 }, {
   label: 'Playground',

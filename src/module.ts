@@ -1,10 +1,19 @@
+import { createRequire } from 'node:module'
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
-import type { CollectionNames, IconsPluginOptions } from '@egoist/tailwindcss-icons'
 import { name, version } from '../package.json'
 import createTemplates from './templates'
 import * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types/utils'
 import installTailwind from './tailwind'
+
+const _require = createRequire(import.meta.url)
+const defaultColors = _require('tailwindcss/colors.js')
+
+delete defaultColors.lightBlue
+delete defaultColors.warmGray
+delete defaultColors.trueGray
+delete defaultColors.coolGray
+delete defaultColors.blueGray
 
 type UI = {
   primary?: string
@@ -12,7 +21,7 @@ type UI = {
   colors?: string[]
   strategy?: Strategy
   [key: string]: any
-} & DeepPartial<typeof config>
+} & DeepPartial<typeof config, string>
 
 declare module 'nuxt/schema' {
   interface AppConfigInput {
@@ -38,8 +47,6 @@ export interface ModuleOptions {
    */
   global?: boolean
 
-  icons: CollectionNames[] | 'all' | IconsPluginOptions
-
   safelistColors?: string[]
   /**
    * Disables the global css styles added by the module.
@@ -53,12 +60,11 @@ export default defineNuxtModule<ModuleOptions>({
     version,
     configKey: 'ui',
     compatibility: {
-      nuxt: '^3.10.0'
+      nuxt: '>=3.10.0'
     }
   },
   defaults: {
     prefix: 'U',
-    icons: ['heroicons'],
     safelistColors: ['primary'],
     disableGlobalStyles: false
   },
@@ -80,9 +86,9 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Modules
 
-    await installModule('nuxt-icon')
+    await installModule('@nuxt/icon', { componentName: 'UIcon' })
     await installModule('@nuxtjs/color-mode', { classSuffix: '' })
-    await installTailwind(options, nuxt, { resolve, runtimeDir })
+    await installTailwind(options, nuxt, resolve)
 
     // Plugins
 
@@ -92,6 +98,10 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({
       src: resolve(runtimeDir, 'plugins', 'modals')
+    })
+
+    addPlugin({
+      src: resolve(runtimeDir, 'plugins', 'slideovers')
     })
 
     // Components

@@ -1,12 +1,12 @@
 ---
 description: Display a dialog that slides in from the edge of the screen.
 links:
+  - label: 'Dialog'
+    icon: i-simple-icons-headlessui
+    to: 'https://headlessui.com/v1/vue/dialog'
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/overlays/Slideover.vue
-  - label: 'Dialog'
-    icon: i-simple-icons-headlessui
-    to: 'https://headlessui.com/vue/dialog'
 ---
 
 ## Usage
@@ -33,14 +33,14 @@ Set the `transition` prop to `false` to disable it.
 
 ### Prevent close
 
-Use the `prevent-close` prop to disable the outside click alongside the `esc` keyboard shortcut. A `close-prevented` event will be emitted when the user tries to close the modal.
+Use the `prevent-close` prop to disable the outside click alongside the `esc` keyboard shortcut. A `close-prevented` event will be emitted when the user tries to close the slideover.
 
 :component-example{component="slideover-example-prevent-close"}
 
 You can still handle the `esc` shortcut yourself by using our [defineShortcuts](/getting-started/shortcuts#defineshortcuts) composable.
 
 ```vue
-<script setup>
+<script setup lang="ts">
 const isOpen = ref(false)
 
 defineShortcuts({
@@ -53,6 +53,24 @@ defineShortcuts({
 </script>
 ```
 
+### Control programmatically
+
+First of all, add the `USlideovers` component to your app, preferably inside `app.vue`.
+
+```vue [app.vue]
+<template>
+  <div>
+    <UContainer>
+      <NuxtPage />
+    </UContainer>
+    <USlideovers />
+  </div>
+</template>
+```
+
+Then, you can use the `useSlideover` composable to control your slideovers within your app.
+
+:component-example{component="slideover-example-composable"}
 ## Props
 
 :component-props

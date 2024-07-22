@@ -163,6 +163,22 @@ This can be handy when you want to display HTML content. To achieve this, you ca
 
 :component-example{component="alert-example-html"}
 
+### `icon`
+
+Use the `#icon` slot to customize the displayed icon.
+
+:component-example{component="alert-example-icon"}
+
+### `avatar`
+
+Use the `#avatar` slot to customize the displayable avatar.
+
+:component-example{component="alert-example-avatar"}
+
+### `actions` :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+
+Use the `#actions` slot to add custom user interaction elements.
+
 ## Props
 
 :component-props

@@ -7,7 +7,8 @@
       :disabled="disabled"
       :class="ui.trigger"
       role="button"
-      @mouseover="onMouseOver"
+      @mouseenter="onMouseEnter"
+      @touchstart.passive="onTouchStart"
     >
       <slot :open="open" :close="close">
         <button :disabled="disabled">
@@ -20,7 +21,7 @@
       <div v-if="open" :class="[ui.overlay.base, ui.overlay.background]" />
     </Transition>
 
-    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
+    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseenter="onMouseEnter">
       <Transition appear v-bind="ui.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
@@ -153,7 +154,19 @@ export default defineComponent({
       }
     })
 
-    function onMouseOver () {
+    function onTouchStart (event: TouchEvent) {
+      if (!event.cancelable || !popoverApi.value) {
+        return
+      }
+
+      if (popoverApi.value.popoverState === 0) {
+        popoverApi.value.closePopover()
+      } else {
+        popoverApi.value.togglePopover()
+      }
+    }
+
+    function onMouseEnter () {
       if (props.mode !== 'hover' || !popoverApi.value) {
         return
       }
@@ -223,7 +236,8 @@ export default defineComponent({
       trigger,
       container,
       containerStyle,
-      onMouseOver,
+      onTouchStart,
+      onMouseEnter,
       onMouseLeave
     }
   }

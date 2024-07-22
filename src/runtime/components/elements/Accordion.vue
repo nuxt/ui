@@ -39,24 +39,37 @@
         @before-leave="onBeforeLeave"
         @leave="onLeave"
       >
-        <div v-show="open">
-          <HDisclosurePanel :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]" static>
-            <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
-              {{ item.content }}
-            </slot>
-          </HDisclosurePanel>
-        </div>
+        <HDisclosurePanel
+          v-if="unmount"
+          :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]"
+          unmount
+        >
+          <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
+            {{ item.content }}
+          </slot>
+        </HDisclosurePanel>
+        <template v-else>
+          <div v-show="open">
+            <HDisclosurePanel
+              :class="[ui.item.base, ui.item.size, ui.item.color, ui.item.padding]"
+              static
+            >
+              <slot :name="item.slot || 'item'" :item="item" :index="index" :open="open" :close="close">
+                {{ item.content }}
+              </slot>
+            </HDisclosurePanel>
+          </div>
+        </template>
       </Transition>
     </HDisclosure>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, defineComponent } from 'vue'
+import { ref, computed, toRef, defineComponent, watch } from 'vue'
 import type { PropType } from 'vue'
 import { Disclosure as HDisclosure, DisclosureButton as HDisclosureButton, DisclosurePanel as HDisclosurePanel, provideUseId } from '@headlessui/vue'
-import UIcon from '../elements/Icon.vue'
-import UButton from '../elements/Button.vue'
+import { UIcon, UButton } from '#components'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, omit } from '../../utils'
 import type { AccordionItem, Strategy } from '../../types'
@@ -91,6 +104,10 @@ export default defineComponent({
       type: String,
       default: () => config.default.openIcon
     },
+    unmount: {
+      type: Boolean,
+      default: false
+    },
     closeIcon: {
       type: String,
       default: () => config.default.closeIcon
@@ -108,12 +125,25 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  emits: ['open'],
+  setup (props, { emit }) {
     const { ui, attrs } = useUI('accordion', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const uiButton = computed<typeof configButton>(() => configButton)
 
     const buttonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
+
+    const openedStates = computed(() => buttonRefs.value.map(({ open }) => open))
+    watch(openedStates, (newValue, oldValue) => {
+      for (const index in newValue) {
+        const isOpenBefore = oldValue[index]
+        const isOpenAfter = newValue[index]
+
+        if (!isOpenBefore && isOpenAfter) {
+          emit('open', index)
+        }
+      }
+    }, { immediate: true })
 
     function closeOthers (currentIndex: number, e: Event) {
       if (!props.items[currentIndex].closeOthers && props.multiple) {

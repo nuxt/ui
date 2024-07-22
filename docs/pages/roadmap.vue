@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const title = 'Roadmap'
 const description = 'Discover our Volta board for @nuxt/ui development status.'
 
@@ -9,11 +9,7 @@ useSeoMeta({
   description
 })
 
-defineOgImage({
-  component: 'Docs',
-  title,
-  description
-})
+defineOgImageComponent('Docs')
 
 const appConfig = useAppConfig()
 const colorMode = useColorMode()

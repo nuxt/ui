@@ -1,10 +1,10 @@
 <template>
-  <div :class="ui.group.wrapper" role="option">
+  <div :class="ui.group.wrapper">
     <h2 v-if="label" :class="ui.group.label">
       {{ label }}
     </h2>
 
-    <div :class="ui.group.container" role="listbox" :aria-label="group[groupAttribute]">
+    <div :class="ui.group.container" :aria-label="group[groupAttribute]">
       <HComboboxOption
         v-for="(command, index) of group.commands"
         :key="`${group.key}-${index}`"
@@ -73,9 +73,7 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { ComboboxOption as HComboboxOption, provideUseId } from '@headlessui/vue'
-import UIcon from '../elements/Icon.vue'
-import UAvatar from '../elements/Avatar.vue'
-import UKbd from '../elements/Kbd.vue'
+import { UIcon, UAvatar, UKbd } from '#components'
 import type { Group } from '../../types'
 import { commandPalette } from '#ui/ui.config'
 import { useId } from '#imports'

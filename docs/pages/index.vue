@@ -4,7 +4,7 @@
     <ULandingHero :ui="{ base: 'relative z-[1]', container: 'max-w-4xl' }" class="mb-[calc(var(--header-height)*2)]">
       <template #headline>
         <UBadge variant="subtle" size="md" class="hover:bg-primary-100 dark:bg-primary-950/100 dark:hover:bg-primary-900 transition-color relative font-medium rounded-full shadow-none">
-          <NuxtLink :to="`https://github.com/nuxt/ui/releases/tag/v${config.version.split('.').slice(0, -1).join('.')}.0`" target="_blank" class="focus:outline-none" tabindex="-1">
+          <NuxtLink :to="`https://github.com/nuxt/ui/releases/tag/v${config.version.split('.').slice(0, -1).join('.')}.0`" target="_blank" class="focus:outline-none" aria-label="Go to last relase" tabindex="-1">
             <span class="absolute inset-0" aria-hidden="true" />
           </NuxtLink>
 
@@ -31,10 +31,11 @@
           readonly
           autocomplete="off"
           icon="i-heroicons-command-line"
-          input-class="select-none"
+          class="w-72"
+          input-class="focus:ring-1 focus:ring-gray-300 dark:focus:ring-gray-700"
           aria-label="Install @nuxt/ui"
           size="lg"
-          :ui="{ base: 'disabled:cursor-default', icon: { trailing: { pointer: '' } } }"
+          :ui="{ icon: { trailing: { pointer: '' } } }"
         >
           <template #trailing>
             <UButton
@@ -90,6 +91,7 @@
               :width="card.image.width"
               :height="card.image.height"
               :alt="card.title"
+              loading="lazy"
               class="object-cover w-full"
             />
           </ULandingCard>
@@ -100,71 +102,79 @@
     <ULandingSection class="!pt-0 dark:bg-gradient-to-b from-gray-950/50 to-gray-900">
       <ULandingCTA
         align="left"
-        card
+        :card="false"
         :ui="{
-          background: 'dark:bg-gradient-to-b from-gray-800 to-gray-900',
-          shadow: 'dark:shadow-2xl',
           body: {
-            background: 'bg-gray-50/50 dark:bg-gray-900/50'
+            padding: '!p-0'
           },
-          title: 'text-center lg:text-left',
-          links: 'justify-center lg:justify-start'
+          title: 'text-center lg:text-left lg:text-5xl',
+          description: 'mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8 lg:gap-16',
+          links: '-ml-3 justify-center lg:justify-start flex-wrap gap-y-3'
         }"
       >
         <template #title>
           <span v-html="page.cta.title" />
         </template>
 
-        <template #links>
-          <ClientOnly>
-            <UAvatarGroup :max="xlAndLarger ? 13 : lgAndLarger ? 10 : mdAndLarger ? 16 : 8" size="md" class="flex-wrap-reverse [&_span:first-child]:text-xs justify-center">
-              <UTooltip
-                v-for="(contributor, index) of module.contributors"
-                :key="index"
-                :text="contributor.username"
-                class="rounded-full"
-                :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50' }"
-                :popper="{ offsetDistance: 16 }"
-              >
-                <UAvatar
-                  :alt="contributor.username"
-                  :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
-                  :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
-                  class="lg:hover:scale-125 lg:hover:ring-2 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
-                  width="40"
-                  height="40"
-                  size="md"
-                  loading="lazy"
-                >
-                  <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
-                    <span class="absolute inset-0" aria-hidden="true" />
-                  </NuxtLink>
-                </UAvatar>
-              </UTooltip>
-            </UAvatarGroup>
-          </ClientOnly>
-        </template>
-
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-8 lg:gap-16">
-          <NuxtLink class="text-center group" to="https://npmjs.org/package/@nuxt/ui" target="_blank">
-            <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
+        <template #description>
+          <NuxtLink class="text-center lg:text-left group" to="https://npmjs.org/package/@nuxt/ui" target="_blank">
+            <p class="text-5xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ format(module.stats.downloads) }}+
             </p>
             <p>monthly downloads</p>
           </NuxtLink>
 
-          <NuxtLink class="text-center group" to="https://github.com/nuxt/ui" target="_blank">
-            <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
+          <NuxtLink class="text-center lg:text-left group" to="https://github.com/nuxt/ui" target="_blank">
+            <p class="text-5xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ format(module.stats.stars) }}+
             </p>
-            <p>stars</p>
+            <p>GitHub stars</p>
           </NuxtLink>
+        </template>
+
+        <template #links>
+          <UButton
+            v-for="user in page.cta.users"
+            :key="user.username"
+            :to="user.to"
+            size="md"
+            color="gray"
+            variant="ghost"
+            target="_blank"
+          >
+            <UAvatar
+              :alt="user.username"
+              :src="`https://ipx.nuxt.com/s_80x80/gh_avatar/${user.username}`"
+              :srcset="`https://ipx.nuxt.com/s_160x160/gh_avatar/${user.username} 2x`"
+              width="80"
+              height="80"
+              size="md"
+              loading="lazy"
+            />
+
+            <div class="text-left">
+              <p class="font-medium">
+                {{ user.name }}
+              </p>
+              <p class="text-gray-500 dark:text-gray-400 leading-4">
+                {{ `@${user.username}` }}
+              </p>
+            </div>
+          </UButton>
+        </template>
+
+        <div class="p-5 overflow-hidden flex">
+          <HomeContributors :contributors="module.contributors" />
         </div>
       </ULandingCTA>
     </ULandingSection>
 
     <template v-if="navigation.find(item => item._path === '/pro')">
-      <ULandingHero :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }">
+      <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }" class="bg-gradient-to-b from-gray-50 dark:from-gray-950/50 to-white dark:to-gray-900 relative">
+        <template #top>
+          <Gradient class="absolute inset-x-0 top-0 w-full block" />
+        </template>
+
         <template #title>
           <span v-html="page.pro.title" />
         </template>
@@ -172,6 +182,14 @@
         <template #description>
           <span v-html="page.pro.description" />
         </template>
+
+        <div class="bg-gray-900/5 dark:bg-white/5 ring-1 ring-inset ring-gray-900/10 dark:ring-white/10 rounded-xl lg:-m-4 p-4">
+          <video preload="none" poster="https://res.cloudinary.com/nuxt/video/upload/so_3.3/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.jpg" controls class="rounded-lg">
+            <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.webm" type="video/webm">
+            <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.mp4" type="video/mp4">
+            <source src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.ogg" type="video/ogg">
+          </video>
+        </div>
       </ULandingHero>
 
       <ULandingSection v-for="(section, index) in page.pro.sections" :key="index" v-bind="section" class="!pt-0">
@@ -240,7 +258,7 @@
             </template>
 
             <template #aside-top>
-              <UDocsSearchButton size="md" class="w-full" />
+              <UContentSearchButton size="md" class="w-full" />
             </template>
 
             <template #aside-default>
@@ -268,8 +286,8 @@
               </div>
             </template>
 
-            <template #docs-surround>
-              <UDocsSurround
+            <template #content-surround>
+              <UContentSurround
                 :surround="(surround as unknown as ParsedContent[])"
                 class="w-full gap-4"
                 :ui="{
@@ -286,9 +304,9 @@
               />
             </template>
 
-            <template #docs-toc>
+            <template #content-toc>
               <div class="absolute top-0 left-0 right-0 space-y-3">
-                <UDocsToc :links="toc" class="bg-transparent relative max-h-full overflow-hidden top-0" :ui="({ container: { base: '!pt-0 !pb-4' } } as any)" />
+                <UContentToc :links="toc" class="bg-transparent relative max-h-full overflow-hidden top-0" :ui="({ container: { base: '!pt-0 !pb-4' } } as any)" />
 
                 <UDivider type="dashed" :ui="{ border: { base: 'border-gray-800/10 dark:border-gray-200/10' } }" />
 
@@ -366,7 +384,7 @@
           <template #description>
             <span v-html="page.pro.landing?.description" />
           </template>
-          <video poster="https://res.cloudinary.com/nuxt/video/upload/so_14.4/v1698923423/ui-pro/nuxt-ui-pro-landing-demo_yrh6nr.jpg" controls>
+          <video preload="none" poster="https://res.cloudinary.com/nuxt/video/upload/so_14.4/v1698923423/ui-pro/nuxt-ui-pro-landing-demo_yrh6nr.jpg" controls>
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923423/ui-pro/nuxt-ui-pro-landing-demo_yrh6nr.webm" type="video/webm">
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923423/ui-pro/nuxt-ui-pro-landing-demo_yrh6nr.mp4" type="video/mp4">
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923423/ui-pro/nuxt-ui-pro-landing-demo_yrh6nr.ogg" type="video/ogg">
@@ -379,7 +397,7 @@
           <template #description>
             <span v-html="page.pro.docs?.description" />
           </template>
-          <video poster="https://res.cloudinary.com/nuxt/video/upload/v1698923398/ui-pro/nuxt-ui-pro-docs-demo_jm6ubr.jpg" controls>
+          <video preload="none" poster="https://res.cloudinary.com/nuxt/video/upload/v1698923398/ui-pro/nuxt-ui-pro-docs-demo_jm6ubr.jpg" controls>
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923398/ui-pro/nuxt-ui-pro-docs-demo_jm6ubr.webm" type="video/webm">
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923398/ui-pro/nuxt-ui-pro-docs-demo_jm6ubr.mp4" type="video/mp4">
             <source src="https://res.cloudinary.com/nuxt/video/upload/v1698923398/ui-pro/nuxt-ui-pro-docs-demo_jm6ubr.ogg" type="video/ogg">
@@ -391,7 +409,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ParsedContent, NavItem } from '@nuxt/content/dist/runtime/types'
+import type { ParsedContent, NavItem } from '@nuxt/content'
 import { useElementBounding, useWindowScroll, useElementSize, breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { HomeProBlock } from '~/types'
 
@@ -420,9 +438,9 @@ useSeoMeta({
   twitterImage: 'https://ui.nuxt.com/social-card.png'
 })
 
-const source = ref('npm i @nuxt/ui')
+const source = ref('npx nuxi@latest module add ui')
 const sectionRef = ref()
-const demoRef = ref()
+const demoRef = ref(null)
 const start = ref(0)
 
 const { height } = useElementSize(demoRef)
@@ -432,9 +450,7 @@ const config = useRuntimeConfig().public
 const { copy, copied } = useClipboard({ source })
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
-const mdAndLarger = breakpoints.greaterOrEqual('md')
 const lgAndLarger = breakpoints.greaterOrEqual('lg')
-const xlAndLarger = breakpoints.greaterOrEqual('xl')
 
 const { format } = Intl.NumberFormat('en', { notation: 'compact' })
 
@@ -454,7 +470,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
   inactive: true,
   children: [{
     name: 'ULandingHero',
-    to: '/pro/components/landing/landing-hero',
+    to: '/pro/components/landing-hero',
     class: [
       'inset-4',
       isAfterStep(steps.landing + 2) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
@@ -469,7 +485,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
     }]
   }, isAfterStep(steps.landing + 2) && {
     name: 'ULandingSection',
-    to: '/pro/components/landing/landing-section',
+    to: '/pro/components/landing-section',
     class: [
       'inset-4',
       isBeforeStep(steps.landing + 6) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]',
@@ -486,7 +502,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
       class: 'inset-x-4 top-16'
     }, {
       name: 'ULandingGrid',
-      to: '/pro/components/landing/landing-grid',
+      to: '/pro/components/landing-grid',
       class: ['inset-x-4 bottom-4 top-48', isAfterStep(steps.landing + 8) && 'grid grid-cols-4 gap-4 p-4'].filter(Boolean).join(' '),
       inactive: isAfterStep(steps.landing + 8),
       children: [isAfterStep(steps.landing + 9) ? {
@@ -494,7 +510,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         class: '!relative'
       } : {
         name: 'ULandingCard',
-        to: '/pro/components/landing/landing-card',
+        to: '/pro/components/landing-card',
         class: '!relative h-full',
         inactive: false
       }, isAfterStep(steps.landing + 9) ? {
@@ -502,7 +518,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         class: '!relative h-full'
       } : {
         name: 'ULandingCard',
-        to: '/pro/components/landing/landing-card',
+        to: '/pro/components/landing-card',
         class: '!relative h-full',
         inactive: false
       }, isAfterStep(steps.landing + 9) ? {
@@ -510,7 +526,7 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         class: '!relative h-full'
       } : {
         name: 'ULandingCard',
-        to: '/pro/components/landing/landing-card',
+        to: '/pro/components/landing-card',
         class: '!relative h-full',
         inactive: false
       }, isAfterStep(steps.landing + 9) ? {
@@ -518,14 +534,14 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
         class: '!relative h-full'
       } : {
         name: 'ULandingCard',
-        to: '/pro/components/landing/landing-card',
+        to: '/pro/components/landing-card',
         class: '!relative h-full',
         inactive: false
       }]
     }]
   }, isAfterStep(steps.landing + 10) && {
     name: 'ULandingSection',
-    to: '/pro/components/landing/landing-section',
+    to: '/pro/components/landing-section',
     class: [
       'inset-4',
       isBeforeStep(steps.landing + 14) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]'
@@ -550,12 +566,12 @@ const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(
 
 const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
   name: 'UPage',
-  to: '/pro/components/page/page',
+  to: '/pro/components/page',
   class: 'inset-x-0 top-20 bottom-20',
   inactive: isAfterStep(steps.docs + 1),
   children: [isAfterStep(steps.docs + 2) ? {
     name: 'UAside',
-    to: '/pro/components/aside/aside',
+    to: '/pro/components/aside',
     class: 'left-4 inset-y-4 w-64',
     inactive: isAfterStep(steps.docs + 3),
     children: [isAfterStep(steps.docs + 4) ? {
@@ -566,7 +582,7 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
       class: 'inset-x-4 top-4 h-9'
     }, isAfterStep(steps.docs + 5) ? {
       name: 'UNavigationTree',
-      to: '/pro/components/navigation/navigation-tree',
+      to: '/pro/components/navigation-tree',
       class: ['inset-x-4 top-[4.25rem] bottom-4', isAfterStep(steps.docs + 6) && '!bg-transparent !border-0'].join(' '),
       inactive: isAfterStep(steps.docs + 6),
       children: [{
@@ -582,12 +598,12 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
     class: 'left-4 inset-y-4 w-64'
   }, isAfterStep(steps.docs + 7) ? {
     name: 'UPage',
-    to: '/pro/components/page/page',
+    to: '/pro/components/page',
     class: 'left-72 right-4 inset-y-4',
     inactive: isAfterStep(steps.docs + 8),
     children: [...(isAfterStep(steps.docs + 9) ? [{
       name: 'UPageHeader',
-      to: '/pro/components/page/page-header',
+      to: '/pro/components/page-header',
       class: 'top-4 left-4 right-72 h-32',
       inactive: isAfterStep(steps.docs + 10),
       children: [{
@@ -596,18 +612,18 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
       }]
     }, {
       name: 'UPageBody',
-      to: '/pro/components/page/page-body',
+      to: '/pro/components/page-body',
       class: 'top-40 left-4 right-72 bottom-4 overflow-y-auto',
       inactive: isAfterStep(steps.docs + 11),
       children: [{
         slot: 'page-body',
         class: 'inset-x-4 top-4 justify-start'
       }, isAfterStep(steps.docs + 12) ? {
-        slot: 'docs-surround',
+        slot: 'content-surround',
         class: 'bottom-4 inset-x-4 h-28'
       } : {
-        name: 'UDocsSurround',
-        to: '/pro/components/docs/docs-surround',
+        name: 'UContentSurround',
+        to: '/pro/components/content-surround',
         class: 'bottom-4 inset-x-4 h-28',
         inactive: false
       }]
@@ -615,12 +631,12 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
       name: '#default',
       class: 'left-4 right-72 inset-y-4'
     }]), isAfterStep(steps.docs + 13) ? {
-      name: 'UDocsToc',
-      to: '/pro/components/docs/docs-toc',
+      name: 'UContentToc',
+      to: '/pro/components/content-toc',
       class: 'right-4 inset-y-4 w-64',
       inactive: isAfterStep(steps.docs + 14),
       children: [{
-        slot: 'docs-toc',
+        slot: 'content-toc',
         class: 'inset-4 overflow-y-auto'
       }]
     } : {
@@ -635,7 +651,7 @@ const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
 
 const blocks = computed(() => [isAfterStep(steps.header) && {
   name: 'UHeader',
-  to: '/pro/components/header/header',
+  to: '/pro/components/header',
   class: 'h-16 inset-x-0 top-0',
   inactive: isAfterStep(steps.header + 1),
   children: [isAfterStep(steps.header + 2) ? {
@@ -659,7 +675,7 @@ const blocks = computed(() => [isAfterStep(steps.header) && {
   }]
 }, isAfterStep(steps.footer) && {
   name: 'UFooter',
-  to: '/pro/components/footer/footer',
+  to: '/pro/components/footer',
   class: 'h-16 inset-x-0 bottom-0',
   inactive: isAfterStep(steps.footer + 1),
   children: [isAfterStep(steps.footer + 2) ? {
@@ -749,10 +765,12 @@ const navigationLinks = [{
 
 const surround = [{
   title: 'Introduction',
-  description: 'Fully styled and customizable components for Nuxt.'
+  description: 'Fully styled and customizable components for Nuxt.',
+  _path: '/'
 }, {
   title: 'Theming',
-  description: 'Learn how to customize the look and feel of the components.'
+  description: 'Learn how to customize the look and feel of the components.',
+  _path: '/'
 }]
 
 const md = `

@@ -3,5 +3,5 @@ const value = ref(50)
 </script>
 
 <template>
-  <URange v-model="value" name="range" />
+  <URange v-model="value" />
 </template>
