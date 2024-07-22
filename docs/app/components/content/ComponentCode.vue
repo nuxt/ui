@@ -172,7 +172,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
 <template>
   <div class="my-5">
     <div>
-      <div v-if="options.length" class="flex items-center gap-2.5 border border-gray-300 dark:border-gray-700 border-b-0 relative rounded-t-md px-4 py-2.5">
+      <div v-if="options.length" class="flex items-center gap-2.5 border border-gray-300 dark:border-gray-700 border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">
           <UFormField
             :label="option.label"
@@ -213,7 +213,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
               :model-value="getComponentProp(option.name)"
               color="gray"
               variant="soft"
-              :ui="{ base: 'rounded rounded-l-none' }"
+              :ui="{ base: 'rounded rounded-l-none min-w-12' }"
               @update:model-value="setComponentProp(option.name, $event)"
             />
           </UFormField>
