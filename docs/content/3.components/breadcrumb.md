@@ -66,17 +66,17 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.che
 
 ## Examples
 
-### With dropdown
+### With custom slot
 
 Use the `slot` property to customize a specific item with a dropdown menu for example.
 
-:component-example{name="breadcrumb-dropdown-example"}
+:component-example{name="breadcrumb-custom-slot-example"}
 
 ### With separator slot
 
 Use the `#separator` slot to customize the separator between each item.
 
-:component-example{name="breadcrumb-separator-example"}
+:component-example{name="breadcrumb-separator-slot-example"}
 
 ## API
 
