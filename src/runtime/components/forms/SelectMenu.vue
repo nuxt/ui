@@ -30,7 +30,7 @@
       <slot :open="open" :disabled="disabled" :loading="loading">
         <button :id="inputId" :class="selectClass" :disabled="disabled" type="button" v-bind="attrs">
           <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
-            <slot name="leading" :disabled="disabled" :loading="loading">
+            <slot name="leading" :selected="selected" :disabled="disabled" :loading="loading">
               <UIcon :name="leadingIconName" :class="leadingIconClass" />
             </slot>
           </span>
@@ -41,7 +41,7 @@
           </slot>
 
           <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
-            <slot name="trailing" :disabled="disabled" :loading="loading">
+            <slot name="trailing" :selected="selected" :disabled="disabled" :loading="loading">
               <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
             </slot>
           </span>
