@@ -45,7 +45,7 @@
     "release": "release-it"
   },
   "dependencies": {
-    "@nuxt/icon": "^1.2.0",
+    "@nuxt/icon": "^1.2.1",
     "@nuxt/kit": "^3.12.4",
     "@nuxt/schema": "^3.12.4",
     "@nuxtjs/color-mode": "^3.4.2",
@@ -73,9 +73,9 @@
     "nuxt": "^3.12.4",
     "release-it": "^17.6.0",
     "valibot": "^0.36.0",
-    "vitest": "^2.0.3",
+    "vitest": "^2.0.4",
     "vitest-environment-nuxt": "^1.0.0",
-    "vue-tsc": "^2.0.26",
+    "vue-tsc": "^2.0.28",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
   },
