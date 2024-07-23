@@ -81,11 +81,8 @@
                 :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
               >
                 <UButton
-                  color="gray"
-                  variant="ghost"
-                  :padded="false"
-                  size="2xs"
-                  :icon="openedRows.includes(index) ? 'i-heroicons-chevron-up' : 'i-heroicons-chevron-down'"
+                  v-bind="{ ...(ui.default.expandButton || {}), ...expandButton }"
+                  :ui="{ icon: { base: [ui.expand.icon, openedRows.includes(index) && 'rotate-180'] } }"
                   @click="toggleOpened(index)"
                 />
               </td>
@@ -202,6 +199,10 @@ export default defineComponent({
     sortDescIcon: {
       type: String,
       default: () => config.default.sortDescIcon
+    },
+    expandButton: {
+      type: Object as PropType<Button>,
+      default: () => config.default.expandButton as Button
     },
     loading: {
       type: Boolean,

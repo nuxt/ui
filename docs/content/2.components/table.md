@@ -301,7 +301,7 @@ componentProps:
 ---
 ::
 
-### Expandable
+### Expandable :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
 
 You can use the `expand` slot to display extra information about a row. You will have access to the `row` property in the slot scope.
 

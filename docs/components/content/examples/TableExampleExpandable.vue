@@ -41,7 +41,9 @@ const people = [{
 <template>
   <UTable :rows="people">
     <template #expand="{ row }">
-      <Placeholder class="h-36" />
+      <div class="p-4">
+        <pre>{{ row }}</pre>
+      </div>
     </template>
   </UTable>
 </template>
