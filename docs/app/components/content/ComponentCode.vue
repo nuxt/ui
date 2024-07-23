@@ -54,8 +54,9 @@ const options = computed(() => {
 
   return keys.map((key) => {
     const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
-    const items = props.items?.[key]?.length
-      ? props.items[key].map(item => ({
+    const propItems = get(props.items, key, [])
+    const items = propItems.length
+      ? propItems.map(item => ({
         value: item,
         label: item
       }))
@@ -108,7 +109,7 @@ const code = computed(() => {
       if (value && prop?.default === 'true') {
         continue
       }
-      if (!value && !prop?.default) {
+      if (!value && (!prop?.default || prop.default === 'false')) {
         continue
       }
 
@@ -186,7 +187,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
           >
             <USelectMenu
               v-if="option.items?.length"
-              v-model="componentProps[option.name]"
+              :model-value="getComponentProp(option.name)"
               :items="option.items"
               value-key="value"
               color="gray"
@@ -195,6 +196,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
               :search="false"
               :class="[option.name === 'color' && 'pl-6']"
               :ui="{ itemLeadingChip: 'size-2' }"
+              @update:model-value="setComponentProp(option.name, $event)"
             >
               <template v-if="option.name === 'color'" #leading="{ modelValue, ui }">
                 <UChip
