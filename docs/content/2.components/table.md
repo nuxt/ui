@@ -301,6 +301,19 @@ componentProps:
 ---
 ::
 
+### Expandable :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+
+You can use the `expand` slot to display extra information about a row. You will have access to the `row` property in the slot scope.
+
+::component-example{class="grid"}
+---
+padding: false
+component: 'table-example-expandable'
+componentProps:
+  class: 'flex-1'
+---
+::
+
 ### Loading
 
 Use the `loading` prop to indicate that data is currently loading with an indeterminate [Progress](/components/progress#indeterminate) bar.
