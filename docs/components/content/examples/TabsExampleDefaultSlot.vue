@@ -17,11 +17,7 @@ const items = [{
 <template>
   <UTabs :items="items" class="w-full">
     <template #default="{ item, index, selected }">
-      <div class="flex items-center gap-2 relative truncate">
-        <span class="truncate">{{ index + 1 }}. {{ item.label }}</span>
-
-        <span v-if="selected" class="absolute -right-4 w-2 h-2 rounded-full bg-primary-500 dark:bg-primary-400" />
-      </div>
+      <span class="truncate" :class="[selected && 'text-primary-500 dark:text-primary-400']">{{ index + 1 }}. {{ item.label }}</span>
     </template>
   </UTabs>
 </template>

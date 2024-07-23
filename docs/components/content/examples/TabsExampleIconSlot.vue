@@ -16,8 +16,8 @@ const items = [{
 
 <template>
   <UTabs :items="items" class="w-full">
-    <template #icon="{ item }">
-      <UIcon :name="item.icon" class="w-4 h-4 flex-shrink-0 mr-2" />
+    <template #icon="{ item, selected }">
+      <UIcon :name="item.icon" class="w-4 h-4 flex-shrink-0 mr-2" :class="[selected && 'text-primary-500 dark:text-primary-400']" />
     </template>
   </UTabs>
 </template>

@@ -11,6 +11,7 @@ links:
 Pass an array to the `items` prop of the Tabs component. Each item can have the following properties:
 
 - `label` - The label of the item.
+- `icon` - The icon of the item.
 - `slot` - A key to customize the item with a slot.
 - `content` - The content to display in the panel by default.
 - `disabled` - Determines whether the item is disabled or not.
