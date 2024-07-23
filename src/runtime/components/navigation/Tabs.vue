@@ -25,6 +25,16 @@
         as="template"
       >
         <button :class="[ui.list.tab.base, ui.list.tab.background, ui.list.tab.height, ui.list.tab.padding, ui.list.tab.size, ui.list.tab.font, ui.list.tab.rounded, ui.list.tab.shadow, selected ? ui.list.tab.active : ui.list.tab.inactive]">
+          <slot
+            name="icon"
+            :item="item"
+            :index="index"
+            :selected="selected"
+            :disabled="disabled"
+          >
+            <UIcon v-if="item.icon" :name="item.icon" :class="ui.list.tab.icon" />
+          </slot>
+
           <slot :item="item" :index="index" :selected="selected" :disabled="disabled">
             <span class="truncate">{{ item.label }}</span>
           </slot>
