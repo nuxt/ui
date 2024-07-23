@@ -11,6 +11,8 @@ navigation:
 
 ## Usage
 
+### Value
+
 Use the default slot to set the value of the Kbd.
 
 ::component-code

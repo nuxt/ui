@@ -8,6 +8,8 @@ links:
 
 ## Usage
 
+### Title
+
 Use the `title` prop to set the title of the Alert.
 
 ::component-code

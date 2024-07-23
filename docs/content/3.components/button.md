@@ -8,6 +8,8 @@ links:
 
 ## Usage
 
+### Label
+
 Use the default slot to set the label of the Button.
 
 ::component-code
