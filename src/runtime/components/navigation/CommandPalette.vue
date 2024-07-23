@@ -216,7 +216,7 @@ export default defineComponent({
     const commands = computed(() => {
       const commands: Command[] = []
       for (const group of props.groups) {
-        if (!group.search) {
+        if (!group.search && !group.static) {
           commands.push(...(group.commands?.map(command => ({ ...command, group: group.key })) || []))
         }
       }
@@ -274,9 +274,14 @@ export default defineComponent({
         return getGroupWithCommands(group, [...commands])
       })
 
+      const staticGroups: Group[] = props.groups.filter((group) => group.static && group.commands?.length).map((group) => {
+        return getGroupWithCommands(group, group.commands)
+      })
+
       return [
         ...groups,
-        ...searchGroups
+        ...searchGroups,
+        ...staticGroups
       ]
     })
 

@@ -24,5 +24,6 @@ export interface Group {
   commands?: Command[]
   search?: Function
   filter?: Function
+  static?: Boolean
   [key: string]: any
 }
