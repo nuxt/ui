@@ -188,7 +188,7 @@ componentProps:
 ---
 ::
 
-Pass a function to the `show-create-option-when` prop to control wether or not to show the create option. This function takes two arguments: the query (as the first argument) and an array of current results (as the second argument). It should return true to display the create option.
+Pass a function to the `show-create-option-when` prop to control wether or not to show the create option. This function takes two arguments: the query (as the first argument) and an array of current results (as the second argument). It should return true to display the create option. :u-badge{label="New" class="!rounded-full" variant="subtle"}
 
 The example below shows how to make the create option visible when the query is at least three characters long and does not exactly match any of the current results (case insensitive).
 
