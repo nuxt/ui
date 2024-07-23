@@ -23,7 +23,7 @@
       :rel="rel"
       :target="target"
       :class="active !== undefined ? (active ? activeClass : inactiveClass) : resolveLinkClass(route, $route, { isActive, isExactActive })"
-      @click="(e) => !isExternal && navigate(e)"
+      @click="(e) => (!isExternal && !disabled) && navigate(e)"
     >
       <slot v-bind="{ isActive: active !== undefined ? active : (exact ? isExactActive : isActive) }" />
     </a>

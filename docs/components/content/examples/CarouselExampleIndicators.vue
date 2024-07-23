@@ -11,6 +11,6 @@ const items = [
 
 <template>
   <UCarousel v-slot="{ item }" :items="items" :ui="{ item: 'basis-full' }" class="rounded-lg overflow-hidden" indicators>
-    <img :src="item" class="w-full">
+    <img :src="item" class="w-full" draggable="false">
   </UCarousel>
 </template>

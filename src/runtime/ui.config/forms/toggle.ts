@@ -49,11 +49,13 @@ export default {
       '2xl': 'h-6 w-6'
     },
     on: 'text-{color}-500 dark:text-{color}-400',
-    off: 'text-gray-400 dark:text-gray-500'
+    off: 'text-gray-400 dark:text-gray-500',
+    loading: 'animate-spin text-{color}-500 dark:text-{color}-400'
   },
   default: {
     onIcon: null,
     offIcon: null,
+    loadingIcon: 'i-heroicons-arrow-path-20-solid',
     color: 'primary',
     size: 'md'
   }

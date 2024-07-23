@@ -30,6 +30,6 @@ const items = [
     arrows
     class="w-64 mx-auto"
   >
-    <img :src="item" class="w-full">
+    <img :src="item" class="w-full" draggable="false">
   </UCarousel>
 </template>

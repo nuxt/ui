@@ -1,27 +1,29 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
-    <div v-if="label || $slots.label" :class="[ui.label.wrapper, size]">
-      <label :for="inputId" :class="[ui.label.base, required ? ui.label.required : '']">
-        <slot v-if="$slots.label" name="label" v-bind="{ error, label, name, hint, description, help }" />
-        <template v-else>{{ label }}</template>
-      </label>
-      <span v-if="hint || $slots.hint" :class="[ui.hint]">
-        <slot v-if="$slots.hint" name="hint" v-bind="{ error, label, name, hint, description, help }" />
-        <template v-else>{{ hint }}</template>
-      </span>
-    </div>
+    <div :class="ui.inner">
+      <div v-if="label || $slots.label" :class="[ui.label.wrapper, size]">
+        <label :for="inputId" :class="[ui.label.base, required ? ui.label.required : '']">
+          <slot v-if="$slots.label" name="label" v-bind="{ error, label, name, hint, description, help }" />
+          <template v-else>{{ label }}</template>
+        </label>
+        <span v-if="hint || $slots.hint" :class="[ui.hint]">
+          <slot v-if="$slots.hint" name="hint" v-bind="{ error, label, name, hint, description, help }" />
+          <template v-else>{{ hint }}</template>
+        </span>
+      </div>
 
-    <p v-if="description || $slots.description" :class="[ui.description, size]">
-      <slot v-if="$slots.description" name="description" v-bind="{ error, label, name, hint, description, help }" />
-      <template v-else>
-        {{ description }}
-      </template>
-    </p>
+      <p v-if="description || $slots.description" :class="[ui.description, size]">
+        <slot v-if="$slots.description" name="description" v-bind="{ error, label, name, hint, description, help }" />
+        <template v-else>
+          {{ description }}
+        </template>
+      </p>
+    </div>
 
     <div :class="[label ? ui.container : '']">
       <slot v-bind="{ error }" />
 
-      <p v-if="(typeof error === 'string' && error) || $slots.error" :class="[ui.error, size]">
+      <p v-if="typeof error === 'string' && error" :class="[ui.error, size]">
         <slot v-if="$slots.error" name="error" v-bind="{ error, label, name, hint, description, help }" />
         <template v-else>
           {{ error }}
@@ -46,6 +48,7 @@ import type { FormError, InjectedFormGroupValue, FormGroupSize, Strategy } from 
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { formGroup } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof formGroup>(appConfig.ui.strategy, appConfig.ui.formGroup, formGroup)
 
@@ -112,7 +115,7 @@ export default defineComponent({
     })
 
     const size = computed(() => ui.value.size[props.size ?? config.default.size])
-    const inputId = ref()
+    const inputId = ref(useId())
 
     provide<InjectedFormGroupValue>('form-group', {
       error,

@@ -1,16 +1,15 @@
-<script setup>
-const date = ref(new Date())
+<script setup lang="ts">
+import { format } from 'date-fns'
 
-const label = computed(() => date.value.toLocaleDateString('en-us', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })
-)
+const date = ref(new Date())
 </script>
 
 <template>
   <UPopover :popper="{ placement: 'bottom-start' }">
-    <UButton icon="i-heroicons-calendar-days-20-solid" :label="label" />
+    <UButton icon="i-heroicons-calendar-days-20-solid" :label="format(date, 'd MMM, yyy')" />
 
     <template #panel="{ close }">
-      <LazyDatePicker v-model="date" @close="close" />
+      <DatePicker v-model="date" is-required @close="close" />
     </template>
   </UPopover>
 </template>

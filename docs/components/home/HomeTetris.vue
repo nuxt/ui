@@ -26,7 +26,7 @@
   </Transition>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useElementSize } from '@vueuse/core'
 
 const el = ref(null)

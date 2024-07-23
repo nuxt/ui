@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const title = 'Playground'
 const description = 'Play online with our interactive Nuxt Image playground.'
 
@@ -9,11 +9,7 @@ useSeoMeta({
   description
 })
 
-defineOgImage({
-  component: 'Docs',
-  title,
-  description
-})
+defineOgImageComponent('Docs')
 </script>
 
 <template>

@@ -1,6 +1,7 @@
 <template>
   <div class="[&>div>pre]:!rounded-t-none [&>div>pre]:!mt-0">
     <div
+      v-if="hasPreview"
       class="flex border border-gray-200 dark:border-gray-700 relative rounded-t-md"
       :class="[{ 'p-4': padding, 'rounded-b-md': !hasCode, 'border-b-0': hasCode, 'not-prose': !prose }, backgroundClass, extraClass]"
     >
@@ -21,10 +22,8 @@
 <script setup lang="ts">
 import { camelCase } from 'scule'
 import { fetchContentExampleCode } from '~/composables/useContentExamplesCode'
-// @ts-expect-error
 import { transformContent } from '@nuxt/content/transformers'
-// @ts-ignore
-import { useShikiHighlighter } from '@nuxtjs/mdc/runtime'
+import { useShikiHighlighter } from '~/composables/useShikiHighlighter'
 
 const props = defineProps({
   component: {
@@ -38,6 +37,10 @@ const props = defineProps({
   componentProps: {
     type: Object,
     default: () => ({})
+  },
+  hiddenPreview: {
+    type: Boolean,
+    default: false
   },
   hiddenCode: {
     type: Boolean,
@@ -78,15 +81,15 @@ if (['command-palette-theme-algolia', 'command-palette-theme-raycast', 'vertical
 const instance = getCurrentInstance()
 const camelName = camelCase(component)
 const data = await fetchContentExampleCode(camelName)
+const highlighter = useShikiHighlighter()
 
 const hasCode = computed(() => !props.hiddenCode && (data?.code || instance.slots.code))
+const hasPreview = computed(() => !props.hiddenPreview && (props.component || instance.slots.default))
 
-const shikiHighlighter = useShikiHighlighter({})
-const codeHighlighter = async (code: string, lang: string, theme: any, highlights: number[]) => shikiHighlighter.getHighlightedAST(code, lang, theme, { highlights })
 const { data: ast } = await useAsyncData(`content-example-${camelName}-ast`, () => transformContent('content:_markdown.md', `\`\`\`vue\n${data?.code ?? ''}\n\`\`\``, {
   markdown: {
     highlight: {
-      highlighter: codeHighlighter,
+      highlighter,
       theme: {
         light: 'material-theme-lighter',
         default: 'material-theme',

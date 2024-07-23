@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const items = [{
   key: 'account',
   label: 'Account',

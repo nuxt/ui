@@ -21,7 +21,7 @@
         autocomplete="off"
         v-bind="attrs"
         :display-value="() => query ? query : label"
-        @change="onChange"
+        @change="onQueryChange"
       />
 
       <span v-if="(isLeading && leadingIconName) || $slots.leading" :class="leadingWrapperIconClass">
@@ -98,13 +98,13 @@ import {
   ComboboxButton as HComboboxButton,
   ComboboxOptions as HComboboxOptions,
   ComboboxOption as HComboboxOption,
-  ComboboxInput as HComboboxInput
+  ComboboxInput as HComboboxInput,
+  provideUseId
 } from '@headlessui/vue'
 import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
-import UIcon from '../elements/Icon.vue'
-import UAvatar from '../elements/Avatar.vue'
+import { UIcon, UAvatar } from '#components'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
@@ -114,6 +114,7 @@ import type { InputSize, InputColor, InputVariant, PopperOptions, Strategy } fro
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { input, inputMenu } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof input>(appConfig.ui.strategy, appConfig.ui.input, input)
 
@@ -247,6 +248,10 @@ export default defineComponent({
       type: Array,
       default: null
     },
+    searchLazy: {
+      type: Boolean,
+      default: false
+    },
     debounce: {
       type: Number,
       default: 200
@@ -275,7 +280,6 @@ export default defineComponent({
   emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
   setup (props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
-
     const { ui: uiMenu } = useUI('inputMenu', toRef(props, 'uiMenu'), configMenu)
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, uiMenu.value.popper as PopperOptions))
@@ -285,7 +289,7 @@ export default defineComponent({
     const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
     const { emitFormBlur, emitFormChange, inputId, color, size: sizeFormGroup, name } = useFormGroup(props, config)
 
-    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
+    const size = computed(() => sizeButtonGroup.value ?? sizeFormGroup.value)
 
     const internalQuery = ref('')
     const query = computed({
@@ -304,7 +308,7 @@ export default defineComponent({
       }
 
       if (props.valueAttribute) {
-        const option = props.options.find(option => option[props.valueAttribute] === props.modelValue)
+        const option = options.value.find(option => option[props.valueAttribute] === props.modelValue)
         return option ? option[props.optionAttribute] : null
       } else {
         return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
@@ -386,16 +390,22 @@ export default defineComponent({
 
     const debouncedSearch = props.search && typeof props.search === 'function' ? useDebounceFn(props.search, props.debounce) : undefined
 
-    const filteredOptions = computedAsync(async () => {
+    const options = computedAsync(async () => {
       if (debouncedSearch) {
         return await debouncedSearch(query.value)
       }
 
-      if (query.value === '') {
-        return props.options
+      return props.options || []
+    }, [], {
+      lazy: props.searchLazy
+    })
+
+    const filteredOptions = computed(() => {
+      if (!query.value || debouncedSearch) {
+        return options.value
       }
 
-      return (props.options as any[]).filter((option: any) => {
+      return options.value.filter((option: any) => {
         return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
           if (['string', 'number'].includes(typeof option)) {
             return String(option).search(new RegExp(query.value, 'i')) !== -1
@@ -417,16 +427,19 @@ export default defineComponent({
       }
     })
 
-    function onUpdate (event: any) {
+    function onUpdate (value: any) {
       query.value = ''
-      emit('update:modelValue', event)
-      emit('change', event)
+      emit('update:modelValue', value)
+      emit('change', value)
+
       emitFormChange()
     }
 
-    function onChange (event: any) {
+    function onQueryChange (event: any) {
       query.value = event.target.value
     }
+
+    provideUseId(() => useId())
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
@@ -456,7 +469,7 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       query,
       onUpdate,
-      onChange
+      onQueryChange
     }
   }
 })

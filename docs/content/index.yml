@@ -62,64 +62,135 @@ sections:
           height: 160
         orientation: 'horizontal'
     links:
-      - label: Explore docs
-        to: /getting-started/theming
-        color: white
+      - label: Explore 40+ components
+        to: /components
+        color: black
         size: lg
-        trailingIcon: i-heroicons-arrow-right-20-solid
-  - title: 'A collection of <span class="text-primary">40+</span> components'
-    description: 'Get access to 40+ beautifully designed and fully customizable components built for Nuxt. These components<br class="hidden lg:block"> are updated regularly to ensure that you always have the latest features and functionalities.'
-    class: 'dark:bg-gradient-to-b from-gray-950/50 to-gray-900'
-    slot: categories
-    links:
-      - label: Explore components
-        to: /elements/accordion
-        color: white
-        size: lg
-        trailingIcon: i-heroicons-arrow-right-20-solid
-    categories:
-      - label: Elements
-        to: /elements/dropdown
-        image:
-          path: /illustrations/elements
-        badge: 15
-      - label: Forms
-        to: /forms/form
-        image:
-          path: /illustrations/forms
-        badge: 12
-      - label: Data
-        to: /data/table
-        image:
-          path: /illustrations/data
-        badge: 1
-      - label: Navigation
-        to: /navigation/command-palette
-        image:
-          path: /illustrations/navigation
-        badge: 5
-      - label: Overlays
-        to: /overlays/modal
-        image:
-          path: /illustrations/overlays
-        badge: 7
-      - label: Layout
-        to: /layout/card
-        image:
-          path: /illustrations/layout
-        badge: 4
+        icon: i-heroicons-cube
 cta:
-  title: Trusted and supported by our<br class="hidden lg:block"> amazing community
+  title: Built and driven by an <span class="text-primary">amazing community</span>
+  align: center
+  users:
+    - name: Benjamin Canac
+      username: benjamincanac
+      to: https://twitter.com/benjamincanac
+    - name: Romain Hamel
+      username: romhml
+      to: https://github.com/romhml
+    - name: Neil Richter
+      username: noook
+      to: https://nook.sh/
 pro:
-  title: 'Upgrade to <span class="text-primary">UI Pro</span> for more components'
-  description: 'Nuxt UI Pro is a collection of premium components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.<br>It includes all primitives to build landing pages, documentation, blogs, changelog, dashboards or entire SaaS products.'
-  image:
-    path: /illustrations/pro
-    width: 1216
-    height: 424
+  title: Upgrade to <span class="text-primary">Nuxt UI Pro</span>
+  description: 'Nuxt UI Pro is a collection of premium Vue components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.<br>It includes all primitives to build landing pages, documentations, blogs, dashboards or entire SaaS products.'
   links:
-    - label: Explore Pro
-      to: /pro
-      color: white
-      size: lg
+    - label: Buy now
+      to: /pro/pricing
+      color: black
       trailingIcon: i-heroicons-arrow-right-20-solid
+      size: lg
+    - label: Explore templates
+      to: /pro/templates
+      color: gray
+      icon: i-heroicons-computer-desktop
+      size: lg
+  sections:
+    - title: The freedom to build anything
+      description: Nuxt UI Pro ships with an extensive set of advanced components that cover a wide range of use-cases. Carefully crafted to reduce boilerplate code without sacrificing flexibility.
+      id: features
+      align: left
+      features:
+        - name: Fully customizable
+          description: Like Nuxt UI, change the style of any component from your App Config or customize them specifically through the ui prop.
+          icon: i-heroicons-wrench-screwdriver
+        - name: Slots for everything
+          description: Each component leverages the power of Vue's slots to give you the flexibility to build anything.
+          icon: i-heroicons-square-3-stack-3d
+        - name: Responsive by design
+          description: Nuxt UI Pro components aims to structure your content, they are responsive by design and will adapt to any screen size.
+          icon: i-heroicons-device-phone-mobile
+      links:
+        - label: Explore components
+          to: /pro/components
+          color: gray
+          icon: i-heroicons-arrow-right-20-solid
+          trailing: true
+          size: md
+          class: ml-8
+      code: |
+        ```vue [app.vue]
+        <script setup lang="ts">
+        const links = [
+          { to: '/', label: 'Home' },
+          { to: '/about', label: 'About' },
+          { to: '/contact', label: 'Contact' }
+        ]
+        </script>
+
+        <template>
+          <UHeader :links="links" />
+
+          <UMain>
+            <ULandingHero title="Hello World" />
+
+            <ULandingSection title="Features">
+              <UPageGrid>
+                <ULandingCard title="First Card" />
+                <ULandingCard title="Second Card" />
+                <ULandingCard title="Third Card" />
+              </UPageGrid>
+            </ULandingSection>
+          </UMain>
+
+          <UFooter />
+        </template>
+        ```
+    - title: The flexibility to control your data
+      description: Although you can use any data source you want, Nuxt UI Pro is fully integrated with Nuxt Content and provides additional features when the module is detected.
+      align: right
+      features:
+        - name: 'Write Markdown with ease'
+          description: Nuxt UI Pro overrides Nuxt Content prose components to make them awesome but also adds new ones like Callout, CodeGroup, Field, etc.
+          icon: i-simple-icons-markdown
+        - name: 'Beautiful Typography styles'
+          description: Tailwind CSS typography plugin is pre-configured and styled to match Nuxt UI components and colors.
+          icon: i-heroicons-paint-brush
+        - name: Full-Text Search out of the box
+          description: 'Nuxt UI Pro ships with a ready to use command palette component. No need to setup Algolia DocSearch anymore.'
+          icon: i-heroicons-magnifying-glass
+      links:
+        - label: Nuxt Content integration
+          to: /pro/getting-started/content
+          color: gray
+          icon: i-heroicons-arrow-right-20-solid
+          trailing: true
+          size: md
+          class: ml-8
+      code: |
+        ```vue [pages/\[...slug\\].vue]
+        <script setup lang="ts">
+        const route = useRoute()
+
+        const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+        </script>
+
+        <template>
+          <UPage>
+            <UPageHeader :title="page.title" :description="page.description" :links="page.links" />
+
+            <UPageBody prose>
+              <ContentRenderer v-if="page.body" :value="page" />
+            </UPageBody>
+
+            <template #right>
+              <UContentToc :links="page.body.toc.links" />
+            </template>
+          </UPage>
+        </template>
+        ```
+  landing:
+    title: Start with a landing page
+    description: Stop wasting time building another landing page, Nuxt UI Pro flexible components will allow you to focus on your content.
+  docs:
+    title: Build your docs in seconds
+    description: Whether you're creating documentation for your open source project or explaining your product, Nuxt UI Pro has you covered.

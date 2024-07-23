@@ -42,7 +42,7 @@ export default {
         inactive: 'text-gray-400 dark:text-gray-500'
       },
       selectedIcon: {
-        base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
+        base: 'h-5 w-5 text-gray-900 dark:text-white flex-shrink-0'
       },
       avatar: {
         base: 'flex-shrink-0',

@@ -6,7 +6,12 @@
       <div class="h-px w-px rounded-full bg-transparent" />
     </div>
 
-    <UPageHero :title="page.title" :description="page.description" :links="page.links" align="center" />
+    <ULandingHero :description="page.description" :links="page.links" align="center" :ui="{ title: 'sm:text-6xl' }" class="md:py-32">
+      <template #title>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <span v-html="page.title" />
+      </template>
+    </ULandingHero>
 
     <UPageBody>
       <div class="h-[96px] w-0.5 bg-gray-200 dark:bg-gray-800 mx-auto rounded-t-full" />
@@ -54,19 +59,17 @@ const dates = computed(() => {
   })
 })
 
+const title = page.value.head?.title || page.value.title
+const description = page.value.head?.description || page.value.description
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
-  title: page.value.title,
-  ogTitle: `${page.value.title} - Nuxt UI`,
-  description: page.value.description,
-  ogDescription: page.value.description
+  title,
+  description,
+  ogTitle: `${title} - Nuxt UI`,
+  ogDescription: description
 })
 
-defineOgImage({
-  component: 'Docs',
-  title: page.value.title,
-  description: page.value.description
-})
+defineOgImageComponent('Docs')
 </script>
 
 <style scoped>

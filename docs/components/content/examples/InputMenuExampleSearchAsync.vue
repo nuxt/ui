@@ -1,11 +1,11 @@
-<script setup>
+<script setup lang="ts">
 const loading = ref(false)
 const selected = ref()
 
-async function search (q) {
+async function search (q: string) {
   loading.value = true
 
-  const users = await $fetch('https://jsonplaceholder.typicode.com/users', { params: { q } })
+  const users: any[] = await $fetch('https://jsonplaceholder.typicode.com/users', { params: { q } })
 
   loading.value = false
 

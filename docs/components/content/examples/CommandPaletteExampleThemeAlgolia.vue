@@ -1,8 +1,11 @@
-<script setup>
+<script setup lang="ts">
+import type { NavItem, ParsedContent } from '@nuxt/content'
+import type { Button } from '#ui/types'
+
 const commandPaletteRef = ref()
 
-const navigation = inject('navigation')
-const files = inject('files')
+const navigation = inject<Ref<NavItem[]>>('navigation')
+const files = inject<Ref<ParsedContent[]>>('files')
 
 const groups = computed(() => navigation.value.map(item => ({
   key: item._path,
@@ -63,8 +66,8 @@ const ui = {
     ref="commandPaletteRef"
     :groups="groups"
     :ui="ui"
-    :close-button="closeButton"
-    :empty-state="emptyState"
+    :close-button="(closeButton as Button)"
+    :empty-state="(emptyState as any)"
     :autoselect="false"
     command-attribute="title"
     :fuse="{

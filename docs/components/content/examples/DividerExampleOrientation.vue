@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const form = reactive({ email: 'mail@example.com', password: 'password' })
 </script>
 

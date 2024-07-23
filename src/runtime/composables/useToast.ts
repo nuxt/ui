@@ -22,8 +22,22 @@ export function useToast () {
     notifications.value = notifications.value.filter((n: Notification) => n.id !== id)
   }
 
+  function update (id: string, notification: Partial<Notification>) {
+    const index = notifications.value.findIndex((n: Notification) => n.id === id)
+    if (index !== -1) {
+      const previous = notifications.value[index]
+      notifications.value.splice(index, 1, { ...previous, ...notification })
+    }
+  }
+
+  function clear () {
+    notifications.value = []
+  }
+
   return {
     add,
-    remove
+    remove,
+    update,
+    clear
   }
 }

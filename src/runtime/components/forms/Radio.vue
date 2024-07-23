@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="ui.wrapper" :data-n-ids="attrs['data-n-ids']">
     <div :class="ui.container">
       <input
         :id="inputId"
@@ -11,6 +11,7 @@
         type="radio"
         :class="inputClass"
         v-bind="attrs"
+        @change="onChange"
       >
     </div>
     <div v-if="label || $slots.label" :class="ui.inner">
@@ -26,18 +27,18 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, toRef, onMounted, ref } from 'vue'
+import { computed, defineComponent, inject, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
+import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
 import type { Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { radio } from '#ui/ui.config'
 import colors from '#ui-colors'
-import { uid } from '../../utils/uid'
-import { useFormGroup } from '../../composables/useFormGroup'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
 
@@ -46,7 +47,7 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      default: () => null
+      default: null
     },
     value: {
       type: [String, Number, Boolean],
@@ -100,15 +101,10 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('radio', toRef(props, 'ui'), config, toRef(props, 'class'))
 
+    const inputId = props.id ?? useId()
+
     const radioGroup = inject('radio-group', null)
     const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config)
-    const inputId = ref(props.id)
-
-    onMounted(() => {
-      if (!inputId.value) {
-        inputId.value = uid()
-      }
-    })
 
     const pick = computed({
       get () {
@@ -116,13 +112,15 @@ export default defineComponent({
       },
       set (value) {
         emit('update:modelValue', value)
-        emit('change', value)
-
         if (!radioGroup) {
           emitFormChange()
         }
       }
     })
+
+    function onChange (event: Event) {
+      emit('change', (event.target as HTMLInputElement).value)
+    }
 
     const inputClass = computed(() => {
       return twMerge(twJoin(
@@ -144,7 +142,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       name,
       // eslint-disable-next-line vue/no-dupe-keys
-      inputClass
+      inputClass,
+      onChange
     }
   }
 })

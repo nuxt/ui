@@ -25,6 +25,16 @@
         as="template"
       >
         <button :class="[ui.list.tab.base, ui.list.tab.background, ui.list.tab.height, ui.list.tab.padding, ui.list.tab.size, ui.list.tab.font, ui.list.tab.rounded, ui.list.tab.shadow, selected ? ui.list.tab.active : ui.list.tab.inactive]">
+          <slot
+            name="icon"
+            :item="item"
+            :index="index"
+            :selected="selected"
+            :disabled="disabled"
+          >
+            <UIcon v-if="item.icon" :name="item.icon" :class="ui.list.tab.icon" />
+          </slot>
+
           <slot :item="item" :index="index" :selected="selected" :disabled="disabled">
             <span class="truncate">{{ item.label }}</span>
           </slot>
@@ -32,14 +42,8 @@
       </HTab>
     </HTabList>
 
-    <HTabPanels :class="ui.container">
-      <HTabPanel
-        v-for="(item, index) of items"
-        :key="index"
-        v-slot="{ selected }"
-        :class="ui.base"
-        tabindex="-1"
-      >
+    <HTabPanels v-if="content" :class="ui.container">
+      <HTabPanel v-for="(item, index) of items" :key="index" v-slot="{ selected }" :class="ui.base" :unmount="unmount">
         <slot :name="item.slot || 'item'" :item="item" :index="index" :selected="selected">
           {{ item.content }}
         </slot>
@@ -51,7 +55,7 @@
 <script lang="ts">
 import { toRef, ref, watch, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel } from '@headlessui/vue'
+import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel, provideUseId } from '@headlessui/vue'
 import { useResizeObserver } from '@vueuse/core'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
@@ -59,6 +63,7 @@ import type { TabItem, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { tabs } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof tabs>(appConfig.ui.strategy, appConfig.ui.tabs, tabs)
 
@@ -88,6 +93,14 @@ export default defineComponent({
     items: {
       type: Array as PropType<TabItem[]>,
       default: () => []
+    },
+    unmount: {
+      type: Boolean,
+      default: false
+    },
+    content: {
+      type: Boolean,
+      default: true
     },
     class: {
       type: [String, Object, Array] as PropType<any>,
@@ -150,6 +163,8 @@ export default defineComponent({
     })
 
     onMounted(() => calcMarkerSize(selectedIndex.value))
+
+    provideUseId(() => useId())
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

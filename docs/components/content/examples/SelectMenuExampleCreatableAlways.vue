@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const options = ref([
   { id: 1, name: 'bug' },
   { id: 2, name: 'documentation' },

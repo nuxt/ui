@@ -20,7 +20,7 @@ const items = [
     class="w-64 mx-auto"
   >
     <template #default="{ item }">
-      <img :src="item" class="w-full">
+      <img :src="item" class="w-full" draggable="false">
     </template>
 
     <template #prev="{ onClick, disabled }">
@@ -30,7 +30,7 @@ const items = [
     </template>
 
     <template #next="{ onClick, disabled }">
-      <button :disabled="disabled" class="" @click="onClick">
+      <button :disabled="disabled" @click="onClick">
         Next
       </button>
     </template>

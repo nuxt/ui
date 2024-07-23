@@ -41,7 +41,7 @@ ${Object.entries(gray || colors.cool).map(([key, value]) => `--color-gray-${key}
   }
 
   // SPA mode
-  if (process.client && nuxtApp.isHydrating && !nuxtApp.payload.serverRendered) {
+  if (import.meta.client && nuxtApp.isHydrating && !nuxtApp.payload.serverRendered) {
     const style = document.createElement('style')
 
     style.innerHTML = root.value

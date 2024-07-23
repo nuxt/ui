@@ -7,7 +7,8 @@
       :disabled="disabled"
       :class="ui.trigger"
       role="button"
-      @mouseover="onMouseOver"
+      @mouseenter="onMouseEnter"
+      @touchstart.passive="onTouchStart"
     >
       <slot :open="open" :close="close">
         <button :disabled="disabled">
@@ -20,7 +21,7 @@
       <div v-if="open" :class="[ui.overlay.base, ui.overlay.background]" />
     </Transition>
 
-    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseover="onMouseOver">
+    <div v-if="open" ref="container" :class="[ui.container, ui.width]" :style="containerStyle" @mouseenter="onMouseEnter">
       <Transition appear v-bind="ui.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
@@ -38,7 +39,7 @@
 import { computed, ref, toRef, onMounted, defineComponent, watch } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
-import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel } from '@headlessui/vue'
+import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as HPopoverPanel, provideUseId } from '@headlessui/vue'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { mergeConfig } from '../../utils'
@@ -46,6 +47,7 @@ import type { PopperOptions, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { popover } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof popover>(appConfig.ui.strategy, appConfig.ui.popover, popover)
 
@@ -152,7 +154,19 @@ export default defineComponent({
       }
     })
 
-    function onMouseOver () {
+    function onTouchStart (event: TouchEvent) {
+      if (!event.cancelable || !popoverApi.value) {
+        return
+      }
+
+      if (popoverApi.value.popoverState === 0) {
+        popoverApi.value.closePopover()
+      } else {
+        popoverApi.value.togglePopover()
+      }
+    }
+
+    function onMouseEnter () {
       if (props.mode !== 'hover' || !popoverApi.value) {
         return
       }
@@ -210,6 +224,8 @@ export default defineComponent({
       emit('update:open', newValue === 0)
     })
 
+    provideUseId(() => useId())
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -220,7 +236,8 @@ export default defineComponent({
       trigger,
       container,
       containerStyle,
-      onMouseOver,
+      onTouchStart,
+      onMouseEnter,
       onMouseLeave
     }
   }

@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "name": "@nuxt/ui-playground",
+  "type": "module",
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "generate": "nuxi generate"
+  },
+  "dependencies": {
+    "@nuxt/ui": "latest",
+    "nuxt": "^3.12.4"
+  }
+}

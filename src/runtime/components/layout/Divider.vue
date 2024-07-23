@@ -22,11 +22,10 @@
 import { toRef, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
-import UIcon from '../elements/Icon.vue'
-import UAvatar from '../elements/Avatar.vue'
+import { UIcon, UAvatar } from '#components'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Avatar, Strategy } from '../../types'
+import type { Avatar, DividerSize, Strategy } from '../../types'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { divider } from '#ui/ui.config'
@@ -51,6 +50,13 @@ export default defineComponent({
     avatar: {
       type: Object as PropType<Avatar>,
       default: null
+    },
+    size: {
+      type: String as PropType<DividerSize>,
+      default: () => config.default.size,
+      validator (value: string) {
+        return Object.keys(config.border.size.horizontal).includes(value) || Object.keys(config.border.size.vertical).includes(value)
+      }
     },
     orientation: {
       type: String as PropType<'horizontal' | 'vertical'>,
@@ -92,7 +98,7 @@ export default defineComponent({
       return twJoin(
         ui.value.border.base,
         ui.value.border[props.orientation],
-        ui.value.border.size[props.orientation],
+        ui.value.border.size[props.orientation][props.size],
         ui.value.border.type[props.type]
       )
     })

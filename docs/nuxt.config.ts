@@ -1,7 +1,7 @@
 import { createResolver } from '@nuxt/kit'
 import colors from 'tailwindcss/colors'
 import module from '../src/module'
-import { excludeColors } from '../src/colors'
+import { excludeColors } from '../src/runtime/utils/colors'
 import pkg from '../package.json'
 
 const { resolve } = createResolver(import.meta.url)
@@ -15,31 +15,38 @@ export default defineNuxtConfig({
     '@nuxt/ui-pro',
     process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/.docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
   ].filter(Boolean),
+
   modules: [
     '@nuxt/content',
+    '@nuxt/fonts',
     '@nuxt/image',
     'nuxt-og-image',
-    // '@nuxthq/studio',
     module,
-    '@nuxtjs/fontaine',
-    '@nuxtjs/google-fonts',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-cloudflare-analytics',
     'modules/content-examples-code'
   ],
+
   runtimeConfig: {
     public: {
       version: pkg.version
     }
   },
+
   ui: {
     global: true,
-    icons: ['heroicons', 'simple-icons'],
     safelistColors: excludeColors(colors)
   },
+
   content: {
+    highlight: {
+      langs: [
+        'postcss',
+        'mdc'
+      ]
+    },
     sources: {
       dev: {
         prefix: '/dev',
@@ -67,16 +74,11 @@ export default defineNuxtConfig({
       } : undefined
     }
   },
-  fontMetrics: {
-    fonts: ['DM Sans']
+
+  image: {
+    provider: 'ipx'
   },
-  googleFonts: {
-    display: 'swap',
-    download: true,
-    families: {
-      'DM+Sans': [400, 500, 600, 700]
-    }
-  },
+
   nitro: {
     prerender: {
       routes: [
@@ -90,6 +92,12 @@ export default defineNuxtConfig({
       ignore: !process.env.NUXT_UI_PRO_PATH && !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     }
   },
+
+  routeRules: {
+    '/components': { redirect: '/components/accordion', prerender: false },
+    '/dev/components': { redirect: '/dev/components/accordion', prerender: false }
+  },
+
   componentMeta: {
     exclude: [
       '@nuxt/content',
@@ -110,10 +118,12 @@ export default defineNuxtConfig({
       exposed: false
     }
   },
+
   cloudflareAnalytics: {
     token: '1e2b0c5e9a214f0390b9b94e043d8d4c',
     scriptPath: false
   },
+
   hooks: {
     // Related to https://github.com/nuxt/nuxt/pull/22558
     'components:extend': (components) => {
@@ -126,12 +136,20 @@ export default defineNuxtConfig({
       })
     }
   },
+
   typescript: {
     strict: false
   },
+
+  site: {
+    url: 'https://ui.nuxt.com'
+  },
+
   vite: {
     optimizeDeps: {
       include: ['date-fns']
     }
-  }
+  },
+
+  compatibilityDate: '2024-07-23'
 })
