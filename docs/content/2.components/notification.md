@@ -29,7 +29,7 @@ export default defineAppConfig({
   ui: {
     notifications: {
       // Show toasts at the top right of the screen
-      position: 'top-0 bottom-auto'
+      position: 'top-0 right-0'
     }
   }
 })
@@ -289,8 +289,14 @@ Slots defined in the `<UNotifications />` component are automatically passed dow
 
 ## Props
 
-:component-props
+::tabs
+  :component-props{label="Notification"}
+  :component-props{label="Notifications" slug="UNotifications"}
+::
 
 ## Config
 
-:component-preset
+::tabs
+  :component-preset{label="Notification"}
+  :component-preset{label="Notifications" slug="Notifications"}
+::

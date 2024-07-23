@@ -27,24 +27,7 @@ Read more on [ui.nuxt.com](https://ui.nuxt.com)
 ## Installation
 
 ```bash
-# npm
-npm install @nuxt/ui
-# yarn
-yarn add @nuxt/ui
-# pnpm
-pnpm add @nuxt/ui
-# bun
-bun add @nuxt/ui
-```
-
-Then, register the module in your `nuxt.config.ts`:
-
-```js
-export default defineNuxtConfig({
-  modules: [
-    '@nuxt/ui'
-  ]
-})
+npx nuxi@latest module add ui
 ```
 
 If you want latest updates, please use `@nuxt/ui-edge` in your `package.json`:

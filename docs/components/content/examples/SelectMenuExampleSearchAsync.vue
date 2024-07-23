@@ -5,7 +5,7 @@ const selected = ref([])
 async function search (q: string) {
   loading.value = true
 
-  const users = await $fetch<any[]>('https://jsonplaceholder.typicode.com/users', { params: { q } })
+  const users: any[] = await $fetch('https://jsonplaceholder.typicode.com/users', { params: { q } })
 
   loading.value = false
 

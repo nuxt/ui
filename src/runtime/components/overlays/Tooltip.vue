@@ -1,5 +1,5 @@
 <template>
-  <div ref="trigger" :class="ui.wrapper" v-bind="attrs" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
+  <div ref="trigger" :class="ui.wrapper" v-bind="attrs" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <slot :open="open">
       Hover
     </slot>
@@ -96,7 +96,7 @@ export default defineComponent({
 
     // Methods
 
-    function onMouseOver () {
+    function onMouseEnter () {
       // cancel programmed closing
       if (closeTimeout) {
         clearTimeout(closeTimeout)
@@ -137,7 +137,7 @@ export default defineComponent({
       trigger,
       container,
       open,
-      onMouseOver,
+      onMouseEnter,
       onMouseLeave
     }
   }

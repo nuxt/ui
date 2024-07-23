@@ -70,8 +70,7 @@ import { useFuse } from '@vueuse/integrations/useFuse'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import { twJoin } from 'tailwind-merge'
 import { defu } from 'defu'
-import UIcon from '../elements/Icon.vue'
-import UButton from '../elements/Button.vue'
+import { UIcon, UButton } from '#components'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
@@ -326,7 +325,10 @@ export default defineComponent({
       )
     })
 
-    const emptyState = computed(() => ({ ...ui.value.default.emptyState, ...props.emptyState }))
+    const emptyState = computed(() => {
+      if (props.emptyState === null) return null
+      return { ...ui.value.default.emptyState, ...props.emptyState }
+    })
 
     // Methods
 

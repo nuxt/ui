@@ -1,52 +1,27 @@
 ---
-description: Display any icon (100,000+) from Iconify.
+description: Add 200,000+ ready to use icons to your Nuxt application, based on Iconify.
 links:
-  - label: GitHub
+  - label: Iconify
+    icon: i-simple-icons-iconify
+    to: https://icones.js.org
+  - label: Nuxt Icon
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/elements/Icon.vue
+    to: https://github.com/nuxt/icon
 ---
 
 ## Usage
 
-Use the `name` prop by following this pattern: `i-{collection_name}-{icon_name}`. You can search any icon from [Iconify](https://iconify.design/) using https://icones.js.org.
+You can use any name from the https://icones.js.org collection such as the `i-` prefix:
 
 ::component-card
 ---
+baseProps:
+  class: 'w-5 h-5'
 props:
   name: 'i-heroicons-light-bulb'
 ---
 ::
 
-::callout{icon="i-heroicons-exclamation-triangle"}
-You won't be able to use any icon in the `name` prop here as icons are bundled using [egoist/tailwindcss-icons](https://github.com/egoist/tailwindcss-icons), read more about this in [Theming](/getting-started/theming#icons).
+::callout{icon="i-heroicons-light-bulb"}
+It's highly recommended to install the icons collections you need, read more about this in [Theming](/getting-started/theming#icons).
 ::
-
-### Dynamic
-
-You can use the `dynamic` prop to enable dynamic icon loading. This will use [`nuxt-icon`](https://github.com/nuxt-modules/icon) instead and allow you to use any icon from [Iconify](https://iconify.design/) as well as the `{collection_name}:{icon_name}` pattern.
-
-This can be quite useful when using [dynamic class names](https://tailwindcss.com/docs/content-configuration#dynamic-class-names) or for icons that are not bundled by default (fetched from a database for example).
-
-::component-card
----
-props:
-  name: 'i-ph-rocket-launch'
-  dynamic: true
----
-::
-
-You can also change the default behavior of the `dynamic` prop by setting the `ui.icons.dynamic` option in your `app.config.ts`.
-
-```ts [app.config.ts]
-export default defineAppConfig({
-  ui: {
-    icons: {
-      dynamic: true
-    }
-  }
-})
-```
-
-## Props
-
-:component-props

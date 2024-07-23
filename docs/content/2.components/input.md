@@ -71,10 +71,12 @@ props:
 
 Use the `type` prop to change the input type, the default `type` is set to `text`, you can check all the available types at [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types).
 
-Some types have been implemented in their own components, such as [Checkbox](/components/checkbox), [Radio](/components/radio-group), etc. and others have been styled like `file` for example. :u-badge{label="New" class="!rounded-full" variant="subtle"}
+Some types have been implemented in their own components, such as [Checkbox](/components/checkbox), [Radio](/components/radio-group), etc. and others have been styled like `file` for example.
 
 ::component-card
 ---
+baseProps:
+  icon: 'i-heroicons-folder'
 props:
   type: 'file'
   size: sm
@@ -180,13 +182,13 @@ Use the `#leading` slot to set the content of the leading icon.
 ::component-card
 ---
 slots:
-  leading: <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" size="3xs" class="mx-0.5" />
+  leading: <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" size="2xs" />
 baseProps:
   placeholder: 'Search...'
 ---
 
 #leading
-  :u-avatar{src="https://avatars.githubusercontent.com/u/739984?v=4" size="3xs" class="mx-0.5"}
+  :u-avatar{src="https://avatars.githubusercontent.com/u/739984?v=4" size="2xs"}
 ::
 
 ### `trailing`

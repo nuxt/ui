@@ -4,5 +4,5 @@ contact_links:
     url: https://ui.nuxt.com
     about: Check the documentation for guides and examples.
   - name: 📚 Discord
-    url: https://discord.com/channels/473401852243869706/1153996761426300948
-    about: Consider asking questions in the `#ui` channel.
+    url: https://go.nuxt.com/discord
+    about: Consider asking questions in the help channel.

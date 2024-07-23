@@ -16,7 +16,7 @@
     <Footer />
 
     <ClientOnly>
-      <LazyUContentSearch :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 1000 }" />
+      <LazyUContentSearch :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
     </ClientOnly>
 
     <UNotifications>
@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import type { NuxtError } from '#app'
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import type { ParsedContent } from '@nuxt/content'
 
 useSeoMeta({
   title: 'Page not found',
@@ -79,7 +79,7 @@ const links = computed(() => {
     active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
   }, {
     label: 'Pricing',
-    icon: 'i-heroicons-credit-card',
+    icon: 'i-heroicons-ticket',
     to: '/pro/pricing'
   }, {
     label: 'Templates',

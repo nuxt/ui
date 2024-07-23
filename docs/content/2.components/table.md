@@ -29,6 +29,7 @@ Use the `columns` prop to configure which columns to display. It's an array of o
 - `sortable` - Whether the column is sortable. Defaults to `false`.
 - `direction` - The sort direction to use on first click. Defaults to `asc`.
 - `class` - The class to apply to the column cells.
+- `rowClass` - The class to apply to the data column cells. :u-badge{label="New" class="!rounded-full" variant="subtle"}
 - `sort` - Pass your own `sort` function. Defaults to a simple _greater than_ / _less than_ comparison.
 
 ::component-example{class="grid"}
@@ -49,7 +50,7 @@ extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-columns-selectable'
 componentProps:
-  class: 'flex-1'
+  class: 'flex-1 flex-col overflow-hidden'
 ---
 ::
 
@@ -255,7 +256,7 @@ componentProps:
 ::
 
 ::callout{icon="i-heroicons-light-bulb"}
-You can use the `by` prop to compare objects by a field instead of comparing object instances. We've replicated the behavior of Headless UI [Combobox](https://headlessui.com/vue/combobox#binding-objects-as-values).
+You can use the `by` prop to compare objects by a field instead of comparing object instances. We've replicated the behavior of Headless UI [Combobox](https://headlessui.com/v1/vue/combobox#binding-objects-as-values).
 ::
 
 You can also add a `select` listener on your Table to make the rows clickable. The function will receive the row as the first argument.
@@ -282,7 +283,7 @@ extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-searchable'
 componentProps:
-  class: 'flex-1'
+  class: 'flex-1 flex-col overflow-hidden'
 ---
 ::
 
@@ -295,6 +296,19 @@ You can easily use the [Pagination](/components/pagination) component to paginat
 extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-paginable'
+componentProps:
+  class: 'flex-1 flex-col overflow-hidden'
+---
+::
+
+### Expandable :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+
+You can use the `expand` slot to display extra information about a row. You will have access to the `row` property in the slot scope.
+
+::component-example{class="grid"}
+---
+padding: false
+component: 'table-example-expandable'
 componentProps:
   class: 'flex-1'
 ---
@@ -445,6 +459,19 @@ Use the `#empty-state` slot to customize the empty state.
 extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-empty-slot'
+componentProps:
+  class: 'flex-1'
+---
+::
+
+### `caption`
+
+Use the `#caption` slot to customize the table's caption.
+
+::component-example
+---
+padding: false
+component: 'table-example-caption-slot'
 componentProps:
   class: 'flex-1'
 ---

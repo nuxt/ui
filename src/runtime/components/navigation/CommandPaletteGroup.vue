@@ -73,10 +73,8 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { ComboboxOption as HComboboxOption, provideUseId } from '@headlessui/vue'
-import UIcon from '../elements/Icon.vue'
-import UAvatar from '../elements/Avatar.vue'
-import UKbd from '../elements/Kbd.vue'
-import type { Group } from '../../types'
+import { UIcon, UAvatar, UKbd } from '#components'
+import type { Command, Group } from '../../types'
 import { commandPalette } from '#ui/ui.config'
 import { useId } from '#imports'
 
@@ -120,7 +118,7 @@ export default defineComponent({
       return typeof label === 'function' ? label(props.query) : label
     })
 
-    function highlight (text: string, { indices, value }: { indices: number[][], value: string }): string {
+    function highlight (text: string, { indices, value }: Command['matches'][number]): string {
       if (text === value) {
         return ''
       }

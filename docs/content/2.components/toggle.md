@@ -3,7 +3,7 @@ description: Display a toggle field.
 links:
   - label: 'Switch'
     icon: i-simple-icons-headlessui
-    to: 'https://headlessui.com/vue/switch'
+    to: 'https://headlessui.com/v1/vue/switch'
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/Toggle.vue
@@ -49,6 +49,19 @@ props:
 excludedProps:
   - onIcon
   - offIcon
+---
+::
+
+### Loading
+
+Use the `loading` prop to show a loading icon and disable the Toggle.
+
+Use the `loading-icon` prop to set a different icon or change it globally in `ui.toggle.default.loadingIcon`. Defaults to `i-heroicons-arrow-path-20-solid`.
+
+::component-card
+---
+props:
+  loading: true
 ---
 ::
 

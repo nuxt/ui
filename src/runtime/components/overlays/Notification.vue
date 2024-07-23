@@ -18,11 +18,11 @@
                 {{ title }}
               </slot>
             </p>
-            <p v-if="(description || $slots.description)" :class="twMerge(ui.description, !(title && $slots.title) && 'mt-0 leading-5')">
+            <div v-if="(description || $slots.description)" :class="twMerge(ui.description, !title && !$slots.title && 'mt-0 leading-5')">
               <slot name="description" :description="description">
                 {{ description }}
               </slot>
-            </p>
+            </div>
 
             <div v-if="(description || $slots.description) && actions.length" :class="ui.actions">
               <UButton v-for="(action, index) of actions" :key="index" v-bind="{ ...(ui.default.actionButton || {}), ...action }" @click.stop="onAction(action)" />
@@ -43,12 +43,10 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, onMounted, onUnmounted, watchEffect, defineComponent } from 'vue'
+import { ref, computed, toRef, onMounted, onUnmounted, watch, watchEffect, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
-import UIcon from '../elements/Icon.vue'
-import UAvatar from '../elements/Avatar.vue'
-import UButton from '../elements/Button.vue'
+import { UIcon, UAvatar, UButton } from '#components'
 import { useUI } from '../../composables/useUI'
 import { useTimer } from '../../composables/useTimer'
 import { mergeConfig } from '../../utils'
@@ -123,7 +121,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { ui, attrs } = useUI('notification', toRef(props, 'ui'), config)
 
-    let timer: any = null
+    let timer: null | ReturnType<typeof useTimer> = null
     const remaining = ref(props.timeout)
 
     const wrapperClass = computed(() => {
@@ -131,7 +129,8 @@ export default defineComponent({
         ui.value.wrapper,
         ui.value.background?.replaceAll('{color}', props.color),
         ui.value.rounded,
-        ui.value.shadow
+        ui.value.shadow,
+        ui.value.ring?.replaceAll('{color}', props.color)
       ), props.class)
     })
 
@@ -191,7 +190,11 @@ export default defineComponent({
       emit('close')
     }
 
-    onMounted(() => {
+    function initTimer () {
+      if (timer) {
+        timer.stop()
+      }
+
       if (!props.timeout) {
         return
       }
@@ -203,7 +206,11 @@ export default defineComponent({
       watchEffect(() => {
         remaining.value = timer.remaining.value
       })
-    })
+    }
+
+    watch(() => props.timeout, initTimer)
+
+    onMounted(initTimer)
 
     onUnmounted(() => {
       if (timer) {
