@@ -3,7 +3,7 @@ export default {
   overlay: {
     base: 'fixed inset-0 transition-opacity',
     background: 'bg-gray-200/75 dark:bg-gray-800/75',
-    // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
+    // Syntax for `<TransitionRoot>` component https://headlessui.com/v1/vue/transition#basic-example
     transition: {
       enter: 'ease-in-out duration-500',
       enterFrom: 'opacity-0',
@@ -28,7 +28,7 @@ export default {
     top: '-translate-y-full',
     bottom: 'translate-y-full'
   },
-  // Syntax for `<TransitionRoot>` component https://headlessui.com/vue/transition#basic-example
+  // Syntax for `<TransitionRoot>` component https://headlessui.com/v1/vue/transition#basic-example
   transition: {
     enter: 'transform transition ease-in-out duration-300',
     leave: 'transform transition ease-in-out duration-200'

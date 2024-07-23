@@ -1,4 +1,4 @@
-import type { FuseSortFunctionMatch, FuseSortFunctionMatchList } from 'fuse.js'
+import Fuse from 'fuse.js'
 import type { Avatar } from './avatar'
 
 export interface Command {
@@ -13,7 +13,7 @@ export interface Command {
   shortcuts?: string[]
   group?: string
   score?: number
-  matches?: (FuseSortFunctionMatch | FuseSortFunctionMatchList)[]
+  matches?: Fuse.FuseResultMatch[]
   [key: string]: any
 }
 

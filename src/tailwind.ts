@@ -81,5 +81,6 @@ export default async function installTailwind (
       configTemplate.dst,
       join(nuxt.options.rootDir, 'tailwind.config')
     ]
+  // @ts-expect-error - `@nuxtjs/tailwindcss` not installed yet
   }, nuxt.options.tailwindcss))
 }

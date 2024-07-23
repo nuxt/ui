@@ -3,7 +3,7 @@ description: Display a list of actions in a dropdown menu.
 links:
   - label: Menu
     icon: i-simple-icons-headlessui
-    to: https://headlessui.com/vue/menu
+    to: https://headlessui.com/v1/vue/menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/elements/Dropdown.vue
