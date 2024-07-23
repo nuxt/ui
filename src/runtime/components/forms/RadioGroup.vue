@@ -20,6 +20,10 @@
         <template #label>
           <slot name="label" v-bind="{ option, selected: option.selected }" />
         </template>
+
+        <template #help>
+          <slot name="help" v-bind="{ option, selected: option.selected }" />
+        </template>
       </URadio>
     </fieldset>
   </div>

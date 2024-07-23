@@ -87,6 +87,10 @@ slots:
   [Label]{.italic}
 ::
 
+### `help` :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+
+Like the `#label` slot, use the `#help` slot to override the content of the help text.
+
 ## Props
 
 :component-props
