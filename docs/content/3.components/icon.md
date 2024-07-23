@@ -22,5 +22,5 @@ props:
 ::
 
 ::tip
-It's highly recommended to install the icons collections you need, read more about this in [Theming](/getting-started/theming#icons).
+It's highly recommended to install the icons collections you need, read more about this in [Icons](/getting-started/icons).
 ::
