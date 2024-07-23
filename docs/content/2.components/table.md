@@ -314,7 +314,6 @@ componentProps:
 ---
 ::
 
-
 ### Loading
 
 Use the `loading` prop to indicate that data is currently loading with an indeterminate [Progress](/components/progress#indeterminate) bar.
