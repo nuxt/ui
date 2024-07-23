@@ -7,7 +7,7 @@ const groups = [{
       return []
     }
 
-    const users = await $fetch<any[]>('https://jsonplaceholder.typicode.com/users', { params: { q } })
+    const users: any[] = await $fetch('https://jsonplaceholder.typicode.com/users', { params: { q } })
 
     return users.map(user => ({ id: user.id, label: user.name, suffix: user.email }))
   }
