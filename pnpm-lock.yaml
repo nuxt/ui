@@ -110,9 +110,6 @@ importers:
       release-it:
         specifier: ^17.6.0
         version: 17.6.0(typescript@5.5.3)
-      typescript:
-        specifier: ^5.5.3
-        version: 5.5.3
       unbuild:
         specifier: ^2.0.0
         version: 2.0.0(typescript@5.5.3)(vue-tsc@2.0.26(typescript@5.5.3))
@@ -203,9 +200,6 @@ importers:
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
-      typescript:
-        specifier: ^5.5.3
-        version: 5.5.3
       ufo:
         specifier: ^1.5.4
         version: 1.5.4

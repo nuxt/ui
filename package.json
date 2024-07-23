@@ -68,7 +68,6 @@
     "joi": "^17.13.3",
     "nuxt": "^3.12.4",
     "release-it": "^17.6.0",
-    "typescript": "^5.5.3",
     "unbuild": "^2.0.0",
     "valibot": "^0.36.0",
     "valibot30": "npm:valibot@0.30.0",

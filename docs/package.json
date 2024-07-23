@@ -23,7 +23,6 @@
     "nuxt-component-meta": "^0.6.4",
     "nuxt-og-image": "^3.0.0-rc.64",
     "prettier": "^3.3.3",
-    "typescript": "^5.5.3",
     "ufo": "^1.5.4",
     "v-calendar": "^3.1.2",
     "valibot": "^0.36.0",
