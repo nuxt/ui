@@ -75,7 +75,7 @@
     "valibot30": "npm:valibot@0.30.0",
     "vitest": "^2.0.3",
     "vitest-environment-nuxt": "^1.0.0",
-    "vue-tsc": "^2.0.16",
+    "vue-tsc": "^2.0.26",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
   },
@@ -83,6 +83,6 @@
     "@nuxt/ui": "workspace:*",
     "@nuxt/module-builder": "0.5.5",
     "nuxt-component-meta": "0.6.4",
-    "vue-tsc": "2.0.16"
+    "vue-tsc": "2.0.26"
   }
 }
