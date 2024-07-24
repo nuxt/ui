@@ -117,43 +117,23 @@ props:
 ---
 ::
 
-### Default value
+## Examples
 
-Use the `default-value` prop to set the default value of the Tabs with the index of the item. You can also pass the value of one of the items if provided.
+### Control selected tab
 
-::component-code
----
-ignore:
-  - items
-  - content
-  - defaultValue
-external:
-  - items
-hide:
-  - class
-props:
-  defaultValue: '1'
-  class: 'w-full'
-  content: false
-  items:
-    - label: Account
-    - label: Password
----
-::
-
-### Model value
-
-You can control the selected tab by using the `v-model` directive.
+You can control the selected tab by using the `default-value` prop or the `v-model` directive with the index of the item.
 
 ::component-example
 ---
-name: 'tabs-model-value-example'
+name: 'tabs-selected-example'
 props:
   class: 'w-full'
 ---
 ::
 
-## Examples
+::tip
+You can also pass the value of one of the items if provided.
+::
 
 ### With content slot
 
