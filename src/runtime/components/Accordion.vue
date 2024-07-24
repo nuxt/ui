@@ -10,12 +10,14 @@ const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof th
 
 const accordion = tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })
 
-export interface AccordionItem extends Partial<Pick<AccordionItemProps, 'disabled' | 'value'>> {
+export interface AccordionItem extends Pick<AccordionItemProps, 'disabled'> {
   label?: string
   icon?: string
   trailingIcon?: string
   slot?: string
   content?: string
+  /** A unique value for the accordion item. Defaults to the index. */
+  value?: string
 }
 
 export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible' | 'defaultValue' | 'modelValue' | 'type' | 'disabled'> {
