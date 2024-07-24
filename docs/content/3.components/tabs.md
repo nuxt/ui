@@ -18,9 +18,9 @@ Use the `items` prop as an array of objects with the following properties:
 - `label?: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
-- `slot?: string`{lang="ts-type"}
+- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `content?: string`{lang="ts-type"}
-- `value?: StringOrNumber`{lang="ts-type"}
+- `value?: string | number`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 
 ::component-code
@@ -119,25 +119,25 @@ props:
 
 ## Examples
 
-### Control selected tab
+### Control active tab
 
-You can control the selected tab by using the `default-value` prop or the `v-model` directive with the index of the item.
+You can control the active tab by using the `default-value` prop or the `v-model` directive with the index of the item.
 
 ::component-example
 ---
-name: 'tabs-selected-example'
+name: 'tabs-model-value-example'
 props:
   class: 'w-full'
 ---
 ::
 
 ::tip
-You can also pass the value of one of the items if provided.
+You can also pass the `value` of one of the items if provided.
 ::
 
 ### With content slot
 
-Use the `#content` slot to customize each item.
+Use the `#content` slot to customize the content of each item.
 
 ::component-example
 ---
@@ -149,7 +149,7 @@ props:
 
 ### With custom slot
 
-Use the `slot` property to customize a specific item with a form for example.
+Use the `slot` property to customize a specific item.
 
 ::component-example
 ---

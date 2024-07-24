@@ -8,16 +8,16 @@ const items = [
   }
 ]
 
-const selected = ref('1')
+const active = ref('1')
 
 // Note: This is for demonstration purposes only.
 onMounted(() => {
   setInterval(() => {
-    selected.value = selected.value === '0' ? '1' : '0'
-  }, 1000)
+    active.value = active.value === '0' ? '1' : '0'
+  }, 2000)
 })
 </script>
 
 <template>
-  <UTabs v-model="selected" :content="false" :items="items" />
+  <UTabs v-model="active" :content="false" :items="items" />
 </template>

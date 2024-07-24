@@ -11,17 +11,19 @@ const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> 
 
 const tabs = tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })
 
-export interface TabsItem extends Partial<Pick<TabsTriggerProps, 'disabled' | 'value'>> {
+export interface TabsItem extends Pick<TabsTriggerProps, 'disabled'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
   slot?: string
   content?: string
+  /** A unique value for the tab item. Defaults to the index. */
+  value?: string | number
 }
 
 type TabsVariants = VariantProps<typeof tabs>
 
-export interface TabsProps<T> extends Pick<TabsRootProps, 'defaultValue' | 'modelValue' | 'activationMode'> {
+export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -45,7 +47,7 @@ export interface TabsProps<T> extends Pick<TabsRootProps, 'defaultValue' | 'mode
   ui?: PartialString<typeof tabs.slots>
 }
 
-export interface TabsEmits extends TabsRootEmits {}
+export interface TabsEmits extends TabsRootEmits<string | number> {}
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
