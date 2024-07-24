@@ -88,7 +88,7 @@ Use the `close` prop to display a [Button](/components/button) to dismiss the Al
 A `close` event will be emitted when the close button is clicked.
 ::
 
-Use the `close-icon` prop to customize this icon. Defaults to `i-heroicons-x-mark-20-solid`.
+Use the `close-icon` prop to customize the button [Icon](/components/icon). Defaults to `i-heroicons-x-mark-20-solid`.
 
 ::component-code
 ---
