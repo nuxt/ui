@@ -41,8 +41,59 @@ props:
 ---
 ::
 
+### Content
+
+Use the `content` prop to control how the Tabs are rendered.
+
+You can set it to `false` to prevent the Tabs from rendering any content and act as a toggle.
+
+::component-code
+---
+ignore:
+  - content
+external:
+  - items
+hide:
+  - class
+props:
+  class: 'w-full'
+  content: false
+  items:
+    - label: Account
+      icon: 'i-heroicons-user'
+      content: 'This is the account content.'
+    - label: Password
+      icon: 'i-heroicons-lock-closed'
+      content: 'This is the password content.'
+---
+::
+
+You can also choose to only render the content of the active tab by setting `content.forceMount` to `false`.
+
+::component-code
+---
+ignore:
+  - content.forceMount
+external:
+  - items
+hide:
+  - class
+props:
+  class: 'w-full'
+  content:
+    forceMount: false
+  items:
+    - label: Account
+      icon: 'i-heroicons-user'
+      content: 'This is the account content.'
+    - label: Password
+      icon: 'i-heroicons-lock-closed'
+      content: 'This is the password content.'
+---
+::
+
 ::tip
-You can use Tabs without content by setting the `content` prop to `false`.
+You can inspect the DOM to see that the content of the inactive tab is not rendered.
 ::
 
 ### Style
@@ -52,7 +103,6 @@ Use the `color` and `variant` props to change the style of the Tabs.
 ::component-code
 ---
 ignore:
-  - items
   - content
 external:
   - items
@@ -76,7 +126,6 @@ Use the `size` prop to change the size of the Tabs.
 ::component-code
 ---
 ignore:
-  - items
   - content
 external:
   - items
@@ -100,7 +149,6 @@ Use the `orientation` prop to change the orientation of the Tabs.
 ::component-code
 ---
 ignore:
-  - items
   - content
 external:
   - items
