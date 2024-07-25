@@ -37,7 +37,7 @@
     "@headlessui/tailwindcss": "^0.2.1",
     "@headlessui/vue": "^1.7.22",
     "@iconify-json/heroicons": "^1.1.22",
-    "@nuxt/icon": "^1.2.1",
+    "@nuxt/icon": "^1.3.1",
     "@nuxt/kit": "^3.12.4",
     "@nuxtjs/color-mode": "^3.4.2",
     "@nuxtjs/tailwindcss": "^6.12.1",
@@ -55,7 +55,7 @@
     "pathe": "^1.1.2",
     "scule": "^1.3.0",
     "tailwind-merge": "^2.4.0",
-    "tailwindcss": "^3.4.6"
+    "tailwindcss": "^3.4.7"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.3.13",
@@ -72,7 +72,7 @@
     "valibot": "^0.36.0",
     "valibot30": "npm:valibot@0.30.0",
     "valibot31": "npm:valibot@0.31.0",
-    "vitest": "^2.0.3",
+    "vitest": "^2.0.4",
     "vitest-environment-nuxt": "^1.0.0",
     "vue-tsc": "^2.0.29",
     "yup": "^1.4.0",
