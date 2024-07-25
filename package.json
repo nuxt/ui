@@ -74,13 +74,12 @@
     "valibot31": "npm:valibot@0.31.0",
     "vitest": "^2.0.3",
     "vitest-environment-nuxt": "^1.0.0",
-    "vue-tsc": "^2.0.26",
+    "vue-tsc": "^2.0.29",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
-    "nuxt-component-meta": "0.6.4",
-    "vue-tsc": "2.0.26"
+    "nuxt-component-meta": "0.6.4"
   }
 }
