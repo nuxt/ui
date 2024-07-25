@@ -31,7 +31,7 @@
 import { computed, defineComponent, toRef } from 'vue'
 import type { SlotsType, PropType } from 'vue'
 import { twJoin } from 'tailwind-merge'
-import { UIcon } from '#components'
+import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
 import type { Strategy, MeterColor, MeterSize } from '../../types'

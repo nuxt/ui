@@ -1,7 +1,7 @@
 import { h, cloneVNode, computed, toRef, defineComponent } from 'vue'
 import type { ComputedRef, VNode, SlotsType, PropType } from 'vue'
 import { twJoin } from 'tailwind-merge'
-import { UIcon } from '#components'
+import UIcon from '../elements/Icon.vue'
 import Meter from './Meter.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getSlotsChildren } from '../../utils'
