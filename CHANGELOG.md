@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.18.1](https://github.com/nuxt/ui/compare/v2.18.0...v2.18.1) (2024-07-25)
+
+
+### Bug Fixes
+
+* **components:** use relative imports ([ea721a3](https://github.com/nuxt/ui/commit/ea721a3705cfbcef3075f8c9c1f4acf359974597))
+
 ## [2.18.0](https://github.com/nuxt/ui/compare/v2.17.0...v2.18.0) (2024-07-25)
 
 
