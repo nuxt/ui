@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.18.2](https://github.com/nuxt/ui/compare/v2.18.1...v2.18.2) (2024-07-25)
+
+
+### Bug Fixes
+
+* **Tabs:** add missing `UIcon` import ([4fd1be2](https://github.com/nuxt/ui/commit/4fd1be28922bf39584005c14982e5cd9a7d0c624))
+
 ## [2.18.1](https://github.com/nuxt/ui/compare/v2.18.0...v2.18.1) (2024-07-25)
 
 
