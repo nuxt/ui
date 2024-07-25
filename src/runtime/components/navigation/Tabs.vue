@@ -57,6 +57,7 @@ import { toRef, ref, watch, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel, provideUseId } from '@headlessui/vue'
 import { useResizeObserver } from '@vueuse/core'
+import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
 import type { TabItem, Strategy } from '../../types'
@@ -69,6 +70,7 @@ const config = mergeConfig<typeof tabs>(appConfig.ui.strategy, appConfig.ui.tabs
 
 export default defineComponent({
   components: {
+    UIcon,
     HTabGroup,
     HTabList,
     HTab,
