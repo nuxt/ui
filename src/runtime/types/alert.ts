@@ -8,5 +8,5 @@ export type AlertColor = keyof typeof alert.color | ExtractDeepKey<AppConfig, ['
 export type AlertVariant = keyof typeof alert.variant | ExtractDeepKey<AppConfig, ['ui', 'alert', 'variant']> | NestedKeyOf<typeof alert.color> | NestedKeyOf<ExtractDeepObject<AppConfig, ['ui', 'alert', 'color']>>
 
 export interface AlertAction extends Button {
-  click?: Function
+  click?: (...args: any[]) => void
 }

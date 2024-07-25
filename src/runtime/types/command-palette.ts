@@ -22,8 +22,8 @@ export interface Group {
   active?: string
   inactive?: string
   commands?: Command[]
-  search?: Function
-  filter?: Function
+  search?: (...args: any[]) => any[] | Promise<any[]>
+  filter?: (...args: any[]) => Command[]
   static?: Boolean
   [key: string]: any
 }
