@@ -31,8 +31,8 @@ export interface AvatarProps extends Pick<AvatarFallbackProps, 'delayMs'> {
 import { computed } from 'vue'
 import { AvatarRoot, AvatarImage, AvatarFallback, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { UIcon } from '#components'
-import { useAvatarGroup } from '#imports'
+import { useAvatarGroup } from '../composables/useAvatarGroup'
+import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 

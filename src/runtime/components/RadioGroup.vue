@@ -53,7 +53,8 @@ export interface RadioGroupSlots<T> {
 import { computed } from 'vue'
 import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { useId, useFormField } from '#imports'
+import { useId } from '#imports'
+import { useFormField } from '../composables/useFormField'
 
 const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
   orientation: 'vertical'

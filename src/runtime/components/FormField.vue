@@ -38,7 +38,8 @@ export interface FormFieldSlots {
 <script lang="ts" setup>
 import { computed, ref, inject, provide, type Ref } from 'vue'
 import { Label } from 'radix-vue'
-import { useId, formFieldInjectionKey } from '#imports'
+import { useId } from '#imports'
+import { formFieldInjectionKey } from '../composables/useFormField'
 import type { FormError } from '../types/form'
 
 const props = defineProps<FormFieldProps>()

@@ -33,7 +33,7 @@ export interface ButtonGroupSlots {
 <script setup lang="ts">
 import { provide, computed } from 'vue'
 import { Primitive } from 'radix-vue'
-import { buttonGroupInjectionKey } from '#imports'
+import { buttonGroupInjectionKey } from '../composables/useButtonGroup'
 
 const props = withDefaults(defineProps<ButtonGroupProps>(), {
   orientation: 'horizontal'

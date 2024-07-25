@@ -39,7 +39,7 @@ export type SliderEmits = Omit<SliderRootEmits, 'valueCommit'> & {
 import { computed } from 'vue'
 import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { useFormField } from '#imports'
+import { useFormField } from '../composables/useFormField'
 
 const props = withDefaults(defineProps<SliderProps>(), {
   min: 0,

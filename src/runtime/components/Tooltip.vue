@@ -47,7 +47,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { UKbd } from '#components'
+import UKbd from './Kbd.vue'
 
 const props = withDefaults(defineProps<TooltipProps>(), {
   portal: true

@@ -54,7 +54,8 @@ export interface SwitchSlots {
 import { computed } from 'vue'
 import { SwitchRoot, SwitchThumb, useForwardProps, Label } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { useId, useAppConfig, useFormField } from '#imports'
+import { useId, useAppConfig } from '#imports'
+import { useFormField } from '../composables/useFormField'
 
 const props = defineProps<SwitchProps>()
 const slots = defineSlots<SwitchSlots>()

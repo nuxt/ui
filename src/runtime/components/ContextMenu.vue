@@ -62,7 +62,7 @@ export type ContextMenuSlots<T extends { slot?: string }> = {
 import { computed, toRef } from 'vue'
 import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { UContextMenuContent } from '#components'
+import UContextMenuContent from './ContextMenuContent.vue'
 import { omit } from '../utils'
 
 const props = withDefaults(defineProps<ContextMenuProps<T>>(), {

@@ -30,7 +30,7 @@ export interface KbdSlots {
 
 <script setup lang="ts">
 import { Primitive } from 'radix-vue'
-import { useKbd } from '#imports'
+import { useKbd } from '../composables/useKbd'
 
 const props = withDefaults(defineProps<KbdProps>(), {
   as: 'kbd'

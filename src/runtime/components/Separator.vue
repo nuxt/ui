@@ -45,7 +45,8 @@ export interface SeparatorSlots {
 import { computed } from 'vue'
 import { Separator, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { UAvatar, UIcon } from '#components'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 const props = withDefaults(defineProps<SeparatorProps>(), {
   orientation: 'horizontal'

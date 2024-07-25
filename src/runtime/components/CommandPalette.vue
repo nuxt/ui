@@ -98,8 +98,12 @@ import { ComboboxRoot, ComboboxInput, ComboboxPortal, ComboboxContent, ComboboxE
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
-import { UInput, UAvatar, UIcon, UKbd, UChip } from '#components'
 import { useAppConfig } from '#imports'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
+import UChip from './Chip.vue'
+import UKbd from './Kbd.vue'
+import UInput from './Input.vue'
 import { omit } from '../utils'
 import { highlight } from '../utils/fuse'
 

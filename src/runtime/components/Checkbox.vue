@@ -49,7 +49,8 @@ export interface CheckboxSlots {
 import { computed } from 'vue'
 import { CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { useId, useAppConfig, useFormField } from '#imports'
+import { useId, useAppConfig } from '#imports'
+import { useFormField } from '../composables/useFormField'
 
 const props = defineProps<CheckboxProps>()
 const slots = defineSlots<CheckboxSlots>()

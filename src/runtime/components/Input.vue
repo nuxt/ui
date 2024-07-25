@@ -48,8 +48,10 @@ export interface InputSlots {
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
-import { useComponentIcons, useFormField, useButtonGroup } from '#imports'
-import { UIcon } from '#components'
+import { useButtonGroup } from '../composables/useButtonGroup'
+import { useComponentIcons } from '../composables/useComponentIcons'
+import { useFormField } from '../composables/useFormField'
+import UIcon from './Icon.vue'
 import { looseToNumber } from '../utils'
 
 defineOptions({ inheritAttrs: false })

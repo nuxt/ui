@@ -4,9 +4,6 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
-import { FormValidationException } from '../types/form'
-
-import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, useId } from '#imports'
 
 const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
 
@@ -36,7 +33,10 @@ export interface FormSlots {
 <script lang="ts" setup generic="T extends object">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed } from 'vue'
 import { useEventBus } from '@vueuse/core'
+import { useId } from '#imports'
+import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey } from '../composables/useFormField'
 import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '../utils/form'
+import { FormValidationException } from '../types/form'
 
 const props = withDefaults(defineProps<FormProps<T>>(), {
   validateOn() {

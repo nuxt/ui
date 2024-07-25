@@ -93,8 +93,13 @@ import { computed, toRef } from 'vue'
 import { SelectRoot, SelectTrigger, SelectValue, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig, useComponentIcons, useFormField, useButtonGroup } from '#imports'
-import { UIcon, UChip, UAvatar } from '#components'
+import { useAppConfig } from '#imports'
+import { useButtonGroup } from '../composables/useButtonGroup'
+import { useComponentIcons } from '../composables/useComponentIcons'
+import { useFormField } from '../composables/useFormField'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
+import UChip from './Chip.vue'
 
 const props = withDefaults(defineProps<SelectProps<T>>(), {
   valueKey: 'value' as any,

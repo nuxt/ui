@@ -62,7 +62,8 @@ export interface AlertSlots {
 import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useAppConfig } from '#imports'
-import { UIcon, UAvatar } from '#components'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 const props = defineProps<AlertProps>()
 const emits = defineEmits<AlertEmits>()

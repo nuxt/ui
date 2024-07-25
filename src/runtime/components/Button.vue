@@ -36,8 +36,10 @@ export interface ButtonSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useForwardProps } from 'radix-vue'
-import { useComponentIcons, useButtonGroup } from '#imports'
-import { UIcon, ULink } from '#components'
+import { useComponentIcons } from '../composables/useComponentIcons'
+import { useButtonGroup } from '../composables/useButtonGroup'
+import UIcon from './Icon.vue'
+import ULink from './Link.vue'
 import { pickLinkProps } from '../utils/link'
 
 const props = defineProps<ButtonProps>()

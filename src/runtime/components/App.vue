@@ -17,7 +17,9 @@ import { toRef } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useId } from '#imports'
-import { UToaster, UModalProvider, USlideoverProvider } from '#components'
+import UToaster from './Toaster.vue'
+import UModalProvider from './ModalProvider.vue'
+import USlideoverProvider from './SlideoverProvider.vue'
 
 const props = withDefaults(defineProps<AppProps>(), {
   useId: () => useId()

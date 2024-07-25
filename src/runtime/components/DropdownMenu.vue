@@ -71,7 +71,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { UDropdownMenuContent } from '#components'
+import UDropdownMenuContent from './DropdownMenuContent.vue'
 import { omit } from '../utils'
 
 const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {

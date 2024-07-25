@@ -60,7 +60,8 @@ import { ref, computed, onMounted } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { UIcon, UAvatar } from '#components'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 const props = withDefaults(defineProps<ToastProps>(), {
   close: true

@@ -59,7 +59,7 @@ import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { UButton } from '#components'
+import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<ModalProps>(), {
   close: true,

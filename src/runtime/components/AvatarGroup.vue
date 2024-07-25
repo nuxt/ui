@@ -33,8 +33,8 @@ export interface AvatarGroupSlots {
 <script setup lang="ts">
 import { computed, provide } from 'vue'
 import { Primitive } from 'radix-vue'
-import { UAvatar } from '#components'
-import { avatarGroupInjectionKey } from '#imports'
+import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
+import UAvatar from './Avatar.vue'
 
 const props = defineProps<AvatarGroupProps>()
 const slots = defineSlots<AvatarGroupSlots>()
