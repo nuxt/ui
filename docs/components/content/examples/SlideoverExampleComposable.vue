@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { SlideoverExampleComponent } from '#components'
+
 const slideover = useSlideover()
 const count = ref(0)
 function openSlideover () {
