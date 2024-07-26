@@ -82,7 +82,7 @@ Use the `size` prop to change the size of the Kbd.
 ::component-code
 ---
 props:
-  size: md
+  size: lg
 slots:
   default: K
 ---

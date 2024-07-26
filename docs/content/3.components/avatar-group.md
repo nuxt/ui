@@ -34,7 +34,7 @@ Use the `size` prop to change the size of all the avatars.
 ---
 prettier: true
 props:
-  size: md
+  size: xl
 slots:
   default: |
 

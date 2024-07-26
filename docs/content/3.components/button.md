@@ -66,7 +66,7 @@ Use the `size` prop to change the size of the Button.
 ::component-code
 ---
 props:
-  size: md
+  size: xl
 slots:
   default: Button
 ---
@@ -93,7 +93,6 @@ Use the `leading` and `trailing` props to set the icon position or the `leading-
 ::component-code
 ---
 props:
-  leadingIcon: ''
   trailingIcon: i-heroicons-arrow-right
   size: md
 slots:

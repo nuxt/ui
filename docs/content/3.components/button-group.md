@@ -32,7 +32,7 @@ Use the `size` prop to change the size of all the buttons.
 ---
 prettier: true
 props:
-  size: md
+  size: xl
 slots:
   default: |
 
