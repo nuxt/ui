@@ -44,7 +44,10 @@ import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 
-const props = defineProps<ChipProps>()
+const props = withDefaults(defineProps<ChipProps>(), {
+  inset: false,
+  standalone: false
+})
 defineSlots<ChipSlots>()
 
 const show = defineModel<boolean>('show', { default: true })

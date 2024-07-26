@@ -126,6 +126,7 @@ export default defineNuxtConfig({
         'UButton',
         'UButtonGroup',
         'UCheckbox',
+        'UChip',
         'UIcon',
         'UInput',
         'UKbd',

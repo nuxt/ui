@@ -10,7 +10,7 @@ const items = [
 
 const active = ref('0')
 
-// Note: This is for demonstration purposes only.
+// Note: This is for demonstration purposes only. Don't do this at home.
 onMounted(() => {
   setInterval(() => {
     active.value = String((Number(active.value) + 1) % items.length)
