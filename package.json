@@ -49,7 +49,8 @@
     "@nuxt/kit": "^3.12.4",
     "@nuxt/schema": "^3.12.4",
     "@nuxtjs/color-mode": "^3.4.2",
-    "@tailwindcss/vite": "4.0.0-alpha.17",
+    "@tailwindcss/postcss": "4.0.0-alpha.18",
+    "@tailwindcss/vite": "4.0.0-alpha.18",
     "@vueuse/core": "^10.11.0",
     "@vueuse/integrations": "^10.11.0",
     "defu": "^6.1.4",
@@ -58,7 +59,7 @@
     "radix-vue": "^1.9.2",
     "scule": "^1.3.0",
     "tailwind-variants": "^0.2.1",
-    "tailwindcss": "4.0.0-alpha.17",
+    "tailwindcss": "4.0.0-alpha.18",
     "vaul-vue": "^0.2.0"
   },
   "devDependencies": {
