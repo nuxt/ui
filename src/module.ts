@@ -1,6 +1,5 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule } from '@nuxt/kit'
-import tailwindcss from '@tailwindcss/vite'
 import { addTemplates } from './templates'
 import icons from './theme/icons'
 
@@ -63,11 +62,14 @@ export default defineNuxtModule<ModuleOptions>({
     // Add keyframes for animations
     nuxt.options.css.push(resolve('./runtime/assets/css/animations.css'))
 
-    addVitePlugin(tailwindcss)
+    if (nuxt.options.builder === '@nuxt/vite-builder') {
+      const plugin = await import('@tailwindcss/vite').then(r => r.default)
+      addVitePlugin(plugin())
+    } else {
+      nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
+    }
 
-    await installModule('@nuxt/icon', {
-      cssLayer: 'components'
-    })
+    await installModule('@nuxt/icon', { cssLayer: 'components' })
     // await installModule('@nuxtjs/color-mode', { classSuffix: '' })
 
     addPlugin({
