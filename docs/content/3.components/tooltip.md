@@ -21,10 +21,13 @@ Use the `text` prop to set the content of the Tooltip.
 
 ::component-code
 ---
+prettier: true
 props:
   text: 'Open on GitHub'
 slots:
-  default: <UButton icon="i-simple-icons-github" />
+  default: |
+
+    <UButton icon="i-simple-icons-github" />
 ---
 
 :u-button{icon="i-simple-icons-github"}
@@ -36,6 +39,7 @@ Use the `kbds` prop to render [Kbd](/components/kbd) components in the Tooltip.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - text
   - kbds
@@ -45,7 +49,9 @@ props:
     - meta
     - G
 slots:
-  default: <UButton icon="i-simple-icons-github" />
+  default: |
+
+    <UButton icon="i-simple-icons-github" />
 ---
 
 :u-button{icon="i-simple-icons-github"}
@@ -61,13 +67,16 @@ Use the `delay-duration` prop to change the delay before the Tooltip appears. Fo
 
 ::component-code
 ---
+prettier: true
 ignore:
   - text
 props:
   delayDuration: 0
   text: 'Open on GitHub'
 slots:
-  default: <UButton icon="i-simple-icons-github" />
+  default: |
+
+    <UButton icon="i-simple-icons-github" />
 ---
 
 :u-button{icon="i-simple-icons-github"}
@@ -83,6 +92,7 @@ Use the `arrow` prop to display an arrow on the Tooltip.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - text
   - arrow
@@ -90,7 +100,9 @@ props:
   arrow: true
   text: 'Open on GitHub'
 slots:
-  default: <UButton icon="i-simple-icons-github" />
+  default: |
+
+    <UButton icon="i-simple-icons-github" />
 ---
 
 :u-button{icon="i-simple-icons-github"}
@@ -102,6 +114,7 @@ Use the `content` prop to control how the Tooltip content is rendered, like its 
 
 ::component-code
 ---
+prettier: true
 ignore:
   - text
 items:
@@ -116,7 +129,9 @@ props:
     sideOffset: 8
   text: 'Open on GitHub'
 slots:
-  default: <UButton icon="i-simple-icons-github" />
+  default: |
+
+    <UButton icon="i-simple-icons-github" />
 ---
 
 :u-button{icon="i-simple-icons-github"}
@@ -132,13 +147,16 @@ Use the `disabled` prop to disable the Tooltip.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - text
 props:
   disabled: true
   text: 'Open on GitHub'
 slots:
-  default: <UButton icon="i-simple-icons-github" />
+  default: |
+
+    <UButton icon="i-simple-icons-github" />
 ---
 
 :u-button{icon="i-simple-icons-github"}

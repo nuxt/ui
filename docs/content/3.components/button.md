@@ -172,6 +172,7 @@ Use the `ui` prop to override the slots styles of the Button.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - ui
   - color

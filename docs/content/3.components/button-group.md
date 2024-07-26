@@ -13,6 +13,7 @@ Wrap multiple [Button](/components/button) within a ButtonGroup to group them to
 
 ::component-code
 ---
+prettier: true
 slots:
   default: |
 
@@ -29,6 +30,7 @@ Use the `size` prop to change the size of all the buttons.
 
 ::component-code
 ---
+prettier: true
 props:
   size: md
 slots:
@@ -47,6 +49,7 @@ Use the `orientation` prop to change the orientation of the buttons.
 
 ::component-code
 ---
+prettier: true
 props:
   orientation: vertical
 slots:
@@ -67,6 +70,7 @@ You can use components like [Input](/components/input), [InputMenu](/components/
 
 ::component-code
 ---
+prettier: true
 slots:
   default: |
 

@@ -4,6 +4,11 @@ import { camelCase } from 'scule'
 const props = defineProps<{
   name: string
   props?: { [key: string]: any }
+  /**
+   * Whether to format the code with Prettier
+   * @defaultValue false
+   */
+  prettier?: boolean
 }>()
 
 const { $prettier } = useNuxtApp()
@@ -17,6 +22,10 @@ const componentProps = reactive({ ...(props.props || {}) })
 const code = computed(() => `\`\`\`vue\n${data?.code ?? ''}\n\`\`\``)
 
 const { data: ast } = await useAsyncData(`component-example-${camelName}`, async () => {
+  if (!props.prettier) {
+    return parseMarkdown(code.value)
+  }
+
   let formatted = ''
   try {
     formatted = await $prettier.format(code.value, {

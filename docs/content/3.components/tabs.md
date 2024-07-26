@@ -72,6 +72,7 @@ You can also choose to only render the content of the active tab by setting `con
 
 ::component-code
 ---
+prettier: true
 ignore:
   - content.forceMount
 external:

@@ -13,6 +13,7 @@ Wrap multiple [Avatar](/components/avatar) within an AvatarGroup to stack them.
 
 ::component-code
 ---
+prettier: true
 slots:
   default: |
 
@@ -31,6 +32,7 @@ Use the `size` prop to change the size of all the avatars.
 
 ::component-code
 ---
+prettier: true
 props:
   size: md
 slots:
@@ -51,10 +53,12 @@ Use the `max` prop to limit the number of avatars displayed. The rest will be di
 
 ::component-code
 ---
+prettier: true
 props:
   max: 2
 slots:
-  default: >
+  default: |
+
     <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" />
     <UAvatar src="https://avatars.githubusercontent.com/u/25613751?v=4" alt="Romain Hamel" />
     <UAvatar src="https://avatars.githubusercontent.com/u/19751938?v=4" alt="Neil Richter" />

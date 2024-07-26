@@ -23,6 +23,7 @@ Use the `description` prop to set the description of the Alert.
 
 ::component-code
 ---
+prettier: true
 props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
@@ -35,6 +36,7 @@ Use the `icon` prop to show an [Icon](/components/icon).
 
 ::component-code
 ---
+prettier: true
 ignore:
   - title
   - description
@@ -51,6 +53,7 @@ Use the `avatar` prop to show an [Avatar](/components/avatar).
 
 ::component-code
 ---
+prettier: true
 ignore:
   - title
   - description
@@ -67,6 +70,7 @@ Use the `color` and `variant` props to change the style of the Alert.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - title
   - description
@@ -92,6 +96,7 @@ Use the `close-icon` prop to customize the button [Icon](/components/icon). Defa
 
 ::component-code
 ---
+prettier: true
 ignore:
   - title
   - description
@@ -112,6 +117,7 @@ You can pass all the props of the [Button](/components/button) component to cust
 
 ::component-code
 ---
+prettier: true
 ignore:
   - title
   - description
@@ -133,6 +139,7 @@ Use the `actions` prop to add some [Button](/components/button) actions to the A
 
 ::component-code
 ---
+prettier: true
 ignore:
   - title
   - actions
@@ -159,6 +166,7 @@ Use the `class` prop to override the base styles of the Button.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - title
   - description
@@ -175,6 +183,7 @@ Use the `ui` prop to override the slots styles of the Button.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - ui
   - title

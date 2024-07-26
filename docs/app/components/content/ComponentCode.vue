@@ -16,6 +16,11 @@ const props = defineProps<{
   items?: { [key: string]: string[] }
   props?: { [key: string]: any }
   slots?: { [key: string]: any }
+  /**
+   * Whether to format the code with Prettier
+   * @defaultValue false
+   */
+  prettier?: boolean
 }>()
 
 const route = useRoute()
@@ -85,20 +90,23 @@ const code = computed(() => {
 <script setup lang="ts">
 `
     for (const key of props.external) {
-      code += `const ${key} = ${json5.stringify(componentProps[key], null, 2).replace(/,([ |\t\n]+[}|\]])/g, '$1')}
-
+      code += `const ${key === 'modelValue' ? 'value' : key} = ref(${json5.stringify(componentProps[key], null, 2).replace(/,([ |\t\n]+[}|\]])/g, '$1')})
 `
     }
-    code += `
-<\/script>
+    code += `<\/script>
 `
   }
 
   code += `
 <template>
-<${name}`
+  <${name}`
   for (const [key, value] of Object.entries(componentProps)) {
     if (value === undefined || value === null || value === '' || props.hide?.includes(key)) {
+      continue
+    }
+
+    if (key === 'modelValue') {
+      code += ` v-model="value"`
       continue
     }
 
@@ -130,13 +138,7 @@ const code = computed(() => {
 
   if (props.slots) {
     if (props.slots && Object.keys(props.slots).length === 1 && props.slots.default) {
-      if (Object.keys(props.props || {}).length > 0) {
-        code += `>
-${props.slots.default}
-</${name}>`
-      } else {
-        code += `>${props.slots.default}</${name}>`
-      }
+      code += `>${props.slots.default}</${name}>`
     } else {
       code += `>
   ${Object.entries(props.slots).map(([key, value]) => `<template #${key}>
@@ -155,6 +157,10 @@ ${props.slots.default}
 })
 
 const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringify({ props: componentProps, slots: props.slots })}`, async () => {
+  if (!props.prettier) {
+    return parseMarkdown(code.value)
+  }
+
   let formatted = ''
   try {
     formatted = await $prettier.format(code.value, {
