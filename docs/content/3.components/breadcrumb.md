@@ -36,7 +36,7 @@ props:
 ---
 ::
 
-::tip
+::note
 A `span` will be rendered instead of a link when the `to` property is not defined.
 ::
 

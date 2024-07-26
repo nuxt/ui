@@ -107,7 +107,7 @@ props:
 
 Use the `close` prop to display a [Button](/components/button) to dismiss the Alert.
 
-::note
+::tip
 A `close` event will be emitted when the close button is clicked.
 ::
 
@@ -173,7 +173,7 @@ props:
 ---
 ::
 
-::tip
+::note
 Actions will render differently when the description is not set. You can try to remove it.
 ::
 

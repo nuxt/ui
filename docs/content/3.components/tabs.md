@@ -93,7 +93,7 @@ props:
 ---
 ::
 
-::tip
+::note
 You can inspect the DOM to see that the content of the inactive tab is not rendered.
 ::
 

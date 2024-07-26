@@ -34,7 +34,7 @@ slots:
 ---
 ::
 
-::tip
+::note
 You can inspect the rendered HTML by changing the `to` prop.
 ::
 
@@ -51,7 +51,7 @@ slots:
 ---
 ::
 
-::tip
+::note
 Try changing the `to` prop to see the active and inactive states.
 ::
 

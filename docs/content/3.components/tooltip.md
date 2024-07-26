@@ -11,7 +11,7 @@ links:
 
 ## Usage
 
-::note
+::important
 Make sure to wrap your app with the [`App`](/components/app) component to make the Tooltip work properly.
 ::
 
@@ -135,10 +135,6 @@ slots:
 ---
 
 :u-button{icon="i-simple-icons-github"}
-::
-
-::tip{to="https://www.radix-vue.com/components/tooltip#content" target="_blank"}
-Take a look at all the `TooltipContent` props available in the Radix Vue documentation.
 ::
 
 ### Disabled

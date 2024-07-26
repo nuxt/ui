@@ -72,7 +72,7 @@ props:
 ---
 ::
 
-::tip
+::note
 The `alt` prop will be used as the `alt` attribute of the image.
 ::
 
