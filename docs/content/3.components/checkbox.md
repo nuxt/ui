@@ -1,5 +1,5 @@
 ---
-description: Display a checkbox field.
+description: An input element to toggle between checked and unchecked states.
 links:
   - label: Checkbox
     icon: i-custom-radix-vue

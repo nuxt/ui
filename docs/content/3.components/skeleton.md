@@ -1,5 +1,5 @@
 ---
-description: Display a placeholder while content is loading.
+description: A placeholder to show while content is loading.
 links:
   - label: GitHub
     icon: i-simple-icons-github

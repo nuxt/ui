@@ -1,5 +1,5 @@
 ---
-description: Show a horizontal bar to indicate task progression.
+description: An indicator showing the progress of a task.
 links:
   - label: Progress
     icon: i-custom-radix-vue

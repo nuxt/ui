@@ -1,5 +1,5 @@
 ---
-description: Display a textarea field.
+description: A textarea element to input multi-line text.
 links:
   - label: GitHub
     icon: i-simple-icons-github

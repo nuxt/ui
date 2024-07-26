@@ -1,5 +1,5 @@
 ---
-description: Display a callout to draw user attention.
+description: A callout to draw user's attention.
 links:
   - label: GitHub
     icon: i-simple-icons-github

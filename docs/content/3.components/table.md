@@ -1,5 +1,5 @@
 ---
-description: Display data in a table.
+description: A responsive table element to display data in rows and columns.
 links:
   - label: GitHub
     icon: i-simple-icons-github

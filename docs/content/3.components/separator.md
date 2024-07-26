@@ -1,5 +1,5 @@
 ---
-description: Display a separator between content.
+description: Separates content horizontally or vertically.
 links:
   - label: Separator
     icon: i-custom-radix-vue

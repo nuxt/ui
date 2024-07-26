@@ -1,5 +1,5 @@
 ---
-description: Display an image element with fallback.
+description: An image element with fallback.
 links:
   - label: Avatar
     icon: i-custom-radix-vue

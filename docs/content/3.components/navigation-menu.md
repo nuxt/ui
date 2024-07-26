@@ -1,6 +1,6 @@
 ---
 title: NavigationMenu
-description: Display a list of horizontal links.
+description: A list of links that can be displayed horizontally or vertically.
 links:
   - label: NavigationMenu
     icon: i-custom-radix-vue

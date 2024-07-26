@@ -1,5 +1,5 @@
 ---
-description: Display an input field.
+description: An input element to enter text.
 links:
   - label: GitHub
     icon: i-simple-icons-github

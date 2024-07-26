@@ -1,6 +1,6 @@
 ---
 title: FormField
-description: Display a label and additional informations around a form element.
+description: A wrapper for form elements that provides validation and error handling.
 links:
   - label: GitHub
     icon: i-simple-icons-github

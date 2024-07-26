@@ -1,5 +1,5 @@
 ---
-description: Display a chip indicator on any component.
+description: An indicator of a numeric value or a state.
 links:
   - label: GitHub
     icon: i-simple-icons-github

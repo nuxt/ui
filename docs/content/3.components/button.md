@@ -1,5 +1,5 @@
 ---
-description: Create a button with icon or link capabilities.
+description: A button element that can act as a link or trigger an action.
 links:
   - label: GitHub
     icon: i-simple-icons-github

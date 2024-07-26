@@ -1,5 +1,5 @@
 ---
-description: Display content that appears on hover next to an element.
+description: A popup that reveals information when hovering over an element.
 links:
   - label: Tooltip
     icon: i-custom-radix-vue

@@ -1,5 +1,5 @@
 ---
-description: Render a NuxtLink but with superpowers.
+description: A wrapper around <NuxtLink> with extra props.
 links:
   - label: GitHub
     icon: i-simple-icons-github

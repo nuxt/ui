@@ -1,5 +1,5 @@
 ---
-description: Display a gauge meter that fills or depletes.
+description: A gauge meter that fills or depletes.
 links:
   - label: GitHub
     icon: i-simple-icons-github

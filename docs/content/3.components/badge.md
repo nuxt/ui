@@ -1,5 +1,5 @@
 ---
-description: Display a short text to represent a status or a category.
+description: A short text to represent a status or a category.
 links:
   - label: GitHub
     icon: i-simple-icons-github

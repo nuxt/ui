@@ -1,6 +1,6 @@
 ---
 title: DropdownMenu
-description: Display a list of actions in a dropdown menu.
+description: A menu to display actions when clicking on an element.
 links:
   - label: DropdownMenu
     icon: i-custom-radix-vue

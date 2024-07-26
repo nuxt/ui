@@ -1,5 +1,5 @@
 ---
-description: Collect and validate form data.
+description: A form element that provides validation and submission handling.
 links:
   - label: GitHub
     icon: i-simple-icons-github

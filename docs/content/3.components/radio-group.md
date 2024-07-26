@@ -1,6 +1,6 @@
 ---
 title: RadioGroup
-description: Display a set of radio buttons.
+description: A set of radio buttons to select a single option from a list.
 links:
   - label: RadioGroup
     icon: i-custom-radix-vue

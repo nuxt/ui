@@ -1,5 +1,5 @@
 ---
-description: Display a non-modal dialog that floats around a trigger element.
+description: A non-modal dialog that floats around a trigger element.
 links:
   - label: Popover
     icon: i-custom-radix-vue

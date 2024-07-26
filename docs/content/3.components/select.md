@@ -1,5 +1,5 @@
 ---
-description: Display a select field.
+description: A select element to choose from a list of options.
 links:
   - label: Select
     icon: i-custom-radix-vue

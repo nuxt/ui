@@ -1,6 +1,6 @@
 ---
 title: CommandPalette
-description: Add a customizable command palette to your app.
+description: A command palette to search and execute commands with full-text search.
 links:
   - label: Combobox
     icon: i-custom-radix-vue

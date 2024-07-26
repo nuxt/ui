@@ -1,5 +1,5 @@
 ---
-description: Display images or content in a scrollable area.
+description: A carousel with motion and swipe support.
 links:
   - label: GitHub
     icon: i-simple-icons-github

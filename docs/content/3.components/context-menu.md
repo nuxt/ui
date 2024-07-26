@@ -1,6 +1,6 @@
 ---
 title: ContextMenu
-description: Display a menu that appears on right click.
+description: A menu to display actions when right-clicking on an element.
 links:
   - label: ContextMenu
     icon: i-custom-radix-vue

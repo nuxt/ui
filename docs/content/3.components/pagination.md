@@ -1,5 +1,5 @@
 ---
-description: Add a pagination to handle pages.
+description: A list of buttons or links to navigate through pages.
 links:
   - label: Pagination
     icon: i-custom-radix-vue

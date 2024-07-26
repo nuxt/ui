@@ -1,5 +1,5 @@
 ---
-description: Display a modal within your application.
+description: A dialog window that can be used to display a message or request user input.
 links:
   - label: Dialog
     icon: i-custom-radix-vue
