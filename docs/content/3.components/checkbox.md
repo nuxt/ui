@@ -20,33 +20,42 @@ external:
 ignore:
   - label
 props:
-  label: Check me
   modelValue: true
+  label: Check me
 ---
 ::
 
-Use the `default-value` prop to set the initial value of the Checkbox when you do not need to control its state.
+Use the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::component-code
 ---
 ignore:
   - label
 props:
-  label: Check me
   defaultValue: true
+  label: Check me
 ---
 ::
+
+### Indeterminate
 
 Use the `indeterminate` prop to set the Checkbox to an [indeterminate state](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#indeterminate_state_checkboxes).
 
+Use the `indeterminate-icon` prop to customize this icon. Defaults to `i-heroicons-minus-20-solid`.
+
 ::component-code
 ---
 ignore:
   - label
 props:
-  label: Check me
   indeterminate: true
+  indeterminateIcon: ''
+  label: Check me
 ---
+::
+
+::tip
+You can customize this icon globally in your `app.config.ts` under `ui.icons.minus` key.
 ::
 
 ### Label
@@ -84,9 +93,9 @@ ignore:
   - label
   - defaultValue
 props:
-  label: Check me
   icon: 'i-heroicons-heart'
   defaultValue: true
+  label: Check me
 ---
 ::
 
@@ -104,9 +113,9 @@ ignore:
   - label
   - defaultValue
 props:
-  label: Check me
   color: gray
   defaultValue: true
+  label: Check me
 ---
 ::
 
@@ -120,21 +129,37 @@ ignore:
   - label
   - defaultValue
 props:
-  label: Check me
   size: xl
   defaultValue: true
+  label: Check me
 ---
 ::
 
-### Disabled
+### Required
+
+Use the `required` prop to make the Checkbox required.
 
 ::component-code
 ---
 ignore:
   - label
 props:
+  required: true
   label: Check me
+---
+::
+
+### Disabled
+
+Use the `disabled` prop to disable the Checkbox.
+
+::component-code
+---
+ignore:
+  - label
+props:
   disabled: true
+  label: Check me
 ---
 ::
 
