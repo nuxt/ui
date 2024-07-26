@@ -64,9 +64,9 @@ props:
 ---
 ::
 
-### Style
+### Color
 
-Use the `color` and `variant` props to change the style of the Alert.
+Use the `color` prop to change the color of the Alert.
 
 ::component-code
 ---
@@ -77,7 +77,26 @@ ignore:
   - icon
 props:
   color: gray
-  variant: outline
+  title: 'Heads up!'
+  description: 'You can change the primary color in your app config.'
+  icon: 'i-heroicons-command-line'
+---
+::
+
+### Variant
+
+Use the `variant` prop to change the variant of the Alert.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+  - description
+  - icon
+props:
+  color: gray
+  variant: solid
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
   icon: 'i-heroicons-command-line'

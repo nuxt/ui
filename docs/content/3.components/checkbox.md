@@ -103,9 +103,9 @@ props:
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
 ::
 
-### Style
+### Color
 
-Use the `color` prop to change the style of the Checkbox.
+Use the `color` prop to change the color of the Checkbox.
 
 ::component-code
 ---

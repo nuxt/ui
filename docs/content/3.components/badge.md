@@ -28,15 +28,28 @@ props:
 ---
 ::
 
-### Style
+### Color
 
-Use the `color` and `variant` props to change the style of the Badge.
+Use the `color` prop to change the color of the Badge.
 
 ::component-code
 ---
 props:
   color: gray
-  variant: solid
+slots:
+  default: Badge
+---
+::
+
+### Variant
+
+Use the `variant` props to change the variant of the Badge.
+
+::component-code
+---
+props:
+  color: gray
+  variant: outline
 slots:
   default: Badge
 ---

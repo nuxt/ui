@@ -45,15 +45,28 @@ slots:
 ---
 ::
 
-### Style
+### Color
 
-Use the `color` and `variant` props to change the style of the Button.
+Use the `color` prop to change the color of the Button.
 
 ::component-code
 ---
 props:
   color: gray
-  variant: solid
+slots:
+  default: Button
+---
+::
+
+### Variant
+
+Use the `variant` prop to change the variant of the Button.
+
+::component-code
+---
+props:
+  color: gray
+  variant: outline
 slots:
   default: Button
 ---

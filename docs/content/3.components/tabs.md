@@ -97,9 +97,31 @@ props:
 You can inspect the DOM to see that the content of the inactive tab is not rendered.
 ::
 
-### Style
+### Color
 
-Use the `color` and `variant` props to change the style of the Tabs.
+Use the `color` prop to change the color of the Tabs.
+
+::component-code
+---
+ignore:
+  - content
+external:
+  - items
+hide:
+  - class
+props:
+  color: gray
+  class: 'w-full'
+  content: false
+  items:
+    - label: Account
+    - label: Password
+---
+::
+
+### Variant
+
+Use the `variant` prop to change the variant of the Tabs.
 
 ::component-code
 ---

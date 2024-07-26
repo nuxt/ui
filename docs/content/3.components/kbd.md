@@ -62,9 +62,9 @@ items:
 ---
 ::
 
-### Style
+### Variant
 
-Use the `variant` prop to change the style of the Kbd.
+Use the `variant` prop to change the variant of the Kbd.
 
 ::component-code
 ---
