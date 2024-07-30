@@ -1,19 +1,20 @@
 <script setup lang="ts">
-const statuses = ['online', 'offline', 'busy', 'away']
+const statuses = ['online', 'away', 'busy', 'offline']
 const status = ref(statuses[0])
 
 const color = computed(() => ({
   online: 'green',
-  offline: 'gray',
+  away: 'amber',
   busy: 'red',
-  away: 'amber'
+  offline: 'gray'
 })[status.value] as any)
+
 const show = computed(() => status.value !== 'offline')
 
 // Note: This is for demonstration purposes only. Don't do this at home.
 onMounted(() => {
   setInterval(() => {
-    status.value = statuses[Math.floor(Math.random() * statuses.length)]
+    status.value = statuses[(statuses.indexOf(status.value) + 1) % statuses.length]
   }, 1000)
 })
 </script>

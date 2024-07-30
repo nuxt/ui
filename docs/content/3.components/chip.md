@@ -132,7 +132,7 @@ You can control the visibility of the Chip using the `show` prop.
 :component-example{name="chip-show-example"}
 
 ::note
-In this example, the Chip has a color per status and is only displayed when the status is not `offline`.
+In this example, the Chip has a color per status and is displayed when the status is not `offline`.
 ::
 
 ## API
