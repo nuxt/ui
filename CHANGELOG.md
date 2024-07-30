@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.18.3](https://github.com/nuxt/ui/compare/v2.18.2...v2.18.3) (2024-07-30)
+
+
+### Bug Fixes
+
+* **Link:** define `rel` as any ([69f605f](https://github.com/nuxt/ui/commit/69f605fa724454e4be9e4cee9666a5d57f43a129))
+* **types:** only use `.ts` for index ([93ddf1d](https://github.com/nuxt/ui/commit/93ddf1d60b0ea5f99f564f3d3969c397ad91cc72))
+
 ## [2.18.2](https://github.com/nuxt/ui/compare/v2.18.1...v2.18.2) (2024-07-25)
 
 
