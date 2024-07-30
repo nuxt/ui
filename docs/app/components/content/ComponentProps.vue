@@ -75,7 +75,7 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
         <ProseTd>
           <HighlightInlineType v-if="prop.type" :type="prop.type" />
 
-          <MDC v-if="prop.description" :value="prop.description" class="text-gray-600 dark:text-gray-300 mt-1 whitespace-pre" />
+          <MDC v-if="prop.description" :value="prop.description" class="text-gray-600 dark:text-gray-300 mt-1" />
 
           <ComponentPropsSchema v-if="prop.schema" :prop="prop" />
         </ProseTd>
