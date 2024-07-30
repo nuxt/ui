@@ -3,10 +3,8 @@
     "github>nuxt/renovate-config-nuxt"
   ],
   "ignoreDeps": [
-    "@nuxt/module-builder",
     "nuxt-component-meta",
     "valibot30",
-    "valibot31",
-    "vue-tsc"
+    "valibot31"
   ]
 }
