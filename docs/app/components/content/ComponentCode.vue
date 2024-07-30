@@ -137,15 +137,18 @@ const code = computed(() => {
   }
 
   if (props.slots) {
-    if (props.slots && Object.keys(props.slots).length === 1 && props.slots.default) {
-      code += `>${props.slots.default}</${name}>`
-    } else {
-      code += `>
-  ${Object.entries(props.slots).map(([key, value]) => `<template #${key}>
+    code += `>`
+    for (const [key, value] of Object.entries(props.slots)) {
+      if (key === 'default') {
+        code += props.slots.default
+      } else {
+        code += `
+  <template #${key}>
     ${value}
-  </template>`).join('\n  ')}
-</${name}>`
+  </template>`
+      }
     }
+    code += (Object.keys(props.slots).length > 1 ? '\n' : '') + `</${name}>`
   } else {
     code += ' />'
   }
