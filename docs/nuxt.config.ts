@@ -133,6 +133,7 @@ export default defineNuxtConfig({
         'ULink',
         'UProgress',
         'UTabs',
+        'UTextarea',
         'UTooltip'
       ].includes(c.pascalName))
 

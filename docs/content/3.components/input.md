@@ -15,7 +15,7 @@ Use the `v-model` directive to control the value of the Input.
 external:
   - modelValue
 props:
-  modelValue: 'benjamincanac'
+  modelValue: ''
 ---
 ::
 
