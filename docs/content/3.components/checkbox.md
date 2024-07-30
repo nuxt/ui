@@ -163,8 +163,6 @@ props:
 ---
 ::
 
-## Examples
-
 ## API
 
 ### Props
