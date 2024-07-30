@@ -101,12 +101,16 @@ const code = computed(() => {
 <template>
   <${name}`
   for (const [key, value] of Object.entries(componentProps)) {
-    if (value === undefined || value === null || value === '' || props.hide?.includes(key)) {
+    if (value === undefined || value === null || props.hide?.includes(key)) {
       continue
     }
 
     if (key === 'modelValue') {
       code += ` v-model="value"`
+      continue
+    }
+
+    if (value === '') {
       continue
     }
 
