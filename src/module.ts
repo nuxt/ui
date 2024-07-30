@@ -3,7 +3,7 @@ import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, creat
 import { name, version } from '../package.json'
 import createTemplates from './templates'
 import * as config from './runtime/ui.config'
-import type { DeepPartial, Strategy } from './runtime/types/utils'
+import type { DeepPartial, Strategy } from './runtime/types'
 import installTailwind from './tailwind'
 
 const _require = createRequire(import.meta.url)
