@@ -31,7 +31,7 @@ const meta = await fetchComponentMeta(name as any)
         <ProseTd>
           <HighlightInlineType v-if="slot.type" :type="slot.type" />
 
-          <MDC v-if="slot.description" :value="slot.description" class="text-gray-600 dark:text-gray-300 mt-1" />
+          <MDC v-if="slot.description" :value="slot.description" class="text-gray-600 dark:text-gray-300 mt-1 whitespace-pre" />
         </ProseTd>
       </ProseTr>
     </ProseTbody>
