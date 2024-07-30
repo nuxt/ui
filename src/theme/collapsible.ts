@@ -1,6 +1,6 @@
 export default {
   slots: {
-    root: '',
+    root: 'flex flex-col gap-2',
     content: 'data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden'
   }
 }

@@ -4,7 +4,7 @@ const appConfig = useAppConfig()
 
 <template>
   <div class="flex-1">
-    <UCollapsible class="space-y-2 w-48">
+    <UCollapsible class="w-48">
       <UButton
         class="group"
         icon="i-heroicons-light-bulb"
