@@ -11,6 +11,8 @@ links:
 
 ## Usage
 
+Use a [Button](/components/button) or any other component in the default slot of the Tooltip.
+
 ::important
 Make sure to wrap your app with the [`App`](/components/app) component to make the Tooltip work properly.
 ::
@@ -170,6 +172,10 @@ name: 'tooltip-open-example'
 props:
   class: 'w-full'
 ---
+::
+
+::note
+In this example, press :kbd{value="O"} to toggle the Tooltip.
 ::
 
 ## API
