@@ -21,7 +21,7 @@ export const nuxtLinkProps = {
     required: false
   },
   rel: {
-    type: String as PropType<NuxtLinkProps['rel']>,
+    type: String as PropType<any>,
     default: undefined,
     required: false
   },
