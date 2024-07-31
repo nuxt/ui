@@ -188,9 +188,9 @@ In this example, press :kbd{value="O"} to toggle the Tooltip.
 
 :component-slots
 
-### Events
+### Emits
 
-:component-events
+:component-emits
 
 ## Theme
 

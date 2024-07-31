@@ -169,9 +169,9 @@ props:
 
 :component-props
 
-### Events
+### Emits
 
-:component-events
+:component-emits
 
 ## Theme
 
