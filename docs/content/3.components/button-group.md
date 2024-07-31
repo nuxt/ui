@@ -45,7 +45,7 @@ slots:
 
 ### Orientation
 
-Use the `orientation` prop to change the orientation of the buttons.
+Use the `orientation` prop to change the orientation of the buttons. Defaults to `horizontal`.
 
 ::component-code
 ---

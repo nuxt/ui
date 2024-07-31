@@ -87,7 +87,7 @@ props:
 
 ### Orientation
 
-Use the `orientation` prop to change the orientation of the Slider.
+Use the `orientation` prop to change the orientation of the Slider. Defaults to `horizontal`.
 
 ::component-code
 ---

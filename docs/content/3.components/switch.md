@@ -17,11 +17,8 @@ Use the `v-model` directive to control the checked state of the Switch.
 ---
 external:
   - modelValue
-ignore:
-  - label
 props:
   modelValue: true
-  label: Check me
 ---
 ::
 
@@ -29,11 +26,8 @@ Use the `default-value` prop to set the initial value when you do not need to co
 
 ::component-code
 ---
-ignore:
-  - label
 props:
   defaultValue: true
-  label: Check me
 ---
 ::
 
@@ -44,6 +38,18 @@ Use the `label` prop to set the label of the Switch.
 ::component-code
 ---
 props:
+  label: Check me
+---
+::
+
+When using the `required` prop, an asterisk will be added next to the label.
+
+::component-code
+---
+ignore:
+  - label
+props:
+  required: true
   label: Check me
 ---
 ::
@@ -131,20 +137,6 @@ ignore:
 props:
   size: xl
   defaultValue: true
-  label: Check me
----
-::
-
-### Required
-
-Use the `required` prop to make the Switch required. This will add an asterisk to the label.
-
-::component-code
----
-ignore:
-  - label
-props:
-  required: true
   label: Check me
 ---
 ::

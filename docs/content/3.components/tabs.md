@@ -11,8 +11,6 @@ links:
 
 ## Usage
 
-### Items
-
 Use the `items` prop as an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
@@ -167,7 +165,7 @@ props:
 
 ### Orientation
 
-Use the `orientation` prop to change the orientation of the Tabs.
+Use the `orientation` prop to change the orientation of the Tabs. Defaults to `horizontal`.
 
 ::component-code
 ---

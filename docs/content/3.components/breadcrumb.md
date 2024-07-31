@@ -8,8 +8,6 @@ links:
 
 ## Usage
 
-### Items
-
 Use the `items` prop as an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
