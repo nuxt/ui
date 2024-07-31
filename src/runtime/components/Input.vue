@@ -133,6 +133,10 @@ function onBlur(event: FocusEvent) {
   emits('blur', event)
 }
 
+defineExpose({
+  inputRef
+})
+
 onMounted(() => {
   setTimeout(() => {
     autoFocus()

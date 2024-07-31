@@ -151,6 +151,10 @@ watch(() => modelValue, () => {
   nextTick(autoResize)
 })
 
+defineExpose({
+  textareaRef
+})
+
 onMounted(() => {
   setTimeout(() => {
     autoResize()

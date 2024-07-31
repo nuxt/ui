@@ -228,6 +228,10 @@ function onUpdateOpen(value: boolean) {
     emits('focus', event)
   }
 }
+
+defineExpose({
+  inputRef
+})
 </script>
 
 <template>
