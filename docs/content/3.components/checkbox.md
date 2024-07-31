@@ -137,7 +137,7 @@ props:
 
 ### Required
 
-Use the `required` prop to make the Checkbox required.
+Use the `required` prop to make the Checkbox required. This will add an asterisk to the label.
 
 ::component-code
 ---
