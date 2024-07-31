@@ -132,7 +132,7 @@ const code = computed(() => {
         continue
       }
 
-      code += ` ${prop?.type === 'number' ? ':' : ''}${name}="${value}"`
+      code += ` ${prop?.type.includes('number') ? ':' : ''}${name}="${value}"`
     }
   }
 
