@@ -103,7 +103,7 @@ ignore:
 props:
   orientation: vertical
   defaultValue: 50
-  class: 'h-96 mx-auto'
+  class: 'h-48 mx-auto'
 ---
 ::
 

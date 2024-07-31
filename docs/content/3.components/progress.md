@@ -102,7 +102,7 @@ Use the `orientation` prop to change the orientation of the Progress. Defaults t
 ---
 props:
   orientation: vertical
-  class: 'h-96 mx-auto'
+  class: 'h-48 mx-auto'
 ---
 ::
 
