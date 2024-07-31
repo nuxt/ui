@@ -15,6 +15,8 @@ Use the `v-model` directive to control the value of the Slider.
 
 ::component-code
 ---
+ignore:
+  - modelValue
 external:
   - modelValue
 props:
@@ -66,6 +68,8 @@ Use the `v-model` directive or the `default-value` prop with an array of values 
 
 ::component-code
 ---
+ignore:
+  - modelValue
 external:
   - modelValue
 props:
@@ -77,6 +81,8 @@ Use the `min-steps-between-thumbs` prop to limit the minimum distance between th
 
 ::component-code
 ---
+ignore:
+  - modelValue
 external:
   - modelValue
 props:
@@ -103,7 +109,7 @@ props:
 
 ### Color
 
-Use the `color` prop to change the color of the Checkbox.
+Use the `color` prop to change the color of the Slider.
 
 ::component-code
 ---
@@ -117,7 +123,7 @@ props:
 
 ### Size
 
-Use the `size` prop to change the size of the Checkbox.
+Use the `size` prop to change the size of the Slider.
 
 ::component-code
 ---
@@ -131,7 +137,7 @@ props:
 
 ### Disabled
 
-Use the `disabled` prop to disable the Checkbox.
+Use the `disabled` prop to disable the Slider.
 
 ::component-code
 ---
@@ -140,6 +146,20 @@ ignore:
 props:
   disabled: true
   defaultValue: 50
+---
+::
+
+### Inverted
+
+Use the `inverted` prop to visually invert the Slider.
+
+::component-code
+---
+ignore:
+  - defaultValue
+props:
+  inverted: true
+  defaultValue: 25
 ---
 ::
 

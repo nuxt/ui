@@ -23,6 +23,9 @@ Use the `v-model` directive to control the value of the RadioGroup.
 
 ::component-code
 ---
+ignore:
+  - modelValue
+  - items
 external:
   - modelValue
   - items
@@ -45,6 +48,8 @@ Use the `default-value` prop to set the initial value when you do not need to co
 
 ::component-code
 ---
+ignore:
+  - items
 external:
   - items
 props:
@@ -70,6 +75,7 @@ Use the `legend` prop to set the legend of the RadioGroup.
 ---
 ignore:
   - defaultValue
+  - items
 external:
   - items
 props:
@@ -96,6 +102,7 @@ Use the `orientation` prop to change the orientation of the RadioGroup. Defaults
 ---
 ignore:
   - defaultValue
+  - items
 external:
   - items
 props:
@@ -122,6 +129,7 @@ Use the `color` prop to change the color of the RadioGroup.
 ---
 ignore:
   - defaultValue
+  - items
 external:
   - items
 props:
@@ -148,6 +156,7 @@ Use the `size` prop to change the size of the RadioGroup.
 ---
 ignore:
   - defaultValue
+  - items
 external:
   - items
 props:
@@ -174,6 +183,7 @@ Use the `disabled` prop to disable the RadioGroup.
 ---
 ignore:
   - defaultValue
+  - items
 external:
   - items
 props:

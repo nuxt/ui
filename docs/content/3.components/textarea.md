@@ -12,6 +12,8 @@ Use the `v-model` directive to control the value of the Textarea.
 
 ::component-code
 ---
+ignore:
+  - modelValue
 external:
   - modelValue
 props:
@@ -109,6 +111,8 @@ Use the `autoresize` prop to enable autoresizing the height of the Textarea.
 
 ::component-code
 ---
+ignore:
+  - modelValue
 external:
   - modelValue
 props:
@@ -121,6 +125,8 @@ Use the `maxrows` prop to set the maximum number of rows when autoresizing. If s
 
 ::component-code
 ---
+ignore:
+  - modelValue
 external:
   - modelValue
 props:

@@ -50,7 +50,7 @@ function mapKeys(obj, parentKey = '') {
 
     const fullKey = parentKey ? `${parentKey}.${key}` : key
 
-    return !props.ignore?.includes(fullKey) && !props.hide?.includes(fullKey) && !props.external?.includes(fullKey) ? fullKey : undefined
+    return !props.ignore?.includes(fullKey) && !props.hide?.includes(fullKey) ? fullKey : undefined
   }).filter(Boolean)
 }
 

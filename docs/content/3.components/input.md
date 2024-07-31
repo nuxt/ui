@@ -12,6 +12,8 @@ Use the `v-model` directive to control the value of the Input.
 
 ::component-code
 ---
+ignore:
+  - modelValue
 external:
   - modelValue
 props:

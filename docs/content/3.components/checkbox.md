@@ -15,6 +15,8 @@ Use the `v-model` directive to control the checked state of the Checkbox.
 
 ::component-code
 ---
+ignore:
+  - modelValue
 external:
   - modelValue
 props:

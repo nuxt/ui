@@ -19,6 +19,8 @@ You can also pass any property from [NuxtLink](https://nuxt.com/docs/api/compone
 
 ::component-code
 ---
+ignore:
+  - items
 external:
   - items
 props:
@@ -44,6 +46,8 @@ Use the `separator-icon` prop to customize the [Icon](/components/icon) between 
 
 ::component-code
 ---
+ignore:
+  - items
 external:
   - items
 props:
