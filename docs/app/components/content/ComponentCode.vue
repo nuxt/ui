@@ -43,7 +43,7 @@ const componentTheme = theme[camelName]
 const meta = await fetchComponentMeta(name as any)
 
 function mapKeys(obj, parentKey = '') {
-  return Object.entries(obj).flatMap(([key, value]) => {
+  return Object.entries(obj || {}).flatMap(([key, value]) => {
     if (typeof value === 'object' && !Array.isArray(value)) {
       return mapKeys(value, key)
     }
@@ -101,16 +101,12 @@ const code = computed(() => {
 <template>
   <${name}`
   for (const [key, value] of Object.entries(componentProps)) {
-    if (value === undefined || value === null || props.hide?.includes(key)) {
-      continue
-    }
-
     if (key === 'modelValue') {
       code += ` v-model="value"`
       continue
     }
 
-    if (value === '') {
+    if (value === undefined || value === null || value === '' || props.hide?.includes(key)) {
       continue
     }
 
