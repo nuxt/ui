@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { SliderRootProps, SliderRootEmits } from 'radix-vue'
+import type { SliderRootProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/slider'
@@ -30,8 +30,9 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
   ui?: Partial<typeof slider.slots>
 }
 
-export type SliderEmits = Omit<SliderRootEmits, 'valueCommit'> & {
-  change: [payload: Event]
+export interface SliderEmits {
+  (e: 'update:modelValue', payload: number | number[]): void
+  (e: 'change', payload: Event): void
 }
 </script>
 
