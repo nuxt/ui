@@ -134,7 +134,8 @@ export default defineComponent({
         }
         const submitEvent: FormSubmitEvent<any> = {
           ...event,
-          data: props.state
+          data: props.state,
+          name:  payload.submitter?.name
         }
         emit('submit', submitEvent)
       } catch (error) {
