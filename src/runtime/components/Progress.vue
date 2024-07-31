@@ -17,8 +17,11 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
    * @defaultValue `div`
    */
   as?: any
+  /** The maximum progress value. */
   max?: number | Array<any>
+  /** Display the current progress value. */
   status?: boolean
+  /** Whether the progress is visually inverted. */
   inverted?: boolean
   size?: ProgressVariants['size']
   color?: ProgressVariants['color']
