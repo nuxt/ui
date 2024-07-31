@@ -132,6 +132,7 @@ export default defineNuxtConfig({
         'UKbd',
         'ULink',
         'UProgress',
+        'USlider',
         'USwitch',
         'UTabs',
         'UTextarea',
