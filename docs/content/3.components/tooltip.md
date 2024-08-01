@@ -166,13 +166,7 @@ slots:
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::component-example
----
-name: 'tooltip-open-example'
-props:
-  class: 'w-full'
----
-::
+:component-example{name="tooltip-open-example"}
 
 ::note
 In this example, press :kbd{value="O"} to toggle the Tooltip.
