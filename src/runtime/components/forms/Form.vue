@@ -132,10 +132,15 @@ export default defineComponent({
         if (props.validateOn?.includes('submit')) {
           await validate()
         }
+        let submitterName: string | null = null
+        if (event.submitter) {
+          const element = event.submitter as HTMLButtonElement | HTMLInputElement
+          submitterName = element.name || null
+        }
         const submitEvent: FormSubmitEvent<any> = {
           ...event,
           data: props.state,
-          name:  payload.submitter?.name
+          submitterName
         }
         emit('submit', submitEvent)
       } catch (error) {

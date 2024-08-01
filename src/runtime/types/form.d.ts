@@ -19,7 +19,7 @@ export interface Form<T> {
   submit(): Promise<void>
 }
 
-export type FormSubmitEvent<T> = SubmitEvent & { data: T }
+export type FormSubmitEvent<T> = SubmitEvent & { data: T, submitterName?: string | undefined }
 export type FormErrorEvent = SubmitEvent & { errors: FormErrorWithId[] }
 
 export type FormEventType = 'blur' | 'input' | 'change' | 'submit'

@@ -23,26 +23,26 @@ body {
 </style> -->
 <template>
   <UNotifications />
-  <UForm :state="state" @submit="onSubmit" class="flex gap-2">
+  <UForm :state="state" class="flex gap-2" @submit="onSubmit">
     <div class="flex flex-col gap-1 w-32">
       <UFormGroup>
-        <UInput type="text" v-model="state.textOne" placeholder="Text 1" />
+        <UInput v-model="state.textOne" type="text" placeholder="Text 1" />
       </UFormGroup>
       <UFormGroup>
-        <UInput type="text" v-model="state.texttwo" placeholder="Text 2" />
+        <UInput v-model="state.texttwo" type="text" placeholder="Text 2" />
       </UFormGroup>
       <UFormGroup>
-        <UInput type="text" v-model="state.textTree" placeholder="Text 3" />
+        <UInput v-model="state.textTree" type="text" placeholder="Text 3" />
       </UFormGroup>
     </div>
     <div class="flex flex-col gap-1 w-32">
       <UButton type="submit" block>
         create
       </UButton>
-      <UButton  type="submit" name="update" block>
+      <UButton type="submit" name="update" block>
         update
       </UButton>
-      <UButton  type="submit" name="delete" block>
+      <UButton type="submit" name="delete" block>
         delete
       </UButton>
     </div>
@@ -50,26 +50,27 @@ body {
 </template>
 
 <script setup>
-  const state = reactive({
-    textOne: '',
-    textTwo: '',
-    textTree: '',
-  })
+const state = reactive({
+  textOne: '',
+  textTwo: '',
+  textTree: ''
+})
 
-  async function onSubmit(event) {
-    switch (event.name) {
-      case 'create':
-        useToast().add({ title: "is a create submission", description: JSON.stringify(event.data) });
-        break;
-        case 'update':
-          useToast().add({ title: "is a update submission", description: JSON.stringify(event.data)});
-          break;
-      case 'delete':
-        useToast().add({ title: "is a delete submission", description: JSON.stringify(event.data)});
-        break;
-      default:
-        useToast().add({ title: "is a create submission", description: JSON.stringify(event.data)});
-        break;
-    }
-  }
+async function onSubmit (event) {
+  console.log(event)
+  // switch (event.name) {
+  // case 'create':
+  //   useToast().add({ title: 'is a create submission', description: JSON.stringify(event.data) })
+  //   break
+  // case 'update':
+  //   useToast().add({ title: 'is a update submission', description: JSON.stringify(event.data) })
+  //   break
+  // case 'delete':
+  //   useToast().add({ title: 'is a delete submission', description: JSON.stringify(event.data) })
+  //   break
+  // default:
+  //   useToast().add({ title: 'is a create submission', description: JSON.stringify(event.data) })
+  //   break
+  // }
+}
 </script>
