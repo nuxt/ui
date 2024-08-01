@@ -8,7 +8,7 @@ links:
 
 ## Usage
 
-The Link component is a wrapper around [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) through the [`custom`](https://router.vuejs.org/api/interfaces/RouterLinkProps.html#Properties-custom) prop that provides a few extra props:
+The Link component is a wrapper around [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) using the [`custom`](https://router.vuejs.org/api/interfaces/RouterLinkProps.html#Properties-custom) prop. It provides a few extra props:
 
 - `inactive-class` prop to set a class when the link is inactive, `active-class` is used when active.
 - `exact` prop to style with `active-class` when the link is active and the route is exactly the same as the current route.

@@ -30,7 +30,7 @@ props:
 
 ### Link
 
-You can pass any property from [NuxtLink](https://nuxt.com/docs/api/components/nuxt-link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
 ::component-code
 ---
