@@ -36,6 +36,7 @@ export default (options: Required<ModuleOptions>) => ({
     size: {
       xs: {
         fieldset: 'gap-0.5',
+        legend: 'text-xs',
         base: 'size-3',
         item: 'text-xs',
         container: 'h-4',
@@ -43,6 +44,7 @@ export default (options: Required<ModuleOptions>) => ({
       },
       sm: {
         fieldset: 'gap-0.5',
+        legend: 'text-xs',
         base: 'size-3.5',
         item: 'text-xs',
         container: 'h-4',
@@ -50,6 +52,7 @@ export default (options: Required<ModuleOptions>) => ({
       },
       md: {
         fieldset: 'gap-1',
+        legend: 'text-sm',
         base: 'size-4',
         item: 'text-sm',
         container: 'h-5',
@@ -57,6 +60,7 @@ export default (options: Required<ModuleOptions>) => ({
       },
       lg: {
         fieldset: 'gap-1',
+        legend: 'text-sm',
         base: 'size-4.5',
         item: 'text-sm',
         container: 'h-5',
@@ -64,6 +68,7 @@ export default (options: Required<ModuleOptions>) => ({
       },
       xl: {
         fieldset: 'gap-1.5',
+        legend: 'text-base',
         base: 'size-5',
         item: 'text-base',
         container: 'h-6',
