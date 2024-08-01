@@ -15,7 +15,7 @@ export interface FormFieldProps {
   label?: string
   description?: string
   help?: string
-  error?: string
+  error?: string | boolean
   hint?: string
   size?: FormFieldVariants['size']
   required?: boolean
@@ -29,9 +29,9 @@ export interface FormFieldSlots {
   label(props: { label?: string }): any
   hint(props: { hint?: string }): any
   description(props: { description?: string }): any
-  error(props: { error?: string }): any
   help(props: { help?: string }): any
-  default(props: { error?: string }): any
+  error(props: { error?: string | boolean }): any
+  default(props: { error?: string | boolean }): any
 }
 </script>
 
