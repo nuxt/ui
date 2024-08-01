@@ -13,7 +13,7 @@ links:
 
 Use a [Button](/components/button) or any other component in the default slot of the Collapsible.
 
-Then, use the `#content` slot to add the content that will be shown when the Collapsible is open.
+Then, use the `#content` slot to add the content displayed when the Collapsible is open.
 
 ::component-example
 ---

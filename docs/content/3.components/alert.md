@@ -174,7 +174,7 @@ props:
 ::
 
 ::note
-Actions will render differently when the description is not set. You can try to remove it.
+Actions renders differently when the description is not set. You can try to remove it.
 ::
 
 ## Examples

@@ -49,7 +49,7 @@ slots:
 
 ### Max
 
-Use the `max` prop to limit the number of avatars displayed. The rest will be displayed as a `+X` avatar.
+Use the `max` prop to limit the number of avatars displayed. The rest is displayed as an `+X` avatar.
 
 ::component-code
 ---

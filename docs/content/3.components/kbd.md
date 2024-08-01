@@ -31,7 +31,7 @@ props:
 ---
 ::
 
-You can pass special keys to the `value` prop that goes through the [`useKbd`](https://github.com/benjamincanac/ui3/blob/dev/src/runtime/composables/useKbd.ts) composable. For example, the `meta` key will display as `⌘` on macOS and `Ctrl` on other platforms.
+You can pass special keys to the `value` prop that goes through the [`useKbd`](https://github.com/benjamincanac/ui3/blob/dev/src/runtime/composables/useKbd.ts) composable. For example, the `meta` key displays as `⌘` on macOS and `Ctrl` on other platforms.
 
 ::component-code
 ---

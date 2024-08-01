@@ -60,7 +60,7 @@ slots:
 ::
 
 ::tip
-You can use special keys there like `meta` that will display as `⌘` on macOS and `Ctrl` on other platforms.
+You can use special keys like `meta` that displays as `⌘` on macOS and `Ctrl` on other platforms.
 ::
 
 ### Delay

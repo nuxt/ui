@@ -62,7 +62,7 @@ props:
 
 ### Alt
 
-When no icon or text is provided, the **initials** of the `alt` prop will be used as fallback.
+When no icon or text is provided, the **initials** of the `alt` prop is used as fallback.
 
 ::component-code
 ---
@@ -73,7 +73,7 @@ props:
 ::
 
 ::note
-The `alt` prop will be used as the `alt` attribute of the image.
+The `alt` prop is passed to the `img` element as the `alt` attribute.
 ::
 
 ## Examples

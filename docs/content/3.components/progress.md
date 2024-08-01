@@ -36,7 +36,7 @@ props:
 ---
 ::
 
-Use the `max` prop with an array of strings to display the active step under the bar, the maximum value of the Progress will be the length of the array.
+Use the `max` prop with an array of strings to display the active step under the bar, the maximum value of the Progress is the length of the array.
 
 ::component-code
 ---
@@ -72,7 +72,7 @@ props:
 
 ### Indeterminate
 
-When no `v-model` is set or the value is `null`, the Progress becomes _indeterminate_. The progress bar will be animated as a carousel, but you can change it using the `animation` prop for an inverse carousel, a swinging bar or an elastic bar.
+When no `v-model` is set or the value is `null`, the Progress becomes _indeterminate_. The progress bar is animated as a `carousel`, but you can change it using the [`animation`](#animation) prop.
 
 ::component-code
 ---
@@ -85,7 +85,7 @@ props:
 
 ### Animation
 
-Use the `animation` prop to change the animation of the Progress. Defaults to `carousel`.
+Use the `animation` prop to change the animation of the Progress to an inverse carousel, a swinging bar or an elastic bar. Defaults to `carousel`.
 
 ::component-code
 ---

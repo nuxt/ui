@@ -62,7 +62,7 @@ props:
 ---
 ::
 
-When using the `required` prop, an asterisk will be added next to the label.
+When using the `required` prop, an asterisk is added next to the label.
 
 ::component-code
 ---
