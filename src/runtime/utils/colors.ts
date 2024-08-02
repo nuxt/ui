@@ -233,8 +233,18 @@ export const setGlobalColors = (theme: TWConfig['theme']) => {
     ...theme.extend?.colors
   }
 
-  // @ts-ignore
-  globalColors.primary = theme.extend.colors.primary = {
+  // reference theme as any
+  const themeColors: any = theme.extend.colors
+
+  // track user colors
+  const userColors: ColorConfig = {}
+
+  // primary colors
+  if (globalColors.primary) {
+    userColors.$primary = themeColors.$primary = globalColors.primary
+  }
+
+  globalColors.primary = themeColors.primary = {
     50: 'rgb(var(--color-primary-50) / <alpha-value>)',
     100: 'rgb(var(--color-primary-100) / <alpha-value>)',
     200: 'rgb(var(--color-primary-200) / <alpha-value>)',
@@ -250,13 +260,11 @@ export const setGlobalColors = (theme: TWConfig['theme']) => {
   }
 
   if (globalColors.gray) {
-    // @ts-ignore
-    globalColors.cool = theme.extend.colors.cool =
-      defaultColors.gray
+    userColors.$gray = themeColors.$gray = globalColors.gray
+    globalColors.cool = themeColors.cool = defaultColors.gray
   }
 
-  // @ts-ignore
-  globalColors.gray = theme.extend.colors.gray = {
+  globalColors.gray = themeColors.gray = {
     50: 'rgb(var(--color-gray-50) / <alpha-value>)',
     100: 'rgb(var(--color-gray-100) / <alpha-value>)',
     200: 'rgb(var(--color-gray-200) / <alpha-value>)',
@@ -270,7 +278,10 @@ export const setGlobalColors = (theme: TWConfig['theme']) => {
     950: 'rgb(var(--color-gray-950) / <alpha-value>)'
   }
 
-  return excludeColors(globalColors)
+  return [
+    ...excludeColors(globalColors),
+    ...Object.keys(userColors),
+  ]
 }
 
 export const generateSafelist = (colors: string[], globalColors: string[]) => {
