@@ -4,6 +4,7 @@ import type { FormEvent, FormEventType, InjectedFormGroupValue } from '../types/
 import { mergeConfig } from '../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
+
 import { formGroup } from '#ui/ui.config'
 
 type InputProps = {
@@ -62,7 +63,8 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     name: computed(() => inputProps?.name ?? formGroup?.name.value),
     size: computed(() => {
       const formGroupSize = config.size[formGroup?.size.value as string] ? formGroup?.size.value : null
-      return inputProps?.size ?? formGroupSize ?? formGroupConfig?.default?.size
+      const defaultSize = config.default?.size ?? formGroupConfig?.default?.size
+      return inputProps?.size ?? formGroupSize ?? defaultSize
     }),
     color: computed(() => formGroup?.error?.value ? 'red' : inputProps?.color),
     emitFormBlur,
