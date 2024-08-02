@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 import { get, hexToRgb } from '../utils'
-import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from '#imports'
+import { defineNuxtPlugin, useAppConfig, useHead, useNuxtApp } from '#imports'
 import colors from '#tailwind-config/theme/colors'
 
 export default defineNuxtPlugin(() => {

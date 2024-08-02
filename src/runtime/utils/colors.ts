@@ -280,7 +280,7 @@ export const setGlobalColors = (theme: TWConfig['theme']) => {
 
   return [
     ...excludeColors(globalColors),
-    ...Object.keys(userColors),
+    ...Object.keys(userColors)
   ]
 }
 
