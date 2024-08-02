@@ -24,17 +24,17 @@ describe('generateSafelist', () => {
     [
       'default safelist',
       {}, [],
-      ['bg-(primary)-50', 'bg-(red)-500'] // these both should be in the safelist
+      ['^bg-(primary)-50$', '^bg-(red)-500$'] // these both should be in the safelist
     ],
     [
       'safelisting single new color',
       {}, ['myColor'],
-      'bg-(myColor|primary)-50'
+      '^bg-(myColor|primary)-50$'
     ],
     [
       'reducing amount of theme colors',
       { theme: { colors: { plainBlue: '#00F' } } }, ['plainBlue'],
-      ['bg-(plainBlue|primary)-50', '!', /orange/] // the word "orange" should _not_ be found in any safelist pattern
+      ['^bg-(plainBlue|primary)-50$', '!', /orange/] // the word "orange" should _not_ be found in any safelist pattern
     ]
   ])('%s', async (_description, tailwindConfig: Partial<TWConfig>, safelistColors, safelistPatterns) => {
     safelistColors.push('primary')

@@ -19,193 +19,193 @@ const colorsToExclude = [
 
 const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist']> = {
   alert: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-50`)
+    pattern: RegExp(`^bg-(${colorsAsRegex})-50$`)
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^bg-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^ring-(${colorsAsRegex})-500$`)
   }],
   avatar: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^bg-(${colorsAsRegex})-500$`)
   }],
   badge: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-50`)
+    pattern: RegExp(`^bg-(${colorsAsRegex})-50$`)
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^bg-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^ring-(${colorsAsRegex})-500$`)
   }],
   button: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-50`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-50$`),
     variants: ['hover', 'disabled']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-100`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-100$`),
     variants: ['hover']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark', 'dark:disabled']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-500$`),
     variants: ['disabled', 'dark:hover']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-600`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-600$`),
     variants: ['hover']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-900`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-900$`),
     variants: ['dark:hover']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-950`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-950$`),
     variants: ['dark', 'dark:hover', 'dark:disabled']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark', 'dark:disabled']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-500$`),
     variants: ['dark:hover', 'disabled']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-600`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-600$`),
     variants: ['hover']
   }, {
-    pattern: new RegExp(`outline-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^outline-(${colorsAsRegex})-400$`),
     variants: ['dark:focus-visible']
   }, {
-    pattern: new RegExp(`outline-(${colorsAsRegex})-500`),
+    pattern: RegExp(`^outline-(${colorsAsRegex})-500$`),
     variants: ['focus-visible']
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-400$`),
     variants: ['dark:focus-visible']
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus-visible']
   }],
   input: (colorsAsRegex) => [{
-    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-400$`),
     variants: ['dark', 'dark:focus']
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus']
   }],
   radio: (colorsAsRegex) => [{
-    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-400$`),
     variants: ['dark:focus-visible']
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus-visible']
   }],
   checkbox: (colorsAsRegex) => [{
-    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-400$`),
     variants: ['dark:focus-visible']
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus-visible']
   }],
   toggle: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^bg-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-400$`),
     variants: ['dark:focus-visible']
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus-visible']
   }],
   range: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^bg-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-400$`),
     variants: ['dark:focus-visible']
   }, {
-    pattern: new RegExp(`ring-(${colorsAsRegex})-500`),
+    pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus-visible']
   }],
   progress: (colorsAsRegex) => [{
-    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }],
   meter: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^bg-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }],
   notification: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^bg-(${colorsAsRegex})-500$`)
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`text-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }],
   chip: (colorsAsRegex) => [{
-    pattern: new RegExp(`bg-(${colorsAsRegex})-400`),
+    pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
-    pattern: new RegExp(`bg-(${colorsAsRegex})-500`)
+    pattern: RegExp(`^bg-(${colorsAsRegex})-500$`)
   }]
 }
 
@@ -335,7 +335,15 @@ export const customSafelistExtractor = (prefix: string, content: string, colors:
 
         return matches.map(match => {
           const colorOptions = match.substring(1, match.length - 1).split('|')
-          return colorOptions.map(color => `${variant ? variant + ':' : ''}` + group.pattern.source.replace(match, color))
+          return colorOptions.map(
+            color => {
+              const classesExtracted = group.pattern.source.replace(match, color).replace('^', '').replace('$', '')
+              if (variant) {
+                return `${variant}:${classesExtracted}`
+              }
+              return classesExtracted
+            }
+          )
         }).flat()
       })
     })
