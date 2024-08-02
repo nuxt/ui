@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { hexToRgb } from '../utils'
+import { get, hexToRgb } from '../utils'
 import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from '#imports'
 import colors from '#tailwind-config/theme/colors'
 
@@ -8,8 +8,8 @@ export default defineNuxtPlugin(() => {
   const nuxtApp = useNuxtApp()
 
   const root = computed(() => {
-    const primary: Record<string, string> | undefined = colors[appConfig.ui.primary]
-    const gray: Record<string, string> | undefined = colors[appConfig.ui.gray]
+    const primary: Record<string, string> | undefined = get(colors, appConfig.ui.primary)
+    const gray: Record<string, string> | undefined = get(colors, appConfig.ui.gray)
 
     if (!primary) {
       console.warn(`[@nuxt/ui] Primary color '${appConfig.ui.primary}' not found in Tailwind config`)
