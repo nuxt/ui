@@ -324,7 +324,15 @@ export const customSafelistExtractor = (prefix: string, content: string, colors:
 
         return matches.map(match => {
           const colorOptions = match.substring(1, match.length - 1).split('|')
-          return colorOptions.map(color => `${variant ? variant + ':' : ''}` + group.pattern.source.replace(match, color))
+          return colorOptions.map(
+            color => {
+              const classesExtracted = group.pattern.source.replace(match, color).replace('^', '').replace('$', '')
+              if (variant) {
+                return `${variant}:${classesExtracted}`
+              }
+              return classesExtracted
+            }
+          )
         }).flat()
       })
     })
