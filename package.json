@@ -1,7 +1,7 @@
 {
   "name": "@nuxt/ui",
   "version": "3.0.0",
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@9.6.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -81,7 +81,10 @@
     "zod": "^3.23.8"
   },
   "resolutions": {
+    "@nuxt/kit": "3.12.3",
+    "@nuxt/schema": "3.12.3",
     "@nuxt/ui": "workspace:*",
+    "nuxt": "3.12.3",
     "vite": "5.2.4"
   }
 }
