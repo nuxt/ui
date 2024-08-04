@@ -2,7 +2,7 @@ import { computed, toValue, useAttrs } from 'vue'
 import type { Ref } from 'vue'
 import { useAppConfig } from '#imports'
 import { mergeConfig, omit, get } from '../utils'
-import type { Strategy } from '../types'
+import type { Strategy } from '../types/index'
 
 export const useUI = <T>(key, $ui?: Ref<Partial<T> & { strategy?: Strategy } | undefined>, $config?: Ref<T> | T, $wrapperClass?: Ref<string>, withAppConfig: boolean = false) => {
   const $attrs = useAttrs()

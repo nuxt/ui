@@ -60,7 +60,7 @@ import { useResizeObserver } from '@vueuse/core'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { TabItem, Strategy } from '../../types'
+import type { TabItem, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { tabs } from '#ui/ui.config'

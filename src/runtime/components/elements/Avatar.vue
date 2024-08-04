@@ -27,7 +27,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { AvatarSize, AvatarChipColor, AvatarChipPosition, Strategy } from '../../types'
+import type { AvatarSize, AvatarChipColor, AvatarChipPosition, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { avatar } from '#ui/ui.config'
