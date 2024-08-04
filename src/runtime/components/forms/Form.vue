@@ -127,16 +127,13 @@ export default defineComponent({
     }
 
     async function onSubmit (payload: Event) {
-      const event = payload as SubmitEvent
+      const event = payload as FormSubmitEvent<any>
       try {
         if (props.validateOn?.includes('submit')) {
           await validate()
         }
-        const submitEvent: FormSubmitEvent<any> = {
-          ...event,
-          data: props.state
-        }
-        emit('submit', submitEvent)
+        event.data = props.state
+        emit('submit', event)
       } catch (error) {
         if (!(error instanceof FormException)) {
           throw error
