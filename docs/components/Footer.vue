@@ -25,6 +25,8 @@
 </template>
 
 <script setup lang="ts">
+const { $ui } = useNuxtApp()
+
 const links = [{
   icon: 'i-simple-icons-figma',
   label: 'Figma Kit',
