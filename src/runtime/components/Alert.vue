@@ -92,13 +92,11 @@ const ui = computed(() => alert({
           {{ title }}
         </slot>
       </div>
-      <template v-if="description || !!slots.description">
-        <div :class="ui.description({ class: props.ui?.description })">
-          <slot name="description">
-            {{ description }}
-          </slot>
-        </div>
-      </template>
+      <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+        <slot name="description">
+          {{ description }}
+        </slot>
+      </div>
 
       <div v-if="multiline && actions?.length" :class="ui.actions({ class: props.ui?.actions, multiline: true })">
         <slot name="actions">

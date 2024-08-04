@@ -115,13 +115,11 @@ defineExpose({
           {{ title }}
         </slot>
       </ToastTitle>
-      <template v-if="description || !!slots.description">
-        <ToastDescription :class="ui.description({ class: props.ui?.description })">
-          <slot name="description">
-            {{ description }}
-          </slot>
-        </ToastDescription>
-      </template>
+      <ToastDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+        <slot name="description">
+          {{ description }}
+        </slot>
+      </ToastDescription>
 
       <div v-if="multiline && actions?.length" :class="ui.actions({ class: props.ui?.actions, multiline: true })">
         <slot name="actions">
