@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.18.4](https://github.com/nuxt/ui/compare/v2.18.3...v2.18.4) (2024-08-05)
+
+
+### Bug Fixes
+
+* **Form:** submit event data ([#2012](https://github.com/nuxt/ui/issues/2012)) ([4d61936](https://github.com/nuxt/ui/commit/4d61936e7e90b664846a8f265825612c509511d7))
+* **module:** handle nested colors from ui config ([#2008](https://github.com/nuxt/ui/issues/2008)) ([1cc7e2a](https://github.com/nuxt/ui/commit/1cc7e2a306e0f3f666b9a588f6ed02e7eabc0272))
+* **module:** reduce css bundle size by fixing safelist regex ([#2005](https://github.com/nuxt/ui/issues/2005)) ([8ac9ca4](https://github.com/nuxt/ui/commit/8ac9ca49789a9a7281f7a40926e7e9a8068cc395))
+* **module:** suffix types imports with `/index` ([7e37668](https://github.com/nuxt/ui/commit/7e37668940d06c5aa20b60d9bfd600d50a171014)), closes [#2018](https://github.com/nuxt/ui/issues/2018)
+* **Tabs:** use `nextTick` before marker calc ([#2020](https://github.com/nuxt/ui/issues/2020)) ([9c04969](https://github.com/nuxt/ui/commit/9c049690227af8aba61a1f7c002b00c5dfeb63ff))
+* **useFormGroup:** app config default input size ([#2011](https://github.com/nuxt/ui/issues/2011)) ([3485092](https://github.com/nuxt/ui/commit/3485092edb55f9ef2ca038a8c137431866d6c28a))
+
 ## [2.18.3](https://github.com/nuxt/ui/compare/v2.18.2...v2.18.3) (2024-07-30)
 
 
