@@ -164,7 +164,10 @@ export default defineComponent({
       calcMarkerSize(selectedIndex.value)
     })
 
-    onMounted(() => nextTick(() => calcMarkerSize(selectedIndex.value)))
+    onMounted(async () => {
+      await nextTick()
+      calcMarkerSize(selectedIndex.value)
+    })
 
     provideUseId(() => useId())
 
