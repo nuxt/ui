@@ -41,7 +41,7 @@ import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getULinkProps } from '../../utils'
-import type { BreadcrumbLink, Strategy } from '../../types'
+import type { BreadcrumbLink, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { breadcrumb } from '#ui/ui.config'

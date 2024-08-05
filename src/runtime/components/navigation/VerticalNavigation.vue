@@ -63,7 +63,7 @@ import ULink from '../elements/Link.vue'
 import UDivider from '../layout/Divider.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getULinkProps } from '../../utils'
-import type { VerticalNavigationLink, Strategy } from '../../types'
+import type { VerticalNavigationLink, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { verticalNavigation } from '#ui/ui.config'

@@ -75,7 +75,7 @@ import UButton from '../elements/Button.vue'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Group, Command, Button, Strategy } from '../../types'
+import type { Group, Command, Button, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { commandPalette } from '#ui/ui.config'

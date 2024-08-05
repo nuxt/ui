@@ -73,7 +73,7 @@ import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, omit } from '../../utils'
-import type { AccordionItem, Strategy } from '../../types'
+import type { AccordionItem, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { accordion, button } from '#ui/ui.config'
@@ -194,7 +194,7 @@ export default defineComponent({
       attrs,
       buttonRefs,
       closeOthers,
-      omit,
+      omit: (omit as any),
       onEnter,
       onBeforeLeave,
       onAfterEnter,

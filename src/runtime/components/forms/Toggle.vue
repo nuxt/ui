@@ -38,7 +38,7 @@ import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
-import type { ToggleSize, ToggleColor, Strategy } from '../../types'
+import type { ToggleSize, ToggleColor, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { toggle } from '#ui/ui.config'

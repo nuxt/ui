@@ -28,7 +28,7 @@ import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, looseToNumber } from '../../utils'
-import type { TextareaSize, TextareaColor, TextareaVariant, Strategy } from '../../types'
+import type { TextareaSize, TextareaColor, TextareaVariant, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { textarea } from '#ui/ui.config'

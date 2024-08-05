@@ -34,7 +34,7 @@ import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy, MeterColor, MeterSize } from '../../types'
+import type { Strategy, MeterColor, MeterSize } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { meter } from '#ui/ui.config'

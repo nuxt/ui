@@ -43,7 +43,7 @@ import { Popover as HPopover, PopoverButton as HPopoverButton, PopoverPanel as H
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { mergeConfig } from '../../utils'
-import type { PopperOptions, Strategy } from '../../types'
+import type { PopperOptions, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { popover } from '#ui/ui.config'
