@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-import { toRef, ref, watch, onMounted, defineComponent } from 'vue'
+import { toRef, ref, watch, onMounted, defineComponent, nextTick } from 'vue'
 import type { PropType } from 'vue'
 import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel, provideUseId } from '@headlessui/vue'
 import { useResizeObserver } from '@vueuse/core'
@@ -164,7 +164,7 @@ export default defineComponent({
       calcMarkerSize(selectedIndex.value)
     })
 
-    onMounted(() => calcMarkerSize(selectedIndex.value))
+    onMounted(() => nextTick(() => calcMarkerSize(selectedIndex.value)))
 
     provideUseId(() => useId())
 
