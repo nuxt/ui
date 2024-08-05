@@ -77,7 +77,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/getting-started/installation',
+        '/getting-started',
         '/api/releases.json',
         '/api/pulls.json'
       ],
@@ -86,7 +86,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/': { redirect: '/getting-started/installation', prerender: false },
+    '/': { redirect: '/getting-started', prerender: false },
     '/components': { redirect: '/components/app', prerender: false }
   },
 

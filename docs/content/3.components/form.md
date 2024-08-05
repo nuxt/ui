@@ -4,6 +4,9 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Form.vue
+navigation:
+  badge:
+    label: Todo
 ---
 
 ## Usage

@@ -8,6 +8,9 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/InputMenu.vue
+navigation:
+  badge:
+    label: Todo
 ---
 
 ## Usage
