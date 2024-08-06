@@ -1,5 +1,5 @@
 <template>
-  <UCollapsible class="w-48 mx-auto">
+  <UCollapsible class="w-48">
     <UButton
       class="group"
       label="Open"
