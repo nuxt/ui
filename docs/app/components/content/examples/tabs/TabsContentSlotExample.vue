@@ -12,7 +12,7 @@ const items = [
 </script>
 
 <template>
-  <UTabs :items="items">
+  <UTabs :items="items" class="w-full">
     <template #content="{ item }">
       <p>This is the {{ item.label }} tab.</p>
     </template>

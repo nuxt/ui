@@ -19,5 +19,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <UTabs v-model="active" :content="false" :items="items" />
+  <UTabs v-model="active" :content="false" :items="items" class="w-full" />
 </template>

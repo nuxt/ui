@@ -24,7 +24,7 @@ const state = reactive({
 </script>
 
 <template>
-  <UTabs :items="items" variant="link" class="gap-4" :ui="{ trigger: 'flex-1' }">
+  <UTabs :items="items" variant="link" class="gap-4 w-full" :ui="{ trigger: 'flex-1' }">
     <template #account="{ item }">
       <p class="text-gray-500 dark:text-gray-400 mb-4">
         {{ item.description }}

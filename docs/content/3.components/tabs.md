@@ -25,12 +25,10 @@ Use the `items` prop as an array of objects with the following properties:
 ---
 ignore:
   - items
+  - class
 external:
   - items
-hide:
-  - class
 props:
-  class: 'w-full'
   items:
     - label: Account
       icon: 'i-heroicons-user'
@@ -38,6 +36,7 @@ props:
     - label: Password
       icon: 'i-heroicons-lock-closed'
       content: 'This is the password content.'
+  class: 'w-full'
 ---
 ::
 
@@ -52,12 +51,10 @@ You can set it to `false` to prevent the Tabs from rendering any content and act
 ignore:
   - content
   - items
+  - class
 external:
   - items
-hide:
-  - class
 props:
-  class: 'w-full'
   content: false
   items:
     - label: Account
@@ -66,6 +63,7 @@ props:
     - label: Password
       icon: 'i-heroicons-lock-closed'
       content: 'This is the password content.'
+  class: 'w-full'
 ---
 ::
 
@@ -77,12 +75,10 @@ prettier: true
 ignore:
   - content.forceMount
   - items
+  - class
 external:
   - items
-hide:
-  - class
 props:
-  class: 'w-full'
   content:
     forceMount: false
   items:
@@ -92,6 +88,7 @@ props:
     - label: Password
       icon: 'i-heroicons-lock-closed'
       content: 'This is the password content.'
+  class: 'w-full'
 ---
 ::
 
@@ -108,17 +105,16 @@ Use the `color` prop to change the color of the Tabs.
 ignore:
   - content
   - items
+  - class
 external:
   - items
-hide:
-  - class
 props:
   color: gray
-  class: 'w-full'
   content: false
   items:
     - label: Account
     - label: Password
+  class: 'w-full'
 ---
 ::
 
@@ -131,18 +127,17 @@ Use the `variant` prop to change the variant of the Tabs.
 ignore:
   - content
   - items
+  - class
 external:
   - items
-hide:
-  - class
 props:
   color: gray
   variant: link
-  class: 'w-full'
   content: false
   items:
     - label: Account
     - label: Password
+  class: 'w-full'
 ---
 ::
 
@@ -155,18 +150,17 @@ Use the `size` prop to change the size of the Tabs.
 ignore:
   - content
   - items
+  - class
 external:
   - items
-hide:
-  - class
 props:
   size: md
   variant: pill
-  class: 'w-full'
   content: false
   items:
     - label: Account
     - label: Password
+  class: 'w-full'
 ---
 ::
 
@@ -179,18 +173,17 @@ Use the `orientation` prop to change the orientation of the Tabs. Defaults to `h
 ignore:
   - content
   - items
+  - class
 external:
   - items
-hide:
-  - class
 props:
   orientation: vertical
   variant: pill
-  class: 'w-full'
   content: false
   items:
     - label: Account
     - label: Password
+  class: 'w-full'
 ---
 ::
 
@@ -200,13 +193,7 @@ props:
 
 You can control the active tab by using the `default-value` prop or the `v-model` directive with the index of the item.
 
-::component-example
----
-name: 'tabs-model-value-example'
-props:
-  class: 'w-full'
----
-::
+:component-example{name="tabs-model-value-example"}
 
 ::tip
 You can also pass the `value` of one of the items if provided.
@@ -216,25 +203,13 @@ You can also pass the `value` of one of the items if provided.
 
 Use the `#content` slot to customize the content of each item.
 
-::component-example
----
-name: 'tabs-content-slot-example'
-props:
-  class: 'w-full'
----
-::
+:component-example{name="tabs-content-slot-example"}
 
 ### With custom slot
 
 Use the `slot` property to customize a specific item.
 
-::component-example
----
-name: 'tabs-custom-slot-example'
-props:
-  class: 'w-full'
----
-::
+:component-example{name="tabs-custom-slot-example"}
 
 ## API
 
