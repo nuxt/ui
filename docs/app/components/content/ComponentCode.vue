@@ -6,6 +6,7 @@ import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
 const props = defineProps<{
+  class?: any
   /** List of props to ignore in selection */
   ignore?: string[]
   /** List of props to hide from code and selection */
@@ -231,7 +232,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
         </template>
       </div>
 
-      <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4" :class="[!options.length && 'rounded-t-md']">
+      <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4" :class="[!options.length && 'rounded-t-md', props.class]">
         <component :is="name" v-bind="componentProps">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <ContentSlot :name="slot" unwrap="p">

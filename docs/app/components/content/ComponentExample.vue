@@ -3,6 +3,7 @@ import { camelCase } from 'scule'
 
 const props = defineProps<{
   name: string
+  class?: any
   props?: { [key: string]: any }
   /**
    * Whether to format the code with Prettier
@@ -44,7 +45,7 @@ const { data: ast } = await useAsyncData(`component-example-${camelName}`, async
 <template>
   <div class="my-5">
     <div>
-      <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4 rounded-t-md">
+      <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4 rounded-t-md" :class="[props.class]">
         <component :is="camelName" v-bind="componentProps" />
       </div>
     </div>
