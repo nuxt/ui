@@ -8,12 +8,22 @@ import * as theme from './theme'
 export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
   const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
-  const template = addTemplate({
-    filename: 'tailwind.css',
-    write: true,
-    getContents: () => `@import "tailwindcss";
+  if (!nuxt.options.css.find(path => path.endsWith('tailwind.css'))) {
+    const template = addTemplate({
+      filename: 'tailwind.css',
+      write: true,
+      getContents: () => `@import "tailwindcss";
+@import "#build/ui.css";
+    `
+    })
 
-@layer base {
+    nuxt.options.css.unshift(template.dst)
+  }
+
+  addTemplate({
+    filename: 'ui.css',
+    write: true,
+    getContents: () => `@layer base {
   :root {
     color-scheme: light dark;
   }
@@ -41,8 +51,6 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
 }
 `
   })
-
-  nuxt.options.css.unshift(template.dst)
 
   for (const component in theme) {
     addTemplate({
