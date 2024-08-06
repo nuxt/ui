@@ -10,7 +10,7 @@ const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof t
 
 const breadcrumb = tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb || {}) })
 
-export interface BreadcrumbItem extends Omit<LinkProps, 'custom'> {
+export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -68,7 +68,7 @@ const ui = breadcrumb()
       <template v-for="(item, index) in items" :key="index">
         <li :class="ui.item({ class: props.ui?.item })">
           <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
-            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ class: props.ui?.link, active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
+            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ class: [props.ui?.link, item.class], active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
               <slot :name="item.slot || 'item'" :item="item" :index="index">
                 <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="index === items!.length - 1" :index="index">
                   <UAvatar v-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active: index === items!.length - 1 })" />

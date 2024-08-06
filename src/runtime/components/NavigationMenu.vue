@@ -11,14 +11,14 @@ const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<type
 
 const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })
 
-export interface NavigationMenuChildItem extends Omit<LinkProps, 'custom'> {
+export interface NavigationMenuChildItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label: string
   description?: string
   icon?: string
   select?(e: MouseEvent): void
 }
 
-export interface NavigationMenuItem extends Omit<LinkProps, 'custom'>, Pick<NavigationMenuItemProps, 'value'> {
+export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'>, Pick<NavigationMenuItemProps, 'value'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -121,7 +121,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               :active="active"
               @select="item.select"
             >
-              <ULinkBase v-bind="slotProps" :class="ui.link({ class: props.ui?.link, active, disabled: !!item.disabled })">
+              <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active, disabled: !!item.disabled })">
                 <slot :name="item.slot || 'item'" :item="item" :index="index">
                   <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="active" :index="index">
                     <UAvatar v-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active, disabled: !!item.disabled })" />
@@ -158,7 +158,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                 <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
                   <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
                     <NavigationMenuLink as-child :active="childActive" @select="childItem.select">
-                      <ULinkBase v-bind="childSlotProps" :class="ui.childLink({ class: props.ui?.childLink, active: childActive })">
+                      <ULinkBase v-bind="childSlotProps" :class="ui.childLink({ class: [props.ui?.childLink, childItem.class], active: childActive })">
                         <UIcon v-if="childItem.icon" :name="childItem.icon" :class="ui.childLinkIcon({ class: props.ui?.childLinkIcon, active: childActive })" />
 
                         <div :class="ui.childLinkWrapper({ class: props.ui?.childLinkWrapper })">
