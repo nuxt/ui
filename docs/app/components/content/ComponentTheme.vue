@@ -4,6 +4,7 @@ import { camelCase } from 'scule'
 import * as theme from '#build/ui'
 
 const route = useRoute()
+const { $prettier } = useNuxtApp()
 
 const name = camelCase(route.params.slug[route.params.slug.length - 1])
 
@@ -14,6 +15,14 @@ function stripCompoundVariants(component) {
     component.compoundVariants = component.compoundVariants.filter((compoundVariant: any) => {
       if (compoundVariant.color) {
         if (!['primary', 'gray'].includes(compoundVariant.color)) {
+          strippedCompoundVariants.value = true
+
+          return false
+        }
+      }
+
+      if (compoundVariant.highlightColor) {
+        if (!['primary', 'gray'].includes(compoundVariant.highlightColor)) {
           strippedCompoundVariants.value = true
 
           return false
@@ -33,9 +42,14 @@ const component = computed(() => {
   return stripCompoundVariants(component)
 })
 
-const { data: ast } = await useAsyncData(`component-theme-${name}`, () => parseMarkdown(`
-\`\`\`yml
-${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')}
+const { data: ast } = await useAsyncData(`component-theme-${name}`, async () => {
+  const md = `
+\`\`\`ts [app.config.ts]
+export default defineAppConfig({
+  ui: {
+    ${name}: ${json5.stringify(component.value, null, 2)}
+  }
+})
 \`\`\`\
 
 ${strippedCompoundVariants.value
@@ -44,11 +58,21 @@ ${strippedCompoundVariants.value
 Some colors in \`compoundVariants\` are omitted for readability. Check out the source code on GitHub.
 ::`
 : ''}
+`
 
-::tip
-You can customize this component in your \`app.config.ts\` under \`ui.${name}\` key.
-::
-`))
+  let formatted = ''
+  try {
+    formatted = await $prettier.format(md, {
+      trailingComma: 'none',
+      semi: false,
+      singleQuote: true
+    })
+  } catch (e) {
+    formatted = md
+  }
+
+  return parseMarkdown(formatted)
+})
 </script>
 
 <template>
