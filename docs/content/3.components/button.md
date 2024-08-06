@@ -197,7 +197,9 @@ props:
   ui:
     leadingIcon: 'text-primary-500 dark:text-primary-400'
 slots:
-  default: Button
+  default: |
+
+    Button
 ---
 ::
 
