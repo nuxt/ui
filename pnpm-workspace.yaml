@@ -3,4 +3,3 @@ packages:
   - "cli"
   - "docs"
   - "playground"
-  - "modules/*"
