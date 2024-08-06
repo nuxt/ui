@@ -30,7 +30,7 @@ external:
 hide:
   - class
 props:
-  class: 'w-full px-4'
+  class: 'px-4'
   items:
     - label: 'Colors'
       icon: 'i-heroicons-swatch'
@@ -58,7 +58,7 @@ external:
 hide:
   - class
 props:
-  class: 'w-full px-4'
+  class: 'px-4'
   type: 'multiple'
   items:
     - label: 'Colors'
@@ -87,7 +87,7 @@ external:
 hide:
   - class
 props:
-  class: 'w-full px-4'
+  class: 'px-4'
   collapsible: false
   items:
     - label: 'Colors'
@@ -117,7 +117,7 @@ external:
 hide:
   - class
 props:
-  class: 'w-full px-4'
+  class: 'px-4'
   disabled: true
   items:
     - label: 'Colors'
@@ -148,7 +148,7 @@ external:
 hide:
   - class
 props:
-  class: 'w-full px-4'
+  class: 'px-4'
   trailingIcon: 'i-heroicons-plus'
   items:
     - label: 'Colors'
@@ -178,7 +178,7 @@ You can control the active item(s) by using the `default-value` prop or the `v-m
 ---
 name: 'accordion-model-value-example'
 props:
-  class: 'w-full px-4'
+  class: 'px-4'
 ---
 ::
 
@@ -194,7 +194,7 @@ Use the `#content` slot to customize the content of each item.
 ---
 name: 'accordion-content-slot-example'
 props:
-  class: 'w-full px-4'
+  class: 'px-4'
 ---
 ::
 
@@ -206,7 +206,7 @@ Use the `slot` property to customize a specific item.
 ---
 name: 'accordion-custom-slot-example'
 props:
-  class: 'w-full px-4'
+  class: 'px-4'
 ---
 ::
 
