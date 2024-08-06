@@ -75,8 +75,7 @@ import UDropdownMenuContent from './DropdownMenuContent.vue'
 import { omit } from '../utils'
 
 const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
-  portal: true,
-  modal: false
+  portal: true
 })
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()

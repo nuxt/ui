@@ -66,8 +66,7 @@ import UContextMenuContent from './ContextMenuContent.vue'
 import { omit } from '../utils'
 
 const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
-  portal: true,
-  modal: false
+  portal: true
 })
 const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
