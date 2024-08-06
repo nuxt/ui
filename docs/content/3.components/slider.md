@@ -100,10 +100,11 @@ Use the `orientation` prop to change the orientation of the Slider. Defaults to 
 ignore:
   - defaultValue
   - class
+class: 'justify-center'
 props:
   orientation: vertical
   defaultValue: 50
-  class: 'h-48 mx-auto'
+  class: 'h-48'
 ---
 ::
 
