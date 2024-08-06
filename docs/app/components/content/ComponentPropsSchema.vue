@@ -3,6 +3,7 @@ import type { PropertyMeta } from 'vue-component-meta'
 
 const props = defineProps<{
   prop: PropertyMeta
+  ignore?: string[]
 }>()
 
 function getSchemaProps(schema: PropertyMeta['schema']) {
@@ -11,7 +12,7 @@ function getSchemaProps(schema: PropertyMeta['schema']) {
   }
 
   if (schema.kind === 'object') {
-    return Object.values(schema.schema)
+    return Object.values(schema.schema).filter(prop => !props.ignore?.includes(prop.name))
   }
 
   return (Array.isArray(schema.schema) ? schema.schema : Object.values(schema.schema)).flatMap(getSchemaProps)
