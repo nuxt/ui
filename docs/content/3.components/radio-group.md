@@ -12,14 +12,16 @@ links:
 
 ## Usage
 
+Use the `v-model` directive to control the value of the RadioGroup.
+
+### Items
+
 Use the `items` prop as an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
 - `description?: string`{lang="ts-type"}
 - `value?: string`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
-
-Use the `v-model` directive to control the value of the RadioGroup.
 
 ::component-code
 ---

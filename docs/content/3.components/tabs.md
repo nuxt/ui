@@ -11,15 +11,17 @@ links:
 
 ## Usage
 
+### Items
+
 Use the `items` prop as an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
-- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `content?: string`{lang="ts-type"}
 - `value?: string | number`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
+- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 
 ::component-code
 ---
@@ -207,7 +209,7 @@ Use the `#content` slot to customize the content of each item.
 
 ### With custom slot
 
-Use the `slot` property to customize a specific item.
+Use the `slot` property instead of the `#content` slot to customize a specific item.
 
 :component-example{name="tabs-custom-slot-example"}
 

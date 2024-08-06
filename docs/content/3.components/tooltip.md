@@ -88,6 +88,40 @@ slots:
 This can be configured globally through the `tooltip.delayDuration` option in the [`App`](/components/app) component.
 ::
 
+### Content
+
+Use the `content` prop to control how the Tooltip content is rendered, like its `align` or `side` for example.
+
+::component-code
+---
+prettier: true
+ignore:
+  - text
+items:
+  content.align:
+    - start
+    - center
+    - end
+  content.side:
+    - right
+    - left
+    - top
+    - bottom
+props:
+  content:
+    align: center
+    side: bottom
+    sideOffset: 8
+  text: 'Open on GitHub'
+slots:
+  default: |
+
+    <UButton icon="i-simple-icons-github" />
+---
+
+:u-button{icon="i-simple-icons-github"}
+::
+
 ### Arrow
 
 Use the `arrow` prop to display an arrow on the Tooltip.
@@ -100,35 +134,6 @@ ignore:
   - arrow
 props:
   arrow: true
-  text: 'Open on GitHub'
-slots:
-  default: |
-
-    <UButton icon="i-simple-icons-github" />
----
-
-:u-button{icon="i-simple-icons-github"}
-::
-
-### Content
-
-Use the `content` prop to control how the Tooltip content is rendered, like its side for example.
-
-::component-code
----
-prettier: true
-ignore:
-  - text
-items:
-  content.side:
-    - right
-    - left
-    - top
-    - bottom
-props:
-  content:
-    side: right
-    sideOffset: 8
   text: 'Open on GitHub'
 slots:
   default: |

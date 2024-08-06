@@ -3,7 +3,7 @@ const items = [{
   label: 'Home',
   to: '/'
 }, {
-  slot: 'dropdown' as const,
+  slot: 'dropdown',
   icon: 'i-heroicons-ellipsis-horizontal',
   children: [{
     label: 'Documentation'
