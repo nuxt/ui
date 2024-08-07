@@ -33,6 +33,7 @@ You can also pass any property from the [Link](/components/link#props) component
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - class
@@ -346,6 +347,7 @@ ignore:
   - as
   - to
   - target
+  - active
   - activeClass
   - inactiveClass
   - exactActiveClass
