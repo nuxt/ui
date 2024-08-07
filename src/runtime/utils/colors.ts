@@ -251,8 +251,7 @@ export const setGlobalColors = (theme: TWConfig['theme']) => {
 
   if (globalColors.gray) {
     // @ts-ignore
-    globalColors.cool = theme.extend.colors.cool =
-      defaultColors.gray
+    globalColors.cool = theme.extend.colors.cool = defaultColors.gray
   }
 
   // @ts-ignore
