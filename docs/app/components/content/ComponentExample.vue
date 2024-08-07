@@ -10,6 +10,11 @@ const props = defineProps<{
    * @defaultValue false
    */
   prettier?: boolean
+  /**
+   * Whether to collapse the code block
+   * @defaultValue false
+   */
+  collapse?: boolean
 }>()
 
 const { $prettier } = useNuxtApp()
@@ -20,7 +25,25 @@ const data = await fetchComponentExample(camelName)
 
 const componentProps = reactive({ ...(props.props || {}) })
 
-const code = computed(() => `\`\`\`vue\n${data?.code ?? ''}\n\`\`\``)
+const code = computed(() => {
+  let code = ''
+
+  if (props.collapse) {
+    code += `::code-collapse
+`
+  }
+
+  code += `\`\`\`vue
+${data?.code ?? ''}
+\`\`\``
+
+  if (props.collapse) {
+    code += `
+::`
+  }
+
+  return code
+})
 
 const { data: ast } = await useAsyncData(`component-example-${camelName}`, async () => {
   if (!props.prettier) {
@@ -50,6 +73,6 @@ const { data: ast } = await useAsyncData(`component-example-${camelName}`, async
       </div>
     </div>
 
-    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&>div>pre]:!rounded-t-none [&>div]:!mt-0" />
+    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
   </div>
 </template>

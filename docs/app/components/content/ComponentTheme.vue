@@ -44,6 +44,7 @@ const component = computed(() => {
 
 const { data: ast } = await useAsyncData(`component-theme-${name}`, async () => {
   const md = `
+::code-collapse
 \`\`\`ts [app.config.ts]
 export default defineAppConfig({
   ui: {
@@ -51,6 +52,8 @@ export default defineAppConfig({
   }
 })
 \`\`\`\
+
+::
 
 ${strippedCompoundVariants.value
 ? `
