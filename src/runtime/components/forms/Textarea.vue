@@ -154,6 +154,7 @@ export default defineComponent({
         }
 
         textarea.value.rows = props.rows
+        textarea.value.style.overflow = 'hidden'
 
         const styles = window.getComputedStyle(textarea.value)
         const paddingTop = parseInt(styles.paddingTop)
@@ -166,6 +167,8 @@ export default defineComponent({
         if (newRows > props.rows) {
           textarea.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
         }
+
+        textarea.value.style.overflow = ''
       }
     }
 
