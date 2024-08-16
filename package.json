@@ -39,7 +39,7 @@
     "@iconify-json/heroicons": "^1.1.24",
     "@nuxt/icon": "^1.4.5",
     "@nuxt/kit": "^3.12.4",
-    "@nuxtjs/color-mode": "^3.4.2",
+    "@nuxtjs/color-mode": "^3.4.4",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@popperjs/core": "^2.11.8",
     "@tailwindcss/aspect-ratio": "^0.4.2",
