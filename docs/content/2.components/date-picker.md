@@ -38,7 +38,7 @@ The following example is styled based on the `primary` and `gray` colors and sup
 ```vue [components/DatePicker.vue]
 <script setup lang="ts">
 import { DatePicker as VCalendarDatePicker } from 'v-calendar'
-import type { DatePickerDate, DatePickerRangeObject } from 'v-calendar/dist/types/src/use/datePicker'
+import type { DatePickerDate, DatePickerRangeObject } from '~/node_modules/v-calendar/dist/types/src/use/datePicker'
 import 'v-calendar/dist/style.css'
 
 const props = defineProps({
