@@ -72,7 +72,7 @@ const ui = computed(() => tooltip({
     </TooltipTrigger>
 
     <TooltipPortal :disabled="!portal">
-      <TooltipContent v-bind="contentProps" :class="ui.content({ class: props.class })">
+      <TooltipContent v-bind="contentProps" :class="ui.content({ class: [props.class, props.ui?.content] })">
         <slot name="content">
           <span v-if="text" :class="ui.text({ class: props.ui?.text })">{{ text }}</span>
 

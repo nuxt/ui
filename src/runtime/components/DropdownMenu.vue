@@ -98,7 +98,7 @@ const ui = computed(() => dropdownMenu({
     </DropdownMenuTrigger>
 
     <UDropdownMenuContent
-      :class="ui.content({ class: props.class })"
+      :class="ui.content({ class: [props.class, props.ui?.content] })"
       :ui="ui"
       :ui-override="props.ui"
       v-bind="contentProps"

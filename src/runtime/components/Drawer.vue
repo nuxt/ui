@@ -73,7 +73,7 @@ const ui = drawer()
     <DrawerPortal :disabled="!portal">
       <DrawerOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DrawerContent :class="ui.content({ class: props.class })" v-bind="contentProps">
+      <DrawerContent :class="ui.content({ class: [props.class, props.ui?.content] })" v-bind="contentProps">
         <slot name="handle">
           <div :class="ui.handle({ class: props.ui?.handle })" />
         </slot>

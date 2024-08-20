@@ -88,7 +88,7 @@ const ui = computed(() => contextMenu({
     </ContextMenuTrigger>
 
     <UContextMenuContent
-      :class="ui.content({ class: props.class })"
+      :class="ui.content({ class: [props.class, props.ui?.content] })"
       :ui="ui"
       :ui-override="props.ui"
       v-bind="contentProps"

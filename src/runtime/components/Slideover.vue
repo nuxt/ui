@@ -111,7 +111,7 @@ const ui = computed(() => slideover({
     <DialogPortal :disabled="!portal">
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DialogContent :data-side="side" :class="ui.content({ class: props.class })" v-bind="contentProps" v-on="contentEvents">
+      <DialogContent :data-side="side" :class="ui.content({ class: [props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
         <slot name="content">
           <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
             <slot name="header">

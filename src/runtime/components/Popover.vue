@@ -78,7 +78,7 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
     </Component.Trigger>
 
     <Component.Portal :disabled="!portal">
-      <Component.Content v-bind="contentProps" :class="ui.content({ class: props.class })">
+      <Component.Content v-bind="contentProps" :class="ui.content({ class: [props.class, props.ui?.content] })">
         <slot name="content" />
 
         <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
