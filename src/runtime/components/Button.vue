@@ -69,11 +69,11 @@ const ui = computed(() => button({
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
     </slot>
 
-    <span v-if="label || !!slots.default" :class="ui.label({ class: props.ui?.label })">
-      <slot>
+    <slot>
+      <span v-if="label" :class="ui.label({ class: props.ui?.label })">
         {{ label }}
-      </slot>
-    </span>
+      </span>
+    </slot>
 
     <slot name="trailing">
       <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />

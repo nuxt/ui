@@ -11,7 +11,7 @@ exports[`Button > renders with class correctly 1`] = `"<button type="button" cla
 
 exports[`Button > renders with default slot correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-white dark:text-gray-900 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="truncate">Default slot</span>
+  <!--v-if-->Default slot
   <!--v-if-->
 </button>"
 `;
