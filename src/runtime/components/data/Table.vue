@@ -83,7 +83,7 @@
                 <UButton
                   v-bind="{ ...(ui.default.expandButton || {}), ...expandButton }"
                   :ui="{ icon: { base: [ui.expand.icon, openedRows.includes(index) && 'rotate-180'] } }"
-                  @click="toggleOpened(index)"
+                  @click="toggleOpened({ index, row })"
                 />
               </td>
 
@@ -154,6 +154,10 @@ interface Column {
   [key: string]: any
 }
 
+interface Row {
+  [key: string]: any
+}
+
 export default defineComponent({
   components: {
     UIcon,
@@ -172,7 +176,7 @@ export default defineComponent({
       default: () => defaultComparator
     },
     rows: {
-      type: Array as PropType<{ [key: string]: any }[]>,
+      type: Array as PropType<Row[]>,
       default: () => []
     },
     columns: {
@@ -236,7 +240,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'update:sort'],
+  emits: ['update:modelValue', 'update:sort', 'update:expand'],
   setup (props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -349,11 +353,12 @@ export default defineComponent({
       return get(row, rowKey, defaultValue)
     }
 
-    function toggleOpened (index: number) {
+    function toggleOpened ({ index, row }: { index: number, row: Row }) {
       if (openedRows.value.includes(index)) {
         openedRows.value = openedRows.value.filter((i) => i !== index)
       } else {
         openedRows.value.push(index)
+        emit('update:expand', { expandedRows: openedRows.value, row })
       }
     }
 

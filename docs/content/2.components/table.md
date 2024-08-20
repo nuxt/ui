@@ -314,6 +314,29 @@ componentProps:
 ---
 ::
 
+#### Custom `expand` event
+
+The `@update:expand` event is emitted when a row is expanded. This event provides the current state of expanded rows and the data of the row that triggered the event.
+
+To use the `@update:expand` event, add it to your `UTable` component. The event handler will receive an object with the following properties:
+- `expandedRows`: An array of indices of the currently expanded rows.
+- `row`: The row data that triggered the expand/collapse action.
+
+```vue
+<script setup lang="ts">
+const { data, pending } = await useLazyFetch(() => `/api/users?orderBy=${sort.value.column}&order=${sort.value.direction}`)
+
+const handleExpand = ({ expandedRows, row }) => {
+  console.log('Expanded Rows:', expandedRows);
+  console.log('Row Data:', row);
+};
+</script>
+
+<template>
+  <UTable :loading="pending" :rows="data" @update:expand="handleExpand" />
+</template>
+```
+
 ### Loading
 
 Use the `loading` prop to indicate that data is currently loading with an indeterminate [Progress](/components/progress#indeterminate) bar.
