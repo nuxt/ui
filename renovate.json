@@ -8,5 +8,8 @@
     "nuxt-component-meta",
     "valibot30",
     "valibot31"
-  ]
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  }
 }
