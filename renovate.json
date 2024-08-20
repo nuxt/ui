@@ -4,6 +4,7 @@
   ],
   "ignoreDeps": [
     "@nuxt/eslint-config",
+    "eslint",
     "nuxt-component-meta",
     "valibot30",
     "valibot31"
