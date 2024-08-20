@@ -273,6 +273,21 @@ componentProps:
 ---
 ::
 
+Now, you can enable **Single Selection** so it will only return the selected row by setting the `multiple` prop to `false`. 
+::callout{icon="i-heroicons-exclamation-triangle"}
+The default data type of `v-model` in `UTable` is `Array`, please beware of this when you enable **Single Selection**. For the proper handling, please refer to the following example.
+::
+::component-example{class="grid"}
+---
+extraClass: 'overflow-hidden'
+padding: false
+component: 'table-example-selectable-single'
+componentProps:
+  class: 'flex-1'
+---
+::
+
+
 ### Searchable
 
 You can easily use the [Input](/components/input) component to filter the rows.
