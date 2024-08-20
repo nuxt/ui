@@ -48,7 +48,7 @@
     "@tailwindcss/typography": "^0.5.14",
     "@vueuse/core": "^10.11.1",
     "@vueuse/integrations": "^10.11.1",
-    "@vueuse/math": "^10.11.1",
+    "@vueuse/math": "^11.0.1",
     "defu": "^6.1.4",
     "fuse.js": "^6.6.2",
     "ohash": "^1.1.3",
