@@ -167,6 +167,10 @@ export default defineComponent({
       type: Array,
       default: null
     },
+    multiple: {
+      type: Boolean,
+      default: true
+    },
     by: {
       type: [String, Function],
       default: () => defaultComparator
@@ -270,7 +274,12 @@ export default defineComponent({
         return props.modelValue
       },
       set (value) {
-        emit('update:modelValue', value)
+        if (props.multiple) {
+          emit('update:modelValue', value)
+        } else {
+          value = [value.at(-1)]
+          emit('update:modelValue', value)
+        }
       }
     })
 
