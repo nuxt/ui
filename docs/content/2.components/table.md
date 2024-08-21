@@ -273,7 +273,6 @@ componentProps:
 ---
 ::
 
-
 ### Searchable
 
 You can easily use the [Input](/components/input) component to filter the rows.
