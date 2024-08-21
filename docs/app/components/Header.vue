@@ -32,7 +32,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
     <!-- <UNavigationMenu :items="items" variant="link" /> -->
 
     <template #right>
-      <!-- <ColorPicker /> -->
+      <ColorPicker />
 
       <UTooltip text="Search" :kbds="['meta', 'K']">
         <UContentSearchButton />
