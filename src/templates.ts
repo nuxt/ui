@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { kebabCase } from 'scule'
-import { addTemplate, addTypeTemplate } from '@nuxt/kit'
+import { addTemplate, addTypeTemplate, hasNuxtModule } from '@nuxt/kit'
 import type { Nuxt } from '@nuxt/schema'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
@@ -14,6 +14,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
       write: true,
       getContents: () => `@import "tailwindcss";
 @import "#build/ui.css";
+${hasNuxtModule('@nuxt/content') ? '@source "../content/**/*.md";' : ''}
     `
     })
 
