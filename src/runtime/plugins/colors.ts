@@ -16,7 +16,7 @@ export default defineNuxtPlugin(() => {
   ${Object.entries(appConfig.ui.colors).map(([key, value]: [string, string]) => generateColor(key, value)).join('\n  ')}
   --color-primary-DEFAULT: var(--color-primary-500);
 }
-.dark {
+@media (prefers-color-scheme: dark) {
   --color-primary-DEFAULT: var(--color-primary-400);
 }
 `
