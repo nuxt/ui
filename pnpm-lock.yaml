@@ -22,8 +22,8 @@ importers:
         specifier: ^1.1.24
         version: 1.1.24
       '@nuxt/icon':
-        specifier: ^1.4.5
-        version: 1.4.5(magicast@0.3.4)(rollup@3.29.4)(vite@5.4.2(@types/node@20.14.12)(terser@5.31.3))(vue@3.4.38(typescript@5.5.4))
+        specifier: ^1.4.8
+        version: 1.4.8(magicast@0.3.4)(rollup@3.29.4)(vite@5.4.2(@types/node@20.14.12)(terser@5.31.3))(vue@3.4.38(typescript@5.5.4))
       '@nuxt/kit':
         specifier: ^3.13.0
         version: 3.13.0(magicast@0.3.4)(rollup@3.29.4)
@@ -113,8 +113,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(typescript@5.5.4)(vue-tsc@2.0.29(typescript@5.5.4))
       valibot:
-        specifier: ^0.37.0
-        version: 0.37.0(typescript@5.5.4)
+        specifier: ^0.38.0
+        version: 0.38.0(typescript@5.5.4)
       valibot30:
         specifier: npm:valibot@0.30.0
         version: valibot@0.30.0
@@ -206,8 +206,8 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2(@popperjs/core@2.11.8)(vue@3.4.38(typescript@5.5.4))
       valibot:
-        specifier: ^0.37.0
-        version: 0.37.0(typescript@5.5.4)
+        specifier: ^0.38.0
+        version: 0.38.0(typescript@5.5.4)
       yup:
         specifier: ^1.4.0
         version: 1.4.0
@@ -234,8 +234,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@antfu/install-pkg@0.1.1':
-    resolution: {integrity: sha512-LyB/8+bSfa0DFGC06zpCEfs89/XoWZwws5ygEa5D+Xsm3OfI+aXQ86VgVG7Acyef+rSZ5HE7J8rrxzrQeM3PjQ==}
+  '@antfu/install-pkg@0.4.0':
+    resolution: {integrity: sha512-vI73C0pFA9L+5v+djh0WSLXb8qYQGH5fX8nczaFe1OTI/8Fh03JS1Mov1V7urb6P3A2cBlBqZNjJIKv54+zVRw==}
 
   '@antfu/utils@0.7.10':
     resolution: {integrity: sha512-+562v9k4aI80m1+VuMHehNJWLOFjBnXn3tdOitzD0il5b7smkSBal4+a3oKiQTbrwMmN/TBUMDvbdoWDehgOww==}
@@ -1229,14 +1229,14 @@ packages:
   '@iconify-json/vscode-icons@1.1.37':
     resolution: {integrity: sha512-02+dR2/LdIZTqGfyQerla5snhdN4edwYgpDuFZpI2lK9w8OVm26WYbg8RR8TxXQrlCRs726NQYxl5W+7V1YM/Q==}
 
-  '@iconify/collections@1.0.444':
-    resolution: {integrity: sha512-3+dA5B8vs+qew23dwBAqv6M4LqtOHlYQiKCproN5o3lLelnA1fnWJMfv5f2RyPecaS9rZEGi1+eg8AFKF2sk1A==}
+  '@iconify/collections@1.0.451':
+    resolution: {integrity: sha512-rxJuvER88l6nkZf3AW1uhnz5KGYwOgUoJMQ7wOn1lEf2PGkvgT+vPNfqT5ig0hp7vAlOo7reasI8TgElXZP0AQ==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
-  '@iconify/utils@2.1.25':
-    resolution: {integrity: sha512-Y+iGko8uv/Fz5bQLLJyNSZGOdMW0G7cnlEX1CiNcKsRXX9cq/y/vwxrIAtLCZhKHr3m0VJmsjVPsvnM4uX8YLg==}
+  '@iconify/utils@2.1.31':
+    resolution: {integrity: sha512-WCu65iVaFRXyGU+op12XVbDZgIov0vzMIlUokZ1WR42cU2wwYMks/pZY8v0tE72W8ShXVaprO79Jv6EjYm3Sjw==}
 
   '@iconify/vue@4.1.3-beta.1':
     resolution: {integrity: sha512-N7iEOnWfhjbMqiyGMhotJKip23nrK5l3+T1hQwpEjKeMD2o4zOjm8zmeEfOOH81EXllhhOm7upR8jcH499YRWA==}
@@ -1352,8 +1352,8 @@ packages:
   '@nuxt/fonts@0.7.2':
     resolution: {integrity: sha512-Tu3Wn1agG96khZaRwFdpYAhr+HltUKWxXXAnK6qvhLWbFbVigEPyQOY352KZ4UjFlTlNxUz9hphwvDNioP3vUQ==}
 
-  '@nuxt/icon@1.4.5':
-    resolution: {integrity: sha512-h0Fe1VhpVB5bcQutsH37G46DyE2u+j5j7+0sFbxT2ovRm+uILqo5ONXWe4WuJ20AtngvdpqvnqT25ZQtzx4K9A==}
+  '@nuxt/icon@1.4.8':
+    resolution: {integrity: sha512-m/KnEFap65O99eG4ISCB9e61o6gTJgztB0MfErYKOLbl1C5404jzz0uVgKXkwJ8ASJzPVT5Kw6OYQeEWgiUdPw==}
 
   '@nuxt/image@1.7.0':
     resolution: {integrity: sha512-zSj32bLgbV9AvLkLX0pF52J5KBfSyj0eSIdpXCtTJATSZlqgcJigoCvmabC1nbcMIp0SZ29Bu9+acQpGTQKz+g==}
@@ -5294,6 +5294,9 @@ packages:
     resolution: {integrity: sha512-ua1L4OgXSBdsu1FPb7F3tYH0F48a6kxvod4pLUlGY9COeJAJQNX/sNH2IiEmsxw7lqYiAwrdHMjz1FctOsyDQg==}
     engines: {node: '>=18'}
 
+  package-manager-detector@0.1.2:
+    resolution: {integrity: sha512-iePyefLTOm2gEzbaZKSW+eBMjg+UYsQvUKxmvGXAQ987K16efBg10MxIjZs08iyX+DY2/owKY9DIdu193kX33w==}
+
   pako@0.2.9:
     resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
 
@@ -6472,6 +6475,9 @@ packages:
   tinybench@2.8.0:
     resolution: {integrity: sha512-1/eK7zUnIklz4JUUlL+658n58XO2hHLQfSk1Zf2LKieUjxidN16eKFEoDEfjHc3ohofSSqK3X5yO6VGb6iW8Lw==}
 
+  tinyexec@0.2.0:
+    resolution: {integrity: sha512-au8dwv4xKSDR+Fw52csDo3wcDztPdne2oM1o/7LFro4h6bdFmvyUAeAfX40pwDtzHgRFqz1XWaUqgKS2G83/ig==}
+
   tinyglobby@0.2.2:
     resolution: {integrity: sha512-mZ2sDMaySvi1PkTp4lTo1In2zjU+cY8OvZsfwrDrx3YGRbXPX1/cbPwCR9zkm3O/Fz9Jo0F1HNgIQ1b8BepqyQ==}
     engines: {node: '>=12.0.0'}
@@ -6805,8 +6811,8 @@ packages:
   valibot@0.31.0:
     resolution: {integrity: sha512-bleS8aVFpRGTUgbMoXzsRJhpxJGiZ3MG1nuNSORuDvio+sI1EyT1+lQHg+77Pfnlxz+25Uj5HiwdaklcDcYdiQ==}
 
-  valibot@0.37.0:
-    resolution: {integrity: sha512-FQz52I8RXgFgOHym3XHYSREbNtkgSjF9prvMFH1nBsRyfL6SfCzoT1GuSDTlbsuPubM7/6Kbw0ZMQb8A+V+VsQ==}
+  valibot@0.38.0:
+    resolution: {integrity: sha512-RCJa0fetnzp+h+KN9BdgYOgtsMAG9bfoJ9JSjIhFHobKWVWyzM3jjaeNTdpFK9tQtf3q1sguXeERJ/LcmdFE7w==}
     peerDependencies:
       typescript: '>=5'
     peerDependenciesMeta:
@@ -7276,10 +7282,10 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@antfu/install-pkg@0.1.1':
+  '@antfu/install-pkg@0.4.0':
     dependencies:
-      execa: 5.1.1
-      find-up: 5.0.0
+      package-manager-detector: 0.1.2
+      tinyexec: 0.2.0
 
   '@antfu/utils@0.7.10': {}
 
@@ -7303,7 +7309,7 @@ snapshots:
       '@babel/traverse': 7.24.8
       '@babel/types': 7.24.9
       convert-source-map: 2.0.0
-      debug: 4.3.5
+      debug: 4.3.6
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -7511,7 +7517,7 @@ snapshots:
       '@babel/helper-split-export-declaration': 7.24.7
       '@babel/parser': 7.24.8
       '@babel/types': 7.24.9
-      debug: 4.3.5
+      debug: 4.3.6
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -7982,18 +7988,18 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify/collections@1.0.444':
+  '@iconify/collections@1.0.451':
     dependencies:
       '@iconify/types': 2.0.0
 
   '@iconify/types@2.0.0': {}
 
-  '@iconify/utils@2.1.25':
+  '@iconify/utils@2.1.31':
     dependencies:
-      '@antfu/install-pkg': 0.1.1
+      '@antfu/install-pkg': 0.4.0
       '@antfu/utils': 0.7.10
       '@iconify/types': 2.0.0
-      debug: 4.3.5
+      debug: 4.3.6
       kolorist: 1.8.0
       local-pkg: 0.5.0
       mlly: 1.7.1
@@ -8052,7 +8058,7 @@ snapshots:
 
   '@kwsites/file-exists@1.1.1':
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.6
     transitivePeerDependencies:
       - supports-color
 
@@ -8177,17 +8183,6 @@ snapshots:
     dependencies:
       '@nuxt/kit': 3.13.0(magicast@0.3.4)(rollup@4.21.0)
       '@nuxt/schema': 3.13.0(rollup@4.21.0)
-      execa: 7.2.0
-      vite: 5.4.2(@types/node@20.14.12)(terser@5.31.3)
-    transitivePeerDependencies:
-      - magicast
-      - rollup
-      - supports-color
-
-  '@nuxt/devtools-kit@1.3.9(magicast@0.3.4)(rollup@3.29.4)(vite@5.4.2(@types/node@20.14.12)(terser@5.31.3))':
-    dependencies:
-      '@nuxt/kit': 3.13.0(magicast@0.3.4)(rollup@3.29.4)
-      '@nuxt/schema': 3.12.4(rollup@3.29.4)
       execa: 7.2.0
       vite: 5.4.2(@types/node@20.14.12)(terser@5.31.3)
     transitivePeerDependencies:
@@ -8433,19 +8428,20 @@ snapshots:
       - uWebSockets.js
       - vite
 
-  '@nuxt/icon@1.4.5(magicast@0.3.4)(rollup@3.29.4)(vite@5.4.2(@types/node@20.14.12)(terser@5.31.3))(vue@3.4.38(typescript@5.5.4))':
+  '@nuxt/icon@1.4.8(magicast@0.3.4)(rollup@3.29.4)(vite@5.4.2(@types/node@20.14.12)(terser@5.31.3))(vue@3.4.38(typescript@5.5.4))':
     dependencies:
-      '@iconify/collections': 1.0.444
+      '@iconify/collections': 1.0.451
       '@iconify/types': 2.0.0
-      '@iconify/utils': 2.1.25
+      '@iconify/utils': 2.1.31
       '@iconify/vue': 4.1.3-beta.1(vue@3.4.38(typescript@5.5.4))
-      '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@3.29.4)(vite@5.4.2(@types/node@20.14.12)(terser@5.31.3))
+      '@nuxt/devtools-kit': 1.3.14(magicast@0.3.4)(rollup@3.29.4)(vite@5.4.2(@types/node@20.14.12)(terser@5.31.3))
       '@nuxt/kit': 3.13.0(magicast@0.3.4)(rollup@3.29.4)
       consola: 3.2.3
       fast-glob: 3.3.2
       local-pkg: 0.5.0
       mlly: 1.7.1
       pathe: 1.1.2
+      std-env: 3.7.0
     transitivePeerDependencies:
       - magicast
       - rollup
@@ -9799,7 +9795,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 7.17.0(typescript@5.5.4)
       '@typescript-eslint/utils': 7.17.0(eslint@8.57.0)(typescript@5.5.4)
-      debug: 4.3.5
+      debug: 4.3.6
       eslint: 8.57.0
       ts-api-utils: 1.3.0(typescript@5.5.4)
     optionalDependencies:
@@ -9813,7 +9809,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 7.17.0
       '@typescript-eslint/visitor-keys': 7.17.0
-      debug: 4.3.5
+      debug: 4.3.6
       globby: 11.1.0
       is-glob: 4.0.3
       minimatch: 9.0.5
@@ -10374,7 +10370,7 @@ snapshots:
 
   agent-base@6.0.2:
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.6
     transitivePeerDependencies:
       - supports-color
 
@@ -11983,7 +11979,7 @@ snapshots:
     dependencies:
       basic-ftp: 5.0.5
       data-uri-to-buffer: 6.0.2
-      debug: 4.3.5
+      debug: 4.3.6
       fs-extra: 11.2.0
     transitivePeerDependencies:
       - supports-color
@@ -12298,7 +12294,7 @@ snapshots:
   https-proxy-agent@5.0.1:
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.5
+      debug: 4.3.6
     transitivePeerDependencies:
       - supports-color
 
@@ -12652,7 +12648,7 @@ snapshots:
 
   koa-send@5.0.1:
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.6
       http-errors: 1.8.1
       resolve-path: 1.4.0
     transitivePeerDependencies:
@@ -13557,7 +13553,7 @@ snapshots:
   nuxt-site-config-kit@2.2.15(magicast@0.3.4)(rollup@4.19.0)(vue@3.4.38(typescript@5.5.4)):
     dependencies:
       '@nuxt/kit': 3.13.0(magicast@0.3.4)(rollup@4.19.0)
-      '@nuxt/schema': 3.12.4(rollup@4.19.0)
+      '@nuxt/schema': 3.13.0(rollup@4.19.0)
       pkg-types: 1.1.3
       site-config-stack: 2.2.15(vue@3.4.38(typescript@5.5.4))
       std-env: 3.7.0
@@ -13570,9 +13566,9 @@ snapshots:
 
   nuxt-site-config@2.2.15(magicast@0.3.4)(rollup@4.19.0)(vite@5.4.2(@types/node@20.14.12)(terser@5.31.3))(vue@3.4.38(typescript@5.5.4)):
     dependencies:
-      '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@4.19.0)(vite@5.4.2(@types/node@20.14.12)(terser@5.31.3))
+      '@nuxt/devtools-kit': 1.3.14(magicast@0.3.4)(rollup@4.19.0)(vite@5.4.2(@types/node@20.14.12)(terser@5.31.3))
       '@nuxt/kit': 3.13.0(magicast@0.3.4)(rollup@4.19.0)
-      '@nuxt/schema': 3.12.4(rollup@4.19.0)
+      '@nuxt/schema': 3.13.0(rollup@4.19.0)
       nuxt-site-config-kit: 2.2.15(magicast@0.3.4)(rollup@4.19.0)(vue@3.4.38(typescript@5.5.4))
       pathe: 1.1.2
       pkg-types: 1.1.3
@@ -14067,6 +14063,8 @@ snapshots:
       registry-auth-token: 5.0.2
       registry-url: 6.0.1
       semver: 7.6.3
+
+  package-manager-detector@0.1.2: {}
 
   pako@0.2.9: {}
 
@@ -15531,6 +15529,8 @@ snapshots:
 
   tinybench@2.8.0: {}
 
+  tinyexec@0.2.0: {}
+
   tinyglobby@0.2.2:
     dependencies:
       fdir: 6.2.0(picomatch@4.0.2)
@@ -16017,7 +16017,7 @@ snapshots:
 
   valibot@0.31.0: {}
 
-  valibot@0.37.0(typescript@5.5.4):
+  valibot@0.38.0(typescript@5.5.4):
     optionalDependencies:
       typescript: 5.5.4
 
