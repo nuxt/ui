@@ -1,7 +1,7 @@
 {
   "name": "@nuxt/ui",
   "version": "3.0.0",
-  "packageManager": "pnpm@9.7.1",
+  "packageManager": "pnpm@9.8.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -45,9 +45,9 @@
     "release": "release-it"
   },
   "dependencies": {
-    "@nuxt/icon": "^1.4.5",
-    "@nuxt/kit": "^3.12.4",
-    "@nuxt/schema": "^3.12.4",
+    "@nuxt/icon": "^1.4.8",
+    "@nuxt/kit": "^3.13.0",
+    "@nuxt/schema": "^3.13.0",
     "@nuxtjs/color-mode": "^3.4.4",
     "@tailwindcss/postcss": "4.0.0-alpha.19",
     "@tailwindcss/vite": "4.0.0-alpha.19",
@@ -63,17 +63,17 @@
     "vaul-vue": "^0.2.0"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.5.1",
+    "@nuxt/eslint-config": "^0.5.2",
     "@nuxt/module-builder": "^0.8.3",
     "@nuxt/test-utils": "^3.14.1",
     "@release-it/conventional-changelog": "^8.0.1",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.9.0",
-    "happy-dom": "^14.12.3",
+    "happy-dom": "^15.0.0",
     "joi": "^17.13.3",
-    "nuxt": "^3.12.4",
+    "nuxt": "^3.13.0",
     "release-it": "^17.6.0",
-    "valibot": "^0.37.0",
+    "valibot": "^0.38.0",
     "vitest": "^2.0.5",
     "vitest-environment-nuxt": "^1.0.1",
     "vue-tsc": "^2.0.29",

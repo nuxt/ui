@@ -15,12 +15,12 @@
     "@octokit/rest": "^21.0.2",
     "@vueuse/nuxt": "^11.0.1",
     "joi": "^17.13.3",
-    "nuxt": "^3.12.4",
+    "nuxt": "^3.13.0",
     "nuxt-component-meta": "^0.7.0",
     "nuxt-og-image": "^3.0.0-rc.65",
     "prettier": "^3.3.3",
     "ufo": "^1.5.4",
-    "valibot": "^0.37.0",
+    "valibot": "^0.38.0",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
   }
