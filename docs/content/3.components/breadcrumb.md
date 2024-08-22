@@ -85,15 +85,15 @@ Use the `slot` property to customize a specific item.
 
 You will have access to the following slots:
 
-- `{{ item.slot }}`{lang="ts-type"}
-- `{{ item.slot }}-leading`{lang="ts-type"}
-- `{{ item.slot }}-label`{lang="ts-type"}
-- `{{ item.slot }}-trailing`{lang="ts-type"}
+- `#{{ item.slot }}`{lang="ts-type"}
+- `#{{ item.slot }}-leading`{lang="ts-type"}
+- `#{{ item.slot }}-label`{lang="ts-type"}
+- `#{{ item.slot }}-trailing`{lang="ts-type"}
 
 :component-example{name="breadcrumb-custom-slot-example"}
 
 ::tip{to="#slots"}
-You can also use the `item`, `item-leading`, `item-label` and `item-trailing` slots to customize all items.
+You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
 ::
 
 ## API

@@ -10,6 +10,10 @@ export default defineNuxtConfig({
       bodyAttrs: {
         class: 'antialiased font-sans text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900'
       }
+    },
+    rootAttrs: {
+      'vaul-drawer-wrapper': '',
+      'class': 'bg-white dark:bg-gray-900'
     }
   },
 
@@ -129,6 +133,7 @@ export default defineNuxtConfig({
         'UChip',
         'UCollapsible',
         'UContextMenu',
+        'UDrawer',
         'UDropdownMenu',
         'UFormField',
         'UIcon',

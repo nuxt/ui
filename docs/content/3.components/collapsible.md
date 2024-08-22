@@ -36,7 +36,7 @@ class: 'justify-center'
 ::
 
 ::note
-In this example, press :kbd{value="O" color="blue"} to toggle the Collapsible.
+In this example, press :kbd{value="O"} to toggle the Collapsible.
 ::
 
 ### With rotating icon
