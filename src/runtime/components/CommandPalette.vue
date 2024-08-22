@@ -31,6 +31,7 @@ export interface CommandPaletteGroup<T> {
   label?: string
   slot?: string
   items?: T[]
+  /** Filter group items based on the search term. */
   filter?: (searchTerm: string, items: T[]) => T[]
   /** The icon displayed when an item is highlighted. */
   highlightedIcon?: string
@@ -142,14 +143,14 @@ const items = computed(() => props.groups?.filter((group) => {
   return true
 }).flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
 
-const { results: fuseResults } = useFuse<T>(searchTerm, items, fuse)
+const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
 
 const groups = computed(() => {
   if (!fuseResults.value?.length) {
     return []
   }
 
-  const groupsById: Record<string, (T & { matches?: FuseResult<T>['matches'] })[]> = fuseResults.value.reduce((acc, result) => {
+  const groupsById = fuseResults.value.reduce((acc, result) => {
     const { item, matches } = result
     if (!item.group) {
       return acc
@@ -159,7 +160,7 @@ const groups = computed(() => {
     acc[item.group].push({ ...item, matches })
 
     return acc
-  }, {})
+  }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
 
   return Object.entries(groupsById).map(([id, items]) => {
     const group = props.groups?.find(group => group.id === id)
