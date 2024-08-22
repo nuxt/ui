@@ -33,12 +33,17 @@ function truncateHTMLFromStart(html: string, maxLength: number) {
 }
 
 export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, searchTerm: string, forceKey?: string, omitKeys?: string[]) {
-  const generateHighlightedText = (value: FuseResultMatch['value'], indices: FuseResultMatch['indices'] = []) => {
+  function generateHighlightedText(value: FuseResultMatch['value'], indices: FuseResultMatch['indices'] = []) {
     value = value || ''
     let content = ''
     let nextUnhighlightedRegionStartingIndex = 0
 
     indices.forEach((region) => {
+      // skip if region is a single character
+      if (region.length === 2 && region[0] === region[1]) {
+        return
+      }
+
       const lastIndiceNextIndex = region[1] + 1
       const isMatched = (lastIndiceNextIndex - region[0]) >= searchTerm.length
 
