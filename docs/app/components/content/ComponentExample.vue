@@ -57,7 +57,7 @@ const { data: ast } = await useAsyncData(`component-example-${camelName}`, async
       semi: false,
       singleQuote: true
     })
-  } catch (e) {
+  } catch {
     formatted = code.value
   }
 

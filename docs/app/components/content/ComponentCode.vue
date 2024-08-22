@@ -189,7 +189,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
       semi: false,
       singleQuote: true
     })
-  } catch (e) {
+  } catch {
     formatted = code.value
   }
 

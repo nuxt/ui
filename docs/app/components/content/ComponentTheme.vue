@@ -56,11 +56,11 @@ export default defineAppConfig({
 ::
 
 ${strippedCompoundVariants.value
-? `
+    ? `
 ::callout{icon="i-simple-icons-github" to="https://github.com/benjamincanac/ui3/blob/dev/src/theme/${name}.ts"}
 Some colors in \`compoundVariants\` are omitted for readability. Check out the source code on GitHub.
 ::`
-: ''}
+    : ''}
 `
 
   let formatted = ''
@@ -70,7 +70,7 @@ Some colors in \`compoundVariants\` are omitted for readability. Check out the s
       semi: false,
       singleQuote: true
     })
-  } catch (e) {
+  } catch {
     formatted = md
   }
 

@@ -22,7 +22,7 @@ export default defineAppConfig({
       semi: false,
       singleQuote: true
     })
-  } catch (e) {
+  } catch {
     formatted = md
   }
 
