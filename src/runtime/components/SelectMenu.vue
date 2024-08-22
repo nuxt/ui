@@ -68,7 +68,7 @@ export interface SelectMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelVal
   portal?: boolean
   /**
    * Whether to filter items or not, can be an array of fields to filter.
-   * When `false`, items will not be filtered which is useful for custom filtering.
+   * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
    * @defaultValue ['label']
    */
   filter?: boolean | string[]

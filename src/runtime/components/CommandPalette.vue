@@ -31,8 +31,14 @@ export interface CommandPaletteGroup<T> {
   label?: string
   slot?: string
   items?: T[]
-  /** Filter group items based on the search term. */
-  filter?: (searchTerm: string, items: T[]) => T[]
+  /**
+   * Wether to filter group items with [useFuse](https://vueuse.org/integrations/useFuse).
+   * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
+   * @defaultValue true
+   */
+  filter?: boolean
+  /** Filter group items after the search happened. */
+  postFilter?: (searchTerm: string, items: T[]) => T[]
   /** The icon displayed when an item is highlighted. */
   highlightedIcon?: string
 }
@@ -140,16 +146,33 @@ const items = computed(() => props.groups?.filter((group) => {
     return false
   }
 
+  if (group.filter === false) {
+    return false
+  }
+
   return true
 }).flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
 
-const groups = computed(() => {
-  if (!fuseResults.value?.length) {
-    return []
+function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
+  if (group?.postFilter && typeof group.postFilter === 'function') {
+    items = group.postFilter(searchTerm.value, items)
   }
 
+  return {
+    ...group,
+    items: items.slice(0, fuse.value.resultLimit).map((item) => {
+      return {
+        ...item,
+        labelHtml: highlight<T>(item, searchTerm.value, 'label'),
+        suffixHtml: highlight<T>(item, searchTerm.value, undefined, ['label'])
+      }
+    })
+  }
+}
+
+const groups = computed(() => {
   const groupsById = fuseResults.value.reduce((acc, result) => {
     const { item, matches } = result
     if (!item.group) {
@@ -162,24 +185,23 @@ const groups = computed(() => {
     return acc
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
 
-  return Object.entries(groupsById).map(([id, items]) => {
+  const fuseGroups = Object.entries(groupsById).map(([id, items]) => {
     const group = props.groups?.find(group => group.id === id)
-
-    if (group?.filter && typeof group.filter === 'function') {
-      items = group.filter(searchTerm.value, items)
+    if (!group) {
+      return
     }
 
-    return {
-      ...group,
-      items: items.slice(0, fuse.value.resultLimit).map((item) => {
-        return {
-          ...item,
-          labelHtml: highlight<T>(item, searchTerm.value, 'label'),
-          suffixHtml: highlight<T>(item, searchTerm.value, undefined, ['label'])
-        }
-      })
-    }
-  })
+    return getGroupWithItems(group, items)
+  }).filter(group => !!group)
+
+  const nonFuseGroups = props.groups?.filter(group => group.filter === false && group.items?.length).map((group) => {
+    return getGroupWithItems(group, group.items || [])
+  }) || []
+
+  return [
+    ...fuseGroups,
+    ...nonFuseGroups
+  ]
 })
 </script>
 
