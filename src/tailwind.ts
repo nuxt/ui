@@ -73,14 +73,24 @@ export default async function installTailwind (
     `
   })
 
+  // @ts-expect-error - `@nuxtjs/tailwindcss` not installed yet
+  const { configPath: userTwConfigPath = [], ...twModuleConfig } = nuxt.options.tailwindcss ?? {}
+
+  const twConfigPaths = [
+    configTemplate.dst,
+    join(nuxt.options.rootDir, 'tailwind.config')
+  ]
+
+  if (typeof userTwConfigPath === 'string') {
+    twConfigPaths.push(userTwConfigPath)
+  } else {
+    twConfigPaths.push(...userTwConfigPath)
+  }
+
   // 3. install module
   await installModule('@nuxtjs/tailwindcss', defu({
     exposeConfig: true,
     config: { darkMode: 'class' },
-    configPath: [
-      configTemplate.dst,
-      join(nuxt.options.rootDir, 'tailwind.config')
-    ]
-  // @ts-expect-error - `@nuxtjs/tailwindcss` not installed yet
-  }, nuxt.options.tailwindcss))
+    configPath: twConfigPaths
+  }, twModuleConfig))
 }
