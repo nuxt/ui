@@ -6,14 +6,9 @@ const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
   app: {
-    head: {
-      bodyAttrs: {
-        class: 'antialiased font-sans text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900'
-      }
-    },
     rootAttrs: {
       'vaul-drawer-wrapper': '',
-      'class': 'bg-white dark:bg-gray-900'
+      'class': 'bg-[--background]'
     }
   },
 
