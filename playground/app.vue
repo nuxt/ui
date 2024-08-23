@@ -8,12 +8,25 @@
       <p class="text-gray-500 dark:text-gray-400">
         Try your components here!
       </p>
+      <UButton label="Open Slideover" @click="openSlideover" />
     </UCard>
+    <USlideovers />
   </UContainer>
 </template>
 
 <script setup>
+import { SlideoverExampleComponent } from '#components'
 
+const slideover = useSlideover()
+
+const openSlideover = () => {
+  const parent = slideover.open(SlideoverExampleComponent, { count: 1, side: 'left',
+                                                             onSwitch: () => parent.patch({ side: 'right' }) })
+
+
+
+
+}
 </script>
 
 <style>

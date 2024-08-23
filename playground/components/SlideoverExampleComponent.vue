@@ -14,6 +14,7 @@ const props = defineProps({
 
 const emits = defineEmits<{
   close: [];
+  switch: [];
 }>()
 
 const slideover = useSlideover()
@@ -23,13 +24,8 @@ const anotherCount = ref(0)
 function openAnotherSlideover () {
   anotherCount.value += 1
 
-  const instance = slideover.open(SlideoverExampleComponentB, {
-    count: anotherCount.value,
-    side: 'left',
-    onClose: () => {
-      instance.close()
-    }
-  })
+  slideover.open(SlideoverExampleComponentB)
+
 }
 </script>
 
@@ -46,10 +42,11 @@ function openAnotherSlideover () {
       </template>
 
       <div class="flex gap-2 flex-col h-full">
-        <div class="flex justify-around">
+        <div class="flex justify-around flex-col">
+          <pre>{{ $props }}</pre>
           <UButton label="Reveal another slideover" @click="openAnotherSlideover" />
+          <UButton label="Switch" @click="$emit('switch')" />
         </div>
-        <Placeholder class="flex-grow" />
       </div>
     </UCard>
   </USlideover>

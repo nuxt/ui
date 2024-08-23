@@ -13,7 +13,7 @@ export interface Slideover {
 export interface SlideoverInstance<T> {
   id: number,
   isOpen: boolean
-  component: Component | string
+  component: Component
   props: Slideover & T
   patch (props: Partial<Slideover & T>): void
   close: () => void,

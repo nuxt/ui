@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { SlideoverExampleComponentB } from '#components'
-
 const props = defineProps({
   count: {
     type: Number,
@@ -16,21 +14,6 @@ const emits = defineEmits<{
   close: [];
 }>()
 
-const slideover = useSlideover()
-const anotherCount = ref(0)
-
-
-function openAnotherSlideover () {
-  anotherCount.value += 1
-
-  const instance = slideover.open(SlideoverExampleComponentB, {
-    count: anotherCount.value,
-    side: 'left',
-    onClose: () => {
-      instance.close()
-    }
-  })
-}
 </script>
 
 <template>
@@ -44,13 +27,6 @@ function openAnotherSlideover () {
           <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="emits('close')" />
         </div>
       </template>
-
-      <div class="flex gap-2 flex-col h-full">
-        <div class="flex justify-around">
-          <UButton label="Reveal another slideover" @click="openAnotherSlideover" />
-        </div>
-        <Placeholder class="flex-grow" />
-      </div>
     </UCard>
   </USlideover>
 </template>
