@@ -186,7 +186,12 @@ function onUpdateOpen(value: boolean) {
                 {{ item.label }}
               </SelectLabel>
               <SelectSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
-              <SelectItem v-else :class="ui.item({ class: props.ui?.item })" :disabled="item.disabled" :value="typeof item === 'object' ? (item[valueKey as keyof SelectItem] as string) : item">
+              <SelectItem
+                v-else
+                :class="ui.item({ class: props.ui?.item })"
+                :disabled="item.disabled"
+                :value="typeof item === 'object' ? (item[valueKey as keyof SelectItem] as string) : item"
+              >
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
                     <UAvatar v-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
