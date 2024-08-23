@@ -39,6 +39,35 @@ slots:
 :placeholder{class="h-48"}
 ::
 
+### Disabled
+
+Use the `disabled` prop to disable the Collapsible.
+
+::component-code
+---
+prettier: true
+ignore:
+  - class
+class: 'justify-center'
+props:
+  class: 'w-48'
+  disabled: true
+slots:
+  default: |
+
+    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block />
+
+  content: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block}
+
+#content
+:placeholder{class="h-48"}
+::
+
 ## Examples
 
 ### Control open state
