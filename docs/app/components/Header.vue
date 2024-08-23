@@ -6,7 +6,6 @@ const props = defineProps<{
   links: NavigationMenuItem[]
 }>()
 
-const route = useRoute()
 const config = useRuntimeConfig().public
 
 const navigation = inject<Ref<NavItem[]>>('navigation')
@@ -15,12 +14,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
 </script>
 
 <template>
-  <UHeader
-    :class="{
-      'border-primary-200/75 dark:border-primary-900/50': route.path === '/',
-      'border-gray-200 dark:border-gray-800': route.path !== '/'
-    }"
-  >
+  <UHeader>
     <template #left>
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white" aria-label="Nuxt UI">
         <Logo class="w-auto h-6" />

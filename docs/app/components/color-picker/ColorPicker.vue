@@ -20,7 +20,7 @@
         <ColorPickerPill v-for="color in primaryColors" :key="color" :color="color" :selected="primary" @select="primary = color" />
       </fieldset>
 
-      <hr class="border-gray-200 dark:border-gray-800 my-2">
+      <USeparator class="my-2" type="dashed" />
 
       <fieldset class="grid grid-cols-5 gap-px">
         <legend class="text-[11px] font-bold mb-1">
