@@ -84,6 +84,7 @@
     "@nuxt/kit": "3.12.3",
     "@nuxt/schema": "3.12.3",
     "@nuxt/ui": "workspace:*",
+    "happy-dom": "14.12.3",
     "nuxt": "3.12.3",
     "vite": "5.2.4"
   }
