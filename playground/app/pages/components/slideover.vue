@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LazySlideoverProgrammaticExample } from '#components'
+import { LazySlideoverExample } from '#components'
 
 const open = ref(false)
 const count = ref(0)
@@ -9,8 +9,8 @@ const slideover = useSlideover()
 function openSlideover() {
   count.value++
 
-  slideover.open(LazySlideoverProgrammaticExample, {
-    description: 'And you can even provide a description!',
+  slideover.open(LazySlideoverExample, {
+    title: 'Slideover',
     count: count.value
   })
 }
