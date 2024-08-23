@@ -35,7 +35,7 @@ export interface FormFieldSlots {
 }
 </script>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, ref, inject, provide, type Ref } from 'vue'
 import { Label } from 'radix-vue'
 import { useId } from '#imports'

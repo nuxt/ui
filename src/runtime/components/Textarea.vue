@@ -42,7 +42,7 @@ export interface TextareaSlots {
 }
 </script>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
