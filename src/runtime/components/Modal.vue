@@ -15,8 +15,20 @@ export interface ModalProps extends DialogRootProps {
   description?: string
   /** The content of the modal. */
   content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
+  /**
+   * Render an overlay behind the modal.
+   * @defaultValue true
+   */
   overlay?: boolean
+  /**
+   * Animate the modal when opening or closing.
+   * @defaultValue true
+   */
   transition?: boolean
+  /**
+   * When `true`, the modal will take up the full screen.
+   * @defaultValue false
+   */
   fullscreen?: boolean
   /**
    * Render the modal in a portal.
@@ -34,7 +46,10 @@ export interface ModalProps extends DialogRootProps {
    * @defaultValue appConfig.ui.icons.close
    */
   closeIcon?: string
-  /** When `true`, the modal will not close when clicking outside. */
+  /**
+   * When `true`, the modal will not close when clicking outside.
+   * @defaultValue false
+   */
   preventClose?: boolean
   class?: any
   ui?: Partial<typeof modal.slots>
@@ -65,7 +80,8 @@ const props = withDefaults(defineProps<ModalProps>(), {
   close: true,
   portal: true,
   overlay: true,
-  transition: true
+  transition: true,
+  modal: true
 })
 const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()

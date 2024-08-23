@@ -76,9 +76,9 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/getting-started',
-        '/api/releases.json',
-        '/api/pulls.json'
+        '/getting-started'
+        // '/api/releases.json',
+        // '/api/pulls.json'
       ],
       ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     }
@@ -135,6 +135,7 @@ export default defineNuxtConfig({
         'UInput',
         'UKbd',
         'ULink',
+        'UModal',
         'UProgress',
         'URadioGroup',
         'USlider',
@@ -147,12 +148,6 @@ export default defineNuxtConfig({
       globals.forEach(c => c.global = 'sync')
     }
   },
-
-  // vite: {
-  //   optimizeDeps: {
-  //     include: ['date-fns']
-  //   }
-  // },
 
   site: {
     url: 'https://ui3.nuxt.com'

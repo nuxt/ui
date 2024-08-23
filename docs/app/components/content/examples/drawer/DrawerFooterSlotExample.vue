@@ -3,7 +3,7 @@ const open = ref(false)
 </script>
 
 <template>
-  <UDrawer v-model:open="open" title="Drawer with actions" description="This is useful when you want a form in a drawer.">
+  <UDrawer v-model:open="open" title="Drawer with footer" description="This is useful when you want a form in a Drawer.">
     <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
 
     <template #body>

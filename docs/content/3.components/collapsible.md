@@ -39,6 +39,10 @@ class: 'justify-center'
 In this example, press :kbd{value="O"} to toggle the Collapsible.
 ::
 
+::tip
+This allows you to move the trigger outside of the Collapsible or remove it entirely.
+::
+
 ### With rotating icon
 
 Here is an example with a rotating icon in the Button that indicates the open state of the Collapsible.

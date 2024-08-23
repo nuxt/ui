@@ -20,6 +20,10 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
   description?: string
   /** The content of the drawer. */
   content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
+  /**
+   * Render an overlay behind the drawer.
+   * @defaultValue true
+   */
   overlay?: boolean
   /**
    * Render the drawer in a portal.

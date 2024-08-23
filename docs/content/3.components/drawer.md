@@ -26,7 +26,7 @@ slots:
 
   content: |
 
-    <Placeholder class="h-48" />
+    <Placeholder class="h-48 m-4" />
 ---
 
 :u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
@@ -35,7 +35,7 @@ slots:
 :placeholder{class="h-48 m-4"}
 ::
 
-You can also use the `#header`, `#body` and `#footer` slots to customize the Drawer's content.
+You can also use the `#header`{lang="ts-type"}, `#body`{lang="ts-type"} and `#footer`{lang="ts-type"} slots to customize the Drawer's content.
 
 ### Title
 
@@ -46,7 +46,7 @@ Use the `title` prop to set the title of the Drawer's header.
 prettier: true
 class: 'justify-center'
 props:
-  title: 'Title'
+  title: 'Drawer with title'
 slots:
   default: |
 
@@ -74,7 +74,7 @@ class: 'justify-center'
 ignore:
   - title
 props:
-  title: 'Title'
+  title: 'Drawer with description'
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
 slots:
   default: |
@@ -92,6 +92,32 @@ slots:
 :placeholder{class="h-48"}
 ::
 
+### Overlay
+
+Use the `overlay` prop to control whether the Drawer has an overlay or not. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+class: 'justify-center'
+props:
+  overlay: false
+slots:
+  default: |
+
+    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+
+  content: |
+
+    <Placeholder class="h-48 m-4" />
+---
+
+:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+
+#content
+:placeholder{class="h-48 m-4"}
+::
+
 ### Scale background
 
 Use the `should-scale-background` prop to scale the background when the Drawer is open, creating a visual depth effect.
@@ -105,14 +131,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open with scale" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
 
   content: |
 
-    <Placeholder class="h-48" />
+    <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open with scale" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
 
 #content
 :placeholder{class="h-screen m-4"}
@@ -160,6 +186,10 @@ class: 'justify-center'
 
 ::note
 In this example, press :kbd{value="O"} to toggle the Drawer.
+::
+
+::tip
+This allows you to move the trigger outside of the Drawer or remove it entirely.
 ::
 
 ### With footer slot

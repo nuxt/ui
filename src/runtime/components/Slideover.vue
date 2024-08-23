@@ -18,12 +18,12 @@ export interface SlideoverProps extends DialogRootProps {
   /** The content of the slideover. */
   content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
-   * Display an overlay behind the slideover.
+   * Render an overlay behind the slideover.
    * @defaultValue true
    */
   overlay?: boolean
   /**
-   * Open & close the slideover with a transition.
+   * Animate the slideover when opening or closing.
    * @defaultValue true
    */
   transition?: boolean
@@ -44,7 +44,10 @@ export interface SlideoverProps extends DialogRootProps {
    * @defaultValue appConfig.ui.icons.close
    */
   closeIcon?: string
-  /** When `true`, the slideover will not close when clicking outside. */
+  /**
+   * When `true`, the slideover will not close when clicking outside.
+   * @defaultValue false
+   */
   preventClose?: boolean
   class?: any
   ui?: Partial<typeof slideover.slots>
@@ -76,6 +79,7 @@ const props = withDefaults(defineProps<SlideoverProps>(), {
   portal: true,
   overlay: true,
   transition: true,
+  modal: true,
   side: 'right'
 })
 const emits = defineEmits<SlideoverEmits>()

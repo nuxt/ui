@@ -129,7 +129,7 @@ props:
 ::
 
 ::tip
-You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 ::
 
 You can pass all the props of the [Button](/components/button) component to customize it.
