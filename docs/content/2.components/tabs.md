@@ -11,6 +11,7 @@ links:
 Pass an array to the `items` prop of the Tabs component. Each item can have the following properties:
 
 - `label` - The label of the item.
+- `icon` - The icon of the item.
 - `slot` - A key to customize the item with a slot.
 - `content` - The content to display in the panel by default.
 - `disabled` - Determines whether the item is disabled or not.
@@ -63,6 +64,8 @@ componentProps:
 ---
 ::
 
+You can use the `content` prop and set it to `false` to avoid the rendering of the HTML content if you don't need it.
+
 ### Control the selected index
 
 Use a `v-model` to control the selected index.
@@ -88,6 +91,12 @@ You can use slots to customize the buttons and items content of the Accordion.
 Use the `#default` slot to customize the content of the trigger buttons. You will have access to the `item`, `index`, `selected` and `disabled` in the slot scope.
 
 :component-example{component="tabs-example-default-slot"}
+
+### `icon` :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+
+Use the `#icon` slot to customize the icon of the trigger buttons. You will have access to the `item`, `index`, `selected` and `disabled` in the slot scope.
+
+:component-example{component="tabs-example-icon-slot"}
 
 ### `item`
 

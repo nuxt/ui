@@ -73,7 +73,7 @@ import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, omit } from '../../utils'
-import type { AccordionItem, Strategy } from '../../types'
+import type { AccordionItem, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { accordion, button } from '#ui/ui.config'
@@ -133,7 +133,7 @@ export default defineComponent({
     const uiButton = computed<typeof configButton>(() => configButton)
 
     const buttonRefs = ref<{ open: boolean, close: (e: EventTarget) => {} }[]>([])
-    
+
     const openedStates = computed(() => buttonRefs.value.map(({ open }) => open))
     watch(openedStates, (newValue, oldValue) => {
       for (const index in newValue) {
@@ -194,7 +194,7 @@ export default defineComponent({
       attrs,
       buttonRefs,
       closeOthers,
-      omit,
+      omit: (omit as any),
       onEnter,
       onBeforeLeave,
       onAfterEnter,

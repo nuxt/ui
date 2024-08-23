@@ -18,7 +18,11 @@
         @change="onUpdate(option.value)"
       >
         <template #label>
-          <slot name="label" v-bind="{ option }" />
+          <slot name="label" v-bind="{ option, selected: option.selected }" />
+        </template>
+
+        <template #help>
+          <slot name="help" v-bind="{ option, selected: option.selected }" />
         </template>
       </URadio>
     </fieldset>
@@ -32,7 +36,7 @@ import type { PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, get } from '../../utils'
-import type { Strategy } from '../../types'
+import type { Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { radioGroup, radio } from '#ui/ui.config'
@@ -48,7 +52,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: [String, Number, Object],
+      type: [String, Number, Object, Boolean],
       default: ''
     },
     name: {
@@ -117,6 +121,10 @@ export default defineComponent({
       return get(option, props.optionAttribute, get(option, props.valueAttribute))
     }
 
+    const guessOptionSelected = (option: any) => {
+      return props.modelValue === guessOptionValue(option)
+    }
+
     const normalizeOption = (option: any) => {
       if (['string', 'number', 'boolean'].includes(typeof option)) {
         return {
@@ -128,7 +136,8 @@ export default defineComponent({
       return {
         ...option,
         value: guessOptionValue(option),
-        label: guessOptionText(option)
+        label: guessOptionText(option),
+        selected: guessOptionSelected(option)
       }
     }
 

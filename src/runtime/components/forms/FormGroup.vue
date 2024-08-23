@@ -23,7 +23,7 @@
     <div :class="[label ? ui.container : '']">
       <slot v-bind="{ error }" />
 
-      <p v-if="(typeof error === 'string' && error) || $slots.error" :class="[ui.error, size]">
+      <p v-if="typeof error === 'string' && error" :class="[ui.error, size]">
         <slot v-if="$slots.error" name="error" v-bind="{ error, label, name, hint, description, help }" />
         <template v-else>
           {{ error }}
@@ -44,7 +44,7 @@ import { computed, defineComponent, provide, inject, ref, toRef } from 'vue'
 import type { Ref, PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { FormError, InjectedFormGroupValue, FormGroupSize, Strategy } from '../../types'
+import type { FormError, InjectedFormGroupValue, FormGroupSize, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { formGroup } from '#ui/ui.config'

@@ -3,7 +3,7 @@ description: Display a modal within your application.
 links:
   - label: 'Dialog'
     icon: i-simple-icons-headlessui
-    to: 'https://headlessui.com/vue/dialog'
+    to: 'https://headlessui.com/v1/vue/dialog'
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/overlays/Modal.vue
@@ -59,7 +59,7 @@ Set the `fullscreen` prop to `true` to enable it.
 
 :component-example{component="modal-example-fullscreen"}
 
-### Control programmatically :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### Control programmatically
 
 First of all, add the `Modals` component to your app, preferably inside `app.vue`.
 
@@ -85,7 +85,7 @@ Then, you can use the `useModal` composable to control your modals within your a
   :component-example{component="modal-example-component" hiddenPreview label="modal.vue" }
 ::
 
-Additionally, you can close the modal within the modal component by calling `modal.close()`. 
+Additionally, you can close the modal within the modal component by calling `modal.close()`.
 
 ## Props
 

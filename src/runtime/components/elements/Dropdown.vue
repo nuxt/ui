@@ -67,7 +67,7 @@ import UKbd from '../elements/Kbd.vue'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { mergeConfig, getNuxtLinkProps } from '../../utils'
-import type { DropdownItem, PopperOptions, Strategy } from '../../types'
+import type { DropdownItem, PopperOptions, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { dropdown } from '#ui/ui.config'

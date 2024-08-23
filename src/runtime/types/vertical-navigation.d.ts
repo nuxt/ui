@@ -8,6 +8,6 @@ export interface VerticalNavigationLink extends Link {
   icon?: string
   iconClass?: string
   avatar?: Avatar
-  click?: Function
+  click?: (...args: any[]) => void
   badge?: string | number | Badge
 }

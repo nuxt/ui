@@ -11,6 +11,7 @@ type InputProps = {
   legend?: string | null
 }
 
+
 export const useFormGroup = (inputProps?: InputProps, config?: any) => {
   const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
   const formGroup = inject<InjectedFormGroupValue | undefined>('form-group', undefined)
@@ -55,7 +56,7 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
     name: computed(() => inputProps?.name ?? formGroup?.name.value),
     size: computed(() => {
       const formGroupSize = config.size[formGroup?.size.value as string] ? formGroup?.size.value : null
-      return inputProps?.size ?? formGroupSize ?? config?.default?.size
+      return inputProps?.size ?? formGroupSize ?? config.default?.size
     }),
     color: computed(() => formGroup?.error?.value ? 'red' : inputProps?.color),
     emitFormBlur,

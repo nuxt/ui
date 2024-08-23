@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper">
+  <div :class="(type === 'hidden') ? 'hidden' : ui.wrapper">
     <input
       :id="inputId"
       ref="input"
@@ -41,7 +41,7 @@ import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, looseToNumber } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { InputSize, InputColor, InputVariant, Strategy } from '../../types'
+import type { InputSize, InputColor, InputVariant, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { input } from '#ui/ui.config'
@@ -171,7 +171,7 @@ export default defineComponent({
 
     const { emitFormBlur, emitFormInput, size: sizeFormGroup, color, inputId, name } = useFormGroup(props, config)
 
-    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
+    const size = computed(() => sizeButtonGroup.value ?? sizeFormGroup.value)
 
     const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
 

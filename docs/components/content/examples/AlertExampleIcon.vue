@@ -7,4 +7,3 @@
     </template>
   </UAlert>
 </template>
-  

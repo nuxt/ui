@@ -1,11 +1,10 @@
 <template>
-  <Icon v-if="dynamic" :name="name" />
-  <span v-else :class="name" />
+  <Icon v-bind="$props" />
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
-import { useAppConfig } from '#imports'
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 
 export default defineComponent({
   props: {
@@ -13,20 +12,20 @@ export default defineComponent({
       type: String,
       required: true
     },
-    dynamic: {
-      type: Boolean,
-      default: false
-    }
-  },
-  setup (props) {
-    const appConfig = useAppConfig()
-
-    // @ts-ignore
-    const dynamic = computed(() => props.dynamic || appConfig.ui?.icons?.dynamic)
-
-    return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      dynamic
+    mode: {
+      type: String as PropType<'svg' | 'css'>,
+      required: false,
+      default: null
+    },
+    size: {
+      type: [Number, String],
+      required: false,
+      default: null
+    },
+    customize: {
+      type: Function,
+      required: false,
+      default: null
     }
   }
 })

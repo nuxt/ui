@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import type { NuxtError } from '#app'
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import type { ParsedContent } from '@nuxt/content'
 
 useSeoMeta({
   title: 'Page not found',

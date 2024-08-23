@@ -11,5 +11,5 @@ export interface DropdownItem extends NuxtLinkProps {
   shortcuts?: string[]
   disabled?: boolean
   class?: string
-  click?: Function
+  click?: (...args: any[]) => void
 }

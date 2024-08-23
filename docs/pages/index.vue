@@ -102,77 +102,79 @@
     <ULandingSection class="!pt-0 dark:bg-gradient-to-b from-gray-950/50 to-gray-900">
       <ULandingCTA
         align="left"
-        card
+        :card="false"
         :ui="{
-          background: 'dark:bg-gradient-to-b from-gray-800 to-gray-900',
-          shadow: 'dark:shadow-2xl',
           body: {
-            background: 'bg-gray-50/50 dark:bg-gray-900/50'
+            padding: '!p-0'
           },
-          title: 'text-center lg:text-left',
-          links: 'justify-center lg:justify-start'
+          title: 'text-center lg:text-left lg:text-5xl',
+          description: 'mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8 lg:gap-16',
+          links: '-ml-3 justify-center lg:justify-start flex-wrap gap-y-3'
         }"
       >
         <template #title>
           <span v-html="page.cta.title" />
         </template>
 
-        <template #links>
-          <ClientOnly>
-            <UAvatarGroup :max="xlAndLarger ? 13 : lgAndLarger ? 10 : mdAndLarger ? 16 : 8" size="md" class="flex-wrap-reverse [&_span:first-child]:text-xs justify-center">
-              <UTooltip
-                v-for="(contributor, index) of module.contributors"
-                :key="index"
-                :text="contributor.username"
-                class="rounded-full"
-                :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50' }"
-                :popper="{ offsetDistance: 16 }"
-              >
-                <UAvatar
-                  :alt="contributor.username"
-                  :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
-                  :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
-                  class="lg:hover:scale-125 lg:hover:ring-2 lg:hover:ring-primary-500 dark:lg:hover:ring-primary-400 transition-transform"
-                  width="40"
-                  height="40"
-                  size="md"
-                  loading="lazy"
-                >
-                  <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
-                    <span class="absolute inset-0" aria-hidden="true" />
-                  </NuxtLink>
-                </UAvatar>
-              </UTooltip>
-            </UAvatarGroup>
-          </ClientOnly>
-        </template>
-
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-8 lg:gap-16">
-          <NuxtLink class="text-center group" to="https://npmjs.org/package/@nuxt/ui" target="_blank">
-            <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
+        <template #description>
+          <NuxtLink class="text-center lg:text-left group" to="https://npmjs.org/package/@nuxt/ui" target="_blank">
+            <p class="text-5xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ format(module.stats.downloads) }}+
             </p>
             <p>monthly downloads</p>
           </NuxtLink>
 
-          <NuxtLink class="text-center group" to="https://github.com/nuxt/ui" target="_blank">
-            <p class="text-6xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
+          <NuxtLink class="text-center lg:text-left group" to="https://github.com/nuxt/ui" target="_blank">
+            <p class="text-5xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {{ format(module.stats.stars) }}+
             </p>
-            <p>stars</p>
+            <p>GitHub stars</p>
           </NuxtLink>
+        </template>
+
+        <template #links>
+          <UButton
+            v-for="user in page.cta.users"
+            :key="user.username"
+            :to="user.to"
+            size="md"
+            color="gray"
+            variant="ghost"
+            target="_blank"
+          >
+            <UAvatar
+              :alt="user.username"
+              :src="`https://ipx.nuxt.com/s_80x80/gh_avatar/${user.username}`"
+              :srcset="`https://ipx.nuxt.com/s_160x160/gh_avatar/${user.username} 2x`"
+              width="80"
+              height="80"
+              size="md"
+              loading="lazy"
+            />
+
+            <div class="text-left">
+              <p class="font-medium">
+                {{ user.name }}
+              </p>
+              <p class="text-gray-500 dark:text-gray-400 leading-4">
+                {{ `@${user.username}` }}
+              </p>
+            </div>
+          </UButton>
+        </template>
+
+        <div class="p-5 overflow-hidden flex">
+          <HomeContributors :contributors="module.contributors" />
         </div>
       </ULandingCTA>
     </ULandingSection>
 
     <template v-if="navigation.find(item => item._path === '/pro')">
-      <div class="relative">
-        <UDivider class="absolute inset-x-0" />
-
-        <div class="w-full relative overflow-hidden h-px bg-gradient-to-r from-gray-800 via-primary-400 to-gray-800 max-w-5xl mx-auto" />
-      </div>
-
       <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }" class="bg-gradient-to-b from-gray-50 dark:from-gray-950/50 to-white dark:to-gray-900 relative">
+        <template #top>
+          <Gradient class="absolute inset-x-0 top-0 w-full block" />
+        </template>
+
         <template #title>
           <span v-html="page.pro.title" />
         </template>
@@ -407,7 +409,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ParsedContent, NavItem } from '@nuxt/content/dist/runtime/types'
+import type { ParsedContent, NavItem } from '@nuxt/content'
 import { useElementBounding, useWindowScroll, useElementSize, breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { HomeProBlock } from '~/types'
 
@@ -438,9 +440,10 @@ useSeoMeta({
 
 const source = ref('npx nuxi@latest module add ui')
 const sectionRef = ref()
-const demoRef = ref()
+const demoRef = ref(null)
 const start = ref(0)
 
+const { $ui } = useNuxtApp()
 const { height } = useElementSize(demoRef)
 const { top } = useElementBounding(sectionRef)
 const { y } = useWindowScroll()
@@ -448,9 +451,7 @@ const config = useRuntimeConfig().public
 const { copy, copied } = useClipboard({ source })
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
-const mdAndLarger = breakpoints.greaterOrEqual('md')
 const lgAndLarger = breakpoints.greaterOrEqual('lg')
-const xlAndLarger = breakpoints.greaterOrEqual('xl')
 
 const { format } = Intl.NumberFormat('en', { notation: 'compact' })
 

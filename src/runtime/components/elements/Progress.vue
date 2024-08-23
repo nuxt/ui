@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper" v-bind="attrs">
+  <div :class="ui.wrapper" role="progressbar">
     <slot v-if="indicator || $slots.indicator" name="indicator" v-bind="{ percent }">
       <div v-if="!isSteps" :class="indicatorContainerClass" :style="{ width: `${percent}%` }">
         <div :class="indicatorClass">
@@ -8,7 +8,12 @@
       </div>
     </slot>
 
-    <progress :class="progressClass" v-bind="{ value, max: realMax }">
+    <progress
+      :aria-valuemax="realMax"
+      :aria-valuenow="value"
+      :class="progressClass"
+      v-bind="{ value, max: realMax, ...attrs }"
+    >
       {{ percent !== undefined ? `${Math.round(percent)}%` : undefined }}
     </progress>
 
@@ -28,7 +33,7 @@ import type { PropType } from 'vue'
 import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy, ProgressSize, ProgressAnimation, ProgressColor } from '../../types'
+import type { Strategy, ProgressSize, ProgressAnimation, ProgressColor } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { progress } from '#ui/ui.config'

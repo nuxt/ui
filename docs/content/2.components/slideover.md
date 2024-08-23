@@ -3,7 +3,7 @@ description: Display a dialog that slides in from the edge of the screen.
 links:
   - label: 'Dialog'
     icon: i-simple-icons-headlessui
-    to: 'https://headlessui.com/vue/dialog'
+    to: 'https://headlessui.com/v1/vue/dialog'
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/overlays/Slideover.vue
@@ -53,7 +53,7 @@ defineShortcuts({
 </script>
 ```
 
-### Control programmatically :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### Control programmatically
 
 First of all, add the `USlideovers` component to your app, preferably inside `app.vue`.
 

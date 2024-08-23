@@ -1,6 +1,6 @@
 name: "🚀 Feature request"
 description: Suggest an idea or enhancement for the module.
-labels: ["enhancement"]
+labels: ["triage", "enhancement"]
 body:
   - type: markdown
     attributes:

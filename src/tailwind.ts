@@ -38,7 +38,6 @@ export default async function installTailwind (
     getContents: ({ nuxt }) => `
       const { defaultExtractor: createDefaultExtractor } = require('tailwindcss/lib/lib/defaultExtractor.js')
       const { customSafelistExtractor, generateSafelist } = require(${JSON.stringify(resolve(runtimeDir, 'utils', 'colors'))})
-      const { iconsPlugin, getIconCollections } = require('@egoist/tailwindcss-icons')
 
       const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
@@ -48,8 +47,7 @@ export default async function installTailwind (
           require('@tailwindcss/aspect-ratio'),
           require('@tailwindcss/typography'),
           require('@tailwindcss/container-queries'),
-          require('@headlessui/tailwindcss'),
-          iconsPlugin(${Array.isArray(moduleOptions.icons) || moduleOptions.icons === 'all' ? `{ collections: getIconCollections(${JSON.stringify(moduleOptions.icons)}) }` : typeof moduleOptions.icons === 'object' ? JSON.stringify(moduleOptions.icons) : {}})
+          require('@headlessui/tailwindcss')
         ],
         content: {
           files: [
@@ -75,13 +73,24 @@ export default async function installTailwind (
     `
   })
 
+  // @ts-expect-error - `@nuxtjs/tailwindcss` not installed yet
+  const { configPath: userTwConfigPath = [], ...twModuleConfig } = nuxt.options.tailwindcss ?? {}
+
+  const twConfigPaths = [
+    configTemplate.dst,
+    join(nuxt.options.rootDir, 'tailwind.config')
+  ]
+
+  if (typeof userTwConfigPath === 'string') {
+    twConfigPaths.push(userTwConfigPath)
+  } else {
+    twConfigPaths.push(...userTwConfigPath)
+  }
+
   // 3. install module
   await installModule('@nuxtjs/tailwindcss', defu({
     exposeConfig: true,
     config: { darkMode: 'class' },
-    configPath: [
-      configTemplate.dst,
-      join(nuxt.options.rootDir, 'tailwind.config')
-    ]
-  }, nuxt.options.tailwindcss))
+    configPath: twConfigPaths
+  }, twModuleConfig))
 }

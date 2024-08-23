@@ -5,7 +5,7 @@ import colors from '#ui-colors'
 export type NotificationColor = 'gray' | typeof colors[number]
 
 export interface NotificationAction extends Button {
-  click?: Function
+  click?: (...args: any[]) => void
 }
 
 export interface Notification {
@@ -17,8 +17,8 @@ export interface Notification {
   closeButton?: Button
   timeout: number
   actions?: NotificationAction[]
-  click?: Function
-  callback?: Function
+  click?: (...args: any[]) => void
+  callback?: (...args: any[]) => void
   color?: NotificationColor
   ui?: any
 }

@@ -25,7 +25,7 @@ import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, nuxtLinkProps, getNuxtLinkProps } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { ButtonColor, ButtonSize, ButtonVariant, Strategy } from '../../types'
+import type { ButtonColor, ButtonSize, ButtonVariant, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { button } from '#ui/ui.config'

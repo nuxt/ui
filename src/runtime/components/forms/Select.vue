@@ -61,7 +61,7 @@ import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, get } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { SelectSize, SelectColor, SelectVariant, Strategy } from '../../types'
+import type { SelectSize, SelectColor, SelectVariant, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { select } from '#ui/ui.config'
@@ -187,7 +187,7 @@ export default defineComponent({
 
     const { emitFormChange, inputId, color, size: sizeFormGroup, name } = useFormGroup(props, config)
 
-    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
+    const size = computed(() => sizeButtonGroup.value ?? sizeFormGroup.value)
 
     const onInput = (event: Event) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
@@ -199,11 +199,11 @@ export default defineComponent({
     }
 
     const guessOptionValue = (option: any) => {
-      return get(option, props.valueAttribute, get(option, props.optionAttribute))
+      return get(option, props.valueAttribute, '')
     }
 
     const guessOptionText = (option: any) => {
-      return get(option, props.optionAttribute, get(option, props.valueAttribute))
+      return get(option, props.optionAttribute, '')
     }
 
     const normalizeOption = (option: any) => {

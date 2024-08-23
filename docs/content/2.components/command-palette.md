@@ -4,7 +4,7 @@ description: Add a customizable command palette to your app.
 links:
   - label: 'Combobox'
     icon: i-simple-icons-headlessui
-    to: 'https://headlessui.com/vue/combobox'
+    to: 'https://headlessui.com/v1/vue/combobox'
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/navigation/CommandPalette.vue
@@ -246,7 +246,7 @@ When accessing the component via a template ref, you can use the following:
   ::field{name="updateQuery (query)"}
     Updates the current query.
   ::
-  ::field{name="results" type="ComputedRef<Fuse.FuseResult<Command>[]>"}
+  ::field{name="results" type="ComputedRef<FuseResult<Command>[]>"}
     The results exposed by [useFuse](https://vueuse.org/integrations/useFuse/#usefuse).
   ::
   ::field{name="comboboxApi"}

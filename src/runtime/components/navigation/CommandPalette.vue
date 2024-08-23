@@ -75,7 +75,7 @@ import UButton from '../elements/Button.vue'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Group, Command, Button, Strategy } from '../../types'
+import type { Group, Command, Button, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { commandPalette } from '#ui/ui.config'
@@ -217,7 +217,7 @@ export default defineComponent({
     const commands = computed(() => {
       const commands: Command[] = []
       for (const group of props.groups) {
-        if (!group.search) {
+        if (!group.search && !group.static) {
           commands.push(...(group.commands?.map(command => ({ ...command, group: group.key })) || []))
         }
       }
@@ -275,9 +275,14 @@ export default defineComponent({
         return getGroupWithCommands(group, [...commands])
       })
 
+      const staticGroups: Group[] = props.groups.filter((group) => group.static && group.commands?.length).map((group) => {
+        return getGroupWithCommands(group, group.commands)
+      })
+
       return [
         ...groups,
-        ...searchGroups
+        ...searchGroups,
+        ...staticGroups
       ]
     })
 

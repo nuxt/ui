@@ -4,7 +4,7 @@ description: Display a select menu with advanced features.
 links:
   - label: 'Listbox'
     icon: i-simple-icons-headlessui
-    to: 'https://headlessui.com/vue/listbox'
+    to: 'https://headlessui.com/v1/vue/listbox'
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/SelectMenu.vue
@@ -87,7 +87,7 @@ Use the `searchable` prop to enable search.
 
 Use the `searchable-placeholder` prop to set a different placeholder.
 
-This will use Headless UI [Combobox](https://headlessui.com/vue/combobox) component instead of [Listbox](https://headlessui.com/vue/listbox).
+This will use Headless UI [Combobox](https://headlessui.com/v1/vue/combobox) component instead of [Listbox](https://headlessui.com/v1/vue/listbox).
 
 ::component-card
 ---
@@ -150,7 +150,7 @@ Pass a function to the `searchable` prop to customize the search behavior and fi
 
 Use the `debounce` prop to adjust the delay of the function.
 
-Use the `searchableLazy` prop to control the immediacy of data requests. :u-badge{label="New" class="!rounded-full" variant="subtle"}
+Use the `searchableLazy` prop to control the immediacy of data requests.
 
 ::component-example
 ---
@@ -183,6 +183,18 @@ Try to search for something that exists in the example below, but not an exact m
 ::component-example
 ---
 component: 'select-menu-example-creatable-always'
+componentProps:
+  class: 'w-full lg:w-48'
+---
+::
+
+Pass a function to the `show-create-option-when` prop to control wether or not to show the create option. This function takes two arguments: the query (as the first argument) and an array of current results (as the second argument). It should return true to display the create option. :u-badge{label="New" class="!rounded-full" variant="subtle"}
+
+The example below shows how to make the create option visible when the query is at least three characters long and does not exactly match any of the current results (case insensitive).
+
+::component-example
+---
+component: 'select-menu-example-creatable-function'
 componentProps:
   class: 'w-full lg:w-48'
 ---
