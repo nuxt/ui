@@ -15,11 +15,28 @@ Use a [Button](/components/button) or any other component in the default slot of
 
 Then, use the `#content` slot to add the content displayed when the Collapsible is open.
 
-::component-example
+::component-code
 ---
-name: 'collapsible-example'
+prettier: true
+ignore:
+  - class
 class: 'justify-center'
+props:
+  class: 'w-48'
+slots:
+  default: |
+
+    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block />
+
+  content: |
+
+    <Placeholder class="h-48" />
 ---
+
+:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block}
+
+#content
+:placeholder{class="h-48"}
 ::
 
 ## Examples
