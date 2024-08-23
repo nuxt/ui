@@ -7,7 +7,11 @@ defineShortcuts({
 </script>
 
 <template>
-  <UTooltip v-model:open="open" text="Open on GitHub">
+  <UPopover v-model:open="open">
     <UButton label="Open" color="gray" variant="subtle" />
-  </UTooltip>
+
+    <template #content>
+      <Placeholder class="size-48 m-4 inline-flex" />
+    </template>
+  </UPopover>
 </template>

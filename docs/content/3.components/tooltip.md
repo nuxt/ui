@@ -24,15 +24,16 @@ Use the `text` prop to set the content of the Tooltip.
 ::component-code
 ---
 prettier: true
+class: 'justify-center'
 props:
   text: 'Open on GitHub'
 slots:
   default: |
 
-    <UButton icon="i-simple-icons-github" />
+    <UButton label="Open" color="gray" variant="subtle" />
 ---
 
-:u-button{icon="i-simple-icons-github"}
+:u-button{label="Open" color="gray" variant="subtle"}
 ::
 
 ### Kbds
@@ -53,10 +54,10 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-simple-icons-github" />
+    <UButton label="Open" color="gray" variant="subtle" />
 ---
 
-:u-button{icon="i-simple-icons-github"}
+:u-button{label="Open" color="gray" variant="subtle"}
 ::
 
 ::tip
@@ -70,6 +71,7 @@ Use the `delay-duration` prop to change the delay before the Tooltip appears. Fo
 ::component-code
 ---
 prettier: true
+class: 'justify-center'
 ignore:
   - text
 props:
@@ -78,10 +80,10 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-simple-icons-github" />
+    <UButton label="Open" color="gray" variant="subtle" />
 ---
 
-:u-button{icon="i-simple-icons-github"}
+:u-button{label="Open" color="gray" variant="subtle"}
 ::
 
 ::tip
@@ -95,6 +97,7 @@ Use the `content` prop to control how the Tooltip content is rendered, like its 
 ::component-code
 ---
 prettier: true
+class: 'justify-center'
 ignore:
   - text
 items:
@@ -116,10 +119,10 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-simple-icons-github" />
+    <UButton label="Open" color="gray" variant="subtle" />
 ---
 
-:u-button{icon="i-simple-icons-github"}
+:u-button{label="Open" color="gray" variant="subtle"}
 ::
 
 ### Arrow
@@ -129,6 +132,7 @@ Use the `arrow` prop to display an arrow on the Tooltip.
 ::component-code
 ---
 prettier: true
+class: 'justify-center'
 ignore:
   - text
   - arrow
@@ -138,10 +142,10 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-simple-icons-github" />
+    <UButton label="Open" color="gray" variant="subtle" />
 ---
 
-:u-button{icon="i-simple-icons-github"}
+:u-button{label="Open" color="gray" variant="subtle"}
 ::
 
 ### Disabled
@@ -151,6 +155,7 @@ Use the `disabled` prop to disable the Tooltip.
 ::component-code
 ---
 prettier: true
+class: 'justify-center'
 ignore:
   - text
 props:
@@ -159,10 +164,10 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-simple-icons-github" />
+    <UButton label="Open" color="gray" variant="subtle" />
 ---
 
-:u-button{icon="i-simple-icons-github"}
+:u-button{label="Open" color="gray" variant="subtle"}
 ::
 
 ## Examples
@@ -171,7 +176,12 @@ slots:
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-:component-example{name="tooltip-open-example"}
+::component-example
+---
+name: 'tooltip-open-example'
+class: 'justify-center'
+---
+::
 
 ::note
 In this example, press :kbd{value="O"} to toggle the Tooltip.

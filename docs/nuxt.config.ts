@@ -136,6 +136,7 @@ export default defineNuxtConfig({
         'UKbd',
         'ULink',
         'UModal',
+        'UPopover',
         'UProgress',
         'URadioGroup',
         'USlider',
