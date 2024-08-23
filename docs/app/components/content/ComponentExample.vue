@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { camelCase } from 'scule'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   name: string
   class?: any
   props?: { [key: string]: any }
@@ -15,7 +15,15 @@ const props = defineProps<{
    * @defaultValue false
    */
   collapse?: boolean
-}>()
+  /**
+   * Whether to show the preview
+   * When `false`, the filename will be shown instead
+   * @defaultValue true
+   */
+  preview?: boolean
+}>(), {
+  preview: true
+})
 
 const { $prettier } = useNuxtApp()
 
@@ -33,7 +41,7 @@ const code = computed(() => {
 `
   }
 
-  code += `\`\`\`vue
+  code += `\`\`\`vue${props.preview ? '' : ` [${data.pascalName}.vue]`}
 ${data?.code ?? ''}
 \`\`\``
 
@@ -67,7 +75,7 @@ const { data: ast } = await useAsyncData(`component-example-${camelName}`, async
 
 <template>
   <div class="my-5">
-    <div>
+    <div v-if="preview">
       <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4 rounded-t-md" :class="[props.class]">
         <component :is="camelName" v-bind="componentProps" />
       </div>
