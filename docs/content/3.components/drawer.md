@@ -205,7 +205,7 @@ class: 'justify-center'
 
 ### With command palette
 
-You can use the [CommandPalette](/components/command-palette) component inside the Drawer.
+You can use the [CommandPalette](/components/command-palette) component inside the Drawer's content.
 
 ::component-example
 ---

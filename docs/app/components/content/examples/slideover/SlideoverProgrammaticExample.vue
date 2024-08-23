@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { LazyModalExample } from '#components'
+import { LazySlideoverExample } from '#components'
 
 const count = ref(0)
 
-const modal = useModal()
+const slideover = useSlideover()
 
 function open() {
   count.value++
 
-  modal.open(LazyModalExample, {
-    description: 'And you can even provide a description!',
+  slideover.open(LazySlideoverExample, {
+    title: 'Slideover',
     count: count.value
   })
 }

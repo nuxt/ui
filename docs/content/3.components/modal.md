@@ -149,7 +149,7 @@ ignore:
 class: 'justify-center'
 props:
   overlay: false
-  title: 'Modal fullscreen'
+  title: 'Modal without overlay'
 slots:
   default: |
 
@@ -178,7 +178,7 @@ ignore:
 class: 'justify-center'
 props:
   transition: false
-  title: 'Modal fullscreen'
+  title: 'Modal without transition'
 slots:
   default: |
 
@@ -286,23 +286,12 @@ Make sure to wrap your app with the [`App`](/components/app) component that inst
 
 First, create a modal component that will be opened programatically:
 
-```vue [ExampleModalComponent.vue]
-<script lang="ts" setup>
-const modal = useModal()
-
-defineProps<{
-  count: number
-}>()
-</script>
-
-<template>
-  <UModal :title="`This modal was opened programmatically ${count} times`">
-    <template #footer>
-      <UButton color="gray" label="Close" @click="modal.close()" />
-    </template>
-  </UModal>
-</template>
-```
+::component-example
+---
+name: 'modal-example'
+preview: false
+---
+::
 
 Then, use it in your app:
 
@@ -341,7 +330,7 @@ class: 'justify-center'
 
 ### With command palette
 
-You can use the [CommandPalette](/components/command-palette) component inside the Modal.
+You can use the [CommandPalette](/components/command-palette) component inside the Modal's content.
 
 ::component-example
 ---
