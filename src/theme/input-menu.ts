@@ -1,9 +1,9 @@
-import { defu } from 'defu'
+import { defuFn } from 'defu'
 import type { ModuleOptions } from '../module'
 import input from './input'
 
 export default (options: Required<ModuleOptions>) => {
-  return defu({
+  return defuFn({
     slots: {
       arrow: 'fill-gray-200 dark:fill-gray-800',
       content: 'max-h-60 w-[--radix-popper-anchor-width] bg-white dark:bg-gray-900 shadow-lg rounded-md ring ring-gray-200 dark:ring-gray-800 overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
@@ -29,7 +29,7 @@ export default (options: Required<ModuleOptions>) => {
     }
   }, {
     slots: {
-      base: ['rounded-md', options.transitions && 'transition-colors'],
+      base: () => ['rounded-md', options.transitions && 'transition-colors'],
       trailing: 'absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75'
     },
     variants: {

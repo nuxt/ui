@@ -1,10 +1,10 @@
-import { defu } from 'defu'
+import { defuFn } from 'defu'
 import type { ModuleOptions } from '../module'
 import input from './input'
 import { buttonGroupVariant } from './button-group'
 
 export default (options: Required<ModuleOptions>) => {
-  return defu({
+  return defuFn({
     slots: {
       arrow: 'fill-gray-200 dark:fill-gray-800',
       content: 'max-h-60 w-[--radix-popper-anchor-width] bg-white dark:bg-gray-900 shadow-lg rounded-md ring ring-gray-200 dark:ring-gray-800 overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
@@ -74,7 +74,7 @@ export default (options: Required<ModuleOptions>) => {
     }
   }, {
     slots: {
-      base: ['relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.transitions && 'transition-colors'],
+      base: () => ['relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.transitions && 'transition-colors'],
       value: 'truncate group-data-placeholder:text-current/50'
     },
     variants: {
