@@ -45,5 +45,8 @@ const links = [{
   label: 'Releases',
   icon: 'i-heroicons-rocket-launch',
   to: '/releases'
+}, {
+  label: 'Terms',
+  to: '/pro/terms'
 }]
 </script>

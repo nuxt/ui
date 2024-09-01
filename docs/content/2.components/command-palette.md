@@ -246,7 +246,7 @@ When accessing the component via a template ref, you can use the following:
   ::field{name="updateQuery (query)"}
     Updates the current query.
   ::
-  ::field{name="results" type="ComputedRef<Fuse.FuseResult<Command>[]>"}
+  ::field{name="results" type="ComputedRef<FuseResult<Command>[]>"}
     The results exposed by [useFuse](https://vueuse.org/integrations/useFuse/#usefuse).
   ::
   ::field{name="comboboxApi"}
