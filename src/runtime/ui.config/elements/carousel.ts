@@ -20,7 +20,7 @@ export default {
     nextButton: {
       color: 'black' as const,
       class: 'rtl:[&_span:last-child]:rotate-180 absolute right-4 top-1/2 transform -translate-y-1/2 rounded-full',
-      icon: 'i-heroicons-chevron-right-20-solid '
+      icon: 'i-heroicons-chevron-right-20-solid'
     }
   }
 }
