@@ -148,11 +148,11 @@ const columns = [{
   sortable: true
 }]
 
-const { data, pending } = await useLazyFetch(() => `/api/users?orderBy=${sort.value.column}&order=${sort.value.direction}`)
+const { data, status } = await useLazyFetch(() => `/api/users?orderBy=${sort.value.column}&order=${sort.value.direction}`)
 </script>
 
 <template>
-  <UTable v-model:sort="sort" :loading="pending" :columns="columns" :rows="data" sort-mode="manual" />
+  <UTable v-model:sort="sort" :loading="status === 'pending'" :columns="columns" :rows="data" sort-mode="manual" />
 </template>
 ```
 
@@ -359,11 +359,11 @@ This can be easily used with Nuxt `useAsyncData` composable.
 <script setup lang="ts">
 const columns = [...]
 
-const { pending, data: people } = await useLazyAsyncData('people', () => $fetch('/api/people'))
+const { status, data: people } = await useLazyAsyncData('people', () => $fetch('/api/people'))
 </script>
 
 <template>
-  <UTable :rows="people" :columns="columns" :loading="pending" />
+  <UTable :rows="people" :columns="columns" :loading="status === 'pending'" />
 </template>
 ```
 
