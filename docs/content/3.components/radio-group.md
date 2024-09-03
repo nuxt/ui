@@ -12,11 +12,30 @@ links:
 
 ## Usage
 
-Use the `v-model` directive to control the value of the RadioGroup.
+Use the `v-model` directive to control the value of the RadioGroup or the `default-value` prop to set the initial value when you do not need to control its state.
 
 ### Items
 
-Use the `items` prop as an array of objects with the following properties:
+Use the `items` prop as an array of strings, numbers or booleans:
+
+::component-code
+---
+ignore:
+  - modelValue
+  - items
+external:
+  - modelValue
+  - items
+props:
+  modelValue: 'System'
+  items:
+    - 'System'
+    - 'Light'
+    - 'Dark'
+---
+::
+
+You can also pass an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
 - `description?: string`{lang="ts-type"}
@@ -32,40 +51,46 @@ external:
   - modelValue
   - items
 props:
-  modelValue: '1'
+  modelValue: 'system'
   items:
-    - label: 'Option 1'
+    - label: 'System'
       description: 'This is the first option.'
-      value: '1'
-    - label: 'Option 2'
+      value: 'system'
+    - label: 'Light'
       description: 'This is the second option.'
-      value: '2'
-    - label: 'Option 3'
+      value: 'light'
+    - label: 'Dark'
       description: 'This is the third option.'
-      value: '3'
+      value: 'dark'
 ---
 ::
 
-Use the `default-value` prop to set the initial value when you do not need to control its state.
+When using objects, you need to reference the `value` property of the object in the `v-model` directive or the `default-value` prop.
+
+However, you can change the property that is used to set the value by using the `value-key` prop.
 
 ::component-code
 ---
 ignore:
+  - modelValue
   - items
+  - valueKey
 external:
+  - modelValue
   - items
 props:
-  defaultValue: '1'
+  modelValue: 'light'
+  valueKey: 'id'
   items:
-    - label: 'Option 1'
+    - label: 'System'
       description: 'This is the first option.'
-      value: '1'
-    - label: 'Option 2'
+      id: 'system'
+    - label: 'Light'
       description: 'This is the second option.'
-      value: '2'
-    - label: 'Option 3'
+      id: 'light'
+    - label: 'Dark'
       description: 'This is the third option.'
-      value: '3'
+      id: 'dark'
 ---
 ::
 
@@ -81,18 +106,18 @@ ignore:
 external:
   - items
 props:
-  defaultValue: '1'
-  legend: 'Legend'
+  defaultValue: 'system'
+  legend: 'Theme'
   items:
-    - label: 'Option 1'
+    - label: 'System'
       description: 'This is the first option.'
-      value: '1'
-    - label: 'Option 2'
+      value: 'system'
+    - label: 'Light'
       description: 'This is the second option.'
-      value: '2'
-    - label: 'Option 3'
+      value: 'light'
+    - label: 'Dark'
       description: 'This is the third option.'
-      value: '3'
+      value: 'dark'
 ---
 ::
 
@@ -108,18 +133,18 @@ ignore:
 external:
   - items
 props:
-  defaultValue: '1'
+  defaultValue: 'system'
   orientation: 'horizontal'
   items:
-    - label: 'Option 1'
+    - label: 'System'
       description: 'This is the first option.'
-      value: '1'
-    - label: 'Option 2'
+      value: 'system'
+    - label: 'Light'
       description: 'This is the second option.'
-      value: '2'
-    - label: 'Option 3'
+      value: 'light'
+    - label: 'Dark'
       description: 'This is the third option.'
-      value: '3'
+      value: 'dark'
 ---
 ::
 
@@ -135,18 +160,18 @@ ignore:
 external:
   - items
 props:
-  defaultValue: '1'
+  defaultValue: 'system'
   color: 'gray'
   items:
-    - label: 'Option 1'
+    - label: 'System'
       description: 'This is the first option.'
-      value: '1'
-    - label: 'Option 2'
+      value: 'system'
+    - label: 'Light'
       description: 'This is the second option.'
-      value: '2'
-    - label: 'Option 3'
+      value: 'light'
+    - label: 'Dark'
       description: 'This is the third option.'
-      value: '3'
+      value: 'dark'
 ---
 ::
 
@@ -162,18 +187,18 @@ ignore:
 external:
   - items
 props:
-  defaultValue: '1'
+  defaultValue: 'system'
   size: 'xl'
   items:
-    - label: 'Option 1'
+    - label: 'System'
       description: 'This is the first option.'
-      value: '1'
-    - label: 'Option 2'
+      value: 'system'
+    - label: 'Light'
       description: 'This is the second option.'
-      value: '2'
-    - label: 'Option 3'
+      value: 'light'
+    - label: 'Dark'
       description: 'This is the third option.'
-      value: '3'
+      value: 'dark'
 ---
 ::
 
@@ -189,18 +214,18 @@ ignore:
 external:
   - items
 props:
-  defaultValue: '1'
+  defaultValue: 'system'
   disabled: true
   items:
-    - label: 'Option 1'
+    - label: 'System'
       description: 'This is the first option.'
-      value: '1'
-    - label: 'Option 2'
+      value: 'system'
+    - label: 'Light'
       description: 'This is the second option.'
-      value: '2'
-    - label: 'Option 3'
+      value: 'light'
+    - label: 'Dark'
       description: 'This is the third option.'
-      value: '3'
+      value: 'dark'
 ---
 ::
 
