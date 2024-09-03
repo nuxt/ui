@@ -85,7 +85,7 @@ const pageFrom = computed(() => (page.value - 1) * pageCount.value + 1)
 const pageTo = computed(() => Math.min(page.value * pageCount.value, pageTotal.value))
 
 // Data
-const { data: todos, pending } = await useLazyAsyncData<{
+const { data: todos, status } = await useLazyAsyncData<{
   id: number
   title: string
   completed: string
@@ -181,7 +181,7 @@ const { data: todos, pending } = await useLazyAsyncData<{
       v-model:sort="sort"
       :rows="todos"
       :columns="columnsTable"
-      :loading="pending"
+      :loading="status === 'pending'"
       sort-asc-icon="i-heroicons-arrow-up"
       sort-desc-icon="i-heroicons-arrow-down"
       sort-mode="manual"
