@@ -169,7 +169,7 @@ export default defineComponent({
           textarea.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
         }
 
-        textarea.value.style.overflow = ''
+        textarea.value.style.overflow = overflow
       }
     }
 
