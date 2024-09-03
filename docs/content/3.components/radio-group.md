@@ -20,6 +20,7 @@ Use the `items` prop as an array of strings, numbers or booleans:
 
 ::component-code
 ---
+prettier: true
 ignore:
   - modelValue
   - items
@@ -65,9 +66,11 @@ props:
 ---
 ::
 
+::important
 When using objects, you need to reference the `value` property of the object in the `v-model` directive or the `default-value` prop.
+::
 
-However, you can change the property that is used to set the value by using the `value-key` prop.
+You can change the property that is used to set the value by using the `value-key` prop.
 
 ::component-code
 ---
@@ -100,24 +103,19 @@ Use the `legend` prop to set the legend of the RadioGroup.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - defaultValue
   - items
 external:
   - items
 props:
-  defaultValue: 'system'
   legend: 'Theme'
+  defaultValue: 'System'
   items:
-    - label: 'System'
-      description: 'This is the first option.'
-      value: 'system'
-    - label: 'Light'
-      description: 'This is the second option.'
-      value: 'light'
-    - label: 'Dark'
-      description: 'This is the third option.'
-      value: 'dark'
+    - 'System'
+    - 'Light'
+    - 'Dark'
 ---
 ::
 
@@ -127,24 +125,19 @@ Use the `orientation` prop to change the orientation of the RadioGroup. Defaults
 
 ::component-code
 ---
+prettier: true
 ignore:
   - defaultValue
   - items
 external:
   - items
 props:
-  defaultValue: 'system'
   orientation: 'horizontal'
+  defaultValue: 'System'
   items:
-    - label: 'System'
-      description: 'This is the first option.'
-      value: 'system'
-    - label: 'Light'
-      description: 'This is the second option.'
-      value: 'light'
-    - label: 'Dark'
-      description: 'This is the third option.'
-      value: 'dark'
+    - 'System'
+    - 'Light'
+    - 'Dark'
 ---
 ::
 
@@ -154,24 +147,19 @@ Use the `color` prop to change the color of the RadioGroup.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - defaultValue
   - items
 external:
   - items
 props:
-  defaultValue: 'system'
   color: 'gray'
+  defaultValue: 'System'
   items:
-    - label: 'System'
-      description: 'This is the first option.'
-      value: 'system'
-    - label: 'Light'
-      description: 'This is the second option.'
-      value: 'light'
-    - label: 'Dark'
-      description: 'This is the third option.'
-      value: 'dark'
+    - 'System'
+    - 'Light'
+    - 'Dark'
 ---
 ::
 
@@ -181,24 +169,19 @@ Use the `size` prop to change the size of the RadioGroup.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - defaultValue
   - items
 external:
   - items
 props:
-  defaultValue: 'system'
   size: 'xl'
+  defaultValue: 'System'
   items:
-    - label: 'System'
-      description: 'This is the first option.'
-      value: 'system'
-    - label: 'Light'
-      description: 'This is the second option.'
-      value: 'light'
-    - label: 'Dark'
-      description: 'This is the third option.'
-      value: 'dark'
+    - 'System'
+    - 'Light'
+    - 'Dark'
 ---
 ::
 
@@ -208,24 +191,19 @@ Use the `disabled` prop to disable the RadioGroup.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - defaultValue
   - items
 external:
   - items
 props:
-  defaultValue: 'system'
   disabled: true
+  defaultValue: 'System'
   items:
-    - label: 'System'
-      description: 'This is the first option.'
-      value: 'system'
-    - label: 'Light'
-      description: 'This is the second option.'
-      value: 'light'
-    - label: 'Dark'
-      description: 'This is the third option.'
-      value: 'dark'
+    - 'System'
+    - 'Light'
+    - 'Dark'
 ---
 ::
 

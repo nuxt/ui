@@ -86,6 +86,7 @@ ignore:
 props:
   color: gray
   variant: subtle
+  highlight: false
   placeholder: 'Search...'
 ---
 ::

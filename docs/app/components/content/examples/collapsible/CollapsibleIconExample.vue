@@ -6,7 +6,9 @@
       color="gray"
       variant="subtle"
       trailing-icon="i-heroicons-chevron-down-20-solid"
-      :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+      :ui="{
+        trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+      }"
       block
     />
 
