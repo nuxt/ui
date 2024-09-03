@@ -24,6 +24,11 @@ export interface RadioGroupProps<T> extends Pick<RadioGroupRootProps, 'defaultVa
    */
   as?: any
   legend?: string
+  /**
+   * When `items` is an array of objects, select the field to use as the value.
+   * @defaultValue 'value'
+   */
+  valueKey?: string
   items?: T[]
   size?: RadioGroupVariants['size']
   color?: RadioGroupVariants['color']
@@ -57,6 +62,7 @@ import { useId } from '#imports'
 import { useFormField } from '../composables/useFormField'
 
 const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
+  valueKey: 'value' as any,
   orientation: 'vertical'
 })
 const emits = defineEmits<RadioGroupEmits>()
@@ -84,14 +90,20 @@ function normalizeItem(item: any) {
     }
   }
 
+  const value = item[props.valueKey]
+
   return {
     ...item,
-    id: `${id}:${item.value}`
+    value,
+    id: `${id}:${value}`
   }
 }
 
 const normalizedItems = computed(() => {
-  if (!props.items) return []
+  if (!props.items) {
+    return []
+  }
+
   return props.items.map(normalizeItem)
 })
 
