@@ -7,7 +7,6 @@ export default {
   check: 'i-heroicons-check-20-solid',
   close: 'i-heroicons-x-mark-20-solid',
   ellipsis: 'i-heroicons-ellipsis-horizontal-20-solid',
-  empty: 'i-heroicons-circle-stack-20-solid',
   external: 'i-heroicons-arrow-up-right-20-solid',
   loading: 'i-heroicons-arrow-path-20-solid',
   minus: 'i-heroicons-minus-20-solid',
