@@ -154,6 +154,7 @@ export default defineComponent({
         }
 
         textarea.value.rows = props.rows
+        const overflow = textarea.value.style.overflow
         textarea.value.style.overflow = 'hidden'
 
         const styles = window.getComputedStyle(textarea.value)
