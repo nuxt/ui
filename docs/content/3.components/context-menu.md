@@ -195,6 +195,76 @@ class: 'justify-center'
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
 ::
 
+### Extract shortcuts
+
+When you have some items with `kbds` property (displaying some [Kbd](/components/kbd)), you can easily make them work with the [defineShortcuts](/composables/define-shortcuts) composable.
+
+Inside the `defineShortcuts` composable, there is an `extractShortcuts` utility that will extract the shortcuts recursively from the items and return an object that you can pass to `defineShortcuts`. It will automatically call the `select` function of the item when the shortcut is pressed.
+
+```vue
+<script setup lang="ts">
+const items = [
+  [{
+    label: 'Show Sidebar',
+    kbds: ['meta', 'S'],
+    select() {
+      console.log('Show Sidebar clicked')
+    }
+  }, {
+    label: 'Show Toolbar',
+    kbds: ['shift', 'meta', 'D'],
+    select() {
+      console.log('Show Toolbar clicked')
+    }
+  }, {
+    label: 'Collapse Pinned Tabs',
+    disabled: true
+  }], [{
+    label: 'Refresh the Page'
+  }, {
+    label: 'Clear Cookies and Refresh'
+  }, {
+    label: 'Clear Cache and Refresh'
+  }, {
+    type: 'separator' as const
+  }, {
+    label: 'Developer',
+    children: [[{
+      label: 'View Source',
+      kbds: ['option', 'meta', 'U'],
+      select() {
+        console.log('View Source clicked')
+      }
+    }, {
+      label: 'Developer Tools',
+      kbds: ['option', 'meta', 'I'],
+      select() {
+        console.log('Developer Tools clicked')
+      }
+    }], [{
+      label: 'Inspect Elements',
+      kbds: ['option', 'meta', 'C'],
+      select() {
+        console.log('Inspect Elements clicked')
+      }
+    }], [{
+      label: 'JavaScript Console',
+      kbds: ['option', 'meta', 'J'],
+      select() {
+        console.log('JavaScript Console clicked')
+      }
+    }]]
+  }]
+]
+
+defineShortcuts(extractShortcuts(items))
+</script>
+```
+
+::note
+In this example, :kbd{value="meta"} :kbd{value="S"}, :kbd{value="shift"} :kbd{value="meta"} :kbd{value="D"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="U"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="I"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="C"} and :kbd{value="option"} :kbd{value="meta"} :kbd{value="J"} would trigger the `select` function of the corresponding item.
+::
+
 ## API
 
 ### Props
