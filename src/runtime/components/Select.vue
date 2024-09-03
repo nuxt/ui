@@ -102,7 +102,7 @@ import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 
 const props = withDefaults(defineProps<SelectProps<T>>(), {
-  valueKey: 'value' as any,
+  valueKey: 'value',
   portal: true
 })
 const emits = defineEmits<SelectEmits>()

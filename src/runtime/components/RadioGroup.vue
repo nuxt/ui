@@ -62,7 +62,7 @@ import { useId } from '#imports'
 import { useFormField } from '../composables/useFormField'
 
 const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
-  valueKey: 'value' as any,
+  valueKey: 'value',
   orientation: 'vertical'
 })
 const emits = defineEmits<RadioGroupEmits>()
