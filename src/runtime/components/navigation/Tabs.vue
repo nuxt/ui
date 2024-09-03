@@ -164,6 +164,11 @@ export default defineComponent({
       calcMarkerSize(selectedIndex.value)
     })
 
+    watch(() => props.items, async () => {
+      await nextTick()
+      calcMarkerSize(selectedIndex.value)
+    }, { deep: true })
+
     onMounted(async () => {
       await nextTick()
       calcMarkerSize(selectedIndex.value)
