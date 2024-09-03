@@ -28,6 +28,8 @@ Use the `default-value` prop to set the initial value when you do not need to co
 
 ::component-code
 ---
+ignore:
+  - defaultValue
 props:
   defaultValue: true
 ---

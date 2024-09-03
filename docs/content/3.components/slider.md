@@ -15,8 +15,6 @@ Use the `v-model` directive to control the value of the Slider.
 
 ::component-code
 ---
-ignore:
-  - modelValue
 external:
   - modelValue
 props:
@@ -28,6 +26,8 @@ Use the `default-value` prop to set the initial value when you do not need to co
 
 ::component-code
 ---
+ignore:
+  - defaultValue
 props:
   defaultValue: 50
 ---
