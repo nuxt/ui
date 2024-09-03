@@ -19,6 +19,8 @@ props:
 ---
 ::
 
+### Description
+
 Use the `description` prop to set the description of the Alert.
 
 ::component-code
