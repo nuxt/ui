@@ -4,7 +4,6 @@ import { camelCase } from 'scule'
 import * as theme from '#build/ui'
 
 const route = useRoute()
-const { $prettier } = useNuxtApp()
 
 const name = camelCase(route.params.slug[route.params.slug.length - 1])
 
@@ -37,20 +36,18 @@ function stripCompoundVariants(component) {
 }
 
 const component = computed(() => {
-  const component = { ...theme[name] }
-
-  return stripCompoundVariants(component)
+  return {
+    ui: {
+      [name]: stripCompoundVariants(theme[name])
+    }
+  }
 })
 
 const { data: ast } = await useAsyncData(`component-theme-${name}`, async () => {
   const md = `
 ::code-collapse
 \`\`\`ts [app.config.ts]
-export default defineAppConfig({
-  ui: {
-    ${name}: ${json5.stringify(component.value, null, 2)}
-  }
-})
+export default defineAppConfig(${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')})
 \`\`\`\
 
 ::
@@ -63,18 +60,7 @@ Some colors in \`compoundVariants\` are omitted for readability. Check out the s
     : ''}
 `
 
-  let formatted = ''
-  try {
-    formatted = await $prettier.format(md, {
-      trailingComma: 'none',
-      semi: false,
-      singleQuote: true
-    })
-  } catch {
-    formatted = md
-  }
-
-  return parseMarkdown(formatted)
+  return parseMarkdown(md)
 })
 </script>
 
