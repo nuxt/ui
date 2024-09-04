@@ -61,7 +61,7 @@ import { Primitive } from 'radix-vue'
 const props = withDefaults(defineProps<${upperName}Props>(), { as: 'div' })
 defineSlots<${upperName}Slots>()
 
-const ui = computed(() => tv({ extend: ${camelName}, slots: props.ui })())
+const ui = ${camelName}()
 </script>
 
 <template>
@@ -105,7 +105,7 @@ const slots = defineSlots<${upperName}Slots>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props), emits)
 
-const ui = computed(() => tv({ extend: ${camelName}, slots: props.ui })())
+const ui = ${camelName}()
 </script>
 
 <template>
