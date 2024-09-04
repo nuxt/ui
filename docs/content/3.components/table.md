@@ -6,7 +6,7 @@ links:
     to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Table.vue
 navigation:
   badge:
-    label: Soon
+    label: Todo
     color: gray
   disabled: true
 ---
