@@ -7,7 +7,7 @@ export interface AppProps extends ConfigProviderProps {
   toaster?: ToasterProps | null
 }
 
-export interface AppSlors {
+export interface AppSlots {
   default(props?: {}): any
 }
 </script>
@@ -24,7 +24,7 @@ import USlideoverProvider from './SlideoverProvider.vue'
 const props = withDefaults(defineProps<AppProps>(), {
   useId: () => useId()
 })
-defineSlots<AppSlors>()
+defineSlots<AppSlots>()
 
 const configProviderProps = useForwardProps(reactivePick(props, 'dir', 'scrollBody', 'useId'))
 const tooltipProps = toRef(() => props.tooltip)
