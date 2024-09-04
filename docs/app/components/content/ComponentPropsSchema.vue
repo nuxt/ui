@@ -18,7 +18,20 @@ function getSchemaProps(schema: PropertyMeta['schema']) {
   return (Array.isArray(schema.schema) ? schema.schema : Object.values(schema.schema)).flatMap(getSchemaProps)
 }
 
-const schemaProps = computed(() => getSchemaProps(props.prop.schema))
+const schemaProps = computed(() => {
+  return getSchemaProps(props.prop.schema).map((prop) => {
+    const defaultValue = prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text
+    let description = prop.description
+    if (defaultValue) {
+      description = description ? `${description} Defaults to \`${defaultValue}\`{lang="ts-type"}.` : `Defaults to \`${defaultValue}\`{lang="ts-type"}.`
+    }
+
+    return {
+      ...prop,
+      description
+    }
+  })
+})
 </script>
 
 <template>
