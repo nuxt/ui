@@ -140,6 +140,7 @@ export default defineNuxtConfig({
         'UProgress',
         'URadioGroup',
         'USelect',
+        'USeparator',
         'USlider',
         'USlideover',
         'USwitch',

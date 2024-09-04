@@ -18,7 +18,7 @@ Use the `src` prop to set the image URL. You can pass any property from HTML `<i
 ::component-code
 ---
 props:
-  src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+  src: 'https://github.com/benjamincanac.png'
 ---
 ::
 
@@ -31,7 +31,7 @@ Use the `size` prop to set the size of the Avatar.
 ignore:
   - src
 props:
-  src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+  src: 'https://github.com/benjamincanac.png'
   size: xl
 ---
 ::

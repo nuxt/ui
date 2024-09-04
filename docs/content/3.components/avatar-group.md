@@ -17,13 +17,13 @@ prettier: true
 slots:
   default: |
 
-    <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" />
-    <UAvatar src="https://avatars.githubusercontent.com/u/25613751?v=4" alt="Romain Hamel" />
-    <UAvatar src="https://avatars.githubusercontent.com/u/19751938?v=4" alt="Neil Richter" />
+    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
+    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
+    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
 ---
-:u-avatar{src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac"}
-:u-avatar{src="https://avatars.githubusercontent.com/u/25613751?v=4" alt="Romain Hamel"}
-:u-avatar{src="https://avatars.githubusercontent.com/u/19751938?v=4" alt="Neil Richter"}
+:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
+:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
+:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
 ::
 
 ### Size
@@ -38,13 +38,13 @@ props:
 slots:
   default: |
 
-    <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" />
-    <UAvatar src="https://avatars.githubusercontent.com/u/25613751?v=4" alt="Romain Hamel" />
-    <UAvatar src="https://avatars.githubusercontent.com/u/19751938?v=4" alt="Neil Richter" />
+    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
+    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
+    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
 ---
-:u-avatar{src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac"}
-:u-avatar{src="https://avatars.githubusercontent.com/u/25613751?v=4" alt="Romain Hamel"}
-:u-avatar{src="https://avatars.githubusercontent.com/u/19751938?v=4" alt="Neil Richter"}
+:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
+:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
+:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
 ::
 
 ### Max
@@ -59,13 +59,13 @@ props:
 slots:
   default: |
 
-    <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" />
-    <UAvatar src="https://avatars.githubusercontent.com/u/25613751?v=4" alt="Romain Hamel" />
-    <UAvatar src="https://avatars.githubusercontent.com/u/19751938?v=4" alt="Neil Richter" />
+    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
+    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
+    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
 ---
-:u-avatar{src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac"}
-:u-avatar{src="https://avatars.githubusercontent.com/u/25613751?v=4" alt="Romain Hamel"}
-:u-avatar{src="https://avatars.githubusercontent.com/u/19751938?v=4" alt="Neil Richter"}
+:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
+:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
+:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
 ::
 
 ## Examples
