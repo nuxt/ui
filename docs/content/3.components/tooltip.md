@@ -14,7 +14,11 @@ links:
 Use a [Button](/components/button) or any other component in the default slot of the Tooltip.
 
 ::important
-Make sure to wrap your app with the [`App`](/components/app) component to make the Tooltip work properly.
+Make sure to wrap your app with the [`App`](/components/app) component which uses the [TooltipProvider](https://www.radix-vue.com/components/tooltip.html#provider) component from Radix Vue.
+::
+
+::tip{to="/components/app#props"}
+You can check the `App` component `tooltip` prop to see how to configure the Tooltip globally.
 ::
 
 ### Text

@@ -15,7 +15,7 @@ type ToastVariants = VariantProps<typeof toast>
 export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' | 'type' | 'duration'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue 'div'
+   * @defaultValue 'li'
    */
   as?: any
   title?: string
@@ -70,7 +70,7 @@ const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'duration', 'open', 'type'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
 const multiline = computed(() => !!props.title && !!props.description)
 

@@ -14,21 +14,72 @@ navigation:
 
 ## Usage
 
+Use the [useToast](/composables/use-toast) composable to display a toast in your application.
+
+::important
+Make sure to wrap your app with the [App](/components/app) component which uses our [Toaster](https://github.com/benjamincanac/ui3/blob/dev/src/runtime/components/Toaster.vue) component which uses the [ToastProvider](https://www.radix-vue.com/components/toast.html#provider) component from Radix Vue.
+::
+
+::tip{to="/components/app#props"}
+You can check the `App` component `toaster` prop to see how to configure the Toaster globally.
+::
+
+### Title
+
+### Description
+
+### Icon
+
+### Avatar
+
+### Color
+
+### Variant
+
+### Close
+
+### Actions
+
 ## Examples
 
 ## API
 
 ### Props
 
-:component-props
+::component-props
+---
+ignore:
+  - as
+  - open
+  - defaultOpen
+  - to
+  - target
+  - active
+  - activeClass
+  - inactiveClass
+  - exactActiveClass
+  - ariaCurrentValue
+  - href
+  - rel
+  - noRel
+  - prefetch
+  - noPrefetch
+  - prefetchedClass
+  - replace
+  - exact
+  - exactQuery
+  - exactHash
+  - external
+---
+::
 
-### Slots
+<!-- ### Slots
 
 :component-slots
 
 ### Emits
 
-:component-emits
+:component-emits -->
 
 ## Theme
 

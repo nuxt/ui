@@ -280,7 +280,7 @@ This allows you to move the trigger outside of the Slideover or remove it entire
 You can use the `useSlideover` composable to open a Slideover programatically.
 
 ::important
-Make sure to wrap your app with the [`App`](/components/app) component that instantiates the `SlideoverProvider` component.
+Make sure to wrap your app with the [`App`](/components/app) component which uses the [`SlideoverProvider`](https://github.com/benjamincanac/ui3/blob/dev/src/runtime/components/SlideoverProvider.vue) component.
 ::
 
 First, create a slideover component that will be opened programatically:
