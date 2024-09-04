@@ -47,11 +47,13 @@ describe('Accordion', () => {
     ['with class', { props: { ...props, class: 'w-96' } }],
     ['with ui', { props: { ...props, ui: { item: 'border-gray-300 dark:border-gray-700' } } }],
     // Slots
-    ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
-    ['with default slot', { props, slots: { default: () => 'Default slot' } }],
-    ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
-    ['with content slot', { props, slots: { content: () => 'Content slot' } }],
-    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
+    ['with leading slot', { props: { ...props, modelValue: '1' }, slots: { leading: () => 'Leading slot' } }],
+    ['with default slot', { props: { ...props, modelValue: '1' }, slots: { default: () => 'Default slot' } }],
+    ['with trailing slot', { props: { ...props, modelValue: '1' }, slots: { trailing: () => 'Trailing slot' } }],
+    ['with content slot', { props: { ...props, modelValue: '1' }, slots: { content: () => 'Content slot' } }],
+    ['with body slot', { props: { ...props, modelValue: '1' }, slots: { body: () => 'Body slot' } }],
+    ['with custom slot', { props: { ...props, modelValue: '5' }, slots: { custom: () => 'Custom slot' } }],
+    ['with custom body slot', { props: { ...props, modelValue: '5' }, slots: { 'custom-body': () => 'Custom body slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps<typeof items[number]>, slots?: Partial<AccordionSlots<typeof items[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, Accordion)
     expect(html).toMatchSnapshot()

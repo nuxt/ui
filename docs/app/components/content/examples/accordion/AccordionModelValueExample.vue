@@ -1,14 +1,14 @@
 <script setup lang="ts">
 const items = [
   {
-    label: 'Colors',
-    icon: 'i-heroicons-swatch',
-    content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
-  },
-  {
     label: 'Icons',
     icon: 'i-heroicons-face-smile',
     content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+  },
+  {
+    label: 'Colors',
+    icon: 'i-heroicons-swatch',
+    content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
   },
   {
     label: 'Components',

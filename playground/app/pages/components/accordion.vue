@@ -30,9 +30,17 @@ const items = [{
 
 <template>
   <UCard :ui="{ body: 'p-0 sm:p-0' }">
-    <UAccordion :items="items" class="w-96" :ui="{ trigger: 'px-3.5', content: 'px-3.5' }">
-      <template #custom="{ item }">
-        <span class="text-gray-500 dark:text-gray-400">Custom: {{ item.content }}</span>
+    <UAccordion :items="items" class="w-96" :ui="{ trigger: 'px-3.5', body: 'px-3.5' }">
+      <template #body="{ item }">
+        <p class="text-gray-500 dark:text-gray-400">
+          {{ item.content }}
+        </p>
+      </template>
+
+      <template #custom-body="{ item }">
+        <p class="text-gray-500 dark:text-gray-400">
+          Custom: {{ item.content }}
+        </p>
       </template>
     </UAccordion>
   </UCard>

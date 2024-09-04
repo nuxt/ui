@@ -45,6 +45,7 @@ export type AccordionSlots<T extends { slot?: string }> = {
   default: SlotProps<T>
   trailing: SlotProps<T>
   content: SlotProps<T>
+  body: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 </script>
 
@@ -95,9 +96,13 @@ const ui = computed(() => accordion({
         </AccordionTrigger>
       </AccordionHeader>
 
-      <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot])" :class="ui.content({ class: props.ui?.content })">
+      <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body`])" :class="ui.content({ class: props.ui?.content })">
         <slot :name="item.slot || 'content'" :item="item" :index="index" :open="open">
-          {{ item.content }}
+          <div :class="ui.body({ class: props.ui?.body })">
+            <slot :name="item.slot ? `${item.slot}-body`: 'body'" :item="item" :index="index" :open="open">
+              {{ item.content }}
+            </slot>
+          </div>
         </slot>
       </AccordionContent>
     </AccordionItem>

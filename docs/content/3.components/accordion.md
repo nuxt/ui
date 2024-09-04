@@ -34,12 +34,12 @@ hide:
 props:
   class: 'px-4'
   items:
-    - label: 'Colors'
-      icon: 'i-heroicons-swatch'
-      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
     - label: 'Icons'
       icon: 'i-heroicons-face-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+    - label: 'Colors'
+      icon: 'i-heroicons-swatch'
+      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
     - label: 'Components'
       icon: 'i-heroicons-cube-transparent'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
@@ -63,12 +63,12 @@ props:
   class: 'px-4'
   type: 'multiple'
   items:
-    - label: 'Colors'
-      icon: 'i-heroicons-swatch'
-      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
     - label: 'Icons'
       icon: 'i-heroicons-face-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+    - label: 'Colors'
+      icon: 'i-heroicons-swatch'
+      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
     - label: 'Components'
       icon: 'i-heroicons-cube-transparent'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
@@ -92,12 +92,12 @@ props:
   class: 'px-4'
   collapsible: false
   items:
-    - label: 'Colors'
-      icon: 'i-heroicons-swatch'
-      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
     - label: 'Icons'
       icon: 'i-heroicons-face-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+    - label: 'Colors'
+      icon: 'i-heroicons-swatch'
+      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
     - label: 'Components'
       icon: 'i-heroicons-cube-transparent'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
@@ -122,12 +122,12 @@ props:
   class: 'px-4'
   disabled: true
   items:
-    - label: 'Colors'
-      icon: 'i-heroicons-swatch'
-      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
     - label: 'Icons'
       icon: 'i-heroicons-face-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+    - label: 'Colors'
+      icon: 'i-heroicons-swatch'
+      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
       disabled: true
     - label: 'Components'
       icon: 'i-heroicons-cube-transparent'
@@ -153,13 +153,13 @@ props:
   class: 'px-4'
   trailingIcon: 'i-heroicons-plus'
   items:
-    - label: 'Colors'
-      icon: 'i-heroicons-swatch'
-      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
     - label: 'Icons'
       icon: 'i-heroicons-face-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
       trailingIcon: 'i-heroicons-arrow-down'
+    - label: 'Colors'
+      icon: 'i-heroicons-swatch'
+      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
     - label: 'Components'
       icon: 'i-heroicons-cube-transparent'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
@@ -188,6 +188,22 @@ props:
 You can also pass the `value` of one of the items if provided.
 ::
 
+### With body slot
+
+Use the `#body` slot to customize the body of each item.
+
+::component-example
+---
+name: 'accordion-body-slot-example'
+props:
+  class: 'px-4'
+---
+::
+
+::note
+The `#body` slot includes some pre-defined styles, use the [`#content` slot](#with-content-slot) if you want to start from scratch.
+::
+
 ### With content slot
 
 Use the `#content` slot to customize the content of each item.
@@ -202,7 +218,12 @@ props:
 
 ### With custom slot
 
-Use the `slot` property instead of the `#content` slot to customize a specific item.
+Use the `slot` property to customize a specific item.
+
+You will have access to the following slots:
+
+- `#{{ item.slot }}`{lang="ts-type"}
+- `#{{ item.slot }}-body`{lang="ts-type"}
 
 ::component-example
 ---

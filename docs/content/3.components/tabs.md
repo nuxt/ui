@@ -209,7 +209,7 @@ Use the `#content` slot to customize the content of each item.
 
 ### With custom slot
 
-Use the `slot` property instead of the `#content` slot to customize a specific item.
+Use the `slot` property to customize a specific item.
 
 :component-example{name="tabs-custom-slot-example"}
 
