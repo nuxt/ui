@@ -344,7 +344,30 @@ class: 'justify-center'
 
 ### Props
 
-:component-props
+::component-props
+---
+ignore:
+  - as
+  - to
+  - target
+  - active
+  - activeClass
+  - inactiveClass
+  - exactActiveClass
+  - ariaCurrentValue
+  - href
+  - rel
+  - noRel
+  - prefetch
+  - noPrefetch
+  - prefetchedClass
+  - replace
+  - exact
+  - exactQuery
+  - exactHash
+  - external
+---
+::
 
 ### Slots
 
