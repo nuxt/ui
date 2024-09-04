@@ -156,7 +156,11 @@ slots:
 
 ## Config
 
+::callout{icon="i-heroicons-light-bulb"}
+Use the `ui` prop to override the radio group config and the `uiRadio` prop to override the radio config.
+::
+
 ::tabs
-  :component-preset{label="Radio" slug="Radio"}
-  :component-preset{label="RadioGroup"}
+  :component-preset{label="Radio (uiRadio)" slug="Radio"}
+  :component-preset{label="RadioGroup (ui)"}
 ::
