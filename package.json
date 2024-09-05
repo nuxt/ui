@@ -36,7 +36,7 @@
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground && nuxi prepare docs",
     "docs": "DEV=true nuxi dev docs",
-    "docs:build": "nuxi generate docs",
+    "docs:build": "nuxi build docs",
     "docs:prepare": "nuxt-component-meta docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -45,12 +45,12 @@
     "release": "release-it"
   },
   "dependencies": {
-    "@nuxt/icon": "^1.5.0",
-    "@nuxt/kit": "^3.13.0",
-    "@nuxt/schema": "^3.13.0",
+    "@nuxt/icon": "^1.5.1",
+    "@nuxt/kit": "^3.13.1",
+    "@nuxt/schema": "^3.13.1",
     "@nuxtjs/color-mode": "^3.4.4",
-    "@tailwindcss/postcss": "4.0.0-alpha.21",
-    "@tailwindcss/vite": "4.0.0-alpha.21",
+    "@tailwindcss/postcss": "4.0.0-alpha.22",
+    "@tailwindcss/vite": "4.0.0-alpha.22",
     "@vueuse/core": "^11.0.3",
     "@vueuse/integrations": "^11.0.3",
     "defu": "^6.1.4",
@@ -59,7 +59,7 @@
     "radix-vue": "^1.9.5",
     "scule": "^1.3.0",
     "tailwind-variants": "^0.2.1",
-    "tailwindcss": "4.0.0-alpha.21",
+    "tailwindcss": "4.0.0-alpha.22",
     "vaul-vue": "^0.2.0"
   },
   "devDependencies": {
@@ -71,21 +71,17 @@
     "eslint": "^9.9.1",
     "happy-dom": "^15.7.3",
     "joi": "^17.13.3",
-    "nuxt": "^3.13.0",
+    "nuxt": "^3.13.1",
     "release-it": "^17.6.0",
     "valibot": "^0.41.0",
     "vitest": "^2.0.5",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^2.1.4",
+    "vue-tsc": "^2.1.6",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
   },
   "resolutions": {
-    "@nuxt/kit": "3.12.3",
-    "@nuxt/schema": "3.12.3",
     "@nuxt/ui": "workspace:*",
-    "happy-dom": "14.12.3",
-    "nuxt": "3.12.3",
-    "vite": "5.2.4"
+    "happy-dom": "14.12.3"
   }
 }
