@@ -6,7 +6,7 @@ links:
     to: https://www.radix-vue.com/components/toast.html
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Notification.vue
+    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Toast.vue
 navigation:
   badge:
     label: Todo

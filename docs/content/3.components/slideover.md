@@ -275,12 +275,12 @@ In this example, press :kbd{value="O"} to toggle the Slideover.
 This allows you to move the trigger outside of the Slideover or remove it entirely.
 ::
 
-### Control programatically
+### Programmatic usage
 
-You can use the `useSlideover` composable to open a Slideover programatically.
+You can use the [`useSlideover`](/composables/use-slideover) composable to open a Slideover programatically.
 
 ::important
-Make sure to wrap your app with the [`App`](/components/app) component which uses the [`SlideoverProvider`](https://github.com/benjamincanac/ui3/blob/dev/src/runtime/components/SlideoverProvider.vue) component.
+Make sure to wrap your app with the [App](/components/app) component which uses the [SlideoverProvider](https://github.com/benjamincanac/ui3/blob/dev/src/runtime/components/SlideoverProvider.vue) component.
 ::
 
 First, create a slideover component that will be opened programatically:

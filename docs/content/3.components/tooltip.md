@@ -14,7 +14,7 @@ links:
 Use a [Button](/components/button) or any other component in the default slot of the Tooltip.
 
 ::important
-Make sure to wrap your app with the [`App`](/components/app) component which uses the [TooltipProvider](https://www.radix-vue.com/components/tooltip.html#provider) component from Radix Vue.
+Make sure to wrap your app with the [App](/components/app) component which uses the [TooltipProvider](https://www.radix-vue.com/components/tooltip.html#provider) component from Radix Vue.
 ::
 
 ::tip{to="/components/app#props"}
@@ -91,7 +91,7 @@ slots:
 ::
 
 ::tip
-This can be configured globally through the `tooltip.delayDuration` option in the [`App`](/components/app) component.
+This can be configured globally through the `tooltip.delayDuration` option in the [App](/components/app) component.
 ::
 
 ### Content
