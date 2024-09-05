@@ -1,6 +1,6 @@
 {
   "name": "@nuxt/ui",
-  "version": "3.0.0",
+  "version": "3.0.0-alpha.0",
   "packageManager": "pnpm@9.9.0",
   "repository": {
     "type": "git",
