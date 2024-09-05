@@ -8,11 +8,7 @@
   },
   "github": {
     "release": true,
-    "releaseName": "v${version}",
-    "web": true
-  },
-  "hooks": {
-    "before:init": ["pnpm lint", "pnpm typecheck"]
+    "releaseName": "v${version}"
   },
   "plugins": {
     "@release-it/conventional-changelog": {
