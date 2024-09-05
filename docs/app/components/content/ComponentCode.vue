@@ -38,7 +38,7 @@ const name = `U${upperFirst(camelName)}`
 const componentProps = reactive({ ...(props.props || {}) })
 
 function getComponentProp(name: string) {
-  return get(componentProps, name)
+  return get(componentProps, name) || undefined
 }
 
 function setComponentProp(name: string, value: any) {
@@ -76,8 +76,8 @@ const options = computed(() => {
         : Object.keys(componentTheme?.variants?.[key] || {}).map(variant => ({
           value: variant,
           label: variant,
-          chip: key === 'color' ? { color: variant } : undefined
-        })).filter(variant => key === 'color' ? !['error'].includes(variant.value) : true)
+          chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
+        })).filter(variant => key.toLowerCase().endsWith('color') ? !['error'].includes(variant.value) : true)
 
     return {
       name: key,
@@ -219,13 +219,13 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
               value-key="value"
               color="gray"
               variant="soft"
-              class="rounded rounded-l-none"
+              class="rounded rounded-l-none min-w-12"
               :search="false"
-              :class="[option.name === 'color' && 'pl-6']"
+              :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
               :ui="{ itemLeadingChip: 'size-2' }"
               @update:model-value="setComponentProp(option.name, $event)"
             >
-              <template v-if="option.name === 'color'" #leading="{ modelValue, ui }">
+              <template v-if="option.name.toLowerCase().endsWith('color')" #leading="{ modelValue, ui }">
                 <UChip
                   v-if="modelValue"
                   inset
@@ -249,7 +249,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
         </template>
       </div>
 
-      <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4" :class="[!options.length && 'rounded-t-md', props.class]">
+      <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class]">
         <component :is="name" v-bind="componentProps" @update:model-value="!!componentProps.modelValue && setComponentProp('modelValue', $event)">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <ContentSlot :name="slot" unwrap="p">
