@@ -46,24 +46,24 @@ export default defineNuxtConfig({
   },
 
   content: {
-    sources: {
-      pro: process.env.NUXT_UI_PRO_PATH
-        ? {
-            prefix: '/pro',
-            driver: 'fs',
-            base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/app/content/pro')
-          }
-        : process.env.NUXT_GITHUB_TOKEN
-          ? {
-              prefix: '/pro',
-              driver: 'github',
-              repo: 'nuxt/ui-pro',
-              branch: 'dev',
-              dir: 'docs/app/content/pro',
-              token: process.env.NUXT_GITHUB_TOKEN || ''
-            }
-          : undefined
-    },
+    // sources: {
+    //   pro: process.env.NUXT_UI_PRO_PATH
+    //     ? {
+    //         prefix: '/pro',
+    //         driver: 'fs',
+    //         base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/app/content/pro')
+    //       }
+    //     : process.env.NUXT_GITHUB_TOKEN
+    //       ? {
+    //           prefix: '/pro',
+    //           driver: 'github',
+    //           repo: 'nuxt/ui-pro',
+    //           branch: 'dev',
+    //           dir: 'docs/app/content/pro',
+    //           token: process.env.NUXT_GITHUB_TOKEN || ''
+    //         }
+    //       : undefined
+    // },
     highlight: {
       langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
     }
@@ -73,19 +73,20 @@ export default defineNuxtConfig({
     provider: 'ipx'
   },
 
-  nitro: {
-    prerender: {
-      routes: [
-        '/getting-started'
-        // '/api/releases.json',
-        // '/api/pulls.json'
-      ],
-      ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
-    }
-  },
+  // nitro: {
+  //   prerender: {
+  //     routes: [
+  //       '/getting-started'
+  //       // '/api/releases.json',
+  //       // '/api/pulls.json'
+  //     ],
+  //     ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
+  //   }
+  // },
 
   routeRules: {
     '/': { redirect: '/getting-started', prerender: false },
+    '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
     '/components': { redirect: '/components/app', prerender: false }
   },
 
