@@ -41,7 +41,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     options.colors = options.colors?.length ? [...new Set(['primary', 'error', ...options.colors])] : ['primary', 'error', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
 
-    // @ts-expect-error - Add ui options to nuxt
     nuxt.options.ui = options
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
