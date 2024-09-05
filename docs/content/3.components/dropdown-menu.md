@@ -98,8 +98,12 @@ slots:
 :u-button{icon="i-heroicons-bars-3" color="gray" variant="outline"}
 ::
 
+::note
+You can pass an array of arrays to the `items` prop to create separated groups of items.
+::
+
 ::tip
-Each item can take a `children` array to create a nested menu which can be controlled using the `open`, `defaultOpen` and `content` properties.
+Each item can take a `children` array of objects with the same properties as the `items` prop to create a nested menu which can be controlled using the `open`, `defaultOpen` and `content` properties.
 ::
 
 ### Content
