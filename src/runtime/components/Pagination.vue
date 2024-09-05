@@ -123,7 +123,7 @@ const ui = pagination()
 </script>
 
 <template>
-  <PaginationRoot v-slot="{ page, pageCount }" v-bind="rootProps" :class="ui.root({ class: props.class })">
+  <PaginationRoot v-slot="{ page, pageCount }" v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <PaginationList v-slot="{ items }" :class="ui.list({ class: props.ui?.list })">
       <PaginationFirst v-if="showControls || !!slots.first" as-child>
         <slot name="first">

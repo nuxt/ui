@@ -63,7 +63,7 @@ const ui = breadcrumb()
 </script>
 
 <template>
-  <Primitive :as="as" aria-label="breadcrumb" :class="ui.root({ class: props.class })">
+  <Primitive :as="as" aria-label="breadcrumb" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <ol :class="ui.list({ class: props.ui?.list })">
       <template v-for="(item, index) in items" :key="index">
         <li :class="ui.item({ class: props.ui?.item })">

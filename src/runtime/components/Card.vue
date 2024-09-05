@@ -36,7 +36,7 @@ const ui = card()
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: props.class })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div v-if="!!slots.header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" />
     </div>

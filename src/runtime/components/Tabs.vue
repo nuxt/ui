@@ -85,7 +85,7 @@ const ui = computed(() => tabs({
 </script>
 
 <template>
-  <TabsRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
+  <TabsRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <TabsList :class="ui.list({ class: props.ui?.list })">
       <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
 

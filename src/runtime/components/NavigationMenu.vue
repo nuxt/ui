@@ -109,7 +109,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
 </script>
 
 <template>
-  <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
+  <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list({ class: props.ui?.list })">
         <NavigationMenuItem v-for="(item, index) in list" :key="`list-${listIndex}-${index}`" :value="item.value || String(index)" :class="ui.item({ class: props.ui?.item })">

@@ -91,7 +91,7 @@ provide(avatarGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: props.class })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" :class="ui.base({ class: props.ui?.base })" />
     <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" :class="ui.base({ class: props.ui?.base })" />
   </Primitive>

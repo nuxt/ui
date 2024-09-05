@@ -42,7 +42,7 @@ const ui = collapsible()
 </script>
 
 <template>
-  <CollapsibleRoot v-slot="{ open }" v-bind="rootProps" :class="ui.root({ class: props.class })">
+  <CollapsibleRoot v-slot="{ open }" v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <CollapsibleTrigger v-if="!!slots.default" as-child>
       <slot :open="open" />
     </CollapsibleTrigger>

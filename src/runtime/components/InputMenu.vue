@@ -244,7 +244,7 @@ defineExpose({
     :disabled="disabled"
     :display-value="displayValue"
     :filter-function="filterFunction"
-    :class="ui.root({ class: props.class })"
+    :class="ui.root({ class: [props.class, props.ui?.root] })"
     :as-child="!!multiple"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"

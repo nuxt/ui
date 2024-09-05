@@ -64,7 +64,7 @@ const ui = computed(() => separator({
 </script>
 
 <template>
-  <Separator v-bind="rootProps" :class="ui.root({ class: props.class })">
+  <Separator v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div :class="ui.border({ class: props.ui?.border })" />
 
     <template v-if="label || icon || avatar || !!slots.default">

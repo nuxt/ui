@@ -101,7 +101,7 @@ defineExpose({
     ref="el"
     v-slot="{ remaining, duration }"
     v-bind="rootProps"
-    :class="ui.root({ class: props.class, multiline })"
+    :class="ui.root({ class: [props.class, props.ui?.root], multiline })"
     :style="{ '--height': height }"
   >
     <slot name="leading">

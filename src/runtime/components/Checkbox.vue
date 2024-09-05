@@ -93,7 +93,7 @@ function onUpdate(value: any) {
 </script>
 
 <template>
-  <div :class="ui.root({ class: props.class })">
+  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"

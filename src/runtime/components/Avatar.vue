@@ -51,7 +51,7 @@ const ui = computed(() => avatar({
 </script>
 
 <template>
-  <AvatarRoot :class="ui.root({ class: props.class })">
+  <AvatarRoot :class="ui.root({ class: [props.class, props.ui?.root] })">
     <AvatarImage
       v-if="src"
       :as="as"

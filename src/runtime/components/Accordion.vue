@@ -71,7 +71,7 @@ const ui = computed(() => accordion({
 </script>
 
 <template>
-  <AccordionRoot v-bind="rootProps" :class="ui.root({ class: props.class })">
+  <AccordionRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <AccordionItem
       v-for="(item, index) in items"
       v-slot="{ open }"

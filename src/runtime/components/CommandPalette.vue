@@ -207,7 +207,7 @@ const groups = computed(() => {
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ComboboxRoot v-bind="rootProps" v-model:search-term="searchTerm" open :class="ui.root({ class: props.class })">
+  <ComboboxRoot v-bind="rootProps" v-model:search-term="searchTerm" open :class="ui.root({ class: [props.class, props.ui?.root] })">
     <ComboboxInput as-child>
       <UInput
         variant="none"

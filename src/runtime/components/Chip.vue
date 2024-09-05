@@ -64,7 +64,7 @@ const ui = computed(() => chip({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: props.class })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <slot />
 
     <span v-if="show" :class="ui.base({ class: props.ui?.base })">

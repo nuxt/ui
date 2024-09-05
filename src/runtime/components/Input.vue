@@ -145,7 +145,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="ui.root({ class: props.class })">
+  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
     <input
       :id="id"
       ref="inputRef"

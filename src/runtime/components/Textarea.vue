@@ -163,7 +163,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="ui.root({ class: props.class })">
+  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
     <textarea
       :id="id"
       ref="textareaRef"

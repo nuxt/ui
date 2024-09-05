@@ -65,7 +65,7 @@ const ui = ${camelName}()
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: props.class })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <slot />
   </Primitive>
 </template>
@@ -109,7 +109,7 @@ const ui = ${camelName}()
 </script>
 
 <template>
-  <${upperName}Root v-bind="rootProps" :class="ui.root({ class: props.class })" />
+  <${upperName}Root v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })" />
 </template>
 `
   }

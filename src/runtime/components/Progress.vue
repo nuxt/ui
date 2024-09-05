@@ -142,7 +142,7 @@ const ui = computed(() => progress({
 </script>
 
 <template>
-  <div :class="ui.root({ class: props.class })">
+  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div v-if="!isIndeterminate && (status || $slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
