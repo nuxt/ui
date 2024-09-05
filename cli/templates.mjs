@@ -55,7 +55,6 @@ export interface ${upperName}Slots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 
 const props = withDefaults(defineProps<${upperName}Props>(), { as: 'div' })
@@ -95,7 +94,6 @@ export interface ${upperName}Slots {}
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { ${upperName}Root, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 
