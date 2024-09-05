@@ -7,7 +7,7 @@ links:
     to: https://www.radix-vue.com/components/navigation-menu.html
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/HorizontalNavigation.vue
+    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/NavigationMenu.vue
 navigation:
   badge:
     label: Todo
