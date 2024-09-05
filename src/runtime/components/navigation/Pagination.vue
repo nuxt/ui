@@ -15,7 +15,7 @@
 
     <slot name="prev" :on-click="onClickPrev">
       <UButton
-        v-if="prevButton"
+        v-if="prevButton && showPrev"
         :size="size"
         :disabled="!canGoFirstOrPrev || disabled"
         :class="[ui.base, ui.rounded]"
@@ -41,7 +41,7 @@
 
     <slot name="next" :on-click="onClickNext">
       <UButton
-        v-if="nextButton"
+        v-if="nextButton && showNext"
         :size="size"
         :disabled="!canGoLastOrNext || disabled"
         :class="[ui.base, ui.rounded]"
@@ -138,6 +138,14 @@ export default defineComponent({
     showLast: {
       type: Boolean,
       default: false
+    },
+    showPrev: {
+      type: Boolean,
+      default: true
+    },
+    showNext: {
+      type: Boolean,
+      default: true
     },
     firstButton: {
       type: Object as PropType<Button>,
