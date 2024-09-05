@@ -11,5 +11,6 @@
   ],
   "lockFileMaintenance": {
     "enabled": true
-  }
+  },
+  "baseBranches": ["dev", "v3"]
 }
