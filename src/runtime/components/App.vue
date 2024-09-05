@@ -2,7 +2,7 @@
 import type { ConfigProviderProps, TooltipProviderProps } from 'radix-vue'
 import type { ToasterProps } from '../types'
 
-export interface AppProps extends ConfigProviderProps {
+export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
   tooltip?: TooltipProviderProps
   toaster?: ToasterProps | null
 }
@@ -13,26 +13,23 @@ export interface AppSlots {
 </script>
 
 <script setup lang="ts">
-import { toRef } from 'vue'
+import { toRef, useId } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { useId } from '#imports'
 import UToaster from './Toaster.vue'
 import UModalProvider from './ModalProvider.vue'
 import USlideoverProvider from './SlideoverProvider.vue'
 
-const props = withDefaults(defineProps<AppProps>(), {
-  useId: () => useId()
-})
+const props = defineProps<AppProps>()
 defineSlots<AppSlots>()
 
-const configProviderProps = useForwardProps(reactivePick(props, 'dir', 'scrollBody', 'useId'))
+const configProviderProps = useForwardProps(reactivePick(props, 'dir', 'scrollBody'))
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
 </script>
 
 <template>
-  <ConfigProvider v-bind="configProviderProps">
+  <ConfigProvider :use-id="() => useId() as string" v-bind="configProviderProps">
     <TooltipProvider v-bind="tooltipProps">
       <UToaster v-if="toaster !== null" v-bind="toasterProps">
         <slot />

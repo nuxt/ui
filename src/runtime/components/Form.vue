@@ -31,9 +31,8 @@ export interface FormSlots {
 </script>
 
 <script lang="ts" setup generic="T extends object">
-import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed } from 'vue'
+import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId } from 'vue'
 import { useEventBus } from '@vueuse/core'
-import { useId } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey } from '../composables/useFormField'
 import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'

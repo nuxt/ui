@@ -51,10 +51,10 @@ export interface SwitchSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useId } from 'vue'
 import { SwitchRoot, SwitchThumb, useForwardProps, Label } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import { useId, useAppConfig } from '#imports'
+import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 
 const props = defineProps<SwitchProps>()
