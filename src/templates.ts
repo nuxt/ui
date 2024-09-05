@@ -15,7 +15,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
       getContents: () => `@import "tailwindcss";
 @import "#build/ui.css";
 ${hasNuxtModule('@nuxt/content') ? '@source "../content/**/*.md";' : ''}
-    `
+`
     })
 
     nuxt.options.css.unshift(template.dst)
