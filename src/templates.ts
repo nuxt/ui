@@ -13,7 +13,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
       filename: 'tailwind.css',
       write: true,
       getContents: () => `@import "tailwindcss";
-@import "#build/ui.css";
+@import "./ui.css";
 ${hasNuxtModule('@nuxt/content') ? '@source "../content/**/*.md";' : ''}
 `
     })
