@@ -5,11 +5,13 @@
   "ignoreDeps": [
     "@nuxt/eslint-config",
     "eslint",
+    "happy-dom",
     "nuxt-component-meta",
     "valibot30",
     "valibot31"
   ],
   "lockFileMaintenance": {
     "enabled": true
-  }
+  },
+  "baseBranches": ["dev", "v3"]
 }
