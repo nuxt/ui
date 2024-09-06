@@ -13,13 +13,15 @@
     ".": {
       "types": "./dist/module.d.ts",
       "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
+      "require": "./dist/module.cjs",
+      "style": "./dist/runtime/index.css"
     },
     "./runtime/*": "./dist/runtime/*"
   },
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
   },
+  "style": "./dist/runtime/index.css",
   "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
   "files": [
