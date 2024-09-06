@@ -27,7 +27,7 @@
     "cli"
   ],
   "engines": {
-    "node": ">=v16.20.2"
+    "node": ">=20.17.0"
   },
   "scripts": {
     "build": "nuxt-module-build build",
