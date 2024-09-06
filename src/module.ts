@@ -58,9 +58,6 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
     nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, 'isolate'].filter(Boolean).join(' ')
 
-    // Add keyframes for animations
-    nuxt.options.css.push(resolve('./runtime/assets/css/animations.css'))
-
     if (nuxt.options.builder === '@nuxt/vite-builder') {
       const plugin = await import('@tailwindcss/vite').then(r => r.default)
       addVitePlugin(plugin())

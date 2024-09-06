@@ -91,3 +91,10 @@ provide('files', files)
     <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
   </UApp>
 </template>
+
+<style>
+@import "tailwindcss";
+@import "@nuxt/ui-pro/dist/runtime/index.css";
+
+@source "../content/**/*.md";
+</style>

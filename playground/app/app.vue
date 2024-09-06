@@ -80,3 +80,8 @@ defineShortcuts({
     </UModal>
   </UApp>
 </template>
+
+<style>
+@import "tailwindcss";
+@import "@nuxt/ui/dist/runtime/index.css";
+</style>

@@ -1,58 +1,11 @@
 import { fileURLToPath } from 'node:url'
 import { kebabCase } from 'scule'
-import { addTemplate, addTypeTemplate, hasNuxtModule } from '@nuxt/kit'
+import { addTemplate, addTypeTemplate } from '@nuxt/kit'
 import type { Nuxt } from '@nuxt/schema'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 
 export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
-  const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
-
-  if (!nuxt.options.css.find(path => path.endsWith('tailwind.css'))) {
-    const template = addTemplate({
-      filename: 'tailwind.css',
-      write: true,
-      getContents: () => `@import "tailwindcss";
-@import "./ui.css";
-${hasNuxtModule('@nuxt/content') ? '@source "../content/**/*.md";' : ''}
-`
-    })
-
-    nuxt.options.css.unshift(template.dst)
-  }
-
-  addTemplate({
-    filename: 'ui.css',
-    write: true,
-    getContents: () => `@layer base {
-  :root {
-    color-scheme: light dark;
-  }
-}
-
-@theme {
-  --color-gray-*: initial;
-  --color-cool-50: #f9fafb;
-  --color-cool-100: #f3f4f6;
-  --color-cool-200: #e5e7eb;
-  --color-cool-300: #d1d5db;
-  --color-cool-400: #9ca3af;
-  --color-cool-500: #6b7280;
-  --color-cool-600: #4b5563;
-  --color-cool-700: #374151;
-  --color-cool-800: #1f2937;
-  --color-cool-900: #111827;
-  --color-cool-950: #030712;
-
-  --spacing-4_5: 1.125rem;
-
-  ${shades.map(shade => `--color-primary-${shade}: var(--color-primary-${shade});`).join('\n\t')}
-  ${shades.map(shade => `--color-error-${shade}: var(--color-error-${shade});`).join('\n\t')}
-  ${shades.map(shade => `--color-gray-${shade}: var(--color-gray-${shade});`).join('\n\t')}
-}
-`
-  })
-
   for (const component in theme) {
     addTemplate({
       filename: `ui/${kebabCase(component)}.ts`,
