@@ -149,8 +149,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: file:../../ui-pro2
-        version: file:../ui-pro2(magicast@0.3.5)(rollup@4.21.2)(vue@3.5.2(typescript@5.5.4))
+        specifier: 2.0.0-alpha.1
+        version: 2.0.0-alpha.1(magicast@0.3.5)(rollup@4.21.2)(vue@3.5.2(typescript@5.5.4))
       '@nuxtjs/plausible':
         specifier: ^1.0.2
         version: 1.0.2(magicast@0.3.5)(rollup@4.21.2)
@@ -1203,8 +1203,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@file:../ui-pro2':
-    resolution: {directory: ../ui-pro2, type: directory}
+  '@nuxt/ui-pro@2.0.0-alpha.1':
+    resolution: {integrity: sha512-RitZCZ0D/Onq5FfDnFOydh7ATRYy4cDGWc3wUhWP8OizQhA++lWsKvgAHvQR7Iv+W0Auntcjyi/X0I90/uu1gA==}
     engines: {node: '>=v16.20.2'}
 
   '@nuxt/vite-builder@3.13.1':
@@ -4075,8 +4075,8 @@ packages:
     resolution: {integrity: sha512-7W0vV3rqv5tokqkBAFV1LbR7HPOWzXQDpDgEuib/aJ1jsZZx6x3c2mBI+TJhJzOhkGeaLbCKEHXEXLfirtG2JA==}
     engines: {node: '>=18'}
 
-  launch-editor@2.8.2:
-    resolution: {integrity: sha512-eF5slEUZXmi6WvFzI3dYcv+hA24/iKnROf24HztcURJpSz9RBmBgz5cNCVOeguouf1llrwy6Yctl4C4HM+xI8g==}
+  launch-editor@2.9.1:
+    resolution: {integrity: sha512-Gcnl4Bd+hRO9P9icCP/RVVT2o8SFlPXofuCxvA2SaZuH45whSvf5p8x5oih5ftLiVhEI4sp5xDY+R+b3zJBh5w==}
 
   lazystream@1.0.1:
     resolution: {integrity: sha512-b94GiNHQNy6JNTrt5w6zNyffMrNkXZb3KTkCZJb2V1xaEGCk093vkZ2jk3tpaeP33/OiXC+WvK9AxUebnf5nbw==}
@@ -7395,7 +7395,7 @@ snapshots:
       hookable: 5.5.3
       image-meta: 0.2.1
       is-installed-globally: 1.0.0
-      launch-editor: 2.8.2
+      launch-editor: 2.9.1
       local-pkg: 0.5.0
       magicast: 0.3.5
       nypm: 0.3.11
@@ -7442,7 +7442,7 @@ snapshots:
       hookable: 5.5.3
       image-meta: 0.2.1
       is-installed-globally: 1.0.0
-      launch-editor: 2.8.2
+      launch-editor: 2.9.1
       local-pkg: 0.5.0
       magicast: 0.3.5
       nypm: 0.3.11
@@ -7805,7 +7805,7 @@ snapshots:
       - supports-color
       - webpack-sources
 
-  '@nuxt/ui-pro@file:../ui-pro2(magicast@0.3.5)(rollup@4.21.2)(vue@3.5.2(typescript@5.5.4))':
+  '@nuxt/ui-pro@2.0.0-alpha.1(magicast@0.3.5)(rollup@4.21.2)(vue@3.5.2(typescript@5.5.4))':
     dependencies:
       '@nuxt/kit': 3.13.1(magicast@0.3.5)(rollup@4.21.2)
       '@nuxt/schema': 3.13.1(rollup@4.21.2)
@@ -11240,7 +11240,7 @@ snapshots:
     dependencies:
       package-json: 10.0.1
 
-  launch-editor@2.8.2:
+  launch-editor@2.9.1:
     dependencies:
       picocolors: 1.1.0
       shell-quote: 1.8.1
