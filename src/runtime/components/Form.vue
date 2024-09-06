@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
 const emits = defineEmits<FormEmits<T>>()
 defineSlots<FormSlots>()
 
-const formId = props.id ?? useId()
+const formId = props.id ?? useId() as string
 
 const bus = useEventBus<FormEvent>(`form-${formId}`)
 const parentBus = inject(
