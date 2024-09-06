@@ -102,8 +102,8 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     variant: 'pill',
     class: {
-      link: ['hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50', options.transitions && 'transition-colors before:transition-colors'],
-      linkLeadingIcon: ['group-hover:text-gray-700 dark:group-hover:text-gray-200', options.transitions && 'transition-colors']
+      link: ['hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50', options.transitions && 'transition-colors before:transition-colors'],
+      linkLeadingIcon: ['group-hover:text-gray-700 dark:group-hover:text-gray-200 group-data-[state=open]:text-gray-700 dark:group-data-[state=open]:text-gray-200', options.transitions && 'transition-colors']
     }
   }, ...options.colors.map((color: string) => ({
     color,
@@ -140,8 +140,8 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     variant: 'link',
     class: {
-      link: ['hover:text-gray-900 dark:hover:text-white', options.transitions && 'transition-colors'],
-      linkLeadingIcon: ['group-hover:text-gray-700 dark:group-hover:text-gray-200', options.transitions && 'transition-colors']
+      link: ['hover:text-gray-900 dark:hover:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white', options.transitions && 'transition-colors'],
+      linkLeadingIcon: ['group-hover:text-gray-700 dark:group-hover:text-gray-200 group-data-[state=open]:text-gray-700 dark:group-data-[state=open]:text-gray-200', options.transitions && 'transition-colors']
     }
   }, ...options.colors.map((color: string) => ({
     color,
