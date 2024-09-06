@@ -94,7 +94,7 @@ provide('files', files)
 
 <style>
 @import "tailwindcss";
-@import "@nuxt/ui-pro/dist/runtime/index.css";
+@import "@nuxt/ui-pro";
 
 @source "../content/**/*.md";
 </style>
