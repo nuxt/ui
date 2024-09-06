@@ -37,16 +37,6 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: pnpm
 
-      - name: Filter changes
-        uses: dorny/paths-filter@v3
-        id: changes
-        with:
-          filters: |
-            src:
-              - 'src/**'
-              - 'package.json'
-              - 'pnpm-lock.yaml'
-
       - name: Install dependencies
         run: pnpm install
 
