@@ -1,4 +1,4 @@
-import { type InjectionKey, type ComputedRef } from 'vue'
+import type { InjectionKey, ComputedRef } from 'vue'
 import { inject, computed } from 'vue'
 import type { ButtonGroupProps } from '../components/ButtonGroup.vue'
 import type { GetObjectField } from '../types/utils'
