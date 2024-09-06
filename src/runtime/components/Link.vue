@@ -74,31 +74,31 @@ const ui = computed(() => tv({
   }
 }))
 
-function isLinkActive(slotProps: any) {
+function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
   if (props.active !== undefined) {
     return props.active
   }
 
-  if (props.exactQuery && !isEqual(slotProps.route.query, route.query)) {
+  if (props.exactQuery && !isEqual(linkRoute.query, route.query)) {
     return false
   }
-  if (props.exactHash && slotProps.route.hash !== route.hash) {
+  if (props.exactHash && linkRoute.hash !== route.hash) {
     return false
   }
 
-  if (props.exact && slotProps.isExactActive) {
+  if (props.exact && isExactActive) {
     return true
   }
 
-  if (!props.exact && slotProps.isActive) {
+  if (!props.exact && isActive) {
     return true
   }
 
   return false
 }
 
-function resolveLinkClass(slotProps: any) {
-  const active = isLinkActive(slotProps)
+function resolveLinkClass({ route, isActive, isExactActive }: any) {
+  const active = isLinkActive({ route, isActive, isExactActive })
 
   if (props.raw) {
     return [props.class, active ? props.activeClass : props.inactiveClass]
@@ -109,12 +109,39 @@ function resolveLinkClass(slotProps: any) {
 </script>
 
 <template>
-  <NuxtLink v-slot="slotProps" v-bind="nuxtLinkProps" custom>
+  <NuxtLink v-slot="{ href, navigate, route: linkRoute, rel, target, isExternal, isActive, isExactActive }" v-bind="nuxtLinkProps" custom>
     <template v-if="custom">
-      <slot v-bind="{ ...$attrs, ...slotProps, as, type, disabled, active: isLinkActive(slotProps) }" />
+      <slot
+        v-bind="{
+          ...$attrs,
+          as,
+          type,
+          disabled,
+          href,
+          navigate,
+          rel,
+          target,
+          isExternal,
+          active: isLinkActive({ route: linkRoute, isActive, isExactActive })
+        }"
+      />
     </template>
-    <ULinkBase v-else v-bind="{ ...$attrs, ...slotProps, as, type, disabled }" :class="resolveLinkClass(slotProps)">
-      <slot v-bind="{ ...slotProps, as, type, disabled, active: isLinkActive(slotProps) }" />
+    <ULinkBase
+      v-else
+      v-bind="{
+        ...$attrs,
+        as,
+        type,
+        disabled,
+        href,
+        navigate,
+        rel,
+        target,
+        isExternal
+      }"
+      :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
+    >
+      <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
     </ULinkBase>
   </NuxtLink>
 </template>
