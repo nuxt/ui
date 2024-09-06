@@ -92,17 +92,14 @@ const items = [
     </div>
 
     <UNavigationMenu
+      arrow
       :items="items"
       :color="color"
       :variant="variant"
       :orientation="orientation"
       :highlight="highlight"
       :highlight-color="highlightColor"
-      arrow
-      :class="highlight ? [
-        'border-gray-200 dark:border-gray-800',
-        orientation === 'vertical' as any ? 'border-l' : 'border-b'
-      ] : undefined"
+      :class="highlight && 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-gray-200 dark:border-gray-800'"
     />
   </div>
 </template>

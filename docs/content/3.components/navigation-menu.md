@@ -8,9 +8,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/NavigationMenu.vue
-navigation:
-  badge:
-    label: Todo
 ---
 
 ## Usage
@@ -24,6 +21,8 @@ Use the `items` prop as an array of objects with the following properties:
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `badge?: string | number | BadgeProps`{lang="ts-type"}
 - `trailingIcon?: string`{lang="ts-type"}
+- `value?: string`{lang="ts-type"}
+- `disabled?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `select?(e: Event): void`{lang="ts-type"}
@@ -42,6 +41,7 @@ props:
   items:
     - label: Guide
       icon: i-heroicons-book-open
+      to: /getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -139,10 +139,8 @@ Use the `orientation` prop to change the orientation of the NavigationMenu.
 
 ::component-code
 ---
-collapse: true
 ignore:
   - items
-  - class
 external:
   - items
 props:
@@ -150,6 +148,7 @@ props:
   items:
     - - label: Guide
         icon: i-heroicons-book-open
+        to: /getting-started
       - label: Composables
         icon: i-heroicons-circle-stack
         to: /composables
@@ -166,7 +165,7 @@ props:
 ::
 
 ::note
-Groups will be spaced between each other when orientation is `horizontal` and separated by a line when orientation is `vertical`.
+Groups will be spaced when orientation is `horizontal` and separated when orientation is `vertical`.
 ::
 
 ### Highlight
@@ -178,7 +177,6 @@ Use the `highlight-color` prop to change the color of the border. It defaults to
 ::component-code
 ---
 prettier: true
-collapse: true
 ignore:
   - items
   - highlight
@@ -192,6 +190,7 @@ props:
   items:
     - - label: Guide
         icon: i-heroicons-book-open
+        to: /getting-started
       - label: Composables
         icon: i-heroicons-circle-stack
         to: /composables
@@ -218,10 +217,8 @@ Use the `color` prop to change the color of the NavigationMenu.
 
 ::component-code
 ---
-collapse: true
 ignore:
   - items
-  - class
 external:
   - items
 props:
@@ -229,6 +226,7 @@ props:
   items:
     - - label: Guide
         icon: i-heroicons-book-open
+        to: /getting-started
       - label: Composables
         icon: i-heroicons-circle-stack
         to: /composables
@@ -250,10 +248,8 @@ Use the `variant` prop to change the variant of the NavigationMenu.
 
 ::component-code
 ---
-collapse: true
 ignore:
   - items
-  - class
 external:
   - items
 props:
@@ -263,6 +259,7 @@ props:
   items:
     - - label: Guide
         icon: i-heroicons-book-open
+        to: /getting-started
       - label: Composables
         icon: i-heroicons-circle-stack
         to: /composables
@@ -282,7 +279,231 @@ props:
 The `highlight` prop changes the `pill` variant active item style. Try it out to see the difference.
 ::
 
+### Icon
+
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-heroicons-chevron-down-20-solid`. This icon is only displayed when an item has children.
+
+::note
+You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
+::
+
+::component-code
+---
+collapse: true
+ignore:
+  - items
+  - class
+external:
+  - items
+props:
+  trailingIcon: 'i-heroicons-plus'
+  items:
+    - label: Guide
+      icon: i-heroicons-book-open
+      to: /getting-started
+      children:
+        - label: Introduction
+          description: Fully styled and customizable components for Nuxt.
+          icon: i-heroicons-home
+        - label: Installation
+          description: Learn how to install and configure Nuxt UI in your application.
+          icon: i-heroicons-cloud-arrow-down
+        - label: 'Icons'
+          icon: 'i-heroicons-face-smile'
+          description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+        - label: 'Colors'
+          icon: 'i-heroicons-swatch'
+          description: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+        - label: 'Theme'
+          icon: 'i-heroicons-cog'
+          description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+    - label: Composables
+      icon: i-heroicons-circle-stack
+      to: /composables
+      children:
+        - label: defineShortcuts
+          icon: i-heroicons-document-text-20-solid
+          description: Define shortcuts for your application.
+          to: /composables/define-shortcuts
+        - label: useModal
+          icon: i-heroicons-document-text-20-solid
+          description: Display a modal within your application.
+          to: /composables/use-modal
+        - label: useSlideover
+          icon: i-heroicons-document-text-20-solid
+          description: Display a slideover within your application.
+          to: /composables/use-slideover
+        - label: useToast
+          icon: i-heroicons-document-text-20-solid
+          description: Display a toast within your application.
+          to: /composables/use-toast
+    - label: Components
+      icon: i-heroicons-cube-transparent
+      to: /components
+      active: true
+      children:
+        - label: Link
+          icon: i-heroicons-document-text-20-solid
+          description: Use NuxtLink with superpowers.
+          to: /components/link
+        - label: Modal
+          icon: i-heroicons-document-text-20-solid
+          description: Display a modal within your application.
+          to: /components/modal
+        - label: NavigationMenu
+          icon: i-heroicons-document-text-20-solid
+          description: Display a list of links.
+          to: /components/navigation-menu
+        - label: Pagination
+          icon: i-heroicons-document-text-20-solid
+          description: Display a list of pages.
+          to: /components/pagination
+        - label: Popover
+          icon: i-heroicons-document-text-20-solid
+          description: Display a non-modal dialog that floats around a trigger element.
+          to: /components/popover
+        - label: Progress
+          icon: i-heroicons-document-text-20-solid
+          description: Show a horizontal bar to indicate task progression.
+          to: /components/progress
+  class: 'justify-center'
+---
+::
+
+::tip
+You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
+::
+
+### Arrow
+
+Use the `arrow` prop to display an arrow on the NavigationMenu content when items have children.
+
+::component-code
+---
+collapse: true
+ignore:
+  - items
+  - arrow
+  - class
+external:
+  - items
+props:
+  arrow: true
+  items:
+    - label: Guide
+      icon: i-heroicons-book-open
+      to: /getting-started
+      children:
+        - label: Introduction
+          description: Fully styled and customizable components for Nuxt.
+          icon: i-heroicons-home
+        - label: Installation
+          description: Learn how to install and configure Nuxt UI in your application.
+          icon: i-heroicons-cloud-arrow-down
+        - label: 'Icons'
+          icon: 'i-heroicons-face-smile'
+          description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+        - label: 'Colors'
+          icon: 'i-heroicons-swatch'
+          description: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+        - label: 'Theme'
+          icon: 'i-heroicons-cog'
+          description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+    - label: Composables
+      icon: i-heroicons-circle-stack
+      to: /composables
+      children:
+        - label: defineShortcuts
+          icon: i-heroicons-document-text-20-solid
+          description: Define shortcuts for your application.
+          to: /composables/define-shortcuts
+        - label: useModal
+          icon: i-heroicons-document-text-20-solid
+          description: Display a modal within your application.
+          to: /composables/use-modal
+        - label: useSlideover
+          icon: i-heroicons-document-text-20-solid
+          description: Display a slideover within your application.
+          to: /composables/use-slideover
+        - label: useToast
+          icon: i-heroicons-document-text-20-solid
+          description: Display a toast within your application.
+          to: /composables/use-toast
+    - label: Components
+      icon: i-heroicons-cube-transparent
+      to: /components
+      active: true
+      children:
+        - label: Link
+          icon: i-heroicons-document-text-20-solid
+          description: Use NuxtLink with superpowers.
+          to: /components/link
+        - label: Modal
+          icon: i-heroicons-document-text-20-solid
+          description: Display a modal within your application.
+          to: /components/modal
+        - label: NavigationMenu
+          icon: i-heroicons-document-text-20-solid
+          description: Display a list of links.
+          to: /components/navigation-menu
+        - label: Pagination
+          icon: i-heroicons-document-text-20-solid
+          description: Display a list of pages.
+          to: /components/pagination
+        - label: Popover
+          icon: i-heroicons-document-text-20-solid
+          description: Display a non-modal dialog that floats around a trigger element.
+          to: /components/popover
+        - label: Progress
+          icon: i-heroicons-document-text-20-solid
+          description: Show a horizontal bar to indicate task progression.
+          to: /components/progress
+  class: 'justify-center'
+---
+::
+
+::note
+The arrow is animated to follow the active item.
+::
+
 ## Examples
+
+### Control active item
+
+You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
+
+::component-example
+---
+collapse: true
+name: 'navigation-menu-model-value-example'
+---
+::
+
+::tip
+You can also pass the `value` of one of the items if provided.
+::
+
+### With custom slot
+
+Use the `slot` property to customize a specific item.
+
+You will have access to the following slots:
+
+- `#{{ item.slot }}`{lang="ts-type"}
+- `#{{ item.slot }}-leading`{lang="ts-type"}
+- `#{{ item.slot }}-label`{lang="ts-type"}
+- `#{{ item.slot }}-trailing`{lang="ts-type"}
+
+::component-example
+---
+name: 'navigation-menu-custom-slot-example'
+class: 'justify-center'
+---
+::
+
+::tip{to="#slots"}
+You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
+::
 
 ## API
 
