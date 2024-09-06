@@ -30,7 +30,7 @@ export interface FormError<P extends string = string> {
 }
 
 export interface FormErrorWithId extends FormError {
-  id: string
+  id?: string
 }
 
 export type FormSubmitEvent<T> = SubmitEvent & { data: T }
