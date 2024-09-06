@@ -26,9 +26,6 @@
     "dist",
     "cli"
   ],
-  "engines": {
-    "node": ">=v16.20.2"
-  },
   "scripts": {
     "build": "nuxt-module-build build",
     "prepack": "pnpm build",
