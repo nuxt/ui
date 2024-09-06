@@ -94,7 +94,7 @@ Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md)
 [npm-downloads-href]: https://npmjs.com/package/@nuxt/ui
 
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://github.com/nuxt/ui/blob/main/LICENSE
+[license-href]: https://github.com/nuxt/ui/blob/main/LICENSE.md
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
