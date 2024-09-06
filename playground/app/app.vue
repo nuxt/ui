@@ -83,5 +83,5 @@ defineShortcuts({
 
 <style>
 @import "tailwindcss";
-@import "@nuxt/ui/dist/runtime/index.css";
+@import "@nuxt/ui";
 </style>
