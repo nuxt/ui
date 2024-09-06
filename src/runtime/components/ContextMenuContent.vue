@@ -4,14 +4,14 @@ import type { ContextMenuContentProps as RadixContextMenuContentProps, ContextMe
 import theme from '#build/ui/context-menu'
 import type { KbdProps, AvatarProps, ContextMenuItem, ContextMenuSlots } from '../types'
 
-const contextMenu = tv(theme)()
+const _contextMenu = tv(theme)()
 
 interface ContextMenuContentProps<T> extends Omit<RadixContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean
   class?: any
-  ui: typeof contextMenu
+  ui: typeof _contextMenu
   uiOverride?: any
 }
 

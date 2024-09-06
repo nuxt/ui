@@ -4,14 +4,14 @@ import type { DropdownMenuContentProps as RadixDropdownMenuContentProps, Dropdow
 import theme from '#build/ui/dropdown-menu'
 import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
 
-const dropdownMenu = tv(theme)()
+const _dropdownMenu = tv(theme)()
 
 interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean
   class?: any
-  ui: typeof dropdownMenu
+  ui: typeof _dropdownMenu
   uiOverride?: any
 }
 
