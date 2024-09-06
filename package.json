@@ -82,6 +82,6 @@
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
-    "happy-dom": "14.12.3"
+    "happy-dom": "15.7.3"
   }
 }
