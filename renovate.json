@@ -13,5 +13,11 @@
   "lockFileMaintenance": {
     "enabled": true
   },
-  "baseBranches": ["dev", "v3"]
+  "baseBranches": ["dev", "v3"],
+  "packageRules": [
+    {
+      "matchBaseBranches": ["v3"],
+      "labels": ["v3"]
+    }
+  ]
 }
