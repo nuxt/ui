@@ -18,22 +18,26 @@ type Props<T> = {
 export const formOptionsInjectionKey: InjectionKey<ComputedRef<FormInjectedOptions>> = Symbol('nuxt-ui.form-options')
 export const formBusInjectionKey: InjectionKey<UseEventBusReturn<FormEvent, string>> = Symbol('nuxt-ui.form-events')
 export const formFieldInjectionKey: InjectionKey<ComputedRef<FormFieldInjectedOptions<FormFieldProps>>> = Symbol('nuxt-ui.form-field')
+export const inputIdInjectionKey: InjectionKey<Ref<string | undefined>> = Symbol('nuxt-ui.input-id')
 export const formInputsInjectionKey: InjectionKey<Ref<Record<string, string>>> = Symbol('nuxt-ui.form-inputs')
 
-export function useFormField<T>(props?: Props<T>) {
+export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean }) {
   const formOptions = inject(formOptionsInjectionKey, undefined)
   const formBus = inject(formBusInjectionKey, undefined)
   const formField = inject(formFieldInjectionKey, undefined)
   const formInputs = inject(formInputsInjectionKey, undefined)
+  const inputId = inject(inputIdInjectionKey, undefined)
 
-  if (formField) {
-    if (props?.id) {
-      // Updates for="..." attribute on label if props.id is provided
-      formField.value.id = props?.id
+  if (formField && inputId) {
+    if (opts?.bind === false || props?.legend) {
+      // Removes for="..." attribute on label for RadioGroup and alike.
+      inputId.value = undefined
+    } if (props?.id) {
+      // Updates for="..." attribute on label if props.id is provided.
+      inputId.value = props?.id
     }
-
-    if (formInputs && formField.value.name) {
-      formInputs.value[formField.value.name] = formField.value.id
+    if (formInputs && formField.value.name && inputId.value) {
+      formInputs.value[formField.value.name] = inputId.value
     }
   }
 
@@ -62,7 +66,7 @@ export function useFormField<T>(props?: Props<T>) {
   )
 
   return {
-    id: computed(() => props?.id ?? formField?.value.id),
+    id: computed(() => props?.id ?? inputId?.value),
     name: computed(() => props?.name ?? formField?.value.name),
     size: computed(() => props?.size ?? formField?.value.size),
     color: computed(() => formField?.value.error ? 'error' : props?.color),

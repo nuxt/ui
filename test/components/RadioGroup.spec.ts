@@ -72,7 +72,7 @@ describe('RadioGroup', () => {
           items: ['Option 1', 'Option 2']
         },
         slotTemplate: `
-        <UFormField name="value">
+        <UFormField name="value" label="Radio group">
           <URadioGroup id="input" v-model="state.value" :items="items" />
         </UFormField>
         `
@@ -106,6 +106,13 @@ describe('RadioGroup', () => {
       input.setValue('Option 2')
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
+    })
+
+
+    test('no label for=... on FormField', async () => {
+      const { wrapper } = await createForm()
+      const formFieldLabel  = wrapper.findAll('label').map((label) => label.attributes()).filter((label) => !label.for?.includes('Option'))[0]
+      expect(formFieldLabel.for).toBeUndefined()
     })
   })
 })
