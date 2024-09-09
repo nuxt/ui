@@ -173,7 +173,6 @@ async function onSubmit(payload: Event) {
       errors: error.errors,
       childrens: error.childrens
     }
-
     emits('error', errorEvent)
   }
 }
