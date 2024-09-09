@@ -29,7 +29,7 @@ const toasterProps = toRef(() => props.toaster)
 </script>
 
 <template>
-  <ConfigProvider :use-id="() => useId() as string" v-bind="configProviderProps">
+  <ConfigProvider :use-id="() => (useId() as string)" v-bind="configProviderProps">
     <TooltipProvider v-bind="tooltipProps">
       <UToaster v-if="toaster !== null" v-bind="toasterProps">
         <slot />
