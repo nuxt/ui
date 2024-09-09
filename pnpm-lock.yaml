@@ -2042,8 +2042,8 @@ packages:
   '@vue/compiler-vue2@2.7.16':
     resolution: {integrity: sha512-qYC3Psj9S/mfu9uVi5WvNZIzq+xnXMhOwbTFKKDD7b1lhpnn71jXSFdTQ+WsIEk0ONCd7VV2IMm7ONl6tbQ86A==}
 
-  '@vue/devtools-api@6.6.3':
-    resolution: {integrity: sha512-0MiMsFma/HqA6g3KLKn+AGpL1kgKhFWszC9U29NfpWK5LE7bjeXxySWJrOJ77hBz+TBrBQ7o4QJqbPbqbs8rJw==}
+  '@vue/devtools-api@6.6.4':
+    resolution: {integrity: sha512-sGhTPMuXqZ1rVOk32RylztWkfXTRhuS7vgAKv0zjqk8gbsHkJ7xfFf+jbySxt7tWObEJwyKaHMikV/WGDiQm8g==}
 
   '@vue/devtools-core@7.3.3':
     resolution: {integrity: sha512-i6Bwkx4OwfY0QVHjAdsivhlzZ2HMj7fbNRYJsWspQ+dkA1f3nTzycPqZmVUsm2TGkbQlhTMhCAdDoP97JKoc+g==}
@@ -4491,8 +4491,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  mkdist@1.5.6:
-    resolution: {integrity: sha512-QwIZ9Fdtuzinz1Gzlc7gQq/4WNUVBnPk90PASUYD2hbvfeJsnzb+gUsn+iTZv8RJ5oOkP1FJn/pXscH3qPaL/w==}
+  mkdist@1.5.7:
+    resolution: {integrity: sha512-xdBMl7hxGctAmAg4BLT3HqgpwP2QIRU4jm9aqTwu0911onX0C11+HFOvsK+VuFCpaMfIZJ5MrLfTXE+Hn/6Q2g==}
     hasBin: true
     peerDependencies:
       sass: ^1.78.0
@@ -5830,8 +5830,8 @@ packages:
     resolution: {integrity: sha512-weEDEq7Z5eTHPDh4xjX789+fHfF+P8boiFB+0vbWzpbnbsEr/GRaohi/uMKxg8RZMXnl1ItAi/IUHWMsjDV7kQ==}
     engines: {node: '>=14.0.0'}
 
-  tinyspy@3.0.1:
-    resolution: {integrity: sha512-Zl/ko7fioZvaflejqwgnWwnTjr3K562tmyNFZADyRWYLXxkr2g+cuZ+lP+s2GRUV0PVCqqoDu0Rmx4fzdJnrZw==}
+  tinyspy@3.0.2:
+    resolution: {integrity: sha512-n1cw8k1k0x4pgA2+9XrOkFydTerNcJ1zWCO5Nn9scWHTD+5tp8dghT2x1uduQePZTZgd3Tupf+x9BxJjeJi77Q==}
     engines: {node: '>=14.0.0'}
 
   tmp@0.0.33:
@@ -8783,7 +8783,7 @@ snapshots:
 
   '@vitest/spy@2.0.5':
     dependencies:
-      tinyspy: 3.0.1
+      tinyspy: 3.0.2
 
   '@vitest/utils@2.0.5':
     dependencies:
@@ -8895,7 +8895,7 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
 
-  '@vue/devtools-api@6.6.3': {}
+  '@vue/devtools-api@6.6.4': {}
 
   '@vue/devtools-core@7.3.3(vite@5.4.3(@types/node@22.5.4)(lightningcss@1.26.0)(terser@5.32.0))':
     dependencies:
@@ -11771,7 +11771,7 @@ snapshots:
 
   mkdirp@1.0.4: {}
 
-  mkdist@1.5.6(typescript@5.5.4)(vue-tsc@2.1.6(typescript@5.5.4)):
+  mkdist@1.5.7(typescript@5.5.4)(vue-tsc@2.1.6(typescript@5.5.4)):
     dependencies:
       autoprefixer: 10.4.20(postcss@8.4.45)
       citty: 0.1.6
@@ -13654,7 +13654,7 @@ snapshots:
 
   tinyrainbow@1.2.0: {}
 
-  tinyspy@3.0.1: {}
+  tinyspy@3.0.2: {}
 
   tmp@0.0.33:
     dependencies:
@@ -13747,7 +13747,7 @@ snapshots:
       hookable: 5.5.3
       jiti: 1.21.6
       magic-string: 0.30.11
-      mkdist: 1.5.6(typescript@5.5.4)(vue-tsc@2.1.6(typescript@5.5.4))
+      mkdist: 1.5.7(typescript@5.5.4)(vue-tsc@2.1.6(typescript@5.5.4))
       mlly: 1.7.1
       pathe: 1.1.2
       pkg-types: 1.2.0
@@ -14280,7 +14280,7 @@ snapshots:
 
   vue-router@4.4.3(vue@3.5.3(typescript@5.5.4)):
     dependencies:
-      '@vue/devtools-api': 6.6.3
+      '@vue/devtools-api': 6.6.4
       vue: 3.5.3(typescript@5.5.4)
 
   vue-tsc@2.1.6(typescript@5.5.4):
