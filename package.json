@@ -67,7 +67,7 @@
     "@nuxt/test-utils": "^3.14.1",
     "@release-it/conventional-changelog": "^8.0.1",
     "@vue/test-utils": "^2.4.6",
-    "eslint": "^9.9.1",
+    "eslint": "^9.10.0",
     "happy-dom": "^15.7.3",
     "joi": "^17.13.3",
     "nuxt": "^3.13.1",

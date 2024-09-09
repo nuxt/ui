@@ -159,9 +159,5 @@ export default defineNuxtConfig({
     url: 'https://ui3.nuxt.com'
   },
 
-  typescript: {
-    strict: false
-  },
-
   compatibilityDate: '2024-07-09'
 })
