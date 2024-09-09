@@ -157,15 +157,12 @@ async function _validate(opts: { name?: string | string[], silent?: boolean, nes
 }
 
 async function onSubmit(payload: Event) {
-  const event = payload as SubmitEvent
+  const event = payload as FormSubmitEvent<any>
 
   try {
     await _validate({ nested: true })
-    const submitEvent: FormSubmitEvent<any> = {
-      ...event,
-      data: props.state
-    }
-    emits('submit', submitEvent)
+    event.data = props.state
+    emits('submit', event)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
       throw error
@@ -176,7 +173,6 @@ async function onSubmit(payload: Event) {
       errors: error.errors,
       childrens: error.childrens
     }
-
     emits('error', errorEvent)
   }
 }

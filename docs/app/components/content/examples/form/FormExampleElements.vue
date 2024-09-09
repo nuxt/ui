@@ -43,37 +43,44 @@ const items = [
   { label: 'Option 3', value: 'option-3' }
 ]
 
-function onSubmit(event: FormSubmitEvent<Schema>) {
+const toast = useToast()
+async function onSubmit(event: FormSubmitEvent<any>) {
+  toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'green' })
   console.log(event.data)
 }
-
-const validateOn = ref(['change', 'input', 'blur'])
 </script>
 
 <template>
-  <div>
-    <UFormField label="Validate On">
-      <USelectMenu v-model="validateOn" :options="['change', 'input', 'blur']" />
-    </UFormField>
-    <UForm ref="form" :state="state" :schema="schema" class="gap-4 flex flex-col w-60" @submit="onSubmit">
+  <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit">
+    <div class="grid grid-cols-3 gap-4">
       <UFormField label="Input" name="input">
-        <UInput v-model="state.input" placeholder="john@lennon.com" />
+        <UInput v-model="state.input" placeholder="john@lennon.com" class="w-40" />
       </UFormField>
 
-      <UFormField label="Textarea" name="textarea">
-        <UTextarea v-model="state.textarea" />
+      <div class="flex flex-col gap-4">
+        <UFormField name="switch">
+          <USwitch v-model="state.switch" label="Switch me" />
+        </UFormField>
+
+        <UFormField name="checkbox">
+          <UCheckbox v-model="state.checkbox" label="Check me" />
+        </UFormField>
+      </div>
+
+      <UFormField name="slider" label="Slider">
+        <USlider v-model="state.slider" />
       </UFormField>
 
       <UFormField name="select" label="Select">
-        <USelect v-model="state.select" class="w-44" :items="items" />
+        <USelect v-model="state.select" :items="items" />
       </UFormField>
 
       <UFormField name="selectMenu" label="Select Menu">
-        <USelectMenu v-model="state.selectMenu" class="w-44" :items="items" />
+        <USelectMenu v-model="state.selectMenu" :items="items" />
       </UFormField>
 
       <UFormField name="selectMenuMultiple" label="Select Menu (Multiple)">
-        <USelectMenu v-model="state.selectMenuMultiple" class="w-44" multiple :items="items" />
+        <USelectMenu v-model="state.selectMenuMultiple" multiple :items="items" />
       </UFormField>
 
       <UFormField name="inputMenu" label="Input Menu">
@@ -84,31 +91,25 @@ const validateOn = ref(['change', 'input', 'blur'])
         <UInputMenu v-model="state.inputMenuMultiple" multiple :items="items" />
       </UFormField>
 
-      <UFormField name="checkbox">
-        <UCheckbox v-model="state.checkbox" label="Check me" />
+      <span />
+
+      <UFormField label="Textarea" name="textarea">
+        <UTextarea v-model="state.textarea" />
       </UFormField>
 
       <UFormField name="radioGroup">
         <URadioGroup v-model="state.radioGroup" legend="Radio group" :items="items" />
       </UFormField>
+    </div>
 
-      <UFormField name="switch">
-        <USwitch v-model="state.switch" label="Switch me" />
-      </UFormField>
+    <div class="flex gap-2 mt-8">
+      <UButton color="gray" type="submit" :disabled="form?.disabled">
+        Submit
+      </UButton>
 
-      <UFormField name="slider" label="Slider">
-        <USlider v-model="state.slider" />
-      </UFormField>
-
-      <div class="flex gap-2">
-        <UButton color="gray" type="submit">
-          Submit
-        </UButton>
-
-        <UButton color="gray" variant="outline" @click="form?.clear()">
-          Clear
-        </UButton>
-      </div>
-    </UForm>
-  </div>
+      <UButton color="gray" variant="outline" :disabled="form?.disabled" @click="form?.clear()">
+        Clear
+      </UButton>
+    </div>
+  </UForm>
 </template>
