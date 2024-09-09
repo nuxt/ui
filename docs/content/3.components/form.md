@@ -86,12 +86,23 @@ You can control when validation happens this using the `validate-on` prop.
 ---
 source: false
 name: 'form-example-elements'
-options: [{ name: 'validate-on', label: 'validate-on', items: ['input', 'change', 'blur'], default: ['input', 'change', 'blur'], multiple: true }]
+options:
+  - name: 'validate-on'
+    label: 'validate-on'
+    items:
+    - 'input'
+    - 'change'
+    - 'blur'
+    default:
+    - 'input'
+    - 'change'
+    - 'blur'
+    multiple: true
 ---
 ::
 
 ::callout{icon="i-heroicons-light-bulb"}
-You can use [useFormField](/composables/use-form-field) to implement this inside your own custom inputs.
+You can use [useFormField](/composables/use-form-field) to implement this inside your own components.
 ::
 
 ## Error Event
