@@ -1,7 +1,7 @@
 import { ref, inject } from 'vue'
 import type { ShallowRef, Component, InjectionKey } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
-import type { SlideoverProps } from '../types'
+import type { SlideoverProps } from '../types/index'
 import type { ComponentProps } from '../types/component'
 
 export interface SlideoverState {
