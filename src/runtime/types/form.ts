@@ -71,7 +71,6 @@ export interface FormInjectedOptions {
 }
 
 export interface FormFieldInjectedOptions<T> {
-  id: string
   name?: string
   size?: GetObjectField<T, 'size'>
   error?: string | boolean

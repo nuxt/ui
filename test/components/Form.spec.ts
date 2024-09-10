@@ -228,7 +228,7 @@ describe('Form', () => {
       expect(passwordField.text()).toBe('Required')
     })
 
-    test('valid submit works', async () => {
+    test('validate on submit works', async () => {
       state.email = 'bob@dylan.com'
       state.password = 'strongpassword'
 
@@ -236,6 +236,7 @@ describe('Form', () => {
 
       expect(wrapper.setupState.onSubmit).toHaveBeenCalledTimes(1)
       expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({
+        type: 'submit',
         data: {
           email: 'bob@dylan.com',
           password: 'strongpassword'

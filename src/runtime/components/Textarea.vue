@@ -132,6 +132,8 @@ function autoResize() {
     }
 
     textareaRef.value.rows = props.rows
+    const overflow = textareaRef.value.style.overflow
+    textareaRef.value.style.overflow = 'hidden'
 
     const styles = window.getComputedStyle(textareaRef.value)
     const paddingTop = Number.parseInt(styles.paddingTop)
@@ -144,6 +146,8 @@ function autoResize() {
     if (newRows > props.rows) {
       textareaRef.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
     }
+
+    textareaRef.value.style.overflow = overflow
   }
 }
 
