@@ -4,13 +4,12 @@
       :id="inputId"
       ref="input"
       :name="name"
-      :value="modelValue"
       :type="type"
       :required="required"
       :placeholder="placeholder"
       :disabled="disabled"
       :class="inputClass"
-      v-bind="attrs"
+      v-bind="type === 'file' ? attrs : { ...attrs, value: modelValue }"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"
@@ -41,7 +40,7 @@ import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, looseToNumber } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { InputSize, InputColor, InputVariant, Strategy } from '../../types'
+import type { InputSize, InputColor, InputVariant, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { input } from '#ui/ui.config'

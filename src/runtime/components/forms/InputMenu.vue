@@ -111,7 +111,7 @@ import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { get, mergeConfig } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { InputSize, InputColor, InputVariant, PopperOptions, Strategy } from '../../types'
+import type { InputSize, InputColor, InputVariant, PopperOptions, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { input, inputMenu } from '#ui/ui.config'

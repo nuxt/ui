@@ -47,7 +47,7 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
-import type { Avatar, Button, AlertColor, AlertVariant, AlertAction, Strategy } from '../../types'
+import type { Avatar, Button, AlertColor, AlertVariant, AlertAction, Strategy } from '../../types/index'
 import { mergeConfig } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'

@@ -74,7 +74,7 @@ import type { RouteLocationRaw } from '#vue-router'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Button, ButtonSize, Strategy } from '../../types'
+import type { Button, ButtonSize, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { pagination, button } from '#ui/ui.config'

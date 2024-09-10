@@ -36,7 +36,7 @@ import type { PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, get } from '../../utils'
-import type { Strategy } from '../../types'
+import type { Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { radioGroup, radio } from '#ui/ui.config'
@@ -104,7 +104,7 @@ export default defineComponent({
     const { ui, attrs } = useUI('radioGroup', toRef(props, 'ui'), config, toRef(props, 'class'))
     const { ui: uiRadio } = useUI('radio', toRef(props, 'uiRadio'), configRadio)
 
-    const { emitFormChange, color, name } = useFormGroup(props, config)
+    const { emitFormChange, color, name } = useFormGroup(props, config, false)
     provide('radio-group', { color, name })
 
     const onUpdate = (value: any) => {

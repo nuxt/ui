@@ -73,7 +73,7 @@
           <template v-for="(row, index) in rows" :key="index">
             <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
               <td v-if="modelValue" :class="ui.checkbox.padding">
-                <UCheckbox v-model="selected" :value="row" v-bind="ui.default.checkbox" aria-label="Select row" @click.stop />
+                <UCheckbox v-model="selected" :value="row" v-bind="ui.default.checkbox" aria-label="Select row" @click.capture.stop="() => onSelect(row)" />
               </td>
 
               <td
@@ -121,7 +121,7 @@ import UProgress from '../elements/Progress.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, get } from '../../utils'
-import type { Strategy, Button, ProgressColor, ProgressAnimation } from '../../types'
+import type { Strategy, Button, ProgressColor, ProgressAnimation } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { table } from '#ui/ui.config'

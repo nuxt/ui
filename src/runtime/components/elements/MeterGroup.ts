@@ -5,7 +5,7 @@ import UIcon from '../elements/Icon.vue'
 import Meter from './Meter.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getSlotsChildren } from '../../utils'
-import type { Strategy, MeterSize } from '../../types'
+import type { Strategy, MeterSize } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { meter, meterGroup } from '#ui/ui.config'

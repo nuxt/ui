@@ -44,7 +44,7 @@ import { computed, defineComponent, provide, inject, ref, toRef } from 'vue'
 import type { Ref, PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { FormError, InjectedFormGroupValue, FormGroupSize, Strategy } from '../../types'
+import type { FormError, InjectedFormGroupValue, FormGroupSize, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { formGroup } from '#ui/ui.config'

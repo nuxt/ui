@@ -35,7 +35,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types'
+import type { Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { radio } from '#ui/ui.config'

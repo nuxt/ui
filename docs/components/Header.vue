@@ -54,6 +54,7 @@ defineProps<{
 }>()
 
 const route = useRoute()
+const { $ui } = useNuxtApp()
 const { metaSymbol } = useShortcuts()
 
 const nav = inject<Ref<NavItem[]>>('navigation')

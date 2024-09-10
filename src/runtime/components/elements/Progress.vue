@@ -33,7 +33,7 @@ import type { PropType } from 'vue'
 import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy, ProgressSize, ProgressAnimation, ProgressColor } from '../../types'
+import type { Strategy, ProgressSize, ProgressAnimation, ProgressColor } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { progress } from '#ui/ui.config'

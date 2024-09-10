@@ -52,7 +52,7 @@ import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { useTimer } from '../../composables/useTimer'
 import { mergeConfig } from '../../utils'
-import type { Avatar, Button, NotificationColor, NotificationAction, Strategy } from '../../types'
+import type { Avatar, Button, NotificationColor, NotificationAction, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { notification } from '#ui/ui.config'

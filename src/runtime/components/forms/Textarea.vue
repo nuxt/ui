@@ -28,7 +28,7 @@ import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, looseToNumber } from '../../utils'
-import type { TextareaSize, TextareaColor, TextareaVariant, Strategy } from '../../types'
+import type { TextareaSize, TextareaColor, TextareaVariant, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { textarea } from '#ui/ui.config'
@@ -154,6 +154,8 @@ export default defineComponent({
         }
 
         textarea.value.rows = props.rows
+        const overflow = textarea.value.style.overflow
+        textarea.value.style.overflow = 'hidden'
 
         const styles = window.getComputedStyle(textarea.value)
         const paddingTop = parseInt(styles.paddingTop)
@@ -166,6 +168,8 @@ export default defineComponent({
         if (newRows > props.rows) {
           textarea.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
         }
+
+        textarea.value.style.overflow = overflow
       }
     }
 

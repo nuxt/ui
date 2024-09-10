@@ -443,6 +443,7 @@ const sectionRef = ref()
 const demoRef = ref(null)
 const start = ref(0)
 
+const { $ui } = useNuxtApp()
 const { height } = useElementSize(demoRef)
 const { top } = useElementBounding(sectionRef)
 const { y } = useWindowScroll()

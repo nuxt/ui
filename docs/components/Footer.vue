@@ -25,6 +25,8 @@
 </template>
 
 <script setup lang="ts">
+const { $ui } = useNuxtApp()
+
 const links = [{
   icon: 'i-simple-icons-figma',
   label: 'Figma Kit',
@@ -43,5 +45,8 @@ const links = [{
   label: 'Releases',
   icon: 'i-heroicons-rocket-launch',
   to: '/releases'
+}, {
+  label: 'Terms',
+  to: '/pro/terms'
 }]
 </script>

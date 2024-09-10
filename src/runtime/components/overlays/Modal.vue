@@ -32,7 +32,7 @@ import type { PropType } from 'vue'
 import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild, provideUseId } from '@headlessui/vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types'
+import type { Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { modal } from '#ui/ui.config'
