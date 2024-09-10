@@ -157,12 +157,12 @@ async function _validate(opts: { name?: string | string[], silent?: boolean, nes
 }
 
 async function onSubmit(payload: Event) {
-  const event = payload as FormSubmitEvent<any>;
+  const event = payload as FormSubmitEvent<any>
 
   try {
-    await _validate({ nested: true });
-    event.data = props.state;
-    emits("submit", event);
+    await _validate({ nested: true })
+    event.data = props.state
+    emits('submit', event)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
       throw error
