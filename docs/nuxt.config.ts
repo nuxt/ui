@@ -45,6 +45,13 @@ export default defineNuxtConfig({
     }]
   },
 
+  fonts: {
+    experimental: {
+      // Required for TailwindCSS v4. You can enable support for processing CSS variables for font family names. This may have a performance impact.
+      processCSSVariables: true
+    }
+  },
+
   content: {
     // sources: {
     //   pro: process.env.NUXT_UI_PRO_PATH
