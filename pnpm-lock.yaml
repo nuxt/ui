@@ -117,11 +117,11 @@ importers:
         specifier: ^0.41.0
         version: 0.41.0(typescript@5.5.4)
       valibot30:
-        specifier: npm:valibot@0.30.0
-        version: valibot@0.30.0
+        specifier: npm:valibot@0.41.0
+        version: valibot@0.41.0(typescript@5.5.4)
       valibot31:
-        specifier: npm:valibot@0.31.0
-        version: valibot@0.31.0
+        specifier: npm:valibot@0.41.0
+        version: valibot@0.41.0(typescript@5.5.4)
       vitest:
         specifier: ^2.0.5
         version: 2.0.5(@types/node@22.5.2)(happy-dom@14.12.3)(terser@5.31.6)
@@ -6347,12 +6347,6 @@ packages:
     peerDependencies:
       '@popperjs/core': ^2.0.0
       vue: ^3.2.0
-
-  valibot@0.30.0:
-    resolution: {integrity: sha512-5POBdbSkM+3nvJ6ZlyQHsggisfRtyT4tVTo1EIIShs6qCdXJnyWU5TJ68vr8iTg5zpOLjXLRiBqNx+9zwZz/rA==}
-
-  valibot@0.31.0:
-    resolution: {integrity: sha512-bleS8aVFpRGTUgbMoXzsRJhpxJGiZ3MG1nuNSORuDvio+sI1EyT1+lQHg+77Pfnlxz+25Uj5HiwdaklcDcYdiQ==}
 
   valibot@0.41.0:
     resolution: {integrity: sha512-igDBb8CTYr8YTQlOKgaN9nSS0Be7z+WRuaeYqGf3Cjz3aKmSnqEmYnkfVjzIuumGqfHpa3fLIvMEAfhrpqN8ng==}
@@ -14489,10 +14483,6 @@ snapshots:
       lodash: 4.17.21
       vue: 3.4.38(typescript@5.5.4)
       vue-screen-utils: 1.0.0-beta.13(vue@3.4.38(typescript@5.5.4))
-
-  valibot@0.30.0: {}
-
-  valibot@0.31.0: {}
 
   valibot@0.41.0(typescript@5.5.4):
     optionalDependencies:
