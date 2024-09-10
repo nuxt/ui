@@ -6,7 +6,7 @@ links:
     to: https://www.radix-vue.com/components/separator.html
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Separator.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Separator.vue
 ---
 
 ## Usage

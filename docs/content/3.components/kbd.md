@@ -4,7 +4,7 @@ description: A kbd element to display a keyboard key.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Kbd.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Kbd.vue
 navigation:
   title: Kbd
 ---
@@ -31,7 +31,7 @@ props:
 ---
 ::
 
-You can pass special keys to the `value` prop that goes through the [`useKbd`](https://github.com/benjamincanac/ui3/blob/dev/src/runtime/composables/useKbd.ts) composable. For example, the `meta` key displays as `⌘` on macOS and `Ctrl` on other platforms.
+You can pass special keys to the `value` prop that goes through the [`useKbd`](https://github.com/nuxt/ui/blob/v3/src/runtime/composables/useKbd.ts) composable. For example, the `meta` key displays as `⌘` on macOS and `Ctrl` on other platforms.
 
 ::component-code
 ---

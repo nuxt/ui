@@ -6,7 +6,7 @@ links:
     to: https://www.radix-vue.com/components/avatar.html
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Avatar.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Avatar.vue
 ---
 
 ## Usage

@@ -7,15 +7,36 @@ links:
     to: https://www.radix-vue.com/components/combobox.html
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/CommandPalette.vue
-navigation:
-  badge:
-    label: Todo
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/CommandPalette.vue
 ---
 
 ## Usage
 
 ## Examples
+
+### Control search term
+
+### Control selected value
+
+### With fetched items
+
+### With filtered items
+
+### Within a modal
+
+### Within a drawer
+
+### Within a popover
+
+### Listen open state
+
+### With custom search
+
+### With highlighted search
+
+### With custom slot
+
+### With empty slot
 
 ## API
 

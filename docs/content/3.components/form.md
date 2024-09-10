@@ -3,7 +3,7 @@ description: A form element that provides validation and submission handling.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Form.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Form.vue
 navigation:
   badge:
     label: Todo
