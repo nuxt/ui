@@ -1,5 +1,5 @@
 <template>
-  <div ref="trigger" :class="ui.wrapper" v-bind="attrs" @mouseover="onMouseOver" @mouseleave="onMouseLeave">
+  <div ref="trigger" :class="ui.wrapper" v-bind="attrs" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <slot :open="open">
       Hover
     </slot>
@@ -19,7 +19,7 @@
 
               <UKbd v-for="shortcut of shortcuts" :key="shortcut" size="xs">
                 {{ shortcut }}
-              </Ukbd>
+              </UKbd>
             </span>
           </div>
         </div>
@@ -36,7 +36,7 @@ import UKbd from '../elements/Kbd.vue'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { mergeConfig } from '../../utils'
-import type { PopperOptions, Strategy } from '../../types'
+import type { PopperOptions, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { tooltip } from '#ui/ui.config'
@@ -63,11 +63,11 @@ export default defineComponent({
     },
     openDelay: {
       type: Number,
-      default: 0
+      default: () => config.default.openDelay
     },
     closeDelay: {
       type: Number,
-      default: 0
+      default: () => config.default.closeDelay
     },
     popper: {
       type: Object as PropType<PopperOptions>,
@@ -96,7 +96,7 @@ export default defineComponent({
 
     // Methods
 
-    function onMouseOver () {
+    function onMouseEnter () {
       // cancel programmed closing
       if (closeTimeout) {
         clearTimeout(closeTimeout)
@@ -137,7 +137,7 @@ export default defineComponent({
       trigger,
       container,
       open,
-      onMouseOver,
+      onMouseEnter,
       onMouseLeave
     }
   }

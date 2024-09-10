@@ -5,8 +5,8 @@
     </NuxtLink>
 
     <UColorModeImage
-      light="/pro/illustrations/docs-light.svg"
-      dark="/pro/illustrations/docs-dark.svg"
+      light="/illustrations/pro-light.svg"
+      dark="/illustrations/pro-dark.svg"
       alt="Nuxt UI Pro"
       loading="lazy"
       class="w-full"
@@ -16,7 +16,7 @@
       <div class="inline-flex gap-1.5">
         <Logo class="h-4 w-auto" />
 
-        <UBadge variant="subtle" size="xs" label="Pro" class="font-semibold" />
+        <UBadge variant="subtle" size="xs" label="Pro" class="font-semibold rounded" />
       </div>
 
       <p class="text-sm text-gray-500 dark:text-gray-400 group-hover/ad:text-gray-700 dark:group-hover/ad:text-gray-200 mt-1 transition-colors">

@@ -1,5 +1,5 @@
 <template>
-  <div :class="skeletonClass" v-bind="attrs" />
+  <component :is="as" :class="skeletonClass" v-bind="attrs" />
 </template>
 
 <script lang="ts">
@@ -8,7 +8,7 @@ import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types'
+import type { Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { skeleton } from '#ui/ui.config'
@@ -18,6 +18,10 @@ const config = mergeConfig<typeof skeleton>(appConfig.ui.strategy, appConfig.ui.
 export default defineComponent({
   inheritAttrs: false,
   props: {
+    as: {
+      type: String,
+      default: 'div'
+    },
     class: {
       type: [String, Object, Array] as PropType<any>,
       default: () => ''

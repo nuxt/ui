@@ -5,8 +5,9 @@
         <ULink
           as="span"
           :class="[ui.base, index === links.length - 1 ? ui.active : !!link.to ? ui.inactive : '']"
-          v-bind="omit(link, ['label', 'labelClass', 'icon', 'iconClass'])"
           :aria-current="index === links.length - 1 ? 'page' : undefined"
+          v-bind="getULinkProps(link)"
+          @click="link.click"
         >
           <slot name="icon" :link="link" :index="index" :is-active="index === links.length - 1">
             <UIcon
@@ -39,8 +40,8 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, omit } from '../../utils'
-import type { BreadcrumbLink, Strategy } from '../../types'
+import { mergeConfig, getULinkProps } from '../../utils'
+import type { BreadcrumbLink, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { breadcrumb } from '#ui/ui.config'
@@ -78,7 +79,7 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
-      omit,
+      getULinkProps,
       twMerge,
       twJoin
     }

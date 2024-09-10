@@ -5,7 +5,7 @@
       :name="name"
       :value="modelValue"
       :required="required"
-      :disabled="disabled || loading"
+      :disabled="disabled"
       :class="selectClass"
       v-bind="attrs"
       @input="onInput"
@@ -61,7 +61,7 @@ import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, get } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { SelectSize, SelectColor, SelectVariant, Strategy } from '../../types'
+import type { SelectSize, SelectColor, SelectVariant, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { select } from '#ui/ui.config'
@@ -187,23 +187,23 @@ export default defineComponent({
 
     const { emitFormChange, inputId, color, size: sizeFormGroup, name } = useFormGroup(props, config)
 
-    const size = computed(() => sizeButtonGroup.value || sizeFormGroup.value)
+    const size = computed(() => sizeButtonGroup.value ?? sizeFormGroup.value)
 
     const onInput = (event: Event) => {
       emit('update:modelValue', (event.target as HTMLInputElement).value)
     }
 
     const onChange = (event: Event) => {
+      emit('change', (event.target as HTMLInputElement).value)
       emitFormChange()
-      emit('change', event)
     }
 
     const guessOptionValue = (option: any) => {
-      return get(option, props.valueAttribute, get(option, props.optionAttribute))
+      return get(option, props.valueAttribute, '')
     }
 
     const guessOptionText = (option: any) => {
-      return get(option, props.optionAttribute, get(option, props.valueAttribute))
+      return get(option, props.optionAttribute, '')
     }
 
     const normalizeOption = (option: any) => {
@@ -262,7 +262,7 @@ export default defineComponent({
         variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
-      ), props.selectClass)
+      ), props.placeholder && !props.modelValue && ui.value.placeholder, props.selectClass)
     })
 
     const isLeading = computed(() => {
@@ -348,3 +348,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.form-select {
+  background-image: none;
+}
+</style>

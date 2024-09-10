@@ -2,7 +2,7 @@ import { arrow } from '../popper'
 
 export default {
   container: 'z-20 group',
-  trigger: 'inline-flex w-full',
+  trigger: 'flex items-center w-full',
   width: 'w-full',
   height: 'max-h-60',
   base: 'relative focus:outline-none overflow-y-auto scroll-py-1',
@@ -15,28 +15,28 @@ export default {
   option: {
     base: 'cursor-default select-none relative flex items-center justify-between gap-1',
     rounded: 'rounded-md',
-    padding: 'px-2 py-1.5',
+    padding: 'px-1.5 py-1.5',
     size: 'text-sm',
     color: 'text-gray-900 dark:text-white',
-    container: 'flex items-center gap-2 min-w-0',
+    container: 'flex items-center gap-1.5 min-w-0',
     active: 'bg-gray-100 dark:bg-gray-900',
     inactive: '',
     selected: 'pe-7',
     disabled: 'cursor-not-allowed opacity-50',
     empty: 'text-sm text-gray-400 dark:text-gray-500 px-2 py-1.5',
     icon: {
-      base: 'flex-shrink-0 h-4 w-4',
+      base: 'flex-shrink-0 h-5 w-5',
       active: 'text-gray-900 dark:text-white',
       inactive: 'text-gray-400 dark:text-gray-500'
     },
     selectedIcon: {
       wrapper: 'absolute inset-y-0 end-0 flex items-center',
       padding: 'pe-2',
-      base: 'h-4 w-4 text-gray-900 dark:text-white flex-shrink-0'
+      base: 'h-5 w-5 text-gray-900 dark:text-white flex-shrink-0'
     },
     avatar: {
       base: 'flex-shrink-0',
-      size: '3xs' as const
+      size: '2xs' as const
     },
     chip: {
       base: 'flex-shrink-0 w-2 h-2 mx-1 rounded-full'

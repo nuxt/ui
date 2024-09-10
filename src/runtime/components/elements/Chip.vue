@@ -16,7 +16,7 @@ import type { PropType } from 'vue'
 import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { ChipSize, ChipColor, ChipPosition, Strategy } from '../../types'
+import type { ChipSize, ChipColor, ChipPosition, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { chip } from '#ui/ui.config'

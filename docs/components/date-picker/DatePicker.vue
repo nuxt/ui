@@ -1,19 +1,22 @@
 <script setup lang="ts">
+import { useBreakpoints, breakpointsTailwind } from '@vueuse/core'
 import { DatePicker as VCalendarDatePicker } from 'v-calendar'
+// @ts-ignore
+import type { DatePickerDate, DatePickerRangeObject } from 'v-calendar/dist/types/src/use/datePicker'
 import 'v-calendar/dist/style.css'
+
+defineOptions({
+  inheritAttrs: false
+})
 
 const props = defineProps({
   modelValue: {
-    type: Date,
+    type: [Date, Object] as PropType<DatePickerDate | DatePickerRangeObject | null>,
     default: null
   }
 })
 
 const emit = defineEmits(['update:model-value', 'close'])
-
-const colorMode = useColorMode()
-
-const isDark = computed(() => colorMode.value === 'dark')
 
 const date = computed({
   get: () => props.modelValue,
@@ -23,28 +26,22 @@ const date = computed({
   }
 })
 
-const attrs = [{
-  key: 'today',
-  highlight: {
-    color: 'blue',
-    fillMode: 'outline',
-    class: '!bg-gray-100 dark:!bg-gray-800'
-  },
-  dates: new Date()
-}]
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const smallerThanSm = breakpoints.smaller('sm')
+
+const attrs = {
+  transparent: true,
+  borderless: true,
+  color: 'primary',
+  'is-dark': { selector: 'html', darkClass: 'dark' },
+  'first-day-of-week': 2
+}
 </script>
 
 <template>
-  <VCalendarDatePicker
-    v-model="date"
-    transparent
-    borderless
-    :attributes="attrs"
-    :is-dark="isDark"
-    title-position="left"
-    trim-weeks
-    :first-day-of-week="2"
-  />
+  <VCalendarDatePicker v-if="date && (date as DatePickerRangeObject)?.start && (date as DatePickerRangeObject)?.end" v-model.range="date" :columns="smallerThanSm ? 1 : 2" :rows="smallerThanSm ? 2 : 1" v-bind="{ ...attrs, ...$attrs }" />
+  <VCalendarDatePicker v-else v-model="date" v-bind="{ ...attrs, ...$attrs }" />
 </template>
 
 <style>
@@ -61,7 +58,7 @@ const attrs = [{
   --vc-gray-900: rgb(var(--color-gray-900));
 }
 
-.vc-blue {
+.vc-primary {
   --vc-accent-50: rgb(var(--color-primary-50));
   --vc-accent-100: rgb(var(--color-primary-100));
   --vc-accent-200: rgb(var(--color-primary-200));

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const task = ref(1)
 
 const steps = [

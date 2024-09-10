@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 const sort = ref({
   column: 'name',
-  direction: 'desc'
+  direction: 'desc' as const
 })
 
 const columns = [{
@@ -22,7 +22,7 @@ const columns = [{
   key: 'role',
   label: 'Role',
   sortable: true,
-  direction: 'desc'
+  direction: 'desc' as const
 }]
 
 const people = [{

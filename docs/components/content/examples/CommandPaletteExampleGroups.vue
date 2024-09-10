@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const router = useRouter()
 const toast = useToast()
 

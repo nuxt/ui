@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const options = ref([
   { id: 1, name: 'bug', color: 'd73a4a' },
   { id: 2, name: 'documentation', color: '0075ca' },
@@ -23,6 +23,7 @@ const labels = computed({
 
       // In a real app, you would make an API call to create the label
       const response = {
+        id: options.value.length + 1,
         name: label.name,
         color: generateColorFromString(label.name)
       }

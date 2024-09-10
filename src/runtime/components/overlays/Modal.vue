@@ -1,6 +1,6 @@
 <template>
-  <TransitionRoot :appear="appear" :show="isOpen" as="template">
-    <HDialog :class="ui.wrapper" v-bind="attrs" @close="(e) => !preventClose && close(e)">
+  <TransitionRoot :appear="appear" :show="isOpen" as="template" @after-leave="onAfterLeave">
+    <HDialog :class="ui.wrapper" v-bind="attrs" @close="close">
       <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
@@ -29,13 +29,14 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
+import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild, provideUseId } from '@headlessui/vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types'
+import type { Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { modal } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof modal>(appConfig.ui.strategy, appConfig.ui.modal, modal)
 
@@ -81,7 +82,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'close'],
+  emits: ['update:modelValue', 'close', 'close-prevented', 'after-leave'],
   setup (props, { emit }) {
     const { ui, attrs } = useUI('modal', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -105,10 +106,22 @@ export default defineComponent({
     })
 
     function close (value: boolean) {
+      if (props.preventClose) {
+        emit('close-prevented')
+
+        return
+      }
+
       isOpen.value = value
 
       emit('close')
     }
+
+    const onAfterLeave = () => {
+      emit('after-leave')
+    }
+
+    provideUseId(() => useId())
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
@@ -116,6 +129,7 @@ export default defineComponent({
       attrs,
       isOpen,
       transitionClass,
+      onAfterLeave,
       close
     }
   }

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const methods = [
   { value: 'email', label: 'Email' },
   { value: 'sms', label: 'Phone (SMS)' },

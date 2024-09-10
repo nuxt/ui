@@ -7,16 +7,19 @@
     }"
   >
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white" aria-label="Nuxt UI">
+      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white" aria-label="Nuxt UI">
         <Logo class="w-auto h-6" />
+
+        <UBadge v-if="$route.path.startsWith('/pro')" label="Pro" variant="subtle" size="xs" class="-mb-[2px] rounded font-semibold" />
+        <UBadge v-if="$route.path.startsWith('/dev')" label="Edge" variant="subtle" size="xs" class="-mb-[2px] rounded font-semibold" />
       </NuxtLink>
     </template>
 
     <template #right>
       <ColorPicker />
 
-      <UTooltip text="Search" :shortcuts="[metaSymbol, 'K']">
-        <UDocsSearchButton :label="null" />
+      <UTooltip text="Search" :shortcuts="[metaSymbol, 'K']" :popper="{ strategy: 'absolute' }">
+        <UContentSearchButton :label="null" />
       </UTooltip>
 
       <UColorModeButton />
@@ -33,9 +36,9 @@
     <template #panel>
       <UAsideLinks :links="links" />
 
-      <UDivider type="dashed" class="mt-4 mb-3" />
+      <UDivider type="dashed" class="my-4" />
 
-      <BranchSelect v-if="!route.path.startsWith('/pro')" />
+      <BranchSelect />
 
       <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
     </template>
@@ -43,14 +46,15 @@
 </template>
 
 <script setup lang="ts">
-import type { NavItem } from '@nuxt/content/dist/runtime/types'
-import type { Link } from '#ui-pro/types'
+import type { NavItem } from '@nuxt/content'
+import type { HeaderLink } from '#ui-pro/types'
 
 defineProps<{
-  links: Link[]
+  links: HeaderLink[]
 }>()
 
 const route = useRoute()
+const { $ui } = useNuxtApp()
 const { metaSymbol } = useShortcuts()
 
 const nav = inject<Ref<NavItem[]>>('navigation')

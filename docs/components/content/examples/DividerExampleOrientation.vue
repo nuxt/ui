@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const form = reactive({ email: 'mail@example.com', password: 'password' })
 </script>
 
@@ -17,7 +17,7 @@ const form = reactive({ email: 'mail@example.com', password: 'password' })
         <UButton label="Login" color="gray" block />
       </div>
 
-      <UDivider label="OR" color="gray" orientation="vertical" />
+      <UDivider label="OR" orientation="vertical" />
 
       <div class="space-y-4 flex flex-col justify-center">
         <UButton color="black" label="Login with GitHub" icon="i-simple-icons-github" block />
@@ -37,7 +37,7 @@ const form = reactive({ email: 'mail@example.com', password: 'password' })
 
         <UButton label="Login" color="gray" block />
 
-        <UDivider label="OR" color="gray" />
+        <UDivider label="OR" />
 
         <UButton color="black" label="Login with GitHub" icon="i-simple-icons-github" block />
         <UButton color="black" label="Login with Google" icon="i-simple-icons-google" block />

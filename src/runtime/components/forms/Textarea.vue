@@ -28,7 +28,7 @@ import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, looseToNumber } from '../../utils'
-import type { TextareaSize, TextareaColor, TextareaVariant, Strategy } from '../../types'
+import type { TextareaSize, TextareaColor, TextareaVariant, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { textarea } from '#ui/ui.config'
@@ -65,6 +65,10 @@ export default defineComponent({
     rows: {
       type: Number,
       default: 3
+    },
+    maxrows: {
+      type: Number,
+      default: 0
     },
     autoresize: {
       type: Boolean,
@@ -127,7 +131,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'blur'],
+  emits: ['update:modelValue', 'blur', 'change'],
   setup (props, { emit }) {
     const { ui, attrs } = useUI('textarea', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -150,6 +154,8 @@ export default defineComponent({
         }
 
         textarea.value.rows = props.rows
+        const overflow = textarea.value.style.overflow
+        textarea.value.style.overflow = 'hidden'
 
         const styles = window.getComputedStyle(textarea.value)
         const paddingTop = parseInt(styles.paddingTop)
@@ -160,8 +166,10 @@ export default defineComponent({
         const newRows = (scrollHeight - padding) / lineHeight
 
         if (newRows > props.rows) {
-          textarea.value.rows = newRows
+          textarea.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
         }
+
+        textarea.value.style.overflow = overflow
       }
     }
 
@@ -188,12 +196,13 @@ export default defineComponent({
 
     const onChange = (event: Event) => {
       const value = (event.target as HTMLInputElement).value
+      emit('change', value)
 
       if (modelModifiers.value.lazy) {
         updateInput(value)
       }
 
-      // Update trimmed input so that it has same behaviour as native input
+      // Update trimmed input so that it has same behavior as native input
       if (modelModifiers.value.trim) {
         (event.target as HTMLInputElement).value = value.trim()
       }

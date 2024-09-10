@@ -1,5 +1,5 @@
 <template>
-  <ULink :type="type" :disabled="disabled || loading" :class="buttonClass" v-bind="attrs">
+  <ULink :type="type" :disabled="disabled || loading" :class="buttonClass" v-bind="{ ...linkProps, ...attrs }">
     <slot name="leading" :disabled="disabled" :loading="loading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="leadingIconClass" aria-hidden="true" />
     </slot>
@@ -23,9 +23,9 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig } from '../../utils'
+import { mergeConfig, nuxtLinkProps, getNuxtLinkProps } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { ButtonColor, ButtonSize, ButtonVariant, Strategy } from '../../types'
+import type { ButtonColor, ButtonSize, ButtonVariant, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { button } from '#ui/ui.config'
@@ -39,6 +39,7 @@ export default defineComponent({
   },
   inheritAttrs: false,
   props: {
+    ...nuxtLinkProps,
     type: {
       type: String,
       default: 'button'
@@ -190,6 +191,8 @@ export default defineComponent({
       )
     })
 
+    const linkProps = computed(() => getNuxtLinkProps(props))
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -201,7 +204,8 @@ export default defineComponent({
       leadingIconName,
       trailingIconName,
       leadingIconClass,
-      trailingIconClass
+      trailingIconClass,
+      linkProps
     }
   }
 })

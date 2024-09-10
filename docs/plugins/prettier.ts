@@ -44,7 +44,7 @@ function createPrettierWorkerApi (worker: Worker): SimplePrettier {
 export default defineNuxtPlugin({
   async setup () {
     let prettier: SimplePrettier
-    if (process.server) {
+    if (import.meta.server) {
       const prettierModule = await import('prettier')
       prettier = {
         format (source, options = {

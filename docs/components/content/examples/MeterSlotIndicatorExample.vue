@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const used = ref(84.2)
 
 const total = 238.42

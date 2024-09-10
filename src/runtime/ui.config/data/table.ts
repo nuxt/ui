@@ -2,8 +2,9 @@ export default {
   wrapper: 'relative overflow-x-auto',
   base: 'min-w-full table-fixed',
   divide: 'divide-y divide-gray-300 dark:divide-gray-700',
-  thead: '',
+  thead: 'relative',
   tbody: 'divide-y divide-gray-200 dark:divide-gray-800',
+  caption: 'sr-only',
   tr: {
     base: '',
     selected: 'bg-gray-50 dark:bg-gray-800/50',
@@ -11,14 +12,14 @@ export default {
   },
   th: {
     base: 'text-left rtl:text-right',
-    padding: 'px-3 py-3.5',
+    padding: 'px-4 py-3.5',
     color: 'text-gray-900 dark:text-white',
     font: 'font-semibold',
     size: 'text-sm'
   },
   td: {
     base: 'whitespace-nowrap',
-    padding: 'px-3 py-4',
+    padding: 'px-4 py-4',
     color: 'text-gray-500 dark:text-gray-400',
     font: '',
     size: 'text-sm'
@@ -36,6 +37,12 @@ export default {
     label: 'text-sm text-center text-gray-900 dark:text-white',
     icon: 'w-6 h-6 mx-auto text-gray-400 dark:text-gray-500 mb-4'
   },
+  expand: {
+    icon: 'transform transition-transform duration-200'
+  },
+  progress: {
+    wrapper: 'absolute inset-x-0 -bottom-[0.5px] p-0'
+  },
   default: {
     sortAscIcon: 'i-heroicons-bars-arrow-up-20-solid',
     sortDescIcon: 'i-heroicons-bars-arrow-down-20-solid',
@@ -46,6 +53,20 @@ export default {
       color: 'gray' as const,
       variant: 'ghost' as const,
       class: '-m-1.5'
+    },
+    expandButton: {
+      icon: 'i-heroicons-chevron-down',
+      color: 'gray' as const,
+      variant: 'ghost' as const,
+      size: 'xs' as const,
+      class: '-my-1.5 align-middle'
+    },
+    checkbox: {
+      color: 'primary' as const
+    },
+    progress: {
+      color: 'primary' as const,
+      animation: 'carousel' as const
     },
     loadingState: {
       icon: 'i-heroicons-arrow-path-20-solid',

@@ -63,7 +63,7 @@
 
 <script lang="ts">
 import { ref, computed, watch, toRef, onMounted, defineComponent } from 'vue'
-import { Combobox as HCombobox, ComboboxInput as HComboboxInput, ComboboxOptions as HComboboxOptions } from '@headlessui/vue'
+import { Combobox as HCombobox, ComboboxInput as HComboboxInput, ComboboxOptions as HComboboxOptions, provideUseId } from '@headlessui/vue'
 import type { ComputedRef, PropType, ComponentPublicInstance } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
@@ -75,10 +75,11 @@ import UButton from '../elements/Button.vue'
 import CommandPaletteGroup from './CommandPaletteGroup.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Group, Command, Button, Strategy } from '../../types'
+import type { Group, Command, Button, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { commandPalette } from '#ui/ui.config'
+import { useId } from '#imports'
 
 const config = mergeConfig<typeof commandPalette>(appConfig.ui.strategy, appConfig.ui.commandPalette, commandPalette)
 
@@ -216,7 +217,7 @@ export default defineComponent({
     const commands = computed(() => {
       const commands: Command[] = []
       for (const group of props.groups) {
-        if (!group.search) {
+        if (!group.search && !group.static) {
           commands.push(...(group.commands?.map(command => ({ ...command, group: group.key })) || []))
         }
       }
@@ -274,9 +275,14 @@ export default defineComponent({
         return getGroupWithCommands(group, [...commands])
       })
 
+      const staticGroups: Group[] = props.groups.filter((group) => group.static && group.commands?.length).map((group) => {
+        return getGroupWithCommands(group, group.commands)
+      })
+
       return [
         ...groups,
-        ...searchGroups
+        ...searchGroups,
+        ...staticGroups
       ]
     })
 
@@ -320,7 +326,10 @@ export default defineComponent({
       )
     })
 
-    const emptyState = computed(() => ({ ...ui.value.default.emptyState, ...props.emptyState }))
+    const emptyState = computed(() => {
+      if (props.emptyState === null) return null
+      return { ...ui.value.default.emptyState, ...props.emptyState }
+    })
 
     // Methods
 
@@ -365,6 +374,8 @@ export default defineComponent({
       comboboxApi,
       results
     })
+
+    provideUseId(() => useId())
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys

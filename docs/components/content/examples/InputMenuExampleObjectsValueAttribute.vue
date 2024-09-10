@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const people = [{
   id: 1,
   name: 'Wade Cooper'
@@ -13,14 +13,14 @@ const people = [{
   name: 'Tom Cook'
 }]
 
-const selected = ref(people[0].name)
+const selected = ref(people[0].id)
 </script>
 
 <template>
   <UInputMenu
     v-model="selected"
     :options="people"
-    value-attribute="name"
+    value-attribute="id"
     option-attribute="name"
   />
 </template>

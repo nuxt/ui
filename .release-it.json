@@ -1,6 +1,7 @@
 {
   "git": {
-    "commitMessage": "chore(release): ${version}"
+    "commitMessage": "chore(release): v${version}",
+    "tagName": "v${version}"
   },
   "npm": {
     "publish": false
@@ -11,7 +12,7 @@
     "web": true
   },
   "hooks": {
-    "before:init": ["pnpm lint"]
+    "before:init": ["pnpm lint", "pnpm typecheck"]
   },
   "plugins": {
     "@release-it/conventional-changelog": {

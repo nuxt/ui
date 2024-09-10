@@ -27,7 +27,7 @@ import UNotification from './Notification.vue'
 import { useUI } from '../../composables/useUI'
 import { useToast } from '../../composables/useToast'
 import { mergeConfig } from '../../utils'
-import type { Notification, Strategy } from '../../types'
+import type { Notification, Strategy } from '../../types/index'
 import { useState } from '#imports'
 // @ts-expect-error
 import appConfig from '#build/app.config'

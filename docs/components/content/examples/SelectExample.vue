@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const countries = ['United States', 'Canada', 'Mexico']
 
 const country = ref(countries[0])

@@ -31,9 +31,10 @@
 import { computed, defineComponent, toRef } from 'vue'
 import type { SlotsType, PropType } from 'vue'
 import { twJoin } from 'tailwind-merge'
+import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy, MeterColor, MeterSize } from '../../types'
+import type { Strategy, MeterColor, MeterSize } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { meter } from '#ui/ui.config'
@@ -41,6 +42,9 @@ import { meter } from '#ui/ui.config'
 const config = mergeConfig<typeof meter>(appConfig.ui.strategy, appConfig.ui.meter, meter)
 
 export default defineComponent({
+  components: {
+    UIcon
+  },
   inheritAttrs: false,
   slots: Object as SlotsType<{
     indicator?: { percent: number, value: number },

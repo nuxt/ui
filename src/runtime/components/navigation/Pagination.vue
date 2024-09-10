@@ -4,7 +4,7 @@
       <UButton
         v-if="firstButton && showFirst"
         :size="size"
-        :disabled="!canGoFirstOrPrev"
+        :disabled="!canGoFirstOrPrev || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.firstButton || {}), ...firstButton }"
         :ui="{ rounded: '' }"
@@ -17,7 +17,7 @@
       <UButton
         v-if="prevButton"
         :size="size"
-        :disabled="!canGoFirstOrPrev"
+        :disabled="!canGoFirstOrPrev || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.prevButton || {}), ...prevButton }"
         :ui="{ rounded: '' }"
@@ -29,7 +29,9 @@
     <UButton
       v-for="(page, index) of displayedPages"
       :key="`${page}-${index}`"
+      :to="typeof page === 'number' ? to?.(page) : null"
       :size="size"
+      :disabled="disabled"
       :label="`${page}`"
       v-bind="page === currentPage ? { ...(ui.default.activeButton || {}), ...activeButton } : { ...(ui.default.inactiveButton || {}), ...inactiveButton }"
       :class="[{ 'pointer-events-none': typeof page === 'string', 'z-[1]': page === currentPage }, ui.base, ui.rounded]"
@@ -41,7 +43,7 @@
       <UButton
         v-if="nextButton"
         :size="size"
-        :disabled="!canGoLastOrNext"
+        :disabled="!canGoLastOrNext || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.nextButton || {}), ...nextButton }"
         :ui="{ rounded: '' }"
@@ -54,7 +56,7 @@
       <UButton
         v-if="lastButton && showLast"
         :size="size"
-        :disabled="!canGoLastOrNext"
+        :disabled="!canGoLastOrNext || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.lastButton || {}), ...lastButton }"
         :ui="{ rounded: '' }"
@@ -68,10 +70,11 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
+import type { RouteLocationRaw } from '#vue-router'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Button, ButtonSize, Strategy } from '../../types'
+import type { Button, ButtonSize, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { pagination, button } from '#ui/ui.config'
@@ -105,12 +108,20 @@ export default defineComponent({
         return value >= 5 && value < Number.MAX_VALUE
       }
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     size: {
       type: String as PropType<ButtonSize>,
       default: () => config.default.size,
       validator (value: string) {
         return Object.keys(buttonConfig.size).includes(value)
       }
+    },
+    to: {
+      type: Function as PropType<(page: number) => RouteLocationRaw>,
+      default: null
     },
     activeButton: {
       type: Object as PropType<Button>,

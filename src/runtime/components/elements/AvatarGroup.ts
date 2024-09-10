@@ -4,7 +4,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UAvatar from './Avatar.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getSlotsChildren } from '../../utils'
-import type { AvatarSize, Strategy } from '../../types'
+import type { AvatarSize, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { avatar, avatarGroup } from '#ui/ui.config'

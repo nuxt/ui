@@ -26,7 +26,7 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Avatar, Strategy } from '../../types'
+import type { Avatar, DividerSize, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { divider } from '#ui/ui.config'
@@ -52,6 +52,13 @@ export default defineComponent({
       type: Object as PropType<Avatar>,
       default: null
     },
+    size: {
+      type: String as PropType<DividerSize>,
+      default: () => config.default.size,
+      validator (value: string) {
+        return Object.keys(config.border.size.horizontal).includes(value) || Object.keys(config.border.size.vertical).includes(value)
+      }
+    },
     orientation: {
       type: String as PropType<'horizontal' | 'vertical'>,
       default: 'horizontal',
@@ -74,27 +81,25 @@ export default defineComponent({
   setup (props) {
     const { ui, attrs } = useUI('divider', toRef(props, 'ui'), config)
 
-    const isHorizontal = computed(() => props.orientation === 'horizontal' )
-
     const wrapperClass = computed(() => {
       return twMerge(twJoin(
         ui.value.wrapper.base,
-        isHorizontal.value ? ui.value.wrapper.horizontal : ui.value.wrapper.vertical
+        ui.value.wrapper[props.orientation]
       ), props.class)
     })
 
     const containerClass = computed(() => {
       return twJoin(
         ui.value.container.base,
-        isHorizontal.value ? ui.value.container.horizontal : ui.value.container.vertical
+        ui.value.container[props.orientation]
       )
     })
 
     const borderClass = computed(() => {
       return twJoin(
         ui.value.border.base,
-        isHorizontal.value ? ui.value.border.horizontal : ui.value.border.vertical,
-        isHorizontal.value ? ui.value.border.size.horizontal : ui.value.border.size.vertical,
+        ui.value.border[props.orientation],
+        ui.value.border.size[props.orientation][props.size],
         ui.value.border.type[props.type]
       )
     })

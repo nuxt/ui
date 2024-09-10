@@ -1,10 +1,10 @@
 <template>
-  <div :class="ui.group.wrapper" role="option">
+  <div :class="ui.group.wrapper">
     <h2 v-if="label" :class="ui.group.label">
       {{ label }}
     </h2>
 
-    <div :class="ui.group.container" role="listbox" :aria-label="group[groupAttribute]">
+    <div :class="ui.group.container" :aria-label="group[groupAttribute]">
       <HComboboxOption
         v-for="(command, index) of group.commands"
         :key="`${group.key}-${index}`"
@@ -72,12 +72,13 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { ComboboxOption as HComboboxOption } from '@headlessui/vue'
+import { ComboboxOption as HComboboxOption, provideUseId } from '@headlessui/vue'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
-import type { Group } from '../../types'
+import type { Command, Group } from '../../types/index'
 import { commandPalette } from '#ui/ui.config'
+import { useId } from '#imports'
 
 export default defineComponent({
   components: {
@@ -119,7 +120,7 @@ export default defineComponent({
       return typeof label === 'function' ? label(props.query) : label
     })
 
-    function highlight (text: string, { indices, value }: { indices: number[][], value: string }): string {
+    function highlight (text: string, { indices, value }: Command['matches'][number]): string {
       if (text === value) {
         return ''
       }
@@ -150,6 +151,8 @@ export default defineComponent({
 
       return content
     }
+
+    provideUseId(() => useId())
 
     return {
       label,

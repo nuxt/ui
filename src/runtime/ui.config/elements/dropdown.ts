@@ -14,21 +14,21 @@ export default {
   divide: 'divide-y divide-gray-200 dark:divide-gray-700',
   padding: 'p-1',
   item: {
-    base: 'group flex items-center gap-2 w-full',
+    base: 'group flex items-center gap-1.5 w-full',
     rounded: 'rounded-md',
-    padding: 'px-2 py-1.5',
+    padding: 'px-1.5 py-1.5',
     size: 'text-sm',
     active: 'bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white',
     inactive: 'text-gray-700 dark:text-gray-200',
     disabled: 'cursor-not-allowed opacity-50',
     icon: {
-      base: 'flex-shrink-0 h-4 w-4',
+      base: 'flex-shrink-0 w-5 h-5',
       active: 'text-gray-500 dark:text-gray-400',
       inactive: 'text-gray-400 dark:text-gray-500'
     },
     avatar: {
       base: 'flex-shrink-0',
-      size: '3xs' as const
+      size: '2xs' as const
     },
     label: 'truncate',
     shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ms-auto'
@@ -45,6 +45,10 @@ export default {
   popper: {
     placement: 'bottom-end',
     strategy: 'fixed'
+  },
+  default: {
+    openDelay: 0,
+    closeDelay: 0
   },
   arrow: {
     ...arrow,

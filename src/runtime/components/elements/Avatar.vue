@@ -1,13 +1,14 @@
 <template>
   <span :class="wrapperClass">
-    <img
+    <component
+      :is="as"
       v-if="url && !error"
       :class="imgClass"
       :alt="alt"
       :src="url"
       v-bind="attrs"
       @error="onError"
-    >
+    />
     <span v-else-if="text" :class="ui.text">{{ text }}</span>
     <UIcon v-else-if="icon" :name="icon" :class="iconClass" />
     <span v-else-if="placeholder" :class="ui.placeholder">{{ placeholder }}</span>
@@ -26,7 +27,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { AvatarSize, AvatarChipColor, AvatarChipPosition, Strategy } from '../../types'
+import type { AvatarSize, AvatarChipColor, AvatarChipPosition, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { avatar } from '#ui/ui.config'
@@ -39,6 +40,10 @@ export default defineComponent({
   },
   inheritAttrs: false,
   props: {
+    as: {
+      type: [String, Object],
+      default: 'img'
+    },
     src: {
       type: [String, Boolean],
       default: null

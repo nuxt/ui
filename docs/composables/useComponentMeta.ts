@@ -12,7 +12,7 @@ export async function fetchComponentMeta (name: string) {
   // Store promise to avoid multiple calls
 
   // add to nitro prerender
-  if (process.server) {
+  if (import.meta.server) {
     const event = useRequestEvent()
     event.node.res.setHeader(
       'x-nitro-prerender',

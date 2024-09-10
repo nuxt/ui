@@ -5,14 +5,16 @@
 </template>
 
 <script lang="ts">
-import { provide, ref, type PropType, defineComponent } from 'vue'
+import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
-import type { ObjectSchemaAsync as ValibotObjectSchema } from 'valibot'
+import type { BaseSchema as ValibotSchema30, BaseSchemaAsync as ValibotSchemaAsync30 } from 'valibot30'
+import type { GenericSchema as ValibotSchema31, GenericSchemaAsync as ValibotSchemaAsync31, SafeParser as ValibotSafeParser31, SafeParserAsync as ValibotSafeParserAsync31 } from 'valibot31'
+import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync, SafeParser as ValibotSafeParser, SafeParserAsync as ValibotSafeParserAsync } from 'valibot'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types/form'
-import { uid } from '../../utils/uid'
+import { useId } from '#imports'
 
 class FormException extends Error {
   constructor (message: string) {
@@ -25,11 +27,15 @@ class FormException extends Error {
 export default defineComponent({
   props: {
     schema: {
-      type: Object as
+      type: [Object, Function] as
         | PropType<ZodSchema>
         | PropType<YupObjectSchema<any>>
         | PropType<JoiSchema>
-        | PropType<ValibotObjectSchema<any>>,
+        | PropType<ValibotSchema30 | ValibotSchemaAsync30>
+        | PropType<ValibotSchema31 | ValibotSchemaAsync31>
+        | PropType<ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any>>
+        | PropType<ValibotSchema | ValibotSchemaAsync>
+        | PropType<ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>>,
       default: undefined
     },
     state: {
@@ -49,12 +55,19 @@ export default defineComponent({
   },
   emits: ['submit', 'error'],
   setup (props, { expose, emit }) {
-    const bus = useEventBus<FormEvent>(`form-${uid()}`)
+    const formId = useId()
+    const bus = useEventBus<FormEvent>(`form-${formId}`)
 
-    bus.on(async (event) => {
-      if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
-        await validate(event.path, { silent: true })
-      }
+    onMounted(() => {
+      bus.on(async (event) => {
+        if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
+          await validate(event.path, { silent: true })
+        }
+      })
+    })
+
+    onUnmounted(() => {
+      bus.reset()
     })
 
     const errors = ref<FormError[]>([])
@@ -83,37 +96,44 @@ export default defineComponent({
       return errs
     }
 
-    async function validate (path?: string, opts: { silent?: boolean } = { silent: false }) {
-      if (path) {
+    async function validate (path?: string | string[], opts: { silent?: boolean } = { silent: false }) {
+      let paths = path
+
+      if (path && !Array.isArray(path)) {
+        paths = [path]
+      }
+
+      if (paths) {
         const otherErrors = errors.value.filter(
-          (error) => error.path !== path
+          (error) => !paths.includes(error.path)
         )
         const pathErrors = (await getErrors()).filter(
-          (error) => error.path === path
+          (error) => paths.includes(error.path)
         )
         errors.value = otherErrors.concat(pathErrors)
       } else {
         errors.value = await getErrors()
       }
 
-      if (!opts.silent && errors.value.length > 0) {
+      if (errors.value.length > 0) {
+        if (opts.silent) return false
+
         throw new FormException(
           `Form validation failed: ${JSON.stringify(errors.value, null, 2)}`
         )
       }
+
       return props.state
     }
 
-    async function onSubmit (event: SubmitEvent) {
+    async function onSubmit (payload: Event) {
+      const event = payload as FormSubmitEvent<any>
       try {
         if (props.validateOn?.includes('submit')) {
           await validate()
         }
-        const submitEvent: FormSubmitEvent<any> = {
-          ...event,
-          data: props.state
-        }
-        emit('submit', submitEvent)
+        event.data = props.state
+        emit('submit', event)
       } catch (error) {
         if (!(error instanceof FormException)) {
           throw error
@@ -134,7 +154,6 @@ export default defineComponent({
       validate,
       errors,
       setErrors (errs: FormError[], path?: string) {
-        errors.value = errs
         if (path) {
           errors.value = errors.value.filter(
             (error) => error.path !== path
@@ -142,6 +161,9 @@ export default defineComponent({
         } else {
           errors.value = errs
         }
+      },
+      async submit () {
+        await onSubmit(new Event('submit'))
       },
       getErrors (path?: string) {
         if (path) {
@@ -151,7 +173,7 @@ export default defineComponent({
       },
       clear (path?: string) {
         if (path) {
-          errors.value = errors.value.filter((err) => err.path === path)
+          errors.value = errors.value.filter((err) => err.path !== path)
         } else {
           errors.value = []
         }
@@ -236,21 +258,19 @@ async function getJoiErrors (
   }
 }
 
-function isValibotSchema (schema: any): schema is ValibotObjectSchema<any> {
-  return schema._parse !== undefined
+function isValibotSchema (schema: any): schema is ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema31 | ValibotSchemaAsync31 | ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any> | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any> {
+  return '_parse' in schema || '_run' in schema || (typeof schema === 'function' && 'schema' in schema)
 }
 
 async function getValibotError (
   state: any,
-  schema: ValibotObjectSchema<any>
+  schema: ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema31 | ValibotSchemaAsync31 | ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any> | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>
 ): Promise<FormError[]> {
-  const result = await schema._parse(state)
-  if (result.issues) {
-    return result.issues.map((issue) => ({
-      path: issue.path?.map(p => p.key).join('.') || '',
-      message: issue.message
-    }))
-  }
-  return []
+  const result = await ('_parse' in schema ? schema._parse(state) : '_run' in schema ? schema._run({ typed: false, value: state }, {}) : schema(state))
+  return result.issues?.map((issue) => ({
+    // We know that the key for a form schema is always a string or a number
+    path: issue.path?.map((item) => item.key).join('.') || '',
+    message: issue.message
+  })) || []
 }
 </script>
