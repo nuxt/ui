@@ -4,17 +4,24 @@ const props = defineProps<{
 }>()
 
 const type = computed(() => {
-  if (props.type.includes(', "as" | "asChild" | "forceMount">')) {
-    return props.type.replace(`, "as" | "asChild" | "forceMount">`, ``).replace('Omit<', '')
+  let type = props.type
+  if (type.includes(', "as" | "asChild" | "forceMount">')) {
+    type = type.replace(`, "as" | "asChild" | "forceMount">`, ``).replace('Omit<', '')
   }
-  if (props.type.includes(', "as" | "asChild">')) {
-    return props.type.replace(', "as" | "asChild">', '').replace('Omit<', '')
+  if (type.includes(', "as" | "asChild">')) {
+    type = type.replace(', "as" | "asChild">', '').replace('Omit<', '')
+  }
+  if (type.startsWith('undefined |')) {
+    type = type.replace('undefined |', '')
+  }
+  if (type.endsWith('| undefined')) {
+    type = type.replace('| undefined', '')
   }
 
-  return props.type
+  return type
 })
 
-const { data: ast } = await useAsyncData(`hightlight-inline-code-${props.type}`, () => parseMarkdown(`\`${type.value}\`{lang="ts-type"}`))
+const { data: ast } = await useAsyncData(`hightlight-inline-code-${type.value}`, () => parseMarkdown(`\`${type.value}\`{lang="ts-type"}`))
 </script>
 
 <template>
