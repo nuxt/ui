@@ -28,12 +28,6 @@ type UI = {
   strategy?: Strategy
   [key: string]: any
 } & DeepPartial<typeof config>
-
-declare module 'nuxt/schema' {
-  interface AppConfigInput {
-    ui?: UI
-  }
-}
 declare module '@nuxt/schema' {
   interface AppConfigInput {
     ui?: UI
