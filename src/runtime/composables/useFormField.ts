@@ -32,7 +32,7 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean }) {
     if (opts?.bind === false || props?.legend) {
       // Removes for="..." attribute on label for RadioGroup and alike.
       inputId.value = undefined
-    } if (props?.id) {
+    } else if (props?.id) {
       // Updates for="..." attribute on label if props.id is provided.
       inputId.value = props?.id
     }
