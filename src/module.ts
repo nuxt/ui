@@ -23,12 +23,6 @@ type UI = {
   [key: string]: any
 } & DeepPartial<typeof config, string | number>
 
-declare module 'nuxt/schema' {
-  interface AppConfigInput {
-    // @ts-ignore
-    ui?: UI
-  }
-}
 declare module '@nuxt/schema' {
   interface AppConfigInput {
     // @ts-ignore
