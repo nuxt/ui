@@ -1,5 +1,5 @@
 import { useState } from '#imports'
-import type { ToastProps } from '../types'
+import type { ToastProps } from '../types/index'
 
 export interface Toast extends Omit<ToastProps, 'defaultOpen'> {
   id: string | number
