@@ -5,25 +5,16 @@
   "lockFileMaintenance": {
     "enabled": true
   },
+  "ignoreDeps": [
+    "@nuxt/eslint-config",
+    "eslint",
+    "happy-dom",
+    "valibot30",
+    "valibot31"
+  ],
   "baseBranches": ["dev", "v3"],
   "packageRules": [{
     "matchBaseBranches": ["v3"],
     "labels": ["v3"]
-  }, {
-    "matchBaseBranches": ["dev"],
-    "matchPackageNames": [
-      "@nuxt/eslint-config",
-      "eslint",
-      "happy-dom",
-      "valibot30",
-      "valibot31"
-    ],
-    "enabled": false
-  }, {
-    "matchBaseBranches": ["v3"],
-    "matchPackageNames": [
-      "happy-dom"
-    ],
-    "enabled": false
   }]
 }
