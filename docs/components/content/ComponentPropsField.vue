@@ -11,7 +11,6 @@
       </FieldGroup>
     </Collapsible>
     <Collapsible v-else-if="(prop.schema?.kind === 'enum' || prop.schema?.kind === 'array') && Object.values(prop.schema?.schema)?.filter((schema: any) => schema.kind === 'array' && typeof schema.schema === 'object')?.length > 1">
-      {{ prop.schema }}
       <FieldGroup v-for="schema in (Object.values(prop.schema.schema) as any[])" :key="schema.name">
         <template v-for="subSchema in schema.schema" :key="subSchema.name">
           <ComponentPropsField v-for="subProp in subSchema.schema" :key="(subProp as any).name" :prop="subProp" />
