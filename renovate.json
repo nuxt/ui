@@ -2,22 +2,19 @@
   "extends": [
     "github>nuxt/renovate-config-nuxt"
   ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "ignoreDeps": [
     "@nuxt/eslint-config",
     "eslint",
     "happy-dom",
-    "nuxt-component-meta",
     "valibot30",
     "valibot31"
   ],
-  "lockFileMaintenance": {
-    "enabled": true
-  },
   "baseBranches": ["dev", "v3"],
-  "packageRules": [
-    {
-      "matchBaseBranches": ["v3"],
-      "labels": ["v3"]
-    }
-  ]
+  "packageRules": [{
+    "matchBaseBranches": ["v3"],
+    "labels": ["v3"]
+  }]
 }
