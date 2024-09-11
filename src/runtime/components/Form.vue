@@ -147,7 +147,7 @@ async function _validate(opts: { name?: string | string[], silent?: boolean, nes
     errors.value = await getErrors()
   }
 
-  const childErrors = (await Promise.all(nestedValidatePromises)).filter((val) => val)
+  const childErrors = (await Promise.all(nestedValidatePromises)).filter(val => val)
 
   if (errors.value.length + childErrors.length > 0) {
     if (opts.silent) return false
