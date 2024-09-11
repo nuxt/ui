@@ -91,6 +91,15 @@ export default defineNuxtConfig({
   //   }
   // },
 
+  nitro: {
+    prerender: {
+      // Pre-render the homepage
+      routes: ['/getting-started'],
+      // Then crawl all the links on the page
+      crawlLinks: true
+    }
+  },
+
   routeRules: {
     '/': { redirect: '/getting-started', prerender: false },
     '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
