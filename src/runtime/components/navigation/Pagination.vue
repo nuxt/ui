@@ -4,6 +4,7 @@
       <UButton
         v-if="firstButton && showFirst"
         :size="size"
+        :to="to?.(1)"
         :disabled="!canGoFirstOrPrev || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.firstButton || {}), ...firstButton }"
@@ -17,6 +18,7 @@
       <UButton
         v-if="prevButton"
         :size="size"
+        :to="to?.(currentPage - 1)"
         :disabled="!canGoFirstOrPrev || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.prevButton || {}), ...prevButton }"
@@ -43,6 +45,7 @@
       <UButton
         v-if="nextButton"
         :size="size"
+        :to="to?.(currentPage + 1)"
         :disabled="!canGoLastOrNext || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.nextButton || {}), ...nextButton }"
@@ -56,6 +59,7 @@
       <UButton
         v-if="lastButton && showLast"
         :size="size"
+        :to="to?.(pages.length)"
         :disabled="!canGoLastOrNext || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.lastButton || {}), ...lastButton }"
