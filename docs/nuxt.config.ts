@@ -91,15 +91,6 @@ export default defineNuxtConfig({
   //   }
   // },
 
-  nitro: {
-    prerender: {
-      // Pre-render the homepage
-      routes: ['/getting-started'],
-      // Then crawl all the links on the page
-      crawlLinks: true
-    }
-  },
-
   routeRules: {
     '/': { redirect: '/getting-started', prerender: false },
     '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
@@ -111,13 +102,12 @@ export default defineNuxtConfig({
       '@nuxt/content',
       '@nuxt/icon',
       '@nuxt/image',
-      // '@nuxt/ui-templates',
+      '@nuxt/ui-pro',
       '@nuxtjs/color-mode',
       '@nuxtjs/mdc',
       '@nuxtjs/plausible',
       'nuxt/dist',
       'nuxt-og-image',
-      // 'nuxt-site-config',
       resolve('./app/components')
       // process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
     ],
