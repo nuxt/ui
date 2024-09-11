@@ -140,7 +140,7 @@ name: 'form-example-nested'
 ---
 ::
 
-Or to implement list inputs:
+Or to validate list inputs:
 ::component-example
 ---
 collapse: true

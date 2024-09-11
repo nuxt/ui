@@ -49,61 +49,59 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <div>
-    <UForm ref="form" :state="state" :schema="schema" class="gap-4 flex flex-col w-60" @submit="onSubmit">
-      <UFormField label="Input" name="input">
-        <UInput v-model="state.input" placeholder="john@lennon.com" />
-      </UFormField>
+  <UForm ref="form" :state="state" :schema="schema" class="gap-4 flex flex-col w-60" @submit="onSubmit">
+    <UFormField label="Input" name="input">
+      <UInput v-model="state.input" placeholder="john@lennon.com" />
+    </UFormField>
 
-      <UFormField label="Textarea" name="textarea">
-        <UTextarea v-model="state.textarea" />
-      </UFormField>
+    <UFormField label="Textarea" name="textarea">
+      <UTextarea v-model="state.textarea" />
+    </UFormField>
 
-      <UFormField name="select" label="Select">
-        <USelect v-model="state.select" class="w-44" :items="items" />
-      </UFormField>
+    <UFormField name="select" label="Select">
+      <USelect v-model="state.select" class="w-44" :items="items" />
+    </UFormField>
 
-      <UFormField name="selectMenu" label="Select Menu">
-        <USelectMenu v-model="state.selectMenu" class="w-44" :items="items" />
-      </UFormField>
+    <UFormField name="selectMenu" label="Select Menu">
+      <USelectMenu v-model="state.selectMenu" class="w-44" :items="items" />
+    </UFormField>
 
-      <UFormField name="selectMenuMultiple" label="Select Menu (Multiple)">
-        <USelectMenu v-model="state.selectMenuMultiple" class="w-44" multiple :items="items" />
-      </UFormField>
+    <UFormField name="selectMenuMultiple" label="Select Menu (Multiple)">
+      <USelectMenu v-model="state.selectMenuMultiple" class="w-44" multiple :items="items" />
+    </UFormField>
 
-      <UFormField name="inputMenu" label="Input Menu">
-        <UInputMenu v-model="state.inputMenu" :items="items" />
-      </UFormField>
+    <UFormField name="inputMenu" label="Input Menu">
+      <UInputMenu v-model="state.inputMenu" :items="items" />
+    </UFormField>
 
-      <UFormField name="inputMenuMultiple" label="Input Menu (Multiple)">
-        <UInputMenu v-model="state.inputMenuMultiple" multiple :items="items" />
-      </UFormField>
+    <UFormField name="inputMenuMultiple" label="Input Menu (Multiple)">
+      <UInputMenu v-model="state.inputMenuMultiple" multiple :items="items" />
+    </UFormField>
 
-      <UFormField name="checkbox">
-        <UCheckbox v-model="state.checkbox" label="Check me" />
-      </UFormField>
+    <UFormField name="checkbox">
+      <UCheckbox v-model="state.checkbox" label="Check me" />
+    </UFormField>
 
-      <UFormField name="radioGroup">
-        <URadioGroup v-model="state.radioGroup" legend="Radio group" :items="items" />
-      </UFormField>
+    <UFormField name="radioGroup">
+      <URadioGroup v-model="state.radioGroup" legend="Radio group" :items="items" />
+    </UFormField>
 
-      <UFormField name="switch">
-        <USwitch v-model="state.switch" label="Switch me" />
-      </UFormField>
+    <UFormField name="switch">
+      <USwitch v-model="state.switch" label="Switch me" />
+    </UFormField>
 
-      <UFormField name="slider" label="Slider">
-        <USlider v-model="state.slider" />
-      </UFormField>
+    <UFormField name="slider" label="Slider">
+      <USlider v-model="state.slider" />
+    </UFormField>
 
-      <div class="flex gap-2">
-        <UButton color="gray" type="submit">
-          Submit
-        </UButton>
+    <div class="flex gap-2">
+      <UButton color="gray" type="submit">
+        Submit
+      </UButton>
 
-        <UButton color="gray" variant="outline" @click="form?.clear()">
-          Clear
-        </UButton>
-      </div>
-    </UForm>
-  </div>
+      <UButton color="gray" variant="outline" @click="form?.clear()">
+        Clear
+      </UButton>
+    </div>
+  </UForm>
 </template>
