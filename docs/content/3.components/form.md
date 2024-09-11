@@ -140,7 +140,6 @@ name: 'form-example-nested'
 ---
 ::
 
-
 Or to implement list inputs:
 ::component-example
 ---

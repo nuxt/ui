@@ -47,7 +47,6 @@ async function onSubmit(event: FormSubmitEvent<any>) {
     :schema="schema"
     class="gap-4 flex flex-col w-60"
     @submit="onSubmit"
-    @error="onError"
   >
     <UFormField label="Customer" name="customer">
       <UInput v-model="state.customer" placeholder="Wonka Industries" />
