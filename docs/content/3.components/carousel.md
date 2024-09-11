@@ -3,7 +3,7 @@ description: A carousel with motion and swipe support.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Carousel.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Carousel.vue
 navigation:
   badge:
     label: Todo

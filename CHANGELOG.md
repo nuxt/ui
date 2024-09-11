@@ -1,5 +1,25 @@
 # Changelog
 
+## [3.0.0-alpha.1](https://github.com/nuxt/ui/compare/v3.0.0-alpha.0...v3.0.0-alpha.1) (2024-09-11)
+
+
+### Features
+
+* **module:** hard-code css file to be imported anywhere ([62a2643](https://github.com/nuxt/ui/commit/62a2643a80e7ab6c6e154ba59801d393d9a53c40))
+
+
+### Bug Fixes
+
+* **ContextMenu/DropdownMenu:** lint unused var ([a03a55c](https://github.com/nuxt/ui/commit/a03a55cf8d89c45fba6607f83b67367cfd419c3e))
+* import from `../types/index` ([3e28c8f](https://github.com/nuxt/ui/commit/3e28c8f35a64a7c19ce18f36dbe580503f2050bc))
+* **Link:** only bind necessary slot props ([7fe7ff6](https://github.com/nuxt/ui/commit/7fe7ff6fe2055d29b7fd54793ca52850842294e3))
+* **NavigationMenu:** handle open state hover effect ([84186e5](https://github.com/nuxt/ui/commit/84186e52e997a4dd55f98bf7bc0199656943b9c9))
+* **plugins:** infer type from `[#app](https://github.com/nuxt/ui/issues/app)` to remove build warning ([debf9cc](https://github.com/nuxt/ui/commit/debf9cc85339b7b162ac34392757214a16dad977))
+* **README:** license link ([71428da](https://github.com/nuxt/ui/commit/71428da3dc9c6f17a6e21b2bd889f6090be127d6))
+* **templates:** augment `@nuxt/schema` rather than `nuxt/schema` ([40b3570](https://github.com/nuxt/ui/commit/40b3570343dc68684d3ecf03e1a439e815f57ba3))
+* **types:** no longer need to import types with `/index` suffix ([8277167](https://github.com/nuxt/ui/commit/82771673f20b6ece7e126a4f8914311473d687e3))
+* **useButtonGroup:** lint ([97d0593](https://github.com/nuxt/ui/commit/97d05936cd198026e6c4d66920266e0b4b85242c))
+
 ## [3.0.0-alpha.0](https://github.com/nuxt/ui/compare/v2.15.0...v3.0.0-alpha.0) (2024-09-05)
 
 

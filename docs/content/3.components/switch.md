@@ -6,7 +6,7 @@ links:
     to: https://www.radix-vue.com/components/switch.html
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Switch.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Switch.vue
 ---
 
 ## Usage

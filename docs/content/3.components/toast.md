@@ -6,7 +6,7 @@ links:
     to: https://www.radix-vue.com/components/toast.html
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Toast.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Toast.vue
 navigation:
   badge:
     label: Todo
@@ -17,7 +17,7 @@ navigation:
 Use the [useToast](/composables/use-toast) composable to display a toast in your application.
 
 ::important
-Make sure to wrap your app with the [App](/components/app) component which uses our [Toaster](https://github.com/benjamincanac/ui3/blob/dev/src/runtime/components/Toaster.vue) component which uses the [ToastProvider](https://www.radix-vue.com/components/toast.html#provider) component from Radix Vue.
+Make sure to wrap your app with the [App](/components/app) component which uses our [Toaster](https://github.com/nuxt/ui/blob/v3/src/runtime/components/Toaster.vue) component which uses the [ToastProvider](https://www.radix-vue.com/components/toast.html#provider) component from Radix Vue.
 ::
 
 ::tip{to="/components/app#props"}
@@ -63,6 +63,7 @@ ignore:
   - rel
   - noRel
   - prefetch
+  - prefetchOn
   - noPrefetch
   - prefetchedClass
   - replace

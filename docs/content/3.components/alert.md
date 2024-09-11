@@ -3,7 +3,7 @@ description: A callout to draw user's attention.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Alert.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Alert.vue
 ---
 
 ## Usage
@@ -238,6 +238,7 @@ ignore:
   - rel
   - noRel
   - prefetch
+  - prefetchOn
   - noPrefetch
   - prefetchedClass
   - replace

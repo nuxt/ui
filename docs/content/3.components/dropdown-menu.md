@@ -7,7 +7,7 @@ links:
     to: https://www.radix-vue.com/components/dropdown-menu.html
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/DropdownMenu.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/DropdownMenu.vue
 ---
 
 ## Usage
@@ -360,6 +360,7 @@ ignore:
   - rel
   - noRel
   - prefetch
+  - prefetchOn
   - noPrefetch
   - prefetchedClass
   - replace

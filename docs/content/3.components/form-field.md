@@ -4,7 +4,7 @@ description: A wrapper for form elements that provides validation and error hand
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/FormField.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/FormField.vue
 ---
 
 ## Usage

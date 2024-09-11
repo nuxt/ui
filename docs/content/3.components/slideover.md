@@ -6,7 +6,7 @@ links:
     to: https://www.radix-vue.com/components/dialog.html
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Slideover.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Slideover.vue
 ---
 
 ## Usage
@@ -280,7 +280,7 @@ This allows you to move the trigger outside of the Slideover or remove it entire
 You can use the [`useSlideover`](/composables/use-slideover) composable to open a Slideover programatically.
 
 ::important
-Make sure to wrap your app with the [App](/components/app) component which uses the [SlideoverProvider](https://github.com/benjamincanac/ui3/blob/dev/src/runtime/components/SlideoverProvider.vue) component.
+Make sure to wrap your app with the [App](/components/app) component which uses the [SlideoverProvider](https://github.com/nuxt/ui/blob/v3/src/runtime/components/SlideoverProvider.vue) component.
 ::
 
 First, create a slideover component that will be opened programatically:
@@ -346,6 +346,7 @@ ignore:
   - rel
   - noRel
   - prefetch
+  - prefetchOn
   - noPrefetch
   - prefetchedClass
   - replace

@@ -3,7 +3,7 @@ description: A button element that can act as a link or trigger an action.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Button.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Button.vue
 ---
 
 ## Usage
@@ -220,6 +220,7 @@ ignore:
   - rel
   - noRel
   - prefetch
+  - prefetchOn
   - noPrefetch
   - prefetchedClass
   - replace
@@ -231,7 +232,7 @@ ignore:
 ---
 ::
 
-::callout{icon="i-simple-icons-github" to="https://github.com/benjamincanac/ui3/blob/dev/src/runtime/components/Link.vue#L13"}
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v3/src/runtime/components/Link.vue#L13"}
 The `Button` component extends the `Link` component. Check out the source code on GitHub.
 ::
 

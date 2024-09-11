@@ -97,4 +97,8 @@ provide('files', files)
 @import "@nuxt/ui-pro";
 
 @source "../content/**/*.md";
+
+@theme {
+  --font-family-sans: 'Inter', sans-serif;
+}
 </style>

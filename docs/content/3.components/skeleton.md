@@ -3,7 +3,7 @@ description: A placeholder to show while content is loading.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/benjamincanac/ui3/tree/dev/src/runtime/components/Skeleton.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Skeleton.vue
 ---
 
 ## Usage

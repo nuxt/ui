@@ -2,31 +2,23 @@
 import json5 from 'json5'
 
 const appConfig = useAppConfig()
-const { $prettier } = useNuxtApp()
+
+const icons = computed(() => {
+  return {
+    ui: {
+      icons: appConfig.ui.icons
+    }
+  }
+})
 
 const { data: ast } = await useAsyncData(`icons-theme`, async () => {
   const md = `
 \`\`\`ts [app.config.ts]
-export default defineAppConfig({
-  ui: {
-    icons: ${json5.stringify(appConfig.ui.icons, null, 2)}
-  }
-})
+export default defineAppConfig(${json5.stringify(icons.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')})
 \`\`\`\
 `
 
-  let formatted = ''
-  try {
-    formatted = await $prettier.format(md, {
-      trailingComma: 'none',
-      semi: false,
-      singleQuote: true
-    })
-  } catch {
-    formatted = md
-  }
-
-  return parseMarkdown(formatted)
+  return parseMarkdown(md)
 })
 </script>
 

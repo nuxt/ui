@@ -65,16 +65,12 @@ type AppConfigUI = {
   icons?: Partial<typeof icons>
 } & DeepPartial<typeof ui, string>
 
-declare module 'nuxt/schema' {
-  interface AppConfigInput {
-    ui?: AppConfigUI
-  }
-}
 declare module '@nuxt/schema' {
   interface AppConfigInput {
     ui?: AppConfigUI
   }
 }
+
 export {}
 `
   })
