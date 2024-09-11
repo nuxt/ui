@@ -192,8 +192,8 @@ importers:
         specifier: ^1.0.8
         version: 1.0.8(magicast@0.3.5)(rollup@4.21.2)
       nuxt-component-meta:
-        specifier: ^0.8.0
-        version: 0.8.0(magicast@0.3.5)(rollup@4.21.2)
+        specifier: npm:nuxt-component-meta@0.8.1-1726053684.40aea05
+        version: 0.8.1-1726053684.40aea05(magicast@0.3.5)(rollup@4.21.2)
       nuxt-og-image:
         specifier: ^3.0.0-rc.66
         version: 3.0.0-rc.66(magicast@0.3.5)(rollup@4.21.2)(vite@5.4.2(@types/node@22.5.2)(terser@5.31.6))(vue@3.4.38(typescript@5.5.4))
@@ -4790,8 +4790,8 @@ packages:
     resolution: {integrity: sha512-gUBcxHfvR06tBNDszTj/cMx8EGwtNFqICk7IBM66JIebe/VG0HgDF6AFJfqqOFG5ACk6ApdAxREHhvnmgUSudA==}
     engines: {npm: '>= 4.0.0'}
 
-  nuxt-component-meta@0.8.0:
-    resolution: {integrity: sha512-NZByaVK/KL3oD7myU93GTUfxw74TyV7mLmxgAVep6qMXPVN9sDyFyj2Y84Qd7O+o00MlR3Dgf+g9v2ONffloew==}
+  nuxt-component-meta@0.8.1-1726053684.40aea05:
+    resolution: {integrity: sha512-YwswuzoemYDkpyBo4kcJ0Ky8zR9RrBUlLjDgcLo2qrHFVYwLP87V2RnDBmv2Kev4ZVQFjGVysIgHXCz8CGfyjw==}
     hasBin: true
 
   nuxt-og-image@3.0.0-rc.66:
@@ -12374,7 +12374,7 @@ snapshots:
       - rollup
       - supports-color
 
-  nuxt-component-meta@0.8.0(magicast@0.3.5)(rollup@4.21.2):
+  nuxt-component-meta@0.8.1-1726053684.40aea05(magicast@0.3.5)(rollup@4.21.2):
     dependencies:
       '@nuxt/kit': 3.13.0(magicast@0.3.5)(rollup@4.21.2)
       citty: 0.1.6
