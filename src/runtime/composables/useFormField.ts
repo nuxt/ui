@@ -1,6 +1,6 @@
 import { inject, ref, computed, type InjectionKey, type Ref, type ComputedRef } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
-import type { FormFieldProps } from '../types/index'
+import type { FormFieldProps } from '../types'
 import type { FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '../types/form'
 import type { GetObjectField } from '../types/utils'
 
