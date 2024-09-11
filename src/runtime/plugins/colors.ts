@@ -1,5 +1,7 @@
 import { computed } from 'vue'
 import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from '#imports'
+// FIXME: https://github.com/nuxt/module-builder/issues/141#issuecomment-2078248248
+import type {} from '#app'
 
 export default defineNuxtPlugin(() => {
   const appConfig = useAppConfig()
