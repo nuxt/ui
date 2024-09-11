@@ -26,7 +26,7 @@ export function useToast() {
     return body
   }
 
-  function update(id: string | number, toast: Omit<Partial<Toast>, "id">) {
+  function update(id: string | number, toast: Omit<Partial<Toast>, 'id'>) {
     const index = toasts.value.findIndex((t: Toast) => t.id === id)
     if (index !== -1) {
       toasts.value[index] = {

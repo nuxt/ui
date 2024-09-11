@@ -9,10 +9,11 @@ const props = defineProps<{
 
 const route = useRoute()
 
-const camelName = camelCase(route.params.slug[route.params.slug.length - 1])
+const slug = Array.isArray(route.params.slug) ? route.params.slug[0] ?? '' : route.params.slug ?? ''
+const camelName = camelCase(slug[slug.length - 1] ?? '')
 const name = `U${upperFirst(camelName)}`
 
-const componentTheme = theme[camelName]
+const componentTheme = (theme as any)[camelName]
 const meta = await fetchComponentMeta(name as any)
 
 const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
@@ -43,6 +44,8 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
     if (b.name === 'ui') {
       return -1
     }
+
+    return 0
   })
 })
 </script>

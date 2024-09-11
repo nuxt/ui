@@ -86,7 +86,7 @@ defineOgImageComponent('Docs', {
 
       <USeparator />
 
-      <UContentSurround :surround="surround" />
+      <UContentSurround :surround="surround as any" />
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
