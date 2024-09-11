@@ -41,7 +41,7 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck docs",
     "test": "vitest",
-    "release": "release-it"
+    "release": "release-it --preRelease=alpha --npm.tag=next"
   },
   "dependencies": {
     "@nuxt/icon": "^1.5.1",
