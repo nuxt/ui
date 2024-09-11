@@ -38,11 +38,6 @@ async function onSubmit(event: FormSubmitEvent<any>) {
   toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'green' })
   console.log(event.data)
 }
-
-async function onError(e) {
-  console.log(state)
-  console.error(e.value)
-}
 </script>
 
 <template>
@@ -59,10 +54,10 @@ async function onError(e) {
     </UFormField>
 
     <UForm v-for="item, count in state.items" :key="count" :state="item" :schema="itemSchema" class="flex gap-2">
-      <UFormField label="Description" name="description">
+      <UFormField :label="!count ? 'Description' : undefined" name="description">
         <UInput v-model="item.description" />
       </UFormField>
-      <UFormField label="Price" name="price" class="w-20">
+      <UFormField :label="!count ? 'Price' : undefined" name="price" class="w-20">
         <UInput v-model="item.price" type="number" />
       </UFormField>
     </UForm>

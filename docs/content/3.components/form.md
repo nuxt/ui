@@ -12,7 +12,7 @@ Use the Form component to validate form data using schema libraries such as [Zod
 
 It works with the [FormField](/components/form-field) component to display error messages around form elements automatically.
 
-The form component requires two props:
+It requires two props:
 - `state` - a reactive object holding the form's state.
 - `schema` - a schema object from a validation library like [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Valibot](https://github.com/fabian-hiller/valibot).
 
@@ -54,13 +54,17 @@ The form component requires two props:
   ::
 ::
 
+Errors are reported directly to the [FormField](/components/form-field) component based on the `name` prop. This means the validation rules defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}.
+
+Nested validation rules are handled using dot notation. For example, a rule like `{ user: z.object({ email: z.string() }) }`{lang="ts"} will be applied to `<FormField name="user.email">`{lang="vue"}.
+
 ## Custom Validation
 
 Use the `validate` prop to apply your own validation logic.
 
 The validation function must return a list of errors with the following attributes:
-- `message` - Error message to display.
-- `name` - The `name` of the `FormField` attribute to send the error to.
+- `message` - the error message to display.
+- `name` - the `name` of the `FormField` to send the error to.
 
 ::callout{icon="i-heroicons-light-bulb"}
 It can be used alongside the `schema` prop to handle complex use cases.
@@ -109,8 +113,8 @@ You can use [useFormField](/composables/use-form-field) to implement this inside
 
 You can listen to the `@error` event to handle errors. This event is triggered when the form is submitted and contains an array of `FormError` objects with the following fields:
 
-- `id` - the identifier of the form element.
-- `path` - the path to the form element matching the `name`.
+- `id` - the input's `id`.
+- `name` - the `name` of the `FormField` 
 - `message` - the error message to display.
 
 Here's an example that focuses the first input element with an error after the form is submitted:
@@ -126,9 +130,9 @@ props:
 
 ## Nesting Forms
 
-Nesting form components allows you to manage complex data structures, such as lists or conditional fields, more efficiently. 
+Nesting form components allows you to manage complex data structures, such as lists or conditional fields, more efficiently.
 
-
+For example, it can be used to dynamically add fields based on user's input:
 ::component-example
 ---
 collapse: true
@@ -137,7 +141,7 @@ name: 'form-example-nested'
 ::
 
 
-// TODO: Fix Me
+Or to implement list inputs:
 ::component-example
 ---
 collapse: true

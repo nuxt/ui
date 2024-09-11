@@ -46,15 +46,10 @@ const items = [
 function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data)
 }
-
-const validateOn = ref(['change', 'input', 'blur'])
 </script>
 
 <template>
   <div>
-    <UFormField label="Validate On">
-      <USelectMenu v-model="validateOn" :options="['change', 'input', 'blur']" />
-    </UFormField>
     <UForm ref="form" :state="state" :schema="schema" class="gap-4 flex flex-col w-60" @submit="onSubmit">
       <UFormField label="Input" name="input">
         <UInput v-model="state.input" placeholder="john@lennon.com" />
