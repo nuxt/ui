@@ -20,7 +20,6 @@ export default defineNuxtConfig({
     module,
     '@nuxt/ui-pro',
     '@nuxt/content',
-    '@nuxt/fonts',
     '@nuxt/image',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
@@ -43,13 +42,6 @@ export default defineNuxtConfig({
       prefix: 'custom',
       dir: resolve('./app/assets/icons')
     }]
-  },
-
-  fonts: {
-    experimental: {
-      // Required for TailwindCSS v4. You can enable support for processing CSS variables for font family names. This may have a performance impact.
-      processCSSVariables: true
-    }
   },
 
   content: {

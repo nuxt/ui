@@ -1,5 +1,5 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
 import { addTemplates } from './templates'
 import icons from './theme/icons'
 
@@ -65,8 +65,23 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
     }
 
-    await installModule('@nuxt/icon', { cssLayer: 'components' })
-    // await installModule('@nuxtjs/color-mode', { classSuffix: '' })
+    if (!hasNuxtModule('@nuxt/fonts')) {
+      await installModule('@nuxt/fonts', { experimental: { processCSSVariables: true } })
+    } else {
+      nuxt.options.fonts = defu(nuxt.options.fonts, { experimental: { processCSSVariables: true } })
+    }
+
+    if (!hasNuxtModule('@nuxt/icon')) {
+      await installModule('@nuxt/icon', { cssLayer: 'components' })
+    } else {
+      nuxt.options.icon = defu(nuxt.options.icon, { cssLayer: 'components' })
+    }
+
+    // if (!hasNuxtModule('@nuxtjs/color-mode')) {
+    //   await installModule('@nuxtjs/color-mode', { classSuffix: '' })
+    // } else {
+    //   nuxt.options.colorMode = defu(nuxt.options.colorMode, { classSuffix: '' })
+    // }
 
     addPlugin({
       src: resolve('./runtime/plugins/colors')
