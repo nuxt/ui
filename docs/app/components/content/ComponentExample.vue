@@ -21,8 +21,26 @@ const props = withDefaults(defineProps<{
    * @defaultValue true
    */
   preview?: boolean
+
+  /**
+   * Whether to show the source code
+   * @defaultValue true
+   */
+  source?: boolean
+
+  /**
+   * A list of variable props to link to the component.
+   */
+  options?: Array<{
+    name: string
+    label: string
+    items: any[]
+    default: any
+    multiple: boolean
+  }>
 }>(), {
-  preview: true
+  preview: true,
+  source: true
 })
 
 const { $prettier } = useNuxtApp()
@@ -71,16 +89,48 @@ const { data: ast } = await useAsyncData(`component-example-${camelName}`, async
 
   return parseMarkdown(formatted)
 }, { watch: [code] })
+
+const optionsValues = ref(props.options?.reduce((acc, option) => {
+  if (option.name) {
+    acc[option.name] = option.default
+  }
+  return acc
+}, {}))
 </script>
 
 <template>
   <div class="my-5">
     <div v-if="preview">
-      <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4 rounded-t-md z-[1]" :class="[props.class]">
-        <component :is="camelName" v-bind="componentProps" />
+      <div class="border border-gray-300 dark:border-gray-700 relative z-[1]" :class="[props.class, { 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source }]">
+        <div v-if="props.options?.length" class="flex gap-4 p-4 border-b border-gray-300 dark:border-gray-700">
+          <UFormField
+            v-for="option in props.options"
+            :key="option.name"
+            :label="option.label"
+            :name="option.name"
+            size="sm"
+            class="inline-flex ring ring-gray-300 dark:ring-gray-700 rounded"
+            :ui="{
+              wrapper: 'bg-gray-50 dark:bg-gray-800/50 rounded-l flex border-r border-gray-300 dark:border-gray-700',
+              label: 'text-gray-500 dark:text-gray-400 px-2 py-1.5',
+              container: 'mt-0'
+            }"
+          >
+            <USelectMenu
+              v-model="optionsValues[option.name]"
+              :items="option.items"
+              class="rounded rounded-l-none w-40"
+              multiple
+              :ui="{ itemLeadingChip: 'size-2' }"
+            />
+          </UFormField>
+        </div>
+        <div class="p-4">
+          <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
+        </div>
       </div>
     </div>
 
-    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+    <MDCRenderer v-if="ast && props.source" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
   </div>
 </template>
