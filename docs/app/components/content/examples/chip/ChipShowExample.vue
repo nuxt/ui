@@ -2,19 +2,16 @@
 const statuses = ['online', 'away', 'busy', 'offline']
 const status = ref(statuses[0])
 
-const color = computed(() => ({
-  online: 'green',
-  away: 'amber',
-  busy: 'red',
-  offline: 'gray'
-})[status.value] as any)
+const color = computed(() => status.value ? { online: 'green', away: 'amber', busy: 'red', offline: 'gray' }[status.value] as any : 'online')
 
 const show = computed(() => status.value !== 'offline')
 
 // Note: This is for demonstration purposes only. Don't do this at home.
 onMounted(() => {
   setInterval(() => {
-    status.value = statuses[(statuses.indexOf(status.value) + 1) % statuses.length]
+    if (status.value) {
+      status.value = statuses[(statuses.indexOf(status.value) + 1) % statuses.length]
+    }
   }, 1000)
 })
 </script>

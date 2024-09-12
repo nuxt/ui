@@ -1,6 +1,6 @@
 import { Octokit } from '@octokit/rest'
 
-function isUserABot(user) {
+function isUserABot(user: any) {
   return user?.login?.endsWith('-bot') || user?.login?.endsWith('[bot]')
 }
 

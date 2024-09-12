@@ -4,11 +4,14 @@ export default defineNuxtPlugin({
     const appConfig = useAppConfig()
 
     if (import.meta.client) {
-      if (window.localStorage.getItem('nuxt-ui-primary')) {
-        appConfig.ui.colors.primary = window.localStorage.getItem('nuxt-ui-primary')
+      const primary = window.localStorage.getItem('nuxt-ui-primary')
+      if (primary) {
+        appConfig.ui.colors.primary = primary
       }
-      if (window.localStorage.getItem('nuxt-ui-gray')) {
-        appConfig.ui.colors.gray = window.localStorage.getItem('nuxt-ui-gray')
+
+      const gray = window.localStorage.getItem('nuxt-ui-gray')
+      if (gray) {
+        appConfig.ui.colors.gray = gray
       }
     }
 

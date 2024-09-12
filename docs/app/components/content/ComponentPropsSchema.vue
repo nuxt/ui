@@ -6,7 +6,7 @@ const props = defineProps<{
   ignore?: string[]
 }>()
 
-function getSchemaProps(schema: PropertyMeta['schema']) {
+function getSchemaProps(schema: PropertyMeta['schema']): any {
   if (!schema || typeof schema === 'string' || !schema.schema) {
     return []
   }
@@ -15,12 +15,12 @@ function getSchemaProps(schema: PropertyMeta['schema']) {
     return Object.values(schema.schema).filter(prop => !props.ignore?.includes(prop.name))
   }
 
-  return (Array.isArray(schema.schema) ? schema.schema : Object.values(schema.schema)).flatMap(getSchemaProps)
+  return (Array.isArray(schema.schema) ? schema.schema : Object.values(schema.schema)).flatMap(getSchemaProps as any)
 }
 
 const schemaProps = computed(() => {
-  return getSchemaProps(props.prop.schema).map((prop) => {
-    const defaultValue = prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text
+  return getSchemaProps(props.prop.schema).map((prop: any) => {
+    const defaultValue = prop.default ?? prop.tags?.find((tag: any) => tag.name === 'defaultValue')?.text
     let description = prop.description
     if (defaultValue) {
       description = description ? `${description} Defaults to \`${defaultValue}\`{lang="ts-type"}.` : `Defaults to \`${defaultValue}\`{lang="ts-type"}.`

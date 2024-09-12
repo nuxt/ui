@@ -72,7 +72,7 @@ export default defineNuxtModule({
         .reduce((acc, component) => {
           acc[component.pascalName] = component
           return acc
-        }, {})
+        }, {} as Record<string, any>)
       await stubOutput()
     })
 
@@ -94,10 +94,10 @@ export default defineNuxtModule({
           await fetchComponents()
           await updateOutput()
         },
-        configResolved(config) {
+        configResolved(config: any) {
           _configResolved = config
         },
-        async handleHotUpdate({ file }) {
+        async handleHotUpdate({ file }: { file: any }) {
           if (
             Object.entries(components).some(
               ([, comp]: any) => comp.filePath === file
