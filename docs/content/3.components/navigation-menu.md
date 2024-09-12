@@ -123,7 +123,7 @@ props:
 You can pass an array of arrays to the `items` prop to display groups of items.
 ::
 
-::tip{class="[&_ul]:my-0 [&_ul]:marker:text-green-500/50 dark:[&_ul]:marker:text-green-400/50"}
+::tip
 Each item can take a `children` array of objects with the following properties to create submenus:
 
 - `label: string`
