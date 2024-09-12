@@ -21,6 +21,7 @@ describe('Button', () => {
     ['with loading', { props: { loading: true } }],
     ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-heroicons-sparkles' } }],
     ['with disabled', { props: { label: 'Button', disabled: true } }],
+    ['with disabled and with link', { props: { label: 'Button', disabled: true, to: '/link' } }],
     ['with block', { props: { label: 'Button', block: true } }],
     ['with square', { props: { label: 'Button', square: true } }],
     ['with class', { props: { class: 'rounded-full font-bold' } }],
