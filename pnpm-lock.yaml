@@ -7,7 +7,6 @@ settings:
 overrides:
   '@nuxt/ui': workspace:*
   happy-dom: 14.12.3
-  nuxt-component-meta: 0.8.0
 
 importers:
 
@@ -168,8 +167,8 @@ importers:
         specifier: ^3.13.1
         version: 3.13.1(@parcel/watcher@2.4.1)(@types/node@22.5.4)(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(lightningcss@1.27.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.3)(terser@5.32.0)(typescript@5.6.2)(vite@5.4.4(@types/node@22.5.4)(lightningcss@1.27.0)(terser@5.32.0))(vue-tsc@2.1.6(typescript@5.6.2))
       nuxt-component-meta:
-        specifier: 0.8.0
-        version: 0.8.0(magicast@0.3.5)(rollup@4.21.3)
+        specifier: ^0.8.2
+        version: 0.8.2(magicast@0.3.5)(rollup@4.21.3)
       nuxt-og-image:
         specifier: ^3.0.1
         version: 3.0.1(magicast@0.3.5)(rollup@4.21.3)(vite@5.4.4(@types/node@22.5.4)(lightningcss@1.27.0)(terser@5.32.0))(vue@3.5.4(typescript@5.6.2))
@@ -4700,8 +4699,8 @@ packages:
     engines: {node: ^16.10.0 || >=18.0.0}
     hasBin: true
 
-  nuxt-component-meta@0.8.0:
-    resolution: {integrity: sha512-NZByaVK/KL3oD7myU93GTUfxw74TyV7mLmxgAVep6qMXPVN9sDyFyj2Y84Qd7O+o00MlR3Dgf+g9v2ONffloew==}
+  nuxt-component-meta@0.8.2:
+    resolution: {integrity: sha512-diMXSjBDlueIGy0Wb60vqKCwjT+ZorJGhcD/0xMhGOuyc971ccJgbQRZnwYoCTgMICo+0/+ZL2UyjAiYuHgHqw==}
     hasBin: true
 
   nuxt-og-image@3.0.1:
@@ -12100,7 +12099,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  nuxt-component-meta@0.8.0(magicast@0.3.5)(rollup@4.21.3):
+  nuxt-component-meta@0.8.2(magicast@0.3.5)(rollup@4.21.3):
     dependencies:
       '@nuxt/kit': 3.13.1(magicast@0.3.5)(rollup@4.21.3)
       citty: 0.1.6
