@@ -6,6 +6,8 @@ import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
 const props = defineProps<{
+  /** Override the slug taken from the route */
+  slug?: string
   class?: any
   /** List of props to ignore in selection */
   ignore?: string[]
@@ -32,7 +34,7 @@ const props = defineProps<{
 const route = useRoute()
 const { $prettier } = useNuxtApp()
 
-const camelName = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
+const camelName = camelCase(props.slug ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
 const name = `U${upperFirst(camelName)}`
 
 const componentProps = reactive({ ...(props.props || {}) })
