@@ -126,6 +126,7 @@ export default defineNuxtConfig({
         'UCheckbox',
         'UChip',
         'UCollapsible',
+        'UCommandPalette',
         'UContextMenu',
         'UDrawer',
         'UDropdownMenu',
