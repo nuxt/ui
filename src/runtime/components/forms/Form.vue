@@ -1,11 +1,11 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <slot />
+    <slot v-bind="{ errors }" />
   </form>
 </template>
 
 <script lang="ts">
-import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted } from 'vue'
+import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
@@ -181,7 +181,8 @@ export default defineComponent({
     } as Form<any>)
 
     return {
-      onSubmit
+      onSubmit,
+      errors: readonly(errors)
     }
   }
 })
