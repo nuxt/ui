@@ -26,11 +26,11 @@ export function useToast() {
     return body
   }
 
-  function update(id: string | number, toast: Partial<Toast>) {
+  function update(id: string | number, toast: Omit<Partial<Toast>, 'id'>) {
     const index = toasts.value.findIndex((t: Toast) => t.id === id)
     if (index !== -1) {
       toasts.value[index] = {
-        ...toasts.value[index],
+        ...toasts.value[index] as Toast,
         ...toast
       }
     }
@@ -40,7 +40,7 @@ export function useToast() {
     const index = toasts.value.findIndex((t: Toast) => t.id === id)
     if (index !== -1) {
       toasts.value[index] = {
-        ...toasts.value[index],
+        ...toasts.value[index] as Toast,
         open: false
       }
     }

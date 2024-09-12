@@ -180,7 +180,7 @@ const groups = computed(() => {
     }
 
     acc[item.group] ||= []
-    acc[item.group].push({ ...item, matches })
+    acc[item.group]?.push({ ...item, matches })
 
     return acc
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)

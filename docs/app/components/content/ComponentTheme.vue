@@ -5,11 +5,12 @@ import * as theme from '#build/ui'
 
 const route = useRoute()
 
-const name = camelCase(route.params.slug[route.params.slug.length - 1])
+const slug = Array.isArray(route.params.slug) ? route.params.slug[0] ?? '' : route.params.slug ?? ''
+const name = camelCase(slug[slug.length - 1] ?? '')
 
 const strippedCompoundVariants = ref(false)
 
-function stripCompoundVariants(component) {
+function stripCompoundVariants(component: any) {
   if (component.compoundVariants) {
     component.compoundVariants = component.compoundVariants.filter((compoundVariant: any) => {
       if (compoundVariant.color) {
@@ -38,7 +39,7 @@ function stripCompoundVariants(component) {
 const component = computed(() => {
   return {
     ui: {
-      [name]: stripCompoundVariants(theme[name])
+      [name]: stripCompoundVariants((theme as any)[name])
     }
   }
 })

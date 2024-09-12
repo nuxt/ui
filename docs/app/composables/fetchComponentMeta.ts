@@ -1,6 +1,6 @@
 import type { ComponentMeta } from 'vue-component-meta'
 
-const useComponentsMetaState = () => useState('component-meta-state', () => ({}))
+const useComponentsMetaState = () => useState<Record<string, any>>('component-meta-state', () => ({}))
 
 export async function fetchComponentMeta(name: string): Promise<{ meta: ComponentMeta }> {
   const state = useComponentsMetaState()
@@ -16,9 +16,9 @@ export async function fetchComponentMeta(name: string): Promise<{ meta: Componen
   // Add to nitro prerender
   if (import.meta.server) {
     const event = useRequestEvent()
-    event.node.res.setHeader(
+    event?.node.res.setHeader(
       'x-nitro-prerender',
-      [event.node.res.getHeader('x-nitro-prerender'), `/api/component-meta/${name}.json`].filter(Boolean).join(',')
+      [event?.node.res.getHeader('x-nitro-prerender'), `/api/component-meta/${name}.json`].filter(Boolean).join(',')
     )
   }
 

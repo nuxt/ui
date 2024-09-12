@@ -32,7 +32,8 @@ const props = defineProps<{
 const route = useRoute()
 const { $prettier } = useNuxtApp()
 
-const camelName = camelCase(route.params.slug[route.params.slug.length - 1])
+const slug = Array.isArray(route.params.slug) ? route.params.slug[0] ?? '' : route.params.slug ?? ''
+const camelName = camelCase(slug[slug.length - 1] ?? '')
 const name = `U${upperFirst(camelName)}`
 
 const componentProps = reactive({ ...(props.props || {}) })
@@ -45,11 +46,11 @@ function setComponentProp(name: string, value: any) {
   set(componentProps, name, value)
 }
 
-const componentTheme = theme[camelName]
+const componentTheme = (theme as any)[camelName]
 const meta = await fetchComponentMeta(name as any)
 
-function mapKeys(obj, parentKey = '') {
-  return Object.entries(obj || {}).flatMap(([key, value]) => {
+function mapKeys(obj: object, parentKey = ''): any {
+  return Object.entries(obj || {}).flatMap(([key, value]: [string, any]) => {
     if (typeof value === 'object' && !Array.isArray(value)) {
       return mapKeys(value, key)
     }
@@ -63,11 +64,11 @@ function mapKeys(obj, parentKey = '') {
 const options = computed(() => {
   const keys = mapKeys(props.props || {})
 
-  return keys.map((key) => {
+  return keys.map((key: string) => {
     const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
     const propItems = get(props.items, key, [])
     const items = propItems.length
-      ? propItems.map(item => ({
+      ? propItems.map((item: any) => ({
         value: item,
         label: item
       }))
@@ -253,7 +254,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
         <component :is="name" v-bind="componentProps" @update:model-value="!!componentProps.modelValue && setComponentProp('modelValue', $event)">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <ContentSlot :name="slot" unwrap="p">
-              {{ slots[slot] }}
+              {{ slots?.[slot] }}
             </ContentSlot>
           </template>
         </component>

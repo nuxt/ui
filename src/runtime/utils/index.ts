@@ -19,7 +19,7 @@ export function omit<Data extends object, Keys extends keyof Data>(data: Data, k
   return result as Omit<Data, Keys>
 }
 
-export function get(object: Record<string, any>, path: (string | number)[] | string, defaultValue?: any): any {
+export function get(object: Record<string, any> | undefined, path: (string | number)[] | string, defaultValue?: any): any {
   if (typeof path === 'string') {
     path = path.split('.').map((key) => {
       const numKey = Number(key)
