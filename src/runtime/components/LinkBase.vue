@@ -43,7 +43,8 @@ function onClick(e: MouseEvent) {
       'as': 'a',
       'href': disabled ? undefined : href,
       'aria-disabled': disabled ? 'true' : undefined,
-      'role': disabled ? 'link' : undefined
+      'role': disabled ? 'link' : undefined,
+      'tabindex': disabled ? -1 : undefined
     } : as === 'button' ? {
       as,
       type,

@@ -36,7 +36,7 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     to: true,
     class: {
-      link: ['hover:text-gray-700 dark:hover:text-gray-200', options.transitions && 'transition-colors']
+      link: ['hover:text-gray-700 dark:hover:text-gray-200', options.theme?.transitions && 'transition-colors']
     }
   }]
 })

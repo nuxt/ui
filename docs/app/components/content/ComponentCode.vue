@@ -32,8 +32,7 @@ const props = defineProps<{
 const route = useRoute()
 const { $prettier } = useNuxtApp()
 
-const slug = Array.isArray(route.params.slug) ? route.params.slug[0] ?? '' : route.params.slug ?? ''
-const camelName = camelCase(slug[slug.length - 1] ?? '')
+const camelName = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
 const name = `U${upperFirst(camelName)}`
 
 const componentProps = reactive({ ...(props.props || {}) })

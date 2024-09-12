@@ -5,8 +5,7 @@ import * as theme from '#build/ui'
 
 const route = useRoute()
 
-const slug = Array.isArray(route.params.slug) ? route.params.slug[0] ?? '' : route.params.slug ?? ''
-const name = camelCase(slug[slug.length - 1] ?? '')
+const name = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
 
 const strippedCompoundVariants = ref(false)
 
