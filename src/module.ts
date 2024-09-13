@@ -1,7 +1,9 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, extendPages, addServerHandler } from '@nuxt/kit'
 import { addTemplates } from './templates'
 import icons from './theme/icons'
+
+import { addCustomTab } from '@nuxt/devtools-kit'
 
 export type * from './runtime/types'
 
@@ -87,5 +89,31 @@ export default defineNuxtModule<ModuleOptions>({
     addImportsDir(resolve('./runtime/composables'))
 
     addTemplates(options, nuxt)
+
+    if (nuxt.options.dev) {
+      addServerHandler({
+        route: '/_ui/config',
+        handler: resolve('./runtime/devtools/server/config.post.ts'),
+        method: 'POST'
+      })
+
+      extendPages((pages) => {
+        pages.unshift({
+          name: 'ui-devtools',
+          path: '/_ui/devtools',
+          file: resolve('runtime/devtools/pages/index.vue')
+        })
+      })
+
+      addCustomTab({
+        name: 'nuxt-ui',
+        title: 'Nuxt UI',
+        icon: 'bx:paint',
+        view: {
+          type: 'iframe',
+          src: '/_ui/devtools'
+        }
+      })
+    }
   }
 })

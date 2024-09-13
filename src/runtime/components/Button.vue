@@ -64,19 +64,26 @@ const ui = computed(() => button({
 </script>
 
 <template>
-  <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="linkProps" raw>
+  <ULink
+    :type="type"
+    :disabled="disabled || loading"
+    :class="ui.base({ class: props.class })"
+    v-bind="linkProps"
+    raw
+    data-slot="base"
+  >
     <slot name="leading">
-      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" data-slot="leadingIcon" />
     </slot>
 
     <slot>
-      <span v-if="label" :class="ui.label({ class: props.ui?.label })">
+      <span v-if="label" :class="ui.label({ class: props.ui?.label })" data-slot="label">
         {{ label }}
       </span>
     </slot>
 
     <slot name="trailing">
-      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" data-slot="trailingIcon" />
     </slot>
   </ULink>
 </template>
