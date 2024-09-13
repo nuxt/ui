@@ -17,6 +17,10 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
       <UButton disabled>
         Disabled
       </UButton>
+
+      <UButton to="#" disabled>
+        Disabled Link
+      </UButton>
     </div>
     <div class="flex items-center gap-2">
       <UButton loading>

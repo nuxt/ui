@@ -1,5 +1,5 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, extendPages, addServerHandler } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, extendPages, addServerHandler, hasNuxtModule } from '@nuxt/kit'
 import { addTemplates } from './templates'
 import icons from './theme/icons'
 
@@ -13,16 +13,26 @@ export interface ModuleOptions {
    * @defaultValue U
    */
   prefix?: string
+
   /**
    * Colors to generate classes for (based on TailwindCSS colors)
    * @defaultValue ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
    */
   colors?: string[]
+
   /**
-   * Disable color transitions
+   * Enable or disable `@nuxt/fonts` module
    * @defaultValue true
    */
-  transitions?: boolean
+  fonts?: boolean
+
+  theme?: {
+    /**
+     * Enable or disable transitions on components
+     * @defaultValue true
+     */
+    transitions?: boolean
+  }
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -36,7 +46,10 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     prefix: 'U',
     colors: undefined,
-    transitions: true
+    fonts: true,
+    theme: {
+      transitions: true
+    }
   },
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
@@ -67,8 +80,25 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
     }
 
-    await installModule('@nuxt/icon', { cssLayer: 'components' })
-    // await installModule('@nuxtjs/color-mode', { classSuffix: '' })
+    if (options.fonts) {
+      if (!hasNuxtModule('@nuxt/fonts')) {
+        await installModule('@nuxt/fonts', { experimental: { processCSSVariables: true } })
+      } else {
+        nuxt.options.fonts = defu(nuxt.options.fonts, { experimental: { processCSSVariables: true } })
+      }
+    }
+
+    if (!hasNuxtModule('@nuxt/icon')) {
+      await installModule('@nuxt/icon', { cssLayer: 'components' })
+    } else {
+      nuxt.options.icon = defu(nuxt.options.icon, { cssLayer: 'components' })
+    }
+
+    // if (!hasNuxtModule('@nuxtjs/color-mode')) {
+    //   await installModule('@nuxtjs/color-mode', { classSuffix: '' })
+    // } else {
+    //   nuxt.options.colorMode = defu(nuxt.options.colorMode, { classSuffix: '' })
+    // }
 
     addPlugin({
       src: resolve('./runtime/plugins/colors')

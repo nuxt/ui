@@ -1,17 +1,155 @@
 ---
-description: A form element that provides validation and submission handling.
+description: A form component with built-in validation and submission handling.
 links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Form.vue
-navigation:
-  badge:
-    label: Todo
 ---
 
 ## Usage
 
-## Examples
+Use the Form component to validate form data using schema libraries such as [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi), [Valibot](https://github.com/fabian-hiller/valibot), or your own validation logic.
+
+It works with the [FormField](/components/form-field) component to display error messages around form elements automatically.
+
+### Schema Validation
+
+It requires two props:
+- `state` - a reactive object holding the form's state.
+- `schema` - a schema object from a validation library like [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Valibot](https://github.com/fabian-hiller/valibot).
+
+::warning
+**No validation library is included** by default, ensure you **install the one you need**.
+::
+
+::tabs
+  ::component-example{label="Zod"}
+  ---
+  name: 'form-example-zod'
+  props:
+    class: 'w-60'
+  ---
+  ::
+
+  ::component-example{label="Yup"}
+  ---
+  name: 'form-example-yup'
+  props:
+    class: 'w-60'
+  ---
+  ::
+
+  ::component-example{label="Joi"}
+  ---
+  name: 'form-example-joi'
+  props:
+    class: 'w-60'
+  ---
+  ::
+
+  ::component-example{label="Valibot"}
+  ---
+  name: 'form-example-valibot'
+  props:
+    class: 'w-60'
+  ---
+  ::
+::
+
+Errors are reported directly to the [FormField](/components/form-field) component based on the `name` prop. This means the validation rules defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}.
+
+Nested validation rules are handled using dot notation. For example, a rule like `{ user: z.object({ email: z.string() }) }`{lang="ts"} will be applied to `<FormField name="user.email">`{lang="vue"}.
+
+### Custom Validation
+
+Use the `validate` prop to apply your own validation logic.
+
+The validation function must return a list of errors with the following attributes:
+- `message` - the error message to display.
+- `name` - the `name` of the `FormField` to send the error to.
+
+::tip
+It can be used alongside the `schema` prop to handle complex use cases.
+::
+
+::component-example
+---
+name: 'form-example-basic'
+props:
+  class: 'w-60'
+---
+::
+
+### Input Events
+
+The Form component automatically triggers validation when an input emits an `input`, `change`, or `blur` event.
+- Validation on `input` occurs **as you type**.
+- Validation on `change` occurs when you **commit to a value**.
+- Validation on `blur` happens when an input **loses focus**.
+
+You can control when validation happens this using the `validate-on` prop.
+
+::component-example{label="Default"}
+---
+source: false
+name: 'form-example-elements'
+options:
+  - name: 'validate-on'
+    label: 'validate-on'
+    items:
+    - 'input'
+    - 'change'
+    - 'blur'
+    default:
+    - 'input'
+    - 'change'
+    - 'blur'
+    multiple: true
+---
+::
+
+::tip
+You can use the [useFormField](/composables/use-form-field) composable to implement this inside your own components.
+::
+
+### Error Event
+
+You can listen to the `@error` event to handle errors. This event is triggered when the form is submitted and contains an array of `FormError` objects with the following fields:
+
+- `id` - the input's `id`.
+- `name` - the `name` of the `FormField`
+- `message` - the error message to display.
+
+Here's an example that focuses the first input element with an error after the form is submitted:
+
+::component-example
+---
+name: 'form-example-on-error'
+collapse: true
+props:
+  class: 'w-60'
+---
+::
+
+### Nesting Forms
+
+Nesting form components allows you to manage complex data structures, such as lists or conditional fields, more efficiently.
+
+For example, it can be used to dynamically add fields based on user's input:
+::component-example
+---
+collapse: true
+name: 'form-example-nested'
+---
+::
+
+Or to validate list inputs:
+::component-example
+---
+collapse: true
+name: 'form-example-nested-list'
+---
+::
 
 ## API
 

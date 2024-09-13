@@ -8,7 +8,7 @@ export interface SimplePrettier {
 
 function createPrettierWorkerApi(worker: Worker): SimplePrettier {
   let counter = 0
-  const handlers = {}
+  const handlers: any = {}
 
   worker.addEventListener('message', (event) => {
     const { uid, message, error } = event.data
@@ -28,7 +28,7 @@ function createPrettierWorkerApi(worker: Worker): SimplePrettier {
     }
   })
 
-  function postMessage<T>(message) {
+  function postMessage<T>(message: any) {
     const uid = ++counter
     return new Promise<T>((resolve, reject) => {
       handlers[uid] = [resolve, reject]

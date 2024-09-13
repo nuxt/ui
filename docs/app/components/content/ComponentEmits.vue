@@ -3,7 +3,7 @@ import { upperFirst, camelCase } from 'scule'
 
 const route = useRoute()
 
-const camelName = camelCase(route.params.slug[route.params.slug.length - 1])
+const camelName = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
 const name = `U${upperFirst(camelName)}`
 
 const meta = await fetchComponentMeta(name as any)
