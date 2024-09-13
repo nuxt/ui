@@ -167,7 +167,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <div data-slot="root" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <textarea
       :id="id"
       ref="textareaRef"
@@ -175,6 +175,7 @@ onMounted(() => {
       :name="name"
       :rows="rows"
       :placeholder="placeholder"
+      data-slot="base"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       :required="required"

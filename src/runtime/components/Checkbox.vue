@@ -93,8 +93,8 @@ function onUpdate(value: any) {
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <div :class="ui.container({ class: props.ui?.container })">
+  <div data-slot="root" :class="ui.root({ class: [props.class, props.ui?.root] })">
+    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
         v-model:checked="checked"
@@ -102,23 +102,24 @@ function onUpdate(value: any) {
         v-bind="rootProps"
         :name="name"
         :disabled="disabled"
+        data-slot="base"
         :class="ui.base({ class: props.ui?.base })"
         @update:checked="onUpdate"
       >
         <CheckboxIndicator as-child>
-          <UIcon v-if="indeterminate" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon({ class: props.ui?.icon })" />
-          <UIcon v-else :name="icon || appConfig.ui.icons.check" :class="ui.icon({ class: props.ui?.icon })" />
+          <UIcon v-if="indeterminate" :name="indeterminateIcon || appConfig.ui.icons.minus" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+          <UIcon v-else :name="icon || appConfig.ui.icons.check" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
         </CheckboxIndicator>
       </CheckboxRoot>
     </div>
 
-    <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <Label v-if="label || !!slots.label" :for="id" :class="ui.label({ class: props.ui?.label })">
+    <div v-if="(label || !!slots.label) || (description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <Label v-if="label || !!slots.label" :for="id" data-slot="label" :class="ui.label({ class: props.ui?.label })">
         <slot name="label" :label="label">
           {{ label }}
         </slot>
       </Label>
-      <p v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+      <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description" :description="description">
           {{ description }}
         </slot>

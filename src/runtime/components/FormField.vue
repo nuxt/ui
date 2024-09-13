@@ -67,22 +67,22 @@ provide(formFieldInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <div v-if="label || !!slots.label" :class="ui.labelWrapper({ class: props.ui?.labelWrapper })">
-        <Label :for="id" :class="ui.label({ class: props.ui?.label })">
+  <div data-slot="root" :class="ui.root({ class: [props.class, props.ui?.root] })">
+    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <div v-if="label || !!slots.label" data-slot="labelWrapper" :class="ui.labelWrapper({ class: props.ui?.labelWrapper })">
+        <Label :for="id" data-slot="label" :class="ui.label({ class: props.ui?.label })">
           <slot name="label" :label="label">
             {{ label }}
           </slot>
         </Label>
-        <span v-if="hint || !!slots.hint" :class="ui.hint({ class: props.ui?.hint })">
+        <span v-if="hint || !!slots.hint" data-slot="hint" :class="ui.hint({ class: props.ui?.hint })">
           <slot name="hint" :hint="hint">
             {{ hint }}
           </slot>
         </span>
       </div>
 
-      <p v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+      <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description" :description="description">
           {{ description }}
         </slot>
@@ -92,12 +92,12 @@ provide(formFieldInjectionKey, computed(() => ({
     <div :class="[label && ui.container({ class: props.ui?.container })]">
       <slot :error="error" />
 
-      <p v-if="(typeof error === 'string' && error) || !!slots.error" :class="ui.error({ class: props.ui?.error })">
+      <p v-if="(typeof error === 'string' && error) || !!slots.error" data-slot="error" :class="ui.error({ class: props.ui?.error })">
         <slot name="error" :error="error">
           {{ error }}
         </slot>
       </p>
-      <p v-else-if="help || !!slots.help" :class="ui.help({ class: props.ui?.help })">
+      <p v-else-if="help || !!slots.help" data-slot="help" :class="ui.help({ class: props.ui?.help })">
         <slot name="help" :help="help">
           {{ help }}
         </slot>

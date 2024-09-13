@@ -113,19 +113,19 @@ const ui = computed(() => slideover({
     </DialogTrigger>
 
     <DialogPortal :disabled="!portal">
-      <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
+      <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DialogContent :data-side="side" :class="ui.content({ class: [props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+      <DialogContent :data-side="side" data-slot="content" :class="ui.content({ class: [props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
         <slot name="content">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
+          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
             <slot name="header">
-              <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+              <DialogTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
                 <slot name="title">
                   {{ title }}
                 </slot>
               </DialogTitle>
 
-              <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+              <DialogDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
                 <slot name="description">
                   {{ description }}
                 </slot>
@@ -141,6 +141,7 @@ const ui = computed(() => slideover({
                     variant="ghost"
                     aria-label="Close"
                     v-bind="typeof close === 'object' ? close : undefined"
+                    data-slot="close"
                     :class="ui.close({ class: props.ui?.close })"
                   />
                 </slot>
@@ -148,11 +149,11 @@ const ui = computed(() => slideover({
             </slot>
           </div>
 
-          <div :class="ui.body({ class: props.ui?.body })">
+          <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
             <slot name="body" />
           </div>
 
-          <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
             <slot name="footer" />
           </div>
         </slot>

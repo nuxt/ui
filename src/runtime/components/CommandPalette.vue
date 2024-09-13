@@ -207,7 +207,7 @@ const groups = computed(() => {
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ComboboxRoot v-bind="rootProps" v-model:search-term="searchTerm" open :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <ComboboxRoot v-bind="rootProps" v-model:search-term="searchTerm" open data-slot="root" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <ComboboxInput as-child>
       <UInput
         variant="none"
@@ -215,6 +215,7 @@ const groups = computed(() => {
         size="lg"
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
+        data-slot="input"
         :class="ui.input({ class: props.ui?.input })"
       >
         <template v-if="close || !!slots.close" #trailing>
@@ -227,6 +228,7 @@ const groups = computed(() => {
               variant="ghost"
               aria-label="Close"
               v-bind="typeof close === 'object' ? close : undefined"
+              data-slot="close"
               :class="ui.close({ class: props.ui?.close })"
               @click="emits('update:open', false)"
             />
@@ -236,16 +238,16 @@ const groups = computed(() => {
     </ComboboxInput>
 
     <ComboboxPortal disabled>
-      <ComboboxContent :class="ui.content({ class: props.ui?.content })" :dismissable="false">
-        <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
+      <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" :dismissable="false">
+        <ComboboxEmpty data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
             {{ searchTerm ? `No results for ${searchTerm}` : 'No results' }}
           </slot>
         </ComboboxEmpty>
 
-        <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
-          <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
-            <ComboboxLabel v-if="group.label" :class="ui.label({ class: props.ui?.label })">
+        <ComboboxViewport data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+          <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+            <ComboboxLabel v-if="group.label" data-slot="label" :class="ui.label({ class: props.ui?.label })">
               {{ group.label }}
             </ComboboxLabel>
 
@@ -254,43 +256,45 @@ const groups = computed(() => {
               :key="`group-${groupIndex}-${index}`"
               :value="omit(item, ['matches' as any, 'group' as any, 'select', 'labelHtml', 'suffixHtml'])"
               :disabled="item.disabled"
+              data-slot="item"
               :class="ui.item({ class: props.ui?.item })"
               @select="item.select"
             >
               <slot :name="item.slot || group.slot || 'item'" :item="item" :index="index">
                 <slot :name="item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`" :item="item" :index="index">
-                  <UAvatar v-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
-                  <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
+                  <UAvatar v-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+                  <UIcon v-else-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
                   <UChip
                     v-else-if="item.chip"
                     :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
                     inset
                     standalone
                     v-bind="item.chip"
+                    data-slot="itemLeadingChip"
                     :class="ui.itemLeadingChip({ class: props.ui?.itemLeadingChip })"
                   />
                 </slot>
 
-                <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+                <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" data-slot="itemLabel" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                   <slot :name="item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`" :item="item" :index="index">
-                    <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: props.ui?.itemLabelPrefix })">{{ item.prefix }}</span>
+                    <span v-if="item.prefix" data-slot="itemLabelPrefix" :class="ui.itemLabelPrefix({ class: props.ui?.itemLabelPrefix })">{{ item.prefix }}</span>
 
-                    <span :class="ui.itemLabelBase({ class: props.ui?.itemLabelBase })" v-html="item.labelHtml || item.label" />
+                    <span data-slot="itemLabelBase" :class="ui.itemLabelBase({ class: props.ui?.itemLabelBase })" v-html="item.labelHtml || item.label" />
 
-                    <span :class="ui.itemLabelSuffix({ class: props.ui?.itemLabelSuffix })" v-html="item.suffixHtml || item.suffix" />
+                    <span data-slot="itemLabelSuffix" :class="ui.itemLabelSuffix({ class: props.ui?.itemLabelSuffix })" v-html="item.suffixHtml || item.suffix" />
                   </slot>
                 </span>
 
-                <span :class="ui.itemTrailing({ class: props.ui?.itemTrailing })">
+                <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: props.ui?.itemTrailing })">
                   <slot :name="item.slot ? `${item.slot}-trailing` : group.slot ? `${group.slot}-trailing` : `item-trailing`" :item="item" :index="index">
-                    <span v-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: props.ui?.itemTrailingKbds })">
+                    <span v-if="item.kbds?.length" data-slot="itemTrailingKbds" :class="ui.itemTrailingKbds({ class: props.ui?.itemTrailingKbds })">
                       <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((props.ui?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
                     </span>
-                    <UIcon v-else-if="group.highlightedIcon" :name="group.highlightedIcon" :class="ui.itemTrailingHighlightedIcon({ class: props.ui?.itemTrailingHighlightedIcon })" />
+                    <UIcon v-else-if="group.highlightedIcon" :name="group.highlightedIcon" data-slot="itemTrailingHighlightedIcon" :class="ui.itemTrailingHighlightedIcon({ class: props.ui?.itemTrailingHighlightedIcon })" />
                   </slot>
 
                   <ComboboxItemIndicator as-child>
-                    <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: props.ui?.itemTrailingIcon })" />
+                    <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: props.ui?.itemTrailingIcon })" />
                   </ComboboxItemIndicator>
                 </span>
               </slot>

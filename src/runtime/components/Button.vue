@@ -7,13 +7,17 @@ import type { LinkProps } from './Link.vue'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
+const appConfig = _appConfig as AppConfig & {
+  ui: { button: Partial<typeof theme> }
+}
 
 const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
 
 type ButtonVariants = VariantProps<typeof button>
 
-export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'raw' | 'custom'> {
+export interface ButtonProps
+  extends UseComponentIconsProps,
+  Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
   color?: ButtonVariants['color']
   variant?: ButtonVariants['variant']
@@ -48,19 +52,22 @@ const slots = defineSlots<ButtonSlots>()
 const linkProps = useForwardProps(pickLinkProps(props))
 
 const { orientation, size: buttonSize } = useButtonGroup<ButtonProps>(props)
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
+const { isLeading, isTrailing, leadingIconName, trailingIconName }
+  = useComponentIcons(props)
 
-const ui = computed(() => button({
-  color: props.color,
-  variant: props.variant,
-  size: buttonSize.value,
-  loading: props.loading,
-  block: props.block,
-  square: props.square || (!slots.default && !props.label),
-  leading: isLeading.value,
-  trailing: isTrailing.value,
-  buttonGroup: orientation.value
-}))
+const ui = computed(() =>
+  button({
+    color: props.color,
+    variant: props.variant,
+    size: buttonSize.value,
+    loading: props.loading,
+    block: props.block,
+    square: props.square || (!slots.default && !props.label),
+    leading: isLeading.value,
+    trailing: isTrailing.value,
+    buttonGroup: orientation.value
+  })
+)
 </script>
 
 <template>
@@ -73,17 +80,31 @@ const ui = computed(() => button({
     data-slot="base"
   >
     <slot name="leading">
-      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" data-slot="leadingIcon" />
+      <UIcon
+        v-if="isLeading && leadingIconName"
+        :name="leadingIconName"
+        :class="ui.leadingIcon({ class: props.ui?.leadingIcon })"
+        data-slot="leadingIcon"
+      />
     </slot>
 
     <slot>
-      <span v-if="label" :class="ui.label({ class: props.ui?.label })" data-slot="label">
+      <span
+        v-if="label"
+        :class="ui.label({ class: props.ui?.label })"
+        data-slot="label"
+      >
         {{ label }}
       </span>
     </slot>
 
     <slot name="trailing">
-      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" data-slot="trailingIcon" />
+      <UIcon
+        v-if="isTrailing && trailingIconName"
+        :name="trailingIconName"
+        :class="ui.trailingIcon({ class: props.ui?.trailingIcon })"
+        data-slot="trailingIcon"
+      />
     </slot>
   </ULink>
 </template>

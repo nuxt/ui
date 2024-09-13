@@ -1,317 +1,317 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import * as ui from "#build/ui";
-import { pascalCase } from "scule";
-import { updateAppConfig } from "#app";
-import { definePageMeta, resolveComponent } from "#imports";
+import { ref, computed } from 'vue'
+import * as ui from '#build/ui'
+import { pascalCase } from 'scule'
+import { updateAppConfig } from '#app'
+import { definePageMeta, resolveComponent } from '#imports'
 
 definePageMeta({
-  layout: false,
-});
+  layout: false
+})
 
 const componentExample = {
   accordion: {
-    component: resolveComponent("UAccordion"),
+    component: resolveComponent('UAccordion'),
     props: {
       items: [
         {
-          label: "Getting Started",
-          icon: "i-heroicons-information-circle",
+          label: 'Getting Started',
+          icon: 'i-heroicons-information-circle',
           content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.",
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
         },
         {
-          label: "Installation",
-          icon: "i-heroicons-arrow-down-tray",
+          label: 'Installation',
+          icon: 'i-heroicons-arrow-down-tray',
           disabled: true,
           content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.",
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
         },
         {
-          label: "Theming",
-          icon: "i-heroicons-eye-dropper",
+          label: 'Theming',
+          icon: 'i-heroicons-eye-dropper',
           content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.",
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
         },
         {
-          label: "Layouts",
-          icon: "i-heroicons-rectangle-group",
+          label: 'Layouts',
+          icon: 'i-heroicons-rectangle-group',
           content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.",
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
         },
         {
-          label: "Components",
-          icon: "i-heroicons-square-3-stack-3d",
+          label: 'Components',
+          icon: 'i-heroicons-square-3-stack-3d',
           content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.",
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
         },
         {
-          label: "Utilities",
-          slot: "custom" as const,
-          icon: "i-heroicons-wrench-screwdriver",
+          label: 'Utilities',
+          slot: 'custom' as const,
+          icon: 'i-heroicons-wrench-screwdriver',
           content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.",
-        },
-      ],
-    },
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+        }
+      ]
+    }
   },
   alert: {
-    component: resolveComponent("UAlert"),
+    component: resolveComponent('UAlert'),
     props: {
-      title: "Heads up!",
-      description: "You can change the primary color in your app config.",
-      icon: "i-heroicons-command-line",
-      close: true,
-    },
+      title: 'Heads up!',
+      description: 'You can change the primary color in your app config.',
+      icon: 'i-heroicons-command-line',
+      close: true
+    }
   },
   avatar: {
-    component: resolveComponent("UAvatar"),
+    component: resolveComponent('UAvatar'),
     props: {
-      src: "https://github.com/benjamincanac.png",
-    },
+      src: 'https://github.com/benjamincanac.png'
+    }
   },
   badge: {
-    component: resolveComponent("UBadge"),
+    component: resolveComponent('UBadge'),
     props: {
-      label: "badge",
-    },
+      label: 'badge'
+    }
   },
   breadcrumb: {
-    component: resolveComponent("UBreadcrumb"),
+    component: resolveComponent('UBreadcrumb'),
     props: {
       items: [
         {
-          label: "Home",
-          to: "/",
+          label: 'Home',
+          to: '/'
         },
         {
-          slot: "dropdown" as const,
-          icon: "i-heroicons-ellipsis-horizontal",
+          slot: 'dropdown' as const,
+          icon: 'i-heroicons-ellipsis-horizontal',
           children: [
             {
-              label: "Documentation",
+              label: 'Documentation'
             },
             {
-              label: "Themes",
+              label: 'Themes'
             },
             {
-              label: "GitHub",
-            },
-          ],
+              label: 'GitHub'
+            }
+          ]
         },
         {
-          label: "Components",
-          disabled: true,
+          label: 'Components',
+          disabled: true
         },
         {
-          label: "Breadcrumb",
-          to: "/components/breadcrumb",
-        },
-      ],
-    },
+          label: 'Breadcrumb',
+          to: '/components/breadcrumb'
+        }
+      ]
+    }
   },
   button: {
-    component: resolveComponent("UButton"),
+    component: resolveComponent('UButton'),
     props: {
-      label: "Click me!",
-      icon: "i-heroicons-rocket-launch-20-solid",
-    },
+      label: 'Click me!',
+      icon: 'i-heroicons-rocket-launch-20-solid'
+    }
   },
   buttonGroup: {
-    component: resolveComponent("UButtonGroup"),
-    props: {},
+    component: resolveComponent('UButtonGroup'),
+    props: {}
   },
   card: {
-    component: resolveComponent("UCard"),
-    props: {},
+    component: resolveComponent('UCard'),
+    props: {}
   },
   checkbox: {
-    component: resolveComponent("UCheckbox"),
+    component: resolveComponent('UCheckbox'),
     props: {
-      label: "Check me!",
-    },
+      label: 'Check me!'
+    }
   },
   chip: {
-    component: resolveComponent("UChip"),
+    component: resolveComponent('UChip'),
     props: {
-      icon: "i-heroicons-bell",
-      count: 3,
-    },
+      icon: 'i-heroicons-bell',
+      count: 3
+    }
   },
   collapsible: {
-    component: resolveComponent("UCollapsible"),
-    props: {},
+    component: resolveComponent('UCollapsible'),
+    props: {}
   },
   contextMenu: {
-    component: resolveComponent("UContextMenu"),
-    props: {},
+    component: resolveComponent('UContextMenu'),
+    props: {}
   },
   commandPalette: {
-    component: resolveComponent("UCommandPalette"),
-    props: {},
+    component: resolveComponent('UCommandPalette'),
+    props: {}
   },
   drawer: {
-    component: resolveComponent("UDrawer"),
-    props: {},
+    component: resolveComponent('UDrawer'),
+    props: {}
   },
   dropdownMenu: {
-    component: resolveComponent("UDropdownMenu"),
-    props: {},
+    component: resolveComponent('UDropdownMenu'),
+    props: {}
   },
   form: {
-    component: resolveComponent("UForm"),
-    props: {},
+    component: resolveComponent('UForm'),
+    props: {}
   },
   formField: {
-    component: resolveComponent("UFormField"),
-    props: {},
+    component: resolveComponent('UFormField'),
+    props: {}
   },
   input: {
-    component: resolveComponent("UInput"),
-    props: {},
+    component: resolveComponent('UInput'),
+    props: {}
   },
   inputMenu: {
-    component: resolveComponent("UInputMenu"),
-    props: {},
+    component: resolveComponent('UInputMenu'),
+    props: {}
   },
   kbd: {
-    component: resolveComponent("UKbd"),
-    props: {},
+    component: resolveComponent('UKbd'),
+    props: {}
   },
   link: {
-    component: resolveComponent("ULink"),
-    props: {},
+    component: resolveComponent('ULink'),
+    props: {}
   },
   modal: {
-    component: resolveComponent("UModal"),
-    props: {},
+    component: resolveComponent('UModal'),
+    props: {}
   },
   navigationMenu: {
-    component: resolveComponent("UNavigationMenu"),
-    props: {},
+    component: resolveComponent('UNavigationMenu'),
+    props: {}
   },
   pagination: {
-    component: resolveComponent("UPagination"),
-    props: {},
+    component: resolveComponent('UPagination'),
+    props: {}
   },
   popover: {
-    component: resolveComponent("UPopover"),
-    props: {},
+    component: resolveComponent('UPopover'),
+    props: {}
   },
   progress: {
-    component: resolveComponent("UProgress"),
-    props: {},
+    component: resolveComponent('UProgress'),
+    props: {}
   },
   radioGroup: {
-    component: resolveComponent("URadioGroup"),
-    props: {},
+    component: resolveComponent('URadioGroup'),
+    props: {}
   },
   select: {
-    component: resolveComponent("USelect"),
-    props: {},
+    component: resolveComponent('USelect'),
+    props: {}
   },
   selectMenu: {
-    component: resolveComponent("USelectMenu"),
-    props: {},
+    component: resolveComponent('USelectMenu'),
+    props: {}
   },
   separator: {
-    component: resolveComponent("USeparator"),
-    props: {},
+    component: resolveComponent('USeparator'),
+    props: {}
   },
   shortcuts: {
-    component: resolveComponent("UShortcuts"),
-    props: {},
+    component: resolveComponent('UShortcuts'),
+    props: {}
   },
   skeleton: {
-    component: resolveComponent("USkeleton"),
-    props: {},
+    component: resolveComponent('USkeleton'),
+    props: {}
   },
   slideover: {
-    component: resolveComponent("USlideover"),
-    props: {},
+    component: resolveComponent('USlideover'),
+    props: {}
   },
   slider: {
-    component: resolveComponent("USlider"),
-    props: {},
+    component: resolveComponent('USlider'),
+    props: {}
   },
   switch: {
-    component: resolveComponent("USwitch"),
-    props: {},
+    component: resolveComponent('USwitch'),
+    props: {}
   },
   tabs: {
-    component: resolveComponent("UTabs"),
-    props: {},
+    component: resolveComponent('UTabs'),
+    props: {}
   },
   textarea: {
-    component: resolveComponent("UTextarea"),
-    props: {},
+    component: resolveComponent('UTextarea'),
+    props: {}
   },
   toast: {
-    component: resolveComponent("UToast"),
-    props: {},
+    component: resolveComponent('UToast'),
+    props: {}
   },
   tooltip: {
-    component: resolveComponent("UTooltip"),
-    props: {},
-  },
-};
-const appConfig = useAppConfig();
+    component: resolveComponent('UTooltip'),
+    props: {}
+  }
+}
+const appConfig = useAppConfig()
 
 const components = Object.keys(ui).map((key) => {
-  const slots = (ui as any)[key].slots;
+  const slots = (ui as any)[key].slots
 
   return {
     key,
     value: key,
     label: `U${pascalCase(key)}`,
     slots: slots
-      ? Object.keys(slots)?.map((id) => ({
-          id,
-          value: appConfig.ui?.[key]?.slots?.[id], // TODO: default to app.config value
-        }))
-      : [],
-  };
-});
+      ? Object.keys(slots)?.map(id => ({
+        id,
+        value: appConfig.ui?.[key]?.slots?.[id] // TODO: default to app.config value
+      }))
+      : [{ id: 'base', value: '' }]
+  }
+})
 
-const component = ref(components.find((c) => c.key === "button"));
+const component = ref(components.find(c => c.key === 'button'))
 
-const preview = ref();
+const preview = ref()
 const computedUI = computed(() => {
-  if (!component.value) return;
+  if (!component.value) return
 
   return component.value.slots?.reduce(
     (acc, slot) => {
-      acc[slot.id] = slot.value;
-      return acc;
+      acc[slot.id] = slot.value
+      return acc
     },
-    {} as Record<string, any>,
-  );
-});
+    {} as Record<string, any>
+  )
+})
 
 function onHover(slotId: string) {
-  const element = preview.value.querySelector(`[data-slot=${slotId}]`);
+  const element = preview.value.querySelector(`[data-slot=${slotId}]`)
   if (element) {
-    element.classList.add("highlight");
+    element.classList.add('highlight')
   }
 }
 
 function onLeave(slotId: string) {
-  const element = preview.value.querySelector(`[data-slot=${slotId}]`);
+  const element = preview.value.querySelector(`[data-slot=${slotId}]`)
   if (element) {
-    element.classList.remove("highlight");
+    element.classList.remove('highlight')
   }
 }
 
 function saveConfig() {
-  if (!component.value) return;
+  if (!component.value) return
   updateAppConfig({
-    ui: { [component.value.key]: { slots: computedUI.value } },
-  });
+    ui: { [component.value.key]: { slots: computedUI.value } }
+  })
 
-  $fetch("/_ui/config", {
-    method: "POST",
-    body: appConfig,
-  });
+  $fetch('/_ui/config', {
+    method: 'POST',
+    body: appConfig
+  })
 }
 </script>
 
@@ -328,7 +328,9 @@ function saveConfig() {
         placeholder="Search component..."
       />
 
-      <UButton variant="ghost" @click="saveConfig"> Save config </UButton>
+      <UButton variant="ghost" @click="saveConfig">
+        Save config
+      </UButton>
     </div>
     <div
       class="absolute top-[49px] inset-x-0 bottom-0 overflow-y-scroll grid grid-cols-3 gap-4"
