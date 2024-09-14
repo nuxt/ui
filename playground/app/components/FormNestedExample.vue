@@ -35,8 +35,8 @@ function onError(event: any) {
     :state="state"
     :schema="schema"
     class="gap-4 flex flex-col w-60"
-    @submit="(event) => onSubmit(event)"
-    @error="(event) => onError(event)"
+    @submit="onSubmit"
+    @error="onError"
   >
     <UFormField label="Email" name="email">
       <UInput v-model="state.email" placeholder="john@lennon.com" />

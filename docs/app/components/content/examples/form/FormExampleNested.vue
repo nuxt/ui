@@ -29,7 +29,7 @@ async function onSubmit(event: FormSubmitEvent<any>) {
     :state="state"
     :schema="schema"
     class="gap-4 flex flex-col w-60"
-    @submit="(event) => onSubmit(event)"
+    @submit="onSubmit"
   >
     <UFormField label="Name" name="name">
       <UInput v-model="state.name" placeholder="John Lennon" />
