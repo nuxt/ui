@@ -4,6 +4,10 @@ import theme from '#build/ui/button'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
+
+function onClick() {
+  return new Promise<void>(res => setTimeout(res, 5000))
+}
 </script>
 
 <template>
@@ -23,7 +27,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
       </UButton>
     </div>
     <div class="flex items-center gap-2">
-      <UButton loading>
+      <UButton loading-auto @click="onClick">
         Loading
       </UButton>
     </div>

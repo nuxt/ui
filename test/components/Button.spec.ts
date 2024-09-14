@@ -1,7 +1,14 @@
-import { describe, it, expect } from 'vitest'
+import { ref } from 'vue'
+import { describe, it, expect, test } from 'vitest'
 import Button, { type ButtonProps, type ButtonSlots } from '../../src/runtime/components/Button.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/button'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises } from '@vue/test-utils'
+
+import {
+  UForm
+} from '#components'
 
 describe('Button', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -33,5 +40,64 @@ describe('Button', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ButtonProps, slots?: Partial<ButtonSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Button)
     expect(html).toMatchSnapshot()
+  })
+
+  test('with loading-auto works', async () => {
+    let resolve: any | null = null
+    const wrapper = await mountSuspended({
+      components: { Button },
+      async setup() {
+        function onClick() {
+          return new Promise(res => resolve = res)
+        }
+
+        return { onClick }
+      },
+      template: `
+        <Button loading-auto @click="onClick"> Click </Button>
+      `
+    })
+
+    const button = wrapper.find('button')
+    button.trigger('click')
+    await flushPromises()
+
+    const icon = wrapper.findComponent({ name: 'Icon' })
+
+    expect(icon.classes()).toContain('animate-spin')
+    expect(icon?.vm?.name).toBe('i-heroicons-arrow-path-20-solid')
+
+    resolve?.(null)
+  })
+
+  test('with loading-auto works with forms', async () => {
+    let resolve: any | null = null
+    const wrapper = await mountSuspended({
+      components: { Button, UForm },
+      async setup() {
+        function onSubmit() {
+          return new Promise(res => resolve = res)
+        }
+
+        const form = ref()
+        return { form, onSubmit }
+      },
+      template: `
+        <UForm :state="{}" ref="form" @submit="onSubmit">
+          <Button type="submit" loading-auto> Click </Button>
+        </UForm>
+      `
+    })
+
+    const form = wrapper.setupState.form
+    form.value.submit()
+    await flushPromises()
+
+    const icon = wrapper.findComponent({ name: 'Icon' })
+
+    expect(icon.classes()).toContain('animate-spin')
+    expect(icon?.vm?.name).toBe('i-heroicons-arrow-path-20-solid')
+
+    resolve?.(null)
   })
 })

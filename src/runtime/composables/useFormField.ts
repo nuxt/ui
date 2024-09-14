@@ -20,6 +20,7 @@ export const formBusInjectionKey: InjectionKey<UseEventBusReturn<FormEvent, stri
 export const formFieldInjectionKey: InjectionKey<ComputedRef<FormFieldInjectedOptions<FormFieldProps>>> = Symbol('nuxt-ui.form-field')
 export const inputIdInjectionKey: InjectionKey<Ref<string | undefined>> = Symbol('nuxt-ui.input-id')
 export const formInputsInjectionKey: InjectionKey<Ref<Record<string, string>>> = Symbol('nuxt-ui.form-inputs')
+export const formLoadingInjectionKey: InjectionKey<Readonly<Ref<boolean>>> = Symbol('nuxt-ui.form-loading')
 
 export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean }) {
   const formOptions = inject(formOptionsInjectionKey, undefined)

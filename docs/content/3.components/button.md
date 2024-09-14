@@ -140,13 +140,20 @@ props:
 slots:
   default: Button
 ---
-
 Button
 ::
 
 ::tip
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 ::
+
+Use the `loading-auto` prop to show the loading icon automatically while the `@click` handler is pending.
+
+:component-example{name="button-loading-auto-example"}
+
+This also works for with the `@submit` handler of the [Form](/components/form) component 
+
+:component-example{name="button-loading-auto-form-example"}
 
 ### Disabled
 

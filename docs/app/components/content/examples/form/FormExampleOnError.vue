@@ -20,9 +20,11 @@ async function onSubmit(event: FormSubmitEvent<any>) {
 }
 
 async function onError(event: FormErrorEvent) {
-  const element = document.getElementById(event.errors[0].id)
-  element?.focus()
-  element?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  if (event?.errors?.[0]?.id) {
+    const element = document.getElementById(event.errors[0].id)
+    element?.focus()
+    element?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
 }
 </script>
 
