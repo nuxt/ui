@@ -81,8 +81,10 @@ describe('Form', () => {
     }
     ]
   ])('%s validation works', async (_nameOrHtml: string, options: Partial<FormProps<any>>) => {
+    const onSubmit = vi.fn()
+
     const wrapper = await renderForm({
-      props: options,
+      props: { ...options, onSubmit },
       slotTemplate: `
           <UFormField name="email">
             <UInput id="email" v-model="state.email" />
@@ -117,10 +119,9 @@ describe('Form', () => {
     await form.trigger('submit.prevent')
     await flushPromises()
 
-    expect(wrapper.emitted()).toHaveProperty('submit')
-    expect(wrapper.emitted('submit')![0][0]).toMatchObject({
+    expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
       data: { email: 'bob@dylan.com', password: 'validpassword' }
-    })
+    }))
 
     expect(wrapper.html()).toMatchSnapshot('without error')
   })

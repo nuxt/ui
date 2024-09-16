@@ -6,6 +6,7 @@ import theme from '#build/ui/button'
 import type { LinkProps } from './Link.vue'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { PartialString } from '../types/utils'
+import { formLoadingInjectionKey } from '../composables/useFormField'
 
 const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
@@ -22,6 +23,9 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   square?: boolean
   /** Render the button full width. */
   block?: boolean
+  /** Set loading state automatically based on the `@click` promise state */
+  loadingAuto?: boolean
+  onClick?: (event: Event) => void | Promise<void>
   class?: any
   ui?: PartialString<typeof button.slots>
 }
@@ -34,7 +38,7 @@ export interface ButtonSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { type Ref, computed, ref, inject } from 'vue'
 import { useForwardProps } from 'radix-vue'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useButtonGroup } from '../composables/useButtonGroup'
@@ -48,13 +52,32 @@ const slots = defineSlots<ButtonSlots>()
 const linkProps = useForwardProps(pickLinkProps(props))
 
 const { orientation, size: buttonSize } = useButtonGroup<ButtonProps>(props)
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
+
+const loadingAutoState = ref(false)
+const formLoading = inject<Ref<boolean> | undefined>(formLoadingInjectionKey, undefined)
+
+async function onClickWrapper(event: Event) {
+  loadingAutoState.value = true
+  try {
+    await props.onClick?.(event)
+  } finally {
+    loadingAutoState.value = false
+  }
+}
+
+const isLoading = computed(() => {
+  return props.loading || (props.loadingAuto && (loadingAutoState.value || (formLoading?.value && props.type === 'submit')))
+})
+
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(
+  computed(() => ({ ...props, loading: isLoading.value }))
+)
 
 const ui = computed(() => button({
   color: props.color,
   variant: props.variant,
   size: buttonSize.value,
-  loading: props.loading,
+  loading: isLoading.value,
   block: props.block,
   square: props.square || (!slots.default && !props.label),
   leading: isLeading.value,
@@ -64,7 +87,14 @@ const ui = computed(() => button({
 </script>
 
 <template>
-  <ULink :type="type" :disabled="disabled || loading" :class="ui.base({ class: props.class })" v-bind="linkProps" raw>
+  <ULink
+    :type="type"
+    :disabled="disabled || isLoading"
+    :class="ui.base({ class: props.class })"
+    v-bind="linkProps"
+    raw
+    @click="onClickWrapper"
+  >
     <slot name="leading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
     </slot>
