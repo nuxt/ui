@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
 // import { debounce } from 'perfect-debounce'
-import type { ContentSearchFile } from '@nuxt/ui-pro'
+// import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 const route = useRoute()
 // const colorMode = useColorMode()
@@ -9,7 +9,7 @@ const runtimeConfig = useRuntimeConfig()
 const { integrity, api } = runtimeConfig.public.content
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
-const { data: files } = await useLazyFetch<ContentSearchFile[]>(`${api.baseURL}/search${integrity ? '.' + integrity : ''}`, { default: () => [] })
+const { data: files } = await useLazyFetch<any[]>(`${api.baseURL}/search${integrity ? '.' + integrity : ''}`, { default: () => [] })
 
 const searchTerm = ref('')
 
