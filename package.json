@@ -35,7 +35,7 @@
     "@headlessui/vue": "^1.7.23",
     "@iconify-json/heroicons": "^1.2.0",
     "@nuxt/icon": "^1.5.1",
-    "@nuxt/kit": "^3.13.1",
+    "@nuxt/kit": "^3.13.2",
     "@nuxtjs/color-mode": "^3.5.1",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@popperjs/core": "^2.11.8",
@@ -57,13 +57,13 @@
   "devDependencies": {
     "@nuxt/eslint-config": "^0.4.0",
     "@nuxt/module-builder": "^0.8.4",
-    "@nuxt/test-utils": "^3.14.1",
+    "@nuxt/test-utils": "^3.14.2",
     "@release-it/conventional-changelog": "^8.0.2",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^8.57.0",
     "happy-dom": "^14.12.3",
     "joi": "^17.13.3",
-    "nuxt": "^3.13.1",
+    "nuxt": "^3.13.2",
     "release-it": "^17.6.0",
     "unbuild": "^2.0.0",
     "valibot": "^0.42.0",
@@ -76,8 +76,6 @@
     "zod": "^3.23.8"
   },
   "resolutions": {
-    "@nuxt/ui": "workspace:*",
-    "@nuxt/kit": "^3.13.1",
-    "@nuxt/schema": "3.13.1"
+    "@nuxt/ui": "workspace:*"
   }
 }
