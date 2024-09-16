@@ -15,7 +15,7 @@
     "@nuxtjs/plausible": "^1.0.2",
     "@octokit/rest": "^21.0.2",
     "@vueuse/nuxt": "^11.1.0",
-    "date-fns": "^3.6.0",
+    "date-fns": "^4.0.0",
     "eslint": "^8.57.0",
     "joi": "^17.13.3",
     "nuxt": "^3.13.2",
