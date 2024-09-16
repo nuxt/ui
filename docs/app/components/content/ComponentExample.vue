@@ -95,7 +95,7 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
     acc[option.name] = option.default
   }
   return acc
-}, {}))
+}, {} as Record<string, any>) || {})
 </script>
 
 <template>
