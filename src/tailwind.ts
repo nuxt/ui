@@ -1,7 +1,6 @@
 import { join } from 'pathe'
 import { defu } from 'defu'
 import { addTemplate, createResolver, installModule, useNuxt } from '@nuxt/kit'
-
 import { setGlobalColors } from './runtime/utils/colors'
 import type { ModuleOptions } from './module'
 
@@ -13,12 +12,10 @@ export default async function installTailwind (
   const runtimeDir = resolve('./runtime')
 
   // 1. register hook
-  // @ts-ignore
   nuxt.hook('tailwindcss:config', function (tailwindConfig) {
     tailwindConfig.theme = tailwindConfig.theme || {}
     tailwindConfig.theme.extend = tailwindConfig.theme.extend || {}
-    tailwindConfig.theme.extend.colors =
-      tailwindConfig.theme.extend.colors || {}
+    tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {}
 
     const colors = setGlobalColors(tailwindConfig.theme)
 
@@ -73,7 +70,6 @@ export default async function installTailwind (
     `
   })
 
-  // @ts-expect-error - `@nuxtjs/tailwindcss` not installed yet
   const { configPath: userTwConfigPath = [], ...twModuleConfig } = nuxt.options.tailwindcss ?? {}
 
   const twConfigPaths = [
@@ -90,7 +86,9 @@ export default async function installTailwind (
   // 3. install module
   await installModule('@nuxtjs/tailwindcss', defu({
     exposeConfig: true,
-    config: { darkMode: 'class' },
+    config: {
+      darkMode: 'class' as const
+    },
     configPath: twConfigPaths
   }, twModuleConfig))
 }
