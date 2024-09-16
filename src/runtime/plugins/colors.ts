@@ -1,21 +1,29 @@
 import { computed } from 'vue'
 import { get, hexToRgb } from '../utils'
-import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from '#imports'
+import { defineNuxtPlugin, useAppConfig, useHead, useNuxtApp, useRuntimeConfig } from '#imports'
 import colors from '#tailwind-config/theme/colors'
 
 export default defineNuxtPlugin(() => {
+  const runtimeConfig = useRuntimeConfig()
   const appConfig = useAppConfig()
   const nuxtApp = useNuxtApp()
 
   const root = computed(() => {
-    const primary: Record<string, string> | undefined = get(colors, appConfig.ui.primary)
-    const gray: Record<string, string> | undefined = get(colors, appConfig.ui.gray)
+    const theme = runtimeConfig.public.nuxtUi.theme
+    const ui = appConfig.ui
+
+    const primary: Record<string, string> | undefined = theme.primary && ui.primary === 'primary'
+      ? theme.primary
+      : get(colors, ui.primary)
+    const gray: Record<string, string> | undefined = theme.gray && ui.gray === 'gray'
+      ? theme.gray
+      : get(colors, ui.gray)
 
     if (!primary) {
-      console.warn(`[@nuxt/ui] Primary color '${appConfig.ui.primary}' not found in Tailwind config`)
+      console.warn(`[@nuxt/ui] Primary color '${ui.primary}' not found in Tailwind config`)
     }
     if (!gray) {
-      console.warn(`[@nuxt/ui] Gray color '${appConfig.ui.gray}' not found in Tailwind config`)
+      console.warn(`[@nuxt/ui] Gray color '${ui.gray}' not found in Tailwind config`)
     }
 
     return `:root {

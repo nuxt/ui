@@ -82,5 +82,9 @@ export function looseToNumber (val: any): any {
   return isNaN(n) ? val : n
 }
 
+export function clone (value: any) {
+  return JSON.parse(JSON.stringify(value))
+}
+
 export * from './lodash'
 export * from './link'

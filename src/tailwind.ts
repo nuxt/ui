@@ -2,6 +2,7 @@ import { join } from 'pathe'
 import { defu } from 'defu'
 import { addTemplate, createResolver, installModule, useNuxt } from '@nuxt/kit'
 import { setGlobalColors } from './runtime/utils/colors'
+import { clone } from './runtime/utils'
 import type { ModuleOptions } from './module'
 
 export default async function installTailwind (
@@ -17,6 +18,16 @@ export default async function installTailwind (
     tailwindConfig.theme.extend = tailwindConfig.theme.extend || {}
     tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {}
 
+    // cache theme colors
+    const { primary, gray } = clone({
+      ...tailwindConfig.theme.colors,
+      ...tailwindConfig.theme.extend?.colors
+    })
+    nuxt.options.runtimeConfig.public.nuxtUi = {
+      theme: { primary, gray }
+    }
+
+    // set global colors
     const colors = setGlobalColors(tailwindConfig.theme)
 
     // @ts-ignore
