@@ -19,10 +19,10 @@ importers:
         specifier: ^1.5.1
         version: 1.5.1(magicast@0.3.5)(rollup@3.29.4)(vite@5.4.5(@types/node@22.5.5)(lightningcss@1.27.0)(terser@5.32.0))(vue@3.5.6(typescript@5.6.2))
       '@nuxt/kit':
-        specifier: ^3.13.1
+        specifier: ^3.13.2
         version: 3.13.2(magicast@0.3.5)(rollup@3.29.4)
       '@nuxt/schema':
-        specifier: ^3.13.1
+        specifier: ^3.13.2
         version: 3.13.2(rollup@3.29.4)
       '@nuxtjs/color-mode':
         specifier: ^3.4.4
@@ -89,7 +89,7 @@ importers:
         specifier: ^17.13.3
         version: 17.13.3
       nuxt:
-        specifier: ^3.13.1
+        specifier: ^3.13.2
         version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.5.5)(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(lightningcss@1.27.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@3.29.4)(terser@5.32.0)(typescript@5.6.2)(vite@5.4.5(@types/node@22.5.5)(lightningcss@1.27.0)(terser@5.32.0))(vue-tsc@2.1.6(typescript@5.6.2))
       release-it:
         specifier: ^17.6.0
@@ -12689,7 +12689,7 @@ snapshots:
       ky: 1.7.2
       registry-auth-token: 5.0.2
       registry-url: 6.0.1
-      semver: 7.6.2
+      semver: 7.6.3
 
   package-manager-detector@0.2.0: {}
 
@@ -13465,7 +13465,7 @@ snapshots:
 
   semver-diff@4.0.0:
     dependencies:
-      semver: 7.6.2
+      semver: 7.6.3
 
   semver@5.7.2: {}
 
