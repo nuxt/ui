@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { get, hexToRgb } from '../utils'
+import { get, parseConfigValue } from '../utils'
 import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from '#imports'
 import colors from '#tailwind-config/theme/colors'
 
@@ -19,10 +19,10 @@ export default defineNuxtPlugin(() => {
     }
 
     return `:root {
-${Object.entries(primary || colors.green).map(([key, value]) => `--color-primary-${key}: ${hexToRgb(value)};`).join('\n')}
+${Object.entries(primary || colors.green).map(([key, value]) => `--color-primary-${key}: ${parseConfigValue(value)};`).join('\n')}
 --color-primary-DEFAULT: var(--color-primary-500);
 
-${Object.entries(gray || colors.cool).map(([key, value]) => `--color-gray-${key}: ${hexToRgb(value)};`).join('\n')}
+${Object.entries(gray || colors.cool).map(([key, value]) => `--color-gray-${key}: ${parseConfigValue(value)};`).join('\n')}
 }
 
 .dark {
