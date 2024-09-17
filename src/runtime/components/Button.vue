@@ -25,7 +25,7 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   block?: boolean
   /** Set loading state automatically based on the `@click` promise state */
   loadingAuto?: boolean
-  onClick?: (event: MouseEvent) => void | Promise<void>
+  onClick?: ((event: MouseEvent) => void | Promise<void>) | undefined
   class?: any
   ui?: PartialString<typeof button.slots>
 }
