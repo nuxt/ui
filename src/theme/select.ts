@@ -6,6 +6,9 @@ import { buttonGroupVariant } from './button-group'
 export default (options: Required<ModuleOptions>) => {
   return defuFn({
     slots: {
+      root: () => undefined,
+      base: () => ['relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme?.transitions && 'transition-colors'],
+      value: 'truncate group-data-placeholder:text-current/50',
       arrow: 'fill-gray-200 dark:fill-gray-800',
       content: 'max-h-60 w-[--radix-popper-anchor-width] bg-white dark:bg-gray-900 shadow-lg rounded-md ring ring-gray-200 dark:ring-gray-800 overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
       viewport: 'divide-y divide-gray-200 dark:divide-gray-800 scroll-py-1',
@@ -24,6 +27,7 @@ export default (options: Required<ModuleOptions>) => {
       itemLabel: 'truncate'
     },
     variants: {
+      ...buttonGroupVariant,
       size: {
         xs: {
           label: 'p-1 text-[10px]/3 gap-1',
@@ -71,14 +75,6 @@ export default (options: Required<ModuleOptions>) => {
           itemTrailingIcon: 'size-6'
         }
       }
-    }
-  }, {
-    slots: {
-      base: () => ['relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme?.transitions && 'transition-colors'],
-      value: 'truncate group-data-placeholder:text-current/50'
-    },
-    variants: {
-      ...buttonGroupVariant
     }
   }, input(options))
 }
