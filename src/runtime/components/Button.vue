@@ -90,7 +90,7 @@ const ui = computed(() => button({
   <ULink
     :type="type"
     :disabled="disabled || isLoading"
-    :class="ui.base({ class: props.class })"
+    :class="ui.base({ class: [props.class, props.ui?.base] })"
     v-bind="linkProps"
     raw
     @click="onClickWrapper"
