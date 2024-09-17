@@ -25,7 +25,7 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   block?: boolean
   /** Set loading state automatically based on the `@click` promise state */
   loadingAuto?: boolean
-  onClick?: (event: Event) => void | Promise<void>
+  onClick?: (event: MouseEvent) => void | Promise<void>
   class?: any
   ui?: PartialString<typeof button.slots>
 }
@@ -56,7 +56,7 @@ const { orientation, size: buttonSize } = useButtonGroup<ButtonProps>(props)
 const loadingAutoState = ref(false)
 const formLoading = inject<Ref<boolean> | undefined>(formLoadingInjectionKey, undefined)
 
-async function onClickWrapper(event: Event) {
+async function onClickWrapper(event: MouseEvent) {
   loadingAutoState.value = true
   try {
     await props.onClick?.(event)

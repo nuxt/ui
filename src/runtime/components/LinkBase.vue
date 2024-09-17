@@ -3,7 +3,7 @@ export interface LinkBaseProps {
   as?: string
   type?: string
   disabled?: boolean
-  click?: (e: MouseEvent) => void
+  onClick?: (e: MouseEvent) => void | Promise<void>
   href?: string
   navigate?: (e: MouseEvent) => void
   rel?: string
@@ -20,15 +20,15 @@ const props = withDefaults(defineProps<LinkBaseProps>(), {
   type: 'button'
 })
 
-function onClick(e: MouseEvent) {
+function onClickWrapper(e: MouseEvent) {
   if (props.disabled) {
     e.stopPropagation()
     e.preventDefault()
     return
   }
 
-  if (props.click) {
-    props.click(e)
+  if (props.onClick) {
+    props.onClick(e)
   }
 
   if (props.href && props.navigate && !props.isExternal) {
@@ -54,7 +54,7 @@ function onClick(e: MouseEvent) {
     }"
     :rel="rel"
     :target="target"
-    @click="onClick"
+    @click="onClickWrapper"
   >
     <slot />
   </Primitive>
