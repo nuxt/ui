@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.0-alpha.3](https://github.com/nuxt/ui/compare/v3.0.0-alpha.2...v3.0.0-alpha.3) (2024-09-18)
+
+
+### Features
+
+* **module:** move `colors` options into `theme.colors` ([2e95446](https://github.com/nuxt/ui/commit/2e954467c4679d70b68d3155ae34eca300508e38))
+
 ## [3.0.0-alpha.2](https://github.com/nuxt/ui/compare/v3.0.0-alpha.1...v3.0.0-alpha.2) (2024-09-18)
 
 
