@@ -64,11 +64,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <!-- TODO: Find a way to include the page without the added template from app.vue and layouts -->
-  <div v-if="$route.name === 'ui-devtools'">
-    <NuxtPage />
-  </div>
-  <UApp v-else :toaster="appConfig.toaster">
+  <UApp :toaster="appConfig.toaster">
     <div class="h-screen w-screen overflow-hidden flex min-h-0 bg-white dark:bg-gray-900" vaul-drawer-wrapper>
       <UNavigationMenu :items="items" orientation="vertical" class="border-r border-gray-200 dark:border-gray-800 overflow-y-auto w-48 p-4" />
 
