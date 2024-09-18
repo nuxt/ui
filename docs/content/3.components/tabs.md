@@ -191,9 +191,9 @@ props:
 
 ## Examples
 
-### Control active tab
+### Control active item
 
-You can control the active tab by using the `default-value` prop or the `v-model` directive with the index of the item.
+You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
 
 :component-example{name="tabs-model-value-example"}
 

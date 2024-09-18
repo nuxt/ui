@@ -133,7 +133,7 @@ slots:
 :placeholder{class="h-48"}
 ::
 
-::tip
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 ::
 
@@ -330,7 +330,7 @@ class: 'justify-center'
 
 ### With command palette
 
-You can use the [CommandPalette](/components/command-palette) component inside the Modal's content.
+You can use a [CommandPalette](/components/command-palette) component inside the Modal's content.
 
 ::component-example
 ---

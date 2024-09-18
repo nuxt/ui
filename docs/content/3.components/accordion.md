@@ -135,7 +135,7 @@ props:
 ---
 ::
 
-### Icon
+### Trailing Icon
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-heroicons-chevron-down-20-solid`.
 
@@ -168,7 +168,7 @@ props:
 ---
 ::
 
-::tip
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
 ::
 

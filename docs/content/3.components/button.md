@@ -143,7 +143,7 @@ slots:
 Button
 ::
 
-::tip
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 ::
 

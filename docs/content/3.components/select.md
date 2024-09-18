@@ -333,6 +333,8 @@ props:
 ---
 ::
 
+### Trailing Icon
+
 Use the `trailing-icon` prop to customize the trailing icon. Defaults to `i-heroicons-chevron-down-20-solid`.
 
 ::component-code
@@ -355,9 +357,11 @@ props:
 ---
 ::
 
-::tip
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
 ::
+
+### Selected Icon
 
 Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-heroicons-check-20-solid`.
 
@@ -381,7 +385,7 @@ props:
 ---
 ::
 
-::tip
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
 ::
 
@@ -412,7 +416,7 @@ props:
 ---
 ::
 
-::tip
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 ::
 
