@@ -63,7 +63,7 @@ export default defineNuxtModule<ModuleOptions>({
       colors: {
         primary: 'green',
         error: 'red',
-        gray: 'cool'
+        gray: 'slate'
       },
       icons
     })
