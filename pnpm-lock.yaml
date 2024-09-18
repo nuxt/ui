@@ -149,8 +149,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: 2.0.0-alpha.2
-        version: 2.0.0-alpha.2(magicast@0.3.5)(rollup@4.21.3)(vue@3.5.6(typescript@5.6.2))
+        specifier: 2.0.0-alpha.3
+        version: 2.0.0-alpha.3(magicast@0.3.5)(rollup@4.21.3)(vue@3.5.6(typescript@5.6.2))
       '@nuxtjs/plausible':
         specifier: ^1.0.2
         version: 1.0.2(magicast@0.3.5)(rollup@4.21.3)
@@ -1218,8 +1218,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@2.0.0-alpha.2':
-    resolution: {integrity: sha512-o7oowT8uurJF5ykbPYPao3Qq0OtWpzirM8dJpNAaxZbiuYQkfxQHEHn0Jmj0M+kVg4mETSvggAPDKXZa+LrzuA==}
+  '@nuxt/ui-pro@2.0.0-alpha.3':
+    resolution: {integrity: sha512-1s/CuPUUqnJrNPTLifodxA0SsI3ZAgMMd8UjokLDKUX2YOiXB9H2gD0h6VE0HgCrjxvS+5VZ2zBqooODIwPVfA==}
 
   '@nuxt/vite-builder@3.13.2':
     resolution: {integrity: sha512-3dzc3YH3UeTmzGtCevW1jTq0Q8/cm+yXqo/VS/EFM3aIO/tuNPS88is8ZF2YeBButFnLFllq/QenziPbq0YD6Q==}
@@ -7891,7 +7891,7 @@ snapshots:
       - supports-color
       - webpack-sources
 
-  '@nuxt/ui-pro@2.0.0-alpha.2(magicast@0.3.5)(rollup@4.21.3)(vue@3.5.6(typescript@5.6.2))':
+  '@nuxt/ui-pro@2.0.0-alpha.3(magicast@0.3.5)(rollup@4.21.3)(vue@3.5.6(typescript@5.6.2))':
     dependencies:
       '@nuxt/kit': 3.13.2(magicast@0.3.5)(rollup@4.21.3)
       '@nuxt/schema': 3.13.2(rollup@4.21.3)
