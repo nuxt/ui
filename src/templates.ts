@@ -53,13 +53,13 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
     getContents: () => `import * as ui from '#build/ui'
 import type { DeepPartial } from '#ui/types/utils'
 
-const colors = ${JSON.stringify(options.colors)} as const;
+const colors = ${JSON.stringify(options.theme?.colors || [])} as const;
 const icons = ${JSON.stringify(nuxt.options.appConfig.ui.icons)};
 
 type AppConfigUI = {
   colors?: {
-    primary?: Exclude<typeof colors[number], 'error'>
-    error?: Exclude<typeof colors[number], 'primary'>
+    primary?: Exclude<typeof colors[number], 'error' | 'primary'>
+    error?: Exclude<typeof colors[number], 'primary' | 'error'>
     gray?: 'slate' | 'cool' | 'zinc' | 'neutral' | 'stone'
   }
   icons?: Partial<typeof icons>
