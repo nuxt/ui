@@ -25,8 +25,8 @@ export default (options: Required<ModuleOptions>) => ({
         itemLeadingIcon: 'text-gray-700 dark:text-gray-200'
       },
       false: {
-        item: ['text-gray-700 dark:text-gray-200 data-highlighted:text-gray-900 dark:data-highlighted:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-highlighted:before:bg-gray-50 dark:data-highlighted:before:bg-gray-800/50 data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50', options.theme?.transitions && 'transition-colors before:transition-colors'],
-        itemLeadingIcon: ['text-gray-400 dark:text-gray-500 group-data-highlighted:text-gray-700 dark:group-data-highlighted:text-gray-200 group-data-[state=open]:text-gray-700 dark:group-data-[state=open]:text-gray-200', options.theme?.transitions && 'transition-colors']
+        item: ['text-gray-700 dark:text-gray-200 data-highlighted:text-gray-900 dark:data-highlighted:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-highlighted:before:bg-gray-50 dark:data-highlighted:before:bg-gray-800/50 data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50', options.theme.transitions && 'transition-colors before:transition-colors'],
+        itemLeadingIcon: ['text-gray-400 dark:text-gray-500 group-data-highlighted:text-gray-700 dark:group-data-highlighted:text-gray-200 group-data-[state=open]:text-gray-700 dark:group-data-[state=open]:text-gray-200', options.theme.transitions && 'transition-colors']
       }
     },
     size: {

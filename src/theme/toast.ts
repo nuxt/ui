@@ -15,7 +15,7 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, {
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
         icon: `text-${color}-500 dark:text-${color}-400`,
         progress: `bg-${color}-500 dark:bg-${color}-400`
       }])),

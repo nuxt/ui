@@ -17,7 +17,7 @@ export default (options: Required<ModuleOptions>) => ({
       'elastic': ''
     },
     color: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, {
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
         indicator: `bg-${color}-500 dark:bg-${color}-400`,
         steps: `text-${color}-500 dark:text-${color}-400`
       }])),

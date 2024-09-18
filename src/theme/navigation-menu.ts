@@ -33,7 +33,7 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, {
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
         link: `focus-visible:before:ring-${color}-500 dark:focus-visible:before:ring-${color}-400`,
         childLink: `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
       }])),
@@ -43,7 +43,7 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     highlightColor: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
       gray: ''
     },
     variant: {
@@ -70,8 +70,8 @@ export default (options: Required<ModuleOptions>) => ({
       false: {
         link: 'text-gray-500 dark:text-gray-400',
         linkLeadingIcon: 'text-gray-400 dark:text-gray-500',
-        childLink: ['hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white', options.theme?.transitions && 'transition-colors'],
-        childLinkIcon: ['text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200', options.theme?.transitions && 'transition-colors']
+        childLink: ['hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white', options.theme.transitions && 'transition-colors'],
+        childLinkIcon: ['text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200', options.theme.transitions && 'transition-colors']
       }
     },
     disabled: {
@@ -102,10 +102,10 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     variant: 'pill',
     class: {
-      link: ['hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50', options.theme?.transitions && 'transition-colors before:transition-colors'],
-      linkLeadingIcon: ['group-hover:text-gray-700 dark:group-hover:text-gray-200 group-data-[state=open]:text-gray-700 dark:group-data-[state=open]:text-gray-200', options.theme?.transitions && 'transition-colors']
+      link: ['hover:text-gray-900 dark:hover:text-white hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50 data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[state=open]:before:bg-gray-50 dark:data-[state=open]:before:bg-gray-800/50', options.theme.transitions && 'transition-colors before:transition-colors'],
+      linkLeadingIcon: ['group-hover:text-gray-700 dark:group-hover:text-gray-200 group-data-[state=open]:text-gray-700 dark:group-data-[state=open]:text-gray-200', options.theme.transitions && 'transition-colors']
     }
-  }, ...options.colors.map((color: string) => ({
+  }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'pill',
     active: true,
@@ -133,17 +133,17 @@ export default (options: Required<ModuleOptions>) => ({
     active: true,
     highlight: true,
     class: {
-      link: ['hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50', options.theme?.transitions && 'before:transition-colors']
+      link: ['hover:before:bg-gray-50 dark:hover:before:bg-gray-800/50', options.theme.transitions && 'before:transition-colors']
     }
   }, {
     disabled: false,
     active: false,
     variant: 'link',
     class: {
-      link: ['hover:text-gray-900 dark:hover:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white', options.theme?.transitions && 'transition-colors'],
-      linkLeadingIcon: ['group-hover:text-gray-700 dark:group-hover:text-gray-200 group-data-[state=open]:text-gray-700 dark:group-data-[state=open]:text-gray-200', options.theme?.transitions && 'transition-colors']
+      link: ['hover:text-gray-900 dark:hover:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white', options.theme.transitions && 'transition-colors'],
+      linkLeadingIcon: ['group-hover:text-gray-700 dark:group-hover:text-gray-200 group-data-[state=open]:text-gray-700 dark:group-data-[state=open]:text-gray-200', options.theme.transitions && 'transition-colors']
     }
-  }, ...options.colors.map((color: string) => ({
+  }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'link',
     active: true,
@@ -159,7 +159,7 @@ export default (options: Required<ModuleOptions>) => ({
       link: 'text-gray-900 dark:text-white',
       linkLeadingIcon: 'text-gray-900 dark:text-white'
     }
-  }, ...options.colors.map((highlightColor: string) => ({
+  }, ...(options.theme.colors || []).map((highlightColor: string) => ({
     highlightColor,
     highlight: true,
     active: true,

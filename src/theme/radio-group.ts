@@ -15,7 +15,7 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, {
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
         base: `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`,
         indicator: `bg-${color}-500 dark:bg-${color}-400`
       }])),
