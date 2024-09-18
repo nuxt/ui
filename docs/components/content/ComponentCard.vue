@@ -156,9 +156,11 @@ const generateOptions = (key: string, schema: { kind: string, schema: [], type: 
     options = [...appConfig.ui.colors]
   }
 
-  if (key.toLowerCase() === 'size' && schema?.schema?.length > 0) {
+  const schemaOptions = Object.values(schema?.schema || {})
+
+  if (key.toLowerCase() === 'size' && schemaOptions?.length > 0) {
     const baseSizeOrder = { 'xs': 1, 'sm': 2, 'md': 3, 'lg': 4, 'xl': 5 }
-    schema.schema.sort((a: string, b: string) => {
+    schemaOptions.sort((a: string, b: string) => {
       const aBase = a.match(/[a-zA-Z]+/)[0].toLowerCase()
       const bBase = b.match(/[a-zA-Z]+/)[0].toLowerCase()
 
@@ -173,8 +175,8 @@ const generateOptions = (key: string, schema: { kind: string, schema: [], type: 
     })
   }
 
-  if (schema?.schema?.length > 0 && schema?.kind === 'enum' && !hasIgnoredTypes && optionItem?.restriction !== 'only') {
-    options = schema.schema.filter(option => typeof option === 'string').map((option: string) => option.replaceAll('"', ''))
+  if (schemaOptions?.length > 0 && schema?.kind === 'enum' && !hasIgnoredTypes && optionItem?.restriction !== 'only') {
+    options = schemaOptions.filter(option => typeof option === 'string').map((option: string) => option.replaceAll('"', ''))
   }
 
   if (optionItem?.restriction === 'only') {

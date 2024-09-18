@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.18.5](https://github.com/nuxt/ui/compare/v2.18.4...v2.18.5) (2024-09-18)
+
+
+### Features
+
+* **Form:** add errors slot prop ([#2188](https://github.com/nuxt/ui/issues/2188)) ([67c6a74](https://github.com/nuxt/ui/commit/67c6a74ed15db1ee8a40e9c74ecfef0d3c3e374a))
+
+
+### Bug Fixes
+
+* **Button:** button link not showing disabled classes ([#2185](https://github.com/nuxt/ui/issues/2185)) ([e8ea84a](https://github.com/nuxt/ui/commit/e8ea84a5736759d953664f8f397a2339c212b294))
+* **Carousel:** remove trailing space in next button icon ([#2088](https://github.com/nuxt/ui/issues/2088)) ([1282a5f](https://github.com/nuxt/ui/commit/1282a5f6c001aa05597d458800bafcf6b6419634))
+* **FormGroup:** remove id when used with `RadioGroup` ([#2152](https://github.com/nuxt/ui/issues/2152)) ([7aec42c](https://github.com/nuxt/ui/commit/7aec42ca15aaa0ccc63c520b484cba203fd3232b))
+* **Input:** avoid binding value when type is `file` ([#2047](https://github.com/nuxt/ui/issues/2047)) ([82313e8](https://github.com/nuxt/ui/commit/82313e862cbf21ae631156af4cd057f1383db634))
+* **module:** allow CSS variables in tailwind colors ([#2014](https://github.com/nuxt/ui/issues/2014)) ([7f50c70](https://github.com/nuxt/ui/commit/7f50c7031fecb5ab26a6d0f58b576b2fd0860487))
+* **module:** augment `@nuxt/schema` rather than `nuxt/schema` ([#2171](https://github.com/nuxt/ui/issues/2171)) ([ead904f](https://github.com/nuxt/ui/commit/ead904fd2f2bbb29fd60ccde063bf02daa2cbdbb))
+* **module:** consider user tailwind `configPath` for module as string ([#2074](https://github.com/nuxt/ui/issues/2074)) ([e4ba4f7](https://github.com/nuxt/ui/commit/e4ba4f7c729f99dde51891636605793864812d30))
+* **Pagination:** use links on prev and next button ([#2179](https://github.com/nuxt/ui/issues/2179)) ([c850f85](https://github.com/nuxt/ui/commit/c850f85aaa40c7abbe8cc4dc1bd4705bf7677390))
+* **README:** update license link ([#2154](https://github.com/nuxt/ui/issues/2154)) ([8d79eea](https://github.com/nuxt/ui/commit/8d79eea19b3276b1f1e069d33b98b311e9b91cfd))
+* **Slideover:** bind `rounded` class to panel ([#2187](https://github.com/nuxt/ui/issues/2187)) ([bf32baa](https://github.com/nuxt/ui/commit/bf32baaab01dc4150622f67b3b4a8d02d21b922c))
+* **Slideover:** bind `shadow` class to panel ([#2201](https://github.com/nuxt/ui/issues/2201)) ([d22526c](https://github.com/nuxt/ui/commit/d22526c0c10735a92e63b7d086e7b8534a08d768))
+* **Table:** checkbox can emit the `[@select](https://github.com/select)` event ([#2072](https://github.com/nuxt/ui/issues/2072)) ([b1f691f](https://github.com/nuxt/ui/commit/b1f691f28ca8c94f6b658dcb61eeff06951bd1d0))
+* **Table:** select all rows reactivity issue ([#2200](https://github.com/nuxt/ui/issues/2200)) ([68124de](https://github.com/nuxt/ui/commit/68124de5106e55cb2987a6ba4ec1120d79b51788))
+* **Tabs:** recalculate marker if items change ([#2101](https://github.com/nuxt/ui/issues/2101)) ([82c4926](https://github.com/nuxt/ui/commit/82c4926c090ce7fac48022a93b1b05b877bb48dd))
+* **Textarea:** resolve row count calculation errors caused by scrollbar ([#2040](https://github.com/nuxt/ui/issues/2040)) ([8210936](https://github.com/nuxt/ui/commit/8210936f22fcf6b7eb5b9711e2c29be38956b8d6))
+
 ## [2.18.4](https://github.com/nuxt/ui/compare/v2.18.3...v2.18.4) (2024-08-05)
 
 

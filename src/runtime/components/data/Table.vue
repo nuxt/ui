@@ -326,15 +326,18 @@ export default defineComponent({
     }
 
     function selectAllRows () {
-      props.rows.forEach((row) => {
-        // If the row is already selected, don't select it again
-        if (isSelected(row)) {
-          return
-        }
+      // Create a new array to ensure reactivity
+      const newSelected = [...selected.value]
 
-        // @ts-ignore
-        selected.value.push(row)
+      // If the row is not already selected, add it to the newSelected array
+      props.rows.forEach((row) => {
+        if (!isSelected(row)) {
+          newSelected.push(row)
+        }
       })
+
+      // Reassign the array to trigger Vue's reactivity
+      selected.value = newSelected
     }
 
     function onChange (checked: boolean) {
