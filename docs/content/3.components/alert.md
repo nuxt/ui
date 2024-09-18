@@ -110,7 +110,7 @@ props:
 Use the `close` prop to display a [Button](/components/button) to dismiss the Alert.
 
 ::tip
-A `close` event will be emitted when the close button is clicked.
+An `update:open` event will be emitted when the close button is clicked.
 ::
 
 Use the `close-icon` prop to customize the button [Icon](/components/icon). Defaults to `i-heroicons-x-mark-20-solid`.
