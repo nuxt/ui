@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.0-alpha.2](https://github.com/nuxt/ui/compare/v3.0.0-alpha.1...v3.0.0-alpha.2) (2024-09-18)
+
+
+### Features
+
+* **Button:** loading-auto ([#2198](https://github.com/nuxt/ui/issues/2198)) ([ed18e74](https://github.com/nuxt/ui/commit/ed18e7454986ed104fc73b77e88573b3c1df8566))
+* **module:** improve options ([5076b8c](https://github.com/nuxt/ui/commit/5076b8cc9e908cf289150c668b1707dc1397dba3))
+* **module:** install `@nuxt/fonts` by default ([8898a5d](https://github.com/nuxt/ui/commit/8898a5d6758b1047e35bcdf648362c42de387488))
+
+
+### Bug Fixes
+
+* **Button:** button link not showing disabled classes ([#2189](https://github.com/nuxt/ui/issues/2189)) ([7c2adf2](https://github.com/nuxt/ui/commit/7c2adf2f7fc88174897cc775c752414a8b84f3a9))
+* **Button:** duplicate click handlers ([#2213](https://github.com/nuxt/ui/issues/2213)) ([dd6bf56](https://github.com/nuxt/ui/commit/dd6bf5694ff05ed1eeb9df8c42f833f51dbec66e))
+* **playground:** typecheck ([cf92c5f](https://github.com/nuxt/ui/commit/cf92c5f3f0e0f329844ee60772773a844ea1cc71))
+
 ## [3.0.0-alpha.1](https://github.com/nuxt/ui/compare/v3.0.0-alpha.0...v3.0.0-alpha.1) (2024-09-11)
 
 
