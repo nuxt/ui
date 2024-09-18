@@ -175,6 +175,9 @@ importers:
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
+      shiki-transformer-color-highlight:
+        specifier: ^0.0.0
+        version: 0.0.0
       ufo:
         specifier: ^1.5.4
         version: 1.5.4
@@ -2629,6 +2632,9 @@ packages:
 
   colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
+
+  colorjs.io@0.5.2:
+    resolution: {integrity: sha512-twmVoizEW7ylZSN32OgKdXRmo1qg+wT5/6C3xu5b9QsWzSFAhHLn2xd8ro0diCsKfCj1RdaTP/nrcW+vAoQPIw==}
 
   comma-separated-tokens@2.0.3:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
@@ -5588,6 +5594,9 @@ packages:
     resolution: {integrity: sha512-TiwcRcrkhHvbrZbnRcFYMLl30Dfov3HKqzp5tO5b4pt6G/SezKcYhmDg15zXVBswHmctSAQKznqNW2LO5tTDow==}
     engines: {node: '>=4'}
     hasBin: true
+
+  shiki-transformer-color-highlight@0.0.0:
+    resolution: {integrity: sha512-jzaEo6wdBIYelDNrc0UqoHn2zc6m4AXGVWUrHLbV2pw9V3SYjX5VjNQR0eEGPlXZ9BL9NVYXVxHsVxrOxFDZEw==}
 
   shiki@1.17.7:
     resolution: {integrity: sha512-Zf6hNtWhFyF4XP5OOsXkBTEx9JFPiN0TQx4wSe+Vqeuczewgk2vT4IZhF4gka55uelm052BD5BaHavNqUNZd+A==}
@@ -9656,6 +9665,8 @@ snapshots:
 
   colorette@2.0.20: {}
 
+  colorjs.io@0.5.2: {}
+
   comma-separated-tokens@2.0.3: {}
 
   commander@10.0.1: {}
@@ -13531,6 +13542,12 @@ snapshots:
       glob: 7.2.3
       interpret: 1.4.0
       rechoir: 0.6.2
+
+  shiki-transformer-color-highlight@0.0.0:
+    dependencies:
+      '@shikijs/core': 1.17.7
+      '@shikijs/types': 1.17.7
+      colorjs.io: 0.5.2
 
   shiki@1.17.7:
     dependencies:
