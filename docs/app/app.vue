@@ -113,4 +113,8 @@ provide('files', files)
   --color-green-900: #0A5331;
   --color-green-950: #052E16;
 }
+
+:root {
+  --container-width: 90rem;
+}
 </style>
