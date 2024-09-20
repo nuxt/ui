@@ -86,7 +86,12 @@ export default defineComponent({
 
     const transitionClass = computed(() => {
       if (!props.transition) {
-        return {}
+        return {} as typeof ui.value.transition & {
+          enterFrom: string
+          enterTo: string
+          leaveFrom: string
+          leaveTo: string
+        }
       }
 
       let enterFrom, leaveTo
@@ -120,6 +125,7 @@ export default defineComponent({
         leaveTo
       }
     })
+
     const sideType = computed(() => {
       switch (props.side) {
       case 'left':

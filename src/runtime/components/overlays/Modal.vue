@@ -97,7 +97,7 @@ export default defineComponent({
 
     const transitionClass = computed(() => {
       if (!props.transition) {
-        return {}
+        return {} as typeof ui.value.transition
       }
 
       return {
