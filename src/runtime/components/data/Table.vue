@@ -44,7 +44,7 @@
       </thead>
       <tbody :class="ui.tbody">
         <tr v-if="loadingState && loading && !rows.length">
-          <td :colspan="columns.length + (modelValue ? 1 : 0)">
+          <td :colspan="columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)">
             <slot name="loading-state">
               <div :class="ui.loadingState.wrapper">
                 <UIcon v-if="loadingState.icon" :name="loadingState.icon" :class="ui.loadingState.icon" aria-hidden="true" />
@@ -57,7 +57,7 @@
         </tr>
 
         <tr v-else-if="emptyState && !rows.length">
-          <td :colspan="columns.length + (modelValue ? 1 : 0)">
+          <td :colspan="columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)">
             <slot name="empty-state">
               <div :class="ui.emptyState.wrapper">
                 <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
