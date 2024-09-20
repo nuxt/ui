@@ -18,7 +18,7 @@
     "nuxt-component-meta": "^0.8.2",
     "nuxt-og-image": "^3.0.2",
     "prettier": "^3.3.3",
-    "shiki-transformer-color-highlight": "^0.0.0",
+    "shiki-transformer-color-highlight": "^0.1.0",
     "ufo": "^1.5.4",
     "valibot": "^0.42.0",
     "yup": "^1.4.0",
