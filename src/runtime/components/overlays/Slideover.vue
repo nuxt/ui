@@ -1,11 +1,11 @@
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen" @after-leave="onAfterLeave">
     <HDialog :class="[ui.wrapper, { 'justify-end': side === 'right' }, { 'items-end': side === 'bottom' }]" v-bind="attrs" @close="close">
-      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
+      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition" :class="ui.overlay.transition.enterFrom">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
-      <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
+      <TransitionChild as="template" :appear="appear" v-bind="transitionClass" :class="ui.overlay.transition.enterFrom">
         <HDialogPanel :class="[ui.base, sideType === 'horizontal' ? [ui.width, 'h-full'] : [ui.height, 'w-full'], ui.background, ui.ring, ui.rounded, ui.padding, ui.shadow]">
           <slot />
         </HDialogPanel>
