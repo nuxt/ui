@@ -1,0 +1,15 @@
+{
+  "name": "@nuxt/ui-devtools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "nuxt": "^3.13.1",
+    "@nuxt/ui": "latest"
+  }
+}

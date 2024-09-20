@@ -3,6 +3,8 @@ import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addV
 import { addTemplates } from './templates'
 import icons from './theme/icons'
 import { addCustomTab } from '@nuxt/devtools-kit'
+import sirv from 'sirv'
+import { setupDevtoolsClient } from './devtools/rpc'
 
 export type * from './runtime/types'
 
@@ -119,7 +121,20 @@ export default defineNuxtModule<ModuleOptions>({
 
     addTemplates(options, nuxt)
 
-    if (nuxt.options.dev) {
+    if (nuxt.options.dev && nuxt.options.devtools.enabled) {
+      // installModule('nuxt-component-meta')
+
+      setupDevtoolsClient(options)
+
+      nuxt.options.nitro.routeRules['_ui/**'] = { ssr: false }
+
+      nuxt.hook('vite:serverCreated', async (server) => {
+        server.middlewares.use('/_ui/devtools', sirv(resolve('../devtools/dist'), {
+          single: true,
+          dev: true
+        }))
+      })
+
       nuxt.hook('app:resolve', (app) => {
         app.rootComponent = resolve('./devtools/nuxt-root.vue')
       })
@@ -133,11 +148,9 @@ export default defineNuxtModule<ModuleOptions>({
       extendPages((pages) => {
         pages.unshift({
           name: 'ui-devtools',
-          path: '/_ui/devtools'
+          path: '/_ui/components/:component'
         })
       })
-
-      nuxt.options.nitro.routeRules['_ui/**'] = { ssr: false }
 
       addCustomTab({
         name: 'nuxt-ui',

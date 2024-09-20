@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import * as ui from '#build/ui'
-import { pascalCase } from 'scule'
-import { updateAppConfig } from '#app'
-import { definePageMeta, resolveComponent } from '#imports'
+import { camelCase, upperFirst } from 'scule'
+import { computed, resolveComponent } from '#imports'
 
-definePageMeta({
-  layout: false
-})
+const props = defineProps<{
+  slug: string
+}>()
 
-const componentExample = {
+const componentExamples: Record<string, any> = {
   accordion: {
     component: resolveComponent('UAccordion'),
     props: {
@@ -255,127 +252,22 @@ const componentExample = {
     props: {}
   }
 }
-const appConfig = useAppConfig()
 
-const components = Object.keys(ui).map((key) => {
-  const slots = (ui as any)[key].slots
-
-  return {
-    key,
-    value: key,
-    label: `U${pascalCase(key)}`,
-    slots: slots
-      ? Object.keys(slots)?.map(id => ({
-        id,
-        value: appConfig.ui?.[key]?.slots?.[id] // TODO: default to app.config value
-      }))
-      : [{ id: 'base', value: '' }]
-  }
-})
-
-const component = ref(components.find(c => c.key === 'button'))
-
-const preview = ref()
-const computedUI = computed(() => {
-  if (!component.value) return
-
-  return component.value.slots?.reduce(
-    (acc, slot) => {
-      acc[slot.id] = slot.value
-      return acc
-    },
-    {} as Record<string, any>
-  )
-})
-
-function onHover(slotId: string) {
-  const element = preview.value.querySelector(`[data-slot=${slotId}]`)
-  if (element) {
-    element.classList.add('highlight')
-  }
-}
-
-function onLeave(slotId: string) {
-  const element = preview.value.querySelector(`[data-slot=${slotId}]`)
-  if (element) {
-    element.classList.remove('highlight')
-  }
-}
-
-function saveConfig() {
-  if (!component.value) return
-  updateAppConfig({
-    ui: { [component.value.key]: { slots: computedUI.value } }
-  })
-
-  $fetch('/_ui/config', {
-    method: 'POST',
-    body: appConfig
-  })
-}
+const component = computed(() => componentExamples[props.slug])
 </script>
 
 <template>
-  <div class="relative w-full h-screen">
-    <div
-      class="top-0 h-[49px] border-b border-gray-100 bg-white flex justify-center items-center"
-    >
-      <UInputMenu
-        v-model="component"
-        variant="none"
-        :items="components"
-        class="grow"
-        placeholder="Search component..."
-      />
-
-      <UButton variant="ghost" @click="saveConfig">
-        Save config
-      </UButton>
-    </div>
-    <div
-      class="absolute top-[49px] inset-x-0 bottom-0 overflow-y-scroll grid grid-cols-3 gap-4"
-    >
-      <div
-        v-if="component"
-        ref="preview"
-        class="col-span-2 flex justify-center items-center p-8"
-      >
-        <component
-          :is="componentExample[component.key].component"
-          v-bind="{ ui: computedUI, ...componentExample[component.key].props, class: computedUI.base }"
-        />
-      </div>
-
-      <div class="border-l border-gray-200 overflow-y-scroll">
-        <div
-          v-for="slot in component?.slots"
-          :id="slot.id"
-          :key="slot.id"
-          ref="slotsRef"
-          class="border-b p-4 border-gray-200 font-mono hover:bg-gray-50 transition ease"
-          @mouseenter="onHover(slot.id)"
-          @mouseleave="onLeave(slot.id)"
-        >
-          <p class="text-sm">
-            {{ slot.id }}
-          </p>
-          <UInput v-model="slot.value" variant="ghost" class="w-full px-0" />
-        </div>
-      </div>
-
-      <!-- This is to include tailwind css classes for testing -->
-      <div
-        class="hidden rounded-full bg-black border border-4 border-black border-cool-100 border-red-800 text-black p-1 p-2 p-3 p-4"
-      />
-    </div>
+  <div class="nuxt-ui-component-renderer h-screen w-screen p-8">
+    <component :is="component.component" v-if="component" v-bind="component.props" />
   </div>
 </template>
 
 <style>
-.highlight {
-  outline: dashed;
-  outline-color: blue;
-  outline-width: 1.5px;
-  outline-offset: 2px;
+.nuxt-ui-component-renderer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' transform='scale(3)'%3E%3Crect width='100%25' height='100%25' fill='%23fff'/%3E%3Cpath fill='none' stroke='hsla(0, 0%25, 98%25, 1)' stroke-width='.2' d='M10 0v20ZM0 10h20Z'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
 }
 </style>

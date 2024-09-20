@@ -13,7 +13,7 @@
       :is="SingleRenderer"
       v-else-if="SingleRenderer"
     />
-    <Devtools v-else-if="url === '/_ui/devtools'" />
+    <ComponentRenderer v-else-if="url.startsWith('/_ui/components')" :slug="url?.replace('/_ui/components/', '')" />
     <AppComponent v-else />
   </Suspense>
 </template>
@@ -24,7 +24,7 @@ import AppComponent from '#build/app-component.mjs'
 import ErrorComponent from '#build/error-component.mjs'
 // @ts-expect-error virtual file
 import { componentIslands } from '#build/nuxt.config.mjs'
-import Devtools from './components/Devtools.vue'
+import ComponentRenderer from './ComponentRenderer.vue'
 
 const IslandRenderer = import.meta.server && componentIslands
   ? defineAsyncComponent(() => import('./island-renderer').then(r => r.default || r))
