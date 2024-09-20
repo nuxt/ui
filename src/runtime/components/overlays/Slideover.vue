@@ -5,7 +5,7 @@
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
-      <TransitionChild as="template" :appear="appear" v-bind="transitionClass" :class="ui.overlay.transition.enterFrom">
+      <TransitionChild as="template" :appear="appear" v-bind="transitionClass" :class="transitionClass.enterFrom">
         <HDialogPanel :class="[ui.base, sideType === 'horizontal' ? [ui.width, 'h-full'] : [ui.height, 'w-full'], ui.background, ui.ring, ui.rounded, ui.padding, ui.shadow]">
           <slot />
         </HDialogPanel>
