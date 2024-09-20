@@ -94,13 +94,9 @@ slots:
 
 ### Close
 
-Use the `close` prop to customize or hide the close button displayed in the Slideover's header. You can pass all the props of the [Button](/components/button) component to customize it.
+Use the `close` prop to customize or hide the close button (with `false` value) displayed in the Slideover's header.
 
-::tip
-The close button is not displayed if the `#content` slot is used as it's a part of the header.
-::
-
-Use the `close-icon` prop to customize the button [Icon](/components/icon). Defaults to `i-heroicons-x-mark-20-solid`.
+You can pass all the props of the [Button](/components/button) component to customize it.
 
 ::component-code
 ---
@@ -116,7 +112,39 @@ props:
     color: primary
     variant: outline
     class: 'rounded-full'
-  closeIcon: ''
+slots:
+  default: |
+
+    <UButton label="Open" color="gray" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-full" />
+---
+
+:u-button{label="Open" color="gray" variant="subtle"}
+
+#body
+:placeholder{class="h-full"}
+::
+
+::note
+The close button is not displayed if the `#content` slot is used as it's a part of the header.
+::
+
+### Close Icon
+
+Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-heroicons-x-mark-20-solid`.
+
+::component-code
+---
+prettier: true
+class: 'justify-center'
+ignore:
+  - title
+props:
+  title: 'Slideover with close button'
+  closeIcon: 'i-heroicons-arrow-right'
 slots:
   default: |
 

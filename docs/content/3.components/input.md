@@ -140,7 +140,20 @@ props:
 
 Use the `loading` prop to show a loading icon on the Input.
 
-Use the `loading-icon` prop to customize this icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+::component-code
+---
+ignore:
+  - placeholder
+props:
+  loading: true
+  trailing: false
+  placeholder: 'Search...'
+---
+::
+
+### Loading Icon
+
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
 
 ::component-code
 ---
@@ -148,7 +161,7 @@ ignore:
   - placeholder
 props:
   loading: true
-  loadingIcon: ''
+  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
   trailing: false
   placeholder: 'Search...'
 ---

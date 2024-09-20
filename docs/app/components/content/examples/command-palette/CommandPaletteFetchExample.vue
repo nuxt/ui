@@ -1,0 +1,25 @@
+<script setup lang="ts">
+const searchTerm = ref('')
+
+const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+  transform: (data: any[]) => {
+    return data?.map(user => ({ id: user.id, label: user.name, suffix: user.email, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
+  },
+  lazy: true
+})
+
+const groups = computed(() => [{
+  id: 'users',
+  label: searchTerm.value ? `Users matching “${searchTerm.value}”...` : 'Users',
+  items: users.value || []
+}])
+</script>
+
+<template>
+  <UCommandPalette
+    v-model:search-term="searchTerm"
+    :loading="status === 'pending'"
+    :groups="groups"
+    class="flex-1 h-80"
+  />
+</template>

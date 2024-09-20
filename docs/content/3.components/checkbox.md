@@ -39,13 +39,22 @@ props:
 
 Use the `indeterminate` prop to set the Checkbox to an [indeterminate state](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#indeterminate_state_checkboxes).
 
-Use the `indeterminate-icon` prop to customize this icon. Defaults to `i-heroicons-minus-20-solid`.
+::component-code
+---
+props:
+  indeterminate: true
+---
+::
+
+### Indeterminate Icon
+
+Use the `indeterminate-icon` prop to customize the indeterminate icon. Defaults to `i-heroicons-minus-20-solid`.
 
 ::component-code
 ---
 props:
   indeterminate: true
-  indeterminateIcon: ''
+  indeterminateIcon: 'i-heroicons-plus'
 ---
 ::
 

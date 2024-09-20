@@ -393,7 +393,29 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.che
 
 Use the `loading` prop to show a loading icon on the Select.
 
-Use the `loading-icon` prop to customize this icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+::component-code
+---
+prettier: true
+external:
+  - items
+ignore:
+  - items
+  - defaultValue
+props:
+  loading: true
+  trailing: false
+  defaultValue: 'Backlog'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+### Loading Icon
+
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
 
 ::component-code
 ---
@@ -405,7 +427,7 @@ ignore:
   - defaultValue
 props:
   loading: true
-  loadingIcon: ''
+  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
   trailing: false
   defaultValue: 'Backlog'
   items:

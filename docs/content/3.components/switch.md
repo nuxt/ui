@@ -94,7 +94,21 @@ props:
 
 Use the `loading` prop to show a loading icon on the Switch.
 
-Use the `loading-icon` prop to customize this icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+::component-code
+---
+ignore:
+  - label
+  - defaultValue
+props:
+  loading: true
+  defaultValue: true
+  label: Check me
+---
+::
+
+### Loading Icon
+
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
 
 ::component-code
 ---
@@ -103,7 +117,7 @@ ignore:
   - defaultValue
 props:
   loading: true
-  loadingIcon: ''
+  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
   defaultValue: true
   label: Check me
 ---

@@ -113,8 +113,6 @@ Use the `close` prop to display a [Button](/components/button) to dismiss the Al
 An `update:open` event will be emitted when the close button is clicked.
 ::
 
-Use the `close-icon` prop to customize the button [Icon](/components/icon). Defaults to `i-heroicons-x-mark-20-solid`.
-
 ::component-code
 ---
 prettier: true
@@ -126,15 +124,10 @@ props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
   close: true
-  closeIcon: ''
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
-::
-
-You can pass all the props of the [Button](/components/button) component to customize it.
+You can also pass all the props of the [Button](/components/button) component to customize it.
 
 ::component-code
 ---
@@ -152,6 +145,29 @@ props:
     variant: outline
     class: 'rounded-full'
 ---
+::
+
+### Close Icon
+
+Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-heroicons-x-mark-20-solid`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+  - description
+  - close
+props:
+  title: 'Heads up!'
+  description: 'You can change the primary color in your app config.'
+  close: true
+  closeIcon: 'i-heroicons-arrow-right'
+---
+::
+
+::tip{to="/getting-started/icons#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 ::
 
 ### Actions
