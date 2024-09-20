@@ -1,7 +1,7 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template" @after-leave="onAfterLeave">
     <HDialog :class="ui.wrapper" v-bind="attrs" @close="close">
-      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
+      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition" :class="ui.overlay.transition.enterFrom">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
