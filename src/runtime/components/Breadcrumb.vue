@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
@@ -42,6 +43,7 @@ export type BreadcrumbSlots<T extends { slot?: string }> = {
   'item-trailing': SlotProps<T>
   'separator'(props?: {}): any
 } & DynamicSlots<T, SlotProps<T>>
+
 </script>
 
 <script setup lang="ts" generic="T extends BreadcrumbItem">
