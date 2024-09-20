@@ -372,6 +372,15 @@ export default defineComponent({
         if (props.valueAttribute) {
           return options.value.filter(option => (props.modelValue as any[]).includes(option[props.valueAttribute]))
         }
+
+        if (props.by) {
+          return options.value.filter(
+            option => typeof option === 'object' && option !== null && props.modelValue.some(
+              (value: any) => typeof value === 'object' && value !== null && value[props.by] === option[props.by]
+            )
+          )
+        }
+
         return options.value.filter(option => (props.modelValue as any[]).includes(option))
       }
 
@@ -481,7 +490,7 @@ export default defineComponent({
       }
 
       return props.options || []
-    }, [], {
+    }, props.options || [], {
       lazy: props.searchableLazy
     })
 
