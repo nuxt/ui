@@ -1,13 +1,13 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template" @after-leave="onAfterLeave">
     <HDialog :class="ui.wrapper" v-bind="attrs" @close="close">
-      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
+      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition" :class="ui.overlay.transition.enterFrom">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
       <div :class="ui.inner">
         <div :class="[ui.container, !fullscreen && ui.padding]">
-          <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
+          <TransitionChild as="template" :appear="appear" v-bind="transitionClass" :class="transitionClass.enterFrom">
             <HDialogPanel
               :class="[
                 ui.base,
@@ -97,7 +97,7 @@ export default defineComponent({
 
     const transitionClass = computed(() => {
       if (!props.transition) {
-        return {}
+        return {} as typeof ui.value.transition
       }
 
       return {
