@@ -365,23 +365,35 @@ export default defineComponent({
 
     const selected = computed(() => {
       if (props.multiple) {
-        if (!Array.isArray(props.modelValue) || !props.modelValue.length) {
+        const modelValue = props.modelValue
+        if (!Array.isArray(modelValue) || !modelValue.length) {
           return []
         }
 
         if (props.valueAttribute) {
-          return options.value.filter(option => (props.modelValue as any[]).includes(option[props.valueAttribute]))
+          if (props.by) {
+            // handle the case when the valueAttribute is an object, and we need to compare by a specific key
+            return options.value.filter(
+              option => typeof option === 'object' && option !== null
+                && typeof option[props.valueAttribute] === 'object' && option[props.valueAttribute] !== null && modelValue.some(
+                  (value: any) => typeof value === 'object' && value !== null && value[props.by] === option[props.valueAttribute][props.by]
+                )
+            )
+          }
+
+          // compute selected items by the valueAttribute form the options
+          return options.value.filter(option => modelValue.includes(option[props.valueAttribute]))
         }
 
         if (props.by) {
           return options.value.filter(
-            option => typeof option === 'object' && option !== null && (props.modelValue as any[]).some(
+            option => typeof option === 'object' && option !== null && modelValue.some(
               (value: any) => typeof value === 'object' && value !== null && value[props.by] === option[props.by]
             )
           )
         }
 
-        return options.value.filter(option => (props.modelValue as any[]).includes(option))
+        return options.value.filter(option => modelValue.includes(option))
       }
 
       if (props.valueAttribute) {
