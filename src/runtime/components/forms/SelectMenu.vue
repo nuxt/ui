@@ -375,7 +375,7 @@ export default defineComponent({
 
         if (props.by) {
           return options.value.filter(
-            option => typeof option === 'object' && option !== null && props.modelValue.some(
+            option => typeof option === 'object' && option !== null && (props.modelValue as any[]).some(
               (value: any) => typeof value === 'object' && value !== null && value[props.by] === option[props.by]
             )
           )
