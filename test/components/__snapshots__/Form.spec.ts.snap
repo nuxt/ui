@@ -124,9 +124,9 @@ exports[`Form > joi validation works > without error 1`] = `
 </form>"
 `;
 
-exports[`Form > renders with default slot correctly 1`] = `"<form id="1" class="">Form slot</form>"`;
+exports[`Form > renders with default slot correctly 1`] = `"<form id="v-0-0" class="">Form slot</form>"`;
 
-exports[`Form > renders with state correctly 1`] = `"<form id="0" class=""></form>"`;
+exports[`Form > renders with state correctly 1`] = `"<form id="v-0-0" class=""></form>"`;
 
 exports[`Form > valibot safeParser validation works > with error 1`] = `
 "<form id="42" class="">
