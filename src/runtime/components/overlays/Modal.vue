@@ -7,7 +7,7 @@
 
       <div :class="ui.inner">
         <div :class="[ui.container, !fullscreen && ui.padding]">
-          <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
+          <TransitionChild as="template" :appear="appear" v-bind="transitionClass" :class="ui.overlay.transition.enterFrom">
             <HDialogPanel
               :class="[
                 ui.base,
