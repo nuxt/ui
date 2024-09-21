@@ -4,7 +4,7 @@
       Hover
     </slot>
 
-    <div v-if="open && !prevent" ref="container" :class="[ui.container, ui.width]">
+    <div v-if="open && !prevent && isVisible" ref="container" :class="[ui.container, ui.width]">
       <Transition appear v-bind="ui.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
@@ -94,6 +94,8 @@ export default defineComponent({
     let openTimeout: NodeJS.Timeout | null = null
     let closeTimeout: NodeJS.Timeout | null = null
 
+    let isVisible = computed<boolean>(() => !!(useSlots().text || props.text));
+
     // Methods
 
     function onMouseEnter () {
@@ -138,7 +140,8 @@ export default defineComponent({
       container,
       open,
       onMouseEnter,
-      onMouseLeave
+      onMouseLeave,
+      isVisible
     }
   }
 })
