@@ -15,6 +15,9 @@ onDevtoolsClientConnected(async (client) => {
     component.value = components.value.find(comp => comp.slug === 'button')
   }
 })
+
+// Disable devtools in component renderer iframe
+window.__NUXT_DEVTOOLS_DISABLE__ = true
 </script>
 
 <template>
