@@ -37,6 +37,7 @@
     "docs": "DEV=true nuxi dev docs",
     "docs:build": "nuxi build docs",
     "docs:prepare": "nuxt-component-meta docs",
+    "devtools": "NUXT_UI_DEVTOOLS_LOCAL=true nuxi dev playground",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck docs",

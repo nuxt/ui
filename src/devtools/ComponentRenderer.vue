@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { camelCase, upperFirst } from 'scule'
 import { computed, resolveComponent } from '#imports'
 
 const props = defineProps<{

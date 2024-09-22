@@ -2,11 +2,10 @@ import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, extendPages, addServerHandler, hasNuxtModule } from '@nuxt/kit'
 import { addTemplates } from './templates'
 import icons from './theme/icons'
-import { addCustomTab } from '@nuxt/devtools-kit'
+import { addCustomTab, startSubprocess } from '@nuxt/devtools-kit'
 import sirv from 'sirv'
 import { setupDevtoolsClient } from './devtools/rpc'
-
-export type * from './runtime/types'
+import { getPort } from 'get-port-please'
 
 export interface ModuleOptions {
   /**
@@ -126,14 +125,53 @@ export default defineNuxtModule<ModuleOptions>({
 
       setupDevtoolsClient(options)
 
+      nuxt.options.nitro.routeRules ||= {}
       nuxt.options.nitro.routeRules['_ui/**'] = { ssr: false }
 
-      nuxt.hook('vite:serverCreated', async (server) => {
-        server.middlewares.use('/_ui/devtools', sirv(resolve('../devtools/dist'), {
-          single: true,
-          dev: true
-        }))
-      })
+      // Runs UI devtools in a subprocess for local development
+      if (process.env.NUXT_UI_DEVTOOLS_LOCAL) {
+        const PORT = await getPort({ port: 42124 })
+        nuxt.hook('app:resolve', () => {
+          startSubprocess(
+            {
+              command: 'pnpm',
+              args: ['nuxi', 'dev'],
+              cwd: './devtools',
+              stdio: 'pipe',
+              env: {
+                PORT: PORT.toString()
+              }
+            },
+            {
+              id: 'ui:devtools:local',
+              name: 'Nuxt UI DevTools Local',
+              icon: 'logos-nuxt-icon'
+            },
+            nuxt
+          )
+        })
+
+        nuxt.hook('vite:extendConfig', (config) => {
+          config.server ||= {}
+          // add proxy to client
+          config.server.proxy ||= {}
+          // TODO: ws proxy is not working
+          config.server.proxy['/_ui/devtools'] = {
+            target: `http://localhost:${PORT}`,
+            changeOrigin: true,
+            followRedirects: true,
+            ws: true,
+            rewriteWsOrigin: true
+          }
+        })
+      } else {
+        nuxt.hook('vite:serverCreated', async (server) => {
+          server.middlewares.use('/_ui/devtools', sirv(resolve('../devtools/dist'), {
+            single: true,
+            dev: true
+          }))
+        })
+      }
 
       nuxt.hook('app:resolve', (app) => {
         app.rootComponent = resolve('./devtools/nuxt-root.vue')

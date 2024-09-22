@@ -19,5 +19,14 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4
   },
+
+  vite: {
+    server: {
+      hmr: {
+        clientPort: process.env.PORT ? +process.env.PORT : undefined
+      }
+    }
+  },
+
   compatibilityDate: '2024-04-03'
 })
