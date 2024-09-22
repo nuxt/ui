@@ -36,7 +36,7 @@ import type { PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, get } from '../../utils'
-import type { Strategy } from '../../types/index'
+import type { DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { radioGroup, radio } from '#ui/ui.config'
@@ -91,11 +91,11 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     },
     uiRadio: {
-      type: Object as PropType<Partial<typeof configRadio> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof configRadio> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },

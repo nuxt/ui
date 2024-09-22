@@ -25,7 +25,7 @@ import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, nuxtLinkProps, getNuxtLinkProps } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { ButtonColor, ButtonSize, ButtonVariant, Strategy } from '../../types/index'
+import type { ButtonColor, ButtonSize, ButtonVariant, DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { button } from '#ui/ui.config'
@@ -125,7 +125,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },

@@ -27,7 +27,7 @@ import UNotification from './Notification.vue'
 import { useUI } from '../../composables/useUI'
 import { useToast } from '../../composables/useToast'
 import { mergeConfig } from '../../utils'
-import type { Notification, Strategy } from '../../types/index'
+import type { DeepPartial, Notification, Strategy } from '../../types/index'
 import { useState } from '#imports'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -46,7 +46,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
