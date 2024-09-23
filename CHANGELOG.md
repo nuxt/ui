@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.18.6](https://github.com/nuxt/ui/compare/v2.18.5...v2.18.6) (2024-09-23)
+
+
+### Bug Fixes
+
+* **components:** accept partial config in `ui` prop ([#2235](https://github.com/nuxt/ui/issues/2235)) ([eecf4f7](https://github.com/nuxt/ui/commit/eecf4f7ed8a32a874f00afd7bff2964a1366e0b5))
+* **Modal/Slideover:** bind transition class to `TransitionChild` for Vue 3.5 ([#2227](https://github.com/nuxt/ui/issues/2227)) ([803c20a](https://github.com/nuxt/ui/commit/803c20ad92e8a31fefd6d300856735b0e9adbdf9))
+* **SelectMenu:** wrong placeholder color with multiple ([#2218](https://github.com/nuxt/ui/issues/2218)) ([28ad5cf](https://github.com/nuxt/ui/commit/28ad5cf98251c6a8acec8d0bf4f0fd07ff6b7066))
+* **Table:** colspan with expand ([#2217](https://github.com/nuxt/ui/issues/2217)) ([56118c4](https://github.com/nuxt/ui/commit/56118c4a794f3d763dad7b65e044814cf7ef11cf))
+* **Tabs:** handle icon `margin` in RTL mode ([#2233](https://github.com/nuxt/ui/issues/2233)) ([ea05414](https://github.com/nuxt/ui/commit/ea05414930fe3f5e6805c8aa25bbe8f746bcc86e))
+* **useFormField:** optional property access ([#2226](https://github.com/nuxt/ui/issues/2226)) ([0a054a5](https://github.com/nuxt/ui/commit/0a054a52b64b4f774041c40223e18e7e056cfd80))
+
 ## [2.18.5](https://github.com/nuxt/ui/compare/v2.18.4...v2.18.5) (2024-09-18)
 
 
