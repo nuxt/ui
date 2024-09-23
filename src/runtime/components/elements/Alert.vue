@@ -47,7 +47,7 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
-import type { Avatar, Button, AlertColor, AlertVariant, AlertAction, Strategy } from '../../types/index'
+import type { Avatar, Button, AlertColor, AlertVariant, AlertAction, Strategy, DeepPartial } from '../../types/index'
 import { mergeConfig } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -109,7 +109,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },

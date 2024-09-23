@@ -78,7 +78,7 @@ import type { RouteLocationRaw } from '#vue-router'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Button, ButtonSize, Strategy } from '../../types/index'
+import type { Button, ButtonSize, DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { pagination, button } from '#ui/ui.config'
@@ -168,7 +168,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
