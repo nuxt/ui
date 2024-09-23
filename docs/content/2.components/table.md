@@ -30,7 +30,19 @@ Use the `columns` prop to configure which columns to display. It's an array of o
 - `direction` - The sort direction to use on first click. Defaults to `asc`.
 - `class` - The class to apply to the column cells.
 - `rowClass` - The class to apply to the data column cells. :u-badge{label="New" class="!rounded-full" variant="subtle"}
-- `sort` - Pass your own `sort` function. Defaults to a simple _greater than_ / _less than_ comparison.
+- `sort` - Pass your own `sort` function. Defaults to a simple _greater than_ / _less than_ comparison. 
+
+Arguments for the `sort` function are: Value A, Value B, Direction - 'asc' or 'desc'
+
+Example `sort` function:
+```
+(a, b, direction) => {
+  if (!a || !b) return 0
+  const aPrice = parseInt(a.replace(/[,$]/g, ""))
+  const bPrice = parseInt(b.replace(/[,$]/g, ""))
+  return direction === "asc" ? aPrice - bPrice : bPrice - aPrice
+}
+```
 
 ::component-example{class="grid"}
 ---
