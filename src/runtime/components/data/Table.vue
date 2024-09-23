@@ -82,7 +82,7 @@
               >
                 <UButton
                   v-bind="{ ...(ui.default.expandButton || {}), ...expandButton }"
-                  :ui="{ icon: { base: [ui.expand.icon, openedRows.includes(index) && 'rotate-180'] } }"
+                  :ui="{ icon: { base: [ui.expand.icon, openedRows.includes(index) && 'rotate-180'].join(' ') } }"
                   @click="toggleOpened(index)"
                 />
               </td>
