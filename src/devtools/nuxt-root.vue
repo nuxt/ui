@@ -13,7 +13,7 @@
       :is="SingleRenderer"
       v-else-if="SingleRenderer"
     />
-    <ComponentRenderer v-else-if="url.startsWith('/_ui/components')" :slug="url?.replace('/_ui/components/', '')" />
+    <ComponentRenderer v-else-if="url.startsWith('/__nuxt_ui__/components')" :slug="url?.replace('/__nuxt_ui__/components/', '')" />
     <AppComponent v-else />
   </Suspense>
 </template>

@@ -10,10 +10,13 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: ['../src/module'],
+  modules: [
+    '../src/module',
+    '@nuxtjs/mdc'
+  ],
 
   app: {
-    baseURL: '/_ui/devtools'
+    baseURL: '/__nuxt_ui__/devtools'
   },
 
   future: {

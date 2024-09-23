@@ -53,7 +53,6 @@ export default defineNuxtModule<ModuleOptions>({
   },
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
-
     options.colors = options.colors?.length ? [...new Set(['primary', 'error', ...options.colors])] : ['primary', 'error', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
 
     nuxt.options.ui = options
@@ -121,12 +120,29 @@ export default defineNuxtModule<ModuleOptions>({
     addTemplates(options, nuxt)
 
     if (nuxt.options.dev && nuxt.options.devtools.enabled) {
-      // installModule('nuxt-component-meta')
+      installModule('nuxt-component-meta')
 
-      setupDevtoolsClient(options)
+      // @ts-ignore
+      nuxt.options.componentMeta ||= {}
+      // @ts-ignore
+      nuxt.options.componentMeta.exclude ||= []
+      // @ts-ignore
+      nuxt.options.componentMeta.exclude.push(
+        '@nuxt/content',
+        '@nuxt/icon',
+        '@nuxt/image',
+        '@nuxt/ui-pro',
+        '@nuxtjs/color-mode',
+        '@nuxtjs/mdc',
+        '@nuxtjs/plausible',
+        'nuxt/dist',
+        'nuxt-og-image'
+      )
+
+      setupDevtoolsClient(options, nuxt)
 
       nuxt.options.nitro.routeRules ||= {}
-      nuxt.options.nitro.routeRules['_ui/**'] = { ssr: false }
+      nuxt.options.nitro.routeRules['__nuxt_ui__/**'] = { ssr: false }
 
       // Runs UI devtools in a subprocess for local development
       if (process.env.NUXT_UI_DEVTOOLS_LOCAL) {
@@ -156,7 +172,7 @@ export default defineNuxtModule<ModuleOptions>({
           // add proxy to client
           config.server.proxy ||= {}
           // TODO: ws proxy is not working
-          config.server.proxy['/_ui/devtools'] = {
+          config.server.proxy['/__nuxt_ui__/devtools'] = {
             target: `http://localhost:${PORT}`,
             changeOrigin: true,
             followRedirects: true,
@@ -166,7 +182,7 @@ export default defineNuxtModule<ModuleOptions>({
         })
       } else {
         nuxt.hook('vite:serverCreated', async (server) => {
-          server.middlewares.use('/_ui/devtools', sirv(resolve('../devtools/dist'), {
+          server.middlewares.use('/__nuxt_ui__/devtools', sirv(resolve('../devtools/dist'), {
             single: true,
             dev: true
           }))
@@ -178,7 +194,7 @@ export default defineNuxtModule<ModuleOptions>({
       })
 
       addServerHandler({
-        route: '/_ui/config',
+        route: '/api/__nuxt_ui__/config',
         handler: resolve('./devtools/server/config.post.ts'),
         method: 'POST'
       })
@@ -186,7 +202,7 @@ export default defineNuxtModule<ModuleOptions>({
       extendPages((pages) => {
         pages.unshift({
           name: 'ui-devtools',
-          path: '/_ui/components/:component'
+          path: '/__nuxt_ui__/components/:component'
         })
       })
 
@@ -196,7 +212,7 @@ export default defineNuxtModule<ModuleOptions>({
         icon: 'bx:paint',
         view: {
           type: 'iframe',
-          src: '/_ui/devtools'
+          src: '/__nuxt_ui__/devtools'
         }
       })
     }

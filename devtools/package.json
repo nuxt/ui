@@ -9,7 +9,8 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
-    "nuxt": "^3.13.1",
-    "@nuxt/ui": "latest"
+    "@nuxt/ui": "latest",
+    "@nuxtjs/mdc": "^0.9.0",
+    "nuxt": "^3.13.1"
   }
 }

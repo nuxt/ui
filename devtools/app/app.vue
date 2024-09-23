@@ -1,45 +1,142 @@
 <script setup lang="ts">
 import { onDevtoolsClientConnected } from '@nuxt/devtools-kit/iframe-client'
 import type { ClientFunctions, ServerFunctions, Component } from '../../src/devtools/rpc'
+import type { BirpcReturn } from 'birpc'
+import { watchDebounced } from '@vueuse/core'
+import defu from 'defu'
 
-const components = useState<Array<Component & { value: string }>>('ui-devtools-components')
-const component = useState<Component>('ui-devtools-component')
-
-onDevtoolsClientConnected(async (client) => {
-  const rpc = client.devtools.extendClientRpc<ServerFunctions, ClientFunctions>('nuxt/ui/devtools', { })
-
-  // call server RPC functions
-  components.value = (await rpc.getComponents()).map(component => ({ ...component, value: component.slug }))
-
-  if (!component.value || !components.value.find(c => c.slug === component.value.slug)) {
-    component.value = components.value.find(comp => comp.slug === 'button')
-  }
-})
-
+// @ts-ignore
 // Disable devtools in component renderer iframe
 window.__NUXT_DEVTOOLS_DISABLE__ = true
+
+const components = useState<Array<Component & { value: string }>>('__ui-devtools-components')
+const component = useState<Component | undefined>('__ui-devtools-component')
+const state = useState<Record<string, any>>('__ui-devtools-state', () => ({}))
+
+let rpc: BirpcReturn<ServerFunctions, ClientFunctions> | null = null
+
+onDevtoolsClientConnected(async (client) => {
+  rpc = client.devtools.extendClientRpc<ServerFunctions, ClientFunctions>('nuxt/ui/devtools', { })
+  components.value = (await rpc.getComponents()).map(component => ({ ...component, value: component.slug }))
+
+  if (!component.value || !components.value.find(c => c.slug === component.value?.slug)) {
+    component.value = components.value.find(comp => comp.slug === 'button')
+  }
+
+  state.value.props = defu(state.value.props, components.value?.reduce((acc, comp) => {
+    acc[comp.slug] = comp.defaultVariants ?? {}
+    return acc
+  }, {} as Record<string, any>))
+
+  state.value.slots = defu(state.value.slots, components.value.reduce((acc, comp) => {
+    acc[comp.slug] = {} // comp.slots ?? {}
+    return acc
+  }, {} as Record<string, any>))
+})
+
+function updateRenderer() {
+  if (!component.value) return
+
+  const event: Event & { data?: any } = new Event('nuxt-ui-devtools:update-renderer')
+  event.data = { props: state.value.props?.[component.value.slug], slots: state.value.slots?.[component.value?.slug] }
+
+  window.dispatchEvent(event)
+}
+
+watchDebounced(state, updateRenderer, { deep: true, debounce: 200, maxWait: 500 })
+
+onMounted(() => {
+  window.addEventListener('nuxt-ui-devtools:component-loaded', (event: Event & { data?: any }) => {
+    if (!component.value) return
+    state.value.props[component.value.slug] = defu(state.value.props[component.value.slug], event.data?.props)
+  })
+})
+
+const accordionItems = computed(() => {
+  if (!component.value) return
+
+  const themeCount = component.value.meta.slots ? Object.keys(component.value.meta.slots)?.length : 0
+
+  return [
+    { label: 'Props', slot: 'props', icon: 'i-heroicons-cog-6-tooth', description: `${component.value.meta.props.length} props`, disabled: !component.value.meta.props?.length },
+    { label: 'Theme', slot: 'theme', icon: 'i-heroicons-paint-brush', description: `${themeCount} theme slots`, disabled: !themeCount }
+  ]
+})
+
+function onSlotHover(slot: string) {
+  const event: Event & { data?: any } = new Event('nuxt-ui-devtools:slot-hover')
+  event.data = { slot }
+  window.dispatchEvent(event)
+}
+
+function onSlotLeave(slot: string) {
+  const event: Event & { data?: any } = new Event('nuxt-ui-devtools:slot-leave')
+  event.data = { slot }
+  window.dispatchEvent(event)
+}
 </script>
 
 <template>
-  <UApp class="h-screen w-full relative">
+  <UApp class="h-screen w-full relative font-sans">
     <div
-      class="top-0 h-[49px] border-b border-gray-200 bg-white flex justify-center items-center px-2"
+      class="top-0 h-[49px] border-b border-gray-200 bg-white flex px-2"
     >
       <UInputMenu
         v-model="component"
         variant="none"
         :items="components"
+        trailing-icon="i-heroicons-magnifying-glass-20-solid"
         class="grow"
         placeholder="Search component..."
-        size="xl"
       />
     </div>
-    <div v-if="component" class="absolute top-[49px] bottom-0 inset-x-0 grid grid-cols-2 border-l border-gray-100">
-      <div class="bg-white">
-        <!-- TODO: Add component configuration and documentation -->
+    <div v-if="component" class="absolute top-[49px] bottom-0 inset-x-0 grid grid-cols-2">
+      <div class="bg-white border-r border-gray-200 flex flex-col overflow-y-scroll">
+        <UAccordion :items="accordionItems" class="border-b border-gray-200" multiple :ui="{ trigger: 'px-2.5 py-4.5 text-start hover:bg-gray-100 transition ease duration-150 gap-2.5 data-[state=closed]:opacity-80' }">
+          <template #leading="{ item }">
+            <UIcon :name="item.icon" class="size-6 text-gray-700" />
+          </template>
+
+          <template #="{ item }">
+            <p class="font-sans font-medium">
+              {{ item.label }}
+            </p>
+            <p class="text-sm font-sans text-gray-500">
+              {{ item.description }}
+            </p>
+          </template>
+
+          <template #props>
+            <div v-for="prop in component.meta?.props.filter((prop) => prop.name !== 'ui')" class="p-3">
+              <UFormField :name="prop.name">
+                <template #label>
+                  <p class="font-mono font-bold px-2 py-0.5 border-gray-300 border border-dashed rounded bg-gray-50">
+                    {{ prop?.name }}
+                  </p>
+                </template>
+                <template #description>
+                  <MDC v-if="prop.description" :value="prop.description" class="text-gray-600 dark:text-gray-300 mt-1" />
+                </template>
+                <ComponentPropInput v-bind="prop" v-model="state.props[component.slug][prop.name]" class="mt-2" />
+              </UFormField>
+            </div>
+          </template>
+          <template #theme>
+            <div v-for="(_value, slot) in component.slots" class="p-3 hover:bg-gray-50 transition">
+              <UFormField :name="slot" @mouseenter="onSlotHover(slot)" @mouseleave="onSlotLeave(slot)">
+                <template #label>
+                  <p class="font-mono font-bold px-2 py-0.5 border-gray-300 border border-dashed rounded bg-gray-100">
+                    {{ slot }}
+                  </p>
+                </template>
+                <UTextarea v-model="state.slots[component.slug][slot]" autoresize class="mt-2 w-full font-mono" />
+              </UFormField>
+            </div>
+          </template>
+        </UAccordion>
       </div>
       <div>
-        <iframe class="h-full w-full" :src="`/_ui/components/${component.slug}`" />
+        <iframe class="h-full w-full" :src="`/__nuxt_ui__/components/${component.slug}`" />
       </div>
     </div>
   </UApp>
