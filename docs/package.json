@@ -4,7 +4,7 @@
   "type": "module",
   "dependencies": {
     "@iconify-json/heroicons": "^1.2.0",
-    "@iconify-json/simple-icons": "^1.2.3",
+    "@iconify-json/simple-icons": "^1.2.4",
     "@iconify-json/vscode-icons": "^1.2.2",
     "@nuxt/content": "^2.13.2",
     "@nuxt/image": "^1.8.0",
@@ -20,7 +20,7 @@
     "prettier": "^3.3.3",
     "shiki-transformer-color-highlight": "^0.1.0",
     "ufo": "^1.5.4",
-    "valibot": "^0.42.0",
+    "valibot": "^0.42.1",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
   }
