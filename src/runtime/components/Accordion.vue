@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { AccordionRootProps, AccordionRootEmits, AccordionItemProps } from 'radix-vue'
@@ -47,6 +48,7 @@ export type AccordionSlots<T extends { slot?: string }> = {
   content: SlotProps<T>
   body: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
+
 </script>
 
 <script setup lang="ts" generic="T extends AccordionItem">

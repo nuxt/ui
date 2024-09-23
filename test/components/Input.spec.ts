@@ -19,6 +19,7 @@ describe('Input', () => {
     ['with placeholder', { props: { placeholder: 'Search...' } }],
     ['with disabled', { props: { disabled: true } }],
     ['with required', { props: { required: true } }],
+    ['with file type', { props: { type: 'file' } }],
     ['with icon', { props: { icon: 'i-heroicons-magnifying-glass' } }],
     ['with leading and icon', { props: { leading: true, icon: 'i-heroicons-magnifying-glass' } }],
     ['with leadingIcon', { props: { leadingIcon: 'i-heroicons-magnifying-glass' } }],

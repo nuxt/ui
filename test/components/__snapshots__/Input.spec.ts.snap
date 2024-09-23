@@ -21,6 +21,13 @@ exports[`Input > renders with disabled correctly 1`] = `
 </div>"
 `;
 
+exports[`Input > renders with file type correctly 1`] = `
+"<div class="relative inline-flex items-center"><input type="file" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 file:mr-1.5 file:font-medium file:text-gray-500 dark:file:text-gray-400 file:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Input > renders with gray variant ghost correctly 1`] = `
 "<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white hover:bg-gray-100 focus:bg-gray-100 disabled:bg-transparent dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:disabled:bg-transparent" autocomplete="off">
   <!--v-if-->
