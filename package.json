@@ -67,7 +67,7 @@
     "nuxt": "^3.13.2",
     "release-it": "^17.6.0",
     "unbuild": "^2.0.0",
-    "valibot": "^0.42.0",
+    "valibot": "^0.42.1",
     "valibot30": "npm:valibot@0.30.0",
     "valibot31": "npm:valibot@0.31.0",
     "vitest": "^2.1.1",
