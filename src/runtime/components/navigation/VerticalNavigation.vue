@@ -63,7 +63,7 @@ import ULink from '../elements/Link.vue'
 import UDivider from '../layout/Divider.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getULinkProps } from '../../utils'
-import type { VerticalNavigationLink, Strategy } from '../../types/index'
+import type { VerticalNavigationLink, Strategy, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { verticalNavigation } from '#ui/ui.config'
@@ -89,7 +89,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },

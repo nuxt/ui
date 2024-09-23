@@ -41,7 +41,7 @@ import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getULinkProps } from '../../utils'
-import type { BreadcrumbLink, Strategy } from '../../types/index'
+import type { BreadcrumbLink, DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { breadcrumb } from '#ui/ui.config'
@@ -68,7 +68,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
