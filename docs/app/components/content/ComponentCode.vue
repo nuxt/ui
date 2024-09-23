@@ -251,7 +251,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
         </template>
       </div>
 
-      <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class]">
+      <div class="flex justify-center border border-b-0 border-gray-300 dark:border-gray-700 relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class]">
         <component :is="name" v-bind="componentProps" @update:model-value="!!componentProps.modelValue && setComponentProp('modelValue', $event)">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <ContentSlot :name="slot" unwrap="p">

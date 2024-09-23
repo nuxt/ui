@@ -497,7 +497,6 @@ You will have access to the following slots:
 ::component-example
 ---
 name: 'navigation-menu-custom-slot-example'
-class: 'justify-center'
 ---
 ::
 

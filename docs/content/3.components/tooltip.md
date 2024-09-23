@@ -28,7 +28,6 @@ Use the `text` prop to set the content of the Tooltip.
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 props:
   text: 'Open on GitHub'
 slots:
@@ -75,7 +74,6 @@ Use the `delay-duration` prop to change the delay before the Tooltip appears. Fo
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - text
 props:
@@ -101,7 +99,6 @@ Use the `content` prop to control how the Tooltip content is rendered, like its 
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - text
 items:
@@ -136,7 +133,6 @@ Use the `arrow` prop to display an arrow on the Tooltip.
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - text
   - arrow
@@ -159,7 +155,6 @@ Use the `disabled` prop to disable the Tooltip.
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - text
 props:
@@ -183,7 +178,6 @@ You can control the open state by using the `default-open` prop or the `v-model:
 ::component-example
 ---
 name: 'tooltip-open-example'
-class: 'justify-center'
 ---
 ::
 

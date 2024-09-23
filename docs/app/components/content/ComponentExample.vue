@@ -128,7 +128,7 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
           </UFormField>
         </div>
 
-        <div class="flex p-4" :class="props.class">
+        <div class="flex justify-center p-4" :class="props.class">
           <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
         </div>
       </div>

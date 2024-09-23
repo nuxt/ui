@@ -18,7 +18,6 @@ Then, use the `#content` slot to add the content displayed when the Drawer is op
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 slots:
   default: |
 
@@ -44,7 +43,6 @@ Use the `title` prop to set the title of the Drawer's header.
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 props:
   title: 'Drawer with title'
 slots:
@@ -70,7 +68,6 @@ Use the `description` prop to set the description of the Drawer's header.
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - title
 props:
@@ -99,7 +96,6 @@ Use the `overlay` prop to control whether the Drawer has an overlay or not. Defa
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 props:
   overlay: false
 slots:
@@ -125,7 +121,6 @@ Use the `should-scale-background` prop to scale the background when the Drawer i
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 props:
   shouldScaleBackground: true
 slots:
@@ -180,7 +175,6 @@ You can control the open state by using the `default-open` prop or the `v-model:
 ::component-example
 ---
 name: 'drawer-open-example'
-class: 'justify-center'
 ---
 ::
 
@@ -199,7 +193,6 @@ Use the `#footer` slot to add content after the Drawer's body.
 ::component-example
 ---
 name: 'drawer-footer-slot-example'
-class: 'justify-center'
 ---
 ::
 
@@ -211,7 +204,6 @@ You can use a [CommandPalette](/components/command-palette) component inside the
 ---
 collapse: true
 name: 'drawer-command-palette-example'
-class: 'justify-center'
 ---
 ::
 
