@@ -99,7 +99,7 @@ provide('files', files)
 @source "../content/**/*.md";
 
 @theme {
-  --font-family-sans: 'Inter', sans-serif;
+  --font-family-sans: 'Public Sans', sans-serif;
 
   --color-green-50: #EFFDF5;
   --color-green-100: #D9FBE8;
