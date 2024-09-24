@@ -92,7 +92,7 @@ export type SelectMenuEmits<T> = ComboboxRootEmits<T> & {
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export type SelectMenuSlots<T> = {
+export interface SelectMenuSlots<T> {
   'leading'(props: { modelValue: T, open: boolean, ui: any }): any
   'default'(props: { modelValue: T, open: boolean }): any
   'trailing'(props: { modelValue: T, open: boolean, ui: any }): any
