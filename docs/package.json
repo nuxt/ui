@@ -8,7 +8,7 @@
     "@iconify-json/vscode-icons": "^1.2.2",
     "@nuxt/content": "^2.13.2",
     "@nuxt/eslint-config": "^0.4.0",
-    "@nuxt/fonts": "^0.8.0",
+    "@nuxt/fonts": "^0.9.1",
     "@nuxt/image": "^1.8.0",
     "@nuxt/ui": "latest",
     "@nuxt/ui-pro": "^1.4.3",
