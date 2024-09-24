@@ -31,6 +31,10 @@ export default defineNuxtConfig({
     compatibilityVersion: 4
   },
 
+  experimental: {
+    buildCache: true
+  },
+
   runtimeConfig: {
     public: {
       version: pkg.version
@@ -72,16 +76,17 @@ export default defineNuxtConfig({
     provider: 'ipx'
   },
 
-  // nitro: {
-  //   prerender: {
-  //     routes: [
-  //       '/getting-started'
-  //       // '/api/releases.json',
-  //       // '/api/pulls.json'
-  //     ],
-  //     ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
-  //   }
-  // },
+  nitro: {
+    prerender: {
+      routes: [
+        '/getting-started'
+        // '/api/releases.json',
+        // '/api/pulls.json'
+      ],
+      crawlLinks: true
+      // ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
+    }
+  },
 
   routeRules: {
     '/': { redirect: '/getting-started', prerender: false },

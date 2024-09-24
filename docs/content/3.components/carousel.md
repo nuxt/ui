@@ -15,7 +15,7 @@ navigation:
 
 ## Examples
 
-## API
+<!-- ## API
 
 ### Props
 
@@ -31,4 +31,4 @@ navigation:
 
 ## Theme
 
-:component-theme
+:component-theme -->

@@ -79,7 +79,7 @@ defineOgImageComponent('Docs', {
 
 <template>
   <UPage v-if="page">
-    <UPageHeader :title="page.title" :links="page.links" :headline="headline" :ui="{}">
+    <UPageHeader :title="page.title" :links="page.links" :headline="headline">
       <template #description>
         <MDC v-if="page.description" :value="page.description" unwrap="p" />
       </template>
@@ -90,7 +90,7 @@ defineOgImageComponent('Docs', {
 
       <USeparator />
 
-      <UContentSurround :surround="surround as any" />
+      <UContentSurround :surround="(surround as any)" />
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>

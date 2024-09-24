@@ -22,7 +22,7 @@ const meta = await fetchComponentMeta(name as any)
       </ProseTr>
     </ProseThead>
     <ProseTbody>
-      <ProseTr v-for="event in meta.meta.events" :key="event.name">
+      <ProseTr v-for="event in (meta?.meta?.events || [])" :key="event.name">
         <ProseTd>
           <ProseCodeInline>
             {{ event.name }}

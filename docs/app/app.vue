@@ -9,7 +9,7 @@ const runtimeConfig = useRuntimeConfig()
 const { integrity, api } = runtimeConfig.public.content
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
-const { data: files } = await useLazyFetch<any[]>(`${api.baseURL}/search${integrity ? '.' + integrity : ''}`, { default: () => [] })
+const { data: files } = await useLazyFetch<any[]>(`${api.baseURL}/search${integrity ? '-' + integrity : ''}`, { default: () => [] })
 
 const searchTerm = ref('')
 
@@ -71,24 +71,29 @@ useServerSeoMeta({
 })
 
 provide('navigation', navigation)
-provide('files', files)
 </script>
 
 <template>
   <UApp>
     <NuxtLoadingIndicator />
 
-    <Banner v-if="!route.path.startsWith('/examples')" />
+    <template v-if="!route.path.startsWith('/examples')">
+      <Banner />
 
-    <Header v-if="!route.path.startsWith('/examples')" :links="links" />
+      <Header :links="links" />
+    </template>
 
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
 
-    <Footer v-if="!route.path.startsWith('/examples')" />
+    <template v-if="!route.path.startsWith('/examples')">
+      <Footer />
 
-    <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+      <ClientOnly>
+        <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+      </ClientOnly>
+    </template>
   </UApp>
 </template>
 

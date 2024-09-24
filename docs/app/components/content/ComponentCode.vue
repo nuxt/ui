@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import json5 from 'json5'
 import { upperFirst, camelCase, kebabCase } from 'scule'
+import { hash } from 'ohash'
 import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
@@ -179,7 +180,7 @@ const code = computed(() => {
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringify({ props: componentProps, slots: props.slots })}`, async () => {
+const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props: componentProps, slots: props.slots })}`, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
   }
