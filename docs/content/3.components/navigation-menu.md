@@ -279,7 +279,7 @@ props:
 The `highlight` prop changes the `pill` variant active item style. Try it out to see the difference.
 ::
 
-### Icon
+### Trailing Icon
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-heroicons-chevron-down-20-solid`. This icon is only displayed when an item has children.
 
@@ -370,7 +370,7 @@ props:
 ---
 ::
 
-::tip
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
 ::
 

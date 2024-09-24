@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxItemProps } from 'radix-vue'
@@ -65,7 +66,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'mult
    */
   placeholder?: InputProps['placeholder']
   /**
-   * Display a close button in the input (useful when inside a `UModal`).
+   * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'gray', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue false
    */
@@ -78,7 +79,15 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'mult
   groups?: G[]
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
-   * @defaultValue { ignoreLocation: true, threshold: 0.1, keys: ['label', 'suffix'], resultLimit: 12, matchAllWhenSearchEmpty: true }
+   * @defaultValue {
+      fuseOptions: {
+        ignoreLocation: true,
+        threshold: 0.1,
+        keys: ['label', 'suffix']
+      },
+      resultLimit: 12,
+      matchAllWhenSearchEmpty: true
+    }
    */
   fuse?: UseFuseOptions<T>
   class?: any
@@ -97,6 +106,7 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & DynamicSlots<G, SlotProps<T>> & DynamicSlots<T, SlotProps<T>>
+
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">

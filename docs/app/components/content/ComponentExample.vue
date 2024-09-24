@@ -95,13 +95,13 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
     acc[option.name] = option.default
   }
   return acc
-}, {}))
+}, {} as Record<string, any>) || {})
 </script>
 
 <template>
   <div class="my-5">
     <div v-if="preview">
-      <div class="border border-gray-300 dark:border-gray-700 relative z-[1]" :class="[props.class, { 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source }]">
+      <div class="border border-gray-300 dark:border-gray-700 relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source }]">
         <div v-if="props.options?.length" class="flex gap-4 p-4 border-b border-gray-300 dark:border-gray-700">
           <UFormField
             v-for="option in props.options"
@@ -119,13 +119,16 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
             <USelectMenu
               v-model="optionsValues[option.name]"
               :items="option.items"
-              class="rounded rounded-l-none w-40"
+              :search="false"
+              color="gray"
+              variant="soft"
+              class="rounded rounded-l-none min-w-12"
               multiple
-              :ui="{ itemLeadingChip: 'size-2' }"
             />
           </UFormField>
         </div>
-        <div class="p-4">
+
+        <div class="flex p-4" :class="props.class">
           <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
         </div>
       </div>

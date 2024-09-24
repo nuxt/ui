@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
     indicator: 'absolute transition-[translate,width] duration-200',
-    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-gray-500 dark:data-[state=inactive]:text-gray-400 hover:data-[state=inactive]:text-gray-700 dark:hover:data-[state=inactive]:text-gray-200 font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none', options.theme?.transitions && 'transition-colors'],
+    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-gray-500 dark:data-[state=inactive]:text-gray-400 hover:data-[state=inactive]:text-gray-700 dark:hover:data-[state=inactive]:text-gray-200 font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none', options.theme.transitions && 'transition-colors'],
     content: 'focus:outline-none w-full',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -14,7 +14,7 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
       gray: ''
     },
     variant: {
@@ -95,7 +95,7 @@ export default (options: Required<ModuleOptions>) => ({
       list: 'border-l',
       indicator: '-left-px w-px'
     }
-  }, ...options.colors.map((color: string) => ({
+  }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'pill',
     class: {
@@ -109,7 +109,7 @@ export default (options: Required<ModuleOptions>) => ({
       indicator: 'bg-gray-900 dark:bg-white',
       trigger: 'data-[state=active]:text-white dark:data-[state=active]:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:focus-visible:outline-white'
     }
-  }, ...options.colors.map((color: string) => ({
+  }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'link',
     class: {

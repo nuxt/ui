@@ -12,7 +12,7 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`])),
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`])),
       gray: 'focus-visible:outline-gray-900 dark:focus-visible:outline-white'
     },
     size: {
@@ -58,7 +58,7 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     }
   },
-  compoundVariants: [...options.colors.map((color: string) => ({
+  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     checked: true,
     class: `ring-2 ring-${color}-500 dark:ring-${color}-400 bg-${color}-500 dark:bg-${color}-400`

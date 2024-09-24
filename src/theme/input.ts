@@ -4,7 +4,7 @@ import { buttonGroupVariantWithRoot } from './button-group'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center',
-    base: ['w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme?.transitions && 'transition-colors'],
+    base: ['w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     leading: 'absolute inset-y-0 start-0 flex items-center',
     leadingIcon: 'shrink-0 text-gray-400 dark:text-gray-500',
     leadingAvatar: 'shrink-0',
@@ -58,7 +58,7 @@ export default (options: Required<ModuleOptions>) => ({
       none: 'text-gray-900 dark:text-white'
     },
     color: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
       gray: ''
     },
     leading: {
@@ -77,11 +77,11 @@ export default (options: Required<ModuleOptions>) => ({
       file: 'file:mr-1.5 file:font-medium file:text-gray-500 dark:file:text-gray-400 file:outline-none'
     }
   },
-  compoundVariants: [...options.colors.map((color: string) => ({
+  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: ['outline', 'subtle'],
     class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
-  })), ...options.colors.map((color: string) => ({
+  })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     highlight: true,
     class: `ring ring-inset ring-${color}-500 dark:ring-${color}-400`

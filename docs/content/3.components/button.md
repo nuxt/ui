@@ -129,22 +129,42 @@ props:
 
 Use the `loading` prop to show a loading icon and disable the Button.
 
-Use the `loading-icon` prop to customize this icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+::component-code
+---
+props:
+  loading: true
+  trailing: false
+slots:
+  default: Button
+---
+Button
+::
+
+Use the `loading-auto` prop to show the loading icon automatically while the `@click` promise is pending.
+
+:component-example{name="button-loading-auto-example"}
+
+This also works with the [Form](/components/form) component.
+
+:component-example{name="button-loading-auto-form-example"}
+
+### Loading Icon
+
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
 
 ::component-code
 ---
 props:
   loading: true
-  loadingIcon: ''
+  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
   trailing: false
 slots:
   default: Button
 ---
-
 Button
 ::
 
-::tip
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 ::
 

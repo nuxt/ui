@@ -1,86 +1,65 @@
 [![nuxt-ui.png](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxt.com)
 
-# Nuxt UI
+# Nuxt UI v3
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-Nuxt UI is a module that provides a set of Vue components and composables built with [Tailwind CSS](https://tailwindcss.com/) and [Headless UI](https://headlessui.dev/) to help you build beautiful and accessible user interfaces.
-
-Its goal is to provide everything related to UI when building a Nuxt app. This includes components, icons, colors, dark mode but also keyboard shortcuts.
-
-## Features
-
-- Built with [Headless UI](https://headlessui.dev/) and [Tailwind CSS](https://tailwindcss.com/)
-- HMR support through Nuxt App Config
-- Dark mode support
-- Support for LTR and RTL languages
-- Keyboard shortcuts
-- Bundled icons
-- Fully typed
-- [Figma Kit](https://www.figma.com/community/file/1288455405058138934)
-
-Read more on [ui.nuxt.com](https://ui.nuxt.com)
+We're thrilled to introduce Nuxt UI v3, a significant upgrade to our UI library that delivers extensive improvements and robust new capabilities. This major update harnesses the combined strengths of [Radix Vue](https://www.radix-vue.com/), [Tailwind CSS v4](https://tailwindcss.com/blog/tailwindcss-v4-alpha), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
 ## Installation
 
-```bash
-# npm
-npm install @nuxt/ui
-# yarn
-yarn add @nuxt/ui
-# pnpm
-pnpm add @nuxt/ui
-# bun
-bun add @nuxt/ui
+1. Install the Nuxt UI v3 alpha package:
+
+```bash [pnpm]
+pnpm add @nuxt/ui@next
 ```
 
-Then, register the module in your `nuxt.config.ts`:
+```bash [yarn]
+yarn add @nuxt/ui@next
+```
 
-```js
+```bash [npm]
+npm install @nuxt/ui@next
+```
+
+```bash [bun]
+bun add @nuxt/ui@next
+```
+
+> [!WARNING]
+> Make sure you have `typescript` installed in your dev dependencies.
+
+2. Register the Nuxt UI module in your `nuxt.config.ts`:
+
+```ts [nuxt.config.ts]
 export default defineNuxtConfig({
-  modules: [
-    '@nuxt/ui'
-  ]
+  modules: ['@nuxt/ui']
 })
 ```
 
-If you want latest updates, please use `@nuxt/ui-edge` in your `package.json`:
+3. Import Tailwind and Nuxt UI in your `app.vue` or in your [CSS](https://nuxt.com/docs/getting-started/styling#the-css-property):
 
-```json
-{
-  "devDependencies": {
-    "@nuxt/ui": "npm:@nuxt/ui-edge@latest"
-  }
-}
+```css [main.css]
+@import "tailwindcss";
+@import "@nuxt/ui";
 ```
 
 ## Documentation
 
-Visit https://ui.nuxt.com to explore the documentation.
+Visit https://ui3.nuxt.com to explore the documentation.
 
 ## Credits
 
 - [nuxt/nuxt](https://github.com/nuxt/nuxt)
+- [nuxt/icon](https://github.com/nuxt/icon)
+- [nuxt/fonts](https://github.com/nuxt/fonts)
 - [nuxt-modules/color-mode](https://github.com/nuxt-modules/color-mode)
-- [nuxt-modules/tailwindcss](https://github.com/nuxt-modules/tailwindcss)
+- [radix-vue/radix-vue](https://github.com/radix-vue/radix-vue)
 - [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss)
-- [tailwindlabs/headlessui](https://github.com/tailwindlabs/headlessui)
 - [vueuse/vueuse](https://github.com/vueuse/vueuse)
-- [egoist/tailwindcss-icons](https://github.com/egoist/tailwindcss-icons)
-
-## Contributing
-
-Thank you for considering contributing to Nuxt UI. Here are a few ways you can get involved:
-
-- Reporting Bugs: If you come across any bugs or issues, please check out the reporting bugs guide to learn how to submit a bug report.
-- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/getting-started/contributing) to share your suggestions.
-
-## Local Development
-
-Follow the docs to [Set up your local development environment](https://ui.nuxt.com/getting-started/contributing#_2-local-development-setup) and contribute.
 
 ## License
 

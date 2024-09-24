@@ -183,6 +183,18 @@ class: 'justify-center'
 In this example, press :kbd{value="O"} to toggle the Popover.
 ::
 
+### With command palette
+
+You can use a [CommandPalette](/components/command-palette) component inside the Popover's content.
+
+::component-example
+---
+collapse: true
+name: 'popover-command-palette-example'
+class: 'justify-center'
+---
+::
+
 ## API
 
 ### Props

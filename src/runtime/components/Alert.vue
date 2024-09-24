@@ -46,7 +46,7 @@ export interface AlertProps {
 }
 
 export interface AlertEmits {
-  (e: 'close'): void
+  (e: 'update:open', value: boolean): void
 }
 
 export interface AlertSlots {
@@ -123,7 +123,7 @@ const ui = computed(() => alert({
           v-bind="typeof close === 'object' ? close : undefined"
           data-slot="close"
           :class="ui.close({ class: props.ui?.close })"
-          @click="emits('close')"
+          @click="emits('update:open', false)"
         />
       </slot>
     </div>

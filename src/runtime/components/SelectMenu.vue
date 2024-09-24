@@ -219,7 +219,7 @@ function onUpdateOpen(value: boolean) {
     @update:open="onUpdateOpen"
   >
     <ComboboxAnchor as-child>
-      <ComboboxTrigger data-slot="base" :class="ui.base({ class: props.class })" tabindex="0">
+      <ComboboxTrigger :class="ui.base({ class: [props.class, props.ui?.base] })" tabindex="0">
         <span v-if="isLeading || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as T)" :open="open" :ui="ui">
             <UIcon v-if="leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />

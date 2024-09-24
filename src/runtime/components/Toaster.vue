@@ -116,7 +116,7 @@ function getOffset(index: number) {
     <ToastViewport
       :data-expanded="expanded"
       data-slot="viewport"
-      :class="ui.viewport({ class: props.class })"
+      :class="ui.viewport({ class: [props.class, props.ui?.viewport] })"
       :style="{
         '--scale-factor': '0.05',
         '--translate-factor': position?.startsWith('top') ? '1px' : '-1px',

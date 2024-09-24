@@ -80,13 +80,13 @@ The `alt` prop is passed to the `img` element as the `alt` attribute.
 
 ### With tooltip
 
-You can use the [Tooltip](/components/tooltip) component to display a tooltip when hovering the Avatar.
+You can use a [Tooltip](/components/tooltip) component to display a tooltip when hovering the Avatar.
 
 :component-example{name="avatar-tooltip-example"}
 
 ### With chip
 
-You can use the [Chip](/components/chip) component to display a chip around the Avatar.
+You can use a [Chip](/components/chip) component to display a chip around the Avatar.
 
 :component-example{name="avatar-chip-example"}
 

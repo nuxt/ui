@@ -73,7 +73,7 @@ const options = computed(() => {
         value: item,
         label: item
       }))
-      : prop?.type === 'boolean'
+      : prop?.type === 'boolean' || prop?.type === 'boolean | undefined'
         ? [{ value: true, label: 'true' }, { value: false, label: 'false' }]
         : Object.keys(componentTheme?.variants?.[key] || {}).map(variant => ({
           value: variant,

@@ -14,7 +14,7 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, ''])),
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
       gray: ''
     },
     variant: {
@@ -34,25 +34,25 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
-  compoundVariants: [...options.colors.map((color: string) => ({
+  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
     class: {
       root: `bg-${color}-500 dark:bg-${color}-400 text-white dark:text-gray-900`
     }
-  })), ...options.colors.map((color: string) => ({
+  })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
     class: {
       root: `text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/25 dark:ring-${color}-400/25`
     }
-  })), ...options.colors.map((color: string) => ({
+  })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'soft',
     class: {
       root: `bg-${color}-500/10 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400`
     }
-  })), ...options.colors.map((color: string) => ({
+  })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'subtle',
     class: {

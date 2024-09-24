@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, `bg-${color}-500 dark:bg-${color}-400`])),
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `bg-${color}-500 dark:bg-${color}-400`])),
       gray: 'bg-gray-500 dark:bg-gray-400'
     },
     size: {

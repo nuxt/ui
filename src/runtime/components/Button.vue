@@ -6,18 +6,15 @@ import theme from '#build/ui/button'
 import type { LinkProps } from './Link.vue'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { PartialString } from '../types/utils'
+import { formLoadingInjectionKey } from '../composables/useFormField'
 
-const appConfig = _appConfig as AppConfig & {
-  ui: { button: Partial<typeof theme> }
-}
+const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
 const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
 
 type ButtonVariants = VariantProps<typeof button>
 
-export interface ButtonProps
-  extends UseComponentIconsProps,
-  Omit<LinkProps, 'raw' | 'custom'> {
+export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
   color?: ButtonVariants['color']
   variant?: ButtonVariants['variant']
@@ -26,6 +23,9 @@ export interface ButtonProps
   square?: boolean
   /** Render the button full width. */
   block?: boolean
+  /** Set loading state automatically based on the `@click` promise state */
+  loadingAuto?: boolean
+  onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>
   class?: any
   ui?: PartialString<typeof button.slots>
 }
@@ -38,7 +38,7 @@ export interface ButtonSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { type Ref, computed, ref, inject } from 'vue'
 import { useForwardProps } from 'radix-vue'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useButtonGroup } from '../composables/useButtonGroup'
@@ -52,59 +52,63 @@ const slots = defineSlots<ButtonSlots>()
 const linkProps = useForwardProps(pickLinkProps(props))
 
 const { orientation, size: buttonSize } = useButtonGroup<ButtonProps>(props)
-const { isLeading, isTrailing, leadingIconName, trailingIconName }
-  = useComponentIcons(props)
 
-const ui = computed(() =>
-  button({
-    color: props.color,
-    variant: props.variant,
-    size: buttonSize.value,
-    loading: props.loading,
-    block: props.block,
-    square: props.square || (!slots.default && !props.label),
-    leading: isLeading.value,
-    trailing: isTrailing.value,
-    buttonGroup: orientation.value
-  })
+const loadingAutoState = ref(false)
+const formLoading = inject<Ref<boolean> | undefined>(formLoadingInjectionKey, undefined)
+
+async function onClickWrapper(event: MouseEvent) {
+  loadingAutoState.value = true
+  const callbacks = Array.isArray(props.onClick) ? props.onClick : [props.onClick]
+  try {
+    await Promise.all(callbacks.map(fn => fn?.(event)))
+  } finally {
+    loadingAutoState.value = false
+  }
+}
+
+const isLoading = computed(() => {
+  return props.loading || (props.loadingAuto && (loadingAutoState.value || (formLoading?.value && props.type === 'submit')))
+})
+
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(
+  computed(() => ({ ...props, loading: isLoading.value }))
 )
+
+const ui = computed(() => button({
+  color: props.color,
+  variant: props.variant,
+  size: buttonSize.value,
+  loading: isLoading.value,
+  block: props.block,
+  square: props.square || (!slots.default && !props.label),
+  leading: isLeading.value,
+  trailing: isTrailing.value,
+  buttonGroup: orientation.value
+}))
 </script>
 
 <template>
   <ULink
     :type="type"
-    :disabled="disabled || loading"
-    :class="ui.base({ class: props.class })"
+    :disabled="disabled || isLoading"
+    :class="ui.base({ class: [props.class, props.ui?.base] })"
     v-bind="linkProps"
     raw
     data-slot="base"
+    @click="onClickWrapper"
   >
     <slot name="leading">
-      <UIcon
-        v-if="isLeading && leadingIconName"
-        :name="leadingIconName"
-        :class="ui.leadingIcon({ class: props.ui?.leadingIcon })"
-        data-slot="leadingIcon"
-      />
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" data-slot="leading" />
     </slot>
 
     <slot>
-      <span
-        v-if="label"
-        :class="ui.label({ class: props.ui?.label })"
-        data-slot="label"
-      >
+      <span v-if="label" :class="ui.label({ class: props.ui?.label })" data-slot="label">
         {{ label }}
       </span>
     </slot>
 
     <slot name="trailing">
-      <UIcon
-        v-if="isTrailing && trailingIconName"
-        :name="trailingIconName"
-        :class="ui.trailingIcon({ class: props.ui?.trailingIcon })"
-        data-slot="trailingIcon"
-      />
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" data-slot="trailing" />
     </slot>
   </ULink>
 </template>

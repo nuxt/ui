@@ -25,7 +25,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
         :state="state"
         :schema="schema"
         class="gap-4 flex flex-col w-60"
-        @submit="(event) => onSubmit(event)"
+        @submit="onSubmit"
       >
         <UFormField label="Email" name="email">
           <UInput v-model="state.email" placeholder="john@lennon.com" />
@@ -51,7 +51,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
         :schema="schema"
         class="gap-4 flex flex-col w-60"
         :validate-on-input-delay="2000"
-        @submit="(event) => onSubmit(event)"
+        @submit="onSubmit"
       >
         <UFormField label="Email" name="email">
           <UInput v-model="state2.email" placeholder="john@lennon.com" />

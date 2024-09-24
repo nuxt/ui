@@ -333,6 +333,8 @@ props:
 ---
 ::
 
+### Trailing Icon
+
 Use the `trailing-icon` prop to customize the trailing icon. Defaults to `i-heroicons-chevron-down-20-solid`.
 
 ::component-code
@@ -355,9 +357,11 @@ props:
 ---
 ::
 
-::tip
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
 ::
+
+### Selected Icon
 
 Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-heroicons-check-20-solid`.
 
@@ -381,15 +385,13 @@ props:
 ---
 ::
 
-::tip
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
 ::
 
 ### Loading
 
 Use the `loading` prop to show a loading icon on the Select.
-
-Use the `loading-icon` prop to customize this icon. Defaults to `i-heroicons-arrow-path-20-solid`.
 
 ::component-code
 ---
@@ -401,7 +403,6 @@ ignore:
   - defaultValue
 props:
   loading: true
-  loadingIcon: ''
   trailing: false
   defaultValue: 'Backlog'
   items:
@@ -412,7 +413,32 @@ props:
 ---
 ::
 
-::tip
+### Loading Icon
+
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+
+::component-code
+---
+prettier: true
+external:
+  - items
+ignore:
+  - items
+  - defaultValue
+props:
+  loading: true
+  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  trailing: false
+  defaultValue: 'Backlog'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 ::
 

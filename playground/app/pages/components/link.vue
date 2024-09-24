@@ -27,27 +27,27 @@
     </div>
 
     <div class="flex flex-col items-start gap-2 text-sm">
-      <ULink to="/link" raw>
+      <ULink to="/components/link" raw>
         Link raw
       </ULink>
 
-      <ULink to="/link">
+      <ULink to="/components/link">
         Link active
       </ULink>
-      <ULink to="/link" class="font-medium" active-class="text-gray-900 dark:text-white">
+      <ULink to="/components/link" class="font-medium" active-class="text-gray-900 dark:text-white">
         Link active with class
       </ULink>
-      <ULink to="/link" disabled>
+      <ULink to="/components/link" disabled>
         Link active disabled
       </ULink>
 
-      <ULink to="/button">
+      <ULink to="/components/button">
         Link inactive
       </ULink>
-      <ULink to="/button" class="font-medium" inactive-class="hover:text-primary-500 dark:hover:text-primary-400">
+      <ULink to="/components/button" class="font-medium" inactive-class="hover:text-primary-500 dark:hover:text-primary-400">
         Link inactive with class
       </ULink>
-      <ULink to="/button" disabled>
+      <ULink to="/components/button" disabled>
         Link inactive disabled
       </ULink>
     </div>

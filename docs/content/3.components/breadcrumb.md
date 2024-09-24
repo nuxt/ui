@@ -43,7 +43,7 @@ props:
 A `span` is rendered instead of a link when the `to` property is not defined.
 ::
 
-### Separator
+### Separator Icon
 
 Use the `separator-icon` prop to customize the [Icon](/components/icon) between each item. Defaults to `i-heroicons-chevron-right-20-solid`.
 
@@ -67,7 +67,7 @@ props:
 ---
 ::
 
-::tip
+::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronRight` key.
 ::
 

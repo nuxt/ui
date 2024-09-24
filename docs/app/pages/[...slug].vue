@@ -79,7 +79,11 @@ defineOgImageComponent('Docs', {
 
 <template>
   <UPage v-if="page">
-    <UPageHeader :title="page.title" :description="page.description" :links="page.links" :headline="headline" />
+    <UPageHeader :title="page.title" :links="page.links" :headline="headline" :ui="{}">
+      <template #description>
+        <MDC v-if="page.description" :value="page.description" unwrap="p" />
+      </template>
+    </UPageHeader>
 
     <UPageBody>
       <ContentRenderer v-if="page.body" :value="page" />

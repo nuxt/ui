@@ -13,11 +13,12 @@ export interface FormProps<T extends object> {
   id?: string | number
   schema?: FormSchema<T>
   state: Partial<T>
-  validate?: (state: Partial<T>) => Promise<FormError[]>
+  validate?: (state: Partial<T>) => Promise<FormError[]> | FormError[]
   validateOn?: FormInputEvents[]
   disabled?: boolean
   validateOnInputDelay?: number
   class?: any
+  onSubmit?: ((event: FormSubmitEvent<T>) => void | Promise<void>) | (() => void | Promise<void>)
 }
 
 export interface FormEmits<T extends object> {
@@ -31,9 +32,9 @@ export interface FormSlots {
 </script>
 
 <script lang="ts" setup generic="T extends object">
-import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId } from 'vue'
+import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
-import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey } from '../composables/useFormField'
+import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
 import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
@@ -53,6 +54,7 @@ const parentBus = inject(
   formBusInjectionKey,
   undefined
 )
+
 provide(formBusInjectionKey, bus)
 
 const nestedForms = ref<Map<string | number, { validate: () => any }>>(new Map())
@@ -85,11 +87,6 @@ onUnmounted(() => {
     parentBus.emit({ type: 'detach', formId })
   }
 })
-
-provide(formOptionsInjectionKey, computed(() => ({
-  disabled: props.disabled,
-  validateOnInputDelay: props.validateOnInputDelay
-})))
 
 const errors = ref<FormErrorWithId[]>([])
 provide('form-errors', errors)
@@ -157,13 +154,18 @@ async function _validate(opts: { name?: string | string[], silent?: boolean, nes
   return props.state as T
 }
 
-async function onSubmit(payload: Event) {
+const loading = ref(false)
+provide(formLoadingInjectionKey, readonly(loading))
+
+async function onSubmitWrapper(payload: Event) {
+  loading.value = true
+
   const event = payload as FormSubmitEvent<any>
 
   try {
     await _validate({ nested: true })
     event.data = props.state
-    emits('submit', event)
+    await props.onSubmit?.(event)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
       throw error
@@ -176,7 +178,16 @@ async function onSubmit(payload: Event) {
     }
     emits('error', errorEvent)
   }
+
+  loading.value = false
 }
+
+const disabled = computed(() => props.disabled || loading.value)
+
+provide(formOptionsInjectionKey, computed(() => ({
+  disabled: disabled.value,
+  validateOnInputDelay: props.validateOnInputDelay
+})))
 
 defineExpose<Form<T>>({
   validate: _validate,
@@ -193,7 +204,7 @@ defineExpose<Form<T>>({
   },
 
   async submit() {
-    await onSubmit(new Event('submit'))
+    await onSubmitWrapper(new Event('submit'))
   },
 
   getErrors(name?: string) {
@@ -211,7 +222,7 @@ defineExpose<Form<T>>({
     }
   },
 
-  disabled: computed(() => props.disabled)
+  disabled
 })
 </script>
 
@@ -220,7 +231,7 @@ defineExpose<Form<T>>({
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
     :class="form({ class: props.class })"
-    @submit.prevent="onSubmit"
+    @submit.prevent="onSubmitWrapper"
   >
     <slot />
   </component>

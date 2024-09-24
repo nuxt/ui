@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
 // import { debounce } from 'perfect-debounce'
-import type { ContentSearchFile } from '@nuxt/ui-pro'
+// import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 const route = useRoute()
 // const colorMode = useColorMode()
@@ -9,7 +9,7 @@ const runtimeConfig = useRuntimeConfig()
 const { integrity, api } = runtimeConfig.public.content
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
-const { data: files } = await useLazyFetch<ContentSearchFile[]>(`${api.baseURL}/search${integrity ? '.' + integrity : ''}`, { default: () => [] })
+const { data: files } = await useLazyFetch<any[]>(`${api.baseURL}/search${integrity ? '.' + integrity : ''}`, { default: () => [] })
 
 const searchTerm = ref('')
 
@@ -100,5 +100,21 @@ provide('files', files)
 
 @theme {
   --font-family-sans: 'Inter', sans-serif;
+
+  --color-green-50: #EFFDF5;
+  --color-green-100: #D9FBE8;
+  --color-green-200: #B3F5D1;
+  --color-green-300: #75EDAE;
+  --color-green-400: #00DC82;
+  --color-green-500: #00C16A;
+  --color-green-600: #00A155;
+  --color-green-700: #007F45;
+  --color-green-800: #016538;
+  --color-green-900: #0A5331;
+  --color-green-950: #052E16;
+}
+
+:root {
+  --container-width: 90rem;
 }
 </style>

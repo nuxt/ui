@@ -9,7 +9,7 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries(options.colors.map((color: string) => [color, {
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
         range: `bg-${color}-500 dark:bg-${color}-400`,
         thumb: `ring-${color}-500 dark:ring-${color}-400 focus-visible:outline-${color}-500/50 dark:focus-visible:outline-${color}-400/50`
       }])),
