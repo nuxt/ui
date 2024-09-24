@@ -23,6 +23,7 @@ export interface InputMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
+  select?(e?: Event): void
 }
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
@@ -332,6 +333,7 @@ defineExpose({
                 :class="ui.item({ class: props.ui?.item })"
                 :disabled="item.disabled"
                 :value="valueKey && typeof item === 'object' ? (item[valueKey as keyof InputMenuItem]) as AcceptableValue : item"
+                @select="item.select"
               >
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
