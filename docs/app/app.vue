@@ -75,7 +75,7 @@ provide('navigation', navigation)
 
 <template>
   <UApp>
-    <NuxtLoadingIndicator />
+    <NuxtLoadingIndicator color="#FFF" />
 
     <template v-if="!route.path.startsWith('/examples')">
       <Banner />
