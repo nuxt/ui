@@ -82,8 +82,7 @@ export default defineNuxtConfig({
         '/getting-started'
         // '/api/releases.json',
         // '/api/pulls.json'
-      ],
-      crawlLinks: true
+      ]
       // ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     }
   },
