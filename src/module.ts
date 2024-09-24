@@ -122,11 +122,11 @@ export default defineNuxtModule<ModuleOptions>({
     if (nuxt.options.dev && nuxt.options.devtools.enabled) {
       installModule('nuxt-component-meta')
 
-      // @ts-ignore
+      // @ts-expect-error - no types available
       nuxt.options.componentMeta ||= {}
-      // @ts-ignore
+      // @ts-expect-error - no types available
       nuxt.options.componentMeta.exclude ||= []
-      // @ts-ignore
+      // @ts-expect-error - no types available
       nuxt.options.componentMeta.exclude.push(
         '@nuxt/content',
         '@nuxt/icon',
@@ -139,7 +139,7 @@ export default defineNuxtModule<ModuleOptions>({
         'nuxt-og-image'
       )
 
-      setupDevtoolsClient(options, nuxt)
+      setupDevtoolsClient(options)
 
       nuxt.options.nitro.routeRules ||= {}
       nuxt.options.nitro.routeRules['__nuxt_ui__/**'] = { ssr: false }

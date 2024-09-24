@@ -2,10 +2,12 @@
 import { onDevtoolsClientConnected } from '@nuxt/devtools-kit/iframe-client'
 import type { ClientFunctions, ServerFunctions, Component } from '../../src/devtools/rpc'
 import type { BirpcReturn } from 'birpc'
-import { watchDebounced } from '@vueuse/core'
+import { watchDebounced, useClipboard } from '@vueuse/core'
 import defu from 'defu'
+import { kebabCase } from 'scule'
+import { genObjectFromValues } from 'knitwork'
 
-// @ts-ignore
+// @ts-expect-error - Nuxt Devtools internal value
 // Disable devtools in component renderer iframe
 window.__NUXT_DEVTOOLS_DISABLE__ = true
 
@@ -54,7 +56,6 @@ onMounted(() => {
 
 const accordionItems = computed(() => {
   if (!component.value) return
-
   const themeCount = component.value.meta.slots ? Object.keys(component.value.meta.slots)?.length : 0
 
   return [
@@ -74,6 +75,54 @@ function onSlotLeave(slot: string) {
   event.data = { slot }
   window.dispatchEvent(event)
 }
+
+const code = ref()
+watchDebounced([state, component], () => {
+  if (!component.value) return
+
+  const props = state.value.props?.[component.value?.slug ?? '']
+  const slots = state.value.slots?.[component.value?.slug ?? '']
+
+  const propsTemplate = Object.entries(props ?? {}).map(([key, value]: [string, any]) => {
+    if (value === true) return kebabCase(key)
+    if (value === false) return
+    if (typeof value === 'number') return `:${kebabCase(key)}="${value}"`
+    if (Array.isArray(value) ?? typeof value === 'object') return `:${kebabCase(key)}="${genObjectFromValues(value)}"`
+    return `${kebabCase(key)}="${value}"`
+  }).filter(Boolean).join('\n')
+
+  const slotsTemplate = genObjectFromValues(Object.keys(slots).filter(key => key !== 'base').reduce((acc, key) => {
+    acc[key] = slots[key]
+    return acc
+  }, {} as Record<string, string>))
+
+  code.value = `\`\`\`vue
+  <${component.value.label}
+    ${propsTemplate}
+    ${slots.base ? `:class="${slots.base}"` : ''}
+    ${slotsTemplate !== '{}' ? `:ui="${slotsTemplate}"` : ''}
+  ></${component.value.label}>
+\`\`\``
+}, { deep: true, debounce: 200, maxWait: 500 })
+
+const { $prettier } = useNuxtApp()
+const { parseMarkdown } = useMarkdownParser()
+
+const { data: ast } = await useAsyncData('component-code', async () => {
+  let formatted = ''
+  try {
+    formatted = await $prettier.format(code.value, {
+      trailingComma: 'none',
+      semi: false,
+      singleQuote: true
+    })
+  } catch {
+    return
+  }
+  return await parseMarkdown(formatted)
+}, { watch: [code], immediate: false, server: false })
+
+const { copy, copied } = useClipboard()
 </script>
 
 <template>
@@ -92,22 +141,22 @@ function onSlotLeave(slot: string) {
     </div>
     <div v-if="component" class="absolute top-[49px] bottom-0 inset-x-0 grid grid-cols-2">
       <div class="bg-white border-r border-gray-200 flex flex-col overflow-y-scroll">
-        <UAccordion :items="accordionItems" class="border-b border-gray-200" multiple :ui="{ trigger: 'px-2.5 py-4.5 text-start hover:bg-gray-100 transition ease duration-150 gap-2.5 data-[state=closed]:opacity-80' }">
+        <UAccordion :items="accordionItems" class="border-b border-gray-200" type="multiple" :ui="{ trigger: 'px-2.5 py-4.5 text-start hover:bg-gray-100 transition ease duration-150 gap-2.5 data-[state=closed]:opacity-80' }">
           <template #leading="{ item }">
             <UIcon :name="item.icon" class="size-6 text-gray-700" />
           </template>
 
-          <template #="{ item }">
-            <p class="font-sans font-medium">
+          <template #default="{ item }">
+            <p>
               {{ item.label }}
             </p>
-            <p class="text-sm font-sans text-gray-500">
+            <p class="text-sm text-gray-400">
               {{ item.description }}
             </p>
           </template>
 
           <template #props>
-            <div v-for="prop in component.meta?.props.filter((prop) => prop.name !== 'ui')" class="p-3">
+            <div v-for="prop in component.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="p-3">
               <UFormField :name="prop.name">
                 <template #label>
                   <p class="font-mono font-bold px-2 py-0.5 border-gray-300 border border-dashed rounded bg-gray-50">
@@ -122,7 +171,7 @@ function onSlotLeave(slot: string) {
             </div>
           </template>
           <template #theme>
-            <div v-for="(_value, slot) in component.slots" class="p-3 hover:bg-gray-50 transition">
+            <div v-for="(_value, slot) in component?.slots" :key="'slots-' + slot" class="p-3 hover:bg-gray-50 transition">
               <UFormField :name="slot" @mouseenter="onSlotHover(slot)" @mouseleave="onSlotLeave(slot)">
                 <template #label>
                   <p class="font-mono font-bold px-2 py-0.5 border-gray-300 border border-dashed rounded bg-gray-100">
@@ -135,8 +184,19 @@ function onSlotLeave(slot: string) {
           </template>
         </UAccordion>
       </div>
-      <div>
-        <iframe class="h-full w-full" :src="`/__nuxt_ui__/components/${component.slug}`" />
+      <div class="flex flex-col">
+        <iframe class="grow w-full" :src="`/__nuxt_ui__/components/${component.slug}`" />
+        <div class="relative min-h-40 max-h-72 w-full border-t border-gray-200 overflow-y-scroll bg-gray-50">
+          <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="p-4" />
+          <UButton
+            v-if="ast"
+            color="gray"
+            variant="link"
+            :icon="copied ? 'i-heroicons-clipboard-document-check' : 'i-heroicons-clipboard-document'"
+            class="absolute top-4 right-4"
+            @click="copy(ast?.body?.children?.[0]?.props.code)"
+          />
+        </div>
       </div>
     </div>
   </UApp>
@@ -145,4 +205,8 @@ function onSlotLeave(slot: string) {
 <style>
 @import 'tailwindcss';
 @import '@nuxt/ui';
+
+@theme {
+  --font-family-sans: 'DM Sans', sans-serif;
+}
 </style>

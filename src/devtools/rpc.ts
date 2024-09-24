@@ -3,7 +3,6 @@ import { extendServerRpc, onDevToolsInitialized } from '@nuxt/devtools-kit'
 import * as theme from '../theme'
 import type { ModuleOptions } from '../module'
 import { upperFirst, camelCase } from 'scule'
-import type { Nuxt } from '@nuxt/schema'
 
 export type Component = {
   slug: string
@@ -22,7 +21,7 @@ export interface ClientFunctions {
 
 }
 
-export function setupDevtoolsClient(options: ModuleOptions, nuxt: Nuxt) {
+export function setupDevtoolsClient(options: ModuleOptions) {
   onDevToolsInitialized(async () => {
     const _rpc = extendServerRpc<ClientFunctions, ServerFunctions>('nuxt/ui/devtools', {
       async getComponents() {

@@ -10,10 +10,7 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: [
-    '../src/module',
-    '@nuxtjs/mdc'
-  ],
+  modules: ['../src/module', '@nuxtjs/mdc', '@nuxt/content'],
 
   app: {
     baseURL: '/__nuxt_ui__/devtools'
@@ -28,6 +25,12 @@ export default defineNuxtConfig({
       hmr: {
         clientPort: process.env.PORT ? +process.env.PORT : undefined
       }
+    }
+  },
+
+  content: {
+    highlight: {
+      langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
     }
   },
 
