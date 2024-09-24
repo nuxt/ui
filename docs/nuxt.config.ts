@@ -99,8 +99,8 @@ export default defineNuxtConfig({
         routes: {
           exclude: [
             '/components/*',
-            '/getting-started/',
-            '/composables/',
+            '/getting-started/*',
+            '/composables/*',
             '/api/*',
             '/__og-image__/*'
           ]
