@@ -21,11 +21,16 @@ export default defineNuxtConfig({
     '@nuxt/ui-pro',
     '@nuxt/content',
     '@nuxt/image',
+    '@nuxthub/core',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-og-image'
   ],
+
+  hub: {
+    cache: true
+  },
 
   future: {
     compatibilityVersion: 4
