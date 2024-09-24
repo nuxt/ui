@@ -2,7 +2,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'flex flex-col min-h-0 divide-y divide-gray-200 dark:divide-gray-800',
+    root: 'flex flex-col min-h-0 min-w-0 divide-y divide-gray-200 dark:divide-gray-800',
     input: '[&>input]:h-12',
     close: '',
     content: 'relative overflow-hidden',
