@@ -51,7 +51,7 @@ export default defineNuxtConfig({
       scan: true,
       includeCustomCollections: true
     },
-    serverBundle: 'local'
+    serverBundle: 'remote'
   },
 
   content: {
