@@ -48,18 +48,6 @@ export default defineNuxtConfig({
       ]
     },
     sources: {
-      dev: {
-        prefix: '/dev',
-        driver: 'fs',
-        base: resolve('./content')
-      },
-      // overwrite default source AKA `content` directory
-      content: {
-        driver: 'github',
-        repo: 'nuxt/ui',
-        branch: 'main',
-        dir: 'docs/content'
-      },
       pro: process.env.NUXT_UI_PRO_PATH ? {
         prefix: '/pro',
         driver: 'fs',
@@ -79,12 +67,17 @@ export default defineNuxtConfig({
     provider: 'ipx'
   },
 
+  icon: {
+    clientBundle: {
+      scan: true
+    }
+  },
+
   nitro: {
     prerender: {
       routes: [
         '/',
         '/getting-started',
-        '/dev/getting-started',
         '/api/search.json',
         '/api/releases.json',
         '/api/pulls.json'
@@ -94,8 +87,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/components': { redirect: '/components/accordion', prerender: false },
-    '/dev/components': { redirect: '/dev/components/accordion', prerender: false }
+    '/components': { redirect: '/components/accordion', prerender: false }
   },
 
   componentMeta: {

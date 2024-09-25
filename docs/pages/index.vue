@@ -413,7 +413,7 @@ import type { ParsedContent, NavItem } from '@nuxt/content'
 import { useElementBounding, useWindowScroll, useElementSize, breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { HomeProBlock } from '~/types'
 
-const { data: page } = await useAsyncData('index', () => queryContent('/dev').findOne())
+const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
 const { data: module } = await useFetch<{
   stats: {
     downloads: number

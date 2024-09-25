@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import { eachDayOfInterval, isSameDay, isToday } from 'date-fns'
 
-const { data: page } = await useAsyncData('releases', () => queryContent('/dev/releases').findOne())
+const { data: page } = await useAsyncData('releases', () => queryContent('/releases').findOne())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
