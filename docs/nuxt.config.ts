@@ -36,10 +36,6 @@ export default defineNuxtConfig({
     compatibilityVersion: 4
   },
 
-  experimental: {
-    buildCache: true
-  },
-
   runtimeConfig: {
     public: {
       version: pkg.version
