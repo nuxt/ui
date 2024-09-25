@@ -8,7 +8,7 @@ const hideBanner = () => {
   document.querySelector('html')?.classList.add('hide-banner')
 }
 
-if (process.server) {
+if (import.meta.server) {
   useHead({
     script: [{
       key: 'prehydrate-template-banner',
@@ -32,7 +32,7 @@ if (process.server) {
       <div class="flex items-center justify-between gap-2">
         <div class="lg:flex-1 hidden lg:flex items-center" />
 
-        <p class="text-sm font-medium text-white dark:text-gray-900">
+        <p class="text-sm font-medium text-white dark:text-gray-900 truncate">
           <UIcon name="i-heroicons-rocket-launch" class="w-5 h-5 align-top flex-shrink-0 pointer-events-none mr-2" />
           <span class="font-semibold">Nuxt UI Pro v1.0</span> is out with dashboard components!
         </p>
