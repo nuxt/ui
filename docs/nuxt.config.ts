@@ -50,8 +50,7 @@ export default defineNuxtConfig({
     clientBundle: {
       scan: true,
       includeCustomCollections: true
-    },
-    serverBundle: 'remote'
+    }
   },
 
   content: {
@@ -99,8 +98,7 @@ export default defineNuxtConfig({
           exclude: [
             '/components/*',
             '/getting-started/*',
-            '/composables/*',
-            '/api/*'
+            '/composables/*'
           ]
         }
       }
