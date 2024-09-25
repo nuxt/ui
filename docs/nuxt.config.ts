@@ -87,7 +87,8 @@ export default defineNuxtConfig({
         // '/api/releases.json',
         // '/api/pulls.json'
       ],
-      crawlLinks: true
+      crawlLinks: true,
+      autoSubfolderIndex: false
       // ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     },
     cloudflare: {
