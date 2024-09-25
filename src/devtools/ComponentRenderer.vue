@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, computed, reactive, resolveComponent } from 'vue'
+import { onUnmounted, onMounted, computed, reactive, resolveComponent } from 'vue'
 
 const props = defineProps<{
   slug: string
@@ -256,25 +256,35 @@ const component = computed(() => componentExamples[props.slug])
 
 const state = reactive<{ slots?: any, props?: any }>({})
 
+function onUpdateRenderer(event: Event & { data?: any }) {
+  state.props = { ...event.data.props }
+  state.slots = { ...event.data.slots }
+}
+
+function onSlotHover(event: Event & { data?: any }) {
+  const element = window.document.querySelector(`[data-slot=${event.data.slot}]`)
+  if (element) {
+    element.classList.add('nuxt-ui-slot-highlight')
+  }
+}
+
+function onSlotLeave(event: Event & { data?: any }) {
+  const element = window.document.querySelector(`[data-slot=${event.data.slot}]`)
+  if (element) {
+    element.classList.remove('nuxt-ui-slot-highlight')
+  }
+}
+
 onMounted(() => {
-  window.parent.addEventListener('nuxt-ui-devtools:update-renderer', (event: Event & { data?: any }) => {
-    state.props = { ...event.data.props }
-    state.slots = { ...event.data.slots }
-  })
+  window.parent.addEventListener('nuxt-ui-devtools:update-renderer', onUpdateRenderer)
+  window.parent.addEventListener('nuxt-ui-devtools:slot-hover', onSlotHover)
+  window.parent.addEventListener('nuxt-ui-devtools:slot-leave', onSlotLeave)
+})
 
-  window.parent.addEventListener('nuxt-ui-devtools:slot-hover', (event: Event & { data?: any }) => {
-    const element = window.document.querySelector(`[data-slot=${event.data.slot}]`)
-    if (element) {
-      element.classList.add('nuxt-ui-slot-highlight')
-    }
-  })
-
-  window.parent.addEventListener('nuxt-ui-devtools:slot-leave', (event: Event & { data?: any }) => {
-    const element = window.document.querySelector(`[data-slot=${event.data.slot}]`)
-    if (element) {
-      element.classList.remove('nuxt-ui-slot-highlight')
-    }
-  })
+onUnmounted(() => {
+  window.parent.removeEventListener('nuxt-ui-devtools:update-renderer', onUpdateRenderer)
+  window.parent.removeEventListener('nuxt-ui-devtools:slot-hover', onSlotHover)
+  window.parent.removeEventListener('nuxt-ui-devtools:slot-leave', onSlotLeave)
 })
 
 onMounted(() => {

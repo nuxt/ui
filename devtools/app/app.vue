@@ -48,19 +48,25 @@ function updateRenderer() {
 watchDebounced(state, updateRenderer, { deep: true, debounce: 200, maxWait: 500 })
 
 onMounted(() => {
-  window.addEventListener('nuxt-ui-devtools:component-loaded', (event: Event & { data?: any }) => {
-    if (!component.value) return
-    state.value.props[component.value.slug] = defu(state.value.props[component.value.slug], event.data?.props)
-  })
+  window.addEventListener('nuxt-ui-devtools:component-loaded', onComponentLoaded)
 })
+
+onUnmounted(() => {
+  window.removeEventListener('nuxt-ui-devtools:component-loaded', onComponentLoaded)
+})
+
+function onComponentLoaded(event: Event & { data?: any }) {
+  if (!component.value) return
+  state.value.props[component.value.slug] = defu(state.value.props[component.value.slug], event.data?.props)
+}
 
 const accordionItems = computed(() => {
   if (!component.value) return
   const themeCount = component.value.meta.slots ? Object.keys(component.value.meta.slots)?.length : 0
 
   return [
-    { label: 'Props', slot: 'props', icon: 'i-heroicons-cog-6-tooth', description: `${component.value.meta.props.length} props`, disabled: !component.value.meta.props?.length },
-    { label: 'Theme', slot: 'theme', icon: 'i-heroicons-paint-brush', description: `${themeCount} theme slots`, disabled: !themeCount }
+    { label: 'Props', slot: 'props', icon: 'i-heroicons-cog-6-tooth', disabled: !component.value.meta.props?.length },
+    { label: 'Theme', slot: 'theme', icon: 'i-heroicons-paint-brush', disabled: !themeCount }
   ]
 })
 
@@ -128,65 +134,31 @@ const { copy, copied } = useClipboard()
 <template>
   <UApp class="h-screen w-full relative font-sans">
     <div
-      class="top-0 h-[49px] border-b border-gray-200 bg-white flex px-2"
+      class="top-0 h-[49px] border-b border-gray-200 bg-white flex"
     >
-      <UInputMenu
+      <USelectMenu
         v-model="component"
         variant="none"
         :items="components"
-        trailing-icon="i-heroicons-magnifying-glass-20-solid"
+        leading-icon="i-heroicons-magnifying-glass-20-solid"
         class="grow"
         placeholder="Search component..."
+        :ui="{ content: 'max-h-96' }"
       />
     </div>
-    <div v-if="component" class="absolute top-[49px] bottom-0 inset-x-0 grid grid-cols-2">
-      <div class="bg-white border-r border-gray-200 flex flex-col overflow-y-scroll">
-        <UAccordion :items="accordionItems" class="border-b border-gray-200" type="multiple" :ui="{ trigger: 'px-2.5 py-4.5 text-start hover:bg-gray-100 transition ease duration-150 gap-2.5 data-[state=closed]:opacity-80' }">
-          <template #leading="{ item }">
-            <UIcon :name="item.icon" class="size-6 text-gray-700" />
-          </template>
-
-          <template #default="{ item }">
-            <p>
-              {{ item.label }}
-            </p>
-            <p class="text-sm text-gray-400">
-              {{ item.description }}
-            </p>
-          </template>
-
-          <template #props>
-            <div v-for="prop in component.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="p-3">
-              <UFormField :name="prop.name">
-                <template #label>
-                  <p class="font-mono font-bold px-2 py-0.5 border-gray-300 border border-dashed rounded bg-gray-50">
-                    {{ prop?.name }}
-                  </p>
-                </template>
-                <template #description>
-                  <MDC v-if="prop.description" :value="prop.description" class="text-gray-600 dark:text-gray-300 mt-1" />
-                </template>
-                <ComponentPropInput v-bind="prop" v-model="state.props[component.slug][prop.name]" class="mt-2" />
-              </UFormField>
-            </div>
-          </template>
-          <template #theme>
-            <div v-for="(_value, slot) in component?.slots" :key="'slots-' + slot" class="p-3 hover:bg-gray-50 transition">
-              <UFormField :name="slot" @mouseenter="onSlotHover(slot)" @mouseleave="onSlotLeave(slot)">
-                <template #label>
-                  <p class="font-mono font-bold px-2 py-0.5 border-gray-300 border border-dashed rounded bg-gray-100">
-                    {{ slot }}
-                  </p>
-                </template>
-                <UTextarea v-model="state.slots[component.slug][slot]" autoresize class="mt-2 w-full font-mono" />
-              </UFormField>
-            </div>
-          </template>
-        </UAccordion>
+    <div v-if="component" class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-6">
+      <div class="col-span-1 border-r border-gray-200 hidden xl:block overflow-y-auto bg-white">
+        <UNavigationMenu
+          :model-value="component?.slug"
+          :items="components.map((c) => ({ ...c, select: () => component = c }))"
+          orientation="vertical"
+          highlight
+        />
       </div>
-      <div class="flex flex-col">
+
+      <div class="flex flex-col xl:col-span-4 col-span-3">
         <iframe class="grow w-full" :src="`/__nuxt_ui__/components/${component.slug}`" />
-        <div class="relative min-h-40 max-h-72 w-full border-t border-gray-200 overflow-y-scroll bg-gray-50">
+        <div class="relative min-h-40 max-h-72 w-full border-t border-gray-200 overflow-y-auto bg-gray-50">
           <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="p-4" />
           <UButton
             v-if="ast"
@@ -197,6 +169,37 @@ const { copy, copied } = useClipboard()
             @click="copy(ast?.body?.children?.[0]?.props.code)"
           />
         </div>
+      </div>
+      <div class="bg-white border-l border-gray-200 flex flex-col overflow-y-auto col-span-3">
+        <UTabs color="gray" variant="link" :items="accordionItems">
+          <template #props>
+            <div v-for="prop in component.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-gray-200">
+              <UFormField :name="prop.name" class="grid grid-cols-2 gap-8 items-baseline">
+                <template #label>
+                  <p class="font-mono font-bold px-2 py-0.5 border-gray-300 border border-dashed rounded bg-gray-50">
+                    {{ prop?.name }}
+                  </p>
+                </template>
+                <template #description>
+                  <MDC v-if="prop.description" :value="prop.description" class="text-gray-600 dark:text-gray-300 mt-1" />
+                </template>
+                <ComponentPropInput v-bind="prop" v-model="state.props[component.slug][prop.name]" />
+              </UFormField>
+            </div>
+          </template>
+          <template #theme>
+            <div v-for="(_value, slot) in component?.slots" :key="'slots-' + slot" class="px-3 py-5 hover:bg-gray-50 transition">
+              <UFormField :name="slot" @mouseenter="onSlotHover(slot)" @mouseleave="onSlotLeave(slot)">
+                <template #label>
+                  <p class="font-mono font-bold px-2 py-0.5 border-gray-300 border border-dashed rounded bg-gray-100">
+                    {{ slot }}
+                  </p>
+                </template>
+                <UTextarea v-model="state.slots[component.slug][slot]" autoresize class="mt-2 w-full font-mono" />
+              </UFormField>
+            </div>
+          </template>
+        </UTabs>
       </div>
     </div>
   </UApp>

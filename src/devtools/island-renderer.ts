@@ -2,8 +2,6 @@ import type { defineAsyncComponent } from 'vue'
 import { createVNode, defineComponent, onErrorCaptured } from 'vue'
 
 import { injectHead } from '@unhead/vue'
-
-// @ts-expect-error virtual file
 import { islandComponents } from '#build/components.islands.mjs'
 
 export default defineComponent({
