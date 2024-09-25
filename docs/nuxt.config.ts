@@ -90,8 +90,22 @@ export default defineNuxtConfig({
         '/getting-started'
         // '/api/releases.json',
         // '/api/pulls.json'
-      ]
+      ],
+      crawlLinks: true
       // ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
+    },
+    cloudflare: {
+      pages: {
+        routes: {
+          exclude: [
+            '/components/*',
+            '/getting-started/*',
+            '/composables/*',
+            '/api/*',
+            '/__og-image__/*'
+          ]
+        }
+      }
     }
   },
 
