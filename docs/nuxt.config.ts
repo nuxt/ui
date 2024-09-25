@@ -48,8 +48,10 @@ export default defineNuxtConfig({
       dir: resolve('./app/assets/icons')
     }],
     clientBundle: {
-      scan: true
-    }
+      scan: true,
+      includeCustomCollections: true
+    },
+    serverBundle: 'local'
   },
 
   content: {
