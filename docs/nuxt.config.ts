@@ -101,8 +101,7 @@ export default defineNuxtConfig({
             '/components/*',
             '/getting-started/*',
             '/composables/*',
-            '/api/*',
-            '/__og-image__/*'
+            '/api/*'
           ]
         }
       }
