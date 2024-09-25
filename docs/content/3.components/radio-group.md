@@ -70,9 +70,9 @@ props:
 When using objects, you need to reference the `value` property of the object in the `v-model` directive or the `default-value` prop.
 ::
 
-#### Value Key
+### Value Key
 
-You can change the property that is used to set the value by using the `value-key` prop.
+You can change the property that is used to set the value by using the `value-key` prop. Defaults to `value`.
 
 ::component-code
 ---

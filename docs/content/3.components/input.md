@@ -162,7 +162,6 @@ ignore:
 props:
   loading: true
   loadingIcon: 'i-heroicons-arrow-path-rounded-square'
-  trailing: false
   placeholder: 'Search...'
 ---
 ::

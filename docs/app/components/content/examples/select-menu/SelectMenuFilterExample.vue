@@ -1,5 +1,9 @@
 <script setup lang="ts">
+const searchTerm = ref('')
+const searchTermDebounced = refDebounced(searchTerm, 200)
+
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+  params: { q: searchTermDebounced },
   transform: (data: { id: number, name: string }[]) => {
     return data?.map(user => ({
       label: user.name,
@@ -9,16 +13,14 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   },
   lazy: true
 })
-
-function getUserAvatar(value: string) {
-  return users.value?.find(user => user.value === value)?.avatar || {}
-}
 </script>
 
 <template>
-  <USelect
+  <USelectMenu
+    v-model:search-term="searchTerm"
     :items="users || []"
     :loading="status === 'pending'"
+    :filter="false"
     icon="i-heroicons-user"
     placeholder="Select user"
     class="w-48"
@@ -26,10 +28,10 @@ function getUserAvatar(value: string) {
     <template #leading="{ modelValue, ui }">
       <UAvatar
         v-if="modelValue"
-        v-bind="getUserAvatar(modelValue)"
+        v-bind="modelValue.avatar"
         :size="ui.itemLeadingAvatarSize()"
         :class="ui.itemLeadingAvatar()"
       />
     </template>
-  </USelect>
+  </USelectMenu>
 </template>

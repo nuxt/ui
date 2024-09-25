@@ -9,14 +9,10 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   },
   lazy: true
 })
-
-function getUserAvatar(value: string) {
-  return users.value?.find(user => user.value === value)?.avatar || {}
-}
 </script>
 
 <template>
-  <USelect
+  <USelectMenu
     :items="users || []"
     :loading="status === 'pending'"
     icon="i-heroicons-user"
@@ -26,10 +22,10 @@ function getUserAvatar(value: string) {
     <template #leading="{ modelValue, ui }">
       <UAvatar
         v-if="modelValue"
-        v-bind="getUserAvatar(modelValue)"
+        v-bind="modelValue.avatar"
         :size="ui.itemLeadingAvatarSize()"
         :class="ui.itemLeadingAvatar()"
       />
     </template>
-  </USelect>
+  </USelectMenu>
 </template>
