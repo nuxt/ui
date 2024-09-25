@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper" v-bind="attrs">
+  <div :class="ui.wrapper" v-bind="attrs" :dir="isRtl ? 'rtl' : 'ltr'">
     <div ref="carouselRef" :class="ui.container" class="no-scrollbar">
       <div
         v-for="(item, index) in items"
@@ -89,6 +89,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    isRtl: {
+      type: Boolean,
+      default: false
+    },
     prevButton: {
       type: Object as PropType<Button & { class?: string }>,
       default: () => config.default.prevButton as Button & { class?: string }
@@ -129,7 +133,9 @@ export default defineComponent({
         return 0
       }
 
-      return Math.round(x.value / itemWidth.value) + 1
+      return props.isRtl
+        ? Math.round(-x.value / itemWidth.value) + 1
+        : Math.round(x.value / itemWidth.value) + 1
     })
 
     const pages = computed(() => {
@@ -144,15 +150,15 @@ export default defineComponent({
     const isLast = computed(() => currentPage.value === pages.value)
 
     function onClickNext () {
-      x.value += itemWidth.value
+      x.value += props.isRtl ? -itemWidth.value : itemWidth.value
     }
 
     function onClickPrev () {
-      x.value -= itemWidth.value
+      x.value -= props.isRtl ? -itemWidth.value : itemWidth.value
     }
 
     function onClick (page: number) {
-      x.value = (page - 1) * itemWidth.value
+      x.value = (page - 1) * itemWidth.value * (props.isRtl ? -1 : 1)
     }
 
     expose({
