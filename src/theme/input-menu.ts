@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => {
   return defuFn({
     slots: {
       base: () => ['rounded-md', options.theme.transitions && 'transition-colors'],
-      trailing: 'absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75',
+      trailing: 'group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75',
       arrow: 'fill-gray-200 dark:fill-gray-800',
       content: 'max-h-60 w-[--radix-popper-anchor-width] bg-white dark:bg-gray-900 shadow-lg rounded-md ring ring-gray-200 dark:ring-gray-800 overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
       viewport: 'divide-y divide-gray-200 dark:divide-gray-800 scroll-py-1',
