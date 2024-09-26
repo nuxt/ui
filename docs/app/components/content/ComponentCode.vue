@@ -47,7 +47,7 @@ const componentEvents = reactive({
 })
 
 function getComponentProp(name: string) {
-  return get(componentProps, name) || undefined
+  return get(componentProps, name) ?? undefined
 }
 
 function setComponentProp(name: string, value: any) {
