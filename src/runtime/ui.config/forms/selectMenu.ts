@@ -29,6 +29,9 @@ export default {
     },
     empty: {
       label: 'No options.'
+    },
+    optionEmpty: {
+      label: 'No results for "{query}".'
     }
   },
   arrow: {
