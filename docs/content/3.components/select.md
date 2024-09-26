@@ -24,8 +24,8 @@ ignore:
   - modelValue
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'Backlog'
   items:
@@ -52,8 +52,8 @@ ignore:
   - modelValue
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'backlog'
   items:
@@ -81,8 +81,8 @@ ignore:
   - modelValue
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'Apple'
   items:
@@ -110,8 +110,8 @@ ignore:
   - valueKey
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'backlog'
   valueKey: 'id'
@@ -134,9 +134,9 @@ Use the `placeholder` prop to set a placeholder text.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
+  - items
+external:
   - items
 props:
   placeholder: 'Select status'
@@ -159,11 +159,11 @@ The `content.align`, `content.side`, etc. properties only apply when `content.po
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 items:
   content.position:
     - 'item-aligned'
@@ -203,11 +203,11 @@ Use the `color` prop to change the ring color when the Select is focused.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   color: gray
   highlight: true
@@ -231,11 +231,11 @@ Use the `variant` prop to change the variant of the Select.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   color: gray
   variant: subtle
@@ -256,11 +256,11 @@ Use the `size` prop to change the size of the Select.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   size: xl
   defaultValue: 'Backlog'
@@ -279,11 +279,11 @@ Use the `icon` prop to show an [Icon](/components/icon) inside the Select.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   icon: 'i-heroicons-magnifying-glass'
   size: md
@@ -298,18 +298,18 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing icon. Defaults to `i-heroicons-chevron-down-20-solid`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-heroicons-chevron-down-20-solid`.
 
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
-  trailingIcon: 'i-heroicons-arrow-small-right'
+  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
   size: md
   defaultValue: 'Backlog'
   items:
@@ -331,11 +331,11 @@ Use the `selected-icon` prop to customize the icon when an item is selected. Def
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   selectedIcon: 'i-heroicons-fire'
   size: md
@@ -359,11 +359,11 @@ Use the `loading` prop to show a loading icon on the Select.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   loading: true
   trailing: false
@@ -383,11 +383,11 @@ Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroic
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   loading: true
   loadingIcon: 'i-heroicons-arrow-path-rounded-square'
@@ -411,11 +411,11 @@ Use the `disabled` prop to disable the Select.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - placeholder
+external:
+  - items
 props:
   disabled: true
   placeholder: 'Select status'
@@ -440,8 +440,8 @@ ignore:
   - modelValue
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'Apple'
   items:

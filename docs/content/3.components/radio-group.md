@@ -25,8 +25,8 @@ ignore:
   - modelValue
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'System'
   items:
@@ -49,8 +49,8 @@ ignore:
   - modelValue
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'system'
   items:
@@ -81,8 +81,8 @@ ignore:
   - items
   - valueKey
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'light'
   valueKey: 'id'

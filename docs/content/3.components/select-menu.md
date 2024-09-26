@@ -15,7 +15,11 @@ links:
 Use the `v-model` directive to control the value of the SelectMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::tip
-Use the SelectMenu component over a [Select](/components/select) to take advantage of Radix Vue's [Combobox](https://www.radix-vue.com/components/combobox.html) component that offers search capabilities and multiple selection.
+Use this over a [Select](/components/select) to take advantage of Radix Vue's [Combobox](https://www.radix-vue.com/components/combobox.html) component that offers search capabilities and multiple selection.
+::
+
+::note
+This component is similar to the [InputMenu](/components/input-menu) but it's using a Select instead of an Input with the search inside the menu.
 ::
 
 ### Items
@@ -29,8 +33,8 @@ ignore:
   - modelValue
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'Backlog'
   items:
@@ -57,8 +61,8 @@ ignore:
   - modelValue.label
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue:
     label: 'Todo'
@@ -83,8 +87,8 @@ ignore:
   - modelValue
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'Apple'
   items:
@@ -113,8 +117,8 @@ ignore:
   - valueKey
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'todo'
   valueKey: 'id'
@@ -142,18 +146,18 @@ ignore:
   - items
   - multiple
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue:
     - Backlog
     - Todo
+  multiple: true
   items:
     - Backlog
     - Todo
     - In Progress
     - Done
-  multiple: true
 ---
 ::
 
@@ -168,9 +172,9 @@ Use the `placeholder` prop to set a placeholder text.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
+  - items
+external:
   - items
 props:
   placeholder: 'Select status'
@@ -225,10 +229,10 @@ Use the `content` prop to control how the SelectMenu content is rendered, like i
 ::component-code
 ---
 prettier: true
-external:
+ignore:
   - items
   - modelValue
-ignore:
+external:
   - items
   - modelValue
 items:
@@ -257,15 +261,15 @@ props:
 
 ### Color
 
-Use the `color` prop to change the ring color when the Select is focused.
+Use the `color` prop to change the ring color when the SelectMenu is focused.
 
 ::component-code
 ---
 prettier: true
-external:
+ignore:
   - items
   - modelValue
-ignore:
+external:
   - items
   - modelValue
 props:
@@ -286,15 +290,15 @@ The `highlight` prop is used here to show the focus state. It's used internally 
 
 ### Variant
 
-Use the `variant` prop to change the variant of the Select.
+Use the `variant` prop to change the variant of the SelectMenu.
 
 ::component-code
 ---
 prettier: true
-external:
+ignore:
   - items
   - modelValue
-ignore:
+external:
   - items
   - modelValue
 props:
@@ -312,15 +316,15 @@ props:
 
 ### Size
 
-Use the `size` prop to change the size of the Select.
+Use the `size` prop to change the size of the SelectMenu.
 
 ::component-code
 ---
 prettier: true
-external:
+ignore:
   - items
   - modelValue
-ignore:
+external:
   - items
   - modelValue
 props:
@@ -336,15 +340,15 @@ props:
 
 ### Icon
 
-Use the `icon` prop to show an [Icon](/components/icon) inside the Select.
+Use the `icon` prop to show an [Icon](/components/icon) inside the SelectMenu.
 
 ::component-code
 ---
 prettier: true
-external:
+ignore:
   - items
   - modelValue
-ignore:
+external:
   - items
   - modelValue
 props:
@@ -361,20 +365,20 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing icon. Defaults to `i-heroicons-chevron-down-20-solid`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-heroicons-chevron-down-20-solid`.
 
 ::component-code
 ---
 prettier: true
-external:
+ignore:
   - items
   - modelValue
-ignore:
+external:
   - items
   - modelValue
 props:
   modelValue: 'Backlog'
-  trailingIcon: 'i-heroicons-arrow-small-right'
+  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
   size: md
   items:
     - Backlog
@@ -395,10 +399,10 @@ Use the `selected-icon` prop to customize the icon when an item is selected. Def
 ::component-code
 ---
 prettier: true
-external:
+ignore:
   - items
   - modelValue
-ignore:
+external:
   - items
   - modelValue
 props:
@@ -419,15 +423,15 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.che
 
 ### Loading
 
-Use the `loading` prop to show a loading icon on the Select.
+Use the `loading` prop to show a loading icon on the SelectMenu.
 
 ::component-code
 ---
 prettier: true
-external:
+ignore:
   - items
   - modelValue
-ignore:
+external:
   - items
   - modelValue
 props:
@@ -449,10 +453,10 @@ Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroic
 ::component-code
 ---
 prettier: true
-external:
+ignore:
   - items
   - modelValue
-ignore:
+external:
   - items
   - modelValue
 props:
@@ -473,16 +477,16 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.loa
 
 ### Disabled
 
-Use the `disabled` prop to disable the Select.
+Use the `disabled` prop to disable the SelectMenu.
 
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - placeholder
+external:
+  - items
 props:
   disabled: true
   placeholder: 'Select status'

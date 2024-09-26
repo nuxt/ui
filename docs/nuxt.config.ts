@@ -163,6 +163,7 @@ export default defineNuxtConfig({
         'UFormField',
         'UIcon',
         'UInput',
+        'UInputMenu',
         'UKbd',
         'ULink',
         'UModal',
