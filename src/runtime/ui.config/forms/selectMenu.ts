@@ -23,7 +23,10 @@ export default {
   default: {
     selectedIcon: 'i-heroicons-check-20-solid',
     clearSearchOnClose: false,
-    showCreateOptionWhen: 'empty'
+    showCreateOptionWhen: 'empty',
+    searchablePlaceholder: {
+      label: 'Search...'
+    }
   },
   arrow: {
     ...arrow,

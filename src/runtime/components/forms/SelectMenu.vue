@@ -247,7 +247,7 @@ export default defineComponent({
     },
     searchablePlaceholder: {
       type: String,
-      default: 'Search...'
+      default: () => configMenu.default.searchablePlaceholder.label
     },
     searchableLazy: {
       type: Boolean,
