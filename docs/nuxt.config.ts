@@ -168,6 +168,7 @@ export default defineNuxtConfig({
         'ULink',
         'UModal',
         'UNavigationMenu',
+        'UPagination',
         'UPopover',
         'UProgress',
         'URadioGroup',
