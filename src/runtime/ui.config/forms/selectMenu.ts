@@ -26,6 +26,9 @@ export default {
     showCreateOptionWhen: 'empty',
     searchablePlaceholder: {
       label: 'Search...'
+    },
+    empty: {
+      label: 'No options.'
     }
   },
   arrow: {
