@@ -85,7 +85,7 @@ Learn how to customize icons from the [Select](/components/select#icon) componen
 
 Use the `searchable` prop to enable search.
 
-Use the `searchable-placeholder` prop to set a different placeholder.
+Use the `searchable-placeholder` prop to set a different placeholder or globally through the `ui.selectMenu.default.searchablePlaceholder.label` config. Defaults to `Search...`.
 
 This will use Headless UI [Combobox](https://headlessui.com/v1/vue/combobox) component instead of [Listbox](https://headlessui.com/v1/vue/listbox).
 
@@ -258,6 +258,8 @@ componentProps:
 
 Use the `#option-empty` slot to customize the content displayed when the `searchable` prop is `true` and there is no options. You will have access to the `query` property in the slot scope.
 
+You can also configure this globally through the `ui.selectMenu.default.optionEmpty.label` config. The token `{query}` will be replaced by `query` property. Defaults to `No results for "{query}".`.
+
 ::component-example
 ---
 component: 'select-menu-example-option-empty-slot'
@@ -276,7 +278,9 @@ An example is available in the [Creatable](#creatable) section.
 
 ### `empty`
 
-Use the `#empty` slot to customize the content displayed when there is no options. Defaults to `No options.`.
+Use the `#empty` slot to customize the content displayed when there is no options.
+
+You can also configure this globally through the `ui.selectMenu.default.empty.label` config. Defaults to `No options.`.
 
 ::component-example
 ---
