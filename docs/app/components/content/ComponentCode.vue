@@ -16,6 +16,8 @@ const props = defineProps<{
   hide?: string[]
   /** List of props to externalize in script setup */
   external?: string[]
+  /** List of props to use with `v-model` */
+  model?: string[]
   /** List of items for each prop */
   items?: { [key: string]: string[] }
   props?: { [key: string]: any }
@@ -39,6 +41,10 @@ const camelName = camelCase(props.slug ?? route.params.slug?.[route.params.slug.
 const name = `U${upperFirst(camelName)}`
 
 const componentProps = reactive({ ...(props.props || {}) })
+const componentEvents = reactive({
+  ...Object.fromEntries((props.model || []).map(key => [`onUpdate:${key}`, (e: any) => setComponentProp(key, e)])),
+  ...(componentProps.modelValue ? { [`onUpdate:modelValue`]: (e: any) => setComponentProp('modelValue', e) } : {})
+})
 
 function getComponentProp(name: string) {
   return get(componentProps, name) || undefined
@@ -119,6 +125,11 @@ const code = computed(() => {
   for (const [key, value] of Object.entries(componentProps)) {
     if (key === 'modelValue') {
       code += ` v-model="value"`
+      continue
+    }
+
+    if (props.model?.includes(key)) {
+      code += ` v-model:${key}="${key}"`
       continue
     }
 
@@ -253,7 +264,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
       </div>
 
       <div class="flex justify-center border border-b-0 border-gray-200 dark:border-gray-700 relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class]">
-        <component :is="name" v-bind="componentProps" @update:model-value="!!componentProps.modelValue && setComponentProp('modelValue', $event)">
+        <component :is="name" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <ContentSlot :name="slot" unwrap="p">
               {{ slots?.[slot] }}
