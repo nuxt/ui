@@ -4,6 +4,7 @@ import { withoutTrailingSlash } from 'ufo'
 // import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 const route = useRoute()
+const appConfig = useAppConfig()
 // const colorMode = useColorMode()
 const runtimeConfig = useRuntimeConfig()
 const { integrity, api } = runtimeConfig.public.content
@@ -74,7 +75,7 @@ provide('navigation', navigation)
 </script>
 
 <template>
-  <UApp>
+  <UApp :toaster="appConfig.toaster">
     <NuxtLoadingIndicator color="#FFF" />
 
     <template v-if="!route.path.startsWith('/examples')">
