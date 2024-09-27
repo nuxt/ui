@@ -1,5 +1,5 @@
 ---
-description: A drawer that slides in from the bottom of the screen.
+description: A drawer that smoothly slides in & out of the screen.
 links:
   - label: Drawer
     icon: i-custom-radix-vue
