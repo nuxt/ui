@@ -89,6 +89,85 @@ slots:
 :placeholder{class="h-48"}
 ::
 
+### Direction
+
+Use the `direction` prop to control the direction of the Drawer. Defaults to `bottom`.
+
+::component-code
+---
+prettier: true
+items:
+  direction:
+    - top
+    - bottom
+props:
+  direction: 'top'
+slots:
+  default: |
+
+    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+
+  content: |
+
+    <Placeholder class="h-96 m-4" />
+---
+
+:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+
+#content
+:placeholder{class="h-96 m-4"}
+::
+
+::component-code
+---
+prettier: true
+items:
+  direction:
+    - right
+    - left
+props:
+  direction: 'right'
+slots:
+  default: |
+
+    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+
+  content: |
+
+    <Placeholder class="w-96 m-4" />
+---
+
+:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+
+#content
+:placeholder{class="w-96 m-4"}
+::
+
+### Handle
+
+Use the `handle` prop to control whether the Drawer has a handle or not. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+props:
+  handle: false
+slots:
+  default: |
+
+    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+
+  content: |
+
+    <Placeholder class="h-48 m-4" />
+---
+
+:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+
+#content
+:placeholder{class="h-48 m-4"}
+::
+
 ### Overlay
 
 Use the `overlay` prop to control whether the Drawer has an overlay or not. Defaults to `true`.
@@ -174,6 +253,7 @@ You can control the open state by using the `default-open` prop or the `v-model:
 
 ::component-example
 ---
+prettier: true
 name: 'drawer-open-example'
 ---
 ::
@@ -192,6 +272,8 @@ Use the `#footer` slot to add content after the Drawer's body.
 
 ::component-example
 ---
+prettier: true
+collapse: true
 name: 'drawer-footer-slot-example'
 ---
 ::

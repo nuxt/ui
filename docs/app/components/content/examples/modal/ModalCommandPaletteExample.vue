@@ -19,7 +19,12 @@ const groups = computed(() => [{
 
 <template>
   <UModal>
-    <UButton label="Search users..." color="gray" variant="subtle" icon="i-heroicons-magnifying-glass" />
+    <UButton
+      label="Search users..."
+      color="gray"
+      variant="subtle"
+      icon="i-heroicons-magnifying-glass"
+    />
 
     <template #content>
       <UCommandPalette

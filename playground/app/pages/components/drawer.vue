@@ -24,5 +24,37 @@ const open = ref(false)
         <Placeholder class="h-screen w-full" />
       </template>
     </UDrawer>
+
+    <UDrawer title="Drawer with bottom direction" direction="bottom" :handle="false">
+      <UButton color="gray" variant="outline" label="Open on bottom" />
+
+      <template #body>
+        <Placeholder class="h-96 w-full" />
+      </template>
+    </UDrawer>
+
+    <UDrawer title="Drawer with left direction" direction="left" :handle="false">
+      <UButton color="gray" variant="outline" label="Open on left" />
+
+      <template #body>
+        <Placeholder class="w-96 h-full" />
+      </template>
+    </UDrawer>
+
+    <UDrawer title="Drawer with top direction" direction="top" :handle="false">
+      <UButton color="gray" variant="outline" label="Open on top" />
+
+      <template #body>
+        <Placeholder class="h-96 w-full" />
+      </template>
+    </UDrawer>
+
+    <UDrawer title="Drawer with right direction" direction="right" :handle="false">
+      <UButton color="gray" variant="outline" label="Open on right" />
+
+      <template #body>
+        <Placeholder class="w-96 h-full" />
+      </template>
+    </UDrawer>
   </div>
 </template>
