@@ -39,7 +39,7 @@ export default {
   }, {
     direction: ['right', 'left'],
     class: {
-      content: 'inset-y-4 w-auto max-w-[96%] rounded-lg after:hidden',
+      content: 'inset-y-4 w-auto max-w-[calc(100%-2rem)] rounded-lg after:hidden',
       handle: 'h-12 w-1.5 mt-auto mb-auto'
     }
   }]
