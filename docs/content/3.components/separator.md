@@ -27,7 +27,7 @@ Use the `orientation` prop to change the orientation of the Separator. Defaults 
 ---
 ignore:
   - class
-class: 'p-8 justify-center'
+class: 'p-8'
 props:
   orientation: vertical
   class: 'h-48'
@@ -40,7 +40,7 @@ Use the `label` prop to display a label in the middle of the Separator.
 
 ::component-code
 ---
-class: 'p-8 justify-center'
+class: 'p-8'
 props:
   label: 'Hello World'
 ---
@@ -52,7 +52,7 @@ Use the `icon` prop to display an icon in the middle of the Separator.
 
 ::component-code
 ---
-class: 'p-8 justify-center'
+class: 'p-8'
 props:
   icon: 'i-simple-icons-nuxtdotjs'
 ---
@@ -65,7 +65,7 @@ Use the `avatar` prop to display an avatar in the middle of the Separator.
 ::component-code
 ---
 prettier: true
-class: 'p-8 justify-center'
+class: 'p-8'
 props:
   avatar:
     src: 'https://github.com/benjamincanac.png'
@@ -78,7 +78,7 @@ Use the `color` prop to change the color of the Separator. Defaults to `gray`.
 
 ::component-code
 ---
-class: 'p-8 justify-center'
+class: 'p-8'
 props:
   color: 'primary'
   type: solid

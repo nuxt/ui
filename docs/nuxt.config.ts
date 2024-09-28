@@ -21,11 +21,16 @@ export default defineNuxtConfig({
     '@nuxt/ui-pro',
     '@nuxt/content',
     '@nuxt/image',
+    '@nuxthub/core',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-og-image'
   ],
+
+  hub: {
+    cache: true
+  },
 
   future: {
     compatibilityVersion: 4
@@ -41,7 +46,11 @@ export default defineNuxtConfig({
     customCollections: [{
       prefix: 'custom',
       dir: resolve('./app/assets/icons')
-    }]
+    }],
+    clientBundle: {
+      scan: true,
+      includeCustomCollections: true
+    }
   },
 
   content: {
@@ -72,21 +81,42 @@ export default defineNuxtConfig({
     provider: 'ipx'
   },
 
-  // nitro: {
-  //   prerender: {
-  //     routes: [
-  //       '/getting-started'
-  //       // '/api/releases.json',
-  //       // '/api/pulls.json'
-  //     ],
-  //     ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
-  //   }
-  // },
+  nitro: {
+    prerender: {
+      routes: [
+        '/getting-started'
+        // '/api/releases.json',
+        // '/api/pulls.json'
+      ],
+      crawlLinks: true,
+      autoSubfolderIndex: false
+      // ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
+    },
+    cloudflare: {
+      pages: {
+        routes: {
+          exclude: [
+            '/components/*',
+            '/getting-started/*',
+            '/composables/*',
+            '/api/*'
+          ]
+        }
+      }
+    }
+  },
 
   routeRules: {
     '/': { redirect: '/getting-started', prerender: false },
     '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
     '/components': { redirect: '/components/app', prerender: false }
+  },
+
+  $production: {
+    routeRules: {
+      '/api/_mdc/highlight': { cache: { group: 'mdc', name: 'highlight', maxAge: 60 * 60 } },
+      '/api/_content/query/**': { cache: { group: 'content', name: 'query', maxAge: 60 * 60 } }
+    }
   },
 
   componentMeta: {
@@ -133,14 +163,17 @@ export default defineNuxtConfig({
         'UFormField',
         'UIcon',
         'UInput',
+        'UInputMenu',
         'UKbd',
         'ULink',
         'UModal',
         'UNavigationMenu',
+        'UPagination',
         'UPopover',
         'UProgress',
         'URadioGroup',
         'USelect',
+        'USelectMenu',
         'USeparator',
         'USlider',
         'USlideover',

@@ -20,7 +20,6 @@ Then, use the `#content` slot to add the content displayed when the Collapsible 
 prettier: true
 ignore:
   - class
-class: 'justify-center'
 props:
   class: 'w-48'
 slots:
@@ -48,7 +47,6 @@ Use the `disabled` prop to disable the Collapsible.
 prettier: true
 ignore:
   - class
-class: 'justify-center'
 props:
   class: 'w-48'
   disabled: true
@@ -77,7 +75,6 @@ You can control the open state by using the `default-open` prop or the `v-model:
 ::component-example
 ---
 name: 'collapsible-open-example'
-class: 'justify-center'
 ---
 ::
 
@@ -96,7 +93,6 @@ Here is an example with a rotating icon in the Button that indicates the open st
 ::component-example
 ---
 name: 'collapsible-icon-example'
-class: 'justify-center'
 ---
 ::
 

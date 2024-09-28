@@ -22,6 +22,7 @@ export interface SelectMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
+  select?(e?: Event): void
 }
 
 type SelectMenuVariants = VariantProps<typeof selectMenu>
@@ -32,11 +33,10 @@ export interface SelectMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelVal
   placeholder?: string
   /**
    * Wether to display the search input or not.
-   * @defaultValue true
+   * Can be an object to pass additional props to the input.
+   * @defaultValue { placeholder: 'Search...' }
    */
-  search?: boolean
-  /** The placeholder text when the search input is empty. */
-  searchPlaceholder?: string
+  searchInput?: boolean | { placeholder?: string }
   color?: SelectMenuVariants['color']
   variant?: SelectMenuVariants['variant']
   size?: SelectMenuVariants['size']
@@ -92,7 +92,7 @@ export type SelectMenuEmits<T> = ComboboxRootEmits<T> & {
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export type SelectMenuSlots<T> = {
+export interface SelectMenuSlots<T> {
   'leading'(props: { modelValue: T, open: boolean, ui: any }): any
   'default'(props: { modelValue: T, open: boolean }): any
   'trailing'(props: { modelValue: T, open: boolean, ui: any }): any
@@ -122,7 +122,7 @@ const props = withDefaults(defineProps<SelectMenuProps<T>>(), {
   search: true,
   portal: true,
   autofocusDelay: 0,
-  searchPlaceholder: 'Search...',
+  searchInput: () => ({ placeholder: 'Search...' }),
   filter: () => ['label']
 })
 const emits = defineEmits<SelectMenuEmits<T>>()
@@ -244,14 +244,14 @@ function onUpdateOpen(value: boolean) {
     </ComboboxAnchor>
 
     <ComboboxPortal :disabled="!portal">
-      <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
+      <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <ComboboxInput
-          v-if="search"
-          :placeholder="searchPlaceholder"
-          data-slot="input"
-          :class="ui.input({ class: props.ui?.input })"
+          v-if="!!searchInput"
           autofocus
           autocomplete="off"
+          data-slot="input"
+          v-bind="typeof searchInput === 'object' ? searchInput : {}"
+          :class="ui.input({ class: props.ui?.input })"
         />
 
         <ComboboxEmpty data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
@@ -275,6 +275,7 @@ function onUpdateOpen(value: boolean) {
                 :class="ui.item({ class: props.ui?.item })"
                 :disabled="item.disabled"
                 :value="valueKey && typeof item === 'object' ? (item[valueKey as keyof SelectMenuItem]) as AcceptableValue : item"
+                @select="item.select"
               >
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">

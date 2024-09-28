@@ -39,7 +39,6 @@ ignore:
   - class
 external:
   - items
-class: 'justify-center'
 props:
   items:
     - - label: Appearance
@@ -119,7 +118,6 @@ ignore:
   - class
 external:
   - items
-class: 'justify-center'
 props:
   size: xl
   items:
@@ -153,7 +151,6 @@ ignore:
   - class
 external:
   - items
-class: 'justify-center'
 props:
   disabled: true
   items:
@@ -191,7 +188,6 @@ You will have access to the following slots:
 ::component-example
 ---
 name: 'context-menu-custom-slot-example'
-class: 'justify-center'
 ---
 ::
 

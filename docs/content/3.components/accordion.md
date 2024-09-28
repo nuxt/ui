@@ -153,12 +153,12 @@ hide:
   - class
 props:
   class: 'px-4'
-  trailingIcon: 'i-heroicons-plus'
+  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
   items:
     - label: 'Icons'
       icon: 'i-heroicons-face-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-      trailingIcon: 'i-heroicons-arrow-down'
+      trailingIcon: 'i-heroicons-plus-20-solid'
     - label: 'Colors'
       icon: 'i-heroicons-swatch'
       content: 'Choose a primary and a gray color from your Tailwind CSS theme.'

@@ -23,6 +23,7 @@ export interface InputMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
+  select?(e?: Event): void
 }
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
@@ -100,7 +101,7 @@ export type InputMenuEmits<T> = ComboboxRootEmits<T> & {
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export type InputMenuSlots<T> = {
+export interface InputMenuSlots<T> {
   'leading'(props: { modelValue: T, open: boolean, ui: any }): any
   'trailing'(props: { modelValue: T, open: boolean, ui: any }): any
   'empty'(props: { searchTerm?: string }): any
@@ -336,6 +337,7 @@ defineExpose({
                 :class="ui.item({ class: props.ui?.item })"
                 :disabled="item.disabled"
                 :value="valueKey && typeof item === 'object' ? (item[valueKey as keyof InputMenuItem]) as AcceptableValue : item"
+                @select="item.select"
               >
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">

@@ -54,7 +54,7 @@ Use the `indeterminate-icon` prop to customize the indeterminate icon. Defaults 
 ---
 props:
   indeterminate: true
-  indeterminateIcon: 'i-heroicons-plus'
+  indeterminateIcon: 'i-heroicons-plus-20-solid'
 ---
 ::
 

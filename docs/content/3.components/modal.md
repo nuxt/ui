@@ -18,7 +18,6 @@ Then, use the `#content` slot to add the content displayed when the Modal is ope
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 slots:
   default: |
 
@@ -44,7 +43,6 @@ Use the `title` prop to set the title of the Modal's header.
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 props:
   title: 'Modal with title'
 slots:
@@ -70,7 +68,6 @@ Use the `description` prop to set the description of the Modal's header.
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - title
 props:
@@ -101,7 +98,6 @@ You can pass all the props of the [Button](/components/button) component to cust
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - title
   - close.color
@@ -139,7 +135,6 @@ Use the `close-icon` prop to customize the close button [Icon](/components/icon)
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - title
 props:
@@ -174,7 +169,6 @@ Use the `overlay` prop to control whether the Modal has an overlay or not. Defau
 prettier: true
 ignore:
   - title
-class: 'justify-center'
 props:
   overlay: false
   title: 'Modal without overlay'
@@ -203,7 +197,6 @@ Use the `transition` prop to control whether the Modal is animated or not. Defau
 prettier: true
 ignore:
   - title
-class: 'justify-center'
 props:
   transition: false
   title: 'Modal without transition'
@@ -233,7 +226,6 @@ prettier: true
 ignore:
   - title
   - fullscreen
-class: 'justify-center'
 props:
   fullscreen: true
   title: 'Modal fullscreen'
@@ -263,7 +255,6 @@ prettier: true
 ignore:
   - title
   - preventClose
-class: 'justify-center'
 props:
   preventClose: true
   title: 'Modal prevent close'
@@ -292,7 +283,6 @@ You can control the open state by using the `default-open` prop or the `v-model:
 ::component-example
 ---
 name: 'modal-open-example'
-class: 'justify-center'
 ---
 ::
 
@@ -326,7 +316,6 @@ Then, use it in your app:
 ::component-example
 ---
 name: 'modal-programmatic-example'
-class: 'justify-center'
 ---
 ::
 
@@ -341,7 +330,6 @@ You can nest modals within each other.
 ::component-example
 ---
 name: 'modal-nested-example'
-class: 'justify-center'
 ---
 ::
 
@@ -352,7 +340,6 @@ Use the `#footer` slot to add content after the Modal's body.
 ::component-example
 ---
 name: 'modal-footer-slot-example'
-class: 'justify-center'
 ---
 ::
 
@@ -364,7 +351,6 @@ You can use a [CommandPalette](/components/command-palette) component inside the
 ---
 collapse: true
 name: 'modal-command-palette-example'
-class: 'justify-center'
 ---
 ::
 

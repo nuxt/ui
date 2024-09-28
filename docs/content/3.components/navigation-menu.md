@@ -296,7 +296,7 @@ ignore:
 external:
   - items
 props:
-  trailingIcon: 'i-heroicons-plus'
+  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
   items:
     - label: Guide
       icon: i-heroicons-book-open
@@ -497,7 +497,6 @@ You will have access to the following slots:
 ::component-example
 ---
 name: 'navigation-menu-custom-slot-example'
-class: 'justify-center'
 ---
 ::
 

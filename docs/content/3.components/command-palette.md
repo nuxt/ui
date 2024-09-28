@@ -467,7 +467,6 @@ You can use the CommandPalette component inside a [Popover](/components/popover)
 ---
 collapse: true
 name: 'popover-command-palette-example'
-class: 'justify-center'
 ---
 ::
 
@@ -479,7 +478,6 @@ You can use the CommandPalette component inside a [Modal](/components/modal)'s c
 ---
 collapse: true
 name: 'modal-command-palette-example'
-class: 'justify-center'
 ---
 ::
 
@@ -491,7 +489,6 @@ You can use the CommandPalette component inside a [Drawer](/components/drawer)'s
 ---
 collapse: true
 name: 'drawer-command-palette-example'
-class: 'justify-center'
 ---
 ::
 
@@ -503,7 +500,6 @@ When using the `close` prop, you can listen to the `update:open` event when the 
 ---
 collapse: true
 name: 'command-palette-open-example'
-class: 'justify-center'
 ---
 ::
 

@@ -44,17 +44,17 @@ export interface PaginationProps extends Pick<PaginationRootProps, 'defaultPage'
   ellipsisIcon?: string
   /**
    * The color of the pagination controls.
-   * @defaultValue 'white'
+   * @defaultValue 'gray'
    */
   color?: ButtonProps['color']
   /**
    * The variant of the pagination controls.
-   * @defaultValue 'solid'
+   * @defaultValue 'outline'
    */
   variant?: ButtonProps['variant']
   /**
    * The color of the active pagination control.
-   * @defaultValue 'black'
+   * @defaultValue 'primary'
    */
   activeColor?: ButtonProps['color']
   /**
@@ -105,11 +105,16 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 
 const props = withDefaults(defineProps<PaginationProps>(), {
+  size: 'md',
   color: 'gray',
-  activeColor: 'primary',
   variant: 'outline',
+  activeColor: 'primary',
   activeVariant: 'solid',
-  showControls: true
+  showControls: true,
+  showEdges: false,
+  itemsPerPage: 10,
+  siblingCount: 2,
+  total: 0
 })
 const emits = defineEmits<PaginationEmits>()
 const slots = defineSlots<PaginationSlots>()

@@ -19,12 +19,13 @@ Use the `items` prop as an array of strings, numbers or booleans:
 
 ::component-code
 ---
+prettier: true
 ignore:
   - modelValue
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'Backlog'
   items:
@@ -39,21 +40,20 @@ You can also pass an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
 - [`value?: string`{lang="ts-type"}](#value-key)
-- [`type?: "label" | "separator" | "item"`{lang="ts-type"}](#items-type)
-- [`icon?: string`{lang="ts-type"}](#items-icon)
-- [`avatar?: AvatarProps`{lang="ts-type"}](#items-avatar)
-- [`chip?: ChipProps`{lang="ts-type"}](#items-chip)
+- [`type?: "label" | "separator" | "item"`{lang="ts-type"}](#with-typed-items)
+- [`icon?: string`{lang="ts-type"}](#with-icons-in-items)
+- [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
+- [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
 - `disabled?: boolean`{lang="ts-type"}
 
 ::component-code
 ---
-collapse: true
 ignore:
   - modelValue
   - items
 external:
-  - modelValue
   - items
+  - modelValue
 props:
   modelValue: 'backlog'
   items:
@@ -72,49 +72,19 @@ props:
 When using objects, you need to reference the `value` property of the object in the `v-model` directive or the `default-value` prop.
 ::
 
-#### Value Key
-
-You can change the property that is used to set the value by using the `value-key` prop.
-
-::component-code
----
-collapse: true
-ignore:
-  - modelValue
-  - valueKey
-  - items
-external:
-  - modelValue
-  - items
-props:
-  valueKey: 'id'
-  modelValue: 'backlog'
-  items:
-    - label: 'Backlog'
-      id: 'backlog'
-    - label: 'Todo'
-      id: 'todo'
-    - label: 'In Progress'
-      id: 'in_progress'
-    - label: 'Done'
-      id: 'done'
----
-::
-
-#### Group items
-
-You can pass an array of arrays to the `items` prop to display separated groups of items.
+You can also pass an array of arrays to the `items` prop to display separated groups of items.
 
 ::component-code
 ---
 prettier: true
 ignore:
-  - defaultValue
+  - modelValue
   - items
 external:
   - items
+  - modelValue
 props:
-  defaultValue: 'Apple'
+  modelValue: 'Apple'
   items:
     - - Apple
       - Banana
@@ -129,87 +99,32 @@ props:
 ---
 ::
 
-#### Items Type
+### Value Key
 
-You can use the `type` property with `separator` to display a separator between items or `label` to display a label.
+You can change the property that is used to set the value by using the `value-key` prop. Defaults to `value`.
 
 ::component-code
 ---
-prettier: true
-collapse: true
 ignore:
-  - defaultValue
+  - modelValue
+  - valueKey
   - items
 external:
   - items
+  - modelValue
 props:
-  defaultValue: 'Apple'
+  modelValue: 'backlog'
+  valueKey: 'id'
   items:
-    - type: 'label'
-      label: 'Fruits'
-    - Apple
-    - Banana
-    - Blueberry
-    - Grapes
-    - Pineapple
-    - type: 'separator'
-    - type: 'label'
-      label: 'Vegetables'
-    - Aubergine
-    - Broccoli
-    - Carrot
-    - Courgette
-    - Leek
+    - label: 'Backlog'
+      id: 'backlog'
+    - label: 'Todo'
+      id: 'todo'
+    - label: 'In Progress'
+      id: 'in_progress'
+    - label: 'Done'
+      id: 'done'
 ---
-::
-
-#### Items Icon
-
-You can use the `icon` property to display an [Icon](/components/icon) inside the items.
-
-::component-example
----
-collapse: true
-name: 'select-items-icon-example'
----
-::
-
-::note
-In this example, the icon is computed from the `value` property of the selected item.
-::
-
-::tip
-You can also use the `#leading` slot to display the selected icon, like in the next example.
-::
-
-#### Items Avatar
-
-You can use the `avatar` property to display an [Avatar](/components/avatar) inside the items.
-
-::component-example
----
-collapse: true
-name: 'select-items-avatar-example'
----
-::
-
-::note
-In this example, the `#leading` slot is used to display the selected avatar.
-::
-
-#### Items Chip
-
-You can use the `chip` property to display a [Chip](/components/chip) inside the items.
-
-::component-example
----
-collapse: true
-name: 'select-items-chip-example'
----
-::
-
-::note
-In this example, the `#leading` slot is used to display the selected chip.
 ::
 
 ### Placeholder
@@ -219,9 +134,9 @@ Use the `placeholder` prop to set a placeholder text.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
+  - items
+external:
   - items
 props:
   placeholder: 'Select status'
@@ -233,6 +148,54 @@ props:
 ---
 ::
 
+### Content
+
+Use the `content` prop to control how the Select content is rendered, like its its `align`, `side` or `position` for example. Defaults to `popper` to match other components.
+
+::caution
+The `content.align`, `content.side`, etc. properties only apply when `content.position` is set to `popper`.
+::
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - defaultValue
+external:
+  - items
+items:
+  content.position:
+    - 'item-aligned'
+    - 'popper'
+  content.align:
+    - start
+    - center
+    - end
+  content.side:
+    - right
+    - left
+    - top
+    - bottom
+props:
+  content:
+    position: 'item-aligned'
+    align: center
+    side: bottom
+    sideOffset: 8
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  defaultValue: 'Todo'
+---
+::
+
+::note{to="https://www.radix-vue.com/components/select.html#change-the-positioning-mode"}
+Read more about the `content.position` prop in the [Radix Vue documentation](https://www.radix-vue.com/components/select.html#change-the-positioning-mode).
+::
+
 ### Color
 
 Use the `color` prop to change the ring color when the Select is focused.
@@ -240,11 +203,11 @@ Use the `color` prop to change the ring color when the Select is focused.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   color: gray
   highlight: true
@@ -268,11 +231,11 @@ Use the `variant` prop to change the variant of the Select.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   color: gray
   variant: subtle
@@ -293,11 +256,11 @@ Use the `size` prop to change the size of the Select.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   size: xl
   defaultValue: 'Backlog'
@@ -316,11 +279,11 @@ Use the `icon` prop to show an [Icon](/components/icon) inside the Select.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   icon: 'i-heroicons-magnifying-glass'
   size: md
@@ -335,18 +298,18 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing icon. Defaults to `i-heroicons-chevron-down-20-solid`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-heroicons-chevron-down-20-solid`.
 
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
-  trailingIcon: 'i-heroicons-arrow-small-right'
+  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
   size: md
   defaultValue: 'Backlog'
   items:
@@ -368,11 +331,11 @@ Use the `selected-icon` prop to customize the icon when an item is selected. Def
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   selectedIcon: 'i-heroicons-fire'
   size: md
@@ -396,11 +359,11 @@ Use the `loading` prop to show a loading icon on the Select.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   loading: true
   trailing: false
@@ -420,15 +383,14 @@ Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroic
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - defaultValue
+external:
+  - items
 props:
   loading: true
   loadingIcon: 'i-heroicons-arrow-path-rounded-square'
-  trailing: false
   defaultValue: 'Backlog'
   items:
     - Backlog
@@ -449,11 +411,11 @@ Use the `disabled` prop to disable the Select.
 ::component-code
 ---
 prettier: true
-external:
-  - items
 ignore:
   - items
   - placeholder
+external:
+  - items
 props:
   disabled: true
   placeholder: 'Select status'
@@ -466,6 +428,89 @@ props:
 ::
 
 ## Examples
+
+### With typed items
+
+You can use the `type` property with `separator` to display a separator between items or `label` to display a label.
+
+::component-code
+---
+collapse: true
+ignore:
+  - modelValue
+  - items
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Apple'
+  items:
+    - type: 'label'
+      label: 'Fruits'
+    - Apple
+    - Banana
+    - Blueberry
+    - Grapes
+    - Pineapple
+    - type: 'separator'
+    - type: 'label'
+      label: 'Vegetables'
+    - Aubergine
+    - Broccoli
+    - Carrot
+    - Courgette
+    - Leek
+---
+::
+
+### With icons in items
+
+You can use the `icon` property to display an [Icon](/components/icon) inside the items.
+
+::component-example
+---
+collapse: true
+name: 'select-items-icon-example'
+---
+::
+
+::note
+In this example, the icon is computed from the `value` property of the selected item.
+::
+
+::tip
+You can also use the `#leading` slot to display the selected icon, like in the next example.
+::
+
+### With avatar in items
+
+You can use the `avatar` property to display an [Avatar](/components/avatar) inside the items.
+
+::component-example
+---
+collapse: true
+name: 'select-items-avatar-example'
+---
+::
+
+::note
+In this example, the `#leading` slot is used to display the selected avatar.
+::
+
+### With chip in items
+
+You can use the `chip` property to display a [Chip](/components/chip) inside the items.
+
+::component-example
+---
+collapse: true
+name: 'select-items-chip-example'
+---
+::
+
+::note
+In this example, the `#leading` slot is used to display the selected chip.
+::
 
 ### Control open state
 
@@ -498,6 +543,7 @@ You can fetch items from an API and use them in the Select.
 ::component-example
 ---
 name: 'select-fetch-example'
+collapse: true
 ---
 ::
 

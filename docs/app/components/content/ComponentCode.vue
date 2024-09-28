@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import json5 from 'json5'
 import { upperFirst, camelCase, kebabCase } from 'scule'
+import { hash } from 'ohash'
 import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
@@ -15,6 +16,8 @@ const props = defineProps<{
   hide?: string[]
   /** List of props to externalize in script setup */
   external?: string[]
+  /** List of props to use with `v-model` */
+  model?: string[]
   /** List of items for each prop */
   items?: { [key: string]: string[] }
   props?: { [key: string]: any }
@@ -38,9 +41,13 @@ const camelName = camelCase(props.slug ?? route.params.slug?.[route.params.slug.
 const name = `U${upperFirst(camelName)}`
 
 const componentProps = reactive({ ...(props.props || {}) })
+const componentEvents = reactive({
+  ...Object.fromEntries((props.model || []).map(key => [`onUpdate:${key}`, (e: any) => setComponentProp(key, e)])),
+  ...(componentProps.modelValue ? { [`onUpdate:modelValue`]: (e: any) => setComponentProp('modelValue', e) } : {})
+})
 
 function getComponentProp(name: string) {
-  return get(componentProps, name) || undefined
+  return get(componentProps, name) ?? undefined
 }
 
 function setComponentProp(name: string, value: any) {
@@ -121,6 +128,11 @@ const code = computed(() => {
       continue
     }
 
+    if (props.model?.includes(key)) {
+      code += ` v-model:${key}="${key}"`
+      continue
+    }
+
     if (value === undefined || value === null || value === '' || props.hide?.includes(key)) {
       continue
     }
@@ -179,7 +191,7 @@ const code = computed(() => {
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringify({ props: componentProps, slots: props.slots })}`, async () => {
+const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props: componentProps, slots: props.slots })}`, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
   }
@@ -202,7 +214,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
 <template>
   <div class="my-5">
     <div>
-      <div v-if="options.length" class="flex items-center gap-2.5 border border-gray-300 dark:border-gray-700 border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
+      <div v-if="options.length" class="flex items-center gap-2.5 border border-gray-200 dark:border-gray-700 border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">
           <UFormField
             :label="option.label"
@@ -222,7 +234,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
               color="gray"
               variant="soft"
               class="rounded rounded-l-none min-w-12"
-              :search="false"
+              :search-input="false"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
               :ui="{ itemLeadingChip: 'size-2' }"
               @update:model-value="setComponentProp(option.name, $event)"
@@ -251,8 +263,8 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${JSON.stringif
         </template>
       </div>
 
-      <div class="flex border border-b-0 border-gray-300 dark:border-gray-700 relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class]">
-        <component :is="name" v-bind="componentProps" @update:model-value="!!componentProps.modelValue && setComponentProp('modelValue', $event)">
+      <div class="flex justify-center border border-b-0 border-gray-200 dark:border-gray-700 relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class]">
+        <component :is="name" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <ContentSlot :name="slot" unwrap="p">
               {{ slots?.[slot] }}

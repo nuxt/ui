@@ -4,12 +4,13 @@ import { withoutTrailingSlash } from 'ufo'
 // import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 const route = useRoute()
+const appConfig = useAppConfig()
 // const colorMode = useColorMode()
 const runtimeConfig = useRuntimeConfig()
 const { integrity, api } = runtimeConfig.public.content
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
-const { data: files } = await useLazyFetch<any[]>(`${api.baseURL}/search${integrity ? '.' + integrity : ''}`, { default: () => [] })
+const { data: files } = await useLazyFetch<any[]>(`${api.baseURL}/search${integrity ? '-' + integrity : ''}`, { default: () => [] })
 
 const searchTerm = ref('')
 
@@ -71,24 +72,29 @@ useServerSeoMeta({
 })
 
 provide('navigation', navigation)
-provide('files', files)
 </script>
 
 <template>
-  <UApp>
-    <NuxtLoadingIndicator />
+  <UApp :toaster="appConfig.toaster">
+    <NuxtLoadingIndicator color="#FFF" />
 
-    <Banner v-if="!route.path.startsWith('/examples')" />
+    <template v-if="!route.path.startsWith('/examples')">
+      <Banner />
 
-    <Header v-if="!route.path.startsWith('/examples')" :links="links" />
+      <Header :links="links" />
+    </template>
 
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
 
-    <Footer v-if="!route.path.startsWith('/examples')" />
+    <template v-if="!route.path.startsWith('/examples')">
+      <Footer />
 
-    <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+      <ClientOnly>
+        <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+      </ClientOnly>
+    </template>
   </UApp>
 </template>
 
@@ -99,7 +105,7 @@ provide('files', files)
 @source "../content/**/*.md";
 
 @theme {
-  --font-family-sans: 'Inter', sans-serif;
+  --font-family-sans: 'Public Sans', sans-serif;
 
   --color-green-50: #EFFDF5;
   --color-green-100: #D9FBE8;

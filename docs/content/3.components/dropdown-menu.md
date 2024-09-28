@@ -39,7 +39,6 @@ ignore:
   - class
 external:
   - items
-class: 'justify-center'
 props:
   items:
     - - label: Benjamin
@@ -128,7 +127,6 @@ items:
     - left
     - top
     - bottom
-class: 'justify-center'
 props:
   items:
     - label: Profile
@@ -164,7 +162,6 @@ ignore:
   - class
 external:
   - items
-class: 'justify-center'
 props:
   arrow: true
   items:
@@ -197,7 +194,6 @@ ignore:
   - content.align
 external:
   - items
-class: 'justify-center'
 props:
   size: xl
   items:
@@ -239,7 +235,6 @@ ignore:
   - class
 external:
   - items
-class: 'justify-center'
 props:
   disabled: true
   items:
@@ -268,7 +263,6 @@ You can control the open state by using the `default-open` prop or the `v-model:
 ::component-example
 ---
 name: 'dropdown-menu-open-example'
-class: 'justify-center'
 ---
 ::
 
@@ -290,7 +284,6 @@ You will have access to the following slots:
 ::component-example
 ---
 name: 'dropdown-menu-custom-slot-example'
-class: 'justify-center'
 ---
 ::
 

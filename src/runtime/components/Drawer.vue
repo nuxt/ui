@@ -10,7 +10,7 @@ const appConfig = _appConfig as AppConfig & { ui: { drawer: Partial<typeof theme
 
 const drawer = tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })
 
-export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'defaultOpen' | 'direction' | 'dismissible' | 'fadeFromIndex' | 'fixed' | 'modal' | 'nested' | 'open' | 'scrollLockTimeout' | 'shouldScaleBackground' | 'snapPoints'> {
+export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'defaultOpen' | 'direction' | 'dismissible' | 'fadeFromIndex' | 'fixed' | 'modal' | 'nested' | 'direction' | 'open' | 'scrollLockTimeout' | 'shouldScaleBackground' | 'snapPoints'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -25,6 +25,11 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * @defaultValue true
    */
   overlay?: boolean
+  /**
+   * Render a handle on the drawer.
+   * @defaultValue true
+   */
+  handle?: boolean
   /**
    * Render the drawer in a portal.
    * @defaultValue true
@@ -49,23 +54,26 @@ export interface DrawerSlots {
 </script>
 
 <script setup lang="ts">
-import { toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { useForwardPropsEmits } from 'radix-vue'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
+  direction: 'bottom',
   portal: true,
-  overlay: true
+  overlay: true,
+  handle: true
 })
 const emits = defineEmits<DrawerEmits>()
 const slots = defineSlots<DrawerSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'defaultOpen', 'dismissible', 'fadeFromIndex', 'fixed', 'modal', 'nested', 'open', 'scrollLockTimeout', 'shouldScaleBackground', 'snapPoints'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'defaultOpen', 'dismissible', 'fadeFromIndex', 'fixed', 'modal', 'nested', 'direction', 'open', 'scrollLockTimeout', 'shouldScaleBackground', 'snapPoints'), emits)
 const contentProps = toRef(() => props.content)
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = drawer()
+const ui = computed(() => drawer({
+  direction: props.direction
+}))
 </script>
 
 <template>
@@ -79,7 +87,7 @@ const ui = drawer()
 
       <DrawerContent data-slot="content" :class="ui.content({ class: [props.class, props.ui?.content] })" v-bind="contentProps">
         <slot name="handle">
-          <div data-slot="handle" :class="ui.handle({ class: props.ui?.handle })" />
+          <div v-if="handle" data-slot="handle" :class="ui.handle({ class: props.ui?.handle })" />
         </slot>
 
         <slot name="content">

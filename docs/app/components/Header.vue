@@ -2,7 +2,7 @@
 import type { NavItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
-const props = defineProps<{
+defineProps<{
   links: NavigationMenuItem[]
 }>()
 
@@ -10,16 +10,16 @@ const config = useRuntimeConfig().public
 
 const navigation = inject<Ref<NavItem[]>>('navigation')
 
-const items = computed(() => props.links.map(({ icon, ...link }) => link))
+// const items = computed(() => props.links.map(({ icon, ...link }) => link))
 </script>
 
 <template>
-  <UHeader>
+  <UHeader :ui="{ left: 'min-w-0' }">
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white" aria-label="Nuxt UI">
-        <Logo class="w-auto h-6" />
+      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white min-w-0" aria-label="Nuxt UI">
+        <Logo class="w-auto h-6 shrink-0" />
 
-        <UBadge :label="`v${config.version}`" variant="subtle" size="sm" class="-mb-[2px] rounded font-semibold" />
+        <UBadge :label="`v${config.version}`" variant="subtle" size="sm" class="-mb-[2px] rounded font-semibold truncate" />
       </NuxtLink>
     </template>
 
@@ -45,9 +45,9 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
     </template>
 
     <template #content>
-      <UNavigationMenu orientation="vertical" :items="items" class="-ml-2.5" />
+      <!-- <UNavigationMenu orientation="vertical" :items="items" class="-ml-2.5" />
 
-      <USeparator type="dashed" class="my-4" />
+      <USeparator type="dashed" class="my-4" /> -->
 
       <UContentNavigation :navigation="navigation" />
     </template>

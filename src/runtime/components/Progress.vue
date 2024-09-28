@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { ProgressRootProps, ProgressRootEmits } from 'radix-vue'
@@ -42,6 +43,7 @@ export type ProgressSlots = {
 } & {
   [key: string]: (props: { step: number }) => any
 }
+
 </script>
 
 <script setup lang="ts">

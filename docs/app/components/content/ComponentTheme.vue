@@ -9,8 +9,8 @@ const name = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
 
 const strippedCompoundVariants = ref(false)
 
-function stripCompoundVariants(component: any) {
-  if (component.compoundVariants) {
+function stripCompoundVariants(component?: any) {
+  if (component?.compoundVariants) {
     component.compoundVariants = component.compoundVariants.filter((compoundVariant: any) => {
       if (compoundVariant.color) {
         if (!['primary', 'gray'].includes(compoundVariant.color)) {

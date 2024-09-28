@@ -20,7 +20,7 @@ defineShortcuts({
 ```
 
 - Shortcuts are automatically adjusted for non-macOS platforms, converting `meta` to `ctrl`.
-- The composable uses Vue's `useEventListener` to handle keydown events.
+- The composable uses VueUse's [`useEventListener`](https://vueuse.org/core/useEventListener/) to handle keydown events.
 - For a complete list of available shortcut keys, refer to the [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values) API documentation. Note that the key should be written in lowercase.
 
 ::tip{to="/components/kbd"}
@@ -35,6 +35,7 @@ Define keyboard shortcuts for your application.
 
 - `config`: An object where keys are shortcut definitions and values are either handler functions or shortcut configuration objects.
 - `options`: Optional configuration for the shortcuts behavior.
+  - `chainDelay`: The delay between key presses to consider the shortcut as chained. Default is `250`.
 
 #### Shortcut Definition
 
@@ -55,7 +56,7 @@ Shortcuts are defined using the following format:
 - `escape`: Triggers on Esc key
 - `enter`: Triggers on Enter key
 - `arrowleft`, `arrowright`, `arrowup`, `arrowdown`: Trigger on respective arrow keys
-
+- etc.
 #### Shortcut Configuration
 
 Each shortcut can be defined as a function or an object with the following properties:
@@ -72,24 +73,6 @@ interface ShortcutConfig {
   - `false` (default): Shortcut only triggers when no input is focused
   - `true`: Shortcut triggers even when any input is focused
   - `string`: Shortcut only triggers when the specified input (by name) is focused
-
-#### ShortcutsOptions
-
-The `options` parameter allows you to configure the behavior of the shortcuts. It has the following properties:
-
-```ts
-interface ShortcutsOptions {
-  repeat?: boolean
-  trigger?: 'keydown' | 'keyup'
-  capture?: boolean
-  passive?: boolean
-}
-```
-
-- `repeat`: If `true`, the shortcut will trigger repeatedly while the key is held down. Default is `false`.
-- `trigger`: Specifies whether the shortcut should trigger on 'keydown' or 'keyup' events. Default is 'keydown'.
-- `capture`: If `true`, the event listener will be set to capture phase. Default is `false`.
-- `passive`: If `true`, indicates that the function specified by listener will never call preventDefault(). Default is `false`.
 
 ## Examples
 

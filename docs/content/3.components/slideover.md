@@ -18,7 +18,6 @@ Then, use the `#content` slot to add the content displayed when the Slideover is
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 slots:
   default: |
 
@@ -44,7 +43,6 @@ Use the `title` prop to set the title of the Slideover's header.
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 props:
   title: 'Slideover with title'
 slots:
@@ -70,7 +68,6 @@ Use the `description` prop to set the description of the Slideover's header.
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - title
 props:
@@ -101,7 +98,6 @@ You can pass all the props of the [Button](/components/button) component to cust
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - title
   - close.color
@@ -139,7 +135,6 @@ Use the `close-icon` prop to customize the close button [Icon](/components/icon)
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - title
 props:
@@ -174,7 +169,6 @@ Use the `side` prop to set the side of the screen where the Slideover will slide
 prettier: true
 ignore:
   - title
-class: 'justify-center'
 props:
   side: 'left'
   title: 'Slideover with side'
@@ -203,7 +197,6 @@ Use the `overlay` prop to control whether the Slideover has an overlay or not. D
 prettier: true
 ignore:
   - title
-class: 'justify-center'
 props:
   overlay: false
   title: 'Slideover without overlay'
@@ -232,7 +225,6 @@ Use the `transition` prop to control whether the Slideover is animated or not. D
 prettier: true
 ignore:
   - title
-class: 'justify-center'
 props:
   transition: false
   title: 'Slideover without transition'
@@ -262,7 +254,6 @@ prettier: true
 ignore:
   - title
   - preventClose
-class: 'justify-center'
 props:
   preventClose: true
   title: 'Slideover prevent close'
@@ -291,7 +282,6 @@ You can control the open state by using the `default-open` prop or the `v-model:
 ::component-example
 ---
 name: 'slideover-open-example'
-class: 'justify-center'
 ---
 ::
 
@@ -325,7 +315,6 @@ Then, use it in your app:
 ::component-example
 ---
 name: 'slideover-programmatic-example'
-class: 'justify-center'
 ---
 ::
 
@@ -340,7 +329,6 @@ You can nest slideovers within each other.
 ::component-example
 ---
 name: 'slideover-nested-example'
-class: 'justify-center'
 ---
 ::
 
@@ -351,7 +339,6 @@ Use the `#footer` slot to add content after the Slideover's body.
 ::component-example
 ---
 name: 'slideover-footer-slot-example'
-class: 'justify-center'
 ---
 ::
 

@@ -18,7 +18,6 @@ Then, use the `#content` slot to add the content displayed when the Popover is o
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 slots:
   default: |
 
@@ -42,7 +41,6 @@ Use the `mode` prop to change the mode of the Popover. Defaults to `click`.
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 items:
   mode:
     - click
@@ -76,7 +74,6 @@ When using the `hover` mode, you can use the `open-delay` and `close-delay` prop
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - mode
 props:
@@ -106,7 +103,6 @@ Use the `content` prop to control how the Popover content is rendered, like its 
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 items:
   content.align:
     - start
@@ -145,7 +141,6 @@ Use the `arrow` prop to display an arrow on the Popover.
 ::component-code
 ---
 prettier: true
-class: 'justify-center'
 ignore:
   - arrow
 props:
@@ -175,7 +170,6 @@ You can control the open state by using the `default-open` prop or the `v-model:
 ::component-example
 ---
 name: 'popover-open-example'
-class: 'justify-center'
 ---
 ::
 
@@ -191,7 +185,6 @@ You can use a [CommandPalette](/components/command-palette) component inside the
 ---
 collapse: true
 name: 'popover-command-palette-example'
-class: 'justify-center'
 ---
 ::
 

@@ -4,5 +4,20 @@
   ],
   "lockFileMaintenance": {
     "enabled": true
-  }
+  },
+  "ignoreDeps": [
+    "happy-dom"
+  ],
+  "baseBranches": ["dev", "v3"],
+  "packageRules": [{
+    "matchBaseBranches": ["v3"],
+    "labels": ["v3"]
+  }, {
+    "groupName": "tailwindcss",
+    "matchPackageNames": [
+      "tailwindcss",
+      "@tailwindcss/postcss",
+      "@tailwindcss/vite"
+    ]
+  }]
 }

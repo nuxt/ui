@@ -157,7 +157,6 @@ Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroic
 props:
   loading: true
   loadingIcon: 'i-heroicons-arrow-path-rounded-square'
-  trailing: false
 slots:
   default: Button
 ---
