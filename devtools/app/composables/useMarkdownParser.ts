@@ -13,7 +13,7 @@ import VueLang from 'shiki/langs/vue.mjs'
 export default function useMarkdownParser() {
   let parser: Awaited<ReturnType<typeof createMarkdownParser>>
 
-  const parseMarkdown = async (markdown: string) => {
+  async function parseMarkdown(markdown: string) {
     if (!parser) {
       parser = await createMarkdownParser({
         rehype: {
@@ -43,6 +43,7 @@ export default function useMarkdownParser() {
         }
       })
     }
+
     return parser(markdown)
   }
 
