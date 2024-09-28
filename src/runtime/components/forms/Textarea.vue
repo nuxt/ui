@@ -183,7 +183,7 @@ export default defineComponent({
         value = looseToNumber(value)
       }
 
-      if (modelModifiers.value.nullable && value === '') {
+      if (modelModifiers.value.nullable && !value) {
         value = null
       }
 
