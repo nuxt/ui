@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onUnmounted, onMounted, computed, reactive, resolveComponent } from 'vue'
+import { useHead } from '#imports'
 
 const props = defineProps<{
   slug: string
@@ -292,6 +293,12 @@ onMounted(() => {
   event.data = componentExamples[props.slug]
   window.parent.dispatchEvent(event)
 })
+
+// TODO: This conflicts with the existing tailwind setup and clears classes defined by @nuxt/ui. We should wait for
+// the Tailwind v4 equivalent or find another way to include all tailwindcss classes in the playground.
+// useHead({
+//   script: [{ src: 'https://cdn.tailwindcss.com/3.4.5' }]
+// })
 </script>
 
 <template>
