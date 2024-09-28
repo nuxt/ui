@@ -1,11 +1,11 @@
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen" @after-leave="onAfterLeave">
     <HDialog :class="[ui.wrapper, { 'justify-end': side === 'right' }, { 'items-end': side === 'bottom' }]" v-bind="attrs" @close="close">
-      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
+      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition" :class="ui.overlay.transition.enterFrom">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
-      <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
+      <TransitionChild as="template" :appear="appear" v-bind="transitionClass" :class="transitionClass.enterFrom">
         <HDialogPanel :class="[ui.base, sideType === 'horizontal' ? [ui.width, 'h-full'] : [ui.height, 'w-full'], ui.background, ui.ring, ui.rounded, ui.padding, ui.shadow]">
           <slot />
         </HDialogPanel>
@@ -20,7 +20,7 @@ import type { WritableComputedRef, PropType } from 'vue'
 import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild, provideUseId } from '@headlessui/vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types/index'
+import type { DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { slideover } from '#ui/ui.config'
@@ -67,7 +67,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
@@ -86,7 +86,12 @@ export default defineComponent({
 
     const transitionClass = computed(() => {
       if (!props.transition) {
-        return {}
+        return {} as typeof ui.value.transition & {
+          enterFrom: string
+          enterTo: string
+          leaveFrom: string
+          leaveTo: string
+        }
       }
 
       let enterFrom, leaveTo
@@ -120,6 +125,7 @@ export default defineComponent({
         leaveTo
       }
     })
+
     const sideType = computed(() => {
       switch (props.side) {
       case 'left':

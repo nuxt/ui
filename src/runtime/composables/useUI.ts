@@ -2,9 +2,9 @@ import { computed, toValue, useAttrs } from 'vue'
 import type { Ref } from 'vue'
 import { useAppConfig } from '#imports'
 import { mergeConfig, omit, get } from '../utils'
-import type { Strategy } from '../types/index'
+import type { DeepPartial, Strategy } from '../types/index'
 
-export const useUI = <T>(key, $ui?: Ref<Partial<T> & { strategy?: Strategy } | undefined>, $config?: Ref<T> | T, $wrapperClass?: Ref<string>, withAppConfig: boolean = false) => {
+export const useUI = <T>(key, $ui?: Ref<DeepPartial<T> & { strategy?: Strategy } | undefined>, $config?: Ref<T> | T, $wrapperClass?: Ref<string>, withAppConfig: boolean = false) => {
   const $attrs = useAttrs()
   const appConfig = useAppConfig()
 
@@ -17,7 +17,7 @@ export const useUI = <T>(key, $ui?: Ref<Partial<T> & { strategy?: Strategy } | u
       _ui?.strategy || (appConfig.ui?.strategy as Strategy),
       _wrapperClass ? { wrapper: _wrapperClass } : {},
       _ui || {},
-      (process.dev || withAppConfig) ? get(appConfig.ui, key, {}) : {},
+      (import.meta.dev || withAppConfig) ? get(appConfig.ui, key, {}) : {},
       _config || {}
     )
   })

@@ -186,7 +186,7 @@ const { data: todos, status } = await useLazyAsyncData<{
       sort-desc-icon="i-heroicons-arrow-down"
       sort-mode="manual"
       class="w-full"
-      :ui="{ td: { base: 'max-w-[0] truncate' }, default: { checkbox: { color: 'gray' } } }"
+      :ui="{ td: { base: 'max-w-[0] truncate' }, default: { checkbox: { color: 'gray' as any } } }"
       @select="select"
     >
       <template #completed-data="{ row }">

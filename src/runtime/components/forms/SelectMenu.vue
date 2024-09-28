@@ -147,7 +147,7 @@ import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { get, mergeConfig } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy } from '../../types/index'
+import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { select, selectMenu } from '#ui/ui.config'
@@ -326,11 +326,11 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     },
     uiMenu: {
-      type: Object as PropType<Partial<typeof configMenu> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof configMenu> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
@@ -412,7 +412,7 @@ export default defineComponent({
         variant?.replaceAll('{color}', color.value),
         (isLeading.value || slots.leading) && ui.value.leading.padding[size.value],
         (isTrailing.value || slots.trailing) && ui.value.trailing.padding[size.value]
-      ), props.placeholder && !props.modelValue && ui.value.placeholder, props.selectClass)
+      ), props.placeholder && (!props.modelValue || (Array.isArray(props.modelValue) && !props.modelValue.length)) && ui.value.placeholder, props.selectClass)
     })
 
     const isLeading = computed(() => {

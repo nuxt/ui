@@ -1,13 +1,13 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template" @after-leave="onAfterLeave">
     <HDialog :class="ui.wrapper" v-bind="attrs" @close="close">
-      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
+      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition" :class="ui.overlay.transition.enterFrom">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
       <div :class="ui.inner">
         <div :class="[ui.container, !fullscreen && ui.padding]">
-          <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
+          <TransitionChild as="template" :appear="appear" v-bind="transitionClass" :class="transitionClass.enterFrom">
             <HDialogPanel
               :class="[
                 ui.base,
@@ -32,7 +32,7 @@ import type { PropType } from 'vue'
 import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild, provideUseId } from '@headlessui/vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types/index'
+import type { DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { modal } from '#ui/ui.config'
@@ -78,7 +78,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
@@ -97,7 +97,7 @@ export default defineComponent({
 
     const transitionClass = computed(() => {
       if (!props.transition) {
-        return {}
+        return {} as typeof ui.value.transition
       }
 
       return {

@@ -61,7 +61,7 @@ import type { PropType } from 'vue'
 import { twMerge } from 'tailwind-merge'
 import { mergeConfig } from '../../utils'
 import UButton from '../elements/Button.vue'
-import type { Strategy, Button } from '../../types/index'
+import type { Strategy, Button, DeepPartial } from '../../types/index'
 import { useUI } from '../../composables/useUI'
 import { useCarouselScroll } from '../../composables/useCarouselScroll'
 import { useScroll, useResizeObserver, useElementSize } from '@vueuse/core'
@@ -102,7 +102,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      type: Object as PropType<DeepPartial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },

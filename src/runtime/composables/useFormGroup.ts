@@ -18,7 +18,7 @@ export const useFormGroup = (inputProps?: InputProps, config?: any, bind: boolea
   const formInputs = inject<any>('form-inputs', undefined)
 
   if (formGroup) {
-    if (!bind || inputProps.legend) {
+    if (!bind || inputProps?.legend) {
       formGroup.inputId.value = undefined
     } else if (inputProps?.id) {
       // Updates for="..." attribute on label if inputProps.id is provided

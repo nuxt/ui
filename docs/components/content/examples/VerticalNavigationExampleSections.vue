@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const route = useRoute()
-
 const links = [
   [{
     label: 'Profile',
@@ -15,7 +13,7 @@ const links = [
   }, {
     label: 'Vertical Navigation',
     icon: 'i-heroicons-chart-bar',
-    to: `${route.path.startsWith('/dev') ? '/dev' : ''}/components/vertical-navigation`
+    to: '/components/vertical-navigation'
   }, {
     label: 'Command Palette',
     icon: 'i-heroicons-command-line',
