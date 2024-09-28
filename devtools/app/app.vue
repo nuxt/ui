@@ -3,9 +3,9 @@ import { onDevtoolsClientConnected } from '@nuxt/devtools-kit/iframe-client'
 import type { ClientFunctions, ServerFunctions, Component } from '../../src/devtools/rpc'
 import type { BirpcReturn } from 'birpc'
 import { watchDebounced, useClipboard } from '@vueuse/core'
-import defu from 'defu'
+import { defu } from 'defu'
 import { kebabCase } from 'scule'
-import { genObjectFromValues } from 'knitwork'
+import { genObjectFromValues, genArrayFromRaw } from 'knitwork'
 
 // @ts-expect-error - Nuxt Devtools internal value
 // Disable devtools in component renderer iframe
@@ -60,7 +60,7 @@ function onComponentLoaded(event: Event & { data?: any }) {
   state.value.props[component.value.slug] = defu(state.value.props[component.value.slug], event.data?.props)
 }
 
-const accordionItems = computed(() => {
+const tabs = computed(() => {
   if (!component.value) return
   const themeCount = component.value.meta.slots ? Object.keys(component.value.meta.slots)?.length : 0
 
@@ -93,7 +93,8 @@ watchDebounced([state, component], () => {
     if (value === true) return kebabCase(key)
     if (value === false) return
     if (typeof value === 'number') return `:${kebabCase(key)}="${value}"`
-    if (Array.isArray(value) ?? typeof value === 'object') return `:${kebabCase(key)}="${genObjectFromValues(value)}"`
+    if (Array.isArray(value)) return `:${kebabCase(key)}="${genArrayFromRaw(value)}"`
+    if (typeof value === 'object') return `:${kebabCase(key)}="${genObjectFromValues(value)}"`
     return `${kebabCase(key)}="${value}"`
   }).filter(Boolean).join('\n')
 
@@ -105,7 +106,7 @@ watchDebounced([state, component], () => {
   code.value = `\`\`\`vue
   <${component.value.label}
     ${propsTemplate}
-    ${slots.base ? `:class="${slots.base}"` : ''}
+    ${slots.base ? `class="${slots.base}"` : ''}
     ${slotsTemplate !== '{}' ? `:ui="${slotsTemplate}"` : ''}
   ></${component.value.label}>
 \`\`\``
@@ -120,7 +121,8 @@ const { data: ast } = await useAsyncData('component-code', async () => {
     formatted = await $prettier.format(code.value, {
       trailingComma: 'none',
       semi: false,
-      singleQuote: true
+      singleQuote: true,
+      printWidth: 30
     })
   } catch {
     return
@@ -158,20 +160,21 @@ const { copy, copied } = useClipboard()
 
       <div class="flex flex-col xl:col-span-4 col-span-3">
         <iframe class="grow w-full" :src="`/__nuxt_ui__/components/${component.slug}`" />
-        <div class="relative min-h-40 max-h-72 w-full border-t border-gray-200 overflow-y-auto bg-gray-50">
-          <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="p-4" />
+        <div class="relative  w-full p-3">
+          <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 overflow-y-auto rounded-lg border border-gray-200 bg-gray-50" />
           <UButton
             v-if="ast"
             color="gray"
+            size="sm"
             variant="link"
             :icon="copied ? 'i-heroicons-clipboard-document-check' : 'i-heroicons-clipboard-document'"
-            class="absolute top-4 right-4"
+            class="absolute top-6 right-6"
             @click="copy(ast?.body?.children?.[0]?.props.code)"
           />
         </div>
       </div>
-      <div class="bg-white border-l border-gray-200 flex flex-col overflow-y-auto col-span-3">
-        <UTabs color="gray" variant="link" :items="accordionItems">
+      <div class="bg-white border-l border-gray-200 flex flex-col col-span-3 overflow-y-auto">
+        <UTabs color="gray" variant="link" :items="tabs" :class="{ content: 'overflow-y-auto' }">
           <template #props>
             <div v-for="prop in component.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-gray-200">
               <UFormField :name="prop.name" class="grid grid-cols-2 gap-8 items-baseline">
@@ -180,13 +183,16 @@ const { copy, copied } = useClipboard()
                     {{ prop?.name }}
                   </p>
                 </template>
+
                 <template #description>
                   <MDC v-if="prop.description" :value="prop.description" class="text-gray-600 dark:text-gray-300 mt-1" />
                 </template>
+
                 <ComponentPropInput v-bind="prop" v-model="state.props[component.slug][prop.name]" />
               </UFormField>
             </div>
           </template>
+
           <template #theme>
             <div v-for="(_value, slot) in component?.slots" :key="'slots-' + slot" class="px-3 py-5 hover:bg-gray-50 transition">
               <UFormField :name="slot" @mouseenter="onSlotHover(slot)" @mouseleave="onSlotLeave(slot)">
