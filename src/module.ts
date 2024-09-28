@@ -211,7 +211,7 @@ export default defineNuxtModule<ModuleOptions>({
       addCustomTab({
         name: 'nuxt-ui',
         title: 'Nuxt UI',
-        icon: 'bx:paint',
+        icon: '/__nuxt_ui__/devtools/favicon.svg',
         view: {
           type: 'iframe',
           src: '/__nuxt_ui__/devtools'

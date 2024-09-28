@@ -70,8 +70,6 @@ function onSlotLeave(slot: string) {
   window.dispatchEvent(event)
 }
 
-const searchTerm = ref<string>()
-
 const tabs = computed(() => {
   if (!component.value) return
   const themeCount = component.value.meta.slots ? Object.keys(component.value.meta.slots)?.length : 0
@@ -81,6 +79,19 @@ const tabs = computed(() => {
     { label: 'Theme', slot: 'theme', icon: 'i-heroicons-paint-brush', disabled: !themeCount }
   ]
 })
+
+const searchOpened = ref(false)
+function onComponentSearch(value: any) {
+  const match = components.value.find(c => c.slug === value?.slug)
+  searchOpened.value = false
+
+  if (!match) return
+  component.value = match
+}
+
+defineShortcuts({
+  meta_k: () => searchOpened.value = true
+})
 </script>
 
 <template>
@@ -88,23 +99,28 @@ const tabs = computed(() => {
     <div v-if="!components || !component" class="h-screen w-screen" />
     <template v-else>
       <div
-        class="top-0 h-[49px] border-b border-gray-200 bg-white flex"
+        class="top-0 h-[49px] border-b border-gray-200 bg-white flex justify-center"
       >
-        <UCommandPalette
-          v-model="component"
-          v-model:search-term="searchTerm"
-          variant="none"
-          :groups="[{ id: 'component', items: components }]"
-          leading-icon="i-heroicons-magnifying-glass-20-solid"
-          class="grow"
-          placeholder="Search component..."
-          :fuse="{
-            fuseOptions: {
-              includeMatches: true
-            }
-          }"
-          :ui="{ content: 'max-h-96' }"
-        />
+        <span />
+
+        <UModal v-model:open="searchOpened" :ui="{ content: 'top-0 sm:top-8 translate-y-0 sm:max-w-xl w-full' }">
+          <UButton color="gray" label="Search component..." variant="link" icon="i-heroicons-magnifying-glass-20-solid" class="w-full cursor-pointer" />
+          <template #content>
+            <UCommandPalette
+              variant="none"
+              :groups="[{ id: 'component', items: components.map((c) => ({ slug: c.slug, label: c.label })) }]"
+              leading-icon=""
+              placeholder="Search component..."
+              :fuse="{
+                fuseOptions: {
+                  includeMatches: true
+                }
+              }"
+              @update:model-value="onComponentSearch"
+              @close="searchOpened = false"
+            />
+          </template>
+        </UModal>
       </div>
 
       <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-6">
@@ -121,8 +137,8 @@ const tabs = computed(() => {
           <ComponentPreview :component="component" :props="state.props[component.slug]" :theme-slots="state.slots[component.slug]" class="h-full" />
         </div>
 
-        <div class="bg-white border-l border-gray-200 flex flex-col col-span-3 overflow-y-auto">
-          <UTabs color="gray" variant="link" :items="tabs" :class="{ content: 'overflow-y-auto' }">
+        <div class="bg-white border-l border-gray-200 flex flex-col col-span-3  overflow-y-auto">
+          <UTabs color="gray" variant="link" :items="tabs">
             <template #props>
               <div v-for="prop in component.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-gray-200">
                 <UFormField :name="prop.name" class="grid grid-cols-2 gap-8 items-baseline">
