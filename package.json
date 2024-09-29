@@ -35,7 +35,7 @@
     "@headlessui/tailwindcss": "^0.2.1",
     "@headlessui/vue": "^1.7.23",
     "@iconify-json/heroicons": "^1.2.0",
-    "@nuxt/icon": "^1.5.1",
+    "@nuxt/icon": "^1.5.2",
     "@nuxt/kit": "^3.13.2",
     "@nuxtjs/color-mode": "^3.5.1",
     "@nuxtjs/tailwindcss": "^6.12.1",
