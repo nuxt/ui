@@ -13,7 +13,7 @@ const toast = useToast()
 </script>
 ```
 
-- The `useToast` composable uses Vue's `useState` to manage the toast state, ensuring reactivity across your application.
+- The `useToast` composable uses Nuxt's `useState` to manage the toast state, ensuring reactivity across your application.
 - A maximum of 5 toasts are displayed at a time. When adding a new toast that would exceed this limit, the oldest toast is automatically removed.
 - When removing a toast, there's a 200ms delay before it's actually removed from the state, allowing for exit animations.
 
