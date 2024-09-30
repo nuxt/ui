@@ -50,7 +50,8 @@ export default defineNuxtConfig({
     clientBundle: {
       scan: true,
       includeCustomCollections: true
-    }
+    },
+    provider: 'iconify'
   },
 
   content: {
