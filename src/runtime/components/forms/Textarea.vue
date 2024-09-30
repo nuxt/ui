@@ -39,7 +39,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: [String, Number, null] as PropType<string | number | null>,
+      type: [String, Number] as PropType<string | number | null>,
       default: ''
     },
     id: {
