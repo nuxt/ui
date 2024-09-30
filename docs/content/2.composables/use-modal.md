@@ -21,7 +21,7 @@ Learn how to customize the appearance and behavior of modals in the **Modal** co
 
 ## API
 
-### `open(component: Component, props?: ModalProps & ComponentProps<T>): void`
+### `open(component: Component, props?: ModalProps & ComponentProps<T>)`
 
 Opens a modal with the specified component and props.
 
@@ -39,7 +39,7 @@ function openModal() {
 </script>
 ```
 
-### `close(): Promise<void>`
+### `close()`
 
 Closes the currently open modal.
 
@@ -53,7 +53,7 @@ async function closeModal() {
 </script>
 ```
 
-### `reset(): void`
+### `reset()`
 
 Resets the modal state to its default values.
 
@@ -67,7 +67,7 @@ function resetModal() {
 </script>
 ```
 
-### `patch(props: Partial<ModalProps & ComponentProps<T>>): void`
+### `patch(props: Partial<ModalProps & ComponentProps<T>>)`
 
 Updates the props of the currently open modal.
 

@@ -21,7 +21,7 @@ Learn how to customize the appearance and behavior of slideovers in the **Slideo
 
 ## API
 
-### `open(component: Component, props?: SlideoverProps & ComponentProps<T>): void`
+### `open(component: Component, props?: SlideoverProps & ComponentProps<T>)`
 
 Opens a slideover with the specified component and props.
 
@@ -53,7 +53,7 @@ async function closeSlideover() {
 </script>
 ````
 
-### `reset(): void`
+### `reset()`
 
 Resets the slideover state to its default values.
 
@@ -67,7 +67,7 @@ function resetSlideover() {
 </script>
 ````
 
-### `patch(props: Partial<SlideoverProps & ComponentProps<T>>): void`
+### `patch(props: Partial<SlideoverProps & ComponentProps<T>>)`
 
 Updates the props of the currently open slideover.
 
