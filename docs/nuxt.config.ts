@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   modules: [
     module,
     '@nuxt/ui-pro',
-    '@nuxt/content',
+    '@farnabaz/content-next',
     '@nuxt/image',
     '@nuxthub/core',
     '@nuxtjs/plausible',
@@ -27,6 +27,14 @@ export default defineNuxtConfig({
     'nuxt-component-meta',
     'nuxt-og-image'
   ],
+
+  // FIXME: Remove this once `components/content/` is registered globally
+  components: [{
+    path: '~/components/content',
+    global: true
+  }, {
+    path: '~/components'
+  }],
 
   hub: {
     cache: true
@@ -54,29 +62,29 @@ export default defineNuxtConfig({
     provider: 'iconify'
   },
 
-  content: {
-    // sources: {
-    //   pro: process.env.NUXT_UI_PRO_PATH
-    //     ? {
-    //         prefix: '/pro',
-    //         driver: 'fs',
-    //         base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/app/content/pro')
-    //       }
-    //     : process.env.NUXT_GITHUB_TOKEN
-    //       ? {
-    //           prefix: '/pro',
-    //           driver: 'github',
-    //           repo: 'nuxt/ui-pro',
-    //           branch: 'dev',
-    //           dir: 'docs/app/content/pro',
-    //           token: process.env.NUXT_GITHUB_TOKEN || ''
-    //         }
-    //       : undefined
-    // },
-    highlight: {
-      langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
-    }
-  },
+  // content: {
+  //   // sources: {
+  //   //   pro: process.env.NUXT_UI_PRO_PATH
+  //   //     ? {
+  //   //         prefix: '/pro',
+  //   //         driver: 'fs',
+  //   //         base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/app/content/pro')
+  //   //       }
+  //   //     : process.env.NUXT_GITHUB_TOKEN
+  //   //       ? {
+  //   //           prefix: '/pro',
+  //   //           driver: 'github',
+  //   //           repo: 'nuxt/ui-pro',
+  //   //           branch: 'dev',
+  //   //           dir: 'docs/app/content/pro',
+  //   //           token: process.env.NUXT_GITHUB_TOKEN || ''
+  //   //         }
+  //   //       : undefined
+  //   // },
+  //   highlight: {
+  //     langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+  //   }
+  // },
 
   image: {
     provider: 'ipx'
@@ -122,7 +130,7 @@ export default defineNuxtConfig({
 
   componentMeta: {
     exclude: [
-      '@nuxt/content',
+      '@farnabaz/content-next',
       '@nuxt/icon',
       '@nuxt/image',
       '@nuxt/ui-pro',

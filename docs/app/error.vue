@@ -14,11 +14,9 @@ defineProps<{
 const route = useRoute()
 // const colorMode = useColorMode()
 // const { branch } = useContentSource()
-const runtimeConfig = useRuntimeConfig()
-const { integrity, api } = runtimeConfig.public.content
 
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
-const { data: files } = await useLazyFetch<any[]>(`${api.baseURL}/search${integrity ? '.' + integrity : ''}`, { default: () => [] })
+const { data: navigation } = await useAsyncData('navigation', () => getCollectionNavigation('content'))
+const { data: files } = await useAsyncData('files', () => getCollectionSearchSections('content', { ignoredTags: ['style'] }))
 
 // Computed
 
@@ -30,7 +28,7 @@ const links = computed(() => {
     icon: 'i-heroicons-book-open',
     to: '/getting-started',
     active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value.find(item => item._path === '/pro')
+  }, ...(navigation.value?.find(item => item.path === '/pro')
     ? [{
         label: 'Pro',
         icon: 'i-heroicons-square-3-stack-3d',

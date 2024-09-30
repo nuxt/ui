@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@farnabaz/content-next'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 defineProps<{
@@ -8,7 +8,7 @@ defineProps<{
 
 const config = useRuntimeConfig().public
 
-const navigation = inject<Ref<NavItem[]>>('navigation')
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 // const items = computed(() => props.links.map(({ icon, ...link }) => link))
 </script>

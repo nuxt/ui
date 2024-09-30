@@ -266,9 +266,9 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
       <div class="flex justify-center border border-b-0 border-gray-200 dark:border-gray-700 relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class]">
         <component :is="name" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
-            <ContentSlot :name="slot" unwrap="p">
+            <MDCSlot :name="slot" unwrap="p">
               {{ slots?.[slot] }}
-            </ContentSlot>
+            </MDCSlot>
           </template>
         </component>
       </div>
