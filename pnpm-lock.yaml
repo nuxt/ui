@@ -173,14 +173,14 @@ importers:
         specifier: ^0.8.2
         version: 0.8.2(magicast@0.3.5)(rollup@4.22.5)
       nuxt-og-image:
-        specifier: ^3.0.2
+        specifier: ^3.0.4
         version: 3.0.4(magicast@0.3.5)(rollup@4.22.5)(vite@5.4.8(@types/node@22.7.4)(lightningcss@1.27.0)(terser@5.34.1))(vue@3.5.10(typescript@5.6.2))
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
       shiki-transformer-color-highlight:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.2.0
+        version: 0.2.0
       ufo:
         specifier: ^1.5.4
         version: 1.5.4
@@ -5753,8 +5753,8 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
-  shiki-transformer-color-highlight@0.1.0:
-    resolution: {integrity: sha512-RRJAFqeL/qxTPtNJlaPmGM0iq6KmZTmLv9zCrYZFywxhFbBfbM6xAMcjT3G9nSWi8G4u6w+bggdaTdmE8ohtBQ==}
+  shiki-transformer-color-highlight@0.2.0:
+    resolution: {integrity: sha512-KvQYFqhf7gdZCr1GcwWHqPS/sYl0RgwhCET95Sf3N8UX2yHUBqJbis9CbkR+KcnGxR6PWO4I/jB3Q64+yquNrQ==}
 
   shiki@1.21.0:
     resolution: {integrity: sha512-apCH5BoWTrmHDPGgg3RF8+HAAbEL/CdbYr8rMw7eIrdhCkZHdVGat5mMNlRtd1erNG01VPMIKHNQ0Pj2HMAiog==}
@@ -13827,7 +13827,7 @@ snapshots:
       interpret: 1.4.0
       rechoir: 0.6.2
 
-  shiki-transformer-color-highlight@0.1.0:
+  shiki-transformer-color-highlight@0.2.0:
     dependencies:
       '@shikijs/core': 1.21.0
       '@shikijs/types': 1.21.0
