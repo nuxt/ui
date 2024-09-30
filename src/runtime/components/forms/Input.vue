@@ -158,7 +158,7 @@ export default defineComponent({
       default: () => ({})
     },
     modelModifiers: {
-      type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean, nullable?: boolean }>,
+      type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean }>,
       default: () => ({})
     }
   },
@@ -172,7 +172,7 @@ export default defineComponent({
 
     const size = computed(() => sizeButtonGroup.value ?? sizeFormGroup.value)
 
-    const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false, nullable: false }))
+    const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
 
     const input = ref<HTMLInputElement | null>(null)
 
@@ -191,10 +191,6 @@ export default defineComponent({
 
       if (modelModifiers.value.number || props.type === 'number') {
         value = looseToNumber(value)
-      }
-
-      if (modelModifiers.value.nullable && !value) {
-        value = null
       }
 
       emit('update:modelValue', value)
