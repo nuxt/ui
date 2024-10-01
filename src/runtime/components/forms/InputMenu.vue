@@ -134,7 +134,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: [String, Number, Object, Array],
+      type: [String, Number, Object, Array] as PropType<string | number | object | Array<any> | null>,
       default: ''
     },
     query: {

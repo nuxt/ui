@@ -57,7 +57,7 @@ export default defineComponent({
       default: null
     },
     modelValue: {
-      type: [Boolean, Array],
+      type: [Boolean, Array] as PropType<boolean | Array<any> | null>,
       default: null
     },
     name: {

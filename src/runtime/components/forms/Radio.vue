@@ -56,7 +56,7 @@ export default defineComponent({
       default: null
     },
     modelValue: {
-      type: [String, Number, Boolean, Object],
+      type: [String, Number, Boolean, Object] as PropType<string | number | boolean | object | null>,
       default: null
     },
     name: {
