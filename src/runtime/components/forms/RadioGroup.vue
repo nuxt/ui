@@ -52,7 +52,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: [String, Number, Object, Boolean],
+      type: [String, Number, Object, Boolean] as PropType<string | number | boolean | object | null>,
       default: ''
     },
     name: {

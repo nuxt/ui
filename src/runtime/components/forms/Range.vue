@@ -37,7 +37,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: Number,
+      type: Number as PropType<number | null>,
       default: 0
     },
     id: {
