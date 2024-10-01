@@ -55,6 +55,7 @@
     "@vueuse/core": "^11.1.0",
     "@vueuse/integrations": "^11.1.0",
     "defu": "^6.1.4",
+    "embla-carousel-vue": "^8.3.0",
     "fuse.js": "^7.0.0",
     "ohash": "^1.1.4",
     "radix-vue": "^1.9.6",
