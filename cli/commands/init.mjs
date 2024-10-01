@@ -75,7 +75,7 @@ export default defineCommand({
     await sortFile(themePath)
 
     if (!args.prose) {
-      const typesPath = resolve(path, 'src/runtime/types/index.d.ts')
+      const typesPath = resolve(path, 'src/runtime/types/index.ts')
       await appendFile(typesPath, `export * from '../components/${args.content ? 'content/' : ''}${splitByCase(name).map(p => upperFirst(p)).join('')}.vue'`)
       await sortFile(typesPath)
     }
