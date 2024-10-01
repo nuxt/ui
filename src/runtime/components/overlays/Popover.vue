@@ -155,7 +155,7 @@ export default defineComponent({
     })
 
     function onTouchStart (event: TouchEvent) {
-      if (!event.cancelable || !popoverApi.value) {
+      if (!event.cancelable || !popoverApi.value || props.mode === 'click') {
         return
       }
 

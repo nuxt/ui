@@ -183,7 +183,7 @@ export default defineComponent({
     })
 
     function onTouchStart (event: TouchEvent) {
-      if (!event.cancelable || !menuApi.value) {
+      if (!event.cancelable || !menuApi.value || props.mode === 'click') {
         return
       }
 
