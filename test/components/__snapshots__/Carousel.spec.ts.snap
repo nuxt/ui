@@ -2,8 +2,8 @@
 
 exports[`Carousel > renders with as correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" tabindex="0" class="relative focus:outline-none" as="nav">
-  <div class="overflow-hidden" style="transform: translate3d(0px,0px,0px);">
-    <div class="flex flex-row -ml-4">
+  <div class="overflow-hidden">
+    <div class="flex flex-row -ml-4" style="transform: translate3d(NaNpx,0px,0px);">
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
@@ -12,13 +12,14 @@ exports[`Carousel > renders with as correctly 1`] = `
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`Carousel > renders with class correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" tabindex="0" class="relative focus:outline-none w-full max-w-xs">
-  <div class="overflow-hidden" style="transform: translate3d(0px,0px,0px);">
-    <div class="flex flex-row -ml-4">
+  <div class="overflow-hidden">
+    <div class="flex flex-row -ml-4" style="transform: translate3d(NaNpx,0px,0px);">
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
@@ -27,13 +28,14 @@ exports[`Carousel > renders with class correctly 1`] = `
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`Carousel > renders with default slot correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" tabindex="0" class="relative focus:outline-none">
-  <div class="overflow-hidden" style="transform: translate3d(0px,0px,0px);">
-    <div class="flex flex-row -ml-4">
+  <div class="overflow-hidden">
+    <div class="flex flex-row -ml-4" style="transform: translate3d(NaNpx,0px,0px);">
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
@@ -42,13 +44,14 @@ exports[`Carousel > renders with default slot correctly 1`] = `
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`Carousel > renders with items correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" tabindex="0" class="relative focus:outline-none">
-  <div class="overflow-hidden" style="transform: translate3d(0px,0px,0px);">
-    <div class="flex flex-row -ml-4">
+  <div class="overflow-hidden">
+    <div class="flex flex-row -ml-4" style="transform: translate3d(NaNpx,0px,0px);">
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
@@ -57,13 +60,14 @@ exports[`Carousel > renders with items correctly 1`] = `
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`Carousel > renders with orientation vertical correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" tabindex="0" class="relative focus:outline-none">
-  <div class="overflow-hidden" style="transform: translate3d(0px,0px,0px);">
-    <div class="flex flex-col -mt-4">
+  <div class="overflow-hidden">
+    <div class="flex flex-col -mt-4" style="transform: translate3d(0px,NaNpx,0px);">
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
@@ -72,13 +76,14 @@ exports[`Carousel > renders with orientation vertical correctly 1`] = `
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`Carousel > renders with ui correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" tabindex="0" class="relative focus:outline-none">
-  <div class="overflow-hidden" style="transform: translate3d(0px,0px,0px);">
-    <div class="flex flex-row -ml-4">
+  <div class="overflow-hidden">
+    <div class="flex flex-row -ml-4" style="transform: translate3d(NaNpx,0px,0px);">
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
@@ -87,5 +92,6 @@ exports[`Carousel > renders with ui correctly 1`] = `
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
+  <!--v-if-->
 </div>"
 `;
