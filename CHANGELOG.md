@@ -1,5 +1,29 @@
 # Changelog
 
+## [3.0.0-alpha.4](https://github.com/nuxt/ui/compare/v3.0.0-alpha.3...v3.0.0-alpha.4) (2024-10-01)
+
+
+### Features
+
+* **Drawer:** handle `direction` + `handle` props ([5f77aac](https://github.com/nuxt/ui/commit/5f77aac368448c7c45a0f9238d2dc3a5b0de825e))
+
+
+### Bug Fixes
+
+* **Accordion:** missing `min-w-0` on trigger ([6c28597](https://github.com/nuxt/ui/commit/6c285977bd175d4866ca601bca47132ebb2d3440))
+* **build.config:** disable mkdist `addRelativeDeclarationExtensions` option ([f54f607](https://github.com/nuxt/ui/commit/f54f6074131db0f68eab1edcde3a4b2a7ecaba92))
+* **CommandPalette:** missing `min-w-0` on root ([a61e765](https://github.com/nuxt/ui/commit/a61e7656c25b26409cab77178e67d1cb9ec22dbd))
+* **Drawer:** improve max-width on mobile ([fac52fa](https://github.com/nuxt/ui/commit/fac52fa933aeb02f0855d20be37c4214efba0ab7))
+* **InputMenu:** missing `group` on trailing ([2c7c41b](https://github.com/nuxt/ui/commit/2c7c41bd046a961d398bbe8ee4a5945cd1fbaeab))
+* **README:** npm badge link ([#2271](https://github.com/nuxt/ui/issues/2271)) ([30c33c7](https://github.com/nuxt/ui/commit/30c33c71134ccbea4258949a851eaf8b26213b60))
+* **templates:** app config colors type ([96c9246](https://github.com/nuxt/ui/commit/96c9246d83b54637ceb2e2dd77542e435690c387))
+* **Toast:** improve focus styles ([1f9abda](https://github.com/nuxt/ui/commit/1f9abdae614acbfa0be868a599071a601406f0f5))
+
+
+### Reverts
+
+* Revert "chore(deps): refresh lock" ([b83ecc9](https://github.com/nuxt/ui/commit/b83ecc9a6f309d37d3f096667143a4ed7700db6d))
+
 ## [3.0.0-alpha.3](https://github.com/nuxt/ui/compare/v3.0.0-alpha.2...v3.0.0-alpha.3) (2024-09-18)
 
 

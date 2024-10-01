@@ -44,6 +44,7 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import UIcon from './Icon.vue'
 import ULink from './Link.vue'
+import { omit } from '../utils'
 import { pickLinkProps } from '../utils/link'
 
 const props = defineProps<ButtonProps>()
@@ -92,7 +93,7 @@ const ui = computed(() => button({
     :type="type"
     :disabled="disabled || isLoading"
     :class="ui.base({ class: [props.class, props.ui?.base] })"
-    v-bind="linkProps"
+    v-bind="omit(linkProps, ['type', 'disabled'])"
     raw
     @click="onClickWrapper"
   >
