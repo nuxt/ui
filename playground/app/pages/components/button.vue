@@ -18,6 +18,11 @@ function onClick() {
       </UButton>
     </div>
     <div class="flex items-center gap-2">
+      <UButton to="/">
+        Link
+      </UButton>
+    </div>
+    <div class="flex items-center gap-2">
       <UButton disabled>
         Disabled
       </UButton>
