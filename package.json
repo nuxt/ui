@@ -71,6 +71,7 @@
     "@release-it/conventional-changelog": "^8.0.2",
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.3.0",
+    "embla-carousel-auto-height": "^8.3.0",
     "embla-carousel-auto-scroll": "^8.3.0",
     "embla-carousel-autoplay": "^8.3.0",
     "embla-carousel-class-names": "^8.3.0",

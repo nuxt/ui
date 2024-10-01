@@ -5,9 +5,10 @@ import type { AppConfig } from '@nuxt/schema'
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 import type { AutoplayOptionsType } from 'embla-carousel-autoplay'
 import type { AutoScrollOptionsType } from 'embla-carousel-auto-scroll'
-import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
-import type { FadeOptionsType } from 'embla-carousel-fade'
+import type { AutoHeightOptionsType } from 'embla-carousel-auto-height'
 import type { ClassNamesOptionsType } from 'embla-carousel-class-names'
+import type { FadeOptionsType } from 'embla-carousel-fade'
+import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/carousel'
 import type { ButtonProps } from '../types'
@@ -63,6 +64,16 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
    */
   autoScroll?: boolean | Omit<AutoScrollOptionsType, 'rootNode'>
   /**
+   * Enable Auto Height plugin
+   * https://www.embla-carousel.com/plugins/auto-height/
+   */
+  autoHeight?: boolean | AutoHeightOptionsType
+  /**
+   * Enable Class Names plugin
+   * https://www.embla-carousel.com/plugins/class-names/
+   */
+  classNames?: boolean | ClassNamesOptionsType
+  /**
    * Enable Fade plugin
    * https://www.embla-carousel.com/plugins/fade/
    */
@@ -72,21 +83,12 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
    * https://www.embla-carousel.com/plugins/wheel-gestures/
    */
   wheelGestures?: boolean | WheelGesturesPluginOptions
-  /**
-   * Enable Class Names plugin
-   * https://www.embla-carousel.com/plugins/class-names/
-   */
-  classNames?: boolean | ClassNamesOptionsType
   class?: any
   ui?: Partial<typeof carousel.slots>
 }
 
-export type CarouselEmits = {}
-
-type SlotProps<T> = (props: { item: T, index: number }) => any
-
-export interface CarouselSlots<T> {
-  default: SlotProps<T>
+export type CarouselSlots<T> = {
+  default(props: { item: T, index: number }): any
 }
 
 </script>
@@ -100,6 +102,9 @@ import { useAppConfig } from '#imports'
 
 const props = withDefaults(defineProps<CarouselProps<T>>(), {
   orientation: 'horizontal',
+  arrows: false,
+  dots: false,
+  // Embla Options
   active: true,
   align: 'center',
   breakpoints: () => ({}),
@@ -116,14 +121,14 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
   watchResize: true,
   watchSlides: true,
   watchFocus: true,
+  // Embla Plugins
   autoplay: false,
-  autoscroll: false,
+  autoScroll: false,
+  autoHeight: false,
+  classNames: false,
   fade: false,
-  wheelGestures: false,
-  arrows: false,
-  dots: false
+  wheelGestures: false
 })
-defineEmits<CarouselEmits>()
 defineSlots<CarouselSlots<T>>()
 
 const appConfig = useAppConfig()
@@ -137,7 +142,7 @@ const options = computed<EmblaOptionsType>(() => ({
   ...(props.fade ? { align: 'center', containScroll: false } : {}),
   ...rootProps.value,
   axis: props.orientation === 'horizontal' ? 'x' : 'y',
-  // TODO: Get from UApp
+  // TODO: Get from ConfigProvider
   direction: 'ltr'
 }))
 
@@ -154,6 +159,16 @@ const plugins = computedAsync<EmblaPluginType[]>(async () => {
     plugins.push(AutoScrollPlugin(typeof props.autoScroll === 'boolean' ? {} : props.autoScroll))
   }
 
+  if (props.autoHeight) {
+    const AutoHeightPlugin = await import('embla-carousel-auto-height').then(r => r.default)
+    plugins.push(AutoHeightPlugin(typeof props.autoHeight === 'boolean' ? {} : props.autoHeight))
+  }
+
+  if (props.classNames) {
+    const ClassNamesPlugin = await import('embla-carousel-class-names').then(r => r.default)
+    plugins.push(ClassNamesPlugin(typeof props.classNames === 'boolean' ? {} : props.classNames))
+  }
+
   if (props.fade) {
     const FadePlugin = await import('embla-carousel-fade').then(r => r.default)
     plugins.push(FadePlugin(typeof props.fade === 'boolean' ? {} : props.fade))
@@ -162,11 +177,6 @@ const plugins = computedAsync<EmblaPluginType[]>(async () => {
   if (props.wheelGestures) {
     const { WheelGesturesPlugin } = await import('embla-carousel-wheel-gestures').then(r => r.default)
     plugins.push(WheelGesturesPlugin(typeof props.wheelGestures === 'boolean' ? {} : props.wheelGestures))
-  }
-
-  if (props.classNames) {
-    const ClassNamesPlugin = await import('embla-carousel-class-names').then(r => r.default)
-    plugins.push(ClassNamesPlugin(typeof props.classNames === 'boolean' ? {} : props.classNames))
   }
 
   return plugins
@@ -200,7 +210,6 @@ function onSelect(api: EmblaCarouselType) {
   canScrollNext.value = api?.canScrollNext() || false
   canScrollPrev.value = api?.canScrollPrev() || false
   selectedIndex.value = api?.selectedScrollSnap() || 0
-  console.log(selectedIndex.value)
 }
 
 onMounted(() => {
@@ -269,7 +278,7 @@ defineExpose({
       </div>
 
       <div v-if="dots" :class="ui.dots({ class: props.ui?.dots })">
-        <template v-for="index in scrollSnaps" :key="index">
+        <template v-for="(_, index) in scrollSnaps" :key="index">
           <button :class="ui.dot({ class: props.ui?.dot, active: selectedIndex === index })" @click="scrollTo(index)" />
         </template>
       </div>

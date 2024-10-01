@@ -5,7 +5,7 @@ import ComponentRender from '../component-render'
 
 const CarouselWrapper = defineComponent({
   components: {
-    UCarousel: Carousel
+    UCarousel: Carousel as any
   },
   template: `<UCarousel v-slot="{ item }">
   <img :src="item.src" width="300" height="300" class="rounded-lg">
@@ -28,11 +28,15 @@ describe('Carousel', () => {
     // Props
     ['with items', { props }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['with arrows', { props: { ...props, arrows: true } }],
+    ['with prev', { props: { ...props, arrows: true, prev: { color: 'primary' as const } } }],
+    ['with prevIcon', { props: { ...props, arrows: true, prevIcon: 'i-heroicons-arrow-left' } }],
+    ['with next', { props: { ...props, arrows: true, next: { color: 'primary' as const } } }],
+    ['with nextIcon', { props: { ...props, arrows: true, nextIcon: 'i-heroicons-arrow-right' } }],
+    ['with dots', { props: { ...props, dots: true } }],
     ['with as', { props: { ...props, as: 'nav' } }],
     ['with class', { props: { ...props, class: 'w-full max-w-xs' } }],
-    ['with ui', { props: { ...props, ui: {} } }],
-    // Slots
-    ['with default slot', { props, slots: { default: () => 'Default slot' } }]
+    ['with ui', { props: { ...props, ui: { viewport: 'h-[320px]' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CarouselProps<typeof items[number]>, slots?: Partial<CarouselSlots<typeof items[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, CarouselWrapper)
     expect(html).toMatchSnapshot()

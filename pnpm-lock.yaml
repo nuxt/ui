@@ -85,6 +85,9 @@ importers:
       embla-carousel:
         specifier: ^8.3.0
         version: 8.3.0
+      embla-carousel-auto-height:
+        specifier: ^8.3.0
+        version: 8.3.0(embla-carousel@8.3.0)
       embla-carousel-auto-scroll:
         specifier: ^8.3.0
         version: 8.3.0(embla-carousel@8.3.0)
@@ -3288,6 +3291,11 @@ packages:
 
   electron-to-chromium@1.5.29:
     resolution: {integrity: sha512-PF8n2AlIhCKXQ+gTpiJi0VhcHDb69kYX4MtCiivctc2QD3XuNZ/XIOlbGzt7WAjjEev0TtaH6Cu3arZExm5DOw==}
+
+  embla-carousel-auto-height@8.3.0:
+    resolution: {integrity: sha512-RbRu1AK5eC1ysBYysVKHMAl2PvtvbqE3GDa6mYyfuD5nDrLrRG/UHjElW8Elh/WYeJZ6AGW6Vb5SnWVwPsHnDg==}
+    peerDependencies:
+      embla-carousel: 8.3.0
 
   embla-carousel-auto-scroll@8.3.0:
     resolution: {integrity: sha512-ybXWqCTWvl+DeGwtGw0tUU1bOKglS/Ov8F5fueMkiwySKrSFAHizdqSrlMR1SQEXNZHMPH9LqCz7MajNYkdeAQ==}
@@ -10223,6 +10231,10 @@ snapshots:
   ee-first@1.1.1: {}
 
   electron-to-chromium@1.5.29: {}
+
+  embla-carousel-auto-height@8.3.0(embla-carousel@8.3.0):
+    dependencies:
+      embla-carousel: 8.3.0
 
   embla-carousel-auto-scroll@8.3.0(embla-carousel@8.3.0):
     dependencies:

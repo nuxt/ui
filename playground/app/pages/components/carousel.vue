@@ -24,12 +24,12 @@ const bind = computed(() => ({
   dots: dots.value
 }))
 
-const items = Array.from({ length: 10 }).map((_, index) => index)
+const items = Array.from({ length: 6 }).map((_, index) => index)
 </script>
 
 <template>
-  <div class="space-y-12">
-    <div class="space-y-4">
+  <div class="space-y-11">
+    <div class="space-y-3">
       <div class="flex justify-center">
         <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
       </div>
@@ -53,16 +53,21 @@ const items = Array.from({ length: 10 }).map((_, index) => index)
       </fieldset>
     </div>
 
-    <UCarousel v-slot="{ index }" v-bind="bind" :items="items" class="w-[320px] mx-auto" :ui="{ container: 'h-[320px]' }">
-      <img :src="`https://picsum.photos/640/640?v=${index}`" width="320" height="320" class="rounded-lg shadow">
+    <UCarousel v-slot="{ index }" v-bind="bind" :items="items" class="w-[320px] mx-auto" :ui="{ viewport: 'h-[320px]' }">
+      <img :src="`https://picsum.photos/640/640?v=${index}`" width="320" height="320" class="rounded-lg">
     </UCarousel>
 
-    <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ item: 'basis-1/3' }" class="w-full max-w-xs mx-auto">
-      <img :src="`https://picsum.photos/640/640?v=${index}`" width="320" height="320" class="rounded-lg shadow">
-    </UCarousel>
-
-    <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ item: 'basis-[70%] transition-opacity ease-in-out [&:not(.is-snapped)]:opacity-10' }" class="w-full max-w-[48rem] mx-auto">
-      <img :src="`https://picsum.photos/600/350?v=${index}`" class="rounded-lg shadow">
-    </UCarousel>
+    <template v-if="orientation === 'horizontal'">
+      <template v-if="classNames">
+        <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ item: 'basis-[70%] transition-opacity ease-in-out [&:not(.is-snapped)]:opacity-10' }" class="w-full max-w-xl mx-auto">
+          <img :src="`https://picsum.photos/600/350?v=${index}`" class="rounded-lg">
+        </UCarousel>
+      </template>
+      <template v-else>
+        <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ item: 'basis-1/3' }" class="w-full max-w-xs mx-auto">
+          <img :src="`https://picsum.photos/320/320?v=${index}`" class="rounded-lg">
+        </UCarousel>
+      </template>
+    </template>
   </div>
 </template>
