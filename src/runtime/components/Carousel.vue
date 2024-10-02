@@ -175,11 +175,9 @@ const plugins = computedAsync<EmblaPluginType[]>(async () => {
   }
 
   if (props.wheelGestures) {
-    const { WheelGesturesPlugin } = await import('embla-carousel-wheel-gestures').then(r => r.default)
+    const { WheelGesturesPlugin } = await import('embla-carousel-wheel-gestures')
     plugins.push(WheelGesturesPlugin(typeof props.wheelGestures === 'boolean' ? {} : props.wheelGestures))
   }
-
-  console.log(plugins)
 
   return plugins
 })
@@ -198,6 +196,23 @@ function scrollNext() {
 }
 function scrollTo(index: number) {
   emblaApi.value?.scrollTo(index)
+}
+
+function onKeyDown(event: KeyboardEvent) {
+  const prevKey = props.orientation === 'vertical' ? 'ArrowUp' : 'ArrowLeft'
+  const nextKey = props.orientation === 'vertical' ? 'ArrowDown' : 'ArrowRight'
+
+  if (event.key === prevKey) {
+    event.preventDefault()
+    scrollPrev()
+
+    return
+  }
+
+  if (event.key === nextKey) {
+    event.preventDefault()
+    scrollNext()
+  }
 }
 
 const canScrollNext = ref(false)
@@ -238,6 +253,7 @@ defineExpose({
     aria-roledescription="carousel"
     tabindex="0"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
+    @keydown="onKeyDown"
   >
     <div ref="emblaRef" :class="ui.viewport({ class: props.ui?.viewport })">
       <div :class="ui.container({ class: props.ui?.container })">

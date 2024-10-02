@@ -5,6 +5,7 @@ const orientations = Object.keys(theme.variants.orientation)
 
 const orientation = ref('horizontal' as const)
 const loop = ref(false)
+const skipSnaps = ref(false)
 const autoplay = ref(false)
 const autoScroll = ref(false)
 const autoHeight = ref(false)
@@ -15,6 +16,7 @@ const arrows = ref(false)
 const dots = ref(false)
 const bind = computed(() => ({
   loop: loop.value,
+  skipSnaps: skipSnaps.value,
   orientation: orientation.value,
   autoplay: autoplay.value,
   autoScroll: autoScroll.value,
@@ -40,6 +42,7 @@ const items = Array.from({ length: 6 }).map((_, index) => index)
           Options
         </legend>
         <USwitch v-model="loop" label="Loop" />
+        <USwitch v-model="skipSnaps" label="Skip Snaps" />
         <USwitch v-model="arrows" label="Arrows" />
         <USwitch v-model="dots" label="Dots" />
       </fieldset>
