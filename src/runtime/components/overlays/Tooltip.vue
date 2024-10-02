@@ -94,7 +94,7 @@ export default defineComponent({
     let openTimeout: NodeJS.Timeout | null = null
     let closeTimeout: NodeJS.Timeout | null = null
 
-    let isVisible = computed<boolean>(() => !!(useSlots().text || props.text));
+    const isVisible = computed<boolean>(() => !!(useSlots().text || props.text))
 
     // Methods
 
