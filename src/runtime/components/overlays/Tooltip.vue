@@ -4,7 +4,7 @@
       Hover
     </slot>
 
-    <div v-if="open && !prevent" ref="container" :class="[ui.container, ui.width]">
+    <div v-if="open && !prevent && isVisible" ref="container" :class="[ui.container, ui.width]">
       <Transition appear v-bind="ui.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ref, toRef, defineComponent } from 'vue'
+import { computed, ref, toRef, defineComponent, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UKbd from '../elements/Kbd.vue'
@@ -40,6 +40,8 @@ import type { DeepPartial, PopperOptions, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { tooltip } from '#ui/ui.config'
+// import useslots
+
 
 const config = mergeConfig<typeof tooltip>(appConfig.ui.strategy, appConfig.ui.tooltip, tooltip)
 
@@ -94,6 +96,8 @@ export default defineComponent({
     let openTimeout: NodeJS.Timeout | null = null
     let closeTimeout: NodeJS.Timeout | null = null
 
+    const isVisible = computed<boolean>(() => !!(useSlots().text || props.text))
+
     // Methods
 
     function onMouseEnter () {
@@ -138,7 +142,8 @@ export default defineComponent({
       container,
       open,
       onMouseEnter,
-      onMouseLeave
+      onMouseLeave,
+      isVisible
     }
   }
 })
