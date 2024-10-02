@@ -36,7 +36,8 @@ useSeoMeta({
 })
 
 defineOgImageComponent('Docs', {
-  headline: headline.value
+  headline: headline.value,
+  title: page.value.title
 })
 
 const communityLinks = computed(() => [{
