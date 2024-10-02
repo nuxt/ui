@@ -53,7 +53,10 @@ export default {
   },
   default: {
     selectedIcon: 'i-heroicons-check-20-solid',
-    trailingIcon: 'i-heroicons-chevron-down-20-solid'
+    trailingIcon: 'i-heroicons-chevron-down-20-solid',
+    empty: {
+      label: 'No options.'
+    }
   },
   arrow: {
     ...arrow,
