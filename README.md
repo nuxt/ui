@@ -49,7 +49,7 @@ export default defineNuxtConfig({
 
 ## Documentation
 
-Visit https://ui3.nuxt.com to explore the documentation.
+Visit https://ui3.nuxt.dev to explore the documentation.
 
 ## Credits
 
