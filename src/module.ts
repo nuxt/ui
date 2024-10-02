@@ -1,6 +1,5 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
-import type { NuxtOptions } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import icons from './theme/icons'
 
