@@ -314,7 +314,7 @@ componentProps:
 ---
 ::
 
-#### Custom `expand` event
+#### Reactive expand
 
 The `@update:expand` event is emitted when a row is expanded. This event provides the current state of expanded rows and the data of the row that triggered the event.
 
