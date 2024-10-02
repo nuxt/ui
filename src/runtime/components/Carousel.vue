@@ -99,6 +99,7 @@ import useEmblaCarousel from 'embla-carousel-vue'
 import { useForwardProps } from 'radix-vue'
 import { reactivePick, computedAsync } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<CarouselProps<T>>(), {
   orientation: 'horizontal',

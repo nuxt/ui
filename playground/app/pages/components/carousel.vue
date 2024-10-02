@@ -52,7 +52,7 @@ const items = Array.from({ length: 6 }).map((_, index) => index)
         </legend>
         <USwitch v-model="autoplay" label="Autoplay" />
         <USwitch v-model="autoScroll" label="Auto Scroll" />
-        <USwitch v-model="autoHeight" label="Auto Height" />
+        <USwitch v-model="autoHeight" label="Auto Height" :disabled="orientation !== 'horizontal'" />
         <USwitch v-model="fade" label="Fade" />
         <USwitch v-model="classNames" label="Class Names" />
         <USwitch v-model="wheelGestures" label="Wheel Gestures" />
@@ -60,7 +60,7 @@ const items = Array.from({ length: 6 }).map((_, index) => index)
     </div>
 
     <template v-if="classNames">
-      <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ item: 'basis-[70%] transition-opacity ease-in-out [&:not(.is-snapped)]:opacity-10' }" class="w-full max-w-xl mx-auto">
+      <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ item: 'basis-[70%] transition-opacity ease-in-out [&:not(.is-snapped)]:opacity-10', container: 'h-[352px]' }" class="w-full max-w-xl mx-auto">
         <img :src="`https://picsum.photos/600/350?v=${index}`" class="rounded-lg">
       </UCarousel>
     </template>
@@ -70,8 +70,8 @@ const items = Array.from({ length: 6 }).map((_, index) => index)
       </UCarousel>
     </template>
     <template v-else>
-      <UCarousel v-slot="{ index }" v-bind="bind" :items="items" class="w-[320px] mx-auto" :ui="{ viewport: 'h-[320px]' }">
-        <img :src="`https://picsum.photos/640/640?v=${index}`" width="320" height="320" class="rounded-lg">
+      <UCarousel v-slot="{ index }" v-bind="bind" :items="items" class="w-[320px] mx-auto" :ui="{ container: 'h-[336px]' }">
+        <img :src="`https://picsum.photos/640/640?v=${index}`" class="rounded-lg">
       </UCarousel>
 
       <template v-if="orientation === 'horizontal'">
