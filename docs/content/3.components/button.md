@@ -248,6 +248,7 @@ ignore:
   - exactHash
   - external
   - active
+  - onClick
 ---
 ::
 

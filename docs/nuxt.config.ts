@@ -154,6 +154,7 @@ export default defineNuxtConfig({
         'UBreadcrumb',
         'UButton',
         'UButtonGroup',
+        'UCarousel',
         'UCheckbox',
         'UChip',
         'UCollapsible',

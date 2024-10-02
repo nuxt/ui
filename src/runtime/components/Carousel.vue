@@ -57,12 +57,12 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
    * Enable Autoplay plugin
    * https://www.embla-carousel.com/plugins/autoplay/
    */
-  autoplay?: boolean | Omit<AutoplayOptionsType, 'rootNode'>
+  autoplay?: boolean | AutoplayOptionsType
   /**
    * Enable Auto Scroll plugin
    * https://www.embla-carousel.com/plugins/auto-scroll/
    */
-  autoScroll?: boolean | Omit<AutoScrollOptionsType, 'rootNode'>
+  autoScroll?: boolean | AutoScrollOptionsType
   /**
    * Enable Auto Height plugin
    * https://www.embla-carousel.com/plugins/auto-height/
