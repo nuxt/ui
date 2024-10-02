@@ -174,6 +174,8 @@ componentProps:
 
 Use the `#option-empty` slot to customize the content displayed when the `searchable` prop is `true` and there is no options. You will have access to the `query` property in the slot scope.
 
+You can also configure this globally through the `ui.inputMenu.default.optionEmpty.label` config. The token `{query}` will be replaced by `query` property. Defaults to `No results for "{query}".`.
+
 ::component-example
 ---
 component: 'input-menu-example-option-empty-slot'
@@ -185,6 +187,8 @@ componentProps:
 ### `empty`
 
 Use the `#empty` slot to customize the content displayed when there is no options. Defaults to `No options.`.
+
+You can also configure this globally through the `ui.inputMenu.default.empty.label` config. Defaults to `No options.`.
 
 ::component-example
 ---
