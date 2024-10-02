@@ -32,7 +32,7 @@ const navigation = inject<Ref<NavItem[]>>('navigation')
         <UContentSearchButton />
       </UTooltip>
 
-      <!-- <UColorModeButton /> -->
+      <ColorModeButton />
 
       <UButton
         color="gray"
