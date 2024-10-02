@@ -75,7 +75,7 @@
 
             <p v-if="query && !filteredOptions.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
-                No results for "{{ query }}".
+                {{ uiMenu.default.optionEmpty.label.replace('{query}', query) }}
               </slot>
             </p>
             <p v-else-if="!filteredOptions.length" :class="uiMenu.empty">

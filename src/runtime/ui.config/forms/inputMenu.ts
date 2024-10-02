@@ -56,6 +56,9 @@ export default {
     trailingIcon: 'i-heroicons-chevron-down-20-solid',
     empty: {
       label: 'No options.'
+    },
+    optionEmpty: {
+      label: 'No results for "{query}".'
     }
   },
   arrow: {
