@@ -49,6 +49,8 @@
   --color-gray-950: var(--color-gray-950);
 }
 
+@variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     color-scheme: light dark;

@@ -79,35 +79,21 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
     }
 
-    if (options.fonts) {
-      if (!hasNuxtModule('@nuxt/fonts')) {
-        await installModule('@nuxt/fonts', { experimental: { processCSSVariables: true } })
+    async function registerModule(name: string, options: Record<string, any>) {
+      if (!hasNuxtModule(name)) {
+        await installModule(name, options)
       } else {
-        nuxt.options.fonts = defu(nuxt.options.fonts, { experimental: { processCSSVariables: true } })
+        (nuxt.options as any)[name] = defu((nuxt.options as any)[name], options)
       }
     }
 
-    if (!hasNuxtModule('@nuxt/icon')) {
-      await installModule('@nuxt/icon', { cssLayer: 'components' })
-    } else {
-      nuxt.options.icon = defu(nuxt.options.icon, { cssLayer: 'components' })
-    }
+    await registerModule('@nuxt/icon', { cssLayer: 'components' })
+    await registerModule('@nuxt/fonts', { experimental: { processCSSVariables: true } })
+    await registerModule('@nuxtjs/color-mode', { classSuffix: '', disableTransition: true })
 
-    // if (!hasNuxtModule('@nuxtjs/color-mode')) {
-    //   await installModule('@nuxtjs/color-mode', { classSuffix: '' })
-    // } else {
-    //   nuxt.options.colorMode = defu(nuxt.options.colorMode, { classSuffix: '' })
-    // }
-
-    addPlugin({
-      src: resolve('./runtime/plugins/colors')
-    })
-    addPlugin({
-      src: resolve('./runtime/plugins/modal')
-    })
-    addPlugin({
-      src: resolve('./runtime/plugins/slideover')
-    })
+    addPlugin({ src: resolve('./runtime/plugins/colors') })
+    addPlugin({ src: resolve('./runtime/plugins/modal') })
+    addPlugin({ src: resolve('./runtime/plugins/slideover') })
 
     addComponentsDir({
       path: resolve('./runtime/components'),

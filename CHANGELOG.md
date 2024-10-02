@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.0-alpha.5](https://github.com/nuxt/ui/compare/v3.0.0-alpha.4...v3.0.0-alpha.5) (2024-10-02)
+
+
+### Features
+
+* **module:** enable `@nuxtjs/color-mode` ([9dcf903](https://github.com/nuxt/ui/commit/9dcf903926046b6e92b4784043e374d2174e4201))
+* **module:** override `dark` variant with class strategy ([0f86b87](https://github.com/nuxt/ui/commit/0f86b87385375e5bd859e84d21f8b4f06b0a99e0))
+
+
+### Bug Fixes
+
+* **Button:** props specified more than once ([66a04ad](https://github.com/nuxt/ui/commit/66a04add91389910e1336bf0be1cfeada3540f76))
+
 ## [3.0.0-alpha.4](https://github.com/nuxt/ui/compare/v3.0.0-alpha.3...v3.0.0-alpha.4) (2024-10-01)
 
 
