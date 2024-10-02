@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ref, toRef, defineComponent } from 'vue'
+import { computed, ref, toRef, defineComponent, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UKbd from '../elements/Kbd.vue'
@@ -40,6 +40,8 @@ import type { PopperOptions, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { tooltip } from '#ui/ui.config'
+// import useslots
+
 
 const config = mergeConfig<typeof tooltip>(appConfig.ui.strategy, appConfig.ui.tooltip, tooltip)
 
