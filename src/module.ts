@@ -93,11 +93,11 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.icon = defu(nuxt.options.icon, { cssLayer: 'components' })
     }
 
-    // if (!hasNuxtModule('@nuxtjs/color-mode')) {
-    //   await installModule('@nuxtjs/color-mode', { classSuffix: '' })
-    // } else {
-    //   nuxt.options.colorMode = defu(nuxt.options.colorMode, { classSuffix: '' })
-    // }
+    if (!hasNuxtModule('@nuxtjs/color-mode')) {
+      await installModule('@nuxtjs/color-mode', { classSuffix: '' })
+    } else {
+      nuxt.options.colorMode = defu(nuxt.options.colorMode, { classSuffix: '' })
+    }
 
     addPlugin({
       src: resolve('./runtime/plugins/colors')
