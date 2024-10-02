@@ -4,8 +4,8 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative focus:outline-none',
     viewport: 'overflow-hidden',
-    container: 'flex',
-    item: 'min-w-0 shrink-0 grow-0 basis-full',
+    container: 'flex items-start',
+    item: 'min-w-0 shrink-0 basis-full',
     controls: '',
     arrows: '',
     prev: 'absolute rounded-full',

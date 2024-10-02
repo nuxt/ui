@@ -62,7 +62,7 @@ const items = Array.from({ length: 6 }).map((_, index) => index)
       </UCarousel>
     </template>
     <template v-else-if="autoHeight">
-      <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ container: 'transition-[height] duration-200' }" class="w-full max-w-xl mx-auto">
+      <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ container: 'transition-[height] duration-200' }" class="w-full max-w-md mx-auto">
         <img :src="`https://picsum.photos/600/${index % 2 === 0 ? 350 : 450}?v=${index}`" :class="index % 2 === 0 ? 'h-[350px]' : 'h-[450px]'" class="rounded-lg">
       </UCarousel>
     </template>
