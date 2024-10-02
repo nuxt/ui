@@ -45,6 +45,7 @@
     "release": "release-it --preRelease=alpha --npm.tag=next"
   },
   "dependencies": {
+    "@farnabaz/content-next": "nightly",
     "@nuxt/fonts": "^0.9.2",
     "@nuxt/icon": "^1.5.2",
     "@nuxt/kit": "^3.13.2",
