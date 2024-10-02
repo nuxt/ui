@@ -22,7 +22,7 @@ type CarouselVariants = VariantProps<typeof carousel>
 
 export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
-   * Prev button options to
+   * Configure the prev button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'gray', variant: 'link' }
    */
   prev?: ButtonProps
@@ -32,7 +32,7 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
    */
   prevIcon?: string
   /**
-   * Display a next button to scroll to the next slide.
+   * Configure the next button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'gray', variant: 'link' }
    */
   next?: ButtonProps
@@ -178,6 +178,8 @@ const plugins = computedAsync<EmblaPluginType[]>(async () => {
     const { WheelGesturesPlugin } = await import('embla-carousel-wheel-gestures').then(r => r.default)
     plugins.push(WheelGesturesPlugin(typeof props.wheelGestures === 'boolean' ? {} : props.wheelGestures))
   }
+
+  console.log(plugins)
 
   return plugins
 })

@@ -7,6 +7,7 @@ const orientation = ref('horizontal' as const)
 const loop = ref(false)
 const autoplay = ref(false)
 const autoScroll = ref(false)
+const autoHeight = ref(false)
 const fade = ref(false)
 const wheelGestures = ref(false)
 const classNames = ref(false)
@@ -17,6 +18,7 @@ const bind = computed(() => ({
   orientation: orientation.value,
   autoplay: autoplay.value,
   autoScroll: autoScroll.value,
+  autoHeight: autoHeight.value,
   fade: fade.value,
   wheelGestures: wheelGestures.value,
   classNames: classNames.value,
@@ -46,24 +48,30 @@ const items = Array.from({ length: 6 }).map((_, index) => index)
           Plugins
         </legend>
         <USwitch v-model="autoplay" label="Autoplay" />
-        <USwitch v-model="autoScroll" label="Autoscroll" />
+        <USwitch v-model="autoScroll" label="Auto Scroll" />
+        <USwitch v-model="autoHeight" label="Auto Height" />
         <USwitch v-model="fade" label="Fade" />
         <USwitch v-model="classNames" label="Class Names" />
         <USwitch v-model="wheelGestures" label="Wheel Gestures" />
       </fieldset>
     </div>
 
-    <UCarousel v-slot="{ index }" v-bind="bind" :items="items" class="w-[320px] mx-auto" :ui="{ viewport: 'h-[320px]' }">
-      <img :src="`https://picsum.photos/640/640?v=${index}`" width="320" height="320" class="rounded-lg">
-    </UCarousel>
+    <template v-if="classNames">
+      <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ item: 'basis-[70%] transition-opacity ease-in-out [&:not(.is-snapped)]:opacity-10' }" class="w-full max-w-xl mx-auto">
+        <img :src="`https://picsum.photos/600/350?v=${index}`" class="rounded-lg">
+      </UCarousel>
+    </template>
+    <template v-else-if="autoHeight">
+      <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ container: 'transition-[height] duration-200' }" class="w-full max-w-xl mx-auto">
+        <img :src="`https://picsum.photos/600/${index % 2 === 0 ? 350 : 450}?v=${index}`" :class="index % 2 === 0 ? 'h-[350px]' : 'h-[450px]'" class="rounded-lg">
+      </UCarousel>
+    </template>
+    <template v-else>
+      <UCarousel v-slot="{ index }" v-bind="bind" :items="items" class="w-[320px] mx-auto" :ui="{ viewport: 'h-[320px]' }">
+        <img :src="`https://picsum.photos/640/640?v=${index}`" width="320" height="320" class="rounded-lg">
+      </UCarousel>
 
-    <template v-if="orientation === 'horizontal'">
-      <template v-if="classNames">
-        <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ item: 'basis-[70%] transition-opacity ease-in-out [&:not(.is-snapped)]:opacity-10' }" class="w-full max-w-xl mx-auto">
-          <img :src="`https://picsum.photos/600/350?v=${index}`" class="rounded-lg">
-        </UCarousel>
-      </template>
-      <template v-else>
+      <template v-if="orientation === 'horizontal'">
         <UCarousel v-slot="{ index }" v-bind="bind" :items="items" :ui="{ item: 'basis-1/3' }" class="w-full max-w-xs mx-auto">
           <img :src="`https://picsum.photos/320/320?v=${index}`" class="rounded-lg">
         </UCarousel>
