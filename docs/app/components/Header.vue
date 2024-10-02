@@ -37,7 +37,7 @@ const navigation = inject<Ref<NavItem[]>>('navigation')
       <UButton
         color="gray"
         variant="ghost"
-        to="https://github.com/nuxt/ui"
+        to="https://github.com/nuxt/ui/tree/v3"
         target="_blank"
         icon="i-simple-icons-github"
         aria-label="GitHub"
