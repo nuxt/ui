@@ -117,16 +117,26 @@ You can manually set errors after form submission if required. To do this, simpl
 
 ```vue
 <script setup lang="ts">
-import type { FormError, FormSubmitEvent } from '#ui/types'
+import type { Form, FormSubmitEvent } from '#ui/types'
 
-const state = reactive({
+interface Schema {
+  email?: string
+  password?: string
+}
+
+const state = reactive<Schema>({
   email: undefined,
   password: undefined
 })
 
-const form = ref()
+const form = ref<Form<Schema>>()
 
-async function onSubmit (event: FormSubmitEvent<any>) {
+async function onSubmit (event: FormSubmitEvent<Schema>) {
+  if (!form.value) {
+    console.error("Form component not mounted yet")
+    return
+  }
+
   form.value.clear()
   try {
     const response = await $fetch('...')
