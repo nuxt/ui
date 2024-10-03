@@ -153,6 +153,7 @@ props:
     - Backlog
     - Todo
   multiple: true
+  placeholder: 'Select status'
   items:
     - Backlog
     - Todo
