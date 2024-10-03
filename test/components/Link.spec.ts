@@ -11,7 +11,7 @@ describe('Link', () => {
     ['with disabled', { props: { disabled: true } }],
     ['with raw', { props: { raw: true } }],
     ['with class', { props: { class: 'font-medium' } }],
-    ['with activeClass', { props: { active: true, activeClass: 'text-gray-900 dark:text-white' } }],
+    ['with activeClass', { props: { active: true, activeClass: 'text-[--ui-text-highlighted]' } }],
     ['with inactiveClass', { props: { active: false, inactiveClass: 'hover:text-primary-500 dark:hover:text-primary-400' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]

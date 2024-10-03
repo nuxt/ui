@@ -29,7 +29,7 @@ describe('FormField', () => {
     ['with hint', { props: { hint: 'Use letters, numbers, and special characters' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Username', description: 'Enter your username', size } }]),
     ['with class', { props: { class: 'relative' } }],
-    ['with ui', { props: { ui: { label: 'text-gray-900 dark:text-white' } } }],
+    ['with ui', { props: { ui: { label: 'text-[--ui-text-highlighted]' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with label slot', { slots: { label: () => 'Label slot' } }],

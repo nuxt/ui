@@ -16,7 +16,7 @@ const navigation = inject<Ref<NavItem[]>>('navigation')
 <template>
   <UHeader :ui="{ left: 'min-w-0' }">
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white min-w-0" aria-label="Nuxt UI">
+      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[--ui-text-highlighted] min-w-0" aria-label="Nuxt UI">
         <Logo class="w-auto h-6 shrink-0" />
 
         <UBadge :label="`v${config.version}`" variant="subtle" size="sm" class="-mb-[2px] rounded font-semibold inline-block truncate" />

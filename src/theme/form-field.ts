@@ -3,12 +3,12 @@ export default {
     root: '',
     wrapper: '',
     labelWrapper: 'flex content-center items-center justify-between',
-    label: 'block font-medium text-gray-700 dark:text-gray-200',
+    label: 'block font-medium text-[--ui-text]',
     container: 'mt-1 relative',
-    description: 'text-gray-500 dark:text-gray-400',
+    description: 'text-[--ui-text-muted]',
     error: 'mt-2 text-error-500 dark:text-error-400',
-    hint: 'text-gray-500 dark:text-gray-400',
-    help: 'mt-2 text-gray-500 dark:text-gray-400'
+    hint: 'text-[--ui-text-muted]',
+    help: 'mt-2 text-[--ui-text-muted]'
   },
   variants: {
     size: {

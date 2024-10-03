@@ -72,7 +72,7 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
-    class: `text-white dark:text-gray-900 bg-${color}-500 hover:bg-${color}-600 disabled:bg-${color}-500 aria-disabled:bg-${color}-500 dark:bg-${color}-400 dark:hover:bg-${color}-500 dark:disabled:bg-${color}-400 dark:aria-disabled:bg-${color}-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
+    class: `text-[--ui-bg] bg-${color}-500 hover:bg-${color}-600 disabled:bg-${color}-500 aria-disabled:bg-${color}-500 dark:bg-${color}-400 dark:hover:bg-${color}-500 dark:disabled:bg-${color}-400 dark:aria-disabled:bg-${color}-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
@@ -96,27 +96,27 @@ export default (options: Required<ModuleOptions>) => ({
   })), {
     color: 'gray',
     variant: 'solid',
-    class: 'text-white dark:text-gray-900 bg-gray-900 hover:bg-gray-700 disabled:bg-gray-900 aria-disabled:bg-gray-900 dark:bg-white dark:hover:bg-gray-200 dark:disabled:bg-white dark:aria-disabled:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:focus-visible:outline-white'
+    class: 'text-[--ui-bg] bg-[--ui-bg-inverted] hover:bg-[--ui-bg-inverted]/80 disabled:bg-[--ui-bg-inverted] aria-disabled:bg-[--ui-bg-inverted] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-border-inverted]'
   }, {
     color: 'gray',
     variant: 'outline',
-    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-white hover:bg-gray-100 disabled:bg-white aria-disabled:bg-white dark:bg-gray-900 dark:hover:bg-gray-800 dark:disabled:bg-gray-900 dark:aria-disabled:bg-gray-900 focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white'
+    class: 'ring ring-inset ring-[--ui-border-accented] text-[--ui-text] bg-[--ui-bg] hover:bg-[--ui-bg-elevated] disabled:bg-[--ui-bg] aria-disabled:bg-[--ui-bg] focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]'
   }, {
     color: 'gray',
     variant: 'soft',
-    class: 'text-gray-700 dark:text-gray-200 bg-gray-100 hover:bg-gray-200 focus-visible:bg-gray-200 disabled:bg-gray-100 aria-disabled:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700/50 dark:focus-visible:bg-gray-700/50 dark:disabled:bg-gray-800 dark:aria-disabled:bg-gray-800'
+    class: 'text-[--ui-text] bg-[--ui-bg-elevated] hover:bg-[--ui-bg-accented]/75 focus-visible:bg-[--ui-bg-accented]/75 disabled:bg-[--ui-bg-elevated] aria-disabled:bg-[--ui-bg-elevated]'
   }, {
     color: 'gray',
     variant: 'subtle',
-    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-100 hover:bg-gray-200 disabled:bg-gray-100 aria-disabled:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700/50 dark:disabled:bg-gray-800 dark:aria-disabled:bg-gray-800 focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white'
+    class: 'ring ring-inset ring-[--ui-border-accented] text-[--ui-text] bg-[--ui-bg-elevated] hover:bg-[--ui-bg-accented]/75 disabled:bg-[--ui-bg-elevated] aria-disabled:bg-[--ui-bg-elevated] focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]'
   }, {
     color: 'gray',
     variant: 'ghost',
-    class: 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent'
+    class: 'text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent'
   }, {
     color: 'gray',
     variant: 'link',
-    class: 'text-gray-500 hover:text-gray-700 disabled:text-gray-500 aria-disabled:text-gray-500 dark:text-gray-400 dark:hover:text-gray-200 dark:disabled:text-gray-400 dark:aria-disabled:text-gray-400 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white'
+    class: 'text-[--ui-text-muted] hover:text-[--ui-text] disabled:text-[--ui-text-muted] aria-disabled:text-[--ui-text-muted] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]'
   }, {
     size: 'xs',
     square: true,

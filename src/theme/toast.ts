@@ -2,10 +2,10 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'relative group overflow-hidden bg-white dark:bg-gray-900 shadow-lg rounded-lg ring ring-gray-200 dark:ring-gray-800 p-4 flex gap-2.5 focus:outline-none',
+    root: 'relative group overflow-hidden bg-[--ui-bg] shadow-lg rounded-lg ring ring-[--ui-border] p-4 flex gap-2.5 focus:outline-none',
     wrapper: 'w-0 flex-1 flex flex-col gap-1',
-    title: 'text-sm font-medium text-gray-900 dark:text-white',
-    description: 'text-sm text-gray-500 dark:text-gray-400',
+    title: 'text-sm font-medium text-[--ui-text-highlighted]',
+    description: 'text-sm text-[--ui-text-muted]',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
     avatarSize: '2xl',
@@ -21,9 +21,9 @@ export default (options: Required<ModuleOptions>) => ({
         progress: `bg-${color}-500 dark:bg-${color}-400`
       }])),
       gray: {
-        root: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-900 dark:focus-visible:ring-white',
-        icon: 'text-gray-900 dark:text-white',
-        progress: 'bg-gray-900 dark:bg-white'
+        root: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-border-inverted]',
+        icon: 'text-[--ui-text-highlighted]',
+        progress: 'bg-[--ui-bg-inverted]'
       }
     },
     multiline: {

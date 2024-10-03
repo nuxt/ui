@@ -11,7 +11,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkLeadingAvatarSize: '2xs',
     linkLabel: 'truncate',
     separator: 'flex',
-    separatorIcon: 'shrink-0 size-5 text-gray-500 dark:text-gray-400'
+    separatorIcon: 'shrink-0 size-5 text-[--ui-text-muted]'
   },
   variants: {
     active: {
@@ -19,7 +19,7 @@ export default (options: Required<ModuleOptions>) => ({
         link: 'text-primary-500 dark:text-primary-400 font-semibold'
       },
       false: {
-        link: 'text-gray-500 dark:text-gray-400 font-medium'
+        link: 'text-[--ui-text-muted] font-medium'
       }
     },
     disabled: {
@@ -36,7 +36,7 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     to: true,
     class: {
-      link: ['hover:text-gray-700 dark:hover:text-gray-200', options.theme.transitions && 'transition-colors']
+      link: ['hover:text-[--ui-text]', options.theme.transitions && 'transition-colors']
     }
   }]
 })

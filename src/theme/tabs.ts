@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
     indicator: 'absolute transition-[translate,width] duration-200',
-    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-gray-500 dark:data-[state=inactive]:text-gray-400 hover:data-[state=inactive]:text-gray-700 dark:hover:data-[state=inactive]:text-gray-200 font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none', options.theme.transitions && 'transition-colors'],
+    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-[--ui-text-muted] hover:data-[state=inactive]:text-[--ui-text] font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none', options.theme.transitions && 'transition-colors'],
     content: 'focus:outline-none w-full',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -19,12 +19,12 @@ export default (options: Required<ModuleOptions>) => ({
     },
     variant: {
       pill: {
-        list: 'bg-gray-100 dark:bg-gray-800 rounded-lg',
+        list: 'bg-[--ui-bg-elevated] rounded-lg',
         trigger: 'flex-1',
         indicator: 'rounded-md shadow-sm'
       },
       link: {
-        list: 'border-gray-200 dark:border-gray-800',
+        list: 'border-[--ui-border]',
         indicator: 'rounded-full'
       }
     },
@@ -100,14 +100,14 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'pill',
     class: {
       indicator: `bg-${color}-500 dark:bg-${color}-400`,
-      trigger: `data-[state=active]:text-white dark:data-[state=active]:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
+      trigger: `data-[state=active]:text-[--ui-bg] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
     }
   })), {
     color: 'gray',
     variant: 'pill',
     class: {
-      indicator: 'bg-gray-900 dark:bg-white',
-      trigger: 'data-[state=active]:text-white dark:data-[state=active]:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:focus-visible:outline-white'
+      indicator: 'bg-[--ui-bg-inverted]',
+      trigger: 'data-[state=active]:text-[--ui-bg] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-border-inverted]'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
@@ -120,8 +120,8 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'gray',
     variant: 'link',
     class: {
-      indicator: 'bg-gray-900 dark:bg-white',
-      trigger: 'data-[state=active]:text-gray-900 dark:data-[state=active]:text-white focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-900 dark:focus-visible:ring-white'
+      indicator: 'bg-[--ui-bg-inverted]',
+      trigger: 'data-[state=active]:text-[--ui-text-highlighted] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-border-inverted]'
     }
   }],
   defaultVariants: {

@@ -214,15 +214,15 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
 <template>
   <div class="my-5">
     <div>
-      <div v-if="options.length" class="flex items-center gap-2.5 border border-gray-200 dark:border-gray-700 border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
+      <div v-if="options.length" class="flex items-center gap-2.5 border border-[--ui-bg-accented] border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">
           <UFormField
             :label="option.label"
             size="sm"
-            class="inline-flex ring ring-gray-300 dark:ring-gray-700 rounded"
+            class="inline-flex ring ring-[--ui-border-accented] rounded"
             :ui="{
-              wrapper: 'bg-gray-50 dark:bg-gray-800/50 rounded-l flex border-r border-gray-300 dark:border-gray-700',
-              label: 'text-gray-500 dark:text-gray-400 px-2 py-1.5',
+              wrapper: 'bg-[--ui-bg-elevated]/50 rounded-l flex border-r border-[--ui-border-accented]',
+              label: 'text-[--ui-text-muted] px-2 py-1.5',
               container: 'mt-0'
             }"
           >
@@ -263,7 +263,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
         </template>
       </div>
 
-      <div class="flex justify-center border border-b-0 border-gray-200 dark:border-gray-700 relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class]">
+      <div class="flex justify-center border border-b-0 border-[--ui-bg-accented] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class]">
         <component :is="name" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <ContentSlot :name="slot" unwrap="p">

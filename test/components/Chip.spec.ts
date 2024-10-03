@@ -17,7 +17,7 @@ describe('Chip', () => {
     ['with color gray', { props: { color: 'gray' } }],
     ['without show', { props: { show: false } }],
     ['with class', { props: { class: 'mx-auto' } }],
-    ['with ui', { props: { ui: { base: 'text-gray-500 dark:text-gray-400' } } }],
+    ['with ui', { props: { ui: { base: 'text-[--ui-text-muted]' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }]

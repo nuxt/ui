@@ -73,7 +73,7 @@ describe('CommandPalette', () => {
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-heroicons-trash' } }],
     ['with as', { props: { ...props, as: 'section' } }],
-    ['with class', { props: { ...props, class: 'divide-gray-300 dark:divide-gray-700' } }],
+    ['with class', { props: { ...props, class: 'divide-[--ui-border-accented]' } }],
     ['with ui', { props: { ...props, ui: { input: '[&>input]:h-10' } } }],
     // Slots
     ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }],

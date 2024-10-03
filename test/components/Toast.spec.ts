@@ -38,7 +38,7 @@ describe('Toast', () => {
     ['with closeIcon', { props: { ...props, closeIcon: 'i-heroicons-trash' } }],
     ['with type', { props: { ...props, type: 'background' as const } }],
     ['with color gray', { props: { ...props, color: 'gray' as const } }],
-    ['with class', { props: { ...props, class: 'bg-gray-50 dark:bg-gray-800/50' } }],
+    ['with class', { props: { ...props, class: 'bg-[--ui-bg-elevated]/50' } }],
     ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],

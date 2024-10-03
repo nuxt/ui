@@ -8,7 +8,7 @@
       <ULink active>
         Button active
       </ULink>
-      <ULink active class="font-medium" active-class="text-gray-900 dark:text-white">
+      <ULink active class="font-medium" active-class="text-[--ui-text-highlighted]">
         Button active with class
       </ULink>
       <ULink active disabled>
@@ -34,7 +34,7 @@
       <ULink to="/components/link">
         Link active
       </ULink>
-      <ULink to="/components/link" class="font-medium" active-class="text-gray-900 dark:text-white">
+      <ULink to="/components/link" class="font-medium" active-class="text-[--ui-text-highlighted]">
         Link active with class
       </ULink>
       <ULink to="/components/link" disabled>

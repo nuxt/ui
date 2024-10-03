@@ -22,7 +22,7 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
-    class: `bg-${color}-500 dark:bg-${color}-400 text-white dark:text-gray-900`
+    class: `bg-${color}-500 dark:bg-${color}-400 text-[--ui-bg]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
@@ -38,19 +38,19 @@ export default (options: Required<ModuleOptions>) => ({
   })), {
     color: 'gray',
     variant: 'solid',
-    class: 'text-white dark:text-gray-900 bg-gray-900 dark:bg-white'
+    class: 'text-[--ui-bg] bg-[--ui-bg-inverted]'
   }, {
     color: 'gray',
     variant: 'outline',
-    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900'
+    class: 'ring ring-inset ring-[--ui-border-accented] text-[--ui-text] bg-[--ui-bg]'
   }, {
     color: 'gray',
     variant: 'soft',
-    class: 'text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800'
+    class: 'text-[--ui-text] bg-[--ui-bg-elevated]'
   }, {
     color: 'gray',
     variant: 'subtle',
-    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800'
+    class: 'ring ring-inset ring-[--ui-border-accented] text-[--ui-text] bg-[--ui-bg-elevated]'
   }],
   defaultVariants: {
     color: 'primary',

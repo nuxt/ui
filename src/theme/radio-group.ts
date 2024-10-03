@@ -4,14 +4,14 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative',
     fieldset: 'flex',
-    legend: 'mb-1 block font-medium text-gray-700 dark:text-gray-200',
+    legend: 'mb-1 block font-medium text-[--ui-text]',
     item: 'flex items-start',
-    base: 'rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-offset-white dark:focus-visible:outline-offset-gray-900',
-    indicator: 'flex items-center justify-center size-full rounded-full after:bg-white dark:after:bg-gray-900 after:rounded-full',
+    base: 'rounded-full ring ring-inset ring-[--ui-border-accented] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-offset-[--ui-bg]',
+    indicator: 'flex items-center justify-center size-full rounded-full after:bg-[--ui-bg] after:rounded-full',
     container: 'flex items-center',
     wrapper: 'ms-2',
-    label: 'block font-medium text-gray-700 dark:text-gray-200',
-    description: 'text-gray-500 dark:text-gray-400'
+    label: 'block font-medium text-[--ui-text]',
+    description: 'text-[--ui-text-muted]'
   },
   variants: {
     color: {
@@ -20,8 +20,8 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: `bg-${color}-500 dark:bg-${color}-400`
       }])),
       gray: {
-        base: 'focus-visible:outline-gray-900 dark:focus-visible:outline-white',
-        indicator: 'bg-gray-900 dark:bg-white'
+        base: 'focus-visible:outline-[--ui-border-inverted]',
+        indicator: 'bg-[--ui-bg-inverted]'
       }
     },
     orientation: {

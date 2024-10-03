@@ -1,12 +1,12 @@
 export default {
   slots: {
-    overlay: 'fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75',
-    content: 'fixed z-50 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 flex focus:outline-none',
-    handle: 'shrink-0 rounded-full bg-gray-200 dark:bg-gray-700',
+    overlay: 'fixed inset-0 z-50 bg-[--ui-bg-elevated]/75',
+    content: 'fixed z-50 bg-[--ui-bg] ring ring-[--ui-border] flex focus:outline-none',
+    handle: 'shrink-0 rounded-full bg-[--ui-bg-accented]',
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: '',
-    title: 'text-gray-900 dark:text-white font-semibold',
-    description: 'mt-1 text-gray-500 dark:text-gray-400 text-sm',
+    title: 'text-[--ui-text-highlighted] font-semibold',
+    description: 'mt-1 text-[--ui-text-muted] text-sm',
     body: 'flex-1',
     footer: 'flex flex-col gap-1.5'
   },

@@ -23,11 +23,11 @@ const route = useRoute()
 
   <UFooter>
     <template #left>
-      <NuxtLink v-if="route.path.startsWith('/pro')" to="https://ui.nuxt.com/pro/purchase" target="_blank" class="text-sm text-gray-500 dark:text-gray-400">
-        Purchase <span class="text-gray-900 dark:text-white">Nuxt UI Pro</span>
+      <NuxtLink v-if="route.path.startsWith('/pro')" to="https://ui.nuxt.com/pro/purchase" target="_blank" class="text-sm text-[--ui-text-muted]">
+        Purchase <span class="text-[--ui-text-highlighted]">Nuxt UI Pro</span>
       </NuxtLink>
-      <NuxtLink v-else to="https://github.com/nuxt/ui" target="_blank" class="text-sm text-gray-500 dark:text-gray-400">
-        Published under <span class="text-gray-900 dark:text-white">MIT License</span>
+      <NuxtLink v-else to="https://github.com/nuxt/ui" target="_blank" class="text-sm text-[--ui-text-muted]">
+        Published under <span class="text-[--ui-text-highlighted]">MIT License</span>
       </NuxtLink>
     </template>
 
