@@ -132,18 +132,13 @@ const state = reactive<Schema>({
 const form = ref<Form<Schema>>()
 
 async function onSubmit (event: FormSubmitEvent<Schema>) {
-  if (!form.value) {
-    console.error("Form component not mounted yet")
-    return
-  }
-
-  form.value.clear()
+  form.value!.clear()
   try {
     const response = await $fetch('...')
     // ...
   } catch (err) {
     if (err.statusCode === 422) {
-      form.value.setErrors(err.data.errors.map((err) => ({
+      form.value!.setErrors(err.data.errors.map((err) => ({
         // Map validation errors to { path: string, message: string }
         message: err.message,
         path: err.path,
