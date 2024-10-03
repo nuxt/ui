@@ -42,9 +42,11 @@ export default defineNuxtConfig({
 
 3. Import Tailwind and Nuxt UI in your `app.vue` or in your [CSS](https://nuxt.com/docs/getting-started/styling#the-css-property):
 
-```css [main.css]
+```vue [app.vue]
+<style>
 @import "tailwindcss";
 @import "@nuxt/ui";
+</style>
 ```
 
 ## Documentation
