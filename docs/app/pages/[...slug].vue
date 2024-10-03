@@ -36,7 +36,8 @@ useSeoMeta({
 })
 
 defineOgImageComponent('Docs', {
-  headline: headline.value
+  headline: headline.value,
+  title: page.value.title
 })
 
 const communityLinks = computed(() => [{
@@ -90,7 +91,7 @@ const communityLinks = computed(() => [{
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
-      <UContentToc :links="page.body.toc.links">
+      <UContentToc :links="page.body.toc.links" class="z-[2]">
         <template #bottom>
           <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
 
