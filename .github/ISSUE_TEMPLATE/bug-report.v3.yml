@@ -5,8 +5,8 @@ body:
   - type: markdown
     attribues:
       value: |
-      > [!IMPORTANT]  
-      > As Nuxt UI v3 is currently in alpha, we recommend thorough testing before using it in production environments. We're actively working on stabilization and welcome feedback from early adopters to improve the library. 
+        > [!IMPORTANT]  
+        > As Nuxt UI v3 is currently in alpha, we recommend thorough testing before using it in production environments. We're actively working on stabilization and welcome feedback from early adopters to improve the library. 
   - type: markdown
     attributes:
       value: |
