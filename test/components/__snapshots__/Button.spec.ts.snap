@@ -1,229 +1,229 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Button > renders with block correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
-exports[`Button > renders with class correctly 1`] = `"<button type="button" class="inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5 rounded-full font-bold"></button>"`;
+exports[`Button > renders with class correctly 1`] = `"<button type="button" class="inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5 rounded-full font-bold"></button>"`;
 
 exports[`Button > renders with default slot correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if-->Default slot
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with disabled and with link correctly 1`] = `
-"<a aria-disabled="true" role="link" tabindex="-1" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+"<a aria-disabled="true" role="link" tabindex="-1" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </a>"
 `;
 
 exports[`Button > renders with disabled correctly 1`] = `
-"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
-  <!--v-if--><span class="truncate">Button</span>
-  <!--v-if-->
-</button>"
-`;
-
-exports[`Button > renders with gray variant ghost correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
-  <!--v-if--><span class="truncate">Button</span>
-  <!--v-if-->
-</button>"
-`;
-
-exports[`Button > renders with gray variant link correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-muted] hover:text-[--ui-text] disabled:text-[--ui-text-muted] aria-disabled:text-[--ui-text-muted] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]">
-  <!--v-if--><span class="truncate">Button</span>
-  <!--v-if-->
-</button>"
-`;
-
-exports[`Button > renders with gray variant outline correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 ring ring-inset ring-[--ui-border-accented] text-[--ui-text] bg-[--ui-bg] hover:bg-[--ui-bg-elevated] disabled:bg-[--ui-bg] aria-disabled:bg-[--ui-bg] focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]">
-  <!--v-if--><span class="truncate">Button</span>
-  <!--v-if-->
-</button>"
-`;
-
-exports[`Button > renders with gray variant soft correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text] bg-[--ui-bg-elevated] hover:bg-[--ui-bg-accented]/75 focus-visible:bg-[--ui-bg-accented]/75 disabled:bg-[--ui-bg-elevated] aria-disabled:bg-[--ui-bg-elevated]">
-  <!--v-if--><span class="truncate">Button</span>
-  <!--v-if-->
-</button>"
-`;
-
-exports[`Button > renders with gray variant solid correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-[--ui-bg-inverted] hover:bg-[--ui-bg-inverted]/80 disabled:bg-[--ui-bg-inverted] aria-disabled:bg-[--ui-bg-inverted] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-border-inverted]">
-  <!--v-if--><span class="truncate">Button</span>
-  <!--v-if-->
-</button>"
-`;
-
-exports[`Button > renders with gray variant subtle correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 ring ring-inset ring-[--ui-border-accented] text-[--ui-text] bg-[--ui-bg-elevated] hover:bg-[--ui-bg-accented]/75 disabled:bg-[--ui-bg-elevated] aria-disabled:bg-[--ui-bg-elevated] focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]">
+"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with icon correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:rocket-launch shrink-0 size-5" aria-hidden="true"></span>
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5"><span class="iconify i-heroicons:rocket-launch shrink-0 size-5" aria-hidden="true"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with label correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with leading and icon correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:arrow-left shrink-0 size-5" aria-hidden="true"></span>
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5"><span class="iconify i-heroicons:arrow-left shrink-0 size-5" aria-hidden="true"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with leading slot correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5">Leading slot
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5">Leading slot
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with leadingIcon correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:arrow-left shrink-0 size-5" aria-hidden="true"></span>
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5"><span class="iconify i-heroicons:arrow-left shrink-0 size-5" aria-hidden="true"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with loading correctly 1`] = `
-"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:arrow-path-20-solid shrink-0 size-5 animate-spin" aria-hidden="true"></span>
+"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5"><span class="iconify i-heroicons:arrow-path-20-solid shrink-0 size-5 animate-spin" aria-hidden="true"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with loadingIcon correctly 1`] = `
-"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"><span class="iconify i-heroicons:sparkles shrink-0 size-5 animate-spin" aria-hidden="true"></span>
+"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5"><span class="iconify i-heroicons:sparkles shrink-0 size-5 animate-spin" aria-hidden="true"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
 `;
 
+exports[`Button > renders with neutral variant ghost correctly 1`] = `
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
+  <!--v-if--><span class="truncate">Button</span>
+  <!--v-if-->
+</button>"
+`;
+
+exports[`Button > renders with neutral variant link correctly 1`] = `
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-muted] hover:text-[--ui-text] disabled:text-[--ui-text-muted] aria-disabled:text-[--ui-text-muted] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]">
+  <!--v-if--><span class="truncate">Button</span>
+  <!--v-if-->
+</button>"
+`;
+
+exports[`Button > renders with neutral variant outline correctly 1`] = `
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 ring ring-inset ring-[--ui-border-accented] text-[--ui-text] bg-[--ui-bg] hover:bg-[--ui-bg-elevated] disabled:bg-[--ui-bg] aria-disabled:bg-[--ui-bg] focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]">
+  <!--v-if--><span class="truncate">Button</span>
+  <!--v-if-->
+</button>"
+`;
+
+exports[`Button > renders with neutral variant soft correctly 1`] = `
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text] bg-[--ui-bg-elevated] hover:bg-[--ui-bg-accented]/75 focus-visible:bg-[--ui-bg-accented]/75 disabled:bg-[--ui-bg-elevated] aria-disabled:bg-[--ui-bg-elevated]">
+  <!--v-if--><span class="truncate">Button</span>
+  <!--v-if-->
+</button>"
+`;
+
+exports[`Button > renders with neutral variant solid correctly 1`] = `
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-[--ui-bg-inverted] hover:bg-[--ui-bg-inverted]/80 disabled:bg-[--ui-bg-inverted] aria-disabled:bg-[--ui-bg-inverted] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-border-inverted]">
+  <!--v-if--><span class="truncate">Button</span>
+  <!--v-if-->
+</button>"
+`;
+
+exports[`Button > renders with neutral variant subtle correctly 1`] = `
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 ring ring-inset ring-[--ui-border-accented] text-[--ui-text] bg-[--ui-bg-elevated] hover:bg-[--ui-bg-accented]/75 disabled:bg-[--ui-bg-elevated] aria-disabled:bg-[--ui-bg-elevated] focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]">
+  <!--v-if--><span class="truncate">Button</span>
+  <!--v-if-->
+</button>"
+`;
+
 exports[`Button > renders with primary variant ghost correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-primary-500 dark:text-primary-400 hover:bg-primary-500/10 focus-visible:bg-primary-500/10 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-primary-400/10 dark:focus-visible:bg-primary-400/10 dark:disabled:bg-transparent dark:aria-disabled:bg-transparent">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-primary] hover:bg-[--ui-primary]/10 focus-visible:bg-[--ui-primary]/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with primary variant link correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-primary-500 hover:text-primary-600 disabled:text-primary-500 aria-disabled:text-primary-500 dark:text-primary-400 dark:hover:text-primary-500 dark:disabled:text-primary-400 dark:aria-disabled:text-primary-400 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-primary] hover:text-[--ui-primary] disabled:text-[--ui-primary] aria-disabled:text-[--ui-primary] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with primary variant outline correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 ring ring-inset ring-primary-500/50 dark:ring-primary-400/50 text-primary-500 dark:text-primary-400 hover:bg-primary-500/10 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-primary-400/10 dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 ring ring-inset ring-[--ui-primary]/50 text-[--ui-primary] hover:bg-[--ui-primary]/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with primary variant soft correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-primary-500 dark:text-primary-400 bg-primary-500/10 hover:bg-primary-500/15 focus-visible:bg-primary-500/15 disabled:bg-primary-500/10 aria-disabled:bg-primary-500/10 dark:bg-primary-400/10 dark:hover:bg-primary-400/15 dark:focus-visible:bg-primary-400/15 dark:disabled:bg-primary-400/10 dark:aria-disabled:bg-primary-400/10">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-primary] bg-[--ui-primary]/10 hover:bg-[--ui-primary]/15 focus-visible:bg-[--ui-primary]/15 disabled:bg-[--ui-primary]/10 aria-disabled:bg-[--ui-primary]/10">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with primary variant solid correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with primary variant subtle correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-primary-500 dark:text-primary-400 ring ring-inset ring-primary-500/25 dark:ring-primary-400/25 bg-primary-500/10 hover:bg-primary-500/15 disabled:bg-primary-500/10 aria-disabled:bg-primary-500/10 dark:bg-primary-400/10 dark:hover:bg-primary-400/15 dark:disabled:bg-primary-400/10 dark:aria-disabled:bg-primary-400/10 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25 bg-[--ui-primary]/10 hover:bg-[--ui-primary]/15 disabled:bg-[--ui-primary]/10 aria-disabled:bg-[--ui-primary]/10 focus-visible:ring-2 focus-visible:ring-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size lg correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size md correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size sm correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-xs gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-xs gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size xl correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with size xs correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with square correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with trailing and icon correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5">
   <!--v-if-->
   <!--v-if--><span class="iconify i-heroicons:arrow-right shrink-0 size-5" aria-hidden="true"></span>
 </button>"
 `;
 
 exports[`Button > renders with trailing slot correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5">
   <!--v-if-->
   <!--v-if-->Trailing slot
 </button>"
 `;
 
 exports[`Button > renders with trailingIcon correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5">
   <!--v-if-->
   <!--v-if--><span class="iconify i-heroicons:arrow-right shrink-0 size-5" aria-hidden="true"></span>
 </button>"
 `;
 
-exports[`Button > renders with ui correctly 1`] = `"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-primary-500 hover:bg-primary-600 disabled:bg-primary-500 aria-disabled:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-500 dark:disabled:bg-primary-400 dark:aria-disabled:bg-primary-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400 p-1.5"></button>"`;
+exports[`Button > renders with ui correctly 1`] = `"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary] p-1.5"></button>"`;
