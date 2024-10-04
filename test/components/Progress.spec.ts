@@ -20,7 +20,7 @@ describe('Progress', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { orientation } }]),
     ...animations.map((animation: string) => [`with animation ${animation}`, { props: { animation } }]),
-    ['with color gray', { props: { color: 'gray', modelValue: 50 } }],
+    ['with color neutral', { props: { color: 'neutral', modelValue: 50 } }],
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { base: 'bg-[--ui-bg]' } } }],
     // Slots

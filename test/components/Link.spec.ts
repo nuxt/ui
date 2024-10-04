@@ -12,7 +12,7 @@ describe('Link', () => {
     ['with raw', { props: { raw: true } }],
     ['with class', { props: { class: 'font-medium' } }],
     ['with activeClass', { props: { active: true, activeClass: 'text-[--ui-text-highlighted]' } }],
-    ['with inactiveClass', { props: { active: false, inactiveClass: 'hover:text-primary-500 dark:hover:text-primary-400' } }],
+    ['with inactiveClass', { props: { active: false, inactiveClass: 'hover:text-[--ui-primary]' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: LinkProps, slots?: Partial<LinkSlots> }) => {

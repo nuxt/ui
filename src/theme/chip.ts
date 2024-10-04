@@ -7,8 +7,8 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `bg-${color}-500 dark:bg-${color}-400`])),
-      gray: 'bg-[--ui-text-muted]'
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `bg-[--ui-${color}]`])),
+      neutral: 'bg-[--ui-text-muted]'
     },
     size: {
       '3xs': 'h-[4px] min-w-[4px] text-[4px]',

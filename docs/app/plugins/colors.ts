@@ -9,9 +9,9 @@ export default defineNuxtPlugin({
         appConfig.ui.colors.primary = primary
       }
 
-      const gray = window.localStorage.getItem('nuxt-ui-gray')
-      if (gray) {
-        appConfig.ui.colors.gray = gray
+      const neutral = window.localStorage.getItem('nuxt-ui-neutral')
+      if (neutral) {
+        appConfig.ui.colors.neutral = neutral
       }
     }
 
@@ -25,8 +25,8 @@ export default defineNuxtPlugin({
             if (localStorage.getItem('nuxt-ui-primary')) {
               html = html.replaceAll('${appConfig.ui.colors.primary}', localStorage.getItem('nuxt-ui-primary'))
             }
-            if (localStorage.getItem('nuxt-ui-gray')) {
-              html = html.replaceAll('${appConfig.ui.colors.gray}', localStorage.getItem('nuxt-ui-gray'))
+            if (localStorage.getItem('nuxt-ui-neutral')) {
+              html = html.replaceAll('${appConfig.ui.colors.neutral}', localStorage.getItem('nuxt-ui-neutral'))
             }
 
             document.querySelector('style#nuxt-ui-colors').innerHTML = html

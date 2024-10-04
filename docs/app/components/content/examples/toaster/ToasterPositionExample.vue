@@ -20,7 +20,7 @@ const appConfig = useAppConfig()
       <USelectMenu
         v-model="appConfig.toaster.position"
         :items="positions"
-        color="gray"
+        color="neutral"
         variant="soft"
         class="rounded rounded-l-none min-w-12"
         :search-input="false"

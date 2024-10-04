@@ -15,7 +15,7 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      gray: ''
+      neutral: ''
     },
     variant: {
       pill: {
@@ -99,11 +99,11 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     variant: 'pill',
     class: {
-      indicator: `bg-${color}-500 dark:bg-${color}-400`,
-      trigger: `data-[state=active]:text-[--ui-bg] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
+      indicator: `bg-[--ui-${color}]`,
+      trigger: `data-[state=active]:text-[--ui-bg] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-${color}]`
     }
   })), {
-    color: 'gray',
+    color: 'neutral',
     variant: 'pill',
     class: {
       indicator: 'bg-[--ui-bg-inverted]',
@@ -113,11 +113,11 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     variant: 'link',
     class: {
-      indicator: `bg-${color}-500 dark:bg-${color}-400`,
-      trigger: `data-[state=active]:text-${color}-500 dark:data-[state=active]:text-${color}-400 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
+      indicator: `bg-[--ui-${color}]`,
+      trigger: `data-[state=active]:text-[--ui-${color}] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-${color}]`
     }
   })), {
-    color: 'gray',
+    color: 'neutral',
     variant: 'link',
     class: {
       indicator: 'bg-[--ui-bg-inverted]',

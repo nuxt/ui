@@ -10,10 +10,10 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        range: `bg-${color}-500 dark:bg-${color}-400`,
-        thumb: `ring-${color}-500 dark:ring-${color}-400 focus-visible:outline-${color}-500/50 dark:focus-visible:outline-${color}-400/50`
+        range: `bg-[--ui-${color}]`,
+        thumb: `ring-[--ui-${color}] focus-visible:outline-[--ui-${color}]`
       }])),
-      gray: {
+      neutral: {
         range: 'bg-[--ui-bg-inverted]',
         thumb: 'ring-[--ui-border-inverted] focus-visible:outline-[--ui-border-inverted]/50'
       }

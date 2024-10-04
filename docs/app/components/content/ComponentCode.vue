@@ -86,7 +86,7 @@ const options = computed(() => {
           value: variant,
           label: variant,
           chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
-        })).filter(variant => key.toLowerCase().endsWith('color') ? !['error'].includes(variant.value) : true)
+        }))
 
     return {
       name: key,
@@ -214,7 +214,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
 <template>
   <div class="my-5">
     <div>
-      <div v-if="options.length" class="flex items-center gap-2.5 border border-[--ui-bg-accented] border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
+      <div v-if="options.length" class="flex items-center gap-2.5 border border-[--ui-color-neutral-200] dark:border-[--ui-color-neutral-700] border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">
           <UFormField
             :label="option.label"
@@ -231,7 +231,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               :model-value="getComponentProp(option.name)"
               :items="option.items"
               value-key="value"
-              color="gray"
+              color="neutral"
               variant="soft"
               class="rounded rounded-l-none min-w-12"
               :search-input="false"
@@ -254,7 +254,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               v-else
               :type="option.type?.includes('number') ? 'number' : 'text'"
               :model-value="getComponentProp(option.name)"
-              color="gray"
+              color="neutral"
               variant="soft"
               :ui="{ base: 'rounded rounded-l-none min-w-12' }"
               @update:model-value="setComponentProp(option.name, $event)"
@@ -263,7 +263,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
         </template>
       </div>
 
-      <div class="flex justify-center border border-b-0 border-[--ui-bg-accented] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class]">
+      <div class="flex justify-center border border-b-0 border-[--ui-color-neutral-200] dark:border-[--ui-color-neutral-700] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class]">
         <component :is="name" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <ContentSlot :name="slot" unwrap="p">

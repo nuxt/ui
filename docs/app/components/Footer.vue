@@ -31,7 +31,7 @@ const route = useRoute()
       </NuxtLink>
     </template>
 
-    <!-- <UNavigationMenu :items="items" variant="link" color="gray" /> -->
+    <!-- <UNavigationMenu :items="items" variant="link" color="neutral" /> -->
 
     <template #right>
       <UButton
@@ -39,7 +39,7 @@ const route = useRoute()
         icon="i-simple-icons-nuxtdotjs"
         to="https://nuxt.com"
         target="_blank"
-        color="gray"
+        color="neutral"
         variant="ghost"
       />
       <UButton
@@ -47,7 +47,7 @@ const route = useRoute()
         icon="i-simple-icons-discord"
         to="https://chat.nuxt.dev"
         target="_blank"
-        color="gray"
+        color="neutral"
         variant="ghost"
       />
       <UButton
@@ -55,7 +55,7 @@ const route = useRoute()
         icon="i-simple-icons-x"
         to="https://x.com/nuxt_js"
         target="_blank"
-        color="gray"
+        color="neutral"
         variant="ghost"
       />
       <UButton
@@ -63,7 +63,7 @@ const route = useRoute()
         icon="i-simple-icons-github"
         to="https://github.com/nuxt/ui"
         target="_blank"
-        color="gray"
+        color="neutral"
         variant="ghost"
       />
     </template>

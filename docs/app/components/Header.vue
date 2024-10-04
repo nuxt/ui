@@ -35,7 +35,7 @@ const navigation = inject<Ref<NavItem[]>>('navigation')
       <ColorModeButton />
 
       <UButton
-        color="gray"
+        color="neutral"
         variant="ghost"
         to="https://github.com/nuxt/ui/tree/v3"
         target="_blank"

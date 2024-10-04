@@ -91,10 +91,10 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-heroicons-bars-3" color="gray" variant="outline" />
+    <UButton icon="i-heroicons-bars-3" color="neutral" variant="outline" />
 ---
 
-:u-button{icon="i-heroicons-bars-3" color="gray" variant="outline"}
+:u-button{icon="i-heroicons-bars-3" color="neutral" variant="outline"}
 ::
 
 ::note
@@ -143,10 +143,10 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" icon="i-heroicons-bars-3" color="gray" variant="outline" />
+    <UButton label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline" />
 ---
 
-:u-button{label="Open" icon="i-heroicons-bars-3" color="gray" variant="outline"}
+:u-button{label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline"}
 ::
 
 ### Arrow
@@ -175,10 +175,10 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" icon="i-heroicons-bars-3" color="gray" variant="outline" />
+    <UButton label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline" />
 ---
 
-:u-button{label="Open" icon="i-heroicons-bars-3" color="gray" variant="outline"}
+:u-button{label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline"}
 ::
 
 ### Size
@@ -209,10 +209,10 @@ props:
 slots:
   default: |
 
-    <UButton size="xl" label="Open" icon="i-heroicons-bars-3" color="gray" variant="outline" />
+    <UButton size="xl" label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline" />
 ---
 
-:u-button{size="xl" label="Open" icon="i-heroicons-bars-3" color="gray" variant="outline"}
+:u-button{size="xl" label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline"}
 ::
 
 ::caution
@@ -248,10 +248,10 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" icon="i-heroicons-bars-3" color="gray" variant="outline" />
+    <UButton label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline" />
 ---
 
-:u-button{label="Open" icon="i-heroicons-bars-3" color="gray" variant="outline"}
+:u-button{label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline"}
 ::
 
 ## Examples

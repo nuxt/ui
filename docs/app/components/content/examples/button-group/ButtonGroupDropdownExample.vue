@@ -20,11 +20,11 @@ const items = [{
 
 <template>
   <UButtonGroup>
-    <UButton color="gray" variant="subtle" label="Settings" />
+    <UButton color="neutral" variant="subtle" label="Settings" />
 
     <UDropdownMenu :items="items">
       <UButton
-        color="gray"
+        color="neutral"
         variant="outline"
         icon="i-heroicons-chevron-down-20-solid"
       />

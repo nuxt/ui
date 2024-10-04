@@ -34,10 +34,10 @@ describe('Tabs', () => {
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant, color: 'gray' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ['without content', { props: { ...props, content: false } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
-    ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-[--border]' } } }],
+    ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-[--ui-border]' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],

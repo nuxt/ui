@@ -35,7 +35,7 @@ const data = {
         v-for="variant in variants"
         :key="variant"
         v-bind="data"
-        :actions="actions('gray')"
+        :actions="actions('neutral')"
         :variant="variant"
       />
     </div>
@@ -45,7 +45,7 @@ const data = {
         :key="variant"
         v-bind="data"
         :actions="actions('primary')"
-        color="gray"
+        color="neutral"
         :variant="variant"
       />
     </div>

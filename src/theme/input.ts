@@ -59,7 +59,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      gray: ''
+      neutral: ''
     },
     leading: {
       true: ''
@@ -80,17 +80,17 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: ['outline', 'subtle'],
-    class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
+    class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-${color}]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     highlight: true,
-    class: `ring ring-inset ring-${color}-500 dark:ring-${color}-400`
+    class: `ring ring-inset ring-[--ui-${color}]`
   })), {
-    color: 'gray',
+    color: 'neutral',
     variant: ['outline', 'subtle'],
     class: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-border-inverted]'
   }, {
-    color: 'gray',
+    color: 'neutral',
     highlight: true,
     class: 'ring ring-inset ring-[--ui-border-inverted]'
   }, {

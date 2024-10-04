@@ -14,10 +14,10 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `data-[state=checked]:bg-${color}-500 dark:data-[state=checked]:bg-${color}-400 focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`,
-        icon: `group-data-[state=checked]:text-${color}-500 dark:group-data-[state=checked]:text-${color}-400`
+        base: `data-[state=checked]:bg-[--ui-${color}] focus-visible:ring-[--ui-${color}]`,
+        icon: `group-data-[state=checked]:text-[--ui-${color}]`
       }])),
-      gray: {
+      neutral: {
         base: 'data-[state=checked]:bg-[--ui-bg-inverted] focus-visible:ring-[--ui-border-inverted]',
         icon: 'group-data-[state=checked]:text-[--ui-text-highlighted]'
       }

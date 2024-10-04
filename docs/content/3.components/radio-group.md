@@ -156,7 +156,7 @@ ignore:
 external:
   - items
 props:
-  color: 'gray'
+  color: neutral
   defaultValue: 'System'
   items:
     - 'System'

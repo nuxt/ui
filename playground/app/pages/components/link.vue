@@ -18,7 +18,7 @@
       <ULink>
         Button inactive
       </ULink>
-      <ULink class="font-medium" inactive-class="hover:text-primary-500 dark:hover:text-primary-400">
+      <ULink class="font-medium" inactive-class="hover:text-[--ui-primary]">
         Button inactive with class
       </ULink>
       <ULink disabled>
@@ -44,7 +44,7 @@
       <ULink to="/components/button">
         Link inactive
       </ULink>
-      <ULink to="/components/button" class="font-medium" inactive-class="hover:text-primary-500 dark:hover:text-primary-400">
+      <ULink to="/components/button" class="font-medium" inactive-class="hover:text-[--ui-primary]">
         Link inactive with class
       </ULink>
       <ULink to="/components/button" disabled>

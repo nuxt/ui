@@ -12,8 +12,8 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`])),
-      gray: 'focus-visible:outline-[--ui-border-inverted]'
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:outline-[--ui-${color}]`])),
+      neutral: 'focus-visible:outline-[--ui-border-inverted]'
     },
     size: {
       xs: {
@@ -61,9 +61,9 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     checked: true,
-    class: `ring-2 ring-${color}-500 dark:ring-${color}-400 bg-${color}-500 dark:bg-${color}-400`
+    class: `ring-2 ring-[--ui-${color}] bg-[--ui-${color}]`
   })), {
-    color: 'gray',
+    color: 'neutral',
     checked: true,
     class: 'ring-2 ring-[--ui-border-inverted] bg-[--ui-bg-inverted]'
   }],

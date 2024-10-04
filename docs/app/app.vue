@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
+import colors from 'tailwindcss/colors'
 // import { debounce } from 'perfect-debounce'
 // import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 const route = useRoute()
 const appConfig = useAppConfig()
-// const colorMode = useColorMode()
+const colorMode = useColorMode()
 const runtimeConfig = useRuntimeConfig()
 const { integrity, api } = runtimeConfig.public.content
 
@@ -50,12 +51,12 @@ const links = computed(() => {
   }].filter(Boolean)
 })
 
-// const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
+const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 
 useHead({
   meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
-    // { key: 'theme-color', name: 'theme-color', content: color }
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
     { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
@@ -100,7 +101,7 @@ provide('navigation', navigation)
 
 <style>
 @import "tailwindcss";
-@import "@nuxt/ui-pro";
+@import "@nuxt/ui";
 
 @source "../content/**/*.md";
 
@@ -121,6 +122,7 @@ provide('navigation', navigation)
 }
 
 :root {
-  --container-width: 90rem;
+  --ui-header-height: var(--spacing-16);
+  --ui-container-width: 90rem;
 }
 </style>

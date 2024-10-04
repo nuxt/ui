@@ -62,11 +62,11 @@ async function onSubmit(event: FormSubmitEvent<any>) {
     </UForm>
 
     <div class="flex gap-2">
-      <UButton color="gray" variant="subtle" size="sm" @click="addItem()">
+      <UButton color="neutral" variant="subtle" size="sm" @click="addItem()">
         Add Item
       </UButton>
 
-      <UButton color="gray" variant="ghost" size="sm" @click="removeItem()">
+      <UButton color="neutral" variant="ghost" size="sm" @click="removeItem()">
         Remove Item
       </UButton>
     </div>

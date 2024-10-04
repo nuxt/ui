@@ -21,7 +21,7 @@ export interface ModuleOptions {
   theme?: {
     /**
      * Colors to generate classes for (defaults to TailwindCSS colors)
-     * @defaultValue ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
+     * @defaultValue ['primary', 'secondary', 'success', 'info', 'warning', 'error']
      */
     colors?: string[]
 
@@ -45,15 +45,12 @@ export default defineNuxtModule<ModuleOptions>({
     prefix: 'U',
     fonts: true,
     theme: {
-      colors: undefined,
+      colors: ['primary', 'secondary', 'success', 'info', 'warning', 'error'],
       transitions: true
     }
   },
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
-
-    options.theme = options.theme || {}
-    options.theme.colors = options.theme.colors?.length ? [...new Set(['primary', 'error', ...options.theme.colors])] : ['primary', 'error', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
 
     nuxt.options.ui = options
 
@@ -61,9 +58,13 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
       colors: {
-        primary: 'green',
+        primary: 'sky',
+        secondary: 'indigo',
+        success: 'green',
+        info: 'blue',
+        warning: 'yellow',
         error: 'red',
-        gray: 'slate'
+        neutral: 'slate'
       },
       icons
     })

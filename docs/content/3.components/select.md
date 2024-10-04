@@ -209,7 +209,7 @@ ignore:
 external:
   - items
 props:
-  color: gray
+  color: neutral
   highlight: true
   defaultValue: 'Backlog'
   items:
@@ -237,7 +237,7 @@ ignore:
 external:
   - items
 props:
-  color: gray
+  color: neutral
   variant: subtle
   highlight: false
   defaultValue: 'Backlog'

@@ -37,7 +37,7 @@ describe('Toast', () => {
     ['without close', { props: { ...props, close: false } }],
     ['with closeIcon', { props: { ...props, closeIcon: 'i-heroicons-trash' } }],
     ['with type', { props: { ...props, type: 'background' as const } }],
-    ['with color gray', { props: { ...props, color: 'gray' as const } }],
+    ['with color neutral', { props: { ...props, color: 'neutral' as const } }],
     ['with class', { props: { ...props, class: 'bg-[--ui-bg-elevated]/50' } }],
     ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],
     // Slots

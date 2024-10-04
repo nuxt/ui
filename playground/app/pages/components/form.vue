@@ -40,7 +40,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
         </UFormField>
 
         <div>
-          <UButton color="gray" type="submit">
+          <UButton color="neutral" type="submit">
             Submit
           </UButton>
         </div>
@@ -67,7 +67,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
         </UFormField>
 
         <div>
-          <UButton color="gray" type="submit">
+          <UButton color="neutral" type="submit">
             Submit
           </UButton>
         </div>

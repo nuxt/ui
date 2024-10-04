@@ -71,7 +71,7 @@ function getUserAvatar(value: string) {
         :items="items"
         :placeholder="upperFirst(variant)"
         :variant="variant"
-        color="gray"
+        color="neutral"
         class="w-48"
       />
     </div>

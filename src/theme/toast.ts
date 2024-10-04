@@ -16,11 +16,11 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        root: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`,
-        icon: `text-${color}-500 dark:text-${color}-400`,
-        progress: `bg-${color}-500 dark:bg-${color}-400`
+        root: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-${color}]`,
+        icon: `text-[--ui-${color}]`,
+        progress: `bg-[--ui-${color}]`
       }])),
-      gray: {
+      neutral: {
         root: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-border-inverted]',
         icon: 'text-[--ui-text-highlighted]',
         progress: 'bg-[--ui-bg-inverted]'

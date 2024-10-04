@@ -34,17 +34,17 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        link: `focus-visible:before:ring-${color}-500 dark:focus-visible:before:ring-${color}-400`,
-        childLink: `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`
+        link: `focus-visible:before:ring-[--ui-${color}]`,
+        childLink: `focus-visible:outline-[--ui-${color}]`
       }])),
-      gray: {
+      neutral: {
         link: 'focus-visible:before:ring-[--ui-border-inverted]',
         childLink: 'focus-visible:outline-[--ui-border-inverted]'
       }
     },
     highlightColor: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      gray: ''
+      neutral: ''
     },
     variant: {
       pill: '',
@@ -110,11 +110,11 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'pill',
     active: true,
     class: {
-      link: `text-${color}-500 dark:text-${color}-400`,
-      linkLeadingIcon: `text-${color}-500 dark:text-${color}-400`
+      link: `text-[--ui-${color}]`,
+      linkLeadingIcon: `text-[--ui-${color}]`
     }
   })), {
-    color: 'gray',
+    color: 'neutral',
     variant: 'pill',
     active: true,
     class: {
@@ -148,11 +148,11 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'link',
     active: true,
     class: {
-      link: `text-${color}-500 dark:text-${color}-400`,
-      linkLeadingIcon: `text-${color}-500 dark:text-${color}-400`
+      link: `text-[--ui-${color}]`,
+      linkLeadingIcon: `text-[--ui-${color}]`
     }
   })), {
-    color: 'gray',
+    color: 'neutral',
     variant: 'link',
     active: true,
     class: {
@@ -164,10 +164,10 @@ export default (options: Required<ModuleOptions>) => ({
     highlight: true,
     active: true,
     class: {
-      link: `after:bg-${highlightColor}-500 dark:after:bg-${highlightColor}-400`
+      link: `after:bg-[--ui-${highlightColor}]`
     }
   })), {
-    highlightColor: 'gray',
+    highlightColor: 'neutral',
     highlight: true,
     active: true,
     class: {

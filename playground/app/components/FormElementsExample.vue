@@ -95,11 +95,11 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
     </UFormField>
 
     <div class="flex gap-2">
-      <UButton color="gray" type="submit">
+      <UButton color="neutral" type="submit">
         Submit
       </UButton>
 
-      <UButton color="gray" variant="outline" @click="form?.clear()">
+      <UButton color="neutral" variant="outline" @click="form?.clear()">
         Clear
       </UButton>
     </div>

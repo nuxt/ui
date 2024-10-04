@@ -13,7 +13,7 @@ function stripCompoundVariants(component?: any) {
   if (component?.compoundVariants) {
     component.compoundVariants = component.compoundVariants.filter((compoundVariant: any) => {
       if (compoundVariant.color) {
-        if (!['primary', 'gray'].includes(compoundVariant.color)) {
+        if (!['primary', 'neutral'].includes(compoundVariant.color)) {
           strippedCompoundVariants.value = true
 
           return false
@@ -21,7 +21,7 @@ function stripCompoundVariants(component?: any) {
       }
 
       if (compoundVariant.highlightColor) {
-        if (!['primary', 'gray'].includes(compoundVariant.highlightColor)) {
+        if (!['primary', 'neutral'].includes(compoundVariant.highlightColor)) {
           strippedCompoundVariants.value = true
 
           return false

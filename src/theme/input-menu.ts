@@ -101,9 +101,9 @@ export default (options: Required<ModuleOptions>) => {
       color,
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: `has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-${color}-500 dark:has-[:focus-visible]:ring-${color}-400`
+      class: `has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[--${color}]`
     })), {
-      color: 'gray',
+      color: 'neutral',
       multiple: true,
       variant: ['outline', 'subtle'],
       class: 'has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[--ui-border-inverted]'

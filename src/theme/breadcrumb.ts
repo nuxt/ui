@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative min-w-0',
     list: 'flex items-center gap-1.5',
     item: 'flex min-w-0',
-    link: 'group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400',
+    link: 'group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[--ui-primary]',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -16,7 +16,7 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     active: {
       true: {
-        link: 'text-primary-500 dark:text-primary-400 font-semibold'
+        link: 'text-[--ui-primary] font-semibold'
       },
       false: {
         link: 'text-[--ui-text-muted] font-medium'

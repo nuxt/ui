@@ -1,7 +1,7 @@
 <template>
   <UTooltip :text="color" class="capitalize" :portal="false">
     <UButton
-      color="gray"
+      color="neutral"
       square
       :variant="color === selected ? 'soft' : 'ghost'"
       @click.stop.prevent="$emit('select')"

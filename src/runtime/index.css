@@ -1,52 +1,5 @@
 @theme {
-  --color-gray-*: initial;
-  --color-cool-50: #f9fafb;
-  --color-cool-100: #f3f4f6;
-  --color-cool-200: #e5e7eb;
-  --color-cool-300: #d1d5db;
-  --color-cool-400: #9ca3af;
-  --color-cool-500: #6b7280;
-  --color-cool-600: #4b5563;
-  --color-cool-700: #374151;
-  --color-cool-800: #1f2937;
-  --color-cool-900: #111827;
-  --color-cool-950: #030712;
-
   --spacing-4_5: 1.125rem;
-
-  --color-primary-50: var(--color-primary-50);
-  --color-primary-100: var(--color-primary-100);
-  --color-primary-200: var(--color-primary-200);
-  --color-primary-300: var(--color-primary-300);
-  --color-primary-400: var(--color-primary-400);
-  --color-primary-500: var(--color-primary-500);
-  --color-primary-600: var(--color-primary-600);
-  --color-primary-700: var(--color-primary-700);
-  --color-primary-800: var(--color-primary-800);
-  --color-primary-900: var(--color-primary-900);
-  --color-primary-950: var(--color-primary-950);
-  --color-error-50: var(--color-error-50);
-  --color-error-100: var(--color-error-100);
-  --color-error-200: var(--color-error-200);
-  --color-error-300: var(--color-error-300);
-  --color-error-400: var(--color-error-400);
-  --color-error-500: var(--color-error-500);
-  --color-error-600: var(--color-error-600);
-  --color-error-700: var(--color-error-700);
-  --color-error-800: var(--color-error-800);
-  --color-error-900: var(--color-error-900);
-  --color-error-950: var(--color-error-950);
-  --color-gray-50: var(--color-gray-50);
-  --color-gray-100: var(--color-gray-100);
-  --color-gray-200: var(--color-gray-200);
-  --color-gray-300: var(--color-gray-300);
-  --color-gray-400: var(--color-gray-400);
-  --color-gray-500: var(--color-gray-500);
-  --color-gray-600: var(--color-gray-600);
-  --color-gray-700: var(--color-gray-700);
-  --color-gray-800: var(--color-gray-800);
-  --color-gray-900: var(--color-gray-900);
-  --color-gray-950: var(--color-gray-950);
 }
 
 @variant dark (&:where(.dark, .dark *));
@@ -59,36 +12,36 @@
   :root {
     color-scheme: light dark;
 
-    --ui-text-dimmed: var(--color-gray-400);
-    --ui-text-muted: var(--color-gray-500);
-    --ui-text-toned: var(--color-gray-600);
-    --ui-text: var(--color-gray-700);
-    --ui-text-highlighted: var(--color-gray-900);
+    --ui-text-dimmed: var(--ui-color-neutral-400);
+    --ui-text-muted: var(--ui-color-neutral-500);
+    --ui-text-toned: var(--ui-color-neutral-600);
+    --ui-text: var(--ui-color-neutral-700);
+    --ui-text-highlighted: var(--ui-color-neutral-900);
 
     --ui-bg: var(--color-white);
-    --ui-bg-elevated: var(--color-gray-100);
-    --ui-bg-accented: var(--color-gray-200);
-    --ui-bg-inverted: var(--color-gray-900);
+    --ui-bg-elevated: var(--ui-color-neutral-100);
+    --ui-bg-accented: var(--ui-color-neutral-200);
+    --ui-bg-inverted: var(--ui-color-neutral-900);
 
-    --ui-border: var(--color-gray-200);
-    --ui-border-accented: var(--color-gray-300);
-    --ui-border-inverted: var(--color-gray-900);
+    --ui-border: var(--ui-color-neutral-200);
+    --ui-border-accented: var(--ui-color-neutral-300);
+    --ui-border-inverted: var(--ui-color-neutral-900);
   }
 
   .dark {
-    --ui-text-dimmed: var(--color-gray-500);
-    --ui-text-muted: var(--color-gray-400);
-    --ui-text-toned: var(--color-gray-300);
-    --ui-text: var(--color-gray-200);
+    --ui-text-dimmed: var(--ui-color-neutral-500);
+    --ui-text-muted: var(--ui-color-neutral-400);
+    --ui-text-toned: var(--ui-color-neutral-300);
+    --ui-text: var(--ui-color-neutral-200);
     --ui-text-highlighted: var(--color-white);
 
-    --ui-bg: var(--color-gray-900);
-    --ui-bg-elevated: var(--color-gray-800);
-    --ui-bg-accented: var(--color-gray-700);
+    --ui-bg: var(--ui-color-neutral-900);
+    --ui-bg-elevated: var(--ui-color-neutral-800);
+    --ui-bg-accented: var(--ui-color-neutral-700);
     --ui-bg-inverted: var(--color-white);
 
-    --ui-border: var(--color-gray-800);
-    --ui-border-accented: var(--color-gray-700);
+    --ui-border: var(--ui-color-neutral-800);
+    --ui-border-accented: var(--ui-color-neutral-700);
     --ui-border-inverted: var(--color-white);
   }
 

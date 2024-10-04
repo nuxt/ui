@@ -111,7 +111,7 @@ ignore:
 external:
   - items
 props:
-  color: gray
+  color: neutral
   content: false
   items:
     - label: Account
@@ -133,7 +133,7 @@ ignore:
 external:
   - items
 props:
-  color: gray
+  color: neutral
   variant: link
   content: false
   items:

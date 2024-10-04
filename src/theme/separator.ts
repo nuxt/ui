@@ -12,8 +12,8 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { border: `border-${color}-500 dark:border-${color}-400` }])),
-      gray: { border: 'border-[--ui-border]' }
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { border: `border-[--ui-${color}]` }])),
+      neutral: { border: 'border-[--ui-border]' }
     },
     orientation: {
       horizontal: {
@@ -88,7 +88,7 @@ export default (options: Required<ModuleOptions>) => ({
     class: { border: 'border-s-[5px]' }
   }],
   defaultVariants: {
-    color: 'gray',
+    color: 'neutral',
     size: 'xs',
     type: 'solid'
   }
