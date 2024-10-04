@@ -35,7 +35,7 @@ export interface FormSlots {
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
-import { getYupErrors, isYupSchema, getValibotError, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema } from '../utils/form'
+import { getYupErrors, isYupSchema, getValibotErrors, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema, getStandardErrors, isStandardSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
 const props = withDefaults(defineProps<FormProps<T>>(), {
@@ -112,7 +112,9 @@ async function getErrors(): Promise<FormErrorWithId[]> {
     } else if (isJoiSchema(props.schema)) {
       errs = errs.concat(await getJoiErrors(props.state, props.schema))
     } else if (isValibotSchema(props.schema)) {
-      errs = errs.concat(await getValibotError(props.state, props.schema))
+      errs = errs.concat(await getValibotErrors(props.state, props.schema))
+    } else if (isStandardSchema(props.schema)) {
+      errs = errs.concat(await getStandardErrors(props.state, props.schema))
     } else {
       throw new Error('Form validation failed: Unsupported form schema')
     }
