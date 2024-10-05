@@ -30,7 +30,7 @@ export default defineNuxtConfig({
 
   ui: {
     theme: {
-      colors: ['green', 'red']
+      colors: ['gray', 'red']
     }
   },
 

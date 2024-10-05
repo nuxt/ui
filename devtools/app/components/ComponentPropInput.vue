@@ -1,22 +1,117 @@
 <script setup lang="ts">
 import type { PropertyMeta } from 'vue-component-meta'
 
-defineProps<Partial<PropertyMeta>>()
+type ComponentPropInputType = 'string' | 'number' | 'boolean' | 'enum' | 'object' | 'array'
+
+const props = defineProps<Partial<PropertyMeta>>()
 const modelValue = defineModel<any>()
+
+const inputType = computed<ComponentPropInputType | null>(() => {
+  if (!props.schema) return null
+
+  if (props.type?.includes('string')) return 'string'
+  if (props.type?.includes('number')) return 'number'
+  if (props.type?.includes('boolean')) return 'boolean'
+  if (arraySchema.value) return 'array'
+  if (typeof props.schema === 'string') return null
+  if (props.schema.kind === 'enum' && props.schema.schema && parseEnumValues(props.schema.schema)?.length) return 'enum'
+  if (props.schema.kind !== 'enum' && typeof props.schema === 'object') return 'object'
+
+  return null
+})
 
 function parseEnumValues(propMeta: PropertyMeta['schema'] | PropertyMeta['schema'][]) {
   const meta = Array.isArray(propMeta) ? propMeta[0] : propMeta
   if (!meta) return
-  return Object.values(propMeta).map((value: string) => typeof value === 'string' ? value.replaceAll('"', '') : value).filter(value => value !== 'undefined')
+  return Object.values(propMeta).filter((value: string) =>
+    typeof value === 'string' && value.startsWith('"') /* Keeps only string symbols and filters interfaces from matches */
+  ).map((value: string) => value.replaceAll('"', '')).filter(value => value !== 'undefined')
+}
+
+const arraySchema = computed(() => {
+  if (typeof props.schema === 'string' || props.schema?.kind !== 'enum') return
+  if (!props.schema?.schema) return
+
+  const schema = Object.values(props.schema?.schema)
+  const arr = schema?.find(s => typeof s !== 'string' && s.kind === 'array')
+
+  if (!arr?.kind || arr.kind !== 'array' || typeof arr.schema?.[0] !== 'object') return
+
+  return arr.schema[0]
+})
+
+function removeArrayItem(index: number) {
+  if (!Array.isArray(modelValue.value)) return
+  modelValue.value.splice(index, 1)
+}
+
+function addArrayItem() {
+  if (!Array.isArray(modelValue.value)) return
+  modelValue.value.push({})
 }
 </script>
 
 <template>
-  <div v-if="schema">
-    <UInput v-if="type?.includes('string')" v-model="modelValue" />
-    <UInput v-else-if="type?.includes('number')" v-model="modelValue" type="number" />
-    <UCheckbox v-else-if="type?.includes('boolean')" v-model="modelValue" />
-    <span v-else-if="typeof schema === 'string' || !schema.schema " />
-    <USelectMenu v-else-if="schema?.kind === 'enum'" v-model="modelValue" :items="parseEnumValues(schema.schema)" class="w-48" />
-  </div>
+  <UFormField :name="name" class="" :ui="{ wrapper: 'mb-2' }" :class="{ 'opacity-70 cursor-not-allowed': !inputType }">
+    <template #label>
+      <p v-if="name" class="font-mono font-bold px-2 py-1 border-gray-300 border border-dashed rounded bg-gray-50">
+        {{ name }}
+      </p>
+    </template>
+
+    <template #description>
+      <MDC v-if="description" :value="description" class="text-gray-600 dark:text-gray-300 mt-1" />
+    </template>
+
+    <span v-if="!schema" />
+
+    <UInput v-if="inputType === 'string'" v-model="modelValue" />
+    <UInput v-else-if="inputType === 'number'" v-model="modelValue" type="number" />
+    <UCheckbox v-else-if="inputType === 'boolean'" v-model="modelValue" />
+
+    <div v-else-if="inputType === 'array'">
+      <div v-for="value, index in modelValue" :key="value.id" class="relative border border-gray-200 rounded-md mt-4">
+        <ComponentPropInput v-bind="arraySchema" :model-value="value" />
+
+        <UPopover>
+          <UButton variant="ghost" color="gray" icon="i-heroicons-ellipsis-vertical" class="absolute top-1 right-1" />
+          <template #content>
+            <UButton
+              variant="ghost"
+              color="red"
+              icon="i-heroicons-trash"
+              block
+              @click="removeArrayItem(index)"
+            >
+              Remove
+            </UButton>
+          </template>
+        </UPopover>
+      </div>
+
+      <UButton
+        icon="i-heroicons-plus"
+        color="gray"
+        variant="ghost"
+        block
+        class="justify-center mt-4"
+        @click="addArrayItem()"
+      >
+        Add value
+      </UButton>
+    </div>
+
+    <USelectMenu v-else-if="inputType === 'enum'" v-model="modelValue" :items="parseEnumValues(schema.schema)" class="w-56" />
+
+    <div v-else-if="inputType === 'object'">
+      <ComponentPropInput
+        v-for="attr in schema"
+        :key="attr.name"
+        v-bind="attr"
+        :model-value="modelValue?.[attr.name]"
+        class="border-b last:border-b-0 border-gray-200 p-4"
+        @update:model-value="(value) => modelValue[attr.name] = value"
+      />
+    </div>
+  </UFormField>
 </template>

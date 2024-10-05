@@ -3,7 +3,6 @@ import { onDevtoolsClientConnected } from '@nuxt/devtools-kit/iframe-client'
 import type { ClientFunctions, ServerFunctions, Component } from '../../src/devtools/rpc'
 import type { BirpcReturn } from 'birpc'
 import { watchDebounced } from '@vueuse/core'
-import { defu } from 'defu'
 
 // @ts-expect-error - Nuxt Devtools internal value
 // Disable devtools in component renderer iframe
@@ -20,18 +19,18 @@ onDevtoolsClientConnected(async (client) => {
   components.value = (await rpc.getComponents()).map(component => ({ ...component, value: component.slug }))
 
   if (!component.value || !components.value.find(c => c.slug === component.value?.slug)) {
-    component.value = components.value.find(comp => comp.slug === 'button')
+    component.value = components.value.find(comp => comp.slug === 'accordion')
   }
 
-  state.value.props = defu(state.value.props, components.value?.reduce((acc, comp) => {
+  state.value.props = { ...state.value.props, ...components.value?.reduce((acc, comp) => {
     acc[comp.slug] = comp.defaultVariants ?? {}
     return acc
-  }, {} as Record<string, any>))
+  }, {} as Record<string, any>) }
 
-  state.value.slots = defu(state.value.slots, components.value.reduce((acc, comp) => {
+  state.value.slots = { ...state.value.slots, ...components.value.reduce((acc, comp) => {
     acc[comp.slug] = {} // comp.slots ?? {}
     return acc
-  }, {} as Record<string, any>))
+  }, {} as Record<string, any>) }
 })
 
 function updateRenderer() {
@@ -55,7 +54,7 @@ onUnmounted(() => {
 
 function onComponentLoaded(event: Event & { data?: any }) {
   if (!component.value) return
-  state.value.props[component.value.slug] = defu(state.value.props[component.value.slug], event.data?.props)
+  state.value.props[component.value.slug] = event.data?.props
 }
 
 function onSlotHover(slot: string) {
@@ -123,7 +122,7 @@ defineShortcuts({
         </UModal>
       </div>
 
-      <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-6">
+      <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-4">
         <div class="col-span-1 border-r border-gray-200 hidden xl:block overflow-y-auto bg-white">
           <UNavigationMenu
             :model-value="component?.slug"
@@ -133,27 +132,15 @@ defineShortcuts({
           />
         </div>
 
-        <div class="xl:col-span-4 col-span-3">
+        <div class="xl:col-span-5 col-span-2">
           <ComponentPreview :component="component" :props="state.props[component.slug]" :theme-slots="state.slots[component.slug]" class="h-full" />
         </div>
 
-        <div class="bg-white border-l border-gray-200 flex flex-col col-span-3  overflow-y-auto">
+        <div class="bg-white border-l border-gray-200 flex flex-col col-span-2  overflow-y-auto">
           <UTabs color="gray" variant="link" :items="tabs">
             <template #props>
               <div v-for="prop in component.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-gray-200">
-                <UFormField :name="prop.name" class="grid grid-cols-2 gap-8 items-baseline">
-                  <template #label>
-                    <p class="font-mono font-bold px-2 py-0.5 border-gray-300 border border-dashed rounded bg-gray-50">
-                      {{ prop?.name }}
-                    </p>
-                  </template>
-
-                  <template #description>
-                    <MDC v-if="prop.description" :value="prop.description" class="text-gray-600 dark:text-gray-300 mt-1" />
-                  </template>
-
-                  <ComponentPropInput v-bind="prop" v-model="state.props[component.slug][prop.name]" />
-                </UFormField>
+                <ComponentPropInput v-bind="prop" v-model="state.props[component.slug][prop.name]" />
               </div>
             </template>
 

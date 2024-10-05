@@ -25,24 +25,6 @@ const componentExamples: Record<string, any> = {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
         },
         {
-          label: 'Theming',
-          icon: 'i-heroicons-eye-dropper',
-          content:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
-        },
-        {
-          label: 'Layouts',
-          icon: 'i-heroicons-rectangle-group',
-          content:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
-        },
-        {
-          label: 'Components',
-          icon: 'i-heroicons-square-3-stack-3d',
-          content:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
-        },
-        {
           label: 'Utilities',
           slot: 'custom' as const,
           icon: 'i-heroicons-wrench-screwdriver',
@@ -145,7 +127,34 @@ const componentExamples: Record<string, any> = {
   },
   commandPalette: {
     component: resolveComponent('UCommandPalette'),
-    props: {}
+    props: {
+      groups: [
+        {
+          id: 'actions',
+          items: [{
+            label: 'Add new file',
+            suffix: 'Create a new file in the current directory or workspace.',
+            icon: 'i-heroicons-document-plus',
+            kbds: ['meta', 'N']
+          }, {
+            label: 'Add new folder',
+            suffix: 'Create a new folder in the current directory or workspace.',
+            icon: 'i-heroicons-folder-plus',
+            kbds: ['meta', 'F']
+          }, {
+            label: 'Add hashtag',
+            suffix: 'Add a hashtag to the current item.',
+            icon: 'i-heroicons-hashtag',
+            kbds: ['meta', 'H']
+          }, {
+            label: 'Add label',
+            suffix: 'Add a label to the current item.',
+            icon: 'i-heroicons-tag',
+            kbds: ['meta', 'L']
+          }]
+        }
+      ]
+    }
   },
   drawer: {
     component: resolveComponent('UDrawer'),
