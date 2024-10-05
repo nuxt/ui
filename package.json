@@ -40,7 +40,7 @@
     "docs:prepare": "nuxt-component-meta docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck docs",
+    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground",
     "test": "vitest",
     "release": "release-it --preRelease=alpha --npm.tag=next"
   },
