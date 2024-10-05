@@ -53,11 +53,11 @@ export default defineAppConfig(${json5.stringify(component.value, null, 2).repla
 ::
 
 ${strippedCompoundVariants.value
-    ? `
+  ? `
 ::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v3/src/theme/${name}.ts"}
 Some colors in \`compoundVariants\` are omitted for readability. Check out the source code on GitHub.
 ::`
-    : ''}
+  : ''}
 `
 
   return parseMarkdown(md)
