@@ -33,8 +33,8 @@ const groups = [{
 
 <template>
   <UCommandPalette :groups="groups" class="flex-1 h-80">
-    <template #users-leading="{ item }">
-      <UAvatar :src="`https://i.pravatar.cc/120?img=${item.id}`" size="2xs" />
+    <template #users-leading="{ index }">
+      <UAvatar :src="`https://i.pravatar.cc/120?img=${index}`" size="2xs" />
     </template>
 
     <template #billing-label="{ item }">

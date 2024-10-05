@@ -50,7 +50,8 @@ export default defineNuxtConfig({
     clientBundle: {
       scan: true,
       includeCustomCollections: true
-    }
+    },
+    provider: 'iconify'
   },
 
   content: {
@@ -188,7 +189,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: 'https://ui3.nuxt.com'
+    url: 'https://ui3.nuxt.dev'
   },
 
   compatibilityDate: '2024-07-09'

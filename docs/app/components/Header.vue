@@ -19,7 +19,7 @@ const navigation = inject<Ref<NavItem[]>>('navigation')
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white min-w-0" aria-label="Nuxt UI">
         <Logo class="w-auto h-6 shrink-0" />
 
-        <UBadge :label="`v${config.version}`" variant="subtle" size="sm" class="-mb-[2px] rounded font-semibold truncate" />
+        <UBadge :label="`v${config.version}`" variant="subtle" size="sm" class="-mb-[2px] rounded font-semibold inline-block truncate" />
       </NuxtLink>
     </template>
 
@@ -32,12 +32,12 @@ const navigation = inject<Ref<NavItem[]>>('navigation')
         <UContentSearchButton />
       </UTooltip>
 
-      <!-- <UColorModeButton /> -->
+      <ColorModeButton />
 
       <UButton
         color="gray"
         variant="ghost"
-        to="https://github.com/nuxt/ui"
+        to="https://github.com/nuxt/ui/tree/v3"
         target="_blank"
         icon="i-simple-icons-github"
         aria-label="GitHub"

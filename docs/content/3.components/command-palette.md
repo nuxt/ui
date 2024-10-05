@@ -449,7 +449,7 @@ You can use the `fuse` prop to override the options of [useFuse](https://vueuse.
 The `fuseOptions` are the options of [Fuse.js](https://www.fusejs.io/api/options.html), the `resultLimit` is the maximum number of results to return and the `matchAllWhenSearchEmpty` is a boolean to match all items when the search term is empty.
 ::
 
-You can for example set `{ fuseOptions: { includeMatches: true } }` to highlight the search term in the items.
+You can for example set `{ fuseOptions: { includeMatches: true } }`{lang="ts-type"} to highlight the search term in the items.
 
 ::component-example
 ---

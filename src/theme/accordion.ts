@@ -8,7 +8,7 @@ export default {
     body: 'text-sm pb-3.5',
     leadingIcon: 'shrink-0 size-5',
     trailingIcon: 'shrink-0 size-5 ms-auto group-data-[state=open]:rotate-180 transition-transform duration-200',
-    label: 'truncate'
+    label: 'text-left break-words'
   },
   variants: {
     disabled: {

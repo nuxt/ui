@@ -36,28 +36,25 @@ useSeoMeta({
 })
 
 defineOgImageComponent('Docs', {
-  headline: headline.value
+  headline: headline.value,
+  title: page.value.title
 })
 
-// const communityLinks = computed(() => [{
-//   icon: 'i-heroicons-pencil-square',
-//   label: 'Edit this page',
-//   to: `https://github.com/nuxt/ui/edit/dev/docs/content/${page?.value?._file}`,
-//   target: '_blank'
-// }, {
-//   icon: 'i-heroicons-star',
-//   label: 'Star on GitHub',
-//   to: 'https://github.com/nuxt/ui',
-//   target: '_blank'
-// }, {
-//   icon: 'i-heroicons-lifebuoy',
-//   label: 'Contributing',
-//   to: '/getting-started/contributing'
-// }, {
-//   label: 'Roadmap',
-//   icon: 'i-heroicons-map',
-//   to: '/roadmap'
-// }])
+const communityLinks = computed(() => [{
+  icon: 'i-heroicons-pencil-square',
+  label: 'Edit this page',
+  to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?._file}`,
+  target: '_blank'
+}, {
+  icon: 'i-heroicons-star',
+  label: 'Star on GitHub',
+  to: 'https://github.com/nuxt/ui',
+  target: '_blank'
+}, {
+  label: 'Roadmap',
+  icon: 'i-heroicons-map',
+  to: '/roadmap'
+}])
 
 // const resourcesLinks = [{
 //   icon: 'i-simple-icons-figma',
@@ -94,21 +91,21 @@ defineOgImageComponent('Docs', {
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
-      <UContentToc :links="page.body.toc.links">
-        <!-- <template #bottom>
+      <UContentToc :links="page.body.toc.links" class="z-[2]">
+        <template #bottom>
           <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
 
           <UPageLinks title="Community" :links="communityLinks" />
 
-          <USeparator type="dashed" />
+          <!-- <USeparator type="dashed" />
 
           <UPageLinks title="Resources" :links="resourcesLinks" />
 
           <USeparator type="dashed" />
 
           <AdsPro />
-          <AdsCarbon />
-        </template> -->
+          <AdsCarbon /> -->
+        </template>
       </UContentToc>
     </template>
   </UPage>

@@ -1,9 +1,7 @@
 ---
-title: useFormField 
+title: useFormField
 description: 'A composable to integrate custom inputs with the Form component'
-navigation:
-  badge:
-    label: Todo
+navigation: false
 ---
 
 ## Usage

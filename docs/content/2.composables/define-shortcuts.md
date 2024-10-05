@@ -56,7 +56,7 @@ Shortcuts are defined using the following format:
 - `escape`: Triggers on Esc key
 - `enter`: Triggers on Enter key
 - `arrowleft`, `arrowright`, `arrowup`, `arrowdown`: Trigger on respective arrow keys
-- etc.
+
 #### Shortcut Configuration
 
 Each shortcut can be defined as a function or an object with the following properties:

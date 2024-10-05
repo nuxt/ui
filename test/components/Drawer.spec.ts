@@ -9,9 +9,9 @@ describe('Drawer', () => {
     // Props
     ['with title', { props: { ...props, title: 'Title' } }],
     ['with description', { props: { ...props, title: 'Title', description: 'Description' } }],
-    ['with left direction', { props: { ...props, direction: 'left', title: 'Title', description: 'Description' } }],
-    ['with top direction', { props: { ...props, direction: 'top', title: 'Title', description: 'Description' } }],
-    ['with right direction', { props: { ...props, direction: 'right', title: 'Title', description: 'Description' } }],
+    ['with left direction', { props: { ...props, direction: 'left' as const, title: 'Title', description: 'Description' } }],
+    ['with top direction', { props: { ...props, direction: 'top' as const, title: 'Title', description: 'Description' } }],
+    ['with right direction', { props: { ...props, direction: 'right' as const, title: 'Title', description: 'Description' } }],
     ['without handle', { props: { ...props, handle: false, title: 'Title', description: 'Description' } }],
     ['without overlay', { props: { ...props, overlay: false, title: 'Title', description: 'Description' } }],
     ['with class', { props: { ...props, class: 'bg-gray-50 dark:bg-gray-800' } }],
