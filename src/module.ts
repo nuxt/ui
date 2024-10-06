@@ -2,6 +2,7 @@ import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
 import { addTemplates } from './templates'
 import icons from './theme/icons'
+import { pick } from './runtime/utils'
 
 export type * from './runtime/types'
 
@@ -52,27 +53,30 @@ export default defineNuxtModule<ModuleOptions>({
     fonts: true,
     colorMode: true,
     theme: {
-      colors: ['primary', 'secondary', 'success', 'info', 'warning', 'error'],
+      colors: undefined,
       transitions: true
     }
   },
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
+    options.theme = options.theme || {}
+    options.theme.colors = options.theme.colors?.length ? [...new Set(['primary', 'error', ...options.theme.colors])] : ['primary', 'secondary', 'success', 'info', 'warning', 'error']
+
     nuxt.options.ui = options
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
-      colors: {
-        primary: 'sky',
-        secondary: 'indigo',
+      colors: pick({
+        primary: 'green',
+        secondary: 'blue',
         success: 'green',
         info: 'blue',
         warning: 'yellow',
         error: 'red',
         neutral: 'slate'
-      },
+      }, [...(options.theme?.colors || []), 'neutral' as any]),
       icons
     })
 
