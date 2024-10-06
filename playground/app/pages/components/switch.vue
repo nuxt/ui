@@ -10,7 +10,7 @@ const checked = ref(true)
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 ml-[-114px]">
       <USwitch v-model="checked" label="Primary" />
-      <USwitch color="neutral" label="Gray" :default-value="true" />
+      <USwitch color="neutral" label="Neutral" :default-value="true" />
       <USwitch color="error" label="Error" :default-value="true" />
       <USwitch label="Default value" :default-value="true" />
       <USwitch label="Required" required />
