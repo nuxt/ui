@@ -2,7 +2,7 @@
 import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
 // import { debounce } from 'perfect-debounce'
-// import type { ContentSearchFile } from '@nuxt/ui-pro'
+import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 const route = useRoute()
 const appConfig = useAppConfig()
@@ -11,7 +11,7 @@ const runtimeConfig = useRuntimeConfig()
 const { integrity, api } = runtimeConfig.public.content
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
-const { data: files } = await useLazyFetch<any[]>(`${api.baseURL}/search${integrity ? '-' + integrity : ''}`, { default: () => [] })
+const { data: files } = await useLazyFetch<ContentSearchFile[]>(`${api.baseURL}/search${integrity ? '-' + integrity : ''}`, { default: () => [] })
 
 const searchTerm = ref('')
 
@@ -101,7 +101,7 @@ provide('navigation', navigation)
 
 <style>
 @import "tailwindcss";
-@import "@nuxt/ui";
+@import "@nuxt/ui-pro";
 
 @source "../content/**/*.md";
 
@@ -122,7 +122,6 @@ provide('navigation', navigation)
 }
 
 :root {
-  --ui-header-height: var(--spacing-16);
   --ui-container-width: 90rem;
 }
 </style>
