@@ -74,7 +74,7 @@ props:
 ---
 ::
 
-::warning
+::caution
 Unlike the [Select](/components/select) component, the SelectMenu expects the whole object to be passed to the `v-model` directive or the `default-value` prop by default.
 ::
 
