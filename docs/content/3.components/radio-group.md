@@ -66,7 +66,7 @@ props:
 ---
 ::
 
-::note
+::caution
 When using objects, you need to reference the `value` property of the object in the `v-model` directive or the `default-value` prop.
 ::
 

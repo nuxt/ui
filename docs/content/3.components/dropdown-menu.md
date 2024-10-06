@@ -215,7 +215,7 @@ slots:
 :u-button{size="xl" label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline"}
 ::
 
-::caution
+::warning
 The `size` prop will not be proxied to the Button, you need to set it yourself.
 ::
 

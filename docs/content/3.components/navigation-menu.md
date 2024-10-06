@@ -283,7 +283,7 @@ The `highlight` prop changes the `pill` variant active item style. Try it out to
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-heroicons-chevron-down-20-solid`. This icon is only displayed when an item has children.
 
-::note
+::tip
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
 ::
 

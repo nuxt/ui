@@ -139,7 +139,7 @@ props:
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-heroicons-chevron-down-20-solid`.
 
-::note
+::tip
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
 ::
 
@@ -202,7 +202,7 @@ props:
 ---
 ::
 
-::note
+::tip
 The `#body` slot includes some pre-defined styles, use the [`#content` slot](#with-content-slot) if you want to start from scratch.
 ::
 
