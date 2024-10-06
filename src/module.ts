@@ -61,7 +61,7 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url)
 
     options.theme = options.theme || {}
-    options.theme.colors = options.theme.colors?.length ? [...new Set(['primary', 'error', ...options.theme.colors])] : ['primary', 'secondary', 'success', 'info', 'warning', 'error']
+    options.theme.colors = options.theme.colors?.length ? [...new Set(['primary', ...options.theme.colors])] : ['primary', 'secondary', 'success', 'info', 'warning', 'error']
 
     nuxt.options.ui = options
 
