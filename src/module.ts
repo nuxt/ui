@@ -18,6 +18,12 @@ export interface ModuleOptions {
    */
   fonts?: boolean
 
+  /**
+   * Enable or disable `@nuxtjs/color-mode` module
+   * @defaultValue true
+   */
+  colorMode?: boolean
+
   theme?: {
     /**
      * Colors to generate classes for (defaults to TailwindCSS colors)
@@ -44,6 +50,7 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     prefix: 'U',
     fonts: true,
+    colorMode: true,
     theme: {
       colors: ['primary', 'secondary', 'success', 'info', 'warning', 'error'],
       transitions: true
@@ -89,8 +96,12 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     await registerModule('@nuxt/icon', { cssLayer: 'components' })
-    await registerModule('@nuxt/fonts', { experimental: { processCSSVariables: true } })
-    await registerModule('@nuxtjs/color-mode', { classSuffix: '', disableTransition: true })
+    if (options.fonts) {
+      await registerModule('@nuxt/fonts', { experimental: { processCSSVariables: true } })
+    }
+    if (options.colorMode) {
+      await registerModule('@nuxtjs/color-mode', { classSuffix: '', disableTransition: true })
+    }
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
     addPlugin({ src: resolve('./runtime/plugins/modal') })
