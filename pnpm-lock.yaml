@@ -81,8 +81,8 @@ importers:
         specifier: ^8.0.2
         version: 8.0.2(release-it@17.7.0(typescript@5.6.2))
       '@standard-schema/spec':
-        specifier: 1.0.0-beta.0
-        version: 1.0.0-beta.0
+        specifier: 1.0.0-beta.1
+        version: 1.0.0-beta.1
       '@vue/test-utils':
         specifier: ^2.4.6
         version: 2.4.6
@@ -159,7 +159,7 @@ importers:
         specifier: https://pkg.pr.new/nuxt/ui-pro/@nuxt/ui-pro@v2
         version: https://pkg.pr.new/nuxt/ui-pro/@nuxt/ui-pro@v2(magicast@0.3.5)(rollup@4.24.0)(vue@3.5.11(typescript@5.6.2))
       '@nuxthub/core':
-        specifier: ^0.7.25
+        specifier: ^0.7.26
         version: 0.7.26(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.0)(vite@5.4.8(@types/node@22.7.4)(lightningcss@1.27.0)(terser@5.34.1))
       '@nuxtjs/plausible':
         specifier: ^1.0.3
@@ -1912,8 +1912,8 @@ packages:
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
 
-  '@standard-schema/spec@1.0.0-beta.0':
-    resolution: {integrity: sha512-//opTrDGFcAaG8BNc0btA5wwU1V573X/UezT5jgfwucdZEbzukpKCsFUJVskH6aJ3KNVOXdSbhS4YWFfnyLVbA==}
+  '@standard-schema/spec@1.0.0-beta.1':
+    resolution: {integrity: sha512-XFHxCgvFiNrofjsZ1SFLKjLSo6kM9WITBU6gPnkKtrQ6fSuPWhZ/7gLTWmMcMprFgN4FfU1Wcsr5+jNkRaksCQ==}
 
   '@stylistic/eslint-plugin@2.9.0':
     resolution: {integrity: sha512-OrDyFAYjBT61122MIY1a3SfEgy3YCMgt2vL4eoPmvTwDBwyQhAXurxNQznlRD/jESNfYWfID8Ej+31LljvF7Xg==}
@@ -8550,7 +8550,7 @@ snapshots:
 
   '@socket.io/component-emitter@3.1.2': {}
 
-  '@standard-schema/spec@1.0.0-beta.0': {}
+  '@standard-schema/spec@1.0.0-beta.1': {}
 
   '@stylistic/eslint-plugin@2.9.0(eslint@9.12.0(jiti@2.3.3))(typescript@5.6.2)':
     dependencies:
