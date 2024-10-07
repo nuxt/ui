@@ -25,7 +25,7 @@ const data = {
       <UAlert :title="data.title" />
       <UAlert :title="data.title" :icon="data.icon" />
       <UAlert :title="data.title" :icon="data.icon" :close="data.close" />
-      <UAlert :title="data.title" :icon="data.icon" :close="data.close" :actions="actions('primary')" />
+      <UAlert :title="data.title" :icon="data.icon" :close="data.close" :actions="actions('neutral')" />
       <UAlert :title="data.title" :icon="data.icon" :close="data.close" :description="data.description" />
       <UAlert :title="data.title" :avatar="{ src: 'https://avatars.githubusercontent.com/u/739984?v=4' }" :close="data.close" :description="data.description" />
     </div>

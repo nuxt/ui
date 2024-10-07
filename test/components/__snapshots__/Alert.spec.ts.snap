@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Alert > renders with as correctly 1`] = `
-"<article class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25">
+"<article class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -13,7 +13,7 @@ exports[`Alert > renders with as correctly 1`] = `
 `;
 
 exports[`Alert > renders with avatar correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[--ui-bg-elevated] size-11 text-[22px] shrink-0"><img role="img" src="https://avatars.githubusercontent.com/u/739984?v=4" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[--ui-text-muted] truncate"></span></span>
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg]"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[--ui-bg-elevated] size-11 text-[22px] shrink-0"><img role="img" src="https://avatars.githubusercontent.com/u/739984?v=4" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[--ui-text-muted] truncate"></span></span>
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
     <!--v-if-->
@@ -24,7 +24,7 @@ exports[`Alert > renders with avatar correctly 1`] = `
 `;
 
 exports[`Alert > renders with class correctly 1`] = `
-"<div class="relative overflow-hidden rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25 w-48">
+"<div class="relative overflow-hidden rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg] w-48">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -36,7 +36,7 @@ exports[`Alert > renders with class correctly 1`] = `
 `;
 
 exports[`Alert > renders with close correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -51,7 +51,7 @@ exports[`Alert > renders with close correctly 1`] = `
 `;
 
 exports[`Alert > renders with close slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -63,7 +63,7 @@ exports[`Alert > renders with close slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with closeIcon correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -78,7 +78,7 @@ exports[`Alert > renders with closeIcon correctly 1`] = `
 `;
 
 exports[`Alert > renders with description correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start bg-[--ui-primary] text-[--ui-bg]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -90,7 +90,7 @@ exports[`Alert > renders with description correctly 1`] = `
 `;
 
 exports[`Alert > renders with description slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -102,7 +102,7 @@ exports[`Alert > renders with description slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with icon correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25"><span class="iconify i-heroicons:light-bulb shrink-0 size-5" aria-hidden="true"></span>
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg]"><span class="iconify i-heroicons:light-bulb shrink-0 size-5" aria-hidden="true"></span>
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
     <!--v-if-->
@@ -113,7 +113,7 @@ exports[`Alert > renders with icon correctly 1`] = `
 `;
 
 exports[`Alert > renders with leading slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Leading slot</div>
@@ -221,7 +221,7 @@ exports[`Alert > renders with primary variant subtle correctly 1`] = `
 `;
 
 exports[`Alert > renders with title correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -233,7 +233,7 @@ exports[`Alert > renders with title correctly 1`] = `
 `;
 
 exports[`Alert > renders with title slot correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Title slot</div>
@@ -245,7 +245,7 @@ exports[`Alert > renders with title slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with ui correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center text-[--ui-primary] ring ring-inset ring-[--ui-primary]/25">
+"<div class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[--ui-bg]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-bold">Alert</div>

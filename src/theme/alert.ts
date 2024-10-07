@@ -85,6 +85,6 @@ export default (options: Required<ModuleOptions>) => ({
   }],
   defaultVariants: {
     color: 'primary',
-    variant: 'outline'
+    variant: 'solid'
   }
 })

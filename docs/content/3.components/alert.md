@@ -98,7 +98,7 @@ ignore:
   - icon
 props:
   color: neutral
-  variant: solid
+  variant: subtle
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
   icon: 'i-heroicons-command-line'
@@ -120,9 +120,13 @@ ignore:
   - title
   - description
   - close
+  - color
+  - variant
 props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
+  color: neutral
+  variant: outline
   close: true
 ---
 ::
@@ -137,9 +141,13 @@ ignore:
   - description
   - close.color
   - close.variant
+  - color
+  - variant
 props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
+  color: neutral
+  variant: outline
   close:
     color: primary
     variant: outline
@@ -158,9 +166,13 @@ ignore:
   - title
   - description
   - close
+  - color
+  - variant
 props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
+  color: neutral
+  variant: outline
   close: true
   closeIcon: 'i-heroicons-arrow-right'
 ---
@@ -180,9 +192,13 @@ prettier: true
 ignore:
   - title
   - actions
+  - color
+  - variant
 props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
+  color: neutral
+  variant: outline
   actions:
     - label: Action 1
     - label: Action 2
@@ -199,7 +215,7 @@ Actions renders differently when the description is not set. You can try to remo
 
 ### `class` prop
 
-Use the `class` prop to override the base styles of the Button.
+Use the `class` prop to override the base styles of the Alert.
 
 ::component-code
 ---
@@ -216,7 +232,7 @@ props:
 
 ### `ui` prop
 
-Use the `ui` prop to override the slots styles of the Button.
+Use the `ui` prop to override the slots styles of the Alert.
 
 ::component-code
 ---
