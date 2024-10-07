@@ -16,5 +16,5 @@ function open() {
 </script>
 
 <template>
-  <UButton label="Open" color="gray" variant="subtle" @click="open" />
+  <UButton label="Open" color="neutral" variant="subtle" @click="open" />
 </template>

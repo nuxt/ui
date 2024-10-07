@@ -1,10 +1,10 @@
 <template>
   <UButtonGroup>
-    <UInput color="gray" variant="outline" placeholder="Enter token" />
+    <UInput color="neutral" variant="outline" placeholder="Enter token" />
 
     <UTooltip text="Copy to clipboard">
       <UButton
-        color="gray"
+        color="neutral"
         variant="subtle"
         icon="i-heroicons-clipboard-document"
       />

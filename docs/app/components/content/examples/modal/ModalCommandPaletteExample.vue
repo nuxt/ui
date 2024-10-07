@@ -21,7 +21,7 @@ const groups = computed(() => [{
   <UModal>
     <UButton
       label="Search users..."
-      color="gray"
+      color="neutral"
       variant="subtle"
       icon="i-heroicons-magnifying-glass"
     />

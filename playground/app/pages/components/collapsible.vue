@@ -9,7 +9,7 @@ const appConfig = useAppConfig()
         class="group"
         icon="i-heroicons-light-bulb"
         :trailing-icon="appConfig.ui.icons.chevronDown"
-        color="gray"
+        color="neutral"
         variant="outline"
         label="Open"
         block

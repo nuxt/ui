@@ -52,15 +52,17 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
 import type { DeepPartial } from '#ui/types/utils'
+import colors from 'tailwindcss/colors'
 
-const colors = ${JSON.stringify(options.theme?.colors || [])} as const;
 const icons = ${JSON.stringify(nuxt.options.appConfig.ui.icons)};
+
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
+type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor>
 
 type AppConfigUI = {
   colors?: {
-    primary?: Exclude<typeof colors[number], 'error' | 'primary'>
-    error?: Exclude<typeof colors[number], 'primary' | 'error'>
-    gray?: 'slate' | 'cool' | 'zinc' | 'neutral' | 'stone'
+    ${options.theme?.colors?.map(color => `${color}?: Color`).join('\n\t\t')}
+    neutral?: NeutralColor
   }
   icons?: Partial<typeof icons>
 } & DeepPartial<typeof ui, string>

@@ -6,10 +6,10 @@ const { data: ast } = await useAsyncData(`icons-theme`, async () => {
   const md = `
 \`\`\`ts [app.config.ts]
 export default defineAppConfig(${json5.stringify({
-    ui: {
-      icons
-    }
-  }, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')})
+  ui: {
+    icons
+  }
+}, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')})
 \`\`\`\
 `
 

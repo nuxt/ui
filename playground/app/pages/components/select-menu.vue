@@ -69,7 +69,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         :items="items"
         :placeholder="upperFirst(variant)"
         :variant="variant"
-        color="gray"
+        color="neutral"
         class="w-48"
       />
     </div>

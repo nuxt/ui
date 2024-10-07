@@ -29,6 +29,6 @@ exports[`Collapsible > renders with open correctly 1`] = `
 exports[`Collapsible > renders with ui correctly 1`] = `
 "<div data-state="open" class="flex flex-col gap-2">
   <!--v-if-->
-  <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden bg-gray-50 dark:bg-gray-800" id="radix-vue-collapsible-content-v-0-0-0" data-state="open" style="--radix-collapsible-content-height: 0px; --radix-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+  <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden bg-[--ui-bg-elevated]" id="radix-vue-collapsible-content-v-0-0-0" data-state="open" style="--radix-collapsible-content-height: 0px; --radix-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
 </div>"
 `;

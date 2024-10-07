@@ -54,7 +54,7 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
           icon: 'i-heroicons-swatch'
-          description: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+          description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
           icon: 'i-heroicons-cog'
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
@@ -203,12 +203,12 @@ props:
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
-  class: 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-gray-200 dark:border-gray-800'
+  class: 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-[--ui-border]'
 ---
 ::
 
 ::note
-In this example, the `border-l` and `border-b` classes are applied to display a gray line, this is not done by default to let you have a clean slate to work with.
+In this example, the `border-l` and `border-b` classes are applied to display a border, this is not done by default to let you have a clean slate to work with.
 ::
 
 ### Color
@@ -222,7 +222,7 @@ ignore:
 external:
   - items
 props:
-  color: 'gray'
+  color: neutral
   items:
     - - label: Guide
         icon: i-heroicons-book-open
@@ -253,8 +253,8 @@ ignore:
 external:
   - items
 props:
-  color: 'gray'
-  variant: 'link'
+  color: neutral
+  variant: link
   highlight: false
   items:
     - - label: Guide
@@ -283,7 +283,7 @@ The `highlight` prop changes the `pill` variant active item style. Try it out to
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-heroicons-chevron-down-20-solid`. This icon is only displayed when an item has children.
 
-::note
+::tip
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
 ::
 
@@ -313,7 +313,7 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
           icon: 'i-heroicons-swatch'
-          description: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+          description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
           icon: 'i-heroicons-cog'
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
@@ -405,7 +405,7 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
           icon: 'i-heroicons-swatch'
-          description: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+          description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
           icon: 'i-heroicons-cog'
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'

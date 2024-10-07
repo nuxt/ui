@@ -4,21 +4,21 @@ const items = ref([
     label: 'bug',
     value: 'bug',
     chip: {
-      color: 'red' as const
-    }
-  },
-  {
-    label: 'enhancement',
-    value: 'enhancement',
-    chip: {
-      color: 'blue' as const
+      color: 'error' as const
     }
   },
   {
     label: 'feature',
     value: 'feature',
     chip: {
-      color: 'violet' as const
+      color: 'success' as const
+    }
+  },
+  {
+    label: 'enhancement',
+    value: 'enhancement',
+    chip: {
+      color: 'info' as const
     }
   }
 ])

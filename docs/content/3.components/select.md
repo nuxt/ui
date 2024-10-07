@@ -68,7 +68,7 @@ props:
 ---
 ::
 
-::note
+::caution
 When using objects, you need to reference the `value` property of the object in the `v-model` directive or the `default-value` prop.
 ::
 
@@ -152,7 +152,7 @@ props:
 
 Use the `content` prop to control how the Select content is rendered, like its its `align`, `side` or `position` for example. Defaults to `popper` to match other components.
 
-::caution
+::warning
 The `content.align`, `content.side`, etc. properties only apply when `content.position` is set to `popper`.
 ::
 
@@ -209,7 +209,7 @@ ignore:
 external:
   - items
 props:
-  color: gray
+  color: neutral
   highlight: true
   defaultValue: 'Backlog'
   items:
@@ -237,7 +237,7 @@ ignore:
 external:
   - items
 props:
-  color: gray
+  color: neutral
   variant: subtle
   highlight: false
   defaultValue: 'Backlog'

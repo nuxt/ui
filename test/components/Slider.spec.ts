@@ -20,9 +20,9 @@ describe('Slider', () => {
     ['with min max step', { props: { min: 4, max: 12, step: 2 } }],
     ['with min steps between thumbs', { props: { defaultValue: [0, 30], minStepsBetweenThumbs: 30 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ['with color gray', { props: { color: 'gray', defaultValue: 10 } }],
+    ['with color neutral', { props: { color: 'neutral', defaultValue: 10 } }],
     ['with class', { props: { class: 'w-48' } }],
-    ['with ui', { props: { ui: { track: 'bg-gray-100 dark:bg-gray-800' } } }]
+    ['with ui', { props: { ui: { track: 'bg-[--ui-bg-elevated]' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SliderProps }) => {
     const html = await ComponentRender(nameOrHtml, options, Slider)
     expect(html).toMatchSnapshot()

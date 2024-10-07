@@ -116,7 +116,7 @@ props:
 
 ### Color
 
-Use the `color` prop to set the color of the inactive controls. Defaults to `gray`.
+Use the `color` prop to set the color of the inactive controls. Defaults to `neutral`.
 
 ::component-code
 ---
@@ -130,24 +130,12 @@ model:
 items:
   color:
     - primary
-    - green
-    - red
-    - orange
-    - amber
-    - yellow
-    - lime
-    - emerald
-    - teal
-    - cyan
-    - sky
-    - blue
-    - indigo
-    - violet
-    - purple
-    - fuchsia
-    - pink
-    - rose
-    - gray
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
 props:
   page: 5
   color: primary
@@ -171,24 +159,12 @@ model:
 items:
   color:
     - primary
-    - green
-    - red
-    - orange
-    - amber
-    - yellow
-    - lime
-    - emerald
-    - teal
-    - cyan
-    - sky
-    - blue
-    - indigo
-    - violet
-    - purple
-    - fuchsia
-    - pink
-    - rose
-    - gray
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
   variant:
     - solid
     - outline
@@ -198,7 +174,7 @@ items:
     - link
 props:
   page: 5
-  color: gray
+  color: neutral
   variant: subtle
   total: 100
 ---
@@ -220,27 +196,15 @@ model:
 items:
   activeColor:
     - primary
-    - green
-    - red
-    - orange
-    - amber
-    - yellow
-    - lime
-    - emerald
-    - teal
-    - cyan
-    - sky
-    - blue
-    - indigo
-    - violet
-    - purple
-    - fuchsia
-    - pink
-    - rose
-    - gray
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
 props:
   page: 5
-  activeColor: gray
+  activeColor: neutral
   total: 100
 ---
 ::
@@ -261,24 +225,12 @@ model:
 items:
   activeColor:
     - primary
-    - green
-    - red
-    - orange
-    - amber
-    - yellow
-    - lime
-    - emerald
-    - teal
-    - cyan
-    - sky
-    - blue
-    - indigo
-    - violet
-    - purple
-    - fuchsia
-    - pink
-    - rose
-    - gray
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
   activeVariant:
     - solid
     - outline

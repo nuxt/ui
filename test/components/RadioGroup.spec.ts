@@ -24,7 +24,7 @@ describe('RadioGroup', () => {
     ['with description', { props: { items: items.map((opt, count) => ({ ...opt, description: `Description ${count}` })) } }],
     ['with required', { props: { ...props, legend: 'Legend', required: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
-    ['with color gray', { props: { color: 'gray', defaultValue: '1' } }],
+    ['with color neutral', { props: { color: 'neutral', defaultValue: '1' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { wrapper: 'ms-4' } } }],
     ['with orientation', { props: { ...props, orientation: 'horizontal' } }],

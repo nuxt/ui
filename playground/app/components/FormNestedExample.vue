@@ -57,7 +57,7 @@ function onError(event: any) {
     </UForm>
 
     <div>
-      <UButton color="gray" type="submit">
+      <UButton color="neutral" type="submit">
         Submit
       </UButton>
     </div>

@@ -19,13 +19,13 @@ const items = [{
   <div class="flex flex-col gap-4">
     <div class="flex items-center gap-2">
       <UChip v-for="position in positions" :key="position" :position="position">
-        <UButton icon="i-heroicons-inbox" color="gray" variant="subtle" />
+        <UButton icon="i-heroicons-inbox" color="neutral" variant="subtle" />
       </UChip>
     </div>
 
     <div class="flex items-center gap-2">
       <UChip v-for="{ name, icon, count } in items" :key="name" :text="count" :show="count > 0" size="lg">
-        <UButton :icon="icon" color="gray" variant="subtle" />
+        <UButton :icon="icon" color="neutral" variant="subtle" />
       </UChip>
     </div>
 

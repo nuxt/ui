@@ -8,7 +8,7 @@ const items = [
   {
     label: 'Colors',
     icon: 'i-heroicons-swatch',
-    content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+    content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
   },
   {
     label: 'Components',

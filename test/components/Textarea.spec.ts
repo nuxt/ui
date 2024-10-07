@@ -20,7 +20,7 @@ describe('Textarea', () => {
     ['with rows', { props: { rows: 5 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { variant, color: 'gray' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
     // Slots

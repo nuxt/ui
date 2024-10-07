@@ -3,23 +3,23 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-start',
-    base: ['inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 data-[state=unchecked]:bg-gray-200 dark:data-[state=unchecked]:bg-gray-700', options.theme.transitions && 'transition-colors duration-200'],
+    base: ['inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[--ui-bg] data-[state=unchecked]:bg-[--ui-bg-accented]', options.theme.transitions && 'transition-colors duration-200'],
     container: 'flex items-center',
-    thumb: 'group pointer-events-none block rounded-full bg-white dark:bg-gray-900 shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center',
-    icon: ['absolute shrink-0 group-data-[state=unchecked]:text-gray-400 dark:group-data-[state=unchecked]:text-gray-500 opacity-0 size-10/12', options.theme.transitions && 'transition-[color,opacity] duration-200'],
+    thumb: 'group pointer-events-none block rounded-full bg-[--ui-bg] shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center',
+    icon: ['absolute shrink-0 group-data-[state=unchecked]:text-[--ui-text-dimmed] opacity-0 size-10/12', options.theme.transitions && 'transition-[color,opacity] duration-200'],
     wrapper: 'ms-2',
-    label: 'block font-medium text-gray-700 dark:text-gray-200',
-    description: 'text-gray-500 dark:text-gray-400'
+    label: 'block font-medium text-[--ui-text]',
+    description: 'text-[--ui-text-muted]'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `data-[state=checked]:bg-${color}-500 dark:data-[state=checked]:bg-${color}-400 focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`,
-        icon: `group-data-[state=checked]:text-${color}-500 dark:group-data-[state=checked]:text-${color}-400`
+        base: `data-[state=checked]:bg-[--ui-${color}] focus-visible:ring-[--ui-${color}]`,
+        icon: `group-data-[state=checked]:text-[--ui-${color}]`
       }])),
-      gray: {
-        base: 'data-[state=checked]:bg-gray-900 dark:data-[state=checked]:bg-white focus-visible:ring-gray-900 dark:focus-visible:ring-white',
-        icon: 'group-data-[state=checked]:text-gray-900 dark:group-data-[state=checked]:text-white'
+      neutral: {
+        base: 'data-[state=checked]:bg-[--ui-bg-inverted] focus-visible:ring-[--ui-border-inverted]',
+        icon: 'group-data-[state=checked]:text-[--ui-text-highlighted]'
       }
     },
     size: {
@@ -71,7 +71,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     required: {
       true: {
-        label: 'after:content-[\'*\'] after:ms-0.5 after:text-error-500 dark:after:text-error-400'
+        label: 'after:content-[\'*\'] after:ms-0.5 after:text-[--ui-error]'
       }
     },
     disabled: {

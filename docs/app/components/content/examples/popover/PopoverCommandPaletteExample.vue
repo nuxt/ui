@@ -1,20 +1,27 @@
 <script setup lang="ts">
-const labels = [{
-  label: 'bug',
-  chip: {
-    color: 'red' as const
+const items = ref([
+  {
+    label: 'bug',
+    value: 'bug',
+    chip: {
+      color: 'error' as const
+    }
+  },
+  {
+    label: 'feature',
+    value: 'feature',
+    chip: {
+      color: 'success' as const
+    }
+  },
+  {
+    label: 'enhancement',
+    value: 'enhancement',
+    chip: {
+      color: 'info' as const
+    }
   }
-}, {
-  label: 'feature',
-  chip: {
-    color: 'green' as const
-  }
-}, {
-  label: 'enhancement',
-  chip: {
-    color: 'blue' as const
-  }
-}]
+])
 const label = ref([])
 </script>
 
@@ -23,7 +30,7 @@ const label = ref([])
     <UButton
       icon="i-heroicons-tag"
       label="Select labels"
-      color="gray"
+      color="neutral"
       variant="subtle"
     />
 
@@ -32,7 +39,7 @@ const label = ref([])
         v-model="label"
         multiple
         placeholder="Search labels..."
-        :groups="[{ id: 'labels', items: labels }]"
+        :groups="[{ id: 'labels', items }]"
         :ui="{ input: '[&>input]:h-8' }"
       />
     </template>
