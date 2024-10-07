@@ -325,7 +325,7 @@ exports[`RadioGroup > renders with orientation correctly 1`] = `
 exports[`RadioGroup > renders with required correctly 1`] = `
 "<div role="radiogroup" required="true" aria-orientation="vertical" aria-required="true" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" class="relative" tabindex="0">
   <fieldset class="flex flex-col gap-1">
-    <legend class="mb-1 block font-medium text-[--ui-text] text-sm after:content-['*'] after:ms-0.5 after:text-error-500 dark:after:text-error-400">Legend</legend>
+    <legend class="mb-1 block font-medium text-[--ui-text] text-sm after:content-['*'] after:ms-0.5 after:text-[--ui-error]">Legend</legend>
     <div class="flex items-start text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[--ui-border-accented] focus-visible:outline-2 focus-visible:outline-offset-[--ui-bg] focus-visible:outline-[--ui-primary] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" aria-label="1" value="1">
           <!---->

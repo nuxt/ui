@@ -44,7 +44,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     required: {
       true: {
-        label: 'after:content-[\'*\'] after:ms-0.5 after:text-error-500 dark:after:text-error-400'
+        label: 'after:content-[\'*\'] after:ms-0.5 after:text-[--ui-error]'
       }
     },
     disabled: {

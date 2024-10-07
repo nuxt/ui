@@ -150,7 +150,7 @@ exports[`Checkbox > renders with required correctly 1`] = `
     </button>
     <!---->
   </div>
-  <div class="ms-2 text-sm"><label for="v-0-0" class="block font-medium text-[--ui-text] after:content-['*'] after:ms-0.5 after:text-error-500 dark:after:text-error-400">Label</label>
+  <div class="ms-2 text-sm"><label for="v-0-0" class="block font-medium text-[--ui-text] after:content-['*'] after:ms-0.5 after:text-[--ui-error]">Label</label>
     <!--v-if-->
   </div>
 </div>"

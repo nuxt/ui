@@ -6,7 +6,7 @@ export default {
     label: 'block font-medium text-[--ui-text]',
     container: 'mt-1 relative',
     description: 'text-[--ui-text-muted]',
-    error: 'mt-2 text-error-500 dark:text-error-400',
+    error: 'mt-2 text-[--ui-error]',
     hint: 'text-[--ui-text-muted]',
     help: 'mt-2 text-[--ui-text-muted]'
   },
@@ -20,7 +20,7 @@ export default {
     },
     required: {
       true: {
-        label: `after:content-['*'] after:ms-0.5 after:text-error-500 dark:after:text-error-400`
+        label: `after:content-['*'] after:ms-0.5 after:text-[--ui-error]`
       }
     }
   },

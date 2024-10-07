@@ -142,7 +142,7 @@ exports[`Switch > renders with required correctly 1`] = `
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[--ui-bg] data-[state=unchecked]:bg-[--ui-bg-accented] transition-colors duration-200 data-[state=checked]:bg-[--ui-primary] focus-visible:ring-[--ui-primary] w-9" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="true" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-[--ui-bg] shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4"></span></button>
     <!---->
   </div>
-  <div class="ms-2 text-sm"><label for="v-0-0" class="block font-medium text-[--ui-text] after:content-['*'] after:ms-0.5 after:text-error-500 dark:after:text-error-400">Label</label>
+  <div class="ms-2 text-sm"><label for="v-0-0" class="block font-medium text-[--ui-text] after:content-['*'] after:ms-0.5 after:text-[--ui-error]">Label</label>
     <!--v-if-->
   </div>
 </div>"

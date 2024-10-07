@@ -83,7 +83,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     required: {
       true: {
-        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-error-500 dark:after:text-error-400'
+        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-[--ui-error]'
       }
     }
   },
