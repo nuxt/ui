@@ -10,7 +10,7 @@
   }
 
   :root {
-    color-scheme: light dark;
+    color-scheme: light;
 
     --ui-text-dimmed: var(--ui-color-neutral-400);
     --ui-text-muted: var(--ui-color-neutral-500);
@@ -29,6 +29,8 @@
   }
 
   .dark {
+    color-scheme: dark;
+
     --ui-text-dimmed: var(--ui-color-neutral-500);
     --ui-text-muted: var(--ui-color-neutral-400);
     --ui-text-toned: var(--ui-color-neutral-300);
