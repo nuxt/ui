@@ -68,7 +68,7 @@
     "@nuxt/module-builder": "^0.8.4",
     "@nuxt/test-utils": "^3.14.3",
     "@release-it/conventional-changelog": "^8.0.2",
-    "@standard-schema/spec": "1.0.0-beta.0",
+    "@standard-schema/spec": "1.0.0-beta.1",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.11.1",
     "happy-dom": "^15.7.4",
