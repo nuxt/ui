@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@nuxt/fonts": "^0.9.2",
-    "@nuxt/icon": "^1.5.3",
+    "@nuxt/icon": "^1.5.4",
     "@nuxt/kit": "^3.13.2",
     "@nuxt/schema": "^3.13.2",
     "@nuxtjs/color-mode": "^3.5.1",
@@ -87,6 +87,6 @@
   "resolutions": {
     "@nuxt/ui": "workspace:*",
     "happy-dom": "14.12.3",
-    "rollup": "^4"
+    "rollup": "^4.24.0"
   }
 }
