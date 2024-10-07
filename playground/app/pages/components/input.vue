@@ -20,7 +20,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
         :key="variant"
         :placeholder="upperFirst(variant)"
         :variant="variant"
-        color="gray"
+        color="neutral"
         class="w-48"
       />
     </div>

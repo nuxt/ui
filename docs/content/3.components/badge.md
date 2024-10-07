@@ -35,7 +35,7 @@ Use the `color` prop to change the color of the Badge.
 ::component-code
 ---
 props:
-  color: gray
+  color: neutral
 slots:
   default: Badge
 ---
@@ -48,7 +48,7 @@ Use the `variant` props to change the variant of the Badge.
 ::component-code
 ---
 props:
-  color: gray
+  color: neutral
   variant: outline
 slots:
   default: Badge

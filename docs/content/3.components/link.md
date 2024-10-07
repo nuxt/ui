@@ -65,7 +65,7 @@ props:
   raw: true
   to: /components/link
   activeClass: 'font-bold'
-  inactiveClass: 'text-gray-500 dark:text-gray-500'
+  inactiveClass: 'text-[--ui-text-muted]'
 slots:
   default: Link
 ---

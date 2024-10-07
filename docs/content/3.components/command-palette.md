@@ -355,7 +355,7 @@ class: '!p-0'
 ---
 ::
 
-::note
+::tip
 You can also use the `select` field on each item and/or the `@update:model-value` event.
 ::
 

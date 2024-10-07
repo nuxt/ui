@@ -137,7 +137,7 @@ ignore:
   - label
   - defaultValue
 props:
-  color: gray
+  color: neutral
   defaultValue: true
   label: Check me
 ---

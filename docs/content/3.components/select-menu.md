@@ -74,7 +74,7 @@ props:
 ---
 ::
 
-::note
+::caution
 Unlike the [Select](/components/select) component, the SelectMenu expects the whole object to be passed to the `v-model` directive or the `default-value` prop by default.
 ::
 
@@ -274,7 +274,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  color: gray
+  color: neutral
   highlight: true
   items:
     - Backlog
@@ -303,7 +303,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  color: gray
+  color: neutral
   variant: subtle
   highlight: false
   items:

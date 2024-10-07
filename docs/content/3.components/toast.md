@@ -13,7 +13,7 @@ links:
 
 Use the [useToast](/composables/use-toast) composable to display a toast in your application.
 
-::important
+::warning
 Make sure to wrap your app with the [App](/components/app) component which uses our [Toaster](https://github.com/nuxt/ui/blob/v3/src/runtime/components/Toaster.vue) component which uses the [ToastProvider](https://www.radix-vue.com/components/toast.html#provider) component from Radix Vue.
 ::
 
@@ -91,27 +91,15 @@ Pass a `color` field to the `toast.add` method to change the color of the Toast.
 options:
   - name: 'color'
     label: 'color'
-    default: 'gray'
+    default: neutral
     items:
       - primary
-      - green
-      - red
-      - orange
-      - amber
-      - yellow
-      - lime
-      - emerald
-      - teal
-      - cyan
-      - sky
-      - blue
-      - indigo
-      - violet
-      - purple
-      - fuchsia
-      - pink
-      - rose
-      - gray
+      - secondary
+      - success
+      - info
+      - warning
+      - error
+      - neutral
 name: 'toast-color-example'
 ---
 ::

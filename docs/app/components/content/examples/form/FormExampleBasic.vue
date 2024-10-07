@@ -15,7 +15,7 @@ const validate = (state: any): FormError[] => {
 
 const toast = useToast()
 async function onSubmit(event: FormSubmitEvent<any>) {
-  toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'green' })
+  toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
   console.log(event.data)
 }
 </script>

@@ -4,12 +4,12 @@ import { buttonGroupVariantWithRoot } from './button-group'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center',
-    base: ['w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+    base: ['w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     leading: 'absolute inset-y-0 start-0 flex items-center',
-    leadingIcon: 'shrink-0 text-gray-400 dark:text-gray-500',
+    leadingIcon: 'shrink-0 text-[--ui-text-dimmed]',
     leadingAvatar: 'shrink-0',
     trailing: 'absolute inset-y-0 end-0 flex items-center',
-    trailingIcon: 'shrink-0 text-gray-400 dark:text-gray-500'
+    trailingIcon: 'shrink-0 text-[--ui-text-dimmed]'
   },
   variants: {
     ...buttonGroupVariantWithRoot,
@@ -51,15 +51,15 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     variant: {
-      outline: 'text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700',
-      soft: 'text-gray-900 dark:text-white bg-gray-50 hover:bg-gray-100 focus:bg-gray-100 disabled:bg-gray-50 dark:bg-gray-800/50 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:disabled:bg-gray-800/50',
-      subtle: 'text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 ring ring-inset ring-gray-300 dark:ring-gray-700',
-      ghost: 'text-gray-900 dark:text-white hover:bg-gray-100 focus:bg-gray-100 disabled:bg-transparent dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:disabled:bg-transparent',
-      none: 'text-gray-900 dark:text-white'
+      outline: 'text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented]',
+      soft: 'text-[--ui-text-highlighted] bg-[--ui-bg-elevated]/50 hover:bg-[--ui-bg-elevated] focus:bg-[--ui-bg-elevated] disabled:bg-[--ui-bg-elevated]/50',
+      subtle: 'text-[--ui-text-highlighted] bg-[--ui-bg-elevated] ring ring-inset ring-[--ui-border-accented]',
+      ghost: 'text-[--ui-text-highlighted] hover:bg-[--ui-bg-elevated] focus:bg-[--ui-bg-elevated] disabled:bg-transparent dark:disabled:bg-transparent',
+      none: 'text-[--ui-text-highlighted]'
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      gray: ''
+      neutral: ''
     },
     leading: {
       true: ''
@@ -74,25 +74,25 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     },
     type: {
-      file: 'file:mr-1.5 file:font-medium file:text-gray-500 dark:file:text-gray-400 file:outline-none'
+      file: 'file:mr-1.5 file:font-medium file:text-[--ui-text-muted] file:outline-none'
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: ['outline', 'subtle'],
-    class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}-500 dark:focus-visible:ring-${color}-400`
+    class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-${color}]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     highlight: true,
-    class: `ring ring-inset ring-${color}-500 dark:ring-${color}-400`
+    class: `ring ring-inset ring-[--ui-${color}]`
   })), {
-    color: 'gray',
+    color: 'neutral',
     variant: ['outline', 'subtle'],
-    class: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-900 dark:focus-visible:ring-white'
+    class: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-border-inverted]'
   }, {
-    color: 'gray',
+    color: 'neutral',
     highlight: true,
-    class: 'ring ring-inset ring-gray-900 dark:ring-white'
+    class: 'ring ring-inset ring-[--ui-border-inverted]'
   }, {
     leading: true,
     size: 'xs',

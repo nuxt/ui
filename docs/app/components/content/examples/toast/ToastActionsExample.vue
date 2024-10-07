@@ -12,7 +12,7 @@ function showToast() {
     actions: [{
       icon: 'i-heroicons-arrow-path-20-solid',
       label: 'Retry',
-      color: 'gray',
+      color: 'neutral',
       variant: 'outline',
       onClick: (e) => {
         e?.stopPropagation()
@@ -23,5 +23,5 @@ function showToast() {
 </script>
 
 <template>
-  <UButton label="Show toast" color="gray" variant="outline" @click="showToast" />
+  <UButton label="Show toast" color="neutral" variant="outline" @click="showToast" />
 </template>

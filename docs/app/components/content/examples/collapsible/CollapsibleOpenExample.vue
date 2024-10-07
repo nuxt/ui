@@ -10,7 +10,7 @@ defineShortcuts({
   <UCollapsible v-model:open="open" class="w-48">
     <UButton
       label="Open"
-      color="gray"
+      color="neutral"
       variant="subtle"
       trailing-icon="i-heroicons-chevron-down-20-solid"
       block

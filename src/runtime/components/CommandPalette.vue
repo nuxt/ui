@@ -67,7 +67,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'mult
   placeholder?: InputProps['placeholder']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
-   * `{ size: 'md', color: 'gray', variant: 'ghost' }`{lang="ts-type"}
+   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue false
    */
   close?: ButtonProps | boolean
@@ -233,7 +233,7 @@ const groups = computed(() => {
               v-if="close"
               :icon="closeIcon || appConfig.ui.icons.close"
               size="md"
-              color="gray"
+              color="neutral"
               variant="ghost"
               aria-label="Close"
               v-bind="typeof close === 'object' ? close : undefined"

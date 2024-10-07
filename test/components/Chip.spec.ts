@@ -14,10 +14,10 @@ describe('Chip', () => {
     ['with inset', { props: { inset: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...positions.map((position: string) => [`with position ${position}`, { props: { position } }]),
-    ['with color gray', { props: { color: 'gray' } }],
+    ['with color neutral', { props: { color: 'neutral' } }],
     ['without show', { props: { show: false } }],
     ['with class', { props: { class: 'mx-auto' } }],
-    ['with ui', { props: { ui: { base: 'text-gray-500 dark:text-gray-400' } } }],
+    ['with ui', { props: { ui: { base: 'text-[--ui-text-muted]' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }]

@@ -42,7 +42,7 @@ function showToast() {
   toast.add({
     title: 'Success',
     description: 'Your action was completed successfully.',
-    color: 'green'
+    color: 'success'
   })
 }
 </script>

@@ -49,13 +49,13 @@ const templates = (id: number) => [{
   icon: 'i-heroicons-rocket-launch',
   actions: [{
     label: 'Action 1',
-    color: 'gray' as const,
+    color: 'neutral' as const,
     click() {
       console.log(`Toast ${id} action 1 clicked`)
     }
   }, {
     label: 'Action 2',
-    color: 'gray' as const,
+    color: 'neutral' as const,
     variant: 'outline' as const,
     click() {
       console.log(`Toast ${id} action 2 clicked`)
@@ -116,9 +116,9 @@ function removeToast() {
     </div>
 
     <div class="flex items-center gap-2">
-      <UButton label="Add new" color="gray" variant="outline" @click="addToast" />
-      <UButton label="Update last" color="gray" variant="outline" @click="updateToast" />
-      <UButton label="Remove last" color="gray" variant="outline" @click="removeToast" />
+      <UButton label="Add new" color="neutral" variant="outline" @click="addToast" />
+      <UButton label="Update last" color="neutral" variant="outline" @click="updateToast" />
+      <UButton label="Remove last" color="neutral" variant="outline" @click="removeToast" />
     </div>
   </div>
 </template>

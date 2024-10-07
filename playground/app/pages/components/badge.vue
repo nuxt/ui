@@ -17,7 +17,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
       <UBadge v-for="variant in variants" :key="variant" :label="upperFirst(variant)" :variant="variant" />
     </div>
     <div class="flex items-center gap-2">
-      <UBadge v-for="variant in variants" :key="variant" :label="upperFirst(variant)" :variant="variant" color="gray" />
+      <UBadge v-for="variant in variants" :key="variant" :label="upperFirst(variant)" :variant="variant" color="neutral" />
     </div>
     <div class="flex items-center gap-2 ml-[-56px]">
       <UBadge v-for="size in sizes" :key="size" label="Badge" :size="size" />

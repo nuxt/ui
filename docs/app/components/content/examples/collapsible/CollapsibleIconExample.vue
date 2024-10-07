@@ -3,7 +3,7 @@
     <UButton
       class="group"
       label="Open"
-      color="gray"
+      color="neutral"
       variant="subtle"
       trailing-icon="i-heroicons-chevron-down-20-solid"
       :ui="{

@@ -13,7 +13,7 @@ defineProps<{
     </template>
 
     <template #footer>
-      <UButton color="gray" label="Close" @click="slideover.close()" />
+      <UButton color="neutral" label="Close" @click="slideover.close()" />
     </template>
   </USlideover>
 </template>

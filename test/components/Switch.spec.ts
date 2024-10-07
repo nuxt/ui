@@ -25,7 +25,7 @@ describe('Switch', () => {
     ['with required', { props: { label: 'Label', required: true } }],
     ['with description', { props: { label: 'Label', description: 'Description' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ['with color gray', { props: { color: 'gray', defaultValue: true } }],
+    ['with color neutral', { props: { color: 'neutral', defaultValue: true } }],
     ['with class', { props: { class: 'inline-flex' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
     // Slots

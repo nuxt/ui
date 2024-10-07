@@ -21,14 +21,14 @@ prettier: true
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -48,14 +48,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-48"}
@@ -76,14 +76,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-48"}
@@ -111,14 +111,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-48"}
@@ -143,14 +143,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-48"}
@@ -175,14 +175,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-48"}
@@ -203,14 +203,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-48"}
@@ -232,14 +232,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-full" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-full"}
@@ -261,14 +261,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-48"}
@@ -298,7 +298,7 @@ This allows you to move the trigger outside of the Modal or remove it entirely.
 
 You can use the [`useModal`](/composables/use-modal) composable to open a Modal programatically.
 
-::important
+::warning
 Make sure to wrap your app with the [App](/components/app) component which uses the [ModalProvider](https://github.com/nuxt/ui/blob/v3/src/runtime/components/ModalProvider.vue) component.
 ::
 

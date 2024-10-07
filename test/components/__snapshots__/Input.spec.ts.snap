@@ -1,229 +1,229 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Input > renders with class correctly 1`] = `
-"<div class="inline-flex items-center absolute"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="inline-flex items-center absolute"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with default slot correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">Default slot
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">Default slot
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with disabled correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" disabled="" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" disabled="" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with file type correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="file" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 file:mr-1.5 file:font-medium file:text-gray-500 dark:file:text-gray-400 file:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
-  <!--v-if-->
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Input > renders with gray variant ghost correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white hover:bg-gray-100 focus:bg-gray-100 disabled:bg-transparent dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:disabled:bg-transparent" autocomplete="off">
-  <!--v-if-->
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Input > renders with gray variant none correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white" autocomplete="off">
-  <!--v-if-->
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Input > renders with gray variant outline correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-900 dark:focus-visible:ring-white" autocomplete="off">
-  <!--v-if-->
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Input > renders with gray variant soft correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-gray-50 hover:bg-gray-100 focus:bg-gray-100 disabled:bg-gray-50 dark:bg-gray-800/50 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:disabled:bg-gray-800/50" autocomplete="off">
-  <!--v-if-->
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Input > renders with gray variant subtle correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-900 dark:focus-visible:ring-white" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="file" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] file:mr-1.5 file:font-medium file:text-[--ui-text-muted] file:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with icon correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary] pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-[--ui-text-dimmed] size-5" aria-hidden="true"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with id correctly 1`] = `
-"<div class="relative inline-flex items-center"><input id="id" type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="relative inline-flex items-center"><input id="id" type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with leading and icon correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary] pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-[--ui-text-dimmed] size-5" aria-hidden="true"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with leading slot correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5">Leading slot</span>
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary] pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5">Leading slot</span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with leadingIcon correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary] pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-[--ui-text-dimmed] size-5" aria-hidden="true"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with loading correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:arrow-path-20-solid shrink-0 text-gray-400 dark:text-gray-500 size-5 animate-spin" aria-hidden="true"></span></span>
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary] pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:arrow-path-20-solid shrink-0 text-[--ui-text-dimmed] size-5 animate-spin" aria-hidden="true"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with loadingIcon correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:sparkles shrink-0 text-gray-400 dark:text-gray-500 size-5 animate-spin" aria-hidden="true"></span></span>
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary] pl-9" autocomplete="off"><span class="absolute inset-y-0 start-0 flex items-center pl-2.5"><span class="iconify i-heroicons:sparkles shrink-0 text-[--ui-text-dimmed] size-5 animate-spin" aria-hidden="true"></span></span>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with name correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" name="name" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" name="name" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with neutral variant ghost correctly 1`] = `
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] hover:bg-[--ui-bg-elevated] focus:bg-[--ui-bg-elevated] disabled:bg-transparent dark:disabled:bg-transparent" autocomplete="off">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with neutral variant none correctly 1`] = `
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted]" autocomplete="off">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with neutral variant outline correctly 1`] = `
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-border-inverted]" autocomplete="off">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with neutral variant soft correctly 1`] = `
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg-elevated]/50 hover:bg-[--ui-bg-elevated] focus:bg-[--ui-bg-elevated] disabled:bg-[--ui-bg-elevated]/50" autocomplete="off">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with neutral variant subtle correctly 1`] = `
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg-elevated] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-border-inverted]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with placeholder correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" placeholder="Search..." class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" placeholder="Search..." class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with primary variant ghost correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white hover:bg-gray-100 focus:bg-gray-100 disabled:bg-transparent dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:disabled:bg-transparent" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] hover:bg-[--ui-bg-elevated] focus:bg-[--ui-bg-elevated] disabled:bg-transparent dark:disabled:bg-transparent" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with primary variant none correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with primary variant outline correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with primary variant soft correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-gray-50 hover:bg-gray-100 focus:bg-gray-100 disabled:bg-gray-50 dark:bg-gray-800/50 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:disabled:bg-gray-800/50" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg-elevated]/50 hover:bg-[--ui-bg-elevated] focus:bg-[--ui-bg-elevated] disabled:bg-[--ui-bg-elevated]/50" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with primary variant subtle correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg-elevated] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with required correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" required="" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" required="" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with size lg correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with size md correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with size sm correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-xs gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-xs gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with size xl correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with size xs correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with trailing and icon correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 pr-9" autocomplete="off">
-  <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pr-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary] pr-9" autocomplete="off">
+  <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pr-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-[--ui-text-dimmed] size-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
 exports[`Input > renders with trailing slot correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 pr-9" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary] pr-9" autocomplete="off">
   <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pr-2.5">Trailing slot</span>
 </div>"
 `;
 
 exports[`Input > renders with trailingIcon correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 pr-9" autocomplete="off">
-  <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pr-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-gray-400 dark:text-gray-500 size-5" aria-hidden="true"></span></span>
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary] pr-9" autocomplete="off">
+  <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pr-2.5"><span class="iconify i-heroicons:magnifying-glass shrink-0 text-[--ui-text-dimmed] size-5" aria-hidden="true"></span></span>
 </div>"
 `;
 
 exports[`Input > renders with type correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="password" class="w-full rounded-md border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="password" class="w-full rounded-md border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary]" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with ui correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 rounded-full" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full border-0 placeholder-[--ui-text-dimmed] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-primary] rounded-full" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"

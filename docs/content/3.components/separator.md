@@ -74,13 +74,13 @@ props:
 
 ### Color
 
-Use the `color` prop to change the color of the Separator. Defaults to `gray`.
+Use the `color` prop to change the color of the Separator. Defaults to `neutral`.
 
 ::component-code
 ---
 class: 'p-8'
 props:
-  color: 'primary'
+  color: primary
   type: solid
 ---
 ::
@@ -105,7 +105,7 @@ Use the `size` prop to change the size of the Separator. Defaults to `xs`.
 ---
 class: 'p-8'
 props:
-  size: 'lg'
+  size: lg
 ---
 ::
 

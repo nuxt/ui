@@ -2,7 +2,7 @@
 const statuses = ['online', 'away', 'busy', 'offline']
 const status = ref(statuses[0])
 
-const color = computed(() => status.value ? { online: 'green', away: 'amber', busy: 'red', offline: 'gray' }[status.value] as any : 'online')
+const color = computed(() => status.value ? { online: 'success', away: 'warning', busy: 'error', offline: 'neutral' }[status.value] as any : 'online')
 
 const show = computed(() => status.value !== 'offline')
 

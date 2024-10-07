@@ -114,8 +114,8 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
 <template>
   <div class="my-5">
     <div v-if="preview">
-      <div class="border border-gray-200 dark:border-gray-700 relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source }]">
-        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-gray-200 dark:border-gray-700">
+      <div class="border border-[--ui-color-neutral-200] dark:border-[--ui-color-neutral-700] relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source }]">
+        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-[--ui-color-neutral-200] dark:border-[--ui-color-neutral-700]">
           <slot name="options" />
 
           <UFormField
@@ -124,10 +124,10 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
             :label="option.label"
             :name="option.name"
             size="sm"
-            class="inline-flex ring ring-gray-300 dark:ring-gray-700 rounded"
+            class="inline-flex ring ring-[--ui-border-accented] rounded"
             :ui="{
-              wrapper: 'bg-gray-50 dark:bg-gray-800/50 rounded-l flex border-r border-gray-300 dark:border-gray-700',
-              label: 'text-gray-500 dark:text-gray-400 px-2 py-1.5',
+              wrapper: 'bg-[--ui-bg-elevated]/50 rounded-l flex border-r border-[--ui-border-accented]',
+              label: 'text-[--ui-text-muted] px-2 py-1.5',
               container: 'mt-0'
             }"
           >
@@ -137,7 +137,7 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
               :items="option.items"
               :search-input="false"
               :value-key="option.name.toLowerCase().endsWith('color') ? 'value' : undefined"
-              color="gray"
+              color="neutral"
               variant="soft"
               class="rounded rounded-l-none min-w-12"
               :multiple="option.multiple"
@@ -158,7 +158,7 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
             <UInput
               v-else
               :model-value="get(optionsValues, option.name)"
-              color="gray"
+              color="neutral"
               variant="soft"
               :ui="{ base: 'rounded rounded-l-none min-w-12' }"
               @update:model-value="set(optionsValues, option.name, $event)"
