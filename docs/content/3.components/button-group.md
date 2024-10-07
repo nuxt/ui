@@ -17,11 +17,11 @@ prettier: true
 slots:
   default: |
 
-    <UButton color="gray" variant="subtle" label="Button" />
-    <UButton color="gray" variant="outline" icon="i-heroicons-chevron-down-20-solid" />
+    <UButton color="neutral" variant="subtle" label="Button" />
+    <UButton color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid" />
 ---
-:u-button{color="gray" variant="subtle" label="Button"}
-:u-button{color="gray" variant="outline" icon="i-heroicons-chevron-down-20-solid"}
+:u-button{color="neutral" variant="subtle" label="Button"}
+:u-button{color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid"}
 ::
 
 ### Size
@@ -36,11 +36,11 @@ props:
 slots:
   default: |
 
-    <UButton color="gray" variant="subtle" label="Button" />
-    <UButton color="gray" variant="outline" icon="i-heroicons-chevron-down-20-solid" />
+    <UButton color="neutral" variant="subtle" label="Button" />
+    <UButton color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid" />
 ---
-:u-button{color="gray" variant="subtle" label="Button"}
-:u-button{color="gray" variant="outline" icon="i-heroicons-chevron-down-20-solid"}
+:u-button{color="neutral" variant="subtle" label="Button"}
+:u-button{color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid"}
 ::
 
 ### Orientation
@@ -55,11 +55,11 @@ props:
 slots:
   default: |
 
-    <UButton color="gray" variant="subtle" label="Submit" />
-    <UButton color="gray" variant="outline" label="Cancel" />
+    <UButton color="neutral" variant="subtle" label="Submit" />
+    <UButton color="neutral" variant="outline" label="Cancel" />
 ---
-:u-button{color="gray" variant="subtle" label="Submit"}
-:u-button{color="gray" variant="outline" label="Cancel"}
+:u-button{color="neutral" variant="subtle" label="Submit"}
+:u-button{color="neutral" variant="outline" label="Cancel"}
 ::
 
 ## Examples
@@ -74,12 +74,12 @@ prettier: true
 slots:
   default: |
 
-    <UInput color="gray" variant="outline" placeholder="Enter token" />
+    <UInput color="neutral" variant="outline" placeholder="Enter token" />
 
-    <UButton color="gray" variant="subtle" icon="i-heroicons-clipboard-document" />
+    <UButton color="neutral" variant="subtle" icon="i-heroicons-clipboard-document" />
 ---
-:u-input{color="gray" variant="outline" placeholder="Enter token"}
-:u-button{color="gray" variant="subtle" icon="i-heroicons-clipboard-document"}
+:u-input{color="neutral" variant="outline" placeholder="Enter token"}
+:u-button{color="neutral" variant="subtle" icon="i-heroicons-clipboard-document"}
 ::
 
 ### With tooltip

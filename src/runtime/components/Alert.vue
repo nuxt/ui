@@ -31,7 +31,7 @@ export interface AlertProps {
   actions?: ButtonProps[]
   /**
    * Display a close button to dismiss the alert.
-   * `{ size: 'md', color: 'gray', variant: 'link' }`{lang="ts-type"}
+   * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @emits `close`
    * @defaultValue false
    */
@@ -117,7 +117,7 @@ const ui = computed(() => alert({
           v-if="close"
           :icon="closeIcon || appConfig.ui.icons.close"
           size="md"
-          color="gray"
+          color="neutral"
           variant="link"
           aria-label="Close"
           v-bind="typeof close === 'object' ? close : undefined"

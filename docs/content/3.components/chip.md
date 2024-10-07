@@ -16,9 +16,9 @@ prettier: true
 slots:
   default: |
 
-    <UButton icon="i-heroicons-envelope" color="gray" variant="subtle" />
+    <UButton icon="i-heroicons-envelope" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-heroicons-envelope" color="gray" variant="subtle"}
+:u-button{icon="i-heroicons-envelope" color="neutral" variant="subtle"}
 ::
 
 ### Color
@@ -29,13 +29,13 @@ Use the `color` prop to change the color of the Chip.
 ---
 prettier: true
 props:
-  color: gray
+  color: neutral
 slots:
   default: |
 
-    <UButton icon="i-heroicons-envelope" color="gray" variant="subtle" />
+    <UButton icon="i-heroicons-envelope" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-heroicons-envelope" color="gray" variant="subtle"}
+:u-button{icon="i-heroicons-envelope" color="neutral" variant="subtle"}
 ::
 
 ### Size
@@ -50,9 +50,9 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-heroicons-envelope" color="gray" variant="subtle" />
+    <UButton icon="i-heroicons-envelope" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-heroicons-envelope" color="gray" variant="subtle"}
+:u-button{icon="i-heroicons-envelope" color="neutral" variant="subtle"}
 ::
 
 ### Text
@@ -68,9 +68,9 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-heroicons-envelope" color="gray" variant="subtle" />
+    <UButton icon="i-heroicons-envelope" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-heroicons-envelope" color="gray" variant="subtle"}
+:u-button{icon="i-heroicons-envelope" color="neutral" variant="subtle"}
 ::
 
 ### Position
@@ -85,9 +85,9 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-heroicons-envelope" color="gray" variant="subtle" />
+    <UButton icon="i-heroicons-envelope" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-heroicons-envelope" color="gray" variant="subtle"}
+:u-button{icon="i-heroicons-envelope" color="neutral" variant="subtle"}
 ::
 
 ### Inset

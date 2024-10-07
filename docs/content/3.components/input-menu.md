@@ -266,7 +266,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  color: gray
+  color: neutral
   highlight: true
   items:
     - Backlog
@@ -295,7 +295,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  color: gray
+  color: neutral
   variant: subtle
   highlight: false
   items:

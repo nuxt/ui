@@ -41,7 +41,7 @@ Use the `color` prop to change the ring color when the Textarea is focused.
 ignore:
   - placeholder
 props:
-  color: gray
+  color: neutral
   highlight: true
   placeholder: 'Type something...'
 ---
@@ -60,7 +60,7 @@ Use the `variant` prop to change the variant of the Textarea.
 ignore:
   - placeholder
 props:
-  color: gray
+  color: neutral
   variant: subtle
   highlight: false
   placeholder: 'Type something...'

@@ -37,7 +37,7 @@ export interface ModalProps extends DialogRootProps {
   portal?: boolean
   /**
    * Display a close button to dismiss the modal.
-   * `{ size: 'md', color: 'gray', variant: 'ghost' }`{lang="ts-type"}
+   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
   close?: ButtonProps | boolean
@@ -138,7 +138,7 @@ const ui = computed(() => modal({
                     v-if="close"
                     :icon="closeIcon || appConfig.ui.icons.close"
                     size="md"
-                    color="gray"
+                    color="neutral"
                     variant="ghost"
                     aria-label="Close"
                     v-bind="typeof close === 'object' ? close : undefined"

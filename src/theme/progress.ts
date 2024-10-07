@@ -3,9 +3,9 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'gap-2',
-    base: 'relative overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700',
+    base: 'relative overflow-hidden rounded-full bg-[--ui-bg-accented]',
     indicator: 'rounded-full size-full transition-transform duration-200 ease-out',
-    status: 'flex justify-end text-gray-400 dark:text-gray-500 transition-[width] duration-200',
+    status: 'flex justify-end text-[--ui-text-dimmed] transition-[width] duration-200',
     steps: 'grid items-end',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity'
   },
@@ -18,12 +18,12 @@ export default (options: Required<ModuleOptions>) => ({
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `bg-${color}-500 dark:bg-${color}-400`,
-        steps: `text-${color}-500 dark:text-${color}-400`
+        indicator: `bg-[--ui-${color}]`,
+        steps: `text-[--ui-${color}]`
       }])),
-      gray: {
-        indicator: 'bg-gray-900 dark:bg-white',
-        steps: 'text-white dark:text-gray-900'
+      neutral: {
+        indicator: 'bg-[--ui-bg-inverted]',
+        steps: 'text-[--ui-bg]'
       }
     },
     size: {
@@ -61,7 +61,7 @@ export default (options: Required<ModuleOptions>) => ({
         step: 'opacity-100'
       },
       first: {
-        step: 'opacity-100 text-gray-500 dark:text-gray-400'
+        step: 'opacity-100 text-[--ui-text-muted]'
       },
       other: {
         step: 'opacity-0'

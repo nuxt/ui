@@ -6,6 +6,9 @@ import { addCustomTab, startSubprocess } from '@nuxt/devtools-kit'
 import sirv from 'sirv'
 import { setupDevtoolsClient } from './devtools/rpc'
 import { getPort } from 'get-port-please'
+import { pick } from './runtime/utils'
+
+export type * from './runtime/types'
 
 export interface ModuleOptions {
   /**
@@ -20,10 +23,16 @@ export interface ModuleOptions {
    */
   fonts?: boolean
 
+  /**
+   * Enable or disable `@nuxtjs/color-mode` module
+   * @defaultValue true
+   */
+  colorMode?: boolean
+
   theme?: {
     /**
      * Colors to generate classes for (defaults to TailwindCSS colors)
-     * @defaultValue ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
+     * @defaultValue ['primary', 'secondary', 'success', 'info', 'warning', 'error']
      */
     colors?: string[]
 
@@ -46,6 +55,7 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     prefix: 'U',
     fonts: true,
+    colorMode: true,
     theme: {
       colors: undefined,
       transitions: true
@@ -55,18 +65,22 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url)
 
     options.theme = options.theme || {}
-    options.theme.colors = options.theme.colors?.length ? [...new Set(['primary', 'error', ...options.theme.colors])] : ['primary', 'error', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
+    options.theme.colors = options.theme.colors?.length ? [...new Set(['primary', ...options.theme.colors])] : ['primary', 'secondary', 'success', 'info', 'warning', 'error']
 
     nuxt.options.ui = options
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
-      colors: {
+      colors: pick({
         primary: 'green',
+        secondary: 'blue',
+        success: 'green',
+        info: 'blue',
+        warning: 'yellow',
         error: 'red',
-        gray: 'slate'
-      },
+        neutral: 'slate'
+      }, [...(options.theme?.colors || []), 'neutral' as any]),
       icons
     })
 
@@ -90,8 +104,12 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     await registerModule('@nuxt/icon', { cssLayer: 'components' })
-    await registerModule('@nuxt/fonts', { experimental: { processCSSVariables: true } })
-    await registerModule('@nuxtjs/color-mode', { classSuffix: '', disableTransition: true })
+    if (options.fonts) {
+      await registerModule('@nuxt/fonts', { experimental: { processCSSVariables: true } })
+    }
+    if (options.colorMode) {
+      await registerModule('@nuxtjs/color-mode', { classSuffix: '', disableTransition: true })
+    }
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
     addPlugin({ src: resolve('./runtime/plugins/modal') })

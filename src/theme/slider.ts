@@ -3,19 +3,19 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-center select-none touch-none',
-    track: 'relative bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-full grow',
+    track: 'relative bg-[--ui-bg-accented] overflow-hidden rounded-full grow',
     range: 'absolute rounded-full',
-    thumb: 'rounded-full bg-white dark:bg-gray-900 ring-2 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2'
+    thumb: 'rounded-full bg-[--ui-bg] ring-2 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        range: `bg-${color}-500 dark:bg-${color}-400`,
-        thumb: `ring-${color}-500 dark:ring-${color}-400 focus-visible:outline-${color}-500/50 dark:focus-visible:outline-${color}-400/50`
+        range: `bg-[--ui-${color}]`,
+        thumb: `ring-[--ui-${color}] focus-visible:outline-[--ui-${color}]`
       }])),
-      gray: {
-        range: 'bg-gray-900 dark:bg-white',
-        thumb: 'ring-gray-900 dark:ring-white focus-visible:outline-gray-900/50 dark:focus-visible:outline-white/50'
+      neutral: {
+        range: 'bg-[--ui-bg-inverted]',
+        thumb: 'ring-[--ui-border-inverted] focus-visible:outline-[--ui-border-inverted]/50'
       }
     },
     size: {

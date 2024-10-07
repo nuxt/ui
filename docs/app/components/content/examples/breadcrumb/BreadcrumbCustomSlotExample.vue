@@ -25,7 +25,7 @@ const items = [{
   <UBreadcrumb :items="items">
     <template #dropdown="{ item }">
       <UDropdownMenu :items="item.children">
-        <UButton :icon="item.icon" color="gray" variant="link" class="p-0.5" />
+        <UButton :icon="item.icon" color="neutral" variant="link" class="p-0.5" />
       </UDropdownMenu>
     </template>
   </UBreadcrumb>

@@ -14,7 +14,7 @@ const users = [
   <UModal v-model:open="open">
     <UButton
       label="Search users..."
-      color="gray"
+      color="neutral"
       variant="subtle"
       icon="i-heroicons-magnifying-glass"
     />

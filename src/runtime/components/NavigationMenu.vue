@@ -142,7 +142,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                     <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="item" :active="active" :index="index">
                       <UBadge
                         v-if="item.badge"
-                        color="gray"
+                        color="neutral"
                         variant="outline"
                         :size="((props.ui?.linkTrailingBadgeSize || ui.linkTrailingBadgeSize()) as BadgeProps['size'])"
                         v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"

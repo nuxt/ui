@@ -3,11 +3,11 @@
     <template #default="{ open }">
       <UButton
         icon="i-heroicons-swatch-20-solid"
-        color="gray"
+        color="neutral"
         :variant="open ? 'soft' : 'ghost'"
         square
         aria-label="Color picker"
-        :ui="{ leadingIcon: 'text-primary-500 dark:text-primary-400' }"
+        :ui="{ leadingIcon: 'text-[--ui-primary]' }"
       />
     </template>
 
@@ -24,21 +24,36 @@
 
       <fieldset class="grid grid-cols-5 gap-px">
         <legend class="text-[11px] font-bold mb-1">
-          Gray
+          Neutral
         </legend>
 
-        <ColorPickerPill v-for="color in grayColors" :key="color" :color="color" :selected="gray" @select="gray = color" />
+        <ColorPickerPill v-for="color in neutralColors" :key="color" :color="color" :selected="neutral" @select="neutral = color" />
       </fieldset>
     </template>
   </UPopover>
 </template>
 
 <script setup lang="ts">
+import colors from 'tailwindcss/colors'
+import { omit } from '#ui/utils'
+
 const appConfig = useAppConfig()
 
 // Computed
 
-const primaryColors = ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
+const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone']
+const neutral = computed({
+  get() {
+    return appConfig.ui.colors.neutral
+  },
+  set(option) {
+    appConfig.ui.colors.neutral = option
+    window.localStorage.setItem('nuxt-ui-neutral', appConfig.ui.colors.neutral)
+  }
+})
+
+const colorsToOmit = ['inherit', 'current', 'transparent', 'black', 'white', ...neutralColors]
+const primaryColors = Object.keys(omit(colors, colorsToOmit as any))
 const primary = computed({
   get() {
     return appConfig.ui.colors.primary
@@ -46,17 +61,6 @@ const primary = computed({
   set(option) {
     appConfig.ui.colors.primary = option
     window.localStorage.setItem('nuxt-ui-primary', appConfig.ui.colors.primary)
-  }
-})
-
-const grayColors = ['slate', 'cool', 'zinc', 'neutral', 'stone']
-const gray = computed({
-  get() {
-    return appConfig.ui.colors.gray
-  },
-  set(option) {
-    appConfig.ui.colors.gray = option
-    window.localStorage.setItem('nuxt-ui-gray', appConfig.ui.colors.gray)
   }
 })
 </script>

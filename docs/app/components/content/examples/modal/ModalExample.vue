@@ -9,7 +9,7 @@ defineProps<{
 <template>
   <UModal :title="`This modal was opened programmatically ${count} times`">
     <template #footer>
-      <UButton color="gray" label="Close" @click="modal.close()" />
+      <UButton color="neutral" label="Close" @click="modal.close()" />
     </template>
   </UModal>
 </template>

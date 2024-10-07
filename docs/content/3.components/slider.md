@@ -116,7 +116,7 @@ Use the `color` prop to change the color of the Slider.
 ignore:
   - defaultValue
 props:
-  color: gray
+  color: neutral
   defaultValue: 50
 ---
 ::

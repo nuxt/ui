@@ -5,21 +5,21 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative min-w-0',
     list: 'flex items-center gap-1.5',
     item: 'flex min-w-0',
-    link: 'group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary-500 dark:focus-visible:outline-primary-400',
+    link: 'group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[--ui-primary]',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
     linkLabel: 'truncate',
     separator: 'flex',
-    separatorIcon: 'shrink-0 size-5 text-gray-500 dark:text-gray-400'
+    separatorIcon: 'shrink-0 size-5 text-[--ui-text-muted]'
   },
   variants: {
     active: {
       true: {
-        link: 'text-primary-500 dark:text-primary-400 font-semibold'
+        link: 'text-[--ui-primary] font-semibold'
       },
       false: {
-        link: 'text-gray-500 dark:text-gray-400 font-medium'
+        link: 'text-[--ui-text-muted] font-medium'
       }
     },
     disabled: {
@@ -36,7 +36,7 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     to: true,
     class: {
-      link: ['hover:text-gray-700 dark:hover:text-gray-200', options.theme.transitions && 'transition-colors']
+      link: ['hover:text-[--ui-text]', options.theme.transitions && 'transition-colors']
     }
   }]
 })

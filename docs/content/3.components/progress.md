@@ -115,7 +115,7 @@ Use the `color` prop to change the color of the Slider.
 ::component-code
 ---
 props:
-  color: gray
+  color: neutral
 ---
 ::
 
