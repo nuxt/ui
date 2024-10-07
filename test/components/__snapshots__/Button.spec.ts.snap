@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Button > renders with block correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
+"<button type="button" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-[--ui-bg] bg-[--ui-primary] hover:bg-[--ui-primary]/75 disabled:bg-[--ui-primary] aria-disabled:bg-[--ui-primary] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-primary]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"

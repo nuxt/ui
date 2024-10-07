@@ -52,7 +52,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     block: {
       true: {
-        base: 'w-full',
+        base: 'w-full justify-center',
         trailingIcon: 'ms-auto'
       }
     },
