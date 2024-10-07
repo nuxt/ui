@@ -19,7 +19,7 @@ onDevtoolsClientConnected(async (client) => {
   components.value = (await rpc.getComponents()).map(component => ({ ...component, value: component.slug }))
 
   if (!component.value || !components.value.find(c => c.slug === component.value?.slug)) {
-    component.value = components.value.find(comp => comp.slug === 'accordion')
+    component.value = components.value.find(comp => comp.slug === 'button')
   }
 
   state.value.props = { ...state.value.props, ...components.value?.reduce((acc, comp) => {
@@ -31,6 +31,8 @@ onDevtoolsClientConnected(async (client) => {
     acc[comp.slug] = {} // comp.slots ?? {}
     return acc
   }, {} as Record<string, any>) }
+
+  console.log(component.value)
 })
 
 function updateRenderer() {
@@ -57,25 +59,25 @@ function onComponentLoaded(event: Event & { data?: any }) {
   state.value.props[component.value.slug] = event.data?.props
 }
 
-function onSlotHover(slot: string) {
-  const event: Event & { data?: any } = new Event('nuxt-ui-devtools:slot-hover')
-  event.data = { slot }
-  window.dispatchEvent(event)
-}
-
-function onSlotLeave(slot: string) {
-  const event: Event & { data?: any } = new Event('nuxt-ui-devtools:slot-leave')
-  event.data = { slot }
-  window.dispatchEvent(event)
-}
+// function onSlotHover(slot: string) {
+//   const event: Event & { data?: any } = new Event('nuxt-ui-devtools:slot-hover')
+//   event.data = { slot }
+//   window.dispatchEvent(event)
+// }
+//
+// function onSlotLeave(slot: string) {
+//   const event: Event & { data?: any } = new Event('nuxt-ui-devtools:slot-leave')
+//   event.data = { slot }
+//   window.dispatchEvent(event)
+// }
 
 const tabs = computed(() => {
   if (!component.value) return
   const themeCount = component.value.meta.slots ? Object.keys(component.value.meta.slots)?.length : 0
 
   return [
-    { label: 'Props', slot: 'props', icon: 'i-heroicons-cog-6-tooth', disabled: !component.value.meta.props?.length },
-    { label: 'Theme', slot: 'theme', icon: 'i-heroicons-paint-brush', disabled: !themeCount }
+    { label: 'Props', slot: 'props', icon: 'i-heroicons-cog-6-tooth', disabled: !component.value.meta.props?.length }
+    // { label: 'Theme', slot: 'theme', icon: 'i-heroicons-paint-brush', disabled: !themeCount }
   ]
 })
 
@@ -144,7 +146,7 @@ defineShortcuts({
               </div>
             </template>
 
-            <template #theme>
+            <!-- template #theme>
               <div v-for="(_value, slot) in component?.slots" :key="'slots-' + slot" class="px-3 py-5 hover:bg-gray-50 transition">
                 <UFormField :name="slot" @mouseenter="onSlotHover(slot)" @mouseleave="onSlotLeave(slot)">
                   <template #label>
@@ -155,7 +157,7 @@ defineShortcuts({
                   <UTextarea v-model="state.slots[component.slug][slot]" autoresize class="mt-2 w-full font-mono" />
                 </UFormField>
               </div>
-            </template>
+            </template -->
           </UTabs>
         </div>
       </div>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onUnmounted, onMounted, computed, reactive, resolveComponent } from 'vue'
 import { useHead } from '#imports'
+import { UButton, type ButtonProps } from '../runtime/components/Button.vue'
 
 const props = defineProps<{
   slug: string
@@ -90,11 +91,8 @@ const componentExamples: Record<string, any> = {
     }
   },
   button: {
-    component: resolveComponent('UButton'),
-    props: {
-      label: 'Click me!',
-      icon: 'i-heroicons-rocket-launch-20-solid'
-    }
+    component: UButton,
+    props: { label: 'Click me!' } as ButtonProps
   },
   buttonGroup: {
     component: resolveComponent('UButtonGroup'),
@@ -271,30 +269,30 @@ function onUpdateRenderer(event: Event & { data?: any }) {
   state.slots = { ...event.data.slots }
 }
 
-function onSlotHover(event: Event & { data?: any }) {
-  const element = window.document.querySelector(`[data-slot=${event.data.slot}]`)
-  if (element) {
-    element.classList.add('nuxt-ui-slot-highlight')
-  }
-}
+// function onSlotHover(event: Event & { data?: any }) {
+//   const element = window.document.querySelector(`[data-slot=${event.data.slot}]`)
+//   if (element) {
+//     element.classList.add('nuxt-ui-slot-highlight')
+//   }
+// }
 
-function onSlotLeave(event: Event & { data?: any }) {
-  const element = window.document.querySelector(`[data-slot=${event.data.slot}]`)
-  if (element) {
-    element.classList.remove('nuxt-ui-slot-highlight')
-  }
-}
+// function onSlotLeave(event: Event & { data?: any }) {
+//   const element = window.document.querySelector(`[data-slot=${event.data.slot}]`)
+//   if (element) {
+//     element.classList.remove('nuxt-ui-slot-highlight')
+//   }
+// }
 
 onMounted(() => {
   window.parent.addEventListener('nuxt-ui-devtools:update-renderer', onUpdateRenderer)
-  window.parent.addEventListener('nuxt-ui-devtools:slot-hover', onSlotHover)
-  window.parent.addEventListener('nuxt-ui-devtools:slot-leave', onSlotLeave)
+  // window.parent.addEventListener('nuxt-ui-devtools:slot-hover', onSlotHover)
+  // window.parent.addEventListener('nuxt-ui-devtools:slot-leave', onSlotLeave)
 })
 
 onUnmounted(() => {
   window.parent.removeEventListener('nuxt-ui-devtools:update-renderer', onUpdateRenderer)
-  window.parent.removeEventListener('nuxt-ui-devtools:slot-hover', onSlotHover)
-  window.parent.removeEventListener('nuxt-ui-devtools:slot-leave', onSlotLeave)
+  // window.parent.removeEventListener('nuxt-ui-devtools:slot-hover', onSlotHover)
+  // window.parent.removeEventListener('nuxt-ui-devtools:slot-leave', onSlotLeave)
 })
 
 onMounted(() => {
@@ -325,10 +323,10 @@ onMounted(() => {
   background-size: 40px 40px;
 }
 
-.nuxt-ui-slot-highlight {
-  outline-color: blue !important;
-  outline-width: 1.5px !important;
-  outline-offset: 2px !important;
-  outline-style: dashed !important;
-}
+/* .nuxt-ui-slot-highlight { */
+/*   outline-color: blue !important; */
+/*   outline-width: 1.5px !important; */
+/*   outline-offset: 2px !important; */
+/*   outline-style: dashed !important; */
+/* } */
 </style>
