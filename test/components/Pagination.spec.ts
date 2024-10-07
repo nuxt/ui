@@ -26,10 +26,10 @@ describe('Pagination', () => {
     ['with lastIcon', { props: { ...props, lastIcon: 'i-heroicons-arrow-right' } }],
     ['with ellipsisIcon', { props: { ...props, ellipsisIcon: 'i-heroicons-ellipsis-vertical', siblingCount: 1, showEdges: true, page: 5 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant, color: 'primary' } }]),
     ...variants.map((activeVariant: string) => [`with primary active variant ${activeVariant}`, { props: { ...props, activeVariant } }]),
-    ...variants.map((activeVariant: string) => [`with gray active variant ${activeVariant}`, { props: { ...props, activeVariant, color: 'gray' } }]),
+    ...variants.map((activeVariant: string) => [`with neutral active variant ${activeVariant}`, { props: { ...props, activeVariant, color: 'neutral' } }]),
     ['with class', { props: { ...props, class: 'relative' } }],
     ['with ui', { props: { ...props, ui: { list: 'gap-3' } } }],
     // Slots

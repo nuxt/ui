@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Card > renders with as correctly 1`] = `
-"<section class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 divide-y divide-gray-200 dark:divide-gray-800 rounded-lg shadow">
+"<section class="bg-[--ui-bg] ring ring-[--ui-border] divide-y divide-[--ui-border] rounded-lg shadow">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -9,7 +9,7 @@ exports[`Card > renders with as correctly 1`] = `
 `;
 
 exports[`Card > renders with class correctly 1`] = `
-"<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 divide-y divide-gray-200 dark:divide-gray-800 shadow rounded-xl">
+"<div class="bg-[--ui-bg] ring ring-[--ui-border] divide-y divide-[--ui-border] shadow rounded-xl">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -17,7 +17,7 @@ exports[`Card > renders with class correctly 1`] = `
 `;
 
 exports[`Card > renders with default slot correctly 1`] = `
-"<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 divide-y divide-gray-200 dark:divide-gray-800 rounded-lg shadow">
+"<div class="bg-[--ui-bg] ring ring-[--ui-border] divide-y divide-[--ui-border] rounded-lg shadow">
   <!--v-if-->
   <div class="p-4 sm:p-6">Default slot</div>
   <!--v-if-->
@@ -25,7 +25,7 @@ exports[`Card > renders with default slot correctly 1`] = `
 `;
 
 exports[`Card > renders with footer slot correctly 1`] = `
-"<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 divide-y divide-gray-200 dark:divide-gray-800 rounded-lg shadow">
+"<div class="bg-[--ui-bg] ring ring-[--ui-border] divide-y divide-[--ui-border] rounded-lg shadow">
   <!--v-if-->
   <!--v-if-->
   <div class="p-4 sm:px-6">Footer slot</div>
@@ -33,7 +33,7 @@ exports[`Card > renders with footer slot correctly 1`] = `
 `;
 
 exports[`Card > renders with header slot correctly 1`] = `
-"<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 divide-y divide-gray-200 dark:divide-gray-800 rounded-lg shadow">
+"<div class="bg-[--ui-bg] ring ring-[--ui-border] divide-y divide-[--ui-border] rounded-lg shadow">
   <div class="p-4 sm:px-6">Header slot</div>
   <!--v-if-->
   <!--v-if-->
@@ -41,7 +41,7 @@ exports[`Card > renders with header slot correctly 1`] = `
 `;
 
 exports[`Card > renders with ui correctly 1`] = `
-"<div class="bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 divide-y divide-gray-200 dark:divide-gray-800 rounded-lg shadow">
+"<div class="bg-[--ui-bg] ring ring-[--ui-border] divide-y divide-[--ui-border] rounded-lg shadow">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->

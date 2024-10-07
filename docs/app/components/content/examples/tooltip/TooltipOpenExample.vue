@@ -8,6 +8,6 @@ defineShortcuts({
 
 <template>
   <UTooltip v-model:open="open" text="Open on GitHub">
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
   </UTooltip>
 </template>

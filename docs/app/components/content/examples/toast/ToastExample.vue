@@ -14,5 +14,5 @@ function addToCalendar() {
 </script>
 
 <template>
-  <UButton label="Add to calendar" color="gray" variant="outline" icon="i-heroicons-plus" @click="addToCalendar" />
+  <UButton label="Add to calendar" color="neutral" variant="outline" icon="i-heroicons-plus" @click="addToCalendar" />
 </template>

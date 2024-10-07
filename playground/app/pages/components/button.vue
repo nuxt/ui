@@ -51,7 +51,7 @@ function onClick() {
         icon="i-heroicons-rocket-launch"
         :label="upperFirst(variant)"
         :variant="variant"
-        color="gray"
+        color="neutral"
       />
     </div>
     <div class="flex items-center gap-2 ml-[-129px]">

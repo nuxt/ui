@@ -18,7 +18,7 @@ const items = [
 <template>
   <UAccordion :items="items">
     <template #content="{ item }">
-      <p class="pb-3.5 text-sm text-gray-500 dark:text-gray-400">
+      <p class="pb-3.5 text-sm text-[--ui-text-muted]">
         This is the {{ item.label }} panel.
       </p>
     </template>

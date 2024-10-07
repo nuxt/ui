@@ -14,7 +14,7 @@ describe('Badge', () => {
     ['with class', { props: { label: 'Badge', class: 'rounded-full font-bold' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Badge', size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { label: 'Badge', variant } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { label: 'Badge', variant, color: 'gray' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { label: 'Badge', variant, color: 'neutral' } }]),
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BadgeProps, slots?: Partial<BadgeSlots> }) => {

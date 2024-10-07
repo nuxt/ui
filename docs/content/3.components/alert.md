@@ -78,7 +78,7 @@ ignore:
   - description
   - icon
 props:
-  color: gray
+  color: neutral
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
   icon: 'i-heroicons-command-line'
@@ -97,7 +97,7 @@ ignore:
   - description
   - icon
 props:
-  color: gray
+  color: neutral
   variant: solid
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
@@ -186,7 +186,7 @@ props:
   actions:
     - label: Action 1
     - label: Action 2
-      color: gray
+      color: neutral
       variant: subtle
 ---
 ::

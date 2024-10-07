@@ -2,7 +2,7 @@
   <ClientOnly v-if="!colorMode?.forced">
     <UButton
       :icon="isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light"
-      color="gray"
+      color="neutral"
       variant="ghost"
       v-bind="{
         ...$attrs

@@ -57,7 +57,7 @@ const items = [{
         class="w-96"
       >
         <template #custom="{ item }">
-          <span class="text-gray-500 dark:text-gray-400">Custom: {{ item.content }}</span>
+          <span class="text-[--ui-text-muted]">Custom: {{ item.content }}</span>
         </template>
       </UTabs>
     </div>

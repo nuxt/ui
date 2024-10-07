@@ -25,14 +25,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block />
 
   content: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block}
 
 #content
 :placeholder{class="h-48"}
@@ -53,14 +53,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block />
 
   content: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-down-20-solid" block}
 
 #content
 :placeholder{class="h-48"}

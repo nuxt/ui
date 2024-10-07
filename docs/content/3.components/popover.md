@@ -21,14 +21,14 @@ prettier: true
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="size-48 m-4 inline-flex" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="size-48 m-4 inline-flex"}
@@ -50,14 +50,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="size-48 m-4 inline-flex" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="size-48 m-4 inline-flex"}
@@ -83,14 +83,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="size-48 m-4 inline-flex" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="size-48 m-4 inline-flex"}
@@ -121,14 +121,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="size-48 m-4 inline-flex" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="size-48 m-4 inline-flex"}
@@ -148,14 +148,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="size-48 m-4 inline-flex" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="size-48 m-4 inline-flex"}

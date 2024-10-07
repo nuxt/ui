@@ -16,26 +16,26 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
       </UButtonGroup>
 
       <UButtonGroup>
-        <UButton color="gray" variant="outline">
+        <UButton color="neutral" variant="outline">
           Button
         </UButton>
-        <UButton color="gray" variant="subtle">
+        <UButton color="neutral" variant="subtle">
           Button
         </UButton>
-        <UButton color="gray" variant="outline">
+        <UButton color="neutral" variant="outline">
           Button
         </UButton>
       </UButtonGroup>
 
       <UButtonGroup orientation="vertical">
-        <UButton color="gray" variant="outline">
+        <UButton color="neutral" variant="outline">
           Button
         </UButton>
         <UInput placeholder="Search..." />
       </UButtonGroup>
 
       <UButtonGroup>
-        <UButton color="gray" variant="outline">
+        <UButton color="neutral" variant="outline">
           Button
         </UButton>
         <UInput placeholder="Search..." />
@@ -43,7 +43,7 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
 
       <UButtonGroup>
         <UInput placeholder="Search..." />
-        <UButton color="gray" variant="outline">
+        <UButton color="neutral" variant="outline">
           Button
         </UButton>
       </UButtonGroup>
@@ -52,7 +52,7 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
     <div class="flex gap-4 items-center justify-center">
       <UButtonGroup v-for="size in sizes" :key="size" :size="size">
         <UInput placeholder="Search..." />
-        <UButton color="gray" variant="outline">
+        <UButton color="neutral" variant="outline">
           Button
         </UButton>
       </UButtonGroup>

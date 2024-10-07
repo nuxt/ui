@@ -19,6 +19,6 @@ const items = [{
 
 <template>
   <UDropdownMenu v-model:open="open" :items="items" class="w-48">
-    <UButton label="Open" color="gray" variant="outline" icon="i-heroicons-bars-3" />
+    <UButton label="Open" color="neutral" variant="outline" icon="i-heroicons-bars-3" />
   </UDropdownMenu>
 </template>

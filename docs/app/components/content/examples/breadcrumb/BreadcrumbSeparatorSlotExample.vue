@@ -14,7 +14,7 @@ const items = [{
 <template>
   <UBreadcrumb :items="items">
     <template #separator>
-      <span class="mx-2 text-gray-500 dark:text-gray-400">/</span>
+      <span class="mx-2 text-[--ui-text-muted]">/</span>
     </template>
   </UBreadcrumb>
 </template>

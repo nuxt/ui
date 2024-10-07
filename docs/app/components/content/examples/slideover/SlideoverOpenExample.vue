@@ -8,7 +8,7 @@ defineShortcuts({
 
 <template>
   <USlideover v-model:open="open">
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
     <template #content>
       <Placeholder class="h-full m-4" />

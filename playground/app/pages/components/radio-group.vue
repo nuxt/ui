@@ -25,7 +25,7 @@ const itemsWithDescription = [
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 ml-[100px]">
       <URadioGroup :items="items" default-value="1" />
-      <URadioGroup :items="items" color="gray" default-value="1" />
+      <URadioGroup :items="items" color="neutral" default-value="1" />
       <URadioGroup :items="items" color="error" default-value="2" />
       <URadioGroup :items="literalOptions" />
       <URadioGroup :items="items" label="Disabled" disabled />

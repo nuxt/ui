@@ -22,7 +22,7 @@ const items = [
       {
         label: 'Colors',
         icon: 'i-heroicons-swatch',
-        description: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+        description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
       },
       {
         label: 'Theme',

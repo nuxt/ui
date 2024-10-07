@@ -5,11 +5,11 @@ exports[`Modal > renders with body slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
     <!--v-if-->
-    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -27,11 +27,11 @@ exports[`Modal > renders with class correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800 bg-gray-50 dark:bg-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border] bg-[--ui-bg-elevated]">
   <div class="px-4 py-5 sm:px-6">
     <!--v-if-->
-    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -49,8 +49,8 @@ exports[`Modal > renders with close slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
     <!--v-if-->
     <!--v-if-->Close slot
@@ -68,11 +68,11 @@ exports[`Modal > renders with closeIcon correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
     <!--v-if-->
-    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:trash shrink-0 size-5" aria-hidden="true"></span>
+    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:trash shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -90,8 +90,8 @@ exports[`Modal > renders with content slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">Content slot</div>
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">Content slot</div>
 
 
 <!--teleport end-->"
@@ -102,11 +102,11 @@ exports[`Modal > renders with default slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="radix-vue-dialog-content-v-0-0-0" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-2" aria-labelledby="radix-vue-dialog-title-v-0-0-1" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="radix-vue-dialog-content-v-0-0-0" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-2" aria-labelledby="radix-vue-dialog-title-v-0-0-1" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
     <!--v-if-->
-    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -124,11 +124,11 @@ exports[`Modal > renders with description correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
-    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-gray-900 dark:text-white font-semibold">Title</h2>
-    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-gray-500 dark:text-gray-400 text-sm">Description</p><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-[--ui-text-highlighted] font-semibold">Title</h2>
+    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-[--ui-text-muted] text-sm">Description</p><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -146,11 +146,11 @@ exports[`Modal > renders with description slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
     <!--v-if-->
-    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-gray-500 dark:text-gray-400 text-sm">Description slot</p><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-[--ui-text-muted] text-sm">Description slot</p><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -168,11 +168,11 @@ exports[`Modal > renders with footer slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
     <!--v-if-->
-    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -190,11 +190,11 @@ exports[`Modal > renders with fullscreen correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] inset-0">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] inset-0">
   <div class="px-4 py-5 sm:px-6">
-    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-gray-900 dark:text-white font-semibold">Title</h2>
-    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-gray-500 dark:text-gray-400 text-sm">Description</p><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-[--ui-text-highlighted] font-semibold">Title</h2>
+    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-[--ui-text-muted] text-sm">Description</p><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -212,8 +212,8 @@ exports[`Modal > renders with header slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">Header slot</div>
   <!--v-if-->
   <!--v-if-->
@@ -228,11 +228,11 @@ exports[`Modal > renders with open correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800" style="pointer-events: auto;">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]" style="pointer-events: auto;">
   <div class="px-4 py-5 sm:px-6">
     <!--v-if-->
-    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -250,11 +250,11 @@ exports[`Modal > renders with title correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
-    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-gray-900 dark:text-white font-semibold">Title</h2>
-    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-[--ui-text-highlighted] font-semibold">Title</h2>
+    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -272,11 +272,11 @@ exports[`Modal > renders with title slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
-    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-gray-900 dark:text-white font-semibold">Title slot</h2>
-    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-[--ui-text-highlighted] font-semibold">Title slot</h2>
+    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -294,11 +294,11 @@ exports[`Modal > renders with ui correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
     <!--v-if-->
-    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-2"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-2"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -316,11 +316,11 @@ exports[`Modal > renders without close correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
-    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-gray-900 dark:text-white font-semibold">Title</h2>
-    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-gray-500 dark:text-gray-400 text-sm">Description</p>
+    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-[--ui-text-highlighted] font-semibold">Title</h2>
+    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-[--ui-text-muted] text-sm">Description</p>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -336,10 +336,10 @@ exports[`Modal > renders without overlay correctly 1`] = `
 
 
 <!--v-if-->
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
-    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-gray-900 dark:text-white font-semibold">Title</h2>
-    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-gray-500 dark:text-gray-400 text-sm">Description</p><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-[--ui-text-highlighted] font-semibold">Title</h2>
+    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-[--ui-text-muted] text-sm">Description</p><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -357,11 +357,11 @@ exports[`Modal > renders without transition correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 flex flex-col focus:outline-none top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-gray-200 dark:ring-gray-800">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 z-50 bg-[--ui-bg-elevated]/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="radix-vue-dialog-description-v-0-0-1" aria-labelledby="radix-vue-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed z-50 w-full h-dvh bg-[--ui-bg] divide-y divide-[--ui-border] flex flex-col focus:outline-none top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-lg sm:shadow-lg sm:ring ring-[--ui-border]">
   <div class="px-4 py-5 sm:px-6">
-    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-gray-900 dark:text-white font-semibold">Title</h2>
-    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-gray-500 dark:text-gray-400 text-sm">Description</p><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 focus-visible:bg-gray-100 disabled:bg-transparent aria-disabled:bg-transparent dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800 dark:hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+    <h2 id="radix-vue-dialog-title-v-0-0-0" class="text-[--ui-text-highlighted] font-semibold">Title</h2>
+    <p id="radix-vue-dialog-description-v-0-0-1" class="mt-1 text-[--ui-text-muted] text-sm">Description</p><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 right-4"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
