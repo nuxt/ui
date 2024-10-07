@@ -1,3 +1,4 @@
+import type { StandardSchema } from '@standard-schema/spec'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
@@ -71,7 +72,7 @@ export function isValibotSchema(schema: any): schema is ValibotSchema | ValibotS
   return '_run' in schema || (typeof schema === 'function' && 'schema' in schema)
 }
 
-export async function getValibotError(
+export async function getValibotErrors(
   state: any,
   schema: ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>
 ): Promise<FormError[]> {
@@ -79,6 +80,21 @@ export async function getValibotError(
   return result.issues?.map(issue => ({
     // We know that the key for a form schema is always a string or a number
     name: issue.path?.map((item: any) => item.key).join('.') || '',
+    message: issue.message
+  })) || []
+}
+
+export function isStandardSchema(schema: any): schema is StandardSchema {
+  return '~standard' in schema
+}
+
+export async function getStandardErrors(
+  state: any,
+  schema: StandardSchema
+): Promise<FormError[]> {
+  const result = await schema['~validate']({ value: state })
+  return result.issues?.map(issue => ({
+    name: issue.path?.map(item => typeof item === 'object' ? item.key : item).join('.') || '',
     message: issue.message
   })) || []
 }
