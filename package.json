@@ -45,8 +45,8 @@
     "release": "release-it --preRelease=alpha --npm.tag=next"
   },
   "dependencies": {
-    "@nuxt/fonts": "^0.9.2",
-    "@nuxt/icon": "^1.5.4",
+    "@nuxt/fonts": "^0.10.0",
+    "@nuxt/icon": "^1.5.5",
     "@nuxt/kit": "^3.13.2",
     "@nuxt/schema": "^3.13.2",
     "@nuxtjs/color-mode": "^3.5.1",
