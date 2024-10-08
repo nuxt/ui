@@ -28,12 +28,6 @@ export default defineNuxtConfig({
     }
   },
 
-  ui: {
-    theme: {
-      colors: ['gray', 'red']
-    }
-  },
-
   content: {
     highlight: {
       langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']

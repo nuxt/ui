@@ -54,13 +54,13 @@ function addArrayItem() {
 <template>
   <UFormField :name="name" class="" :ui="{ wrapper: 'mb-2' }" :class="{ 'opacity-70 cursor-not-allowed': !inputType }">
     <template #label>
-      <p v-if="name" class="font-mono font-bold px-2 py-1 border-gray-300 border border-dashed rounded bg-gray-50">
+      <p v-if="name" class="font-mono font-bold px-2 py-1 border-neutral-200 dark:border-neutral-500 dark:text-neutral-100 border border-dashed rounded bg-neutral-50 dark:bg-neutral-700">
         {{ name }}
       </p>
     </template>
 
     <template #description>
-      <MDC v-if="description" :value="description" class="text-gray-600 dark:text-gray-300 mt-1" />
+      <MDC v-if="description" :value="description" class="text-neutral-600 dark:text-neutral-400 mt-1" />
     </template>
 
     <span v-if="!schema" />
@@ -70,11 +70,11 @@ function addArrayItem() {
     <UCheckbox v-else-if="inputType === 'boolean'" v-model="modelValue" />
 
     <div v-else-if="inputType === 'array'">
-      <div v-for="value, index in modelValue" :key="value.id" class="relative border border-gray-200 rounded-md mt-4">
+      <div v-for="value, index in modelValue" :key="value.id" class="relative border border-[--ui-border] rounded-md mt-4">
         <ComponentPropInput v-bind="arraySchema" :model-value="value" />
 
         <UPopover>
-          <UButton variant="ghost" color="gray" icon="i-heroicons-ellipsis-vertical" class="absolute top-1 right-1" />
+          <UButton variant="ghost" color="neutral" icon="i-heroicons-ellipsis-vertical" class="absolute top-1 right-1" />
           <template #content>
             <UButton
               variant="ghost"
@@ -91,7 +91,7 @@ function addArrayItem() {
 
       <UButton
         icon="i-heroicons-plus"
-        color="gray"
+        color="neutral"
         variant="ghost"
         block
         class="justify-center mt-4"
@@ -109,7 +109,7 @@ function addArrayItem() {
         :key="attr.name"
         v-bind="attr"
         :model-value="modelValue?.[attr.name]"
-        class="border-b last:border-b-0 border-gray-200 p-4"
+        class="border-b last:border-b-0 border-[--ui-border]  p-4"
         @update:model-value="(value) => modelValue[attr.name] = value"
       />
     </div>

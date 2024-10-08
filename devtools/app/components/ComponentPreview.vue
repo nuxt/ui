@@ -73,9 +73,9 @@ watch(() => props.component, () => rendererReady.value = false)
     />
 
     <div v-if="ast" v-show="rendererReady" class="relative w-full p-3">
-      <MDCRenderer :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 overflow-y-auto rounded-lg border border-gray-200 bg-gray-50" />
+      <MDCRenderer :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 overflow-y-auto rounded-lg border border-[--ui-border] bg-neutral-50 dark:bg-neutral-700" />
       <UButton
-        color="gray"
+        color="neutral"
         size="sm"
         variant="link"
         :icon="copied ? 'i-heroicons-clipboard-document-check' : 'i-heroicons-clipboard-document'"
@@ -88,7 +88,12 @@ watch(() => props.component, () => rendererReady.value = false)
 
 <style scoped>
 .bg-grid {
-  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' transform='scale(3)'%3E%3Crect width='100%25' height='100%25' fill='%23fff'/%3E%3Cpath fill='none' stroke='hsla(0, 0%25, 98%25, 1)' stroke-width='.2' d='M10 0v20ZM0 10h20Z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' transform='scale(3)'%3E%3Crect width='100%25' height='100%25' fill='%23fff'/%3E%3Cpath fill='none' stroke='hsla(0, 0%25, 98%25, 1)' stroke-width='.2' d='M10 0v20ZM0 10h20Z'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
+}
+
+.dark .bg-grid {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' transform='scale(3)'%3E%3Crect width='100%25' height='100%25' fill='hsl(0, 0%25, 8.5%25)'/%3E%3Cpath fill='none' stroke='hsl(0, 0%25, 11.0%25)' stroke-width='.2' d='M10 0v20ZM0 10h20Z'/%3E%3C/svg%3E");
   background-size: 40px 40px;
 }
 </style>

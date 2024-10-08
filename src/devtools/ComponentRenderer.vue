@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onUnmounted, onMounted, computed, reactive, resolveComponent } from 'vue'
-import { useHead } from '#imports'
-import { UButton, type ButtonProps } from '../runtime/components/Button.vue'
+import { default as UButton, type ButtonProps } from '../runtime/components/Button.vue'
 
 const props = defineProps<{
   slug: string
@@ -269,6 +268,11 @@ function onUpdateRenderer(event: Event & { data?: any }) {
   state.slots = { ...event.data.slots }
 }
 
+const colorMode = useColorMode()
+function setColorMode(event: Event & { isDark: boolean }) {
+  colorMode.preference = event.isDark ? 'dark' : 'light'
+}
+
 // function onSlotHover(event: Event & { data?: any }) {
 //   const element = window.document.querySelector(`[data-slot=${event.data.slot}]`)
 //   if (element) {
@@ -285,12 +289,14 @@ function onUpdateRenderer(event: Event & { data?: any }) {
 
 onMounted(() => {
   window.parent.addEventListener('nuxt-ui-devtools:update-renderer', onUpdateRenderer)
+  window.parent.addEventListener('nuxt-ui-devtools:set-color-mode', setColorMode)
   // window.parent.addEventListener('nuxt-ui-devtools:slot-hover', onSlotHover)
   // window.parent.addEventListener('nuxt-ui-devtools:slot-leave', onSlotLeave)
 })
 
 onUnmounted(() => {
   window.parent.removeEventListener('nuxt-ui-devtools:update-renderer', onUpdateRenderer)
+  window.parent.removeEventListener('nuxt-ui-devtools:set-color-mode', setColorMode)
   // window.parent.removeEventListener('nuxt-ui-devtools:slot-hover', onSlotHover)
   // window.parent.removeEventListener('nuxt-ui-devtools:slot-leave', onSlotLeave)
 })
@@ -300,12 +306,6 @@ onMounted(() => {
   event.data = componentExamples[props.slug]
   window.parent.dispatchEvent(event)
 })
-
-// TODO: This conflicts with the existing tailwind setup and clears classes defined by @nuxt/ui. We should wait for
-// the Tailwind v4 equivalent or find another way to include all tailwindcss classes in the playground.
-// useHead({
-//   script: [{ src: 'https://cdn.tailwindcss.com/3.4.5' }]
-// })
 </script>
 
 <template>
@@ -319,7 +319,12 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' transform='scale(3)'%3E%3Crect width='100%25' height='100%25' fill='%23fff'/%3E%3Cpath fill='none' stroke='hsla(0, 0%25, 98%25, 1)' stroke-width='.2' d='M10 0v20ZM0 10h20Z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' transform='scale(3)'%3E%3Crect width='100%25' height='100%25' fill='%23fff'/%3E%3Cpath fill='none' stroke='hsla(0, 0%25, 98%25, 1)' stroke-width='.2' d='M10 0v20ZM0 10h20Z'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
+}
+
+.dark .nuxt-ui-component-renderer {
+background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' transform='scale(3)'%3E%3Crect width='100%25' height='100%25' fill='hsl(0, 0%25, 8.5%25)'/%3E%3Cpath fill='none' stroke='hsl(0, 0%25, 11.0%25)' stroke-width='.2' d='M10 0v20ZM0 10h20Z'/%3E%3C/svg%3E");
   background-size: 40px 40px;
 }
 

@@ -28,11 +28,9 @@ onDevtoolsClientConnected(async (client) => {
   }, {} as Record<string, any>) }
 
   state.value.slots = { ...state.value.slots, ...components.value.reduce((acc, comp) => {
-    acc[comp.slug] = {} // comp.slots ?? {}
+    acc[comp.slug] = comp.slots ?? {}
     return acc
   }, {} as Record<string, any>) }
-
-  console.log(component.value)
 })
 
 function updateRenderer() {
@@ -73,7 +71,7 @@ function onComponentLoaded(event: Event & { data?: any }) {
 
 const tabs = computed(() => {
   if (!component.value) return
-  const themeCount = component.value.meta.slots ? Object.keys(component.value.meta.slots)?.length : 0
+  // const themeCount = component.value.meta.slots ? Object.keys(component.value.meta.slots)?.length : 0
 
   return [
     { label: 'Props', slot: 'props', icon: 'i-heroicons-cog-6-tooth', disabled: !component.value.meta.props?.length }
@@ -93,6 +91,24 @@ function onComponentSearch(value: any) {
 defineShortcuts({
   meta_k: () => searchOpened.value = true
 })
+
+function openDocs() {
+  if (!component.value) return
+  window.parent.open(`https://ui3.nuxt.dev/components/${component.value.slug}`)
+}
+
+const colorMode = useColorMode()
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set(value) {
+    colorMode.preference = value ? 'dark' : 'light'
+    const event: Event & { isDark: boolean } = new Event('nuxt-ui-devtools:set-color-mode')
+    event.isDark = value
+    window.dispatchEvent(event)
+  }
+})
 </script>
 
 <template>
@@ -100,12 +116,12 @@ defineShortcuts({
     <div v-if="!components || !component" class="h-screen w-screen" />
     <template v-else>
       <div
-        class="top-0 h-[49px] border-b border-gray-200 bg-white flex justify-center"
+        class="top-0 h-[49px] border-b border-[--ui-border] flex justify-center"
       >
         <span />
 
-        <UModal v-model:open="searchOpened" :ui="{ content: 'top-0 sm:top-8 translate-y-0 sm:max-w-xl w-full' }">
-          <UButton color="gray" label="Search component..." variant="link" icon="i-heroicons-magnifying-glass-20-solid" class="w-full cursor-pointer" />
+        <UModal v-model:open="searchOpened" :ui="{ content: 'top-0 sm:top-8 translate-y-0 sm:max-w-xl w-full' }"">
+          <UButton label="Search component..." color="black" variant="link" icon="i-heroicons-magnifying-glass-20-solid" class="w-full" />
           <template #content>
             <UCommandPalette
               variant="none"
@@ -125,7 +141,7 @@ defineShortcuts({
       </div>
 
       <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-4">
-        <div class="col-span-1 border-r border-gray-200 hidden xl:block overflow-y-auto bg-white">
+        <div class="col-span-1 border-r border-[--ui-border] hidden xl:block overflow-y-auto">
           <UNavigationMenu
             :model-value="component?.slug"
             :items="components.map((c) => ({ ...c, select: () => component = c }))"
@@ -134,23 +150,40 @@ defineShortcuts({
           />
         </div>
 
-        <div class="xl:col-span-5 col-span-2">
+        <div class="xl:col-span-5 col-span-2 relative">
           <ComponentPreview :component="component" :props="state.props[component.slug]" :theme-slots="state.slots[component.slug]" class="h-full" />
+          <div class="flex gap-2 absolute top-1 right-2">
+            <UButton
+              :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+              variant="ghost"
+              color="neutral"
+              @click="isDark = !isDark"
+            />
+            <UButton
+              v-if="component"
+              variant="ghost"
+              color="neutral"
+              icon="i-heroicons-arrow-top-right-on-square"
+              @click="openDocs()"
+            >
+              Open docs
+            </UButton>
+          </div>
         </div>
 
-        <div class="bg-white border-l border-gray-200 flex flex-col col-span-2  overflow-y-auto">
-          <UTabs color="gray" variant="link" :items="tabs">
+        <div class="border-l border-[--ui-border] flex flex-col col-span-2 overflow-y-auto">
+          <UTabs color="neutral" variant="link" :items="tabs">
             <template #props>
-              <div v-for="prop in component.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-gray-200">
+              <div v-for="prop in component.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-[--ui-border] dark:border-[--ui-border]">
                 <ComponentPropInput v-bind="prop" v-model="state.props[component.slug][prop.name]" />
               </div>
             </template>
 
             <!-- template #theme>
-              <div v-for="(_value, slot) in component?.slots" :key="'slots-' + slot" class="px-3 py-5 hover:bg-gray-50 transition">
+              <div v-for="(_value, slot) in component?.slots" :key="'slots-' + slot" class="px-3 py-5 hover:bg-neutral-50 transition">
                 <UFormField :name="slot" @mouseenter="onSlotHover(slot)" @mouseleave="onSlotLeave(slot)">
                   <template #label>
-                    <p class="font-mono font-bold px-2 py-0.5 border-gray-300 border border-dashed rounded bg-gray-100">
+                    <p class="font-mono font-bold px-2 py-0.5 border-[--ui-border] border border-dashed rounded bg-neutral-100">
                       {{ slot }}
                     </p>
                   </template>
@@ -171,5 +204,40 @@ defineShortcuts({
 
 @theme {
   --font-family-sans: 'DM Sans', sans-serif;
+}
+
+@theme {
+  --color-primary-50: var(--ui-color-primary-50);
+  --color-primary-100: var(--ui-color-primary-100);
+  --color-primary-200: var(--ui-color-primary-200);
+  --color-primary-300: var(--ui-color-primary-300);
+  --color-primary-400: var(--ui-color-primary-400);
+  --color-primary-500: var(--ui-color-primary-500);
+  --color-primary-600: var(--ui-color-primary-600);
+  --color-primary-700: var(--ui-color-primary-700);
+  --color-primary-800: var(--ui-color-primary-800);
+  --color-primary-900: var(--ui-color-primary-900);
+  --color-primary-950: var(--ui-color-primary-950);
+
+  --color-neutral-50: var(--ui-color-neutral-50);
+  --color-neutral-100: var(--ui-color-neutral-100);
+  --color-neutral-200: var(--ui-color-neutral-200);
+  --color-neutral-300: var(--ui-color-neutral-300);
+  --color-neutral-400: var(--ui-color-neutral-400);
+  --color-neutral-500: var(--ui-color-neutral-500);
+  --color-neutral-600: var(--ui-color-neutral-600);
+  --color-neutral-700: var(--ui-color-neutral-700);
+  --color-neutral-800: var(--ui-color-neutral-800);
+  --color-neutral-900: var(--ui-color-neutral-900);
+  --color-neutral-950: var(--ui-color-neutral-950);
+}
+
+:root {
+  --ui-border: var(--ui-color-neutral-200);
+}
+
+.dark {
+  --ui-border: var(--ui-color-neutral-700);
+  background-color: #111
 }
 </style>

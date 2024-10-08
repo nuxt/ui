@@ -2,7 +2,7 @@ import type { ComponentMeta } from 'vue-component-meta'
 import { extendServerRpc, onDevToolsInitialized } from '@nuxt/devtools-kit'
 import * as theme from '../theme'
 import type { ModuleOptions } from '../module'
-import { upperFirst, camelCase } from 'scule'
+import { upperFirst, camelCase, kebabCase } from 'scule'
 
 export type Component = {
   slug: string
@@ -25,7 +25,8 @@ export function setupDevtoolsClient(options: ModuleOptions) {
   onDevToolsInitialized(async () => {
     const _rpc = extendServerRpc<ClientFunctions, ServerFunctions>('nuxt/ui/devtools', {
       async getComponents() {
-        return await Promise.all(Object.keys(theme).map(async (slug) => {
+        return await Promise.all(Object.keys(theme).map(async (name) => {
+          const slug = kebabCase(name)
           const label = options.prefix + upperFirst(camelCase(slug))
 
           // TODO: Properly configure the host
