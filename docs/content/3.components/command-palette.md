@@ -561,6 +561,7 @@ ignore:
   - exactQuery
   - exactHash
   - external
+  - onClick
 ---
 ::
 

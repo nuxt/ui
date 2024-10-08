@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -62,7 +62,7 @@ export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'd
    */
   arrow?: boolean
   class?: any
-  ui?: Partial<typeof navigationMenu.slots>
+  ui?: PartialString<typeof navigationMenu.slots>
 }
 
 export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
