@@ -55,32 +55,32 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
   items?: T[]
   /**
    * Enable Autoplay plugin
-   * https://www.embla-carousel.com/plugins/autoplay/
+   * @see https://www.embla-carousel.com/plugins/autoplay/
    */
   autoplay?: boolean | AutoplayOptionsType
   /**
    * Enable Auto Scroll plugin
-   * https://www.embla-carousel.com/plugins/auto-scroll/
+   * @see https://www.embla-carousel.com/plugins/auto-scroll/
    */
   autoScroll?: boolean | AutoScrollOptionsType
   /**
    * Enable Auto Height plugin
-   * https://www.embla-carousel.com/plugins/auto-height/
+   * @see https://www.embla-carousel.com/plugins/auto-height/
    */
   autoHeight?: boolean | AutoHeightOptionsType
   /**
    * Enable Class Names plugin
-   * https://www.embla-carousel.com/plugins/class-names/
+   * @see https://www.embla-carousel.com/plugins/class-names/
    */
   classNames?: boolean | ClassNamesOptionsType
   /**
    * Enable Fade plugin
-   * https://www.embla-carousel.com/plugins/fade/
+   * @see https://www.embla-carousel.com/plugins/fade/
    */
   fade?: boolean | FadeOptionsType
   /**
    * Enable Wheel Gestures plugin
-   * https://www.embla-carousel.com/plugins/wheel-gestures/
+   * @see https://www.embla-carousel.com/plugins/wheel-gestures/
    */
   wheelGestures?: boolean | WheelGesturesPluginOptions
   class?: any
