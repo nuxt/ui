@@ -4,8 +4,8 @@ import type { ClientFunctions, ServerFunctions, Component } from '../../src/devt
 import type { BirpcReturn } from 'birpc'
 import { watchDebounced } from '@vueuse/core'
 
-// @ts-expect-error - Nuxt Devtools internal value
 // Disable devtools in component renderer iframe
+// @ts-expect-error - Nuxt Devtools internal value
 window.__NUXT_DEVTOOLS_DISABLE__ = true
 
 const components = useState<Array<Component & { value: string }>>('__ui-devtools-components')
@@ -22,15 +22,15 @@ onDevtoolsClientConnected(async (client) => {
     component.value = components.value.find(comp => comp.slug === 'button')
   }
 
-  state.value.props = { ...state.value.props, ...components.value?.reduce((acc, comp) => {
+  state.value.props = { ...components.value?.reduce((acc, comp) => {
     acc[comp.slug] = comp.defaultVariants ?? {}
     return acc
-  }, {} as Record<string, any>) }
+  }, {} as Record<string, any>), ...state.value.props }
 
-  state.value.slots = { ...state.value.slots, ...components.value.reduce((acc, comp) => {
+  state.value.slots = { ...components.value.reduce((acc, comp) => {
     acc[comp.slug] = {}
     return acc
-  }, {} as Record<string, any>) }
+  }, {} as Record<string, any>), ...state.value.slots }
 })
 
 function updateRenderer() {
@@ -104,10 +104,16 @@ const isDark = computed({
   },
   set(value) {
     colorMode.preference = value ? 'dark' : 'light'
-    const event: Event & { isDark: boolean } = new Event('nuxt-ui-devtools:set-color-mode')
+
+    const event: Event & { isDark?: boolean } = new Event('nuxt-ui-devtools:set-color-mode')
     event.isDark = value
     window.dispatchEvent(event)
   }
+})
+
+const componentProps = computed(() => {
+  if (!component.value) return
+  return state.value.props[component.value?.slug]
 })
 </script>
 
@@ -120,8 +126,8 @@ const isDark = computed({
       >
         <span />
 
-        <UModal v-model:open="searchOpened" :ui="{ content: 'top-0 sm:top-8 translate-y-0 sm:max-w-xl w-full' }"">
-          <UButton label="Search component..." color="black" variant="link" icon="i-heroicons-magnifying-glass-20-solid" class="w-full" />
+        <UModal v-model:open="searchOpened" :ui="{ content: 'top-0 sm:top-8 translate-y-0 sm:max-w-xl w-full' }">
+          <UButton label="Search component..." color="neutral" variant="link" icon="i-heroicons-magnifying-glass-20-solid" class="w-full" />
           <template #content>
             <UCommandPalette
               :groups="[{ id: 'component', items: components.map((c) => ({ slug: c.slug, label: c.label })) }]"
@@ -143,7 +149,7 @@ const isDark = computed({
         </div>
 
         <div class="xl:col-span-5 col-span-2 relative">
-          <ComponentPreview :component="component" :props="state.props[component.slug]" :theme-slots="state.slots[component.slug]" class="h-full" />
+          <ComponentPreview :component="component" :props="componentProps" class="h-full" />
           <div class="flex gap-2 absolute top-1 right-2">
             <UButton
               :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
@@ -166,8 +172,8 @@ const isDark = computed({
         <div class="border-l border-[--ui-border] flex flex-col col-span-2 overflow-y-auto">
           <UTabs color="neutral" variant="link" :items="tabs">
             <template #props>
-              <div v-for="prop in component.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-[--ui-border] dark:border-[--ui-border]">
-                <ComponentPropInput v-bind="prop" v-model="state.props[component.slug][prop.name]" />
+              <div v-for="prop in component?.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-[--ui-border] dark:border-[--ui-border]">
+                <ComponentPropInput v-bind="prop" v-model="componentProps[prop.name]" />
               </div>
             </template>
 
@@ -196,9 +202,7 @@ const isDark = computed({
 
 @theme {
   --font-family-sans: 'DM Sans', sans-serif;
-}
 
-@theme {
   --color-primary-50: var(--ui-color-primary-50);
   --color-primary-100: var(--ui-color-primary-100);
   --color-primary-200: var(--ui-color-primary-200);

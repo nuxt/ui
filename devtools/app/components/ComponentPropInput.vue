@@ -71,14 +71,14 @@ function addArrayItem() {
 
     <div v-else-if="inputType === 'array'">
       <div v-for="value, index in modelValue" :key="value.id" class="relative border border-[--ui-border] rounded-md mt-4">
-        <ComponentPropInput v-bind="arraySchema" :model-value="value" />
+        <ComponentPropInput v-bind="arraySchema as any" :model-value="value" />
 
         <UPopover>
           <UButton variant="ghost" color="neutral" icon="i-heroicons-ellipsis-vertical" class="absolute top-1 right-1" />
           <template #content>
             <UButton
               variant="ghost"
-              color="red"
+              color="error"
               icon="i-heroicons-trash"
               block
               @click="removeArrayItem(index)"
@@ -101,11 +101,11 @@ function addArrayItem() {
       </UButton>
     </div>
 
-    <USelectMenu v-else-if="inputType === 'enum'" v-model="modelValue" :items="parseEnumValues(schema.schema)" class="w-56" />
+    <USelectMenu v-else-if="inputType === 'enum'" v-model="modelValue" :items="parseEnumValues((schema as any).schema)" class="w-56" />
 
     <div v-else-if="inputType === 'object'">
       <ComponentPropInput
-        v-for="attr in schema"
+        v-for="attr in (schema as any)"
         :key="attr.name"
         v-bind="attr"
         :model-value="modelValue?.[attr.name]"

@@ -79,7 +79,7 @@ watch(() => props.component, () => rendererReady.value = false)
         variant="link"
         :icon="copied ? 'i-heroicons-clipboard-document-check' : 'i-heroicons-clipboard-document'"
         class="absolute top-6 right-6"
-        @click="copy(ast?.body?.children?.[0]?.props.code)"
+        @click="copy((ast?.body?.children?.[0] as any)?.props.code)"
       />
     </div>
   </div>

@@ -41,7 +41,7 @@
     "devtools": "NUXT_UI_DEVTOOLS_LOCAL=true nuxi dev playground",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck docs",
+    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck docs && nuxi typecheck devtools",
     "test": "vitest",
     "release": "release-it --preRelease=alpha --npm.tag=next"
   },

@@ -1,5 +1,5 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, extendPages, addServerHandler, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, extendPages, hasNuxtModule } from '@nuxt/kit'
 import { addTemplates } from './templates'
 import icons from './theme/icons'
 import { addCustomTab, startSubprocess } from '@nuxt/devtools-kit'
@@ -197,12 +197,6 @@ export default defineNuxtModule<ModuleOptions>({
 
       nuxt.hook('app:resolve', (app) => {
         app.rootComponent = resolve('./devtools/nuxt-root.vue')
-      })
-
-      addServerHandler({
-        route: '/api/__nuxt_ui__/config',
-        handler: resolve('./devtools/server/config.post.ts'),
-        method: 'POST'
       })
 
       extendPages((pages) => {

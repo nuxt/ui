@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onUnmounted, onMounted, computed, reactive, resolveComponent } from 'vue'
-import { default as UButton, type ButtonProps } from '../runtime/components/Button.vue'
+import type { ButtonProps } from '../runtime/components/Button.vue'
 
 const props = defineProps<{
   slug: string
@@ -90,7 +90,7 @@ const componentExamples: Record<string, any> = {
     }
   },
   button: {
-    component: UButton,
+    component: resolveComponent('UButton'),
     props: { label: 'Click me!' } as ButtonProps
   },
   buttonGroup: {
