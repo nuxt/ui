@@ -11,15 +11,22 @@ export default defineNuxtPlugin({
         }
       }
 
+      function updateRadius() {
+        const radius = localStorage.getItem('nuxt-ui-radius')
+        if (radius) {
+          appConfig.theme.radius = Number.parseFloat(radius)
+        }
+      }
+
       updateColor('primary')
       updateColor('neutral')
+      updateRadius()
     }
 
     if (import.meta.server) {
       useHead({
-        script: [
-          {
-            innerHTML: `
+        script: [{
+          innerHTML: `
             let html = document.querySelector('style#nuxt-ui-colors').innerHTML;
 
             if (localStorage.getItem('nuxt-ui-primary')) {
@@ -39,10 +46,17 @@ export default defineNuxtPlugin({
 
             document.querySelector('style#nuxt-ui-colors').innerHTML = html;
             `.replace(/\s+/g, ' '),
-            type: 'text/javascript',
-            tagPriority: -1
-          }
-        ]
+          type: 'text/javascript',
+          tagPriority: -1
+        }, {
+          innerHTML: `
+            if (localStorage.getItem('nuxt-ui-radius')) {
+              document.querySelector('style#nuxt-ui-radius').innerHTML = ':root { --ui-radius: ' + localStorage.getItem('nuxt-ui-radius') + 'rem; }';
+            }
+          `.replace(/\s+/g, ' '),
+          type: 'text/javascript',
+          tagPriority: -1
+        }]
       })
     }
   }

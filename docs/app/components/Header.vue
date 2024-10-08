@@ -26,13 +26,11 @@ const navigation = inject<Ref<NavItem[]>>('navigation')
     <!-- <UNavigationMenu :items="items" variant="link" /> -->
 
     <template #right>
-      <ColorPicker />
+      <ThemePicker />
 
       <UTooltip text="Search" :kbds="['meta', 'K']">
         <UContentSearchButton />
       </UTooltip>
-
-      <ColorModeButton />
 
       <UButton
         color="neutral"
