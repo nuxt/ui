@@ -25,7 +25,7 @@ export default (options: Required<ModuleOptions>) => ({
       },
       link: {
         list: 'border-[--ui-border]',
-        indicator: 'rounded-[calc(var(--ui-radius)*625)]'
+        indicator: 'rounded-full'
       }
     },
     orientation: {

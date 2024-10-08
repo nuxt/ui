@@ -88,14 +88,14 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     class: {
       item: '-mb-px',
-      link: 'after:absolute after:-bottom-2 after:inset-x-2.5 after:block after:h-px after:rounded-[calc(var(--ui-radius)*625)]'
+      link: 'after:absolute after:-bottom-2 after:inset-x-2.5 after:block after:h-px after:rounded-full'
     }
   }, {
     highlight: true,
     orientation: 'vertical',
     class: {
       item: 'px-1.5 -ml-px',
-      link: 'after:absolute after:-left-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-[calc(var(--ui-radius)*625)]'
+      link: 'after:absolute after:-left-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full'
     }
   }, {
     disabled: false,
