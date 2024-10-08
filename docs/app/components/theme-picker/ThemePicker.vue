@@ -71,7 +71,7 @@
         <div class="flex gap-1 -mx-2">
           <ThemePickerButton
             v-for="m in modes"
-            :key="m"
+            :key="m.label"
             v-bind="m"
             :selected="mode === m.label"
             @select="mode = m.label"
