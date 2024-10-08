@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
     indicator: 'absolute transition-[translate,width] duration-200',
-    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-[--ui-text-muted] hover:data-[state=inactive]:text-[--ui-text] font-medium rounded-[--ui-radius-md] disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none', options.theme.transitions && 'transition-colors'],
+    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-[--ui-text-muted] hover:data-[state=inactive]:text-[--ui-text] font-medium rounded-[calc(var(--ui-radius)*1.5)] disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none', options.theme.transitions && 'transition-colors'],
     content: 'focus:outline-none w-full',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -19,13 +19,13 @@ export default (options: Required<ModuleOptions>) => ({
     },
     variant: {
       pill: {
-        list: 'bg-[--ui-bg-elevated] rounded-[--ui-radius-lg]',
+        list: 'bg-[--ui-bg-elevated] rounded-[calc(var(--ui-radius)*2)]',
         trigger: 'flex-1',
-        indicator: 'rounded-[--ui-radius-md] shadow-sm'
+        indicator: 'rounded-[calc(var(--ui-radius)*1.5)] shadow-sm'
       },
       link: {
         list: 'border-[--ui-border]',
-        indicator: 'rounded-[--ui-radius-full]'
+        indicator: 'rounded-[calc(var(--ui-radius)*625)]'
       }
     },
     orientation: {

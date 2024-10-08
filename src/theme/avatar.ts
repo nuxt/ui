@@ -1,6 +1,6 @@
 export default {
   slots: {
-    root: 'inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-[--ui-radius-full] align-middle bg-[--ui-bg-elevated]',
+    root: 'inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-[calc(var(--ui-radius)*625)] align-middle bg-[--ui-bg-elevated]',
     image: 'h-full w-full rounded-[inherit] object-cover',
     fallback: 'font-medium leading-none text-[--ui-text-muted] truncate',
     icon: 'text-[--ui-text-muted] shrink-0'

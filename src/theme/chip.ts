@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center justify-center shrink-0',
-    base: 'rounded-[--ui-radius-full] ring ring-[--ui-bg] flex items-center justify-center text-[--ui-bg] font-medium whitespace-nowrap'
+    base: 'rounded-[calc(var(--ui-radius)*625)] ring ring-[--ui-bg] flex items-center justify-center text-[--ui-bg] font-medium whitespace-nowrap'
   },
   variants: {
     color: {

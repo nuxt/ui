@@ -2,7 +2,7 @@ export default {
   slots: {
     overlay: 'fixed inset-0 z-50 bg-[--ui-bg-elevated]/75',
     content: 'fixed z-50 bg-[--ui-bg] ring ring-[--ui-border] flex focus:outline-none',
-    handle: 'shrink-0 rounded-[--ui-radius-full] bg-[--ui-bg-accented]',
+    handle: 'shrink-0 rounded-[calc(var(--ui-radius)*625)] bg-[--ui-bg-accented]',
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: '',
     title: 'text-[--ui-text-highlighted] font-semibold',
@@ -13,7 +13,7 @@ export default {
   variants: {
     direction: {
       top: {
-        content: 'top-0 mb-24 flex-col-reverse rounded-b-[--ui-radius-lg]',
+        content: 'top-0 mb-24 flex-col-reverse rounded-b-[calc(var(--ui-radius)*2)]',
         handle: 'mb-4'
       },
       right: {
@@ -21,7 +21,7 @@ export default {
         handle: 'ml-4'
       },
       bottom: {
-        content: 'bottom-0 mt-24 flex-col rounded-t-[--ui-radius-lg]',
+        content: 'bottom-0 mt-24 flex-col rounded-t-[calc(var(--ui-radius)*2)]',
         handle: 'mt-4'
       },
       left: {
@@ -39,7 +39,7 @@ export default {
   }, {
     direction: ['right', 'left'],
     class: {
-      content: 'inset-y-4 w-auto max-w-[calc(100%-2rem)] rounded-[--ui-radius-lg] after:hidden',
+      content: 'inset-y-4 w-auto max-w-[calc(100%-2rem)] rounded-[calc(var(--ui-radius)*2)] after:hidden',
       handle: 'h-12 w-1.5 mt-auto mb-auto'
     }
   }]

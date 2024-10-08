@@ -3,7 +3,7 @@ import { buttonGroupVariant } from './button-group'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    base: ['rounded-[--ui-radius-md] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+    base: ['rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
