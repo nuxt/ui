@@ -23,7 +23,7 @@ type CarouselVariants = VariantProps<typeof carousel>
 export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
    * Configure the prev button when arrows are enabled.
-   * @defaultValue { size: 'md', color: 'gray', variant: 'link' }
+   * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
   prev?: ButtonProps
   /**
@@ -33,7 +33,7 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
   prevIcon?: string
   /**
    * Configure the next button when arrows are enabled.
-   * @defaultValue { size: 'md', color: 'gray', variant: 'link' }
+   * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
   next?: ButtonProps
   /**
