@@ -76,7 +76,6 @@ watch(() => props.component, () => rendererReady.value = false)
       <MDCRenderer :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 overflow-y-auto rounded-lg border border-[--ui-border] bg-neutral-50 dark:bg-neutral-700" />
       <UButton
         color="neutral"
-        size="sm"
         variant="link"
         :icon="copied ? 'i-heroicons-clipboard-document-check' : 'i-heroicons-clipboard-document'"
         class="absolute top-6 right-6"

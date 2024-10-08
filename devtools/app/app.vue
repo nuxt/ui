@@ -28,7 +28,7 @@ onDevtoolsClientConnected(async (client) => {
   }, {} as Record<string, any>) }
 
   state.value.slots = { ...state.value.slots, ...components.value.reduce((acc, comp) => {
-    acc[comp.slug] = comp.slots ?? {}
+    acc[comp.slug] = {}
     return acc
   }, {} as Record<string, any>) }
 })
@@ -124,15 +124,9 @@ const isDark = computed({
           <UButton label="Search component..." color="black" variant="link" icon="i-heroicons-magnifying-glass-20-solid" class="w-full" />
           <template #content>
             <UCommandPalette
-              variant="none"
               :groups="[{ id: 'component', items: components.map((c) => ({ slug: c.slug, label: c.label })) }]"
-              leading-icon=""
               placeholder="Search component..."
-              :fuse="{
-                fuseOptions: {
-                  includeMatches: true
-                }
-              }"
+              :fuse="{ fuseOptions: { includeMatches: true } }"
               @update:model-value="onComponentSearch"
               @close="searchOpened = false"
             />
@@ -143,10 +137,8 @@ const isDark = computed({
       <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-4">
         <div class="col-span-1 border-r border-[--ui-border] hidden xl:block overflow-y-auto">
           <UNavigationMenu
-            :model-value="component?.slug"
             :items="components.map((c) => ({ ...c, select: () => component = c }))"
             orientation="vertical"
-            highlight
           />
         </div>
 
@@ -237,7 +229,7 @@ const isDark = computed({
 }
 
 .dark {
-  --ui-border: var(--ui-color-neutral-700);
-  background-color: #111
+  --ui-border: var(--ui-color-neutral-800);
+  --ui-bg: #111;
 }
 </style>
