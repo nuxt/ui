@@ -1,5 +1,5 @@
 ---
-description: A carousel with motion and swipe support.
+description: A carousel with motion and swipe built using Embla.
 links:
   - label: Embla
     to: https://www.embla-carousel.com/api/
@@ -13,27 +13,121 @@ links:
 
 ### Items
 
+Use the `items` prop as an array and render each item using the default slot:
+
+::note
+Use your mouse to drag the carousel horizontally on desktop.
+::
+
+::component-example
+---
+name: 'carousel-items-example'
+class: 'p-8'
+---
+::
+
+You can control how many items are visible by using the [`basis`](https://tailwindcss.com/docs/flex-basis) / [`width`](https://tailwindcss.com/docs/width) utility classes on the `item`:
+
+::component-example
+---
+name: 'carousel-items-multiple-example'
+class: 'p-8 px-16'
+---
+::
+
 ### Orientation
+
+Use the `orientation` prop to change the orientation of the Progress. Defaults to `horizontal`.
+
+::note
+Use your mouse to drag the carousel vertically on desktop.
+::
+
+::component-example
+---
+name: 'carousel-orientation-example'
+class: 'p-8'
+---
+::
+
+::caution
+You need to specify a `height` on the container in vertical orientation.
+::
 
 ### Arrows
 
+Use the `arrows` prop to display prev and next buttons.
+
+::component-example
+---
+name: 'carousel-arrows-example'
+class: 'p-8'
+---
+::
+
 ### Prev / Next
+
+Use the `prev` and `next` props to customize the prev and next buttons.
+
+::component-example
+---
+name: 'carousel-prev-next-example'
+class: 'p-8'
+---
+::
 
 ### Prev Icon / Next Icon
 
+Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/components/icon). Defaults to `i-heroicons-arrow-left-20-solid` / `i-heroicons-arrow-right-20-solid`.
+
+::component-example
+---
+name: 'carousel-prev-next-icon-example'
+class: 'p-8'
+options:
+  - name: 'prevIcon'
+    label: 'prevIcon'
+    default: 'i-heroicons-chevron-left'
+  - name: 'nextIcon'
+    label: 'nextIcon'
+    default: 'i-heroicons-chevron-right'
+---
+::
+
+::tip{to="/getting-started/icons#theme"}
+You can customize these icons globally in your `app.config.ts` under `ui.icons.arrowLeft` / `ui.icons.arrowRight` key.
+::
+
 ### Dots
+
+Use the `dots` prop to display a list of dots to scroll to a specific slide.
+
+::component-example
+---
+name: 'carousel-dots-example'
+class: 'p-8 pb-12'
+---
+::
+
+The number of dots is based on the number of slides displayed in the view:
+
+::component-example
+---
+name: 'carousel-dots-multiple-example'
+class: 'p-8 px-16 pb-12'
+---
+::
 
 ## Plugins
 
 The Carousel component implements the official [Embla Carousel plugins](https://www.embla-carousel.com/plugins/).
 
-::warning
-You need to install each plugin individually as Nuxt UI does not bundle them.
-::
-
 ### Autoplay
 
-1. Install the `embla-carousel-autoplay` package:
+This plugin is used to extend Embla Carousel with **autoplay** functionality.
+
+::warning
+Install the `embla-carousel-autoplay` package:
 
 ::code-group
 
@@ -55,9 +149,27 @@ bun add embla-carousel-autoplay
 
 ::
 
+::
+
+Use the `autoplay` prop as a boolean or an object to configure the [Autoplay plugin](https://www.embla-carousel.com/plugins/autoplay/).
+
+::component-example
+---
+name: 'carousel-autoplay-example'
+class: 'p-8 px-16 pb-12'
+---
+::
+
+::note
+In this example, we're using the `loop` prop for an infinite carousel.
+::
+
 ### Auto Scroll
 
-1. Install the `embla-carousel-auto-scroll` package:
+This plugin is used to extend Embla Carousel with **auto scroll** functionality.
+
+::warning
+Install the `embla-carousel-auto-scroll` package:
 
 ::code-group
 
@@ -79,9 +191,27 @@ bun add embla-carousel-auto-scroll
 
 ::
 
+::
+
+Use the `auto-scroll` prop as a boolean or an object to configure the [Auto Scroll plugin](https://www.embla-carousel.com/plugins/auto-scroll/).
+
+::component-example
+---
+name: 'carousel-auto-scroll-example'
+class: 'p-8 px-16 pb-12'
+---
+::
+
+::note
+In this example, we're using the `loop` prop for an infinite carousel.
+::
+
 ### Auto Height
 
-1. Install the `embla-carousel-auto-height` package:
+This plugin is used to extend Embla Carousel with **auto height** functionality. It changes the height of the carousel container to fit the height of the highest slide in view.
+
+::warning
+Install the `embla-carousel-auto-height` package:
 
 ::code-group
 
@@ -103,9 +233,27 @@ bun add embla-carousel-auto-height
 
 ::
 
+::
+
+Use the `auto-height` prop as a boolean or an object to configure the [Auto Height plugin](https://www.embla-carousel.com/plugins/auto-height/).
+
+::component-example
+---
+name: 'carousel-auto-height-example'
+class: 'p-8 pt-16'
+---
+::
+
+::note
+In this example, we add the `transition-[height]` class on the container to animate the height change.
+::
+
 ### Class Names
 
-1. Install the `embla-carousel-class-names` package:
+Class Names is a **class name toggle** utility plugin for Embla Carousel that enables you to automate the toggling of class names on your carousel.
+
+::warning
+Install the `embla-carousel-class-names` package:
 
 ::code-group
 
@@ -127,9 +275,27 @@ bun add embla-carousel-class-names
 
 ::
 
+::
+
+Use the `class-names` prop as a boolean or an object to configure the [Class Names plugin](https://www.embla-carousel.com/plugins/class-names/).
+
+::component-example
+---
+name: 'carousel-class-names-example'
+class: 'p-8'
+---
+::
+
+::note
+In this example, we add the `transition-opacity [&:not(.is-snapped)]:opacity-10` classes on the `item` to animate the opacity change.
+::
+
 ### Fade
 
-1. Install the `embla-carousel-fade` package:
+This plugin is used to replace the Embla Carousel scroll functionality with **fade transitions**.
+
+::warning
+Install the `embla-carousel-fade` package:
 
 ::code-group
 
@@ -151,9 +317,23 @@ bun add embla-carousel-fade
 
 ::
 
+::
+
+Use the `fade` prop as a boolean or an object to configure the [Fade plugin](https://www.embla-carousel.com/plugins/fade/).
+
+::component-example
+---
+name: 'carousel-fade-example'
+class: 'p-8 pb-12'
+---
+::
+
 ### Wheel Gestures
 
-1. Install the `embla-carousel-wheel-gestures` package:
+This plugin is used to extend Embla Carousel with the ability to **use the mouse/trackpad wheel** to navigate the carousel.
+
+::warning
+Install the `embla-carousel-wheel-gestures` package:
 
 ::code-group
 
@@ -173,6 +353,21 @@ npm install embla-carousel-wheel-gestures
 bun add embla-carousel-wheel-gestures
 ```
 
+::
+
+::
+
+Use the `wheel-gestures` prop as a boolean or an object to configure the [Wheel Gestures plugin](https://www.embla-carousel.com/plugins/wheel-gestures/).
+
+::note
+Use your mouse wheel to scroll the carousel.
+::
+
+::component-example
+---
+name: 'carousel-wheel-gestures-example'
+class: 'p-8 px-16'
+---
 ::
 
 ## API
