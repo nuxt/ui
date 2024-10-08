@@ -12,7 +12,7 @@ import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/carousel'
 import type { ButtonProps } from '../types'
-import type { AcceptableValue } from '../types/utils'
+import type { AcceptableValue, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { carousel: Partial<typeof theme> } }
 
@@ -84,7 +84,7 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
    */
   wheelGestures?: boolean | WheelGesturesPluginOptions
   class?: any
-  ui?: Partial<typeof carousel.slots>
+  ui?: PartialString<typeof carousel.slots>
 }
 
 export type CarouselSlots<T> = {
