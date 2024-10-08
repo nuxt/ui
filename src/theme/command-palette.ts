@@ -10,7 +10,7 @@ export default (options: Required<ModuleOptions>) => ({
     group: 'p-1 isolate',
     empty: 'py-6 text-center text-sm',
     label: 'px-2 py-1.5 text-xs font-semibold text-[--ui-text-highlighted]',
-    item: ['group relative w-full flex items-center gap-2 px-2 py-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[--ui-text] data-highlighted:text-[--ui-text-highlighted] data-highlighted:before:bg-[--ui-bg-elevated]/50', options.theme.transitions && 'transition-colors before:transition-colors'],
+    item: ['group relative w-full flex items-center gap-2 px-2 py-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[--ui-radius-md] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[--ui-text] data-highlighted:text-[--ui-text-highlighted] data-highlighted:before:bg-[--ui-bg-elevated]/50', options.theme.transitions && 'transition-colors before:transition-colors'],
     itemLeadingIcon: ['shrink-0 size-5 text-[--ui-text-dimmed] group-data-highlighted:text-[--ui-text]', options.theme.transitions && 'transition-colors'],
     itemLeadingAvatar: 'shrink-0',
     itemLeadingAvatarSize: '2xs',

@@ -3,8 +3,8 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'gap-2',
-    base: 'relative overflow-hidden rounded-full bg-[--ui-bg-accented]',
-    indicator: 'rounded-full size-full transition-transform duration-200 ease-out',
+    base: 'relative overflow-hidden rounded-[--ui-radius-full] bg-[--ui-bg-accented]',
+    indicator: 'rounded-[--ui-radius-full] size-full transition-transform duration-200 ease-out',
     status: 'flex justify-end text-[--ui-text-dimmed] transition-[width] duration-200',
     steps: 'grid items-end',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity'

@@ -3,9 +3,9 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-center select-none touch-none',
-    track: 'relative bg-[--ui-bg-accented] overflow-hidden rounded-full grow',
-    range: 'absolute rounded-full',
-    thumb: 'rounded-full bg-[--ui-bg] ring-2 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2'
+    track: 'relative bg-[--ui-bg-accented] overflow-hidden rounded-[--ui-radius-full] grow',
+    range: 'absolute rounded-[--ui-radius-full]',
+    thumb: 'rounded-[--ui-radius-full] bg-[--ui-bg] ring-2 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2'
   },
   variants: {
     color: {

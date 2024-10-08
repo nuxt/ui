@@ -26,6 +26,18 @@
     --ui-border: var(--ui-color-neutral-200);
     --ui-border-accented: var(--ui-color-neutral-300);
     --ui-border-inverted: var(--ui-color-neutral-900);
+
+    /* Radii */
+    --ui-radius-none: 0px;
+    --ui-radius: var(--radius);
+    --ui-radius-sm: var(--radius-sm);
+    --ui-radius-md: var(--radius-md);
+    --ui-radius-lg: var(--radius-lg);
+    --ui-radius-xl: var(--radius-xl);
+    --ui-radius-2xl: var(--radius-2xl);
+    --ui-radius-3xl: var(--radius-3xl);
+    --ui-radius-4xl: var(--radius-4xl);
+    --ui-radius-full: 9999px;
   }
 
   .dark {
