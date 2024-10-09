@@ -142,10 +142,16 @@ export default defineComponent({
 
     const pages = computed(() => {
       if (!itemWidth.value) {
-        return 0
+        return 0;
       }
 
-      return props.items.length - Math.round(carouselWidth.value / itemWidth.value) + 1
+      const itemDivisions = Math.round(carouselWidth.value / itemWidth.value);
+
+      if (props.items.length <= itemDivisions) {
+        return 0;
+      }
+
+      return props.items.length - itemDivisions + 1;
     })
 
     const isFirst = computed(() => currentPage.value <= 1)
