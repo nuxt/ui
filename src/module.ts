@@ -13,32 +13,41 @@ export type * from './runtime/types'
 export interface ModuleOptions {
   /**
    * Prefix for components
-   * @defaultValue U
+   * @defaultValue `U`
+   * @see https://ui3.nuxt.dev/getting-started/installation#prefix
    */
   prefix?: string
 
   /**
    * Enable or disable `@nuxt/fonts` module
-   * @defaultValue true
+   * @defaultValue `true`
+   * @see https://ui3.nuxt.dev/getting-started/installation#fonts
    */
   fonts?: boolean
 
   /**
    * Enable or disable `@nuxtjs/color-mode` module
-   * @defaultValue true
+   * @defaultValue `true`
+   * @see https://ui3.nuxt.dev/getting-started/installation#colormode
    */
   colorMode?: boolean
 
+  /**
+   * Customize how the theme is generated
+   * @see https://ui3.nuxt.dev/getting-started/theme
+   */
   theme?: {
     /**
-     * Colors to generate classes for (defaults to TailwindCSS colors)
-     * @defaultValue ['primary', 'secondary', 'success', 'info', 'warning', 'error']
+     * Define the color aliases available for components
+     * @defaultValue `['primary', 'secondary', 'success', 'info', 'warning', 'error']`
+     * @see https://ui3.nuxt.dev/getting-started/installation#themecolors
      */
     colors?: string[]
 
     /**
      * Enable or disable transitions on components
-     * @defaultValue true
+     * @defaultValue `true`
+     * @see https://ui3.nuxt.dev/getting-started/installation#themetransitions
      */
     transitions?: boolean
   }
@@ -50,7 +59,8 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: 'ui',
     compatibility: {
       nuxt: '>=3.13.1'
-    }
+    },
+    docs: 'https://ui3.nuxt.dev/getting-started/installation'
   },
   defaults: {
     prefix: 'U',

@@ -1,5 +1,32 @@
 # Changelog
 
+## [3.0.0-alpha.6](https://github.com/nuxt/ui/compare/v3.0.0-alpha.5...v3.0.0-alpha.6) (2024-10-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* **module:** implement design system with CSS variables (#2298)
+
+### Features
+
+* **Carousel:** implement component ([#2288](https://github.com/nuxt/ui/issues/2288)) ([68ee3f1](https://github.com/nuxt/ui/commit/68ee3f11ca01b19cf890ef8105ffb87ef9bb3188))
+* **Form:** add Standard Schema support ([#2303](https://github.com/nuxt/ui/issues/2303)) ([0955c07](https://github.com/nuxt/ui/commit/0955c07edd8ea5b5c39b770804b8e4c6f86d94b0))
+* **module:** implement `--ui-radius` CSS variable ([#2341](https://github.com/nuxt/ui/issues/2341)) ([057e86c](https://github.com/nuxt/ui/commit/057e86cfda1ef5c7a370c99ef409d22e48772ca7))
+* **module:** set `disableTransition` option on `@nuxtjs/color-mode` ([b82af02](https://github.com/nuxt/ui/commit/b82af02839b7d75344d9431fabdc42f0ac0681e1))
+
+
+### Bug Fixes
+
+* **Accordion:** use `text-left break-words` instead of `truncate` on label ([6c7c2f0](https://github.com/nuxt/ui/commit/6c7c2f02f395747a0c68a499630f502e3f02ded3))
+* **Alert:** default variant to `solid` for consistency ([3a7c5c2](https://github.com/nuxt/ui/commit/3a7c5c26011bfcffcdf6ac3451adb2af1453b9db))
+* **Button:** center text with `block` prop ([3cf5535](https://github.com/nuxt/ui/commit/3cf5535b2faa28b557ca55d694abdfa7d7ad0efc)), closes [nuxt/ui#2317](https://github.com/nuxt/ui/issues/2317)
+* **Carousel:** move embla plugins to `dependencies` ([bee04ad](https://github.com/nuxt/ui/commit/bee04adf4cc4fd6d69e93ad94500f5ef604405e7))
+
+
+### Code Refactoring
+
+* **module:** implement design system with CSS variables ([#2298](https://github.com/nuxt/ui/issues/2298)) ([9368c6a](https://github.com/nuxt/ui/commit/9368c6a63955a2e6c2f4f900a9b91c61bb2e5a72))
+
 ## [3.0.0-alpha.5](https://github.com/nuxt/ui/compare/v3.0.0-alpha.4...v3.0.0-alpha.5) (2024-10-02)
 
 

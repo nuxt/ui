@@ -1,3 +1,4 @@
+import type { StandardSchema } from '@standard-schema/spec'
 import type { ComputedRef, Ref } from 'vue'
 import type { ZodSchema } from 'zod'
 import type { Schema as JoiSchema } from 'joi'
@@ -21,6 +22,7 @@ export type FormSchema<T extends Record<string, any>> =
   | ValibotSchema | ValibotSchemaAsync
   | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>
   | JoiSchema<T>
+  | StandardSchema
 
 export type FormInputEvents = 'input' | 'blur' | 'change'
 

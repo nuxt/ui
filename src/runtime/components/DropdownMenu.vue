@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -51,7 +51,7 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
    */
   portal?: boolean
   class?: any
-  ui?: Partial<typeof dropdownMenu.slots>
+  ui?: PartialString<typeof dropdownMenu.slots>
 }
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}

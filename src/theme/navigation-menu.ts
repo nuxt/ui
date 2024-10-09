@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative flex gap-1.5',
     list: 'isolate min-w-0',
     item: 'min-w-0',
-    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -17,7 +17,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkLabelExternalIcon: 'size-3 align-top text-[--ui-text-dimmed]',
     childList: 'grid grid-cols-2 gap-2 p-2',
     childItem: '',
-    childLink: 'group size-full px-3 py-2 rounded-md flex items-start gap-2 text-left',
+    childLink: 'group size-full px-3 py-2 rounded-[calc(var(--ui-radius)*1.5)] flex items-start gap-2 text-left',
     childLinkWrapper: 'flex flex-col items-start',
     childLinkIcon: 'size-5 shrink-0',
     childLinkLabel: 'font-semibold text-sm relative inline-flex',
@@ -26,10 +26,10 @@ export default (options: Required<ModuleOptions>) => ({
     separator: 'px-2 h-px bg-[--ui-border]',
     viewportWrapper: 'absolute top-full inset-x-0 flex w-full',
     // FIXME: add `sm:w-[var(--radix-navigation-menu-viewport-width)]` / `transition-[width,height]` / `origin-[top_center]` once position is based on trigger
-    viewport: 'relative overflow-hidden bg-[--ui-bg] shadow-lg rounded-md ring ring-[--ui-border] h-[--radix-navigation-menu-viewport-height] w-full data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
+    viewport: 'relative overflow-hidden bg-[--ui-bg] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[--ui-border] h-[--radix-navigation-menu-viewport-height] w-full data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
     content: 'absolute top-0 left-0 w-full data-[motion=from-start]:animate-[enter-from-left_200ms_ease] data-[motion=from-end]:animate-[enter-from-right_200ms_ease] data-[motion=to-start]:animate-[exit-to-left_200ms_ease] data-[motion=to-end]:animate-[exit-to-right_200ms_ease]',
     indicator: 'data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] bottom-0 z-[1] flex h-2.5 items-end justify-center overflow-hidden transition-transform duration-200 ease-out',
-    arrow: 'relative top-[50%] size-2.5 rotate-45 border border-[--ui-border] bg-[--ui-bg] z-[1] rounded-sm'
+    arrow: 'relative top-[50%] size-2.5 rotate-45 border border-[--ui-border] bg-[--ui-bg] z-[1] rounded-[calc(var(--ui-radius)/2)]'
   },
   variants: {
     color: {

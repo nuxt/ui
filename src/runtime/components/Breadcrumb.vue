@@ -5,7 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
 import type { AvatarProps, LinkProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
 
@@ -31,7 +31,7 @@ export interface BreadcrumbProps<T> {
    */
   separatorIcon?: string
   class?: any
-  ui?: Partial<typeof breadcrumb.slots>
+  ui?: PartialString<typeof breadcrumb.slots>
 }
 
 type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any

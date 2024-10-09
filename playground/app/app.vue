@@ -13,6 +13,7 @@ const components = [
   'button',
   'button-group',
   'card',
+  'carousel',
   'checkbox',
   'chip',
   'collapsible',
