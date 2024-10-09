@@ -11,6 +11,12 @@ const config = useRuntimeConfig().public
 const navigation = inject<Ref<NavItem[]>>('navigation')
 
 // const items = computed(() => props.links.map(({ icon, ...link }) => link))
+
+defineShortcuts({
+  meta_g: () => {
+    window.open('https://github.com/nuxt/ui/tree/v3', '_blank')
+  }
+})
 </script>
 
 <template>
@@ -26,22 +32,22 @@ const navigation = inject<Ref<NavItem[]>>('navigation')
     <!-- <UNavigationMenu :items="items" variant="link" /> -->
 
     <template #right>
-      <ColorPicker />
+      <ThemePicker />
 
       <UTooltip text="Search" :kbds="['meta', 'K']">
         <UContentSearchButton />
       </UTooltip>
 
-      <ColorModeButton />
-
-      <UButton
-        color="neutral"
-        variant="ghost"
-        to="https://github.com/nuxt/ui/tree/v3"
-        target="_blank"
-        icon="i-simple-icons-github"
-        aria-label="GitHub"
-      />
+      <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
+        <UButton
+          color="neutral"
+          variant="ghost"
+          to="https://github.com/nuxt/ui/tree/v3"
+          target="_blank"
+          icon="i-simple-icons-github"
+          aria-label="GitHub"
+        />
+      </UTooltip>
     </template>
 
     <template #content>

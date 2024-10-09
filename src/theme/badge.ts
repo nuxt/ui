@@ -1,7 +1,7 @@
 import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
-  base: 'rounded-md font-medium inline-flex items-center',
+  base: 'rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center',
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),

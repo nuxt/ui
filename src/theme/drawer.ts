@@ -13,7 +13,7 @@ export default {
   variants: {
     direction: {
       top: {
-        content: 'top-0 mb-24 flex-col-reverse rounded-b-lg',
+        content: 'top-0 mb-24 flex-col-reverse rounded-b-[calc(var(--ui-radius)*2)]',
         handle: 'mb-4'
       },
       right: {
@@ -21,7 +21,7 @@ export default {
         handle: 'ml-4'
       },
       bottom: {
-        content: 'bottom-0 mt-24 flex-col rounded-t-lg',
+        content: 'bottom-0 mt-24 flex-col rounded-t-[calc(var(--ui-radius)*2)]',
         handle: 'mt-4'
       },
       left: {
@@ -39,7 +39,7 @@ export default {
   }, {
     direction: ['right', 'left'],
     class: {
-      content: 'inset-y-4 w-auto max-w-[calc(100%-2rem)] rounded-lg after:hidden',
+      content: 'inset-y-4 w-auto max-w-[calc(100%-2rem)] rounded-[calc(var(--ui-radius)*2)] after:hidden',
       handle: 'h-12 w-1.5 mt-auto mb-auto'
     }
   }]
