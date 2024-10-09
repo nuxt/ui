@@ -126,31 +126,6 @@ The Carousel component implements the official [Embla Carousel plugins](https://
 
 This plugin is used to extend Embla Carousel with **autoplay** functionality.
 
-::warning
-Install the `embla-carousel-autoplay` package:
-
-::code-group
-
-```bash [pnpm]
-pnpm add embla-carousel-autoplay
-```
-
-```bash [yarn]
-yarn add embla-carousel-autoplay
-```
-
-```bash [npm]
-npm install embla-carousel-autoplay
-```
-
-```bash [bun]
-bun add embla-carousel-autoplay
-```
-
-::
-
-::
-
 Use the `autoplay` prop as a boolean or an object to configure the [Autoplay plugin](https://www.embla-carousel.com/plugins/autoplay/).
 
 ::component-example
@@ -167,31 +142,6 @@ In this example, we're using the `loop` prop for an infinite carousel.
 ### Auto Scroll
 
 This plugin is used to extend Embla Carousel with **auto scroll** functionality.
-
-::warning
-Install the `embla-carousel-auto-scroll` package:
-
-::code-group
-
-```bash [pnpm]
-pnpm add embla-carousel-auto-scroll
-```
-
-```bash [yarn]
-yarn add embla-carousel-auto-scroll
-```
-
-```bash [npm]
-npm install embla-carousel-auto-scroll
-```
-
-```bash [bun]
-bun add embla-carousel-auto-scroll
-```
-
-::
-
-::
 
 Use the `auto-scroll` prop as a boolean or an object to configure the [Auto Scroll plugin](https://www.embla-carousel.com/plugins/auto-scroll/).
 
@@ -210,31 +160,6 @@ In this example, we're using the `loop` prop for an infinite carousel.
 
 This plugin is used to extend Embla Carousel with **auto height** functionality. It changes the height of the carousel container to fit the height of the highest slide in view.
 
-::warning
-Install the `embla-carousel-auto-height` package:
-
-::code-group
-
-```bash [pnpm]
-pnpm add embla-carousel-auto-height
-```
-
-```bash [yarn]
-yarn add embla-carousel-auto-height
-```
-
-```bash [npm]
-npm install embla-carousel-auto-height
-```
-
-```bash [bun]
-bun add embla-carousel-auto-height
-```
-
-::
-
-::
-
 Use the `auto-height` prop as a boolean or an object to configure the [Auto Height plugin](https://www.embla-carousel.com/plugins/auto-height/).
 
 ::component-example
@@ -251,31 +176,6 @@ In this example, we add the `transition-[height]` class on the container to anim
 ### Class Names
 
 Class Names is a **class name toggle** utility plugin for Embla Carousel that enables you to automate the toggling of class names on your carousel.
-
-::warning
-Install the `embla-carousel-class-names` package:
-
-::code-group
-
-```bash [pnpm]
-pnpm add embla-carousel-class-names
-```
-
-```bash [yarn]
-yarn add embla-carousel-class-names
-```
-
-```bash [npm]
-npm install embla-carousel-class-names
-```
-
-```bash [bun]
-bun add embla-carousel-class-names
-```
-
-::
-
-::
 
 Use the `class-names` prop as a boolean or an object to configure the [Class Names plugin](https://www.embla-carousel.com/plugins/class-names/).
 
@@ -294,31 +194,6 @@ In this example, we add the `transition-opacity [&:not(.is-snapped)]:opacity-10`
 
 This plugin is used to replace the Embla Carousel scroll functionality with **fade transitions**.
 
-::warning
-Install the `embla-carousel-fade` package:
-
-::code-group
-
-```bash [pnpm]
-pnpm add embla-carousel-fade
-```
-
-```bash [yarn]
-yarn add embla-carousel-fade
-```
-
-```bash [npm]
-npm install embla-carousel-fade
-```
-
-```bash [bun]
-bun add embla-carousel-fade
-```
-
-::
-
-::
-
 Use the `fade` prop as a boolean or an object to configure the [Fade plugin](https://www.embla-carousel.com/plugins/fade/).
 
 ::component-example
@@ -331,31 +206,6 @@ class: 'p-8 pb-12'
 ### Wheel Gestures
 
 This plugin is used to extend Embla Carousel with the ability to **use the mouse/trackpad wheel** to navigate the carousel.
-
-::warning
-Install the `embla-carousel-wheel-gestures` package:
-
-::code-group
-
-```bash [pnpm]
-pnpm add embla-carousel-wheel-gestures
-```
-
-```bash [yarn]
-yarn add embla-carousel-wheel-gestures
-```
-
-```bash [npm]
-npm install embla-carousel-wheel-gestures
-```
-
-```bash [bun]
-bun add embla-carousel-wheel-gestures
-```
-
-::
-
-::
 
 Use the `wheel-gestures` prop as a boolean or an object to configure the [Wheel Gestures plugin](https://www.embla-carousel.com/plugins/wheel-gestures/).
 
