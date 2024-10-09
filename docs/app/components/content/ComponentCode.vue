@@ -219,9 +219,9 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
           <UFormField
             :label="option.label"
             size="sm"
-            class="inline-flex ring ring-[--ui-border-accented] rounded"
+            class="inline-flex ring ring-[--ui-border-accented] rounded-[--ui-radius]"
             :ui="{
-              wrapper: 'bg-[--ui-bg-elevated]/50 rounded-l flex border-r border-[--ui-border-accented]',
+              wrapper: 'bg-[--ui-bg-elevated]/50 rounded-l-[--ui-radius] flex border-r border-[--ui-border-accented]',
               label: 'text-[--ui-text-muted] px-2 py-1.5',
               container: 'mt-0'
             }"
@@ -233,7 +233,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               value-key="value"
               color="neutral"
               variant="soft"
-              class="rounded rounded-l-none min-w-12"
+              class="rounded-[--ui-radius] rounded-l-none min-w-12"
               :search-input="false"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
               :ui="{ itemLeadingChip: 'size-2' }"
@@ -256,7 +256,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               :model-value="getComponentProp(option.name)"
               color="neutral"
               variant="soft"
-              :ui="{ base: 'rounded rounded-l-none min-w-12' }"
+              :ui="{ base: 'rounded-[--ui-radius] rounded-l-none min-w-12' }"
               @update:model-value="setComponentProp(option.name, $event)"
             />
           </UFormField>
