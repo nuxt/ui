@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.18.7](https://github.com/nuxt/ui/compare/v2.18.6...v2.18.7) (2024-10-09)
+
+
+### Features
+
+* **forms:** allow `null` as initial value ([#2275](https://github.com/nuxt/ui/issues/2275)) ([474accb](https://github.com/nuxt/ui/commit/474accbefb36ead3b54406ee4ae0fdd2387fab61))
+
+
+### Bug Fixes
+
+* **Carousel:** arrows & indicators are broken in RTL ([#2251](https://github.com/nuxt/ui/issues/2251)) ([db5e5c4](https://github.com/nuxt/ui/commit/db5e5c49078a4faac3fb0c41b23b0dbd64efdd77))
+* **Carousel:** pages calculation ([#2345](https://github.com/nuxt/ui/issues/2345)) ([5cf24fa](https://github.com/nuxt/ui/commit/5cf24fa6e7ba1508458dd5bc1319ac431d908cb0))
+* **Dropdown/Popover:** conflict in toggle for touch devices ([#2272](https://github.com/nuxt/ui/issues/2272)) ([4ae9654](https://github.com/nuxt/ui/commit/4ae96540629faff1c3b5046cf7ce6a9315bb9bf4))
+* **Link:** allow `title` field ([0aa3909](https://github.com/nuxt/ui/commit/0aa3909e715e34ac80565c0111d4378c828fb566)), closes [#1439](https://github.com/nuxt/ui/issues/1439)
+* **Tooltip:** hide when `text` prop & slot are empty ([#2232](https://github.com/nuxt/ui/issues/2232)) ([5ed5c57](https://github.com/nuxt/ui/commit/5ed5c57d0d09ae39d623c963270bb0a894a97d29))
+
 ## [2.18.6](https://github.com/nuxt/ui/compare/v2.18.5...v2.18.6) (2024-09-23)
 
 
