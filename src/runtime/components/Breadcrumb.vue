@@ -65,19 +65,19 @@ const ui = breadcrumb()
 </script>
 
 <template>
-  <Primitive :as="as" aria-label="breadcrumb" data-slot="root" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <ol data-slot="list" :class="ui.list({ class: props.ui?.list })">
+  <Primitive :as="as" aria-label="breadcrumb" :class="ui.root({ class: [props.class, props.ui?.root] })">
+    <ol :class="ui.list({ class: props.ui?.list })">
       <template v-for="(item, index) in items" :key="index">
-        <li data-slot="item" :class="ui.item({ class: props.ui?.item })">
+        <li :class="ui.item({ class: props.ui?.item })">
           <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
-            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.class], active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
+            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ class: [props.ui?.link, item.class], active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
               <slot :name="item.slot || 'item'" :item="item" :index="index">
                 <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="index === items!.length - 1" :index="index">
-                  <UAvatar v-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="linkLeadingAvatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active: index === items!.length - 1 })" />
-                  <UIcon v-else-if="item.icon" :name="item.icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active: index === items!.length - 1 })" />
+                  <UAvatar v-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active: index === items!.length - 1 })" />
+                  <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active: index === items!.length - 1 })" />
                 </slot>
 
-                <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" data-slot="linkLabel" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
+                <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
                   <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="index === items!.length - 1" :index="index">
                     {{ item.label }}
                   </slot>
@@ -89,9 +89,9 @@ const ui = breadcrumb()
           </ULink>
         </li>
 
-        <li v-if="index < items!.length - 1" role="presentation" data-slot="separator" :class="ui.separator({ class: props.ui?.separator })">
+        <li v-if="index < items!.length - 1" role="presentation" :class="ui.separator({ class: props.ui?.separator })">
           <slot name="separator">
-            <UIcon :name="separatorIcon || appConfig.ui.icons.chevronRight" data-slot="separatorIcon" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
+            <UIcon :name="separatorIcon || appConfig.ui.icons.chevronRight" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
           </slot>
         </li>
       </template>

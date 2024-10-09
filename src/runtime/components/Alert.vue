@@ -80,32 +80,32 @@ const ui = computed(() => alert({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.class, props.ui?.root], multiline })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root], multiline })">
     <slot name="leading">
-      <UAvatar v-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
-      <UIcon v-else-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+      <UAvatar v-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+      <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
     </slot>
 
-    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+    <div :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <div v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
         <slot name="title">
           {{ title }}
         </slot>
       </div>
-      <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+      <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description">
           {{ description }}
         </slot>
       </div>
 
-      <div v-if="multiline && actions?.length" data-slot="actions" :class="ui.actions({ class: props.ui?.actions, multiline: true })">
+      <div v-if="multiline && actions?.length" :class="ui.actions({ class: props.ui?.actions, multiline: true })">
         <slot name="actions">
           <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
         </slot>
       </div>
     </div>
 
-    <div v-if="(!multiline && actions?.length) || close" data-slot="actions" :class="ui.actions({ class: props.ui?.actions, multiline: false })">
+    <div v-if="(!multiline && actions?.length) || close" :class="ui.actions({ class: props.ui?.actions, multiline: false })">
       <template v-if="!multiline">
         <slot name="actions">
           <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
@@ -121,7 +121,6 @@ const ui = computed(() => alert({
           variant="link"
           aria-label="Close"
           v-bind="typeof close === 'object' ? close : undefined"
-          data-slot="close"
           :class="ui.close({ class: props.ui?.close })"
           @click="emits('update:open', false)"
         />

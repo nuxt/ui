@@ -128,8 +128,8 @@ const ui = pagination()
 </script>
 
 <template>
-  <PaginationRoot v-slot="{ page, pageCount }" v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <PaginationList v-slot="{ items }" data-slot="list" :class="ui.list({ class: props.ui?.list })">
+  <PaginationRoot v-slot="{ page, pageCount }" v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
+    <PaginationList v-slot="{ items }" :class="ui.list({ class: props.ui?.list })">
       <PaginationFirst v-if="showControls || !!slots.first" as-child>
         <slot name="first">
           <UButton :color="color" :variant="variant" :size="size" :icon="firstIcon || appConfig.ui.icons.chevronDoubleLeft" :to="to?.(1)" />
@@ -158,14 +158,7 @@ const ui = pagination()
 
         <PaginationEllipsis v-else :key="item.type" :index="index" as-child>
           <slot name="ellipsis">
-            <UButton
-              :color="color"
-              :variant="variant"
-              :size="size"
-              :icon="ellipsisIcon || appConfig.ui.icons.ellipsis"
-              data-slot="ellipsis"
-              :class="ui.ellipsis({ class: props.ui?.ellipsis })"
-            />
+            <UButton :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" :class="ui.ellipsis({ class: props.ui?.ellipsis })" />
           </slot>
         </PaginationEllipsis>
       </template>

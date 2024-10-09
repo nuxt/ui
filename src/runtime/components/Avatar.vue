@@ -51,20 +51,19 @@ const ui = computed(() => avatar({
 </script>
 
 <template>
-  <AvatarRoot data-slot="root" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <AvatarRoot :class="ui.root({ class: [props.class, props.ui?.root] })">
     <AvatarImage
       v-if="src"
       :as="as"
       :src="src"
       :alt="alt"
       v-bind="$attrs"
-      data-slot="image"
       :class="ui.image({ class: props.ui?.image })"
     />
 
     <AvatarFallback as-child v-bind="fallbackProps">
-      <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
-      <span v-else data-slot="fallback" :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback }}</span>
+      <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
+      <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback }}</span>
     </AvatarFallback>
   </AvatarRoot>
 </template>

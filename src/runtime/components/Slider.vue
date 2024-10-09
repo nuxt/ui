@@ -99,16 +99,15 @@ function onChange(value: any) {
     v-model="sliderValue"
     :name="name"
     :disabled="disabled"
-    data-slot="root"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
     :default-value="defaultSliderValue"
     @update:model-value="emitFormInput()"
     @value-commit="onChange"
   >
-    <SliderTrack data-slot="track" :class="ui.track({ class: props.ui?.track })">
-      <SliderRange data-slot="range" :class="ui.range({ class: props.ui?.range })" />
+    <SliderTrack :class="ui.track({ class: props.ui?.track })">
+      <SliderRange :class="ui.range({ class: props.ui?.range })" />
     </SliderTrack>
 
-    <SliderThumb v-for="count in thumbsCount" :key="count" data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" />
+    <SliderThumb v-for="count in thumbsCount" :key="count" :class="ui.thumb({ class: props.ui?.thumb })" />
   </SliderRoot>
 </template>

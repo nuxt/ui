@@ -100,7 +100,6 @@ const ui = computed(() => dropdownMenu({
     </DropdownMenuTrigger>
 
     <UDropdownMenuContent
-      data-slot="content"
       :class="ui.content({ class: [props.class, props.ui?.content] })"
       :ui="ui"
       :ui-override="props.ui"
@@ -112,7 +111,7 @@ const ui = computed(() => dropdownMenu({
         <slot :name="name" v-bind="slotData" />
       </template>
 
-      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
+      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
     </UDropdownMenuContent>
   </DropdownMenuRoot>
 </template>

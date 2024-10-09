@@ -145,7 +145,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div data-slot="root" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
     <input
       :id="id"
       ref="inputRef"
@@ -153,7 +153,6 @@ onMounted(() => {
       :value="modelValue"
       :name="name"
       :placeholder="placeholder"
-      data-slot="base"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       :required="required"
@@ -166,15 +165,15 @@ onMounted(() => {
 
     <slot />
 
-    <span v-if="isLeading || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+    <span v-if="isLeading || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading">
-        <UIcon v-if="leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+    <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </div>
