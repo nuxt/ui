@@ -180,8 +180,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: https://pkg.pr.new/nuxt/ui-pro/@nuxt/ui-pro@v2
-        version: https://pkg.pr.new/nuxt/ui-pro/@nuxt/ui-pro@v2(magicast@0.3.5)(rollup@4.24.0)(vue@3.5.11(typescript@5.6.2))
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@589a589
+        version: https://pkg.pr.new/@nuxt/ui-pro@589a589(magicast@0.3.5)(rollup@4.24.0)(vue@3.5.11(typescript@5.6.2))
       '@nuxthub/core':
         specifier: ^0.7.26
         version: 0.7.26(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.0)(vite@5.4.8(@types/node@22.7.4)(lightningcss@1.27.0)(terser@5.34.1))
@@ -1416,8 +1416,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@https://pkg.pr.new/nuxt/ui-pro/@nuxt/ui-pro@v2':
-    resolution: {tarball: https://pkg.pr.new/nuxt/ui-pro/@nuxt/ui-pro@v2}
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@589a589':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@589a589}
     version: 2.0.0-alpha.5
 
   '@nuxt/vite-builder@3.13.2':
@@ -4969,6 +4969,9 @@ packages:
   ofetch@1.4.0:
     resolution: {integrity: sha512-MuHgsEhU6zGeX+EMh+8mSMrYTnsqJQQrpM00Q6QHMKNqQ0bKy0B43tk8tL1wg+CnsSTy1kg4Ir2T5Ig6rD+dfQ==}
 
+  ofetch@1.4.1:
+    resolution: {integrity: sha512-QZj2DfGplQAr2oj9KzceK9Hwz6Whxazmn85yYeVuS3u9XTMOGMRx0kO95MQ+vLsj/S/NwBDMMLU5hpxvI6Tklw==}
+
   ohash@1.1.4:
     resolution: {integrity: sha512-FlDryZAahJmEF3VR3w1KogSEdWX3WhA5GPakFx4J81kEAiHyLMpdLLElS8n8dfNadMgAne/MywcvmogzscVt4g==}
 
@@ -5179,6 +5182,9 @@ packages:
 
   pkg-types@1.2.0:
     resolution: {integrity: sha512-+ifYuSSqOQ8CqP4MbZA5hDpb97n3E8SVWdJe+Wms9kj745lmd3b7EZJiqvmLwAlmRfjrI7Hi5z3kdBJ93lFNPA==}
+
+  pkg-types@1.2.1:
+    resolution: {integrity: sha512-sQoqa8alT3nHjGuTjuKgOnvjo4cljkufdtLMnO2LBP/wRwuDlo1tkaEdMxCRhyGRPacv/ztlZgDPm2b7FAmEvw==}
 
   playwright-core@1.47.2:
     resolution: {integrity: sha512-3JvMfF+9LJfe16l7AbSmU555PaTl2tPyQsVInqm3id16pdDfvZ8TTZ/pyzmkbDrZTQefyzU7AIHlZqQnxpqHVQ==}
@@ -8057,7 +8063,7 @@ snapshots:
       - supports-color
       - webpack-sources
 
-  '@nuxt/ui-pro@https://pkg.pr.new/nuxt/ui-pro/@nuxt/ui-pro@v2(magicast@0.3.5)(rollup@4.24.0)(vue@3.5.11(typescript@5.6.2))':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@589a589(magicast@0.3.5)(rollup@4.24.0)(vue@3.5.11(typescript@5.6.2))':
     dependencies:
       '@nuxt/kit': 3.13.2(magicast@0.3.5)(rollup@4.24.0)
       '@nuxt/schema': 3.13.2(rollup@4.24.0)
@@ -8066,9 +8072,9 @@ snapshots:
       consola: 3.2.3
       defu: 6.1.4
       git-url-parse: 15.0.0
-      ofetch: 1.4.0
+      ofetch: 1.4.1
       parse-git-config: 3.0.0
-      pkg-types: 1.2.0
+      pkg-types: 1.2.1
       scule: 1.3.0
       vue3-smooth-dnd: 0.0.6(vue@3.5.11(typescript@5.6.2))
     transitivePeerDependencies:
@@ -12782,6 +12788,12 @@ snapshots:
       node-fetch-native: 1.6.4
       ufo: 1.5.4
 
+  ofetch@1.4.1:
+    dependencies:
+      destr: 2.0.3
+      node-fetch-native: 1.6.4
+      ufo: 1.5.4
+
   ohash@1.1.4: {}
 
   on-finished@2.4.1:
@@ -13022,6 +13034,12 @@ snapshots:
   pify@2.3.0: {}
 
   pkg-types@1.2.0:
+    dependencies:
+      confbox: 0.1.8
+      mlly: 1.7.2
+      pathe: 1.1.2
+
+  pkg-types@1.2.1:
     dependencies:
       confbox: 0.1.8
       mlly: 1.7.2
