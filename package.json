@@ -34,7 +34,7 @@
   "dependencies": {
     "@headlessui/tailwindcss": "^0.2.1",
     "@headlessui/vue": "^1.7.23",
-    "@iconify-json/heroicons": "^1.2.0",
+    "@iconify-json/heroicons": "^1.2.1",
     "@nuxt/icon": "^1.5.5",
     "@nuxt/kit": "^3.13.2",
     "@nuxtjs/color-mode": "^3.5.1",
