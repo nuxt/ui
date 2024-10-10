@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly } from 'vue'
+import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly, type Prop } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
@@ -13,6 +13,7 @@ import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } fro
 import type { BaseSchema as ValibotSchema30, BaseSchemaAsync as ValibotSchemaAsync30 } from 'valibot30'
 import type { GenericSchema as ValibotSchema31, GenericSchemaAsync as ValibotSchemaAsync31, SafeParser as ValibotSafeParser31, SafeParserAsync as ValibotSafeParserAsync31 } from 'valibot31'
 import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync, SafeParser as ValibotSafeParser, SafeParserAsync as ValibotSafeParserAsync } from 'valibot'
+import { Struct, validate as validateSuperStruct } from 'superstruct'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types/form'
 import { useId } from '#imports'
 
@@ -35,7 +36,7 @@ export default defineComponent({
         | PropType<ValibotSchema31 | ValibotSchemaAsync31>
         | PropType<ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any>>
         | PropType<ValibotSchema | ValibotSchemaAsync>
-        | PropType<ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>>,
+        | PropType<ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>> | PropType<Struct<any, any>>,
       default: undefined
     },
     state: {
@@ -88,6 +89,8 @@ export default defineComponent({
           errs = errs.concat(await getJoiErrors(props.state, props.schema))
         } else if (isValibotSchema(props.schema)) {
           errs = errs.concat(await getValibotError(props.state, props.schema))
+        } else if (isSuperStructSchema(props.schema)) {
+          errs = errs.concat(await getSuperStructErrors(props.state, props.schema))
         } else {
           throw new Error('Form validation failed: Unsupported form schema')
         }
@@ -195,6 +198,10 @@ function isYupError (error: any): error is YupError {
   return error.inner !== undefined
 }
 
+function isSuperStructSchema (schema: any): schema is Struct<any, any> {
+  return schema instanceof Struct
+}
+
 async function getYupErrors (
   state: any,
   schema: YupObjectSchema<any>
@@ -216,6 +223,18 @@ async function getYupErrors (
 
 function isZodSchema (schema: any): schema is ZodSchema {
   return schema.parse !== undefined
+}
+
+async function getSuperStructErrors (state: any, schema: Struct<any, any>): Promise<FormError[]> {
+  const [err] = validateSuperStruct(state, schema)
+  if (err) {
+    const errors = err.failures()
+    return errors.map((error) => ({
+      message: error.message,
+      path: error.path.join('.')
+    }))
+  }
+  return []
 }
 
 async function getZodErrors (
