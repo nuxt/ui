@@ -108,6 +108,7 @@ export interface SelectMenuSlots<T> {
 import { computed, toRef } from 'vue'
 import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
+import isEqual from 'fast-deep-equal'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
@@ -150,16 +151,14 @@ const ui = computed(() => selectMenu({
   buttonGroup: orientation.value
 }))
 
-function displayValue(val: T, multiple?: boolean): string {
-  if (multiple && Array.isArray(val)) {
-    return val.map(v => displayValue(v)).join(', ')
+function displayValue(value: T): string {
+  if (props.multiple && Array.isArray(value)) {
+    return value.map(v => displayValue(v)).join(', ')
   }
 
-  if (typeof val === 'object') {
-    return val.label
-  }
+  const item = items.value.find(item => props.valueKey ? isEqual(item[props.valueKey], value) : isEqual(item, value))
 
-  return val && String(val)
+  return item && (typeof item === 'object' ? item.label : item)
 }
 
 function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: string): ArrayOrWrapped<AcceptableValue> {
@@ -183,6 +182,8 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
 }
 
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as SelectMenuItem[][] : [])
+// eslint-disable-next-line vue/no-dupe-keys
+const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -227,12 +228,14 @@ function onUpdateOpen(value: boolean) {
         </span>
 
         <slot :model-value="(modelValue as T)" :open="open">
-          <span v-if="multiple ? modelValue?.length : modelValue !== undefined" :class="ui.value({ class: props.ui?.value })">
-            {{ displayValue(modelValue as T, multiple) }}
-          </span>
-          <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
-            {{ placeholder ?? '&nbsp;' }}
-          </span>
+          <template v-for="displayedModelValue in [displayValue(modelValue)]" :key="displayedModelValue">
+            <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
+              {{ displayedModelValue }}
+            </span>
+            <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
+              {{ placeholder ?? '&nbsp;' }}
+            </span>
+          </template>
         </slot>
 
         <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
@@ -291,7 +294,7 @@ function onUpdateOpen(value: boolean) {
 
                   <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                     <slot name="item-label" :item="(item as T)" :index="index">
-                      {{ displayValue(item as T) }}
+                      {{ typeof item === 'object' ? item.label : item }}
                     </slot>
                   </span>
 

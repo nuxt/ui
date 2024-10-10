@@ -118,6 +118,7 @@ export interface InputMenuSlots<T> {
 import { computed, ref, toRef, onMounted } from 'vue'
 import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
+import isEqual from 'fast-deep-equal'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
@@ -162,12 +163,10 @@ const ui = computed(() => inputMenu({
   buttonGroup: orientation.value
 }))
 
-function displayValue(val: AcceptableValue) {
-  if (typeof val === 'object') {
-    return val.label
-  }
+function displayValue(value: AcceptableValue): string {
+  const item = items.value.find(item => props.valueKey ? isEqual(item[props.valueKey], value) : isEqual(item, value))
 
-  return val && String(val)
+  return item && (typeof item === 'object' ? item.label : item)
 }
 
 function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: string): ArrayOrWrapped<AcceptableValue> {
@@ -191,6 +190,8 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
 }
 
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as InputMenuItem[][] : [])
+// eslint-disable-next-line vue/no-dupe-keys
+const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 const inputRef = ref<InstanceType<typeof ComboboxInput> | null>(null)
 
@@ -264,7 +265,7 @@ defineExpose({
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="(item as string)" :class="ui.tagsItem({ class: props.ui?.tagsItem })">
           <TagsInputItemText :class="ui.tagsItemText({ class: props.ui?.tagsItemText })">
             <slot name="tags-item-text" :item="(item as T)" :index="index">
-              {{ typeof item === 'object' ? item.label : item }}
+              {{ displayValue(item as T) }}
             </slot>
           </TagsInputItemText>
 
@@ -351,7 +352,7 @@ defineExpose({
 
                   <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                     <slot name="item-label" :item="(item as T)" :index="index">
-                      {{ displayValue(item as T) }}
+                      {{ typeof item === 'object' ? item.label : item }}
                     </slot>
                   </span>
 
