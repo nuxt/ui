@@ -66,6 +66,7 @@
     "joi": "^17.13.3",
     "nuxt": "^3.13.2",
     "release-it": "^17.7.0",
+    "superstruct": "^2.0.2",
     "unbuild": "^2.0.0",
     "valibot": "^0.42.1",
     "valibot30": "npm:valibot@0.30.0",
