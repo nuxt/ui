@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly, type Prop } from 'vue'
+import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
