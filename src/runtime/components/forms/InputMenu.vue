@@ -401,20 +401,26 @@ export default defineComponent({
       lazy: props.searchLazy
     })
 
+    function escapeRegExp (string: string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    }
+
     const filteredOptions = computed(() => {
       if (!query.value || debouncedSearch) {
         return options.value
       }
 
+      const escapedQuery = escapeRegExp(query.value)
+
       return options.value.filter((option: any) => {
         return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
           if (['string', 'number'].includes(typeof option)) {
-            return String(option).search(new RegExp(query.value, 'i')) !== -1
+            return String(option).search(new RegExp(escapedQuery, 'i')) !== -1
           }
 
           const child = get(option, searchAttribute)
 
-          return child !== null && child !== undefined && String(child).search(new RegExp(query.value, 'i')) !== -1
+          return child !== null && child !== undefined && String(child).search(new RegExp(escapedQuery, 'i')) !== -1
         })
       })
     })
