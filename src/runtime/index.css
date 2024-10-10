@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply antialiased font-sans text-[--ui-text] bg-[--ui-bg];
+    @apply antialiased text-[--ui-text] bg-[--ui-bg];
   }
 
   :root {
