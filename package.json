@@ -82,7 +82,7 @@
     "happy-dom": "^15.7.4",
     "joi": "^17.13.3",
     "nuxt": "^3.13.2",
-    "release-it": "^17.7.0",
+    "release-it": "^17.8.2",
     "valibot": "^0.42.1",
     "vitest": "^2.1.2",
     "vitest-environment-nuxt": "^1.0.1",
