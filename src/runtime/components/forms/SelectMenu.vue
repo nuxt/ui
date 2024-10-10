@@ -384,7 +384,7 @@ export default defineComponent({
     const label = computed(() => {
       if (props.multiple) {
         if (Array.isArray(props.modelValue) && props.modelValue.length) {
-          return `${selected.value.length} selected`
+          return `${props.modelValue.length} selected`
         } else {
           return null
         }
