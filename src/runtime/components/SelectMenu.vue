@@ -117,7 +117,7 @@ import { useFormField } from '../composables/useFormField'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
-import { get } from '../utils'
+import { get, escapeRegExp } from '../utils'
 
 const props = withDefaults(defineProps<SelectMenuProps<T>>(), {
   search: true,
@@ -167,16 +167,17 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
   }
 
   const fields = Array.isArray(props.filter) ? props.filter : ['label']
+  const escapedSearchTerm = escapeRegExp(searchTerm)
 
   return items.filter((item) => {
     if (typeof item !== 'object') {
-      return String(item).search(new RegExp(searchTerm, 'i')) !== -1
+      return String(item).search(new RegExp(escapedSearchTerm, 'i')) !== -1
     }
 
     return fields.some((field) => {
       const child = get(item, field)
 
-      return child !== null && child !== undefined && String(child).search(new RegExp(searchTerm, 'i')) !== -1
+      return child !== null && child !== undefined && String(child).search(new RegExp(escapedSearchTerm, 'i')) !== -1
     })
   }) as ArrayOrWrapped<T>
 }
