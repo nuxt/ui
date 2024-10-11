@@ -90,11 +90,7 @@ export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValu
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-<<<<<<< HEAD
-  labelKey?: string
-=======
   labelKey?: keyof T
->>>>>>> v3
   items?: T[] | T[][]
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
