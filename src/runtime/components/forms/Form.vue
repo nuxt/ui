@@ -13,7 +13,7 @@ import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } fro
 import type { BaseSchema as ValibotSchema30, BaseSchemaAsync as ValibotSchemaAsync30 } from 'valibot30'
 import type { GenericSchema as ValibotSchema31, GenericSchemaAsync as ValibotSchemaAsync31, SafeParser as ValibotSafeParser31, SafeParserAsync as ValibotSafeParserAsync31 } from 'valibot31'
 import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync, SafeParser as ValibotSafeParser, SafeParserAsync as ValibotSafeParserAsync } from 'valibot'
-import { Struct, validate as validateSuperStruct } from 'superstruct'
+import type { Struct } from 'superstruct'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form } from '../../types/form'
 import { useId } from '#imports'
 
@@ -198,8 +198,13 @@ function isYupError (error: any): error is YupError {
   return error.inner !== undefined
 }
 
-function isSuperStructSchema (schema: any): schema is Struct<any, any> {
-  return schema instanceof Struct
+function isSuperStructSchema (schema: any): boolean {
+  return (
+    'schema' in schema &&
+    typeof schema.coercer === 'function' &&
+    typeof schema.validator === 'function' &&
+    typeof schema.refiner === 'function'
+  )
 }
 
 async function getYupErrors (
@@ -226,7 +231,7 @@ function isZodSchema (schema: any): schema is ZodSchema {
 }
 
 async function getSuperStructErrors (state: any, schema: Struct<any, any>): Promise<FormError[]> {
-  const [err] = validateSuperStruct(state, schema)
+  const [err] = schema.validate(state)
   if (err) {
     const errors = err.failures()
     return errors.map((error) => ({
@@ -277,6 +282,7 @@ async function getJoiErrors (
     }
   }
 }
+
 
 function isValibotSchema (schema: any): schema is ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema31 | ValibotSchemaAsync31 | ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any> | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any> {
   return '_parse' in schema || '_run' in schema || (typeof schema === 'function' && 'schema' in schema)
