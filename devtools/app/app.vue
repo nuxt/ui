@@ -23,7 +23,7 @@ onDevtoolsClientConnected(async (client) => {
   }
 
   state.value.props = { ...components.value?.reduce((acc, comp) => {
-    acc[comp.slug] = comp.defaultVariants ?? {}
+    acc[comp.slug] = { ...comp.defaultVariants, ...comp.meta?.devtools?.defaultProps }
     return acc
   }, {} as Record<string, any>), ...state.value.props }
 
@@ -44,17 +44,12 @@ function updateRenderer() {
 
 watchDebounced(state, updateRenderer, { deep: true, debounce: 200, maxWait: 500 })
 
-onMounted(() => {
-  window.addEventListener('nuxt-ui-devtools:component-loaded', onComponentLoaded)
-})
+onMounted(() => window.addEventListener('nuxt-ui-devtools:component-loaded', onComponentLoaded))
+onUnmounted(() => window.removeEventListener('nuxt-ui-devtools:component-loaded', onComponentLoaded))
 
-onUnmounted(() => {
-  window.removeEventListener('nuxt-ui-devtools:component-loaded', onComponentLoaded)
-})
-
-function onComponentLoaded(event: Event & { data?: any }) {
+function onComponentLoaded() {
   if (!component.value) return
-  state.value.props[component.value.slug] = event.data?.props
+  updateRenderer()
 }
 
 // function onSlotHover(slot: string) {

@@ -3,6 +3,7 @@ import { extendServerRpc, onDevToolsInitialized } from '@nuxt/devtools-kit'
 import * as theme from '../theme'
 import type { ModuleOptions } from '../module'
 import { upperFirst, camelCase, kebabCase } from 'scule'
+import defu from 'defu'
 
 export type Component = {
   slug: string
@@ -10,7 +11,13 @@ export type Component = {
   slots: Record<string, string>
   variants: Record<string, any>
   defaultVariants: Record<string, any>
-  meta: ComponentMeta
+  meta: ComponentMeta & Record<string, any>
+}
+
+export type DevtoolsMeta<T> = {
+  devtools: {
+    defaultProps: T
+  }
 }
 
 export interface ServerFunctions {
@@ -25,9 +32,15 @@ export function setupDevtoolsClient(options: ModuleOptions) {
   onDevToolsInitialized(async () => {
     const _rpc = extendServerRpc<ClientFunctions, ServerFunctions>('nuxt/ui/devtools', {
       async getComponents() {
+        // TODO: Properly configure the host
+        const resp = await fetch('http://localhost:3000/__ui_devtools__/api/component-meta')
+        const devtoolsComponentMeta = await resp.json()
+
         return await Promise.all(Object.keys(theme).map(async (name) => {
           const slug = kebabCase(name)
           const label = options.prefix + upperFirst(camelCase(slug))
+
+          const devtoolsMeta: any = Object.entries(devtoolsComponentMeta).find(([key]) => slug === kebabCase(key.split('/')[key.split('/').length - 1]?.replace(/\..*/, '')))?.[1]
 
           // TODO: Properly configure the host
           return fetch(`http://localhost:3000/api/component-meta/${label}.json`).then(async (resp) => {
@@ -39,7 +52,7 @@ export function setupDevtoolsClient(options: ModuleOptions) {
               slots: Array.isArray(template.slots) ? template.slots.join(' ') : template.slots,
               variants: template.variants,
               defaultVariants: template.defaultVariants,
-              meta: data?.meta
+              meta: defu(data?.meta, devtoolsMeta.devtools)
             }
           })
         }))

@@ -7,6 +7,7 @@ import sirv from 'sirv'
 import { setupDevtoolsClient } from './devtools/rpc'
 import { getPort } from 'get-port-please'
 import { pick } from './runtime/utils'
+import { devtoolsMetaPlugin } from './devtools/metaParser'
 
 export type * from './runtime/types'
 
@@ -137,6 +138,9 @@ export default defineNuxtModule<ModuleOptions>({
 
     if (nuxt.options.dev && nuxt.options.devtools.enabled) {
       installModule('nuxt-component-meta')
+      nuxt.options.vite ||= {}
+      nuxt.options.vite.plugins ||= []
+      nuxt.options.vite.plugins.push(devtoolsMetaPlugin())
 
       // @ts-expect-error - no types available
       nuxt.options.componentMeta ||= {}
