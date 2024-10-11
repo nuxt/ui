@@ -3,7 +3,7 @@
   <div>
     <NuxtLoadingIndicator />
 
-    <!-- <Banner v-if="!$route.path.startsWith('/examples')" /> -->
+    <Banner v-if="!$route.path.startsWith('/examples')" />
 
     <Header v-if="!$route.path.startsWith('/examples')" :links="links" />
 
