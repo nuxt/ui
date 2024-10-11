@@ -25,6 +25,7 @@ describe('Breadcrumb', () => {
   it.each([
     // Props
     ['with items', { props }],
+    ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with separatorIcon', { props: { ...props, separatorIcon: 'i-heroicons-minus' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { link: 'font-bold' } } }],

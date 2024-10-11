@@ -10,6 +10,7 @@ interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean
+  labelKey: string
   class?: any
   ui: typeof _dropdownMenu
   uiOverride?: any
@@ -28,7 +29,7 @@ import { DropdownMenu } from 'radix-vue/namespaced'
 import { useForwardPropsEmits } from 'radix-vue'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { omit } from '../utils'
+import { omit, get } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
@@ -57,9 +58,9 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
         <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: uiOverride?.itemLeadingIcon, active })" />
       </slot>
 
-      <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel({ class: uiOverride?.itemLabel, active })">
+      <span v-if="get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel({ class: uiOverride?.itemLabel, active })">
         <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="(item as T)" :active="active" :index="index">
-          {{ item.label }}
+          {{ get(item, props.labelKey as string) }}
         </slot>
 
         <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: uiOverride?.itemLabelExternalIcon, active })" />
@@ -89,7 +90,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               as="button"
               type="button"
               :disabled="item.disabled"
-              :text-value="item.label"
+              :text-value="get(item, props.labelKey as string)"
               :class="ui.item({ class: uiOverride?.item })"
             >
               <ReuseItemTemplate :item="item" :index="index" />
@@ -106,6 +107,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               align="start"
               :align-offset="-4"
               :side-offset="3"
+              :label-key="labelKey"
               v-bind="item.content"
             >
               <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
@@ -113,7 +115,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               </template>
             </UDropdownMenuContent>
           </DropdownMenu.Sub>
-          <DropdownMenu.Item v-else as-child :disabled="item.disabled" :text-value="item.label" @select="item.select">
+          <DropdownMenu.Item v-else as-child :disabled="item.disabled" :text-value="get(item, props.labelKey as string)" @select="item.select">
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<DropdownMenuItem, 'type'>)" custom>
               <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.class], active })">
                 <ReuseItemTemplate :item="item" :active="active" :index="index" />

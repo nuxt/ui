@@ -79,6 +79,7 @@ describe('NavigationMenu', () => {
   it.each([
     // Props
     ['with items', { props }],
+    ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),

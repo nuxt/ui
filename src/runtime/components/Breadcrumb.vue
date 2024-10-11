@@ -30,6 +30,11 @@ export interface BreadcrumbProps<T> {
    * @defaultValue appConfig.ui.icons.chevronRight
    */
   separatorIcon?: string
+  /**
+   * The key used to get the label from the item.
+   * @defaultValue 'label'
+   */
+  labelKey?: string
   class?: any
   ui?: PartialString<typeof breadcrumb.slots>
 }
@@ -49,13 +54,16 @@ export type BreadcrumbSlots<T extends { slot?: string }> = {
 <script setup lang="ts" generic="T extends BreadcrumbItem">
 import { Primitive } from 'radix-vue'
 import { useAppConfig } from '#imports'
+import { get } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
 
-const props = defineProps<BreadcrumbProps<T>>()
+const props = withDefaults(defineProps<BreadcrumbProps<T>>(), {
+  labelKey: 'label'
+})
 const slots = defineSlots<BreadcrumbSlots<T>>()
 
 const appConfig = useAppConfig()
@@ -77,9 +85,9 @@ const ui = breadcrumb()
                   <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active: index === items!.length - 1 })" />
                 </slot>
 
-                <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
+                <span v-if="get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
                   <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="index === items!.length - 1" :index="index">
-                    {{ item.label }}
+                    {{ get(item, props.labelKey as string) }}
                   </slot>
                 </span>
 
