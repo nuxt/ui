@@ -42,6 +42,11 @@ export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'>, 
    * @defaultValue true
    */
   portal?: boolean
+  /**
+   * The key used to get the label from the item.
+   * @defaultValue 'label'
+   */
+  labelKey?: string
   class?: any
   ui?: PartialString<typeof contextMenu.slots>
 }
@@ -69,7 +74,8 @@ import UContextMenuContent from './ContextMenuContent.vue'
 
 const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
   portal: true,
-  modal: true
+  modal: true,
+  labelKey: 'label'
 })
 const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
@@ -96,6 +102,7 @@ const ui = computed(() => contextMenu({
       v-bind="contentProps"
       :items="items"
       :portal="portal"
+      :label-key="labelKey"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />
