@@ -31,7 +31,7 @@ export interface BreadcrumbProps<T> {
    */
   separatorIcon?: string
   /**
-   * The key to use to get the label from the item.
+   * The key used to get the label from the item.
    * @defaultValue 'label'
    */
   labelKey?: string
@@ -85,7 +85,7 @@ const ui = breadcrumb()
                   <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active: index === items!.length - 1 })" />
                 </slot>
 
-                <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
+                <span v-if="get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
                   <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="index === items!.length - 1" :index="index">
                     {{ get(item, props.labelKey as string) }}
                   </slot>
