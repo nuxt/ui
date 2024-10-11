@@ -198,7 +198,7 @@ function isYupError (error: any): error is YupError {
   return error.inner !== undefined
 }
 
-function isSuperStructSchema (schema: any): boolean {
+function isSuperStructSchema (schema: any): schema is Struct<any, any> {
   return (
     'schema' in schema &&
     typeof schema.coercer === 'function' &&
