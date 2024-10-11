@@ -52,6 +52,13 @@ Note that **no validation library is included** by default, so ensure you **inst
     class: 'w-60'
   ---
   ::
+  ::component-example{label="Superstruct"}
+  ---
+  component: 'form-example-superstruct'
+  componentProps:
+    class: 'w-60'
+  ---
+  ::
 ::
 
 ## Custom validation
