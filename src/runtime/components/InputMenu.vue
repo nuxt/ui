@@ -90,7 +90,11 @@ export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValu
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
+<<<<<<< HEAD
   labelKey?: string
+=======
+  labelKey?: keyof T
+>>>>>>> v3
   items?: T[] | T[][]
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -141,7 +145,7 @@ const props = withDefaults(defineProps<InputMenuProps<T>>(), {
   autofocusDelay: 0,
   portal: true,
   filter: () => ['label'],
-  labelKey: 'label'
+  labelKey: 'label' as keyof T
 })
 const emits = defineEmits<InputMenuEmits<T>>()
 const slots = defineSlots<InputMenuSlots<T>>()
