@@ -2,7 +2,7 @@
 
 exports[`Avatar > renders with alt correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[--ui-bg-elevated] size-8 text-base"><!--v-if--><span class="font-medium leading-none text-[--ui-text-muted] truncate">BC</span></span>"`;
 
-exports[`Avatar > renders with class correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle size-8 text-base bg-[--ui-bg]"><!--v-if--><span class="font-medium leading-none text-[--ui-text-muted] truncate"></span></span>"`;
+exports[`Avatar > renders with class correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle size-8 text-base bg-[var(--ui-bg)]"><!--v-if--><span class="font-medium leading-none text-[--ui-text-muted] truncate"></span></span>"`;
 
 exports[`Avatar > renders with icon correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[--ui-bg-elevated] size-8 text-base"><!--v-if--><span class="iconify i-heroicons:photo text-[--ui-text-muted] shrink-0" aria-hidden="true"></span></span>"`;
 
