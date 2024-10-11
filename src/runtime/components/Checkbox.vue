@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { InputHTMLAttributes } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { CheckboxRootProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
@@ -22,7 +21,7 @@ export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'req
    * @defaultValue appConfig.ui.icons.check
    */
   icon?: string
-  indeterminate?: InputHTMLAttributes['indeterminate']
+  indeterminate?: boolean
   /**
    * The icon displayed when the checkbox is indeterminate.
    * @defaultValue appConfig.ui.icons.minus
@@ -64,11 +63,9 @@ const appConfig = useAppConfig()
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled } = useFormField<CheckboxProps>(props)
 const id = _id.value ?? useId()
 
-const indeterminate = computed(() => (modelValue.value === undefined && props.indeterminate))
-
 const checked = computed({
   get() {
-    return indeterminate.value ? 'indeterminate' : modelValue.value
+    return props.indeterminate ? 'indeterminate' : modelValue.value
   },
   set(value) {
     modelValue.value = value === 'indeterminate' ? undefined : value
@@ -80,7 +77,7 @@ const ui = computed(() => checkbox({
   color: color.value,
   required: props.required,
   disabled: disabled.value,
-  checked: (modelValue.value ?? props.defaultValue) || indeterminate.value
+  checked: (modelValue.value ?? props.defaultValue) || props.indeterminate
 }))
 
 function onUpdate(value: any) {

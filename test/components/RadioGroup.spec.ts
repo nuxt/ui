@@ -20,6 +20,9 @@ describe('RadioGroup', () => {
   it.each([
     ['with items', { props }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label' } }],
+    ['with labelKey', { props: { ...props, labelKey: 'value' } }],
+    ['with descriptionKey', { props: { ...props, descriptionKey: 'value' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with description', { props: { items: items.map((opt, count) => ({ ...opt, description: `Description ${count}` })) } }],
     ['with required', { props: { ...props, legend: 'Legend', required: true } }],

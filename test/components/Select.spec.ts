@@ -39,6 +39,8 @@ describe('Select', () => {
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label' } }],
+    ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with id', { props: { ...props, id: 'id' } }],
     ['with name', { props: { ...props, name: 'name' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
