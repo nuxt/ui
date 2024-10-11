@@ -38,7 +38,7 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     variant: 'solid',
     class: {
-      root: `bg-[--ui-${color}] text-[--ui-bg]`
+      root: `bg-[--ui-${color}] text-[var(--ui-bg)]`
     }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
@@ -62,13 +62,13 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'neutral',
     variant: 'solid',
     class: {
-      root: 'text-[--ui-bg] bg-[--ui-bg-inverted]'
+      root: 'text-[var(--ui-bg)] bg-[--ui-bg-inverted]'
     }
   }, {
     color: 'neutral',
     variant: 'outline',
     class: {
-      root: 'text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border]'
+      root: 'text-[--ui-text-highlighted] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border)]'
     }
   }, {
     color: 'neutral',

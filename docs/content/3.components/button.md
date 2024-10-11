@@ -214,7 +214,7 @@ props:
   color: neutral
   variant: outline
   ui:
-    leadingIcon: 'text-[--ui-primary]'
+    leadingIcon: 'text-[var(--ui-primary)]'
 slots:
   default: |
 

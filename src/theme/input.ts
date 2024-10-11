@@ -51,7 +51,7 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     variant: {
-      outline: 'text-[--ui-text-highlighted] bg-[--ui-bg] ring ring-inset ring-[--ui-border-accented]',
+      outline: 'text-[--ui-text-highlighted] bg-[var(--ui-bg)] ring ring-inset ring-[--ui-border-accented]',
       soft: 'text-[--ui-text-highlighted] bg-[--ui-bg-elevated]/50 hover:bg-[--ui-bg-elevated] focus:bg-[--ui-bg-elevated] disabled:bg-[--ui-bg-elevated]/50',
       subtle: 'text-[--ui-text-highlighted] bg-[--ui-bg-elevated] ring ring-inset ring-[--ui-border-accented]',
       ghost: 'text-[--ui-text-highlighted] hover:bg-[--ui-bg-elevated] focus:bg-[--ui-bg-elevated] disabled:bg-transparent dark:disabled:bg-transparent',

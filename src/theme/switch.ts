@@ -3,12 +3,12 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-start',
-    base: ['inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[--ui-bg] data-[state=unchecked]:bg-[--ui-bg-accented]', options.theme.transitions && 'transition-colors duration-200'],
+    base: ['inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ui-bg)] data-[state=unchecked]:bg-[--ui-bg-accented]', options.theme.transitions && 'transition-colors duration-200'],
     container: 'flex items-center',
-    thumb: 'group pointer-events-none block rounded-full bg-[--ui-bg] shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center',
+    thumb: 'group pointer-events-none block rounded-full bg-[var(--ui-bg)] shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center',
     icon: ['absolute shrink-0 group-data-[state=unchecked]:text-[--ui-text-dimmed] opacity-0 size-10/12', options.theme.transitions && 'transition-[color,opacity] duration-200'],
     wrapper: 'ms-2',
-    label: 'block font-medium text-[--ui-text]',
+    label: 'block font-medium text-[var(--ui-text)]',
     description: 'text-[--ui-text-muted]'
   },
   variants: {
@@ -71,7 +71,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     required: {
       true: {
-        label: 'after:content-[\'*\'] after:ms-0.5 after:text-[--ui-error]'
+        label: 'after:content-[\'*\'] after:ms-0.5 after:text-[var(--ui-error)]'
       }
     },
     disabled: {

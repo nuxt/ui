@@ -1,7 +1,7 @@
 export default {
   slots: {
     overlay: 'fixed inset-0 bg-[--ui-bg-elevated]/75',
-    content: 'fixed bg-[--ui-bg] divide-y divide-[--ui-border] sm:ring ring-[--ui-border] sm:shadow-lg flex flex-col focus:outline-none',
+    content: 'fixed bg-[var(--ui-bg)] divide-y divide-[var(--ui-border)] sm:ring ring-[var(--ui-border)] sm:shadow-lg flex flex-col focus:outline-none',
     header: 'px-4 py-5 sm:px-6',
     body: 'flex-1 overflow-y-auto p-4 sm:p-6',
     footer: 'flex items-center gap-1.5 p-4 sm:px-6',

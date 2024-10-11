@@ -130,7 +130,7 @@ defineShortcuts(extractShortcuts(items))
         <UButton label="Open" color="neutral" variant="outline" icon="i-heroicons-bars-3" />
 
         <template #custom-trailing>
-          <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-[--ui-primary]" />
+          <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-[var(--ui-primary)]" />
         </template>
       </UDropdownMenu>
     </div>

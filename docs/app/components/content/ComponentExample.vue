@@ -124,9 +124,9 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
             :label="option.label"
             :name="option.name"
             size="sm"
-            class="inline-flex ring ring-[--ui-border-accented] rounded-[--ui-radius]"
+            class="inline-flex ring ring-[--ui-border-accented] rounded-[var(--ui-radius)]"
             :ui="{
-              wrapper: 'bg-[--ui-bg-elevated]/50 rounded-l-[--ui-radius] flex border-r border-[--ui-border-accented]',
+              wrapper: 'bg-[--ui-bg-elevated]/50 rounded-l-[var(--ui-radius)] flex border-r border-[--ui-border-accented]',
               label: 'text-[--ui-text-muted] px-2 py-1.5',
               container: 'mt-0'
             }"
@@ -139,7 +139,7 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
               :value-key="option.name.toLowerCase().endsWith('color') ? 'value' : undefined"
               color="neutral"
               variant="soft"
-              class="rounded-[--ui-radius] rounded-l-none min-w-12"
+              class="rounded-[var(--ui-radius)] rounded-l-none min-w-12"
               :multiple="option.multiple"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
               :ui="{ itemLeadingChip: 'size-2' }"
@@ -160,7 +160,7 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
               :model-value="get(optionsValues, option.name)"
               color="neutral"
               variant="soft"
-              :ui="{ base: 'rounded-[--ui-radius] rounded-l-none min-w-12' }"
+              :ui="{ base: 'rounded-[var(--ui-radius)] rounded-l-none min-w-12' }"
               @update:model-value="set(optionsValues, option.name, $event)"
             />
           </UFormField>

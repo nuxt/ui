@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative flex items-center select-none touch-none',
     track: 'relative bg-[--ui-bg-accented] overflow-hidden rounded-full grow',
     range: 'absolute rounded-full',
-    thumb: 'rounded-full bg-[--ui-bg] ring-2 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2'
+    thumb: 'rounded-full bg-[var(--ui-bg)] ring-2 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2'
   },
   variants: {
     color: {

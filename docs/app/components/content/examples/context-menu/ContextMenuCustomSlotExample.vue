@@ -22,7 +22,7 @@ const items = [{
     </template>
 
     <template #refresh-trailing>
-      <UIcon v-if="loading" name="i-heroicons-arrow-path-20-solid" class="shrink-0 size-5 text-[--ui-primary] animate-spin" />
+      <UIcon v-if="loading" name="i-heroicons-arrow-path-20-solid" class="shrink-0 size-5 text-[var(--ui-primary)] animate-spin" />
     </template>
   </UContextMenu>
 </template>

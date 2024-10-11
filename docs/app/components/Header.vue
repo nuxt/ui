@@ -22,10 +22,10 @@ defineShortcuts({
 <template>
   <UHeader :ui="{ left: 'min-w-0' }">
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[--ui-text-highlighted] min-w-0 focus-visible:outline-[--ui-primary]" aria-label="Nuxt UI">
+      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[--ui-text-highlighted] min-w-0 focus-visible:outline-[var(--ui-primary)]" aria-label="Nuxt UI">
         <Logo class="w-auto h-6 shrink-0" />
 
-        <UBadge :label="`v${config.version}`" variant="subtle" size="sm" class="-mb-[2px] rounded-[--ui-radius] font-semibold inline-block truncate" />
+        <UBadge :label="`v${config.version}`" variant="subtle" size="sm" class="-mb-[2px] rounded-[var(--ui-radius)] font-semibold inline-block truncate" />
       </NuxtLink>
     </template>
 
