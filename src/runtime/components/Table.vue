@@ -1,7 +1,7 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import type { ColumnDef, ColumnFiltersState, ExpandedState, SortingState, VisibilityState, Updater } from '@tanstack/vue-table'
+import type { PaginationOptions, Row, ColumnDef, ColumnFiltersState, ColumnPinningState, ExpandedState, SortingState, PaginationState, RowSelectionState, VisibilityState, Updater } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
 
@@ -12,6 +12,7 @@ const table = tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })
 export type TableColumn<T> = ColumnDef<T>
 
 export interface TableProps<T> {
+  paginationOptions?: Omit<PaginationOptions, 'getPaginationRowModel' | 'onPaginationChange'>
   columns?: TableColumn<T>[]
   data: T[]
   class?: any
@@ -21,13 +22,13 @@ export interface TableProps<T> {
 export type TableEmits = {}
 
 export interface TableSlots<T> {
-  expanded(props?: { row: T }): any
+  expanded(props: { row: Row<T> }): any
   empty(props?: {}): any
 }
 </script>
 
 <script setup lang="ts" generic="T">
-import { ref, computed, type Ref } from 'vue'
+import { computed, type Ref } from 'vue'
 import { FlexRender, getCoreRowModel, getExpandedRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useVueTable } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 
@@ -38,33 +39,40 @@ defineSlots<TableSlots<T>>()
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = table()
 
-const sorting = ref<SortingState>([])
-const columnFilters = ref<ColumnFiltersState>([])
-const columnVisibility = ref<VisibilityState>({})
-const rowSelection = ref({})
-const expanded = ref<ExpandedState>({})
+const sortingState = defineModel<SortingState>('sorting', { default: [] })
+const paginationState = defineModel<PaginationState>('pagination', { default: undefined })
+const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
+const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: {} })
+const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: {} })
+const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
+const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 
 const columns = computed<ColumnDef<T>[]>(() => props.columns ?? Object.keys(props.data[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 
 const tableApi = useVueTable({
-  data: props.data,
-  columns: columns.value,
+  ...(props.paginationOptions || {}),
+  get data() { return props.data },
+  get columns() { return columns.value },
   getCoreRowModel: getCoreRowModel(),
-  getPaginationRowModel: getPaginationRowModel(),
+  // getPaginationRowModel: getPaginationRowModel(),
   getSortedRowModel: getSortedRowModel(),
   getFilteredRowModel: getFilteredRowModel(),
   getExpandedRowModel: getExpandedRowModel(),
-  onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sorting),
-  onColumnFiltersChange: updaterOrValue => valueUpdater(updaterOrValue, columnFilters),
-  onColumnVisibilityChange: updaterOrValue => valueUpdater(updaterOrValue, columnVisibility),
-  onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelection),
-  onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expanded),
+  onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sortingState),
+  onPaginationChange: updaterOrValue => valueUpdater(updaterOrValue, paginationState),
+  onColumnFiltersChange: updaterOrValue => valueUpdater(updaterOrValue, columnFiltersState),
+  onColumnVisibilityChange: updaterOrValue => valueUpdater(updaterOrValue, columnVisibilityState),
+  onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelectionState),
+  onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
+  onColumnPinningChange: updaterOrValue => valueUpdater(updaterOrValue, columnPinningState),
   state: {
-    get sorting() { return sorting.value },
-    get columnFilters() { return columnFilters.value },
-    get columnVisibility() { return columnVisibility.value },
-    get rowSelection() { return rowSelection.value },
-    get expanded() { return expanded.value }
+    get sorting() { return sortingState.value },
+    // get pagination() { return props.paginationOptions ? paginationState.value : undefined },
+    get columnFilters() { return columnFiltersState.value },
+    get columnVisibility() { return columnVisibilityState.value },
+    get rowSelection() { return rowSelectionState.value },
+    get expanded() { return expandedState.value },
+    get columnPinning() { return columnPinningState.value }
   }
 })
 
@@ -87,10 +95,11 @@ defineExpose({
           </th>
         </tr>
       </thead>
+
       <tbody :class="ui.tbody({ class: [props.ui?.tbody] })">
         <template v-if="tableApi.getRowModel().rows?.length">
           <template v-for="row in tableApi.getRowModel().rows" :key="row.id">
-            <tr :data-state="row.getIsSelected() && 'selected'" :class="ui.tr({ class: [props.ui?.tr] })">
+            <tr :data-state="row.getIsSelected() ? 'selected' : undefined" :class="ui.tr({ class: [props.ui?.tr] })">
               <td v-for="cell in row.getVisibleCells()" :key="cell.id" :class="ui.td({ class: [props.ui?.td] })">
                 <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
               </td>

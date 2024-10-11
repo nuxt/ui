@@ -1,34 +1,131 @@
 <script setup lang="ts">
 import { h } from 'vue'
 import type { ComponentExposed } from 'vue-component-type-helpers'
-import { UCheckbox, UButton, UDropdownMenu, UTable } from '#components'
+import { UBadge, UButton, UCheckbox, UDropdownMenu, UTable } from '#components'
 import type { TableColumn } from '@nuxt/ui'
 
+const toast = useToast()
+
 const data = [{
-  id: 'm5gr84i9',
-  amount: 316,
-  status: 'success',
-  email: 'ken99@yahoo.com'
+  id: '4600',
+  date: '2024-03-11T15:30:00',
+  status: 'paid',
+  email: 'james.anderson@example.com',
+  amount: 594
 }, {
-  id: '3u1reuv4',
-  amount: 242,
-  status: 'success',
-  email: 'Abe45@gmail.com'
-}, {
-  id: 'derv1ws0',
-  amount: 837,
-  status: 'processing',
-  email: 'Monserrat44@gmail.com'
-}, {
-  id: '5kma53ae',
-  amount: 874,
-  status: 'success',
-  email: 'Silas22@gmail.com'
-}, {
-  id: 'bhqecj4p',
-  amount: 721,
+  id: '4599',
+  date: '2024-03-11T10:10:00',
   status: 'failed',
-  email: 'carmella@hotmail.com'
+  email: 'mia.white@example.com',
+  amount: 276
+}, {
+  id: '4598',
+  date: '2024-03-11T08:50:00',
+  status: 'refunded',
+  email: 'william.brown@example.com',
+  amount: 315
+}, {
+  id: '4597',
+  date: '2024-03-10T19:45:00',
+  status: 'paid',
+  email: 'emma.davis@example.com',
+  amount: 529
+}, {
+  id: '4596',
+  date: '2024-03-10T15:55:00',
+  status: 'paid',
+  email: 'ethan.harris@example.com',
+  amount: 639
+}, {
+  id: '4595',
+  date: '2024-03-10T13:40:00',
+  status: 'refunded',
+  email: 'ava.thomas@example.com',
+  amount: 428
+}, {
+  id: '4594',
+  date: '2024-03-10T09:15:00',
+  status: 'paid',
+  email: 'michael.wilson@example.com',
+  amount: 683
+}, {
+  id: '4593',
+  date: '2024-03-09T20:25:00',
+  status: 'failed',
+  email: 'olivia.taylor@example.com',
+  amount: 947
+}, {
+  id: '4592',
+  date: '2024-03-09T18:45:00',
+  status: 'paid',
+  email: 'benjamin.jackson@example.com',
+  amount: 851
+}, {
+  id: '4591',
+  date: '2024-03-09T16:05:00',
+  status: 'paid',
+  email: 'sophia.miller@example.com',
+  amount: 762
+}, {
+  id: '4590',
+  date: '2024-03-09T14:20:00',
+  status: 'paid',
+  email: 'noah.clark@example.com',
+  amount: 573
+}, {
+  id: '4589',
+  date: '2024-03-09T11:35:00',
+  status: 'failed',
+  email: 'isabella.lee@example.com',
+  amount: 389
+}, {
+  id: '4588',
+  date: '2024-03-08T22:50:00',
+  status: 'refunded',
+  email: 'liam.walker@example.com',
+  amount: 701
+}, {
+  id: '4587',
+  date: '2024-03-08T20:15:00',
+  status: 'paid',
+  email: 'charlotte.hall@example.com',
+  amount: 856
+}, {
+  id: '4586',
+  date: '2024-03-08T17:40:00',
+  status: 'paid',
+  email: 'mason.young@example.com',
+  amount: 492
+}, {
+  id: '4585',
+  date: '2024-03-08T14:55:00',
+  status: 'failed',
+  email: 'amelia.king@example.com',
+  amount: 637
+}, {
+  id: '4584',
+  date: '2024-03-08T12:30:00',
+  status: 'paid',
+  email: 'elijah.wright@example.com',
+  amount: 784
+}, {
+  id: '4583',
+  date: '2024-03-08T09:45:00',
+  status: 'refunded',
+  email: 'harper.scott@example.com',
+  amount: 345
+}, {
+  id: '4582',
+  date: '2024-03-07T23:10:00',
+  status: 'paid',
+  email: 'evelyn.green@example.com',
+  amount: 918
+}, {
+  id: '4581',
+  date: '2024-03-07T20:25:00',
+  status: 'paid',
+  email: 'logan.baker@example.com',
+  amount: 567
 }]
 
 const columns: TableColumn<typeof data[number]>[] = [{
@@ -47,9 +144,34 @@ const columns: TableColumn<typeof data[number]>[] = [{
   enableSorting: false,
   enableHiding: false
 }, {
+  accessorKey: 'id',
+  header: '#',
+  cell: ({ row }) => `#${row.getValue('id')}`
+}, {
+  accessorKey: 'date',
+  header: 'Date',
+  cell: ({ row }) => {
+    return new Date(row.getValue('date')).toLocaleString('en-US', {
+      day: 'numeric',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    })
+  }
+}, {
   accessorKey: 'status',
   header: 'Status',
-  cell: ({ row }) => h('div', { class: 'capitalize' }, row.getValue('status'))
+  cell: ({ row }) => {
+    const color = ({
+      paid: 'success' as const,
+      failed: 'error' as const,
+      refunded: 'neutral' as const
+    })[row.getValue('status') as string]
+
+    return h(UBadge, {
+      class: 'capitalize', variant: 'subtle', color }, row.getValue('status'))
+  }
 }, {
   accessorKey: 'email',
   header: ({ column }) => {
@@ -60,7 +182,7 @@ const columns: TableColumn<typeof data[number]>[] = [{
       variant: 'ghost',
       label: 'Email',
       icon: isSorted ? (isSorted === 'asc' ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid') : 'i-heroicons-arrows-up-down-20-solid',
-      class: '-my-3 -mx-2.5',
+      class: '-mx-2.5',
       onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
     })
   },
@@ -71,10 +193,9 @@ const columns: TableColumn<typeof data[number]>[] = [{
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
 
-    // Format the amount as a dollar amount
     const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'EUR'
     }).format(amount)
 
     return h('div', { class: 'text-right font-medium' }, formatted)
@@ -83,36 +204,44 @@ const columns: TableColumn<typeof data[number]>[] = [{
   id: 'actions',
   enableHiding: false,
   cell: ({ row }) => {
-    return h(UDropdownMenu, {
+    const items = [{
+      type: 'label',
+      label: 'Actions'
+    }, {
+      label: 'Copy payment ID',
+      select() {
+        navigator.clipboard.writeText(row.original.id)
+
+        toast.add({
+          title: 'Payment ID copied to clipboard!',
+          color: 'success',
+          icon: 'i-heroicons-check-circle'
+        })
+      }
+    }, {
+      label: row.getIsExpanded() ? 'Collapse' : 'Expand',
+      select() {
+        row.toggleExpanded()
+      }
+    }, {
+      type: 'separator'
+    }, {
+      label: 'View customer'
+    }, {
+      label: 'View payment details'
+    }]
+
+    return h('div', { class: 'text-right' }, h(UDropdownMenu, {
       content: {
         align: 'end'
       },
-      items: [{
-        type: 'label',
-        label: 'Actions'
-      }, {
-        label: 'Copy payment ID',
-        onClick() {
-          navigator.clipboard.writeText(row.original.id)
-        }
-      }, {
-        label: 'Expand',
-        onClick() {
-          row.toggleExpanded()
-        }
-      }, {
-        type: 'separator'
-      }, {
-        label: 'View customer'
-      }, {
-        label: 'View payment details'
-      }]
-    }, h(UButton, {
+      items
+    }, () => h(UButton, {
       icon: 'i-heroicons-ellipsis-vertical-20-solid',
       color: 'neutral',
       variant: 'ghost',
       class: 'ml-auto'
-    }))
+    })))
   }
 }]
 
@@ -120,8 +249,8 @@ const table = ref<ComponentExposed<typeof UTable<typeof data[number]>>>()
 </script>
 
 <template>
-  <div class="w-full">
-    <div class="flex gap-2 items-center py-4">
+  <div class="h-full flex flex-col flex-1 gap-4 w-full -my-8">
+    <div class="flex gap-2 items-center">
       <UInput
         class="max-w-sm"
         placeholder="Filter emails..."
@@ -138,38 +267,18 @@ const table = ref<ComponentExposed<typeof UTable<typeof data[number]>>>()
       >
         <UButton label="Columns" color="neutral" variant="outline" trailing-icon="i-heroicons-chevron-down-20-solid" class="ml-auto" />
       </UDropdownMenu>
-
-      <!-- <UDropdownMenu>
-          <UButton label="Columns"  variant="outline" class="ml-auto">
-            Columns <ChevronDown class="ml-2 h-4 w-4" />
-            </Button>
-          </ubutton>
-        <UDropdownMenuContent align="end">
-          <UDropdownMenuCheckboxItem
-            v-for="column in table.getAllColumns().filter((column) => column.getCanHide())"
-            :key="column.id"
-            class="capitalize"
-            :checked="column.getIsVisible()"
-            @update:checked="(value) => {
-              column.toggleVisibility(!!value)
-            }"
-          >
-            {{ column.id }}
-          </UDropdownMenuCheckboxItem>
-        </UDropdownMenuContent>
-      </UDropdownMenu> -->
     </div>
 
-    <UTable ref="table" :data="data" :columns="columns" class="rounded-[--ui-radius] border-[--ui-border]">
+    <UTable ref="table" :pagination="{ pageIndex: 0, pageSize: 20 }" :data="data" :columns="columns" class="border border-[--ui-border-accented] rounded-[--ui-radius] flex-1 overflow-y-auto">
       <template #expanded="{ row }">
-        {{ row }}
+        <pre>{{ row.original }}</pre>
       </template>
     </UTable>
 
-    <div class="flex items-center justify-between gap-3 border-t border-[--ui-border] pt-4">
+    <div class="flex items-center justify-between gap-3">
       <div class="text-sm text-[--ui-text-muted]">
-        {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length }} of
-        {{ table?.tableApi?.getFilteredRowModel().rows.length }} row(s) selected.
+        {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
+        {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>
 
       <div class="flex items-center gap-1.5">

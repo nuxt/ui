@@ -12,35 +12,35 @@ exports[`Table > renders with class correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[--ui-border]">
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">m5gr84i9</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">316</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">success</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">3u1reuv4</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">242</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">success</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">derv1ws0</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">837</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">processing</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">5kma53ae</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">874</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">success</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">bhqecj4p</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">721</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">failed</td>
@@ -64,35 +64,35 @@ exports[`Table > renders with data correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[--ui-border]">
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">m5gr84i9</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">316</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">success</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">3u1reuv4</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">242</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">success</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">derv1ws0</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">837</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">processing</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">5kma53ae</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">874</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">success</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">bhqecj4p</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">721</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">failed</td>
@@ -116,35 +116,35 @@ exports[`Table > renders with ui correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[--ui-border]">
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">m5gr84i9</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">316</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">success</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">3u1reuv4</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">242</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">success</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">derv1ws0</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">837</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">processing</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">5kma53ae</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">874</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">success</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr data-state="false" class="">
+      <tr class="">
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">bhqecj4p</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">721</td>
         <td class="p-4 text-sm text-[--ui-text-muted] whitespace-nowrap">failed</td>
