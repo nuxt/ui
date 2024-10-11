@@ -61,6 +61,11 @@ export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'd
    * @defaultValue false
    */
   arrow?: boolean
+  /**
+   * The key used to get the label from the item.
+   * @defaultValue 'label'
+   */
+  labelKey?: string
   class?: any
   ui?: PartialString<typeof navigationMenu.slots>
 }
@@ -82,6 +87,7 @@ export type NavigationMenuSlots<T extends { slot?: string }> = {
 import { computed, toRef } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
+import { get } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
@@ -91,7 +97,8 @@ import UBadge from './Badge.vue'
 
 const props = withDefaults(defineProps<NavigationMenuProps<T>>(), {
   orientation: 'horizontal',
-  delayDuration: 0
+  delayDuration: 0,
+  labelKey: 'label'
 })
 const emits = defineEmits<NavigationMenuEmits>()
 const slots = defineSlots<NavigationMenuSlots<T>>()
@@ -132,7 +139,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
 
                   <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
                     <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="active" :index="index">
-                      {{ item.label }}
+                      {{ get(item, props.labelKey as string) }}
                     </slot>
 
                     <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.linkLabelExternalIcon({ class: props.ui?.linkLabelExternalIcon, active })" />
@@ -165,7 +172,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
 
                         <div :class="ui.childLinkWrapper({ class: props.ui?.childLinkWrapper })">
                           <p :class="ui.childLinkLabel({ class: props.ui?.childLinkLabel, active: childActive })">
-                            {{ childItem.label }}
+                            {{ get(childItem, props.labelKey as string) }}
 
                             <UIcon v-if="childItem.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.childLinkLabelExternalIcon({ class: props.ui?.childLinkLabelExternalIcon, active: childActive })" />
                           </p>
