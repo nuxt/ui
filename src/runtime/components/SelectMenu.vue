@@ -77,6 +77,11 @@ export interface SelectMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelVal
    * @defaultValue undefined
    */
   valueKey?: keyof T
+  /**
+   * When `items` is an array of objects, select the field to use as the label.
+   * @defaultValue 'label'
+   */
+  labelKey?: keyof T
   items?: T[] | T[][]
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -124,7 +129,8 @@ const props = withDefaults(defineProps<SelectMenuProps<T>>(), {
   portal: true,
   autofocusDelay: 0,
   searchInput: () => ({ placeholder: 'Search...' }),
-  filter: () => ['label']
+  filter: () => ['label'],
+  labelKey: 'label' as keyof T
 })
 const emits = defineEmits<SelectMenuEmits<T>>()
 const slots = defineSlots<SelectMenuSlots<T>>()
@@ -156,9 +162,9 @@ function displayValue(value: T): string {
     return value.map(v => displayValue(v)).join(', ')
   }
 
-  const item = items.value.find(item => props.valueKey ? isEqual(item[props.valueKey], value) : isEqual(item, value))
+  const item = items.value.find(item => props.valueKey ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
 
-  return item && (typeof item === 'object' ? item.label : item)
+  return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
 function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: string): ArrayOrWrapped<AcceptableValue> {
@@ -166,7 +172,7 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
     return items
   }
 
-  const fields = Array.isArray(props.filter) ? props.filter : ['label']
+  const fields = Array.isArray(props.filter) ? props.filter : [props.labelKey]
   const escapedSearchTerm = escapeRegExp(searchTerm)
 
   return items.filter((item) => {
@@ -175,7 +181,7 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
     }
 
     return fields.some((field) => {
-      const child = get(item, field)
+      const child = get(item, field as string)
 
       return child !== null && child !== undefined && String(child).search(new RegExp(escapedSearchTerm, 'i')) !== -1
     })
@@ -267,7 +273,7 @@ function onUpdateOpen(value: boolean) {
           <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
-                {{ item.label }}
+                {{ get(item, props.labelKey as string) }}
               </ComboboxLabel>
 
               <ComboboxSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
@@ -276,7 +282,7 @@ function onUpdateOpen(value: boolean) {
                 v-else
                 :class="ui.item({ class: props.ui?.item })"
                 :disabled="item.disabled"
-                :value="valueKey && typeof item === 'object' ? (item[valueKey as keyof SelectMenuItem]) as AcceptableValue : item"
+                :value="valueKey && typeof item === 'object' ? get(item, props.valueKey as string) : item"
                 @select="item.select"
               >
                 <slot name="item" :item="(item as T)" :index="index">
@@ -295,7 +301,7 @@ function onUpdateOpen(value: boolean) {
 
                   <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                     <slot name="item-label" :item="(item as T)" :index="index">
-                      {{ typeof item === 'object' ? item.label : item }}
+                      {{ typeof item === 'object' ? get(item, props.labelKey as string) : item }}
                     </slot>
                   </span>
 
