@@ -1,25 +1,22 @@
 import { defu } from 'defu'
+import type { ViteDevServer } from 'vite'
 
-export const devtoolsComponentMeta: Record<string, any> = {}
+const devtoolsComponentMeta: Record<string, any> = {}
 
+// A Plugin to parse additional metadata for the Nuxt UI Devtools.
 export function devtoolsMetaPlugin() {
   return {
     name: 'ui-devtools-component-meta',
-    enforce: 'pre',
+    enforce: 'pre' as const,
 
     transform(code: string, id: string) {
-      // Only process Vue Single File Components (.vue files)
       if (!id.endsWith('.vue')) return
       const metaRegex = /extendComponentMeta<.*>\((\{[\s\S]*?\})\)/
 
       if (code) {
-        // Regular expression to match `extendComponentMeta({ ... })`
-        // Check if the macro `extendComponentMeta` is present in the code
         const match = code.match(metaRegex)
         if (match) {
-          // Parse the matched object inside `extendComponentMeta({ ... })`
           const metaObject = eval(`(${match[1]})`)
-          // Add the parsed metadata to the globalComponentMeta
           devtoolsComponentMeta[id] = defu(metaObject)
         }
       }
@@ -29,9 +26,8 @@ export function devtoolsMetaPlugin() {
       }
     },
 
-    // Hook into Vite dev server to expose the API
-    configureServer(server) {
-      server.middlewares.use('/__ui_devtools__/api/component-meta', (req, res) => {
+    configureServer(server: ViteDevServer) {
+      server.middlewares.use('/__ui_devtools__/api/component-meta', (_req, res) => {
         res.setHeader('Content-Type', 'application/json')
         res.end(JSON.stringify(devtoolsComponentMeta, null, 2))
       })

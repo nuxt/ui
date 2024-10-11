@@ -1,4 +1,5 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import module from '../src/module'
+
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: false },
@@ -10,7 +11,7 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: ['../src/module', '@nuxtjs/mdc', '@nuxt/content'],
+  modules: [module, '@nuxtjs/mdc', '@nuxt/content'],
 
   app: {
     baseURL: '/__nuxt_ui__/devtools'

@@ -40,7 +40,11 @@ export function setupDevtoolsClient(options: ModuleOptions) {
           const slug = kebabCase(name)
           const label = options.prefix + upperFirst(camelCase(slug))
 
-          const devtoolsMeta: any = Object.entries(devtoolsComponentMeta).find(([key]) => slug === kebabCase(key.split('/')[key.split('/').length - 1]?.replace(/\..*/, '')))?.[1]
+          const devtoolsMeta: any = Object.entries(devtoolsComponentMeta).find(([key]) => {
+            const fileName = key.split('/')[key.split('/').length - 1]
+
+            return fileName && slug === kebabCase(fileName.replace(/\..*/, ''))
+          })
 
           // TODO: Properly configure the host
           return fetch(`http://localhost:3000/api/component-meta/${label}.json`).then(async (resp) => {

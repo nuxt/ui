@@ -52,25 +52,11 @@ function onComponentLoaded() {
   updateRenderer()
 }
 
-// function onSlotHover(slot: string) {
-//   const event: Event & { data?: any } = new Event('nuxt-ui-devtools:slot-hover')
-//   event.data = { slot }
-//   window.dispatchEvent(event)
-// }
-//
-// function onSlotLeave(slot: string) {
-//   const event: Event & { data?: any } = new Event('nuxt-ui-devtools:slot-leave')
-//   event.data = { slot }
-//   window.dispatchEvent(event)
-// }
-
 const tabs = computed(() => {
   if (!component.value) return
-  // const themeCount = component.value.meta.slots ? Object.keys(component.value.meta.slots)?.length : 0
 
   return [
     { label: 'Props', slot: 'props', icon: 'i-heroicons-cog-6-tooth', disabled: !component.value.meta.props?.length }
-    // { label: 'Theme', slot: 'theme', icon: 'i-heroicons-paint-brush', disabled: !themeCount }
   ]
 })
 
@@ -171,19 +157,6 @@ const componentProps = computed(() => {
                 <ComponentPropInput v-bind="prop" v-model="componentProps[prop.name]" />
               </div>
             </template>
-
-            <!-- template #theme>
-              <div v-for="(_value, slot) in component?.slots" :key="'slots-' + slot" class="px-3 py-5 hover:bg-neutral-50 transition">
-                <UFormField :name="slot" @mouseenter="onSlotHover(slot)" @mouseleave="onSlotLeave(slot)">
-                  <template #label>
-                    <p class="font-mono font-bold px-2 py-0.5 border-[--ui-border] border border-dashed rounded bg-neutral-100">
-                      {{ slot }}
-                    </p>
-                  </template>
-                  <UTextarea v-model="state.slots[component.slug][slot]" autoresize class="mt-2 w-full font-mono" />
-                </UFormField>
-              </div>
-            </template -->
           </UTabs>
         </div>
       </div>

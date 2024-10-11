@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { defineAsyncComponent } from 'vue'
 import { createVNode, defineComponent, onErrorCaptured } from 'vue'
 

@@ -137,16 +137,17 @@ export default defineNuxtModule<ModuleOptions>({
     addTemplates(options, nuxt)
 
     if (nuxt.options.dev && nuxt.options.devtools.enabled) {
-      installModule('nuxt-component-meta')
       nuxt.options.vite ||= {}
       nuxt.options.vite.plugins ||= []
       nuxt.options.vite.plugins.push(devtoolsMetaPlugin())
 
-      // @ts-expect-error - no types available
+      installModule('nuxt-component-meta')
+
+      // @ts-ignore
       nuxt.options.componentMeta ||= {}
-      // @ts-expect-error - no types available
+      // @ts-ignore
       nuxt.options.componentMeta.exclude ||= []
-      // @ts-expect-error - no types available
+      // @ts-ignore
       nuxt.options.componentMeta.exclude.push(
         '@nuxt/content',
         '@nuxt/icon',
@@ -189,9 +190,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         nuxt.hook('vite:extendConfig', (config) => {
           config.server ||= {}
-          // add proxy to client
           config.server.proxy ||= {}
-          // TODO: ws proxy is not working
           config.server.proxy['/__nuxt_ui__/devtools'] = {
             target: `http://localhost:${PORT}`,
             changeOrigin: true,
