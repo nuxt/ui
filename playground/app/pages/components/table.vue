@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { h } from 'vue'
 import type { ComponentExposed } from 'vue-component-type-helpers'
-import type { ColumnDef } from '@tanstack/vue-table'
+import type { Row, ColumnDef } from '@tanstack/vue-table'
 import { UCheckbox, UButton, UDropdownMenu, UTable } from '#components'
 
 const table = ref<ComponentExposed<typeof UTable>>()
@@ -84,19 +84,41 @@ const columns: ColumnDef<typeof data[0]>[] = [{
 }, {
   id: 'actions',
   enableHiding: false,
+  class: 'text-right',
   cell: ({ row }) => {
-    const payment = row.original
-
-    return h('div', { class: 'relative' }, h(UDropdownMenu, {
-      items: [{
-        label: 'View',
-        onClick: () => row.toggleExpanded()
-      }]
-    }, [h('UButton', {
-      icon: 'i-heroicons-ellipsis-horizontal-20-solid'
-    })]))
+    return h(UDropdownMenu, {
+      items: getRowActions(row)
+    }, h(UButton, {
+      icon: 'i-heroicons-ellipsis-vertical-20-solid',
+      color: 'neutral',
+      variant: 'ghost',
+      class: 'ml-auto'
+    }))
   }
 }]
+
+function getRowActions(row: Row<typeof data[number]>) {
+  return [{
+    type: 'label',
+    label: 'Actions'
+  }, {
+    label: 'Copy payment ID',
+    onClick() {
+      navigator.clipboard.writeText(row.original.id)
+    }
+  }, {
+    label: 'Expand',
+    onClick() {
+      row.toggleExpanded()
+    }
+  }, {
+    type: 'separator'
+  }, {
+    label: 'View customer'
+  }, {
+    label: 'View payment details'
+  }]
+}
 </script>
 
 <template>
@@ -113,6 +135,7 @@ const columns: ColumnDef<typeof data[0]>[] = [{
         :items="table?.tableApi?.getAllColumns().filter((column) => column.getCanHide())"
         placeholder="Columns"
         variant="outline"
+        label-key="id"
         :content="{ align: 'end' }"
       >
         <UButton label="Columns" color="neutral" variant="outline" trailing-icon="i-heroicons-chevron-down-20-solid" class="ml-auto" />
@@ -139,7 +162,7 @@ const columns: ColumnDef<typeof data[0]>[] = [{
       </UDropdownMenu> -->
     </div>
     <div class="rounded-[--ui-radius] border-[--ui-border]">
-      <UTable ref="table" :data="data" />
+      <UTable ref="table" :data="data" :columns="columns" />
     </div>
 
     <div class="flex items-center justify-between gap-3 border-t border-[--ui-border] pt-4">
