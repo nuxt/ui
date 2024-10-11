@@ -125,6 +125,9 @@ importers:
       release-it:
         specifier: ^17.7.0
         version: 17.7.0(typescript@5.6.3)
+      superstruct:
+        specifier: ^2.0.2
+        version: 2.0.2
       valibot:
         specifier: ^0.42.1
         version: 0.42.1(typescript@5.6.3)
@@ -5975,6 +5978,10 @@ packages:
   superjson@2.2.1:
     resolution: {integrity: sha512-8iGv75BYOa0xRJHK5vRLEjE2H/i4lulTjzpUXic3Eg8akftYjkmQDa8JARQ42rlczXyFR3IeRoeFCc7RxHsYZA==}
     engines: {node: '>=16'}
+
+  superstruct@2.0.2:
+    resolution: {integrity: sha512-uV+TFRZdXsqXTL2pRvujROjdZQ4RAlBUS5BTh9IGm+jTqQntYThciG/qu57Gs69yjnVUSqdxF9YLmSnpupBW9A==}
+    engines: {node: '>=14.0.0'}
 
   supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
@@ -13651,6 +13658,8 @@ snapshots:
   superjson@2.2.1:
     dependencies:
       copy-anything: 3.0.5
+
+  superstruct@2.0.2: {}
 
   supports-color@5.5.0:
     dependencies:

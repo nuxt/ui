@@ -5,6 +5,7 @@ import { z } from 'zod'
 import * as yup from 'yup'
 import Joi from 'joi'
 import * as valibot from 'valibot'
+import { object, string, nonempty, refine } from 'superstruct'
 import ComponentRender from '../component-render'
 import type { FormProps, FormSlots } from '../../src/runtime/components/Form.vue'
 import { renderForm } from '../utils/form'
@@ -25,6 +26,11 @@ describe('Form', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props: FormProps<any>, slots?: Partial<FormSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, UForm)
     expect(html).toMatchSnapshot()
+  })
+
+  const PasswordMinLength = refine(string(), 'Password', (value) => {
+    if (value.length >= 8) return true
+    return 'Must be at least 8 characters'
   })
 
   it.each([
@@ -65,6 +71,12 @@ describe('Form', () => {
       }))
     }
     ],
+    ['superstruct', {
+      schema: object({
+        email: nonempty(string()),
+        password: PasswordMinLength
+      })
+    }],
     ['custom', {
       async validate(state: any) {
         const errs = []
