@@ -114,10 +114,10 @@ import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { get, escapeRegExp } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
-import { get, escapeRegExp } from '../utils'
 
 const props = withDefaults(defineProps<SelectMenuProps<T>>(), {
   search: true,
