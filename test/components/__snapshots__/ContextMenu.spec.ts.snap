@@ -117,6 +117,19 @@ exports[`ContextMenu > renders with items correctly 1`] = `
 <!--teleport end-->"
 `;
 
+exports[`ContextMenu > renders with labelKey correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
 exports[`ContextMenu > renders with size lg correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->

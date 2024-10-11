@@ -124,6 +124,7 @@ describe('DropdownMenu', () => {
   it.each([
     // Props
     ['with items', { props }],
+    ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),

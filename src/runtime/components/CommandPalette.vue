@@ -116,13 +116,13 @@ import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
+import { omit } from '../utils'
+import { highlight } from '../utils/fuse'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 import UKbd from './Kbd.vue'
 import UInput from './Input.vue'
-import { omit } from '../utils'
-import { highlight } from '../utils/fuse'
 
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',

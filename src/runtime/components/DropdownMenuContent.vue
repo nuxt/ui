@@ -10,6 +10,7 @@ interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean
+  labelKey: string
   class?: any
   ui: typeof _dropdownMenu
   uiOverride?: any
@@ -28,13 +29,13 @@ import { DropdownMenu } from 'radix-vue/namespaced'
 import { useForwardPropsEmits } from 'radix-vue'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { omit, get } from '../utils'
+import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
-import { omit } from '../utils'
-import { pickLinkProps } from '../utils/link'
 
 const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()
@@ -59,7 +60,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 
       <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel({ class: uiOverride?.itemLabel, active })">
         <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="(item as T)" :active="active" :index="index">
-          {{ item.label }}
+          {{ get(item, props.labelKey as string) }}
         </slot>
 
         <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: uiOverride?.itemLabelExternalIcon, active })" />
@@ -106,6 +107,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               align="start"
               :align-offset="-4"
               :side-offset="3"
+              :label-key="labelKey"
               v-bind="item.content"
             >
               <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
