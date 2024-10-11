@@ -9,8 +9,10 @@ const appConfig = _appConfig as AppConfig & { ui: { table: Partial<typeof theme>
 
 const table = tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })
 
+export type TableColumn<T> = ColumnDef<T>
+
 export interface TableProps<T> {
-  columns?: ColumnDef<T>[]
+  columns?: TableColumn<T>[]
   data: T[]
   class?: any
   ui?: Partial<typeof table.slots>
@@ -94,6 +96,7 @@ defineExpose({
             </tr>
             <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">
               <td :colspan="row.getAllCells().length" :class="ui.td({ class: [props.ui?.td] })">
+                test
                 <slot name="expanded" :row="row" />
               </td>
             </tr>

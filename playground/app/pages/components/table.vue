@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { h } from 'vue'
 import type { ComponentExposed } from 'vue-component-type-helpers'
-import type { Row, ColumnDef } from '@tanstack/vue-table'
 import { UCheckbox, UButton, UDropdownMenu, UTable } from '#components'
-
-const table = ref<ComponentExposed<typeof UTable>>()
+import type { TableColumn } from '@nuxt/ui'
 
 const data = [{
   id: 'm5gr84i9',
@@ -33,7 +31,7 @@ const data = [{
   email: 'carmella@hotmail.com'
 }]
 
-const columns: ColumnDef<typeof data[0]>[] = [{
+const columns: TableColumn<typeof data[number]>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
     'modelValue': table.getIsAllPageRowsSelected(),
@@ -84,10 +82,31 @@ const columns: ColumnDef<typeof data[0]>[] = [{
 }, {
   id: 'actions',
   enableHiding: false,
-  class: 'text-right',
   cell: ({ row }) => {
     return h(UDropdownMenu, {
-      items: getRowActions(row)
+      content: {
+        align: 'end'
+      },
+      items: [{
+        type: 'label',
+        label: 'Actions'
+      }, {
+        label: 'Copy payment ID',
+        onClick() {
+          navigator.clipboard.writeText(row.original.id)
+        }
+      }, {
+        label: 'Expand',
+        onClick() {
+          row.toggleExpanded()
+        }
+      }, {
+        type: 'separator'
+      }, {
+        label: 'View customer'
+      }, {
+        label: 'View payment details'
+      }]
     }, h(UButton, {
       icon: 'i-heroicons-ellipsis-vertical-20-solid',
       color: 'neutral',
@@ -97,28 +116,7 @@ const columns: ColumnDef<typeof data[0]>[] = [{
   }
 }]
 
-function getRowActions(row: Row<typeof data[number]>) {
-  return [{
-    type: 'label',
-    label: 'Actions'
-  }, {
-    label: 'Copy payment ID',
-    onClick() {
-      navigator.clipboard.writeText(row.original.id)
-    }
-  }, {
-    label: 'Expand',
-    onClick() {
-      row.toggleExpanded()
-    }
-  }, {
-    type: 'separator'
-  }, {
-    label: 'View customer'
-  }, {
-    label: 'View payment details'
-  }]
-}
+const table = ref<ComponentExposed<typeof UTable<typeof data[number]>>>()
 </script>
 
 <template>
@@ -161,9 +159,12 @@ function getRowActions(row: Row<typeof data[number]>) {
         </UDropdownMenuContent>
       </UDropdownMenu> -->
     </div>
-    <div class="rounded-[--ui-radius] border-[--ui-border]">
-      <UTable ref="table" :data="data" :columns="columns" />
-    </div>
+
+    <UTable ref="table" :data="data" :columns="columns" class="rounded-[--ui-radius] border-[--ui-border]">
+      <template #expanded="{ row }">
+        {{ row }}
+      </template>
+    </UTable>
 
     <div class="flex items-center justify-between gap-3 border-t border-[--ui-border] pt-4">
       <div class="text-sm text-[--ui-text-muted]">
