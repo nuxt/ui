@@ -30,14 +30,14 @@ describe('Table', () => {
     email: 'carmella@hotmail.com'
   }]
 
+  const props = { data }
+
   it.each([
     // Props
-    ['with as', { props: { as: 'div' } }],
-    ['with class', { props: { class: '' } }],
-    ['with ui', { props: { ui: {} } }],
-    // Slots
-    ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps<any>, slots?: Partial<TableSlots> }) => {
+    ['with data', { props }],
+    ['with class', { props: { ...props, class: 'absolute' } }],
+    ['with ui', { props: { ...props, ui: { base: 'table-auto' } } }]
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps<typeof data[number]>, slots?: Partial<TableSlots<typeof data[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, Table)
     expect(html).toMatchSnapshot()
   })

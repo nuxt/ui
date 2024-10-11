@@ -6,7 +6,8 @@ export default {
     tbody: 'divide-y divide-[--ui-border]',
     tr: '',
     th: 'px-4 py-3.5 text-sm text-[--ui-text-highlighted] text-left rtl:text-right font-semibold',
-    td: 'p-4 text-sm text-[--ui-text-muted] whitespace-nowrap'
+    td: 'p-4 text-sm text-[--ui-text-muted] whitespace-nowrap',
+    empty: 'h-24 text-center'
   },
   variants: {
 

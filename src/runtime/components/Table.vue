@@ -21,7 +21,8 @@ export interface TableProps<T> {
 export type TableEmits = {}
 
 export interface TableSlots<T> {
-  expanded: { row: T }
+  expanded(props?: { row: T }): any
+  empty(props?: {}): any
 }
 </script>
 
@@ -96,7 +97,6 @@ defineExpose({
             </tr>
             <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">
               <td :colspan="row.getAllCells().length" :class="ui.td({ class: [props.ui?.td] })">
-                test
                 <slot name="expanded" :row="row" />
               </td>
             </tr>
@@ -104,11 +104,10 @@ defineExpose({
         </template>
 
         <tr v-else :class="ui.tr({ class: [props.ui?.tr] })">
-          <td
-            :colspan="columns?.length"
-            class="h-24 text-center"
-          >
-            No results.
+          <td :colspan="columns?.length" :class="ui.empty({ class: props.ui?.empty })">
+            <slot name="empty">
+              No results
+            </slot>
           </td>
         </tr>
       </tbody>
