@@ -15,7 +15,7 @@ navigation:
 
 ## Examples
 
-<!-- ## API
+## API
 
 ### Props
 
@@ -29,6 +29,14 @@ navigation:
 
 :component-emits
 
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `tableApi`{lang="ts-type"} | [`Ref<Table \| null>`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
+
 ## Theme
 
-:component-theme -->
+:component-theme
