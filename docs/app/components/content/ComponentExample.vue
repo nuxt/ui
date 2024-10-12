@@ -114,8 +114,8 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
 <template>
   <div class="my-5">
     <div v-if="preview">
-      <div class="border border-[--ui-color-neutral-200] dark:border-[--ui-color-neutral-700] relative z-[1]" :class="[{ 'border-b-0 rounded-t-[calc(var(--ui-radius)*1.5)]': props.source, 'rounded-[calc(var(--ui-radius)*1.5)]': !props.source }]">
-        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-[--ui-color-neutral-200] dark:border-[--ui-color-neutral-700]">
+      <div class="border border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)] relative z-[1]" :class="[{ 'border-b-0 rounded-t-[calc(var(--ui-radius)*1.5)]': props.source, 'rounded-[calc(var(--ui-radius)*1.5)]': !props.source }]">
+        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)]">
           <slot name="options" />
 
           <UFormField
