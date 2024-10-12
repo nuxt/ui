@@ -32,12 +32,12 @@ export default (options: Required<ModuleOptions>) => ({
       horizontal: {
         root: 'flex-col',
         list: 'w-full',
-        indicator: 'left-0 w-[--radix-tabs-indicator-size] translate-x-[--radix-tabs-indicator-position]',
+        indicator: 'left-0 w-[var(--radix-tabs-indicator-size)] translate-x-[var(--radix-tabs-indicator-position)]',
         trigger: 'justify-center'
       },
       vertical: {
         list: 'flex-col',
-        indicator: 'top-0 h-[--radix-tabs-indicator-size] translate-y-[--radix-tabs-indicator-position]'
+        indicator: 'top-0 h-[var(--radix-tabs-indicator-size)] translate-y-[var(--radix-tabs-indicator-position)]'
       }
     },
     size: {
