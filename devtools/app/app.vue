@@ -3,6 +3,7 @@ import { onDevtoolsClientConnected } from '@nuxt/devtools-kit/iframe-client'
 import type { ClientFunctions, ServerFunctions, Component } from '../../src/devtools/rpc'
 import type { BirpcReturn } from 'birpc'
 import { watchDebounced } from '@vueuse/core'
+import type { ComponentMeta } from 'vue-component-meta'
 
 // Disable devtools in component renderer iframe
 // @ts-expect-error - Nuxt Devtools internal value
@@ -12,18 +13,26 @@ const components = useState<Array<Component & { value: string }>>('__ui-devtools
 const component = useState<Component | undefined>('__ui-devtools-component')
 const state = useState<Record<string, any>>('__ui-devtools-state', () => ({}))
 
+const _fetch = $fetch.create({ baseURL: '/' })
+
 let rpc: BirpcReturn<ServerFunctions, ClientFunctions> | null = null
 
 onDevtoolsClientConnected(async (client) => {
   rpc = client.devtools.extendClientRpc<ServerFunctions, ClientFunctions>('nuxt/ui/devtools', { })
-  components.value = (await rpc.getComponents()).map(component => ({ ...component, value: component.slug }))
+
+  const [devtoolsComponentMeta, componentMeta] = await Promise.all([
+    _fetch<Record<string, any>>('/__ui_devtools__/api/component-meta'),
+    _fetch<Record<string, { meta: ComponentMeta }>>('/api/component-meta')
+  ])
+
+  components.value = (await rpc.getComponents()).map(component => ({ ...component, value: component.slug, meta: componentMeta[component.label]?.meta }))
 
   if (!component.value || !components.value.find(c => c.slug === component.value?.slug)) {
     component.value = components.value.find(comp => comp.slug === 'button')
   }
 
   state.value.props = { ...components.value?.reduce((acc, comp) => {
-    acc[comp.slug] = { ...comp.defaultVariants, ...comp.meta?.devtools?.defaultProps }
+    acc[comp.slug] = { ...comp.defaultVariants, ...devtoolsComponentMeta[comp.slug]?.devtools?.defaultProps }
     return acc
   }, {} as Record<string, any>), ...state.value.props }
 
@@ -56,7 +65,7 @@ const tabs = computed(() => {
   if (!component.value) return
 
   return [
-    { label: 'Props', slot: 'props', icon: 'i-heroicons-cog-6-tooth', disabled: !component.value.meta.props?.length }
+    { label: 'Props', slot: 'props', icon: 'i-heroicons-cog-6-tooth', disabled: !component.value.meta?.props?.length }
   ]
 })
 

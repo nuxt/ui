@@ -7,7 +7,7 @@ import sirv from 'sirv'
 import { setupDevtoolsClient } from './devtools/rpc'
 import { getPort } from 'get-port-please'
 import { pick } from './runtime/utils'
-import { devtoolsMetaPlugin } from './devtools/metaParser'
+import { devtoolsMetaPlugin } from './devtools/meta'
 
 export type * from './runtime/types'
 

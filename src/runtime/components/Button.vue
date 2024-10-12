@@ -7,8 +7,7 @@ import type { LinkProps } from './Link.vue'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { PartialString } from '../types/utils'
 import { formLoadingInjectionKey } from '../composables/useFormField'
-import { extendComponentMeta } from '../composables/extendComponentMeta'
-import type { DevtoolsMeta } from '../../devtools/rpc'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
@@ -33,7 +32,7 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
 }
 
 // Injects props to use as default in the devtools playground.
-extendComponentMeta<DevtoolsMeta<ButtonProps>>({ devtools: { defaultProps: { label: 'Click me!' } } })
+extendComponentMeta<ButtonProps>({ devtools: { defaultProps: { label: 'Click me!' } } })
 
 export interface ButtonSlots {
   leading(props?: {}): any
