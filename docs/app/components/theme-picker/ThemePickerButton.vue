@@ -11,7 +11,7 @@
     <template v-if="chip" #leading>
       <span
         class="inline-block w-2 h-2 rounded-full"
-        :class="`bg-[--color-light] dark:bg-[--color-dark]`"
+        :class="`bg-[var(--color-light)] dark:bg-[var(--color-dark)]`"
         :style="{
           '--color-light': `var(--color-${chip}-500)`,
           '--color-dark': `var(--color-${chip}-400)`
