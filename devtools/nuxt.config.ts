@@ -29,11 +29,5 @@ export default defineNuxtConfig({
     }
   },
 
-  content: {
-    highlight: {
-      langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
-    }
-  },
-
   compatibilityDate: '2024-04-03'
 })

@@ -69,19 +69,6 @@ const tabs = computed(() => {
   ]
 })
 
-const searchOpened = ref(false)
-function onComponentSearch(value: any) {
-  const match = components.value.find(c => c.slug === value?.slug)
-  searchOpened.value = false
-
-  if (!match) return
-  component.value = match
-}
-
-defineShortcuts({
-  meta_k: () => searchOpened.value = true
-})
-
 function openDocs() {
   if (!component.value) return
   window.parent.open(`https://ui3.nuxt.dev/components/${component.value.slug}`)
@@ -116,57 +103,53 @@ const componentProps = computed(() => {
       >
         <span />
 
-        <UModal v-model:open="searchOpened" :ui="{ content: 'top-0 sm:top-8 translate-y-0 sm:max-w-xl w-full' }">
-          <UButton label="Search component..." color="neutral" variant="link" icon="i-heroicons-magnifying-glass-20-solid" class="w-full" />
-          <template #content>
-            <UCommandPalette
-              :groups="[{ id: 'component', items: components.map((c) => ({ slug: c.slug, label: c.label })) }]"
-              placeholder="Search component..."
-              :fuse="{ fuseOptions: { includeMatches: true } }"
-              @update:model-value="onComponentSearch"
-              @close="searchOpened = false"
-            />
-          </template>
-        </UModal>
-      </div>
+        <UInputMenu
+          v-model="component"
+          variant="none"
+          :items="components"
+          placeholder="Search component..."
+          class="top-0 translate-y-0 w-full mx-2"
+          icon="i-heroicons-magnifying-glass"
+        />
 
-      <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-4">
-        <div class="col-span-1 border-r border-[--ui-border] hidden xl:block overflow-y-auto">
-          <UNavigationMenu
-            :items="components.map((c) => ({ ...c, select: () => component = c }))"
-            orientation="vertical"
-          />
-        </div>
-
-        <div class="xl:col-span-5 col-span-2 relative">
-          <ComponentPreview :component="component" :props="componentProps" class="h-full" />
-          <div class="flex gap-2 absolute top-1 right-2">
-            <UButton
-              :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-              variant="ghost"
-              color="neutral"
-              @click="isDark = !isDark"
+        <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-4 bg-[--ui-bg]">
+          <div class="col-span-1 border-r border-[--ui-border] hidden xl:block overflow-y-auto">
+            <UNavigationMenu
+              :items="components.map((c) => ({ ...c, select: () => component = c }))"
+              orientation="vertical"
             />
-            <UButton
-              v-if="component"
-              variant="ghost"
-              color="neutral"
-              icon="i-heroicons-arrow-top-right-on-square"
-              @click="openDocs()"
-            >
-              Open docs
-            </UButton>
           </div>
-        </div>
 
-        <div class="border-l border-[--ui-border] flex flex-col col-span-2 overflow-y-auto">
-          <UTabs color="neutral" variant="link" :items="tabs">
-            <template #props>
-              <div v-for="prop in component?.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-[--ui-border] dark:border-[--ui-border]">
-                <ComponentPropInput v-bind="prop" v-model="componentProps[prop.name]" />
-              </div>
-            </template>
-          </UTabs>
+          <div class="xl:col-span-5 col-span-2 relative">
+            <ComponentPreview :component="component" :props="componentProps" class="h-full" />
+            <div class="flex gap-2 absolute top-1 right-2">
+              <UButton
+                :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+                variant="ghost"
+                color="neutral"
+                @click="isDark = !isDark"
+              />
+              <UButton
+                v-if="component"
+                variant="ghost"
+                color="neutral"
+                icon="i-heroicons-arrow-top-right-on-square"
+                @click="openDocs()"
+              >
+                Open docs
+              </UButton>
+            </div>
+          </div>
+
+          <div class="border-l border-[--ui-border] flex flex-col col-span-2 overflow-y-auto">
+            <UTabs color="neutral" variant="link" :items="tabs" class="relative" :ui="{ list: 'sticky top-0 bg-[--ui-bg] z-50' }">
+              <template #props>
+                <div v-for="prop in component?.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-[--ui-border] dark:border-[--ui-border]">
+                  <ComponentPropInput v-bind="prop" v-model="componentProps[prop.name]" />
+                </div>
+              </template>
+            </UTabs>
+          </div>
         </div>
       </div>
     </template>
@@ -207,10 +190,11 @@ const componentProps = computed(() => {
 
 :root {
   --ui-border: var(--ui-color-neutral-200);
+  --ui-bg: white;
 }
 
 .dark {
   --ui-border: var(--ui-color-neutral-800);
-  --ui-bg: #111;
+  --ui-bg: var(--ui-color-neutral-900);
 }
 </style>

@@ -11,7 +11,7 @@ const code = computed(() => {
 
   const propsTemplate = Object.entries(props.props ?? {}).map(([key, value]: [string, any]) => {
     if (value === true) return kebabCase(key)
-    if (value === false) return
+    if (value === false || props.component?.defaultVariants?.[key]) return
     if (typeof value === 'number') return `:${kebabCase(key)}="${value}"`
     if (Array.isArray(value)) return `:${kebabCase(key)}="${genArrayFromRaw(value)}"`
     if (typeof value === 'object') return `:${kebabCase(key)}="${genObjectFromValues(value)}"`
@@ -26,11 +26,11 @@ const code = computed(() => {
     : undefined
 
   return `\`\`\`vue
-  <${props.component.label}
-    ${propsTemplate}
-    ${props.themeSlots?.base ? `class="${props.themeSlots.base}"` : ''}
-    ${slotsTemplate && slotsTemplate !== '{}' ? `:ui="${slotsTemplate}"` : ''}
-  ></${props.component.label}>
+<${props.component.label}
+  ${propsTemplate}
+  ${props.themeSlots?.base ? `class="${props.themeSlots.base}"` : ''}
+  ${slotsTemplate && slotsTemplate !== '{}' ? `:ui="${slotsTemplate}"` : ''}>
+</${props.component.label}>
 \`\`\``
 })
 
@@ -73,7 +73,7 @@ watch(() => props.component, () => rendererReady.value = false)
     />
 
     <div v-if="ast" v-show="rendererReady" class="relative w-full p-3">
-      <MDCRenderer :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 overflow-y-auto rounded-lg border border-[--ui-border] bg-neutral-50 dark:bg-neutral-700" />
+      <MDCRenderer :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 overflow-y-auto rounded-lg border border-[--ui-border] bg-neutral-50 dark:bg-neutral-800" />
       <UButton
         color="neutral"
         variant="link"

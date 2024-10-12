@@ -49,12 +49,17 @@ function addArrayItem() {
   if (!Array.isArray(modelValue.value)) return
   modelValue.value.push({})
 }
+
+if (!modelValue.value) {
+  // TODO: Inject app.config values into the defaults and resolve references
+  modelValue.value = props.default ?? props?.tags?.find(tag => tag.name === 'defaultValue' && !tag.text?.includes('appConfig'))?.text?.replaceAll('\'', '')
+}
 </script>
 
 <template>
   <UFormField :name="name" class="" :ui="{ wrapper: 'mb-2' }" :class="{ 'opacity-70 cursor-not-allowed': !inputType }">
     <template #label>
-      <p v-if="name" class="font-mono font-bold px-2 py-1 border-neutral-200 dark:border-neutral-500 dark:text-neutral-100 border border-dashed rounded bg-neutral-50 dark:bg-neutral-700">
+      <p v-if="name" class="font-mono font-bold px-1.5 py-0.5 border-neutral-200 dark:border-neutral-500 dark:text-neutral-100 border border-dashed rounded bg-neutral-50 dark:bg-neutral-700">
         {{ name }}
       </p>
     </template>
@@ -65,9 +70,9 @@ function addArrayItem() {
 
     <span v-if="!schema" />
 
-    <UInput v-if="inputType === 'string'" v-model="modelValue" />
+    <UInput v-if="inputType === 'string'" v-model="modelValue" class="min-w-56" />
     <UInput v-else-if="inputType === 'number'" v-model="modelValue" type="number" />
-    <UCheckbox v-else-if="inputType === 'boolean'" v-model="modelValue" />
+    <USwitch v-else-if="inputType === 'boolean'" v-model="modelValue" />
 
     <div v-else-if="inputType === 'array'">
       <div v-for="value, index in modelValue" :key="value.id" class="relative border border-[--ui-border] rounded-md mt-4">
@@ -101,7 +106,7 @@ function addArrayItem() {
       </UButton>
     </div>
 
-    <USelectMenu v-else-if="inputType === 'enum'" v-model="modelValue" :items="parseEnumValues((schema as any).schema)" class="w-56" />
+    <USelectMenu v-else-if="inputType === 'enum'" v-model="modelValue" :items="parseEnumValues((schema as any).schema)" class="min-w-56" />
 
     <div v-else-if="inputType === 'object'">
       <ComponentPropInput
@@ -109,7 +114,7 @@ function addArrayItem() {
         :key="attr.name"
         v-bind="attr"
         :model-value="modelValue?.[attr.name]"
-        class="border-b last:border-b-0 border-[--ui-border]  p-4"
+        class="border-b last:border-b-0 border-[--ui-border] p-4"
         @update:model-value="(value) => modelValue[attr.name] = value"
       />
     </div>
