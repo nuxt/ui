@@ -19,7 +19,6 @@
 </template>
 
 <script setup>
-// @ts-nocheck
 import { defineAsyncComponent, onErrorCaptured, onServerPrefetch, provide } from 'vue'
 import AppComponent from '#build/app-component.mjs'
 import ErrorComponent from '#build/error-component.mjs'

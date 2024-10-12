@@ -1,4 +1,3 @@
-// @ts-nocheck
 import type { defineAsyncComponent } from 'vue'
 import { createVNode, defineComponent, onErrorCaptured } from 'vue'
 
@@ -18,9 +17,11 @@ export default defineComponent({
     const head = injectHead()
     head.headEntries().splice(0, head.headEntries().length)
 
+    // @ts-expect-error - File comes from Nuxt.
     const component = islandComponents[props.context.name] as ReturnType<typeof defineAsyncComponent>
 
     if (!component) {
+    // @ts-expect-error - File comes from Nuxt.
       throw createError({
         statusCode: 404,
         statusMessage: `Island component not found: ${props.context.name}`
