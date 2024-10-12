@@ -19,7 +19,7 @@ exports[`Separator > renders with class correctly 1`] = `
 
 exports[`Separator > renders with color primary correctly 1`] = `
 "<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
-  <div class="border-[--ui-primary] w-full border-solid border-t"></div>
+  <div class="border-[var(--ui-primary)] w-full border-solid border-t"></div>
   <!--v-if-->
 </div>"
 `;
