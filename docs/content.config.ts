@@ -1,4 +1,4 @@
-import { defineCollection, z } from '@farnabaz/content-next'
+import { defineCollection, z } from '@nuxt/content'
 
 export const collections = {
   content: defineCollection({

@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   modules: [
     module,
     '@nuxt/ui-pro',
-    '@farnabaz/content-next',
+    '@nuxt/content',
     '@nuxt/image',
     '@nuxthub/core',
     '@nuxtjs/plausible',
@@ -130,7 +130,7 @@ export default defineNuxtConfig({
 
   componentMeta: {
     exclude: [
-      '@farnabaz/content-next',
+      '@nuxt/content',
       '@nuxt/icon',
       '@nuxt/image',
       '@nuxt/ui-pro',

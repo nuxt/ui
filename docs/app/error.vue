@@ -15,8 +15,8 @@ const route = useRoute()
 // const colorMode = useColorMode()
 // const { branch } = useContentSource()
 
-const { data: navigation } = await useAsyncData('navigation', () => getCollectionNavigation('content'))
-const { data: files } = await useAsyncData('files', () => getCollectionSearchSections('content', { ignoredTags: ['style'] }))
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: files } = await useAsyncData('files', () => queryCollectionSearchSections('content', { ignoredTags: ['style'] }))
 
 // Computed
 

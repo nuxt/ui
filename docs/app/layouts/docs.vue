@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@farnabaz/content-next'
+import type { ContentNavigationItem } from '@nuxt/content'
 
 const nav = inject<Ref<ContentNavigationItem[]>>('navigation')
 

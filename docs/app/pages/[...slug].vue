@@ -12,7 +12,7 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => getCollectionItemSurroundings('content', route.path, {
+const { data: surround } = await useAsyncData(`${route.path}-surround`, () => queryCollectionItemSurroundings('content', route.path, {
   fields: ['description']
 }))
 
@@ -73,7 +73,7 @@ const communityLinks = computed(() => [{
     </UPageHeader>
 
     <UPageBody>
-      <MDCRenderer v-if="page.body" :body="page.body" :data="page" />
+      <ContentRenderer v-if="page.body" :value="page" />
 
       <USeparator />
 
