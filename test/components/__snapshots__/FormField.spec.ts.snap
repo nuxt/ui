@@ -28,7 +28,7 @@ exports[`FormField > renders with description slot correctly 1`] = `
 "<div class="text-sm">
   <div class="">
     <!--v-if-->
-    <p class="text-[--ui-text-muted]">Description slot</p>
+    <p class="text-[var(--ui-text-muted)]">Description slot</p>
   </div>
   <div class="">
     <!--v-if-->
@@ -67,7 +67,7 @@ exports[`FormField > renders with help correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <p class="mt-2 text-[--ui-text-muted]">Username must be unique</p>
+    <p class="mt-2 text-[var(--ui-text-muted)]">Username must be unique</p>
   </div>
 </div>"
 `;
@@ -79,7 +79,7 @@ exports[`FormField > renders with help slot correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <p class="mt-2 text-[--ui-text-muted]">Help slot</p>
+    <p class="mt-2 text-[var(--ui-text-muted)]">Help slot</p>
   </div>
 </div>"
 `;
@@ -114,7 +114,7 @@ exports[`FormField > renders with label and description correctly 1`] = `
     <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-[var(--ui-text)]">Username</label>
       <!--v-if-->
     </div>
-    <p class="text-[--ui-text-muted]">Enter your username</p>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -156,7 +156,7 @@ exports[`FormField > renders with size lg correctly 1`] = `
     <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-[var(--ui-text)]">Username</label>
       <!--v-if-->
     </div>
-    <p class="text-[--ui-text-muted]">Enter your username</p>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -170,7 +170,7 @@ exports[`FormField > renders with size md correctly 1`] = `
     <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-[var(--ui-text)]">Username</label>
       <!--v-if-->
     </div>
-    <p class="text-[--ui-text-muted]">Enter your username</p>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -184,7 +184,7 @@ exports[`FormField > renders with size sm correctly 1`] = `
     <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-[var(--ui-text)]">Username</label>
       <!--v-if-->
     </div>
-    <p class="text-[--ui-text-muted]">Enter your username</p>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -198,7 +198,7 @@ exports[`FormField > renders with size xl correctly 1`] = `
     <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-[var(--ui-text)]">Username</label>
       <!--v-if-->
     </div>
-    <p class="text-[--ui-text-muted]">Enter your username</p>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -212,7 +212,7 @@ exports[`FormField > renders with size xs correctly 1`] = `
     <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-[var(--ui-text)]">Username</label>
       <!--v-if-->
     </div>
-    <p class="text-[--ui-text-muted]">Enter your username</p>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->

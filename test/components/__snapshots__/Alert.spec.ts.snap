@@ -13,7 +13,7 @@ exports[`Alert > renders with as correctly 1`] = `
 `;
 
 exports[`Alert > renders with avatar correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[var(--ui-bg)]"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[--ui-bg-elevated] size-11 text-[22px] shrink-0"><img role="img" src="https://avatars.githubusercontent.com/u/739984?v=4" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[--ui-text-muted] truncate"></span></span>
+"<div class="relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5 items-center bg-[--ui-primary] text-[var(--ui-bg)]"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-11 text-[22px] shrink-0"><img role="img" src="https://avatars.githubusercontent.com/u/739984?v=4" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
     <!--v-if-->
@@ -43,7 +43,7 @@ exports[`Alert > renders with close correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text-muted] hover:text-[var(--ui-text)] disabled:text-[--ui-text-muted] aria-disabled:text-[--ui-text-muted] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button></div>
@@ -70,7 +70,7 @@ exports[`Alert > renders with closeIcon correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
   </div>
-  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[--ui-text-muted] hover:text-[var(--ui-text)] disabled:text-[--ui-text-muted] aria-disabled:text-[--ui-text-muted] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted] p-0.5"><span class="iconify i-heroicons:trash shrink-0 size-5" aria-hidden="true"></span>
+  <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:trash shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button></div>
@@ -125,7 +125,7 @@ exports[`Alert > renders with leading slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with neutral variant outline correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5 items-center text-[--ui-text-highlighted] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border)]">
+"<div class="relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5 items-center text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border)]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -137,7 +137,7 @@ exports[`Alert > renders with neutral variant outline correctly 1`] = `
 `;
 
 exports[`Alert > renders with neutral variant soft correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5 items-center text-[--ui-text-highlighted] bg-[--ui-bg-elevated]/50">
+"<div class="relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5 items-center text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)]/50">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -149,7 +149,7 @@ exports[`Alert > renders with neutral variant soft correctly 1`] = `
 `;
 
 exports[`Alert > renders with neutral variant solid correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5 items-center text-[var(--ui-bg)] bg-[--ui-bg-inverted]">
+"<div class="relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5 items-center text-[var(--ui-bg)] bg-[var(--ui-bg-inverted)]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
@@ -161,7 +161,7 @@ exports[`Alert > renders with neutral variant solid correctly 1`] = `
 `;
 
 exports[`Alert > renders with neutral variant subtle correctly 1`] = `
-"<div class="relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5 items-center text-[--ui-text-highlighted] bg-[--ui-bg-elevated]/50 ring ring-inset ring-[--ui-border-accented]">
+"<div class="relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5 items-center text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)]/50 ring ring-inset ring-[var(--ui-border-accented)]">
   <!--v-if-->
   <div class="min-w-0 flex-1 flex flex-col gap-1">
     <div class="text-sm font-medium">Alert</div>
