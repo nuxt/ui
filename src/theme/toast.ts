@@ -4,8 +4,8 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none',
     wrapper: 'w-0 flex-1 flex flex-col gap-1',
-    title: 'text-sm font-medium text-[--ui-text-highlighted]',
-    description: 'text-sm text-[--ui-text-muted]',
+    title: 'text-sm font-medium text-[var(--ui-text-highlighted)]',
+    description: 'text-sm text-[var(--ui-text-muted)]',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
     avatarSize: '2xl',
@@ -21,9 +21,9 @@ export default (options: Required<ModuleOptions>) => ({
         progress: `bg-[--ui-${color}]`
       }])),
       neutral: {
-        root: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-border-inverted]',
-        icon: 'text-[--ui-text-highlighted]',
-        progress: 'bg-[--ui-bg-inverted]'
+        root: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-border-inverted)]',
+        icon: 'text-[var(--ui-text-highlighted)]',
+        progress: 'bg-[var(--ui-bg-inverted)]'
       }
     },
     multiline: {

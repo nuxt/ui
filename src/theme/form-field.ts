@@ -5,10 +5,10 @@ export default {
     labelWrapper: 'flex content-center items-center justify-between',
     label: 'block font-medium text-[var(--ui-text)]',
     container: 'mt-1 relative',
-    description: 'text-[--ui-text-muted]',
+    description: 'text-[var(--ui-text-muted)]',
     error: 'mt-2 text-[var(--ui-error)]',
-    hint: 'text-[--ui-text-muted]',
-    help: 'mt-2 text-[--ui-text-muted]'
+    hint: 'text-[var(--ui-text-muted)]',
+    help: 'mt-2 text-[var(--ui-text-muted)]'
   },
   variants: {
     size: {

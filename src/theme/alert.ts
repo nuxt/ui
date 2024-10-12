@@ -62,25 +62,25 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'neutral',
     variant: 'solid',
     class: {
-      root: 'text-[var(--ui-bg)] bg-[--ui-bg-inverted]'
+      root: 'text-[var(--ui-bg)] bg-[var(--ui-bg-inverted)]'
     }
   }, {
     color: 'neutral',
     variant: 'outline',
     class: {
-      root: 'text-[--ui-text-highlighted] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border)]'
+      root: 'text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border)]'
     }
   }, {
     color: 'neutral',
     variant: 'soft',
     class: {
-      root: 'text-[--ui-text-highlighted] bg-[--ui-bg-elevated]/50'
+      root: 'text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)]/50'
     }
   }, {
     color: 'neutral',
     variant: 'subtle',
     class: {
-      root: 'text-[--ui-text-highlighted] bg-[--ui-bg-elevated]/50 ring ring-inset ring-[--ui-border-accented]'
+      root: 'text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)]/50 ring ring-inset ring-[var(--ui-border-accented)]'
     }
   }],
   defaultVariants: {

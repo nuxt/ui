@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
     indicator: 'absolute transition-[translate,width] duration-200',
-    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-[--ui-text-muted] hover:data-[state=inactive]:text-[var(--ui-text)] font-medium rounded-[calc(var(--ui-radius)*1.5)] disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none', options.theme.transitions && 'transition-colors'],
+    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-[var(--ui-text-muted)] hover:data-[state=inactive]:text-[var(--ui-text)] font-medium rounded-[calc(var(--ui-radius)*1.5)] disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none', options.theme.transitions && 'transition-colors'],
     content: 'focus:outline-none w-full',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -19,7 +19,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     variant: {
       pill: {
-        list: 'bg-[--ui-bg-elevated] rounded-[calc(var(--ui-radius)*2)]',
+        list: 'bg-[var(--ui-bg-elevated)] rounded-[calc(var(--ui-radius)*2)]',
         trigger: 'flex-1',
         indicator: 'rounded-[calc(var(--ui-radius)*1.5)] shadow-sm'
       },
@@ -106,8 +106,8 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'neutral',
     variant: 'pill',
     class: {
-      indicator: 'bg-[--ui-bg-inverted]',
-      trigger: 'data-[state=active]:text-[var(--ui-bg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-border-inverted]'
+      indicator: 'bg-[var(--ui-bg-inverted)]',
+      trigger: 'data-[state=active]:text-[var(--ui-bg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-border-inverted)]'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
@@ -120,8 +120,8 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'neutral',
     variant: 'link',
     class: {
-      indicator: 'bg-[--ui-bg-inverted]',
-      trigger: 'data-[state=active]:text-[--ui-text-highlighted] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-border-inverted]'
+      indicator: 'bg-[var(--ui-bg-inverted)]',
+      trigger: 'data-[state=active]:text-[var(--ui-text-highlighted)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-border-inverted)]'
     }
   }],
   defaultVariants: {

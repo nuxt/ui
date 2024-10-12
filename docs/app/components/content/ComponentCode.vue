@@ -219,10 +219,10 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
           <UFormField
             :label="option.label"
             size="sm"
-            class="inline-flex ring ring-[--ui-border-accented] rounded-[var(--ui-radius)]"
+            class="inline-flex ring ring-[var(--ui-border-accented)] rounded-[var(--ui-radius)]"
             :ui="{
-              wrapper: 'bg-[--ui-bg-elevated]/50 rounded-l-[var(--ui-radius)] flex border-r border-[--ui-border-accented]',
-              label: 'text-[--ui-text-muted] px-2 py-1.5',
+              wrapper: 'bg-[var(--ui-bg-elevated)]/50 rounded-l-[var(--ui-radius)] flex border-r border-[var(--ui-border-accented)]',
+              label: 'text-[var(--ui-text-muted)] px-2 py-1.5',
               container: 'mt-0'
             }"
           >

@@ -1,12 +1,12 @@
 export default {
   slots: {
-    overlay: 'fixed inset-0 bg-[--ui-bg-elevated]/75',
+    overlay: 'fixed inset-0 bg-[var(--ui-bg-elevated)]/75',
     content: 'fixed w-full h-dvh bg-[var(--ui-bg)] divide-y divide-[var(--ui-border)] flex flex-col focus:outline-none',
     header: 'px-4 py-5 sm:px-6',
     body: 'flex-1 p-4 sm:p-6',
     footer: 'flex items-center gap-1.5 p-4 sm:px-6',
-    title: 'text-[--ui-text-highlighted] font-semibold',
-    description: 'mt-1 text-[--ui-text-muted] text-sm',
+    title: 'text-[var(--ui-text-highlighted)] font-semibold',
+    description: 'mt-1 text-[var(--ui-text-muted)] text-sm',
     close: 'absolute top-4 right-4'
   },
   variants: {

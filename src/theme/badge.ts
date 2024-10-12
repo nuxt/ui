@@ -38,19 +38,19 @@ export default (options: Required<ModuleOptions>) => ({
   })), {
     color: 'neutral',
     variant: 'solid',
-    class: 'text-[var(--ui-bg)] bg-[--ui-bg-inverted]'
+    class: 'text-[var(--ui-bg)] bg-[var(--ui-bg-inverted)]'
   }, {
     color: 'neutral',
     variant: 'outline',
-    class: 'ring ring-inset ring-[--ui-border-accented] text-[var(--ui-text)] bg-[var(--ui-bg)]'
+    class: 'ring ring-inset ring-[var(--ui-border-accented)] text-[var(--ui-text)] bg-[var(--ui-bg)]'
   }, {
     color: 'neutral',
     variant: 'soft',
-    class: 'text-[var(--ui-text)] bg-[--ui-bg-elevated]'
+    class: 'text-[var(--ui-text)] bg-[var(--ui-bg-elevated)]'
   }, {
     color: 'neutral',
     variant: 'subtle',
-    class: 'ring ring-inset ring-[--ui-border-accented] text-[var(--ui-text)] bg-[--ui-bg-elevated]'
+    class: 'ring ring-inset ring-[var(--ui-border-accented)] text-[var(--ui-text)] bg-[var(--ui-bg-elevated)]'
   }],
   defaultVariants: {
     color: 'primary',

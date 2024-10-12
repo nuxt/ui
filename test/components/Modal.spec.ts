@@ -15,7 +15,7 @@ describe('Modal', () => {
     ['without transition', { props: { ...props, transition: false, title: 'Title', description: 'Description' } }],
     ['without close', { props: { ...props, close: false, title: 'Title', description: 'Description' } }],
     ['with closeIcon', { props: { ...props, closeIcon: 'i-heroicons-trash' } }],
-    ['with class', { props: { ...props, class: 'bg-[--ui-bg-elevated]' } }],
+    ['with class', { props: { ...props, class: 'bg-[var(--ui-bg-elevated)]' } }],
     ['with ui', { props: { ...props, ui: { close: 'right-2' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],

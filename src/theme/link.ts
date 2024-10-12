@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     active: {
       true: 'text-[var(--ui-primary)]',
-      false: ['text-[--ui-text-muted] hover:text-[var(--ui-text)]', options.theme.transitions && 'transition-colors']
+      false: ['text-[var(--ui-text-muted)] hover:text-[var(--ui-text)]', options.theme.transitions && 'transition-colors']
     },
     disabled: {
       true: 'cursor-not-allowed opacity-75'

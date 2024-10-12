@@ -22,7 +22,7 @@ describe('Slider', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with color neutral', { props: { color: 'neutral', defaultValue: 10 } }],
     ['with class', { props: { class: 'w-48' } }],
-    ['with ui', { props: { ui: { track: 'bg-[--ui-bg-elevated]' } } }]
+    ['with ui', { props: { ui: { track: 'bg-[var(--ui-bg-elevated)]' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SliderProps }) => {
     const html = await ComponentRender(nameOrHtml, options, Slider)
     expect(html).toMatchSnapshot()

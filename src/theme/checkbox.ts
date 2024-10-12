@@ -3,17 +3,17 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-start',
-    base: 'shrink-0 flex items-center justify-center rounded-[var(--ui-radius)] text-[var(--ui-bg)] ring ring-inset ring-[--ui-border-accented] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
+    base: 'shrink-0 flex items-center justify-center rounded-[var(--ui-radius)] text-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
     container: 'flex items-center',
     wrapper: 'ms-2',
     icon: 'shrink-0 size-full',
     label: 'block font-medium text-[var(--ui-text)]',
-    description: 'text-[--ui-text-muted]'
+    description: 'text-[var(--ui-text-muted)]'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:outline-[--ui-${color}]`])),
-      neutral: 'focus-visible:outline-[--ui-border-inverted]'
+      neutral: 'focus-visible:outline-[var(--ui-border-inverted)]'
     },
     size: {
       xs: {
@@ -65,7 +65,7 @@ export default (options: Required<ModuleOptions>) => ({
   })), {
     color: 'neutral',
     checked: true,
-    class: 'ring-2 ring-[--ui-border-inverted] bg-[--ui-bg-inverted]'
+    class: 'ring-2 ring-[var(--ui-border-inverted)] bg-[var(--ui-bg-inverted)]'
   }],
   defaultVariants: {
     size: 'md',

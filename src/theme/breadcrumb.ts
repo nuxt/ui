@@ -11,7 +11,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkLeadingAvatarSize: '2xs',
     linkLabel: 'truncate',
     separator: 'flex',
-    separatorIcon: 'shrink-0 size-5 text-[--ui-text-muted]'
+    separatorIcon: 'shrink-0 size-5 text-[var(--ui-text-muted)]'
   },
   variants: {
     active: {
@@ -19,7 +19,7 @@ export default (options: Required<ModuleOptions>) => ({
         link: 'text-[var(--ui-primary)] font-semibold'
       },
       false: {
-        link: 'text-[--ui-text-muted] font-medium'
+        link: 'text-[var(--ui-text-muted)] font-medium'
       }
     },
     disabled: {

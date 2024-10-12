@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => {
     slots: {
       value: 'truncate',
       placeholder: 'truncate text-current/50',
-      input: 'placeholder-[--ui-text-dimmed] border-0 border-b border-[var(--ui-border)] focus:outline-none'
+      input: 'placeholder-[var(--ui-text-dimmed)] border-0 border-b border-[var(--ui-border)] focus:outline-none'
     },
     variants: {
       size: {

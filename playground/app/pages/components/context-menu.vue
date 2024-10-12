@@ -88,7 +88,7 @@ defineShortcuts(extractShortcuts(items))
     </div>
 
     <UContextMenu :items="items" class="min-w-48" :size="size">
-      <div class="flex items-center justify-center rounded-md border border-dashed border-[--ui-border-accented] text-sm aspect-video w-72">
+      <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
         Right click here
       </div>
     </UContextMenu>
