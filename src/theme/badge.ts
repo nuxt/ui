@@ -22,19 +22,19 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
-    class: `bg-[--ui-${color}] text-[var(--ui-bg)]`
+    class: `bg-[var(--ui-${color})] text-[var(--ui-bg)]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
-    class: `text-[--ui-${color}] ring ring-inset ring-[--ui-${color}]/50`
+    class: `text-[var(--ui-${color})] ring ring-inset ring-[var(--ui-${color})]/50`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'soft',
-    class: `bg-[--ui-${color}]/10 text-[--ui-${color}]`
+    class: `bg-[var(--ui-${color})]/10 text-[var(--ui-${color})]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'subtle',
-    class: `bg-[--ui-${color}]/10 text-[--ui-${color}] ring ring-inset ring-[--ui-${color}]/25`
+    class: `bg-[var(--ui-${color})]/10 text-[var(--ui-${color})] ring ring-inset ring-[var(--ui-${color})]/25`
   })), {
     color: 'neutral',
     variant: 'solid',

@@ -12,7 +12,7 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { border: `border-[--ui-${color}]` }])),
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { border: `border-[var(--ui-${color})]` }])),
       neutral: { border: 'border-[var(--ui-border)]' }
     },
     orientation: {

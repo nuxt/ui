@@ -101,7 +101,7 @@ export default (options: Required<ModuleOptions>) => {
       color,
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: `has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[--${color}]`
+      class: `has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--${color})]`
     })), {
       color: 'neutral',
       multiple: true,

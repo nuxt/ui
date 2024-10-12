@@ -72,27 +72,27 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
-    class: `text-[var(--ui-bg)] bg-[--ui-${color}] hover:bg-[--ui-${color}]/75 disabled:bg-[--ui-${color}] aria-disabled:bg-[--ui-${color}] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-${color}]`
+    class: `text-[var(--ui-bg)] bg-[var(--ui-${color})] hover:bg-[var(--ui-${color})]/75 disabled:bg-[var(--ui-${color})] aria-disabled:bg-[var(--ui-${color})] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-${color})]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
-    class: `ring ring-inset ring-[--ui-${color}]/50 text-[--ui-${color}] hover:bg-[--ui-${color}]/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-[--ui-${color}]`
+    class: `ring ring-inset ring-[var(--ui-${color})]/50 text-[var(--ui-${color})] hover:bg-[var(--ui-${color})]/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-[var(--ui-${color})]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'soft',
-    class: `text-[--ui-${color}] bg-[--ui-${color}]/10 hover:bg-[--ui-${color}]/15 focus-visible:bg-[--ui-${color}]/15 disabled:bg-[--ui-${color}]/10 aria-disabled:bg-[--ui-${color}]/10`
+    class: `text-[var(--ui-${color})] bg-[var(--ui-${color})]/10 hover:bg-[var(--ui-${color})]/15 focus-visible:bg-[var(--ui-${color})]/15 disabled:bg-[var(--ui-${color})]/10 aria-disabled:bg-[var(--ui-${color})]/10`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'subtle',
-    class: `text-[--ui-${color}] ring ring-inset ring-[--ui-${color}]/25 bg-[--ui-${color}]/10 hover:bg-[--ui-${color}]/15 disabled:bg-[--ui-${color}]/10 aria-disabled:bg-[--ui-${color}]/10 focus-visible:ring-2 focus-visible:ring-[--ui-${color}]`
+    class: `text-[var(--ui-${color})] ring ring-inset ring-[var(--ui-${color})]/25 bg-[var(--ui-${color})]/10 hover:bg-[var(--ui-${color})]/15 disabled:bg-[var(--ui-${color})]/10 aria-disabled:bg-[var(--ui-${color})]/10 focus-visible:ring-2 focus-visible:ring-[var(--ui-${color})]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'ghost',
-    class: `text-[--ui-${color}] hover:bg-[--ui-${color}]/10 focus-visible:bg-[--ui-${color}]/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent`
+    class: `text-[var(--ui-${color})] hover:bg-[var(--ui-${color})]/10 focus-visible:bg-[var(--ui-${color})]/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'link',
-    class: `text-[--ui-${color}] hover:text-[--ui-${color}] disabled:text-[--ui-${color}] aria-disabled:text-[--ui-${color}] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-${color}]`
+    class: `text-[var(--ui-${color})] hover:text-[var(--ui-${color})] disabled:text-[var(--ui-${color})] aria-disabled:text-[var(--ui-${color})] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-${color})]`
   })), {
     color: 'neutral',
     variant: 'solid',

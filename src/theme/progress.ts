@@ -18,8 +18,8 @@ export default (options: Required<ModuleOptions>) => ({
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `bg-[--ui-${color}]`,
-        steps: `text-[--ui-${color}]`
+        indicator: `bg-[var(--ui-${color})]`,
+        steps: `text-[var(--ui-${color})]`
       }])),
       neutral: {
         indicator: 'bg-[var(--ui-bg-inverted)]',

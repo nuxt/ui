@@ -80,11 +80,11 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: ['outline', 'subtle'],
-    class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-${color}]`
+    class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-${color})]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     highlight: true,
-    class: `ring ring-inset ring-[--ui-${color}]`
+    class: `ring ring-inset ring-[var(--ui-${color})]`
   })), {
     color: 'neutral',
     variant: ['outline', 'subtle'],

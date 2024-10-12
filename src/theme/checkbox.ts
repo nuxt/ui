@@ -12,7 +12,7 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:outline-[--ui-${color}]`])),
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:outline-[var(--ui-${color})]`])),
       neutral: 'focus-visible:outline-[var(--ui-border-inverted)]'
     },
     size: {
@@ -61,7 +61,7 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     checked: true,
-    class: `ring-2 ring-[--ui-${color}] bg-[--ui-${color}]`
+    class: `ring-2 ring-[var(--ui-${color})] bg-[var(--ui-${color})]`
   })), {
     color: 'neutral',
     checked: true,

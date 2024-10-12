@@ -16,9 +16,9 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        root: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-${color}]`,
-        icon: `text-[--ui-${color}]`,
-        progress: `bg-[--ui-${color}]`
+        root: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-${color})]`,
+        icon: `text-[var(--ui-${color})]`,
+        progress: `bg-[var(--ui-${color})]`
       }])),
       neutral: {
         root: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-border-inverted)]',

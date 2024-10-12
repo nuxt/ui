@@ -99,8 +99,8 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     variant: 'pill',
     class: {
-      indicator: `bg-[--ui-${color}]`,
-      trigger: `data-[state=active]:text-[var(--ui-bg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-${color}]`
+      indicator: `bg-[var(--ui-${color})]`,
+      trigger: `data-[state=active]:text-[var(--ui-bg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-${color})]`
     }
   })), {
     color: 'neutral',
@@ -113,8 +113,8 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     variant: 'link',
     class: {
-      indicator: `bg-[--ui-${color}]`,
-      trigger: `data-[state=active]:text-[--ui-${color}] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-${color}]`
+      indicator: `bg-[var(--ui-${color})]`,
+      trigger: `data-[state=active]:text-[var(--ui-${color})] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-${color})]`
     }
   })), {
     color: 'neutral',

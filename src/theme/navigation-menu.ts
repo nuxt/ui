@@ -34,8 +34,8 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        link: `focus-visible:before:ring-[--ui-${color}]`,
-        childLink: `focus-visible:outline-[--ui-${color}]`
+        link: `focus-visible:before:ring-[var(--ui-${color})]`,
+        childLink: `focus-visible:outline-[var(--ui-${color})]`
       }])),
       neutral: {
         link: 'focus-visible:before:ring-[var(--ui-border-inverted)]',
@@ -110,8 +110,8 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'pill',
     active: true,
     class: {
-      link: `text-[--ui-${color}]`,
-      linkLeadingIcon: `text-[--ui-${color}]`
+      link: `text-[var(--ui-${color})]`,
+      linkLeadingIcon: `text-[var(--ui-${color})]`
     }
   })), {
     color: 'neutral',
@@ -148,8 +148,8 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'link',
     active: true,
     class: {
-      link: `text-[--ui-${color}]`,
-      linkLeadingIcon: `text-[--ui-${color}]`
+      link: `text-[var(--ui-${color})]`,
+      linkLeadingIcon: `text-[var(--ui-${color})]`
     }
   })), {
     color: 'neutral',
@@ -164,7 +164,7 @@ export default (options: Required<ModuleOptions>) => ({
     highlight: true,
     active: true,
     class: {
-      link: `after:bg-[--ui-${highlightColor}]`
+      link: `after:bg-[var(--ui-${highlightColor})]`
     }
   })), {
     highlightColor: 'neutral',
