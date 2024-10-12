@@ -11,7 +11,9 @@ const code = computed(() => {
 
   const propsTemplate = Object.entries(props.props ?? {}).map(([key, value]: [string, any]) => {
     if (value === true) return kebabCase(key)
-    if (value === false || props.component?.defaultVariants?.[key]) return
+    if (value === false) return
+    if (props.component?.defaultVariants?.[key]) return
+    if (props.component?.meta?.props.find(prop => prop.name === key && prop.default === value)) return
     if (typeof value === 'number') return `:${kebabCase(key)}="${value}"`
     if (Array.isArray(value)) return `:${kebabCase(key)}="${genArrayFromRaw(value)}"`
     if (typeof value === 'object') return `:${kebabCase(key)}="${genObjectFromValues(value)}"`

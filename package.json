@@ -38,6 +38,7 @@
     "docs": "DEV=true nuxi dev docs",
     "docs:build": "nuxi build docs",
     "docs:prepare": "nuxt-component-meta docs",
+    "devtools:prepare": "nuxt-component-meta src/runtime/ --outputDir ../devtools/.component-meta",
     "devtools": "NUXT_UI_DEVTOOLS_LOCAL=true nuxi dev playground",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

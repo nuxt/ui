@@ -141,29 +141,7 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.vite.plugins ||= []
       nuxt.options.vite.plugins.push(devtoolsMetaPlugin())
 
-      installModule('nuxt-component-meta')
-
-      // @ts-ignore
-      nuxt.options.componentMeta ||= {}
-      // @ts-ignore
-      nuxt.options.componentMeta.exclude ||= []
-      // @ts-ignore
-      nuxt.options.componentMeta.exclude.push(
-        '@nuxt/content',
-        '@nuxt/icon',
-        '@nuxt/image',
-        '@nuxt/ui-pro',
-        '@nuxtjs/color-mode',
-        '@nuxtjs/mdc',
-        '@nuxtjs/plausible',
-        'nuxt/dist',
-        'nuxt-og-image'
-      )
-
       setupDevtoolsClient(options)
-
-      nuxt.options.nitro.routeRules ||= {}
-      nuxt.options.nitro.routeRules['__nuxt_ui__/**'] = { ssr: false }
 
       // Runs UI devtools in a subprocess for local development
       if (process.env.NUXT_UI_DEVTOOLS_LOCAL) {

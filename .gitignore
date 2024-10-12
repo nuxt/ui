@@ -1,3 +1,5 @@
+src/devtools/.component-meta/
+
 # Nuxt dev/build outputs
 .output
 .data

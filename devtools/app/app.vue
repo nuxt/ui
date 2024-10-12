@@ -3,7 +3,6 @@ import { onDevtoolsClientConnected } from '@nuxt/devtools-kit/iframe-client'
 import type { ClientFunctions, ServerFunctions, Component } from '../../src/devtools/rpc'
 import type { BirpcReturn } from 'birpc'
 import { watchDebounced } from '@vueuse/core'
-import type { ComponentMeta } from 'vue-component-meta'
 
 // Disable devtools in component renderer iframe
 // @ts-expect-error - Nuxt Devtools internal value
@@ -20,19 +19,17 @@ let rpc: BirpcReturn<ServerFunctions, ClientFunctions> | null = null
 onDevtoolsClientConnected(async (client) => {
   rpc = client.devtools.extendClientRpc<ServerFunctions, ClientFunctions>('nuxt/ui/devtools', { })
 
-  const [devtoolsComponentMeta, componentMeta] = await Promise.all([
-    _fetch<Record<string, any>>('/__ui_devtools__/api/component-meta'),
-    _fetch<Record<string, { meta: ComponentMeta }>>('/api/component-meta')
-  ])
-
-  components.value = (await rpc.getComponents()).map(component => ({ ...component, value: component.slug, meta: componentMeta[component.label]?.meta }))
+  const componentMeta = await _fetch<Record<string, any>>('/__ui_devtools__/api/component-meta')
+  components.value = (await rpc.getComponents()).map(component => ({
+    ...component, value: component.slug, meta: componentMeta[component.slug]?.meta
+  }))
 
   if (!component.value || !components.value.find(c => c.slug === component.value?.slug)) {
     component.value = components.value.find(comp => comp.slug === 'button')
   }
 
   state.value.props = { ...components.value?.reduce((acc, comp) => {
-    acc[comp.slug] = { ...comp.defaultVariants, ...devtoolsComponentMeta[comp.slug]?.devtools?.defaultProps }
+    acc[comp.slug] = { ...comp.defaultVariants, ...componentMeta[comp.slug]?.devtools?.defaultProps }
     return acc
   }, {} as Record<string, any>), ...state.value.props }
 

@@ -24,8 +24,8 @@ function parseEnumValues(propMeta: PropertyMeta['schema'] | PropertyMeta['schema
   const meta = Array.isArray(propMeta) ? propMeta[0] : propMeta
   if (!meta) return
   return Object.values(propMeta).filter((value: string) =>
-    typeof value === 'string' && value.startsWith('"') /* Keeps only string symbols and filters interfaces from matches */
-  ).map((value: string) => value.replaceAll('"', '')).filter(value => value !== 'undefined')
+    typeof value === 'string' && value.match(/^["']/) /* Keeps only string symbols and filters interfaces from matches */
+  ).map((value: string) => value.replaceAll(/["']/g, '')).filter(value => value !== 'undefined')
 }
 
 const arraySchema = computed(() => {
@@ -51,8 +51,7 @@ function addArrayItem() {
 }
 
 if (!modelValue.value) {
-  // TODO: Inject app.config values into the defaults and resolve references
-  modelValue.value = props.default ?? props?.tags?.find(tag => tag.name === 'defaultValue' && !tag.text?.includes('appConfig'))?.text?.replaceAll('\'', '')
+  modelValue.value = props.default
 }
 </script>
 
