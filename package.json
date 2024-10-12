@@ -34,7 +34,7 @@
     "prepack": "pnpm build",
     "dev": "DEV=true nuxi dev playground",
     "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground && nuxi prepare docs && nuxi prepare devtools",
+    "dev:prepare": "pnpm devtools:prepare && nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground && nuxi prepare docs && nuxi prepare devtools",
     "docs": "DEV=true nuxi dev docs",
     "docs:build": "nuxi build docs",
     "docs:prepare": "nuxt-component-meta docs",
