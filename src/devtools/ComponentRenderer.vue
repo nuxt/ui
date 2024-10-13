@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { onUnmounted, onMounted, reactive, defineAsyncComponent } from 'vue'
 import { pascalCase } from 'scule'
-import { useColorMode } from '#imports'
+import { useColorMode, useRoute } from '#imports'
 
-const props = defineProps<{
-  slug: string
-}>()
+const route = useRoute()
+const component = route.query?.example
+  ? defineAsyncComponent(() => import(`./examples/${route.query.example}.vue`))
+  : route.params?.slug && defineAsyncComponent(() => import(`../runtime/components/${pascalCase(route.params.slug)}.vue`))
 
-const component = props.slug && defineAsyncComponent(() => import(`../runtime/components/${pascalCase(props.slug)}.vue`))
 const state = reactive<{ slots?: any, props?: any }>({})
 
 function onUpdateRenderer(event: Event & { data?: any }) {
@@ -30,16 +30,21 @@ onUnmounted(() => {
   window.parent.removeEventListener('nuxt-ui-devtools:set-color-mode', setColorMode)
 })
 
-onMounted(() => {
-  const event: Event & { data?: any } = new Event('nuxt-ui-devtools:component-loaded')
-  event.data = props.slug
+onMounted(async () => {
+  const event: Event = new Event('nuxt-ui-devtools:component-loaded')
   window.parent.dispatchEvent(event)
+})
+
+onMounted(() => {
+  if (!route.query?.example) return
 })
 </script>
 
 <template>
   <div class="nuxt-ui-component-renderer h-screen w-screen p-8">
-    <component :is="component" v-if="component && state.props" v-bind="state.props" :class="state?.slots?.base" :ui="state.slots" />
+    <template v-if="component && state.props">
+      <component :is="component" v-if="component && state.props" v-bind="state.props" :class="state?.slots?.base" :ui="state.slots" />
+    </template>
   </div>
 </template>
 

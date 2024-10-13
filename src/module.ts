@@ -191,7 +191,8 @@ export default defineNuxtModule<ModuleOptions>({
       extendPages((pages) => {
         pages.unshift({
           name: 'ui-devtools',
-          path: '/__nuxt_ui__/components/:component'
+          path: '/__nuxt_ui__/components/:slug',
+          file: resolve(__dirname, './devtools/ComponentRenderer.vue')
         })
       })
 

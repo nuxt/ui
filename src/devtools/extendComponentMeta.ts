@@ -1,7 +1,6 @@
 export type DevtoolsMeta<T> = {
-  devtools: {
-    defaultProps: T
-  }
+  defaultProps?: T
+  example?: string
 }
 
-export function extendComponentMeta<T>(_meta: DevtoolsMeta<T>) { /* Placeholder for extendComponentMeta macro */ };
+export function extendComponentMeta<T>(_meta: DevtoolsMeta<T>) { }

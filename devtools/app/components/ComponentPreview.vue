@@ -6,6 +6,12 @@ import { genObjectFromValues, genArrayFromRaw } from 'knitwork'
 
 const props = defineProps<{ component?: Component, props?: object, themeSlots?: Record<string, any> }>()
 
+const { data: componentExample } = await useAsyncData('__ui_devtools_component-source', async () => {
+  const example = props.component?.meta?.devtools?.example
+  if (!example) return false
+  return await $fetch<{ source: string }>(`/api/component-example`, { params: { component: example } })
+}, { watch: [() => props.component?.slug] })
+
 const code = computed(() => {
   if (!props.component) return
 
@@ -26,6 +32,17 @@ const code = computed(() => {
       return acc
     }, {} as Record<string, string>))
     : undefined
+
+  if (componentExample.value) {
+    return `\`\`\`vue
+${componentExample.value?.source.replace(
+  `<${props.component.label}`,
+  `<${props.component.label} ${propsTemplate}
+    ${props.themeSlots?.base ? `class="${props.themeSlots.base}"` : ''}
+    ${slotsTemplate && slotsTemplate !== '{}' ? `:ui="${slotsTemplate}"` : ''}
+  `)}
+\`\`\``
+  }
 
   return `\`\`\`vue
 <${props.component.label}
@@ -61,6 +78,18 @@ function onRendererReady() {
 }
 
 watch(() => props.component, () => rendererReady.value = false)
+
+const previewUrl = computed(() => {
+  if (!props.component) return
+  const baseUrl = `/__nuxt_ui__/components/${props.component.slug}`
+  const params = new URLSearchParams()
+
+  if (props.component?.meta?.devtools?.example !== undefined) {
+    params.append('example', props.component.meta.devtools.example)
+  }
+  const queryString = params.toString()
+  return queryString ? `${baseUrl}?${queryString}` : baseUrl
+})
 </script>
 
 <template>
@@ -70,12 +99,11 @@ watch(() => props.component, () => rendererReady.value = false)
       v-show="rendererReady"
       ref="renderer"
       class="grow w-full"
-      :src="`/__nuxt_ui__/components/${component.slug}`"
+      :src="previewUrl"
       @load="onRendererReady"
     />
-
     <div v-if="ast" v-show="rendererReady" class="relative w-full p-3">
-      <MDCRenderer :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 overflow-y-auto rounded-lg border border-[--ui-border] bg-neutral-50 dark:bg-neutral-800" />
+      <MDCRenderer :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 text-sm overflow-y-auto rounded-lg border border-[--ui-border] bg-neutral-50 dark:bg-neutral-800" />
       <UButton
         color="neutral"
         variant="link"

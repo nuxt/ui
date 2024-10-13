@@ -13,7 +13,7 @@
       :is="SingleRenderer"
       v-else-if="SingleRenderer"
     />
-    <ComponentRenderer v-else-if="url.startsWith('/__nuxt_ui__/components')" :slug="url?.replace('/__nuxt_ui__/components/', '')" />
+    <NuxtPage v-else-if="url.startsWith('/__nuxt_ui__/components')" />
     <AppComponent v-else />
   </Suspense>
 </template>
@@ -24,7 +24,6 @@ import AppComponent from '#build/app-component.mjs'
 import ErrorComponent from '#build/error-component.mjs'
 // @ts-expect-error virtual file
 import { componentIslands } from '#build/nuxt.config.mjs'
-import ComponentRenderer from './ComponentRenderer.vue'
 
 const IslandRenderer = import.meta.server && componentIslands
   ? defineAsyncComponent(() => import('./island-renderer').then(r => r.default || r))

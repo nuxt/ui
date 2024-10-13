@@ -3,6 +3,7 @@ import { extendServerRpc, onDevToolsInitialized } from '@nuxt/devtools-kit'
 import * as theme from '../theme'
 import type { ModuleOptions } from '../module'
 import { upperFirst, camelCase, kebabCase } from 'scule'
+import type { DevtoolsMeta } from './extendComponentMeta'
 
 export type Component = {
   slug: string
@@ -10,7 +11,7 @@ export type Component = {
   slots: Record<string, string>
   variants: Record<string, any>
   defaultVariants: Record<string, any>
-  meta?: ComponentMeta
+  meta?: ComponentMeta & { devtools: DevtoolsMeta<any> }
 }
 
 export interface ServerFunctions {

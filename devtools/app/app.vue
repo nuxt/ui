@@ -3,6 +3,8 @@ import { onDevtoolsClientConnected } from '@nuxt/devtools-kit/iframe-client'
 import type { ClientFunctions, ServerFunctions, Component } from '../../src/devtools/rpc'
 import type { BirpcReturn } from 'birpc'
 import { watchDebounced } from '@vueuse/core'
+import type { DevtoolsMeta } from '../../src/devtools/extendComponentMeta'
+import type { ComponentMeta } from 'vue-component-meta'
 
 // Disable devtools in component renderer iframe
 // @ts-expect-error - Nuxt Devtools internal value
@@ -12,24 +14,22 @@ const components = useState<Array<Component & { value: string }>>('__ui-devtools
 const component = useState<Component | undefined>('__ui-devtools-component')
 const state = useState<Record<string, any>>('__ui-devtools-state', () => ({}))
 
-const _fetch = $fetch.create({ baseURL: '/' })
-
 let rpc: BirpcReturn<ServerFunctions, ClientFunctions> | null = null
 
 onDevtoolsClientConnected(async (client) => {
   rpc = client.devtools.extendClientRpc<ServerFunctions, ClientFunctions>('nuxt/ui/devtools', { })
+  const componentMeta = await $fetch<Record<string, { meta: ComponentMeta & { devtools: DevtoolsMeta<any> } }>>('/api/component-meta')
 
-  const componentMeta = await _fetch<Record<string, any>>('/__ui_devtools__/api/component-meta')
   components.value = (await rpc.getComponents()).map(component => ({
     ...component, value: component.slug, meta: componentMeta[component.slug]?.meta
   }))
 
   if (!component.value || !components.value.find(c => c.slug === component.value?.slug)) {
-    component.value = components.value.find(comp => comp.slug === 'button')
+    component.value = components.value.find(comp => comp.slug === 'form')
   }
 
   state.value.props = { ...components.value?.reduce((acc, comp) => {
-    acc[comp.slug] = { ...comp.defaultVariants, ...componentMeta[comp.slug]?.devtools?.defaultProps }
+    acc[comp.slug] = { ...comp.defaultVariants, ...componentMeta[comp.slug]?.meta?.devtools?.defaultProps }
     return acc
   }, {} as Record<string, any>), ...state.value.props }
 
@@ -41,9 +41,10 @@ onDevtoolsClientConnected(async (client) => {
 
 function updateRenderer() {
   if (!component.value) return
-
   const event: Event & { data?: any } = new Event('nuxt-ui-devtools:update-renderer')
-  event.data = { props: state.value.props?.[component.value.slug], slots: state.value.slots?.[component.value?.slug] }
+  event.data = {
+    props: state.value.props?.[component.value.slug], slots: state.value.slots?.[component.value?.slug]
+  }
 
   window.dispatchEvent(event)
 }

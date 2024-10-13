@@ -32,7 +32,7 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
 }
 
 // Injects props to use as default in the devtools playground.
-extendComponentMeta<ButtonProps>({ devtools: { defaultProps: { label: 'Click me!' } } })
+extendComponentMeta<ButtonProps>({ defaultProps: { label: 'Click me!' } })
 
 export interface ButtonSlots {
   leading(props?: {}): any
