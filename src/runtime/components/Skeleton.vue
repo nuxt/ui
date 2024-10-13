@@ -3,6 +3,7 @@ import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/skeleton'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { skeleton: Partial<typeof theme> } }
 
@@ -16,6 +17,8 @@ export interface SkeletonProps {
   as?: any
   class?: any
 }
+
+extendComponentMeta({ example: 'SkeletonExample' })
 </script>
 
 <script setup lang="ts">

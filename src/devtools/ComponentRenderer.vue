@@ -42,9 +42,11 @@ onMounted(() => {
 
 <template>
   <div class="nuxt-ui-component-renderer h-screen w-screen p-8">
-    <template v-if="component && state.props">
-      <component :is="component" v-if="component && state.props" v-bind="state.props" :class="state?.slots?.base" :ui="state.slots" />
-    </template>
+    <UApp>
+      <template v-if="component && state.props">
+        <component :is="component" v-if="component && state.props" v-bind="state.props" :class="state?.slots?.base" :ui="state.slots" />
+      </template>
+    </UApp>
   </div>
 </template>
 

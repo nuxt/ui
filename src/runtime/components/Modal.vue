@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/modal'
 import type { ButtonProps } from '../types'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { modal: Partial<typeof theme> } }
 
@@ -67,6 +68,8 @@ export interface ModalSlots {
   body(props?: {}): any
   footer(props?: {}): any
 }
+
+extendComponentMeta({ example: 'ModalExample' })
 </script>
 
 <script setup lang="ts">

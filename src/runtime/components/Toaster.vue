@@ -4,6 +4,7 @@ import type { ToastProviderProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toaster'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { toaster: Partial<typeof theme> } }
 
@@ -85,6 +86,8 @@ const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 
 function getOffset(index: number) {
   return refs.value.slice(index + 1).reduce((acc, { height }) => acc + height + 16, 0)
 }
+
+extendComponentMeta({ ignore: true })
 </script>
 
 <template>

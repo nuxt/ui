@@ -6,6 +6,7 @@ import type { RouteLocationRaw } from '#vue-router'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/pagination'
 import type { ButtonProps } from '../types'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { pagination: Partial<typeof theme> } }
 
@@ -97,6 +98,8 @@ export interface PaginationSlots {
     index: number
   }): any
 }
+
+extendComponentMeta({ defaultProps: { total: 50 } })
 </script>
 
 <script setup lang="ts">

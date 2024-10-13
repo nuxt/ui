@@ -20,16 +20,24 @@ onDevtoolsClientConnected(async (client) => {
   rpc = client.devtools.extendClientRpc<ServerFunctions, ClientFunctions>('nuxt/ui/devtools', { })
   const componentMeta = await $fetch<Record<string, { meta: ComponentMeta & { devtools: DevtoolsMeta<any> } }>>('/api/component-meta')
 
-  components.value = (await rpc.getComponents()).map(component => ({
-    ...component, value: component.slug, meta: componentMeta[component.slug]?.meta
-  }))
+  components.value = (await rpc.getComponents()).flatMap((component) => {
+    if (componentMeta[component.slug]?.meta.devtools?.ignore) return []
+    return [{
+      ...component, value: component.slug, meta: componentMeta[component.slug]?.meta
+    }]
+  })
 
   if (!component.value || !components.value.find(c => c.slug === component.value?.slug)) {
     component.value = components.value.find(comp => comp.slug === 'button')
   }
 
   state.value.props = { ...components.value?.reduce((acc, comp) => {
-    acc[comp.slug] = { ...comp.defaultVariants, ...componentMeta[comp.slug]?.meta?.devtools?.defaultProps }
+    const componentDefaultProps = comp.meta?.props.reduce((acc, prop) => {
+      acc[prop.name] = prop.default
+      return acc
+    }, {} as Record<string, any>)
+
+    acc[comp.slug] = { ...comp.defaultVariants, ...componentDefaultProps, ...componentMeta[comp.slug]?.meta?.devtools?.defaultProps }
     return acc
   }, {} as Record<string, any>), ...state.value.props }
 

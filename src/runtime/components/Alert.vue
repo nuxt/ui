@@ -4,6 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/alert'
 import type { AvatarProps, ButtonProps } from '../types'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { alert: Partial<typeof theme> } }
 
@@ -56,6 +57,8 @@ export interface AlertSlots {
   actions(props?: {}): any
   close(props: { ui: any }): any
 }
+
+extendComponentMeta<AlertProps>({ defaultProps: { title: 'Heads up!' } })
 </script>
 
 <script setup lang="ts">

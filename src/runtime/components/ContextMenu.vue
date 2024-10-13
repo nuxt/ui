@@ -7,6 +7,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
 
@@ -58,6 +59,62 @@ export type ContextMenuSlots<T extends { slot?: string }> = {
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
+extendComponentMeta({ example: 'ContextMenuExample', defaultProps: { items:
+  [
+    [{
+      label: 'My account',
+      avatar: {
+        src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+      }
+    }],
+    [{
+      label: 'Appearance',
+      children: [{
+        label: 'System',
+        icon: 'i-heroicons-computer-desktop'
+      }, {
+        label: 'Light',
+        icon: 'i-heroicons-sun'
+      }, {
+        label: 'Dark',
+        icon: 'i-heroicons-moon'
+      }]
+    }],
+    [{
+      label: 'Show Sidebar',
+      kbds: ['meta', 'S']
+    }, {
+      label: 'Show Toolbar',
+      kbds: ['shift', 'meta', 'D']
+    }, {
+      label: 'Collapse Pinned Tabs',
+      disabled: true
+    }], [{
+      label: 'Refresh the Page'
+    }, {
+      label: 'Clear Cookies and Refresh'
+    }, {
+      label: 'Clear Cache and Refresh'
+    }, {
+      type: 'separator'
+    }, {
+      label: 'Developer',
+      children: [[{
+        label: 'View Source',
+        kbds: ['option', 'meta', 'U']
+      }, {
+        label: 'Developer Tools',
+        kbds: ['option', 'meta', 'I']
+      }], [{
+        label: 'Inspect Elements',
+        kbds: ['option', 'meta', 'C']
+      }], [{
+        label: 'JavaScript Console',
+        kbds: ['option', 'meta', 'J']
+      }]]
+    }]
+  ] }
+})
 </script>
 
 <script setup lang="ts" generic="T extends ContextMenuItem">

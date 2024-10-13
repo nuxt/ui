@@ -13,6 +13,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/carousel'
 import type { ButtonProps } from '../types'
 import type { AcceptableValue, PartialString } from '../types/utils'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { carousel: Partial<typeof theme> } }
 
@@ -91,6 +92,7 @@ export type CarouselSlots<T> = {
   default(props: { item: T, index: number }): any
 }
 
+extendComponentMeta({ example: 'CarouselExample' })
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue">

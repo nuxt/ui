@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
 import type { KbdProps } from '../types'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof theme> } }
 
@@ -40,6 +41,8 @@ export interface TooltipSlots {
   default(props: { open: boolean }): any
   content(props?: {}): any
 }
+
+extendComponentMeta({ example: 'TooltipExample', defaultProps: { text: 'Hello world!' } })
 </script>
 
 <script setup lang="ts">

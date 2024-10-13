@@ -3,6 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/badge'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { badge: Partial<typeof theme> } }
 
@@ -35,6 +36,8 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   as: 'span'
 })
 defineSlots<BadgeSlots>()
+
+extendComponentMeta({ defaultProps: { label: 'Badge' } })
 </script>
 
 <template>

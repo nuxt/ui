@@ -4,6 +4,7 @@ import type { AvatarFallbackProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { avatar: Partial<typeof theme> } }
 
@@ -25,6 +26,8 @@ export interface AvatarProps extends Pick<AvatarFallbackProps, 'delayMs'> {
   class?: any
   ui?: Partial<typeof avatar.slots>
 }
+
+extendComponentMeta<AvatarProps>({ defaultProps: { src: 'https://avatars.githubusercontent.com/u/739984?v=4', alt: 'Benjamin Canac' } })
 </script>
 
 <script setup lang="ts">

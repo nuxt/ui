@@ -8,7 +8,7 @@ const modelValue = defineModel<any>()
 
 const inputType = computed<ComponentPropInputType | null>(() => {
   const types = props.type?.split(' | ')
-  if (!props.schema) return null
+  if (!props.schema || props.name?.startsWith('on')) return null
   if (types?.includes('string')) return 'string'
   if (types?.includes('number')) return 'number'
   if (types?.includes('boolean')) return 'boolean'
@@ -45,11 +45,6 @@ function removeArrayItem(index: number) {
 function addArrayItem() {
   modelValue.value ||= []
   modelValue.value.push({})
-}
-
-if (!modelValue.value) {
-  console.log(props.name, props.default)
-  modelValue.value = props.default
 }
 </script>
 

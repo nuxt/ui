@@ -62,9 +62,11 @@ export function devtoolsMetaPlugin() {
 
           value.meta.props = value.meta.props.map((prop: any) => ({
             ...prop,
-            default: prop.default ?? prop?.tags?.find((tag: any) =>
-              tag.name === 'defaultValue'
-              && !tag.text?.includes('appConfig'))?.text?.replaceAll(/["']/g, '') }
+            default: prop.default
+              ? prop.default?.replaceAll(/["'`]/g, '')
+              : prop?.tags?.find((tag: any) =>
+                tag.name === 'defaultValue'
+                && !tag.text?.includes('appConfig'))?.text?.replaceAll(/["']/g, '') }
           ))
 
           acc[kebabCase(key.replace(/^U/, ''))] = value

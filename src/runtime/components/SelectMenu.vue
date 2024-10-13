@@ -7,6 +7,7 @@ import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { AcceptableValue, ArrayOrWrapped, PartialString } from '../types/utils'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { selectMenu: Partial<typeof theme> } }
 
@@ -102,6 +103,8 @@ export interface SelectMenuSlots<T> {
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 }
+
+extendComponentMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends SelectMenuItem | AcceptableValue">

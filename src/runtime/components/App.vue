@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'radix-vue'
 import type { ToasterProps } from '../types'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
   tooltip?: TooltipProviderProps
@@ -26,6 +27,8 @@ defineSlots<AppSlots>()
 const configProviderProps = useForwardProps(reactivePick(props, 'dir', 'scrollBody'))
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
+
+extendComponentMeta({ ignore: true })
 </script>
 
 <template>

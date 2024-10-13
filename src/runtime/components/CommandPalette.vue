@@ -10,6 +10,7 @@ import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
+import { extendComponentMeta } from '../../devtools/extendComponentMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { commandPalette: Partial<typeof theme> } }
 
@@ -107,6 +108,7 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
   'item-trailing': SlotProps<T>
 } & DynamicSlots<G, SlotProps<T>> & DynamicSlots<T, SlotProps<T>>
 
+extendComponentMeta({ example: 'CommandPaletteExample' })
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
