@@ -269,14 +269,14 @@ const table = ref<ComponentExposed<typeof UTable<typeof data[number]>>>()
       </UDropdownMenu>
     </div>
 
-    <UTable ref="table" :pagination="{ pageIndex: 0, pageSize: 20 }" :data="data" :columns="columns" class="border border-[--ui-border-accented] rounded-[--ui-radius] flex-1 overflow-y-auto">
+    <UTable ref="table" :pagination="{ pageIndex: 0, pageSize: 20 }" :data="data" :columns="columns" class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1 overflow-y-auto">
       <template #expanded="{ row }">
         <pre>{{ row.original }}</pre>
       </template>
     </UTable>
 
     <div class="flex items-center justify-between gap-3">
-      <div class="text-sm text-[--ui-text-muted]">
+      <div class="text-sm text-[var(--ui-text-muted)]">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>
