@@ -25,7 +25,7 @@ onDevtoolsClientConnected(async (client) => {
   }))
 
   if (!component.value || !components.value.find(c => c.slug === component.value?.slug)) {
-    component.value = components.value.find(comp => comp.slug === 'form')
+    component.value = components.value.find(comp => comp.slug === 'button')
   }
 
   state.value.props = { ...components.value?.reduce((acc, comp) => {
@@ -90,6 +90,10 @@ const componentProps = computed(() => {
   if (!component.value) return
   return state.value.props[component.value?.slug]
 })
+
+const componentPropsMeta = computed(() => {
+  return component.value?.meta?.props.filter(prop => prop.name !== 'ui').sort((a, b) => a.name.localeCompare(b.name))
+})
 </script>
 
 <template>
@@ -142,7 +146,7 @@ const componentProps = computed(() => {
           <div class="border-l border-[--ui-border] flex flex-col col-span-2 overflow-y-auto">
             <UTabs color="neutral" variant="link" :items="tabs" class="relative" :ui="{ list: 'sticky top-0 bg-[--ui-bg] z-50' }">
               <template #props>
-                <div v-for="prop in component?.meta?.props.filter((prop) => prop.name !== 'ui')" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-[--ui-border] dark:border-[--ui-border]">
+                <div v-for="prop in componentPropsMeta" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-[--ui-border] dark:border-[--ui-border]">
                   <ComponentPropInput v-bind="prop" v-model="componentProps[prop.name]" />
                 </div>
               </template>

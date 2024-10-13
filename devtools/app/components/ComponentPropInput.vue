@@ -7,25 +7,25 @@ const props = defineProps<Partial<PropertyMeta>>()
 const modelValue = defineModel<any>()
 
 const inputType = computed<ComponentPropInputType | null>(() => {
+  const types = props.type?.split(' | ')
   if (!props.schema) return null
-
-  if (props.type?.includes('string')) return 'string'
-  if (props.type?.includes('number')) return 'number'
-  if (props.type?.includes('boolean')) return 'boolean'
-  if (arraySchema.value) return 'array'
+  if (types?.includes('string')) return 'string'
+  if (types?.includes('number')) return 'number'
+  if (types?.includes('boolean')) return 'boolean'
   if (typeof props.schema === 'string') return null
+  if (arraySchema.value) return 'array'
   if (props.schema.kind === 'enum' && props.schema.schema && parseEnumValues(props.schema.schema)?.length) return 'enum'
   if (props.schema.kind !== 'enum' && typeof props.schema === 'object') return 'object'
 
   return null
 })
 
-function parseEnumValues(propMeta: PropertyMeta['schema'] | PropertyMeta['schema'][]) {
-  const meta = Array.isArray(propMeta) ? propMeta[0] : propMeta
+function parseEnumValues(propMeta: PropertyMeta['schema'][] | PropertyMeta['schema']) {
+  const meta = Array.isArray(propMeta) ? propMeta : Object.values(propMeta)
   if (!meta) return
-  return Object.values(propMeta).filter((value: string) =>
+  return meta.filter(value =>
     typeof value === 'string' && value.match(/^["']/) /* Keeps only string symbols and filters interfaces from matches */
-  ).map((value: string) => value.replaceAll(/["']/g, '')).filter(value => value !== 'undefined')
+  ).map(value => value.replaceAll(/["']/g, '')).filter(value => value !== 'undefined')
 }
 
 const arraySchema = computed(() => {
@@ -34,23 +34,21 @@ const arraySchema = computed(() => {
 
   const schema = Object.values(props.schema?.schema)
   const arr = schema?.find(s => typeof s !== 'string' && s.kind === 'array')
-
   if (!arr?.kind || arr.kind !== 'array' || typeof arr.schema?.[0] !== 'object') return
-
   return arr.schema[0]
 })
 
 function removeArrayItem(index: number) {
-  if (!Array.isArray(modelValue.value)) return
   modelValue.value.splice(index, 1)
 }
 
 function addArrayItem() {
-  if (!Array.isArray(modelValue.value)) return
+  modelValue.value ||= []
   modelValue.value.push({})
 }
 
 if (!modelValue.value) {
+  console.log(props.name, props.default)
   modelValue.value = props.default
 }
 </script>
@@ -74,35 +72,39 @@ if (!modelValue.value) {
     <USwitch v-else-if="inputType === 'boolean'" v-model="modelValue" />
 
     <div v-else-if="inputType === 'array'">
-      <div v-for="value, index in modelValue" :key="value.id" class="relative border border-[--ui-border] rounded-md mt-4">
-        <ComponentPropInput v-bind="arraySchema as any" :model-value="value" />
+      <USelectMenu v-if="arraySchema?.kind === 'enum' && arraySchema.schema && parseEnumValues(arraySchema.schema)" v-model="modelValue" :items="parseEnumValues(arraySchema.schema)" class="min-w-56" multiple />
 
-        <UPopover>
-          <UButton variant="ghost" color="neutral" icon="i-heroicons-ellipsis-vertical" class="absolute top-1 right-1" />
-          <template #content>
-            <UButton
-              variant="ghost"
-              color="error"
-              icon="i-heroicons-trash"
-              block
-              @click="removeArrayItem(index)"
-            >
-              Remove
-            </UButton>
-          </template>
-        </UPopover>
-      </div>
+      <template v-if="arraySchema?.kind === 'object'">
+        <div v-for="value, index in modelValue" :key="value.id" class="relative border border-[--ui-border] rounded-md mt-4">
+          <ComponentPropInput v-bind="arraySchema as any" :model-value="value" />
 
-      <UButton
-        icon="i-heroicons-plus"
-        color="neutral"
-        variant="ghost"
-        block
-        class="justify-center mt-4"
-        @click="addArrayItem()"
-      >
-        Add value
-      </UButton>
+          <UPopover>
+            <UButton variant="ghost" color="neutral" icon="i-heroicons-ellipsis-vertical" class="absolute top-1 right-1" />
+            <template #content>
+              <UButton
+                variant="ghost"
+                color="error"
+                icon="i-heroicons-trash"
+                block
+                @click="removeArrayItem(index)"
+              >
+                Remove
+              </UButton>
+            </template>
+          </UPopover>
+        </div>
+
+        <UButton
+          icon="i-heroicons-plus"
+          color="neutral"
+          variant="ghost"
+          block
+          class="justify-center mt-4"
+          @click="addArrayItem()"
+        >
+          Add value
+        </UButton>
+      </template>
     </div>
 
     <USelectMenu v-else-if="inputType === 'enum'" v-model="modelValue" :items="parseEnumValues((schema as any).schema)" class="min-w-56" />

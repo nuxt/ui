@@ -21,7 +21,7 @@ const code = computed(() => {
     if (props.component?.defaultVariants?.[key]) return
     if (props.component?.meta?.props.find(prop => prop.name === key && prop.default === value)) return
     if (typeof value === 'number') return `:${kebabCase(key)}="${value}"`
-    if (Array.isArray(value)) return `:${kebabCase(key)}="${genArrayFromRaw(value)}"`
+    if (Array.isArray(value)) return value.length ? `:${kebabCase(key)}="${genArrayFromRaw(value)}"` : undefined
     if (typeof value === 'object') return `:${kebabCase(key)}="${genObjectFromValues(value)}"`
     return `${kebabCase(key)}="${value}"`
   }).filter(Boolean).join('\n')
