@@ -105,14 +105,16 @@ function addArrayItem() {
     <USelectMenu v-else-if="inputType === 'enum'" v-model="modelValue" :items="parseEnumValues((schema as any).schema)" class="min-w-56" />
 
     <div v-else-if="inputType === 'object'">
-      <ComponentPropInput
-        v-for="attr in (schema as any)"
-        :key="attr.name"
-        v-bind="attr"
-        :model-value="modelValue?.[attr.name]"
-        class="border-b last:border-b-0 border-[--ui-border] p-4"
-        @update:model-value="(value) => modelValue[attr.name] = value"
-      />
+      <CollapseContainer>
+        <ComponentPropInput
+          v-for="attr in (schema as any)"
+          :key="attr.name"
+          v-bind="attr"
+          :model-value="modelValue?.[attr.name]"
+          class="border-b last:border-b-0 border-[--ui-border] p-4"
+          @update:model-value="(value) => modelValue[attr.name] = value"
+        />
+      </CollapseContainer>
     </div>
   </UFormField>
 </template>
