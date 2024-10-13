@@ -137,9 +137,7 @@ export default defineNuxtModule<ModuleOptions>({
     addTemplates(options, nuxt)
 
     if (nuxt.options.dev && nuxt.options.devtools.enabled) {
-      nuxt.options.vite ||= {}
-      nuxt.options.vite.plugins ||= []
-      nuxt.options.vite.plugins.push(devtoolsMetaPlugin())
+      nuxt.options.vite = defu(nuxt.options?.vite, { plugins: [devtoolsMetaPlugin()] })
 
       setupDevtoolsClient(options)
 

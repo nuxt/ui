@@ -1,6 +1,5 @@
 import type { ViteDevServer } from 'vite'
 import { kebabCase } from 'scule'
-import componentMeta from './.component-meta/component-meta'
 import defu from 'defu'
 
 const devtoolsComponentMeta: Record<string, any> = {}
@@ -35,17 +34,21 @@ export function devtoolsMetaPlugin() {
     },
 
     configureServer(server: ViteDevServer) {
-      server.middlewares.use('/__ui_devtools__/api/component-meta', (_req, res) => {
+      server.middlewares.use('/__ui_devtools__/api/component-meta', async (_req, res) => {
         res.setHeader('Content-Type', 'application/json')
-        // TODO: Meta generated from the CLI do not resolve color and size types.
-        const meta = defu(Object.entries(componentMeta).reduce((acc, [key, value]) => {
+        const componentMeta = await import('./.component-meta/component-meta')
+
+        const meta = defu(Object.entries(componentMeta).reduce((acc, [key, value]: [string, any]) => {
+          if (!key.startsWith('U')) return acc
+
           value.meta.props = value.meta.props.map((prop: any) => ({
             ...prop,
             default: prop.default ?? prop?.tags?.find((tag: any) =>
               tag.name === 'defaultValue'
               && !tag.text?.includes('appConfig'))?.text?.replaceAll(/["']/g, '') }
           ))
-          acc[kebabCase(key)] = value
+
+          acc[kebabCase(key.replace(/^U/, ''))] = value
           return acc
         }, {} as Record<string, any>), devtoolsComponentMeta)
 
