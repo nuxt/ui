@@ -33,6 +33,11 @@ export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible
    * @defaultValue appConfig.ui.icons.chevronDown
    */
   trailingIcon?: string
+  /**
+   * The key used to get the label from the item.
+   * @defaultValue 'label'
+   */
+  labelKey?: string
   class?: any
   ui?: Partial<typeof accordion.slots>
 }
@@ -56,10 +61,12 @@ import { computed } from 'vue'
 import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { get } from '../utils'
 
 const props = withDefaults(defineProps<AccordionProps<T>>(), {
   type: 'single',
-  collapsible: true
+  collapsible: true,
+  labelKey: 'label'
 })
 const emits = defineEmits<AccordionEmits>()
 const slots = defineSlots<AccordionSlots<T>>()
@@ -87,9 +94,8 @@ const ui = computed(() => accordion({
           <slot name="leading" :item="item" :index="index" :open="open">
             <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           </slot>
-
-          <span v-if="item.label || !!slots.default" :class="ui.label({ class: props.ui?.label })">
-            <slot :item="item" :index="index" :open="open">{{ item.label }}</slot>
+          <span v-if="get(item, props.labelKey as string) || !!slots.default" :class="ui.label({ class: props.ui?.label })">
+            <slot :item="item" :index="index" :open="open">{{ get(item, props.labelKey as string) }}</slot>
           </span>
 
           <slot name="trailing" :item="item" :index="index" :open="open">

@@ -51,8 +51,8 @@ import { ref, computed, onMounted } from 'vue'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
-import UIcon from './Icon.vue'
 import { looseToNumber } from '../utils'
+import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 

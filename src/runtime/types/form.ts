@@ -26,7 +26,7 @@ export type FormSchema<T extends Record<string, any>> =
   | ValibotSafeParserAsync<any, any>
   | JoiSchema<T>
   | Struct<any, any>
-  | StandardSchema;
+  | StandardSchema
 
 export type FormInputEvents = 'input' | 'blur' | 'change'
 

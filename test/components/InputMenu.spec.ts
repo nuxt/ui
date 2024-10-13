@@ -12,18 +12,23 @@ describe('InputMenu', () => {
 
   const items = [{
     label: 'Backlog',
+    value: 'backlog',
     icon: 'i-heroicons-question-mark-circle'
   }, {
     label: 'Todo',
+    value: 'todo',
     icon: 'i-heroicons-plus-circle'
   }, {
     label: 'In Progress',
+    value: 'in_progress',
     icon: 'i-heroicons-arrow-up-circle'
   }, {
     label: 'Done',
+    value: 'done',
     icon: 'i-heroicons-check-circle'
   }, {
     label: 'Canceled',
+    value: 'canceled',
     icon: 'i-heroicons-x-circle'
   }]
 
@@ -34,6 +39,8 @@ describe('InputMenu', () => {
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
+    ['with valueKey', { props: { ...props, valueKey: 'value' } }],
+    ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with id', { props: { ...props, id: 'id' } }],
     ['with name', { props: { ...props, name: 'name' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
