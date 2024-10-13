@@ -20,10 +20,13 @@ export interface Form<T> {
 export type FormSchema<T extends Record<string, any>> =
   | ZodSchema
   | YupObjectSchema<T>
-  | ValibotSchema | ValibotSchemaAsync
-  | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>
-  | JoiSchema<T> | Struct<any, T>
-  | StandardSchema
+  | ValibotSchema
+  | ValibotSchemaAsync
+  | ValibotSafeParser<any, any>
+  | ValibotSafeParserAsync<any, any>
+  | JoiSchema<T>
+  | Struct<any, any>
+  | StandardSchema;
 
 export type FormInputEvents = 'input' | 'blur' | 'change'
 
