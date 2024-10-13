@@ -60,14 +60,23 @@ export function devtoolsMetaPlugin() {
         const meta = defu(Object.entries(componentMeta).reduce((acc, [key, value]: [string, any]) => {
           if (!key.startsWith('U')) return acc
 
-          value.meta.props = value.meta.props.map((prop: any) => ({
-            ...prop,
-            default: prop.default
-              ? prop.default?.replaceAll(/["'`]/g, '')
+          value.meta.props = value.meta.props.map((prop: any) => {
+            let defaultValue = prop.default
+              ? prop.default
               : prop?.tags?.find((tag: any) =>
                 tag.name === 'defaultValue'
-                && !tag.text?.includes('appConfig'))?.text?.replaceAll(/["']/g, '') }
-          ))
+                && !tag.text?.includes('appConfig'))?.text
+
+            if (typeof defaultValue === 'string') defaultValue = defaultValue?.replaceAll(/["'`]/g, '')
+            if (defaultValue === 'true') defaultValue = true
+            if (defaultValue === 'false') defaultValue = false
+            if (Number.parseInt(defaultValue)) defaultValue = Number.parseInt(defaultValue)
+
+            return {
+              ...prop,
+              default: defaultValue
+            }
+          })
 
           acc[kebabCase(key.replace(/^U/, ''))] = value
           return acc
