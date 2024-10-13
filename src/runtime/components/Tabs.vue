@@ -45,6 +45,11 @@ export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defa
    * @defaultValue true
    */
   content?: boolean | Omit<TabsContentProps, 'as' | 'asChild' | 'value'>
+  /**
+   * The key used to get the label from the item.
+   * @defaultValue 'label'
+   */
+  labelKey?: string
   class?: any
   ui?: PartialString<typeof tabs.slots>
 }
@@ -84,11 +89,13 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
+import { get } from '../utils'
 
 const props = withDefaults(defineProps<TabsProps<T>>(), {
   content: true,
   defaultValue: '0',
-  orientation: 'horizontal'
+  orientation: 'horizontal',
+  labelKey: 'label'
 })
 const emits = defineEmits<TabsEmits>()
 const slots = defineSlots<TabsSlots<T>>()
@@ -115,8 +122,8 @@ const ui = computed(() => tabs({
           <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
         </slot>
 
-        <span v-if="item.label || !!slots.default" :class="ui.label({ class: props.ui?.label })">
-          <slot :item="item" :index="index">{{ item.label }}</slot>
+        <span v-if="get(item, props.labelKey as string) || !!slots.default" :class="ui.label({ class: props.ui?.label })">
+          <slot :item="item" :index="index">{{ get(item, props.labelKey as string) }}</slot>
         </span>
 
         <slot name="trailing" :item="item" :index="index" />

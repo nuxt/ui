@@ -51,6 +51,11 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
    * @defaultValue true
    */
   portal?: boolean
+  /**
+   * The key used to get the label from the item.
+   * @defaultValue 'label'
+   */
+  labelKey?: string
   class?: any
   ui?: PartialString<typeof dropdownMenu.slots>
 }
@@ -156,12 +161,13 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import UDropdownMenuContent from './DropdownMenuContent.vue'
 import { omit } from '../utils'
+import UDropdownMenuContent from './DropdownMenuContent.vue'
 
 const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   portal: true,
-  modal: true
+  modal: true,
+  labelKey: 'label'
 })
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
@@ -189,6 +195,7 @@ const ui = computed(() => dropdownMenu({
       v-bind="contentProps"
       :items="items"
       :portal="portal"
+      :label-key="labelKey"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />

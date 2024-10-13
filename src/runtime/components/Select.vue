@@ -64,6 +64,11 @@ export interface SelectProps<T> extends Omit<SelectRootProps, 'dir'>, UseCompone
    * @defaultValue 'value'
    */
   valueKey?: string
+  /**
+   * When `items` is an array of objects, select the field to use as the label.
+   * @defaultValue 'label'
+   */
+  labelKey?: string
   items?: T[] | T[][]
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -100,12 +105,14 @@ import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { get } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 
 const props = withDefaults(defineProps<SelectProps<T>>(), {
   valueKey: 'value',
+  labelKey: 'label',
   portal: true
 })
 const emits = defineEmits<SelectEmits>()
@@ -186,14 +193,16 @@ function onUpdateOpen(value: boolean) {
           <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <SelectLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
-                {{ item.label }}
+                {{ get(item, props.labelKey as string) }}
               </SelectLabel>
+
               <SelectSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
+
               <SelectItem
                 v-else
                 :class="ui.item({ class: props.ui?.item })"
                 :disabled="item.disabled"
-                :value="typeof item === 'object' ? (item[valueKey as keyof SelectItem] as string) : item"
+                :value="typeof item === 'object' ? get(item, props.valueKey as string) : item"
               >
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
@@ -211,7 +220,7 @@ function onUpdateOpen(value: boolean) {
 
                   <SelectItemText :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                     <slot name="item-label" :item="(item as T)" :index="index">
-                      {{ typeof item === 'object' ? item.label : item }}
+                      {{ typeof item === 'object' ? get(item, props.labelKey as string) : item }}
                     </slot>
                   </SelectItemText>
 

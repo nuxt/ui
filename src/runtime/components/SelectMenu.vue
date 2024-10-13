@@ -78,6 +78,11 @@ export interface SelectMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelVal
    * @defaultValue undefined
    */
   valueKey?: keyof T
+  /**
+   * When `items` is an array of objects, select the field to use as the label.
+   * @defaultValue 'label'
+   */
+  labelKey?: keyof T
   items?: T[] | T[][]
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -111,22 +116,24 @@ extendComponentMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'
 import { computed, toRef } from 'vue'
 import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
+import isEqual from 'fast-deep-equal'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { get, escapeRegExp } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
-import { get } from '../utils'
 
 const props = withDefaults(defineProps<SelectMenuProps<T>>(), {
   search: true,
   portal: true,
   autofocusDelay: 0,
   searchInput: () => ({ placeholder: 'Search...' }),
-  filter: () => ['label']
+  filter: () => ['label'],
+  labelKey: 'label' as keyof T
 })
 const emits = defineEmits<SelectMenuEmits<T>>()
 const slots = defineSlots<SelectMenuSlots<T>>()
@@ -153,16 +160,14 @@ const ui = computed(() => selectMenu({
   buttonGroup: orientation.value
 }))
 
-function displayValue(val: T, multiple?: boolean): string {
-  if (multiple && Array.isArray(val)) {
-    return val.map(v => displayValue(v)).join(', ')
+function displayValue(value: T): string {
+  if (props.multiple && Array.isArray(value)) {
+    return value.map(v => displayValue(v)).join(', ')
   }
 
-  if (typeof val === 'object') {
-    return val.label
-  }
+  const item = items.value.find(item => props.valueKey ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
 
-  return val && String(val)
+  return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
 function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: string): ArrayOrWrapped<AcceptableValue> {
@@ -170,22 +175,25 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
     return items
   }
 
-  const fields = Array.isArray(props.filter) ? props.filter : ['label']
+  const fields = Array.isArray(props.filter) ? props.filter : [props.labelKey]
+  const escapedSearchTerm = escapeRegExp(searchTerm)
 
   return items.filter((item) => {
     if (typeof item !== 'object') {
-      return String(item).search(new RegExp(searchTerm, 'i')) !== -1
+      return String(item).search(new RegExp(escapedSearchTerm, 'i')) !== -1
     }
 
     return fields.some((field) => {
-      const child = get(item, field)
+      const child = get(item, field as string)
 
-      return child !== null && child !== undefined && String(child).search(new RegExp(searchTerm, 'i')) !== -1
+      return child !== null && child !== undefined && String(child).search(new RegExp(escapedSearchTerm, 'i')) !== -1
     })
   }) as ArrayOrWrapped<T>
 }
 
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as SelectMenuItem[][] : [])
+// eslint-disable-next-line vue/no-dupe-keys
+const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -230,12 +238,14 @@ function onUpdateOpen(value: boolean) {
         </span>
 
         <slot :model-value="(modelValue as T)" :open="open">
-          <span v-if="multiple ? modelValue?.length : modelValue !== undefined" :class="ui.value({ class: props.ui?.value })">
-            {{ displayValue(modelValue as T, multiple) }}
-          </span>
-          <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
-            {{ placeholder ?? '&nbsp;' }}
-          </span>
+          <template v-for="displayedModelValue in [displayValue(modelValue)]" :key="displayedModelValue">
+            <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
+              {{ displayedModelValue }}
+            </span>
+            <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
+              {{ placeholder ?? '&nbsp;' }}
+            </span>
+          </template>
         </slot>
 
         <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
@@ -266,7 +276,7 @@ function onUpdateOpen(value: boolean) {
           <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
-                {{ item.label }}
+                {{ get(item, props.labelKey as string) }}
               </ComboboxLabel>
 
               <ComboboxSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
@@ -275,7 +285,7 @@ function onUpdateOpen(value: boolean) {
                 v-else
                 :class="ui.item({ class: props.ui?.item })"
                 :disabled="item.disabled"
-                :value="valueKey && typeof item === 'object' ? (item[valueKey as keyof SelectMenuItem]) as AcceptableValue : item"
+                :value="valueKey && typeof item === 'object' ? get(item, props.valueKey as string) : item"
                 @select="item.select"
               >
                 <slot name="item" :item="(item as T)" :index="index">
@@ -294,7 +304,7 @@ function onUpdateOpen(value: boolean) {
 
                   <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                     <slot name="item-label" :item="(item as T)" :index="index">
-                      {{ displayValue(item as T) }}
+                      {{ typeof item === 'object' ? get(item, props.labelKey as string) : item }}
                     </slot>
                   </span>
 

@@ -8,5 +8,5 @@ defineShortcuts({
 </script>
 
 <template>
-  <USelect v-model:open="open" default-value="Backlog" :items="items" />
+  <USelect v-model:open="open" default-value="Backlog" :items="items" class="w-40" />
 </template>

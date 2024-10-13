@@ -33,8 +33,8 @@ import { ref, computed } from 'vue'
 import { ToastProvider, ToastViewport, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useToast } from '../composables/useToast'
-import UToast from './Toast.vue'
 import { omit } from '../utils'
+import UToast from './Toast.vue'
 
 const props = withDefaults(defineProps<ToasterProps>(), {
   expand: true,

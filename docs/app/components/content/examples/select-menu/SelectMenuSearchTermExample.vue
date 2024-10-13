@@ -5,5 +5,5 @@ const selected = ref('Backlog')
 </script>
 
 <template>
-  <USelectMenu v-model="selected" v-model:search-term="searchTerm" :items="items" />
+  <USelectMenu v-model="selected" v-model:search-term="searchTerm" :items="items" class="w-40" />
 </template>

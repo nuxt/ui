@@ -91,6 +91,11 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'mult
     }
    */
   fuse?: UseFuseOptions<T>
+  /**
+   * The key used to get the label from the item.
+   * @defaultValue 'label'
+   */
+  labelKey?: string
   class?: any
   ui?: PartialString<typeof commandPalette.slots>
 }
@@ -118,17 +123,18 @@ import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
+import { omit, get } from '../utils'
+import { highlight } from '../utils/fuse'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 import UKbd from './Kbd.vue'
 import UInput from './Input.vue'
-import { omit } from '../utils'
-import { highlight } from '../utils/fuse'
 
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
-  placeholder: 'Type a command or search...'
+  placeholder: 'Type a command or search...',
+  labelKey: 'label'
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
@@ -146,7 +152,7 @@ const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     ignoreLocation: true,
     threshold: 0.1,
-    keys: ['label', 'suffix']
+    keys: [props.labelKey, 'suffix']
   },
   resultLimit: 12,
   matchAllWhenSearchEmpty: true
@@ -177,8 +183,8 @@ function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matc
     items: items.slice(0, fuse.value.resultLimit).map((item) => {
       return {
         ...item,
-        labelHtml: highlight<T>(item, searchTerm.value, 'label'),
-        suffixHtml: highlight<T>(item, searchTerm.value, undefined, ['label'])
+        labelHtml: highlight<T>(item, searchTerm.value, props.labelKey),
+        suffixHtml: highlight<T>(item, searchTerm.value, undefined, [props.labelKey])
       }
     })
   }
@@ -257,8 +263,8 @@ const groups = computed(() => {
 
         <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
           <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
-            <ComboboxLabel v-if="group.label" :class="ui.label({ class: props.ui?.label })">
-              {{ group.label }}
+            <ComboboxLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: props.ui?.label })">
+              {{ get(group, props.labelKey as string) }}
             </ComboboxLabel>
 
             <ComboboxItem
@@ -283,11 +289,11 @@ const groups = computed(() => {
                   />
                 </slot>
 
-                <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+                <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                   <slot :name="item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`" :item="item" :index="index">
                     <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: props.ui?.itemLabelPrefix })">{{ item.prefix }}</span>
 
-                    <span :class="ui.itemLabelBase({ class: props.ui?.itemLabelBase })" v-html="item.labelHtml || item.label" />
+                    <span :class="ui.itemLabelBase({ class: props.ui?.itemLabelBase })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
 
                     <span :class="ui.itemLabelSuffix({ class: props.ui?.itemLabelSuffix })" v-html="item.suffixHtml || item.suffix" />
                   </slot>

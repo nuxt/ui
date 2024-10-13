@@ -30,6 +30,16 @@ export interface RadioGroupProps<T> extends Pick<RadioGroupRootProps, 'defaultVa
    * @defaultValue 'value'
    */
   valueKey?: string
+  /**
+   * When `items` is an array of objects, select the field to use as the label.
+   * @defaultValue 'label'
+   */
+  labelKey?: string
+  /**
+   * When `items` is an array of objects, select the field to use as the description.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: string
   items?: T[]
   size?: RadioGroupVariants['size']
   color?: RadioGroupVariants['color']
@@ -62,9 +72,12 @@ import { computed, useId } from 'vue'
 import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
+import { get } from '../utils'
 
 const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
   valueKey: 'value',
+  labelKey: 'label',
+  descriptionKey: 'description',
   orientation: 'vertical'
 })
 const emits = defineEmits<RadioGroupEmits>()
@@ -92,11 +105,15 @@ function normalizeItem(item: any) {
     }
   }
 
-  const value = item[props.valueKey]
+  const value = get(item, props.valueKey as string)
+  const label = get(item, props.labelKey as string)
+  const description = get(item, props.descriptionKey as string)
 
   return {
     ...item,
     value,
+    label,
+    description,
     id: `${id}:${value}`
   }
 }

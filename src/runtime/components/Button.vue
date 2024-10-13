@@ -46,10 +46,10 @@ import { type Ref, computed, ref, inject } from 'vue'
 import { useForwardProps } from 'radix-vue'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useButtonGroup } from '../composables/useButtonGroup'
-import UIcon from './Icon.vue'
-import ULink from './Link.vue'
 import { omit } from '../utils'
 import { pickLinkProps } from '../utils/link'
+import UIcon from './Icon.vue'
+import ULink from './Link.vue'
 
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
