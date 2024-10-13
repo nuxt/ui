@@ -28,8 +28,9 @@ export function setupDevtoolsClient(options: ModuleOptions) {
       async getComponents() {
         return Object.keys(theme).map((name) => {
           const slug = kebabCase(name)
+          const camelName = camelCase(name)
           const label = options.prefix + upperFirst(camelCase(slug))
-          const template = typeof (theme as any)[slug] === 'function' ? (theme as any)[slug](options) : theme
+          const template = typeof (theme as any)[camelName] === 'function' ? (theme as any)[camelName](options) : theme
 
           return {
             slug,
