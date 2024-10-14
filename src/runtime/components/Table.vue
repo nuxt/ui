@@ -39,22 +39,29 @@ defineSlots<TableSlots<T>>()
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = table()
 
-const sortingState = defineModel<SortingState>('sorting', { default: [] })
+const sortingState = defineModel<SortingState>('sorting', { default: undefined })
 const paginationState = defineModel<PaginationState>('pagination', { default: undefined })
-const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
-const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: {} })
-const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: {} })
-const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
-const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
+const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: undefined })
+const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: undefined })
+const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: undefined })
+const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: undefined })
+const expandedState = defineModel<ExpandedState>('expanded', { default: undefined })
 
 const columns = computed<ColumnDef<T>[]>(() => props.columns ?? Object.keys(props.data[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
+
+const definedState = (state: Record<string, Ref>) =>
+  Object.fromEntries(
+    Object.entries(state)
+      .filter(([_, value]) => value.value !== undefined)
+      .map(([key, value]) => [key, value.value])
+  )
 
 const tableApi = useVueTable({
   ...(props.paginationOptions || {}),
   get data() { return props.data },
   get columns() { return columns.value },
   getCoreRowModel: getCoreRowModel(),
-  // getPaginationRowModel: getPaginationRowModel(),
+  getPaginationRowModel: getPaginationRowModel(),
   getSortedRowModel: getSortedRowModel(),
   getFilteredRowModel: getFilteredRowModel(),
   getExpandedRowModel: getExpandedRowModel(),
@@ -65,15 +72,15 @@ const tableApi = useVueTable({
   onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelectionState),
   onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
   onColumnPinningChange: updaterOrValue => valueUpdater(updaterOrValue, columnPinningState),
-  state: {
-    get sorting() { return sortingState.value },
-    // get pagination() { return props.paginationOptions ? paginationState.value : undefined },
-    get columnFilters() { return columnFiltersState.value },
-    get columnVisibility() { return columnVisibilityState.value },
-    get rowSelection() { return rowSelectionState.value },
-    get expanded() { return expandedState.value },
-    get columnPinning() { return columnPinningState.value }
-  }
+  state: definedState({
+    sorting: sortingState,
+    pagination: paginationState,
+    columnFilters: columnFiltersState,
+    columnVisibility: columnVisibilityState,
+    rowSelection: rowSelectionState,
+    expanded: expandedState,
+    columnPinning: columnPinningState
+  })
 })
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
