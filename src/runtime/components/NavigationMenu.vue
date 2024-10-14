@@ -7,6 +7,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
+import { extendDevtoolsMeta } from '#imports'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -81,6 +82,40 @@ export type NavigationMenuSlots<T extends { slot?: string }> = {
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
+extendDevtoolsMeta({ defaultProps:
+{ items: [
+  [{
+    label: 'Documentation',
+    icon: 'i-heroicons-book-open',
+    badge: 10,
+    children: [{
+      label: 'Introduction',
+      description: 'Fully styled and customizable components for Nuxt.',
+      icon: 'i-heroicons-home'
+    }, {
+      label: 'Installation',
+      description: 'Learn how to install and configure Nuxt UI in your application.',
+      icon: 'i-heroicons-cloud-arrow-down'
+    }, {
+      label: 'Theming',
+      description: 'Learn how to customize the look and feel of the components.',
+      icon: 'i-heroicons-swatch'
+    }, {
+      label: 'Shortcuts',
+      description: 'Learn how to display and define keyboard shortcuts in your app.',
+      icon: 'i-heroicons-computer-desktop'
+    }]
+  }, {
+    label: 'GitHub',
+    icon: 'i-simple-icons-github',
+    to: 'https://github.com/nuxt/ui',
+    target: '_blank'
+  }, {
+    label: 'Help',
+    icon: 'i-heroicons-question-mark-circle',
+    disabled: true
+  }]
+] } })
 </script>
 
 <script setup lang="ts" generic="T extends NavigationMenuItem">

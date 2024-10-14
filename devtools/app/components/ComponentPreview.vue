@@ -18,10 +18,11 @@ const code = computed(() => {
   const propsTemplate = Object.entries(props.props ?? {}).map(([key, value]: [string, any]) => {
     if (value === true) return kebabCase(key)
     if (value === false) return
+    if (!value) return
     if (props.component?.defaultVariants?.[key]) return
     if (props.component?.meta?.props.find(prop => prop.name === key && prop.default === value)) return
     if (typeof value === 'number') return `:${kebabCase(key)}="${value}"`
-    if (Array.isArray(value)) return value.length ? `:${kebabCase(key)}="${genArrayFromRaw(value)}"` : undefined
+    if (Array.isArray(value)) return value.length ? `:${kebabCase(key)}="${genArrayFromRaw(value, undefined, { preserveTypes: true })}"` : undefined
     if (typeof value === 'object') return `:${kebabCase(key)}="${genObjectFromValues(value)}"`
     return `${kebabCase(key)}="${value}"`
   }).filter(Boolean).join('\n')
@@ -33,22 +34,21 @@ const code = computed(() => {
     }, {} as Record<string, string>))
     : undefined
 
+  const extraTemplate = [propsTemplate, props.themeSlots?.base ? `class="${props.themeSlots.base}"` : null, slotsTemplate && slotsTemplate !== '{}' ? `:ui="${slotsTemplate}"` : null].filter(Boolean).join(' ')
+
   if (componentExample.value) {
+    const componentRegexp = new RegExp(`<${props.component.label}(\\s|\\r)`)
+
     return `\`\`\`vue
-${componentExample.value?.source.replace(
-  `<${props.component.label}`,
-  `<${props.component.label} ${propsTemplate}
-    ${props.themeSlots?.base ? `class="${props.themeSlots.base}"` : ''}
-    ${slotsTemplate && slotsTemplate !== '{}' ? `:ui="${slotsTemplate}"` : ''}
-  `)}
+${componentExample.value?.source
+  .replace(componentRegexp, `<${props.component.label} ${extraTemplate}`)
+  .replace('v-bind="$attrs"', '')}
 \`\`\``
   }
 
   return `\`\`\`vue
-<${props.component.label}
-  ${propsTemplate}
-  ${props.themeSlots?.base ? `class="${props.themeSlots.base}"` : ''}
-  ${slotsTemplate && slotsTemplate !== '{}' ? `:ui="${slotsTemplate}"` : ''}>
+<${props.component.label} ${extraTemplate}
+>
 </${props.component.label}>
 \`\`\``
 })
@@ -62,8 +62,7 @@ const { data: ast } = await useAsyncData('component-code', async () => {
   const formatted = await $prettier.format(code.value, {
     trailingComma: 'none',
     semi: false,
-    singleQuote: true,
-    printWidth: 30
+    singleQuote: true
   })
 
   return await parseMarkdown(formatted)

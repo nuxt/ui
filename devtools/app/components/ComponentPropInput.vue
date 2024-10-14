@@ -63,7 +63,7 @@ function addArrayItem() {
     <span v-if="!schema" />
 
     <UInput v-if="inputType === 'string'" v-model="modelValue" class="min-w-56" />
-    <UInput v-else-if="inputType === 'number'" v-model="modelValue" type="number" />
+    <UInput v-else-if="inputType === 'number'" v-model.number="modelValue" type="number" />
     <USwitch v-else-if="inputType === 'boolean'" v-model="modelValue" />
 
     <div v-else-if="inputType === 'array'">

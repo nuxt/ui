@@ -82,8 +82,7 @@ extendDevtoolsMeta({
           src: 'https://avatars.githubusercontent.com/u/739984?v=4'
         },
         type: 'label'
-      }],
-      [{
+      }], [{
         label: 'Profile',
         icon: 'i-heroicons-user',
         slot: 'custom'
@@ -96,9 +95,6 @@ extendDevtoolsMeta({
         icon: 'i-heroicons-cog',
         kbds: ['?']
       }], [{
-        label: 'Team',
-        icon: 'i-heroicons-users'
-      }, {
         label: 'Invite users',
         icon: 'i-heroicons-user-plus',
         children: [[{
@@ -108,26 +104,7 @@ extendDevtoolsMeta({
           label: 'Invite by link',
           icon: 'i-heroicons-link',
           kbds: ['meta', 'i']
-        }], [{
-          label: 'More',
-          icon: 'i-heroicons-plus-circle',
-          children: [{
-            label: 'Import from Slack',
-            icon: 'i-simple-icons-slack',
-            to: 'https://slack.com',
-            target: '_blank'
-          }, {
-            label: 'Import from Trello',
-            icon: 'i-simple-icons-trello'
-          }, {
-            label: 'Import from Asana',
-            icon: 'i-simple-icons-asana'
-          }]
         }]]
-      }, {
-        label: 'New team',
-        icon: 'i-heroicons-plus',
-        kbds: ['meta', 'n']
       }],
       [{
         label: 'GitHub',
@@ -138,21 +115,9 @@ extendDevtoolsMeta({
         label: 'Support',
         icon: 'i-heroicons-lifebuoy',
         to: '/components/dropdown-menu'
-      }, {
-        type: 'separator'
-      }, {
-        label: 'Keyboard Shortcuts',
-        icon: 'i-heroicons-key'
-      }, {
-        label: 'API',
-        icon: 'i-heroicons-cube',
-        disabled: true
-      }], [{
-        label: 'Logout',
-        icon: 'i-heroicons-arrow-right-start-on-rectangle',
-        kbds: ['shift', 'meta', 'q']
       }]
-    ] }
+    ]
+  }
 })
 </script>
 

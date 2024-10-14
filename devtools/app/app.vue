@@ -18,13 +18,16 @@ let rpc: BirpcReturn<ServerFunctions, ClientFunctions> | null = null
 
 onDevtoolsClientConnected(async (client) => {
   rpc = client.devtools.extendClientRpc<ServerFunctions, ClientFunctions>('nuxt/ui/devtools', { })
+
   const componentMeta = await $fetch<Record<string, { meta: ComponentMeta & { devtools: DevtoolsMeta<any> } }>>('/api/component-meta')
 
-  console.log('Meta', componentMeta)
   components.value = (await rpc.getComponents()).flatMap((component) => {
     if (componentMeta[component.slug]?.meta.devtools?.ignore) return []
+
     return [{
-      ...component, value: component.slug, meta: componentMeta[component.slug]?.meta
+      ...component,
+      value: component.slug,
+      meta: componentMeta[component.slug]?.meta
     }]
   })
 
@@ -32,20 +35,29 @@ onDevtoolsClientConnected(async (client) => {
     component.value = components.value.find(comp => comp.slug === 'button')
   }
 
-  state.value.props = { ...components.value?.reduce((acc, comp) => {
+  state.value.props = components.value?.reduce((acc, comp) => {
     const componentDefaultProps = comp.meta?.props.reduce((acc, prop) => {
-      acc[prop.name] = prop.default
+      if (prop.default) acc[prop.name] = prop.default
       return acc
     }, {} as Record<string, any>)
 
-    acc[comp.slug] = { ...comp.defaultVariants, ...componentDefaultProps, ...componentMeta[comp.slug]?.meta?.devtools?.defaultProps }
-    return acc
-  }, {} as Record<string, any>), ...state.value.props }
+    acc[comp.slug] = {
+      ...comp.defaultVariants, // Default values from the theme template
+      ...componentDefaultProps, // Default values from vue props
+      ...componentMeta[comp.slug]?.meta?.devtools?.defaultProps // Default values from devtools extended meta
+    }
 
-  state.value.slots = { ...components.value.reduce((acc, comp) => {
-    acc[comp.slug] = {}
     return acc
-  }, {} as Record<string, any>), ...state.value.slots }
+  }, {} as Record<string, any>)
+})
+
+const componentProps = computed(() => {
+  if (!component.value) return
+  return state.value.props[component.value?.slug]
+})
+
+const componentPropsMeta = computed(() => {
+  return component.value?.meta?.props.filter(prop => prop.name !== 'ui').sort((a, b) => a.name.localeCompare(b.name))
 })
 
 function updateRenderer() {
@@ -54,12 +66,10 @@ function updateRenderer() {
   event.data = {
     props: state.value.props?.[component.value.slug], slots: state.value.slots?.[component.value?.slug]
   }
-
   window.dispatchEvent(event)
 }
 
 watchDebounced(state, updateRenderer, { deep: true, debounce: 200, maxWait: 500 })
-
 onMounted(() => window.addEventListener('nuxt-ui-devtools:component-loaded', onComponentLoaded))
 onUnmounted(() => window.removeEventListener('nuxt-ui-devtools:component-loaded', onComponentLoaded))
 
@@ -70,7 +80,6 @@ function onComponentLoaded() {
 
 const tabs = computed(() => {
   if (!component.value) return
-
   return [
     { label: 'Props', slot: 'props', icon: 'i-heroicons-cog-6-tooth', disabled: !component.value.meta?.props?.length }
   ]
@@ -93,15 +102,6 @@ const isDark = computed({
     event.isDark = value
     window.dispatchEvent(event)
   }
-})
-
-const componentProps = computed(() => {
-  if (!component.value) return
-  return state.value.props[component.value?.slug]
-})
-
-const componentPropsMeta = computed(() => {
-  return component.value?.meta?.props.filter(prop => prop.name !== 'ui').sort((a, b) => a.name.localeCompare(b.name))
 })
 </script>
 

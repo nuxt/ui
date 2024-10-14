@@ -26,6 +26,14 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
 export interface ToasterSlots {
   default(props?: {}): any
 }
+
+export default {
+  name: 'Toaster'
+}
+
+extendDevtoolsMeta({
+  example: 'ToasterExample'
+})
 </script>
 
 <script setup lang="ts">

@@ -71,7 +71,7 @@ export function devtoolsMetaPlugin() {
               if (typeof defaultValue === 'string') defaultValue = defaultValue?.replaceAll(/["'`]/g, '')
               if (defaultValue === 'true') defaultValue = true
               if (defaultValue === 'false') defaultValue = false
-              if (Number.parseInt(defaultValue)) defaultValue = Number.parseInt(defaultValue)
+              if (!Number.isNaN(Number.parseInt(defaultValue))) defaultValue = Number.parseInt(defaultValue)
 
               return {
                 ...prop,
@@ -98,7 +98,7 @@ export function devtoolsMetaPlugin() {
         }
 
         try {
-          const componentPath = resolve(`./runtime/examples/${componentName}.vue`)
+          const componentPath = resolve(`../runtime/examples/${componentName}.vue`)
           const sourceCode = fs.readFileSync(componentPath, 'utf-8')
 
           res.setHeader('Content-Type', 'application/json')

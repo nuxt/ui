@@ -41,7 +41,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="nuxt-ui-component-renderer h-screen w-screen p-8">
+  <div class="nuxt-ui-component-renderer">
     <UApp>
       <template v-if="component && state.props">
         <component :is="component" v-if="component && state.props" v-bind="state.props" :class="state?.slots?.base" :ui="state.slots" />
@@ -52,9 +52,16 @@ onMounted(() => {
 
 <style>
 .nuxt-ui-component-renderer {
+  position: 'relative';
+  height: 100vh;
+  width: 100vw;
+
+  padding: 32px;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' transform='scale(3)'%3E%3Crect width='100%25' height='100%25' fill='%23fff'/%3E%3Cpath fill='none' stroke='hsla(0, 0%25, 98%25, 1)' stroke-width='.2' d='M10 0v20ZM0 10h20Z'/%3E%3C/svg%3E");
   background-size: 40px 40px;
 }

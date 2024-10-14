@@ -55,7 +55,7 @@ export interface ToastSlots {
   close(props: { ui: any }): any
 }
 
-extendDevtoolsMeta<ToastProps>({ defaultProps: { title: 'Heads up!', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' } })
+extendDevtoolsMeta<ToastProps>({ ignore: true })
 </script>
 
 <script setup lang="ts">

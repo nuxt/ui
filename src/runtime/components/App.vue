@@ -11,6 +11,14 @@ export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
 export interface AppSlots {
   default(props?: {}): any
 }
+
+export default {
+  name: 'App'
+}
+
+extendDevtoolsMeta({
+  ignore: true
+})
 </script>
 
 <script setup lang="ts">
