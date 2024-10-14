@@ -7,7 +7,7 @@
         :variant="open ? 'soft' : 'ghost'"
         square
         aria-label="Color picker"
-        :ui="{ leadingIcon: 'text-[--ui-primary]' }"
+        :ui="{ leadingIcon: 'text-[var(--ui-primary)]' }"
       />
     </template>
 

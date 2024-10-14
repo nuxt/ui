@@ -32,7 +32,7 @@ const groups = computed(() => [{
         :loading="status === 'pending'"
         :groups="groups"
         placeholder="Search users..."
-        class="h-96"
+        class="h-80"
       />
     </template>
   </UModal>

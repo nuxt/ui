@@ -17,7 +17,7 @@ describe('Chip', () => {
     ['with color neutral', { props: { color: 'neutral' } }],
     ['without show', { props: { show: false } }],
     ['with class', { props: { class: 'mx-auto' } }],
-    ['with ui', { props: { ui: { base: 'text-[--ui-text-muted]' } } }],
+    ['with ui', { props: { ui: { base: 'text-[var(--ui-text-muted)]' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }]
