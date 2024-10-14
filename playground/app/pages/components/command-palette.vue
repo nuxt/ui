@@ -67,17 +67,17 @@ const groups = computed(() => [{
 const labels = [{
   label: 'bug',
   chip: {
-    color: 'red' as const
+    color: 'error' as const
   }
 }, {
   label: 'feature',
   chip: {
-    color: 'green' as const
+    color: 'success' as const
   }
 }, {
   label: 'enhancement',
   chip: {
-    color: 'blue' as const
+    color: 'info' as const
   }
 }]
 const label = ref()
@@ -114,7 +114,7 @@ defineShortcuts({
   <div class="flex-1 flex flex-col gap-12 w-full max-w-lg">
     <div class="flex items-center justify-between gap-2 mt-[58px]">
       <UModal v-model:open="open">
-        <UButton label="Open modal" color="gray" variant="outline" />
+        <UButton label="Open modal" color="neutral" variant="outline" />
 
         <template #content>
           <ReuseTemplate :close="true" @close="open = false" />
@@ -122,15 +122,15 @@ defineShortcuts({
       </UModal>
 
       <UDrawer should-scale-background>
-        <UButton label="Open drawer" color="gray" variant="outline" />
+        <UButton label="Open drawer" color="neutral" variant="outline" />
 
         <template #content>
-          <ReuseTemplate class="border-t border-gray-200 dark:border-gray-800" />
+          <ReuseTemplate class="border-t border-[var(--ui-border)]" />
         </template>
       </UDrawer>
 
       <UPopover :content="{ side: 'right', align: 'start' }">
-        <UButton label="Select label (popover)" color="gray" variant="outline" />
+        <UButton label="Select label (popover)" color="neutral" variant="outline" />
 
         <template #content>
           <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-9' }" />

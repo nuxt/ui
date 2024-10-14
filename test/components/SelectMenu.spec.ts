@@ -39,6 +39,8 @@ describe('SelectMenu', () => {
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
+    ['with valueKey', { props: { ...props, valueKey: 'value' } }],
+    ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
     ['with multiple and modelValue', { props: { ...props, multiple: true, modelValue: [items[0], items[1]] } }],
     ['with id', { props: { ...props, id: 'id' } }],
@@ -58,7 +60,7 @@ describe('SelectMenu', () => {
     ['with arrow', { props: { ...props, arrow: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant, color: 'gray' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ['with class', { props: { ...props, class: 'rounded-full' } }],
     ['with ui', { props: { ...props, ui: { group: 'p-2' } } }],
     // Slots

@@ -21,14 +21,14 @@ prettier: true
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
     <Placeholder class="h-full m-4" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :placeholder{class="h-full m-4"}
@@ -48,14 +48,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-full" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-full"}
@@ -76,14 +76,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-full" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-full"}
@@ -111,14 +111,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-full" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-full"}
@@ -143,14 +143,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-full" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-full"}
@@ -175,14 +175,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-full min-h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-full min-h-48"}
@@ -203,14 +203,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-full" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-full"}
@@ -231,14 +231,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-full" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-full"}
@@ -260,14 +260,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
     <Placeholder class="h-full" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :placeholder{class="h-full"}
@@ -297,7 +297,7 @@ This allows you to move the trigger outside of the Slideover or remove it entire
 
 You can use the [`useSlideover`](/composables/use-slideover) composable to open a Slideover programatically.
 
-::important
+::warning
 Make sure to wrap your app with the [App](/components/app) component which uses the [SlideoverProvider](https://github.com/nuxt/ui/blob/v3/src/runtime/components/SlideoverProvider.vue) component.
 ::
 
@@ -369,6 +369,7 @@ ignore:
   - exactQuery
   - exactHash
   - external
+  - onClick
 ---
 ::
 

@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -61,8 +61,13 @@ export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'd
    * @defaultValue false
    */
   arrow?: boolean
+  /**
+   * The key used to get the label from the item.
+   * @defaultValue 'label'
+   */
+  labelKey?: string
   class?: any
-  ui?: Partial<typeof navigationMenu.slots>
+  ui?: PartialString<typeof navigationMenu.slots>
 }
 
 export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
@@ -82,16 +87,18 @@ export type NavigationMenuSlots<T extends { slot?: string }> = {
 import { computed, toRef } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
+import { get } from '../utils'
+import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UBadge from './Badge.vue'
-import { pickLinkProps } from '../utils/link'
 
 const props = withDefaults(defineProps<NavigationMenuProps<T>>(), {
   orientation: 'horizontal',
-  delayDuration: 0
+  delayDuration: 0,
+  labelKey: 'label'
 })
 const emits = defineEmits<NavigationMenuEmits>()
 const slots = defineSlots<NavigationMenuSlots<T>>()
@@ -130,9 +137,9 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                     <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active, disabled: !!item.disabled })" />
                   </slot>
 
-                  <span v-if="item.label || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
+                  <span v-if="get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
                     <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="active" :index="index">
-                      {{ item.label }}
+                      {{ get(item, props.labelKey as string) }}
                     </slot>
 
                     <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.linkLabelExternalIcon({ class: props.ui?.linkLabelExternalIcon, active })" />
@@ -142,7 +149,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                     <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="item" :active="active" :index="index">
                       <UBadge
                         v-if="item.badge"
-                        color="gray"
+                        color="neutral"
                         variant="outline"
                         :size="((props.ui?.linkTrailingBadgeSize || ui.linkTrailingBadgeSize()) as BadgeProps['size'])"
                         v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
@@ -165,7 +172,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
 
                         <div :class="ui.childLinkWrapper({ class: props.ui?.childLinkWrapper })">
                           <p :class="ui.childLinkLabel({ class: props.ui?.childLinkLabel, active: childActive })">
-                            {{ childItem.label }}
+                            {{ get(childItem, props.labelKey as string) }}
 
                             <UIcon v-if="childItem.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.childLinkLabelExternalIcon({ class: props.ui?.childLinkLabelExternalIcon, active: childActive })" />
                           </p>

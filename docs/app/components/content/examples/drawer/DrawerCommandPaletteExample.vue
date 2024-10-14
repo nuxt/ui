@@ -18,10 +18,10 @@ const groups = computed(() => [{
 </script>
 
 <template>
-  <UDrawer>
+  <UDrawer :handle="false">
     <UButton
       label="Search users..."
-      color="gray"
+      color="neutral"
       variant="subtle"
       icon="i-heroicons-magnifying-glass"
     />
@@ -32,7 +32,7 @@ const groups = computed(() => [{
         :loading="status === 'pending'"
         :groups="groups"
         placeholder="Search users..."
-        class="h-96 border-t border-gray-200 dark:border-gray-800"
+        class="h-80"
       />
     </template>
   </UDrawer>

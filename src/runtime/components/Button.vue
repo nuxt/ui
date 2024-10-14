@@ -42,9 +42,10 @@ import { type Ref, computed, ref, inject } from 'vue'
 import { useForwardProps } from 'radix-vue'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useButtonGroup } from '../composables/useButtonGroup'
+import { omit } from '../utils'
+import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
 import ULink from './Link.vue'
-import { pickLinkProps } from '../utils/link'
 
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
@@ -92,7 +93,7 @@ const ui = computed(() => button({
     :type="type"
     :disabled="disabled || isLoading"
     :class="ui.base({ class: [props.class, props.ui?.base] })"
-    v-bind="linkProps"
+    v-bind="omit(linkProps, ['type', 'disabled'])"
     raw
     @click="onClickWrapper"
   >

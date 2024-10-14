@@ -3,12 +3,12 @@ export default {
     root: '',
     wrapper: '',
     labelWrapper: 'flex content-center items-center justify-between',
-    label: 'block font-medium text-gray-700 dark:text-gray-200',
+    label: 'block font-medium text-[var(--ui-text)]',
     container: 'mt-1 relative',
-    description: 'text-gray-500 dark:text-gray-400',
-    error: 'mt-2 text-error-500 dark:text-error-400',
-    hint: 'text-gray-500 dark:text-gray-400',
-    help: 'mt-2 text-gray-500 dark:text-gray-400'
+    description: 'text-[var(--ui-text-muted)]',
+    error: 'mt-2 text-[var(--ui-error)]',
+    hint: 'text-[var(--ui-text-muted)]',
+    help: 'mt-2 text-[var(--ui-text-muted)]'
   },
   variants: {
     size: {
@@ -20,7 +20,7 @@ export default {
     },
     required: {
       true: {
-        label: `after:content-['*'] after:ms-0.5 after:text-error-500 dark:after:text-error-400`
+        label: `after:content-['*'] after:ms-0.5 after:text-[var(--ui-error)]`
       }
     }
   },

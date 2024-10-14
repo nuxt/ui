@@ -33,17 +33,17 @@ describe('CommandPalette', () => {
     items: [{
       label: 'bug',
       chip: {
-        color: 'red'
+        color: 'error'
       }
     }, {
       label: 'feature',
       chip: {
-        color: 'green'
+        color: 'success'
       }
     }, {
       label: 'enhancement',
       chip: {
-        color: 'blue'
+        color: 'info'
       }
     }]
   }, {
@@ -64,6 +64,7 @@ describe('CommandPalette', () => {
     ['with groups', { props }],
     ['with modelValue', { props: { ...props, modelValue: groups[2].items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: groups[2].items[0] } }],
+    ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with icon', { props: { ...props, icon: 'i-heroicons-command-line' } }],
@@ -73,7 +74,7 @@ describe('CommandPalette', () => {
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-heroicons-trash' } }],
     ['with as', { props: { ...props, as: 'section' } }],
-    ['with class', { props: { ...props, class: 'divide-gray-300 dark:divide-gray-700' } }],
+    ['with class', { props: { ...props, class: 'divide-[var(--ui-border-accented)]' } }],
     ['with ui', { props: { ...props, ui: { input: '[&>input]:h-10' } } }],
     // Slots
     ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }],

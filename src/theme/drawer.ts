@@ -1,19 +1,19 @@
 export default {
   slots: {
-    overlay: 'fixed inset-0 z-50 bg-gray-200/75 dark:bg-gray-800/75',
-    content: 'fixed z-50 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-800 flex focus:outline-none',
-    handle: 'shrink-0 rounded-full bg-gray-200 dark:bg-gray-700',
+    overlay: 'fixed inset-0 bg-[var(--ui-bg-elevated)]/75',
+    content: 'fixed bg-[var(--ui-bg)] ring ring-[var(--ui-border)] flex focus:outline-none',
+    handle: 'shrink-0 rounded-full bg-[var(--ui-bg-accented)]',
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: '',
-    title: 'text-gray-900 dark:text-white font-semibold',
-    description: 'mt-1 text-gray-500 dark:text-gray-400 text-sm',
+    title: 'text-[var(--ui-text-highlighted)] font-semibold',
+    description: 'mt-1 text-[var(--ui-text-muted)] text-sm',
     body: 'flex-1',
     footer: 'flex flex-col gap-1.5'
   },
   variants: {
     direction: {
       top: {
-        content: 'top-0 mb-24 flex-col-reverse rounded-b-lg',
+        content: 'top-0 mb-24 flex-col-reverse rounded-b-[calc(var(--ui-radius)*2)]',
         handle: 'mb-4'
       },
       right: {
@@ -21,7 +21,7 @@ export default {
         handle: 'ml-4'
       },
       bottom: {
-        content: 'bottom-0 mt-24 flex-col rounded-t-lg',
+        content: 'bottom-0 mt-24 flex-col rounded-t-[calc(var(--ui-radius)*2)]',
         handle: 'mt-4'
       },
       left: {
@@ -39,7 +39,7 @@ export default {
   }, {
     direction: ['right', 'left'],
     class: {
-      content: 'inset-y-4 w-auto max-w-[calc(100%-2rem)] rounded-lg after:hidden',
+      content: 'inset-y-4 w-auto max-w-[calc(100%-2rem)] rounded-[calc(var(--ui-radius)*2)] after:hidden',
       handle: 'h-12 w-1.5 mt-auto mb-auto'
     }
   }]

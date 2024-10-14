@@ -1,7 +1,7 @@
 export default {
   slots: {
-    viewport: 'fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[--height]',
-    base: 'absolute inset-x-0 z-[--index] transform-[--transform] data-[expanded=false]:data-[front=false]:h-[--front-height] data-[expanded=false]:data-[front=false]:*:invisible data-[state=closed]:animate-[toast-closed_200ms_ease-in-out] data-[state=closed]:data-[expanded=false]:data-[front=false]:animate-[toast-collapsed-closed_200ms_ease-in-out] data-[swipe=move]:transition-none transition-[transform,translate,height] duration-200 ease-out'
+    viewport: 'fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none',
+    base: 'absolute inset-x-0 z-[var(--index)] transform-[var(--transform)] data-[expanded=false]:data-[front=false]:h-[var(--front-height)] data-[expanded=false]:data-[front=false]:*:invisible data-[state=closed]:animate-[toast-closed_200ms_ease-in-out] data-[state=closed]:data-[expanded=false]:data-[front=false]:animate-[toast-collapsed-closed_200ms_ease-in-out] data-[swipe=move]:transition-none transition-[transform,translate,height] duration-200 ease-out'
   },
   variants: {
     position: {
@@ -45,10 +45,10 @@ export default {
     }
   }, {
     swipeDirection: ['left', 'right'],
-    class: 'data-[swipe=move]:translate-x-[--radix-toast-swipe-move-x] data-[swipe=end]:translate-x-[--radix-toast-swipe-end-x] data-[swipe=cancel]:translate-x-0'
+    class: 'data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=cancel]:translate-x-0'
   }, {
     swipeDirection: ['up', 'down'],
-    class: 'data-[swipe=move]:translate-y-[--radix-toast-swipe-move-y] data-[swipe=end]:translate-y-[--radix-toast-swipe-end-y] data-[swipe=cancel]:translate-y-0'
+    class: 'data-[swipe=move]:translate-y-[var(--radix-toast-swipe-move-y)] data-[swipe=end]:translate-y-[var(--radix-toast-swipe-end-y)] data-[swipe=cancel]:translate-y-0'
   }],
   defaultVariants: {
     position: 'bottom-right'

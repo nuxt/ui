@@ -3,12 +3,12 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center justify-center shrink-0',
-    base: 'rounded-full ring ring-white dark:ring-gray-900 flex items-center justify-center text-white dark:text-gray-900 font-medium whitespace-nowrap'
+    base: 'rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap'
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `bg-${color}-500 dark:bg-${color}-400`])),
-      gray: 'bg-gray-500 dark:bg-gray-400'
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `bg-[var(--ui-${color})]`])),
+      neutral: 'bg-[var(--ui-text-muted)]'
     },
     size: {
       '3xs': 'h-[4px] min-w-[4px] text-[4px]',

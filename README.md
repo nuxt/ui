@@ -40,16 +40,18 @@ export default defineNuxtConfig({
 })
 ```
 
-3. Import Tailwind and Nuxt UI in your `app.vue` or in your [CSS](https://nuxt.com/docs/getting-started/styling#the-css-property):
+3. Import Tailwind CSS and Nuxt UI in your `app.vue` or [CSS](https://nuxt.com/docs/getting-started/styling#the-css-property):
 
-```css [main.css]
+```vue [app.vue]
+<style>
 @import "tailwindcss";
 @import "@nuxt/ui";
+</style>
 ```
 
 ## Documentation
 
-Visit https://ui3.nuxt.com to explore the documentation.
+Visit https://ui3.nuxt.dev to explore the documentation.
 
 ## Credits
 
@@ -70,7 +72,7 @@ Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md)
 [npm-version-href]: https://npmjs.com/package/@nuxt/ui
 
 [npm-downloads-src]: https://img.shields.io/npm/dm/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-downloads-href]: https://npmjs.com/package/@nuxt/ui
+[npm-downloads-href]: https://npm.chart.dev/@nuxt/ui
 
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
 [license-href]: https://github.com/nuxt/ui/blob/main/LICENSE.md

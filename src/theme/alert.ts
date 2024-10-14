@@ -2,7 +2,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5',
+    root: 'relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5',
     wrapper: 'min-w-0 flex-1 flex flex-col gap-1',
     title: 'text-sm font-medium',
     description: 'text-sm opacity-90',
@@ -15,7 +15,7 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      gray: ''
+      neutral: ''
     },
     variant: {
       solid: '',
@@ -38,53 +38,53 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     variant: 'solid',
     class: {
-      root: `bg-${color}-500 dark:bg-${color}-400 text-white dark:text-gray-900`
+      root: `bg-[var(--ui-${color})] text-[var(--ui-bg)]`
     }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
     class: {
-      root: `text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/25 dark:ring-${color}-400/25`
+      root: `text-[var(--ui-${color})] ring ring-inset ring-[var(--ui-${color})]/25`
     }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'soft',
     class: {
-      root: `bg-${color}-500/10 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400`
+      root: `bg-[var(--ui-${color})]/10 text-[var(--ui-${color})]`
     }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'subtle',
     class: {
-      root: `bg-${color}-500/10 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/25 dark:ring-${color}-400/25`
+      root: `bg-[var(--ui-${color})]/10 text-[var(--ui-${color})] ring ring-inset ring-[var(--ui-${color})]/25`
     }
   })), {
-    color: 'gray',
+    color: 'neutral',
     variant: 'solid',
     class: {
-      root: 'text-white dark:text-gray-900 bg-gray-900 dark:bg-white'
+      root: 'text-[var(--ui-bg)] bg-[var(--ui-bg-inverted)]'
     }
   }, {
-    color: 'gray',
+    color: 'neutral',
     variant: 'outline',
     class: {
-      root: 'text-gray-900 dark:text-white bg-white dark:bg-gray-900 ring ring-inset ring-gray-200 dark:ring-gray-800'
+      root: 'text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border)]'
     }
   }, {
-    color: 'gray',
+    color: 'neutral',
     variant: 'soft',
     class: {
-      root: 'text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800/50'
+      root: 'text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)]/50'
     }
   }, {
-    color: 'gray',
+    color: 'neutral',
     variant: 'subtle',
     class: {
-      root: 'text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800/50 ring ring-inset ring-gray-300 dark:ring-gray-700'
+      root: 'text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)]/50 ring ring-inset ring-[var(--ui-border-accented)]'
     }
   }],
   defaultVariants: {
     color: 'primary',
-    variant: 'outline'
+    variant: 'solid'
   }
 })

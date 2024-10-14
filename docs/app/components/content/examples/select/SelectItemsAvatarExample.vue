@@ -32,7 +32,7 @@ function getAvatar(value: string) {
 </script>
 
 <template>
-  <USelect default-value="benjamincanac" :items="items" class="w-40">
+  <USelect default-value="benjamincanac" :items="items" class="w-48">
     <template #leading="{ modelValue, ui }">
       <UAvatar
         v-if="modelValue"

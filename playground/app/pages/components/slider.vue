@@ -10,7 +10,7 @@ const value = ref(50)
   <div class="flex flex-col gap-6 items-center">
     <div class="flex flex-col gap-6 w-48">
       <USlider v-model="value" />
-      <USlider color="gray" :model-value="50" />
+      <USlider color="neutral" :model-value="50" />
       <USlider color="error" :model-value="50" />
       <USlider :default-value="100" />
       <USlider inverted />

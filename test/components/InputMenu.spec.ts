@@ -12,18 +12,23 @@ describe('InputMenu', () => {
 
   const items = [{
     label: 'Backlog',
+    value: 'backlog',
     icon: 'i-heroicons-question-mark-circle'
   }, {
     label: 'Todo',
+    value: 'todo',
     icon: 'i-heroicons-plus-circle'
   }, {
     label: 'In Progress',
+    value: 'in_progress',
     icon: 'i-heroicons-arrow-up-circle'
   }, {
     label: 'Done',
+    value: 'done',
     icon: 'i-heroicons-check-circle'
   }, {
     label: 'Canceled',
+    value: 'canceled',
     icon: 'i-heroicons-x-circle'
   }]
 
@@ -34,6 +39,8 @@ describe('InputMenu', () => {
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
+    ['with valueKey', { props: { ...props, valueKey: 'value' } }],
+    ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with id', { props: { ...props, id: 'id' } }],
     ['with name', { props: { ...props, name: 'name' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
@@ -51,7 +58,7 @@ describe('InputMenu', () => {
     ['with arrow', { props: { ...props, arrow: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant, color: 'gray' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { group: 'p-2' } } }],

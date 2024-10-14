@@ -2,11 +2,55 @@
 const open = ref(false)
 
 const users = [
-  { id: 1, label: 'Durward Reynolds' },
-  { id: 2, label: 'Kenton Towne' },
-  { id: 3, label: 'Therese Wunsch' },
-  { id: 4, label: 'Benedict Kessler' },
-  { id: 5, label: 'Katelyn Rohan' }
+  {
+    label: 'Benjamin Canac',
+    suffix: 'benjamincanac',
+    avatar: {
+      src: 'https://github.com/benjamincanac.png'
+    }
+  },
+  {
+    label: 'Sylvain Marroufin',
+    suffix: 'smarroufin',
+    avatar: {
+      src: 'https://github.com/smarroufin.png'
+    }
+  },
+  {
+    label: 'Sébastien Chopin',
+    suffix: 'atinux',
+    avatar: {
+      src: 'https://github.com/atinux.png'
+    }
+  },
+  {
+    label: 'Romain Hamel',
+    suffix: 'romhml',
+    avatar: {
+      src: 'https://github.com/romhml.png'
+    }
+  },
+  {
+    label: 'Haytham A. Salama',
+    suffix: 'Haythamasalama',
+    avatar: {
+      src: 'https://github.com/Haythamasalama.png'
+    }
+  },
+  {
+    label: 'Daniel Roe',
+    suffix: 'danielroe',
+    avatar: {
+      src: 'https://github.com/danielroe.png'
+    }
+  },
+  {
+    label: 'Neil Richter',
+    suffix: 'noook',
+    avatar: {
+      src: 'https://github.com/noook.png'
+    }
+  }
 ]
 </script>
 
@@ -14,17 +58,13 @@ const users = [
   <UModal v-model:open="open">
     <UButton
       label="Search users..."
-      color="gray"
+      color="neutral"
       variant="subtle"
       icon="i-heroicons-magnifying-glass"
     />
 
     <template #content>
-      <UCommandPalette
-        close
-        :groups="[{ id: 'users', items: users }]"
-        @update:open="open = $event"
-      />
+      <UCommandPalette close :groups="[{ id: 'users', items: users }]" @update:open="open = $event" />
     </template>
   </UModal>
 </template>

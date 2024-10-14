@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -50,8 +50,13 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
    * @defaultValue true
    */
   portal?: boolean
+  /**
+   * The key used to get the label from the item.
+   * @defaultValue 'label'
+   */
+  labelKey?: string
   class?: any
-  ui?: Partial<typeof dropdownMenu.slots>
+  ui?: PartialString<typeof dropdownMenu.slots>
 }
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
@@ -73,12 +78,13 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import UDropdownMenuContent from './DropdownMenuContent.vue'
 import { omit } from '../utils'
+import UDropdownMenuContent from './DropdownMenuContent.vue'
 
 const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   portal: true,
-  modal: true
+  modal: true,
+  labelKey: 'label'
 })
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
@@ -106,6 +112,7 @@ const ui = computed(() => dropdownMenu({
       v-bind="contentProps"
       :items="items"
       :portal="portal"
+      :label-key="labelKey"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />

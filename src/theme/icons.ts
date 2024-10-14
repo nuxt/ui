@@ -4,6 +4,8 @@ export default {
   chevronDown: 'i-heroicons-chevron-down-20-solid',
   chevronLeft: 'i-heroicons-chevron-left-20-solid',
   chevronRight: 'i-heroicons-chevron-right-20-solid',
+  arrowLeft: 'i-heroicons-arrow-left-20-solid',
+  arrowRight: 'i-heroicons-arrow-right-20-solid',
   check: 'i-heroicons-check-20-solid',
   close: 'i-heroicons-x-mark-20-solid',
   ellipsis: 'i-heroicons-ellipsis-horizontal-20-solid',

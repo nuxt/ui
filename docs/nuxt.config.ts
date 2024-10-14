@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   app: {
     rootAttrs: {
       'vaul-drawer-wrapper': '',
-      'class': 'bg-[--background]'
+      'class': 'bg-[var(--ui-bg)]'
     }
   },
 
@@ -197,7 +197,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: 'https://ui3.nuxt.com'
+    url: 'https://ui3.nuxt.dev'
   },
 
   compatibilityDate: '2024-07-09'

@@ -13,7 +13,7 @@ links:
 
 Use a [Button](/components/button) or any other component in the default slot of the Tooltip.
 
-::important
+::warning
 Make sure to wrap your app with the [App](/components/app) component which uses the [TooltipProvider](https://www.radix-vue.com/components/tooltip.html#provider) component from Radix Vue.
 ::
 
@@ -33,10 +33,10 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ### Kbds
@@ -57,10 +57,10 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ::tip
@@ -82,10 +82,10 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ::tip
@@ -120,10 +120,10 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ### Arrow
@@ -142,10 +142,10 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ### Disabled
@@ -163,10 +163,10 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" />
+    <UButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle"}
+:u-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ## Examples

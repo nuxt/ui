@@ -79,13 +79,14 @@ describe('NavigationMenu', () => {
   it.each([
     // Props
     ['with items', { props }],
+    ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant, color: 'gray' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant} highlight`, { props: { ...props, variant, color: 'gray', highlight: true } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant} highlight gray`, { props: { ...props, variant, color: 'gray', highlight: true, highlightColor: 'gray' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { ...props, variant, color: 'neutral', highlight: true } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight neutral`, { props: { ...props, variant, color: 'neutral', highlight: true, highlightColor: 'neutral' } }]),
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-plus' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
+import colors from 'tailwindcss/colors'
 // import { debounce } from 'perfect-debounce'
-// import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 const route = useRoute()
 const appConfig = useAppConfig()
-// const colorMode = useColorMode()
+const colorMode = useColorMode()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
 const { data: files } = await useAsyncData('files', () => queryCollectionSearchSections('content', { ignoredTags: ['style'] }))
@@ -48,16 +48,20 @@ const links = computed(() => {
   }].filter(Boolean)
 })
 
-// const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
+const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
+const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
 
 useHead({
   meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
-    // { key: 'theme-color', name: 'theme-color', content: color }
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
     { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
     { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
+  ],
+  style: [
+    { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 }
   ],
   htmlAttrs: {
     lang: 'en'
@@ -119,6 +123,6 @@ provide('navigation', navigation)
 }
 
 :root {
-  --container-width: 90rem;
+  --ui-container-width: 90rem;
 }
 </style>

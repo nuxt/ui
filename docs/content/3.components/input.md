@@ -65,7 +65,7 @@ Use the `color` prop to change the ring color when the Input is focused.
 ignore:
   - placeholder
 props:
-  color: gray
+  color: neutral
   highlight: true
   placeholder: 'Search...'
 ---
@@ -84,7 +84,7 @@ Use the `variant` prop to change the variant of the Input.
 ignore:
   - placeholder
 props:
-  color: gray
+  color: neutral
   variant: subtle
   highlight: false
   placeholder: 'Search...'

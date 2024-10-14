@@ -1,10 +1,10 @@
 export default {
-  base: 'inline-flex items-center justify-center px-1 rounded font-medium font-sans',
+  base: 'inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans',
   variants: {
     variant: {
-      solid: 'bg-gray-900 dark:bg-white text-white dark:text-gray-900',
-      outline: 'bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring ring-inset ring-gray-300 dark:ring-gray-700',
-      subtle: 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 ring ring-inset ring-gray-300 dark:ring-gray-700'
+      solid: 'bg-[var(--ui-bg-inverted)] text-[var(--ui-bg)]',
+      outline: 'bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)]',
+      subtle: 'bg-[var(--ui-bg-elevated)] text-[var(--ui-text)] ring ring-inset ring-[var(--ui-border-accented)]'
     },
     size: {
       sm: 'h-4 min-w-[16px] text-[10px]',

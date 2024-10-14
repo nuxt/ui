@@ -9,19 +9,24 @@ export default defineNuxtPlugin(() => {
 
   const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
-  function generateColor(key: string, value: string) {
-    return `${shades.map(shade => `--color-${key}-${shade}: var(--color-${value}-${shade});`).join('\n  ')}`
+  function generateShades(key: string, value: string) {
+    return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--color-${value}-${shade});`).join('\n  ')}`
+  }
+  function generateColor(key: string, shade: number) {
+    return `--ui-${key}: var(--ui-color-${key}-${shade});`
   }
 
   const root = computed(() => {
+    const { neutral, ...colors } = appConfig.ui.colors
+
     return `:root {
-  ${Object.entries(appConfig.ui.colors).map(([key, value]: [string, string]) => generateColor(key, value)).join('\n  ')}
-  --color-primary-DEFAULT: var(--color-primary-500);
+  ${Object.entries(appConfig.ui.colors).map(([key, value]: [string, string]) => generateShades(key, value)).join('\n  ')}
+
+  ${Object.keys(colors).map(key => generateColor(key, 500)).join('\n  ')}
 }
-@media (prefers-color-scheme: dark) {
-  --color-primary-DEFAULT: var(--color-primary-400);
-}
-`
+.dark {
+  ${Object.keys(colors).map(key => generateColor(key, 400)).join('\n  ')}
+}`
   })
 
   // Head

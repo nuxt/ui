@@ -32,6 +32,7 @@ prettier: true
 ignore:
   - modelValue
   - items
+  - class
 external:
   - items
   - modelValue
@@ -42,13 +43,14 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
 You can also pass an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
-- [`type?: "label" | "separator" | "item"`{lang="ts-type"}](#with-typed-items)
+- [`type?: "label" | "separator" | "item"`{lang="ts-type"}](#with-items-type)
 - [`icon?: string`{lang="ts-type"}](#with-icons-in-items)
 - [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
 - [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
@@ -60,6 +62,7 @@ You can also pass an array of objects with the following properties:
 ignore:
   - modelValue.label
   - items
+  - class
 external:
   - items
   - modelValue
@@ -71,10 +74,11 @@ props:
     - label: 'Todo'
     - label: 'In Progress'
     - label: 'Done'
+  class: 'w-40'
 ---
 ::
 
-::note
+::caution
 Unlike the [Select](/components/select) component, the SelectMenu expects the whole object to be passed to the `v-model` directive or the `default-value` prop by default.
 ::
 
@@ -86,6 +90,7 @@ prettier: true
 ignore:
   - modelValue
   - items
+  - class
 external:
   - items
   - modelValue
@@ -102,6 +107,7 @@ props:
       - Carrot
       - Courgette
       - Leek
+  class: 'w-40'
 ---
 ::
 
@@ -116,6 +122,7 @@ ignore:
   - modelValue
   - valueKey
   - items
+  - class
 external:
   - items
   - modelValue
@@ -131,6 +138,7 @@ props:
       id: 'in_progress'
     - label: 'Done'
       id: 'done'
+  class: 'w-40'
 ---
 ::
 
@@ -145,6 +153,7 @@ ignore:
   - modelValue
   - items
   - multiple
+  - class
 external:
   - items
   - modelValue
@@ -158,6 +167,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -174,6 +184,7 @@ Use the `placeholder` prop to set a placeholder text.
 prettier: true
 ignore:
   - items
+  - class
 external:
   - items
 props:
@@ -183,6 +194,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -197,6 +209,7 @@ ignore:
   - modelValue.label
   - modelValue.icon
   - items
+  - class
 external:
   - items
   - modelValue
@@ -215,6 +228,7 @@ props:
       icon: 'i-heroicons-arrow-up-circle'
     - label: Done
       icon: 'i-heroicons-check-circle'
+  class: 'w-40'
 ---
 ::
 
@@ -232,6 +246,7 @@ prettier: true
 ignore:
   - items
   - modelValue
+  - class
 external:
   - items
   - modelValue
@@ -256,6 +271,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -269,18 +285,20 @@ prettier: true
 ignore:
   - items
   - modelValue
+  - class
 external:
   - items
   - modelValue
 props:
   modelValue: 'Backlog'
-  color: gray
+  color: neutral
   highlight: true
   items:
     - Backlog
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -298,12 +316,13 @@ prettier: true
 ignore:
   - items
   - modelValue
+  - class
 external:
   - items
   - modelValue
 props:
   modelValue: 'Backlog'
-  color: gray
+  color: neutral
   variant: subtle
   highlight: false
   items:
@@ -311,6 +330,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -324,6 +344,7 @@ prettier: true
 ignore:
   - items
   - modelValue
+  - class
 external:
   - items
   - modelValue
@@ -335,6 +356,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -348,6 +370,7 @@ prettier: true
 ignore:
   - items
   - modelValue
+  - class
 external:
   - items
   - modelValue
@@ -360,6 +383,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -373,6 +397,7 @@ prettier: true
 ignore:
   - items
   - modelValue
+  - class
 external:
   - items
   - modelValue
@@ -385,6 +410,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -402,6 +428,7 @@ prettier: true
 ignore:
   - items
   - modelValue
+  - class
 external:
   - items
   - modelValue
@@ -414,6 +441,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -431,6 +459,7 @@ prettier: true
 ignore:
   - items
   - modelValue
+  - class
 external:
   - items
   - modelValue
@@ -443,6 +472,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -456,6 +486,7 @@ prettier: true
 ignore:
   - items
   - modelValue
+  - class
 external:
   - items
   - modelValue
@@ -468,6 +499,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -485,6 +517,7 @@ prettier: true
 ignore:
   - items
   - placeholder
+  - class
 external:
   - items
 props:
@@ -495,12 +528,13 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
 ## Examples
 
-### With typed items
+### With items type
 
 You can use the `type` property with `separator` to display a separator between items or `label` to display a label.
 
@@ -510,6 +544,7 @@ collapse: true
 ignore:
   - modelValue
   - items
+  - class
 external:
   - items
   - modelValue
@@ -531,6 +566,7 @@ props:
     - Carrot
     - Courgette
     - Leek
+  class: 'w-40'
 ---
 ::
 

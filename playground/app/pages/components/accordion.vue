@@ -32,13 +32,13 @@ const items = [{
   <UCard :ui="{ body: 'p-0 sm:p-0' }">
     <UAccordion :items="items" class="w-96" :ui="{ trigger: 'px-3.5', body: 'px-3.5' }">
       <template #body="{ item }">
-        <p class="text-gray-500 dark:text-gray-400">
+        <p class="text-[var(--ui-text-muted)]">
           {{ item.content }}
         </p>
       </template>
 
       <template #custom-body="{ item }">
-        <p class="text-gray-500 dark:text-gray-400">
+        <p class="text-[var(--ui-text-muted)]">
           Custom: {{ item.content }}
         </p>
       </template>

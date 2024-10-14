@@ -39,7 +39,7 @@ props:
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
       icon: 'i-heroicons-swatch'
-      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
       icon: 'i-heroicons-cube-transparent'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
@@ -68,7 +68,7 @@ props:
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
       icon: 'i-heroicons-swatch'
-      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
       icon: 'i-heroicons-cube-transparent'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
@@ -97,7 +97,7 @@ props:
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
       icon: 'i-heroicons-swatch'
-      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
       icon: 'i-heroicons-cube-transparent'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
@@ -127,7 +127,7 @@ props:
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
       icon: 'i-heroicons-swatch'
-      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
       disabled: true
     - label: 'Components'
       icon: 'i-heroicons-cube-transparent'
@@ -139,7 +139,7 @@ props:
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-heroicons-chevron-down-20-solid`.
 
-::note
+::tip
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
 ::
 
@@ -161,7 +161,7 @@ props:
       trailingIcon: 'i-heroicons-plus-20-solid'
     - label: 'Colors'
       icon: 'i-heroicons-swatch'
-      content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
       icon: 'i-heroicons-cube-transparent'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
@@ -190,6 +190,10 @@ props:
 You can also pass the `value` of one of the items if provided.
 ::
 
+::caution
+When `type="multiple"`, ensure to pass an array to the `default-value` prop or the `v-model` directive.
+::
+
 ### With body slot
 
 Use the `#body` slot to customize the body of each item.
@@ -202,7 +206,7 @@ props:
 ---
 ::
 
-::note
+::tip
 The `#body` slot includes some pre-defined styles, use the [`#content` slot](#with-content-slot) if you want to start from scratch.
 ::
 

@@ -19,7 +19,7 @@ describe('Button', () => {
     ['with label', { props: { label: 'Button' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Button', size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { label: 'Button', variant } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { label: 'Button', variant, color: 'gray' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { label: 'Button', variant, color: 'neutral' } }]),
     ['with icon', { props: { icon: 'i-heroicons-rocket-launch' } }],
     ['with leading and icon', { props: { leading: true, icon: 'i-heroicons-arrow-left' } }],
     ['with leadingIcon', { props: { leadingIcon: 'i-heroicons-arrow-left' } }],

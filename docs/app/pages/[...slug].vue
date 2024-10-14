@@ -20,14 +20,16 @@ const headline = computed(() => findPageHeadline(page.value))
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
-  title: (page.value.navigation as any)?.title || page.value.title,
-  ogTitle: `${(page.value.navigation as any)?.title || page.value.title} - Nuxt UI v3`,
-  description: page.value.description,
-  ogDescription: page.value.description
+  title: page.value.navigation?.title || page.value.title,
+  ogTitle: `${page.value.navigation?.title || page.value.title} - Nuxt UI v3`,
+  description: page.value.seo?.description || page.value.description,
+  ogDescription: page.value.seo?.description || page.value.description
 })
 
 defineOgImageComponent('Docs', {
-  headline: headline.value
+  headline: headline.value,
+  title: page.value.title,
+  description: page.value.seo?.description || page.value.description
 })
 
 const communityLinks = computed(() => [{
@@ -81,7 +83,7 @@ const communityLinks = computed(() => [{
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
-      <UContentToc :links="page.body.toc.links">
+      <UContentToc :links="page.body.toc.links" class="z-[2]">
         <template #bottom>
           <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
 

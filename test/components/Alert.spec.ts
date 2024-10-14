@@ -17,7 +17,7 @@ describe('Alert', () => {
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-heroicons-trash' } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant, color: 'gray' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ['with as', { props: { ...props, as: 'article' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],

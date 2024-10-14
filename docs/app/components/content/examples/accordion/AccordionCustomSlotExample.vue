@@ -9,7 +9,7 @@ const items = [
     label: 'Colors',
     icon: 'i-heroicons-swatch',
     slot: 'colors',
-    content: 'Choose a primary and a gray color from your Tailwind CSS theme.'
+    content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
   },
   {
     label: 'Components',
@@ -22,7 +22,7 @@ const items = [
 <template>
   <UAccordion :items="items">
     <template #colors="{ item }">
-      <p class="text-sm pb-3.5 text-primary-500 dark:text-primary-400">
+      <p class="text-sm pb-3.5 text-[var(--ui-primary)]">
         {{ item.content }}
       </p>
     </template>

@@ -4,24 +4,24 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative',
     fieldset: 'flex',
-    legend: 'mb-1 block font-medium text-gray-700 dark:text-gray-200',
+    legend: 'mb-1 block font-medium text-[var(--ui-text)]',
     item: 'flex items-start',
-    base: 'rounded-full ring ring-inset ring-gray-300 dark:ring-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-offset-white dark:focus-visible:outline-offset-gray-900',
-    indicator: 'flex items-center justify-center size-full rounded-full after:bg-white dark:after:bg-gray-900 after:rounded-full',
+    base: 'rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-offset-[var(--ui-bg)]',
+    indicator: 'flex items-center justify-center size-full rounded-full after:bg-[var(--ui-bg)] after:rounded-full',
     container: 'flex items-center',
     wrapper: 'ms-2',
-    label: 'block font-medium text-gray-700 dark:text-gray-200',
-    description: 'text-gray-500 dark:text-gray-400'
+    label: 'block font-medium text-[var(--ui-text)]',
+    description: 'text-[var(--ui-text-muted)]'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `focus-visible:outline-${color}-500 dark:focus-visible:outline-${color}-400`,
-        indicator: `bg-${color}-500 dark:bg-${color}-400`
+        base: `focus-visible:outline-[var(--ui-${color})]`,
+        indicator: `bg-[var(--ui-${color})]`
       }])),
-      gray: {
-        base: 'focus-visible:outline-gray-900 dark:focus-visible:outline-white',
-        indicator: 'bg-gray-900 dark:bg-white'
+      neutral: {
+        base: 'focus-visible:outline-[var(--ui-border-inverted)]',
+        indicator: 'bg-[var(--ui-bg-inverted)]'
       }
     },
     orientation: {
@@ -83,7 +83,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     required: {
       true: {
-        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-error-500 dark:after:text-error-400'
+        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-[var(--ui-error)]'
       }
     }
   },

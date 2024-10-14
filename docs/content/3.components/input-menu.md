@@ -48,7 +48,7 @@ props:
 You can also pass an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
-- [`type?: "label" | "separator" | "item"`{lang="ts-type"}](#with-typed-items)
+- [`type?: "label" | "separator" | "item"`{lang="ts-type"}](#with-items-type)
 - [`icon?: string`{lang="ts-type"}](#with-icons-in-items)
 - [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
 - [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
@@ -266,7 +266,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  color: gray
+  color: neutral
   highlight: true
   items:
     - Backlog
@@ -295,7 +295,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  color: gray
+  color: neutral
   variant: subtle
   highlight: false
   items:
@@ -492,7 +492,7 @@ props:
 
 ## Examples
 
-### With typed items
+### With items type
 
 You can use the `type` property with `separator` to display a separator between items or `label` to display a label.
 

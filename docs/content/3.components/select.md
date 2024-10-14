@@ -23,6 +23,7 @@ prettier: true
 ignore:
   - modelValue
   - items
+  - class
 external:
   - items
   - modelValue
@@ -33,6 +34,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -40,7 +42,7 @@ You can also pass an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
 - [`value?: string`{lang="ts-type"}](#value-key)
-- [`type?: "label" | "separator" | "item"`{lang="ts-type"}](#with-typed-items)
+- [`type?: "label" | "separator" | "item"`{lang="ts-type"}](#with-items-type)
 - [`icon?: string`{lang="ts-type"}](#with-icons-in-items)
 - [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
 - [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
@@ -51,6 +53,7 @@ You can also pass an array of objects with the following properties:
 ignore:
   - modelValue
   - items
+  - class
 external:
   - items
   - modelValue
@@ -65,10 +68,11 @@ props:
       value: 'in_progress'
     - label: 'Done'
       value: 'done'
+  class: 'w-40'
 ---
 ::
 
-::note
+::caution
 When using objects, you need to reference the `value` property of the object in the `v-model` directive or the `default-value` prop.
 ::
 
@@ -80,6 +84,7 @@ prettier: true
 ignore:
   - modelValue
   - items
+  - class
 external:
   - items
   - modelValue
@@ -96,6 +101,7 @@ props:
       - Carrot
       - Courgette
       - Leek
+  class: 'w-40'
 ---
 ::
 
@@ -109,6 +115,7 @@ ignore:
   - modelValue
   - valueKey
   - items
+  - class
 external:
   - items
   - modelValue
@@ -124,6 +131,7 @@ props:
       id: 'in_progress'
     - label: 'Done'
       id: 'done'
+  class: 'w-40'
 ---
 ::
 
@@ -136,6 +144,7 @@ Use the `placeholder` prop to set a placeholder text.
 prettier: true
 ignore:
   - items
+  - class
 external:
   - items
 props:
@@ -145,6 +154,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -152,7 +162,7 @@ props:
 
 Use the `content` prop to control how the Select content is rendered, like its its `align`, `side` or `position` for example. Defaults to `popper` to match other components.
 
-::caution
+::warning
 The `content.align`, `content.side`, etc. properties only apply when `content.position` is set to `popper`.
 ::
 
@@ -162,6 +172,7 @@ prettier: true
 ignore:
   - items
   - defaultValue
+  - class
 external:
   - items
 items:
@@ -189,6 +200,7 @@ props:
     - In Progress
     - Done
   defaultValue: 'Todo'
+  class: 'w-40'
 ---
 ::
 
@@ -206,10 +218,11 @@ prettier: true
 ignore:
   - items
   - defaultValue
+  - class
 external:
   - items
 props:
-  color: gray
+  color: neutral
   highlight: true
   defaultValue: 'Backlog'
   items:
@@ -217,6 +230,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -234,10 +248,11 @@ prettier: true
 ignore:
   - items
   - defaultValue
+  - class
 external:
   - items
 props:
-  color: gray
+  color: neutral
   variant: subtle
   highlight: false
   defaultValue: 'Backlog'
@@ -246,6 +261,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -259,6 +275,7 @@ prettier: true
 ignore:
   - items
   - defaultValue
+  - class
 external:
   - items
 props:
@@ -269,6 +286,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -282,6 +300,7 @@ prettier: true
 ignore:
   - items
   - defaultValue
+  - class
 external:
   - items
 props:
@@ -293,6 +312,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -306,6 +326,7 @@ prettier: true
 ignore:
   - items
   - defaultValue
+  - class
 external:
   - items
 props:
@@ -317,6 +338,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -334,6 +356,7 @@ prettier: true
 ignore:
   - items
   - defaultValue
+  - class
 external:
   - items
 props:
@@ -345,6 +368,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -362,6 +386,7 @@ prettier: true
 ignore:
   - items
   - defaultValue
+  - class
 external:
   - items
 props:
@@ -373,6 +398,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -386,6 +412,7 @@ prettier: true
 ignore:
   - items
   - defaultValue
+  - class
 external:
   - items
 props:
@@ -397,6 +424,7 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
@@ -414,6 +442,7 @@ prettier: true
 ignore:
   - items
   - placeholder
+  - class
 external:
   - items
 props:
@@ -424,12 +453,13 @@ props:
     - Todo
     - In Progress
     - Done
+  class: 'w-40'
 ---
 ::
 
 ## Examples
 
-### With typed items
+### With items type
 
 You can use the `type` property with `separator` to display a separator between items or `label` to display a label.
 
@@ -439,6 +469,7 @@ collapse: true
 ignore:
   - modelValue
   - items
+  - class
 external:
   - items
   - modelValue
@@ -460,6 +491,7 @@ props:
     - Carrot
     - Courgette
     - Leek
+  class: 'w-40'
 ---
 ::
 

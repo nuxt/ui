@@ -21,7 +21,7 @@ const groups = computed(() => [{
   <UModal>
     <UButton
       label="Search users..."
-      color="gray"
+      color="neutral"
       variant="subtle"
       icon="i-heroicons-magnifying-glass"
     />
@@ -32,7 +32,7 @@ const groups = computed(() => [{
         :loading="status === 'pending'"
         :groups="groups"
         placeholder="Search users..."
-        class="h-96"
+        class="h-80"
       />
     </template>
   </UModal>

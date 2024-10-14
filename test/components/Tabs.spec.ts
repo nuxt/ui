@@ -29,15 +29,16 @@ describe('Tabs', () => {
   it.each([
     // Props
     ['with items', { props }],
+    ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
-    ...variants.map((variant: string) => [`with gray variant ${variant}`, { props: { ...props, variant, color: 'gray' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ['without content', { props: { ...props, content: false } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
-    ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-gray-200 dark:ring-gray-800' } } }],
+    ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-[var(--ui-border)]' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],

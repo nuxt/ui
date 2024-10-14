@@ -21,14 +21,14 @@ prettier: true
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -48,14 +48,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
 
 #body
 :placeholder{class="h-48"}
@@ -76,14 +76,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
 
 #body
 :placeholder{class="h-48"}
@@ -105,14 +105,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
 
   content: |
 
     <Placeholder class="h-96 m-4" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
 
 #content
 :placeholder{class="h-96 m-4"}
@@ -130,14 +130,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
 
   content: |
 
     <Placeholder class="w-96 m-4" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
 
 #content
 :placeholder{class="w-96 m-4"}
@@ -155,14 +155,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -180,14 +180,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -205,26 +205,26 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="gray" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
 
 #content
 :placeholder{class="h-screen m-4"}
 ::
 
-::important
+::warning
 Make sure to add the `vaul-drawer-wrapper` directive to a parent element of your app to make this work.
 
 ```vue [app.vue]
 <template>
   <UApp>
-    <div class="bg-white dark:bg-gray-900" vaul-drawer-wrapper>
+    <div class="bg-[var(--ui-bg)]" vaul-drawer-wrapper>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -238,7 +238,7 @@ export default defineNuxtConfig({
   app: {
     rootAttrs: {
       'vaul-drawer-wrapper': '',
-      'class': 'bg-white dark:bg-gray-900'
+      'class': 'bg-[var(--ui-bg)]'
     }
   }
 })

@@ -44,7 +44,7 @@ export interface PaginationProps extends Pick<PaginationRootProps, 'defaultPage'
   ellipsisIcon?: string
   /**
    * The color of the pagination controls.
-   * @defaultValue 'gray'
+   * @defaultValue 'neutral'
    */
   color?: ButtonProps['color']
   /**
@@ -106,7 +106,7 @@ import { useAppConfig } from '#imports'
 
 const props = withDefaults(defineProps<PaginationProps>(), {
   size: 'md',
-  color: 'gray',
+  color: 'neutral',
   variant: 'outline',
   activeColor: 'primary',
   activeVariant: 'solid',

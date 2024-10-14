@@ -14,7 +14,7 @@ describe('Drawer', () => {
     ['with right direction', { props: { ...props, direction: 'right' as const, title: 'Title', description: 'Description' } }],
     ['without handle', { props: { ...props, handle: false, title: 'Title', description: 'Description' } }],
     ['without overlay', { props: { ...props, overlay: false, title: 'Title', description: 'Description' } }],
-    ['with class', { props: { ...props, class: 'bg-gray-50 dark:bg-gray-800' } }],
+    ['with class', { props: { ...props, class: 'bg-[var(--ui-bg-elevated)]' } }],
     ['with ui', { props: { ...props, ui: { handle: 'w-20' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],

@@ -1,5 +1,69 @@
 # Changelog
 
+## [3.0.0-alpha.6](https://github.com/nuxt/ui/compare/v3.0.0-alpha.5...v3.0.0-alpha.6) (2024-10-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* **module:** implement design system with CSS variables (#2298)
+
+### Features
+
+* **Carousel:** implement component ([#2288](https://github.com/nuxt/ui/issues/2288)) ([68ee3f1](https://github.com/nuxt/ui/commit/68ee3f11ca01b19cf890ef8105ffb87ef9bb3188))
+* **Form:** add Standard Schema support ([#2303](https://github.com/nuxt/ui/issues/2303)) ([0955c07](https://github.com/nuxt/ui/commit/0955c07edd8ea5b5c39b770804b8e4c6f86d94b0))
+* **module:** implement `--ui-radius` CSS variable ([#2341](https://github.com/nuxt/ui/issues/2341)) ([057e86c](https://github.com/nuxt/ui/commit/057e86cfda1ef5c7a370c99ef409d22e48772ca7))
+* **module:** set `disableTransition` option on `@nuxtjs/color-mode` ([b82af02](https://github.com/nuxt/ui/commit/b82af02839b7d75344d9431fabdc42f0ac0681e1))
+
+
+### Bug Fixes
+
+* **Accordion:** use `text-left break-words` instead of `truncate` on label ([6c7c2f0](https://github.com/nuxt/ui/commit/6c7c2f02f395747a0c68a499630f502e3f02ded3))
+* **Alert:** default variant to `solid` for consistency ([3a7c5c2](https://github.com/nuxt/ui/commit/3a7c5c26011bfcffcdf6ac3451adb2af1453b9db))
+* **Button:** center text with `block` prop ([3cf5535](https://github.com/nuxt/ui/commit/3cf5535b2faa28b557ca55d694abdfa7d7ad0efc)), closes [nuxt/ui#2317](https://github.com/nuxt/ui/issues/2317)
+* **Carousel:** move embla plugins to `dependencies` ([bee04ad](https://github.com/nuxt/ui/commit/bee04adf4cc4fd6d69e93ad94500f5ef604405e7))
+
+
+### Code Refactoring
+
+* **module:** implement design system with CSS variables ([#2298](https://github.com/nuxt/ui/issues/2298)) ([9368c6a](https://github.com/nuxt/ui/commit/9368c6a63955a2e6c2f4f900a9b91c61bb2e5a72))
+
+## [3.0.0-alpha.5](https://github.com/nuxt/ui/compare/v3.0.0-alpha.4...v3.0.0-alpha.5) (2024-10-02)
+
+
+### Features
+
+* **module:** enable `@nuxtjs/color-mode` ([9dcf903](https://github.com/nuxt/ui/commit/9dcf903926046b6e92b4784043e374d2174e4201))
+* **module:** override `dark` variant with class strategy ([0f86b87](https://github.com/nuxt/ui/commit/0f86b87385375e5bd859e84d21f8b4f06b0a99e0))
+
+
+### Bug Fixes
+
+* **Button:** props specified more than once ([66a04ad](https://github.com/nuxt/ui/commit/66a04add91389910e1336bf0be1cfeada3540f76))
+
+## [3.0.0-alpha.4](https://github.com/nuxt/ui/compare/v3.0.0-alpha.3...v3.0.0-alpha.4) (2024-10-01)
+
+
+### Features
+
+* **Drawer:** handle `direction` + `handle` props ([5f77aac](https://github.com/nuxt/ui/commit/5f77aac368448c7c45a0f9238d2dc3a5b0de825e))
+
+
+### Bug Fixes
+
+* **Accordion:** missing `min-w-0` on trigger ([6c28597](https://github.com/nuxt/ui/commit/6c285977bd175d4866ca601bca47132ebb2d3440))
+* **build.config:** disable mkdist `addRelativeDeclarationExtensions` option ([f54f607](https://github.com/nuxt/ui/commit/f54f6074131db0f68eab1edcde3a4b2a7ecaba92))
+* **CommandPalette:** missing `min-w-0` on root ([a61e765](https://github.com/nuxt/ui/commit/a61e7656c25b26409cab77178e67d1cb9ec22dbd))
+* **Drawer:** improve max-width on mobile ([fac52fa](https://github.com/nuxt/ui/commit/fac52fa933aeb02f0855d20be37c4214efba0ab7))
+* **InputMenu:** missing `group` on trailing ([2c7c41b](https://github.com/nuxt/ui/commit/2c7c41bd046a961d398bbe8ee4a5945cd1fbaeab))
+* **README:** npm badge link ([#2271](https://github.com/nuxt/ui/issues/2271)) ([30c33c7](https://github.com/nuxt/ui/commit/30c33c71134ccbea4258949a851eaf8b26213b60))
+* **templates:** app config colors type ([96c9246](https://github.com/nuxt/ui/commit/96c9246d83b54637ceb2e2dd77542e435690c387))
+* **Toast:** improve focus styles ([1f9abda](https://github.com/nuxt/ui/commit/1f9abdae614acbfa0be868a599071a601406f0f5))
+
+
+### Reverts
+
+* Revert "chore(deps): refresh lock" ([b83ecc9](https://github.com/nuxt/ui/commit/b83ecc9a6f309d37d3f096667143a4ed7700db6d))
+
 ## [3.0.0-alpha.3](https://github.com/nuxt/ui/compare/v3.0.0-alpha.2...v3.0.0-alpha.3) (2024-09-18)
 
 

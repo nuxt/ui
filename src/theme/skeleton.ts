@@ -1,3 +1,3 @@
 export default {
-  base: 'animate-pulse rounded-md bg-gray-100 dark:bg-gray-800'
+  base: 'animate-pulse rounded-[calc(var(--ui-radius)*1.5)] bg-[var(--ui-bg-elevated)]'
 }

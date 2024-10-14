@@ -13,7 +13,7 @@ function stripCompoundVariants(component?: any) {
   if (component?.compoundVariants) {
     component.compoundVariants = component.compoundVariants.filter((compoundVariant: any) => {
       if (compoundVariant.color) {
-        if (!['primary', 'gray'].includes(compoundVariant.color)) {
+        if (!['primary', 'neutral'].includes(compoundVariant.color)) {
           strippedCompoundVariants.value = true
 
           return false
@@ -21,7 +21,7 @@ function stripCompoundVariants(component?: any) {
       }
 
       if (compoundVariant.highlightColor) {
-        if (!['primary', 'gray'].includes(compoundVariant.highlightColor)) {
+        if (!['primary', 'neutral'].includes(compoundVariant.highlightColor)) {
           strippedCompoundVariants.value = true
 
           return false
@@ -53,11 +53,11 @@ export default defineAppConfig(${json5.stringify(component.value, null, 2).repla
 ::
 
 ${strippedCompoundVariants.value
-    ? `
+  ? `
 ::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v3/src/theme/${name}.ts"}
 Some colors in \`compoundVariants\` are omitted for readability. Check out the source code on GitHub.
 ::`
-    : ''}
+  : ''}
 `
 
   return parseMarkdown(md)

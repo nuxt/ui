@@ -7,7 +7,7 @@ links:
 navigation:
   badge:
     label: Todo
-    color: gray
+    color: neutral
   disabled: true
 ---
 

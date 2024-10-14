@@ -45,7 +45,7 @@ const items = [
 
 const toast = useToast()
 async function onSubmit(event: FormSubmitEvent<any>) {
-  toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'green' })
+  toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
   console.log(event.data)
 }
 </script>
@@ -103,11 +103,11 @@ async function onSubmit(event: FormSubmitEvent<any>) {
     </div>
 
     <div class="flex gap-2 mt-8">
-      <UButton color="gray" type="submit">
+      <UButton color="neutral" type="submit">
         Submit
       </UButton>
 
-      <UButton color="gray" variant="outline" @click="form?.clear()">
+      <UButton color="neutral" variant="outline" @click="form?.clear()">
         Clear
       </UButton>
     </div>

@@ -14,10 +14,10 @@ const items = [{
 
 <template>
   <UDropdownMenu :items="items" class="w-48">
-    <UButton label="Open" color="gray" variant="outline" icon="i-heroicons-bars-3" />
+    <UButton label="Open" color="neutral" variant="outline" icon="i-heroicons-bars-3" />
 
     <template #profile-trailing>
-      <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-primary-500 dark:text-primary-400" />
+      <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-[var(--ui-primary)]" />
     </template>
   </UDropdownMenu>
 </template>

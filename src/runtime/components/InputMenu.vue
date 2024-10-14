@@ -86,6 +86,11 @@ export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValu
    * @defaultValue undefined
    */
   valueKey?: keyof T
+  /**
+   * When `items` is an array of objects, select the field to use as the label.
+   * @defaultValue 'label'
+   */
+  labelKey?: keyof T
   items?: T[] | T[][]
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -118,15 +123,16 @@ export interface InputMenuSlots<T> {
 import { computed, ref, toRef, onMounted } from 'vue'
 import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
+import isEqual from 'fast-deep-equal'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { get, escapeRegExp } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
-import { get } from '../utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -134,7 +140,8 @@ const props = withDefaults(defineProps<InputMenuProps<T>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
-  filter: () => ['label']
+  filter: () => ['label'],
+  labelKey: 'label' as keyof T
 })
 const emits = defineEmits<InputMenuEmits<T>>()
 const slots = defineSlots<InputMenuSlots<T>>()
@@ -162,12 +169,10 @@ const ui = computed(() => inputMenu({
   buttonGroup: orientation.value
 }))
 
-function displayValue(val: AcceptableValue) {
-  if (typeof val === 'object') {
-    return val.label
-  }
+function displayValue(value: AcceptableValue): string {
+  const item = items.value.find(item => props.valueKey ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
 
-  return val && String(val)
+  return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
 function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: string): ArrayOrWrapped<AcceptableValue> {
@@ -175,22 +180,25 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
     return items
   }
 
-  const fields = Array.isArray(props.filter) ? props.filter : ['label']
+  const fields = Array.isArray(props.filter) ? props.filter : [props.labelKey]
+  const escapedSearchTerm = escapeRegExp(searchTerm)
 
   return items.filter((item) => {
     if (typeof item !== 'object') {
-      return String(item).search(new RegExp(searchTerm, 'i')) !== -1
+      return String(item).search(new RegExp(escapedSearchTerm, 'i')) !== -1
     }
 
     return fields.some((field) => {
-      const child = get(item, field)
+      const child = get(item, field as string)
 
-      return child !== null && child !== undefined && String(child).search(new RegExp(searchTerm, 'i')) !== -1
+      return child !== null && child !== undefined && String(child).search(new RegExp(escapedSearchTerm, 'i')) !== -1
     })
   }) as ArrayOrWrapped<T>
 }
 
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as InputMenuItem[][] : [])
+// eslint-disable-next-line vue/no-dupe-keys
+const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 const inputRef = ref<InstanceType<typeof ComboboxInput> | null>(null)
 
@@ -264,7 +272,7 @@ defineExpose({
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="(item as string)" :class="ui.tagsItem({ class: props.ui?.tagsItem })">
           <TagsInputItemText :class="ui.tagsItemText({ class: props.ui?.tagsItemText })">
             <slot name="tags-item-text" :item="(item as T)" :index="index">
-              {{ typeof item === 'object' ? item.label : item }}
+              {{ displayValue(item as T) }}
             </slot>
           </TagsInputItemText>
 
@@ -323,7 +331,7 @@ defineExpose({
           <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
-                {{ item.label }}
+                {{ get(item, props.labelKey as string) }}
               </ComboboxLabel>
 
               <ComboboxSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
@@ -332,7 +340,7 @@ defineExpose({
                 v-else
                 :class="ui.item({ class: props.ui?.item })"
                 :disabled="item.disabled"
-                :value="valueKey && typeof item === 'object' ? (item[valueKey as keyof InputMenuItem]) as AcceptableValue : item"
+                :value="valueKey && typeof item === 'object' ? get(item, props.valueKey as string) : item"
                 @select="item.select"
               >
                 <slot name="item" :item="(item as T)" :index="index">
@@ -351,7 +359,7 @@ defineExpose({
 
                   <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                     <slot name="item-label" :item="(item as T)" :index="index">
-                      {{ displayValue(item as T) }}
+                      {{ typeof item === 'object' ? get(item, props.labelKey as string) : item }}
                     </slot>
                   </span>
 

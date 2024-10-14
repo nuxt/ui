@@ -52,7 +52,7 @@ Use the `color` prop to change the color of the Button.
 ::component-code
 ---
 props:
-  color: gray
+  color: neutral
 slots:
   default: Button
 ---
@@ -65,7 +65,7 @@ Use the `variant` prop to change the variant of the Button.
 ::component-code
 ---
 props:
-  color: gray
+  color: neutral
   variant: outline
 slots:
   default: Button
@@ -211,10 +211,10 @@ ignore:
   - icon
 props:
   icon: i-heroicons-rocket-launch
-  color: gray
+  color: neutral
   variant: outline
   ui:
-    leadingIcon: 'text-primary-500 dark:text-primary-400'
+    leadingIcon: 'text-[var(--ui-primary)]'
 slots:
   default: |
 
@@ -248,6 +248,7 @@ ignore:
   - exactHash
   - external
   - active
+  - onClick
 ---
 ::
 

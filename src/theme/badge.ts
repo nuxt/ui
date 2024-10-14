@@ -1,11 +1,11 @@
 import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
-  base: 'rounded-md font-medium inline-flex items-center',
+  base: 'rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center',
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      gray: ''
+      neutral: ''
     },
     variant: {
       solid: '',
@@ -22,35 +22,35 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
-    class: `bg-${color}-500 dark:bg-${color}-400 text-white dark:text-gray-900`
+    class: `bg-[var(--ui-${color})] text-[var(--ui-bg)]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
-    class: `text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/50 dark:ring-${color}-400/50`
+    class: `text-[var(--ui-${color})] ring ring-inset ring-[var(--ui-${color})]/50`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'soft',
-    class: `bg-${color}-500/10 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400`
+    class: `bg-[var(--ui-${color})]/10 text-[var(--ui-${color})]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'subtle',
-    class: `bg-${color}-500/10 dark:bg-${color}-400/10 text-${color}-500 dark:text-${color}-400 ring ring-inset ring-${color}-500/25 dark:ring-${color}-400/25`
+    class: `bg-[var(--ui-${color})]/10 text-[var(--ui-${color})] ring ring-inset ring-[var(--ui-${color})]/25`
   })), {
-    color: 'gray',
+    color: 'neutral',
     variant: 'solid',
-    class: 'text-white dark:text-gray-900 bg-gray-900 dark:bg-white'
+    class: 'text-[var(--ui-bg)] bg-[var(--ui-bg-inverted)]'
   }, {
-    color: 'gray',
+    color: 'neutral',
     variant: 'outline',
-    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900'
+    class: 'ring ring-inset ring-[var(--ui-border-accented)] text-[var(--ui-text)] bg-[var(--ui-bg)]'
   }, {
-    color: 'gray',
+    color: 'neutral',
     variant: 'soft',
-    class: 'text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800'
+    class: 'text-[var(--ui-text)] bg-[var(--ui-bg-elevated)]'
   }, {
-    color: 'gray',
+    color: 'neutral',
     variant: 'subtle',
-    class: 'ring ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800'
+    class: 'ring ring-inset ring-[var(--ui-border-accented)] text-[var(--ui-text)] bg-[var(--ui-bg-elevated)]'
   }],
   defaultVariants: {
     color: 'primary',

@@ -9,7 +9,7 @@ describe('Collapsible', () => {
     // Props
     ['with open', { props }],
     ['with class', { props: { ...props, class: 'gap-4' } }],
-    ['with ui', { props: { ...props, ui: { content: 'bg-gray-50 dark:bg-gray-800' } } }],
+    ['with ui', { props: { ...props, ui: { content: 'bg-[var(--ui-bg-elevated)]' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }]
