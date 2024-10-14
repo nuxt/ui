@@ -1,14 +1,13 @@
 ---
 description: A responsive table element to display data in rows and columns.
 links:
+  - label: TanStack Table
+    avatar:
+      src: https://github.com/tanstack.png
+    to: https://tanstack.com/table/latest
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Table.vue
-navigation:
-  badge:
-    label: Todo
-    color: neutral
-  disabled: true
 ---
 
 ## Usage
