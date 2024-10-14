@@ -66,8 +66,8 @@ defineShortcuts({
 
 <template>
   <UApp :toaster="appConfig.toaster">
-    <div class="h-screen w-screen overflow-hidden flex min-h-0 bg-[--ui-bg]" vaul-drawer-wrapper>
-      <UNavigationMenu :items="items" orientation="vertical" class="border-r border-[--ui-border] overflow-y-auto w-48 p-4" />
+    <div class="h-screen w-screen overflow-hidden flex min-h-0 bg-[var(--ui-bg)]" vaul-drawer-wrapper>
+      <UNavigationMenu :items="items" orientation="vertical" class="border-r border-[var(--ui-border)] overflow-y-auto w-48 p-4" />
 
       <div class="flex-1 flex flex-col items-center justify-around overflow-y-auto w-full py-12 px-4">
         <NuxtPage />
