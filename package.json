@@ -59,7 +59,7 @@
     "@nuxt/eslint-config": "^0.4.0",
     "@nuxt/module-builder": "^0.8.4",
     "@nuxt/test-utils": "^3.14.3",
-    "@release-it/conventional-changelog": "^8.0.2",
+    "@release-it/conventional-changelog": "^9.0.0",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^8.57.0",
     "happy-dom": "^14.12.3",
