@@ -127,7 +127,7 @@ export default defineComponent({
       default: () => ({})
     },
     modelModifiers: {
-      type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean }>,
+      type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean, nullify?: boolean }>,
       default: () => ({})
     }
   },
@@ -137,7 +137,7 @@ export default defineComponent({
 
     const { emitFormBlur, emitFormInput, inputId, color, size, name } = useFormGroup(props, config)
 
-    const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
+    const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false, nullify: false }))
 
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
@@ -181,6 +181,10 @@ export default defineComponent({
 
       if (modelModifiers.value.number) {
         value = looseToNumber(value)
+      }
+
+      if (modelModifiers.value.nullify) {
+        value ||= null
       }
 
       emit('update:modelValue', value)
