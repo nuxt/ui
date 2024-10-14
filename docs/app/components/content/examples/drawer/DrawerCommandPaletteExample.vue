@@ -32,7 +32,7 @@ const groups = computed(() => [{
         :loading="status === 'pending'"
         :groups="groups"
         placeholder="Search users..."
-        class="h-96 border-t border-[--ui-border]"
+        class="h-96 border-t border-[var(--ui-border)]"
       />
     </template>
   </UDrawer>

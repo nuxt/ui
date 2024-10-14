@@ -203,7 +203,7 @@ props:
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
-  class: 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-[--ui-border]'
+  class: 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-[var(--ui-border)]'
 ---
 ::
 

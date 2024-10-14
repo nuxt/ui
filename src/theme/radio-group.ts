@@ -4,24 +4,24 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative',
     fieldset: 'flex',
-    legend: 'mb-1 block font-medium text-[--ui-text]',
+    legend: 'mb-1 block font-medium text-[var(--ui-text)]',
     item: 'flex items-start',
-    base: 'rounded-full ring ring-inset ring-[--ui-border-accented] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-offset-[--ui-bg]',
-    indicator: 'flex items-center justify-center size-full rounded-full after:bg-[--ui-bg] after:rounded-full',
+    base: 'rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-offset-[var(--ui-bg)]',
+    indicator: 'flex items-center justify-center size-full rounded-full after:bg-[var(--ui-bg)] after:rounded-full',
     container: 'flex items-center',
     wrapper: 'ms-2',
-    label: 'block font-medium text-[--ui-text]',
-    description: 'text-[--ui-text-muted]'
+    label: 'block font-medium text-[var(--ui-text)]',
+    description: 'text-[var(--ui-text-muted)]'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `focus-visible:outline-[--ui-${color}]`,
-        indicator: `bg-[--ui-${color}]`
+        base: `focus-visible:outline-[var(--ui-${color})]`,
+        indicator: `bg-[var(--ui-${color})]`
       }])),
       neutral: {
-        base: 'focus-visible:outline-[--ui-border-inverted]',
-        indicator: 'bg-[--ui-bg-inverted]'
+        base: 'focus-visible:outline-[var(--ui-border-inverted)]',
+        indicator: 'bg-[var(--ui-bg-inverted)]'
       }
     },
     orientation: {
@@ -83,7 +83,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     required: {
       true: {
-        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-[--ui-error]'
+        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-[var(--ui-error)]'
       }
     }
   },
