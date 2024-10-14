@@ -17,7 +17,7 @@ importers:
         specifier: ^0.10.0
         version: 0.10.0(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.0)(vite@5.4.9(@types/node@22.7.5)(lightningcss@1.27.0)(terser@5.34.1))
       '@nuxt/icon':
-        specifier: ^1.5.5
+        specifier: ^1.5.6
         version: 1.5.6(magicast@0.3.5)(rollup@4.24.0)(vite@5.4.9(@types/node@22.7.5)(lightningcss@1.27.0)(terser@5.34.1))(vue@3.5.12(typescript@5.6.3))
       '@nuxt/kit':
         specifier: ^3.13.2
@@ -123,13 +123,13 @@ importers:
         specifier: ^3.13.2
         version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.7.5)(eslint@9.12.0(jiti@2.3.3))(ioredis@5.4.1)(lightningcss@1.27.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.24.0)(terser@5.34.1)(typescript@5.6.3)(vite@5.4.9(@types/node@22.7.5)(lightningcss@1.27.0)(terser@5.34.1))(vue-tsc@2.1.6(typescript@5.6.3))
       release-it:
-        specifier: ^17.7.0
+        specifier: ^17.8.2
         version: 17.8.2(typescript@5.6.3)
       valibot:
         specifier: ^0.42.1
         version: 0.42.1(typescript@5.6.3)
       vitest:
-        specifier: ^2.1.2
+        specifier: ^2.1.3
         version: 2.1.3(@types/node@22.7.5)(happy-dom@14.12.3)(lightningcss@1.27.0)(terser@5.34.1)
       vitest-environment-nuxt:
         specifier: ^1.0.1
@@ -165,7 +165,7 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       '@iconify-json/simple-icons':
-        specifier: ^1.2.7
+        specifier: ^1.2.8
         version: 1.2.8
       '@iconify-json/vscode-icons':
         specifier: ^1.2.2
@@ -183,7 +183,7 @@ importers:
         specifier: 2.0.0-alpha.6
         version: 2.0.0-alpha.6(magicast@0.3.5)(rollup@4.24.0)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))
       '@nuxthub/core':
-        specifier: ^0.7.26
+        specifier: ^0.7.31
         version: 0.7.31(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.0)(vite@5.4.9(@types/node@22.7.5)(lightningcss@1.27.0)(terser@5.34.1))
       '@nuxtjs/plausible':
         specifier: ^1.0.3
