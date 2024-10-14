@@ -39,13 +39,13 @@ defineSlots<TableSlots<T>>()
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = table()
 
-const sortingState = defineModel<SortingState>('sorting', { default: undefined })
+const sortingState = defineModel<SortingState>('sorting', { default: [] })
 const paginationState = defineModel<PaginationState>('pagination', { default: undefined })
-const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: undefined })
-const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: undefined })
-const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: undefined })
-const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: undefined })
-const expandedState = defineModel<ExpandedState>('expanded', { default: undefined })
+const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
+const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: {} })
+const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: {} })
+const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
+const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 
 const columns = computed<ColumnDef<T>[]>(() => props.columns ?? Object.keys(props.data[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 
