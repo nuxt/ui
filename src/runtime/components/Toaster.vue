@@ -4,7 +4,7 @@ import type { ToastProviderProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toaster'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { toaster: Partial<typeof theme> } }
 
@@ -87,7 +87,7 @@ function getOffset(index: number) {
   return refs.value.slice(index + 1).reduce((acc, { height }) => acc + height + 16, 0)
 }
 
-extendComponentMeta({ ignore: true })
+extendDevtoolsMeta({ ignore: true })
 </script>
 
 <template>

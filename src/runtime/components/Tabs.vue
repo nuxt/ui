@@ -7,7 +7,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
 import type { AvatarProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
 
@@ -65,7 +65,7 @@ export type TabsSlots<T extends { slot?: string }> = {
   content: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
-extendComponentMeta({
+extendDevtoolsMeta({
   defaultProps: {
     items: [{
       label: 'Tab1',

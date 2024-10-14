@@ -8,7 +8,7 @@ import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { AcceptableValue, ArrayOrWrapped, PartialString } from '../types/utils'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
 
@@ -119,7 +119,7 @@ export interface InputMenuSlots<T> {
   'tags-item-delete': SlotProps<T>
 }
 
-extendComponentMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
+extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends InputMenuItem | AcceptableValue">

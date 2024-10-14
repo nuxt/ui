@@ -4,7 +4,7 @@ import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverCon
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/popover'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { popover: Partial<typeof theme> } }
 
@@ -42,7 +42,7 @@ export interface PopoverSlots {
   content(props?: {}): any
 }
 
-extendComponentMeta({ example: 'PopoverExample' })
+extendDevtoolsMeta({ example: 'PopoverExample' })
 </script>
 
 <script setup lang="ts">

@@ -7,7 +7,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -72,7 +72,7 @@ export type DropdownMenuSlots<T extends { slot?: string }> = {
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
-extendComponentMeta({
+extendDevtoolsMeta({
   example: 'DropdownMenuExample',
   defaultProps: {
     items: [

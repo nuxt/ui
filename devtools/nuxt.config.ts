@@ -1,4 +1,5 @@
 import module from '../src/module'
+import { resolve } from 'node:path'
 
 export default defineNuxtConfig({
   ssr: false,
@@ -8,6 +9,9 @@ export default defineNuxtConfig({
       'prerender:routes': function (routes) {
         routes.clear()
       }
+    },
+    output: {
+      publicDir: resolve(__dirname, '../dist/client/devtools')
     }
   },
 

@@ -5,7 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/radio-group'
 import type { AcceptableValue } from '../types/utils'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
 
@@ -64,7 +64,7 @@ export interface RadioGroupSlots<T> {
   description: SlotProps<T>
 }
 
-extendComponentMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
+extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends RadioGroupItem | AcceptableValue">

@@ -3,7 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/button-group'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { buttonGroup: Partial<typeof theme> } }
 
@@ -30,7 +30,7 @@ export interface ButtonGroupSlots {
   default(props?: {}): any
 }
 
-extendComponentMeta({
+extendDevtoolsMeta({
   example: 'ButtonGroupExample'
 })
 </script>

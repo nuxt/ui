@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
 import type { DynamicSlots } from '../types/utils'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
 
@@ -55,7 +55,7 @@ export type AccordionSlots<T extends { slot?: string }> = {
   body: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
-extendComponentMeta({
+extendDevtoolsMeta({
   defaultProps: {
     items: [{
       label: 'Getting Started',

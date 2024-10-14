@@ -3,7 +3,7 @@ import { onDevtoolsClientConnected } from '@nuxt/devtools-kit/iframe-client'
 import type { ClientFunctions, ServerFunctions, Component } from '../../src/devtools/rpc'
 import type { BirpcReturn } from 'birpc'
 import { watchDebounced } from '@vueuse/core'
-import type { DevtoolsMeta } from '../../src/devtools/extendComponentMeta'
+import type { DevtoolsMeta } from '../../src/runtime/composables/extendDevtoolsMeta'
 import type { ComponentMeta } from 'vue-component-meta'
 
 // Disable devtools in component renderer iframe
@@ -20,6 +20,7 @@ onDevtoolsClientConnected(async (client) => {
   rpc = client.devtools.extendClientRpc<ServerFunctions, ClientFunctions>('nuxt/ui/devtools', { })
   const componentMeta = await $fetch<Record<string, { meta: ComponentMeta & { devtools: DevtoolsMeta<any> } }>>('/api/component-meta')
 
+  console.log('Meta', componentMeta)
   components.value = (await rpc.getComponents()).flatMap((component) => {
     if (componentMeta[component.slug]?.meta.devtools?.ignore) return []
     return [{

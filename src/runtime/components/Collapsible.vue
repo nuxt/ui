@@ -4,7 +4,7 @@ import type { CollapsibleRootProps, CollapsibleRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/collapsible'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { collapsible: Partial<typeof theme> } }
 
@@ -27,7 +27,7 @@ export interface CollapsibleSlots {
   content(props?: {}): any
 }
 
-extendComponentMeta({ example: 'CollapsibleExample' })
+extendDevtoolsMeta({ example: 'CollapsibleExample' })
 </script>
 
 <script setup lang="ts">

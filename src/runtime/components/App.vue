@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'radix-vue'
 import type { ToasterProps } from '../types'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
   tooltip?: TooltipProviderProps
@@ -28,7 +28,7 @@ const configProviderProps = useForwardProps(reactivePick(props, 'dir', 'scrollBo
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
 
-extendComponentMeta({ ignore: true })
+extendDevtoolsMeta({ ignore: true })
 </script>
 
 <template>

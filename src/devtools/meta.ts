@@ -2,12 +2,13 @@ import type { ViteDevServer } from 'vite'
 import { kebabCase } from 'scule'
 import defu from 'defu'
 import fs from 'node:fs'
-import { resolve } from 'node:path'
+import { createResolver } from '@nuxt/kit'
 
+const { resolve } = createResolver(import.meta.url)
 const devtoolsComponentMeta: Record<string, any> = {}
 
 function extractComponentMeta(code: string): string | null {
-  const match = code.match(/extendComponentMeta(?:<.*?>)?\(/)
+  const match = code.match(/extendDevtoolsMeta(?:<.*?>)?\(/)
   if (!match) return null
 
   const startIndex = code.indexOf(match[0]) + match[0].length
@@ -24,7 +25,7 @@ function extractComponentMeta(code: string): string | null {
       break
     }
   }
-  // Return only the object inside extendComponentMeta
+  // Return only the object inside extendDevtoolsMeta
   return code.slice(startIndex, endIndex).trim()
 }
 
@@ -56,31 +57,33 @@ export function devtoolsMetaPlugin() {
       server.middlewares.use('/__nuxt_ui__/devtools/api/component-meta', async (_req, res) => {
         res.setHeader('Content-Type', 'application/json')
         const componentMeta = await import('./.component-meta/component-meta')
+        const meta = defu(
+          Object.entries(componentMeta.default).reduce((acc, [key, value]: [string, any]) => {
+            if (!key.startsWith('U')) return acc
 
-        const meta = defu(Object.entries(componentMeta).reduce((acc, [key, value]: [string, any]) => {
-          if (!key.startsWith('U')) return acc
+            value.meta.props = value.meta.props.map((prop: any) => {
+              let defaultValue = prop.default
+                ? prop.default
+                : prop?.tags?.find((tag: any) =>
+                  tag.name === 'defaultValue'
+                  && !tag.text?.includes('appConfig'))?.text
 
-          value.meta.props = value.meta.props.map((prop: any) => {
-            let defaultValue = prop.default
-              ? prop.default
-              : prop?.tags?.find((tag: any) =>
-                tag.name === 'defaultValue'
-                && !tag.text?.includes('appConfig'))?.text
+              if (typeof defaultValue === 'string') defaultValue = defaultValue?.replaceAll(/["'`]/g, '')
+              if (defaultValue === 'true') defaultValue = true
+              if (defaultValue === 'false') defaultValue = false
+              if (Number.parseInt(defaultValue)) defaultValue = Number.parseInt(defaultValue)
 
-            if (typeof defaultValue === 'string') defaultValue = defaultValue?.replaceAll(/["'`]/g, '')
-            if (defaultValue === 'true') defaultValue = true
-            if (defaultValue === 'false') defaultValue = false
-            if (Number.parseInt(defaultValue)) defaultValue = Number.parseInt(defaultValue)
+              return {
+                ...prop,
+                default: defaultValue
+              }
+            })
 
-            return {
-              ...prop,
-              default: defaultValue
-            }
-          })
-
-          acc[kebabCase(key.replace(/^U/, ''))] = value
-          return acc
-        }, {} as Record<string, any>), devtoolsComponentMeta)
+            acc[kebabCase(key.replace(/^U/, ''))] = value
+            return acc
+          }, {} as Record<string, any>),
+          devtoolsComponentMeta
+        )
 
         res.end(JSON.stringify(meta))
       })
@@ -95,11 +98,9 @@ export function devtoolsMetaPlugin() {
         }
 
         try {
-          // Define the path to your component
-          const componentPath = resolve(__dirname, `../devtools/examples/${componentName}.vue`)
-
-          // Read the component's source code
+          const componentPath = resolve(`./runtime/examples/${componentName}.vue`)
           const sourceCode = fs.readFileSync(componentPath, 'utf-8')
+
           res.setHeader('Content-Type', 'application/json')
           res.end(JSON.stringify({ component: componentName, source: sourceCode }))
         } catch (error) {

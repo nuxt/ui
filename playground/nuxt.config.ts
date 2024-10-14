@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['../src/module'],
+  modules: ['../dist/module'],
 
   future: {
     compatibilityVersion: 4

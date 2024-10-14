@@ -30,7 +30,7 @@
     "cli"
   ],
   "scripts": {
-    "build": "nuxt-module-build build",
+    "build": "nuxt-module-build build && nuxi generate devtools",
     "prepack": "pnpm build",
     "dev": "DEV=true nuxi dev playground",
     "dev:build": "nuxi build playground",
@@ -47,6 +47,7 @@
     "release": "release-it --preRelease=alpha --npm.tag=next"
   },
   "dependencies": {
+    "@nuxt/devtools-kit": "^1.6.0",
     "@nuxt/fonts": "^0.10.0",
     "@nuxt/icon": "^1.5.5",
     "@nuxt/kit": "^3.13.2",
@@ -65,9 +66,11 @@
     "embla-carousel-vue": "^8.3.0",
     "embla-carousel-wheel-gestures": "^8.0.1",
     "fuse.js": "^7.0.0",
+    "get-port-please": "^3.1.2",
     "ohash": "^1.1.4",
     "radix-vue": "^1.9.7",
     "scule": "^1.3.0",
+    "sirv": "^2.0.4",
     "tailwind-variants": "^0.2.1",
     "tailwindcss": "4.0.0-alpha.24",
     "vaul-vue": "^0.2.0"
@@ -86,7 +89,6 @@
     "knitwork": "^1.1.0",
     "nuxt": "^3.13.2",
     "nuxt-component-meta": "^0.8.2",
-    "sirv": "^2.0.4",
     "release-it": "^17.7.0",
     "valibot": "^0.42.1",
     "vitest": "^2.1.2",

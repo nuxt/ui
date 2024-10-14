@@ -6,9 +6,7 @@
       'https://picsum.photos/320/320?v=2',
       'https://picsum.photos/320/320?v=3'
     ]"
-    :ui="{ item: 'basis-1/3' }"
-    class="w-full max-w-xs mx-auto"
   >
-    <img :src="item" class="rounded-lg">
+    <img :src="item" class="rounded-lg basis-1/3">
   </UCarousel>
 </template>

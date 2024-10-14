@@ -5,7 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/switch'
 import type { PartialString } from '../types/utils'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { switch: Partial<typeof theme> } }
 
@@ -50,7 +50,7 @@ export interface SwitchSlots {
   description(props: { description?: string }): any
 }
 
-extendComponentMeta({ defaultProps: { label: 'Switch me!' } })
+extendDevtoolsMeta({ defaultProps: { label: 'Switch me!' } })
 </script>
 
 <script setup lang="ts">

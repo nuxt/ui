@@ -5,7 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/slideover'
 import type { ButtonProps } from '../types'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { slideover: Partial<typeof theme> } }
 
@@ -67,7 +67,7 @@ export interface SlideoverSlots {
   footer(props?: {}): any
 }
 
-extendComponentMeta({ example: 'SlideoverExample' })
+extendDevtoolsMeta({ example: 'SlideoverExample' })
 </script>
 
 <script setup lang="ts">

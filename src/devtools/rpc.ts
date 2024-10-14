@@ -3,7 +3,7 @@ import { extendServerRpc, onDevToolsInitialized } from '@nuxt/devtools-kit'
 import * as theme from '../theme'
 import type { ModuleOptions } from '../module'
 import { upperFirst, camelCase, kebabCase } from 'scule'
-import type { DevtoolsMeta } from './extendComponentMeta'
+import type { DevtoolsMeta } from '../runtime/composables/extendDevtoolsMeta'
 
 export type Component = {
   slug: string

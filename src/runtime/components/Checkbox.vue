@@ -4,7 +4,7 @@ import type { CheckboxRootProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/checkbox'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { checkbox: Partial<typeof theme> } }
 
@@ -44,7 +44,7 @@ export interface CheckboxSlots {
   description(props: { description?: string }): any
 }
 
-extendComponentMeta({ defaultProps: { label: 'Check me!' } })
+extendDevtoolsMeta({ defaultProps: { label: 'Check me!' } })
 </script>
 
 <script setup lang="ts">

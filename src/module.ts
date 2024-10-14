@@ -177,22 +177,21 @@ export default defineNuxtModule<ModuleOptions>({
         })
       } else {
         nuxt.hook('vite:serverCreated', async (server) => {
-          server.middlewares.use('/__nuxt_ui__/devtools', sirv(resolve('../devtools/dist'), {
-            single: true,
-            dev: true
+          server.middlewares.use('/__nuxt_ui__/devtools', sirv(resolve('../dist/client/devtools'), {
+            single: true
           }))
         })
       }
-
-      nuxt.hook('app:resolve', (app) => {
-        app.rootComponent = resolve('./devtools/nuxt-root.vue')
-      })
 
       extendPages((pages) => {
         pages.unshift({
           name: 'ui-devtools',
           path: '/__nuxt_ui__/components/:slug',
-          file: resolve(__dirname, './devtools/ComponentRenderer.vue')
+          file: resolve(__dirname, './runtime/DevtoolsRenderer.vue')
+          // https://github.com/nuxt/nuxt/pull/29366
+          // meta: {
+          //   isolate: true
+          // }
         })
       })
 

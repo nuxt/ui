@@ -5,7 +5,7 @@ import type { DialogContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/drawer'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { drawer: Partial<typeof theme> } }
 
@@ -53,7 +53,7 @@ export interface DrawerSlots {
   footer(props?: {}): any
 }
 
-extendComponentMeta({ example: 'DrawerExample' })
+extendDevtoolsMeta({ example: 'DrawerExample' })
 </script>
 
 <script setup lang="ts">

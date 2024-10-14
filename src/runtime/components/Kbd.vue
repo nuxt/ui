@@ -4,7 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { kbd: Partial<typeof theme> } }
 
@@ -27,7 +27,7 @@ export interface KbdProps {
 export interface KbdSlots {
   default(props?: {}): any
 }
-extendComponentMeta({ defaultProps: { value: 'K' } })
+extendDevtoolsMeta({ defaultProps: { value: 'K' } })
 </script>
 
 <script setup lang="ts">

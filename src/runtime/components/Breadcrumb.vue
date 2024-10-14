@@ -6,7 +6,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
 import type { AvatarProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
 
@@ -50,7 +50,7 @@ export type BreadcrumbSlots<T extends { slot?: string }> = {
   'separator'(props?: {}): any
 } & DynamicSlots<T, SlotProps<T>>
 
-extendComponentMeta({
+extendDevtoolsMeta({
   defaultProps: {
     items: [
       { label: 'Home', to: '/' },

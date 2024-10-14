@@ -4,7 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
-import { extendComponentMeta } from '../../devtools/extendComponentMeta'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
 
@@ -31,7 +31,7 @@ export interface FormSlots {
   default(props?: {}): any
 }
 
-extendComponentMeta({
+extendDevtoolsMeta({
   example: 'FormExample'
 })
 </script>

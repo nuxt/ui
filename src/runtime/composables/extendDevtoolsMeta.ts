@@ -4,4 +4,4 @@ export type DevtoolsMeta<T> = {
   ignore?: boolean
 }
 
-export function extendComponentMeta<T>(_meta: DevtoolsMeta<T>) { }
+export function extendDevtoolsMeta<T>(_meta: DevtoolsMeta<T>) { }
