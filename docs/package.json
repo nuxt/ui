@@ -24,5 +24,8 @@
     "valibot": "^0.42.1",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.4"
   }
 }
