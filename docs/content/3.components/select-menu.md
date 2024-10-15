@@ -55,7 +55,7 @@ You can also pass an array of objects with the following properties:
 - [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
 - [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
 - `disabled?: boolean`{lang="ts-type"}
-- `select?(e: Event): void`{lang="ts-type"}
+- `onSelect?(e: Event): void`{lang="ts-type"}
 
 ::component-code
 ---

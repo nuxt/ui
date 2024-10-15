@@ -17,25 +17,15 @@ describe('DropdownMenu', () => {
     [{
       label: 'Profile',
       icon: 'i-heroicons-user',
-      slot: 'custom',
-      select(e: Event) {
-        e.preventDefault()
-        console.log('Profile clicked')
-      }
+      slot: 'custom'
     }, {
       label: 'Billing',
       icon: 'i-heroicons-credit-card',
-      kbds: ['meta', 'b'],
-      select() {
-        console.log('Billing clicked')
-      }
+      kbds: ['meta', 'b']
     }, {
       label: 'Settings',
       icon: 'i-heroicons-cog',
-      kbds: ['?'],
-      select() {
-        console.log('Settings clicked')
-      }
+      kbds: ['?']
     }], [{
       label: 'Team',
       icon: 'i-heroicons-users'
@@ -48,11 +38,7 @@ describe('DropdownMenu', () => {
       }, {
         label: 'Invite by link',
         icon: 'i-heroicons-link',
-        kbds: ['meta', 'i'],
-        select(e: Event) {
-          e?.preventDefault()
-          console.log('Invite by link clicked')
-        }
+        kbds: ['meta', 'i']
       }], [{
         label: 'More',
         icon: 'i-heroicons-plus-circle',
@@ -60,42 +46,24 @@ describe('DropdownMenu', () => {
           label: 'Import from Slack',
           icon: 'i-simple-icons-slack',
           to: 'https://slack.com',
-          target: '_blank',
-          select(e: Event) {
-            e.preventDefault()
-            console.log('Import from Slack clicked')
-          }
+          target: '_blank'
         }, {
           label: 'Import from Trello',
-          icon: 'i-simple-icons-trello',
-          select(e: Event) {
-            e.preventDefault()
-            console.log('Import from Trello clicked')
-          }
+          icon: 'i-simple-icons-trello'
         }, {
           label: 'Import from Asana',
-          icon: 'i-simple-icons-asana',
-          select(e: Event) {
-            e.preventDefault()
-            console.log('Import from Asana clicked')
-          }
+          icon: 'i-simple-icons-asana'
         }]
       }]]
     }, {
       label: 'New team',
       icon: 'i-heroicons-plus',
-      kbds: ['meta', 'n'],
-      select() {
-        console.log('New team clicked')
-      }
+      kbds: ['meta', 'n']
     }], [{
       label: 'GitHub',
       icon: 'i-simple-icons-github',
       to: 'https://github.com/nuxt/ui',
-      target: '_blank',
-      select(e: Event) {
-        e.preventDefault()
-      }
+      target: '_blank'
     }, {
       label: 'Support',
       icon: 'i-heroicons-lifebuoy',
@@ -112,10 +80,7 @@ describe('DropdownMenu', () => {
     }], [{
       label: 'Logout',
       icon: 'i-heroicons-arrow-right-start-on-rectangle',
-      kbds: ['shift', 'meta', 'q'],
-      select() {
-        console.log('Logout clicked')
-      }
+      kbds: ['shift', 'meta', 'q']
     }]
   ]
 

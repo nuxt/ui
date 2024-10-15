@@ -123,12 +123,16 @@ const items = [{
   label: 'Save',
   icon: 'i-heroicons-document-arrow-down',
   kbds: ['meta', 'S'],
-  select: () => save()
+  onSelect() {
+    save()
+  }
 }, {
   label: 'Copy',
   icon: 'i-heroicons-document-duplicate',
   kbds: ['meta', 'C'],
-  select: () => copy()
+  onSelect() {
+    copy()
+  }
 }]
 
 defineShortcuts(extractShortcuts(items))

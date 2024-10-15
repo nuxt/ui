@@ -22,11 +22,11 @@ Use the `items` prop as an array of objects with the following properties:
 - `icon?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
-- `type?: "link" | "label" | "separator"`{lang="ts-type"}
+- [`type?: "link" | "label" | "separator" | "checkbox"`{lang="ts-type"}](#with-checkbox-items)
 - `disabled?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `select?(e: Event): void`{lang="ts-type"}
+- `onSelect?(e: Event): void`{lang="ts-type"}
 
 You can also pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
@@ -174,6 +174,21 @@ slots:
 
 ## Examples
 
+### With checkbox items
+
+You can use the `type` property with `checkbox` and use the `checked` / `onUpdateChecked` properties to control the checked state of the item.
+
+::component-example
+---
+collapse: true
+name: 'context-menu-checkbox-items-example'
+---
+::
+
+::note
+To ensure reactivity for the `checked` state of items, it's recommended to wrap your `items` array inside a `computed`.
+::
+
 ### With custom slot
 
 Use the `slot` property to customize a specific item.
@@ -207,13 +222,13 @@ const items = [
   [{
     label: 'Show Sidebar',
     kbds: ['meta', 'S'],
-    select() {
+    onSelect() {
       console.log('Show Sidebar clicked')
     }
   }, {
     label: 'Show Toolbar',
     kbds: ['shift', 'meta', 'D'],
-    select() {
+    onSelect() {
       console.log('Show Toolbar clicked')
     }
   }, {
@@ -232,25 +247,25 @@ const items = [
     children: [[{
       label: 'View Source',
       kbds: ['option', 'meta', 'U'],
-      select() {
+      onSelect() {
         console.log('View Source clicked')
       }
     }, {
       label: 'Developer Tools',
       kbds: ['option', 'meta', 'I'],
-      select() {
+      onSelect() {
         console.log('Developer Tools clicked')
       }
     }], [{
       label: 'Inspect Elements',
       kbds: ['option', 'meta', 'C'],
-      select() {
+      onSelect() {
         console.log('Inspect Elements clicked')
       }
     }], [{
       label: 'JavaScript Console',
       kbds: ['option', 'meta', 'J'],
-      select() {
+      onSelect() {
         console.log('JavaScript Console clicked')
       }
     }]]

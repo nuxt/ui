@@ -43,7 +43,7 @@ Each group takes some `items` as an array of objects with the following properti
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `select?(e?: Event): void`{lang="ts-type"}
+- `onSelect?(e?: Event): void`{lang="ts-type"}
 
 ::component-code
 ---
