@@ -585,6 +585,16 @@ name: 'input-menu-open-example'
 In this example, press :kbd{value="O"} to toggle the InputMenu.
 ::
 
+### Control open state on focus
+
+Use the `@focus` directive to control the open state.
+
+::component-example
+---
+name: 'input-menu-open-focus-example'
+---
+::
+
 ### Control search term
 
 Use the `v-model:search-term` directive to control the search term.
