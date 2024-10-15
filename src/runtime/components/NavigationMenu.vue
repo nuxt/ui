@@ -133,6 +133,9 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               v-bind="item.children?.length ? { disabled: item.disabled } : { active }"
               as-child
               :active="active"
+              :ui="item.children?.length && orientation === 'vertical'
+                ? { content: ui.content({ class: props.ui?.content }) }
+                : {}"
               @select="item.select"
             >
               <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active, disabled: !!item.disabled })">
