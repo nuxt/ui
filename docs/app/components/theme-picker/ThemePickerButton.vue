@@ -6,7 +6,6 @@
     :label="label"
     :variant="selected ? 'soft' : 'outline'"
     class="capitalize ring-[var(--ui-border)] rounded-[var(--ui-radius)] text-[11px]"
-    @click.stop.prevent="$emit('select')"
   >
     <template v-if="chip" #leading>
       <span
@@ -28,5 +27,4 @@ defineProps<{
   chip?: string
   selected?: boolean
 }>()
-defineEmits(['select'])
 </script>
