@@ -89,7 +89,7 @@ const groups = ref([
           'meta',
           'N'
         ],
-        select: () => {
+        onSelect() {
           console.log('Add new file')
         }
       },
@@ -101,7 +101,7 @@ const groups = ref([
           'meta',
           'F'
         ],
-        select: () => {
+        onSelect() {
           console.log('Add new folder')
         }
       },
@@ -113,7 +113,7 @@ const groups = ref([
           'meta',
           'H'
         ],
-        select: () => {
+        onSelect() {
           console.log('Add hashtag')
         }
       },
@@ -125,7 +125,7 @@ const groups = ref([
           'meta',
           'L'
         ],
-        select: () => {
+        onSelect() {
           console.log('Add label')
         }
       }
@@ -134,8 +134,8 @@ const groups = ref([
 ])
 
 function onSelect(item: any) {
-  if (item.select) {
-    item.select()
+  if (item.onSelect) {
+    item.onSelect()
   } else if (item.to) {
     if (typeof item.to === 'string' && (item.target === '_blank' || item.to.startsWith('http'))) {
       window.open(item.to, item.target || '_blank')

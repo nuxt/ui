@@ -31,9 +31,9 @@ function removeItem() {
     state.items.pop()
   }
 }
-const formItemRef = ref()
 
 const toast = useToast()
+
 async function onSubmit(event: FormSubmitEvent<any>) {
   toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
   console.log(event.data)
@@ -42,7 +42,6 @@ async function onSubmit(event: FormSubmitEvent<any>) {
 
 <template>
   <UForm
-    ref="formItemRef"
     :state="state"
     :schema="schema"
     class="gap-4 flex flex-col w-60"

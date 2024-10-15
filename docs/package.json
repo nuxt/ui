@@ -9,8 +9,8 @@
     "@nuxt/content": "3.0.0-alpha.0",
     "@nuxt/image": "^1.8.1",
     "@nuxt/ui": "latest",
-    "@nuxt/ui-pro": "2.0.0-alpha.6",
-    "@nuxthub/core": "^0.7.31",
+    "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@defb4d9",
+    "@nuxthub/core": "^0.7.32",
     "@nuxtjs/plausible": "^1.0.3",
     "@octokit/rest": "^21.0.2",
     "@vueuse/nuxt": "^11.1.0",
@@ -24,5 +24,8 @@
     "valibot": "^0.42.1",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.4"
   }
 }
