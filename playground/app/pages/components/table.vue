@@ -2,11 +2,19 @@
 import { h } from 'vue'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 import { UBadge, UButton, UCheckbox, UDropdownMenu, UTable } from '#components'
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn, Table } from '@nuxt/ui'
 
 const toast = useToast()
 
-const data = [{
+type Payment = {
+  id: string
+  date: string
+  status: 'paid' | 'failed' | 'refunded'
+  email: string
+  amount: number
+}
+
+const data: Payment[] = [{
   id: '4600',
   date: '2024-03-11T15:30:00',
   status: 'paid',
@@ -128,7 +136,7 @@ const data = [{
   amount: 567
 }]
 
-const columns: TableColumn<typeof data[number]>[] = [{
+const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
     'modelValue': table.getIsAllPageRowsSelected(),
@@ -169,8 +177,7 @@ const columns: TableColumn<typeof data[number]>[] = [{
       refunded: 'neutral' as const
     })[row.getValue('status') as string]
 
-    return h(UBadge, {
-      class: 'capitalize', variant: 'subtle', color }, row.getValue('status'))
+    return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
   }
 }, {
   accessorKey: 'email',
@@ -209,7 +216,7 @@ const columns: TableColumn<typeof data[number]>[] = [{
       label: 'Actions'
     }, {
       label: 'Copy payment ID',
-      select() {
+      onSelect() {
         navigator.clipboard.writeText(row.original.id)
 
         toast.add({
@@ -220,7 +227,7 @@ const columns: TableColumn<typeof data[number]>[] = [{
       }
     }, {
       label: row.getIsExpanded() ? 'Collapse' : 'Expand',
-      select() {
+      onSelect() {
         row.toggleExpanded()
       }
     }, {
@@ -231,7 +238,7 @@ const columns: TableColumn<typeof data[number]>[] = [{
       label: 'View payment details'
     }]
 
-    return h('div', { class: 'text-right' }, h(UDropdownMenu, {
+    return h('div', { class: 'text-right' }, () => h(UDropdownMenu, {
       content: {
         align: 'end'
       },
@@ -245,16 +252,17 @@ const columns: TableColumn<typeof data[number]>[] = [{
   }
 }]
 
-const table = ref<ComponentExposed<typeof UTable<typeof data[number]>>>()
+const table = ref<Table<Payment>>()
 </script>
 
 <template>
   <div class="h-full flex flex-col flex-1 gap-4 w-full -my-8">
     <div class="flex gap-2 items-center">
       <UInput
+        ref="input"
+        :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
         class="max-w-sm"
         placeholder="Filter emails..."
-        :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
         @update:model-value="table?.tableApi?.getColumn('email')?.setFilterValue($event)"
       />
 
@@ -265,11 +273,23 @@ const table = ref<ComponentExposed<typeof UTable<typeof data[number]>>>()
         label-key="id"
         :content="{ align: 'end' }"
       >
-        <UButton label="Columns" color="neutral" variant="outline" trailing-icon="i-heroicons-chevron-down-20-solid" class="ml-auto" />
+        <UButton
+          label="Columns"
+          color="neutral"
+          variant="outline"
+          trailing-icon="i-heroicons-chevron-down-20-solid"
+          class="ml-auto"
+        />
       </UDropdownMenu>
     </div>
 
-    <UTable ref="table" :pagination="{ pageIndex: 0, pageSize: 20 }" :data="data" :columns="columns" class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1 overflow-y-auto">
+    <UTable
+      ref="table"
+      :pagination="{ pageIndex: 0, pageSize: 20 }"
+      :data="data"
+      :columns="columns"
+      class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1 overflow-y-auto"
+    >
       <template #expanded="{ row }">
         <pre>{{ row.original }}</pre>
       </template>

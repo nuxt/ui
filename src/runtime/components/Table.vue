@@ -1,7 +1,8 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import type { PaginationOptions, Row, ColumnDef, ColumnFiltersState, ColumnPinningState, ExpandedState, SortingState, PaginationState, RowSelectionState, VisibilityState, Updater } from '@tanstack/vue-table'
+import type { PaginationOptions, Row, ColumnDef, ColumnFiltersState, ColumnPinningState, ExpandedState, SortingState, PaginationState, RowSelectionState, VisibilityState, Updater, Table as TableApi } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
 
@@ -12,7 +13,7 @@ const table = tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })
 export type TableColumn<T> = ColumnDef<T>
 
 export interface TableProps<T> {
-  paginationOptions?: Omit<PaginationOptions, 'getPaginationRowModel' | 'onPaginationChange'>
+  // paginationOptions?: Omit<PaginationOptions, 'getPaginationRowModel' | 'onPaginationChange'>
   columns?: TableColumn<T>[]
   data: T[]
   class?: any
@@ -25,10 +26,15 @@ export interface TableSlots<T> {
   expanded(props: { row: Row<T> }): any
   empty(props?: {}): any
 }
+
+export type Table<T> = {
+  tableApi: TableApi<T>
+}
+
 </script>
 
 <script setup lang="ts" generic="T">
-import { computed, type Ref } from 'vue'
+import { ref, computed, type Ref } from 'vue'
 import { FlexRender, getCoreRowModel, getExpandedRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useVueTable } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 
@@ -39,9 +45,10 @@ defineSlots<TableSlots<T>>()
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = table()
 
+const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
+const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
 const sortingState = defineModel<SortingState>('sorting', { default: [] })
 const paginationState = defineModel<PaginationState>('pagination', { default: undefined })
-const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
 const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: {} })
 const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: {} })
 const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
@@ -49,45 +56,40 @@ const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 
 const columns = computed<ColumnDef<T>[]>(() => props.columns ?? Object.keys(props.data[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 
-const definedState = (state: Record<string, Ref>) =>
-  Object.fromEntries(
-    Object.entries(state)
-      .filter(([_, value]) => value.value !== undefined)
-      .map(([key, value]) => [key, value.value])
-  )
-
 const tableApi = useVueTable({
-  ...(props.paginationOptions || {}),
   get data() { return props.data },
   get columns() { return columns.value },
   getCoreRowModel: getCoreRowModel(),
-  getPaginationRowModel: getPaginationRowModel(),
-  getSortedRowModel: getSortedRowModel(),
   getFilteredRowModel: getFilteredRowModel(),
-  getExpandedRowModel: getExpandedRowModel(),
-  onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sortingState),
-  onPaginationChange: updaterOrValue => valueUpdater(updaterOrValue, paginationState),
+  // getPaginationRowModel: getPaginationRowModel()
+  // getSortedRowModel: getSortedRowModel(),
+  // getExpandedRowModel: getExpandedRowModel(),
+  onGlobalFilterChange: updaterOrValue => valueUpdater(updaterOrValue, globalFilterState),
   onColumnFiltersChange: updaterOrValue => valueUpdater(updaterOrValue, columnFiltersState),
   onColumnVisibilityChange: updaterOrValue => valueUpdater(updaterOrValue, columnVisibilityState),
-  onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelectionState),
-  onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
-  onColumnPinningChange: updaterOrValue => valueUpdater(updaterOrValue, columnPinningState),
-  state: definedState({
-    sorting: sortingState,
-    pagination: paginationState,
-    columnFilters: columnFiltersState,
-    columnVisibility: columnVisibilityState,
-    rowSelection: rowSelectionState,
-    expanded: expandedState,
-    columnPinning: columnPinningState
-  })
+  // onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sortingState),
+  // onPaginationChange: updaterOrValue => valueUpdater(updaterOrValue, paginationState),
+  // onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelectionState),
+  // onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
+  // onColumnPinningChange: updaterOrValue => valueUpdater(updaterOrValue, columnPinningState),
+  state: {
+    get globalFilter() {
+      return globalFilterState.value
+    },
+    get columnFilters() {
+      return columnFiltersState.value
+    },
+    get columnVisibility() {
+      return columnVisibilityState.value
+    }
+  }
 })
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
 }
 
-defineExpose({
+defineExpose<Table<T>>({
   tableApi
 })
 </script>
