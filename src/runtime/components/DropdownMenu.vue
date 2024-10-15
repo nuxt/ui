@@ -27,7 +27,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   open?: boolean
   defaultOpen?: boolean
   children?: DropdownMenuItem[] | DropdownMenuItem[][]
-  select?(e: Event): void
+  onSelect?(e: Event): void
 }
 
 type DropdownMenuVariants = VariantProps<typeof dropdownMenu>

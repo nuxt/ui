@@ -27,7 +27,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
   open?: boolean
   defaultOpen?: boolean
   children?: ContextMenuItem[] | ContextMenuItem[][]
-  select?(e: Event): void
+  onSelect?(e: Event): void
 }
 
 type ContextMenuVariants = VariantProps<typeof contextMenu>

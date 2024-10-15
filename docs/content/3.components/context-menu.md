@@ -26,7 +26,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `disabled?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `select?(e: Event): void`{lang="ts-type"}
+- `onSelect?(e: Event): void`{lang="ts-type"}
 
 You can also pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
@@ -207,13 +207,13 @@ const items = [
   [{
     label: 'Show Sidebar',
     kbds: ['meta', 'S'],
-    select() {
+    onSelect() {
       console.log('Show Sidebar clicked')
     }
   }, {
     label: 'Show Toolbar',
     kbds: ['shift', 'meta', 'D'],
-    select() {
+    onSelect() {
       console.log('Show Toolbar clicked')
     }
   }, {
@@ -232,25 +232,25 @@ const items = [
     children: [[{
       label: 'View Source',
       kbds: ['option', 'meta', 'U'],
-      select() {
+      onSelect() {
         console.log('View Source clicked')
       }
     }, {
       label: 'Developer Tools',
       kbds: ['option', 'meta', 'I'],
-      select() {
+      onSelect() {
         console.log('Developer Tools clicked')
       }
     }], [{
       label: 'Inspect Elements',
       kbds: ['option', 'meta', 'C'],
-      select() {
+      onSelect() {
         console.log('Inspect Elements clicked')
       }
     }], [{
       label: 'JavaScript Console',
       kbds: ['option', 'meta', 'J'],
-      select() {
+      onSelect() {
         console.log('JavaScript Console clicked')
       }
     }]]

@@ -24,13 +24,13 @@ const items = [
   [{
     label: 'Show Sidebar',
     kbds: ['meta', 'S'],
-    select() {
+    onSelect() {
       console.log('Show Sidebar clicked')
     }
   }, {
     label: 'Show Toolbar',
     kbds: ['shift', 'meta', 'D'],
-    select() {
+    onSelect() {
       console.log('Show Toolbar clicked')
     }
   }, {
@@ -49,25 +49,25 @@ const items = [
     children: [[{
       label: 'View Source',
       kbds: ['option', 'meta', 'U'],
-      select() {
+      onSelect() {
         console.log('View Source clicked')
       }
     }, {
       label: 'Developer Tools',
       kbds: ['option', 'meta', 'I'],
-      select() {
+      onSelect() {
         console.log('Developer Tools clicked')
       }
     }], [{
       label: 'Inspect Elements',
       kbds: ['option', 'meta', 'C'],
-      select() {
+      onSelect() {
         console.log('Inspect Elements clicked')
       }
     }], [{
       label: 'JavaScript Console',
       kbds: ['option', 'meta', 'J'],
-      select() {
+      onSelect() {
         console.log('JavaScript Console clicked')
       }
     }]]

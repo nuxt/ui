@@ -108,7 +108,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               </template>
             </UContextMenuContent>
           </ContextMenu.Sub>
-          <ContextMenu.Item v-else as-child :disabled="item.disabled" :text-value="get(item, props.labelKey as string)" @select="item.select">
+          <ContextMenu.Item v-else as-child :disabled="item.disabled" :text-value="get(item, props.labelKey as string)" @select="item.onSelect">
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<ContextMenuItem, 'type'>)" custom>
               <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.class], active })">
                 <ReuseItemTemplate :item="item" :active="active" :index="index" />

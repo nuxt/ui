@@ -115,7 +115,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               </template>
             </UDropdownMenuContent>
           </DropdownMenu.Sub>
-          <DropdownMenu.Item v-else as-child :disabled="item.disabled" :text-value="get(item, props.labelKey as string)" @select="item.select">
+          <DropdownMenu.Item v-else as-child :disabled="item.disabled" :text-value="get(item, props.labelKey as string)" @select="item.onSelect">
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<DropdownMenuItem, 'type'>)" custom>
               <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.class], active })">
                 <ReuseItemTemplate :item="item" :active="active" :index="index" />
