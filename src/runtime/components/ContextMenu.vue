@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuTriggerProps, ContextMenuItemProps } from 'radix-vue'
+import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuTriggerProps, ContextMenuItemProps, ContextMenuCheckboxItemProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
@@ -12,7 +12,7 @@ const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof 
 
 const contextMenu = tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu || {}) })
 
-export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'>, Pick<ContextMenuItemProps, 'disabled'> {
+export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'>, Pick<ContextMenuItemProps, 'disabled'>, Pick<ContextMenuCheckboxItemProps, 'checked'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -22,12 +22,13 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
    * The item type.
    * @defaultValue 'link'
    */
-  type?: 'label' | 'separator' | 'link'
+  type?: 'label' | 'separator' | 'link' | 'checkbox'
   slot?: string
   open?: boolean
   defaultOpen?: boolean
   children?: ContextMenuItem[] | ContextMenuItem[][]
   onSelect?(e: Event): void
+  onUpdateChecked?(checked: boolean): void
 }
 
 type ContextMenuVariants = VariantProps<typeof contextMenu>
@@ -35,6 +36,11 @@ type ContextMenuVariants = VariantProps<typeof contextMenu>
 export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'>, Pick<ContextMenuTriggerProps, 'disabled'> {
   size?: ContextMenuVariants['size']
   items?: T[] | T[][]
+  /**
+   * The icon displayed when an item is checked.
+   * @defaultValue appConfig.ui.icons.check
+   */
+  checkedIcon?: string
   /** The content of the menu. */
   content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -103,6 +109,7 @@ const ui = computed(() => contextMenu({
       :items="items"
       :portal="portal"
       :label-key="labelKey"
+      :checked-icon="checkedIcon"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />
