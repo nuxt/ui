@@ -6,7 +6,6 @@ settings:
 
 overrides:
   '@nuxt/ui': workspace:*
-  '@nuxtjs/mdc': 0.9.2
 
 importers:
 

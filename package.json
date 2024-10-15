@@ -78,7 +78,6 @@
     "zod": "^3.23.8"
   },
   "resolutions": {
-    "@nuxt/ui": "workspace:*",
-    "@nuxtjs/mdc": "0.9.2"
+    "@nuxt/ui": "workspace:*"
   }
 }
