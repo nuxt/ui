@@ -26,7 +26,7 @@ const attributesSchemas = computed(() => {
     <ComponentPropInput
       v-for="attributeSchema in attributesSchemas"
       :key="attributeSchema.name"
-      class="border-b last:border-b-0 border-[--ui-border] p-4"
+      class="border-b last:border-b-0 border-[var(--ui-border)] p-4"
       :model-value="modelValue?.[attributeSchema.name]"
       :meta="attributeSchema"
       @update:model-value="(value: any) => {

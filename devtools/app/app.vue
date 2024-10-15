@@ -110,7 +110,7 @@ const isDark = computed({
     <div v-if="!components || !component" class="h-screen w-screen" />
     <template v-else>
       <div
-        class="top-0 h-[49px] border-b border-[--ui-border] flex justify-center"
+        class="top-0 h-[49px] border-b border-[var(--ui-border)] flex justify-center"
       >
         <span />
 
@@ -123,8 +123,8 @@ const isDark = computed({
           icon="i-heroicons-magnifying-glass"
         />
 
-        <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-4 bg-[--ui-bg]">
-          <div class="col-span-1 border-r border-[--ui-border] hidden xl:block overflow-y-auto">
+        <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-4 bg-[var(--ui-bg)]">
+          <div class="col-span-1 border-r border-[var(--ui-border)] hidden xl:block overflow-y-auto">
             <UNavigationMenu
               :items="components.map((c) => ({ ...c, select: () => component = c }))"
               orientation="vertical"
@@ -152,10 +152,10 @@ const isDark = computed({
             </div>
           </div>
 
-          <div class="border-l border-[--ui-border] flex flex-col col-span-2 overflow-y-auto">
-            <UTabs color="neutral" variant="link" :items="tabs" class="relative" :ui="{ list: 'sticky top-0 bg-[--ui-bg] z-50' }">
+          <div class="border-l border-[var(--ui-border)] flex flex-col col-span-2 overflow-y-auto">
+            <UTabs color="neutral" variant="link" :items="tabs" class="relative" :ui="{ list: 'sticky top-0 bg-[var(--ui-bg)] z-50' }">
               <template #props>
-                <div v-for="prop in componentPropsMeta" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-[--ui-border] dark:border-[--ui-border]">
+                <div v-for="prop in componentPropsMeta" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-[var(--ui-border)]">
                   <ComponentPropInput
                     v-model="componentProps[prop.name]"
                     :meta="prop"

@@ -20,7 +20,7 @@ watchEffect(() => {
 <template>
   <UFormField :name="meta?.name" class="" :ui="{ wrapper: 'mb-2' }" :class="{ 'opacity-70 cursor-not-allowed': !matchedInput || ignore }">
     <template #label>
-      <p v-if="meta?.name" class="font-mono font-bold px-1.5 py-0.5 border border-[--ui-border-accented] border-dashed rounded bg-[--ui-bg-elevated]">
+      <p v-if="meta?.name" class="font-mono font-bold px-1.5 py-0.5 border border-[var(--ui-border-accented)] border-dashed rounded bg-[var(--ui-bg-elevated)]">
         {{ meta?.name }}
       </p>
     </template>

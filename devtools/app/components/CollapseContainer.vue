@@ -29,7 +29,7 @@ onMounted(() => {
     </div>
     <UButton
       v-if="overflow"
-      class="bg-[--ui-bg] group w-full flex justify-center my-1 border-t border-[--ui-border] rounded-t-none"
+      class="bg-[var(--ui-bg)] group w-full flex justify-center my-1 border-t border-[var(--ui-border)] rounded-t-none"
       variant="link"
       color="neutral"
       trailing-icon="i-heroicons-chevron-down"

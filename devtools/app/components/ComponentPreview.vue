@@ -102,7 +102,7 @@ const previewUrl = computed(() => {
       @load="onRendererReady"
     />
     <div v-if="ast" v-show="rendererReady" class="relative w-full p-3">
-      <MDCRenderer :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 text-sm overflow-y-auto rounded-lg border border-[--ui-border] bg-neutral-50 dark:bg-neutral-800" />
+      <MDCRenderer :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 text-sm overflow-y-auto rounded-lg border border-[var(--ui-border)] bg-neutral-50 dark:bg-neutral-800" />
       <UButton
         color="neutral"
         variant="link"
