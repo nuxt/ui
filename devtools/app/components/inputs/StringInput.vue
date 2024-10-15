@@ -7,6 +7,7 @@ export type StringInputSchema = z.infer<typeof stringInputSchema>
 </script>
 
 <script setup lang="ts">
+defineProps<{ schema: StringInputSchema }>()
 </script>
 
 <template>

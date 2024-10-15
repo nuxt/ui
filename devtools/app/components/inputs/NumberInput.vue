@@ -6,6 +6,7 @@ export type NumberInputSchema = z.infer<typeof numberInputSchema>
 </script>
 
 <script setup lang="ts">
+defineProps<{ schema: NumberInputSchema }>()
 const modelValue = defineModel<number>()
 </script>
 

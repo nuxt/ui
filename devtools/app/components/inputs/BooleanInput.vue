@@ -12,6 +12,7 @@ export type BooleanInputSchema = z.infer<typeof booleanInputSchema>
 </script>
 
 <script setup lang="ts">
+defineProps<{ schema: BooleanInputSchema }>()
 </script>
 
 <template>
