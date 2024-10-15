@@ -33,5 +33,21 @@ export default defineNuxtConfig({
     }
   },
 
-  compatibilityDate: '2024-04-03'
+  compatibilityDate: '2024-04-03',
+
+  mdc: {
+    highlight: {
+      theme: {
+        light: 'material-theme-lighter',
+        default: 'material-theme',
+        dark: 'material-theme-palenight'
+      }
+    }
+  },
+
+  content: {
+    highlight: {
+      langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+    }
+  }
 })

@@ -53,8 +53,6 @@ ${componentExample.value?.source
 \`\`\``
 })
 
-const { parseMarkdown } = useMarkdownParser()
-
 const { data: ast } = await useAsyncData('component-code', async () => {
   if (!code.value) return
 
