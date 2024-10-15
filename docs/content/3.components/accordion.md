@@ -190,6 +190,10 @@ props:
 You can also pass the `value` of one of the items if provided.
 ::
 
+::caution
+When `type="multiple"`, ensure to pass an array to the `default-value` prop or the `v-model` directive.
+::
+
 ### With body slot
 
 Use the `#body` slot to customize the body of each item.

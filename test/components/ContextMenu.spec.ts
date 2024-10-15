@@ -23,16 +23,10 @@ describe('ContextMenu', () => {
     }],
     [{
       label: 'Show Sidebar',
-      kbds: ['meta', 'S'],
-      select() {
-        console.log('Show Sidebar clicked')
-      }
+      kbds: ['meta', 'S']
     }, {
       label: 'Show Toolbar',
-      kbds: ['shift', 'meta', 'D'],
-      select() {
-        console.log('Show Toolbar clicked')
-      }
+      kbds: ['shift', 'meta', 'D']
     }, {
       label: 'Collapse Pinned Tabs',
       disabled: true
@@ -48,29 +42,17 @@ describe('ContextMenu', () => {
       label: 'Developer',
       children: [[{
         label: 'View Source',
-        kbds: ['option', 'meta', 'U'],
-        select() {
-          console.log('View Source clicked')
-        }
+        kbds: ['option', 'meta', 'U']
       }, {
         label: 'Developer Tools',
-        kbds: ['option', 'meta', 'I'],
-        select() {
-          console.log('Developer Tools clicked')
-        }
+        kbds: ['option', 'meta', 'I']
       }], [{
         label: 'Inspect Elements',
-        kbds: ['option', 'meta', 'C'],
-        select() {
-          console.log('Inspect Elements clicked')
-        }
+        kbds: ['option', 'meta', 'C']
       }], [{
         label: 'JavaScript Console',
         kbds: ['option', 'meta', 'J'],
-        slot: 'custom',
-        select() {
-          console.log('JavaScript Console clicked')
-        }
+        slot: 'custom'
       }]]
     }]
   ]

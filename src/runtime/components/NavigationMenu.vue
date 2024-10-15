@@ -17,7 +17,7 @@ export interface NavigationMenuChildItem extends Omit<LinkProps, 'raw' | 'custom
   label: string
   description?: string
   icon?: string
-  select?(e: Event): void
+  onSelect?(e: Event): void
 }
 
 export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'>, Pick<NavigationMenuItemProps, 'value'> {
@@ -28,7 +28,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'>, P
   trailingIcon?: string
   slot?: string
   children?: NavigationMenuChildItem[]
-  select?(e: Event): void
+  onSelect?(e: Event): void
 }
 
 type NavigationMenuVariants = VariantProps<typeof navigationMenu>
@@ -164,7 +164,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               v-bind="item.children?.length ? { disabled: item.disabled } : { active }"
               as-child
               :active="active"
-              @select="item.select"
+              @select="item.onSelect"
             >
               <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active, disabled: !!item.disabled })">
                 <slot :name="item.slot || 'item'" :item="item" :index="index">
@@ -202,7 +202,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               <ul :class="ui.childList({ class: props.ui?.childList })">
                 <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
                   <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
-                    <NavigationMenuLink as-child :active="childActive" @select="childItem.select">
+                    <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
                       <ULinkBase v-bind="childSlotProps" :class="ui.childLink({ class: [props.ui?.childLink, childItem.class], active: childActive })">
                         <UIcon v-if="childItem.icon" :name="childItem.icon" :class="ui.childLinkIcon({ class: props.ui?.childLinkIcon, active: childActive })" />
 

@@ -25,7 +25,7 @@ export interface CommandPaletteItem extends Pick<ComboboxItemProps, 'disabled'> 
   chip?: ChipProps
   kbds?: KbdProps['value'][] | KbdProps[]
   slot?: string
-  select?(e?: Event): void
+  onSelect?(e?: Event): void
 }
 
 export interface CommandPaletteGroup<T> {
@@ -270,10 +270,10 @@ const groups = computed(() => {
             <ComboboxItem
               v-for="(item, index) in group.items"
               :key="`group-${groupIndex}-${index}`"
-              :value="omit(item, ['matches' as any, 'group' as any, 'select', 'labelHtml', 'suffixHtml'])"
+              :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml'])"
               :disabled="item.disabled"
               :class="ui.item({ class: props.ui?.item })"
-              @select="item.select"
+              @select="item.onSelect"
             >
               <slot :name="item.slot || group.slot || 'item'" :item="item" :index="index">
                 <slot :name="item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`" :item="item" :index="index">

@@ -23,7 +23,7 @@ export interface SelectMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
-  select?(e?: Event): void
+  onSelect?(e?: Event): void
 }
 
 type SelectMenuVariants = VariantProps<typeof selectMenu>
@@ -286,7 +286,7 @@ function onUpdateOpen(value: boolean) {
                 :class="ui.item({ class: props.ui?.item })"
                 :disabled="item.disabled"
                 :value="valueKey && typeof item === 'object' ? get(item, props.valueKey as string) : item"
-                @select="item.select"
+                @select="item.onSelect"
               >
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">

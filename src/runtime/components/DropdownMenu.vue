@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps, DropdownMenuTriggerProps, DropdownMenuItemProps } from 'radix-vue'
+import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps, DropdownMenuTriggerProps, DropdownMenuItemProps, DropdownMenuCheckboxItemProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
@@ -13,7 +13,7 @@ const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof
 
 const dropdownMenu = tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })
 
-export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'>, Pick<DropdownMenuItemProps, 'disabled'> {
+export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'>, Pick<DropdownMenuItemProps, 'disabled'>, Pick<DropdownMenuCheckboxItemProps, 'checked'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -23,12 +23,13 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
    * The item type.
    * @defaultValue 'link'
    */
-  type?: 'label' | 'separator' | 'link'
+  type?: 'label' | 'separator' | 'link' | 'checkbox'
   slot?: string
   open?: boolean
   defaultOpen?: boolean
   children?: DropdownMenuItem[] | DropdownMenuItem[][]
-  select?(e: Event): void
+  onSelect?(e: Event): void
+  onUpdateChecked?(checked: boolean): void
 }
 
 type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
@@ -36,6 +37,11 @@ type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>, Pick<DropdownMenuTriggerProps, 'disabled'> {
   size?: DropdownMenuVariants['size']
   items?: T[] | T[][]
+  /**
+   * The icon displayed when an item is checked.
+   * @defaultValue appConfig.ui.icons.check
+   */
+  checkedIcon?: string
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8 }
@@ -162,6 +168,7 @@ const ui = computed(() => dropdownMenu({
       :items="items"
       :portal="portal"
       :label-key="labelKey"
+      :checked-icon="checkedIcon"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />
