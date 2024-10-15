@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { z } from 'zod'
-import type { FormSubmitEvent, Form } from '@nuxt/ui'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = z.object({
   input: z.string().min(10),
@@ -35,7 +35,8 @@ const schema = z.object({
 type Schema = z.output<typeof schema>
 
 const state = reactive<Partial<Schema>>({})
-const form = ref<Form<Schema>>()
+
+const form = useTemplateRef('form')
 
 const items = [
   { label: 'Option 1', value: 'option-1' },
