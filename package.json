@@ -38,9 +38,10 @@
     "docs": "DEV=true nuxi dev docs",
     "docs:build": "nuxi build docs",
     "docs:prepare": "nuxt-component-meta docs",
+    "docs:typecheck": "nuxi typecheck docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck docs",
+    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground",
     "test": "vitest",
     "release": "release-it --preRelease=alpha --npm.tag=next"
   },
