@@ -19,7 +19,7 @@ const code = computed(() => {
     if (value === true) return kebabCase(key)
     if (value === false) return
     if (!value) return
-    if (props.component?.defaultVariants?.[key]) return
+    if (props.component?.defaultVariants?.[key] === value) return
     if (props.component?.meta?.props.find(prop => prop.name === key && prop.default === value)) return
     if (typeof value === 'number') return `:${kebabCase(key)}="${value}"`
     if (Array.isArray(value)) return value.length ? `:${kebabCase(key)}="${genArrayFromRaw(value, undefined, { preserveTypes: true })}"` : undefined
