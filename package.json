@@ -65,7 +65,7 @@
     "happy-dom": "^14.12.3",
     "joi": "^17.13.3",
     "nuxt": "^3.13.2",
-    "release-it": "^17.8.2",
+    "release-it": "^17.9.0",
     "superstruct": "^2.0.2",
     "unbuild": "^2.0.0",
     "valibot": "^0.42.1",
@@ -78,7 +78,6 @@
     "zod": "^3.23.8"
   },
   "resolutions": {
-    "@nuxt/ui": "workspace:*",
-    "@nuxtjs/mdc": "0.9.0"
+    "@nuxt/ui": "workspace:*"
   }
 }
