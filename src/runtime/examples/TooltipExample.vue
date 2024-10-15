@@ -1,5 +1,5 @@
 <template>
-  <UTooltip text="Top" :kbds="['meta', 'T']" :content="{ side: 'top' }" arrow>
+  <UTooltip>
     <Placeholder class="size-20" />
   </UTooltip>
 </template>

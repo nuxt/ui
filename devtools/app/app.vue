@@ -156,7 +156,11 @@ const isDark = computed({
             <UTabs color="neutral" variant="link" :items="tabs" class="relative" :ui="{ list: 'sticky top-0 bg-[--ui-bg] z-50' }">
               <template #props>
                 <div v-for="prop in componentPropsMeta" :key="'prop-' + prop.name" class="px-3 py-5 border-b border-[--ui-border] dark:border-[--ui-border]">
-                  <ComponentPropInput v-bind="prop" v-model="componentProps[prop.name]" />
+                  <ComponentPropInput
+                    v-model="componentProps[prop.name]"
+                    :meta="prop"
+                    :ignore="component.meta?.devtools?.ignoreProps?.includes(prop.name)"
+                  />
                 </div>
               </template>
             </UTabs>

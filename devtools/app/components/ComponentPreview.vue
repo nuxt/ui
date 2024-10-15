@@ -37,11 +37,11 @@ const code = computed(() => {
   const extraTemplate = [propsTemplate, props.themeSlots?.base ? `class="${props.themeSlots.base}"` : null, slotsTemplate && slotsTemplate !== '{}' ? `:ui="${slotsTemplate}"` : null].filter(Boolean).join(' ')
 
   if (componentExample.value) {
-    const componentRegexp = new RegExp(`<${props.component.label}(\\s|\\r)`)
+    const componentRegexp = new RegExp(`<${props.component.label}(\\s|\\r|>)`)
 
     return `\`\`\`vue
 ${componentExample.value?.source
-  .replace(componentRegexp, `<${props.component.label} ${extraTemplate}`)
+  .replace(componentRegexp, `<${props.component.label} ${extraTemplate}$1`)
   .replace('v-bind="$attrs"', '')}
 \`\`\``
   }

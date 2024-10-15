@@ -74,6 +74,7 @@ export type DropdownMenuSlots<T extends { slot?: string }> = {
 
 extendDevtoolsMeta({
   example: 'DropdownMenuExample',
+  ignoreProps: ['items'],
   defaultProps: {
     items: [
       [{

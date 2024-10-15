@@ -64,8 +64,10 @@ export type ContextMenuSlots<T extends { slot?: string }> = {
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
-extendDevtoolsMeta({ example: 'ContextMenuExample', defaultProps: { items:
-  [
+extendDevtoolsMeta({
+  example: 'ContextMenuExample',
+  ignoreProps: ['items'],
+  defaultProps: { items: [
     [{
       label: 'My account',
       avatar: {

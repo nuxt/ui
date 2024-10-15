@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: [module, '@nuxtjs/mdc', '@nuxt/content'],
+  modules: [module, '@nuxtjs/mdc', '@nuxt/content', '@nuxt/test-utils/module'],
 
   app: {
     baseURL: '/__nuxt_ui__/devtools'

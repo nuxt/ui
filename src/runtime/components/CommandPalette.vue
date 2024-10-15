@@ -113,7 +113,7 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
   'item-trailing': SlotProps<T>
 } & DynamicSlots<G, SlotProps<T>> & DynamicSlots<T, SlotProps<T>>
 
-extendDevtoolsMeta({ example: 'CommandPaletteExample' })
+extendDevtoolsMeta({ example: 'CommandPaletteExample', ignoreProps: ['groups'] })
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
