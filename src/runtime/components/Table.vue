@@ -1,8 +1,9 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
+import type { ComponentExposed } from 'vue-component-type-helpers'
 import type { AppConfig } from '@nuxt/schema'
-import type { PaginationOptions, Row, ColumnDef, ColumnFiltersState, ColumnPinningState, ExpandedState, SortingState, PaginationState, RowSelectionState, VisibilityState, Updater, Table as TableApi } from '@tanstack/vue-table'
+import type { Row, ColumnDef, ColumnFiltersState, ColumnPinningState, ExpandedState, SortingState, PaginationState, RowSelectionState, VisibilityState, Updater, Table as TableApi } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
 
@@ -20,8 +21,6 @@ export interface TableProps<T> {
   ui?: Partial<typeof table.slots>
 }
 
-export type TableEmits = {}
-
 export interface TableSlots<T> {
   expanded(props: { row: Row<T> }): any
   empty(props?: {}): any
@@ -33,13 +32,12 @@ export type Table<T> = {
 
 </script>
 
-<script setup lang="ts" generic="T">
+<script setup lang="ts" generic="T extends object">
 import { ref, computed, type Ref } from 'vue'
 import { FlexRender, getCoreRowModel, getExpandedRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useVueTable } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 
 const props = defineProps<TableProps<T>>()
-defineEmits<TableEmits>()
 defineSlots<TableSlots<T>>()
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -47,12 +45,12 @@ const ui = table()
 
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
 const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
-const sortingState = defineModel<SortingState>('sorting', { default: [] })
-const paginationState = defineModel<PaginationState>('pagination', { default: undefined })
 const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: {} })
-const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: {} })
-const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
-const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
+// const sortingState = defineModel<SortingState>('sorting', { default: [] })
+// const paginationState = defineModel<PaginationState>('pagination', { default: undefined })
+// const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: {} })
+// const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
+// const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 
 const columns = computed<ColumnDef<T>[]>(() => props.columns ?? Object.keys(props.data[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 

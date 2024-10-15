@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { h } from 'vue'
-import type { ComponentExposed } from 'vue-component-type-helpers'
+import { upperFirst } from 'scule'
 import { UBadge, UButton, UCheckbox, UDropdownMenu, UTable } from '#components'
 import type { TableColumn, Table } from '@nuxt/ui'
 
@@ -13,6 +13,8 @@ type Payment = {
   email: string
   amount: number
 }
+
+const table = ref<Table<Payment>>()
 
 const data: Payment[] = [{
   id: '4600',
@@ -252,14 +254,23 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const table = ref<Table<Payment>>()
+const columnItems = computed(() => table.value?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
+  label: upperFirst(column.id),
+  type: 'checkbox' as const,
+  checked: column.getIsVisible(),
+  onUpdateChecked(checked: boolean) {
+    table.value?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
+  },
+  onSelect(e?: Event) {
+    e?.preventDefault()
+  }
+})))
 </script>
 
 <template>
   <div class="h-full flex flex-col flex-1 gap-4 w-full -my-8">
     <div class="flex gap-2 items-center">
       <UInput
-        ref="input"
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
         class="max-w-sm"
         placeholder="Filter emails..."
@@ -267,10 +278,9 @@ const table = ref<Table<Payment>>()
       />
 
       <UDropdownMenu
-        :items="table?.tableApi?.getAllColumns().filter((column) => column.getCanHide())"
+        :items="columnItems"
         placeholder="Columns"
         variant="outline"
-        label-key="id"
         :content="{ align: 'end' }"
       >
         <UButton
