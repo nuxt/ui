@@ -5,11 +5,11 @@ const selected = ref('Backlog')
 </script>
 
 <template>
-  <UInputMenu 
-    v-model="selected" 
-    v-model:open="open" 
-    :items="items" 
-    @focus="open = true" 
+  <UInputMenu
+    v-model="selected"
+    v-model:open="open"
+    :items="items"
+    @focus="open = true"
     @blur="open = false"
   />
 </template>
