@@ -47,9 +47,7 @@ ${componentExample.value?.source
   }
 
   return `\`\`\`vue
-<${props.component.label} ${extraTemplate}
->
-</${props.component.label}>
+<${props.component.label} ${extraTemplate} />
 \`\`\``
 })
 

@@ -4,8 +4,8 @@ import type { PropertyMeta } from 'vue-component-meta'
 const props = defineProps<{ meta: Partial<PropertyMeta>, ignore?: boolean }>()
 const modelValue = defineModel<any>()
 
-const matchedInput = ref()
-const parsedSchema = ref()
+const matchedInput = shallowRef()
+const parsedSchema = shallowRef()
 
 const { resolveInputSchema } = usePropSchema()
 

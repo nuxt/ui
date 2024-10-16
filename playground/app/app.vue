@@ -65,7 +65,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <div v-if="!$route.path.startsWith('/__nuxt_ui__')">
+  <template v-if="!$route.path.startsWith('/__nuxt_ui__')">
     <UApp :toaster="appConfig.toaster">
       <div class="h-screen w-screen overflow-hidden flex min-h-0 bg-[var(--ui-bg)]" vaul-drawer-wrapper>
         <UNavigationMenu :items="items" orientation="vertical" class="border-r border-[var(--ui-border)] overflow-y-auto w-48 p-4" />
@@ -80,10 +80,10 @@ defineShortcuts({
         </template>
       </UModal>
     </UApp>
-  </div>
-  <div v-else>
+  </template>
+  <template v-else>
     <NuxtPage />
-  </div>
+  </template>
 </template>
 
 <style>
