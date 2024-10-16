@@ -42,7 +42,7 @@ onMounted(() => {
 
 <template>
   <div class="nuxt-ui-component-renderer">
-    <UApp>
+    <UApp :toaster="null">
       <template v-if="component && state.props">
         <component :is="component" v-if="component && state.props" v-bind="state.props" :class="state?.slots?.base" :ui="state.slots" />
       </template>

@@ -45,6 +45,7 @@ extendDevtoolsMeta({ ignore: true })
       <UToaster v-if="toaster !== null" v-bind="toasterProps">
         <slot />
       </UToaster>
+      <slot v-else />
     </TooltipProvider>
 
     <UModalProvider />
