@@ -1,9 +1,21 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { Ref } from 'vue'
 import { tv } from 'tailwind-variants'
-import type { ComponentExposed } from 'vue-component-type-helpers'
 import type { AppConfig } from '@nuxt/schema'
-import type { Row, ColumnDef, ColumnFiltersState, ColumnPinningState, ExpandedState, SortingState, PaginationState, RowSelectionState, VisibilityState, Updater, Table as TableApi } from '@tanstack/vue-table'
+import type {
+  Row,
+  ColumnDef,
+  ColumnFiltersState,
+  // ColumnPinningState,
+  // ExpandedState,
+  // SortingState,
+  // PaginationState,
+  // RowSelectionState,
+  VisibilityState,
+  Updater
+  // Table as TableApi
+} from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
 
@@ -12,6 +24,9 @@ const appConfig = _appConfig as AppConfig & { ui: { table: Partial<typeof theme>
 const table = tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })
 
 export type TableColumn<T> = ColumnDef<T>
+export interface TableData {
+  [key: string]: any
+}
 
 export interface TableProps<T> {
   // paginationOptions?: Omit<PaginationOptions, 'getPaginationRowModel' | 'onPaginationChange'>
@@ -26,15 +41,19 @@ export interface TableSlots<T> {
   empty(props?: {}): any
 }
 
-export type Table<T> = {
-  tableApi: TableApi<T>
-}
-
 </script>
 
-<script setup lang="ts" generic="T extends object">
-import { ref, computed, type Ref } from 'vue'
-import { FlexRender, getCoreRowModel, getExpandedRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useVueTable } from '@tanstack/vue-table'
+<script setup lang="ts" generic="T extends TableData">
+import { computed } from 'vue'
+import {
+  FlexRender,
+  getCoreRowModel,
+  // getExpandedRowModel,
+  getFilteredRowModel,
+  // getPaginationRowModel,
+  // getSortedRowModel,
+  useVueTable
+} from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 
 const props = defineProps<TableProps<T>>()
@@ -52,7 +71,7 @@ const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', {
 // const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
 // const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 
-const columns = computed<ColumnDef<T>[]>(() => props.columns ?? Object.keys(props.data[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
+const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(props.data[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 
 const tableApi = useVueTable({
   get data() { return props.data },
@@ -87,7 +106,7 @@ function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
 }
 
-defineExpose<Table<T>>({
+defineExpose({
   tableApi
 })
 </script>

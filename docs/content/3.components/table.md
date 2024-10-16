@@ -24,13 +24,21 @@ links:
 
 :component-slots
 
-### Emits
-
-:component-emits
-
 ### Expose
 
-When accessing the component via a template ref, you can use the following:
+You can access the typed component instance using [`useTemplateRef`](https://vuejs.org/api/composition-api-helpers.html#usetemplateref).
+
+```vue
+<script setup lang="ts">
+const table = useTemplateRef('table')
+</script>
+
+<template>
+  <UTable ref="table" />
+</template>
+```
+
+This will give you access to the following:
 
 | Name | Type |
 | ---- | ---- |

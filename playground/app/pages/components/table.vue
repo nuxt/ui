@@ -2,7 +2,7 @@
 import { h } from 'vue'
 import { upperFirst } from 'scule'
 import { UBadge, UButton, UCheckbox, UDropdownMenu, UTable } from '#components'
-import type { TableColumn, Table } from '@nuxt/ui'
+import type { TableColumn } from '@nuxt/ui'
 
 const toast = useToast()
 
@@ -14,7 +14,7 @@ type Payment = {
   amount: number
 }
 
-const table = ref<Table<Payment>>()
+const table = useTemplateRef('table')
 
 const data: Payment[] = [{
   id: '4600',
@@ -240,7 +240,7 @@ const columns: TableColumn<Payment>[] = [{
       label: 'View payment details'
     }]
 
-    return h('div', { class: 'text-right' }, () => h(UDropdownMenu, {
+    return h('div', { class: 'text-right' }, h(UDropdownMenu, {
       content: {
         align: 'end'
       },
@@ -253,18 +253,6 @@ const columns: TableColumn<Payment>[] = [{
     })))
   }
 }]
-
-const columnItems = computed(() => table.value?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
-  label: upperFirst(column.id),
-  type: 'checkbox' as const,
-  checked: column.getIsVisible(),
-  onUpdateChecked(checked: boolean) {
-    table.value?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
-  },
-  onSelect(e?: Event) {
-    e?.preventDefault()
-  }
-})))
 </script>
 
 <template>
@@ -278,9 +266,17 @@ const columnItems = computed(() => table.value?.tableApi?.getAllColumns().filter
       />
 
       <UDropdownMenu
-        :items="columnItems"
-        placeholder="Columns"
-        variant="outline"
+        :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
+          label: upperFirst(column.id),
+          type: 'checkbox' as const,
+          checked: column.getIsVisible(),
+          onUpdateChecked(checked: boolean) {
+            table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
+          },
+          onSelect(e?: Event) {
+            e?.preventDefault()
+          }
+        }))"
         :content="{ align: 'end' }"
       >
         <UButton
@@ -295,7 +291,6 @@ const columnItems = computed(() => table.value?.tableApi?.getAllColumns().filter
 
     <UTable
       ref="table"
-      :pagination="{ pageIndex: 0, pageSize: 20 }"
       :data="data"
       :columns="columns"
       class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1 overflow-y-auto"
