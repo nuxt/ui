@@ -8,11 +8,11 @@ import type {
   ColumnDef,
   ColumnFiltersState,
   // ColumnPinningState,
-  // ExpandedState,
-  // SortingState,
-  // PaginationState,
-  // RowSelectionState,
+  RowSelectionState,
+  SortingState,
+  ExpandedState,
   VisibilityState,
+  // PaginationState,
   Updater
   // Table as TableApi
 } from '@tanstack/vue-table'
@@ -48,10 +48,10 @@ import { computed } from 'vue'
 import {
   FlexRender,
   getCoreRowModel,
-  // getExpandedRowModel,
+  getExpandedRowModel,
   getFilteredRowModel,
   // getPaginationRowModel,
-  // getSortedRowModel,
+  getSortedRowModel,
   useVueTable
 } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
@@ -65,11 +65,11 @@ const ui = table()
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
 const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
 const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: {} })
-// const sortingState = defineModel<SortingState>('sorting', { default: [] })
-// const paginationState = defineModel<PaginationState>('pagination', { default: undefined })
 // const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: {} })
-// const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
-// const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
+const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
+const sortingState = defineModel<SortingState>('sorting', { default: [] })
+const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
+// const paginationState = defineModel<PaginationState>('pagination', { default: undefined })
 
 const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(props.data[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 
@@ -79,16 +79,16 @@ const tableApi = useVueTable({
   getCoreRowModel: getCoreRowModel(),
   getFilteredRowModel: getFilteredRowModel(),
   // getPaginationRowModel: getPaginationRowModel()
-  // getSortedRowModel: getSortedRowModel(),
-  // getExpandedRowModel: getExpandedRowModel(),
+  getSortedRowModel: getSortedRowModel(),
+  getExpandedRowModel: getExpandedRowModel(),
   onGlobalFilterChange: updaterOrValue => valueUpdater(updaterOrValue, globalFilterState),
   onColumnFiltersChange: updaterOrValue => valueUpdater(updaterOrValue, columnFiltersState),
   onColumnVisibilityChange: updaterOrValue => valueUpdater(updaterOrValue, columnVisibilityState),
-  // onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sortingState),
-  // onPaginationChange: updaterOrValue => valueUpdater(updaterOrValue, paginationState),
-  // onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelectionState),
-  // onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
   // onColumnPinningChange: updaterOrValue => valueUpdater(updaterOrValue, columnPinningState),
+  onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelectionState),
+  onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sortingState),
+  onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
+  // onPaginationChange: updaterOrValue => valueUpdater(updaterOrValue, paginationState),
   state: {
     get globalFilter() {
       return globalFilterState.value
@@ -98,6 +98,15 @@ const tableApi = useVueTable({
     },
     get columnVisibility() {
       return columnVisibilityState.value
+    },
+    get expanded() {
+      return expandedState.value
+    },
+    get rowSelection() {
+      return rowSelectionState.value
+    },
+    get sorting() {
+      return sortingState.value
     }
   }
 })

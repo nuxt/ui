@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { h } from 'vue'
+import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
-import { UBadge, UButton, UCheckbox, UDropdownMenu, UTable } from '#components'
 import type { TableColumn } from '@nuxt/ui'
+
+const UButton = resolveComponent('UButton')
+const UCheckbox = resolveComponent('UCheckbox')
+const UBadge = resolveComponent('UBadge')
+const UDropdownMenu = resolveComponent('UDropdownMenu')
 
 const toast = useToast()
 
@@ -306,7 +310,7 @@ const columns: TableColumn<Payment>[] = [{
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>
 
-      <div class="flex items-center gap-1.5">
+      <!-- <div class="flex items-center gap-1.5">
         <UButton
           color="neutral"
           variant="outline"
@@ -323,7 +327,7 @@ const columns: TableColumn<Payment>[] = [{
         >
           Next
         </UButton>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
