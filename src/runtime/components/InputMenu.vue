@@ -228,6 +228,10 @@ function onBlur(event: FocusEvent) {
   emitFormBlur()
 }
 
+function onFocus(event: FocusEvent) {
+  emits('focus', event)
+}
+
 function onUpdateOpen(value: boolean) {
   if (!value) {
     const event = new FocusEvent('blur')
@@ -269,6 +273,7 @@ defineExpose({
         delimiter=""
         as-child
         @blur="onBlur"
+        @focus="onFocus"
       >
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="(item as string)" :class="ui.tagsItem({ class: props.ui?.tagsItem })">
           <TagsInputItemText :class="ui.tagsItemText({ class: props.ui?.tagsItemText })">
@@ -305,6 +310,7 @@ defineExpose({
         :required="required"
         :class="ui.base({ class: props.ui?.base })"
         @blur="onBlur"
+        @focus="onFocus"
       />
 
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
