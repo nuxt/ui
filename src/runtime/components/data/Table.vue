@@ -3,9 +3,7 @@
     <table :class="[ui.base, ui.divide]">
       <slot v-if="$slots.caption || caption" name="caption">
         <caption :class="ui.caption">
-          {{
-            caption
-          }}
+          {{ caption }}
         </caption>
       </slot>
       <thead :class="ui.thead">
@@ -28,32 +26,14 @@
             v-for="(column, index) in columns"
             :key="index"
             scope="col"
-            :class="[
-              ui.th.base,
-              ui.th.padding,
-              ui.th.color,
-              ui.th.font,
-              ui.th.size,
-              column.class,
-            ]"
+            :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]"
             :aria-sort="getAriaSort(column)"
           >
-            <slot
-              :name="`${column.key}-header`"
-              :column="column"
-              :sort="sort"
-              :on-sort="onSort"
-            >
+            <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
                 v-bind="{ ...(ui.default.sortButton || {}), ...sortButton }"
-                :icon="
-                  !sort.column || sort.column !== column.key
-                    ? sortButton.icon || ui.default.sortButton.icon
-                    : sort.direction === 'asc'
-                      ? sortAscIcon
-                      : sortDescIcon
-                "
+                :icon="(!sort.column || sort.column !== column.key) ? (sortButton.icon || ui.default.sortButton.icon) : sort.direction === 'asc' ? sortAscIcon : sortDescIcon"
                 :label="column[columnAttribute]"
                 @click="onSort(column)"
               />
@@ -64,28 +44,16 @@
 
         <tr v-if="loading && progress">
           <td :colspan="0" :class="ui.progress.wrapper">
-            <UProgress
-              v-bind="{ ...(ui.default.progress || {}), ...progress }"
-              size="2xs"
-            />
+            <UProgress v-bind="{ ...(ui.default.progress || {}), ...progress }" size="2xs" />
           </td>
         </tr>
       </thead>
       <tbody :class="ui.tbody">
         <tr v-if="loadingState && loading && !rows.length">
-          <td
-            :colspan="
-              columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)
-            "
-          >
+          <td :colspan="columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)">
             <slot name="loading-state">
               <div :class="ui.loadingState.wrapper">
-                <UIcon
-                  v-if="loadingState.icon"
-                  :name="loadingState.icon"
-                  :class="ui.loadingState.icon"
-                  aria-hidden="true"
-                />
+                <UIcon v-if="loadingState.icon" :name="loadingState.icon" :class="ui.loadingState.icon" aria-hidden="true" />
                 <p :class="ui.loadingState.label">
                   {{ loadingState.label }}
                 </p>
@@ -95,19 +63,10 @@
         </tr>
 
         <tr v-else-if="emptyState && !rows.length">
-          <td
-            :colspan="
-              columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)
-            "
-          >
+          <td :colspan="columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)">
             <slot name="empty-state">
               <div :class="ui.emptyState.wrapper">
-                <UIcon
-                  v-if="emptyState.icon"
-                  :name="emptyState.icon"
-                  :class="ui.emptyState.icon"
-                  aria-hidden="true"
-                />
+                <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
                 <p :class="ui.emptyState.label">
                   {{ emptyState.label }}
                 </p>
@@ -118,15 +77,7 @@
 
         <template v-else>
           <template v-for="(row, index) in rows" :key="index">
-            <tr
-              :class="[
-                ui.tr.base,
-                isSelected(row) && ui.tr.selected,
-                $attrs.onSelect && ui.tr.active,
-                row?.class,
-              ]"
-              @click="() => onSelect(row)"
-            >
+            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
               <td v-if="modelValue" :class="ui.checkbox.padding">
                 <UCheckbox
                   :model-value="isSelected(row)"
@@ -140,60 +91,28 @@
 
               <td
                 v-if="$slots.expand"
-                :class="[
-                  ui.td.base,
-                  ui.td.padding,
-                  ui.td.color,
-                  ui.td.font,
-                  ui.td.size,
-                ]"
+                :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
               >
                 <UButton
-                  v-bind="{
-                    ...(ui.default.expandButton || {}),
-                    ...expandButton,
-                  }"
-                  :ui="{
-                    icon: {
-                      base: [
-                        ui.expand.icon,
-                        openedRows.includes(index) && 'rotate-180',
-                      ].join(' '),
-                    },
-                  }"
+                  v-bind="{ ...(ui.default.expandButton || {}), ...expandButton }"
+                  :ui="{ icon: { base: [ui.expand.icon, openedRows.includes(index) && 'rotate-180'].join(' ') } }"
                   @click="toggleOpened(index)"
                 />
               </td>
 
-              <td
-                v-for="(column, subIndex) in columns"
-                :key="subIndex"
-                :class="[
-                  ui.td.base,
-                  ui.td.padding,
-                  ui.td.color,
-                  ui.td.font,
-                  ui.td.size,
-                  column?.rowClass,
-                  row[column.key]?.class,
-                ]"
-              >
-                <slot
-                  :name="`${column.key}-data`"
-                  :column="column"
-                  :row="row"
-                  :index="index"
-                  :get-row-data="
-                    (defaultValue) => getRowData(row, column.key, defaultValue)
-                  "
-                >
+              <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, column?.rowClass, row[column.key]?.class]">
+                <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue) => getRowData(row, column.key, defaultValue)">
                   {{ getRowData(row, column.key) }}
                 </slot>
               </td>
             </tr>
             <tr v-if="openedRows.includes(index)">
               <td colspan="100%">
-                <slot name="expand" :row="row" :index="index" />
+                <slot
+                  name="expand"
+                  :row="row"
+                  :index="index"
+                />
               </td>
             </tr>
           </template>
@@ -215,22 +134,12 @@ import UProgress from '../elements/Progress.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, get } from '../../utils'
-import type {
-  Strategy,
-  Button,
-  ProgressColor,
-  ProgressAnimation,
-  DeepPartial
-} from '../../types/index'
+import type { TableRow, TableColumn, Strategy, Button, ProgressColor, ProgressAnimation, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { table } from '#ui/ui.config'
 
-const config = mergeConfig<typeof table>(
-  appConfig.ui.strategy,
-  appConfig.ui.table,
-  table
-)
+const config = mergeConfig<typeof table>(appConfig.ui.strategy, appConfig.ui.table, table)
 
 function defaultComparator<T> (a: T, z: T): boolean {
   return a === z
@@ -246,16 +155,6 @@ function defaultSort (a: any, b: any, direction: 'asc' | 'desc') {
   } else {
     return a > b ? -1 : 1
   }
-}
-
-interface Column {
-  key: string;
-  sortable?: boolean;
-  sort?: (a: any, b: any, direction: 'asc' | 'desc') => number;
-  direction?: 'asc' | 'desc';
-  class?: string;
-  rowClass?: string;
-  [key: string]: any;
 }
 
 export default defineComponent({
@@ -276,11 +175,11 @@ export default defineComponent({
       default: () => defaultComparator
     },
     rows: {
-      type: Array as PropType<{ [key: string]: any }[]>,
+      type: Array as PropType<TableRow[]>,
       default: () => []
     },
     columns: {
-      type: Array as PropType<Column[]>,
+      type: Array as PropType<TableColumn[]>,
       default: null
     },
     columnAttribute: {
@@ -288,7 +187,7 @@ export default defineComponent({
       default: 'label'
     },
     sort: {
-      type: Object as PropType<{ column: string; direction: 'asc' | 'desc' }>,
+      type: Object as PropType<{ column: string, direction: 'asc' | 'desc' }>,
       default: () => ({})
     },
     sortMode: {
@@ -316,11 +215,11 @@ export default defineComponent({
       default: false
     },
     loadingState: {
-      type: Object as PropType<{ icon: string; label: string }>,
+      type: Object as PropType<{ icon: string, label: string }>,
       default: () => config.default.loadingState
     },
     emptyState: {
-      type: Object as PropType<{ icon: string; label: string }>,
+      type: Object as PropType<{ icon: string, label: string }>,
       default: () => config.default.emptyState
     },
     caption: {
@@ -328,10 +227,7 @@ export default defineComponent({
       default: null
     },
     progress: {
-      type: Object as PropType<{
-        color: ProgressColor;
-        animation: ProgressAnimation;
-      }>,
+      type: Object as PropType<{ color: ProgressColor, animation: ProgressAnimation }>,
       default: () => config.default.progress
     },
     class: {
@@ -339,40 +235,17 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<
-        DeepPartial<typeof config> & { strategy?: Strategy }
-      >,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'update:sort'],
   setup (props, { emit, attrs: $attrs }) {
-    const { ui, attrs } = useUI(
-      'table',
-      toRef(props, 'ui'),
-      config,
-      toRef(props, 'class')
-    )
+    const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const columns = computed(
-      () =>
-        props.columns ??
-        Object.keys(props.rows[0] ?? {}).map(
-          (key) =>
-            ({
-              key,
-              label: upperFirst(key),
-              sortable: false,
-              class: undefined,
-              sort: defaultSort
-            }) as Column
-        )
-    )
+    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort }) as TableColumn))
 
-    const sort = useVModel(props, 'sort', emit, {
-      passive: true,
-      defaultValue: defu({}, props.sort, { column: null, direction: 'asc' })
-    })
+    const sort = useVModel(props, 'sort', emit, { passive: true, defaultValue: defu({}, props.sort, { column: null, direction: 'asc' }) })
 
     const openedRows = ref([])
 
@@ -389,8 +262,7 @@ export default defineComponent({
         const aValue = get(a, column)
         const bValue = get(b, column)
 
-        const sort =
-          columns.value.find((col) => col.key === column)?.sort ?? defaultSort
+        const sort = columns.value.find((col) => col.key === column)?.sort ?? defaultSort
 
         return sort(aValue, bValue, direction)
       })
@@ -405,12 +277,7 @@ export default defineComponent({
       }
     })
 
-    const indeterminate = computed(
-      () =>
-        selected.value &&
-        selected.value.length > 0 &&
-        selected.value.length < props.rows.length
-    )
+    const indeterminate = computed(() => selected.value && selected.value.length > 0 && selected.value.length < props.rows.length)
 
     const emptyState = computed(() => {
       if (props.emptyState === null) return null
@@ -438,24 +305,17 @@ export default defineComponent({
       return selected.value.some((item) => compare(toRaw(item), toRaw(row)))
     }
 
-    function onSort (column: { key: string; direction?: 'asc' | 'desc' }) {
+    function onSort (column: { key: string, direction?: 'asc' | 'desc' }) {
       if (sort.value.column === column.key) {
-        const direction =
-          !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
+        const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
 
         if (sort.value.direction === direction) {
           sort.value = defu({}, savedSort, { column: null, direction: 'asc' })
         } else {
-          sort.value = {
-            column: sort.value.column,
-            direction: sort.value.direction === 'asc' ? 'desc' : 'asc'
-          }
+          sort.value = { column: sort.value.column, direction: sort.value.direction === 'asc' ? 'desc' : 'asc' }
         }
       } else {
-        sort.value = {
-          column: column.key,
-          direction: column.direction || 'asc'
-        }
+        sort.value = { column: column.key, direction: column.direction || 'asc' }
       }
     }
 
@@ -483,16 +343,6 @@ export default defineComponent({
       selected.value = newSelected
     }
 
-    function onChangeCheckbox (checked: boolean, row: any) {
-      if (checked) {
-        selected.value.push(row)
-      } else {
-        const index = selected.value.findIndex((item) => compare(item, row))
-
-        selected.value.splice(index, 1)
-      }
-    }
-
     function onChange (checked: boolean) {
       if (checked) {
         selectAllRows()
@@ -501,11 +351,16 @@ export default defineComponent({
       }
     }
 
-    function getRowData (
-      row: Object,
-      rowKey: string | string[],
-      defaultValue: any = ''
-    ) {
+    function onChangeCheckbox (checked: boolean, row: any) {
+      if (checked) {
+        selected.value.push(row)
+      } else {
+        const index = selected.value.findIndex((item) => compare(item, row))
+        selected.value.splice(index, 1)
+      }
+    }
+
+    function getRowData (row: Object, rowKey: string | string[], defaultValue: any = '') {
       return get(row, rowKey, defaultValue)
     }
 
@@ -517,7 +372,7 @@ export default defineComponent({
       }
     }
 
-    function getAriaSort (column: Column): AriaAttributes['aria-sort'] {
+    function getAriaSort (column: TableColumn): AriaAttributes['aria-sort'] {
       if (!column.sortable) {
         return undefined
       }
@@ -553,11 +408,10 @@ export default defineComponent({
       emptyState,
       // eslint-disable-next-line vue/no-dupe-keys
       loadingState,
+      onChangeCheckbox,
       openedRows,
       isSelected,
-      onChangeCheckbox,
       onSort,
-      compare,
       onSelect,
       onChange,
       getRowData,
