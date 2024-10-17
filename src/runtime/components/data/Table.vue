@@ -81,7 +81,6 @@
               <td v-if="modelValue" :class="ui.checkbox.padding">
                 <UCheckbox
                   :model-value="isSelected(row)"
-                  :value="row"
                   v-bind="ui.default.checkbox"
                   aria-label="Select row"
                   @change="onChangeCheckbox($event, row)"
