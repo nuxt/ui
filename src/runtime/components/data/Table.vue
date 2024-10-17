@@ -142,7 +142,7 @@ import { table } from '#ui/ui.config'
 const config = mergeConfig<typeof table>(appConfig.ui.strategy, appConfig.ui.table, table)
 
 function defaultComparator<T> (a: T, z: T): boolean {
-  return a === z
+  return JSON.stringify(a) === JSON.stringify(z)
 }
 
 function defaultSort (a: any, b: any, direction: 'asc' | 'desc') {
@@ -297,7 +297,7 @@ export default defineComponent({
       return props.by(a, z)
     }
 
-    function isSelected (row) {
+    function isSelected (row: TableRow) {
       if (!props.modelValue) {
         return false
       }
@@ -319,7 +319,7 @@ export default defineComponent({
       }
     }
 
-    function onSelect (row) {
+    function onSelect (row: TableRow) {
       if (!$attrs.onSelect) {
         return
       }
@@ -351,7 +351,7 @@ export default defineComponent({
       }
     }
 
-    function onChangeCheckbox (checked: boolean, row: Object) {
+    function onChangeCheckbox (checked: boolean, row: TableRow) {
       if (checked) {
         selected.value.push(row)
       } else {
@@ -360,7 +360,7 @@ export default defineComponent({
       }
     }
 
-    function getRowData (row: Object, rowKey: string | string[], defaultValue: any = '') {
+    function getRowData (row: TableRow, rowKey: string | string[], defaultValue: any = '') {
       return get(row, rowKey, defaultValue)
     }
 
