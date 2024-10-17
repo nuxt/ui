@@ -62,7 +62,7 @@ ignore:
 props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
-  avatar.src: 'https://github.com/benjamincanac.png'
+  avatar.src: 'https://github.com/nuxt.png'
 ---
 ::
 
