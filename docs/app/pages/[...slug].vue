@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { withoutTrailingSlash } from 'ufo'
 import { findPageHeadline } from '#ui-pro/utils/content'
 
 const route = useRoute()
@@ -8,22 +7,14 @@ definePageMeta({
   layout: 'docs'
 })
 
-const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+const { data: page } = await useAsyncData(route.path, () => queryCollection('content').path(route.path).first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryContent()
-    .where({
-      _extension: 'md',
-      navigation: {
-        $ne: false
-      }
-    })
-    .only(['title', 'description', '_path'])
-    .findSurround(withoutTrailingSlash(route.path))
-}, { default: () => [] })
+const { data: surround } = await useAsyncData(`${route.path}-surround`, () => queryCollectionItemSurroundings('content', route.path, {
+  fields: ['description']
+}))
 
 const headline = computed(() => findPageHeadline(page.value))
 
@@ -44,7 +35,7 @@ defineOgImageComponent('Docs', {
 const communityLinks = computed(() => [{
   icon: 'i-heroicons-pencil-square',
   label: 'Edit this page',
-  to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?._file}`,
+  to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
   icon: 'i-heroicons-star',
