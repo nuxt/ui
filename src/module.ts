@@ -1,8 +1,7 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
 import { addTemplates } from './templates'
-import icons from './theme/icons'
-import { pick } from './runtime/utils'
+import { defaultOptions, getDefaultUiConfig } from './defaults'
 
 export type * from './runtime/types'
 
@@ -58,15 +57,7 @@ export default defineNuxtModule<ModuleOptions>({
     },
     docs: 'https://ui3.nuxt.dev/getting-started/installation'
   },
-  defaults: {
-    prefix: 'U',
-    fonts: true,
-    colorMode: true,
-    theme: {
-      colors: undefined,
-      transitions: true
-    }
-  },
+  defaults: defaultOptions,
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
@@ -77,18 +68,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
-      colors: pick({
-        primary: 'green',
-        secondary: 'blue',
-        success: 'green',
-        info: 'blue',
-        warning: 'yellow',
-        error: 'red',
-        neutral: 'slate'
-      }, [...(options.theme?.colors || []), 'neutral' as any]),
-      icons
-    })
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultUiConfig(options.theme.colors))
 
     // Isolate root node from portaled components
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}

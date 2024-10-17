@@ -1,13 +1,15 @@
 import { fileURLToPath } from 'node:url'
 import { kebabCase } from 'scule'
 import { addTemplate, addTypeTemplate } from '@nuxt/kit'
-import type { Nuxt } from '@nuxt/schema'
+import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 
-export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
+export function getTemplates(options: ModuleOptions, nuxt: Nuxt) {
+  const templates: NuxtTemplate[] = []
+
   for (const component in theme) {
-    addTemplate({
+    templates.push({
       filename: `ui/${kebabCase(component)}.ts`,
       write: true,
       getContents: async () => {
@@ -41,14 +43,14 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
     })
   }
 
-  addTemplate({
+  templates.push({
     filename: 'ui/index.ts',
     write: true,
     getContents: () => Object.keys(theme).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
   })
 
   // FIXME: `typeof colors[number]` should include all colors from the theme
-  addTypeTemplate({
+  templates.push({
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
 import type { DeepPartial } from '#ui/types/utils'
@@ -76,4 +78,17 @@ declare module '@nuxt/schema' {
 export {}
 `
   })
+
+  return templates
+}
+
+export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
+  const templates = getTemplates(options, nuxt)
+  for (const template of templates) {
+    if (template.filename!.endsWith('.d.ts')) {
+      addTypeTemplate(template as NuxtTypeTemplate)
+    } else {
+      addTemplate(template)
+    }
+  }
 }
