@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps, DropdownMenuTriggerProps } from 'radix-vue'
+import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
@@ -35,7 +35,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
 
 type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
-export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>, Pick<DropdownMenuTriggerProps, 'disabled'> {
+export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'> {
   size?: DropdownMenuVariants['size']
   items?: T[] | T[][]
   /**
@@ -63,6 +63,7 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
    * @defaultValue 'label'
    */
   labelKey?: string
+  disabled?: boolean
   class?: any
   ui?: PartialString<typeof dropdownMenu.slots>
 }

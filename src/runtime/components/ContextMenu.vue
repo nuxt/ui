@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuTriggerProps } from 'radix-vue'
+import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
@@ -35,7 +35,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
 
 type ContextMenuVariants = VariantProps<typeof contextMenu>
 
-export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'>, Pick<ContextMenuTriggerProps, 'disabled'> {
+export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
   size?: ContextMenuVariants['size']
   items?: T[] | T[][]
   /**
@@ -55,6 +55,7 @@ export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'>, 
    * @defaultValue 'label'
    */
   labelKey?: string
+  disabled?: boolean
   class?: any
   ui?: PartialString<typeof contextMenu.slots>
 }
