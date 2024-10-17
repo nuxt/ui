@@ -187,7 +187,7 @@ export default defineNuxtModule<ModuleOptions>({
         pages.unshift({
           name: 'ui-devtools',
           path: '/__nuxt_ui__/components/:slug',
-          file: resolve(__dirname, './runtime/DevtoolsRenderer.vue')
+          file: resolve(__dirname, './runtime/devtools/DevtoolsRenderer.vue')
           // https://github.com/nuxt/nuxt/pull/29366
           // meta: {
           //   isolate: true
