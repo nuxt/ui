@@ -169,7 +169,7 @@ exports[`Button > renders with primary variant ghost correctly 1`] = `
 `;
 
 exports[`Button > renders with primary variant link correctly 1`] = `
-"<button type="button" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)] disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)]">
+"<button type="button" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)]">
   <!--v-if--><span class="truncate">Button</span>
   <!--v-if-->
 </button>"

@@ -99,7 +99,7 @@ export default (options: Required<ModuleOptions>) => ({
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'link',
-    class: `text-[var(--ui-${color})] hover:text-[var(--ui-${color})] disabled:text-[var(--ui-${color})] aria-disabled:text-[var(--ui-${color})] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-${color})]`
+    class: `text-[var(--ui-${color})] hover:text-[var(--ui-${color})]/75 disabled:text-[var(--ui-${color})] aria-disabled:text-[var(--ui-${color})] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-${color})]`
   })), {
     color: 'neutral',
     variant: 'solid',
