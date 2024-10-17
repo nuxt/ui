@@ -12,6 +12,7 @@ interface ContextMenuContentProps<T> extends Omit<RadixContextMenuContentProps, 
   sub?: boolean
   labelKey: string
   checkedIcon?: string
+  loadingIcon?: string
   class?: any
   ui: typeof _contextMenu
   uiOverride?: any
@@ -51,7 +52,8 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
   <DefineItemTemplate v-slot="{ item, active, index }">
     <slot :name="item.slot || 'item'" :item="(item as T)" :index="index">
       <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="(item as T)" :active="active" :index="index">
-        <UIcon v-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: uiOverride?.itemLeadingIcon, active })" />
+        <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: uiOverride?.itemLeadingIcon, loading: true })" />
+        <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: uiOverride?.itemLeadingIcon, active })" />
         <UAvatar v-else-if="item.avatar" :size="((props.uiOverride?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: uiOverride?.itemLeadingAvatar, active })" />
       </slot>
 
@@ -106,6 +108,8 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               :items="item.children"
               :align-offset="-4"
               :label-key="labelKey"
+              :checked-icon="checkedIcon"
+              :loading-icon="loadingIcon"
               v-bind="item.content"
             >
               <template v-for="(_, name) in proxySlots" #[name]="slotData: any">

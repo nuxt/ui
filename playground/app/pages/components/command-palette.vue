@@ -33,7 +33,8 @@ const groups = computed(() => [{
     icon: 'i-heroicons-document-plus',
     loading: loading.value,
     onSelect(e: Event) {
-      e?.preventDefault()
+      e.preventDefault()
+
       toast.add({ title: 'New file added!' })
 
       loading.value = true
@@ -48,7 +49,8 @@ const groups = computed(() => [{
     suffix: 'Create a new folder in the current directory or workspace.',
     icon: 'i-heroicons-folder-plus',
     onSelect(e: Event) {
-      e?.preventDefault()
+      e.preventDefault()
+
       toast.add({ title: 'New folder added!' })
     },
     kbds: ['meta', 'F']
@@ -57,7 +59,8 @@ const groups = computed(() => [{
     suffix: 'Add a hashtag to the current item.',
     icon: 'i-heroicons-hashtag',
     onSelect(e: Event) {
-      e?.preventDefault()
+      e.preventDefault()
+
       toast.add({ title: 'Hashtag added!' })
     },
     kbds: ['meta', 'H']
@@ -66,7 +69,8 @@ const groups = computed(() => [{
     suffix: 'Add a label to the current item.',
     icon: 'i-heroicons-tag',
     onSelect(e: Event) {
-      e?.preventDefault()
+      e.preventDefault()
+
       toast.add({ title: 'Label added!' })
     },
     kbds: ['meta', 'L']

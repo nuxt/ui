@@ -24,6 +24,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
    */
   type?: 'label' | 'separator' | 'link' | 'checkbox'
   slot?: string
+  loading?: boolean
   disabled?: boolean
   checked?: boolean
   open?: boolean
@@ -43,6 +44,11 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
    * @defaultValue appConfig.ui.icons.check
    */
   checkedIcon?: string
+  /**
+   * The icon displayed when an item is loading.
+   * @defaultValue appConfig.ui.icons.loading
+   */
+  loadingIcon?: string
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8 }
@@ -123,6 +129,7 @@ const ui = computed(() => dropdownMenu({
       :portal="portal"
       :label-key="labelKey"
       :checked-icon="checkedIcon"
+      :loading-icon="loadingIcon"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />

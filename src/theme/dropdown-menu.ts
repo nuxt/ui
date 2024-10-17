@@ -29,6 +29,11 @@ export default (options: Required<ModuleOptions>) => ({
         itemLeadingIcon: ['text-[var(--ui-text-dimmed)] group-data-highlighted:text-[var(--ui-text)] group-data-[state=open]:text-[var(--ui-text)]', options.theme.transitions && 'transition-colors']
       }
     },
+    loading: {
+      true: {
+        itemLeadingIcon: 'animate-spin'
+      }
+    },
     size: {
       xs: {
         label: 'p-1 text-xs gap-1',

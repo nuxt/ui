@@ -24,6 +24,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
    */
   type?: 'label' | 'separator' | 'link' | 'checkbox'
   slot?: string
+  loading?: boolean
   disabled?: boolean
   checked?: boolean
   open?: boolean
@@ -43,6 +44,11 @@ export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
    * @defaultValue appConfig.ui.icons.check
    */
   checkedIcon?: string
+  /**
+   * The icon displayed when an item is loading.
+   * @defaultValue appConfig.ui.icons.loading
+   */
+  loadingIcon?: string
   /** The content of the menu. */
   content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -113,6 +119,7 @@ const ui = computed(() => contextMenu({
       :portal="portal"
       :label-key="labelKey"
       :checked-icon="checkedIcon"
+      :loading-icon="loadingIcon"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />

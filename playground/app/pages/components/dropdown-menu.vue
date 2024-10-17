@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import theme from '#build/ui/dropdown-menu'
 
-const items = [
+const loading = ref(false)
+
+const items = computed(() => [
   [{
     label: 'My account',
     avatar: {
@@ -45,7 +47,7 @@ const items = [
       icon: 'i-heroicons-link',
       kbds: ['meta', 'i'],
       onSelect(e: Event) {
-        e?.preventDefault()
+        e.preventDefault()
         console.log('Invite by link clicked')
       }
     }], [{
@@ -80,8 +82,14 @@ const items = [
     label: 'New team',
     icon: 'i-heroicons-plus',
     kbds: ['meta', 'n'],
-    onSelect() {
-      console.log('New team clicked')
+    loading: loading.value,
+    onSelect(e: Event) {
+      e.preventDefault()
+
+      loading.value = true
+      setTimeout(() => {
+        loading.value = false
+      }, 2000)
     }
   }], [{
     label: 'GitHub',
@@ -112,13 +120,13 @@ const items = [
       console.log('Logout clicked')
     }
   }]
-]
+])
 
 const sizes = Object.keys(theme.variants.size)
 
 const size = ref('md' as const)
 
-defineShortcuts(extractShortcuts(items))
+defineShortcuts(extractShortcuts(items.value))
 </script>
 
 <template>
