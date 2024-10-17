@@ -1,9 +1,12 @@
 import { computed, toValue, type MaybeRefOrGetter } from 'vue'
 import { useAppConfig } from '#imports'
+import type { AvatarProps } from '../types'
 
 export interface UseComponentIconsProps {
   /** Display an icon based on the `leading` and `trailing` props. */
   icon?: string
+  /** Display an avatar on the left side. */
+  avatar?: AvatarProps
   /** When `true`, the icon will be displayed on the left side. */
   leading?: boolean
   /** Display an icon on the left side. */

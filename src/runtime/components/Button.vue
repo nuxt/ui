@@ -5,6 +5,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/button'
 import type { LinkProps } from './Link.vue'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import type { AvatarProps } from '../types'
 import type { PartialString } from '../types/utils'
 import { formLoadingInjectionKey } from '../composables/useFormField'
 
@@ -99,6 +100,7 @@ const ui = computed(() => button({
   >
     <slot name="leading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+      <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
     </slot>
 
     <slot>

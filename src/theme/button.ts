@@ -7,6 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
+    leadingAvatarSize: '',
     trailingIcon: 'shrink-0'
   },
   variants: {
@@ -27,32 +28,38 @@ export default (options: Required<ModuleOptions>) => ({
       xs: {
         base: 'px-2 py-1 text-xs gap-1',
         leadingIcon: 'size-4',
+        leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       sm: {
         base: 'px-2.5 py-1.5 text-xs gap-1.5',
         leadingIcon: 'size-4',
+        leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       md: {
         base: 'px-2.5 py-1.5 text-sm gap-1.5',
         leadingIcon: 'size-5',
+        leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       lg: {
         base: 'px-3 py-2 text-sm gap-2',
         leadingIcon: 'size-5',
+        leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       xl: {
         base: 'px-3 py-2 text-base gap-2',
         leadingIcon: 'size-6',
+        leadingAvatarSize: 'xs',
         trailingIcon: 'size-6'
       }
     },
     block: {
       true: {
         base: 'w-full justify-center',
+        leadingAvatarSize: 'xs',
         trailingIcon: 'ms-auto'
       }
     },

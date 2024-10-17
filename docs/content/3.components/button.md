@@ -125,6 +125,40 @@ props:
 ---
 ::
 
+### Avatar
+
+Use the `avatar` prop to show an [Avatar](/components/avatar) inside the Button.
+
+::component-code
+---
+prettier: true
+props:
+  avatar:
+    src: 'https://github.com/nuxt.png'
+  size: md
+  color: neutral
+  variant: outline
+slots:
+  default: |
+
+    Button
+---
+::
+
+The `label` as prop or slot is optional so you can use the Button as an avatar-only button.
+
+::component-code
+---
+prettier: true
+props:
+  avatar:
+    src: 'https://github.com/nuxt.png'
+  size: md
+  color: neutral
+  variant: outline
+---
+::
+
 ### Loading
 
 Use the `loading` prop to show a loading icon and disable the Button.
