@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const open = ref(false)
 const items = ref(['Backlog', 'Todo', 'In Progress', 'Done'])
+const value = ref('Backlog')
 
 defineShortcuts({
   o: () => open.value = !open.value
@@ -8,5 +9,5 @@ defineShortcuts({
 </script>
 
 <template>
-  <USelect v-model:open="open" default-value="Backlog" :items="items" class="w-40" />
+  <USelect v-model="value" v-model:open="open" :items="items" class="w-48" />
 </template>

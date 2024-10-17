@@ -22,11 +22,11 @@ const items = ref([
     }
   }
 ])
-const selected = ref(items.value[0])
+const value = ref(items.value[0])
 </script>
 
 <template>
-  <UInputMenu v-model="selected" :items="items" class="w-40">
+  <UInputMenu v-model="value" :items="items">
     <template #leading="{ modelValue, ui }">
       <UChip
         v-if="modelValue"

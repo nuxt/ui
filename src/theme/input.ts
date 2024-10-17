@@ -8,6 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
     leading: 'absolute inset-y-0 start-0 flex items-center',
     leadingIcon: 'shrink-0 text-[var(--ui-text-dimmed)]',
     leadingAvatar: 'shrink-0',
+    leadingAvatarSize: '',
     trailing: 'absolute inset-y-0 end-0 flex items-center',
     trailingIcon: 'shrink-0 text-[var(--ui-text-dimmed)]'
   },
@@ -19,6 +20,7 @@ export default (options: Required<ModuleOptions>) => ({
         leading: 'pl-2',
         trailing: 'pr-2',
         leadingIcon: 'size-4',
+        leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       sm: {
@@ -26,6 +28,7 @@ export default (options: Required<ModuleOptions>) => ({
         leading: 'pl-2.5',
         trailing: 'pr-2.5',
         leadingIcon: 'size-4',
+        leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       md: {
@@ -33,6 +36,7 @@ export default (options: Required<ModuleOptions>) => ({
         leading: 'pl-2.5',
         trailing: 'pr-2.5',
         leadingIcon: 'size-5',
+        leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       lg: {
@@ -40,6 +44,7 @@ export default (options: Required<ModuleOptions>) => ({
         leading: 'pl-3',
         trailing: 'pr-3',
         leadingIcon: 'size-5',
+        leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       xl: {
@@ -47,6 +52,7 @@ export default (options: Required<ModuleOptions>) => ({
         leading: 'pl-3',
         trailing: 'pr-3',
         leadingIcon: 'size-6',
+        leadingAvatarSize: 'xs',
         trailingIcon: 'size-6'
       }
     },

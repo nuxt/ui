@@ -136,6 +136,24 @@ props:
 ---
 ::
 
+### Avatar
+
+Use the `avatar` prop to show an [Avatar](/components/avatar) inside the Input.
+
+::component-code
+---
+prettier: true
+ignore:
+  - placeholder
+props:
+  avatar:
+    src: 'https://github.com/nuxt.png'
+  size: md
+  variant: outline
+  placeholder: 'Search...'
+---
+::
+
 ### Loading
 
 Use the `loading` prop to show a loading icon on the Input.

@@ -43,7 +43,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -74,7 +74,7 @@ props:
     - label: 'Todo'
     - label: 'In Progress'
     - label: 'Done'
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -107,7 +107,7 @@ props:
       - Carrot
       - Courgette
       - Leek
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -138,7 +138,7 @@ props:
       id: 'in_progress'
     - label: 'Done'
       id: 'done'
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -167,7 +167,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -194,7 +194,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -228,7 +228,7 @@ props:
       icon: 'i-heroicons-arrow-up-circle'
     - label: Done
       icon: 'i-heroicons-check-circle'
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -271,7 +271,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -298,7 +298,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -330,7 +330,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -356,7 +356,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -383,7 +383,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -410,7 +410,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -441,12 +441,40 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
 ::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
+::
+
+### Avatar
+
+Use the `avatar` prop to display an [Avatar](/components/avatar) inside the SelectMenu.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Nuxt'
+  avatar:
+    src: 'https://github.com/nuxt.png'
+  items:
+    - Nuxt
+    - NuxtHub
+    - NuxtLabs
+    - Nuxt Modules
+    - Nuxt Community
+  class: 'w-48'
+---
 ::
 
 ### Loading
@@ -472,7 +500,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -499,7 +527,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -528,7 +556,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -566,7 +594,7 @@ props:
     - Carrot
     - Courgette
     - Leek
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -582,7 +610,7 @@ name: 'select-menu-items-icon-example'
 ::
 
 ::tip
-You can also use the `#leading` slot to display the selected icon, like in the next example.
+You can also use the `#leading` slot to display the selected icon.
 ::
 
 ### With avatar in items
@@ -596,8 +624,8 @@ name: 'select-menu-items-avatar-example'
 ---
 ::
 
-::note
-In this example, the `#leading` slot is used to display the selected avatar.
+::tip
+You can also use the `#leading` slot to display the selected avatar.
 ::
 
 ### With chip in items

@@ -23,14 +23,13 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
     :filter="false"
     icon="i-heroicons-user"
     placeholder="Select user"
-    class="w-48"
   >
     <template #leading="{ modelValue, ui }">
       <UAvatar
         v-if="modelValue"
         v-bind="modelValue.avatar"
-        :size="ui.itemLeadingAvatarSize()"
-        :class="ui.itemLeadingAvatar()"
+        :size="ui.leadingAvatarSize()"
+        :class="ui.leadingAvatar()"
       />
     </template>
   </UInputMenu>

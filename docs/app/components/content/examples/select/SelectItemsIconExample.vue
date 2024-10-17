@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const selected = ref('backlog')
 const items = ref([
   {
     label: 'Backlog',
@@ -22,10 +21,11 @@ const items = ref([
     icon: 'i-heroicons-check-circle'
   }
 ])
+const value = ref(items.value[0]?.value)
 
-const icon = computed(() => items.value.find(item => item.value === selected.value)?.icon)
+const icon = computed(() => items.value.find(item => item.value === value.value)?.icon)
 </script>
 
 <template>
-  <USelect v-model="selected" :icon="icon" :items="items" class="w-40" />
+  <USelect v-model="value" :icon="icon" :items="items" class="w-48" />
 </template>
