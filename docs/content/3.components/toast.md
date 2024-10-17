@@ -214,42 +214,15 @@ In this example, we use the `AppConfig` to configure the `expand` prop of the `T
 
 ### Props
 
-::component-props
----
-ignore:
-  - as
-  - open
-  - defaultOpen
-  - to
-  - target
-  - active
-  - activeClass
-  - inactiveClass
-  - exactActiveClass
-  - ariaCurrentValue
-  - href
-  - rel
-  - noRel
-  - prefetch
-  - prefetchOn
-  - noPrefetch
-  - prefetchedClass
-  - replace
-  - exact
-  - exactQuery
-  - exactHash
-  - external
-  - onClick
----
-::
+:component-props
 
-<!-- ### Slots
+### Slots
 
 :component-slots
 
 ### Emits
 
-:component-emits -->
+:component-emits
 
 ## Theme
 
