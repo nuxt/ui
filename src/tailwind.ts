@@ -4,11 +4,11 @@ import { addTemplate, createResolver, installModule, useNuxt } from '@nuxt/kit'
 import { setGlobalColors } from './runtime/utils/colors'
 import type { ModuleOptions } from './module'
 
-export default async function installTailwind (
+export default function installTailwind (
   moduleOptions: ModuleOptions,
   nuxt = useNuxt(),
   resolve = createResolver(import.meta.url).resolve
-) {
+): Promise<void> {
   const runtimeDir = resolve('./runtime')
 
   // 1. register hook
@@ -84,7 +84,7 @@ export default async function installTailwind (
   }
 
   // 3. install module
-  await installModule('@nuxtjs/tailwindcss', defu({
+  return installModule('@nuxtjs/tailwindcss', defu({
     exposeConfig: true,
     config: {
       darkMode: 'class' as const
