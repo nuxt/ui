@@ -351,7 +351,7 @@ export default defineComponent({
       }
     }
 
-    function onChangeCheckbox (checked: boolean, row: any) {
+    function onChangeCheckbox (checked: boolean, row: Object) {
       if (checked) {
         selected.value.push(row)
       } else {
