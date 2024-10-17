@@ -27,7 +27,7 @@ const data = {
       <UAlert :title="data.title" :icon="data.icon" :close="data.close" />
       <UAlert :title="data.title" :icon="data.icon" :close="data.close" :actions="actions('neutral')" />
       <UAlert :title="data.title" :icon="data.icon" :close="data.close" :description="data.description" />
-      <UAlert :title="data.title" :avatar="{ src: 'https://avatars.githubusercontent.com/u/739984?v=4' }" :close="data.close" :description="data.description" />
+      <UAlert :title="data.title" :avatar="{ src: 'https://github.com/benjamincanac.png' }" :close="data.close" :description="data.description" />
     </div>
 
     <div class="flex items-center gap-2">

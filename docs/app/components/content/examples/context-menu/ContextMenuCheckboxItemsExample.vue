@@ -14,8 +14,8 @@ const items = computed(() => [{
   onUpdateChecked(checked: boolean) {
     showSidebar.value = checked
   },
-  onSelect(e?: Event) {
-    e?.preventDefault()
+  onSelect(e: Event) {
+    e.preventDefault()
   }
 }, {
   label: 'Show Toolbar',

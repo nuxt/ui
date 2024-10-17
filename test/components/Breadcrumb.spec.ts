@@ -6,7 +6,7 @@ describe('Breadcrumb', () => {
   const items = [{
     label: 'Home',
     avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+      src: 'https://github.com/benjamincanac.png'
     },
     to: '/'
   }, {

@@ -22,6 +22,7 @@ const items = ref([
     }
   }
 ])
+const value = ref(items.value[0]?.value)
 
 function getChip(value: string) {
   return items.value.find(item => item.value === value)?.chip
@@ -29,7 +30,7 @@ function getChip(value: string) {
 </script>
 
 <template>
-  <USelect default-value="bug" :items="items" class="w-40">
+  <USelect v-model="value" :items="items" class="w-48">
     <template #leading="{ modelValue, ui }">
       <UChip
         v-if="modelValue"

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { InputHTMLAttributes } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxItemProps, ComboboxArrowProps } from 'radix-vue'
+import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
@@ -13,7 +13,7 @@ const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof th
 
 const inputMenu = tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu || {}) })
 
-export interface InputMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
+export interface InputMenuItem {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -23,6 +23,7 @@ export interface InputMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
+  disabled?: boolean
   onSelect?(e?: Event): void
 }
 
@@ -163,7 +164,7 @@ const ui = computed(() => inputMenu({
   size: inputSize?.value,
   loading: props.loading,
   highlight: highlight.value,
-  leading: isLeading.value || !!slots.leading,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   multiple: props.multiple,
   buttonGroup: orientation.value
@@ -306,9 +307,10 @@ defineExpose({
         @blur="onBlur"
       />
 
-      <span v-if="isLeading || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+      <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as T)" :open="open" :ui="ui">
-          <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
@@ -345,8 +347,8 @@ defineExpose({
               >
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
-                    <UAvatar v-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
-                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
+                    <UIcon v-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
+                    <UAvatar v-else-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
                     <UChip
                       v-else-if="item.chip"
                       :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"

@@ -41,6 +41,7 @@ Each group takes some `items` as an array of objects with the following properti
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `chip?: ChipProps`{lang="ts-type"}
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
+- `loading?: boolean`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `onSelect?(e?: Event): void`{lang="ts-type"}
@@ -592,32 +593,7 @@ You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing
 
 ### Props
 
-::component-props
----
-ignore:
-  - as
-  - to
-  - target
-  - active
-  - activeClass
-  - inactiveClass
-  - exactActiveClass
-  - ariaCurrentValue
-  - href
-  - rel
-  - noRel
-  - prefetch
-  - prefetchOn
-  - noPrefetch
-  - prefetchedClass
-  - replace
-  - exact
-  - exactQuery
-  - exactHash
-  - external
-  - onClick
----
-::
+:component-props
 
 ### Slots
 

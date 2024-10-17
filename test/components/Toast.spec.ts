@@ -31,7 +31,7 @@ describe('Toast', () => {
     ['with title', { props }],
     ['with description', { props: { ...props, description: 'This is a toast' } }],
     ['with icon', { props: { ...props, icon: 'i-heroicons-rocket-launch' } }],
-    ['with avatar', { props: { ...props, avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' } } }],
+    ['with avatar', { props: { ...props, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with actions', { props: { ...props, actions: [{ label: 'Action' }] } }],
     ['with description actions', { props: { ...props, description: 'This is a toast', actions: [{ label: 'Action' }] } }],
     ['without close', { props: { ...props, close: false } }],
