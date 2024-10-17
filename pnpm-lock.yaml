@@ -166,8 +166,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: ^1.4.4
-        version: 1.4.4(vue@3.5.12(typescript@5.6.3))
+        specifier: npm:@nuxt/ui-pro-edge@1.4.4-28819338.453a914
+        version: '@nuxt/ui-pro-edge@1.4.4-28819338.453a914(vue@3.5.12(typescript@5.6.3))'
       '@nuxtjs/plausible':
         specifier: ^1.0.3
         version: 1.0.3(magicast@0.3.5)(rollup@4.24.0)
@@ -1399,8 +1399,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@1.4.4':
-    resolution: {integrity: sha512-sQbaXcUaMWxTYf0UewkncvRc5U3CeamTuDP3bDYi0uni//9BqVSby7avKgKGRZZwq4z2U+cmlMkWgxk1DFM0hQ==}
+  '@nuxt/ui-pro-edge@1.4.4-28819338.453a914':
+    resolution: {integrity: sha512-Lampt5GqlQ0wpeIUmwLOzz7/0oC3g8juMYVNNej9bz0zYdYyfB+7L1CSVZsiZKkD+Sp2HxPnS0ewScFRHwE/KQ==}
 
   '@nuxt/vite-builder@3.13.2':
     resolution: {integrity: sha512-3dzc3YH3UeTmzGtCevW1jTq0Q8/cm+yXqo/VS/EFM3aIO/tuNPS88is8ZF2YeBButFnLFllq/QenziPbq0YD6Q==}
@@ -6038,9 +6038,6 @@ packages:
     peerDependencies:
       tailwindcss: 1 || 2 || 2.0.1-compat || 3
 
-  tailwind-merge@2.5.3:
-    resolution: {integrity: sha512-d9ZolCAIzom1nf/5p4LdD5zvjmgSxY0BGgdSvmXIoMYAiPdAW/dSpP7joCDYFY7r/HkEa2qmPtkgsu0xjQeQtw==}
-
   tailwind-merge@2.5.4:
     resolution: {integrity: sha512-0q8cfZHMu9nuYP/b5Shb7Y7Sh1B7Nnl5GqNr1U+n2p6+mybvRtayrQ+0042Z5byvTA8ihjlP8Odo8/VnHbZu4Q==}
 
@@ -8178,7 +8175,7 @@ snapshots:
       - supports-color
       - webpack-sources
 
-  '@nuxt/ui-pro@1.4.4(vue@3.5.12(typescript@5.6.3))':
+  '@nuxt/ui-pro-edge@1.4.4-28819338.453a914(vue@3.5.12(typescript@5.6.3))':
     dependencies:
       '@iconify-json/vscode-icons': 1.2.2
       '@nuxt/ui': 'link:'
@@ -8189,7 +8186,7 @@ snapshots:
       parse-git-config: 3.0.0
       pathe: 1.1.2
       pkg-types: 1.2.1
-      tailwind-merge: 2.5.3
+      tailwind-merge: 2.5.4
       vue3-smooth-dnd: 0.0.6(vue@3.5.12(typescript@5.6.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -14190,8 +14187,6 @@ snapshots:
       tailwindcss: 3.4.14
     transitivePeerDependencies:
       - supports-color
-
-  tailwind-merge@2.5.3: {}
 
   tailwind-merge@2.5.4: {}
 
