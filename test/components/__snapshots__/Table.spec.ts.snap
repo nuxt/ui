@@ -4,47 +4,185 @@ exports[`Table > renders with class correctly 1`] = `
 "<div class="overflow-x-auto absolute">
   <table class="min-w-full table-fixed divide-y divide-[var(--ui-border-accented)]">
     <thead class="">
-      <tr class="">
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Id</th>
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Amount</th>
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Status</th>
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Email</th>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Email</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">m5gr84i9</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">316</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">success</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">ken99@yahoo.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">3u1reuv4</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">242</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">success</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">Abe45@gmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">derv1ws0</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">837</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">processing</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">Monserrat44@gmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">5kma53ae</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">874</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">success</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">Silas22@gmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">bhqecj4p</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">721</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">failed</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">carmella@hotmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+  </table>
+</div>"
+`;
+
+exports[`Table > renders with columns correctly 1`] = `
+"<div class="relative overflow-x-auto">
+  <table class="min-w-full table-fixed divide-y divide-[var(--ui-border-accented)]">
+    <thead class="">
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">
+          <ucheckbox modelvalue="false" indeterminate="false" arialabel="Select all"></ucheckbox>
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">#</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Date</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">
+          <ubutton color="neutral" variant="ghost" label="Email" icon="i-heroicons-arrows-up-down-20-solid" class="-mx-2.5"></ubutton>
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">
+          <div class="text-right">Amount</div>
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">
+          <!---->
+        </th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-[var(--ui-border)]">
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <ucheckbox modelvalue="false" arialabel="Select row"></ucheckbox>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">#m5gr84i9</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Invalid Date</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <ubadge class="capitalize" variant="subtle"></ubadge>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="lowercase">ken99@yahoo.com</div>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="text-right font-medium">€316.00</div>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="text-right">
+            <udropdownmenu content="[object Object]" items="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"></udropdownmenu>
+          </div>
+        </td>
+      </tr>
+      <!--v-if-->
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <ucheckbox modelvalue="false" arialabel="Select row"></ucheckbox>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">#3u1reuv4</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Invalid Date</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <ubadge class="capitalize" variant="subtle"></ubadge>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="lowercase">Abe45@gmail.com</div>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="text-right font-medium">€242.00</div>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="text-right">
+            <udropdownmenu content="[object Object]" items="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"></udropdownmenu>
+          </div>
+        </td>
+      </tr>
+      <!--v-if-->
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <ucheckbox modelvalue="false" arialabel="Select row"></ucheckbox>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">#derv1ws0</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Invalid Date</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <ubadge class="capitalize" variant="subtle"></ubadge>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="lowercase">Monserrat44@gmail.com</div>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="text-right font-medium">€837.00</div>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="text-right">
+            <udropdownmenu content="[object Object]" items="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"></udropdownmenu>
+          </div>
+        </td>
+      </tr>
+      <!--v-if-->
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <ucheckbox modelvalue="false" arialabel="Select row"></ucheckbox>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">#5kma53ae</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Invalid Date</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <ubadge class="capitalize" variant="subtle"></ubadge>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="lowercase">Silas22@gmail.com</div>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="text-right font-medium">€874.00</div>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="text-right">
+            <udropdownmenu content="[object Object]" items="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"></udropdownmenu>
+          </div>
+        </td>
+      </tr>
+      <!--v-if-->
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <ucheckbox modelvalue="false" arialabel="Select row"></ucheckbox>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">#bhqecj4p</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Invalid Date</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <ubadge class="capitalize" variant="subtle" color="error"></ubadge>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="lowercase">carmella@hotmail.com</div>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="text-right font-medium">€721.00</div>
+        </td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
+          <div class="text-right">
+            <udropdownmenu content="[object Object]" items="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"></udropdownmenu>
+          </div>
+        </td>
       </tr>
       <!--v-if-->
     </tbody>
@@ -56,47 +194,47 @@ exports[`Table > renders with data correctly 1`] = `
 "<div class="relative overflow-x-auto">
   <table class="min-w-full table-fixed divide-y divide-[var(--ui-border-accented)]">
     <thead class="">
-      <tr class="">
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Id</th>
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Amount</th>
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Status</th>
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Email</th>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Email</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">m5gr84i9</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">316</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">success</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">ken99@yahoo.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">3u1reuv4</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">242</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">success</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">Abe45@gmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">derv1ws0</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">837</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">processing</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">Monserrat44@gmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">5kma53ae</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">874</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">success</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">Silas22@gmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">bhqecj4p</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">721</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">failed</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">carmella@hotmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">carmella@hotmail.com</td>
       </tr>
       <!--v-if-->
     </tbody>
@@ -108,47 +246,47 @@ exports[`Table > renders with ui correctly 1`] = `
 "<div class="relative overflow-x-auto">
   <table class="min-w-full divide-y divide-[var(--ui-border-accented)] table-auto">
     <thead class="">
-      <tr class="">
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Id</th>
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Amount</th>
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Status</th>
-        <th class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold">Email</th>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Email</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">m5gr84i9</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">316</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">success</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">ken99@yahoo.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">3u1reuv4</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">242</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">success</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">Abe45@gmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">derv1ws0</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">837</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">processing</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">Monserrat44@gmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">5kma53ae</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">874</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">success</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">Silas22@gmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="">
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">bhqecj4p</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">721</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">failed</td>
-        <td class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap">carmella@hotmail.com</td>
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">carmella@hotmail.com</td>
       </tr>
       <!--v-if-->
     </tbody>

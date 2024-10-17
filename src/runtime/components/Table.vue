@@ -7,14 +7,12 @@ import type {
   Row,
   ColumnDef,
   ColumnFiltersState,
-  // ColumnPinningState,
+  ColumnPinningState,
   RowSelectionState,
   SortingState,
   ExpandedState,
   VisibilityState,
-  // PaginationState,
   Updater
-  // Table as TableApi
 } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
@@ -29,7 +27,6 @@ export interface TableData {
 }
 
 export interface TableProps<T> {
-  // paginationOptions?: Omit<PaginationOptions, 'getPaginationRowModel' | 'onPaginationChange'>
   columns?: TableColumn<T>[]
   data: T[]
   class?: any
@@ -50,7 +47,6 @@ import {
   getCoreRowModel,
   getExpandedRowModel,
   getFilteredRowModel,
-  // getPaginationRowModel,
   getSortedRowModel,
   useVueTable
 } from '@tanstack/vue-table'
@@ -65,11 +61,10 @@ const ui = table()
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
 const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
 const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: {} })
-// const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: {} })
+const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: {} })
 const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
 const sortingState = defineModel<SortingState>('sorting', { default: [] })
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
-// const paginationState = defineModel<PaginationState>('pagination', { default: undefined })
 
 const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(props.data[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 
@@ -78,17 +73,15 @@ const tableApi = useVueTable({
   get columns() { return columns.value },
   getCoreRowModel: getCoreRowModel(),
   getFilteredRowModel: getFilteredRowModel(),
-  // getPaginationRowModel: getPaginationRowModel()
   getSortedRowModel: getSortedRowModel(),
   getExpandedRowModel: getExpandedRowModel(),
   onGlobalFilterChange: updaterOrValue => valueUpdater(updaterOrValue, globalFilterState),
   onColumnFiltersChange: updaterOrValue => valueUpdater(updaterOrValue, columnFiltersState),
   onColumnVisibilityChange: updaterOrValue => valueUpdater(updaterOrValue, columnVisibilityState),
-  // onColumnPinningChange: updaterOrValue => valueUpdater(updaterOrValue, columnPinningState),
+  onColumnPinningChange: updaterOrValue => valueUpdater(updaterOrValue, columnPinningState),
   onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelectionState),
   onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sortingState),
   onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
-  // onPaginationChange: updaterOrValue => valueUpdater(updaterOrValue, paginationState),
   state: {
     get globalFilter() {
       return globalFilterState.value
@@ -98,6 +91,9 @@ const tableApi = useVueTable({
     },
     get columnVisibility() {
       return columnVisibilityState.value
+    },
+    get columnPinning() {
+      return columnPinningState.value
     },
     get expanded() {
       return expandedState.value
@@ -125,7 +121,12 @@ defineExpose({
     <table :class="ui.base({ class: [props.ui?.base] })">
       <thead :class="ui.thead({ class: [props.ui?.thead] })">
         <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
-          <th v-for="header in headerGroup.headers" :key="header.id" :class="ui.th({ class: [props.ui?.th] })">
+          <th
+            v-for="header in headerGroup.headers"
+            :key="header.id"
+            :data-pinned="header.column.getIsPinned()"
+            :class="ui.th({ class: [props.ui?.th], pinned: !!header.column.getIsPinned() })"
+          >
             <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
           </th>
         </tr>
@@ -135,7 +136,12 @@ defineExpose({
         <template v-if="tableApi.getRowModel().rows?.length">
           <template v-for="row in tableApi.getRowModel().rows" :key="row.id">
             <tr :data-state="row.getIsSelected() ? 'selected' : undefined" :class="ui.tr({ class: [props.ui?.tr] })">
-              <td v-for="cell in row.getVisibleCells()" :key="cell.id" :class="ui.td({ class: [props.ui?.td] })">
+              <td
+                v-for="cell in row.getVisibleCells()"
+                :key="cell.id"
+                :data-pinned="cell.column.getIsPinned()"
+                :class="ui.td({ class: [props.ui?.td], pinned: !!cell.column.getIsPinned() })"
+              >
                 <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
               </td>
             </tr>

@@ -257,6 +257,11 @@ const columns: TableColumn<Payment>[] = [{
     })))
   }
 }]
+
+const columnPinning = ref({
+  left: ['id'],
+  right: ['actions']
+})
 </script>
 
 <template>
@@ -297,6 +302,7 @@ const columns: TableColumn<Payment>[] = [{
       ref="table"
       :data="data"
       :columns="columns"
+      :column-pinning="columnPinning"
       class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1 overflow-y-auto"
     >
       <template #expanded="{ row }">

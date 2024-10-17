@@ -1,8 +1,14 @@
+import { h, resolveComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
-import Table, { type TableProps, type TableSlots } from '../../src/runtime/components/Table.vue'
+import Table, { type TableProps, type TableSlots, type TableColumn } from '../../src/runtime/components/Table.vue'
 import ComponentRender from '../component-render'
 
 describe('Table', () => {
+  const UButton = resolveComponent('UButton')
+  const UCheckbox = resolveComponent('UCheckbox')
+  const UBadge = resolveComponent('UBadge')
+  const UDropdownMenu = resolveComponent('UDropdownMenu')
+
   const data = [{
     id: 'm5gr84i9',
     amount: 316,
@@ -30,11 +36,116 @@ describe('Table', () => {
     email: 'carmella@hotmail.com'
   }]
 
+  const columns: TableColumn<typeof data[number]>[] = [{
+    id: 'select',
+    header: ({ table }) => h(UCheckbox, {
+      'modelValue': table.getIsAllPageRowsSelected(),
+      'indeterminate': table.getIsSomePageRowsSelected(),
+      'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(!!value),
+      'ariaLabel': 'Select all'
+    }),
+    cell: ({ row }) => h(UCheckbox, {
+      'modelValue': row.getIsSelected(),
+      'onUpdate:modelValue': (value: boolean) => row.toggleSelected(!!value),
+      'ariaLabel': 'Select row'
+    }),
+    enableSorting: false,
+    enableHiding: false
+  }, {
+    accessorKey: 'id',
+    header: '#',
+    cell: ({ row }) => `#${row.getValue('id')}`
+  }, {
+    accessorKey: 'date',
+    header: 'Date',
+    cell: ({ row }) => {
+      return new Date(row.getValue('date')).toLocaleString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      })
+    }
+  }, {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => {
+      const color = ({
+        paid: 'success' as const,
+        failed: 'error' as const,
+        refunded: 'neutral' as const
+      })[row.getValue('status') as string]
+
+      return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
+    }
+  }, {
+    accessorKey: 'email',
+    header: ({ column }) => {
+      const isSorted = column.getIsSorted()
+
+      return h(UButton, {
+        color: 'neutral',
+        variant: 'ghost',
+        label: 'Email',
+        icon: isSorted ? (isSorted === 'asc' ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid') : 'i-heroicons-arrows-up-down-20-solid',
+        class: '-mx-2.5',
+        onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
+      })
+    },
+    cell: ({ row }) => h('div', { class: 'lowercase' }, row.getValue('email'))
+  }, {
+    accessorKey: 'amount',
+    header: () => h('div', { class: 'text-right' }, 'Amount'),
+    cell: ({ row }) => {
+      const amount = Number.parseFloat(row.getValue('amount'))
+
+      const formatted = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'EUR'
+      }).format(amount)
+
+      return h('div', { class: 'text-right font-medium' }, formatted)
+    }
+  }, {
+    id: 'actions',
+    enableHiding: false,
+    cell: ({ row }) => {
+      const items = [{
+        type: 'label',
+        label: 'Actions'
+      }, {
+        label: 'Copy payment ID'
+      }, {
+        label: row.getIsExpanded() ? 'Collapse' : 'Expand'
+      }, {
+        type: 'separator'
+      }, {
+        label: 'View customer'
+      }, {
+        label: 'View payment details'
+      }]
+
+      return h('div', { class: 'text-right' }, h(UDropdownMenu, {
+        content: {
+          align: 'end'
+        },
+        items
+      }, () => h(UButton, {
+        icon: 'i-heroicons-ellipsis-vertical-20-solid',
+        color: 'neutral',
+        variant: 'ghost',
+        class: 'ml-auto'
+      })))
+    }
+  }]
+
   const props = { data }
 
   it.each([
     // Props
     ['with data', { props }],
+    ['with columns', { props: { ...props, columns } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { base: 'table-auto' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps<typeof data[number]>, slots?: Partial<TableSlots<typeof data[number]>> }) => {
