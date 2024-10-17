@@ -76,5 +76,17 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
         class="w-48"
       />
     </div>
+    <div class="flex items-center gap-4">
+      <UInput
+        v-for="size in sizes"
+        :key="size"
+        :avatar="{ src: 'https://github.com/benjamincanac.png' }"
+        icon="i-heroicons-magnifying-glass"
+        trailing
+        placeholder="Search..."
+        :size="size"
+        class="w-48"
+      />
+    </div>
   </div>
 </template>

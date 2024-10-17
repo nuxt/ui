@@ -23,8 +23,8 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
       <UAvatar
         v-if="modelValue"
         v-bind="modelValue.avatar"
-        :size="ui.itemLeadingAvatarSize()"
-        :class="ui.itemLeadingAvatar()"
+        :size="ui.leadingAvatarSize()"
+        :class="ui.leadingAvatar()"
       />
     </template>
   </USelectMenu>

@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps, DropdownMenuTriggerProps, DropdownMenuItemProps, DropdownMenuCheckboxItemProps } from 'radix-vue'
+import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
@@ -12,7 +12,7 @@ const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof
 
 const dropdownMenu = tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })
 
-export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'>, Pick<DropdownMenuItemProps, 'disabled'>, Pick<DropdownMenuCheckboxItemProps, 'checked'> {
+export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -24,6 +24,9 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
    */
   type?: 'label' | 'separator' | 'link' | 'checkbox'
   slot?: string
+  loading?: boolean
+  disabled?: boolean
+  checked?: boolean
   open?: boolean
   defaultOpen?: boolean
   children?: DropdownMenuItem[] | DropdownMenuItem[][]
@@ -33,7 +36,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
 
 type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
-export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>, Pick<DropdownMenuTriggerProps, 'disabled'> {
+export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'> {
   size?: DropdownMenuVariants['size']
   items?: T[] | T[][]
   /**
@@ -41,6 +44,11 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
    * @defaultValue appConfig.ui.icons.check
    */
   checkedIcon?: string
+  /**
+   * The icon displayed when an item is loading.
+   * @defaultValue appConfig.ui.icons.loading
+   */
+  loadingIcon?: string
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8 }
@@ -61,6 +69,7 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
    * @defaultValue 'label'
    */
   labelKey?: string
+  disabled?: boolean
   class?: any
   ui?: PartialString<typeof dropdownMenu.slots>
 }
@@ -120,6 +129,7 @@ const ui = computed(() => dropdownMenu({
       :portal="portal"
       :label-key="labelKey"
       :checked-icon="checkedIcon"
+      :loading-icon="loadingIcon"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />
