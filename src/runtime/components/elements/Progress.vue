@@ -256,6 +256,20 @@ progress:indeterminate {
     }
   }
 
+  [dir=rtl] &.bar-animation-carousel {
+    &:after {
+      animation: carousel-rtl 2s ease-in-out infinite;
+    }
+
+    &::-webkit-progress-value {
+      animation: carousel-rtl 2s ease-in-out infinite;
+    }
+
+    &::-moz-progress-bar {
+      animation: carousel-rtl 2s ease-in-out infinite;
+    }
+  }
+
   &.bar-animation-carousel-inverse {
     &:after {
       animation: carousel-inverse 2s ease-in-out infinite;
@@ -267,6 +281,20 @@ progress:indeterminate {
 
     &::-moz-progress-bar {
       animation: carousel-inverse 2s ease-in-out infinite;
+    }
+  }
+
+  [dir=rtl] &.bar-animation-carousel-inverse {
+    &:after {
+      animation: carousel-inverse-rtl 2s ease-in-out infinite;
+    }
+
+    &::-webkit-progress-value {
+      animation: carousel-inverse-rtl 2s ease-in-out infinite;
+    }
+
+    &::-moz-progress-bar {
+      animation: carousel-inverse-rtl 2s ease-in-out infinite;
     }
   }
 
@@ -315,6 +343,22 @@ progress:indeterminate {
   }
 }
 
+@keyframes carousel-rtl {
+
+  0%,
+  100% {
+    width: 50%
+  }
+
+  0% {
+    transform: translateX(100%)
+  }
+
+  100% {
+    transform: translateX(-200%)
+  }
+}
+
 @keyframes carousel-inverse {
 
   0%,
@@ -328,6 +372,22 @@ progress:indeterminate {
 
   100% {
     transform: translateX(-100%)
+  }
+}
+
+@keyframes carousel-inverse-rtl {
+
+  0%,
+  100% {
+    width: 50%
+  }
+
+  0% {
+    transform: translateX(-200%)
+  }
+
+  100% {
+    transform: translateX(100%)
   }
 }
 
