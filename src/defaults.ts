@@ -24,3 +24,9 @@ export const defaultOptions = {
     transitions: true
   }
 }
+
+export const resolveColors = (colors?: string[]) => {
+  return colors?.length
+    ? [...new Set(['primary', ...colors])]
+    : ['primary', 'secondary', 'success', 'info', 'warning', 'error']
+}

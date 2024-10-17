@@ -1,7 +1,7 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
 import { addTemplates } from './templates'
-import { defaultOptions, getDefaultUiConfig } from './defaults'
+import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
 
 export type * from './runtime/types'
 
@@ -62,7 +62,7 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url)
 
     options.theme = options.theme || {}
-    options.theme.colors = options.theme.colors?.length ? [...new Set(['primary', ...options.theme.colors])] : ['primary', 'secondary', 'success', 'info', 'warning', 'error']
+    options.theme.colors = resolveColors(options.theme.colors)
 
     nuxt.options.ui = options
 
