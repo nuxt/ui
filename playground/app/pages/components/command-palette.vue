@@ -19,6 +19,8 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   lazy: true
 })
 
+const loading = ref(false)
+
 const groups = computed(() => [{
   id: 'users',
   label: searchTerm.value ? `Users matching “${searchTerm.value}”...` : 'Users',
@@ -29,16 +31,23 @@ const groups = computed(() => [{
     label: 'Add new file',
     suffix: 'Create a new file in the current directory or workspace.',
     icon: 'i-heroicons-document-plus',
-    select: (e: Event) => {
+    loading: loading.value,
+    onSelect(e: Event) {
       e?.preventDefault()
       toast.add({ title: 'New file added!' })
+
+      loading.value = true
+
+      setTimeout(() => {
+        loading.value = false
+      }, 2000)
     },
     kbds: ['meta', 'N']
   }, {
     label: 'Add new folder',
     suffix: 'Create a new folder in the current directory or workspace.',
     icon: 'i-heroicons-folder-plus',
-    select: (e: Event) => {
+    onSelect(e: Event) {
       e?.preventDefault()
       toast.add({ title: 'New folder added!' })
     },
@@ -47,7 +56,7 @@ const groups = computed(() => [{
     label: 'Add hashtag',
     suffix: 'Add a hashtag to the current item.',
     icon: 'i-heroicons-hashtag',
-    select: (e: Event) => {
+    onSelect(e: Event) {
       e?.preventDefault()
       toast.add({ title: 'Hashtag added!' })
     },
@@ -56,7 +65,7 @@ const groups = computed(() => [{
     label: 'Add label',
     suffix: 'Add a label to the current item.',
     icon: 'i-heroicons-tag',
-    select: (e: Event) => {
+    onSelect(e: Event) {
       e?.preventDefault()
       toast.add({ title: 'Label added!' })
     },

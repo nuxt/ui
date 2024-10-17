@@ -23,6 +23,7 @@ export interface CommandPaletteItem extends Pick<ComboboxItemProps, 'disabled'> 
   avatar?: AvatarProps
   chip?: ChipProps
   kbds?: KbdProps['value'][] | KbdProps[]
+  loading?: boolean
   slot?: string
   onSelect?(e?: Event): void
 }
@@ -275,7 +276,8 @@ const groups = computed(() => {
             >
               <slot :name="item.slot || group.slot || 'item'" :item="item" :index="index">
                 <slot :name="item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`" :item="item" :index="index">
-                  <UIcon v-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
+                  <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon, loading: true })" />
+                  <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
                   <UAvatar v-else-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
                   <UChip
                     v-else-if="item.chip"
