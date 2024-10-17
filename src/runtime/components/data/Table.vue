@@ -121,7 +121,7 @@ import UProgress from '../elements/Progress.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, get } from '../../utils'
-import type { Strategy, Button, ProgressColor, ProgressAnimation, DeepPartial } from '../../types/index'
+import type { TableRow, TableColumn, Strategy, Button, ProgressColor, ProgressAnimation, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { table } from '#ui/ui.config'
@@ -144,16 +144,6 @@ function defaultSort (a: any, b: any, direction: 'asc' | 'desc') {
   }
 }
 
-interface Column {
-  key: string
-  sortable?: boolean
-  sort?: (a: any, b: any, direction: 'asc' | 'desc') => number
-  direction?: 'asc' | 'desc'
-  class?: string
-  rowClass?: string
-  [key: string]: any
-}
-
 export default defineComponent({
   components: {
     UIcon,
@@ -172,11 +162,11 @@ export default defineComponent({
       default: () => defaultComparator
     },
     rows: {
-      type: Array as PropType<{ [key: string]: any }[]>,
+      type: Array as PropType<TableRow[]>,
       default: () => []
     },
     columns: {
-      type: Array as PropType<Column[]>,
+      type: Array as PropType<TableColumn[]>,
       default: null
     },
     columnAttribute: {
@@ -240,7 +230,7 @@ export default defineComponent({
   setup (props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort }) as Column))
+    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort }) as TableColumn))
 
     const sort = useVModel(props, 'sort', emit, { passive: true, defaultValue: defu({}, props.sort, { column: null, direction: 'asc' }) })
 
@@ -360,7 +350,7 @@ export default defineComponent({
       }
     }
 
-    function getAriaSort (column: Column): AriaAttributes['aria-sort'] {
+    function getAriaSort (column: TableColumn): AriaAttributes['aria-sort'] {
       if (!column.sortable) {
         return undefined
       }
