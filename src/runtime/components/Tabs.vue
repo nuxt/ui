@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { TabsRootProps, TabsRootEmits, TabsContentProps, TabsTriggerProps } from 'radix-vue'
+import type { TabsRootProps, TabsRootEmits, TabsContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
@@ -12,7 +12,7 @@ const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> 
 
 const tabs = tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })
 
-export interface TabsItem extends Pick<TabsTriggerProps, 'disabled'> {
+export interface TabsItem {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -20,6 +20,7 @@ export interface TabsItem extends Pick<TabsTriggerProps, 'disabled'> {
   content?: string
   /** A unique value for the tab item. Defaults to the index. */
   value?: string | number
+  disabled?: boolean
 }
 
 type TabsVariants = VariantProps<typeof tabs>

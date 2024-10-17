@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps, SelectItemProps } from 'radix-vue'
+import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
@@ -12,7 +12,7 @@ const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme
 
 const select = tv({ extend: tv(theme), ...(appConfig.ui?.select || {}) })
 
-export interface SelectItem extends Pick<SelectItemProps, 'disabled' | 'value'> {
+export interface SelectItem {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -22,6 +22,8 @@ export interface SelectItem extends Pick<SelectItemProps, 'disabled' | 'value'> 
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
+  value?: string
+  disabled?: boolean
 }
 
 type SelectVariants = VariantProps<typeof select>

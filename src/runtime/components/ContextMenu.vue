@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuTriggerProps, ContextMenuItemProps, ContextMenuCheckboxItemProps } from 'radix-vue'
+import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuTriggerProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
@@ -12,7 +12,7 @@ const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof 
 
 const contextMenu = tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu || {}) })
 
-export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'>, Pick<ContextMenuItemProps, 'disabled'>, Pick<ContextMenuCheckboxItemProps, 'checked'> {
+export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -24,6 +24,8 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
    */
   type?: 'label' | 'separator' | 'link' | 'checkbox'
   slot?: string
+  disabled?: boolean
+  checked?: boolean
   open?: boolean
   defaultOpen?: boolean
   children?: ContextMenuItem[] | ContextMenuItem[][]

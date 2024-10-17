@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuItemProps, NavigationMenuContentProps } from 'radix-vue'
+import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
@@ -19,13 +19,14 @@ export interface NavigationMenuChildItem extends Omit<LinkProps, 'raw' | 'custom
   onSelect?(e: Event): void
 }
 
-export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'>, Pick<NavigationMenuItemProps, 'value'> {
+export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
   badge?: string | number | BadgeProps
   trailingIcon?: string
   slot?: string
+  value?: string
   children?: NavigationMenuChildItem[]
   onSelect?(e: Event): void
 }

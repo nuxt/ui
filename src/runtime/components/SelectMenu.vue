@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxItemProps, ComboboxArrowProps } from 'radix-vue'
+import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select-menu'
@@ -12,7 +12,7 @@ const appConfig = _appConfig as AppConfig & { ui: { selectMenu: Partial<typeof t
 
 const selectMenu = tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu || {}) })
 
-export interface SelectMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
+export interface SelectMenuItem {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -22,6 +22,7 @@ export interface SelectMenuItem extends Pick<ComboboxItemProps, 'disabled'> {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
+  disabled?: boolean
   onSelect?(e?: Event): void
 }
 

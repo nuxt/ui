@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { ComboboxRootProps, ComboboxRootEmits, ComboboxItemProps } from 'radix-vue'
+import type { ComboboxRootProps, ComboboxRootEmits } from 'radix-vue'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
@@ -15,7 +15,7 @@ const appConfig = _appConfig as AppConfig & { ui: { commandPalette: Partial<type
 
 const commandPalette = tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })
 
-export interface CommandPaletteItem extends Pick<ComboboxItemProps, 'disabled'> {
+export interface CommandPaletteItem {
   prefix?: string
   label?: string
   suffix?: string
@@ -24,6 +24,7 @@ export interface CommandPaletteItem extends Pick<ComboboxItemProps, 'disabled'> 
   chip?: ChipProps
   kbds?: KbdProps['value'][] | KbdProps[]
   loading?: boolean
+  disabled?: boolean
   slot?: string
   onSelect?(e?: Event): void
 }
