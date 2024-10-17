@@ -166,8 +166,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: npm:@nuxt/ui-pro-edge@1.4.4-28819338.453a914
-        version: '@nuxt/ui-pro-edge@1.4.4-28819338.453a914(vue@3.5.12(typescript@5.6.3))'
+        specifier: npm:@nuxt/ui-pro-edge@1.4.4-28819937.e3eb89d
+        version: '@nuxt/ui-pro-edge@1.4.4-28819937.e3eb89d(vue@3.5.12(typescript@5.6.3))'
       '@nuxtjs/plausible':
         specifier: ^1.0.3
         version: 1.0.3(magicast@0.3.5)(rollup@4.24.0)
@@ -1399,8 +1399,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro-edge@1.4.4-28819338.453a914':
-    resolution: {integrity: sha512-Lampt5GqlQ0wpeIUmwLOzz7/0oC3g8juMYVNNej9bz0zYdYyfB+7L1CSVZsiZKkD+Sp2HxPnS0ewScFRHwE/KQ==}
+  '@nuxt/ui-pro-edge@1.4.4-28819937.e3eb89d':
+    resolution: {integrity: sha512-5gSvPwoPjDvLTFovvrluWE7OFWM2MRnPgdeYnZg+sfhKQcx1WKrlrgVhqaljkWNqtJ1w7AAUnYEQgejojBUL4g==}
 
   '@nuxt/vite-builder@3.13.2':
     resolution: {integrity: sha512-3dzc3YH3UeTmzGtCevW1jTq0Q8/cm+yXqo/VS/EFM3aIO/tuNPS88is8ZF2YeBButFnLFllq/QenziPbq0YD6Q==}
@@ -8179,7 +8179,7 @@ snapshots:
       - supports-color
       - webpack-sources
 
-  '@nuxt/ui-pro-edge@1.4.4-28819338.453a914(vue@3.5.12(typescript@5.6.3))':
+  '@nuxt/ui-pro-edge@1.4.4-28819937.e3eb89d(vue@3.5.12(typescript@5.6.3))':
     dependencies:
       '@iconify-json/vscode-icons': 1.2.2
       '@nuxt/ui': 'link:'
