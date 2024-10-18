@@ -46,7 +46,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions>((_options = {}, meta) 
 
   const appConfig = defu({ ui: options.ui }, { ui: getDefaultUiConfig(options.theme.colors) })
 
-  const stubPath = resolvePathSync(join(runtimeDir, 'vue/stubs'))
+  const stubPath = resolvePathSync(join(runtimeDir, 'vue/stubs'), { extensions: ['.ts', '.mjs', '.js'] })
   return [
     {
       name: 'nuxt:ui',

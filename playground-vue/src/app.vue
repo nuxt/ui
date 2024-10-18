@@ -2,7 +2,8 @@
 import { splitByCase, upperFirst } from 'scule'
 import { useRouter } from 'vue-router'
 
-// @ts-expect-error this is for compatibility with the Nuxt version of this playground
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore included for compatibility with Nuxt playground
 import { useAppConfig } from '#imports'
 
 const appConfig = useAppConfig()
@@ -76,7 +77,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <UApp :toaster="appConfig.toaster">
+  <UApp :toaster="appConfig.toaster as any">
     <div class="h-screen w-screen overflow-hidden flex min-h-0 bg-[var(--ui-bg)]" vaul-drawer-wrapper>
       <UNavigationMenu :items="items" orientation="vertical" class="border-r border-[var(--ui-border)] overflow-y-auto w-48 p-4" />
 

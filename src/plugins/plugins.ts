@@ -15,10 +15,10 @@ import type { UnpluginOptions } from 'unplugin'
 export default function PluginsPlugin(options: NuxtUIOptions) {
   const plugins = globSync(['**/*', '!*.d.ts'], { cwd: join(runtimeDir, 'plugins'), absolute: true })
 
-  plugins.unshift(resolvePathSync(join(runtimeDir, 'vue/plugins/head')))
-  plugins.unshift(resolvePathSync(join(runtimeDir, 'vue/plugins/icon')))
+  plugins.unshift(resolvePathSync(join(runtimeDir, 'vue/plugins/head'), { extensions: ['.ts', '.mjs', '.js'] }))
+  plugins.unshift(resolvePathSync(join(runtimeDir, 'vue/plugins/icon'), { extensions: ['.ts', '.mjs', '.js'] }))
   if (options.colorMode) {
-    plugins.push(resolvePathSync(join(runtimeDir, 'vue/plugins/color-mode')))
+    plugins.push(resolvePathSync(join(runtimeDir, 'vue/plugins/color-mode'), { extensions: ['.ts', '.mjs', '.js'] }))
   }
 
   return {
