@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useAppConfig } from '#imports'
+
 const appConfig = useAppConfig()
 </script>
 
