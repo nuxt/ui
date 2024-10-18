@@ -30,7 +30,7 @@
     "cli"
   ],
   "scripts": {
-    "build": "nuxt-module-build build && nuxi generate devtools && cp -r src/devtools dist/devtools",
+    "build": "nuxt-module-build build && pnpm devtools:build",
     "prepack": "pnpm build",
     "dev": "DEV=true nuxi dev playground",
     "dev:build": "nuxi build playground",
@@ -40,6 +40,7 @@
     "docs:prepare": "nuxt-component-meta docs",
     "docs:typecheck": "nuxi typecheck docs",
     "devtools": "NUXT_UI_DEVTOOLS_LOCAL=true nuxi dev playground",
+    "devtools:build": "nuxi generate devtools && cp -r src/devtools dist/devtools",
     "devtools:prepare": "nuxt-component-meta playground --outputDir ../src/devtools/.component-meta/",
     "devtools:typecheck": "nuxi typecheck devtools",
     "lint": "eslint .",
