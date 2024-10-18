@@ -4,6 +4,7 @@ import type { ToastProviderProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toaster'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { toaster: Partial<typeof theme> } }
 
@@ -25,6 +26,14 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
 export interface ToasterSlots {
   default(props?: {}): any
 }
+
+export default {
+  name: 'Toaster'
+}
+
+extendDevtoolsMeta({
+  example: 'ToasterExample'
+})
 </script>
 
 <script setup lang="ts">
@@ -85,6 +94,8 @@ const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 
 function getOffset(index: number) {
   return refs.value.slice(index + 1).reduce((acc, { height }) => acc + height + 16, 0)
 }
+
+extendDevtoolsMeta({ ignore: true })
 </script>
 
 <template>

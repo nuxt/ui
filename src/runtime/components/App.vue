@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'radix-vue'
 import type { ToasterProps } from '../types'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
   tooltip?: TooltipProviderProps
@@ -10,6 +11,14 @@ export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
 export interface AppSlots {
   default(props?: {}): any
 }
+
+export default {
+  name: 'App'
+}
+
+extendDevtoolsMeta({
+  ignore: true
+})
 </script>
 
 <script setup lang="ts">
@@ -26,6 +35,8 @@ defineSlots<AppSlots>()
 const configProviderProps = useForwardProps(reactivePick(props, 'dir', 'scrollBody'))
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
+
+extendDevtoolsMeta({ ignore: true })
 </script>
 
 <template>
@@ -34,6 +45,7 @@ const toasterProps = toRef(() => props.toaster)
       <UToaster v-if="toaster !== null" v-bind="toasterProps">
         <slot />
       </UToaster>
+      <slot v-else />
     </TooltipProvider>
 
     <UModalProvider />

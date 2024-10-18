@@ -7,6 +7,7 @@ import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { AcceptableValue, PartialString } from '../types/utils'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 
@@ -93,6 +94,8 @@ export interface SelectSlots<T> {
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 }
+
+extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends SelectItem | AcceptableValue">

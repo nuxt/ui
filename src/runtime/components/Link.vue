@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/link'
 import type { NuxtLinkProps } from '#app'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { link: Partial<typeof theme> } }
 
@@ -41,6 +42,8 @@ export interface LinkProps extends NuxtLinkProps {
 export interface LinkSlots {
   default(props: { active: boolean }): any
 }
+
+extendDevtoolsMeta({ example: 'LinkExample' })
 </script>
 
 <script setup lang="ts">

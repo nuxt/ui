@@ -7,6 +7,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
 import type { AvatarProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
 
@@ -65,6 +66,23 @@ export type TabsSlots<T extends { slot?: string }> = {
   content: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
+extendDevtoolsMeta({
+  defaultProps: {
+    items: [{
+      label: 'Tab1',
+      avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' },
+      content: 'This is the content shown for Tab1'
+    }, {
+      label: 'Tab2',
+      icon: 'i-heroicons-user',
+      content: 'And, this is the content for Tab2'
+    }, {
+      label: 'Tab3',
+      icon: 'i-heroicons-bell',
+      content: 'Finally, this is the content for Tab3'
+    }]
+  }
+})
 </script>
 
 <script setup lang="ts" generic="T extends TabsItem">

@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toast'
 import type { AvatarProps, ButtonProps } from '../types'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { toast: Partial<typeof theme> } }
 
@@ -53,6 +54,8 @@ export interface ToastSlots {
   actions(props?: {}): any
   close(props: { ui: any }): any
 }
+
+extendDevtoolsMeta<ToastProps>({ ignore: true })
 </script>
 
 <script setup lang="ts">
