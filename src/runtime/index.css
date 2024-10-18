@@ -30,6 +30,9 @@
     --ui-border-inverted: var(--ui-color-neutral-900);
 
     --ui-radius: var(--radius);
+
+    --ui-card-bg: var(--ui-bg);
+    --ui-card-text: var(--ui-text);
   }
 
   .dark {
