@@ -38,7 +38,7 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
 
 export const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
 
-export const NuxtUIPlugin = createUnplugin<NuxtUIOptions>((_options = {}, meta) => {
+export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options = {}, meta) => {
   const options = defu(_options, { fonts: false }, defaultOptions)
 
   options.theme = options.theme || {}
