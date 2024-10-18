@@ -6,27 +6,45 @@ import AutoImport from 'unplugin-auto-import'
 import { defu } from 'defu'
 import tailwind from '@tailwindcss/vite'
 import { resolvePathSync } from 'mlly'
+import type colors from 'tailwindcss/colors'
 
-import { defaultOptions, resolveColors } from './defaults'
+import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
 import type { ModuleOptions } from './module'
+import type icons from './theme/icons'
 
 import TemplatePlugin from './plugins/templates'
 import PluginsPlugin from './plugins/plugins'
 import AppConfigPlugin from './plugins/app-config'
 import ComponentImportPlugin from './plugins/components'
 
-export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts'> {}
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
+type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
+
+interface AppConfigUI {
+  // TODO: add type hinting for colors from `options.theme.colors`
+  colors?: Record<string, Color> & { neutral?: NeutralColor }
+  icons?: Partial<typeof icons>
+  [key: string]: unknown
+}
+
+export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'> {
+  ui?: AppConfigUI
+  /**
+   * Enable or disable `@vueuse/vueuse` color-mode integration
+   * @defaultValue `true`
+   */
+  colorMode?: boolean
+}
 
 export const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
 
-// TODO: Types for app config
 export const NuxtUIPlugin = createUnplugin<NuxtUIOptions>((_options = {}, meta) => {
   const options = defu(_options, { fonts: false }, defaultOptions)
 
   options.theme = options.theme || {}
   options.theme.colors = resolveColors(options.theme.colors)
 
-  const appConfig: Record<string, any> = {}
+  const appConfig = defu({ ui: options.ui }, { ui: getDefaultUiConfig(options.theme.colors) })
 
   const stubPath = resolvePathSync(join(runtimeDir, 'vue/stubs'))
   return [

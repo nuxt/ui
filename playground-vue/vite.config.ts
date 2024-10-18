@@ -15,7 +15,12 @@ export default defineConfig({
     vue(),
     AutoImports({ imports: ['vue'] }),
     NuxtUIPlugin.vite({
-      // options
+      ui: {
+        colors: {
+          primary: 'green',
+          neutral: 'slate'
+        }
+      }
     })
   ]
 })

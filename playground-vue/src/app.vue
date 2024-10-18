@@ -2,7 +2,16 @@
 import { splitByCase, upperFirst } from 'scule'
 import { useRouter } from 'vue-router'
 
-import appConfig from '../app.config'
+// @ts-expect-error this is for compatibility with the Nuxt version of this playground
+import { useAppConfig } from '#imports'
+
+const appConfig = useAppConfig()
+
+appConfig.toaster = reactive({
+  position: 'bottom-right' as const,
+  expand: true,
+  duration: 5000
+})
 
 const router = useRouter()
 
