@@ -290,10 +290,14 @@ export default defineComponent({
 
     function compare (a: any, z: any) {
       if (typeof props.by === 'string') {
-        const property = props.by as unknown as any
-        return a?.[property] === z?.[property]
+        const accesorFn = accessor(props.by)
+        return accesorFn(a) === accesorFn(z)
       }
       return props.by(a, z)
+    }
+
+    function accessor <T extends Record<string, any>> (key: string) {
+      return (obj: T) => key.split('.').reduce((acc, curr) => acc[curr], obj)
     }
 
     function isSelected (row: TableRow) {
