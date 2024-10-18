@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import type { AvatarProps } from '../types'
 import type { PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { input: Partial<typeof theme> } }
@@ -79,7 +80,7 @@ const ui = computed(() => input({
   size: inputSize?.value,
   loading: props.loading,
   highlight: highlight.value,
-  leading: isLeading.value || !!slots.leading,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   buttonGroup: orientation.value
 }))
@@ -165,9 +166,10 @@ onMounted(() => {
 
     <slot />
 
-    <span v-if="isLeading || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+    <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading">
-        <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 

@@ -23,10 +23,12 @@ Use the `items` prop as an array of objects with the following properties:
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
 - [`type?: "link" | "label" | "separator" | "checkbox"`{lang="ts-type"}](#with-checkbox-items)
+- [`checked?: boolean`{lang="ts-type"}](#with-checkbox-items)
 - `disabled?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `onSelect?(e: Event): void`{lang="ts-type"}
+- [`onUpdateChecked?(checked: boolean): void`{lang="ts-type"}](#with-checkbox-items)
 
 You can also pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
@@ -353,32 +355,7 @@ In this example, :kbd{value="meta"} :kbd{value="E"}, :kbd{value="meta"} :kbd{val
 
 ### Props
 
-::component-props
----
-ignore:
-  - as
-  - to
-  - target
-  - active
-  - activeClass
-  - inactiveClass
-  - exactActiveClass
-  - ariaCurrentValue
-  - href
-  - rel
-  - noRel
-  - prefetch
-  - prefetchOn
-  - noPrefetch
-  - prefetchedClass
-  - replace
-  - exact
-  - exactQuery
-  - exactHash
-  - external
-  - onClick
----
-::
+:component-props
 
 ### Slots
 

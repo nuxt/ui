@@ -2,21 +2,21 @@
   <UAvatarGroup>
     <UTooltip text="benjamincanac">
       <UAvatar
-        src="https://avatars.githubusercontent.com/u/739984?v=4"
+        src="https://github.com/benjamincanac.png"
         alt="Benjamin Canac"
       />
     </UTooltip>
 
     <UTooltip text="romhml">
       <UAvatar
-        src="https://avatars.githubusercontent.com/u/25613751?v=4"
+        src="https://github.com/romhml.png"
         alt="Romain Hamel"
       />
     </UTooltip>
 
     <UTooltip text="noook">
       <UAvatar
-        src="https://avatars.githubusercontent.com/u/19751938?v=4"
+        src="https://github.com/noook.png"
         alt="Neil Richter"
       />
     </UTooltip>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const open = ref(false)
 const items = ref(['Backlog', 'Todo', 'In Progress', 'Done'])
-const selected = ref('Backlog')
+const value = ref('Backlog')
 
 defineShortcuts({
   o: () => open.value = !open.value
@@ -9,5 +9,5 @@ defineShortcuts({
 </script>
 
 <template>
-  <UInputMenu v-model="selected" v-model:open="open" :items="items" />
+  <UInputMenu v-model="value" v-model:open="open" :items="items" />
 </template>

@@ -25,5 +25,12 @@ export default (options: Required<ModuleOptions>) => ({
     itemLabelBase: 'text-[var(--ui-text-highlighted)] [&>mark]:text-[var(--ui-bg)] [&>mark]:bg-[var(--ui-primary)]',
     itemLabelPrefix: 'text-[var(--ui-text)]',
     itemLabelSuffix: 'text-[var(--ui-text-dimmed)] [&>mark]:text-[var(--ui-bg)] [&>mark]:bg-[var(--ui-primary)]'
+  },
+  variants: {
+    loading: {
+      true: {
+        itemLeadingIcon: 'animate-spin'
+      }
+    }
   }
 })

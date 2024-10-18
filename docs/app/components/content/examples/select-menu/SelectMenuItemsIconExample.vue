@@ -21,9 +21,9 @@ const items = ref([
     icon: 'i-heroicons-check-circle'
   }
 ])
-const selected = ref(items.value[0])
+const value = ref(items.value[0])
 </script>
 
 <template>
-  <USelectMenu v-model="selected" :icon="selected?.icon" :items="items" class="w-40" />
+  <USelectMenu v-model="value" :icon="value?.icon" :items="items" class="w-48" />
 </template>

@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { RadioGroupRootProps, RadioGroupRootEmits, RadioGroupItemProps } from 'radix-vue'
+import type { RadioGroupRootProps, RadioGroupRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/radio-group'
@@ -13,9 +13,11 @@ const radioGroup = tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup || {}) }
 
 type RadioGroupVariants = VariantProps<typeof radioGroup>
 
-export interface RadioGroupItem extends Pick<RadioGroupItemProps, 'disabled' | 'value'> {
+export interface RadioGroupItem {
   label?: string
   description?: string
+  disabled?: boolean
+  value?: string
 }
 
 export interface RadioGroupProps<T> extends Pick<RadioGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'> {

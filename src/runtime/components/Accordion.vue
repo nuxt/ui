@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { AccordionRootProps, AccordionRootEmits, AccordionItemProps } from 'radix-vue'
+import type { AccordionRootProps, AccordionRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
@@ -12,7 +12,7 @@ const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof th
 
 const accordion = tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })
 
-export interface AccordionItem extends Pick<AccordionItemProps, 'disabled'> {
+export interface AccordionItem {
   label?: string
   icon?: string
   trailingIcon?: string
@@ -20,6 +20,7 @@ export interface AccordionItem extends Pick<AccordionItemProps, 'disabled'> {
   content?: string
   /** A unique value for the accordion item. Defaults to the index. */
   value?: string
+  disabled?: boolean
 }
 
 export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible' | 'defaultValue' | 'modelValue' | 'type' | 'disabled'> {

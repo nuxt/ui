@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import theme from '#build/ui/context-menu'
 
-const items = [
+const loading = ref(false)
+
+const items = computed(() => [
   [{
     label: 'My account',
+    type: 'label' as const,
     avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+      src: 'https://github.com/benjamincanac.png'
     }
   }],
   [{
@@ -37,7 +40,16 @@ const items = [
     label: 'Collapse Pinned Tabs',
     disabled: true
   }], [{
-    label: 'Refresh the Page'
+    label: 'Refresh the Page',
+    loading: loading.value,
+    onSelect(e: Event) {
+      e.preventDefault()
+
+      loading.value = true
+      setTimeout(() => {
+        loading.value = false
+      }, 2000)
+    }
   }, {
     label: 'Clear Cookies and Refresh'
   }, {
@@ -72,13 +84,13 @@ const items = [
       }
     }]]
   }]
-]
+])
 
 const sizes = Object.keys(theme.variants.size)
 
 const size = ref('md' as const)
 
-defineShortcuts(extractShortcuts(items))
+defineShortcuts(extractShortcuts(items.value))
 </script>
 
 <template>

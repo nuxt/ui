@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuItemProps, NavigationMenuContentProps } from 'radix-vue'
+import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
@@ -20,13 +20,14 @@ export interface NavigationMenuChildItem extends Omit<LinkProps, 'raw' | 'custom
   onSelect?(e: Event): void
 }
 
-export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'>, Pick<NavigationMenuItemProps, 'value'> {
+export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
   badge?: string | number | BadgeProps
   trailingIcon?: string
   slot?: string
+  value?: string
   children?: NavigationMenuChildItem[]
   onSelect?(e: Event): void
 }
@@ -169,8 +170,8 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active, disabled: !!item.disabled })">
                 <slot :name="item.slot || 'item'" :item="item" :index="index">
                   <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="active" :index="index">
-                    <UAvatar v-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active, disabled: !!item.disabled })" />
-                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active, disabled: !!item.disabled })" />
+                    <UIcon v-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active, disabled: !!item.disabled })" />
+                    <UAvatar v-else-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active, disabled: !!item.disabled })" />
                   </slot>
 
                   <span v-if="get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
