@@ -297,7 +297,7 @@ export default defineComponent({
     }
 
     function accessor <T extends Record<string, any>> (key: string) {
-      return (obj: T) => key.split('.').reduce((acc, curr) => acc[curr], obj)
+      return (obj: T) => get(obj, key)
     }
 
     function isSelected (row: TableRow) {
