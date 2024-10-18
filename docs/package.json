@@ -21,7 +21,7 @@
     "nuxt": "^3.13.2",
     "nuxt-cloudflare-analytics": "^1.0.8",
     "nuxt-component-meta": "^0.8.2",
-    "nuxt-og-image": "^3.0.4",
+    "nuxt-og-image": "^3.0.6",
     "prettier": "^3.3.3",
     "ufo": "^1.5.4",
     "v-calendar": "^3.1.2",

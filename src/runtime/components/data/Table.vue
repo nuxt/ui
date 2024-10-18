@@ -9,7 +9,13 @@
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
           <th v-if="modelValue" scope="col" :class="ui.checkbox.padding">
-            <UCheckbox :model-value="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" v-bind="ui.default.checkbox" aria-label="Select all" @change="onChange" />
+            <UCheckbox
+              :model-value="indeterminate || selected.length === rows.length"
+              :indeterminate="indeterminate"
+              v-bind="ui.default.checkbox"
+              aria-label="Select all"
+              @change="onChange"
+            />
           </th>
 
           <th v-if="$slots.expand" scope="col" :class="ui.tr.base">
@@ -73,7 +79,13 @@
           <template v-for="(row, index) in rows" :key="index">
             <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
               <td v-if="modelValue" :class="ui.checkbox.padding">
-                <UCheckbox v-model="selected" :value="row" v-bind="ui.default.checkbox" aria-label="Select row" @click.capture.stop="() => onSelect(row)" />
+                <UCheckbox
+                  :model-value="isSelected(row)"
+                  v-bind="ui.default.checkbox"
+                  aria-label="Select row"
+                  @change="onChangeCheckbox($event, row)"
+                  @click.capture.stop="() => onSelect(row)"
+                />
               </td>
 
               <td
@@ -129,7 +141,7 @@ import { table } from '#ui/ui.config'
 const config = mergeConfig<typeof table>(appConfig.ui.strategy, appConfig.ui.table, table)
 
 function defaultComparator<T> (a: T, z: T): boolean {
-  return a === z
+  return JSON.stringify(a) === JSON.stringify(z)
 }
 
 function defaultSort (a: any, b: any, direction: 'asc' | 'desc') {
@@ -284,7 +296,7 @@ export default defineComponent({
       return props.by(a, z)
     }
 
-    function isSelected (row) {
+    function isSelected (row: TableRow) {
       if (!props.modelValue) {
         return false
       }
@@ -306,7 +318,7 @@ export default defineComponent({
       }
     }
 
-    function onSelect (row) {
+    function onSelect (row: TableRow) {
       if (!$attrs.onSelect) {
         return
       }
@@ -338,7 +350,16 @@ export default defineComponent({
       }
     }
 
-    function getRowData (row: Object, rowKey: string | string[], defaultValue: any = '') {
+    function onChangeCheckbox (checked: boolean, row: TableRow) {
+      if (checked) {
+        selected.value.push(row)
+      } else {
+        const index = selected.value.findIndex((item) => compare(item, row))
+        selected.value.splice(index, 1)
+      }
+    }
+
+    function getRowData (row: TableRow, rowKey: string | string[], defaultValue: any = '') {
       return get(row, rowKey, defaultValue)
     }
 
@@ -386,6 +407,7 @@ export default defineComponent({
       emptyState,
       // eslint-disable-next-line vue/no-dupe-keys
       loadingState,
+      onChangeCheckbox,
       openedRows,
       isSelected,
       onSort,
