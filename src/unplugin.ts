@@ -30,7 +30,7 @@ interface AppConfigUI {
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'> {
   ui?: AppConfigUI
   /**
-   * Enable or disable `@vueuse/vueuse` color-mode integration
+   * Enable or disable `@vueuse/core` color-mode integration
    * @defaultValue `true`
    */
   colorMode?: boolean
