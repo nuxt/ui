@@ -11,6 +11,8 @@ const appConfig = _appConfig as AppConfig & { ui: { link: Partial<typeof theme> 
 const link = tv({ extend: tv(theme), ...(appConfig.ui?.link || {}) })
 
 export interface LinkProps extends NuxtLinkProps {
+  /** Ensures we are accepting an undefined `to` when running without Nuxt context */
+  to?: NuxtLinkProps['to']
   /**
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'

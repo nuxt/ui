@@ -1,4 +1,4 @@
-import { computed, defineComponent, h, reactive } from 'vue'
+import { computed, defineComponent, reactive } from 'vue'
 import { RouterLink } from 'vue-router'
 import type { RouterLinkProps } from 'vue-router'
 
@@ -18,21 +18,18 @@ export default defineComponent({
     const { href, isActive, isExactActive, navigate, route } = RouterLink.useLink(routerProps)
 
     return () => {
-      if (props.custom) {
-        return slots.default?.({
-          href: props.to ? href.value : undefined,
-          isActive: isActive.value,
-          isExactActive: isExactActive.value,
-          navigate,
-          route,
-          // NuxtLinkProps
-          rel: undefined,
-          target: undefined,
-          isExternal: false
-        })
-      }
-
-      return h(RouterLink, props)
+      // we always use a custom link in Nuxt UI
+      return slots.default?.({
+        href: props.to ? href.value : undefined,
+        isActive: isActive.value,
+        isExactActive: isExactActive.value,
+        navigate,
+        route,
+        // NuxtLinkProps
+        rel: undefined,
+        target: undefined,
+        isExternal: false
+      })
     }
   }
 })
