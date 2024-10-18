@@ -73,8 +73,12 @@ export default defineNuxtConfig({
     //         }
     //       : undefined
     // },
-    highlight: {
-      langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+    build: {
+      markdown: {
+        highlight: {
+          langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+        }
+      }
     }
   },
 
@@ -140,51 +144,6 @@ export default defineNuxtConfig({
       slots: true,
       events: true,
       exposed: false
-    }
-  },
-
-  hooks: {
-    'components:extend': (components) => {
-      const globals = components.filter(c => [
-        'UAccordion',
-        'UAlert',
-        'UAvatar',
-        'UAvatarGroup',
-        'UBadge',
-        'UBreadcrumb',
-        'UButton',
-        'UButtonGroup',
-        'UCheckbox',
-        'UChip',
-        'UCollapsible',
-        'UCommandPalette',
-        'UContextMenu',
-        'UDrawer',
-        'UDropdownMenu',
-        'UFormField',
-        'UIcon',
-        'UInput',
-        'UInputMenu',
-        'UKbd',
-        'ULink',
-        'UModal',
-        'UNavigationMenu',
-        'UPagination',
-        'UPopover',
-        'UProgress',
-        'URadioGroup',
-        'USelect',
-        'USelectMenu',
-        'USeparator',
-        'USlider',
-        'USlideover',
-        'USwitch',
-        'UTabs',
-        'UTextarea',
-        'UTooltip'
-      ].includes(c.pascalName))
-
-      globals.forEach(c => c.global = 'sync')
     }
   },
 

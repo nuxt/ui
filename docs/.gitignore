@@ -1,0 +1,3 @@
+
+# Ignore content module cache directory
+.content/**
