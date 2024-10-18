@@ -14,6 +14,7 @@ export default function ComponentImportPlugin(framework: UnpluginContextMeta['fr
   const componentNames = new Set(components.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
   return AutoImportComponents[framework]({
     dts: true,
+    exclude: [/[\\/]node_modules[\\/](?!\.pnpm|@nuxt\/ui)/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
     resolvers: [
       (componentName) => {
         if (componentName === 'NuxtLink') {
