@@ -17,8 +17,6 @@ export default function PluginsPlugin(options: NuxtUIOptions) {
     plugins.push(resolvePathSync(join(runtimeDir, 'vue/plugins/color-mode')))
   }
 
-  console.log(plugins)
-
   return {
     name: 'nuxt:ui:plugins',
     enforce: 'pre',
