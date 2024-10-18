@@ -31,13 +31,13 @@ const templates = (id: number) => [{
   title: 'Toast',
   description: `This is the toast ${id}`,
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+    src: 'https://github.com/benjamincanac.png'
   }
 }, {
   title: 'Toast',
   description: `This is the toast ${id}`,
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+    src: 'https://github.com/benjamincanac.png'
   },
   actions: [{
     label: 'Action',

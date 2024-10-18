@@ -34,7 +34,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -68,7 +68,7 @@ props:
       value: 'in_progress'
     - label: 'Done'
       value: 'done'
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -101,7 +101,7 @@ props:
       - Carrot
       - Courgette
       - Leek
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -131,7 +131,7 @@ props:
       id: 'in_progress'
     - label: 'Done'
       id: 'done'
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -154,7 +154,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -171,10 +171,11 @@ The `content.align`, `content.side`, etc. properties only apply when `content.po
 prettier: true
 ignore:
   - items
-  - defaultValue
+  - modelValue
   - class
 external:
   - items
+  - modelValue
 items:
   content.position:
     - 'item-aligned'
@@ -189,6 +190,7 @@ items:
     - top
     - bottom
 props:
+  modelValue: 'Todo'
   content:
     position: 'item-aligned'
     align: center
@@ -199,8 +201,7 @@ props:
     - Todo
     - In Progress
     - Done
-  defaultValue: 'Todo'
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -217,20 +218,21 @@ Use the `color` prop to change the ring color when the Select is focused.
 prettier: true
 ignore:
   - items
-  - defaultValue
+  - modelValue
   - class
 external:
   - items
+  - modelValue
 props:
+  modelValue: 'Backlog'
   color: neutral
   highlight: true
-  defaultValue: 'Backlog'
   items:
     - Backlog
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -247,21 +249,22 @@ Use the `variant` prop to change the variant of the Select.
 prettier: true
 ignore:
   - items
-  - defaultValue
+  - modelValue
   - class
 external:
   - items
+  - modelValue
 props:
+  modelValue: 'Backlog'
   color: neutral
   variant: subtle
   highlight: false
-  defaultValue: 'Backlog'
   items:
     - Backlog
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -274,19 +277,20 @@ Use the `size` prop to change the size of the Select.
 prettier: true
 ignore:
   - items
-  - defaultValue
+  - modelValue
   - class
 external:
   - items
+  - modelValue
 props:
+  modelValue: 'Backlog'
   size: xl
-  defaultValue: 'Backlog'
   items:
     - Backlog
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -299,20 +303,21 @@ Use the `icon` prop to show an [Icon](/components/icon) inside the Select.
 prettier: true
 ignore:
   - items
-  - defaultValue
+  - modelValue
   - class
 external:
   - items
+  - modelValue
 props:
+  modelValue: 'Backlog'
   icon: 'i-heroicons-magnifying-glass'
   size: md
-  defaultValue: 'Backlog'
   items:
     - Backlog
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -325,20 +330,21 @@ Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon).
 prettier: true
 ignore:
   - items
-  - defaultValue
+  - modelValue
   - class
 external:
   - items
+  - modelValue
 props:
+  modelValue: 'Backlog'
   trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
   size: md
-  defaultValue: 'Backlog'
   items:
     - Backlog
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -355,25 +361,54 @@ Use the `selected-icon` prop to customize the icon when an item is selected. Def
 prettier: true
 ignore:
   - items
-  - defaultValue
+  - modelValue
   - class
 external:
   - items
+  - modelValue
 props:
+  modelValue: 'Backlog'
   selectedIcon: 'i-heroicons-fire'
   size: md
-  defaultValue: 'Backlog'
   items:
     - Backlog
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
 ::tip{to="/getting-started/icons#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
+::
+
+### Avatar
+
+Use the `avatar` prop to show an [Avatar](/components/avatar) inside the Select.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Nuxt'
+  avatar:
+    src: 'https://github.com/nuxt.png'
+  items:
+    - Nuxt
+    - NuxtHub
+    - NuxtLabs
+    - Nuxt Modules
+    - Nuxt Community
+  class: 'w-48'
+---
 ::
 
 ### Loading
@@ -385,20 +420,21 @@ Use the `loading` prop to show a loading icon on the Select.
 prettier: true
 ignore:
   - items
-  - defaultValue
+  - modelValue
   - class
 external:
   - items
+  - modelValue
 props:
+  modelValue: 'Backlog'
   loading: true
   trailing: false
-  defaultValue: 'Backlog'
   items:
     - Backlog
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -411,20 +447,21 @@ Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroic
 prettier: true
 ignore:
   - items
-  - defaultValue
+  - modelValue
   - class
 external:
   - items
+  - modelValue
 props:
+  modelValue: 'Backlog'
   loading: true
   loadingIcon: 'i-heroicons-arrow-path-rounded-square'
-  defaultValue: 'Backlog'
   items:
     - Backlog
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -453,7 +490,7 @@ props:
     - Todo
     - In Progress
     - Done
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -491,7 +528,7 @@ props:
     - Carrot
     - Courgette
     - Leek
-  class: 'w-40'
+  class: 'w-48'
 ---
 ::
 
@@ -511,7 +548,7 @@ In this example, the icon is computed from the `value` property of the selected 
 ::
 
 ::tip
-You can also use the `#leading` slot to display the selected icon, like in the next example.
+You can also use the `#leading` slot to display the selected icon.
 ::
 
 ### With avatar in items
@@ -526,7 +563,11 @@ name: 'select-items-avatar-example'
 ::
 
 ::note
-In this example, the `#leading` slot is used to display the selected avatar.
+In this example, the avatar is computed from the `value` property of the selected item.
+::
+
+::tip
+You can also use the `#leading` slot to display the selected avatar.
 ::
 
 ### With chip in items

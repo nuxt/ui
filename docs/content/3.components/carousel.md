@@ -224,32 +224,7 @@ class: 'p-8 px-16'
 
 ### Props
 
-::component-props
----
-ignore:
-  - as
-  - to
-  - target
-  - active
-  - activeClass
-  - inactiveClass
-  - exactActiveClass
-  - ariaCurrentValue
-  - href
-  - rel
-  - noRel
-  - prefetch
-  - prefetchOn
-  - noPrefetch
-  - prefetchedClass
-  - replace
-  - exact
-  - exactQuery
-  - exactHash
-  - external
-  - onClick
----
-::
+:component-props
 
 ### Slots
 

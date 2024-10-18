@@ -25,21 +25,11 @@ const items = ref([
     }
   }
 ])
+const value = ref(items.value[0]?.value)
 
-function getAvatar(value: string) {
-  return items.value.find(item => item.value === value)?.avatar
-}
+const avatar = computed(() => items.value.find(item => item.value === value.value)?.avatar)
 </script>
 
 <template>
-  <USelect default-value="benjamincanac" :items="items" class="w-48">
-    <template #leading="{ modelValue, ui }">
-      <UAvatar
-        v-if="modelValue"
-        v-bind="getAvatar(modelValue)"
-        :size="ui.itemLeadingAvatarSize()"
-        :class="ui.itemLeadingAvatar()"
-      />
-    </template>
-  </USelect>
+  <USelect v-model="value" :avatar="avatar" :items="items" class="w-48" />
 </template>

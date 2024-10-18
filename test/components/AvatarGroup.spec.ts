@@ -11,9 +11,9 @@ const AvatarGroupWrapper = defineComponent({
     UAvatarGroup: AvatarGroup
   },
   template: `<UAvatarGroup>
-  <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" />
-  <UAvatar src="https://avatars.githubusercontent.com/u/25613751?v=4" alt="Romain Hamel" />
-  <UAvatar src="https://avatars.githubusercontent.com/u/19751938?v=4" alt="Neil Richter" />
+  <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
+  <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
+  <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
 </UAvatarGroup>`
 })
 

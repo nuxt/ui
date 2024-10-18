@@ -18,6 +18,6 @@ onMounted(() => {
 
 <template>
   <UChip :color="color" :show="show" inset>
-    <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" />
+    <UAvatar src="https://github.com/benjamincanac.png" />
   </UChip>
 </template>

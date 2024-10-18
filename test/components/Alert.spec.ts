@@ -13,7 +13,7 @@ describe('Alert', () => {
     ['with title', { props }],
     ['with description', { props: { ...props, description: 'Description' } }],
     ['with icon', { props: { ...props, icon: 'i-heroicons-light-bulb' } }],
-    ['with avatar', { props: { ...props, avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' } } }],
+    ['with avatar', { props: { ...props, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-heroicons-trash' } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),

@@ -68,7 +68,7 @@ prettier: true
 class: 'p-8'
 props:
   avatar:
-    src: 'https://github.com/benjamincanac.png'
+    src: 'https://github.com/nuxt.png'
 ---
 ::
 
