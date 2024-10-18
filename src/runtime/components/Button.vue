@@ -8,6 +8,7 @@ import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
 import type { PartialString } from '../types/utils'
 import { formLoadingInjectionKey } from '../composables/useFormField'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
@@ -30,6 +31,9 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   class?: any
   ui?: PartialString<typeof button.slots>
 }
+
+// Injects props to use as default in the devtools playground.
+extendDevtoolsMeta<ButtonProps>({ defaultProps: { label: 'Click me!' } })
 
 export interface ButtonSlots {
   leading(props?: {}): any
