@@ -53,8 +53,15 @@ jobs:
         run: pnpm run docs:typecheck
         continue-on-error: true
 
+      - name: Devtools typecheck
+        run: pnpm run devtools:typecheck
+        continue-on-error: true
+
       - name: Test
         run: pnpm run test
+
+      - name: Devtools prepare
+        run: pnpm run devtools:prepare
 
       - name: Build
         run: pnpm run build

@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: [module, '@nuxtjs/mdc', '@nuxt/content', '@nuxt/test-utils/module'],
+  modules: [module, '@nuxtjs/mdc', '@nuxt/test-utils/module'],
 
   app: {
     baseURL: '/__nuxt_ui__/devtools'
@@ -42,12 +42,6 @@ export default defineNuxtConfig({
         default: 'material-theme',
         dark: 'material-theme-palenight'
       }
-    }
-  },
-
-  content: {
-    highlight: {
-      langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
     }
   }
 })

@@ -2,9 +2,8 @@ import type { ViteDevServer } from 'vite'
 import { kebabCase } from 'scule'
 import defu from 'defu'
 import fs from 'node:fs'
-import { createResolver } from '@nuxt/kit'
+import type { Resolver } from '@nuxt/kit'
 
-const { resolve } = createResolver(import.meta.url)
 const devtoolsComponentMeta: Record<string, any> = {}
 
 function extractDevtoolsMeta(code: string): string | null {
@@ -30,7 +29,7 @@ function extractDevtoolsMeta(code: string): string | null {
 }
 
 // A Plugin to parse additional metadata for the Nuxt UI Devtools.
-export function devtoolsMetaPlugin() {
+export function devtoolsMetaPlugin({ resolve }: { resolve: Resolver['resolve'] }) {
   return {
     name: 'ui-devtools-component-meta',
     enforce: 'pre' as const,
@@ -57,50 +56,55 @@ export function devtoolsMetaPlugin() {
     configureServer(server: ViteDevServer) {
       server.middlewares.use('/__nuxt_ui__/devtools/api/component-meta', async (_req, res) => {
         res.setHeader('Content-Type', 'application/json')
-        const componentMeta = await import('./.component-meta/component-meta')
-        const meta = defu(
-          Object.entries(componentMeta.default).reduce((acc, [key, value]: [string, any]) => {
-            if (!key.startsWith('U')) return acc
-            const name = key.substring(1)
-            const slug = kebabCase(name)
+        try {
+          const componentMeta = await import(resolve('./devtools/.component-meta/component-meta.mjs'))
+          const meta = defu(
+            Object.entries(componentMeta.default).reduce((acc, [key, value]: [string, any]) => {
+              if (!key.startsWith('U')) return acc
+              const name = key.substring(1)
+              const slug = kebabCase(name)
 
-            if (devtoolsComponentMeta[slug] === undefined) {
-              const path = resolve(`../runtime/components/${name}.vue`)
-              const code = fs.readFileSync(path, 'utf-8')
-              const match = extractDevtoolsMeta(code)
-              if (match) {
-                const metaObject = new Function(`return ${match}`)()
-                devtoolsComponentMeta[slug] = { meta: { devtools: { ...metaObject } } }
-              } else {
-                devtoolsComponentMeta[slug] = null
+              if (devtoolsComponentMeta[slug] === undefined) {
+                const path = resolve(`./runtime/components/${name}.vue`)
+                const code = fs.readFileSync(path, 'utf-8')
+                const match = extractDevtoolsMeta(code)
+                if (match) {
+                  const metaObject = new Function(`return ${match}`)()
+                  devtoolsComponentMeta[slug] = { meta: { devtools: { ...metaObject } } }
+                } else {
+                  devtoolsComponentMeta[slug] = null
+                }
               }
-            }
 
-            value.meta.props = value.meta.props.map((prop: any) => {
-              let defaultValue = prop.default
-                ? prop.default
-                : prop?.tags?.find((tag: any) =>
-                  tag.name === 'defaultValue'
-                  && !tag.text?.includes('appConfig'))?.text
+              value.meta.props = value.meta.props.map((prop: any) => {
+                let defaultValue = prop.default
+                  ? prop.default
+                  : prop?.tags?.find((tag: any) =>
+                    tag.name === 'defaultValue'
+                    && !tag.text?.includes('appConfig'))?.text
 
-              if (typeof defaultValue === 'string') defaultValue = defaultValue?.replaceAll(/["'`]/g, '')
-              if (defaultValue === 'true') defaultValue = true
-              if (defaultValue === 'false') defaultValue = false
-              if (!Number.isNaN(Number.parseInt(defaultValue))) defaultValue = Number.parseInt(defaultValue)
+                if (typeof defaultValue === 'string') defaultValue = defaultValue?.replaceAll(/["'`]/g, '')
+                if (defaultValue === 'true') defaultValue = true
+                if (defaultValue === 'false') defaultValue = false
+                if (!Number.isNaN(Number.parseInt(defaultValue))) defaultValue = Number.parseInt(defaultValue)
 
-              return {
-                ...prop,
-                default: defaultValue
-              }
-            })
+                return {
+                  ...prop,
+                  default: defaultValue
+                }
+              })
 
-            acc[kebabCase(key.replace(/^U/, ''))] = value
-            return acc
-          }, {} as Record<string, any>),
-          devtoolsComponentMeta
-        )
-
-        res.end(JSON.stringify(meta))
+              acc[kebabCase(key.replace(/^U/, ''))] = value
+              return acc
+            }, {} as Record<string, any>),
+            devtoolsComponentMeta
+          )
+          res.end(JSON.stringify(meta))
+        } catch (error) {
+          console.error(`Failed to fetch component meta`, error)
+          res.statusCode = 500
+          res.end(JSON.stringify({ error: 'Failed to fetch component meta' }))
+        }
       })
 
       server.middlewares.use('/__nuxt_ui__/devtools/api/component-example', async (req, res) => {
@@ -113,7 +117,7 @@ export function devtoolsMetaPlugin() {
         }
 
         try {
-          const path = resolve(`../runtime/devtools/examples/${name}.vue`)
+          const path = resolve(`./devtools/examples/${name}.vue`)
           const source = fs.readFileSync(path, 'utf-8')
 
           res.setHeader('Content-Type', 'application/json')

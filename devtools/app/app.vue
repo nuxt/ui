@@ -16,39 +16,47 @@ const state = useState<Record<string, any>>('__ui-devtools-state', () => ({}))
 
 let rpc: BirpcReturn<ServerFunctions, ClientFunctions> | null = null
 
+const loading = ref(true)
+const error = ref<any | null>(null)
+
 onDevtoolsClientConnected(async (client) => {
   rpc = client.devtools.extendClientRpc<ServerFunctions, ClientFunctions>('nuxt/ui/devtools', { })
 
-  const componentMeta = await $fetch<Record<string, { meta: ComponentMeta & { devtools: DevtoolsMeta<any> } }>>('/api/component-meta')
+  try {
+    const componentMeta = await $fetch<Record<string, { meta: ComponentMeta & { devtools: DevtoolsMeta<any> } }>>('/api/component-meta')
+    components.value = (await rpc.getComponents()).flatMap((component) => {
+      if (componentMeta[component.slug]?.meta.devtools?.ignore) return []
 
-  components.value = (await rpc.getComponents()).flatMap((component) => {
-    if (componentMeta[component.slug]?.meta.devtools?.ignore) return []
+      return [{
+        ...component,
+        value: component.slug,
+        meta: componentMeta[component.slug]?.meta
+      }]
+    })
 
-    return [{
-      ...component,
-      value: component.slug,
-      meta: componentMeta[component.slug]?.meta
-    }]
-  })
-
-  if (!component.value || !components.value.find(c => c.slug === component.value?.slug)) {
-    component.value = components.value.find(comp => comp.slug === 'button')
-  }
-
-  state.value.props = components.value?.reduce((acc, comp) => {
-    const componentDefaultProps = comp.meta?.props.reduce((acc, prop) => {
-      if (prop.default) acc[prop.name] = prop.default
-      return acc
-    }, {} as Record<string, any>)
-
-    acc[comp.slug] = {
-      ...comp.defaultVariants, // Default values from the theme template
-      ...componentDefaultProps, // Default values from vue props
-      ...componentMeta[comp.slug]?.meta?.devtools?.defaultProps // Default values from devtools extended meta
+    if (!component.value || !components.value.find(c => c.slug === component.value?.slug)) {
+      component.value = components.value.find(comp => comp.slug === 'button')
     }
 
-    return acc
-  }, {} as Record<string, any>)
+    state.value.props = components.value?.reduce((acc, comp) => {
+      const componentDefaultProps = comp.meta?.props.reduce((acc, prop) => {
+        if (prop.default) acc[prop.name] = prop.default
+        return acc
+      }, {} as Record<string, any>)
+
+      acc[comp.slug] = {
+        ...comp.defaultVariants, // Default values from the theme template
+        ...componentDefaultProps, // Default values from vue props
+        ...componentMeta[comp.slug]?.meta?.devtools?.defaultProps // Default values from devtools extended meta
+      }
+
+      return acc
+    }, {} as Record<string, any>)
+  } catch (e) {
+    error.value = e
+  } finally {
+    loading.value = false
+  }
 })
 
 const componentProps = computed(() => {
@@ -106,8 +114,16 @@ const isDark = computed({
 </script>
 
 <template>
-  <UApp class="h-screen w-full relative font-sans">
-    <div v-if="!components || !component" class="h-screen w-screen" />
+  <UApp class="flex justify-center items-center h-screen w-full relative font-sans">
+    <div v-if="loading || error || !component">
+      <div v-if="error" class="flex flex-col justify-center items-center h-screen w-screen text-center text-[var(--ui-color-error-500)]">
+        <UILogo class="h-8" />
+        <UIcon name="i-heroicons-exclamation-circle" size="20" class="mt-2" />
+        <p>
+          {{ error.data?.error ?? 'Unexpected error' }}
+        </p>
+      </div>
+    </div>
     <template v-else>
       <div
         class="top-0 h-[49px] border-b border-[var(--ui-border)] flex justify-center"

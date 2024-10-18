@@ -7,7 +7,7 @@ import sirv from 'sirv'
 import { setupDevtoolsClient } from './devtools/rpc'
 import { getPort } from 'get-port-please'
 import { pick } from './runtime/utils'
-import { devtoolsMetaPlugin } from './devtools/meta'
+import { devtoolsMetaPlugin } from './devtools/devtoolsMetaPlugin'
 
 export type * from './runtime/types'
 
@@ -137,7 +137,7 @@ export default defineNuxtModule<ModuleOptions>({
     addTemplates(options, nuxt)
 
     if (nuxt.options.dev && nuxt.options.devtools.enabled) {
-      nuxt.options.vite = defu(nuxt.options?.vite, { plugins: [devtoolsMetaPlugin()] })
+      nuxt.options.vite = defu(nuxt.options?.vite, { plugins: [devtoolsMetaPlugin({ resolve })] })
 
       setupDevtoolsClient(options)
 
@@ -187,7 +187,7 @@ export default defineNuxtModule<ModuleOptions>({
         pages.unshift({
           name: 'ui-devtools',
           path: '/__nuxt_ui__/components/:slug',
-          file: resolve(__dirname, './runtime/devtools/DevtoolsRenderer.vue')
+          file: resolve('./devtools/DevtoolsRenderer.vue')
           // https://github.com/nuxt/nuxt/pull/29366
           // meta: {
           //   isolate: true

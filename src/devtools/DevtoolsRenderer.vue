@@ -6,7 +6,7 @@ import { useColorMode, useRoute } from '#imports'
 const route = useRoute()
 const component = route.query?.example
   ? defineAsyncComponent(() => import(`./examples/${route.query.example}.vue`))
-  : route.params?.slug && defineAsyncComponent(() => import(`../components/${pascalCase(route.params.slug as string)}.vue`))
+  : route.params?.slug && defineAsyncComponent(() => import(`../runtime/components/${pascalCase(route.params.slug as string)}.vue`))
 
 const state = reactive<{ slots?: any, props?: any }>({})
 
@@ -43,9 +43,7 @@ onMounted(() => {
 <template>
   <div class="nuxt-ui-component-renderer">
     <UApp :toaster="null">
-      <template v-if="component && state.props">
-        <component :is="component" v-if="component && state.props" v-bind="state.props" :class="state?.slots?.base" :ui="state.slots" />
-      </template>
+      <component :is="component" v-if="component" v-bind="state.props" :class="state?.slots?.base" :ui="state.slots" />
     </UApp>
   </div>
 </template>

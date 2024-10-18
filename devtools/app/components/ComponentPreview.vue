@@ -15,7 +15,7 @@ const { data: componentExample } = await useAsyncData('__ui_devtools_component-s
 const code = computed(() => {
   if (!props.component) return
 
-  const propsTemplate = Object.entries(props.props ?? {}).map(([key, value]: [string, any]) => {
+  const propsTemplate = Object.entries(props.props ?? {})?.map(([key, value]: [string, any]) => {
     if (value === true) return kebabCase(key)
     if (value === false) return
     if (!value) return
