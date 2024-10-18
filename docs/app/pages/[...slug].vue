@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageHeadline } from '#ui-pro/utils/content'
 
 const route = useRoute()
@@ -16,7 +17,9 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => qu
   fields: ['description']
 }))
 
-const headline = computed(() => findPageHeadline(page.value))
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+
+const headline = computed(() => findPageHeadline(navigation.value, page.value))
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
