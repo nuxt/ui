@@ -27,8 +27,8 @@ function getUserAvatar(value: string) {
       <UAvatar
         v-if="modelValue"
         v-bind="getUserAvatar(modelValue)"
-        :size="ui.itemLeadingAvatarSize()"
-        :class="ui.itemLeadingAvatar()"
+        :size="ui.leadingAvatarSize()"
+        :class="ui.leadingAvatar()"
       />
     </template>
   </USelect>

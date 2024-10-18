@@ -10,14 +10,14 @@
     "@nuxt/image": "^1.8.1",
     "@nuxt/ui": "latest",
     "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@defb4d9",
-    "@nuxthub/core": "^0.7.32",
+    "@nuxthub/core": "^0.7.33",
     "@nuxtjs/plausible": "^1.0.3",
     "@octokit/rest": "^21.0.2",
     "@vueuse/nuxt": "^11.1.0",
     "joi": "^17.13.3",
     "nuxt": "^3.13.2",
     "nuxt-component-meta": "^0.8.2",
-    "nuxt-og-image": "^3.0.4",
+    "nuxt-og-image": "^3.0.6",
     "prettier": "^3.3.3",
     "shiki-transformer-color-highlight": "^0.2.0",
     "ufo": "^1.5.4",
@@ -26,6 +26,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "wrangler": "^3.80.4"
+    "wrangler": "^3.81.0"
   }
 }

@@ -62,7 +62,7 @@ ignore:
 props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
-  avatar.src: 'https://github.com/benjamincanac.png'
+  avatar.src: 'https://github.com/nuxt.png'
 ---
 ::
 
@@ -255,32 +255,7 @@ props:
 
 ### Props
 
-::component-props
----
-ignore:
-  - as
-  - to
-  - target
-  - active
-  - activeClass
-  - inactiveClass
-  - exactActiveClass
-  - ariaCurrentValue
-  - href
-  - rel
-  - noRel
-  - prefetch
-  - prefetchOn
-  - noPrefetch
-  - prefetchedClass
-  - replace
-  - exact
-  - exactQuery
-  - exactHash
-  - external
-  - onClick
----
-::
+:component-props
 
 ### Slots
 
