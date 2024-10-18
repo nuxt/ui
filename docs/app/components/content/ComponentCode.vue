@@ -39,6 +39,7 @@ const { $prettier } = useNuxtApp()
 
 const camelName = camelCase(props.slug ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
 const name = `U${upperFirst(camelName)}`
+const component = defineAsyncComponent(() => import(`#ui/components/${upperFirst(camelName)}.vue`))
 
 const componentProps = reactive({ ...(props.props || {}) })
 const componentEvents = reactive({
@@ -263,8 +264,8 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
         </template>
       </div>
 
-      <div class="flex justify-center border border-b-0 border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class]">
-        <component :is="name" v-bind="{ ...componentProps, ...componentEvents }">
+      <div v-if="component" class="flex justify-center border border-b-0 border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class]">
+        <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <MDCSlot :name="slot" unwrap="p">
               {{ slots?.[slot] }}

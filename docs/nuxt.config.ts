@@ -28,14 +28,6 @@ export default defineNuxtConfig({
     'nuxt-og-image'
   ],
 
-  // FIXME: Remove this once `components/content/` is registered globally
-  components: [{
-    path: '~/components/content',
-    global: true
-  }, {
-    path: '~/components'
-  }],
-
   hub: {
     cache: true
   },
@@ -62,29 +54,33 @@ export default defineNuxtConfig({
     provider: 'iconify'
   },
 
-  // content: {
-  //   // sources: {
-  //   //   pro: process.env.NUXT_UI_PRO_PATH
-  //   //     ? {
-  //   //         prefix: '/pro',
-  //   //         driver: 'fs',
-  //   //         base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/app/content/pro')
-  //   //       }
-  //   //     : process.env.NUXT_GITHUB_TOKEN
-  //   //       ? {
-  //   //           prefix: '/pro',
-  //   //           driver: 'github',
-  //   //           repo: 'nuxt/ui-pro',
-  //   //           branch: 'dev',
-  //   //           dir: 'docs/app/content/pro',
-  //   //           token: process.env.NUXT_GITHUB_TOKEN || ''
-  //   //         }
-  //   //       : undefined
-  //   // },
-  //   highlight: {
-  //     langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
-  //   }
-  // },
+  content: {
+    // sources: {
+    //   pro: process.env.NUXT_UI_PRO_PATH
+    //     ? {
+    //         prefix: '/pro',
+    //         driver: 'fs',
+    //         base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/app/content/pro')
+    //       }
+    //     : process.env.NUXT_GITHUB_TOKEN
+    //       ? {
+    //           prefix: '/pro',
+    //           driver: 'github',
+    //           repo: 'nuxt/ui-pro',
+    //           branch: 'dev',
+    //           dir: 'docs/app/content/pro',
+    //           token: process.env.NUXT_GITHUB_TOKEN || ''
+    //         }
+    //       : undefined
+    // },
+    build: {
+      markdown: {
+        highlight: {
+          langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+        }
+      }
+    }
+  },
 
   image: {
     provider: 'ipx'
@@ -148,51 +144,6 @@ export default defineNuxtConfig({
       slots: true,
       events: true,
       exposed: false
-    }
-  },
-
-  hooks: {
-    'components:extend': (components) => {
-      const globals = components.filter(c => [
-        'UAccordion',
-        'UAlert',
-        'UAvatar',
-        'UAvatarGroup',
-        'UBadge',
-        'UBreadcrumb',
-        'UButton',
-        'UButtonGroup',
-        'UCheckbox',
-        'UChip',
-        'UCollapsible',
-        'UCommandPalette',
-        'UContextMenu',
-        'UDrawer',
-        'UDropdownMenu',
-        'UFormField',
-        'UIcon',
-        'UInput',
-        'UInputMenu',
-        'UKbd',
-        'ULink',
-        'UModal',
-        'UNavigationMenu',
-        'UPagination',
-        'UPopover',
-        'UProgress',
-        'URadioGroup',
-        'USelect',
-        'USelectMenu',
-        'USeparator',
-        'USlider',
-        'USlideover',
-        'USwitch',
-        'UTabs',
-        'UTextarea',
-        'UTooltip'
-      ].includes(c.pascalName))
-
-      globals.forEach(c => c.global = 'sync')
     }
   },
 
