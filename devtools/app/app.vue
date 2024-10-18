@@ -142,8 +142,9 @@ const isDark = computed({
         <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-4 bg-[var(--ui-bg)]">
           <div class="col-span-1 border-r border-[var(--ui-border)] hidden xl:block overflow-y-auto">
             <UNavigationMenu
-              :items="components.map((c) => ({ ...c, onSelect: () => component = c }))"
+              :items="components.map((c) => ({ ...c, active: c.slug === component?.slug, onSelect: () => component = c }))"
               orientation="vertical"
+              :ui="{ link: 'before:rounded-none' }"
             />
           </div>
 
