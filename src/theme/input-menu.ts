@@ -27,16 +27,17 @@ export default (options: Required<ModuleOptions>) => {
       tagsItemText: 'truncate',
       tagsItemDelete: ['inline-flex items-center rounded-[calc(var(--ui-radius)/2)] text-[var(--ui-text-dimmed)] hover:text-[var(--ui-text)] hover:bg-[var(--ui-bg-accented)]/75 disabled:pointer-events-none', options.theme.transitions && 'transition-colors'],
       tagsItemDeleteIcon: '',
-      tagsInput: 'border-0 placeholder-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+      tagsInput: ''
     },
     variants: {
       multiple: {
         true: {
           root: 'flex-wrap',
-          base: ''
+          base: '',
+          tagsInput: 'border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
         },
         false: {
-          base: 'w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+          base: 'w-full border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
         }
       },
       size: {
