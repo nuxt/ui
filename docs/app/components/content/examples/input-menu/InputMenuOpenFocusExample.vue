@@ -10,6 +10,5 @@ const selected = ref('Backlog')
     v-model:open="open"
     :items="items"
     @focus="open = true"
-    @blur="open = false"
   />
 </template>

@@ -613,7 +613,7 @@ In this example, press :kbd{value="O"} to toggle the InputMenu.
 
 ### Control open state on focus
 
-Use the `@focus` directive to control the open state.
+You can also use the `@focus` directive to control the open state.
 
 ::component-example
 ---
