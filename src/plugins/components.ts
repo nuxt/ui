@@ -3,10 +3,13 @@ import type { UnpluginContextMeta } from 'unplugin'
 import { globSync } from 'tinyglobby'
 import AutoImportComponents from 'unplugin-vue-components'
 
-import { runtimeDir, type NuxtUIOptions } from '../unplugin'
+import { runtimeDir } from '../unplugin'
+import type { NuxtUIOptions } from '../unplugin'
 
+/**
+ * This plugin adds all the Nuxt UI components as auto-imports.
+ */
 export default function ComponentImportPlugin(framework: UnpluginContextMeta['framework'], options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']> }) {
-  // TODO: document that Make sure you also add components.d.ts to your tsconfig.json under include.
   const components = globSync('**/*.vue', { cwd: join(runtimeDir, 'components') })
   const componentNames = new Set(components.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
   return AutoImportComponents[framework]({

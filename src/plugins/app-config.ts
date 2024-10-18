@@ -6,6 +6,10 @@ import { defu } from 'defu'
 import { getDefaultUiConfig } from '../defaults'
 import type { NuxtUIOptions } from '../unplugin'
 
+/**
+ * This plugin injects Nuxt UI configuration into the runtime build so Nuxt UI components can
+ * access it.
+ */
 export default function AppConfigPlugin(options: NuxtUIOptions & { theme: NonNullable<NuxtUIOptions['theme']> }, appConfig: Record<string, any>) {
   return {
     name: 'nuxt:ui:app-config',

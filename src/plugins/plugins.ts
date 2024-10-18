@@ -8,6 +8,10 @@ import { runtimeDir, type NuxtUIOptions } from '../unplugin'
 
 import type { UnpluginOptions } from 'unplugin'
 
+/**
+ * This plugin provides the necessary transforms to allow loading the
+ * Nuxt UI _Nuxt_ plugins in `src/runtime/plugins/` in a pure Vue environment.
+ */
 export default function PluginsPlugin(options: NuxtUIOptions) {
   const plugins = globSync(['**/*', '!*.d.ts'], { cwd: join(runtimeDir, 'plugins'), absolute: true })
 
