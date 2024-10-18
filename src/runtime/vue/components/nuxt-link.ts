@@ -1,4 +1,4 @@
-import { defineComponent, h, reactive } from 'vue'
+import { computed, defineComponent, h, reactive } from 'vue'
 import { RouterLink } from 'vue-router'
 import type { RouterLinkProps } from 'vue-router'
 
@@ -11,7 +11,7 @@ export default defineComponent({
       default: undefined
     }
   },
-  setup(props: RouterLinkProps, { slots }) {
+  setup(props: RouterLinkProps & { to?: any }, { slots }) {
     const routerProps = Object.assign(reactive({}), props, {
       to: computed(() => props.to || '#')
     })

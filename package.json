@@ -51,7 +51,7 @@
     "docs:typecheck": "nuxi typecheck docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground",
+    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && cd playground-vue && vue-tsc --noEmit",
     "test": "vitest",
     "release": "release-it --preRelease=alpha --npm.tag=next"
   },
