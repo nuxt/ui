@@ -37,7 +37,7 @@ items:
     - search
     - file
 props:
-  type: 'number'
+  type: 'file'
 ---
 ::
 
@@ -199,6 +199,83 @@ ignore:
 props:
   disabled: true
   placeholder: 'Search...'
+---
+::
+
+## Examples
+
+### With clear button
+
+You can put a [Button](/components/button) inside the `#trailing` slot to clear the Input.
+
+::component-example
+---
+name: 'input-clear-button-example'
+---
+::
+
+### With password toggle
+
+You can put a [Button](/components/button) inside the `#trailing` slot to toggle the password visibility.
+
+::component-example
+---
+name: 'input-password-toggle-example'
+---
+::
+
+### With password strength indicator
+
+You can use the [Progress](/components/progress) component to display the password strength indicator.
+
+::component-example
+---
+collapse: true
+name: 'input-password-strength-indicator-example'
+---
+::
+
+### With character limit
+
+You can use the `#trailing` slot to add a character limit to the Input.
+
+::component-example
+---
+name: 'input-character-limit-example'
+---
+::
+
+### With floating label
+
+You can use the `#default` slot to add a floating label to the Input.
+
+::component-example
+---
+name: 'input-floating-label-example'
+---
+::
+
+### Within a FormField
+
+You can use the Input within a [FormField](/components/form-field) component to display a label, help text, required indicator, etc.
+
+::component-example
+---
+name: 'input-form-field-example'
+---
+::
+
+::tip{to="/components/form"}
+It also provides validation and error handling when used within a [Form](/components/form) component.
+::
+
+### Within a ButtonGroup
+
+You can use the Input within a [ButtonGroup](/components/button-group) component to group multiple elements together.
+
+::component-example
+---
+name: 'input-button-group-example'
 ---
 ::
 
