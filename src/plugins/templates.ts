@@ -1,12 +1,10 @@
-import type { Nuxt } from '@nuxt/schema'
-
 import type { NuxtUIOptions } from '../unplugin'
 
 import { getTemplates } from '../templates'
 import type { UnpluginOptions } from 'unplugin'
 
-export default function TemplatePlugin(options: NuxtUIOptions, appConfig?: Record<string, any>) {
-  const templates = collectTemplates(options, appConfig)
+export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record<string, any>) {
+  const templates = getTemplates(options, appConfig.ui)
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
   return {
@@ -22,9 +20,4 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig?: Recor
       return templates.find(t => `#build/${t.filename}` === id)!.getContents!({} as any)
     }
   } satisfies UnpluginOptions
-}
-
-function collectTemplates(options: NuxtUIOptions, appConfig?: Record<string, any>) {
-  const fakeNuxt = { options: { appConfig } }
-  return getTemplates(options, fakeNuxt as Nuxt)
 }

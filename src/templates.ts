@@ -5,7 +5,7 @@ import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 
-export function getTemplates(options: ModuleOptions, nuxt: Nuxt) {
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>) {
   const templates: NuxtTemplate[] = []
 
   for (const component in theme) {
@@ -56,7 +56,7 @@ export function getTemplates(options: ModuleOptions, nuxt: Nuxt) {
 import type { DeepPartial } from '#ui/types/utils'
 import colors from 'tailwindcss/colors'
 
-const icons = ${JSON.stringify(nuxt.options.appConfig.ui.icons)};
+const icons = ${JSON.stringify(uiConfig.icons)};
 
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor>
@@ -83,7 +83,7 @@ export {}
 }
 
 export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
-  const templates = getTemplates(options, nuxt)
+  const templates = getTemplates(options, nuxt.options.appConfig.ui)
   for (const template of templates) {
     if (template.filename!.endsWith('.d.ts')) {
       addTypeTemplate(template as NuxtTypeTemplate)
