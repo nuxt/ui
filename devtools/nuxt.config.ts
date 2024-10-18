@@ -3,7 +3,9 @@ import { resolve } from 'node:path'
 
 export default defineNuxtConfig({
   ssr: false,
+
   devtools: { enabled: false },
+
   nitro: {
     hooks: {
       'prerender:routes': function (routes) {
