@@ -52,6 +52,17 @@ export interface ModuleOptions {
      */
     transitions?: boolean
   }
+
+  /**
+   * Configuration for the Nuxt UI devtools.
+   */
+  devtools: {
+    /**
+     * Enable or disable Nuxt UI devtools.
+     * @defaultValue `true`
+     */
+    enabled?: boolean
+  }
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -70,6 +81,9 @@ export default defineNuxtModule<ModuleOptions>({
     theme: {
       colors: undefined,
       transitions: true
+    },
+    devtools: {
+      enabled: true
     }
   },
   async setup(options, nuxt) {
@@ -136,7 +150,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addTemplates(options, nuxt)
 
-    if (nuxt.options.dev && nuxt.options.devtools.enabled) {
+    if (nuxt.options.dev && nuxt.options.devtools.enabled && options.devtools.enabled) {
       nuxt.options.vite = defu(nuxt.options?.vite, { plugins: [devtoolsMetaPlugin({ resolve })] })
 
       setupDevtoolsClient(options)
@@ -187,11 +201,12 @@ export default defineNuxtModule<ModuleOptions>({
         pages.unshift({
           name: 'ui-devtools',
           path: '/__nuxt_ui__/components/:slug',
-          file: resolve('./devtools/runtime/DevtoolsRenderer.vue')
-          // https://github.com/nuxt/nuxt/pull/29366
-          // meta: {
-          //   isolate: true
-          // }
+          file: resolve('./devtools/runtime/DevtoolsRenderer.vue'),
+          meta: {
+            // https://github.com/nuxt/nuxt/pull/29366
+            //   isolate: true
+            layout: false
+          }
         })
       })
 

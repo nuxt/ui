@@ -41,7 +41,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="nuxt-ui-component-renderer">
+  <div id="ui-devtools-renderer" class="nuxt-ui-component-renderer">
     <UApp :toaster="null">
       <component :is="component" v-if="component" v-bind="state.props" :class="state?.slots?.base" :ui="state.slots" />
     </UApp>

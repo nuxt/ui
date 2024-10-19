@@ -67,9 +67,11 @@ const { data: ast } = await useAsyncData('component-code', async () => {
 
 const { copy, copied } = useClipboard()
 
+const rendererVisible = ref(true)
 const renderer = ref()
 const rendererReady = ref(false)
 function onRendererReady() {
+  rendererVisible.value = !!renderer.value.contentWindow.document.getElementById('ui-devtools-renderer')
   rendererReady.value = true
 }
 
@@ -92,12 +94,19 @@ const previewUrl = computed(() => {
   <div class="flex flex-col bg-grid">
     <iframe
       v-if="component"
-      v-show="rendererReady"
+      v-show="rendererReady && rendererVisible"
       ref="renderer"
       class="grow w-full"
       :src="previewUrl"
       @load="onRendererReady"
     />
+    <div v-if="!rendererVisible" class="grow w-full flex justify-center items-center px-8">
+      <UAlert color="error" variant="subtle" title="Component preview not found" icon="i-heroicons-exclamation-circle">
+        <template #description>
+          <MDC value="Ensure your `app.vue` file includes a `<NuxtPage />` component, as the component preview is mounted as a page." />
+        </template>
+      </UAlert>
+    </div>
     <div v-if="ast" v-show="rendererReady" class="relative w-full p-3">
       <MDCRenderer :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 text-sm overflow-y-auto rounded-lg border border-[var(--ui-border)] bg-neutral-50 dark:bg-neutral-800" />
       <UButton
