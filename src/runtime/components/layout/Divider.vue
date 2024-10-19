@@ -66,7 +66,7 @@ export default defineComponent({
     },
     type: {
       type: String as PropType<'solid' | 'dotted' | 'dashed'>,
-      default: 'solid',
+      default: () => config.default.type,
       validator: (value: string) => ['solid', 'dotted', 'dashed'].includes(value)
     },
     class: {

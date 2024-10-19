@@ -46,6 +46,7 @@ export default {
   },
   label: 'text-sm',
   default: {
-    size: '2xs' as const
+    size: '2xs' as const,
+    type: 'solid' as const
   }
 }
